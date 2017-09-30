@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="indicator_strings">
+        <item name="indicator_string_1">优</item>
+        <item name="indicator_string_2">良</item>
+        <item name="indicator_string_3">轻度污染</item>
+        <item name="indicator_string_4">中度污染</item>
+        <item name="indicator_string_5">重度污染</item>
+        <item name="indicator_string_5">严重污染</item>
+    </string-array>
+
+    <integer-array name="indicator_colors">
+        <item name="indicator_color_1">@color/indicator_color_1</item>
+        <item name="indicator_color_2">@color/indicator_color_2</item>
+        <item name="indicator_color_3">@color/indicator_color_3</item>
+        <item name="indicator_color_4">@color/indicator_color_4</item>
+        <item name="indicator_color_5">@color/indicator_color_5</item>
+        <item name="indicator_color_6">@color/indicator_color_6</item>
+    </integer-array>
+
+    <string-array name="sub_rank_tabs">
+        <item>周榜</item>
+        <item>月榜</item>
+        <item>总榜</item>
+    </string-array>
+
+    <string-array name="sub_tabs">
+        <item>新书</item>
+        <item>热门</item>
+        <item>口碑</item>
+        <item>完结</item>
+    </string-array>
+
+</resources>

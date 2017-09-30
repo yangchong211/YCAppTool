@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.ns.yc.lifehelper.ui.weight.scrollView.NoNestedScrollview
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </com.ns.yc.lifehelper.ui.weight.scrollView.NoNestedScrollview>
+
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/base_tool_bar" />
+
+</RelativeLayout>

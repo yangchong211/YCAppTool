@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="16dp"
+        android:layout_height="16dp">
+        <ImageView
+            android:id="@+id/iv_priority_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_priority_1"/>
+        <ImageView
+            android:id="@+id/iv_mask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_priority_2"
+            android:visibility="invisible"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_priority_text"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        tools:text="紧急"/>
+
+</LinearLayout>

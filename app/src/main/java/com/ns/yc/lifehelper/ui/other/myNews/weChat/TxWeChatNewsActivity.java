@@ -1,0 +1,230 @@
+package com.ns.yc.lifehelper.ui.other.myNews.weChat;
+
+import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.blankj.utilcode.util.NetworkUtils;
+import com.jude.easyrecyclerview.EasyRecyclerView;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.ConstantTxApi;
+import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.ui.other.myNews.weChat.adapter.TxWeChatAdapter;
+import com.ns.yc.lifehelper.ui.other.myNews.weChat.bean.WeChatBean;
+import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.WeChatModel;
+import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.NewsContentActivity;
+
+import butterknife.Bind;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+
+/**
+ * ================================================
+ * 作    者：杨充
+ * 版    本：1.0
+ * 创建日期：2017/9/4
+ * 描    述：天行微信新闻
+ * 修订历史：
+ * ================================================
+ */
+public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickListener {
+
+    @Bind(R.id.ll_title_menu)
+    FrameLayout llTitleMenu;
+    @Bind(R.id.toolbar_title)
+    TextView toolbarTitle;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.recyclerView)
+    EasyRecyclerView recyclerView;
+    private TxWeChatNewsActivity activity;
+    private TxWeChatAdapter adapter;
+
+    private int num = 10;
+    private int page = 1;
+
+    @Override
+    public int getContentView() {
+        return R.layout.base_easy_recycle_list;
+    }
+
+    @Override
+    public void initView() {
+        activity = TxWeChatNewsActivity.this;
+        initToolBar();
+        initRecycleView();
+    }
+
+
+    private void initToolBar() {
+        toolbarTitle.setText("微信精选新闻");
+    }
+
+
+    @Override
+    public void initListener() {
+        llTitleMenu.setOnClickListener(this);
+        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if(position>-1 && adapter.getAllData().size()>position){
+                    Intent intent = new Intent(activity, NewsContentActivity.class);
+                    intent.putExtra("name",adapter.getAllData().get(position).getDescription());
+                    intent.putExtra("url",adapter.getAllData().get(position).getUrl());
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void initData() {
+        recyclerView.showProgress();
+        page = 1;
+        getNews(num,page);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_title_menu:
+                finish();
+                break;
+        }
+    }
+
+
+    private void initRecycleView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+        adapter = new TxWeChatAdapter(activity);
+        recyclerView.setAdapter(adapter);
+
+        //加载更多
+        adapter.setMore(R.layout.view_recycle_more, new RecyclerArrayAdapter.OnMoreListener() {
+            @Override
+            public void onMoreShow() {
+                if (NetworkUtils.isConnected()) {
+                    if (adapter.getAllData().size() > 0) {
+                        page++;
+                        getNews(num,page);
+                    } else {
+                        adapter.pauseMore();
+                    }
+                } else {
+                    adapter.pauseMore();
+                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMoreClick() {
+
+            }
+        });
+
+        //设置没有数据
+        adapter.setNoMore(R.layout.view_recycle_no_more, new RecyclerArrayAdapter.OnNoMoreListener() {
+            @Override
+            public void onNoMoreShow() {
+                if (NetworkUtils.isConnected()) {
+                    adapter.resumeMore();
+                } else {
+                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNoMoreClick() {
+                if (NetworkUtils.isConnected()) {
+                    adapter.resumeMore();
+                } else {
+                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //设置错误
+        adapter.setError(R.layout.view_recycle_error, new RecyclerArrayAdapter.OnErrorListener() {
+            @Override
+            public void onErrorShow() {
+                adapter.resumeMore();
+            }
+
+            @Override
+            public void onErrorClick() {
+                adapter.resumeMore();
+            }
+        });
+
+        //刷新
+        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (NetworkUtils.isConnected()) {
+                    page = 1;
+                    getNews(num,page);
+                } else {
+                    recyclerView.setRefreshing(false);
+                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void getNews(int num, final int page) {
+        WeChatModel model = WeChatModel.getInstance(activity);
+        model.getTxNews(ConstantTxApi.TX_KEY,num,page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<WeChatBean>() {
+                    @Override
+                    public void onCompleted() {
+                        if(recyclerView!=null){
+                            recyclerView.showRecycler();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if(recyclerView!=null){
+                            recyclerView.showError();
+                            recyclerView.setErrorView(R.layout.view_custom_empty_data);
+                        }
+                    }
+
+                    @Override
+                    public void onNext(WeChatBean weChatBean) {
+                        if(adapter==null){
+                            adapter = new TxWeChatAdapter(activity);
+                        }
+
+                        if(page==1){
+                            if(weChatBean!=null && weChatBean.getNewslist()!=null && weChatBean.getNewslist().size()>0){
+                                adapter.clear();
+                                adapter.addAll(weChatBean.getNewslist());
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                recyclerView.showEmpty();
+                                recyclerView.setEmptyView(R.layout.view_custom_empty_data);
+                            }
+                        } else {
+                            if(weChatBean!=null && weChatBean.getNewslist()!=null && weChatBean.getNewslist().size()>0){
+                                adapter.addAll(weChatBean.getNewslist());
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                adapter.stopMore();
+                            }
+                        }
+                    }
+                });
+    }
+
+}

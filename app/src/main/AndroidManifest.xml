@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.ns.yc.lifehelper">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+
+
+    <application
+        android:name=".base.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.guide.GuideActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.main.MainActivity"/>
+        <activity android:name=".ui.main.view.DownLoadActivity"/>
+
+        <activity android:name=".ui.other.expressDelivery.ExpressDeliveryActivity"/>
+        <activity android:name=".ui.other.expressDelivery.indexModel.SelectorCompanyActivity"/>
+        <activity android:name=".ui.other.expressDelivery.activity.ExpressDeliveryInfoActivity"/>
+
+        <activity android:name=".ui.other.douMovie.DouMovieActivity"/>
+        <activity android:name=".ui.other.douMovie.activity.MovieTopActivity"/>
+        <activity android:name=".ui.other.douMovie.activity.MovieDetailActivity"/>
+        <activity android:name=".ui.other.douMovie.activity.MovieWebViewActivity"/>
+
+        <activity android:name=".ui.other.douBook.DouBookActivity"/>
+        <activity android:name=".ui.other.douBook.activity.DouBookDetailActivity"/>
+
+        <activity android:name=".ui.other.douMusic.DouMusicActivity"/>
+        <activity android:name=".ui.other.douMusic.activity.DouMusicDetailActivity"/>
+        <activity android:name=".ui.other.toDo.ToDoTimerActivity"/>
+        <activity android:name=".ui.other.toDo.view.ToDoAddActivity"/>
+        <activity android:name=".ui.other.bookReader.BookReaderActivity"/>
+        <activity android:name=".ui.other.bookReader.view.ReaderSubjectActivity"/>
+        <activity android:name=".ui.other.bookReader.bean.ReaderTopBookActivity"/>
+        <activity android:name=".ui.other.bookReader.view.SubHomeTopRankActivity"/>
+        <activity android:name=".ui.other.bookReader.view.SubTopRankActivity"/>
+        <activity android:name=".ui.other.bookReader.view.ReaderCategoryActivity"/>
+        <activity android:name=".ui.other.bookReader.view.SubCategoryListActivity"/>
+        <activity android:name=".ui.other.bookReader.view.ReadBookDetailActivity"/>
+        <activity android:name=".ui.other.bookReader.activity.BookReaderDiscussionActivity"/>
+        <activity android:name=".ui.other.bookReader.activity.BookReaderGirlActivity"/>
+        <activity android:name=".ui.other.bookReader.activity.BookReaderHelpActivity"/>
+        <activity android:name=".ui.other.bookReader.activity.BookReaderOriginalActivity"/>
+        <activity android:name=".ui.other.bookReader.activity.BookReaderReviewActivity"/>
+        <activity android:name=".ui.other.bookReader.activity.BookReaderLocalActivity"/>
+        <activity android:name=".ui.other.bookReader.activity.BookReadPDFActivity"/>
+        <activity android:name=".ui.other.bookReader.activity.BookReadPubActivity"/>
+        <activity android:name=".ui.other.bookReader.activity.BookReadChmActivity"/>
+
+        <activity android:name=".ui.other.timer.TimerActivity"/>
+
+        <activity android:name=".ui.other.myVideo.MyVideoActivity"/>
+
+        <activity android:name=".ui.other.myMusic.MyMusicActivity"/>
+        <activity android:name=".ui.other.myMusic.activity.MyMusicLocalActivity"/>
+        <activity android:name=".ui.other.myMusic.activity.MyMusicSearchActivity"/>
+        <activity android:name=".ui.other.myMusic.activity.MyMusicRippleActivity"/>
+
+        <activity android:name=".ui.other.myKnowledge.MyKnowledgeActivity"/>
+        <activity android:name=".ui.other.myKnowledge.activity.KnowledgeSearchActivity"/>
+        <activity android:name=".ui.other.myKnowledge.activity.KnowledgeImageActivity"/>
+
+        <activity android:name=".ui.other.myNews.wyNews.WyNewsActivity"/>
+        <activity android:name=".ui.other.myNews.wxNews.WxNewsActivity"/>
+        <activity android:name=".ui.other.myNews.wyNews.view.WxNewsDropActivity"/>
+        <activity android:name=".ui.other.myNews.txNews.TxNewsActivity"/>
+        <activity android:name=".ui.main.WebViewActivity"/>
+        <activity android:name=".ui.other.myNews.wxNews.view.NewsSearchActivity"/>
+        <activity android:name=".ui.other.myNews.weChat.TxWeChatNewsActivity"/>
+        <activity android:name=".ui.other.myNews.weChat.view.NewsContentActivity"/>
+
+        <activity android:name=".ui.other.myTsSc.TangShiActivity"/>
+        <activity android:name=".ui.other.myTsSc.SongCiActivity"/>
+        <activity android:name=".ui.other.myTsSc.YuanQuActivity"/>
+        <activity android:name=".ui.other.myTsSc.view.TangShiFirstActivity"/>
+        <activity android:name=".ui.other.myTsSc.view.TangShiDetailActivity"/>
+        <activity android:name=".ui.other.myTsSc.view.SongCiDetailActivity"/>
+        <activity android:name=".ui.other.myTsSc.view.YuanQuDetailActivity"/>
+        <activity android:name=".ui.other.myTsSc.view.TangShiSearchActivity"/>
+        <activity android:name=".ui.other.myTsSc.view.TangShiSearchDetailActivity"/>
+
+
+        <activity android:name=".ui.other.timeListener.TimeListenerActivity"/>
+
+        <activity android:name=".ui.other.myPicture.MyPictureActivity"/>
+        <activity android:name=".ui.other.myPicture.view.MyPicPileActivity"/>
+        <activity android:name=".ui.other.myPicture.view.MyPicNiceActivity"/>
+        <activity android:name=".ui.other.myPicture.view.MyPicBeautifulActivity"/>
+        <activity android:name=".ui.other.myPicture.view.BeautifulGroupActivity"/>
+        <activity android:name=".ui.other.myPicture.view.MyPicLargeActivity"/>
+
+        <activity android:name=".ui.other.myNote.NoteActivity"/>
+        <activity android:name=".ui.other.myNote.view.NoteAddActivity"/>
+
+        <activity android:name=".ui.find.view.RiddleActivity"/>
+        <activity android:name=".ui.find.view.RiddleDetailActivity"/>
+        <activity android:name=".ui.data.view.DoodleViewActivity"/>
+        <activity android:name=".ui.other.weather.WeatherActivity"/>
+
+        <activity android:name=".ui.other.sharpBendOfBrain.SharpBendOfBrainActivity"/>
+
+        <activity android:name=".ui.me.view.MeCollectActivity"/>
+        <activity android:name=".ui.me.view.MeFeedBackActivity"/>
+        <activity android:name=".ui.me.view.MeSettingActivity"/>
+        <activity android:name=".ui.me.view.MePersonActivity"/>
+        <activity android:name=".ui.me.activity.MeQoneActivity"/>
+        <activity android:name=".ui.me.activity.MeLoginActivity"/>
+        <activity android:name=".ui.me.activity.MeRegisterActivity"/>
+
+        <service android:name=".service.PicBeautifulService"/>
+        <service android:name=".service.PicGroupService"/>
+        <service android:name=".service.TimerService"/>
+
+        <receiver android:name=".receiver.TimerReceiver"/>
+
+    </application>
+.
+</manifest>

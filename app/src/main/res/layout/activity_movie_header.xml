@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="20dp"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_header_photo"
+        android:layout_width="125dp"
+        android:layout_height="165dp"
+        android:layout_marginRight="15dp"
+        android:scaleType="fitXY"/>
+
+    <!--评分-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="12dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_header_rating_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="评分：7.4"
+                android:textColor="@color/redTab" />
+            <TextView
+                android:id="@+id/tv_header_rating_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="23333人评分"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+        <!--导演-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="43dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="导演："
+                    android:textColor="@color/colorWhite" />
+                <View
+                    android:layout_width="28dp"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/redTab" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_header_directors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="吴京"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+        <!--主演-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="主演："
+                android:textColor="@color/colorWhite" />
+            <TextView
+                android:id="@+id/tv_header_casts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="吴京"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+        <!--类型-->
+        <TextView
+            android:id="@+id/tv_header_genres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:text="类型：动作"
+            android:textColor="@color/colorWhite" />
+
+        <!--上映日期-->
+        <TextView
+            android:id="@+id/tv_header_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:text="上映日期："
+            android:textColor="@color/colorWhite" />
+
+        <!--制片国家/地区-->
+        <TextView
+            android:id="@+id/tv_header_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="制片国家/地区："
+            android:textColor="@color/colorWhite" />
+
+    </LinearLayout>
+</LinearLayout>

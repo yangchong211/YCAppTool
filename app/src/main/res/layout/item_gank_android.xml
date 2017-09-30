@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:padding="10dp"
+    android:id="@+id/ll_all">
+
+
+    <!--全部标签时显示福利图-->
+    <ImageView
+        android:id="@+id/iv_all_welfare"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_welfare_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_android_des"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:lineSpacingExtra="4dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text=""
+            android:textColor="@color/blackText"
+            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/iv_android_pic"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:scaleType="centerCrop"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp">
+        <TextView
+            android:id="@+id/tv_android_who"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blackText2"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/tv_content_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_android_who"
+            android:text=""
+            android:textColor="@color/blackText2"
+            android:textSize="12sp"
+            android:visibility="gone" />
+        <TextView
+            android:id="@+id/tv_android_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/blackText2"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</LinearLayout>

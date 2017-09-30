@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.youth.banner.Banner
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:indicator_drawable_selected="@drawable/shape_banner_selected_radius"
+        app:indicator_drawable_unselected="@drawable/shape_banner_unselected_radius"
+        app:indicator_height="6dp"
+        app:indicator_margin="3dp"
+        app:indicator_width="6dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
+        <TextView
+            android:id="@+id/tv_home_first"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_first"
+            android:text="精选新闻" />
+        <TextView
+            android:id="@+id/tv_home_second"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_second"
+            android:text="今日头条" />
+        <TextView
+            android:id="@+id/tv_home_third"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_third"
+            android:text="天行热点" />
+        <TextView
+            android:id="@+id/tv_home_four"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_four"
+            android:text="干货定制" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/redTab"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="头条"/>
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="25dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/redTab"/>
+
+        <!--上下滚动TextView-->
+        <com.ns.yc.lifehelper.ui.weight.MarqueeView
+            android:id="@+id/marqueeView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical"
+            app:paddingStart="0dp"
+            app:mvAnimDuration="1000"
+            app:mvInterval="2000"
+            app:mvTextColor="#464C4E"
+            app:mvTextSize="16sp"
+            app:mvSingleLine="true"/>
+    </LinearLayout>
+
+    <!--注意外面一定要嵌套一层帧布局，线性布局，相对布局都行，解决与BGA滑动冲突事件-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <com.ns.yc.lifehelper.ui.weight.pileCard.PileLayout
+            android:id="@+id/pileLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            app:displayCount="1.8"
+            app:interval="10dp"
+            app:scaleStep="0.32"
+            app:sizeRatio="1.12" />
+    </FrameLayout>
+
+
+</LinearLayout>

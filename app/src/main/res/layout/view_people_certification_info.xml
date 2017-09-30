@@ -1,0 +1,210 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/iv_app_person_photo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/avatar_default"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_app_person_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:textSize="16sp"
+                android:text="修改图片"/>
+            <View style="@style/DeepUnderLine"/>
+            <RelativeLayout
+                android:id="@+id/rl_person_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp">
+                <TextView
+                    android:id="@+id/tv_person_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="姓名"/>
+                <TextView
+                    android:id="@+id/tv_app_person_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:drawablePadding="8dp"
+                    android:textSize="16sp"
+                    android:text="杨充"
+                    android:drawableRight="@drawable/ic_back_right"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_person_coll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="收藏"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="8dp"
+            android:textSize="16sp"
+            android:drawableRight="@drawable/ic_back_right"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_person_comm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="评论"/>
+        <TextView
+            android:id="@+id/tv_person_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="8dp"
+            android:text="18条"
+            android:textSize="16sp"
+            android:drawableRight="@drawable/ic_back_right"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_person_company"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="公司"/>
+        <TextView
+            android:id="@+id/tv_person_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="8dp"
+            android:text="清科集团"
+            android:textSize="16sp"
+            android:drawableRight="@drawable/ic_back_right"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_person_duty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="职位"/>
+        <TextView
+            android:id="@+id/tv_person_duty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="8dp"
+            android:text="软件开发"
+            android:textSize="16sp"
+            android:drawableRight="@drawable/ic_back_right"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_person_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="邮箱"/>
+        <TextView
+            android:id="@+id/tv_person_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="8dp"
+            android:text="正则校核"
+            android:textSize="16sp"
+            android:drawableRight="@drawable/ic_back_right"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_person_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="简介"/>
+        <TextView
+            android:id="@+id/tv_person_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="8dp"
+            android:text="一句话，要字数限制"
+            android:textSize="16sp"
+            android:drawableRight="@drawable/ic_back_right"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_person_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="地区"/>
+        <TextView
+            android:id="@+id/tv_person_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="8dp"
+            android:text="快速索引"
+            android:textSize="16sp"
+            android:drawableRight="@drawable/ic_back_right"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+</LinearLayout>

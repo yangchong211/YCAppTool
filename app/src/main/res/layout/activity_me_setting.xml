@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteBg">
+
+
+    <include layout="@layout/base_tool_bar"/>
+
+    <!--去评分-->
+    <RelativeLayout
+        android:id="@+id/rl_set_go_star"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="去评分"/>
+        <TextView
+            style="@style/MeInfoTextRightStyle"
+            android:textColor="@color/blackText2"/>
+    </RelativeLayout>
+
+    <!--推送开关-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="推送开关"/>
+        <com.ns.yc.lifehelper.ui.weight.SwitchButton
+            android:id="@+id/switch_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            app:sb_show_indicator="false"
+            app:sb_checked="true"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <!--夜间模式-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="夜间模式"/>
+        <com.ns.yc.lifehelper.ui.weight.SwitchButton
+            android:id="@+id/switch_night"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            app:sb_show_indicator="false"
+            app:sb_checked="false"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <!--清空缓存-->
+    <RelativeLayout
+        android:id="@+id/rl_set_clean_cache"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="清空缓存"/>
+        <TextView
+            android:id="@+id/tv_set_cache_size"
+            style="@style/MeInfoTextRightStyle"
+            android:textColor="@color/blackText2"
+            android:text="19M"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+
+    <!--修改密码-->
+    <RelativeLayout
+        android:id="@+id/rl_set_revise_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="修改密码"/>
+        <TextView
+            style="@style/MeInfoTextRightStyle"
+            android:textColor="@color/blackText2"
+            android:drawableRight="@drawable/ic_back_right"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <!--手机认证-->
+    <RelativeLayout
+        android:id="@+id/rl_set_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="手机认证"/>
+        <TextView
+            android:id="@+id/tv_is_cert"
+            style="@style/MeInfoTextRightStyle"
+            android:textColor="@color/blackText2"
+            android:text="未认证"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <!--关于我们-->
+    <RelativeLayout
+        android:id="@+id/rl_set_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="关于我们"/>
+        <TextView
+            style="@style/MeInfoTextRightStyle"
+            android:textColor="@color/blackText2"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+
+    <!--账户绑定-->
+    <RelativeLayout
+        android:id="@+id/rl_set_binding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="账户绑定"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@drawable/ic_back_right"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+
+    <!--推出登录-->
+    <TextView
+        android:id="@+id/tv_exit"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/blackText"
+        android:text="退出登录"/>
+
+
+</LinearLayout>

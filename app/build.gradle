@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'realm-android'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+        applicationId "com.ns.yc.lifehelper"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // 64k
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support:palette-v7:25.3.1'
+    compile 'com.android.support:percent:25.3.1'
+    compile 'com.android.support:multidex:1.0.1'
+    //黄牛刀
+    compile 'com.jakewharton:butterknife:7.0.1'
+    //图片加载框架
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
+    //takePhoto框架
+    compile 'com.jph.takephoto:takephoto_library:4.0.3'
+    compile 'com.lzy.widget:imagepicker:0.5.0'  //指定版本
+    //事件总线
+    compile 'org.greenrobot:eventbus:3.0.0'
+    //导航栏
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar'
+    //轮播图
+    compile 'com.youth.banner:banner:1.4.8'
+    // Bus
+    compile 'org.greenrobot:eventbus:3.0.0'
+    //网络请求
+    compile 'com.zhy:okhttputils:2.5.2'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    //compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //compile 'io.reactivex.rxjava2:rxjava:2.1.2'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.0'
+    //快速索引
+    compile 'me.yokeyword:indexablerecyclerview:1.3.0'
+    //BGA系列
+    compile 'cn.bingoogolapple:bga-refreshlayout:1.1.7'
+    compile 'cn.bingoogolapple:bga-adapter:1.1.5@aar'
+    //工具类
+    compile 'com.blankj:utilcode:1.7.1'
+    //recycleView 封装
+    compile 'com.jude:easyrecyclerview:4.4.0'
+    //洪洋大神流式布局
+    compile 'com.zhy:flowlayout-lib:1.0.3'
+    compile 'com.github.clans:fab:1.6.1'
+    //解析Html
+    compile 'org.jsoup:jsoup:1.8.2'
+    //电子书
+    compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
+
+    //自定义
+    //状态管理
+    compile 'cn.yc:StateLayoutLib:1.0'
+    //图片选择器
+    compile 'cn.yc:YCPhotoLib:1.0'
+    //弹窗
+    compile 'cn.yc:YCDialogLib:3.0'
+}

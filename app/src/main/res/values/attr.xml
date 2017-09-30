@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--自定义圆形图片控件-->
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="WatchBoard">
+        <!--表盘的边距-->
+        <attr name="wb_padding" format="dimension"/>
+        <!--表盘文字大小-->
+        <attr name="wb_text_size" format="dimension"/>
+        <!--时针的宽度-->
+        <attr name="wb_hour_pointer_width" format="dimension"/>
+        <!--分针的宽度-->
+        <attr name="wb_minute_pointer_width" format="dimension"/>
+        <!--秒针的宽度-->
+        <attr name="wb_second_pointer_width" format="dimension"/>
+        <!--指针圆角值-->
+        <attr name="wb_pointer_corner_radius" format="dimension"/>
+        <!--指针超过中心点的长度-->
+        <attr name="wb_pointer_end_length" format="dimension"/>
+        <!--时刻刻度颜色-->
+        <attr name="wb_scale_long_color" format="color"/>
+        <!--非时刻刻度颜色-->
+        <attr name="wb_scale_short_color" format="color"/>
+        <!--时针颜色-->
+        <attr name="wb_hour_pointer_color" format="color"/>
+        <!--分针颜色-->
+        <attr name="wb_minute_pointer_color" format="color"/>
+        <!--秒针颜色-->
+        <attr name="wb_second_pointer_color" format="color"/>
+    </declare-styleable>
+
+    <!--我的音乐item抽取-->
+    <declare-styleable name="LocalMenuItem">
+        <attr name="icon" format="reference" />
+        <attr name="title" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="RippleAnimationView">
+        <attr name="ripple_anim_scale" format="float" />
+        <attr name="ripple_anim_color" format="color" />
+        <attr name="ripple_anim_amount" format="integer" />
+        <attr name="ripple_anim_duration" format="integer" />
+        <attr name="ripple_anim_radius" format="dimension" />
+        <attr name="ripple_anim_strokeWidth" format="dimension" />
+        <attr name="ripple_anim_type" format="enum">
+            <enum name="fillRipple" value="0" />
+            <enum name="strokeRipple" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <!--跑马灯效果文本控件-->
+    <declare-styleable name="MarqueeViewStyle">
+        <attr name="mvInterval" format="integer|reference"/>
+        <attr name="mvAnimDuration" format="integer|reference"/>
+        <attr name="mvTextSize" format="dimension|reference"/>
+        <attr name="mvTextColor" format="color|reference"/>
+        <attr name="mvSingleLine" format="boolean"/>
+        <attr name="mvGravity">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="pile">
+        <attr name="interval" format="dimension" />
+        <attr name="sizeRatio" format="float" />
+        <attr name="scaleStep" format="float" />
+        <attr name="displayCount" format="float" />
+    </declare-styleable>
+    <declare-styleable name="scene">
+        <attr name="leftMargin" format="dimension" />
+        <attr name="leftDistance" format="dimension" />
+        <attr name="rightDistance" format="dimension" />
+        <attr name="verticalDistance" format="dimension" />
+        <attr name="textSize" format="float" />
+        <attr name="textColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="IndicatorView">
+        <attr name="marker" format="reference" />
+        <attr name="indicatorValue" format="integer" />
+        <attr name="inTextSize" format="dimension" />
+        <attr name="inTextColor" format="color" />
+        <attr name="intervalSize" format="dimension" />
+        <attr name="indicatorStrings" format="integer" />
+        <attr name="indicatorColors" format="integer" />
+    </declare-styleable>
+
+    <!--选择开关自定义控件-->
+    <declare-styleable name="SwitchButton">
+        <attr name="sb_shadow_radius" format="reference|dimension"/>
+        <attr name="sb_shadow_offset" format="reference|dimension"/>
+        <attr name="sb_shadow_color" format="reference|color"/>
+        <attr name="sb_uncheck_color" format="reference|color"/>
+        <attr name="sb_checked_color" format="reference|color"/>
+
+        <attr name="sb_border_width" format="reference|dimension"/>
+        <attr name="sb_checkline_color" format="reference|color"/>
+        <attr name="sb_checkline_width" format="reference|dimension"/>
+        <attr name="sb_uncheckcircle_color" format="reference|color"/>
+        <attr name="sb_uncheckcircle_width" format="reference|dimension"/>
+        <attr name="sb_uncheckcircle_radius" format="reference|dimension"/>
+
+        <attr name="sb_checked" format="reference|boolean"/>
+        <attr name="sb_shadow_effect" format="reference|boolean"/>
+        <attr name="sb_effect_duration" format="reference|integer"/>
+        <attr name="sb_button_color" format="reference|color"/>
+        <attr name="sb_show_indicator" format="reference|boolean"/>
+        <attr name="sb_background" format="reference|color"/>
+        <attr name="sb_enable_effect" format="reference|boolean"/>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="CountDownView">
+        <!--view半径-->
+        <attr name="cd_circle_radius" format="dimension" />
+        <!--画笔宽度-->
+        <attr name="cd_arc_width" format="dimension" />
+        <!--画笔颜色-->
+        <attr name="cd_arc_color" format="color" />
+        <!--背景颜色-->
+        <attr name="cd_bg_color" format="color" />
+        <!--字体颜色-->
+        <attr name="cd_text_color" format="color" />
+        <!--字体尺寸-->
+        <attr name="cd_text_size" format="dimension" />
+        <!--动画执行时长-->
+        <attr name="cd_animator_time" format="integer" />
+        <!--时间单位-->
+        <attr name="cd_animator_time_unit" format="string" />
+        <!--动画进退方式-->
+        <attr name="cd_retreat_type" format="enum">
+            <!--外层的圆弧逐渐变长-->
+            <enum name="forward" value="1" />
+            <!--外层的圆弧逐渐减短-->
+            <enum name="back" value="2" />
+        </attr>
+        <!--加载进度的开始位置-->
+        <attr name="cd_location" format="enum">
+            <enum name="left" value="1" />
+            <enum name="top" value="2" />
+            <enum name="right" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="XlHRatingBar">
+        <attr name="starCount" format="integer" /><!--总的星星数-->
+        <attr name="canEdit" format="boolean" /><!--是否可以点击选择，有时候纯展示用不需要选择-->
+        <attr name="widthAndHeight" format="dimension" /><!--单个星星的宽度-->
+        <attr name="dividerWidth" format="dimension" /><!--星星左右间距-->
+        <attr name="countSelected" format="integer" /><!--当前已选中的星星个数-->
+        <attr name="stateResId" format="reference" /><!--单个星星不同状态下对应的图标-->
+        <attr name="differentSize" format="boolean" /><!--是否支持大小不等星星样式-->
+    </declare-styleable>
+
+    <declare-styleable name="DirectionalViewpager">
+        <attr name="direction" format="string"/>
+    </declare-styleable>
+
+</resources>

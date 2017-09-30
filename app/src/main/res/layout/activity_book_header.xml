@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_book_detail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/iv_book_photo"
+            android:layout_width="125dp"
+            android:layout_height="165dp"
+            android:layout_marginRight="15dp"
+            android:scaleType="fitXY"/>
+        <!--评分-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="12dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="43dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="作者："
+                        android:textColor="@color/colorWhite" />
+                    <View
+                        android:layout_width="28dp"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@color/redTab" />
+                </LinearLayout>
+                <!--集合不能直接赋值，参数也要传对，注意！-->
+                <TextView
+                    android:id="@+id/tv_book_directors"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:text="杨充"
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+
+            <!--导演-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_book_rating_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:text="评分：9.2"
+                    android:textColor="@color/redTab" />
+                <TextView
+                    android:id="@+id/tv_book_rating_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="11198人评分"
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+
+            <!--主演-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="出版时间："
+                    android:textColor="@color/colorWhite" />
+                <TextView
+                    android:id="@+id/tv_one_casts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:text="2011-6"
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+
+            <!--类型-->
+            <TextView
+                android:id="@+id/tv_book_genres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:text="南海出版公司"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

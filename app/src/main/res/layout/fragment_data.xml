@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ns.yc.lifehelper.ui.weight.scrollView.NoSlidingScrollview
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorWhite">
+
+        <com.youth.banner.Banner
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:title_height="20dp"
+            app:title_textsize="16sp"
+            app:title_textcolor="@color/colorAccent"
+            app:title_background="@color/colorTransparent"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorWhite">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <LinearLayout
+                android:id="@+id/ll_points"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="#00000000"
+                android:gravity="center"
+                android:layout_gravity="bottom|center"
+                android:orientation="horizontal" />
+        </FrameLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/shape_find_icon"
+            android:drawablePadding="10dp"
+            android:background="@color/whiteBg"
+            android:textSize="18sp"
+            android:textColor="@color/blackText"
+            android:text="时光日志"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2017年4月18日"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="任务目录"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_note_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:drawableRight="@drawable/ic_back_right"
+                android:text="编辑笔记"/>
+        </RelativeLayout>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/shape_find_icon"
+            android:drawablePadding="10dp"
+            android:background="@color/whiteBg"
+            android:textSize="18sp"
+            android:textColor="@color/blackText"
+            android:text="最新观察"/>
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scrollbars="none"
+            app:layout_empty="@layout/view_custom_empty_data"
+            app:layout_error="@layout/view_custom_data_error"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/shape_find_icon"
+            android:drawablePadding="10dp"
+            android:background="@color/whiteBg"
+            android:textSize="18sp"
+            android:textColor="@color/blackText"
+            android:text="实用小工具"/>
+
+        <com.ns.yc.lifehelper.ui.weight.MyGridView
+            android:id="@+id/gridView"
+            android:gravity="center"
+            android:numColumns="4"
+            android:columnWidth="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"/>
+
+    </LinearLayout>
+
+</com.ns.yc.lifehelper.ui.weight.scrollView.NoSlidingScrollview>

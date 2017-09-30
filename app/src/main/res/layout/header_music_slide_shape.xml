@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <ImageView
+        android:id="@+id/img_music_item_bg"
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:scaleType="fitXY"
+        android:background="@drawable/bg_stack_blur_default"/>
+
+    <LinearLayout
+        android:id="@+id/ll_music_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="95dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_music_photo"
+                android:layout_width="120dp"
+                android:layout_height="140dp"
+                android:layout_marginRight="15dp"
+                android:scaleType="fitXY"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="12dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="43dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="作者："
+                            android:textColor="@color/colorWhite" />
+                        <View
+                            android:layout_width="28dp"
+                            android:layout_height="2dp"
+                            android:layout_marginTop="2dp"
+                            android:background="@color/redTab" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/tv_music_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:text="宫崎骏"
+                        android:textColor="@color/colorWhite" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="艺术名："
+                        android:textColor="@color/colorWhite" />
+                    <TextView
+                        android:id="@+id/tv_music_alt_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:text="林夕字傳"
+                        android:textColor="@color/colorWhite" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_music_average"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:text="评分：9.5"
+                    android:textColor="@color/colorWhite" />
+                <TextView
+                    android:id="@+id/tv_music_numRaters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:text="评论数：33302"
+                    android:textColor="@color/colorWhite" />
+                <TextView
+                    android:id="@+id/tv_music_summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:lines="2"
+                    android:text="介绍："
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

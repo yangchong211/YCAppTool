@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:indicatorView="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            app:cardElevation="1dp"
+            app:contentPadding="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+                <TextView
+                    android:id="@+id/tv_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/blackText"
+                    android:text="详情"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_detail_title"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    tools:listitem="@layout/item_weather_detail" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            app:cardElevation="1dp"
+            app:contentPadding="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+                <TextView
+                    android:id="@+id/tv_forecast_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/blackText"
+                    android:text="预报" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_forecast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_forecast_title"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    tools:listitem="@layout/item_weather_forecast" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_aqi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="6dp"
+            app:cardElevation="1dp"
+            app:contentPadding="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_aqi_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/blackText"
+                    android:text="污染指数"/>
+                <TextView
+                    android:id="@+id/tv_aqi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_aqi_title"
+                    android:layout_marginTop="8dp"
+                    android:includeFontPadding="false"
+                    android:textSize="46sp"
+                    tools:text="29" />
+                <TextView
+                    android:id="@+id/tv_quality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/tv_aqi"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/tv_aqi"
+                    android:layout_toRightOf="@id/tv_aqi"
+                    android:includeFontPadding="false"
+                    android:textSize="24sp"
+                    tools:text="优" />
+                <com.ns.yc.lifehelper.ui.other.weather.weight.IndicatorView
+                    android:id="@+id/indicator_view_aqi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tv_aqi"
+                    android:layout_alignStart="@id/tv_aqi"
+                    android:layout_below="@id/tv_aqi"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="16dp"
+                    indicatorView:indicatorValue="0"
+                    indicatorView:intervalSize="0dp"
+                    indicatorView:marker="@drawable/ic_vector_indicator_down"
+                    indicatorView:inTextSize="8sp" />
+                <TextView
+                    android:id="@+id/tv_advice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tv_aqi"
+                    android:layout_alignStart="@id/tv_aqi"
+                    android:layout_below="@id/indicator_view_aqi"
+                    tools:text="气象条件不利于空气污染物稀释、扩散和清除，请尽量避免在室外长时间活动。" />
+                <TextView
+                    android:id="@+id/tv_city_rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_advice"
+                    android:layout_marginTop="4dp"
+                    android:textSize="12sp"
+                    tools:text="空气质量超过全国4%的城市或地区" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_index"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="4dp"
+            app:cardElevation="1dp"
+            app:contentPadding="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+                <TextView
+                    android:id="@+id/tv_index_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:textColor="@color/blackText"
+                    android:text="生活指数"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_life_index"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_index_title"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="12dp"
+                    tools:listitem="@layout/item_weather_life_index" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
