@@ -9,6 +9,9 @@
 * 8.关于版本更新说明
 * 9.关于获取更多信息
 * 10.App图片展示
+* 11.关于版本更新说明
+* 12.关于云测试情况
+* 13.关于bug管理说明
 
 ### 1.关于前言介绍
 - 关于开发的APP有：[投资界](http://openbox.mobilem.360.cn/index/d/sid/3583538)，[新芽](http://openbox.mobilem.360.cn/index/d/sid/3425699)，可以在应用市场上下载
@@ -166,14 +169,13 @@
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-56-32.png)
 
 
+### 11.关于版本更新说明
 
 
+### 12.关于云测试情况
 
 
-
-
-
-
+### 13.关于bug管理说明
 
 
 
