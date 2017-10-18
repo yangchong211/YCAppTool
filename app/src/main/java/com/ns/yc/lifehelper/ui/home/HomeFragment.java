@@ -236,6 +236,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
         return header;
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
