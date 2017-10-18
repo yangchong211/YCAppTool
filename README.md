@@ -129,13 +129,9 @@
 - 图片页面
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-15-41.png)
 - 音乐页面
-![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-16-08.png)
-![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-39-49.png)
-![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-44-26.png)
-- 音乐通知栏
-![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-44-26.png)
+- ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-44-26.png)
 - 视频页面
-![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-39-21.png)
+- ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-39-21.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-39-28.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-39-32.png)
 - 小说阅读器页面
