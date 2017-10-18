@@ -9,7 +9,7 @@
 * 8.关于版本更新说明
 * 9.关于获取更多信息
 * 10.App图片展示
-* 11.关于版本更新说明
+* 11.关于其他说明
 * 12.关于云测试情况
 * 13.关于bug管理说明
 
@@ -130,6 +130,14 @@
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-15-41.png)
 - 音乐页面
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-16-08.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-39-49.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-44-26.png)
+- 音乐通知栏
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-44-26.png)
+- 视频页面
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-39-21.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-39-28.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-18-19-39-32.png)
 - 小说阅读器页面
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-16-25.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-16-30.png)
@@ -169,7 +177,7 @@
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-56-32.png)
 
 
-### 11.关于版本更新说明
+### 11.其他说明
 
 
 ### 12.关于云测试情况
