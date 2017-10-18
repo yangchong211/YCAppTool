@@ -9,12 +9,14 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -27,8 +29,10 @@ import com.ns.yc.lifehelper.base.AppManager;
 import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.ui.main.WebViewActivity;
 import com.ns.yc.lifehelper.ui.me.view.MeFeedBackActivity;
+import com.pedaily.yc.ycdialoglib.selector.CustomSelectDialog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ================================================
@@ -185,7 +189,7 @@ public class DialogUtils {
         final AlertDialog alertDialog = builder.create();
         alertDialog.setCancelable(false);
 
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_toast_view, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading_view, null);
         alertDialog.setView(view);
         ImageView iv_image = (ImageView) view.findViewById(R.id.iv_image);
         AnimationDrawable animationDrawable = (AnimationDrawable) iv_image.getDrawable();
@@ -237,7 +241,7 @@ public class DialogUtils {
      */
     public static void showWindowDialog(final Context context){
         //首先获取当前Activity
-        Activity activity = AppManager.getAppManager().currentActivity();
+        final Activity activity = AppManager.getAppManager().currentActivity();
         if(AppUtil.isActivityLiving(activity)){
             //context 不行
             //final BaseApplication context = BaseApplication.getInstance();
@@ -291,10 +295,11 @@ public class DialogUtils {
 
             //Unable to add window android.view.ViewRootImpl$W@12b82d6 -- permission denied for this window type
             //alertDialog.show();
+            AppUtil.setBackgroundAlpha(activity,0.5f);
             alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
-
+                    AppUtil.setBackgroundAlpha(activity,1.0f);
                 }
             });
         }
@@ -342,7 +347,8 @@ public class DialogUtils {
      * 注意，由于是在Activity页面弹窗，因此不需要设置setType属性；
      *      如果是设置主题，那么弹窗无法居中，new AlertDialog.Builder(context,R.style.AppTheme);        //传统主题
      */
-    public static void showActivityDialog(final Activity activity){
+    public static void showActivityDialog(){
+        final Activity activity = AppManager.getAppManager().currentActivity();
         if(AppUtil.isActivityLiving(activity)){
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             final AlertDialog alertDialog = builder.create();
@@ -367,11 +373,43 @@ public class DialogUtils {
                 public void onClick(View v) {
                     //评分跳转应用宝 com.tencent.android.qqdownloader
                     if(AppUtil.isPkgInstalled(activity,"com.tencent.android.qqdownloader")){
-                        //GoToScoreUtils.goToMarket(activity, AppUtils.getAppPackageName());
-                        GoToScoreUtils.goToMarket(activity, "com.zero2ipo.harlanhu.pedaily");
-                        //ArrayList<String> installAppMarkets = GoToScoreUtils.getInstallAppMarkets(activity);
-                        //ArrayList<String> filterInstallMarkets = GoToScoreUtils.getFilterInstallMarkets(activity, installAppMarkets);
-                        //GoToScoreUtils.launchAppDetail(activity,"com.zero2ipo.harlanhu.pedaily",filterInstallMarkets.get(0));
+
+                        ArrayList<String> installAppMarkets = GoToScoreUtils.queryInstalledMarketPkgs(activity);
+                        ArrayList<String> filterInstallMarkets = GoToScoreUtils.filterInstalledPkgs(activity, installAppMarkets);
+
+                        final ArrayList<String> markets = new ArrayList<>();
+                        for(int a=0 ; a<installAppMarkets.size() ; a++){
+                            Log.e("应用市场----",installAppMarkets.get(a));
+                        }
+
+                        if(filterInstallMarkets.size()>0){
+                            //过滤
+                            for(int a=0 ; a<filterInstallMarkets.size() ; a++){
+                                Log.e("应用市场++++",filterInstallMarkets.get(a));
+                                String pkg = filterInstallMarkets.get(a);
+                                if(installAppMarkets.contains(pkg)){
+                                    markets.add(pkg);
+                                }
+                            }
+                            List<String> names = new ArrayList<>();
+                            for(int b=0 ; b<markets.size() ; b++){
+                                com.blankj.utilcode.util.AppUtils.AppInfo appInfo = com.blankj.utilcode.util.AppUtils.getAppInfo(markets.get(b));
+                                String name = appInfo.getName();
+                                names.add(name);
+                            }
+                            showDialog(activity , new CustomSelectDialog.SelectDialogListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    GoToScoreUtils.launchAppDetail(activity,"com.zero2ipo.harlanhu.pedaily",markets.get(position));
+                                }
+                            }, names);
+                        }else {
+                            //投资界应用宝评分链接
+                            String QQUrl = "http://android.myapp.com/myapp/detail.htm?apkName=com.zero2ipo.harlanhu.pedaily";
+                            Intent intent = new Intent(activity, WebViewActivity.class);
+                            intent.putExtra("url", QQUrl);
+                            activity.startActivity(intent);
+                        }
                     }else {
                         Intent intent = new Intent(activity, WebViewActivity.class);
                         intent.putExtra("url", Constant.QQUrl);
@@ -447,6 +485,17 @@ public class DialogUtils {
             });
         }
     }
+
+
+    /**展示对话框视图，构造方法创建对象*/
+    private static CustomSelectDialog showDialog(Activity activity , CustomSelectDialog.SelectDialogListener listener, List<String> names) {
+        CustomSelectDialog dialog = new CustomSelectDialog(activity, R.style.transparentFrameWindowStyle, listener, names);
+        if (!activity.isFinishing()) {
+            dialog.show();
+        }
+        return dialog;
+    }
+
 
 
 }

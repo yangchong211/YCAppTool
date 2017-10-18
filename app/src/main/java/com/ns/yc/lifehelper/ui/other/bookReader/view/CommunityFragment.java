@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.bookReader.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,7 +15,6 @@ import com.ns.yc.lifehelper.ui.other.bookReader.BookReaderActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.activity.BookReaderDiscussionActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.activity.BookReaderGirlActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.activity.BookReaderHelpActivity;
-import com.ns.yc.lifehelper.ui.other.bookReader.activity.BookReaderOriginalActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.activity.BookReaderReviewActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.adapter.ReaderFindAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.support.FindBean;
@@ -110,7 +110,10 @@ public class CommunityFragment extends BaseFragment {
             public void onItemClick(View view, int position) {
                 switch (position){
                     case 0:
-                        startActivity(BookReaderDiscussionActivity.class);
+                        Intent intent1 = new Intent(activity,BookReaderDiscussionActivity.class);
+                        intent1.putExtra("type","ramble");
+                        intent1.putExtra("name","综合讨论区");
+                        startActivity(intent1);
                         break;
                     case 1:
                         startActivity(BookReaderReviewActivity.class);
@@ -122,7 +125,10 @@ public class CommunityFragment extends BaseFragment {
                         startActivity(BookReaderGirlActivity.class);
                         break;
                     case 4:
-                        startActivity(BookReaderOriginalActivity.class);
+                        Intent intent2 = new Intent(activity,BookReaderDiscussionActivity.class);
+                        intent2.putExtra("type","original");
+                        intent2.putExtra("name","原创区");
+                        startActivity(intent2);
                         break;
                 }
             }

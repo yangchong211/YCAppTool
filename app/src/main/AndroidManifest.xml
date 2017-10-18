@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.ns.yc.lifehelper">
+          package="com.ns.yc.lifehelper"
+          android:versionCode="2"
+          android:versionName="1.2">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,6 +15,10 @@
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <category android:name="android.intent.category.APP_MARKET" />
 
 
     <application
@@ -125,10 +132,53 @@
         <activity android:name=".ui.me.activity.MeLoginActivity"/>
         <activity android:name=".ui.me.activity.MeRegisterActivity"/>
 
+        <activity android:name=".ui.other.safe360.SafeHomeActivity"/>
+        <activity android:name=".ui.other.safe360.activity.MobileSafeActivity"/>
+
+
+        <activity android:name=".ui.other.listener.ListenerActivity"/>
+        <activity android:name=".ui.other.mobilePlayer.MobilePlayerActivity"/>
+        <activity android:name=".ui.other.mobilePlayer.activity.MobileVideoPlayActivity"
+                  android:theme="@style/FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="rtsp" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="application/sdp" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:mimeType="video/mp4" />
+                <data android:mimeType="video/3gp" />
+                <data android:mimeType="video/3gpp" />
+                <data android:mimeType="video/3gpp2" />
+            </intent-filter>
+        </activity>
+        <!-- Don't forgot InitActivity -->
+        <activity
+            android:name="io.vov.vitamio.activity.InitActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".ui.other.mobilePlayer.activity.MobileAudioPlayActivity"/>
+
+        <!--服务-->
         <service android:name=".service.PicBeautifulService"/>
         <service android:name=".service.PicGroupService"/>
         <service android:name=".service.TimerService"/>
+        <service android:name=".service.AudioPlayService"/>
 
+        <!--广播接收者-->
         <receiver android:name=".receiver.TimerReceiver"/>
 
     </application>

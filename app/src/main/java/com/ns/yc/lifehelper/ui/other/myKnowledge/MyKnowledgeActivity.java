@@ -17,7 +17,7 @@ import com.ns.yc.lifehelper.base.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.fragment.KnowledgeAndroidFragment;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.fragment.KnowledgeCustomFragment;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.fragment.KnowledgeOtherFragment;
-import com.ns.yc.lifehelper.ui.weight.fragmentBack.BackHandlerHelper;
+import com.ns.yc.ycutilslib.fragmentBack.BackHandlerHelper;
 
 import java.util.ArrayList;
 

@@ -30,14 +30,18 @@ public class InterceptorUtils {
      * 创建日志拦截器
      * @return
      */
-    public static HttpLoggingInterceptor getHttpLoggingInterceptor() {
+    public static HttpLoggingInterceptor getHttpLoggingInterceptor(boolean debug) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
                 Log.e("OkHttp", "log = " + message);
             }
         });
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        if (debug) {
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // 测试
+        } else {
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE); // 打包
+        }
         return loggingInterceptor;
     }
 

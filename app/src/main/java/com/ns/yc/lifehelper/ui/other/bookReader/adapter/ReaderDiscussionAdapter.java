@@ -14,8 +14,9 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantZssqApi;
-import com.ns.yc.lifehelper.ui.other.bookReader.bean.DiscussionListBean;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookDiscussionList;
 import com.ns.yc.lifehelper.ui.other.bookReader.manager.SettingManager;
+import com.ns.yc.lifehelper.utils.FormatUtils;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 
 
@@ -28,7 +29,7 @@ import com.ns.yc.lifehelper.utils.ImageUtils;
  * 修订历史：
  * ================================================
  */
-public class ReaderDiscussionAdapter extends RecyclerArrayAdapter<DiscussionListBean.PostsBean> {
+public class ReaderDiscussionAdapter extends RecyclerArrayAdapter<ReaderBookDiscussionList.PostsBean> {
 
     private Activity activity;
 
@@ -43,7 +44,7 @@ public class ReaderDiscussionAdapter extends RecyclerArrayAdapter<DiscussionList
     }
 
 
-    private class ExpressDeliveryViewHolder extends BaseViewHolder<DiscussionListBean.PostsBean> {
+    private class ExpressDeliveryViewHolder extends BaseViewHolder<ReaderBookDiscussionList.PostsBean> {
 
         ImageView ivBookCover;
         TextView tvBookTitle , tvBookType , tvTime , tvHot ,tvDistillate ,tvTitle ,tvHelpfulYes,tvLikeCount;
@@ -62,7 +63,7 @@ public class ReaderDiscussionAdapter extends RecyclerArrayAdapter<DiscussionList
         }
 
         @Override
-        public void setData(DiscussionListBean.PostsBean data) {
+        public void setData(ReaderBookDiscussionList.PostsBean data) {
             super.setData(data);
             if (!SettingManager.getInstance().isNoneCover()) {
                 ImageUtils.loadImgByPicassoPerson(getContext(),ConstantZssqApi.IMG_BASE_URL + data.getAuthor().getAvatar(),R.drawable.avatar_default,ivBookCover);
@@ -99,7 +100,7 @@ public class ReaderDiscussionAdapter extends RecyclerArrayAdapter<DiscussionList
                     tvTime.setVisibility(View.VISIBLE);
                     tvHot.setVisibility(View.GONE);
                     tvDistillate.setVisibility(View.GONE);
-                    tvTime.setText(data.getCreated());
+                    tvTime.setText(FormatUtils.getDescriptionTimeFromDateString(data.getCreated()));
                 }
             } catch (Exception e) {
 

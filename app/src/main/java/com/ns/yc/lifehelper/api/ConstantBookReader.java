@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.api;
 
 import android.support.annotation.StringDef;
+import android.support.v4.util.ArrayMap;
 
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.utils.FileUtils;
@@ -9,6 +10,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * ================================================
@@ -28,6 +30,10 @@ public class ConstantBookReader {
     public static final String SUFFIX_CHM = ".chm";
     public static final String SUFFIX_DOC = ".doc";
     public static final String SUFFIX_DOCX = ".docx";
+
+    public static String PATH_DATA = FileUtils.createRootPath(Utils.getContext()) + "/cache";
+    public static String PATH_TXT = PATH_DATA + "/book/";
+    public static String PATH_CHM = PATH_DATA + "/chm";
 
     public static List<List<String>> list1 = new ArrayList<List<String>>() {{
         add(new ArrayList<String>() {{
@@ -136,8 +142,21 @@ public class ConstantBookReader {
         add(BookType.DMTR);
     }};
 
-    public static String PATH_DATA = FileUtils.createRootPath(Utils.getContext()) + "/cache";
-    public static String PATH_TXT = PATH_DATA + "/book/";
-    public static String PATH_CHM = PATH_DATA + "/chm";
+
+    public static Map<String, String> bookType = new ArrayMap<String, String>() {{
+        put("qt", "其他");
+        put(BookType.XHQH, "玄幻奇幻");
+        put(BookType.WXXX, "武侠仙侠");
+        put(BookType.DSYN, "都市异能");
+        put(BookType.LSJS, "历史军事");
+        put(BookType.YXJJ, "游戏竞技");
+        put(BookType.KHLY, "科幻灵异");
+        put(BookType.CYJK, "穿越架空");
+        put(BookType.HMZC, "豪门总裁");
+        put(BookType.XDYQ, "现代言情");
+        put(BookType.GDYQ, "古代言情");
+        put(BookType.HXYQ, "幻想言情");
+        put(BookType.DMTR, "耽美同人");
+    }};
 
 }

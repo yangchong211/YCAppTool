@@ -1,26 +1,31 @@
 package com.ns.yc.lifehelper.ui.other.bookReader.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantBookReader;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.event.BookReaderSelectionEvent;
+import com.ns.yc.lifehelper.ui.other.bookReader.activity.BookDetailDiscussionActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.activity.BookReaderDiscussionActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.adapter.ReaderDiscussionAdapter;
-import com.ns.yc.lifehelper.ui.other.bookReader.bean.DiscussionListBean;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookDiscussionList;
 import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
+import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.AppUtil;
+import com.ns.yc.lifehelper.utils.EventBusUtils;
 import com.ns.yc.lifehelper.utils.RxUtil;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -87,7 +92,7 @@ public class BookReaderDiscussionFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        EventBus.getDefault().unregister(this);
+        EventBusUtils.unregister(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -105,13 +110,22 @@ public class BookReaderDiscussionFragment extends BaseFragment {
 
     @Override
     public void initView() {
-        EventBus.getDefault().register(this);
+        EventBusUtils.register(this);
         initRecycleView();
     }
 
     @Override
     public void initListener() {
-
+        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if(adapter.getAllData().size()>position && position>-1){
+                    Intent intent = new Intent(activity, BookDetailDiscussionActivity.class);
+                    intent.putExtra("id",adapter.getAllData().get(position).get_id());
+                    activity.startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
@@ -125,6 +139,9 @@ public class BookReaderDiscussionFragment extends BaseFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         adapter = new ReaderDiscussionAdapter(activity);
         recyclerView.setAdapter(adapter);
+        final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
+                SizeUtils.dp2px(1), activity.getResources().getColor(R.color.grayLine));
+        recyclerView.addItemDecoration(line);
         //加载更多
         adapter.setMore(R.layout.view_recycle_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
@@ -201,13 +218,13 @@ public class BookReaderDiscussionFragment extends BaseFragment {
     private void getData(String block, String sort, String distillate, final int start, final int limit) {
         String key = AppUtil.createCacheKey("book-discussion-list", block, "all", sort, "all", start + "", limit + "", distillate);
         BookReaderModel model = BookReaderModel.getInstance(activity);
-        Observable<DiscussionListBean> fromNetWork = model.getBookDiscussionList(block, "all", sort, "all", start + "", limit + "", distillate)
-                .compose(RxUtil.<DiscussionListBean>rxCacheListHelper(key));
+        Observable<ReaderBookDiscussionList> fromNetWork = model.getBookDiscussionList(block, "all", sort, "all", start + "", limit + "", distillate)
+                .compose(RxUtil.<ReaderBookDiscussionList>rxCacheListHelper(key));
         //依次检查disk、network
-        Subscription rxSubscription = Observable
-                .concat(RxUtil.rxCreateDiskObservable(key, DiscussionListBean.class), fromNetWork)
+        Subscription rxSubscription =
+                Observable.concat(RxUtil.rxCreateDiskObservable(key, ReaderBookDiscussionList.class), fromNetWork)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<DiscussionListBean>() {
+                .subscribe(new Observer<ReaderBookDiscussionList>() {
                     @Override
                     public void onCompleted() {
 
@@ -219,7 +236,7 @@ public class BookReaderDiscussionFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(DiscussionListBean list) {
+                    public void onNext(ReaderBookDiscussionList list) {
                         boolean isRefresh = start == 0 ? true : false;
                         if(isRefresh){
                             recyclerView.setRefreshing(true);
@@ -234,7 +251,7 @@ public class BookReaderDiscussionFragment extends BaseFragment {
                         if(start==0){
                             if(list.isOk()){
                                 if(list.getPosts()!=null && list.getPosts().size()>0){
-                                    recyclerView.showProgress();
+                                    recyclerView.showRecycler();
                                     adapter.clear();
                                     adapter.addAll(list.getPosts());
                                     adapter.notifyDataSetChanged();
@@ -246,7 +263,7 @@ public class BookReaderDiscussionFragment extends BaseFragment {
                         }else {
                             if(list.isOk()){
                                 if(list.getPosts()!=null && list.getPosts().size()>0){
-                                    recyclerView.showProgress();
+                                    recyclerView.showRecycler();
                                     adapter.addAll(list.getPosts());
                                     adapter.notifyDataSetChanged();
                                 }else {

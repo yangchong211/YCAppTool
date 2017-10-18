@@ -7,14 +7,17 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 
 import com.ns.yc.lifehelper.base.BaseApplication;
 
 import java.lang.ref.WeakReference;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -178,13 +181,49 @@ public class AppUtil {
     public static void setBackgroundAlpha(Activity activity, float bgAlpha) {
         WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
         lp.alpha = bgAlpha;
-        if (bgAlpha == 1) {
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
-        } else {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+        Window window = activity.getWindow();
+        if(window!=null){
+            if (bgAlpha == 1) {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+            } else {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+            }
+            window.setAttributes(lp);
         }
-        activity.getWindow().setAttributes(lp);
     }
+
+    /**
+     * 设置页面的昏暗度
+     * 主要作用于：弹窗时设置宿主Activity的背景色
+     * @param bgDimAmount
+     */
+    public static void setBackgroundDimAmount(Activity activity, float bgDimAmount){
+        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+        lp.dimAmount = bgDimAmount;
+        Window window = activity.getWindow();
+        if(window!=null){
+            if(bgDimAmount == 1){
+                window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            }else {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            }
+            window.setAttributes(lp);
+        }
+    }
+
+    /**
+     * 背景模糊
+     * 主要作用于：activity页面，建议不要用这种方式，可以使用模糊视图自定义控件【毛玻璃效果】
+     * @param
+     */
+    public static void setBackgroundDimAmount(Activity activity, View view, int bgAlpha){
+        Window window = activity.getWindow();
+        if(window!=null){
+            window.setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND, WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
+            view.getBackground().setAlpha(bgAlpha);     //0~255透明度值 ，0为完全透明，255为不透明
+        }
+    }
+
 
     /**
      * 判断某Activity是否挂掉，主要是用于弹窗
@@ -231,5 +270,18 @@ public class AppUtil {
         return false;
     }
 
+    /**
+     * 格式化毫秒值，如果这个毫秒值包含小时，则格式为时分秒，如:01:30:58，如果不包含小时，则格式化为分秒，如：30:58
+     * @param duration
+     * @return
+     */
+    public static CharSequence formatMillis(long duration) {
+        Calendar calendar = Calendar.getInstance(); // 以当前系统时间创建一个日历
+        calendar.clear();   // 清空时间，变成1970 年 1 月 1 日 00:00:00
+        calendar.add(Calendar.MILLISECOND, (int) duration);// 1970 年 1 月 1 日 01:58:32
+        boolean hasHour = duration / (1 * 60 * 60 * 1000) > 0;    // 判断毫秒值有没有包含小时
+        CharSequence inFormat = hasHour ? "kk:mm:ss" : "mm:ss";   // 如果包含小时，则格式化为时:分:秒，否则格式化为分:秒
+        return DateFormat.format(inFormat, calendar);
+    }
 
 }

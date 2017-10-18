@@ -5,4 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/base_tool_bar"/>
+
+    <TextView
+        android:id="@+id/tv_call_me"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg"
+        android:padding="10dp"
+        android:text="直接给我打电话"/>
+
+    <TextView
+        android:id="@+id/tv_send_sms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg"
+        android:padding="10dp"
+        android:text="直接给我发短信"/>
+
+
+    <TextView
+        android:id="@+id/tv_send_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg"
+        android:padding="10dp"
+        android:text="直接给我发邮件"/>
+
+    <TextView
+        android:id="@+id/tv_wx_me"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg"
+        android:padding="10dp"
+        android:text="直接给我发微信"/>
+
 </LinearLayout>

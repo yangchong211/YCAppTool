@@ -14,5 +14,11 @@ public interface ConstantKeys {
     String NAME = "name";
     String PWD = "pwd";
     String IS_LOGIN = "is_login";
+    String CURRENT_POSITION = "current_position";
+    String MOBILE_VIDEO_ITEMS = "mobile_video_items";
+    String MOBILE_AUDIO_ITEMS = "mobile_audio_items";
+    String MOBILE_WHAT = "mobile_what";
+    String MOBILE_SIZE = "mobile_size";
+    String MOBILE_PLAY_MODE = "mobile_play_mode";
 
 }

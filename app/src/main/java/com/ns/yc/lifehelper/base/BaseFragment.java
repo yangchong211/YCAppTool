@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.leakcanary.RefWatcher;
+
 import butterknife.ButterKnife;
 
 /**
@@ -42,6 +44,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        initLeakCanary();             //测试内存泄漏，正式一定要隐藏
     }
 
     /** 返回一个用于显示界面的布局id */
@@ -93,5 +96,13 @@ public abstract class BaseFragment extends Fragment {
         }
         startActivity(intent);
     }
+
+    /**用来检测所有Fragment的内存泄漏*/
+    private void initLeakCanary() {
+        RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
+    }
+
+
 
 }

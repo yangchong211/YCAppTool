@@ -29,7 +29,7 @@
         android:textColor="@color/blackText"
         android:text="跳过广告" />
 
-    <com.ns.yc.lifehelper.ui.weight.CountDownView
+    <com.ns.yc.yccountdownviewlib.CountDownView
         android:id="@+id/cdv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -216,6 +216,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
 
 
     private View getHeaderView() {
+        //LayoutInflater.from(activity).inflate(R.layout.head_home_main, null);
         View header =  View.inflate(activity, R.layout.head_home_main, null);
         banner = (Banner) header.findViewById(R.id.banner);
         tv_home_first = (TextView) header.findViewById(R.id.tv_home_first);
@@ -260,6 +261,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
             for(int a = 0; a< ConstantImageApi.SPALSH_URLS.length ; a++){
                 lists.add(ConstantImageApi.SPALSH_URLS[a]);
             }
+            //ArrayList<Integer> lists = ConstantImageApi.getNarrowImage();
             //设置banner样式
             banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
             //设置图片加载器

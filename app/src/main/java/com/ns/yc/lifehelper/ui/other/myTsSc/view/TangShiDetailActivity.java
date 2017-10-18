@@ -11,11 +11,12 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantJsApi;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiDetail;
 import com.ns.yc.lifehelper.ui.other.myTsSc.model.TangShiModel;
-import com.ns.yc.lifehelper.ui.weight.ViewLoading;
+import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 
 import butterknife.Bind;
 import rx.Subscriber;
@@ -68,7 +69,7 @@ public class TangShiDetailActivity extends BaseActivity implements View.OnClickL
         initIntentData();
         initToolBar();
         // 添加Loading
-        mLoading = new ViewLoading(this) {
+        mLoading = new ViewLoading(this, Constant.loadingStyle) {
             @Override
             public void loadCancel() {
 

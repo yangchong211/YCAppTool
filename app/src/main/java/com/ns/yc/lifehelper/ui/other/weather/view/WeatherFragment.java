@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.other.weather.adapter.WeatherDetailAdapter;
@@ -23,7 +24,7 @@ import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherLive;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherSuggestion;
 import com.ns.yc.lifehelper.ui.other.weather.model.WeatherModel;
 import com.ns.yc.lifehelper.ui.other.weather.weight.IndicatorView;
-import com.ns.yc.lifehelper.ui.weight.ViewLoading;
+import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +113,7 @@ public class WeatherFragment extends BaseFragment {
     @Override
     public void initView() {
         // 添加Loading
-        mLoading = new ViewLoading(activity) {
+        mLoading = new ViewLoading(activity, Constant.loadingStyle) {
             @Override
             public void loadCancel() {
 

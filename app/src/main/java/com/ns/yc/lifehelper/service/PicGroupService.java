@@ -110,13 +110,21 @@ public class PicGroupService extends IntentService {
         PicBeautifulContentBean content = ContentParser.ParserContent(html);    //这里解析获取的HTML文本
 
         //其实这里不用再去解析bitmap，从HTML可以解析到的。。。至于为什么不去解析，我也不知道我当时怎么想的。。
-        Response response = client.newCall(new Request.Builder().url(content.getUrl()).build()).execute();
+        Response response = client.newCall(new Request.Builder()
+                .url(content.getUrl())
+                .build())
+                .execute();
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        BitmapFactory.decodeStream(response.body().byteStream(), null, options);
-        content.setImagewidth(options.outWidth);
-        content.setImageheight(options.outHeight);
-        return content;
+        ResponseBody body = response.body();
+        if(body!=null){
+            BitmapFactory.decodeStream(body.byteStream(), null, options);
+            content.setImagewidth(options.outWidth);
+            content.setImageheight(options.outHeight);
+            return content;
+        }else {
+            return null;
+        }
     }
 
 }

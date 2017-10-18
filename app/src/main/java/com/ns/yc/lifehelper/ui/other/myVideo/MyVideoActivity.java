@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
 import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.ui.other.myVideo.activity.VideoLocalActivity;
 import com.ns.yc.lifehelper.ui.other.myVideo.adapter.VideoGridAdapter;
 import com.ns.yc.lifehelper.ui.other.myVideo.bean.VideoIconBean;
 
@@ -40,7 +41,7 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
     @Bind(R.id.ll_dot)
     LinearLayout llDot;
 
-    private String[] titles = {"美食", "电影", "酒店住宿", "休闲娱乐", "外卖", "自助餐", "KTV", "火车票", "周边游", "美甲美睫",
+    private String[] titles = {"本地", "电影", "酒店住宿", "休闲娱乐", "外卖", "自助餐", "KTV", "火车票", "周边游", "美甲美睫",
             "火锅", "生日蛋糕", "甜品饮品", "水上乐园", "汽车服务", "美发", "丽人", "景点", "足疗按摩", "运动健身", "健身", "超市", "买菜",
             "今日新单", "小吃快餐", "面膜", "洗浴/汗蒸", "母婴亲子", "生活服务", "婚纱摄影", "学习培训", "家装", "结婚", "全部分配"};
     private int pageCount;          //总的页数
@@ -114,7 +115,11 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                    switch (position){
+                        case 0:
+                            startActivity(VideoLocalActivity.class);
+                            break;
+                    }
                 }
             });
             //每一个GridView作为一个View对象添加到ViewPager集合中

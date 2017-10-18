@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,9 +18,9 @@ import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.receiver.TimerReceiver;
 import com.ns.yc.lifehelper.service.TimerService;
 import com.ns.yc.lifehelper.ui.main.MainActivity;
-import com.ns.yc.lifehelper.ui.weight.CountDownView;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.yccountdownviewlib.CountDownView;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -81,12 +80,6 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
         // 先显示默认图
         int i = new Random().nextInt(ConstantImageApi.SPALSH_URLS.length);
         ImageUtils.loadImgByPicassoError(this, ConstantImageApi.SPALSH_URLS[i], R.drawable.pic_page_background, ivSplashAd);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ivSplashDownload.setVisibility(View.GONE);
-            }
-        }, 1000);
 
         /*new Handler().postDelayed(new Runnable() {
             @Override

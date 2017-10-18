@@ -9,12 +9,18 @@ android {
         applicationId "com.ns.yc.lifehelper"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        /*ndk {
+            // 设置支持的 SO 库构架
+            abiFilters 'armeabi', 'x86'// 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }*/
         // 64k
         multiDexEnabled true
+        // 支持模糊视图
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -22,7 +28,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
+
+//腾讯bug管理插件
+apply plugin: 'bugly'
+bugly {
+    appId = '<a3f5f3820f>' // 注册时分配的App ID
+    appKey = '<d9753a2c-4187-47a8-a843-a00474df0caa>' // 注册时分配的App Key
+}
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -41,7 +56,8 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     //takePhoto框架
     compile 'com.jph.takephoto:takephoto_library:4.0.3'
-    compile 'com.lzy.widget:imagepicker:0.5.0'  //指定版本
+    compile 'com.lzy.widget:imagepicker:0.5.0'
+    //指定版本
     //事件总线
     compile 'org.greenrobot:eventbus:3.0.0'
     //导航栏
@@ -77,6 +93,15 @@ dependencies {
     compile 'org.jsoup:jsoup:1.8.2'
     //电子书
     compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
+    //权限库
+    compile 'pub.devrel:easypermissions:1.0.1'
+    compile project(':vitamio')
+    //内存泄漏检测工具
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    //腾讯bug管理平台
+    compile 'com.tencent.bugly:crashreport:2.6.0'
+    compile 'com.tencent.bugly:nativecrashreport:3.3.0'
 
     //自定义
     //状态管理
@@ -85,4 +110,9 @@ dependencies {
     compile 'cn.yc:YCPhotoLib:1.0'
     //弹窗
     compile 'cn.yc:YCDialogLib:3.0'
+    //倒计时器
+    compile 'cn.yc:YCCountDownViewLib:1.0'
+    //公共类
+    compile 'cn.yc:YCUtilsLib:1.1'
+
 }

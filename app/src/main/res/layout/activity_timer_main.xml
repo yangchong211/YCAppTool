@@ -25,7 +25,7 @@
         <TextView
             style="@style/MeInfoTextLeftStyle"
             android:text="是否开启闹钟"/>
-        <com.ns.yc.lifehelper.ui.weight.SwitchButton
+        <com.ns.yc.ycutilslib.switchButton.SwitchButton
             android:id="@+id/switch_night"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

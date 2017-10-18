@@ -11,11 +11,14 @@ import java.util.Stack;
  * 创建日期：2017/1/18
  * 描    述：Activity容器
  * 修订历史：
+ * 备注：如果在BaseActivity中添加入栈和出栈，将会导致activityStack内存泄漏
+ *      建议：在Application中用registerActivityLifecycleCallbacks进行Activity生命周期的栈管理
  * ================================================
  */
 public class AppManager {
 
-    private static Stack<Activity> activityStack;
+    //栈：也就是stack
+    public static Stack<Activity> activityStack;
     private static AppManager instance;
     private AppManager() {
 
@@ -39,7 +42,7 @@ public class AppManager {
      * 添加Activity到堆栈
      */
     public void addActivity(Activity activity) {
-        if (activityStack == null) {
+        if(activityStack == null){
             activityStack = new Stack<>();
         }
         activityStack.add(activity);
@@ -49,6 +52,9 @@ public class AppManager {
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     public Activity currentActivity() {
+        if(activityStack.size()==0){
+            return null;
+        }
         Activity activity = activityStack.lastElement();
         return activity;
     }
@@ -57,15 +63,17 @@ public class AppManager {
      * 结束当前Activity（堆栈中最后一个压入的）
      */
     public void finishActivity() {
-        Activity activity = activityStack.lastElement();
-        finishActivity(activity);
+        if(activityStack!=null && activityStack.size()>0){
+            Activity activity = activityStack.lastElement();
+            finishActivity(activity);
+        }
     }
 
     /**
      * 结束指定的Activity
      */
-    private void finishActivity(Activity activity) {
-        if (activity != null) {
+    public void finishActivity(Activity activity) {
+        if (activity != null && !activity.isFinishing()) {
             activityStack.remove(activity);
             activity.finish();
             activity = null;
@@ -112,6 +120,7 @@ public class AppManager {
         try {
             finishAllActivity();
             android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(0);
         } catch (Exception e) {
             //
         } finally {

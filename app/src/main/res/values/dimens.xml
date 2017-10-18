@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_bar_height">58dp</dimen>
     <dimen name="nav_bar_height_more">30dp</dimen>
+    <dimen name="highlightSize">18sp</dimen>
+    <dimen name="defaultSize">15sp</dimen>
 </resources>

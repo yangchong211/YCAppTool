@@ -1,14 +1,10 @@
 package com.ns.yc.lifehelper.service;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-
-import com.ns.yc.lifehelper.base.AppManager;
-import com.ns.yc.lifehelper.utils.DialogUtils;
 
 /**
  * Created by PC on 2017/9/29.
@@ -16,6 +12,7 @@ import com.ns.yc.lifehelper.utils.DialogUtils;
  */
 
 public class TimerService extends Service {
+
 
     /**
      * 绑定服务时才会调用
@@ -36,7 +33,8 @@ public class TimerService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        new CountDownTimer(30000, 1000) {
+        System.out.println("onCreate invoke");
+        new CountDownTimer(1200000, 1000) {
             public void onTick(long millisUntilFinished) {
 
             }
@@ -46,9 +44,9 @@ public class TimerService extends Service {
                 //IllegalStateException: You need to use a Theme.AppCompat theme (or descendant) with this activity.
                 //DialogUtils.showWindowDialog(TimerService.this);
                 //DialogUtils.showWindowDialog();
-                Activity activity = AppManager.getAppManager().currentActivity();
+                //Activity activity = AppManager.getAppManager().currentActivity();
                 //DialogUtils.showActivityDialog(activity);
-                DialogUtils.showActivityDialog(activity);
+                //DialogUtils.showActivityDialog();
             }
         }.start();
     }

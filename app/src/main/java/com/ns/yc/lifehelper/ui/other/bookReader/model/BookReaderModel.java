@@ -5,7 +5,9 @@ import android.content.Context;
 import com.ns.yc.lifehelper.api.ConstantZssqApi;
 import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.bookReader.api.BookReaderApi;
-import com.ns.yc.lifehelper.ui.other.bookReader.bean.DiscussionListBean;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookDiscussionList;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookHelpList;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookReviewList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderDetailBook;
@@ -147,7 +149,49 @@ public class BookReaderModel {
      * @param distillate
      * @return
      */
-    public Observable<DiscussionListBean> getBookDiscussionList(String block, String duration, String sort, String type, String start, String limit, String distillate) {
+    public Observable<ReaderBookDiscussionList> getBookDiscussionList(String block, String duration, String sort, String type, String start, String limit, String distillate) {
+        return service.getBookDiscussionList(block, duration, sort, type, start, limit, distillate);
+    }
+
+    /**
+     * 书评区
+     * @param duration
+     * @param sort
+     * @param type
+     * @param start
+     * @param limit
+     * @param distillate
+     * @return
+     */
+    public Observable<ReaderBookReviewList> getBookReviewList(String duration, String sort, String type, String start, String limit, String distillate) {
+        return service.getBookReviewList(duration, sort, type, start, limit, distillate);
+    }
+
+    /**
+     * 书荒互助区
+     * @param duration
+     * @param sort
+     * @param start
+     * @param limit
+     * @param distillate
+     * @return
+     */
+    public Observable<ReaderBookHelpList> getBookHelpList(String duration, String sort, String start, String limit, String distillate) {
+        return service.getBookHelpList(duration, sort, start, limit, distillate);
+    }
+
+    /**
+     * 女生区
+     * @param block
+     * @param duration
+     * @param sort
+     * @param type
+     * @param start
+     * @param limit
+     * @param distillate
+     * @return
+     */
+    public Observable<ReaderBookDiscussionList> getBookGirlList(String block, String duration, String sort, String type, String start, String limit, String distillate) {
         return service.getBookDiscussionList(block, duration, sort, type, start, limit, distillate);
     }
 

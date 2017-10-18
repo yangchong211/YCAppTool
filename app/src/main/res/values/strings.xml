@@ -29,6 +29,21 @@
     <string name="book_detail_retention_ratio">%1$s%%</string>
     <string name="book_detail_is_joined_the_book_shelf">是否将《%1$s》加入书架</string>
     <string name="book_detail_has_joined_the_book_shelf">《%1$s》成功加入书架</string>
+    <string name="easy_permissions">该APP需要您允许打开电话，拍摄照片和访问设备上的文件的权限</string>
 
+    <!--书评区相关-->
+    <string name="book_review_book_type">[%1$s]</string>
+    <string name="book_review_helpful_yes">%1$d 人推荐</string>
+    <string name="book_review_detail_helpful_yes">有用</string>
+    <string name="book_review_detail_helpful_no">无用</string>
+    <string name="book_review_detail_to_review_the_scoring">给书评打分</string>
+    <string name="book_review_detail_score">楼主打分：</string>
+
+    <string name="manually_add">手动添加</string>
+    <string name="add_from_contacts">从联系人添加</string>
+    <string name="add_from_phone_history">从通话记录添加</string>
+    <string name="add_from_sms_history">从短信记录添加</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
 
 </resources>

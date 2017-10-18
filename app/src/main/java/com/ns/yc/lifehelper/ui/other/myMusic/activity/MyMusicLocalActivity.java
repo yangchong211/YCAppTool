@@ -127,6 +127,7 @@ public class MyMusicLocalActivity extends BaseActivity {
                 finish();
             }
         });
+        playerController.setVisibility(View.VISIBLE);
     }
 
 

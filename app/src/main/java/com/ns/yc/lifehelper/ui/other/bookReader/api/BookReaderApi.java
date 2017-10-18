@@ -1,6 +1,8 @@
 package com.ns.yc.lifehelper.ui.other.bookReader.api;
 
-import com.ns.yc.lifehelper.ui.other.bookReader.bean.DiscussionListBean;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookDiscussionList;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookHelpList;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookReviewList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderDetailBook;
@@ -144,12 +146,60 @@ public interface BookReaderApi {
      * @return
      */
     @GET("/post/by-block")
-    Observable<DiscussionListBean> getBookDiscussionList(@Query("block") String block,
-                                                         @Query("duration") String duration,
-                                                         @Query("sort") String sort,
-                                                         @Query("type") String type,
-                                                         @Query("start") String start,
-                                                         @Query("limit") String limit,
-                                                         @Query("distillate") String distillate);
+    Observable<ReaderBookDiscussionList> getBookDiscussionList(@Query("block") String block,
+                                                               @Query("duration") String duration,
+                                                               @Query("sort") String sort,
+                                                               @Query("type") String type,
+                                                               @Query("start") String start,
+                                                               @Query("limit") String limit,
+                                                               @Query("distillate") String distillate);
+
+
+    /**
+     * 获取书评区帖子列表
+     * 全部、全部类型、默认排序  http://api.zhuishushenqi.com/post/review?duration=all&sort=updated&type=all&start=0&limit=20&distillate=
+     * 精品、玄幻奇幻、默认排序  http://api.zhuishushenqi.com/post/review?duration=all&sort=updated&type=xhqh&start=0&limit=20&distillate=true
+     *
+     * @param duration   all
+     * @param sort       updated(默认排序)
+     *                   created(最新发布)
+     *                   helpful(最有用的)
+     *                   comment-count(最多评论)
+     * @param type       all(全部类型)、xhqh(玄幻奇幻)、dsyn(都市异能)...
+     * @param start      0
+     * @param limit      20
+     * @param distillate true(精品) 、空字符（全部）
+     * @return
+     */
+    @GET("/post/review")
+    Observable<ReaderBookReviewList> getBookReviewList(@Query("duration") String duration,
+                                                       @Query("sort") String sort,
+                                                       @Query("type") String type,
+                                                       @Query("start") String start,
+                                                       @Query("limit") String limit,
+                                                       @Query("distillate") String distillate);
+
+
+    /**
+     * 获取书荒区帖子列表
+     * 全部、默认排序  http://api.zhuishushenqi.com/post/help?duration=all&sort=updated&start=0&limit=20&distillate=
+     * 精品、默认排序  http://api.zhuishushenqi.com/post/help?duration=all&sort=updated&start=0&limit=20&distillate=true
+     *
+     * @param duration   all
+     * @param sort       updated(默认排序)
+     *                   created(最新发布)
+     *                   comment-count(最多评论)
+     * @param start      0
+     * @param limit      20
+     * @param distillate true(精品) 、空字符（全部）
+     * @return
+     */
+    @GET("/post/help")
+    Observable<ReaderBookHelpList> getBookHelpList(@Query("duration") String duration,
+                                                   @Query("sort") String sort,
+                                                   @Query("start") String start,
+                                                   @Query("limit") String limit,
+                                                   @Query("distillate") String distillate);
+
 
 }

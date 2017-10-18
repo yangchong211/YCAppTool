@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
-import com.ns.yc.lifehelper.receiver.TimerReceiver;
+import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
 
@@ -23,7 +23,6 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends AppCompatActivity{
 
-    private TimerReceiver timerReceiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,17 +30,18 @@ public abstract class BaseActivity extends AppCompatActivity{
         setContentView(getContentView());
         ButterKnife.bind(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);              //避免切换横竖屏
-        AppManager.getAppManager().addActivity(this);                                   //将当前Activity添加到容器
+        //AppManager.getAppManager().addActivity(this);                                   //将当前Activity添加到容器
         initView();
         initListener();
         initData();
+        initLeakCanary();             //测试内存泄漏，正式一定要隐藏
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //AppManager.getAppManager().removeActivity(this);                                //将当前Activity移除到容器
         ButterKnife.unbind(this);
-        AppManager.getAppManager().removeActivity(this);                                //将当前Activity移除到容器
     }
 
 
@@ -124,6 +124,14 @@ public abstract class BaseActivity extends AppCompatActivity{
             intent.putExtras(bundle);
         }
         startActivity(intent);
+    }
+
+    /**
+     * 用来检测所有Activity的内存泄漏
+     */
+    private void initLeakCanary() {
+        RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 
 

@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.bookReader.activity;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -10,8 +11,7 @@ import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.event.BookReaderSelectionEvent;
 import com.ns.yc.lifehelper.ui.other.bookReader.fragment.BookReaderDiscussionFragment;
 import com.ns.yc.lifehelper.ui.weight.SelectionLayout;
-
-import org.greenrobot.eventbus.EventBus;
+import com.ns.yc.lifehelper.utils.EventBusUtils;
 
 import java.util.List;
 
@@ -34,6 +34,8 @@ public class BookReaderDiscussionActivity extends BaseActivity implements View.O
     TextView toolbarTitle;
     @Bind(R.id.sl_layout)
     SelectionLayout slLayout;
+    private String readType;
+    private String name;
 
 
     @Override
@@ -43,12 +45,26 @@ public class BookReaderDiscussionActivity extends BaseActivity implements View.O
 
     @Override
     public void initView() {
+        initIntent();
         initToolBar();
         initAddFragment();
     }
 
+    private void initIntent() {
+        if(getIntent()!=null){
+            readType = getIntent().getStringExtra("type");
+            name = getIntent().getStringExtra("name");
+        }
+        if(TextUtils.isEmpty(readType)){
+            readType = "ramble";
+        }
+        if(TextUtils.isEmpty(name)){
+            name = "综合讨论区";
+        }
+    }
+
     private void initToolBar() {
-        toolbarTitle.setText("综合讨论区");
+        toolbarTitle.setText(name);
     }
 
 
@@ -72,7 +88,7 @@ public class BookReaderDiscussionActivity extends BaseActivity implements View.O
     }
 
     private void initAddFragment() {
-        BookReaderDiscussionFragment fragment = BookReaderDiscussionFragment.newInstance("ramble");
+        BookReaderDiscussionFragment fragment = BookReaderDiscussionFragment.newInstance(readType);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment, fragment)
@@ -120,7 +136,8 @@ public class BookReaderDiscussionActivity extends BaseActivity implements View.O
                         default:
                             break;
                     }
-                    EventBus.getDefault().post(new BookReaderSelectionEvent(distillate, type, sort));
+                    BookReaderSelectionEvent bookReaderSelectionEvent = new BookReaderSelectionEvent(distillate, type, sort);
+                    EventBusUtils.post(bookReaderSelectionEvent);
                 }
             });
         }

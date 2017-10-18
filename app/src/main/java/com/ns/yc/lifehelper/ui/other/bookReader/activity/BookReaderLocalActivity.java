@@ -25,6 +25,7 @@ import com.ns.yc.lifehelper.api.ConstantBookReader;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.adapter.ReaderLocalAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderRecommendBean;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.support.RefreshCollectionListEvent;
 import com.ns.yc.lifehelper.ui.other.bookReader.manager.CollectionsManager;
 import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
@@ -46,6 +47,7 @@ import butterknife.Bind;
  * ================================================
  */
 public class BookReaderLocalActivity extends BaseActivity implements View.OnClickListener {
+
     @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
     @Bind(R.id.toolbar_title)
@@ -196,7 +198,8 @@ public class BookReaderLocalActivity extends BaseActivity implements View.OnClic
                                         })
                                         .show();
                                 // 通知
-                                EventBusUtils.refreshCollectionList();
+                                RefreshCollectionListEvent refreshCollectionListEvent = new RefreshCollectionListEvent();
+                                EventBusUtils.post(refreshCollectionListEvent);
                             } else {
                                 //showTipViewAndDelayClose("书籍已存在");
                                 Snackbar.make(recyclerView,"书籍已存在" ,Snackbar.LENGTH_LONG)

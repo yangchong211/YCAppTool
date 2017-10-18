@@ -96,66 +96,6 @@
         <attr name="indicatorColors" format="integer" />
     </declare-styleable>
 
-    <!--选择开关自定义控件-->
-    <declare-styleable name="SwitchButton">
-        <attr name="sb_shadow_radius" format="reference|dimension"/>
-        <attr name="sb_shadow_offset" format="reference|dimension"/>
-        <attr name="sb_shadow_color" format="reference|color"/>
-        <attr name="sb_uncheck_color" format="reference|color"/>
-        <attr name="sb_checked_color" format="reference|color"/>
-
-        <attr name="sb_border_width" format="reference|dimension"/>
-        <attr name="sb_checkline_color" format="reference|color"/>
-        <attr name="sb_checkline_width" format="reference|dimension"/>
-        <attr name="sb_uncheckcircle_color" format="reference|color"/>
-        <attr name="sb_uncheckcircle_width" format="reference|dimension"/>
-        <attr name="sb_uncheckcircle_radius" format="reference|dimension"/>
-
-        <attr name="sb_checked" format="reference|boolean"/>
-        <attr name="sb_shadow_effect" format="reference|boolean"/>
-        <attr name="sb_effect_duration" format="reference|integer"/>
-        <attr name="sb_button_color" format="reference|color"/>
-        <attr name="sb_show_indicator" format="reference|boolean"/>
-        <attr name="sb_background" format="reference|color"/>
-        <attr name="sb_enable_effect" format="reference|boolean"/>
-    </declare-styleable>
-
-
-
-    <declare-styleable name="CountDownView">
-        <!--view半径-->
-        <attr name="cd_circle_radius" format="dimension" />
-        <!--画笔宽度-->
-        <attr name="cd_arc_width" format="dimension" />
-        <!--画笔颜色-->
-        <attr name="cd_arc_color" format="color" />
-        <!--背景颜色-->
-        <attr name="cd_bg_color" format="color" />
-        <!--字体颜色-->
-        <attr name="cd_text_color" format="color" />
-        <!--字体尺寸-->
-        <attr name="cd_text_size" format="dimension" />
-        <!--动画执行时长-->
-        <attr name="cd_animator_time" format="integer" />
-        <!--时间单位-->
-        <attr name="cd_animator_time_unit" format="string" />
-        <!--动画进退方式-->
-        <attr name="cd_retreat_type" format="enum">
-            <!--外层的圆弧逐渐变长-->
-            <enum name="forward" value="1" />
-            <!--外层的圆弧逐渐减短-->
-            <enum name="back" value="2" />
-        </attr>
-        <!--加载进度的开始位置-->
-        <attr name="cd_location" format="enum">
-            <enum name="left" value="1" />
-            <enum name="top" value="2" />
-            <enum name="right" value="3" />
-            <enum name="bottom" value="4" />
-        </attr>
-    </declare-styleable>
-
-
     <declare-styleable name="XlHRatingBar">
         <attr name="starCount" format="integer" /><!--总的星星数-->
         <attr name="canEdit" format="boolean" /><!--是否可以点击选择，有时候纯展示用不需要选择-->

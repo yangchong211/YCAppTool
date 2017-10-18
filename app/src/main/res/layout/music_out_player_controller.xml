@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/thumb"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_centerVertical="true"
             android:scaleType="centerCrop"
             tools:src="@drawable/ic_music_avatar"/>
@@ -33,8 +33,10 @@
 
         <ImageView
             android:id="@+id/play"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/next"
             android:src="@drawable/ic_music_play"/>

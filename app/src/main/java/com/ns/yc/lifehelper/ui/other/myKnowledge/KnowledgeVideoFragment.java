@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.weight.fragmentBack.BackHandledFragment;
+import com.ns.yc.ycutilslib.fragmentBack.BackHandledFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -1,5 +1,7 @@
 package com.ns.yc.lifehelper.api;
 
+import com.ns.yc.lifehelper.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -27,6 +29,7 @@ public class Constant {
     public static boolean isLogin;
     //投资界应用宝评分链接
     public static String QQUrl = "http://android.myapp.com/myapp/detail.htm?apkName=com.zero2ipo.harlanhu.pedaily";
+    public static int loadingStyle = R.style.Loading;
 
     @Retention(RetentionPolicy.SOURCE)
     public @interface Gender {

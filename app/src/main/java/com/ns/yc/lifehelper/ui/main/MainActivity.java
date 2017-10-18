@@ -1,5 +1,7 @@
 package com.ns.yc.lifehelper.ui.main;
 
+import android.Manifest;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -7,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,15 +36,19 @@ import com.ns.yc.lifehelper.ui.home.HomeFragment;
 import com.ns.yc.lifehelper.ui.main.view.DownLoadActivity;
 import com.ns.yc.lifehelper.ui.me.MeFragment;
 import com.ns.yc.lifehelper.ui.me.view.MeSettingActivity;
-import com.ns.yc.lifehelper.ui.weight.viewPager.NoSlidingViewPager;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.ns.yc.lifehelper.utils.statusbar.StatusBarUtils;
+import com.ns.yc.ycutilslib.managerLeak.InputMethodManagerLeakUtils;
+import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
 import com.pedaily.yc.ycdialoglib.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * ================================================
@@ -52,7 +59,7 @@ import butterknife.Bind;
  * 修订历史：
  * ================================================
  */
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener ,EasyPermissions.PermissionCallbacks {
 
 
     private String[] mTitles = {"首页", "数据", "工具", "更多"};
@@ -97,6 +104,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout ll_nav_video;
     private LinearLayout ll_nav_homepage;
     private View view;
+    private long time;
 
     @Override
     public int getContentView() {
@@ -131,6 +139,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initTabLayout();
         initViewPager();
         initNav();
+        initPermissions();
     }
 
     @Override
@@ -358,11 +367,118 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 drawerLayout.closeDrawer(GravityCompat.START);
             } else {
                 // 不退出程序，进入后台
-                moveTaskToBack(true);
+                //moveTaskToBack(true);
+
+                //双击返回桌面
+                if ((System.currentTimeMillis() - time > 1000)) {
+                    Toast.makeText(this, "再按一次返回桌面", Toast.LENGTH_SHORT).show();
+                    time = System.currentTimeMillis();
+                } else {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    startActivity(intent);
+                }
             }
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        InputMethodManagerLeakUtils.fixInputMethodManagerLeak(this);
+    }
+
+    /**
+     * 初始化权限
+     */
+    private void initPermissions() {
+        locationPermissionsTask();
+    }
+
+    private static final int RC_LOCATION_CONTACTS_PERM = 124;
+    /**
+     * 权限集合
+     */
+    private static final String[] LOCATION_AND_CONTACTS = {
+            Manifest.permission.CALL_PHONE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    };
+    @AfterPermissionGranted(RC_LOCATION_CONTACTS_PERM)
+    public void locationPermissionsTask() {
+        //检查是否获取该权限
+        if (hasPermissions()) {
+            //具备权限 直接进行操作
+            //Toast.makeText(this, "Location and Contacts things", Toast.LENGTH_LONG).show();
+        } else {
+            //权限拒绝 申请权限
+            //第二个参数是被拒绝后再次申请该权限的解释
+            //第三个参数是请求码
+            //第四个参数是要申请的权限
+            EasyPermissions.requestPermissions(this,
+                    getString(R.string.easy_permissions),
+                    RC_LOCATION_CONTACTS_PERM,
+                    LOCATION_AND_CONTACTS);
+        }
+    }
+
+    /**
+     * 判断是否添加了权限
+     * @return    true
+     */
+    private boolean hasPermissions() {
+        return EasyPermissions.hasPermissions(this, LOCATION_AND_CONTACTS);
+    }
+
+    /**
+     * 将结果转发到EasyPermissions
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // 将结果转发到EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    /**
+     * 某些权限已被授予
+     */
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        //某些权限已被授予
+        Log.d("权限", "onPermissionsGranted:" + requestCode + ":" + perms.size());
+    }
+
+    /**
+     * 某些权限已被拒绝
+     */
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        //某些权限已被拒绝
+        Log.d("权限", "onPermissionsDenied:" + requestCode + ":" + perms.size());
+        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
+        // This will display a dialog directing them to enable the permission in app settings.
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this).build().show();
+        }
+
+        /*if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(MainActivity.this)
+                    .setTitle("提示")
+                    .setPositiveButton("去设置")
+                    .setNegativeButton("取消")
+                    .setRequestCode(RC_LOCATION_CONTACTS_PERM)
+                    .build()
+                    .show();
+        }*/
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }

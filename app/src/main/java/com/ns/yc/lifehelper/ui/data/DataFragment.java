@@ -30,7 +30,10 @@ import com.ns.yc.lifehelper.ui.data.adapter.DataToolAdapter;
 import com.ns.yc.lifehelper.ui.data.view.DoodleViewActivity;
 import com.ns.yc.lifehelper.ui.main.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
+import com.ns.yc.lifehelper.ui.other.listener.ListenerActivity;
+import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
+import com.ns.yc.lifehelper.ui.other.safe360.SafeHomeActivity;
 import com.ns.yc.lifehelper.ui.other.toDo.ToDoTimerActivity;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.weight.MyGridView;
@@ -89,7 +92,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
     private int[] toolLogo = {R.drawable.ic_investment, R.drawable.ic_project, R.drawable.ic_financing, R.drawable.ic_show,
             R.drawable.ic_project, R.drawable.ic_show, R.drawable.ic_project, R.drawable.ic_investment,
             R.drawable.ic_investment, R.drawable.ic_project, R.drawable.ic_financing, R.drawable.ic_show};
-    private String[] toolName = {"笔记本", "计算器", "邮编", "生肖", "计算器", "唐诗", "宋词", "历史", "法律", "景点", "航班", "绘画板"};
+    private String[] toolName = {"笔记本", "计算器", "360工具", "听听", "播放器", "唐诗", "宋词", "历史", "法律", "景点", "航班", "绘画板"};
     private NarrowImageAdapter adapter;
 
     @Override
@@ -293,10 +296,13 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
 
                         break;
                     case 2:
-
+                        startActivity(SafeHomeActivity.class);
                         break;
                     case 3:
-
+                        startActivity(ListenerActivity.class);
+                        break;
+                    case 4:
+                        startActivity(MobilePlayerActivity.class);
                         break;
                     case 11:
                         startActivity(DoodleViewActivity.class);
