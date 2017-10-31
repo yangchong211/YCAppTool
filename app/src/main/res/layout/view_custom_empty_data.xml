@@ -27,7 +27,7 @@
             android:textColor="#999999"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="没有数据"/>
+            android:text="暂时没有您的数据"/>
     </LinearLayout>
 
 </RelativeLayout>

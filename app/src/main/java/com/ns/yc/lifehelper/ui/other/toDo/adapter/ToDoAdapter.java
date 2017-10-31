@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantImageApi;
-import com.ns.yc.lifehelper.listener.OnItemClickListener;
+import com.ns.yc.lifehelper.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.ToDoDetail;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 
@@ -30,7 +30,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
 
     private final List<ToDoDetail.ToDo> list;
     private final Context context;
-    private OnItemClickListener mItemClickListener;
+    private OnListItemClickListener mItemClickListener;
     private boolean showPriority = true;
 
     public ToDoAdapter(List<ToDoDetail.ToDo> list, Context context) {
@@ -38,7 +38,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
         this.context = context;
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnListItemClickListener listener) {
         this.mItemClickListener = listener;
     }
 
@@ -90,12 +90,12 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private OnItemClickListener mListener;
+        private OnListItemClickListener mListener;
         ImageView ic_icon , iv_curr_priority;
         TextView tv_title , tv_content;
         LinearLayout ll_task_finished_mask;
 
-        MyViewHolder(View view, OnItemClickListener listener) {
+        MyViewHolder(View view, OnListItemClickListener listener) {
             super(view);
             ic_icon = (ImageView) view.findViewById(R.id.ic_icon);
             tv_title = (TextView) view.findViewById(R.id.tv_title);

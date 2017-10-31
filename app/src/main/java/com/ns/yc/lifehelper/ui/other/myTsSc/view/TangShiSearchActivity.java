@@ -83,11 +83,19 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
     private Realm realm;
-    private TangShiSearchActivity activity;
     private RealmResults<TsSearchHis> searchHises;
     private String type;
     private TangShiSearchAdapter searchAdapter;
     private TangShiSearchAdapter hisAdapter;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*if(realm!=null){
+            realm.close();
+        }*/
+    }
 
     @Override
     public int getContentView() {
@@ -96,7 +104,6 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void initView() {
-        activity = TangShiSearchActivity.this;
         initIntentData();
         initSearchView();
         initRealm();
@@ -120,7 +127,9 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     @Override
@@ -163,7 +172,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
             public void onItemClick(int position) {
                 if(position>-1 && searchAdapter.getAllData().size()>position){
                     TangShiBean.ResultBean.ListBean listBean = searchAdapter.getAllData().get(position);
-                    Intent intent = new Intent(activity,TangShiSearchDetailActivity.class);
+                    Intent intent = new Intent(TangShiSearchActivity.this,TangShiSearchDetailActivity.class);
                     intent.putExtra("type",listBean.getType());
                     intent.putExtra("title",listBean.getTitle());
                     intent.putExtra("appreciation",listBean.getAppreciation());
@@ -270,6 +279,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
 
 
     private void addRealm(String k) {
+        initRealm();
         if (realm!=null && realm.where(TsSearchHis.class).findAll() != null) {
             searchHises = realm.where(TsSearchHis.class).findAll();
         } else {
@@ -293,6 +303,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
 
 
     private void cleanHisRealm() {
+        initRealm();
         if(realm!=null && searchHises!=null){
             realm.beginTransaction();
             searchHises.clear();
@@ -309,7 +320,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
         final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
         rvSearchHis.addItemDecoration(line);
-        hisAdapter = new TangShiSearchAdapter(activity);
+        hisAdapter = new TangShiSearchAdapter(TangShiSearchActivity.this);
         rvSearchHis.setAdapter(hisAdapter);
     }
 
@@ -319,7 +330,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
         final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
         recyclerView.addItemDecoration(line);
-        searchAdapter = new TangShiSearchAdapter(activity);
+        searchAdapter = new TangShiSearchAdapter(TangShiSearchActivity.this);
         recyclerView.setAdapter(searchAdapter);
     }
 
@@ -333,7 +344,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
         tflSearchHot.setAdapter(new TagAdapter<String>(tags) {
             @Override
             public View getView(FlowLayout parent, int position, String o) {
-                LayoutInflater from = LayoutInflater.from(activity);
+                LayoutInflater from = LayoutInflater.from(TangShiSearchActivity.this);
                 TextView tv = (TextView) from.inflate(R.layout.tag_hot, tflSearchHot, false);
                 tv.setText(o);
                 return tv;
@@ -394,7 +405,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
                         @Override
                         public void onNext(TangShiBean tangShiBean) {
                             if(searchAdapter==null){
-                                searchAdapter = new TangShiSearchAdapter(activity);
+                                searchAdapter = new TangShiSearchAdapter(TangShiSearchActivity.this);
                             }
 
                             if(tangShiBean!=null && tangShiBean.getResult()!=null && tangShiBean.getResult().getList()!=null){

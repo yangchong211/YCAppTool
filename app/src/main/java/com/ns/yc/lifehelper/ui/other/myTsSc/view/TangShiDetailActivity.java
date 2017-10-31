@@ -53,10 +53,15 @@ public class TangShiDetailActivity extends BaseActivity implements View.OnClickL
     TextView tvAppreciation;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    private TangShiDetailActivity activity;
     private String id;
     private String name;
     private ViewLoading mLoading;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -65,7 +70,6 @@ public class TangShiDetailActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void initView() {
-        activity = TangShiDetailActivity.this;
         initIntentData();
         initToolBar();
         // 添加Loading

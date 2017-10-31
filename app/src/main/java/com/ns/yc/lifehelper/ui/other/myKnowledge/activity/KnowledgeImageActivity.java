@@ -1,6 +1,9 @@
 package com.ns.yc.lifehelper.ui.other.myKnowledge.activity;
 
+import android.app.AlertDialog;
+import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,6 +28,7 @@ import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.base.BaseActivity;
 
 import java.io.File;
@@ -35,6 +39,11 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import butterknife.Bind;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * ================================================
@@ -53,6 +62,14 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
     TextView tvText;
     @Bind(R.id.tv_save_image)
     TextView tvSaveImage;
+    @Bind(R.id.large_more)
+    ImageView largeMore;
+    @Bind(R.id.large_star)
+    ImageView largeStar;
+    @Bind(R.id.large_download)
+    ImageView largeDownload;
+    @Bind(R.id.large_share)
+    ImageView largeShare;
 
     private int code;                               //接收穿过来当前选择的图片的数量
     private int selector;                           //用于判断是头像还是文章图片 1:头像 2：文章大图
@@ -61,8 +78,12 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
     private ArrayList<String> imageUri;             //接收传过来的uri地址
     private boolean isApp;                          //是否是本应用中的图片
     private int imageId;
-    private KnowledgeImageActivity activity;
+    private Bitmap bitmap;
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -71,11 +92,9 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void initView() {
-        activity = KnowledgeImageActivity.this;
         initIntentData();
         initViewPagerData();
     }
-
 
 
     private void initIntentData() {
@@ -93,6 +112,10 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
     @Override
     public void initListener() {
         tvSaveImage.setOnClickListener(this);
+        largeMore.setOnClickListener(this);
+        largeDownload.setOnClickListener(this);
+        largeShare.setOnClickListener(this);
+        largeStar.setOnClickListener(this);
     }
 
     @Override
@@ -102,12 +125,16 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_save_image:
                 toSaveImage();
                 break;
+            case R.id.large_more:
+                showMoreDialog();
+                break;
         }
     }
+
 
     /**
      * 给viewpager设置适配器
@@ -157,7 +184,7 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         if (isApp) {            // 本地图片
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageId);
             if (bitmap != null) {
-                saveImageToGallery(activity, bitmap);
+                saveImageToGallery(KnowledgeImageActivity.this, bitmap);
                 ToastUtils.showShortSafe("保存成功");
             }
         } else {                // 网络图片
@@ -168,14 +195,14 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
                     // 子线程获得图片路径
                     final String imagePath = getImagePath(imageUri.get(page));
                     // 主线程更新
-                    activity.runOnUiThread(new Runnable() {
+                    KnowledgeImageActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             if (imagePath != null) {
-                                Bitmap bitmap = BitmapFactory.decodeFile(imagePath, bmOptions);
+                                bitmap = BitmapFactory.decodeFile(imagePath, bmOptions);
                                 if (bitmap != null) {
-                                    saveImageToGallery(activity, bitmap);
-                                    ToastUtils.showShortSafe("已保存至"+ Environment.getExternalStorageDirectory().getAbsolutePath()+"/生活助手");
+                                    saveImageToGallery(KnowledgeImageActivity.this, bitmap);
+                                    ToastUtils.showShortSafe("已保存至" + Environment.getExternalStorageDirectory().getAbsolutePath() + "/生活助手");
                                 }
                             }
                         }
@@ -185,6 +212,60 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         }
     }
 
+
+    /**
+     * 更多功能
+     */
+    private int yourChoice;
+    String[] items = {"设为壁纸", "剪辑图片", "举报不良图片"};
+    private void showMoreDialog() {
+        yourChoice = -1;
+        AlertDialog.Builder singleChoiceDialog = new AlertDialog.Builder(this);
+        singleChoiceDialog.setTitle("更多选项");
+        // 第二个参数是默认选项，此处设置为0
+        singleChoiceDialog.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                yourChoice = which;
+            }
+        });
+        singleChoiceDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (yourChoice){
+                    case 0:
+                        toSaveImage();
+                        if(bitmap!=null){
+                            Observable<Bitmap> observable = Observable.just(bitmap);
+                            observable.map(new Func1<Bitmap, Integer>() {
+                                @Override
+                                public Integer call(Bitmap bitmap) {
+                                    WallpaperManager wallpaperManager = WallpaperManager.getInstance(KnowledgeImageActivity.this);
+                                    try {
+                                        wallpaperManager.setBitmap(bitmap);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                        return Constant.status.error;
+                                    }
+                                    return Constant.status.success;
+                                }
+                            })
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(callbackSubscriber);
+                        }
+                        break;
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                }
+            }
+        });
+        singleChoiceDialog.show();
+    }
 
 
     /**
@@ -223,7 +304,6 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
     }
 
 
-
     /**
      * ViewPager的适配器
      */
@@ -238,7 +318,7 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = inflater.inflate(R.layout.view_pager_very_image, container, false);
-            final  ImageView iv_image = (ImageView) view.findViewById(R.id.iv_image);
+            final ImageView iv_image = (ImageView) view.findViewById(R.id.iv_image);
             final ProgressBar spinner = (ProgressBar) view.findViewById(R.id.loading);
             // 保存网络图片的路径
             String adapter_image_Entity = (String) getItem(position);
@@ -252,7 +332,7 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
 
             spinner.setVisibility(View.VISIBLE);
             spinner.setClickable(false);
-            Glide.with(activity)
+            Glide.with(KnowledgeImageActivity.this)
                     .load(imageUrl)
                     .crossFade(700)
                     .listener(new RequestListener<String, GlideDrawable>() {
@@ -309,7 +389,6 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
     }
 
 
-
     /**
      * 保存图片至相册
      */
@@ -346,7 +425,7 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
      */
     private String getImagePath(String imgUrl) {
         String path = null;
-        FutureTarget<File> future = Glide.with(activity).load(imgUrl).downloadOnly(500, 500);
+        FutureTarget<File> future = Glide.with(KnowledgeImageActivity.this).load(imgUrl).downloadOnly(500, 500);
         try {
             File cacheFile = future.get();
             path = cacheFile.getAbsolutePath();
@@ -356,6 +435,26 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         return path;
     }
 
+    //设置事件发生后的消费该事件的观察者
+    Subscriber<Integer> callbackSubscriber = new Subscriber<Integer>() {
+        @Override
+        public void onNext(Integer integer) {
+            if (integer == Constant.status.success) {
+                ToastUtils.showShort("设置失败");
+            } else {
+                ToastUtils.showShort("设置成功");
+            }
+        }
 
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+    };
 
 }

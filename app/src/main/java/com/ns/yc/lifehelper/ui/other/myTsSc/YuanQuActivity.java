@@ -66,11 +66,19 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
     private String search;
-    private YuanQuActivity activity;
     private TangShiAdapter adapter;
     private Realm realm;
     private boolean isCache = false;
     private RealmResults<CacheYqList> cacheYqLists;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*if(realm!=null){
+            realm.close();
+        }*/
+    }
 
     @Override
     public int getContentView() {
@@ -79,7 +87,6 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void initView() {
-        activity = YuanQuActivity.this;
         initToolBar();
         initRealm();
         initRecycleView();
@@ -99,7 +106,7 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(activity,YuanQuDetailActivity.class);
+                Intent intent = new Intent(YuanQuActivity.this,YuanQuDetailActivity.class);
                 intent.putExtra("id",adapter.getAllData().get(position).getDetailid());
                 intent.putExtra("name",adapter.getAllData().get(position).getName());
                 startActivity(intent);
@@ -109,7 +116,9 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
 
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     @Override
@@ -140,11 +149,11 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initRecycleView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
+        recyclerView.setLayoutManager(new LinearLayoutManager(YuanQuActivity.this));
+        final RecycleViewItemLine line = new RecycleViewItemLine(YuanQuActivity.this, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
         recyclerView.addItemDecoration(line);
-        adapter = new TangShiAdapter(activity);
+        adapter = new TangShiAdapter(YuanQuActivity.this);
         recyclerView.setAdapter(adapter);
         AddHeader();
         //刷新
@@ -159,7 +168,7 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
                     }
                 } else {
                     recyclerView.setRefreshing(false);
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(YuanQuActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -180,7 +189,7 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
                 tfl_tag.setAdapter(new TagAdapter<String>(tags) {
                     @Override
                     public View getView(FlowLayout parent, int position, String o) {
-                        LayoutInflater from = LayoutInflater.from(activity);
+                        LayoutInflater from = LayoutInflater.from(YuanQuActivity.this);
                         TextView tv = (TextView) from.inflate(R.layout.tag_hot, tfl_tag, false);
                         tv.setText(o);
                         return tv;
@@ -224,7 +233,7 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
                     @Override
                     public void onNext(TangShiChapter tangShiChapter) {
                         if(adapter==null){
-                            adapter = new TangShiAdapter(activity);
+                            adapter = new TangShiAdapter(YuanQuActivity.this);
                         }
 
                         if(tangShiChapter!=null && tangShiChapter.getResult()!=null && tangShiChapter.getResult().size()>0){
@@ -241,6 +250,7 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void readCache() {
+        initRealm();
         if(realm !=null && realm.where(CacheYqList.class).findAll()!=null){
             cacheYqLists = realm.where(CacheYqList.class).findAll();
         }else {
@@ -257,7 +267,7 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
             return;
         }
         if(adapter==null){
-            adapter = new TangShiAdapter(activity);
+            adapter = new TangShiAdapter(YuanQuActivity.this);
         }else {
             adapter.getAllData().clear();
         }
@@ -273,6 +283,7 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
 
 
     private void cacheData(List<TangShiChapter.ResultBean> result) {
+        initRealm();
         if(realm !=null && realm.where(CacheYqList.class).findAll()!=null){
             cacheYqLists = realm.where(CacheYqList.class).findAll();
         }else {

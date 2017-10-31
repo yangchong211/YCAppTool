@@ -18,8 +18,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.other.bookReader.adapter.EasyLVAdapter;
-import com.ns.yc.lifehelper.ui.other.bookReader.adapter.EasyLVHolder;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.EasyLVAdapter;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.EasyLVHolder;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -20,9 +20,9 @@ import com.ns.yc.lifehelper.ui.other.myKnowledge.adapter.GanKAndroidAdapter;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.bean.GanKIoDataBean;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.model.GanKIoDataModel;
 import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
-import com.pedaily.yc.ycdialoglib.bottom.CustomBottomDialog;
-import com.pedaily.yc.ycdialoglib.bottom.CustomItem;
-import com.pedaily.yc.ycdialoglib.bottom.OnItemClickListener;
+import com.pedaily.yc.ycdialoglib.bottomMenu.CustomBottomDialog;
+import com.pedaily.yc.ycdialoglib.bottomMenu.CustomItem;
+import com.pedaily.yc.ycdialoglib.bottomMenu.OnItemClickListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

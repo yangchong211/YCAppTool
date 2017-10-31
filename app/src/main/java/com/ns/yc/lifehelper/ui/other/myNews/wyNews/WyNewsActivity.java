@@ -50,10 +50,18 @@ public class WyNewsActivity extends BaseActivity implements View.OnClickListener
 
     private ArrayList<String> mTitleList = new ArrayList<>();
     private ArrayList<Fragment> mFragments = new ArrayList<>();
-    private WyNewsActivity activity;
     private Realm realm;
     private List<String> channel;
     private RealmResults<CacheTodayChannel> cacheTodayChannels;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*if(realm!=null){
+            realm.close();
+        }*/
+    }
 
     @Override
     public int getContentView() {
@@ -62,7 +70,6 @@ public class WyNewsActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void initView() {
-        activity = WyNewsActivity.this;
         initToolBar();
         initRealm();
         readCacheChannel();
@@ -71,7 +78,9 @@ public class WyNewsActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     private void initToolBar() {
@@ -132,7 +141,7 @@ public class WyNewsActivity extends BaseActivity implements View.OnClickListener
 
 
     private void getTodayDataChanel() {
-        TodayNewsModel model = TodayNewsModel.getInstance(activity);
+        TodayNewsModel model = TodayNewsModel.getInstance(WyNewsActivity.this);
         model.getTodayNewsChannel(ConstantALiYunApi.Key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -161,6 +170,7 @@ public class WyNewsActivity extends BaseActivity implements View.OnClickListener
 
 
     private void readCacheChannel() {
+        initRealm();
         if(realm !=null && realm.where(CacheTodayChannel.class).findAll()!=null){
             cacheTodayChannels = realm.where(CacheTodayChannel.class).findAll();
         } else {
@@ -174,6 +184,7 @@ public class WyNewsActivity extends BaseActivity implements View.OnClickListener
 
 
     private void startCacheChannel(List<String> result) {
+        initRealm();
         if(realm !=null && realm.where(CacheTodayChannel.class).findAll()!=null){
             cacheTodayChannels = realm.where(CacheTodayChannel.class).findAll();
         } else {

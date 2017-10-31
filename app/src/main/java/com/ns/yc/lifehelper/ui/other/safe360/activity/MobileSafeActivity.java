@@ -25,7 +25,7 @@ import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.safe360.adapter.MobileSafeAdapter;
 import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
-import com.pedaily.yc.ycdialoglib.ToastUtil;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 
 import butterknife.Bind;
 
@@ -48,12 +48,16 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
     Toolbar toolbar;
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
-    private MobileSafeActivity activity;
     private MobileSafeAdapter adapter;
     private ViewLoading mLoading;
     private EditText etPhoneNumber;
     private CheckBox cbCallIntercept;
     private CheckBox cbSmsIntercept;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -62,7 +66,6 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initView() {
-        activity = MobileSafeActivity.this;
         initToolBar();
         initLoading();
         initRecycleView();
@@ -121,7 +124,7 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.m_manually_add:
-                showAddDialog(activity);
+                showAddDialog(MobileSafeActivity.this);
                 break;
             case R.id.m_add_from_contacts:
                 AddContacts();
@@ -137,9 +140,9 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initRecycleView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        adapter = new MobileSafeAdapter(activity);
-        final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
+        recyclerView.setLayoutManager(new LinearLayoutManager(MobileSafeActivity.this));
+        adapter = new MobileSafeAdapter(MobileSafeActivity.this);
+        final RecycleViewItemLine line = new RecycleViewItemLine(MobileSafeActivity.this, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
         recyclerView.addItemDecoration(line);
         recyclerView.setAdapter(adapter);
@@ -203,7 +206,7 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
      */
     private void AddDataToSQL(String number) {
         if (!cbCallIntercept.isChecked() && !cbSmsIntercept.isChecked()) {
-            ToastUtil.showToast(activity,"添加未生效，您没选择任何拦截");
+            ToastUtil.showToast(MobileSafeActivity.this,"添加未生效，您没选择任何拦截");
             return;
         }
 

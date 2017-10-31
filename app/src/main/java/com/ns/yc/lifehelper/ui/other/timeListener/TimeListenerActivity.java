@@ -62,13 +62,18 @@ public class TimeListenerActivity extends BaseActivity {
     private CollapsingToolbarLayoutState state;
     private List<String> mTitles;
     private ArrayList<Fragment> mFragments;
-    private TimeListenerActivity activity;
 
 
     private enum CollapsingToolbarLayoutState {
         EXPANDED,
         COLLAPSED,
         INTERNEDIATE
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -78,7 +83,6 @@ public class TimeListenerActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        activity = TimeListenerActivity.this;
         initToolBar();
         initFragments();
         initViewPager();
@@ -135,7 +139,7 @@ public class TimeListenerActivity extends BaseActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.about:
-                        Toast.makeText(activity, "关于", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TimeListenerActivity.this, "关于", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return true;

@@ -1,9 +1,8 @@
 package com.ns.yc.lifehelper.base;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
@@ -11,8 +10,6 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.LogInterceptor;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -35,22 +32,16 @@ public class BaseApplication extends Application {
 
 
     private static BaseApplication instance;
-    private RefWatcher refWatcher;
+    //private RefWatcher refWatcher;
 
-
-    /**
-     * 不建议使用这种单例模式
-     * @return
-     */
-    /*public static synchronized BaseApplication getInstance() {
+    public static synchronized BaseApplication getInstance() {
         if (null == instance) {
             instance = new BaseApplication();
         }
         return instance;
-    }*/
+    }
 
-
-    public static BaseApplication getInstance() {
+    /*public static BaseApplication getInstance() {
         if (null == instance) {
             synchronized (BaseApplication.class){
                 if(instance == null){
@@ -59,8 +50,11 @@ public class BaseApplication extends Application {
             }
         }
         return instance;
-    }
+    }*/
 
+    /**
+     * 这个最先执行
+     */
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -68,18 +62,64 @@ public class BaseApplication extends Application {
     }
 
 
+    /**
+     * 程序启动的时候执行
+     */
     @Override
     public void onCreate() {
+        Log.d("Application", "onCreate");
         super.onCreate();
         instance = this;
         initUtils();
         initRealm();
         initOkHttpUtils();
-        initLeakCanary();           //Square公司内存泄漏检测工具
-        initBugly();                //初始化腾讯bug管理平台
-        initRegisterActivityLifecycleCallbacks();       //栈管理
+        //initLeakCanary();                               //Square公司内存泄漏检测工具
+        initBugly();                                    //初始化腾讯bug管理平台
+        BaseAppManager.getInstance().init(this);        //栈管理
+        BaseConfig.INSTANCE.initConfig();               //初始化配置信息
     }
 
+
+    /**
+     * 程序终止的时候执行
+     */
+    @Override
+    public void onTerminate() {
+        Log.d("Application", "onTerminate");
+        super.onTerminate();
+    }
+
+    /**
+     * 低内存的时候执行
+     */
+    @Override
+    public void onLowMemory() {
+        Log.d("Application", "onLowMemory");
+        super.onLowMemory();
+    }
+
+    /**
+     * HOME键退出应用程序
+     * 程序在内存清理的时候执行
+     */
+    @Override
+    public void onTrimMemory(int level) {
+        Log.d("Application", "onTrimMemory");
+        super.onTrimMemory(level);
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        Log.d("Application", "onConfigurationChanged");
+        super.onConfigurationChanged(newConfig);
+    }
+
+    /**
+     * 初始化utils工具类
+     */
     private void initUtils() {
         Utils.init(this);
     }
@@ -89,7 +129,7 @@ public class BaseApplication extends Application {
      */
     private Realm realm;
     private void initRealm() {
-        Realm.init(this);
+        Realm.init(instance);
         RealmConfiguration realmConfig = new RealmConfiguration
                 .Builder()
                 .name(Constant.REALM_NAME)
@@ -118,9 +158,9 @@ public class BaseApplication extends Application {
         OkHttpUtils.initClient(okHttpClient);
     }
 
-    /**
+/*    *//**
      * 初始化内存泄漏检测工具
-     */
+     *//*
     private void initLeakCanary() {
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
@@ -128,15 +168,15 @@ public class BaseApplication extends Application {
         refWatcher = LeakCanary.install(this);
     }
 
-    /**
+    *//**
      * 获取RefWatcher对象
      * @param context
      * @return
-     */
+     *//*
     public static RefWatcher getRefWatcher(Context context) {
         BaseApplication application = (BaseApplication) context.getApplicationContext();
         return application.refWatcher;
-    }
+    }*/
 
     /**
      * 初始化腾讯bug管理平台
@@ -154,55 +194,6 @@ public class BaseApplication extends Application {
         strategy.setAppReportDelay(20000);                          //Bugly会在启动20s后联网同步数据
         CrashReport.initCrashReport(getApplicationContext(), "a3f5f3820f", false ,strategy);
         //Bugly.init(getApplicationContext(), "1374455732", false);
-    }
-
-    /**
-     * 监测Activity的生命周期事件
-     */
-    private void initRegisterActivityLifecycleCallbacks() {
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                Log.e("Activity生命周期","onActivityCreated");
-                AppManager.getAppManager().addActivity(activity);
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-                Log.e("Activity生命周期","onActivityStarted");
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-                Log.e("Activity生命周期","onActivityResumed");
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-                Log.e("Activity生命周期","onActivityPaused");
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-                Log.e("Activity生命周期","onActivityStopped");
-                if(AppManager.activityStack!=null && AppManager.activityStack.size()>0){
-                    AppManager.getAppManager().removeActivity(activity);
-                }
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-                Log.e("Activity生命周期","onActivitySaveInstanceState");
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-                Log.e("Activity生命周期","onActivityDestroyed");
-                /*if(AppManager.activityStack!=null && AppManager.activityStack.size()>0){
-                    AppManager.getAppManager().finishActivity(activity);
-                }*/
-            }
-        });
     }
 
 }

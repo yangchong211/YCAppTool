@@ -8,15 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.leakcanary.RefWatcher;
-
 import butterknife.ButterKnife;
 
-/**
- * Created by PC on 2017/8/18.
- * 作者：PC
- */
 
+/**
+ * ================================================
+ * 作    者：杨充
+ * 版    本：1.0
+ * 创建日期：2017/5/18
+ * 描    述：所有Fragment的父类
+ * 修订历史：
+ * ================================================
+ */
 public abstract class BaseFragment extends Fragment {
 
     @Nullable
@@ -99,8 +102,8 @@ public abstract class BaseFragment extends Fragment {
 
     /**用来检测所有Fragment的内存泄漏*/
     private void initLeakCanary() {
-        RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
-        refWatcher.watch(this);
+        /*RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);*/
     }
 
 

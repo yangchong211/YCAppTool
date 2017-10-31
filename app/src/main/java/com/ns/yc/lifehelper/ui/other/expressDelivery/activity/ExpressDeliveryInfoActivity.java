@@ -44,8 +44,12 @@ public class ExpressDeliveryInfoActivity extends BaseActivity implements View.On
     TextView toolbarTitle;
     private String number = "";
     private String type = "";
-    private ExpressDeliveryInfoActivity activity;
     private ExpressDeliveryAdapter adapter;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -55,7 +59,6 @@ public class ExpressDeliveryInfoActivity extends BaseActivity implements View.On
     @Override
     public void initView() {
         initToolBar();
-        activity = ExpressDeliveryInfoActivity.this;
         getIntentData();
         initRecycleView();
     }
@@ -94,11 +97,11 @@ public class ExpressDeliveryInfoActivity extends BaseActivity implements View.On
 
 
     private void initRecycleView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
+        recyclerView.setLayoutManager(new LinearLayoutManager(ExpressDeliveryInfoActivity.this));
+        final RecycleViewItemLine line = new RecycleViewItemLine(ExpressDeliveryInfoActivity.this, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
         recyclerView.addItemDecoration(line);
-        adapter = new ExpressDeliveryAdapter(activity);
+        adapter = new ExpressDeliveryAdapter(ExpressDeliveryInfoActivity.this);
         recyclerView.setAdapter(adapter);
         AddHeader();
         //设置没有数据
@@ -108,7 +111,7 @@ public class ExpressDeliveryInfoActivity extends BaseActivity implements View.On
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ExpressDeliveryInfoActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -117,7 +120,7 @@ public class ExpressDeliveryInfoActivity extends BaseActivity implements View.On
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ExpressDeliveryInfoActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -147,7 +150,7 @@ public class ExpressDeliveryInfoActivity extends BaseActivity implements View.On
                     }
                 } else {
                     recyclerView.setRefreshing(false);
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ExpressDeliveryInfoActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -158,7 +161,7 @@ public class ExpressDeliveryInfoActivity extends BaseActivity implements View.On
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
             public View onCreateView(ViewGroup parent) {
-                View view = LayoutInflater.from(activity).inflate(R.layout.head_express_delivery, parent, false);
+                View view = LayoutInflater.from(ExpressDeliveryInfoActivity.this).inflate(R.layout.head_express_delivery, parent, false);
                 return view;
             }
 
@@ -191,7 +194,7 @@ public class ExpressDeliveryInfoActivity extends BaseActivity implements View.On
                     @Override
                     public void onNext(ExpressDeliverySearchBean expressDeliverySearchBean) {
                         if (adapter == null) {
-                            adapter = new ExpressDeliveryAdapter(activity);
+                            adapter = new ExpressDeliveryAdapter(ExpressDeliveryInfoActivity.this);
                         }
 
                         if (expressDeliverySearchBean != null) {

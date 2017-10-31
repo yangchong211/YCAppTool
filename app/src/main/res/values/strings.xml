@@ -6,6 +6,16 @@
     <string name="title_3">Bad card</string>
     <string name="title_4">Ugly card</string>
     <string name="text_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Etiam eget ligula eu lectus lobortis condimentum.</string>
+    <string name="introduce">关于开发的APP有：投资界，新芽，可以在应用市场上下载
+        \n\n此项目属于业余时间练手的项目，接口数据来源均来自网络，自己付费购买了阿里云和极速网络接口数据，同时使用了部分免费接口，如果存在侵权情况，请第一时间告知
+        \n\n本项目仅做学习交流使用，API数据内容所有权归原作公司所有，请勿用于其他用途
+        \n\n我的 GitHub: https://github.com/yangchong211/
+        \n\n我的 知乎: https://www.zhihu.com/people/yang-chong-69-24/pins/posts
+        \n\n我的 CSDN: http://my.csdn.net/m0_37700275
+        \n\n我的 喜马拉雅: http://www.ximalaya.com/zhubo/71989305/
+        \n\n完全开源，最佳的源代码，最佳的学习软件，如果你觉得不错，可以帮忙分享给你更多的朋友，这是我们最大的动力和支持，非常感谢！
+        \n\n另外，如果喜欢你也可以下载我开发的其它应用：投资界，新芽</string>
+
 
     <string name="menu_main_please_login">请登录</string>
     <string name="menu_main_my_message">我的消息</string>
@@ -18,18 +28,25 @@
     <string name="subject_book_msg">共%1$d本书 |&#160; %2$d人收藏</string>
     <string name="category_book_msg">%1$d人在追 |&#160; %2$s%%读者留存</string>
     <string name="category_book_count">%1$d本</string>
-    <string name="book_detail_community">%1$s的社区</string>
-    <string name="book_detail_post_count">共有%1$d个帖子</string>
-    <string name="book_detail_join_collection">追更新</string>
-    <string name="book_detail_user_lv">&#160;lv.%1$d</string>
-    <string name="book_detail_recommend_book_list_book_count">共%1$d本书 |&#160;</string>
-    <string name="book_detail_recommend_book_list_collector_count">%1$d人收藏</string>
+    <string name="easy_permissions">该APP需要您允许打开电话，拍摄照片和访问设备上的文件的权限</string>
+
+    <!--书籍详情相关-->
+    <string name="book_detail">书籍详情</string>
     <string name="book_detail_author">%1$s</string>
     <string name="book_detail_category"> &#160;|&#160;%1$s |&#160;</string>
+    <string name="book_detail_user_lv">&#160;lv.%1$d</string>
+    <string name="book_detail_remove_collection">不追了</string>
+    <string name="book_detail_join_collection">追更新</string>
     <string name="book_detail_retention_ratio">%1$s%%</string>
+    <string name="book_detail_hot_reviews">热门书评</string>
+    <string name="book_detail_community">%1$s的社区</string>
+    <string name="book_detail_post_count">共有%1$d个帖子</string>
+    <string name="book_detail_recommend_book_list">推荐书单</string>
+    <string name="book_detail_recommend_book_list_book_count">共%1$d本书 |&#160;</string>
+    <string name="book_detail_recommend_book_list_collector_count">%1$d人收藏</string>
     <string name="book_detail_is_joined_the_book_shelf">是否将《%1$s》加入书架</string>
     <string name="book_detail_has_joined_the_book_shelf">《%1$s》成功加入书架</string>
-    <string name="easy_permissions">该APP需要您允许打开电话，拍摄照片和访问设备上的文件的权限</string>
+    <string name="book_detail_has_remove_the_book_shelf">已移除《%1$s》</string>
 
     <!--书评区相关-->
     <string name="book_review_book_type">[%1$s]</string>
@@ -38,6 +55,21 @@
     <string name="book_review_detail_helpful_no">无用</string>
     <string name="book_review_detail_to_review_the_scoring">给书评打分</string>
     <string name="book_review_detail_score">楼主打分：</string>
+
+    <!--评论相关-->
+    <string name="comment_floor">%1$d楼&#160;</string>
+    <string name="comment_like_count">❤%1$d次同感</string>
+    <string name="comment_best_comment">仰望神评论</string>
+    <string name="comment_comment_count">共%1$d条评论</string>
+    <string name="comment_reply_floor">(%1$d楼)</string>
+    <string name="comment_reply_nickname">回复 %1$s</string>
+
+    <!--主题书单相关-->
+    <string name="subject_book_list">主题书单</string>
+    <string name="subject_book_list_my_book_list">我的书单</string>
+    <string name="subject_book_list_detail">书单详情</string>
+    <string name="subject_book_list_detail_book_lately_follower">%1$d&#160;人在追</string>
+    <string name="subject_book_list_detail_book_word_count">|&#160;%1$d&#160;万字</string>
 
     <string name="manually_add">手动添加</string>
     <string name="add_from_contacts">从联系人添加</string>

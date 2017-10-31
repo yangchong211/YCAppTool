@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.bookReader.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -59,7 +60,7 @@ public class ReaderSubjectBean {
         this.bookLists = bookLists;
     }
 
-    public static class BookListsBean {
+    public static class BookListsBean implements Serializable {
         private String _id;
         private String title;
         private String author;

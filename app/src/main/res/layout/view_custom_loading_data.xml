@@ -12,4 +12,14 @@
         android:paddingTop="4dp"
         android:layout_centerInParent="true"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/progress_bar1"
+        android:layout_marginTop="5dp"
+        android:textSize="14sp"
+        android:textColor="@color/redTab"
+        android:text="正在玩命加载中……"/>
+
 </RelativeLayout>

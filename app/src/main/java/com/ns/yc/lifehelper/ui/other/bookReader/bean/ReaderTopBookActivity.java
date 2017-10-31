@@ -10,10 +10,10 @@ import android.widget.TextView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
-import com.ns.yc.lifehelper.ui.other.bookReader.adapter.TopReaderAdapter;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.TopReaderAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.SubHomeTopRankActivity;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.SubTopRankActivity;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.SubHomeTopRankActivity;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.SubTopRankActivity;
 import com.ns.yc.lifehelper.ui.weight.CustomExpandableListView;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.RxUtil;
@@ -59,10 +59,16 @@ public class ReaderTopBookActivity extends BaseActivity implements View.OnClickL
     private ReaderTopBookActivity activity;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        activity = null;
+    }
+
+
+    @Override
     public int getContentView() {
         return R.layout.activity_reader_top_look;
     }
-
 
     @Override
     public void initView() {
@@ -119,12 +125,14 @@ public class ReaderTopBookActivity extends BaseActivity implements View.OnClickL
         @Override
         public void onItemClick(View view, int position, ReaderTopBookBean.MaleBean data) {
             if (data.getMonthRank() == null) {
+                //追书最热榜
                 //SubOtherHomeRankActivity.startActivity(mContext, data._id, data.title);
                 Intent intent = new Intent(activity, SubHomeTopRankActivity.class);
                 intent.putExtra("id",data.get_id());
                 intent.putExtra("title",data.getTitle());
                 startActivity(intent);
             } else {
+                //排行榜
                 //SubRankActivity.startActivity(mContext, data._id, data.monthRank, data.totalRank, data.title);
                 Intent intent = new Intent(activity, SubTopRankActivity.class);
                 intent.putExtra("id",data.get_id());

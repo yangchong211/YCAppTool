@@ -45,7 +45,12 @@ public class TimerActivity extends BaseActivity implements View.OnClickListener 
     TextView tvSetRe;
     @Bind(R.id.rl_set_re)
     RelativeLayout rlSetRe;
-    private TimerActivity activity;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -54,7 +59,6 @@ public class TimerActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void initView() {
-        activity = TimerActivity.this;
         initToolBar();
     }
 

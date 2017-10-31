@@ -1,5 +1,9 @@
 package com.ns.yc.lifehelper.ui.other.bookReader.api;
 
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookHelp;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookSubjectList;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailDiscussionComment;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailDiscussionContent;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookDiscussionList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookHelpList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookReviewList;
@@ -200,6 +204,69 @@ public interface BookReaderApi {
                                                    @Query("start") String start,
                                                    @Query("limit") String limit,
                                                    @Query("distillate") String distillate);
+
+
+    /**
+     * 获取综合讨论区帖子详情
+     *
+     * @param disscussionId->_id
+     * @return
+     */
+    @GET("/post/{disscussionId}")
+    Observable<DetailDiscussionContent> getBookDiscussionDetail(@Path("disscussionId") String disscussionId);
+
+    /**
+     * 获取神评论列表(综合讨论区、书评区、书荒区皆为同一接口)
+     *
+     * @param disscussionId->_id
+     * @return
+     */
+    @GET("/post/{disscussionId}/comment/best")
+    Observable<DetailDiscussionComment> getBestComments(@Path("disscussionId") String disscussionId);
+
+    /**
+     * 获取综合讨论区帖子详情内的评论列表
+     *
+     * @param disscussionId->_id
+     * @param start              0
+     * @param limit              30
+     * @return
+     */
+    @GET("/post/{disscussionId}/comment")
+    Observable<DetailDiscussionComment> getBookDiscussionComments(@Path("disscussionId") String disscussionId,
+                                                                   @Query("start") String start,
+                                                                   @Query("limit") String limit);
+
+
+    /**
+     * 获取书荒区帖子详情
+     *
+     * @param helpId->_id
+     * @return
+     */
+    @GET("/post/help/{helpId}")
+    Observable<DetailBookHelp> getBookHelpDetail(@Path("helpId") String helpId);
+
+    /**
+     * 获取书评区、书荒区帖子详情内的评论列表
+     *
+     * @param bookReviewId->_id
+     * @param start             0
+     * @param limit             30
+     * @return
+     */
+    @GET("/post/review/{bookReviewId}/comment")
+    Observable<DetailDiscussionComment> getBookReviewComments(@Path("bookReviewId") String bookReviewId,
+                                                              @Query("start") String start,
+                                                              @Query("limit") String limit);
+
+
+    /**
+     * 获取书单详情
+     * @return
+     */
+    @GET("/book-list/{bookListId}")
+    Observable<DetailBookSubjectList> getBookListDetail(@Path("bookListId") String bookListId);
 
 
 }

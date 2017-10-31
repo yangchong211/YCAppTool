@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--天气页面-->
     <string-array name="indicator_strings">
         <item name="indicator_string_1">优</item>
         <item name="indicator_string_2">良</item>
@@ -10,6 +11,7 @@
         <item name="indicator_string_5">严重污染</item>
     </string-array>
 
+    <!--天气页面指示器颜色-->
     <integer-array name="indicator_colors">
         <item name="indicator_color_1">@color/indicator_color_1</item>
         <item name="indicator_color_2">@color/indicator_color_2</item>
@@ -18,6 +20,7 @@
         <item name="indicator_color_5">@color/indicator_color_5</item>
         <item name="indicator_color_6">@color/indicator_color_6</item>
     </integer-array>
+
 
     <string-array name="sub_rank_tabs">
         <item>周榜</item>
@@ -32,5 +35,126 @@
         <item>完结</item>
     </string-array>
 
+    <!--首页底部导航栏的标题，未选中时-->
+    <integer-array name="main_tab_un_select">
+        <item name="tab_home">@drawable/tab_home_unselect</item>
+        <item name="tab_find">@drawable/tab_speech_unselect</item>
+        <item name="tab_data">@drawable/tab_contact_unselect</item>
+        <item name="tab_me">@drawable/tab_more_unselect</item>
+    </integer-array>
+
+    <!--首页底部导航栏的标题，选中时-->
+    <integer-array name="main_tab_select">
+        <item name="tab_home">@drawable/tab_home_select</item>
+        <item name="tab_find">@drawable/tab_speech_select</item>
+        <item name="tab_data">@drawable/tab_contact_select</item>
+        <item name="tab_me">@drawable/tab_more_select</item>
+    </integer-array>
+
+    <!--首页底部导航栏文字-->
+    <string-array name="main_title">
+        <item>首页</item>
+        <item>数据</item>
+        <item>工具</item>
+        <item>更多</item>
+    </string-array>
+
+
+    <!--发现页图片-->
+    <integer-array name="find_pro_pic">
+        <item name="tab_home">@drawable/ic_investment</item>
+        <item name="tab_find">@drawable/ic_project</item>
+        <item name="tab_data">@drawable/ic_financing</item>
+        <item name="tab_me">@drawable/ic_show</item>
+        <item name="tab_home">@drawable/ic_investment</item>
+        <item name="tab_find">@drawable/ic_project</item>
+        <item name="tab_data">@drawable/ic_financing</item>
+        <item name="tab_me">@drawable/ic_show</item>
+        <item name="tab_home">@drawable/ic_investment</item>
+        <item name="tab_find">@drawable/ic_project</item>
+        <item name="tab_data">@drawable/ic_financing</item>
+        <item name="tab_me">@drawable/ic_show</item>
+    </integer-array>
+
+    <!--发现页图片对应的位子-->
+    <string-array name="find_pro_title">
+        <item>干货集中营</item>
+        <item>播放器</item>
+        <item>超文本</item>
+        <item>猜谜语</item>
+        <item>急转弯</item>
+        <item>绘画板</item>
+        <item>人脸识别</item>
+        <item>时光聆听</item>
+        <item>空气质量</item>
+        <item>今日油价</item>
+        <item>翻译</item>
+        <item>缴费</item>
+    </string-array>
+
+    <!--数据页图片-->
+    <integer-array name="data_pro_pic">
+        <item name="tab_home">@drawable/ic_investment</item>
+        <item name="tab_find">@drawable/ic_project</item>
+        <item name="tab_data">@drawable/ic_financing</item>
+        <item name="tab_me">@drawable/ic_show</item>
+        <item name="tab_home">@drawable/ic_investment</item>
+        <item name="tab_find">@drawable/ic_project</item>
+        <item name="tab_data">@drawable/ic_financing</item>
+        <item name="tab_me">@drawable/ic_show</item>
+        <item name="tab_home">@drawable/ic_investment</item>
+        <item name="tab_find">@drawable/ic_project</item>
+        <item name="tab_data">@drawable/ic_financing</item>
+        <item name="tab_me">@drawable/ic_show</item>
+    </integer-array>
+
+    <!--数据页图片对应的位子-->
+    <string-array name="data_pro_title">
+        <item>快递</item>
+        <item>天气</item>
+        <item>记事</item>
+        <item>工商</item>
+        <item>股票</item>
+        <item>身份证</item>
+        <item>人脸识别</item>
+        <item>归属地</item>
+        <item>空气质量</item>
+        <item>今日油价</item>
+        <item>翻译</item>
+        <item>缴费</item>
+    </string-array>
+
+
+    <!--数据页小工具图片-->
+    <integer-array name="data_tool_pro_pic">
+        <item name="tab_home">@drawable/ic_investment</item>
+        <item name="tab_find">@drawable/ic_project</item>
+        <item name="tab_data">@drawable/ic_financing</item>
+        <item name="tab_me">@drawable/ic_show</item>
+        <item name="tab_home">@drawable/ic_investment</item>
+        <item name="tab_find">@drawable/ic_project</item>
+        <item name="tab_data">@drawable/ic_financing</item>
+        <item name="tab_me">@drawable/ic_show</item>
+        <item name="tab_home">@drawable/ic_investment</item>
+        <item name="tab_find">@drawable/ic_project</item>
+        <item name="tab_data">@drawable/ic_financing</item>
+        <item name="tab_me">@drawable/ic_show</item>
+    </integer-array>
+
+    <!--数据页小工具图片对应的位子-->
+    <string-array name="data_tool_pro_title">
+        <item>笔记本</item>
+        <item>计算器</item>
+        <item>360工具</item>
+        <item>听听</item>
+        <item>播放器</item>
+        <item>唐诗</item>
+        <item>宋词</item>
+        <item>历史</item>
+        <item>法律</item>
+        <item>景点</item>
+        <item>航班</item>
+        <item>绘画板</item>
+    </string-array>
 
 </resources>

@@ -16,11 +16,11 @@ import com.ns.yc.lifehelper.api.ConstantKeys;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.service.AudioPlayService;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
-import com.ns.yc.lifehelper.utils.localFile.bean.AudioItem;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.view.LyricView;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
-import com.pedaily.yc.ycdialoglib.ToastUtil;
+import com.ns.yc.lifehelper.utils.localFile.bean.AudioItem;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -60,7 +60,6 @@ public class MobileAudioPlayActivity extends BaseActivity implements View.OnClic
     Button btnPlay;
     @Bind(R.id.btn_next)
     Button btnNext;
-    private MobileAudioPlayActivity activity;
     private AudioItem items;
     private int currentPosition;
     private int what;
@@ -86,7 +85,7 @@ public class MobileAudioPlayActivity extends BaseActivity implements View.OnClic
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBusUtils.unregister(activity);
+        EventBusUtils.unregister(MobileAudioPlayActivity.this);
         if(handler!=null){
             handler.removeCallbacksAndMessages(null);
             handler = null;
@@ -96,8 +95,9 @@ public class MobileAudioPlayActivity extends BaseActivity implements View.OnClic
     @Subscribe
     public void onReceivePlayServic(AudioPlayService playService) {
         this.playService = playService;
-        EventBusUtils.post(activity);
+        EventBusUtils.post(MobileAudioPlayActivity.this);
     }
+
 
 
     @Override
@@ -107,8 +107,7 @@ public class MobileAudioPlayActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void initView() {
-        activity = MobileAudioPlayActivity.this;
-        EventBusUtils.register(activity);
+        EventBusUtils.register(MobileAudioPlayActivity.this);
         initIntentData();
         initToolBar();
         initAnimMusic();
@@ -308,15 +307,15 @@ public class MobileAudioPlayActivity extends BaseActivity implements View.OnClic
         switch (currentPlayMode) {
             case AudioPlayService.PLAY_MODE_ORDER:
                 btnPlayMode.setBackgroundResource(R.drawable.btn_playmode_order);
-                ToastUtil.showToast(activity,"顺序播放并且循环");
+                ToastUtil.showToast(MobileAudioPlayActivity.this,"顺序播放并且循环");
                 break;
             case AudioPlayService.PLAY_MODE_SINGLE:
                 btnPlayMode.setBackgroundResource(R.drawable.btn_playmode_single);
-                ToastUtil.showToast(activity,"单曲播放");
+                ToastUtil.showToast(MobileAudioPlayActivity.this,"单曲播放");
                 break;
             case AudioPlayService.PLAY_MODE_RANDOM:
                 btnPlayMode.setBackgroundResource(R.drawable.btn_playmode_random);
-                ToastUtil.showToast(activity,"随机播放");
+                ToastUtil.showToast(MobileAudioPlayActivity.this,"随机播放");
                 break;
         }
 

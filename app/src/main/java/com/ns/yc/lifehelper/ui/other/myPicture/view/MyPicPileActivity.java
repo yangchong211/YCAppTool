@@ -15,7 +15,7 @@ import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.weight.pileCard.FadeTransitionImageView;
 import com.ns.yc.lifehelper.ui.weight.pileCard.HorizontalTransitionLayout;
 import com.ns.yc.lifehelper.ui.weight.pileCard.ItemEntity;
-import com.ns.yc.lifehelper.ui.weight.pileCard.PileLayout;
+import com.ns.yc.yccardviewlib.CardViewLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -55,7 +55,7 @@ public class MyPicPileActivity extends BaseActivity implements View.OnClickListe
     @Bind(R.id.temperatureView)
     HorizontalTransitionLayout temperatureView;
     @Bind(R.id.pileLayout)
-    PileLayout pileLayout;
+    CardViewLayout pileLayout;
     @Bind(R.id.addressView)
     HorizontalTransitionLayout addressView;
     @Bind(R.id.descriptionView)
@@ -167,7 +167,7 @@ public class MyPicPileActivity extends BaseActivity implements View.OnClickListe
 
     private int lastDisplay = -1;
     private void initPile() {
-        pileLayout.setAdapter(new PileLayout.Adapter() {
+        pileLayout.setAdapter(new CardViewLayout.Adapter() {
             class ViewHolder {
                 ImageView imageView;
             }

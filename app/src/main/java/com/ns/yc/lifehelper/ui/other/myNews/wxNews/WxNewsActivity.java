@@ -59,12 +59,19 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
     SlidingTabLayout stlTab;
     @Bind(R.id.vp_content)
     ViewPager vpContent;
-    private WxNewsActivity activity;
     private List<String> title = new ArrayList<>();
     private List<String> chanelId = new ArrayList<>();
     private List<Fragment> fragments = new ArrayList<>();
     private Realm realm;
     private RealmResults<CacheWxChannel> cacheWxChannels;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*if(realm!=null){
+            realm.close();
+        }*/
+    }
 
     @Override
     public int getContentView() {
@@ -73,14 +80,15 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void initView() {
-        activity = WxNewsActivity.this;
         initToolBar();
         initRealm();
         initTabData();
     }
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
 
@@ -111,7 +119,7 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ll_search:
-                Intent intent = new Intent(activity,NewsSearchActivity.class);
+                Intent intent = new Intent(WxNewsActivity.this,NewsSearchActivity.class);
                 intent.putExtra("type","wx");
                 startActivity(intent);
                 break;
@@ -169,7 +177,7 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
 
 
     private void getWxDataChanel() {
-        WxNewsModel model = WxNewsModel.getInstance(activity);
+        WxNewsModel model = WxNewsModel.getInstance(WxNewsActivity.this);
         model.getWxNewsChannel(ConstantALiYunApi.Key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -199,6 +207,7 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void readCacheChannel() {
+        initRealm();
         if(realm!=null && realm.where(CacheWxChannel.class).findAll()!=null){
             cacheWxChannels = realm.where(CacheWxChannel.class).findAll();
         } else {
@@ -217,6 +226,7 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void startCacheChannel(List<WxNewsTypeBean.ResultBean> result) {
+        initRealm();
         if(realm!=null && realm.where(CacheWxChannel.class).findAll()!=null){
             cacheWxChannels = realm.where(CacheWxChannel.class).findAll();
         } else {

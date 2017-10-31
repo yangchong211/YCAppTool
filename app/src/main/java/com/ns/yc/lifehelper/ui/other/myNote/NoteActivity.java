@@ -90,7 +90,9 @@ public class NoteActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     private void initToolBar() {
@@ -177,6 +179,7 @@ public class NoteActivity extends BaseActivity implements View.OnClickListener {
      * @param id
      */
     private void addRealmData(String content, String time, String id , int type) {
+        initRealm();
         if(realm.where(CacheNoteDetail.class).findAll()!=null){
             cacheNoteDetails = realm.where(CacheNoteDetail.class).findAll();
         }else {
@@ -216,7 +219,8 @@ public class NoteActivity extends BaseActivity implements View.OnClickListener {
      * 读取数据库中的数据
      */
     private void initNoteData() {
-        if(realm.where(CacheNoteDetail.class).findAll()!=null){
+        initRealm();
+        if(realm!=null && realm.where(CacheNoteDetail.class).findAll()!=null){
             cacheNoteDetails = realm.where(CacheNoteDetail.class).findAll();
         }else {
             return;

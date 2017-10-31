@@ -29,7 +29,9 @@ public class Constant {
     public static boolean isLogin;
     //投资界应用宝评分链接
     public static String QQUrl = "http://android.myapp.com/myapp/detail.htm?apkName=com.zero2ipo.harlanhu.pedaily";
+    //loading加载style样式
     public static int loadingStyle = R.style.Loading;
+
 
     @Retention(RetentionPolicy.SOURCE)
     public @interface Gender {
@@ -45,5 +47,20 @@ public class Constant {
         String OVER = "over";
     }
 
+    public class status{
+        public static final int success=200;
+        public static final int error=-1;
+    }
+
+
+    /**-------------------------------------键-------------------------------------------------**/
+    //Sp键
+    public static String KEY_FIRST_SPLASH = "first_splash";                 //是否第一次启动
+    public static String KEY_IS_LOGIN = "is_login";                         //登录
+    public static String KEY_IS_SHOW_LIST_IMG = "is_show_list_img";         //是否展示list页面图片
+    public static String KEY_IS_SHOW_GIRL_IMG = "is_show_girl_img";         //启动页是否是妹子图
+    public static String KEY_IS_SHOW_IMG_RANDOM = "is_show_girl_random";    //启动页是否概率出现
+    public static String KEY_THUMBNAIL_QUALITY = "thumbnail_quality";       //启动页是否概率出现
+    public static String KEY_BANNER_URL = "banner_url";                     //启动页是否概率出现
 
 }

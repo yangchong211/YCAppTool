@@ -13,7 +13,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseFragment;
-import com.ns.yc.lifehelper.ui.main.WebViewActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.MyKnowledgeActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.adapter.GanKAndroidAdapter;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.bean.GanKIoDataBean;

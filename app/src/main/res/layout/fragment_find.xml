@@ -57,10 +57,23 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/ic_data_picture"
                 android:drawablePadding="5dp"
+                android:layout_marginRight="10dp"
                 android:padding="8dp"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:text="美图"
+                android:background="@drawable/shape_gray_bg"/>
+            <TextView
+                android:id="@+id/tv_reader"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@drawable/ic_data_reader"
+                android:drawablePadding="5dp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:text="阅读器"
                 android:background="@drawable/shape_gray_bg"/>
         </LinearLayout>
 
@@ -74,7 +87,7 @@
             android:background="@color/whiteBg"
             android:textSize="18sp"
             android:textColor="@color/blackText"
-            android:text="开心一刻"/>
+            android:text="最新栏目"/>
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"

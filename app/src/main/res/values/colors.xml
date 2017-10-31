@@ -14,6 +14,8 @@
     <color name="blackText2">#464C4E</color>
     <!--字体的颜色 黑色3-->
     <color name="blackText3">#212121</color>
+    <!--字体的颜色 黑色4-->
+    <color name="blackText4">#323232</color>
     <!--item的水波纹颜色，灰色1-->
     <color name="itemBackground">#DD7D7D7D</color>
     <!--灰色2-->

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context=".ui.other.douMovie.activity.MovieWebViewActivity">
+      tools:context=".ui.other.douMovie.view.activity.MovieWebViewActivity">
 
     <item
         android:id="@+id/share"

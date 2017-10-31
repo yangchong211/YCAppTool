@@ -92,6 +92,14 @@ public class KnowledgeSearchActivity extends BaseActivity implements View.OnClic
     private KnowledgeSearchAdapter hisAdapter;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(realm!=null){
+            realm.close();
+        }
+    }
+
+    @Override
     public int getContentView() {
         return R.layout.activity_knowledge_search;
     }
@@ -109,7 +117,9 @@ public class KnowledgeSearchActivity extends BaseActivity implements View.OnClic
     }
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     @Override
@@ -322,6 +332,7 @@ public class KnowledgeSearchActivity extends BaseActivity implements View.OnClic
      * 获取历史记录
      */
     private void getHisTags() {
+        initRealm();
         if (realm!=null && realm.where(SearchHis.class).findAll() != null) {
             searchHises = realm.where(SearchHis.class).findAll();
         } else {
@@ -347,6 +358,7 @@ public class KnowledgeSearchActivity extends BaseActivity implements View.OnClic
 
 
     private void addRealm(String k) {
+        initRealm();
         if (realm!=null && realm.where(SearchHis.class).findAll() != null) {
             searchHises = realm.where(SearchHis.class).findAll();
         } else {
@@ -370,6 +382,7 @@ public class KnowledgeSearchActivity extends BaseActivity implements View.OnClic
 
 
     private void cleanHisRealm() {
+        initRealm();
         if(realm!=null && searchHises!=null){
             realm.beginTransaction();
             searchHises.clear();

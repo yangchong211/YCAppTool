@@ -12,7 +12,7 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.ui.find.adapter.PicNiceAdapter;
+import com.ns.yc.lifehelper.ui.find.view.adapter.PicNiceAdapter;
 import com.ns.yc.lifehelper.ui.find.bean.GanKNicePicBean;
 import com.ns.yc.lifehelper.ui.find.model.GanKNicePicModel;
 
@@ -48,11 +48,16 @@ public class MyPicNiceActivity extends BaseActivity implements View.OnClickListe
     RecyclerView recyclerView;
     @Bind(R.id.bga_refresh)
     BGARefreshLayout bgaRefresh;
-    private MyPicNiceActivity activity;
     private PicNiceAdapter adapter;
     private int size = 10;              //默认每次加载10条数据
     private int page = 1;               //默认页码1
     private List<GanKNicePicBean.ResultsBean> gankPic = new ArrayList<>();
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -61,7 +66,6 @@ public class MyPicNiceActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initView() {
-        activity = MyPicNiceActivity.this;
         initToolBar();
         initRefresh(bgaRefresh);
         initRecycleView();
@@ -96,7 +100,7 @@ public class MyPicNiceActivity extends BaseActivity implements View.OnClickListe
         //设置下拉刷新不可用
         bgaRefresh.setPullDownRefreshEnable(true);
         bgaRefresh.setIsShowLoadingMoreView(true);
-        BGANormalRefreshViewHolder refreshViewHolder = new BGANormalRefreshViewHolder(activity, true);
+        BGANormalRefreshViewHolder refreshViewHolder = new BGANormalRefreshViewHolder(MyPicNiceActivity.this, true);
         refreshViewHolder.setRefreshingText("正在加载数据中");
         refreshViewHolder.setReleaseRefreshText("松开立即刷新");
         refreshViewHolder.setPullDownRefreshText("下拉可以刷新");
@@ -135,13 +139,13 @@ public class MyPicNiceActivity extends BaseActivity implements View.OnClickListe
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);//不设置的话，图片闪烁错位，有可能有整列错位的情况。
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new PicNiceAdapter(activity, gankPic);
+        adapter = new PicNiceAdapter(MyPicNiceActivity.this, gankPic);
         recyclerView.setAdapter(adapter);
     }
 
 
     private void getGanKNicePic(int size, final int page) {
-        GanKNicePicModel model = GanKNicePicModel.getInstance(activity);
+        GanKNicePicModel model = GanKNicePicModel.getInstance(MyPicNiceActivity.this);
         model.getGanKNicePic(String.valueOf(size),String.valueOf(page))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -159,7 +163,7 @@ public class MyPicNiceActivity extends BaseActivity implements View.OnClickListe
                     @Override
                     public void onNext(GanKNicePicBean ganKNicePicBean) {
                         if(adapter==null){
-                            adapter = new PicNiceAdapter(activity, gankPic);
+                            adapter = new PicNiceAdapter(MyPicNiceActivity.this, gankPic);
                         }
                         if(page==1){
                             if(ganKNicePicBean!=null){

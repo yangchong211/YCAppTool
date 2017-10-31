@@ -2,11 +2,16 @@ package com.ns.yc.lifehelper.utils;
 
 import org.greenrobot.eventbus.EventBus;
 
-/**
- * Created by PC on 2017/9/27.
- * 作者：PC
- */
 
+/**
+ * ================================================
+ * 作    者：杨充
+ * 版    本：1.0
+ * 创建日期：2017/8/31
+ * 描    述：EventBus事件总线工具类
+ * 修订历史：
+ * ================================================
+ */
 public class EventBusUtils {
 
     public EventBusUtils() {}
@@ -21,7 +26,8 @@ public class EventBusUtils {
         EventBus.getDefault().register(subscriber);       //开始订阅
     }
 
-    public static void post(Object event){
+    /**发送事件*/
+    public static void post(Object event){                //开始发送
         EventBus.getDefault().post(event);
     }
 

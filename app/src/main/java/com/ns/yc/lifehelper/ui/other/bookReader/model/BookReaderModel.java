@@ -5,6 +5,10 @@ import android.content.Context;
 import com.ns.yc.lifehelper.api.ConstantZssqApi;
 import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.bookReader.api.BookReaderApi;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookHelp;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookSubjectList;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailDiscussionComment;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailDiscussionContent;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookDiscussionList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookHelpList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookReviewList;
@@ -193,6 +197,50 @@ public class BookReaderModel {
      */
     public Observable<ReaderBookDiscussionList> getBookGirlList(String block, String duration, String sort, String type, String start, String limit, String distillate) {
         return service.getBookDiscussionList(block, duration, sort, type, start, limit, distillate);
+    }
+
+    /**
+     * 获取综合讨论区帖子详情
+     * @param id
+     * @return
+     */
+    public Observable<DetailDiscussionContent> getBookDiscussionDetail(String id) {
+        return service.getBookDiscussionDetail(id);
+    }
+
+    /**
+     * 获取神评论列表
+     */
+    public Observable<DetailDiscussionComment> getBestComments(String id) {
+        return service.getBestComments(id);
+    }
+
+    /**
+     * 获取综合讨论区帖子详情内的评论列表
+     */
+    public Observable<DetailDiscussionComment> getBookDiscussionComments(String disscussionId, String start, String limit) {
+        return service.getBookDiscussionComments(disscussionId, start, limit);
+    }
+
+    /**
+     * 获取书荒区帖子详情
+     */
+    public Observable<DetailBookHelp> getBookHelpDetail(String helpId) {
+        return service.getBookHelpDetail(helpId);
+    }
+
+    /**
+     *  获取书评区、书荒区帖子详情内的评论列表
+     */
+    public Observable<DetailDiscussionComment> getBookReviewComments(String bookReviewId, String start, String limit) {
+        return service.getBookReviewComments(bookReviewId, start, limit);
+    }
+
+    /**
+     * 获取书单详情
+     */
+    public Observable<DetailBookSubjectList> getBookListDetail(String bookListId) {
+        return service.getBookListDetail(bookListId);
     }
 
 }

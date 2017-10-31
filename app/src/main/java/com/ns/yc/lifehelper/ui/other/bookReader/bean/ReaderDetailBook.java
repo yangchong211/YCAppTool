@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.bookReader.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * 作者：PC
  */
 
-public class ReaderDetailBook {
+public class ReaderDetailBook implements Serializable {
 
 
     /**

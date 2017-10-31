@@ -18,8 +18,9 @@ import java.util.Stack;
 public class AppManager {
 
     //栈：也就是stack
-    public static Stack<Activity> activityStack;
-    private static AppManager instance;
+    private static Stack<Activity> activityStack;
+    private volatile static AppManager instance;
+
     private AppManager() {
 
     }

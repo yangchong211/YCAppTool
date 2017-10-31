@@ -8,8 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
-import com.squareup.leakcanary.RefWatcher;
-
 import butterknife.ButterKnife;
 
 /**
@@ -40,8 +38,9 @@ public abstract class BaseActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //AppManager.getAppManager().removeActivity(this);                                //将当前Activity移除到容器
         ButterKnife.unbind(this);
+        //AppManager.getAppManager().removeActivity(this);                                //将当前Activity移除到容器
+        //AppManager.getAppManager().finishActivity(this);
     }
 
 
@@ -130,8 +129,8 @@ public abstract class BaseActivity extends AppCompatActivity{
      * 用来检测所有Activity的内存泄漏
      */
     private void initLeakCanary() {
-        RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
-        refWatcher.watch(this);
+        /*RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+        refWatcher.watch(this);*/
     }
 
 

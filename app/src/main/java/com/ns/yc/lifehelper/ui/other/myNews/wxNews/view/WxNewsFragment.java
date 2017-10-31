@@ -17,7 +17,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.BaseFragment;
-import com.ns.yc.lifehelper.ui.main.WebViewActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.WxNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.adapter.WxNewsAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.bean.WxNewsDetailBean;

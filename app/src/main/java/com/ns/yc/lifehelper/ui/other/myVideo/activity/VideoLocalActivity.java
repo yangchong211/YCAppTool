@@ -31,7 +31,12 @@ public class VideoLocalActivity extends BaseActivity implements View.OnClickList
     TextView toolbarTitle;
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
-    private VideoLocalActivity activity;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -40,7 +45,6 @@ public class VideoLocalActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initView() {
-        activity = VideoLocalActivity.this;
         initToolBar();
         initRecycleView();
     }
@@ -69,9 +73,9 @@ public class VideoLocalActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initRecycleView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
-                SizeUtils.px2dp(2), activity.getResources().getColor(R.color.grayLine));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
+                SizeUtils.px2dp(2), this.getResources().getColor(R.color.grayLine));
         recyclerView.addItemDecoration(line);
     }
 

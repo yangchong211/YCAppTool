@@ -20,8 +20,6 @@ import java.util.List;
 
 /**
  * 自定义的用于涂鸦的 View
- * <p>
- * Created by developerHaoz on 2017/7/12.
  */
 
 public class DoodleView extends SurfaceView implements SurfaceHolder.Callback {

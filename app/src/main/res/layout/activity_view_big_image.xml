@@ -3,34 +3,68 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blackText">
+    android:background="@color/colorTheme">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/colorTheme"/>
 
-    <TextView
-        android:id="@+id/tv_text"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/linearlayout_img"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:textColor="#fff"
-        android:textSize="14sp" />
+        android:layout_margin="16dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="3/48"
+            android:textColor="#fff"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tv_save_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_text"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape_save_big_image"
+            android:text="保存"
+            android:textColor="#fff"
+            android:textSize="13sp" />
+        <ImageView
+            android:id="@+id/large_more"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_large_more_selector"/>
+        <ImageView
+            android:id="@+id/large_star"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_toLeftOf="@+id/large_more"
+            android:src="@drawable/ic_large_star"/>
+        <ImageView
+            android:id="@+id/large_download"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_toLeftOf="@+id/large_star"
+            android:src="@drawable/ic_large_download"/>
+        <ImageView
+            android:id="@+id/large_share"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_toLeftOf="@+id/large_download"
+            android:src="@drawable/ic_large_share_selector"/>
 
-    <TextView
-        android:id="@+id/tv_save_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="17dp"
-        android:layout_marginRight="13dp"
-        android:background="@drawable/shape_save_big_image"
-        android:text="保存"
-        android:textColor="#fff"
-        android:textSize="13sp" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

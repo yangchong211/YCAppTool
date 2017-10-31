@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.listener.OnItemClickListener;
+import com.ns.yc.lifehelper.listener.OnListItemClickListener;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class KnowledgeSearchAdapter extends RecyclerView.Adapter<KnowledgeSearch
 
     private final List<String> list;
     private final Activity activity;
-    private OnItemClickListener mItemClickListener;
+    private OnListItemClickListener mItemClickListener;
 
     public KnowledgeSearchAdapter(List<String> list, Activity activity) {
         this.list = list;
@@ -53,20 +53,20 @@ public class KnowledgeSearchAdapter extends RecyclerView.Adapter<KnowledgeSearch
         return list.size();
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnListItemClickListener listener) {
         this.mItemClickListener = listener;
     }
 
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final OnItemClickListener mListener;
+        private final OnListItemClickListener mListener;
         ImageView iv_detail_avatar;
         TextView tv_detail_name;
         TextView tv_detail_duty;
 
 
-        MyViewHolder(View view, OnItemClickListener listener) {
+        MyViewHolder(View view, OnListItemClickListener listener) {
             super(view);
             iv_detail_avatar = (ImageView) view.findViewById(R.id.iv_detail_avatar);
             tv_detail_name = (TextView) view.findViewById(R.id.tv_detail_name);

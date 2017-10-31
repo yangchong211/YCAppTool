@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.ui.data;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -26,19 +27,20 @@ import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
 import com.ns.yc.lifehelper.api.ConstantImageApi;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.bean.ImageIconBean;
-import com.ns.yc.lifehelper.ui.data.adapter.DataToolAdapter;
-import com.ns.yc.lifehelper.ui.data.view.DoodleViewActivity;
-import com.ns.yc.lifehelper.ui.main.MainActivity;
+import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
+import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
 import com.ns.yc.lifehelper.ui.other.listener.ListenerActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
+import com.ns.yc.lifehelper.ui.other.notePad.NotePadActivity;
 import com.ns.yc.lifehelper.ui.other.safe360.SafeHomeActivity;
 import com.ns.yc.lifehelper.ui.other.toDo.ToDoTimerActivity;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.weight.MyGridView;
 import com.ns.yc.lifehelper.utils.ImageUtils;
-import com.pedaily.yc.ycdialoglib.ToastUtil;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -76,23 +78,9 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
 
-    private List<ImageIconBean> listDatas;  //总的数据源
-    private List<View> viewPagerList;       //GridView作为一个View对象添加到ViewPager集合中
     private ImageView[] ivPoints;           //小圆点图片的集合
     private int totalPage;                  //总的页数
-    private int mPageSize = 8;              //每页显示的最大的数量
     private MainActivity activity;
-
-    private int[] proPic = {R.drawable.ic_investment, R.drawable.ic_project, R.drawable.ic_financing, R.drawable.ic_show,
-            R.drawable.ic_project, R.drawable.ic_show, R.drawable.ic_project, R.drawable.ic_investment,
-            R.drawable.ic_investment, R.drawable.ic_project, R.drawable.ic_financing, R.drawable.ic_show};
-    private String[] proName = {"快递", "天气", "违章", "工商", "股票", "身份证", "人脸识别", "归属地", "空气质量", "今日油价", "翻译", "缴费"};
-
-
-    private int[] toolLogo = {R.drawable.ic_investment, R.drawable.ic_project, R.drawable.ic_financing, R.drawable.ic_show,
-            R.drawable.ic_project, R.drawable.ic_show, R.drawable.ic_project, R.drawable.ic_investment,
-            R.drawable.ic_investment, R.drawable.ic_project, R.drawable.ic_financing, R.drawable.ic_show};
-    private String[] toolName = {"笔记本", "计算器", "360工具", "听听", "播放器", "唐诗", "宋词", "历史", "法律", "景点", "航班", "绘画板"};
     private NarrowImageAdapter adapter;
 
     @Override
@@ -202,18 +190,23 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
     private class BannerImageLoader extends ImageLoader {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
-            ImageUtils.loadImgByPicasso(context, (String) path, imageView);
+            ImageUtils.loadImgByPicasso(context, (String) path, R.drawable.image_default ,imageView);
         }
     }
 
     private void iniVpData() {
-        listDatas = new ArrayList<>();
-        for (int i = 0; i < proPic.length; i++) {
-            listDatas.add(new ImageIconBean(proName[i], proPic[i]));
+        List<ImageIconBean> listDatas = new ArrayList<>();
+        int mPageSize = 8;              //每页显示的最大的数量
+        TypedArray proPic = activity.getResources().obtainTypedArray(R.array.data_pro_pic);
+        String[] proName = activity.getResources().getStringArray(R.array.data_pro_title);
+        for (int i = 0; i < proName.length; i++) {
+            int proPicId = proPic.getResourceId(i, R.drawable.ic_investment);
+            listDatas.add(new ImageIconBean(proName[i], proPicId));
         }
+        proPic.recycle();
         //总的页数向上取整
         totalPage = (int) Math.ceil(listDatas.size() * 1.0 / mPageSize);
-        viewPagerList = new ArrayList<>();
+        List<View> viewPagerList = new ArrayList<>();
         for (int i = 0; i < totalPage; i++) {
             //每个页面都是inflate出一个新实例
             final GridView gridView = (GridView) View.inflate(activity, R.layout.item_vp_grid_view, null);
@@ -232,7 +225,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
                                 startActivity(WeatherActivity.class);
                                 break;
                             case 2:
-
+                                startActivity(NotePadActivity.class);
                                 break;
                             case 4:
 
@@ -283,7 +276,14 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void initGridView() {
-        DataToolAdapter adapter = new DataToolAdapter(activity, toolName, toolLogo);
+        TypedArray toolLogo = activity.getResources().obtainTypedArray(R.array.data_tool_pro_pic);
+        String[] toolName = activity.getResources().getStringArray(R.array.data_tool_pro_title);
+        ArrayList<Integer> logoList = new ArrayList<>();
+        for(int a=0 ; a<toolName.length ; a++){
+            logoList.add(toolLogo.getResourceId(a,R.drawable.ic_investment));
+        }
+        toolLogo.recycle();
+        DataToolAdapter adapter = new DataToolAdapter(activity, toolName, logoList);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

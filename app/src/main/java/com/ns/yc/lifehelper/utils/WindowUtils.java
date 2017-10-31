@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.ui.main.WebViewActivity;
-import com.ns.yc.lifehelper.ui.me.view.MeFeedBackActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
+import com.ns.yc.lifehelper.ui.me.view.activity.MeFeedBackActivity;
 
 import java.util.ArrayList;
 

@@ -50,8 +50,13 @@ public class TangShiSearchDetailActivity extends BaseActivity implements View.On
     TextView tvTranslation;
     @Bind(R.id.ll_translation)
     LinearLayout llTranslation;
-    private TangShiSearchDetailActivity activity;
     private String title;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -60,7 +65,6 @@ public class TangShiSearchDetailActivity extends BaseActivity implements View.On
 
     @Override
     public void initView() {
-        activity = TangShiSearchDetailActivity.this;
         initIntentData();
         initToolBar();
     }

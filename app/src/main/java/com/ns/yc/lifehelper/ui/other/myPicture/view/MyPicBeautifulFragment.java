@@ -56,6 +56,7 @@ public class MyPicBeautifulFragment extends Fragment implements SwipeRefreshLayo
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(mType)) {
+                initRealm();
                 boolean isRefreshe, isLoadmore, isFirstload;
                 if( realm.where(PicBeautifulMainBean.class).findAll()!=null){
                     latest = realm.where(PicBeautifulMainBean.class)
@@ -102,6 +103,14 @@ public class MyPicBeautifulFragment extends Fragment implements SwipeRefreshLayo
     public void onDetach() {
         super.onDetach();
         activity = null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(realm!=null){
+            realm.close();
+        }
     }
 
     @Override
@@ -202,9 +211,11 @@ public class MyPicBeautifulFragment extends Fragment implements SwipeRefreshLayo
     }
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
-        //realm = Realm.getDefaultInstance();
-        realm.createAllFromJson(PicBeautifulMainBean.class,"");
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+            //realm = Realm.getDefaultInstance();
+            realm.createAllFromJson(PicBeautifulMainBean.class,"");
+        }
     }
 
 

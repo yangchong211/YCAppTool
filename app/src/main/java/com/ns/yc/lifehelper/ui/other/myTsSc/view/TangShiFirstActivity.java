@@ -65,11 +65,19 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
     private String search;
-    private TangShiFirstActivity activity;
     private TangShiAdapter adapter;
     private Realm realm;
     private RealmResults<CacheTsList> cacheTsLists;
     private boolean isCache = false;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*if(realm!=null){
+            realm.close();
+        }*/
+    }
 
     @Override
     public int getContentView() {
@@ -78,7 +86,6 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initView() {
-        activity = TangShiFirstActivity.this;
         initIntentData();
         initRealm();
         initToolBar();
@@ -94,7 +101,9 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
 
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     private void initToolBar() {
@@ -112,7 +121,7 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(activity,TangShiDetailActivity.class);
+                Intent intent = new Intent(TangShiFirstActivity.this,TangShiDetailActivity.class);
                 intent.putExtra("id",adapter.getAllData().get(position).getDetailid());
                 intent.putExtra("name",adapter.getAllData().get(position).getName());
                 startActivity(intent);
@@ -148,11 +157,11 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initRecycleView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
+        recyclerView.setLayoutManager(new LinearLayoutManager(TangShiFirstActivity.this));
+        final RecycleViewItemLine line = new RecycleViewItemLine(TangShiFirstActivity.this, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
         recyclerView.addItemDecoration(line);
-        adapter = new TangShiAdapter(activity);
+        adapter = new TangShiAdapter(TangShiFirstActivity.this);
         recyclerView.setAdapter(adapter);
         AddHeader();
         //刷新
@@ -167,7 +176,7 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
                     }
                 } else {
                     recyclerView.setRefreshing(false);
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TangShiFirstActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -188,7 +197,7 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
                 tfl_tag.setAdapter(new TagAdapter<String>(tags) {
                     @Override
                     public View getView(FlowLayout parent, int position, String o) {
-                        LayoutInflater from = LayoutInflater.from(activity);
+                        LayoutInflater from = LayoutInflater.from(TangShiFirstActivity.this);
                         TextView tv = (TextView) from.inflate(R.layout.tag_hot, tfl_tag, false);
                         tv.setText(o);
                         return tv;
@@ -232,7 +241,7 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
                     @Override
                     public void onNext(TangShiChapter tangShiChapter) {
                         if(adapter==null){
-                            adapter = new TangShiAdapter(activity);
+                            adapter = new TangShiAdapter(TangShiFirstActivity.this);
                         }
 
                         if(tangShiChapter!=null && tangShiChapter.getResult()!=null && tangShiChapter.getResult().size()>0){
@@ -250,6 +259,7 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
 
 
     private void readCache() {
+        initRealm();
         if(realm!=null && realm.where(CacheTsList.class).findAll()!=null){
             cacheTsLists = realm.where(CacheTsList.class).findAll();
         }else {
@@ -266,7 +276,7 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
             return;
         }
         if(adapter==null){
-            adapter = new TangShiAdapter(activity);
+            adapter = new TangShiAdapter(TangShiFirstActivity.this);
         }else {
             adapter.getAllData().clear();
         }
@@ -282,6 +292,7 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
 
 
     private void cacheData(List<TangShiChapter.ResultBean> result) {
+        initRealm();
         if(realm!=null && realm.where(CacheTsList.class).findAll()!=null){
             cacheTsLists = realm.where(CacheTsList.class).findAll();
         }else {

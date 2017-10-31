@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.ns.yc.lifehelper"
-          android:versionCode="2"
-          android:versionName="1.2">
+          android:versionCode="3"
+          android:versionName="1.3">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <category android:name="android.intent.category.APP_MARKET" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
 
 
     <application
@@ -28,49 +29,58 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.guide.GuideActivity">
+        <activity android:name=".ui.guide.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity"/>
-        <activity android:name=".ui.main.view.DownLoadActivity"/>
+        <activity android:name=".ui.main.view.MainActivity"/>
+        <activity android:name=".ui.guide.GuideActivity"/>
+        <activity android:name=".ui.main.view.activity.DownLoadActivity"/>
+        <activity android:name=".ui.main.view.activity.AboutMeActivity"/>
+        <activity android:name=".ui.other.gank.view.activity.GanKHomeActivity"/>
+        <activity android:name=".ui.other.gank.view.activity.GanKWebActivity"/>
+        <activity android:name=".ui.other.gank.view.activity.GanKSearchActivity"/>
 
         <activity android:name=".ui.other.expressDelivery.ExpressDeliveryActivity"/>
         <activity android:name=".ui.other.expressDelivery.indexModel.SelectorCompanyActivity"/>
         <activity android:name=".ui.other.expressDelivery.activity.ExpressDeliveryInfoActivity"/>
 
-        <activity android:name=".ui.other.douMovie.DouMovieActivity"/>
-        <activity android:name=".ui.other.douMovie.activity.MovieTopActivity"/>
-        <activity android:name=".ui.other.douMovie.activity.MovieDetailActivity"/>
-        <activity android:name=".ui.other.douMovie.activity.MovieWebViewActivity"/>
+        <activity android:name=".ui.other.douMovie.view.DouMovieActivity"/>
+        <activity android:name=".ui.other.douMovie.view.activity.MovieTopActivity"/>
+        <activity android:name=".ui.other.douMovie.view.activity.MovieDetailActivity"/>
+        <activity android:name=".ui.other.douMovie.view.activity.MovieWebViewActivity"/>
 
-        <activity android:name=".ui.other.douBook.DouBookActivity"/>
-        <activity android:name=".ui.other.douBook.activity.DouBookDetailActivity"/>
+        <activity android:name=".ui.other.douBook.view.DouBookActivity"/>
+        <activity android:name=".ui.other.douBook.view.activity.DouBookDetailActivity"/>
 
-        <activity android:name=".ui.other.douMusic.DouMusicActivity"/>
-        <activity android:name=".ui.other.douMusic.activity.DouMusicDetailActivity"/>
+        <activity android:name=".ui.other.douMusic.view.DouMusicActivity"/>
+        <activity android:name=".ui.other.douMusic.view.activity.DouMusicDetailActivity"/>
+
         <activity android:name=".ui.other.toDo.ToDoTimerActivity"/>
         <activity android:name=".ui.other.toDo.view.ToDoAddActivity"/>
-        <activity android:name=".ui.other.bookReader.BookReaderActivity"/>
-        <activity android:name=".ui.other.bookReader.view.ReaderSubjectActivity"/>
+
+        <activity android:name=".ui.other.bookReader.view.BookReaderActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.ReaderSubjectActivity"/>
         <activity android:name=".ui.other.bookReader.bean.ReaderTopBookActivity"/>
-        <activity android:name=".ui.other.bookReader.view.SubHomeTopRankActivity"/>
-        <activity android:name=".ui.other.bookReader.view.SubTopRankActivity"/>
-        <activity android:name=".ui.other.bookReader.view.ReaderCategoryActivity"/>
-        <activity android:name=".ui.other.bookReader.view.SubCategoryListActivity"/>
-        <activity android:name=".ui.other.bookReader.view.ReadBookDetailActivity"/>
-        <activity android:name=".ui.other.bookReader.activity.BookReaderDiscussionActivity"/>
-        <activity android:name=".ui.other.bookReader.activity.BookReaderGirlActivity"/>
-        <activity android:name=".ui.other.bookReader.activity.BookReaderHelpActivity"/>
-        <activity android:name=".ui.other.bookReader.activity.BookReaderOriginalActivity"/>
-        <activity android:name=".ui.other.bookReader.activity.BookReaderReviewActivity"/>
-        <activity android:name=".ui.other.bookReader.activity.BookReaderLocalActivity"/>
-        <activity android:name=".ui.other.bookReader.activity.BookReadPDFActivity"/>
-        <activity android:name=".ui.other.bookReader.activity.BookReadPubActivity"/>
-        <activity android:name=".ui.other.bookReader.activity.BookReadChmActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.SubHomeTopRankActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.SubTopRankActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.ReaderCategoryActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.SubCategoryListActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.ReadBookDetailActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.BookReaderDiscussionActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.BookReaderGirlActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.BookReaderHelpActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.BookReaderReviewActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.BookReaderLocalActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.BookReadPDFActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.BookReadPubActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.BookReadChmActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.BookDetailDiscussionActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.BookDetailHelpActivity"/>
+        <activity android:name=".ui.other.bookReader.view.activity.ReadBookDetailSubjectActivity"/>
 
         <activity android:name=".ui.other.timer.TimerActivity"/>
 
@@ -89,7 +99,7 @@
         <activity android:name=".ui.other.myNews.wxNews.WxNewsActivity"/>
         <activity android:name=".ui.other.myNews.wyNews.view.WxNewsDropActivity"/>
         <activity android:name=".ui.other.myNews.txNews.TxNewsActivity"/>
-        <activity android:name=".ui.main.WebViewActivity"/>
+        <activity android:name=".ui.main.view.activity.WebViewActivity"/>
         <activity android:name=".ui.other.myNews.wxNews.view.NewsSearchActivity"/>
         <activity android:name=".ui.other.myNews.weChat.TxWeChatNewsActivity"/>
         <activity android:name=".ui.other.myNews.weChat.view.NewsContentActivity"/>
@@ -116,21 +126,24 @@
 
         <activity android:name=".ui.other.myNote.NoteActivity"/>
         <activity android:name=".ui.other.myNote.view.NoteAddActivity"/>
+        <activity android:name=".ui.other.notePad.NotePadActivity"/>
+        <activity android:name=".ui.other.notePad.activity.NotePadNewActivity"/>
+        <activity android:name=".ui.other.notePad.activity.NotePadDetailActivity"/>
 
-        <activity android:name=".ui.find.view.RiddleActivity"/>
-        <activity android:name=".ui.find.view.RiddleDetailActivity"/>
-        <activity android:name=".ui.data.view.DoodleViewActivity"/>
+        <activity android:name=".ui.find.view.activity.RiddleActivity"/>
+        <activity android:name=".ui.find.view.activity.RiddleDetailActivity"/>
+        <activity android:name=".ui.data.view.activity.DoodleViewActivity"/>
         <activity android:name=".ui.other.weather.WeatherActivity"/>
 
         <activity android:name=".ui.other.sharpBendOfBrain.SharpBendOfBrainActivity"/>
 
-        <activity android:name=".ui.me.view.MeCollectActivity"/>
-        <activity android:name=".ui.me.view.MeFeedBackActivity"/>
-        <activity android:name=".ui.me.view.MeSettingActivity"/>
-        <activity android:name=".ui.me.view.MePersonActivity"/>
-        <activity android:name=".ui.me.activity.MeQoneActivity"/>
-        <activity android:name=".ui.me.activity.MeLoginActivity"/>
-        <activity android:name=".ui.me.activity.MeRegisterActivity"/>
+        <activity android:name=".ui.me.view.activity.MeCollectActivity"/>
+        <activity android:name=".ui.me.view.activity.MeFeedBackActivity"/>
+        <activity android:name=".ui.me.view.activity.MeSettingActivity"/>
+        <activity android:name=".ui.me.view.activity.MePersonActivity"/>
+        <activity android:name=".ui.me.view.activity.MeQoneActivity"/>
+        <activity android:name=".ui.me.view.activity.MeLoginActivity"/>
+        <activity android:name=".ui.me.view.activity.MeRegisterActivity"/>
 
         <activity android:name=".ui.other.safe360.SafeHomeActivity"/>
         <activity android:name=".ui.other.safe360.activity.MobileSafeActivity"/>

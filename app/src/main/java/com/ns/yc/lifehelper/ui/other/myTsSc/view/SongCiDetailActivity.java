@@ -55,10 +55,15 @@ public class SongCiDetailActivity extends BaseActivity implements View.OnClickLi
     TextView tvAppreciation;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    private SongCiDetailActivity activity;
     private String id;
     private String name;
     private ViewLoading mLoading;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -67,7 +72,6 @@ public class SongCiDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initView() {
-        activity = SongCiDetailActivity.this;
         initIntentData();
         initToolBar();
         // 添加Loading

@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.utils;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,10 +26,9 @@ import android.widget.Toast;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.AppManager;
 import com.ns.yc.lifehelper.base.BaseApplication;
-import com.ns.yc.lifehelper.ui.main.WebViewActivity;
-import com.ns.yc.lifehelper.ui.me.view.MeFeedBackActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
+import com.ns.yc.lifehelper.ui.me.view.activity.MeFeedBackActivity;
 import com.pedaily.yc.ycdialoglib.selector.CustomSelectDialog;
 
 import java.util.ArrayList;
@@ -44,6 +44,31 @@ import java.util.List;
  * ================================================
  */
 public class DialogUtils {
+
+    /**
+     * 显示进度条对话框
+     **/
+    private static ProgressDialog dialog;
+    public static void showProgressDialog(Activity activity) {
+        if (dialog == null) {
+            dialog = new ProgressDialog(activity);
+            dialog.setMessage("玩命加载中……");
+            dialog.setCancelable(true);
+            dialog.setCanceledOnTouchOutside(false);
+        }
+        dialog.show();
+    }
+
+    /**
+     * 关闭进度条对话框
+     */
+    public static void dismissProgressDialog() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+
 
     /**
      * 自定义PopupWindow
@@ -229,6 +254,18 @@ public class DialogUtils {
                 alertDialog.show();
             }
         }
+        alertDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+
+            }
+        });
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+
+            }
+        });
     }
 
 
@@ -239,10 +276,10 @@ public class DialogUtils {
      * 解决办法：
      * context：全局上下文，service上下文
      */
-    public static void showWindowDialog(final Context context){
+    public static void showWindowDialog(final Activity context){
         //首先获取当前Activity
-        final Activity activity = AppManager.getAppManager().currentActivity();
-        if(AppUtil.isActivityLiving(activity)){
+        //final Activity activity = BaseAppManager.getInstance().currentActivity();
+        if(AppUtil.isActivityLiving(context)){
             //context 不行
             //final BaseApplication context = BaseApplication.getInstance();
             //AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -295,11 +332,11 @@ public class DialogUtils {
 
             //Unable to add window android.view.ViewRootImpl$W@12b82d6 -- permission denied for this window type
             //alertDialog.show();
-            AppUtil.setBackgroundAlpha(activity,0.5f);
+            AppUtil.setBackgroundAlpha(context,0.5f);
             alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
-                    AppUtil.setBackgroundAlpha(activity,1.0f);
+                    AppUtil.setBackgroundAlpha(context,1.0f);
                 }
             });
         }
@@ -347,8 +384,8 @@ public class DialogUtils {
      * 注意，由于是在Activity页面弹窗，因此不需要设置setType属性；
      *      如果是设置主题，那么弹窗无法居中，new AlertDialog.Builder(context,R.style.AppTheme);        //传统主题
      */
-    public static void showActivityDialog(){
-        final Activity activity = AppManager.getAppManager().currentActivity();
+    public static void showActivityDialog(final Activity activity){
+        //final Activity activity = BaseAppManager.getInstance().currentActivity();
         if(AppUtil.isActivityLiving(activity)){
             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
             final AlertDialog alertDialog = builder.create();

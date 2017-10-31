@@ -41,9 +41,13 @@ public class MobilePlayerActivity extends BaseActivity implements View.OnClickLi
     View viewIndicator;
     @Bind(R.id.view_pager)
     ViewPager viewPager;
-    private MobilePlayerActivity activity;
     private ArrayList<Fragment> fragments;
     private int indicatorWidth;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -52,7 +56,6 @@ public class MobilePlayerActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initView() {
-        activity = MobilePlayerActivity.this;
         initToolBar();
         initFragment();
         initIndicator();

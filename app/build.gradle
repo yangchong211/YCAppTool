@@ -9,8 +9,8 @@ android {
         applicationId "com.ns.yc.lifehelper"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 2
-        versionName "1.2"
+        versionCode 3
+        versionName "1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         /*ndk {
@@ -97,22 +97,21 @@ dependencies {
     compile 'pub.devrel:easypermissions:1.0.1'
     compile project(':vitamio')
     //内存泄漏检测工具
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    //debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    //releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     //腾讯bug管理平台
     compile 'com.tencent.bugly:crashreport:2.6.0'
     compile 'com.tencent.bugly:nativecrashreport:3.3.0'
 
     //自定义
-    //状态管理
-    compile 'cn.yc:StateLayoutLib:1.0'
-    //图片选择器
-    compile 'cn.yc:YCPhotoLib:1.0'
-    //弹窗
-    compile 'cn.yc:YCDialogLib:3.0'
-    //倒计时器
-    compile 'cn.yc:YCCountDownViewLib:1.0'
-    //公共类
-    compile 'cn.yc:YCUtilsLib:1.1'
+    compile 'cn.yc:YCStateLib:1.0'                      //状态管理
+    compile 'cn.yc:YCPhotoLib:1.0'                      //图片选择器
+    compile 'cn.yc:YCDialogLib:3.2'                     //弹窗
+    compile 'cn.yc:YCCountDownViewLib:1.0'              //倒计时器
+    compile 'cn.yc:YCUtilsLib:1.1'                      //公共类
+    compile 'cn.yc:YCMultiInputViewLib:1.0'             //倒计数
+    compile 'cn.yc:YCProgressLib:1.0'                   //进度条
+    compile 'cn.yc:YCCardViewLib:1.2'                   //滑动卡片
+    compile 'cn.yc:YCCustomTextLib:1.6'                 //自定义超文本
 
 }

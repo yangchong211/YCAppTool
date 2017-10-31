@@ -27,7 +27,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.base.BaseApplication;
-import com.ns.yc.lifehelper.ui.main.WebViewActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.cache.SearchHis;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.adapter.WxSearchNewsAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.bean.WxNewsSearchBean;
@@ -82,11 +82,18 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
     private Realm realm;
-    private NewsSearchActivity activity;
     private RealmResults<TsSearchHis> searchHises;
     private String type;
     private WxSearchNewsAdapter searchAdapter;
     private TangShiSearchAdapter hisAdapter;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*if(realm!=null){
+            realm.close();
+        }*/
+    }
 
     @Override
     public int getContentView() {
@@ -95,7 +102,6 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initView() {
-        activity = NewsSearchActivity.this;
         initIntentData();
         initSearchView();
         initRealm();
@@ -119,7 +125,9 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     @Override
@@ -160,7 +168,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(int position) {
                 if(position>-1 && searchAdapter.getAllData().size()>position){
-                    Intent intent = new Intent(activity, WebViewActivity.class);
+                    Intent intent = new Intent(NewsSearchActivity.this, WebViewActivity.class);
                     intent.putExtra("name",searchAdapter.getAllData().get(position).getWeixinname());
                     intent.putExtra("url",searchAdapter.getAllData().get(position).getUrl());
                     startActivity(intent);
@@ -262,6 +270,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
 
 
     private void addRealm(String k) {
+        initRealm();
         if (realm!=null && realm.where(TsSearchHis.class).findAll() != null) {
             searchHises = realm.where(TsSearchHis.class).findAll();
         } else {
@@ -285,6 +294,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
 
 
     private void cleanHisRealm() {
+        initRealm();
         if(realm!=null && searchHises!=null){
             realm.beginTransaction();
             searchHises.deleteAllFromRealm();
@@ -301,7 +311,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
         final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
         rvSearchHis.addItemDecoration(line);
-        hisAdapter = new TangShiSearchAdapter(activity);
+        hisAdapter = new TangShiSearchAdapter(NewsSearchActivity.this);
         rvSearchHis.setAdapter(hisAdapter);
     }
 
@@ -311,7 +321,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
         final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
         recyclerView.addItemDecoration(line);
-        searchAdapter = new WxSearchNewsAdapter(activity);
+        searchAdapter = new WxSearchNewsAdapter(NewsSearchActivity.this);
         recyclerView.setAdapter(searchAdapter);
 
     }
@@ -326,7 +336,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
         tflSearchHot.setAdapter(new TagAdapter<String>(tags) {
             @Override
             public View getView(FlowLayout parent, int position, String o) {
-                LayoutInflater from = LayoutInflater.from(activity);
+                LayoutInflater from = LayoutInflater.from(NewsSearchActivity.this);
                 TextView tv = (TextView) from.inflate(R.layout.tag_hot, tflSearchHot, false);
                 tv.setText(o);
                 return tv;
@@ -356,7 +366,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
 
 
     private void startSearch(String k) {
-        WxNewsModel model = WxNewsModel.getInstance(activity);
+        WxNewsModel model = WxNewsModel.getInstance(NewsSearchActivity.this);
         model.getWxNewsSearch(ConstantALiYunApi.Key,k)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -374,7 +384,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
                     @Override
                     public void onNext(WxNewsSearchBean wxNewsSearchBean) {
                         if(searchAdapter==null){
-                            searchAdapter = new WxSearchNewsAdapter(activity);
+                            searchAdapter = new WxSearchNewsAdapter(NewsSearchActivity.this);
                         }
 
                         if(wxNewsSearchBean!=null){

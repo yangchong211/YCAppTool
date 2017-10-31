@@ -45,11 +45,15 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
     Toolbar toolbar;
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
-    private TxWeChatNewsActivity activity;
     private TxWeChatAdapter adapter;
 
     private int num = 10;
     private int page = 1;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -58,7 +62,6 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initView() {
-        activity = TxWeChatNewsActivity.this;
         initToolBar();
         initRecycleView();
     }
@@ -76,7 +79,7 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onItemClick(int position) {
                 if(position>-1 && adapter.getAllData().size()>position){
-                    Intent intent = new Intent(activity, NewsContentActivity.class);
+                    Intent intent = new Intent(TxWeChatNewsActivity.this, NewsContentActivity.class);
                     intent.putExtra("name",adapter.getAllData().get(position).getDescription());
                     intent.putExtra("url",adapter.getAllData().get(position).getUrl());
                     startActivity(intent);
@@ -103,8 +106,8 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
 
 
     private void initRecycleView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        adapter = new TxWeChatAdapter(activity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(TxWeChatNewsActivity.this));
+        adapter = new TxWeChatAdapter(TxWeChatNewsActivity.this);
         recyclerView.setAdapter(adapter);
 
         //加载更多
@@ -120,7 +123,7 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
                     }
                 } else {
                     adapter.pauseMore();
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TxWeChatNewsActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -137,7 +140,7 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TxWeChatNewsActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -146,7 +149,7 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TxWeChatNewsActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -173,14 +176,14 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
                     getNews(num,page);
                 } else {
                     recyclerView.setRefreshing(false);
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TxWeChatNewsActivity.this, "网络不可用", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     private void getNews(int num, final int page) {
-        WeChatModel model = WeChatModel.getInstance(activity);
+        WeChatModel model = WeChatModel.getInstance(TxWeChatNewsActivity.this);
         model.getTxNews(ConstantTxApi.TX_KEY,num,page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -203,7 +206,7 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
                     @Override
                     public void onNext(WeChatBean weChatBean) {
                         if(adapter==null){
-                            adapter = new TxWeChatAdapter(activity);
+                            adapter = new TxWeChatAdapter(TxWeChatNewsActivity.this);
                         }
 
                         if(page==1){

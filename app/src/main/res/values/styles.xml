@@ -9,14 +9,51 @@
     </style>
     <style name="BaseTheme" parent="AppTheme" />
 
+
+    <!--设置ToolBar样式-->
+    <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--设置字体为白色-->
+        <item name="actionMenuTextColor">@color/colorWhite</item>
+        <!--设置那三个点的图标为白色-->
+        <item name="android:textColorSecondary">@color/colorWhite</item>
+        <!--设置不覆盖锚点-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+    </style>
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+    </style>
+
+
     <!--titleBar样式-->
     <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="actionBarItemBackground">@drawable/abc_item_background_holo_light</item>
         <item name="selectableItemBackground">@drawable/abc_item_background_holo_light</item>
+        <!--设置那三个点的图标为白色-->
+        <item name="android:textColorSecondary">@color/colorWhite</item>
+        <!--设置不覆盖锚点-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
         <item name="titleTextAppearance">@style/ToolBar.Title</item>
         <item name="subtitleTextAppearance">@style/Toolbar.SubTitle</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+
+    <!--titleBar 标题-->
+    <style name="ToolBar.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <!--titleBar 副标题-->
+    <style name="Toolbar.SubTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">9.0sp</item>
+        <item name="android:textColor">@color/colorWhiteBg</item>
+    </style>
+
+    <style name="MyToolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+    </style>
+
 
     <style name="FullScreenDialog" parent="android:Theme.Dialog">
         <!-- 窗口设为无标题 -->
@@ -51,19 +88,6 @@
         <item name="android:windowCloseOnTouchOutside">false</item>
     </style>
 
-
-    <!--titleBar 标题-->
-    <style name="ToolBar.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">18.0sp</item>
-        <item name="android:textColor">@color/colorWhite</item>
-    </style>
-
-    <!--titleBar 副标题-->
-    <style name="Toolbar.SubTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
-        <item name="android:textSize">9.0sp</item>
-        <item name="android:textColor">@color/colorWhiteBg</item>
-    </style>
-
     <!--侧滑菜单分割线样式-->
     <style name="ViewLineNav">
         <item name="android:layout_height">1px</item>
@@ -92,7 +116,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/blackText2</item>
+        <item name="android:textColor">@color/blackText4</item>
     </style>
 
 

@@ -1,12 +1,15 @@
 package com.ns.yc.lifehelper.utils;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.ClipboardManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.PowerManager;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +24,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Created by PC on 2017/8/22.
+ * Created by PC on 2017/2/22.
  * 作者：PC
  */
 
@@ -253,8 +256,6 @@ public class AppUtil {
 
     /**
      * 判断某Activity是否挂掉，主要是用于弹窗
-     * @param
-     * @return
      */
     private static boolean isActivityLiving(WeakReference<Activity> weakReference) {
         if(weakReference != null){
@@ -283,5 +284,39 @@ public class AppUtil {
         CharSequence inFormat = hasHour ? "kk:mm:ss" : "mm:ss";   // 如果包含小时，则格式化为时:分:秒，否则格式化为分:秒
         return DateFormat.format(inFormat, calendar);
     }
+
+    /**
+     * 判断应用是否处于后台
+     * @param context
+     * @return
+     */
+    public static boolean isAppOnBackground(Context context) {
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * 判断是否锁屏
+     * @param context
+     * @return
+     */
+    public static boolean isLockScreen(Context context){
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        boolean isScreenOn = pm.isScreenOn();       //如果为true，则表示屏幕“亮”了，否则屏幕“暗”了。
+        if (isScreenOn){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
 }

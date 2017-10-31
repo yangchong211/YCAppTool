@@ -2,6 +2,9 @@ package com.ns.yc.lifehelper.utils;
 
 import android.os.CountDownTimer;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * ================================================
  * 作    者：杨充
@@ -40,6 +43,36 @@ public class TimerUtils {
         @Override
         public void onTick(long millisUntilFinished) {       //计时过程显示
 
+        }
+    }
+
+
+    /**
+     * <pre>
+     * 判断date和当前日期是否在同一周内
+     * 注:
+     * Calendar类提供了一个获取日期在所属年份中是第几周的方法，对于上一年末的某一天
+     * 和新年初的某一天在同一周内也一样可以处理，例如2012-12-31和2013-01-01虽然在
+     * 不同的年份中，但是使用此方法依然判断二者属于同一周内
+     * </pre>
+     *
+     * @param date
+     * @return
+     */
+    public static boolean isSameWeekWithToday(Date date) {
+        if (date == null) {
+            return false;
+        }
+        // 0.先把Date类型的对象转换Calendar类型的对象
+        Calendar todayCal = Calendar.getInstance();
+        Calendar dateCal = Calendar.getInstance();
+        todayCal.setTime(new Date());
+        dateCal.setTime(date);
+        // 1.比较当前日期在年份中的周数是否相同
+        if (todayCal.get(Calendar.WEEK_OF_YEAR) == dateCal.get(Calendar.WEEK_OF_YEAR)) {
+            return true;
+        } else {
+            return false;
         }
     }
 

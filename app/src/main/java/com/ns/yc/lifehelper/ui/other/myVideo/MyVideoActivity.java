@@ -48,7 +48,12 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
     private int pageSize = 10;      //每一页显示的个数
 
     private ArrayList<VideoIconBean> iconData;
-    private MyVideoActivity activity;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -57,7 +62,6 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void initView() {
-        activity = MyVideoActivity.this;
         initToolBar();
         initIconData();
         initViewPager();
@@ -111,7 +115,7 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
             GridView gridView = (GridView) inflater.inflate(R.layout.item_vp_grid_view,vpPager,false);
             GridView gv = (GridView) gridView.findViewById(R.id.gridView);
             gv.setNumColumns(5);
-            gridView.setAdapter(new VideoGridAdapter(activity, iconData, a, pageSize));
+            gridView.setAdapter(new VideoGridAdapter(MyVideoActivity.this, iconData, a, pageSize));
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -137,7 +141,7 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
         final ImageView[] ivPoints = new ImageView[pageCount];
         for (int i = 0; i < pageCount; i++) {
             //循坏加入点点图片组
-            ivPoints[i] = new ImageView(activity);
+            ivPoints[i] = new ImageView(MyVideoActivity.this);
             if (i == 0) {
                 ivPoints[i].setImageResource(R.drawable.ic_page_focuese);
             } else {

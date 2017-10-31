@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.ui.find;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,23 +17,26 @@ import com.ns.yc.lifehelper.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.bean.ImageIconBean;
-import com.ns.yc.lifehelper.ui.find.view.RiddleActivity;
-import com.ns.yc.lifehelper.ui.main.MainActivity;
-import com.ns.yc.lifehelper.ui.other.bookReader.BookReaderActivity;
-import com.ns.yc.lifehelper.ui.other.douBook.DouBookActivity;
-import com.ns.yc.lifehelper.ui.other.douMovie.DouMovieActivity;
-import com.ns.yc.lifehelper.ui.other.douMusic.DouMusicActivity;
+import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
+import com.ns.yc.lifehelper.ui.find.view.activity.RiddleActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.BookReaderActivity;
+import com.ns.yc.lifehelper.ui.other.douBook.view.DouBookActivity;
+import com.ns.yc.lifehelper.ui.other.douMovie.view.DouMovieActivity;
+import com.ns.yc.lifehelper.ui.other.douMusic.view.DouMusicActivity;
+import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKHomeActivity;
+import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myMusic.MyMusicActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.SongCiActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.YuanQuActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.view.TangShiFirstActivity;
 import com.ns.yc.lifehelper.ui.other.myVideo.MyVideoActivity;
+import com.ns.yc.lifehelper.ui.other.notePad.NotePadActivity;
 import com.ns.yc.lifehelper.ui.other.sharpBendOfBrain.SharpBendOfBrainActivity;
 import com.ns.yc.lifehelper.ui.other.timeListener.TimeListenerActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -55,6 +59,8 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
     TextView tvPlayer;
     @Bind(R.id.tv_photo)
     TextView tvPhoto;
+    @Bind(R.id.tv_reader)
+    TextView tvReader;
     @Bind(R.id.tv_dou_movie)
     TextView tvDouMovie;
     @Bind(R.id.tv_dou_music)
@@ -74,17 +80,6 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
     private MainActivity activity;
-
-    private List<View> viewPagerList;       //GridView作为一个View对象添加到ViewPager集合中
-    private ImageView[] ivPoints;           //小圆点图片的集合
-    private int totalPage;                  //总的页数
-    private int mPageSize = 8;              //每页显示的最大的数量
-
-    private int[] proPic = {R.drawable.ic_investment, R.drawable.ic_project, R.drawable.ic_financing, R.drawable.ic_show,
-            R.drawable.ic_project, R.drawable.ic_show, R.drawable.ic_project, R.drawable.ic_investment,
-            R.drawable.ic_investment, R.drawable.ic_project, R.drawable.ic_financing, R.drawable.ic_show};
-    private String[] proName = {"猜谜语", "阅读器", "急转弯", "笑话大全", "股票", "身份证", "人脸识别", "时光聆听", "空气质量", "今日油价", "翻译", "缴费"};
-
 
     @Override
     public void onAttach(Context context) {
@@ -113,7 +108,6 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void initView() {
         iniVpData();
-        initViewPager();
     }
 
 
@@ -122,6 +116,7 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
         tvMusic.setOnClickListener(this);
         tvPhoto.setOnClickListener(this);
         tvPlayer.setOnClickListener(this);
+        tvReader.setOnClickListener(this);
         tvDouMusic.setOnClickListener(this);
         tvDouMovie.setOnClickListener(this);
         tvDouBook.setOnClickListener(this);
@@ -148,6 +143,9 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
             case R.id.tv_player:
                 startActivity(MyVideoActivity.class);
                 break;
+            case R.id.tv_reader:
+                startActivity(BookReaderActivity.class);
+                break;
             case R.id.tv_dou_movie:
                 startActivity(DouMovieActivity.class);
                 break;
@@ -170,13 +168,18 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void iniVpData() {
+        int mPageSize = 8;          //每页显示的最大的数量
         ArrayList<ImageIconBean> listDatas = new ArrayList<>();
-        for (int i = 0; i < proPic.length; i++) {
-            listDatas.add(new ImageIconBean(proName[i], proPic[i]));
+        TypedArray proPic = activity.getResources().obtainTypedArray(R.array.find_pro_pic);
+        String[] proName = activity.getResources().getStringArray(R.array.find_pro_title);
+        for (int i = 0; i < proName.length; i++) {
+            int proPicId = proPic.getResourceId(i, R.drawable.ic_investment);
+            listDatas.add(new ImageIconBean(proName[i], proPicId));
         }
-        //总的页数向上取整
-        totalPage = (int) Math.ceil(listDatas.size() * 1.0 / mPageSize);
-        viewPagerList = new ArrayList<>();
+        proPic.recycle();
+        //总的页数向上取整  //总的页数
+        final int totalPage = (int) Math.ceil(listDatas.size() * 1.0 / mPageSize);
+        ArrayList<View> viewPagerList = new ArrayList<>();
         for (int i = 0; i < totalPage; i++) {
             //每个页面都是inflate出一个新实例
             final GridView gridView = (GridView) View.inflate(activity, R.layout.item_vp_grid_view, null);
@@ -189,16 +192,22 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
                     if (obj != null && obj instanceof ImageIconBean) {
                         switch (position) {
                             case 0:
-                                startActivity(RiddleActivity.class);
+                                startActivity(GanKHomeActivity.class);
                                 break;
                             case 1:
-                                startActivity(BookReaderActivity.class);
+                                startActivity(MobilePlayerActivity.class);
                                 break;
                             case 2:
-                                startActivity(SharpBendOfBrainActivity.class);
+                                startActivity(NotePadActivity.class);
+                                break;
+                            case 3:
+                                startActivity(RiddleActivity.class);
                                 break;
                             case 4:
-
+                                startActivity(SharpBendOfBrainActivity.class);
+                                break;
+                            case 5:
+                                startActivity(DoodleViewActivity.class);
                                 break;
                             case 7:
                                 startActivity(TimeListenerActivity.class);
@@ -217,7 +226,7 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
         vpPager.setAdapter(new ViewPagerRollAdapter(viewPagerList));
 
         //添加小圆点
-        ivPoints = new ImageView[totalPage];
+        final ImageView[] ivPoints = new ImageView[totalPage];
         for (int i = 0; i < totalPage; i++) {
             //循坏加入点点图片组
             ivPoints[i] = new ImageView(activity);
@@ -229,10 +238,7 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
             ivPoints[i].setPadding(8, 8, 8, 8);
             llPoints.addView(ivPoints[i]);
         }
-    }
 
-
-    private void initViewPager() {
         //设置ViewPager的滑动监听，主要是设置点点的背景颜色的改变
         vpPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -247,6 +253,5 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
-
 
 }

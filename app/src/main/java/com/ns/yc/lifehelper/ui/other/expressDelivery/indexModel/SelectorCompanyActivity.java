@@ -94,6 +94,14 @@ public class SelectorCompanyActivity extends BaseActivity implements View.OnClic
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*if(realm!=null){
+            realm.close();
+        }*/
+    }
+
+    @Override
     public int getContentView() {
         return R.layout.activity_express_delivery_index;
     }
@@ -108,7 +116,9 @@ public class SelectorCompanyActivity extends BaseActivity implements View.OnClic
     }
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     @Override
@@ -335,6 +345,7 @@ public class SelectorCompanyActivity extends BaseActivity implements View.OnClic
      * @param result
      */
     private void StartCacheExpressCompany(List<ExpressDeliveryBean.ResultBean> result) {
+        initRealm();
         if(realm!=null && realm.where(CacheExpressCompany.class).findAll()!=null){
             cacheExpressCompanies = realm.where(CacheExpressCompany.class).findAll();
         }else {
@@ -359,6 +370,7 @@ public class SelectorCompanyActivity extends BaseActivity implements View.OnClic
      * 读取缓存
      */
     private void readCacheExpressCompany() {
+        initRealm();
         if(realm!=null && realm.where(CacheExpressCompany.class).findAll()!=null){
             cacheExpressCompanies = realm.where(CacheExpressCompany.class).findAll();
         }else {

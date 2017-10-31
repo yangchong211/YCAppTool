@@ -10,12 +10,13 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.cache.CacheToDoDetail;
-import com.ns.yc.lifehelper.listener.OnItemClickListener;
+import com.ns.yc.lifehelper.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.toDo.ToDoTimerActivity;
 import com.ns.yc.lifehelper.ui.other.toDo.adapter.ToDoAdapter;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.ToDoDetail;
-import com.pedaily.yc.ycdialoglib.bottom.CustomBottomDialog;
-import com.pedaily.yc.ycdialoglib.bottom.CustomItem;
+import com.pedaily.yc.ycdialoglib.bottomMenu.CustomBottomDialog;
+import com.pedaily.yc.ycdialoglib.bottomMenu.CustomItem;
+import com.pedaily.yc.ycdialoglib.bottomMenu.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,13 @@ public class ToDoTimerFragment extends BaseFragment {
         activity = null;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        /*if(realm!=null){
+            realm.close();
+        }*/
+    }
 
     @Override
     public void onDestroyView() {
@@ -95,7 +103,9 @@ public class ToDoTimerFragment extends BaseFragment {
     }
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     @Override
@@ -112,7 +122,7 @@ public class ToDoTimerFragment extends BaseFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         adapter = new ToDoAdapter(list,activity);
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new OnItemClickListener() {
+        adapter.setOnItemClickListener(new OnListItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
@@ -128,6 +138,7 @@ public class ToDoTimerFragment extends BaseFragment {
 
 
     public void addDataNotify(){
+        initRealm();
         if(realm==null){
             return;
         }
@@ -161,7 +172,7 @@ public class ToDoTimerFragment extends BaseFragment {
                 .title("选择分类")
                 .setCancel(true,"取消选择")
                 .orientation(CustomBottomDialog.VERTICAL)
-                .inflateMenu(R.menu.to_do_bottom_sheet, new com.pedaily.yc.ycdialoglib.bottom.OnItemClickListener() {
+                .inflateMenu(R.menu.to_do_bottom_sheet, new OnItemClickListener() {
                     @Override
                     public void click(CustomItem item) {
                         //String title = item.getTitle();

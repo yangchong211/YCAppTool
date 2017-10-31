@@ -49,8 +49,13 @@ public class MyPicBeautifulActivity extends BaseActivity implements View.OnClick
     SlidingTabLayout stlTab;
     @Bind(R.id.vp_content)
     ViewPager vpContent;
-    private MyPicBeautifulActivity activity;
     private List<Fragment> fragments = new ArrayList<>();
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public int getContentView() {
@@ -59,7 +64,6 @@ public class MyPicBeautifulActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void initView() {
-        activity = MyPicBeautifulActivity.this;
         initToolBar();
         initTabData();
     }
@@ -91,7 +95,7 @@ public class MyPicBeautifulActivity extends BaseActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ll_search:
-                Intent intent = new Intent(activity,NewsSearchActivity.class);
+                Intent intent = new Intent(MyPicBeautifulActivity.this,NewsSearchActivity.class);
                 intent.putExtra("type","wx");
                 startActivity(intent);
                 break;

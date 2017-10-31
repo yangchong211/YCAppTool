@@ -94,6 +94,14 @@ public class ToDoAddActivity extends BaseActivity implements View.OnClickListene
     private int priority = 0;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*if(realm!=null){
+            realm.close();
+        }*/
+    }
+
+    @Override
     public int getContentView() {
         return R.layout.activity_to_do_edit;
     }
@@ -108,7 +116,9 @@ public class ToDoAddActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm == null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     @Override
@@ -277,6 +287,7 @@ public class ToDoAddActivity extends BaseActivity implements View.OnClickListene
             ToastUtils.showShortSafe("内容不能为空");
             return;
         }
+        initRealm();
         if(realm.where(CacheToDoDetail.class).findAll()!=null){
             cacheToDoDetails = realm.where(CacheToDoDetail.class).findAll();
         }

@@ -17,7 +17,7 @@ import com.ns.yc.lifehelper.api.ConstantKeys;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.receiver.TimerReceiver;
 import com.ns.yc.lifehelper.service.TimerService;
-import com.ns.yc.lifehelper.ui.main.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.ns.yc.yccountdownviewlib.CountDownView;
@@ -49,6 +49,14 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
     CountDownView cdvTime;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(cdvTime!=null && cdvTime.isShown()){
+            cdvTime.stop();
+        }
+    }
+
+    @Override
     public int getContentView() {
         return R.layout.activity_guide;
     }
@@ -59,7 +67,7 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
         initImage();
         initConstantData();
         initCountDownView();
-        initService();
+        //initService();
         //initTimer();
         //initAlarmManager();
         //initAlarmManagerSecond();
@@ -80,13 +88,6 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
         // 先显示默认图
         int i = new Random().nextInt(ConstantImageApi.SPALSH_URLS.length);
         ImageUtils.loadImgByPicassoError(this, ConstantImageApi.SPALSH_URLS[i], R.drawable.pic_page_background, ivSplashAd);
-
-        /*new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                toMainActivity();
-            }
-        }, 3000);*/
     }
 
     private void initCountDownView() {
@@ -102,6 +103,7 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onClick(View v) {
                 cdvTime.stop();
+                finish();
             }
         });
     }
@@ -128,6 +130,8 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
         Constant.isLogin = SPUtils.getInstance(Constant.SP_NAME).getBoolean(ConstantKeys.IS_LOGIN);
     }
 
+
+    /**---------------------------下面是测试功能，主要是做投资界全局弹窗功能--------------------------**/
     /**
      * 开启一个服务，在服务中倒计时
      */
@@ -146,7 +150,7 @@ public class GuideActivity extends BaseActivity implements View.OnClickListener 
             }
 
             public void onFinish() {
-                DialogUtils.showWindowToast("全局吐司");
+                //DialogUtils.showWindowToast("全局吐司");
                 //IllegalStateException: You need to use a Theme.AppCompat theme (or descendant) with this activity.
                 //DialogUtils.showAllAlertDialog(GuideActivity.this);
                 DialogUtils.showWindowDialog();
