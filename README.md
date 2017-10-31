@@ -41,6 +41,7 @@
 - 仿360杀毒小工具（通讯，软件管家，缓存清理，流量统计，通讯卫士等功能）
 - 其他功能（更换皮肤，跳转应用市场评分，夜间模式，版本更新，）
 - 部分板块功能正在完善中，主要是用于练手，因此界面不是很美观
+- 干货集中营
 
 
 ### 4.关于相关特性说明
@@ -67,7 +68,7 @@
 - 关于自定义Dialog，Toast，PopupWindow等
 - 关于线程并发的难题以及解决方案（这个是一同事给的提示，debug无法检测）
 - 关于平时开发中遇到的bug总结
-- 关于设计模式，最近正在重新阅读《Android源码实际模式解析与实战》，并且逐步引用设计模式。具体可参考开源项目：【YCDialog】(https://github.com/yangchong211/YCDialog)
+- 关于设计模式，最近正在重新阅读《Android源码实际模式解析与实战》，并且逐步引用设计模式。具体可参考开源项目：【YCDialog】(https://github.com/yangchong211/YCDialog)，
 
 
 ### 6.关于开源项目说明
@@ -86,18 +87,25 @@
     - 2.自定义弹窗以及自定义Loading加载
     - 3.自定义启动页圆形倒计时器
     - 4.自定义状态管理器
+    - 5.自定义工具类
+    - 6.自定义图文混排超文本
+    - 7.自定义倒计数文本
 
 
 ### 7.关于参考项目说明
 - 参考的项目有：云阅，开源中国，番茄周，Geek系列，MusicPlayer，仿网易新闻等项目
 
 ### 8.关于版本更新说明
-- v1.2版本
+- v1.2版本【9月16日】
     - 添加了音乐和视频【Vitamio】版块，包括读取本地视频及音乐，音乐播放，视频播放基础功能
     - 加入了腾讯bugly管理
     - 修复了某些内存泄漏bug，添加了全局弹窗功能【投资界功能】，跳转应用市场【3种方法】，自定义弹窗功能
     - 缓存了部分数据，例如唐诗宋词，快递的公司列表，直接使用realm缓存到本地
     - 由于部分网络Api接口有数据访问量限制，因此添加了同一天之请求一次网络数据功能【同一天其他时间访问走缓存】
+- v1.3版本【10月31】
+    - 添加了自定义超文本控件，支持图文混排，并且支持键盘键【x号】删除图片，使用Realm数据库
+    - 初步尝试改版干货集中营版本为MVP结构
+    - 修复了部分bug，完善了播放器部分
 
 ### 9.关于获取更多信息
 - 知乎：https://www.zhihu.com/people/yang-chong-69-24/pins/posts
@@ -161,6 +169,11 @@
 - 天气页面
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-53-23.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-53-26.png)
+- 干货集中营
+- ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-31-19-48-39.png)
+- 图文混排超文本
+- ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-31-19-46-58.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-31-19-48-13.png)
 - 记事本页面
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-18-19.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-18-36.png)
