@@ -189,6 +189,8 @@
 - 图文混排超文本
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-31-19-46-58.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-31-19-48-13.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-11-13-18-55-55.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-11-13-18-56-05.png)
 - 记事本页面
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-18-19.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-18-36.png)
