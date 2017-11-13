@@ -14,6 +14,9 @@
 * 13.关于bug管理说明
 * 14.关于我的博客
 
+### 0.关于博客笔记大整理，持续更新迭代
+- 可以直接看：[博客笔记](http://www.jianshu.com/p/53017c3fc75d)
+
 ### 1.关于前言介绍
 - 关于开发的APP有：[投资界](http://openbox.mobilem.360.cn/index/d/sid/3583538)，[新芽](http://openbox.mobilem.360.cn/index/d/sid/3425699)，可以在应用市场上下载
 - 此项目属于业余时间练手的项目，接口数据来源均来自网络，自己付费购买了阿里云和极速网络接口数据，同时使用了部分免费接口，如果存在侵权情况，请第一时间告知。
@@ -34,7 +37,7 @@
 - 豆瓣电影，音乐，读书（豆瓣接口）
 - 唐诗，宋词，元曲
 - 快递查询
-- 天气
+- 天气，自定义七日天气折线图，背景可以设置动态图，模仿华为天气App
 - 简易记事本
 - 绘画板
 - 计时器（闹钟）
@@ -42,6 +45,8 @@
 - 其他功能（更换皮肤，跳转应用市场评分，夜间模式，版本更新，）
 - 部分板块功能正在完善中，主要是用于练手，因此界面不是很美观
 - 干货集中营
+- 超文本笔记本，可以支持文字，图片，动态图混排
+- 画廊欣赏图片
 
 
 ### 4.关于相关特性说明
@@ -96,16 +101,23 @@
 - 参考的项目有：云阅，开源中国，番茄周，Geek系列，MusicPlayer，仿网易新闻等项目
 
 ### 8.关于版本更新说明
+- v1.0版本【2016年9月-2017年8月】
 - v1.2版本【9月16日】
     - 添加了音乐和视频【Vitamio】版块，包括读取本地视频及音乐，音乐播放，视频播放基础功能
     - 加入了腾讯bugly管理
     - 修复了某些内存泄漏bug，添加了全局弹窗功能【投资界功能】，跳转应用市场【3种方法】，自定义弹窗功能
     - 缓存了部分数据，例如唐诗宋词，快递的公司列表，直接使用realm缓存到本地
     - 由于部分网络Api接口有数据访问量限制，因此添加了同一天之请求一次网络数据功能【同一天其他时间访问走缓存】
-- v1.3版本【10月31】
+- v1.3版本【10月31日】
     - 添加了自定义超文本控件，支持图文混排，并且支持键盘键【x号】删除图片，使用Realm数据库
     - 初步尝试改版干货集中营版本为MVP结构
     - 修复了部分bug，完善了播放器部分
+- v1.4版本【11月13日】
+    - 完善干货集中营模块代码，修复了加载图片失败bug，支持收藏
+    - 优化了超文本记事本功能，增加了闹钟功能，自动发送通知。
+    - 继续完善了七日天气版块的功能，增加了设置动态背景，切换背景，修复了时间显示错误bug，TODO，后期添加选择地区，查询天气功能
+    - 减少了静态变量，例如图片集合，文字集合等；该为array中设置，节省开辟更多内存空间。
+    
 
 ### 9.关于获取更多信息
 - 知乎：https://www.zhihu.com/people/yang-chong-69-24/pins/posts
@@ -171,6 +183,9 @@
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-53-26.png)
 - 干货集中营
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-31-19-48-39.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-11-13-18-44-25.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-11-13-18-44-35.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-11-13-18-44-15.png)
 - 图文混排超文本
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-31-19-46-58.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-10-31-19-48-13.png)
@@ -178,6 +193,9 @@
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-18-19.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-18-36.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-18-51.png)
+- 七日天气
+- ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-11-13-18-42-02.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-11-13-18-42-05.png)
 - 快递页面
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-17-57.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-18-06.png)
