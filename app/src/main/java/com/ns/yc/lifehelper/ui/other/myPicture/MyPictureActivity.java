@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -13,6 +15,10 @@ import android.widget.TextView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.ui.data.view.activity.GalleryImageActivity;
+import com.ns.yc.lifehelper.ui.other.myPicture.view.MyPicBeautifulActivity;
+import com.ns.yc.lifehelper.ui.other.myPicture.view.MyPicNiceActivity;
+import com.ns.yc.lifehelper.ui.other.myPicture.view.MyPicPileActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.view.fragment.PictureHomeFragment;
 import com.ns.yc.lifehelper.ui.other.myPicture.view.fragment.PictureOtherFragment;
 
@@ -74,8 +80,13 @@ public class MyPictureActivity extends BaseActivity implements View.OnClickListe
 
     private void initToolBar() {
         llSearch.setVisibility(View.VISIBLE);
-        ivRightImg.setImageResource(R.drawable.book_detail_info_add_img);
+        //ivRightImg.setImageResource(R.drawable.book_detail_info_add_img);
+        ivRightImg.setBackgroundResource(R.drawable.book_detail_info_add_img);
         toolbarTitle.setText("图片欣赏");
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
@@ -97,6 +108,32 @@ public class MyPictureActivity extends BaseActivity implements View.OnClickListe
                 break;
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_picture_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item1:
+                startActivity(GalleryImageActivity.class);
+                break;
+            case R.id.item2:
+                startActivity(MyPicBeautifulActivity.class);
+                break;
+            case R.id.item3:
+                startActivity(MyPicPileActivity.class);
+                break;
+            case R.id.item4:
+                startActivity(MyPicNiceActivity.class);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     private String[] titles = {"热门推荐","动漫","唯美","美女","风景","旅游","军事","电影壁纸","萌宠","游戏壁纸"};

@@ -3,9 +3,9 @@ package com.ns.yc.lifehelper.ui.other.gank.bean;
 import java.io.Serializable;
 
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
-
+@RealmClass
 public class GanKFavorite extends RealmObject implements Serializable{
 
     private String title;
@@ -13,7 +13,7 @@ public class GanKFavorite extends RealmObject implements Serializable{
     private String author;
     private String data;
     private String url;
-    @PrimaryKey
+    //@PrimaryKey
     private String gankID;
     private long createtime;
 

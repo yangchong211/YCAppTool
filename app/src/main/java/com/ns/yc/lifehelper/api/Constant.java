@@ -52,6 +52,14 @@ public class Constant {
         public static final int error=-1;
     }
 
+    /**-------------------------------------记事本----------------------------------------------**/
+    public static String DAY_OF_WEEK = "day_of_week";
+    public static String ADD_NEW_OLD = "add_new_old";
+    public interface NOTE_TYPE{
+        int add_new = 1;            //新建
+        int add_old = 2;            //修改
+    }
+
 
     /**-------------------------------------键-------------------------------------------------**/
     //Sp键

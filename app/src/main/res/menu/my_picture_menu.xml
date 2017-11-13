@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".ui.other.myPicture.MyPictureActivity">
+
+    <item
+        android:id="@+id/item1"
+        android:orderInCategory="100"
+        android:title="画廊效果"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/item2"
+        android:orderInCategory="100"
+        android:title="美图欣赏"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/item3"
+        android:orderInCategory="100"
+        android:title="滑动卡片"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/item4"
+        android:orderInCategory="100"
+        android:title="不规则图片"
+        app:showAsAction="never" />
+</menu>

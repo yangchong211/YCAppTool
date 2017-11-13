@@ -177,7 +177,7 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
 
 
     private void getWxDataChanel() {
-        WxNewsModel model = WxNewsModel.getInstance(WxNewsActivity.this);
+        WxNewsModel model = WxNewsModel.getInstance();
         model.getWxNewsChannel(ConstantALiYunApi.Key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

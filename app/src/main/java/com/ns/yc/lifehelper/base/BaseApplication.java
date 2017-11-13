@@ -10,6 +10,8 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.LogInterceptor;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -32,7 +34,7 @@ public class BaseApplication extends Application {
 
 
     private static BaseApplication instance;
-    //private RefWatcher refWatcher;
+    private RefWatcher refWatcher;
 
     public static synchronized BaseApplication getInstance() {
         if (null == instance) {
@@ -73,7 +75,7 @@ public class BaseApplication extends Application {
         initUtils();
         initRealm();
         initOkHttpUtils();
-        //initLeakCanary();                               //Square公司内存泄漏检测工具
+        initLeakCanary();                               //Square公司内存泄漏检测工具
         initBugly();                                    //初始化腾讯bug管理平台
         BaseAppManager.getInstance().init(this);        //栈管理
         BaseConfig.INSTANCE.initConfig();               //初始化配置信息
@@ -87,6 +89,10 @@ public class BaseApplication extends Application {
     public void onTerminate() {
         Log.d("Application", "onTerminate");
         super.onTerminate();
+        if(realm!=null){
+            realm.close();
+            realm = null;
+        }
     }
 
     /**
@@ -158,9 +164,9 @@ public class BaseApplication extends Application {
         OkHttpUtils.initClient(okHttpClient);
     }
 
-/*    *//**
+    /**
      * 初始化内存泄漏检测工具
-     *//*
+     */
     private void initLeakCanary() {
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
@@ -168,15 +174,15 @@ public class BaseApplication extends Application {
         refWatcher = LeakCanary.install(this);
     }
 
-    *//**
+    /**
      * 获取RefWatcher对象
      * @param context
      * @return
-     *//*
+     */
     public static RefWatcher getRefWatcher(Context context) {
         BaseApplication application = (BaseApplication) context.getApplicationContext();
         return application.refWatcher;
-    }*/
+    }
 
     /**
      * 初始化腾讯bug管理平台

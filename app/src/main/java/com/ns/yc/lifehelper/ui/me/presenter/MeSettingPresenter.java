@@ -146,7 +146,7 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
     public void cleanAppCache(final Activity activity) {
         AlertDialog.Builder normalDialog = new AlertDialog.Builder(activity);
         normalDialog.setTitle("温馨提示");
-        normalDialog.setMessage("是否清空新芽缓存");
+        normalDialog.setMessage("是否清空缓存");
         normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

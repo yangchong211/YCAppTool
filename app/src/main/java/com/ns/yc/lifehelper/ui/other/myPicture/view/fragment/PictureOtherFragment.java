@@ -13,9 +13,8 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseFragment;
-import com.ns.yc.lifehelper.ui.other.myNews.txNews.view.TxNewsFragment;
+import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.adapter.PictureOtherAdapter;
-import com.ns.yc.lifehelper.ui.other.myPicture.view.MyPicLargeActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,16 +32,16 @@ import butterknife.ButterKnife;
 public class PictureOtherFragment extends BaseFragment {
 
     private static final String TYPE = "";
-    private MyPicLargeActivity activity;
+    private MyPictureActivity activity;
     private String mType;
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
     private PictureOtherAdapter adapter;
 
-    public static Fragment newInstance(String param1) {
-        TxNewsFragment fragment = new TxNewsFragment();
+    public static Fragment newInstance(String param) {
+        PictureOtherFragment fragment = new PictureOtherFragment();
         Bundle args = new Bundle();
-        args.putString(TYPE, param1);
+        args.putString(TYPE, param);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,7 +49,7 @@ public class PictureOtherFragment extends BaseFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (MyPicLargeActivity) context;
+        activity = (MyPictureActivity) context;
     }
 
 

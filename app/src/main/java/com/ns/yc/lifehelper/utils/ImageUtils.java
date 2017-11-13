@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.weight.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -49,20 +50,6 @@ public class ImageUtils {
         if(path!=0){
             Picasso.with(context)
                     .load(path)
-                    .into(target);
-        }
-    }
-
-    /**
-     * 加载图片
-     * @param context
-     * @param path
-     * @param target
-     */
-    public static void loadImgByPicassoLocation(Context context , int path, ImageView target) {
-        if(path!=0){
-            Picasso.with(context)
-                    .load(path)
                     .placeholder(path)
                     .into(target);
         }
@@ -71,14 +58,15 @@ public class ImageUtils {
 
     /**
      * 加载本地图片
-     * @param context
-     * @param path
-     * @param target
+     * @param context       上下文
+     * @param path          路径
+     * @param target        view
      */
     public static void loadImgByPicassoWithCircle(Context context , int path, ImageView target) {
         if(path>0){
             Picasso.with(context)
                     .load(path)
+                    .placeholder(R.drawable.avatar_default)
                     .transform(new CircleTransform())
                     .into(target);
         }
@@ -155,6 +143,13 @@ public class ImageUtils {
         if(url!=null && url.length()>0){
             Glide.with(context)
                     .load(url)
+                    .asBitmap()
+                    .placeholder(resId)
+                    .error(resId)
+                    .into(imageView);
+        }else {
+            Glide.with(context)
+                    .load(resId)
                     .asBitmap()
                     .placeholder(resId)
                     .error(resId)

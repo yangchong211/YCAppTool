@@ -6,7 +6,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.view.MainActivity"
+    tools:context=".ui.main.view.activity.MainActivity"
     android:fitsSystemWindows="true">
 
     <android.support.v7.widget.Toolbar

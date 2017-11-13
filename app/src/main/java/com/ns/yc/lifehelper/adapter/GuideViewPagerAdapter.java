@@ -1,7 +1,6 @@
 package com.ns.yc.lifehelper.adapter;
 
 
-import android.app.Activity;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,9 @@ import java.util.ArrayList;
 public class GuideViewPagerAdapter extends PagerAdapter {
 
     private final ArrayList<View> views;
-    private final Activity content;
 
-    public GuideViewPagerAdapter(ArrayList<View> picLists, Activity context) {
+    public GuideViewPagerAdapter(ArrayList<View> picLists) {
         this.views = picLists;
-        this.content = context;
     }
 
     @Override

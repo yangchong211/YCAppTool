@@ -1,5 +1,8 @@
 package com.ns.yc.lifehelper.ui.other.notePad.activity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -12,12 +15,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.TimeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -26,17 +32,25 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.cache.CacheNotePad;
+import com.ns.yc.lifehelper.listener.OnDatePickListener;
+import com.ns.yc.lifehelper.listener.OnTimePickListener;
+import com.ns.yc.lifehelper.receiver.ReminderReceiver;
 import com.ns.yc.lifehelper.ui.me.view.adapter.GlideImageLoader;
 import com.ns.yc.lifehelper.ui.other.notePad.bean.NotePadDetail;
+import com.ns.yc.lifehelper.ui.other.notePad.fragment.DatePickerFragment;
+import com.ns.yc.lifehelper.ui.other.notePad.fragment.TimePickerFragment;
 import com.ns.yc.lifehelper.utils.AppImageUtils;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.SDCardUtils;
 import com.ns.yc.lifehelper.utils.StringUtils;
+import com.ns.yc.lifehelper.utils.TimerUtils;
 import com.ns.yc.yccustomtextlib.HyperTextEditor;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -75,6 +89,12 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
     EditText etNewTitle;
     @Bind(R.id.et_new_content)
     HyperTextEditor etNewContent;
+    @Bind(R.id.cb_alarm)
+    CheckBox cbAlarm;
+    @Bind(R.id.tv_note_time)
+    TextView tvNoteTime;
+    @Bind(R.id.tv_note_date)
+    TextView tvNoteDate;
 
     private int maxImgCount = 5;                        //允许选择图片最大数
     private int flag;
@@ -82,6 +102,8 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
     private RealmResults<CacheNotePad> cacheNotePads;
     private NotePadDetail notePadDetail;
     private int id;
+    private boolean isPicked = false;
+    private AlarmManager alarmMgr;
 
 
     @Override
@@ -97,7 +119,7 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
     protected void onStop() {
         super.onStop();
         //如果APP处于后台，或者手机锁屏，则保存数据
-        if(AppUtil.isAppOnBackground(getApplicationContext()) || AppUtil.isLockScreen(getApplicationContext())){
+        if (AppUtil.isAppOnBackground(getApplicationContext()) || AppUtil.isLockScreen(getApplicationContext())) {
             saveNoteData(true);
         }
     }
@@ -120,11 +142,12 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
         initToolBar();
         initRealm();
         initImagePicker();
+        initAlarmManager();
     }
 
 
     private void initRealm() {
-        if(realm == null){
+        if (realm == null) {
             realm = BaseApplication.getInstance().getRealmHelper();
         }
     }
@@ -141,15 +164,15 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
 
     private void initIntentData() {
         Intent intent = getIntent();
-        if(intent!=null){
+        if (intent != null) {
             flag = intent.getIntExtra("flag", 0);
             id = intent.getIntExtra("id", 1);
-            if(flag==0){
+            if (flag == 0) {
                 //新建
                 toolbarTitle.setText("新建笔记");
-                tvNoteDetailDate.setText(TimeUtils.date2String(new Date()));
+                tvNoteDetailDate.setText("当下");
                 tvNoteType.setText("默认笔记");
-            }else {
+            } else {
                 //编辑
                 toolbarTitle.setText("编辑笔记");
                 Bundle bundle = intent.getBundleExtra("data");
@@ -163,7 +186,25 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
         tvNoteType.setOnClickListener(this);
+        tvNoteDate.setOnClickListener(this);
+        tvNoteTime.setOnClickListener(this);
+        cbAlarm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    //first time, so pick date and time.
+                    if (!isPicked) {
+                        pickDate();
+                    }
+                    //has date and time ,just show it.
+                    showDateTimeViews();
+                } else {
+                    hideDateTimeViews();
+                }
+            }
+        });
     }
+
 
     @Override
     public void initData() {
@@ -192,15 +233,47 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_title_menu:
                 backAndExit();
                 break;
             case R.id.tv_note_type:
-                ToastUtil.showToast(NotePadNewActivity.this,"笔记类型后期添加");
+                ToastUtil.showToast(NotePadNewActivity.this, "笔记类型后期添加");
+                break;
+            case R.id.tv_note_date:
+                pickDate();
+                break;
+            case R.id.tv_note_time:
+                pickTime();
                 break;
         }
     }
+
+
+    private void showDateTimeViews() {
+        tvNoteDate.setVisibility(View.VISIBLE);
+        tvNoteTime.setVisibility(View.VISIBLE);
+    }
+
+    private void hideDateTimeViews() {
+        tvNoteDate.setVisibility(View.INVISIBLE);
+        tvNoteTime.setVisibility(View.INVISIBLE);
+        // If the alarm has been set, cancel it.
+        cancelReminder();
+    }
+
+    private PendingIntent alarmIntent;
+    private long mItemID = -1L;
+    private void cancelReminder() {
+        if (alarmIntent == null && mItemID != -1L) {
+            //not add note
+            Intent mIntent = new Intent(NotePadNewActivity.this, ReminderReceiver.class);
+            alarmIntent = PendingIntent.getBroadcast(NotePadNewActivity.this,
+                    (int) mItemID, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+        alarmMgr.cancel(alarmIntent);
+    }
+
 
     /**
      * 初始化图片选择器
@@ -241,7 +314,7 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
      * 展示数据
      */
     private void showData(final NotePadDetail notePadDetail) {
-        if(notePadDetail.getCreateTime()!=null){
+        if (notePadDetail.getCreateTime() != null) {
             tvNoteDetailDate.setText(notePadDetail.getCreateTime());
         }
         tvNoteType.setText(String.valueOf(notePadDetail.getType()));
@@ -261,7 +334,7 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
     /**
      * 异步方式显示数据
      */
-    private void showDataSync(final String html){
+    private void showDataSync(final String html) {
         Subscription subsLoading = Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
@@ -280,7 +353,7 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        ToastUtil.showToast(NotePadNewActivity.this,"解析错误：图片不存在或已损坏");
+                        ToastUtil.showToast(NotePadNewActivity.this, "解析错误：图片不存在或已损坏");
                     }
 
                     @Override
@@ -295,12 +368,11 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
     }
 
 
-
     /**
      * 显示数据
      */
     protected void showEditData(Subscriber<? super String> subscriber, String html) {
-        try{
+        try {
             List<String> textList = StringUtils.cutStringByImgTag(html);
             for (int i = 0; i < textList.size(); i++) {
                 String text = textList.get(i);
@@ -309,20 +381,18 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
                     if (new File(imagePath).exists()) {
                         subscriber.onNext(imagePath);
                     } else {
-                        ToastUtil.showToast(NotePadNewActivity.this,"图片"+i+"已丢失，请重新插入！");
+                        ToastUtil.showToast(NotePadNewActivity.this, "图片" + i + "已丢失，请重新插入！");
                     }
                 } else {
                     subscriber.onNext(text);
                 }
             }
             subscriber.onCompleted();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             subscriber.onError(e);
         }
     }
-
-
 
 
     /**
@@ -343,20 +413,20 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
         String type = tvNoteType.getText().toString();
         String time = tvNoteDetailDate.getText().toString();
         String content = getHyperContent();
-        if(TextUtils.isEmpty(title)){
-            ToastUtil.showToast(NotePadNewActivity.this,"标题不能为空");
+        if (TextUtils.isEmpty(title)) {
+            ToastUtil.showToast(NotePadNewActivity.this, "标题不能为空");
             return;
         }
-        if(TextUtils.isEmpty(content)){
-            ToastUtil.showToast(NotePadNewActivity.this,"内容不能为空");
+        if (TextUtils.isEmpty(content)) {
+            ToastUtil.showToast(NotePadNewActivity.this, "内容不能为空");
             return;
         }
-        switch (flag){
+        switch (flag) {
             case 0:                 //新建笔记保存
-                insertNewDataRealm(isBackground,title,type,time,content);
+                insertNewDataRealm(isBackground, title, type, time, content);
                 break;
             case 1:                 //修改笔记保存
-                editOldDataRealm(isBackground,title,type,time,content);
+                editOldDataRealm(isBackground, title, type, time, content);
                 break;
         }
     }
@@ -385,6 +455,7 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
      * 用这个一直报错：Center crop requires calling resize with positive width and height
      */
     private ArrayList<String> photos = new ArrayList<>();
+
     private void insertImagesSync(final Intent data) {
         Subscription subsInsert = Observable.create(new Observable.OnSubscribe<String>() {
             @Override
@@ -447,9 +518,9 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
      */
     private void insertNewDataRealm(boolean isBackground, String title, String type, String time, String content) {
         initRealm();
-        if(realm!=null && realm.where(CacheNotePad.class).findAll()!=null){
+        if (realm != null && realm.where(CacheNotePad.class).findAll() != null) {
             cacheNotePads = realm.where(CacheNotePad.class).findAll();
-        }else {
+        } else {
             return;
         }
         realm.beginTransaction();
@@ -462,16 +533,33 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
         notePad.setType(2);
         notePad.setBgColor("#FFFFFF");
         notePad.setIsEncrypt(0);
+        notePad.setHasAlarm(cbAlarm.isChecked());
         notePad.setCreateTime(TimeUtils.getFriendlyTimeSpanByNow(time));
         realm.insert(notePad);
         realm.commitTransaction();
+        if(cbAlarm.isChecked()){
+            addReminder(title,content,id);
+        }
 
         flag = 1;//插入以后只能是编辑
-        if (!isBackground){
+        if (!isBackground) {
             Intent intent = new Intent();
             setResult(RESULT_OK, intent);
             finish();
         }
+    }
+
+
+    private void addReminder(String title, String content, int id) {
+        String time = String.valueOf(tvNoteDate.getText()) + " " + String.valueOf(tvNoteTime.getText());
+        Date date = TimeUtils.string2Date(time, new SimpleDateFormat("yyyy-MM-dd HH:mm"));
+        //long strTime = TimeUtils.date2Millis(date);
+        long strTime = date.getTime();
+        Intent mIntent = new Intent(NotePadNewActivity.this, ReminderReceiver.class);
+        mIntent.putExtra("title", title);
+        mIntent.putExtra("content", content);
+        alarmIntent = PendingIntent.getBroadcast(NotePadNewActivity.this, id, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmMgr.set(AlarmManager.RTC_WAKEUP, strTime, alarmIntent);
     }
 
 
@@ -480,8 +568,13 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
      */
     private void editOldDataRealm(boolean isBackground, final String title, final String type, final String time, final String content) {
         initRealm();
-        RealmResults<CacheNotePad> notePads = realm.where(CacheNotePad.class).equalTo("id", this.id).findAll();
-        notePads.size();
+        RealmResults<CacheNotePad> notePads =
+                realm.where(CacheNotePad.class)
+                        .equalTo("id", this.id)
+                        .findAll();
+        int size = notePads.size();
+        Log.e("notePads", size + "");
+        //notePads.deleteAllFromRealm();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -492,7 +585,7 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
                 pad.setContent(content);
             }
         });
-        if (!isBackground){
+        if (!isBackground) {
             finish();
         }
     }
@@ -503,20 +596,140 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
      */
     private void backAndExit() {
         String title = etNewTitle.getText().toString().trim();
-        String type = tvNoteType.getText().toString();
-        String time = tvNoteDetailDate.getText().toString();
         String content = getHyperContent();
         if (flag == 0) {                //新建笔记
-            if(!TextUtils.isEmpty(title) && !TextUtils.isEmpty(content)){
+            if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(content)) {
                 saveNoteData(false);
+            } else {
+
             }
-        }else if (flag == 1) {          //编辑笔记
-            if(!TextUtils.isEmpty(title) && !TextUtils.isEmpty(content)){
+        } else if (flag == 1) {          //编辑笔记
+            if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(content)) {
                 saveNoteData(false);
+            } else {
+
             }
         }
         finish();
     }
+
+
+
+    private void initAlarmManager() {
+        alarmMgr = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        //setPicked(true);
+        //setAlarmChecked(true);
+        //tvNoteDate.setText(TimeUtils.date2String(new Date(),new SimpleDateFormat("yyyy-MM-dd")));
+        //tvNoteTime.setText(TimeUtils.date2String(new Date(),new SimpleDateFormat("HH:mm")));
+    }
+
+
+    public void setPicked(boolean picked) {
+        isPicked = picked;
+    }
+
+    public void setAlarmChecked(boolean isChecked) {
+        cbAlarm.setChecked(isChecked);
+    }
+
+
+    private void pickDate() {
+        DatePickerFragment datePickerDialog = new DatePickerFragment();
+        datePickerDialog.setOnDatePickListener(new OnDatePickListener() {
+            @Override
+            public void onDatePick(int year, int monthOfYear, int dayOfMonth) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, monthOfYear, dayOfMonth);
+                Date date = new Date(calendar.getTimeInMillis());
+                String text = TimeUtils.date2String(date, new SimpleDateFormat("yyyy-MM-dd"));
+                tvNoteDate.setText(text);
+                confirmTimeValidity(year, monthOfYear, dayOfMonth);
+                PickTimeIfCreateAlarm();
+            }
+
+            @Override
+            public void onDatePickCancel() {
+                if (!isPicked) {
+                    cbAlarm.setChecked(false);
+                }
+            }
+        });
+        datePickerDialog.show(getFragmentManager(), "DatePickerDialog");
+    }
+
+    private void confirmTimeValidity(int year, int monthOfYear, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, monthOfYear, dayOfMonth);
+        if (!TimerUtils.isSameDay(calendar, Calendar.getInstance())) {
+            return;
+        }
+        String timeStr = tvNoteTime.getText().toString().trim();
+        if (TextUtils.isEmpty(timeStr)) {
+            return;
+        }
+        Date timeDate = TimeUtils.string2Date(timeStr,new SimpleDateFormat("HH:mm"));
+        Calendar rightNow = Calendar.getInstance();
+        rightNow.setTime(timeDate);
+        rightNow.set(Calendar.YEAR, year);
+        rightNow.set(Calendar.MONTH, monthOfYear);
+        rightNow.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        if (rightNow.getTimeInMillis() < System.currentTimeMillis() + 60000) {
+            ToastUtils.showShort("The time has passed");
+            pickDate();
+        }
+    }
+
+
+    private void PickTimeIfCreateAlarm() {
+        if (!isPicked) {
+            pickTime();
+        }
+    }
+
+
+    private void pickTime() {
+        TimePickerFragment timePickDialog = new TimePickerFragment();
+        timePickDialog.setOnTimePickListener(new OnTimePickListener() {
+            @Override
+            public void onTimePick(int hourOfDay, int minute) {
+                String dateStr = String.valueOf(tvNoteDate.getText());
+                Date date = TimeUtils.string2Date(dateStr,new SimpleDateFormat("yyyy-MM-dd"));
+                Calendar tvCalendar = Calendar.getInstance();
+                tvCalendar.setTime(date);
+
+                boolean isToday = TimerUtils.isSameDay(tvCalendar, Calendar.getInstance());
+                //if the date is today,decide time has not passed
+                Calendar rightNow = Calendar.getInstance();
+                rightNow.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                rightNow.set(Calendar.MINUTE, minute);
+                if (isToday) {
+                    confirmTimePast(rightNow);
+                }
+                String time = TimeUtils.date2String(rightNow.getTime(),new SimpleDateFormat("HH:mm"));
+                tvNoteTime.setText(time);
+                if (!isPicked) {
+                    isPicked = true;
+                }
+            }
+
+            private void confirmTimePast(Calendar rightNow) {
+                if (rightNow.getTimeInMillis() < System.currentTimeMillis() + 60000) {
+                    //Alarm time over now less than one minute,choose time again
+                    ToastUtils.showShort("The time has passed");
+                    pickTime();
+                }
+            }
+
+            @Override
+            public void onTimePickCancel() {
+                if (!isPicked) {
+                    cbAlarm.setChecked(false);
+                }
+            }
+        });
+        timePickDialog.show(getFragmentManager(), "TimePickerDialog");
+    }
+
 
 
 }

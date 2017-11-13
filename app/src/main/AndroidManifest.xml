@@ -29,15 +29,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.guide.SplashActivity">
+        <activity android:name=".ui.guide.view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.view.MainActivity"/>
-        <activity android:name=".ui.guide.GuideActivity"/>
+        <activity android:name=".ui.main.view.activity.MainActivity"/>
+        <activity android:name=".ui.guide.view.activity.GuideActivity"/>
+        <activity android:name=".ui.guide.view.activity.SelectFollowActivity"/>
         <activity android:name=".ui.main.view.activity.DownLoadActivity"/>
         <activity android:name=".ui.main.view.activity.AboutMeActivity"/>
         <activity android:name=".ui.other.gank.view.activity.GanKHomeActivity"/>
@@ -52,15 +53,17 @@
         <activity android:name=".ui.other.douMovie.view.activity.MovieTopActivity"/>
         <activity android:name=".ui.other.douMovie.view.activity.MovieDetailActivity"/>
         <activity android:name=".ui.other.douMovie.view.activity.MovieWebViewActivity"/>
-
+        <activity android:name=".ui.data.view.activity.GalleryImageActivity"/>
         <activity android:name=".ui.other.douBook.view.DouBookActivity"/>
         <activity android:name=".ui.other.douBook.view.activity.DouBookDetailActivity"/>
 
         <activity android:name=".ui.other.douMusic.view.DouMusicActivity"/>
         <activity android:name=".ui.other.douMusic.view.activity.DouMusicDetailActivity"/>
 
-        <activity android:name=".ui.other.toDo.ToDoTimerActivity"/>
-        <activity android:name=".ui.other.toDo.view.ToDoAddActivity"/>
+        <activity android:name=".ui.other.toDo.view.ToDoTimerActivity"/>
+        <activity android:name=".ui.other.toDo.view.activity.ToDoAddActivity"/>
+        <activity android:name=".ui.find.view.activity.FastLookActivity"/>
+        <activity android:name=".ui.other.weather.SevenWeatherActivity"/>
 
         <activity android:name=".ui.other.bookReader.view.BookReaderActivity"/>
         <activity android:name=".ui.other.bookReader.view.activity.ReaderSubjectActivity"/>
@@ -193,6 +196,10 @@
 
         <!--广播接收者-->
         <receiver android:name=".receiver.TimerReceiver"/>
+        <receiver
+            android:name=".receiver.ReminderReceiver"
+            android:exported="false">
+        </receiver>
 
     </application>
 .

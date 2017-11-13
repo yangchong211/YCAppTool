@@ -1,5 +1,7 @@
 package com.ns.yc.lifehelper.cache;
 
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 
 /**
@@ -7,7 +9,7 @@ import io.realm.RealmObject;
  * 作者：PC
  */
 
-public class CacheToDoDetail extends RealmObject {
+public class CacheToDoDetail extends RealmObject implements Serializable{
 
     private String title;               //标题
     private String content;             //内容

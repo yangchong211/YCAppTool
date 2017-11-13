@@ -101,7 +101,6 @@ public class HTQAnimations {
             } else {
                 continue;
             }
-
             int top = imageView.getTop();
             int left = imageView.getLeft();
             if (top == 0) {

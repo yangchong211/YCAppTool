@@ -25,7 +25,6 @@ public class GanKHomeAdapter extends RecyclerArrayAdapter<CategoryResult.Results
         return new ExpressDeliveryViewHolder(parent);
     }
 
-
     private class ExpressDeliveryViewHolder extends BaseViewHolder<CategoryResult.ResultsBean> {
 
         ImageView iv_item_img;

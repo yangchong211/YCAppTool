@@ -24,9 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @创建人 chaychan
- * @创建时间 2016/7/23  14:34
- * @描述 文件管理者, 可以获取本机的各种文件
+ * 文件管理者, 可以获取本机的各种文件
  */
 public class FileManager {
 

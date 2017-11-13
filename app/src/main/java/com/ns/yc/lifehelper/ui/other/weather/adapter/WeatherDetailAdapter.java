@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.weather.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,10 @@ public class WeatherDetailAdapter extends BaseRecyclerViewAdapter<WeatherDetailA
     @Override
     public WeatherDetailAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_weather_detail, parent, false);
-        return new ViewHolder(itemView, this);
+        ViewHolder viewHolder = new ViewHolder(itemView, this);
+        String string = viewHolder.toString();
+        Log.e("ViewHolder",string);
+        return viewHolder;
     }
 
     @Override
@@ -63,6 +67,13 @@ public class WeatherDetailAdapter extends BaseRecyclerViewAdapter<WeatherDetailA
                     adapter.onItemHolderClick(ViewHolder.this);
                 }
             });
+
+            String string = RecyclerView.ViewHolder.class.toString();
+            Log.e("ViewHolder",string);
         }
     }
+
+
+
+
 }

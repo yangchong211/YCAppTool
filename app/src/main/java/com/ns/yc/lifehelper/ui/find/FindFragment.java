@@ -18,8 +18,9 @@ import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.bean.ImageIconBean;
 import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
+import com.ns.yc.lifehelper.ui.find.view.activity.FastLookActivity;
 import com.ns.yc.lifehelper.ui.find.view.activity.RiddleActivity;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.BookReaderActivity;
 import com.ns.yc.lifehelper.ui.other.douBook.view.DouBookActivity;
 import com.ns.yc.lifehelper.ui.other.douMovie.view.DouMovieActivity;
@@ -35,6 +36,8 @@ import com.ns.yc.lifehelper.ui.other.myVideo.MyVideoActivity;
 import com.ns.yc.lifehelper.ui.other.notePad.NotePadActivity;
 import com.ns.yc.lifehelper.ui.other.sharpBendOfBrain.SharpBendOfBrainActivity;
 import com.ns.yc.lifehelper.ui.other.timeListener.TimeListenerActivity;
+import com.ns.yc.lifehelper.ui.other.toDo.view.ToDoTimerActivity;
+import com.ns.yc.lifehelper.ui.other.weather.SevenWeatherActivity;
 
 import java.util.ArrayList;
 
@@ -201,16 +204,25 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
                                 startActivity(NotePadActivity.class);
                                 break;
                             case 3:
-                                startActivity(RiddleActivity.class);
+                                startActivity(ToDoTimerActivity.class);
                                 break;
                             case 4:
-                                startActivity(SharpBendOfBrainActivity.class);
+                                startActivity(SevenWeatherActivity.class);
                                 break;
                             case 5:
                                 startActivity(DoodleViewActivity.class);
                                 break;
+                            case 6:
+                                startActivity(FastLookActivity.class);
+                                break;
                             case 7:
                                 startActivity(TimeListenerActivity.class);
+                                break;
+                            case 8:
+                                startActivity(SharpBendOfBrainActivity.class);
+                                break;
+                            case 9:
+                                startActivity(RiddleActivity.class);
                                 break;
                             default:
                                 Toast.makeText(activity, ((ImageIconBean) obj).getName() + "---", Toast.LENGTH_SHORT).show();

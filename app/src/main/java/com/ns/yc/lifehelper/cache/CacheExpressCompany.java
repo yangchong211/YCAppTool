@@ -2,10 +2,6 @@ package com.ns.yc.lifehelper.cache;
 
 import io.realm.RealmObject;
 
-/**
- * Created by PC on 2017/9/25.
- * 作者：PC
- */
 
 public class CacheExpressCompany extends RealmObject {
 

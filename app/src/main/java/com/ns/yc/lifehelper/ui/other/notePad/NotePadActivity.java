@@ -94,6 +94,7 @@ public class NotePadActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initToolBar() {
+        toolbarTitle.setText("超文本记事");
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

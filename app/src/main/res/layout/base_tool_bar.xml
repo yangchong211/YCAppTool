@@ -79,7 +79,7 @@
         android:singleLine="true"
         android:text="编辑"
         android:textColor="@color/colorWhite"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:visibility="gone" />
 
 </android.support.v7.widget.Toolbar>

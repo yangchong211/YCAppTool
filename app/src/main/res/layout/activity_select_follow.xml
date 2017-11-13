@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/base_tool_bar"/>
+
+    <com.yc.cn.ycrecycleviewlib.select.SelectRecyclerView
+        android:id="@+id/select_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:horizontalSpacing="8dp"
+        android:padding="10dp"
+        android:verticalSpacing="8dp"
+        android:scrollbars="vertical"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/whiteBg">
+        <TextView
+            android:id="@+id/tv_clean"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="清除选择"
+            android:textColor="@color/blackText1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:textSize="18sp"
+            android:background="@drawable/shape_bg"/>
+        <TextView
+            android:id="@+id/tv_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="现在开启"
+            android:textColor="@color/blackText1"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:background="@drawable/shape_bg"/>
+    </LinearLayout>
+
+</LinearLayout>

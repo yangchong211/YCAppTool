@@ -32,7 +32,6 @@ import java.util.List;
  * 感谢这篇博客的作者，http://blog.csdn.net/xiaanming/article/details/17718579<br>
  * 在这个基础上解决了原作者的问题:Adapter无法使用ViewHolder优化的问题，优化了手势识别率，并添加了trashView功能，
  * 优化自定义控件对外扩展性，解决在上下拉环境下手势冲突问题<br>
- * 
  *
  */
 public class HTQDragGridView extends GridView {
@@ -136,6 +135,7 @@ public class HTQDragGridView extends GridView {
         }
         return statusHeight;
     }
+
 
     private static final Handler mHandler = new Handler() {
         @Override

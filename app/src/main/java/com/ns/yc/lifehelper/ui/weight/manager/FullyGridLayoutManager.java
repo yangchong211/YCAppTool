@@ -119,4 +119,8 @@ public class FullyGridLayoutManager extends GridLayoutManager {
         }
     }
 
+    @Override
+    public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+        return super.generateDefaultLayoutParams();
+    }
 }

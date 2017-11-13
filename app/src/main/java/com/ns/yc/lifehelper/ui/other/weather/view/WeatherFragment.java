@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.ConstantEnvicloudApi;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.other.weather.adapter.WeatherDetailAdapter;
@@ -22,7 +23,7 @@ import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherDetail;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherForecast;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherLive;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherSuggestion;
-import com.ns.yc.lifehelper.ui.other.weather.model.WeatherModel;
+import com.ns.yc.lifehelper.ui.other.weather.model.WeathersModel;
 import com.ns.yc.lifehelper.ui.other.weather.weight.IndicatorView;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 
@@ -186,7 +187,7 @@ public class WeatherFragment extends BaseFragment {
     }
 
     private void getWeatherData(int type) {
-        WeatherModel model = WeatherModel.getInstance(activity);
+        WeathersModel model = WeathersModel.getInstance(ConstantEnvicloudApi.EnviCloudApi);
         switch (type){
             case 1:
                 Observable<WeatherLive> weatherLive = model.getWeatherLive(id);

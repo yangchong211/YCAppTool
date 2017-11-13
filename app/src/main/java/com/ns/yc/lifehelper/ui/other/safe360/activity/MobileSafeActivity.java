@@ -152,8 +152,6 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
      * 获取数据，刷新页面
      */
     private void getData() {
-
-
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 if (mLoading != null && mLoading.isShowing()) {

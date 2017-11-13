@@ -366,7 +366,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
 
 
     private void startSearch(String k) {
-        WxNewsModel model = WxNewsModel.getInstance(NewsSearchActivity.this);
+        WxNewsModel model = WxNewsModel.getInstance();
         model.getWxNewsSearch(ConstantALiYunApi.Key,k)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

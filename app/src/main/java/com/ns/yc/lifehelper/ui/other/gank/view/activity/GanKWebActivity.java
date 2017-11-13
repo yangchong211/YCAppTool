@@ -203,7 +203,7 @@ public class GanKWebActivity extends BaseActivity implements View.OnClickListene
                         fabTop.hide();
                     } else {
                         fabFavorite.show();
-                        fabTop.hide();
+                        fabTop.show();
                     }
                 }
             });
@@ -218,7 +218,7 @@ public class GanKWebActivity extends BaseActivity implements View.OnClickListene
                         fabTop.hide();
                     } else {
                         fabFavorite.show();
-                        fabTop.hide();
+                        fabTop.show();
                     }
                 }
             });
@@ -244,9 +244,11 @@ public class GanKWebActivity extends BaseActivity implements View.OnClickListene
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
-            pb.setProgress(newProgress);
-            if (newProgress == 100) {
-                pb.setVisibility(View.GONE);
+            if(pb!=null){
+                pb.setProgress(newProgress);
+                if (newProgress == 100) {
+                    pb.setVisibility(View.GONE);
+                }
             }
         }
     }

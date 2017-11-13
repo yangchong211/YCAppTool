@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.home.bean.HomeBlogEntity;
+import com.ns.yc.lifehelper.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 
 import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;

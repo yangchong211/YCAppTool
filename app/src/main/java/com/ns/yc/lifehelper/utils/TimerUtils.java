@@ -76,4 +76,11 @@ public class TimerUtils {
         }
     }
 
+
+    public static boolean isSameDay(Calendar tvCalendar, Calendar today) {
+        return tvCalendar.get(Calendar.YEAR) == today.get(Calendar.YEAR)
+                && tvCalendar.get(Calendar.MONTH) == today.get(Calendar.MONTH)
+                && tvCalendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH);
+    }
+
 }

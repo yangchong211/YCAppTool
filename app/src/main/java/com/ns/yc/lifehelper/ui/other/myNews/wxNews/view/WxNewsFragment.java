@@ -194,7 +194,7 @@ public class WxNewsFragment extends BaseFragment {
 
 
     private void getWxNews(String mType, int num, final int start) {
-        WxNewsModel model = WxNewsModel.getInstance(activity);
+        WxNewsModel model = WxNewsModel.getInstance();
         model.getWxNewsDetail(ConstantALiYunApi.Key,mType,String.valueOf(num),String.valueOf(start))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

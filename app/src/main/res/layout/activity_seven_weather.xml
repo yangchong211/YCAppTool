@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/base_tool_bar"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--底部背景，可以动画-->
+        <com.ns.yc.lifehelper.ui.other.weather.view.weather.DynamicWeatherView
+            android:id="@+id/bg_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <!--布局-->
+        <com.ns.yc.lifehelper.ui.weight.scrollView.ReboundScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/ll_weather"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/alpha_35_black"
+                    android:padding="10dp">
+                    <ImageView
+                        android:id="@+id/manual_location"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_centerVertical="true"
+                        android:src="@mipmap/ic_weather_home" />
+                    <TextView
+                        android:id="@+id/tv_temperature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:text="温度"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/air_quality"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/ic_air_quality"
+                        android:layout_marginLeft="15dp"
+                        android:paddingBottom="5dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:text="95 良"
+                        android:textColor="@color/redTab"
+                        android:background="@drawable/shape_gray_bg"
+                        android:textSize="12dp" />
+                </LinearLayout>
+                <View style="@style/divider_all_horizontal_transport" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@color/alpha_35_black"
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:padding="6dp"
+                            android:text="今天" />
+                        <TextView
+                            android:id="@+id/today_temperature_range"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:layout_alignParentRight="true"
+                            android:padding="6dp"
+                            android:text="7/2℃"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/today_weather"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:layout_alignParentBottom="true"
+                            android:padding="6dp"
+                            android:text="小雨转阴" />
+                        <ImageView
+                            android:id="@+id/today_weather_pic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:src="@mipmap/wind_direction" />
+                    </RelativeLayout>
+                    <View style="@style/divider_all_vertical_transport" />
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:padding="6dp"
+                            android:text="明天" />
+                        <TextView
+                            android:id="@+id/tomorrow_temperature_range"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:layout_alignParentRight="true"
+                            android:padding="6dp"
+                            android:text="9/4℃"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tomorrow_weather"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:layout_alignParentBottom="true"
+                            android:padding="6dp"
+                            android:text="多云" />
+                        <ImageView
+                            android:id="@+id/tomorrow_weather_pic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:src="@mipmap/wind_direction" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <View style="@style/divider_all_horizontal_transport" />
+
+                <com.yc.cn.ycweatherlib.WeatherView
+                    android:id="@+id/weather_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:scrollbarThumbHorizontal="@drawable/scroll_bar_thumb"
+                    android:scrollbarTrackHorizontal="@drawable/scroll_bar_thumb"
+                    android:scrollbarSize="4dp"
+                    android:background="#333"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:drawablePadding="10dp"
+                    android:background="@color/alpha_35_black"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="空气质量"/>
+
+
+                <View style="@style/divider_all_horizontal_transport" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
+
+                    <com.ns.yc.lifehelper.ui.other.weather.weight.moji.view.AqiView
+                        android:id="@+id/aqi_view"
+                        android:layout_width="140dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center_vertical" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:text="PM2.5[入肺颗粒物]"
+                            android:textColor="@color/alpha_15_white" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:text="PM10[可吸入颗粒物]"
+                            android:textColor="@color/alpha_15_white" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:text="SO₂[二氧化硫]"
+                            android:textColor="@color/alpha_15_white" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:text="NO₂[二氧化氮]"
+                            android:textColor="@color/alpha_15_white" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/pm2_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:textColor="@color/colorWhite" />
+                        <TextView
+                            android:id="@+id/pm10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:textColor="@color/colorWhite" />
+                        <TextView
+                            android:id="@+id/so2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:textColor="@color/colorWhite" />
+                        <TextView
+                            android:id="@+id/no2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="3dp"
+                            android:textColor="@color/colorWhite" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:drawablePadding="10dp"
+                    android:background="@color/alpha_35_black"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="太阳和风"/>
+                <View style="@style/divider_all_horizontal_transport" />
+                <com.ns.yc.lifehelper.ui.other.weather.weight.moji.view.AstroView
+                    android:id="@+id/ast_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="144dp" />
+            </LinearLayout>
+        </com.ns.yc.lifehelper.ui.weight.scrollView.ReboundScrollView>
+    </FrameLayout>
+
+</LinearLayout>

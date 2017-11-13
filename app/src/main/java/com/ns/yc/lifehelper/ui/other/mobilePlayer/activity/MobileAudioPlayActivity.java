@@ -260,6 +260,14 @@ public class MobileAudioPlayActivity extends BaseActivity implements View.OnClic
         sbAudio.setMax(duration);
         sbAudio.setProgress(currentPosition);
         handler.sendEmptyMessageDelayed(UPDATE_PLAY_TIME_SHOW, 30); // 每30毫秒更新一下显示的内容
+
+        //相当于下面这句话
+        /*handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(UPDATE_PLAY_TIME_SHOW);
+            }
+        },30);*/
     }
 
 

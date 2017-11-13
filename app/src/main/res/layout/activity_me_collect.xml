@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/whiteBg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark">
+
+        <!--左返回键按钮-->
+        <FrameLayout
+            android:id="@+id/fl_title_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:visibility="visible">
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_back_white" />
+        </FrameLayout>
+
+        <!--注意：关于toolbar中menu的宽度一般是56dp-->
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/stl_table"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_centerInParent="true"
+            app:tl_divider_color="@color/redTab"
+            app:tl_divider_padding="5dp"
+            app:tl_divider_width="0dp"
+            app:tl_indicator_color="@color/redTab"
+            app:tl_indicator_height="3dp"
+            app:tl_indicator_width_equal_title="true"
+            app:tl_tab_padding="5dp"
+            app:tl_tab_space_equal="true"
+            app:tl_textsize="18sp"
+            app:tl_textSelectColor="@color/colorWhite"
+            app:tl_textUnselectColor="@color/gray2"
+            app:tl_underline_color="@color/colorTransparent"
+            app:tl_underline_height="0dp"/>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

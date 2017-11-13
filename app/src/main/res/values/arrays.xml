@@ -62,18 +62,18 @@
 
     <!--发现页图片-->
     <integer-array name="find_pro_pic">
-        <item name="tab_home">@drawable/ic_investment</item>
-        <item name="tab_find">@drawable/ic_project</item>
-        <item name="tab_data">@drawable/ic_financing</item>
-        <item name="tab_me">@drawable/ic_show</item>
-        <item name="tab_home">@drawable/ic_investment</item>
-        <item name="tab_find">@drawable/ic_project</item>
-        <item name="tab_data">@drawable/ic_financing</item>
-        <item name="tab_me">@drawable/ic_show</item>
-        <item name="tab_home">@drawable/ic_investment</item>
-        <item name="tab_find">@drawable/ic_project</item>
-        <item name="tab_data">@drawable/ic_financing</item>
-        <item name="tab_me">@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
     </integer-array>
 
     <!--发现页图片对应的位子-->
@@ -81,31 +81,31 @@
         <item>干货集中营</item>
         <item>播放器</item>
         <item>超文本</item>
-        <item>猜谜语</item>
-        <item>急转弯</item>
+        <item>时光笔记</item>
+        <item>7日天气</item>
         <item>绘画板</item>
-        <item>人脸识别</item>
+        <item>快读</item>
         <item>时光聆听</item>
-        <item>空气质量</item>
-        <item>今日油价</item>
+        <item>急转弯</item>
+        <item>猜谜语</item>
         <item>翻译</item>
         <item>缴费</item>
     </string-array>
 
     <!--数据页图片-->
     <integer-array name="data_pro_pic">
-        <item name="tab_home">@drawable/ic_investment</item>
-        <item name="tab_find">@drawable/ic_project</item>
-        <item name="tab_data">@drawable/ic_financing</item>
-        <item name="tab_me">@drawable/ic_show</item>
-        <item name="tab_home">@drawable/ic_investment</item>
-        <item name="tab_find">@drawable/ic_project</item>
-        <item name="tab_data">@drawable/ic_financing</item>
-        <item name="tab_me">@drawable/ic_show</item>
-        <item name="tab_home">@drawable/ic_investment</item>
-        <item name="tab_find">@drawable/ic_project</item>
-        <item name="tab_data">@drawable/ic_financing</item>
-        <item name="tab_me">@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
     </integer-array>
 
     <!--数据页图片对应的位子-->
@@ -114,7 +114,7 @@
         <item>天气</item>
         <item>记事</item>
         <item>工商</item>
-        <item>股票</item>
+        <item>画廊</item>
         <item>身份证</item>
         <item>人脸识别</item>
         <item>归属地</item>
@@ -127,18 +127,18 @@
 
     <!--数据页小工具图片-->
     <integer-array name="data_tool_pro_pic">
-        <item name="tab_home">@drawable/ic_investment</item>
-        <item name="tab_find">@drawable/ic_project</item>
-        <item name="tab_data">@drawable/ic_financing</item>
-        <item name="tab_me">@drawable/ic_show</item>
-        <item name="tab_home">@drawable/ic_investment</item>
-        <item name="tab_find">@drawable/ic_project</item>
-        <item name="tab_data">@drawable/ic_financing</item>
-        <item name="tab_me">@drawable/ic_show</item>
-        <item name="tab_home">@drawable/ic_investment</item>
-        <item name="tab_find">@drawable/ic_project</item>
-        <item name="tab_data">@drawable/ic_financing</item>
-        <item name="tab_me">@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
+        <item>@drawable/ic_investment</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_financing</item>
+        <item>@drawable/ic_show</item>
     </integer-array>
 
     <!--数据页小工具图片对应的位子-->
@@ -155,6 +155,59 @@
         <item>景点</item>
         <item>航班</item>
         <item>绘画板</item>
+    </string-array>
+
+    <!--数据页横向滑动图片-->
+    <integer-array name="data_narrow_Image">
+        <item>@drawable/bg_small_autumn_tree_min</item>
+        <item>@drawable/bg_small_kites_min</item>
+        <item>@drawable/bg_small_lake_min</item>
+        <item>@drawable/bg_small_leaves_min</item>
+        <item>@drawable/bg_small_magnolia_trees_min</item>
+        <item>@drawable/bg_small_solda_min</item>
+        <item>@drawable/bg_small_tree_min</item>
+        <item>@drawable/bg_small_tulip_min</item>
+    </integer-array>
+
+
+    <!--数据页图片对应的位子-->
+    <string-array name="select_follow">
+        <item>快递</item>
+        <item>天气</item>
+        <item>记事</item>
+        <item>工商</item>
+        <item>画廊</item>
+        <item>身份</item>
+        <item>人脸</item>
+        <item>归属地</item>
+        <item>空气</item>
+        <item>今日</item>
+        <item>翻译</item>
+        <item>缴费</item>
+        <item>快递</item>
+        <item>天气</item>
+        <item>记事</item>
+        <item>工商</item>
+        <item>画廊</item>
+        <item>身份</item>
+        <item>人脸</item>
+        <item>归属地</item>
+        <item>空气</item>
+        <item>今日</item>
+        <item>翻译</item>
+        <item>缴费</item>
+        <item>快递</item>
+        <item>天气</item>
+        <item>记事</item>
+        <item>工商</item>
+        <item>画廊</item>
+        <item>身份</item>
+        <item>人脸</item>
+        <item>归属地</item>
+        <item>空气</item>
+        <item>今日</item>
+        <item>翻译</item>
+        <item>缴费</item>
     </string-array>
 
 </resources>

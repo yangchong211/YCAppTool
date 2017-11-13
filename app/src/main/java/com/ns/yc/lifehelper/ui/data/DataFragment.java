@@ -1,8 +1,11 @@
 package com.ns.yc.lifehelper.ui.data;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.SizeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.jude.easyrecyclerview.decoration.SpaceDecoration;
@@ -27,16 +31,17 @@ import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
 import com.ns.yc.lifehelper.api.ConstantImageApi;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.bean.ImageIconBean;
-import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
 import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ns.yc.lifehelper.ui.data.view.activity.GalleryImageActivity;
+import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
 import com.ns.yc.lifehelper.ui.other.listener.ListenerActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
 import com.ns.yc.lifehelper.ui.other.notePad.NotePadActivity;
 import com.ns.yc.lifehelper.ui.other.safe360.SafeHomeActivity;
-import com.ns.yc.lifehelper.ui.other.toDo.ToDoTimerActivity;
+import com.ns.yc.lifehelper.ui.other.toDo.view.ToDoTimerActivity;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.weight.MyGridView;
 import com.ns.yc.lifehelper.utils.ImageUtils;
@@ -227,8 +232,18 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
                             case 2:
                                 startActivity(NotePadActivity.class);
                                 break;
+                            case 3:
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                    if(!Settings.canDrawOverlays(activity)) {
+                                        ToastUtils.showShort("请打开投资界允许权限开关");
+                                        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        activity.startActivity(intent);
+                                    }
+                                }
+                                break;
                             case 4:
-
+                                startActivity(GalleryImageActivity.class);
                                 break;
                             default:
                                 Toast.makeText(activity, ((ImageIconBean) obj).getName() + "---", Toast.LENGTH_SHORT).show();
@@ -314,6 +329,12 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
 
 
     private void initRecycleView() {
+        TypedArray typedArray = activity.getResources().obtainTypedArray(R.array.data_narrow_Image);
+        final ArrayList<Integer> list = new ArrayList<>();
+        for(int a=0 ; a<8 ; a++){
+            list.add(typedArray.getResourceId(a, R.drawable.bg_small_autumn_tree_min));
+        }
+        typedArray.recycle();
         recyclerView.setAdapter(adapter = new NarrowImageAdapter(activity));
         //recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setHorizontalScrollBarEnabled(false);
@@ -324,13 +345,15 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
             public void onRefresh() {
                 adapter.clear();
                 //adapter.addAll(ConstantImageApi.createSmallImage());
-                adapter.addAll(ConstantImageApi.getNarrowImage());
+                //adapter.addAll(ConstantImageApi.getNarrowImage());
+                adapter.addAll(list);
             }
         });
         //思考，为什么下面这种方式会导致加载图片OOM
         //adapter.addAll(ConstantImageApi.createSmallImage());
         //下面这个是正常的
-        adapter.addAll(ConstantImageApi.getNarrowImage());
+        //adapter.addAll(ConstantImageApi.getNarrowImage());
+        adapter.addAll(list);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {

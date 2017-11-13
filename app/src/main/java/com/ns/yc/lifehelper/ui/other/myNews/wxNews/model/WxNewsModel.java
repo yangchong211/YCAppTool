@@ -1,7 +1,5 @@
 package com.ns.yc.lifehelper.ui.other.myNews.wxNews.model;
 
-import android.content.Context;
-
 import com.ns.yc.lifehelper.api.ConstantALiYunApi;
 import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.api.WxNewsApi;
@@ -22,15 +20,15 @@ public class WxNewsModel {
     private static WxNewsModel model;
     private WxNewsApi mApiService;
 
-    public WxNewsModel(Context context) {
+    public WxNewsModel() {
         mApiService = RetrofitWrapper
                 .getInstance(ConstantALiYunApi.ALiYunJs)
                 .create(WxNewsApi.class);
     }
 
-    public static WxNewsModel getInstance(Context context){
+    public static WxNewsModel getInstance(){
         if(model == null) {
-            model = new WxNewsModel(context);
+            model = new WxNewsModel();
         }
         return model;
     }

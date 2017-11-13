@@ -19,6 +19,7 @@ public class CacheNotePad extends RealmObject {
     private int isEncrypt ;         //是否加密，0未加密，1加密
     private String createTime;      //创建时间
     private String updateTime;      //修改时间
+    private boolean hasAlarm;       //是否定时闹钟
 
     public int getId() {
         return id;
@@ -98,5 +99,13 @@ public class CacheNotePad extends RealmObject {
 
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public boolean isHasAlarm() {
+        return hasAlarm;
+    }
+
+    public void setHasAlarm(boolean hasAlarm) {
+        this.hasAlarm = hasAlarm;
     }
 }

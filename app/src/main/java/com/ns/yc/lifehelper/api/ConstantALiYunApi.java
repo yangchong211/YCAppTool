@@ -50,6 +50,11 @@ public class ConstantALiYunApi {
     public static final String ALiYunJsRiddle = "http://jisumiyu.market.alicloudapi.com";
 
     /**
+     * 新闻接口
+     */
+    public static String BASE_WEATHER_URL = "https://ali-weather.showapi.com/";
+
+    /**
      * 豆瓣接口
      * GET  https://api.douban.com/v2/movie/in_theaters     热映榜
      * GET  https://api.douban.com/v2/movie/top250          Top250电影评分

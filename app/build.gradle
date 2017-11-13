@@ -97,8 +97,8 @@ dependencies {
     compile 'pub.devrel:easypermissions:1.0.1'
     compile project(':vitamio')
     //内存泄漏检测工具
-    //debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-    //releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     //腾讯bug管理平台
     compile 'com.tencent.bugly:crashreport:2.6.0'
     compile 'com.tencent.bugly:nativecrashreport:3.3.0'
@@ -113,5 +113,9 @@ dependencies {
     compile 'cn.yc:YCProgressLib:1.0'                   //进度条
     compile 'cn.yc:YCCardViewLib:1.2'                   //滑动卡片
     compile 'cn.yc:YCCustomTextLib:1.6'                 //自定义超文本
+    compile 'cn.yc:YCRecycleViewLib:1.1'                //RecycleView封装类
+    compile 'cn.yc:YCWeatherLib:1.0'                    //天气自定义控件
+    compile 'cn.yc:YCGalleryLib:1.1'                    //自定义画廊
+    compile 'cn.yc:YCBaseAdapterLib:1.0'                //adapter封装
 
 }

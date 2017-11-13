@@ -74,6 +74,13 @@ public class ConstantImageApi {
         return Arrays.asList(smallImages);
     }
 
+    /**
+     * 注意：
+     * 集合类如果仅仅有添加元素的方法，而没有相应的删除机制，导致内存被占用。
+     * 如果这个集合类是全局性的变量 (比如类中的静态属性，全局性的 map 等即有静态引用或 final 一直指向它)，
+     * 那么没有相应的删除机制，很可能导致集合所占用的内存只增不减。
+     * 这里做法：使用arrays文件代替
+     */
 
     static final int[] NarrowImage = {
             R.drawable.bg_small_autumn_tree_min,
