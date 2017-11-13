@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,11 +82,13 @@ public class MyPictureActivity extends BaseActivity implements View.OnClickListe
     private void initToolBar() {
         llSearch.setVisibility(View.VISIBLE);
         //ivRightImg.setImageResource(R.drawable.book_detail_info_add_img);
-        ivRightImg.setBackgroundResource(R.drawable.book_detail_info_add_img);
+        //ivRightImg.setBackgroundResource(R.drawable.book_detail_info_add_img);
         toolbarTitle.setText("图片欣赏");
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //去除默认Title显示
+            actionBar.setDisplayShowTitleEnabled(false);
         }
     }
 
