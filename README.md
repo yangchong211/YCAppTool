@@ -118,6 +118,10 @@
     - 优化了超文本记事本功能，增加了闹钟功能，自动发送通知。
     - 继续完善了七日天气版块的功能，增加了设置动态背景，切换背景，修复了时间显示错误bug，TODO，后期添加选择地区，查询天气功能
     - 减少了静态变量，例如图片集合，文字集合等；该为array中设置，节省开辟更多内存空间。
+- v1.5版本【11月26日】
+    - 学习并且练习MVP+Dagger2架构模式案例，具体可以看数据页->猜你喜欢->番茄模块
+    - 使用阿里的开源框架Vlayout，改写了数据页面，具体使用方法可以看我博客，建议一边看博客，一边练习。
+    - 修改了部分bugly平台上报的错误
     
 
 ### 9.关于获取更多信息
@@ -144,6 +148,7 @@
 - 侧滑+底部导航：DrawerLayout+NavigationView+TabLayout，屏蔽ViewPager的左右滑动，如图所示
 - 首页list新闻加载数据来于本地json
 - ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-12-38.png)
+![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-11-24-19-29-39-957_com.ns.yc.life.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-13-22.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-12-45.png)
 ![image](https://github.com/yangchong211/LifeHelper/blob/master/image/Screenshot_2017-09-30-17-12-56.png)
