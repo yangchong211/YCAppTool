@@ -57,6 +57,7 @@ public class SelectFollowAdapter extends SelectRecyclerViewAdapter<SelectFollowA
         }
     }
 
+
     @Override
     public int getItemCount() {
         return data!=null ? data.size() : 0;

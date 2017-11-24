@@ -1,0 +1,61 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="主界面">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="SHOW_WEEK_TASK"
+            android:summary="主界面任务列表显示所有任务"
+            android:title="仅显示本周任务"/>
+        <ListPreference
+            android:defaultValue="list"
+            android:entries="@array/show_as_list_entries"
+            android:entryValues="@array/show_as_list_entries_values"
+            android:key="SHOW_AS_LIST"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:summary="列表形式展示任务列表"
+            android:title="布局方式"/>
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="SHOW_PRIORITY"
+            android:summary="在任务卡片中将显示优先级"
+            android:title="显示优先级"/>
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="备份与还原">
+        <Preference
+            android:key="BACKUP"
+            android:summary="将数据备份/导出至外部存储设备"
+            android:title="备份内容"/>
+        <Preference
+            android:key="RECOVERY"
+            android:summary="还原备份的数据"
+            android:title="还原内容"/>
+    </PreferenceCategory>
+
+
+
+    <PreferenceCategory
+        android:title="其它">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="AUTO_NOTIFY"
+            android:title="智能提醒完成任务"/>
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="关于">
+        <Preference
+            android:title="关于我">
+            <intent
+                android:targetClass="com.ns.yc.lifehelper.ui.main.view.activity.AboutMeActivity"
+                android:targetPackage="com.ns.yc.lifehelper"/>
+        </Preference>
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

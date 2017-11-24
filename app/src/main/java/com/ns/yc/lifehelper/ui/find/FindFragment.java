@@ -17,27 +17,13 @@ import com.ns.yc.lifehelper.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.bean.ImageIconBean;
-import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
-import com.ns.yc.lifehelper.ui.find.view.activity.FastLookActivity;
 import com.ns.yc.lifehelper.ui.find.view.activity.RiddleActivity;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.BookReaderActivity;
 import com.ns.yc.lifehelper.ui.other.douBook.view.DouBookActivity;
 import com.ns.yc.lifehelper.ui.other.douMovie.view.DouMovieActivity;
 import com.ns.yc.lifehelper.ui.other.douMusic.view.DouMusicActivity;
-import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKHomeActivity;
-import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
-import com.ns.yc.lifehelper.ui.other.myMusic.MyMusicActivity;
-import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
-import com.ns.yc.lifehelper.ui.other.myTsSc.SongCiActivity;
-import com.ns.yc.lifehelper.ui.other.myTsSc.YuanQuActivity;
-import com.ns.yc.lifehelper.ui.other.myTsSc.view.TangShiFirstActivity;
-import com.ns.yc.lifehelper.ui.other.myVideo.MyVideoActivity;
 import com.ns.yc.lifehelper.ui.other.notePad.NotePadActivity;
 import com.ns.yc.lifehelper.ui.other.sharpBendOfBrain.SharpBendOfBrainActivity;
-import com.ns.yc.lifehelper.ui.other.timeListener.TimeListenerActivity;
-import com.ns.yc.lifehelper.ui.other.toDo.view.ToDoTimerActivity;
-import com.ns.yc.lifehelper.ui.other.weather.SevenWeatherActivity;
 
 import java.util.ArrayList;
 
@@ -138,16 +124,16 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_music:
-                startActivity(MyMusicActivity.class);
+//                startActivity(MyMusicActivity.class);
                 break;
             case R.id.tv_photo:
-                startActivity(MyPictureActivity.class);
+//                startActivity(MyPictureActivity.class);
                 break;
             case R.id.tv_player:
-                startActivity(MyVideoActivity.class);
+//                startActivity(MyVideoActivity.class);
                 break;
             case R.id.tv_reader:
-                startActivity(BookReaderActivity.class);
+//                startActivity(BookReaderActivity.class);
                 break;
             case R.id.tv_dou_movie:
                 startActivity(DouMovieActivity.class);
@@ -159,25 +145,25 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(DouMusicActivity.class);
                 break;
             case R.id.tv_model_ts:
-                startActivity(TangShiFirstActivity.class);
+//                startActivity(TangShiFirstActivity.class);
                 break;
             case R.id.tv_model_sc:
-                startActivity(SongCiActivity.class);
+//                startActivity(SongCiActivity.class);
                 break;
             case R.id.tv_model_yq:
-                startActivity(YuanQuActivity.class);
+//                startActivity(YuanQuActivity.class);
                 break;
         }
     }
 
     private void iniVpData() {
-        int mPageSize = 8;          //每页显示的最大的数量
+        final int mPageSize = 8;          //每页显示的最大的数量
         ArrayList<ImageIconBean> listDatas = new ArrayList<>();
         TypedArray proPic = activity.getResources().obtainTypedArray(R.array.find_pro_pic);
         String[] proName = activity.getResources().getStringArray(R.array.find_pro_title);
         for (int i = 0; i < proName.length; i++) {
             int proPicId = proPic.getResourceId(i, R.drawable.ic_investment);
-            listDatas.add(new ImageIconBean(proName[i], proPicId));
+            listDatas.add(new ImageIconBean(proName[i], proPicId,i));
         }
         proPic.recycle();
         //总的页数向上取整  //总的页数
@@ -192,31 +178,35 @@ public class FindFragment extends BaseFragment implements View.OnClickListener {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                     Object obj = gridView.getItemAtPosition(position);
+                    //注意：pos = position + 第几页*每页个数
+                    //int pos = position + totalPage * mPageSize;
                     if (obj != null && obj instanceof ImageIconBean) {
-                        switch (position) {
+                        int pos = ((ImageIconBean) obj).getId();
+                        //注意这里不能传position
+                        switch (pos) {
                             case 0:
-                                startActivity(GanKHomeActivity.class);
+//                                startActivity(GanKHomeActivity.class);
                                 break;
                             case 1:
-                                startActivity(MobilePlayerActivity.class);
+//                                startActivity(MobilePlayerActivity.class);
                                 break;
                             case 2:
                                 startActivity(NotePadActivity.class);
                                 break;
                             case 3:
-                                startActivity(ToDoTimerActivity.class);
+//                                startActivity(ToDoTimerActivity.class);
                                 break;
                             case 4:
-                                startActivity(SevenWeatherActivity.class);
+//                                startActivity(SevenWeatherActivity.class);
                                 break;
                             case 5:
-                                startActivity(DoodleViewActivity.class);
+//                                startActivity(DoodleViewActivity.class);
                                 break;
                             case 6:
-                                startActivity(FastLookActivity.class);
+//                                startActivity(FastLookActivity.class);
                                 break;
                             case 7:
-                                startActivity(TimeListenerActivity.class);
+//                                startActivity(TimeListenerActivity.class);
                                 break;
                             case 8:
                                 startActivity(SharpBendOfBrainActivity.class);

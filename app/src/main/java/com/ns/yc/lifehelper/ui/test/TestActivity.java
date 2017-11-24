@@ -24,6 +24,25 @@ import java.util.Calendar;
 
 public class TestActivity extends AppCompatActivity {
 
+
+    /**
+     *
+     *
+     * person包，主要是探索装饰者模式简单案例实现
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     */
+
+
 //    @Override
 //    protected void onDraw(Canvas canvas) {
 //        super.onDraw(canvas);
@@ -123,6 +142,7 @@ public class TestActivity extends AppCompatActivity {
      */
     private void initAlarmManagerSecond() {
         Intent intent =new Intent(this, TimerReceiver.class);
+
         intent.setAction("repeating");
         PendingIntent sender = PendingIntent.getBroadcast(this, 0, intent, 0);
         //开始时间

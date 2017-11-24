@@ -115,8 +115,6 @@ public class SelectFollowActivity extends BaseActivity implements SelectFollowCo
                 if(adapter!=null && adapter.data!=null){
                     if(adapter.getSelectedIndices().length>0){
                         presenter.addSelectToRealm(adapter.getSelectedIndices());
-                    }else {
-
                     }
                 }
                 presenter.goMainActivity();

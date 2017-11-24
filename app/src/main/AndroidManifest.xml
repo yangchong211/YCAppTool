@@ -44,12 +44,14 @@
         <activity android:name=".ui.other.gank.view.activity.GanKHomeActivity"/>
         <activity android:name=".ui.other.gank.view.activity.GanKWebActivity"/>
         <activity android:name=".ui.other.gank.view.activity.GanKSearchActivity"/>
-
+        <activity android:name=".ui.data.view.activity.OpenFileActivity"/>
         <activity android:name=".ui.other.expressDelivery.ExpressDeliveryActivity"/>
         <activity android:name=".ui.other.expressDelivery.indexModel.SelectorCompanyActivity"/>
         <activity android:name=".ui.other.expressDelivery.activity.ExpressDeliveryInfoActivity"/>
-
+        <activity android:name=".ui.other.workDo.ui.WorkDoActivity"/>
+        <activity android:name=".ui.other.workDo.ui.activity.WorkNewActivity"/>
         <activity android:name=".ui.other.douMovie.view.DouMovieActivity"/>
+        <activity android:name=".ui.other.workDo.ui.activity.WorkSettingActivity"/>
         <activity android:name=".ui.other.douMovie.view.activity.MovieTopActivity"/>
         <activity android:name=".ui.other.douMovie.view.activity.MovieDetailActivity"/>
         <activity android:name=".ui.other.douMovie.view.activity.MovieWebViewActivity"/>
@@ -179,6 +181,30 @@
                 <data android:mimeType="video/3gpp2" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".ui.other.workDo.ui.activity.SearchListActivity"
+            android:label="任务"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/work_do_search"/>
+        </activity>
+
+
+
+
+
+
+
+
+
+
+
         <!-- Don't forgot InitActivity -->
         <activity
             android:name="io.vov.vitamio.activity.InitActivity"
@@ -188,11 +214,18 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ui.other.mobilePlayer.activity.MobileAudioPlayActivity"/>
 
+
         <!--服务-->
         <service android:name=".service.PicBeautifulService"/>
         <service android:name=".service.PicGroupService"/>
         <service android:name=".service.TimerService"/>
         <service android:name=".service.AudioPlayService"/>
+        <service
+            android:name=".service.WorkDoNotifyService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+
 
         <!--广播接收者-->
         <receiver android:name=".receiver.TimerReceiver"/>

@@ -10,7 +10,7 @@ public class TaskDetailEntity extends RealmObject implements Serializable {
     private int dayOfWeek;
     private String title;
     private String content;
-    private String icon;
+    private int icon;
     private long timeStamp;
     private int state;
     private int priority;
@@ -46,11 +46,11 @@ public class TaskDetailEntity extends RealmObject implements Serializable {
         this.content = content;
     }
 
-    public String getIcon() {
+    public int getIcon() {
         return icon;
     }
 
-    public void setIcon(String icon) {
+    public void setIcon(int icon) {
         this.icon = icon;
     }
 
@@ -89,7 +89,7 @@ public class TaskDetailEntity extends RealmObject implements Serializable {
         if ((o.title == title || o.title.equals(title))
                 && (o.content == content || o.content.equals(content))
                 && o.state == state
-                && (o.icon == icon || o.icon.equals(icon))
+                && (o.icon == icon)
 //                && o.timeStamp == timeStamp
                 && o.dayOfWeek == dayOfWeek
                 && o.priority == priority)

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:layout_marginTop="10dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:drawablePadding="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/blackText1"
+        android:text="最新栏目"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:textSize="14sp"
+        android:text="查看更多"
+        android:drawableRight="@drawable/ic_back_right"/>
+
+
+    <View style="@style/DeepUnderLine"
+        android:layout_below="@id/tv_title"/>
+
+</RelativeLayout>

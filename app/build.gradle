@@ -17,6 +17,9 @@ android {
             // 设置支持的 SO 库构架
             abiFilters 'armeabi', 'x86'// 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
         }*/
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
         // 64k
         multiDexEnabled true
         // 支持模糊视图
@@ -29,6 +32,11 @@ android {
         }
     }
 
+    //
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 //腾讯bug管理插件
@@ -47,7 +55,9 @@ dependencies {
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.android.support:palette-v7:25.3.1'
     compile 'com.android.support:percent:25.3.1'
+    compile 'com.android.support:support-annotations:25.3.1'
     compile 'com.android.support:multidex:1.0.1'
+
     //黄牛刀
     compile 'com.jakewharton:butterknife:7.0.1'
     //图片加载框架
@@ -95,6 +105,13 @@ dependencies {
     compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
     //权限库
     compile 'pub.devrel:easypermissions:1.0.1'
+    //注解
+    compile 'com.google.dagger:dagger:2.13'
+    apt 'com.google.dagger:dagger-compiler:2.13'
+    //阿里巴巴
+    compile('com.alibaba.android:vlayout:1.2.2@aar') {
+        transitive = true
+    }
     compile project(':vitamio')
     //内存泄漏检测工具
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
@@ -103,19 +120,22 @@ dependencies {
     compile 'com.tencent.bugly:crashreport:2.6.0'
     compile 'com.tencent.bugly:nativecrashreport:3.3.0'
 
-    //自定义
-    compile 'cn.yc:YCStateLib:1.0'                      //状态管理
-    compile 'cn.yc:YCPhotoLib:1.0'                      //图片选择器
-    compile 'cn.yc:YCDialogLib:3.2'                     //弹窗
-    compile 'cn.yc:YCCountDownViewLib:1.0'              //倒计时器
-    compile 'cn.yc:YCUtilsLib:1.1'                      //公共类
-    compile 'cn.yc:YCMultiInputViewLib:1.0'             //倒计数
-    compile 'cn.yc:YCProgressLib:1.0'                   //进度条
-    compile 'cn.yc:YCCardViewLib:1.2'                   //滑动卡片
-    compile 'cn.yc:YCCustomTextLib:1.6'                 //自定义超文本
-    compile 'cn.yc:YCRecycleViewLib:1.1'                //RecycleView封装类
-    compile 'cn.yc:YCWeatherLib:1.0'                    //天气自定义控件
-    compile 'cn.yc:YCGalleryLib:1.1'                    //自定义画廊
-    compile 'cn.yc:YCBaseAdapterLib:1.0'                //adapter封装
+    compile files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
+
+
+    compile 'cn.yc:YCStateLib:1.0'              //状态管理
+    compile 'cn.yc:YCPhotoLib:1.0'              //图片选择器
+    compile 'cn.yc:YCDialogLib:3.2'             //弹窗
+    compile 'cn.yc:YCCountDownViewLib:1.0'      //倒计时器
+    compile 'cn.yc:YCUtilsLib:1.2'              //公共类
+    compile 'cn.yc:YCMultiInputViewLib:1.0'     //倒计数
+    compile 'cn.yc:YCProgressLib:1.0'           //进度条
+    compile 'cn.yc:YCCardViewLib:1.2'           //滑动卡片
+    compile 'cn.yc:YCCustomTextLib:2.1'         //自定义超文本
+    compile 'cn.yc:YCRecycleViewLib:1.1'        //RecycleView封装类
+    compile 'cn.yc:YCWeatherLib:1.0'            //天气自定义控件
+    compile 'cn.yc:YCGalleryLib:1.1'            //自定义画廊
+    compile 'cn.yc:YCBaseAdapterLib:1.2'        //adapter封装
+    compile 'cn.yc:YCBannerLib:1.1'             //轮播图
 
 }

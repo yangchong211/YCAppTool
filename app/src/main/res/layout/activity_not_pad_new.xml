@@ -77,7 +77,7 @@
     <View style="@style/DeepUnderLine"
         android:layout_height="5dp"/>
 
-    <com.ns.yc.yccustomtextlib.HyperTextEditor
+    <com.ns.yc.yccustomtextlib.hyper.HyperTextEditor
         android:id="@+id/et_new_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

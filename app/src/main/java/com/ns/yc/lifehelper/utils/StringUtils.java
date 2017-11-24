@@ -51,7 +51,6 @@ public class StringUtils {
             while (result_img) {
                 //获取到匹配的<img />标签中的内容
                 String str_img = m_img.group(2);
-
                 //开始匹配<img />标签中的src
                 Pattern p_src = Pattern.compile("(src|SRC)=(\"|\')(.*?)(\"|\')");
                 Matcher m_src = p_src.matcher(str_img);

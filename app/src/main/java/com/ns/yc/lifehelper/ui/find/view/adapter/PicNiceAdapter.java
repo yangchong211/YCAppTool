@@ -1,8 +1,6 @@
 package com.ns.yc.lifehelper.ui.find.view.adapter;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.content.Context;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -10,8 +8,8 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.find.bean.GanKNicePicBean;
 import com.ns.yc.lifehelper.ui.other.myPicture.view.MyPicNiceActivity;
 import com.ns.yc.lifehelper.utils.ImageUtils;
-
-import java.util.List;
+import com.yc.cn.ycbaseadapterlib.first.BaseAdapter;
+import com.yc.cn.ycbaseadapterlib.first.BaseViewHolder;
 
 /**
  * ================================================
@@ -22,45 +20,26 @@ import java.util.List;
  * 修订历史：
  * ================================================
  */
-public class PicNiceAdapter extends RecyclerView.Adapter<PicNiceAdapter.MyViewHolder> {
+public class PicNiceAdapter extends BaseAdapter<GanKNicePicBean.ResultsBean> {
 
     public MyPicNiceActivity activity;
-    public List<GanKNicePicBean.ResultsBean> gankPic;
 
-    public PicNiceAdapter(MyPicNiceActivity activity, List<GanKNicePicBean.ResultsBean> gankPic) {
-        this.activity = activity;
-        this.gankPic = gankPic;
+
+    public PicNiceAdapter(Context context) {
+        super(context,R.layout.item_nice_pic_card);
     }
 
-    @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.item_nice_pic_card, parent, false);
-        return new MyViewHolder(view);
-    }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    protected void bindData(BaseViewHolder holder, GanKNicePicBean.ResultsBean resultsBean) {
         int width = activity.getWindowManager().getDefaultDisplay().getWidth();
-        ViewGroup.LayoutParams params = holder.iv_nice_img.getLayoutParams();
+        ImageView iv_image = holder.getView(R.id.iv_nice_img);
+        ViewGroup.LayoutParams params = iv_image.getLayoutParams();
         //设置图片的相对于屏幕的宽高比
         params.width = width / 2;
         params.height =  (int) (200 + Math.random() * 400) ;
-        holder.iv_nice_img.setLayoutParams(params);
-        ImageUtils.loadImgByPicasso(activity,gankPic.get(position).getUrl(),holder.iv_nice_img);
+        holder.getView(R.id.iv_nice_img).setLayoutParams(params);
+        ImageUtils.loadImgByPicasso(activity,resultsBean.getUrl(), R.drawable.image_default , iv_image);
     }
 
-    @Override
-    public int getItemCount() {
-        return gankPic!=null ? gankPic.size() : 0;
-    }
-
-    class MyViewHolder extends  RecyclerView.ViewHolder{
-
-        ImageView iv_nice_img;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            iv_nice_img = (ImageView) itemView.findViewById(R.id.iv_nice_img);
-        }
-    }
 }

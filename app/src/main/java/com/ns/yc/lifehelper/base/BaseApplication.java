@@ -13,6 +13,7 @@ import com.ns.yc.lifehelper.api.LogInterceptor;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.smtt.sdk.QbSdk;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -79,6 +80,7 @@ public class BaseApplication extends Application {
         initBugly();                                    //初始化腾讯bug管理平台
         BaseAppManager.getInstance().init(this);        //栈管理
         BaseConfig.INSTANCE.initConfig();               //初始化配置信息
+        initQQX5();                                     //初始化腾讯X5
     }
 
 
@@ -201,6 +203,29 @@ public class BaseApplication extends Application {
         CrashReport.initCrashReport(getApplicationContext(), "a3f5f3820f", false ,strategy);
         //Bugly.init(getApplicationContext(), "1374455732", false);
     }
+
+
+    /**
+     * 初始化腾讯X5
+     */
+    private void initQQX5() {
+        QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
+
+            @Override
+            public void onViewInitFinished(boolean arg0) {
+                //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
+                Log.d("app", " onViewInitFinished is " + arg0);
+            }
+
+            @Override
+            public void onCoreInitFinished() {
+
+            }
+        };
+        //x5内核初始化接口
+        QbSdk.initX5Environment(getApplicationContext(),  cb);
+    }
+
 
 }
 

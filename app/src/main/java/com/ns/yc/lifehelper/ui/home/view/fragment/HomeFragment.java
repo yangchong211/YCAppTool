@@ -21,9 +21,10 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantImageApi;
+import com.ns.yc.lifehelper.base.BannerImageLoader;
 import com.ns.yc.lifehelper.base.BaseFragment;
-import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.bean.HomeBlogEntity;
+import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.MyKnowledgeActivity;
@@ -39,7 +40,6 @@ import com.ns.yc.yccardviewlib.CardViewLayout;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
-import com.youth.banner.loader.ImageLoader;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -281,13 +281,6 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
             banner.setIndicatorGravity(BannerConfig.RIGHT);
             //banner设置方法全部调用完毕时最后调用
             banner.start();
-        }
-    }
-
-    private class BannerImageLoader extends ImageLoader {
-        @Override
-        public void displayImage(Context context, Object path, ImageView imageView) {
-            ImageUtils.loadImgByPicasso(context, (String) path,R.drawable.image_default ,imageView);
         }
     }
 

@@ -30,7 +30,7 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
 
     /**
      * 默认分割线：高度为2px，颜色为灰色
-     * @param context
+     * @param context     上下文
      * @param orientation 列表方向
      */
     public RecycleViewItemLine(Context context, int orientation) {
@@ -45,7 +45,7 @@ public class RecycleViewItemLine extends RecyclerView.ItemDecoration {
 
     /**
      * 自定义分割线
-     * @param context
+     * @param context     上下文
      * @param orientation 列表方向
      * @param drawableId  分割线图片,或者shape图形
      */

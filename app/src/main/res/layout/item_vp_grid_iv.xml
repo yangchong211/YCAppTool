@@ -22,6 +22,7 @@
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/blackText1"
         android:text="找投资"/>
 
 </LinearLayout>

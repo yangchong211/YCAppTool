@@ -13,6 +13,10 @@ public class HomeBlogEntity {
     private String time;
     private String author;
 
+    public HomeBlogEntity(){
+
+    }
+
     public HomeBlogEntity(JSONObject jsonObject) {
         this.title = jsonObject.optString("title");
         this.logo = jsonObject.optString("logo");

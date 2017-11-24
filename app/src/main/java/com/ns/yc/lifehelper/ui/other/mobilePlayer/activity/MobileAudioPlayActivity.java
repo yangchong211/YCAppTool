@@ -105,6 +105,7 @@ public class MobileAudioPlayActivity extends BaseActivity implements View.OnClic
         return R.layout.activity_mobile_audio_play;
     }
 
+
     @Override
     public void initView() {
         EventBusUtils.register(MobileAudioPlayActivity.this);

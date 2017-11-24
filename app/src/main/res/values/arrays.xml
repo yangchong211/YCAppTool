@@ -1,39 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--天气页面-->
-    <string-array name="indicator_strings">
-        <item name="indicator_string_1">优</item>
-        <item name="indicator_string_2">良</item>
-        <item name="indicator_string_3">轻度污染</item>
-        <item name="indicator_string_4">中度污染</item>
-        <item name="indicator_string_5">重度污染</item>
-        <item name="indicator_string_5">严重污染</item>
-    </string-array>
+    <!--///////////////////////////////////////首页/////////////////////////////////////-->
 
-    <!--天气页面指示器颜色-->
-    <integer-array name="indicator_colors">
-        <item name="indicator_color_1">@color/indicator_color_1</item>
-        <item name="indicator_color_2">@color/indicator_color_2</item>
-        <item name="indicator_color_3">@color/indicator_color_3</item>
-        <item name="indicator_color_4">@color/indicator_color_4</item>
-        <item name="indicator_color_5">@color/indicator_color_5</item>
-        <item name="indicator_color_6">@color/indicator_color_6</item>
-    </integer-array>
-
-
-    <string-array name="sub_rank_tabs">
-        <item>周榜</item>
-        <item>月榜</item>
-        <item>总榜</item>
-    </string-array>
-
-    <string-array name="sub_tabs">
-        <item>新书</item>
-        <item>热门</item>
-        <item>口碑</item>
-        <item>完结</item>
-    </string-array>
 
     <!--首页底部导航栏的标题，未选中时-->
     <integer-array name="main_tab_un_select">
@@ -58,6 +27,82 @@
         <item>工具</item>
         <item>更多</item>
     </string-array>
+
+
+
+    <!--///////////////////////////////////////发现/////////////////////////////////////-->
+
+
+    <!--发现页图片-->
+    <integer-array name="find_gv_image">
+        <item>@drawable/ic_category_16</item>
+        <item>@drawable/ic_category_18</item>
+        <item>@drawable/ic_category_2</item>
+        <item>@drawable/ic_category_6</item>
+        <item>@drawable/ic_category_27</item>
+        <item>@drawable/ic_category_24</item>
+        <item>@drawable/ic_category_22</item>
+        <item>@drawable/ic_category_14</item>
+    </integer-array>
+    <!--发现页图片对应的位子-->
+    <string-array name="find_gv_title">
+        <item>干货集中营</item>
+        <item>播放器</item>
+        <item>超文本</item>
+        <item>时光笔记</item>
+        <item>7日天气</item>
+        <item>绘画板</item>
+        <item>快读</item>
+        <item>时光聆听</item>
+    </string-array>
+
+
+    <string-array name="find_list1_title">
+        <item>阅读器</item>
+        <item>音乐</item>
+        <item>视频</item>
+        <item>美图</item>
+        <item>唐诗</item>
+        <item>宋词</item>
+        <item>元曲</item>
+        <item>番茄</item>
+    </string-array>
+    <integer-array name="find_list1_image">
+        <item>@drawable/ic_data_picture</item>
+        <item>@drawable/ic_data_music</item>
+        <item>@drawable/ic_data_video</item>
+        <item>@drawable/ic_data_picture</item>
+        <item>@drawable/ic_data_video</item>
+        <item>@drawable/ic_data_music</item>
+        <item>@drawable/ic_data_picture</item>
+        <item>@drawable/ic_data_video</item>
+    </integer-array>
+
+
+
+    <string-array name="find_list3_title">
+        <item>豆瓣电影</item>
+        <item>豆瓣音乐</item>
+        <item>豆瓣读书</item>
+    </string-array>
+    <integer-array name="find_list3_image">
+        <item>@drawable/bg_small_autumn_tree_min</item>
+        <item>@drawable/bg_small_leaves_min</item>
+        <item>@drawable/bg_small_magnolia_trees_min</item>
+    </integer-array>
+
+
+
+    <string-array name="find_list4_title">
+        <item>微信精选</item>
+        <item>时事热点</item>
+        <item>今日头条</item>
+    </string-array>
+    <integer-array name="find_list4_image">
+        <item>@drawable/bg_small_autumn_tree_min</item>
+        <item>@drawable/bg_small_leaves_min</item>
+        <item>@drawable/bg_small_magnolia_trees_min</item>
+    </integer-array>
 
 
     <!--发现页图片-->
@@ -91,6 +136,10 @@
         <item>翻译</item>
         <item>缴费</item>
     </string-array>
+
+
+    <!--///////////////////////////////////////数据/////////////////////////////////////-->
+
 
     <!--数据页图片-->
     <integer-array name="data_pro_pic">
@@ -144,7 +193,7 @@
     <!--数据页小工具图片对应的位子-->
     <string-array name="data_tool_pro_title">
         <item>笔记本</item>
-        <item>计算器</item>
+        <item>腾讯X5</item>
         <item>360工具</item>
         <item>听听</item>
         <item>播放器</item>
@@ -208,6 +257,40 @@
         <item>今日</item>
         <item>翻译</item>
         <item>缴费</item>
+    </string-array>
+
+    <!--天气页面-->
+    <string-array name="indicator_strings">
+        <item name="indicator_string_1">优</item>
+        <item name="indicator_string_2">良</item>
+        <item name="indicator_string_3">轻度污染</item>
+        <item name="indicator_string_4">中度污染</item>
+        <item name="indicator_string_5">重度污染</item>
+        <item name="indicator_string_5">严重污染</item>
+    </string-array>
+
+    <!--天气页面指示器颜色-->
+    <integer-array name="indicator_colors">
+        <item name="indicator_color_1">@color/indicator_color_1</item>
+        <item name="indicator_color_2">@color/indicator_color_2</item>
+        <item name="indicator_color_3">@color/indicator_color_3</item>
+        <item name="indicator_color_4">@color/indicator_color_4</item>
+        <item name="indicator_color_5">@color/indicator_color_5</item>
+        <item name="indicator_color_6">@color/indicator_color_6</item>
+    </integer-array>
+
+
+    <string-array name="sub_rank_tabs">
+        <item>周榜</item>
+        <item>月榜</item>
+        <item>总榜</item>
+    </string-array>
+
+    <string-array name="sub_tabs">
+        <item>新书</item>
+        <item>热门</item>
+        <item>口碑</item>
+        <item>完结</item>
     </string-array>
 
 </resources>

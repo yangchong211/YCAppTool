@@ -50,46 +50,8 @@
             android:text="干货定制" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:gravity="center_vertical"
-        android:background="@color/colorWhite">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/redTab"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="头条"/>
-
-        <View
-            android:layout_width="5dp"
-            android:layout_height="25dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:background="@color/redTab"/>
-
-        <!--上下滚动TextView-->
-        <com.ns.yc.lifehelper.ui.weight.MarqueeView
-            android:id="@+id/marqueeView"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical"
-            app:paddingStart="0dp"
-            app:mvAnimDuration="1000"
-            app:mvInterval="2000"
-            app:mvTextColor="#464C4E"
-            app:mvTextSize="16sp"
-            app:mvSingleLine="true"/>
-    </LinearLayout>
+    <include layout="@layout/view_vlayout_marquee"/>
 
     <!--注意外面一定要嵌套一层帧布局，线性布局，相对布局都行，解决与BGA滑动冲突事件-->
     <FrameLayout

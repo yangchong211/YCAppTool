@@ -68,6 +68,4 @@ public class ConstantALiYunApi {
      */
     public static final String NEW_SEED = "https://nsapi.pedaily.cn";
 
-
-
 }

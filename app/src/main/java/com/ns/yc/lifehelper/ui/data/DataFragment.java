@@ -29,10 +29,12 @@ import com.ns.yc.lifehelper.adapter.NarrowImageAdapter;
 import com.ns.yc.lifehelper.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
 import com.ns.yc.lifehelper.api.ConstantImageApi;
+import com.ns.yc.lifehelper.base.BannerImageLoader;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.bean.ImageIconBean;
 import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
 import com.ns.yc.lifehelper.ui.data.view.activity.GalleryImageActivity;
+import com.ns.yc.lifehelper.ui.data.view.activity.OpenFileActivity;
 import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
@@ -44,12 +46,10 @@ import com.ns.yc.lifehelper.ui.other.safe360.SafeHomeActivity;
 import com.ns.yc.lifehelper.ui.other.toDo.view.ToDoTimerActivity;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.weight.MyGridView;
-import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
-import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -192,21 +192,15 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
         return rootView;
     }
 
-    private class BannerImageLoader extends ImageLoader {
-        @Override
-        public void displayImage(Context context, Object path, ImageView imageView) {
-            ImageUtils.loadImgByPicasso(context, (String) path, R.drawable.image_default ,imageView);
-        }
-    }
 
     private void iniVpData() {
         List<ImageIconBean> listDatas = new ArrayList<>();
-        int mPageSize = 8;              //每页显示的最大的数量
+        final int mPageSize = 8;              //每页显示的最大的数量
         TypedArray proPic = activity.getResources().obtainTypedArray(R.array.data_pro_pic);
         String[] proName = activity.getResources().getStringArray(R.array.data_pro_title);
         for (int i = 0; i < proName.length; i++) {
             int proPicId = proPic.getResourceId(i, R.drawable.ic_investment);
-            listDatas.add(new ImageIconBean(proName[i], proPicId));
+            listDatas.add(new ImageIconBean(proName[i], proPicId,i));
         }
         proPic.recycle();
         //总的页数向上取整
@@ -221,8 +215,10 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                     Object obj = gridView.getItemAtPosition(position);
+                    //int pos = position + totalPage * mPageSize;
                     if (obj != null && obj instanceof ImageIconBean) {
-                        switch (position) {
+                        int pos = ((ImageIconBean) obj).getId();
+                        switch (pos) {
                             case 0:
                                 startActivity(ExpressDeliveryActivity.class);
                                 break;
@@ -308,7 +304,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
                         startActivity(NoteActivity.class);
                         break;
                     case 1:
-
+                        startActivity(OpenFileActivity.class);
                         break;
                     case 2:
                         startActivity(SafeHomeActivity.class);

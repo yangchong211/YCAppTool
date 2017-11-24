@@ -16,10 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.ns.yc.lifehelper.base.BaseApplication;
 
 import java.lang.ref.WeakReference;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -302,6 +305,21 @@ public class AppUtil {
         return false;
     }
 
+    /**
+     * 吐司工具类    避免点击多次导致吐司多次，最后导致Toast就长时间关闭不掉了
+     * @param context       注意：这里如果传入context会报内存泄漏
+     * @param content
+     */
+    private static Toast toast;
+    public static void showToast(Context context, String content) {
+        if (toast == null) {
+            toast = Toast.makeText(context.getApplicationContext(), content, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(content);
+        }
+        toast.show();
+    }
+
 
     /**
      * 判断是否锁屏
@@ -318,5 +336,28 @@ public class AppUtil {
         }
     }
 
+    public static String hashKey(String key) {
+        String hashKey;
+        try {
+            final MessageDigest mDigest = MessageDigest.getInstance("MD5");
+            mDigest.update(key.getBytes());
+            hashKey = bytesToHexString(mDigest.digest());
+        } catch (NoSuchAlgorithmException e) {
+            hashKey = String.valueOf(key.hashCode());
+        }
+        return hashKey;
+    }
+
+    private static String bytesToHexString(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            String hex = Integer.toHexString(0xFF & bytes[i]);
+            if (hex.length() == 1) {
+                sb.append('0');
+            }
+            sb.append(hex);
+        }
+        return sb.toString();
+    }
 
 }

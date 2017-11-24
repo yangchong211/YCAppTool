@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.guide.view.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -74,7 +75,9 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
 
     @Override
     public void initData() {
-
+        presenter.cacheHomeNewsData();
+        presenter.cacheFindNewsData();
+        presenter.cacheFindBottomNewsData();
     }
 
     private void initCountDownView() {
@@ -133,6 +136,11 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
                         //加载失败
                     }
                 });*/
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
     }
 
 

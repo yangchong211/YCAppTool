@@ -1,9 +1,14 @@
 package com.ns.yc.lifehelper.api;
 
+import android.os.Environment;
+
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.bean.HomeBlogEntity;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ================================================
@@ -47,6 +52,19 @@ public class Constant {
         String OVER = "over";
     }
 
+    public interface viewType{
+        int typeBanner = 1;         //轮播图
+        int typeGv = 2;             //九宫格
+        int typeTitle = 3;          //标题
+        int typeList = 4;           //list
+        int typeNews = 5;           //新闻
+        int typeMarquee = 6;        //跑马灯
+        int typePlus = 7 ;          //不规则视图
+        int typeSticky = 8;         //指示器
+        int typeFooter = 9;         //底部
+        int typeGvSecond = 10;      //九宫格
+    }
+
     public class status{
         public static final int success=200;
         public static final int error=-1;
@@ -60,6 +78,43 @@ public class Constant {
         int add_old = 2;            //修改
     }
 
+    public static int NEW_ACTIVITY_REQUEST_CODE = 0;
+    public static int EDIT_ACTIVITY_REQUEST_CODE = 1;
+    public static String INTENT_EXTRA_DAY_OF_WEEK = "DAY_OF_WEEK";
+    public static String INTENT_BUNDLE_NEW_TASK_DETAIL = "NEW_TASK_DETAIL";
+    public static String INTENT_EXTRA_EDIT_TASK_DETAIL_ENTITY = "EDIT_TASK_DETAIL_ENTITY";
+    public static String INTENT_EXTRA_MODE_OF_NEW_ACT = "MODE_OF_NEW_ACT";
+    public static String INTENT_EXTRA_SWITCH_TO_INDEX = "SWITCH_TO_INDEX";
+    public static String CHOOSE_PAPER_DIALOG_CHECK_ITEM_BUNDLE_KEY = "CHECK_ITEM_BUNDLE_KEY";
+    public static String ExternalStorageDirectory = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
+    public static String DATABASE_FILE_PATH_FOLDER = "WeekToDo";
+    public static String DATABASE_FILE_PATH_FILE_NAME = "data.realm";
+    public static String DATABASE_FILE_BACKUP_PATH_FOLDER = "番茄周/备份";
+    public static String DATABASE_FILE_EXPORT_PATH_FOLDER = "番茄周/导出";
+
+    public static long AUTO_NOTIFY_INTERVAL_TIME = 60 * 60 * 1000;
+    public static int AUTO_NOTIFY_NOTIFICATION_ID = 0;
+    public interface MODE_OF_NEW_ACT {
+        int MODE_EDIT = 5;
+        int MODE_CREATE = 6;
+        int MODE_QUICK = 7;
+    }
+
+    public interface CONFIG_KEY {
+        String SHOW_WEEK_TASK = "SHOW_WEEK_TASK";
+        String SHOW_AS_LIST = "SHOW_AS_LIST";
+        String SHOW_PRIORITY = "SHOW_PRIORITY";
+        String NIGHT_MODE = "NIGHT_MODE";
+        String AUTO_SWITCH_NIGHT_MODE = "AUTO_SWITCH_NIGHT_MODE";
+        String BACKUP = "BACKUP";
+        String RECOVERY = "RECOVERY";
+        String AUTO_NOTIFY = "AUTO_NOTIFY";
+    }
+
+    public interface TaskState {
+        int DEFAULT = 0;
+        int FINISHED = 1;
+    }
 
     /**-------------------------------------键-------------------------------------------------**/
     //Sp键
@@ -71,4 +126,9 @@ public class Constant {
     public static String KEY_THUMBNAIL_QUALITY = "thumbnail_quality";       //启动页是否概率出现
     public static String KEY_BANNER_URL = "banner_url";                     //启动页是否概率出现
 
+
+    /**-------------------------------------集合-------------------------------------------------**/
+    //
+    public static List<HomeBlogEntity> findNews = new ArrayList<>();
+    public static List<HomeBlogEntity> findBottomNews = new ArrayList<>();
 }

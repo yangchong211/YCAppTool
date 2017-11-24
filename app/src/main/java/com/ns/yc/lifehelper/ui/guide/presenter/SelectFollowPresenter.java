@@ -59,7 +59,6 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
     }
 
     private void addUnSelectData() {
-
         if(realm.where(SelectUnFollow.class).findAll()!=null){
             selectUnFollows = realm.where(SelectUnFollow.class).findAll();
         }else {

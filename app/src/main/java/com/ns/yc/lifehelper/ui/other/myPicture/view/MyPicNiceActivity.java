@@ -139,8 +139,9 @@ public class MyPicNiceActivity extends BaseActivity implements View.OnClickListe
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);//不设置的话，图片闪烁错位，有可能有整列错位的情况。
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new PicNiceAdapter(MyPicNiceActivity.this, gankPic);
+        adapter = new PicNiceAdapter(MyPicNiceActivity.this);
         recyclerView.setAdapter(adapter);
+        adapter.setData(gankPic);
     }
 
 
@@ -163,7 +164,7 @@ public class MyPicNiceActivity extends BaseActivity implements View.OnClickListe
                     @Override
                     public void onNext(GanKNicePicBean ganKNicePicBean) {
                         if(adapter==null){
-                            adapter = new PicNiceAdapter(MyPicNiceActivity.this, gankPic);
+                            adapter = new PicNiceAdapter(MyPicNiceActivity.this);
                         }
                         if(page==1){
                             if(ganKNicePicBean!=null){
@@ -171,7 +172,7 @@ public class MyPicNiceActivity extends BaseActivity implements View.OnClickListe
                                     List<GanKNicePicBean.ResultsBean> results = ganKNicePicBean.getResults();
                                     gankPic.clear();
                                     gankPic.addAll(results);
-                                    adapter.notifyDataSetChanged();
+                                    adapter.setData(gankPic);
                                     bgaRefresh.scrollTo(0,0);
                                 }else {
                                     bgaRefresh.endRefreshing();
@@ -184,7 +185,7 @@ public class MyPicNiceActivity extends BaseActivity implements View.OnClickListe
                                 if(ganKNicePicBean.getResults()!=null && ganKNicePicBean.getResults().size()>0){
                                     List<GanKNicePicBean.ResultsBean> results = ganKNicePicBean.getResults();
                                     gankPic.addAll(results);
-                                    adapter.notifyDataSetChanged();
+                                    adapter.setData(gankPic);
                                     bgaRefresh.endLoadingMore();
                                 }else {
                                     bgaRefresh.endLoadingMore();

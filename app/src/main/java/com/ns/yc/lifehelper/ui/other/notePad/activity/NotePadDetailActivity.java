@@ -16,7 +16,7 @@ import com.ns.yc.lifehelper.ui.other.notePad.bean.NotePadDetail;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
 import com.ns.yc.lifehelper.utils.SDCardUtils;
 import com.ns.yc.lifehelper.utils.StringUtils;
-import com.ns.yc.yccustomtextlib.HyperTextView;
+import com.ns.yc.yccustomtextlib.hyper.HyperTextView;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 
 import java.io.File;
