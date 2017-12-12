@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -249,6 +250,7 @@ public class WebViewActivity extends BaseActivity {
         }
         /** 设置字体默认缩放大小(改变网页字体大小,setTextSize  api14被弃用)*/
         ws.setTextZoom(100);
+        mWebView.addJavascriptInterface(new JavascriptInterface(this), "injectedObject");
         mWebView.setWebViewClient(new MyWebViewClient());
         mWebView.setWebChromeClient(webChromeClient = new MyWebChromeClient());
     }
@@ -500,5 +502,27 @@ public class WebViewActivity extends BaseActivity {
                 "}" +
                 "})()");
     }
+
+    /***
+     * 打开图片js通信接口
+     */
+    public class JavascriptInterface {
+        private Context context;
+
+        JavascriptInterface(Context context) {
+            this.context = context;
+        }
+
+        //打开图片
+        @android.webkit.JavascriptInterface
+        public void imageClick(String img) {
+            Intent intent = new Intent();
+            intent.putExtra("url", img);
+            //intent.setClass(context, ImgUrlActivity.class);
+            context.startActivity(intent);
+            Log.i("js接口返回数据", img + "--图片--");
+        }
+    }
+
 
 }

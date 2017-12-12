@@ -36,7 +36,8 @@ public class Constant {
     public static String QQUrl = "http://android.myapp.com/myapp/detail.htm?apkName=com.zero2ipo.harlanhu.pedaily";
     //loading加载style样式
     public static int loadingStyle = R.style.Loading;
-
+    //本地路径
+    public static String ExternalStorageDirectory = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 
     @Retention(RetentionPolicy.SOURCE)
     public @interface Gender {
@@ -86,7 +87,6 @@ public class Constant {
     public static String INTENT_EXTRA_MODE_OF_NEW_ACT = "MODE_OF_NEW_ACT";
     public static String INTENT_EXTRA_SWITCH_TO_INDEX = "SWITCH_TO_INDEX";
     public static String CHOOSE_PAPER_DIALOG_CHECK_ITEM_BUNDLE_KEY = "CHECK_ITEM_BUNDLE_KEY";
-    public static String ExternalStorageDirectory = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
     public static String DATABASE_FILE_PATH_FOLDER = "WeekToDo";
     public static String DATABASE_FILE_PATH_FILE_NAME = "data.realm";
     public static String DATABASE_FILE_BACKUP_PATH_FOLDER = "番茄周/备份";
@@ -116,6 +116,25 @@ public class Constant {
         int FINISHED = 1;
     }
 
+    public interface LikeType{
+        int TYPE_ZHI_HU = 101;
+        int TYPE_GIRL = 105;
+        int TYPE_WE_CHAT = 106;
+    }
+
+    public interface DetailKeys{
+        String IT_DETAIL_URL = "url";
+        String IT_DETAIL_IMG_URL = "img_url";
+        String IT_DETAIL_ID = "id";
+        String IT_DETAIL_TYPE = "type";
+        String IT_DETAIL_TITLE = "title";
+
+        String IT_GOLD_TYPE = "type";
+        String IT_GOLD_TYPE_STR = "type_str";
+        String IT_GOLD_MANAGER = "manager";
+    }
+
+
     /**-------------------------------------键-------------------------------------------------**/
     //Sp键
     public static String KEY_FIRST_SPLASH = "first_splash";                 //是否第一次启动
@@ -131,4 +150,10 @@ public class Constant {
     //
     public static List<HomeBlogEntity> findNews = new ArrayList<>();
     public static List<HomeBlogEntity> findBottomNews = new ArrayList<>();
+
+
+    /**-------------------------------------腾讯x5页面-------------------------------------------------**/
+    public static final String SP_NO_IMAGE = "no_image";
+    public static final String SP_AUTO_CACHE = "auto_cache";
+
 }

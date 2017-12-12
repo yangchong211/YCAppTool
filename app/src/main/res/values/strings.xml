@@ -16,6 +16,11 @@
         \n\n完全开源，最佳的源代码，最佳的学习软件，如果你觉得不错，可以帮忙分享给你更多的朋友，这是我们最大的动力和支持，非常感谢！
         \n\n另外，如果喜欢你也可以下载我开发的其它应用：投资界，新芽</string>
 
+    <string name="data_timer_note">时光日志</string>
+    <string name="data_news_zhi_hu">知乎日报</string>
+    <string name="data_new_look">最新观察</string>
+    <string name="data_small_tool">实用工具</string>
+    <string name="data_edit">编辑笔记</string>
 
     <string name="menu_main_please_login">请登录</string>
     <string name="menu_main_my_message">我的消息</string>

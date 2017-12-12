@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.ns.yc.lifehelper.api.ConstantGanKApi;
 import com.ns.yc.lifehelper.api.RetrofitWrapper;
-import com.ns.yc.lifehelper.ui.find.api.GanKNicePicApi;
-import com.ns.yc.lifehelper.ui.find.bean.GanKNicePicBean;
+import com.ns.yc.lifehelper.ui.find.model.api.GanKNicePicApi;
+import com.ns.yc.lifehelper.ui.find.model.bean.GanKNicePicBean;
 
 import rx.Observable;
 

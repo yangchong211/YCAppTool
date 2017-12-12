@@ -81,6 +81,8 @@ public class ShadowImageView extends ImageView {
         circle.getPaint().setColor(DEFAULT_BACKGROUND_COLOR);
         setBackground(circle);
 
+
+
         mRotateAnimator = ObjectAnimator.ofFloat(this, "rotation", 0f, 360f);
         mRotateAnimator.setDuration(7200);
         mRotateAnimator.setInterpolator(new LinearInterpolator());

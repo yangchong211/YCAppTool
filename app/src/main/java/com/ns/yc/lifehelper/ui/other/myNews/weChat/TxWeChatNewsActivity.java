@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.myNews.weChat;
 
-import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -13,12 +14,13 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantTxApi;
 import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.WebViewQQActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.adapter.TxWeChatAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.bean.WeChatBean;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.WeChatModel;
-import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.NewsContentActivity;
 
 import butterknife.Bind;
 import rx.Subscriber;
@@ -31,7 +33,7 @@ import rx.schedulers.Schedulers;
  * 作    者：杨充
  * 版    本：1.0
  * 创建日期：2017/9/4
- * 描    述：天行微信新闻
+ * 描    述：微信新闻
  * 修订历史：
  * ================================================
  */
@@ -76,13 +78,17 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onItemClick(int position) {
                 if(position>-1 && adapter.getAllData().size()>position){
-                    Intent intent = new Intent(TxWeChatNewsActivity.this, NewsContentActivity.class);
-                    intent.putExtra("name",adapter.getAllData().get(position).getDescription());
-                    intent.putExtra("url",adapter.getAllData().get(position).getUrl());
-                    startActivity(intent);
+                    WebViewQQActivity.toWhere(new WebViewQQActivity.Builder()
+                            .setContext(TxWeChatNewsActivity.this)
+                            .setId(adapter.getAllData().get(position).getUrl())             //wechat API 没有id，用图片来做唯一数据库索引
+                            .setImgUrl(adapter.getAllData().get(position).getPicUrl())
+                            .setTitle(adapter.getAllData().get(position).getTitle())
+                            .setUrl(adapter.getAllData().get(position).getUrl())
+                            .setType(Constant.LikeType.TYPE_WE_CHAT));
                 }
             }
         });

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/base_tool_bar"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/tv_node_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Geek"
+            android:textColor="@color/blackText1"
+            android:textSize="14sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingStart="12dp"
+            android:background="@color/whiteBg"/>
+    </FrameLayout>
+</LinearLayout>

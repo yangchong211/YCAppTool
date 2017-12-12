@@ -17,7 +17,7 @@
             android:layout_height="match_parent"/>
 
         <!--布局-->
-        <com.ns.yc.lifehelper.ui.weight.scrollView.ReboundScrollView
+        <com.ns.yc.ycutilslib.scrollView.ReboundScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
@@ -268,7 +268,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="144dp" />
             </LinearLayout>
-        </com.ns.yc.lifehelper.ui.weight.scrollView.ReboundScrollView>
+        </com.ns.yc.ycutilslib.scrollView.ReboundScrollView>
     </FrameLayout>
 
 </LinearLayout>

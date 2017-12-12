@@ -34,6 +34,7 @@ public interface WorkDoContract {
         void showDialog(int position, TaskDetailEntity entity);
         Intent getIntent();
         void finishActivity();
+        void showAction(String message, String action, android.view.View.OnClickListener listener);
     }
 
     //Presenter控制器

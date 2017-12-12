@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
@@ -34,6 +36,9 @@ public abstract class BaseActivity extends AppCompatActivity{
         initView();
         initListener();
         initData();
+        if(!NetworkUtils.isConnected()){
+            ToastUtils.showShort("请检查网络是否连接");
+        }
     }
 
     @Override

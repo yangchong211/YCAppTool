@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <animator
+        android:valueFrom="0"
+        android:valueTo="100"
+        android:valueType="intType"
+        android:duration="3000"
+        android:startOffset ="1000"
+        android:fillBefore = "true"
+        android:fillAfter = "false"
+        android:fillEnabled= "true"
+        android:repeatMode= "restart"
+        android:repeatCount = "0"
+        android:interpolator="@android:anim/accelerate_interpolator"/>
+
+        <!--初始值-->
+        <!--结束值-->
+        <!--变化值类型 ：floatType & intType-->
+        <!--动画持续时间（ms），必须设置，动画才有效果-->
+        <!--动画延迟开始时间（ms）-->
+        <!--动画播放完后，视图是否会停留在动画开始的状态，默认为true-->
+        <!--动画播放完后，视图是否会停留在动画结束的状态，优先于fillBefore值，默认为false-->
+        <!--是否应用fillBefore值，对fillAfter值无影响，默认为true-->
+        <!--选择重复播放动画模式，restart代表正序重放，reverse代表倒序回放，默认为restart|-->
+        <!--重放次数（所以动画的播放次数=重放次数+1），为infinite时无限重复-->
+        <!--插值器，即影响动画的播放速度,下面会详细讲-->
+    
+</set>

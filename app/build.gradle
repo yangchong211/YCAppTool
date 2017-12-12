@@ -7,7 +7,7 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.ns.yc.lifehelper"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 25
         versionCode 3
         versionName "1.3"
@@ -74,8 +74,6 @@ dependencies {
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar'
     //轮播图
     compile 'com.youth.banner:banner:1.4.8'
-    // Bus
-    compile 'org.greenrobot:eventbus:3.0.0'
     //网络请求
     compile 'com.zhy:okhttputils:2.5.2'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
@@ -127,7 +125,7 @@ dependencies {
     compile 'cn.yc:YCPhotoLib:1.0'              //图片选择器
     compile 'cn.yc:YCDialogLib:3.2'             //弹窗
     compile 'cn.yc:YCCountDownViewLib:1.0'      //倒计时器
-    compile 'cn.yc:YCUtilsLib:1.2'              //公共类
+    compile 'cn.yc:YCUtilsLib:1.4'              //公共类
     compile 'cn.yc:YCMultiInputViewLib:1.0'     //倒计数
     compile 'cn.yc:YCProgressLib:1.0'           //进度条
     compile 'cn.yc:YCCardViewLib:1.2'           //滑动卡片
@@ -136,6 +134,6 @@ dependencies {
     compile 'cn.yc:YCWeatherLib:1.0'            //天气自定义控件
     compile 'cn.yc:YCGalleryLib:1.1'            //自定义画廊
     compile 'cn.yc:YCBaseAdapterLib:1.2'        //adapter封装
-    compile 'cn.yc:YCBannerLib:1.1'             //轮播图
+    compile 'cn.yc:YCBannerLib:1.2'             //轮播图
 
 }

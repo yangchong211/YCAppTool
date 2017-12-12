@@ -6,7 +6,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.find.view.activity.RiddleActivity;
+import com.ns.yc.lifehelper.ui.data.view.activity.RiddleActivity;
 
 /**
  * ================================================

@@ -7,7 +7,7 @@
 
     <include layout="@layout/base_tool_bar"/>
 
-    <com.ns.yc.lifehelper.ui.weight.scrollView.BounceScrollView
+    <com.ns.yc.ycutilslib.scrollView.BounceScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -181,7 +181,7 @@
 
         </LinearLayout>
 
-    </com.ns.yc.lifehelper.ui.weight.scrollView.BounceScrollView>
+    </com.ns.yc.ycutilslib.scrollView.BounceScrollView>
 
 
 </LinearLayout>

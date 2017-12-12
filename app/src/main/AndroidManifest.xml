@@ -58,15 +58,22 @@
         <activity android:name=".ui.data.view.activity.GalleryImageActivity"/>
         <activity android:name=".ui.other.douBook.view.DouBookActivity"/>
         <activity android:name=".ui.other.douBook.view.activity.DouBookDetailActivity"/>
-
+        <activity android:name=".ui.other.zhihu.ui.ZhiHuNewsActivity"/>
         <activity android:name=".ui.other.douMusic.view.DouMusicActivity"/>
         <activity android:name=".ui.other.douMusic.view.activity.DouMusicDetailActivity"/>
-
+        <activity android:name=".ui.main.view.activity.WebViewAnimActivity"
+                  android:configChanges="orientation|screenSize|keyboardHidden"
+                  android:windowSoftInputMode="stateHidden|adjustResize"
+                  android:launchMode="singleTop"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuCommentActivity"/>
+        <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuThemeListActivity"/>
+        <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuSectionListActivity"/>
         <activity android:name=".ui.other.toDo.view.ToDoTimerActivity"/>
         <activity android:name=".ui.other.toDo.view.activity.ToDoAddActivity"/>
         <activity android:name=".ui.find.view.activity.FastLookActivity"/>
         <activity android:name=".ui.other.weather.SevenWeatherActivity"/>
-
+        <activity android:name=".ui.main.view.activity.WebViewQQActivity"/>
         <activity android:name=".ui.other.bookReader.view.BookReaderActivity"/>
         <activity android:name=".ui.other.bookReader.view.activity.ReaderSubjectActivity"/>
         <activity android:name=".ui.other.bookReader.bean.ReaderTopBookActivity"/>
@@ -86,9 +93,11 @@
         <activity android:name=".ui.other.bookReader.view.activity.BookDetailDiscussionActivity"/>
         <activity android:name=".ui.other.bookReader.view.activity.BookDetailHelpActivity"/>
         <activity android:name=".ui.other.bookReader.view.activity.ReadBookDetailSubjectActivity"/>
-
+        <activity android:name=".ui.other.gold.view.activity.GoldMainActivity"/>
         <activity android:name=".ui.other.timer.TimerActivity"/>
-
+        <activity android:name=".ui.other.vtex.view.WTexNewsActivity"/>
+        <activity android:name=".ui.other.vtex.view.activity.WTexRepliesActivity"/>
+        <activity android:name=".ui.other.vtex.view.activity.WTNoteActivity"/>
         <activity android:name=".ui.other.myVideo.MyVideoActivity"/>
 
         <activity android:name=".ui.other.myMusic.MyMusicActivity"/>
@@ -135,8 +144,8 @@
         <activity android:name=".ui.other.notePad.activity.NotePadNewActivity"/>
         <activity android:name=".ui.other.notePad.activity.NotePadDetailActivity"/>
 
-        <activity android:name=".ui.find.view.activity.RiddleActivity"/>
-        <activity android:name=".ui.find.view.activity.RiddleDetailActivity"/>
+        <activity android:name=".ui.data.view.activity.RiddleActivity"/>
+        <activity android:name=".ui.data.view.activity.RiddleDetailActivity"/>
         <activity android:name=".ui.data.view.activity.DoodleViewActivity"/>
         <activity android:name=".ui.other.weather.WeatherActivity"/>
 
@@ -233,6 +242,17 @@
             android:name=".receiver.ReminderReceiver"
             android:exported="false">
         </receiver>
+
+
+
+        <!--用于测试，发布时删除-->
+        <activity android:name=".ui.test.aidl.BankActivity"/>
+        <service android:name=".ui.test.aidl.BankService"
+            android:process="cn.aigestudio.BinderServer">
+            <intent-filter>
+                <action android:name="com.ns.yc.lifehelper.ui.test.aidl.BankService"/>
+            </intent-filter>
+        </service>
 
     </application>
 .

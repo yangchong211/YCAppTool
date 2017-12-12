@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,8 +14,9 @@ import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.GuidePresenter;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
-import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.ns.yc.yccountdownviewlib.CountDownView;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 
@@ -56,6 +58,18 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
         presenter.subscribe();
     }
 
+    /**
+     * 屏蔽返回键
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
     @Override
     public int getContentView() {
         return R.layout.activity_guide;
@@ -78,6 +92,7 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
         presenter.cacheHomeNewsData();
         presenter.cacheFindNewsData();
         presenter.cacheFindBottomNewsData();
+        presenter.cacheHomePileData();
     }
 
     private void initCountDownView() {
@@ -121,8 +136,8 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
      */
     @Override
     public void showGuideLogo(String logo) {
-        ImageUtils.loadImgByPicassoError(this,logo,R.drawable.pic_page_background,ivSplashAd);
-        /*Picasso.with(this)
+        //ImageUtils.loadImgByPicassoError(this,logo,R.drawable.pic_page_background,ivSplashAd);
+        Picasso.with(this)
                 .load(logo)
                 .placeholder(R.drawable.pic_page_background)
                 .into(ivSplashAd, new Callback() {
@@ -135,7 +150,7 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
                     public void onError() {
                         //加载失败
                     }
-                });*/
+                });
     }
 
     @Override

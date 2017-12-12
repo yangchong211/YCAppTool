@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import io.realm.Realm;
@@ -75,9 +76,6 @@ public class SongCiActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        /*if(realm!=null){
-            realm.close();
-        }*/
     }
 
     @Override
@@ -131,9 +129,9 @@ public class SongCiActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void initData() {
-        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
         String date = sDateFormat.format(new Date());
-        if(TimeUtils.isToday(date)){
+        if(TimeUtils.isLeapYear(date)){
             isCache = true;
             readCache();
         }else {

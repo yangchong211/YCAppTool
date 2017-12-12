@@ -49,7 +49,7 @@ public class WorkDoNotifyService  extends Service {
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
-        android.support.v4.app.NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_people, "查看", pendingIntent);
+        NotificationCompat.Action action = new NotificationCompat.Action(R.drawable.ic_people, "查看", pendingIntent);
         Notification notification = new NotificationCompat
                 .Builder(this)
                 .setAutoCancel(true)

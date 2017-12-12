@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.ConstantImageApi;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
 
 import java.util.List;
@@ -25,12 +27,14 @@ import java.util.List;
  */
 public class WorkDoAdapter extends RecyclerView.Adapter<WorkDoAdapter.MyViewHolder> {
 
-    private final List<TaskDetailEntity> list;
-    private final Context context;
+    private List<TaskDetailEntity> list;
+    private Context context;
+    private int[] priorityIcons;
 
     public WorkDoAdapter(List<TaskDetailEntity> list, Context context) {
         this.list = list;
         this.context = context;
+        priorityIcons = ConstantImageApi.createPriorityIcons();
     }
 
     @Override
@@ -42,7 +46,33 @@ public class WorkDoAdapter extends RecyclerView.Adapter<WorkDoAdapter.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         holder.tv_title.setText(list.get(position).getTitle());
-        holder.tv_content.setText(list.get(position).getContent());
+
+        String content = list.get(position).getContent();
+        int length = content.length();
+        String s = content.substring(0, Math.min(length, 28));
+        if (length >= 28) s += "...";
+        holder.tv_content.setText(s);
+
+        holder.ic_icon.setImageResource(list.get(position).getIcon());
+
+        if (showPriority) {
+            if (!holder.iv_curr_priority.isShown()){
+                holder.iv_curr_priority.setVisibility(View.VISIBLE);
+            }
+            int priority = list.get(position).getPriority();
+            holder.iv_curr_priority.setImageResource(priorityIcons[priority]);
+        } else {
+            if (holder.iv_curr_priority.isShown()){
+                holder.iv_curr_priority.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        int state = list.get(position).getState();
+        if (state == Constant.TaskState.FINISHED){
+            holder.ll_task_finished_mask.setVisibility(View.VISIBLE);
+        } else{
+            holder.ll_task_finished_mask.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

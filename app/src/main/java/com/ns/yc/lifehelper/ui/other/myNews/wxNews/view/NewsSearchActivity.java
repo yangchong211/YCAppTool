@@ -29,9 +29,9 @@ import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.cache.SearchHis;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.adapter.WxSearchNewsAdapter;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.bean.WxNewsSearchBean;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.WxNewsModel;
+import com.ns.yc.lifehelper.ui.other.myNews.wxNews.view.adapter.WxSearchNewsAdapter;
+import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsSearchBean;
+import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.api.WxNewsModel;
 import com.ns.yc.lifehelper.ui.other.myTsSc.adapter.TangShiSearchAdapter;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiBean;
 import com.ns.yc.lifehelper.ui.other.myTsSc.cache.TsSearchHis;
@@ -85,7 +85,6 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
     private RealmResults<TsSearchHis> searchHises;
     private String type;
     private WxSearchNewsAdapter searchAdapter;
-    private TangShiSearchAdapter hisAdapter;
 
     @Override
     protected void onDestroy() {
@@ -311,7 +310,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
         final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
         rvSearchHis.addItemDecoration(line);
-        hisAdapter = new TangShiSearchAdapter(NewsSearchActivity.this);
+        TangShiSearchAdapter hisAdapter = new TangShiSearchAdapter(NewsSearchActivity.this);
         rvSearchHis.setAdapter(hisAdapter);
     }
 
@@ -327,7 +326,7 @@ public class NewsSearchActivity extends BaseActivity implements View.OnClickList
     }
 
 
-    private String[] hot_tags = {"热点新闻","国际新闻","推荐新闻","笑话","时势新闻","政策新闻","幽默","养生健康","八卦娱乐"};
+    private final String[] hot_tags = {"热点新闻","国际新闻","推荐新闻","笑话","时势新闻","政策新闻","幽默","养生健康","八卦娱乐"};
     private void getHotTags() {
         final List<String> tags = new ArrayList<>();
         for(int a=0 ; a<hot_tags.length ; a++){

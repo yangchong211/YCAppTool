@@ -206,8 +206,21 @@ public class MobileAudioPlayActivity extends BaseActivity implements View.OnClic
      * 初始化音乐动画效果
      */
     private void initAnimMusic() {
+        //第一种方式：用XML方式
         AnimationDrawable rocketAnimation = (AnimationDrawable) ivVisualEffect.getBackground();
         rocketAnimation.start();    // 开启帧动画
+        //rocketAnimation.stop();     //停止动画
+
+
+        //第二种方式：代码方式
+        /*AnimationDrawable drawable = new AnimationDrawable();
+        for(int a=0 ; a<9 ; a++){
+            int id = getResources().getIdentifier("audio_anim_0" + a, "mipmap", getPackageName());
+            Drawable da = getResources().getDrawable(id);
+            drawable.addFrame(da,200);
+        }
+        ivVisualEffect.setBackground(drawable);
+        drawable.setOneShot(false);*/
     }
 
 

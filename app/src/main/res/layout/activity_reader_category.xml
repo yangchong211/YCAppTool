@@ -10,7 +10,7 @@
 
     <include layout="@layout/base_tool_bar" />
 
-    <com.ns.yc.lifehelper.ui.weight.scrollView.ReboundScrollView
+    <com.ns.yc.ycutilslib.scrollView.ReboundScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -80,5 +80,5 @@
                     android:layout_gravity="center" />
             </FrameLayout>
         </LinearLayout>
-    </com.ns.yc.lifehelper.ui.weight.scrollView.ReboundScrollView>
+    </com.ns.yc.ycutilslib.scrollView.ReboundScrollView>
 </LinearLayout>

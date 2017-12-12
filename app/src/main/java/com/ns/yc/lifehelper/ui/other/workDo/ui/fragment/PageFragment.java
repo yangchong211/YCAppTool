@@ -71,13 +71,14 @@ public class PageFragment extends BaseFragment implements PageFragmentContract.V
     public void onDestroy() {
         super.onDestroy();
         presenter.unSubscribe();
+        mListener = null;
+        adapter = null;
+        mList = null;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mListener = null;
-        adapter = null;
     }
 
     @Override
@@ -109,7 +110,13 @@ public class PageFragment extends BaseFragment implements PageFragmentContract.V
             recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
         }
         adapter = new WorkDoAdapter(mList ,activity);
+        setListener();
+        recyclerView.setAdapter(adapter);
+    }
+
+    private void setListener() {
         boolean showPriority = SPUtils.getInstance(Constant.SP_NAME).getBoolean(Constant.CONFIG_KEY.SHOW_PRIORITY, true);
+        adapter.setShowPriority(showPriority);
         if (mListener == null && getActivity() instanceof OnPageListener) {
             mListener = (OnPageListener) getActivity();
         }
@@ -128,8 +135,6 @@ public class PageFragment extends BaseFragment implements PageFragmentContract.V
                 }
             }
         });
-        adapter.setShowPriority(showPriority);
-        recyclerView.setAdapter(adapter);
     }
 
     public WorkDoAdapter getAdapter() {

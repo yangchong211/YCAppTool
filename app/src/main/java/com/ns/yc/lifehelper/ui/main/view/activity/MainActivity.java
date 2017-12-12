@@ -2,7 +2,9 @@ package com.ns.yc.lifehelper.ui.main.view.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -29,11 +31,12 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.AppManager;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.base.BasePagerAdapter;
-import com.ns.yc.lifehelper.entry.TabEntity;
 import com.ns.yc.lifehelper.listener.PerfectClickListener;
 import com.ns.yc.lifehelper.ui.data.DataFragment;
 import com.ns.yc.lifehelper.ui.find.view.fragment.FindFragment;
 import com.ns.yc.lifehelper.ui.home.view.fragment.HomeFragment;
+import com.ns.yc.lifehelper.ui.main.contract.MainContract;
+import com.ns.yc.lifehelper.ui.main.presenter.MainPresenter;
 import com.ns.yc.lifehelper.ui.me.view.MeFragment;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeFeedBackActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
@@ -61,7 +64,8 @@ import pub.devrel.easypermissions.EasyPermissions;
  * 修订历史：
  * ================================================
  */
-public class MainActivity extends BaseActivity implements View.OnClickListener ,EasyPermissions.PermissionCallbacks {
+public class MainActivity extends BaseActivity implements View.OnClickListener
+        ,EasyPermissions.PermissionCallbacks , MainContract.View {
 
 
     @Bind(R.id.view_status)
@@ -100,6 +104,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     private View view;
     private long time;
 
+    private MainContract.Presenter presenter = new MainPresenter(this);
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        presenter.subscribe();
+        presenter.bindView(this);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        InputMethodManagerLeakUtils.fixInputMethodManagerLeak(MainActivity.this);
+        presenter.unSubscribe();
+    }
+
+
     @Override
     public int getContentView() {
         return R.layout.activity_main;
@@ -136,6 +157,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         initPermissions();
     }
 
+
     @Override
     public void initListener() {
         flTitleMenu.setOnClickListener(MainActivity.this);
@@ -157,7 +179,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
 
     @Override
     public void initData() {
-
+        presenter.getUpdate();
     }
 
 
@@ -176,7 +198,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
      */
     private void initStatusView() {
         ViewGroup.LayoutParams layoutParams = viewStatus.getLayoutParams();
-        layoutParams.height = StatusBarUtils.getStatusBarHeight(MainActivity.this);
+        layoutParams.height = StatusBarUtils.getStatusBarHeight(this);
         viewStatus.setLayoutParams(layoutParams);
     }
 
@@ -185,7 +207,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
      * 初始化侧滑菜单的状态栏
      */
     private void initDrawerLayoutStatus() {
-        StatusBarUtils.setColorNoTranslucentForDrawerLayout(MainActivity.this, drawerLayout,
+        StatusBarUtils.setColorNoTranslucentForDrawerLayout(this, drawerLayout,
                 getResources().getColor(R.color.colorTheme));
     }
 
@@ -205,17 +227,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
      * 初始化底部导航栏数据
      */
     private void initTabLayout() {
-        ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
-        TypedArray mIconUnselectIds = this.getResources().obtainTypedArray(R.array.main_tab_un_select);
-        TypedArray mIconSelectIds = this.getResources().obtainTypedArray(R.array.main_tab_select);
-        String[] mainTitles = this.getResources().getStringArray(R.array.main_title);
-        for (int i = 0; i < mainTitles.length; i++) {
-            int unSelectId = mIconUnselectIds.getResourceId(i, R.drawable.tab_home_unselect);
-            int selectId = mIconSelectIds.getResourceId(i, R.drawable.tab_home_select);
-            mTabEntities.add(new TabEntity(mainTitles[i],selectId , unSelectId));
-        }
-        mIconUnselectIds.recycle();
-        mIconSelectIds.recycle();
+        ArrayList<CustomTabEntity> mTabEntities = presenter.getTabEntity();
         ctlTable.setTabData(mTabEntities);
         //ctlTable.showDot(3);                   //显示红点
         //ctlTable.showMsg(2,5);                 //显示未读信息
@@ -302,9 +314,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         ll_nav_login = (LinearLayout) view.findViewById(R.id.ll_nav_login);
         ll_nav_video = (LinearLayout) view.findViewById(R.id.ll_nav_video);
 
-        ImageUtils.loadImgByPicassoWithCircle(MainActivity.this, R.drawable.ic_nav_bg_drawer, iv_avatar);
+        ImageUtils.loadImgByPicassoWithCircle(MainActivity.this, R.drawable.ic_person_logo, iv_avatar);
         tv_username.setText("杨充");
     }
+
 
     /**
      * 自定义菜单点击事件
@@ -433,13 +446,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        InputMethodManagerLeakUtils.fixInputMethodManagerLeak(MainActivity.this);
-    }
-
-
     /**
      * 初始化权限
      */
@@ -448,9 +454,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     }
 
     private static final int RC_LOCATION_CONTACTS_PERM = 124;
-    /**
-     * 权限集合
-     */
     private static final String[] LOCATION_AND_CONTACTS = {
             Manifest.permission.CALL_PHONE,
             Manifest.permission.CAMERA,
@@ -469,9 +472,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
             //第三个参数是请求码
             //第四个参数是要申请的权限
             EasyPermissions.requestPermissions(MainActivity.this,
-                    getString(R.string.easy_permissions),
-                    RC_LOCATION_CONTACTS_PERM,
-                    LOCATION_AND_CONTACTS);
+                    getString(R.string.easy_permissions), RC_LOCATION_CONTACTS_PERM, LOCATION_AND_CONTACTS);
         }
     }
 
@@ -487,7 +488,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
      * 将结果转发到EasyPermissions
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,@NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // 将结果转发到EasyPermissions
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, MainActivity.this);
@@ -512,23 +513,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
         // This will display a dialog directing them to enable the permission in app settings.
         if (EasyPermissions.somePermissionPermanentlyDenied(MainActivity.this, perms)) {
-            new AppSettingsDialog.Builder(MainActivity.this).build().show();
-        }
-
-        /*if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            new AppSettingsDialog.Builder(MainActivity.this)
-                    .setTitle("提示")
+            //new AppSettingsDialog.Builder(MainActivity.this).build().show();
+            AppSettingsDialog.Builder builder = new AppSettingsDialog.Builder(MainActivity.this);
+            builder.setTitle("允许权限")
+                    .setRationale("没有该权限，此应用程序部分功能可能无法正常工作。打开应用设置界面以修改应用权限")
                     .setPositiveButton("去设置")
                     .setNegativeButton("取消")
                     .setRequestCode(RC_LOCATION_CONTACTS_PERM)
                     .build()
                     .show();
-        }*/
+        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
+            // Do something after user returned from app settings screen, like showing a Toast.
+            // 当用户从应用设置界面返回的时候，可以做一些事情，比如弹出一个土司。
+        }
     }
 
 }

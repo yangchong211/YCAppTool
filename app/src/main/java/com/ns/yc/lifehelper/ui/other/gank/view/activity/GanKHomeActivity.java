@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.gank.view.activity;
 
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -16,7 +16,6 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -30,6 +29,7 @@ import com.ns.yc.lifehelper.ui.other.gank.contract.GanKHomeAContract;
 import com.ns.yc.lifehelper.ui.other.gank.presenter.GanKHomeAPresenter;
 import com.ns.yc.lifehelper.ui.other.gank.view.fragment.GanKHomeFragment;
 import com.ns.yc.lifehelper.utils.MDTintUtil;
+import com.ns.yc.lifehelper.utils.animation.AnimatorUtils;
 import com.ns.yc.lifehelper.utils.statusbar.GanKStatusBarUtil;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 import com.squareup.picasso.Callback;
@@ -91,8 +91,24 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected void onDestroy() {
+        if(mAnimator!=null && mAnimator.isRunning()){
+            mAnimator.cancel();
+        }
         super.onDestroy();
         presenter.unSubscribe();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && mAnimator!=null) {
+            mAnimator.pause();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -160,11 +176,12 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void startBannerLoadingAnim() {
         fabHomeRandom.setImageResource(R.drawable.ic_gank_loading);
-        mAnimator = ObjectAnimator.ofFloat(fabHomeRandom, "rotation", 0, 360);
-        mAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        mAnimator.setDuration(800);
-        mAnimator.setInterpolator(new LinearInterpolator());
+        mAnimator = AnimatorUtils.setObjectAnimator(fabHomeRandom,"rotation",0,360,800,0);
         mAnimator.start();
+
+        //Animator mAnim = AnimatorInflater.loadAnimator(this, R.animator.animator_1_0);
+        //mAnim.setTarget(fabHomeRandom);
+        //mAnim.start();
     }
 
     /**

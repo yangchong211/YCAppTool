@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:ordering="sequentially" >
+    <!--表示Set集合内的动画按顺序进行-->
+    <!--ordering的属性值:sequentially & together-->
+    <!--sequentially:表示set中的动画，按照先后顺序逐步进行（a 完成之后进行 b ）-->
+    <!--together:表示set中的动画，在同一时间同时进行,为默认值-->
+
+    <set android:ordering="together" >
+        <!--下面的动画同时进行-->
+        <objectAnimator
+            android:duration="2000"
+            android:propertyName="translationX"
+            android:valueFrom="0"
+            android:valueTo="300"
+            android:valueType="floatType" >
+        </objectAnimator>
+
+        <objectAnimator
+            android:duration="3000"
+            android:propertyName="rotation"
+            android:valueFrom="0"
+            android:valueTo="360"
+            android:valueType="floatType" >
+        </objectAnimator>
+    </set>
+
+    <set android:ordering="sequentially" >
+        <!--下面的动画按序进行-->
+        <objectAnimator
+            android:duration="1500"
+            android:propertyName="alpha"
+            android:valueFrom="1"
+            android:valueTo="0"
+            android:valueType="floatType" >
+        </objectAnimator>
+        <objectAnimator
+            android:duration="1500"
+            android:propertyName="alpha"
+            android:valueFrom="0"
+            android:valueTo="1"
+            android:valueType="floatType" >
+        </objectAnimator>
+    </set>
+
+</set>

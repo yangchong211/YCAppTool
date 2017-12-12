@@ -15,8 +15,8 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.listener.NestedScrollViewListener;
-import com.ns.yc.lifehelper.ui.weight.scrollView.NoNestedScrollview;
+import com.ns.yc.ycutilslib.scrollView.NestedScrollViewListener;
+import com.ns.yc.ycutilslib.scrollView.NoNestedScrollview;
 
 import butterknife.Bind;
 

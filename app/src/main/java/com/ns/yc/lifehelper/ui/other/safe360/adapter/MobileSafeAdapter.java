@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.bean.WxNewsDetailBean;
+import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 
 

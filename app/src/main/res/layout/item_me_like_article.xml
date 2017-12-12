@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/whiteBg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="2dp"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:contentPadding="6dp"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="3dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_article_image"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher"
+                android:layout_width="80dp"
+                android:layout_height="80dp" />
+            <TextView
+                android:id="@+id/tv_article_title"
+                android:layout_marginStart="6dp"
+                android:layout_toRightOf="@id/iv_article_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/blackText3"/>
+            <TextView
+                android:id="@+id/tv_article_from"
+                android:text="来自 知乎"
+                android:layout_marginTop="3dp"
+                android:layout_below="@id/iv_article_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blackText3"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

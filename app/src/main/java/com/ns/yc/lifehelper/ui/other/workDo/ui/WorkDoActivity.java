@@ -25,6 +25,7 @@ import com.ns.yc.lifehelper.ui.other.workDo.presenter.WorkDoPresenter;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.adapter.WorkPageAdapter;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.fragment.PageFragment;
 import com.ns.yc.lifehelper.utils.AppUtil;
+import com.ns.yc.lifehelper.utils.SnackBarUtils;
 import com.pedaily.yc.ycdialoglib.bottomMenu.CustomBottomDialog;
 import com.pedaily.yc.ycdialoglib.bottomMenu.CustomItem;
 import com.pedaily.yc.ycdialoglib.bottomMenu.OnItemClickListener;
@@ -64,6 +65,7 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //初始化读写权限
         presenter.bindView(this);
         presenter.subscribe();
     }
@@ -206,7 +208,7 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
      */
     @Override
     public void showDialog(final int position, final TaskDetailEntity entity) {
-        new CustomBottomDialog(this)
+        CustomBottomDialog dialog = new CustomBottomDialog(this)
                 .title("选择分类")
                 .setCancel(true,"取消选择")
                 .orientation(CustomBottomDialog.VERTICAL)
@@ -219,19 +221,20 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
                                 presenter.dialogActionFlagTask(position, entity);
                                 break;
                             case R.id.to_do_put_off:
-                                presenter.dialogActionEditTask(position, entity);
+                                presenter.dialogActionPutOffTask(position, entity);
                                 break;
                             case R.id.to_do_edit:
-                                presenter.dialogActionDeleteTask(position, entity);
+                                presenter.dialogActionEditTask(position, entity);
                                 break;
                             case R.id.to_do_delete:
-                                presenter.dialogActionPutOffTask(position, entity);
+                                presenter.dialogActionDeleteTask(position, entity);
                                 break;
                         }
                     }
-                })
-                .show();
+                });
+        dialog.show();
     }
+
 
     @Override
     public void finishActivity() {
@@ -239,5 +242,11 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
             finish();
         }
     }
+
+    @Override
+    public void showAction(String message, String action, View.OnClickListener listener) {
+        SnackBarUtils.showAction(clMain, message, action, listener);
+    }
+
 
 }

@@ -178,7 +178,7 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
                 .subscribe(new Subscriber<DouHotMovieBean>() {
                     @Override
                     public void onCompleted() {
-                        recyclerView.showRecycler();
+
                     }
 
                     @Override
@@ -197,6 +197,7 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
                             adapter.clear();
                             adapter.addAll(hotMovieBean.getSubjects());
                             adapter.notifyDataSetChanged();
+                            recyclerView.showRecycler();
                         } else {
                             recyclerView.showEmpty();
                             recyclerView.setEmptyView(R.layout.view_custom_empty_data);

@@ -31,7 +31,7 @@ public class NarrowImageAdapter extends RecyclerArrayAdapter<Integer> {
     private static class NarrowImageViewHolder extends BaseViewHolder<Integer> {
         ImageView imgPicture;
 
-        public NarrowImageViewHolder(ViewGroup parent) {
+        NarrowImageViewHolder(ViewGroup parent) {
             super(new ImageView(parent.getContext()));
             imgPicture = (ImageView) itemView;
             ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(SizeUtils.dp2px(150f), ViewGroup.LayoutParams.MATCH_PARENT);

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.ns.yc.lifehelper.ui.weight.scrollView.MyNestedScrollView
+    <com.ns.yc.ycutilslib.scrollView.MyNestedScrollView
         android:id="@+id/nsv_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,7 +49,7 @@
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
-    </com.ns.yc.lifehelper.ui.weight.scrollView.MyNestedScrollView>
+    </com.ns.yc.ycutilslib.scrollView.MyNestedScrollView>
 
 
     <RelativeLayout

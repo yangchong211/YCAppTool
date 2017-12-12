@@ -28,7 +28,7 @@ import com.ns.yc.lifehelper.ui.other.workDo.ui.adapter.WorkChooseAdapter;
 public class WorkChooseColorDialog extends DialogFragment {
 
     private WorkChooseAdapter mChooseDialogAdapter;
-    RecyclerView mRvDlChooseColor;
+    private RecyclerView mRvDlChooseColor;
 
     public static WorkChooseColorDialog newInstance(int currCheckItemUri) {
         WorkChooseColorDialog dialog = new WorkChooseColorDialog();

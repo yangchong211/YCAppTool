@@ -14,7 +14,6 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.data.BackupManager;
-import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.fragment.WorkSettingFragment;
 
 import java.util.Calendar;
@@ -87,9 +86,9 @@ public class WorkSettingActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ll_title_menu:
-                Intent intent = new Intent(this, WorkDoActivity.class);
+                /*Intent intent = new Intent(this, WorkDoActivity.class);
                 intent.putExtra(Constant.INTENT_EXTRA_SWITCH_TO_INDEX, mCurrIndex);
-                startActivity(intent);
+                startActivity(intent);*/
                 finish();
                 break;
         }
@@ -99,11 +98,12 @@ public class WorkSettingActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(this, WorkDoActivity.class);
+        /*Intent intent = new Intent(this, WorkDoActivity.class);
         intent.putExtra(Constant.INTENT_EXTRA_SWITCH_TO_INDEX, mCurrIndex);
-        startActivity(intent);
+        startActivity(intent);*/
         finish();
     }
+
 
 
     private int option = 0;

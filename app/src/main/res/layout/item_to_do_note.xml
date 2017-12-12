@@ -21,7 +21,8 @@
         <FrameLayout
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:background="@mipmap/default_image">
             <ImageView
                 android:id="@+id/ic_icon"
                 android:layout_width="match_parent"
@@ -64,7 +65,7 @@
         android:layout_gravity="end"
         android:layout_margin="12dp"
         android:src="@drawable/ic_priority_1"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
 
     <LinearLayout
         android:id="@+id/ll_task_finished_mask"

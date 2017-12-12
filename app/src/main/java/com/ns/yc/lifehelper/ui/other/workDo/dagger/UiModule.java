@@ -38,7 +38,7 @@ public class UiModule {
     }
 
     @Provides
-    public FragmentManager fragmentManager() {
+    FragmentManager fragmentManager() {
         return mActivity.getSupportFragmentManager();
     }
 

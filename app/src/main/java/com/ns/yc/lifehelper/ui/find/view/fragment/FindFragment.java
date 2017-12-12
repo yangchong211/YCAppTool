@@ -9,14 +9,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BannerImageLoader;
+import com.ns.yc.lifehelper.base.BannerImageStrLoader;
 import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.base.BaseDelegateAdapter;
 import com.ns.yc.lifehelper.base.BaseFragment;
@@ -32,8 +31,10 @@ import com.ns.yc.lifehelper.ui.other.douBook.view.DouBookActivity;
 import com.ns.yc.lifehelper.ui.other.douMovie.view.DouMovieActivity;
 import com.ns.yc.lifehelper.ui.other.douMusic.view.DouMusicActivity;
 import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKHomeActivity;
+import com.ns.yc.lifehelper.ui.other.gold.view.activity.GoldMainActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myMusic.MyMusicActivity;
+import com.ns.yc.lifehelper.ui.other.myNews.weChat.TxWeChatNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.SongCiActivity;
@@ -44,6 +45,7 @@ import com.ns.yc.lifehelper.ui.other.timeListener.TimeListenerActivity;
 import com.ns.yc.lifehelper.ui.other.toDo.view.ToDoTimerActivity;
 import com.ns.yc.lifehelper.ui.other.weather.SevenWeatherActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
+import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.yc.cn.ycbaseadapterlib.first.BaseViewHolder;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -71,6 +73,7 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
+
     private MainActivity activity;
     private FindFragmentContract.Presenter presenter = new FindFragmentPresenter(this);
     private List<DelegateAdapter.Adapter> mAdapters;        //存放各个模块的适配器
@@ -87,7 +90,9 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
     @Override
     public void onDetach() {
         super.onDetach();
-        activity = null;
+        if(activity!=null){
+            activity = null;
+        }
     }
 
     @Override
@@ -101,10 +106,11 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
 
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         presenter.subscribe();
     }
+
 
     @Override
     public void onDestroy() {
@@ -254,7 +260,7 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
         //设置banner样式
         mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
-        mBanner.setImageLoader(new BannerImageLoader());
+        mBanner.setImageLoader(new BannerImageStrLoader());
         //设置图片集合
         mBanner.setImages(arrayList);
         //设置banner动画效果
@@ -374,13 +380,13 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
     public void setGridClickFour(int position) {
         switch (position){
             case 0:
-                startActivity(DouMovieActivity.class);
+                startActivity(TxWeChatNewsActivity.class);
                 break;
             case 1:
-                startActivity(DouMusicActivity.class);
+                startActivity(GoldMainActivity.class);
                 break;
             case 2:
-                startActivity(DouBookActivity.class);
+                startActivity(ZhiHuNewsActivity.class);
                 break;
         }
     }

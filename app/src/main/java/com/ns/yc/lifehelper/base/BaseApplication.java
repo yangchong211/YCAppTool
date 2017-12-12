@@ -10,12 +10,14 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.LogInterceptor;
+import com.ns.yc.lifehelper.utils.LogUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 import com.zhy.http.okhttp.OkHttpUtils;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import io.realm.Realm;
@@ -81,6 +83,7 @@ public class BaseApplication extends Application {
         BaseAppManager.getInstance().init(this);        //栈管理
         BaseConfig.INSTANCE.initConfig();               //初始化配置信息
         initQQX5();                                     //初始化腾讯X5
+        LogUtils.logDebug = true;                       //开启日志
     }
 
 
@@ -137,6 +140,13 @@ public class BaseApplication extends Application {
      */
     private Realm realm;
     private void initRealm() {
+        File file = null;
+        try {
+            file = new File(Constant.ExternalStorageDirectory, Constant.DATABASE_FILE_PATH_FOLDER);
+            file.mkdirs();
+        } catch (Exception e) {
+            Log.e("异常",e.getMessage());
+        }
         Realm.init(instance);
         RealmConfiguration realmConfig = new RealmConfiguration
                 .Builder()

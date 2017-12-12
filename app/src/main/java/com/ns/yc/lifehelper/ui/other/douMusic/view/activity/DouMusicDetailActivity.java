@@ -26,9 +26,9 @@ import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.douMusic.bean.DouMusicDetailBean;
 import com.ns.yc.lifehelper.ui.other.douMusic.model.DouMusicDetailModel;
 import com.ns.yc.lifehelper.ui.weight.CustomChangeBounds;
-import com.ns.yc.lifehelper.ui.weight.scrollView.MyNestedScrollView;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.ns.yc.lifehelper.utils.statusbar.StatusBarUtils;
+import com.ns.yc.ycutilslib.scrollView.MyNestedScrollView;
 
 import butterknife.Bind;
 import jp.wasabeef.glide.transformations.BlurTransformation;

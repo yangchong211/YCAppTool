@@ -90,7 +90,7 @@ public class BackupManager {
 
 
 
-    public static boolean copyFile(File src, File des) {
+    private static boolean copyFile(File src, File des) {
         if (src == null || des == null) throw new NullPointerException("file is null");
         FileInputStream inputStream = null;
         FileOutputStream outputStream = null;
@@ -116,7 +116,7 @@ public class BackupManager {
     }
 
 
-    public static <T> boolean exportToFile(File des, List<T> list, ItemStringCreator<T> creator) {
+    private static <T> boolean exportToFile(File des, List<T> list, ItemStringCreator<T> creator) {
         if (des == null || list == null || list.isEmpty())
             throw new IllegalArgumentException("Des file or list is null");
         BufferedWriter bw = null;

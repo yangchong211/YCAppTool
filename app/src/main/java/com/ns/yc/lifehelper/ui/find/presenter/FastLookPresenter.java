@@ -4,8 +4,8 @@ import com.ns.yc.lifehelper.api.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.cache.CacheFastLook;
 import com.ns.yc.lifehelper.ui.find.contract.FastLookContract;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.bean.WxNewsDetailBean;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.WxNewsModel;
+import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
+import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.api.WxNewsModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -69,7 +70,7 @@ public class FastLookPresenter implements FastLookContract.Presenter {
             num = start + 10;
         }
         WxNewsModel model = WxNewsModel.getInstance();
-        model.getWxNewsDetail(ConstantALiYunApi.Key,"1",String.valueOf(num),String.valueOf(start))
+        Subscription subscribe = model.getWxNewsDetail(ConstantALiYunApi.Key, "1", String.valueOf(num), String.valueOf(start))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<WxNewsDetailBean>() {
@@ -85,8 +86,8 @@ public class FastLookPresenter implements FastLookContract.Presenter {
 
                     @Override
                     public void onNext(WxNewsDetailBean wxNewsDetailBean) {
-                        if(wxNewsDetailBean!=null){
-                            if(start==1){
+                        if (wxNewsDetailBean != null) {
+                            if (start == 1) {
                                 mView.setRefreshData(wxNewsDetailBean);
                             } else {
                                 mView.setLoadMore(wxNewsDetailBean);
@@ -94,6 +95,7 @@ public class FastLookPresenter implements FastLookContract.Presenter {
                         }
                     }
                 });
+        mSubscriptions.add(subscribe);
     }
 
     /**

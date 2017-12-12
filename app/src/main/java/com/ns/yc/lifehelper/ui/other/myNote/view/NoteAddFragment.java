@@ -19,7 +19,7 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.ui.weight.imageView.NoteItemCircleView;
-import com.ns.yc.lifehelper.utils.HTQAnimations;
+import com.ns.yc.lifehelper.utils.animation.AnimationsUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -293,14 +293,14 @@ public class NoteAddFragment extends BaseFragment implements View.OnClickListene
      * 切换便签颜色的菜单
      */
     private void openMenu() {
-        HTQAnimations.openAnimation(note_detail_menu, noteDetailImgButton, 700);
+        AnimationsUtils.openAnimation(note_detail_menu, noteDetailImgButton, 700);
     }
 
     /**
      * 切换便签颜色的菜单
      */
     private void closeMenu() {
-        HTQAnimations.closeAnimation(note_detail_menu, noteDetailImgButton, 500);
+        AnimationsUtils.closeAnimation(note_detail_menu, noteDetailImgButton, 500);
     }
 
 

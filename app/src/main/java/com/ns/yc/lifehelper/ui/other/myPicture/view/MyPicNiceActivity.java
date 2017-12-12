@@ -13,7 +13,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.find.view.adapter.PicNiceAdapter;
-import com.ns.yc.lifehelper.ui.find.bean.GanKNicePicBean;
+import com.ns.yc.lifehelper.ui.find.model.bean.GanKNicePicBean;
 import com.ns.yc.lifehelper.ui.find.model.GanKNicePicModel;
 
 import java.util.ArrayList;

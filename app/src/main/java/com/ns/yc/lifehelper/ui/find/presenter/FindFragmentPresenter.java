@@ -92,16 +92,15 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
         arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
         //banner
-        BaseDelegateAdapter bannerAdapter = new BaseDelegateAdapter(activity, new LinearLayoutHelper(), R.layout.view_vlayout_banner, 1, Constant.viewType.typeBanner) {
+        return new BaseDelegateAdapter(activity, new LinearLayoutHelper(), R.layout.view_vlayout_banner, 1, Constant.viewType.typeBanner) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-               // 绑定数据
+                // 绑定数据
                 Banner mBanner = holder.getView(R.id.banner);
                 mView.setBanner(mBanner,arrayList);
             }
         };
-        return bannerAdapter;
     }
 
     @Override
@@ -120,7 +119,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         gridLayoutHelper.setVGap(16);   // 控制子元素之间的垂直间距
         gridLayoutHelper.setHGap(0);    // 控制子元素之间的水平间距
         gridLayoutHelper.setBgColor(Color.WHITE);
-        BaseDelegateAdapter menuAdapter = new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.item_vp_grid_iv, 8, Constant.viewType.typeGv) {
+        return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.item_vp_grid_iv, 8, Constant.viewType.typeGv) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
@@ -134,13 +133,12 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 });
             }
         };
-        return menuAdapter;
     }
 
     @Override
     public BaseDelegateAdapter initMarqueeView() {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-        BaseDelegateAdapter marqueeAdapter = new BaseDelegateAdapter(activity,linearLayoutHelper , R.layout.view_vlayout_marquee, 1, Constant.viewType.typeMarquee) {
+        return new BaseDelegateAdapter(activity,linearLayoutHelper , R.layout.view_vlayout_marquee, 1, Constant.viewType.typeMarquee) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -159,19 +157,17 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 });
             }
         };
-        return marqueeAdapter;
     }
 
     @Override
     public BaseDelegateAdapter initTitle(final String title) {
-        BaseDelegateAdapter titleAdapter = new BaseDelegateAdapter(activity, new LinearLayoutHelper(), R.layout.view_vlayout_title, 1, Constant.viewType.typeTitle) {
+        return new BaseDelegateAdapter(activity, new LinearLayoutHelper(), R.layout.view_vlayout_title, 1, Constant.viewType.typeTitle) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, title);
             }
         };
-        return titleAdapter;
     }
 
     @Override
@@ -192,7 +188,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         gridLayoutHelper.setWeights(new float[]{25, 25, 25 , 25});
         gridLayoutHelper.setBgColor(Color.WHITE);
         //gridLayoutHelper.setAutoExpand(true);//是否自动填充空白区域
-        BaseDelegateAdapter girdAdapter = new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.view_vlayout_grid, 8, Constant.viewType.typeGvSecond) {
+        return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.view_vlayout_grid, 8, Constant.viewType.typeGvSecond) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
@@ -207,7 +203,6 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 });
             }
         };
-        return girdAdapter;
     }
 
     @Override
@@ -218,7 +213,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         linearLayoutHelper.setMargin(0, 0, 0, 0);
         linearLayoutHelper.setPadding(0, 0, 0, 10);
         //linearLayoutHelper.setBgColor(0xFFF5A623);
-        BaseDelegateAdapter linearAdapter = new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.item_tx_news_list, 3, Constant.viewType.typeNews) {
+        return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.item_tx_news_list, 3, Constant.viewType.typeNews) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -236,8 +231,8 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 }
             }
         };
-        return linearAdapter;
     }
+
 
     @Override
     public BaseDelegateAdapter initList3() {
@@ -261,7 +256,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         gridLayoutHelper.setHGap(5);// 控制子元素之间的水平间距
         //gridLayoutHelper.setAutoExpand(false);//是否自动填充空白区域
         //gridLayoutHelper.setSpanCount(6);   // 设置每行多少个网格
-        BaseDelegateAdapter girdAdapter3 = new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.view_vlayout_hor, 3, Constant.viewType.typeList) {
+        return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.view_vlayout_hor, 3, Constant.viewType.typeList) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
@@ -276,7 +271,6 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 });
             }
         };
-        return girdAdapter3;
     }
 
 
@@ -296,7 +290,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         //onePlusNLayoutHelper.setRowWeight(30f);
         onePlusNLayoutHelper.setMargin(0, 0, 0, 0);
         onePlusNLayoutHelper.setPadding(10, 20, 10, 10);
-        BaseDelegateAdapter plusAdapter = new BaseDelegateAdapter(activity, onePlusNLayoutHelper, R.layout.view_vlayout_plus, 3, Constant.viewType.typePlus) {
+        return new BaseDelegateAdapter(activity, onePlusNLayoutHelper, R.layout.view_vlayout_plus, 3, Constant.viewType.typePlus) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
@@ -319,7 +313,6 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 });
             }
         };
-        return plusAdapter;
     }
 
 
@@ -330,7 +323,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         linearLayoutHelper.setDividerHeight(5);
         linearLayoutHelper.setMargin(0, 0, 0, 0);
         linearLayoutHelper.setPadding(0, 0, 0, 10);
-        BaseDelegateAdapter linearAdapter = new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.view_vlayout_news, 10, Constant.viewType.typeFooter) {
+        return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.view_vlayout_news, 10, Constant.viewType.typeFooter) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -348,6 +341,5 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 }
             }
         };
-        return linearAdapter;
     }
 }

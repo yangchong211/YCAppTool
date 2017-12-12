@@ -19,7 +19,7 @@ import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.find.contract.FastLookContract;
 import com.ns.yc.lifehelper.ui.find.presenter.FastLookPresenter;
 import com.ns.yc.lifehelper.ui.find.view.adapter.FastLookAdapter;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.bean.WxNewsDetailBean;
+import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
 import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
 import com.pedaily.yc.ycdialoglib.toast.CustomToast;
 
@@ -45,8 +45,8 @@ public class FastLookActivity extends BaseActivity implements FastLookContract.V
     TextView toolbarTitle;
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
-    private FastLookAdapter adapter;
 
+    private FastLookAdapter adapter;
     private FastLookContract.Presenter presenter = new FastLookPresenter(this);
 
     @Override

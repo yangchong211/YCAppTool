@@ -1,6 +1,8 @@
 package com.ns.yc.lifehelper.ui.other.myNews.wxNews;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -15,14 +17,11 @@ import android.widget.TextView;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.base.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.TxWeChatNewsActivity;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.bean.WxNewsTypeBean;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.cache.CacheWxChannel;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.WxNewsModel;
+import com.ns.yc.lifehelper.ui.other.myNews.wxNews.contract.WxNewsContract;
+import com.ns.yc.lifehelper.ui.other.myNews.wxNews.presenter.WxNewsPresenter;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.view.NewsSearchActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.view.WxNewsFragment;
 
@@ -30,22 +29,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import io.realm.Realm;
-import io.realm.RealmResults;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * ================================================
  * 作    者：杨充
  * 版    本：1.0
- * 创建日期：2017/8/30
+ * 创建日期：2017/4/30
  * 描    述：微信新闻
  * 修订历史：
+ *          v1.3 修改于2017年8月6日
  * ================================================
  */
-public class WxNewsActivity extends BaseActivity implements View.OnClickListener {
+public class WxNewsActivity extends BaseActivity implements View.OnClickListener ,WxNewsContract.View {
 
     @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
@@ -59,18 +54,19 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
     SlidingTabLayout stlTab;
     @Bind(R.id.vp_content)
     ViewPager vpContent;
-    private List<String> title = new ArrayList<>();
-    private List<String> chanelId = new ArrayList<>();
-    private List<Fragment> fragments = new ArrayList<>();
-    private Realm realm;
-    private RealmResults<CacheWxChannel> cacheWxChannels;
+
+    private WxNewsContract.Presenter presenter = new WxNewsPresenter(this);
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        /*if(realm!=null){
-            realm.close();
-        }*/
+        presenter.unSubscribe();
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        presenter.subscribe();
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -81,16 +77,8 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initView() {
         initToolBar();
-        initRealm();
         initTabData();
     }
-
-    private void initRealm() {
-        if(realm == null){
-            realm = BaseApplication.getInstance().getRealmHelper();
-        }
-    }
-
 
     private void initToolBar() {
         toolbarTitle.setText("头条新闻");
@@ -112,7 +100,7 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void initData() {
-        getWxDataChanel();
+        presenter.readCacheChannel();
     }
 
     @Override
@@ -146,10 +134,11 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
     }
 
 
-    private String[] tabTitles = {"热门","推荐","段子","养生","私房话","八卦"};
-    private String[] tabIds = {"1","2","3","4","5","6"};
     private void initTabData() {
+        String[] tabTitles = {"热门","推荐","八卦"};
+        String[] tabIds = {"1","2","6"};
         List<String> titles = new ArrayList<>();
+        List<Fragment> fragments = new ArrayList<>();
         for(int a=0 ; a<tabTitles.length ; a++){
             fragments.add(WxNewsFragment.newInstance(tabIds[a]));
             titles.add(tabTitles[a]);
@@ -173,76 +162,5 @@ public class WxNewsActivity extends BaseActivity implements View.OnClickListener
             }
         });
     }
-
-
-
-    private void getWxDataChanel() {
-        WxNewsModel model = WxNewsModel.getInstance();
-        model.getWxNewsChannel(ConstantALiYunApi.Key)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<WxNewsTypeBean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        readCacheChannel();
-                    }
-
-                    @Override
-                    public void onNext(WxNewsTypeBean wxNewsTypeBean) {
-                        if(wxNewsTypeBean!=null && wxNewsTypeBean.getResult()!=null && wxNewsTypeBean.getResult().size()>0){
-                            List<WxNewsTypeBean.ResultBean> result = wxNewsTypeBean.getResult();
-                            for (int a=0 ; a<result.size() ; a++){
-                                title.add(result.get(a).getChannel());
-                                chanelId.add(result.get(a).getChannelid());
-                                startCacheChannel(result);
-                            }
-                        }
-                    }
-                });
-    }
-
-    private void readCacheChannel() {
-        initRealm();
-        if(realm!=null && realm.where(CacheWxChannel.class).findAll()!=null){
-            cacheWxChannels = realm.where(CacheWxChannel.class).findAll();
-        } else {
-            return;
-        }
-        title.clear();
-        chanelId.clear();
-        for(int a=0 ; a<cacheWxChannels.size() ; a++){
-            CacheWxChannel cacheWxChannel = new CacheWxChannel();
-            cacheWxChannel.setChannel(cacheWxChannel.getChannel());
-            cacheWxChannel.setChannelid(cacheWxChannel.getChannelid());
-
-            title.add(cacheWxChannel.getChannel());
-            chanelId.add(cacheWxChannel.getChannelid());
-        }
-    }
-
-    private void startCacheChannel(List<WxNewsTypeBean.ResultBean> result) {
-        initRealm();
-        if(realm!=null && realm.where(CacheWxChannel.class).findAll()!=null){
-            cacheWxChannels = realm.where(CacheWxChannel.class).findAll();
-        } else {
-            return;
-        }
-        realm.beginTransaction();
-        cacheWxChannels.deleteAllFromRealm();
-        realm.commitTransaction();
-        realm.beginTransaction();
-        for(int a=0 ; a<result.size() ; a++){
-            CacheWxChannel wxNews = realm.createObject(CacheWxChannel.class);
-            wxNews.setChannelid(cacheWxChannels.get(a).getChannelid());
-            wxNews.setChannel(cacheWxChannels.get(a).getChannel());
-        }
-        realm.commitTransaction();
-    }
-
 
 }

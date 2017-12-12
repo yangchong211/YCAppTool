@@ -12,7 +12,7 @@ public class BannerImageLoader extends ImageLoader {
 
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
-        ImageUtils.loadImgByPicasso(context, (String) path, R.drawable.image_default ,imageView);
+        ImageUtils.loadImgByPicasso(context, (Integer) path, R.drawable.image_default ,imageView);
     }
 
 }

@@ -67,5 +67,16 @@ public class ConstantALiYunApi {
      * 新芽接口
      */
     public static final String NEW_SEED = "https://nsapi.pedaily.cn";
+    /**
+     * 知乎日报
+     */
+    public static final String ZHI_HU = "http://news-at.zhihu.com/api/4/";
+    /**
+     * 稀土掘金
+     */
+    public static final String GOLD_URL = "https://api.leancloud.cn/";
+    public static final String LEANCLOUD_ID = "mhke0kuv33myn4t4ghuid4oq2hjj12li374hvcif202y5bm6";
+    public static final String LEANCLOUD_SIGN = "badc5461a25a46291054b902887a68eb,1480438132702";
+    public static final String WTex_URL = "https://www.v2ex.com/?tab=";
 
 }

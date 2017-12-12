@@ -29,6 +29,8 @@ import butterknife.Bind;
  */
 public class MobilePlayerActivity extends BaseActivity implements View.OnClickListener {
 
+
+
     @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
     @Bind(R.id.toolbar_title)

@@ -34,6 +34,7 @@ public interface GuideContract {
         void cacheHomeNewsData();
         void cacheFindNewsData();
         void cacheFindBottomNewsData();
+        void cacheHomePileData();
     }
 
 

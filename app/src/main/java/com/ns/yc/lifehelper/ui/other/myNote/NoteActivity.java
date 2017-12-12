@@ -24,7 +24,7 @@ import com.ns.yc.lifehelper.ui.other.myNote.adapter.NotebookAdapter;
 import com.ns.yc.lifehelper.ui.other.myNote.bean.NoteDetail;
 import com.ns.yc.lifehelper.ui.other.myNote.view.NoteAddActivity;
 import com.ns.yc.lifehelper.ui.weight.noteView.HTQDragGridView;
-import com.ns.yc.lifehelper.utils.HTQAnimations;
+import com.ns.yc.lifehelper.utils.animation.AnimationsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -269,14 +269,14 @@ public class NoteActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void startMove() {
                 refresher.setEnabled(false);
-                ivNoteTrash.startAnimation(HTQAnimations.getTranslateAnimation(0, 0, ivNoteTrash.getTop(), 0, 500));
+                ivNoteTrash.startAnimation(AnimationsUtils.getTranslateAnimation(0, 0, ivNoteTrash.getTop(), 0, 500));
                 ivNoteTrash.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void finishMove() {
                 ivNoteTrash.setVisibility(View.INVISIBLE);
-                ivNoteTrash.startAnimation(HTQAnimations.getTranslateAnimation(0, 0, 0, ivNoteTrash.getTop(), 500));
+                ivNoteTrash.startAnimation(AnimationsUtils.getTranslateAnimation(0, 0, 0, ivNoteTrash.getTop(), 500));
                 if (adapter.getDataChange()) {
                     initNoteData();
                 }

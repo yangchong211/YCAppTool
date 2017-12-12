@@ -11,7 +11,9 @@ import com.ns.yc.lifehelper.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.cache.CacheFindBottomNews;
 import com.ns.yc.lifehelper.cache.CacheFindNews;
 import com.ns.yc.lifehelper.cache.CacheHomeNews;
+import com.ns.yc.lifehelper.cache.CacheHomePile;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
+import com.ns.yc.lifehelper.ui.weight.pileCard.ItemEntity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,6 +34,7 @@ import rx.subscriptions.CompositeSubscription;
  * 创建日期：2017/9/14
  * 描    述：启动页
  * 修订历史：
+ *          启动页目前设置为5秒倒计时
  * ================================================
  */
 public class GuidePresenter implements GuideContract.Presenter {
@@ -39,13 +42,7 @@ public class GuidePresenter implements GuideContract.Presenter {
     private GuideContract.View mView;
     private CompositeSubscription mSubscriptions;
     private Realm realm;
-    private RealmResults<CacheHomeNews> cacheHomeNewses;
-    private List<HomeBlogEntity> blog = new ArrayList<>();
-    private List<HomeBlogEntity> findNews = new ArrayList<>();
-    private List<HomeBlogEntity> findBottomNews = new ArrayList<>();
     private Activity activity;
-    private RealmResults<CacheFindNews> cacheFindNewses;
-    private RealmResults<CacheFindBottomNews> cacheFindBottomNewses;
 
     public GuidePresenter(GuideContract.View androidView) {
         this.mView = androidView;
@@ -85,6 +82,7 @@ public class GuidePresenter implements GuideContract.Presenter {
         activity = null;
     }
 
+
     @Override
     public void goMainActivity() {
         mView.toMainActivity();
@@ -93,7 +91,7 @@ public class GuidePresenter implements GuideContract.Presenter {
     @Override
     public void cacheHomeNewsData() {
         activity = mView.getActivity();
-        blog.clear();
+        List<HomeBlogEntity> blog = new ArrayList<>();
         try {
             InputStream in = activity.getAssets().open("ycBlog.config");
             int size = in.available();
@@ -121,6 +119,7 @@ public class GuidePresenter implements GuideContract.Presenter {
 
     @Override
     public void cacheFindNewsData() {
+        List<HomeBlogEntity> findNews = new ArrayList<>();
         try {
             InputStream in = activity.getAssets().open("findNews.config");
             int size = in.available();
@@ -149,6 +148,7 @@ public class GuidePresenter implements GuideContract.Presenter {
 
     @Override
     public void cacheFindBottomNewsData() {
+        List<HomeBlogEntity> findBottomNews = new ArrayList<>();
         try {
             InputStream in = activity.getAssets().open("findBottomNews.config");
             int size = in.available();
@@ -175,12 +175,41 @@ public class GuidePresenter implements GuideContract.Presenter {
         }
     }
 
+    @Override
+    public void cacheHomePileData() {
+        ArrayList<ItemEntity> dataList = new ArrayList<>();
+        try {
+            InputStream in = activity.getAssets().open("preset.config");
+            int size = in.available();
+            byte[] buffer = new byte[size];
+            in.read(buffer);
+            String jsonStr = new String(buffer, "UTF-8");
+            JSONObject jsonObject = new JSONObject(jsonStr);
+            JSONArray jsonArray = jsonObject.optJSONArray("result");
+            if (null != jsonArray) {
+                int len = jsonArray.length();
+                for (int j = 0; j < 3; j++) {
+                    for (int i = 0; i < len; i++) {
+                        JSONObject itemJsonObject = jsonArray.getJSONObject(i);
+                        ItemEntity itemEntity = new ItemEntity(itemJsonObject);
+                        dataList.add(itemEntity);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            cacheHomePileData(dataList);
+        }
+    }
+
     /**
      * 直接换成新闻页的数据
      */
     private void cacheHomeNews(List<HomeBlogEntity> blog) {
         initRealm();
-        if(realm!=null && realm.where(CacheHomeNews.class).findAll()!=null){
+        RealmResults<CacheHomeNews> cacheHomeNewses;
+        if(realm.where(CacheHomeNews.class).findAll()!=null){
             cacheHomeNewses = realm.where(CacheHomeNews.class).findAll();
         }else {
             return;
@@ -205,7 +234,8 @@ public class GuidePresenter implements GuideContract.Presenter {
 
     private void cacheFindNews(List<HomeBlogEntity> findNews) {
         initRealm();
-        if(realm!=null && realm.where(CacheFindNews.class).findAll()!=null){
+        RealmResults<CacheFindNews> cacheFindNewses;
+        if(realm.where(CacheFindNews.class).findAll()!=null){
             cacheFindNewses = realm.where(CacheFindNews.class).findAll();
         }else {
             return;
@@ -230,7 +260,8 @@ public class GuidePresenter implements GuideContract.Presenter {
 
     private void cacheFindBottomNews(List<HomeBlogEntity> findBottomNews) {
         initRealm();
-        if(realm!=null && realm.where(CacheFindBottomNews.class).findAll()!=null){
+        RealmResults<CacheFindBottomNews> cacheFindBottomNewses;
+        if(realm.where(CacheFindBottomNews.class).findAll()!=null){
             cacheFindBottomNewses = realm.where(CacheFindBottomNews.class).findAll();
         }else {
             return;
@@ -252,5 +283,30 @@ public class GuidePresenter implements GuideContract.Presenter {
         realm.commitTransaction();
     }
 
+
+    private void cacheHomePileData(ArrayList<ItemEntity> dataList) {
+        initRealm();
+        RealmResults<CacheHomePile> cacheHomePiles;
+        if(realm.where(CacheHomePile.class).findAll()!=null){
+            cacheHomePiles = realm.where(CacheHomePile.class).findAll();
+        }else {
+            return;
+        }
+        realm.beginTransaction();
+        cacheHomePiles.deleteAllFromRealm();
+        realm.commitTransaction();
+        realm.beginTransaction();
+        for(int a=0 ; a<dataList.size() ; a++){
+            CacheHomePile news = realm.createObject(CacheHomePile.class);
+            news.setTime(dataList.get(a).getTime());
+            news.setAddress(dataList.get(a).getAddress());
+            news.setCountry(dataList.get(a).getCountry());
+            news.setCoverImageUrl(dataList.get(a).getCoverImageUrl());
+            news.setMapImageUrl(dataList.get(a).getMapImageUrl());
+            news.setDescription(dataList.get(a).getDescription());
+            news.setTemperature(dataList.get(a).getTemperature());
+        }
+        realm.commitTransaction();
+    }
 
 }

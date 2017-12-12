@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.ns.yc.lifehelper.R;
@@ -135,7 +136,7 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
                 Intent intent = new Intent(mContext, WorkSettingActivity.class);
                 intent.putExtra(Constant.INTENT_EXTRA_SWITCH_TO_INDEX, mView.getCurrentViewPagerItem());
                 mContext.startActivity(intent);
-                mView.finishActivity();
+                //mView.finishActivity();
                 break;
         }
         return true;
@@ -222,8 +223,13 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
      */
     @Override
     public void dialogActionDeleteTask(int position, TaskDetailEntity entity) {
-        Subscription subscription = deleteTaskWithDelay(position, entity);
-        subscription.unsubscribe();
+        final Subscription subscription = deleteTaskWithDelay(position, entity);
+        mView.showAction("即将删除", "撤销", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subscription.unsubscribe();
+            }
+        });
     }
 
     /**
@@ -231,8 +237,13 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
      */
     @Override
     public void dialogActionPutOffTask(int position, TaskDetailEntity entity) {
-        Subscription subscription = putOffTaskOneDayWithDelay(position, entity);
-        subscription.unsubscribe();
+        final Subscription subscription = putOffTaskOneDayWithDelay(position, entity);
+        mView.showAction("该任务即将推延一天", "撤销", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subscription.unsubscribe();
+            }
+        });
     }
 
     private void switchTaskState(int position, TaskDetailEntity entity, int newState) {
@@ -242,7 +253,8 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
     }
 
     private Subscription deleteTaskWithDelay(final int position, final TaskDetailEntity entity) {
-        return Observable.just(1)
+        return Observable
+                .just(1)
                 .delay(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<Integer>() {

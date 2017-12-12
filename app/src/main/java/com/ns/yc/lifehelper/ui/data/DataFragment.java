@@ -2,16 +2,14 @@ package com.ns.yc.lifehelper.ui.data;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -28,13 +26,14 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.adapter.NarrowImageAdapter;
 import com.ns.yc.lifehelper.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
-import com.ns.yc.lifehelper.api.ConstantImageApi;
-import com.ns.yc.lifehelper.base.BannerImageLoader;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.bean.ImageIconBean;
+import com.ns.yc.lifehelper.ui.data.contract.DataFragmentContract;
+import com.ns.yc.lifehelper.ui.data.presenter.DataFragmentPresenter;
 import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
 import com.ns.yc.lifehelper.ui.data.view.activity.GalleryImageActivity;
 import com.ns.yc.lifehelper.ui.data.view.activity.OpenFileActivity;
+import com.ns.yc.lifehelper.ui.data.view.activity.RiddleActivity;
 import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
@@ -43,67 +42,57 @@ import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
 import com.ns.yc.lifehelper.ui.other.notePad.NotePadActivity;
 import com.ns.yc.lifehelper.ui.other.safe360.SafeHomeActivity;
-import com.ns.yc.lifehelper.ui.other.toDo.view.ToDoTimerActivity;
+import com.ns.yc.lifehelper.ui.other.vtex.view.WTexNewsActivity;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
+import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
+import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
+import com.ns.yc.lifehelper.ui.test.aidl.BankActivity;
 import com.ns.yc.lifehelper.ui.weight.MyGridView;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 
 /**
  * ================================================
  * 作    者：杨充
  * 版    本：1.0
- * 创建日期：2017/8/18
+ * 创建日期：2017/3/18
  * 描    述：工具页面
  * 修订历史：
+ *          v1.4 17年6月8日
+ *          v1.5 17年10月3日修改
  * ================================================
  */
-public class DataFragment extends BaseFragment implements View.OnClickListener {
+public class DataFragment extends BaseFragment implements View.OnClickListener
+        ,DataFragmentContract.View{
 
 
     @Bind(R.id.gridView)
     MyGridView gridView;
-    @Bind(R.id.banner)
-    Banner banner;
     @Bind(R.id.vp_pager)
     ViewPager vpPager;
     @Bind(R.id.ll_points)
     LinearLayout llPoints;
     @Bind(R.id.tv_note_edit)
     TextView tvNoteEdit;
+    @Bind(R.id.tv_news_zhi_hu)
+    TextView tvNewsZhiHu;
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
 
-    private ImageView[] ivPoints;           //小圆点图片的集合
-    private int totalPage;                  //总的页数
     private MainActivity activity;
     private NarrowImageAdapter adapter;
+    private DataFragmentContract.Presenter presenter = new DataFragmentPresenter(this);
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //开始轮播
-        if (banner != null) {
-            banner.startAutoPlay();
-        }
-    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //结束轮播
-        if (banner != null) {
-            banner.stopAutoPlay();
-        }
+        presenter.unSubscribe();
     }
 
     @Override
@@ -115,13 +104,16 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onDetach() {
         super.onDetach();
-        activity = null;
+        if(activity!=null){
+            activity = null;
+        }
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter.bindView(activity);
+        presenter.subscribe();
     }
 
     @Override
@@ -131,85 +123,45 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initView() {
-        initBanner();
         iniVpData();
-        initViewPager();
-        initGridView();
-        initRecycleView();
     }
 
     @Override
     public void initListener() {
         tvNoteEdit.setOnClickListener(this);
+        tvNewsZhiHu.setOnClickListener(this);
     }
 
     @Override
     public void initData() {
-
+        presenter.initGridViewData();
+        presenter.initRecycleViewData();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_note_edit:
-                startActivity(ToDoTimerActivity.class);
+                //startActivity(ToDoTimerActivity.class);
+                startActivity(WorkDoActivity.class);
+                break;
+            case R.id.tv_news_zhi_hu:
+                startActivity(ZhiHuNewsActivity.class);
                 break;
         }
     }
 
-    /**
-     * 初始化轮播图
-     */
-    private void initBanner() {
-        List<String> lists = new ArrayList<>();
-        for (int a = 0; a < ConstantImageApi.SPALSH_URLS.length; a++) {
-            lists.add(ConstantImageApi.SPALSH_URLS[a]);
-        }
-        //设置banner样式
-        banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
-        //设置图片加载器
-        banner.setImageLoader(new BannerImageLoader());
-        //设置图片集合
-        banner.setImages(lists);
-        //设置banner动画效果
-        banner.setBannerAnimation(Transformer.Default);
-        //设置标题集合（当banner样式有显示title时）
-        //banner.setBannerTitles(titleLists);
-        //设置自动轮播，默认为true
-        banner.isAutoPlay(true);
-        //设置轮播时间
-        banner.setDelayTime(2000);
-        //设置指示器位置（当banner模式中有指示器时）
-        banner.setIndicatorGravity(BannerConfig.RIGHT);
-        //banner设置方法全部调用完毕时最后调用
-        banner.start();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
 
     private void iniVpData() {
-        List<ImageIconBean> listDatas = new ArrayList<>();
+        List<ImageIconBean> listData = presenter.getVpData();
         final int mPageSize = 8;              //每页显示的最大的数量
-        TypedArray proPic = activity.getResources().obtainTypedArray(R.array.data_pro_pic);
-        String[] proName = activity.getResources().getStringArray(R.array.data_pro_title);
-        for (int i = 0; i < proName.length; i++) {
-            int proPicId = proPic.getResourceId(i, R.drawable.ic_investment);
-            listDatas.add(new ImageIconBean(proName[i], proPicId,i));
-        }
-        proPic.recycle();
         //总的页数向上取整
-        totalPage = (int) Math.ceil(listDatas.size() * 1.0 / mPageSize);
+        final int totalPage = (int) Math.ceil(listData.size() * 1.0 / mPageSize);
         List<View> viewPagerList = new ArrayList<>();
         for (int i = 0; i < totalPage; i++) {
             //每个页面都是inflate出一个新实例
             final GridView gridView = (GridView) View.inflate(activity, R.layout.item_vp_grid_view, null);
-            gridView.setAdapter(new ViewPagerGridAdapter(activity, listDatas, i, mPageSize));
+            gridView.setAdapter(new ViewPagerGridAdapter(activity, listData, i, mPageSize));
             //添加item点击监听
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -241,6 +193,12 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
                             case 4:
                                 startActivity(GalleryImageActivity.class);
                                 break;
+                            case 5:
+                                startActivity(WTexNewsActivity.class);
+                                break;
+                            case 6:
+                                startActivity(WorkDoActivity.class);
+                                break;
                             default:
                                 Toast.makeText(activity, ((ImageIconBean) obj).getName() + "---", Toast.LENGTH_SHORT).show();
                                 break;
@@ -255,7 +213,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
         vpPager.setAdapter(new ViewPagerRollAdapter(viewPagerList));
 
         //添加小圆点
-        ivPoints = new ImageView[totalPage];
+        final ImageView[] ivPoints = new ImageView[totalPage];
         for (int i = 0; i < totalPage; i++) {
             //循坏加入点点图片组
             ivPoints[i] = new ImageView(activity);
@@ -267,11 +225,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
             ivPoints[i].setPadding(8, 8, 8, 8);
             llPoints.addView(ivPoints[i]);
         }
-    }
 
-
-    private void initViewPager() {
-        //设置ViewPager的滑动监听，主要是设置点点的背景颜色的改变
         vpPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -286,14 +240,9 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
         });
     }
 
-    private void initGridView() {
-        TypedArray toolLogo = activity.getResources().obtainTypedArray(R.array.data_tool_pro_pic);
-        String[] toolName = activity.getResources().getStringArray(R.array.data_tool_pro_title);
-        ArrayList<Integer> logoList = new ArrayList<>();
-        for(int a=0 ; a<toolName.length ; a++){
-            logoList.add(toolLogo.getResourceId(a,R.drawable.ic_investment));
-        }
-        toolLogo.recycle();
+
+    @Override
+    public void setGridView(String[] toolName, ArrayList<Integer> logoList) {
         DataToolAdapter adapter = new DataToolAdapter(activity, toolName, logoList);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -315,6 +264,12 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
                     case 4:
                         startActivity(MobilePlayerActivity.class);
                         break;
+                    case 9:
+                        startActivity(RiddleActivity.class);
+                        break;
+                    case 10:
+                        startActivity(BankActivity.class);
+                        break;
                     case 11:
                         startActivity(DoodleViewActivity.class);
                         break;
@@ -323,14 +278,8 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
         });
     }
 
-
-    private void initRecycleView() {
-        TypedArray typedArray = activity.getResources().obtainTypedArray(R.array.data_narrow_Image);
-        final ArrayList<Integer> list = new ArrayList<>();
-        for(int a=0 ; a<8 ; a++){
-            list.add(typedArray.getResourceId(a, R.drawable.bg_small_autumn_tree_min));
-        }
-        typedArray.recycle();
+    @Override
+    public void setRecycleView(final ArrayList<Integer> list) {
         recyclerView.setAdapter(adapter = new NarrowImageAdapter(activity));
         //recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setHorizontalScrollBarEnabled(false);
@@ -357,6 +306,4 @@ public class DataFragment extends BaseFragment implements View.OnClickListener {
             }
         });
     }
-
-
 }

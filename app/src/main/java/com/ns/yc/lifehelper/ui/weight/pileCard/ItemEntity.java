@@ -13,6 +13,8 @@ public class ItemEntity {
     private String time;
     private String mapImageUrl;
 
+    public ItemEntity(){}
+
     public ItemEntity(JSONObject jsonObject) {
         this.country = jsonObject.optString("country");
         this.temperature = jsonObject.optString("temperature");

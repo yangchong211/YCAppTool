@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.find.bean.GanKNicePicBean;
+import com.ns.yc.lifehelper.ui.find.model.bean.GanKNicePicBean;
 import com.ns.yc.lifehelper.ui.other.myPicture.view.MyPicNiceActivity;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.yc.cn.ycbaseadapterlib.first.BaseAdapter;

@@ -3,12 +3,10 @@ package com.ns.yc.lifehelper.ui.home.view.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.URLSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,11 +17,11 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.api.ConstantImageApi;
 import com.ns.yc.lifehelper.base.BannerImageLoader;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.bean.HomeBlogEntity;
+import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
+import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
@@ -41,15 +39,10 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
@@ -59,35 +52,32 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
  * ================================================
  * 作    者：杨充
  * 版    本：1.0
- * 创建日期：2017/8/21
+ * 创建日期：2017/3/21
  * 描    述：Home主页面
  * 修订历史：
+ *
+ *       v1.5 修改于11月3日，改写代码为MVP架构
  * ================================================
  */
-public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate, View.OnClickListener {
+public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate
+        , View.OnClickListener ,HomeFragmentContract.View{
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
     @Bind(R.id.bga_refresh)
     BGARefreshLayout bgaRefresh;
+
     private MainActivity activity;
-    private HomeBlogAdapter adapter;
     private Banner banner;
     private TextView tv_home_first;
     private TextView tv_home_second;
     private TextView tv_home_third;
     private TextView tv_home_four;
     private View headerView;
-
-    private List<HomeBlogEntity> blog = new ArrayList<>();
     private MarqueeView marqueeView;
-    private ArrayList<ItemEntity> dataList;
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
+    private HomeFragmentContract.Presenter presenter = new HomeFragmentPresenter(this);
+    private HomeBlogAdapter adapter;
 
     @Override
     public void onAttach(Context context) {
@@ -98,7 +88,9 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     @Override
     public void onDetach() {
         super.onDetach();
-        activity = null;
+        if(activity!=null){
+            activity = null;
+        }
     }
 
     @Override
@@ -117,14 +109,12 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
         if(banner!=null){
             banner.stopAutoPlay();
         }
+        presenter.unSubscribe();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(Constant.isLogin){
-
-        }
     }
 
     @Override
@@ -139,6 +129,12 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
         initBanner();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter.bindView(activity);
+        presenter.subscribe();
+    }
 
     @Override
     public void initListener() {
@@ -150,7 +146,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
 
     @Override
     public void initData() {
-        getWxNews();
+        presenter.getHomeNewsData();
     }
 
     private void initRefresh(BGARefreshLayout bgaRefresh) {
@@ -169,7 +165,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
         if(NetworkUtils.isConnected()){
-            getWxData();
+            presenter.getHomeNewsData();
         } else {
             ToastUtils.showShortSafe("没有网络");
             refreshLayout.endRefreshing();
@@ -179,7 +175,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         if(NetworkUtils.isConnected()){
-            getWxData();
+            presenter.getHomeNewsData();
             return true;
         }else {
             ToastUtils.showShortSafe("没有网络");
@@ -216,7 +212,6 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
 
 
     private View getHeaderView() {
-        //LayoutInflater.from(activity).inflate(R.layout.head_home_main, null);
         View header =  View.inflate(activity, R.layout.head_home_main, null);
         banner = (Banner) header.findViewById(R.id.banner);
         tv_home_first = (TextView) header.findViewById(R.id.tv_home_first);
@@ -258,11 +253,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     /**初始化轮播图*/
     private void initBanner() {
         if(headerView!=null && banner!=null){
-            List<String> lists = new ArrayList<>();
-            for(int a = 0; a< ConstantImageApi.SPALSH_URLS.length ; a++){
-                lists.add(ConstantImageApi.SPALSH_URLS[a]);
-            }
-            //ArrayList<Integer> lists = ConstantImageApi.getNarrowImage();
+            List<Integer> lists = presenter.getBannerData();
             //设置banner样式
             banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
             //设置图片加载器
@@ -285,21 +276,11 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     }
 
 
-    private String[] title = {"1.坚持读书，写作，源于内心的动力","2.展翅翱翔，青春我们一路前行","3.欢迎订阅喜马拉雅听书"};
     private void initMarqueeView() {
         if(marqueeView==null){
             return;
         }
-        List<CharSequence> list = new ArrayList<>();
-        SpannableString ss1 = new SpannableString(title[0]);
-        ss1.setSpan(new ForegroundColorSpan(Color.BLACK),  2, title[0].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        list.add(ss1);
-        SpannableString ss2 = new SpannableString(title[1]);
-        ss2.setSpan(new ForegroundColorSpan(Color.BLACK),  2, title[1].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        list.add(ss2);
-        SpannableString ss3 = new SpannableString(title[2]);
-        ss3.setSpan(new URLSpan("http://www.ximalaya.com/zhubo/71989305/"), 2, title[2].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        list.add(ss3);
+        List<CharSequence> list = presenter.getMarqueeTitle();
         marqueeView.startWithList(list);
         marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
             @Override
@@ -326,36 +307,14 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
 
 
     private void initPileCard(CardViewLayout pileLayout) {
-        initDataList();
-        initPile(pileLayout);
-    }
-
-    private void initDataList() {
-        dataList = new ArrayList<>();
-        try {
-            InputStream in = activity.getAssets().open("preset.config");
-            int size = in.available();
-            byte[] buffer = new byte[size];
-            in.read(buffer);
-            String jsonStr = new String(buffer, "UTF-8");
-            JSONObject jsonObject = new JSONObject(jsonStr);
-            JSONArray jsonArray = jsonObject.optJSONArray("result");
-            if (null != jsonArray) {
-                int len = jsonArray.length();
-                for (int j = 0; j < 3; j++) {
-                    for (int i = 0; i < len; i++) {
-                        JSONObject itemJsonObject = jsonArray.getJSONObject(i);
-                        ItemEntity itemEntity = new ItemEntity(itemJsonObject);
-                        dataList.add(itemEntity);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(presenter.getHomePileData()!=null){
+            ArrayList<ItemEntity> dataList = presenter.getHomePileData();
+            initPile(pileLayout,dataList);
         }
     }
 
-    private void initPile(CardViewLayout pileLayout) {
+
+    private void initPile(CardViewLayout pileLayout,final ArrayList<ItemEntity> dataList) {
         pileLayout.setAdapter(new CardViewLayout.Adapter() {
 
             class ViewHolder {
@@ -398,40 +357,13 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     }
 
 
-    private void getWxNews() {
-        blog.clear();
-        try {
-            InputStream in = activity.getAssets().open("ycBlog.config");
-            int size = in.available();
-            byte[] buffer = new byte[size];
-            in.read(buffer);
-            String jsonStr = new String(buffer, "UTF-8");
-            JSONObject jsonObject = new JSONObject(jsonStr);
-            JSONArray jsonArray = jsonObject.optJSONArray("result");
-            if (null != jsonArray) {
-                int len = jsonArray.length();
-                for (int j = 0; j < 3; j++) {
-                    for (int i = 0; i < len; i++) {
-                        JSONObject itemJsonObject = jsonArray.getJSONObject(i);
-                        HomeBlogEntity blogEntity = new HomeBlogEntity(itemJsonObject);
-                        blog.add(blogEntity);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        getWxData();
-    }
-
-
-    private void getWxData() {
-        if (blog != null && blog.size() > 0) {
+    @Override
+    public void setNewsData(List<HomeBlogEntity> list) {
+        if (list != null && list.size() > 0) {
             adapter.clear();
-            adapter.addNewData(blog);
+            adapter.addNewData(list);
             bgaRefresh.endRefreshing();
             bgaRefresh.scrollTo(0, 0);
         }
     }
-
 }

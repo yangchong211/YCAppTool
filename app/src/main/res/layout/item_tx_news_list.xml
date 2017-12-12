@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="@color/gray3"
-            android:text="2017年8月28日"/>
+            android:text=""/>
     </LinearLayout>
     <ImageView
         android:id="@+id/iv_logo"

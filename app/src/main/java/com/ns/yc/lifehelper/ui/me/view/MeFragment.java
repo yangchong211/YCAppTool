@@ -1,39 +1,44 @@
 package com.ns.yc.lifehelper.ui.me.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
-import com.ns.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
-import com.ns.yc.lifehelper.ui.me.view.activity.MeQoneActivity;
+import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;
+import com.ns.yc.lifehelper.ui.me.presenter.MeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeFeedBackActivity;
+import com.ns.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
+import com.ns.yc.lifehelper.ui.me.view.activity.MeQoneActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ns.yc.lifehelper.ui.other.timer.TimerActivity;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * ================================================
  * 作    者：杨充
  * 版    本：1.0
- * 创建日期：2017/8/21
+ * 创建日期：2017/3/21
  * 描    述：我的页面
  * 修订历史：
+ *          v1.5 17年9月8日修改
  * ================================================
  */
-public class MeFragment extends BaseFragment implements View.OnClickListener {
+public class MeFragment extends BaseFragment implements View.OnClickListener , MeFragmentContract.View{
 
     @Bind(R.id.rl_me_timer)
     RelativeLayout rlMeTimer;
@@ -61,6 +66,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     LinearLayout llPerson;
     private MainActivity activity;
 
+    private MeFragmentContract.Presenter presenter = new MeFragmentPresenter(this);
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -68,9 +75,23 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+    public void onDetach() {
+        super.onDetach();
+        if(activity!=null){
+            activity = null;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.unSubscribe();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter.subscribe();
     }
 
     @Override
@@ -98,7 +119,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     public void initData() {
-
+        presenter.getRedHotMessageData();
     }
 
     @Override
@@ -123,7 +144,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(MeFeedBackActivity.class);
                 break;
             case R.id.rl_me_phone:
-                ToastUtils.showShortSafe("打电话");
+                toCallMe();
                 break;
             case R.id.iv_person_image:
                 if(Constant.isLogin){
@@ -133,6 +154,13 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 }
                 break;
         }
+    }
+
+
+    private void toCallMe() {
+        String number = tvMePhoneNumber.getText().toString().trim();
+        Intent myIntentDial = new Intent("android.intent.action.CALL", Uri.parse("tel:" + number));
+        startActivity(myIntentDial);
     }
 
 }

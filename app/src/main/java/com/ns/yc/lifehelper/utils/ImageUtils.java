@@ -28,11 +28,11 @@ public class ImageUtils {
 
     /**
      * 加载图片
-     * @param context
-     * @param path
-     * @param target
      */
     public static void loadImgByPicasso(Context context , String path, ImageView target) {
+        if(target==null){
+            return;
+        }
         if(path!=null && path.length()>0){
             Picasso.with(context)
                     .load(path)
@@ -42,11 +42,11 @@ public class ImageUtils {
 
     /**
      * 加载图片
-     * @param context
-     * @param path
-     * @param target
      */
     public static void loadImgByPicasso(Context context , int path, ImageView target) {
+        if(target==null){
+            return;
+        }
         if(path!=0){
             Picasso.with(context)
                     .load(path)
@@ -63,6 +63,9 @@ public class ImageUtils {
      * @param target        view
      */
     public static void loadImgByPicassoWithCircle(Context context , int path, ImageView target) {
+        if(target==null){
+            return;
+        }
         if(path>0){
             Picasso.with(context)
                     .load(path)
@@ -79,6 +82,9 @@ public class ImageUtils {
      * @param target        控件
      */
     public static void loadImgByPicassoPerson(Context context , String path, int resId, ImageView target) {
+        if(target==null){
+            return;
+        }
         if(path!=null && path.length()>0){
             Picasso.with(context)
                     .load(path)
@@ -95,6 +101,9 @@ public class ImageUtils {
      * @param target        控件
      */
     public static void loadImgByPicasso(Context context , String path , int resId, ImageView target) {
+        if(target==null){
+            return;
+        }
         if(path!=null && path.length()>0){
             Picasso.with(context)
                     .load(path)
@@ -113,7 +122,33 @@ public class ImageUtils {
      * @param resId
      * @param target        控件
      */
+    public static void loadImgByPicasso(Context context , int path , int resId, ImageView target) {
+        if(target==null){
+            return;
+        }
+        if(path>0){
+            Picasso.with(context)
+                    .load(path)
+                    .error(resId)
+                    .into(target);
+        }else {
+            Picasso.with(context)
+                    .load(resId)
+                    .error(resId)
+                    .into(target);
+        }
+    }
+
+
+    /**
+     * 加载图片
+     * @param resId
+     * @param target        控件
+     */
     public static void loadImgByPicassoError(Context context , String path , int resId, ImageView target) {
+        if(target==null){
+            return;
+        }
         if(path!=null && path.length()>0){
             Picasso.with(context)
                     .load(path)
@@ -140,6 +175,9 @@ public class ImageUtils {
      * @param imageView
      */
     public static void displayGif(Context context , String url, int resId ,ImageView imageView) {
+        if(imageView==null){
+            return;
+        }
         if(url!=null && url.length()>0){
             Glide.with(context)
                     .load(url)

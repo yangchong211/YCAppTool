@@ -29,6 +29,24 @@
     </string-array>
 
 
+    <!--首页精选跑马灯文字-->
+    <string-array name="main_marquee_title">
+        <item>1.坚持读书，写作，源于内心的动力</item>
+        <item>2.展翅翱翔，青春我们一路前行</item>
+        <item>3.欢迎订阅喜马拉雅听书</item>
+    </string-array>
+
+    <!--轮播图图片-->
+    <integer-array name="banner_image">
+        <item>@drawable/bg_small_autumn_tree_min</item>
+        <item>@drawable/bg_small_kites_min</item>
+        <item>@drawable/bg_small_lake_min</item>
+        <item>@drawable/bg_small_magnolia_trees_min</item>
+        <item>@drawable/bg_small_solda_min</item>
+        <item>@drawable/bg_small_tree_min</item>
+        <item>@drawable/bg_small_tulip_min</item>
+        <item>@drawable/bg_small_leaves_min</item>
+    </integer-array>
 
     <!--///////////////////////////////////////发现/////////////////////////////////////-->
 
@@ -95,8 +113,8 @@
 
     <string-array name="find_list4_title">
         <item>微信精选</item>
-        <item>时事热点</item>
-        <item>今日头条</item>
+        <item>稀土掘金</item>
+        <item>知乎头条</item>
     </string-array>
     <integer-array name="find_list4_image">
         <item>@drawable/bg_small_autumn_tree_min</item>
@@ -164,7 +182,7 @@
         <item>记事</item>
         <item>工商</item>
         <item>画廊</item>
-        <item>身份证</item>
+        <item>Wt新闻</item>
         <item>人脸识别</item>
         <item>归属地</item>
         <item>空气质量</item>
@@ -201,8 +219,8 @@
         <item>宋词</item>
         <item>历史</item>
         <item>法律</item>
-        <item>景点</item>
-        <item>航班</item>
+        <item>猜谜语</item>
+        <item>aidl测试</item>
         <item>绘画板</item>
     </string-array>
 

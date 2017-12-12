@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.ui.guide.view.activity;
 
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -146,5 +147,18 @@ public class SplashActivity extends BaseActivity {
         dotViews[position].setIsSelected(true);
         currentIndex = position;
     }
+
+    /**
+     * 屏蔽返回键
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
 
 }

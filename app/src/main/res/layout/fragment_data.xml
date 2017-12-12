@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ns.yc.lifehelper.ui.weight.scrollView.NoSlidingScrollview
+<com.ns.yc.ycutilslib.scrollView.NoNestedScrollview
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -10,16 +10,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/colorWhite">
-
-        <com.youth.banner.Banner
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/banner"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:title_height="20dp"
-            app:title_textsize="16sp"
-            app:title_textcolor="@color/colorAccent"
-            app:title_background="@color/colorTransparent"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -40,16 +30,25 @@
         </FrameLayout>
 
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:drawableLeft="@drawable/shape_find_icon"
-            android:drawablePadding="10dp"
+            android:orientation="horizontal"
             android:background="@color/whiteBg"
-            android:textSize="18sp"
-            android:textColor="@color/blackText"
-            android:text="时光日志"/>
+            android:padding="10dp">
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/redTab"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/blackText"
+                android:textSize="18sp"
+                android:text="@string/data_timer_note"/>
+        </LinearLayout>
+        <View style="@style/DeepUnderLine"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -63,36 +62,95 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2017年4月18日"/>
+                    android:text="我的笔记"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="任务目录"/>
+                    android:text="MVP+dagger2+rx训练"/>
             </LinearLayout>
             <TextView
                 android:id="@+id/tv_note_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
-                android:drawableRight="@drawable/ic_back_right"
-                android:text="编辑笔记"/>
+                android:drawableEnd="@drawable/ic_back_right"
+                android:text="@string/data_edit"/>
         </RelativeLayout>
 
 
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:drawableLeft="@drawable/shape_find_icon"
-            android:drawablePadding="10dp"
+            android:orientation="horizontal"
             android:background="@color/whiteBg"
-            android:textSize="18sp"
-            android:textColor="@color/blackText"
-            android:text="最新观察"/>
+            android:padding="10dp">
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/redTab"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/blackText"
+                android:textSize="18sp"
+                android:text="@string/data_news_zhi_hu"/>
+        </LinearLayout>
+        <View style="@style/DeepUnderLine"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="知乎日报"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="练习腾讯X5框架加载网页"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_news_zhi_hu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:drawableEnd="@drawable/ic_back_right"
+                android:text="@string/data_news_zhi_hu"/>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/whiteBg"
+            android:padding="10dp">
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/redTab"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/blackText"
+                android:textSize="18sp"
+                android:text="@string/data_new_look"/>
+        </LinearLayout>
+        <View style="@style/DeepUnderLine"/>
         <com.jude.easyrecyclerview.EasyRecyclerView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/recyclerView"
@@ -102,16 +160,25 @@
             app:layout_empty="@layout/view_custom_empty_data"
             app:layout_error="@layout/view_custom_data_error"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:drawableLeft="@drawable/shape_find_icon"
-            android:drawablePadding="10dp"
+            android:orientation="horizontal"
             android:background="@color/whiteBg"
-            android:textSize="18sp"
-            android:textColor="@color/blackText"
-            android:text="实用小工具"/>
+            android:padding="10dp">
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/redTab"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/blackText"
+                android:textSize="18sp"
+                android:text="@string/data_small_tool"/>
+        </LinearLayout>
+        <View style="@style/DeepUnderLine"/>
 
         <com.ns.yc.lifehelper.ui.weight.MyGridView
             android:id="@+id/gridView"
@@ -124,4 +191,4 @@
 
     </LinearLayout>
 
-</com.ns.yc.lifehelper.ui.weight.scrollView.NoSlidingScrollview>
+</com.ns.yc.ycutilslib.scrollView.NoNestedScrollview>

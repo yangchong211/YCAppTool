@@ -17,9 +17,7 @@ import com.ns.yc.lifehelper.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by sunfusheng on 16/5/31.
- */
+
 public class MarqueeView extends ViewFlipper {
 
     private Context mContext;

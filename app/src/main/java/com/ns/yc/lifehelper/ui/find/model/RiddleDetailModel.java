@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.ns.yc.lifehelper.api.ConstantALiYunApi;
 import com.ns.yc.lifehelper.api.RetrofitWrapper;
-import com.ns.yc.lifehelper.ui.find.api.RiddleDetailApi;
-import com.ns.yc.lifehelper.ui.find.bean.RiddleDetailBean;
+import com.ns.yc.lifehelper.ui.find.model.api.RiddleDetailApi;
+import com.ns.yc.lifehelper.ui.find.model.bean.RiddleDetailBean;
 
 import rx.Observable;
 

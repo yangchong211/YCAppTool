@@ -10,7 +10,7 @@
 
     <include layout="@layout/base_tool_bar" />
 
-    <com.ns.yc.lifehelper.ui.weight.scrollView.NoNestedScrollview
+    <com.ns.yc.ycutilslib.scrollView.NoNestedScrollview
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -354,5 +354,5 @@
             </FrameLayout>
 
         </LinearLayout>
-    </com.ns.yc.lifehelper.ui.weight.scrollView.NoNestedScrollview>
+    </com.ns.yc.ycutilslib.scrollView.NoNestedScrollview>
 </LinearLayout>
