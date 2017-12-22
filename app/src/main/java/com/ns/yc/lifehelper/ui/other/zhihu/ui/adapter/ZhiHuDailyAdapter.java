@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.yc.cn.ycbannerlib.first.BannerView;
@@ -30,10 +30,10 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private LayoutInflater inflater;
     private Context mContext;
-    private List<ZhiHuDailyBean.StoriesBean> mList;
+    private List<ZhiHuDailyListBean.StoriesBean> mList;
     private String currentTitle = "今日热闻";
     private OnItemClickListener onItemClickListener;
-    private List<ZhiHuDailyBean.TopStoriesBean> mTopList;
+    private List<ZhiHuDailyListBean.TopStoriesBean> mTopList;
     private boolean isBefore = false;
     private BannerView banner;
     private BannerPagerAdapter mAdapter;
@@ -45,7 +45,7 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    public ZhiHuDailyAdapter(Context activity, List<ZhiHuDailyBean.StoriesBean> mList) {
+    public ZhiHuDailyAdapter(Context activity, List<ZhiHuDailyListBean.StoriesBean> mList) {
         this.mList = mList;
         this.mContext = activity;
         inflater = LayoutInflater.from(activity);
@@ -152,7 +152,7 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
      * 添加今天日期新闻的数据
      * @param zhiHuDailyBean      数据
      */
-    public void addDailyDate(ZhiHuDailyBean zhiHuDailyBean) {
+    public void addDailyDate(ZhiHuDailyListBean zhiHuDailyBean) {
         currentTitle = "今日热闻";
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
                 new ZhiHuDiffCallback(mList, zhiHuDailyBean.getStories()), true);

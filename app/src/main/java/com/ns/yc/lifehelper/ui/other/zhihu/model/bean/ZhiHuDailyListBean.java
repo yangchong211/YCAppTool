@@ -3,8 +3,7 @@ package com.ns.yc.lifehelper.ui.other.zhihu.model.bean;
 import java.util.List;
 
 
-public class ZhiHuDailyBean {
-
+public class ZhiHuDailyListBean {
 
     private String date;
     /**

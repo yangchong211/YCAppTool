@@ -9,7 +9,7 @@ import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuDailyContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
 import com.ns.yc.lifehelper.utils.RxBus;
 import com.ns.yc.lifehelper.utils.RxUtil;
@@ -116,8 +116,8 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
                 .map(new Func1<ZhiHuDailyBeforeListBean, ZhiHuDailyBeforeListBean>() {
                     @Override
                     public ZhiHuDailyBeforeListBean call(ZhiHuDailyBeforeListBean dailyBeforeListBean) {
-                        List<ZhiHuDailyBean.StoriesBean> list = dailyBeforeListBean.getStories();
-                        for(ZhiHuDailyBean.StoriesBean item : list) {
+                        List<ZhiHuDailyListBean.StoriesBean> list = dailyBeforeListBean.getStories();
+                        for(ZhiHuDailyListBean.StoriesBean item : list) {
                             item.setReadState(RealmHelper.queryNewsId(realm,item.getId()));
                         }
                         return dailyBeforeListBean;
@@ -157,8 +157,8 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
     public void getData() {
         ZhiHuModel model = ZhiHuModel.getInstance();
         Subscription rxSubscription = model.getDailyList()
-                .compose(RxUtil.<ZhiHuDailyBean>rxSchedulerHelper())
-                .subscribe(new Subscriber<ZhiHuDailyBean>() {
+                .compose(RxUtil.<ZhiHuDailyListBean>rxSchedulerHelper())
+                .subscribe(new Subscriber<ZhiHuDailyListBean>() {
                     @Override
                     public void onCompleted() {
 
@@ -174,7 +174,7 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ZhiHuDailyBean zhiHuDailyBean) {
+                    public void onNext(ZhiHuDailyListBean zhiHuDailyBean) {
                         if(zhiHuDailyBean!=null){
                             mView.setView(zhiHuDailyBean);
                         }else {

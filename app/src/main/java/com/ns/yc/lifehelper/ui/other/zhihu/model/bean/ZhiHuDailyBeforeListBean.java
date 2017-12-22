@@ -18,7 +18,7 @@ public class ZhiHuDailyBeforeListBean {
      * title : 小事 · 骗了骗子的钱
      */
 
-    private List<ZhiHuDailyBean.StoriesBean> stories;
+    private List<ZhiHuDailyListBean.StoriesBean> stories;
 
     public String getDate() {
         return date;
@@ -28,11 +28,11 @@ public class ZhiHuDailyBeforeListBean {
         this.date = date;
     }
 
-    public List<ZhiHuDailyBean.StoriesBean> getStories() {
+    public List<ZhiHuDailyListBean.StoriesBean> getStories() {
         return stories;
     }
 
-    public void setStories(List<ZhiHuDailyBean.StoriesBean> stories) {
+    public void setStories(List<ZhiHuDailyListBean.StoriesBean> stories) {
         this.stories = stories;
     }
 

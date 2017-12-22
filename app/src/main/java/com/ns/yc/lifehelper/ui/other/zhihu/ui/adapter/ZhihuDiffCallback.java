@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.ui.other.zhihu.ui.adapter;
 
 import android.support.v7.util.DiffUtil;
 
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ public class ZhiHuDiffCallback extends DiffUtil.Callback{
 
 
 
-    private List<ZhiHuDailyBean.StoriesBean> mOldData, mNewData;
+    private List<ZhiHuDailyListBean.StoriesBean> mOldData, mNewData;
 
-    public ZhiHuDiffCallback(List<ZhiHuDailyBean.StoriesBean> mOldData, List<ZhiHuDailyBean.StoriesBean> mNewData) {
+    public ZhiHuDiffCallback(List<ZhiHuDailyListBean.StoriesBean> mOldData, List<ZhiHuDailyListBean.StoriesBean> mNewData) {
         this.mOldData = mOldData;
         this.mNewData = mNewData;
     }
@@ -35,8 +35,8 @@ public class ZhiHuDiffCallback extends DiffUtil.Callback{
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        ZhiHuDailyBean.StoriesBean beanOld = mOldData.get(oldItemPosition);
-        ZhiHuDailyBean.StoriesBean beanNew = mNewData.get(newItemPosition);
+        ZhiHuDailyListBean.StoriesBean beanOld = mOldData.get(oldItemPosition);
+        ZhiHuDailyListBean.StoriesBean beanNew = mNewData.get(newItemPosition);
         if (!beanOld.getTitle().equals(beanNew.getTitle())) {
             return false;
         }

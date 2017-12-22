@@ -20,7 +20,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseStateFragment;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewAnimActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuDailyContract;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.presenter.ZhiHuDailyPresenter;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
@@ -63,7 +63,7 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
 
     private ZhiHuNewsActivity activity;
     private ZhiHuDailyContract.Presenter presenter = new ZhiHuDailyPresenter(this);
-    private List<ZhiHuDailyBean.StoriesBean> mList = new ArrayList<>();
+    private List<ZhiHuDailyListBean.StoriesBean> mList = new ArrayList<>();
     private ZhiHuDailyAdapter mAdapter;
     private String currentDate;
 
@@ -201,7 +201,7 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
 
 
     @Override
-    public void setView(ZhiHuDailyBean zhiHuDailyBean) {
+    public void setView(ZhiHuDailyListBean zhiHuDailyBean) {
         if (refresher.isRefreshing()) {
             refresher.setRefreshing(false);
         }

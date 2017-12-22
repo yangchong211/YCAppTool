@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.ui.other.zhihu.model.api;
 import com.ns.yc.lifehelper.api.ConstantALiYunApi;
 import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuCommentBean;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuHotBean;
@@ -42,7 +42,7 @@ public class ZhiHuModel {
     /**
      * 最新日报
      */
-    public Observable<ZhiHuDailyBean> getDailyList() {
+    public Observable<ZhiHuDailyListBean> getDailyList() {
         return mApiService.getDailyList();
     }
 

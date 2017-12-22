@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.zhihu.model.api;
 
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuCommentBean;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
@@ -22,7 +22,7 @@ public interface ZhiHuApi {
      * 最新日报
      */
     @GET("news/latest")
-    Observable<ZhiHuDailyBean> getDailyList();
+    Observable<ZhiHuDailyListBean> getDailyList();
 
     /**
      * 主题日报

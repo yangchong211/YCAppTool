@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.ui.other.zhihu.contract;
 
 import com.ns.yc.lifehelper.base.BasePresenter;
 import com.ns.yc.lifehelper.base.BaseView;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 
 /**
@@ -20,7 +20,7 @@ public interface ZhiHuDailyContract {
 
     //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
-        void setView(ZhiHuDailyBean zhiHuDailyBean);
+        void setView(ZhiHuDailyListBean zhiHuDailyBean);
         void setEmptyView();
         void setNetworkErrorView();
         void setErrorView();

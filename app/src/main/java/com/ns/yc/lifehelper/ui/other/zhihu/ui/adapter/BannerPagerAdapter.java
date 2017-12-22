@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.yc.cn.ycbannerlib.first.adapter.StaticPagerAdapter;
 
@@ -24,9 +24,9 @@ import java.util.List;
 public class BannerPagerAdapter extends StaticPagerAdapter {
 
     private Context ctx;
-    private List<ZhiHuDailyBean.TopStoriesBean> list;
+    private List<ZhiHuDailyListBean.TopStoriesBean> list;
 
-    BannerPagerAdapter(Context ctx, List<ZhiHuDailyBean.TopStoriesBean> list) {
+    BannerPagerAdapter(Context ctx, List<ZhiHuDailyListBean.TopStoriesBean> list) {
         this.ctx = ctx;
         this.list = list;
     }
