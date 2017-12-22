@@ -25,7 +25,6 @@ import butterknife.Bind;
 
 public class VTexPagerFragment extends BaseFragment implements WTexPagerContract.View {
 
-
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
     private WTexNewsActivity activity;
@@ -35,7 +34,6 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
     private WTexPagerContract.Presenter presenter = new WTexPagerPresenter(this);
     private WTexPagerAdapter mAdapter;
 
-
     public static VTexPagerFragment getInstance(String param) {
         VTexPagerFragment fragment = new VTexPagerFragment();
         Bundle args = new Bundle();
@@ -44,14 +42,12 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
         return fragment;
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (WTexNewsActivity) context;
 
     }
-
 
     @Override
     public void onDetach() {
@@ -99,6 +95,7 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
         });
     }
 
+    
     @Override
     public void initData() {
         recyclerView.showProgress();
