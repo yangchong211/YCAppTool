@@ -9,6 +9,8 @@ import java.util.List;
 
 public class ZhiHuDiffCallback extends DiffUtil.Callback{
 
+
+
     private List<ZhiHuDailyBean.StoriesBean> mOldData, mNewData;
 
     public ZhiHuDiffCallback(List<ZhiHuDailyBean.StoriesBean> mOldData, List<ZhiHuDailyBean.StoriesBean> mNewData) {

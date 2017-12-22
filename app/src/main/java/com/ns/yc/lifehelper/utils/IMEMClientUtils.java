@@ -19,6 +19,8 @@ import com.hyphenate.exceptions.HyphenateException;
 public class IMemClientUtils {
 
 
+
+
     /**
      * 获取对象
      * @return                  EMClient对象

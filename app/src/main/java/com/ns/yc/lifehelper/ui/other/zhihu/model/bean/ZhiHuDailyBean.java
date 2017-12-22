@@ -2,12 +2,9 @@ package com.ns.yc.lifehelper.ui.other.zhihu.model.bean;
 
 import java.util.List;
 
-/**
- * Created by PC on 2017/11/29.
- * 作者：PC
- */
 
 public class ZhiHuDailyBean {
+
 
 
     /**
