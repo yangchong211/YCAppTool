@@ -6,4 +6,5 @@ package com.ns.yc.lifehelper.utils;
  */
 
 public class LifeHelperUtils {
+
 }
