@@ -33,7 +33,7 @@ public class WTexNewsActivity extends BaseActivity implements View.OnClickListen
 
     public static String[] typeStr = {"技术", "创意", "好玩", "Apple", "酷工作", "交易", "城市", "问与答", "最热", "全部", "R2"};
     public static String[] type = {"tech", "creative", "play", "apple", "jobs", "deals", "city", "qna", "hot", "all", "r2"};
-    List<VTexPagerFragment> fragments = new ArrayList<>();
+    List<VtexPagerFragment> fragments = new ArrayList<>();
     List<String> title = new ArrayList<>();
 
     @Override
@@ -47,7 +47,7 @@ public class WTexNewsActivity extends BaseActivity implements View.OnClickListen
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setupWithViewPager(vpContent);
         for (int i = 0; i < type.length; i++) {
-            VTexPagerFragment fragment = VTexPagerFragment.getInstance(type[i]);
+            VtexPagerFragment fragment = VtexPagerFragment.getInstance(type[i]);
             fragments.add(fragment);
             title.add(typeStr[i]);
         }

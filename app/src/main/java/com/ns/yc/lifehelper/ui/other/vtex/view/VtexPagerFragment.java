@@ -23,7 +23,7 @@ import java.util.List;
 
 import butterknife.Bind;
 
-public class VTexPagerFragment extends BaseFragment implements WTexPagerContract.View {
+public class VtexPagerFragment extends BaseFragment implements WTexPagerContract.View {
 
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
@@ -33,8 +33,8 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
     private WTexPagerContract.Presenter presenter = new WTexPagerPresenter(this);
     private WTexPagerAdapter mAdapter;
 
-    public static VTexPagerFragment getInstance(String param) {
-        VTexPagerFragment fragment = new VTexPagerFragment();
+    public static VtexPagerFragment getInstance(String param) {
+        VtexPagerFragment fragment = new VtexPagerFragment();
         Bundle args = new Bundle();
         args.putString(TYPE, param);
         fragment.setArguments(args);
