@@ -21,7 +21,7 @@ import com.ns.yc.lifehelper.ui.other.imTalk.presenter.ImTalkPresenter;
 import com.ns.yc.lifehelper.ui.other.imTalk.ui.fragment.ImContactFragment;
 import com.ns.yc.lifehelper.ui.other.imTalk.ui.fragment.ImConversationFragment;
 import com.ns.yc.lifehelper.ui.other.imTalk.ui.fragment.ImSettingFragment;
-import com.ns.yc.lifehelper.utils.IMemClientUtils;
+import com.ns.yc.lifehelper.utils.IMEmClientUtils;
 import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
 
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class ImTalkActivity extends BaseActivity implements View.OnClickListener
         presenter.subscribe();
 
         // 判断sdk是否登录成功过，并没有退出和被踢，否则跳转到登陆界面
-        if (!IMemClientUtils.getIMemClientInstance().isLoggedInBefore()) {
+        if (!IMEmClientUtils.getIMemClientInstance().isLoggedInBefore()) {
             Intent intent = new Intent(this, MeLoginActivity.class);
             startActivity(intent);
             finish();

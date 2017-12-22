@@ -16,7 +16,8 @@ import com.hyphenate.exceptions.HyphenateException;
  * 修订历史：
  * ================================================
  */
-public class IMemClientUtils {
+public class IMEmClientUtils {
+
 
     /**
      * 获取对象
@@ -24,7 +25,6 @@ public class IMemClientUtils {
      */
     public static EMClient  getIMemClientInstance(){
         return EMClient.getInstance();
-        
     }
 
 
