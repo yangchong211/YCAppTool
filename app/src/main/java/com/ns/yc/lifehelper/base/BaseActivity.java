@@ -10,7 +10,6 @@ import android.view.WindowManager;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
 
@@ -135,8 +134,8 @@ public abstract class BaseActivity extends AppCompatActivity{
      * 用来检测所有Activity的内存泄漏
      */
     private void initLeakCanary() {
-        RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
-        refWatcher.watch(this);
+        /*RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+        refWatcher.watch(this);*/
     }
 
 

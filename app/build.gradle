@@ -47,11 +47,6 @@ bugly {
 }
 
 
-android {
-    //use legacy for android 6.0
-    useLibrary 'org.apache.http.legacy'
-}
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //官方库
@@ -69,19 +64,16 @@ dependencies {
     //测试框架
     testCompile 'junit:junit:4.12'
     androidTestCompile 'junit:junit:4.12'
-    testCompile "org.robolectric:robolectric:3.6.1"
-    testCompile "org.mockito:mockito-all:1.10.19"
+    //testCompile "org.robolectric:robolectric:3.6.1"
+    //testCompile "org.mockito:mockito-all:1.10.19"
 
 
     //网络请求retrofit2+Rx
-    compile 'com.zhy:okhttputils:2.5.2'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    //compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    //compile 'io.reactivex.rxjava2:rxjava:2.1.2'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.0'
 
@@ -134,8 +126,8 @@ dependencies {
     //视频播放
     compile project(':vitamio')
     //内存泄漏检测工具
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    //debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    //releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     //腾讯bug管理平台
     compile 'com.tencent.bugly:crashreport:2.6.0'
     compile 'com.tencent.bugly:nativecrashreport:3.3.0'

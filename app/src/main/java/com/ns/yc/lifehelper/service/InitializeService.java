@@ -8,18 +8,12 @@ import android.util.Log;
 import com.blankj.utilcode.util.AppUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
-import com.ns.yc.lifehelper.api.LogInterceptor;
 import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.base.BaseConfig;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.LogUtils;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
-import com.zhy.http.okhttp.OkHttpUtils;
-
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 
 
 public class InitializeService extends IntentService {
@@ -55,7 +49,7 @@ public class InitializeService extends IntentService {
     }
 
     private void initApplication() {
-        initOkHttpUtils();
+        //initOkHttpUtils();                            //初始化鸿洋大神OkHttpUtils
         initBugly();                                    //初始化腾讯bug管理平台
         BaseConfig.INSTANCE.initConfig();               //初始化配置信息
         initQQX5();                                     //初始化腾讯X5
@@ -68,7 +62,7 @@ public class InitializeService extends IntentService {
      * 初始化鸿洋大神网络请求框架
      * 项目刚开始时用鸿洋大神的框架【正式项目中用这个】，后来慢慢改成Retrofit
      */
-    private void initOkHttpUtils() {
+    /*private void initOkHttpUtils() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 //.addInterceptor(new BaseInterceptor())
                 //.addInterceptor(interceptor)
@@ -78,7 +72,7 @@ public class InitializeService extends IntentService {
                 .writeTimeout(10000L,TimeUnit.MICROSECONDS)                     //写数据超时时间
                 .build();
         OkHttpUtils.initClient(okHttpClient);
-    }
+    }*/
 
 
     /**

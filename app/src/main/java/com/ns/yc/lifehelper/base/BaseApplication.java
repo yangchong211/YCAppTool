@@ -12,8 +12,6 @@ import com.hyphenate.chat.EMOptions;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.service.InitializeService;
 import com.ns.yc.lifehelper.utils.AppUtil;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 import java.io.File;
 
@@ -33,7 +31,7 @@ public class BaseApplication extends Application {
 
 
     private static BaseApplication instance;
-    private RefWatcher refWatcher;
+    //private RefWatcher refWatcher;
     private boolean isInit = false;         //记录环信是否已经初始化，避免初始化两次
 
     public static synchronized BaseApplication getInstance() {
@@ -77,7 +75,7 @@ public class BaseApplication extends Application {
         instance = this;
         initUtils();
         BaseAppManager.getInstance().init(this);        //栈管理
-        initLeakCanary();                               //Square公司内存泄漏检测工具
+        //initLeakCanary();                               //Square公司内存泄漏检测工具
         initRealm();                                    //初始化Realm数据库
         initChatIM();                                   //初始化环信，不要在子线程中初始化
 
@@ -142,12 +140,12 @@ public class BaseApplication extends Application {
     /**
      * 初始化内存泄漏检测工具
      */
-    private void initLeakCanary() {
+    /*private void initLeakCanary() {
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         refWatcher = LeakCanary.install(this);
-    }
+    }*/
 
 
     /**
@@ -155,10 +153,10 @@ public class BaseApplication extends Application {
      * @param context       上下文
      * @return              RefWatcher对象
      */
-    public static RefWatcher getRefWatcher(Context context) {
+    /*public static RefWatcher getRefWatcher(Context context) {
         BaseApplication application = (BaseApplication) context.getApplicationContext();
         return application.refWatcher;
-    }
+    }*/
 
 
     /**

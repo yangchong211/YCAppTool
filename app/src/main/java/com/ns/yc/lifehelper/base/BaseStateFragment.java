@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.ycstatelib.StateLayoutManager;
-import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
 
@@ -120,8 +119,8 @@ public abstract class BaseStateFragment extends Fragment {
 
     /**用来检测所有Fragment的内存泄漏*/
     private void initLeakCanary() {
-        RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
-        refWatcher.watch(this);
+        /*RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);*/
     }
 
 
