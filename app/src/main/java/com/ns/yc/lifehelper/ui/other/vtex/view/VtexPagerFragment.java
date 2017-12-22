@@ -30,7 +30,6 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
     private WTexNewsActivity activity;
     private static final String TYPE = "type";
     private String mType;
-
     private WTexPagerContract.Presenter presenter = new WTexPagerPresenter(this);
     private WTexPagerAdapter mAdapter;
 
