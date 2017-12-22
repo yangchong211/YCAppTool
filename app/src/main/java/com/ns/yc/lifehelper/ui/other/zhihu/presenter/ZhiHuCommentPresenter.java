@@ -2,6 +2,7 @@ package com.ns.yc.lifehelper.ui.other.zhihu.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuCommentContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuCommentBean;
@@ -58,12 +59,20 @@ public class ZhiHuCommentPresenter implements ZhiHuCommentContract.Presenter {
 
                         @Override
                         public void onError(Throwable e) {
-
+                            if(NetworkUtils.isConnected()){
+                                mView.setErrorView();
+                            }else {
+                                mView.setNetworkErrorView();
+                            }
                         }
 
                         @Override
                         public void onNext(ZhiHuCommentBean zhiHuCommentBean) {
-                            mView.showContent(zhiHuCommentBean);
+                            if(zhiHuCommentBean!=null){
+                                mView.showContent(zhiHuCommentBean);
+                            }else {
+                                mView.setEmptyView();
+                            }
                         }
                     });
             mSubscriptions.add(rxSubscription);
@@ -78,12 +87,20 @@ public class ZhiHuCommentPresenter implements ZhiHuCommentContract.Presenter {
 
                         @Override
                         public void onError(Throwable e) {
-
+                            if(NetworkUtils.isConnected()){
+                                mView.setErrorView();
+                            }else {
+                                mView.setNetworkErrorView();
+                            }
                         }
 
                         @Override
                         public void onNext(ZhiHuCommentBean zhiHuCommentBean) {
-                            mView.showContent(zhiHuCommentBean);
+                            if(zhiHuCommentBean!=null){
+                                mView.showContent(zhiHuCommentBean);
+                            }else {
+                                mView.setEmptyView();
+                            }
                         }
                     });
             mSubscriptions.add(rxSubscription);

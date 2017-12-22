@@ -39,7 +39,7 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends AppCompat
         if(mPresenter!=null){
             mPresenter.subscribe();
         }
-        AppManager.getAppManager().addActivity(this);                                   //将当前Activity添加到容器
+        AppManager.getAppManager().addActivity(this);                  //将当前Activity添加到容器
         initView();
         initListener();
         initData();
@@ -51,12 +51,15 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends AppCompat
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
         initLeakCanary();             //测试内存泄漏，正式一定要隐藏
+        //注意一定要先做销毁mPresenter.unSubscribe()，然后在调用这步ButterKnife.unbind(this)，销毁所有控件对象
+        //查询unbind源码可知，执行这步后会将创建所有控件对象置null，如果后调用mPresenter.unSubscribe()，
+        //那么如果有对象在做执行行为，将会导致控件对象报空指针。一定注意先后顺序。
         if(mPresenter!=null){
             mPresenter.unSubscribe();
         }
-        AppManager.getAppManager().removeActivity(this);                                //将当前Activity移除到容器
+        ButterKnife.unbind(this);
+        AppManager.getAppManager().removeActivity(this);             //将当前Activity移除到容器
         //AppManager.getAppManager().finishActivity(this);
     }
 

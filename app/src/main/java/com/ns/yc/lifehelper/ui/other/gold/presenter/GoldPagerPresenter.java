@@ -1,12 +1,13 @@
 package com.ns.yc.lifehelper.ui.other.gold.presenter;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
+import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.ui.other.gold.contract.GoldPagerContract;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldListBean;
-import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerItemBean;
 import com.ns.yc.lifehelper.ui.other.gold.model.api.GoldModel;
+import com.ns.yc.lifehelper.utils.LogUtils;
 import com.ns.yc.lifehelper.utils.RxUtil;
 
 import java.text.SimpleDateFormat;
@@ -14,8 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import io.realm.Realm;
-import io.realm.RealmList;
+import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -34,9 +34,6 @@ public class GoldPagerPresenter implements GoldPagerContract.Presenter {
     private GoldPagerContract.View mView;
     @NonNull
     private CompositeSubscription mSubscriptions;
-    private RealmList<GoldManagerItemBean> mList;
-    private boolean isFirst = true;
-    private Realm realm;
     private String mType;
     private List<GoldListBean> totalList = new ArrayList<>();
     private boolean isHotList = true;
@@ -44,14 +41,14 @@ public class GoldPagerPresenter implements GoldPagerContract.Presenter {
     private static final int NUM_EACH_PAGE = 20;
     private static final int NUM_HOT_LIMIT = 3;
 
-    public GoldPagerPresenter(GoldPagerContract.View homeView) {
+    public
+    GoldPagerPresenter(GoldPagerContract.View homeView) {
         this.mView = homeView;
         mSubscriptions = new CompositeSubscription();
     }
 
     @Override
     public void subscribe() {
-        isFirst = true;
 
     }
 
@@ -66,43 +63,62 @@ public class GoldPagerPresenter implements GoldPagerContract.Presenter {
         this.mType = mType;
         currentPage = 0;
         totalList.clear();
-
         GoldModel model = GoldModel.getInstance();
-        Subscription subscribe = model.fetchGoldList(mType, NUM_EACH_PAGE, currentPage++)
+        Observable<List<GoldListBean>> list = model.fetchGoldList(mType, NUM_EACH_PAGE, currentPage++)
                 .compose(RxUtil.<List<GoldListBean>>rxSchedulerHelper())
-                .subscribe(new Subscriber<List<GoldListBean>>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.e("GoldPagerPresenter","onCompleted");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("GoldPagerPresenter","onError"+e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(List<GoldListBean> goldListBeen) {
-                        Log.e("GoldPagerPresenter","onNext");
-                        if (isHotList) {
-                            isHotList = false;
-                            totalList.addAll(goldListBeen);
-                        } else {
-                            isHotList = true;
-                            totalList.addAll(goldListBeen);
-                            mView.showContent(totalList);
-                        }
-                    }
-                });
-        mSubscriptions.add(subscribe);
-
+                .compose(RxUtil.<List<GoldListBean>>handleGoldResult());
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -3);
 
-        Subscription hotSubscribe = model.fetchGoldHotList(mType,
+        @SuppressLint("SimpleDateFormat")
+        Observable<List<GoldListBean>> hotList = model.fetchGoldHotList(mType,
                 new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()), NUM_HOT_LIMIT)
                 .compose(RxUtil.<List<GoldListBean>>rxSchedulerHelper())
+                .compose(RxUtil.<List<GoldListBean>>handleGoldResult());
+
+        Subscription rxSubscription = Observable.concat(hotList, list)
+                .subscribe(new Subscriber<List<GoldListBean>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtils.e("Throwable---------"+e.getMessage());
+                        if(NetworkUtils.isConnected()){
+                            mView.setErrorView();
+                        }else {
+                            mView.setNetworkErrorView();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(List<GoldListBean> goldListBeen) {
+                        if(goldListBeen!=null && goldListBeen.size()>0){
+                            if (isHotList) {
+                                isHotList = false;
+                                totalList.addAll(goldListBeen);
+                            } else {
+                                isHotList = true;
+                                totalList.addAll(goldListBeen);
+                                mView.showContent(totalList);
+                            }
+                        }else {
+                            mView.setEmptyView();
+                        }
+                    }
+                });
+        mSubscriptions.add(rxSubscription);
+    }
+
+    @Override
+    public void getMoreGoldData() {
+        GoldModel model = GoldModel.getInstance();
+        Subscription rxSubscription = model.fetchGoldList(mType, NUM_EACH_PAGE, currentPage++)
+                .compose(RxUtil.<List<GoldListBean>>rxSchedulerHelper())
+                .compose(RxUtil.<List<GoldListBean>>handleGoldResult())
                 .subscribe(new Subscriber<List<GoldListBean>>() {
                     @Override
                     public void onCompleted() {
@@ -116,11 +132,14 @@ public class GoldPagerPresenter implements GoldPagerContract.Presenter {
 
                     @Override
                     public void onNext(List<GoldListBean> goldListBeen) {
-                        if(goldListBeen!=null){
-                            Log.e("Tag","----");
+                        if(goldListBeen!=null && goldListBeen.size()>0){
+                            totalList.addAll(goldListBeen);
+                            mView.showMoreContent(totalList, totalList.size(), totalList.size() + NUM_EACH_PAGE);
+                        }else {
+                            mView.setNoMore();
                         }
                     }
                 });
-        mSubscriptions.add(hotSubscribe);
+        mSubscriptions.add(rxSubscription);
     }
 }

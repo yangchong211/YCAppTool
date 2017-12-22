@@ -1,20 +1,28 @@
 package com.ns.yc.lifehelper.ui.other.zhihu.ui.fragment;
 
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.BaseStateFragment;
+import com.ns.yc.lifehelper.ui.main.view.activity.WebViewAnimActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuHotContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuHotBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.presenter.ZhiHuHotPresenter;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.adapter.ZhiHuHotAdapter;
+import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +39,7 @@ import butterknife.Bind;
  * 修订历史：
  * ================================================
  */
-public class ZhiHuHotFragment extends BaseFragment implements ZhiHuHotContract.View{
+public class ZhiHuHotFragment extends BaseStateFragment implements ZhiHuHotContract.View{
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -43,11 +51,13 @@ public class ZhiHuHotFragment extends BaseFragment implements ZhiHuHotContract.V
     private List<ZhiHuHotBean.RecentBean> mList = new ArrayList<>();
     private ZhiHuHotAdapter mAdapter;
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.subscribe();
     }
+
 
     @Override
     public void onDestroy() {
@@ -57,9 +67,9 @@ public class ZhiHuHotFragment extends BaseFragment implements ZhiHuHotContract.V
             mAdapter = null;
         }
         mList = null;
-        recyclerView = null;
         refresher = null;
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -67,16 +77,25 @@ public class ZhiHuHotFragment extends BaseFragment implements ZhiHuHotContract.V
         activity = (ZhiHuNewsActivity) context;
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         activity = null;
     }
 
+
     @Override
-    public int getContentView() {
-        return R.layout.base_refresh_recycle;
+    protected void initStatusLayout() {
+        statusLayoutManager = StateLayoutManager.newBuilder(activity)
+                .contentView(R.layout.base_refresh_recycle)
+                .emptyDataView(R.layout.view_custom_empty_data)
+                .errorView(R.layout.view_custom_data_error)
+                .loadingView(R.layout.view_custom_loading_data)
+                .netWorkErrorView(R.layout.view_custom_network_error)
+                .build();
     }
+
 
     @Override
     public void initView() {
@@ -85,11 +104,29 @@ public class ZhiHuHotFragment extends BaseFragment implements ZhiHuHotContract.V
 
     @Override
     public void initListener() {
-
+        mAdapter.setOnItemClickListener(new ZhiHuHotAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, View view) {
+                presenter.insertReadToDB(mList.get(position).getNews_id());
+                mAdapter.setReadState(position,true);
+                mAdapter.notifyItemChanged(position);
+                Intent intent = new Intent();
+                intent.setClass(activity, WebViewAnimActivity.class);
+                intent.putExtra("id",mList.get(position).getNews_id());
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, view, "view");
+                    activity.startActivity(intent,options.toBundle());
+                }else {
+                    activity.startActivity(intent);
+                }
+            }
+        });
     }
+
 
     @Override
     public void initData() {
+        statusLayoutManager.showLoading();
         presenter.getData();
     }
 
@@ -98,6 +135,9 @@ public class ZhiHuHotFragment extends BaseFragment implements ZhiHuHotContract.V
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         mAdapter = new ZhiHuHotAdapter(activity, mList);
         recyclerView.setAdapter(mAdapter);
+        final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
+                SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
+        recyclerView.addItemDecoration(line);
         refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -115,5 +155,26 @@ public class ZhiHuHotFragment extends BaseFragment implements ZhiHuHotContract.V
         mList.clear();
         mList.addAll(zhiHuHotBean.getRecent());
         mAdapter.notifyDataSetChanged();
+        statusLayoutManager.showContent();
     }
+
+
+    @Override
+    public void setEmptyView() {
+        statusLayoutManager.showEmptyData();
+    }
+
+
+    @Override
+    public void setNetworkErrorView() {
+        statusLayoutManager.showError();
+    }
+
+
+    @Override
+    public void setErrorView() {
+        statusLayoutManager.showNetWorkError();
+    }
+
+
 }

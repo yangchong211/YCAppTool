@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.zhihu.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -45,6 +46,7 @@ public class ZhiHuCommentActivity extends BaseActivity {
         return R.layout.base_tab_view;
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void initView() {
         Intent intent = getIntent();
@@ -73,9 +75,16 @@ public class ZhiHuCommentActivity extends BaseActivity {
         tabLayout.addTab(tabLayout.newTab().setText(String.format("短评论(%d)",shortNum)));
         tabLayout.addTab(tabLayout.newTab().setText(String.format("长评论(%d)",longNum)));
         tabLayout.setupWithViewPager(vpContent);
-        tabLayout.getTabAt(0).setText(String.format("短评论(%d)",shortNum));
-        tabLayout.getTabAt(1).setText(String.format("长评论(%d)",longNum));
+        TabLayout.Tab tabAt0 = tabLayout.getTabAt(0);
+        TabLayout.Tab tabAt1 = tabLayout.getTabAt(1);
+        if(tabAt0!=null){
+            tabAt0.setText(String.format("短评论(%d)",shortNum));
+        }
+        if(tabAt1!=null){
+            tabAt1.setText(String.format("长评论(%d)",longNum));
+        }
     }
+
 
     @Override
     public void initListener() {
@@ -86,6 +95,7 @@ public class ZhiHuCommentActivity extends BaseActivity {
             }
         });
     }
+
 
     @Override
     public void initData() {

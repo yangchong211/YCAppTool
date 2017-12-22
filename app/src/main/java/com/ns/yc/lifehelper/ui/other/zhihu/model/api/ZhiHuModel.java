@@ -4,6 +4,7 @@ import com.ns.yc.lifehelper.api.ConstantALiYunApi;
 import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuCommentBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuHotBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuSectionBean;
@@ -107,5 +108,13 @@ public class ZhiHuModel {
     public Observable<ZhiHuSectionChildBean> getSectionChildList(int id) {
         return mApiService.getSectionChildList(id);
     }
+
+    /**
+     * 往期日报
+     */
+    public Observable<ZhiHuDailyBeforeListBean> fetchDailyBeforeListInfo(String date) {
+        return mApiService.getDailyBeforeList(date);
+    }
+
 
 }

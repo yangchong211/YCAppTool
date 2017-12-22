@@ -32,6 +32,7 @@ public class ZhiHuHotBean {
         private String url;
         private String thumbnail;
         private String title;
+        private boolean readState;
 
         public int getNews_id() {
             return news_id;
@@ -63,6 +64,14 @@ public class ZhiHuHotBean {
 
         public void setTitle(String title) {
             this.title = title;
+        }
+
+        public boolean isReadState() {
+            return readState;
+        }
+
+        public void setReadState(boolean readState) {
+            this.readState = readState;
         }
     }
 }

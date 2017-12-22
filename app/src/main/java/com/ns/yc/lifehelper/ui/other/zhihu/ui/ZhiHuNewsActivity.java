@@ -24,9 +24,10 @@ import butterknife.Bind;
  * ================================================
  * 作    者：杨充
  * 版    本：1.0
- * 创建日期：2017/11/29
+ * 创建日期：2017/10/29
  * 描    述：知乎日报模块
  * 修订历史：
+ *          练习MVP架构
  * ================================================
  */
 public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListener {

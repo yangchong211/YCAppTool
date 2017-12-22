@@ -70,8 +70,8 @@
         <item>时光笔记</item>
         <item>7日天气</item>
         <item>绘画板</item>
-        <item>快读</item>
-        <item>时光聆听</item>
+        <item>知乎专栏</item>
+        <item>微信精选</item>
     </string-array>
 
 
@@ -112,9 +112,9 @@
 
 
     <string-array name="find_list4_title">
-        <item>微信精选</item>
+        <item>时光日志</item>
         <item>稀土掘金</item>
-        <item>知乎头条</item>
+        <item>快读头条</item>
     </string-array>
     <integer-array name="find_list4_image">
         <item>@drawable/bg_small_autumn_tree_min</item>
@@ -183,7 +183,7 @@
         <item>工商</item>
         <item>画廊</item>
         <item>Wt新闻</item>
-        <item>人脸识别</item>
+        <item>IM聊天</item>
         <item>归属地</item>
         <item>空气质量</item>
         <item>今日油价</item>
@@ -309,6 +309,28 @@
         <item>热门</item>
         <item>口碑</item>
         <item>完结</item>
+    </string-array>
+
+
+    <!--im底部导航栏的标题，未选中时-->
+    <integer-array name="im_tab_un_select">
+        <item name="tab_home">@drawable/em_conversation_normal</item>
+        <item name="tab_find">@drawable/em_contact_list_normal</item>
+        <item name="tab_data">@drawable/em_settings_normal</item>
+    </integer-array>
+
+    <!--im底部导航栏的标题，选中时-->
+    <integer-array name="im_tab_select">
+        <item name="tab_home">@drawable/em_conversation_selected</item>
+        <item name="tab_find">@drawable/em_contact_list_selected</item>
+        <item name="tab_data">@drawable/em_settings_selected</item>
+    </integer-array>
+
+    <!--im底部导航栏文字-->
+    <string-array name="im_title">
+        <item>会话</item>
+        <item>通讯录</item>
+        <item>设置</item>
     </string-array>
 
 </resources>

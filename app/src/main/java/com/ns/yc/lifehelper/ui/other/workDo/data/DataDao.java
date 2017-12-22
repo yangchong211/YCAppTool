@@ -3,6 +3,7 @@ package com.ns.yc.lifehelper.ui.other.workDo.data;
 import android.text.TextUtils;
 
 import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
 
 import java.util.List;
@@ -15,8 +16,17 @@ public class DataDao {
 
     //volatile关键字
     private static volatile DataDao mDataDao;
+    private Realm realm;
 
-    private DataDao() {}
+    private DataDao() {
+        initRealm();
+    }
+
+    private void initRealm() {
+        if(realm==null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
+    }
 
 
     public static DataDao getInstance() {
@@ -39,8 +49,7 @@ public class DataDao {
 
 
     public void insertTask(final TaskDetailEntity taskDetailEntity) {
-        Realm.getDefaultInstance()
-                .executeTransaction(new Realm.Transaction() {
+        realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
                         realm.copyToRealm(taskDetailEntity);
@@ -49,22 +58,20 @@ public class DataDao {
     }
 
     public RealmResults<TaskDetailEntity> findAllTask() {
-        return Realm.getDefaultInstance()
-                .where(TaskDetailEntity.class)
+        return realm.where(TaskDetailEntity.class)
                 .findAllSorted("timeStamp");
     }
 
 
     public RealmResults<TaskDetailEntity> findAllTask(int dayOfWeek) {
-        return Realm.getDefaultInstance()
+        return realm
                 .where(TaskDetailEntity.class)
                 .equalTo("dayOfWeek", dayOfWeek)
                 .findAllSorted("timeStamp");
     }
 
     public RealmResults<TaskDetailEntity> findUnFinishedTasks(int dayOfWeek) {
-        return Realm
-                .getDefaultInstance()
+        return realm
                 .where(TaskDetailEntity.class)
                 .equalTo("dayOfWeek", dayOfWeek)
                 .notEqualTo("state", Constant.TaskState.FINISHED)
@@ -74,7 +81,7 @@ public class DataDao {
 
     public RealmResults<TaskDetailEntity> findAllTaskOfThisWeekFromSunday() {
         long sundayTimeMillisOfWeek = DateUtils.getFirstSundayTimeMillisOfWeek();
-        return Realm.getDefaultInstance()
+        return realm
                 .where(TaskDetailEntity.class)
                 .greaterThan("timeStamp", sundayTimeMillisOfWeek)
                 .findAll();
@@ -82,8 +89,7 @@ public class DataDao {
 
 
     public void editTask(final TaskDetailEntity oldTask, final TaskDetailEntity newTask) {
-        Realm.getDefaultInstance()
-                .executeTransaction(new Realm.Transaction() {
+        realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
                         oldTask.setTaskDetailEntity(newTask);
@@ -93,8 +99,7 @@ public class DataDao {
 
 
     public void deleteTask(final TaskDetailEntity entity) {
-        Realm.getDefaultInstance()
-                .executeTransaction(new Realm.Transaction() {
+        realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
                         TaskDetailEntity first = realm.where(TaskDetailEntity.class)
@@ -118,8 +123,7 @@ public class DataDao {
         if (TextUtils.isEmpty(like)) {
             throw new IllegalArgumentException("str is null");
         }
-        return Realm.getDefaultInstance()
-                .where(TaskDetailEntity.class)
+        return realm.where(TaskDetailEntity.class)
                 .contains("content", like)
                 .or()
                 .contains("title", like)
@@ -128,8 +132,7 @@ public class DataDao {
 
 
     public void switchTaksState(final TaskDetailEntity entity, final int state) {
-        Realm.getDefaultInstance()
-                .executeTransaction(new Realm.Transaction() {
+        realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
                         entity.setState(state);

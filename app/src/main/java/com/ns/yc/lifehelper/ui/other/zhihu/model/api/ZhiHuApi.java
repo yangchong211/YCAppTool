@@ -2,6 +2,7 @@ package com.ns.yc.lifehelper.ui.other.zhihu.model.api;
 
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuCommentBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuHotBean;
@@ -78,5 +79,11 @@ public interface ZhiHuApi {
      */
     @GET("section/{id}")
     Observable<ZhiHuSectionChildBean> getSectionChildList(@Path("id") int id);
+
+    /**
+     * 往期日报
+     */
+    @GET("news/before/{date}")
+    Observable<ZhiHuDailyBeforeListBean> getDailyBeforeList(@Path("date") String date);
 
 }

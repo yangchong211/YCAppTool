@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.yc.cn.ycbannerlib.first.BannerView;
 
@@ -114,11 +115,9 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
     private class ContentViewHolder extends RecyclerView.ViewHolder {
-
         TextView tvTitle;
         TextView tvTime;
         ImageView ivLogo;
-
         ContentViewHolder(View itemView) {
             super(itemView);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
@@ -129,10 +128,8 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
     private class DateViewHolder extends RecyclerView.ViewHolder {
-
         TextView tvZhTitle;
         TextView tvZhTime;
-
         DateViewHolder(View itemView) {
             super(itemView);
             tvZhTitle = (TextView) itemView.findViewById(R.id.tv_zh_title);
@@ -140,10 +137,10 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+
+
     private class TopViewHolder extends RecyclerView.ViewHolder {
-
         BannerView banner;
-
         TopViewHolder(View itemView) {
             super(itemView);
             banner = (BannerView) itemView.findViewById(R.id.banner);
@@ -151,9 +148,14 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
+    /**
+     * 添加今天日期新闻的数据
+     * @param zhiHuDailyBean      数据
+     */
     public void addDailyDate(ZhiHuDailyBean zhiHuDailyBean) {
         currentTitle = "今日热闻";
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ZhiHuDiffCallback(mList, zhiHuDailyBean.getStories()), true);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
+                new ZhiHuDiffCallback(mList, zhiHuDailyBean.getStories()), true);
         mList = zhiHuDailyBean.getStories();
         mTopList = zhiHuDailyBean.getTop_stories();
         isBefore = false;
@@ -161,9 +163,54 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
+    /**
+     * 添加之前日期新闻的数据
+     * @param zhiHuDailyBeforeListBean      数据
+     */
+    public void addDailyBeforeDate(ZhiHuDailyBeforeListBean zhiHuDailyBeforeListBean) {
+        currentTitle = zhiHuDailyBeforeListBean.getDate();
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
+                new ZhiHuDiffCallback(mList, zhiHuDailyBeforeListBean.getStories()), true);
+        mList = zhiHuDailyBeforeListBean.getStories();
+        isBefore = true;
+        diffResult.dispatchUpdatesTo(this);
+    }
+
+
+    /**
+     * 设置阅读的状态，记录位置
+     * @param position                      索引
+     * @param readState                     是否阅读
+     */
+    public void setReadState(int position, boolean readState) {
+        mList.get(position).setReadState(readState);
+    }
+
+
+    /**
+     * 是否是之前的
+     * @return
+     */
+    public boolean getIsBefore() {
+        return isBefore;
+    }
+
+
+    /**
+     * 设置轮播图滑动位置
+     * @param currentCount          索引
+     */
+    public void changeTopPager(int currentCount) {
+        if(!isBefore && banner != null) {
+            banner.getViewPager().setCurrentItem(currentCount);
+        }
+    }
+
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
 
     public interface OnItemClickListener {
         void onItemClick(int position, View view);

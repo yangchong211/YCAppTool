@@ -6,23 +6,19 @@ import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
-import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.Utils;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.api.LogInterceptor;
-import com.ns.yc.lifehelper.utils.LogUtils;
+import com.ns.yc.lifehelper.service.InitializeService;
+import com.ns.yc.lifehelper.utils.AppUtil;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
-import com.tencent.bugly.crashreport.CrashReport;
-import com.tencent.smtt.sdk.QbSdk;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
-import okhttp3.OkHttpClient;
 
 /**
  * ================================================
@@ -38,6 +34,7 @@ public class BaseApplication extends Application {
 
     private static BaseApplication instance;
     private RefWatcher refWatcher;
+    private boolean isInit = false;         //记录环信是否已经初始化，避免初始化两次
 
     public static synchronized BaseApplication getInstance() {
         if (null == instance) {
@@ -45,6 +42,8 @@ public class BaseApplication extends Application {
         }
         return instance;
     }
+
+    public BaseApplication(){}
 
     /*public static BaseApplication getInstance() {
         if (null == instance) {
@@ -56,6 +55,7 @@ public class BaseApplication extends Application {
         }
         return instance;
     }*/
+
 
     /**
      * 这个最先执行
@@ -76,14 +76,13 @@ public class BaseApplication extends Application {
         super.onCreate();
         instance = this;
         initUtils();
-        initRealm();
-        initOkHttpUtils();
-        initLeakCanary();                               //Square公司内存泄漏检测工具
-        initBugly();                                    //初始化腾讯bug管理平台
         BaseAppManager.getInstance().init(this);        //栈管理
-        BaseConfig.INSTANCE.initConfig();               //初始化配置信息
-        initQQX5();                                     //初始化腾讯X5
-        LogUtils.logDebug = true;                       //开启日志
+        initLeakCanary();                               //Square公司内存泄漏检测工具
+        initRealm();                                    //初始化Realm数据库
+        initChatIM();                                   //初始化环信，不要在子线程中初始化
+
+        //在子线程中初始化
+        InitializeService.start(this);
     }
 
 
@@ -100,6 +99,7 @@ public class BaseApplication extends Application {
         }
     }
 
+
     /**
      * 低内存的时候执行
      */
@@ -108,6 +108,7 @@ public class BaseApplication extends Application {
         Log.d("Application", "onLowMemory");
         super.onLowMemory();
     }
+
 
     /**
      * HOME键退出应用程序
@@ -119,14 +120,16 @@ public class BaseApplication extends Application {
         super.onTrimMemory(level);
     }
 
+
     /**
-     *
+     * onConfigurationChanged
      */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         Log.d("Application", "onConfigurationChanged");
         super.onConfigurationChanged(newConfig);
     }
+
 
     /**
      * 初始化utils工具类
@@ -135,14 +138,38 @@ public class BaseApplication extends Application {
         Utils.init(this);
     }
 
+
+    /**
+     * 初始化内存泄漏检测工具
+     */
+    private void initLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        refWatcher = LeakCanary.install(this);
+    }
+
+
+    /**
+     * 获取RefWatcher对象
+     * @param context       上下文
+     * @return              RefWatcher对象
+     */
+    public static RefWatcher getRefWatcher(Context context) {
+        BaseApplication application = (BaseApplication) context.getApplicationContext();
+        return application.refWatcher;
+    }
+
+
     /**
      * 初始化数据库
      */
     private Realm realm;
     private void initRealm() {
-        File file = null;
+        File file ;
         try {
             file = new File(Constant.ExternalStorageDirectory, Constant.DATABASE_FILE_PATH_FOLDER);
+            //noinspection ResultOfMethodCallIgnored
             file.mkdirs();
         } catch (Exception e) {
             Log.e("异常",e.getMessage());
@@ -156,84 +183,78 @@ public class BaseApplication extends Application {
                 .build();
         realm = Realm.getInstance(realmConfig);
     }
+
+
+    /**
+     * 获取Realm数据库对象
+     * @return              realm对象
+     */
     public Realm getRealmHelper() {
         return realm;
     }
 
 
-    /**
-     * 初始化鸿洋大神网络请求框架
-     */
-    private void initOkHttpUtils() {
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                //.addInterceptor(new BaseInterceptor())
-                //.addInterceptor(interceptor)
-                .addInterceptor(new LogInterceptor("TAG_APP",true))          //打印请求网络数据日志，上线版本就关掉
-                .connectTimeout(50000L, TimeUnit.MILLISECONDS)                  //连接超时时间
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)                     //读数据超时时间
-                .writeTimeout(10000L,TimeUnit.MICROSECONDS)                     //写数据超时时间
-                .build();
-        OkHttpUtils.initClient(okHttpClient);
-    }
 
     /**
-     * 初始化内存泄漏检测工具
+     * 初始化环信
      */
-    private void initLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
+    private void initChatIM() {
+        // 获取当前进程 id 并取得进程名
+        int pid = android.os.Process.myPid();
+        String processAppName = AppUtil.getAppName(this , pid);
+        /**
+         * 如果app启用了远程的service，此application:onCreate会被调用2次
+         * 为了防止环信SDK被初始化2次，加此判断会保证SDK被初始化1次
+         * 默认的app会在以包名为默认的process name下运行，如果查到的process name不是app的process name就立即返回
+         */
+        if (processAppName == null || !processAppName.equalsIgnoreCase(this.getPackageName())) {
+            // 则此application的onCreate 是被service 调用的，直接返回
             return;
         }
-        refWatcher = LeakCanary.install(this);
-    }
-
-    /**
-     * 获取RefWatcher对象
-     * @param context
-     * @return
-     */
-    public static RefWatcher getRefWatcher(Context context) {
-        BaseApplication application = (BaseApplication) context.getApplicationContext();
-        return application.refWatcher;
-    }
-
-    /**
-     * 初始化腾讯bug管理平台
-     */
-    private void initBugly() {
-        /* Bugly SDK初始化
-        * 参数1：上下文对象
-        * 参数2：APPID，平台注册时得到,注意替换成你的appId
-        * 参数3：是否开启调试模式，调试模式下会输出'CrashReport'tag的日志
-        * 注意：如果您之前使用过Bugly SDK，请将以下这句注释掉。
-        */
-        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(getApplicationContext());
-        strategy.setAppVersion(AppUtils.getAppVersionName());
-        strategy.setAppPackageName(AppUtils.getAppPackageName());
-        strategy.setAppReportDelay(20000);                          //Bugly会在启动20s后联网同步数据
-        CrashReport.initCrashReport(getApplicationContext(), "a3f5f3820f", false ,strategy);
-        //Bugly.init(getApplicationContext(), "1374455732", false);
+        if (isInit) {
+            return;
+        }
+        // 调用初始化方法初始化sdk
+        EMClient.getInstance().init(this, initOptions());
+        // 设置开启debug模式
+        EMClient.getInstance().setDebugMode(true);
+        // 设置初始化已经完成
+        isInit = true;
     }
 
 
     /**
-     * 初始化腾讯X5
+     * SDK初始化的一些配置
+     * 关于 EMOptions 可以参考官方的 API 文档
+     * http://www.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html
      */
-    private void initQQX5() {
-        QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
-
-            @Override
-            public void onViewInitFinished(boolean arg0) {
-                //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
-                Log.d("app", " onViewInitFinished is " + arg0);
-            }
-
-            @Override
-            public void onCoreInitFinished() {
-
-            }
-        };
-        //x5内核初始化接口
-        QbSdk.initX5Environment(getApplicationContext(),  cb);
+    private EMOptions initOptions() {
+        EMOptions options = new EMOptions();
+        // 设置AppKey，如果配置文件已经配置，这里可以不用设置
+         options.setAppKey("1100171221178707#yclifehelper");
+        // 设置自动登录
+        options.setAutoLogin(true);
+        // 设置是否需要发送已读回执
+        options.setRequireAck(true);
+        // 设置是否需要发送回执，
+        options.setRequireDeliveryAck(true);
+        // 设置是否需要服务器收到消息确认
+        //options.setRequireServerAck(true);
+        // 设置是否根据服务器时间排序，默认是true
+        options.setSortMessageByServerTime(false);
+        // 收到好友申请是否自动同意，如果是自动同意就不会收到好友请求的回调，因为sdk会自动处理，默认为true
+        options.setAcceptInvitationAlways(false);
+        // 设置是否自动接收加群邀请，如果设置了当收到群邀请会自动同意加入
+        options.setAutoAcceptGroupInvitation(false);
+        // 设置（主动或被动）退出群组时，是否删除群聊聊天记录
+        options.setDeleteMessagesAsExitGroup(false);
+        // 设置是否允许聊天室的Owner 离开并删除聊天室的会话
+        options.allowChatroomOwnerLeave(true);
+        // 设置google GCM推送id，国内可以不用设置
+        // options.setGCMNumber(MLConstants.ML_GCM_NUMBER);
+        // 设置集成小米推送的appid和appkey
+        // options.setMipushConfig(MLConstants.ML_MI_APP_ID, MLConstants.ML_MI_APP_KEY);
+        return options;
     }
 
 

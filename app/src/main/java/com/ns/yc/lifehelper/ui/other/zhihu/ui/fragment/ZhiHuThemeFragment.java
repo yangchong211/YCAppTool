@@ -10,13 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.BaseStateFragment;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuThemeContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.presenter.ZhiHuThemePresenter;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.activity.ZhiHuThemeListActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.adapter.ZhiHuThemeAdapter;
+import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ import butterknife.Bind;
  * 修订历史：
  * ================================================
  */
-public class ZhiHuThemeFragment extends BaseFragment implements ZhiHuThemeContract.View{
+public class ZhiHuThemeFragment extends BaseStateFragment implements ZhiHuThemeContract.View{
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -41,10 +42,10 @@ public class ZhiHuThemeFragment extends BaseFragment implements ZhiHuThemeContra
     SwipeRefreshLayout refresher;
 
     private ZhiHuNewsActivity activity;
-
     private ZhiHuThemeContract.Presenter presenter = new ZhiHuThemePresenter(this);
     private List<ZhiHuThemeBean.OthersBean> mList = new ArrayList<>();
     private ZhiHuThemeAdapter mAdapter;
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -52,17 +53,17 @@ public class ZhiHuThemeFragment extends BaseFragment implements ZhiHuThemeContra
         presenter.subscribe();
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         presenter.unSubscribe();
-        if(mAdapter!=null){
+        if(mAdapter !=null){
             mAdapter = null;
         }
         mList = null;
-        recyclerView = null;
-        refresher = null;
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -70,16 +71,25 @@ public class ZhiHuThemeFragment extends BaseFragment implements ZhiHuThemeContra
         activity = (ZhiHuNewsActivity) context;
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         activity = null;
     }
 
+
     @Override
-    public int getContentView() {
-        return R.layout.base_refresh_recycle;
+    protected void initStatusLayout() {
+        statusLayoutManager = StateLayoutManager.newBuilder(activity)
+                .contentView(R.layout.base_refresh_recycle)
+                .emptyDataView(R.layout.view_custom_empty_data)
+                .errorView(R.layout.view_custom_data_error)
+                .loadingView(R.layout.view_custom_loading_data)
+                .netWorkErrorView(R.layout.view_custom_network_error)
+                .build();
     }
+
 
     @Override
     public void initView() {
@@ -99,8 +109,10 @@ public class ZhiHuThemeFragment extends BaseFragment implements ZhiHuThemeContra
         });
     }
 
+
     @Override
     public void initData() {
+        statusLayoutManager.showLoading();
         presenter.getData();
     }
 
@@ -126,5 +138,27 @@ public class ZhiHuThemeFragment extends BaseFragment implements ZhiHuThemeContra
         mList.clear();
         mList.addAll(zhiHuThemeBean.getOthers());
         mAdapter.notifyDataSetChanged();
+        statusLayoutManager.showContent();
     }
+
+
+
+    @Override
+    public void setEmptyView() {
+        statusLayoutManager.showEmptyData();
+    }
+
+
+    @Override
+    public void setNetworkErrorView() {
+        statusLayoutManager.showError();
+    }
+
+
+    @Override
+    public void setErrorView() {
+        statusLayoutManager.showNetWorkError();
+    }
+
+
 }

@@ -93,5 +93,8 @@
         <item>grid</item>
     </string-array>
 
+    <!--登录注册相关-->
+    <string name="login_state">正在玩命登录</string>
+    <string name="register_state">正在玩命注册</string>
 
 </resources>

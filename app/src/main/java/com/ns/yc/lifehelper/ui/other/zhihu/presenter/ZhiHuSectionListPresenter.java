@@ -2,13 +2,20 @@ package com.ns.yc.lifehelper.ui.other.zhihu.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.blankj.utilcode.util.NetworkUtils;
+import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuSectionListContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuSectionChildBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
 import com.ns.yc.lifehelper.utils.RxUtil;
 
+import java.util.List;
+
+import io.realm.Realm;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.functions.Func1;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -25,6 +32,7 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
     private ZhiHuSectionListContract.View mView;
     @NonNull
     private CompositeSubscription mSubscriptions;
+    private Realm realm;
 
 
     public ZhiHuSectionListPresenter(ZhiHuSectionListContract.View homeView) {
@@ -34,7 +42,13 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
 
     @Override
     public void subscribe() {
+        initRealm();
+    }
 
+    private void initRealm() {
+        if(realm ==null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
 
     @Override
@@ -47,6 +61,17 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
         ZhiHuModel model = ZhiHuModel.getInstance();
         Subscription rxSubscription = model.getSectionChildList(id)
                 .compose(RxUtil.<ZhiHuSectionChildBean>rxSchedulerHelper())
+                .map(new Func1<ZhiHuSectionChildBean, ZhiHuSectionChildBean>() {
+                    @Override
+                    public ZhiHuSectionChildBean call(ZhiHuSectionChildBean zhiHuSectionChildBean) {
+                        List<ZhiHuSectionChildBean.StoriesBean> list = zhiHuSectionChildBean.getStories();
+                        initRealm();
+                        for(ZhiHuSectionChildBean.StoriesBean item : list) {
+                            item.setReadState(RealmHelper.queryNewsId(realm,item.getId()));
+                        }
+                        return zhiHuSectionChildBean;
+                    }
+                })
                 .subscribe(new Subscriber<ZhiHuSectionChildBean>() {
                     @Override
                     public void onCompleted() {
@@ -55,16 +80,31 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
 
                     @Override
                     public void onError(Throwable e) {
-
+                        if(NetworkUtils.isConnected()){
+                            mView.setErrorView();
+                        }else {
+                            mView.setNetworkErrorView();
+                        }
                     }
 
                     @Override
                     public void onNext(ZhiHuSectionChildBean zhiHuSectionChildBean) {
                         if(zhiHuSectionChildBean!=null){
                             mView.setView(zhiHuSectionChildBean);
+                        }else {
+                            mView.setEmptyView();
                         }
                     }
                 });
         mSubscriptions.add(rxSubscription);
     }
+
+
+    @Override
+    public void insertReadToDB(int id) {
+        initRealm();
+        RealmHelper.insertNewsId(realm , id);
+    }
+
+
 }

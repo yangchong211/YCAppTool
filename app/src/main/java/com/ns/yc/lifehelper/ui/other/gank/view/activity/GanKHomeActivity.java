@@ -94,8 +94,8 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
         if(mAnimator!=null && mAnimator.isRunning()){
             mAnimator.cancel();
         }
-        super.onDestroy();
         presenter.unSubscribe();
+        super.onDestroy();
     }
 
     @Override

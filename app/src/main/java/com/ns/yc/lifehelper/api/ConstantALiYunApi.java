@@ -4,7 +4,7 @@ package com.ns.yc.lifehelper.api;
  * ================================================
  * 作    者：杨充
  * 版    本：1.0
- * 创建日期：2017/8/18
+ * 创建日期：2016/9/18
  * 描    述：阿里云服务器接口地址
  * 修订历史：
  * ================================================
@@ -77,6 +77,5 @@ public class ConstantALiYunApi {
     public static final String GOLD_URL = "https://api.leancloud.cn/";
     public static final String LEANCLOUD_ID = "mhke0kuv33myn4t4ghuid4oq2hjj12li374hvcif202y5bm6";
     public static final String LEANCLOUD_SIGN = "badc5461a25a46291054b902887a68eb,1480438132702";
-    public static final String WTex_URL = "https://www.v2ex.com/?tab=";
 
 }

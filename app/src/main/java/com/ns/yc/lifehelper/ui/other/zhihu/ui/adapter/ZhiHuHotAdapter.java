@@ -52,6 +52,10 @@ public class ZhiHuHotAdapter extends RecyclerView.Adapter<ZhiHuHotAdapter.ViewHo
         });
     }
 
+    public void setReadState(int position, boolean readState) {
+        mList.get(position).setReadState(readState);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle;

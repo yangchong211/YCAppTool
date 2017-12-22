@@ -4,6 +4,7 @@ package com.ns.yc.lifehelper.ui.other.zhihu.contract;
 import com.ns.yc.lifehelper.base.BasePresenter;
 import com.ns.yc.lifehelper.base.BaseView;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 
 /**
  * ================================================
@@ -16,14 +17,24 @@ import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBean;
  */
 public interface ZhiHuDailyContract {
 
+
     //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
         void setView(ZhiHuDailyBean zhiHuDailyBean);
+        void setEmptyView();
+        void setNetworkErrorView();
+        void setErrorView();
+        void doInterval(int i);
+        void showMoreContent(String format, ZhiHuDailyBeforeListBean zhiHuDailyBeforeListBean);
     }
+
 
     //Presenter控制器
     interface Presenter extends BasePresenter {
         void getData();
+        void insertReadToDB(int id);
+        void stopInterval();
+        void startInterval();
     }
 
 

@@ -1,8 +1,11 @@
 package com.ns.yc.lifehelper.ui.other.zhihu.ui.activity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +21,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.WebViewAnimActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuThemeListContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeChildBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.presenter.ZhiHuThemeListPresenter;
@@ -35,7 +39,8 @@ import butterknife.Bind;
  * 修订历史：
  * ================================================
  */
-public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClickListener , ZhiHuThemeListContract.View{
+public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClickListener ,
+        ZhiHuThemeListContract.View{
 
     @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
@@ -54,16 +59,19 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
         presenter.subscribe();
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         presenter.unSubscribe();
     }
 
+
     @Override
     public int getContentView() {
         return R.layout.base_easy_recycle_list;
     }
+
 
     @Override
     public void initView() {
@@ -72,14 +80,17 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
         initRecycleView();
     }
 
+
     private void initToolBar() {
         toolbarTitle.setText("知乎主题");
     }
+
 
     private void initIntentData() {
         Intent intent = getIntent();
         id = intent.getExtras().getInt("id");
     }
+
 
     @Override
     public void initListener() {
@@ -87,16 +98,31 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                if(adapter.getAllData().size()>position && position>-1){
+                    presenter.insertReadToDB(adapter.getAllData().get(position).getId());
+                    adapter.setReadState(position, true);
+                    adapter.notifyItemChanged(position);
+                    Intent intent = new Intent();
+                    intent.setClass(ZhiHuThemeListActivity.this, WebViewAnimActivity.class);
+                    intent.putExtra("id", adapter.getAllData().get(position).getId());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation
+                                (ZhiHuThemeListActivity.this).toBundle());
+                    }else {
+                        startActivity(intent);
+                    }
+                }
             }
         });
     }
+
 
     @Override
     public void initData() {
         recyclerView.showProgress();
         presenter.getThemeChildData(id);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -106,6 +132,7 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
                 break;
         }
     }
+
 
     private void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -139,5 +166,44 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
         }
         adapter.addAll(zhiHuThemeChildBean.getStories());
         adapter.notifyDataSetChanged();
+        recyclerView.showRecycler();
+    }
+
+
+    @Override
+    public void setEmptyView() {
+        recyclerView.setEmptyView(R.layout.view_custom_empty_data);
+        recyclerView.showEmpty();
+    }
+
+    @Override
+    public void setErrorView() {
+        recyclerView.setErrorView(R.layout.view_custom_data_error);
+        recyclerView.showError();
+        LinearLayout ll_error_view = (LinearLayout) recyclerView.findViewById(R.id.ll_error_view);
+        ll_error_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initData();
+            }
+        });
+    }
+
+    @Override
+    public void setNetworkErrorView() {
+        recyclerView.setErrorView(R.layout.view_custom_network_error);
+        recyclerView.showError();
+        LinearLayout ll_set_network = (LinearLayout) recyclerView.findViewById(R.id.ll_set_network);
+        ll_set_network.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(NetworkUtils.isConnected()){
+                    initData();
+                }else {
+                    Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }

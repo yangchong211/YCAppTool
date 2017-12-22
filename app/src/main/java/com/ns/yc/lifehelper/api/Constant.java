@@ -120,6 +120,7 @@ public class Constant {
         int TYPE_ZHI_HU = 101;
         int TYPE_GIRL = 105;
         int TYPE_WE_CHAT = 106;
+        int TYPE_GOLD = 108;
     }
 
     public interface DetailKeys{

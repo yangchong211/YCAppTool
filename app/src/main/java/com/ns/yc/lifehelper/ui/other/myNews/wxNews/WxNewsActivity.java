@@ -19,7 +19,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.base.BasePagerAdapter;
-import com.ns.yc.lifehelper.ui.other.myNews.weChat.TxWeChatNewsActivity;
+import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.activity.TxWeChatNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.contract.WxNewsContract;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.presenter.WxNewsPresenter;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.view.NewsSearchActivity;

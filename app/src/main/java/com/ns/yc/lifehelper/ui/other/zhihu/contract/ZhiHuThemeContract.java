@@ -19,6 +19,9 @@ public interface ZhiHuThemeContract {
     //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
         void setView(ZhiHuThemeBean zhiHuThemeBean);
+        void setEmptyView();
+        void setErrorView();
+        void setNetworkErrorView();
     }
 
     //Presenter控制器

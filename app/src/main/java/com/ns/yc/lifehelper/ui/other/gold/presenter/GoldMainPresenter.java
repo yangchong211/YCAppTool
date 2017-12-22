@@ -7,13 +7,12 @@ import com.ns.yc.lifehelper.ui.other.gold.contract.GoldMainContract;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerBean;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerItemBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.RxBus;
 
 import io.realm.Realm;
 import io.realm.RealmList;
+import rx.Subscription;
 import rx.functions.Action1;
-import rx.subjects.PublishSubject;
-import rx.subjects.SerializedSubject;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -46,7 +45,7 @@ public class GoldMainPresenter implements GoldMainContract.Presenter {
     }
 
     private void registerEvent() {
-        new SerializedSubject<>(PublishSubject.create())
+        /*new SerializedSubject<>(PublishSubject.create())
                 .ofType(GoldManagerBean.class)
                 .compose(RxUtil.<GoldManagerBean>rxSchedulerHelper())
                 .subscribe(new Action1<GoldManagerBean>() {
@@ -55,7 +54,16 @@ public class GoldMainPresenter implements GoldMainContract.Presenter {
                         RealmHelper.updateGoldManagerList(realm,goldManagerBean);
                         mView.updateTab(goldManagerBean.getManagerList());
                     }
-                });
+                });*/
+        Subscription subscription = RxBus.getDefault().toDefaultObservable(
+                GoldManagerBean.class, new Action1<GoldManagerBean>() {
+            @Override
+            public void call(GoldManagerBean goldManagerBean) {
+                RealmHelper.updateGoldManagerList(realm,goldManagerBean);
+                mView.updateTab(goldManagerBean.getManagerList());
+            }
+        });
+        mSubscriptions.add(subscription);
     }
 
 
@@ -87,6 +95,7 @@ public class GoldMainPresenter implements GoldMainContract.Presenter {
                 initList();
                 RealmHelper.updateGoldManagerList(realm , new GoldManagerBean(mList));
             } else {
+                //noinspection ConstantConditions
                 mList = RealmHelper.getGoldManagerList(realm).getManagerList();
             }
             mView.updateTab(mList);

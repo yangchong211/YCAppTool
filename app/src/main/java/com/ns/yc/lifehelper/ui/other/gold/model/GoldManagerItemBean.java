@@ -5,14 +5,10 @@ import android.os.Parcelable;
 
 import io.realm.RealmObject;
 
-/**
- * Created by codeest on 16/12/1.
- */
 
 public class GoldManagerItemBean extends RealmObject implements Parcelable {
 
     private int index;
-
     private boolean isSelect;
 
     public GoldManagerItemBean () {

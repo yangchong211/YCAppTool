@@ -1,8 +1,11 @@
 package com.ns.yc.lifehelper.ui.other.zhihu.ui.activity;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +21,7 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.WebViewAnimActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuSectionListContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuSectionChildBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.presenter.ZhiHuSectionListPresenter;
@@ -89,16 +93,31 @@ public class ZhiHuSectionListActivity extends BaseActivity implements View.OnCli
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                if(adapter.getAllData().size()>position && position>-1){
+                    presenter.insertReadToDB(adapter.getAllData().get(position).getId());
+                    adapter.setReadState(position, true);
+                    adapter.notifyItemChanged(position);
+                    Intent intent = new Intent();
+                    intent.setClass(ZhiHuSectionListActivity.this, WebViewAnimActivity.class);
+                    intent.putExtra("id", adapter.getAllData().get(position).getId());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(
+                                ZhiHuSectionListActivity.this).toBundle());
+                    }else {
+                        startActivity(intent);
+                    }
+                }
             }
         });
     }
+
 
     @Override
     public void initData() {
         recyclerView.showProgress();
         presenter.getSectionChildData(id);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -108,6 +127,7 @@ public class ZhiHuSectionListActivity extends BaseActivity implements View.OnCli
                 break;
         }
     }
+
 
     private void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -121,7 +141,7 @@ public class ZhiHuSectionListActivity extends BaseActivity implements View.OnCli
             @Override
             public void onRefresh() {
                 if (NetworkUtils.isConnected()) {
-
+                    presenter.getSectionChildData(id);
                 } else {
                     recyclerView.setRefreshing(false);
                     ToastUtils.showShort("网络不可用");
@@ -129,6 +149,7 @@ public class ZhiHuSectionListActivity extends BaseActivity implements View.OnCli
             }
         });
     }
+
 
     @Override
     public void setView(ZhiHuSectionChildBean zhiHuSectionChildBean) {
@@ -140,5 +161,48 @@ public class ZhiHuSectionListActivity extends BaseActivity implements View.OnCli
         }
         adapter.addAll(zhiHuSectionChildBean.getStories());
         adapter.notifyDataSetChanged();
+        recyclerView.showRecycler();
     }
+
+
+    @Override
+    public void setEmptyView() {
+        recyclerView.setEmptyView(R.layout.view_custom_empty_data);
+        recyclerView.showEmpty();
+    }
+
+
+    @Override
+    public void setErrorView() {
+        recyclerView.setErrorView(R.layout.view_custom_data_error);
+        recyclerView.showError();
+        LinearLayout ll_error_view = (LinearLayout) recyclerView.findViewById(R.id.ll_error_view);
+        ll_error_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initData();
+            }
+        });
+    }
+
+
+    @Override
+    public void setNetworkErrorView() {
+        recyclerView.setErrorView(R.layout.view_custom_network_error);
+        recyclerView.showError();
+        LinearLayout ll_set_network = (LinearLayout) recyclerView.findViewById(R.id.ll_set_network);
+        ll_set_network.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(NetworkUtils.isConnected()){
+                    initData();
+                }else {
+                    Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+
 }

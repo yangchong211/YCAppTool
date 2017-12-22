@@ -1,6 +1,9 @@
 package com.ns.yc.lifehelper.ui.me.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MotionEvent;
@@ -14,14 +17,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantKeys;
 import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.event.LoginSuccessEvent;
+import com.ns.yc.lifehelper.ui.other.imTalk.ui.ImTalkActivity;
+import com.ns.yc.lifehelper.utils.IMemClientUtils;
+import com.ns.yc.lifehelper.utils.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 
@@ -65,6 +70,9 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
     @Bind(R.id.tv_sina_login)
     TextView tvSinaLogin;
 
+    private boolean progressShow;
+    private static final String TAG = "MeLoginActivity";
+
     @Override
     public int getContentView() {
         return R.layout.activity_me_login;
@@ -92,11 +100,6 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    @Subscribe          //订阅事件FirstEvent
-    public void onEventMainThread(LoginSuccessEvent event){
-        MeLoginActivity.this.finish();//收到订阅事件之后关闭当前界面
-        ToastUtil.showToast(MeLoginActivity.this,"关闭当前界面");
-    }
 
     @Override
     public void onClick(View v) {
@@ -112,6 +115,7 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
                 break;
         }
     }
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -143,8 +147,8 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
 
 
     private void goToLogin() {
-        String name = tvPersonUsername.getText().toString().trim();
-        String pwd = tvPersonPassword.getText().toString().trim();
+        final String name = tvPersonUsername.getText().toString().trim();
+        final String pwd = tvPersonPassword.getText().toString().trim();
         if(TextUtils.isEmpty(name)){
             ToastUtil.showToast(MeLoginActivity.this,"用户名不能为空");
             return;
@@ -153,15 +157,67 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
             ToastUtil.showToast(MeLoginActivity.this,"密码不能为空");
             return;
         }
-        String loginName = SPUtils.getInstance(Constant.SP_NAME).getString(ConstantKeys.NAME);
+        /*String loginName = SPUtils.getInstance(Constant.SP_NAME).getString(ConstantKeys.NAME);
         String loginPwd = SPUtils.getInstance(Constant.SP_NAME).getString(ConstantKeys.PWD);
         if(!name.equals(loginName) || !loginPwd.equals(pwd)){
             ToastUtil.showToast(MeLoginActivity.this,"用户名或者密码错误");
             return;
-        }
-        MeLoginActivity.this.finish();
-        Constant.isLogin = true;
-        SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.IS_LOGIN,true);
+        }*/
+
+        progressShow = true;
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setCanceledOnTouchOutside(false);
+        pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                LogUtils.e(TAG +"EMClient.getInstance().onCancel");
+                progressShow = false;
+            }
+        });
+        pd.setMessage(getString(R.string.login_state));
+        pd.show();
+
+        IMemClientUtils.imLogin(name, pwd, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                LogUtils.e(TAG +"login: onSuccess");
+                // ** manually load all local groups and conversation
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+                if (!MeLoginActivity.this.isFinishing() && pd.isShowing()) {
+                    pd.dismiss();
+                }
+
+                Intent intent = new Intent(MeLoginActivity.this, ImTalkActivity.class);
+                startActivity(intent);
+                Constant.isLogin = true;
+                SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.NAME,name);
+                SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.PWD,pwd);
+                SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.IS_LOGIN,true);
+                finish();
+            }
+
+            @Override
+            public void onError(int code, final String error) {
+                LogUtils.e(TAG+"login: onError: " + code);
+                if (!progressShow) {
+                    return;
+                }
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        pd.dismiss();
+                        ToastUtil.showToast(MeLoginActivity.this,"登录失败"+error);
+                    }
+                });
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+                LogUtils.e(TAG+"login: onProgress");
+            }
+        });
     }
+
 
 }

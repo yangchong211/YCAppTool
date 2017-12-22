@@ -22,7 +22,11 @@ public class ZhiHuThemeListAdapter extends RecyclerArrayAdapter<ZhiHuThemeChildB
         return new ExpressDeliveryViewHolder(parent);
     }
 
-    private class ExpressDeliveryViewHolder extends BaseViewHolder<ZhiHuThemeChildBean.StoriesBean> {
+    public void setReadState(int position, boolean readState) {
+        getAllData().get(position).setReadState(readState);
+    }
+
+    private class ExpressDeliveryViewHolder extends BaseViewHolder<ZhiHuThemeChildBean.StoriesBean>{
 
         ImageView iv_logo;
         TextView tv_title , tv_time;

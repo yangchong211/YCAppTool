@@ -19,11 +19,15 @@ public interface ZhiHuThemeListContract {
     //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
         void setView(ZhiHuThemeChildBean zhiHuThemeChildBean);
+        void setEmptyView();
+        void setErrorView();
+        void setNetworkErrorView();
     }
 
     //Presenter控制器
     interface Presenter extends BasePresenter {
         void getThemeChildData(int id);
+        void insertReadToDB(int id);
     }
 
 

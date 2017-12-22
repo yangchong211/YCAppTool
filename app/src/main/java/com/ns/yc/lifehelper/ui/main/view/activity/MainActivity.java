@@ -116,7 +116,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        InputMethodManagerLeakUtils.fixInputMethodManagerLeak(MainActivity.this);
+        InputMethodManagerLeakUtils.fixInputMethodManagerLeak(this);
         presenter.unSubscribe();
     }
 
@@ -126,11 +126,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         return R.layout.activity_main;
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu_home, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -177,6 +179,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         }
     }
 
+
     @Override
     public void initData() {
         presenter.getUpdate();
@@ -211,6 +214,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                 getResources().getColor(R.color.colorTheme));
     }
 
+
     /**
      * 初始化ActionBar按钮
      */
@@ -222,6 +226,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
             actionBar.setDisplayShowTitleEnabled(false);
         }
     }
+
 
     /**
      * 初始化底部导航栏数据

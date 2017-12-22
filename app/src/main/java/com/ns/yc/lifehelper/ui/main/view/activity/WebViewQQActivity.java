@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.main.view.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,6 +74,7 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
         return R.layout.base_x5_web_view;
     }
 
+
     @Override
     public void initView() {
         initRealm();
@@ -83,8 +86,11 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
 
 
     private void initRealm() {
-        realm = BaseApplication.getInstance().getRealmHelper();
+        if(realm==null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
     }
+
 
     private void initToolBar() {
         setSupportActionBar(toolbar);
@@ -96,12 +102,14 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
         llFab.setVisibility(View.VISIBLE);
     }
 
+
     @Override
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
         fabFavorite.setOnClickListener(this);
         fabTop.setOnClickListener(this);
     }
+
 
     @Override
     public void initData() {
@@ -119,9 +127,28 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
                 collectNews();
                 break;
             case R.id.fab_top:
-                webView.scrollTo(0,0);
+                //webView.scrollTo(0,0);
+                //webView.scrollBy(0,0);
                 break;
         }
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //全屏播放退出全屏
+            if (webView.canGoBack()) {
+                //返回上一页面
+                webView.goBack();
+                return true;
+            } else {
+                //退出网页
+                webView.loadUrl("about:blank");
+                finish();
+            }
+        }
+        return false;
     }
 
 
@@ -151,6 +178,7 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+
     boolean isLiked;
     private void collectNews() {
         if(isLiked) {
@@ -170,6 +198,7 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
             isLiked = true;
         }
     }
+
 
     private void setLikeState(boolean state) {
         if(state) {
@@ -191,8 +220,11 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
         id = intent.getExtras().getString(Constant.DetailKeys.IT_DETAIL_ID);
     }
 
+
+    @SuppressLint("SetJavaScriptEnabled")
     private void initWebView() {
         WebSettings settings = webView.getSettings();
+        //设置是否有图片展示
         if (SPUtils.getInstance(Constant.SP_NAME).getBoolean(Constant.SP_NO_IMAGE,false)) {
             settings.setBlockNetworkImage(true);
         }
@@ -234,6 +266,7 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
             toolbarTitle.setText(title);
         }
     }
+
 
     private class MyWebViewClient extends WebViewClient {
         @Override
@@ -293,6 +326,7 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
             return this;
         }
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static void toWhere(Builder builder) {

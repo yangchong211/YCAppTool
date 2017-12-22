@@ -24,6 +24,7 @@ import java.lang.ref.WeakReference;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -358,6 +359,37 @@ public class AppUtil {
             sb.append(hex);
         }
         return sb.toString();
+    }
+
+
+
+
+    /**
+     * 根据Pid获取当前进程的名字，一般就是当前app的包名
+     *
+     * @param pid 进程的id
+     * @return 返回进程的名字
+     */
+    public static String getAppName(Context context , int pid) {
+        String processName ;
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List list = activityManager.getRunningAppProcesses();
+        Iterator i = list.iterator();
+        while (i.hasNext()) {
+            ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo) (i.next());
+            try {
+                if (info.pid == pid) {
+                    // 根据进程的信息获取当前进程的名字
+                    processName = info.processName;
+                    // 返回当前进程名
+                    return processName;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        // 没有匹配的项，返回为null
+        return null;
     }
 
 }

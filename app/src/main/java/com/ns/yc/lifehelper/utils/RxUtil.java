@@ -137,4 +137,52 @@ public class RxUtil {
     }
 
 
+    /**
+     * 统一返回结果处理
+     * @param <T>
+     * @return
+     */
+    public static <T> Observable.Transformer<T, T> handleGoldResult() {   //compose判断结果
+        return new Observable.Transformer<T, T>() {
+            @Override
+            public Observable<T> call(Observable<T> httpResponseObservable) {
+                return httpResponseObservable.flatMap(new Func1<T, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(T tGoldHttpResponse) {
+                        if(tGoldHttpResponse != null) {
+                            return createData(tGoldHttpResponse);
+                        } else {
+                            return Observable.error(new ApiException("服务器返回error"));
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+    /**
+     * 生成Observable
+     * @param <T>
+     * @return
+     */
+    public static <T> Observable<T> createData(final T t) {
+        return Observable.create(new Observable.OnSubscribe<T>() {
+            @Override
+            public void call(Subscriber<? super T> subscriber) {
+                try {
+                    subscriber.onNext(t);
+                    subscriber.onCompleted();
+                } catch (Exception e) {
+                    subscriber.onError(e);
+                }
+            }
+        });
+    }
+
+    private static class ApiException extends Exception{
+        ApiException(String msg) {
+            super(msg);
+        }
+    }
+
 }

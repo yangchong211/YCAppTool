@@ -34,13 +34,13 @@ import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKHomeActivity;
 import com.ns.yc.lifehelper.ui.other.gold.view.activity.GoldMainActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myMusic.MyMusicActivity;
-import com.ns.yc.lifehelper.ui.other.myNews.weChat.TxWeChatNewsActivity;
-import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
+import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.activity.TxWeChatNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.SongCiActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.YuanQuActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.view.TangShiFirstActivity;
 import com.ns.yc.lifehelper.ui.other.myVideo.MyVideoActivity;
+import com.ns.yc.lifehelper.ui.other.notePad.NotePadActivity;
 import com.ns.yc.lifehelper.ui.other.timeListener.TimeListenerActivity;
 import com.ns.yc.lifehelper.ui.other.toDo.view.ToDoTimerActivity;
 import com.ns.yc.lifehelper.ui.other.weather.SevenWeatherActivity;
@@ -293,7 +293,7 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
                 startActivity(MobilePlayerActivity.class);
                 break;
             case 2:
-                startActivity(NoteActivity.class);
+                startActivity(NotePadActivity.class);
                 break;
             case 3:
                 startActivity(ToDoTimerActivity.class);
@@ -305,10 +305,10 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
                 startActivity(DoodleViewActivity.class);
                 break;
             case 6:
-                startActivity(FastLookActivity.class);
+                startActivity(ZhiHuNewsActivity.class);
                 break;
             case 7:
-                startActivity(TimeListenerActivity.class);
+                startActivity(TxWeChatNewsActivity.class);
                 break;
         }
     }
@@ -380,13 +380,13 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
     public void setGridClickFour(int position) {
         switch (position){
             case 0:
-                startActivity(TxWeChatNewsActivity.class);
+                startActivity(TimeListenerActivity.class);
                 break;
             case 1:
                 startActivity(GoldMainActivity.class);
                 break;
             case 2:
-                startActivity(ZhiHuNewsActivity.class);
+                startActivity(FastLookActivity.class);
                 break;
         }
     }

@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.main.view.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.transition.Transition;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.base.BaseActivity;
@@ -27,6 +31,7 @@ import com.ns.yc.lifehelper.ui.main.presenter.WebViewAnimPresenter;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.activity.ZhiHuCommentActivity;
+import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
 import com.ns.yc.lifehelper.utils.HtmlUtil;
 import com.ns.yc.lifehelper.utils.ImageUtils;
@@ -141,6 +146,13 @@ public class WebViewAnimActivity extends BaseActivity implements WebViewAnimCont
         initScroll();
     }
 
+
+    private void initIntent() {
+        Intent intent = getIntent();
+        id = intent.getExtras().getInt("id");
+    }
+
+
     @Override
     public void initListener() {
         initWindowListener();
@@ -172,6 +184,47 @@ public class WebViewAnimActivity extends BaseActivity implements WebViewAnimCont
                 break;
         }
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.movie_web_view_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String url = "https://github.com/yangchong211";
+        if(id==0){
+            url = "about:blank";
+            wvDetailContent.loadUrl("about:blank");
+        }
+
+        switch (item.getItemId()) {
+            case R.id.share:
+                DoShareUtils.shareText(this,url,"潇湘剑雨");
+                break;
+            case R.id.collect:
+                /*if(Constant.isLogin){
+                    goToCollect();
+                }else {
+                    startActivity(MeLoginActivity.class);
+                }*/
+                ToastUtils.showShortSafe("后期添加");
+                break;
+            case R.id.cope:
+                AppUtil.copy("");
+                ToastUtils.showShortSafe("复制成功");
+                break;
+            case R.id.open:
+                AppUtil.openLink(this, "");
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     private void collectNews() {
         if (fabLike.isSelected()) {
@@ -210,16 +263,11 @@ public class WebViewAnimActivity extends BaseActivity implements WebViewAnimCont
     }
 
 
-    private void initIntent() {
-        Intent intent = getIntent();
-        id = intent.getExtras().getInt("id");
-    }
-
-
     private void initScroll() {
         nsvScroller.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+            public void onScrollChange(NestedScrollView v, int scrollX,
+                                       int scrollY, int oldScrollX, int oldScrollY) {
                 if(scrollY - oldScrollY > 0 && isBottomShow) {  //下移隐藏
                     isBottomShow = false;
                     llDetailBottom.animate().translationY(llDetailBottom.getHeight());
@@ -232,6 +280,7 @@ public class WebViewAnimActivity extends BaseActivity implements WebViewAnimCont
     }
 
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void initWebView() {
         WebSettings settings = wvDetailContent.getSettings();
         if (SPUtils.getInstance(Constant.SP_NAME).getBoolean(Constant.SP_NO_IMAGE,false)) {
@@ -263,6 +312,7 @@ public class WebViewAnimActivity extends BaseActivity implements WebViewAnimCont
         }
     }
 
+
     private void initWindowListener() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             (getWindow().getSharedElementEnterTransition()).addListener(new Transition.TransitionListener() {
@@ -274,7 +324,6 @@ public class WebViewAnimActivity extends BaseActivity implements WebViewAnimCont
                     /**
                      * 测试发现部分手机(如红米note2)上加载图片会变形,没有达到centerCrop效果
                      * 查阅资料发现Glide配合SharedElementTransition是有坑的,需要在Transition动画结束后再加载图片
-                     * https://github.com/TWiStErRob/glide-support/blob/master/src/glide3/java/com/bumptech/glide/supportapp/github/_847_shared_transition/DetailFragment.java
                      */
                     isTransitionEnd = true;
                     if (imgUrl != null) {
@@ -311,6 +360,8 @@ public class WebViewAnimActivity extends BaseActivity implements WebViewAnimCont
         wvDetailContent.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
     }
 
+
+    @SuppressLint("DefaultLocale")
     @Override
     public void showExtraInfo(ZhiHuDetailExtraBean zhiHuDetailExtraBean) {
         tvDetailBottomLike.setText(String.format("%d个赞",zhiHuDetailExtraBean.getPopularity()));

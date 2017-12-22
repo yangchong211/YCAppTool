@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,16 +14,17 @@
         android:layout_height="wrap_content"
         tools:text="Geek"
         android:textColor="@color/blackText1"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
         android:paddingStart="12dp"
+        android:paddingEnd="0dp"
         android:background="@color/whiteBg"/>
 
     <com.ns.yc.lifehelper.ui.weight.FlowLayout
         android:id="@+id/fl_node_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="6dp">
-    </com.ns.yc.lifehelper.ui.weight.FlowLayout>
+        android:padding="6dp"/>
+
 </LinearLayout>

@@ -94,6 +94,7 @@ public class WTNoteActivity extends BaseActivity implements View.OnClickListener
         tvNodeTitle.setText(map.keyAt(0));
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -102,4 +103,6 @@ public class WTNoteActivity extends BaseActivity implements View.OnClickListener
                 break;
         }
     }
+
+
 }

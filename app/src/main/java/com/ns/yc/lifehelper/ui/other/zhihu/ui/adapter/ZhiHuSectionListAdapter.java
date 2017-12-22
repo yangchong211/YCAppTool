@@ -22,6 +22,10 @@ public class ZhiHuSectionListAdapter extends RecyclerArrayAdapter<ZhiHuSectionCh
         return new ExpressDeliveryViewHolder(parent);
     }
 
+    public void setReadState(int position, boolean readState) {
+        getAllData().get(position).setReadState(readState);
+    }
+
     private class ExpressDeliveryViewHolder extends BaseViewHolder<ZhiHuSectionChildBean.StoriesBean> {
 
         ImageView iv_logo;

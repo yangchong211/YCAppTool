@@ -87,6 +87,8 @@ public class RetrofitWrapper {
         initSSL();
         //设置读取超时时间，连接超时时间，写入超时时间值
         initTimeOut();
+        //错误重连
+        builder.retryOnConnectionFailure(true);
 
         //解析json
         gson = getJson();

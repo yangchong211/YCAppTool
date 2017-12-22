@@ -44,7 +44,6 @@ public abstract class BaseActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
         initLeakCanary();             //测试内存泄漏，正式一定要隐藏
         AppManager.getAppManager().removeActivity(this);                                //将当前Activity移除到容器
         //AppManager.getAppManager().finishActivity(this);

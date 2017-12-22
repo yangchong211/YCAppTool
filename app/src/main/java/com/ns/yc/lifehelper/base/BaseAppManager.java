@@ -16,9 +16,8 @@ import java.util.Set;
  * 创建日期：2017/1/18
  * 描    述：Activity容器
  * 修订历史：
- * 备注：如果在BaseActivity中添加入栈和出栈，将会导致activityStack内存泄漏
+ * 备注：
  *      建议：在Application中用registerActivityLifecycleCallbacks进行Activity生命周期的栈管理
- *      问题：activityStack内存泄漏？？？？不知道该如何解决
  * ================================================
  */
 public class BaseAppManager implements Application.ActivityLifecycleCallbacks {
@@ -107,6 +106,7 @@ public class BaseAppManager implements Application.ActivityLifecycleCallbacks {
     public void AppExit() {
         try {
             if (activityStack != null) {
+                //noinspection SynchronizeOnNonFinalField
                 synchronized (activityStack) {
                     for (Activity act : activityStack) {
                         act.finish();

@@ -5,7 +5,7 @@ package com.ns.yc.lifehelper.api;
  * ================================================
  * 作    者：杨充
  * 版    本：1.0
- * 创建日期：2017/8/18
+ * 创建日期：2017/4/18
  * 描    述：网络其他新闻接口
  * 修订历史：
  * ================================================
@@ -14,6 +14,7 @@ public class ConstantTxApi {
 
     /**
      * 天行数据
+     * 关于key，请自行去天行申请
      * http://api.tianapi.com/social/?key=APIKEY&num=10         社会新闻
      * http://api.tianapi.com/guonei/?key=APIKEY&num=10         国内新闻
      * http://api.tianapi.com/huabian/?key=APIKEY&num=10	    娱乐新闻

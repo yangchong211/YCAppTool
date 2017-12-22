@@ -28,20 +28,22 @@
             android:background="@color/colorTransparent"/>
     </FrameLayout>
 
+
     <LinearLayout
         android:id="@+id/ll_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="visible">
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_margin="10dp"
+            app:fab_size="mini"
             app:srcCompat="@drawable/ic_gank_un_favorite"/>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_top"
@@ -49,7 +51,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_margin="10dp"
+            app:fab_size="mini"
             app:srcCompat="@drawable/ic_top"/>
     </LinearLayout>
+
 
 </RelativeLayout>

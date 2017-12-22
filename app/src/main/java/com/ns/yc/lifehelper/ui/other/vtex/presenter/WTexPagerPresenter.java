@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.vtex.presenter;
 
-import com.ns.yc.lifehelper.api.ConstantALiYunApi;
 import com.ns.yc.lifehelper.ui.other.vtex.contract.WTexPagerContract;
+import com.ns.yc.lifehelper.ui.other.vtex.model.api.VTexApi;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.TopicListBean;
 import com.ns.yc.lifehelper.utils.LogUtils;
 
@@ -15,6 +15,7 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -44,7 +45,7 @@ public class WTexPagerPresenter implements WTexPagerContract.Presenter {
 
     @Override
     public void getData(String mType) {
-        Observable.just(ConstantALiYunApi.WTex_URL + mType)
+        Subscription subscribe = Observable.just(VTexApi.TAB_HOST + mType)
                 .subscribeOn(Schedulers.io())
                 .map(new Func1<String, Document>() {
                     @Override
@@ -103,7 +104,6 @@ public class WTexPagerPresenter implements WTexPagerContract.Presenter {
                             if (timeElements.size() > 1) {
                                 bean.setUpdateTime(parseTime(timeElements.get(1).text()));
                             }
-
                             mList.add(bean);
                         }
                         return mList;
@@ -113,27 +113,29 @@ public class WTexPagerPresenter implements WTexPagerContract.Presenter {
                 .subscribe(new Subscriber<List<TopicListBean>>() {
                     @Override
                     public void onCompleted() {
-
+                        LogUtils.e("WTexPagerPresenter----------" + "结束");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        LogUtils.e("WTexPagerPresenter----------" + e.getMessage());
                     }
 
                     @Override
                     public void onNext(List<TopicListBean> topicListBeen) {
+                        LogUtils.e("WTexPagerPresenter----------" + "成功");
                         mView.showContent(topicListBeen);
                     }
                 });
+        mSubscriptions.add(subscribe);
     }
 
-    private String parseId(String str) {
+    public String parseId(String str) {
         int idEnd = str.indexOf("#");
         return str.substring(3, idEnd);
     }
 
-    private String parseTime(String str) {
+    public String parseTime(String str) {
         int timeEnd = str.indexOf("  •");
         if (timeEnd == -1) {
             return str;
@@ -141,7 +143,7 @@ public class WTexPagerPresenter implements WTexPagerContract.Presenter {
         return str.substring(0, timeEnd);
     }
 
-    private static String parseImg(String str) {
+    public static String parseImg(String str) {
         return "http:" + str;
     }
 

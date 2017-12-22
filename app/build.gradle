@@ -9,8 +9,8 @@ android {
         applicationId "com.ns.yc.lifehelper"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 3
-        versionName "1.3"
+        versionCode 5
+        versionName "1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         /*ndk {
@@ -32,7 +32,7 @@ android {
         }
     }
 
-    //
+    //jdk1.7
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
@@ -47,10 +47,17 @@ bugly {
 }
 
 
+android {
+    //use legacy for android 6.0
+    useLibrary 'org.apache.http.legacy'
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    //官方库
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.android.support:palette-v7:25.3.1'
@@ -58,23 +65,15 @@ dependencies {
     compile 'com.android.support:support-annotations:25.3.1'
     compile 'com.android.support:multidex:1.0.1'
 
-    //黄牛刀
-    compile 'com.jakewharton:butterknife:7.0.1'
-    //图片加载框架
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'jp.wasabeef:glide-transformations:2.0.1'
-    //takePhoto框架
-    compile 'com.jph.takephoto:takephoto_library:4.0.3'
-    compile 'com.lzy.widget:imagepicker:0.5.0'
-    //指定版本
-    //事件总线
-    compile 'org.greenrobot:eventbus:3.0.0'
-    //导航栏
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar'
-    //轮播图
-    compile 'com.youth.banner:banner:1.4.8'
-    //网络请求
+
+    //测试框架
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'junit:junit:4.12'
+    testCompile "org.robolectric:robolectric:3.6.1"
+    testCompile "org.mockito:mockito-all:1.10.19"
+
+
+    //网络请求retrofit2+Rx
     compile 'com.zhy:okhttputils:2.5.2'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
@@ -85,6 +84,29 @@ dependencies {
     //compile 'io.reactivex.rxjava2:rxjava:2.1.2'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.0'
+
+
+    //事件总线
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+
+    //注解
+    compile 'com.jakewharton:butterknife:7.0.1'                 //黄牛刀
+    compile 'com.google.dagger:dagger:2.13'                     //注解
+    apt 'com.google.dagger:dagger-compiler:2.13'
+
+
+    //图片加载框架
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.1'
+    //takePhoto框架
+    compile 'com.jph.takephoto:takephoto_library:4.0.3'
+    compile 'com.lzy.widget:imagepicker:0.5.0'
+    //导航栏
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar'
+    //轮播图
+    compile 'com.youth.banner:banner:1.4.8'
     //快速索引
     compile 'me.yokeyword:indexablerecyclerview:1.3.0'
     //BGA系列
@@ -103,13 +125,13 @@ dependencies {
     compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
     //权限库
     compile 'pub.devrel:easypermissions:1.0.1'
-    //注解
-    compile 'com.google.dagger:dagger:2.13'
-    apt 'com.google.dagger:dagger-compiler:2.13'
+    //自定义日期控件
+    compile 'com.prolificinteractive:material-calendarview:1.4.0'
     //阿里巴巴
     compile('com.alibaba.android:vlayout:1.2.2@aar') {
         transitive = true
     }
+    //视频播放
     compile project(':vitamio')
     //内存泄漏检测工具
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
@@ -117,23 +139,33 @@ dependencies {
     //腾讯bug管理平台
     compile 'com.tencent.bugly:crashreport:2.6.0'
     compile 'com.tencent.bugly:nativecrashreport:3.3.0'
-
+    //腾讯x5
     compile files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
 
 
-    compile 'cn.yc:YCStateLib:1.0'              //状态管理
-    compile 'cn.yc:YCPhotoLib:1.0'              //图片选择器
-    compile 'cn.yc:YCDialogLib:3.2'             //弹窗
-    compile 'cn.yc:YCCountDownViewLib:1.0'      //倒计时器
-    compile 'cn.yc:YCUtilsLib:1.4'              //公共类
-    compile 'cn.yc:YCMultiInputViewLib:1.0'     //倒计数
-    compile 'cn.yc:YCProgressLib:1.0'           //进度条
-    compile 'cn.yc:YCCardViewLib:1.2'           //滑动卡片
-    compile 'cn.yc:YCCustomTextLib:2.1'         //自定义超文本
-    compile 'cn.yc:YCRecycleViewLib:1.1'        //RecycleView封装类
-    compile 'cn.yc:YCWeatherLib:1.0'            //天气自定义控件
-    compile 'cn.yc:YCGalleryLib:1.1'            //自定义画廊
-    compile 'cn.yc:YCBaseAdapterLib:1.2'        //adapter封装
-    compile 'cn.yc:YCBannerLib:1.2'             //轮播图
+    //环信
+    //Optional compile for GCM (Google Cloud Messaging).
+    //compile 'com.google.android.gms:play-services-gcm:9.4.0'
+    //compile 'com.hyphenate:hyphenate-sdk:3.3.0'
+    compile 'com.hyphenate:hyphenate-sdk-lite:3.3.0'
+
+
+
+    //关于开源库，都已经放到的github上，https://github.com/yangchong211
+    compile 'cn.yc:YCStateLib:1.0'                                  //状态管理
+    compile 'cn.yc:YCPhotoLib:1.0'                                  //图片选择器
+    compile 'cn.yc:YCDialogLib:3.2'                                 //弹窗
+    compile 'cn.yc:YCCountDownViewLib:1.0'                          //倒计时器
+    compile 'cn.yc:YCUtilsLib:1.5'                                  //公共类
+    compile 'cn.yc:YCMultiInputViewLib:1.0'                         //倒计数
+    compile 'cn.yc:YCProgressLib:1.0'                               //进度条
+    compile 'cn.yc:YCCardViewLib:1.2'                               //滑动卡片
+    compile 'cn.yc:YCCustomTextLib:2.1'                             //自定义超文本
+    compile 'cn.yc:YCRecycleViewLib:1.1'                            //RecycleView封装类
+    compile 'cn.yc:YCWeatherLib:1.0'                                //天气自定义控件
+    compile 'cn.yc:YCGalleryLib:1.1'                                //自定义画廊
+    compile 'cn.yc:YCBaseAdapterLib:1.2'                            //adapter封装
+    compile 'cn.yc:YCBannerLib:1.2'                                 //轮播图
+
 
 }

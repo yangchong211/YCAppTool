@@ -25,5 +25,6 @@ public class ConstantGanKApi {
      * GanIo 干货集中营 API
      */
     public static final String GAN_K_IO_API = "http://gank.io/api/";
+    public static final String URL = "http://www.jcodecraeer.com/plus/view.php?aid=8895";
 
 }

@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.me.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -15,14 +16,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.hyphenate.EMError;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantKeys;
 import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.event.LoginSuccessEvent;
+import com.ns.yc.lifehelper.utils.AppUtil;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.Bind;
 
@@ -86,10 +88,12 @@ public class MeRegisterActivity extends BaseActivity implements View.OnClickList
         btnPersonRegister.setOnClickListener(this);
     }
 
+
     @Override
     public void initData() {
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -132,10 +136,11 @@ public class MeRegisterActivity extends BaseActivity implements View.OnClickList
         return false;
     }
 
+
     private void goToRegister() {
-        String name = tvPersonUsername.getText().toString().trim();
+        final String name = tvPersonUsername.getText().toString().trim();
         String code = tvPersonCode.getText().toString().trim();
-        String pwd = tvPersonPassword.getText().toString().trim();
+        final String pwd = tvPersonPassword.getText().toString().trim();
         String pwdAgain = tvPersonPasswordAgain.getText().toString().trim();
         if(TextUtils.isEmpty(name)){
             ToastUtil.showToast(MeRegisterActivity.this,"用户名不能为空");
@@ -153,11 +158,71 @@ public class MeRegisterActivity extends BaseActivity implements View.OnClickList
             ToastUtil.showToast(MeRegisterActivity.this,"两次输入密码不同");
             return;
         }
-        SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.NAME,name);
-        SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.PWD,pwd);
-        ToastUtil.showToast(MeRegisterActivity.this,"注册成功");
-        EventBus.getDefault().post(new LoginSuccessEvent("发布事件-注册"));                        //发布事件
-        this.finish();
+        final ProgressDialog pd = new ProgressDialog(MeRegisterActivity.this);
+        pd.setMessage(getResources().getString(R.string.register_state));
+        if(!pd.isShowing()){
+            pd.show();
+        }
+
+
+        try {
+            // call method in SDK
+            EMClient.getInstance().createAccount(name, pwd);
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    if (AppUtil.isActivityLiving(MeRegisterActivity.this)){
+                        if(pd.isShowing()){
+                            pd.dismiss();
+                        }
+                        ToastUtil.showToast(MeRegisterActivity.this,"注册成功");
+                        SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.NAME,name);
+                        SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.PWD,pwd);
+                        finish();
+                    }
+                }
+            });
+        } catch (final HyphenateException e) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    if (AppUtil.isActivityLiving(MeRegisterActivity.this)){
+                        if(pd.isShowing()){
+                            pd.dismiss();
+                        }
+                        int errorCode = e.getErrorCode();
+                        if(errorCode == EMError.NETWORK_ERROR){
+                            ToastUtil.showToast(MeRegisterActivity.this,"网络异常，请检查网络！");
+                        }else if(errorCode == EMError.USER_ALREADY_EXIST){
+                            ToastUtil.showToast(MeRegisterActivity.this,"用户已存在！");
+                        }else if(errorCode == EMError.USER_AUTHENTICATION_FAILED){
+                            ToastUtil.showToast(MeRegisterActivity.this,"注册失败，无权限！");
+                        }else if(errorCode == EMError.USER_ILLEGAL_ARGUMENT){
+                            ToastUtil.showToast(MeRegisterActivity.this,"用户名不合法");
+                        }else{
+                            ToastUtil.showToast(MeRegisterActivity.this,"注册失败");
+                        }
+                    }
+                }
+            });
+        }
+
+        /*new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // call method in SDK
+                *//*IMemClientUtils.imRegister(name,pwd);
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        if(AppUtil.isActivityLiving(MeRegisterActivity.this)){
+                            pd.dismiss();
+                            ToastUtil.showToast(MeRegisterActivity.this,"注册成功");
+                            SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.NAME,name);
+                            SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.PWD,pwd);
+                            finish();
+                        }
+                    }
+                });*//*
+            }
+        }).start();*/
     }
 
 

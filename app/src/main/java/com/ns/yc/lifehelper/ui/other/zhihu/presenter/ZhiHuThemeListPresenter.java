@@ -2,13 +2,20 @@ package com.ns.yc.lifehelper.ui.other.zhihu.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.blankj.utilcode.util.NetworkUtils;
+import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuThemeListContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeChildBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
 import com.ns.yc.lifehelper.utils.RxUtil;
 
+import java.util.List;
+
+import io.realm.Realm;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.functions.Func1;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -25,6 +32,7 @@ public class ZhiHuThemeListPresenter implements ZhiHuThemeListContract.Presenter
     private ZhiHuThemeListContract.View mView;
     @NonNull
     private CompositeSubscription mSubscriptions;
+    private Realm realm;
 
 
     public ZhiHuThemeListPresenter(ZhiHuThemeListContract.View homeView) {
@@ -32,10 +40,19 @@ public class ZhiHuThemeListPresenter implements ZhiHuThemeListContract.Presenter
         mSubscriptions = new CompositeSubscription();
     }
 
+
     @Override
     public void subscribe() {
-
+        initRealm();
     }
+
+
+    private void initRealm() {
+        if(realm ==null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
+    }
+
 
     @Override
     public void unSubscribe() {
@@ -48,6 +65,17 @@ public class ZhiHuThemeListPresenter implements ZhiHuThemeListContract.Presenter
         ZhiHuModel model = ZhiHuModel.getInstance();
         Subscription rxSubscription = model.getThemeChildList(id)
                 .compose(RxUtil.<ZhiHuThemeChildBean>rxSchedulerHelper())
+                .map(new Func1<ZhiHuThemeChildBean, ZhiHuThemeChildBean>() {
+                    @Override
+                    public ZhiHuThemeChildBean call(ZhiHuThemeChildBean zhiHuThemeChildBean) {
+                        List<ZhiHuThemeChildBean.StoriesBean> list = zhiHuThemeChildBean.getStories();
+                        for(ZhiHuThemeChildBean.StoriesBean item : list) {
+                            boolean b = RealmHelper.queryNewsId(realm, item.getId());
+                            item.setReadState(b);
+                        }
+                        return zhiHuThemeChildBean;
+                    }
+                })
                 .subscribe(new Subscriber<ZhiHuThemeChildBean>() {
                     @Override
                     public void onCompleted() {
@@ -56,16 +84,31 @@ public class ZhiHuThemeListPresenter implements ZhiHuThemeListContract.Presenter
 
                     @Override
                     public void onError(Throwable e) {
-
+                        if(NetworkUtils.isConnected()){
+                            mView.setErrorView();
+                        }else {
+                            mView.setNetworkErrorView();
+                        }
                     }
 
                     @Override
                     public void onNext(ZhiHuThemeChildBean zhiHuThemeChildBean) {
                         if(zhiHuThemeChildBean!=null){
                             mView.setView(zhiHuThemeChildBean);
+                        }else {
+                            mView.setEmptyView();
                         }
                     }
                 });
         mSubscriptions.add(rxSubscription);
     }
+
+
+    @Override
+    public void insertReadToDB(int id) {
+        initRealm();
+        RealmHelper.insertNewsId(realm , id);
+    }
+
+
 }

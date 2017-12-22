@@ -37,10 +37,10 @@ import com.ns.yc.lifehelper.ui.data.view.activity.RiddleActivity;
 import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
+import com.ns.yc.lifehelper.ui.other.imTalk.ui.ImTalkActivity;
 import com.ns.yc.lifehelper.ui.other.listener.ListenerActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
-import com.ns.yc.lifehelper.ui.other.notePad.NotePadActivity;
 import com.ns.yc.lifehelper.ui.other.safe360.SafeHomeActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.WTexNewsActivity;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
@@ -83,6 +83,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
     TextView tvNewsZhiHu;
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
+
 
     private MainActivity activity;
     private NarrowImageAdapter adapter;
@@ -132,11 +133,13 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
         tvNewsZhiHu.setOnClickListener(this);
     }
 
+
     @Override
     public void initData() {
         presenter.initGridViewData();
         presenter.initRecycleViewData();
     }
+
 
     @Override
     public void onClick(View v) {
@@ -178,7 +181,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                                 startActivity(WeatherActivity.class);
                                 break;
                             case 2:
-                                startActivity(NotePadActivity.class);
+                                startActivity(NoteActivity.class);
                                 break;
                             case 3:
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -197,7 +200,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                                 startActivity(WTexNewsActivity.class);
                                 break;
                             case 6:
-                                startActivity(WorkDoActivity.class);
+                                startActivity(ImTalkActivity.class);
                                 break;
                             default:
                                 Toast.makeText(activity, ((ImageIconBean) obj).getName() + "---", Toast.LENGTH_SHORT).show();
@@ -277,6 +280,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
             }
         });
     }
+
 
     @Override
     public void setRecycleView(final ArrayList<Integer> list) {

@@ -62,16 +62,19 @@ public class GoldMainActivity extends BaseActivity implements View.OnClickListen
         presenter.subscribe();
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         presenter.unSubscribe();
     }
 
+
     @Override
     public int getContentView() {
         return R.layout.base_add_tab_view;
     }
+
 
     @Override
     public void initView() {
@@ -86,16 +89,19 @@ public class GoldMainActivity extends BaseActivity implements View.OnClickListen
         toolbarTitle.setText("稀土掘金");
     }
 
+
     @Override
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
         ivAdd.setOnClickListener(this);
     }
 
+
     @Override
     public void initData() {
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -146,4 +152,6 @@ public class GoldMainActivity extends BaseActivity implements View.OnClickListen
         intent.putExtra(Constant.DetailKeys.IT_GOLD_MANAGER, goldManagerList);
         startActivity(intent);
     }
+
+
 }

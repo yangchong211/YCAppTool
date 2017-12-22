@@ -2,6 +2,7 @@ package com.ns.yc.lifehelper.ui.other.zhihu.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuThemeContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeBean;
@@ -56,13 +57,19 @@ public class ZhiHuThemePresenter implements ZhiHuThemeContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        if(NetworkUtils.isConnected()){
+                            mView.setErrorView();
+                        }else {
+                            mView.setNetworkErrorView();
+                        }
                     }
 
                     @Override
                     public void onNext(ZhiHuThemeBean zhiHuThemeBean) {
                         if(zhiHuThemeBean!=null){
                             mView.setView(zhiHuThemeBean);
+                        }else {
+                            mView.setEmptyView();
                         }
                     }
                 });

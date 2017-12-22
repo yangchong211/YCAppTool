@@ -55,6 +55,7 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
         return fragment;
     }
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -62,11 +63,13 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
 
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         activity = null;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,11 +79,13 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
         }
     }
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.subscribe();
     }
+
 
     @Override
     public void onDestroy() {
@@ -121,6 +126,7 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
             }
         });
     }
+
 
     @Override
     public void initData() {

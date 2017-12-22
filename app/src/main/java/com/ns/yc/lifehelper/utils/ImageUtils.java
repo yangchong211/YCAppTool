@@ -107,11 +107,13 @@ public class ImageUtils {
         if(path!=null && path.length()>0){
             Picasso.with(context)
                     .load(path)
+                    .placeholder(resId)
                     .error(resId)
                     .into(target);
         }else {
             Picasso.with(context)
                     .load(resId)
+                    .placeholder(resId)
                     .error(resId)
                     .into(target);
         }
@@ -129,11 +131,13 @@ public class ImageUtils {
         if(path>0){
             Picasso.with(context)
                     .load(path)
+                    .placeholder(resId)
                     .error(resId)
                     .into(target);
         }else {
             Picasso.with(context)
                     .load(resId)
+                    .placeholder(resId)
                     .error(resId)
                     .into(target);
         }

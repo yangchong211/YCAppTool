@@ -41,6 +41,7 @@ public class WTexNewsActivity extends BaseActivity implements View.OnClickListen
         return R.layout.base_add_tab_view;
     }
 
+
     @Override
     public void initView() {
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -54,16 +55,19 @@ public class WTexNewsActivity extends BaseActivity implements View.OnClickListen
         vpContent.setAdapter(mAdapter);
     }
 
+
     @Override
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
         ivAdd.setOnClickListener(this);
     }
 
+
     @Override
     public void initData() {
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -76,4 +80,6 @@ public class WTexNewsActivity extends BaseActivity implements View.OnClickListen
                 break;
         }
     }
+
+
 }

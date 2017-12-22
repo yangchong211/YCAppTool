@@ -43,12 +43,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        ButterKnife.unbind(this);
         initLeakCanary();             //测试内存泄漏，正式一定要隐藏
     }
 

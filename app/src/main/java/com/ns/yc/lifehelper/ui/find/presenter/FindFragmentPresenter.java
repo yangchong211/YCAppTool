@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.find.presenter;
 
+import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
@@ -121,7 +122,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         gridLayoutHelper.setBgColor(Color.WHITE);
         return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.item_vp_grid_iv, 8, Constant.viewType.typeGv) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, final int position) {
+            public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_new_seed_title, proName[position]);
                 holder.setImageResource(R.id.iv_new_seed_ic, images.get(position));
@@ -190,7 +191,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         //gridLayoutHelper.setAutoExpand(true);//是否自动填充空白区域
         return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.view_vlayout_grid, 8, Constant.viewType.typeGvSecond) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, final int position) {
+            public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, list1_title[position]);
                 ImageView iv = holder.getView(R.id.iv_image);
@@ -258,7 +259,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         //gridLayoutHelper.setSpanCount(6);   // 设置每行多少个网格
         return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.view_vlayout_hor, 3, Constant.viewType.typeList) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, final int position) {
+            public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, list3_title[position]);
                 ImageView iv = holder.getView(R.id.iv_image);
@@ -284,6 +285,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         }
         list4_image.recycle();
         OnePlusNLayoutHelper onePlusNLayoutHelper = new OnePlusNLayoutHelper();
+        //noinspection deprecation
         onePlusNLayoutHelper.setBgColor(activity.getResources().getColor(R.color.colorWhite));
         //onePlusNLayoutHelper.setAspectRatio(2.0f);
         //onePlusNLayoutHelper.setColWeights(new float[]{40f});
@@ -292,7 +294,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         onePlusNLayoutHelper.setPadding(10, 20, 10, 10);
         return new BaseDelegateAdapter(activity, onePlusNLayoutHelper, R.layout.view_vlayout_plus, 3, Constant.viewType.typePlus) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, final int position) {
+            public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 if (position == 0) {
                     holder.getView(R.id.ll_first).setVisibility(View.VISIBLE);

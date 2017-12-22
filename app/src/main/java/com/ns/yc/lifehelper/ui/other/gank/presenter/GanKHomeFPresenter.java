@@ -5,6 +5,7 @@ import com.ns.yc.lifehelper.ui.other.gank.contract.GanKHomeFContract;
 import com.ns.yc.lifehelper.ui.other.gank.network.GanKModel;
 
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -23,7 +24,7 @@ public class GanKHomeFPresenter implements GanKHomeFContract.Presenter {
     private GanKHomeFContract.View fragmentView;
     private CompositeSubscription mSubscriptions;
 
-    private int number = 10;
+    private final int number = 10;
     private int mPage = 1;
 
     public GanKHomeFPresenter(GanKHomeFContract.View androidView) {
@@ -49,7 +50,7 @@ public class GanKHomeFPresenter implements GanKHomeFContract.Presenter {
             mPage += 1;
         }
         GanKModel model = GanKModel.getInstance();
-        model.getCategoryDate(fragmentView.getDataType(),number,mPage)
+        Subscription subscribe = model.getCategoryDate(fragmentView.getDataType(), number, mPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<CategoryResult>() {
@@ -65,18 +66,19 @@ public class GanKHomeFPresenter implements GanKHomeFContract.Presenter {
 
                     @Override
                     public void onNext(CategoryResult categoryResult) {
-                        if(categoryResult.results!=null){
+                        if (categoryResult.results != null) {
                             fragmentView.hideSwipeLoading();
-                            if(isRefresh){
+                            if (isRefresh) {
                                 fragmentView.refreshData(categoryResult);
                             } else {
                                 fragmentView.moreData(categoryResult);
                             }
-                        }else {
+                        } else {
                             fragmentView.showNoData();
                         }
                     }
                 });
+        mSubscriptions.add(subscribe);
     }
 
 

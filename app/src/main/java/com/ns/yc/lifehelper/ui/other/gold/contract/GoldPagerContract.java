@@ -21,11 +21,17 @@ public interface GoldPagerContract {
     //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
         void showContent(List<GoldListBean> totalList);
+        void setNoMore();
+        void showMoreContent(List<GoldListBean> totalList, int size, int i);
+        void setEmptyView();
+        void setErrorView();
+        void setNetworkErrorView();
     }
 
     //Presenter控制器
     interface Presenter extends BasePresenter {
         void getGoldData(String mType);
+        void getMoreGoldData();
     }
 
 
