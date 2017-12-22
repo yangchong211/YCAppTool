@@ -24,7 +24,7 @@ import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantKeys;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.imTalk.ui.ImTalkActivity;
-import com.ns.yc.lifehelper.utils.IMEmClientUtils;
+import com.ns.yc.lifehelper.utils.IMEMClientUtils;
 import com.ns.yc.lifehelper.utils.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 
@@ -178,7 +178,7 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
         pd.setMessage(getString(R.string.login_state));
         pd.show();
 
-        IMEmClientUtils.imLogin(name, pwd, new EMCallBack() {
+        IMEMClientUtils.imLogin(name, pwd, new EMCallBack() {
             @Override
             public void onSuccess() {
                 LogUtils.e(TAG +"login: onSuccess");

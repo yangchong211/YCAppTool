@@ -155,7 +155,7 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void addDailyDate(ZhiHuDailyListBean zhiHuDailyBean) {
         currentTitle = "今日热闻";
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
-                new ZhiHuDiffCallback(mList, zhiHuDailyBean.getStories()), true);
+                new ZhihuDiffCallback(mList, zhiHuDailyBean.getStories()), true);
         mList = zhiHuDailyBean.getStories();
         mTopList = zhiHuDailyBean.getTop_stories();
         isBefore = false;
@@ -170,7 +170,7 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void addDailyBeforeDate(ZhiHuDailyBeforeListBean zhiHuDailyBeforeListBean) {
         currentTitle = zhiHuDailyBeforeListBean.getDate();
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
-                new ZhiHuDiffCallback(mList, zhiHuDailyBeforeListBean.getStories()), true);
+                new ZhihuDiffCallback(mList, zhiHuDailyBeforeListBean.getStories()), true);
         mList = zhiHuDailyBeforeListBean.getStories();
         isBefore = true;
         diffResult.dispatchUpdatesTo(this);

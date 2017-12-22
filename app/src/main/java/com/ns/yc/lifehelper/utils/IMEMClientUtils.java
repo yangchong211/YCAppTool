@@ -16,7 +16,7 @@ import com.hyphenate.exceptions.HyphenateException;
  * 修订历史：
  * ================================================
  */
-public class IMEmClientUtils {
+public class IMEMClientUtils {
 
 
     /**

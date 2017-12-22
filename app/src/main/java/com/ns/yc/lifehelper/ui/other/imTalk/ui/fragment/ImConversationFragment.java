@@ -9,7 +9,7 @@ import com.ns.yc.lifehelper.base.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.imTalk.model.ConversationList;
 import com.ns.yc.lifehelper.ui.other.imTalk.ui.ImTalkActivity;
 import com.ns.yc.lifehelper.ui.other.imTalk.ui.adapter.ImConversationAdapter;
-import com.ns.yc.lifehelper.utils.IMEmClientUtils;
+import com.ns.yc.lifehelper.utils.IMEMClientUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class ImConversationFragment extends BaseFragment {
             @Override
             public void onItemClick(int position , int id) {
                 // 获取当前登录用户的 username
-                String currUsername = IMEmClientUtils.getIMemClientInstance().getCurrentUser();
+                String currUsername = IMEMClientUtils.getIMemClientInstance().getCurrentUser();
 
             }
         });

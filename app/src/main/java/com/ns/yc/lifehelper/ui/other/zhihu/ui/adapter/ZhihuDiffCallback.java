@@ -7,10 +7,10 @@ import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import java.util.List;
 
 
-public class ZhiHuDiffCallback extends DiffUtil.Callback{
+public class ZhihuDiffCallback extends DiffUtil.Callback{
 
     private List<ZhiHuDailyListBean.StoriesBean> mOldData, mNewData;
-    public ZhiHuDiffCallback(List<ZhiHuDailyListBean.StoriesBean> mOldData, List<ZhiHuDailyListBean.StoriesBean> mNewData) {
+    public ZhihuDiffCallback(List<ZhiHuDailyListBean.StoriesBean> mOldData, List<ZhiHuDailyListBean.StoriesBean> mNewData) {
         this.mOldData = mOldData;
         this.mNewData = mNewData;
         
