@@ -62,6 +62,8 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
             mType = getArguments().getString(TYPE);
         }
         presenter.subscribe();
+        
+        
     }
 
     @Override
@@ -92,6 +94,7 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
                 activity.startActivity(intent);
             }
         });
+        
     }
 
     
@@ -108,6 +111,7 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
         final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
         recyclerView.addItemDecoration(line);
+        
     }
 
 
