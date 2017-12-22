@@ -8,7 +8,7 @@ import com.ns.yc.lifehelper.base.BaseApplication;
 import com.ns.yc.lifehelper.cache.CacheZhLike;
 import com.ns.yc.lifehelper.ui.main.contract.WebViewAnimContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhihuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
 import com.ns.yc.lifehelper.utils.RxUtil;
@@ -32,7 +32,7 @@ public class WebViewAnimPresenter implements WebViewAnimContract.Presenter {
     private WebViewAnimContract.View mView;
     private CompositeSubscription mSubscriptions;
     private Activity activity;
-    private ZhiHuDetailBean mData;
+    private ZhihuDetailBean mData;
     private Realm realm;
 
 
@@ -65,8 +65,8 @@ public class WebViewAnimPresenter implements WebViewAnimContract.Presenter {
     public void getDetailData(int id) {
         ZhiHuModel model = ZhiHuModel.getInstance();
         Subscription rxSubscription =  model.getDetailInfo(id)
-                .compose(RxUtil.<ZhiHuDetailBean>rxSchedulerHelper())
-                .subscribe(new Subscriber<ZhiHuDetailBean>() {
+                .compose(RxUtil.<ZhihuDetailBean>rxSchedulerHelper())
+                .subscribe(new Subscriber<ZhihuDetailBean>() {
                     @Override
                     public void onCompleted() {
 
@@ -78,7 +78,7 @@ public class WebViewAnimPresenter implements WebViewAnimContract.Presenter {
                     }
 
                     @Override
-                    public void onNext(ZhiHuDetailBean zhihuDetailBean) {
+                    public void onNext(ZhihuDetailBean zhihuDetailBean) {
                         mData = zhihuDetailBean;
                         mView.showContent(zhihuDetailBean);
                     }

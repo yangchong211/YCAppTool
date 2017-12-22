@@ -28,7 +28,7 @@ import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.main.contract.WebViewAnimContract;
 import com.ns.yc.lifehelper.ui.main.presenter.WebViewAnimPresenter;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhihuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.activity.ZhiHuCommentActivity;
 import com.ns.yc.lifehelper.utils.AppUtil;
@@ -344,7 +344,7 @@ public class WebViewAnimActivity extends BaseActivity implements WebViewAnimCont
 
 
     @Override
-    public void showContent(ZhiHuDetailBean zhihuDetailBean) {
+    public void showContent(ZhihuDetailBean zhihuDetailBean) {
         imgUrl = zhihuDetailBean.getImage();
         shareUrl = zhihuDetailBean.getShare_url();
         if (isNotTransition) {

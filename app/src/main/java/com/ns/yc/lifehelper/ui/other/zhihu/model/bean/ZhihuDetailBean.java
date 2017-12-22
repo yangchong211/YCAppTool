@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.ui.other.zhihu.model.bean;
 import java.util.List;
 
 
-public class ZhiHuDetailBean {
+public class ZhihuDetailBean {
 
     /**
      * body: "<div class="main-wrap content-wrap">...</div>",

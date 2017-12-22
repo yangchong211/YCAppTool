@@ -5,7 +5,7 @@ import android.app.Activity;
 
 import com.ns.yc.lifehelper.base.BasePresenter;
 import com.ns.yc.lifehelper.base.BaseView;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhihuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 
 /**
@@ -21,7 +21,7 @@ public interface WebViewAnimContract {
 
     //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
-        void showContent(ZhiHuDetailBean zhihuDetailBean);
+        void showContent(ZhihuDetailBean zhihuDetailBean);
         void showExtraInfo(ZhiHuDetailExtraBean zhiHuDetailExtraBean);
     }
 

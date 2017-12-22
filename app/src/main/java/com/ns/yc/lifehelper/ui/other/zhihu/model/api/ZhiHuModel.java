@@ -10,7 +10,7 @@ import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuHotBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuSectionBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuSectionChildBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeBean;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhihuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeChildBean;
 
 import rx.Observable;
@@ -70,7 +70,7 @@ public class ZhiHuModel {
     /**
      * 日报详情
      */
-    public Observable<ZhiHuDetailBean> getDetailInfo(int id) {
+    public Observable<ZhihuDetailBean> getDetailInfo(int id) {
         return mApiService.getDetailInfo(id);
     }
 
