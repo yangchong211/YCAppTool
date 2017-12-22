@@ -28,7 +28,6 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
 
     @Bind(R.id.recyclerView)
     EasyRecyclerView recyclerView;
-
     private WTexNewsActivity activity;
     private static final String TYPE = "type";
     private String mType;
@@ -46,7 +45,6 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
     }
 
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -55,13 +53,11 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
     }
 
 
-
     @Override
     public void onDetach() {
         super.onDetach();
         activity = null;
     }
-
 
 
     @Override
@@ -72,7 +68,6 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
         }
         presenter.subscribe();
     }
-
 
     @Override
     public void onDestroy() {
@@ -98,6 +93,7 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
                 Intent intent = new Intent();
                 intent.setClass(activity, WTexRepliesActivity.class);
                 intent.putExtra("id", mAdapter.getAllData().get(position).getTopicId());
+                intent.putExtra("name","");
                 activity.startActivity(intent);
             }
         });
