@@ -18,15 +18,13 @@ import com.hyphenate.exceptions.HyphenateException;
  */
 public class IMemClientUtils {
 
-
-
-
     /**
      * 获取对象
      * @return                  EMClient对象
      */
     public static EMClient  getIMemClientInstance(){
         return EMClient.getInstance();
+        
     }
 
 
@@ -42,7 +40,6 @@ public class IMemClientUtils {
             e.printStackTrace();
         }
     }
-
 
     /**
      * 登录
