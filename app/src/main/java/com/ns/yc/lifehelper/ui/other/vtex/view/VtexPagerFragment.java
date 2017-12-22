@@ -52,7 +52,7 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
 
     }
 
-    
+
 
     @Override
     public void onDetach() {

@@ -87,10 +87,10 @@ public class SplashActivity extends BaseActivity {
         View view3 = View.inflate(this, R.layout.activity_splash_view, null);
         View view4 = View.inflate(this, R.layout.activity_splash_view, null);
 
-        ((ImageView) view1.findViewById(R.id.iv_image)).setImageResource(R.drawable.screenshot_1);
-        ((ImageView) view2.findViewById(R.id.iv_image)).setImageResource(R.drawable.screenshot_2);
-        ((ImageView) view3.findViewById(R.id.iv_image)).setImageResource(R.drawable.screenshot_3);
-        ((ImageView) view4.findViewById(R.id.iv_image)).setImageResource(R.drawable.screenshot_4);
+        ((ImageView) view1.findViewById(R.id.iv_image)).setImageResource(R.drawable.screenshot_first);
+        ((ImageView) view2.findViewById(R.id.iv_image)).setImageResource(R.drawable.screenshot_second);
+        ((ImageView) view3.findViewById(R.id.iv_image)).setImageResource(R.drawable.screenshot_three);
+        ((ImageView) view4.findViewById(R.id.iv_image)).setImageResource(R.drawable.screenshot_four);
 
         views = new ArrayList<>();
         views.add(view1);
