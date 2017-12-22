@@ -45,6 +45,8 @@ public class VTexPagerFragment extends BaseFragment implements WTexPagerContract
         return fragment;
     }
 
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

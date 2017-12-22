@@ -5,10 +5,6 @@ import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 
-/**
- * Created by PC on 2017/10/25.
- * 作者：PC
- */
 
 public class AppImageUtils {
 
