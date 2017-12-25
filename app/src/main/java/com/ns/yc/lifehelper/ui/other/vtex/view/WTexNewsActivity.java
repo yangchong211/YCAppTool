@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.vtex.view;
 
+import android.annotation.SuppressLint;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -44,6 +45,19 @@ public class WTexNewsActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initView() {
+        initToolBar();
+        initTabLayout();
+
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    private void initToolBar() {
+        toolbarTitle.setText("Vt新闻");
+    }
+
+
+    private void initTabLayout() {
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setupWithViewPager(vpContent);
         for (int i = 0; i < type.length; i++) {

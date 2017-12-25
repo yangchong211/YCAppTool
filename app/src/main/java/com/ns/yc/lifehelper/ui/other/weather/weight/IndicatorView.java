@@ -218,17 +218,15 @@ public class IndicatorView extends LinearLayout {
         canvas.drawBitmap(marker, left - marker.getWidth() / 2 - 2, this.paddingTopInXML, paint);
     }
 
-    private IndicatorValueChangeListener indicatorValueChangeListener;
 
+    private IndicatorValueChangeListener indicatorValueChangeListener;
     public void setIndicatorValueChangeListener(IndicatorValueChangeListener indicatorValueChangeListener) {
         this.indicatorValueChangeListener = indicatorValueChangeListener;
     }
 
     public void setIndicatorValue(int indicatorValue) {
-
         if (indicatorValue < 0)
             throw new IllegalStateException("参数indicatorValue必须大于0");
-
         this.indicatorValue = indicatorValue;
         if (indicatorValueChangeListener != null) {
             String stateDescription;
@@ -254,14 +252,16 @@ public class IndicatorView extends LinearLayout {
             }
             marker.recycle();
             marker = drawableToBitmap(createVectorDrawable(markerId, indicatorTextColor));
-            indicatorValueChangeListener.onChange(this.indicatorValue, stateDescription, indicatorTextColor);
+            indicatorValueChangeListener.onChange(this.indicatorValue,
+                    stateDescription, indicatorTextColor);
         }
         invalidate();
     }
 
 
     private Drawable createVectorDrawable(int drawableId, int color) {
-        VectorDrawableCompat vectorDrawableCompat = VectorDrawableCompat.create(getResources(), drawableId, context.getTheme());
+        VectorDrawableCompat vectorDrawableCompat = VectorDrawableCompat.create(
+                context.getResources(), drawableId, context.getTheme());
         assert vectorDrawableCompat != null;
         DrawableCompat.setTint(vectorDrawableCompat, color);
         DrawableCompat.setTintMode(vectorDrawableCompat, PorterDuff.Mode.SRC_IN);
@@ -278,9 +278,11 @@ public class IndicatorView extends LinearLayout {
             }
         }
         if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+            // Single color bitmap will be created of 1x1 pixel
         } else {
-            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                    drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         }
         Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());

@@ -3,19 +3,12 @@ package com.ns.yc.lifehelper.ui.other.vtex.model.bean;
 public class TopicListBean {
 
     private String imgUrl;
-
     private String name;
-
     private String updateTime;
-
     private String lastUser;
-
     private String node;
-
     private int commentNum;
-
     private String title;
-
     private String topicId;
 
     public int getCommentNum() {

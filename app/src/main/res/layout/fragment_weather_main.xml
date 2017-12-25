@@ -122,7 +122,7 @@
                     android:includeFontPadding="false"
                     android:textSize="24sp"
                     tools:text="优" />
-                <com.ns.yc.lifehelper.ui.other.weather.weight.IndicatorView
+                <!--<com.ns.yc.lifehelper.ui.other.weather.weight.IndicatorView
                     android:id="@+id/indicator_view_aqi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -134,14 +134,14 @@
                     indicatorView:indicatorValue="0"
                     indicatorView:intervalSize="0dp"
                     indicatorView:marker="@drawable/ic_vector_indicator_down"
-                    indicatorView:inTextSize="8sp" />
+                    indicatorView:inTextSize="8sp" />-->
                 <TextView
                     android:id="@+id/tv_advice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/tv_aqi"
                     android:layout_alignStart="@id/tv_aqi"
-                    android:layout_below="@id/indicator_view_aqi"
+                    android:layout_below="@id/tv_quality"
                     tools:text="气象条件不利于空气污染物稀释、扩散和清除，请尽量避免在室外长时间活动。" />
                 <TextView
                     android:id="@+id/tv_city_rank"

@@ -45,6 +45,7 @@ public class SevenWeatherPresenter implements SevenWeatherContract.Presenter {
     public void subscribe() {
         context = mView.getActivity();
         mView.setWeatherBg(BaseDrawer.Type.DEFAULT);
+        mView.startLoading();
     }
 
     @Override

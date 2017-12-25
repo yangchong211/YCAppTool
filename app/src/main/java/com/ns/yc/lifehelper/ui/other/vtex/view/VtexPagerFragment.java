@@ -18,6 +18,7 @@ import com.ns.yc.lifehelper.ui.other.vtex.presenter.WTexPagerPresenter;
 import com.ns.yc.lifehelper.ui.other.vtex.view.activity.WTexRepliesActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.adapter.WTexPagerAdapter;
 import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 
 import java.util.List;
 
@@ -41,6 +42,7 @@ public class VtexPagerFragment extends BaseFragment implements WTexPagerContract
         return fragment;
     }
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -62,9 +64,8 @@ public class VtexPagerFragment extends BaseFragment implements WTexPagerContract
             mType = getArguments().getString(TYPE);
         }
         presenter.subscribe();
-        
-        
     }
+
 
     @Override
     public void onDestroy() {
@@ -87,11 +88,18 @@ public class VtexPagerFragment extends BaseFragment implements WTexPagerContract
         mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent();
-                intent.setClass(activity, WTexRepliesActivity.class);
-                intent.putExtra("id", mAdapter.getAllData().get(position).getTopicId());
-                intent.putExtra("name","");
-                activity.startActivity(intent);
+                if(mAdapter.getAllData().size()>position && position>-1){
+                    if(mAdapter.getAllData().get(position).getTopicId()!=null &&
+                            mAdapter.getAllData().get(position).getTopicId().length()>0){
+                        Intent intent = new Intent();
+                        intent.setClass(activity, WTexRepliesActivity.class);
+                        intent.putExtra("id", mAdapter.getAllData().get(position).getTopicId());
+                        intent.putExtra("name","");
+                        activity.startActivity(intent);
+                    }else {
+                        ToastUtil.showToast(activity,"无法获取到数据");
+                    }
+                }
             }
         });
         
@@ -104,6 +112,7 @@ public class VtexPagerFragment extends BaseFragment implements WTexPagerContract
         presenter.getData(mType);
     }
 
+
     private void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         mAdapter = new WTexPagerAdapter(activity);
@@ -111,7 +120,6 @@ public class VtexPagerFragment extends BaseFragment implements WTexPagerContract
         final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
         recyclerView.addItemDecoration(line);
-        
     }
 
 

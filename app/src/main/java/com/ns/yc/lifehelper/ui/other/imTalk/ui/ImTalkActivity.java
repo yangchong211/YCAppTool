@@ -56,14 +56,6 @@ public class ImTalkActivity extends BaseActivity implements View.OnClickListener
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         presenter.bindView(this);
         presenter.subscribe();
-
-        // 判断sdk是否登录成功过，并没有退出和被踢，否则跳转到登陆界面
-        if (!IMEMClientUtils.getIMemClientInstance().isLoggedInBefore()) {
-            Intent intent = new Intent(this, MeLoginActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
         super.onCreate(savedInstanceState);
     }
 
@@ -82,6 +74,13 @@ public class ImTalkActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void initView() {
+        // 判断sdk是否登录成功过，并没有退出和被踢，否则跳转到登陆界面
+        if (!IMEMClientUtils.getIMemClientInstance().isLoggedInBefore()) {
+            Intent intent = new Intent(this, MeLoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         initTabLayout();
         initViewPager();
     }

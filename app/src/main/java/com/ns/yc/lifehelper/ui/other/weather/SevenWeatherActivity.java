@@ -3,6 +3,7 @@ package com.ns.yc.lifehelper.ui.other.weather;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.base.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.weather.bean.FiftyDayWeather;
 import com.ns.yc.lifehelper.ui.other.weather.contract.SevenWeatherContract;
@@ -25,6 +27,7 @@ import com.ns.yc.lifehelper.ui.other.weather.weight.moji.bean.ShowApiWeatherNorm
 import com.ns.yc.lifehelper.ui.other.weather.weight.moji.view.AqiView;
 import com.ns.yc.lifehelper.ui.other.weather.weight.moji.view.AstroView;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
+import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 import com.yc.cn.ycweatherlib.WeatherAirLevel;
 import com.yc.cn.ycweatherlib.WeatherItemView;
 import com.yc.cn.ycweatherlib.WeatherModel;
@@ -78,7 +81,7 @@ public class SevenWeatherActivity extends BaseActivity implements View.OnClickLi
 
 
     private SevenWeatherContract.Presenter presenter = new SevenWeatherPresenter(this);
-
+    private ViewLoading mLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -255,6 +258,27 @@ public class SevenWeatherActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void setWeatherBg(BaseDrawer.Type aDefault) {
         bgView.setDrawerType(aDefault);
+    }
+
+    @Override
+    public void startLoading() {
+        // 添加Loading
+        mLoading = new ViewLoading(this, Constant.loadingStyle) {
+            @Override
+            public void loadCancel() {
+
+            }
+        };
+        if (!mLoading.isShowing()) {
+            mLoading.show();
+        }
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                if (mLoading != null && mLoading.isShowing()) {
+                    mLoading.dismiss();
+                }
+            }
+        }, 2000);
     }
 
 

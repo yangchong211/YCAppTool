@@ -29,6 +29,7 @@ public interface SevenWeatherContract {
         Context getActivity();
         //设置背景
         void setWeatherBg(BaseDrawer.Type aDefault);
+        void startLoading();
     }
 
     //Presenter控制器

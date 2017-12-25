@@ -33,15 +33,18 @@ public class WTexPagerPresenter implements WTexPagerContract.Presenter {
         mSubscriptions = new CompositeSubscription();
     }
 
+
     @Override
     public void subscribe() {
 
     }
 
+
     @Override
     public void unSubscribe() {
         mSubscriptions.clear();
     }
+
 
     @Override
     public void getData(String mType) {

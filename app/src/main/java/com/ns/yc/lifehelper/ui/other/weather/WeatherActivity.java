@@ -47,7 +47,6 @@ public class WeatherActivity extends BaseActivity {
     public AppBarLayout appBar;
     @Bind(R.id.fragment_container)
     public FrameLayout fragmentContainer;
-    private WeatherFragment weatherFragment;
 
     @Override
     public int getContentView() {
@@ -80,7 +79,7 @@ public class WeatherActivity extends BaseActivity {
     private void initFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        weatherFragment = new WeatherFragment();
+        WeatherFragment weatherFragment = new WeatherFragment();
         //ft.replace(R.id.fragment_container, weatherFragment,null);
         ft.add(R.id.fragment_container,weatherFragment);
         ft.commit();

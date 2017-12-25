@@ -178,6 +178,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                                 startActivity(ExpressDeliveryActivity.class);
                                 break;
                             case 1:
+
                                 startActivity(WeatherActivity.class);
                                 break;
                             case 2:

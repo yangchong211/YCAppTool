@@ -142,7 +142,9 @@ public class PageFragment extends BaseFragment implements PageFragmentContract.V
     }
 
     public void clearTasks() {
-        mList.clear();
+        if(mList!=null){
+            mList.clear();
+        }
     }
 
     public void insertTask(TaskDetailEntity task) {

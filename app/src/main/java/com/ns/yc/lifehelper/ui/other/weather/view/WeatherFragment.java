@@ -24,7 +24,6 @@ import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherForecast;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherLive;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherSuggestion;
 import com.ns.yc.lifehelper.ui.other.weather.model.WeathersModel;
-import com.ns.yc.lifehelper.ui.other.weather.weight.IndicatorView;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 
 import java.util.ArrayList;
@@ -62,8 +61,8 @@ public class WeatherFragment extends BaseFragment {
     TextView tvAqi;
     @Bind(R.id.tv_quality)
     TextView tvQuality;
-    @Bind(R.id.indicator_view_aqi)
-    IndicatorView indicatorViewAqi;
+//    @Bind(R.id.indicator_view_aqi)
+//    IndicatorView indicatorViewAqi;
     @Bind(R.id.tv_advice)
     TextView tvAdvice;
     @Bind(R.id.tv_city_rank)
@@ -85,7 +84,6 @@ public class WeatherFragment extends BaseFragment {
     private WeatherForecastAdapter forecastAdapter;
     private WeatherLifeIndexAdapter lifeIndexAdapter;
     private String id = "101010100";
-    private int type = 1;
     private ViewLoading mLoading;
 
     @Override
@@ -100,11 +98,13 @@ public class WeatherFragment extends BaseFragment {
         activity = (WeatherActivity) context;
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         activity = null;
     }
+
 
     @Override
     public int getContentView() {
@@ -284,7 +284,7 @@ public class WeatherFragment extends BaseFragment {
                             public void onNext(WeatherAirLive weatherAirLive) {
                                 if(weatherAirLive!=null){
                                     tvAqi.setText(weatherAirLive.getAQI());
-                                    indicatorViewAqi.setIndicatorValue(Integer.valueOf(weatherAirLive.getAQI()));
+//                                    indicatorViewAqi.setIndicatorValue(Integer.valueOf(weatherAirLive.getAQI()));
                                     tvCityRank.setText(weatherAirLive.getPrimary());
                                 }
                                 if (mLoading != null && mLoading.isShowing()) {

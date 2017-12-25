@@ -85,6 +85,7 @@ public class GoldMainActivity extends BaseActivity implements View.OnClickListen
         presenter.initManagerList();
     }
 
+
     private void initToolBar() {
         toolbarTitle.setText("稀土掘金");
     }
