@@ -9,8 +9,8 @@ android {
         applicationId "com.ns.yc.lifehelper"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 5
-        versionName "1.5"
+        versionCode 7
+        versionName "1.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         /*ndk {
