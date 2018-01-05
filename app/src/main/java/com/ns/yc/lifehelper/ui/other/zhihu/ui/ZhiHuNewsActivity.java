@@ -6,11 +6,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.fragment.ZhiHuDailyFragment;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.fragment.ZhiHuHotFragment;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.fragment.ZhiHuSectionFragment;
@@ -75,6 +76,8 @@ public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.ll_title_menu:
                 finish();
+                break;
+            default:
                 break;
         }
     }

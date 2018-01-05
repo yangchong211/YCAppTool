@@ -16,18 +16,20 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantImageApi;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.douMovie.view.activity.MovieDetailActivity;
 import com.ns.yc.lifehelper.ui.other.douMovie.view.activity.MovieTopActivity;
 import com.ns.yc.lifehelper.ui.other.douMovie.view.adapter.DouMovieAdapter;
 import com.ns.yc.lifehelper.ui.other.douMovie.bean.DouHotMovieBean;
 import com.ns.yc.lifehelper.ui.other.douMovie.model.HotMovieModel;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
@@ -52,7 +54,7 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
     @Bind(R.id.toolbar_title)
     TextView toolbarTitle;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private DouMovieAdapter adapter;
 
     @Override
@@ -62,7 +64,7 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override
@@ -114,6 +116,8 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
         switch (view.getId()){
             case R.id.ll_title_menu:
                 finish();
+                break;
+            default:
                 break;
         }
     }

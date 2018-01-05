@@ -12,14 +12,13 @@ import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
-import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BannerImageStrLoader;
-import com.ns.yc.lifehelper.base.BaseApplication;
-import com.ns.yc.lifehelper.base.BaseDelegateAdapter;
-import com.ns.yc.lifehelper.base.BaseFragment;
-import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
+import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.ns.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
@@ -35,6 +34,7 @@ import com.ns.yc.lifehelper.ui.other.gold.view.activity.GoldMainActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myMusic.MyMusicActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.activity.TxWeChatNewsActivity;
+import com.ns.yc.lifehelper.ui.other.myNews.wxNews.WxNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.SongCiActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.YuanQuActivity;
@@ -46,12 +46,9 @@ import com.ns.yc.lifehelper.ui.other.toDo.view.ToDoTimerActivity;
 import com.ns.yc.lifehelper.ui.other.weather.SevenWeatherActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
+import com.yc.cn.ycbannerlib.first.BannerView;
+import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 import com.yc.cn.ycbaseadapterlib.first.BaseViewHolder;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
-import com.youth.banner.listener.OnBannerClickListener;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -76,8 +73,9 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
 
     private MainActivity activity;
     private FindFragmentContract.Presenter presenter = new FindFragmentPresenter(this);
-    private List<DelegateAdapter.Adapter> mAdapters;        //存放各个模块的适配器
-    private Banner mBanner;
+    /** 存放各个模块的适配器*/
+    private List<DelegateAdapter.Adapter> mAdapters;
+    private BannerView mBanner;
     private Realm realm;
 
 
@@ -96,14 +94,20 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        //开始轮播
+    public void onPause() {
+        super.onPause();
         if(mBanner!=null){
-            mBanner.startAutoPlay();
+            mBanner.pause();
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(mBanner!=null){
+            mBanner.resume();
+        }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,10 +119,6 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //结束轮播
-        if(mBanner!=null){
-            mBanner.stopAutoPlay();
-        }
         presenter.unSubscribe();
     }
 
@@ -220,8 +220,6 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
-                //TabLayout tabLayout = holder.getView(R.id.tab_layout);
-                //ViewPager vpContent = holder.getView(R.id.vp_content);
                 TabLayout tabLayout = (TabLayout) holder.getItemView().findViewById(R.id.tab_layout);
                 ViewPager vpContent = (ViewPager) holder.getItemView().findViewById(R.id.vp_content);
                 mTitleList.add("综合");
@@ -255,32 +253,13 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
 
 
     @Override
-    public void setBanner(Banner mBanner,ArrayList<String> arrayList) {
+    public void setBanner(BannerView mBanner, List<Object> arrayList) {
         this.mBanner = mBanner;
-        //设置banner样式
-        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-        //设置图片加载器
-        mBanner.setImageLoader(new BannerImageStrLoader());
-        //设置图片集合
-        mBanner.setImages(arrayList);
-        //设置banner动画效果
-        mBanner.setBannerAnimation(Transformer.DepthPage);
-        //设置标题集合（当banner样式有显示title时）
-        //        mBanner.setBannerTitles(titles);
-        //设置自动轮播，默认为true
-        mBanner.isAutoPlay(true);
-        //设置轮播时间
-        mBanner.setDelayTime(5000);
-        //设置指示器位置（当banner模式中有指示器时）
-        mBanner.setIndicatorGravity(BannerConfig.CENTER);
-        //banner设置方法全部调用完毕时最后调用
-        mBanner.start();
-        mBanner.setOnBannerClickListener(new OnBannerClickListener() {
-            @Override
-            public void OnBannerClick(int position) {
-                ToastUtils.showShort("轮播图被点击了"+position);
-            }
-        });
+        mBanner.setHintGravity(2);
+        mBanner.setAnimationDuration(1000);
+        mBanner.setPlayDelay(2000);
+        mBanner.setHintPadding(0,0,0, SizeUtil.dip2px(activity,10));
+        mBanner.setAdapter(new BaseBannerPagerAdapter(activity, arrayList));
     }
 
     @Override
@@ -310,6 +289,8 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
             case 7:
                 startActivity(TxWeChatNewsActivity.class);
                 break;
+            default:
+                break;
         }
     }
 
@@ -326,6 +307,8 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
                 Intent intent2 = new Intent(activity, WebViewActivity.class);
                 intent2.putExtra("url", "http://www.ximalaya.com/zhubo/71989305/");
                 activity.startActivity(intent2);
+                break;
+            default:
                 break;
         }
     }
@@ -358,6 +341,8 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
             case 7:
                 startActivity(WorkDoActivity.class);
                 break;
+            default:
+                break;
         }
     }
 
@@ -372,6 +357,8 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
                 break;
             case 2:
                 startActivity(DouBookActivity.class);
+                break;
+            default:
                 break;
         }
     }
@@ -388,8 +375,33 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
             case 2:
                 startActivity(FastLookActivity.class);
                 break;
+            default:
+                break;
         }
     }
+
+    @Override
+    public void setNewsList2Click(int position, String url) {
+        if(position>-1 && url!=null && url.length()>0){
+            Intent intent = new Intent(activity, WebViewActivity.class);
+            intent.putExtra("url",url);
+            startActivity(intent);
+        }else if(position==0){
+            startActivity(WxNewsActivity.class);
+        }
+    }
+
+    @Override
+    public void setNewsList5Click(int position, String url) {
+        if(position>-1 && url!=null && url.length()>0){
+            Intent intent = new Intent(activity, WebViewActivity.class);
+            intent.putExtra("url",url);
+            startActivity(intent);
+        }else if(position==0){
+            startActivity(WxNewsActivity.class);
+        }
+    }
+
 
 
 }

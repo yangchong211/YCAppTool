@@ -39,9 +39,12 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private BannerPagerAdapter mAdapter;
 
     private enum ITEM_TYPE {
-        ITEM_TOP,       //滚动栏
-        ITEM_DATE,      //日期
-        ITEM_CONTENT    //内容
+        //滚动栏
+        ITEM_TOP,
+        //日期
+        ITEM_DATE,
+        //内容
+        ITEM_CONTENT
     }
 
 

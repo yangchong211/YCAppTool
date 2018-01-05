@@ -4,12 +4,13 @@ import android.app.Activity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.bean.GanKIoDataBean;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 
 /**

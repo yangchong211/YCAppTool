@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.cache.CacheZhLike;
 import com.ns.yc.lifehelper.ui.main.contract.WebViewAnimContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;

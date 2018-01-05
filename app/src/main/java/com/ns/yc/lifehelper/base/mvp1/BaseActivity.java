@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base;
+package com.ns.yc.lifehelper.base.mvp1;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -10,8 +10,7 @@ import android.view.WindowManager;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
-
-import javax.inject.Inject;
+import com.ns.yc.lifehelper.base.app.AppManager;
 
 import butterknife.ButterKnife;
 
@@ -19,26 +18,23 @@ import butterknife.ButterKnife;
  * ================================================
  * 作    者：杨充
  * 版    本：1.0
- * 创建日期：2017/11/23
- * 描    述：改版封装MVP结构的Activity的父类
+ * 创建日期：2017/5/18
+ * 描    述：所有Activity的父类
  * 修订历史：
  * ================================================
  */
-public abstract class BaseMvpActivity<T extends BasePresenter> extends AppCompatActivity implements BaseView{
+public abstract class BaseActivity extends AppCompatActivity{
 
-    @Inject
-    protected T mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
         ButterKnife.bind(this);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);              //避免切换横竖屏
-        if(mPresenter!=null){
-            mPresenter.subscribe();
-        }
-        AppManager.getAppManager().addActivity(this);                  //将当前Activity添加到容器
+        //避免切换横竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        //将当前Activity添加到容器
+        AppManager.getAppManager().addActivity(this);
         initView();
         initListener();
         initData();
@@ -47,18 +43,14 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends AppCompat
         }
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        initLeakCanary();             //测试内存泄漏，正式一定要隐藏
-        //注意一定要先做销毁mPresenter.unSubscribe()，然后在调用这步ButterKnife.unbind(this)，销毁所有控件对象
-        //查询unbind源码可知，执行这步后会将创建所有控件对象置null，如果后调用mPresenter.unSubscribe()，
-        //那么如果有对象在做执行行为，将会导致控件对象报空指针。一定注意先后顺序。
-        if(mPresenter!=null){
-            mPresenter.unSubscribe();
-        }
-        ButterKnife.unbind(this);
-        AppManager.getAppManager().removeActivity(this);             //将当前Activity移除到容器
+        //测试内存泄漏，正式一定要隐藏
+        initLeakCanary();
+        //将当前Activity移除到容器
+        AppManager.getAppManager().removeActivity(this);
         //AppManager.getAppManager().finishActivity(this);
     }
 
@@ -75,11 +67,14 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends AppCompat
 
     @Override
     protected void onPause() {
-        super.onStop();
+        super.onPause();
     }
 
 
-    /** 返回一个用于显示界面的布局id */
+    /**
+     * 返回一个用于显示界面的布局id
+     * @return          视图id
+     */
     public abstract int getContentView();
 
     /** 初始化View的代码写在这个方法中 */

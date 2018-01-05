@@ -18,17 +18,18 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.cache.CacheNotePad;
 import com.ns.yc.lifehelper.ui.other.notePad.activity.NotePadDetailActivity;
 import com.ns.yc.lifehelper.ui.other.notePad.activity.NotePadNewActivity;
 import com.ns.yc.lifehelper.ui.other.notePad.adapter.NotePadListAdapter;
 import com.ns.yc.lifehelper.ui.other.notePad.bean.NotePadDetail;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class NotePadActivity extends BaseActivity implements View.OnClickListene
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private NotePadListAdapter adapter;
     private Realm realm;
     private RealmResults<CacheNotePad> cacheNotePads;
@@ -84,7 +85,7 @@ public class NotePadActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override

@@ -42,9 +42,6 @@
         <item>@drawable/bg_small_kites_min</item>
         <item>@drawable/bg_small_lake_min</item>
         <item>@drawable/bg_small_magnolia_trees_min</item>
-        <item>@drawable/bg_small_solda_min</item>
-        <item>@drawable/bg_small_tree_min</item>
-        <item>@drawable/bg_small_tulip_min</item>
         <item>@drawable/bg_small_leaves_min</item>
     </integer-array>
 

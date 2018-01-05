@@ -18,18 +18,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantBookReader;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderLocalAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderRecommendBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.support.RefreshCollectionListEvent;
 import com.ns.yc.lifehelper.ui.other.bookReader.manager.CollectionsManager;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
 import com.ns.yc.lifehelper.utils.FileUtils;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class BookReaderLocalActivity extends BaseActivity implements View.OnClic
     @Bind(R.id.toolbar_title)
     TextView toolbarTitle;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private ReaderLocalAdapter adapter;
 
     @Override
@@ -63,7 +64,7 @@ public class BookReaderLocalActivity extends BaseActivity implements View.OnClic
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override

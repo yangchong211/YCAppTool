@@ -8,11 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.SubCategoryAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryList;
 import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
@@ -20,6 +18,9 @@ import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.ReadBookDetailActi
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.SubCategoryListActivity;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.RxUtil;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,7 +43,7 @@ public class SubCategoryFragment extends BaseFragment {
 
 
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private SubCategoryListActivity activity;
     private String name = "";
     private String minor = "";

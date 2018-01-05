@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base;
+package com.ns.yc.lifehelper.base.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

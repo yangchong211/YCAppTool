@@ -1,6 +1,6 @@
 package com.ns.yc.lifehelper.ui.me.presenter;
 
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.me.contract.MeNewsCollectContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
 

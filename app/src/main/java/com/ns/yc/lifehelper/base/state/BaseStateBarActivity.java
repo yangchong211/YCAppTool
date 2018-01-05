@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base;
+package com.ns.yc.lifehelper.base.state;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.base.app.AppManager;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import butterknife.ButterKnife;
@@ -70,7 +71,7 @@ public abstract class BaseStateBarActivity extends AppCompatActivity{
 
     @Override
     protected void onPause() {
-        super.onStop();
+        super.onPause();
     }
 
 

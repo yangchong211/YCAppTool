@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.GuidePresenter;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
@@ -61,10 +61,13 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
     /**
      * 屏蔽返回键
      */
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
                 return true;
+            default:
+                break;
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -116,6 +119,8 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
             case R.id.cdv_time:
                 cdvTime.stop();
                 finish();
+                break;
+            default:
                 break;
         }
     }

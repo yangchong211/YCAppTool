@@ -1,8 +1,8 @@
 package com.ns.yc.lifehelper.ui.me.contract;
 
 
-import com.ns.yc.lifehelper.base.BasePresenter;
-import com.ns.yc.lifehelper.base.BaseView;
+import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp1.BaseView;
 import com.ns.yc.lifehelper.cache.CacheZhLike;
 
 import java.util.List;

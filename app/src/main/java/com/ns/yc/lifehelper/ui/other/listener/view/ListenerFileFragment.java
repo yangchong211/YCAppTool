@@ -11,7 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

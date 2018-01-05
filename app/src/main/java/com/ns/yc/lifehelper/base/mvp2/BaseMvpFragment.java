@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base;
+package com.ns.yc.lifehelper.base.mvp2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
@@ -21,7 +22,10 @@ import butterknife.ButterKnife;
  * 修订历史：
  * ================================================
  */
-public abstract class BaseMvpFragment<T extends BasePresenter> extends Fragment implements BaseView{
+public abstract class BaseMvpFragment<T extends BaseMvpPresenter> extends Fragment implements BaseMvpView {
+
+    @Inject
+    protected T mPresenter;
 
     @Nullable
     @Override
@@ -34,6 +38,7 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends Fragment 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mPresenter.subscribe(this);
         initView();
         initListener();
         initData();
@@ -49,6 +54,9 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends Fragment 
     public void onDestroy() {
         super.onDestroy();
         initLeakCanary();             //测试内存泄漏，正式一定要隐藏
+        if (mPresenter != null){
+            mPresenter.unSubscribe();
+        }
     }
 
     /** 返回一个用于显示界面的布局id */

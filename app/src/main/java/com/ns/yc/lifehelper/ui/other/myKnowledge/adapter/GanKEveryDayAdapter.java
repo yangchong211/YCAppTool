@@ -8,11 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.bean.GanKEveryDay;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 
 /**

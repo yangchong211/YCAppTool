@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.service.PicBeautifulService;
 import com.ns.yc.lifehelper.ui.other.myPicture.adapter.PicBeautifulAdapter;
 import com.ns.yc.lifehelper.ui.other.myPicture.bean.PicBeautifulMainBean;

@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
+import com.hyphenate.EMConnectionListener;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.entry.TabEntity;
 import com.ns.yc.lifehelper.ui.other.imTalk.contract.ImTalkContract;
+import com.ns.yc.lifehelper.utils.IMEMClientUtils;
 
 import java.util.ArrayList;
 
@@ -50,6 +52,7 @@ public class ImTalkPresenter implements ImTalkContract.Presenter {
         this.activity = activity;
     }
 
+
     @Override
     public ArrayList<CustomTabEntity> getTabEntity() {
         ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
@@ -66,5 +69,23 @@ public class ImTalkPresenter implements ImTalkContract.Presenter {
         return mTabEntities;
     }
 
+
+    @Override
+    public void addConnectionListener() {
+        //注册一个监听连接状态的listener
+        IMEMClientUtils.imAddConnectionListener(new MyConnectionListener());
+    }
+
+    //实现ConnectionListener接口
+    private class MyConnectionListener implements EMConnectionListener {
+        @Override
+        public void onConnected() {
+            //已连接到服务器
+        }
+        @Override
+        public void onDisconnected(final int error) {
+            mView.onDisconnected(error);
+        }
+    }
 
 }

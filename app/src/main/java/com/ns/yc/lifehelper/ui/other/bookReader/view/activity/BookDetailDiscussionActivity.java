@@ -14,21 +14,22 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantZssqApi;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.BookDetailCommentAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.BookDetailDiscussionAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailDiscussionComment;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailDiscussionContent;
 import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.lifehelper.ui.weight.readerBook.BookContentTextView;
 import com.ns.yc.lifehelper.utils.FormatUtils;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class BookDetailDiscussionActivity extends BaseActivity implements View.O
     @Bind(R.id.toolbar_title)
     TextView toolbarTitle;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private BookDetailDiscussionAdapter adapter;
     private HeaderViewHolder headerViewHolder;
     private String id;
@@ -73,7 +74,7 @@ public class BookDetailDiscussionActivity extends BaseActivity implements View.O
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override

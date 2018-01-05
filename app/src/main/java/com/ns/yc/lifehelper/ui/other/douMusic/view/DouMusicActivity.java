@@ -9,8 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.douMusic.view.fragment.DouMusicFragment;
 
 import java.util.ArrayList;
@@ -76,6 +76,8 @@ public class DouMusicActivity extends BaseActivity implements View.OnClickListen
         switch (view.getId()){
             case R.id.ll_title_menu:
                 finish();
+                break;
+            default:
                 break;
         }
     }

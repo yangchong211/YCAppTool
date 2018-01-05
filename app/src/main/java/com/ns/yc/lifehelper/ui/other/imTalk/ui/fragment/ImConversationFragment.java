@@ -1,13 +1,15 @@
 package com.ns.yc.lifehelper.ui.other.imTalk.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.imTalk.model.ConversationList;
 import com.ns.yc.lifehelper.ui.other.imTalk.ui.ImTalkActivity;
+import com.ns.yc.lifehelper.ui.other.imTalk.ui.activity.ImTalkDetailActivity;
 import com.ns.yc.lifehelper.ui.other.imTalk.ui.adapter.ImConversationAdapter;
 import com.ns.yc.lifehelper.utils.IMEMClientUtils;
 
@@ -53,19 +55,25 @@ public class ImConversationFragment extends BaseFragment {
         return R.layout.fragment_im_conversation;
     }
 
+
     @Override
     public void initView() {
         initRecycleView();
     }
 
+    
     @Override
     public void initListener() {
         adapter.setOnItemClickListener(new ImConversationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position , int id) {
-                // 获取当前登录用户的 username
-                String currUsername = IMEMClientUtils.getIMemClientInstance().getCurrentUser();
-
+                if(lists.size()>position && position>-1){
+                    // 获取当前登录用户的 username
+                    String currUsername = IMEMClientUtils.getIMemClientInstance().getCurrentUser();
+                    Intent intent = new Intent(activity, ImTalkDetailActivity.class);
+                    intent.putExtra("name",currUsername);
+                    startActivity(intent);
+                }
             }
         });
     }

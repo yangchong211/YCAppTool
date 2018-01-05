@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.weight.imageView.TouchImageView;
 import com.squareup.picasso.Picasso;
 

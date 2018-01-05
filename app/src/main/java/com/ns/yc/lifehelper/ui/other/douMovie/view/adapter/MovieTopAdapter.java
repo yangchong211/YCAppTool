@@ -5,11 +5,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.douMovie.bean.DouHotMovieBean;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 /**
  * Created by PC on 2017/8/21.

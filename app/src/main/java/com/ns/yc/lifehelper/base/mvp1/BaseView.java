@@ -1,4 +1,5 @@
-package com.ns.yc.lifehelper.base;
+package com.ns.yc.lifehelper.base.mvp1;
+
 
 /**
  * ================================================
@@ -9,10 +10,6 @@ package com.ns.yc.lifehelper.base;
  * 修订历史：
  * ================================================
  */
-public interface BasePresenter {
+public interface BaseView {
 
-    //绑定数据
-    void subscribe();
-    //解除绑定
-    void unSubscribe();
 }

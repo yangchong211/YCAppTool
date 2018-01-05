@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.test;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 
 /**
  * Created by PC on 2017/11/29.

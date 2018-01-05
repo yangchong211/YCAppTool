@@ -11,8 +11,8 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.listener.view.ListenerFileFragment;
 import com.ns.yc.lifehelper.ui.other.listener.view.ListenerListFragment;
 import com.ns.yc.lifehelper.ui.other.listener.view.ListenerSettingFragment;

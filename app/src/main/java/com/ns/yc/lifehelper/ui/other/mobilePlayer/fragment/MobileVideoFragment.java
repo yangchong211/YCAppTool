@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantKeys;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.activity.MobileVideoPlayActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.adapter.MobileVideoListAdapter;

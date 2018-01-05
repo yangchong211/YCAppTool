@@ -8,7 +8,7 @@ import android.util.Log;
 import com.blankj.utilcode.util.AppUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.base.BaseConfig;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.LogUtils;

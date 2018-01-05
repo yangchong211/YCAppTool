@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.douBook.bean.DouBookDetailBean;
 import com.ns.yc.lifehelper.ui.other.douBook.model.DouBookDetailModel;
 import com.ns.yc.lifehelper.ui.other.douMovie.view.activity.MovieWebViewActivity;

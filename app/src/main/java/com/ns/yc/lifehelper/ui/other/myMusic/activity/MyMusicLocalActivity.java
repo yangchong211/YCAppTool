@@ -11,8 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.myMusic.fragment.MusicLocalDetailFragment;
 import com.ns.yc.lifehelper.ui.other.myMusic.weight.OutPlayerController;
 

@@ -14,15 +14,16 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantALiYunApi;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.bean.ExpressDeliverySearchBean;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.adapter.ExpressDeliveryAdapter;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.model.ExpressDeliverySearchModel;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import butterknife.Bind;
 import rx.Subscriber;
@@ -37,7 +38,7 @@ import rx.schedulers.Schedulers;
 public class ExpressDeliveryInfoActivity extends BaseActivity implements View.OnClickListener {
 
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
     @Bind(R.id.toolbar_title)
@@ -53,7 +54,7 @@ public class ExpressDeliveryInfoActivity extends BaseActivity implements View.On
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override

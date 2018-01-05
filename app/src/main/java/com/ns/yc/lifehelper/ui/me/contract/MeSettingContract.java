@@ -3,8 +3,9 @@ package com.ns.yc.lifehelper.ui.me.contract;
 
 import android.app.Activity;
 
-import com.ns.yc.lifehelper.base.BasePresenter;
-import com.ns.yc.lifehelper.base.BaseView;
+import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp1.BaseView;
+import com.ns.yc.lifehelper.bean.UpdateBean;
 
 /**
  * ================================================
@@ -41,6 +42,10 @@ public interface MeSettingContract {
         void showCacheSize();
         //设置清理缓存后的文本
         void setClearText();
+        void setErrorView(Throwable e);
+        void showUpdateDialog(UpdateBean updateBean);
+        void showError(String s);
+        void finishActivity();
     }
 
     //Presenter控制器
@@ -57,6 +62,9 @@ public interface MeSettingContract {
         void saveIsLauncherAlwaysShowImg(boolean isLauncherAlwaysShowImg);
         //设置清理缓存
         void cleanAppCache(Activity activity);
+        //版本更新
+        void checkVersion(String appVersionName);
+        void exitLogout();
     }
 
 

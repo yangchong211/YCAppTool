@@ -15,6 +15,7 @@ import com.ns.yc.lifehelper.api.Constant;
  */
 public enum BaseConfig {
 
+    //对象
     INSTANCE;
 
     private boolean isLogin;
@@ -23,6 +24,7 @@ public enum BaseConfig {
     private boolean isProbabilityShowImg;
     private int thumbnailQuality;
     private String bannerUrl;
+    private boolean isNight;
 
 
     public void initConfig(){
@@ -38,6 +40,8 @@ public enum BaseConfig {
         thumbnailQuality = SPUtils.getInstance(Constant.SP_NAME).getInt(Constant.KEY_THUMBNAIL_QUALITY, 1);
         //6.Banner URL 用于加载页显示
         bannerUrl = SPUtils.getInstance(Constant.SP_NAME).getString(Constant.KEY_BANNER_URL, "");
+        //7.初始化夜间模式
+        isNight = SPUtils.getInstance(Constant.SP_NAME).getBoolean(Constant.KEY_NIGHT_STATE);
     }
 
     public boolean isLogin() {
@@ -92,5 +96,14 @@ public enum BaseConfig {
     public void setBannerUrl(String bannerUrl) {
         SPUtils.getInstance(Constant.SP_NAME).put(Constant.KEY_BANNER_URL,bannerUrl);
         this.bannerUrl = bannerUrl;
+    }
+
+    public boolean isNight() {
+        return isNight;
+    }
+
+    public void setNight(boolean night) {
+        SPUtils.getInstance(Constant.SP_NAME).put(Constant.KEY_NIGHT_STATE,night);
+        this.isNight = night;
     }
 }

@@ -8,15 +8,16 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.MyKnowledgeActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.activity.KnowledgeImageActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.adapter.GanKOtherAdapter;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.bean.GanKIoDataBean;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.model.GanKIoDataModel;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ import rx.schedulers.Schedulers;
 public class KnowledgeOtherFragment  extends BaseFragment {
 
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private MyKnowledgeActivity activity;
     private GanKOtherAdapter adapter;
 

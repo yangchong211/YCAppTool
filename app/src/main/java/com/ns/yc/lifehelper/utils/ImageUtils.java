@@ -75,6 +75,7 @@ public class ImageUtils {
         }
     }
 
+
     /**
      * 加载人物，机构logo时，加载失败时显示默认图片
      * @param path          路径
@@ -97,7 +98,7 @@ public class ImageUtils {
 
     /**
      * 加载图片
-     * @param resId
+     * @param resId         string
      * @param target        控件
      */
     public static void loadImgByPicasso(Context context , String path , int resId, ImageView target) {
@@ -121,7 +122,7 @@ public class ImageUtils {
 
     /**
      * 加载图片
-     * @param resId
+     * @param resId         int
      * @param target        控件
      */
     public static void loadImgByPicasso(Context context , int path , int resId, ImageView target) {
@@ -198,6 +199,7 @@ public class ImageUtils {
                     .into(imageView);
         }
     }
+
 
     /**
      * 加载带有圆角的矩形图片  用glide处理

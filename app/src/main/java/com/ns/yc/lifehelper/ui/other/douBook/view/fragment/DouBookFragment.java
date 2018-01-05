@@ -7,16 +7,17 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.douBook.view.DouBookActivity;
 import com.ns.yc.lifehelper.ui.other.douBook.view.activity.DouBookDetailActivity;
 import com.ns.yc.lifehelper.ui.other.douBook.adapter.DouBookAdapter;
 import com.ns.yc.lifehelper.ui.other.douBook.bean.DouBookBean;
 import com.ns.yc.lifehelper.ui.other.douBook.model.DouBookModel;
 import com.ns.yc.lifehelper.ui.weight.manager.FullyGridLayoutManager;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import butterknife.Bind;
 import rx.Observer;
@@ -38,7 +39,7 @@ public class DouBookFragment extends BaseFragment {
 
     private static final String TYPE = "";
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private DouBookActivity activity;
     private String mType;
     private DouBookAdapter adapter;
@@ -192,7 +193,7 @@ public class DouBookFragment extends BaseFragment {
                 .subscribe(new Observer<DouBookBean>() {
                     @Override
                     public void onCompleted() {
-                        recyclerView.showRecycler();
+
                     }
 
                     @Override

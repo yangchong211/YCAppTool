@@ -20,8 +20,8 @@ import android.view.View;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.MainPageItem;
 import com.ns.yc.lifehelper.ui.other.toDo.contract.ToDoTimerContract;
 import com.ns.yc.lifehelper.ui.other.toDo.presenter.ToDoTimerPresenter;

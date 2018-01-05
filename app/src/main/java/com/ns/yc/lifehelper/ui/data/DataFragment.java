@@ -19,14 +19,11 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.adapter.NarrowImageAdapter;
 import com.ns.yc.lifehelper.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.bean.ImageIconBean;
 import com.ns.yc.lifehelper.ui.data.contract.DataFragmentContract;
 import com.ns.yc.lifehelper.ui.data.presenter.DataFragmentPresenter;
@@ -49,6 +46,10 @@ import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.ns.yc.lifehelper.ui.test.aidl.BankActivity;
 import com.ns.yc.lifehelper.ui.weight.MyGridView;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
     @Bind(R.id.tv_news_zhi_hu)
     TextView tvNewsZhiHu;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
 
 
     private MainActivity activity;
@@ -150,6 +151,8 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.tv_news_zhi_hu:
                 startActivity(ZhiHuNewsActivity.class);
+                break;
+            default:
                 break;
         }
     }
@@ -289,7 +292,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
         //recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setHorizontalScrollBarEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
-        recyclerView.addItemDecoration(new SpaceDecoration(SizeUtils.dp2px(8)));
+        recyclerView.addItemDecoration(new SpaceViewItemLine(SizeUtils.dp2px(8)));
         recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

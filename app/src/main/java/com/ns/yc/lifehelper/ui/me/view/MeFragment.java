@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.me.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeFragmentPresenter;
@@ -25,6 +26,8 @@ import com.ns.yc.lifehelper.ui.me.view.activity.MeQoneActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ns.yc.lifehelper.ui.other.timer.TimerActivity;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 
@@ -39,6 +42,7 @@ import butterknife.Bind;
  * ================================================
  */
 public class MeFragment extends BaseFragment implements View.OnClickListener , MeFragmentContract.View{
+
 
     @Bind(R.id.rl_me_timer)
     RelativeLayout rlMeTimer;
@@ -64,8 +68,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener , M
     TextView tvPersonName;
     @Bind(R.id.ll_person)
     LinearLayout llPerson;
-    private MainActivity activity;
 
+
+    private MainActivity activity;
     private MeFragmentContract.Presenter presenter = new MeFragmentPresenter(this);
 
     @Override
@@ -153,6 +158,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener , M
                     startActivity(MeLoginActivity.class);
                 }
                 break;
+            default:
+                break;
         }
     }
 
@@ -162,5 +169,14 @@ public class MeFragment extends BaseFragment implements View.OnClickListener , M
         Intent myIntentDial = new Intent("android.intent.action.CALL", Uri.parse("tel:" + number));
         startActivity(myIntentDial);
     }
+
+    /*@Subscribe
+    public void onEventMainThread(LoginSuccessEvent event) {
+        if (null != event) {
+            String msg = event.getMsg();
+            tvPersonName.setText(String.format("网友%s", msg));
+            ivPersonImage.setImageResource(R.drawable.image_default);
+        }
+    }*/
 
 }

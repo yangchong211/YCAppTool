@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseRecyclerViewAdapter;
+import com.ns.yc.lifehelper.base.adapter.BaseRecyclerViewAdapter;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherForecast;
 
 import java.util.List;

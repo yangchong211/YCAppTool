@@ -8,16 +8,17 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.CategoryListAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.CategoryList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
 import com.ns.yc.lifehelper.ui.weight.manager.FullyGridLayoutManager;
-import com.ns.yc.lifehelper.ui.weight.itemLine.SupportGridItemDecoration;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.RxUtil;
+
+import org.yczbj.ycrefreshviewlib.item.SupportGridItemLine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,10 +98,10 @@ public class ReaderCategoryActivity extends BaseActivity implements View.OnClick
     private void initRecycleView() {
         rvMale.setHasFixedSize(true);
         rvMale.setLayoutManager(new FullyGridLayoutManager(this, 3));
-        rvMale.addItemDecoration(new SupportGridItemDecoration(this));
+        rvMale.addItemDecoration(new SupportGridItemLine(this));
         rvFemale.setHasFixedSize(true);
         rvFemale.setLayoutManager(new FullyGridLayoutManager(this, 3));
-        rvFemale.addItemDecoration(new SupportGridItemDecoration(this));
+        rvFemale.addItemDecoration(new SupportGridItemLine(this));
         maleAdapter = new CategoryListAdapter(ReaderCategoryActivity.this, mMaleCategoryList, new ClickListener(Constant.Gender.MALE));
         femaleAdapter = new CategoryListAdapter(ReaderCategoryActivity.this, mFemaleCategoryList, new ClickListener(Constant.Gender.FEMALE));
         rvMale.setAdapter(maleAdapter);

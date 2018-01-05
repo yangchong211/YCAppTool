@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.gank.presenter;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
 import com.ns.yc.lifehelper.ui.other.gank.contract.GanKWebContract;
 

@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.BookReaderActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderFindAdapter;
@@ -16,7 +16,7 @@ import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderTopBookActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.support.FindBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.ReaderCategoryActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.ReaderSubjectActivity;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;

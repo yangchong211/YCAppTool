@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.utils.AppUtil;
 
 import butterknife.Bind;

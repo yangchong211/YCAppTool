@@ -8,17 +8,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantKeys;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.activity.MobileAudioPlayActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.adapter.MobileAudioListAdapter;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.localFile.FileManager;
 import com.ns.yc.lifehelper.utils.localFile.bean.AudioItem;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -37,7 +38,7 @@ import butterknife.Bind;
 public class MobileAudioFragment extends BaseFragment {
 
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private MobilePlayerActivity activity;
     private MobileAudioListAdapter adapter;
     public static ArrayList<AudioItem> musics;

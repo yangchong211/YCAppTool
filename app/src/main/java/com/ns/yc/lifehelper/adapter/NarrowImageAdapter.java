@@ -5,8 +5,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+
 
 /**
  * ================================================

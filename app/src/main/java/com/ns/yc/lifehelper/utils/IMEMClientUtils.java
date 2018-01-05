@@ -108,7 +108,7 @@ public class IMEMClientUtils {
             public void onError(int code, String message) {
             }
         });*/
-        EMClient.getInstance().logout(true, callBack);
+        EMClient.getInstance().logout(login, callBack);
     }
 
 

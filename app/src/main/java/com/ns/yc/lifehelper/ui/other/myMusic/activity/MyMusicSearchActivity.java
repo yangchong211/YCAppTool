@@ -4,9 +4,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
 
 import butterknife.Bind;
 
@@ -28,11 +29,11 @@ public class MyMusicSearchActivity extends BaseActivity implements View.OnClickL
     @Bind(R.id.ll_search)
     FrameLayout llSearch;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override

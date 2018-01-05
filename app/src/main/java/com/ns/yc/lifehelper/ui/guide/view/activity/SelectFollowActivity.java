@@ -9,10 +9,9 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.bean.SelectPoint;
 import com.ns.yc.lifehelper.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
@@ -20,6 +19,8 @@ import com.ns.yc.lifehelper.ui.guide.presenter.SelectFollowPresenter;
 import com.ns.yc.lifehelper.ui.guide.view.adapter.SelectFollowAdapter;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.yc.cn.ycrecycleviewlib.select.SelectRecyclerView;
+
+import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,14 @@ public class SelectFollowActivity extends BaseActivity implements SelectFollowCo
         initRecycleView();
     }
 
+
+    private void initToolBar() {
+        toolbarTitle.setText("关注点");
+        tvTitleRight.setVisibility(View.VISIBLE);
+        tvTitleRight.setText("跳过");
+    }
+
+
     @Override
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
@@ -119,14 +128,9 @@ public class SelectFollowActivity extends BaseActivity implements SelectFollowCo
                 }
                 presenter.goMainActivity();
                 break;
+            default:
+                break;
         }
-    }
-
-
-    private void initToolBar() {
-        toolbarTitle.setText("关注点");
-        tvTitleRight.setVisibility(View.VISIBLE);
-        tvTitleRight.setText("跳过");
     }
 
 
@@ -135,7 +139,7 @@ public class SelectFollowActivity extends BaseActivity implements SelectFollowCo
         adapter = new SelectFollowAdapter(this, lists);
         selectView.setAdapter(adapter);
         //下划线
-        SpaceDecoration itemDecoration = new SpaceDecoration(SizeUtils.dp2px(5));
+        SpaceViewItemLine itemDecoration = new SpaceViewItemLine(SizeUtils.dp2px(5));
         itemDecoration.setPaddingEdgeSide(false);
         itemDecoration.setPaddingStart(false);
         itemDecoration.setPaddingHeaderFooter(false);

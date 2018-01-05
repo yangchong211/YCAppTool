@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantBookReader;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.event.BookReaderSelectionEvent;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.fragment.BookReaderHelpFragment;
 import com.ns.yc.lifehelper.ui.weight.SelectionLayout;

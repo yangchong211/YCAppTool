@@ -91,7 +91,6 @@ public class Constant {
     public static String DATABASE_FILE_PATH_FILE_NAME = "data.realm";
     public static String DATABASE_FILE_BACKUP_PATH_FOLDER = "番茄周/备份";
     public static String DATABASE_FILE_EXPORT_PATH_FOLDER = "番茄周/导出";
-
     public static long AUTO_NOTIFY_INTERVAL_TIME = 60 * 60 * 1000;
     public static int AUTO_NOTIFY_NOTIFICATION_ID = 0;
     public interface MODE_OF_NEW_ACT {
@@ -99,6 +98,7 @@ public class Constant {
         int MODE_CREATE = 6;
         int MODE_QUICK = 7;
     }
+
 
     public interface CONFIG_KEY {
         String SHOW_WEEK_TASK = "SHOW_WEEK_TASK";
@@ -111,10 +111,12 @@ public class Constant {
         String AUTO_NOTIFY = "AUTO_NOTIFY";
     }
 
+
     public interface TaskState {
         int DEFAULT = 0;
         int FINISHED = 1;
     }
+
 
     public interface LikeType{
         int TYPE_ZHI_HU = 101;
@@ -122,6 +124,7 @@ public class Constant {
         int TYPE_WE_CHAT = 106;
         int TYPE_GOLD = 108;
     }
+
 
     public interface DetailKeys{
         String IT_DETAIL_URL = "url";
@@ -145,6 +148,7 @@ public class Constant {
     public static String KEY_IS_SHOW_IMG_RANDOM = "is_show_girl_random";    //启动页是否概率出现
     public static String KEY_THUMBNAIL_QUALITY = "thumbnail_quality";       //启动页是否概率出现
     public static String KEY_BANNER_URL = "banner_url";                     //启动页是否概率出现
+    public static String KEY_NIGHT_STATE = "night_state";                   //启动页夜间模式
 
 
     /**-------------------------------------集合-------------------------------------------------**/

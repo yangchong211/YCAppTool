@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseRecyclerViewAdapter;
+import com.ns.yc.lifehelper.base.adapter.BaseRecyclerViewAdapter;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherSuggestion;
 
 import java.util.List;

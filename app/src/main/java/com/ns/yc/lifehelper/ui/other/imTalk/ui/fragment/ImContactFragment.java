@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.imTalk.ui.fragment;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 
 /**
  * ================================================

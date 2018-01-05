@@ -14,8 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.myMusic.activity.MyMusicSearchActivity;
 import com.ns.yc.lifehelper.ui.other.myMusic.fragment.MyMusicNetFragment;
 import com.ns.yc.lifehelper.ui.other.myMusic.fragment.MyMusicLocalFragment;

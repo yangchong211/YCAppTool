@@ -7,7 +7,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.sharpBendOfBrain.SharpBendOfBrainActivity;
 import com.ns.yc.lifehelper.ui.other.sharpBendOfBrain.adapter.SharpBendLookAdapter;
 

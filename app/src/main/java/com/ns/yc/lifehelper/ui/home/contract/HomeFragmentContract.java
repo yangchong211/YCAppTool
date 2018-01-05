@@ -1,8 +1,8 @@
 package com.ns.yc.lifehelper.ui.home.contract;
 
 
-import com.ns.yc.lifehelper.base.BasePresenter;
-import com.ns.yc.lifehelper.base.BaseView;
+import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp1.BaseView;
 import com.ns.yc.lifehelper.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.weight.pileCard.ItemEntity;
@@ -35,7 +35,7 @@ public interface HomeFragmentContract {
         List<CharSequence> getMarqueeTitle();
         void bindView(MainActivity activity);
         ArrayList<ItemEntity> getHomePileData();
-        List<Integer> getBannerData();
+        List<Object> getBannerData();
     }
 
 

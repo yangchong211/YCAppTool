@@ -14,15 +14,16 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.SubHomeTopAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.BooksByCats;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.SubHomeTopBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class SubHomeTopRankActivity extends BaseActivity implements View.OnClick
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private String id = "";
     private String title = "";
     private SubHomeTopAdapter adapter;
@@ -62,7 +63,7 @@ public class SubHomeTopRankActivity extends BaseActivity implements View.OnClick
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override

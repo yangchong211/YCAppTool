@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.service.PicGroupService;
 import com.ns.yc.lifehelper.ui.other.myPicture.adapter.PicBeautifulGroupAdapter;
 import com.ns.yc.lifehelper.ui.other.myPicture.bean.PicBeautifulContentBean;

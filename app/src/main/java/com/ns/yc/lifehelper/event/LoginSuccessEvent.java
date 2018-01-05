@@ -9,7 +9,8 @@ public class LoginSuccessEvent {
 
     private String msg;
 
-    public LoginSuccessEvent(String msg) {//事件传递参数
+    //事件传递参数
+    public LoginSuccessEvent(String msg) {
         this.msg = msg;
     }
 

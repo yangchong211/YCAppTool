@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base;
+package com.ns.yc.lifehelper.base.mvp1;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.ns.yc.lifehelper.R;
-import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import butterknife.ButterKnife;
 
@@ -24,16 +21,12 @@ import butterknife.ButterKnife;
  * 修订历史：
  * ================================================
  */
-public abstract class BaseStateFragment extends Fragment {
-
-    protected StateLayoutManager statusLayoutManager;
+public abstract class BaseFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.base_state_view, container , false);
-        initStatusLayout();
-        initBaseView(view);
+        View view = inflater.inflate(getContentView(), container , false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -58,17 +51,8 @@ public abstract class BaseStateFragment extends Fragment {
         initLeakCanary();             //测试内存泄漏，正式一定要隐藏
     }
 
-    /**
-     * 获取到子布局
-     * @param view
-     */
-    private void initBaseView(View view) {
-        LinearLayout fl_main = (LinearLayout) view.findViewById(R.id.ll_main);
-        fl_main.addView(statusLayoutManager.getRootLayout());
-    }
-
-    /** 状态切换 **/
-    protected abstract void initStatusLayout();
+    /** 返回一个用于显示界面的布局id */
+    public abstract int getContentView();
 
     /** 初始化View的代码写在这个方法中 */
     public abstract void initView();

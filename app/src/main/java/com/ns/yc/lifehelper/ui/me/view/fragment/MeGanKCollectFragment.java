@@ -12,16 +12,17 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.me.contract.MeGanKCollectContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeGanKCollectPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
 import com.ns.yc.lifehelper.ui.me.view.adapter.MeGanKCollectAdapter;
 import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ import butterknife.Bind;
 public class MeGanKCollectFragment extends BaseFragment implements MeGanKCollectContract.View{
 
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
 
     private MeGanKCollectContract.Presenter presenter = new MeGanKCollectPresenter(this);
 

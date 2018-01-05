@@ -161,6 +161,30 @@ public class RxUtil {
     }
 
     /**
+     * 统一返回结果处理
+     * @param <T>
+     * @return
+     */
+    public static <T> Observable.Transformer<T, T> handleMyResult() {   //compose判断结果
+        return new Observable.Transformer<T, T>() {
+            @Override
+            public Observable<T> call(Observable<T> httpResponseObservable) {
+                return httpResponseObservable.flatMap(new Func1<T, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(T tMyHttpResponse) {
+                        if(tMyHttpResponse !=null) {
+                            return createData(tMyHttpResponse);
+                        } else {
+                            return Observable.error(new ApiException("服务器返回error"));
+                        }
+                    }
+                });
+            }
+        };
+    }
+
+
+    /**
      * 生成Observable
      * @param <T>
      * @return

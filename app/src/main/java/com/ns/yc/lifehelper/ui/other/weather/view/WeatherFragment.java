@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantEnvicloudApi;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.other.weather.adapter.WeatherDetailAdapter;
 import com.ns.yc.lifehelper.ui.other.weather.adapter.WeatherForecastAdapter;

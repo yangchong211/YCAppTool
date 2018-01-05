@@ -1,6 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.nicePic.parseHtmlPic;
 
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 
 
 /**

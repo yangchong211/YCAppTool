@@ -31,7 +31,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantImageApi;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.toDo.view.adapter.ChoosePriorityAdapter;
 import com.ns.yc.lifehelper.ui.other.workDo.contract.WorkNewContract;

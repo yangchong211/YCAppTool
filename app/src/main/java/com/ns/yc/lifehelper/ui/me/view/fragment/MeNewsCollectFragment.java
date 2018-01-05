@@ -9,7 +9,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.cache.CacheZhLike;
 import com.ns.yc.lifehelper.callback.DefaultItemTouchHelpCallback;
 import com.ns.yc.lifehelper.ui.me.contract.MeNewsCollectContract;

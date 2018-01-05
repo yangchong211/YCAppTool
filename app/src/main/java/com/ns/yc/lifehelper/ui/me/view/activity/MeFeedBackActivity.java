@@ -15,7 +15,7 @@ import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.IntentUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.utils.PermissionsUtils;
 import com.ns.yc.ycmultiinputviewlib.MultiEditInputView;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;

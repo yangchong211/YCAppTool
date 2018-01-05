@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantZssqApi;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.GlideRoundTransform;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.HotReviewAdapter;

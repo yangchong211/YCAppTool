@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseStateBarActivity;
+import com.ns.yc.lifehelper.base.state.BaseStateBarActivity;
 import com.ns.yc.lifehelper.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.vtex.contract.WTNodeListContract;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeBean;

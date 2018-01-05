@@ -6,12 +6,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.adapter.PictureHomeAdapter;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,7 +31,7 @@ public class PictureHomeFragment extends BaseFragment {
 
 
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private MyPictureActivity activity;
     private PictureHomeAdapter adapter;
 

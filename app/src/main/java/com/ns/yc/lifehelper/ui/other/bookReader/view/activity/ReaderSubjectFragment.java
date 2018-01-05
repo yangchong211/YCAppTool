@@ -11,17 +11,18 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderSubjectAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderSubjectBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.RxUtil;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,7 +42,7 @@ import rx.android.schedulers.AndroidSchedulers;
 public class ReaderSubjectFragment extends BaseFragment {
 
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private ReaderSubjectActivity activity;
     private int tab;
 

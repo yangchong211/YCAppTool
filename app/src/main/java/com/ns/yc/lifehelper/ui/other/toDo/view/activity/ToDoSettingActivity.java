@@ -1,6 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.toDo.view.activity;
 
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 
 /**
  * Created by PC on 2017/11/7.

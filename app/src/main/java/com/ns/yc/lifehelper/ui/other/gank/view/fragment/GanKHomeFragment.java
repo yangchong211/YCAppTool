@@ -13,10 +13,8 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.gank.bean.CategoryResult;
 import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
 import com.ns.yc.lifehelper.ui.other.gank.contract.GanKHomeFContract;
@@ -24,7 +22,10 @@ import com.ns.yc.lifehelper.ui.other.gank.presenter.GanKHomeFPresenter;
 import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKHomeActivity;
 import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKWebActivity;
 import com.ns.yc.lifehelper.ui.other.gank.view.adapter.GanKHomeAdapter;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import butterknife.Bind;
 
@@ -41,7 +42,7 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
 
     private static final String TYPE = "type";
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private GanKHomeActivity activity;
     private String mType;
     private GanKHomeAdapter adapter;

@@ -10,16 +10,17 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.douMusic.view.DouMusicActivity;
 import com.ns.yc.lifehelper.ui.other.douMusic.view.activity.DouMusicDetailActivity;
 import com.ns.yc.lifehelper.ui.other.douMusic.view.adapter.DouMusicAdapter;
 import com.ns.yc.lifehelper.ui.other.douMusic.bean.DouMusicBean;
 import com.ns.yc.lifehelper.ui.other.douMusic.model.DouMusicModel;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import butterknife.Bind;
 import rx.Subscriber;
@@ -41,7 +42,7 @@ public class DouMusicFragment extends BaseFragment {
 
     private static final String TYPE = "";
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private DouMusicActivity activity;
     private String mType;
     private DouMusicAdapter adapter;
@@ -186,7 +187,9 @@ public class DouMusicFragment extends BaseFragment {
         });
     }
 
-
+    /**
+     * 添加头部布局
+     */
     private void AddHeader() {
 
     }
@@ -199,7 +202,7 @@ public class DouMusicFragment extends BaseFragment {
                 .subscribe(new Subscriber<DouMusicBean>() {
                     @Override
                     public void onCompleted() {
-                        recyclerView.showRecycler();
+
                     }
 
                     @Override

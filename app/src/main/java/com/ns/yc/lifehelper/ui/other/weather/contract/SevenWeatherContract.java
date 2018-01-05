@@ -3,8 +3,8 @@ package com.ns.yc.lifehelper.ui.other.weather.contract;
 
 import android.content.Context;
 
-import com.ns.yc.lifehelper.base.BasePresenter;
-import com.ns.yc.lifehelper.base.BaseView;
+import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp1.BaseView;
 import com.ns.yc.lifehelper.ui.other.weather.bean.FiftyDayWeather;
 import com.ns.yc.lifehelper.ui.other.weather.view.weather.BaseDrawer;
 

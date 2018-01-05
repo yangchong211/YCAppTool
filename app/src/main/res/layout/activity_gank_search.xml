@@ -93,7 +93,7 @@
     </LinearLayout>
 
 
-    <com.jude.easyrecyclerview.EasyRecyclerView
+    <org.yczbj.ycrefreshviewlib.YCRefreshView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/recyclerView"
         android:visibility="gone"

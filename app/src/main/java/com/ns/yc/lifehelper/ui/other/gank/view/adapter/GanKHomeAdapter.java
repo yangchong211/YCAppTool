@@ -7,12 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.TimeUtils;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseConfig;
 import com.ns.yc.lifehelper.ui.other.gank.bean.CategoryResult;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 public class GanKHomeAdapter extends RecyclerArrayAdapter<CategoryResult.ResultsBean> {
 
@@ -54,6 +55,8 @@ public class GanKHomeAdapter extends RecyclerArrayAdapter<CategoryResult.Results
                             break;
                         case 2: // 省流
                             quality = "?imageView2/0/w/190";
+                            break;
+                        default:
                             break;
                     }
                     iv_item_img.setVisibility(View.VISIBLE);

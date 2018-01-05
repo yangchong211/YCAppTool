@@ -15,17 +15,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewQQActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.contract.TxWeChatContract;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WeChatBean;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.presenter.TxWeChatPresenter;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.adapter.TxWeChatAdapter;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class TxWeChatNewsActivity extends BaseActivity implements
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private TxWeChatAdapter adapter;
 
     private int num = 10;
@@ -74,7 +75,7 @@ public class TxWeChatNewsActivity extends BaseActivity implements
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override

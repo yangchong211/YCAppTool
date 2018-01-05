@@ -6,7 +6,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.utils.RxBus;
 import com.ns.yc.lifehelper.utils.TimeUtils;
 import com.prolificinteractive.materialcalendarview.CalendarDay;

@@ -9,8 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.sharpBendOfBrain.view.SharpBendCollectFragment;
 import com.ns.yc.lifehelper.ui.other.sharpBendOfBrain.view.SharpBendLookFragment;
 import com.ns.yc.lifehelper.ui.other.sharpBendOfBrain.view.SharpBendSearchFragment;

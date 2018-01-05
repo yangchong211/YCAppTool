@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.ui.guide.presenter;
 import android.app.Activity;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.bean.SelectPoint;
 import com.ns.yc.lifehelper.cache.SelectFollow;
 import com.ns.yc.lifehelper.cache.SelectUnFollow;
@@ -30,7 +30,6 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
     private SelectFollowContract.View mView;
     private CompositeSubscription mSubscriptions;
     private Realm realm;
-    private RealmResults<SelectFollow> selectFollows;
     private RealmResults<SelectUnFollow> selectUnFollows;
     private List<SelectPoint> list = new ArrayList<>();
     private int del;
@@ -100,7 +99,7 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
     public void addSelectToRealm(final Integer[] selectedIndices) {
         initRealm();
         if(realm.where(SelectFollow.class).findAll()!=null){
-            selectFollows = realm.where(SelectFollow.class).findAll();
+            RealmResults<SelectFollow> selectFollows = realm.where(SelectFollow.class).findAll();
         }else {
             return;
         }
@@ -128,7 +127,7 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
                             //selectUnFollows.remove(del);
                         }
                     });
-                    //此时要注意,因为list会动态变化不像数组会占位,所以当前索引应该后退一位
+                    // 此时要注意,因为list会动态变化不像数组会占位,所以当前索引应该后退一位
                     j--;
                 }
             }

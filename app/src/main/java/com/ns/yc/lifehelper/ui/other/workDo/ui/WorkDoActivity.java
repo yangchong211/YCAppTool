@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.workDo.contract.WorkDoContract;
 import com.ns.yc.lifehelper.ui.other.workDo.dagger.DaggerUiComponent;
@@ -56,7 +56,6 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
     FloatingActionButton fabEdit;
     @Bind(R.id.cl_main)
     CoordinatorLayout clMain;
-
 
     @Inject
     WorkDoPresenter presenter;
@@ -134,11 +133,13 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
         return presenter.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         finishActivity();
     }
+
 
     /**
      * 这个很重要
@@ -242,6 +243,7 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
             finish();
         }
     }
+
 
     @Override
     public void showAction(String message, String action, View.OnClickListener listener) {

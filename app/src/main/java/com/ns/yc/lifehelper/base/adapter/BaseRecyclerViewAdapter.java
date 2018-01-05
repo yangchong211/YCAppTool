@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base;
+package com.ns.yc.lifehelper.base.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.widget.AdapterView;

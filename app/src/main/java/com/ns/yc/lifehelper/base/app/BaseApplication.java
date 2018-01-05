@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base;
+package com.ns.yc.lifehelper.base.app;
 
 import android.app.Application;
 import android.content.Context;

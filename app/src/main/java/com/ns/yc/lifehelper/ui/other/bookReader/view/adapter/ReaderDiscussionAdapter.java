@@ -10,14 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantZssqApi;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookDiscussionList;
 import com.ns.yc.lifehelper.ui.other.bookReader.manager.SettingManager;
 import com.ns.yc.lifehelper.utils.FormatUtils;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 
 /**

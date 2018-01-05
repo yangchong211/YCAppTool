@@ -1,16 +1,19 @@
 package com.ns.yc.lifehelper.ui.other.douMovie.view.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.douMovie.bean.DouHotMovieBean;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 import java.util.List;
 
@@ -48,21 +51,30 @@ public class DouMovieAdapter extends RecyclerArrayAdapter<DouHotMovieBean.Subjec
             view_color = $(R.id.view_color);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void setData(DouHotMovieBean.SubjectsBean data) {
             super.setData(data);
-            ImageUtils.loadImgByPicasso(getContext(),data.getImages().getLarge(),iv_movie_photo);
-            tv_movie_title.setText(data.getTitle());
-            tv_movie_directors.setText(data.getDirectors().get(0).getName());
-            List<DouHotMovieBean.SubjectsBean.CastsBean> casts = data.getCasts();
-            StringBuilder sb = new StringBuilder();
-            for(int a=0 ; a<casts.size() ; a++){
-                sb.append(casts.get(a).getName());
-                sb.append("/");
+            if(data!=null){
+                ImageUtils.loadImgByPicasso(getContext(),data.getImages().getLarge(),iv_movie_photo);
+                tv_movie_title.setText(data.getTitle());
+                if(data.getDirectors().size()>0){
+                    tv_movie_directors.setText(data.getDirectors().get(0).getName());
+                }
+                List<DouHotMovieBean.SubjectsBean.CastsBean> casts = data.getCasts();
+                if(casts.size()>0){
+                    StringBuilder sb = new StringBuilder();
+                    for(int a=0 ; a<casts.size() ; a++){
+                        sb.append(casts.get(a).getName());
+                        sb.append("/");
+                    }
+                    tv_movie_casts.setText(sb.toString());
+                }
+                if(data.getGenres().size()>0){
+                    tv_movie_genres.setText("类型："+ data.getGenres().get(0));
+                }
+                tv_movie_rating_rate.setText("评分："+ data.getRating().getAverage());
             }
-            tv_movie_casts.setText(sb.toString());
-            tv_movie_genres.setText("类型："+ data.getGenres().get(0));
-            tv_movie_rating_rate.setText("评分："+ data.getRating().getAverage());
         }
     }
 }

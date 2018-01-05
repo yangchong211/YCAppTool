@@ -13,7 +13,7 @@ import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.adapter.GuideViewPagerAdapter;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.weight.DotView;
 
 import java.util.ArrayList;
@@ -151,10 +151,13 @@ public class SplashActivity extends BaseActivity {
     /**
      * 屏蔽返回键
      */
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
                 return true;
+            default:
+                break;
         }
         return super.onKeyDown(keyCode, event);
     }

@@ -3,8 +3,8 @@ package com.ns.yc.lifehelper.ui.other.workDo.contract;
 
 import android.content.Intent;
 
-import com.ns.yc.lifehelper.base.BasePresenter;
-import com.ns.yc.lifehelper.base.BaseView;
+import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp1.BaseView;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
 
 import java.util.List;

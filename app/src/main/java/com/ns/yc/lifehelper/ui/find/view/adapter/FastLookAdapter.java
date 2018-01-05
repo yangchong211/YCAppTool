@@ -5,11 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
 import com.ns.yc.lifehelper.ui.weight.textSpan.AwesomeTextHandler;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 import java.util.ArrayList;
 
@@ -96,6 +98,8 @@ public class FastLookAdapter extends RecyclerArrayAdapter<WxNewsDetailBean.Resul
                     break;
                 case R.id.tv_share:
 
+                    break;
+                default:
                     break;
             }
         }

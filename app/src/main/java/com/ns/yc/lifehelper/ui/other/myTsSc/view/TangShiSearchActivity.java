@@ -22,21 +22,22 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantJsApi;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.cache.SearchHis;
 import com.ns.yc.lifehelper.ui.other.myTsSc.adapter.TangShiSearchAdapter;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiBean;
 import com.ns.yc.lifehelper.ui.other.myTsSc.cache.TsSearchHis;
 import com.ns.yc.lifehelper.ui.other.myTsSc.model.TangShiModel;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +82,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
     @Bind(R.id.ll_search_after)
     LinearLayout llSearchAfter;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private Realm realm;
     private RealmResults<TsSearchHis> searchHises;
     private String type;

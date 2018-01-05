@@ -12,16 +12,17 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.find.contract.FastLookContract;
 import com.ns.yc.lifehelper.ui.find.presenter.FastLookPresenter;
 import com.ns.yc.lifehelper.ui.find.view.adapter.FastLookAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
 import com.pedaily.yc.ycdialoglib.toast.CustomToast;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class FastLookActivity extends BaseActivity implements FastLookContract.V
     @Bind(R.id.toolbar_title)
     TextView toolbarTitle;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
 
     private FastLookAdapter adapter;
     private FastLookContract.Presenter presenter = new FastLookPresenter(this);
@@ -63,7 +64,7 @@ public class FastLookActivity extends BaseActivity implements FastLookContract.V
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
 

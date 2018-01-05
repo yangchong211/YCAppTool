@@ -3,11 +3,11 @@ package com.ns.yc.lifehelper.ui.other.myTsSc.adapter;
 import android.app.Activity;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiBean;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 /**
  * ================================================

@@ -18,14 +18,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.safe360.adapter.MobileSafeAdapter;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
 
 import butterknife.Bind;
 
@@ -47,7 +48,7 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private MobileSafeAdapter adapter;
     private ViewLoading mLoading;
     private EditText etPhoneNumber;
@@ -61,7 +62,7 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override
@@ -110,6 +111,8 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
             case R.id.ll_title_menu:
                 finish();
                 break;
+            default:
+                break;
         }
     }
 
@@ -134,6 +137,8 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.m_add_from_sms_history:
 
+                break;
+            default:
                 break;
         }
         return true;

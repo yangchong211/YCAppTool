@@ -9,7 +9,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.cache.CacheHomeNews;
 import com.ns.yc.lifehelper.cache.CacheHomePile;
@@ -75,6 +75,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
         this.activity = activity;
     }
 
+
     @Override
     public void getHomeNewsData() {
         initRealm();
@@ -98,6 +99,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
         }
         mHomeView.setNewsData(list);
     }
+
 
     @Override
     public List<CharSequence> getMarqueeTitle() {
@@ -140,9 +142,10 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
         return dataList;
     }
 
+
     @Override
-    public List<Integer> getBannerData() {
-        List<Integer> lists = new ArrayList<>();
+    public List<Object> getBannerData() {
+        List<Object> lists = new ArrayList<>();
         TypedArray bannerImage = activity.getResources().obtainTypedArray(R.array.banner_image);
         for (int i = 0; i < 8 ; i++) {
             int image = bannerImage.getResourceId(i, R.drawable.ic_investment);
@@ -151,5 +154,6 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
         bannerImage.recycle();
         return lists;
     }
+
 
 }

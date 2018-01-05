@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantImageApi;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.base.BaseConfig;
 import com.ns.yc.lifehelper.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.cache.CacheFindBottomNews;

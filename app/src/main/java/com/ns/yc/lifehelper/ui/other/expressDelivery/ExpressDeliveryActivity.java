@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.activity.ExpressDeliveryInfoActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.indexModel.SelectorCompanyActivity;
 

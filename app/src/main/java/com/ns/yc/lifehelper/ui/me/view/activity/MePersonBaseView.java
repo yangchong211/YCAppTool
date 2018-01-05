@@ -20,7 +20,6 @@ import com.ns.yc.lifehelper.utils.ImageUtils;
 
 public class MePersonBaseView extends FrameLayout implements View.OnClickListener {
 
-    private Context context;
     private ImageView iv_app_person_photo;
     private TextView tv_app_person_pic;
     private TextView tv_person_name;
@@ -39,10 +38,10 @@ public class MePersonBaseView extends FrameLayout implements View.OnClickListene
     private TextView tv_person_comment;
     private TextView tv_person_company;
     private TextView tv_person_duty;
+    private View view;
 
     public MePersonBaseView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context = context;
         init();
     }
 
@@ -58,37 +57,41 @@ public class MePersonBaseView extends FrameLayout implements View.OnClickListene
 
     private void initFindViewById() {
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.view_people_certification_info, this);
-        iv_app_person_photo = (ImageView) findViewById(R.id.iv_app_person_photo);
-        tv_app_person_pic = (TextView) findViewById(R.id.tv_app_person_pic);
-        tv_person_name = (TextView) findViewById(R.id.tv_person_name);
-        tv_app_person_name = (TextView) findViewById(R.id.tv_app_person_name);
-        tv_person_comment = (TextView) findViewById(R.id.tv_person_comment);
-        tv_person_company = (TextView) findViewById(R.id.tv_person_company);
-        tv_person_duty = (TextView) findViewById(R.id.tv_person_duty);
-        tv_person_email = (TextView) findViewById(R.id.tv_person_email);
-        tv_person_show = (TextView) findViewById(R.id.tv_person_show);
-        rl_person_name = (RelativeLayout) findViewById(R.id.rl_person_name);
-        rl_person_coll = (RelativeLayout) findViewById(R.id.rl_person_coll);
-        rl_person_comm = (RelativeLayout) findViewById(R.id.rl_person_comm);
-        rl_person_company = (RelativeLayout) findViewById(R.id.rl_person_company);
-        rl_person_duty = (RelativeLayout) findViewById(R.id.rl_person_duty);
-        rl_person_email = (RelativeLayout) findViewById(R.id.rl_person_email);
-        rl_person_show = (RelativeLayout) findViewById(R.id.rl_person_show);
-        rl_person_area = (RelativeLayout) findViewById(R.id.rl_person_area);
-        tv_person_area = (TextView) findViewById(R.id.tv_person_area);
+        if (inflater != null) {
+            view = inflater.inflate(R.layout.view_people_certification_info, this);
+            iv_app_person_photo = (ImageView) view.findViewById(R.id.iv_app_person_photo);
+            tv_app_person_pic = (TextView) view.findViewById(R.id.tv_app_person_pic);
+            tv_person_name = (TextView) view.findViewById(R.id.tv_person_name);
+            tv_app_person_name = (TextView) view.findViewById(R.id.tv_app_person_name);
+            tv_person_comment = (TextView) view.findViewById(R.id.tv_person_comment);
+            tv_person_company = (TextView) view.findViewById(R.id.tv_person_company);
+            tv_person_duty = (TextView) view.findViewById(R.id.tv_person_duty);
+            tv_person_email = (TextView) view.findViewById(R.id.tv_person_email);
+            tv_person_show = (TextView) view.findViewById(R.id.tv_person_show);
+            rl_person_name = (RelativeLayout) view.findViewById(R.id.rl_person_name);
+            rl_person_coll = (RelativeLayout) view.findViewById(R.id.rl_person_coll);
+            rl_person_comm = (RelativeLayout) view.findViewById(R.id.rl_person_comm);
+            rl_person_company = (RelativeLayout) view.findViewById(R.id.rl_person_company);
+            rl_person_duty = (RelativeLayout) view.findViewById(R.id.rl_person_duty);
+            rl_person_email = (RelativeLayout) view.findViewById(R.id.rl_person_email);
+            rl_person_show = (RelativeLayout) view.findViewById(R.id.rl_person_show);
+            rl_person_area = (RelativeLayout) view.findViewById(R.id.rl_person_area);
+            tv_person_area = (TextView) view.findViewById(R.id.tv_person_area);
+        }
     }
 
     private void initListener() {
-        tv_app_person_pic.setOnClickListener(this);
-        rl_person_name.setOnClickListener(this);
-        rl_person_coll.setOnClickListener(this);
-        rl_person_comm.setOnClickListener(this);
-        rl_person_company.setOnClickListener(this);
-        rl_person_duty.setOnClickListener(this);
-        rl_person_email.setOnClickListener(this);
-        rl_person_show.setOnClickListener(this);
-        rl_person_area.setOnClickListener(this);
+        if(view!=null){
+            tv_app_person_pic.setOnClickListener(this);
+            rl_person_name.setOnClickListener(this);
+            rl_person_coll.setOnClickListener(this);
+            rl_person_comm.setOnClickListener(this);
+            rl_person_company.setOnClickListener(this);
+            rl_person_duty.setOnClickListener(this);
+            rl_person_email.setOnClickListener(this);
+            rl_person_show.setOnClickListener(this);
+            rl_person_area.setOnClickListener(this);
+        }
     }
 
     @Override
@@ -120,6 +123,8 @@ public class MePersonBaseView extends FrameLayout implements View.OnClickListene
                 break;
             case R.id.rl_person_area:
                 listener.editPersonCity(view);
+                break;
+            default:
                 break;
         }
     }

@@ -12,17 +12,18 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantALiYunApi;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.WyNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.adapter.TodayNewsAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.bean.TodayNewsDetail;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.model.TodayNewsModel;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import butterknife.Bind;
 import rx.Subscriber;
@@ -41,10 +42,9 @@ import rx.schedulers.Schedulers;
  */
 public class WyNewsFragment extends BaseFragment {
 
-
-    private static final String TYPE = "头条";
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
+    private static final String TYPE = "头条";
     private WyNewsActivity activity;
     private String mType;
     private int num = 15;

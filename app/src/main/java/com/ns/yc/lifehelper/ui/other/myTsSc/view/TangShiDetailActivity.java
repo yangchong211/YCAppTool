@@ -13,7 +13,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantJsApi;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiDetail;
 import com.ns.yc.lifehelper.ui.other.myTsSc.model.TangShiModel;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;

@@ -11,19 +11,27 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.blankj.utilcode.util.AppUtils;
+import com.hyphenate.EMCallBack;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseConfig;
+import com.ns.yc.lifehelper.bean.UpdateBean;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
+import com.ns.yc.lifehelper.ui.me.model.MeAppModel;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.lifehelper.utils.GoToScoreUtils;
+import com.ns.yc.lifehelper.utils.IMEMClientUtils;
+import com.ns.yc.lifehelper.utils.LogUtils;
+import com.ns.yc.lifehelper.utils.RxUtil;
 import com.pedaily.yc.ycdialoglib.selector.CustomSelectDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscriber;
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -172,6 +180,58 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
         dialog.show();
     }
 
+    @Override
+    public void checkVersion(final String currentVersion) {
+        MeAppModel model = MeAppModel.getInstance();
+        Subscription rxSubscription = model.getVersionInfo()
+                .compose(RxUtil.<UpdateBean>rxSchedulerHelper())
+                .compose(RxUtil.<UpdateBean>handleMyResult())
+                .subscribe(new Subscriber<UpdateBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mMeSetView.setErrorView(e);
+                    }
+
+                    @Override
+                    public void onNext(UpdateBean updateBean) {
+                        if (Integer.valueOf(currentVersion.replace(".", "")) <
+                                Integer.valueOf(updateBean.getCode().replace(".", ""))) {
+                            mMeSetView.showUpdateDialog(updateBean);
+                        } else {
+                            mMeSetView.showError("已经是最新版本~");
+                        }
+                    }
+                });
+        mSubscriptions.add(rxSubscription);
+    }
+
+    @Override
+    public void exitLogout() {
+        IMEMClientUtils.imOutLogin(true, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                LogUtils.e("logout success");
+                // 调用退出成功，结束app
+                mMeSetView.finishActivity();
+            }
+
+            @Override
+            public void onError(int code, String error) {
+                LogUtils.e("logout error " + code + " - " + error);
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+        });
+    }
+
 
     /**
      * 展示缩略图质量
@@ -241,8 +301,10 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
     /**
      * 展示对话框视图，构造方法创建对象
      */
-    CustomSelectDialog showDialog(Activity activity, CustomSelectDialog.SelectDialogListener listener, List<String> names) {
-        CustomSelectDialog dialog = new CustomSelectDialog(activity, R.style.transparentFrameWindowStyle, listener, names);
+    private CustomSelectDialog showDialog(Activity activity, CustomSelectDialog.
+            SelectDialogListener listener, List<String> names) {
+        CustomSelectDialog dialog = new CustomSelectDialog(activity,
+                R.style.transparentFrameWindowStyle, listener, names);
         if (AppUtil.isActivityLiving(activity)) {
             dialog.show();
         }

@@ -12,18 +12,19 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.WxNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.contract.WxFragmentContract;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.presenter.WxFragmentPresenter;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.view.adapter.WxNewsAdapter;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ import butterknife.Bind;
 public class WxNewsFragment extends BaseFragment implements WxFragmentContract.View{
 
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private static String TYPE = "wx";
     private String mType;
     private WxNewsActivity activity;

@@ -7,11 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantBookReader;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.event.BookReaderSelectionEvent;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.BookReaderReviewActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderReviewAdapter;
@@ -23,6 +21,8 @@ import com.ns.yc.lifehelper.utils.RxUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,7 +43,7 @@ import rx.android.schedulers.AndroidSchedulers;
 public class BookReaderReviewFragment extends BaseFragment {
 
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private BookReaderReviewActivity activity;
     private static final String TYPE = "type";
     private String mType;

@@ -22,7 +22,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.douMusic.bean.DouMusicDetailBean;
 import com.ns.yc.lifehelper.ui.other.douMusic.model.DouMusicDetailModel;
 import com.ns.yc.lifehelper.ui.weight.CustomChangeBounds;

@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.ui.other.gank.presenter;
 import android.graphics.Color;
 import android.text.TextUtils;
 
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.gank.bean.SearchHistory;
 import com.ns.yc.lifehelper.ui.other.gank.bean.SearchResult;
 import com.ns.yc.lifehelper.ui.other.gank.contract.GanKSearchContract;

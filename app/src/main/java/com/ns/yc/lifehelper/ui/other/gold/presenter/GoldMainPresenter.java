@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.ui.other.gold.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.gold.contract.GoldMainContract;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerBean;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerItemBean;

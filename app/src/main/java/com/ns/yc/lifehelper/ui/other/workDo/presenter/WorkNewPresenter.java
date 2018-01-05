@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.ui.other.workDo.presenter;
 
 import android.content.Context;
 
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.workDo.contract.WorkNewContract;
 
 import io.realm.Realm;

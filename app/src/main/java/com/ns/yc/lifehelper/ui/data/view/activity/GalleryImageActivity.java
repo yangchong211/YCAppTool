@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.utils.PicassoImageLoader;
 import com.yc.cn.ycgallerylib.gallery.GalleryImageView;
 import com.yc.cn.ycgallerylib.gallery.loader.DefaultImageLoader;

@@ -7,13 +7,14 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantBookReader;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderRecommendBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.manager.SettingManager;
 import com.ns.yc.lifehelper.utils.FileUtils;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 import java.text.NumberFormat;
 

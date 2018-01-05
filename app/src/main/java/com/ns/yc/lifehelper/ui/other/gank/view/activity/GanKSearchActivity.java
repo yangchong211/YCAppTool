@@ -25,10 +25,8 @@ import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
 import com.ns.yc.lifehelper.ui.other.gank.bean.SearchHistory;
@@ -37,10 +35,13 @@ import com.ns.yc.lifehelper.ui.other.gank.contract.GanKSearchContract;
 import com.ns.yc.lifehelper.ui.other.gank.presenter.GanKSearchPresenter;
 import com.ns.yc.lifehelper.ui.other.gank.view.adapter.GanKSearchHisAdapter;
 import com.ns.yc.lifehelper.ui.other.gank.view.adapter.GanKSearchListAdapter;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.MDTintUtil;
 import com.ns.yc.lifehelper.utils.statusbar.GanKStatusBarUtil;
 import com.pedaily.yc.ycdialoglib.toast.CustomToast;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +77,7 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
     @Bind(R.id.ll_search_history)
     LinearLayout llSearchHistory;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
 
     private GanKSearchContract.Presenter presenter = new GanKSearchPresenter(this);
     private GanKSearchHisAdapter mHistoryListAdapter;
@@ -174,6 +175,8 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
                 break;
             case R.id.tv_search_clean:
                 presenter.deleteAllHistory();
+                break;
+            default:
                 break;
         }
     }

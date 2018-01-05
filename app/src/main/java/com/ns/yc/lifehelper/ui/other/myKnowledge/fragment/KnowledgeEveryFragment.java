@@ -8,15 +8,16 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.MyKnowledgeActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.adapter.GanKEveryDayAdapter;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.bean.GanKEveryDay;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.model.GanKIoDataModel;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ import rx.schedulers.Schedulers;
 public class KnowledgeEveryFragment extends BaseFragment {
 
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private MyKnowledgeActivity activity;
     private GanKEveryDayAdapter adapter;
 

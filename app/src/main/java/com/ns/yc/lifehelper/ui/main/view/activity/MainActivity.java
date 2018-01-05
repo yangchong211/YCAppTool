@@ -28,9 +28,9 @@ import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.AppManager;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.app.AppManager;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.listener.PerfectClickListener;
 import com.ns.yc.lifehelper.ui.data.DataFragment;
 import com.ns.yc.lifehelper.ui.find.view.fragment.FindFragment;
@@ -262,6 +262,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                         tvTitle.setVisibility(View.VISIBLE);
                         tvTitle.setText("更多内容");
                         break;
+                    default:
+                        break;
                 }
             }
 
@@ -367,6 +369,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
                             //BaseAppManager.getInstance().AppExit();
                             //exit();
                             //moveTaskToBack(true);
+                            break;
+                        default:
                             break;
                     }
                 }

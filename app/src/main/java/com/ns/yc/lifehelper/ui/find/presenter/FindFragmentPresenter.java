@@ -15,14 +15,14 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.OnePlusNLayoutHelper;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseDelegateAdapter;
+import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
 import com.ns.yc.lifehelper.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.weight.MarqueeView;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.yc.cn.ycbannerlib.first.BannerView;
 import com.yc.cn.ycbaseadapterlib.first.BaseViewHolder;
-import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +89,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
 
     @Override
     public BaseDelegateAdapter initBannerAdapter() {
-        final ArrayList<String> arrayList = new ArrayList<>();
+        final List<Object> arrayList = new ArrayList<>();
         arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
         arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
         //banner
@@ -98,7 +98,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 // 绑定数据
-                Banner mBanner = holder.getView(R.id.banner);
+                BannerView mBanner = holder.getView(R.id.banner);
                 mView.setBanner(mBanner,arrayList);
             }
         };
@@ -216,7 +216,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         //linearLayoutHelper.setBgColor(0xFFF5A623);
         return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.item_tx_news_list, 3, Constant.viewType.typeNews) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, int position) {
+            public void onBindViewHolder(BaseViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
                 if (Constant.findNews != null && Constant.findNews.size() > 0) {
                     HomeBlogEntity model = Constant.findNews.get(position);
@@ -224,6 +224,12 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                     ImageView imageView = holder.getView(R.id.iv_logo);
                     ImageUtils.loadImgByPicassoError(activity, model.getImageUrl(), R.drawable.image_default, imageView);
                     holder.setText(R.id.tv_time, model.getTime());
+                    holder.getItemView().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mView.setNewsList2Click(position,Constant.findNews.get(position).getUrl());
+                        }
+                    });
                 } else {
                     ImageView imageView = holder.getView(R.id.iv_logo);
                     holder.setText(R.id.tv_title, "标题 ");
@@ -327,7 +333,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         linearLayoutHelper.setPadding(0, 0, 0, 10);
         return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.view_vlayout_news, 10, Constant.viewType.typeFooter) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, int position) {
+            public void onBindViewHolder(BaseViewHolder holder, final int position) {
                 super.onBindViewHolder(holder, position);
                 if (Constant.findBottomNews != null && Constant.findBottomNews.size() > 0) {
                     HomeBlogEntity model = Constant.findBottomNews.get(position);
@@ -335,11 +341,17 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                     ImageView imageView = holder.getView(R.id.iv_logo);
                     ImageUtils.loadImgByPicassoError(activity, model.getImageUrl(), R.drawable.image_default, imageView);
                     holder.setText(R.id.tv_time, model.getTime());
+                    holder.getItemView().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mView.setNewsList5Click(position,Constant.findBottomNews.get(position).getUrl());
+                        }
+                    });
                 } else {
                     ImageView imageView = holder.getView(R.id.iv_logo);
-                    holder.setText(R.id.tv_title, "标题 ");
+                    holder.setText(R.id.tv_title, "新闻标题 ");
                     imageView.setImageResource(R.drawable.image_default);
-                    holder.setText(R.id.tv_time, "时间");
+                    holder.setText(R.id.tv_time, "新闻时间");
                 }
             }
         };

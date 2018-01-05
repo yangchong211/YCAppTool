@@ -16,17 +16,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantZssqApi;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.BookDetailSubjectAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookSubjectList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderSubjectBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
 import com.ns.yc.lifehelper.utils.ImageUtils;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class ReadBookDetailSubjectActivity extends BaseActivity implements View.
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private BookDetailSubjectAdapter adapter;
 
     private int start = 0;
@@ -73,7 +74,7 @@ public class ReadBookDetailSubjectActivity extends BaseActivity implements View.
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override

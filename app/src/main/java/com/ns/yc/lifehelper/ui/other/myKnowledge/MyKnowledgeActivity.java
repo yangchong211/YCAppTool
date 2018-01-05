@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.fragment.KnowledgeAndroidFragment;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.fragment.KnowledgeCustomFragment;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.fragment.KnowledgeOtherFragment;

@@ -25,7 +25,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.main.contract.WebViewAnimContract;
 import com.ns.yc.lifehelper.ui.main.presenter.WebViewAnimPresenter;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhihuDetailBean;

@@ -9,7 +9,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.find.view.adapter.PicRiddleAdapter;
 
 import butterknife.Bind;

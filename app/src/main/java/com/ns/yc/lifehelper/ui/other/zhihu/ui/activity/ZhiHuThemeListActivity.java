@@ -17,16 +17,17 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewAnimActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuThemeListContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeChildBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.presenter.ZhiHuThemeListPresenter;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.adapter.ZhiHuThemeListAdapter;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import butterknife.Bind;
 
@@ -47,7 +48,7 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
     @Bind(R.id.toolbar_title)
     TextView toolbarTitle;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private ZhiHuThemeListAdapter adapter;
     private int id;
 
@@ -69,7 +70,7 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
 

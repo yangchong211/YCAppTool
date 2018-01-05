@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.utils;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -39,14 +40,19 @@ public class CrashUtils implements Thread.UncaughtExceptionHandler {
     // 程序的Context对象
     private Context mContext;
     // 用来存储设备信息和异常信息
-    private Map<String, String> infos = new HashMap<String, String>();
+    private Map<String, String> infos = new HashMap<>();
     // 用于格式化日期,作为日志文件名的一部分
+    @SuppressLint("SimpleDateFormat")
     private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+
 
     /**
      * 保证只有一个CrashHandler实例
      */
-    private CrashUtils() {}
+    private CrashUtils() {
+
+    }
+
 
     /**
      * 获取CrashHandler实例 ,单例模式
@@ -55,9 +61,10 @@ public class CrashUtils implements Thread.UncaughtExceptionHandler {
         return INSTANCE;
     }
 
+
     /**
      * 初始化
-     * @param context
+     * @param context       上下文
      */
     public void init(Context context) {
         mContext = context.getApplicationContext();
@@ -66,6 +73,7 @@ public class CrashUtils implements Thread.UncaughtExceptionHandler {
         // 设置该CrashHandler为程序的默认处理器
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
+
 
     /**
      * 当UncaughtException发生时会转入该函数来处理
@@ -91,6 +99,7 @@ public class CrashUtils implements Thread.UncaughtExceptionHandler {
         }
     }
 
+
     /**
      * 自定义错误处理,收集错误信息 发送错误报告等操作均在此完成.
      * @return true:如果处理了该异常信息;否则返回false.
@@ -114,6 +123,7 @@ public class CrashUtils implements Thread.UncaughtExceptionHandler {
         //saveCrashInfo2File(ex);
         return true;
     }
+
 
     /**
      * 获取栈顶Activity
@@ -160,6 +170,7 @@ public class CrashUtils implements Thread.UncaughtExceptionHandler {
         }
     }
 
+
     /**
      * 保存错误信息到文件中，需要有对SD的读写权限！
      * @param ex
@@ -170,7 +181,10 @@ public class CrashUtils implements Thread.UncaughtExceptionHandler {
         for (Map.Entry<String, String> entry : infos.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            sb.append(key + "=" + value + "\n");
+            sb.append(key)
+                    .append("=")
+                    .append(value)
+                    .append("\n");
         }
         Writer writer = new StringWriter();
         PrintWriter printWriter = new PrintWriter(writer);
@@ -191,6 +205,7 @@ public class CrashUtils implements Thread.UncaughtExceptionHandler {
                 String path = "/sdcard/crash/"; // 崩溃日志的存储路径
                 File dir = new File(path);
                 if (!dir.exists()) {
+                    //noinspection ResultOfMethodCallIgnored
                     dir.mkdirs();
                 }
                 FileOutputStream fos = new FileOutputStream(path + fileName);
@@ -203,5 +218,6 @@ public class CrashUtils implements Thread.UncaughtExceptionHandler {
         }
         return null;
     }
+
 
 }

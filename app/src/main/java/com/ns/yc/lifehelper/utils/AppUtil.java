@@ -18,7 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 
 import java.lang.ref.WeakReference;
 import java.security.MessageDigest;

@@ -33,13 +33,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
 import com.ns.yc.lifehelper.utils.LogUtils;
 import com.ns.yc.ycutilslib.webView.ScrollWebView;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 
 import butterknife.Bind;
 
@@ -71,6 +73,7 @@ public class WebViewActivity extends BaseActivity {
     private String url;
     private String name;
     private MyWebChromeClient webChromeClient;
+    private View mErrorView;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -366,9 +369,33 @@ public class WebViewActivity extends BaseActivity {
         // 向主机应用程序报告Web资源加载错误。这些错误通常表明无法连接到服务器。
         // 值得注意的是，不同的是过时的版本的回调，新的版本将被称为任何资源（iframe，图像等）
         // 不仅为主页。因此，建议在回调过程中执行最低要求的工作。
+        // 6.0 之后
         @Override
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
             super.onReceivedError(view, request, error);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                LogUtils.e("服务器异常"+error.getDescription().toString());
+            }
+            ToastUtil.showToast(WebViewActivity.this,"服务器异常6.0之后");
+            //当加载错误时，就让它加载本地错误网页文件
+            //mWebView.loadUrl("file:///android_asset/errorpage/error.html");
+
+            showErrorPage();//显示错误页面
+        }
+
+
+        // 6.0 之前
+        @Override
+        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            super.onReceivedError(view, errorCode, description, failingUrl);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                LogUtils.e("服务器异常"+"----");
+            }
+            ToastUtil.showToast(WebViewActivity.this,"服务器异常6.0之前");
+            //当加载错误时，就让它加载本地错误网页文件
+            //mWebView.loadUrl("file:///android_asset/errorpage/error.html");
+
+            showErrorPage();//显示错误页面
         }
 
         // 通知主机应用程序在加载资源时从服务器接收到HTTP错误。
@@ -376,6 +403,7 @@ public class WebViewActivity extends BaseActivity {
         public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
             super.onReceivedHttpError(view, request, errorResponse);
         }
+
 
         // 通知主机应用程序已自动处理用户登录请求。
         @Override
@@ -409,6 +437,9 @@ public class WebViewActivity extends BaseActivity {
         public void onReceivedTitle(WebView view, String title) {
             toolbarTitle.setText(title);
             LogUtils.e("WebViewActivity-----onReceivedTitle-------"+title);
+            if (title.contains("404") || title.contains("网页无法打开")){
+                showErrorPage();
+            }
         }
 
         @Override
@@ -559,12 +590,66 @@ public class WebViewActivity extends BaseActivity {
             super(ctx);
             setBackgroundColor(ctx.getResources().getColor(android.R.color.black));
         }
-
         @Override
         public boolean onTouchEvent(MotionEvent event) {
             return true;
         }
     }
+
+
+    /**
+     * 显示自定义错误提示页面，用一个View覆盖在WebView
+     */
+    boolean mIsErrorPage;
+    private void showErrorPage() {
+        FrameLayout webParentView = (FrameLayout) mWebView.getParent();
+        initErrorPage();//初始化自定义页面
+        while (webParentView.getChildCount() > 1) {
+            webParentView.removeViewAt(0);
+        }
+        @SuppressWarnings("deprecation")
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.FILL_PARENT, FrameLayout.LayoutParams.FILL_PARENT);
+        webParentView.addView(mErrorView, 0, lp);
+        mIsErrorPage = true;
+    }
+
+
+    /**
+     * 把系统自身请求失败时的网页隐藏
+     */
+    protected void hideErrorPage() {
+        LinearLayout webParentView = (LinearLayout) mWebView.getParent();
+        mIsErrorPage = false;
+        while (webParentView.getChildCount() > 1) {
+            webParentView.removeViewAt(0);
+        }
+    }
+
+
+    /**
+     * 显示加载失败时自定义的网页
+     */
+    protected void initErrorPage() {
+        if (mErrorView == null) {
+            mErrorView = View.inflate(this, R.layout.view_custom_data_error, null);
+            LinearLayout ll_error_view = (LinearLayout) mErrorView.findViewById(R.id.ll_error_view);
+            ll_error_view.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if(NetworkUtils.isConnected()){
+                        //如果有网络，则刷新页面
+                        mWebView.reload();
+                        recreate();
+                    }else {
+                        //没有网络，不处理
+                        ToastUtil.showToast(WebViewActivity.this,"请检查是否连上网络");
+                    }
+                }
+            });
+            mErrorView.setOnClickListener(null);
+        }
+    }
+
 
 
     private void addImageClickListener() {
@@ -591,12 +676,12 @@ public class WebViewActivity extends BaseActivity {
     }
 
 
+
     /***
      * 打开图片js通信接口
      */
     public class JavascriptInterface {
         private Context context;
-
         JavascriptInterface(Context context) {
             this.context = context;
         }

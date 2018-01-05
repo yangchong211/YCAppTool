@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import butterknife.Bind;
 

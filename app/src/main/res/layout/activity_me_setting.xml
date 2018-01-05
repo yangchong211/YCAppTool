@@ -189,7 +189,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="更多设置"
+                    android:text="常用功能"
                     android:textColor="@color/gray2"
                     android:textSize="14sp"/>
             </LinearLayout>
@@ -279,6 +279,60 @@
                     style="@style/MeInfoTextLeftStyle"
                     android:text="账户绑定"/>
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/ic_back_right"/>
+            </RelativeLayout>
+            <View style="@style/DeepUnderLine"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorWhite">
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="其他"
+                    android:textColor="@color/gray2"
+                    android:textSize="14sp"/>
+            </LinearLayout>
+            <View style="@style/DeepUnderLine"/>
+            <!--意见反馈-->
+            <RelativeLayout
+                android:id="@+id/rl_set_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="10dp">
+                <TextView
+                    style="@style/MeInfoTextLeftStyle"
+                    android:text="意见反馈"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/ic_back_right"/>
+            </RelativeLayout>
+            <View style="@style/DeepUnderLine"/>
+
+            <!--检测更新-->
+            <RelativeLayout
+                android:id="@+id/rl_set_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="10dp">
+                <TextView
+                    style="@style/MeInfoTextLeftStyle"
+                    android:text="检测更新"/>
+                <TextView
+                    android:id="@+id/tv_update_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

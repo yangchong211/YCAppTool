@@ -5,10 +5,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.TimeUtils;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 public class MeGanKCollectAdapter extends RecyclerArrayAdapter<GanKFavorite> {
 

@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base;
+package com.ns.yc.lifehelper.base.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -59,7 +59,10 @@ public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder>
         return mViewTypeItem;
     }
 
-    //条目数量
+    /**
+     * 条目数量
+     * @return          条目数量
+     */
     @Override
     public int getItemCount() {
         return mCount;

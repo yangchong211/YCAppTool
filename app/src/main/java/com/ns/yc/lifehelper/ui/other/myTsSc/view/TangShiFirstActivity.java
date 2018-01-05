@@ -17,20 +17,21 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.ConstantJsApi;
-import com.ns.yc.lifehelper.base.BaseActivity;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.myTsSc.adapter.TangShiAdapter;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiChapter;
 import com.ns.yc.lifehelper.ui.other.myTsSc.cache.CacheTsList;
 import com.ns.yc.lifehelper.ui.other.myTsSc.model.TangShiModel;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
+
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
     @Bind(R.id.ll_search)
     FrameLayout llSearch;
     @Bind(R.id.recyclerView)
-    EasyRecyclerView recyclerView;
+    YCRefreshView recyclerView;
     private String search;
     private TangShiAdapter adapter;
     private Realm realm;
@@ -74,14 +75,11 @@ public class TangShiFirstActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        /*if(realm!=null){
-            realm.close();
-        }*/
     }
 
     @Override
     public int getContentView() {
-        return R.layout.base_easy_recycle_list;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override

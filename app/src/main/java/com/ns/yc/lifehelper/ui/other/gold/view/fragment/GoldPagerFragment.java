@@ -15,13 +15,13 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.base.BaseStateFragment;
+import com.ns.yc.lifehelper.base.state.BaseStateFragment;
 import com.ns.yc.lifehelper.ui.other.gold.contract.GoldPagerContract;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldListBean;
 import com.ns.yc.lifehelper.ui.other.gold.presenter.GoldPagerPresenter;
 import com.ns.yc.lifehelper.ui.other.gold.view.activity.GoldMainActivity;
 import com.ns.yc.lifehelper.ui.other.gold.view.adapter.GoldListAdapter;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 

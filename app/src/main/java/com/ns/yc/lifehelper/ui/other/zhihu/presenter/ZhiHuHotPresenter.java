@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.ui.other.zhihu.presenter;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.ns.yc.lifehelper.base.BaseApplication;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuHotContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuHotBean;

@@ -17,8 +17,8 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BannerImageLoader;
-import com.ns.yc.lifehelper.base.BaseFragment;
+import com.ns.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
@@ -30,14 +30,14 @@ import com.ns.yc.lifehelper.ui.other.myNews.txNews.TxNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.WxNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.WyNewsActivity;
 import com.ns.yc.lifehelper.ui.weight.MarqueeView;
-import com.ns.yc.lifehelper.ui.weight.itemLine.RecycleViewItemLine;
 import com.ns.yc.lifehelper.ui.weight.pileCard.ItemEntity;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.ns.yc.yccardviewlib.CardViewLayout;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
+import com.yc.cn.ycbannerlib.first.BannerView;
+import com.yc.cn.ycbannerlib.first.util.SizeUtil;
+
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
     BGARefreshLayout bgaRefresh;
 
     private MainActivity activity;
-    private Banner banner;
+    private BannerView banner;
     private TextView tv_home_first;
     private TextView tv_home_second;
     private TextView tv_home_third;
@@ -93,29 +93,29 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //开始轮播
-        if(banner!=null){
-            banner.startAutoPlay();
-        }
-    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //结束轮播
-        if(banner!=null){
-            banner.stopAutoPlay();
-        }
         presenter.unSubscribe();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(banner!=null){
+            banner.pause();
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if(banner!=null){
+            banner.resume();
+        }
     }
+
 
     @Override
     public int getContentView() {
@@ -213,7 +213,7 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
 
     private View getHeaderView() {
         View header =  View.inflate(activity, R.layout.head_home_main, null);
-        banner = (Banner) header.findViewById(R.id.banner);
+        banner = (BannerView) header.findViewById(R.id.banner);
         tv_home_first = (TextView) header.findViewById(R.id.tv_home_first);
         tv_home_second = (TextView) header.findViewById(R.id.tv_home_second);
         tv_home_third = (TextView) header.findViewById(R.id.tv_home_third);
@@ -247,31 +247,20 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
             case R.id.tv_home_four:
                 startActivity(MyKnowledgeActivity.class);
                 break;
+            default:
+                break;
         }
     }
 
     /**初始化轮播图*/
     private void initBanner() {
         if(headerView!=null && banner!=null){
-            List<Integer> lists = presenter.getBannerData();
-            //设置banner样式
-            banner.setBannerStyle(BannerConfig.NOT_INDICATOR);
-            //设置图片加载器
-            banner.setImageLoader(new BannerImageLoader());
-            //设置图片集合
-            banner.setImages(lists);
-            //设置banner动画效果
-            banner.setBannerAnimation(Transformer.Default);
-            //设置标题集合（当banner样式有显示title时）
-            //banner.setBannerTitles(titleLists);
-            //设置自动轮播，默认为true
-            banner.isAutoPlay(true);
-            //设置轮播时间
-            banner.setDelayTime(2000);
-            //设置指示器位置（当banner模式中有指示器时）
-            banner.setIndicatorGravity(BannerConfig.RIGHT);
-            //banner设置方法全部调用完毕时最后调用
-            banner.start();
+            List<Object> lists = presenter.getBannerData();
+            banner.setHintGravity(1);
+            banner.setAnimationDuration(1000);
+            banner.setPlayDelay(2000);
+            banner.setHintPadding(0,0,0, SizeUtil.dip2px(activity,10));
+            banner.setAdapter(new BaseBannerPagerAdapter(activity, lists));
         }
     }
 
@@ -288,7 +277,6 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
                 switch (position){
                     case 0:
                         DialogUtils.showCustomPopupWindow(activity);
-                        //DialogUtils.showCustomAlertDialog(activity);
                         break;
                     case 1:
                         Intent intent1 = new Intent(activity,WebViewActivity.class);
@@ -299,6 +287,8 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
                         Intent intent2 = new Intent(activity,WebViewActivity.class);
                         intent2.putExtra("url","http://www.ximalaya.com/zhubo/71989305/");
                         startActivity(intent2);
+                        break;
+                    default:
                         break;
                 }
             }
@@ -334,8 +324,10 @@ public class HomeFragment extends BaseFragment implements BGARefreshLayout.BGARe
                     viewHolder.imageView = (ImageView) view.findViewById(R.id.imageView);
                     view.setTag(viewHolder);
                 }
-                ImageUtils.loadImgByPicassoWithRound(activity,dataList.get(position).getCoverImageUrl()
-                        ,SizeUtils.dp2px(15),R.drawable.image_default,viewHolder.imageView);
+                if(dataList.size()>0){
+                    ImageUtils.loadImgByPicassoWithRound(activity,dataList.get(position).getCoverImageUrl()
+                            ,SizeUtils.dp2px(15),R.drawable.image_default,viewHolder.imageView);
+                }
             }
 
             @Override
