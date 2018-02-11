@@ -75,7 +75,7 @@ public class YuanQuDetailActivity extends BaseActivity implements View.OnClickLi
         initIntentData();
         initToolBar();
         // 添加Loading
-        mLoading = new ViewLoading(this, Constant.loadingStyle) {
+        mLoading = new ViewLoading(this, Constant.loadingStyle,"") {
             @Override
             public void loadCancel() {
 

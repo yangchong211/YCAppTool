@@ -213,6 +213,7 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
     }
 
 
+
     private void getYuanQu() {
         TangShiModel model = TangShiModel.getInstance(this);
         model.getYuanQuAhapter(ConstantJsApi.JsAppKey)
@@ -249,6 +250,8 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
                 });
     }
 
+
+
     private void readCache() {
         initRealm();
         if(realm !=null && realm.where(CacheYqList.class).findAll()!=null){
@@ -280,6 +283,7 @@ public class YuanQuActivity extends BaseActivity implements View.OnClickListener
         }
         adapter.notifyDataSetChanged();
     }
+
 
 
     private void cacheData(List<TangShiChapter.ResultBean> result) {

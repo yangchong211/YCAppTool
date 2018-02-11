@@ -30,7 +30,7 @@ import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
 import com.ns.yc.lifehelper.utils.MDTintUtil;
 import com.ns.yc.lifehelper.utils.statusbar.GanKStatusBarUtil;
-import com.pedaily.yc.ycdialoglib.toast.CustomToast;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import butterknife.Bind;
 
@@ -154,10 +154,10 @@ public class GanKWebActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.cope:
                 if(TextUtils.isEmpty(url)){
-                    CustomToast.warning(GanKWebActivity.this,"复制链接错误").show();
+                    ToastUtil.showToast(GanKWebActivity.this,"复制链接错误");
                 }else {
                     AppUtil.copy(url);
-                    CustomToast.success(GanKWebActivity.this,"复制链接成功").show();
+                    ToastUtil.showToast(GanKWebActivity.this,"复制链接成功");
                 }
                 break;
             case R.id.open:

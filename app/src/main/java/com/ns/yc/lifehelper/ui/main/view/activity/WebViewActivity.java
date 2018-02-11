@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
@@ -33,15 +34,18 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.lzy.imagepicker.util.BitmapUtil;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
 import com.ns.yc.lifehelper.utils.LogUtils;
+import com.ns.yc.lifehelper.utils.ScreenCaptureUtils;
 import com.ns.yc.ycutilslib.webView.ScrollWebView;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import butterknife.Bind;
 
@@ -158,6 +162,12 @@ public class WebViewActivity extends BaseActivity {
                 break;
             case R.id.open:
                 AppUtil.openLink(this, url);
+                break;
+            case R.id.capture:
+                Bitmap bitmap = ScreenCaptureUtils.captureWebViewKitKat(mWebView);
+                Drawable drawable = ImageUtils.bitmap2Drawable(bitmap);
+                break;
+            default:
                 break;
         }
         return super.onOptionsItemSelected(item);

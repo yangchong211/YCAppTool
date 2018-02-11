@@ -263,7 +263,7 @@ public class SevenWeatherActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void startLoading() {
         // 添加Loading
-        mLoading = new ViewLoading(this, Constant.loadingStyle) {
+        mLoading = new ViewLoading(this, Constant.loadingStyle,"") {
             @Override
             public void loadCancel() {
 
@@ -273,6 +273,7 @@ public class SevenWeatherActivity extends BaseActivity implements View.OnClickLi
             mLoading.show();
         }
         new Handler().postDelayed(new Runnable() {
+            @Override
             public void run() {
                 if (mLoading != null && mLoading.isShowing()) {
                     mLoading.dismiss();

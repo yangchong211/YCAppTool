@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.state.BaseStateFragment;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuThemeContract;

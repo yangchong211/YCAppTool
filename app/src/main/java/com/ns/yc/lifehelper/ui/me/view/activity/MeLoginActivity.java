@@ -3,12 +3,8 @@ package com.ns.yc.lifehelper.ui.me.view.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -19,21 +15,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.SPUtils;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.EMError;
-import com.hyphenate.chat.EMClient;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.api.ConstantKeys;
-import com.ns.yc.lifehelper.base.BaseConfig;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.other.imTalk.ui.ImTalkActivity;
-import com.ns.yc.lifehelper.utils.EventBusUtils;
-import com.ns.yc.lifehelper.utils.IMEMClientUtils;
 import com.ns.yc.lifehelper.utils.LogUtils;
 import com.ns.yc.yccustomtextlib.pwdEt.PasswordEditText;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import butterknife.Bind;
 
@@ -197,103 +183,6 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
             }
         });
         pd.setMessage(getString(R.string.login_state));
-
-        IMEMClientUtils.imLogin(name, pwd, new EMCallBack() {
-            @Override
-            public void onSuccess() {
-                LogUtils.e(TAG +"login: onSuccess");
-                // ** manually load all local groups and conversation
-                //以下两个方法是为了保证进入主页面后本地会话和群组都 load 完毕。
-                EMClient.getInstance().groupManager().loadAllGroups();
-                EMClient.getInstance().chatManager().loadAllConversations();
-                if (!MeLoginActivity.this.isFinishing() && pd.isShowing()) {
-                    pd.dismiss();
-                }
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        //注意，一定要放到runOnUiThread方法中吐司，否则崩溃
-                        ToastUtil.showToast(MeLoginActivity.this,"登录成功");
-                        //EventBusUtils.post(new LoginSuccessEvent(name));
-                    }
-                });
-
-                Intent intent = new Intent(MeLoginActivity.this, ImTalkActivity.class);
-                startActivity(intent);
-                Constant.isLogin = true;
-                SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.NAME,name);
-                SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.PWD,pwd);
-                BaseConfig.INSTANCE.setLogin(true);
-                finish();
-            }
-
-            @Override
-            public void onError(final int code, final String error) {
-                LogUtils.e(TAG+"login: onError: " + code);
-                if (!progressShow) {
-                    return;
-                }
-                /**
-                 * 关于错误码可以参考官方api详细说明
-                 * http://www.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html
-                 */
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        pd.dismiss();
-                        Log.d("lzan13", "登录失败 Error code:" + code + ", message:" + error);
-                       
-                        switch (code) {
-                            // 网络异常 2
-                            case EMError.NETWORK_ERROR:
-                                ToastUtil.showToast(MeLoginActivity.this, "网络错误 code: " + code + ", message:" + error);
-                                break;
-                            // 无效的用户名 101
-                            case EMError.INVALID_USER_NAME:
-                                ToastUtil.showToast(MeLoginActivity.this, "无效的用户名 code: " + code + ", message:" + error);
-                                break;
-                            // 无效的密码 102
-                            case EMError.INVALID_PASSWORD:
-                                ToastUtil.showToast(MeLoginActivity.this, "无效的密码 code: " + code + ", message:" + error);
-                                break;
-                            // 用户认证失败，用户名或密码错误 202
-                            case EMError.USER_AUTHENTICATION_FAILED:
-                                ToastUtil.showToast(MeLoginActivity.this, "用户认证失败，用户名或密码错误 code: " + code + ", message:" + error);
-                                break;
-                            // 用户不存在 204
-                            case EMError.USER_NOT_FOUND:
-                                ToastUtil.showToast(MeLoginActivity.this, "用户不存在 code: " + code + ", message:" + error);
-                                break;
-                            // 无法访问到服务器 300
-                            case EMError.SERVER_NOT_REACHABLE:
-                                ToastUtil.showToast(MeLoginActivity.this, "无法访问到服务器 code: " + code + ", message:" + error);
-                                break;
-                            // 等待服务器响应超时 301
-                            case EMError.SERVER_TIMEOUT:
-                                ToastUtil.showToast(MeLoginActivity.this, "等待服务器响应超时 code: " + code + ", message:" + error);
-                                break;
-                            // 服务器繁忙 302
-                            case EMError.SERVER_BUSY:
-                                ToastUtil.showToast(MeLoginActivity.this, "服务器繁忙 code: " + code + ", message:" + error);
-                                break;
-                            // 未知 Server 异常 303 一般断网会出现这个错误
-                            case EMError.SERVER_UNKNOWN_ERROR:
-                                ToastUtil.showToast(MeLoginActivity.this, "未知的服务器异常 code: " + code + ", message:" + error);
-                                break;
-                            default:
-                                ToastUtil.showToast(MeLoginActivity.this, "ml_sign_in_failed code: " + code + ", message:" + error);
-                                break;
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-                LogUtils.e(TAG+"login: onProgress");
-            }
-        });
     }
 
 

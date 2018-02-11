@@ -166,6 +166,8 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
                 it.setClass(activity,ZhiHuCalendarActivity.class);
                 AnimationViewUtil.startActivity(activity,it,fab,R.color.redTab);
                 break;
+            default:
+                break;
         }
     }
 

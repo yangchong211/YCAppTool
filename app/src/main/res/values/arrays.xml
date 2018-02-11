@@ -308,26 +308,4 @@
         <item>完结</item>
     </string-array>
 
-
-    <!--im底部导航栏的标题，未选中时-->
-    <integer-array name="im_tab_un_select">
-        <item name="tab_home">@drawable/em_conversation_normal</item>
-        <item name="tab_find">@drawable/em_contact_list_normal</item>
-        <item name="tab_data">@drawable/em_settings_normal</item>
-    </integer-array>
-
-    <!--im底部导航栏的标题，选中时-->
-    <integer-array name="im_tab_select">
-        <item name="tab_home">@drawable/em_conversation_selected</item>
-        <item name="tab_find">@drawable/em_contact_list_selected</item>
-        <item name="tab_data">@drawable/em_settings_selected</item>
-    </integer-array>
-
-    <!--im底部导航栏文字-->
-    <string-array name="im_title">
-        <item>会话</item>
-        <item>通讯录</item>
-        <item>设置</item>
-    </string-array>
-
 </resources>

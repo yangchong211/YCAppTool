@@ -23,7 +23,7 @@ import com.ns.yc.lifehelper.ui.other.gold.view.activity.GoldMainActivity;
 import com.ns.yc.lifehelper.ui.other.gold.view.adapter.GoldListAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.ycstatelib.StateLayoutManager;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -89,6 +89,7 @@ public class SelectFollowActivity extends BaseActivity implements SelectFollowCo
     @Override
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
+        tvTitleRight.setOnClickListener(this);
         tvClean.setOnClickListener(this);
         tvStart.setOnClickListener(this);
         adapter.setOnItemClickListener(new OnListItemClickListener() {

@@ -38,7 +38,6 @@ import com.ns.yc.lifehelper.ui.other.gank.view.adapter.GanKSearchListAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.MDTintUtil;
 import com.ns.yc.lifehelper.utils.statusbar.GanKStatusBarUtil;
-import com.pedaily.yc.ycdialoglib.toast.CustomToast;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -385,7 +384,7 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
      */
     @Override
     public void showTip(String msg) {
-        CustomToast.warning(this,msg).show();
+
     }
 
 

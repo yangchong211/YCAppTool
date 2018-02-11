@@ -29,7 +29,7 @@ import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeFeedBackActivity;
-import com.pedaily.yc.ycdialoglib.selector.CustomSelectDialog;
+import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
 
 import java.util.ArrayList;
 import java.util.List;

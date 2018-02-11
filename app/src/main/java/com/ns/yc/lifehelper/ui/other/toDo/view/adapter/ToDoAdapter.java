@@ -73,6 +73,8 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
                     case "紧急":
                         img = ConstantImageApi.createPriorityIcons()[3];
                         break;
+                    default:
+                        break;
                 }
                 holder.iv_curr_priority.setImageResource(img);
             } else {

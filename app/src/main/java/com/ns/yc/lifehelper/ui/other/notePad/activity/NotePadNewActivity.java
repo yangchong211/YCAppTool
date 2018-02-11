@@ -45,7 +45,7 @@ import com.ns.yc.lifehelper.utils.SDCardUtils;
 import com.ns.yc.lifehelper.utils.StringUtils;
 import com.ns.yc.lifehelper.utils.TimerUtils;
 import com.ns.yc.yccustomtextlib.hyper.HyperTextEditor;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

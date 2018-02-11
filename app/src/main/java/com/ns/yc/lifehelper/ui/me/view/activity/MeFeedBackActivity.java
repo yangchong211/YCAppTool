@@ -18,7 +18,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.utils.PermissionsUtils;
 import com.ns.yc.ycmultiinputviewlib.MultiEditInputView;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import butterknife.Bind;
 

@@ -18,7 +18,7 @@ import com.ns.yc.lifehelper.ui.find.contract.FastLookContract;
 import com.ns.yc.lifehelper.ui.find.presenter.FastLookPresenter;
 import com.ns.yc.lifehelper.ui.find.view.adapter.FastLookAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
-import com.pedaily.yc.ycdialoglib.toast.CustomToast;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -123,7 +123,7 @@ public class FastLookActivity extends BaseActivity implements FastLookContract.V
                     }
                 } else {
                     adapter.pauseMore();
-                    CustomToast.normal(FastLookActivity.this,"网络不可用").show();
+                    ToastUtil.showToast(FastLookActivity.this,"网络不可用");
                 }
             }
 
@@ -140,7 +140,7 @@ public class FastLookActivity extends BaseActivity implements FastLookContract.V
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    CustomToast.normal(FastLookActivity.this,"网络不可用").show();
+                    ToastUtil.showToast(FastLookActivity.this,"网络不可用");
                 }
             }
 
@@ -149,7 +149,7 @@ public class FastLookActivity extends BaseActivity implements FastLookContract.V
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    CustomToast.normal(FastLookActivity.this,"网络不可用").show();
+                    ToastUtil.showToast(FastLookActivity.this,"网络不可用");
                 }
             }
         });
@@ -175,7 +175,7 @@ public class FastLookActivity extends BaseActivity implements FastLookContract.V
                     presenter.getData(false);
                 } else {
                     recyclerView.setRefreshing(false);
-                    CustomToast.normal(FastLookActivity.this,"网络不可用").show();
+                    ToastUtil.showToast(FastLookActivity.this,"网络不可用");
                 }
             }
         });

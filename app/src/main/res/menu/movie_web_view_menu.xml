@@ -25,4 +25,11 @@
         android:orderInCategory="100"
         android:title="打开链接"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/capture"
+        android:orderInCategory="100"
+        android:title="屏幕截图"
+        app:showAsAction="never" />
+
 </menu>

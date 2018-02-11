@@ -32,20 +32,24 @@ public class DoShareUtils {
         context.startActivity(Intent.createChooser(intent,title));
     }
 
+
     /**
      * 分享单张图片
      */
     public static void shareImage(Context context, String imagePath) {
         //String imagePath = Environment.getExternalStorageDirectory() + File.separator + "test.jpg";
-        Uri imageUri = Uri.fromFile(new File(imagePath));//由文件得到uri
-        Log.d("share", "uri:" + imageUri);  //输出：file:///storage/emulated/0/test.jpg
-
+        //由文件得到uri
+        Uri imageUri = Uri.fromFile(new File(imagePath));
+        //输出：file:///storage/emulated/0/test.jpg
+        Log.d("share", "uri:" + imageUri);
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
         shareIntent.setType("image/*");
         context.startActivity(Intent.createChooser(shareIntent, "分享到"));
     }
+
+
 
 
     /**
@@ -58,7 +62,8 @@ public class DoShareUtils {
     public static void shareTextAndImage(Context context, String msgTitle, String msgText, String imgPath) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         if (imgPath == null || imgPath.equals("")) {
-            intent.setType("text/plain"); // 纯文本
+            // 纯文本
+            intent.setType("text/plain");
         } else {
             File f = new File(imgPath);
             if (f.exists() && f.isFile()) {

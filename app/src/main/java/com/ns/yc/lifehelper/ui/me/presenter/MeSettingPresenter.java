@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.blankj.utilcode.util.AppUtils;
-import com.hyphenate.EMCallBack;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseConfig;
 import com.ns.yc.lifehelper.bean.UpdateBean;
@@ -22,10 +21,8 @@ import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.lifehelper.utils.GoToScoreUtils;
-import com.ns.yc.lifehelper.utils.IMEMClientUtils;
-import com.ns.yc.lifehelper.utils.LogUtils;
 import com.ns.yc.lifehelper.utils.RxUtil;
-import com.pedaily.yc.ycdialoglib.selector.CustomSelectDialog;
+import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -160,6 +157,7 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
             public void onClick(DialogInterface dialog, int which) {
                 DialogUtils.showProgressDialog(activity);
                 new Handler().postDelayed(new Runnable() {
+                    @Override
                     public void run() {
                         DialogUtils.dismissProgressDialog();
                         FileCacheUtils.cleanInternalCache(activity);
@@ -212,24 +210,7 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
 
     @Override
     public void exitLogout() {
-        IMEMClientUtils.imOutLogin(true, new EMCallBack() {
-            @Override
-            public void onSuccess() {
-                LogUtils.e("logout success");
-                // 调用退出成功，结束app
-                mMeSetView.finishActivity();
-            }
 
-            @Override
-            public void onError(int code, String error) {
-                LogUtils.e("logout error " + code + " - " + error);
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-        });
     }
 
 

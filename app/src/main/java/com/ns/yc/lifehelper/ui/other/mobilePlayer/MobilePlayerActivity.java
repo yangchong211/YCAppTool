@@ -106,6 +106,8 @@ public class MobilePlayerActivity extends BaseActivity implements View.OnClickLi
             case R.id.tv_audio:
                 viewPager.setCurrentItem(1);
                 break;
+            default:
+                break;
         }
     }
 

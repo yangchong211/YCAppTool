@@ -15,8 +15,9 @@ import com.ns.yc.lifehelper.ui.other.vtex.model.bean.TopicListBean;
 import com.ns.yc.lifehelper.ui.other.vtex.presenter.WTexPagerPresenter;
 import com.ns.yc.lifehelper.ui.other.vtex.view.activity.WTexRepliesActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.adapter.WTexPagerAdapter;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
+
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

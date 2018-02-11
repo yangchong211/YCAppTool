@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.mobilePlayer.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
@@ -20,7 +21,7 @@ import com.ns.yc.lifehelper.ui.other.mobilePlayer.view.LyricView;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
 import com.ns.yc.lifehelper.utils.localFile.bean.AudioItem;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -69,6 +70,7 @@ public class MobileAudioPlayActivity extends BaseActivity implements View.OnClic
      */
     private static final int UPDATE_PLAY_TIME_SHOW = 0;
 
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -76,6 +78,8 @@ public class MobileAudioPlayActivity extends BaseActivity implements View.OnClic
             switch (msg.what){
                 case UPDATE_PLAY_TIME_SHOW:
                     updatePlayTimeShow();
+                    break;
+                default:
                     break;
             }
         }

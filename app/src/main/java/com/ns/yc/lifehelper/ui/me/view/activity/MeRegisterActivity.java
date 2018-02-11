@@ -16,16 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.hyphenate.EMError;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.Constant;
 import com.ns.yc.lifehelper.api.ConstantKeys;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.yccustomtextlib.pwdEt.PasswordEditText;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import butterknife.Bind;
 
@@ -169,55 +166,6 @@ public class MeRegisterActivity extends BaseActivity implements View.OnClickList
         if(!pd.isShowing()){
             pd.show();
         }
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    // call method in SDK
-                    EMClient.getInstance().createAccount(name, pwd);
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            if (AppUtil.isActivityLiving(MeRegisterActivity.this)){
-                                if(pd.isShowing()){
-                                    pd.dismiss();
-                                }
-                                ToastUtil.showToast(MeRegisterActivity.this,"注册成功");
-                                SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.NAME,name);
-                                SPUtils.getInstance(Constant.SP_NAME).put(ConstantKeys.PWD,pwd);
-                                finish();
-                            }
-                        }
-                    });
-                } catch (final HyphenateException e) {
-                    e.printStackTrace();
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            if (AppUtil.isActivityLiving(MeRegisterActivity.this)){
-                                if(pd.isShowing()){
-                                    pd.dismiss();
-                                }
-                                int errorCode = e.getErrorCode();
-                                String message = e.getMessage();
-                                if(errorCode == EMError.NETWORK_ERROR){
-                                    ToastUtil.showToast(MeRegisterActivity.this,"网络异常，请检查网络！"+message);
-                                }else if(errorCode == EMError.USER_ALREADY_EXIST){
-                                    ToastUtil.showToast(MeRegisterActivity.this,"用户已存在！"+message);
-                                }else if(errorCode == EMError.USER_AUTHENTICATION_FAILED){
-                                    ToastUtil.showToast(MeRegisterActivity.this,"注册失败，无权限！"+message);
-                                }else if(errorCode == EMError.USER_ILLEGAL_ARGUMENT){
-                                    ToastUtil.showToast(MeRegisterActivity.this,"用户名不合法"+message);
-                                }else{
-                                    ToastUtil.showToast(MeRegisterActivity.this,"注册失败"+message);
-                                }
-                            }
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
     }
 
 

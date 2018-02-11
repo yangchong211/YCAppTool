@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * 作    者：杨充
  * 版    本：1.0
  * 创建日期：2017/5/18
- * 描    述：所有Activity的父类，使用开源库compile 'cn.yc:YCStateLib:1.0'进行状态管理
+ * 描    述：所有Activity的父类，使用开源库compile 'cn.yc:YCStateLib:1.x'进行状态管理
  * 修订历史：
  * 开源库地址：https://github.com/yangchong211/YCStateLayout
  *          v1.5版本，使用自己的开源库，可以自由切换5种不同状态
@@ -41,8 +41,10 @@ public abstract class BaseStateActivity extends AppCompatActivity{
         initStatusLayout();
         initBaseView();
         ButterKnife.bind(this);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);              //避免切换横竖屏
-        AppManager.getAppManager().addActivity(this);                                   //将当前Activity添加到容器
+        //避免切换横竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        //将当前Activity添加到容器
+        AppManager.getAppManager().addActivity(this);
         initView();
         initListener();
         initData();
@@ -55,8 +57,10 @@ public abstract class BaseStateActivity extends AppCompatActivity{
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
-        initLeakCanary();             //测试内存泄漏，正式一定要隐藏
-        AppManager.getAppManager().removeActivity(this);                                //将当前Activity移除到容器
+        //测试内存泄漏，正式一定要隐藏
+        initLeakCanary();
+        //将当前Activity移除到容器
+        AppManager.getAppManager().removeActivity(this);
         //AppManager.getAppManager().finishActivity(this);
     }
 

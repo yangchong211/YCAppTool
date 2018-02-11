@@ -19,7 +19,7 @@ import com.ns.yc.lifehelper.ui.me.view.adapter.Loader;
 import com.ns.yc.ycphotolib.PhotoShowView;
 import com.ns.yc.ycphotolib.bean.PhotoShowBean;
 import com.ns.yc.ycphotolib.listener.PhotoShowListener;
-import com.pedaily.yc.ycdialoglib.selector.CustomSelectDialog;
+import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
 
 import java.util.ArrayList;
 import java.util.List;

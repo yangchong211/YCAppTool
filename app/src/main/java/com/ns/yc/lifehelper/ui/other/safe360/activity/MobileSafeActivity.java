@@ -24,7 +24,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.safe360.adapter.MobileSafeAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 
@@ -84,7 +84,7 @@ public class MobileSafeActivity extends BaseActivity implements View.OnClickList
 
     private void initLoading() {
         // 添加Loading
-        mLoading = new ViewLoading(this, Constant.loadingStyle) {
+        mLoading = new ViewLoading(this, Constant.loadingStyle,"") {
             @Override
             public void loadCancel() {
 

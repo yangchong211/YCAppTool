@@ -148,6 +148,7 @@ public class SplashActivity extends BaseActivity {
         currentIndex = position;
     }
 
+
     /**
      * 屏蔽返回键
      */

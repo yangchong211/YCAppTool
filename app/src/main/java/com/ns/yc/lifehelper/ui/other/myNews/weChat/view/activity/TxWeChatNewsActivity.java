@@ -23,7 +23,7 @@ import com.ns.yc.lifehelper.ui.other.myNews.weChat.contract.TxWeChatContract;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WeChatBean;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.presenter.TxWeChatPresenter;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.adapter.TxWeChatAdapter;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -100,7 +100,8 @@ public class TxWeChatNewsActivity extends BaseActivity implements
                 if(position>-1 && adapter.getAllData().size()>position){
                     WebViewQQActivity.toWhere(new WebViewQQActivity.Builder()
                             .setContext(TxWeChatNewsActivity.this)
-                            .setId(adapter.getAllData().get(position).getUrl())             //wechat API 没有id，用图片来做唯一数据库索引
+                            //wechat API 没有id，用图片来做唯一数据库索引
+                            .setId(adapter.getAllData().get(position).getUrl())
                             .setImgUrl(adapter.getAllData().get(position).getPicUrl())
                             .setTitle(adapter.getAllData().get(position).getTitle())
                             .setUrl(adapter.getAllData().get(position).getUrl())
@@ -124,6 +125,8 @@ public class TxWeChatNewsActivity extends BaseActivity implements
         switch (v.getId()){
             case R.id.ll_title_menu:
                 finish();
+                break;
+            default:
                 break;
         }
     }

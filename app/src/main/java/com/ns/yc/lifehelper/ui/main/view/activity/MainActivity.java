@@ -28,16 +28,13 @@ import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.base.BaseFragmentFactory;
+import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.base.app.AppManager;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.listener.PerfectClickListener;
-import com.ns.yc.lifehelper.ui.data.DataFragment;
-import com.ns.yc.lifehelper.ui.find.view.fragment.FindFragment;
-import com.ns.yc.lifehelper.ui.home.view.fragment.HomeFragment;
 import com.ns.yc.lifehelper.ui.main.contract.MainContract;
 import com.ns.yc.lifehelper.ui.main.presenter.MainPresenter;
-import com.ns.yc.lifehelper.ui.me.view.MeFragment;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeFeedBackActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
@@ -45,7 +42,7 @@ import com.ns.yc.lifehelper.utils.ImageUtils;
 import com.ns.yc.lifehelper.utils.statusbar.StatusBarUtils;
 import com.ns.yc.ycutilslib.managerLeak.InputMethodManagerLeakUtils;
 import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +62,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * ================================================
  */
 public class MainActivity extends BaseActivity implements View.OnClickListener
-        ,EasyPermissions.PermissionCallbacks , MainContract.View {
+        , EasyPermissions.PermissionCallbacks, MainContract.View {
 
 
     @Bind(R.id.view_status)
@@ -76,23 +73,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
     TextView tvTitle;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.vp_title)
-    ViewPager vpTitle;
     @Bind(R.id.vp_home)
     NoSlidingViewPager vpHome;
     @Bind(R.id.ctl_table)
     CommonTabLayout ctlTable;
     @Bind(R.id.ll_main)
     LinearLayout llMain;
-    @Bind(R.id.nav_view)
-    NavigationView navView;
-    @Bind(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
     @Bind(R.id.setting)
     TextView setting;
     @Bind(R.id.quit)
     TextView quit;
-
+    @Bind(R.id.nav_view)
+    NavigationView navView;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
 
     private ImageView iv_avatar;
     private LinearLayout ll_nav_scan_download;
@@ -144,6 +138,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
             case R.id.action_about_us:
                 startActivity(AboutMeActivity.class);
                 break;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -192,6 +188,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         switch (view.getId()) {
             case R.id.fl_title_menu:
                 drawerLayout.openDrawer(GravityCompat.START);
+                break;
+            default:
                 break;
         }
     }
@@ -279,14 +277,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
      */
     private void initViewPager() {
         List<Fragment> fragments = new ArrayList<>();
-        HomeFragment homeFragment = new HomeFragment();
-        FindFragment findFragment = new FindFragment();
-        DataFragment otherFragment = new DataFragment();
-        MeFragment meFragment = new MeFragment();
-        fragments.add(homeFragment);
-        fragments.add(findFragment);
-        fragments.add(otherFragment);
-        fragments.add(meFragment);
+        fragments.add(BaseFragmentFactory.getInstance().getHomeFragment());
+        fragments.add(BaseFragmentFactory.getInstance().getFindFragment());
+        fragments.add(BaseFragmentFactory.getInstance().getDataFragment());
+        fragments.add(BaseFragmentFactory.getInstance().getMeFragment());
+
 
         BasePagerAdapter adapter = new BasePagerAdapter(getSupportFragmentManager(), fragments);
         vpHome.setAdapter(adapter);
@@ -342,8 +337,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
                             break;
                         case R.id.ll_nav_homepage:          // 主页
-                            Intent intent = new Intent(MainActivity.this,WebViewActivity.class);
-                            intent.putExtra("url","");
+                            Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+                            intent.putExtra("url", "");
                             startActivity(intent);
                             break;
                         case R.id.ll_nav_scan_download:     //扫码下载
@@ -408,7 +403,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
      */
     @Override
     public void onBackPressed() {
-        Log.e("触摸监听","onBackPressed");
+        Log.e("触摸监听", "onBackPressed");
         if (drawerLayout != null && drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
@@ -421,7 +416,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.e("触摸监听","onKeyDown");
+        Log.e("触摸监听", "onKeyDown");
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -431,7 +426,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
                 //双击返回桌面
                 if ((System.currentTimeMillis() - time > 1000)) {
-                    ToastUtil.showToast(MainActivity.this,"再按一次返回桌面");
+                    ToastUtil.showToast(MainActivity.this, "再按一次返回桌面");
                     time = System.currentTimeMillis();
                 } else {
                     moveTaskToBack(true);
@@ -451,7 +446,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
      */
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
-        Log.e("触摸监听","onKeyUp");
+        Log.e("触摸监听", "onKeyUp");
         return super.onKeyUp(keyCode, event);
     }
 
@@ -470,6 +465,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
     };
+
     @AfterPermissionGranted(RC_LOCATION_CONTACTS_PERM)
     public void locationPermissionsTask() {
         //检查是否获取该权限
@@ -488,7 +484,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
     /**
      * 判断是否添加了权限
-     * @return    true
+     *
+     * @return true
      */
     private boolean hasPermissions() {
         return EasyPermissions.hasPermissions(MainActivity.this, LOCATION_AND_CONTACTS);
@@ -498,7 +495,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
      * 将结果转发到EasyPermissions
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,@NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // 将结果转发到EasyPermissions
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, MainActivity.this);

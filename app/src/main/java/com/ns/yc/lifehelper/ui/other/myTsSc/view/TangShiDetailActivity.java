@@ -73,7 +73,7 @@ public class TangShiDetailActivity extends BaseActivity implements View.OnClickL
         initIntentData();
         initToolBar();
         // 添加Loading
-        mLoading = new ViewLoading(this, Constant.loadingStyle) {
+        mLoading = new ViewLoading(this, Constant.loadingStyle,"") {
             @Override
             public void loadCancel() {
 
@@ -110,6 +110,8 @@ public class TangShiDetailActivity extends BaseActivity implements View.OnClickL
                         break;
                     case R.id.about:
                         ToastUtils.showShortSafe("关于");
+                        break;
+                    default:
                         break;
                 }
                 return true;

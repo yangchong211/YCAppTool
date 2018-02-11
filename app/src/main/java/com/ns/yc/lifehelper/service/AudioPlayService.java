@@ -19,7 +19,7 @@ import com.ns.yc.lifehelper.ui.other.mobilePlayer.activity.MobileAudioPlayActivi
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.fragment.MobileAudioFragment;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
 import com.ns.yc.lifehelper.utils.localFile.bean.AudioItem;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -256,6 +256,8 @@ public class AudioPlayService extends Service {
                 break;
             case PLAY_MODE_RANDOM:
                 currentPosition = random.nextInt(size);
+                break;
+            default:
                 break;
         }
         startPlayMusic();

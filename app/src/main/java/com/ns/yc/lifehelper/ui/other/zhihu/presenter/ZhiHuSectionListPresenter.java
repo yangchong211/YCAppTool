@@ -10,6 +10,7 @@ import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuSectionChildBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
 import com.ns.yc.lifehelper.utils.RxUtil;
 
+import java.io.Serializable;
 import java.util.List;
 
 import io.realm.Realm;

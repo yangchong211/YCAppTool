@@ -268,5 +268,4 @@ public interface BookReaderApi {
     @GET("/book-list/{bookListId}")
     Observable<DetailBookSubjectList> getBookListDetail(@Path("bookListId") String bookListId);
 
-
 }

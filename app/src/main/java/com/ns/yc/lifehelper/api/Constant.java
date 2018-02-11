@@ -14,7 +14,7 @@ import java.util.List;
  * ================================================
  * 作    者：杨充
  * 版    本：1.0
- * 创建日期：2017/1/20
+ * 创建日期：2016/1/20
  * 描    述：存放基本常量
  * 修订历史：
  * ================================================
@@ -141,14 +141,14 @@ public class Constant {
 
     /**-------------------------------------键-------------------------------------------------**/
     //Sp键
-    public static String KEY_FIRST_SPLASH = "first_splash";                 //是否第一次启动
-    public static String KEY_IS_LOGIN = "is_login";                         //登录
-    public static String KEY_IS_SHOW_LIST_IMG = "is_show_list_img";         //是否展示list页面图片
-    public static String KEY_IS_SHOW_GIRL_IMG = "is_show_girl_img";         //启动页是否是妹子图
-    public static String KEY_IS_SHOW_IMG_RANDOM = "is_show_girl_random";    //启动页是否概率出现
-    public static String KEY_THUMBNAIL_QUALITY = "thumbnail_quality";       //启动页是否概率出现
-    public static String KEY_BANNER_URL = "banner_url";                     //启动页是否概率出现
-    public static String KEY_NIGHT_STATE = "night_state";                   //启动页夜间模式
+    public static final String KEY_FIRST_SPLASH = "first_splash";                 //是否第一次启动
+    public static final String KEY_IS_LOGIN = "is_login";                         //登录
+    public static final String KEY_IS_SHOW_LIST_IMG = "is_show_list_img";         //是否展示list页面图片
+    public static final String KEY_IS_SHOW_GIRL_IMG = "is_show_girl_img";         //启动页是否是妹子图
+    public static final String KEY_IS_SHOW_IMG_RANDOM = "is_show_girl_random";    //启动页是否概率出现
+    public static final String KEY_THUMBNAIL_QUALITY = "thumbnail_quality";       //启动页是否概率出现
+    public static final String KEY_BANNER_URL = "banner_url";                     //启动页是否概率出现
+    public static final String KEY_NIGHT_STATE = "night_state";                   //启动页夜间模式
 
 
     /**-------------------------------------集合-------------------------------------------------**/

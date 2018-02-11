@@ -26,7 +26,7 @@ import com.ns.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import butterknife.Bind;
 
@@ -223,7 +223,7 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void startLoading() {
         // 添加Loading
-        mLoading = new ViewLoading(this, Constant.loadingStyle) {
+        mLoading = new ViewLoading(this, Constant.loadingStyle,"") {
             @Override
             public void loadCancel() {
 

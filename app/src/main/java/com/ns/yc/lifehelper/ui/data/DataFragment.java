@@ -34,7 +34,6 @@ import com.ns.yc.lifehelper.ui.data.view.activity.RiddleActivity;
 import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
-import com.ns.yc.lifehelper.ui.other.imTalk.ui.ImTalkActivity;
 import com.ns.yc.lifehelper.ui.other.listener.ListenerActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
@@ -45,7 +44,7 @@ import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.ns.yc.lifehelper.ui.test.aidl.BankActivity;
 import com.ns.yc.lifehelper.ui.weight.MyGridView;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -204,7 +203,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                                 startActivity(WTexNewsActivity.class);
                                 break;
                             case 6:
-                                startActivity(ImTalkActivity.class);
+
                                 break;
                             default:
                                 Toast.makeText(activity, ((ImageIconBean) obj).getName() + "---", Toast.LENGTH_SHORT).show();

@@ -29,7 +29,7 @@ import com.ns.yc.lifehelper.api.ConstantKeys;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.bean.VideoItem;
 import com.ns.yc.lifehelper.utils.AppUtil;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.Date;

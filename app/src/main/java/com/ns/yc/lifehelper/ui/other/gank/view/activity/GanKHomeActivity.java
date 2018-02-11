@@ -31,7 +31,7 @@ import com.ns.yc.lifehelper.ui.other.gank.view.fragment.GanKHomeFragment;
 import com.ns.yc.lifehelper.utils.MDTintUtil;
 import com.ns.yc.lifehelper.utils.animation.AnimatorUtils;
 import com.ns.yc.lifehelper.utils.statusbar.GanKStatusBarUtil;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 

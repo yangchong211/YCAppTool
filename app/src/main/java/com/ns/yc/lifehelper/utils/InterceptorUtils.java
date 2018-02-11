@@ -28,7 +28,7 @@ public class InterceptorUtils {
 
     /**
      * 创建日志拦截器
-     * @return
+     * @return              HttpLoggingInterceptor
      */
     public static HttpLoggingInterceptor getHttpLoggingInterceptor(boolean debug) {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
@@ -38,9 +38,11 @@ public class InterceptorUtils {
             }
         });
         if (debug) {
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // 测试
+            // 测试
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         } else {
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE); // 打包
+            // 打包
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
         }
         return loggingInterceptor;
     }

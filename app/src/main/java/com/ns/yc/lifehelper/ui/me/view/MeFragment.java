@@ -25,7 +25,7 @@ import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeQoneActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ns.yc.lifehelper.ui.other.timer.TimerActivity;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 

@@ -20,8 +20,9 @@ import com.ns.yc.lifehelper.ui.other.myNews.wxNews.contract.WxFragmentContract;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.presenter.WxFragmentPresenter;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.view.adapter.WxNewsAdapter;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
+
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

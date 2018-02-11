@@ -17,7 +17,7 @@ import com.ns.yc.lifehelper.utils.DoShareUtils;
 import com.ns.yc.lifehelper.utils.SDCardUtils;
 import com.ns.yc.lifehelper.utils.StringUtils;
 import com.ns.yc.yccustomtextlib.hyper.HyperTextView;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import java.io.File;
 import java.util.List;

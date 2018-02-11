@@ -114,7 +114,7 @@ public class WeatherFragment extends BaseFragment {
     @Override
     public void initView() {
         // 添加Loading
-        mLoading = new ViewLoading(activity, Constant.loadingStyle) {
+        mLoading = new ViewLoading(activity, Constant.loadingStyle,"") {
             @Override
             public void loadCancel() {
 

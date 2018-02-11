@@ -14,6 +14,8 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeBean;
 import com.ns.yc.lifehelper.utils.ImageUtils;
 
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
 import java.util.List;
 
 import butterknife.Bind;
