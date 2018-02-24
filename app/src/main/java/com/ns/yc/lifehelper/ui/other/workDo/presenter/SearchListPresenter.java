@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.workDo.contract.SearchListContract;
 import com.ns.yc.lifehelper.ui.other.workDo.data.DataDao;

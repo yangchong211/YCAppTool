@@ -17,14 +17,14 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantZssqApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.BookDetailSubjectAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookSubjectList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderSubjectBean;
-import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
+import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

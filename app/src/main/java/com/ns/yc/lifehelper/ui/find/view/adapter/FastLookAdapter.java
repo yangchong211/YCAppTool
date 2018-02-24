@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
-import com.ns.yc.lifehelper.ui.weight.textSpan.AwesomeTextHandler;
+import com.ns.yc.lifehelper.weight.textSpan.AwesomeTextHandler;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;

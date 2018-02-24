@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuHotBean;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.util.List;
 

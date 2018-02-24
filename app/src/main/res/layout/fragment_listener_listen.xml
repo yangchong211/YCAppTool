@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-        <com.ns.yc.lifehelper.ui.weight.ShadowImageView
+        <com.ns.yc.lifehelper.weight.ShadowImageView
             android:id="@+id/image_view_album"
             android:layout_width="250dp"
             android:layout_height="250dp"

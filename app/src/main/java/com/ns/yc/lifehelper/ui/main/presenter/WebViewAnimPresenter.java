@@ -3,15 +3,15 @@ package com.ns.yc.lifehelper.ui.main.presenter;
 import android.app.Activity;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.cache.CacheZhLike;
 import com.ns.yc.lifehelper.ui.main.contract.WebViewAnimContract;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
+import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhihuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import io.realm.Realm;
 import rx.Subscriber;

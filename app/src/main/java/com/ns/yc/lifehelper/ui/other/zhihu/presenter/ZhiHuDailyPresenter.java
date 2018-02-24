@@ -7,12 +7,12 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuDailyContract;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
+import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
-import com.ns.yc.lifehelper.utils.RxBus;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxBus;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.text.SimpleDateFormat;

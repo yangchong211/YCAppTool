@@ -9,13 +9,10 @@
     android:padding="10dp"
     android:id="@+id/ll_new_seed_item">
 
-    <com.ns.yc.lifehelper.ui.weight.imageView.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ImageView
         android:id="@+id/iv_new_seed_ic"
         android:layout_width="45dp"
-        android:layout_height="45dp"
-        app:civ_border_width="1px"
-        app:civ_border_color="@color/gray_black"/>
+        android:layout_height="45dp"/>
 
     <TextView
         android:id="@+id/tv_new_seed_title"

@@ -38,7 +38,7 @@
             android:contentDescription="@null"
             android:scaleType="fitXY"
             android:visibility="invisible"/>
-        <com.ns.yc.lifehelper.ui.weight.imageView.NoteItemCircleView
+        <com.ns.yc.lifehelper.weight.imageView.NoteItemCircleView
             android:id="@+id/note_detail_img_green"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -49,7 +49,7 @@
             android:background="#ffcef3d4"
             app:civ_fill_color="@color/colorWhite"
             app:civ_border_width="2dip"/>
-        <com.ns.yc.lifehelper.ui.weight.imageView.NoteItemCircleView
+        <com.ns.yc.lifehelper.weight.imageView.NoteItemCircleView
             android:id="@+id/note_detail_img_blue"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -60,7 +60,7 @@
             android:background="#ffb9e5f2"
             app:civ_fill_color="@color/colorWhite"
             app:civ_border_width="2dip" />
-        <com.ns.yc.lifehelper.ui.weight.imageView.NoteItemCircleView
+        <com.ns.yc.lifehelper.weight.imageView.NoteItemCircleView
             android:id="@+id/note_detail_img_purple"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -71,7 +71,7 @@
             android:background="#ffede7e9"
             app:civ_fill_color="@color/colorWhite"
             app:civ_border_width="2dip" />
-        <com.ns.yc.lifehelper.ui.weight.imageView.NoteItemCircleView
+        <com.ns.yc.lifehelper.weight.imageView.NoteItemCircleView
             android:id="@+id/note_detail_img_yellow"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -82,7 +82,7 @@
             android:background="#fffbf5b9"
             app:civ_fill_color="@color/colorWhite"
             app:civ_border_width="2dip"/>
-        <com.ns.yc.lifehelper.ui.weight.imageView.NoteItemCircleView
+        <com.ns.yc.lifehelper.weight.imageView.NoteItemCircleView
             android:id="@+id/note_detail_img_red"
             android:layout_width="30dp"
             android:layout_height="30dp"

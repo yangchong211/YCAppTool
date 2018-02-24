@@ -18,16 +18,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dip"
         android:orientation="horizontal" >
-        <com.ns.yc.lifehelper.ui.weight.DotView
+        <com.ns.yc.lifehelper.weight.DotView
             android:layout_width="15dip"
             android:layout_height="15dip" />
-        <com.ns.yc.lifehelper.ui.weight.DotView
+        <com.ns.yc.lifehelper.weight.DotView
             android:layout_width="15dip"
             android:layout_height="15dip" />
-        <com.ns.yc.lifehelper.ui.weight.DotView
+        <com.ns.yc.lifehelper.weight.DotView
             android:layout_width="15dip"
             android:layout_height="15dip" />
-        <com.ns.yc.lifehelper.ui.weight.DotView
+        <com.ns.yc.lifehelper.weight.DotView
             android:layout_width="15dip"
             android:layout_height="15dip" />
     </LinearLayout>

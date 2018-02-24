@@ -1,6 +1,6 @@
 package com.ns.yc.lifehelper.base.mvp2;
 
-import com.ns.yc.lifehelper.utils.RxBus;
+import com.ns.yc.lifehelper.utils.rx.RxBus;
 
 import rx.Subscription;
 import rx.functions.Action1;

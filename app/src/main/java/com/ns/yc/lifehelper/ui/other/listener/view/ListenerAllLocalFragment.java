@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.ui.weight.RecyclerViewFastScroller;
+import com.ns.yc.lifehelper.weight.RecyclerViewFastScroller;
 
 import butterknife.Bind;
 

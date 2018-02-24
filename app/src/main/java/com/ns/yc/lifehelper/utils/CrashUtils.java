@@ -10,7 +10,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;

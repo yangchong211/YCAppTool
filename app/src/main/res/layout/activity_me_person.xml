@@ -32,7 +32,7 @@
                 app:tabSelectedTextColor="@color/colorTheme"
                 app:tabTextColor="@color/blackText" />
 
-            <com.ns.yc.lifehelper.ui.weight.AutoHeightViewPager
+            <com.ns.yc.lifehelper.weight.AutoHeightViewPager
                 android:id="@+id/vp_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

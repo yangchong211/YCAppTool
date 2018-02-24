@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantImageApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantImageApi;
 
 import java.util.ArrayList;
 import java.util.List;

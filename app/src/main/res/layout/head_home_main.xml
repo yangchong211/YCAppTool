@@ -44,26 +44,7 @@
             android:text="干货定制" />
     </LinearLayout>
 
-
     <include layout="@layout/view_vlayout_marquee"/>
-
-    <!--注意外面一定要嵌套一层帧布局，线性布局，相对布局都行，解决与BGA滑动冲突事件-->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <com.ns.yc.yccardviewlib.CardViewLayout
-            android:id="@+id/pileLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            app:displayCount="1.8"
-            app:interval="10dp"
-            app:scaleStep="0.32"
-            app:sizeRatio="1.12" />
-    </FrameLayout>
 
 
 </LinearLayout>

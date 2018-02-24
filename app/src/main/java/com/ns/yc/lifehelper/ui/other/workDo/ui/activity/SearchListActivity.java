@@ -59,7 +59,7 @@ public class SearchListActivity extends BaseActivity implements SearchListContra
 
     @Override
     public int getContentView() {
-        return R.layout.base_bga_recycle_header;
+        return R.layout.base_recycler_view;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class ClockAlarmActivity extends AppCompatActivity {
 
     private void showDialogInBroadcastReceiver(String message, final int flag) {
         if (flag == 1 || flag == 2) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.in_call_alarm);
+            mediaPlayer = MediaPlayer.create(this,null);
             mediaPlayer.setLooping(true);
             mediaPlayer.start();
         }

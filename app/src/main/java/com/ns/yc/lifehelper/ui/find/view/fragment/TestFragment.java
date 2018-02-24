@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 /**
  * Created by PC on 2017/11/16.

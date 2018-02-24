@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.gank.network;
 
-import com.ns.yc.lifehelper.api.ConstantGanKApi;
-import com.ns.yc.lifehelper.api.RetrofitWrapper;
+import com.ns.yc.lifehelper.api.constantApi.ConstantGanKApi;
+import com.ns.yc.lifehelper.api.manager.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.gank.bean.CategoryResult;
 import com.ns.yc.lifehelper.ui.other.gank.bean.SearchResult;
 

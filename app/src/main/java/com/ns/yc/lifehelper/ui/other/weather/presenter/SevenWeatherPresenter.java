@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
-import com.ns.yc.lifehelper.api.ConstantALiYunApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
 import com.ns.yc.lifehelper.ui.other.weather.bean.FiftyDayWeather;
 import com.ns.yc.lifehelper.ui.other.weather.contract.SevenWeatherContract;
 import com.ns.yc.lifehelper.ui.other.weather.model.EventCenter;
-import com.ns.yc.lifehelper.ui.other.weather.model.WeathersModel;
+import com.ns.yc.lifehelper.api.http.weather.WeathersModel;
 import com.ns.yc.lifehelper.ui.other.weather.view.weather.BaseDrawer;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
 

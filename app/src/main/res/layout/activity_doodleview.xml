@@ -6,7 +6,7 @@
 
     <include layout="@layout/base_tool_bar"/>
 
-    <com.ns.yc.lifehelper.ui.weight.doodleView.DoodleView
+    <com.ns.yc.lifehelper.weight.doodleView.DoodleView
         android:id="@+id/dv_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

@@ -1,11 +1,11 @@
 package com.ns.yc.lifehelper.ui.find.presenter;
 
-import com.ns.yc.lifehelper.api.ConstantALiYunApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.cache.CacheFastLook;
 import com.ns.yc.lifehelper.ui.find.contract.FastLookContract;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.api.WxNewsModel;
+import com.ns.yc.lifehelper.api.http.news.WxNewsModel;
 
 import java.util.ArrayList;
 import java.util.List;

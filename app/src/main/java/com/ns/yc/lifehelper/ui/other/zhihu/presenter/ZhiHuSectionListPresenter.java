@@ -5,12 +5,11 @@ import android.support.annotation.NonNull;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuSectionListContract;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
+import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuSectionChildBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
-import java.io.Serializable;
 import java.util.List;
 
 import io.realm.Realm;

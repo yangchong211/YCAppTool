@@ -9,7 +9,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.service.WorkDoNotifyService;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.activity.WorkSettingActivity;
 

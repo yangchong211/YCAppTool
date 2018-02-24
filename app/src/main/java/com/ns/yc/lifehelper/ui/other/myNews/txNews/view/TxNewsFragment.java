@@ -12,13 +12,13 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantTxApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantTxApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.txNews.TxNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.txNews.adapter.TxNewsAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.txNews.bean.TxNewsBean;
-import com.ns.yc.lifehelper.ui.other.myNews.txNews.model.TxNewsModel;
+import com.ns.yc.lifehelper.api.http.news.TxNewsModel;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;

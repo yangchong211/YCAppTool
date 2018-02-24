@@ -27,14 +27,14 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.api.ConstantImageApi;
+import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.api.constantApi.ConstantImageApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.cache.CacheToDoDetail;
 import com.ns.yc.lifehelper.ui.other.toDo.view.adapter.ChoosePriorityAdapter;
 import com.ns.yc.lifehelper.ui.other.toDo.view.dialog.ChoosePaperColorDialog;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

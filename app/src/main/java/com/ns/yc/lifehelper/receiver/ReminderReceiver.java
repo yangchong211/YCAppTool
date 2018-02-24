@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 
 public class ReminderReceiver extends BroadcastReceiver {

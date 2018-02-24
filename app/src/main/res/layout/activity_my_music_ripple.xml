@@ -6,7 +6,7 @@
               android:gravity="center"
               android:orientation="vertical">
 
-    <com.ns.yc.lifehelper.ui.weight.musicView.RippleAnimationView
+    <com.ns.yc.lifehelper.weight.musicView.RippleAnimationView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/layout_RippleAnimation"
         android:layout_width="300dp"
@@ -24,7 +24,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_music_ripple" />
-    </com.ns.yc.lifehelper.ui.weight.musicView.RippleAnimationView>
+    </com.ns.yc.lifehelper.weight.musicView.RippleAnimationView>
 
     <TextView
         android:layout_width="match_parent"

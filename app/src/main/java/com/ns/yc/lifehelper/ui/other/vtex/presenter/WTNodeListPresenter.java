@@ -1,10 +1,10 @@
 package com.ns.yc.lifehelper.ui.other.vtex.presenter;
 
 import com.ns.yc.lifehelper.ui.other.vtex.contract.WTNodeListContract;
-import com.ns.yc.lifehelper.ui.other.vtex.model.api.VTexModel;
+import com.ns.yc.lifehelper.api.http.vtex.VTexModel;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeBean;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeListBean;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import java.util.List;
 

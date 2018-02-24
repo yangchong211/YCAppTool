@@ -9,7 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 
-import com.ns.yc.lifehelper.api.ConstantZssqApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

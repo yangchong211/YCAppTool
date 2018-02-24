@@ -27,7 +27,7 @@
         android:background="@color/redTab"/>
 
     <!--上下滚动TextView-->
-    <com.ns.yc.lifehelper.ui.weight.MarqueeView
+    <com.ns.yc.lifehelper.weight.MarqueeView
         android:id="@+id/marqueeView"
         android:layout_width="match_parent"
         android:layout_height="40dp"

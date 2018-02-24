@@ -5,7 +5,7 @@ import android.content.res.TypedArray;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.entry.TabEntity;
+import com.ns.yc.lifehelper.model.entry.TabEntity;
 import com.ns.yc.lifehelper.ui.main.contract.MainContract;
 
 import java.util.ArrayList;

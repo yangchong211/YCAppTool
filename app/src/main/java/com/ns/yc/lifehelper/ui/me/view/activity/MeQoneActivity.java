@@ -13,7 +13,7 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.bean.ImagePhotoBean;
+import com.ns.yc.lifehelper.model.bean.ImagePhotoBean;
 import com.ns.yc.lifehelper.ui.me.view.adapter.GlideImageLoader;
 import com.ns.yc.lifehelper.ui.me.view.adapter.Loader;
 import com.ns.yc.ycphotolib.PhotoShowView;

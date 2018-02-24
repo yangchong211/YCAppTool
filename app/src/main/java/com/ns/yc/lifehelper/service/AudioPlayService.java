@@ -13,8 +13,8 @@ import android.widget.RemoteViews;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.api.ConstantKeys;
+import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.api.constant.ConstantKeys;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.activity.MobileAudioPlayActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.fragment.MobileAudioFragment;
 import com.ns.yc.lifehelper.utils.EventBusUtils;

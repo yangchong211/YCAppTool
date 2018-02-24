@@ -9,7 +9,7 @@
 
     <include layout="@layout/base_tool_bar"/>
 
-    <com.ns.yc.lifehelper.ui.weight.WatcherBoard
+    <com.ns.yc.lifehelper.weight.WatcherBoard
         android:id="@+id/watch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

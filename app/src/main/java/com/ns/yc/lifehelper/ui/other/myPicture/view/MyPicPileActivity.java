@@ -12,9 +12,9 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.weight.pileCard.FadeTransitionImageView;
-import com.ns.yc.lifehelper.ui.weight.pileCard.HorizontalTransitionLayout;
-import com.ns.yc.lifehelper.ui.weight.pileCard.ItemEntity;
+import com.ns.yc.lifehelper.weight.pileCard.FadeTransitionImageView;
+import com.ns.yc.lifehelper.weight.pileCard.HorizontalTransitionLayout;
+import com.ns.yc.lifehelper.weight.pileCard.ItemEntity;
 import com.ns.yc.yccardviewlib.CardViewLayout;
 
 import org.json.JSONArray;

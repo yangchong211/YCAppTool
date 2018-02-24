@@ -14,5 +14,4 @@
         app:layout_empty="@layout/view_custom_empty_data"
         app:layout_error="@layout/view_custom_data_error"/>
 
-
 </LinearLayout>

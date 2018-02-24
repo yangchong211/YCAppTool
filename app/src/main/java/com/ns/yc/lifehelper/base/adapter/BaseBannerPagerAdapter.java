@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 import com.yc.cn.ycbannerlib.first.adapter.StaticPagerAdapter;
 
 

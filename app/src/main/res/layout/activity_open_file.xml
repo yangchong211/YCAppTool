@@ -7,7 +7,7 @@
 
     <include layout="@layout/base_tool_bar"/>
 
-    <com.ns.yc.lifehelper.ui.weight.tencent.SuperFileView
+    <com.ns.yc.lifehelper.weight.tencent.SuperFileView
         android:id="@+id/file_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

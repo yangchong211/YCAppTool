@@ -8,16 +8,16 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantBookReader;
+import com.ns.yc.lifehelper.api.constant.ConstantBookReader;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.event.BookReaderSelectionEvent;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.BookReaderReviewActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderReviewAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookReviewList;
-import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
+import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

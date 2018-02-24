@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.me.model;
 
 
-import com.ns.yc.lifehelper.bean.UpdateBean;
+import com.ns.yc.lifehelper.model.bean.UpdateBean;
 
 import retrofit2.http.GET;
 import rx.Observable;

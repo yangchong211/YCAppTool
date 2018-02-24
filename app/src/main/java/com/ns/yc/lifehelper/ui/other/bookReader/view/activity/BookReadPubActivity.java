@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.weight.epubview.DirectionalViewpager;
+import com.ns.yc.lifehelper.weight.epubview.DirectionalViewpager;
 
 import butterknife.Bind;
 

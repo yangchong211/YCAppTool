@@ -1,6 +1,6 @@
 package com.ns.yc.lifehelper.event;
 
-import com.ns.yc.lifehelper.api.ConstantBookReader;
+import com.ns.yc.lifehelper.api.constant.ConstantBookReader;
 
 /**
  * Created by PC on 2017/9/28.

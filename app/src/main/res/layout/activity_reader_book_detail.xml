@@ -102,7 +102,7 @@
                     android:layout_below="@id/iv_book_cover"
                     android:layout_marginTop="10dp">
 
-                    <com.ns.yc.lifehelper.ui.weight.DrawableCenterButton
+                    <com.ns.yc.lifehelper.weight.DrawableCenterButton
                         android:id="@+id/btn_join_collection"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                         android:text="@string/book_detail_join_collection"
                         android:textColor="@color/colorWhite" />
 
-                    <com.ns.yc.lifehelper.ui.weight.DrawableCenterButton
+                    <com.ns.yc.lifehelper.weight.DrawableCenterButton
                         android:id="@+id/btn_read"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

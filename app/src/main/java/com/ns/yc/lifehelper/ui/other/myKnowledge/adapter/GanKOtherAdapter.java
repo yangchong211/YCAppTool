@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.bean.GanKIoDataBean;
 import com.ns.yc.lifehelper.utils.AppUtil;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;

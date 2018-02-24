@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseConfig;
 import com.ns.yc.lifehelper.ui.other.gank.bean.CategoryResult;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;

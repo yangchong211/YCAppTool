@@ -9,15 +9,15 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.SubCategoryAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryList;
-import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
+import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.ReadBookDetailActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.SubCategoryListActivity;
 import com.ns.yc.lifehelper.utils.AppUtil;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

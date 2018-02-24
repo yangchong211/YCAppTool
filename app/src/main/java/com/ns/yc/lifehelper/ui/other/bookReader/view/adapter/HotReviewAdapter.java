@@ -5,10 +5,10 @@ import android.app.Activity;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantZssqApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
 import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderDetailReviews;
-import com.ns.yc.lifehelper.ui.weight.XLHRatingBar;
+import com.ns.yc.lifehelper.weight.XLHRatingBar;
 
 import java.util.List;
 

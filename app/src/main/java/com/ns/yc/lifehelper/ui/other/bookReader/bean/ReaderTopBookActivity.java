@@ -11,12 +11,12 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.TopReaderAdapter;
-import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
+import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.SubHomeTopRankActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.SubTopRankActivity;
-import com.ns.yc.lifehelper.ui.weight.CustomExpandableListView;
+import com.ns.yc.lifehelper.weight.CustomExpandableListView;
 import com.ns.yc.lifehelper.utils.AppUtil;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import java.util.ArrayList;
 import java.util.List;

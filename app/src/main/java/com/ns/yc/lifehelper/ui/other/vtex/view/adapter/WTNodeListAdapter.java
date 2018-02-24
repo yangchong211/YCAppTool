@@ -13,7 +13,7 @@ import com.ns.yc.lifehelper.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeBean;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeListBean;
 import com.ns.yc.lifehelper.ui.other.vtex.presenter.WTexPagerPresenter;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.util.List;
 

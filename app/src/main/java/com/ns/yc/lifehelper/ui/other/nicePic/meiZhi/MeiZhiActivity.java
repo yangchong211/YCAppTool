@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.nicePic.meiZhi;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -9,8 +9,10 @@ import android.widget.TextView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 
+import org.yczbj.ycrefreshviewlib.YCRefreshView;
+
 import butterknife.Bind;
-import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
+import butterknife.ButterKnife;
 
 
 /**
@@ -32,13 +34,12 @@ public class MeiZhiActivity extends BaseActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.recyclerView)
-    RecyclerView recyclerView;
-    @Bind(R.id.bga_refresh)
-    BGARefreshLayout bgaRefresh;
+    YCRefreshView recyclerView;
+
 
     @Override
     public int getContentView() {
-        return R.layout.base_bga_recycle_header;
+        return R.layout.base_refresh_recycle_bar;
     }
 
     @Override
@@ -67,4 +68,10 @@ public class MeiZhiActivity extends BaseActivity {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

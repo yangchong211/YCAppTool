@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.api.ConstantImageApi;
+import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.api.constantApi.ConstantImageApi;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
 
 import java.util.List;

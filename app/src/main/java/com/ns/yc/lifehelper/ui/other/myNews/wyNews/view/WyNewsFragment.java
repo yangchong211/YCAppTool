@@ -13,13 +13,13 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantALiYunApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.WyNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.adapter.TodayNewsAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.bean.TodayNewsDetail;
-import com.ns.yc.lifehelper.ui.other.myNews.wyNews.model.TodayNewsModel;
+import com.ns.yc.lifehelper.api.http.news.TodayNewsModel;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;

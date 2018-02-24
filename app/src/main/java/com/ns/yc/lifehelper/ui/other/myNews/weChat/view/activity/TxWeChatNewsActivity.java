@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewQQActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.contract.TxWeChatContract;

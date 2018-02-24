@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.myPicture.bean.PicBeautifulContentBean;
-import com.ns.yc.lifehelper.ui.weight.imageView.RadioImageView;
+import com.ns.yc.lifehelper.weight.imageView.RadioImageView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 

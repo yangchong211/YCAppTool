@@ -11,14 +11,15 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.state.BaseStateBarActivity;
-import com.ns.yc.lifehelper.callback.DefaultItemTouchHelpCallback;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerBean;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerItemBean;
 import com.ns.yc.lifehelper.ui.other.gold.view.adapter.GoldManagerAdapter;
+
+import org.yczbj.ycrefreshviewlib.callback.DefaultItemTouchHelpCallback;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-import com.ns.yc.lifehelper.utils.RxBus;
+import com.ns.yc.lifehelper.utils.rx.RxBus;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import java.util.Collections;

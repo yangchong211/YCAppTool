@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="2dp">
 
-    <com.ns.yc.lifehelper.ui.weight.imageView.RadioImageView
+    <com.ns.yc.lifehelper.weight.imageView.RadioImageView
         android:id="@+id/iv_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

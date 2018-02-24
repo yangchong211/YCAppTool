@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.ui.other.workDo.data;
 
 import android.text.TextUtils;
 
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
 

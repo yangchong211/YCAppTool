@@ -19,7 +19,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.SubHomeTopAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.BooksByCats;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.SubHomeTopBean;
-import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
+import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;

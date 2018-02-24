@@ -7,7 +7,7 @@
 
     <include layout="@layout/base_tool_bar" />
 
-    <com.ns.yc.lifehelper.ui.weight.SelectionLayout
+    <com.ns.yc.lifehelper.weight.SelectionLayout
         android:id="@+id/sl_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

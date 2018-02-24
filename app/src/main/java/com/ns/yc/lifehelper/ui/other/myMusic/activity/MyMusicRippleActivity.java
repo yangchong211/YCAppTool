@@ -5,7 +5,7 @@ import android.widget.ImageView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.weight.musicView.RippleAnimationView;
+import com.ns.yc.lifehelper.weight.musicView.RippleAnimationView;
 
 import butterknife.Bind;
 

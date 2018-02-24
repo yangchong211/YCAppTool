@@ -12,9 +12,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeBean;
-import com.ns.yc.lifehelper.utils.ImageUtils;
-
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.util.List;
 

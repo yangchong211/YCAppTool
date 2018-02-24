@@ -39,11 +39,11 @@ import com.ns.yc.lifehelper.ui.me.view.adapter.GlideImageLoader;
 import com.ns.yc.lifehelper.ui.other.notePad.bean.NotePadDetail;
 import com.ns.yc.lifehelper.ui.other.notePad.fragment.DatePickerFragment;
 import com.ns.yc.lifehelper.ui.other.notePad.fragment.TimePickerFragment;
-import com.ns.yc.lifehelper.utils.AppImageUtils;
+import com.ns.yc.lifehelper.utils.image.AppImageUtils;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.SDCardUtils;
 import com.ns.yc.lifehelper.utils.StringUtils;
-import com.ns.yc.lifehelper.utils.TimerUtils;
+import com.ns.yc.lifehelper.utils.time.TimerUtils;
 import com.ns.yc.yccustomtextlib.hyper.HyperTextEditor;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 

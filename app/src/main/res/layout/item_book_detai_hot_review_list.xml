@@ -51,7 +51,7 @@
         android:textColor="@color/blackText1"
         tools:text="越到后面越索然无味" />
 
-    <com.ns.yc.lifehelper.ui.weight.XLHRatingBar
+    <com.ns.yc.lifehelper.weight.XLHRatingBar
           xmlns:xlhRatingBar="http://schemas.android.com/apk/res-auto"
           android:id="@+id/rating"
           android:layout_width="wrap_content"

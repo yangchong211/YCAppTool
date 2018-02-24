@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantImageApi;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.api.constantApi.ConstantImageApi;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.util.ArrayList;
 import java.util.List;

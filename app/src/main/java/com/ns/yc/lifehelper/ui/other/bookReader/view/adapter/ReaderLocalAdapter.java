@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantBookReader;
+import com.ns.yc.lifehelper.api.constant.ConstantBookReader;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderRecommendBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.manager.SettingManager;
 import com.ns.yc.lifehelper.utils.FileUtils;

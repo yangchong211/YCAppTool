@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 import com.yc.cn.ycbannerlib.first.adapter.StaticPagerAdapter;
 
 import java.util.List;

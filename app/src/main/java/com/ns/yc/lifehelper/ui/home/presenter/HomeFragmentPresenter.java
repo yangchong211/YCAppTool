@@ -10,12 +10,12 @@ import android.text.style.URLSpan;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.bean.HomeBlogEntity;
+import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.cache.CacheHomeNews;
 import com.ns.yc.lifehelper.cache.CacheHomePile;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
-import com.ns.yc.lifehelper.ui.weight.pileCard.ItemEntity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ns.yc.lifehelper.weight.pileCard.ItemEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,7 +118,6 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     }
 
 
-    @Override
     public ArrayList<ItemEntity> getHomePileData() {
         initRealm();
         RealmResults<CacheHomePile> cacheHomePiles;

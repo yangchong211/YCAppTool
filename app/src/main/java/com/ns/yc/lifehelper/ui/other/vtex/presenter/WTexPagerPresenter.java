@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.vtex.presenter;
 
 import com.ns.yc.lifehelper.ui.other.vtex.contract.WTexPagerContract;
-import com.ns.yc.lifehelper.ui.other.vtex.model.api.VTexApi;
+import com.ns.yc.lifehelper.api.http.vtex.VTexApi;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.TopicListBean;
 import com.ns.yc.lifehelper.utils.LogUtils;
 

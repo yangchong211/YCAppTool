@@ -9,13 +9,13 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantALiYunApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.bean.TodayNewsChannel;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.cache.CacheTodayChannel;
-import com.ns.yc.lifehelper.ui.other.myNews.wyNews.model.TodayNewsModel;
+import com.ns.yc.lifehelper.api.http.news.TodayNewsModel;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.view.WyNewsFragment;
 
 import java.util.ArrayList;

@@ -32,7 +32,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.listener.MePersonBaseListener;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MePersonFragment;
-import com.ns.yc.lifehelper.ui.weight.AutoHeightViewPager;
+import com.ns.yc.lifehelper.weight.AutoHeightViewPager;
 import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
 
 import java.io.File;

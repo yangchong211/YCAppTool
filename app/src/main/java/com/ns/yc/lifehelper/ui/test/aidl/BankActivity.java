@@ -5,6 +5,7 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -121,7 +122,8 @@ public class BankActivity extends AppCompatActivity {
 
     private void initThirdAnim() {
         Button b3 = (Button) findViewById(R.id.b3);
-        Animator mAnim = AnimatorInflater.loadAnimator(this, R.animator.animator_1_0);
+        @SuppressLint("ResourceType")
+        Animator mAnim = AnimatorInflater.loadAnimator(this, R.anim.animator_1_0);
         mAnim.setTarget(b3);
         mAnim.start();
         mAnim.addListener(new Animator.AnimatorListener() {
@@ -149,7 +151,8 @@ public class BankActivity extends AppCompatActivity {
 
     private void initFourAnim() {
         Button b4 = (Button) findViewById(R.id.b4);
-        Animator mAnim2 = AnimatorInflater.loadAnimator(this, R.animator.animator_set);
+        @SuppressLint("ResourceType")
+        Animator mAnim2 = AnimatorInflater.loadAnimator(this, R.anim.animator_set);
         mAnim2.setTarget(b4);
         mAnim2.start();
         mAnim2.addListener(new AnimatorListenerAdapter() {

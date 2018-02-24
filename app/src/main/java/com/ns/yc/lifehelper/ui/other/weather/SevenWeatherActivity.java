@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.weather.bean.FiftyDayWeather;
 import com.ns.yc.lifehelper.ui.other.weather.contract.SevenWeatherContract;

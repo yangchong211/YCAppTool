@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.myPicture.bean.PicBeautifulMainBean;
-import com.ns.yc.lifehelper.ui.weight.imageView.RadioImageView;
+import com.ns.yc.lifehelper.weight.imageView.RadioImageView;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -67,7 +67,6 @@ public abstract class PicBeautifulAdapter extends ArrayRecyclerAdapter<PicBeauti
 
         @Bind(R.id.iv_image)
         public RadioImageView imageView;
-
         @Bind(R.id.tv_title)
         public TextView title;
 

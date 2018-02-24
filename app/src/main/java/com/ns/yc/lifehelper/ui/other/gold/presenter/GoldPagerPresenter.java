@@ -6,9 +6,9 @@ import android.support.annotation.NonNull;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.ui.other.gold.contract.GoldPagerContract;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldListBean;
-import com.ns.yc.lifehelper.ui.other.gold.model.api.GoldModel;
+import com.ns.yc.lifehelper.api.http.gold.GoldModel;
 import com.ns.yc.lifehelper.utils.LogUtils;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

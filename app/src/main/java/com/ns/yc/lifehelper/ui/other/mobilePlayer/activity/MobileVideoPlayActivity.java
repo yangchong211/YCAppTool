@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantKeys;
+import com.ns.yc.lifehelper.api.constant.ConstantKeys;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.bean.VideoItem;
 import com.ns.yc.lifehelper.utils.AppUtil;

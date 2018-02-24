@@ -11,10 +11,10 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.adapter.GuideViewPagerAdapter;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.ui.guide.view.adapter.GuideViewPagerAdapter;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.weight.DotView;
+import com.ns.yc.lifehelper.weight.DotView;
 
 import java.util.ArrayList;
 

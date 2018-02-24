@@ -7,9 +7,8 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.blankj.utilcode.util.Utils;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.service.InitializeService;
-import com.ns.yc.lifehelper.utils.AppUtil;
 
 import java.io.File;
 

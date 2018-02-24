@@ -3,17 +3,17 @@ package com.ns.yc.lifehelper.ui.guide.presenter;
 import android.app.Activity;
 import android.text.TextUtils;
 
-import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.api.ConstantImageApi;
+import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.api.constantApi.ConstantImageApi;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.base.BaseConfig;
-import com.ns.yc.lifehelper.bean.HomeBlogEntity;
+import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.cache.CacheFindBottomNews;
 import com.ns.yc.lifehelper.cache.CacheFindNews;
 import com.ns.yc.lifehelper.cache.CacheHomeNews;
 import com.ns.yc.lifehelper.cache.CacheHomePile;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
-import com.ns.yc.lifehelper.ui.weight.pileCard.ItemEntity;
+import com.ns.yc.lifehelper.weight.pileCard.ItemEntity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.jph.takephoto.model.TResult;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.listener.MePersonBaseListener;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 
 public class MePersonBaseView extends FrameLayout implements View.OnClickListener {

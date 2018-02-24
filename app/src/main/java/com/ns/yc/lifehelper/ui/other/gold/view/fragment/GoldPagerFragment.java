@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.state.BaseStateFragment;
 import com.ns.yc.lifehelper.ui.other.gold.contract.GoldPagerContract;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldListBean;

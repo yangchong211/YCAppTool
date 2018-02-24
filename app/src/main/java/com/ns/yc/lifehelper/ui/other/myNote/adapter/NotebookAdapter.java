@@ -14,7 +14,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.myNote.bean.NoteDetail;
 import com.ns.yc.lifehelper.ui.other.myNote.view.NoteAddFragment;
-import com.ns.yc.lifehelper.ui.weight.noteView.HTQDragGridView;
+import com.ns.yc.lifehelper.weight.noteView.HTQDragGridView;
 
 import java.util.Collections;
 import java.util.List;

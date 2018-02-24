@@ -23,7 +23,7 @@ import com.ns.yc.lifehelper.cache.CacheNoteDetail;
 import com.ns.yc.lifehelper.ui.other.myNote.adapter.NotebookAdapter;
 import com.ns.yc.lifehelper.ui.other.myNote.bean.NoteDetail;
 import com.ns.yc.lifehelper.ui.other.myNote.view.NoteAddActivity;
-import com.ns.yc.lifehelper.ui.weight.noteView.HTQDragGridView;
+import com.ns.yc.lifehelper.weight.noteView.HTQDragGridView;
 import com.ns.yc.lifehelper.utils.animation.AnimationsUtils;
 
 import java.util.ArrayList;

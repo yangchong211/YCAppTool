@@ -8,11 +8,11 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.ui.other.douBook.adapter.DouBookAdapter;
-import com.ns.yc.lifehelper.ui.other.douBook.bean.DouBookBean;
-import com.ns.yc.lifehelper.ui.other.douBook.model.DouBookModel;
+import com.ns.yc.lifehelper.ui.other.douban.douBook.view.adapter.DouBookAdapter;
+import com.ns.yc.lifehelper.ui.other.douban.douBook.model.DouBookBean;
+import com.ns.yc.lifehelper.api.http.douban.DouBookModel;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.activity.KnowledgeSearchActivity;
-import com.ns.yc.lifehelper.ui.weight.manager.FullyGridLayoutManager;
+import com.ns.yc.lifehelper.weight.manager.FullyGridLayoutManager;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -178,7 +178,7 @@ public class KnowledgeSearchFragment extends BaseFragment {
 
 
     private void getTopMovieData(String mType , final int start, int count) {
-        DouBookModel model = DouBookModel.getInstance(activity);
+        DouBookModel model = DouBookModel.getInstance();
         model.getHotMovie(mType,start,count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

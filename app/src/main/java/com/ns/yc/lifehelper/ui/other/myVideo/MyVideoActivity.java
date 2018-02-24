@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
+import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.myVideo.activity.VideoLocalActivity;
 import com.ns.yc.lifehelper.ui.other.myVideo.adapter.VideoGridAdapter;
@@ -138,7 +138,7 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
         }
 
         //设置适配器
-        vpPager.setAdapter(new ViewPagerRollAdapter(mPagerList));
+        vpPager.setAdapter(new BaseViewPagerRollAdapter(mPagerList));
         //设置圆点
         setOvalLayout();
     }

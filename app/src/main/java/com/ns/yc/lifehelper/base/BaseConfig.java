@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.base;
 
 
 import com.blankj.utilcode.util.SPUtils;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 
 /**
  * ================================================

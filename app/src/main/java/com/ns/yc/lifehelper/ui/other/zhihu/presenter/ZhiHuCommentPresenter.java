@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuCommentContract;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.api.ZhiHuModel;
+import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuCommentBean;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import rx.Subscriber;
 import rx.Subscription;

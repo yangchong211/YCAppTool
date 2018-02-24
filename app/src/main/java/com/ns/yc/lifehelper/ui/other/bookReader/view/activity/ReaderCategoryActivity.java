@@ -7,16 +7,16 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.CategoryListAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.CategoryList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryBean;
-import com.ns.yc.lifehelper.ui.other.bookReader.model.BookReaderModel;
-import com.ns.yc.lifehelper.ui.weight.manager.FullyGridLayoutManager;
+import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
+import com.ns.yc.lifehelper.weight.manager.FullyGridLayoutManager;
 import com.ns.yc.lifehelper.utils.AppUtil;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import org.yczbj.ycrefreshviewlib.item.SupportGridItemLine;
 

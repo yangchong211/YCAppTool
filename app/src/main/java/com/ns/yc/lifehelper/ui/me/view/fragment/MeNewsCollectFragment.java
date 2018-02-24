@@ -11,11 +11,12 @@ import android.view.View;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.cache.CacheZhLike;
-import com.ns.yc.lifehelper.callback.DefaultItemTouchHelpCallback;
 import com.ns.yc.lifehelper.ui.me.contract.MeNewsCollectContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeNewsCollectPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
 import com.ns.yc.lifehelper.ui.me.view.adapter.MeNewsLikeAdapter;
+
+import org.yczbj.ycrefreshviewlib.callback.DefaultItemTouchHelpCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;

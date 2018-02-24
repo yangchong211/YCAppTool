@@ -15,11 +15,11 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantALiYunApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.bean.ExpressDeliverySearchBean;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.adapter.ExpressDeliveryAdapter;
-import com.ns.yc.lifehelper.ui.other.expressDelivery.model.ExpressDeliverySearchModel;
+import com.ns.yc.lifehelper.api.http.expressDelivery.ExpressDeliverySearchModel;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;

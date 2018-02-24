@@ -12,7 +12,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
-import com.ns.yc.lifehelper.ui.weight.textSpan.AwesomeTextHandler;
+import com.ns.yc.lifehelper.weight.textSpan.AwesomeTextHandler;
 
 
 /**

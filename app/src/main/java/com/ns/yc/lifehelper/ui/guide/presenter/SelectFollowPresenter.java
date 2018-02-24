@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.bean.SelectPoint;
+import com.ns.yc.lifehelper.model.bean.SelectPoint;
 import com.ns.yc.lifehelper.cache.SelectFollow;
 import com.ns.yc.lifehelper.cache.SelectUnFollow;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;

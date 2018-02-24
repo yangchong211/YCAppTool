@@ -1,6 +1,5 @@
 package com.ns.yc.lifehelper.ui.me.view;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,9 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
@@ -26,8 +25,6 @@ import com.ns.yc.lifehelper.ui.me.view.activity.MeQoneActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ns.yc.lifehelper.ui.other.timer.TimerActivity;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 

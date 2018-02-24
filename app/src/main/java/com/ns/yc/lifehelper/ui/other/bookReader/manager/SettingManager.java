@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.other.bookReader.manager;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 
 /**
  * Created by PC on 2017/9/22.

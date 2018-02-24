@@ -59,7 +59,7 @@
         android:textColor="@color/blackText1"
         android:textSize="16dp" />
 
-    <com.ns.yc.lifehelper.ui.weight.readerBook.BookContentTextView
+    <com.ns.yc.lifehelper.weight.readerBook.BookContentTextView
         android:id="@+id/tvContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

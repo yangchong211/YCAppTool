@@ -21,9 +21,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.ConstantBookReader;
+import com.ns.yc.lifehelper.api.constant.ConstantBookReader;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.weight.chmview.Utils;
+import com.ns.yc.lifehelper.weight.chmview.Utils;
 
 import java.io.File;
 import java.io.IOException;

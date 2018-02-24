@@ -3,10 +3,10 @@ package com.ns.yc.lifehelper.ui.other.myNews.wxNews.presenter;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.ns.yc.lifehelper.api.ConstantALiYunApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.contract.WxFragmentContract;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.api.WxNewsModel;
+import com.ns.yc.lifehelper.api.http.news.WxNewsModel;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
 
 import io.realm.Realm;

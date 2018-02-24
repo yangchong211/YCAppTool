@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.ns.yc.lifehelper.ui.weight.imageView.RadioImageView
+        <com.ns.yc.lifehelper.weight.imageView.RadioImageView
             android:id="@+id/iv_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

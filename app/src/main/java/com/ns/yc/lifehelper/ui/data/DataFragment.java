@@ -20,11 +20,11 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.adapter.NarrowImageAdapter;
-import com.ns.yc.lifehelper.adapter.ViewPagerGridAdapter;
-import com.ns.yc.lifehelper.adapter.ViewPagerRollAdapter;
+import com.ns.yc.lifehelper.ui.data.view.adapter.NarrowImageAdapter;
+import com.ns.yc.lifehelper.ui.data.view.adapter.ViewPagerGridAdapter;
+import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.bean.ImageIconBean;
+import com.ns.yc.lifehelper.model.bean.ImageIconBean;
 import com.ns.yc.lifehelper.ui.data.contract.DataFragmentContract;
 import com.ns.yc.lifehelper.ui.data.presenter.DataFragmentPresenter;
 import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
@@ -32,18 +32,17 @@ import com.ns.yc.lifehelper.ui.data.view.activity.GalleryImageActivity;
 import com.ns.yc.lifehelper.ui.data.view.activity.OpenFileActivity;
 import com.ns.yc.lifehelper.ui.data.view.activity.RiddleActivity;
 import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
 import com.ns.yc.lifehelper.ui.other.listener.ListenerActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
-import com.ns.yc.lifehelper.ui.other.safe360.SafeHomeActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.WTexNewsActivity;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.ns.yc.lifehelper.ui.test.aidl.BankActivity;
-import com.ns.yc.lifehelper.ui.weight.MyGridView;
+import com.ns.yc.lifehelper.weight.MyGridView;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -216,7 +215,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
             viewPagerList.add(gridView);
         }
         //设置ViewPager适配器
-        vpPager.setAdapter(new ViewPagerRollAdapter(viewPagerList));
+        vpPager.setAdapter(new BaseViewPagerRollAdapter(viewPagerList));
 
         //添加小圆点
         final ImageView[] ivPoints = new ImageView[totalPage];
@@ -262,7 +261,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                         startActivity(OpenFileActivity.class);
                         break;
                     case 2:
-                        startActivity(SafeHomeActivity.class);
+
                         break;
                     case 3:
                         startActivity(ListenerActivity.class);
@@ -278,6 +277,8 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                         break;
                     case 11:
                         startActivity(DoodleViewActivity.class);
+                        break;
+                    default:
                         break;
                 }
             }

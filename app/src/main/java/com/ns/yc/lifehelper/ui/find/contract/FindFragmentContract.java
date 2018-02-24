@@ -7,7 +7,7 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
 import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.lifehelper.base.mvp1.BaseView;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.first.BannerView;
 import java.util.List;
 

@@ -18,7 +18,6 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.data.view.activity.GalleryImageActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.view.MyPicBeautifulActivity;
-import com.ns.yc.lifehelper.ui.other.myPicture.view.MyPicNiceActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.view.MyPicPileActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.view.fragment.PictureHomeFragment;
 import com.ns.yc.lifehelper.ui.other.myPicture.view.fragment.PictureOtherFragment;
@@ -131,7 +130,9 @@ public class MyPictureActivity extends BaseActivity implements View.OnClickListe
                 startActivity(MyPicPileActivity.class);
                 break;
             case R.id.item4:
-                startActivity(MyPicNiceActivity.class);
+
+                break;
+            default:
                 break;
         }
         return super.onOptionsItemSelected(item);

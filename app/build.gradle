@@ -50,7 +50,6 @@ bugly {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //官方库
-    //官方库
     //noinspection GradleCompatible
     compile 'com.android.support:appcompat-v7:25.4.0'
     compile 'com.android.support:support-v4:25.4.0'
@@ -67,7 +66,7 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.0'
@@ -82,18 +81,15 @@ dependencies {
 
     //图片加载框架
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'jp.wasabeef:glide-transformations:2.0.1'
+    compile 'com.github.bumptech.glide:glide:3.8.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
     //takePhoto框架
     compile 'com.jph.takephoto:takephoto_library:4.0.3'
     compile 'com.lzy.widget:imagepicker:0.5.0'
     //导航栏
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.0@aar'
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     //快速索引
     compile 'me.yokeyword:indexablerecyclerview:1.3.0'
-    //BGA系列
-    compile 'cn.bingoogolapple:bga-refreshlayout:1.1.7'
-    compile 'cn.bingoogolapple:bga-adapter:1.1.5@aar'
     //工具类
     compile 'com.blankj:utilcode:1.7.1'
     //洪洋大神流式布局
@@ -123,7 +119,7 @@ dependencies {
     compile files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
 
 
-    //关于开源库，都已经放到的github上，https://github.com/yangchong211
+    //关于开源库，都已经放到的Github上，https://github.com/yangchong211
     compile 'cn.yc:YCStateLib:1.1'                                  //状态管理
     compile 'cn.yc:YCPhotoLib:1.0'                                  //图片选择器
     compile 'cn.yc:YCDialogLib:3.5'                                 //弹窗

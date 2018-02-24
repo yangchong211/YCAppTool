@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.ui.main.dagger;
 
 
 import com.ns.yc.lifehelper.ui.main.presenter.MainPresenter;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 import dagger.Component;
 

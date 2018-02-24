@@ -3,8 +3,8 @@ package com.ns.yc.lifehelper.ui.data.contract;
 
 import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.lifehelper.base.mvp1.BaseView;
-import com.ns.yc.lifehelper.bean.ImageIconBean;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.model.bean.ImageIconBean;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

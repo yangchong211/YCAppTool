@@ -16,7 +16,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <com.ns.yc.lifehelper.ui.weight.pileCard.HorizontalTransitionLayout
+        <com.ns.yc.lifehelper.weight.pileCard.HorizontalTransitionLayout
             android:id="@+id/countryView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -28,7 +28,7 @@
             scene:textSize="22" />
 
 
-        <com.ns.yc.lifehelper.ui.weight.pileCard.HorizontalTransitionLayout
+        <com.ns.yc.lifehelper.weight.pileCard.HorizontalTransitionLayout
             android:id="@+id/temperatureView"
             android:layout_width="90dp"
             android:layout_height="match_parent"
@@ -45,7 +45,7 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_pile_9_right" />
 
-        </com.ns.yc.lifehelper.ui.weight.pileCard.HorizontalTransitionLayout>
+        </com.ns.yc.lifehelper.weight.pileCard.HorizontalTransitionLayout>
 
 
     </LinearLayout>
@@ -73,7 +73,7 @@
             android:layout_height="15dp"
             android:src="@drawable/ic_icon_star" />
 
-        <com.ns.yc.lifehelper.ui.weight.pileCard.HorizontalTransitionLayout
+        <com.ns.yc.lifehelper.weight.pileCard.HorizontalTransitionLayout
             android:id="@+id/addressView"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -107,7 +107,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.ns.yc.lifehelper.ui.weight.pileCard.FadeTransitionImageView
+        <com.ns.yc.lifehelper.weight.pileCard.FadeTransitionImageView
             android:id="@+id/bottomImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -129,7 +129,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_icon_clock" />
-            <com.ns.yc.lifehelper.ui.weight.pileCard.HorizontalTransitionLayout
+            <com.ns.yc.lifehelper.weight.pileCard.HorizontalTransitionLayout
                 android:id="@+id/timeView"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

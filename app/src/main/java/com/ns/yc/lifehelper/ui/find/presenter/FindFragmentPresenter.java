@@ -14,13 +14,13 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.OnePlusNLayoutHelper;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
-import com.ns.yc.lifehelper.bean.HomeBlogEntity;
+import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
-import com.ns.yc.lifehelper.ui.weight.MarqueeView;
-import com.ns.yc.lifehelper.utils.ImageUtils;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ns.yc.lifehelper.weight.MarqueeView;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 import com.yc.cn.ycbannerlib.first.BannerView;
 import com.yc.cn.ycbaseadapterlib.first.BaseViewHolder;
 

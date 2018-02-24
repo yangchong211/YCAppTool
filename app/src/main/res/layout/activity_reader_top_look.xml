@@ -27,7 +27,7 @@
                 android:text="男生"
                 android:textColor="@color/blackText"
                 android:textSize="18dp" />
-            <com.ns.yc.lifehelper.ui.weight.CustomExpandableListView
+            <com.ns.yc.lifehelper.weight.CustomExpandableListView
                 android:id="@+id/elv_male"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 android:text="女生"
                 android:textColor="@color/blackText"
                 android:textSize="18dp" />
-            <com.ns.yc.lifehelper.ui.weight.CustomExpandableListView
+            <com.ns.yc.lifehelper.weight.CustomExpandableListView
                 android:id="@+id/elv_fe_male"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

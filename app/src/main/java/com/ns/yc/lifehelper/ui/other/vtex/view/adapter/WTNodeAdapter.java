@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.vtex.view.activity.WTNodeListActivity;
-import com.ns.yc.lifehelper.ui.weight.FlowLayout;
+import com.ns.yc.lifehelper.weight.FlowLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.ns.yc.lifehelper.api.ConstantBookReader;
+import com.ns.yc.lifehelper.api.constant.ConstantBookReader;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -11,8 +11,8 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.Constant;
-import com.ns.yc.lifehelper.api.ConstantEnvicloudApi;
+import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.api.constantApi.ConstantEnvicloudApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.other.weather.adapter.WeatherDetailAdapter;
@@ -23,7 +23,7 @@ import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherDetail;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherForecast;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherLive;
 import com.ns.yc.lifehelper.ui.other.weather.bean.WeatherSuggestion;
-import com.ns.yc.lifehelper.ui.other.weather.model.WeathersModel;
+import com.ns.yc.lifehelper.api.http.weather.WeathersModel;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 
 import java.util.ArrayList;

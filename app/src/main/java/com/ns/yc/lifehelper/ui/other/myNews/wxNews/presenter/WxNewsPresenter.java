@@ -2,11 +2,11 @@ package com.ns.yc.lifehelper.ui.other.myNews.wxNews.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.ns.yc.lifehelper.api.ConstantALiYunApi;
+import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.cache.CacheWxChannel;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.contract.WxNewsContract;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.api.WxNewsModel;
+import com.ns.yc.lifehelper.api.http.news.WxNewsModel;
 import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsTypeBean;
 
 import java.util.List;

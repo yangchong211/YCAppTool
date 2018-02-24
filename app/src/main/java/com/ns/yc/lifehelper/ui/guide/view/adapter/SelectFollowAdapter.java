@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.bean.SelectPoint;
+import com.ns.yc.lifehelper.model.bean.SelectPoint;
 import com.ns.yc.lifehelper.listener.OnListItemClickListener;
 import com.yc.cn.ycrecycleviewlib.select.SelectRecyclerViewAdapter;
 

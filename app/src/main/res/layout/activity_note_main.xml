@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible" >
-            <com.ns.yc.lifehelper.ui.weight.noteView.HTQDragGridView
+            <com.ns.yc.lifehelper.weight.noteView.HTQDragGridView
                 android:id="@+id/gridView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

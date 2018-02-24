@@ -45,6 +45,8 @@ public class XmlUtil {
                         nodeMap = null;
                     }
                     break;
+                default:
+                    break;
             }
             root=xmlResourceParser.next();
         }

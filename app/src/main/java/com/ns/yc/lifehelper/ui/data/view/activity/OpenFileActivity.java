@@ -19,7 +19,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.data.contract.OpenFileContract;
 import com.ns.yc.lifehelper.ui.data.model.LoadFileModel;
 import com.ns.yc.lifehelper.ui.data.presenter.OpenFilePresenter;
-import com.ns.yc.lifehelper.ui.weight.tencent.SuperFileView;
+import com.ns.yc.lifehelper.weight.tencent.SuperFileView;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.pedaily.yc.ycdialoglib.bottomMenu.CustomBottomDialog;
 import com.pedaily.yc.ycdialoglib.bottomMenu.CustomItem;

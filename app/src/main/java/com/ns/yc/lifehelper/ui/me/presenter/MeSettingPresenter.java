@@ -13,7 +13,7 @@ import android.widget.AdapterView;
 import com.blankj.utilcode.util.AppUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.BaseConfig;
-import com.ns.yc.lifehelper.bean.UpdateBean;
+import com.ns.yc.lifehelper.model.bean.UpdateBean;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.model.MeAppModel;
@@ -21,7 +21,7 @@ import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.lifehelper.utils.GoToScoreUtils;
-import com.ns.yc.lifehelper.utils.RxUtil;
+import com.ns.yc.lifehelper.utils.rx.RxUtil;
 import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
 
 import java.util.ArrayList;
