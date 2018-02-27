@@ -1,14 +1,12 @@
-package com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean;
+package com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean;
 
 import java.util.List;
 
 /**
- * Created by PC on 2017/8/30.
- * 作者：PC
+ * Created by yc on 2018/2/27.
  */
 
 public class WxNewsDetailBean {
-
 
     /**
      * status : 0
@@ -222,4 +220,5 @@ public class WxNewsDetailBean {
             }
         }
     }
+
 }

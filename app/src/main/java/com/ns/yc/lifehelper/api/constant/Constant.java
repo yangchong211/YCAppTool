@@ -39,6 +39,15 @@ public class Constant {
     //本地路径
     public static String ExternalStorageDirectory = Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 
+    public enum CollapsingToolbarLayoutState {
+        // 完全展开
+        EXPANDED,
+        // 折叠
+        COLLAPSED,
+        // 中间状态
+        INTERNEDIATE
+    }
+
     @Retention(RetentionPolicy.SOURCE)
     public @interface Gender {
         String MALE = "male";

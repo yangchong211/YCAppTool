@@ -22,7 +22,6 @@ import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.ns.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
-import com.ns.yc.lifehelper.ui.find.view.activity.FastLookActivity;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.BookReaderActivity;
@@ -33,8 +32,8 @@ import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKHomeActivity;
 import com.ns.yc.lifehelper.ui.other.gold.view.activity.GoldMainActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myMusic.MyMusicActivity;
+import com.ns.yc.lifehelper.ui.other.myNews.videoNews.VideoNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.activity.TxWeChatNewsActivity;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.WxNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.SongCiActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.YuanQuActivity;
@@ -373,7 +372,7 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
                 startActivity(GoldMainActivity.class);
                 break;
             case 2:
-                startActivity(FastLookActivity.class);
+                startActivity(ZhiHuNewsActivity.class);
                 break;
             default:
                 break;
@@ -387,7 +386,7 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
             intent.putExtra("url",url);
             startActivity(intent);
         }else if(position==0){
-            startActivity(WxNewsActivity.class);
+            startActivity(VideoNewsActivity.class);
         }
     }
 
@@ -398,10 +397,8 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
             intent.putExtra("url",url);
             startActivity(intent);
         }else if(position==0){
-            startActivity(WxNewsActivity.class);
+            startActivity(VideoNewsActivity.class);
         }
     }
-
-
 
 }

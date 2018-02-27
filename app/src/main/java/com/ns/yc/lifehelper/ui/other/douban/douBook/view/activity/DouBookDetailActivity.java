@@ -120,17 +120,20 @@ public class DouBookDetailActivity extends BaseActivity {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == 0) {
                     if (state != CollapsingToolbarLayoutState.EXPANDED) {
-                        state = CollapsingToolbarLayoutState.EXPANDED;  //修改状态标记为展开
+                        //修改状态标记为展开
+                        state = CollapsingToolbarLayoutState.EXPANDED;
                     }
                     toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
                 } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
                     if (state != CollapsingToolbarLayoutState.COLLAPSED) {
-                        state = CollapsingToolbarLayoutState.COLLAPSED; //修改状态标记为折叠
+                        //修改状态标记为折叠
+                        state = CollapsingToolbarLayoutState.COLLAPSED;
                     }
                     toolbar.setBackgroundColor(getResources().getColor(R.color.colorTheme));
                 } else {
                     if (state != CollapsingToolbarLayoutState.INTER) {
-                        state = CollapsingToolbarLayoutState.INTER;     //修改状态标记为中间
+                        //修改状态标记为中间
+                        state = CollapsingToolbarLayoutState.INTER;
                     }
                     toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
                 }

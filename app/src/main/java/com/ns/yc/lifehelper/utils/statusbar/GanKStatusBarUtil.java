@@ -219,7 +219,8 @@ public class GanKStatusBarUtil {
         if (Build.VERSION.SDK_INT >= 16) {
             ViewGroup.LayoutParams lp = view.getLayoutParams();
             if (lp != null && lp.height > 0) {
-                lp.height += getStatusBarHeight(context);//增高
+                //增高
+                lp.height += getStatusBarHeight(context);
             }
             view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + getStatusBarHeight(context),
                     view.getPaddingRight(), view.getPaddingBottom());
@@ -230,7 +231,8 @@ public class GanKStatusBarUtil {
     public static void setHeightAndPadding(Context context, View view) {
         if (Build.VERSION.SDK_INT >= 16) {
             ViewGroup.LayoutParams lp = view.getLayoutParams();
-            lp.height += getStatusBarHeight(context);//增高
+            lp.height += getStatusBarHeight(context);
+            //增高
             view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + getStatusBarHeight(context),
                     view.getPaddingRight(), view.getPaddingBottom());
         }
@@ -240,11 +242,13 @@ public class GanKStatusBarUtil {
         if (Build.VERSION.SDK_INT >= 16) {
             ViewGroup.LayoutParams lp = view.getLayoutParams();
             if (lp instanceof ViewGroup.MarginLayoutParams) {
-                ((ViewGroup.MarginLayoutParams) lp).topMargin += getStatusBarHeight(context);//增高
+                //增高
+                ((ViewGroup.MarginLayoutParams) lp).topMargin += getStatusBarHeight(context);
             }
             view.setLayoutParams(lp);
         }
     }
+
     /**
      * 创建假的透明栏
      */

@@ -35,7 +35,7 @@
     <application
         android:name=".base.app.BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_tag_faces_black_48dp"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -85,7 +85,6 @@
         <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuSectionListActivity"/>
         <activity android:name=".ui.other.toDo.view.ToDoTimerActivity"/>
         <activity android:name=".ui.other.toDo.view.activity.ToDoAddActivity"/>
-        <activity android:name=".ui.find.view.activity.FastLookActivity"/>
         <activity android:name=".ui.other.weather.SevenWeatherActivity"/>
         <activity android:name=".ui.main.view.activity.WebViewQQActivity"/>
         <activity android:name=".ui.other.bookReader.view.BookReaderActivity"/>
@@ -123,14 +122,12 @@
         <activity android:name=".ui.other.myKnowledge.activity.KnowledgeSearchActivity"/>
         <activity android:name=".ui.other.myKnowledge.activity.KnowledgeImageActivity"/>
         <activity android:name=".ui.other.myNews.wyNews.WyNewsActivity"/>
-        <activity android:name=".ui.other.myNews.wxNews.WxNewsActivity"/>
         <activity android:name=".ui.other.myNews.wyNews.view.WxNewsDropActivity"/>
         <activity android:name=".ui.other.myNews.txNews.TxNewsActivity"/>
         <activity android:name=".ui.main.view.activity.WebViewActivity"/>
-        <activity android:name=".ui.other.myNews.wxNews.view.NewsSearchActivity"/>
+        <activity android:name=".ui.other.myNews.NewsSearchActivity"/>
         <activity android:name=".ui.other.myNews.weChat.view.activity.TxWeChatNewsActivity"/>
         <activity android:name=".ui.main.view.activity.WebViewChangeActivity"/>
-
         <activity android:name=".ui.other.myTsSc.TangShiActivity"/>
         <activity android:name=".ui.other.myTsSc.SongCiActivity"/>
         <activity android:name=".ui.other.myTsSc.YuanQuActivity"/>
@@ -140,7 +137,7 @@
         <activity android:name=".ui.other.myTsSc.view.YuanQuDetailActivity"/>
         <activity android:name=".ui.other.myTsSc.view.TangShiSearchActivity"/>
         <activity android:name=".ui.other.myTsSc.view.TangShiSearchDetailActivity"/>
-
+        <activity android:name=".ui.other.myNews.videoNews.VideoNewsActivity"/>
 
         <activity android:name=".ui.other.timeListener.TimeListenerActivity"/>
         <activity android:name=".ui.other.vtex.view.activity.WTNodeListActivity"/>
@@ -171,9 +168,6 @@
         <activity android:name=".ui.me.view.activity.MeQoneActivity"/>
         <activity android:name=".ui.me.view.activity.MeLoginActivity"/>
         <activity android:name=".ui.me.view.activity.MeRegisterActivity"/>
-
-        <activity android:name=".ui.other.safe360.SafeHomeActivity"/>
-        <activity android:name=".ui.other.safe360.activity.MobileSafeActivity"/>
 
 
         <activity android:name=".ui.other.listener.ListenerActivity"/>
@@ -231,8 +225,7 @@
 
         <!--广播接收者-->
         <receiver android:name=".receiver.TimerReceiver"/>
-        <receiver
-            android:name=".receiver.ReminderReceiver"
+        <receiver android:name=".receiver.ReminderReceiver"
             android:exported="false"/>
 
 

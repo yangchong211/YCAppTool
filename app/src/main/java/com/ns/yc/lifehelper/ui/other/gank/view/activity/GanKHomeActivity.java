@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
@@ -74,14 +75,13 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
 
     private GanKHomeAContract.Presenter presenter = new GanKHomeAPresenter(this);
 
-    private CollapsingToolbarLayoutState state;             // CollapsingToolbarLayout 折叠状态
+    /**
+     * CollapsingToolbarLayout 折叠状态
+     */
+    private Constant.CollapsingToolbarLayoutState state;
     private ObjectAnimator mAnimator;
 
-    private enum CollapsingToolbarLayoutState {
-        EXPANDED,                                   // 完全展开
-        COLLAPSED,                                  // 折叠
-        INTERNEDIATE                                // 中间状态
-    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -144,11 +144,14 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
             case R.id.ll_home_search:
                 startActivity(GanKSearchActivity.class);
                 break;
-            case R.id.fab_home_random:                  //点击按钮，获取随机图片
+            //点击按钮，获取随机图片
+            case R.id.fab_home_random:
                 presenter.getRandomBanner();
                 break;
             case R.id.iv_home_setting:
                 startActivity(MeSettingActivity.class);
+                break;
+            default:
                 break;
         }
     }
@@ -265,25 +268,27 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
         appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-
                 if (verticalOffset == 0) {
-                    if (state != CollapsingToolbarLayoutState.EXPANDED) {
-                        state = CollapsingToolbarLayoutState.EXPANDED; // 修改状态标记为展开
+                    if (state != Constant.CollapsingToolbarLayoutState.EXPANDED) {
+                        // 修改状态标记为展开
+                        state = Constant.CollapsingToolbarLayoutState.EXPANDED;
                     }
                 } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                    if (state != CollapsingToolbarLayoutState.COLLAPSED) {
+                    if (state != Constant.CollapsingToolbarLayoutState.COLLAPSED) {
                         fabHomeRandom.hide();
-                        state = CollapsingToolbarLayoutState.COLLAPSED; // 修改状态标记为折叠
+                        // 修改状态标记为折叠
+                        state = Constant.CollapsingToolbarLayoutState.COLLAPSED;
                         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) appbar.getLayoutParams();
                         layoutParams.height = SizeUtils.dp2px(240);
                         appbar.setLayoutParams(layoutParams);
                     }
                 } else {
-                    if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
-                        if (state == CollapsingToolbarLayoutState.COLLAPSED) {
+                    if (state != Constant.CollapsingToolbarLayoutState.INTERNEDIATE) {
+                        if (state == Constant.CollapsingToolbarLayoutState.COLLAPSED) {
                             fabHomeRandom.show();
                         }
-                        state = CollapsingToolbarLayoutState.INTERNEDIATE; // 修改状态标记为中间
+                        // 修改状态标记为中间
+                        state = Constant.CollapsingToolbarLayoutState.INTERNEDIATE;
                     }
                 }
             }

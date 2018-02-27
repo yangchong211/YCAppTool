@@ -34,7 +34,6 @@ import com.ns.yc.lifehelper.ui.data.view.activity.RiddleActivity;
 import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
-import com.ns.yc.lifehelper.ui.other.listener.ListenerActivity;
 import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.WTexNewsActivity;
@@ -264,7 +263,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
 
                         break;
                     case 3:
-                        startActivity(ListenerActivity.class);
+                        startActivity(ZhiHuNewsActivity.class);
                         break;
                     case 4:
                         startActivity(MobilePlayerActivity.class);

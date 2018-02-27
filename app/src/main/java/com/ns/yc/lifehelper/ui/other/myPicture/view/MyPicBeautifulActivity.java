@@ -18,7 +18,6 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.view.NewsSearchActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.view.WxNewsDropActivity;
 
 import java.util.ArrayList;
@@ -95,12 +94,12 @@ public class MyPicBeautifulActivity extends BaseActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ll_search:
-                Intent intent = new Intent(MyPicBeautifulActivity.this,NewsSearchActivity.class);
-                intent.putExtra("type","wx");
-                startActivity(intent);
+
                 break;
             case R.id.ll_title_menu:
                 finish();
+                break;
+            default:
                 break;
         }
     }
@@ -125,6 +124,8 @@ public class MyPicBeautifulActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.about:
                 ToastUtils.showShortSafe("关于");
+                break;
+            default:
                 break;
         }
         return super.onOptionsItemSelected(item);

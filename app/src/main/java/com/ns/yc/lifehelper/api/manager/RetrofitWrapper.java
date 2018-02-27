@@ -118,11 +118,11 @@ public class RetrofitWrapper {
                 .Builder()
                 //设置baseUrl
                 .baseUrl(url)
-                //添加转换器Converter(将json 转为JavaBean)
+                //添加转换器Converter(将json 转为JavaBean)，用来进行响应数据转化(反序列化)的ConvertFactory
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 //添加自定义转换器
                 //.addConverterFactory(buildGsonConverterFactory())
-                //添加rx转换器
+                //添加rx转换器，用来生成对应"Call"的CallAdapter的CallAdapterFactory
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(build)
                 .build();

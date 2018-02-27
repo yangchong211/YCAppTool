@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.ui.find.contract;
 
 import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.lifehelper.base.mvp1.BaseView;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.model.bean.WxNewsDetailBean;
+import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WxNewsDetailBean;
 
 import java.util.ArrayList;
 import java.util.List;

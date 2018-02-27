@@ -141,6 +141,8 @@ public class TimeListenerActivity extends BaseActivity {
                     case R.id.about:
                         Toast.makeText(TimeListenerActivity.this, "关于", Toast.LENGTH_SHORT).show();
                         break;
+                    default:
+                        break;
                 }
                 return true;
             }

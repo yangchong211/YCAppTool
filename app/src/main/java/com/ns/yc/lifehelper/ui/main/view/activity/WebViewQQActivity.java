@@ -252,7 +252,9 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
-            if (pb == null) return;
+            if (pb == null) {
+                return;
+            }
             if (newProgress == 100) {
                 pb.setVisibility(View.GONE);
             } else {

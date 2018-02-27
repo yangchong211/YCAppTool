@@ -144,6 +144,7 @@ public class DouMusicDetailActivity extends BaseActivity {
         }
     }
 
+
     private void setTitleBar() {
         setSupportActionBar(titleToolBar);
         ActionBar actionBar = getSupportActionBar();
@@ -161,6 +162,7 @@ public class DouMusicDetailActivity extends BaseActivity {
             }
         });
     }
+
 
     /**
      * 设置自定义 Shared Element切换动画

@@ -34,6 +34,9 @@
     <string name="category_book_msg">%1$d人在追 |&#160; %2$s%%读者留存</string>
     <string name="category_book_count">%1$d本</string>
     <string name="easy_permissions">该APP需要您允许打开电话，拍摄照片和访问设备上的文件的权限</string>
+    <string name="video_news_header_title">我们已经为你精选了5门课程，帮助你了解投资方面的逻辑，以便做出正确的选择</string>
+    <string name="video_news_header_place">298元，一键购买</string>
+
 
     <!--书籍详情相关-->
     <string name="book_detail">书籍详情</string>

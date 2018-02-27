@@ -29,7 +29,7 @@ import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.douban.douMovie.view.DouMovieActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.MyKnowledgeActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.txNews.TxNewsActivity;
-import com.ns.yc.lifehelper.ui.other.myNews.wxNews.WxNewsActivity;
+import com.ns.yc.lifehelper.ui.other.myNews.videoNews.VideoNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.WyNewsActivity;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
@@ -43,13 +43,8 @@ import com.yc.cn.ycbannerlib.first.util.SizeUtil;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.Bind;
-import butterknife.ButterKnife;
-
 
 /**
  * ================================================
@@ -144,7 +139,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
                     intent.putExtra("url", adapter.getAllData().get(position).getUrl());
                     startActivity(intent);
                 } else if (position == 0) {
-                    startActivity(WxNewsActivity.class);
+                    startActivity(VideoNewsActivity.class);
                 }
             }
         });
@@ -182,6 +177,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
         });
     }
 
+
     private void initAddHeader() {
         adapter.addHeader(new RecyclerArrayAdapter.ItemView() {
             @Override
@@ -203,7 +199,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
                     public void onClick(View v) {
                         switch (v.getId()) {
                             case R.id.tv_home_first:
-                                startActivity(WxNewsActivity.class);
+                                startActivity(VideoNewsActivity.class);
                                 break;
                             case R.id.tv_home_second:
                                 startActivity(WyNewsActivity.class);
