@@ -1,7 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.myNews.videoNews;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -10,7 +9,6 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -33,7 +31,6 @@ import com.ns.yc.lifehelper.ui.main.view.activity.WebViewQQActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.contract.TxWeChatContract;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WeChatBean;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.presenter.TxWeChatPresenter;
-import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.activity.TxWeChatNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.adapter.TxWeChatAdapter;
 import com.ns.yc.lifehelper.utils.statusbar.StatusBarAllUtil;
 import com.ns.yc.ycutilslib.blurView.RealTimeBlurView;
@@ -258,6 +255,8 @@ public class VideoNewsActivity extends BaseActivity implements TxWeChatContract.
             }
         });
 
+
+
         //刷新
         /*recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -345,8 +344,12 @@ public class VideoNewsActivity extends BaseActivity implements TxWeChatContract.
 
     @Override
     public void setViewMore(List<WeChatBean.NewslistBean> newsList) {
-        adapter.addAll(newsList);
-        adapter.notifyDataSetChanged();
+        if(newsList.size()>0){
+            adapter.addAll(newsList);
+            adapter.notifyDataSetChanged();
+        }else {
+            adapter.stopMore();
+        }
     }
 
 

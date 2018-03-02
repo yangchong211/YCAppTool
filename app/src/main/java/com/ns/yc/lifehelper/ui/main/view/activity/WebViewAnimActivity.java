@@ -220,6 +220,8 @@ public class WebViewAnimActivity extends BaseActivity implements WebViewAnimCont
             case R.id.open:
                 AppUtil.openLink(this, "");
                 break;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -268,10 +270,12 @@ public class WebViewAnimActivity extends BaseActivity implements WebViewAnimCont
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX,
                                        int scrollY, int oldScrollX, int oldScrollY) {
-                if(scrollY - oldScrollY > 0 && isBottomShow) {  //下移隐藏
+                if(scrollY - oldScrollY > 0 && isBottomShow) {
+                    //下移隐藏
                     isBottomShow = false;
                     llDetailBottom.animate().translationY(llDetailBottom.getHeight());
-                } else if(scrollY - oldScrollY < 0 && !isBottomShow){    //上移出现
+                } else if(scrollY - oldScrollY < 0 && !isBottomShow){
+                    //上移出现
                     isBottomShow = true;
                     llDetailBottom.animate().translationY(0);
                 }

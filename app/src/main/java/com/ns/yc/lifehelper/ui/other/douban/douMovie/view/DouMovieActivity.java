@@ -105,11 +105,13 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
         });
     }
 
+
     @Override
     public void initData() {
         recyclerView.showProgress();
         getHotMovieData();
     }
+
 
     @Override
     public void onClick(View view) {
@@ -121,6 +123,7 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
                 break;
         }
     }
+
 
     private void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(DouMovieActivity.this));
@@ -147,6 +150,7 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
             }
         });
     }
+
 
     private void AddHeader() {
         adapter.removeAllHeader();

@@ -97,7 +97,6 @@ public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListe
     }
 
 
-
     private void initViewPagerAndTab() {
         /**
          * 注意使用的是：getChildFragmentManager，

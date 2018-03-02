@@ -40,7 +40,6 @@ import com.ns.yc.lifehelper.ui.other.vtex.view.WTexNewsActivity;
 import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
-import com.ns.yc.lifehelper.ui.test.aidl.BankActivity;
 import com.ns.yc.lifehelper.weight.MyGridView;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
@@ -272,7 +271,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                         startActivity(RiddleActivity.class);
                         break;
                     case 10:
-                        startActivity(BankActivity.class);
+
                         break;
                     case 11:
                         startActivity(DoodleViewActivity.class);

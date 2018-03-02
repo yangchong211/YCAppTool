@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.douban.douBook.model.DouBookDetailBean;
 import com.ns.yc.lifehelper.api.http.douban.DouBookModel;
@@ -65,15 +66,10 @@ public class DouBookDetailActivity extends BaseActivity {
     CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.app_bar)
     AppBarLayout appBar;
-    private CollapsingToolbarLayoutState state;
+    private Constant.CollapsingToolbarLayoutState state;
     private String id;
     private String alt;
 
-    private enum CollapsingToolbarLayoutState {
-        EXPANDED,
-        COLLAPSED,
-        INTER
-    }
 
     @Override
     protected void onDestroy() {
@@ -119,21 +115,21 @@ public class DouBookDetailActivity extends BaseActivity {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == 0) {
-                    if (state != CollapsingToolbarLayoutState.EXPANDED) {
+                    if (state != Constant.CollapsingToolbarLayoutState.EXPANDED) {
                         //修改状态标记为展开
-                        state = CollapsingToolbarLayoutState.EXPANDED;
+                        state = Constant.CollapsingToolbarLayoutState.EXPANDED;
                     }
                     toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
                 } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                    if (state != CollapsingToolbarLayoutState.COLLAPSED) {
+                    if (state != Constant.CollapsingToolbarLayoutState.COLLAPSED) {
                         //修改状态标记为折叠
-                        state = CollapsingToolbarLayoutState.COLLAPSED;
+                        state = Constant.CollapsingToolbarLayoutState.COLLAPSED;
                     }
                     toolbar.setBackgroundColor(getResources().getColor(R.color.colorTheme));
                 } else {
-                    if (state != CollapsingToolbarLayoutState.INTER) {
+                    if (state != Constant.CollapsingToolbarLayoutState.INTERNEDIATE) {
                         //修改状态标记为中间
-                        state = CollapsingToolbarLayoutState.INTER;
+                        state = Constant.CollapsingToolbarLayoutState.INTERNEDIATE;
                     }
                     toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
                 }

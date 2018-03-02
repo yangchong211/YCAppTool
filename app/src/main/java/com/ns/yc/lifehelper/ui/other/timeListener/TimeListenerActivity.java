@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.timeListener.view.TimeListenerFragment;
@@ -58,17 +59,10 @@ public class TimeListenerActivity extends BaseActivity {
     NestedScrollView nestedScrollView;
     @Bind(R.id.col)
     CoordinatorLayout col;
-    //枚举定义出CollapsingToolbarLayout展开、折叠、中间，这三种状态
-    private CollapsingToolbarLayoutState state;
+    private Constant.CollapsingToolbarLayoutState state;
     private List<String> mTitles;
     private ArrayList<Fragment> mFragments;
 
-
-    private enum CollapsingToolbarLayoutState {
-        EXPANDED,
-        COLLAPSED,
-        INTERNEDIATE
-    }
 
 
     @Override
@@ -104,22 +98,22 @@ public class TimeListenerActivity extends BaseActivity {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (verticalOffset == 0) {
-                    if (state != CollapsingToolbarLayoutState.EXPANDED) {
-                        state = CollapsingToolbarLayoutState.EXPANDED;  //修改状态标记为展开
-                        collapsingToolbar.setTitle("");                //设置title为EXPANDED
+                    if (state != Constant.CollapsingToolbarLayoutState.EXPANDED) {
+                        state = Constant.CollapsingToolbarLayoutState.EXPANDED;
+                        collapsingToolbar.setTitle("");
                         tvTitle.setVisibility(View.GONE);
                     }
                 } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                    if (state != CollapsingToolbarLayoutState.COLLAPSED) {
-                        collapsingToolbar.setTitle("");                //设置title不显示
-                        state = CollapsingToolbarLayoutState.COLLAPSED; //修改状态标记为折叠
+                    if (state != Constant.CollapsingToolbarLayoutState.COLLAPSED) {
+                        collapsingToolbar.setTitle("");
+                        state = Constant.CollapsingToolbarLayoutState.COLLAPSED;
                         tvTitle.setVisibility(View.VISIBLE);
                         tvTitle.setText("专题详情");
                     }
                 } else {
-                    if (state != CollapsingToolbarLayoutState.INTERNEDIATE) {
-                        collapsingToolbar.setTitle("");             //设置title为INTERNEDIATE
-                        state = CollapsingToolbarLayoutState.INTERNEDIATE;  //修改状态标记为中间
+                    if (state != Constant.CollapsingToolbarLayoutState.INTERNEDIATE) {
+                        collapsingToolbar.setTitle("");
+                        state = Constant.CollapsingToolbarLayoutState.INTERNEDIATE;
                         tvTitle.setVisibility(View.GONE);
                     }
                 }
