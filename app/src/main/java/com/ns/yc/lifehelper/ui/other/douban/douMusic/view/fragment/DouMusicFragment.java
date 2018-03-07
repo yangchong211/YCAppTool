@@ -12,6 +12,7 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseLazyFragment;
 import com.ns.yc.lifehelper.ui.other.douban.douMusic.view.DouMusicActivity;
 import com.ns.yc.lifehelper.ui.other.douban.douMusic.view.activity.DouMusicDetailActivity;
 import com.ns.yc.lifehelper.ui.other.douban.douMusic.view.adapter.DouMusicAdapter;
@@ -37,7 +38,7 @@ import rx.schedulers.Schedulers;
  * 修订历史：
  * ================================================
  */
-public class DouMusicFragment extends BaseFragment {
+public class DouMusicFragment extends BaseLazyFragment {
 
 
     private static final String TYPE = "";
@@ -106,9 +107,16 @@ public class DouMusicFragment extends BaseFragment {
 
     @Override
     public void initData() {
+
+    }
+
+
+    @Override
+    public void onLazyLoad() {
         recyclerView.showProgress();
         getDouMusic(mType , 0 , 30);
     }
+
 
     private void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
@@ -237,7 +245,6 @@ public class DouMusicFragment extends BaseFragment {
                     }
                 });
     }
-
 
 
 }

@@ -74,7 +74,8 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
 
     private void registerEvent() {
         initRealm();
-        Subscription rxSubscription = RxBus.getDefault().toObservable(CalendarDay.class)
+        Observable<CalendarDay> calendarDayObservable = RxBus.getDefault().toObservable(CalendarDay.class);
+        Subscription rxSubscription = calendarDayObservable
                 .subscribeOn(Schedulers.io())
                 .map(new Func1<CalendarDay, String>() {
                     @Override
@@ -104,7 +105,8 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
                         return true;
                     }
                 })
-                .observeOn(Schedulers.io())   //为了网络请求切到io线程
+                //为了网络请求切到io线程
+                .observeOn(Schedulers.io())
                 .flatMap(new Func1<String, Observable<ZhiHuDailyBeforeListBean>>() {
                     @Override
                     public Observable<ZhiHuDailyBeforeListBean> call(String date) {
@@ -112,7 +114,8 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
                         return model.fetchDailyBeforeListInfo(date);
                 }
                 })
-                .observeOn(AndroidSchedulers.mainThread())    //为了使用Realm和显示结果切到主线程
+                //为了使用Realm和显示结果切到主线程
+                .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<ZhiHuDailyBeforeListBean, ZhiHuDailyBeforeListBean>() {
                     @Override
                     public ZhiHuDailyBeforeListBean call(ZhiHuDailyBeforeListBean dailyBeforeListBean) {

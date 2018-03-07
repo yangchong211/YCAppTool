@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.ui.other.gank.presenter;
 
 import com.ns.yc.lifehelper.ui.other.gank.bean.CategoryResult;
 import com.ns.yc.lifehelper.ui.other.gank.contract.GanKHomeFContract;
-import com.ns.yc.lifehelper.ui.other.gank.network.GanKModel;
+import com.ns.yc.lifehelper.api.http.gank.GanKModel;
 
 import rx.Subscriber;
 import rx.Subscription;

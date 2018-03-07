@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseLazyFragment;
 import com.ns.yc.lifehelper.ui.other.douban.douBook.contract.DouBookContract;
 import com.ns.yc.lifehelper.ui.other.douban.douBook.presenter.DouBookPresenter;
 import com.ns.yc.lifehelper.ui.other.douban.douBook.view.DouBookActivity;
@@ -23,9 +24,14 @@ import com.ns.yc.lifehelper.weight.manager.FullyGridLayoutManager;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.Bind;
+import rx.Observable;
 import rx.Observer;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 
@@ -38,7 +44,7 @@ import rx.schedulers.Schedulers;
  * 修订历史：
  * ================================================
  */
-public class DouBookFragment extends BaseFragment implements DouBookContract.View{
+public class DouBookFragment extends BaseLazyFragment implements DouBookContract.View{
 
 
     private static final String TYPE = "DouBookFragment";
@@ -123,6 +129,11 @@ public class DouBookFragment extends BaseFragment implements DouBookContract.Vie
 
     @Override
     public void initData() {
+
+    }
+
+    @Override
+    public void onLazyLoad() {
         recyclerView.showProgress();
         getTopMovieData(mType , 0 , 30);
     }
@@ -244,6 +255,32 @@ public class DouBookFragment extends BaseFragment implements DouBookContract.Vie
                         }
                     }
                 });
+    }
+
+
+    private void getData(){
+        Observable.interval(2,1, TimeUnit.SECONDS)
+                .doOnNext(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+
+                    }
+                }).subscribe(new Subscriber<Long>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+
+            }
+        });
     }
 
 

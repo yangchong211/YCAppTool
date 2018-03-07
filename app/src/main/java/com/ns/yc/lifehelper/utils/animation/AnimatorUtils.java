@@ -29,8 +29,8 @@ public class AnimatorUtils {
      */
     public static ValueAnimator setValueAnimator(View view , int start , int end , int time , int delay , int count){
         // 步骤1：设置动画属性的初始值 & 结束值
-        //ValueAnimator.oFloat（）采用默认的浮点型估值器 (FloatEvaluator)
-        //ValueAnimator.ofInt（）采用默认的整型估值器（IntEvaluator)
+        // ValueAnimator.oFloat（）采用默认的浮点型估值器 (FloatEvaluator)
+        // ValueAnimator.ofInt（）采用默认的整型估值器（IntEvaluator)
         ValueAnimator mAnimator = ValueAnimator.ofInt(start, end);
         // ofInt（）作用有两个
         // 1. 创建动画实例
@@ -97,7 +97,7 @@ public class AnimatorUtils {
         mAnimator.setRepeatMode(ValueAnimator.RESTART);
         // ValueAnimator.RESTART(默认):正序重放
         // ValueAnimator.REVERSE:倒序回放
-        //设置差值器
+        // 设置差值器
         mAnimator.setInterpolator(new LinearInterpolator());
         return mAnimator;
     }

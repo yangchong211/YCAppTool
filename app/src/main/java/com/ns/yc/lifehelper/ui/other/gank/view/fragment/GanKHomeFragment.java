@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseLazyFragment;
 import com.ns.yc.lifehelper.ui.other.gank.bean.CategoryResult;
 import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
 import com.ns.yc.lifehelper.ui.other.gank.contract.GanKHomeFContract;
@@ -22,6 +23,8 @@ import com.ns.yc.lifehelper.ui.other.gank.presenter.GanKHomeFPresenter;
 import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKHomeActivity;
 import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKWebActivity;
 import com.ns.yc.lifehelper.ui.other.gank.view.adapter.GanKHomeAdapter;
+import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
+
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -38,7 +41,7 @@ import butterknife.Bind;
  * 修订历史：
  * ================================================
  */
-public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.View {
+public class GanKHomeFragment extends BaseLazyFragment implements GanKHomeFContract.View {
 
     private static final String TYPE = "type";
     @Bind(R.id.recyclerView)
@@ -58,21 +61,6 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
 
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        activity = (GanKHomeActivity) context;
-
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        activity = null;
-    }
-
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -80,6 +68,18 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
         }
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (GanKHomeActivity) context;
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        activity = null;
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -114,6 +114,7 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
                     Intent intent = new Intent(activity, GanKWebActivity.class);
                     intent.putExtra("url",mData.url);
                     intent.putExtra("title",mData.desc);
+
                     GanKFavorite favorite = new GanKFavorite();
                     favorite.setAuthor(mData.who);
                     favorite.setData(mData.publishedAt);
@@ -131,6 +132,12 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
 
     @Override
     public void initData() {
+
+    }
+
+
+    @Override
+    public void onLazyLoad() {
         showSwipeLoading();
         presenter.getData(true);
     }
@@ -216,7 +223,7 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
                     }
                 } else {
                     adapter.pauseMore();
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(activity,"网络不可用");
                 }
             }
 
@@ -233,7 +240,7 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(activity,"网络不可用");
                 }
             }
 
@@ -242,7 +249,7 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(activity,"网络不可用");
                 }
             }
         });
@@ -268,10 +275,11 @@ public class GanKHomeFragment extends BaseFragment implements GanKHomeFContract.
                     presenter.getData(true);
                 } else {
                     recyclerView.setRefreshing(false);
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showToast(activity,"网络不可用");
                 }
             }
         });
     }
+
 
 }

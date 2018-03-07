@@ -82,7 +82,6 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
     private ObjectAnimator mAnimator;
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -313,7 +312,7 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
         BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitles);
         vpHomeCategory.setAdapter(myAdapter);
         // 左右预加载页面的个数
-        vpHomeCategory.setOffscreenPageLimit(5);
+        vpHomeCategory.setOffscreenPageLimit(mFragments.size());
         myAdapter.notifyDataSetChanged();
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setupWithViewPager(vpHomeCategory);

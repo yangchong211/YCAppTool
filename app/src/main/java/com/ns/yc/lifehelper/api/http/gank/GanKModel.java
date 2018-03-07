@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.ui.other.gank.network;
+package com.ns.yc.lifehelper.api.http.gank;
 
 import com.ns.yc.lifehelper.api.constantApi.ConstantGanKApi;
 import com.ns.yc.lifehelper.api.manager.RetrofitWrapper;

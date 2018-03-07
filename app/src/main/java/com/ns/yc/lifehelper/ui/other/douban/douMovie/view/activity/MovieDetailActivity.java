@@ -29,6 +29,7 @@ import com.ns.yc.lifehelper.utils.image.ImageUtils;
 import java.util.List;
 
 import butterknife.Bind;
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -193,7 +194,8 @@ public class MovieDetailActivity extends BaseActivity {
 
     private void getMovieDetailData(String id) {
         DetailMovieModel model = DetailMovieModel.getInstance(this);
-        model.getHotMovie(id)
+        Observable<DouMovieDetailBean> hotMovie = model.getHotMovie(id);
+        hotMovie
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DouMovieDetailBean>() {

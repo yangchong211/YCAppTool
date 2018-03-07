@@ -7,7 +7,7 @@ import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.gank.bean.SearchHistory;
 import com.ns.yc.lifehelper.ui.other.gank.bean.SearchResult;
 import com.ns.yc.lifehelper.ui.other.gank.contract.GanKSearchContract;
-import com.ns.yc.lifehelper.ui.other.gank.network.GanKModel;
+import com.ns.yc.lifehelper.api.http.gank.GanKModel;
 
 import java.util.ArrayList;
 import java.util.List;

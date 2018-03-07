@@ -134,6 +134,6 @@ dependencies {
     compile 'cn.yc:YCGalleryLib:1.1'                                //自定义画廊
     compile 'cn.yc:YCBaseAdapterLib:1.2'                            //adapter封装
     compile 'cn.yc:YCBannerLib:1.2'                                 //轮播图
-    compile 'org.yczbj:YCRefreshViewLib:2.3'                        //RecyclerView封装，刷新加载
+    compile 'org.yczbj:YCRefreshViewLib:2.4'                        //RecyclerView封装，刷新加载
 
 }

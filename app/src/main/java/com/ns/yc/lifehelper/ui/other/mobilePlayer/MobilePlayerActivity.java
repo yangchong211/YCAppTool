@@ -22,14 +22,12 @@ import butterknife.Bind;
  * ================================================
  * 作    者：杨充
  * 版    本：1.0
- * 创建日期：2017/8/31
+ * 创建日期：2015/8/31
  * 描    述：音乐播放器页面
  * 修订历史：
  * ================================================
  */
 public class MobilePlayerActivity extends BaseActivity implements View.OnClickListener {
-
-
 
     @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
