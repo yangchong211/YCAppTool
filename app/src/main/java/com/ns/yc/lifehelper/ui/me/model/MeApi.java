@@ -8,7 +8,7 @@ import rx.Observable;
 
 public interface MeApi {
 
-    String ME_HOST = "http://yczbj.org/app/update";
+    String ME_HOST = "http://yczbj.org/app/update/";
 
     /**
      * 获取最新版本信息
