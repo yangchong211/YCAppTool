@@ -32,8 +32,8 @@
         android:paddingRight="10dp"
         android:visibility="visible">
         <ImageView
-            android:layout_width="18dp"
-            android:layout_height="28dp"
+            android:layout_width="@dimen/back_width"
+            android:layout_height="@dimen/back_height"
             android:layout_gravity="center"
             android:src="@drawable/ic_back_white" />
     </FrameLayout>

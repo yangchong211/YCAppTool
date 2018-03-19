@@ -26,7 +26,7 @@ public class OvercastNightDrawer extends BaseDrawer {
         super(context, false);
         this.context = context;
         if (bg == null) {
-            bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg_overcast_night);
+            bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg_cloud_night);
         }
     }
 

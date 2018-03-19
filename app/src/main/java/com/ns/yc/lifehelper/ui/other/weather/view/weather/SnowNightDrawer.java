@@ -27,7 +27,7 @@ public class SnowNightDrawer extends BaseDrawer {
         super(context, false);
         this.context = context;
         if (bg == null) {
-            bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg_snow_night);
+            bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg_cloud_night);
         }
     }
 

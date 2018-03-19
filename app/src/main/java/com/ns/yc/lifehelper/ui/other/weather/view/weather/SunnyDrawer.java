@@ -26,7 +26,7 @@ public class SunnyDrawer extends BaseDrawer {
         super(context, false);
         this.context = context;
         if (bg == null) {
-            bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg_sunny_day);
+            bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg_cloud_night);
         }
 
     }

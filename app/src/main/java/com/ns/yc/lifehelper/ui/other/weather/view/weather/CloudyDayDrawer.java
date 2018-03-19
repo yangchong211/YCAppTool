@@ -25,7 +25,7 @@ public class CloudyDayDrawer extends BaseDrawer {
         super(context, false);
         this.context = context;
         if (bg == null) {
-            bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg_cloud);
+            bg = BitmapFactory.decodeResource(context.getResources(), R.drawable.bg_cloud_night);
         }
     }
 
