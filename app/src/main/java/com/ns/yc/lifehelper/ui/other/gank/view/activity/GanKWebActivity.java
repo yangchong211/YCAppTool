@@ -1,10 +1,12 @@
 package com.ns.yc.lifehelper.ui.other.gank.view.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -29,10 +31,10 @@ import com.ns.yc.lifehelper.ui.other.gank.presenter.GanKWebPresenter;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
 import com.ns.yc.lifehelper.utils.MDTintUtil;
-import com.ns.yc.lifehelper.utils.statusbar.GanKStatusBarUtil;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import butterknife.Bind;
+import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 /**
  * ================================================
@@ -98,8 +100,6 @@ public class GanKWebActivity extends BaseActivity implements View.OnClickListene
     public void initView() {
         initIntent();
         initToolBar();
-        GanKStatusBarUtil.immersive(this);
-        GanKStatusBarUtil.setPaddingSmart(this, toolbar);
         initWebView();
     }
 
@@ -116,6 +116,7 @@ public class GanKWebActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initToolBar() {
+        YCAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorTheme));
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -163,6 +164,8 @@ public class GanKWebActivity extends BaseActivity implements View.OnClickListene
             case R.id.open:
                 AppUtil.openLink(this,url);
                 break;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -180,10 +183,13 @@ public class GanKWebActivity extends BaseActivity implements View.OnClickListene
             case R.id.fab_top:
                 webView.scrollTo(0,0);
                 break;
+            default:
+                break;
         }
     }
 
 
+    @SuppressLint("SetJavaScriptEnabled")
     public void initWebView() {
         WebSettings settings = webView.getSettings();
         settings.setLoadWithOverviewMode(true);

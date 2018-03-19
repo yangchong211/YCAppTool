@@ -9,6 +9,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -32,13 +33,13 @@ import com.ns.yc.lifehelper.ui.other.myNews.weChat.contract.TxWeChatContract;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WeChatBean;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.presenter.TxWeChatPresenter;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.adapter.TxWeChatAdapter;
-import com.ns.yc.lifehelper.utils.statusbar.StatusBarAllUtil;
 import com.ns.yc.ycutilslib.blurView.RealTimeBlurView;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import java.util.List;
 import butterknife.Bind;
+import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
@@ -112,7 +113,8 @@ public class VideoNewsActivity extends BaseActivity implements TxWeChatContract.
                 // “23”：设置模糊度(在0.0到25.0之间)，默认”25";"4":图片缩放比例,默认“1”。
                 .bitmapTransform(new BlurTransformation(this,18,4))
                 .into(ivBgImage);
-        StatusBarAllUtil.setTranslucentForCoordinatorLayout(this,0);
+        YCAppBar.setStatusBarColorForCollapsingToolbar(this, appBar, collapsingToolbar,
+                toolbar, ContextCompat.getColor(this, R.color.colorPrimary));
         setFabDynamicState();
         initRecycleView();
     }

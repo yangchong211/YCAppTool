@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
@@ -37,7 +38,6 @@ import com.ns.yc.lifehelper.ui.other.gank.view.adapter.GanKSearchHisAdapter;
 import com.ns.yc.lifehelper.ui.other.gank.view.adapter.GanKSearchListAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.MDTintUtil;
-import com.ns.yc.lifehelper.utils.statusbar.GanKStatusBarUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 
 /**
@@ -181,8 +182,7 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
     }
 
     private void initToolBar() {
-        GanKStatusBarUtil.immersive(this);
-        GanKStatusBarUtil.setPaddingSmart(this, toolbarSearch);
+        YCAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorTheme));
         setSupportActionBar(toolbarSearch);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -17,7 +17,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,7 +41,6 @@ import com.ns.yc.lifehelper.ui.me.view.activity.MeFeedBackActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
-import com.ns.yc.lifehelper.utils.statusbar.StatusBarUtils;
 import com.ns.yc.ycutilslib.managerLeak.InputMethodManagerLeakUtils;
 import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
@@ -51,6 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import cn.ycbjie.ycstatusbarlib.dlBar.StatusBarUtils;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -68,8 +67,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
         , EasyPermissions.PermissionCallbacks, MainContract.View {
 
 
-    @Bind(R.id.view_status)
-    View viewStatus;
     @Bind(R.id.fl_title_menu)
     FrameLayout flTitleMenu;
     @Bind(R.id.tv_title)
@@ -150,7 +147,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void initView() {
-        initStatusView();
         initDrawerLayoutStatus();
         initBar();
         initTabLayout();
@@ -199,21 +195,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener
 
 
     /**
-     * 初始化View状态栏
-     */
-    private void initStatusView() {
-        ViewGroup.LayoutParams layoutParams = viewStatus.getLayoutParams();
-        layoutParams.height = StatusBarUtils.getStatusBarHeight(this);
-        viewStatus.setLayoutParams(layoutParams);
-    }
-
-
-    /**
      * 初始化侧滑菜单的状态栏
      */
     private void initDrawerLayoutStatus() {
-        StatusBarUtils.setColorNoTranslucentForDrawerLayout(this, drawerLayout,
-                getResources().getColor(R.color.colorTheme));
+        //为DrawerLayout 布局设置状态栏变色，也就是加上透明度
+        StatusBarUtils.setColorForDrawerLayout(this, drawerLayout,
+                getResources().getColor(R.color.colorTheme), 0);
     }
 
 

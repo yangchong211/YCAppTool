@@ -72,8 +72,6 @@ public class GanKHomeAPresenter implements GanKHomeAContract.Presenter {
     public void setThemeColor(@Nullable Palette palette , Context context) {
         if (palette != null) {
             int colorPrimary = context.getResources().getColor(R.color.colorTheme);
-            // 设置 AppBarLayout 的背景色
-            mHomeView.setAppBarLayoutColor(colorPrimary);
             // 设置 FabButton 的背景色
             mHomeView.setFabButtonColor(colorPrimary);
             // 停止 FabButton 加载中动画

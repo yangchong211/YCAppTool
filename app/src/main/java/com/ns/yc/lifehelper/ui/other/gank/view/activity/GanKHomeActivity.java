@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.AppCompatImageView;
@@ -31,7 +32,6 @@ import com.ns.yc.lifehelper.ui.other.gank.presenter.GanKHomeAPresenter;
 import com.ns.yc.lifehelper.ui.other.gank.view.fragment.GanKHomeFragment;
 import com.ns.yc.lifehelper.utils.MDTintUtil;
 import com.ns.yc.lifehelper.utils.animation.AnimatorUtils;
-import com.ns.yc.lifehelper.utils.statusbar.GanKStatusBarUtil;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 /**
  * ================================================
@@ -117,9 +118,8 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initView() {
-        GanKStatusBarUtil.immersive(this);
-        GanKStatusBarUtil.setPaddingSmart(this, ivHomeBanner);
-        GanKStatusBarUtil.setPaddingSmart(this, tlHomeToolbar);
+        YCAppBar.setStatusBarColorForCollapsingToolbar(this, appbar, collapsingToolbar,
+                tlHomeToolbar, ContextCompat.getColor(this, R.color.colorPrimary));
         setFabDynamicState();
         initFragments();
         initViewPager();
@@ -221,14 +221,6 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
         ToastUtil.showToast(this,"图片加载失败");
     }
 
-    /**
-     * 设置 AppBarLayout 的背景色
-     */
-    @Override
-    public void setAppBarLayoutColor(int appBarLayoutColor) {
-        collapsingToolbar.setContentScrimColor(appBarLayoutColor);
-        appbar.setBackgroundColor(appBarLayoutColor);
-    }
 
     /**
      * 设置 FabButton 的背景色

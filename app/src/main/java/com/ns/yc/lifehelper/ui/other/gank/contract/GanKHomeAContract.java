@@ -33,8 +33,6 @@ public interface GanKHomeAContract {
         void disEnableFabButton();
         //设置图片加载失败
         void errorImage();
-        //设置AppBarLayout 的背景色
-        void setAppBarLayoutColor(int appBarLayoutColor);
         //设置FabButton 的背景色
         void setFabButtonColor(int color);
         //缓存图片

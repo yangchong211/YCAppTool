@@ -86,6 +86,8 @@ public class TimerActivity extends BaseActivity implements View.OnClickListener 
             case R.id.rl_set_time:
                 showTimerPickerDialog();
                 break;
+            default:
+                break;
         }
     }
 

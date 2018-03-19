@@ -86,21 +86,6 @@ public abstract class BaseActivity extends AppCompatActivity{
     /** 初始数据的代码写在这个方法中，用于从服务器获取数据 */
     public abstract void initData();
 
-
-    /**
-     * 沉浸式状态栏
-     */
-    protected void initState() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            // 隐藏状态栏
-            //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN); // 隐藏状态栏
-        }
-    }
-
     /**
      * 通过Class跳转界面
      **/

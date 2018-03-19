@@ -80,7 +80,6 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
 
     @Override
     public void initView() {
-        initState();
         initCountDownView();
     }
 

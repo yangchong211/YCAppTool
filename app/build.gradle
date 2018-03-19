@@ -132,8 +132,8 @@ dependencies {
     compile 'cn.yc:YCRecycleViewLib:1.1'                            //RecycleView封装类，多选单选
     compile 'cn.yc:YCWeatherLib:1.0'                                //天气自定义控件
     compile 'cn.yc:YCGalleryLib:1.1'                                //自定义画廊
-    compile 'cn.yc:YCBaseAdapterLib:1.2'                            //adapter封装
+    compile 'cn.yc:YCBaseAdapterLib:1.3'                            //adapter封装
     compile 'cn.yc:YCBannerLib:1.2'                                 //轮播图
     compile 'org.yczbj:YCRefreshViewLib:2.4'                        //RecyclerView封装，刷新加载
-
+    compile 'cn.yc:YCStatusBarLib:1.3'                              //状态栏
 }

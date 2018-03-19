@@ -27,10 +27,11 @@ import com.ns.yc.lifehelper.ui.other.douban.douMusic.bean.DouMusicDetailBean;
 import com.ns.yc.lifehelper.api.http.douban.DouMusicDetailModel;
 import com.ns.yc.lifehelper.weight.CustomChangeBounds;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
-import com.ns.yc.lifehelper.utils.statusbar.StatusBarUtils;
 import com.ns.yc.ycutilslib.scrollView.MyNestedScrollView;
 
 import butterknife.Bind;
+import cn.ycbjie.ycstatusbarlib.StatusBarHeightUtils;
+import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -215,7 +216,7 @@ public class DouMusicDetailActivity extends BaseActivity {
         // toolbar的高度
         int toolbarHeight = titleToolBar.getLayoutParams().height;
         // toolbar+状态栏的高度
-        final int headerBgHeight = toolbarHeight + StatusBarUtils.getStatusBarHeight(this);
+        final int headerBgHeight = toolbarHeight + StatusBarHeightUtils.getStatusBarHeight(this);
 
         // 使背景图向上移动到图片的最底端，保留toolbar+状态栏的高度
         ivTitleHeadBg.setVisibility(View.VISIBLE);
@@ -226,8 +227,7 @@ public class DouMusicDetailActivity extends BaseActivity {
         ivTitleHeadBg.setImageAlpha(0);
 
         // 为头部是View的界面设置状态栏透明
-        StatusBarUtils.setTranslucentForImageView(this, 0, titleToolBar);
-
+        YCAppBar.translucentStatusBar(this, true);
         ViewGroup.LayoutParams imgItemBgparams = imgMusicItemBg.getLayoutParams();
         // 获得高斯图背景的高度
         imageBgHeight = imgItemBgparams.height;
@@ -272,7 +272,8 @@ public class DouMusicDetailActivity extends BaseActivity {
             }
         });
 
-        int titleBarAndStatusHeight = (int) (DouMusicDetailActivity.this.getResources().getDimension(R.dimen.nav_bar_height) + StatusBarUtils.getStatusBarHeight(this));
+        int titleBarAndStatusHeight = (int) (DouMusicDetailActivity.this.getResources().getDimension(R.dimen.nav_bar_height)
+                + StatusBarHeightUtils.getStatusBarHeight(this));
         slidingDistance = imageBgHeight - titleBarAndStatusHeight - (int) (DouMusicDetailActivity.this.getResources().getDimension(R.dimen.nav_bar_height_more));
     }
 

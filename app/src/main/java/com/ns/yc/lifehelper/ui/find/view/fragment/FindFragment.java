@@ -47,7 +47,8 @@ import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.yc.cn.ycbannerlib.first.BannerView;
 import com.yc.cn.ycbannerlib.first.util.SizeUtil;
-import com.yc.cn.ycbaseadapterlib.first.BaseViewHolder;
+import com.yc.cn.ycbaseadapterlib.BaseViewHolder;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

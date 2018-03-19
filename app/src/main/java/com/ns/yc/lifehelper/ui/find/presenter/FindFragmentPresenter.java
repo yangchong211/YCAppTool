@@ -22,7 +22,7 @@ import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.weight.MarqueeView;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
 import com.yc.cn.ycbannerlib.first.BannerView;
-import com.yc.cn.ycbaseadapterlib.first.BaseViewHolder;
+import com.yc.cn.ycbaseadapterlib.BaseViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

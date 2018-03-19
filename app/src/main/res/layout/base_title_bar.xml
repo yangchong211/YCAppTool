@@ -7,14 +7,6 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <!--状态栏-->
-    <View
-        android:id="@+id/view_status"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:visibility="gone"
-        android:background="@color/colorTheme" />
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
