@@ -1,8 +1,6 @@
 package com.ns.yc.lifehelper.ui.guide.contract;
 
 
-import android.app.Activity;
-
 import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.lifehelper.base.mvp1.BaseView;
 
@@ -17,24 +15,16 @@ import com.ns.yc.lifehelper.base.mvp1.BaseView;
  */
 public interface GuideContract {
 
-    //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
-        //跳转到主页面
-        void toMainActivity();
-        //展示图片
         void showGuideLogo(String logo);
-        //获取上下文
-        Activity getActivity();
     }
 
-    //Presenter控制器
     interface Presenter extends BasePresenter {
-        void goMainActivity();
-        //缓存数据
         void cacheHomeNewsData();
         void cacheFindNewsData();
         void cacheFindBottomNewsData();
         void cacheHomePileData();
+        void startGuideImage();
     }
 
 

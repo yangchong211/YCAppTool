@@ -29,16 +29,16 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.api.constantApi.ConstantImageApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
-import com.ns.yc.lifehelper.ui.other.toDo.view.adapter.ChoosePriorityAdapter;
 import com.ns.yc.lifehelper.ui.other.workDo.contract.WorkNewContract;
-import com.ns.yc.lifehelper.ui.other.workDo.data.DataDao;
+import com.ns.yc.lifehelper.db.realm.RealmWorkDoHelper;
 import com.ns.yc.lifehelper.ui.other.workDo.data.DateUtils;
 import com.ns.yc.lifehelper.ui.other.workDo.inter.WorkState;
+import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.workDo.presenter.WorkNewPresenter;
+import com.ns.yc.lifehelper.ui.other.workDo.ui.adapter.ChoosePriorityAdapter;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.dialog.WorkChooseColorDialog;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
@@ -354,7 +354,7 @@ public class WorkNewActivity extends BaseActivity implements WorkNewContract.Vie
 
         @Override
         public void onComplete(TaskDetailEntity entity) {
-            DataDao.getInstance().insertTask(entity);
+            RealmWorkDoHelper.getInstance().insertTask(entity);
         }
     }
 

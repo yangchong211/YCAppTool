@@ -23,11 +23,11 @@
         android:layout_height="25dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:background="@color/redTab"/>
 
     <!--上下滚动TextView-->
-    <com.ns.yc.lifehelper.weight.MarqueeView
+    <com.yc.cn.ycbannerlib.marquee.MarqueeView
         android:id="@+id/marqueeView"
         android:layout_width="match_parent"
         android:layout_height="40dp"

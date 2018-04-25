@@ -81,7 +81,7 @@ public class SongCiActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public int getContentView() {
-        return R.layout.base_refresh_recycle_bar;
+        return R.layout.base_easy_recycle_bar;
     }
 
     @Override
@@ -197,7 +197,7 @@ public class SongCiActivity extends BaseActivity implements View.OnClickListener
                     @Override
                     public View getView(FlowLayout parent, int position, String o) {
                         LayoutInflater from = LayoutInflater.from(SongCiActivity.this);
-                        TextView tv = (TextView) from.inflate(R.layout.tag_hot, tfl_tag, false);
+                        TextView tv = (TextView) from.inflate(R.layout.tag_tv_view, tfl_tag, false);
                         tv.setText(o);
                         return tv;
                     }
@@ -205,7 +205,7 @@ public class SongCiActivity extends BaseActivity implements View.OnClickListener
                 tfl_tag.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
                     @Override
                     public boolean onTagClick(View view, int position, FlowLayout parent) {
-                        ToastUtils.showShortSafe(ts_tags[position]);
+                        ToastUtils.showShort(ts_tags[position]);
                         return true;
                     }
                 });

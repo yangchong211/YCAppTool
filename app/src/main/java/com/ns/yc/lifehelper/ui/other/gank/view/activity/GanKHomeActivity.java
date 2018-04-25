@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
@@ -297,7 +297,6 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
             mFragments.add(GanKHomeFragment.getInstance(mTabs[a]));
         }
     }
-
 
     private void initViewPager() {
         FragmentManager supportFragmentManager = getSupportFragmentManager();

@@ -74,7 +74,7 @@ public class ReadBookDetailSubjectActivity extends BaseActivity implements View.
 
     @Override
     public int getContentView() {
-        return R.layout.base_refresh_recycle_bar;
+        return R.layout.base_easy_recycle_bar;
     }
 
     @Override

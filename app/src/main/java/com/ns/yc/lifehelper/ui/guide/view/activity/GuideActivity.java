@@ -1,43 +1,39 @@
 package com.ns.yc.lifehelper.ui.guide.view.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.GuidePresenter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ns.yc.lifehelper.utils.image.ImageUtils;
 import com.ns.yc.yccountdownviewlib.CountDownView;
 import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
-
+import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/8/18
- * 描    述：启动页面
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  : 启动页面
+ *     revise:
+ * </pre>
  */
-public class GuideActivity extends BaseActivity implements GuideContract.View ,View.OnClickListener {
+public class GuideActivity extends BaseActivity<GuidePresenter> implements
+        GuideContract.View ,View.OnClickListener {
 
     @Bind(R.id.iv_splash_ad)
     ImageView ivSplashAd;
-    @Bind(R.id.tv_splash_skip_ad)
-    TextView tvSplashSkipAd;
-    @Bind(R.id.iv_splash_download)
-    ImageView ivSplashDownload;
     @Bind(R.id.cdv_time)
     CountDownView cdvTime;
 
@@ -49,13 +45,6 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
         if(cdvTime!=null && cdvTime.isShown()){
             cdvTime.stop();
         }
-        presenter.unSubscribe();
-    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        presenter.subscribe();
     }
 
     /**
@@ -72,6 +61,11 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        YCAppBar.translucentStatusBar(this, true);
+    }
 
     @Override
     public int getContentView() {
@@ -80,6 +74,8 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
 
     @Override
     public void initView() {
+        LogUtils.e("GuideActivity"+"------"+"initView");
+        presenter.startGuideImage();
         initCountDownView();
     }
 
@@ -97,13 +93,14 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
         presenter.cacheHomePileData();
     }
 
+
     private void initCountDownView() {
         cdvTime.setTime(5);
         cdvTime.start();
         cdvTime.setOnLoadingFinishListener(new CountDownView.OnLoadingFinishListener() {
             @Override
             public void finish() {
-                presenter.goMainActivity();
+                toMainActivity();
             }
         });
     }
@@ -112,9 +109,6 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_splash_skip_ad:
-                presenter.goMainActivity();
-                break;
             case R.id.cdv_time:
                 cdvTime.stop();
                 finish();
@@ -127,11 +121,8 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
     /**
      * 直接跳转主页面
      */
-    @Override
-    public void toMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
+    private void toMainActivity() {
+        ActivityUtils.startActivity(MainActivity.class,R.anim.screen_zoom_in,R.anim.screen_zoom_out);
         finish();
     }
 
@@ -140,27 +131,20 @@ public class GuideActivity extends BaseActivity implements GuideContract.View ,V
      */
     @Override
     public void showGuideLogo(String logo) {
-        //ImageUtils.loadImgByPicassoError(this,logo,R.drawable.pic_page_background,ivSplashAd);
-        Picasso.with(this)
-                .load(logo)
-                .placeholder(R.drawable.pic_page_background)
-                .into(ivSplashAd, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        //加载成功
-                    }
+        Callback callback = new Callback() {
+            @Override
+            public void onSuccess() {
+                //加载成功
+            }
 
-                    @Override
-                    public void onError() {
-                        //加载失败
-                    }
-                });
+            @Override
+            public void onError() {
+                //加载失败
+                ivSplashAd.setBackgroundResource(R.drawable.bg_cloud_night);
+            }
+        };
+        LogUtils.e("图片"+logo);
+        ImageUtils.loadImgByPicasso(this,logo,R.drawable.bg_cloud_night,ivSplashAd,callback);
     }
-
-    @Override
-    public Activity getActivity() {
-        return this;
-    }
-
 
 }

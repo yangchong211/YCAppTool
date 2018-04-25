@@ -18,30 +18,28 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/8/21
- * 描    述：Home主页面适配器
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  : Home主页面适配器
+ *     revise:
+ * </pre>
  */
 public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
 
-    private Activity activity;
 
     public HomeBlogAdapter(Activity activity) {
         super(activity);
-        this.activity = activity;
     }
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new HomeBlogViewHolder(parent);
+        return new MyViewHolder(parent);
     }
 
 
-    public class HomeBlogViewHolder extends BaseViewHolder<HomeBlogEntity> {
+    public class MyViewHolder extends BaseViewHolder<HomeBlogEntity> {
 
         @Bind(R.id.ll_news_head)
         LinearLayout llNewsHead;
@@ -58,7 +56,7 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
         @Bind(R.id.ll_new_content)
         LinearLayout llNewContent;
 
-        HomeBlogViewHolder(ViewGroup parent) {
+        MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_home_list);
             ButterKnife.bind(this, itemView);
         }
@@ -73,7 +71,7 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
                 llNewContent.setVisibility(View.VISIBLE);
                 llNewsHead.setVisibility(View.GONE);
                 tvTitle.setText(data.getTitle());
-                ImageUtils.loadImgByPicassoError(activity, data.getImageUrl(), R.drawable.image_default, ivImg);
+                ImageUtils.loadImgByPicasso(getContext(), data.getImageUrl(), R.drawable.image_default, ivImg);
                 tvAuthor.setText(data.getAuthor());
                 tvTime.setText(data.getTime());
             }

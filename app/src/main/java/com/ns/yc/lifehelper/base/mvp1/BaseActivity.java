@@ -2,29 +2,33 @@ package com.ns.yc.lifehelper.base.mvp1;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.WindowManager;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.ns.yc.lifehelper.base.app.AppManager;
+import com.ns.yc.lifehelper.R;
 
 import butterknife.ButterKnife;
+import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
+
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/5/18
- * 描    述：所有Activity的父类
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/5/18
+ *     desc  : 所有Activity的父类
+ *     revise:
+ * </pre>
  */
-public abstract class BaseActivity extends AppCompatActivity{
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity{
 
+    /**
+     * 将代理类通用行为抽出来
+     */
+    protected T mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,8 +37,10 @@ public abstract class BaseActivity extends AppCompatActivity{
         ButterKnife.bind(this);
         //避免切换横竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        //将当前Activity添加到容器
-        AppManager.getAppManager().addActivity(this);
+        if (mPresenter != null){
+            mPresenter.subscribe();
+        }
+        YCAppBar.setStatusBarColor(this, R.color.colorTheme);
         initView();
         initListener();
         initData();
@@ -43,31 +49,15 @@ public abstract class BaseActivity extends AppCompatActivity{
         }
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mPresenter != null){
+            mPresenter.unSubscribe();
+        }
+        ButterKnife.unbind(this);
         //测试内存泄漏，正式一定要隐藏
         initLeakCanary();
-        //将当前Activity移除到容器
-        AppManager.getAppManager().removeActivity(this);
-        //AppManager.getAppManager().finishActivity(this);
-    }
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
 

@@ -31,9 +31,9 @@ import com.lzy.imagepicker.view.CropImageView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.cache.CacheNotePad;
-import com.ns.yc.lifehelper.listener.OnDatePickListener;
-import com.ns.yc.lifehelper.listener.OnTimePickListener;
+import com.ns.yc.lifehelper.db.cache.CacheNotePad;
+import com.ns.yc.lifehelper.inter.listener.OnDatePickListener;
+import com.ns.yc.lifehelper.inter.listener.OnTimePickListener;
 import com.ns.yc.lifehelper.receiver.ReminderReceiver;
 import com.ns.yc.lifehelper.ui.me.view.adapter.GlideImageLoader;
 import com.ns.yc.lifehelper.ui.other.notePad.bean.NotePadDetail;
@@ -119,7 +119,8 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
     protected void onStop() {
         super.onStop();
         //如果APP处于后台，或者手机锁屏，则保存数据
-        if (AppUtil.isAppOnBackground(getApplicationContext()) || AppUtil.isLockScreen(getApplicationContext())) {
+        if (AppUtil.isAppOnBackground(getApplicationContext())
+                || AppUtil.isLockScreen(getApplicationContext())) {
             saveNoteData(true);
         }
     }

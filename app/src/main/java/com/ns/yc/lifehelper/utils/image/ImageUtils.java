@@ -11,6 +11,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.weight.CircleTransform;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 
@@ -122,6 +123,33 @@ public class ImageUtils {
 
     /**
      * 加载图片
+     * @param resId         string
+     * @param target        控件
+     */
+    public static void loadImgByPicasso(Context context , String path , int resId,
+                                        ImageView target, Callback callback) {
+        if(target==null){
+            return;
+        }
+        if(path!=null && path.length()>0){
+            Picasso.with(context)
+                    .load(path)
+                    .placeholder(resId)
+                    .error(resId)
+                    .into(target,callback);
+        }else {
+            Picasso.with(context)
+                    .load(resId)
+                    .placeholder(resId)
+                    .error(resId)
+                    .into(target,callback);
+        }
+    }
+
+
+
+    /**
+     * 加载图片
      * @param resId         int
      * @param target        控件
      */
@@ -145,29 +173,6 @@ public class ImageUtils {
     }
 
 
-    /**
-     * 加载图片
-     * @param resId
-     * @param target        控件
-     */
-    public static void loadImgByPicassoError(Context context , String path , int resId, ImageView target) {
-        if(target==null){
-            return;
-        }
-        if(path!=null && path.length()>0){
-            Picasso.with(context)
-                    .load(path)
-                    .placeholder(resId)
-                    .error(resId)
-                    .into(target);
-        }else {
-            Picasso.with(context)
-                    .load(resId)
-                    .placeholder(resId)
-                    .error(resId)
-                    .into(target);
-        }
-    }
 
     /**------------------------------Glide加载图片--------------------------------------------------**/
 
@@ -216,13 +221,15 @@ public class ImageUtils {
                     .asBitmap()
                     .placeholder(resId)
                     .error(resId)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL) //设置缓存
+                    //设置缓存
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(new BitmapImageViewTarget(target) {
                         @Override
                         protected void setResource(Bitmap resource) {
                             super.setResource(resource);
                             RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(activity.getResources(), resource);
-                            circularBitmapDrawable.setCornerRadius(round); //设置圆角弧度
+                            //设置圆角弧度
+                            circularBitmapDrawable.setCornerRadius(round);
                             target.setImageDrawable(circularBitmapDrawable);
                         }
                     });

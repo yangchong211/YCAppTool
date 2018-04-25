@@ -21,7 +21,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.cache.CacheNotePad;
+import com.ns.yc.lifehelper.db.cache.CacheNotePad;
 import com.ns.yc.lifehelper.ui.other.notePad.activity.NotePadDetailActivity;
 import com.ns.yc.lifehelper.ui.other.notePad.activity.NotePadNewActivity;
 import com.ns.yc.lifehelper.ui.other.notePad.adapter.NotePadListAdapter;
@@ -85,7 +85,7 @@ public class NotePadActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public int getContentView() {
-        return R.layout.base_refresh_recycle_bar;
+        return R.layout.base_easy_recycle_bar;
     }
 
     @Override

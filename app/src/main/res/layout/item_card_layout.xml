@@ -18,6 +18,6 @@
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_music_next" />
+        android:src="@drawable/ic_nav_exit" />
 
 </FrameLayout>

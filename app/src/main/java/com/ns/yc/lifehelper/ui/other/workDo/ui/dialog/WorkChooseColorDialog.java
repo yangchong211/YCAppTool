@@ -49,8 +49,8 @@ public class WorkChooseColorDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dl_choose_paper_color, container, false);
-        mRvDlChooseColor = (RecyclerView) view.findViewById(R.id.rv_dl_choose_color);
+        View view = inflater.inflate(R.layout.base_recycler_view, container, false);
+        mRvDlChooseColor = (RecyclerView) view.findViewById(R.id.recyclerView);
         mRvDlChooseColor.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         mChooseDialogAdapter = new WorkChooseAdapter(getActivity());
         mChooseDialogAdapter.setCheckItem(getArguments().getInt("chooseCheck"));

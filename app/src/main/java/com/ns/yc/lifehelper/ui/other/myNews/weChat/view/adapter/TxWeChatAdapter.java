@@ -60,7 +60,7 @@ public class TxWeChatAdapter extends RecyclerArrayAdapter<WeChatBean.NewslistBea
                 if(data.getDescription()!=null && data.getDescription().length()>0){
                     tv_author.setText(data.getDescription());
                 }
-                ImageUtils.loadImgByPicassoError(getContext(),data.getPicUrl(),R.drawable.shape_load_error_img , iv_img);
+                ImageUtils.loadImgByPicasso(getContext(),data.getPicUrl(),R.drawable.shape_load_error_img , iv_img);
             }
         }
     }

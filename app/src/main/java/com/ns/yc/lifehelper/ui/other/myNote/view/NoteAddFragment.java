@@ -14,12 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.weight.imageView.NoteItemCircleView;
 import com.ns.yc.lifehelper.utils.animation.AnimationsUtils;
+import com.ns.yc.lifehelper.weight.imageView.NoteItemCircleView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -63,16 +61,6 @@ public class NoteAddFragment extends BaseFragment implements View.OnClickListene
     RelativeLayout note_detail_menu;
     @Bind(R.id.note_detail_img_thumbtack)
     ImageView noteDetailImgThumbtack;
-    @Bind(R.id.menu_item_text_font)
-    FloatingActionButton menuItemTextFont;
-    @Bind(R.id.menu_item_clock)
-    FloatingActionButton menuItemClock;
-    @Bind(R.id.menu_item_desktop)
-    FloatingActionButton menuItemDesktop;
-    @Bind(R.id.menu_item_share)
-    FloatingActionButton menuItemShare;
-    @Bind(R.id.floating_action_menu)
-    FloatingActionMenu floatingActionMenu;
     @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
     @Bind(R.id.toolbar_title)
@@ -119,14 +107,7 @@ public class NoteAddFragment extends BaseFragment implements View.OnClickListene
 
     private void initToolBar() {
         toolbarTitle.setText("添加记录");
-        /*activity.setSupportActionBar(toolbar);
-        ActionBar actionBar = activity.getSupportActionBar();
-        if (actionBar != null) {
-            //去除默认Title显示
-            actionBar.setDisplayShowTitleEnabled(false);
-        }*/
         llSearch.setVisibility(View.VISIBLE);
-        //ivRightImg.setImageResource(R.drawable.actionbar_send_icon);
         ivRightImg.setBackgroundResource(R.drawable.actionbar_send_icon);
     }
 
@@ -190,23 +171,11 @@ public class NoteAddFragment extends BaseFragment implements View.OnClickListene
                 noteDetailImgThumbtack.setImageResource(sThumbtackImg[1]);
                 closeMenu();
                 break;
-        }
-    }
-
-    /*@Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.note_menu_add, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.send:
-                saveContent();
+            default:
                 break;
         }
-        return true;
-    }*/
+    }
+
 
 
     public boolean onBackPressed() {
@@ -307,7 +276,7 @@ public class NoteAddFragment extends BaseFragment implements View.OnClickListene
     private void saveContent() {
         String content =  noteDetailEdit.getText().toString().trim();
         if(TextUtils.isEmpty(content)){
-            ToastUtils.showShortSafe("记录笔记不能为空");
+            ToastUtils.showShort("记录笔记不能为空");
             return;
         }
 

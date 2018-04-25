@@ -3,9 +3,7 @@ package com.ns.yc.lifehelper.ui.data;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,8 +18,6 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.data.view.adapter.NarrowImageAdapter;
-import com.ns.yc.lifehelper.ui.data.view.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.model.bean.ImageIconBean;
@@ -29,15 +25,13 @@ import com.ns.yc.lifehelper.ui.data.contract.DataFragmentContract;
 import com.ns.yc.lifehelper.ui.data.presenter.DataFragmentPresenter;
 import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
 import com.ns.yc.lifehelper.ui.data.view.activity.GalleryImageActivity;
-import com.ns.yc.lifehelper.ui.data.view.activity.OpenFileActivity;
-import com.ns.yc.lifehelper.ui.data.view.activity.RiddleActivity;
 import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
+import com.ns.yc.lifehelper.ui.data.view.adapter.NarrowImageAdapter;
+import com.ns.yc.lifehelper.ui.data.view.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
-import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.WTexNewsActivity;
-import com.ns.yc.lifehelper.ui.other.weather.WeatherActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.ns.yc.lifehelper.weight.MyGridView;
@@ -54,17 +48,16 @@ import butterknife.Bind;
 
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/3/18
- * 描    述：工具页面
- * 修订历史：
- *          v1.4 17年6月8日
- *          v1.5 17年10月3日修改
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  :
+ *     revise: v1.4 17年6月8日
+ *             v1.5 17年10月3日修改
+ * </pre>
  */
-public class DataFragment extends BaseFragment implements View.OnClickListener
+public class DataFragment extends BaseFragment<DataFragmentPresenter> implements View.OnClickListener
         ,DataFragmentContract.View{
 
 
@@ -81,22 +74,15 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
     @Bind(R.id.recyclerView)
     YCRefreshView recyclerView;
 
-
     private MainActivity activity;
     private NarrowImageAdapter adapter;
     private DataFragmentContract.Presenter presenter = new DataFragmentPresenter(this);
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        presenter.unSubscribe();
-    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (MainActivity) context;
+        presenter.bindActivity(activity);
     }
 
     @Override
@@ -105,13 +91,6 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
         if(activity!=null){
             activity = null;
         }
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        presenter.bindView(activity);
-        presenter.subscribe();
     }
 
     @Override
@@ -142,7 +121,6 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_note_edit:
-                //startActivity(ToDoTimerActivity.class);
                 startActivity(WorkDoActivity.class);
                 break;
             case R.id.tv_news_zhi_hu:
@@ -156,7 +134,8 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
 
     private void iniVpData() {
         List<ImageIconBean> listData = presenter.getVpData();
-        final int mPageSize = 8;              //每页显示的最大的数量
+        //每页显示的最大的数量
+        final int mPageSize = 8;
         //总的页数向上取整
         final int totalPage = (int) Math.ceil(listData.size() * 1.0 / mPageSize);
         List<View> viewPagerList = new ArrayList<>();
@@ -178,7 +157,6 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                                 break;
                             case 1:
 
-                                startActivity(WeatherActivity.class);
                                 break;
                             case 2:
                                 startActivity(NoteActivity.class);
@@ -256,7 +234,7 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                         startActivity(NoteActivity.class);
                         break;
                     case 1:
-                        startActivity(OpenFileActivity.class);
+
                         break;
                     case 2:
 
@@ -265,10 +243,10 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
                         startActivity(ZhiHuNewsActivity.class);
                         break;
                     case 4:
-                        startActivity(MobilePlayerActivity.class);
+
                         break;
                     case 9:
-                        startActivity(RiddleActivity.class);
+
                         break;
                     case 10:
 
@@ -287,7 +265,6 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void setRecycleView(final ArrayList<Integer> list) {
         recyclerView.setAdapter(adapter = new NarrowImageAdapter(activity));
-        //recyclerView.setVerticalScrollBarEnabled(false);
         recyclerView.setHorizontalScrollBarEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
         recyclerView.addItemDecoration(new SpaceViewItemLine(SizeUtils.dp2px(8)));
@@ -295,15 +272,9 @@ public class DataFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onRefresh() {
                 adapter.clear();
-                //adapter.addAll(ConstantImageApi.createSmallImage());
-                //adapter.addAll(ConstantImageApi.getNarrowImage());
                 adapter.addAll(list);
             }
         });
-        //思考，为什么下面这种方式会导致加载图片OOM
-        //adapter.addAll(ConstantImageApi.createSmallImage());
-        //下面这个是正常的
-        //adapter.addAll(ConstantImageApi.getNarrowImage());
         adapter.addAll(list);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override

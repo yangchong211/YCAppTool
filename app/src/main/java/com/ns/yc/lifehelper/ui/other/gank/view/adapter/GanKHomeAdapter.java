@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseConfig;
+import com.ns.yc.lifehelper.comment.config.AppConfig;
 import com.ns.yc.lifehelper.ui.other.gank.bean.CategoryResult;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
@@ -42,11 +42,11 @@ public class GanKHomeAdapter extends RecyclerArrayAdapter<CategoryResult.Results
         @Override
         public void setData(CategoryResult.ResultsBean data) {
             super.setData(data);
-            if (BaseConfig.INSTANCE.isShowListImg()) {                          // 列表显示图片
+            if (AppConfig.INSTANCE.isShowListImg()) {                          // 列表显示图片
                 iv_item_img.setVisibility(View.VISIBLE);
                 String quality = "";
                 if (data.images != null && data.images.size() > 0) {
-                    switch (BaseConfig.INSTANCE.getThumbnailQuality()) {
+                    switch (AppConfig.INSTANCE.getThumbnailQuality()) {
                         case 0: // 原图
                             quality = "?imageView2/0/w/400";
                             break;

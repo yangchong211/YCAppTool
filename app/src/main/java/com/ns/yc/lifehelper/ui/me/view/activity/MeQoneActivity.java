@@ -16,6 +16,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.model.bean.ImagePhotoBean;
 import com.ns.yc.lifehelper.ui.me.view.adapter.GlideImageLoader;
 import com.ns.yc.lifehelper.ui.me.view.adapter.Loader;
+import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.ycphotolib.PhotoShowView;
 import com.ns.yc.ycphotolib.bean.PhotoShowBean;
 import com.ns.yc.ycphotolib.listener.PhotoShowListener;
@@ -48,10 +49,27 @@ public class MeQoneActivity extends BaseActivity implements View.OnClickListener
     @Bind(R.id.psv_view)
     PhotoShowView psvView;
 
-    private List<ImagePhotoBean> selImageList;               //当前选择的所有图片
-    private int maxImgCount = 8;                        //允许选择图片最大数
+    /**
+     * 当前选择的所有图片
+     */
+    private List<ImagePhotoBean> selImageList;
+    /**
+     * 允许选择图片最大数
+     */
+    private int maxImgCount = 8;
     public static final int REQUEST_CODE_SELECT = 100;
     public static final int REQUEST_CODE_PREVIEW = 101;
+    private CustomSelectDialog selectDialog;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(selectDialog!=null && selectDialog.isShowing()){
+            selectDialog.dismiss();
+        }
+    }
+
 
     @Override
     public int getContentView() {
@@ -90,6 +108,8 @@ public class MeQoneActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.tv_title_right:
 
+                break;
+            default:
                 break;
         }
     }
@@ -141,36 +161,33 @@ public class MeQoneActivity extends BaseActivity implements View.OnClickListener
         List<String> names = new ArrayList<>();
         names.add("拍照");
         names.add("相册");
-        showDialog(new CustomSelectDialog.SelectDialogListener() {
+        selectDialog = DialogUtils.showDialog(this, new CustomSelectDialog.SelectDialogListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
-                    case 0:                 //拍照
+                switch (position) {
+                    //拍照
+                    case 0:
                         //打开选择,本次允许选择的数量
                         ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
                         Intent intent1 = new Intent(MeQoneActivity.this, ImageGridActivity.class);
-                        intent1.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS,true); // 是否是直接打开相机
+                        // 是否是直接打开相机
+                        intent1.putExtra(ImageGridActivity.EXTRAS_TAKE_PICKERS, true);
                         startActivityForResult(intent1, REQUEST_CODE_SELECT);
                         break;
-                    case 1:                 //相册
+                    //相册
+                    case 1:
                         //打开选择,本次允许选择的数量
                         ImagePicker.getInstance().setSelectLimit(maxImgCount - selImageList.size());
                         Intent intent2 = new Intent(MeQoneActivity.this, ImageGridActivity.class);
                         startActivityForResult(intent2, REQUEST_CODE_SELECT);
+                        break;
+                    default:
                         break;
                 }
             }
         }, names);
     }
 
-    /**展示对话框视图，构造方法创建对象*/
-    private CustomSelectDialog showDialog(CustomSelectDialog.SelectDialogListener listener, List<String> names) {
-        CustomSelectDialog dialog = new CustomSelectDialog(this, R.style.transparentFrameWindowStyle, listener, names);
-        if (!this.isFinishing()) {
-            dialog.show();
-        }
-        return dialog;
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

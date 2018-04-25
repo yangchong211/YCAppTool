@@ -4,34 +4,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
-import com.alibaba.android.vlayout.layout.StickyLayoutHelper;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
-import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
-import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.ns.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.BookReaderActivity;
 import com.ns.yc.lifehelper.ui.other.douban.douBook.view.DouBookActivity;
 import com.ns.yc.lifehelper.ui.other.douban.douMovie.view.DouMovieActivity;
 import com.ns.yc.lifehelper.ui.other.douban.douMusic.view.DouMusicActivity;
 import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKHomeActivity;
 import com.ns.yc.lifehelper.ui.other.gold.view.activity.GoldMainActivity;
-import com.ns.yc.lifehelper.ui.other.mobilePlayer.MobilePlayerActivity;
-import com.ns.yc.lifehelper.ui.other.myMusic.MyMusicActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.videoNews.VideoNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.activity.TxWeChatNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
@@ -40,49 +29,44 @@ import com.ns.yc.lifehelper.ui.other.myTsSc.YuanQuActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.view.TangShiFirstActivity;
 import com.ns.yc.lifehelper.ui.other.myVideo.MyVideoActivity;
 import com.ns.yc.lifehelper.ui.other.notePad.NotePadActivity;
-import com.ns.yc.lifehelper.ui.other.timeListener.TimeListenerActivity;
-import com.ns.yc.lifehelper.ui.other.toDo.view.ToDoTimerActivity;
-import com.ns.yc.lifehelper.ui.other.weather.SevenWeatherActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
-import com.yc.cn.ycbannerlib.first.BannerView;
-import com.yc.cn.ycbannerlib.first.util.SizeUtil;
-import com.yc.cn.ycbaseadapterlib.BaseViewHolder;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
+import com.yc.cn.ycbannerlib.BannerView;
+import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.Bind;
-import io.realm.Realm;
+
 
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/11/21
- * 描    述：数据页面，使用阿里巴巴Vlayout框架
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/11/21
+ *     desc  : 数据页面，使用阿里巴巴Vlayout框架
+ *     revise: v1.4 17年6月8日
+ *             v1.5 17年10月3日修改
+ * </pre>
  */
-public class FindFragment extends BaseFragment implements FindFragmentContract.View {
+public class FindFragment extends BaseFragment<FindFragmentPresenter> implements FindFragmentContract.View {
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
     private MainActivity activity;
     private FindFragmentContract.Presenter presenter = new FindFragmentPresenter(this);
-    /** 存放各个模块的适配器*/
     private List<DelegateAdapter.Adapter> mAdapters;
     private BannerView mBanner;
-    private Realm realm;
-
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (MainActivity) context;
+        presenter.bindActivity(activity);
     }
 
     @Override
@@ -130,16 +114,9 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
     @Override
     public void initView() {
         mAdapters = new LinkedList<>();
-        initRealm();
-        presenter.setActivity(activity);
         initRecyclerView();
     }
 
-    private void initRealm() {
-        if(realm ==null){
-            realm = BaseApplication.getInstance().getRealmHelper();
-        }
-    }
 
     @Override
     public void initListener() {
@@ -164,7 +141,6 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
         //初始化
         BaseDelegateAdapter marqueeAdapter = presenter.initMarqueeView();
         mAdapters.add(marqueeAdapter);
-
 
         //初始化标题
         BaseDelegateAdapter titleAdapter = presenter.initTitle("豆瓣分享");
@@ -196,9 +172,6 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
         BaseDelegateAdapter plusAdapter = presenter.initList4();
         mAdapters.add(plusAdapter);
 
-        //初始化折叠式指示器控件
-        //initSticky();
-        //mAdapters.add(stickyAdapter);
 
         //初始化list控件
         titleAdapter = presenter.initTitle("优质新闻");
@@ -208,47 +181,7 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
 
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);
-    }
-
-
-    private void initSticky() {
-        final ArrayList<String> mTitleList = new ArrayList<>();
-        final ArrayList<Fragment> mFragments = new ArrayList<>();
-        StickyLayoutHelper layoutHelper = new StickyLayoutHelper();
-        layoutHelper.setAspectRatio(4);
-        BaseDelegateAdapter stickyAdapter = new BaseDelegateAdapter(activity, layoutHelper, R.layout.view_vlayout_sticky, 1, Constant.viewType.typeSticky) {
-            @Override
-            public void onBindViewHolder(BaseViewHolder holder, int position) {
-                super.onBindViewHolder(holder, position);
-                TabLayout tabLayout = (TabLayout) holder.getItemView().findViewById(R.id.tab_layout);
-                ViewPager vpContent = (ViewPager) holder.getItemView().findViewById(R.id.vp_content);
-                mTitleList.add("综合");
-                mTitleList.add("文学");
-                mTitleList.add("文化");
-                mTitleList.add("生活");
-                mTitleList.add("励志");
-                mFragments.add(TestFragment.newInstance("综合"));
-                mFragments.add(TestFragment.newInstance("文学"));
-                mFragments.add(TestFragment.newInstance("文化"));
-                mFragments.add(TestFragment.newInstance("生活"));
-                mFragments.add(TestFragment.newInstance("励志"));
-
-                /**
-                 * 注意使用的是：getChildFragmentManager，
-                 * 这样setOffscreenPageLimit()就可以添加上，保留相邻2个实例，切换时不会卡
-                 * 但会内存溢出，在显示时加载数据
-                 */
-                FragmentManager childFragmentManager = getChildFragmentManager();
-                FragmentManager supportFragmentManager = activity.getSupportFragmentManager();
-                BasePagerAdapter myAdapter = new BasePagerAdapter(childFragmentManager, mFragments, mTitleList);
-                vpContent.setAdapter(myAdapter);
-                // 左右预加载页面的个数
-                //vpContent.setOffscreenPageLimit(5);
-                myAdapter.notifyDataSetChanged();
-                tabLayout.setTabMode(TabLayout.MODE_FIXED);
-                tabLayout.setupWithViewPager(vpContent);
-            }
-        };
+        recyclerView.requestLayout();
     }
 
 
@@ -269,16 +202,16 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
                 startActivity(GanKHomeActivity.class);
                 break;
             case 1:
-                startActivity(MobilePlayerActivity.class);
+
                 break;
             case 2:
                 startActivity(NotePadActivity.class);
                 break;
             case 3:
-                startActivity(ToDoTimerActivity.class);
+                startActivity(ZhiHuNewsActivity.class);
                 break;
             case 4:
-                startActivity(SevenWeatherActivity.class);
+
                 break;
             case 5:
                 startActivity(DoodleViewActivity.class);
@@ -321,7 +254,7 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
                 startActivity(BookReaderActivity.class);
                 break;
             case 1:
-                startActivity(MyMusicActivity.class);
+
                 break;
             case 2:
                 startActivity(MyVideoActivity.class);
@@ -367,7 +300,7 @@ public class FindFragment extends BaseFragment implements FindFragmentContract.V
     public void setGridClickFour(int position) {
         switch (position){
             case 0:
-                startActivity(TimeListenerActivity.class);
+
                 break;
             case 1:
                 startActivity(GoldMainActivity.class);

@@ -7,9 +7,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
+import com.ns.yc.lifehelper.inter.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.CategoryListAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.CategoryList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryBean;

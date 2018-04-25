@@ -1,6 +1,5 @@
 package com.ns.yc.lifehelper.ui.other.myPicture.view;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -16,9 +15,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
-import com.ns.yc.lifehelper.ui.other.myNews.wyNews.view.WxNewsDropActivity;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,16 +112,16 @@ public class MyPicBeautifulActivity extends BaseActivity implements View.OnClick
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.other:
-                startActivity(WxNewsDropActivity.class);
+
                 break;
             case R.id.share:
-                ToastUtils.showShortSafe("分享");
+                ToastUtils.showShort("分享");
                 break;
             case R.id.collect:
-                ToastUtils.showShortSafe("收藏");
+                ToastUtils.showShort("收藏");
                 break;
             case R.id.about:
-                ToastUtils.showShortSafe("关于");
+                ToastUtils.showShort("关于");
                 break;
             default:
                 break;

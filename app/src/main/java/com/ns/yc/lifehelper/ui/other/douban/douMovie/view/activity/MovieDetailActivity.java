@@ -17,14 +17,15 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.listener.OnListItemClickListener;
-import com.ns.yc.lifehelper.ui.other.douban.douMovie.view.adapter.MovieDetailAdapter;
-import com.ns.yc.lifehelper.ui.other.douban.douMovie.bean.DouMovieDetailBean;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.api.http.douban.DetailMovieModel;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
+import com.ns.yc.lifehelper.ui.other.douban.douMovie.bean.DouMovieDetailBean;
+import com.ns.yc.lifehelper.ui.other.douban.douMovie.view.adapter.MovieDetailAdapter;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
+
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.List;
 

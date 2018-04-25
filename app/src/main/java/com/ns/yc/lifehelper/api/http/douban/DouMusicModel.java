@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.api.http.douban;
 import android.content.Context;
 
 import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
-import com.ns.yc.lifehelper.api.manager.RetrofitWrapper;
+import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.douban.douMusic.bean.DouMusicBean;
 
 import rx.Observable;

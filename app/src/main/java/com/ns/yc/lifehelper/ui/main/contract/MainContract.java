@@ -1,8 +1,6 @@
 package com.ns.yc.lifehelper.ui.main.contract;
 
 
-import android.app.Activity;
-
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.lifehelper.base.mvp1.BaseView;
@@ -10,27 +8,26 @@ import com.ns.yc.lifehelper.base.mvp1.BaseView;
 import java.util.ArrayList;
 
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/3/18
- * 描    述：Main主页面
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  : Main主页面
+ *     revise:
+ * </pre>
  */
 public interface MainContract {
 
-    //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
 
     }
 
-    //Presenter控制器
     interface Presenter extends BasePresenter {
-        void bindView(Activity activity);
         ArrayList<CustomTabEntity> getTabEntity();
         void getUpdate();
+        void locationPermissionsTask();
     }
 
 

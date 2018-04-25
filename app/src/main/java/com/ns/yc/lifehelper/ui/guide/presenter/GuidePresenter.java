@@ -3,17 +3,18 @@ package com.ns.yc.lifehelper.ui.guide.presenter;
 import android.app.Activity;
 import android.text.TextUtils;
 
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.blankj.utilcode.util.LogUtils;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.api.constantApi.ConstantImageApi;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.base.BaseConfig;
+import com.ns.yc.lifehelper.comment.config.AppConfig;
+import com.ns.yc.lifehelper.db.cache.CacheFindBottomNews;
+import com.ns.yc.lifehelper.db.cache.CacheFindNews;
+import com.ns.yc.lifehelper.db.cache.CacheHomeNews;
+import com.ns.yc.lifehelper.db.cache.CacheHomePile;
 import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
-import com.ns.yc.lifehelper.cache.CacheFindBottomNews;
-import com.ns.yc.lifehelper.cache.CacheFindNews;
-import com.ns.yc.lifehelper.cache.CacheHomeNews;
-import com.ns.yc.lifehelper.cache.CacheHomePile;
+import com.ns.yc.lifehelper.model.bean.ItemEntity;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
-import com.ns.yc.lifehelper.weight.pileCard.ItemEntity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,14 +29,13 @@ import io.realm.RealmResults;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/9/14
- * 描    述：启动页
- * 修订历史：
- *          启动页目前设置为5秒倒计时
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  : 启动页面
+ *     revise:
+ * </pre>
  */
 public class GuidePresenter implements GuideContract.Presenter {
 
@@ -46,13 +46,31 @@ public class GuidePresenter implements GuideContract.Presenter {
 
     public GuidePresenter(GuideContract.View androidView) {
         this.mView = androidView;
+        this.activity = (Activity) androidView;
         mSubscriptions = new CompositeSubscription();
     }
 
     @Override
     public void subscribe() {
-        if(BaseConfig.INSTANCE.isShowGirlImg()){
-            String bannerUrl = BaseConfig.INSTANCE.getBannerUrl();
+        LogUtils.e("GuideActivity"+"------"+"subscribe");
+    }
+
+    private void initRealm() {
+        if(realm ==null){
+            realm = BaseApplication.getInstance().getRealmHelper();
+        }
+    }
+
+    @Override
+    public void unSubscribe() {
+        mSubscriptions.unsubscribe();
+    }
+
+
+    @Override
+    public void startGuideImage() {
+        if(AppConfig.INSTANCE.isShowGirlImg()){
+            String bannerUrl = AppConfig.INSTANCE.getBannerUrl();
             if(TextUtils.isEmpty(bannerUrl)){
                 int i = new Random().nextInt(ConstantImageApi.SPALSH_URLS.length);
                 String splashUrl = ConstantImageApi.SPALSH_URLS[i];
@@ -69,28 +87,9 @@ public class GuidePresenter implements GuideContract.Presenter {
         initRealm();
     }
 
-    private void initRealm() {
-        if(realm ==null){
-            realm = BaseApplication.getInstance().getRealmHelper();
-        }
-    }
-
-
-    @Override
-    public void unSubscribe() {
-        mSubscriptions.clear();
-        activity = null;
-    }
-
-
-    @Override
-    public void goMainActivity() {
-        mView.toMainActivity();
-    }
-
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void cacheHomeNewsData() {
-        activity = mView.getActivity();
         List<HomeBlogEntity> blog = new ArrayList<>();
         try {
             InputStream in = activity.getAssets().open("ycBlog.config");
@@ -117,6 +116,7 @@ public class GuidePresenter implements GuideContract.Presenter {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void cacheFindNewsData() {
         List<HomeBlogEntity> findNews = new ArrayList<>();
@@ -146,6 +146,7 @@ public class GuidePresenter implements GuideContract.Presenter {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void cacheFindBottomNewsData() {
         List<HomeBlogEntity> findBottomNews = new ArrayList<>();
@@ -175,6 +176,7 @@ public class GuidePresenter implements GuideContract.Presenter {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void cacheHomePileData() {
         ArrayList<ItemEntity> dataList = new ArrayList<>();
@@ -202,6 +204,7 @@ public class GuidePresenter implements GuideContract.Presenter {
             cacheHomePileData(dataList);
         }
     }
+
 
     /**
      * 直接换成新闻页的数据

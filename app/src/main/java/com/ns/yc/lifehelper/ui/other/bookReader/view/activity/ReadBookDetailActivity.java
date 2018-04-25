@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
+import com.ns.yc.lifehelper.inter.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.GlideRoundTransform;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.HotReviewAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.RecommendBookListAdapter;
@@ -320,7 +320,7 @@ public class ReadBookDetailActivity extends BaseActivity implements View.OnClick
         tflTag.setAdapter(new TagAdapter<String>(tagList) {
             @Override
             public View getView(FlowLayout parent, int position, String s) {
-                TextView tv = (TextView) LayoutInflater.from(ReadBookDetailActivity.this).inflate(R.layout.tag_hot, tflTag, false);
+                TextView tv = (TextView) LayoutInflater.from(ReadBookDetailActivity.this).inflate(R.layout.tag_tv_view, tflTag, false);
                 tv.setText(s);
                 return tv;
             }

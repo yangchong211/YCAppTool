@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.api.http.gold;
 
 import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
-import com.ns.yc.lifehelper.api.manager.RetrofitWrapper;
+import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldListBean;
 
 import java.util.List;

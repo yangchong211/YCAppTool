@@ -7,28 +7,34 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.blankj.utilcode.util.Utils;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.config.AppConfig;
+import com.ns.yc.lifehelper.comment.Constant;
+import com.ns.yc.lifehelper.inter.callback.LogCallback;
 import com.ns.yc.lifehelper.service.InitializeService;
 
 import java.io.File;
 
+import cn.ycbjie.ycthreadpoollib.PoolThread;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/8/18
- * 描    述：BaseApplication
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author      杨充
+ *     blog         https://www.jianshu.com/p/53017c3fc75d
+ *     time         2015/08/22
+ *     desc         Application
+ *     revise
+ *     GitHub       https://github.com/yangchong211
+ * </pre>
  */
 public class BaseApplication extends Application {
 
 
     private static BaseApplication instance;
-    //private RefWatcher refWatcher;
+    private PoolThread executor;
+    private Realm realm;
 
     public static synchronized BaseApplication getInstance() {
         if (null == instance) {
@@ -38,18 +44,6 @@ public class BaseApplication extends Application {
     }
 
     public BaseApplication(){}
-
-    /*public static BaseApplication getInstance() {
-        if (null == instance) {
-            synchronized (BaseApplication.class){
-                if(instance == null){
-                    instance = new BaseApplication();
-                }
-            }
-        }
-        return instance;
-    }*/
-
 
     /**
      * 这个最先执行
@@ -69,10 +63,11 @@ public class BaseApplication extends Application {
         Log.d("Application", "onCreate");
         super.onCreate();
         instance = this;
-        initUtils();
-        //BaseAppManager.getInstance().init(this);        //栈管理
-        //initLeakCanary();                               //Square公司内存泄漏检测工具
-        initRealm();                                    //初始化Realm数据库
+        Utils.init(this);
+        BaseLifecycleCallback.getInstance().init(this);
+        initRealm();
+        initThreadPool();
+        AppConfig.INSTANCE.initConfig();
         //在子线程中初始化
         InitializeService.start(this);
     }
@@ -88,6 +83,10 @@ public class BaseApplication extends Application {
         if(realm!=null){
             realm.close();
             realm = null;
+        }
+        if(executor!=null){
+            executor.close();
+            executor = null;
         }
     }
 
@@ -122,38 +121,6 @@ public class BaseApplication extends Application {
         super.onConfigurationChanged(newConfig);
     }
 
-
-    /**
-     * 初始化utils工具类
-     */
-    private void initUtils() {
-        Utils.init(this);
-    }
-
-
-    /**
-     * 初始化内存泄漏检测工具
-     */
-    /*private void initLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        refWatcher = LeakCanary.install(this);
-    }*/
-
-
-    /**
-     * 获取RefWatcher对象
-     * @param context       上下文
-     * @return              RefWatcher对象
-     */
-    /*public static RefWatcher getRefWatcher(Context context) {
-        BaseApplication application = (BaseApplication) context.getApplicationContext();
-        return application.refWatcher;
-    }*/
-
-
-    private Realm realm;
     /**
      * 初始化数据库
      */
@@ -184,6 +151,27 @@ public class BaseApplication extends Application {
     public Realm getRealmHelper() {
         return realm;
     }
+
+    /**
+     * 初始化线程池管理器
+     */
+    private void initThreadPool() {
+        // 创建一个独立的实例进行使用
+        executor = PoolThread.ThreadBuilder
+                .createFixed(4)
+                .setPriority(Thread.MAX_PRIORITY)
+                .setCallback(new LogCallback())
+                .build();
+    }
+
+    /**
+     * 获取线程池管理器对象，统一的管理器维护所有的线程池
+     * @return                      executor对象
+     */
+    public PoolThread getExecutor(){
+        return executor;
+    }
+
 
 }
 

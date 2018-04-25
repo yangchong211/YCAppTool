@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.api.constantApi.ConstantJsApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiDetail;
@@ -73,7 +72,7 @@ public class TangShiDetailActivity extends BaseActivity implements View.OnClickL
         initIntentData();
         initToolBar();
         // 添加Loading
-        mLoading = new ViewLoading(this, Constant.loadingStyle,"") {
+        mLoading = new ViewLoading(this, R.style.Loading,"") {
             @Override
             public void loadCancel() {
 
@@ -103,13 +102,13 @@ public class TangShiDetailActivity extends BaseActivity implements View.OnClickL
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.share:
-                        ToastUtils.showShortSafe("分享");
+                        ToastUtils.showShort("分享");
                         break;
                     case R.id.collect:
-                        ToastUtils.showShortSafe("收藏");
+                        ToastUtils.showShort("收藏");
                         break;
                     case R.id.about:
-                        ToastUtils.showShortSafe("关于");
+                        ToastUtils.showShort("关于");
                         break;
                     default:
                         break;

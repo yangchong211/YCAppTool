@@ -74,6 +74,8 @@ public class TxNewsActivity extends BaseActivity implements View.OnClickListener
             case R.id.ll_title_menu:
                 finish();
                 break;
+            default:
+                break;
         }
     }
 

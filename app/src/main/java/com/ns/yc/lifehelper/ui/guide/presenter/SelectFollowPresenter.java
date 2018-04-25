@@ -5,8 +5,8 @@ import android.app.Activity;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.model.bean.SelectPoint;
-import com.ns.yc.lifehelper.cache.SelectFollow;
-import com.ns.yc.lifehelper.cache.SelectUnFollow;
+import com.ns.yc.lifehelper.db.cache.SelectFollow;
+import com.ns.yc.lifehelper.db.cache.SelectUnFollow;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
 
 import java.util.ArrayList;
@@ -16,14 +16,15 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.subscriptions.CompositeSubscription;
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2016/5/18
- * 描    述：关注点页面
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  : 关注点页面
+ *     revise:
+ * </pre>
  */
 public class SelectFollowPresenter implements SelectFollowContract.Presenter {
 
@@ -54,7 +55,7 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        mSubscriptions.clear();
+        mSubscriptions.unsubscribe();
     }
 
     private void addUnSelectData() {
@@ -90,19 +91,10 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
         mView.refreshData(list);
     }
 
-    @Override
-    public void goMainActivity() {
-        mView.toMainActivity();
-    }
 
     @Override
     public void addSelectToRealm(final Integer[] selectedIndices) {
         initRealm();
-        if(realm.where(SelectFollow.class).findAll()!=null){
-            RealmResults<SelectFollow> selectFollows = realm.where(SelectFollow.class).findAll();
-        }else {
-            return;
-        }
         if(realm.where(SelectUnFollow.class).findAll()!=null){
             selectUnFollows = realm.where(SelectUnFollow.class).findAll();
         }else {
@@ -113,7 +105,6 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
             realm.beginTransaction();
             SelectFollow selectFollow = realm.createObject(SelectFollow.class);
             selectFollow.setName(list.get(a).getName());
-            //realm.copyToRealm(selectFollow);
             realm.commitTransaction();
 
             //删除，同时删除被选择的标签

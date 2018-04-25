@@ -9,14 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderSubjectAdapter;
-import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderSubjectBean;
 import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderSubjectBean;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderSubjectAdapter;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
@@ -221,7 +219,7 @@ public class ReaderSubjectFragment extends BaseFragment {
 
 
     private void getData() {
-        String sex = SPUtils.getInstance(Constant.REALM_NAME).getString(Constant.sex,"male");
+        String sex = "male";
         getBookLists(duration, sort, start, limit, currendTag, sex);
     }
 

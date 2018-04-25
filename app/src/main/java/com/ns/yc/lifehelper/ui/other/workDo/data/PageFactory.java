@@ -1,6 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.workDo.data;
 
-import com.ns.yc.lifehelper.ui.other.toDo.bean.MainPageItem;
+import com.ns.yc.lifehelper.ui.other.workDo.model.MainPageItem;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.fragment.PageFragment;
 
 import java.util.ArrayList;

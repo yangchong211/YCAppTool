@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
-import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
+import com.ns.yc.lifehelper.inter.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderTopBookBean;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
 

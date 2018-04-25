@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/btn_next_normal" android:state_pressed="false" android:state_enabled="true"/>
-    <item android:drawable="@drawable/btn_next_pressed" android:state_pressed="true" android:state_enabled="true"/>
-    <item android:drawable="@drawable/btn_next_disabled" android:state_pressed="false" android:state_enabled="false"/>
-</selector>

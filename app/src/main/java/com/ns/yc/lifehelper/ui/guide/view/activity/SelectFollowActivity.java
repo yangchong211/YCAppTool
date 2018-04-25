@@ -1,19 +1,18 @@
 package com.ns.yc.lifehelper.ui.guide.view.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.model.bean.SelectPoint;
-import com.ns.yc.lifehelper.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.SelectFollowPresenter;
 import com.ns.yc.lifehelper.ui.guide.view.adapter.SelectFollowAdapter;
@@ -27,16 +26,18 @@ import java.util.List;
 
 import butterknife.Bind;
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2016/5/18
- * 描    述：关注点页面
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  : 关注点页面
+ *     revise:
+ * </pre>
  */
-public class SelectFollowActivity extends BaseActivity implements SelectFollowContract.View, View.OnClickListener {
+public class SelectFollowActivity extends BaseActivity<SelectFollowPresenter>
+        implements SelectFollowContract.View, View.OnClickListener {
 
     @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
@@ -54,18 +55,6 @@ public class SelectFollowActivity extends BaseActivity implements SelectFollowCo
     private SelectFollowContract.Presenter presenter = new SelectFollowPresenter(this);
     private SelectFollowAdapter adapter;
     private List<SelectPoint> lists = new ArrayList<>();
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        presenter.subscribe();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.unSubscribe();
-    }
 
     @Override
     public int getContentView() {
@@ -111,10 +100,10 @@ public class SelectFollowActivity extends BaseActivity implements SelectFollowCo
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_title_menu:
-                presenter.goMainActivity();
+                toMainActivity();
                 break;
             case R.id.tv_title_right:
-                presenter.goMainActivity();
+                toMainActivity();
                 break;
             case R.id.tv_clean:
                 if(adapter!=null && adapter.data!=null){
@@ -127,7 +116,7 @@ public class SelectFollowActivity extends BaseActivity implements SelectFollowCo
                         presenter.addSelectToRealm(adapter.getSelectedIndices());
                     }
                 }
-                presenter.goMainActivity();
+                toMainActivity();
                 break;
             default:
                 break;
@@ -158,10 +147,9 @@ public class SelectFollowActivity extends BaseActivity implements SelectFollowCo
 
     @Override
     public void toMainActivity() {
-        startActivity(MainActivity.class);
-        overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
-        finish();
+        ActivityUtils.startActivity(MainActivity.class,R.anim.screen_zoom_in,R.anim.screen_zoom_out);
         SPUtils.getInstance(Constant.SP_NAME).put(Constant.KEY_FIRST_SPLASH, false);
+        finish();
     }
 
 }

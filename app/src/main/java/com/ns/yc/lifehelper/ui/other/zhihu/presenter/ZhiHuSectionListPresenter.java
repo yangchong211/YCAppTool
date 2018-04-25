@@ -7,7 +7,7 @@ import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuSectionListContract;
 import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuSectionChildBean;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
+import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
 import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import java.util.List;
@@ -67,7 +67,7 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
                         List<ZhiHuSectionChildBean.StoriesBean> list = zhiHuSectionChildBean.getStories();
                         initRealm();
                         for(ZhiHuSectionChildBean.StoriesBean item : list) {
-                            item.setReadState(RealmHelper.queryNewsId(realm,item.getId()));
+                            item.setReadState(RealmDbHelper.getInstance().queryNewsId(item.getId()));
                         }
                         return zhiHuSectionChildBean;
                     }
@@ -103,7 +103,7 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
     @Override
     public void insertReadToDB(int id) {
         initRealm();
-        RealmHelper.insertNewsId(realm , id);
+        RealmDbHelper.getInstance().insertNewsId(id);
     }
 
 

@@ -9,8 +9,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.cache.CacheZhLike;
+import com.ns.yc.lifehelper.base.mvp1.BaseLazyFragment;
+import com.ns.yc.lifehelper.db.cache.CacheZhLike;
 import com.ns.yc.lifehelper.ui.me.contract.MeNewsCollectContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeNewsCollectPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
@@ -25,16 +25,17 @@ import java.util.List;
 import butterknife.Bind;
 
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/11/12
- * 描    述：我的收藏页面
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/9/12
+ *     desc  : 我的收藏页面，新闻
+ *     revise:
+ * </pre>
  */
-public class MeNewsCollectFragment extends BaseFragment implements MeNewsCollectContract.View {
+public class MeNewsCollectFragment extends BaseLazyFragment implements MeNewsCollectContract.View {
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -42,7 +43,6 @@ public class MeNewsCollectFragment extends BaseFragment implements MeNewsCollect
     private MeNewsCollectContract.Presenter presenter = new MeNewsCollectPresenter(this);
     private List<CacheZhLike> mList;
     private MeCollectActivity activity;
-    private DefaultItemTouchHelpCallback mCallback;
     private MeNewsLikeAdapter mAdapter;
 
     @Override
@@ -90,6 +90,11 @@ public class MeNewsCollectFragment extends BaseFragment implements MeNewsCollect
 
     @Override
     public void initData() {
+
+    }
+
+    @Override
+    public void onLazyLoad() {
         presenter.getLikeData();
     }
 
@@ -102,7 +107,8 @@ public class MeNewsCollectFragment extends BaseFragment implements MeNewsCollect
 
 
     private void initCallBack() {
-        mCallback = new DefaultItemTouchHelpCallback(new DefaultItemTouchHelpCallback.OnItemTouchCallbackListener() {
+        DefaultItemTouchHelpCallback mCallback = new DefaultItemTouchHelpCallback(
+                new DefaultItemTouchHelpCallback.OnItemTouchCallbackListener() {
             @Override
             public void onSwiped(int adapterPosition) {
                 // 滑动删除的时候，从数据库、数据源移除，并刷新UI
@@ -118,7 +124,8 @@ public class MeNewsCollectFragment extends BaseFragment implements MeNewsCollect
                 if (mList != null) {
                     // 更换数据库中的数据Item的位置
                     boolean isPlus = srcPosition < targetPosition;
-                    presenter.changeLikeTime(mList.get(srcPosition).getId(),mList.get(targetPosition).getTime(),isPlus);
+                    presenter.changeLikeTime(mList.get(srcPosition).getId(),
+                            mList.get(targetPosition).getTime(), isPlus);
                     // 更换数据源中的数据Item的位置
                     Collections.swap(mList, srcPosition, targetPosition);
                     // 更新UI中的Item的位置，主要是给用户看到交互效果
@@ -140,4 +147,6 @@ public class MeNewsCollectFragment extends BaseFragment implements MeNewsCollect
         mList.addAll(likeList);
         mAdapter.notifyDataSetChanged();
     }
+
+
 }

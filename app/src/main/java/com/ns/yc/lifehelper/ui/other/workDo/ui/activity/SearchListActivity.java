@@ -9,13 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.workDo.contract.SearchListContract;
 import com.ns.yc.lifehelper.ui.other.workDo.dagger.DaggerUiComponent;
 import com.ns.yc.lifehelper.ui.other.workDo.dagger.UiModule;
+import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.workDo.presenter.SearchListPresenter;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.adapter.SearchListAdapter;
-import com.ns.yc.lifehelper.utils.AppUtil;
+
+import org.yczbj.ycvideoplayerlib.VideoPlayerUtils;
 
 import java.util.List;
 
@@ -118,7 +119,7 @@ public class SearchListActivity extends BaseActivity implements SearchListContra
 
     @Override
     public void finishActivity() {
-        if(AppUtil.isActivityLiving(this)){
+        if(VideoPlayerUtils.isActivityLiving(this)){
             finish();
         }
     }

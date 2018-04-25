@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.service;
 import android.app.IntentService;
 import android.content.Intent;
 
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.ui.other.myPicture.bean.PicBeautifulMainBean;
 import com.ns.yc.lifehelper.ui.other.myPicture.util.BeautifulPicUtils;
 import com.ns.yc.lifehelper.ui.other.myPicture.util.ContentParser;

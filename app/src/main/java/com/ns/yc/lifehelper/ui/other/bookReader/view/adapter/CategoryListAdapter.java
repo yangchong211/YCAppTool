@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
+import com.ns.yc.lifehelper.inter.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.CategoryList;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.ReaderCategoryActivity;
 

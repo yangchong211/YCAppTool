@@ -5,8 +5,6 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,19 +16,21 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.state.BaseStateFragment;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewAnimActivity;
+import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuDailyContract;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.presenter.ZhiHuDailyPresenter;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.activity.ZhiHuCalendarActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.adapter.ZhiHuDailyAdapter;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-import com.ns.yc.lifehelper.utils.rx.RxBus;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewAnimActivity;
 import com.ns.yc.lifehelper.utils.animation.AnimationViewUtil;
+import com.ns.yc.lifehelper.utils.rx.RxBus;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,13 +41,13 @@ import butterknife.Bind;
 
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/11/29
- * 描    述：知乎日报模块        日报
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/10/29
+ *     desc  : 知乎日报模块           日报
+ *     revise:
+ * </pre>
  */
 public class ZhiHuDailyFragment extends BaseStateFragment implements
         ZhiHuDailyContract.View, View.OnClickListener {
@@ -60,31 +60,11 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
     @Bind(R.id.fab)
     FloatingActionButton fab;
 
-
     private ZhiHuNewsActivity activity;
     private ZhiHuDailyContract.Presenter presenter = new ZhiHuDailyPresenter(this);
     private List<ZhiHuDailyListBean.StoriesBean> mList = new ArrayList<>();
     private ZhiHuDailyAdapter mAdapter;
     private String currentDate;
-
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        presenter.subscribe();
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        presenter.unSubscribe();
-        if(mAdapter!=null){
-            mAdapter = null;
-        }
-        mList = null;
-        refresher = null;
-    }
 
 
     @Override
@@ -124,9 +104,9 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
     @Override
     public void initListener() {
         fab.setOnClickListener(this);
-        mAdapter.setOnItemClickListener(new ZhiHuDailyAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new OnListItemClickListener() {
             @Override
-            public void onItemClick(int position, View view) {
+            public void onItemClick(View view, int position) {
                 presenter.insertReadToDB(mList.get(position).getId());
                 mAdapter.setReadState(position,true);
                 if(mAdapter.getIsBefore()) {
@@ -134,7 +114,6 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
                 } else {
                     mAdapter.notifyItemChanged(position + 2);
                 }
-
 
                 Intent intent = new Intent();
                 intent.setClass(activity, WebViewAnimActivity.class);

@@ -1,6 +1,6 @@
 package com.ns.yc.lifehelper.api.http.vtex;
 
-import com.ns.yc.lifehelper.api.manager.RetrofitWrapper;
+import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeBean;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeListBean;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.RepliesListBean;

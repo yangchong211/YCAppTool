@@ -13,15 +13,16 @@ import java.util.List;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/3/18
- * 描    述：工具页面
- * 修订历史：
- *         v1.5 17年10月3日修改
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  :
+ *     revise: v1.4 17年6月8日
+ *             v1.5 17年10月3日修改
+ * </pre>
  */
+
 public class DataFragmentPresenter implements DataFragmentContract.Presenter {
 
     private DataFragmentContract.View mView;
@@ -41,16 +42,19 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        mSubscriptions.clear();
+        if(mSubscriptions.isUnsubscribed()){
+            mSubscriptions.unsubscribe();
+        }
         if(activity!=null){
             activity = null;
         }
     }
 
     @Override
-    public void bindView(MainActivity activity) {
+    public void bindActivity(MainActivity activity) {
         this.activity = activity;
     }
+
 
     @Override
     public List<ImageIconBean> getVpData() {
@@ -65,6 +69,7 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
         return listData;
     }
 
+
     @Override
     public void initGridViewData() {
         TypedArray toolLogo = activity.getResources().obtainTypedArray(R.array.data_tool_pro_pic);
@@ -77,11 +82,14 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
         mView.setGridView(toolName, logoList);
     }
 
+
+    @SuppressWarnings("AlibabaUndefineMagicConstant")
     @Override
     public void initRecycleViewData() {
         TypedArray typedArray = activity.getResources().obtainTypedArray(R.array.data_narrow_Image);
         final ArrayList<Integer> list = new ArrayList<>();
-        for(int a=0 ; a<8 ; a++){
+        int b = 8;
+        for(int a=0 ; a<b ; a++){
             list.add(typedArray.getResourceId(a, R.drawable.bg_small_autumn_tree_min));
         }
         typedArray.recycle();

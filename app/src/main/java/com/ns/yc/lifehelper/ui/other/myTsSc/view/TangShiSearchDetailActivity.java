@@ -88,7 +88,7 @@ public class TangShiSearchDetailActivity extends BaseActivity implements View.On
             tvExplanation.setText(Html.fromHtml(explanation));
             tvTranslation.setText(Html.fromHtml(translation));
         } else {
-            ToastUtils.showShortSafe("没有数据");
+            ToastUtils.showShort("没有数据");
         }
     }
 
@@ -103,13 +103,13 @@ public class TangShiSearchDetailActivity extends BaseActivity implements View.On
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.share:
-                        ToastUtils.showShortSafe("分享");
+                        ToastUtils.showShort("分享");
                         break;
                     case R.id.collect:
-                        ToastUtils.showShortSafe("收藏");
+                        ToastUtils.showShort("收藏");
                         break;
                     case R.id.about:
-                        ToastUtils.showShortSafe("关于");
+                        ToastUtils.showShort("关于");
                         break;
                 }
                 return true;

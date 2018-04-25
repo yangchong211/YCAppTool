@@ -5,9 +5,7 @@ import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.lifehelper.base.mvp1.BaseView;
 import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.weight.pileCard.ItemEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,17 +22,15 @@ import java.util.List;
  */
 public interface HomeFragmentContract {
 
-    //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
         void setNewsData(List<HomeBlogEntity> list);
     }
 
-    //Presenter控制器
     interface Presenter extends BasePresenter {
         void getHomeNewsData();
         List<CharSequence> getMarqueeTitle();
-        void bindView(MainActivity activity);
         List<Object> getBannerData();
+        void bindActivity(MainActivity activity);
     }
 
 

@@ -1,6 +1,5 @@
 package com.ns.yc.lifehelper.utils.localFile.bean;
 
-import com.blankj.utilcode.util.PinyinUtils;
 
 import java.io.Serializable;
 
@@ -24,8 +23,6 @@ public class AudioItem implements Serializable {
     /**时长*/
     private int duration;
 
-    private String pinyin;
-
     public AudioItem(String name, String path, String album, String artist, long size, int duration) {
         this.name = name;
         this.path = path;
@@ -33,7 +30,6 @@ public class AudioItem implements Serializable {
         this.artist = artist;
         this.size = size;
         this.duration = duration;
-        pinyin = PinyinUtils.getPinyinFirstLetter(name);
     }
 
     public String getName() {
@@ -84,14 +80,6 @@ public class AudioItem implements Serializable {
         this.duration = duration;
     }
 
-    public String getPinyin() {
-        return pinyin;
-    }
-
-    public void setPinyin(String pinyin) {
-        this.pinyin = pinyin;
-    }
-
     @Override
     public String toString() {
         return "Music{" +
@@ -101,7 +89,6 @@ public class AudioItem implements Serializable {
                 ", artist='" + artist + '\'' +
                 ", size=" + size +
                 ", duration=" + duration +
-                ", pinyin='" + pinyin + '\'' +
                 '}';
     }
 

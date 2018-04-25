@@ -1,8 +1,8 @@
 package com.ns.yc.lifehelper.ui.other.workDo.dagger;
 
-import com.ns.yc.lifehelper.ui.other.toDo.bean.MainPageItem;
-import com.ns.yc.lifehelper.ui.other.workDo.data.DataDao;
+import com.ns.yc.lifehelper.db.realm.RealmWorkDoHelper;
 import com.ns.yc.lifehelper.ui.other.workDo.data.PageFactory;
+import com.ns.yc.lifehelper.ui.other.workDo.model.MainPageItem;
 
 import java.util.List;
 
@@ -19,8 +19,8 @@ public class DataModule {
     }
 
     @Provides
-    public DataDao dataDao() {
-        return DataDao.getInstance();
+    public RealmWorkDoHelper dataDao() {
+        return RealmWorkDoHelper.getInstance();
     }
 
 }

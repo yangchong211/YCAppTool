@@ -2,17 +2,15 @@ package com.ns.yc.lifehelper.ui.me.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.IntentUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.config.AppConfig;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;
@@ -23,22 +21,24 @@ import com.ns.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeQoneActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
-import com.ns.yc.lifehelper.ui.other.timer.TimerActivity;
+import com.ns.yc.lifehelper.ui.me.view.activity.MeTimerActivity;
+import com.ns.yc.lifehelper.utils.AppToolUtils;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import butterknife.Bind;
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/3/21
- * 描    述：我的页面
- * 修订历史：
- *          v1.5 17年9月8日修改
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/11/21
+ *     desc  : 我的页面
+ *     revise: v1.4 17年6月8日
+ *             v1.5 17年10月3日修改
+ * </pre>
  */
-public class MeFragment extends BaseFragment implements View.OnClickListener , MeFragmentContract.View{
+public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
+        View.OnClickListener , MeFragmentContract.View{
 
 
     @Bind(R.id.rl_me_timer)
@@ -85,25 +85,24 @@ public class MeFragment extends BaseFragment implements View.OnClickListener , M
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        presenter.unSubscribe();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        presenter.subscribe();
-    }
-
-    @Override
     public int getContentView() {
         return R.layout.fragment_me;
     }
 
     @Override
     public void initView() {
+        setRipperView();
+    }
 
+    private void setRipperView() {
+        AppToolUtils.setRipper(rlMeTimer);
+        AppToolUtils.setRipper(rlMeQone);
+        AppToolUtils.setRipper(rlMeProject);
+        AppToolUtils.setRipper(rlMeCollect);
+        AppToolUtils.setRipper(rlMeQuestion);
+        AppToolUtils.setRipper(rlMeSetting);
+        AppToolUtils.setRipper(rlMeFeedBack);
+        AppToolUtils.setRipper(rlMePhone);
     }
 
     @Override
@@ -128,7 +127,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener , M
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_me_timer:
-                startActivity(TimerActivity.class);
+                startActivity(MeTimerActivity.class);
                 break;
             case R.id.rl_me_qone:
                 startActivity(MeQoneActivity.class);
@@ -149,7 +148,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener , M
                 toCallMe();
                 break;
             case R.id.iv_person_image:
-                if(Constant.isLogin){
+                if(AppConfig.INSTANCE.isLogin()){
                     startActivity(MePersonActivity.class);
                 }else {
                     startActivity(MeLoginActivity.class);
@@ -163,17 +162,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener , M
 
     private void toCallMe() {
         String number = tvMePhoneNumber.getText().toString().trim();
-        Intent myIntentDial = new Intent("android.intent.action.CALL", Uri.parse("tel:" + number));
-        startActivity(myIntentDial);
+        Intent callIntent = IntentUtils.getCallIntent(number);
+        startActivity(callIntent);
     }
-
-    /*@Subscribe
-    public void onEventMainThread(LoginSuccessEvent event) {
-        if (null != event) {
-            String msg = event.getMsg();
-            tvPersonName.setText(String.format("网友%s", msg));
-            ivPersonImage.setImageResource(R.drawable.image_default);
-        }
-    }*/
 
 }

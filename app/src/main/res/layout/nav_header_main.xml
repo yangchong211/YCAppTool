@@ -113,7 +113,7 @@
         <View style="@style/ViewLineNav" />
 
         <LinearLayout
-            android:id="@+id/ll_nav_deedback"
+            android:id="@+id/ll_nav_feedback"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@drawable/ripple_one_item_bg"

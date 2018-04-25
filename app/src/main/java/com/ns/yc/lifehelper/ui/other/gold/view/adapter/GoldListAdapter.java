@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewQQActivity;
+import com.ns.yc.lifehelper.comment.Constant;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewQQActivity;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldListBean;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
 

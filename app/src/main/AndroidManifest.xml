@@ -3,7 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.ns.yc.lifehelper"
           android:versionCode="6"
-          android:versionName="1.6">
+          android:versionName="1.6"
+          tools:ignore="GradleOverrides">
 
     <!--权限-->
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -21,6 +22,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <category android:name="android.intent.category.APP_MARKET" />
+    <!--suppress DeprecatedClassUsageInspection -->
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -42,23 +44,20 @@
         tools:replace="android:icon,android:name">
         <!--注意： tools:replace="android:icon,android:name" 很重要-->
         <!--主要作用是：解决引入的三方包存在相同的label，icon，等名字-->
-
-        <activity android:name=".ui.guide.view.activity.SplashActivity">
+        <activity android:name=".ui.guide.view.activity.SplashPagerActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.view.MainActivity"/>
         <activity android:name=".ui.guide.view.activity.GuideActivity"/>
         <activity android:name=".ui.guide.view.activity.SelectFollowActivity"/>
-        <activity android:name=".ui.main.view.activity.DownLoadActivity"/>
         <activity android:name=".ui.main.view.activity.AboutMeActivity"/>
         <activity android:name=".ui.other.gank.view.activity.GanKHomeActivity"/>
         <activity android:name=".ui.other.gank.view.activity.GanKWebActivity"/>
         <activity android:name=".ui.other.gank.view.activity.GanKSearchActivity"/>
-        <activity android:name=".ui.data.view.activity.OpenFileActivity"/>
         <activity android:name=".ui.other.expressDelivery.ExpressDeliveryActivity"/>
         <activity android:name=".ui.other.expressDelivery.indexModel.SelectorCompanyActivity"/>
         <activity android:name=".ui.other.expressDelivery.activity.ExpressDeliveryInfoActivity"/>
@@ -75,7 +74,7 @@
         <activity android:name=".ui.other.zhihu.ui.ZhiHuNewsActivity"/>
         <activity android:name=".ui.other.douban.douMusic.view.DouMusicActivity"/>
         <activity android:name=".ui.other.douban.douMusic.view.activity.DouMusicDetailActivity"/>
-        <activity android:name=".ui.main.view.activity.WebViewAnimActivity"
+        <activity android:name=".ui.webView.view.WebViewAnimActivity"
                   android:configChanges="orientation|screenSize|keyboardHidden"
                   android:windowSoftInputMode="stateHidden|adjustResize"
                   android:launchMode="singleTop"
@@ -83,10 +82,7 @@
         <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuCommentActivity"/>
         <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuThemeListActivity"/>
         <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuSectionListActivity"/>
-        <activity android:name=".ui.other.toDo.view.ToDoTimerActivity"/>
-        <activity android:name=".ui.other.toDo.view.activity.ToDoAddActivity"/>
-        <activity android:name=".ui.other.weather.SevenWeatherActivity"/>
-        <activity android:name=".ui.main.view.activity.WebViewQQActivity"/>
+        <activity android:name=".ui.webView.view.WebViewQQActivity"/>
         <activity android:name=".ui.other.bookReader.view.BookReaderActivity"/>
         <activity android:name=".ui.other.bookReader.view.activity.ReaderSubjectActivity"/>
         <activity android:name=".ui.other.bookReader.bean.ReaderTopBookActivity"/>
@@ -107,27 +103,21 @@
         <activity android:name=".ui.other.bookReader.view.activity.BookDetailHelpActivity"/>
         <activity android:name=".ui.other.bookReader.view.activity.ReadBookDetailSubjectActivity"/>
         <activity android:name=".ui.other.gold.view.activity.GoldMainActivity"/>
-        <activity android:name=".ui.other.timer.TimerActivity"/>
+        <activity android:name=".ui.me.view.activity.MeTimerActivity"/>
         <activity android:name=".ui.other.vtex.view.WTexNewsActivity"/>
         <activity android:name=".ui.other.vtex.view.activity.WTexRepliesActivity"/>
         <activity android:name=".ui.other.vtex.view.activity.WTNoteActivity"/>
         <activity android:name=".ui.other.myVideo.MyVideoActivity"/>
         <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuCalendarActivity"/>
-        <activity android:name=".ui.other.myMusic.MyMusicActivity"/>
-        <activity android:name=".ui.other.myMusic.activity.MyMusicLocalActivity"/>
-        <activity android:name=".ui.other.myMusic.activity.MyMusicSearchActivity"/>
-        <activity android:name=".ui.other.myMusic.activity.MyMusicRippleActivity"/>
         <activity android:name=".ui.other.gold.view.activity.GoldManagerActivity"/>
         <activity android:name=".ui.other.myKnowledge.MyKnowledgeActivity"/>
         <activity android:name=".ui.other.myKnowledge.activity.KnowledgeSearchActivity"/>
         <activity android:name=".ui.other.myKnowledge.activity.KnowledgeImageActivity"/>
         <activity android:name=".ui.other.myNews.wyNews.WyNewsActivity"/>
-        <activity android:name=".ui.other.myNews.wyNews.view.WxNewsDropActivity"/>
         <activity android:name=".ui.other.myNews.txNews.TxNewsActivity"/>
-        <activity android:name=".ui.main.view.activity.WebViewActivity"/>
-        <activity android:name=".ui.other.myNews.NewsSearchActivity"/>
+        <activity android:name=".ui.webView.view.WebViewActivity"/>
         <activity android:name=".ui.other.myNews.weChat.view.activity.TxWeChatNewsActivity"/>
-        <activity android:name=".ui.main.view.activity.WebViewChangeActivity"/>
+        <activity android:name=".ui.webView.view.WebViewChangeActivity"/>
         <activity android:name=".ui.other.myTsSc.TangShiActivity"/>
         <activity android:name=".ui.other.myTsSc.SongCiActivity"/>
         <activity android:name=".ui.other.myTsSc.YuanQuActivity"/>
@@ -138,29 +128,17 @@
         <activity android:name=".ui.other.myTsSc.view.TangShiSearchActivity"/>
         <activity android:name=".ui.other.myTsSc.view.TangShiSearchDetailActivity"/>
         <activity android:name=".ui.other.myNews.videoNews.VideoNewsActivity"/>
-
-        <activity android:name=".ui.other.timeListener.TimeListenerActivity"/>
         <activity android:name=".ui.other.vtex.view.activity.WTNodeListActivity"/>
-
         <activity android:name=".ui.other.myPicture.MyPictureActivity"/>
-        <activity android:name=".ui.other.myPicture.view.MyPicPileActivity"/>
         <activity android:name=".ui.other.myPicture.view.MyPicBeautifulActivity"/>
         <activity android:name=".ui.other.myPicture.view.BeautifulGroupActivity"/>
         <activity android:name=".ui.other.myPicture.view.MyPicLargeActivity"/>
-
         <activity android:name=".ui.other.myNote.NoteActivity"/>
         <activity android:name=".ui.other.myNote.view.NoteAddActivity"/>
         <activity android:name=".ui.other.notePad.NotePadActivity"/>
         <activity android:name=".ui.other.notePad.activity.NotePadNewActivity"/>
         <activity android:name=".ui.other.notePad.activity.NotePadDetailActivity"/>
-
-        <activity android:name=".ui.data.view.activity.RiddleActivity"/>
-        <activity android:name=".ui.data.view.activity.RiddleDetailActivity"/>
         <activity android:name=".ui.data.view.activity.DoodleViewActivity"/>
-        <activity android:name=".ui.other.weather.WeatherActivity"/>
-
-        <activity android:name=".ui.other.sharpBendOfBrain.SharpBendOfBrainActivity"/>
-
         <activity android:name=".ui.me.view.activity.MeCollectActivity"/>
         <activity android:name=".ui.me.view.activity.MeFeedBackActivity"/>
         <activity android:name=".ui.me.view.activity.MeSettingActivity"/>
@@ -168,36 +146,6 @@
         <activity android:name=".ui.me.view.activity.MeQoneActivity"/>
         <activity android:name=".ui.me.view.activity.MeLoginActivity"/>
         <activity android:name=".ui.me.view.activity.MeRegisterActivity"/>
-
-
-        <activity android:name=".ui.other.listener.ListenerActivity"/>
-        <activity android:name=".ui.other.mobilePlayer.MobilePlayerActivity"/>
-        <activity android:name=".ui.other.mobilePlayer.activity.MobileVideoPlayActivity"
-                  android:theme="@style/FullScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="rtsp" />
-            </intent-filter>
-            <intent-filter tools:ignore="AppLinkUrlError">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="video/*" />
-                <data android:mimeType="application/sdp" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" />
-                <data android:mimeType="video/mp4" />
-                <data android:mimeType="video/3gp" />
-                <data android:mimeType="video/3gpp" />
-                <data android:mimeType="video/3gpp2" />
-            </intent-filter>
-        </activity>
-
 
         <activity
             android:name=".ui.other.workDo.ui.activity.SearchListActivity"
@@ -215,43 +163,12 @@
         <!--服务-->
         <service android:name=".service.PicBeautifulService"/>
         <service android:name=".service.PicGroupService"/>
-        <service android:name=".service.TimerService"/>
-        <service android:name=".service.AudioPlayService"/>
         <service
             android:name=".service.WorkDoNotifyService"
             android:enabled="true"
             android:exported="true"/>
-
-
         <!--广播接收者-->
-        <receiver android:name=".receiver.TimerReceiver"/>
-        <receiver android:name=".receiver.ReminderReceiver"
-            android:exported="false"/>
-
-
-
-        <!--用于测试，发布时删除-->
-        <!--<activity android:name=".ui.test.aidl.BankActivity"/>
-        <service android:name=".ui.test.aidl.BankService"
-            android:process="cn.aigestudio.BinderServer">
-            <intent-filter>
-                <action android:name="com.ns.yc.lifehelper.ui.test.aidl.BankService"/>
-            </intent-filter>
-        </service>-->
-
-
-
-        <!--vitamio视频-->
-        <!-- Don't forgot InitActivity -->
-        <activity
-            android:name="io.vov.vitamio.activity.InitActivity"
-            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
-            android:launchMode="singleTop"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.other.mobilePlayer.activity.MobileAudioPlayActivity"/>
-
-
+        <receiver android:name=".receiver.ReminderReceiver" android:exported="false"/>
     </application>
 
 </manifest>

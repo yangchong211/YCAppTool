@@ -8,12 +8,12 @@ import android.view.View;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
-import com.ns.yc.lifehelper.ui.other.toDo.bean.MainPageItem;
-import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.ui.other.workDo.contract.WorkDoContract;
-import com.ns.yc.lifehelper.ui.other.workDo.data.DataDao;
+import com.ns.yc.lifehelper.db.realm.RealmWorkDoHelper;
 import com.ns.yc.lifehelper.ui.other.workDo.data.DateUtils;
+import com.ns.yc.lifehelper.ui.other.workDo.model.MainPageItem;
+import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.activity.WorkNewActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.activity.WorkSettingActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.adapter.WorkPageAdapter;
@@ -55,7 +55,7 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
     @Inject
     List<MainPageItem> mItems;
     @Inject
-    DataDao mDataDao;
+    RealmWorkDoHelper mDataDao;
 
     //注意：这里不能传Activity上下文，否则报错：Cannot return null from a non-@Nullable @Provides method
     @Inject
@@ -268,7 +268,7 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
 
     private void deleteTask(int position, TaskDetailEntity entity) {
         PageFragment fragment = (PageFragment) mItems.get(mView.getCurrentViewPagerItem()).getFragment();
-        DataDao dao = DataDao.getInstance();
+        RealmWorkDoHelper dao = RealmWorkDoHelper.getInstance();
         fragment.deleteTask(position);
         dao.deleteTask(entity);
     }

@@ -6,12 +6,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.fragment.ZhiHuDailyFragment;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.fragment.ZhiHuHotFragment;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.fragment.ZhiHuSectionFragment;
@@ -21,15 +21,15 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/10/29
- * 描    述：知乎日报模块
- * 修订历史：
- *          练习MVP架构
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/10/29
+ *     desc  : 知乎日报模块
+ *     revise:
+ * </pre>
  */
 public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListener {
 
@@ -41,9 +41,6 @@ public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListe
     TabLayout tabLayout;
     @Bind(R.id.vp_content)
     ViewPager vpContent;
-    private ArrayList<String> mTitleList;
-    private ArrayList<Fragment> mFragments;
-
 
     @Override
     public int getContentView() {
@@ -54,7 +51,6 @@ public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListe
     public void initView() {
         initToolBar();
         initFragmentList();
-        initViewPagerAndTab();
     }
 
     private void initToolBar() {
@@ -84,8 +80,8 @@ public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListe
 
 
     private void initFragmentList() {
-        mTitleList = new ArrayList<>();
-        mFragments = new ArrayList<>();
+        ArrayList<String> mTitleList = new ArrayList<>();
+        ArrayList<Fragment> mFragments = new ArrayList<>();
         mTitleList.add("日报");
         mTitleList.add("主题");
         mTitleList.add("专栏");
@@ -94,12 +90,7 @@ public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListe
         mFragments.add(new ZhiHuThemeFragment());
         mFragments.add(new ZhiHuSectionFragment());
         mFragments.add(new ZhiHuHotFragment());
-    }
-
-
-    private void initViewPagerAndTab() {
-        /**
-         * 注意使用的是：getChildFragmentManager，
+        /*
          * 这样setOffscreenPageLimit()就可以添加上，保留相邻2个实例，切换时不会卡
          * 但会内存溢出，在显示时加载数据
          */
@@ -111,8 +102,11 @@ public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListe
         myAdapter.notifyDataSetChanged();
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(vpContent);
+        tabLayout.setTabTextColors(getResources().getColor(R.color.colorTheme),
+                getResources().getColor(R.color.redTab));
+        tabLayout.setSelectedTabIndicatorHeight(SizeUtils.dp2px(1));
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorTheme));
     }
-
 
 
 }

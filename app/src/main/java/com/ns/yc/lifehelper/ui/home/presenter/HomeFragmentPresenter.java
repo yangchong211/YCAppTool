@@ -10,12 +10,12 @@ import android.text.style.URLSpan;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
+import com.ns.yc.lifehelper.db.cache.CacheHomeNews;
+import com.ns.yc.lifehelper.db.cache.CacheHomePile;
 import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
-import com.ns.yc.lifehelper.cache.CacheHomeNews;
-import com.ns.yc.lifehelper.cache.CacheHomePile;
+import com.ns.yc.lifehelper.model.bean.ItemEntity;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.weight.pileCard.ItemEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,21 +58,25 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        mSubscriptions.clear();
+        if(mSubscriptions.isUnsubscribed()){
+            mSubscriptions.unsubscribe();
+        }
         if(activity!=null){
             activity = null;
         }
     }
 
+
+    @Override
+    public void bindActivity(MainActivity activity) {
+        this.activity = activity;
+    }
+
+
     private void initRealm() {
         if(realm ==null){
             realm = BaseApplication.getInstance().getRealmHelper();
         }
-    }
-
-    @Override
-    public void bindView(MainActivity activity) {
-        this.activity = activity;
     }
 
 

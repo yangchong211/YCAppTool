@@ -17,18 +17,19 @@ import android.view.View;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.workDo.contract.WorkDoContract;
 import com.ns.yc.lifehelper.ui.other.workDo.dagger.DaggerUiComponent;
 import com.ns.yc.lifehelper.ui.other.workDo.dagger.UiModule;
+import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.workDo.presenter.WorkDoPresenter;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.adapter.WorkPageAdapter;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.fragment.PageFragment;
-import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.SnackBarUtils;
 import com.pedaily.yc.ycdialoglib.bottomMenu.CustomBottomDialog;
 import com.pedaily.yc.ycdialoglib.bottomMenu.CustomItem;
 import com.pedaily.yc.ycdialoglib.bottomMenu.OnItemClickListener;
+
+import org.yczbj.ycvideoplayerlib.VideoPlayerUtils;
 
 import javax.inject.Inject;
 
@@ -239,7 +240,7 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
 
     @Override
     public void finishActivity() {
-        if(AppUtil.isActivityLiving(this)){
+        if(VideoPlayerUtils.isActivityLiving(this)){
             finish();
         }
     }

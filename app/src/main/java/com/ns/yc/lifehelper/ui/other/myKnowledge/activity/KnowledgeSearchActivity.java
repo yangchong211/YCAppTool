@@ -170,7 +170,7 @@ public class KnowledgeSearchActivity extends BaseActivity implements View.OnClic
                 addRealm(k);
                 initTabLayout(k);
             } else {
-                ToastUtils.showShortSafe("输入搜索内容不能为空");
+                ToastUtils.showShort("输入搜索内容不能为空");
             }
             return true;
         }
@@ -192,7 +192,7 @@ public class KnowledgeSearchActivity extends BaseActivity implements View.OnClic
                         addRealm(k);
                         initTabLayout(k);
                     } else {
-                        ToastUtils.showShortSafe("输入搜索内容不能为空");
+                        ToastUtils.showShort("输入搜索内容不能为空");
                     }
                 } else if (click.equals("取消")) {
                     finish();
@@ -392,7 +392,7 @@ public class KnowledgeSearchActivity extends BaseActivity implements View.OnClic
                 hisAdapter.notifyDataSetChanged();
             }
         } else {
-            ToastUtils.showShortSafe("清除历史记录");
+            ToastUtils.showShort("清除历史记录");
         }
     }
 
@@ -402,7 +402,7 @@ public class KnowledgeSearchActivity extends BaseActivity implements View.OnClic
             @Override
             public View getView(FlowLayout parent, int position, Object o) {
                 LayoutInflater from = LayoutInflater.from(KnowledgeSearchActivity.this);
-                TextView tv = (TextView) from.inflate(R.layout.tag_hot, tflSearchHot, false);
+                TextView tv = (TextView) from.inflate(R.layout.tag_tv_view, tflSearchHot, false);
                 tv.setText(data.get(position).getTitle());
                 return tv;
             }

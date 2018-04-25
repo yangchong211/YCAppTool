@@ -20,7 +20,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.cache.CacheExpressCompany;
+import com.ns.yc.lifehelper.db.cache.CacheExpressCompany;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.bean.ExpressDeliveryBean;
 import com.ns.yc.lifehelper.api.http.expressDelivery.ExpressDeliveryModel;
 

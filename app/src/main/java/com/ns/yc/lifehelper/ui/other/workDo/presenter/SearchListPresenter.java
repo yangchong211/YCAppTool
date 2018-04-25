@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.ns.yc.lifehelper.api.constant.Constant;
-import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.ui.other.workDo.contract.SearchListContract;
-import com.ns.yc.lifehelper.ui.other.workDo.data.DataDao;
+import com.ns.yc.lifehelper.db.realm.RealmWorkDoHelper;
+import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.activity.WorkNewActivity;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class SearchListPresenter implements SearchListContract.Presenter {
     private Context mContext;
 
     @Inject
-    DataDao mDataDao;
+    RealmWorkDoHelper mDataDao;
 
     @Inject
     public SearchListPresenter(Context context) {

@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.listener.OnListItemClickListener;
+import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 
 import java.util.List;
 

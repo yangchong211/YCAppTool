@@ -2,33 +2,31 @@ package com.ns.yc.lifehelper.base.state;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.app.AppManager;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import butterknife.ButterKnife;
+import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
+
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/5/18
- * 描    述：所有Activity的父类，使用开源库compile 'cn.yc:YCStateLib:1.x'进行状态管理
- * 修订历史：
- * 开源库地址：https://github.com/yangchong211/YCStateLayout
- *          v1.5版本，使用自己的开源库，可以自由切换5种不同状态
- *          且与Activity，Fragment让View状态的切换和Activity彻底分离开
- *          欢迎star和反馈
- * ================================================
+ * <pre>
+ *     @author      杨充
+ *     blog         https://www.jianshu.com/p/53017c3fc75d
+ *     time         2015/08/22
+ *     desc
+ *     revise       使用自己的开源库，可以自由切换5种不同状态
+ *                  且与Activity，Fragment让View状态的切换和Activity彻底分离开
+ *                  欢迎star和反馈
+ *     GitHub       https://github.com/yangchong211
+ * </pre>
  */
 public abstract class BaseStateActivity extends AppCompatActivity{
 
@@ -43,8 +41,7 @@ public abstract class BaseStateActivity extends AppCompatActivity{
         ButterKnife.bind(this);
         //避免切换横竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        //将当前Activity添加到容器
-        AppManager.getAppManager().addActivity(this);
+        YCAppBar.setStatusBarColor(this, R.color.colorTheme);
         initView();
         initListener();
         initData();
@@ -59,25 +56,6 @@ public abstract class BaseStateActivity extends AppCompatActivity{
         ButterKnife.unbind(this);
         //测试内存泄漏，正式一定要隐藏
         initLeakCanary();
-        //将当前Activity移除到容器
-        AppManager.getAppManager().removeActivity(this);
-        //AppManager.getAppManager().finishActivity(this);
-    }
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
 
@@ -97,24 +75,10 @@ public abstract class BaseStateActivity extends AppCompatActivity{
      * 获取到子布局
      */
     private void initBaseView() {
-        LinearLayout fl_main = (LinearLayout) findViewById(R.id.ll_main);
-        fl_main.addView(statusLayoutManager.getRootLayout());
+        LinearLayout flMain = (LinearLayout) findViewById(R.id.ll_main);
+        flMain.addView(statusLayoutManager.getRootLayout());
     }
 
-
-    /**
-     * 沉浸式状态栏
-     */
-    protected void initState() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            // 隐藏状态栏
-            //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN); // 隐藏状态栏
-        }
-    }
 
     /**
      * 通过Class跳转界面

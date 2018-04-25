@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.api.http.bookReader;
 import android.content.Context;
 
 import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
-import com.ns.yc.lifehelper.api.manager.RetrofitWrapper;
+import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookHelp;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookSubjectList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailDiscussionComment;

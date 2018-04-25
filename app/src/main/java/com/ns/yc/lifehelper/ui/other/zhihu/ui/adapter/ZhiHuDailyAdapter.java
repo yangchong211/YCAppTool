@@ -7,24 +7,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
+import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
+import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
-import com.yc.cn.ycbannerlib.first.BannerView;
+import com.yc.cn.ycbannerlib.BannerView;
 
 import java.util.List;
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/11/29
- * 描    述：知乎日报模块        日报
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/10/29
+ *     desc  : 知乎日报模块           日报
+ *     revise:
+ * </pre>
  */
 public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -32,7 +35,7 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Context mContext;
     private List<ZhiHuDailyListBean.StoriesBean> mList;
     private String currentTitle = "今日热闻";
-    private OnItemClickListener onItemClickListener;
+    private OnListItemClickListener onItemClickListener;
     private List<ZhiHuDailyListBean.TopStoriesBean> mTopList;
     private boolean isBefore = false;
     private BannerView banner;
@@ -58,9 +61,9 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE.ITEM_TOP.ordinal()) {
             mAdapter = new BannerPagerAdapter(mContext, mTopList);
-            return new TopViewHolder(inflater.inflate(R.layout.item_zh_daily_banner, parent, false));
+            return new TopViewHolder(inflater.inflate(R.layout.base_match_banner, parent, false));
         } else if (viewType == ITEM_TYPE.ITEM_DATE.ordinal()) {
-            return new DateViewHolder(inflater.inflate(R.layout.item_zh_daily_date, parent, false));
+            return new DateViewHolder(inflater.inflate(R.layout.base_title_view, parent, false));
         }
         return new ContentViewHolder(inflater.inflate(R.layout.item_tx_news_list, parent, false));
     }
@@ -80,13 +83,18 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 @Override
                 public void onClick(View view) {
                     if(onItemClickListener != null) {
-                        onItemClickListener.onItemClick(contentPosition,view);
+                        onItemClickListener.onItemClick(view,contentPosition);
                     }
                 }
             });
         } else if (holder instanceof DateViewHolder) {
             ((DateViewHolder) holder).tvZhTitle.setText(currentTitle);
         } else {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.height = SizeUtils.dp2px(100);
+            banner.setLayoutParams(layoutParams);
+            ((TopViewHolder) holder).banner.setLayoutParams(layoutParams);
             ((TopViewHolder) holder).banner.setAdapter(mAdapter);
             banner = ((TopViewHolder) holder).banner;
         }
@@ -210,14 +218,10 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnListItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-
-    public interface OnItemClickListener {
-        void onItemClick(int position, View view);
-    }
 
 
 }

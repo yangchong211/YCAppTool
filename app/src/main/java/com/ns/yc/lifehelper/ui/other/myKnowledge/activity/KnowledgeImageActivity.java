@@ -28,7 +28,7 @@ import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 
 import java.io.File;
@@ -180,12 +180,12 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
      * 保存图片到本地文件
      */
     private void toSaveImage() {
-        ToastUtils.showShortSafe("开始下载图片");
+        ToastUtils.showShort("开始下载图片");
         if (isApp) {            // 本地图片
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageId);
             if (bitmap != null) {
                 saveImageToGallery(KnowledgeImageActivity.this, bitmap);
-                ToastUtils.showShortSafe("保存成功");
+                ToastUtils.showShort("保存成功");
             }
         } else {                // 网络图片
             final BitmapFactory.Options bmOptions = new BitmapFactory.Options();
@@ -202,7 +202,7 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
                                 bitmap = BitmapFactory.decodeFile(imagePath, bmOptions);
                                 if (bitmap != null) {
                                     saveImageToGallery(KnowledgeImageActivity.this, bitmap);
-                                    ToastUtils.showShortSafe("已保存至" + Environment.getExternalStorageDirectory().getAbsolutePath() + "/生活助手");
+                                    ToastUtils.showShort("已保存至" + Environment.getExternalStorageDirectory().getAbsolutePath() + "/生活助手");
                                 }
                             }
                         }

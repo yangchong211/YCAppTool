@@ -3,20 +3,15 @@ package com.ns.yc.lifehelper.ui.home.view.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
@@ -25,39 +20,38 @@ import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
-import com.ns.yc.lifehelper.ui.other.douban.douMovie.view.DouMovieActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.MyKnowledgeActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.txNews.TxNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.videoNews.VideoNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.WyNewsActivity;
+import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
 import com.ns.yc.lifehelper.utils.DialogUtils;
-import com.ns.yc.lifehelper.utils.image.ImageUtils;
-import com.ns.yc.lifehelper.weight.MarqueeView;
-import com.ns.yc.lifehelper.weight.pileCard.ItemEntity;
-import com.ns.yc.yccardviewlib.CardViewLayout;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
-import com.yc.cn.ycbannerlib.first.BannerView;
-import com.yc.cn.ycbannerlib.first.util.SizeUtil;
+import com.yc.cn.ycbannerlib.BannerView;
+import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
+import com.yc.cn.ycbannerlib.marquee.MarqueeView;
+import com.yc.cn.ycbannerlib.marquee.OnItemClickListener;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
 import java.util.List;
+
 import butterknife.Bind;
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/3/21
- * 描    述：Home主页面
- * 修订历史：
- * <p>
- * v1.5 修改于11月3日，改写代码为MVP架构
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  : Home主页面
+ *     revise:
+ * </pre>
  */
-public class HomeFragment extends BaseFragment implements HomeFragmentContract.View {
+public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements HomeFragmentContract.View {
 
 
     @Bind(R.id.recyclerView)
@@ -73,6 +67,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (MainActivity) context;
+        presenter.bindActivity(activity);
     }
 
     @Override
@@ -83,14 +78,6 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
         }
     }
 
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        presenter.unSubscribe();
-    }
-
-
     @Override
     public void onPause() {
         super.onPause();
@@ -98,7 +85,6 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
             banner.pause();
         }
     }
-
 
     @Override
     public void onResume() {
@@ -114,20 +100,10 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
         return R.layout.base_easy_recycle;
     }
 
-
     @Override
     public void initView() {
         initRecycleView();
     }
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        presenter.bindView(activity);
-        presenter.subscribe();
-    }
-
 
     @Override
     public void initListener() {
@@ -139,7 +115,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
                     intent.putExtra("url", adapter.getAllData().get(position).getUrl());
                     startActivity(intent);
                 } else if (position == 0) {
-                    startActivity(VideoNewsActivity.class);
+                    startActivity(ZhiHuNewsActivity.class);
                 }
             }
         });
@@ -219,12 +195,6 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
                 tvHomeSecond.setOnClickListener(listener);
                 tvHomeThird.setOnClickListener(listener);
                 tvHomeFour.setOnClickListener(listener);
-                marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position, TextView textView) {
-                        //存放自己的博客
-                    }
-                });
                 initBanner();
                 initMarqueeView();
             }
@@ -253,7 +223,7 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
         }
         List<CharSequence> list = presenter.getMarqueeTitle();
         marqueeView.startWithList(list);
-        marqueeView.setOnItemClickListener(new MarqueeView.OnItemClickListener() {
+        marqueeView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position, TextView textView) {
                 switch (position) {

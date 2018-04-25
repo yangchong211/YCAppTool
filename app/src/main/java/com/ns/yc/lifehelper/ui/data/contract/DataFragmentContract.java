@@ -30,9 +30,9 @@ public interface DataFragmentContract {
     //Presenter控制器
     interface Presenter extends BasePresenter {
         List<ImageIconBean> getVpData();
-        void bindView(MainActivity activity);
         void initGridViewData();
         void initRecycleViewData();
+        void bindActivity(MainActivity activity);
     }
 
 

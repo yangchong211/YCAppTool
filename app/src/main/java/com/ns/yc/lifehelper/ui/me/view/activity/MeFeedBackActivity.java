@@ -2,21 +2,21 @@ package com.ns.yc.lifehelper.ui.me.view.activity;
 
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.IntentUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.utils.PermissionsUtils;
 import com.ns.yc.ycmultiinputviewlib.MultiEditInputView;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
@@ -57,13 +57,8 @@ public class MeFeedBackActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void initView() {
-        PermissionsUtils.verifyCallPermissions(this);
         initToolBar();
         initMevView();
-        //点击空白处隐藏软键盘
-        //KeyboardUtils.clickBlankArea2HideSoftInput();
-        //KeyboardUtils.toggleSoftInput();
-        setListenerToRootView();
     }
 
     private void initToolBar() {
@@ -161,7 +156,7 @@ public class MeFeedBackActivity extends BaseActivity implements View.OnClickList
     }
 
     /**-----------点击空白处隐藏软键盘，第一种方法----------------------------------------------*/
-    /*@Override
+    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
@@ -185,24 +180,6 @@ public class MeFeedBackActivity extends BaseActivity implements View.OnClickList
                     && event.getY() > top && event.getY() < bottom);
         }
         return false;
-    }*/
-
-
-    /**-----------点击空白处隐藏软键盘，第二种方法----------------------------------------------*/
-    private void setListenerToRootView() {
-        final View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
-        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                final int headerHeight = BarUtils.getActionBarHeight(MeFeedBackActivity.this) + BarUtils.getStatusBarHeight(MeFeedBackActivity.this);
-                int heightDiff = rootView.getRootView().getHeight() - rootView.getHeight();
-                if (heightDiff > headerHeight) {
-                    Log.e("keyboard", "keyboard is up");
-                } else {
-                    Log.e("keyboard", "keyboard is hidden");
-                }
-            }
-        });
     }
 
 }

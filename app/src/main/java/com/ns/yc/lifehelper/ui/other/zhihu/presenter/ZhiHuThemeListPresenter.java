@@ -7,7 +7,7 @@ import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuThemeListContract;
 import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeChildBean;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
+import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
 import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import java.util.List;
@@ -70,7 +70,7 @@ public class ZhiHuThemeListPresenter implements ZhiHuThemeListContract.Presenter
                     public ZhiHuThemeChildBean call(ZhiHuThemeChildBean zhiHuThemeChildBean) {
                         List<ZhiHuThemeChildBean.StoriesBean> list = zhiHuThemeChildBean.getStories();
                         for(ZhiHuThemeChildBean.StoriesBean item : list) {
-                            boolean b = RealmHelper.queryNewsId(realm, item.getId());
+                            boolean b = RealmDbHelper.getInstance().queryNewsId(item.getId());
                             item.setReadState(b);
                         }
                         return zhiHuThemeChildBean;
@@ -107,7 +107,7 @@ public class ZhiHuThemeListPresenter implements ZhiHuThemeListContract.Presenter
     @Override
     public void insertReadToDB(int id) {
         initRealm();
-        RealmHelper.insertNewsId(realm , id);
+        RealmDbHelper.getInstance().insertNewsId(id);
     }
 
 

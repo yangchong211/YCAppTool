@@ -15,12 +15,11 @@ import android.widget.TextView;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.BookReaderLocalActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.fragment.CommunityFragment;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.fragment.ReaderFindFragment;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.fragment.RecommendFragment;
 
 import java.util.ArrayList;
 
@@ -152,7 +151,7 @@ public class BookReaderActivity extends BaseActivity implements View.OnClickList
 
     private void initFragment() {
         mFragments.clear();
-        RecommendFragment recommendFragment = new RecommendFragment();
+        CommunityFragment recommendFragment = new CommunityFragment();
         CommunityFragment communityFragment = new CommunityFragment();
         ReaderFindFragment readerFindFragment = new ReaderFindFragment();
         mFragments.add(recommendFragment);

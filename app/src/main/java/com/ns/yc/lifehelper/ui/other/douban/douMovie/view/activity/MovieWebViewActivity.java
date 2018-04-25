@@ -133,7 +133,7 @@ public class MovieWebViewActivity extends BaseActivity {
                 break;
             case R.id.cope:
                 AppUtil.copy(alt);
-                ToastUtils.showShortSafe("复制成功");
+                ToastUtils.showShort("复制成功");
                 break;
             case R.id.open:
                 AppUtil.openLink(this, alt);
@@ -145,7 +145,7 @@ public class MovieWebViewActivity extends BaseActivity {
 
     @Override
     public int getContentView() {
-        return R.layout.activity_video_web_view;
+        return R.layout.base_video_web_view;
     }
 
     @Override
@@ -332,7 +332,7 @@ public class MovieWebViewActivity extends BaseActivity {
         public View getVideoLoadingProgressView() {
             if (progressVideo == null) {
                 LayoutInflater inflater = LayoutInflater.from(MovieWebViewActivity.this);
-                progressVideo = inflater.inflate(R.layout.view_video_loading_progress, null);
+                progressVideo = inflater.inflate(R.layout.layout_progress_loading, null);
             }
             return progressVideo;
         }

@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.ConstantBookReader;
+import com.ns.yc.lifehelper.comment.ConstantBookReader;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderLocalAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderRecommendBean;
@@ -64,7 +64,7 @@ public class BookReaderLocalActivity extends BaseActivity implements View.OnClic
 
     @Override
     public int getContentView() {
-        return R.layout.base_refresh_recycle_bar;
+        return R.layout.base_easy_recycle_bar;
     }
 
     @Override

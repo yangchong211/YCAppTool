@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.api.http.tangshi;
 import android.content.Context;
 
 import com.ns.yc.lifehelper.api.constantApi.ConstantJsApi;
-import com.ns.yc.lifehelper.api.manager.RetrofitWrapper;
+import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiBean;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiChapter;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiDetail;

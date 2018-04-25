@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.api.http.zhihu;
 
 import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
-import com.ns.yc.lifehelper.api.manager.RetrofitWrapper;
+import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuCommentBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;

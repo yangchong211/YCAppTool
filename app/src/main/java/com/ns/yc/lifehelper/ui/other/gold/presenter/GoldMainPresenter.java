@@ -6,7 +6,7 @@ import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.gold.contract.GoldMainContract;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerBean;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerItemBean;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
+import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
 import com.ns.yc.lifehelper.utils.rx.RxBus;
 
 import io.realm.Realm;
@@ -59,7 +59,7 @@ public class GoldMainPresenter implements GoldMainContract.Presenter {
                 GoldManagerBean.class, new Action1<GoldManagerBean>() {
             @Override
             public void call(GoldManagerBean goldManagerBean) {
-                RealmHelper.updateGoldManagerList(realm,goldManagerBean);
+                RealmDbHelper.getInstance().updateGoldManagerList(goldManagerBean);
                 mView.updateTab(goldManagerBean.getManagerList());
             }
         });
@@ -79,7 +79,7 @@ public class GoldMainPresenter implements GoldMainContract.Presenter {
 
     @Override
     public void setManagerList() {
-        mView.jumpToManager(RealmHelper.getGoldManagerList(realm));
+        mView.jumpToManager(RealmDbHelper.getInstance().getGoldManagerList());
     }
 
 
@@ -88,15 +88,15 @@ public class GoldMainPresenter implements GoldMainContract.Presenter {
         if (isFirst) {
             //第一次使用，生成默认ManagerList
             initList();
-            RealmHelper.updateGoldManagerList(realm , new GoldManagerBean(mList));
+            RealmDbHelper.getInstance().updateGoldManagerList(new GoldManagerBean(mList));
             mView.updateTab(mList);
         } else {
-            if (RealmHelper.getGoldManagerList(realm) == null) {
+            if (RealmDbHelper.getInstance().getGoldManagerList() == null) {
                 initList();
-                RealmHelper.updateGoldManagerList(realm , new GoldManagerBean(mList));
+                RealmDbHelper.getInstance().updateGoldManagerList(new GoldManagerBean(mList));
             } else {
                 //noinspection ConstantConditions
-                mList = RealmHelper.getGoldManagerList(realm).getManagerList();
+                mList = RealmDbHelper.getInstance().getGoldManagerList().getManagerList();
             }
             mView.updateTab(mList);
         }

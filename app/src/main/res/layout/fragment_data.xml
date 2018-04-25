@@ -3,18 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/colorWhite">
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/colorWhite">
+            android:layout_height="200dp">
             <android.support.v4.view.ViewPager
                 android:id="@+id/vp_pager"
                 android:layout_width="match_parent"
@@ -151,6 +150,8 @@
                 android:text="@string/data_new_look"/>
         </LinearLayout>
         <View style="@style/DeepUnderLine"/>
+
+
         <org.yczbj.ycrefreshviewlib.YCRefreshView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/recyclerView"

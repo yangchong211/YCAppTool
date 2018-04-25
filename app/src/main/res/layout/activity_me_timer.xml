@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteBg">
+
+    <include layout="@layout/base_tool_bar"/>
+
+    <com.ns.yc.lifehelper.weight.WatcherBoard
+        android:id="@+id/watch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"/>
+
+    <RelativeLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="是否开启闹钟"/>
+        <com.ns.yc.ycutilslib.switchButton.SwitchButton
+            android:id="@+id/switch_night"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            app:sb_show_indicator="false"
+            app:sb_checked="true"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_set_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="设置时间"/>
+        <TextView
+            android:id="@+id/tv_set_time"
+            style="@style/MeInfoTextRightStyle"
+            android:textColor="@color/blackText2"
+            android:text="5:56"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_set_re"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="重复"/>
+        <TextView
+            android:id="@+id/tv_set_re"
+            style="@style/MeInfoTextRightStyle"
+            android:textColor="@color/blackText2"
+            android:text="每周一"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_timer_sound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+        <TextView
+            style="@style/MeInfoTextLeftStyle"
+            android:text="铃声"/>
+        <TextView
+            android:id="@+id/tv_timer_sound"
+            style="@style/MeInfoTextRightStyle"
+            android:textColor="@color/blackText2"
+            android:text="震动"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+
+    <TextView
+        android:id="@+id/tv_exit"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/blackText"
+        android:text="开启闹钟"/>
+
+</LinearLayout>

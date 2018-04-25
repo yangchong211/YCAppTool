@@ -14,7 +14,6 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.other.myVideo.activity.VideoLocalActivity;
 import com.ns.yc.lifehelper.ui.other.myVideo.adapter.VideoGridAdapter;
 import com.ns.yc.lifehelper.ui.other.myVideo.bean.VideoIconBean;
 
@@ -124,11 +123,6 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
                     //int pos = position + pageCount * pageSize;
                     if(obj!=null && obj instanceof VideoIconBean){
                         int pos = ((VideoIconBean) obj).getId();
-                        switch (pos){
-                            case 0:
-                                startActivity(VideoLocalActivity.class);
-                                break;
-                        }
                         ToastUtils.showShort("被点击呢"+pos + "---"+position);
                     }
                 }

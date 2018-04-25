@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.state.BaseStateBarActivity;
-import com.ns.yc.lifehelper.listener.OnListItemClickListener;
+import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.vtex.contract.WTNodeListContract;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeBean;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeListBean;

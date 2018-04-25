@@ -21,7 +21,12 @@ import butterknife.ButterKnife;
  * 修订历史：
  * ================================================
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
+
+    /**
+     * 将代理类通用行为抽出来
+     */
+    protected T mPresenter;
 
     @Nullable
     @Override
@@ -34,8 +39,16 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (mPresenter != null){
+            mPresenter.subscribe();
+        }
         initView();
         initListener();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         initData();
     }
 
@@ -47,6 +60,9 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (mPresenter != null){
+            mPresenter.unSubscribe();
+        }
         ButterKnife.unbind(this);
         initLeakCanary();             //测试内存泄漏，正式一定要隐藏
     }

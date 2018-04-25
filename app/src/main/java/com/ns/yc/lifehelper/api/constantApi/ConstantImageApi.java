@@ -17,7 +17,9 @@ import java.util.List;
  */
 public class ConstantImageApi {
 
-    /**初始化页面随机图片*/
+    /**
+     * 初始化页面随机图片
+     */
     private static final String SPALSH_01 = "http://or4ceksby.bkt.clouddn.com/b_1.jpg";
     private static final String SPALSH_02 = "http://or4ceksby.bkt.clouddn.com/b_2.jpg";
     private static final String SPALSH_03 = "http://or4ceksby.bkt.clouddn.com/b_3.jpg";
@@ -29,7 +31,9 @@ public class ConstantImageApi {
     private static final String SPALSH_09 = "http://or4ceksby.bkt.clouddn.com/b_9.jpg";
     private static final String SPALSH_10 = "http://or4ceksby.bkt.clouddn.com/b_10.jpg";
     public static final String[] SPALSH_URLS = new String[]{
-            SPALSH_01, SPALSH_02, SPALSH_03, SPALSH_04, SPALSH_05, SPALSH_06, SPALSH_07, SPALSH_08, SPALSH_09,SPALSH_10
+            SPALSH_01, SPALSH_02, SPALSH_03, SPALSH_04,
+            SPALSH_05, SPALSH_06, SPALSH_07, SPALSH_08,
+            SPALSH_09,SPALSH_10
     };
 
     // 电影栏头部的图片

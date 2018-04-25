@@ -3,8 +3,9 @@ package com.ns.yc.lifehelper.ui.other.workDo.data;
 import android.util.Log;
 
 import com.blankj.utilcode.util.FileUtils;
-import com.ns.yc.lifehelper.api.constant.Constant;
-import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
+import com.ns.yc.lifehelper.comment.Constant;
+import com.ns.yc.lifehelper.db.realm.RealmWorkDoHelper;
+import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -46,7 +47,7 @@ public class BackupManager {
                 .fromCallable(new Callable<Boolean>() {
                     @Override
                     public Boolean call() throws Exception {
-                        List<TaskDetailEntity> allTask = DataDao.getInstance().findAllTask();
+                        List<TaskDetailEntity> allTask = RealmWorkDoHelper.getInstance().findAllTask();
                         File desDir = new File(Constant.ExternalStorageDirectory + Constant.DATABASE_FILE_EXPORT_PATH_FOLDER);
                         desDir.mkdirs();
                         File desFile = new File(desDir, System.currentTimeMillis() + ".txt");

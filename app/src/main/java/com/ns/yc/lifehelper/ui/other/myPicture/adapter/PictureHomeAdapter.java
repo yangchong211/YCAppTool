@@ -55,7 +55,7 @@ public class PictureHomeAdapter extends RecyclerArrayAdapter<TxNewsBean.Newslist
             if(data.getCtime()!=null && data.getCtime().length()>0){
                 tv_time.setText(data.getCtime());
             }
-            ImageUtils.loadImgByPicassoError(getContext(),data.getPicUrl(),R.drawable.shape_load_error_img , iv_logo);
+            ImageUtils.loadImgByPicasso(getContext(),data.getPicUrl(),R.drawable.shape_load_error_img , iv_logo);
         }
     }
 }

@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.graphics.Palette;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.BaseConfig;
+import com.ns.yc.lifehelper.comment.config.AppConfig;
 import com.ns.yc.lifehelper.ui.other.gank.bean.CategoryResult;
 import com.ns.yc.lifehelper.ui.other.gank.contract.GanKHomeAContract;
 import com.ns.yc.lifehelper.api.http.gank.GanKModel;
@@ -85,7 +85,7 @@ public class GanKHomeAPresenter implements GanKHomeAContract.Presenter {
      */
     @Override
     public void saveCacheImgUrl(String url) {
-        BaseConfig.INSTANCE.setBannerUrl(url);
+        AppConfig.INSTANCE.setBannerUrl(url);
     }
 
 
@@ -129,13 +129,13 @@ public class GanKHomeAPresenter implements GanKHomeAContract.Presenter {
 
     private void cacheRandomImg() {
         // 不显示欢迎妹子，也就不需要预加载了
-        if (!BaseConfig.INSTANCE.isShowGirlImg()) {
+        if (!AppConfig.INSTANCE.isShowGirlImg()) {
             return;
         }
         // 概率出现欢迎妹子
-        if (BaseConfig.INSTANCE.isProbabilityShowImg()) {
+        if (AppConfig.INSTANCE.isProbabilityShowImg()) {
             if (Math.random() < 0.75) {
-                BaseConfig.INSTANCE.setBannerUrl("");
+                AppConfig.INSTANCE.setBannerUrl("");
                 return;
             }
         }

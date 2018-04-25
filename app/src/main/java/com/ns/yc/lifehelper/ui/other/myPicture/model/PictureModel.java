@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.ui.other.myPicture.model;
 import android.content.Context;
 
 import com.ns.yc.lifehelper.api.constantApi.ConstantImageApi;
-import com.ns.yc.lifehelper.api.manager.RetrofitWrapper;
+import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.myNews.txNews.bean.TxNewsBean;
 import com.ns.yc.lifehelper.ui.other.myPicture.api.PictureApi;
 

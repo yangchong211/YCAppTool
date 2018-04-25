@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.ui.me.presenter;
 
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.me.contract.MeNewsCollectContract;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
+import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
 
 import io.realm.Realm;
 import rx.subscriptions.CompositeSubscription;
@@ -35,7 +35,7 @@ public class MeNewsCollectPresenter implements MeNewsCollectContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        mSubscriptions.clear();
+        mSubscriptions.unsubscribe();
     }
 
     @Override
@@ -47,17 +47,17 @@ public class MeNewsCollectPresenter implements MeNewsCollectContract.Presenter {
 
     @Override
     public void deleteLikeData(String id) {
-        RealmHelper.deleteLikeBean(realm, id);
+        RealmDbHelper.getInstance().deleteLikeBean(id);
     }
 
     @Override
     public void changeLikeTime(String id, long time, boolean isPlus) {
-        RealmHelper.changeLikeTime(realm,id,time,isPlus);
+        RealmDbHelper.getInstance().changeLikeTime(id,time,isPlus);
     }
 
 
     @Override
     public void getLikeData() {
-        mView.showContent(RealmHelper.getLikeList(realm));
+        mView.showContent(RealmDbHelper.getInstance().getLikeList());
     }
 }

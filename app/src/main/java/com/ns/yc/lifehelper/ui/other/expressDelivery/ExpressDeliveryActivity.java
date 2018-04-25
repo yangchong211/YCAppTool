@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.activity.ExpressDeliveryInfoActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.indexModel.SelectorCompanyActivity;
@@ -38,6 +37,7 @@ public class ExpressDeliveryActivity extends BaseActivity implements View.OnClic
     @Bind(R.id.tv_search)
     TextView tvSearch;
     private String type;
+    private String number;
 
     @Override
     public int getContentView() {
@@ -65,7 +65,7 @@ public class ExpressDeliveryActivity extends BaseActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_company:
-                Constant.expressDelivery = etNumber.getText().toString().trim();
+                number = etNumber.getText().toString().trim();
                 Intent intent = new Intent(this, SelectorCompanyActivity.class);
                 startActivityForResult(intent, 100);
                 break;
@@ -74,6 +74,8 @@ public class ExpressDeliveryActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.tv_search:
                 startSearch();
+                break;
+            default:
                 break;
         }
     }
@@ -85,7 +87,7 @@ public class ExpressDeliveryActivity extends BaseActivity implements View.OnClic
             String name = data.getStringExtra("name");
             type = data.getStringExtra("type");
             tvCompany.setText(name);
-            etNumber.setText(Constant.expressDelivery);
+            etNumber.setText(number);
         }
     }
 
@@ -93,11 +95,11 @@ public class ExpressDeliveryActivity extends BaseActivity implements View.OnClic
         String number = etNumber.getText().toString().trim();
         String company = tvCompany.getText().toString().trim();
         if(TextUtils.isEmpty(number)){
-            ToastUtils.showShortSafe("快递号不能为空");
+            ToastUtils.showShort("快递号不能为空");
             return;
         }
         if(TextUtils.isEmpty(company)){
-            ToastUtils.showShortSafe("快递公司不能为空");
+            ToastUtils.showShort("快递公司不能为空");
             return;
         }
 

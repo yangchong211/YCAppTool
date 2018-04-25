@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,12 +11,12 @@
 
     <include layout="@layout/base_tool_bar"/>
 
-    <ScrollView
+    <com.ns.yc.ycutilslib.scrollView.BounceScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <!--去评分-->
             <RelativeLayout
@@ -62,9 +63,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     app:sb_show_indicator="false"
-                    app:sb_checked="false"/>
+                    app:sb_checked="false"
+                    tools:ignore="RelativeOverlap" />
             </RelativeLayout>
             <View style="@style/DeepUnderLine"/>
 
@@ -112,9 +114,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     app:sb_show_indicator="false"
-                    app:sb_checked="false"/>
+                    app:sb_checked="false"
+                    tools:ignore="RelativeOverlap" />
             </RelativeLayout>
             <View style="@style/DeepUnderLine"/>
 
@@ -133,9 +136,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     app:sb_show_indicator="false"
-                    app:sb_checked="false"/>
+                    app:sb_checked="false"
+                    tools:ignore="RelativeOverlap" />
             </RelativeLayout>
             <View style="@style/DeepUnderLine"/>
 
@@ -153,9 +157,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     app:sb_show_indicator="false"
-                    app:sb_checked="true"/>
+                    app:sb_checked="true"
+                    tools:ignore="RelativeOverlap" />
             </RelativeLayout>
             <View style="@style/DeepUnderLine"/>
 
@@ -173,9 +178,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     app:sb_show_indicator="false"
-                    app:sb_checked="false"/>
+                    app:sb_checked="false"
+                    tools:ignore="RelativeOverlap" />
             </RelativeLayout>
             <View style="@style/DeepUnderLine"/>
 
@@ -228,7 +234,7 @@
                 <TextView
                     style="@style/MeInfoTextRightStyle"
                     android:textColor="@color/blackText2"
-                    android:drawableRight="@drawable/ic_back_right"/>
+                    android:drawableEnd="@drawable/ic_back_right"/>
             </RelativeLayout>
             <View style="@style/DeepUnderLine"/>
 
@@ -281,9 +287,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:drawableRight="@drawable/ic_back_right"/>
+                    android:drawableEnd="@drawable/ic_back_right"/>
             </RelativeLayout>
             <View style="@style/DeepUnderLine"/>
 
@@ -315,9 +321,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:drawableRight="@drawable/ic_back_right"/>
+                    android:drawableEnd="@drawable/ic_back_right"/>
             </RelativeLayout>
             <View style="@style/DeepUnderLine"/>
 
@@ -335,9 +341,9 @@
                     android:id="@+id/tv_update_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:drawableRight="@drawable/ic_back_right"/>
+                    android:drawableEnd="@drawable/ic_back_right"/>
             </RelativeLayout>
             <View style="@style/DeepUnderLine"/>
 
@@ -348,7 +354,6 @@
                 android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:background="@color/colorWhite"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
@@ -359,7 +364,7 @@
                 android:text="退出登录"/>
 
         </LinearLayout>
-    </ScrollView>
+    </com.ns.yc.ycutilslib.scrollView.BounceScrollView>
 
 
 </LinearLayout>

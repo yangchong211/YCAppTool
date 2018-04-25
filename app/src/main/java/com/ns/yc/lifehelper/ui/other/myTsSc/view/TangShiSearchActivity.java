@@ -217,7 +217,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
                         recyclerView.showProgress();
                         startSearch(k);
                     } else {
-                        ToastUtils.showShortSafe("输入搜索内容不能为空");
+                        ToastUtils.showShort("输入搜索内容不能为空");
                     }
                 } else if (click.equals("取消")) {
                     finish();
@@ -240,7 +240,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
                 recyclerView.showProgress();
                 startSearch(k);
             } else {
-                ToastUtils.showShortSafe("输入搜索内容不能为空");
+                ToastUtils.showShort("输入搜索内容不能为空");
             }
             return true;
         } else if(keyCode == KeyEvent.KEYCODE_BACK){
@@ -311,7 +311,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
             realm.commitTransaction();
 
         } else {
-            ToastUtils.showShortSafe("清除历史记录");
+            ToastUtils.showShort("清除历史记录");
         }
     }
 
@@ -346,7 +346,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
             @Override
             public View getView(FlowLayout parent, int position, String o) {
                 LayoutInflater from = LayoutInflater.from(TangShiSearchActivity.this);
-                TextView tv = (TextView) from.inflate(R.layout.tag_hot, tflSearchHot, false);
+                TextView tv = (TextView) from.inflate(R.layout.tag_tv_view, tflSearchHot, false);
                 tv.setText(o);
                 return tv;
             }
@@ -354,7 +354,7 @@ public class TangShiSearchActivity extends BaseActivity implements View.OnClickL
         tflSearchHot.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-                ToastUtils.showShortSafe(hot_tags[position]);
+                ToastUtils.showShort(hot_tags[position]);
                 return true;
             }
         });

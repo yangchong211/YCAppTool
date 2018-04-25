@@ -10,21 +10,15 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.PowerManager;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 
-import java.lang.ref.WeakReference;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -161,23 +155,6 @@ public class AppUtil {
         }
     }
 
-    /**
-     * 判断相对应的APP是否存在
-     * @param context       上下文
-     * @param packageName   (包名)(若想判断QQ，则改为com.tencent.mobileqq，若想判断微信，则改为com.tencent.mm)
-     * @return              true：该app存在；false：该app不存在
-     */
-    public boolean isAvilible(Context context, String packageName) {
-        PackageManager packageManager = context.getPackageManager();
-        //获取手机系统的所有APP包名，然后进行一一比较
-        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
-        for (int i = 0; i < pinfo.size(); i++) {
-            if (((PackageInfo) pinfo.get(i)).packageName.equalsIgnoreCase(packageName)){
-                return true;
-            }
-        }
-        return false;
-    }
 
 
     /**
@@ -191,9 +168,11 @@ public class AppUtil {
         Window window = activity.getWindow();
         if(window!=null){
             if (bgAlpha == 1) {
-                window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+                //不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+                window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             } else {
-                window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+                //此行代码主要是解决在华为手机上半透明效果无效的bug
+                window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             }
             window.setAttributes(lp);
         }
@@ -218,76 +197,6 @@ public class AppUtil {
         }
     }
 
-    /**
-     * 背景模糊
-     * 主要作用于：activity页面，建议不要用这种方式，可以使用模糊视图自定义控件【毛玻璃效果】
-     * @param
-     */
-    public static void setBackgroundDimAmount(Activity activity, View view, int bgAlpha){
-        Window window = activity.getWindow();
-        if(window!=null){
-            window.setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND, WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
-            view.getBackground().setAlpha(bgAlpha);     //0~255透明度值 ，0为完全透明，255为不透明
-        }
-    }
-
-
-    /**
-     * 判断某Activity是否挂掉，主要是用于弹窗
-     * @param activity
-     * @return
-     */
-    public static boolean isActivityLiving(Activity activity) {
-        if (activity == null) {
-            Log.d("wisely", "activity == null");
-            return false;
-        }
-        if (activity.isFinishing()) {
-            Log.d("wisely", "activity is finishing");
-            return false;
-        }
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {//android 4.2
-            if (activity.isDestroyed()) {
-                Log.d("wisely", "activity is destroy");
-                return false;
-            }
-        }*/
-        String name = activity.getClass().getName();
-        Log.d("wisely",name+"---");
-        Log.d("wisely", "activity is living");
-        return true;
-    }
-
-    /**
-     * 判断某Activity是否挂掉，主要是用于弹窗
-     */
-    private static boolean isActivityLiving(WeakReference<Activity> weakReference) {
-        if(weakReference != null){
-            Activity activity = weakReference.get();
-            if (activity == null) {
-                return false;
-            }
-            if (activity.isFinishing()) {
-                return false;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 格式化毫秒值，如果这个毫秒值包含小时，则格式为时分秒，如:01:30:58，如果不包含小时，则格式化为分秒，如：30:58
-     * @param duration
-     * @return
-     */
-    public static CharSequence formatMillis(long duration) {
-        Calendar calendar = Calendar.getInstance(); // 以当前系统时间创建一个日历
-        calendar.clear();   // 清空时间，变成1970 年 1 月 1 日 00:00:00
-        calendar.add(Calendar.MILLISECOND, (int) duration);// 1970 年 1 月 1 日 01:58:32
-        boolean hasHour = duration / (1 * 60 * 60 * 1000) > 0;    // 判断毫秒值有没有包含小时
-        CharSequence inFormat = hasHour ? "kk:mm:ss" : "mm:ss";   // 如果包含小时，则格式化为时:分:秒，否则格式化为分:秒
-        return DateFormat.format(inFormat, calendar);
-    }
 
     /**
      * 判断应用是否处于后台
@@ -306,21 +215,6 @@ public class AppUtil {
         return false;
     }
 
-    /**
-     * 吐司工具类    避免点击多次导致吐司多次，最后导致Toast就长时间关闭不掉了
-     * @param context       注意：这里如果传入context会报内存泄漏
-     * @param content
-     */
-    private static Toast toast;
-    public static void showToast(Context context, String content) {
-        if (toast == null) {
-            toast = Toast.makeText(context.getApplicationContext(), content, Toast.LENGTH_SHORT);
-        } else {
-            toast.setText(content);
-        }
-        toast.show();
-    }
-
 
     /**
      * 判断是否锁屏
@@ -329,7 +223,8 @@ public class AppUtil {
      */
     public static boolean isLockScreen(Context context){
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        boolean isScreenOn = pm.isScreenOn();       //如果为true，则表示屏幕“亮”了，否则屏幕“暗”了。
+        //如果为true，则表示屏幕“亮”了，否则屏幕“暗”了。
+        boolean isScreenOn = pm.isScreenOn();
         if (isScreenOn){
             return false;
         } else {
@@ -359,37 +254,6 @@ public class AppUtil {
             sb.append(hex);
         }
         return sb.toString();
-    }
-
-
-
-
-    /**
-     * 根据Pid获取当前进程的名字，一般就是当前app的包名
-     *
-     * @param pid 进程的id
-     * @return 返回进程的名字
-     */
-    public static String getAppName(Context context , int pid) {
-        String processName ;
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List list = activityManager.getRunningAppProcesses();
-        Iterator i = list.iterator();
-        while (i.hasNext()) {
-            ActivityManager.RunningAppProcessInfo info = (ActivityManager.RunningAppProcessInfo) (i.next());
-            try {
-                if (info.pid == pid) {
-                    // 根据进程的信息获取当前进程的名字
-                    processName = info.processName;
-                    // 返回当前进程名
-                    return processName;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        // 没有匹配的项，返回为null
-        return null;
     }
 
 }

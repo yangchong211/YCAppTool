@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewQQActivity;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewQQActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.contract.TxWeChatContract;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WeChatBean;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.presenter.TxWeChatPresenter;
@@ -75,7 +75,7 @@ public class TxWeChatNewsActivity extends BaseActivity implements
 
     @Override
     public int getContentView() {
-        return R.layout.base_refresh_recycle_bar;
+        return R.layout.base_easy_recycle_bar;
     }
 
     @Override

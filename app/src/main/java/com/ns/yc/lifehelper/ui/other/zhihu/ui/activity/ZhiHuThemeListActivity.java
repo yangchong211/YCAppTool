@@ -19,7 +19,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewAnimActivity;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewAnimActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuThemeListContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuThemeChildBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.presenter.ZhiHuThemeListPresenter;
@@ -70,7 +70,7 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
 
     @Override
     public int getContentView() {
-        return R.layout.base_refresh_recycle_bar;
+        return R.layout.base_easy_recycle_bar;
     }
 
 

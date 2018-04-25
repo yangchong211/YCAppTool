@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WxNewsDetailBean;
 import com.ns.yc.lifehelper.weight.textSpan.AwesomeTextHandler;
 

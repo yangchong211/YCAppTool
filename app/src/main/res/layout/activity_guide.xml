@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="false">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_splash_ad"
@@ -12,46 +11,22 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"/>
 
-    <TextView
-        android:id="@+id/tv_splash_skip_ad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/shape_guide_skip"
-        android:gravity="center"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:visibility="gone"
-        android:textColor="@color/blackText"
-        android:text="跳过广告" />
-
     <com.ns.yc.yccountdownviewlib.CountDownView
         android:id="@+id/cdv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_gravity="end"
         android:layout_marginTop="40dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
         app:cd_animator_time="3"
         app:cd_animator_time_unit="秒"
         app:cd_arc_color="@color/blackText"
         app:cd_arc_width="2dp"
-        app:cd_bg_color="@color/whiteBg"
+        app:cd_bg_color="@color/alpha_10_black"
         app:cd_circle_radius="20dp"
         app:cd_location="top"
         app:cd_retreat_type="forward"
         app:cd_text_color="@color/blackText"
         app:cd_text_size="9sp" />
 
-
-    <ImageView
-        android:id="@+id/iv_splash_download"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"/>
-
-</RelativeLayout>
+</FrameLayout>

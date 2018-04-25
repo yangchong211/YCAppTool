@@ -16,18 +16,21 @@ import com.ns.yc.lifehelper.ui.me.view.fragment.MeNewsCollectFragment;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MePicCollectFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/9/12
- * 描    述：我的收藏页面
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/9/12
+ *     desc  : 我的收藏页面
+ *     revise: v1.4 17年6月8日
+ *             v1.5 17年10月3日修改
+ * </pre>
  */
 public class MeCollectActivity extends BaseActivity implements View.OnClickListener {
 
@@ -38,7 +41,6 @@ public class MeCollectActivity extends BaseActivity implements View.OnClickListe
     @Bind(R.id.vp_content)
     ViewPager vpContent;
 
-    private List<String> list = new ArrayList<>();
     private final String[] mTitles = {"干货", "新闻", "图片","文件"};
 
     @Override
@@ -68,21 +70,21 @@ public class MeCollectActivity extends BaseActivity implements View.OnClickListe
             case R.id.fl_title_menu:
                 finish();
                 break;
+            default:
+                break;
         }
     }
 
 
     private void initViewPager() {
         ArrayList<Fragment> mFragments = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         mFragments.clear();
         mFragments.add(new MeGanKCollectFragment());
         mFragments.add(new MeNewsCollectFragment());
         mFragments.add(new MePicCollectFragment());
         mFragments.add(new MeDocCollectFragment());
-        list.clear();
-        for(int a=0 ; a<mTitles.length ; a++){
-            list.add(mTitles[a]);
-        }
+        list.addAll(Arrays.asList(mTitles));
         BasePagerAdapter adapter = new BasePagerAdapter(getSupportFragmentManager(),mFragments,list);
         vpContent.setAdapter(adapter);
         //限制预加载页面为4，这一步至关重要
@@ -95,7 +97,7 @@ public class MeCollectActivity extends BaseActivity implements View.OnClickListe
         stlTable.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-
+                vpContent.setCurrentItem(position);
             }
 
             @Override

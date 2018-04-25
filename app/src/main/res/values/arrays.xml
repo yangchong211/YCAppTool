@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+    <integer-array name="splash_image">
+        <item name="first">@drawable/bg_autumn_tree_min</item>
+        <item name="second">@drawable/bg_small_tree_min</item>
+        <item name="third">@drawable/bg_small_solda_min</item>
+        <item name="four">@drawable/bg_small_kites_min</item>
+    </integer-array>
+
     <!--///////////////////////////////////////首页/////////////////////////////////////-->
 
 

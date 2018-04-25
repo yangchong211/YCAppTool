@@ -53,7 +53,7 @@ public class TodayNewsAdapter extends RecyclerArrayAdapter<TodayNewsDetail.Resul
             tv_title.setText(data.getTitle());
             tv_author.setText(data.getSrc());
             tv_time.setText(data.getTime());
-            ImageUtils.loadImgByPicassoError(getContext(),data.getPic(),R.drawable.bg_frame_deep_gray,iv_img);
+            ImageUtils.loadImgByPicasso(getContext(),data.getPic(),R.drawable.bg_frame_deep_gray,iv_img);
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -27,7 +28,7 @@ import com.ns.yc.lifehelper.ui.other.douban.douMusic.bean.DouMusicDetailBean;
 import com.ns.yc.lifehelper.api.http.douban.DouMusicDetailModel;
 import com.ns.yc.lifehelper.weight.CustomChangeBounds;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
-import com.ns.yc.ycutilslib.scrollView.MyNestedScrollView;
+import com.ns.yc.ycutilslib.scrollView.ReboundScrollView;
 
 import butterknife.Bind;
 import cn.ycbjie.ycstatusbarlib.StatusBarHeightUtils;
@@ -71,7 +72,7 @@ public class DouMusicDetailActivity extends BaseActivity {
     @Bind(R.id.xrv_list)
     RecyclerView xrvList;
     @Bind(R.id.nsv_scrollview)
-    MyNestedScrollView nsvScrollview;
+    ReboundScrollView nsvScrollview;
     @Bind(R.id.iv_title_head_bg)
     ImageView ivTitleHeadBg;
     @Bind(R.id.title_tool_bar)
@@ -263,15 +264,14 @@ public class DouMusicDetailActivity extends BaseActivity {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void initScrollViewListener() {
-        // 为了兼容api23以下
-        nsvScrollview.setOnMyScrollChangeListener(new MyNestedScrollView.ScrollInterface() {
+        nsvScrollview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
-            public void onScrollChange(int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 scrollChangeHeader(scrollY);
             }
         });
-
         int titleBarAndStatusHeight = (int) (DouMusicDetailActivity.this.getResources().getDimension(R.dimen.nav_bar_height)
                 + StatusBarHeightUtils.getStatusBarHeight(this));
         slidingDistance = imageBgHeight - titleBarAndStatusHeight - (int) (DouMusicDetailActivity.this.getResources().getDimension(R.dimen.nav_bar_height_more));

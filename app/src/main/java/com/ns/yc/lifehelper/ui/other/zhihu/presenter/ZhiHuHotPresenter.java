@@ -7,7 +7,7 @@ import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuHotContract;
 import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuHotBean;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
+import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
 import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import java.util.List;
@@ -67,7 +67,7 @@ public class ZhiHuHotPresenter implements ZhiHuHotContract.Presenter {
                         List<ZhiHuHotBean.RecentBean> list = zhiHuHotBean.getRecent();
                         initRealm();
                         for(ZhiHuHotBean.RecentBean item : list) {
-                            item.setReadState(RealmHelper.queryNewsId(realm , item.getNews_id()));
+                            item.setReadState(RealmDbHelper.getInstance().queryNewsId(item.getNews_id()));
                         }
                         return zhiHuHotBean;
                     }
@@ -100,8 +100,8 @@ public class ZhiHuHotPresenter implements ZhiHuHotContract.Presenter {
     }
 
     @Override
-    public void insertReadToDB(int news_id) {
+    public void insertReadToDB(int id) {
         initRealm();
-        RealmHelper.insertNewsId(realm , news_id);
+        RealmDbHelper.getInstance().insertNewsId(id);
     }
 }

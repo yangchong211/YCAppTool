@@ -23,7 +23,7 @@ public interface MeGanKCollectContract {
         //加载数据为空
         void setEmpty();
         //设置数据
-        void setFavoriteItems(List<GanKFavorite> favorites);
+        void setDataList(List<GanKFavorite> favorites);
     }
 
     //Presenter控制器

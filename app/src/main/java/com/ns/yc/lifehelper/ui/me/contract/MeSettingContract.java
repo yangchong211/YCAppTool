@@ -44,7 +44,6 @@ public interface MeSettingContract {
         void setClearText();
         void setErrorView(Throwable e);
         void showUpdateDialog(UpdateBean updateBean);
-        void showError(String s);
         void finishActivity();
     }
 

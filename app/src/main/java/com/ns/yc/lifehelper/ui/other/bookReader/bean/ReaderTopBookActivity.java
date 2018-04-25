@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
+import com.ns.yc.lifehelper.inter.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.TopReaderAdapter;
 import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.SubHomeTopRankActivity;

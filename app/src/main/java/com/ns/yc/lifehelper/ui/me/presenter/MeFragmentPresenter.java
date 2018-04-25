@@ -5,14 +5,14 @@ import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/3/21
- * 描    述：我的页面
- * 修订历史：
- *          v1.5 17年9月8日修改
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/11/21
+ *     desc  : 我的页面
+ *     revise: v1.4 17年6月8日
+ *             v1.5 17年10月3日修改
+ * </pre>
  */
 public class MeFragmentPresenter implements MeFragmentContract.Presenter {
 
@@ -32,7 +32,7 @@ public class MeFragmentPresenter implements MeFragmentContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        mSubscriptions.clear();
+        mSubscriptions.unsubscribe();
     }
 
     /**

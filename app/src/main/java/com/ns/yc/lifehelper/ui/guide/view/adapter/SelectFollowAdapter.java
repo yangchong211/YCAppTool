@@ -10,19 +10,20 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.model.bean.SelectPoint;
-import com.ns.yc.lifehelper.listener.OnListItemClickListener;
+import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 import com.yc.cn.ycrecycleviewlib.select.SelectRecyclerViewAdapter;
 
 import java.util.List;
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2016/5/18
- * 描    述：关注点页面
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  : 关注点页面适配器
+ *     revise:
+ * </pre>
  */
 public class SelectFollowAdapter extends SelectRecyclerViewAdapter<SelectFollowAdapter.MyViewHolder> {
 
@@ -46,13 +47,13 @@ public class SelectFollowAdapter extends SelectRecyclerViewAdapter<SelectFollowA
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if(data!=null && data.size()>0){
-            holder.tv_name.setText(data.get(position).getName());
+            holder.tvName.setText(data.get(position).getName());
             if(isIndexSelected(position)){
-                holder.tv_name.setBackgroundResource(R.drawable.shape_btn_color_bg_press);
-                holder.tv_name.setTextColor(activity.getResources().getColor(R.color.colorWhite));
+                holder.tvName.setBackgroundResource(R.drawable.shape_btn_color_bg_press);
+                holder.tvName.setTextColor(activity.getResources().getColor(R.color.colorWhite));
             }else {
-                holder.tv_name.setBackgroundResource(R.drawable.shape_btn_color_bg);
-                holder.tv_name.setTextColor(activity.getResources().getColor(R.color.blackText));
+                holder.tvName.setBackgroundResource(R.drawable.shape_btn_color_bg);
+                holder.tvName.setTextColor(activity.getResources().getColor(R.color.blackText));
             }
         }
     }
@@ -67,10 +68,10 @@ public class SelectFollowAdapter extends SelectRecyclerViewAdapter<SelectFollowA
     class MyViewHolder extends  RecyclerView.ViewHolder{
 
         private  OnListItemClickListener listener;
-        TextView tv_name;
+        TextView tvName;
         MyViewHolder(View itemView , OnListItemClickListener mItemClickListener) {
             super(itemView);
-            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+            tvName = (TextView) itemView.findViewById(R.id.tv_name);
             this.listener = mItemClickListener;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,7 +82,6 @@ public class SelectFollowAdapter extends SelectRecyclerViewAdapter<SelectFollowA
         }
 
     }
-
 
     private OnListItemClickListener mItemClickListener;
     public void setOnItemClickListener(OnListItemClickListener listener) {

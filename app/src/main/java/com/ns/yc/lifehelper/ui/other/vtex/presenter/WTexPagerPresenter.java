@@ -1,9 +1,9 @@
 package com.ns.yc.lifehelper.ui.other.vtex.presenter;
 
-import com.ns.yc.lifehelper.ui.other.vtex.contract.WTexPagerContract;
+import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.api.http.vtex.VTexApi;
+import com.ns.yc.lifehelper.ui.other.vtex.contract.WTexPagerContract;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.TopicListBean;
-import com.ns.yc.lifehelper.utils.LogUtils;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

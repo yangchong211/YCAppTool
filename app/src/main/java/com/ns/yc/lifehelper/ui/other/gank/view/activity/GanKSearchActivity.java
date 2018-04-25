@@ -28,7 +28,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.listener.OnListItemClickListener;
+import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
 import com.ns.yc.lifehelper.ui.other.gank.bean.SearchHistory;
 import com.ns.yc.lifehelper.ui.other.gank.bean.SearchResult;
@@ -36,11 +36,11 @@ import com.ns.yc.lifehelper.ui.other.gank.contract.GanKSearchContract;
 import com.ns.yc.lifehelper.ui.other.gank.presenter.GanKSearchPresenter;
 import com.ns.yc.lifehelper.ui.other.gank.view.adapter.GanKSearchHisAdapter;
 import com.ns.yc.lifehelper.ui.other.gank.view.adapter.GanKSearchListAdapter;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.MDTintUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;

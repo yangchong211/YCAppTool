@@ -10,23 +10,31 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import butterknife.ButterKnife;
 
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/5/18
- * 描    述：所有Fragment的父类
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author      杨充
+ *     blog         https://www.jianshu.com/p/53017c3fc75d
+ *     time         2015/08/22
+ *     desc
+ *     revise       使用自己的开源库，可以自由切换5种不同状态
+ *                  且与Activity，Fragment让View状态的切换和Activity彻底分离开
+ *                  欢迎star和反馈
+ *     GitHub       https://github.com/yangchong211
+ * </pre>
  */
-public abstract class BaseStateFragment extends Fragment {
+public abstract class BaseStateFragment<T extends BasePresenter>  extends Fragment {
 
     protected StateLayoutManager statusLayoutManager;
+    /**
+     * 将代理类通用行为抽出来
+     */
+    protected T mPresenter;
 
     @Nullable
     @Override
@@ -41,19 +49,25 @@ public abstract class BaseStateFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (mPresenter != null){
+            mPresenter.subscribe();
+        }
         initView();
         initListener();
-        initData();
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (mPresenter != null){
+            mPresenter.unSubscribe();
+        }
         ButterKnife.unbind(this);
         initLeakCanary();             //测试内存泄漏，正式一定要隐藏
     }
@@ -63,8 +77,8 @@ public abstract class BaseStateFragment extends Fragment {
      * @param view
      */
     private void initBaseView(View view) {
-        LinearLayout fl_main = (LinearLayout) view.findViewById(R.id.ll_main);
-        fl_main.addView(statusLayoutManager.getRootLayout());
+        LinearLayout flMain = (LinearLayout) view.findViewById(R.id.ll_main);
+        flMain.addView(statusLayoutManager.getRootLayout());
     }
 
     /** 状态切换 **/

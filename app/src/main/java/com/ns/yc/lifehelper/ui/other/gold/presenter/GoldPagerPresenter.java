@@ -3,11 +3,11 @@ package com.ns.yc.lifehelper.ui.other.gold.presenter;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.ns.yc.lifehelper.api.http.gold.GoldModel;
 import com.ns.yc.lifehelper.ui.other.gold.contract.GoldPagerContract;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldListBean;
-import com.ns.yc.lifehelper.api.http.gold.GoldModel;
-import com.ns.yc.lifehelper.utils.LogUtils;
 import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
 import java.text.SimpleDateFormat;

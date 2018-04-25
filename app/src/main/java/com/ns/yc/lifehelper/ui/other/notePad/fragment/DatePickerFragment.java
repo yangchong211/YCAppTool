@@ -8,7 +8,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.DatePicker;
 
-import com.ns.yc.lifehelper.listener.OnDatePickListener;
+import com.ns.yc.lifehelper.inter.listener.OnDatePickListener;
 
 import java.util.Calendar;
 

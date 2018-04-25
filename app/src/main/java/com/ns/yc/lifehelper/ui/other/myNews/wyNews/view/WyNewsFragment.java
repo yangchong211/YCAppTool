@@ -15,7 +15,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewActivity;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.WyNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.adapter.TodayNewsAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.bean.TodayNewsDetail;
@@ -135,7 +135,7 @@ public class WyNewsFragment extends BaseFragment {
                     getTodayNews(mType,num,start);
                 } else {
                     adapter.pauseMore();
-                    ToastUtils.showShortSafe("没有网络");
+                    ToastUtils.showShort("没有网络");
                 }
             }
 

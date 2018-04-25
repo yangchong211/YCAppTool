@@ -20,7 +20,7 @@ public class ReferenceUtils {
      */
     public static void setSoftReference(int image , ImageView view){
         if(view!=null){
-            Bitmap bitmap = BitmapFactory.decodeResource(Utils.getContext().getResources(), image);
+            Bitmap bitmap = BitmapFactory.decodeResource(Utils.getApp().getResources(), image);
             Drawable drawable = new BitmapDrawable(bitmap);
             SoftReference<Drawable> drawableSoftReference = new SoftReference<>(drawable);
             //注意，一定要增加判断

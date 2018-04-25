@@ -15,14 +15,15 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.state.BaseStateFragment;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewAnimActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuHotContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuHotBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.presenter.ZhiHuHotPresenter;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.adapter.ZhiHuHotAdapter;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewAnimActivity;
 import com.ns.yc.ycstatelib.StateLayoutManager;
+
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;

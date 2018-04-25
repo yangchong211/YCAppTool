@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
-import com.ns.yc.lifehelper.listener.OnTimePickListener;
+import com.ns.yc.lifehelper.inter.listener.OnTimePickListener;
 
 import java.util.Calendar;
 
@@ -40,6 +40,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         }
     }
 
+    @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         if (mTimePickListener != null) {
             mTimePickListener.onTimePick(hourOfDay, minute);

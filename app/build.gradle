@@ -5,18 +5,14 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
+
     defaultConfig {
         applicationId "com.ns.yc.lifehelper"
         minSdkVersion 17
         targetSdkVersion 25
         versionCode 8
         versionName "1.8"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        /*ndk {
-            // 设置支持的 SO 库构架
-            abiFilters 'armeabi', 'x86'// 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
-        }*/
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
@@ -25,6 +21,7 @@ android {
         // 支持模糊视图
         renderscriptSupportModeEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -37,6 +34,25 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+
+    //避免项目中存在相同的jar包，导致运行失败
+    dexOptions {
+        preDexLibraries = false
+    }
+
+    //为了解决第三方库重复打包了META_INF问题，替换为有冲突的依赖
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    //过滤掉不支持的平台
+    packagingOptions {
+        exclude "lib/arm64-v8a/librealm-jni.so"
+        exclude "lib/mips/librealm-jni.so"
+        exclude "lib/x86/librealm-jni.so"
+        exclude "lib/x86_64/librealm-jni.so"
+    }
+
 }
 
 //腾讯bug管理插件
@@ -79,39 +95,22 @@ dependencies {
     compile 'com.google.dagger:dagger:2.13'                     //注解
     apt 'com.google.dagger:dagger-compiler:2.13'
 
-    //图片加载框架
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.bumptech.glide:glide:3.8.0'
     compile 'jp.wasabeef:glide-transformations:2.0.2'
-    //takePhoto框架
     compile 'com.jph.takephoto:takephoto_library:4.0.3'
     compile 'com.lzy.widget:imagepicker:0.5.0'
-    //导航栏
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-    //快速索引
     compile 'me.yokeyword:indexablerecyclerview:1.3.0'
-    //工具类
-    compile 'com.blankj:utilcode:1.7.1'
-    //洪洋大神流式布局
+    compile 'com.blankj:utilcode:1.12.5'
     compile 'com.zhy:flowlayout-lib:1.0.3'
-    compile 'com.github.clans:fab:1.6.1'
-    //解析Html
-    compile 'org.jsoup:jsoup:1.8.2'
-    //电子书
+    compile 'org.jsoup:jsoup:1.10.2'
     compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
-    //权限库
     compile 'pub.devrel:easypermissions:1.0.1'
-    //自定义日期控件
     compile 'com.prolificinteractive:material-calendarview:1.4.0'
-    //阿里巴巴
     compile('com.alibaba.android:vlayout:1.2.2@aar') {
         transitive = true
     }
-    //视频播放
-    compile project(':vitamio')
-    //内存泄漏检测工具
-    //debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-    //releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     //腾讯bug管理平台
     compile 'com.tencent.bugly:crashreport:2.6.0'
     compile 'com.tencent.bugly:nativecrashreport:3.3.0'
@@ -119,21 +118,22 @@ dependencies {
     compile files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
 
 
-    //关于开源库，都已经放到的Github上，https://github.com/yangchong211
-    compile 'cn.yc:YCStateLib:1.1'                                  //状态管理
-    compile 'cn.yc:YCPhotoLib:1.0'                                  //图片选择器
-    compile 'cn.yc:YCDialogLib:3.5'                                 //弹窗
-    compile 'cn.yc:YCCountDownViewLib:1.0'                          //倒计时器
-    compile 'cn.yc:YCUtilsLib:1.6'                                  //公共类
-    compile 'cn.yc:YCMultiInputViewLib:1.0'                         //倒计数
-    compile 'cn.yc:YCProgressLib:1.2'                               //进度条
-    compile 'cn.yc:YCCardViewLib:1.2'                               //滑动卡片
-    compile 'cn.yc:YCCustomTextLib:2.1'                             //自定义超文本
-    compile 'cn.yc:YCRecycleViewLib:1.1'                            //RecycleView封装类，多选单选
-    compile 'cn.yc:YCWeatherLib:1.0'                                //天气自定义控件
-    compile 'cn.yc:YCGalleryLib:1.1'                                //自定义画廊
-    compile 'cn.yc:YCBaseAdapterLib:1.3'                            //adapter封装
-    compile 'cn.yc:YCBannerLib:1.2'                                 //轮播图
-    compile 'org.yczbj:YCRefreshViewLib:2.4'                        //RecyclerView封装，刷新加载
-    compile 'cn.yc:YCStatusBarLib:1.3'                              //状态栏
+    compile 'cn.yc:YCStateLib:1.1'
+    compile 'cn.yc:YCPhotoLib:1.0'
+    compile 'cn.yc:YCDialogLib:3.5'
+    compile 'cn.yc:YCCountDownViewLib:1.0'
+    compile 'cn.yc:YCUtilsLib:1.6.2'
+    compile 'cn.yc:YCMultiInputViewLib:1.0'
+    compile 'cn.yc:YCProgressLib:1.2'
+    compile 'cn.yc:YCCardViewLib:1.2'
+    compile 'cn.yc:YCCustomTextLib:2.1'
+    compile 'cn.yc:YCRecycleViewLib:1.1'
+    compile 'cn.yc:YCWeatherLib:1.0'
+    compile 'cn.yc:YCGalleryLib:1.1'
+    compile 'cn.yc:YCBaseAdapterLib:1.3'
+    compile 'cn.yc:YCBannerLib:1.3.1'
+    compile 'org.yczbj:YCRefreshViewLib:2.5'
+    compile 'cn.yc:YCStatusBarLib:1.3'
+    compile 'cn.yc:YCVideoPlayerLib:2.4.5'
+    compile 'cn.yc:YCThreadPoolLib:1.3.0'
 }

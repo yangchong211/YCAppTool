@@ -5,12 +5,11 @@ import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.TimeUtils;
-import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuDailyContract;
 import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
+import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
+import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuDailyContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.db.RealmHelper;
 import com.ns.yc.lifehelper.utils.rx.RxBus;
 import com.ns.yc.lifehelper.utils.rx.RxUtil;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -19,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.realm.Realm;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -30,20 +28,19 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/11/29
- * 描    述：知乎日报模块        日报
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/10/29
+ *     desc  : 知乎日报模块           日报
+ *     revise:
+ * </pre>
  */
 public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
 
     private ZhiHuDailyContract.View mView;
     @NonNull
     private CompositeSubscription mSubscriptions;
-    private Realm realm;
     private Subscription intervalSubscription;
     private int topCount = 0;
     private int currentTopCount = 0;
@@ -57,23 +54,19 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
 
     @Override
     public void subscribe() {
-        initRealm();
+
     }
 
 
     @Override
     public void unSubscribe() {
-        mSubscriptions.clear();
-    }
-
-    private void initRealm() {
-        if(realm ==null){
-            realm = BaseApplication.getInstance().getRealmHelper();
+        if(mSubscriptions.isUnsubscribed()){
+            mSubscriptions.unsubscribe();
         }
     }
 
+
     private void registerEvent() {
-        initRealm();
         Observable<CalendarDay> calendarDayObservable = RxBus.getDefault().toObservable(CalendarDay.class);
         Subscription rxSubscription = calendarDayObservable
                 .subscribeOn(Schedulers.io())
@@ -121,7 +114,7 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
                     public ZhiHuDailyBeforeListBean call(ZhiHuDailyBeforeListBean dailyBeforeListBean) {
                         List<ZhiHuDailyListBean.StoriesBean> list = dailyBeforeListBean.getStories();
                         for(ZhiHuDailyListBean.StoriesBean item : list) {
-                            item.setReadState(RealmHelper.queryNewsId(realm,item.getId()));
+                            item.setReadState(RealmDbHelper.getInstance().queryNewsId(item.getId()));
                         }
                         return dailyBeforeListBean;
                     }
@@ -190,8 +183,7 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
 
     @Override
     public void insertReadToDB(int id) {
-        initRealm();
-        RealmHelper.insertNewsId(realm , id);
+        RealmDbHelper.getInstance().insertNewsId(id);
     }
 
     @Override

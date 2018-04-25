@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp1.BaseLazyFragment;
 import com.ns.yc.lifehelper.ui.me.contract.MeGanKCollectContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeGanKCollectPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
@@ -29,16 +29,17 @@ import java.util.List;
 import butterknife.Bind;
 
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/11/12
- * 描    述：我的收藏页面
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/9/12
+ *     desc  : 我的收藏页面，干货集中营
+ *     revise:
+ * </pre>
  */
-public class MeGanKCollectFragment extends BaseFragment implements MeGanKCollectContract.View{
+public class MeGanKCollectFragment extends BaseLazyFragment implements MeGanKCollectContract.View{
 
     @Bind(R.id.recyclerView)
     YCRefreshView recyclerView;
@@ -95,6 +96,13 @@ public class MeGanKCollectFragment extends BaseFragment implements MeGanKCollect
 
     @Override
     public void initData() {
+
+    }
+
+
+    @Override
+    public void onLazyLoad() {
+        recyclerView.showProgress();
         presenter.getCollectData(false);
     }
 
@@ -123,13 +131,16 @@ public class MeGanKCollectFragment extends BaseFragment implements MeGanKCollect
 
     @Override
     public void setEmpty() {
-        recyclerView.showError();
+        recyclerView.setEmptyView(R.layout.view_custom_data_error);
+        recyclerView.showEmpty();
     }
 
     @Override
-    public void setFavoriteItems(List<GanKFavorite> favorites) {
+    public void setDataList(List<GanKFavorite> favorites) {
         adapter.clear();
         adapter.addAll(favorites);
         adapter.notifyDataSetChanged();
+        recyclerView.showRecycler();
     }
+
 }

@@ -13,7 +13,7 @@ public class DateUtils {
 
     private DateUtils() {}
 
-    static long getFirstSundayTimeMillisOfWeek() {
+    public static long getFirstSundayTimeMillisOfWeek() {
         Calendar calendar = Calendar.getInstance();
         int daysFromSunday = calendar.get(Calendar.DAY_OF_WEEK) - 1;
         long secondOfToday = calendar.get(Calendar.HOUR_OF_DAY) * 60 * 60 +

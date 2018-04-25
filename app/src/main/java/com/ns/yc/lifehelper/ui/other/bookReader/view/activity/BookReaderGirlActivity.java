@@ -5,9 +5,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.ConstantBookReader;
+import com.ns.yc.lifehelper.comment.ConstantBookReader;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.event.BookReaderSelectionEvent;
+import com.ns.yc.lifehelper.model.event.BookReaderSelectionEvent;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.fragment.BookReaderGirlFragment;
 import com.ns.yc.lifehelper.weight.SelectionLayout;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
@@ -66,6 +66,8 @@ public class BookReaderGirlActivity extends BaseActivity implements View.OnClick
         switch (v.getId()){
             case R.id.ll_title_menu:
                 finish();
+                break;
+            default:
                 break;
         }
     }

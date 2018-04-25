@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.cache.CacheNoteDetail;
+import com.ns.yc.lifehelper.db.cache.CacheNoteDetail;
 import com.ns.yc.lifehelper.ui.other.myNote.adapter.NotebookAdapter;
 import com.ns.yc.lifehelper.ui.other.myNote.bean.NoteDetail;
 import com.ns.yc.lifehelper.ui.other.myNote.view.NoteAddActivity;

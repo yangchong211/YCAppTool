@@ -37,54 +37,6 @@
         <attr name="wb_second_pointer_color" format="color"/>
     </declare-styleable>
 
-    <!--我的音乐item抽取-->
-    <declare-styleable name="LocalMenuItem">
-        <attr name="icon" format="reference" />
-        <attr name="title" format="string" />
-    </declare-styleable>
-
-    <declare-styleable name="RippleAnimationView">
-        <attr name="ripple_anim_scale" format="float" />
-        <attr name="ripple_anim_color" format="color" />
-        <attr name="ripple_anim_amount" format="integer" />
-        <attr name="ripple_anim_duration" format="integer" />
-        <attr name="ripple_anim_radius" format="dimension" />
-        <attr name="ripple_anim_strokeWidth" format="dimension" />
-        <attr name="ripple_anim_type" format="enum">
-            <enum name="fillRipple" value="0" />
-            <enum name="strokeRipple" value="1" />
-        </attr>
-    </declare-styleable>
-
-    <!--跑马灯效果文本控件-->
-    <declare-styleable name="MarqueeViewStyle">
-        <attr name="mvInterval" format="integer|reference"/>
-        <attr name="mvAnimDuration" format="integer|reference"/>
-        <attr name="mvTextSize" format="dimension|reference"/>
-        <attr name="mvTextColor" format="color|reference"/>
-        <attr name="mvSingleLine" format="boolean"/>
-        <attr name="mvGravity">
-            <enum name="left" value="0"/>
-            <enum name="center" value="1"/>
-            <enum name="right" value="2"/>
-        </attr>
-    </declare-styleable>
-
-
-    <declare-styleable name="pile">
-        <attr name="interval" format="dimension" />
-        <attr name="sizeRatio" format="float" />
-        <attr name="scaleStep" format="float" />
-        <attr name="displayCount" format="float" />
-    </declare-styleable>
-    <declare-styleable name="scene">
-        <attr name="leftMargin" format="dimension" />
-        <attr name="leftDistance" format="dimension" />
-        <attr name="rightDistance" format="dimension" />
-        <attr name="verticalDistance" format="dimension" />
-        <attr name="textSize" format="float" />
-        <attr name="textColor" format="color" />
-    </declare-styleable>
 
     <declare-styleable name="IndicatorView">
         <attr name="marker" format="reference" />

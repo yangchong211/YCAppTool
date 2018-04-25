@@ -8,7 +8,8 @@ import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
 import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.lifehelper.base.mvp1.BaseView;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.yc.cn.ycbannerlib.first.BannerView;
+import com.yc.cn.ycbannerlib.BannerView;
+
 import java.util.List;
 
 
@@ -23,9 +24,7 @@ import java.util.List;
  */
 public interface FindFragmentContract {
 
-    //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
-        //设置轮播图
         void setBanner(BannerView mBanner, List<Object> arrayList);
         void setOnclick(int position);
         void setMarqueeClick(int position);
@@ -36,10 +35,7 @@ public interface FindFragmentContract {
         void setNewsList5Click(int position , String url);
     }
 
-    //Presenter控制器
     interface Presenter extends BasePresenter {
-        void setActivity(MainActivity activity);
-        //初始化
         DelegateAdapter initRecyclerView(RecyclerView recyclerView);
         BaseDelegateAdapter initBannerAdapter();
         BaseDelegateAdapter initGvMenu();
@@ -50,6 +46,7 @@ public interface FindFragmentContract {
         BaseDelegateAdapter initList3();
         BaseDelegateAdapter initList4();
         BaseDelegateAdapter initList5();
+        void bindActivity(MainActivity activity);
     }
 
 

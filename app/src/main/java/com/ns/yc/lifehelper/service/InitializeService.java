@@ -1,19 +1,27 @@
 package com.ns.yc.lifehelper.service;
 
+import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import com.blankj.utilcode.util.AppUtils;
-import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.base.BaseConfig;
-import com.ns.yc.lifehelper.utils.AppUtil;
-import com.ns.yc.lifehelper.utils.LogUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
-
+/**
+ * <pre>
+ *     @author      杨充
+ *     blog         https://www.jianshu.com/p/53017c3fc75d
+ *     time         2015/08/22
+ *     desc         子线程初始化工作
+ *     revise
+ *     GitHub       https://github.com/yangchong211
+ * </pre>
+ */
+@SuppressLint("Registered")
 public class InitializeService extends IntentService {
 
     private static final String ACTION_INIT = "initApplication";
@@ -23,14 +31,6 @@ public class InitializeService extends IntentService {
         intent.setAction(ACTION_INIT);
         context.startService(intent);
     }
-
-    /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
-     * Used to name the worker thread, important only for debugging.
-     */
-    /*public InitializeService(String name) {
-        super(name);
-    }*/
 
     public InitializeService(){
         super("InitializeService");
@@ -47,37 +47,17 @@ public class InitializeService extends IntentService {
     }
 
     private void initApplication() {
-        //initOkHttpUtils();                            //初始化鸿洋大神OkHttpUtils
-        initBugly();                                    //初始化腾讯bug管理平台
-        BaseConfig.INSTANCE.initConfig();               //初始化配置信息
-        initQQX5();                                     //初始化腾讯X5
-        LogUtils.logDebug = true;                       //开启日志
-        //initChatIM();                                   //初始化环信，不要在子线程中初始化
+        initBugly();
+        initQQX5();
+        initUtils();
     }
-
-
-    /**
-     * 初始化鸿洋大神网络请求框架
-     * 项目刚开始时用鸿洋大神的框架【正式项目中用这个】，后来慢慢改成Retrofit
-     */
-    /*private void initOkHttpUtils() {
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                //.addInterceptor(new BaseInterceptor())
-                //.addInterceptor(interceptor)
-                .addInterceptor(new LogInterceptor("TAG_APP",true))          //打印请求网络数据日志，上线版本就关掉
-                .connectTimeout(50000L, TimeUnit.MILLISECONDS)                  //连接超时时间
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)                     //读数据超时时间
-                .writeTimeout(10000L,TimeUnit.MICROSECONDS)                     //写数据超时时间
-                .build();
-        OkHttpUtils.initClient(okHttpClient);
-    }*/
 
 
     /**
      * 初始化腾讯bug管理平台
      */
     private void initBugly() {
-        /* Bugly SDK初始化
+        /* SDK初始化
         * 参数1：上下文对象
         * 参数2：APPID，平台注册时得到,注意替换成你的appId
         * 参数3：是否开启调试模式，调试模式下会输出'CrashReport'tag的日志
@@ -86,9 +66,9 @@ public class InitializeService extends IntentService {
         CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(getApplicationContext());
         strategy.setAppVersion(AppUtils.getAppVersionName());
         strategy.setAppPackageName(AppUtils.getAppPackageName());
-        strategy.setAppReportDelay(20000);                          //Bugly会在启动20s后联网同步数据
+        //会在启动20s后联网同步数据
+        strategy.setAppReportDelay(20000);
         CrashReport.initCrashReport(getApplicationContext(), "a3f5f3820f", false ,strategy);
-        //Bugly.init(getApplicationContext(), "1374455732", false);
     }
 
 
@@ -113,5 +93,18 @@ public class InitializeService extends IntentService {
         QbSdk.initX5Environment(getApplicationContext(),  cb);
     }
 
+
+    /**
+     * 初始化utils工具类
+     */
+    private void initUtils() {
+        LogUtils.Config config = LogUtils.getConfig();
+        //边框开关，设置打开
+        config.setBorderSwitch(true);
+        //logcat 是否打印，设置打印
+        config.setConsoleSwitch(true);
+        //设置打印日志总开关，线上时关闭
+        config.setLogSwitch(true);
+    }
 
 }

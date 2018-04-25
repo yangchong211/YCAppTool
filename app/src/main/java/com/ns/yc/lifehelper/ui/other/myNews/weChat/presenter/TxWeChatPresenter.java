@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.api.constantApi.ConstantTxApi;
-import com.ns.yc.lifehelper.event.SearchDataEvent;
+import com.ns.yc.lifehelper.model.event.SearchDataEvent;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.contract.TxWeChatContract;
 import com.ns.yc.lifehelper.api.http.news.WeChatModel;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WeChatBean;

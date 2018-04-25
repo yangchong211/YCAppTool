@@ -11,10 +11,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
-import com.ns.yc.lifehelper.ui.other.workDo.data.DataDao;
+import com.ns.yc.lifehelper.db.realm.RealmWorkDoHelper;
+import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
 
 import java.util.Calendar;
 
@@ -35,8 +35,10 @@ public class WorkDoNotifyService  extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         int code = super.onStartCommand(intent, flags, startId);
         int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        RealmResults<TaskDetailEntity> results = DataDao.getInstance().findUnFinishedTasks(day);
-        if (results.size() == 0) return code;
+        RealmResults<TaskDetailEntity> results = RealmWorkDoHelper.getInstance().findUnFinishedTasks(day);
+        if (results.size() == 0) {
+            return code;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("包含: ");
         for (int i = 0; i < results.size() - 1; i++) {

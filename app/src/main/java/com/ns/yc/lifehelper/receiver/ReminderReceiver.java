@@ -39,7 +39,9 @@ public class ReminderReceiver extends BroadcastReceiver {
 
         NotificationManager mNotificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(1, mBuilder.build());
+        if (mNotificationManager != null) {
+            mNotificationManager.notify(1, mBuilder.build());
+        }
     }
 
 }

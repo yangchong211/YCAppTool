@@ -131,48 +131,4 @@
             android:src="@drawable/icon_color" />
     </RelativeLayout>
 
-
-
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/floating_action_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        fab:menu_labels_ellipsize="end"
-        fab:menu_labels_singleLine="true"
-        fab:menu_backgroundColor="@color/colorTransparent">
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item_text_font"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/menu_font_size"
-            fab:fab_size="mini"
-            fab:fab_label="字体大小" />
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item_clock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/menu_alert"
-            fab:fab_size="mini"
-            fab:fab_label="设置闹钟" />
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item_desktop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/menu_to_desktop"
-            fab:fab_size="mini"
-            fab:fab_label="添加到桌面" />
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/menu_share"
-            fab:fab_size="mini"
-            fab:fab_label="分享记录" />
-    </com.github.clans.fab.FloatingActionMenu>
-
-
 </RelativeLayout>

@@ -11,22 +11,21 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.subscriptions.CompositeSubscription;
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/9/14
- * 描    述：干货集中营
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/9/12
+ *     desc  : 干货集中营
+ *     revise:
+ * </pre>
  */
 public class MeGanKCollectPresenter implements MeGanKCollectContract.Presenter {
 
     private MeGanKCollectContract.View mView;
     private CompositeSubscription mSubscriptions;
-    private int mPage = 0;
     private Realm realm;
-    private RealmResults<GanKFavorite> ganKFavorites;
 
     public MeGanKCollectPresenter(MeGanKCollectContract.View androidView) {
         this.mView = androidView;
@@ -54,12 +53,8 @@ public class MeGanKCollectPresenter implements MeGanKCollectContract.Presenter {
      */
     @Override
     public void getCollectData(boolean isRefresh) {
-        if (isRefresh) {
-            mPage = 0;
-        } else {
-            mPage += 1;
-        }
         initRealm();
+        RealmResults<GanKFavorite> ganKFavorites;
         if(realm!=null && realm.where(GanKFavorite.class).findAll()!=null){
             ganKFavorites = realm.where(GanKFavorite.class).findAll();
         }else {
@@ -78,7 +73,7 @@ public class MeGanKCollectPresenter implements MeGanKCollectContract.Presenter {
             list.add(favorite);
         }
         if(list.size()>0){
-            mView.setFavoriteItems(list);
+            mView.setDataList(list);
         }else {
             mView.setEmpty();
         }

@@ -15,8 +15,8 @@ import com.ns.yc.lifehelper.utils.FileUtils;
 public class ConstantZssqApi {
 
     public static final String API_BASE_URL = "http://api.zhuishushenqi.com";
-    public static String PATH_DATA = FileUtils.createRootPath(Utils.getContext()) + "/cache";
-    public static String PATH_COLLECT = FileUtils.createRootPath(Utils.getContext()) + "/collect";
+    public static String PATH_DATA = FileUtils.createRootPath(Utils.getApp()) + "/cache";
+    public static String PATH_COLLECT = FileUtils.createRootPath(Utils.getApp()) + "/collect";
     public static final String IMG_BASE_URL = "http://statics.zhuishushenqi.com";
 
 }

@@ -2,9 +2,6 @@ package com.ns.yc.lifehelper.ui.me.view.activity;
 
 import android.content.DialogInterface;
 import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
@@ -18,29 +15,35 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.model.bean.UpdateBean;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
+import com.ns.yc.lifehelper.utils.AppToolUtils;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.Bind;
+import cn.ycbjie.ycthreadpoollib.PoolThread;
+
 
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/9/12
- * 描    述：我的设置中心页面
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/9/12
+ *     desc  : 我的设置中心页面
+ *     revise:
+ * </pre>
  */
-public class MeSettingActivity extends BaseActivity implements View.OnClickListener,
+
+public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implements View.OnClickListener,
         MeSettingContract.View, SwitchButton.OnCheckedChangeListener {
 
     @Bind(R.id.tv_title_left)
@@ -104,17 +107,6 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
     private MeSettingPresenter presenter = new MeSettingPresenter(this);
     private String appVersionName;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        presenter.subscribe();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.unSubscribe();
-    }
 
     @Override
     public int getContentView() {
@@ -124,6 +116,16 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void initView() {
         initToolBar();
+        setRipperView();
+    }
+
+    private void setRipperView() {
+        AppToolUtils.setRipper(rlSetGoStar);
+        AppToolUtils.setRipper(llPicQuality);
+        AppToolUtils.setRipper(rlSetCleanCache);
+        AppToolUtils.setRipper(rlSetFeedback);
+        AppToolUtils.setRipper(rlSetUpdate);
+        AppToolUtils.setRipper(tvExit);
     }
 
     private void initToolBar() {
@@ -184,6 +186,8 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
             case R.id.tv_exit:
                 presenter.exitLogout();
                 break;
+            default:
+                break;
         }
     }
 
@@ -191,17 +195,17 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onCheckedChanged(SwitchButton view, boolean isChecked) {
         switch (view.getId()) {
-            case R.id.switch_button:            //极光推送
+            case R.id.switch_button:
 
                 break;
-            case R.id.switch_night:             //夜间模式
+            case R.id.switch_night:
 
                 break;
-            case R.id.switch_pic:               //是否显示list上图片
+            case R.id.switch_pic:
                 switchPic.setChecked(isChecked);
                 presenter.saveIsListShowImg(isChecked);
                 break;
-            case R.id.switch_random:            //是否随机展示图片
+            case R.id.switch_random:
                 if (switchGirl.isChecked()) {
                     switchRandom.setChecked(isChecked);
                     presenter.saveIsLauncherShowImg(isChecked);
@@ -210,9 +214,11 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
                     ToastUtil.showToast(this, "请开启启动页显示美女图");
                 }
                 break;
-            case R.id.switch_girl:              //启动页是否展示美女图片
+            case R.id.switch_girl:
                 switchGirl.setChecked(isChecked);
                 presenter.saveIsLauncherAlwaysShowImg(isChecked);
+                break;
+            default:
                 break;
         }
     }
@@ -223,7 +229,7 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void startLoading() {
         // 添加Loading
-        mLoading = new ViewLoading(this, Constant.loadingStyle,"") {
+        mLoading = new ViewLoading(this, R.style.loading_dialog,"") {
             @Override
             public void loadCancel() {
 
@@ -232,13 +238,17 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
         if (!mLoading.isShowing()) {
             mLoading.show();
         }
-        new Handler().postDelayed(new Runnable() {
+        PoolThread executor = BaseApplication.getInstance().getExecutor();
+        executor.setName("load");
+        executor.setDelay(2, TimeUnit.MILLISECONDS);
+        executor.execute(new Runnable() {
+            @Override
             public void run() {
                 if (mLoading != null && mLoading.isShowing()) {
                     mLoading.dismiss();
                 }
             }
-        }, 2000);
+        });
     }
 
 
@@ -318,6 +328,8 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
             case 2:
                 thumbnailQuality = "省流";
                 break;
+            default:
+                break;
         }
         tvPic.setText(thumbnailQuality);
     }
@@ -336,7 +348,6 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
                     }
                 }
                 String cacheSize = FileCacheUtils.getCacheSize(this.getCacheDir());
-                //String cacheCodeSize = FileCacheUtils.getCacheSize(this.getCodeCacheDir());
                 tvSetCacheSize.setText(cacheSize);
             }
         } catch (Exception e) {
@@ -380,10 +391,6 @@ public class MeSettingActivity extends BaseActivity implements View.OnClickListe
         builder.show();
     }
 
-    @Override
-    public void showError(String s) {
-        ToastUtil.showToast(this,"出错了"+s);
-    }
 
     @Override
     public void finishActivity() {

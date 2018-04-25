@@ -26,9 +26,9 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.bumptech.glide.Glide;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
+import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewQQActivity;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewQQActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.contract.TxWeChatContract;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WeChatBean;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.presenter.TxWeChatPresenter;
@@ -100,6 +100,7 @@ public class VideoNewsActivity extends BaseActivity implements TxWeChatContract.
     public int getContentView() {
         return R.layout.activity_video_news;
     }
+
 
     @Override
     public void initView() {
@@ -256,22 +257,6 @@ public class VideoNewsActivity extends BaseActivity implements TxWeChatContract.
                 adapter.resumeMore();
             }
         });
-
-
-
-        //刷新
-        /*recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    page = 1;
-                    presenter.getNews(num, page);
-                } else {
-                    recyclerView.setRefreshing(false);
-                    ToastUtil.showToast(VideoNewsActivity.this, "网络不可用");
-                }
-            }
-        });*/
     }
 
     private void addHeader() {

@@ -16,20 +16,20 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
+import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.BookDetailCommentAdapter;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.BookDetailDiscussionAdapter;
+import com.ns.yc.lifehelper.inter.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookHelp;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailDiscussionComment;
-import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-import com.ns.yc.lifehelper.weight.readerBook.BookContentTextView;
-import com.ns.yc.lifehelper.utils.time.FormatUtils;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.BookDetailCommentAdapter;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.BookDetailDiscussionAdapter;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
+import com.ns.yc.lifehelper.utils.time.FormatUtils;
+import com.ns.yc.lifehelper.weight.readerBook.BookContentTextView;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +74,7 @@ public class BookDetailHelpActivity extends BaseActivity implements View.OnClick
 
     @Override
     public int getContentView() {
-        return R.layout.base_refresh_recycle_bar;
+        return R.layout.base_easy_recycle_bar;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.api.http.news;
 
 import com.ns.yc.lifehelper.api.constantApi.ConstantTxApi;
-import com.ns.yc.lifehelper.api.manager.RetrofitWrapper;
+import com.ns.yc.lifehelper.api.RetrofitWrapper;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WeChatBean;
 
 import rx.Observable;

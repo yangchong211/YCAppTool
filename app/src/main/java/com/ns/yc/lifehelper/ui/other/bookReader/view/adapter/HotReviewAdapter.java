@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
-import com.ns.yc.lifehelper.listener.OnRvItemClickListener;
+import com.ns.yc.lifehelper.inter.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderDetailReviews;
 import com.ns.yc.lifehelper.weight.XLHRatingBar;
 

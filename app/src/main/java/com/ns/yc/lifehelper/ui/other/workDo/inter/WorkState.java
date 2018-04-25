@@ -3,7 +3,8 @@ package com.ns.yc.lifehelper.ui.other.workDo.inter;
 
 import android.content.Intent;
 
-import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
+import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
+
 
 public interface WorkState {
 

@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.api.constant.Constant;
-import com.ns.yc.lifehelper.cache.CacheZhLike;
-import com.ns.yc.lifehelper.ui.main.view.activity.WebViewAnimActivity;
+import com.ns.yc.lifehelper.comment.Constant;
+import com.ns.yc.lifehelper.db.cache.CacheZhLike;
+import com.ns.yc.lifehelper.ui.webView.view.WebViewAnimActivity;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.util.List;
@@ -145,6 +145,8 @@ public class MeNewsLikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 //                        }
 //                    });
 //                    break;
+                default:
+                    break;
             }
         } else if(holder instanceof GirlViewHolder) {
             ImageUtils.loadImgByPicasso(mContext, mList.get(position).getImage(),R.drawable.image_default, ((GirlViewHolder) holder).image);

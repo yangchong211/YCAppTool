@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.lifehelper.base.mvp1.BaseView;
-import com.ns.yc.lifehelper.ui.other.toDo.bean.TaskDetailEntity;
+import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
 
 import java.util.List;
 

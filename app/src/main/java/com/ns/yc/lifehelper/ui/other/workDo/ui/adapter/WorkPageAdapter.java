@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.ns.yc.lifehelper.ui.other.toDo.bean.MainPageItem;
+import com.ns.yc.lifehelper.ui.other.workDo.model.MainPageItem;
 
 import java.util.List;
 

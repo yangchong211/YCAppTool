@@ -7,9 +7,7 @@ import android.widget.ImageView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
-import com.yc.cn.ycbannerlib.first.adapter.StaticPagerAdapter;
-
-
+import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ import java.util.List;
  * 修订历史：
  * ================================================
  */
-public class BaseBannerPagerAdapter extends StaticPagerAdapter {
+public class BaseBannerPagerAdapter extends AbsStaticPagerAdapter {
 
     private Context ctx;
     private List<Object> list;
