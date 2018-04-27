@@ -19,13 +19,16 @@ import com.ns.yc.ycutilslib.activityManager.AppManager;
  */
 public class BaseLifecycleCallback implements Application.ActivityLifecycleCallbacks{
 
+
     public static BaseLifecycleCallback getInstance() {
         return HolderClass.INSTANCE;
     }
 
+
     private final static class HolderClass {
         private final static BaseLifecycleCallback INSTANCE = new BaseLifecycleCallback();
     }
+
 
     private BaseLifecycleCallback() {}
 

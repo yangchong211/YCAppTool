@@ -65,7 +65,7 @@ public class WebViewChangeActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public int getContentView() {
-        return R.layout.activity_news_content;
+        return R.layout.base_change_web_view;
     }
 
 

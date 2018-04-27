@@ -551,6 +551,7 @@ public class WebViewActivity extends BaseActivity {
      * 如果启用了JavaScript，务必做好安全措施，防止远程执行漏洞
      * @param webView               webView控件
      */
+    @SuppressLint("ObsoleteSdkInt")
     @TargetApi(11)      //支持api11以上
     private void removeJavascriptInterfaces(WebView webView) {
         try {
