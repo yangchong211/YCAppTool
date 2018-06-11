@@ -18,6 +18,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.model.bean.UpdateBean;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
 import com.ns.yc.lifehelper.utils.AppToolUtils;
@@ -162,7 +163,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_title_menu:
-                finishActivity();
+                finish();
                 break;
             case R.id.rl_set_go_star:
                 presenter.goToStar(this);
@@ -395,6 +396,12 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
     @Override
     public void finishActivity() {
         finish();
+    }
+
+    @Override
+    public void exitLogout() {
+        //跳转首页
+        MainActivity.startActivity(this,MainActivity.FIND);
     }
 
 

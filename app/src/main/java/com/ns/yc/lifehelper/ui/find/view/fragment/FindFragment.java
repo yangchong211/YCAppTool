@@ -52,10 +52,13 @@ import butterknife.Bind;
  *             v1.5 17年10月3日修改
  * </pre>
  */
-public class FindFragment extends BaseFragment<FindFragmentPresenter> implements FindFragmentContract.View {
+public class FindFragment extends BaseFragment<FindFragmentPresenter>
+        implements FindFragmentContract.View {
+
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
+
 
     private MainActivity activity;
     private FindFragmentContract.Presenter presenter = new FindFragmentPresenter(this);
@@ -69,6 +72,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         presenter.bindActivity(activity);
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -76,6 +80,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
             activity = null;
         }
     }
+
 
     @Override
     public void onPause() {
@@ -85,6 +90,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         }
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -92,6 +98,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
             mBanner.resume();
         }
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,10 +130,12 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
 
     }
 
+
     @Override
     public void initData() {
 
     }
+
 
     private void initRecyclerView() {
         DelegateAdapter delegateAdapter = presenter.initRecyclerView(recyclerView);
@@ -194,6 +203,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         mBanner.setHintPadding(0,0,0, SizeUtil.dip2px(activity,10));
         mBanner.setAdapter(new BaseBannerPagerAdapter(activity, arrayList));
     }
+
 
     @Override
     public void setOnclick(int position) {
@@ -279,6 +289,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         }
     }
 
+
     @Override
     public void setGridClickThird(int position) {
         switch (position){
@@ -295,6 +306,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 break;
         }
     }
+
 
     @Override
     public void setGridClickFour(int position) {
@@ -313,6 +325,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         }
     }
 
+
     @Override
     public void setNewsList2Click(int position, String url) {
         if(position>-1 && url!=null && url.length()>0){
@@ -324,6 +337,8 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         }
     }
 
+
+
     @Override
     public void setNewsList5Click(int position, String url) {
         if(position>-1 && url!=null && url.length()>0){
@@ -334,5 +349,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
             startActivity(VideoNewsActivity.class);
         }
     }
+
+
 
 }

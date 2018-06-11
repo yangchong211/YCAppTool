@@ -158,7 +158,7 @@ public class BaseApplication extends Application {
     private void initThreadPool() {
         // 创建一个独立的实例进行使用
         executor = PoolThread.ThreadBuilder
-                .createFixed(4)
+                .createFixed(6)
                 .setPriority(Thread.MAX_PRIORITY)
                 .setCallback(new LogCallback())
                 .build();

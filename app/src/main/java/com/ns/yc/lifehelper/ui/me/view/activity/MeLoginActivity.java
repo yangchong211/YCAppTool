@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.yccustomtextlib.pwdEt.PasswordEditText;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
@@ -180,6 +181,7 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
             public void onCancel(DialogInterface dialog) {
                 LogUtils.e(TAG +"EMClient.getInstance().onCancel");
                 progressShow = false;
+                MainActivity.startActivity(MeLoginActivity.this,MainActivity.USER);
             }
         });
         pd.setMessage(getString(R.string.login_state));

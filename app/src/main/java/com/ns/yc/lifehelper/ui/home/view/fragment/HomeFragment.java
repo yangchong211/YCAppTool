@@ -1,14 +1,20 @@
 package com.ns.yc.lifehelper.ui.home.view.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
@@ -27,6 +33,7 @@ import com.ns.yc.lifehelper.ui.other.myNews.wyNews.WyNewsActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
 import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
 import com.ns.yc.lifehelper.utils.DialogUtils;
+import com.ns.yc.yccardviewlib.CardViewLayout;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 import com.yc.cn.ycbannerlib.BannerView;
 import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
@@ -37,6 +44,7 @@ import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -56,12 +64,34 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
 
     @Bind(R.id.recyclerView)
     YCRefreshView recyclerView;
+    private HomeFragmentContract.Presenter presenter = new HomeFragmentPresenter(this);
+    private ArrayList<Bitmap> bitmaps;
     private MainActivity activity;
     private BannerView banner;
     private MarqueeView marqueeView;
-    private HomeFragmentContract.Presenter presenter = new HomeFragmentPresenter(this);
     private HomeBlogAdapter adapter;
     private View headerView;
+    private CardViewLayout cardViewLayout;
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 1:
+                    cardViewLayout.setVisibility(View.VISIBLE);
+                    updateGalleryView();
+                    break;
+                case 2:
+                    cardViewLayout.setVisibility(View.GONE);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
 
     @Override
     public void onAttach(Context context) {
@@ -94,6 +124,14 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(handler!=null){
+            handler.removeCallbacksAndMessages(null);
+            handler = null;
+        }
+    }
 
     @Override
     public int getContentView() {
@@ -125,6 +163,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
     @Override
     public void initData() {
         presenter.getHomeNewsData();
+        presenter.getGalleryData();
     }
 
 
@@ -170,6 +209,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 TextView tvHomeThird = (TextView) header.findViewById(R.id.tv_home_third);
                 TextView tvHomeFour = (TextView) header.findViewById(R.id.tv_home_four);
                 marqueeView = (MarqueeView) header.findViewById(R.id.marqueeView);
+                cardViewLayout = (CardViewLayout) header.findViewById(R.id.cardView);
                 View.OnClickListener listener = new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -259,5 +299,59 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
         }
     }
 
+    @Override
+    public void downloadBitmapSuccess(final ArrayList<Bitmap> bitmapList) {
+        if(bitmapList!=null && bitmapList.size()>0){
+            bitmaps = bitmapList;
+            handler.sendEmptyMessageAtTime(1,500);
+        }else {
+            handler.sendEmptyMessageAtTime(2,500);
+        }
+    }
+
+
+    private void updateGalleryView() {
+        if(cardViewLayout==null || bitmaps==null || bitmaps.size()==0){
+            return;
+        }
+        cardViewLayout.setAdapter(new CardViewLayout.Adapter() {
+
+            class ViewHolder {
+                ImageView imageView;
+            }
+
+            @Override
+            public int getLayoutId() {
+                return R.layout.item_card_layout;
+            }
+
+            @Override
+            public void bindView(View view, int position) {
+                ViewHolder viewHolder = (ViewHolder) view.getTag();
+                if (viewHolder == null) {
+                    viewHolder = new ViewHolder();
+                    viewHolder.imageView = (ImageView) view.findViewById(R.id.imageView);
+                    view.setTag(viewHolder);
+                }
+                viewHolder.imageView.setImageBitmap(bitmaps.get(position));
+            }
+
+            @Override
+            public int getItemCount() {
+                return bitmaps.size();
+            }
+
+            @Override
+            public void displaying(int position) {
+
+            }
+
+            @Override
+            public void onItemClick(View view, int position) {
+                super.onItemClick(view, position);
+                ToastUtil.showToast(activity,"点击了"+position);
+            }
+        });
+    }
 
 }

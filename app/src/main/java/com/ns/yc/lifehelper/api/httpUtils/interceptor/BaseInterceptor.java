@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.api.httpUtils;
+package com.ns.yc.lifehelper.api.httpUtils.interceptor;
 
 import java.io.IOException;
 

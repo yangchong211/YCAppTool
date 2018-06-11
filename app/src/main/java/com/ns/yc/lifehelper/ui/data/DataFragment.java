@@ -266,7 +266,8 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     public void setRecycleView(final ArrayList<Integer> list) {
         recyclerView.setAdapter(adapter = new NarrowImageAdapter(activity));
         recyclerView.setHorizontalScrollBarEnabled(false);
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(
+                activity,LinearLayoutManager.HORIZONTAL,false));
         recyclerView.addItemDecoration(new SpaceViewItemLine(SizeUtils.dp2px(8)));
         recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

@@ -1,11 +1,14 @@
 package com.ns.yc.lifehelper.ui.home.contract;
 
 
+import android.graphics.Bitmap;
+
 import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.lifehelper.base.mvp1.BaseView;
 import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,6 +27,7 @@ public interface HomeFragmentContract {
 
     interface View extends BaseView {
         void setNewsData(List<HomeBlogEntity> list);
+        void downloadBitmapSuccess(ArrayList<Bitmap> bitmapList);
     }
 
     interface Presenter extends BasePresenter {
@@ -31,6 +35,7 @@ public interface HomeFragmentContract {
         List<CharSequence> getMarqueeTitle();
         List<Object> getBannerData();
         void bindActivity(MainActivity activity);
+        void getGalleryData();
     }
 
 

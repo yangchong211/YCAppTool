@@ -45,7 +45,7 @@ public class BasePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return mFragment.size();
+        return mFragment==null ? 0 : mFragment.size();
     }
 
     @Override

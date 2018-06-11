@@ -29,6 +29,7 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
     private CompositeSubscription mSubscriptions;
     private MainActivity activity;
 
+
     public DataFragmentPresenter(DataFragmentContract.View androidView) {
         this.mView = androidView;
         mSubscriptions = new CompositeSubscription();

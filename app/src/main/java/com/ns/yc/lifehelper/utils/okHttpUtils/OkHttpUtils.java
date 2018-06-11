@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.utils.okHttpUtils;
 
 
 import com.ns.yc.lifehelper.api.manager.InterceptorUtils;
-import com.ns.yc.lifehelper.api.httpUtils.BaseInterceptor;
+import com.ns.yc.lifehelper.api.httpUtils.interceptor.BaseInterceptor;
 
 import java.io.File;
 import java.io.FileOutputStream;

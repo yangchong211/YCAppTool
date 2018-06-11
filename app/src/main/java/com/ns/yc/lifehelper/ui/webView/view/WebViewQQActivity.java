@@ -24,7 +24,6 @@ import com.blankj.utilcode.util.SPUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
-import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.db.cache.CacheZhLike;
 import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
@@ -34,7 +33,7 @@ import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
 import butterknife.Bind;
-import io.realm.Realm;
+
 
 /**
  * ================================================
@@ -67,7 +66,6 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
 
     private String title,url,imgUrl,id;
     private int type;
-    private Realm realm;
 
     @Override
     public int getContentView() {
@@ -77,18 +75,10 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initView() {
-        initRealm();
         initToolBar();
         initIntentData();
         initWebView();
         setLikeState(RealmDbHelper.getInstance().queryLikeId(id));
-    }
-
-
-    private void initRealm() {
-        if(realm==null){
-            realm = BaseApplication.getInstance().getRealmHelper();
-        }
     }
 
 
@@ -275,6 +265,7 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
     }
 
 
+
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -282,6 +273,7 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
             return true;
         }
     }
+
 
 
     public static class Builder {

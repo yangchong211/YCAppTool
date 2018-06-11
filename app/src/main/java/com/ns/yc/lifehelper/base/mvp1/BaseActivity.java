@@ -33,6 +33,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        YCAppBar.setStatusBarColor(this, R.color.colorTheme);
         setContentView(getContentView());
         ButterKnife.bind(this);
         //避免切换横竖屏
@@ -40,7 +41,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         if (mPresenter != null){
             mPresenter.subscribe();
         }
-        YCAppBar.setStatusBarColor(this, R.color.colorTheme);
         initView();
         initListener();
         initData();

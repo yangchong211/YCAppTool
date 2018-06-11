@@ -33,9 +33,16 @@ public class RiddleDetailModel {
         return model;
     }
 
-    public Observable<RiddleDetailBean> getRiddleDetail(String authorization,String classid,String keyword,String pagenum,String pagesize) {
-        Observable<RiddleDetailBean> riddleDetail = mApiService.getRiddleDetail(authorization, classid, keyword, pagenum, pagesize);
+
+    public Observable<RiddleDetailBean> getRiddleDetail(String authorization,
+                                                        String classid,
+                                                        String keyword,
+                                                        String pagenum,
+                                                        String pagesize) {
+        Observable<RiddleDetailBean> riddleDetail =
+                mApiService.getRiddleDetail(authorization, classid, keyword, pagenum, pagesize);
         return riddleDetail;
     }
+
 
 }

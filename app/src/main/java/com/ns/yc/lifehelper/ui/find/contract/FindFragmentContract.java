@@ -24,6 +24,7 @@ import java.util.List;
  */
 public interface FindFragmentContract {
 
+
     interface View extends BaseView {
         void setBanner(BannerView mBanner, List<Object> arrayList);
         void setOnclick(int position);
@@ -34,6 +35,7 @@ public interface FindFragmentContract {
         void setNewsList2Click(int position, String url);
         void setNewsList5Click(int position , String url);
     }
+
 
     interface Presenter extends BasePresenter {
         DelegateAdapter initRecyclerView(RecyclerView recyclerView);

@@ -37,7 +37,7 @@ public class FileUtils {
         return cacheRootPath;
     }
 
-    public static boolean isSdCardAvailable() {
+    private static boolean isSdCardAvailable() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
@@ -151,6 +151,8 @@ public class FileUtils {
             }
         }
     }
+
+
 
 
 }

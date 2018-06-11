@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.base.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -42,6 +43,8 @@ public class BaseBannerPagerAdapter extends AbsStaticPagerAdapter {
                 ImageUtils.loadImgByPicasso(ctx,(String) list.get(position), R.drawable.image_default,imageView);
             }else if(list.get(position) instanceof Integer){
                 ImageUtils.loadImgByPicasso(ctx,(Integer) list.get(position), R.drawable.image_default,imageView);
+            }else if(list.get(position) instanceof Bitmap){
+                ImageUtils.loadImgByPicasso(ctx,(Bitmap) list.get(position), R.drawable.image_default,imageView);
             }
         }else {
             ImageUtils.loadImgByPicasso(ctx, R.drawable.image_default,imageView);

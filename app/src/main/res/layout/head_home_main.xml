@@ -46,5 +46,16 @@
 
     <include layout="@layout/view_vlayout_marquee"/>
 
+    <com.ns.yc.yccardviewlib.CardViewLayout
+        android:id="@+id/cardView"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        app:displayCount="1.8"
+        app:interval="10dp"
+        app:scaleStep="0.32"
+        app:sizeRatio="1.12" />
 
 </LinearLayout>

@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.comment.config.AppConfig;
 import com.ns.yc.lifehelper.model.bean.UpdateBean;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.model.MeAppModel;
 import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
@@ -208,7 +209,7 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
 
     @Override
     public void exitLogout() {
-
+        mMeSetView.exitLogout();
     }
 
 

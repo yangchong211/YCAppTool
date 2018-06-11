@@ -17,6 +17,8 @@ import com.ns.yc.lifehelper.utils.image.ImageUtils;
 import com.ns.yc.yccountdownviewlib.CountDownView;
 import com.squareup.picasso.Callback;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 

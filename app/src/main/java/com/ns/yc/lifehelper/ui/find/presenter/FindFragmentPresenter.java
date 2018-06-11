@@ -346,20 +346,24 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         linearLayoutHelper.setDividerHeight(5);
         linearLayoutHelper.setMargin(0, 0, 0, 0);
         linearLayoutHelper.setPadding(0, 0, 0, 10);
-        return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.view_vlayout_news, 10, Constant.viewType.typeFooter) {
+        return new BaseDelegateAdapter(activity,
+                linearLayoutHelper, R.layout.view_vlayout_news, 10, Constant.viewType.typeFooter) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+            public void onBindViewHolder(BaseViewHolder holder,
+                                         @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 if (Constant.findBottomNews != null && Constant.findBottomNews.size() > 0) {
                     HomeBlogEntity model = Constant.findBottomNews.get(position);
                     holder.setText(R.id.tv_title, model.getTitle());
                     ImageView imageView = holder.getView(R.id.iv_logo);
-                    ImageUtils.loadImgByPicasso(activity, model.getImageUrl(), R.drawable.image_default, imageView);
+                    ImageUtils.loadImgByPicasso(activity, model.getImageUrl()
+                            , R.drawable.image_default, imageView);
                     holder.setText(R.id.tv_time, model.getTime());
                     holder.getItemView().setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mView.setNewsList5Click(position,Constant.findBottomNews.get(position).getUrl());
+                            mView.setNewsList5Click(position,
+                                    Constant.findBottomNews.get(position).getUrl());
                         }
                     });
                 } else {

@@ -1,6 +1,8 @@
 package com.ns.yc.lifehelper.ui.main.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -96,6 +98,45 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
 
     private MainContract.Presenter presenter = new MainPresenter(this);
 
+    public static final int HOME = 0;
+    public static final int FIND = 1;
+    public static final int DATA = 2;
+    public static final int USER = 3;
+    @IntDef({HOME,FIND,DATA,USER})
+    private  @interface PageIndex{}
+
+    /**
+     * 跳转首页
+     * @param context               上下文
+     * @param selectIndex           添加注解限制输入值
+     */
+    public static void startActivity(Context context, @PageIndex int selectIndex) {
+        Intent intent = new Intent(context, MainActivity.class);
+        //intent.addCategory(Intent.CATEGORY_DEFAULT);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("selectIndex", selectIndex);
+        context.startActivity(intent);
+    }
+
+    /**
+     * 处理onNewIntent()，以通知碎片管理器 状态未保存。
+     * 如果您正在处理新的意图，并且可能是 对碎片状态进行更改时，要确保调用先到这里。
+     * 否则，如果你的状态保存，但活动未停止，则可以获得 onNewIntent()调用，发生在onResume()之前，
+     * 并试图 此时执行片段操作将引发IllegalStateException。 因为碎片管理器认为状态仍然保存。
+     * @param intent intent
+     */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if(intent!=null){
+            int selectIndex = intent.getIntExtra("selectIndex", HOME);
+            vpHome.setCurrentItem(selectIndex);
+        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -438,6 +479,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
             // Do something after user returned from app settings screen, like showing a Toast.
             // 当用户从应用设置界面返回的时候，可以做一些事情，比如弹出一个土司。
+            Log.d("权限", "onPermissionsDenied:" + requestCode + ":");
         }
     }
 

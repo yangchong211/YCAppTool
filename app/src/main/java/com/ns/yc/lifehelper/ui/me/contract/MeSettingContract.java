@@ -45,6 +45,7 @@ public interface MeSettingContract {
         void setErrorView(Throwable e);
         void showUpdateDialog(UpdateBean updateBean);
         void finishActivity();
+        void exitLogout();
     }
 
     //Presenter控制器

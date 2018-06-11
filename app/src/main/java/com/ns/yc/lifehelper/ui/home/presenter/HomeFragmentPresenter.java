@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.ui.home.presenter;
 
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
@@ -8,6 +9,8 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
 
+import com.blankj.utilcode.util.Utils;
+import com.lzy.imagepicker.util.BitmapUtil;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.db.cache.CacheHomeNews;
@@ -15,8 +18,16 @@ import com.ns.yc.lifehelper.db.cache.CacheHomePile;
 import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.model.bean.ItemEntity;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
+import com.ns.yc.lifehelper.ui.home.model.GalleryBean;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ns.yc.lifehelper.utils.BitmapSaveUtils;
+import com.ns.yc.lifehelper.utils.BitmapUtils;
+import com.ns.yc.lifehelper.utils.FileUtils;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,5 +169,71 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
         return lists;
     }
 
+
+    @Override
+    public void getGalleryData() {
+        List<GalleryBean> gallery = new ArrayList<>();
+        try {
+            InputStream in = activity.getAssets().open("ycGallery.config");
+            int size = in.available();
+            byte[] buffer = new byte[size];
+            in.read(buffer);
+            String jsonStr = new String(buffer, "UTF-8");
+            JSONObject jsonObject = new JSONObject(jsonStr);
+            JSONArray jsonArray = jsonObject.optJSONArray("result");
+            if (null != jsonArray) {
+                int len = jsonArray.length();
+                for (int j = 0; j < 3; j++) {
+                    for (int i = 0; i < len; i++) {
+                        JSONObject itemJsonObject = jsonArray.getJSONObject(i);
+                        GalleryBean bean = new GalleryBean(itemJsonObject);
+                        gallery.add(bean);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            new Thread(new BitmapRunnable(gallery)).start();
+            //new Thread(new SaveRunnable(gallery)).start();
+        }
+    }
+
+    private class BitmapRunnable implements Runnable{
+
+        private List<GalleryBean> mGallery;
+
+        BitmapRunnable(List<GalleryBean> gallery) {
+            this.mGallery = gallery;
+        }
+
+        @Override
+        public void run() {
+            ArrayList<Bitmap> bitmapList = new ArrayList<>();
+            for (GalleryBean bean : mGallery) {
+                Bitmap bitmap = BitmapUtils.returnBitMap(bean.getImageUrl());
+                bitmapList.add(bitmap);
+            }
+            mHomeView.downloadBitmapSuccess(bitmapList);
+        }
+    }
+
+    private class SaveRunnable implements Runnable{
+
+        private List<GalleryBean> mGallery;
+
+        SaveRunnable(List<GalleryBean> gallery) {
+            this.mGallery = gallery;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < mGallery.size(); i++) {
+                String str = mGallery.get(i).getImageUrl();
+                Bitmap bitmap = BitmapUtils.returnBitMap(str);
+                BitmapSaveUtils.saveBitmap(Utils.getApp(), bitmap, null, true);
+            }
+        }
+    }
 
 }

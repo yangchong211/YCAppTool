@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.ui.home.view.adapter;
 
 import android.app.Activity;
+import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
+import com.ns.yc.lifehelper.utils.spannable.SpannableUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
@@ -70,10 +72,16 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
             } else {
                 llNewContent.setVisibility(View.VISIBLE);
                 llNewsHead.setVisibility(View.GONE);
-                tvTitle.setText(data.getTitle());
                 ImageUtils.loadImgByPicasso(getContext(), data.getImageUrl(), R.drawable.image_default, ivImg);
                 tvAuthor.setText(data.getAuthor());
                 tvTime.setText(data.getTime());
+                if(getAdapterPosition()==2||getAdapterPosition()==5||getAdapterPosition()==7){
+                    SpannableStringBuilder string = SpannableUtils.appendString(
+                            getContext(), "杨充", data.getTitle());
+                    tvTitle.setText(string);
+                }else {
+                    tvTitle.setText(data.getTitle());
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.me.view.activity;
 
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.ns.yc.lifehelper.ui.me.view.fragment.MePicCollectFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.Bind;
@@ -84,7 +87,9 @@ public class MeCollectActivity extends BaseActivity implements View.OnClickListe
         mFragments.add(new MeNewsCollectFragment());
         mFragments.add(new MePicCollectFragment());
         mFragments.add(new MeDocCollectFragment());
-        list.addAll(Arrays.asList(mTitles));
+        Collections.sort(list);
+        List<String> strings = Arrays.asList(mTitles);
+        list.addAll(strings);
         BasePagerAdapter adapter = new BasePagerAdapter(getSupportFragmentManager(),mFragments,list);
         vpContent.setAdapter(adapter);
         //限制预加载页面为4，这一步至关重要

@@ -32,6 +32,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.inter.listener.MePersonBaseListener;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MePersonFragment;
+import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.ycutilslib.viewPager.AutoHeightViewPager;
 import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
 
@@ -66,6 +67,7 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
     TabLayout tabLayout;
     @Bind(R.id.vp_content)
     AutoHeightViewPager vpContent;
+
     private Uri imageUri;
     private CropOptions cropOptions;
     private InvokeParam invokeParam;
@@ -92,7 +94,9 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PermissionManager.TPermissionType type = PermissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionManager.TPermissionType type =
+                PermissionManager.onRequestPermissionsResult(
+                        requestCode, permissions, grantResults);
         PermissionManager.handlePermissionsResult(this, type, invokeParam, this);
     }
 
@@ -113,6 +117,7 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
         initFragmentList();
         initViewPagerAndTab();
     }
+
 
     @Override
     public void initListener() {
@@ -145,10 +150,13 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
         });
     }
 
+
+
     @Override
     public void initData() {
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -169,8 +177,9 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+
     private void initViewPagerAndTab() {
-        /**
+        /*
          * 注意使用的是：getChildFragmentManager，
          * 这样setOffscreenPageLimit()就可以添加上，保留相邻2个实例，切换时不会卡
          * 但会内存溢出，在显示时加载数据
@@ -179,7 +188,7 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
         BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitleList);
         vpContent.setAdapter(myAdapter);
         // 左右预加载页面的个数
-        //vpContent.setOffscreenPageLimit(2);
+        // vpContent.setOffscreenPageLimit(2);
         myAdapter.notifyDataSetChanged();
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(vpContent);
@@ -190,7 +199,7 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
         List<String> names = new ArrayList<>();
         names.add("拍照");
         names.add("相册");
-        showDialog(new CustomSelectDialog.SelectDialogListener() {
+        DialogUtils.showDialog(this,new CustomSelectDialog.SelectDialogListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
@@ -206,22 +215,14 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
         }, names);
     }
 
-    /**
-     * 展示对话框视图，构造方法创建对象
-     */
-    private CustomSelectDialog showDialog(CustomSelectDialog.SelectDialogListener listener, List<String> names) {
-        CustomSelectDialog dialog = new CustomSelectDialog(this, R.style.transparentFrameWindowStyle, listener, names);
-        if (!this.isFinishing()) {
-            dialog.show();
-        }
-        return dialog;
-    }
+
 
     /**
      * 拍照获取图片
      */
     private void startGetCamPhoto() {
-        File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
+        File file = new File(Environment.getExternalStorageDirectory(),
+                "/temp/" + System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
@@ -236,7 +237,8 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
      * 从本地获取图片
      */
     private void startGetPhotoFromFile() {
-        File file = new File(Environment.getExternalStorageDirectory(), "/temp/" + System.currentTimeMillis() + ".jpg");
+        File file = new File(Environment.getExternalStorageDirectory(),
+                "/temp/" + System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
@@ -245,6 +247,7 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
         configCompress(takePhoto);
         takePhoto.onPickFromGalleryWithCrop(imageUri, cropOptions);
     }
+
 
     /**
      * 配置图片参数
@@ -312,7 +315,8 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
      */
     @Override
     public PermissionManager.TPermissionType invoke(InvokeParam invokeParam) {
-        PermissionManager.TPermissionType type = PermissionManager.checkPermission(TContextWrap.of(this), invokeParam.getMethod());
+        PermissionManager.TPermissionType type = PermissionManager
+                .checkPermission(TContextWrap.of(this), invokeParam.getMethod());
         if (PermissionManager.TPermissionType.WAIT.equals(type)) {
             this.invokeParam = invokeParam;
         }
