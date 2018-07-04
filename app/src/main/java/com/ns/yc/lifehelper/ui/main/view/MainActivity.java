@@ -2,6 +2,7 @@ package com.ns.yc.lifehelper.ui.main.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -47,6 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 import cn.ycbjie.ycstatusbarlib.dlBar.StatusBarUtils;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -227,8 +229,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
      */
     private void initDrawerLayoutStatus() {
         //为DrawerLayout 布局设置状态栏变色，也就是加上透明度
-        StatusBarUtils.setColorForDrawerLayout(this, drawerLayout,
-                getResources().getColor(R.color.colorTheme), 0);
+        YCAppBar.setStatusBarColor(this, R.color.colorTheme);
+        //YCAppBar.setStatusBarLightMode(this, R.color.colorTheme);
     }
 
 
@@ -430,6 +432,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
      * 初始化权限
      */
     private void initPermissions() {
+        //权限
         presenter.locationPermissionsTask();
     }
 
@@ -437,10 +440,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
      * 将结果转发到EasyPermissions
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // 将结果转发到EasyPermissions
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, MainActivity.this);
+        EasyPermissions.onRequestPermissionsResult(requestCode,
+                permissions, grantResults, MainActivity.this);
     }
 
     /**

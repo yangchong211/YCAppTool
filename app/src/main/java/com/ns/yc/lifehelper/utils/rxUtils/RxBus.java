@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.utils.rx;
+package com.ns.yc.lifehelper.utils.rxUtils;
 
 
 import rx.Observable;

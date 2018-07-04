@@ -14,14 +14,13 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.comment.config.AppConfig;
 import com.ns.yc.lifehelper.model.bean.UpdateBean;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.model.MeAppModel;
 import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.lifehelper.utils.GoToScoreUtils;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
+import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.utils;
+package com.ns.yc.lifehelper.utils.bitmap;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,7 +20,8 @@ import java.util.UUID;
 public class BitmapSaveUtils {
 
 
-    private static final String IMAGE_SAVE_PATH = "yc" + File.separator + "share" + File.separator + "images";//分享时临时文件保存目录
+    private static final String IMAGE_SAVE_PATH = "yc" + File.separator + "share" +
+            File.separator + "images";//分享时临时文件保存目录
 
 
     /**
@@ -31,8 +32,7 @@ public class BitmapSaveUtils {
      * @param isScanner
      * @return
      */
-    public static String saveBitmap(Context context, Bitmap mBitmap, String savePath,
-                                    boolean isScanner) {
+    public static String saveBitmap(Context context, Bitmap mBitmap, String savePath,boolean isScanner) {
         if (TextUtils.isEmpty(savePath)) {
             savePath = getLocalImgSavePath();
         }
@@ -50,9 +50,7 @@ public class BitmapSaveUtils {
             if(isScanner){
                 scanner(context,savePath);
             }
-            //ToastUtils.showFillToast("保存成功");
         } catch (IOException e) {
-
             e.printStackTrace();
             return null;
         }

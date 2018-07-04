@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="30dp">
+
+        <com.ns.yc.lifehelper.weight.imageView.CircleImageView
+            android:id="@+id/iv_author_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/ic_person_logo" />
+
+        <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="杨充"
+            android:textColor="@color/blackText1"
+            android:textSize="@dimen/textSize14" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:30"
+            android:textColor="@color/blackText2"
+            android:textSize="@dimen/textSize14" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:lineSpacingExtra="3dp"
+        android:text="标题标题标题标题标题标题标题标题"
+        android:textColor="@color/blackText1"
+        android:textSize="15sp" />
+
+
+    <com.ns.yc.lifehelper.weight.gridview.ImageGridView
+        android:id="@+id/gv_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="6dp"
+        app:cardUseCompatPadding="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/iv_img"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@mipmap/default_image"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42dp"
+            android:drawableLeft="@mipmap/ic_material_save"
+            android:gravity="center"
+            android:text="保存图文"
+            android:textColor="@color/blackText1"
+            android:textSize="@dimen/textSize14" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:background="@color/gray3" />
+        <TextView
+            android:id="@+id/tv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:drawableLeft="@mipmap/ic_material_share"
+            android:gravity="center"
+            android:text="分享"
+            android:textColor="@color/blackText1"
+            android:textSize="@dimen/textSize14" />
+    </LinearLayout>
+
+</LinearLayout>

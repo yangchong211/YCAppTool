@@ -13,7 +13,6 @@ import com.squareup.picasso.Transformation;
  */
 public class CircleTransform implements Transformation {
 
-    private Canvas canvas;
     @Override
     public Bitmap transform(Bitmap source) {
         int size = Math.min(source.getWidth(), source.getHeight());
@@ -27,6 +26,7 @@ public class CircleTransform implements Transformation {
         Bitmap.Config config = source.getConfig() != null ? source.getConfig() : Bitmap.Config.ARGB_8888;
         Bitmap bitmap = Bitmap.createBitmap(size, size, config);
         //注意：一定要做判断，因为gif等图片不能够切圆形
+        Canvas canvas;
         if(bitmap!=null){
             canvas = new Canvas(bitmap);
         }else {

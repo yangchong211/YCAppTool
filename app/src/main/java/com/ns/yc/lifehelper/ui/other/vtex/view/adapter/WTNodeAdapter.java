@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.vtex.view.activity.WTNodeListActivity;
-import com.ns.yc.lifehelper.weight.FlowLayout;
+import com.zhy.view.flowlayout.FlowLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,13 +48,17 @@ public class WTNodeAdapter extends RecyclerView.Adapter<WTNodeAdapter.ViewHolder
             TextView tvNode = new TextView(mContext);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(SizeUtils.dp2px(5), SizeUtils.dp2px(5), SizeUtils.dp2px(5), SizeUtils.dp2px(5));
+            layoutParams.setMargins(SizeUtils.dp2px(5),
+                    SizeUtils.dp2px(5), SizeUtils.dp2px(5),
+                    SizeUtils.dp2px(5));
             tvNode.setLayoutParams(layoutParams);
             tvNode.setText(node.getValue());
             tvNode.setTextSize(SizeUtils.sp2px(9));
             tvNode.setTextColor(ContextCompat.getColor(mContext, R.color.blackText1));
             tvNode.setBackground(mContext.getResources().getDrawable(R.drawable.shape_btn_color_bg));
-            tvNode.setPadding(SizeUtils.dp2px(6f), SizeUtils.dp2px(2f), SizeUtils.dp2px(6f), SizeUtils.dp2px(2f));
+            tvNode.setPadding(SizeUtils.dp2px(6f),
+                    SizeUtils.dp2px(2f), SizeUtils.dp2px(6f),
+                    SizeUtils.dp2px(2f));
             tvNode.setOnClickListener(new OnNodeClickListener(node.getKey()));
             holder.flContent.addView(tvNode);
         }

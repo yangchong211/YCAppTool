@@ -16,7 +16,7 @@ import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryBean;
 import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.weight.manager.FullyGridLayoutManager;
 import com.ns.yc.lifehelper.utils.AppUtil;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
+import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 
 import org.yczbj.ycrefreshviewlib.item.SupportGridItemLine;
 

@@ -3,11 +3,14 @@ package com.ns.yc.lifehelper.ui.data.presenter;
 import android.content.res.TypedArray;
 
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.constantApi.ConstantImageApi;
 import com.ns.yc.lifehelper.model.bean.ImageIconBean;
 import com.ns.yc.lifehelper.ui.data.contract.DataFragmentContract;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import rx.subscriptions.CompositeSubscription;
@@ -54,6 +57,14 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
     @Override
     public void bindActivity(MainActivity activity) {
         this.activity = activity;
+    }
+
+    @Override
+    public ArrayList<String> initGvImageData() {
+        ArrayList<String> list = new ArrayList<>();
+        List<String> strings = Arrays.asList(ConstantImageApi.SPALSH_URLS);
+        list.addAll(strings);
+        return list;
     }
 
 

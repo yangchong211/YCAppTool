@@ -10,7 +10,6 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
 
 import com.blankj.utilcode.util.Utils;
-import com.lzy.imagepicker.util.BitmapUtil;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.db.cache.CacheHomeNews;
@@ -20,9 +19,8 @@ import com.ns.yc.lifehelper.model.bean.ItemEntity;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.model.GalleryBean;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.utils.BitmapSaveUtils;
-import com.ns.yc.lifehelper.utils.BitmapUtils;
-import com.ns.yc.lifehelper.utils.FileUtils;
+import com.ns.yc.lifehelper.utils.bitmap.BitmapSaveUtils;
+import com.ns.yc.lifehelper.utils.bitmap.BitmapUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,6 +29,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.ycbjie.ycthreadpoollib.PoolThread;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.subscriptions.CompositeSubscription;
@@ -172,7 +171,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
     @Override
     public void getGalleryData() {
-        List<GalleryBean> gallery = new ArrayList<>();
+        final List<GalleryBean> gallery = new ArrayList<>();
         try {
             InputStream in = activity.getAssets().open("ycGallery.config");
             int size = in.available();
@@ -194,45 +193,18 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
-            new Thread(new BitmapRunnable(gallery)).start();
-            //new Thread(new SaveRunnable(gallery)).start();
-        }
-    }
-
-    private class BitmapRunnable implements Runnable{
-
-        private List<GalleryBean> mGallery;
-
-        BitmapRunnable(List<GalleryBean> gallery) {
-            this.mGallery = gallery;
-        }
-
-        @Override
-        public void run() {
-            ArrayList<Bitmap> bitmapList = new ArrayList<>();
-            for (GalleryBean bean : mGallery) {
-                Bitmap bitmap = BitmapUtils.returnBitMap(bean.getImageUrl());
-                bitmapList.add(bitmap);
-            }
-            mHomeView.downloadBitmapSuccess(bitmapList);
-        }
-    }
-
-    private class SaveRunnable implements Runnable{
-
-        private List<GalleryBean> mGallery;
-
-        SaveRunnable(List<GalleryBean> gallery) {
-            this.mGallery = gallery;
-        }
-
-        @Override
-        public void run() {
-            for (int i = 0; i < mGallery.size(); i++) {
-                String str = mGallery.get(i).getImageUrl();
-                Bitmap bitmap = BitmapUtils.returnBitMap(str);
-                BitmapSaveUtils.saveBitmap(Utils.getApp(), bitmap, null, true);
-            }
+            PoolThread executor = BaseApplication.getInstance().getExecutor();
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    ArrayList<Bitmap> bitmapList = new ArrayList<>();
+                    for (GalleryBean bean : gallery) {
+                        Bitmap bitmap = BitmapUtils.returnBitMap(bean.getImageUrl());
+                        bitmapList.add(bitmap);
+                    }
+                    mHomeView.downloadBitmapSuccess(bitmapList);
+                }
+            });
         }
     }
 

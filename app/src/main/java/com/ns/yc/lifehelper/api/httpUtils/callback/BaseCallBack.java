@@ -44,12 +44,12 @@ public abstract class BaseCallBack<T> implements Callback<T> {
         if (successful && response.code() == 200) {
             dispatchHttpSuccess(call, response);
         } else {
-            onFailure(call, new HttpException(response));
+            HttpException httpException = new HttpException(response);
+            onFailure(call, httpException);
         }
     }
 
 
     abstract void dispatchHttpSuccess(Call<T> call, Response<T> response);
-
 
 }

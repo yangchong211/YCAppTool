@@ -10,8 +10,8 @@ import com.ns.yc.lifehelper.model.event.SearchDataEvent;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.contract.TxWeChatContract;
 import com.ns.yc.lifehelper.api.http.news.WeChatModel;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WeChatBean;
-import com.ns.yc.lifehelper.utils.rx.RxBus;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
+import com.ns.yc.lifehelper.utils.rxUtils.RxBus;
+import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 
 import rx.Subscriber;
 import rx.Subscription;

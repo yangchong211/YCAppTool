@@ -3,6 +3,7 @@ package com.ns.yc.lifehelper.api.manager;
 import android.util.Log;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.ns.yc.lifehelper.utils.log.LogUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +37,8 @@ public class InterceptorUtils {
                 new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Log.e("OkHttp", "YCLog = " + message);
+                //Log.e("OkHttp", "YCLog = " + message);
+                LogUtils.printJson("printJson",message);
             }
         });
         if (debug) {

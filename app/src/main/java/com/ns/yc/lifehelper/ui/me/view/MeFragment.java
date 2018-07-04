@@ -9,9 +9,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.IntentUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.config.AppConfig;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.inter.listener.NoDoubleClickListener;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeFragmentPresenter;
@@ -114,7 +116,13 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
         rlMeQuestion.setOnClickListener(this);
         rlMeSetting.setOnClickListener(this);
         rlMeFeedBack.setOnClickListener(this);
-        rlMePhone.setOnClickListener(this);
+        rlMePhone.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            protected void onNoDoubleClick(View view) {
+                LogUtils.e("避免重复点击，测试1秒是否调用几次");
+                toCallMe();
+            }
+        });
         ivPersonImage.setOnClickListener(this);
     }
 
@@ -145,7 +153,7 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
                 startActivity(MeFeedBackActivity.class);
                 break;
             case R.id.rl_me_phone:
-                toCallMe();
+
                 break;
             case R.id.iv_person_image:
                 if(AppConfig.INSTANCE.isLogin()){

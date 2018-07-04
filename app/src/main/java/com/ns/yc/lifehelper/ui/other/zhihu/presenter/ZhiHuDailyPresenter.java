@@ -10,8 +10,8 @@ import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
 import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuDailyContract;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyBeforeListBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDailyListBean;
-import com.ns.yc.lifehelper.utils.rx.RxBus;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
+import com.ns.yc.lifehelper.utils.rxUtils.RxBus;
+import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.text.SimpleDateFormat;

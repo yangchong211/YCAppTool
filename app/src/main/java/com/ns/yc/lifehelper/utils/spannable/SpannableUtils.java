@@ -43,7 +43,7 @@ public class SpannableUtils {
         stringBuilder.append(afterText);
         RoundedBackgroundSpan span;
         span= new RoundedBackgroundSpan(ContextCompat.getColor(context,
-                R.color.redTab), R.color.indicator_color_3);
+                R.color.redTab), R.color.priority_yellow);
         stringBuilder.setSpan(span, 0, thisTag.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         stringBuilder.append(" ");
         return stringBuilder;

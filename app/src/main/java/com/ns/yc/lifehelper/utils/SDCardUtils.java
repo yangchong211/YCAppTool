@@ -15,7 +15,8 @@ import java.io.IOException;
 
 public class SDCardUtils {
 
-    public static String SDCardRoot = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
+    public static String SDCardRoot = Environment.getExternalStorageDirectory().getAbsolutePath()
+            + File.separator;
     /**
      * 获得文章图片保存路径
      */

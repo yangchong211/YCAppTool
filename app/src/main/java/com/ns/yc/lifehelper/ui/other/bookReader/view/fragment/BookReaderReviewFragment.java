@@ -17,7 +17,7 @@ import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookReviewList;
 import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
+import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

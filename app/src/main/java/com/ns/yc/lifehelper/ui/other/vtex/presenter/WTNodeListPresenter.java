@@ -4,7 +4,7 @@ import com.ns.yc.lifehelper.ui.other.vtex.contract.WTNodeListContract;
 import com.ns.yc.lifehelper.api.http.vtex.VTexModel;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeBean;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.NodeListBean;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
+import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.ui.other.bookReader.manager;
 import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderRecommendBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.support.RefreshCollectionListEvent;
-import com.ns.yc.lifehelper.utils.ACache;
+import com.ns.yc.lifehelper.utils.cache.ACache;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
 
 import java.io.File;

@@ -26,7 +26,7 @@ import com.ns.yc.lifehelper.ui.other.zhihu.ui.activity.ZhiHuCalendarActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.adapter.ZhiHuDailyAdapter;
 import com.ns.yc.lifehelper.ui.webView.view.WebViewAnimActivity;
 import com.ns.yc.lifehelper.utils.animation.AnimationViewUtil;
-import com.ns.yc.lifehelper.utils.rx.RxBus;
+import com.ns.yc.lifehelper.utils.rxUtils.RxBus;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 

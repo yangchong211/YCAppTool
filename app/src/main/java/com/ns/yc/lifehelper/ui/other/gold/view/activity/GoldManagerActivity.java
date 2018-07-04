@@ -16,7 +16,7 @@ import com.ns.yc.lifehelper.base.state.BaseStateBarActivity;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerBean;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerItemBean;
 import com.ns.yc.lifehelper.ui.other.gold.view.adapter.GoldManagerAdapter;
-import com.ns.yc.lifehelper.utils.rx.RxBus;
+import com.ns.yc.lifehelper.utils.rxUtils.RxBus;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import org.yczbj.ycrefreshviewlib.callback.DefaultItemTouchHelpCallback;

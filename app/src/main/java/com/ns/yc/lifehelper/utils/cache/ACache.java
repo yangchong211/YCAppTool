@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.utils;
+package com.ns.yc.lifehelper.utils.cache;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 
 
 import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
+import com.ns.yc.lifehelper.utils.FileUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

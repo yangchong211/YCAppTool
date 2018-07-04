@@ -103,9 +103,9 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         selector = bundle.getInt("selector");
         isLocal = bundle.getBoolean("isLocal", false);
         imageUri = bundle.getStringArrayList("imageUri");
-        /**是否是本应用中的图片*/
+        /*是否是本应用中的图片*/
         isApp = bundle.getBoolean("isApp", false);
-        /**本应用图片的id*/
+        /*本应用图片的id*/
         imageId = bundle.getInt("id", 0);
     }
 

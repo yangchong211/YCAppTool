@@ -7,7 +7,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.TypeAdapter;
 import com.ns.yc.lifehelper.api.manager.InterceptorUtils;
+import com.ns.yc.lifehelper.utils.JsonUtils;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -52,7 +54,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitWrapper {
 
     private Retrofit mRetrofit;
-    private Gson gson;
     private final OkHttpClient.Builder builder;
 
 
@@ -107,7 +108,6 @@ public class RetrofitWrapper {
 
         initSSL();
         initTimeOut();
-        gson = getJson();
         //获取实例
         mRetrofit = new Retrofit
                 //设置OKHttpClient,如果不设置会提供一个默认的
@@ -115,7 +115,7 @@ public class RetrofitWrapper {
                 //设置baseUrl
                 .baseUrl(url)
                 //添加转换器Converter(将json 转为JavaBean)，用来进行响应数据转化(反序列化)的ConvertFactory
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create(JsonUtils.getJson()))
                 //添加自定义转换器
                 //.addConverterFactory(buildGsonConverterFactory())
                 //添加rx转换器，用来生成对应"Call"的CallAdapter的CallAdapterFactory
@@ -129,21 +129,6 @@ public class RetrofitWrapper {
         return mRetrofit.create(service);
     }
 
-
-    /**
-     * 解析json
-     */
-    private Gson getJson() {
-        /*gson = new GsonBuilder().setLenient().create();*/
-        if (gson == null) {
-            GsonBuilder builder = new GsonBuilder();
-            builder.setLenient();
-            builder.setFieldNamingStrategy(new AnnotateNaming());
-            builder.serializeNulls();
-            gson = builder.create();
-        }
-        return gson;
-    }
 
 
     /**
@@ -218,21 +203,6 @@ public class RetrofitWrapper {
     }
 
 
-    private static class AnnotateNaming implements FieldNamingStrategy {
-        @Override
-        public String translateName(Field field) {
-            ParamNames a = field.getAnnotation(ParamNames.class);
-            return a != null ? a.value() : FieldNamingPolicy.IDENTITY.translateName(field);
-        }
-    }
 
 
-}
-
-
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-@interface ParamNames {
-    String value();
 }

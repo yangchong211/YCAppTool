@@ -39,10 +39,10 @@ import com.ns.yc.lifehelper.ui.me.view.adapter.GlideImageLoader;
 import com.ns.yc.lifehelper.ui.other.notePad.bean.NotePadDetail;
 import com.ns.yc.lifehelper.ui.other.notePad.fragment.DatePickerFragment;
 import com.ns.yc.lifehelper.ui.other.notePad.fragment.TimePickerFragment;
-import com.ns.yc.lifehelper.utils.image.AppImageUtils;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.SDCardUtils;
 import com.ns.yc.lifehelper.utils.StringUtils;
+import com.ns.yc.lifehelper.utils.bitmap.BitmapUtils;
 import com.ns.yc.lifehelper.utils.time.TimerUtils;
 import com.ns.yc.yccustomtextlib.hyper.HyperTextEditor;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
@@ -458,13 +458,12 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
     private ArrayList<String> photos = new ArrayList<>();
 
     private void insertImagesSync(final Intent data) {
-        Subscription subsInsert = Observable.create(new Observable.OnSubscribe<String>() {
+         Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 etNewContent.measure(0, 0);
                 int width = ScreenUtils.getScreenWidth();
                 int height = ScreenUtils.getScreenHeight();
-
                 ArrayList<ImageItem> images = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
                 photos.clear();
                 if (images != null) {
@@ -481,7 +480,7 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
                 //可以同时插入多张图片
                 for (String imagePath : photos) {
                     Log.e("NotePadNewActivity", "###path=" + imagePath);
-                    Bitmap bitmap = AppImageUtils.getSmallBitmap(imagePath, width, height);     //压缩图片
+                    Bitmap bitmap = BitmapUtils.getSmallBitmap(imagePath, width, height);     //压缩图片
                     //bitmap = BitmapFactory.decodeFile(imagePath);
                     imagePath = SDCardUtils.saveToSdCard(bitmap);
                     Log.e("NotePadNewActivity", "###imagePath=" + imagePath);

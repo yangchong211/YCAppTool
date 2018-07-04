@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.myPicture.view;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -55,6 +56,7 @@ public class BeautifulGroupFragment extends BaseFragment implements SwipeRefresh
 
     public BeautifulGroupFragment(){};
 
+    @SuppressLint("ValidFragment")
     public BeautifulGroupFragment(String groupId) {
         this.groupId = groupId;
     }

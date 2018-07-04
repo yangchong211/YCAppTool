@@ -16,7 +16,7 @@ import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.SubHomeTopRankActi
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.SubTopRankActivity;
 import com.ns.yc.lifehelper.weight.CustomExpandableListView;
 import com.ns.yc.lifehelper.utils.AppUtil;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
+import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -23,7 +23,7 @@ public abstract class SimpleCallBack<T> extends BaseCallBack<ResEntity<T>> {
             onSuccess(call, response);
         } else {
             //业务层的失败
-            onFailure(call, response);
+            onHttpFailure(call, response);
         }
     }
 
@@ -39,8 +39,10 @@ public abstract class SimpleCallBack<T> extends BaseCallBack<ResEntity<T>> {
 
     }
 
+    //抽象方法，子类去实现
     abstract void onSuccess(Call<ResEntity<T>> call, Response<ResEntity<T>> response);
-    private void onFailure(Call<ResEntity<T>> call, Response<ResEntity<T>> response){
+
+    private void onHttpFailure(Call<ResEntity<T>> call, Response<ResEntity<T>> response){
         if(response.body().code==ResEntity.CODE_SHOW_TOAST){
             LogUtils.e("业务层失败"+response.body().message);
         }

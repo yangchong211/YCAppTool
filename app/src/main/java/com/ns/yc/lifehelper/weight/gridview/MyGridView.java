@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.weight;
+package com.ns.yc.lifehelper.weight.gridview;
 
 import android.content.Context;
 import android.util.AttributeSet;

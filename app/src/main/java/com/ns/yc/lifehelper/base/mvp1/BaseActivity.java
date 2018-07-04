@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 import butterknife.ButterKnife;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
@@ -33,7 +34,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        YCAppBar.setStatusBarColor(this, R.color.colorTheme);
         setContentView(getContentView());
         ButterKnife.bind(this);
         //避免切换横竖屏

@@ -27,6 +27,18 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug{
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            //混淆
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 
     //jdk1.7
@@ -128,7 +140,6 @@ dependencies {
     compile 'cn.yc:YCCardViewLib:1.2'
     compile 'cn.yc:YCCustomTextLib:2.1'
     compile 'cn.yc:YCRecycleViewLib:1.1'
-    compile 'cn.yc:YCWeatherLib:1.0'
     compile 'cn.yc:YCGalleryLib:1.1'
     compile 'cn.yc:YCBaseAdapterLib:1.3'
     compile 'cn.yc:YCBannerLib:1.3.1'

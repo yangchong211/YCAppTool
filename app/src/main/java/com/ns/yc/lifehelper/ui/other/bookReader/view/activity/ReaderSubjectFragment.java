@@ -16,7 +16,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderSubjectBean;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderSubjectAdapter;
 import com.ns.yc.lifehelper.utils.AppUtil;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
+import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

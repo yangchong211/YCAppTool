@@ -37,7 +37,9 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.api.key.AppKey;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.ui.webView.js.JsAppInterface;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
 import com.ns.yc.ycutilslib.webView.ScrollWebView;
@@ -75,6 +77,8 @@ public class WebViewActivity extends BaseActivity {
     private String name;
     private MyWebChromeClient webChromeClient;
     private View mErrorView;
+    //是否可以调用app的js交互
+    public boolean isJsToAppCallBack=true;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -219,7 +223,7 @@ public class WebViewActivity extends BaseActivity {
     }
 
 
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint("JavascriptInterface")
     private void initWebView() {
         WebSettings ws = mWebView.getSettings();
         // 网页内容的宽度是否可大于WebView控件的宽度
@@ -276,6 +280,9 @@ public class WebViewActivity extends BaseActivity {
                 }
             }
         });
+
+        JsAppInterface jsAppInterface = new JsAppInterface(this, mWebView);
+        mWebView.addJavascriptInterface(jsAppInterface, AppKey.WebViewJsMethodName);
     }
 
 

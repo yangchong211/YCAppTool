@@ -11,7 +11,7 @@ import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhihuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
+import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 
 import io.realm.Realm;
 import rx.Subscriber;

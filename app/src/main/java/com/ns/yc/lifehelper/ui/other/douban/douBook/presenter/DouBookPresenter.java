@@ -2,15 +2,8 @@ package com.ns.yc.lifehelper.ui.other.douban.douBook.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.blankj.utilcode.util.NetworkUtils;
-import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.douban.douBook.contract.DouBookContract;
-import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuCommentContract;
-import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuCommentBean;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
 
-import rx.Subscriber;
-import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**

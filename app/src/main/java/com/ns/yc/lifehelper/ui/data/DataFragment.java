@@ -2,12 +2,17 @@ package com.ns.yc.lifehelper.ui.data;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -19,7 +24,9 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
+import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.inter.listener.NoDoubleClickListener;
 import com.ns.yc.lifehelper.model.bean.ImageIconBean;
 import com.ns.yc.lifehelper.ui.data.contract.DataFragmentContract;
 import com.ns.yc.lifehelper.ui.data.presenter.DataFragmentPresenter;
@@ -34,7 +41,11 @@ import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.WTexNewsActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
-import com.ns.yc.lifehelper.weight.MyGridView;
+import com.ns.yc.lifehelper.utils.FileUtils;
+import com.ns.yc.lifehelper.utils.bitmap.BitmapSaveUtils;
+import com.ns.yc.lifehelper.utils.bitmap.BitmapUtils;
+import com.ns.yc.lifehelper.weight.gridview.ImageGridView;
+import com.ns.yc.lifehelper.weight.gridview.MyGridView;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -43,8 +54,13 @@ import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
+import cn.ycbjie.ycthreadpoollib.PoolThread;
+import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;
+import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
 
 
 /**
@@ -58,7 +74,7 @@ import butterknife.Bind;
  * </pre>
  */
 public class DataFragment extends BaseFragment<DataFragmentPresenter> implements View.OnClickListener
-        ,DataFragmentContract.View{
+        , DataFragmentContract.View {
 
 
     @Bind(R.id.gridView)
@@ -73,10 +89,17 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     TextView tvNewsZhiHu;
     @Bind(R.id.recyclerView)
     YCRefreshView recyclerView;
+    @Bind(R.id.gv_img)
+    ImageGridView gvImg;
+    @Bind(R.id.tv_save)
+    TextView tvSave;
+    @Bind(R.id.tv_share)
+    TextView tvShare;
 
     private MainActivity activity;
     private NarrowImageAdapter adapter;
     private DataFragmentContract.Presenter presenter = new DataFragmentPresenter(this);
+    private ArrayList<String> list;
 
     @Override
     public void onAttach(Context context) {
@@ -88,7 +111,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     @Override
     public void onDetach() {
         super.onDetach();
-        if(activity!=null){
+        if (activity != null) {
             activity = null;
         }
     }
@@ -107,6 +130,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     public void initListener() {
         tvNoteEdit.setOnClickListener(this);
         tvNewsZhiHu.setOnClickListener(this);
+        tvSave.setOnClickListener(this);
     }
 
 
@@ -114,6 +138,15 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     public void initData() {
         presenter.initGridViewData();
         presenter.initRecycleViewData();
+        list = presenter.initGvImageData();
+        if(list!=null && list.size()>0){
+            gvImg.setUri(list, new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                }
+            });
+        }
     }
 
 
@@ -125,6 +158,10 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 break;
             case R.id.tv_news_zhi_hu:
                 startActivity(ZhiHuNewsActivity.class);
+                break;
+            case R.id.tv_save:
+                ToastUtil.showToast(activity,"开始保存");
+                saveBitmapImage(list);
                 break;
             default:
                 break;
@@ -163,7 +200,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                                 break;
                             case 3:
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                    if(!Settings.canDrawOverlays(activity)) {
+                                    if (!Settings.canDrawOverlays(activity)) {
                                         ToastUtils.showShort("请打开投资界允许权限开关");
                                         Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -267,7 +304,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
         recyclerView.setAdapter(adapter = new NarrowImageAdapter(activity));
         recyclerView.setHorizontalScrollBarEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(
-                activity,LinearLayoutManager.HORIZONTAL,false));
+                activity, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.addItemDecoration(new SpaceViewItemLine(SizeUtils.dp2px(8)));
         recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -280,8 +317,51 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                ToastUtil.showToast(activity,position+"被点击呢");
+                ToastUtil.showToast(activity, position + "被点击呢");
             }
         });
     }
+
+
+    private void saveBitmapImage(final ArrayList<String> list) {
+        PoolThread executor = BaseApplication.getInstance().getExecutor();
+        // 启动异步任务
+        executor.async(new Callable<List<Bitmap>>(){
+            @Override
+            public List<Bitmap> call() throws Exception {
+                List<Bitmap> bitmaps = new ArrayList<>();
+                for (int i = 0; i < list.size(); i++) {
+                    String str = list.get(i);
+                    Bitmap bitmap = BitmapUtils.returnBitMap(str);
+                    bitmaps.add(bitmap);
+                }
+                return bitmaps;
+            }
+        }, new AsyncCallback<List<Bitmap>>() {
+            @Override
+            public void onSuccess(List<Bitmap> bitmaps) {
+                Log.e("AsyncCallback","成功");
+                for (Bitmap bitmap : bitmaps){
+                    BitmapSaveUtils.saveBitmap(activity, bitmap, null, true);
+                }
+                ToastUtil.showToast(activity,"保存成功");
+            }
+
+            @Override
+            public void onFailed(Throwable t) {
+                Log.e("AsyncCallback","失败");
+                ToastUtil.showToast(activity,"保存失败");
+            }
+
+            @Override
+            public void onStart(String threadName) {
+                Log.e("AsyncCallback","开始");
+            }
+        });
+
+
+
+    }
+
+
 }

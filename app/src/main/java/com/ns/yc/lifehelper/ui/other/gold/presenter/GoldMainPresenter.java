@@ -7,7 +7,7 @@ import com.ns.yc.lifehelper.ui.other.gold.contract.GoldMainContract;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerBean;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerItemBean;
 import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
-import com.ns.yc.lifehelper.utils.rx.RxBus;
+import com.ns.yc.lifehelper.utils.rxUtils.RxBus;
 
 import io.realm.Realm;
 import io.realm.RealmList;

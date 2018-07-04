@@ -8,7 +8,7 @@ import com.ns.yc.lifehelper.ui.other.zhihu.contract.ZhiHuSectionListContract;
 import com.ns.yc.lifehelper.api.http.zhihu.ZhiHuModel;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuSectionChildBean;
 import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
-import com.ns.yc.lifehelper.utils.rx.RxUtil;
+import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 
 import java.util.List;
 

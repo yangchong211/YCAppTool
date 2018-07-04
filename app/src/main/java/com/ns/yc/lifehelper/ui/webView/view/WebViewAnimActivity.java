@@ -108,7 +108,6 @@ public class WebViewAnimActivity extends BaseActivity<WebViewAnimPresenter> impl
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            //全屏播放退出全屏
             if (wvDetailContent.canGoBack()) {
                 //返回上一页面
                 wvDetailContent.goBack();
