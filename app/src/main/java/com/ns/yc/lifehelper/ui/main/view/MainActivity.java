@@ -229,7 +229,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
      */
     private void initDrawerLayoutStatus() {
         //为DrawerLayout 布局设置状态栏变色，也就是加上透明度
-        YCAppBar.setStatusBarColor(this, R.color.colorTheme);
+        //YCAppBar.setStatusBarLightMode(this, R.color.colorTheme);
         //YCAppBar.setStatusBarLightMode(this, R.color.colorTheme);
     }
 

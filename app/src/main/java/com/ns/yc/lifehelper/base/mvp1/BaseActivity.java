@@ -19,7 +19,7 @@ import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
  * <pre>
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
- *     time  : 2017/5/18
+ *     time  : 2015/5/18
  *     desc  : 所有Activity的父类
  *     revise:
  * </pre>

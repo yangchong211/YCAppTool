@@ -184,7 +184,7 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         if (isApp) {            // 本地图片
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageId);
             if (bitmap != null) {
-                saveImageToGallery(KnowledgeImageActivity.this, bitmap);
+                saveImageToFile(KnowledgeImageActivity.this, bitmap);
                 ToastUtils.showShort("保存成功");
             }
         } else {                // 网络图片
@@ -201,7 +201,7 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
                             if (imagePath != null) {
                                 bitmap = BitmapFactory.decodeFile(imagePath, bmOptions);
                                 if (bitmap != null) {
-                                    saveImageToGallery(KnowledgeImageActivity.this, bitmap);
+                                    saveImageToFile(KnowledgeImageActivity.this, bitmap);
                                     ToastUtils.showShort("已保存至" + Environment.getExternalStorageDirectory().getAbsolutePath() + "/生活助手");
                                 }
                             }
@@ -390,15 +390,20 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
 
 
     /**
-     * 保存图片至相册
+     * 保存图片至自定义路径，刷新相册
      */
-    public static void saveImageToGallery(Context context, Bitmap bmp) {
-        // 首先保存图片
-        File appDir = new File(Environment.getExternalStorageDirectory(), "生活助手");
+    public static void saveImageToFile(Context context, Bitmap bmp) {
+        // 首先保存图片，这个路径可以自定义
+        File appDir = new File(Environment.getExternalStorageDirectory(), "yc");
+        // 测试由此抽象路径名表示的文件或目录是否存在
         if (!appDir.exists()) {
+            //如果不存在，则创建由此抽象路径名命名的目录
+            //noinspection ResultOfMethodCallIgnored
             appDir.mkdir();
         }
+        // 然后自定义图片的文件名称
         String fileName = System.currentTimeMillis() + ".jpg";
+        // 创建file对象
         File file = new File(appDir, fileName);
         try {
             FileOutputStream fos = new FileOutputStream(file);
@@ -416,7 +421,10 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
             e.printStackTrace();
         }
         // 最后通知图库更新
-        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file.getAbsoluteFile())));
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.parse("file://" + file.getAbsoluteFile()));
+        context.sendBroadcast(intent);
     }
 
 
@@ -425,7 +433,10 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
      */
     private String getImagePath(String imgUrl) {
         String path = null;
-        FutureTarget<File> future = Glide.with(KnowledgeImageActivity.this).load(imgUrl).downloadOnly(500, 500);
+        FutureTarget<File> future = Glide
+                .with(KnowledgeImageActivity.this)
+                .load(imgUrl)
+                .downloadOnly(500, 500);
         try {
             File cacheFile = future.get();
             path = cacheFile.getAbsolutePath();

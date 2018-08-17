@@ -32,7 +32,7 @@ public class BitmapSaveUtils {
      * @param isScanner
      * @return
      */
-    public static String saveBitmap(Context context, Bitmap mBitmap, String savePath,boolean isScanner) {
+    public static String saveBitmap(Context context, Bitmap mBitmap, String savePath ,boolean isScanner) {
         if (TextUtils.isEmpty(savePath)) {
             savePath = getLocalImgSavePath();
         }
