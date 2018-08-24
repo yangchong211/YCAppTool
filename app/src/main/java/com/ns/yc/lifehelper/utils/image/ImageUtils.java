@@ -233,7 +233,8 @@ public class ImageUtils {
      * @param resId  加载失败时的图片
      * @param target 控件
      */
-    public static void loadImgByPicassoWithRound(final Context activity, String path, final int round, int resId, final ImageView target) {
+    public static void loadImgByPicassoWithRound(final Context activity, String path,
+                                                 final int round, int resId, final ImageView target) {
         if (path != null && path.length() > 0) {
             Glide.with(activity)
                     .load(path)
@@ -246,8 +247,9 @@ public class ImageUtils {
                         @Override
                         protected void setResource(Bitmap resource) {
                             super.setResource(resource);
-                            RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(activity.getResources(), resource);
-                            //设置圆角弧度
+                            RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory
+                                    .create(activity.getResources(), resource);
+                            //设置绘制位图时要应用的角半径
                             circularBitmapDrawable.setCornerRadius(round);
                             target.setImageDrawable(circularBitmapDrawable);
                         }

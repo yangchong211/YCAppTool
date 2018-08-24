@@ -12,7 +12,7 @@ import com.ns.yc.ycutilslib.activityManager.AppManager;
  * <pre>
  *     @author yangchong
  *     blog  : www.pedaily.cn
- *     time  : 2016/03/22
+ *     time  : 2015/03/22
  *     desc  : 生命周期管理类
  *     revise:
  * </pre>

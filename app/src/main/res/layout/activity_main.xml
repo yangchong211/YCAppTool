@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
 
     <!--主页面布局-->
     <LinearLayout
@@ -23,9 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/colorPageBg"
-        android:clickable="true"
-        android:fitsSystemWindows="true">
+        android:background="@color/colorWhite"
+        android:clickable="true">
 
         <include
             layout="@layout/nav_bottom_set"
