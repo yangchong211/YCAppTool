@@ -19,7 +19,7 @@ import com.squareup.picasso.Callback;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 /**
@@ -34,9 +34,9 @@ import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 public class GuideActivity extends BaseActivity<GuidePresenter> implements
         GuideContract.View ,View.OnClickListener {
 
-    @Bind(R.id.iv_splash_ad)
+    @BindView(R.id.iv_splash_ad)
     ImageView ivSplashAd;
-    @Bind(R.id.cdv_time)
+    @BindView(R.id.cdv_time)
     CountDownView cdvTime;
 
     private GuideContract.Presenter presenter = new GuidePresenter(this);

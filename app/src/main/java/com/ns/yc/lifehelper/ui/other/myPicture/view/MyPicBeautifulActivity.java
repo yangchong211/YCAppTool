@@ -21,7 +21,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -34,17 +34,17 @@ import butterknife.Bind;
  */
 public class MyPicBeautifulActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.ll_search)
+    @BindView(R.id.ll_search)
     FrameLayout llSearch;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.stl_tab)
+    @BindView(R.id.stl_tab)
     SlidingTabLayout stlTab;
-    @Bind(R.id.vp_content)
+    @BindView(R.id.vp_content)
     ViewPager vpContent;
     private List<Fragment> fragments = new ArrayList<>();
 

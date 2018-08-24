@@ -38,7 +38,7 @@ import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import java.util.List;
-import butterknife.Bind;
+import butterknife.BindView;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
@@ -49,29 +49,29 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 public class VideoNewsActivity extends BaseActivity implements TxWeChatContract.View, View.OnClickListener {
 
 
-    @Bind(R.id.cl)
+    @BindView(R.id.cl)
     CoordinatorLayout cl;
-    @Bind(R.id.iv_bg_image)
+    @BindView(R.id.iv_bg_image)
     ImageView ivBgImage;
-    @Bind(R.id.iv_header_image)
+    @BindView(R.id.iv_header_image)
     ImageView ivHeaderImage;
-    @Bind(R.id.iv_header_title)
+    @BindView(R.id.iv_header_title)
     TextView ivHeaderTitle;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.fl_share)
+    @BindView(R.id.fl_share)
     FrameLayout flShare;
-    @Bind(R.id.ll_tool_bar)
+    @BindView(R.id.ll_tool_bar)
     RelativeLayout llToolBar;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.collapsing_toolbar)
+    @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-    @Bind(R.id.app_bar)
+    @BindView(R.id.app_bar)
     AppBarLayout appBar;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
-    @Bind(R.id.blur_view)
+    @BindView(R.id.blur_view)
     RealTimeBlurView blurView;
 
     private TxWeChatContract.Presenter presenter = new TxWeChatPresenter(this);

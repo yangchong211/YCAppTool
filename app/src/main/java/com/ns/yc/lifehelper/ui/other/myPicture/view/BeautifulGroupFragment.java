@@ -25,8 +25,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -42,9 +41,9 @@ import io.realm.RealmResults;
 public class BeautifulGroupFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private String groupId;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @Bind(R.id.refresher)
+    @BindView(R.id.refresher)
     SwipeRefreshLayout refresher;
     private StaggeredGridLayoutManager layoutManager;
     private Realm realm;
@@ -64,7 +63,7 @@ public class BeautifulGroupFragment extends BaseFragment implements SwipeRefresh
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         activity.unregisterReceiver(Receiver);
     }
 

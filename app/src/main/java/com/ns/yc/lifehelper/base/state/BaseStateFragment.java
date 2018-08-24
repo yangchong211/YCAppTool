@@ -14,6 +14,7 @@ import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
  * </pre>
  */
 public abstract class BaseStateFragment<T extends BasePresenter>  extends Fragment {
-
+    protected Unbinder unbinder;
     protected StateLayoutManager statusLayoutManager;
     /**
      * 将代理类通用行为抽出来
@@ -68,7 +69,7 @@ public abstract class BaseStateFragment<T extends BasePresenter>  extends Fragme
         if (mPresenter != null){
             mPresenter.unSubscribe();
         }
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         initLeakCanary();             //测试内存泄漏，正式一定要隐藏
     }
 

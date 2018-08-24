@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -28,7 +28,7 @@ import butterknife.Bind;
 public class NoteAddActivity extends BaseActivity {
 
 
-    @Bind(R.id.fragment)
+    @BindView(R.id.fragment)
     FrameLayout fragment;
     private NoteAddFragment noteAddFragment;
     protected String from;          //1为新建；2为更新

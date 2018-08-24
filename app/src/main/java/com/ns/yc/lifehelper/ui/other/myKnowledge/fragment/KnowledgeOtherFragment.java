@@ -22,8 +22,8 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
+import butterknife.Unbinder;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -38,8 +38,9 @@ import rx.schedulers.Schedulers;
  * ================================================
  */
 public class KnowledgeOtherFragment  extends BaseFragment {
+    protected Unbinder unbinder;
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private MyKnowledgeActivity activity;
     private GanKOtherAdapter adapter;
@@ -53,7 +54,7 @@ public class KnowledgeOtherFragment  extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     @Override

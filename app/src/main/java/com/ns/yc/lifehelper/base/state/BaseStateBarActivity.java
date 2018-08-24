@@ -13,6 +13,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * <pre>
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
  * </pre>
  */
 public abstract class BaseStateBarActivity extends AppCompatActivity{
-
+    protected Unbinder unbinder;
     protected StateLayoutManager statusLayoutManager;
 
     @Override
@@ -36,7 +37,7 @@ public abstract class BaseStateBarActivity extends AppCompatActivity{
         setContentView(R.layout.base_state_bar_view);
         initStatusLayout();
         initBaseView();
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initView();
         initListener();
@@ -50,7 +51,7 @@ public abstract class BaseStateBarActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         initLeakCanary();             //测试内存泄漏，正式一定要隐藏
     }
 

@@ -22,7 +22,7 @@ import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.yccustomtextlib.pwdEt.PasswordEditText;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -37,33 +37,33 @@ import butterknife.Bind;
  */
 public class MeLoginActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.tv_title_left)
+    @BindView(R.id.tv_title_left)
     TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.iv_right_img)
+    @BindView(R.id.iv_right_img)
     ImageView ivRightImg;
-    @Bind(R.id.ll_search)
+    @BindView(R.id.ll_search)
     FrameLayout llSearch;
-    @Bind(R.id.tv_title_right)
+    @BindView(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.tv_person_username)
+    @BindView(R.id.tv_person_username)
     AutoCompleteTextView tvPersonUsername;
-    @Bind(R.id.tv_person_password)
+    @BindView(R.id.tv_person_password)
     PasswordEditText tvPersonPassword;
-    @Bind(R.id.btn_person_login)
+    @BindView(R.id.btn_person_login)
     Button btnPersonLogin;
-    @Bind(R.id.tv_person_register)
+    @BindView(R.id.tv_person_register)
     TextView tvPersonRegister;
-    @Bind(R.id.tv_wei_xin_login)
+    @BindView(R.id.tv_wei_xin_login)
     TextView tvWeiXinLogin;
-    @Bind(R.id.tv_qq_login)
+    @BindView(R.id.tv_qq_login)
     TextView tvQqLogin;
-    @Bind(R.id.tv_sina_login)
+    @BindView(R.id.tv_sina_login)
     TextView tvSinaLogin;
 
     private boolean progressShow;

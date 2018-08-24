@@ -23,7 +23,7 @@ import com.ns.yc.lifehelper.ui.other.gold.view.fragment.GoldPagerFragment;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.realm.RealmList;
 
 
@@ -38,15 +38,15 @@ import io.realm.RealmList;
  */
 public class GoldMainActivity extends BaseActivity implements View.OnClickListener , GoldMainContract.View{
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.tab_layout)
+    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
-    @Bind(R.id.vp_content)
+    @BindView(R.id.vp_content)
     ViewPager vpContent;
-    @Bind(R.id.iv_add)
+    @BindView(R.id.iv_add)
     FrameLayout ivAdd;
 
     public static String[] typeStr = {"Android", "iOS", "前端", "后端", "设计", "产品", "阅读", "工具资源"};

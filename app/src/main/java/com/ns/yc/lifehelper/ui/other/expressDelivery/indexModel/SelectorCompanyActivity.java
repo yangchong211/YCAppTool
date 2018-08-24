@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import me.yokeyword.indexablerv.EntityWrapper;
@@ -53,29 +53,29 @@ import rx.schedulers.Schedulers;
 public class SelectorCompanyActivity extends BaseActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.tv_title_left)
+    @BindView(R.id.tv_title_left)
     TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.ll_search)
+    @BindView(R.id.ll_search)
     FrameLayout llSearch;
-    @Bind(R.id.tv_title_right)
+    @BindView(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.tv_start_put_in)
+    @BindView(R.id.tv_start_put_in)
     TextView tvStartPutIn;
-    @Bind(R.id.et_content)
+    @BindView(R.id.et_content)
     EditText etContent;
-    @Bind(R.id.iv_clean)
+    @BindView(R.id.iv_clean)
     ImageView ivClean;
-    @Bind(R.id.fl_search)
+    @BindView(R.id.fl_search)
     FrameLayout flSearch;
-    @Bind(R.id.index_layout)
+    @BindView(R.id.index_layout)
     IndexableLayout indexLayout;
-    @Bind(R.id.progress)
+    @BindView(R.id.progress)
     FrameLayout progress;
     private CompanySearchFragment searchFragment;
     private List<ExpressDeliveryEntity> mData;

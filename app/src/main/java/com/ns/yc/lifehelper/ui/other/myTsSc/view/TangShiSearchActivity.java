@@ -42,7 +42,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
@@ -61,27 +61,27 @@ import rx.schedulers.Schedulers;
  */
 public class TangShiSearchActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.tv_put_in)
+    @BindView(R.id.tv_put_in)
     TextView tvPutIn;
-    @Bind(R.id.et_content)
+    @BindView(R.id.et_content)
     EditText etContent;
-    @Bind(R.id.iv_clean)
+    @BindView(R.id.iv_clean)
     ImageView ivClean;
-    @Bind(R.id.fl_search)
+    @BindView(R.id.fl_search)
     FrameLayout flSearch;
-    @Bind(R.id.tv_click)
+    @BindView(R.id.tv_click)
     TextView tvClick;
-    @Bind(R.id.tfl_search_hot)
+    @BindView(R.id.tfl_search_hot)
     TagFlowLayout tflSearchHot;
-    @Bind(R.id.rv_search_his)
+    @BindView(R.id.rv_search_his)
     RecyclerView rvSearchHis;
-    @Bind(R.id.tv_clean_his)
+    @BindView(R.id.tv_clean_his)
     TextView tvCleanHis;
-    @Bind(R.id.ll_search_start)
+    @BindView(R.id.ll_search_start)
     LinearLayout llSearchStart;
-    @Bind(R.id.ll_search_after)
+    @BindView(R.id.ll_search_after)
     LinearLayout llSearchAfter;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private Realm realm;
     private RealmResults<TsSearchHis> searchHises;

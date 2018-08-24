@@ -22,8 +22,8 @@ import com.ns.yc.lifehelper.weight.imageView.NoteItemCircleView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
+import butterknife.Unbinder;
 
 /**
  * ================================================
@@ -35,41 +35,41 @@ import butterknife.ButterKnife;
  * ================================================
  */
 public class NoteAddFragment extends BaseFragment implements View.OnClickListener, View.OnTouchListener {
-
+    protected Unbinder unbinder;
     protected boolean isNewNote;
-    @Bind(R.id.note_detail_edit)
+    @BindView(R.id.note_detail_edit)
     EditText noteDetailEdit;
-    @Bind(R.id.note_detail_img_menu)
+    @BindView(R.id.note_detail_img_menu)
     ImageView noteDetailImgMenu;
-    @Bind(R.id.note_detail_img_green)
+    @BindView(R.id.note_detail_img_green)
     NoteItemCircleView noteDetailImgGreen;
-    @Bind(R.id.note_detail_img_blue)
+    @BindView(R.id.note_detail_img_blue)
     NoteItemCircleView noteDetailImgBlue;
-    @Bind(R.id.note_detail_img_purple)
+    @BindView(R.id.note_detail_img_purple)
     NoteItemCircleView noteDetailImgPurple;
-    @Bind(R.id.note_detail_img_yellow)
+    @BindView(R.id.note_detail_img_yellow)
     NoteItemCircleView noteDetailImgYellow;
-    @Bind(R.id.note_detail_img_red)
+    @BindView(R.id.note_detail_img_red)
     NoteItemCircleView noteDetailImgRed;
-    @Bind(R.id.note_detail_tv_date)
+    @BindView(R.id.note_detail_tv_date)
     TextView noteDetailTvDate;
-    @Bind(R.id.note_detail_img_button)
+    @BindView(R.id.note_detail_img_button)
     ImageView noteDetailImgButton;
-    @Bind(R.id.note_detail_titlebar)
+    @BindView(R.id.note_detail_titlebar)
     RelativeLayout noteDetailTitlebar;
-    @Bind(R.id.note_detail_menu)
+    @BindView(R.id.note_detail_menu)
     RelativeLayout note_detail_menu;
-    @Bind(R.id.note_detail_img_thumbtack)
+    @BindView(R.id.note_detail_img_thumbtack)
     ImageView noteDetailImgThumbtack;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.iv_right_img)
+    @BindView(R.id.iv_right_img)
     ImageView ivRightImg;
-    @Bind(R.id.ll_search)
+    @BindView(R.id.ll_search)
     FrameLayout llSearch;
     private NoteAddActivity activity;
     private String time;
@@ -79,7 +79,7 @@ public class NoteAddFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     @Override

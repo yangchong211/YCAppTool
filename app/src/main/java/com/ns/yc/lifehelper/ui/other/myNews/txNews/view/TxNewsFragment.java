@@ -24,7 +24,7 @@ import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -44,7 +44,7 @@ public class TxNewsFragment extends BaseFragment {
 
 
     private static final String TYPE = "";
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private TxNewsActivity activity;
     private String mType;

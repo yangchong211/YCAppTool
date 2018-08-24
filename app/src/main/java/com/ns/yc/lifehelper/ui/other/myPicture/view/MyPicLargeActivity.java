@@ -15,7 +15,7 @@ import com.ns.yc.lifehelper.ui.other.myPicture.bean.PicBeautifulContentBean;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -37,9 +37,9 @@ public class MyPicLargeActivity extends BaseActivity {
             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
             | View.SYSTEM_UI_FLAG_FULLSCREEN;
 
-    @Bind(R.id.pager)
+    @BindView(R.id.pager)
     ViewPager pager;
-    @Bind(R.id.tool_bar)
+    @BindView(R.id.tool_bar)
     Toolbar toolBar;
     private int index;
     private String groupId;

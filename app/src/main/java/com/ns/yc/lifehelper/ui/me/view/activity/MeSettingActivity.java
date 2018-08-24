@@ -29,7 +29,7 @@ import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
 import java.util.concurrent.TimeUnit;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 
 
@@ -47,61 +47,61 @@ import cn.ycbjie.ycthreadpoollib.PoolThread;
 public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implements View.OnClickListener,
         MeSettingContract.View, SwitchButton.OnCheckedChangeListener {
 
-    @Bind(R.id.tv_title_left)
+    @BindView(R.id.tv_title_left)
     TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.iv_right_img)
+    @BindView(R.id.iv_right_img)
     ImageView ivRightImg;
-    @Bind(R.id.ll_search)
+    @BindView(R.id.ll_search)
     FrameLayout llSearch;
-    @Bind(R.id.tv_title_right)
+    @BindView(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.rl_set_go_star)
+    @BindView(R.id.rl_set_go_star)
     RelativeLayout rlSetGoStar;
-    @Bind(R.id.switch_button)
+    @BindView(R.id.switch_button)
     SwitchButton switchButton;
-    @Bind(R.id.switch_night)
+    @BindView(R.id.switch_night)
     SwitchButton switchNight;
-    @Bind(R.id.tv_set_cache_size)
+    @BindView(R.id.tv_set_cache_size)
     TextView tvSetCacheSize;
-    @Bind(R.id.rl_set_clean_cache)
+    @BindView(R.id.rl_set_clean_cache)
     RelativeLayout rlSetCleanCache;
-    @Bind(R.id.rl_set_revise_pwd)
+    @BindView(R.id.rl_set_revise_pwd)
     RelativeLayout rlSetRevisePwd;
-    @Bind(R.id.tv_is_cert)
+    @BindView(R.id.tv_is_cert)
     TextView tvIsCert;
-    @Bind(R.id.rl_set_phone)
+    @BindView(R.id.rl_set_phone)
     RelativeLayout rlSetPhone;
-    @Bind(R.id.rl_set_about_us)
+    @BindView(R.id.rl_set_about_us)
     RelativeLayout rlSetAboutUs;
-    @Bind(R.id.rl_set_binding)
+    @BindView(R.id.rl_set_binding)
     RelativeLayout rlSetBinding;
-    @Bind(R.id.tv_exit)
+    @BindView(R.id.tv_exit)
     TextView tvExit;
-    @Bind(R.id.tv_girl)
+    @BindView(R.id.tv_girl)
     TextView tvGirl;
-    @Bind(R.id.switch_pic)
+    @BindView(R.id.switch_pic)
     SwitchButton switchPic;
-    @Bind(R.id.tv_pic)
+    @BindView(R.id.tv_pic)
     AppCompatTextView tvPic;
-    @Bind(R.id.switch_girl)
+    @BindView(R.id.switch_girl)
     SwitchButton switchGirl;
-    @Bind(R.id.switch_random)
+    @BindView(R.id.switch_random)
     SwitchButton switchRandom;
-    @Bind(R.id.tv_pic_state)
+    @BindView(R.id.tv_pic_state)
     TextView tvPicState;
-    @Bind(R.id.ll_pic_quality)
+    @BindView(R.id.ll_pic_quality)
     LinearLayout llPicQuality;
-    @Bind(R.id.rl_set_feedback)
+    @BindView(R.id.rl_set_feedback)
     RelativeLayout rlSetFeedback;
-    @Bind(R.id.rl_set_update)
+    @BindView(R.id.rl_set_update)
     RelativeLayout rlSetUpdate;
-    @Bind(R.id.tv_update_name)
+    @BindView(R.id.tv_update_name)
     TextView tvUpdateName;
 
     private ViewLoading mLoading;

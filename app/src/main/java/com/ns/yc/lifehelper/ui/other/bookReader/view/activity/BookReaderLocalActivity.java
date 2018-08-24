@@ -36,7 +36,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -49,11 +49,11 @@ import butterknife.Bind;
  */
 public class BookReaderLocalActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private ReaderLocalAdapter adapter;
 

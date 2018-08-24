@@ -17,7 +17,7 @@ import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -57,15 +57,15 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.My
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.ic_icon)
+        @BindView(R.id.ic_icon)
         ImageView icIcon;
-        @Bind(R.id.tv_title)
+        @BindView(R.id.tv_title)
         TextView tvTitle;
-        @Bind(R.id.tv_content)
+        @BindView(R.id.tv_content)
         TextView tvContent;
-        @Bind(R.id.iv_curr_priority)
+        @BindView(R.id.iv_curr_priority)
         ImageView ivCurrPriority;
-        @Bind(R.id.ll_task_finished_mask)
+        @BindView(R.id.ll_task_finished_mask)
         LinearLayout llTaskFinishedMask;
 
         MyViewHolder(View view) {

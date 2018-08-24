@@ -26,7 +26,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.concurrent.TimeUnit;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -48,7 +48,7 @@ public class DouBookFragment extends BaseLazyFragment implements DouBookContract
 
 
     private static final String TYPE = "DouBookFragment";
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private DouBookActivity activity;
     private String mType;

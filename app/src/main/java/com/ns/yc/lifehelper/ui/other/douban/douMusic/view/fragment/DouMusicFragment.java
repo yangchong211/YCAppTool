@@ -11,19 +11,18 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.api.http.douban.DouMusicModel;
 import com.ns.yc.lifehelper.base.mvp1.BaseLazyFragment;
+import com.ns.yc.lifehelper.ui.other.douban.douMusic.bean.DouMusicBean;
 import com.ns.yc.lifehelper.ui.other.douban.douMusic.view.DouMusicActivity;
 import com.ns.yc.lifehelper.ui.other.douban.douMusic.view.activity.DouMusicDetailActivity;
 import com.ns.yc.lifehelper.ui.other.douban.douMusic.view.adapter.DouMusicAdapter;
-import com.ns.yc.lifehelper.ui.other.douban.douMusic.bean.DouMusicBean;
-import com.ns.yc.lifehelper.api.http.douban.DouMusicModel;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -42,7 +41,7 @@ public class DouMusicFragment extends BaseLazyFragment {
 
 
     private static final String TYPE = "";
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private DouMusicActivity activity;
     private String mType;

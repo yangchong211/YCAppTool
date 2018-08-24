@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.ns.yc.lifehelper"
@@ -76,75 +76,76 @@ bugly {
 
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //官方库
     //noinspection GradleCompatible
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:support-v4:25.4.0'
-    compile 'com.android.support:recyclerview-v7:25.4.0'
-    compile 'com.android.support:design:25.4.0'
-    compile 'com.android.support:cardview-v7:25.4.0'
-    compile 'com.android.support:palette-v7:25.4.0'
-    compile 'com.android.support:percent:25.4.0'
-    compile 'com.android.support:support-annotations:25.4.0'
-    compile 'com.android.support:multidex:1.0.1'
+    implementation 'com.android.support:appcompat-v7:25.4.0'
+    implementation 'com.android.support:support-v4:25.4.0'
+    implementation 'com.android.support:recyclerview-v7:25.4.0'
+    implementation 'com.android.support:design:25.4.0'
+    implementation 'com.android.support:cardview-v7:25.4.0'
+    implementation 'com.android.support:palette-v7:25.4.0'
+    implementation 'com.android.support:percent:25.4.0'
+    implementation 'com.android.support:support-annotations:25.4.0'
+    implementation 'com.android.support:multidex:1.0.1'
 
 
     //网络请求retrofit2+Rx
-    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-    compile 'com.squareup.okhttp3:okhttp:3.8.1'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'io.reactivex:rxjava:1.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    implementation 'io.reactivex:rxandroid:1.1.0'
+    implementation 'io.reactivex:rxjava:1.1.0'
 
     //事件总线
-    compile 'org.greenrobot:eventbus:3.0.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
 
     //注解
-    compile 'com.jakewharton:butterknife:7.0.1'                 //黄牛刀
-    compile 'com.google.dagger:dagger:2.13'                     //注解
-    apt 'com.google.dagger:dagger-compiler:2.13'
+    implementation 'com.jakewharton:butterknife:8.8.1'                 //黄牛刀
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.google.dagger:dagger:2.13'                     //注解
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
 
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.github.bumptech.glide:glide:3.8.0'
-    compile 'jp.wasabeef:glide-transformations:2.0.2'
-    compile 'com.jph.takephoto:takephoto_library:4.0.3'
-    compile 'com.lzy.widget:imagepicker:0.5.0'
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-    compile 'me.yokeyword:indexablerecyclerview:1.3.0'
-    compile 'com.blankj:utilcode:1.12.5'
-    compile 'com.zhy:flowlayout-lib:1.0.3'
-    compile 'org.jsoup:jsoup:1.10.2'
-    compile 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
-    compile 'pub.devrel:easypermissions:1.0.1'
-    compile 'com.prolificinteractive:material-calendarview:1.4.0'
-    compile('com.alibaba.android:vlayout:1.2.2@aar') {
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'jp.wasabeef:glide-transformations:2.0.2'
+    implementation 'com.jph.takephoto:takephoto_library:4.0.3'
+    implementation 'com.lzy.widget:imagepicker:0.5.0'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    implementation 'me.yokeyword:indexablerecyclerview:1.3.0'
+    implementation 'com.blankj:utilcode:1.12.5'
+    implementation 'com.zhy:flowlayout-lib:1.0.3'
+    implementation 'org.jsoup:jsoup:1.10.2'
+    implementation 'org.ccil.cowan.tagsoup:tagsoup:1.2.1'
+    implementation 'pub.devrel:easypermissions:1.0.1'
+    implementation 'com.prolificinteractive:material-calendarview:1.4.0'
+    implementation('com.alibaba.android:vlayout:1.2.2@aar') {
         transitive = true
     }
     //腾讯bug管理平台
-    compile 'com.tencent.bugly:crashreport:2.6.0'
-    compile 'com.tencent.bugly:nativecrashreport:3.3.0'
+    implementation 'com.tencent.bugly:crashreport:2.6.0'
+    implementation 'com.tencent.bugly:nativecrashreport:3.3.0'
     //腾讯x5
-    compile files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
+    implementation files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
 
 
-    compile 'cn.yc:YCStateLib:1.1'
-    compile 'cn.yc:YCPhotoLib:1.0'
-    compile 'cn.yc:YCDialogLib:3.5'
-    compile 'cn.yc:YCCountDownViewLib:1.0'
-    compile 'cn.yc:YCUtilsLib:1.6.2'
-    compile 'cn.yc:YCMultiInputViewLib:1.0'
-    compile 'cn.yc:YCProgressLib:1.2'
-    compile 'cn.yc:YCCardViewLib:1.2'
-    compile 'cn.yc:YCCustomTextLib:2.1'
-    compile 'cn.yc:YCRecycleViewLib:1.1'
-    compile 'cn.yc:YCGalleryLib:1.1'
-    compile 'cn.yc:YCBaseAdapterLib:1.3'
-    compile 'cn.yc:YCBannerLib:1.3.1'
-    compile 'org.yczbj:YCRefreshViewLib:2.5'
-    compile 'cn.yc:YCStatusBarLib:1.3'
-    compile 'cn.yc:YCVideoPlayerLib:2.4.5'
-    compile 'cn.yc:YCThreadPoolLib:1.3.0'
+    implementation 'cn.yc:YCStateLib:1.1'
+    implementation 'cn.yc:YCPhotoLib:1.0'
+    implementation 'cn.yc:YCDialogLib:3.5'
+    implementation 'cn.yc:YCCountDownViewLib:1.0'
+    implementation 'cn.yc:YCUtilsLib:1.6.2'
+    implementation 'cn.yc:YCMultiInputViewLib:1.0'
+    implementation 'cn.yc:YCProgressLib:1.2'
+    implementation 'cn.yc:YCCardViewLib:1.2'
+    implementation 'cn.yc:YCCustomTextLib:2.1'
+    implementation 'cn.yc:YCRecycleViewLib:1.1'
+    implementation 'cn.yc:YCGalleryLib:1.1'
+    implementation 'cn.yc:YCBaseAdapterLib:1.3'
+    implementation 'cn.yc:YCBannerLib:1.3.1'
+    implementation 'org.yczbj:YCRefreshViewLib:2.5'
+    implementation 'cn.yc:YCStatusBarLib:1.3'
+    implementation 'cn.yc:YCVideoPlayerLib:2.4.5'
+    implementation 'cn.yc:YCThreadPoolLib:1.3.0'
 }

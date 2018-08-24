@@ -8,13 +8,13 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.comment.ConstantBookReader;
+import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.comment.ConstantBookReader;
 import com.ns.yc.lifehelper.model.event.BookReaderSelectionEvent;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookReviewList;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.BookReaderReviewActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderReviewAdapter;
-import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookReviewList;
-import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
 import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
@@ -24,8 +24,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
+import butterknife.Unbinder;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -41,8 +41,9 @@ import rx.android.schedulers.AndroidSchedulers;
  * ================================================
  */
 public class BookReaderReviewFragment extends BaseFragment {
+    protected Unbinder unbinder;
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private BookReaderReviewActivity activity;
     private static final String TYPE = "type";
@@ -89,7 +90,7 @@ public class BookReaderReviewFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         EventBusUtils.unregister(this);
     }
 

@@ -27,7 +27,7 @@ import com.ns.yc.lifehelper.ui.me.view.activity.MeTimerActivity;
 import com.ns.yc.lifehelper.utils.AppToolUtils;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * <pre>
@@ -43,29 +43,29 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
         View.OnClickListener , MeFragmentContract.View{
 
 
-    @Bind(R.id.rl_me_timer)
+    @BindView(R.id.rl_me_timer)
     RelativeLayout rlMeTimer;
-    @Bind(R.id.rl_me_qone)
+    @BindView(R.id.rl_me_qone)
     RelativeLayout rlMeQone;
-    @Bind(R.id.rl_me_project)
+    @BindView(R.id.rl_me_project)
     RelativeLayout rlMeProject;
-    @Bind(R.id.rl_me_collect)
+    @BindView(R.id.rl_me_collect)
     RelativeLayout rlMeCollect;
-    @Bind(R.id.rl_me_question)
+    @BindView(R.id.rl_me_question)
     RelativeLayout rlMeQuestion;
-    @Bind(R.id.rl_me_setting)
+    @BindView(R.id.rl_me_setting)
     RelativeLayout rlMeSetting;
-    @Bind(R.id.rl_me_feed_back)
+    @BindView(R.id.rl_me_feed_back)
     RelativeLayout rlMeFeedBack;
-    @Bind(R.id.tv_me_phone_number)
+    @BindView(R.id.tv_me_phone_number)
     TextView tvMePhoneNumber;
-    @Bind(R.id.rl_me_phone)
+    @BindView(R.id.rl_me_phone)
     LinearLayout rlMePhone;
-    @Bind(R.id.iv_person_image)
+    @BindView(R.id.iv_person_image)
     ImageView ivPersonImage;
-    @Bind(R.id.tv_person_name)
+    @BindView(R.id.tv_person_name)
     TextView tvPersonName;
-    @Bind(R.id.ll_person)
+    @BindView(R.id.ll_person)
     LinearLayout llPerson;
 
 

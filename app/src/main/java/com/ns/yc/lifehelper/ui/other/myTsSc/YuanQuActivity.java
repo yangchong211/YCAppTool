@@ -19,28 +19,28 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantJsApi;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.api.http.tangshi.TangShiModel;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
+import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.adapter.TangShiAdapter;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiChapter;
 import com.ns.yc.lifehelper.ui.other.myTsSc.cache.CacheYqList;
-import com.ns.yc.lifehelper.api.http.tangshi.TangShiModel;
 import com.ns.yc.lifehelper.ui.other.myTsSc.view.TangShiSearchActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.view.YuanQuDetailActivity;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Subscriber;
@@ -58,13 +58,13 @@ import rx.schedulers.Schedulers;
  */
 public class YuanQuActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.ll_search)
+    @BindView(R.id.ll_search)
     FrameLayout llSearch;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private String search;
     private TangShiAdapter adapter;

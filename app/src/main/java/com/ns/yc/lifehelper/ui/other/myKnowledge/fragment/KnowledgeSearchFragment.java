@@ -17,7 +17,7 @@ import com.ns.yc.lifehelper.weight.manager.FullyGridLayoutManager;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -36,7 +36,7 @@ public class KnowledgeSearchFragment extends BaseFragment {
 
 
     private static final String TYPE = "";
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private KnowledgeSearchActivity activity;
     private String mType;

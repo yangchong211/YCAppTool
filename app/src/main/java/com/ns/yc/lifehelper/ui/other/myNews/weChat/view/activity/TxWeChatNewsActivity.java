@@ -30,7 +30,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -46,13 +46,13 @@ public class TxWeChatNewsActivity extends BaseActivity implements
         View.OnClickListener ,TxWeChatContract.View{
 
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private TxWeChatAdapter adapter;
 

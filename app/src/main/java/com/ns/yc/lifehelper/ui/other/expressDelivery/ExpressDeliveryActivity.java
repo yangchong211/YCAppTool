@@ -13,7 +13,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.activity.ExpressDeliveryInfoActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.indexModel.SelectorCompanyActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -26,15 +26,15 @@ import butterknife.Bind;
  */
 public class ExpressDeliveryActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.et_number)
+    @BindView(R.id.et_number)
     EditText etNumber;
-    @Bind(R.id.tv_company)
+    @BindView(R.id.tv_company)
     TextView tvCompany;
-    @Bind(R.id.tv_search)
+    @BindView(R.id.tv_search)
     TextView tvSearch;
     private String type;
     private String number;

@@ -16,18 +16,18 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.Calendar;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 public class ZhiHuCalendarActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.view_calender)
+    @BindView(R.id.view_calender)
     MaterialCalendarView viewCalender;
-    @Bind(R.id.tv_calender_enter)
+    @BindView(R.id.tv_calender_enter)
     TextView tvCalenderEnter;
     private CalendarDay mDate;
 

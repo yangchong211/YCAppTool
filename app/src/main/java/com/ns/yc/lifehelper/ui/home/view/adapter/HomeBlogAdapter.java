@@ -16,7 +16,7 @@ import com.ns.yc.lifehelper.utils.spannable.SpannableUtils;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -43,19 +43,19 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
 
     public class MyViewHolder extends BaseViewHolder<HomeBlogEntity> {
 
-        @Bind(R.id.ll_news_head)
+        @BindView(R.id.ll_news_head)
         LinearLayout llNewsHead;
-        @Bind(R.id.tv_title)
+        @BindView(R.id.tv_title)
         TextView tvTitle;
-        @Bind(R.id.tv_author)
+        @BindView(R.id.tv_author)
         TextView tvAuthor;
-        @Bind(R.id.tv_time)
+        @BindView(R.id.tv_time)
         TextView tvTime;
-        @Bind(R.id.tv_type)
+        @BindView(R.id.tv_type)
         TextView tvType;
-        @Bind(R.id.iv_img)
+        @BindView(R.id.iv_img)
         ImageView ivImg;
-        @Bind(R.id.ll_new_content)
+        @BindView(R.id.ll_new_content)
         LinearLayout llNewContent;
 
         MyViewHolder(ViewGroup parent) {

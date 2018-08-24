@@ -39,7 +39,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 /**
@@ -53,25 +53,25 @@ import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
  */
 public class GanKHomeActivity extends BaseActivity implements View.OnClickListener , GanKHomeAContract.View{
 
-    @Bind(R.id.iv_home_banner)
+    @BindView(R.id.iv_home_banner)
     ImageView ivHomeBanner;
-    @Bind(R.id.iv_home_setting)
+    @BindView(R.id.iv_home_setting)
     AppCompatImageView ivHomeSetting;
-    @Bind(R.id.tab_layout)
+    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
-    @Bind(R.id.tl_home_toolbar)
+    @BindView(R.id.tl_home_toolbar)
     Toolbar tlHomeToolbar;
-    @Bind(R.id.ll_home_search)
+    @BindView(R.id.ll_home_search)
     LinearLayout llHomeSearch;
-    @Bind(R.id.iv_home_collection)
+    @BindView(R.id.iv_home_collection)
     AppCompatImageView ivHomeCollection;
-    @Bind(R.id.collapsing_toolbar)
+    @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-    @Bind(R.id.appbar)
+    @BindView(R.id.appbar)
     AppBarLayout appbar;
-    @Bind(R.id.vp_home_category)
+    @BindView(R.id.vp_home_category)
     ViewPager vpHomeCategory;
-    @Bind(R.id.fab_home_random)
+    @BindView(R.id.fab_home_random)
     FloatingActionButton fabHomeRandom;
 
     private GanKHomeAContract.Presenter presenter = new GanKHomeAPresenter(this);

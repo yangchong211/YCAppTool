@@ -18,8 +18,9 @@ import android.widget.ProgressBar;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.ycutilslib.fragmentBack.BackHandledFragment;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * ================================================
@@ -31,12 +32,12 @@ import butterknife.ButterKnife;
  * ================================================
  */
 public class KnowledgeVideoFragment extends BackHandledFragment {
-
-    @Bind(R.id.toolbar)
+    protected Unbinder unbinder;
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.webView)
+    @BindView(R.id.webView)
     WebView mWebView;
-    @Bind(R.id.pb)
+    @BindView(R.id.pb)
     ProgressBar pb;
     private String url = "https://www.iqiyi.com/dianying/";
     private MyWebChromeClient webChromeClient;
@@ -47,7 +48,7 @@ public class KnowledgeVideoFragment extends BackHandledFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getContentView(), container , false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -63,7 +64,7 @@ public class KnowledgeVideoFragment extends BackHandledFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     @Override

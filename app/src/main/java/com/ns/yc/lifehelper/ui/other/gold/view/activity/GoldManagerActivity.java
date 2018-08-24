@@ -24,17 +24,17 @@ import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.Collections;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.realm.RealmList;
 
 
 public class GoldManagerActivity extends BaseStateBarActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private RealmList<GoldManagerItemBean> mList;
     private GoldManagerAdapter adapter;

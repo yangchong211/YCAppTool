@@ -10,19 +10,19 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.BookReaderActivity;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderFindAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderTopBookActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.support.FindBean;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.BookReaderActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.ReaderCategoryActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.ReaderSubjectActivity;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderFindAdapter;
+
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -36,7 +36,7 @@ import butterknife.ButterKnife;
 public class ReaderFindFragment extends BaseFragment {
 
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private BookReaderActivity activity;
     private List<FindBean> mList = new ArrayList<>();
@@ -57,7 +57,7 @@ public class ReaderFindFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
 

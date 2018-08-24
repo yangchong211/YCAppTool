@@ -13,18 +13,18 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.adapter.WTNodeAdapter;
 import com.ns.yc.lifehelper.utils.XmlUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 public class WTNoteActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @Bind(R.id.tv_node_title)
+    @BindView(R.id.tv_node_title)
     TextView tvNodeTitle;
 
     private ArrayMap<String, ArrayMap<String, String>> map;

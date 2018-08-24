@@ -22,7 +22,7 @@ import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 
@@ -38,9 +38,9 @@ import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 public class SplashPagerActivity extends BaseActivity {
 
 
-    @Bind(R.id.banner)
+    @BindView(R.id.banner)
     BannerView banner;
-    @Bind(R.id.btn_go)
+    @BindView(R.id.btn_go)
     Button btnGo;
 
     private List<Integer> imageId;

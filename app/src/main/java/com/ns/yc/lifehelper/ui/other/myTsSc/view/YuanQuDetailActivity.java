@@ -20,7 +20,7 @@ import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiDetail;
 import com.ns.yc.lifehelper.api.http.tangshi.TangShiModel;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -38,21 +38,21 @@ import rx.schedulers.Schedulers;
 public class YuanQuDetailActivity extends BaseActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.tv_title)
+    @BindView(R.id.tv_title)
     TextView tvTitle;
-    @Bind(R.id.tv_name)
+    @BindView(R.id.tv_name)
     TextView tvName;
-    @Bind(R.id.tv_content)
+    @BindView(R.id.tv_content)
     TextView tvContent;
-    @Bind(R.id.tv_explanation)
+    @BindView(R.id.tv_explanation)
     TextView tvExplanation;
-    @Bind(R.id.tv_appreciation)
+    @BindView(R.id.tv_appreciation)
     TextView tvAppreciation;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     private String id;
     private String name;
@@ -201,6 +201,6 @@ public class YuanQuDetailActivity extends BaseActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
     }
 }

@@ -46,7 +46,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -61,31 +61,31 @@ import butterknife.Bind;
 public class WorkNewActivity extends BaseActivity implements WorkNewContract.View, View.OnClickListener {
 
 
-    @Bind(R.id.sdv_bg)
+    @BindView(R.id.sdv_bg)
     ImageView sdvBg;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.et_title)
+    @BindView(R.id.et_title)
     EditText etTitle;
-    @Bind(R.id.iv_curr_priority)
+    @BindView(R.id.iv_curr_priority)
     ImageView ivCurrPriority;
-    @Bind(R.id.ll_priority)
+    @BindView(R.id.ll_priority)
     LinearLayout llPriority;
-    @Bind(R.id.rv_choose_priority)
+    @BindView(R.id.rv_choose_priority)
     RecyclerView rvChoosePriority;
-    @Bind(R.id.ll_priority_list)
+    @BindView(R.id.ll_priority_list)
     LinearLayout llPriorityList;
-    @Bind(R.id.et_content)
+    @BindView(R.id.et_content)
     EditText etContent;
-    @Bind(R.id.ll_content)
+    @BindView(R.id.ll_content)
     LinearLayout llContent;
-    @Bind(R.id.tv_date)
+    @BindView(R.id.tv_date)
     TextView tvDate;
-    @Bind(R.id.content_new)
+    @BindView(R.id.content_new)
     LinearLayout contentNew;
-    @Bind(R.id.fab_ok)
+    @BindView(R.id.fab_ok)
     FloatingActionButton fabOk;
-    @Bind(R.id.cl)
+    @BindView(R.id.cl)
     CoordinatorLayout cl;
 
     //@Inject

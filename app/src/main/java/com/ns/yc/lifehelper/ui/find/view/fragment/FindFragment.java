@@ -38,7 +38,7 @@ import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
 import java.util.LinkedList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 
@@ -56,7 +56,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter>
         implements FindFragmentContract.View {
 
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
 

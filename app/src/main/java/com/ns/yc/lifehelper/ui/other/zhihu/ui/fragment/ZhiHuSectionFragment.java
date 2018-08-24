@@ -22,7 +22,7 @@ import com.ns.yc.ycstatelib.StateLayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -37,9 +37,9 @@ import butterknife.Bind;
 public class ZhiHuSectionFragment extends BaseStateFragment implements ZhiHuSectionContract.View{
 
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @Bind(R.id.refresher)
+    @BindView(R.id.refresher)
     SwipeRefreshLayout refresher;
 
     private ZhiHuNewsActivity activity;

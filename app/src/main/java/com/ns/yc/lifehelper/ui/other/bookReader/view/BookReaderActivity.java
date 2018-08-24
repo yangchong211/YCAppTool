@@ -23,7 +23,7 @@ import com.ns.yc.lifehelper.ui.other.bookReader.view.fragment.ReaderFindFragment
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -37,23 +37,23 @@ import butterknife.Bind;
 public class BookReaderActivity extends BaseActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.tv_title_left)
+    @BindView(R.id.tv_title_left)
     TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.iv_right_img)
+    @BindView(R.id.iv_right_img)
     ImageView ivRightImg;
-    @Bind(R.id.ll_search)
+    @BindView(R.id.ll_search)
     FrameLayout llSearch;
-    @Bind(R.id.tv_title_right)
+    @BindView(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.stl_tab)
+    @BindView(R.id.stl_tab)
     SegmentTabLayout stlTab;
-    @Bind(R.id.vp_content)
+    @BindView(R.id.vp_content)
     ViewPager vpContent;
 
     private ArrayList<String> mTitleList = new ArrayList<>();

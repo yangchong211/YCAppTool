@@ -34,7 +34,7 @@ import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observer;
 import rx.Subscription;
@@ -52,11 +52,11 @@ import rx.schedulers.Schedulers;
  */
 public class BookDetailHelpActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private BookDetailDiscussionAdapter adapter;
     private HeaderViewHolder headerViewHolder;
@@ -209,21 +209,21 @@ public class BookDetailHelpActivity extends BaseActivity implements View.OnClick
 
     static class HeaderViewHolder {
 
-        @Bind(R.id.ivBookCover)
+        @BindView(R.id.ivBookCover)
         ImageView ivAvatar;
-        @Bind(R.id.tvBookTitle)
+        @BindView(R.id.tvBookTitle)
         TextView tvNickName;
-        @Bind(R.id.tvTime)
+        @BindView(R.id.tvTime)
         TextView tvTime;
-        @Bind(R.id.tvTitle)
+        @BindView(R.id.tvTitle)
         TextView tvTitle;
-        @Bind(R.id.tvContent)
+        @BindView(R.id.tvContent)
         BookContentTextView tvContent;
-        @Bind(R.id.tvBestComments)
+        @BindView(R.id.tvBestComments)
         TextView tvBestComments;
-        @Bind(R.id.rvBestComments)
+        @BindView(R.id.rvBestComments)
         RecyclerView rvBestComments;
-        @Bind(R.id.tvCommentCount)
+        @BindView(R.id.tvCommentCount)
         TextView tvCommentCount;
 
         HeaderViewHolder(View view) {

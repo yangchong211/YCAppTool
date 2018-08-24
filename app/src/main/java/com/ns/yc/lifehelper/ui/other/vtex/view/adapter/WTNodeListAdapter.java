@@ -17,7 +17,7 @@ import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -104,13 +104,13 @@ public class WTNodeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public static class TopViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.iv_node_face)
+        @BindView(R.id.iv_node_face)
         ImageView ivNodeFace;
-        @Bind(R.id.tv_node_name)
+        @BindView(R.id.tv_node_name)
         TextView tvNodeName;
-        @Bind(R.id.tv_nodes_tips)
+        @BindView(R.id.tv_nodes_tips)
         TextView tvNodesTips;
-        @Bind(R.id.tv_node_content)
+        @BindView(R.id.tv_node_content)
         TextView tvNodeContent;
 
         TopViewHolder(View itemView) {
@@ -121,17 +121,17 @@ public class WTNodeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.iv_topic_face)
+        @BindView(R.id.iv_topic_face)
         ImageView ivTopicFace;
-        @Bind(R.id.tv_topic_name)
+        @BindView(R.id.tv_topic_name)
         TextView tvTopicName;
-        @Bind(R.id.tv_topic_tips)
+        @BindView(R.id.tv_topic_tips)
         TextView tvTopicTips;
-        @Bind(R.id.tv_topic_comment)
+        @BindView(R.id.tv_topic_comment)
         TextView tvTopicComment;
-        @Bind(R.id.tv_topic_node)
+        @BindView(R.id.tv_topic_node)
         TextView tvTopicNode;
-        @Bind(R.id.tv_topic_title)
+        @BindView(R.id.tv_topic_title)
         TextView tvTopicTitle;
 
         public ViewHolder(View itemView) {

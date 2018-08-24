@@ -38,7 +38,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -56,19 +56,19 @@ import rx.schedulers.Schedulers;
  */
 public class KnowledgeImageActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.vp_image)
+    @BindView(R.id.vp_image)
     ViewPager vpImage;
-    @Bind(R.id.tv_text)
+    @BindView(R.id.tv_text)
     TextView tvText;
-    @Bind(R.id.tv_save_image)
+    @BindView(R.id.tv_save_image)
     TextView tvSaveImage;
-    @Bind(R.id.large_more)
+    @BindView(R.id.large_more)
     ImageView largeMore;
-    @Bind(R.id.large_star)
+    @BindView(R.id.large_star)
     ImageView largeStar;
-    @Bind(R.id.large_download)
+    @BindView(R.id.large_download)
     ImageView largeDownload;
-    @Bind(R.id.large_share)
+    @BindView(R.id.large_share)
     ImageView largeShare;
 
     private int code;                               //接收穿过来当前选择的图片的数量

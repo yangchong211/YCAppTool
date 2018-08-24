@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * ================================================
  */
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
-
+    protected Unbinder unbinder;
     /**
      * 将代理类通用行为抽出来
      */
@@ -32,7 +32,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getContentView(), container , false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -63,7 +63,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
         if (mPresenter != null){
             mPresenter.unSubscribe();
         }
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         initLeakCanary();             //测试内存泄漏，正式一定要隐藏
     }
 

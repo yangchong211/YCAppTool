@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -32,7 +32,7 @@ import butterknife.Bind;
  */
 public class GalleryImageActivity extends BaseActivity {
 
-    @Bind(R.id.gallery_view)
+    @BindView(R.id.gallery_view)
     GalleryImageView galleryView;
 
     private static final ArrayList<String> images = new ArrayList<>(Arrays.asList(

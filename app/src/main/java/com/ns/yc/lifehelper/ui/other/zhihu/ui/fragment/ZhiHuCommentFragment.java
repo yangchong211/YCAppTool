@@ -19,7 +19,7 @@ import com.ns.yc.ycstatelib.StateLayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -32,7 +32,7 @@ import butterknife.Bind;
  */
 public class ZhiHuCommentFragment extends BaseStateFragment implements ZhiHuCommentContract.View {
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
     private ZhiHuCommentContract.Presenter presenter = new ZhiHuCommentPresenter(this);

@@ -22,7 +22,7 @@ import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 import java.io.File;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -41,19 +41,19 @@ import rx.schedulers.Schedulers;
  */
 public class NotePadDetailActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.tv_note_detail_date)
+    @BindView(R.id.tv_note_detail_date)
     TextView tvNoteDetailDate;
-    @Bind(R.id.tv_note_type)
+    @BindView(R.id.tv_note_type)
     TextView tvNoteType;
-    @Bind(R.id.et_new_title)
+    @BindView(R.id.et_new_title)
     TextView etNewTitle;
-    @Bind(R.id.et_new_content)
+    @BindView(R.id.et_new_content)
     HyperTextView etNewContent;
     private NotePadDetail notePadDetail;
 

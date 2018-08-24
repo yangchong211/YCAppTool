@@ -15,21 +15,21 @@ import com.ns.yc.lifehelper.ui.other.vtex.view.activity.WTNoteActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 public class WTexNewsActivity extends BaseActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.tab_layout)
+    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
-    @Bind(R.id.iv_add)
+    @BindView(R.id.iv_add)
     FrameLayout ivAdd;
-    @Bind(R.id.vp_content)
+    @BindView(R.id.vp_content)
     ViewPager vpContent;
 
     public static String[] typeStr = {"技术", "创意", "好玩", "Apple", "酷工作", "交易", "城市", "问与答", "最热", "全部", "R2"};

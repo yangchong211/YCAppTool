@@ -22,7 +22,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -36,7 +36,7 @@ import butterknife.Bind;
  */
 public class SearchListActivity extends BaseActivity implements SearchListContract.View {
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
 

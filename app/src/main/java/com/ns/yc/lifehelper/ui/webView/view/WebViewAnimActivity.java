@@ -37,7 +37,7 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -51,29 +51,29 @@ import butterknife.Bind;
  */
 public class WebViewAnimActivity extends BaseActivity<WebViewAnimPresenter> implements WebViewAnimContract.View, View.OnClickListener {
 
-    @Bind(R.id.iv_bar_image)
+    @BindView(R.id.iv_bar_image)
     ImageView ivBarImage;
-    @Bind(R.id.tv_bar_copyright)
+    @BindView(R.id.tv_bar_copyright)
     TextView tvBarCopyright;
-    @Bind(R.id.view_toolbar)
+    @BindView(R.id.view_toolbar)
     Toolbar viewToolbar;
-    @Bind(R.id.clp_toolbar)
+    @BindView(R.id.clp_toolbar)
     CollapsingToolbarLayout clpToolbar;
-    @Bind(R.id.app_bar)
+    @BindView(R.id.app_bar)
     AppBarLayout appBar;
-    @Bind(R.id.wv_detail_content)
+    @BindView(R.id.wv_detail_content)
     WebView wvDetailContent;
-    @Bind(R.id.nsv_scroller)
+    @BindView(R.id.nsv_scroller)
     NestedScrollView nsvScroller;
-    @Bind(R.id.tv_detail_bottom_like)
+    @BindView(R.id.tv_detail_bottom_like)
     TextView tvDetailBottomLike;
-    @Bind(R.id.tv_detail_bottom_comment)
+    @BindView(R.id.tv_detail_bottom_comment)
     TextView tvDetailBottomComment;
-    @Bind(R.id.tv_detail_bottom_share)
+    @BindView(R.id.tv_detail_bottom_share)
     TextView tvDetailBottomShare;
-    @Bind(R.id.ll_detail_bottom)
+    @BindView(R.id.ll_detail_bottom)
     FrameLayout llDetailBottom;
-    @Bind(R.id.fab_like)
+    @BindView(R.id.fab_like)
     FloatingActionButton fabLike;
 
     private WebViewAnimContract.Presenter presenter = new WebViewAnimPresenter(this);

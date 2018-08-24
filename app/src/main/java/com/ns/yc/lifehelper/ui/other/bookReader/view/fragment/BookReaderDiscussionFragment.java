@@ -11,15 +11,14 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.comment.ConstantBookReader;
+import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
 import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.comment.ConstantBookReader;
 import com.ns.yc.lifehelper.model.event.BookReaderSelectionEvent;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookDiscussionList;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.BookDetailDiscussionActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.BookReaderDiscussionActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderDiscussionAdapter;
-import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderBookDiscussionList;
-import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.EventBusUtils;
 import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
@@ -28,9 +27,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -47,7 +46,7 @@ import rx.android.schedulers.AndroidSchedulers;
  */
 public class BookReaderDiscussionFragment extends BaseFragment {
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private BookReaderDiscussionActivity activity;
     private static final String TYPE = "type";
@@ -91,7 +90,7 @@ public class BookReaderDiscussionFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         EventBusUtils.unregister(this);
     }
 

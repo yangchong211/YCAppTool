@@ -17,7 +17,7 @@ import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MeNewsLikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -166,11 +166,11 @@ public class MeNewsLikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public static class ArticleViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.iv_article_image)
+        @BindView(R.id.iv_article_image)
         ImageView image;
-        @Bind(R.id.tv_article_title)
+        @BindView(R.id.tv_article_title)
         TextView title;
-        @Bind(R.id.tv_article_from)
+        @BindView(R.id.tv_article_from)
         TextView from;
 
         public ArticleViewHolder(View itemView) {
@@ -182,7 +182,7 @@ public class MeNewsLikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public static class GirlViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.iv_girl_image)
+        @BindView(R.id.iv_girl_image)
         ImageView image;
 
         public GirlViewHolder(View itemView) {

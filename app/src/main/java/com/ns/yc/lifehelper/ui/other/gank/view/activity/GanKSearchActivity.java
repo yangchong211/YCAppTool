@@ -45,7 +45,7 @@ import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 
@@ -60,23 +60,23 @@ import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
  */
 public class GanKSearchActivity extends BaseActivity implements GanKSearchContract.View, View.OnClickListener {
 
-    @Bind(R.id.ed_search)
+    @BindView(R.id.ed_search)
     AppCompatEditText edSearch;
-    @Bind(R.id.iv_edit_clear)
+    @BindView(R.id.iv_edit_clear)
     AppCompatImageView ivEditClear;
-    @Bind(R.id.iv_search)
+    @BindView(R.id.iv_search)
     AppCompatImageView ivSearch;
-    @Bind(R.id.toolbar_search)
+    @BindView(R.id.toolbar_search)
     Toolbar toolbarSearch;
-    @Bind(R.id.appbar_search)
+    @BindView(R.id.appbar_search)
     AppBarLayout appbarSearch;
-    @Bind(R.id.tv_search_clean)
+    @BindView(R.id.tv_search_clean)
     TextView tvSearchClean;
-    @Bind(R.id.recycler_search_history)
+    @BindView(R.id.recycler_search_history)
     RecyclerView recyclerSearchHistory;
-    @Bind(R.id.ll_search_history)
+    @BindView(R.id.ll_search_history)
     LinearLayout llSearchHistory;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
 
     private GanKSearchContract.Presenter presenter = new GanKSearchPresenter(this);

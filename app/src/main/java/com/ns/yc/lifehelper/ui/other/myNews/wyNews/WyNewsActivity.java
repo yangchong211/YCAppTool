@@ -21,7 +21,7 @@ import com.ns.yc.lifehelper.ui.other.myNews.wyNews.view.WyNewsFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Subscriber;
@@ -39,13 +39,13 @@ import rx.schedulers.Schedulers;
  */
 public class WyNewsActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.tab_layout)
+    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
-    @Bind(R.id.vp_content)
+    @BindView(R.id.vp_content)
     ViewPager vpContent;
 
     private ArrayList<String> mTitleList = new ArrayList<>();

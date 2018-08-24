@@ -47,7 +47,7 @@ import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -62,7 +62,7 @@ import butterknife.Bind;
 public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements HomeFragmentContract.View {
 
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private HomeFragmentContract.Presenter presenter = new HomeFragmentPresenter(this);
     private ArrayList<Bitmap> bitmaps;

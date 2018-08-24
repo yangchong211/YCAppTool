@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
  * ================================================
  */
 public abstract class BaseMvpFragment<T extends BaseMvpPresenter> extends Fragment implements BaseMvpView {
-
+    protected Unbinder unbinder;
     @Inject
     protected T mPresenter;
 
@@ -31,7 +32,7 @@ public abstract class BaseMvpFragment<T extends BaseMvpPresenter> extends Fragme
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getContentView(), container , false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -47,7 +48,7 @@ public abstract class BaseMvpFragment<T extends BaseMvpPresenter> extends Fragme
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     @Override

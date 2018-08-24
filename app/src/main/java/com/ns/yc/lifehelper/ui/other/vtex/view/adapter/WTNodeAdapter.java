@@ -16,7 +16,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.vtex.view.activity.WTNodeListActivity;
 import com.zhy.view.flowlayout.FlowLayout;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -73,9 +73,9 @@ public class WTNodeAdapter extends RecyclerView.Adapter<WTNodeAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.tv_node_title)
+        @BindView(R.id.tv_node_title)
         TextView tvTitle;
-        @Bind(R.id.fl_node_content)
+        @BindView(R.id.fl_node_content)
         FlowLayout flContent;
 
         public ViewHolder(View itemView) {

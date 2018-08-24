@@ -24,11 +24,11 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class VtexPagerFragment extends BaseFragment implements WTexPagerContract.View {
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private WTexNewsActivity activity;
     private static final String TYPE = "type";

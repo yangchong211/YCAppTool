@@ -20,7 +20,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.ycmultiinputviewlib.MultiEditInputView;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -33,19 +33,19 @@ import butterknife.Bind;
  */
 public class MeFeedBackActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.tv_call_me)
+    @BindView(R.id.tv_call_me)
     TextView tvCallMe;
-    @Bind(R.id.tv_send_sms)
+    @BindView(R.id.tv_send_sms)
     TextView tvSendSms;
-    @Bind(R.id.tv_send_email)
+    @BindView(R.id.tv_send_email)
     TextView tvSendEmail;
-    @Bind(R.id.tv_wx_me)
+    @BindView(R.id.tv_wx_me)
     TextView tvWxMe;
-    @Bind(R.id.mev_view)
+    @BindView(R.id.mev_view)
     MultiEditInputView mevView;
     private String phone = "13667225184";
     private String contentText;

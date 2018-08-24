@@ -15,7 +15,7 @@ import com.ns.yc.lifehelper.ui.other.myPicture.bean.PicBeautifulMainBean;
 import com.ns.yc.lifehelper.weight.imageView.RadioImageView;
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -65,9 +65,9 @@ public abstract class PicBeautifulAdapter extends ArrayRecyclerAdapter<PicBeauti
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.iv_image)
+        @BindView(R.id.iv_image)
         public RadioImageView imageView;
-        @Bind(R.id.tv_title)
+        @BindView(R.id.tv_title)
         public TextView title;
 
         public ViewHolder(@LayoutRes int resource, ViewGroup parent) {

@@ -20,7 +20,7 @@ import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -130,19 +130,19 @@ public class ZhiHuCommentAdapter extends RecyclerView.Adapter<ZhiHuCommentAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        @Bind(R.id.iv_comment_face)
+        @BindView(R.id.iv_comment_face)
         ImageView ivFace;
-        @Bind(R.id.tv_comment_name)
+        @BindView(R.id.tv_comment_name)
         TextView tvName;
-        @Bind(R.id.tv_comment_content)
+        @BindView(R.id.tv_comment_content)
         TextView tvContent;
-        @Bind(R.id.tv_comment_time)
+        @BindView(R.id.tv_comment_time)
         TextView tvTime;
-        @Bind(R.id.tv_comment_expand)
+        @BindView(R.id.tv_comment_expand)
         TextView tvExpand;
-        @Bind(R.id.tv_comment_like)
+        @BindView(R.id.tv_comment_like)
         TextView tvLike;
-        @Bind(R.id.tv_comment_reply)
+        @BindView(R.id.tv_comment_reply)
         TextView tvReply;
 
         public ViewHolder(View itemView) {

@@ -13,6 +13,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 
@@ -29,6 +30,8 @@ import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
  * </pre>
  */
 public abstract class BaseStateActivity extends AppCompatActivity{
+    protected Unbinder unbinder;
+
 
     protected StateLayoutManager statusLayoutManager;
 
@@ -38,7 +41,7 @@ public abstract class BaseStateActivity extends AppCompatActivity{
         setContentView(R.layout.base_state_view);
         initStatusLayout();
         initBaseView();
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         //避免切换横竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         YCAppBar.setStatusBarColor(this, R.color.colorTheme);
@@ -53,7 +56,7 @@ public abstract class BaseStateActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         //测试内存泄漏，正式一定要隐藏
         initLeakCanary();
     }

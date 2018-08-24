@@ -19,7 +19,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.ycutilslib.scrollView.NestedScrollViewListener;
 import com.ns.yc.ycutilslib.scrollView.NoNestedScrollview;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -32,15 +32,15 @@ import butterknife.Bind;
  */
 public class WebViewChangeActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.webView)
+    @BindView(R.id.webView)
     WebView webView;
-    @Bind(R.id.scrollView)
+    @BindView(R.id.scrollView)
     NoNestedScrollview scrollView;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.tool_bar)
+    @BindView(R.id.tool_bar)
     Toolbar toolbar;
     private String url;
     private String name;

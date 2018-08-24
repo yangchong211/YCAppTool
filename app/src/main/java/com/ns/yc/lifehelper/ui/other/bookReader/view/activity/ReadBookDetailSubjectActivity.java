@@ -32,7 +32,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observer;
 import rx.Subscription;
@@ -51,13 +51,13 @@ import rx.schedulers.Schedulers;
  */
 public class ReadBookDetailSubjectActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private BookDetailSubjectAdapter adapter;
 
@@ -257,15 +257,15 @@ public class ReadBookDetailSubjectActivity extends BaseActivity implements View.
     private HeaderViewHolder headerViewHolder;
     static class HeaderViewHolder {
 
-        @Bind(R.id.tvBookListTitle)
+        @BindView(R.id.tvBookListTitle)
         TextView tvBookListTitle;
-        @Bind(R.id.tvBookListDesc)
+        @BindView(R.id.tvBookListDesc)
         TextView tvBookListDesc;
-        @Bind(R.id.ivAuthorAvatar)
+        @BindView(R.id.ivAuthorAvatar)
         ImageView ivAuthorAvatar;
-        @Bind(R.id.tvBookListAuthor)
+        @BindView(R.id.tvBookListAuthor)
         TextView tvBookListAuthor;
-        @Bind(R.id.btnShare)
+        @BindView(R.id.btnShare)
         TextView btnShare;
 
         HeaderViewHolder(View view) {

@@ -19,7 +19,7 @@ import com.ns.yc.lifehelper.api.http.douban.DouBookModel;
 import com.ns.yc.lifehelper.ui.other.douban.douMovie.view.activity.MovieWebViewActivity;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -32,39 +32,39 @@ import rx.schedulers.Schedulers;
 public class DouBookDetailActivity extends BaseActivity {
 
 
-    @Bind(R.id.tv_book_summary)
+    @BindView(R.id.tv_book_summary)
     TextView tvBookSummary;
-    @Bind(R.id.tv_intro)
+    @BindView(R.id.tv_intro)
     TextView tvIntro;
-    @Bind(R.id.tv_catalog)
+    @BindView(R.id.tv_catalog)
     TextView tvCatalog;
-    @Bind(R.id.iv_bg_image)
+    @BindView(R.id.iv_bg_image)
     ImageView ivBgImage;
-    @Bind(R.id.iv_book_photo)
+    @BindView(R.id.iv_book_photo)
     ImageView ivBookPhoto;
-    @Bind(R.id.tv_book_directors)
+    @BindView(R.id.tv_book_directors)
     TextView tvBookDirectors;
-    @Bind(R.id.tv_book_rating_rate)
+    @BindView(R.id.tv_book_rating_rate)
     TextView tvBookRatingRate;
-    @Bind(R.id.tv_book_rating_number)
+    @BindView(R.id.tv_book_rating_number)
     TextView tvBookRatingNumber;
-    @Bind(R.id.tv_one_casts)
+    @BindView(R.id.tv_one_casts)
     TextView tvOneCasts;
-    @Bind(R.id.tv_book_genres)
+    @BindView(R.id.tv_book_genres)
     TextView tvBookGenres;
-    @Bind(R.id.ll_book_detail)
+    @BindView(R.id.ll_book_detail)
     LinearLayout llBookDetail;
-    @Bind(R.id.tv_name)
+    @BindView(R.id.tv_name)
     TextView tvName;
-    @Bind(R.id.tv_casts)
+    @BindView(R.id.tv_casts)
     TextView tvCasts;
-    @Bind(R.id.ll_tool_bar)
+    @BindView(R.id.ll_tool_bar)
     LinearLayout llToolBar;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.collapsing_toolbar)
+    @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-    @Bind(R.id.app_bar)
+    @BindView(R.id.app_bar)
     AppBarLayout appBar;
     private Constant.CollapsingToolbarLayoutState state;
     private String id;

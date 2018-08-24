@@ -25,7 +25,7 @@ import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -37,11 +37,11 @@ import rx.schedulers.Schedulers;
 
 public class ExpressDeliveryInfoActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
     private String number = "";
     private String type = "";

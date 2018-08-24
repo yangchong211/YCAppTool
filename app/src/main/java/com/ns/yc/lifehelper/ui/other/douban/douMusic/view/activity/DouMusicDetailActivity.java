@@ -30,7 +30,7 @@ import com.ns.yc.lifehelper.weight.CustomChangeBounds;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
 import com.ns.yc.ycutilslib.scrollView.ReboundScrollView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import cn.ycbjie.ycstatusbarlib.StatusBarHeightUtils;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -49,35 +49,35 @@ import rx.schedulers.Schedulers;
  */
 public class DouMusicDetailActivity extends BaseActivity {
 
-    @Bind(R.id.img_music_item_bg)
+    @BindView(R.id.img_music_item_bg)
     ImageView imgMusicItemBg;
-    @Bind(R.id.iv_music_photo)
+    @BindView(R.id.iv_music_photo)
     ImageView ivMusicPhoto;
-    @Bind(R.id.tv_music_name)
+    @BindView(R.id.tv_music_name)
     TextView tvMusicName;
-    @Bind(R.id.tv_music_alt_title)
+    @BindView(R.id.tv_music_alt_title)
     TextView tvMusicAltTitle;
-    @Bind(R.id.tv_music_average)
+    @BindView(R.id.tv_music_average)
     TextView tvMusicAverage;
-    @Bind(R.id.tv_music_numRaters)
+    @BindView(R.id.tv_music_numRaters)
     TextView tvMusicNumRaters;
-    @Bind(R.id.tv_music_summary)
+    @BindView(R.id.tv_music_summary)
     TextView tvMusicSummary;
-    @Bind(R.id.ll_music_item)
+    @BindView(R.id.ll_music_item)
     LinearLayout llMusicItem;
-    @Bind(R.id.ll_Header_view)
+    @BindView(R.id.ll_Header_view)
     LinearLayout llHeaderView;
-    @Bind(R.id.tv_txt)
+    @BindView(R.id.tv_txt)
     TextView tvTxt;
-    @Bind(R.id.xrv_list)
+    @BindView(R.id.xrv_list)
     RecyclerView xrvList;
-    @Bind(R.id.nsv_scrollview)
+    @BindView(R.id.nsv_scrollview)
     ReboundScrollView nsvScrollview;
-    @Bind(R.id.iv_title_head_bg)
+    @BindView(R.id.iv_title_head_bg)
     ImageView ivTitleHeadBg;
-    @Bind(R.id.title_tool_bar)
+    @BindView(R.id.title_tool_bar)
     Toolbar titleToolBar;
-    @Bind(R.id.rl_title_head)
+    @BindView(R.id.rl_title_head)
     RelativeLayout rlTitleHead;
 
     private String id = "";

@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -45,15 +45,15 @@ import butterknife.Bind;
 public class BookReadChmActivity extends BaseActivity {
 
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.webView)
+    @BindView(R.id.webView)
     WebView webView;
-    @Bind(R.id.pb)
+    @BindView(R.id.pb)
     ProgressBar pb;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     private ArrayList<String> listSite = new ArrayList<>();
     private ArrayList<String> listBookmark;

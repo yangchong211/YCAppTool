@@ -40,7 +40,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -55,17 +55,17 @@ import butterknife.Bind;
 public class MePersonActivity extends BaseActivity implements View.OnClickListener
         , TakePhoto.TakeResultListener, InvokeListener {
 
-    @Bind(R.id.tv_title_left)
+    @BindView(R.id.tv_title_left)
     TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.base_person_view)
+    @BindView(R.id.base_person_view)
     MePersonBaseView basePersonView;
-    @Bind(R.id.tab_layout)
+    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
-    @Bind(R.id.vp_content)
+    @BindView(R.id.vp_content)
     AutoHeightViewPager vpContent;
 
     private Uri imageUri;

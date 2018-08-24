@@ -22,7 +22,7 @@ import com.ns.yc.lifehelper.ui.other.workDo.ui.adapter.WorkDoAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -36,7 +36,7 @@ import butterknife.Bind;
  */
 public class PageFragment extends BaseFragment implements PageFragmentContract.View{
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private List<TaskDetailEntity> mList = new ArrayList<>();
     private PageFragmentContract.Presenter presenter = new PageFragmentPresenter(this);

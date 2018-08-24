@@ -17,8 +17,8 @@ import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
+import butterknife.Unbinder;
 
 
 /**
@@ -33,12 +33,12 @@ import butterknife.ButterKnife;
  */
 public class CompanySearchFragment extends BaseFragment {
 
-
-    @Bind(R.id.tv_result)
+    protected Unbinder unbinder;
+    @BindView(R.id.tv_result)
     TextView tvResult;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @Bind(R.id.tv_no_result)
+    @BindView(R.id.tv_no_result)
     TextView tvNoResult;
     private List<ExpressDeliveryEntity> mData;
     private SearchAdapter mAdapter;
@@ -47,7 +47,7 @@ public class CompanySearchFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     @Override

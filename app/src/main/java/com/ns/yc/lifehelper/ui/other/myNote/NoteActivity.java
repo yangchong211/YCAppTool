@@ -29,7 +29,7 @@ import com.ns.yc.lifehelper.utils.animation.AnimationsUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -44,19 +44,19 @@ import io.realm.RealmResults;
  */
 public class NoteActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.gridView)
+    @BindView(R.id.gridView)
     HTQDragGridView gridView;
-    @Bind(R.id.refresher)
+    @BindView(R.id.refresher)
     SwipeRefreshLayout refresher;
-    @Bind(R.id.iv_note_trash)
+    @BindView(R.id.iv_note_trash)
     ImageView ivNoteTrash;
-    @Bind(R.id.fab)
+    @BindView(R.id.fab)
     ImageView fab;
     private Realm realm;
     private RealmResults<CacheNoteDetail> cacheNoteDetails;

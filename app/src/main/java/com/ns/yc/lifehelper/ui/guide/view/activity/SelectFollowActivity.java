@@ -24,7 +24,7 @@ import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -39,17 +39,17 @@ import butterknife.Bind;
 public class SelectFollowActivity extends BaseActivity<SelectFollowPresenter>
         implements SelectFollowContract.View, View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.tv_title_right)
+    @BindView(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.select_view)
+    @BindView(R.id.select_view)
     SelectRecyclerView selectView;
-    @Bind(R.id.tv_clean)
+    @BindView(R.id.tv_clean)
     TextView tvClean;
-    @Bind(R.id.tv_start)
+    @BindView(R.id.tv_start)
     TextView tvStart;
 
     private SelectFollowContract.Presenter presenter = new SelectFollowPresenter(this);

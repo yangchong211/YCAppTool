@@ -11,7 +11,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerItemBean;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmList;
 
@@ -56,9 +56,9 @@ public class GoldManagerAdapter extends RecyclerView.Adapter<GoldManagerAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.tv_gold_manager_type)
+        @BindView(R.id.tv_gold_manager_type)
         TextView tvType;
-        @Bind(R.id.sb_btn)
+        @BindView(R.id.sb_btn)
         SwitchButton sb_btn;
 
         public ViewHolder(View itemView) {

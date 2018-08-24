@@ -25,7 +25,7 @@ import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -38,15 +38,15 @@ import butterknife.Bind;
  */
 public class MeQoneActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.tv_title_left)
+    @BindView(R.id.tv_title_left)
     TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.tv_title_right)
+    @BindView(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.psv_view)
+    @BindView(R.id.psv_view)
     PhotoShowView psvView;
 
     /**

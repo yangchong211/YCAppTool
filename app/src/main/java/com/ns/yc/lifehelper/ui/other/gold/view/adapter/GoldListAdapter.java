@@ -19,7 +19,7 @@ import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -125,11 +125,11 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public static class ContentViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.tv_gold_item_title)
+        @BindView(R.id.tv_gold_item_title)
         TextView tvTitle;
-        @Bind(R.id.tv_gold_item_info)
+        @BindView(R.id.tv_gold_item_info)
         TextView tvInfo;
-        @Bind(R.id.iv_gold_item_img)
+        @BindView(R.id.iv_gold_item_img)
         ImageView ivImg;
 
         ContentViewHolder(View itemView) {
@@ -140,15 +140,15 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public  static class HotViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.tv_gold_item_title)
+        @BindView(R.id.tv_gold_item_title)
         TextView tvTitle;
-        @Bind(R.id.tv_gold_item_like)
+        @BindView(R.id.tv_gold_item_like)
         TextView tvLike;
-        @Bind(R.id.tv_gold_item_author)
+        @BindView(R.id.tv_gold_item_author)
         TextView tvAuthor;
-        @Bind(R.id.tv_gold_item_time)
+        @BindView(R.id.tv_gold_item_time)
         TextView tvTime;
-        @Bind(R.id.iv_gold_item_img)
+        @BindView(R.id.iv_gold_item_img)
         ImageView ivImg;
 
         HotViewHolder(View itemView) {
@@ -159,9 +159,9 @@ public class GoldListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public  static class TitleViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.tv_gold_hot_title)
+        @BindView(R.id.tv_gold_hot_title)
         TextView tvTitle;
-        @Bind(R.id.btn_gold_hot_close)
+        @BindView(R.id.btn_gold_hot_close)
         AppCompatButton btnClose;
 
         TitleViewHolder(View itemView) {

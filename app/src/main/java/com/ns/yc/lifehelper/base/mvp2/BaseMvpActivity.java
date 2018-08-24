@@ -13,6 +13,7 @@ import com.ns.yc.lifehelper.R;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 /**
@@ -28,13 +29,14 @@ public abstract class BaseMvpActivity<T extends BaseMvpPresenter> extends AppCom
 
     @Inject
     protected T mPresenter;
-
+    protected Unbinder unbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
+
         //避免切换横竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         YCAppBar.setStatusBarColor(this, R.color.colorTheme);
@@ -58,7 +60,7 @@ public abstract class BaseMvpActivity<T extends BaseMvpPresenter> extends AppCom
         if(mPresenter!=null){
             mPresenter.unSubscribe();
         }
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
 

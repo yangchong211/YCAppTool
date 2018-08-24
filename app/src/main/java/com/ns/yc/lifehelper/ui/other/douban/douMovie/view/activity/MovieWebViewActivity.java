@@ -32,7 +32,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.utils.AppUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -45,19 +45,19 @@ import butterknife.Bind;
  */
 public class MovieWebViewActivity extends BaseActivity {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.webView)
+    @BindView(R.id.webView)
     WebView mWebView;
-    @Bind(R.id.pb)
+    @BindView(R.id.pb)
     ProgressBar pb;
-    @Bind(R.id.video_fullView)
+    @BindView(R.id.video_fullView)
     FrameLayout videoFullView;
-    @Bind(R.id.ll_web_view)
+    @BindView(R.id.ll_web_view)
     LinearLayout llWebView;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
     private String alt;
     private String name;

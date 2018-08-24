@@ -19,7 +19,7 @@ import com.ns.yc.lifehelper.ui.other.myVideo.bean.VideoIconBean;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -32,13 +32,13 @@ import butterknife.Bind;
  */
 public class MyVideoActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.vp_pager)
+    @BindView(R.id.vp_pager)
     ViewPager vpPager;
-    @Bind(R.id.ll_dot)
+    @BindView(R.id.ll_dot)
     LinearLayout llDot;
 
     private String[] titles = {"本地", "电影", "酒店住宿", "休闲娱乐", "外卖", "自助餐", "KTV", "火车票", "周边游", "美甲美睫",

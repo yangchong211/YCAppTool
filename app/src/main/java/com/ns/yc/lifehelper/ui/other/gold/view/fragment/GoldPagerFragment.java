@@ -28,7 +28,7 @@ import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -41,9 +41,9 @@ import butterknife.Bind;
  */
 public class GoldPagerFragment extends BaseStateFragment implements GoldPagerContract.View {
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @Bind(R.id.refresher)
+    @BindView(R.id.refresher)
     SwipeRefreshLayout refresher;
 
     private GoldPagerContract.Presenter presenter = new GoldPagerPresenter(this);

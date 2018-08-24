@@ -11,8 +11,8 @@ import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.weight.imageView.TouchImageView;
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
+import butterknife.Unbinder;
 
 
 /**
@@ -26,7 +26,9 @@ import butterknife.ButterKnife;
  */
 public class LargePicFragment extends BaseFragment {
 
-    @Bind(R.id.image)
+    protected Unbinder unbinder;
+
+    @BindView(R.id.image)
     TouchImageView image;
     private MyPicLargeActivity activity;
     private String url;
@@ -89,6 +91,6 @@ public class LargePicFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 }

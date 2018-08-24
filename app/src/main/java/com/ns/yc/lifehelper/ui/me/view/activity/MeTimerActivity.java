@@ -10,7 +10,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.weight.WatcherBoard;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -25,27 +25,27 @@ import butterknife.Bind;
  */
 public class MeTimerActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.watch)
+    @BindView(R.id.watch)
     WatcherBoard watch;
-    @Bind(R.id.switch_night)
+    @BindView(R.id.switch_night)
     SwitchButton switchNight;
-    @Bind(R.id.tv_set_time)
+    @BindView(R.id.tv_set_time)
     TextView tvSetTime;
-    @Bind(R.id.rl_set_time)
+    @BindView(R.id.rl_set_time)
     RelativeLayout rlSetTime;
-    @Bind(R.id.tv_timer_sound)
+    @BindView(R.id.tv_timer_sound)
     TextView tvTimerSound;
-    @Bind(R.id.rl_timer_sound)
+    @BindView(R.id.rl_timer_sound)
     RelativeLayout rlTimerSound;
-    @Bind(R.id.tv_exit)
+    @BindView(R.id.tv_exit)
     TextView tvExit;
-    @Bind(R.id.tv_set_re)
+    @BindView(R.id.tv_set_re)
     TextView tvSetRe;
-    @Bind(R.id.rl_set_re)
+    @BindView(R.id.rl_set_re)
     RelativeLayout rlSetRe;
 
 

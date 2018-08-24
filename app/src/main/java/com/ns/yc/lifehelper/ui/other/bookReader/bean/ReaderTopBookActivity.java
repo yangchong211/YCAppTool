@@ -21,7 +21,7 @@ import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -38,15 +38,15 @@ import rx.android.schedulers.AndroidSchedulers;
 public class ReaderTopBookActivity extends BaseActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.elv_male)
+    @BindView(R.id.elv_male)
     CustomExpandableListView elvMale;
-    @Bind(R.id.elv_fe_male)
+    @BindView(R.id.elv_fe_male)
     CustomExpandableListView elvFeMale;
 
     private List<ReaderTopBookBean.MaleBean> maleGroups = new ArrayList<>();

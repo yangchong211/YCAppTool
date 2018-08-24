@@ -32,7 +32,7 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -47,21 +47,21 @@ import butterknife.Bind;
 public class WebViewQQActivity extends BaseActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.webView)
+    @BindView(R.id.webView)
     WebView webView;
-    @Bind(R.id.pb)
+    @BindView(R.id.pb)
     ProgressBar pb;
-    @Bind(R.id.fab_favorite)
+    @BindView(R.id.fab_favorite)
     FloatingActionButton fabFavorite;
-    @Bind(R.id.fab_top)
+    @BindView(R.id.fab_top)
     FloatingActionButton fabTop;
-    @Bind(R.id.ll_fab)
+    @BindView(R.id.ll_fab)
     LinearLayout llFab;
 
     private String title,url,imgUrl,id;

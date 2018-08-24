@@ -17,7 +17,7 @@ import com.squareup.picasso.Transformation;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -65,7 +65,7 @@ public abstract class PicBeautifulGroupAdapter extends ArrayRecyclerAdapter<PicB
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.iv_item)
+        @BindView(R.id.iv_item)
         public RadioImageView iv_item;
 
         public ViewHolder(@LayoutRes int resource, ViewGroup parent) {

@@ -8,11 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 import butterknife.ButterKnife;
-import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
+import butterknife.Unbinder;
 
 
 /**
@@ -30,12 +28,13 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
      * 将代理类通用行为抽出来
      */
     protected T mPresenter;
+    protected Unbinder unbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
         //避免切换横竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         if (mPresenter != null){
@@ -55,7 +54,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         if (mPresenter != null){
             mPresenter.unSubscribe();
         }
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         //测试内存泄漏，正式一定要隐藏
         initLeakCanary();
     }

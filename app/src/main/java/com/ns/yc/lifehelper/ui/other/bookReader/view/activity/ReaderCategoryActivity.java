@@ -23,7 +23,7 @@ import org.yczbj.ycrefreshviewlib.item.SupportGridItemLine;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -39,13 +39,13 @@ import rx.android.schedulers.AndroidSchedulers;
  */
 public class ReaderCategoryActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.rv_male)
+    @BindView(R.id.rv_male)
     RecyclerView rvMale;
-    @Bind(R.id.rv_female)
+    @BindView(R.id.rv_female)
     RecyclerView rvFemale;
     //private List<ReaderCategoryBean.MaleBean> mMaleCategoryList = new ArrayList<>();
     //private List<ReaderCategoryBean.MaleBean> mFemaleCategoryList = new ArrayList<>();

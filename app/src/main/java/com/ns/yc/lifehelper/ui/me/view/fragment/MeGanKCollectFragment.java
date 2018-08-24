@@ -26,7 +26,7 @@ import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 
@@ -41,7 +41,7 @@ import butterknife.Bind;
  */
 public class MeGanKCollectFragment extends BaseLazyFragment implements MeGanKCollectContract.View{
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
 
     private MeGanKCollectContract.Presenter presenter = new MeGanKCollectPresenter(this);

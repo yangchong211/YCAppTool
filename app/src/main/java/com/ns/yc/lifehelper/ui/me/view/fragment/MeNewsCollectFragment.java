@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 
@@ -37,7 +37,7 @@ import butterknife.Bind;
  */
 public class MeNewsCollectFragment extends BaseLazyFragment implements MeNewsCollectContract.View {
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
     private MeNewsCollectContract.Presenter presenter = new MeNewsCollectPresenter(this);

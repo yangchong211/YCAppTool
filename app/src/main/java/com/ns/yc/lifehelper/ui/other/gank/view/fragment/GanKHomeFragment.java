@@ -9,12 +9,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
 import com.ns.yc.lifehelper.base.mvp1.BaseLazyFragment;
 import com.ns.yc.lifehelper.ui.other.gank.bean.CategoryResult;
 import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
@@ -25,12 +23,11 @@ import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKWebActivity;
 import com.ns.yc.lifehelper.ui.other.gank.view.adapter.GanKHomeAdapter;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -44,7 +41,7 @@ import butterknife.Bind;
 public class GanKHomeFragment extends BaseLazyFragment implements GanKHomeFContract.View {
 
     private static final String TYPE = "type";
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private GanKHomeActivity activity;
     private String mType;

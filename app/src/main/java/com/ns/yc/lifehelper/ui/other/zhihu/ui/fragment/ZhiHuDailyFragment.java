@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -53,11 +53,11 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
         ZhiHuDailyContract.View, View.OnClickListener {
 
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @Bind(R.id.refresher)
+    @BindView(R.id.refresher)
     SwipeRefreshLayout refresher;
-    @Bind(R.id.fab)
+    @BindView(R.id.fab)
     FloatingActionButton fab;
 
     private ZhiHuNewsActivity activity;

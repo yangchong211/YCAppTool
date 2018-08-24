@@ -16,7 +16,7 @@ import com.ns.yc.lifehelper.utils.image.ImageUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ZhiHuSectionAdapter extends RecyclerView.Adapter<ZhiHuSectionAdapter.ViewHolder>{
@@ -62,9 +62,9 @@ public class ZhiHuSectionAdapter extends RecyclerView.Adapter<ZhiHuSectionAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.iv_theme_bg)
+        @BindView(R.id.iv_theme_bg)
         ImageView themeBg;
-        @Bind(R.id.tv_theme_kind)
+        @BindView(R.id.tv_theme_kind)
         TextView themeKind;
 
         public ViewHolder(View itemView) {

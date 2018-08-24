@@ -17,7 +17,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.weight.doodleView.DoodleView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 /**
  * ================================================
  * 作    者：杨充
@@ -31,13 +31,13 @@ import butterknife.Bind;
 
 public class DoodleViewActivity extends BaseActivity {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.dv_view)
+    @BindView(R.id.dv_view)
     DoodleView dvView;
 
     private AlertDialog mColorDialog;

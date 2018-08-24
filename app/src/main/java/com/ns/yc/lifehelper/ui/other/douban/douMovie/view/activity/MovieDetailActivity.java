@@ -29,7 +29,7 @@ import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -46,41 +46,41 @@ import rx.schedulers.Schedulers;
  */
 public class MovieDetailActivity extends BaseActivity {
 
-    @Bind(R.id.tv_content_title)
+    @BindView(R.id.tv_content_title)
     TextView tvContentTitle;
-    @Bind(R.id.tv_content_about)
+    @BindView(R.id.tv_content_about)
     TextView tvContentAbout;
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @Bind(R.id.iv_bg_image)
+    @BindView(R.id.iv_bg_image)
     ImageView ivBgImage;
-    @Bind(R.id.iv_header_photo)
+    @BindView(R.id.iv_header_photo)
     ImageView ivHeaderPhoto;
-    @Bind(R.id.tv_header_rating_rate)
+    @BindView(R.id.tv_header_rating_rate)
     TextView tvHeaderRatingRate;
-    @Bind(R.id.tv_header_rating_number)
+    @BindView(R.id.tv_header_rating_number)
     TextView tvHeaderRatingNumber;
-    @Bind(R.id.tv_header_directors)
+    @BindView(R.id.tv_header_directors)
     TextView tvHeaderDirectors;
-    @Bind(R.id.tv_header_casts)
+    @BindView(R.id.tv_header_casts)
     TextView tvHeaderCasts;
-    @Bind(R.id.tv_header_genres)
+    @BindView(R.id.tv_header_genres)
     TextView tvHeaderGenres;
-    @Bind(R.id.tv_header_day)
+    @BindView(R.id.tv_header_day)
     TextView tvHeaderDay;
-    @Bind(R.id.tv_header_city)
+    @BindView(R.id.tv_header_city)
     TextView tvHeaderCity;
-    @Bind(R.id.tv_name)
+    @BindView(R.id.tv_name)
     TextView tvName;
-    @Bind(R.id.tv_casts)
+    @BindView(R.id.tv_casts)
     TextView tvCasts;
-    @Bind(R.id.ll_tool_bar)
+    @BindView(R.id.ll_tool_bar)
     LinearLayout llToolBar;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.collapsing_toolbar)
+    @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-    @Bind(R.id.app_bar)
+    @BindView(R.id.app_bar)
     AppBarLayout appBar;
     private String id = "";
 

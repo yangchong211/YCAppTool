@@ -20,7 +20,7 @@ import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.yccustomtextlib.pwdEt.PasswordEditText;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -35,33 +35,33 @@ import butterknife.Bind;
  */
 public class MeRegisterActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.tv_title_left)
+    @BindView(R.id.tv_title_left)
     TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.iv_right_img)
+    @BindView(R.id.iv_right_img)
     ImageView ivRightImg;
-    @Bind(R.id.ll_search)
+    @BindView(R.id.ll_search)
     FrameLayout llSearch;
-    @Bind(R.id.tv_title_right)
+    @BindView(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.tv_person_username)
+    @BindView(R.id.tv_person_username)
     AutoCompleteTextView tvPersonUsername;
-    @Bind(R.id.tv_person_code)
+    @BindView(R.id.tv_person_code)
     AutoCompleteTextView tvPersonCode;
-    @Bind(R.id.tv_person_password)
+    @BindView(R.id.tv_person_password)
     PasswordEditText tvPersonPassword;
-    @Bind(R.id.tv_person_password_again)
+    @BindView(R.id.tv_person_password_again)
     PasswordEditText tvPersonPasswordAgain;
-    @Bind(R.id.cb_is_agree)
+    @BindView(R.id.cb_is_agree)
     CheckBox cbIsAgree;
-    @Bind(R.id.tv_about)
+    @BindView(R.id.tv_about)
     TextView tvAbout;
-    @Bind(R.id.btn_person_register)
+    @BindView(R.id.btn_person_register)
     Button btnPersonRegister;
 
     @Override

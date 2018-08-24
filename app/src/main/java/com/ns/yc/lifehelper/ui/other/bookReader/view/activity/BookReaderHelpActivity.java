@@ -14,7 +14,7 @@ import com.ns.yc.lifehelper.utils.EventBusUtils;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -28,11 +28,11 @@ import butterknife.Bind;
 public class BookReaderHelpActivity extends BaseActivity implements View.OnClickListener {
 
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.sl_layout)
+    @BindView(R.id.sl_layout)
     SelectionLayout slLayout;
 
 

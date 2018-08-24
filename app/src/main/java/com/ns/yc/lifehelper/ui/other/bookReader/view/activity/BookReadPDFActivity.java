@@ -11,7 +11,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.weight.pdfview.PDFViewPager;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -25,11 +25,11 @@ import butterknife.Bind;
  */
 public class BookReadPDFActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.llPdfRoot)
+    @BindView(R.id.llPdfRoot)
     LinearLayout llPdfRoot;
 
     @Override

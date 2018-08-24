@@ -18,7 +18,7 @@ import com.ns.yc.lifehelper.ui.other.workDo.ui.fragment.WorkSettingFragment;
 
 import java.util.Calendar;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import rx.functions.Action1;
 
 /**
@@ -32,11 +32,11 @@ import rx.functions.Action1;
  */
 public class WorkSettingActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.fl)
+    @BindView(R.id.fl)
     FrameLayout fl;
     private ProgressDialog mProgressDialog;
     private int mCurrIndex;

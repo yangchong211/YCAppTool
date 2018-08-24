@@ -33,7 +33,7 @@ import org.yczbj.ycvideoplayerlib.VideoPlayerUtils;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -47,15 +47,15 @@ import butterknife.Bind;
 public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
         View.OnClickListener , PageFragment.OnPageListener{
 
-    @Bind(R.id.tool_bar)
+    @BindView(R.id.tool_bar)
     Toolbar toolBar;
-    @Bind(R.id.tab)
+    @BindView(R.id.tab)
     TabLayout tab;
-    @Bind(R.id.vp_pager)
+    @BindView(R.id.vp_pager)
     ViewPager vpPager;
-    @Bind(R.id.fab_edit)
+    @BindView(R.id.fab_edit)
     FloatingActionButton fabEdit;
-    @Bind(R.id.cl_main)
+    @BindView(R.id.cl_main)
     CoordinatorLayout clMain;
 
     @Inject

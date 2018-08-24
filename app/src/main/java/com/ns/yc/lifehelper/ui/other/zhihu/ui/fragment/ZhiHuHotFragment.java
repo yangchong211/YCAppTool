@@ -28,7 +28,7 @@ import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -42,9 +42,9 @@ import butterknife.Bind;
  */
 public class ZhiHuHotFragment extends BaseStateFragment implements ZhiHuHotContract.View{
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @Bind(R.id.refresher)
+    @BindView(R.id.refresher)
     SwipeRefreshLayout refresher;
 
     private ZhiHuNewsActivity activity;

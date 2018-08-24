@@ -9,21 +9,20 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.SubCategoryAdapter;
-import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryList;
 import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
+import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.comment.Constant;
+import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderCategoryList;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.ReadBookDetailActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.SubCategoryListActivity;
+import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.SubCategoryAdapter;
 import com.ns.yc.lifehelper.utils.AppUtil;
 import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -42,7 +41,7 @@ import rx.schedulers.Schedulers;
 public class SubCategoryFragment extends BaseFragment {
 
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private SubCategoryListActivity activity;
     private String name = "";
@@ -80,7 +79,7 @@ public class SubCategoryFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     @Override

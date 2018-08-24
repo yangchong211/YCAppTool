@@ -10,7 +10,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.myTsSc.view.TangShiFirstActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 /**
  * ================================================
@@ -23,27 +23,27 @@ import butterknife.Bind;
  */
 public class TangShiActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.ll_search)
+    @BindView(R.id.ll_search)
     FrameLayout llSearch;
-    @Bind(R.id.rl_ts_first)
+    @BindView(R.id.rl_ts_first)
     RelativeLayout rlTsFirst;
-    @Bind(R.id.rl_ts_second)
+    @BindView(R.id.rl_ts_second)
     RelativeLayout rlTsSecond;
-    @Bind(R.id.rl_ts_three)
+    @BindView(R.id.rl_ts_three)
     RelativeLayout rlTsThree;
-    @Bind(R.id.rl_ts_four)
+    @BindView(R.id.rl_ts_four)
     RelativeLayout rlTsFour;
-    @Bind(R.id.rl_ts_five)
+    @BindView(R.id.rl_ts_five)
     RelativeLayout rlTsFive;
-    @Bind(R.id.rl_ts_six)
+    @BindView(R.id.rl_ts_six)
     RelativeLayout rlTsSix;
-    @Bind(R.id.rl_ts_seven)
+    @BindView(R.id.rl_ts_seven)
     RelativeLayout rlTsSeven;
-    @Bind(R.id.rl_ts_eight)
+    @BindView(R.id.rl_ts_eight)
     RelativeLayout rlTsEight;
 
     @Override

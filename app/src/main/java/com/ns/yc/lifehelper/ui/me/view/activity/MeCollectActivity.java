@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -37,11 +37,11 @@ import butterknife.Bind;
  */
 public class MeCollectActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.fl_title_menu)
+    @BindView(R.id.fl_title_menu)
     FrameLayout flTitleMenu;
-    @Bind(R.id.stl_table)
+    @BindView(R.id.stl_table)
     SlidingTabLayout stlTable;
-    @Bind(R.id.vp_content)
+    @BindView(R.id.vp_content)
     ViewPager vpContent;
 
     private final String[] mTitles = {"干货", "新闻", "图片","文件"};

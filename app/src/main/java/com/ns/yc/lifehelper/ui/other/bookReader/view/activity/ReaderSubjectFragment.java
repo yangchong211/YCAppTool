@@ -22,8 +22,7 @@ import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -39,7 +38,7 @@ import rx.android.schedulers.AndroidSchedulers;
  */
 public class ReaderSubjectFragment extends BaseFragment {
 
-    @Bind(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     YCRefreshView recyclerView;
     private ReaderSubjectActivity activity;
     private int tab;
@@ -77,7 +76,7 @@ public class ReaderSubjectFragment extends BaseFragment {
     public void onDestroyView() {
         //EventBus.getDefault().unregister(this);
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 
     @Override

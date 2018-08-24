@@ -10,7 +10,7 @@ import android.widget.FrameLayout;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -24,9 +24,9 @@ import butterknife.Bind;
  */
 public class BeautifulGroupActivity extends BaseActivity {
 
-    @Bind(R.id.content)
+    @BindView(R.id.content)
     FrameLayout content;
-    @Bind(R.id.group_toolbar)
+    @BindView(R.id.group_toolbar)
     Toolbar groupToolbar;
     private String groupId;
     private int color;

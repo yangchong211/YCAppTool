@@ -54,7 +54,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
@@ -75,25 +75,25 @@ import rx.schedulers.Schedulers;
  */
 public class NotePadNewActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+    @BindView(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
+    @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.tv_note_detail_date)
+    @BindView(R.id.tv_note_detail_date)
     TextView tvNoteDetailDate;
-    @Bind(R.id.tv_note_type)
+    @BindView(R.id.tv_note_type)
     TextView tvNoteType;
-    @Bind(R.id.et_new_title)
+    @BindView(R.id.et_new_title)
     EditText etNewTitle;
-    @Bind(R.id.et_new_content)
+    @BindView(R.id.et_new_content)
     HyperTextEditor etNewContent;
-    @Bind(R.id.cb_alarm)
+    @BindView(R.id.cb_alarm)
     CheckBox cbAlarm;
-    @Bind(R.id.tv_note_time)
+    @BindView(R.id.tv_note_time)
     TextView tvNoteTime;
-    @Bind(R.id.tv_note_date)
+    @BindView(R.id.tv_note_date)
     TextView tvNoteDate;
 
     private int maxImgCount = 5;                        //允许选择图片最大数
