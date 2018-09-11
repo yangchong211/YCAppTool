@@ -12,7 +12,7 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.ConstantBookReader;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.model.event.BookReaderSelectionEvent;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.BookDetailDiscussionActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.BookReaderDiscussionActivity;

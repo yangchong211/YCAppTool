@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.ConstantBookReader;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.model.event.BookReaderSelectionEvent;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.BookReaderReviewActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderReviewAdapter;

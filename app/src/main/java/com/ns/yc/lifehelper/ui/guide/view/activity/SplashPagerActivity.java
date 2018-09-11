@@ -13,7 +13,7 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.yc.cn.ycbannerlib.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
 import com.yc.cn.ycbannerlib.banner.inter.OnPageListener;
@@ -119,7 +119,7 @@ public class SplashPagerActivity extends BaseActivity {
         banner.setOnPageListener(new OnPageListener() {
             @Override
             public void onPageChange(int position) {
-                if(position==imageId.size()-1){
+                if(position>=0 && position==imageId.size()-1){
                     btnGo.setVisibility(View.VISIBLE);
                 }else {
                     btnGo.setVisibility(View.GONE);

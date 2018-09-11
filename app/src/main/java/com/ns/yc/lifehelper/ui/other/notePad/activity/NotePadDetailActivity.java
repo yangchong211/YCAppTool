@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.notePad.bean.NotePadDetail;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
 import com.ns.yc.lifehelper.utils.SDCardUtils;

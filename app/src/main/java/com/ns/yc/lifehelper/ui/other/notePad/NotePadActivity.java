@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.db.cache.CacheNotePad;
 import com.ns.yc.lifehelper.ui.other.notePad.activity.NotePadDetailActivity;

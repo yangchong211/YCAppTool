@@ -24,7 +24,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
 import com.ns.yc.lifehelper.ui.other.gank.contract.GanKWebContract;
 import com.ns.yc.lifehelper.ui.other.gank.presenter.GanKWebPresenter;

@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.MyKnowledgeActivity;
 import com.ns.yc.lifehelper.ui.other.myKnowledge.adapter.GanKAndroidAdapter;

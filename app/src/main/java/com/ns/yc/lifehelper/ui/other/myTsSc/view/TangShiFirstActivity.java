@@ -19,7 +19,7 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantJsApi;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.other.myTsSc.adapter.TangShiAdapter;
 import com.ns.yc.lifehelper.ui.other.myTsSc.bean.TangShiChapter;

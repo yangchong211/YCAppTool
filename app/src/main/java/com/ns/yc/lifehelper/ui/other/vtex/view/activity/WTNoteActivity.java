@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.adapter.WTNodeAdapter;
 import com.ns.yc.lifehelper.utils.XmlUtil;
 

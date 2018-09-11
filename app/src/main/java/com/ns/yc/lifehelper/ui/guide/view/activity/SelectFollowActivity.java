@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.model.bean.SelectPoint;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;

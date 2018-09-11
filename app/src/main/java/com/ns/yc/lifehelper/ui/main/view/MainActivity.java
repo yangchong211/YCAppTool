@@ -2,7 +2,6 @@ package com.ns.yc.lifehelper.ui.main.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -29,7 +28,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.factory.FragmentFactory;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.inter.listener.PerfectClickListener;
 import com.ns.yc.lifehelper.ui.main.contract.MainContract;
 import com.ns.yc.lifehelper.ui.main.presenter.MainPresenter;
@@ -48,8 +47,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
-import cn.ycbjie.ycstatusbarlib.dlBar.StatusBarUtils;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -307,7 +304,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
 
             @Override
             public void onPageSelected(int position) {
-                ctlTable.setCurrentTab(position);
+                if(position>=0){
+                    ctlTable.setCurrentTab(position);
+                }
             }
 
             @Override

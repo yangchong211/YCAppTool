@@ -3,8 +3,8 @@ package com.ns.yc.lifehelper.ui.webView.contract;
 
 import android.app.Activity;
 
-import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp1.BaseView;
+import com.ns.yc.lifehelper.base.mvp.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp.BaseView;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhihuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 

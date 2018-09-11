@@ -27,7 +27,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.bumptech.glide.Glide;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.webView.view.WebViewQQActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.contract.TxWeChatContract;
 import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WeChatBean;

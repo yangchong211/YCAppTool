@@ -23,7 +23,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuDetailExtraBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhihuDetailBean;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.activity.ZhiHuCommentActivity;

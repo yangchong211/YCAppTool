@@ -4,15 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -25,8 +22,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.inter.listener.NoDoubleClickListener;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.model.bean.ImageIconBean;
 import com.ns.yc.lifehelper.ui.data.contract.DataFragmentContract;
 import com.ns.yc.lifehelper.ui.data.presenter.DataFragmentPresenter;
@@ -41,7 +37,6 @@ import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.WTexNewsActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
-import com.ns.yc.lifehelper.utils.FileUtils;
 import com.ns.yc.lifehelper.utils.bitmap.BitmapSaveUtils;
 import com.ns.yc.lifehelper.utils.bitmap.BitmapUtils;
 import com.ns.yc.lifehelper.weight.gridview.ImageGridView;
@@ -57,10 +52,8 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;
-import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
 
 
 /**

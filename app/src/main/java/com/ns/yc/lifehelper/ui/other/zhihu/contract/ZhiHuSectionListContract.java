@@ -1,8 +1,8 @@
 package com.ns.yc.lifehelper.ui.other.zhihu.contract;
 
 
-import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp1.BaseView;
+import com.ns.yc.lifehelper.base.mvp.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp.BaseView;
 import com.ns.yc.lifehelper.ui.other.zhihu.model.bean.ZhiHuSectionChildBean;
 
 /**

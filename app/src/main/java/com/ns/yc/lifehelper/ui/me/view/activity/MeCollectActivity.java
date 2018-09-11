@@ -1,6 +1,5 @@
 package com.ns.yc.lifehelper.ui.me.view.activity;
 
-import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -9,7 +8,7 @@ import android.widget.FrameLayout;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MeDocCollectFragment;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MeGanKCollectFragment;
@@ -19,7 +18,6 @@ import com.ns.yc.lifehelper.ui.me.view.fragment.MePicCollectFragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import butterknife.Bind;

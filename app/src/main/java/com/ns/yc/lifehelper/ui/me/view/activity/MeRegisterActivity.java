@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.yccustomtextlib.pwdEt.PasswordEditText;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 

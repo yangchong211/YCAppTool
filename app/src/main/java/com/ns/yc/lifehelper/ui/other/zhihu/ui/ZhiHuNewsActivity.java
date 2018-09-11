@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.fragment.ZhiHuDailyFragment;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.fragment.ZhiHuHotFragment;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.fragment.ZhiHuSectionFragment;

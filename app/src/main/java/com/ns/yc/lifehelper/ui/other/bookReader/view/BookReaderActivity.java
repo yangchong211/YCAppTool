@@ -16,7 +16,7 @@ import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.activity.BookReaderLocalActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.fragment.CommunityFragment;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.fragment.ReaderFindFragment;

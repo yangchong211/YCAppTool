@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.douban.douMovie.view.adapter.MovieTopAdapter;
 import com.ns.yc.lifehelper.ui.other.douban.douMovie.bean.DouHotMovieBean;
 import com.ns.yc.lifehelper.api.http.douban.TopMovieModel;

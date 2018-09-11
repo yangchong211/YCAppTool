@@ -9,15 +9,13 @@ import android.widget.ImageView;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.GuidePresenter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.utils.image.ImageUtils;
 import com.ns.yc.yccountdownviewlib.CountDownView;
 import com.squareup.picasso.Callback;
-
-import java.util.ArrayList;
 
 import butterknife.Bind;
 import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
@@ -31,8 +29,7 @@ import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
  *     revise:
  * </pre>
  */
-public class GuideActivity extends BaseActivity<GuidePresenter> implements
-        GuideContract.View ,View.OnClickListener {
+public class GuideActivity extends BaseActivity<GuidePresenter> implements GuideContract.View ,View.OnClickListener {
 
     @Bind(R.id.iv_splash_ad)
     ImageView ivSplashAd;

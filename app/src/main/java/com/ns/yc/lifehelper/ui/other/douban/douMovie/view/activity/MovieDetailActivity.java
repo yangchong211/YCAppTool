@@ -19,7 +19,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.Constant;
 import com.ns.yc.lifehelper.api.http.douban.DetailMovieModel;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.douban.douMovie.bean.DouMovieDetailBean;
 import com.ns.yc.lifehelper.ui.other.douban.douMovie.view.adapter.MovieDetailAdapter;

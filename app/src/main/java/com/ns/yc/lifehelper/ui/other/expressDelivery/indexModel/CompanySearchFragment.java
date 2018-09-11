@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

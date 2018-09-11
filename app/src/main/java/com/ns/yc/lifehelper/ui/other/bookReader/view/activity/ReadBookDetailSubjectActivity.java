@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.BookDetailSubjectAdapter;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookSubjectList;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.ReaderSubjectBean;

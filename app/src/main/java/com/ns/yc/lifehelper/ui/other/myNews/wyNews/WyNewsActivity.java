@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.bean.TodayNewsChannel;

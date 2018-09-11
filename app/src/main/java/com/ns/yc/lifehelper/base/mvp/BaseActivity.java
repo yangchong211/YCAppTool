@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base.mvp1;
+package com.ns.yc.lifehelper.base.mvp;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -8,11 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 import butterknife.ButterKnife;
-import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
 
 
 /**

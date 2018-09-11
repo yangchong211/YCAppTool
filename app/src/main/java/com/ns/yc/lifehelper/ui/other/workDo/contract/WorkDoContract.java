@@ -4,8 +4,8 @@ package com.ns.yc.lifehelper.ui.other.workDo.contract;
 import android.content.Intent;
 import android.view.MenuItem;
 
-import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp1.BaseView;
+import com.ns.yc.lifehelper.base.mvp.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp.BaseView;
 import com.ns.yc.lifehelper.ui.other.workDo.model.TaskDetailEntity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.adapter.WorkPageAdapter;
 

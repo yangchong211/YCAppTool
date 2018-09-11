@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.IntentUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.ycmultiinputviewlib.MultiEditInputView;
 import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
 

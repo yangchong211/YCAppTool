@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp.BasePresenter;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 
 import butterknife.ButterKnife;

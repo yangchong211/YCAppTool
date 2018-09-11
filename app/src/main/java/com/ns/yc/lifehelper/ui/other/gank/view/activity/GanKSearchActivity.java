@@ -27,7 +27,7 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
 import com.ns.yc.lifehelper.ui.other.gank.bean.SearchHistory;

@@ -1,6 +1,6 @@
 package com.ns.yc.lifehelper.ui.other.vtex.view.activity;
 
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 
 /**
  * Created by PC on 2017/12/11.

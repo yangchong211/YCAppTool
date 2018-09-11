@@ -29,7 +29,7 @@ import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.db.cache.CacheNotePad;
 import com.ns.yc.lifehelper.inter.listener.OnDatePickListener;

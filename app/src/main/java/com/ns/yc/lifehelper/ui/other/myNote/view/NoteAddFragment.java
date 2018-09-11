@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.utils.animation.AnimationsUtils;
 import com.ns.yc.lifehelper.weight.imageView.NoteItemCircleView;
 

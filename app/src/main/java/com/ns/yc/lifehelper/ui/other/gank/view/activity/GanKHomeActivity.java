@@ -23,7 +23,7 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ns.yc.lifehelper.ui.other.gank.callback.PicassoPalette;

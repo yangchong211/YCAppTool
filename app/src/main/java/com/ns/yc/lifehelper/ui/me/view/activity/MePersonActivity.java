@@ -28,7 +28,7 @@ import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.inter.listener.MePersonBaseListener;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MePersonFragment;

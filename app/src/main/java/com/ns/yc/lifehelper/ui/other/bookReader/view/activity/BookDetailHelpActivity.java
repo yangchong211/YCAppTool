@@ -17,7 +17,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantZssqApi;
 import com.ns.yc.lifehelper.api.http.bookReader.BookReaderModel;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.inter.listener.OnRvItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailBookHelp;
 import com.ns.yc.lifehelper.ui.other.bookReader.bean.DetailDiscussionComment;

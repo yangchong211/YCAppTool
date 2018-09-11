@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.vtex.contract.WTexPagerContract;
 import com.ns.yc.lifehelper.ui.other.vtex.model.bean.TopicListBean;
 import com.ns.yc.lifehelper.ui.other.vtex.presenter.WTexPagerPresenter;

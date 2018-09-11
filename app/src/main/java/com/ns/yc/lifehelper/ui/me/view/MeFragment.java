@@ -12,7 +12,7 @@ import com.blankj.utilcode.util.IntentUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.config.AppConfig;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.inter.listener.NoDoubleClickListener;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;

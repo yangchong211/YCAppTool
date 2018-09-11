@@ -10,8 +10,7 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
-import com.ns.yc.lifehelper.base.mvp1.BaseLazyFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseLazyFragment;
 import com.ns.yc.lifehelper.ui.other.douban.douBook.contract.DouBookContract;
 import com.ns.yc.lifehelper.ui.other.douban.douBook.presenter.DouBookPresenter;
 import com.ns.yc.lifehelper.ui.other.douban.douBook.view.DouBookActivity;

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.other.gold.contract.GoldMainContract;
 import com.ns.yc.lifehelper.ui.other.gold.model.GoldManagerBean;

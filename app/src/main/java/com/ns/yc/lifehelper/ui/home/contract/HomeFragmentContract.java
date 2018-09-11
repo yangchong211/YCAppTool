@@ -3,8 +3,8 @@ package com.ns.yc.lifehelper.ui.home.contract;
 
 import android.graphics.Bitmap;
 
-import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp1.BaseView;
+import com.ns.yc.lifehelper.base.mvp.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp.BaseView;
 import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 

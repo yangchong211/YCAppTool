@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
 import com.ns.yc.lifehelper.ui.other.myPicture.adapter.PictureOtherAdapter;
 

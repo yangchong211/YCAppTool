@@ -2,8 +2,8 @@ package com.ns.yc.lifehelper.ui.main.contract;
 
 
 import com.flyco.tablayout.listener.CustomTabEntity;
-import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp1.BaseView;
+import com.ns.yc.lifehelper.base.mvp.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp.BaseView;
 
 import java.util.ArrayList;
 

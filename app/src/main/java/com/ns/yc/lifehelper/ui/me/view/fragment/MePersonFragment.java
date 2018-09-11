@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 
 /**

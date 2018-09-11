@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.ui.webView.js;
 
 import android.content.Context;
 
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.ycutilslib.activityManager.AppManager;
 import com.tencent.smtt.sdk.WebView;
 

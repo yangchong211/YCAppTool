@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseLazyFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseLazyFragment;
 import com.ns.yc.lifehelper.ui.me.contract.MeGanKCollectContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeGanKCollectPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;

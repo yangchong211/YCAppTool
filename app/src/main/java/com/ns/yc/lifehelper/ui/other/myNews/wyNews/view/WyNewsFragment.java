@@ -14,7 +14,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.api.constantApi.ConstantALiYunApi;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.WyNewsActivity;
 import com.ns.yc.lifehelper.ui.other.myNews.wyNews.adapter.TodayNewsAdapter;

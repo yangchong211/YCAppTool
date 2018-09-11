@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.contract.WorkDoContract;
 import com.ns.yc.lifehelper.ui.other.workDo.dagger.DaggerUiComponent;
 import com.ns.yc.lifehelper.ui.other.workDo.dagger.UiModule;

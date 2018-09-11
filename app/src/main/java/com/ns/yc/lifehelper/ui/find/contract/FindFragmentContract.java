@@ -5,8 +5,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
-import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp1.BaseView;
+import com.ns.yc.lifehelper.base.mvp.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp.BaseView;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.BannerView;
 

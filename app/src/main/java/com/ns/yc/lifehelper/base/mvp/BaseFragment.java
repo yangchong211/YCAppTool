@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base.mvp1;
+package com.ns.yc.lifehelper.base.mvp;
 
 import android.content.Intent;
 import android.os.Bundle;

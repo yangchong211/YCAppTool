@@ -16,7 +16,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseFragment;
+import com.ns.yc.lifehelper.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.BookReaderActivity;
 import com.ns.yc.lifehelper.ui.other.bookReader.view.adapter.ReaderFindAdapter;

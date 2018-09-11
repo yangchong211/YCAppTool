@@ -5,8 +5,8 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.graphics.Palette;
 
-import com.ns.yc.lifehelper.base.mvp1.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp1.BaseView;
+import com.ns.yc.lifehelper.base.mvp.BasePresenter;
+import com.ns.yc.lifehelper.base.mvp.BaseView;
 
 /**
  * ================================================

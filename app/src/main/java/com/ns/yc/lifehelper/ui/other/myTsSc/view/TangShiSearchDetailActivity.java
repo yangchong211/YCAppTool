@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 
 import butterknife.Bind;
 

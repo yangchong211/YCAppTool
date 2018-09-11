@@ -23,7 +23,7 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.base.mvp1.BaseActivity;
+import com.ns.yc.lifehelper.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.db.cache.CacheZhLike;
 import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
 import com.ns.yc.lifehelper.utils.DoShareUtils;
