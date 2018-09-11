@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
 /**
@@ -47,28 +45,8 @@ public class InitializeService extends IntentService {
     }
 
     private void initApplication() {
-        initBugly();
         initQQX5();
         initUtils();
-    }
-
-
-    /**
-     * 初始化腾讯bug管理平台
-     */
-    private void initBugly() {
-        /* SDK初始化
-        * 参数1：上下文对象
-        * 参数2：APPID，平台注册时得到,注意替换成你的appId
-        * 参数3：是否开启调试模式，调试模式下会输出'CrashReport'tag的日志
-        * 注意：如果您之前使用过Bugly SDK，请将以下这句注释掉。
-        */
-        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(getApplicationContext());
-        strategy.setAppVersion(AppUtils.getAppVersionName());
-        strategy.setAppPackageName(AppUtils.getAppPackageName());
-        //会在启动20s后联网同步数据
-        strategy.setAppReportDelay(20000);
-        CrashReport.initCrashReport(getApplicationContext(), "a3f5f3820f", false ,strategy);
     }
 
 

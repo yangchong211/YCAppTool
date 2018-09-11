@@ -190,9 +190,6 @@
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"/>
 
-
-        <include layout="@layout/include_grid_image"/>
-
     </LinearLayout>
 
 </com.ns.yc.ycutilslib.scrollView.NoNestedScrollview>

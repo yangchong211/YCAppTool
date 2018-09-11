@@ -182,9 +182,9 @@
 
     <!--数据页图片对应的位子-->
     <string-array name="data_pro_title">
-        <item>快递</item>
-        <item>天气</item>
-        <item>记事</item>
+        <item>查询快递</item>
+        <item>保存图片</item>
+        <item>我的记事</item>
         <item>工商</item>
         <item>画廊</item>
         <item>Wt新闻</item>

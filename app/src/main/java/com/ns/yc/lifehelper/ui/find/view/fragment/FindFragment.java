@@ -52,8 +52,7 @@ import butterknife.Bind;
  *             v1.5 17年10月3日修改
  * </pre>
  */
-public class FindFragment extends BaseFragment<FindFragmentPresenter>
-        implements FindFragmentContract.View {
+public class FindFragment extends BaseFragment<FindFragmentPresenter> implements FindFragmentContract.View {
 
 
     @Bind(R.id.recyclerView)

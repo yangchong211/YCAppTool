@@ -59,14 +59,6 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
         this.activity = activity;
     }
 
-    @Override
-    public ArrayList<String> initGvImageData() {
-        ArrayList<String> list = new ArrayList<>();
-        List<String> strings = Arrays.asList(ConstantImageApi.SPALSH_URLS);
-        list.addAll(strings);
-        return list;
-    }
-
 
     @Override
     public List<ImageIconBean> getVpData() {

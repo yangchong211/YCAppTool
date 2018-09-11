@@ -93,7 +93,6 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.height = SizeUtils.dp2px(100);
-            banner.setLayoutParams(layoutParams);
             ((TopViewHolder) holder).banner.setLayoutParams(layoutParams);
             ((TopViewHolder) holder).banner.setAdapter(mAdapter);
             banner = ((TopViewHolder) holder).banner;

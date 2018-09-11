@@ -146,6 +146,7 @@
         <activity android:name=".ui.me.view.activity.MeQoneActivity"/>
         <activity android:name=".ui.me.view.activity.MeLoginActivity"/>
         <activity android:name=".ui.me.view.activity.MeRegisterActivity"/>
+        <activity android:name=".ui.other.myPicture.view.activity.ImageGvActivity"/>
 
         <activity
             android:name=".ui.other.workDo.ui.activity.SearchListActivity"

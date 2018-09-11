@@ -4,7 +4,7 @@ apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.ns.yc.lifehelper"
@@ -67,14 +67,6 @@ android {
 
 }
 
-//腾讯bug管理插件
-apply plugin: 'bugly'
-bugly {
-    appId = '<a3f5f3820f>' // 注册时分配的App ID
-    appKey = '<d9753a2c-4187-47a8-a843-a00474df0caa>' // 注册时分配的App Key
-}
-
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //官方库
@@ -123,9 +115,6 @@ dependencies {
     compile('com.alibaba.android:vlayout:1.2.2@aar') {
         transitive = true
     }
-    //腾讯bug管理平台
-    compile 'com.tencent.bugly:crashreport:2.6.0'
-    compile 'com.tencent.bugly:nativecrashreport:3.3.0'
     //腾讯x5
     compile files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
 

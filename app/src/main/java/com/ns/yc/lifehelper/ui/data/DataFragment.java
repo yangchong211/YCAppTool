@@ -34,6 +34,7 @@ import com.ns.yc.lifehelper.ui.data.view.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.other.expressDelivery.ExpressDeliveryActivity;
 import com.ns.yc.lifehelper.ui.other.myNote.NoteActivity;
+import com.ns.yc.lifehelper.ui.other.myPicture.view.activity.ImageGvActivity;
 import com.ns.yc.lifehelper.ui.other.vtex.view.WTexNewsActivity;
 import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
 import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
@@ -82,17 +83,11 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     TextView tvNewsZhiHu;
     @Bind(R.id.recyclerView)
     YCRefreshView recyclerView;
-    @Bind(R.id.gv_img)
-    ImageGridView gvImg;
-    @Bind(R.id.tv_save)
-    TextView tvSave;
-    @Bind(R.id.tv_share)
-    TextView tvShare;
+
 
     private MainActivity activity;
     private NarrowImageAdapter adapter;
     private DataFragmentContract.Presenter presenter = new DataFragmentPresenter(this);
-    private ArrayList<String> list;
 
     @Override
     public void onAttach(Context context) {
@@ -123,7 +118,6 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     public void initListener() {
         tvNoteEdit.setOnClickListener(this);
         tvNewsZhiHu.setOnClickListener(this);
-        tvSave.setOnClickListener(this);
     }
 
 
@@ -131,15 +125,6 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     public void initData() {
         presenter.initGridViewData();
         presenter.initRecycleViewData();
-        list = presenter.initGvImageData();
-        if(list!=null && list.size()>0){
-            gvImg.setUri(list, new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                }
-            });
-        }
     }
 
 
@@ -151,10 +136,6 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 break;
             case R.id.tv_news_zhi_hu:
                 startActivity(ZhiHuNewsActivity.class);
-                break;
-            case R.id.tv_save:
-                ToastUtil.showToast(activity,"开始保存");
-                saveBitmapImage(list);
                 break;
             default:
                 break;
@@ -186,7 +167,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                                 startActivity(ExpressDeliveryActivity.class);
                                 break;
                             case 1:
-
+                                startActivity(ImageGvActivity.class);
                                 break;
                             case 2:
                                 startActivity(NoteActivity.class);
@@ -314,47 +295,5 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
             }
         });
     }
-
-
-    private void saveBitmapImage(final ArrayList<String> list) {
-        PoolThread executor = BaseApplication.getInstance().getExecutor();
-        // 启动异步任务
-        executor.async(new Callable<List<Bitmap>>(){
-            @Override
-            public List<Bitmap> call() throws Exception {
-                List<Bitmap> bitmaps = new ArrayList<>();
-                for (int i = 0; i < list.size(); i++) {
-                    String str = list.get(i);
-                    Bitmap bitmap = BitmapUtils.returnBitMap(str);
-                    bitmaps.add(bitmap);
-                }
-                return bitmaps;
-            }
-        }, new AsyncCallback<List<Bitmap>>() {
-            @Override
-            public void onSuccess(List<Bitmap> bitmaps) {
-                Log.e("AsyncCallback","成功");
-                for (Bitmap bitmap : bitmaps){
-                    BitmapSaveUtils.saveBitmap(activity, bitmap, null, true);
-                }
-                ToastUtil.showToast(activity,"保存成功");
-            }
-
-            @Override
-            public void onFailed(Throwable t) {
-                Log.e("AsyncCallback","失败");
-                ToastUtil.showToast(activity,"保存失败");
-            }
-
-            @Override
-            public void onStart(String threadName) {
-                Log.e("AsyncCallback","开始");
-            }
-        });
-
-
-
-    }
-
 
 }

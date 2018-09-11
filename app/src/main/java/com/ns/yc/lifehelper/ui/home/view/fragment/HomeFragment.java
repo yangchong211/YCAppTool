@@ -79,11 +79,15 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
             super.handleMessage(msg);
             switch (msg.what){
                 case 1:
-                    cardViewLayout.setVisibility(View.VISIBLE);
+                    if (cardViewLayout!=null){
+                        cardViewLayout.setVisibility(View.VISIBLE);
+                    }
                     updateGalleryView();
                     break;
                 case 2:
-                    cardViewLayout.setVisibility(View.GONE);
+                    if (cardViewLayout!=null){
+                        cardViewLayout.setVisibility(View.GONE);
+                    }
                     break;
                 default:
                     break;

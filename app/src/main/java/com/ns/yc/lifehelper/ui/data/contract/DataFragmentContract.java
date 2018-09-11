@@ -33,7 +33,6 @@ public interface DataFragmentContract {
         void initGridViewData();
         void initRecycleViewData();
         void bindActivity(MainActivity activity);
-        ArrayList<String> initGvImageData();
     }
 
 

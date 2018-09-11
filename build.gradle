@@ -12,7 +12,6 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.3.2'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath "io.realm:realm-gradle-plugin:3.3.2"
-        classpath 'com.tencent.bugly:symtabfileuploader:2.1.0'
     }
 }
 
