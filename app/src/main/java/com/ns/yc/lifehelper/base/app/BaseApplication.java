@@ -67,7 +67,6 @@ public class BaseApplication extends Application {
         BaseLifecycleCallback.getInstance().init(this);
         initRealm();
         initThreadPool();
-        AppConfig.INSTANCE.initConfig();
         //在子线程中初始化
         InitializeService.start(this);
     }

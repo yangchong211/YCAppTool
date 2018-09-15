@@ -164,6 +164,7 @@
         <!--服务-->
         <service android:name=".service.PicBeautifulService"/>
         <service android:name=".service.PicGroupService"/>
+        <service android:name=".service.InitializeService"/>
         <service
             android:name=".service.WorkDoNotifyService"
             android:enabled="true"
