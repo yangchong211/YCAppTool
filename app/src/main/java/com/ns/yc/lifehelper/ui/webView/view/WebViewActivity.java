@@ -313,6 +313,7 @@ public class WebViewActivity extends BaseActivity {
      * 添加javascript监听
      */
     private class MyWebViewClient extends WebViewClient {
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             LogUtils.e("WebViewActivity-----shouldOverrideUrlLoading-------"+url);
