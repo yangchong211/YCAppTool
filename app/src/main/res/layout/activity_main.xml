@@ -7,15 +7,47 @@
     android:background="@color/colorWhite">
 
     <!--主页面布局-->
-    <LinearLayout
-        android:id="@+id/ll_main"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <include layout="@layout/base_title_bar"/>
-        <include layout="@layout/view_pager_main"/>
-        <include layout="@layout/activity_main_content"/>
-    </LinearLayout>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include layout="@layout/base_title_bar"/>
+            <include layout="@layout/view_pager_main"/>
+            <include layout="@layout/activity_main_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_main_button"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingEnd="5dp"
+            android:layout_gravity="end|bottom"
+            android:background="@drawable/shape_button_tran_bg"
+            android:layout_marginBottom="100dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/iv_anim_view"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/ic_sales_manager"/>
+            <TextView
+                android:id="@+id/tv_anim_view"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/about_me_more"
+                android:textSize="@dimen/textSize10" />
+        </LinearLayout>
+    </FrameLayout>
 
 
     <!--主页面侧滑菜单-->
@@ -25,7 +57,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/colorWhite"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <include
             layout="@layout/nav_bottom_set"

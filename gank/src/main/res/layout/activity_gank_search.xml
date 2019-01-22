@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteBg"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_search"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:titleTextColor="@android:color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingRight="15dp">
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/ed_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="搜索试试"
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true"
+                    android:textSize="16sp"/>
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_edit_clear"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="8dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_edit_clear"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@null"
+                    android:tint="@android:color/white"
+                    app:srcCompat="@drawable/ic_search_gank"
+                    tools:ignore="VectorDrawableCompat" />
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_search_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="搜索历史"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/tv_search_clean"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:padding="5dp"
+                android:text="清理记录"
+                android:textColor="@color/redTab"
+                android:textSize="12sp"/>
+        </LinearLayout>
+        <View style="@style/DeepUnderLine"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_search_history"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"/>
+    </LinearLayout>
+
+
+    <org.yczbj.ycrefreshviewlib.YCRefreshView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/recyclerView"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_progress="@layout/view_custom_loading_data"
+        app:layout_empty="@layout/view_custom_empty_data"
+        app:layout_error="@layout/view_custom_data_error"/>
+
+</LinearLayout>

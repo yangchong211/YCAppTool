@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ycbjie.music">
+
+    <application>
+
+        <activity android:name=".ui.activity.MusicActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".ui.activity.MusicInfoActivity"/>
+        <activity android:name=".ui.activity.OnlineMusicActivity"/>
+        <activity android:name=".ui.activity.ArtistInfoActivity"/>
+        <service android:name=".service.PlayService" />
+        <receiver android:name=".receiver.NotificationStatusBarReceiver">
+            <intent-filter>
+                <action android:name="YC_ACTION_STATUS_BAR" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.EarphoneControlReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.AudioBroadcastReceiver">
+            <intent-filter>
+                <action android:name="cn.ycbjie.lock" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+
+
+</manifest>

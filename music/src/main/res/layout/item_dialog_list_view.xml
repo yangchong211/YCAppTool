@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <View
+        android:id="@+id/v_playing"
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="3dp"
+        android:background="@color/redTab"
+        android:contentDescription="@null"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:textColor="@color/blackText"
+        android:text="歌曲名称"/>
+
+
+    <TextView
+        android:id="@+id/tv_author"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:maxLength="15"
+        android:ellipsize="end"
+        android:textSize="14sp"
+        android:textColor="@color/blackText2"
+        android:text="曲歌作者"/>
+
+
+    <ImageView
+        android:id="@+id/iv_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/ic_album_item_delete"/>
+
+</LinearLayout>

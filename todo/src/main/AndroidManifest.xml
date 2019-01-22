@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ycbjie.todo" >
+
+    <application>
+        <activity android:name="com.ycbjie.todo.ui.WorkDoActivity"/>
+        <activity android:name="com.ycbjie.todo.ui.activity.WorkNewActivity"/>
+        <activity android:name="com.ycbjie.todo.ui.activity.WorkSettingActivity"/>
+        <activity
+            android:name="com.ycbjie.todo.ui.activity.SearchListActivity"
+            android:label="任务"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/work_do_search"/>
+        </activity>
+        <service
+            android:name="com.ycbjie.todo.service.WorkDoNotifyService"
+            android:enabled="true"
+            android:exported="true"/>
+    </application>
+
+
+
+</manifest>

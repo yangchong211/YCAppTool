@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--注意：ViewPager和GridView，条目不能用相对布局或者线性布局嵌套，否则异常-->
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+<GridView
+    xmlns:android="http://schemas.android.com/apk/res/android"
           android:id="@+id/gridView"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

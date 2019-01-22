@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_lib_name">Library</string>
+
+
+    <string name="title_1">Cool card</string>
+    <string name="title_2">Ok card</string>
+    <string name="title_3">Bad card</string>
+    <string name="title_4">Ugly card</string>
+    <string name="text_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Etiam eget ligula eu lectus lobortis condimentum.</string>
+    <string name="introduce">项目整体架构模式采用：组件化+MVP+Rx+Retrofit+design+Dagger2+阿里VLayout+腾讯X5+腾讯bugly
+        \n\n此项目属于业余时间练手的项目，接口数据来源均来自网络，自己付费购买了阿里云和极速网络接口数据，同时使用了部分免费接口，如果存在侵权情况，请第一时间告知
+        \n\n本项目仅做学习交流使用，API数据内容所有权归原作公司所有，请勿用于其他用途
+        \n\n我的 GitHub: https://github.com/yangchong211/
+        \n\n我的 知乎: https://www.zhihu.com/people/yang-chong-69-24/pins/posts
+        \n\n我的 CSDN: http://my.csdn.net/m0_37700275
+        \n\n我的 喜马拉雅: http://www.ximalaya.com/zhubo/71989305/
+        \n\n完全开源，最佳的源代码，最佳的学习软件，如果你觉得不错，可以关注，可以star，可以帮忙分享给你更多的朋友，这是我们最大的动力和支持，非常感谢！
+        </string>
+
+    <string name="data_timer_note">时光日志</string>
+    <string name="data_news_zhi_hu">知乎日报</string>
+    <string name="data_new_look">最新观察</string>
+    <string name="data_small_tool">实用工具</string>
+    <string name="data_edit">编辑笔记</string>
+
+
+    <string name="easy_permissions">该APP需要您允许打开电话，拍摄照片和访问设备上的文件的权限</string>
+    <string name="video_news_header_title">我们已经为你精选了5门课程，帮助你了解投资方面的逻辑，以便做出正确的选择</string>
+    <string name="video_news_header_place">298元，一键购买</string>
+
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="setting">设置中心</string>
+    <string name="more">关于更多</string>
+    <!--登录注册相关-->
+    <string name="login_state">正在玩命登录</string>
+    <string name="register_state">正在玩命注册</string>
+
+</resources>

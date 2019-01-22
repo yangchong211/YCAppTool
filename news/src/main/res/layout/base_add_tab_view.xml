@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/base_tool_bar"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/whiteBg">
+        <android.support.design.widget.TabLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tab_layout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            app:tabIndicatorColor="@color/colorTheme"
+            app:tabSelectedTextColor="@color/colorTheme"
+            app:tabTextColor="@color/blackText" />
+        <FrameLayout
+            android:id="@+id/iv_add"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/grayLine">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/actionbar_icon_add"/>
+        </FrameLayout>
+    </LinearLayout>
+
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff2f4f5"/>
+
+
+</LinearLayout>

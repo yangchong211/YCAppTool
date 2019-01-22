@@ -1,16 +1,20 @@
 package com.ns.yc.lifehelper.ui.me.view.activity;
 
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseActivity;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.weight.WatcherBoard;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
-
-import butterknife.Bind;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
 
 
 /**
@@ -25,28 +29,17 @@ import butterknife.Bind;
  */
 public class MeTimerActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
-    FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
-    TextView toolbarTitle;
-    @Bind(R.id.watch)
-    WatcherBoard watch;
-    @Bind(R.id.switch_night)
-    SwitchButton switchNight;
-    @Bind(R.id.tv_set_time)
-    TextView tvSetTime;
-    @Bind(R.id.rl_set_time)
-    RelativeLayout rlSetTime;
-    @Bind(R.id.tv_timer_sound)
-    TextView tvTimerSound;
-    @Bind(R.id.rl_timer_sound)
-    RelativeLayout rlTimerSound;
-    @Bind(R.id.tv_exit)
-    TextView tvExit;
-    @Bind(R.id.tv_set_re)
-    TextView tvSetRe;
-    @Bind(R.id.rl_set_re)
-    RelativeLayout rlSetRe;
+    private FrameLayout llTitleMenu;
+    private TextView toolbarTitle;
+    private WatcherBoard watch;
+    private SwitchButton switchNight;
+    private TextView tvSetTime;
+    private RelativeLayout rlSetTime;
+    private TextView tvTimerSound;
+    private RelativeLayout rlTimerSound;
+    private TextView tvExit;
+    private TextView tvSetRe;
+    private RelativeLayout rlSetRe;
 
 
     @Override
@@ -61,7 +54,14 @@ public class MeTimerActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void initView() {
+        initFindById();
         initToolBar();
+    }
+
+    private void initFindById() {
+        llTitleMenu = findViewById(R.id.ll_title_menu);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+        rlSetTime = findViewById(R.id.rl_set_time);
     }
 
     private void initToolBar() {
@@ -86,15 +86,30 @@ public class MeTimerActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.rl_set_time:
-                showTimerPickerDialog();
+                //跨模块实现ForResult返回数据，跳转逻辑
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK,
+                        null,this,666);
                 break;
             default:
                 break;
         }
     }
 
-    private void showTimerPickerDialog() {
+
+    //跨模块实现ForResult返回数据，接收数据数据
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 666:
+                if (data != null) {
+                    String content = data.getStringExtra(Constant.CONTENT);
+                    LogUtils.e("返回的内容"+content);
+                }
+                break;
+            default:
+                break;
+        }
 
     }
-
 }

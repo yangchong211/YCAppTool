@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ycbjie.news" >
+
+
+    <application>
+        <activity android:name=".ui.activity.TxWeChatNewsActivity"/>
+        <activity android:name=".ui.activity.WyNewsActivity"/>
+        <activity android:name=".ui.activity.TxNewsActivity"/>
+    </application>
+
+
+</manifest>

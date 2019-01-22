@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="316dp"
+    android:layout_height="316dp"
+    android:background="@drawable/bg_lucky_monkey_panel"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/bg_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bubble0" />
+
+    <ImageView
+        android:id="@+id/bg_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bubble1"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="25dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.ycbjie.other.weight.PanelItemView
+                android:id="@+id/item1"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:background="@drawable/bg_lucky_monkey_item1" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <com.ycbjie.other.weight.PanelItemView
+                android:id="@+id/item2"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:background="@drawable/bg_lucky_monkey_item2" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <com.ycbjie.other.weight.PanelItemView
+                android:id="@+id/item3"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:background="@drawable/bg_lucky_monkey_item3" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.ycbjie.other.weight.PanelItemView
+                android:id="@+id/item4"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:background="@drawable/bg_lucky_monkey_item4" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+
+            <View
+                android:layout_width="82dp"
+                android:layout_height="82dp" />
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <com.ycbjie.other.weight.PanelItemView
+                android:id="@+id/item6"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:background="@drawable/bg_lucky_monkey_item6" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.ycbjie.other.weight.PanelItemView
+                android:id="@+id/item7"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:background="@drawable/bg_lucky_monkey_item7" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <com.ycbjie.other.weight.PanelItemView
+                android:id="@+id/item8"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:background="@drawable/bg_lucky_monkey_item8" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <com.ycbjie.other.weight.PanelItemView
+                android:id="@+id/item9"
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:background="@drawable/bg_lucky_monkey_item9" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

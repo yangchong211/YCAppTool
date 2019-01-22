@@ -1,0 +1,29 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ycbjie.book" >
+
+
+
+    <application
+        android:name="com.ycbjie.book.BookApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:supportsRtl="true"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name="com.ycbjie.book.ui.activity.DoodleViewActivity"/>
+        <activity android:name="com.ycbjie.book.ui.activity.GameActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.ycbjie.book.ui.activity.AirGameActivity"/>
+        <activity android:name="com.ycbjie.book.ui.activity.PinTuGameActivity"/>
+    </application>
+
+
+
+</manifest>

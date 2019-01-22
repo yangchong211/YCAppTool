@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7f000000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/bg_white_share_popup"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_img"
+                style="@style/share_text_view"
+                android:drawableTop="@mipmap/share_poster"
+                android:text="海报图分享" />
+            <TextView
+                android:id="@+id/tv_wx_friend"
+                style="@style/share_text_view"
+                android:drawableTop="@mipmap/share_wx_friend"
+                android:text="分享给好友" />
+            <TextView
+                android:id="@+id/tv_wx_moment"
+                style="@style/share_text_view"
+                android:drawableTop="@mipmap/share_wx_moment"
+                android:text="分享至朋友圈" />
+            <TextView
+                android:id="@+id/tv_other"
+                style="@style/share_text_view"
+                android:drawableTop="@mipmap/share_poster"
+                android:text="保存图片" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="17dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <ImageView
+                android:id="@+id/iv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_close_publish_dialog" />
+        </FrameLayout>
+
+    </LinearLayout>
+</RelativeLayout>

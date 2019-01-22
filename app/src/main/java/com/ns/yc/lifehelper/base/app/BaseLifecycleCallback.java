@@ -11,7 +11,7 @@ import com.ns.yc.ycutilslib.activityManager.AppManager;
 /**
  * <pre>
  *     @author yangchong
- *     blog  : www.pedaily.cn
+ *     blog  : https://github.com/yangchong211
  *     time  : 2015/03/22
  *     desc  : 生命周期管理类
  *     revise:

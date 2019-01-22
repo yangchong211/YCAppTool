@@ -1,45 +1,26 @@
 package com.ns.yc.lifehelper.ui.find.view.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-
+import android.view.View;
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
-import com.ns.yc.lifehelper.base.mvp.BaseFragment;
-import com.ns.yc.lifehelper.ui.data.view.activity.DoodleViewActivity;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.ns.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.ui.other.bookReader.view.BookReaderActivity;
-import com.ns.yc.lifehelper.ui.other.douban.douBook.view.DouBookActivity;
-import com.ns.yc.lifehelper.ui.other.douban.douMovie.view.DouMovieActivity;
-import com.ns.yc.lifehelper.ui.other.douban.douMusic.view.DouMusicActivity;
-import com.ns.yc.lifehelper.ui.other.gank.view.activity.GanKHomeActivity;
-import com.ns.yc.lifehelper.ui.other.gold.view.activity.GoldMainActivity;
-import com.ns.yc.lifehelper.ui.other.myNews.videoNews.VideoNewsActivity;
-import com.ns.yc.lifehelper.ui.other.myNews.weChat.view.activity.TxWeChatNewsActivity;
-import com.ns.yc.lifehelper.ui.other.myPicture.MyPictureActivity;
-import com.ns.yc.lifehelper.ui.other.myTsSc.SongCiActivity;
-import com.ns.yc.lifehelper.ui.other.myTsSc.YuanQuActivity;
-import com.ns.yc.lifehelper.ui.other.myTsSc.view.TangShiFirstActivity;
-import com.ns.yc.lifehelper.ui.other.myVideo.MyVideoActivity;
-import com.ns.yc.lifehelper.ui.other.notePad.NotePadActivity;
-import com.ns.yc.lifehelper.ui.other.workDo.ui.WorkDoActivity;
-import com.ns.yc.lifehelper.ui.other.zhihu.ui.ZhiHuNewsActivity;
-import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
-import com.yc.cn.ycbannerlib.BannerView;
-import com.yc.cn.ycbannerlib.banner.util.SizeUtil;
-
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.find.view.activity.MyVideoActivity;
+import com.ycbjie.library.constant.Constant;
+import com.yc.cn.ycbannerlib.banner.BannerView;
 import java.util.LinkedList;
 import java.util.List;
-
-import butterknife.Bind;
-
 
 
 /**
@@ -52,13 +33,10 @@ import butterknife.Bind;
  *             v1.5 17年10月3日修改
  * </pre>
  */
-public class FindFragment extends BaseFragment<FindFragmentPresenter> implements FindFragmentContract.View {
+public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
+        FindFragmentContract.View {
 
-
-    @Bind(R.id.recyclerView)
-    RecyclerView recyclerView;
-
-
+    private RecyclerView mRecyclerView;
     private MainActivity activity;
     private FindFragmentContract.Presenter presenter = new FindFragmentPresenter(this);
     private List<DelegateAdapter.Adapter> mAdapters;
@@ -118,7 +96,8 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     }
 
     @Override
-    public void initView() {
+    public void initView(View view) {
+        mRecyclerView = view.findViewById(R.id.recyclerView);
         mAdapters = new LinkedList<>();
         initRecyclerView();
     }
@@ -137,7 +116,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
 
 
     private void initRecyclerView() {
-        DelegateAdapter delegateAdapter = presenter.initRecyclerView(recyclerView);
+        DelegateAdapter delegateAdapter = presenter.initRecyclerView(mRecyclerView);
         //把轮播器添加到集合
         BaseDelegateAdapter bannerAdapter = presenter.initBannerAdapter();
         mAdapters.add(bannerAdapter);
@@ -189,7 +168,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
 
         //设置适配器
         delegateAdapter.setAdapters(mAdapters);
-        recyclerView.requestLayout();
+        mRecyclerView.requestLayout();
     }
 
 
@@ -199,37 +178,41 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         mBanner.setHintGravity(2);
         mBanner.setAnimationDuration(1000);
         mBanner.setPlayDelay(2000);
-        mBanner.setHintPadding(0,0,0, SizeUtil.dip2px(activity,10));
+        mBanner.setHintPadding(0,0,0, SizeUtils.dp2px(10));
         mBanner.setAdapter(new BaseBannerPagerAdapter(activity, arrayList));
     }
 
 
     @Override
     public void setOnclick(int position) {
+        //通过路由跳转到某模块的某个页面
         switch (position){
             case 0:
-                startActivity(GanKHomeActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_GANK_ACTIVITY);
                 break;
             case 1:
-
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_ANDROID_ACTIVITY);
                 break;
             case 2:
-                startActivity(NotePadActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_NOTE_ACTIVITY);
                 break;
             case 3:
-                startActivity(ZhiHuNewsActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_MUSIC_ACTIVITY);
                 break;
             case 4:
-
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_ZHIHU_ACTIVITY);
                 break;
             case 5:
-                startActivity(DoodleViewActivity.class);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString(Constant.URL,Constant.FLUTTER);
+                bundle1.putString(Constant.TITLE,"flutter极致体验的WanAndroid客户端");
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
                 break;
             case 6:
-                startActivity(ZhiHuNewsActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
                 break;
             case 7:
-                startActivity(TxWeChatNewsActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_NEW_WX_ACTIVITY);
                 break;
             default:
                 break;
@@ -241,14 +224,16 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     public void setMarqueeClick(int position) {
         switch (position) {
             case 0:
-                Intent intent1 = new Intent(activity, WebViewActivity.class);
-                intent1.putExtra("url", "https://github.com/yangchong211");
-                activity.startActivity(intent1);
+                Bundle bundle1 = new Bundle();
+                bundle1.putString(Constant.URL,Constant.GITHUB);
+                bundle1.putString(Constant.TITLE,"关于更多内容");
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
                 break;
             case 1:
-                Intent intent2 = new Intent(activity, WebViewActivity.class);
-                intent2.putExtra("url", "http://www.ximalaya.com/zhubo/71989305/");
-                activity.startActivity(intent2);
+                Bundle bundle2 = new Bundle();
+                bundle2.putString(Constant.URL,Constant.ZHI_HU);
+                bundle2.putString(Constant.TITLE,"关于我的知乎");
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle2);
                 break;
             default:
                 break;
@@ -260,28 +245,28 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     public void setGridClick(int position) {
         switch (position){
             case 0:
-                startActivity(BookReaderActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
                 break;
             case 1:
-
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_SNAPHELPER_ACTIVITY);
                 break;
             case 2:
                 startActivity(MyVideoActivity.class);
                 break;
             case 3:
-                startActivity(MyPictureActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_BOOK_DOODLE_ACTIVITY);
                 break;
             case 4:
-                startActivity(TangShiFirstActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
                 break;
             case 5:
-                startActivity(SongCiActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_AIR_ACTIVITY);
                 break;
             case 6:
-                startActivity(YuanQuActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_MONKEY_ACTIVITY);
                 break;
             case 7:
-                startActivity(WorkDoActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_WORK_ACTIVITY);
                 break;
             default:
                 break;
@@ -293,13 +278,13 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     public void setGridClickThird(int position) {
         switch (position){
             case 0:
-                startActivity(DouMovieActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_MOVIE_ACTIVITY);
                 break;
             case 1:
-                startActivity(DouMusicActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_MUSIC_ACTIVITY);
                 break;
             case 2:
-                startActivity(DouBookActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_BOOK_ACTIVITY);
                 break;
             default:
                 break;
@@ -311,13 +296,13 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     public void setGridClickFour(int position) {
         switch (position){
             case 0:
-
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_BANNER_LIST_ACTIVITY);
                 break;
             case 1:
-                startActivity(GoldMainActivity.class);
+
                 break;
             case 2:
-                startActivity(ZhiHuNewsActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_ZHIHU_ACTIVITY);
                 break;
             default:
                 break;
@@ -328,24 +313,18 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     @Override
     public void setNewsList2Click(int position, String url) {
         if(position>-1 && url!=null && url.length()>0){
-            Intent intent = new Intent(activity, WebViewActivity.class);
-            intent.putExtra("url",url);
-            startActivity(intent);
-        }else if(position==0){
-            startActivity(VideoNewsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(Constant.URL,url);
+            ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
         }
     }
-
-
 
     @Override
     public void setNewsList5Click(int position, String url) {
         if(position>-1 && url!=null && url.length()>0){
-            Intent intent = new Intent(activity, WebViewActivity.class);
-            intent.putExtra("url",url);
-            startActivity(intent);
-        }else if(position==0){
-            startActivity(VideoNewsActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(Constant.URL,url);
+            ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
         }
     }
 

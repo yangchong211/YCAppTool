@@ -1,7 +1,9 @@
 package com.ns.yc.lifehelper.ui.me.view.fragment;
 
+import android.view.View;
+
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseFragment;
+import com.ycbjie.library.base.mvp.BaseFragment;
 
 
 /**
@@ -20,7 +22,7 @@ public class MeDocCollectFragment extends BaseFragment {
     }
 
     @Override
-    public void initView() {
+    public void initView(View view) {
 
     }
 

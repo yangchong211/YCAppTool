@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+    <title>Our Love Story</title>
+
+    <style type="text/css">
+        @font-face {
+        font-family: digit;
+        src: url('digital-7_mono.ttf') format("truetype");
+        }
+        body{
+        margin:0px auto;
+        padding:0px auto;
+        width:100%;
+        height:100%;
+        }
+    </style>
+
+    <link href="css/default.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/garden.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+
+</head>
+
+<body>
+<div id="loveHeart">
+    <canvas id="garden"></canvas>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	var $bili = 	625/670;
+	var $hlove;
+	var $high = parseInt(document.body.clientWidth)*$bili;
+	//console.info($high);
+	$('#loveHeart').css('width',document.body.clientWidth+'px');
+	$('#loveHeart').css('height',$high+'px');
+	$('#garden').css('width',document.body.clientWidth+'px');
+	$('#garden').css('height',$high+'px');
+    $hlove=$("#garden").height();
+//  console.log( document.documentElement.clientHeight);
+//  console.log($hlove);
+	$('#loveHeart').css({'marginTop':(document.documentElement.clientHeight-$hlove)/2})
+});
+var offsetX = $("#loveHeart").width() / 2;
+var offsetY = $("#loveHeart").height() / 2 - 55;
+var together = new Date();
+together.setFullYear(2013, 2, 28);
+together.setHours(20);
+together.setMinutes(0);
+together.setSeconds(0);
+together.setMilliseconds(0);
+
+if (!document.createElement('canvas').getContext) {
+	var msg = document.createElement("div");
+	msg.id = "errorMsg";
+	msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
+	document.body.appendChild(msg);
+	$("#copyright").css("position", "absolute");
+	$("#copyright").css("bottom", "10px");
+	document.execCommand("stop");
+} else {
+	setTimeout(function () {
+		startHeartAnimation();
+	}, 0);
+
+	timeElapse(together);
+	setInterval(function () {
+		timeElapse(together);
+	}, 500);
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>

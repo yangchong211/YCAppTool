@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <!--封面图片-->
+            <ImageView
+                android:id="@+id/iv_bg_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:background="#35000000"
+                android:src="@drawable/ic_person_logo_big"
+                android:scaleType="centerCrop" />
+
+            <com.ns.yc.ycutilslib.blurView.RealTimeBlurView
+                android:id="@+id/blur_view"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7"
+                android:layout_marginTop="?attr/actionBarSize">
+                <ImageView
+                    android:id="@+id/iv_header_image"
+                    android:layout_width="100dp"
+                    android:layout_height="75dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/ic_person_logo_big"/>
+                <TextView
+                    android:id="@+id/iv_header_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/iv_header_image"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="投资入门课"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/iv_header_image"
+                    android:layout_below="@+id/iv_header_title"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="共5节课程"/>
+            </RelativeLayout>
+
+            <!--left的值一开始是NavigationIcon的宽度，一般为56dp-->
+            <!--toolBar控件-->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                style="@style/MyToolbar"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                <!--自定义带图片的立即播放按钮-->
+                <RelativeLayout
+                    android:id="@+id/ll_tool_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:visibility="visible">
+                    <FrameLayout
+                        android:id="@+id/ll_title_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:visibility="visible">
+                        <ImageView
+                            android:layout_width="@dimen/back_width"
+                            android:layout_height="@dimen/back_height"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_back_white" />
+                    </FrameLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="14sp"
+                        android:layout_toEndOf="@+id/ll_title_menu"
+                        android:text="返回"/>
+                    <FrameLayout
+                        android:id="@+id/fl_share"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_large_share"/>
+                    </FrameLayout>
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <org.yczbj.ycrefreshviewlib.YCRefreshView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_progress="@layout/view_custom_loading_data"
+        app:layout_empty="@layout/view_custom_empty_data"
+        app:layout_error="@layout/view_custom_data_error"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</android.support.design.widget.CoordinatorLayout>

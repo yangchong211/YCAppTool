@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/main_color"
+        android:title="画笔颜色"/>
+
+    <item
+        android:id="@+id/main_size"
+        android:title="画笔粗细"/>
+
+    <item
+        android:id="@+id/main_action"
+        android:title="画笔形状"/>
+
+    <item
+        android:id="@+id/main_reset"
+        android:title="重新绘制"/>
+
+    <item
+        android:id="@+id/main_save"
+        android:title="保存图片"/>
+
+</menu>

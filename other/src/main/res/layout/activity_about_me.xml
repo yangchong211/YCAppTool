@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/base_tool_bar"/>
+
+    <com.ns.yc.ycutilslib.scrollView.BounceScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:textColor="@color/blackText"
+                android:text="介绍与帮助"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:background="@drawable/shape_common_gray_bg">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:textIsSelectable="true"
+                    android:textSize="14sp"
+                    android:textColor="@color/blackText2"
+                    android:text="@string/introduce"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="12dp"
+                android:background="@color/grayLine"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:textColor="@color/blackText"
+                android:text="开发人员"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_common_gray_bg">
+
+                <ImageView
+                    android:id="@+id/ig_avatar"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/avatar_default"/>
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/ig_avatar"
+                    android:layout_toEndOf="@id/ig_avatar"
+                    android:layout_alignTop="@id/ig_avatar"
+                    tools:ignore="HardcodedText"
+                    android:textColor="@color/blackText"
+                    android:text="潇湘剑雨"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_name"
+                    android:layout_toRightOf="@id/ig_avatar"
+                    android:layout_toEndOf="@id/ig_avatar"
+                    android:textColor="@color/blackText1"
+                    android:text="APP开发"/>
+
+                <ImageView
+                    android:id="@+id/ig_avatar_image"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_below="@id/ig_avatar"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/avatar_default"/>
+
+                <TextView
+                    android:id="@+id/tv_api"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/ig_avatar_image"
+                    android:layout_toEndOf="@id/ig_avatar_image"
+                    android:layout_alignTop="@id/ig_avatar_image"
+                    tools:ignore="HardcodedText"
+                    android:textColor="@color/blackText"
+                    android:text="阿里云，干货集中营，wanAndroid，豆瓣，知乎，百度音乐，极速数据，天行等等"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_api"
+                    android:layout_toRightOf="@id/ig_avatar_image"
+                    android:paddingBottom="16dp"
+                    android:textColor="@color/blackText1"
+                    android:text="服务端开发"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="12dp"
+                android:background="@color/grayLine"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:textColor="@color/blackText"
+                android:text="使用到的开源库"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                android:background="@drawable/shape_common_gray_bg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    tools:ignore="HardcodedText"
+                    android:textColor="@color/blackText1"
+                    android:text="稍后添加"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </com.ns.yc.ycutilslib.scrollView.BounceScrollView>
+
+</LinearLayout>

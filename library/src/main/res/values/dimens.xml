@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nav_bar_height">58dp</dimen>
+    <dimen name="nav_bar_height_more">30dp</dimen>
+    <dimen name="back_height">25dp</dimen>
+    <dimen name="back_width">25dp</dimen>
+    <dimen name="highlightSize">18sp</dimen>
+    <dimen name="defaultSize">15sp</dimen>
+
+    <dimen name="dp5">5dp</dimen>
+
+    <!--全局文字的大小，统一引用-->
+    <dimen name="textSize9">9sp</dimen>
+    <dimen name="textSize10">10sp</dimen>
+    <dimen name="textSize11">11sp</dimen>
+    <dimen name="textSize12">12sp</dimen>
+    <dimen name="textSize13">13sp</dimen>
+    <dimen name="textSize14">14sp</dimen>
+    <dimen name="textSize15">15sp</dimen>
+    <dimen name="textSize16">16sp</dimen>
+    <dimen name="textSize18">18sp</dimen>
+    <dimen name="textSize19">19sp</dimen>
+    <dimen name="textSize20">20sp</dimen>
+    <dimen name="textSize22">22sp</dimen>
+</resources>

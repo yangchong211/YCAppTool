@@ -28,7 +28,7 @@
             android:layout_height="1dp"
             android:background="@color/grayLine"/>
         <TextView
-            android:id="@+id/tv_first"
+            android:id="@+id/tv_star"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -44,7 +44,7 @@
             android:layout_gravity="center"
             android:background="@color/grayLine"/>
         <TextView
-            android:id="@+id/tv_second"
+            android:id="@+id/tv_feedback"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -58,7 +58,7 @@
             android:layout_gravity="center"
             android:background="@color/grayLine"/>
         <TextView
-            android:id="@+id/tv_three"
+            android:id="@+id/tv_look"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"

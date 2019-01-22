@@ -16,11 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseActivity;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.yccustomtextlib.pwdEt.PasswordEditText;
-import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 
-import butterknife.Bind;
 
 /**
  * ================================================
@@ -35,33 +34,19 @@ import butterknife.Bind;
  */
 public class MeRegisterActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.tv_title_left)
-    TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
-    FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
-    TextView toolbarTitle;
-    @Bind(R.id.iv_right_img)
-    ImageView ivRightImg;
-    @Bind(R.id.ll_search)
-    FrameLayout llSearch;
-    @Bind(R.id.tv_title_right)
-    TextView tvTitleRight;
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.tv_person_username)
+    private Toolbar toolbar;
+    private TextView tvTitleLeft;
+    private FrameLayout llTitleMenu;
+    private TextView toolbarTitle;
+    private FrameLayout llSearch;
+    private ImageView ivRightImg;
+    private TextView tvTitleRight;
     AutoCompleteTextView tvPersonUsername;
-    @Bind(R.id.tv_person_code)
     AutoCompleteTextView tvPersonCode;
-    @Bind(R.id.tv_person_password)
     PasswordEditText tvPersonPassword;
-    @Bind(R.id.tv_person_password_again)
     PasswordEditText tvPersonPasswordAgain;
-    @Bind(R.id.cb_is_agree)
     CheckBox cbIsAgree;
-    @Bind(R.id.tv_about)
     TextView tvAbout;
-    @Bind(R.id.btn_person_register)
     Button btnPersonRegister;
 
     @Override
@@ -69,8 +54,26 @@ public class MeRegisterActivity extends BaseActivity implements View.OnClickList
         return R.layout.activity_me_register;
     }
 
+
+
     @Override
     public void initView() {
+        toolbar = findViewById(R.id.toolbar);
+        tvTitleLeft = findViewById(R.id.tv_title_left);
+        llTitleMenu = findViewById(R.id.ll_title_menu);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+        llSearch = findViewById(R.id.ll_search);
+        ivRightImg = findViewById(R.id.iv_right_img);
+        tvTitleRight = findViewById(R.id.tv_title_right);
+        tvPersonUsername = (AutoCompleteTextView) findViewById(R.id.tv_person_username);
+        tvPersonCode = (AutoCompleteTextView) findViewById(R.id.tv_person_code);
+        tvPersonPassword = (PasswordEditText) findViewById(R.id.tv_person_password);
+        tvPersonPasswordAgain = (PasswordEditText) findViewById(R.id.tv_person_password_again);
+        cbIsAgree = (CheckBox) findViewById(R.id.cb_is_agree);
+        tvAbout = (TextView) findViewById(R.id.tv_about);
+        btnPersonRegister = (Button) findViewById(R.id.btn_person_register);
+
+
         initToolBar();
     }
 
@@ -141,19 +144,19 @@ public class MeRegisterActivity extends BaseActivity implements View.OnClickList
         final String pwd = tvPersonPassword.getText().toString().trim();
         String pwdAgain = tvPersonPasswordAgain.getText().toString().trim();
         if(TextUtils.isEmpty(name)){
-            ToastUtil.showToast(MeRegisterActivity.this,"用户名不能为空");
+            ToastUtils.showRoundRectToast("用户名不能为空");
             return;
         }
         if(TextUtils.isEmpty(code)){
-            ToastUtil.showToast(MeRegisterActivity.this,"验证码不能为空");
+            ToastUtils.showRoundRectToast("验证码不能为空");
             return;
         }
         if(TextUtils.isEmpty(pwd)){
-            ToastUtil.showToast(MeRegisterActivity.this,"用户名不能为空");
+            ToastUtils.showRoundRectToast("用户名不能为空");
             return;
         }
         if(!pwd.equals(pwdAgain)){
-            ToastUtil.showToast(MeRegisterActivity.this,"两次输入密码不同");
+            ToastUtils.showRoundRectToast("两次输入密码不同");
             return;
         }
 

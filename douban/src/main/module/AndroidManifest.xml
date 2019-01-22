@@ -1,0 +1,35 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ycbjie.douban" >
+
+
+    <application
+        android:name=".DouBanApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_douban_name"
+        android:theme="@style/AppTheme"
+        android:supportsRtl="true"
+        tools:replace="android:label"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name=".view.activity.DouBookActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".view.activity.DouBookDetailActivity"/>
+        <activity android:name=".view.activity.DouMovieActivity"/>
+        <activity android:name=".view.activity.DouMusicActivity"/>
+        <activity android:name=".view.activity.DouMusicDetailActivity"/>
+        <activity android:name=".view.activity.MovieDetailActivity"/>
+        <activity android:name=".view.activity.MovieTopActivity"/>
+        <activity android:name=".view.activity.MovieWebViewActivity"/>
+
+    </application>
+
+
+
+</manifest>

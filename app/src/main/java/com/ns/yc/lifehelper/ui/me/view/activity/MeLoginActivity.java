@@ -17,13 +17,10 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseActivity;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.yccustomtextlib.pwdEt.PasswordEditText;
-import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
-
-import butterknife.Bind;
-
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 /**
  * ================================================
  * 作    者：杨充
@@ -37,33 +34,19 @@ import butterknife.Bind;
  */
 public class MeLoginActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.tv_title_left)
     TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.iv_right_img)
     ImageView ivRightImg;
-    @Bind(R.id.ll_search)
     FrameLayout llSearch;
-    @Bind(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.tv_person_username)
     AutoCompleteTextView tvPersonUsername;
-    @Bind(R.id.tv_person_password)
     PasswordEditText tvPersonPassword;
-    @Bind(R.id.btn_person_login)
     Button btnPersonLogin;
-    @Bind(R.id.tv_person_register)
     TextView tvPersonRegister;
-    @Bind(R.id.tv_wei_xin_login)
     TextView tvWeiXinLogin;
-    @Bind(R.id.tv_qq_login)
     TextView tvQqLogin;
-    @Bind(R.id.tv_sina_login)
     TextView tvSinaLogin;
 
     private boolean progressShow;
@@ -80,8 +63,27 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
         return R.layout.activity_me_login;
     }
 
+
+
     @Override
     public void initView() {
+        toolbar = findViewById(R.id.toolbar);
+        tvTitleLeft = findViewById(R.id.tv_title_left);
+        llTitleMenu = findViewById(R.id.ll_title_menu);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+        llSearch = findViewById(R.id.ll_search);
+        ivRightImg = findViewById(R.id.iv_right_img);
+        tvTitleRight = findViewById(R.id.tv_title_right);
+
+        tvPersonUsername = (AutoCompleteTextView) findViewById(R.id.tv_person_username);
+        tvPersonPassword = (PasswordEditText) findViewById(R.id.tv_person_password);
+        btnPersonLogin = (Button) findViewById(R.id.btn_person_login);
+        tvPersonRegister = (TextView) findViewById(R.id.tv_person_register);
+        tvWeiXinLogin = (TextView) findViewById(R.id.tv_wei_xin_login);
+        tvQqLogin = (TextView) findViewById(R.id.tv_qq_login);
+        tvSinaLogin = (TextView) findViewById(R.id.tv_sina_login);
+
+
         initToolBar();
     }
 
@@ -158,20 +160,13 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
         final String name = tvPersonUsername.getText().toString().trim();
         final String pwd = tvPersonPassword.getText().toString().trim();
         if(TextUtils.isEmpty(name)){
-            ToastUtil.showToast(MeLoginActivity.this,"用户名不能为空");
+            ToastUtils.showToast("用户名不能为空");
             return;
         }
         if(TextUtils.isEmpty(pwd)){
-            ToastUtil.showToast(MeLoginActivity.this,"密码不能为空");
+            ToastUtils.showToast("密码不能为空");
             return;
         }
-        /*String loginName = SPUtils.getInstance(Constant.SP_NAME).getString(ConstantKeys.NAME);
-        String loginPwd = SPUtils.getInstance(Constant.SP_NAME).getString(ConstantKeys.PWD);
-        if(!name.equals(loginName) || !loginPwd.equals(pwd)){
-            ToastUtil.showToast(MeLoginActivity.this,"用户名或者密码错误");
-            return;
-        }*/
-
         progressShow = true;
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setCanceledOnTouchOutside(false);

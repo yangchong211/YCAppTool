@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="lrc_normal_text_color">#9E9E9E</color>
+    <color name="lrc_current_text_color">#FF4081</color>
+    <color name="lrc_timeline_text_color">#F8BBD0</color>
+    <color name="lrc_timeline_color">#809E9E9E</color>
+    <color name="lrc_time_text_color">#809E9E9E</color>
+
+    <color name="white_96p">#F5FFFFFF</color>
+    <color name="redTab_30p">#4CF44336</color>
+    <color name="grey_300_96p">#F5E0E0E0</color>
+    <color name="grey_700_96p">#F5616161</color>
+    <color name="grey_900_96p">#F5212121</color>
+
+</resources>

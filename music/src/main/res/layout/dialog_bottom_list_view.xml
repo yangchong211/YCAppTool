@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/tv_play_type"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/play_mode_level_list"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:textColor="@color/blackText"
+            android:text="单曲循环(12)"/>
+        <TextView
+            android:id="@+id/tv_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_collection_icon"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:textColor="@color/blackText"
+            android:text="收藏全部"/>
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="end|center"
+            android:background="@drawable/icon_close"/>
+    </LinearLayout>
+    <View style="@style/DeepUnderLine"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorWhite"/>
+
+    <View style="@style/DeepUnderLine"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/tv_download"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/blackText"
+            android:textSize="12sp"
+            android:text="全部下载"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/tv_download"
+            android:textColor="@color/blackText1"
+            android:textSize="10sp"
+            android:text="1个/258MB  可用空间49.97GB"/>
+    </RelativeLayout>
+
+</LinearLayout>

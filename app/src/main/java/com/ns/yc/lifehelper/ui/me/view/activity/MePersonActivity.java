@@ -28,20 +28,17 @@ import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseActivity;
-import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
-import com.ns.yc.lifehelper.inter.listener.MePersonBaseListener;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.base.adapter.BasePagerAdapter;
+import com.ycbjie.library.inter.listener.MePersonBaseListener;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MePersonFragment;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.ycutilslib.viewPager.AutoHeightViewPager;
-import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
+import com.pedaily.yc.ycdialoglib.dialog.CustomSelectDialog;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.Bind;
-
 
 /**
  * ================================================
@@ -55,18 +52,13 @@ import butterknife.Bind;
 public class MePersonActivity extends BaseActivity implements View.OnClickListener
         , TakePhoto.TakeResultListener, InvokeListener {
 
-    @Bind(R.id.tv_title_left)
     TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.base_person_view)
     MePersonBaseView basePersonView;
-    @Bind(R.id.tab_layout)
     TabLayout tabLayout;
-    @Bind(R.id.vp_content)
     AutoHeightViewPager vpContent;
+
 
     private Uri imageUri;
     private CropOptions cropOptions;
@@ -111,8 +103,18 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
         return R.layout.activity_me_person;
     }
 
+
+
     @Override
     public void initView() {
+        tvTitleLeft = findViewById(R.id.tv_title_left);
+        llTitleMenu = findViewById(R.id.ll_title_menu);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+        basePersonView = findViewById(R.id.base_person_view);
+        tabLayout = findViewById(R.id.tab_layout);
+        vpContent = findViewById(R.id.vp_content);
+
+
         toolbarTitle.setText("个人信息中心");
         initFragmentList();
         initViewPagerAndTab();

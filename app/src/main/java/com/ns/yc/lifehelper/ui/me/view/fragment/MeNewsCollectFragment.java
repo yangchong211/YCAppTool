@@ -9,8 +9,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseLazyFragment;
-import com.ns.yc.lifehelper.db.cache.CacheZhLike;
+import com.ycbjie.library.base.mvp.BaseLazyFragment;
+import com.ycbjie.library.db.cache.CacheZhLike;
 import com.ns.yc.lifehelper.ui.me.contract.MeNewsCollectContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeNewsCollectPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
@@ -21,9 +21,6 @@ import org.yczbj.ycrefreshviewlib.callback.DefaultItemTouchHelpCallback;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import butterknife.Bind;
-
 
 
 /**
@@ -37,7 +34,6 @@ import butterknife.Bind;
  */
 public class MeNewsCollectFragment extends BaseLazyFragment implements MeNewsCollectContract.View {
 
-    @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
 
     private MeNewsCollectContract.Presenter presenter = new MeNewsCollectPresenter(this);
@@ -76,7 +72,8 @@ public class MeNewsCollectFragment extends BaseLazyFragment implements MeNewsCol
     }
 
     @Override
-    public void initView() {
+    public void initView(View view) {
+        recyclerView = view.findViewById(R.id.recyclerView);
         presenter.initRealm();
         initRecycleView();
         initCallBack();

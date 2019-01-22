@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/fl_container"
+            android:layout_width="match_parent"
+            android:layout_height="270dp">
+            <com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView
+                android:layout_marginTop="35dp"
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+        </FrameLayout>
+
+
+        <com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView
+            android:layout_marginTop="30dp"
+            android:id="@+id/recyclerView2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="30dp"
+            android:id="@+id/recyclerView3"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+    </LinearLayout>
+
+
+</ScrollView>

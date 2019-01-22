@@ -1,6 +1,6 @@
 package com.ns.yc.lifehelper.ui.me.model;
 
-import com.ns.yc.lifehelper.api.RetrofitWrapper;
+import com.ycbjie.library.http.RetrofitWrapper;
 import com.ns.yc.lifehelper.model.bean.UpdateBean;
 
 import rx.Observable;

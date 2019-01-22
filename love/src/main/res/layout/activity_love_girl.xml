@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/root_fragment_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@mipmap/malin"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="centerCrop"
+        android:visibility="visible"/>
+
+    <FrameLayout
+        android:id="@+id/fl_webView_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <com.ycbjie.love.view.typewriter.TypeTextView
+        android:id="@+id/typeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="55dp"
+        android:gravity="center"
+        android:paddingBottom="55dp"
+        android:textColor="#fcaebb"/>
+
+
+    <com.ycbjie.love.view.bluesnow.FlowerView
+        android:id="@+id/flowerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <com.ycbjie.love.view.whitesnow.SnowView
+        android:id="@+id/whiteSnowView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <com.ycbjie.love.view.heart.HeartLayout
+        android:id="@+id/heart_o_red_layout"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="50dp"
+        android:background="@android:color/transparent"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/holo_green_light"
+        android:padding="4dp"
+        android:text="点击我有惊喜哦"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+
+</FrameLayout>

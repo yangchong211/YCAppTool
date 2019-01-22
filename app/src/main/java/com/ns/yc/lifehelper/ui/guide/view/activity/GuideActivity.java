@@ -1,45 +1,56 @@
 package com.ns.yc.lifehelper.ui.guide.view.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseActivity;
+import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.GuidePresenter;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.utils.image.ImageUtils;
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ycbjie.library.utils.ImageUtils;
 import com.ns.yc.yccountdownviewlib.CountDownView;
 import com.squareup.picasso.Callback;
+import com.ycbjie.music.base.BaseAppHelper;
+import com.ycbjie.music.service.PlayService;
 
-import butterknife.Bind;
-import cn.ycbjie.ycstatusbarlib.bar.YCAppBar;
+import java.util.concurrent.TimeUnit;
+
+import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
+import cn.ycbjie.ycthreadpoollib.PoolThread;
 
 /**
  * <pre>
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2016/03/22
- *     desc  : 启动页面
+ *     desc  : 倒计时广告页面
  *     revise:
  * </pre>
  */
-public class GuideActivity extends BaseActivity<GuidePresenter> implements GuideContract.View ,View.OnClickListener {
+public class GuideActivity extends BaseActivity<GuidePresenter> implements
+        GuideContract.View ,View.OnClickListener {
 
-    @Bind(R.id.iv_splash_ad)
-    ImageView ivSplashAd;
-    @Bind(R.id.cdv_time)
-    CountDownView cdvTime;
+    private ImageView ivSplashAd;
+    private CountDownView cdvTime;
+    private PlayServiceConnection mPlayServiceConnection;
 
     private GuideContract.Presenter presenter = new GuidePresenter(this);
 
     @Override
     protected void onDestroy() {
+        if (mPlayServiceConnection != null) {
+            unbindService(mPlayServiceConnection);
+        }
         super.onDestroy();
         if(cdvTime!=null && cdvTime.isShown()){
             cdvTime.stop();
@@ -61,21 +72,25 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        YCAppBar.translucentStatusBar(this, true);
-    }
-
-    @Override
     public int getContentView() {
         return R.layout.activity_guide;
     }
 
+
+
     @Override
     public void initView() {
-        LogUtils.e("GuideActivity"+"------"+"initView");
+        StateAppBar.translucentStatusBar(this, true);
+        initFindViewById();
         presenter.startGuideImage();
         initCountDownView();
+        //音频播放器需要让服务长期存在
+        startCheckService();
+    }
+
+    private void initFindViewById() {
+        ivSplashAd = findViewById(R.id.iv_splash_ad);
+        cdvTime = findViewById(R.id.cdv_time);
     }
 
 
@@ -96,14 +111,13 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
     private void initCountDownView() {
         cdvTime.setTime(5);
         cdvTime.start();
-        cdvTime.setOnLoadingFinishListener(new CountDownView.OnLoadingFinishListener() {
-            @Override
-            public void finish() {
-                toMainActivity();
-            }
-        });
+        cdvTime.setOnLoadingFinishListener(this::toMainActivity);
     }
 
+    private void toMainActivity() {
+        ActivityUtils.startActivity(MainActivity.class,R.anim.screen_zoom_in, R.anim.screen_zoom_out);
+        //finish();
+    }
 
     @Override
     public void onClick(View view) {
@@ -115,14 +129,6 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
             default:
                 break;
         }
-    }
-
-    /**
-     * 直接跳转主页面
-     */
-    private void toMainActivity() {
-        ActivityUtils.startActivity(MainActivity.class,R.anim.screen_zoom_in,R.anim.screen_zoom_out);
-        finish();
     }
 
     /**
@@ -142,8 +148,58 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements Guide
                 ivSplashAd.setBackgroundResource(R.drawable.bg_cloud_night);
             }
         };
-        LogUtils.e("图片"+logo);
         ImageUtils.loadImgByPicasso(this,logo,R.drawable.bg_cloud_night,ivSplashAd,callback);
     }
+
+    /**
+     * 检测服务
+     */
+    private void startCheckService() {
+        if (BaseAppHelper.get().getPlayService() == null) {
+            startService();
+            PoolThread executor = AppConfig.INSTANCE.getExecutor();
+            executor.setName("startCheckService");
+            executor.setDelay(1, TimeUnit.SECONDS);
+            //绑定服务
+            executor.execute(this::bindService);
+        }
+    }
+
+    /**
+     * 开启服务
+     */
+    private void startService() {
+        Intent intent = new Intent(this, PlayService.class);
+        startService(intent);
+    }
+
+
+    /**
+     * 绑定服务
+     * 注意对于绑定服务一定要解绑
+     */
+    private void bindService() {
+        Intent intent = new Intent();
+        intent.setClass(this, PlayService.class);
+        mPlayServiceConnection = new PlayServiceConnection();
+        bindService(intent, mPlayServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+
+    private class PlayServiceConnection implements ServiceConnection {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LogUtils.e("onServiceConnected"+name);
+            final PlayService playService = ((PlayService.PlayBinder) service).getService();
+            BaseAppHelper.get().setPlayService(playService);
+            playService.updateMusicList(null);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            LogUtils.e("onServiceDisconnected"+name);
+        }
+    }
+
 
 }

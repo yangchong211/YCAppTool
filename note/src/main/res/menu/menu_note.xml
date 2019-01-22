@@ -1,0 +1,8 @@
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/action_display"
+        android:icon="@drawable/ic_action_display"
+        android:title="显示"
+        app:showAsAction="always" />
+</menu>

@@ -2,9 +2,10 @@ package com.ns.yc.lifehelper.ui.me.view.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseFragment;
+import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 
 /**
@@ -62,7 +63,7 @@ public class MePersonFragment extends BaseFragment {
     }
 
     @Override
-    public void initView() {
+    public void initView(View view) {
 
     }
 

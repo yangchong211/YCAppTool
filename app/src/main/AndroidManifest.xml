@@ -1,176 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.ns.yc.lifehelper"
-          android:versionCode="6"
-          android:versionName="1.6"
-          tools:ignore="GradleOverrides">
-
-    <!--权限-->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <category android:name="android.intent.category.APP_MARKET" />
-    <!--suppress DeprecatedClassUsageInspection -->
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"
-                     tools:ignore="MockLocation"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ns.yc.lifehelper">
 
 
     <application
         android:name=".base.app.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/app_yc_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:icon,android:name">
-        <!--注意： tools:replace="android:icon,android:name" 很重要-->
-        <!--主要作用是：解决引入的三方包存在相同的label，icon，等名字-->
-        <activity android:name=".ui.guide.view.activity.SplashPagerActivity">
+        tools:replace="android:label"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.guide.view.activity.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.view.MainActivity"/>
+
+
+        <activity
+            android:name=".ui.main.view.activity.SchemeActivity"
+            android:screenOrientation="portrait">
+            <!--Android 接收外部跳转过滤器-->
+            <!--要想在别的App上能成功调起App，必须添加intent过滤器-->
+            <intent-filter>
+                <!-- 协议部分配置 ,注意需要跟web配置相同-->
+                <!--协议部分，随便设置 yc://ycbjie.cn:8888/from?type=yangchong  -->
+                <data android:scheme="yc"
+                    android:host="ycbjie.cn"
+                    android:path="/from"
+                    android:port="8888"/>
+                <!--下面这几行也必须得设置-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.guide.view.activity.SplashPagerActivity"/>
+        <activity android:name=".ui.main.view.activity.MainActivity"/>
         <activity android:name=".ui.guide.view.activity.GuideActivity"/>
         <activity android:name=".ui.guide.view.activity.SelectFollowActivity"/>
-        <activity android:name=".ui.main.view.activity.AboutMeActivity"/>
-        <activity android:name=".ui.other.gank.view.activity.GanKHomeActivity"/>
-        <activity android:name=".ui.other.gank.view.activity.GanKWebActivity"/>
-        <activity android:name=".ui.other.gank.view.activity.GanKSearchActivity"/>
-        <activity android:name=".ui.other.expressDelivery.ExpressDeliveryActivity"/>
-        <activity android:name=".ui.other.expressDelivery.indexModel.SelectorCompanyActivity"/>
-        <activity android:name=".ui.other.expressDelivery.activity.ExpressDeliveryInfoActivity"/>
-        <activity android:name=".ui.other.workDo.ui.WorkDoActivity"/>
-        <activity android:name=".ui.other.workDo.ui.activity.WorkNewActivity"/>
-        <activity android:name=".ui.other.douban.douMovie.view.DouMovieActivity"/>
-        <activity android:name=".ui.other.workDo.ui.activity.WorkSettingActivity"/>
-        <activity android:name=".ui.other.douban.douMovie.view.activity.MovieTopActivity"/>
-        <activity android:name=".ui.other.douban.douMovie.view.activity.MovieDetailActivity"/>
-        <activity android:name=".ui.other.douban.douMovie.view.activity.MovieWebViewActivity"/>
-        <activity android:name=".ui.data.view.activity.GalleryImageActivity"/>
-        <activity android:name=".ui.other.douban.douBook.view.DouBookActivity"/>
-        <activity android:name=".ui.other.douban.douBook.view.activity.DouBookDetailActivity"/>
-        <activity android:name=".ui.other.zhihu.ui.ZhiHuNewsActivity"/>
-        <activity android:name=".ui.other.douban.douMusic.view.DouMusicActivity"/>
-        <activity android:name=".ui.other.douban.douMusic.view.activity.DouMusicDetailActivity"/>
-        <activity android:name=".ui.webView.view.WebViewAnimActivity"
-                  android:configChanges="orientation|screenSize|keyboardHidden"
-                  android:windowSoftInputMode="stateHidden|adjustResize"
-                  android:launchMode="singleTop"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuCommentActivity"/>
-        <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuThemeListActivity"/>
-        <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuSectionListActivity"/>
-        <activity android:name=".ui.webView.view.WebViewQQActivity"/>
-        <activity android:name=".ui.other.bookReader.view.BookReaderActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.ReaderSubjectActivity"/>
-        <activity android:name=".ui.other.bookReader.bean.ReaderTopBookActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.SubHomeTopRankActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.SubTopRankActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.ReaderCategoryActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.SubCategoryListActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.ReadBookDetailActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.BookReaderDiscussionActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.BookReaderGirlActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.BookReaderHelpActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.BookReaderReviewActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.BookReaderLocalActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.BookReadPDFActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.BookReadPubActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.BookReadChmActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.BookDetailDiscussionActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.BookDetailHelpActivity"/>
-        <activity android:name=".ui.other.bookReader.view.activity.ReadBookDetailSubjectActivity"/>
-        <activity android:name=".ui.other.gold.view.activity.GoldMainActivity"/>
         <activity android:name=".ui.me.view.activity.MeTimerActivity"/>
-        <activity android:name=".ui.other.vtex.view.WTexNewsActivity"/>
-        <activity android:name=".ui.other.vtex.view.activity.WTexRepliesActivity"/>
-        <activity android:name=".ui.other.vtex.view.activity.WTNoteActivity"/>
-        <activity android:name=".ui.other.myVideo.MyVideoActivity"/>
-        <activity android:name=".ui.other.zhihu.ui.activity.ZhiHuCalendarActivity"/>
-        <activity android:name=".ui.other.gold.view.activity.GoldManagerActivity"/>
-        <activity android:name=".ui.other.myKnowledge.MyKnowledgeActivity"/>
-        <activity android:name=".ui.other.myKnowledge.activity.KnowledgeSearchActivity"/>
-        <activity android:name=".ui.other.myKnowledge.activity.KnowledgeImageActivity"/>
-        <activity android:name=".ui.other.myNews.wyNews.WyNewsActivity"/>
-        <activity android:name=".ui.other.myNews.txNews.TxNewsActivity"/>
-        <activity android:name=".ui.webView.view.WebViewActivity"/>
-        <activity android:name=".ui.other.myNews.weChat.view.activity.TxWeChatNewsActivity"/>
-        <activity android:name=".ui.webView.view.WebViewChangeActivity"/>
-        <activity android:name=".ui.other.myTsSc.TangShiActivity"/>
-        <activity android:name=".ui.other.myTsSc.SongCiActivity"/>
-        <activity android:name=".ui.other.myTsSc.YuanQuActivity"/>
-        <activity android:name=".ui.other.myTsSc.view.TangShiFirstActivity"/>
-        <activity android:name=".ui.other.myTsSc.view.TangShiDetailActivity"/>
-        <activity android:name=".ui.other.myTsSc.view.SongCiDetailActivity"/>
-        <activity android:name=".ui.other.myTsSc.view.YuanQuDetailActivity"/>
-        <activity android:name=".ui.other.myTsSc.view.TangShiSearchActivity"/>
-        <activity android:name=".ui.other.myTsSc.view.TangShiSearchDetailActivity"/>
-        <activity android:name=".ui.other.myNews.videoNews.VideoNewsActivity"/>
-        <activity android:name=".ui.other.vtex.view.activity.WTNodeListActivity"/>
-        <activity android:name=".ui.other.myPicture.MyPictureActivity"/>
-        <activity android:name=".ui.other.myPicture.view.MyPicBeautifulActivity"/>
-        <activity android:name=".ui.other.myPicture.view.BeautifulGroupActivity"/>
-        <activity android:name=".ui.other.myPicture.view.MyPicLargeActivity"/>
-        <activity android:name=".ui.other.myNote.NoteActivity"/>
-        <activity android:name=".ui.other.myNote.view.NoteAddActivity"/>
-        <activity android:name=".ui.other.notePad.NotePadActivity"/>
-        <activity android:name=".ui.other.notePad.activity.NotePadNewActivity"/>
-        <activity android:name=".ui.other.notePad.activity.NotePadDetailActivity"/>
-        <activity android:name=".ui.data.view.activity.DoodleViewActivity"/>
+        <activity android:name=".ui.find.view.activity.MyVideoActivity"/>
         <activity android:name=".ui.me.view.activity.MeCollectActivity"/>
-        <activity android:name=".ui.me.view.activity.MeFeedBackActivity"/>
         <activity android:name=".ui.me.view.activity.MeSettingActivity"/>
         <activity android:name=".ui.me.view.activity.MePersonActivity"/>
         <activity android:name=".ui.me.view.activity.MeQoneActivity"/>
         <activity android:name=".ui.me.view.activity.MeLoginActivity"/>
         <activity android:name=".ui.me.view.activity.MeRegisterActivity"/>
-        <activity android:name=".ui.other.myPicture.view.activity.ImageGvActivity"/>
-
-        <activity
-            android:name=".ui.other.workDo.ui.activity.SearchListActivity"
-            android:label="任务"
-            android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
-            </intent-filter>
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/work_do_search"/>
-        </activity>
-
-
-        <!--服务-->
-        <service android:name=".service.PicBeautifulService"/>
-        <service android:name=".service.PicGroupService"/>
         <service android:name=".service.InitializeService"/>
-        <service
-            android:name=".service.WorkDoNotifyService"
-            android:enabled="true"
-            android:exported="true"/>
-        <!--广播接收者-->
-        <receiver android:name=".receiver.ReminderReceiver" android:exported="false"/>
+        <service android:name=".service.LoopRequestService"/>
     </application>
 
 </manifest>

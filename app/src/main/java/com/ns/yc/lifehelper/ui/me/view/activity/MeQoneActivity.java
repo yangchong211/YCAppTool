@@ -12,20 +12,19 @@ import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseActivity;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.model.bean.ImagePhotoBean;
-import com.ns.yc.lifehelper.ui.me.view.adapter.GlideImageLoader;
-import com.ns.yc.lifehelper.ui.me.view.adapter.Loader;
+import com.ycbjie.library.loader.GlideImageLoader;
+import com.ycbjie.library.loader.Loader;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.ycphotolib.PhotoShowView;
 import com.ns.yc.ycphotolib.bean.PhotoShowBean;
 import com.ns.yc.ycphotolib.listener.PhotoShowListener;
-import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
+import com.pedaily.yc.ycdialoglib.dialog.CustomSelectDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
 
 /**
  * ================================================
@@ -38,15 +37,10 @@ import butterknife.Bind;
  */
 public class MeQoneActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.tv_title_left)
     TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.psv_view)
     PhotoShowView psvView;
 
     /**
@@ -78,6 +72,12 @@ public class MeQoneActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void initView() {
+        tvTitleLeft = findViewById(R.id.tv_title_left);
+        llTitleMenu = findViewById(R.id.ll_title_menu);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+        tvTitleRight = findViewById(R.id.tv_title_right);
+        psvView = findViewById(R.id.psv_view);
+
         initToolBar();
         initPhotoView();
         initImagePicker();

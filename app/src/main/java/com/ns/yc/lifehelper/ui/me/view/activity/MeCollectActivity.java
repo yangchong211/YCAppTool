@@ -8,8 +8,8 @@ import android.widget.FrameLayout;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseActivity;
-import com.ns.yc.lifehelper.base.adapter.BasePagerAdapter;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MeDocCollectFragment;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MeGanKCollectFragment;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MeNewsCollectFragment;
@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import butterknife.Bind;
 
 
 /**
@@ -35,14 +33,9 @@ import butterknife.Bind;
  */
 public class MeCollectActivity extends BaseActivity implements View.OnClickListener {
 
-    @Bind(R.id.fl_title_menu)
-    FrameLayout flTitleMenu;
-    @Bind(R.id.stl_table)
-    SlidingTabLayout stlTable;
-    @Bind(R.id.vp_content)
-    ViewPager vpContent;
-
-    private final String[] mTitles = {"干货", "新闻", "图片","文件"};
+    private FrameLayout flTitleMenu;
+    private SlidingTabLayout stlTable;
+    private ViewPager vpContent;
 
     @Override
     public int getContentView() {
@@ -51,6 +44,9 @@ public class MeCollectActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initView() {
+        flTitleMenu = findViewById(R.id.fl_title_menu);
+        stlTable = findViewById(R.id.stl_table);
+        vpContent = findViewById(R.id.vp_content);
         initViewPager();
         initTabLayout();
     }
@@ -78,6 +74,7 @@ public class MeCollectActivity extends BaseActivity implements View.OnClickListe
 
 
     private void initViewPager() {
+        String[] mTitles = {"干货", "新闻", "图片","文件"};
         ArrayList<Fragment> mFragments = new ArrayList<>();
         List<String> list = new ArrayList<>();
         mFragments.clear();

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:background">@color/colorTransparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="BaseTheme" parent="AppTheme" />
+
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/bg_cloud_night</item>
+        <item name="android:statusBarColor" tools:ignore="NewApi">@color/transparent</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="FullScreenDialog" parent="android:Theme.Dialog">
+        <!-- 窗口设为无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 窗口浮现在activity之上 -->
+        <item name="android:windowIsFloating">false</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@color/colorTransparent</item>
+        <!-- 背景模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 全屏 -->
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
+    <style name="Loading" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 设置背景色 透明-->
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 设置是否显示背景 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 设置背景透明度 -->
+        <item name="android:backgroundDimAmount">0.6</item>
+        <!-- 设置点击空白不消失 -->
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
+    <style name="TransparentFrameWindowStyle" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@drawable/photo_choose_bg</item>
+    </style>
+    <style name="dialog_custom_view">
+        <item name="android:windowEnterAnimation">@anim/photo_dialog_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/photo_dialog_out_anim</item>
+    </style>
+
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+
+    <!--自定义一个全屏主题-->
+    <style name="FullScreen" parent="@style/AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+
+
+    <!--设置ToolBar样式-->
+    <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--设置字体为白色-->
+        <item name="actionMenuTextColor">@color/colorWhite</item>
+        <!--设置那三个点的图标为白色-->
+        <item name="android:textColorSecondary">@color/colorWhite</item>
+        <!--设置不覆盖锚点-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+    </style>
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+    </style>
+
+
+    <!--titleBar样式-->
+    <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="actionBarItemBackground">@drawable/abc_item_background_holo_light</item>
+        <item name="selectableItemBackground">@drawable/abc_item_background_holo_light</item>
+        <!--设置那三个点的图标为白色-->
+        <item name="android:textColorSecondary">@color/colorWhite</item>
+        <!--设置不覆盖锚点-->
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <item name="titleTextAppearance">@style/ToolBar.Title</item>
+        <item name="subtitleTextAppearance">@style/Toolbar.SubTitle</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+
+    <!--titleBar 标题-->
+    <style name="ToolBar.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <!--titleBar 副标题-->
+    <style name="Toolbar.SubTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">9.0sp</item>
+        <item name="android:textColor">@color/colorWhiteBg</item>
+    </style>
+
+    <style name="MyToolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+    </style>
+
+
+</resources>

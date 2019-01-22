@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
-    <com.yc.cn.ycbannerlib.BannerView
+    <com.yc.cn.ycbannerlib.banner.BannerView
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="150dp"/>
@@ -23,13 +24,13 @@
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_first"
-            android:text="精选新闻" />
+            android:text="我的视频" />
         <TextView
             android:id="@+id/tv_home_second"
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_second"
-            android:text="今日头条" />
+            android:text="飞机大战" />
         <TextView
             android:id="@+id/tv_home_third"
             style="@style/WeightAttr"

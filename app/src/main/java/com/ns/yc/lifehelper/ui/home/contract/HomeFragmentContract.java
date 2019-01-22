@@ -3,10 +3,10 @@ package com.ns.yc.lifehelper.ui.home.contract;
 
 import android.graphics.Bitmap;
 
-import com.ns.yc.lifehelper.base.mvp.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp.BaseView;
-import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ycbjie.library.base.mvp.BasePresenter;
+import com.ycbjie.library.base.mvp.BaseView;
+import com.ycbjie.library.model.HomeBlogEntity;
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public interface HomeFragmentContract {
 
     interface Presenter extends BasePresenter {
         void getHomeNewsData();
-        List<CharSequence> getMarqueeTitle();
+        ArrayList<String> getMarqueeTitle();
         List<Object> getBannerData();
         void bindActivity(MainActivity activity);
         void getGalleryData();

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_picture_name">picture</string>
+
+    <string name="guideTime">Time © 2017&#045;%d 潇湘剑雨</string>
+    <string name="menu_home">音乐中心</string>
+    <string name="menu_setting">设置中心</string>
+    <string name="menu_share">推荐给朋友</string>
+    <string name="menu_about">关于潇湘剑雨</string>
+    <string name="menu_night">夜间模式</string>
+    <string name="menu_box">定时停播</string>
+    <string name="menu_exit">退出应用</string>
+    <string name="easy_permissions">该APP需要您允许打开电话，拍摄照片，允许使用录音设备，访问设备上的文件的权限</string>
+    <string name="timer_set">设置成功，将于%s分钟后关闭</string>
+    <string name="timer_cancel">定时停止播放已取消</string>
+    <string name="audio_head_title">杨充，现在加入，你将获取沙丘大学2018年全年在线课程和学习服务</string>
+    <string name="join_us">加入商学院</string>
+    <string name="study_announce">课程预告</string>
+    <string name="lrc_label">暂无歌词</string>
+    <string name="splash">立即体验</string>
+
+
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="share">分享</string>
+    <string name="delete">删除</string>
+    <string name="search">搜索</string>
+    <string name="save">保存</string>
+    <string name="loading">努力加载中…</string>
+    <string name="load_fail">加载失败，请检查网络后重试</string>
+    <string name="no_permission_setting">没有权限，无法设置铃声，请授予权限</string>
+    <string name="menu_timer">定时停止播放</string>
+    <string name="unknown">未知</string>
+    <string name="recent_update">最近更新：%s</string>
+
+
+    <string name="artist_info">歌手信息</string>
+    <string name="artist_info_name">姓名：%s</string>
+    <string name="artist_info_country">国籍：%s</string>
+    <string name="artist_info_constellation">星座：%s</string>
+    <string name="artist_info_stature">身高：%scm</string>
+    <string name="artist_info_weight">体重：%skg</string>
+    <string name="artist_info_birth">生日：%s</string>
+    <string name="artist_info_intro">简介：%s</string>
+    <string name="artist_info_empty">暂无歌手信息</string>
+
+    <string name="search_tips">歌曲名、歌手名</string>
+
+    <string name="song_list_item_title_1">1.%1$s - %2$s</string>
+    <string name="song_list_item_title_2">2.%1$s - %2$s</string>
+    <string name="song_list_item_title_3">3.%1$s - %2$s</string>
+
+
+    <string name="mode_loop">列表循环</string>
+    <string name="mode_shuffle">随机播放</string>
+    <string name="mode_one">单曲循环</string>
+
+    <string name="state_next">下一首</string>
+    <string name="state_prev">上一首</string>
+    <string name="state_start">播放</string>
+    <string name="state_pause">暂停</string>
+
+    <string name="tips">温馨提示</string>
+    <string name="unable_to_play">暂时无法播放</string>
+    <string name="play_tips">当前处于移动网络，确定打开移动网络播放开关吗？</string>
+    <string name="play_tips_sure">立即打开</string>
+    <string name="download_tips">当前处于移动网络，下载将消耗较多流量，是否继续下载？</string>
+    <string name="download_tips_sure">继续下载</string>
+    <string name="share_music">我用%1$s分享了歌曲《%2$s》%3$s</string>
+
+    <string name="login_password">密码</string>
+    <string name="login_username">用户名</string>
+    <string name="login_register">注册</string>
+    <string name="login_login">登录</string>
+    <string name="prompt_email">Email(登录不需要填写)</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+
+
+</resources>

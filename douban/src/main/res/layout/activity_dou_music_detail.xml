@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.ns.yc.ycutilslib.scrollView.ReboundScrollView
+        android:id="@+id/nsv_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPageBg"
+        android:scrollbarSize="4dp"
+        android:scrollbarThumbVertical="@color/itemBackground"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ll_Header_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include
+                    android:id="@+id/include"
+                    layout="@layout/header_music_slide_shape" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tv_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="5dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="10dp"
+                    android:textColor="#666"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/xrv_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+    </com.ns.yc.ycutilslib.scrollView.ReboundScrollView>
+
+
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl_title_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+        <ImageView
+            android:id="@+id/iv_title_head_bg"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:visibility="gone"
+            android:scaleType="fitXY" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/title_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorTransparent"
+            app:contentInsetStart="0.0dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        </android.support.v7.widget.Toolbar>
+    </RelativeLayout>
+
+</FrameLayout>

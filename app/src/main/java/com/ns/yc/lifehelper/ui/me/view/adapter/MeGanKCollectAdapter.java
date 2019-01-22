@@ -6,12 +6,12 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
+import com.ycbjie.gank.bean.cache.CacheGanKFavorite;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
-public class MeGanKCollectAdapter extends RecyclerArrayAdapter<GanKFavorite> {
+public class MeGanKCollectAdapter extends RecyclerArrayAdapter<CacheGanKFavorite> {
 
     public MeGanKCollectAdapter(Activity activity) {
         super(activity);
@@ -23,7 +23,7 @@ public class MeGanKCollectAdapter extends RecyclerArrayAdapter<GanKFavorite> {
     }
 
 
-    private class ExpressDeliveryViewHolder extends BaseViewHolder<GanKFavorite> {
+    private class ExpressDeliveryViewHolder extends BaseViewHolder<CacheGanKFavorite> {
 
         TextView tv_title , tv_type ,tv_publisher ,tv_time;
 
@@ -36,7 +36,7 @@ public class MeGanKCollectAdapter extends RecyclerArrayAdapter<GanKFavorite> {
         }
 
         @Override
-        public void setData(GanKFavorite data) {
+        public void setData(CacheGanKFavorite data) {
             super.setData(data);
             tv_title.setText(data.getTitle()==null ? "标题" : data.getTitle());
             tv_type.setText(data.getType()==null ? "类型" : data.getType());

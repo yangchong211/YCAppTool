@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/base_tool_bar"/>
+
+    <com.ns.yc.ycmultiinputviewlib.MultiEditInputView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/mev_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="5dp"
+        app:maxCount="100"
+        app:hintText="请输入意见反馈"
+        app:contentText=""
+        app:contentHeight="120dp"/>
+
+    <TextView
+        android:id="@+id/tv_call_me"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg"
+        android:padding="10dp"
+        android:text="直接给我打电话"/>
+
+    <TextView
+        android:id="@+id/tv_send_sms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg"
+        android:padding="10dp"
+        android:text="直接给我发短信"/>
+
+
+    <TextView
+        android:id="@+id/tv_send_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg"
+        android:padding="10dp"
+        android:text="直接给我发邮件"/>
+
+    <TextView
+        android:id="@+id/tv_wx_me"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg"
+        android:padding="10dp"
+        android:text="直接给我发微信"/>
+
+    <TextView
+        android:id="@+id/tv_commit_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg"
+        android:padding="10dp"
+        android:text="提交意见反馈"/>
+
+</LinearLayout>

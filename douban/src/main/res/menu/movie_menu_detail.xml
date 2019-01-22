@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.ycbjie.douban.view.activity.MovieDetailActivity">
+
+    <item
+        android:id="@+id/movie_about"
+        android:orderInCategory="100"
+        android:title="更多消息"
+        app:showAsAction="never"/>
+
+</menu>

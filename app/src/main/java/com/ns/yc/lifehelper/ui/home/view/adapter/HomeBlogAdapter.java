@@ -9,15 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
-import com.ns.yc.lifehelper.utils.image.ImageUtils;
-import com.ns.yc.lifehelper.utils.spannable.SpannableUtils;
+import com.ycbjie.library.model.HomeBlogEntity;
+import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.spannable.SpannableUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * <pre>
@@ -43,24 +41,21 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
 
     public class MyViewHolder extends BaseViewHolder<HomeBlogEntity> {
 
-        @Bind(R.id.ll_news_head)
         LinearLayout llNewsHead;
-        @Bind(R.id.tv_title)
         TextView tvTitle;
-        @Bind(R.id.tv_author)
         TextView tvAuthor;
-        @Bind(R.id.tv_time)
         TextView tvTime;
-        @Bind(R.id.tv_type)
-        TextView tvType;
-        @Bind(R.id.iv_img)
         ImageView ivImg;
-        @Bind(R.id.ll_new_content)
         LinearLayout llNewContent;
 
         MyViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_home_list);
-            ButterKnife.bind(this, itemView);
+            llNewsHead = getView(R.id.ll_news_head);
+            tvTitle = getView(R.id.tv_title);
+            tvAuthor = getView(R.id.tv_author);
+            tvTime = getView(R.id.tv_time);
+            ivImg = getView(R.id.iv_img);
+            llNewContent = getView(R.id.ll_new_content);
         }
 
         @Override

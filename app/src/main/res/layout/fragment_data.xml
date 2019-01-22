@@ -181,7 +181,7 @@
         </LinearLayout>
         <View style="@style/DeepUnderLine"/>
 
-        <com.ns.yc.lifehelper.weight.gridview.MyGridView
+        <com.ns.yc.lifehelper.weight.MyGridView
             android:id="@+id/gridView"
             android:gravity="center"
             android:numColumns="4"

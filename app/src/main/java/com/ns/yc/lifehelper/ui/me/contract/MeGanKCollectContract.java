@@ -1,9 +1,9 @@
 package com.ns.yc.lifehelper.ui.me.contract;
 
 
-import com.ns.yc.lifehelper.base.mvp.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp.BaseView;
-import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
+import com.ycbjie.library.base.mvp.BasePresenter;
+import com.ycbjie.library.base.mvp.BaseView;
+import com.ycbjie.gank.bean.cache.CacheGanKFavorite;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public interface MeGanKCollectContract {
         //加载数据为空
         void setEmpty();
         //设置数据
-        void setDataList(List<GanKFavorite> favorites);
+        void setDataList(List<CacheGanKFavorite> favorites);
     }
 
     //Presenter控制器

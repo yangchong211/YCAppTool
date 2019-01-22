@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorTheme"
+        android:theme="@style/AppTheme.ActionBar"
+        app:contentInsetStart="0.0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <FrameLayout
+            android:id="@+id/fl_title_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_title_bar_menu" />
+        </FrameLayout>
+        <TextView
+            android:id="@+id/tv_title"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorWhite"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"/>
+    </android.support.v7.widget.Toolbar>
+
+</LinearLayout>

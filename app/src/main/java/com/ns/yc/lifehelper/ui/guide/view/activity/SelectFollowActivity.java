@@ -9,22 +9,19 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.base.mvp.BaseActivity;
-import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.model.bean.SelectPoint;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.SelectFollowPresenter;
 import com.ns.yc.lifehelper.ui.guide.view.adapter.SelectFollowAdapter;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.yc.cn.ycrecycleviewlib.select.SelectRecyclerView;
 
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.Bind;
 
 
 /**
@@ -39,17 +36,12 @@ import butterknife.Bind;
 public class SelectFollowActivity extends BaseActivity<SelectFollowPresenter>
         implements SelectFollowContract.View, View.OnClickListener {
 
-    @Bind(R.id.ll_title_menu)
+
     FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
     TextView toolbarTitle;
-    @Bind(R.id.tv_title_right)
     TextView tvTitleRight;
-    @Bind(R.id.select_view)
     SelectRecyclerView selectView;
-    @Bind(R.id.tv_clean)
     TextView tvClean;
-    @Bind(R.id.tv_start)
     TextView tvStart;
 
     private SelectFollowContract.Presenter presenter = new SelectFollowPresenter(this);
@@ -63,8 +55,18 @@ public class SelectFollowActivity extends BaseActivity<SelectFollowPresenter>
 
     @Override
     public void initView() {
+        initFindViewById();
         initToolBar();
         initRecycleView();
+    }
+
+    private void initFindViewById() {
+        llTitleMenu = findViewById(R.id.ll_title_menu);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+        tvTitleRight = findViewById(R.id.tv_title_right);
+        selectView = findViewById(R.id.select_view);
+        tvClean = findViewById(R.id.tv_clean);
+        tvStart = findViewById(R.id.tv_start);
     }
 
 
@@ -81,12 +83,9 @@ public class SelectFollowActivity extends BaseActivity<SelectFollowPresenter>
         tvTitleRight.setOnClickListener(this);
         tvClean.setOnClickListener(this);
         tvStart.setOnClickListener(this);
-        adapter.setOnItemClickListener(new OnListItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if (adapter.data != null && adapter.data.size() > 0) {
-                    adapter.toggleSelected(position);
-                }
+        adapter.setOnItemClickListener((view, position) -> {
+            if (adapter.data != null && adapter.data.size() > 0) {
+                adapter.toggleSelected(position);
             }
         });
     }

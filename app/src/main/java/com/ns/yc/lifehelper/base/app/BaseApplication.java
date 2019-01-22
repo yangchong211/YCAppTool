@@ -6,17 +6,19 @@ import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.Utils;
-import com.ns.yc.lifehelper.comment.config.AppConfig;
-import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.inter.callback.LogCallback;
+import com.bumptech.glide.Glide;
+import com.ns.yc.lifehelper.BuildConfig;
 import com.ns.yc.lifehelper.service.InitializeService;
-
-import java.io.File;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.db.realm.RealmUtils;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.music.base.BaseAppHelper;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 
 /**
@@ -31,19 +33,6 @@ import io.realm.RealmConfiguration;
  */
 public class BaseApplication extends Application {
 
-
-    private static BaseApplication instance;
-    private PoolThread executor;
-    private Realm realm;
-
-    public static synchronized BaseApplication getInstance() {
-        if (null == instance) {
-            instance = new BaseApplication();
-        }
-        return instance;
-    }
-
-    public BaseApplication(){}
 
     /**
      * 这个最先执行
@@ -62,14 +51,14 @@ public class BaseApplication extends Application {
     public void onCreate() {
         Log.d("Application", "onCreate");
         super.onCreate();
-        instance = this;
         Utils.init(this);
+        AppConfig.INSTANCE.initConfig();
+        BaseAppHelper.get().init(this);
         BaseLifecycleCallback.getInstance().init(this);
-        initRealm();
-        initThreadPool();
         //在子线程中初始化
         InitializeService.start(this);
     }
+
 
 
     /**
@@ -79,14 +68,9 @@ public class BaseApplication extends Application {
     public void onTerminate() {
         Log.d("Application", "onTerminate");
         super.onTerminate();
-        if(realm!=null){
-            realm.close();
-            realm = null;
-        }
-        if(executor!=null){
-            executor.close();
-            executor = null;
-        }
+        AppConfig.INSTANCE.closeRealm();
+        AppConfig.INSTANCE.closeExecutor();
+        ARouterUtils.destroy();
     }
 
 
@@ -97,6 +81,7 @@ public class BaseApplication extends Application {
     public void onLowMemory() {
         Log.d("Application", "onLowMemory");
         super.onLowMemory();
+        Glide.get(this).clearMemory();
     }
 
 
@@ -108,6 +93,10 @@ public class BaseApplication extends Application {
     public void onTrimMemory(int level) {
         Log.d("Application", "onTrimMemory");
         super.onTrimMemory(level);
+        if (level == TRIM_MEMORY_UI_HIDDEN){
+            Glide.get(this).clearMemory();
+        }
+        Glide.get(this).trimMemory(level);
     }
 
 
@@ -118,57 +107,6 @@ public class BaseApplication extends Application {
     public void onConfigurationChanged(Configuration newConfig) {
         Log.d("Application", "onConfigurationChanged");
         super.onConfigurationChanged(newConfig);
-    }
-
-    /**
-     * 初始化数据库
-     */
-    private void initRealm() {
-        File file ;
-        try {
-            file = new File(Constant.ExternalStorageDirectory, Constant.DATABASE_FILE_PATH_FOLDER);
-            //noinspection ResultOfMethodCallIgnored
-            file.mkdirs();
-        } catch (Exception e) {
-            Log.e("异常",e.getMessage());
-        }
-        Realm.init(instance);
-        RealmConfiguration realmConfig = new RealmConfiguration
-                .Builder()
-                .name(Constant.REALM_NAME)
-                .schemaVersion(Constant.REALM_VERSION)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(realmConfig);
-    }
-
-
-    /**
-     * 获取Realm数据库对象
-     * @return              realm对象
-     */
-    public Realm getRealmHelper() {
-        return realm;
-    }
-
-    /**
-     * 初始化线程池管理器
-     */
-    private void initThreadPool() {
-        // 创建一个独立的实例进行使用
-        executor = PoolThread.ThreadBuilder
-                .createFixed(6)
-                .setPriority(Thread.MAX_PRIORITY)
-                .setCallback(new LogCallback())
-                .build();
-    }
-
-    /**
-     * 获取线程池管理器对象，统一的管理器维护所有的线程池
-     * @return                      executor对象
-     */
-    public PoolThread getExecutor(){
-        return executor;
     }
 
 

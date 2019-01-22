@@ -9,25 +9,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.IntentUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.comment.config.AppConfig;
-import com.ns.yc.lifehelper.base.mvp.BaseFragment;
-import com.ns.yc.lifehelper.inter.listener.NoDoubleClickListener;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.base.mvp.BaseFragment;
+import com.ycbjie.library.inter.listener.NoDoubleClickListener;
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
-import com.ns.yc.lifehelper.ui.me.view.activity.MeFeedBackActivity;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeQoneActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeTimerActivity;
-import com.ns.yc.lifehelper.utils.AppToolUtils;
-import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
+import com.ycbjie.library.utils.AppToolUtils;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 
-import butterknife.Bind;
 
 /**
  * <pre>
@@ -43,30 +42,18 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
         View.OnClickListener , MeFragmentContract.View{
 
 
-    @Bind(R.id.rl_me_timer)
-    RelativeLayout rlMeTimer;
-    @Bind(R.id.rl_me_qone)
-    RelativeLayout rlMeQone;
-    @Bind(R.id.rl_me_project)
-    RelativeLayout rlMeProject;
-    @Bind(R.id.rl_me_collect)
-    RelativeLayout rlMeCollect;
-    @Bind(R.id.rl_me_question)
-    RelativeLayout rlMeQuestion;
-    @Bind(R.id.rl_me_setting)
-    RelativeLayout rlMeSetting;
-    @Bind(R.id.rl_me_feed_back)
-    RelativeLayout rlMeFeedBack;
-    @Bind(R.id.tv_me_phone_number)
-    TextView tvMePhoneNumber;
-    @Bind(R.id.rl_me_phone)
-    LinearLayout rlMePhone;
-    @Bind(R.id.iv_person_image)
-    ImageView ivPersonImage;
-    @Bind(R.id.tv_person_name)
-    TextView tvPersonName;
-    @Bind(R.id.ll_person)
-    LinearLayout llPerson;
+    private LinearLayout mLlPerson;
+    private ImageView mIvPersonImage;
+    private TextView mTvPersonName;
+    private RelativeLayout mRlMeTimer;
+    private RelativeLayout mRlMeQone;
+    private RelativeLayout mRlMeProject;
+    private RelativeLayout mRlMeCollect;
+    private RelativeLayout mRlMeQuestion;
+    private RelativeLayout mRlMeSetting;
+    private RelativeLayout mRlMeFeedBack;
+    private LinearLayout mRlMePhone;
+    private TextView mTvMePhoneNumber;
 
 
     private MainActivity activity;
@@ -92,38 +79,53 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
     }
 
     @Override
-    public void initView() {
+    public void initView(View view) {
+        initFindViewById(view);
         setRipperView();
     }
 
+    private void initFindViewById(View view) {
+        mLlPerson = view.findViewById(R.id.ll_person);
+        mIvPersonImage = view.findViewById(R.id.iv_person_image);
+        mTvPersonName = view.findViewById(R.id.tv_person_name);
+        mRlMeTimer = view.findViewById(R.id.rl_me_timer);
+        mRlMeQone = view.findViewById(R.id.rl_me_qone);
+        mRlMeProject = view.findViewById(R.id.rl_me_project);
+        mRlMeCollect = view.findViewById(R.id.rl_me_collect);
+        mRlMeQuestion = view.findViewById(R.id.rl_me_question);
+        mRlMeSetting = view.findViewById(R.id.rl_me_setting);
+        mRlMeFeedBack = view.findViewById(R.id.rl_me_feed_back);
+        mRlMePhone = view.findViewById(R.id.rl_me_phone);
+        mTvMePhoneNumber = view.findViewById(R.id.tv_me_phone_number);
+    }
+
     private void setRipperView() {
-        AppToolUtils.setRipper(rlMeTimer);
-        AppToolUtils.setRipper(rlMeQone);
-        AppToolUtils.setRipper(rlMeProject);
-        AppToolUtils.setRipper(rlMeCollect);
-        AppToolUtils.setRipper(rlMeQuestion);
-        AppToolUtils.setRipper(rlMeSetting);
-        AppToolUtils.setRipper(rlMeFeedBack);
-        AppToolUtils.setRipper(rlMePhone);
+        AppToolUtils.setRipper(mRlMeTimer);
+        AppToolUtils.setRipper(mRlMeQone);
+        AppToolUtils.setRipper(mRlMeProject);
+        AppToolUtils.setRipper(mRlMeCollect);
+        AppToolUtils.setRipper(mRlMeQuestion);
+        AppToolUtils.setRipper(mRlMeSetting);
+        AppToolUtils.setRipper(mRlMeFeedBack);
+        AppToolUtils.setRipper(mRlMePhone);
     }
 
     @Override
     public void initListener() {
-        rlMeTimer.setOnClickListener(this);
-        rlMeQone.setOnClickListener(this);
-        rlMeProject.setOnClickListener(this);
-        rlMeCollect.setOnClickListener(this);
-        rlMeQuestion.setOnClickListener(this);
-        rlMeSetting.setOnClickListener(this);
-        rlMeFeedBack.setOnClickListener(this);
-        rlMePhone.setOnClickListener(new NoDoubleClickListener() {
+        mRlMeTimer.setOnClickListener(this);
+        mRlMeQone.setOnClickListener(this);
+        mRlMeProject.setOnClickListener(this);
+        mRlMeCollect.setOnClickListener(this);
+        mRlMeQuestion.setOnClickListener(this);
+        mRlMeSetting.setOnClickListener(this);
+        mRlMeFeedBack.setOnClickListener(this);
+        mRlMePhone.setOnClickListener(new NoDoubleClickListener() {
             @Override
             protected void onNoDoubleClick(View view) {
-                LogUtils.e("避免重复点击，测试1秒是否调用几次");
                 toCallMe();
             }
         });
-        ivPersonImage.setOnClickListener(this);
+        mIvPersonImage.setOnClickListener(this);
     }
 
     @Override
@@ -138,10 +140,12 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
                 startActivity(MeTimerActivity.class);
                 break;
             case R.id.rl_me_qone:
-                startActivity(MeQoneActivity.class);
+                //后期再看这块
+                //startActivity(MeQoneActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
                 break;
             case R.id.rl_me_project:
-                ToastUtil.showStart(activity, 0);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LOVE_ACTIVITY);
                 break;
             case R.id.rl_me_collect:
                 startActivity(MeCollectActivity.class);
@@ -150,10 +154,10 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
                 startActivity(MeSettingActivity.class);
                 break;
             case R.id.rl_me_feed_back:
-                startActivity(MeFeedBackActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);
                 break;
             case R.id.rl_me_phone:
-
+                toCallMe();
                 break;
             case R.id.iv_person_image:
                 if(AppConfig.INSTANCE.isLogin()){
@@ -169,7 +173,7 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
 
 
     private void toCallMe() {
-        String number = tvMePhoneNumber.getText().toString().trim();
+        String number = mTvMePhoneNumber.getText().toString().trim();
         Intent callIntent = IntentUtils.getCallIntent(number);
         startActivity(callIntent);
     }

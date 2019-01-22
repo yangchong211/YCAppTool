@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#252525</color>
+    <color name="colorPrimaryDark">#252525</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--主题颜色-->
+    <color name="colorTheme">#252525</color>
+    <!--字体的颜色，纯黑色-->
+    <color name="blackText">#000000</color>
+    <!--字体的颜色 黑色1 -->
+    <color name="blackText1">#464C56</color>
+    <!--字体的颜色 黑色2 -->
+    <color name="blackText2">#464C4E</color>
+    <!--字体的颜色 黑色3-->
+    <color name="blackText3">#212121</color>
+    <!--字体的颜色 黑色4-->
+    <color name="blackText4">#323232</color>
+    <!--item的水波纹颜色，灰色1-->
+    <color name="itemBackground">#DD7D7D7D</color>
+    <!--灰色2-->
+    <color name="gray_black">#703f3f3f</color>
+    <!--背景 纯白色-->
+    <color name="colorWhite">#ffffff</color>
+    <!-- 偏白色大背景 -->
+    <color name="whiteBg">#f5f5f7</color>
+    <!--背景 页面背景的颜色-->
+    <color name="colorPageBg">#f2f4f5</color>
+    <!--背景 item的5.0一下版本选择器颜色-->
+    <color name="colorWhiteBg">#d9d9d9</color>
+    <!--透明色-->
+    <color name="colorTransparent">#00000000</color>
+    <!--侧边栏分割线-->
+    <color name="colorNavLine">#E0E0E0</color>
+    <!-- 灰色下划线 -->
+    <color name="grayLine">#e5e5e5</color>
+    <!-- 灰色，二级字段 -->
+    <color name="gray2">#666666</color>
+    <!-- 灰色，三级字段 -->
+    <color name="gray3">#c3c3c3</color>
+    <!-- 底部导航选择红色 -->
+    <color name="redTab">#D03E49</color>
+
+    <!--透明度颜色-->
+    <color name="alpha_15_white">#26FFFFFF</color>
+    <color name="alpha_05_black">#0D000000</color>
+    <color name="alpha_10_black">#1A000000</color>
+    <color name="alpha_15_black">#26000000</color>
+    <color name="alpha_20_black">#33000000</color>
+    <color name="alpha_25_black">#40000000</color>
+    <color name="alpha_30_black">#4D000000</color>
+    <color name="alpha_35_black">#59000000</color>
+    <color name="alpha_40_black">#66000000</color>
+    <color name="alpha_45_black">#73000000</color>
+    <color name="alpha_50_black">#80000000</color>
+    <color name="alpha_55_black">#8C000000</color>
+    <color name="alpha_60_black">#99000000</color>
+    <color name="alpha_65_black">#A6000000</color>
+    <color name="alpha_70_black">#B3000000</color>
+    <color name="alpha_75_black">#BF000000</color>
+    <color name="alpha_80_black">#CC000000</color>
+    <color name="alpha_85_black">#D9000000</color>
+    <color name="alpha_90_black">#E6000000</color>
+    <color name="alpha_95_black">#F2000000</color>
+
+    <color name="priority_blue">#20cbff</color>
+    <color name="priority_green">#99CC00</color>
+    <color name="priority_yellow">#FFCC33</color>
+    <color name="priority_red">#FF0033</color>
+
+</resources>

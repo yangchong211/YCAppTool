@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ycbjie.love" >
+
+    <application>
+        <activity android:name=".activity.LoveGirlMainActivity"/>
+        <activity android:name=".activity.LoveBrowserActivity"/>
+    </application>
+
+
+</manifest>

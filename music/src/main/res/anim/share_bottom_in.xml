@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><!--从500到0 y轴方向平移-->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="600"
+    android:fromYDelta="500"
+    android:interpolator="@android:anim/anticipate_overshoot_interpolator"
+    android:toYDelta="0" />

@@ -10,11 +10,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.me.view.activity.MeFeedBackActivity;
-import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
-import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.web.view.WebViewActivity;
+import com.pedaily.yc.ycdialoglib.dialog.CustomSelectDialog;
+import com.ycbjie.library.utils.AppUtils;
 
-import org.yczbj.ycvideoplayerlib.VideoPlayerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,52 +56,36 @@ public class DialogUtils {
      * 自定义PopupWindow
      */
     public static void showCustomPopupWindow(final Activity activity){
-        if(VideoPlayerUtils.isActivityLiving(activity)){
-            View popMenuView = activity.getLayoutInflater().inflate(R.layout.dialog_star_feedback_view, null);
+        if(AppUtils.isActivityLiving(activity)){
+            View popMenuView = activity.getLayoutInflater().inflate(R.layout.dialog_custom_window, null);
             final PopupWindow popMenu = new PopupWindow(popMenuView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
             popMenu.setClippingEnabled(false);
             popMenu.setFocusable(true);
             popMenu.showAtLocation(popMenuView, Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
-            AppUtil.setBackgroundAlpha(activity,0.5f);
+            AppUtils.setBackgroundAlpha(activity,0.5f);
 
-            TextView tvStar = (TextView) popMenuView.findViewById(R.id.tv_star);
-            TextView tvFeedback = (TextView) popMenuView.findViewById(R.id.tv_feedback);
-            TextView tvLook = (TextView) popMenuView.findViewById(R.id.tv_look);
-            tvStar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //吐槽跳转意见反馈页面
-                    activity.startActivity(new Intent(activity, MeFeedBackActivity.class));
-                    popMenu.dismiss();
-                }
+            TextView tvStar = popMenuView.findViewById(R.id.tv_star);
+            TextView tvFeedback = popMenuView.findViewById(R.id.tv_feedback);
+            TextView tvLook = popMenuView.findViewById(R.id.tv_look);
+            tvStar.setOnClickListener(v -> {
+                //吐槽跳转意见反馈页面
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);
+                popMenu.dismiss();
             });
-            tvFeedback.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(AppUtil.isPkgInstalled(activity,"com.tencent.android.qqdownloader")){
-                        ArrayList<String> installAppMarkets = GoToScoreUtils.getInstallAppMarkets(activity);
-                        ArrayList<String> filterInstallMarkets = GoToScoreUtils.getFilterInstallMarkets(activity, installAppMarkets);
-                        GoToScoreUtils.launchAppDetail(activity,"com.zero2ipo.harlanhu.pedaily",filterInstallMarkets.get(0));
-                    }else {
-                        Intent intent = new Intent(activity, WebViewActivity.class);
-                        intent.putExtra("url", QQ_URL);
-                        activity.startActivity(intent);
-                    }
-                    popMenu.dismiss();
+            tvFeedback.setOnClickListener(v -> {
+                if(AppUtils.isPkgInstalled(activity,"com.tencent.android.qqdownloader")){
+                    ArrayList<String> installAppMarkets = GoToScoreUtils.getInstallAppMarkets(activity);
+                    ArrayList<String> filterInstallMarkets = GoToScoreUtils.getFilterInstallMarkets(activity, installAppMarkets);
+                    GoToScoreUtils.launchAppDetail(activity,"com.zero2ipo.harlanhu.pedaily",filterInstallMarkets.get(0));
+                }else {
+                    Intent intent = new Intent(activity, WebViewActivity.class);
+                    intent.putExtra("url", QQ_URL);
+                    activity.startActivity(intent);
                 }
+                popMenu.dismiss();
             });
-            tvLook.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    popMenu.dismiss();
-                }
-            });
-            popMenu.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    AppUtil.setBackgroundAlpha(activity,1.0f);
-                }
-            });
+            tvLook.setOnClickListener(v -> popMenu.dismiss());
+            popMenu.setOnDismissListener(() -> AppUtils.setBackgroundAlpha(activity,1.0f));
         }
     }
 
@@ -112,8 +97,8 @@ public class DialogUtils {
                                                 CustomSelectDialog.SelectDialogListener listener,
                                                 List<String> names) {
         CustomSelectDialog dialog = new CustomSelectDialog(activity,
-                R.style.transparentFrameWindowStyle, listener, names);
-        if(VideoPlayerUtils.isActivityLiving(activity)){
+                R.style.TransparentFrameWindowStyle, listener, names);
+        if(AppUtils.isActivityLiving(activity)){
             dialog.show();
         }
         return dialog;

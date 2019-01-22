@@ -2,12 +2,11 @@ package com.ns.yc.lifehelper.ui.me.view.activity;
 
 import android.content.DialogInterface;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,20 +15,24 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.base.mvp.BaseActivity;
+import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.model.bean.UpdateBean;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
-import com.ns.yc.lifehelper.utils.AppToolUtils;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.utils.AppToolUtils;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
-import com.pedaily.yc.ycdialoglib.customToast.ToastUtil;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.web.view.WebViewActivity;
+import com.ycbjie.other.ui.activity.MeFeedBackActivity;
 
 import java.util.concurrent.TimeUnit;
-
-import butterknife.Bind;
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 
 
@@ -47,62 +50,30 @@ import cn.ycbjie.ycthreadpoollib.PoolThread;
 public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implements View.OnClickListener,
         MeSettingContract.View, SwitchButton.OnCheckedChangeListener {
 
-    @Bind(R.id.tv_title_left)
-    TextView tvTitleLeft;
-    @Bind(R.id.ll_title_menu)
-    FrameLayout llTitleMenu;
-    @Bind(R.id.toolbar_title)
-    TextView toolbarTitle;
-    @Bind(R.id.iv_right_img)
-    ImageView ivRightImg;
-    @Bind(R.id.ll_search)
-    FrameLayout llSearch;
-    @Bind(R.id.tv_title_right)
-    TextView tvTitleRight;
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.rl_set_go_star)
-    RelativeLayout rlSetGoStar;
-    @Bind(R.id.switch_button)
-    SwitchButton switchButton;
-    @Bind(R.id.switch_night)
-    SwitchButton switchNight;
-    @Bind(R.id.tv_set_cache_size)
-    TextView tvSetCacheSize;
-    @Bind(R.id.rl_set_clean_cache)
-    RelativeLayout rlSetCleanCache;
-    @Bind(R.id.rl_set_revise_pwd)
-    RelativeLayout rlSetRevisePwd;
-    @Bind(R.id.tv_is_cert)
-    TextView tvIsCert;
-    @Bind(R.id.rl_set_phone)
-    RelativeLayout rlSetPhone;
-    @Bind(R.id.rl_set_about_us)
-    RelativeLayout rlSetAboutUs;
-    @Bind(R.id.rl_set_binding)
-    RelativeLayout rlSetBinding;
-    @Bind(R.id.tv_exit)
-    TextView tvExit;
-    @Bind(R.id.tv_girl)
-    TextView tvGirl;
-    @Bind(R.id.switch_pic)
-    SwitchButton switchPic;
-    @Bind(R.id.tv_pic)
-    AppCompatTextView tvPic;
-    @Bind(R.id.switch_girl)
-    SwitchButton switchGirl;
-    @Bind(R.id.switch_random)
-    SwitchButton switchRandom;
-    @Bind(R.id.tv_pic_state)
-    TextView tvPicState;
-    @Bind(R.id.ll_pic_quality)
-    LinearLayout llPicQuality;
-    @Bind(R.id.rl_set_feedback)
-    RelativeLayout rlSetFeedback;
-    @Bind(R.id.rl_set_update)
-    RelativeLayout rlSetUpdate;
-    @Bind(R.id.tv_update_name)
-    TextView tvUpdateName;
+    private FrameLayout llTitleMenu;
+    private TextView toolbarTitle;
+    private RelativeLayout rlSetGoStar;
+    private SwitchButton switchButton;
+    private SwitchButton switchNight;
+    private TextView tvSetCacheSize;
+    private RelativeLayout rlSetCleanCache;
+    private RelativeLayout rlSetRevisePwd;
+    private TextView tvIsCert;
+    private RelativeLayout rlSetPhone;
+    private RelativeLayout rlSetAboutUs;
+    private RelativeLayout rlSetBinding;
+    private TextView tvExit;
+    private TextView tvGirl;
+    private SwitchButton switchPic;
+    private AppCompatTextView tvPic;
+    private SwitchButton switchGirl;
+    private SwitchButton switchRandom;
+    private TextView tvPicState;
+    private LinearLayout llPicQuality;
+    private RelativeLayout rlSetFeedback;
+    private RelativeLayout rlSetUpdate;
+    private RelativeLayout rlAboutMore;
+    private TextView tvUpdateName;
 
     private ViewLoading mLoading;
     private MeSettingPresenter presenter = new MeSettingPresenter(this);
@@ -116,6 +87,31 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
 
     @Override
     public void initView() {
+        llTitleMenu = findViewById(R.id.ll_title_menu);
+        toolbarTitle = findViewById(R.id.toolbar_title);
+        llPicQuality = findViewById(R.id.ll_pic_quality);
+        tvPicState = findViewById(R.id.tv_pic_state);
+        tvPic = findViewById(R.id.tv_pic);
+        switchGirl = findViewById(R.id.switch_girl);
+        tvGirl = findViewById(R.id.tv_girl);
+        rlSetGoStar = findViewById(R.id.rl_set_go_star);
+        switchRandom = findViewById(R.id.switch_random);
+        switchButton = findViewById(R.id.switch_button);
+        switchPic = findViewById(R.id.switch_pic);
+        switchNight = findViewById(R.id.switch_night);
+        rlSetCleanCache = findViewById(R.id.rl_set_clean_cache);
+        tvSetCacheSize = findViewById(R.id.tv_set_cache_size);
+        rlSetRevisePwd = findViewById(R.id.rl_set_revise_pwd);
+        rlSetPhone = findViewById(R.id.rl_set_phone);
+        tvIsCert = findViewById(R.id.tv_is_cert);
+        rlSetAboutUs = findViewById(R.id.rl_set_about_us);
+        rlSetBinding = findViewById(R.id.rl_set_binding);
+        rlSetFeedback = findViewById(R.id.rl_set_feedback);
+        rlSetUpdate = findViewById(R.id.rl_set_update);
+        rlAboutMore = findViewById(R.id.rl_about_more);
+        tvUpdateName = findViewById(R.id.tv_update_name);
+        tvExit = findViewById(R.id.tv_exit);
+
         initToolBar();
         setRipperView();
     }
@@ -144,7 +140,10 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
         rlSetCleanCache.setOnClickListener(this);
         rlSetFeedback.setOnClickListener(this);
         rlSetUpdate.setOnClickListener(this);
+        rlAboutMore.setOnClickListener(this);
         tvExit.setOnClickListener(this);
+        rlSetRevisePwd.setOnClickListener(this);
+        rlSetAboutUs.setOnClickListener(this);
 
         switchNight.setOnCheckedChangeListener(this);
         switchPic.setOnCheckedChangeListener(this);
@@ -172,7 +171,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
                 if (switchPic.isChecked()) {
                     presenter.showPicQualityDialog(this);
                 } else {
-                    ToastUtil.showToast(this, "请开启显示缩略图");
+                    ToastUtils.showRoundRectToast("请开启显示缩略图");
                 }
                 break;
             case R.id.rl_set_clean_cache:
@@ -183,6 +182,20 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
                 break;
             case R.id.rl_set_update:
                 presenter.checkVersion(appVersionName);
+                break;
+            case R.id.rl_about_more:
+                Bundle bundleMore = new Bundle();
+                bundleMore.putString(Constant.URL,Constant.JIAN_SHU);
+                bundleMore.putString(Constant.TITLE,Constant.JIAN_SHU);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME,bundleMore);
+                break;
+            case R.id.rl_set_about_us:
+                Bundle bundleAbout = new Bundle();
+                bundleAbout.putString(Constant.URL,Constant.GITHUB);
+                bundleAbout.putString(Constant.TITLE,"关于查看我的更多博客");
+                //ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEBVIEWACTIVITY,bundleAbout);
+                //注意，在lib中无法引用路由
+                startActivity(WebViewActivity.class,bundleAbout);
                 break;
             case R.id.tv_exit:
                 presenter.exitLogout();
@@ -212,7 +225,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
                     presenter.saveIsLauncherShowImg(isChecked);
                 } else {
                     switchRandom.setChecked(false);
-                    ToastUtil.showToast(this, "请开启启动页显示美女图");
+                    ToastUtils.showToast( "请开启启动页显示美女图");
                 }
                 break;
             case R.id.switch_girl:
@@ -239,7 +252,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
         if (!mLoading.isShowing()) {
             mLoading.show();
         }
-        PoolThread executor = BaseApplication.getInstance().getExecutor();
+        PoolThread executor = AppConfig.INSTANCE.getExecutor();
         executor.setName("load");
         executor.setDelay(2, TimeUnit.MILLISECONDS);
         executor.execute(new Runnable() {
@@ -366,7 +379,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
 
     @Override
     public void setErrorView(Throwable e) {
-        ToastUtil.showToast(this,"加载错误"+e.getMessage());
+        ToastUtils.showToast("加载错误"+e.getMessage());
     }
 
     @Override

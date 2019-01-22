@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.model.bean.SelectPoint;
-import com.ns.yc.lifehelper.inter.listener.OnListItemClickListener;
+import com.ycbjie.library.inter.listener.OnListItemClickListener;
 import com.yc.cn.ycrecycleviewlib.select.SelectRecyclerViewAdapter;
 
 import java.util.List;
@@ -71,7 +71,7 @@ public class SelectFollowAdapter extends SelectRecyclerViewAdapter<SelectFollowA
         TextView tvName;
         MyViewHolder(View itemView , OnListItemClickListener mItemClickListener) {
             super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.tv_name);
+            tvName = itemView.findViewById(R.id.tv_name);
             this.listener = mItemClickListener;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

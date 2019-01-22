@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:text="仿杀毒类型百分比进度条"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="显示:百分比+单位"/>
+        <Button
+            android:id="@+id/btn_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始"/>
+        <Button
+            android:id="@+id/btn_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停"/>
+    </LinearLayout>
+
+
+
+    <com.ns.yc.ycprogresslib.RingProgressBar
+        android:id="@+id/bar_percent"
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="显示:百分比+单位"/>
+        <Button
+            android:id="@+id/btn_21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始"/>
+        <Button
+            android:id="@+id/btn_22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停"/>
+    </LinearLayout>
+
+
+    <com.ns.yc.ycprogresslib.RingProgressBar
+        android:id="@+id/bar_null"
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:dotColor="@color/blackText1"
+        app:dotBgColor="@android:color/holo_red_light" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="百分比+自定义单位"/>
+        <Button
+            android:id="@+id/btn_31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始"/>
+        <Button
+            android:id="@+id/btn_32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停"/>
+    </LinearLayout>
+
+    <com.ns.yc.ycprogresslib.RingProgressBar
+        android:id="@+id/bar_all"
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:percentTextSize="70sp"
+        app:unitText="分"
+        app:unitTextAlignMode="CN"
+        app:unitTextSize="20sp"/>
+
+
+    
+</LinearLayout>

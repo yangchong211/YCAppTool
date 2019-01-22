@@ -2,7 +2,8 @@ package com.ns.yc.lifehelper.ui.me.presenter;
 
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.me.contract.MeNewsCollectContract;
-import com.ns.yc.lifehelper.db.realm.RealmDbHelper;
+import com.ycbjie.library.db.realm.RealmDbHelper;
+import com.ycbjie.library.db.realm.RealmUtils;
 
 import io.realm.Realm;
 import rx.subscriptions.CompositeSubscription;
@@ -41,7 +42,7 @@ public class MeNewsCollectPresenter implements MeNewsCollectContract.Presenter {
     @Override
     public void initRealm() {
         if(realm ==null){
-            realm = BaseApplication.getInstance().getRealmHelper();
+            realm = RealmUtils.getRealmHelper();
         }
     }
 

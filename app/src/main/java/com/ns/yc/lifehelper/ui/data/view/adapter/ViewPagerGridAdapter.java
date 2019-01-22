@@ -61,8 +61,8 @@ public class ViewPagerGridAdapter extends BaseAdapter {
         if(convertView == null){
             holder = new ViewHolder();
             convertView = View.inflate(context, R.layout.item_vp_grid_iv, null);
-            holder.tv_name = (TextView)convertView.findViewById(R.id.tv_new_seed_title);
-            holder.iv_nul = (ImageView)convertView.findViewById(R.id.iv_new_seed_ic);
+            holder.tv_name = convertView.findViewById(R.id.tv_new_seed_title);
+            holder.iv_nul = convertView.findViewById(R.id.iv_new_seed_ic);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder)convertView.getTag();

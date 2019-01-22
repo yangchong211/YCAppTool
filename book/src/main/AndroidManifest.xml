@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ycbjie.book" >
+
+
+    <application>
+        <activity android:name="com.ycbjie.book.ui.activity.DoodleViewActivity"/>
+        <activity android:name="com.ycbjie.book.ui.activity.GameActivity"/>
+        <activity android:name="com.ycbjie.book.ui.activity.AirGameActivity"/>
+        <activity android:name="com.ycbjie.book.ui.activity.PinTuGameActivity"/>
+    </application>
+
+
+
+</manifest>

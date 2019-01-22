@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.ns.yc.lifehelper.comment.config.AppConfig;
+import com.ycbjie.library.base.config.AppConfig;
 import com.tencent.smtt.sdk.QbSdk;
 
 /**
@@ -48,7 +48,6 @@ public class InitializeService extends IntentService {
     private void initApplication() {
         initQQX5();
         initUtils();
-        AppConfig.INSTANCE.initConfig();
     }
 
 

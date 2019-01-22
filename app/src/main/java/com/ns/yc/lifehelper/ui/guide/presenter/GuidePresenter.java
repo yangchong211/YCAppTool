@@ -4,15 +4,15 @@ import android.app.Activity;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.api.constantApi.ConstantImageApi;
-import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.comment.config.AppConfig;
-import com.ns.yc.lifehelper.db.cache.CacheFindBottomNews;
-import com.ns.yc.lifehelper.db.cache.CacheFindNews;
-import com.ns.yc.lifehelper.db.cache.CacheHomeNews;
-import com.ns.yc.lifehelper.db.cache.CacheHomePile;
-import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.api.ConstantImageApi;
+import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.db.cache.CacheFindBottomNews;
+import com.ycbjie.library.db.cache.CacheFindNews;
+import com.ycbjie.library.db.cache.CacheHomeNews;
+import com.ycbjie.library.db.cache.CacheHomePile;
+import com.ycbjie.library.db.realm.RealmUtils;
+import com.ycbjie.library.model.HomeBlogEntity;
 import com.ns.yc.lifehelper.model.bean.ItemEntity;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
 
@@ -57,7 +57,7 @@ public class GuidePresenter implements GuideContract.Presenter {
 
     private void initRealm() {
         if(realm ==null){
-            realm = BaseApplication.getInstance().getRealmHelper();
+            realm = RealmUtils.getRealmHelper();
         }
     }
 

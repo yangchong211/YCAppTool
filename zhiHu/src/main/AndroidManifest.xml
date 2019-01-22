@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ycbjie.zhihu" >
+
+    <application>
+        <activity android:name="com.ycbjie.zhihu.ui.activity.ZhiHuNewsActivity"/>
+        <activity android:name="com.ycbjie.zhihu.web.activity.WebViewAnimActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ycbjie.zhihu.ui.activity.ZhiHuCommentActivity"/>
+        <activity android:name="com.ycbjie.zhihu.ui.activity.ZhiHuThemeListActivity"/>
+        <activity android:name="com.ycbjie.zhihu.ui.activity.ZhiHuSectionListActivity"/>
+        <activity android:name="com.ycbjie.zhihu.ui.activity.ZhiHuCalendarActivity"/>
+    </application>
+
+
+</manifest>

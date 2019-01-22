@@ -1,9 +1,9 @@
 package com.ns.yc.lifehelper.ui.find.contract;
 
 
-import com.ns.yc.lifehelper.base.mvp.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp.BaseView;
-import com.ns.yc.lifehelper.ui.other.myNews.weChat.model.bean.WxNewsDetailBean;
+import com.ycbjie.library.base.mvp.BasePresenter;
+import com.ycbjie.library.base.mvp.BaseView;
+import com.ycbjie.news.model.WxNewsDetailBean;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="mobile_video_name">
+        <item>推荐</item>
+        <item>音乐</item>
+        <item>搞笑</item>
+        <item>社会</item>
+        <item>小品</item>
+        <item>生活</item>
+        <item>影视</item>
+        <item>娱乐</item>
+        <item>呆萌</item>
+        <item>游戏</item>
+        <item>原创</item>
+        <item>开眼</item>
+    </string-array>
+
+    <string-array name="mobile_video_id">
+        <item>video</item>
+        <item>subv_voice</item>
+        <item>subv_funny</item>
+        <item>subv_society</item>
+        <item>subv_comedy</item>
+        <item>subv_life</item>
+        <item>subv_movie</item>
+        <item>subv_entertainment</item>
+        <item>subv_cute</item>
+        <item>subv_game</item>
+        <item>subv_boutique</item>
+        <item>subv_broaden_view</item>
+    </string-array>
+
+
+
+</resources>

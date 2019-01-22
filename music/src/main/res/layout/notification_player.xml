@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:id="@+id/ll_root"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="fitXY"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="这个是歌曲标题"
+            android:textSize="16sp"
+            android:textColor="@color/blackText"
+            android:singleLine="true"
+            android:maxLength="8"
+            android:ellipsize="end"
+            android:id="@+id/tv_title" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="艺术家"
+            android:textColor="@color/blackText2"
+            android:textSize="12sp"
+            android:maxEms="12"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:id="@+id/tv_artist" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="60dp"
+        android:src="@drawable/notify_btn_dark_prev_normal"
+        android:id="@+id/btn_pre" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/notify_btn_dark_pause_normal"
+        android:id="@+id/btn_start" />
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/notify_btn_dark_next_normal"
+        android:id="@+id/btn_next" />
+
+</LinearLayout>

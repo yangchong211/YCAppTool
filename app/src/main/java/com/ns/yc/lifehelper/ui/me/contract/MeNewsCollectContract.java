@@ -1,9 +1,9 @@
 package com.ns.yc.lifehelper.ui.me.contract;
 
 
-import com.ns.yc.lifehelper.base.mvp.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp.BaseView;
-import com.ns.yc.lifehelper.db.cache.CacheZhLike;
+import com.ycbjie.library.base.mvp.BasePresenter;
+import com.ycbjie.library.base.mvp.BaseView;
+import com.ycbjie.library.db.cache.CacheZhLike;
 
 import java.util.List;
 

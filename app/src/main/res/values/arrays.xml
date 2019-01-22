@@ -70,24 +70,24 @@
     <!--发现页图片对应的位子-->
     <string-array name="find_gv_title">
         <item>干货集中营</item>
-        <item>播放器</item>
+        <item>玩Android</item>
         <item>超文本</item>
-        <item>时光笔记</item>
-        <item>7日天气</item>
-        <item>绘画板</item>
-        <item>知乎专栏</item>
+        <item>我的音乐</item>
+        <item>知乎日报</item>
+        <item>flutter</item>
+        <item>妹子画廊</item>
         <item>微信精选</item>
     </string-array>
 
 
     <string-array name="find_list1_title">
-        <item>阅读器</item>
-        <item>音乐</item>
         <item>视频</item>
-        <item>美图</item>
-        <item>唐诗</item>
-        <item>宋词</item>
-        <item>元曲</item>
+        <item>妹子</item>
+        <item>视频</item>
+        <item>画板</item>
+        <item>拼图</item>
+        <item>游戏</item>
+        <item>抽奖</item>
         <item>番茄</item>
     </string-array>
     <integer-array name="find_list1_image">
@@ -117,7 +117,7 @@
 
 
     <string-array name="find_list4_title">
-        <item>时光日志</item>
+        <item>妹子美图</item>
         <item>稀土掘金</item>
         <item>快读头条</item>
     </string-array>
@@ -182,16 +182,16 @@
 
     <!--数据页图片对应的位子-->
     <string-array name="data_pro_title">
-        <item>查询快递</item>
-        <item>保存图片</item>
-        <item>我的记事</item>
-        <item>工商</item>
-        <item>画廊</item>
-        <item>Wt新闻</item>
-        <item>IM聊天</item>
-        <item>归属地</item>
-        <item>空气质量</item>
-        <item>今日油价</item>
+        <item>有趣视频</item>
+        <item>爬妹子图</item>
+        <item>MarkDown</item>
+        <item>开启权限</item>
+        <item>天行八卦</item>
+        <item>妹子美图</item>
+        <item>flutter</item>
+        <item>状态切换</item>
+        <item>圆环进度</item>
+        <item>妹子拼图</item>
         <item>翻译</item>
         <item>缴费</item>
     </string-array>
@@ -215,17 +215,17 @@
 
     <!--数据页小工具图片对应的位子-->
     <string-array name="data_tool_pro_title">
-        <item>笔记本</item>
-        <item>腾讯X5</item>
-        <item>360工具</item>
-        <item>听听</item>
-        <item>播放器</item>
-        <item>唐诗</item>
-        <item>宋词</item>
-        <item>历史</item>
-        <item>法律</item>
-        <item>猜谜语</item>
-        <item>aidl测试</item>
+        <item>加载大图</item>
+        <item>轮播图</item>
+        <item>爱心表达</item>
+        <item>杀毒进度</item>
+        <item>微信新闻</item>
+        <item>飞机大战</item>
+        <item>老虎机</item>
+        <item>电影评分</item>
+        <item>线程池</item>
+        <item>逗比视频</item>
+        <item>百分比条</item>
         <item>绘画板</item>
     </string-array>
 
@@ -282,38 +282,5 @@
         <item>缴费</item>
     </string-array>
 
-    <!--天气页面-->
-    <string-array name="indicator_strings">
-        <item name="indicator_string_1">优</item>
-        <item name="indicator_string_2">良</item>
-        <item name="indicator_string_3">轻度污染</item>
-        <item name="indicator_string_4">中度污染</item>
-        <item name="indicator_string_5">重度污染</item>
-        <item name="indicator_string_5">严重污染</item>
-    </string-array>
-
-    <!--天气页面指示器颜色-->
-    <integer-array name="indicator_colors">
-        <item name="indicator_color_1">@color/indicator_color_1</item>
-        <item name="indicator_color_2">@color/indicator_color_2</item>
-        <item name="indicator_color_3">@color/indicator_color_3</item>
-        <item name="indicator_color_4">@color/indicator_color_4</item>
-        <item name="indicator_color_5">@color/indicator_color_5</item>
-        <item name="indicator_color_6">@color/indicator_color_6</item>
-    </integer-array>
-
-
-    <string-array name="sub_rank_tabs">
-        <item>周榜</item>
-        <item>月榜</item>
-        <item>总榜</item>
-    </string-array>
-
-    <string-array name="sub_tabs">
-        <item>新书</item>
-        <item>热门</item>
-        <item>口碑</item>
-        <item>完结</item>
-    </string-array>
 
 </resources>

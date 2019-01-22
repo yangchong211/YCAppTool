@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--侧滑菜单分割线样式-->
+    <style name="ViewLineNav">
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/colorNavLine</item>
+    </style>
+
+    <!-- 深色下划线 -->
+    <style name="DeepUnderLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/grayLine</item>
+    </style>
+
+
+    <!-- 深色下划线 -->
+    <style name="DeepUnderLineDp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/grayLine</item>
+    </style>
+
+    <!-- 深色下划线 -->
+    <style name="DeepUnderLineSecond">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/grayLine</item>
+    </style>
+
+    <!-- 浅线水平全部分割 颜色深-->
+    <style name="divider_all_horizontal_transport">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">0.01dp</item>
+        <item name="android:background">@color/alpha_15_white</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <!-- 浅线水平全部分割 颜色深-->
+    <style name="divider_all_vertical_transport">
+        <item name="android:layout_width">0.01dp</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">@color/alpha_15_white</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
+    <!--个人中心资料左边文字抽取-->
+    <style name="MeInfoTextLeftStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/blackText4</item>
+    </style>
+
+
+    <style name="MeInfoTextRightStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:drawableRight">@drawable/ic_back_right</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/blackText2</item>
+    </style>
+
+    <style name="WeightAttr">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/blackText</item>
+    </style>
+
+
+</resources>

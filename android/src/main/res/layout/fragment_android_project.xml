@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:textSize="16sp"
+                android:text="@string/select_kind" />
+            <TextView
+                android:id="@+id/tvKind"
+                android:textColor="@color/grayText"
+                android:textSize="@dimen/textSize14"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableRight="@drawable/move_icon"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp" />
+        </RelativeLayout>
+
+
+        <org.yczbj.ycrefreshviewlib.YCRefreshView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/rvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            app:layout_progress="@layout/view_custom_loading_data"
+            app:layout_empty="@layout/view_custom_empty_data"
+            app:layout_error="@layout/view_custom_data_error"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/flRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:background="@android:color/white">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvKinds"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+</android.support.v4.widget.DrawerLayout>

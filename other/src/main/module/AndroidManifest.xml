@@ -1,0 +1,38 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ycbjie.other" >
+
+    <application
+        android:name="com.ycbjie.other.OtherApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_other_name"
+        android:theme="@style/AppTheme"
+        android:supportsRtl="true"
+        tools:replace="android:label"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name="com.ycbjie.other.ui.activity.TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.ycbjie.other.ui.activity.AboutMeActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.MeFeedBackActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.ImageGalleryActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.MeLoginActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.MeRegisterActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.ZoomLargeImageActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.MeBannerActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.BannerViewActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.SnapHelperActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.ProgressFirstActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.ProgressSecondActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.ProgressThirdActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.MonkeyGameActivity"/>
+    </application>
+
+
+</manifest>

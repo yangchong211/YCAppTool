@@ -1,0 +1,13 @@
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/actionbar_icon_add"
+        android:title="添加"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/ic_large_more_normal"
+        android:title="关于"
+        app:showAsAction="always" />
+</menu>

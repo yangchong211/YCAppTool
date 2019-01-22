@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/base_android_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_introduce" />
+
+            <TextView
+                android:textSize="@dimen/textSize16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/app_introduce_content" />
+
+            <TextView
+                android:id="@+id/tvHome"
+                android:textSize="@dimen/textSize14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/app_home" />
+
+            <TextView
+                android:id="@+id/tvOpenApi"
+                android:textSize="@dimen/textSize14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/app_open_api" />
+
+            <TextView
+                android:id="@+id/tvSrc"
+                android:textSize="@dimen/textSize14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/app_git_src" />
+
+            <TextView
+                android:textSize="24sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/app_developer" />
+
+            <TextView
+                android:id="@+id/tvBlog"
+                android:textSize="@dimen/textSize14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/app_developer_blog" />
+
+            <TextView
+                android:id="@+id/tvGitHub"
+                android:textSize="@dimen/textSize14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/app_developer_git" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</FrameLayout>
+

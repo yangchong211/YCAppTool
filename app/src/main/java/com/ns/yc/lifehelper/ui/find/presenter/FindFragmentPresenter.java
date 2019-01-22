@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
@@ -17,20 +15,18 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.OnePlusNLayoutHelper;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.comment.Constant;
+import com.ycbjie.library.constant.Constant;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
-import com.ns.yc.lifehelper.model.bean.HomeBlogEntity;
+import com.ycbjie.library.model.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.utils.image.ImageUtils;
-import com.yc.cn.ycbannerlib.BannerView;
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ycbjie.library.utils.ImageUtils;
+import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
-import com.yc.cn.ycbannerlib.marquee.OnItemClickListener;
-import com.yc.cn.ycbaseadapterlib.BaseViewHolder;
-
+import com.yc.cn.ycbaseadapterlib.adapter.BaseViewHolder;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 import rx.subscriptions.CompositeSubscription;
 
 
@@ -102,7 +98,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         arrayList.add("http://bpic.wotucdn.com/11/66/23/55bOOOPIC3c_1024.jpg!/fw/780/quality/90/unsharp/true/compress/true/watermark/url/L2xvZ28ud2F0ZXIudjIucG5n/repeat/true");
         arrayList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505470629546&di=194a9a92bfcb7754c5e4d19ff1515355&imgtype=0&src=http%3A%2F%2Fpics.jiancai.com%2Fimgextra%2Fimg01%2F656928666%2Fi1%2FT2_IffXdxaXXXXXXXX_%2521%2521656928666.jpg");
         //banner
-        return new BaseDelegateAdapter(activity, new LinearLayoutHelper(), R.layout.base_match_banner, 1, Constant.viewType.typeBanner) {
+        return new BaseDelegateAdapter(activity, new LinearLayoutHelper(), R.layout.base_wrap_banner, 1, Constant.viewType.typeBanner) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -160,18 +156,15 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 super.onBindViewHolder(holder, position);
                 MarqueeView marqueeView = holder.getView(R.id.marqueeView);
 
-                List<String> info1 = new ArrayList<>();
+                ArrayList<String> info1 = new ArrayList<>();
                 info1.add("1.坚持读书，写作，源于内心的动力！");
                 info1.add("2.欢迎订阅喜马拉雅听书！");
                 info1.add("3.欢迎关注我的GitHub！");
                 marqueeView.startWithList(info1);
                 // 在代码里设置自己的动画
-                marqueeView.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position, TextView textView) {
-                        mView.setMarqueeClick(position);
-                    }
-                });
+                marqueeView.setOnItemClickListener((position1, textView) ->
+                        mView.setMarqueeClick(position1)
+                );
             }
         };
     }
@@ -212,12 +205,9 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 holder.setText(R.id.tv_title, listTitle[position]);
                 ImageView iv = holder.getView(R.id.iv_image);
                 ImageUtils.loadImgByPicasso(activity, images.get(position), iv);
-                holder.getItemView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mView.setGridClick(position);
-                    }
-                });
+                Objects.requireNonNull(holder.getItemView()).setOnClickListener(v ->
+                        mView.setGridClick(position)
+                );
             }
         };
     }
@@ -229,7 +219,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         linearLayoutHelper.setDividerHeight(5);
         linearLayoutHelper.setMargin(0, 0, 0, 0);
         linearLayoutHelper.setPadding(0, 0, 0, 10);
-        return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.item_tx_news_list, 3, Constant.viewType.typeNews) {
+        return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.item_gold_news_list, 3, Constant.viewType.typeNews) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
@@ -239,11 +229,9 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                     ImageView imageView = holder.getView(R.id.iv_logo);
                     ImageUtils.loadImgByPicasso(activity, model.getImageUrl(), R.drawable.image_default, imageView);
                     holder.setText(R.id.tv_time, model.getTime());
-                    holder.getItemView().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mView.setNewsList2Click(position,Constant.findNews.get(position).getUrl());
-                        }
+                    Objects.requireNonNull(holder.getItemView()).setOnClickListener(v -> {
+                        //点击事件
+                        mView.setNewsList2Click(position,Constant.findNews.get(position).getUrl());
                     });
                 } else {
                     ImageView imageView = holder.getView(R.id.iv_logo);
@@ -288,11 +276,9 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 holder.setText(R.id.tv_title, listTitle[position]);
                 ImageView iv = holder.getView(R.id.iv_image);
                 ImageUtils.loadImgByPicasso(activity, images.get(position), iv);
-                holder.getItemView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mView.setGridClickThird(position);
-                    }
+                Objects.requireNonNull(holder.getItemView()).setOnClickListener(v -> {
+                    //点击事件
+                    mView.setGridClickThird(position);
                 });
             }
         };
@@ -328,11 +314,9 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                     holder.setText(R.id.tv_title2, listTitle[position]);
                     holder.setImageResource(R.id.iv_image2, images.get(position));
                 }
-                holder.getItemView().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mView.setGridClickFour(position);
-                    }
+                Objects.requireNonNull(holder.getItemView()).setOnClickListener(v -> {
+                    //点击事件
+                    mView.setGridClickFour(position);
                 });
             }
         };
@@ -359,12 +343,10 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                     ImageUtils.loadImgByPicasso(activity, model.getImageUrl()
                             , R.drawable.image_default, imageView);
                     holder.setText(R.id.tv_time, model.getTime());
-                    holder.getItemView().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mView.setNewsList5Click(position,
-                                    Constant.findBottomNews.get(position).getUrl());
-                        }
+                    Objects.requireNonNull(holder.getItemView()).setOnClickListener(v -> {
+                        //点击事件
+                        mView.setNewsList5Click(position,
+                                Constant.findBottomNews.get(position).getUrl());
                     });
                 } else {
                     ImageView imageView = holder.getView(R.id.iv_logo);

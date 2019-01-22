@@ -5,10 +5,10 @@ import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
-import com.ns.yc.lifehelper.base.mvp.BasePresenter;
-import com.ns.yc.lifehelper.base.mvp.BaseView;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.yc.cn.ycbannerlib.BannerView;
+import com.ycbjie.library.base.mvp.BasePresenter;
+import com.ycbjie.library.base.mvp.BaseView;
+import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.yc.cn.ycbannerlib.banner.BannerView;
 
 import java.util.List;
 

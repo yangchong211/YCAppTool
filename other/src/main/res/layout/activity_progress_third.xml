@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始"/>
+        <Button
+            android:id="@+id/btn_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停"/>
+        <Button
+            android:id="@+id/btn_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重新开始"/>
+    </LinearLayout>
+
+    <com.ns.yc.ycprogresslib.NumberProgressbar
+        android:id="@+id/bar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始"/>
+        <Button
+            android:id="@+id/btn_22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂停"/>
+        <Button
+            android:id="@+id/btn_23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重新开始"/>
+    </LinearLayout>
+    <com.ns.yc.ycprogresslib.NumberProgressbar
+        android:id="@+id/bar2"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:progress_max="100"
+        app:progress_reached_bar_height="3dp"
+        app:progress_unreached_bar_height="3dp"
+        app:progress_reached_color="@color/colorPrimary"
+        app:progress_unreached_color="@color/gray3"
+        app:progress_text_size="14sp"
+        app:progress_text_color="@color/colorAccent"
+        app:progress_text_visibility="visible"/>
+
+
+</LinearLayout>

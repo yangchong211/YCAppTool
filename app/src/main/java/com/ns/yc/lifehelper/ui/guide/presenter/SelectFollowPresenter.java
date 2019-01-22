@@ -5,9 +5,10 @@ import android.app.Activity;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.model.bean.SelectPoint;
-import com.ns.yc.lifehelper.db.cache.SelectFollow;
-import com.ns.yc.lifehelper.db.cache.SelectUnFollow;
+import com.ycbjie.library.db.cache.SelectFollow;
+import com.ycbjie.library.db.cache.SelectUnFollow;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
+import com.ycbjie.library.db.realm.RealmUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
 
     private void initRealm() {
         if(realm ==null){
-            realm = BaseApplication.getInstance().getRealmHelper();
+            realm = RealmUtils.getRealmHelper();
         }
     }
 

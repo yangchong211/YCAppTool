@@ -1,7 +1,7 @@
 package com.ns.yc.lifehelper.ui.me.view.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.comment.Constant;
-import com.ns.yc.lifehelper.db.cache.CacheZhLike;
-import com.ns.yc.lifehelper.ui.webView.view.WebViewAnimActivity;
-import com.ns.yc.lifehelper.utils.image.ImageUtils;
-
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.db.cache.CacheZhLike;
+import com.ycbjie.library.utils.ImageUtils;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+
 
 public class MeNewsLikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
@@ -166,37 +165,33 @@ public class MeNewsLikeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public static class ArticleViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.iv_article_image)
         ImageView image;
-        @Bind(R.id.tv_article_title)
         TextView title;
-        @Bind(R.id.tv_article_from)
         TextView from;
 
         public ArticleViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            image = itemView.findViewById(R.id.iv_article_image);
+            title = itemView.findViewById(R.id.tv_article_title);
+            from = itemView.findViewById(R.id.tv_article_from);
         }
 
     }
 
     public static class GirlViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.iv_girl_image)
         ImageView image;
 
         public GirlViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            image = itemView.findViewById(R.id.iv_girl_image);
         }
     }
 
     public void gotoDailyDetail(int id) {
-        Intent intent = new Intent();
-        intent.setClass(mContext, WebViewAnimActivity.class);
-        intent.putExtra("id",id);
-        intent.putExtra("isNotTransition",true);
-        mContext.startActivity(intent);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.ID,id);
+        ARouterUtils.navigation(ARouterConstant.ACTIVITY_ZHI_HU_WEB_VIEW,bundle);
     }
 
 //    public void gotoTechDetail(String url,String imgUrl, String title,String id,int type) {

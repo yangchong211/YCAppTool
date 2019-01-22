@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/share"
+        android:orderInCategory="100"
+        android:title="分享文章"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/collect"
+        android:orderInCategory="100"
+        android:title="收藏文章"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/cope"
+        android:orderInCategory="100"
+        android:title="复制链接"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/open"
+        android:orderInCategory="100"
+        android:title="打开链接"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/capture"
+        android:orderInCategory="100"
+        android:title="屏幕截图"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="100"
+        android:title="关于开源项目"
+        app:showAsAction="never" />
+
+</menu>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"   
+    android:background="@color/whiteBg"
+    android:alpha="100">
+            
+    <TextView        
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="wrap_content"
+        style="@style/ToolbarItemStyle"
+        android:text="#标题"
+        android:onClick="onClickHeader"/>
+    
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@color/grayLine"/>
+    
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="wrap_content"
+        style="@style/ToolbarItemStyle"
+        android:text="{居中}"
+        android:onClick="onClickCenter"/>
+    
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@color/grayLine"/>
+            
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="wrap_content"        
+        style="@style/ToolbarItemStyle"
+        android:text="-列表"
+        android:onClick="onClickList"/>   
+        
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@color/grayLine"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="wrap_content"         
+        style="@style/ToolbarItemStyle"
+        android:text="*加粗*"
+        android:onClick="onClickBold"/>
+
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@color/grayLine"/>
+    
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1.0"
+        android:layout_height="wrap_content"          
+        style="@style/ToolbarItemStyle"
+        android:text=">引用"
+        android:onClick="onClickQuote"/>
+        
+</LinearLayout>
+

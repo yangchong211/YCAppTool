@@ -348,6 +348,26 @@
             <View style="@style/DeepUnderLine"/>
 
 
+            <!--关于开源项目-->
+            <RelativeLayout
+                android:id="@+id/rl_about_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:padding="10dp">
+                <TextView
+                    style="@style/MeInfoTextLeftStyle"
+                    android:text="关于开源项目"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:drawableEnd="@drawable/ic_back_right"/>
+            </RelativeLayout>
+            <View style="@style/DeepUnderLine"/>
+
+
             <!--推出登录-->
             <TextView
                 android:id="@+id/tv_exit"

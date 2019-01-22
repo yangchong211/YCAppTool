@@ -44,7 +44,6 @@ public class NarrowImageAdapter extends RecyclerArrayAdapter<Integer> {
         @Override
         public void setData(Integer data) {
             imgPicture.setImageResource(data);
-            //ImageUtils.loadImgByPicassoLocation(getContext(),data,imgPicture);
         }
     }
 }

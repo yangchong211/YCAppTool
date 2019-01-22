@@ -1,8 +1,8 @@
 package com.ns.yc.lifehelper.ui.me.presenter;
 
-import com.ns.yc.lifehelper.base.app.BaseApplication;
 import com.ns.yc.lifehelper.ui.me.contract.MeGanKCollectContract;
-import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
+import com.ycbjie.gank.bean.cache.CacheGanKFavorite;
+import com.ycbjie.library.db.realm.RealmUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class MeGanKCollectPresenter implements MeGanKCollectContract.Presenter {
 
     private void initRealm() {
         if(realm==null){
-            realm = BaseApplication.getInstance().getRealmHelper();
+            realm = RealmUtils.getRealmHelper();
         }
     }
 
@@ -54,15 +54,15 @@ public class MeGanKCollectPresenter implements MeGanKCollectContract.Presenter {
     @Override
     public void getCollectData(boolean isRefresh) {
         initRealm();
-        RealmResults<GanKFavorite> ganKFavorites;
-        if(realm!=null && realm.where(GanKFavorite.class).findAll()!=null){
-            ganKFavorites = realm.where(GanKFavorite.class).findAll();
+        RealmResults<CacheGanKFavorite> ganKFavorites;
+        if(realm!=null && realm.where(CacheGanKFavorite.class).findAll()!=null){
+            ganKFavorites = realm.where(CacheGanKFavorite.class).findAll();
         }else {
             return;
         }
-        List<GanKFavorite> list = new ArrayList<>();
+        List<CacheGanKFavorite> list = new ArrayList<>();
         for(int a=0 ; a<ganKFavorites.size() ; a++){
-            GanKFavorite favorite = new GanKFavorite();
+            CacheGanKFavorite favorite = new CacheGanKFavorite();
             favorite.setTitle(ganKFavorites.get(a).getTitle());
             favorite.setAuthor(ganKFavorites.get(a).getAuthor());
             favorite.setCreatetime(ganKFavorites.get(a).getCreatetime());

@@ -13,21 +13,18 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.mvp.BaseLazyFragment;
+import com.ycbjie.library.base.mvp.BaseLazyFragment;
 import com.ns.yc.lifehelper.ui.me.contract.MeGanKCollectContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeGanKCollectPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
 import com.ns.yc.lifehelper.ui.me.view.adapter.MeGanKCollectAdapter;
-import com.ns.yc.lifehelper.ui.other.gank.bean.GanKFavorite;
+import com.ycbjie.gank.bean.cache.CacheGanKFavorite;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.List;
-
-import butterknife.Bind;
-
 
 
 /**
@@ -41,7 +38,6 @@ import butterknife.Bind;
  */
 public class MeGanKCollectFragment extends BaseLazyFragment implements MeGanKCollectContract.View{
 
-    @Bind(R.id.recyclerView)
     YCRefreshView recyclerView;
 
     private MeGanKCollectContract.Presenter presenter = new MeGanKCollectPresenter(this);
@@ -80,7 +76,10 @@ public class MeGanKCollectFragment extends BaseLazyFragment implements MeGanKCol
     }
 
     @Override
-    public void initView() {
+    public void initView(View view) {
+
+        recyclerView = view.findViewById(R.id.recyclerView);
+
         initRecycleView();
     }
 
@@ -136,7 +135,7 @@ public class MeGanKCollectFragment extends BaseLazyFragment implements MeGanKCol
     }
 
     @Override
-    public void setDataList(List<GanKFavorite> favorites) {
+    public void setDataList(List<CacheGanKFavorite> favorites) {
         adapter.clear();
         adapter.addAll(favorites);
         adapter.notifyDataSetChanged();

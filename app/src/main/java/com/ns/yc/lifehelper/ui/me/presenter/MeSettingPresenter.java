@@ -12,16 +12,16 @@ import android.widget.AdapterView;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ns.yc.lifehelper.comment.config.AppConfig;
+import com.ycbjie.library.base.config.AppConfig;
 import com.ns.yc.lifehelper.model.bean.UpdateBean;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.model.MeAppModel;
-import com.ns.yc.lifehelper.ui.webView.view.WebViewActivity;
+import com.ycbjie.library.web.view.WebViewActivity;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.lifehelper.utils.GoToScoreUtils;
-import com.ns.yc.lifehelper.utils.rxUtils.RxUtil;
-import com.pedaily.yc.ycdialoglib.selectDialog.CustomSelectDialog;
+import com.ycbjie.library.utils.rxUtils.RxUtil;
+import com.pedaily.yc.ycdialoglib.dialog.CustomSelectDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,7 +155,7 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 DialogUtils.showProgressDialog(activity);
-                PoolThread executor = BaseApplication.getInstance().getExecutor();
+                PoolThread executor = AppConfig.INSTANCE.getExecutor();
                 executor.setName("load");
                 executor.setDelay(2, TimeUnit.MILLISECONDS);
                 executor.execute(new Runnable() {

@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/actionMenu"
+        android:icon="@drawable/ic_menu"
+        android:orderInCategory="100"
+        android:title="菜单"
+        app:showAsAction="always" />
+
+</menu>

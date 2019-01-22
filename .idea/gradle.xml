@@ -8,7 +8,20 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/android" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/book" />
+            <option value="$PROJECT_DIR$/douban" />
+            <option value="$PROJECT_DIR$/gank" />
+            <option value="$PROJECT_DIR$/library" />
+            <option value="$PROJECT_DIR$/love" />
+            <option value="$PROJECT_DIR$/music" />
+            <option value="$PROJECT_DIR$/news" />
+            <option value="$PROJECT_DIR$/note" />
+            <option value="$PROJECT_DIR$/other" />
+            <option value="$PROJECT_DIR$/todo" />
+            <option value="$PROJECT_DIR$/video" />
+            <option value="$PROJECT_DIR$/zhiHu" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

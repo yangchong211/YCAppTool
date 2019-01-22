@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorTheme"
+    android:theme="@style/AppTheme.ActionBar"
+    app:contentInsetStart="0.0dp"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    <!--左边文字-->
+    <TextView
+        android:id="@+id/tv_title_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:padding="10dp"
+        android:text="编辑"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <!--左返回键按钮-->
+    <FrameLayout
+        android:id="@+id/ll_title_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:visibility="visible">
+        <ImageView
+            android:layout_width="@dimen/back_width"
+            android:layout_height="@dimen/back_height"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_arrow_back" />
+    </FrameLayout>
+
+    <!--中间标题-->
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="标题"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+
+
+    <!--右边图片，例如搜索-->
+    <FrameLayout
+        android:id="@+id/ll_search"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/iv_right_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_right_search" />
+    </FrameLayout>
+
+    <!--右边文字-->
+    <TextView
+        android:id="@+id/tv_title_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:text="编辑"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+</android.support.v7.widget.Toolbar>
