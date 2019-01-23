@@ -85,7 +85,8 @@
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@null"
-                    app:srcCompat="@drawable/ic_gank_search"/>
+                    app:srcCompat="@drawable/ic_gank_search"
+                    tools:ignore="VectorDrawableCompat" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -109,7 +110,8 @@
                 android:padding="5dp"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="-0.5"
-                app:srcCompat="@drawable/ic_gank_collection"/>
+                app:srcCompat="@drawable/ic_gank_collection"
+                tools:ignore="VectorDrawableCompat" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -125,5 +127,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_gank_beauty"/>
+        app:srcCompat="@drawable/ic_gank_beauty"
+        tools:ignore="VectorDrawableCompat" />
 </android.support.design.widget.CoordinatorLayout>

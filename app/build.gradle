@@ -35,6 +35,37 @@ android {
         renderscriptSupportModeEnabled true
     }
 
+    //签名
+    /*signingConfigs {
+        debug {
+            v1SigningEnabled true
+            v2SigningEnabled true
+            try {
+                def signP = getSigningProperties(true)
+                storeFile file(signP[0])
+                storePassword signP[1]
+                keyAlias signP[2]
+                keyPassword signP[3]
+            } catch (ex) {
+                ex.printStackTrace()
+            }
+        }
+
+        release {
+            v1SigningEnabled true
+            v2SigningEnabled true
+            try {
+                def signP = getSigningProperties(false)
+                storeFile file(signP[0])
+                storePassword signP[1]
+                keyAlias signP[2]
+                keyPassword signP[3]
+            } catch (ex) {
+                ex.printStackTrace()
+            }
+        }
+    }*/
+
     buildTypes {
         //正式
         release {
@@ -231,6 +262,31 @@ static int getUrl(int status) {
         }
     }
     return 2//线上
+}
+
+
+//读取项目中的sign.properties签名文件，安全
+static String[] getSigningProperties(boolean isDebug) {
+    File propFile = new File('sign.properties')
+    if (propFile.exists()) {
+        Properties props = new Properties()
+        props.load(new FileInputStream(propFile))
+        if (isDebug) {
+            def signP = new String[4]
+            signP[0] = props['DEBUG_STORE_FILE']
+            signP[1] = props['STORE_PASSWORD']
+            signP[2] = props['KEY_ALIAS']
+            signP[3] = props['KEY_PASSWORD']
+            return signP
+        } else {
+            def signP = new String[4]
+            signP[0] = props['STORE_FILE']
+            signP[1] = props['STORE_PASSWORD']
+            signP[2] = props['KEY_ALIAS']
+            signP[3] = props['KEY_PASSWORD']
+            return signP
+        }
+    }
 }
 
 

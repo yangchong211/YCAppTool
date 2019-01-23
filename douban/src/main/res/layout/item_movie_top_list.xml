@@ -25,10 +25,10 @@
         android:ellipsize="marquee"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:maxLines="1"
         android:text="战狼"
         android:textColor="@color/blackText1"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/tv_rate"
