@@ -169,7 +169,7 @@
 
 #### 4.8 组件化实践中的切换run
 - 你完全可以采取拿来注意，将任意一个组件拿来即用即可。
-![image](https://upload-images.jianshu.io/upload_images/4432347-cc01601acabc6728.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+    - ![image](https://upload-images.jianshu.io/upload_images/4432347-cc01601acabc6728.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 ### 05.项目版本更新
