@@ -190,7 +190,6 @@
         - 在2018年之后使用“android.enableAapt2=false”来关闭AAPT2是行不通的，这个方法已经过时
     - 第二种解决方案
         - 在命令行输入，gradlew compileDebugSources，可以查看打印报错的信息，这句话可以控制台输出代码报错的日志。
-        - ![image]()
 - **IOException: CreateProcess error=2, 系统找不到指定的文件。**
     - 具体报错日志如下所示
         ```
