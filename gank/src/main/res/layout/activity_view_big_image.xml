@@ -22,10 +22,9 @@
             android:id="@+id/tv_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:text="3/48"
             android:textColor="#fff"
-            android:textSize="14sp" />
+            android:textSize="@dimen/textSize14" />
         <TextView
             android:id="@+id/tv_save_image"
             android:layout_width="wrap_content"
@@ -34,12 +33,13 @@
             android:layout_marginLeft="10dp"
             android:text="保存"
             android:textColor="#fff"
-            android:textSize="13sp" />
+            android:textSize="@dimen/textSize14" />
         <ImageView
             android:id="@+id/large_more"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_large_more_normal"/>
         <ImageView
             android:id="@+id/large_star"
             android:layout_width="24dp"
@@ -59,7 +59,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginRight="24dp"
-            android:layout_toLeftOf="@+id/large_download"/>
+            android:layout_toLeftOf="@+id/large_download"
+            android:src="@drawable/ic_large_share"/>
 
     </RelativeLayout>
 

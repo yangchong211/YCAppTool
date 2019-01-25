@@ -23,9 +23,7 @@ import com.ycbjie.gank.view.activity.GanKHomeActivity;
 import com.ycbjie.gank.view.adapter.GanKHomeAdapter;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.constant.Constant;
-
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
