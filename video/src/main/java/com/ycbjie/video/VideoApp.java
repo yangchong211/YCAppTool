@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.blankj.utilcode.util.Utils;
+import com.ycbjie.library.base.LibApplication;
 import com.ycbjie.library.base.config.AppConfig;
 
 /**
@@ -16,12 +17,13 @@ import com.ycbjie.library.base.config.AppConfig;
  *     revise:
  * </pre>
  */
-public class VideoApp extends Application {
+public class VideoApp extends LibApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
         Utils.init(this);
+        AppConfig.INSTANCE.initConfig();
     }
 
     protected void attachBaseContext(Context base) {

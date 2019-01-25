@@ -4,7 +4,6 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <application>
         <activity android:name=".view.activity.GanKHomeActivity"/>
-        <activity android:name=".view.activity.GanKWebActivity"/>
         <activity android:name=".view.activity.GanKSearchActivity"/>
         <activity android:name=".view.activity.MyKnowledgeActivity"/>
         <activity android:name=".view.activity.KnowledgeImageActivity"/>

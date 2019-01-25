@@ -13,15 +13,16 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ycbjie.gank.R;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseLazyFragment;
 import com.ycbjie.gank.bean.bean.CategoryResult;
-import com.ycbjie.gank.bean.cache.CacheGanKFavorite;
 import com.ycbjie.gank.contract.GanKHomeFContract;
 import com.ycbjie.gank.presenter.GanKHomeFPresenter;
 import com.ycbjie.gank.view.activity.GanKHomeActivity;
-import com.ycbjie.gank.view.activity.GanKWebActivity;
 import com.ycbjie.gank.view.adapter.GanKHomeAdapter;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.ycbjie.library.constant.Constant;
 
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
@@ -103,25 +104,13 @@ public class GanKHomeFragment extends BaseLazyFragment implements GanKHomeFContr
 
     @Override
     public void initListener() {
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(adapter.getAllData().size()>position && position>=0){
-                    CategoryResult.ResultsBean mData = adapter.getAllData().get(position);
-                    Intent intent = new Intent(activity, GanKWebActivity.class);
-                    intent.putExtra("url",mData.url);
-                    intent.putExtra("title",mData.desc);
-
-                    CacheGanKFavorite favorite = new CacheGanKFavorite();
-                    favorite.setAuthor(mData.who);
-                    favorite.setData(mData.publishedAt);
-                    favorite.setTitle(mData.desc);
-                    favorite.setType(mData.type);
-                    favorite.setUrl(mData.url);
-                    favorite.setGankID(mData._id);
-                    intent.putExtra("favorite",favorite);
-                    startActivity(intent);
-                }
+        adapter.setOnItemClickListener(position -> {
+            if(adapter.getAllData().size()>position && position>=0){
+                CategoryResult.ResultsBean mData = adapter.getAllData().get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString(Constant.URL,mData.url);
+                bundle.putString(Constant.TITLE,mData.desc);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
             }
         });
     }

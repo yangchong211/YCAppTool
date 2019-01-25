@@ -27,6 +27,8 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ycbjie.gank.R;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.gank.bean.cache.CacheGanKFavorite;
 import com.ycbjie.gank.bean.cache.CacheSearchHistory;
@@ -35,6 +37,7 @@ import com.ycbjie.gank.contract.GanKSearchContract;
 import com.ycbjie.gank.presenter.GanKSearchPresenter;
 import com.ycbjie.gank.view.adapter.GanKSearchHisAdapter;
 import com.ycbjie.gank.view.adapter.GanKSearchListAdapter;
+import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.inter.listener.OnListItemClickListener;
 import com.ycbjie.library.utils.MDTintUtil;
 
@@ -244,26 +247,15 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
             public void onItemClick(int position) {
                 if(adapter.getAllData().size()>position && position>=0){
                     SearchResult.ResultsBean resultsBean = adapter.getAllData().get(position);
-                    Intent intent = new Intent();
                     if ("福利".equals(resultsBean.type)) {
                         Log.e("福利",resultsBean.desc);
-                        /*intent.setClass(GanKSearchActivity.this, BigimgActivity.class);
-                        intent.putExtra("title", resultsBean.desc);
-                        intent.putExtra("url", resultsBean.url);*/
+                        ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
                     } else {
-                        intent.setClass(GanKSearchActivity.this, GanKWebActivity.class);
-                        intent.putExtra("title", resultsBean.desc);
-                        intent.putExtra("url", resultsBean.url);
-                        CacheGanKFavorite favorite = new CacheGanKFavorite();
-                        favorite.setAuthor(resultsBean.who);
-                        favorite.setData(resultsBean.publishedAt);
-                        favorite.setTitle(resultsBean.desc);
-                        favorite.setType(resultsBean.type);
-                        favorite.setUrl(resultsBean.url);
-                        favorite.setGankID(resultsBean.ganhuo_id);
-                        intent.putExtra("favorite", favorite);
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constant.URL,resultsBean.url);
+                        bundle.putString(Constant.TITLE,resultsBean.desc);
+                        ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
                     }
-                    startActivity(intent);
                 }
             }
         });
