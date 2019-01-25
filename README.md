@@ -609,9 +609,9 @@
 - 可以优化什么？
     - 在 onTrimMemory() 回调中，应该在一些状态下清理掉不重要的内存资源。对于这些缓存，只要是读进内存内的都算，例如最常见的图片缓存、文件缓存等。拿图片缓存来说，市场上，常规的图片加载库，一般而言都是三级缓存，所以在内存吃紧的时候，我们就应该优先清理掉这部分图片缓存，毕竟图片是吃内存大户，而且再次回来的时候，虽然内存中的资源被回收掉了，依然可以从磁盘或者网络上恢复它。
 - 大概的思路如下所示
-  - 在lowMemory的时候，调用Glide.cleanMemory()清理掉所有的内存缓存。
-  - 在App被置换到后台的时候，调用Glide.cleanMemory()清理掉所有的内存缓存。
-  - 在其它情况的onTrimMemory()回调中，直接调用Glide.trimMemory()方法来交给Glide处理内存情况。
+    - 在lowMemory的时候，调用Glide.cleanMemory()清理掉所有的内存缓存。
+    - 在App被置换到后台的时候，调用Glide.cleanMemory()清理掉所有的内存缓存。
+    - 在其它情况的onTrimMemory()回调中，直接调用Glide.trimMemory()方法来交给Glide处理内存情况。
 
 
 
