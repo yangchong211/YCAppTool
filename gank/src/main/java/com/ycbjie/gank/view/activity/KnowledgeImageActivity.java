@@ -1,5 +1,6 @@
 package com.ycbjie.gank.view.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
@@ -7,12 +8,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -42,6 +45,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+
+import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -61,7 +66,6 @@ import rx.schedulers.Schedulers;
 public class KnowledgeImageActivity extends BaseActivity implements View.OnClickListener {
 
     private ViewPager vpImage;
-    private RelativeLayout linearlayoutImg;
     private TextView tvText;
     private TextView tvSaveImage;
     private ImageView largeMore;
@@ -90,32 +94,35 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void initView() {
-
-
-        vpImage = (ViewPager) findViewById(R.id.vp_image);
-        linearlayoutImg = (RelativeLayout) findViewById(R.id.linearlayout_img);
-        tvText = (TextView) findViewById(R.id.tv_text);
-        tvSaveImage = (TextView) findViewById(R.id.tv_save_image);
-        largeMore = (ImageView) findViewById(R.id.large_more);
-        largeStar = (ImageView) findViewById(R.id.large_star);
-        largeDownload = (ImageView) findViewById(R.id.large_download);
-        largeShare = (ImageView) findViewById(R.id.large_share);
-
+        StateAppBar.setStatusBarColor(this, Color.BLACK);
+        initFindById();
         initIntentData();
         initViewPagerData();
+    }
+
+    private void initFindById() {
+        vpImage = findViewById(R.id.vp_image);
+        tvText = findViewById(R.id.tv_text);
+        tvSaveImage = findViewById(R.id.tv_save_image);
+        largeMore =findViewById(R.id.large_more);
+        largeStar = findViewById(R.id.large_star);
+        largeDownload = findViewById(R.id.large_download);
+        largeShare = findViewById(R.id.large_share);
     }
 
 
     private void initIntentData() {
         Bundle bundle = getIntent().getExtras();
-        code = bundle.getInt("code");
-        selector = bundle.getInt("selector");
-        isLocal = bundle.getBoolean("isLocal", false);
-        imageUri = bundle.getStringArrayList("imageUri");
-        /*是否是本应用中的图片*/
-        isApp = bundle.getBoolean("isApp", false);
-        /*本应用图片的id*/
-        imageId = bundle.getInt("id", 0);
+        if (bundle != null) {
+            code = bundle.getInt("code");
+            selector = bundle.getInt("selector");
+            isLocal = bundle.getBoolean("isLocal", false);
+            imageUri = bundle.getStringArrayList("imageUri");
+            /*是否是本应用中的图片*/
+            isApp = bundle.getBoolean("isApp", false);
+            /*本应用图片的id*/
+            imageId = bundle.getInt("id", 0);
+        }
     }
 
     @Override
@@ -146,6 +153,7 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
     /**
      * 给viewpager设置适配器
      */
+    @SuppressLint("SetTextI18n")
     private void initViewPagerData() {
         if (isApp) {
             MyPageAdapter myPageAdapter = new MyPageAdapter();
@@ -162,6 +170,7 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
 
                 }
 
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void onPageSelected(int position) {
                     // 每当页数发生改变时重新设定一遍当前的页数和总页数
@@ -293,8 +302,8 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = getLayoutInflater().inflate(R.layout.view_pager_very_image, container, false);
-            ImageView iv_image = (ImageView) view.findViewById(R.id.iv_image);
-            ProgressBar spinner = (ProgressBar) view.findViewById(R.id.loading);
+            ImageView iv_image = view.findViewById(R.id.iv_image);
+            ProgressBar spinner = view.findViewById(R.id.loading);
             spinner.setVisibility(View.GONE);
             if (imageId != 0) {
                 iv_image.setImageResource(imageId);
@@ -325,8 +334,8 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = inflater.inflate(R.layout.view_pager_very_image, container, false);
-            final ImageView iv_image = (ImageView) view.findViewById(R.id.iv_image);
-            final ProgressBar spinner = (ProgressBar) view.findViewById(R.id.loading);
+            final ImageView iv_image = view.findViewById(R.id.iv_image);
+            final ProgressBar spinner = view.findViewById(R.id.loading);
             // 保存网络图片的路径
             String adapter_image_Entity = (String) getItem(position);
             String imageUrl;
