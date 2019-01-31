@@ -51,8 +51,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         Log.d("Application", "onCreate");
         super.onCreate();
-        Utils.init(this);
-        AppConfig.INSTANCE.initConfig();
+        AppConfig.INSTANCE.initConfig(this);
         BaseAppHelper.get().init(this);
         BaseLifecycleCallback.getInstance().init(this);
         //在子线程中初始化

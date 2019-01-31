@@ -1,6 +1,5 @@
 package com.ycbjie.video;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
@@ -23,7 +22,7 @@ public class VideoApp extends LibApplication {
     public void onCreate() {
         super.onCreate();
         Utils.init(this);
-        AppConfig.INSTANCE.initConfig();
+        AppConfig.INSTANCE.initConfig(this);
     }
 
     protected void attachBaseContext(Context base) {

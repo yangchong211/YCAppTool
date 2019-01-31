@@ -1,5 +1,7 @@
 package com.ycbjie.library.base.config;
 
+import android.app.Application;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.Utils;
@@ -35,10 +37,11 @@ public enum AppConfig {
     private boolean isNight;
     private PoolThread executor;
 
-    public void initConfig(){
+    public void initConfig(Application application){
+        Utils.init(application);
         initThreadPool();
-        RealmUtils.initRealm(Utils.getApp());
-        ToastUtils.init(Utils.getApp());
+        RealmUtils.initRealm(application);
+        ToastUtils.init(application);
         initARouter();
         //1.是否是登录状态
         isLogin = SPUtils.getInstance(Constant.SP_NAME).getBoolean(Constant.KEY_IS_LOGIN, false);
