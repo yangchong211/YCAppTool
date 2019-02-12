@@ -39,7 +39,9 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.Utils;
 import com.ycbjie.library.R;
+import com.ycbjie.library.arounter.DegradeServiceImpl;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.arounter.ARouterConstant;
@@ -189,6 +191,8 @@ public class WebViewActivity extends BaseActivity {
                 @Override
                 public void onLost(Postcard postcard) {
                     super.onLost(postcard);
+                    DegradeServiceImpl degradeService = new DegradeServiceImpl();
+                    degradeService.onLost(Utils.getApp(),postcard);
                     LogUtils.i("ARouterUtils"+"---找不到了");
                 }
             });

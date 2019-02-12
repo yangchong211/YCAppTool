@@ -234,6 +234,13 @@ public class ARouterUtils {
             public void onLost(Postcard postcard) {
                 super.onLost(postcard);
                 LogUtils.i("ARouterUtils"+"---找不到了");
+                //降级处理
+                //DegradeServiceImpl degradeService = new DegradeServiceImpl();
+                //degradeService.onLost(Utils.getApp(),postcard);
+
+                //无法找到路径，作替换处理
+                PathReplaceServiceImpl pathReplaceService = new PathReplaceServiceImpl();
+                pathReplaceService.replacePath(ARouterConstant.ACTIVITY_ANDROID_ACTIVITY,ARouterConstant.ACTIVITY_DOU_MUSIC_ACTIVITY);
             }
         };
         return callback;
