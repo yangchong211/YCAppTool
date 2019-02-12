@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -34,6 +35,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.yc.cn.ycgallerylib.zoom.view.ZoomImageView;
 import com.ycbjie.gank.R;
 import com.ycbjie.library.base.glide.GlideApp;
 import com.ycbjie.library.constant.Constant;
@@ -302,11 +304,13 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = getLayoutInflater().inflate(R.layout.view_pager_very_image, container, false);
-            ImageView iv_image = view.findViewById(R.id.iv_image);
+            ZoomImageView iv_image = view.findViewById(R.id.iv_image);
             ProgressBar spinner = view.findViewById(R.id.loading);
             spinner.setVisibility(View.GONE);
             if (imageId != 0) {
-                iv_image.setImageResource(imageId);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageId);
+                iv_image.setBitmap(bitmap);
+                //iv_image.setImageResource(imageId);
             }
             container.addView(view, 0);
             return view;
@@ -332,9 +336,9 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
             View view = inflater.inflate(R.layout.view_pager_very_image, container, false);
-            final ImageView iv_image = view.findViewById(R.id.iv_image);
+            final ZoomImageView iv_image = view.findViewById(R.id.iv_image);
             final ProgressBar spinner = view.findViewById(R.id.loading);
             // 保存网络图片的路径
             String adapter_image_Entity = (String) getItem(position);

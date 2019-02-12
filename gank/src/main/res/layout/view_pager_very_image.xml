@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:background="#ff000000">
 
-    <ImageView
+    <com.yc.cn.ycgallerylib.zoom.view.ZoomImageView
         android:id="@+id/iv_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

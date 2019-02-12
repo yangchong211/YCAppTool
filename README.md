@@ -52,7 +52,8 @@
     - 由于组件化模块众多，第一次编译时间会较长，请耐心等待。项目编译成功之后，后期可以较快运行项目。自己每次运行项目，大概是2到5分钟
     - 如果出现编译失败，可以看看该目录下7.1编译失败，记录常见编译错误。如果其他问题，大都可以谷歌解决。如果编译耗时，可以根据run build查看每个模块的编译时间【也就是找出编译耗时所在，作为程序员不仅要知道编译为何时间长，还要找出那个地方编译时间长】，所有组件(初基础公共组件外)均可和主工程app解绑。
     - ![image](https://upload-images.jianshu.io/upload_images/4432347-4198b15a178b6222.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
+- 编译遇到问题
+    - 看看7.1 编译报错bug，如果没有找到解决方案，建议谷歌查询一下问题。
 
 
 
@@ -175,9 +176,8 @@
     - ![image](https://upload-images.jianshu.io/upload_images/4432347-cc01601acabc6728.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
+
 ### 05.项目版本更新
-
-
 
 
 ### 06.项目第三方库
