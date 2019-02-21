@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.model.ZhiHuDailyListBean;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
 
 import java.util.List;

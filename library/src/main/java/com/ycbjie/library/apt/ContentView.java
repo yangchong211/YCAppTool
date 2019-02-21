@@ -1,5 +1,7 @@
 package com.ycbjie.library.apt;
 
+import android.support.annotation.LayoutRes;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,5 +17,5 @@ import java.lang.annotation.Target;
 //就像申明类用关键字class。申明枚举用enum。申明注解用的就是@interface。
 public @interface ContentView {
     //返回值表示这个注解里可以存放什么类型值。
-    int value();
+    @LayoutRes int value();
 }

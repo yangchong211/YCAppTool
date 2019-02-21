@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.model.ZhiHuHotBean;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 
 import java.util.List;
 

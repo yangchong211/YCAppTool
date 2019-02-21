@@ -12,7 +12,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.model.ZhiHuThemeBean;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 
 import java.util.List;
 

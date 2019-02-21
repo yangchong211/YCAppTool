@@ -16,7 +16,7 @@ import com.ycbjie.douban.api.DouBookModel;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.douban.bean.DouBookDetailBean;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

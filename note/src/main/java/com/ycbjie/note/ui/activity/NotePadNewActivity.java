@@ -32,7 +32,7 @@ import com.ycbjie.library.db.cache.CacheNotePad;
 import com.ycbjie.library.inter.listener.OnDatePickListener;
 import com.ycbjie.library.inter.listener.OnTimePickListener;
 import com.ycbjie.library.loader.GlideImageLoader;
-import com.ycbjie.library.utils.bitmap.BitmapUtils;
+import com.ycbjie.library.utils.image.BitmapUtils;
 import com.ycbjie.note.R;
 import com.ycbjie.note.model.NotePadDetail;
 import com.ycbjie.note.ui.fragment.DatePickerFragment;

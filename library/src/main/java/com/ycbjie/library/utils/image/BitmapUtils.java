@@ -1,4 +1,4 @@
-package com.ycbjie.library.utils.bitmap;
+package com.ycbjie.library.utils.image;
 
 
 import android.graphics.Bitmap;

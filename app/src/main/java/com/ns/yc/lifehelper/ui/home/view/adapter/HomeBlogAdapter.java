@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
 import com.ycbjie.library.model.HomeBlogEntity;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 import com.ycbjie.library.utils.spannable.SpannableUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

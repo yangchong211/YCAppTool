@@ -21,12 +21,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 import com.ycbjie.music.R;
 import com.ycbjie.music.api.OnLineMusicModel;
 import com.ycbjie.music.model.bean.ArtistInfo;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;

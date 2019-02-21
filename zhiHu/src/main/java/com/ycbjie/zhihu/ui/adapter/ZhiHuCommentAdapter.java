@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.TimeUtils;
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.model.ZhiHuCommentBean;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 import java.util.List;
 
 /**

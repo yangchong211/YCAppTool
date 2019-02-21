@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.bean.bean.GanKIoDataBean;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;

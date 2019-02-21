@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ycbjie.library.api.ConstantImageApi;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 import com.ycbjie.todo.R;
 
 import java.util.ArrayList;

@@ -15,7 +15,7 @@ import com.ycbjie.library.inter.listener.OnListItemClickListener;
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.model.ZhiHuDailyBeforeListBean;
 import com.ycbjie.zhihu.model.ZhiHuDailyListBean;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 
 import java.util.List;

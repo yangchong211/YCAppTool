@@ -23,7 +23,7 @@ import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.inter.listener.OnListItemClickListener;
 import com.ycbjie.douban.bean.DouMovieDetailBean;
 import com.ycbjie.douban.view.adapter.MovieDetailAdapter;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 

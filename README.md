@@ -99,7 +99,7 @@
 
 
 #### 3.3 项目优化点内容
-- 项目代码规范；布局优化；代码优化；架构优化；内存泄漏优化；线程优化；Bitmap优化；网络优化；懒加载优化，启动页优化；静态变量优化；电量性能优化；view控件异常销毁保存重要信息优化；去除淡黄色警告优化；使用注解替代枚举优化；glide加速优化；多渠道打包优化状态管理切换优化；TrimMemory和LowMemory优化；轮询操作优化
+- 项目代码规范；布局优化；代码优化；架构优化；内存泄漏优化；线程优化；Bitmap优化；网络优化；懒加载优化，启动页优化；静态变量优化；电量性能优化；view控件异常销毁保存重要信息优化；去除淡黄色警告优化；使用注解替代枚举优化；glide加速优化；多渠道打包优化状态管理切换优化；TrimMemory和LowMemory优化；轮询操作优化；去除重复依赖库优化
 - 具体可以看目录09.项目优化处理部分内容！！！
 
 
@@ -204,11 +204,13 @@
         ```
         IOException: Cannot run program "D:\Program File\AndroidSdk\ndk-bundle\toolchains\mips64el-linux-android-4.9\prebuilt\windows-x86_64\bin\mips64el-linux-android-strip" (in directory "D:\GitHub\LifeHelper\app"): CreateProcess error=2, 系统找不到指定的文件。
         ```
-    - 解决办法：找到工程目录下local.properties文件，在ndk-bundle后面添加.cmd即可运行
+    - 原因分析：Android/Sdk/ndk-bundle/toolchains/mips64el-linux-android-4.9/prebuilt/linux-x86_64/bin/mips64el-linux-android-strip 找不到, 导致编译报错。ndk升级导致的，自己现在是17版本。
+    - 第一种解决办法：找到工程目录下local.properties文件，在ndk-bundle后面添加.cmd即可运行
         ```
         ndk.dir=D\:\\Program File\\AndroidSdk\\ndk-bundle.cmd
         sdk.dir=D\:\\Program File\\AndroidSdk
         ```
+    - 第二种解决办法：去官网下载一个16或者更低的版本。下载完成后，把16b版本toolchains\mips64el-linux-android-4.9\prebuilt\windows-x86_64的所有文件copy到r17中toolchains\mips64el-linux-android-4.9\prebuilt\windows-x86_64目录下也可以解决
 - **Invoke-customs are only supported starting with Android O (–min-api 26)**
     - 错误: -source 1.7 中不支持 lambda 表达式，请使用 -source 8 或更高版本以启用 lambda 表达式
         ```
@@ -226,6 +228,25 @@
     - 从Log中找到了输出的出错信息，这个方法很有效，经常遇到编译类错误，可以用它排除错误！
 - Error:Execution ':app:transformClassesWithDexForDebug'.
     - 通过gradle命令查看重复依赖，稍等片刻，会出来一个树状图，其中用"->"会标示出冲突的部分，然后解决重复依赖即可
+- DexArchiveMergerException异常：dexarchivemergeexception:合并dex存档时出错
+    - 网上解决的方法有很多不同看法，比如：可能是64k引起的问题；可能是打包dex引起的问题；可能是jdk1.8新特性引起的问题；可能是jar包重复引用引起的问题
+    ```
+    重点异常信息：
+    Caused by: com.android.builder.dexing.DexArchiveMergerException: Error while merging dex archives:
+    Caused by: com.android.tools.r8.CompilationFailedException: Compilation failed to complete
+    Caused by: com.android.tools.r8.utils.AbortException
+    ```
+    - 但是思考一下，为什么会出现这个问题，什么情况下会出现这个问题？Android Studio 3.0 及以上版本支持所有 Java 7 语言功能，以及部分 Java 8 语言功能（具体因平台版本而异）。
+    - 引入D8作为原先Dex的升级版，升级Dex编译器将直接影响构建时间，.dex文件大小，运行时性能。Android Studio 3.0需要主动在gradle.properties文件中新增:android.enableD8=true
+    - Android Studio 3.1或之后D8将会被作为默认的Dex编译器。如果遇到问题，你可以通过修改gradle.properties文件里的一个属性恢复到DX android.enableD8=false，除了其他好处外，使用D8还有一个好处，就是支持 脱糖，让Java 8才提供的特性（如lambdas）可以转换成Java 7特性。把脱糖步骤集成进D8影响了所有读或写.class字节码的开发工具，因为它会使用Java 8格式。你可以在gradle文件中设置一个属性，恢复到以前的行为，让脱糖发生在Java编译之后，.class字节码仍遵循Java 7格式：android.enableD8.desugaring = false
+    - 所以解决方案如下所示
+    ```
+    #The option 'android.enableD8' is deprecated and should not be used anymore.
+    #Use 'android.enableD8=true' to remove this warning.
+    #It will be removed at the end of 2018..
+    android.enableD8=false
+    android.enableD8.desugaring = false
+    ```
 - 出现其他编译类错误，可以直接谷歌搜索解决
 
 
@@ -646,8 +667,37 @@
     - 大概思路：当用户打开这个页面的时候初始化TimerTask对象，每个一分钟请求一次服务器拉取订单信息并更新UI，当用户离开页面的时候清除TimerTask对象，即取消轮训请求操作。
 
 
-
-
+#### 9.2.2 去除重复依赖库优化
+- 我相信你看到了这里会有疑问，网上有许多博客作了这方面说明。但是我在这里想说，如何查找自己项目的所有依赖关系树
+    - 注意要点：其中app就是项目mudule名字。 正常情况下就是app！
+    ```
+    gradlew app:dependencies
+    ```
+- 关于依赖关系树的结构图如下所示，此处省略很多代码
+    ```
+    |    |    |    |    |    |    \--- android.arch.core:common:1.1.1 (*)
+    |    |    |    |         \--- com.android.support:support-annotations:26.1.0 -> 28.0.0
+    |    +--- com.journeyapps:zxing-android-embedded:3.6.0
+    |    |    +--- com.google.zxing:core:3.3.2
+    |    |    \--- com.android.support:support-v4:25.3.1
+    |    |         +--- com.android.support:support-compat:25.3.1 -> 28.0.0 (*)
+    |    |         +--- com.android.support:support-media-compat:25.3.1
+    |    |         |    +--- com.android.support:support-annotations:25.3.1 -> 28.0.0
+    |    |         |    \--- com.android.support:support-compat:25.3.1 -> 28.0.0 (*)
+    |    |         +--- com.android.support:support-core-utils:25.3.1 -> 28.0.0 (*)
+    |    |         +--- com.android.support:support-core-ui:25.3.1 -> 28.0.0 (*)
+    |    |         \--- com.android.support:support-fragment:25.3.1 -> 28.0.0 (*)
+    \--- com.android.support:multidex:1.0.2 -> 1.0.3
+    ```
+- 然后查看哪些重复jar
+    - ![image](https://upload-images.jianshu.io/upload_images/4432347-686690b44fb92dca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+- 然后修改gradle配置代码
+    ```
+    api (rootProject.ext.dependencies["zxing"]){
+        exclude module: 'support-v4'
+        exclude module: 'appcompat-v7'
+    }
+    ```
 
 
 ### 10.组件化博客

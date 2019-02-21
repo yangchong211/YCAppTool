@@ -32,7 +32,7 @@ import com.ycbjie.zhihu.web.contract.WebViewAnimContract;
 import com.ycbjie.zhihu.web.presenter.WebViewAnimPresenter;
 import com.ycbjie.library.utils.AppUtils;
 import com.ycbjie.library.utils.DoShareUtils;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;

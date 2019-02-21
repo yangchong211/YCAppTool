@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 import com.ycbjie.music.R;
 import com.ycbjie.music.utils.share.ShareDetailBean;
 import com.ycbjie.music.utils.share.ShareTypeBean;

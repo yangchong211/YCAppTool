@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.ycbjie.douban.R;
 import com.ycbjie.library.inter.listener.OnListItemClickListener;
 import com.ycbjie.douban.bean.DouMovieDetailBean;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 
 import java.util.List;
 

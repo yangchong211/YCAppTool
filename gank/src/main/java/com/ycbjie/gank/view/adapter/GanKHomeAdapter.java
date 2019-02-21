@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.bean.bean.CategoryResult;
 import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;

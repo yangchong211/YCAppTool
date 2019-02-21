@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
@@ -29,7 +28,7 @@ import com.ycbjie.douban.weight.CustomChangeBounds;
 import com.ycbjie.library.base.glide.GlideApp;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.douban.bean.DouMusicDetailBean;
-import com.ycbjie.library.utils.ImageUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
 import com.ns.yc.ycutilslib.scrollView.ReboundScrollView;
 import cn.ycbjie.ycstatusbarlib.StatusBarUtils;
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;

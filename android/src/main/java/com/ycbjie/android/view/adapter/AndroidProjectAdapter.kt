@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.ycbjie.android.model.bean.HomeData
 import com.ycbjie.android.R
-import com.ycbjie.library.utils.ImageUtils
+import com.ycbjie.library.utils.image.ImageUtils
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
 
