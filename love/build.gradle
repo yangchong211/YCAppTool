@@ -16,7 +16,7 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         multiDexEnabled true
-        if (rootProject.ext.isAndroidApplication){
+        if (rootProject.ext.isLoveApplication){
             //组件模式下设置applicationId
             applicationId "com.ycbjie.love"
         }

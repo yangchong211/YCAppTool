@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.ns.yc.lifehelper.R;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.utils.WindowUtils;
 import com.ycbjie.library.web.view.WebViewActivity;
 import com.pedaily.yc.ycdialoglib.dialog.CustomSelectDialog;
 import com.ycbjie.library.utils.AppUtils;
@@ -62,7 +63,7 @@ public class DialogUtils {
             popMenu.setClippingEnabled(false);
             popMenu.setFocusable(true);
             popMenu.showAtLocation(popMenuView, Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
-            AppUtils.setBackgroundAlpha(activity,0.5f);
+            WindowUtils.setBackgroundAlpha(activity,0.5f);
 
             TextView tvStar = popMenuView.findViewById(R.id.tv_star);
             TextView tvFeedback = popMenuView.findViewById(R.id.tv_feedback);
@@ -85,7 +86,7 @@ public class DialogUtils {
                 popMenu.dismiss();
             });
             tvLook.setOnClickListener(v -> popMenu.dismiss());
-            popMenu.setOnDismissListener(() -> AppUtils.setBackgroundAlpha(activity,1.0f));
+            popMenu.setOnDismissListener(() -> WindowUtils.setBackgroundAlpha(activity,1.0f));
         }
     }
 
