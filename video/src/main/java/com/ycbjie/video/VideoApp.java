@@ -1,8 +1,5 @@
 package com.ycbjie.video;
 
-import android.content.Context;
-import android.support.multidex.MultiDex;
-
 import com.blankj.utilcode.util.Utils;
 import com.ycbjie.library.base.LibApplication;
 import com.ycbjie.library.base.config.AppConfig;
@@ -23,11 +20,6 @@ public class VideoApp extends LibApplication {
         super.onCreate();
         Utils.init(this);
         AppConfig.INSTANCE.initConfig(this);
-    }
-
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
     }
 
 }

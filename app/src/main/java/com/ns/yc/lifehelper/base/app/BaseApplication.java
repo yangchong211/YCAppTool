@@ -6,19 +6,11 @@ import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
-import com.ns.yc.lifehelper.BuildConfig;
-import com.ns.yc.lifehelper.service.InitializeService;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.db.realm.RealmUtils;
+import com.ycbjie.library.base.InitializeService;
 import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.music.base.BaseAppHelper;
-
-import cn.ycbjie.ycthreadpoollib.PoolThread;
-import io.realm.Realm;
 
 
 /**
@@ -53,7 +45,6 @@ public class BaseApplication extends Application {
         super.onCreate();
         AppConfig.INSTANCE.initConfig(this);
         BaseAppHelper.get().init(this);
-        BaseLifecycleCallback.getInstance().init(this);
         //在子线程中初始化
         InitializeService.start(this);
     }

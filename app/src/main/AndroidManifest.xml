@@ -54,7 +54,7 @@
         <activity android:name=".ui.me.view.activity.MeQoneActivity"/>
         <activity android:name=".ui.me.view.activity.MeLoginActivity"/>
         <activity android:name=".ui.me.view.activity.MeRegisterActivity"/>
-        <service android:name=".service.InitializeService"/>
+        <service android:name="com.ycbjie.library.base.InitializeService"/>
         <service android:name=".service.LoopRequestService"/>
     </application>
 

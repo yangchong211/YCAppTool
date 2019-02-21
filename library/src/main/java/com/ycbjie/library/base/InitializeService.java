@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.service;
+package com.ycbjie.library.base;
 
 import android.annotation.SuppressLint;
 import android.app.IntentService;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.ycbjie.library.base.config.AppConfig;
 import com.tencent.smtt.sdk.QbSdk;
 
 /**

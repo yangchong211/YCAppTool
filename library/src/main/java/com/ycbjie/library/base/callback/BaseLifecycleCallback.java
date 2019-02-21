@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.base.app;
+package com.ycbjie.library.base.callback;
 
 
 import android.app.Activity;
