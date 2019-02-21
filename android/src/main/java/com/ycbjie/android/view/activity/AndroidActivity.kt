@@ -12,30 +12,31 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.ycbjie.android.presenter.AndroidPresenter
-import com.ycbjie.android.view.fragment.AndroidHomeFragment
-import com.ycbjie.android.view.fragment.AndroidKnowledgeFragment
-import com.ycbjie.android.view.fragment.AndroidProfileFragment
-import com.ycbjie.android.view.fragment.AndroidProjectFragment
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.ActivityUtils
 import com.flyco.tablayout.CommonTabLayout
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.base.KotlinConstant
 import com.ycbjie.android.model.bean.BannerBean
+import com.ycbjie.android.presenter.AndroidPresenter
+import com.ycbjie.android.view.fragment.AndroidHomeFragment
+import com.ycbjie.android.view.fragment.AndroidKnowledgeFragment
+import com.ycbjie.android.view.fragment.AndroidProfileFragment
+import com.ycbjie.android.view.fragment.AndroidProjectFragment
+import com.ycbjie.library.arounter.ARouterConstant
+import com.ycbjie.library.arounter.ARouterUtils
 import com.ycbjie.library.base.adapter.BasePagerAdapter
 import com.ycbjie.library.base.mvp.BaseActivity
 import com.ycbjie.library.constant.Constant
 import com.ycbjie.library.model.entry.TabEntity
-import com.ycbjie.library.arounter.ARouterConstant
-import com.ycbjie.library.arounter.ARouterUtils
 import com.ycbjie.library.web.view.WebViewActivity
 import kotlinx.android.synthetic.main.base_android_bar.*
 import java.lang.ref.WeakReference
-import java.util.ArrayList
+import java.util.*
 
 /**
  * <pre>
@@ -54,7 +55,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
      * val关键字声明只读属性
      * 属性的类型在后面，变量名在前面，中间加冒号和空格
      */
-    var presenter : AndroidPresenter? = null
+    private var presenter : AndroidPresenter? = null
 
     /**
      * 定义局部变量和常量
@@ -103,11 +104,11 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
                 NavWebsiteActivity.lunch(this)
             }
             1 -> {
-                //ToastUtils.showRoundRectToast("登录玩Android")
+                this.toast("登录玩Android")
                 ActivityUtils.startActivity(AndroidLoginActivity::class.java)
             }
             2 -> {
-                //ToastUtils.showRoundRectToast("开发作者介绍")
+                ToastUtils.showRoundRectToast("开发作者介绍")
                 WebViewActivity.lunch(this, Constant.GITHUB, "我的GitHub")
             }
             3 -> {

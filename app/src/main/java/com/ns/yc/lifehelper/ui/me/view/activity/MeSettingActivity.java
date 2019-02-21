@@ -14,25 +14,24 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.model.bean.UpdateBean;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
-import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.utils.AppToolUtils;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.utils.AppToolUtils;
 import com.ycbjie.library.web.view.WebViewActivity;
-import com.ycbjie.other.ui.activity.MeFeedBackActivity;
 
 import java.util.concurrent.TimeUnit;
+
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 
 
@@ -178,7 +177,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
                 presenter.cleanAppCache(this);
                 break;
             case R.id.rl_set_feedback:
-                startActivity(MeFeedBackActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);
                 break;
             case R.id.rl_set_update:
                 presenter.checkVersion(appVersionName);

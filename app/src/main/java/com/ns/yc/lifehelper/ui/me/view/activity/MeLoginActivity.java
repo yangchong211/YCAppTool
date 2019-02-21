@@ -17,10 +17,12 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
 import com.ns.yc.yccustomtextlib.pwdEt.PasswordEditText;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseActivity;
 /**
  * ================================================
  * 作    者：杨充
@@ -112,7 +114,7 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.tv_person_register:
-                startActivity(MeRegisterActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_REGISTER_ACTIVITY);
                 break;
             case R.id.btn_person_login:
                 goToLogin();

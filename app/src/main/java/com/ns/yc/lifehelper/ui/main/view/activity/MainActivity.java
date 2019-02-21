@@ -34,28 +34,25 @@ import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.service.LoopRequestService;
-import com.ycbjie.android.base.KotlinConstant;
-import com.ycbjie.android.util.KotlinUtils;
-import com.ycbjie.library.base.adapter.BasePagerAdapter;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.comment.FragmentFactory;
-import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.inter.listener.PerfectClickListener;
+import com.ns.yc.lifehelper.service.LoopRequestService;
 import com.ns.yc.lifehelper.ui.main.contract.MainContract;
 import com.ns.yc.lifehelper.ui.main.presenter.MainPresenter;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
-import com.ycbjie.library.utils.animation.AnimatorUtils;
-import com.ycbjie.library.web.view.WebViewActivity;
-import com.ycbjie.library.utils.image.ImageUtils;
 import com.ns.yc.ycutilslib.activityManager.AppManager;
 import com.ns.yc.ycutilslib.managerLeak.InputMethodManagerLeakUtils;
 import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.other.ui.activity.AboutMeActivity;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.adapter.BasePagerAdapter;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.inter.listener.PerfectClickListener;
+import com.ycbjie.library.utils.animation.AnimatorUtils;
+import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.web.view.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,6 +115,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
             switch (msg.what) {
                 case HOME:
                     initRetractAnim();
+                    break;
+                default:
                     break;
             }
         }
@@ -209,7 +208,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                 ToastUtils.showRoundRectToast("二维码扫描"+1000);
                 break;
             case R.id.action_about_us:
-                ActivityUtils.startActivity(AboutMeActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME);
                 break;
             case 1:
                 WebViewActivity.lunch(this,Constant.GITHUB,"我的GitHub");
@@ -222,17 +221,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                 break;
             case 4:
                 WebViewActivity.lunch(this,Constant.JUE_JIN,"我的掘金");
-                KotlinUtils.getVersionCode(this);
-                KotlinUtils.getVerName(this);
-                //kotlin 使用const关键字 可以直接调用
-                String a = KotlinConstant.COLLECT_ID;
-                //String b = KotlinConstant.INSTANCE.COLLECT_ID;
-                //kotlin @JvmStatic修饰 无法直接调用，通过get调用
-                String c = KotlinConstant.getNEW_ID();
-                //kotlin @JvmStatic修饰 无法直接调用
-                //String d = KotlinConstant.NEW_ID;
-                //kotlin @JvmField修饰
-                String e = KotlinConstant.IS_CACHE;
                 break;
             default:
                 break;
@@ -483,7 +471,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                         break;
                     // 关于
                     case R.id.ll_nav_about:
-                        ActivityUtils.startActivity(AboutMeActivity.class);
+                        ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME);
                         break;
                     // 个人
                     case R.id.ll_nav_login:
@@ -642,20 +630,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         }
     }
 
-
-    /**
-     * onBackPressed、onKeyDown和onKeyUp这三个事件的区别
-     */
-    @Override
-    public void onBackPressed() {
-        LogUtils.e("触摸监听", "onBackPressed");
-        /*if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }*/
-        super.onBackPressed();
-    }
 
 
     /**

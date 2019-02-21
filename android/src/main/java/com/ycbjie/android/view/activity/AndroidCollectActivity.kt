@@ -7,6 +7,8 @@ import com.ycbjie.library.base.mvp.BaseActivity
 
 class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>() {
 
+    private var persenter : AndroidCollectPresenter ?= null
+
     companion object {
         fun lunch(context: AndroidActivity?) {
             context?.startActivity(Intent(context, AndroidCollectActivity::class.java))
