@@ -1,5 +1,7 @@
 package com.ycbjie.android.view.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.support.v4.app.Fragment
@@ -21,6 +23,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.base.KotlinConstant
+import com.ycbjie.android.base.KotlinConstant.HOME
 import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.presenter.AndroidPresenter
 import com.ycbjie.android.view.fragment.AndroidHomeFragment
@@ -86,6 +89,41 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
     private var pageAdapter : BasePagerAdapter? = null
     private var index: Int = 0      //定义具体的类型
 
+    private var selectIndex: Int = 0
+
+    /**
+     * 跳转首页
+     */
+    companion object {
+        fun startActivity(context: Activity?, selectIndex: Int) {
+            val intent = Intent(context, AndroidActivity::class.java)
+            //intent.addCategory(Intent.CATEGORY_DEFAULT);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.action = Intent.ACTION_VIEW
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("selectIndex", selectIndex)
+            context?.startActivity(intent)
+        }
+    }
+
+    /**
+     * 处理onNewIntent()，以通知碎片管理器 状态未保存。
+     * 如果您正在处理新的意图，并且可能是 对碎片状态进行更改时，要确保调用先到这里。
+     * 否则，如果你的状态保存，但活动未停止，则可以获得 onNewIntent()调用，发生在onResume()之前，
+     * 并试图 此时执行片段操作将引发IllegalStateException。 因为碎片管理器认为状态仍然保存。
+     *
+     * @param intent intent
+     */
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent != null) {
+            selectIndex = intent.getIntExtra("selectIndex", HOME)
+            viewPager?.currentItem = selectIndex
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.kotlin_menu_main,menu)
         menu?.add(0, 1, 0, "登录玩Android")
@@ -145,6 +183,12 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
      * 2. !! 操作符
      *      这是为空指针爱好者准备的，非空断言运算符（!!）将任何值转换为非空类型，若该值为空则抛出异常
      *      能不用!!操作符就不要用。。。
+     *
+     * 3. ?. 操作符
+     *      使用 ?. 操作符，就先判空，如果不为空则赋值
+     *
+     * 4. ?= 操作符
+     *      使用 ?= 操作符，当前面的值不为空取前面的值，否则取后面的值，这和java中三目运算符类似
      */
     override fun initView() {
         StateAppBar.setStatusBarColor(this, resources.getColor(R.color.colorTheme))

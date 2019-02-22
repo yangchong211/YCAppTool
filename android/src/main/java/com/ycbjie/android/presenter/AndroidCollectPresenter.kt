@@ -1,8 +1,8 @@
 package com.ycbjie.android.presenter
 
-import com.ycbjie.library.base.mvp.BasePresenter
+import com.ycbjie.android.contract.AndroidCollectContract
 
-class AndroidCollectPresenter : BasePresenter {
+class AndroidCollectPresenter : AndroidCollectContract.Presenter{
 
     override fun subscribe() {
 

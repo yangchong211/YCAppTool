@@ -8,7 +8,7 @@ ext {
     isBookApplication = false  //book模块开关，false:作为Lib组件存在， true:作为application存在
     isDouBanApplication = false  //豆瓣模块开关，false:作为Lib组件存在， true:作为application存在
     isOtherApplication = false  //其他模块开关，false:作为Lib组件存在， true:作为application存在
-    isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
+    isAndroidApplication = true  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
 
     //下面组件先不要切换，后期待完善
     isNoteApplication = false  //记事本模块开关，false:作为Lib组件存在， true:作为application存在

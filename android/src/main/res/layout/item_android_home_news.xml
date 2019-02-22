@@ -51,7 +51,6 @@
                 android:id="@+id/flLike"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="?android:attr/selectableItemBackground"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/ivMore">
                 <ImageView

@@ -1,13 +1,13 @@
 package com.ycbjie.android.presenter
 
-import com.ycbjie.android.contract.AndroidCollectContract
-import io.reactivex.disposables.CompositeDisposable
+import com.ycbjie.android.contract.AndroidDetailContract
 import com.ycbjie.android.network.BaseSchedulerProvider
 import com.ycbjie.android.network.SchedulerProvider
+import io.reactivex.disposables.CompositeDisposable
 
-class AndroidDetailPresenter : AndroidCollectContract.Presenter {
+class AndroidDetailPresenter : AndroidDetailContract.Presenter {
 
-    private var mView: AndroidCollectContract.View
+    private var mView: AndroidDetailContract.View
     private var scheduler: BaseSchedulerProvider? = null
 
 
@@ -15,7 +15,7 @@ class AndroidDetailPresenter : AndroidCollectContract.Presenter {
         CompositeDisposable()
     }
 
-    constructor(androidView: AndroidCollectContract.View){
+    constructor(androidView: AndroidDetailContract.View){
         this.mView = androidView
         scheduler = SchedulerProvider.getInstatnce()
     }

@@ -4,11 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import com.ycbjie.android.R
 import com.ycbjie.android.base.KotlinConstant
-import com.ycbjie.android.contract.AndroidCollectContract
+import com.ycbjie.android.contract.AndroidDetailContract
 import com.ycbjie.android.model.bean.HomeData
 import com.ycbjie.android.presenter.AndroidDetailPresenter
-import com.ycbjie.android.R
 import com.ycbjie.library.web.view.WebViewActivity
 
 
@@ -21,7 +21,7 @@ import com.ycbjie.library.web.view.WebViewActivity
  *     revise:
  * </pre>
  */
-class AndroidDetailActivity : WebViewActivity() , AndroidCollectContract.View{
+class AndroidDetailActivity : WebViewActivity() , AndroidDetailContract.View{
 
     private var isCollect: Boolean = false
 

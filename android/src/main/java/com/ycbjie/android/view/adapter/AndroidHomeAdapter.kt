@@ -62,8 +62,9 @@ class AndroidHomeAdapter : RecyclerArrayAdapter<HomeData>{
             tvChildChapterName.text = homeData.chapterName
             tvContent.text = homeData.title
             val collect = homeData.collect
+            //是否收藏
             if (collect) {
-                ivLike.setBackgroundColor(Color.GRAY)
+                ivLike.setBackgroundColor(Color.RED)
             } else {
                 ivLike.setBackgroundColor(Color.GRAY)
             }

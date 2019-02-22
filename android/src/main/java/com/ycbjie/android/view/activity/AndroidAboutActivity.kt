@@ -1,12 +1,13 @@
 package com.ycbjie.android.view.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.view.View
-import com.ycbjie.android.presenter.AndroidPresenter
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
 import com.blankj.utilcode.util.LogUtils
 import com.ycbjie.android.R
+import com.ycbjie.android.presenter.AndroidPresenter
 import com.ycbjie.library.base.mvp.BaseActivity
 import com.ycbjie.library.web.view.WebViewActivity
 import kotlinx.android.synthetic.main.activity_android_about.*
@@ -43,7 +44,7 @@ class AndroidAboutActivity : BaseActivity<AndroidPresenter>() {
     private val DEVELOPER_GITHUB = "https://github.com/yangchong211"
 
     companion object {
-        fun lunch(context: AndroidActivity?) {
+        fun lunch(context: Activity?) {
             context?.startActivity(Intent(context, AndroidAboutActivity::class.java))
         }
     }

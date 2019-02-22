@@ -147,6 +147,32 @@
             android:textSize="@dimen/textSize16"/>
     </RelativeLayout>
     <View style="@style/DeepUnderLine"/>
+
+    <RelativeLayout
+        android:id="@+id/rlOther"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <ImageView
+            android:id="@+id/ivOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:src="@drawable/ic_about" />
+        <TextView
+            android:id="@+id/tvOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/ivOther"
+            android:text="其他"
+            android:textSize="@dimen/textSize16"/>
+    </RelativeLayout>
+    <View style="@style/DeepUnderLine"/>
+
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"

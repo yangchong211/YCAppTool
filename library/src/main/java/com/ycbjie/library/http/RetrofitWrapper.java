@@ -11,6 +11,7 @@ import java.lang.reflect.Type;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +22,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -62,6 +64,20 @@ public class RetrofitWrapper {
         return instance;
     }
 
+    /**
+     * 获取实例，使用单利模式
+     * 这里传递url参数，是因为项目中需要访问不同基类的地址
+     * @param url               baseUrl
+     * @return                  实例对象
+     */
+    public static RetrofitWrapper getInstance(String url,ArrayList<Interceptor> interceptors){
+        //synchronized 避免同时调用多个接口，导致线程并发
+        RetrofitWrapper instance;
+        synchronized (RetrofitWrapper.class){
+            instance = new RetrofitWrapper(url,interceptors);
+        }
+        return instance;
+    }
 
     /**
      * 创建Retrofit
@@ -72,17 +88,36 @@ public class RetrofitWrapper {
         //拦截日志，依赖
         builder.addInterceptor(InterceptorUtils.getHttpLoggingInterceptor(BuildConfig.DEBUG));
         OkHttpClient build = builder.build();
-
         //添加请求头拦截器
         //builder.addInterceptor(InterceptorUtils.getRequestHeader());
-
         //添加统一请求拦截器
         //builder.addInterceptor(InterceptorUtils.commonParamsInterceptor());
-
         //设置缓存
         //builder.addNetworkInterceptor(InterceptorUtils.getCacheInterceptor());
         builder.addInterceptor(InterceptorUtils.getCacheInterceptor());
+        initBuilder(url,build);
+    }
 
+    /**
+     * 创建Retrofit
+     * @param url               baseUrl
+     */
+    public RetrofitWrapper(String url , ArrayList<Interceptor> interceptors) {
+        builder = new OkHttpClient.Builder();
+        //拦截日志，依赖
+        builder.addInterceptor(InterceptorUtils.getHttpLoggingInterceptor(BuildConfig.DEBUG));
+        OkHttpClient build = builder.build();
+        builder.addInterceptor(InterceptorUtils.getCacheInterceptor());
+        if (interceptors!=null && interceptors.size()>0){
+            for (Interceptor interceptor : interceptors){
+                builder.addInterceptor(interceptor);
+            }
+        }
+        initBuilder(url,build);
+    }
+
+
+    private void initBuilder(String url, OkHttpClient build) {
         //添加自定义CookieJar
         InterceptorUtils.addCookie(builder);
 

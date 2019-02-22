@@ -10,7 +10,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
         android:padding="10dp"
         android:gravity="center_horizontal">
         <android.support.design.widget.TextInputLayout
@@ -44,27 +43,31 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tl_email_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tl_password_layout">
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"/>
+
+        </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_login"
-            android:layout_below="@id/tl_password_layout"
+            android:id="@+id/btn_register"
+            android:layout_below="@id/tl_email_layout"
             android:layout_marginTop="16dp"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login_login"
+            android:text="@string/login_register"
             android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/tv_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_login"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:text="@string/login_click_to_register"
-            android:textColor="@color/colorAccent" />
 
     </RelativeLayout>
 

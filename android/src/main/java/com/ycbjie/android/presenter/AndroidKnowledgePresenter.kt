@@ -1,9 +1,9 @@
 package com.ycbjie.android.presenter
 
-import com.ycbjie.android.contract.AndroidKnowledgeContract
-import com.ycbjie.android.model.helper.AndroidHelper
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.NetworkUtils
+import com.ycbjie.android.contract.AndroidKnowledgeContract
+import com.ycbjie.android.model.helper.AndroidHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -29,7 +29,7 @@ class AndroidKnowledgePresenter : AndroidKnowledgeContract.Presenter {
     }
 
     override fun unSubscribe() {
-
+        compositeDisposable.dispose()
     }
 
     override fun getKnowledgeTree() {

@@ -1,5 +1,11 @@
 package com.ycbjie.library.api;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
+
+import com.blankj.utilcode.util.Utils;
+
 /**
  * ================================================
  * 作    者：杨充
@@ -73,5 +79,25 @@ public class ConstantALiYunApi {
     public static final String GOLD_URL = "https://api.leancloud.cn/";
     public static final String LEANCLOUD_ID = "mhke0kuv33myn4t4ghuid4oq2hjj12li374hvcif202y5bm6";
     public static final String LEANCLOUD_SIGN = "badc5461a25a46291054b902887a68eb,1480438132702";
+
+    private void A(){
+        EditText editText = new EditText(Utils.getApp());
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
 
 }

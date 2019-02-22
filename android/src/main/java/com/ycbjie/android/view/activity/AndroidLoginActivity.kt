@@ -1,11 +1,21 @@
 package com.ycbjie.android.view.activity
 
 
+import android.app.Activity
+import android.content.Intent
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
-import com.ycbjie.android.presenter.AndroidLoginPresenter
-import com.blankj.utilcode.util.RegexUtils
+import com.blankj.utilcode.util.SPUtils
+import com.pedaily.yc.ycdialoglib.loading.ViewLoading
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.ycbjie.android.R
+import com.ycbjie.android.base.KotlinConstant
+import com.ycbjie.android.contract.AndroidLoginContract
+import com.ycbjie.android.model.bean.LoginBean
+import com.ycbjie.android.network.ResponseBean
+import com.ycbjie.android.presenter.AndroidLoginPresenter
 import com.ycbjie.library.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.activity_android_login.*
 import kotlinx.android.synthetic.main.base_android_bar.*
@@ -20,7 +30,8 @@ import kotlinx.android.synthetic.main.base_android_bar.*
  *     revise:
  * </pre>
  */
-class AndroidLoginActivity : BaseActivity<AndroidLoginPresenter>(), View.OnClickListener {
+class AndroidLoginActivity : BaseActivity<AndroidLoginPresenter>(),
+        View.OnClickListener , AndroidLoginContract.View{
 
     /**
      * kotlin可以直接通过id找到控件，之前的findviewbyid就可以不用写了
@@ -29,19 +40,34 @@ class AndroidLoginActivity : BaseActivity<AndroidLoginPresenter>(), View.OnClick
      *
      * 自定义控件，或者需要前缀view.findViewById的就需要findViewById呢……
      */
+    private var presenter : AndroidLoginPresenter ?= null
+
+    companion object {
+        fun lunch(content: Activity?){
+            content?.startActivity(Intent(content,AndroidLoginActivity::class.java))
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter?.unSubscribe()
+    }
 
     override fun getContentView(): Int {
         return R.layout.activity_android_login
     }
 
     override fun initView() {
-        tv_title_left.text = "登陆注册"
+        presenter = AndroidLoginPresenter(this)
+        tv_title_left.text = "开始登陆"
+        toolbar_title.text = "登陆页面"
+        checkEditTextInput()
     }
 
     override fun initListener() {
-        btn_register.setOnClickListener(this)
         btn_login.setOnClickListener(this)
         ll_title_menu.setOnClickListener(this)
+        tv_register.setOnClickListener(this)
     }
 
     override fun initData() {
@@ -53,27 +79,50 @@ class AndroidLoginActivity : BaseActivity<AndroidLoginPresenter>(), View.OnClick
             R.id.ll_title_menu -> {
                 finish()
             }
-            R.id.btn_register -> {
-                if (checkContent(true)) {
-
-                }
+            R.id.tv_register -> {
+                AndroidRegisterActivity.lunch(this@AndroidLoginActivity)
             }
             R.id.btn_login -> {
                 if (checkContent(true)) {
-
+                    ViewLoading.show(this@AndroidLoginActivity)
+                    val name = et_username.text.toString().trim()
+                    val pwd = et_password.text.toString().trim()
+                    presenter?.startLogin(name,pwd)
                 }
             }
         }
     }
 
+    /**
+     * 检测输入密码不能少于6位
+     */
+    private fun checkEditTextInput() {
+        et_password.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val text = s.toString()
+                if (text.length>6){
+                    et_password.error = null
+                }else{
+                    et_password.error = "至少输入六位"
+                }
+            }
+        })
+    }
+
     private fun checkContent(login: Boolean): Boolean {
         et_username.error = null
         et_password.error = null
-        et_email.error = null
 
         var cancel = false
         var focusView: View? = null
-
 
         if (TextUtils.isEmpty(et_username.text.toString().trim())) {
             et_username.error = "用户名不能为空"
@@ -91,18 +140,6 @@ class AndroidLoginActivity : BaseActivity<AndroidLoginPresenter>(), View.OnClick
             cancel = true
         }
 
-        if (!login) {
-            if (TextUtils.isEmpty(et_email.text.toString().trim())) {
-                et_email.error = "Email不能为空"
-                focusView = et_email
-                cancel = true
-            } else if (!RegexUtils.isEmail(et_email.text.toString().trim())) {
-                et_email.error = "Email格式不正确"
-                focusView = et_email
-                cancel = true
-            }
-        }
-
         if (cancel) {
             focusView?.requestFocus()
         } else {
@@ -110,5 +147,24 @@ class AndroidLoginActivity : BaseActivity<AndroidLoginPresenter>(), View.OnClick
         }
         return false
     }
+
+    override fun loginSuccess(bean: ResponseBean<LoginBean>?) {
+        ViewLoading.dismiss(this@AndroidLoginActivity)
+        val data = bean?.data
+        if (data!=null){
+            SPUtils.getInstance().put(KotlinConstant.USER_ID,data.id)
+            SPUtils.getInstance().put(KotlinConstant.USER_NAME, data.username!!)
+            SPUtils.getInstance().put(KotlinConstant.USER_EMAIL, data.email!!)
+        }
+        ToastUtils.showRoundRectToast("登陆成功")
+        finish()
+        AndroidActivity.startActivity(this@AndroidLoginActivity,KotlinConstant.HOME)
+    }
+
+    override fun loginError(message: String?) {
+        ViewLoading.dismiss(this@AndroidLoginActivity)
+        ToastUtils.showRoundRectToast("登陆失败，请稍后再试")
+    }
+
 
 }

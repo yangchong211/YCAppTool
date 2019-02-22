@@ -26,6 +26,7 @@
         <activity android:name=".view.activity.KnowledgeTreeDetailActivity"/>
         <activity android:name=".view.activity.NavWebsiteActivity"/>
         <activity android:name=".view.activity.AndroidCollectActivity"/>
+        <activity android:name=".view.activity.AndroidRegisterActivity"/>
 
     </application>
 

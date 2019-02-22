@@ -26,6 +26,12 @@ object KotlinConstant {
     const val USER_ID = "userId"
     const val HISTORY_SEARCH = "historySearch"
     const val USER_NAME = "userName"
+    const val USER_EMAIL = "userEmail"
+
+    const val HOME = 0
+    const val FIND = 1
+    const val DATA = 2
+    const val USER = 3
 
     //第二种方式
     @JvmStatic

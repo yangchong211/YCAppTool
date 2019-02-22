@@ -32,6 +32,7 @@
     <string name="login_register">注册</string>
     <string name="login_login">登录</string>
     <string name="prompt_email">Email(登录不需要填写)</string>
+    <string name="login_click_to_register">还没账号？点此注册</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>

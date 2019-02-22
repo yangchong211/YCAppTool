@@ -5,27 +5,28 @@ import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.LinearLayout
+import com.blankj.utilcode.util.NetworkUtils
+import com.blankj.utilcode.util.SPUtils
+import com.blankj.utilcode.util.SizeUtils
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils
+import com.yc.cn.ycbannerlib.banner.BannerView
+import com.ycbjie.android.R
 import com.ycbjie.android.base.BaseItemView
 import com.ycbjie.android.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidHomeContract
 import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.model.bean.HomeData
+import com.ycbjie.android.model.bean.HomeListBean
+import com.ycbjie.android.network.ResponseBean
 import com.ycbjie.android.presenter.AndroidHomePresenter
 import com.ycbjie.android.view.activity.AndroidActivity
 import com.ycbjie.android.view.activity.AndroidDetailActivity
+import com.ycbjie.android.view.activity.AndroidLoginActivity
 import com.ycbjie.android.view.adapter.AndroidHomeAdapter
 import com.ycbjie.android.view.adapter.BannerPagerAdapter
-import com.blankj.utilcode.util.NetworkUtils
-import com.blankj.utilcode.util.SPUtils
-import com.blankj.utilcode.util.SizeUtils
-import com.ycbjie.android.model.bean.HomeListBean
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils
-import com.yc.cn.ycbannerlib.banner.BannerView
-import com.ycbjie.android.R
 import com.ycbjie.library.base.mvp.BaseFragment
 import com.ycbjie.library.utils.DoShareUtils
 import com.ycbjie.library.web.view.WebViewActivity
-import com.ycbjie.android.network.ResponseBean
 import org.yczbj.ycrefreshviewlib.YCRefreshView
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine
@@ -91,12 +92,14 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
         adapter.setOnItemChildClickListener { view, position ->
             if(adapter.allData.size>position && position>=0){
                 when (view.id){
+                    //收藏
                     R.id.flLike ->{
                         if (SPUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
-                            ToastUtils.showToast(getString(R.string.collect_fail_pls_login))
+                            ToastUtils.showRoundRectToast(activity?.resources?.
+                                    getString(R.string.collect_fail_pls_login))
+                            AndroidLoginActivity.lunch(activity)
                         }else{
                             val homeData = adapter.allData[position]
-                            //var homdata: HomeData = datas[position].item as HomeData
                             val selectId = homeData.id
                             if (homeData.collect) {
                                 presenter?.unCollectArticle(selectId)
@@ -107,6 +110,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                             }
                         }
                     }
+                    //分享
                     R.id.ivMore ->{
                         val data = adapter.allData[position]
                         DoShareUtils.shareText(activity,data.title,data.link)

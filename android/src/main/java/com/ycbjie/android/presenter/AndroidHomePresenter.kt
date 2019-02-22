@@ -1,12 +1,12 @@
 package com.ycbjie.android.presenter
 
 
-import com.ycbjie.android.contract.AndroidHomeContract
-import com.ycbjie.android.model.model.HomeModel
-import com.ycbjie.android.network.ResponseTransformer
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.NetworkUtils
+import com.ycbjie.android.contract.AndroidHomeContract
+import com.ycbjie.android.model.model.HomeModel
 import com.ycbjie.android.network.BaseSchedulerProvider
+import com.ycbjie.android.network.ResponseTransformer
 import com.ycbjie.android.network.SchedulerProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -94,15 +94,16 @@ class AndroidHomePresenter : AndroidHomeContract.Presenter {
     }
 
     override fun collectInArticle(selectId: Int) {
-        var disposable = model.collectInArticle(selectId)
+        val disposable = model.collectInArticle(selectId)
                 .compose(ResponseTransformer.handleResult())
                 .compose(scheduler?.applySchedulers())
                 .subscribe(
                         {
                             mView.collectInArticleSuccess()
-                        }, { t: Throwable ->
-                    mView.collectInArticleFail(t)
-                }
+                        },
+                        { t: Throwable ->
+                            mView.collectInArticleFail(t)
+                        }
                 )
         compositeDisposable.add(disposable)
     }
