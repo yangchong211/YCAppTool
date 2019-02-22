@@ -44,8 +44,8 @@ interface RequestApi {
      */
     @POST("user/login")
     fun userLogin(
-            @Query("username") userName: String,
-            @Query("password") password: String
+            @Query("username") userName: String?,
+            @Query("password") password: String?
     ): Observable<ResponseBean<LoginBean>>
 
     /**
@@ -53,9 +53,9 @@ interface RequestApi {
      */
     @POST("user/register")
     fun userRegister(
-            @Query("username") userName: String,
-            @Query("password") password: String,
-            @Query("repassword") rePassword: String
+            @Query("username") userName: String?,
+            @Query("password") password: String?,
+            @Query("repassword") rePassword: String?
     ): Observable<ResponseBean<JSONObject>>
 
     /**
@@ -103,7 +103,7 @@ interface RequestApi {
      */
     @POST("article/query/{page}/json")
     fun search(@Path("page") page: Int,
-               @Query("k") text: String): Observable<ResponseBean<ProjectListBean>>
+               @Query("k") text: String?): Observable<ResponseBean<ProjectListBean>>
 
     /**
      * 网址导航
@@ -136,9 +136,9 @@ interface RequestApi {
      * 收藏站外文章
      */
     @POST("lg/collect/add/json")
-    fun collectOutArticle(@Query("title") title: String,
-                          @Query("author") author: String,
-                          @Query("link") link: String): Observable<ResponseBean<JSONObject>>
+    fun collectOutArticle(@Query("title") title: String?,
+                          @Query("author") author: String?,
+                          @Query("link") link: String?): Observable<ResponseBean<JSONObject>>
 
     /**
      * 取消收藏
@@ -150,8 +150,8 @@ interface RequestApi {
      * 收藏网站
      */
     @POST("lg/collect/addtool/json")
-    fun collectWebsite(@Query("name") name: String,
-                       @Query("link") link: String): Observable<ResponseBean<JSONObject>>
+    fun collectWebsite(@Query("name") name: String?,
+                       @Query("link") link: String?): Observable<ResponseBean<JSONObject>>
 
     /**
      * 取消网站收藏
@@ -163,7 +163,7 @@ interface RequestApi {
      * 编辑收藏的网站
      */
     @POST("lg/collect/updatetool/json")
-    fun updateWebsite(@Query("id") id: String,
-                      @Query("name") name: String,
-                      @Query("link") link: String): Observable<ResponseBean<JSONObject>>
+    fun updateWebsite(@Query("id") id: String?,
+                      @Query("name") name: String?,
+                      @Query("link") link: String?): Observable<ResponseBean<JSONObject>>
 }
