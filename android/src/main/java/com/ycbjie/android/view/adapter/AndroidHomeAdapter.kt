@@ -5,12 +5,19 @@ import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.support.annotation.RequiresApi
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextUtils
+import android.text.style.AbsoluteSizeSpan
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import com.ycbjie.android.model.bean.HomeData
+import com.blankj.utilcode.util.Utils
 import com.ycbjie.android.R
+import com.ycbjie.android.model.bean.HomeData
+import com.ycbjie.library.utils.spannable.RoundBackgroundSpan
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
 
@@ -50,7 +57,6 @@ class AndroidHomeAdapter : RecyclerArrayAdapter<HomeData>{
             super.setData(data)
             val homeData: HomeData = data as HomeData
             ttTvName.text = homeData.author
-            tvContent.text = homeData.title
             tvTime.text = homeData.niceDate
             tvSuperChapterName.text = homeData.superChapterName
             tvChildChapterName.text = homeData.chapterName
@@ -61,9 +67,48 @@ class AndroidHomeAdapter : RecyclerArrayAdapter<HomeData>{
             } else {
                 ivLike.setBackgroundColor(Color.GRAY)
             }
+
+
+            if (adapterPosition==0 || adapterPosition==1){
+                val text1 = "杨充"
+                val text2 = "潇湘剑雨"
+                val titleContent = text1 + text2 + homeData.title
+                val titleSpannable = SpannableString(titleContent)
+
+                // 杨充
+                val exclusiveSpannable = RoundBackgroundSpan(
+                        Color.parseColor("#f25057"),
+                        Color.parseColor("#f25057"),
+                        Color.parseColor("#ffffff"),
+                        Utils.getApp().resources.getDimensionPixelOffset(R.dimen.dp1),
+                        Utils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4))
+                spannable(titleSpannable, exclusiveSpannable, 0, text1.length)
+
+                // text2 不等于空 在绘制text
+                if (!TextUtils.isEmpty(text2)) {
+                    val bgColor = Color.parseColor("#ffffff")
+                    val borderColor = Color.parseColor("#ff3d51")
+                    val textColor = Color.parseColor("#f25057")
+                    val spannable = RoundBackgroundSpan(bgColor, borderColor, textColor,
+                            Utils.getApp().resources.getDimensionPixelOffset(R.dimen.dp1),
+                            Utils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4))
+                    spannable(titleSpannable, spannable, 2, 2 + text2.length)
+                }
+
+                tvContent.text = titleSpannable
+            }else{
+                tvContent.text = homeData.title
+            }
         }
     }
 
+
+    private fun spannable(titleSpannable: SpannableString, spannable: RoundBackgroundSpan,
+                          start: Int, end: Int) {
+        titleSpannable.setSpan(spannable, start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        titleSpannable.setSpan(AbsoluteSizeSpan(Utils.getApp().resources.getDimensionPixelSize(
+                R.dimen.textSize9)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    }
 
 }
 
