@@ -274,6 +274,8 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         mIconSelectIds.recycle()
 
         ctlTable?.setTabData(mTabEntities)
+        //匿名内部类
+        //Kotlin 用对象表达式和对象声明巧妙的实现了这一概念。
         ctlTable?.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
                 if(position>=0 && position<fragments.size){
