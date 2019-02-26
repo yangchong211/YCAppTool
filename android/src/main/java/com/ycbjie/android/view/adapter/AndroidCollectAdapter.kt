@@ -17,6 +17,7 @@ import android.widget.TextView
 import com.blankj.utilcode.util.Utils
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.HomeData
+import com.ycbjie.android.util.AndroidUtils
 import com.ycbjie.library.utils.spannable.RoundBackgroundSpan
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
@@ -82,7 +83,8 @@ class AndroidCollectAdapter : RecyclerArrayAdapter<HomeData>{
                         Color.parseColor("#f25057"),
                         Color.parseColor("#f25057"),
                         Color.parseColor("#ffffff"),
-                        Utils.getApp().resources.getDimensionPixelOffset(R.dimen.dp1),
+                        AndroidUtils.SingleObject.getApp().
+                                resources.getDimensionPixelOffset(R.dimen.dp1),
                         Utils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4))
                 spannable(titleSpannable, exclusiveSpannable, 0, text1.length)
 
@@ -108,7 +110,8 @@ class AndroidCollectAdapter : RecyclerArrayAdapter<HomeData>{
                           start: Int, end: Int) {
         titleSpannable.setSpan(spannable, start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
         titleSpannable.setSpan(AbsoluteSizeSpan(Utils.getApp().resources.getDimensionPixelSize(
-                R.dimen.textSize9)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                R.dimen.textSize9)), start,
+                end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
 
 }

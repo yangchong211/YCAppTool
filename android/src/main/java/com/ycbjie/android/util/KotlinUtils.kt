@@ -8,6 +8,9 @@ import android.net.ConnectivityManager
 
 object KotlinUtils{
 
+
+
+
     /**
      * 获取当前本地apk的版本
      * 如果是在Java中调用该静态方法，则必须添加上@JvmStatic

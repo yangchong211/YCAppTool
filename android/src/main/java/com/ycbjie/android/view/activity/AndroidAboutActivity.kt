@@ -62,9 +62,16 @@ class AndroidAboutActivity : BaseActivity<AndroidPresenter>() {
     private fun initToolBar() {
         toolbar_title.visibility = View.VISIBLE
         toolbar_title.text = "关于我"
+        //使用Lambda表达式
         ll_title_menu.setOnClickListener {
             onBackPressed()
         }
+        //直接使用
+        /*ll_title_menu.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                onBackPressed()
+            }
+        })*/
     }
 
     override fun initListener() {
