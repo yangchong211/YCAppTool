@@ -16,20 +16,23 @@ import com.ycbjie.android.contract.AndroidCollectContract
 import com.ycbjie.android.model.bean.ProjectListBean
 import com.ycbjie.android.network.ResponseBean
 import com.ycbjie.android.presenter.AndroidCollectPresenter
-import com.ycbjie.android.view.adapter.AndroidHomeAdapter
+import com.ycbjie.android.view.adapter.AndroidCollectAdapter
 import com.ycbjie.library.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.base_android_bar.*
 import kotlinx.android.synthetic.main.base_android_recycle.*
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine
 
+
+
 class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
         , AndroidCollectContract.View{
 
     private var presenter : AndroidCollectPresenter ?= null
     private var page = 1
-    //lateinit 本身的含义是延迟初始化，但是在编译时必须保证 lateinit 修饰的参数被初始化，否则编译不过去的
-    private lateinit var adapter : AndroidHomeAdapter
+    //lateinit 本身的含义是延迟初始化，但是在编译时必须保证 lateinit 修饰的参数被初始化，否则编译之后运行会报错
+    //慎用，因为防止后面没有进行初始化
+    private lateinit var adapter : AndroidCollectAdapter
     //如果编译不过，则可以使用下面这种写法
     //private var adapter1 : AndroidHomeAdapter ? = null
 
@@ -73,7 +76,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
         val line = RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1f), Color.parseColor("#f5f5f7"))
         recyclerView.addItemDecoration(line)
-        adapter = AndroidHomeAdapter(this)
+        adapter = AndroidCollectAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.setRefreshListener {
             if (NetworkUtils.isConnected()){
@@ -144,10 +147,12 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
         recyclerView.showError()
     }
 
+
     override fun setDataErrorView(message: String?) {
         ToastUtils.showRoundRectToast(message)
         recyclerView.showError()
     }
+
 
     override fun setDataView(bean: ResponseBean<ProjectListBean>?) {
         if (bean!=null){
@@ -157,5 +162,6 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
             recyclerView.showEmpty()
         }
     }
+
 
 }
