@@ -3,7 +3,6 @@ package com.ycbjie.library.http;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.utils.LogUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,14 +32,7 @@ public class InterceptorUtils {
      * @return              HttpLoggingInterceptor
      */
     public static HttpLoggingInterceptor getHttpLoggingInterceptor(boolean debug) {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(
-                new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                //Log.e("OkHttp", "YCLog = " + message);
-                LogUtils.printJson("printJson",message);
-            }
-        });
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLogger());
         if (debug) {
             // 测试
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

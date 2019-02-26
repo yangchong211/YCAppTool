@@ -1,3 +1,4 @@
+
 package com.ycbjie.android.base
 
 /**
@@ -32,6 +33,7 @@ object KotlinConstant {
     const val FIND = 1
     const val DATA = 2
     const val USER = 3
+
 
     //第二种方式
     @JvmStatic

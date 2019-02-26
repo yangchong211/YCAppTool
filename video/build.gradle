@@ -56,6 +56,104 @@ android {
         abortOnError false
     }
 
+
+    //如果是可执行独立run的组件，则执行下面代码
+    if (rootProject.ext.isVideoApplication){
+
+        //设定apk的名字
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                //def outputFile = output.outputFile
+                def appNamePath = "yc-${variant.buildType.name}-${variant.versionName}-"
+                + apkNameTime() + ".apk".toLowerCase()
+                println("Video---------appNamePath:---->"+appNamePath)
+                outputFileName = new File(appNamePath)
+                println("Video---------aa==>" + ("${variant.buildType.name}".toLowerCase()) + "-->"
+                        + buildNowTypes.toLowerCase())
+                if ("${variant.buildType.name}".toLowerCase().contains(buildNowTypes.toLowerCase())) {
+                    outputFileNamePath = output.getOutputFile().absolutePath
+                    outputAppFileName = appNamePath
+                    println("Video---------path:" + outputFileNamePath+"----"+outputAppFileName)
+
+                }
+            }
+        }
+
+
+        //配置评估监听
+        gradle.addProjectEvaluationListener(new ProjectEvaluationListener() {
+            @Override
+            void beforeEvaluate(Project project) {
+                //项目配置评估前回调
+                gradle.println("Video---------ProjectEvaluationListener:beforeEvaluate " +
+                        "${project.getName()}")
+            }
+
+            @Override
+            void afterEvaluate(Project project, ProjectState state) {
+                //项目配置评估后回调
+                //如果失败,则failure不为null
+                gradle.println("Video---------ProjectEvaluationListener:afterEvaluate " +
+                        "${state.executed} ${state.failure}")
+                //删除之前生成的apk文件
+                File apkDirs = new File('./video/build/outputs/apk')
+                if (apkDirs.exists()) {
+                    println("Video---------apk 生成目录存在")
+                    apkDirs.deleteDir()
+                } else {
+                    println("Video---------apk 生成目录不存在")
+                }
+            }
+        })
+
+
+        //构建监听
+        gradle.addBuildListener(new BuildListener() {
+            @Override
+            void buildStarted(Gradle gradle) {
+                //init.gradle被执行前,构建已经发生,且buildStarted已经被回调,
+                // 因此后续加入的BuildListener都不会再调用buildStarted
+                gradle.println("Video---------BuildListener:buildStarted=========")
+                /*defaultMapping = ".app/mapping.txt"
+                if (!new File(defaultMapping).exists()) {
+                    gradle.println("app目录下不存在mapping文件，开始创建新的空文件")
+                    new File(defaultMapping).createNewFile()
+                } else {
+                    gradle.println("app目录下存在mapping文件，不在创建空文件")
+                }*/
+            }
+
+            @Override
+            void settingsEvaluated(Settings settings) {
+                //setting.gradle加载和评估配置阶段完成
+                gradle.println("Video---------=========BuildListener:settingsEvaluated=========")
+            }
+
+            @Override
+            void projectsLoaded(Gradle gradle) {
+                //项目加载完成
+                gradle.println("Video---------=========BuildListener:projectsLoaded=========")
+            }
+
+            @Override
+            void projectsEvaluated(Gradle gradle) {
+                //项目评估配置阶段结束
+                gradle.println("Video---------=========BuildListener:projectsEvaluated=========")
+            }
+
+            @Override
+            void buildFinished(BuildResult result) {
+                //构建完成
+                gradle.println("Video---------=========BuildListener:buildFinished=========")
+            }
+        })
+
+        project.afterEvaluate {
+            // Set application id
+            println("start")
+        }
+    }
+
 }
 
 dependencies {
@@ -63,4 +161,13 @@ dependencies {
     implementation project(':library')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     api rootProject.ext.dependencies["YCVideoPlayerLib"]
+}
+
+
+static def apkNameTime() {
+    return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("Asia/Shanghai"))
+}
+
+static def releaseTime() {
+    return new Date().format("MMddHHmmss", TimeZone.getTimeZone("Asia/Shanghai"))
 }

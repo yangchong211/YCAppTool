@@ -11,12 +11,12 @@ import okhttp3.Interceptor
 import org.json.JSONObject
 
 
-class AndroidHelper  {
+class AndroidHelper private constructor() {
 
     private var mApiService : RequestApi ?= null
     private var interceptor = ArrayList<Interceptor>()
 
-    private constructor(){
+    init {
         interceptor.add(AddCookieInterceptor())
         interceptor.add(GetCookieInterceptor())
         mApiService = RetrofitWrapper
@@ -34,7 +34,6 @@ class AndroidHelper  {
             }
             return model as AndroidHelper
         }
-
     }
 
     /**
@@ -132,6 +131,23 @@ class AndroidHelper  {
     fun login(name: String, pwd: String): Observable<ResponseBean<LoginBean>> {
         return mApiService!!.userLogin(name, pwd)
     }
+
+
+    /**
+     * 获取收藏的文章列表
+     */
+    fun getCollectArticleList(page: Int): Observable<ResponseBean<ProjectListBean>> {
+        return mApiService!!.getCollectArticleList(page)
+    }
+
+
+    /**
+     * 获取收藏的网站列表
+     */
+    fun getCollectWebList(): Observable<ResponseBean<MutableList<SearchTag>>> {
+        return mApiService!!.getCollectWebList()
+    }
+
 
 
 }
