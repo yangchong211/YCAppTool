@@ -288,5 +288,4 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
         ToastUtils.showRoundRectToast(t.message)
     }
 
-
 }
