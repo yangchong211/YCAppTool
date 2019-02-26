@@ -21,4 +21,7 @@ class AndroidApp : LibApplication() {
         //在子线程中初始化
         InitializeService.start(this)
     }
+
+
+
 }

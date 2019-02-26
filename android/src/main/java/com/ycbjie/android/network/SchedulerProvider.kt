@@ -22,6 +22,7 @@ class SchedulerProvider : BaseSchedulerProvider {
         return AndroidSchedulers.mainThread()
     }
 
+    //companion object的好处是，外部类可以直接访问对象，不需要通过对象指针
     companion object {
         private var mInstance: SchedulerProvider? = null
         fun getInstance(): SchedulerProvider? {
@@ -34,7 +35,6 @@ class SchedulerProvider : BaseSchedulerProvider {
             }
             return mInstance
         }
-
     }
 
     /**
