@@ -3,13 +3,15 @@ package com.ycbjie.android.presenter
 import android.annotation.SuppressLint
 import com.ycbjie.android.contract.AndroidLoginContract
 import com.ycbjie.android.model.helper.AndroidHelper
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.ycbjie.android.network.BaseSchedulerProvider
+import com.ycbjie.android.network.ResponseTransformer
+import com.ycbjie.android.network.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class AndroidLoginPresenter : AndroidLoginContract.Presenter {
 
     private var mView : AndroidLoginContract.View
+    private var scheduler: BaseSchedulerProvider? = null
 
     private val compositeDisposable: CompositeDisposable by lazy {
         CompositeDisposable()
@@ -17,6 +19,7 @@ class AndroidLoginPresenter : AndroidLoginContract.Presenter {
 
     constructor(view : AndroidLoginContract.View){
         this.mView = view
+        scheduler = SchedulerProvider.getInstatnce()
     }
 
     override fun subscribe() {
@@ -31,8 +34,8 @@ class AndroidLoginPresenter : AndroidLoginContract.Presenter {
     override fun startLogin(name: String, pwd: String) {
         val instance = AndroidHelper.instance()
         val subscribe = instance.login(name = name, pwd = pwd)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(ResponseTransformer.handleResult())
+                .compose(scheduler?.applySchedulers())
                 .subscribe({ bean ->
                     mView.loginSuccess(bean)
                 }, { t ->

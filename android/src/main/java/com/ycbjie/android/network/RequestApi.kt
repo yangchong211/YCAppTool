@@ -16,6 +16,7 @@ import retrofit2.http.Query
  *     time  : 2018/05/30
  *     desc  : kotlin学习
  *     revise: 请求接口封装
+ *             关于flutter版本的玩Android项目，可以看：https://github.com/yangchong211/ycflutter
  * </pre>
  */
 interface RequestApi {

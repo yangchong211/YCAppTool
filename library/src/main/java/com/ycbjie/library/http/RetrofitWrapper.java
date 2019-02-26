@@ -113,14 +113,13 @@ public class RetrofitWrapper {
                 builder.addInterceptor(interceptor);
             }
         }
+        //添加自定义CookieJar
+        InterceptorUtils.addCookie(builder);
         initBuilder(url,build);
     }
 
 
     private void initBuilder(String url, OkHttpClient build) {
-        //添加自定义CookieJar
-        InterceptorUtils.addCookie(builder);
-
         initSSL();
         initTimeOut();
         if(BuildConfig.DEBUG){

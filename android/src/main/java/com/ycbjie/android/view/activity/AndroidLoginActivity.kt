@@ -14,7 +14,6 @@ import com.ycbjie.android.R
 import com.ycbjie.android.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidLoginContract
 import com.ycbjie.android.model.bean.LoginBean
-import com.ycbjie.android.network.ResponseBean
 import com.ycbjie.android.presenter.AndroidLoginPresenter
 import com.ycbjie.library.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.activity_android_login.*
@@ -148,14 +147,11 @@ class AndroidLoginActivity : BaseActivity<AndroidLoginPresenter>(),
         return false
     }
 
-    override fun loginSuccess(bean: ResponseBean<LoginBean>?) {
+    override fun loginSuccess(bean: LoginBean) {
         ViewLoading.dismiss(this@AndroidLoginActivity)
-        val data = bean?.data
-        if (data!=null){
-            SPUtils.getInstance().put(KotlinConstant.USER_ID,data.id)
-            SPUtils.getInstance().put(KotlinConstant.USER_NAME, data.username!!)
-            SPUtils.getInstance().put(KotlinConstant.USER_EMAIL, data.email!!)
-        }
+        SPUtils.getInstance().put(KotlinConstant.USER_ID,bean.id)
+        SPUtils.getInstance().put(KotlinConstant.USER_NAME, bean.username!!)
+        SPUtils.getInstance().put(KotlinConstant.USER_EMAIL, bean.email!!)
         ToastUtils.showRoundRectToast("登陆成功")
         finish()
         AndroidActivity.startActivity(this@AndroidLoginActivity,KotlinConstant.HOME)
