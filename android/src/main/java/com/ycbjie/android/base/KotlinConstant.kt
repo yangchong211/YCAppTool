@@ -28,7 +28,6 @@ object KotlinConstant {
     const val HISTORY_SEARCH = "historySearch"
     const val USER_NAME = "userName"
     const val USER_EMAIL = "userEmail"
-    const val USER_PWD = "userPwd"
 
     const val HOME = 0
     const val FIND = 1

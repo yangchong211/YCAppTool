@@ -26,6 +26,7 @@ class AndroidAboutActivity : BaseActivity<AndroidPresenter>() {
 
 
     object DataProviderManager {
+        //只是用作学习使用
         init {
             //对应java中static代码块
             LogUtils.e("DataProviderManager"+"init")
