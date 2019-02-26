@@ -95,6 +95,8 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
      * 跳转首页
      */
     companion object {
+        //?的作用是方法参数声明非空
+        //为了增强逻辑，可以在方法参数上加上"?"，可以避免处理参数值时抛出空指针异常。
         fun startActivity(context: Activity?, selectIndex: Int) {
             val intent = Intent(context, AndroidActivity::class.java)
             //intent.addCategory(Intent.CATEGORY_DEFAULT);
