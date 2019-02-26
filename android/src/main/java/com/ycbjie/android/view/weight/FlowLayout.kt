@@ -14,7 +14,12 @@ import android.view.ViewGroup
  *     revise:
  * </pre>
  */
-class FlowLayout : ViewGroup {
+open class FlowLayout : ViewGroup {
+
+    //kotlin的class默认是final, 如果想要能被继承，那么需要使用open 修饰，它的设计原则来自于Effective Java
+    //这种默认的设计原则，会导致第三方/未完成的sdk的大多数会是不可继承的，
+    //从提供者角度来说：它必须保证这个类是足够完整的，从使用者角度来说：这个类必须要提供我需要的所有东西，
+    //否则，我必须重写。当然提供者可以为这个类加上open来表示这个类是可以继承的，但是这是另外一种设计思维。
 
     // 保存每行多少个多少行
     private var viewLines = mutableListOf<MutableList<View>>()
