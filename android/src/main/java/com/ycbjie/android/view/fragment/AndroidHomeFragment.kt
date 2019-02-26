@@ -45,6 +45,20 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
      * 循环轮询的数据
      */
     private val bannerLists = mutableListOf<BannerBean>()
+    /**
+     * kotlin数组的几种形式，编译成java代码对应的则是：
+     * private final int[] a = new int[4];
+     * private final Integer b = new Integer(Integer.valueOf(4));
+     * private final Integer c = new Integer((Integer)null);
+     * 注意要点：
+     *      后面两种方法都对基本类型做了装箱处理，产生了额外的开销。
+     *      所以当需要声明非空的基本类型数组时，应该使用xxxArray，避免自动装箱。
+     */
+    //var a : IntArray = IntArray(4)
+    //var b : Array<Int> = arrayOf(4)
+    //var c : Array<Int?> = arrayOf(null)
+    //var d : Array<String> = arrayOf()
+
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)

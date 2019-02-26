@@ -19,6 +19,7 @@ class AndroidHomePresenter : AndroidHomeContract.Presenter {
     private var mView: AndroidHomeContract.View
     private var scheduler: BaseSchedulerProvider? = null
 
+    //lazy 委托属性可以用于只读属性的惰性加载
     private val compositeDisposable: CompositeDisposable by lazy {
         CompositeDisposable()
     }

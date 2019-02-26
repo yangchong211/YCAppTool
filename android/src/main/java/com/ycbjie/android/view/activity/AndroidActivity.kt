@@ -253,6 +253,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         fragments.add(AndroidProfileFragment())
 
         pageAdapter = BasePagerAdapter(supportFragmentManager, fragments)
+        //
         viewPager.run {
             this!!.adapter = pageAdapter
             addOnPageChangeListener(PagerChangeListener(this@AndroidActivity))
