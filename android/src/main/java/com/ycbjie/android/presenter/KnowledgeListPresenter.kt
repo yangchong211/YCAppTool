@@ -21,7 +21,7 @@ class KnowledgeListPresenter : KnowledgeListContract.Presenter {
 
     constructor(androidView: KnowledgeListContract.View){
         this.mView = androidView
-        scheduler = SchedulerProvider.getInstatnce()
+        scheduler = SchedulerProvider.getInstance()
     }
 
 

@@ -19,7 +19,7 @@ class AndroidLoginPresenter : AndroidLoginContract.Presenter {
 
     constructor(view : AndroidLoginContract.View){
         this.mView = view
-        scheduler = SchedulerProvider.getInstatnce()
+        scheduler = SchedulerProvider.getInstance()
     }
 
     override fun subscribe() {

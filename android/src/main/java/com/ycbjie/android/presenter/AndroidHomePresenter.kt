@@ -29,7 +29,7 @@ class AndroidHomePresenter : AndroidHomeContract.Presenter {
 
     constructor(androidView: AndroidHomeContract.View){
         this.mView = androidView
-        scheduler = SchedulerProvider.getInstatnce()
+        scheduler = SchedulerProvider.getInstance()
     }
 
 

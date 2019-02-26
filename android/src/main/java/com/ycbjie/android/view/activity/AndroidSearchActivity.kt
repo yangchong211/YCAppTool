@@ -57,7 +57,7 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
     }
 
     private val presenter: AndroidSearchPresenter by lazy {
-        AndroidSearchPresenter(this, SchedulerProvider.getInstatnce()!!)
+        AndroidSearchPresenter(this, SchedulerProvider.getInstance()!!)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

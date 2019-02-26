@@ -39,7 +39,7 @@ class NavWebsiteActivity : BaseActivity<NavWebsitePresenter>() , NavWebsiteContr
     private lateinit var kindsAdapter: AndroidNavRightAdapter
 
     private val presenter: NavWebsiteContract.Presenter by lazy {
-        NavWebsitePresenter(this, SchedulerProvider.getInstatnce()!!)
+        NavWebsitePresenter(this, SchedulerProvider.getInstance()!!)
     }
 
 

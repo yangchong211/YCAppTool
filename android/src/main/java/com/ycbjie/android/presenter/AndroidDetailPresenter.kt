@@ -17,7 +17,7 @@ class AndroidDetailPresenter : AndroidDetailContract.Presenter {
 
     constructor(androidView: AndroidDetailContract.View){
         this.mView = androidView
-        scheduler = SchedulerProvider.getInstatnce()
+        scheduler = SchedulerProvider.getInstance()
     }
 
     override fun subscribe() {

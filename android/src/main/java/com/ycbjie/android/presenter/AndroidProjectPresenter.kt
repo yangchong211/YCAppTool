@@ -26,7 +26,7 @@ class AndroidProjectPresenter : AndroidProjectContract.Presenter {
 
     constructor(androidView: AndroidProjectContract.View){
         this.mView = androidView
-        scheduler = SchedulerProvider.getInstatnce()
+        scheduler = SchedulerProvider.getInstance()
     }
 
 

@@ -24,7 +24,7 @@ class SchedulerProvider : BaseSchedulerProvider {
 
     companion object {
         private var mInstance: SchedulerProvider? = null
-        fun getInstatnce(): SchedulerProvider? {
+        fun getInstance(): SchedulerProvider? {
             if (mInstance == null) {
                 synchronized(SchedulerProvider::class) {
                     if (mInstance == null) {
@@ -41,8 +41,8 @@ class SchedulerProvider : BaseSchedulerProvider {
      * 切换线程操作
      */
     override fun <T> applySchedulers(): ObservableTransformer<T, T> {
-        return ObservableTransformer { obserable ->
-            obserable.observeOn(ui())
+        return ObservableTransformer { observable ->
+            observable.observeOn(ui())
                 .subscribeOn(io())
         }
     }
