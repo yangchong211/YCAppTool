@@ -78,7 +78,7 @@ class AndroidHomePresenter : AndroidHomeContract.Presenter {
     }
 
     override fun unCollectArticle(selectId: Int) {
-        var disposable = model.unCollectArticle(selectId)
+        val disposable = model.unCollectArticle(selectId)
                 .compose(ResponseTransformer.handleResult())
                 .compose(scheduler?.applySchedulers())
                 .subscribe(

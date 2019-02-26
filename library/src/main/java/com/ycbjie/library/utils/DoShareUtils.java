@@ -6,14 +6,21 @@ import android.net.Uri;
 import android.util.Log;
 
 import java.io.File;
+import java.util.ArrayList;
 
 
+/**
+ * @author yc
+ */
 public class DoShareUtils {
 
-    public static void shareText(Context context, String text, String title){
+    /**
+     * 分享纯文字
+     */
+    public static void shareText(Context context, String link, String title){
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT,text);
+        intent.putExtra(Intent.EXTRA_TEXT,link);
         context.startActivity(Intent.createChooser(intent,title));
     }
 
@@ -72,6 +79,24 @@ public class DoShareUtils {
         intent.putExtra(Intent.EXTRA_TEXT, msgText);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(Intent.createChooser(intent, "分享到"));
+    }
+
+
+
+
+    /**
+     * 分享多个文件
+     */
+    public static void shareFile(Context context, ArrayList<Uri> imageUris) {
+        /*ArrayList<Uri> imageUris = new ArrayList<>();
+        Uri uri1 = Uri.parse(getResourcesUri(R.drawable.dog));
+        Uri uri2 = Uri.parse(getResourcesUri(R.drawable.shu_1));
+        imageUris.add(uri1);
+        imageUris.add(uri2);*/
+        Intent mulIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+        mulIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
+        mulIntent.setType("image/jpeg");
+        context.startActivity(Intent.createChooser(mulIntent,"多文件分享"));
     }
 
 

@@ -7,21 +7,22 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.LinearLayout
-import com.ycbjie.android.contract.AndroidProjectContract
-import com.ycbjie.android.model.bean.HomeData
-import com.ycbjie.android.model.bean.ProjectListBean
-import com.ycbjie.android.model.bean.TreeBean
-import com.ycbjie.android.presenter.AndroidProjectPresenter
-import com.ycbjie.android.view.activity.AndroidDetailActivity
-import com.ycbjie.android.view.adapter.AndroidProjectAdapter
-import com.ycbjie.android.view.adapter.AndroidProjectTreeAdapter
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.NetworkUtils
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.ycbjie.android.R
-import com.ycbjie.library.base.mvp.BaseLazyFragment
-import kotlinx.android.synthetic.main.fragment_android_project.*
+import com.ycbjie.android.contract.AndroidProjectContract
+import com.ycbjie.android.model.bean.HomeData
+import com.ycbjie.android.model.bean.ProjectListBean
+import com.ycbjie.android.model.bean.TreeBean
 import com.ycbjie.android.network.ResponseBean
+import com.ycbjie.android.presenter.AndroidProjectPresenter
+import com.ycbjie.android.view.activity.AndroidDetailActivity
+import com.ycbjie.android.view.adapter.AndroidProjectAdapter
+import com.ycbjie.android.view.adapter.AndroidProjectTreeAdapter
+import com.ycbjie.library.base.mvp.BaseLazyFragment
+import com.ycbjie.library.utils.DoShareUtils
+import kotlinx.android.synthetic.main.fragment_android_project.*
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 
 class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View, View.OnClickListener {
@@ -44,7 +45,6 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
         initRProjectTreeRecyclerView()
         initRefresh()
     }
-
 
     override fun initListener() {
         tvKind.setOnClickListener(this)
@@ -83,18 +83,24 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
         rvList.recyclerView.layoutManager = linearLayoutManager
         listsAdapter = AndroidProjectAdapter(activity)
         rvList.adapter = listsAdapter
-        listsAdapter.setOnItemClickListener({ position ->
+        listsAdapter.setOnItemClickListener { position ->
             if (listsAdapter.allData.size > position && position > -1) {
                 //条目点击事件
                 val homeData: HomeData = listsAdapter.allData[position] as HomeData
                 AndroidDetailActivity.lunch(activity, homeData, homeData.collect, homeData.id)
             }
-        })
+        }
         listsAdapter.setOnItemChildClickListener(object : AndroidProjectAdapter.OnItemChildClickListener {
             override fun onChildClick(view: View, position: Int) {
                 //子View点击事件
                 when(view.id){
-
+                    R.id.flLike->{
+                        ToastUtils.showRoundRectToast("后期添加收藏")
+                    }
+                    R.id.ivMore->{
+                        val homeData = listsAdapter.allData[position]
+                        DoShareUtils.shareText(activity,homeData.link,homeData.title)
+                    }
                 }
             }
         })
@@ -164,7 +170,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
         rvKinds.layoutManager = LinearLayoutManager(activity)
         kindsAdapter = AndroidProjectTreeAdapter(activity)
         rvKinds.adapter = kindsAdapter
-        kindsAdapter.setOnItemClickListener({ position ->
+        kindsAdapter.setOnItemClickListener { position ->
             if (kindsAdapter.allData.size > position && position > -1) {
                 //条目点击事件
                 //关闭侧滑。请求数据
@@ -177,7 +183,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
                 presenter?.getProjectTreeList(selectProject!!.id, true)
                 kindsAdapter.notifyDataSetChanged()
             }
-        })
+        }
     }
 
 

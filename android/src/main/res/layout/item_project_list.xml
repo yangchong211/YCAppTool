@@ -53,11 +53,11 @@
 
                 <ImageView
                     android:id="@+id/ivLike"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="23dp"
+                    android:layout_height="23dp"
                     android:layout_gravity="center"
                     android:layout_toLeftOf="@+id/ivMore"
-                    android:background="@drawable/ic_like" />
+                    android:background="@drawable/ic_book_review_like" />
 
             </FrameLayout>
 

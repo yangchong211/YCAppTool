@@ -113,7 +113,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                     //分享
                     R.id.ivMore ->{
                         val data = adapter.allData[position]
-                        DoShareUtils.shareText(activity,data.title,data.link)
+                        DoShareUtils.shareText(activity,data.link,data.title)
                     }
                 }
             }
