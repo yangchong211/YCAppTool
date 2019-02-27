@@ -6,6 +6,15 @@ if (rootProject.ext.isAndroidApplication) {
 }
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -22,11 +31,11 @@ android {
             applicationId "com.ycbjie.android"
         }
         //如果是集成模式下，则设置ARouter的配置，用于组件间通信的实现
-        javaCompileOptions {
+        /*javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
-        }
+        }*/
     }
 
     buildTypes {
@@ -62,7 +71,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':library')
-    annotationProcessor rootProject.ext.dependencies["router-compiler"]
+    //annotationProcessor rootProject.ext.dependencies["router-compiler"]
+    kapt rootProject.ext.dependencies["router-compiler"]
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
