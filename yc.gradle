@@ -83,7 +83,6 @@ ext {
 
                 //yc
                 "YCStateLib"                  : "cn.yc:YCStateLib:1.1.5",
-                "YCPhotoLib"                  : "cn.yc:YCPhotoLib:1.0",
                 "YCDialogLib"                 : "cn.yc:YCDialogLib:3.6.5",
                 "YCCountDownViewLib"          : "cn.yc:YCCountDownViewLib:1.0",
                 "YCUtilsLib"                  : "cn.yc:YCUtilsLib:1.6.2",

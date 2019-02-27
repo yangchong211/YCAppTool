@@ -6,9 +6,11 @@ import android.app.Activity
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.*
-import com.ycbjie.android.model.bean.HomeData
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import com.ycbjie.android.R
+import com.ycbjie.android.model.bean.HomeData
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
 
@@ -121,6 +123,7 @@ class AndroidSearchAdapter: RecyclerArrayAdapter<HomeData> {
             super.setData(item)
             var homeData = item
             tvName.text = homeData.author
+            @Suppress("DEPRECATION")
             tvContent.text = Html.fromHtml(homeData.title)
             tvTime.text = homeData.niceDate
             if (homeData.collect) {

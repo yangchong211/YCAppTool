@@ -133,7 +133,6 @@ dependencies {
     api rootProject.ext.dependencies["easypermissions"]
 
     api rootProject.ext.dependencies["YCStateLib"]
-    api rootProject.ext.dependencies["YCPhotoLib"]
     api rootProject.ext.dependencies["YCDialogLib"]
     api rootProject.ext.dependencies["YCCountDownViewLib"]
     api rootProject.ext.dependencies["YCUtilsLib"]

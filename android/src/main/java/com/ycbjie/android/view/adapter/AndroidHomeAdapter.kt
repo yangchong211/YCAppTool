@@ -95,7 +95,6 @@ class AndroidHomeAdapter : RecyclerArrayAdapter<HomeData>{
                             Utils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4))
                     spannable(titleSpannable, spannable, 2, 2 + text2.length)
                 }
-
                 tvContent.text = titleSpannable
             }else{
                 tvContent.text = homeData.title

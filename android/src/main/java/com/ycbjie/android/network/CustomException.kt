@@ -35,8 +35,7 @@ class CustomException {
          * 将本地异常解析成ApiException
          */
         fun handleException(cause: Throwable?): ApiException? {
-            var exception: ApiException? = null
-            exception = if (cause is JsonParseException) {
+            var exception: ApiException? = if (cause is JsonParseException) {
                 ApiException(cause.message, cause, PARSE_ERROR)
             } else if (cause is UnknownHostException ||
                     cause is SocketTimeoutException ||
@@ -47,8 +46,6 @@ class CustomException {
             }
             return exception
         }
-
     }
-
 
 }

@@ -13,12 +13,6 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.ycbjie.android.base.KotlinConstant
-import com.ycbjie.android.contract.AndroidSearchContract
-import com.ycbjie.android.model.bean.ProjectListBean
-import com.ycbjie.android.model.bean.SearchTag
-import com.ycbjie.android.presenter.AndroidSearchPresenter
-import com.ycbjie.android.view.adapter.AndroidSearchAdapter
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
 import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.NetworkUtils
@@ -28,9 +22,15 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.ycbjie.android.R
+import com.ycbjie.android.base.KotlinConstant
+import com.ycbjie.android.contract.AndroidSearchContract
+import com.ycbjie.android.model.bean.ProjectListBean
+import com.ycbjie.android.model.bean.SearchTag
+import com.ycbjie.android.network.SchedulerProvider
+import com.ycbjie.android.presenter.AndroidSearchPresenter
+import com.ycbjie.android.view.adapter.AndroidSearchAdapter
 import com.ycbjie.library.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.activity_android_search.*
-import com.ycbjie.android.network.SchedulerProvider
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine
 
@@ -184,7 +184,7 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
             }
         })
 
-        edSearch.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+        edSearch.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val str = edSearch.text.toString()
                 if (str.isNotEmpty()) {

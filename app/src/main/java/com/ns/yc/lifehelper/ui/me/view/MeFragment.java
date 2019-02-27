@@ -21,11 +21,9 @@ import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
-import com.ns.yc.lifehelper.ui.me.view.activity.MeQoneActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeTimerActivity;
 import com.ycbjie.library.utils.AppToolUtils;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 
 
 /**
@@ -140,8 +138,6 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
                 startActivity(MeTimerActivity.class);
                 break;
             case R.id.rl_me_qone:
-                //后期再看这块
-                //startActivity(MeQoneActivity.class);
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
                 break;
             case R.id.rl_me_project:

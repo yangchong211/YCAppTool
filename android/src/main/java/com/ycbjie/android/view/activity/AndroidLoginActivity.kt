@@ -117,6 +117,7 @@ class AndroidLoginActivity : BaseActivity<AndroidLoginPresenter>(),
     }
 
     private fun checkContent(login: Boolean): Boolean {
+        if (login)
         et_username.error = null
         et_password.error = null
 
