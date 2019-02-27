@@ -107,6 +107,7 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
                         spannable(titleSpannable, spannable, 2, 2 + text2.length());
                     }
                     //tvTitle.setText(titleSpannable.toString());
+                    //用下面这种，否则span不会生效
                     tvTitle.setText(titleSpannable);
                 }else {
                     tvTitle.setText(data.getTitle());
