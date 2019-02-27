@@ -24,6 +24,9 @@ class AndroidHomePresenter : AndroidHomeContract.Presenter {
         CompositeDisposable()
     }
 
+    //懒初始化是指推迟一个变量的初始化时机，变量在使用的时候才去实例化，这样会更加的高效。
+    //因为我们通常会遇到这样的情况，一个变量直到使用时才需要被初始化，
+    //或者仅仅是它的初始化依赖于某些无法立即获得的上下文。
     private val model: HomeModel by lazy {
         HomeModel()
     }
