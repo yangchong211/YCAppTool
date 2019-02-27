@@ -215,11 +215,11 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         mIvRightImg = findViewById(R.id.iv_right_img)
         viewPager = findViewById(R.id.vp_pager)
         ctlTable = findViewById(R.id.ctl_table)
-        mTvTitleLeft!!.visibility = View.VISIBLE
-        mTvTitleLeft!!.textSize = 16.0f
-        mTvTitleLeft!!.typeface = Typeface.DEFAULT
-        mLlTitleMenu!!.visibility = View.GONE
-        mIvRightImg!!.visibility = View.VISIBLE
+        mTvTitleLeft?.visibility = View.VISIBLE
+        mTvTitleLeft?.textSize = 16.0f
+        mTvTitleLeft?.typeface = Typeface.DEFAULT
+        mLlTitleMenu?.visibility = View.GONE
+        mIvRightImg?.visibility = View.VISIBLE
     }
 
 
@@ -280,7 +280,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         ctlTable?.setOnTabSelectListener(object : OnTabSelectListener {
             override fun onTabSelect(position: Int) {
                 if(position>=0 && position<fragments.size){
-                    viewPager!!.currentItem = position
+                    viewPager?.currentItem = position
                 }
             }
 
