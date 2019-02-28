@@ -54,10 +54,10 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
      *      后面两种方法都对基本类型做了装箱处理，产生了额外的开销。
      *      所以当需要声明非空的基本类型数组时，应该使用xxxArray，避免自动装箱。
      */
-    //var a : IntArray = IntArray(4)
-    //var b : Array<Int> = arrayOf(4)
-    //var c : Array<Int?> = arrayOf(null)
-    //var d : Array<String> = arrayOf()
+    var a : IntArray = IntArray(4)
+    var b : Array<Int> = arrayOf(4)
+    var c : Array<Int?> = arrayOf(null)
+    var d : Array<String> = arrayOf()
 
 
     override fun onAttach(context: Context?) {

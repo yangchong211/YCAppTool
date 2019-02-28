@@ -7,6 +7,8 @@ import android.view.View
 import com.ycbjie.android.R
 import com.ycbjie.android.presenter.AndroidLoginPresenter
 import com.ycbjie.library.base.mvp.BaseActivity
+import kotlinx.android.synthetic.main.activity_android_register.*
+import kotlinx.android.synthetic.main.base_android_bar.*
 
 
 /**
@@ -39,7 +41,8 @@ class AndroidRegisterActivity : BaseActivity<AndroidLoginPresenter>(), View.OnCl
     }
 
     override fun initView() {
-
+        toolbar_title.text = "注册页面"
+        btn_register.text = "开始注册"
     }
 
     override fun initListener() {
