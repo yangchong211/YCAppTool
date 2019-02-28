@@ -132,6 +132,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         menu?.add(0, 2, 1, "开发作者介绍")
         menu?.add(0, 3, 2, "分享此软件")
         menu?.add(0, 4, 3, "开源项目介绍")
+        menu?.add(0, 5, 4, "简单使用协程")
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -158,6 +159,9 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
             4 -> {
                 //ToastUtils.showRoundRectToast("开源项目介绍")
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME)
+            }
+            5 -> {
+
             }
         }
         return super.onOptionsItemSelected(item)
@@ -400,6 +404,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
     fun FragmentActivity.toast(message: CharSequence,duration: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(this, message, duration).show()
     }
+
 
 
 }
