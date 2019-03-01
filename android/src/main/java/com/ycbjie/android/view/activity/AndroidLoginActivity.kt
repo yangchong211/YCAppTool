@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.pedaily.yc.ycdialoglib.loading.ViewLoading
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
@@ -18,6 +19,10 @@ import com.ycbjie.android.presenter.AndroidLoginPresenter
 import com.ycbjie.library.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.activity_android_login.*
 import kotlinx.android.synthetic.main.base_android_bar.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 /**
@@ -149,14 +154,26 @@ class AndroidLoginActivity : BaseActivity<AndroidLoginPresenter>(),
     }
 
     override fun loginSuccess(bean: LoginBean) {
-        ViewLoading.dismiss(this@AndroidLoginActivity)
-        SPUtils.getInstance().put(KotlinConstant.USER_ID,bean.id)
-        SPUtils.getInstance().put(KotlinConstant.USER_NAME, bean.username!!)
-        SPUtils.getInstance().put(KotlinConstant.USER_EMAIL, bean.email!!)
-        ToastUtils.showRoundRectToast("登陆成功")
-        finish()
-        AndroidActivity.startActivity(this@AndroidLoginActivity,KotlinConstant.HOME)
+        //协程间是如何切换的，注意这里只是测试协程
+        //这段代码先打印出next，然后延迟1秒钟后打印出now，像是android里handler的post和postDelay方法。
+        GlobalScope.launch(Dispatchers.Default){
+            ViewLoading.dismiss(this@AndroidLoginActivity)
+            LogUtils.i("AndroidLoginActivity"+"协程间是如何切换的")
+            LogUtils.i("AndroidLoginActivity---${Thread.currentThread().name}")
+            launch {
+                delay(1000)
+                LogUtils.i("AndroidLoginActivity"+"now")
+                finish()
+                AndroidActivity.startActivity(this@AndroidLoginActivity,KotlinConstant.HOME)
+            }
+            SPUtils.getInstance().put(KotlinConstant.USER_ID,bean.id)
+            SPUtils.getInstance().put(KotlinConstant.USER_NAME, bean.username!!)
+            SPUtils.getInstance().put(KotlinConstant.USER_EMAIL, bean.email!!)
+            ToastUtils.showRoundRectToast("登陆成功")
+            LogUtils.i("AndroidLoginActivity"+"next")
+        }
     }
+
 
     override fun loginError(message: String?) {
         ViewLoading.dismiss(this@AndroidLoginActivity)

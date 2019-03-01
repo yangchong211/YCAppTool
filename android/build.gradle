@@ -73,7 +73,10 @@ dependencies {
     implementation project(':library')
     //annotationProcessor rootProject.ext.dependencies["router-compiler"]
     kapt rootProject.ext.dependencies["router-compiler"]
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    // Kotlin coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
 }
 repositories {
     mavenCentral()

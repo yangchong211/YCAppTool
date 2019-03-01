@@ -88,11 +88,11 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
 
     override fun initListener() {
         initEditTextInputListener()
-        ivClear.setOnClickListener({
+        ivClear.setOnClickListener {
             edSearch.setText("")
             ivClear.visibility = View.GONE
             showRecommend()
-        })
+        }
     }
 
     override fun initData() {
@@ -110,13 +110,13 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
         recyclerView?.setRefreshing(false)
         recyclerView?.scrollTo(0, 0)
         recyclerView?.scrollBy(0, 0)
-        recyclerView?.setRefreshListener({
+        recyclerView?.setRefreshListener {
             if (NetworkUtils.isConnected()) {
                 presenter.search(edSearch.text.toString(), true)
             } else {
                 recyclerView?.setRefreshing(false)
             }
-        })
+        }
         //加载更多
         adapter.setMore(R.layout.view_recycle_more, object : RecyclerArrayAdapter.OnMoreListener {
             override fun onMoreShow() {

@@ -19,6 +19,10 @@ import com.ycbjie.library.base.mvp.BaseLazyFragment
 import com.ycbjie.library.constant.Constant
 import com.ycbjie.library.web.view.WebViewActivity
 import kotlinx.android.synthetic.main.fragment_android_profile.*
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * <pre>
@@ -116,15 +120,22 @@ class AndroidProfileFragment : BaseLazyFragment(), View.OnClickListener {
             }
             R.id.rlOther ->{
                 if (SPUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
-                    ToastUtils.showRoundRectToast("还未登陆")
+                    //ToastUtils.showRoundRectToast("还未登陆")
                     AndroidLoginActivity.lunch(activity)
                 }else{
                     //开始退出登陆
+                    //设置启动模式
+                    val job = GlobalScope.launch(start = CoroutineStart.LAZY) {
+                        delay(500L)
+                        AndroidActivity.startActivity(activity,KotlinConstant.FIND)
+                        LogUtils.i("AndroidActivity"+"设置启动模式")
+                    }
+                    LogUtils.i("AndroidActivity"+"hello world")
                     SPUtils.getInstance().put(KotlinConstant.USER_ID,0)
                     SPUtils.getInstance().put(KotlinConstant.USER_NAME, "")
                     SPUtils.getInstance().put(KotlinConstant.USER_EMAIL, "")
-                    AndroidActivity.startActivity(activity,KotlinConstant.FIND)
-                    ToastUtils.showRoundRectToast("还未登陆")
+                    ToastUtils.showRoundRectToast("退出登陆")
+                    job.start()
                 }
             }
         }
