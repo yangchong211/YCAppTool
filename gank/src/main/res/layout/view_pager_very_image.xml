@@ -5,10 +5,14 @@
     android:layout_height="fill_parent"
     android:background="#ff000000">
 
-    <com.yc.cn.ycgallerylib.zoom.view.ZoomImageView
+    <ImageView
         android:id="@+id/iv_image"
+        android:scaleType="fitCenter"
+        android:visibility="visible"
+        android:adjustViewBounds="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/black"/>
 
 
     <ProgressBar

@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.yccustomtextlib.pwdEt.PasswordEditText;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.arounter.ARouterConstant;

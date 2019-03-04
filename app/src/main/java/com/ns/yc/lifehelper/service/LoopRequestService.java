@@ -116,7 +116,7 @@ public class LoopRequestService extends Service {
         context = getApplicationContext();
     }
 
-    /*
+    /**
     START_STICKY：
         如果service进程被kill掉，保留service的状态为开始状态，但不保留递送的intent对象。
         随后系统会尝试重新创建service，由于服务状态为开始状态，

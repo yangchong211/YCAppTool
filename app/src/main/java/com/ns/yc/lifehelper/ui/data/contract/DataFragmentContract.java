@@ -4,7 +4,7 @@ package com.ns.yc.lifehelper.ui.data.contract;
 import com.ycbjie.library.base.mvp.BasePresenter;
 import com.ycbjie.library.base.mvp.BaseView;
 import com.ns.yc.lifehelper.model.bean.ImageIconBean;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

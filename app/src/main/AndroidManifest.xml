@@ -24,7 +24,7 @@
 
 
         <activity
-            android:name=".ui.main.view.activity.SchemeActivity"
+            android:name=".ui.main.view.SchemeActivity"
             android:screenOrientation="portrait">
             <!--Android 接收外部跳转过滤器-->
             <!--要想在别的App上能成功调起App，必须添加intent过滤器-->
@@ -43,7 +43,7 @@
         </activity>
 
         <activity android:name=".ui.guide.view.activity.SplashPagerActivity"/>
-        <activity android:name=".ui.main.view.activity.MainActivity"/>
+        <activity android:name=".ui.main.view.MainActivity"/>
         <activity android:name=".ui.guide.view.activity.GuideActivity"/>
         <activity android:name=".ui.guide.view.activity.SelectFollowActivity"/>
         <activity android:name=".ui.me.view.activity.MeTimerActivity"/>
@@ -51,8 +51,8 @@
         <activity android:name=".ui.me.view.activity.MeCollectActivity"/>
         <activity android:name=".ui.me.view.activity.MeSettingActivity"/>
         <activity android:name=".ui.me.view.activity.MePersonActivity"/>
-        <activity android:name=".ui.me.view.activity.MeQoneActivity"/>
         <activity android:name=".ui.me.view.activity.MeLoginActivity"/>
+        <activity android:name=".ui.me.view.activity.IndexJsActivity"/>
         <service android:name="com.ycbjie.library.base.InitializeService"/>
         <service android:name=".service.LoopRequestService"/>
     </application>

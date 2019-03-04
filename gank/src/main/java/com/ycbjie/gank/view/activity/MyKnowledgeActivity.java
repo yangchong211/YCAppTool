@@ -51,7 +51,8 @@ public class MyKnowledgeActivity extends FragmentActivity implements View.OnClic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);              //避免切换横竖屏
+        //避免切换横竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initView();
         initListener();
         initData();
@@ -70,10 +71,8 @@ public class MyKnowledgeActivity extends FragmentActivity implements View.OnClic
         llTitleMenu = findViewById(R.id.ll_title_menu);
         toolbarTitle = findViewById(R.id.toolbar_title);
         llSearch = findViewById(R.id.ll_search);
-
-
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        vpContent = (ViewPager) findViewById(R.id.vp_content);
+        tabLayout = findViewById(R.id.tab_layout);
+        vpContent = findViewById(R.id.vp_content);
 
         initToolBar();
         initFragmentList();
@@ -100,7 +99,6 @@ public class MyKnowledgeActivity extends FragmentActivity implements View.OnClic
         int i = view.getId();
         if (i == R.id.ll_title_menu) {
             finish();
-
         } else if (i == R.id.ll_search) {
         }
     }
@@ -108,12 +106,10 @@ public class MyKnowledgeActivity extends FragmentActivity implements View.OnClic
     private void initFragmentList() {
         mTitleList.clear();
         mFragments.clear();
-        //mTitleList.add("每日推荐");
         mTitleList.add("干货定制");
         mTitleList.add("Android");
         mTitleList.add("生活福利");
         mTitleList.add("休息视频");
-        //mFragments.add(new KnowledgeEveryFragment());
         mFragments.add(new KnowledgeCustomFragment());
         mFragments.add(new KnowledgeAndroidFragment());
         mFragments.add(new KnowledgeOtherFragment());
@@ -123,7 +119,7 @@ public class MyKnowledgeActivity extends FragmentActivity implements View.OnClic
 
 
     private void initViewPagerAndTab() {
-        /**
+        /*
          * 注意使用的是：getChildFragmentManager，
          * 这样setOffscreenPageLimit()就可以添加上，保留相邻2个实例，切换时不会卡
          * 但会内存溢出，在显示时加载数据

@@ -19,7 +19,7 @@ import com.ycbjie.library.constant.Constant;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
 import com.ycbjie.library.model.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ycbjie.library.utils.image.ImageUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;

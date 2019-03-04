@@ -25,7 +25,7 @@ import com.ycbjie.library.model.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ycbjie.library.web.view.WebViewActivity;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.yccardviewlib.CardViewLayout;

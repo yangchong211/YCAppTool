@@ -16,7 +16,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -24,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,11 +33,10 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.yc.cn.ycgallerylib.zoom.view.ZoomImageView;
 import com.ycbjie.gank.R;
 import com.ycbjie.library.base.glide.GlideApp;
-import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.constant.Constant;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -279,6 +276,8 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
                     case 2:
 
                         break;
+                    default:
+                        break;
                 }
             }
         });
@@ -304,13 +303,11 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = getLayoutInflater().inflate(R.layout.view_pager_very_image, container, false);
-            ZoomImageView iv_image = view.findViewById(R.id.iv_image);
+            ImageView iv_image = view.findViewById(R.id.iv_image);
             ProgressBar spinner = view.findViewById(R.id.loading);
             spinner.setVisibility(View.GONE);
             if (imageId != 0) {
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageId);
-                iv_image.setBitmap(bitmap);
-                //iv_image.setImageResource(imageId);
+                iv_image.setImageResource(imageId);
             }
             container.addView(view, 0);
             return view;
@@ -335,24 +332,26 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
             inflater = getLayoutInflater();
         }
 
+        @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
             View view = inflater.inflate(R.layout.view_pager_very_image, container, false);
-            final ZoomImageView iv_image = view.findViewById(R.id.iv_image);
+            final ImageView ivImage = view.findViewById(R.id.iv_image);
             final ProgressBar spinner = view.findViewById(R.id.loading);
             // 保存网络图片的路径
-            String adapter_image_Entity = (String) getItem(position);
+            String adapterImageEntity = (String) getItem(position);
             String imageUrl;
             if (isLocal) {
-                imageUrl = "file://" + adapter_image_Entity;
+                imageUrl = "file://" + adapterImageEntity;
                 tvSaveImage.setVisibility(View.GONE);
             } else {
-                imageUrl = adapter_image_Entity;
+                imageUrl = adapterImageEntity;
             }
 
             spinner.setVisibility(View.VISIBLE);
             spinner.setClickable(false);
             GlideApp.with(KnowledgeImageActivity.this)
+                    .asDrawable()
                     .load(imageUrl)
                     .override(700)
                     .listener(new RequestListener<Drawable>() {
@@ -367,19 +366,19 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
                         public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                             spinner.setVisibility(View.GONE);
 
-                            /**这里应该是加载成功后图片的高*/
-                            int height = iv_image.getHeight();
+                            /*这里应该是加载成功后图片的高*/
+                            int height = ivImage.getHeight();
 
                             int wHeight = getWindowManager().getDefaultDisplay().getHeight();
                             if (height > wHeight) {
-                                iv_image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                                ivImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
                             } else {
-                                iv_image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                                ivImage.setScaleType(ImageView.ScaleType.FIT_CENTER);
                             }
                             return false;
                         }
                     })
-                    .into(iv_image);
+                    .into(ivImage);
             container.addView(view, 0);
             return view;
         }
@@ -393,12 +392,12 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         }
 
         @Override
-        public boolean isViewFromObject(View arg0, Object arg1) {
+        public boolean isViewFromObject(@NonNull View arg0, @NonNull Object arg1) {
             return arg0 == arg1;
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             View view = (View) object;
             container.removeView(view);
         }
@@ -466,7 +465,9 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         return path;
     }
 
-    //设置事件发生后的消费该事件的观察者
+    /**
+     * 设置事件发生后的消费该事件的观察者
+     */
     Subscriber<Integer> callbackSubscriber = new Subscriber<Integer>() {
         @Override
         public void onNext(Integer integer) {

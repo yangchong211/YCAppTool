@@ -16,7 +16,7 @@ import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.GuidePresenter;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ycbjie.library.utils.image.ImageUtils;
 import com.ns.yc.yccountdownviewlib.CountDownView;
 import com.squareup.picasso.Callback;

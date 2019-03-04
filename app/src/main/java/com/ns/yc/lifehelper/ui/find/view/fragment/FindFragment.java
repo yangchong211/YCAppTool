@@ -15,7 +15,7 @@ import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.ns.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.find.view.activity.MyVideoActivity;
 import com.ycbjie.library.constant.Constant;
 import com.yc.cn.ycbannerlib.banner.BannerView;

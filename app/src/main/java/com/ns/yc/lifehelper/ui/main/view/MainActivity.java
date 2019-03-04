@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.ui.main.view.activity;
+package com.ns.yc.lifehelper.ui.main.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

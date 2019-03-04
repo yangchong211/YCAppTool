@@ -45,7 +45,8 @@ public class KnowledgeOtherFragment  extends BaseFragment {
     private String type = "福利";
     private int mPage = 1;
     private int per_page_more = 20;
-    private ArrayList<String> imageList = new ArrayList<>();         //存放图片地址
+    //存放图片地址
+    private ArrayList<String> imageList = new ArrayList<>();
 
 
     @Override
@@ -95,8 +96,10 @@ public class KnowledgeOtherFragment  extends BaseFragment {
             @Override
             public void onItemClick(int position) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("selector", 2);          // 2,大图显示当前页数，1,头像，不显示页数
-                bundle.putInt("code", position);    //第几张
+                // 2,大图显示当前页数，1,头像，不显示页数
+                bundle.putInt("selector", 2);
+                //第几张
+                bundle.putInt("code", position);
                 bundle.putStringArrayList("imageUri", imageList);
                 Intent intent = new Intent(activity, KnowledgeImageActivity.class);
                 intent.putExtras(bundle);

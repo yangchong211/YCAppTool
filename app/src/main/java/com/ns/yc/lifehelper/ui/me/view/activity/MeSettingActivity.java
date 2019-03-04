@@ -15,7 +15,7 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.model.bean.UpdateBean;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;

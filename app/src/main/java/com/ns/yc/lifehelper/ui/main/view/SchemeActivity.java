@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.ui.main.view.activity;
+package com.ns.yc.lifehelper.ui.main.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.ns.yc.lifehelper.ui.guide.view.activity.SplashActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ycbjie.library.utils.AppToolUtils;
+
 import java.util.List;
 
 
@@ -98,15 +102,20 @@ public class SchemeActivity extends AppCompatActivity {
                 switch (type){
                     //yc://ycbjie.cn:8888/from?type=yangchong
                     case "yangchong":
-
+                        readGoActivity(new Intent(this,SplashActivity.class),this);
                         break;
                     //yc://ycbjie.cn:8888/from?type=main
                     case "main":
-                        readGoActivity(new Intent(this,MainActivity.class),this);
+                        openMainActivity(new Intent(this,MainActivity.class),this);
                         break;
                     //yc://ycbjie.cn:8888/from?type=setting
                     case "setting":
+                        readGoActivity(new Intent(this,MeSettingActivity.class),this);
+                        break;
+                    case "":
 
+                        break;
+                    default:
                         break;
                 }
             }
@@ -147,7 +156,19 @@ public class SchemeActivity extends AppCompatActivity {
         }
     }
 
+    private void openMainActivity(Intent intent, Context context) {
+        //通过intent判断是否时首页
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("selectIndex", MainActivity.HOME);
+        context.startActivity(intent);
+    }
+
+
     private void openActivity(Intent intent, Context context) {
+        //通过intent判断是否时首页
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
@@ -155,7 +176,12 @@ public class SchemeActivity extends AppCompatActivity {
     private void reStartActivity(Intent intent, Context context) {
         Intent[] intents = new Intent[2];
         Intent mainIntent = new Intent(context, MainActivity.class);
-        mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mainIntent.setAction(Intent.ACTION_VIEW);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mainIntent.putExtra("selectIndex", MainActivity.HOME);
+
         intents[0] = mainIntent;
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intents[1] = intent;

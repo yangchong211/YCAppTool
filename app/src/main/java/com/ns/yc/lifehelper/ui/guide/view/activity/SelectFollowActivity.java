@@ -15,7 +15,7 @@ import com.ns.yc.lifehelper.model.bean.SelectPoint;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.SelectFollowPresenter;
 import com.ns.yc.lifehelper.ui.guide.view.adapter.SelectFollowAdapter;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycrecycleviewlib.select.SelectRecyclerView;
 
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;

@@ -12,14 +12,11 @@ import android.text.style.URLSpan;
 
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.db.cache.CacheHomeNews;
-import com.ycbjie.library.db.cache.CacheHomePile;
 import com.ycbjie.library.db.realm.RealmUtils;
 import com.ycbjie.library.model.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
-import com.ns.yc.lifehelper.ui.main.view.activity.MainActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import java.util.ArrayList;
 import java.util.List;
 import io.realm.Realm;
