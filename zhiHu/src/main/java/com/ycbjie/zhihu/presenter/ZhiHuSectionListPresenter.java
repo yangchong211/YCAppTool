@@ -3,12 +3,12 @@ package com.ycbjie.zhihu.presenter;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.db.realm.RealmDbHelper;
+import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.ycbjie.zhihu.api.ZhiHuModel;
 import com.ycbjie.zhihu.contract.ZhiHuSectionListContract;
 import com.ycbjie.zhihu.model.ZhiHuSectionChildBean;
-import com.ycbjie.library.db.realm.RealmDbHelper;
-import com.ycbjie.library.db.realm.RealmUtils;
-import com.ycbjie.library.utils.rxUtils.RxUtil;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
 
     private void initRealm() {
         if(realm ==null){
-            realm = RealmUtils.getRealmHelper();
+            realm = AppConfig.INSTANCE.getRealmHelper();
         }
     }
 

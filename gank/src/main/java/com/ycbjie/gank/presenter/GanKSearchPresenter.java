@@ -4,20 +4,12 @@ import android.graphics.Color;
 import android.text.TextUtils;
 
 import com.ycbjie.gank.api.GanKModel;
-import com.ycbjie.gank.bean.cache.CacheSearchHistory;
 import com.ycbjie.gank.bean.bean.SearchResult;
 import com.ycbjie.gank.contract.GanKSearchContract;
-import com.ycbjie.library.db.realm.RealmUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import io.realm.Realm;
-import io.realm.RealmResults;
 import rx.subscriptions.CompositeSubscription;
 
 
@@ -34,8 +26,6 @@ public class GanKSearchPresenter implements GanKSearchContract.Presenter {
 
     private GanKSearchContract.View mView;
     private CompositeSubscription mSubscriptions;
-    private Realm realm;
-    private RealmResults<CacheSearchHistory> searchHistories;
 
 
     public GanKSearchPresenter(GanKSearchContract.View androidView) {
@@ -46,44 +36,11 @@ public class GanKSearchPresenter implements GanKSearchContract.Presenter {
     @Override
     public void subscribe() {
         mView.setEditTextCursorColor(Color.WHITE);
-        initRealm();
-    }
-
-    private void initRealm() {
-        if(realm==null){
-            realm = RealmUtils.getRealmHelper();
-        }
     }
 
     @Override
     public void unSubscribe() {
         mSubscriptions.clear();
-    }
-
-    /**
-     * 查找搜索历史记录
-     */
-    @Override
-    public void queryHistory() {
-        initRealm();
-        if(realm!=null && realm.where(CacheSearchHistory.class).findAll()!=null){
-            searchHistories = realm.where(CacheSearchHistory.class).findAll();
-        }else {
-            return;
-        }
-        List<CacheSearchHistory> list = new ArrayList<>();
-        for(int a=0 ; a<searchHistories.size() ; a++){
-            CacheSearchHistory searchHistory = new CacheSearchHistory();
-            searchHistory.setContent(searchHistories.get(a).getContent());
-            searchHistory.setCreateTimeMill(searchHistories.get(a).getCreateTimeMill());
-            list.add(searchHistory);
-        }
-        // 将查询结果转为list对象
-        if (list.size() < 1) {
-            mView.showSearchResult();
-        } else {
-            mView.setHistory(list);
-        }
     }
 
     /**
@@ -96,7 +53,6 @@ public class GanKSearchPresenter implements GanKSearchContract.Presenter {
             return;
         }
         mView.showSearchResult();
-        saveOneHistory(searchText);
         startSearch(searchText,isLoadMore);
     }
 
@@ -107,28 +63,6 @@ public class GanKSearchPresenter implements GanKSearchContract.Presenter {
     public void deleteAllHistory() {
 
     }
-
-
-    /**
-     * 保存搜索数据
-     */
-    private void saveOneHistory(String historyContent) {
-        if (TextUtils.isEmpty(historyContent)) {
-            return;
-        }
-        if(realm!=null && realm.where(CacheSearchHistory.class).findAll()!=null){
-            searchHistories = realm.where(CacheSearchHistory.class).findAll();
-        }else {
-            return;
-        }
-        realm.beginTransaction();
-        CacheSearchHistory searchHistory = realm.createObject(CacheSearchHistory.class);
-        searchHistory.setContent(historyContent);
-        searchHistory.setCreateTimeMill(System.currentTimeMillis());
-        realm.copyToRealm(searchHistory);
-        realm.commitTransaction();
-    }
-
 
     private int mPage = 1;
     private void startSearch(String searchText, final boolean isLoadMore) {

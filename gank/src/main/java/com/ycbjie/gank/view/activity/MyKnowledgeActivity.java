@@ -1,5 +1,6 @@
 package com.ycbjie.gank.view.activity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -100,6 +101,7 @@ public class MyKnowledgeActivity extends FragmentActivity implements View.OnClic
         if (i == R.id.ll_title_menu) {
             finish();
         } else if (i == R.id.ll_search) {
+            startActivity(new Intent(this,GanKSearchActivity.class));
         }
     }
 

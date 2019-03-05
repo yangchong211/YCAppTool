@@ -45,8 +45,6 @@ public interface GanKSearchContract {
 
     //Presenter控制器
     interface Presenter extends BasePresenter {
-        //查找搜索历史记录
-        void queryHistory();
         //开始搜索
         void search(String searchText, boolean isLoadMore);
         //清除所有历史记录

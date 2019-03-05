@@ -6,18 +6,20 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.api.GanKModel;
-import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.gank.view.activity.MyKnowledgeActivity;
-import com.ycbjie.gank.view.activity.KnowledgeImageActivity;
-import com.ycbjie.gank.view.adapter.GanKOtherAdapter;
 import com.ycbjie.gank.bean.bean.GanKIoDataBean;
+import com.ycbjie.gank.view.activity.KnowledgeImageActivity;
+import com.ycbjie.gank.view.activity.MyKnowledgeActivity;
+import com.ycbjie.gank.view.adapter.GanKOtherAdapter;
+import com.ycbjie.library.base.mvp.BaseFragment;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,24 +30,24 @@ import io.reactivex.schedulers.Schedulers;
 
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/8/28
- * 描    述：我的干货页面  生活福利
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/3/28
+ *     desc  : 生活福利
+ *     revise:
+ * </pre>
  */
 public class KnowledgeOtherFragment  extends BaseFragment {
 
     YCRefreshView recyclerView;
     private MyKnowledgeActivity activity;
     private GanKOtherAdapter adapter;
-
     private String type = "福利";
     private int mPage = 1;
-    private int per_page_more = 20;
-    //存放图片地址
+    /**
+     * 存放图片地址
+     */
     private ArrayList<String> imageList = new ArrayList<>();
 
 
@@ -79,19 +81,6 @@ public class KnowledgeOtherFragment  extends BaseFragment {
 
     @Override
     public void initListener() {
-
-    }
-
-    @Override
-    public void initData() {
-        recyclerView.showProgress();
-        getData(type,mPage,per_page_more);
-    }
-
-    private void initRecycleView() {
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-        adapter = new GanKOtherAdapter(activity);
-        recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -106,17 +95,28 @@ public class KnowledgeOtherFragment  extends BaseFragment {
                 activity.startActivity(intent);
             }
         });
+    }
 
+    @Override
+    public void initData() {
+        recyclerView.showProgress();
+        getData(type,mPage);
+    }
+
+    private void initRecycleView() {
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        adapter = new GanKOtherAdapter(activity);
+        recyclerView.setAdapter(adapter);
         //加载更多
         adapter.setMore(R.layout.view_recycle_more, new RecyclerArrayAdapter.OnMoreListener() {
             @Override
             public void onMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     mPage++;
-                    getData(type,mPage,per_page_more);
+                    getData(type,mPage);
                 } else {
                     adapter.pauseMore();
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
 
@@ -133,7 +133,7 @@ public class KnowledgeOtherFragment  extends BaseFragment {
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
 
@@ -142,7 +142,7 @@ public class KnowledgeOtherFragment  extends BaseFragment {
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
         });
@@ -166,18 +166,18 @@ public class KnowledgeOtherFragment  extends BaseFragment {
             public void onRefresh() {
                 if (NetworkUtils.isConnected()) {
                     mPage = 1;
-                    getData(type,mPage,per_page_more);
+                    getData(type,mPage);
                 } else {
                     recyclerView.setRefreshing(false);
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
         });
     }
 
-    private void getData(String type, final int mPage, int per_page_more) {
+    private void getData(String type, final int mPage) {
         GanKModel model = GanKModel.getInstance();
-        model.getGanKData(type,mPage,per_page_more)
+        model.getGanKData(type,mPage,KnowledgeCustomFragment.PER_PAGE_MORE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GanKIoDataBean>() {

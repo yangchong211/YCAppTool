@@ -56,7 +56,7 @@ public class GanKAndroidAdapter extends RecyclerArrayAdapter<GanKIoDataBean.Resu
         @Override
         public void setData(GanKIoDataBean.ResultsBean data) {
             super.setData(data);
-            if(data.getType()!=null && data.getType().equals("福利")){
+            if("福利".equals(data.getType())){
                 if(data.getImages()!=null && data.getImages().size()>0){
                     iv_all_welfare.setVisibility(View.VISIBLE);
                     ll_welfare_other.setVisibility(View.GONE);
@@ -65,7 +65,7 @@ public class GanKAndroidAdapter extends RecyclerArrayAdapter<GanKIoDataBean.Resu
                     iv_all_welfare.setVisibility(View.GONE);
                     ll_welfare_other.setVisibility(View.VISIBLE);
                 }
-            }else if(data.getType()!=null && data.getType().equals("Android")){
+            }else if("Android".equals(data.getType())){
                 iv_all_welfare.setVisibility(View.GONE);
                 if(data.getImages()!=null && data.getImages().size()>0){
                     iv_android_pic.setVisibility(View.VISIBLE);

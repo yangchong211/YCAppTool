@@ -14,13 +14,13 @@ import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/8/28
- * 描    述：我的干货页面 福利  安卓适配器
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/3/28
+ *     desc  : 安卓适配器
+ *     revise:
+ * </pre>
  */
 public class GanKOtherAdapter extends RecyclerArrayAdapter<GanKIoDataBean.ResultsBean> {
 
@@ -36,18 +36,18 @@ public class GanKOtherAdapter extends RecyclerArrayAdapter<GanKIoDataBean.Result
 
     private class ExpressDeliveryViewHolder extends BaseViewHolder<GanKIoDataBean.ResultsBean> {
 
-        ImageView iv_nice_img ;
+        ImageView ivNiceImg;
 
 
         ExpressDeliveryViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_nice_pic_image);
-            iv_nice_img = $(R.id.iv_nice_img);
+            ivNiceImg = $(R.id.iv_nice_img);
         }
 
         @Override
         public void setData(GanKIoDataBean.ResultsBean data) {
             super.setData(data);
-            /**
+            /*
              * 注意：DensityUtil.setViewMargin(itemView,true,5,3,5,0);
              * 如果这样使用，则每个item的左右边距是不一样的，
              * 这样item不能复用，所以下拉刷新成功后显示会闪一下
@@ -58,9 +58,8 @@ public class GanKOtherAdapter extends RecyclerArrayAdapter<GanKIoDataBean.Result
             } else {
                 AppUtils.setViewMargin(itemView, false, 6, 12, 12, 0);
             }
-
             if(data!=null){
-                ImageUtils.loadImgByPicasso(getContext(),data.getUrl(),iv_nice_img);
+                ImageUtils.loadImgByPicasso(getContext(),data.getUrl(),R.drawable.image_default, ivNiceImg);
             }
         }
     }

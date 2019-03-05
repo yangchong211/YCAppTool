@@ -27,22 +27,22 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
+import com.ns.yc.yccustomtextlib.hyper.HyperTextEditor;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.db.cache.CacheNotePad;
 import com.ycbjie.library.inter.listener.OnDatePickListener;
 import com.ycbjie.library.inter.listener.OnTimePickListener;
 import com.ycbjie.library.loader.GlideImageLoader;
+import com.ycbjie.library.utils.AppUtils;
 import com.ycbjie.library.utils.image.BitmapUtils;
+import com.ycbjie.library.utils.time.TimerUtils;
 import com.ycbjie.note.R;
 import com.ycbjie.note.model.NotePadDetail;
+import com.ycbjie.note.receiver.ReminderReceiver;
 import com.ycbjie.note.ui.fragment.DatePickerFragment;
 import com.ycbjie.note.ui.fragment.TimePickerFragment;
-import com.ycbjie.library.db.realm.RealmUtils;
-import com.ycbjie.library.utils.AppUtils;
-import com.ycbjie.library.utils.time.TimerUtils;
-import com.ns.yc.yccustomtextlib.hyper.HyperTextEditor;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.note.receiver.ReminderReceiver;
 import com.ycbjie.note.utils.SDCardUtils;
 import com.ycbjie.note.utils.StringUtils;
 
@@ -52,6 +52,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
@@ -150,7 +151,7 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
 
     private void initRealm() {
         if (realm == null) {
-            realm = RealmUtils.getRealmHelper();
+            realm = AppConfig.INSTANCE.getRealmHelper();
         }
     }
 

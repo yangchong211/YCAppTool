@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'realm-android'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
+
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]

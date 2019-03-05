@@ -3,15 +3,15 @@ package com.ycbjie.zhihu.web.presenter;
 import android.app.Activity;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.db.cache.CacheZhLike;
-import com.ycbjie.zhihu.web.contract.WebViewAnimContract;
-import com.ycbjie.zhihu.api.ZhiHuModel;
-import com.ycbjie.zhihu.model.ZhihuDetailBean;
-import com.ycbjie.zhihu.model.ZhiHuDetailExtraBean;
 import com.ycbjie.library.db.realm.RealmDbHelper;
-import com.ycbjie.library.db.realm.RealmUtils;
 import com.ycbjie.library.utils.rxUtils.RxUtil;
+import com.ycbjie.zhihu.api.ZhiHuModel;
+import com.ycbjie.zhihu.model.ZhiHuDetailExtraBean;
+import com.ycbjie.zhihu.model.ZhihuDetailBean;
+import com.ycbjie.zhihu.web.contract.WebViewAnimContract;
 
 import io.realm.Realm;
 import rx.Subscriber;
@@ -54,7 +54,7 @@ public class WebViewAnimPresenter implements WebViewAnimContract.Presenter {
     }
 
     private void initRealm() {
-        realm = RealmUtils.getRealmHelper();
+        realm = AppConfig.INSTANCE.getRealmHelper();
     }
 
     @Override

@@ -1,9 +1,7 @@
 package com.ycbjie.note;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,18 +18,17 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.db.cache.CacheNotePad;
+import com.ycbjie.note.model.NotePadDetail;
 import com.ycbjie.note.ui.activity.NotePadDetailActivity;
 import com.ycbjie.note.ui.activity.NotePadNewActivity;
 import com.ycbjie.note.ui.adapter.NotePadListAdapter;
-import com.ycbjie.note.model.NotePadDetail;
-import com.ycbjie.library.db.realm.RealmUtils;
-
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +105,7 @@ public class NotePadActivity extends BaseActivity implements View.OnClickListene
 
     private void initRealm() {
         if(realm==null){
-            realm = RealmUtils.getRealmHelper();
+            realm = AppConfig.INSTANCE.getRealmHelper();
         }
     }
 

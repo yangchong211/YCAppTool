@@ -56,8 +56,6 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
     List<MainPageItem> mItems;
     @Inject
     RealmWorkDoHelper mDataDao;
-
-    //注意：这里不能传Activity上下文，否则报错：Cannot return null from a non-@Nullable @Provides method
     @Inject
     WorkDoPresenter(Context context) {
         mContext = context;

@@ -1,6 +1,5 @@
 package com.ycbjie.gank.view.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,7 +29,6 @@ import com.ycbjie.gank.R;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.gank.bean.cache.CacheGanKFavorite;
 import com.ycbjie.gank.bean.cache.CacheSearchHistory;
 import com.ycbjie.gank.bean.bean.SearchResult;
 import com.ycbjie.gank.contract.GanKSearchContract;
@@ -46,17 +44,20 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/10/14
- * 描    述：干货集中营搜索
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/3/28
+ *     desc  : 干货集中营搜索
+ *     revise:
+ * </pre>
  */
 public class GanKSearchActivity extends BaseActivity implements GanKSearchContract.View, View.OnClickListener {
 
@@ -137,7 +138,6 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
                     adapter.notifyDataSetChanged();
                     llSearchHistory.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
-                    presenter.queryHistory();
                 }
             }
         });
@@ -158,7 +158,7 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
 
     @Override
     public void initData() {
-        presenter.queryHistory();
+
     }
 
     @Override
@@ -171,15 +171,10 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
             recyclerView.setVisibility(View.GONE);
             llSearchHistory.setVisibility(View.VISIBLE);
             presenter.unSubscribe();
-            presenter.queryHistory();
-
         } else if (i == R.id.iv_search) {
             search();
-
         } else if (i == R.id.tv_search_clean) {
             presenter.deleteAllHistory();
-
-        } else {
         }
     }
 
@@ -205,7 +200,8 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
      */
     private void search() {
         KeyboardUtils.hideSoftInput(this);
-        presenter.search(edSearch.getText().toString().trim(), false);
+        presenter.search(Objects.requireNonNull(
+                edSearch.getText()).toString().trim(), false);
     }
 
     /**
@@ -224,7 +220,8 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
                 if(his.size()>position && position>=0){
                     KeyboardUtils.hideSoftInput(GanKSearchActivity.this);
                     edSearch.setText(his.get(position).getContent());
-                    edSearch.setSelection(edSearch.getText().toString().length());
+                    edSearch.setSelection(Objects.requireNonNull(
+                            edSearch.getText()).toString().length());
                     presenter.search(his.get(position).getContent(), false);
                 }
             }

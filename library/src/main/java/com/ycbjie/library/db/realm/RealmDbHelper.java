@@ -1,5 +1,6 @@
 package com.ycbjie.library.db.realm;
 
+import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.db.cache.CacheZhLike;
 import com.ycbjie.library.db.cache.GoldManagerBean;
 import com.ycbjie.library.db.cache.ReadStateBean;
@@ -22,7 +23,7 @@ import io.realm.RealmResults;
 public class RealmDbHelper {
 
 
-    private static volatile RealmDbHelper mRealmDbHelper;
+    private static RealmDbHelper mRealmDbHelper;
     private Realm mRealm;
 
     private RealmDbHelper() {
@@ -31,7 +32,7 @@ public class RealmDbHelper {
 
     private void initRealm() {
         if(mRealm ==null){
-            mRealm = RealmUtils.getRealmHelper();
+            mRealm = AppConfig.INSTANCE.getRealmHelper();
         }
     }
 

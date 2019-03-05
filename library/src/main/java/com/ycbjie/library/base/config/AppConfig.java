@@ -10,9 +10,10 @@ import com.ycbjie.library.BuildConfig;
 import com.ycbjie.library.base.callback.BaseLifecycleCallback;
 import com.ycbjie.library.base.callback.LogCallback;
 import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.db.realm.RealmUtils;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * <pre>
@@ -37,11 +38,13 @@ public enum AppConfig {
     private String bannerUrl;
     private boolean isNight;
     private PoolThread executor;
+    private Realm realm;
+
 
     public void initConfig(Application application){
         Utils.init(application);
         initThreadPool();
-        RealmUtils.initRealm(application);
+        initRealm(application);
         ToastUtils.init(application);
         BaseLifecycleCallback.getInstance().init(application);
         initARouter();
@@ -85,9 +88,35 @@ public enum AppConfig {
         return executor;
     }
 
+    /**
+     * 初始化数据库
+     * @param application
+     */
+    public void initRealm(Application application){
+        Realm.init(application);
+        RealmConfiguration realmConfig = new RealmConfiguration
+                .Builder()
+                .name(Constant.REALM_NAME)
+                .schemaVersion(Constant.REALM_VERSION)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        realm = Realm.getInstance(realmConfig);
+        Realm.setDefaultConfiguration(realmConfig);
+    }
 
     public void closeRealm(){
-        RealmUtils.closeRealm();
+        if(realm!=null){
+            realm.close();
+            realm = null;
+        }
+    }
+
+    /**
+     * 获取Realm数据库对象
+     * @return              realm对象
+     */
+    public Realm getRealmHelper() {
+        return realm;
     }
 
     public void closeExecutor(){

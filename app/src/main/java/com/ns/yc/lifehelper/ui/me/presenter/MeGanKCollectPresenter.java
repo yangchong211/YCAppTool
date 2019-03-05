@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.ui.me.presenter;
 
 import com.ns.yc.lifehelper.ui.me.contract.MeGanKCollectContract;
 import com.ycbjie.gank.bean.cache.CacheGanKFavorite;
-import com.ycbjie.library.db.realm.RealmUtils;
+import com.ycbjie.library.base.config.AppConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class MeGanKCollectPresenter implements MeGanKCollectContract.Presenter {
 
     private void initRealm() {
         if(realm==null){
-            realm = RealmUtils.getRealmHelper();
+            realm = AppConfig.INSTANCE.getRealmHelper();
         }
     }
 

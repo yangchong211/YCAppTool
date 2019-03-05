@@ -2,6 +2,7 @@ package com.ycbjie.library.db.realm;
 
 import android.text.TextUtils;
 
+import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.db.cache.CacheTaskDetailEntity;
 import com.ycbjie.library.utils.time.DateUtils;
@@ -10,11 +11,10 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import io.realm.Sort;
 
 public class RealmWorkDoHelper {
 
-    private static volatile RealmWorkDoHelper mDataDao;
+    private static RealmWorkDoHelper mDataDao;
     private Realm realm;
 
     private RealmWorkDoHelper() {
@@ -23,7 +23,7 @@ public class RealmWorkDoHelper {
 
     private void initRealm() {
         if(realm==null){
-            realm = RealmUtils.getRealmHelper();
+            realm = AppConfig.INSTANCE.getRealmHelper();
         }
     }
 

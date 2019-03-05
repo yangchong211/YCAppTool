@@ -26,8 +26,8 @@ public class BackupManager {
     private BackupManager() {}
 
     public static Observable<Boolean> backup() {
-        final File src = new File(Constant.ExternalStorageDirectory + Constant.DATABASE_FILE_PATH_FOLDER, Constant.DATABASE_FILE_PATH_FILE_NAME);
-        File desDir = new File(Constant.ExternalStorageDirectory + Constant.DATABASE_FILE_BACKUP_PATH_FOLDER);
+        final File src = new File(Constant.EXTERNAL_STORAGE_DIRECTORY + Constant.DATABASE_FILE_PATH_FOLDER, Constant.DATABASE_FILE_PATH_FILE_NAME);
+        File desDir = new File(Constant.EXTERNAL_STORAGE_DIRECTORY + Constant.DATABASE_FILE_BACKUP_PATH_FOLDER);
         desDir.mkdirs();
         final File des = new File(desDir, src.getName());
 
@@ -49,7 +49,7 @@ public class BackupManager {
                     @Override
                     public Boolean call() throws Exception {
                         List<CacheTaskDetailEntity> allTask = RealmWorkDoHelper.getInstance().findAllTask();
-                        File desDir = new File(Constant.ExternalStorageDirectory + Constant.DATABASE_FILE_EXPORT_PATH_FOLDER);
+                        File desDir = new File(Constant.EXTERNAL_STORAGE_DIRECTORY + Constant.DATABASE_FILE_EXPORT_PATH_FOLDER);
                         desDir.mkdirs();
                         File desFile = new File(desDir, System.currentTimeMillis() + ".txt");
                         desFile.createNewFile();
@@ -77,8 +77,8 @@ public class BackupManager {
 
 
     public static Observable<Boolean> recovery() {
-        final File des = new File(Constant.ExternalStorageDirectory + Constant.DATABASE_FILE_PATH_FOLDER, Constant.DATABASE_FILE_PATH_FILE_NAME);
-        final File src = new File(Constant.ExternalStorageDirectory + Constant.DATABASE_FILE_BACKUP_PATH_FOLDER, des.getName());
+        final File des = new File(Constant.EXTERNAL_STORAGE_DIRECTORY + Constant.DATABASE_FILE_PATH_FOLDER, Constant.DATABASE_FILE_PATH_FILE_NAME);
+        final File src = new File(Constant.EXTERNAL_STORAGE_DIRECTORY + Constant.DATABASE_FILE_BACKUP_PATH_FOLDER, des.getName());
         return Observable
                 .fromCallable(new Callable<Boolean>() {
                     @Override

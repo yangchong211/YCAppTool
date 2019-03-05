@@ -4,6 +4,7 @@ if (rootProject.ext.isToDoApplication) {
 } else {
     apply plugin: 'com.android.library'
 }
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]

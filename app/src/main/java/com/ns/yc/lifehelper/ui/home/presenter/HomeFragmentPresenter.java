@@ -12,13 +12,15 @@ import android.text.style.URLSpan;
 
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.db.cache.CacheHomeNews;
-import com.ycbjie.library.db.realm.RealmUtils;
-import com.ycbjie.library.model.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.db.cache.CacheHomeNews;
+import com.ycbjie.library.model.HomeBlogEntity;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.subscriptions.CompositeSubscription;
@@ -74,7 +76,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
     private void initRealm() {
         if(realm ==null){
-            realm = RealmUtils.getRealmHelper();
+            realm = AppConfig.INSTANCE.getRealmHelper();
         }
     }
 

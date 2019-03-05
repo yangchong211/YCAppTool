@@ -1,28 +1,33 @@
 package com.ycbjie.gank.view.fragment;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.ycbjie.gank.R;
-import com.ycbjie.gank.api.GanKModel;
-import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.gank.view.activity.MyKnowledgeActivity;
-import com.ycbjie.gank.view.adapter.GanKAndroidAdapter;
-import com.ycbjie.gank.bean.bean.GanKIoDataBean;
 import com.pedaily.yc.ycdialoglib.dialogMenu.CustomBottomDialog;
 import com.pedaily.yc.ycdialoglib.dialogMenu.CustomItem;
 import com.pedaily.yc.ycdialoglib.dialogMenu.OnItemClickListener;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.ycbjie.gank.R;
+import com.ycbjie.gank.api.GanKModel;
+import com.ycbjie.gank.bean.bean.GanKIoDataBean;
+import com.ycbjie.gank.view.activity.MyKnowledgeActivity;
+import com.ycbjie.gank.view.adapter.GanKAndroidAdapter;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseFragment;
+import com.ycbjie.library.constant.Constant;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,14 +35,15 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/8/28
- * 描    述：我的干货页面  干活定制
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/3/28
+ *     desc  : 干活定制
+ *     revise:
+ * </pre>
  */
 public class KnowledgeCustomFragment extends BaseFragment {
 
@@ -46,7 +52,7 @@ public class KnowledgeCustomFragment extends BaseFragment {
     private MyKnowledgeActivity activity;
     private String mType = "all";
     private int mPage = 1;
-    private int per_page_more = 20;
+    public static final int PER_PAGE_MORE = 20;
     private GanKAndroidAdapter adapter;
 
 
@@ -86,13 +92,24 @@ public class KnowledgeCustomFragment extends BaseFragment {
 
     @Override
     public void initListener() {
-
+        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (adapter.getAllData().size()>position && position>=0){
+                    GanKIoDataBean.ResultsBean resultsBean = adapter.getAllData().get(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.URL,resultsBean.getUrl());
+                    bundle.putString(Constant.TITLE,resultsBean.getDesc());
+                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+                }
+            }
+        });
     }
 
     @Override
     public void initData() {
         recyclerView.showProgress();
-        getGanKAll(mType,mPage,per_page_more);
+        getGanKAll(mType,mPage, PER_PAGE_MORE);
     }
 
     private void initRecycleView() {
@@ -110,13 +127,13 @@ public class KnowledgeCustomFragment extends BaseFragment {
                 if (NetworkUtils.isConnected()) {
                     if (adapter.getAllData().size() > 0) {
                         mPage++;
-                        getGanKAll(mType,mPage,per_page_more);
+                        getGanKAll(mType,mPage, PER_PAGE_MORE);
                     } else {
                         adapter.pauseMore();
                     }
                 } else {
                     adapter.pauseMore();
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
 
@@ -133,7 +150,7 @@ public class KnowledgeCustomFragment extends BaseFragment {
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
 
@@ -142,7 +159,7 @@ public class KnowledgeCustomFragment extends BaseFragment {
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
         });
@@ -166,10 +183,10 @@ public class KnowledgeCustomFragment extends BaseFragment {
             public void onRefresh() {
                 if (NetworkUtils.isConnected()) {
                     mPage = 1 ;
-                    getGanKAll(mType,mPage,per_page_more);
+                    getGanKAll(mType,mPage, PER_PAGE_MORE);
                 } else {
                     recyclerView.setRefreshing(false);
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
         });
@@ -181,8 +198,8 @@ public class KnowledgeCustomFragment extends BaseFragment {
             @Override
             public View onCreateView(ViewGroup parent) {
                 View view = LayoutInflater.from(activity).inflate(R.layout.head_gank_type_all, parent, false);
-                LinearLayout ll_choose_catalogue = view.findViewById(R.id.ll_choose_catalogue);
-                ll_choose_catalogue.setOnClickListener(new View.OnClickListener() {
+                LinearLayout llChooseCatalogue = view.findViewById(R.id.ll_choose_catalogue);
+                llChooseCatalogue.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         startOpenBottomDialog();
@@ -206,7 +223,12 @@ public class KnowledgeCustomFragment extends BaseFragment {
                 .inflateMenu(R.menu.gank_bottom_sheet, new OnItemClickListener() {
                     @Override
                     public void click(CustomItem item) {
-
+                        String title = item.getTitle();
+                        if (title!=null && title.length()>0){
+                            recyclerView.showProgress();
+                            mPage = 1;
+                            getGanKAll(title,mPage, PER_PAGE_MORE);
+                        }
                     }
                 })
                 .show();

@@ -2,11 +2,8 @@ package com.ycbjie.library.constant;
 
 import android.os.Environment;
 
-
 import com.ycbjie.library.model.HomeBlogEntity;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +18,10 @@ import java.util.List;
  */
 public class Constant {
 
-    public static final int REALM_VERSION = 0;
-    public static final String REALM_NAME = "yc";
+    public static final int REALM_VERSION = 2;
+    public static final String REALM_NAME = "life";
     public static final String SP_NAME = "yc";
-    public static final String ExternalStorageDirectory =
+    public static final String EXTERNAL_STORAGE_DIRECTORY =
             Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 
     //关于我的更多信息
