@@ -54,6 +54,7 @@ public class KnowledgeCustomFragment extends BaseFragment {
     private int mPage = 1;
     public static final int PER_PAGE_MORE = 20;
     private GanKAndroidAdapter adapter;
+    private CustomBottomDialog dialog;
 
 
     @Override
@@ -216,7 +217,7 @@ public class KnowledgeCustomFragment extends BaseFragment {
     }
 
     private void startOpenBottomDialog() {
-        new CustomBottomDialog(activity)
+        dialog = new CustomBottomDialog(activity)
                 .title("选择分类")
                 .setCancel(true,"取消选择")
                 .orientation(CustomBottomDialog.VERTICAL)
@@ -230,8 +231,8 @@ public class KnowledgeCustomFragment extends BaseFragment {
                             getGanKAll(title,mPage, PER_PAGE_MORE);
                         }
                     }
-                })
-                .show();
+                });
+        dialog.show();
     }
 
     private void getGanKAll(String id , int page , int pre_page) {

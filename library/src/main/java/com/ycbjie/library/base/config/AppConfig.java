@@ -101,7 +101,7 @@ public enum AppConfig {
                 .deleteRealmIfMigrationNeeded()
                 .build();
         realm = Realm.getInstance(realmConfig);
-        Realm.setDefaultConfiguration(realmConfig);
+        //Realm.setDefaultConfiguration(realmConfig);
     }
 
     public void closeRealm(){

@@ -1,5 +1,6 @@
 package com.ycbjie.library.db.realm;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.ycbjie.library.base.config.AppConfig;
@@ -14,7 +15,7 @@ import io.realm.RealmResults;
 
 public class RealmWorkDoHelper {
 
-    private static RealmWorkDoHelper mDataDao;
+    private static volatile RealmWorkDoHelper mDataDao;
     private Realm realm;
 
     private RealmWorkDoHelper() {
@@ -30,11 +31,7 @@ public class RealmWorkDoHelper {
 
     public static RealmWorkDoHelper getInstance() {
         if (mDataDao == null) {
-            synchronized (RealmWorkDoHelper.class) {
-                if (mDataDao == null) {
-                    mDataDao = new RealmWorkDoHelper();
-                }
-            }
+            mDataDao = new RealmWorkDoHelper();
         }
         return mDataDao;
     }
@@ -58,7 +55,7 @@ public class RealmWorkDoHelper {
 
     public RealmResults<CacheTaskDetailEntity> findAllTask() {
         return realm.where(CacheTaskDetailEntity.class)
-                .findAllAsync("timeStamp");
+                .findAll();
     }
 
 
@@ -66,7 +63,7 @@ public class RealmWorkDoHelper {
         return realm
                 .where(CacheTaskDetailEntity.class)
                 .equalTo("dayOfWeek", dayOfWeek)
-                .findAllAsync("timeStamp");
+                .findAll();
     }
 
     public RealmResults<CacheTaskDetailEntity> findUnFinishedTasks(int dayOfWeek) {
@@ -74,7 +71,7 @@ public class RealmWorkDoHelper {
                 .where(CacheTaskDetailEntity.class)
                 .equalTo("dayOfWeek", dayOfWeek)
                 .notEqualTo("state", Constant.TaskState.FINISHED)
-                .findAllAsync("timeStamp");
+                .findAll();
     }
 
 
@@ -90,7 +87,7 @@ public class RealmWorkDoHelper {
     public void editTask(final CacheTaskDetailEntity oldTask, final CacheTaskDetailEntity newTask) {
         realm.executeTransaction(new Realm.Transaction() {
                     @Override
-                    public void execute(Realm realm) {
+                    public void execute(@NonNull Realm realm) {
                         oldTask.setTaskDetailEntity(newTask);
                     }
                 });
@@ -126,7 +123,7 @@ public class RealmWorkDoHelper {
                 .contains("content", like)
                 .or()
                 .contains("title", like)
-                .findAllAsync("timeStamp");
+                .findAll();
     }
 
 
