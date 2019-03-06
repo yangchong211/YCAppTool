@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     /**
      * 定时任务工具类
      */
-    public Timer timer = new Timer();
+    public Timer timer;
     private boolean isTimerRunning = false;
 
     @SuppressLint("HandlerLeak")

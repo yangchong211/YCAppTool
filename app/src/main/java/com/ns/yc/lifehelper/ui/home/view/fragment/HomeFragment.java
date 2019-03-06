@@ -1,11 +1,9 @@
 package com.ns.yc.lifehelper.ui.home.view.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -32,6 +30,7 @@ import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.model.HomeBlogEntity;
+import com.ycbjie.library.utils.handler.HandlerUtils;
 import com.ycbjie.library.web.view.WebViewActivity;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -66,11 +65,11 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
     private View headerView;
     private CardViewLayout cardViewLayout;
 
-    @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler(){
+
+    private HandlerUtils.HandlerReference handler = new HandlerUtils.HandlerReference(
+            this, new HandlerUtils.HandlerReference.OnReceiveMessageListener() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public void handlerMessage(Message msg) {
             switch (msg.what){
                 case 1:
                     if (cardViewLayout!=null){
@@ -87,8 +86,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                     break;
             }
         }
-    };
-
+    });
 
     @Override
     public void onAttach(Context context) {
@@ -124,10 +122,10 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(handler!=null){
+        /*if(handler!=null){
             handler.removeCallbacksAndMessages(null);
             handler = null;
-        }
+        }*/
     }
 
     @Override
