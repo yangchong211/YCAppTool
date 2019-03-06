@@ -3,7 +3,6 @@ package com.ycbjie.music.utils.share;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Handler;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,9 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pedaily.yc.ycdialoglib.dialogFragment.BaseDialogFragment;
+import com.ycbjie.library.utils.HandlerHolder;
 import com.ycbjie.music.R;
-
-import java.lang.ref.WeakReference;
 
 
 
@@ -39,22 +37,20 @@ public class ShareDialog extends BaseDialogFragment implements View.OnClickListe
     private TextView mTvWxFriend;
     private TextView mTvWxMoment;
     private TextView mTvOther;
-    private FrameLayout mFlCancel;
     private ImageView mIvCancel;
 
-    private HandlerHolder handler = new HandlerHolder(new OnReceiveMessageListener() {
-        @Override
-        public void handlerMessage(Message msg) {
-            switch (msg.what){
-                case 1:
-                    TextView textView1 = (TextView) msg.obj;
-                    showBottomInAnimation(textView1);
-                    break;
-                case 2:
-                    TextView textView2 = (TextView) msg.obj;
-                    showBottomOutAnimation(textView2);
-                    break;
-            }
+    private HandlerHolder handler = new HandlerHolder(msg -> {
+        switch (msg.what){
+            case 1:
+                TextView textView1 = (TextView) msg.obj;
+                showBottomInAnimation(textView1);
+                break;
+            case 2:
+                TextView textView2 = (TextView) msg.obj;
+                showBottomOutAnimation(textView2);
+                break;
+            default:
+                break;
         }
     });
 
@@ -97,7 +93,7 @@ public class ShareDialog extends BaseDialogFragment implements View.OnClickListe
         mTvWxFriend = v.findViewById(R.id.tv_wx_friend);
         mTvWxMoment = v.findViewById(R.id.tv_wx_moment);
         mTvOther = v.findViewById(R.id.tv_other);
-        mFlCancel = v.findViewById(R.id.fl_cancel);
+        FrameLayout mFlCancel = v.findViewById(R.id.fl_cancel);
         mIvCancel = v.findViewById(R.id.iv_cancel);
 
 
@@ -171,63 +167,64 @@ public class ShareDialog extends BaseDialogFragment implements View.OnClickListe
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     private void touchDownAnim(final TextView view1, final TextView view2, final TextView view3, final TextView view4, final String type) {
-        ((View)view1).setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        // 按下 放大
-                        Animation animationDown  = AnimationUtils.loadAnimation(mContext, R.anim.share_touch_down);
-                        view1.startAnimation(animationDown);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.share_touch_up_select_scale);
-                        view1.startAnimation(animation);
-                        // 其余的view 缩小消失
-                        view2.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.share_touch_up_noselect_scale));
-                        view3.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.share_touch_up_noselect_scale));
-                        view4.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.share_touch_up_noselect_scale));
-                        animation.setAnimationListener(new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {
+        view1.setOnTouchListener((v, event) -> {
+            switch (event.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    // 按下 放大
+                    Animation animationDown  = AnimationUtils.loadAnimation(mContext, R.anim.share_touch_down);
+                    view1.startAnimation(animationDown);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.share_touch_up_select_scale);
+                    view1.startAnimation(animation);
+                    // 其余的view 缩小消失
+                    view2.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.share_touch_up_noselect_scale));
+                    view3.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.share_touch_up_noselect_scale));
+                    view4.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.share_touch_up_noselect_scale));
+                    animation.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
 
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            Share share = new Share();
+                            String share_type = shareTypeBean.getShareType();
+                            switch (share_type) {
+                                case ShareComment.ShareType.SHARE_GOODS:    // 商品分享
+                                    share.setSharePolicy(new ShareGoodsPolicy());
+                                    break;
+                                case ShareComment.ShareType.SHARE_MATERIAL: // 素材分享
+                                    share.setSharePolicy(new ShareMaterialPolicy());
+                                    break;
+                                case ShareComment.ShareType.SHARE_TEAM:     //  小队分享
+                                    share.setSharePolicy(new ShareTrimPolicy());
+                                    break;
+                                case ShareComment.ShareType.SHARE_SPECIAL:  //专题分享
+                                    share.setSharePolicy(new ShareSpecialPolicy());
+                                    break;
+                                default:
+                                    break;
                             }
+                            share.share(type, shareTypeBean, getContext());
+                            dismiss();
+                        }
 
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                Share share = new Share();
-                                String share_type = shareTypeBean.getShareType();
-                                switch (share_type) {
-                                    case ShareComment.ShareType.SHARE_GOODS:    // 商品分享
-                                        share.setSharePolicy(new ShareGoodsPolicy());
-                                        break;
-                                    case ShareComment.ShareType.SHARE_MATERIAL: // 素材分享
-                                        share.setSharePolicy(new ShareMaterialPolicy());
-                                        break;
-                                    case ShareComment.ShareType.SHARE_TEAM:     //  小队分享
-                                        share.setSharePolicy(new ShareTrimPolicy());
-                                        break;
-                                    case ShareComment.ShareType.SHARE_SPECIAL:  //专题分享
-                                        share.setSharePolicy(new ShareSpecialPolicy());
-                                        break;
-                                }
-                                share.share(type, shareTypeBean, getContext());
-                                dismiss();
-                            }
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
 
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-
-                            }
-                        });
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    default:
-                        break;
-                }
-                return false;
+                        }
+                    });
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    break;
+                default:
+                    break;
             }
+            return false;
         });
     }
 
@@ -242,12 +239,6 @@ public class ShareDialog extends BaseDialogFragment implements View.OnClickListe
         message.what = 1;
         message.obj = textView;
         handler.sendMessageDelayed(message,time);
-        /*handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showBottomInAnimation(textView);
-            }
-        }, time);*/
     }
 
     /**
@@ -289,30 +280,5 @@ public class ShareDialog extends BaseDialogFragment implements View.OnClickListe
         textView.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.share_bottom_out));
     }
 
-
-    public static class HandlerHolder extends Handler {
-        WeakReference<OnReceiveMessageListener> mListenerWeakReference;
-
-        /**
-         * @param listener 收到消息回调接口
-         */
-        HandlerHolder(OnReceiveMessageListener listener) {
-            mListenerWeakReference = new WeakReference<>(listener);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            if (mListenerWeakReference!=null && mListenerWeakReference.get()!=null){
-                mListenerWeakReference.get().handlerMessage(msg);
-            }
-        }
-    }
-
-    /**
-     * 收到消息回调接口
-     */
-    public interface OnReceiveMessageListener {
-        void handlerMessage(Message msg);
-    }
 
 }

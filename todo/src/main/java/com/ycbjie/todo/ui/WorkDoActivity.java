@@ -16,20 +16,21 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.todo.R;
-import com.ycbjie.todo.contract.WorkDoContract;
-import com.ycbjie.todo.dagger.DaggerUiComponent;
-import com.ycbjie.todo.dagger.UiModule;
-import com.ycbjie.library.db.cache.CacheTaskDetailEntity;
-import com.ycbjie.todo.presenter.WorkDoPresenter;
-import com.ycbjie.todo.ui.adapter.WorkPageAdapter;
-import com.ycbjie.todo.ui.fragment.PageFragment;
 import com.pedaily.yc.ycdialoglib.dialogMenu.CustomBottomDialog;
 import com.pedaily.yc.ycdialoglib.dialogMenu.CustomItem;
 import com.pedaily.yc.ycdialoglib.dialogMenu.OnItemClickListener;
 import com.pedaily.yc.ycdialoglib.snackbar.SnackBarUtils;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.db.cache.CacheTaskDetailEntity;
+import com.ycbjie.todo.R;
+import com.ycbjie.todo.contract.WorkDoContract;
+import com.ycbjie.todo.dagger.DaggerUiComponent;
+import com.ycbjie.todo.dagger.UiModule;
+import com.ycbjie.todo.presenter.WorkDoPresenter;
+import com.ycbjie.todo.ui.adapter.WorkPageAdapter;
+import com.ycbjie.todo.ui.fragment.PageFragment;
+
 import javax.inject.Inject;
 
 

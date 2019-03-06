@@ -13,28 +13,32 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
-import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.model.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ycbjie.library.web.view.WebViewActivity;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.yccardviewlib.CardViewLayout;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseFragment;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.model.HomeBlogEntity;
+import com.ycbjie.library.web.view.WebViewActivity;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -299,6 +303,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
         }
         cardViewLayout.setAdapter(new CardViewLayout.Adapter() {
 
+            SoftReference<Bitmap> bitmapSoftReference;
+
             class ViewHolder {
                 ImageView imageView;
             }
@@ -316,7 +322,12 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                     viewHolder.imageView = view.findViewById(R.id.imageView);
                     view.setTag(viewHolder);
                 }
-                viewHolder.imageView.setImageBitmap(bitmaps.get(position));
+                Bitmap bitmap = bitmaps.get(position);
+                //正常是用来处理图片这种占用内存大的情况
+                bitmapSoftReference = new SoftReference<>(bitmap);
+                if(bitmapSoftReference.get() != null) {
+                    viewHolder.imageView.setImageBitmap(bitmapSoftReference.get());
+                }
             }
 
             @Override

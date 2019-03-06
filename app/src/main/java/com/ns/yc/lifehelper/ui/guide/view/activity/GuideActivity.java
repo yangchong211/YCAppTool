@@ -115,7 +115,8 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements
     }
 
     private void toMainActivity() {
-        ActivityUtils.startActivity(MainActivity.class,R.anim.screen_zoom_in, R.anim.screen_zoom_out);
+        ActivityUtils.startActivity(MainActivity.class,
+                R.anim.screen_zoom_in, R.anim.screen_zoom_out);
         //finish();
     }
 

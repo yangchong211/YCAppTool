@@ -6,10 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
@@ -67,6 +66,7 @@ public class LoveGirlMainActivity extends BaseActivity {
     private FlowerView mBlueSnowView;//蓝色的雪花
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
+        @Override
         public void dispatchMessage(Message msg) {
             mBlueSnowView.inva();
         }
