@@ -7,13 +7,13 @@ import com.ycbjie.douban.contract.DouBookContract;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/12/1
- * 描    述：知乎评论
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/8/22
+ *     desc  : 豆瓣读书页面
+ *     revise:
+ * </pre>
  */
 public class DouBookPresenter implements DouBookContract.Presenter {
 

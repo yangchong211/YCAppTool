@@ -1,15 +1,8 @@
 package com.ns.yc.lifehelper.base.app;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.support.multidex.MultiDex;
 import android.util.Log;
 
-import com.bumptech.glide.Glide;
-import com.ycbjie.library.base.InitializeService;
-import com.ycbjie.library.arounter.ARouterUtils;
-import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.base.LibApplication;
 import com.ycbjie.music.base.BaseAppHelper;
 
 
@@ -23,18 +16,7 @@ import com.ycbjie.music.base.BaseAppHelper;
  *     GitHub       https://github.com/yangchong211
  * </pre>
  */
-public class BaseApplication extends Application {
-
-
-    /**
-     * 这个最先执行
-     */
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
-    }
-
+public class BaseApplication extends LibApplication {
 
     /**
      * 程序启动的时候执行
@@ -43,60 +25,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         Log.d("Application", "onCreate");
         super.onCreate();
-        AppConfig.INSTANCE.initConfig(this);
         BaseAppHelper.get().init(this);
-        //在子线程中初始化
-        InitializeService.start(this);
-    }
-
-
-
-    /**
-     * 程序终止的时候执行
-     */
-    @Override
-    public void onTerminate() {
-        Log.d("Application", "onTerminate");
-        super.onTerminate();
-        AppConfig.INSTANCE.closeRealm();
-        AppConfig.INSTANCE.closeExecutor();
-        ARouterUtils.destroy();
-    }
-
-
-    /**
-     * 低内存的时候执行
-     */
-    @Override
-    public void onLowMemory() {
-        Log.d("Application", "onLowMemory");
-        super.onLowMemory();
-        Glide.get(this).clearMemory();
-    }
-
-
-    /**
-     * HOME键退出应用程序
-     * 程序在内存清理的时候执行
-     */
-    @Override
-    public void onTrimMemory(int level) {
-        Log.d("Application", "onTrimMemory");
-        super.onTrimMemory(level);
-        if (level == TRIM_MEMORY_UI_HIDDEN){
-            Glide.get(this).clearMemory();
-        }
-        Glide.get(this).trimMemory(level);
-    }
-
-
-    /**
-     * onConfigurationChanged
-     */
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        Log.d("Application", "onConfigurationChanged");
-        super.onConfigurationChanged(newConfig);
     }
 
 

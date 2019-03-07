@@ -1,10 +1,8 @@
 package com.ycbjie.love.activity;
 
-import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
 
-import com.blankj.utilcode.util.Utils;
+import com.ycbjie.library.base.LibApplication;
 
 /**
  * <pre>
@@ -15,17 +13,15 @@ import com.blankj.utilcode.util.Utils;
  *     revise:
  * </pre>
  */
-public class LoveApp extends Application {
+public class LoveApp extends LibApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Utils.init(this);
     }
 
+    @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this);
     }
-
 }

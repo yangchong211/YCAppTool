@@ -1,8 +1,8 @@
 package com.ycbjie.video;
 
-import com.blankj.utilcode.util.Utils;
+import android.content.Context;
+
 import com.ycbjie.library.base.LibApplication;
-import com.ycbjie.library.base.config.AppConfig;
 
 /**
  * <pre>
@@ -15,11 +15,15 @@ import com.ycbjie.library.base.config.AppConfig;
  */
 public class VideoApp extends LibApplication {
 
+
     @Override
     public void onCreate() {
         super.onCreate();
-        Utils.init(this);
-        AppConfig.INSTANCE.initConfig(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
     }
 
 }

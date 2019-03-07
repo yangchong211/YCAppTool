@@ -1,4 +1,4 @@
-package com.ycbjie.book;
+package com.ycbjie.douban.app;
 
 import android.content.Context;
 
@@ -13,7 +13,7 @@ import com.ycbjie.library.base.LibApplication;
  *     revise:
  * </pre>
  */
-public class BookApp extends LibApplication {
+public class DouBanApp extends LibApplication {
 
     @Override
     public void onCreate() {

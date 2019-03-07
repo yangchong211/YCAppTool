@@ -37,12 +37,6 @@ public class DouBookActivity extends BaseActivity implements View.OnClickListene
     private ArrayList<String> mTitleList;
     private ArrayList<Fragment> mFragments;
 
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
     @Override
     public int getContentView() {
         return R.layout.base_tab_view;
@@ -52,8 +46,8 @@ public class DouBookActivity extends BaseActivity implements View.OnClickListene
     public void initView() {
         llTitleMenu = findViewById(R.id.ll_title_menu);
         toolbarTitle = findViewById(R.id.toolbar_title);
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        vpContent = (ViewPager) findViewById(R.id.vp_content);
+        tabLayout = findViewById(R.id.tab_layout);
+        vpContent = findViewById(R.id.vp_content);
 
         initToolBar();
         initFragmentList();
@@ -80,8 +74,6 @@ public class DouBookActivity extends BaseActivity implements View.OnClickListene
         int i = view.getId();
         if (i == R.id.ll_title_menu) {
             finish();
-
-        } else {
         }
     }
 
@@ -103,13 +95,14 @@ public class DouBookActivity extends BaseActivity implements View.OnClickListene
 
 
     private void initViewPagerAndTab() {
-        /**
+        /*
          * 注意使用的是：getChildFragmentManager，
          * 这样setOffscreenPageLimit()就可以添加上，保留相邻2个实例，切换时不会卡
          * 但会内存溢出，在显示时加载数据
          */
         FragmentManager supportFragmentManager = getSupportFragmentManager();
-        BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitleList);
+        BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager,
+                mFragments, mTitleList);
         vpContent.setAdapter(myAdapter);
         // 左右预加载页面的个数
         vpContent.setOffscreenPageLimit(5);

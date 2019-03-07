@@ -4,33 +4,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DouBookModel;
-import com.ycbjie.library.base.mvp.BaseLazyFragment;
+import com.ycbjie.douban.bean.DouBookBean;
 import com.ycbjie.douban.contract.DouBookContract;
 import com.ycbjie.douban.presenter.DouBookPresenter;
 import com.ycbjie.douban.view.activity.DouBookActivity;
 import com.ycbjie.douban.view.activity.DouBookDetailActivity;
 import com.ycbjie.douban.view.adapter.DouBookAdapter;
-import com.ycbjie.douban.bean.DouBookBean;
+import com.ycbjie.library.base.mvp.BaseLazyFragment;
 import com.ycbjie.library.weight.manager.FullyGridLayoutManager;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import rx.functions.Action1;
 
 
 
@@ -45,8 +40,6 @@ import rx.functions.Action1;
  */
 public class DouBookFragment extends BaseLazyFragment implements DouBookContract.View{
 
-
-    private static final String TYPE = "DouBookFragment";
     YCRefreshView recyclerView;
     private DouBookActivity activity;
     private String mType;
@@ -57,7 +50,7 @@ public class DouBookFragment extends BaseLazyFragment implements DouBookContract
     public static DouBookFragment newInstance(String param1) {
         DouBookFragment fragment = new DouBookFragment();
         Bundle args = new Bundle();
-        args.putString(TYPE, param1);
+        args.putString("DouBookFragment", param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -79,7 +72,7 @@ public class DouBookFragment extends BaseLazyFragment implements DouBookContract
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             Bundle arguments = getArguments();
-            mType = arguments.getString(TYPE);
+            mType = arguments.getString("DouBookFragment");
         }
     }
 
@@ -108,21 +101,18 @@ public class DouBookFragment extends BaseLazyFragment implements DouBookContract
 
     @Override
     public void initListener() {
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Intent intent = new Intent(activity, DouBookDetailActivity.class);
-                intent.putExtra("title",adapter.getAllData().get(position).getTitle());
-                intent.putExtra("author",adapter.getAllData().get(position).getAuthor().get(0));
-                intent.putExtra("image",adapter.getAllData().get(position).getImage());
-                intent.putExtra("average",adapter.getAllData().get(position).getRating().getAverage());
-                intent.putExtra("numRaters",String.valueOf(adapter.getAllData().get(position).getRating().getNumRaters()));
-                intent.putExtra("pubdate",adapter.getAllData().get(position).getPubdate());
-                intent.putExtra("publisher",adapter.getAllData().get(position).getPublisher());
-                intent.putExtra("id",adapter.getAllData().get(position).getId());
-                intent.putExtra("alt",adapter.getAllData().get(position).getAlt());
-                startActivity(intent);
-            }
+        adapter.setOnItemClickListener(position -> {
+            Intent intent = new Intent(activity, DouBookDetailActivity.class);
+            intent.putExtra("title",adapter.getAllData().get(position).getTitle());
+            intent.putExtra("author",adapter.getAllData().get(position).getAuthor().get(0));
+            intent.putExtra("image",adapter.getAllData().get(position).getImage());
+            intent.putExtra("average",adapter.getAllData().get(position).getRating().getAverage());
+            intent.putExtra("numRaters",String.valueOf(adapter.getAllData().get(position).getRating().getNumRaters()));
+            intent.putExtra("pubdate",adapter.getAllData().get(position).getPubdate());
+            intent.putExtra("publisher",adapter.getAllData().get(position).getPublisher());
+            intent.putExtra("id",adapter.getAllData().get(position).getId());
+            intent.putExtra("alt",adapter.getAllData().get(position).getAlt());
+            startActivity(intent);
         });
     }
 
@@ -198,15 +188,12 @@ public class DouBookFragment extends BaseLazyFragment implements DouBookContract
         });
 
         //刷新
-        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    getTopMovieData(mType , 0 , 30);
-                } else {
-                    recyclerView.setRefreshing(false);
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
-                }
+        recyclerView.setRefreshListener(() -> {
+            if (NetworkUtils.isConnected()) {
+                getTopMovieData(mType , 0 , 30);
+            } else {
+                recyclerView.setRefreshing(false);
+                Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
             }
         });
     }
