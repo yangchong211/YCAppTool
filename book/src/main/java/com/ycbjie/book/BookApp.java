@@ -2,7 +2,7 @@ package com.ycbjie.book;
 
 import android.content.Context;
 
-import com.ycbjie.library.base.LibApplication;
+import com.ycbjie.library.base.app.LibApplication;
 
 /**
  * <pre>

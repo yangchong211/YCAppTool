@@ -1,4 +1,4 @@
-package com.ycbjie.library.base;
+package com.ycbjie.library.base.app;
 
 import android.annotation.SuppressLint;
 import android.app.IntentService;

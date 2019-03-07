@@ -8,12 +8,11 @@ import android.widget.FrameLayout;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MeDocCollectFragment;
-import com.ns.yc.lifehelper.ui.me.view.fragment.MeGanKCollectFragment;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MeNewsCollectFragment;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MePicCollectFragment;
+import com.ycbjie.library.base.adapter.BasePagerAdapter;
+import com.ycbjie.library.base.mvp.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,7 +77,7 @@ public class MeCollectActivity extends BaseActivity implements View.OnClickListe
         ArrayList<Fragment> mFragments = new ArrayList<>();
         List<String> list = new ArrayList<>();
         mFragments.clear();
-        mFragments.add(new MeGanKCollectFragment());
+        mFragments.add(new MeNewsCollectFragment());
         mFragments.add(new MeNewsCollectFragment());
         mFragments.add(new MePicCollectFragment());
         mFragments.add(new MeDocCollectFragment());

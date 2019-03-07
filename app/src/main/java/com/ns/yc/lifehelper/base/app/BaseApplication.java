@@ -2,7 +2,7 @@ package com.ns.yc.lifehelper.base.app;
 
 import android.util.Log;
 
-import com.ycbjie.library.base.LibApplication;
+import com.ycbjie.library.base.app.LibApplication;
 import com.ycbjie.music.base.BaseAppHelper;
 
 

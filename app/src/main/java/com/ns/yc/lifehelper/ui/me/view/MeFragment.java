@@ -140,7 +140,6 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
                 break;
             case R.id.rl_me_qone:
                 startActivity(IndexJsActivity.class);
-                //ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
                 break;
             case R.id.rl_me_project:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_LOVE_ACTIVITY);

@@ -1,7 +1,7 @@
 package com.ycbjie.android.base
 
-import com.ycbjie.library.base.InitializeService
-import com.ycbjie.library.base.LibApplication
+import com.ycbjie.library.base.app.InitializeService
+import com.ycbjie.library.base.app.LibApplication
 import com.ycbjie.library.base.config.AppConfig
 /**
  * <pre>

@@ -21,7 +21,7 @@ import io.realm.RealmConfiguration;
  *     blog         https://www.jianshu.com/p/53017c3fc75d
  *     time         2017/5/14
  *     desc         所有的配置
- *     revise
+ *     revise       生命周期和application一样
  *     GitHub       https://github.com/yangchong211
  * </pre>
  */

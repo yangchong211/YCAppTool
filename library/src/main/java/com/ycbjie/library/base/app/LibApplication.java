@@ -1,4 +1,4 @@
-package com.ycbjie.library.base;
+package com.ycbjie.library.base.app;
 
 import android.app.Application;
 import android.content.Context;
@@ -34,8 +34,6 @@ public class LibApplication extends Application {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
-
-
 
     /**
      * 程序终止的时候执行

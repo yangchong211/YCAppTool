@@ -22,6 +22,8 @@ import com.ycbjie.library.weight.manager.FullyGridLayoutManager;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 
+import java.util.List;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -102,17 +104,22 @@ public class DouBookFragment extends BaseLazyFragment implements DouBookContract
     @Override
     public void initListener() {
         adapter.setOnItemClickListener(position -> {
-            Intent intent = new Intent(activity, DouBookDetailActivity.class);
-            intent.putExtra("title",adapter.getAllData().get(position).getTitle());
-            intent.putExtra("author",adapter.getAllData().get(position).getAuthor().get(0));
-            intent.putExtra("image",adapter.getAllData().get(position).getImage());
-            intent.putExtra("average",adapter.getAllData().get(position).getRating().getAverage());
-            intent.putExtra("numRaters",String.valueOf(adapter.getAllData().get(position).getRating().getNumRaters()));
-            intent.putExtra("pubdate",adapter.getAllData().get(position).getPubdate());
-            intent.putExtra("publisher",adapter.getAllData().get(position).getPublisher());
-            intent.putExtra("id",adapter.getAllData().get(position).getId());
-            intent.putExtra("alt",adapter.getAllData().get(position).getAlt());
-            startActivity(intent);
+            if (adapter.getAllData().size()>position && position>=0){
+                List<String> author = adapter.getAllData().get(position).getAuthor();
+                Intent intent = new Intent(activity, DouBookDetailActivity.class);
+                intent.putExtra("title",adapter.getAllData().get(position).getTitle());
+                if (author!=null && author.size()>0){
+                    intent.putExtra("author",author.get(0));
+                }
+                intent.putExtra("image",adapter.getAllData().get(position).getImage());
+                intent.putExtra("average",adapter.getAllData().get(position).getRating().getAverage());
+                intent.putExtra("numRaters",String.valueOf(adapter.getAllData().get(position).getRating().getNumRaters()));
+                intent.putExtra("pubdate",adapter.getAllData().get(position).getPubdate());
+                intent.putExtra("publisher",adapter.getAllData().get(position).getPublisher());
+                intent.putExtra("id",adapter.getAllData().get(position).getId());
+                intent.putExtra("alt",adapter.getAllData().get(position).getAlt());
+                startActivity(intent);
+            }
         });
     }
 
