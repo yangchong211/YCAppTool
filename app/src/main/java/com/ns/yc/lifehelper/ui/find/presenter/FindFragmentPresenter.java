@@ -3,6 +3,7 @@ package com.ns.yc.lifehelper.ui.find.presenter;
 import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,6 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
 
     public FindFragmentPresenter(FindFragmentContract.View androidView) {
         this.mView = androidView;
-        //this.activity = (MainActivity) androidView;       //有时会报空指针
         mSubscriptions = new CompositeSubscription();
     }
 
@@ -100,7 +100,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         //banner
         return new BaseDelegateAdapter(activity, new LinearLayoutHelper(), R.layout.base_wrap_banner, 1, Constant.viewType.typeBanner) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, int position) {
+            public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 // 绑定数据
                 BannerView mBanner = holder.getView(R.id.banner);
@@ -132,7 +132,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         gridLayoutHelper.setBgColor(Color.WHITE);
         return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.item_vp_grid_iv, 8, Constant.viewType.typeGv) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+            public void onBindViewHolder(@NonNull BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_new_seed_title, proName[position]);
                 holder.setImageResource(R.id.iv_new_seed_ic, images.get(position));
@@ -152,7 +152,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         return new BaseDelegateAdapter(activity,linearLayoutHelper , R.layout.view_vlayout_marquee, 1, Constant.viewType.typeMarquee) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, int position) {
+            public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 MarqueeView marqueeView = holder.getView(R.id.marqueeView);
 
@@ -173,7 +173,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
     public BaseDelegateAdapter initTitle(final String title) {
         return new BaseDelegateAdapter(activity, new LinearLayoutHelper(), R.layout.base_view_title, 1, Constant.viewType.typeTitle) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, int position) {
+            public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, title);
             }
@@ -200,7 +200,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         //gridLayoutHelper.setAutoExpand(true);//是否自动填充空白区域
         return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.view_vlayout_grid, 8, Constant.viewType.typeGvSecond) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+            public void onBindViewHolder(@NonNull BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, listTitle[position]);
                 ImageView iv = holder.getView(R.id.iv_image);
@@ -221,7 +221,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         linearLayoutHelper.setPadding(0, 0, 0, 10);
         return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.item_gold_news_list, 3, Constant.viewType.typeNews) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+            public void onBindViewHolder(@NonNull BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 if (Constant.findNews != null && Constant.findNews.size() > 0) {
                     HomeBlogEntity model = Constant.findNews.get(position);
@@ -271,7 +271,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         //gridLayoutHelper.setSpanCount(6);
         return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.base_btn_title_view, 3, Constant.viewType.typeList) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+            public void onBindViewHolder(@NonNull BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, listTitle[position]);
                 ImageView iv = holder.getView(R.id.iv_image);
@@ -301,7 +301,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         onePlusNLayoutHelper.setPadding(10, 20, 10, 10);
         return new BaseDelegateAdapter(activity, onePlusNLayoutHelper, R.layout.view_vlayout_plus, 3, Constant.viewType.typePlus) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+            public void onBindViewHolder(@NonNull BaseViewHolder holder, @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 if (position == 0) {
                     holder.getView(R.id.ll_first).setVisibility(View.VISIBLE);
@@ -333,7 +333,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         return new BaseDelegateAdapter(activity,
                 linearLayoutHelper, R.layout.view_vlayout_news, 10, Constant.viewType.typeFooter) {
             @Override
-            public void onBindViewHolder(BaseViewHolder holder,
+            public void onBindViewHolder(@NonNull BaseViewHolder holder,
                                          @SuppressLint("RecyclerView") final int position) {
                 super.onBindViewHolder(holder, position);
                 if (Constant.findBottomNews != null && Constant.findBottomNews.size() > 0) {

@@ -4,12 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,11 +18,12 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DetailMovieModel;
-import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.inter.listener.OnListItemClickListener;
 import com.ycbjie.douban.bean.DouMovieDetailBean;
 import com.ycbjie.douban.view.adapter.MovieDetailAdapter;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.utils.image.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
@@ -111,22 +112,17 @@ public class MovieDetailActivity extends BaseActivity {
 
     private void initToolBar() {
         toolbar.inflateMenu(R.menu.movie_menu_detail);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int i = item.getItemId();
-                if (i == R.id.movie_about) {
-                    if (alt != null && alt.length() > 0) {
-                        Intent intent = new Intent(MovieDetailActivity.this, MovieWebViewActivity.class);
-                        intent.putExtra("alt", alt);
-                        intent.putExtra("name", "");
-                        startActivity(intent);
-                    }
-
-                } else {
+        toolbar.setOnMenuItemClickListener(item -> {
+            int i = item.getItemId();
+            if (i == R.id.movie_about) {
+                if (alt != null && alt.length() > 0) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.URL,alt);
+                    bundle.putString(Constant.TITLE,"");
+                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
                 }
-                return true;
             }
+            return true;
         });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,14 +224,11 @@ public class MovieDetailActivity extends BaseActivity {
                             recyclerView.addItemDecoration(line);
                             final MovieDetailAdapter adapter = new MovieDetailAdapter(movieDetailBean.getCasts(),MovieDetailActivity.this);
                             recyclerView.setAdapter(adapter);
-                            adapter.setOnItemClickListener(new OnListItemClickListener() {
-                                @Override
-                                public void onItemClick(View view, int position) {
-                                    Intent intent = new Intent(MovieDetailActivity.this,MovieWebViewActivity.class);
-                                    intent.putExtra("alt",movieDetailBean.getCasts().get(position).getAlt());
-                                    intent.putExtra("name",movieDetailBean.getCasts().get(position).getName());
-                                    startActivity(intent);
-                                }
+                            adapter.setOnItemClickListener((view, position) -> {
+                                Bundle bundle = new Bundle();
+                                bundle.putString(Constant.URL,movieDetailBean.getCasts().get(position).getAlt());
+                                bundle.putString(Constant.TITLE,movieDetailBean.getCasts().get(position).getName());
+                                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
                             });
                         }
                     }

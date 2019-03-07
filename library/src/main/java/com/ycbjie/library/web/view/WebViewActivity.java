@@ -254,12 +254,7 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        llTitleMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        llTitleMenu.setOnClickListener(view -> finish());
     }
 
 

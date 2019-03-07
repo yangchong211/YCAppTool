@@ -39,6 +39,7 @@ public class CustomChangeBounds extends ChangeBounds {
                 offset *= 1.8f;
             }
         }*/
+
         changeBounds.setDuration(500);
         changeBounds.setInterpolator(AnimationUtils.loadInterpolator(sceneRoot.getContext(), android.R.interpolator.fast_out_slow_in));
         return changeBounds;

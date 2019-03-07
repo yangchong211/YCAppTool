@@ -24,9 +24,9 @@ import java.util.List;
 public class VideoGridAdapter extends BaseAdapter {
 
     private Context context;
-    private List<VideoIconBean> lists;      //数据源
-    private int mIndex;                     // 页数下标，标示第几页，从0开始
-    private int mPagerSize;                // 每页显示的最大的数量
+    private List<VideoIconBean> lists;
+    private int mIndex;
+    private int mPagerSize;
 
     public VideoGridAdapter(Context context, List<VideoIconBean> lists, int mIndex, int mPagerSize) {
         this.context = context;
@@ -61,23 +61,23 @@ public class VideoGridAdapter extends BaseAdapter {
         if(convertView == null){
             holder = new ViewHolder();
             convertView = View.inflate(context, R.layout.item_vp_grid_iv, null);
-            holder.tv_name = (TextView)convertView.findViewById(R.id.tv_new_seed_title);
-            holder.iv_nul = (ImageView)convertView.findViewById(R.id.iv_new_seed_ic);
+            holder.tvName = convertView.findViewById(R.id.tv_new_seed_title);
+            holder.ivNul = convertView.findViewById(R.id.iv_new_seed_ic);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder)convertView.getTag();
         }
         //重新确定position因为拿到的总是数据源，数据源是分页加载到每页的GridView上的
-        final int pos = position + mIndex * mPagerSize;//假设mPageSiez
+        final int pos = position + mIndex * mPagerSize;
         //假设mPagerSize=8，假如点击的是第二页（即mIndex=1）上的第二个位置item(position=1),那么这个item的实际位置就是pos=9
-        holder.tv_name.setText(lists.get(pos).getName());
-        holder.tv_name.setTextSize(12);
-        holder.iv_nul.setImageResource(lists.get(pos).getResId());
+        holder.tvName.setText(lists.get(pos).getName());
+        holder.tvName.setTextSize(12);
+        holder.ivNul.setImageResource(lists.get(pos).getResId());
         return convertView;
     }
 
     private static class ViewHolder{
-        private TextView tv_name;
-        private ImageView iv_nul;
+        private TextView tvName;
+        private ImageView ivNul;
     }
 }

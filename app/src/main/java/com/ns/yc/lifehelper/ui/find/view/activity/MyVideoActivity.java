@@ -38,8 +38,10 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
     private String[] titles = {"本地", "电影", "酒店住宿", "休闲娱乐", "外卖", "自助餐", "KTV", "火车票", "周边游", "美甲美睫",
             "火锅", "生日蛋糕", "甜品饮品", "水上乐园", "汽车服务", "美发", "丽人", "景点", "足疗按摩", "运动健身", "健身", "超市", "买菜",
             "今日新单", "小吃快餐", "面膜", "洗浴/汗蒸", "母婴亲子", "生活服务", "婚纱摄影", "学习培训", "家装", "结婚", "全部分配"};
-    private int pageCount;          //总的页数
-    private static final int pageSize = 10;      //每一页显示的个数
+    //总的页数
+    private int pageCount;
+    //每一页显示的个数
+    private static final int pageSize = 10;
 
     private ArrayList<VideoIconBean> iconData;
 
@@ -58,10 +60,8 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
     public void initView() {
         llTitleMenu = findViewById(R.id.ll_title_menu);
         toolbarTitle = findViewById(R.id.toolbar_title);
-        vpPager = (ViewPager) findViewById(R.id.vp_pager);
-        llDot = (LinearLayout) findViewById(R.id.ll_dot);
-
-
+        vpPager = findViewById(R.id.vp_pager);
+        llDot = findViewById(R.id.ll_dot);
         initToolBar();
         initIconData();
         initViewPager();
@@ -86,6 +86,8 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.ll_title_menu:
                 finish();
+                break;
+            default:
                 break;
         }
     }

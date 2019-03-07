@@ -26,7 +26,6 @@
         <activity android:name=".view.activity.DouMusicDetailActivity"/>
         <activity android:name=".view.activity.MovieDetailActivity"/>
         <activity android:name=".view.activity.MovieTopActivity"/>
-        <activity android:name=".view.activity.MovieWebViewActivity"/>
 
     </application>
 

@@ -1,5 +1,6 @@
 package com.ycbjie.douban.view.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -14,22 +15,23 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.ns.yc.ycutilslib.scrollView.ReboundScrollView;
+import com.pedaily.yc.ycdialoglib.loading.ViewLoading;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DouMusicDetailModel;
+import com.ycbjie.douban.bean.DouMusicDetailBean;
 import com.ycbjie.douban.weight.CustomChangeBounds;
 import com.ycbjie.library.base.glide.GlideApp;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.douban.bean.DouMusicDetailBean;
 import com.ycbjie.library.utils.image.ImageUtils;
-import com.ns.yc.ycutilslib.scrollView.ReboundScrollView;
+
 import cn.ycbjie.ycstatusbarlib.StatusBarUtils;
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 import io.reactivex.Observer;
@@ -50,9 +52,7 @@ import io.reactivex.schedulers.Schedulers;
 public class DouMusicDetailActivity extends BaseActivity {
 
     private ReboundScrollView nsvScrollview;
-    private LinearLayout llHeaderView;
     private ImageView imgMusicItemBg;
-    private LinearLayout llMusicItem;
     private ImageView ivMusicPhoto;
     private TextView tvMusicName;
     private TextView tvMusicAltTitle;
@@ -61,16 +61,16 @@ public class DouMusicDetailActivity extends BaseActivity {
     private TextView tvMusicSummary;
     private TextView tvTxt;
     private RecyclerView xrvList;
-    private RelativeLayout rlTitleHead;
     private ImageView ivTitleHeadBg;
     private Toolbar titleToolBar;
 
 
     private String id = "";
     private String title = "";
-    // 这个是高斯图背景的高度
     private int imageBgHeight;
-    // 在多大范围内变色
+    /**
+     * 在多大范围内变色
+     */
     private int slidingDistance;
     private String image = "";
 
@@ -97,29 +97,27 @@ public class DouMusicDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        nsvScrollview = (ReboundScrollView) findViewById(R.id.nsv_scrollview);
-        llHeaderView = (LinearLayout) findViewById(R.id.ll_Header_view);
-        imgMusicItemBg = (ImageView) findViewById(R.id.img_music_item_bg);
-        llMusicItem = (LinearLayout) findViewById(R.id.ll_music_item);
-        ivMusicPhoto = (ImageView) findViewById(R.id.iv_music_photo);
-        tvMusicName = (TextView) findViewById(R.id.tv_music_name);
-        tvMusicAltTitle = (TextView) findViewById(R.id.tv_music_alt_title);
-        tvMusicAverage = (TextView) findViewById(R.id.tv_music_average);
-        tvMusicNumRaters = (TextView) findViewById(R.id.tv_music_numRaters);
-        tvMusicSummary = (TextView) findViewById(R.id.tv_music_summary);
-        tvTxt = (TextView) findViewById(R.id.tv_txt);
-        xrvList = (RecyclerView) findViewById(R.id.xrv_list);
-        rlTitleHead = (RelativeLayout) findViewById(R.id.rl_title_head);
-        ivTitleHeadBg = (ImageView) findViewById(R.id.iv_title_head_bg);
-        titleToolBar = (Toolbar) findViewById(R.id.title_tool_bar);
-
-
-
+        initFindViewById();
         initIntentData();
         setTitleBar();
         setMotion();
         setPicture();
         initSlideShapeTheme();
+    }
+
+    private void initFindViewById() {
+        nsvScrollview = findViewById(R.id.nsv_scrollview);
+        imgMusicItemBg = findViewById(R.id.img_music_item_bg);
+        ivMusicPhoto = findViewById(R.id.iv_music_photo);
+        tvMusicName = findViewById(R.id.tv_music_name);
+        tvMusicAltTitle = findViewById(R.id.tv_music_alt_title);
+        tvMusicAverage = findViewById(R.id.tv_music_average);
+        tvMusicNumRaters = findViewById(R.id.tv_music_numRaters);
+        tvMusicSummary = findViewById(R.id.tv_music_summary);
+        tvTxt = findViewById(R.id.tv_txt);
+        xrvList = findViewById(R.id.xrv_list);
+        ivTitleHeadBg = findViewById(R.id.iv_title_head_bg);
+        titleToolBar = findViewById(R.id.title_tool_bar);
     }
 
     @Override
@@ -129,9 +127,11 @@ public class DouMusicDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        ViewLoading.show(this);
         getMusicDetailData(id);
     }
 
+    @SuppressLint("SetTextI18n")
     private void initIntentData() {
         Intent intent = getIntent();
         if(intent!=null){
@@ -161,12 +161,7 @@ public class DouMusicDetailActivity extends BaseActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_back_white);
         }
         titleToolBar.setTitle(title);
-        titleToolBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        titleToolBar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
 
@@ -180,7 +175,8 @@ public class DouMusicDetailActivity extends BaseActivity {
             arcMotion.setMinimumHorizontalAngle(50f);
             arcMotion.setMinimumVerticalAngle(50f);
             //插值器，控制速度
-            Interpolator interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.fast_out_slow_in);
+            Interpolator interpolator = AnimationUtils.loadInterpolator(
+                    this, android.R.interpolator.fast_out_slow_in);
 
             //实例化自定义的ChangeBounds
             CustomChangeBounds changeBounds = new CustomChangeBounds();
@@ -260,8 +256,25 @@ public class DouMusicDetailActivity extends BaseActivity {
     private void initScrollViewListener() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             nsvScrollview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                /**
+                 * 滚动监听
+                 * @param v                 第一个参数NestedScrollView v:是NestedScrollView的对象
+                 * @param scrollX           第二个参数:scrollX是目前的（滑动后）的X轴坐标
+                 * @param scrollY           第三个参数:ScrollY是目前的（滑动后）的Y轴坐标
+                 * @param oldScrollX        第四个参数:oldScrollX是之前的（滑动前）的X轴坐标
+                 * @param oldScrollY        第五个参数:oldScrollY是之前的（滑动前）的Y轴坐标
+                 */
                 @Override
-                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                public void onScrollChange(View v, int scrollX, int scrollY,
+                                           int oldScrollX, int oldScrollY) {
+                    //滑动后-滑动前>0  屏幕向下滑动
+                    if (scrollY-oldScrollY>0){
+                        //向下滑动
+                        LogUtils.d("setOnScrollChangeListener" + "向下滑动");
+                    }else {
+                        //向上滑动
+                        LogUtils.d("setOnScrollChangeListener" + "向上滑动");
+                    }
                     scrollChangeHeader(scrollY);
                 }
             });
@@ -295,7 +308,6 @@ public class DouMusicDetailActivity extends BaseActivity {
 
     /**
      * 获取网络数据
-     * @param id
      */
     private void getMusicDetailData(String id) {
         DouMusicDetailModel model = new DouMusicDetailModel(this);
@@ -324,7 +336,7 @@ public class DouMusicDetailActivity extends BaseActivity {
 
                     @Override
                     public void onComplete() {
-
+                        ViewLoading.dismiss(DouMusicDetailActivity.this);
                     }
                 });
     }

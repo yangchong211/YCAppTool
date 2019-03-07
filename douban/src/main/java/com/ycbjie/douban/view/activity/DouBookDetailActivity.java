@@ -1,21 +1,24 @@
 package com.ycbjie.douban.view.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.pedaily.yc.ycdialoglib.loading.ViewLoading;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DouBookModel;
-import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.douban.bean.DouBookDetailBean;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.utils.image.ImageUtils;
 
 import io.reactivex.Observer;
@@ -40,9 +43,6 @@ public class DouBookDetailActivity extends BaseActivity {
     private TextView tvIntro;
     private TextView tvCatalog;
     private AppBarLayout appBar;
-    private CollapsingToolbarLayout collapsingToolbar;
-    private ImageView ivBgImage;
-    private LinearLayout llBookDetail;
     private ImageView ivBookPhoto;
     private TextView tvBookDirectors;
     private TextView tvBookRatingRate;
@@ -50,7 +50,6 @@ public class DouBookDetailActivity extends BaseActivity {
     private TextView tvOneCasts;
     private TextView tvBookGenres;
     private Toolbar toolbar;
-    private LinearLayout llToolBar;
     private TextView tvName;
     private TextView tvCasts;
     private Constant.CollapsingToolbarLayoutState state;
@@ -70,29 +69,31 @@ public class DouBookDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        tvBookSummary = (TextView) findViewById(R.id.tv_book_summary);
-        tvIntro = (TextView) findViewById(R.id.tv_intro);
-        tvCatalog = (TextView) findViewById(R.id.tv_catalog);
-        appBar = (AppBarLayout) findViewById(R.id.app_bar);
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        ivBgImage = (ImageView) findViewById(R.id.iv_bg_image);
-        llBookDetail = (LinearLayout) findViewById(R.id.ll_book_detail);
-        ivBookPhoto = (ImageView) findViewById(R.id.iv_book_photo);
-        tvBookDirectors = (TextView) findViewById(R.id.tv_book_directors);
-        tvBookRatingRate = (TextView) findViewById(R.id.tv_book_rating_rate);
-        tvBookRatingNumber = (TextView) findViewById(R.id.tv_book_rating_number);
-        tvOneCasts = (TextView) findViewById(R.id.tv_one_casts);
-        tvBookGenres = (TextView) findViewById(R.id.tv_book_genres);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        llToolBar = (LinearLayout) findViewById(R.id.ll_tool_bar);
-        tvName = (TextView) findViewById(R.id.tv_name);
-        tvCasts = (TextView) findViewById(R.id.tv_casts);
-
-
+        initFindViewById();
         initToolBar();
         initIntent();
     }
 
+    private void initFindViewById() {
+        tvBookSummary = findViewById(R.id.tv_book_summary);
+        tvIntro = findViewById(R.id.tv_intro);
+        tvCatalog = findViewById(R.id.tv_catalog);
+        appBar = findViewById(R.id.app_bar);
+        CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        ImageView ivBgImage = findViewById(R.id.iv_bg_image);
+        LinearLayout llBookDetail = findViewById(R.id.ll_book_detail);
+        ivBookPhoto = findViewById(R.id.iv_book_photo);
+        tvBookDirectors = findViewById(R.id.tv_book_directors);
+        tvBookRatingRate = findViewById(R.id.tv_book_rating_rate);
+        tvBookRatingNumber = findViewById(R.id.tv_book_rating_number);
+        tvOneCasts = findViewById(R.id.tv_one_casts);
+        tvBookGenres = findViewById(R.id.tv_book_genres);
+        toolbar = findViewById(R.id.toolbar);
+        tvName = findViewById(R.id.tv_name);
+        tvCasts = findViewById(R.id.tv_casts);
+    }
+
+    @SuppressLint("SetTextI18n")
     private void initIntent() {
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
@@ -117,62 +118,52 @@ public class DouBookDetailActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == 0) {
-                    if (state != Constant.CollapsingToolbarLayoutState.EXPANDED) {
-                        //修改状态标记为展开
-                        state = Constant.CollapsingToolbarLayoutState.EXPANDED;
-                    }
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                    if (state != Constant.CollapsingToolbarLayoutState.COLLAPSED) {
-                        //修改状态标记为折叠
-                        state = Constant.CollapsingToolbarLayoutState.COLLAPSED;
-                    }
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorTheme));
-                } else {
-                    if (state != Constant.CollapsingToolbarLayoutState.INTERNEDIATE) {
-                        //修改状态标记为中间
-                        state = Constant.CollapsingToolbarLayoutState.INTERNEDIATE;
-                    }
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
+        appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset == 0) {
+                if (state != Constant.CollapsingToolbarLayoutState.EXPANDED) {
+                    //修改状态标记为展开
+                    state = Constant.CollapsingToolbarLayoutState.EXPANDED;
                 }
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                if (state != Constant.CollapsingToolbarLayoutState.COLLAPSED) {
+                    //修改状态标记为折叠
+                    state = Constant.CollapsingToolbarLayoutState.COLLAPSED;
+                }
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorTheme));
+            } else {
+                if (state != Constant.CollapsingToolbarLayoutState.INTERNEDIATE) {
+                    //修改状态标记为中间
+                    state = Constant.CollapsingToolbarLayoutState.INTERNEDIATE;
+                }
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
             }
         });
     }
 
     @Override
     public void initData() {
+        ViewLoading.show(this);
         getBookDetailData(id);
     }
 
     private void initToolBar() {
         toolbar.inflateMenu(R.menu.movie_menu_detail);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int i = item.getItemId();
-                if (i == R.id.movie_about) {
-                    Intent intent = new Intent(DouBookDetailActivity.this, MovieWebViewActivity.class);
-                    intent.putExtra("alt", alt);
-                    intent.putExtra("name", "");
-                    startActivity(intent);
-
-                } else {
-                }
-                return true;
+        toolbar.setOnMenuItemClickListener(item -> {
+            int i = item.getItemId();
+            if (i == R.id.movie_about) {
+                Bundle bundle = new Bundle();
+                bundle.putString(Constant.URL,alt);
+                bundle.putString(Constant.TITLE,"");
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
             }
+            return true;
         });
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    finishAfterTransition();
-                } else {
-                    finish();
-                }
+        toolbar.setNavigationOnClickListener(view -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                finishAfterTransition();
+            } else {
+                finish();
             }
         });
     }
@@ -204,7 +195,7 @@ public class DouBookDetailActivity extends BaseActivity {
 
                     @Override
                     public void onComplete() {
-
+                        ViewLoading.dismiss(DouBookDetailActivity.this);
                     }
                 });
     }

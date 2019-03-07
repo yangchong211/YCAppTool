@@ -17,9 +17,6 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
-import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.model.bean.ImageIconBean;
 import com.ns.yc.lifehelper.ui.data.contract.DataFragmentContract;
 import com.ns.yc.lifehelper.ui.data.presenter.DataFragmentPresenter;
@@ -28,10 +25,14 @@ import com.ns.yc.lifehelper.ui.data.view.adapter.NarrowImageAdapter;
 import com.ns.yc.lifehelper.ui.data.view.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.weight.MyGridView;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,57 +137,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 //int pos = position + totalPage * mPageSize;
                 if (obj instanceof ImageIconBean) {
                     int pos = ((ImageIconBean) obj).getId();
-                    switch (pos) {
-                        case 0:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
-                            break;
-                        case 1:
-                            Bundle bundle1 = new Bundle();
-                            bundle1.putString(Constant.URL,"https://github.com/yangchong211/YCMeiZiTu");
-                            bundle1.putString(Constant.TITLE,"爬妹子图");
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
-                            break;
-                        case 2:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_MARKDOWN_ACTIVITY);
-                            break;
-                        case 3:
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                if (!Settings.canDrawOverlays(activity)) {
-                                   // ToastUtils.showShort("请打开投资界允许权限开关");
-                                    Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    activity.startActivity(intent);
-                                }
-                            }
-                            break;
-                        case 4:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_TX_NEWS_ACTIVITY);
-                            break;
-                        case 5:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_BANNER_ACTIVITY);
-                            break;
-                        case 6:
-                            Bundle bundle6 = new Bundle();
-                            bundle6.putString(Constant.URL,Constant.FLUTTER);
-                            bundle6.putString(Constant.TITLE,"flutter极致体验的WanAndroid客户端");
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle6);
-                            break;
-                        case 7:
-                            Bundle bundle7 = new Bundle();
-                            bundle7.putString(Constant.URL,"https://github.com/yangchong211/YCStateLayout");
-                            bundle7.putString(Constant.TITLE,"状态切换，View状态的切换和Activity彻底分离开");
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle7);
-                            break;
-                        case 8:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PROGRESS2_ACTIVITY);
-                            break;
-                        case 9:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
-                            break;
-                        default:
-                            Toast.makeText(activity, ((ImageIconBean) obj).getName() + "---", Toast.LENGTH_SHORT).show();
-                            break;
-                    }
+                    toPage(pos);
                 }
             });
             //每一个GridView作为一个View对象添加到ViewPager集合中
@@ -220,6 +171,59 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 }
             }
         });
+    }
+
+    private void toPage(int pos) {
+        switch (pos) {
+            case 0:
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
+                break;
+            case 1:
+                Bundle bundle1 = new Bundle();
+                bundle1.putString(Constant.URL,"https://github.com/yangchong211/YCMeiZiTu");
+                bundle1.putString(Constant.TITLE,"爬妹子图");
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                break;
+            case 2:
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_MARKDOWN_ACTIVITY);
+                break;
+            case 3:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (!Settings.canDrawOverlays(activity)) {
+                        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(intent);
+                    }
+                }
+                break;
+            case 4:
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_TX_NEWS_ACTIVITY);
+                break;
+            case 5:
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_BANNER_ACTIVITY);
+                break;
+            case 6:
+                Bundle bundle6 = new Bundle();
+                bundle6.putString(Constant.URL,Constant.FLUTTER);
+                bundle6.putString(Constant.TITLE,"flutter极致体验的WanAndroid客户端");
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle6);
+                break;
+            case 7:
+                Bundle bundle7 = new Bundle();
+                bundle7.putString(Constant.URL,"https://github.com/yangchong211/YCStateLayout");
+                bundle7.putString(Constant.TITLE,"状态切换，View状态的切换和Activity彻底分离开");
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle7);
+                break;
+            case 8:
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PROGRESS2_ACTIVITY);
+                break;
+            case 9:
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
+                break;
+            default:
+                Toast.makeText(activity, pos+ "---", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
 

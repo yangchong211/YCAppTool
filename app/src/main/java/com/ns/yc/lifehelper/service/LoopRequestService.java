@@ -10,6 +10,8 @@ import android.os.IBinder;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,9 +30,15 @@ public class LoopRequestService extends Service {
     /**
      * 是否已经绑定了推送设备id
      */
-    private volatile isBindDevIdEnum isBindDevId = isBindDevIdEnum.NONE;
-    public enum isBindDevIdEnum {
+    private volatile int isBindDevId = BindDevId.NONE;
+    /*public enum isBindDevIdEnum {
         NONE, RUN, SUCCESS
+    }*/
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface BindDevId {
+        int NONE = 1;
+        int ERROR = 2;
+        int SUCCESS = 3;
     }
 
     private static final String ACTION = "LoopService";
@@ -136,7 +144,7 @@ public class LoopRequestService extends Service {
         if (NetworkUtils.isConnected()) {
             // 判断当前长连接状态，若长连接正常，则关闭轮询服务
             LogUtils.i("LoopService当前用户已登录... \n 判断长连接是否已经连接...");
-            if (isBindDevId != null && isBindDevId == isBindDevIdEnum.SUCCESS) {
+            if (isBindDevId == BindDevId.SUCCESS) {
                 LogUtils.i("LoopService已经绑定id成功，退出轮询服务...");
                 quitLoopService(context);
             } else {
@@ -185,7 +193,7 @@ public class LoopRequestService extends Service {
                 //开始执行轮询的网络请求操作sendLoopRequest();
                 //这里只是假设数据操作
                 if (count==5){
-                    isBindDevId = isBindDevIdEnum.SUCCESS;
+                    isBindDevId = BindDevId.SUCCESS;
                     quitLoopService(context);
                 }
                 count++;

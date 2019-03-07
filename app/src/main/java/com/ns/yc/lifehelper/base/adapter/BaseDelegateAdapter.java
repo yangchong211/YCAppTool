@@ -1,6 +1,7 @@
 package com.ns.yc.lifehelper.base.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,22 +10,23 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.yc.cn.ycbaseadapterlib.adapter.BaseViewHolder;
 
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/9/18
- * 描    述：Vlayout框架基类适配器
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/11/21
+ *     desc  : Vlayout框架基类适配器
+ *     revise:
+ * </pre>
  */
 public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder> {
 
     private LayoutHelper mLayoutHelper;
-    private int mCount = -1;
-    private int mLayoutId = -1;
+    private int mCount;
+    private int mLayoutId;
     private Context mContext;
-    private int mViewTypeItem = -1;
+    private int mViewTypeItem;
 
     protected BaseDelegateAdapter(Context context, LayoutHelper layoutHelper, int layoutId, int count, int viewTypeItem) {
         this.mContext = context;
@@ -39,8 +41,9 @@ public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder>
         return mLayoutHelper;
     }
 
+    @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == mViewTypeItem) {
             return new BaseViewHolder(LayoutInflater.from(mContext).inflate(mLayoutId, parent, false));
         }
@@ -48,7 +51,7 @@ public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
 
     }
 
