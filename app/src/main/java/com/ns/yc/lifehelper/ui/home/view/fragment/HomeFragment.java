@@ -301,7 +301,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
         }
         cardViewLayout.setAdapter(new CardViewLayout.Adapter() {
 
-            SoftReference<Bitmap> bitmapSoftReference;
+            private SoftReference<Bitmap> bitmapSoftReference;
 
             class ViewHolder {
                 ImageView imageView;
@@ -325,12 +325,14 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 bitmapSoftReference = new SoftReference<>(bitmap);
                 if(bitmapSoftReference.get() != null) {
                     viewHolder.imageView.setImageBitmap(bitmapSoftReference.get());
+                } else {
+                    viewHolder.imageView.setImageBitmap(bitmap);
                 }
             }
 
             @Override
             public int getItemCount() {
-                return bitmaps.size();
+                return bitmaps==null ? 0 : bitmaps.size();
             }
 
             @Override

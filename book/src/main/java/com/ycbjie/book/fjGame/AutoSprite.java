@@ -39,6 +39,7 @@ public class AutoSprite extends Sprite {
         }
     }
 
+    @Override
     protected void afterDraw(Canvas canvas, Paint paint, GameView gameView){
         if(!isDestroyed()){
             //检查Sprite是否超出了Canvas的范围，如果超出，则销毁Sprite

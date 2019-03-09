@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_todo_name" translatable="false">todo</string>
+    <string name="app_todo_name" translatable="false">小杨todo</string>
 
     <!--WorkDo模块-->
     <string-array name="show_as_list_entries">

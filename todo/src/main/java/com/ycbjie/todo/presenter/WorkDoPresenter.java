@@ -73,7 +73,7 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
         mView.setViewPagerAdapter(mAdapter);
         initVpItem();
         // 坑: mVp.getCurrentItem() 某些时候不能获得第一页和最后一页的Index
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < Constant.DAY_OF_WEEK; i++) {
             ((PageFragment) mItems.get(i).getFragment()).clearTasks();
         }
         RealmResults<CacheTaskDetailEntity> allTask ;
@@ -82,10 +82,14 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
         } else{
             allTask = mDataDao.findAllTask();
         }
-        for (CacheTaskDetailEntity t : allTask) {
-            int day = t.getDayOfWeek();
-            PageFragment fragment = (PageFragment) mItems.get(day - 1).getFragment();
-            fragment.insertTask(t);
+        if (allTask!=null){
+            for (CacheTaskDetailEntity t : allTask) {
+                int day = t.getDayOfWeek();
+                PageFragment fragment = (PageFragment) mItems.get(day - 1).getFragment();
+                if (fragment!=null){
+                    fragment.insertTask(t);
+                }
+            }
         }
     }
 
@@ -134,8 +138,6 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
             Intent intent = new Intent(mContext, WorkSettingActivity.class);
             intent.putExtra(Constant.INTENT_EXTRA_SWITCH_TO_INDEX, mView.getCurrentViewPagerItem());
             mContext.startActivity(intent);
-            //mView.finishActivity();
-
         }
         return true;
     }
@@ -146,7 +148,9 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != RESULT_OK) return;
+        if (resultCode != RESULT_OK) {
+            return;
+        }
         Bundle bundle = data.getExtras();
         CacheTaskDetailEntity task = (CacheTaskDetailEntity) bundle.getSerializable(Constant.INTENT_BUNDLE_NEW_TASK_DETAIL);
         PageFragment fragment = (PageFragment) mItems.get(mView.getCurrentViewPagerItem()).getFragment();
@@ -182,7 +186,11 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
     }
 
 
-    //跳转编辑页面
+    /**
+     * 跳转编辑页面
+     * @param position              索引
+     * @param entity                entry
+     */
     private void toEditActivity(int position, CacheTaskDetailEntity entity) {
         Intent intent = new Intent(mContext, WorkNewActivity.class);
         intent.putExtra(Constant.INTENT_EXTRA_EDIT_TASK_DETAIL_ENTITY, entity.cloneObj());
@@ -293,7 +301,7 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
         ((PageFragment) mItems.get(newEntity.getDayOfWeek() - 1).getFragment()).insertTask(newEntity);
         mDataDao.insertTask(newEntity);
         mDataDao.deleteTask(oldEntity);
-
     }
+
 
 }

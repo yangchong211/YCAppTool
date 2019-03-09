@@ -19,6 +19,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.tv_3).setOnClickListener(this);
         findViewById(R.id.tv_4).setOnClickListener(this);
         findViewById(R.id.tv_5).setOnClickListener(this);
+        findViewById(R.id.tv_6).setOnClickListener(this);
     }
 
     @Override
@@ -48,8 +49,8 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 
         } else if (i == R.id.tv_5) {
             startActivity(new Intent(this, ZoomLargeImageActivity.class));
-
-        } else {
+        } else if (i == R.id.tv_6){
+            startActivity(new Intent(this, TestFirstActivity.class));
         }
     }
 }

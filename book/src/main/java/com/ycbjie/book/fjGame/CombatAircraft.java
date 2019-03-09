@@ -111,6 +111,7 @@ public class CombatAircraft extends Sprite {
     //具体来说，首先隐藏战斗机，然后创建爆炸效果，爆炸用28帧渲染完成
     //爆炸效果完全渲染完成后，爆炸效果消失
     //然后战斗机会进入闪烁模式，战斗机闪烁一定次数后销毁
+    @Override
     protected void afterDraw(Canvas canvas, Paint paint, GameView gameView){
         if(isDestroyed()){
             return;

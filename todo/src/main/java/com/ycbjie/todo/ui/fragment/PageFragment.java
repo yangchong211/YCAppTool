@@ -10,32 +10,31 @@ import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.base.mvp.BaseFragment;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.db.cache.CacheTaskDetailEntity;
 import com.ycbjie.todo.R;
 import com.ycbjie.todo.contract.PageFragmentContract;
-import com.ycbjie.library.db.cache.CacheTaskDetailEntity;
 import com.ycbjie.todo.presenter.PageFragmentPresenter;
 import com.ycbjie.todo.ui.WorkDoActivity;
 import com.ycbjie.todo.ui.adapter.WorkDoAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/10/21
- * 描    述：此版块训练dagger2+MVP
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  : 此版块训练dagger2+MVP
+ *     revise:
+ * </pre>
  */
 public class PageFragment extends BaseFragment implements PageFragmentContract.View{
 
     RecyclerView recyclerView;
-    private List<CacheTaskDetailEntity> mList = new ArrayList<>();
+    private ArrayList<CacheTaskDetailEntity> mList = new ArrayList<>();
     private PageFragmentContract.Presenter presenter = new PageFragmentPresenter(this);
     private WorkDoActivity activity;
     private WorkDoAdapter adapter;
@@ -68,14 +67,6 @@ public class PageFragment extends BaseFragment implements PageFragmentContract.V
     public void onDestroy() {
         super.onDestroy();
         presenter.unSubscribe();
-        mListener = null;
-        adapter = null;
-        mList = null;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 
     @Override

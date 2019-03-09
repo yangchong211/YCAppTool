@@ -1,4 +1,4 @@
-package com.ycbjie.love.activity;
+package com.ycbjie.todo.app;
 
 import android.content.Context;
 
@@ -13,7 +13,7 @@ import com.ycbjie.library.base.app.LibApplication;
  *     revise:
  * </pre>
  */
-public class LoveApp extends LibApplication {
+public class ToDoApp extends LibApplication {
 
     @Override
     public void onCreate() {

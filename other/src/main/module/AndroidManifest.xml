@@ -32,6 +32,7 @@
         <activity android:name="com.ycbjie.other.ui.activity.ProgressSecondActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.ProgressThirdActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.MonkeyGameActivity"/>
+        <activity android:name=".ui.activity.TestFirstActivity"/>
     </application>
 
 

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -17,11 +16,10 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pedaily.yc.ycdialoglib.dialogMenu.CustomBottomDialog;
-import com.pedaily.yc.ycdialoglib.dialogMenu.CustomItem;
-import com.pedaily.yc.ycdialoglib.dialogMenu.OnItemClickListener;
 import com.pedaily.yc.ycdialoglib.snackbar.SnackBarUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.db.cache.CacheTaskDetailEntity;
 import com.ycbjie.todo.R;
 import com.ycbjie.todo.contract.WorkDoContract;
@@ -34,20 +32,20 @@ import com.ycbjie.todo.ui.fragment.PageFragment;
 import javax.inject.Inject;
 
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/10/14.
- * 描    述：此版块训练dagger2+MVP
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2016/03/22
+ *     desc  : 此版块训练dagger2+MVP
+ *     revise:
+ * </pre>
  */
 @Route(path = ARouterConstant.ACTIVITY_WORK_ACTIVITY)
 public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
         View.OnClickListener , PageFragment.OnPageListener{
 
-    private CoordinatorLayout clMain;
     private Toolbar toolBar;
     private TabLayout tab;
     private ViewPager vpPager;
@@ -55,7 +53,6 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
 
     @Inject
     WorkDoPresenter presenter;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,13 +78,15 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
 
     @Override
     public void initView() {
-        clMain = (CoordinatorLayout) findViewById(R.id.cl_main);
-        toolBar = (Toolbar) findViewById(R.id.tool_bar);
-        tab = (TabLayout) findViewById(R.id.tab);
-        vpPager = (ViewPager) findViewById(R.id.vp_pager);
-        fabEdit = (FloatingActionButton) findViewById(R.id.fab_edit);
-
+        initFindViewById();
         initToolBar();
+    }
+
+    private void initFindViewById() {
+        toolBar = findViewById(R.id.tool_bar);
+        tab = findViewById(R.id.tab);
+        vpPager = findViewById(R.id.vp_pager);
+        fabEdit = findViewById(R.id.fab_edit);
     }
 
 
@@ -114,7 +113,6 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
         int i = v.getId();
         if (i == R.id.fab_edit) {
             presenter.setOnFabClick();
-
         }
     }
 
@@ -152,7 +150,8 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
      * DaggerUiComponent这个可以在本工程目录下build/generated/source/dagger目录下查看
      */
     private void initializeInjector() {
-        DaggerUiComponent.builder().uiModule(new UiModule(this)).build().inject(this);
+        DaggerUiComponent.builder().uiModule(new UiModule(this))
+                .build().inject(this);
     }
 
 
@@ -183,7 +182,9 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
      */
     @Override
     public void setViewPagerAdapter(WorkPageAdapter mAdapter) {
-        vpPager.setAdapter(mAdapter);
+        if (mAdapter!=null){
+            vpPager.setAdapter(mAdapter);
+        }
     }
 
     /**
@@ -191,7 +192,9 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
      */
     @Override
     public void setViewPagerCurrentItem(int currIndex, boolean b) {
-        vpPager.setCurrentItem(currIndex, b);
+        if (currIndex>=0 && currIndex<Constant.DAY_OF_WEEK){
+            vpPager.setCurrentItem(currIndex, b);
+        }
     }
 
     /**
@@ -219,23 +222,16 @@ public class WorkDoActivity extends BaseActivity implements WorkDoContract.View,
                 .title("选择分类")
                 .setCancel(true,"取消选择")
                 .orientation(CustomBottomDialog.VERTICAL)
-                .inflateMenu(R.menu.to_do_bottom_sheet, new OnItemClickListener() {
-                    @Override
-                    public void click(CustomItem item) {
-                        int id = item.getId();
-                        if (id == R.id.to_do_flag) {
-                            presenter.dialogActionFlagTask(position, entity);
-
-                        } else if (id == R.id.to_do_put_off) {
-                            presenter.dialogActionPutOffTask(position, entity);
-
-                        } else if (id == R.id.to_do_edit) {
-                            presenter.dialogActionEditTask(position, entity);
-
-                        } else if (id == R.id.to_do_delete) {
-                            presenter.dialogActionDeleteTask(position, entity);
-
-                        }
+                .inflateMenu(R.menu.to_do_bottom_sheet, item -> {
+                    int id = item.getId();
+                    if (id == R.id.to_do_flag) {
+                        presenter.dialogActionFlagTask(position, entity);
+                    } else if (id == R.id.to_do_put_off) {
+                        presenter.dialogActionPutOffTask(position, entity);
+                    } else if (id == R.id.to_do_edit) {
+                        presenter.dialogActionEditTask(position, entity);
+                    } else if (id == R.id.to_do_delete) {
+                        presenter.dialogActionDeleteTask(position, entity);
                     }
                 });
         dialog.show();

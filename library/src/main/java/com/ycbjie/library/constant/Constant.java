@@ -24,7 +24,6 @@ public class Constant {
     public static final String EXTERNAL_STORAGE_DIRECTORY =
             Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 
-    //关于我的更多信息
     public static final String GITHUB = "https://github.com/yangchong211/YCBlogs";
     public static final String LIFE_HELPER = "https://github.com/yangchong211/LifeHelper";
     public static final String JIAN_SHU = "https://www.jianshu.com/u/b7b2c6ed9284";
@@ -61,20 +60,21 @@ public class Constant {
     }
 
     /**-------------------------------------记事本----------------------------------------------**/
-    public static int NEW_ACTIVITY_REQUEST_CODE = 0;
-    public static int EDIT_ACTIVITY_REQUEST_CODE = 1;
-    public static String INTENT_EXTRA_DAY_OF_WEEK = "DAY_OF_WEEK";
-    public static String INTENT_BUNDLE_NEW_TASK_DETAIL = "NEW_TASK_DETAIL";
-    public static String INTENT_EXTRA_EDIT_TASK_DETAIL_ENTITY = "EDIT_TASK_DETAIL_ENTITY";
-    public static String INTENT_EXTRA_MODE_OF_NEW_ACT = "MODE_OF_NEW_ACT";
-    public static String INTENT_EXTRA_SWITCH_TO_INDEX = "SWITCH_TO_INDEX";
-    public static String CHOOSE_PAPER_DIALOG_CHECK_ITEM_BUNDLE_KEY = "CHECK_ITEM_BUNDLE_KEY";
-    public static String DATABASE_FILE_PATH_FOLDER = "WeekToDo";
-    public static String DATABASE_FILE_PATH_FILE_NAME = "data.realm";
-    public static String DATABASE_FILE_BACKUP_PATH_FOLDER = "番茄周/备份";
-    public static String DATABASE_FILE_EXPORT_PATH_FOLDER = "番茄周/导出";
-    public static long AUTO_NOTIFY_INTERVAL_TIME = 60 * 60 * 1000;
-    public static int AUTO_NOTIFY_NOTIFICATION_ID = 0;
+    public static final int NEW_ACTIVITY_REQUEST_CODE = 0;
+    public static final int EDIT_ACTIVITY_REQUEST_CODE = 1;
+    public static final String INTENT_EXTRA_DAY_OF_WEEK = "DAY_OF_WEEK";
+    public static final String INTENT_BUNDLE_NEW_TASK_DETAIL = "NEW_TASK_DETAIL";
+    public static final String INTENT_EXTRA_EDIT_TASK_DETAIL_ENTITY = "EDIT_TASK_DETAIL_ENTITY";
+    public static final String INTENT_EXTRA_MODE_OF_NEW_ACT = "MODE_OF_NEW_ACT";
+    public static final String INTENT_EXTRA_SWITCH_TO_INDEX = "SWITCH_TO_INDEX";
+    public static final String CHOOSE_PAPER_DIALOG_CHECK_ITEM_BUNDLE_KEY = "CHECK_ITEM_BUNDLE_KEY";
+    public static final String DATABASE_FILE_PATH_FOLDER = "WeekToDo";
+    public static final String DATABASE_FILE_PATH_FILE_NAME = "data.realm";
+    public static final String DATABASE_FILE_BACKUP_PATH_FOLDER = "番茄周/备份";
+    public static final String DATABASE_FILE_EXPORT_PATH_FOLDER = "番茄周/导出";
+    public static final long AUTO_NOTIFY_INTERVAL_TIME = 60 * 60 * 1000;
+    public static final int AUTO_NOTIFY_NOTIFICATION_ID = 0;
+    public static final int DAY_OF_WEEK = 7;
     public interface MODE_OF_NEW_ACT {
         int MODE_EDIT = 5;
         int MODE_CREATE = 6;
@@ -165,5 +165,5 @@ public class Constant {
     /**
      * 网络缓存保存时间
      */
-    public static final int TIME_CACHE = 60 * 60; // 一小时
+    public static final int TIME_CACHE = 60 * 60;
 }

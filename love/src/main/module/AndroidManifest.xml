@@ -3,7 +3,7 @@
     package="com.ycbjie.love" >
 
     <application
-        android:name=".activity.LoveApp"
+        android:name=".app.LoveApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
