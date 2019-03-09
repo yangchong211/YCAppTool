@@ -40,6 +40,7 @@ import java.util.concurrent.TimeUnit;
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Func1;
@@ -84,6 +85,7 @@ public class LoveGirlMainActivity extends BaseActivity {
     private Timer myTimer = null;
     private FrameLayout mWebViwFrameLayout = null;
     private TextView textview = null;
+    private Subscription subscribe;
 
     @Override
     public int getContentView() {
@@ -182,6 +184,7 @@ public class LoveGirlMainActivity extends BaseActivity {
             this.mWebView.destroy();
             this.mWebView = null;
         }
+        subscribe.unsubscribe();
         unBindDrawables(findViewById(R.id.root_fragment_layout));
         System.gc();
     }
@@ -219,26 +222,26 @@ public class LoveGirlMainActivity extends BaseActivity {
     }
 
     private void rxJavaSolveMiZhiSuoJinAndNestedLoopAndCallbackHell() {
-        Observable.from(getAssetImageFolderName())
+        subscribe = Observable.from(getAssetImageFolderName())
                 .flatMap(new Func1<String, Observable<String>>() {
                     public Observable<String> call(String folderName) {
                         return Observable.from(ImageUtils.getAssetsImageNamePathList(getApplicationContext(), folderName));
                     }
                 }).filter(new Func1<String, Boolean>() {
-            public Boolean call(String imagePathNameAll) {
-                return Boolean.valueOf(imagePathNameAll.endsWith(LoveGirlMainActivity.JPG));
-            }
-        }).map(new Func1<String, Bitmap>() {
-            public Bitmap call(String imagePathName) {
-                return ImageUtils.getImageBitmapFromAssetsFolderThroughImagePathName(getApplicationContext(), imagePathName, DeviceInfo.mScreenWidthForPortrait, DeviceInfo.mScreenHeightForPortrait);
-            }
-        }).map(new Func1<Bitmap, Void>() {
-            public Void call(Bitmap bitmap) {
-                createSingleImageFromMultipleImages(bitmap, mCounter);
-                mCounter = mCounter++;
-                return null;
-            }
-        }).subscribeOn(Schedulers.io())
+                    public Boolean call(String imagePathNameAll) {
+                        return Boolean.valueOf(imagePathNameAll.endsWith(LoveGirlMainActivity.JPG));
+                    }
+                }).map(new Func1<String, Bitmap>() {
+                    public Bitmap call(String imagePathName) {
+                        return ImageUtils.getImageBitmapFromAssetsFolderThroughImagePathName(getApplicationContext(), imagePathName, DeviceInfo.mScreenWidthForPortrait, DeviceInfo.mScreenHeightForPortrait);
+                    }
+                }).map(new Func1<Bitmap, Void>() {
+                    public Void call(Bitmap bitmap) {
+                        createSingleImageFromMultipleImages(bitmap, mCounter);
+                        mCounter = mCounter++;
+                        return null;
+                    }
+                }).subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     public void call() {
                         mProgressBar.setVisibility(View.VISIBLE);
@@ -273,13 +276,16 @@ public class LoveGirlMainActivity extends BaseActivity {
     private void delayShow(long time) {
         Observable.timer(time, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Long>() {
+                    @Override
                     public void onCompleted() {
                         mTypeTextView.start(LoveGirlMainActivity.LOVE);
                     }
 
+                    @Override
                     public void onError(Throwable e) {
                     }
 
+                    @Override
                     public void onNext(Long aLong) {
                     }
                 });
@@ -306,6 +312,7 @@ public class LoveGirlMainActivity extends BaseActivity {
     private void delayDo() {
         Observable.timer(0, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Long>() {
+                    @Override
                     public void onCompleted() {
                         mWhiteSnowView.setVisibility(View.GONE);
                         mWebView.setVisibility(View.VISIBLE);

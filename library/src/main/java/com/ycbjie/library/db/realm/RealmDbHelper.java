@@ -152,7 +152,7 @@ public class RealmDbHelper {
             initRealm();
         }
         //使用findAllSort ,先findAll再result.sort无效
-        RealmResults<CacheZhLike> results = mRealm.where(CacheZhLike.class).findAllAsync("time");
+        RealmResults<CacheZhLike> results = mRealm.where(CacheZhLike.class).findAll();
         return mRealm.copyFromRealm(results);
     }
 

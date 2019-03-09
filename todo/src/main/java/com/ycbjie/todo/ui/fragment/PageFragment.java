@@ -146,10 +146,14 @@ public class PageFragment extends BaseFragment implements PageFragmentContract.V
     }
 
     public CacheTaskDetailEntity deleteTask(int index) {
-        CacheTaskDetailEntity taskDetailEntity = mList.get(index);
-        mList.remove(index);
-        adapter.notifyItemRemoved(index);
-        return taskDetailEntity;
+        if (mList.size()>index && index>=0){
+            CacheTaskDetailEntity taskDetailEntity = mList.get(index);
+            mList.remove(index);
+            adapter.notifyItemRemoved(index);
+            return taskDetailEntity;
+        }else {
+            return null;
+        }
     }
 
     private OnPageListener mListener;

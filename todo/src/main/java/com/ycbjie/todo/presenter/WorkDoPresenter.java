@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.todo.R;
@@ -162,8 +163,10 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
         } else if (requestCode == Constant.EDIT_ACTIVITY_REQUEST_CODE) {
             //编辑数据
             CacheTaskDetailEntity oldTask = fragment.deleteTask(lastPosition);
-            fragment.insertTask(task);
-            mDataDao.editTask(oldTask, task);
+            if (oldTask!=null){
+                fragment.insertTask(task);
+                mDataDao.editTask(oldTask, task);
+            }
         }
     }
 
@@ -296,11 +299,14 @@ public class WorkDoPresenter implements WorkDoContract.Presenter {
     private void putOffTaskOneDay(int position, CacheTaskDetailEntity entity) {
         PageFragment fragment = (PageFragment) mItems.get(mView.getCurrentViewPagerItem()).getFragment();
         CacheTaskDetailEntity oldEntity = fragment.deleteTask(position);
-        CacheTaskDetailEntity newEntity = oldEntity.cloneObj();
-        newEntity.setDayOfWeek(DateUtils.calNextDayDayOfWeek(oldEntity.getDayOfWeek()));
-        ((PageFragment) mItems.get(newEntity.getDayOfWeek() - 1).getFragment()).insertTask(newEntity);
-        mDataDao.insertTask(newEntity);
-        mDataDao.deleteTask(oldEntity);
+        LogUtils.e("putOffTaskOneDay"+entity.equals(oldEntity));
+        if (oldEntity!=null){
+            CacheTaskDetailEntity newEntity = oldEntity.cloneObj();
+            newEntity.setDayOfWeek(DateUtils.calNextDayDayOfWeek(oldEntity.getDayOfWeek()));
+            ((PageFragment) mItems.get(newEntity.getDayOfWeek() - 1).getFragment()).insertTask(newEntity);
+            mDataDao.deleteTask(oldEntity);
+            mDataDao.insertTask(newEntity);
+        }
     }
 
 
