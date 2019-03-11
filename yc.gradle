@@ -15,8 +15,8 @@ ext {
 
     //下面组件先不要切换，后期待完善
     isNoteApplication = false  //记事本模块开关，false:作为Lib组件存在， true:作为application存在
-    isMusicApplication = false  //音乐模块开关，false:作为Lib组件存在， true:作为application存在
     isNewsApplication = false  //新闻模块开关，false:作为Lib组件存在， true:作为application存在
+    isMusicApplication = false  //音乐模块开关，false:作为Lib组件存在， true:作为application存在
 
 
     android = [

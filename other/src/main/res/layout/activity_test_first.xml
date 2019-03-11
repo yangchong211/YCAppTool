@@ -62,6 +62,26 @@
                 android:background="@color/colorAccent"
                 android:padding="10dp"
                 android:text="5.一个int变量用volatile修饰，多线程去操作++，线程安全吗"/>
+
+
+            <TextView
+                android:id="@+id/tv_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorAccent"
+                android:padding="10dp"
+                android:text="6.静态代理"/>
+
+            <TextView
+                android:id="@+id/tv_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorAccent"
+                android:padding="10dp"
+                android:text="7.动态代理"/>
+
         </LinearLayout>
     </ScrollView>
 

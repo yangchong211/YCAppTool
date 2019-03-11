@@ -1,12 +1,10 @@
 package com.ycbjie.music.base;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.util.LongSparseArray;
 
-import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.Utils;
 import com.ns.yc.ycutilslib.activityManager.AppManager;
 import com.ycbjie.music.model.bean.AudioBean;
 import com.ycbjie.music.model.bean.DownloadMusicInfo;
@@ -44,7 +42,10 @@ public class BaseAppHelper {
 
     private final LongSparseArray<DownloadMusicInfo> mDownloadList = new LongSparseArray<>();
 
-    private BaseAppHelper() {}
+    private BaseAppHelper() {
+        mContext = Utils.getApp().getApplicationContext();
+        //这里可以做一些初始化的逻辑
+    }
 
     private static class SingletonHolder {
         @SuppressLint("StaticFieldLeak")
@@ -53,11 +54,6 @@ public class BaseAppHelper {
 
     public static BaseAppHelper get() {
         return SingletonHolder.INSTANCE;
-    }
-
-    public void init(Application application) {
-        mContext = application.getApplicationContext();
-        //这里可以做一些初始化的逻辑
     }
 
     public Context getContext() {

@@ -2,7 +2,6 @@ package com.ycbjie.library.db.realm;
 
 import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.db.cache.CacheZhLike;
-import com.ycbjie.library.db.cache.GoldManagerBean;
 import com.ycbjie.library.db.cache.ReadStateBean;
 
 import java.util.List;
@@ -179,37 +178,6 @@ public class RealmDbHelper {
     }
 
 
-    /**
-     * 更新 掘金首页管理列表
-     * @param bean
-     */
-    public void updateGoldManagerList(GoldManagerBean bean) {
-        if(mRealm == null){
-            initRealm();
-        }
-        GoldManagerBean data = mRealm.where(GoldManagerBean.class).findFirst();
-        mRealm.beginTransaction();
-        if (data != null) {
-            data.deleteFromRealm();
-        }
-        mRealm.copyToRealm(bean);
-        mRealm.commitTransaction();
-    }
-
-    /**
-     * 获取 掘金首页管理列表
-     * @return
-     */
-    public GoldManagerBean getGoldManagerList() {
-        if(mRealm == null){
-            initRealm();
-        }
-        GoldManagerBean bean = mRealm.where(GoldManagerBean.class).findFirst();
-        if (bean == null){
-            return null;
-        }
-        return mRealm.copyFromRealm(bean);
-    }
 
 
 }

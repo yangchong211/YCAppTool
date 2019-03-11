@@ -7,6 +7,10 @@ import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
 public class TestFirstActivity extends BaseActivity implements View.OnClickListener {
 
     private int a;
@@ -24,6 +28,8 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.tv_3).setOnClickListener(this);
         findViewById(R.id.tv_4).setOnClickListener(this);
         findViewById(R.id.tv_5).setOnClickListener(this);
+        findViewById(R.id.tv_6).setOnClickListener(this);
+        findViewById(R.id.tv_7).setOnClickListener(this);
     }
 
     @Override
@@ -55,8 +61,12 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
         } else if (i == R.id.tv_5) {
             test5();
         } else if (i == R.id.tv_6){
+            test6();
+        } else if (i == R.id.tv_7){
+            test7();
         }
     }
+
 
     /**
      * 测试volatile
@@ -155,6 +165,78 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
                     LogUtils.e("小杨逗比Thread-------------"+c);
                 }
             }).start();
+        }
+    }
+
+
+    /**
+     * 静态代理伪代码
+     */
+    private void test6() {
+        RealSubject subject = new RealSubject();
+        MyProxy p = new MyProxy(subject);
+        p.request();
+    }
+
+    /**
+     * 动态代理伪代码
+     */
+    private void test7() {
+        //1.创建委托对象
+        RealSubject realSubject = new RealSubject();
+        //2.创建调用处理器对象
+        ProxyHandler handler = new ProxyHandler(realSubject);
+        //3.动态生成代理对象
+        Subject proxySubject = (Subject)Proxy.newProxyInstance(
+                RealSubject.class.getClassLoader(),
+                RealSubject.class.getInterfaces(), handler);
+        //4.通过代理对象调用方法
+        proxySubject.request();
+    }
+
+    interface Subject{
+        void request();
+    }
+
+    class RealSubject implements Subject{
+        @Override
+        public void request(){
+            System.out.println("request");
+        }
+    }
+
+    /**
+     * 静态代理
+     */
+    class MyProxy implements Subject{
+        private Subject subject;
+        public MyProxy(Subject subject){
+            this.subject = subject;
+        }
+        @Override
+        public void request(){
+            System.out.println("PreProcess");
+            subject.request();
+            System.out.println("PostProcess");
+        }
+    }
+
+
+    /**
+     * 代理类的调用处理器
+     */
+    class ProxyHandler implements InvocationHandler {
+        private Subject subject;
+        public ProxyHandler(Subject subject){
+            this.subject = subject;
+        }
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            //定义预处理的工作，当然你也可以根据 method 的不同进行不同的预处理工作
+            System.out.println("====before====");
+            Object result = method.invoke(subject, args);
+            System.out.println("====after====");
+            return result;
         }
     }
 

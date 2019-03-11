@@ -3,7 +3,6 @@ package com.ns.yc.lifehelper.base.app;
 import android.util.Log;
 
 import com.ycbjie.library.base.app.LibApplication;
-import com.ycbjie.music.base.BaseAppHelper;
 
 
 /**
@@ -25,7 +24,6 @@ public class BaseApplication extends LibApplication {
     public void onCreate() {
         Log.d("Application", "onCreate");
         super.onCreate();
-        BaseAppHelper.get().init(this);
     }
 
 
