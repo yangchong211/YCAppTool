@@ -3,7 +3,6 @@ package com.ycbjie.zhihu.web.presenter;
 import android.app.Activity;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.db.cache.CacheZhLike;
 import com.ycbjie.library.db.realm.RealmDbHelper;
@@ -13,7 +12,6 @@ import com.ycbjie.zhihu.model.ZhiHuDetailExtraBean;
 import com.ycbjie.zhihu.model.ZhihuDetailBean;
 import com.ycbjie.zhihu.web.contract.WebViewAnimContract;
 
-import io.realm.Realm;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -33,7 +31,6 @@ public class WebViewAnimPresenter implements WebViewAnimContract.Presenter {
     private CompositeSubscription mSubscriptions;
     private Activity activity;
     private ZhihuDetailBean mData;
-    private Realm realm;
 
 
     public WebViewAnimPresenter(WebViewAnimContract.View androidView) {
@@ -44,7 +41,7 @@ public class WebViewAnimPresenter implements WebViewAnimContract.Presenter {
 
     @Override
     public void subscribe() {
-        initRealm();
+
     }
 
     @Override
@@ -53,9 +50,6 @@ public class WebViewAnimPresenter implements WebViewAnimContract.Presenter {
         activity = null;
     }
 
-    private void initRealm() {
-        realm = AppConfig.INSTANCE.getRealmHelper();
-    }
 
     @Override
     public void bindView(Activity activity) {

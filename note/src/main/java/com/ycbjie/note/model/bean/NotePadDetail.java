@@ -1,4 +1,4 @@
-package com.ycbjie.note.model;
+package com.ycbjie.note.model.bean;
 
 import java.io.Serializable;
 

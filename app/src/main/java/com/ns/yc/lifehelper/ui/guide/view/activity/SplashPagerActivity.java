@@ -1,20 +1,30 @@
 package com.ns.yc.lifehelper.ui.guide.view.activity;
+
 import android.content.res.TypedArray;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
+import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.model.HomeBlogEntity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 
@@ -84,7 +94,8 @@ public class SplashPagerActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        cacheFindNewsData();
+        cacheFindBottomNewsData();
     }
 
 
@@ -123,5 +134,57 @@ public class SplashPagerActivity extends BaseActivity {
         }
     }
 
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private void cacheFindNewsData() {
+        Constant.findNews.clear();
+        try {
+            InputStream in = Utils.getApp().getAssets().open("findNews.config");
+            int size = in.available();
+            byte[] buffer = new byte[size];
+            in.read(buffer);
+            String jsonStr = new String(buffer, "UTF-8");
+            JSONObject jsonObject = new JSONObject(jsonStr);
+            JSONArray jsonArray = jsonObject.optJSONArray("result");
+            if (null != jsonArray) {
+                int len = jsonArray.length();
+                for (int j = 0; j < 3; j++) {
+                    for (int i = 0; i < len; i++) {
+                        JSONObject itemJsonObject = jsonArray.getJSONObject(i);
+                        HomeBlogEntity itemEntity = new HomeBlogEntity(itemJsonObject);
+                        Constant.findNews.add(itemEntity);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private void cacheFindBottomNewsData() {
+        Constant.findBottomNews.clear();
+        try {
+            InputStream in = Utils.getApp().getAssets().open("findBottomNews.config");
+            int size = in.available();
+            byte[] buffer = new byte[size];
+            in.read(buffer);
+            String jsonStr = new String(buffer, "UTF-8");
+            JSONObject jsonObject = new JSONObject(jsonStr);
+            JSONArray jsonArray = jsonObject.optJSONArray("result");
+            if (null != jsonArray) {
+                int len = jsonArray.length();
+                for (int j = 0; j < 3; j++) {
+                    for (int i = 0; i < len; i++) {
+                        JSONObject itemJsonObject = jsonArray.getJSONObject(i);
+                        HomeBlogEntity itemEntity = new HomeBlogEntity(itemJsonObject);
+                        Constant.findBottomNews.add(itemEntity);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

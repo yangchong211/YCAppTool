@@ -252,6 +252,21 @@
     android.enableD8=false
     android.enableD8.desugaring = false
     ```
+- kotlin和realm数据库配置问题
+    - 错误配置【参考方案：https://github.com/realm/realm-java/issues/3139】
+    ```
+    apply plugin: 'com.android.application'
+    apply plugin: 'realm-android'
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+    ```
+    - 正确配置【注意：realm-android要在kotlin配置之后】
+    ```
+    apply plugin: 'com.android.application'
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+    apply plugin: 'realm-android'
+    ```
 - 出现其他编译类错误，可以直接谷歌搜索解决
 
 

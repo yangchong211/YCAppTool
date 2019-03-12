@@ -1,10 +1,8 @@
 package com.ns.yc.lifehelper.ui.me.presenter;
 
 import com.ns.yc.lifehelper.ui.me.contract.MeNewsCollectContract;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.db.realm.RealmDbHelper;
 
-import io.realm.Realm;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -20,7 +18,6 @@ public class MeNewsCollectPresenter implements MeNewsCollectContract.Presenter {
 
     private MeNewsCollectContract.View mView;
     private CompositeSubscription mSubscriptions;
-    private Realm realm;
 
 
     public MeNewsCollectPresenter(MeNewsCollectContract.View androidView) {
@@ -30,7 +27,7 @@ public class MeNewsCollectPresenter implements MeNewsCollectContract.Presenter {
 
     @Override
     public void subscribe() {
-        initRealm();
+
     }
 
     @Override
@@ -38,12 +35,6 @@ public class MeNewsCollectPresenter implements MeNewsCollectContract.Presenter {
         mSubscriptions.unsubscribe();
     }
 
-    @Override
-    public void initRealm() {
-        if(realm ==null){
-            realm = AppConfig.INSTANCE.getRealmHelper();
-        }
-    }
 
     @Override
     public void deleteLikeData(String id) {

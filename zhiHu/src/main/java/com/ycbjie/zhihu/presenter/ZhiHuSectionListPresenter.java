@@ -3,7 +3,6 @@ package com.ycbjie.zhihu.presenter;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.db.realm.RealmDbHelper;
 import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.ycbjie.zhihu.api.ZhiHuModel;
@@ -12,7 +11,6 @@ import com.ycbjie.zhihu.model.ZhiHuSectionChildBean;
 
 import java.util.List;
 
-import io.realm.Realm;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Func1;
@@ -32,7 +30,6 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
     private ZhiHuSectionListContract.View mView;
     @NonNull
     private CompositeSubscription mSubscriptions;
-    private Realm realm;
 
 
     public ZhiHuSectionListPresenter(ZhiHuSectionListContract.View homeView) {
@@ -42,14 +39,9 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
 
     @Override
     public void subscribe() {
-        initRealm();
+
     }
 
-    private void initRealm() {
-        if(realm ==null){
-            realm = AppConfig.INSTANCE.getRealmHelper();
-        }
-    }
 
     @Override
     public void unSubscribe() {
@@ -65,7 +57,6 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
                     @Override
                     public ZhiHuSectionChildBean call(ZhiHuSectionChildBean zhiHuSectionChildBean) {
                         List<ZhiHuSectionChildBean.StoriesBean> list = zhiHuSectionChildBean.getStories();
-                        initRealm();
                         for(ZhiHuSectionChildBean.StoriesBean item : list) {
                             item.setReadState(RealmDbHelper.getInstance().queryNewsId(item.getId()));
                         }
@@ -102,7 +93,6 @@ public class ZhiHuSectionListPresenter implements ZhiHuSectionListContract.Prese
 
     @Override
     public void insertReadToDB(int id) {
-        initRealm();
         RealmDbHelper.getInstance().insertNewsId(id);
     }
 

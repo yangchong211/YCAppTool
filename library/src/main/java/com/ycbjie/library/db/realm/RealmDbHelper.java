@@ -1,6 +1,5 @@
 package com.ycbjie.library.db.realm;
 
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.db.cache.CacheZhLike;
 import com.ycbjie.library.db.cache.ReadStateBean;
 
@@ -23,16 +22,9 @@ public class RealmDbHelper {
 
 
     private static RealmDbHelper mRealmDbHelper;
-    private Realm mRealm;
 
     private RealmDbHelper() {
-        initRealm();
-    }
 
-    private void initRealm() {
-        if(mRealm ==null){
-            mRealm = AppConfig.INSTANCE.getRealmHelper();
-        }
     }
 
     /**
@@ -67,9 +59,7 @@ public class RealmDbHelper {
      * 使用@PrimaryKey注解后copyToRealm需要替换为copyToRealmOrUpdate
      */
     public void insertNewsId(int id) {
-        if(mRealm == null){
-            initRealm();
-        }
+        Realm mRealm = Realm.getDefaultInstance();
         ReadStateBean bean = new ReadStateBean();
         bean.setId(id);
         mRealm.beginTransaction();
@@ -83,9 +73,7 @@ public class RealmDbHelper {
      * @return
      */
     public boolean queryNewsId(int id) {
-        if(mRealm == null){
-            initRealm();
-        }
+        Realm mRealm = Realm.getDefaultInstance();
         RealmResults<ReadStateBean> results = mRealm.where(ReadStateBean.class).findAll();
         for(ReadStateBean item : results) {
             if(item.getId() == id) {
@@ -101,9 +89,7 @@ public class RealmDbHelper {
      * @param bean
      */
     public void insertLikeBean(CacheZhLike bean) {
-        if(mRealm == null){
-            initRealm();
-        }
+        Realm mRealm = Realm.getDefaultInstance();
         mRealm.beginTransaction();
         mRealm.copyToRealmOrUpdate(bean);
         mRealm.commitTransaction();
@@ -114,9 +100,7 @@ public class RealmDbHelper {
      * @param id
      */
     public void deleteLikeBean(String id) {
-        if(mRealm == null){
-            initRealm();
-        }
+        Realm mRealm = Realm.getDefaultInstance();
         CacheZhLike data = mRealm.where(CacheZhLike.class)
                 .equalTo("id",id)
                 .findFirst();
@@ -133,9 +117,7 @@ public class RealmDbHelper {
      * @return
      */
     public boolean queryLikeId(String id) {
-        if(mRealm == null){
-            initRealm();
-        }
+        Realm mRealm = Realm.getDefaultInstance();
         RealmResults<CacheZhLike> results = mRealm.where(CacheZhLike.class).findAll();
         for(CacheZhLike item : results) {
             if(item.getId().equals(id)) {
@@ -147,9 +129,7 @@ public class RealmDbHelper {
 
 
     public List<CacheZhLike> getLikeList() {
-        if(mRealm == null){
-            initRealm();
-        }
+        Realm mRealm = Realm.getDefaultInstance();
         //使用findAllSort ,先findAll再result.sort无效
         RealmResults<CacheZhLike> results = mRealm.where(CacheZhLike.class).findAll();
         return mRealm.copyFromRealm(results);
@@ -162,9 +142,7 @@ public class RealmDbHelper {
      * @param isPlus
      */
     public void changeLikeTime(String id ,long time, boolean isPlus) {
-        if(mRealm == null){
-            initRealm();
-        }
+        Realm mRealm = Realm.getDefaultInstance();
         CacheZhLike bean = mRealm.where(CacheZhLike.class)
                 .equalTo("id", id)
                 .findFirst();

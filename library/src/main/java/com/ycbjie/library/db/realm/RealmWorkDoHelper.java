@@ -3,7 +3,6 @@ package com.ycbjie.library.db.realm;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.db.cache.CacheTaskDetailEntity;
 import com.ycbjie.library.utils.time.DateUtils;
@@ -16,18 +15,10 @@ import io.realm.RealmResults;
 public class RealmWorkDoHelper {
 
     private static volatile RealmWorkDoHelper mDataDao;
-    private Realm realm;
 
     private RealmWorkDoHelper() {
-        initRealm();
-    }
 
-    private void initRealm() {
-        if(realm==null){
-            realm = AppConfig.INSTANCE.getRealmHelper();
-        }
     }
-
 
     public static RealmWorkDoHelper getInstance() {
         if (mDataDao == null) {
@@ -45,6 +36,7 @@ public class RealmWorkDoHelper {
 
 
     public void insertTask(final CacheTaskDetailEntity taskDetailEntity) {
+        Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
@@ -54,12 +46,14 @@ public class RealmWorkDoHelper {
     }
 
     public RealmResults<CacheTaskDetailEntity> findAllTask() {
+        Realm realm = Realm.getDefaultInstance();
         return realm.where(CacheTaskDetailEntity.class)
                 .findAll();
     }
 
 
     public RealmResults<CacheTaskDetailEntity> findAllTask(int dayOfWeek) {
+        Realm realm = Realm.getDefaultInstance();
         return realm
                 .where(CacheTaskDetailEntity.class)
                 .equalTo("dayOfWeek", dayOfWeek)
@@ -67,6 +61,7 @@ public class RealmWorkDoHelper {
     }
 
     public RealmResults<CacheTaskDetailEntity> findUnFinishedTasks(int dayOfWeek) {
+        Realm realm = Realm.getDefaultInstance();
         return realm
                 .where(CacheTaskDetailEntity.class)
                 .equalTo("dayOfWeek", dayOfWeek)
@@ -76,6 +71,7 @@ public class RealmWorkDoHelper {
 
 
     public RealmResults<CacheTaskDetailEntity> findAllTaskOfThisWeekFromSunday() {
+        Realm realm = Realm.getDefaultInstance();
         long sundayTimeMillisOfWeek = DateUtils.getFirstSundayTimeMillisOfWeek();
         return realm
                 .where(CacheTaskDetailEntity.class)
@@ -85,6 +81,7 @@ public class RealmWorkDoHelper {
 
 
     public void editTask(final CacheTaskDetailEntity oldTask, final CacheTaskDetailEntity newTask) {
+        Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(@NonNull Realm realm) {
@@ -95,6 +92,7 @@ public class RealmWorkDoHelper {
 
 
     public void deleteTask(final CacheTaskDetailEntity entity) {
+        Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
@@ -119,6 +117,7 @@ public class RealmWorkDoHelper {
         if (TextUtils.isEmpty(like)) {
             throw new IllegalArgumentException("str is null");
         }
+        Realm realm = Realm.getDefaultInstance();
         return realm.where(CacheTaskDetailEntity.class)
                 .contains("content", like)
                 .or()
@@ -128,6 +127,7 @@ public class RealmWorkDoHelper {
 
 
     public void switchTaksState(final CacheTaskDetailEntity entity, final int state) {
+        Realm realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {

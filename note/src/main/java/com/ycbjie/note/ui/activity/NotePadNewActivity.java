@@ -29,9 +29,8 @@ import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.ns.yc.yccustomtextlib.hyper.HyperTextEditor;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.db.cache.CacheNotePad;
+import com.ycbjie.note.model.cache.CacheNotePad;
 import com.ycbjie.library.inter.listener.OnDatePickListener;
 import com.ycbjie.library.inter.listener.OnTimePickListener;
 import com.ycbjie.library.loader.GlideImageLoader;
@@ -39,7 +38,7 @@ import com.ycbjie.library.utils.AppUtils;
 import com.ycbjie.library.utils.image.BitmapUtils;
 import com.ycbjie.library.utils.time.TimerUtils;
 import com.ycbjie.note.R;
-import com.ycbjie.note.model.NotePadDetail;
+import com.ycbjie.note.model.bean.NotePadDetail;
 import com.ycbjie.note.receiver.ReminderReceiver;
 import com.ycbjie.note.ui.fragment.DatePickerFragment;
 import com.ycbjie.note.ui.fragment.TimePickerFragment;
@@ -143,17 +142,10 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
 
         initIntentData();
         initToolBar();
-        initRealm();
         initImagePicker();
         initAlarmManager();
     }
 
-
-    private void initRealm() {
-        if (realm == null) {
-            realm = AppConfig.INSTANCE.getRealmHelper();
-        }
-    }
 
 
     private void initToolBar() {
@@ -520,7 +512,7 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
      * 插入一条笔记
      */
     private void insertNewDataRealm(boolean isBackground, String title, String type, String time, String content) {
-        initRealm();
+        Realm realm = Realm.getDefaultInstance();
         if (realm != null && realm.where(CacheNotePad.class).findAll() != null) {
             cacheNotePads = realm.where(CacheNotePad.class).findAll();
         } else {
@@ -570,7 +562,7 @@ public class NotePadNewActivity extends BaseActivity implements View.OnClickList
      * 编辑一条笔记
      */
     private void editOldDataRealm(boolean isBackground, final String title, final String type, final String time, final String content) {
-        initRealm();
+        Realm realm = Realm.getDefaultInstance();
         RealmResults<CacheNotePad> notePads =
                 realm.where(CacheNotePad.class)
                         .equalTo("id", this.id)

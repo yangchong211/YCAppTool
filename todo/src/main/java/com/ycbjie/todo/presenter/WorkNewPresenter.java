@@ -2,7 +2,6 @@ package com.ycbjie.todo.presenter;
 
 import android.content.Context;
 
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.todo.contract.WorkNewContract;
 
 import io.realm.Realm;
@@ -42,19 +41,13 @@ public class WorkNewPresenter implements WorkNewContract.Presenter {
 
     @Override
     public void subscribe() {
-        initRealm();
+
     }
 
     @Override
     public void unSubscribe() {
         mSubscriptions.clear();
         mContext = null;
-    }
-
-    private void initRealm() {
-        if (realm == null) {
-            realm = AppConfig.INSTANCE.getRealmHelper();
-        }
     }
 
 

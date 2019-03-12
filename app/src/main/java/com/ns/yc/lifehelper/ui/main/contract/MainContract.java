@@ -27,7 +27,6 @@ public interface MainContract {
     interface Presenter extends BasePresenter {
         ArrayList<CustomTabEntity> getTabEntity();
         void getUpdate();
-        void locationPermissionsTask();
     }
 
 
