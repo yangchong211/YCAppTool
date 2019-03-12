@@ -3,7 +3,6 @@ package com.ycbjie.zhihu.presenter;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.db.realm.RealmDbHelper;
 import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.ycbjie.zhihu.api.ZhiHuModel;
@@ -12,7 +11,6 @@ import com.ycbjie.zhihu.model.ZhiHuThemeChildBean;
 
 import java.util.List;
 
-import io.realm.Realm;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Func1;
@@ -32,7 +30,6 @@ public class ZhiHuThemeListPresenter implements ZhiHuThemeListContract.Presenter
     private ZhiHuThemeListContract.View mView;
     @NonNull
     private CompositeSubscription mSubscriptions;
-    private Realm realm;
 
 
     public ZhiHuThemeListPresenter(ZhiHuThemeListContract.View homeView) {
@@ -43,15 +40,8 @@ public class ZhiHuThemeListPresenter implements ZhiHuThemeListContract.Presenter
 
     @Override
     public void subscribe() {
-        initRealm();
     }
 
-
-    private void initRealm() {
-        if(realm ==null){
-            realm = AppConfig.INSTANCE.getRealmHelper();
-        }
-    }
 
 
     @Override
@@ -106,7 +96,6 @@ public class ZhiHuThemeListPresenter implements ZhiHuThemeListContract.Presenter
 
     @Override
     public void insertReadToDB(int id) {
-        initRealm();
         RealmDbHelper.getInstance().insertNewsId(id);
     }
 

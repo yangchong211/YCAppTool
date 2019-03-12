@@ -20,7 +20,6 @@ public interface GuideContract {
     }
 
     interface Presenter extends BasePresenter {
-        void cacheHomeNewsData();
         void cacheFindNewsData();
         void cacheFindBottomNewsData();
         void cacheHomePileData();

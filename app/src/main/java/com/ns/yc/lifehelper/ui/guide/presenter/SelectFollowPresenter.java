@@ -5,9 +5,8 @@ import android.app.Activity;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.model.bean.SelectPoint;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
-import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.db.cache.SelectFollow;
-import com.ycbjie.library.db.cache.SelectUnFollow;
+import com.ns.yc.lifehelper.model.cache.SelectFollow;
+import com.ns.yc.lifehelper.model.cache.SelectUnFollow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +29,6 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
 
     private SelectFollowContract.View mView;
     private CompositeSubscription mSubscriptions;
-    private Realm realm;
     private RealmResults<SelectUnFollow> selectUnFollows;
     private List<SelectPoint> list = new ArrayList<>();
     private int del;
@@ -43,15 +41,9 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
 
     @Override
     public void subscribe() {
-        initRealm();
         addUnSelectData();
     }
 
-    private void initRealm() {
-        if(realm ==null){
-            realm = AppConfig.INSTANCE.getRealmHelper();
-        }
-    }
 
     @Override
     public void unSubscribe() {
@@ -59,6 +51,7 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
     }
 
     private void addUnSelectData() {
+        Realm realm = Realm.getDefaultInstance();
         if(realm.where(SelectUnFollow.class).findAll()!=null){
             selectUnFollows = realm.where(SelectUnFollow.class).findAll();
         }else {
@@ -94,7 +87,7 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
 
     @Override
     public void addSelectToRealm(final Integer[] selectedIndices) {
-        initRealm();
+        Realm realm = Realm.getDefaultInstance();
         if(realm.where(SelectUnFollow.class).findAll()!=null){
             selectUnFollows = realm.where(SelectUnFollow.class).findAll();
         }else {

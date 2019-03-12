@@ -18,10 +18,9 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.db.cache.CacheNotePad;
-import com.ycbjie.note.model.NotePadDetail;
+import com.ycbjie.note.model.cache.CacheNotePad;
+import com.ycbjie.note.model.bean.NotePadDetail;
 import com.ycbjie.note.ui.activity.NotePadDetailActivity;
 import com.ycbjie.note.ui.activity.NotePadNewActivity;
 import com.ycbjie.note.ui.adapter.NotePadListAdapter;
@@ -53,17 +52,10 @@ public class NotePadActivity extends BaseActivity implements View.OnClickListene
     Toolbar toolbar;
     YCRefreshView recyclerView;
     private NotePadListAdapter adapter;
-    private Realm realm;
     private RealmResults<CacheNotePad> cacheNotePads;
     private List<NotePadDetail> list = new ArrayList<>();
+    private Realm realm;
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        /*if(realm!=null){
-            realm.close();
-        }*/
-    }
 
     @Override
     protected void onResume() {
@@ -103,11 +95,6 @@ public class NotePadActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    private void initRealm() {
-        if(realm==null){
-            realm = AppConfig.INSTANCE.getRealmHelper();
-        }
-    }
 
     @Override
     public void initListener() {
@@ -126,6 +113,7 @@ public class NotePadActivity extends BaseActivity implements View.OnClickListene
                 }
             }
         });
+        realm = Realm.getDefaultInstance();
         adapter.setOnItemLongClickListener(position -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(NotePadActivity.this);
             builder.setTitle("提示");
@@ -206,7 +194,7 @@ public class NotePadActivity extends BaseActivity implements View.OnClickListene
      * 从数据库中读取数据
      */
     private void getRealmData() {
-        initRealm();
+        Realm realm = Realm.getDefaultInstance();
         if(realm !=null && realm.where(CacheNotePad.class).findAll()!=null){
             cacheNotePads = realm.where(CacheNotePad.class).findAll();
         }else {

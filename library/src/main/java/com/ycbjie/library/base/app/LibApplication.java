@@ -9,6 +9,10 @@ import android.util.Log;
 import com.bumptech.glide.Glide;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.constant.Constant;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 /**
  * <pre>
@@ -24,6 +28,7 @@ public class LibApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        initRealm(this);
         AppConfig.INSTANCE.initConfig(this);
         //在子线程中初始化
         InitializeService.start(this);
@@ -42,7 +47,7 @@ public class LibApplication extends Application {
     public void onTerminate() {
         Log.d("Application", "onTerminate");
         super.onTerminate();
-        AppConfig.INSTANCE.closeRealm();
+        Realm.getDefaultInstance().close();
         AppConfig.INSTANCE.closeExecutor();
         ARouterUtils.destroy();
     }
@@ -83,6 +88,22 @@ public class LibApplication extends Application {
         super.onConfigurationChanged(newConfig);
     }
 
+
+    /**
+     * 初始化数据库
+     * @param application               application
+     */
+    public void initRealm(Application application){
+        Realm.init(application);
+        RealmConfiguration realmConfig = new RealmConfiguration
+                .Builder()
+                .name(Constant.REALM_NAME)
+                .schemaVersion(Constant.REALM_VERSION)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.getInstance(realmConfig);
+        Realm.setDefaultConfiguration(realmConfig);
+    }
 
 
 }

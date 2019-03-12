@@ -15,14 +15,17 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.db.cache.CacheHomeNews;
 import com.ycbjie.library.model.HomeBlogEntity;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.Realm;
-import io.realm.RealmResults;
+import cn.ycbjie.ycthreadpoollib.PoolThread;
+import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;
 import rx.subscriptions.CompositeSubscription;
 
 
@@ -42,7 +45,6 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     private HomeFragmentContract.View mHomeView;
     @NonNull
     private CompositeSubscription mSubscriptions;
-    private Realm realm;
     private MainActivity activity;
 
     public HomeFragmentPresenter(HomeFragmentContract.View homeView) {
@@ -53,7 +55,6 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
     @Override
     public void subscribe() {
-        initRealm();
     }
 
 
@@ -74,35 +75,50 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     }
 
 
-    private void initRealm() {
-        if(realm ==null){
-            realm = AppConfig.INSTANCE.getRealmHelper();
-        }
-    }
-
 
     @Override
     public void getHomeNewsData() {
-        initRealm();
-        RealmResults<CacheHomeNews> cacheHomeNewses;
-        if(realm.where(CacheHomeNews.class).findAll()!=null){
-            cacheHomeNewses = realm.where(CacheHomeNews.class).findAll();
-        }else {
-            return;
-        }
-        List<HomeBlogEntity> list = new ArrayList<>();
-        for(int a=0 ; a<cacheHomeNewses.size() ; a++){
-            HomeBlogEntity homeNews = new HomeBlogEntity();
-            homeNews.setUrl(cacheHomeNewses.get(a).getUrl());
-            homeNews.setAuthor(cacheHomeNewses.get(a).getAuthor());
-            homeNews.setImageUrl(cacheHomeNewses.get(a).getImageUrl());
-            homeNews.setLogo(cacheHomeNewses.get(a).getLogo());
-            homeNews.setSummary(cacheHomeNewses.get(a).getSummary());
-            homeNews.setTime(cacheHomeNewses.get(a).getTime());
-            homeNews.setTitle(cacheHomeNewses.get(a).getTitle());
-            list.add(homeNews);
-        }
-        mHomeView.setNewsData(list);
+        PoolThread executor = AppConfig.INSTANCE.getExecutor();
+        executor.async(() -> {
+            ArrayList<HomeBlogEntity> blog = new ArrayList<>();
+            try {
+                InputStream in = Utils.getApp().getAssets().open("ycBlog.config");
+                int size = in.available();
+                byte[] buffer = new byte[size];
+                in.read(buffer);
+                String jsonStr = new String(buffer, "UTF-8");
+                JSONObject jsonObject = new JSONObject(jsonStr);
+                JSONArray jsonArray = jsonObject.optJSONArray("result");
+                if (null != jsonArray) {
+                    int len = jsonArray.length();
+                    for (int j = 0; j < 3; j++) {
+                        for (int i = 0; i < len; i++) {
+                            JSONObject itemJsonObject = jsonArray.getJSONObject(i);
+                            HomeBlogEntity blogEntity = new HomeBlogEntity(itemJsonObject);
+                            blog.add(blogEntity);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return blog;
+        }, new AsyncCallback<ArrayList<HomeBlogEntity>>() {
+            @Override
+            public void onSuccess(ArrayList<HomeBlogEntity> homeBlogEntities) {
+                mHomeView.setNewsData(homeBlogEntities);
+            }
+
+            @Override
+            public void onFailed(Throwable t) {
+
+            }
+
+            @Override
+            public void onStart(String threadName) {
+
+            }
+        });
     }
 
 

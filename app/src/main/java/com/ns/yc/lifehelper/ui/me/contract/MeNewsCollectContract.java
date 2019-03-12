@@ -26,7 +26,6 @@ public interface MeNewsCollectContract {
     //Presenter控制器
     interface Presenter extends BasePresenter {
         void getLikeData();
-        void initRealm();
         void deleteLikeData(String id);
         void changeLikeTime(String id, long time, boolean isPlus);
     }

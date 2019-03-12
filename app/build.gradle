@@ -1,7 +1,5 @@
 //设置app空壳始终是application模式
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]

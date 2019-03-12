@@ -74,7 +74,6 @@ public class MeNewsCollectFragment extends BaseLazyFragment implements MeNewsCol
     @Override
     public void initView(View view) {
         recyclerView = view.findViewById(R.id.recyclerView);
-        presenter.initRealm();
         initRecycleView();
         initCallBack();
     }

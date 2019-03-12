@@ -1,4 +1,4 @@
-package com.ycbjie.library.db.cache;
+package com.ns.yc.lifehelper.model.cache;
 
 import io.realm.RealmObject;
 

@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class Constant {
 
-    public static final int REALM_VERSION = 2;
+    public static final int REALM_VERSION = 1;
     public static final String REALM_NAME = "life";
     public static final String SP_NAME = "yc";
     public static final String EXTERNAL_STORAGE_DIRECTORY =

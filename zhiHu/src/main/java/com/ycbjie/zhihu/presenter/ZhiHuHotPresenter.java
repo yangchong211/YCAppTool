@@ -3,7 +3,6 @@ package com.ycbjie.zhihu.presenter;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.db.realm.RealmDbHelper;
 import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.ycbjie.zhihu.api.ZhiHuModel;
@@ -12,7 +11,6 @@ import com.ycbjie.zhihu.model.ZhiHuHotBean;
 
 import java.util.List;
 
-import io.realm.Realm;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.functions.Func1;
@@ -32,7 +30,6 @@ public class ZhiHuHotPresenter implements ZhiHuHotContract.Presenter {
     private ZhiHuHotContract.View mView;
     @NonNull
     private CompositeSubscription mSubscriptions;
-    private Realm realm;
 
 
     public ZhiHuHotPresenter(ZhiHuHotContract.View homeView) {
@@ -42,14 +39,9 @@ public class ZhiHuHotPresenter implements ZhiHuHotContract.Presenter {
 
     @Override
     public void subscribe() {
-        initRealm();
+
     }
 
-    private void initRealm() {
-        if(realm ==null){
-            realm = AppConfig.INSTANCE.getRealmHelper();
-        }
-    }
 
     @Override
     public void unSubscribe() {
@@ -58,6 +50,7 @@ public class ZhiHuHotPresenter implements ZhiHuHotContract.Presenter {
 
     @Override
     public void getData() {
+
         ZhiHuModel model = ZhiHuModel.getInstance();
         Subscription rxSubscription = model.getHotList()
                 .compose(RxUtil.<ZhiHuHotBean>rxSchedulerHelper())
@@ -65,7 +58,6 @@ public class ZhiHuHotPresenter implements ZhiHuHotContract.Presenter {
                     @Override
                     public ZhiHuHotBean call(ZhiHuHotBean zhiHuHotBean) {
                         List<ZhiHuHotBean.RecentBean> list = zhiHuHotBean.getRecent();
-                        initRealm();
                         for(ZhiHuHotBean.RecentBean item : list) {
                             item.setReadState(RealmDbHelper.getInstance().queryNewsId(item.getNews_id()));
                         }
@@ -101,7 +93,6 @@ public class ZhiHuHotPresenter implements ZhiHuHotContract.Presenter {
 
     @Override
     public void insertReadToDB(int id) {
-        initRealm();
         RealmDbHelper.getInstance().insertNewsId(id);
     }
 }

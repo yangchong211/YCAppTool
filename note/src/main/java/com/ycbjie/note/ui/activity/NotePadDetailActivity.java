@@ -15,7 +15,7 @@ import com.ycbjie.note.R;
 import com.ycbjie.library.utils.DoShareUtils;
 import com.ns.yc.yccustomtextlib.hyper.HyperTextView;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.note.model.NotePadDetail;
+import com.ycbjie.note.model.bean.NotePadDetail;
 import com.ycbjie.note.utils.SDCardUtils;
 import com.ycbjie.note.utils.StringUtils;
 

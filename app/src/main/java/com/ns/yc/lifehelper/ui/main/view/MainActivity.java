@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -59,9 +58,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import pub.devrel.easypermissions.AppSettingsDialog;
-import pub.devrel.easypermissions.EasyPermissions;
-
 
 /**
  * <pre>
@@ -73,7 +69,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * </pre>
  */
 public class MainActivity extends BaseActivity<MainPresenter> implements View.OnClickListener
-        , EasyPermissions.PermissionCallbacks, MainContract.View {
+        , MainContract.View {
 
     private DrawerLayout mDrawerLayout;
     private NoSlidingViewPager mVpHome;
@@ -237,7 +233,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         initTabLayout();
         initViewPager();
         initNav();
-        initPermissions();
         LoopRequestService.startLoopService(this);
         startTimer();
     }
@@ -655,65 +650,5 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         return super.onKeyDown(keyCode, event);
     }
 
-
-    /**
-     * 初始化权限
-     */
-    private void initPermissions() {
-        //权限
-        presenter.locationPermissionsTask();
-    }
-
-    /**
-     * 将结果转发到EasyPermissions
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        // 将结果转发到EasyPermissions
-        EasyPermissions.onRequestPermissionsResult(requestCode,
-                permissions, grantResults, MainActivity.this);
-    }
-
-    /**
-     * 某些权限已被授予
-     */
-    @Override
-    public void onPermissionsGranted(int requestCode, List<String> perms) {
-        //某些权限已被授予
-        LogUtils.d("权限", "onPermissionsGranted:" + requestCode + ":" + perms.size());
-    }
-
-    /**
-     * 某些权限已被拒绝
-     */
-    @Override
-    public void onPermissionsDenied(int requestCode, List<String> perms) {
-        //某些权限已被拒绝
-        LogUtils.d("权限", "onPermissionsDenied:" + requestCode + ":" + perms.size());
-        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
-        // This will display a dialog directing them to enable the permission in app settings.
-        if (EasyPermissions.somePermissionPermanentlyDenied(MainActivity.this, perms)) {
-            AppSettingsDialog.Builder builder = new AppSettingsDialog.Builder(MainActivity.this);
-            builder.setTitle("允许权限")
-                    .setRationale("没有该权限，此应用程序部分功能可能无法正常工作。打开应用设置界面以修改应用权限")
-                    .setPositiveButton("去设置")
-                    .setNegativeButton("取消")
-                    .setRequestCode(124)
-                    .build()
-                    .show();
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
-            // Do something after user returned from app settings screen, like showing a Toast.
-            // 当用户从应用设置界面返回的时候，可以做一些事情，比如弹出一个土司。
-            LogUtils.d("权限", "onPermissionsDenied:" + requestCode + ":");
-        }
-    }
 
 }

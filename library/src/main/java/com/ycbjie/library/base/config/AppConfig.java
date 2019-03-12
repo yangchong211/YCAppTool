@@ -38,13 +38,11 @@ public enum AppConfig {
     private String bannerUrl;
     private boolean isNight;
     private PoolThread executor;
-    private Realm realm;
 
 
     public void initConfig(Application application){
         Utils.init(application);
         initThreadPool();
-        initRealm(application);
         ToastUtils.init(application);
         BaseLifecycleCallback.getInstance().init(application);
         initARouter();
@@ -86,37 +84,6 @@ public enum AppConfig {
     public PoolThread getExecutor(){
         initThreadPool();
         return executor;
-    }
-
-    /**
-     * 初始化数据库
-     * @param application
-     */
-    public void initRealm(Application application){
-        Realm.init(application);
-        RealmConfiguration realmConfig = new RealmConfiguration
-                .Builder()
-                .name(Constant.REALM_NAME)
-                .schemaVersion(Constant.REALM_VERSION)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        realm = Realm.getInstance(realmConfig);
-        //Realm.setDefaultConfiguration(realmConfig);
-    }
-
-    public void closeRealm(){
-        if(realm!=null){
-            realm.close();
-            realm = null;
-        }
-    }
-
-    /**
-     * 获取Realm数据库对象
-     * @return              realm对象
-     */
-    public Realm getRealmHelper() {
-        return realm;
     }
 
     public void closeExecutor(){

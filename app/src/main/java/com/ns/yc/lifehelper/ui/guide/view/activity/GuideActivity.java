@@ -101,7 +101,6 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements
 
     @Override
     public void initData() {
-        presenter.cacheHomeNewsData();
         presenter.cacheFindNewsData();
         presenter.cacheFindBottomNewsData();
         presenter.cacheHomePileData();

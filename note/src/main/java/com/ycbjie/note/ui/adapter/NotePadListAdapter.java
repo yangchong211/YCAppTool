@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ycbjie.note.R;
-import com.ycbjie.note.model.NotePadDetail;
+import com.ycbjie.note.model.bean.NotePadDetail;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;

@@ -1,6 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'realm-android'
 
 
@@ -150,7 +148,6 @@ dependencies {
     api rootProject.ext.dependencies["YCThreadPoolLib"]
     api rootProject.ext.dependencies["notificationLib"]
     api files('libs/tbs_sdk_thirdapp_v3.2.0.jar')
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
 }

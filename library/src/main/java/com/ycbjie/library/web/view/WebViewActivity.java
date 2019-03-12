@@ -52,7 +52,6 @@ import com.ycbjie.library.utils.DoShareUtils;
 import com.ns.yc.ycutilslib.webView.ScrollWebView;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 
-import org.jetbrains.annotations.NotNull;
 
 /**
  * <pre>
@@ -133,7 +132,7 @@ public class WebViewActivity extends BaseActivity {
     }
 
 
-    public static void lunch(Activity activity, @NotNull String url, @NotNull String title) {
+    public static void lunch(Activity activity, String url, String title) {
         if(activity!=null){
             Intent intent = new Intent(activity, WebViewActivity.class);
             intent.putExtra(Constant.URL, url);
