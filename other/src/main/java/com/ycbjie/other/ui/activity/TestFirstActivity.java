@@ -173,8 +173,11 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
      * 静态代理伪代码
      */
     private void test6() {
+        //1.创建委托对象
         RealSubject subject = new RealSubject();
+        //2.创建调用处理器对象
         MyProxy p = new MyProxy(subject);
+        //3.通过代理对象调用方法
         p.request();
     }
 
@@ -239,5 +242,7 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
             return result;
         }
     }
+
+
 
 }

@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/activity_book_detail_content"/>
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="270dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
@@ -23,6 +22,14 @@
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <!--app:contentScrim设置折叠时工具栏布局的颜色-->
+            <!--app:statusBarScrim设置折叠时状态栏的颜色-->
+
+            <!--app:layout_collapseMode折叠模式-->
+            <!--off：这个是默认属性，布局将正常显示，没有折叠的行为。-->
+            <!--pin：CollapsingToolbarLayout折叠后，此布局将固定在顶部。-->
+            <!--parallax：CollapsingToolbarLayout折叠时，此布局也会有视差折叠效果。-->
+            <!--app:layout_collapseParallaxMultiplier设置视差滚动因子，值为：0~1-->
 
             <!--封面图片-->
             <ImageView
@@ -82,5 +89,7 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/activity_book_detail_content"/>
 
 </android.support.design.widget.CoordinatorLayout>

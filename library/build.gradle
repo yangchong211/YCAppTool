@@ -91,6 +91,7 @@ dependencies {
         exclude module: "support-annotations"
     }
     api rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["dynamic"]
     api rootProject.ext.dependencies["palette"]
     api rootProject.ext.dependencies["cardview-v7"]
     api rootProject.ext.dependencies["support-v4"]

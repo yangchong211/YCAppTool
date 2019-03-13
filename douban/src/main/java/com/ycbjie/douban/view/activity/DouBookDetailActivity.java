@@ -20,6 +20,7 @@ import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.weight.CustomScrollView;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -55,7 +56,7 @@ public class DouBookDetailActivity extends BaseActivity {
     private Constant.CollapsingToolbarLayoutState state;
     private String id;
     private String alt;
-
+    private CustomScrollView scrollView;
 
     @Override
     protected void onDestroy() {
@@ -91,6 +92,7 @@ public class DouBookDetailActivity extends BaseActivity {
         toolbar = findViewById(R.id.toolbar);
         tvName = findViewById(R.id.tv_name);
         tvCasts = findViewById(R.id.tv_casts);
+        scrollView = findViewById(R.id.scrollView);
     }
 
     @SuppressLint("SetTextI18n")
@@ -137,6 +139,21 @@ public class DouBookDetailActivity extends BaseActivity {
                     state = Constant.CollapsingToolbarLayoutState.INTERNEDIATE;
                 }
                 toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
+            }
+        });
+        scrollView.setListener(new CustomScrollView.ScrollListener() {
+            @Override
+            public int onScrollListener() {
+                switch (state){
+                    case INTERNEDIATE:
+                        return CustomScrollView.STATES.INTERMEDIATE;
+                    case COLLAPSED:
+                        return CustomScrollView.STATES.COLLAPSED;
+                    case EXPANDED:
+                        return CustomScrollView.STATES.EXPANDED;
+                    default:
+                        return CustomScrollView.STATES.INTERMEDIATE;
+                }
             }
         });
     }

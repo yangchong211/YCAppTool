@@ -20,6 +20,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.tv_4).setOnClickListener(this);
         findViewById(R.id.tv_5).setOnClickListener(this);
         findViewById(R.id.tv_6).setOnClickListener(this);
+        findViewById(R.id.tv_7).setOnClickListener(this);
     }
 
     @Override
@@ -37,20 +38,18 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         int i = v.getId();
         if (i == R.id.tv_1) {
             startActivity(new Intent(this, MeBannerActivity.class));
-
         } else if (i == R.id.tv_2) {
             startActivity(new Intent(this, BannerViewActivity.class));
-
         } else if (i == R.id.tv_3) {
             startActivity(new Intent(this, ImageGalleryActivity.class));
-
         } else if (i == R.id.tv_4) {
             startActivity(new Intent(this, ProgressThirdActivity.class));
-
         } else if (i == R.id.tv_5) {
             startActivity(new Intent(this, ZoomLargeImageActivity.class));
         } else if (i == R.id.tv_6){
             startActivity(new Intent(this, TestFirstActivity.class));
+        } else if (i == R.id.tv_7){
+            startActivity(new Intent(this, ScrollActivity.class));
         }
     }
 }

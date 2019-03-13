@@ -14,13 +14,14 @@ import java.util.List;
 
 
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/11/21
- * 描    述：数据页面
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/11/21
+ *     desc  : 数据页面，使用阿里巴巴Vlayout框架
+ *     revise: v1.4 17年6月8日
+ *             v1.5 17年10月3日修改
+ * </pre>
  */
 public interface FindFragmentContract {
 

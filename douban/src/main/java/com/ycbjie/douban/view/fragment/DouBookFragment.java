@@ -17,7 +17,7 @@ import com.ycbjie.douban.view.activity.DouBookActivity;
 import com.ycbjie.douban.view.activity.DouBookDetailActivity;
 import com.ycbjie.douban.view.adapter.DouBookAdapter;
 import com.ycbjie.library.base.mvp.BaseLazyFragment;
-import com.ycbjie.library.weight.manager.FullyGridLayoutManager;
+import com.ycbjie.library.weight.FullyGridLayoutManager;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

@@ -65,4 +65,14 @@
         android:padding="10dp"
         android:text="测试一些功能"/>
 
+
+    <TextView
+        android:id="@+id/tv_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorAccent"
+        android:padding="10dp"
+        android:text="仿网易考拉我的页面"/>
+
 </LinearLayout>

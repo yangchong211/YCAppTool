@@ -3,7 +3,7 @@
     package="com.ycbjie.other" >
 
     <application
-        android:name="com.ycbjie.other.OtherApp"
+        android:name="com.ycbjie.other.app.OtherApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_other_name"
@@ -33,6 +33,8 @@
         <activity android:name="com.ycbjie.other.ui.activity.ProgressThirdActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.MonkeyGameActivity"/>
         <activity android:name=".ui.activity.TestFirstActivity"/>
+        <activity android:name=".ui.activity.ScrollActivity"/>
+
     </application>
 
 

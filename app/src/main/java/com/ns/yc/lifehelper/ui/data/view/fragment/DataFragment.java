@@ -64,7 +64,6 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     public void onAttach(Context context) {
         super.onAttach(context);
         activity = (MainActivity) context;
-        presenter.bindActivity(activity);
     }
 
     @Override
