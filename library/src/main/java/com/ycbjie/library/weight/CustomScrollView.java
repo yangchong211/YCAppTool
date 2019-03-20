@@ -12,8 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import com.ycbjie.library.constant.Constant;
 
 
 /**
@@ -51,16 +50,14 @@ public class CustomScrollView extends NestedScrollView {
     private View contentView;
     private float downX;
     private float downY;
-
     /**
-     * 配合CoordinatorLayout使用，解决滑动卡顿和冲突
+     * 状态，折叠控件
      */
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface STATES{
-        int EXPANDED = 3;
-        int COLLAPSED = 2;
-        int INTERMEDIATE = 1;
+    private int mState = Constant.STATES.EXPANDED;
+    public void setStates(int state) {
+        mState = state;
     }
+
 
     public CustomScrollView(@NonNull Context context) {
         this(context,null);
@@ -153,81 +150,66 @@ public class CustomScrollView extends NestedScrollView {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        switch (e.getAction()) {
-            //手指移动【主要是分为两种：向上滑动，向下滑动】
-            case MotionEvent.ACTION_MOVE:
-                if (getScrollY() <= 0) {
-                    if (listener!=null){
-                        int i = listener.onScrollListener();
-                        if (i==STATES.EXPANDED){
-                            //顶部下拉
-                            if (startDragY == 0) {
-                                startDragY = e.getRawY();
-                            }
-                            // 滑动距离
-                            int deltaY = (int) (e.getRawY() - startDragY);
-                            if (deltaY > 0 && deltaY < MAX_MOVE) {
-                                Log.e("CustomScrollView","onTouchEvent-----------------"+deltaY);
-                                //设置view下滑的位移是手指滑动距离位移的三分之一
-                                setTranslationY((e.getRawY() - startDragY));
-                                return true;
-                            } else if (deltaY>MAX_MOVE){
-                                Log.e("CustomScrollView","onTouchEvent-----------------"+deltaY);
-                                setTranslationY(MAX_MOVE);
-                                return true;
-                            } else {
-                                Log.e("CustomScrollView","onTouchEvent-----------------"+deltaY);
-                                springAnim.cancel();
-                                setTranslationY(0);
-                            }
+        if (mState==Constant.STATES.EXPANDED){
+            //只有当控件折叠后继续滑动，才触发走触摸事件监听
+            switch (e.getAction()) {
+                //手指移动【主要是分为两种：向上滑动，向下滑动】
+                case MotionEvent.ACTION_MOVE:
+                    if (getScrollY() <= 0) {
+                        //顶部下拉
+                        if (startDragY == 0) {
+                            startDragY = e.getRawY();
+                        }
+                        // 滑动距离
+                        int deltaY = (int) (e.getRawY() - startDragY);
+                        if (deltaY > 0 && deltaY < MAX_MOVE) {
+                            Log.e("CustomScrollView","onTouchEvent-----------------"+deltaY);
+                            //设置view下滑的位移是手指滑动距离位移的三分之一
+                            setTranslationY((e.getRawY() - startDragY));
+                            return true;
+                        } else if (deltaY>MAX_MOVE){
+                            Log.e("CustomScrollView","onTouchEvent-----------------"+deltaY);
+                            setTranslationY(MAX_MOVE);
+                            return true;
+                        } else {
+                            Log.e("CustomScrollView","onTouchEvent-----------------"+deltaY);
+                            springAnim.cancel();
+                            setTranslationY(0);
+                        }
+                    } else if ((getScrollY() + getHeight()) >= contentView.getMeasuredHeight()) {
+                        //底部上拉
+                        if (startDragY == 0) {
+                            //时时y坐标
+                            startDragY = e.getRawY();
+                        }
+                        // 滑动距离
+                        int deltaY = (int) (e.getRawY() - startDragY);
+                        if (deltaY < 0) {
+                            Log.e("CustomScrollView","1-----------------"+deltaY);
+                            setTranslationY((e.getRawY() - startDragY) / 3);
+                            return true;
+                        } else {
+                            Log.e("CustomScrollView","2-----------------"+deltaY);
+                            springAnim.cancel();
+                            setTranslationY(0);
                         }
                     }
-                } else if ((getScrollY() + getHeight()) >= contentView.getMeasuredHeight()) {
-                    //底部上拉
-                    if (startDragY == 0) {
-                        //时时y坐标
-                        startDragY = e.getRawY();
+                    break;
+                //手指抬起
+                case MotionEvent.ACTION_UP:
+                    //手指滑动结束
+                case MotionEvent.ACTION_CANCEL:
+                    if (getTranslationY() != 0) {
+                        //当手指抬起的时候，就开始动画
+                        springAnim.start();
                     }
-                    // 滑动距离
-                    int deltaY = (int) (e.getRawY() - startDragY);
-                    if (deltaY < 0) {
-                        Log.e("CustomScrollView","1-----------------"+deltaY);
-                        setTranslationY((e.getRawY() - startDragY) / 3);
-                        return true;
-                    } else {
-                        Log.e("CustomScrollView","2-----------------"+deltaY);
-                        springAnim.cancel();
-                        setTranslationY(0);
-                    }
-                }
-                break;
-            //手指抬起
-            case MotionEvent.ACTION_UP:
-            //手指滑动结束
-            case MotionEvent.ACTION_CANCEL:
-                if (getTranslationY() != 0) {
-                    //当手指抬起的时候，就开始动画
-                    springAnim.start();
-                }
-                startDragY = 0;
-                break;
-            default:
-                break;
+                    startDragY = 0;
+                    break;
+                default:
+                    break;
+            }
         }
         return super.onTouchEvent(e);
-    }
-
-    public ScrollListener listener;
-    public interface ScrollListener{
-        /**
-         * 滑动监听事件
-         * @return          STATES
-         */
-        int onScrollListener();
-    }
-
-    public void setListener(ScrollListener listener){
-        this.listener = listener;
     }
 
 }

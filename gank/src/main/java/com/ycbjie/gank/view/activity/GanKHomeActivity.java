@@ -13,7 +13,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.graphics.Palette;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -22,22 +21,24 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.SizeUtils;
-import com.ycbjie.gank.R;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.base.adapter.BasePagerAdapter;
-import com.ycbjie.gank.callback.PicassoPalette;
-import com.ycbjie.gank.contract.GanKHomeAContract;
-import com.ycbjie.gank.presenter.GanKHomeAPresenter;
-import com.ycbjie.gank.view.fragment.GanKHomeFragment;
-import com.ycbjie.library.utils.MDTintUtil;
-import com.ycbjie.library.utils.animation.AnimatorUtils;
+import com.blankj.utilcode.util.Utils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.ycbjie.gank.R;
+import com.ycbjie.gank.contract.GanKHomeAContract;
+import com.ycbjie.gank.presenter.GanKHomeAPresenter;
+import com.ycbjie.gank.view.fragment.GanKHomeFragment;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.adapter.BasePagerAdapter;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.utils.MDTintUtil;
+import com.ycbjie.library.utils.animation.AnimatorUtils;
+
 import java.util.ArrayList;
-import java.util.List;
+
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 
@@ -70,7 +71,7 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
     /**
      * CollapsingToolbarLayout 折叠状态
      */
-    private Constant.CollapsingToolbarLayoutState state;
+    private int state;
     private ObjectAnimator mAnimator;
 
 
@@ -110,11 +111,11 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void initView() {
         initFindViewId();
-        StateAppBar.setStatusBarColorForCollapsingToolbar(this, appbar, collapsingToolbar,
+        StateAppBar.setStatusBarColorForCollapsingToolbar(
+                this, appbar, collapsingToolbar,
                 tlHomeToolbar, ContextCompat.getColor(this, R.color.colorPrimary));
         setFabDynamicState();
         initFragments();
-        initViewPager();
     }
 
     private void initFindViewId() {
@@ -135,6 +136,7 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
         llHomeSearch.setOnClickListener(this);
         fabHomeRandom.setOnClickListener(this);
         ivHomeSetting.setOnClickListener(this);
+        ivHomeCollection.setOnClickListener(this);
     }
 
     @Override
@@ -151,9 +153,9 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
         } else if (i == R.id.fab_home_random) {
             presenter.getRandomBanner();
         } else if (i == R.id.iv_home_setting) {
-            //startActivity(MeSettingActivity.class);
-        } else {
-
+            ARouterUtils.navigation(ARouterConstant.ACTIVITY_APP_SETTING_ACTIVITY);
+        } else if (i == R.id.iv_home_collection){
+            ARouterUtils.navigation(ARouterConstant.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY);
         }
     }
 
@@ -164,13 +166,22 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
     public void setBanner(String imgUrl) {
         Picasso.with(GanKHomeActivity.this)
                 .load(imgUrl)
-                .into(ivHomeBanner, PicassoPalette.with(imgUrl, ivHomeBanner)
-                        .intoCallBack(new PicassoPalette.CallBack() {
-                            @Override
-                            public void onPaletteLoaded(Palette palette) {
-                                presenter.setThemeColor(palette,GanKHomeActivity.this);
-                            }
-                        }));
+                .into(ivHomeBanner, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        int colorPrimary = Utils.getApp().getResources()
+                                .getColor(R.color.colorTheme);
+                        // 设置 FabButton 的背景色
+                        setFabButtonColor(colorPrimary);
+                        enableFabButton();
+                        stopBannerLoadingAnim();
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
     }
 
 
@@ -259,49 +270,42 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
      * 根据 CollapsingToolbarLayout 的折叠状态，设置 FloatingActionButton 的隐藏和显示
      */
     private void setFabDynamicState() {
-        appbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == 0) {
-                    if (state != Constant.CollapsingToolbarLayoutState.EXPANDED) {
-                        // 修改状态标记为展开
-                        state = Constant.CollapsingToolbarLayoutState.EXPANDED;
+        appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset == 0) {
+                if (state != Constant.STATES.EXPANDED) {
+                    // 修改状态标记为展开
+                    state = Constant.STATES.EXPANDED;
+                }
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                if (state != Constant.STATES.COLLAPSED) {
+                    fabHomeRandom.hide();
+                    // 修改状态标记为折叠
+                    state = Constant.STATES.COLLAPSED;
+                    CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams)
+                            appbar.getLayoutParams();
+                    layoutParams.height = SizeUtils.dp2px(240);
+                    appbar.setLayoutParams(layoutParams);
+                }
+            } else {
+                if (state != Constant.STATES.INTERMEDIATE) {
+                    if (state == Constant.STATES.COLLAPSED) {
+                        fabHomeRandom.show();
                     }
-                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                    if (state != Constant.CollapsingToolbarLayoutState.COLLAPSED) {
-                        fabHomeRandom.hide();
-                        // 修改状态标记为折叠
-                        state = Constant.CollapsingToolbarLayoutState.COLLAPSED;
-                        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) appbar.getLayoutParams();
-                        layoutParams.height = SizeUtils.dp2px(240);
-                        appbar.setLayoutParams(layoutParams);
-                    }
-                } else {
-                    if (state != Constant.CollapsingToolbarLayoutState.INTERNEDIATE) {
-                        if (state == Constant.CollapsingToolbarLayoutState.COLLAPSED) {
-                            fabHomeRandom.show();
-                        }
-                        // 修改状态标记为中间
-                        state = Constant.CollapsingToolbarLayoutState.INTERNEDIATE;
-                    }
+                    // 修改状态标记为中间
+                    state = Constant.STATES.INTERMEDIATE;
                 }
             }
         });
     }
 
-    private List<String> mTitles;
-    private ArrayList<Fragment> mFragments;
-    private String[] mTabs = {"Android", "iOS", "前端", "瞎推荐", "拓展资源","App"};
     private void initFragments() {
-        mTitles = new ArrayList<>();
-        mFragments = new ArrayList<>();
-        for (int a = 0; a < mTabs.length; a++) {
-            mTitles.add(mTabs[a]);
-            mFragments.add(GanKHomeFragment.getInstance(mTabs[a]));
+        String[] mTabs = {"Android", "iOS", "前端", "瞎推荐", "拓展资源","App"};
+        ArrayList<String> mTitles = new ArrayList<>();
+        ArrayList<Fragment> mFragments = new ArrayList<>();
+        for (String mTab : mTabs) {
+            mTitles.add(mTab);
+            mFragments.add(GanKHomeFragment.getInstance(mTab));
         }
-    }
-
-    private void initViewPager() {
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitles);
         vpHomeCategory.setAdapter(myAdapter);

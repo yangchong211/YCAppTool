@@ -2,10 +2,6 @@ package com.ycbjie.gank.bean.bean;
 
 import java.util.List;
 
-/**
- * Created by PC on 2017/8/28.
- * 作者：PC
- */
 
 public class GanKIoDataBean {
 

@@ -1,4 +1,4 @@
-package com.ycbjie.library.utils.spannable;
+package com.ycbjie.other.utils;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -6,15 +6,7 @@ import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.text.style.ReplacementSpan;
 
-/**
- * <pre>
- *     @author yangchong
- *     blog  :
- *     time  : 2018/6/11
- *     desc  : SpannableString 设置文字圆角背景
- *     revise:
- * </pre>
- */
+
 public class RoundedBackgroundSpan extends ReplacementSpan {
 
 
@@ -22,7 +14,7 @@ public class RoundedBackgroundSpan extends ReplacementSpan {
     private int backgroundColor = 0;
     private int textColor = 0;
 
-    public RoundedBackgroundSpan(int backgroundColor, int textColor) {
+    RoundedBackgroundSpan(int backgroundColor,int textColor) {
         super();
         this.backgroundColor = backgroundColor;
         this.textColor = textColor;

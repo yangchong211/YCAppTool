@@ -1,10 +1,6 @@
 package com.ycbjie.gank.contract;
 
 
-import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v7.graphics.Palette;
-
 import com.ycbjie.library.base.mvp.BasePresenter;
 import com.ycbjie.library.base.mvp.BaseView;
 
@@ -43,8 +39,6 @@ public interface GanKHomeAContract {
     interface Presenter extends BasePresenter {
         //处理获取随机的图片
         void getRandomBanner();
-        //设置主题颜色
-        void setThemeColor(@Nullable Palette palette , Context context);
         //保存缓存图片
         void saveCacheImgUrl(String url);
     }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +14,6 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
@@ -26,22 +24,22 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ycbjie.gank.R;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.gank.bean.cache.CacheSearchHistory;
 import com.ycbjie.gank.bean.bean.SearchResult;
+import com.ycbjie.gank.bean.cache.CacheSearchHistory;
 import com.ycbjie.gank.contract.GanKSearchContract;
 import com.ycbjie.gank.presenter.GanKSearchPresenter;
 import com.ycbjie.gank.view.adapter.GanKSearchHisAdapter;
 import com.ycbjie.gank.view.adapter.GanKSearchListAdapter;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.inter.listener.OnListItemClickListener;
 import com.ycbjie.library.utils.MDTintUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -141,14 +139,11 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
                 }
             }
         });
-        edSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    search();
-                }
-                return false;
+        edSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                search();
             }
+            return false;
         });
         ivEditClear.setOnClickListener(this);
         ivSearch.setOnClickListener(this);
@@ -184,12 +179,7 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        toolbarSearch.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        toolbarSearch.setNavigationOnClickListener(view -> finish());
         llSearchHistory.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
         ivEditClear.setVisibility(View.GONE);
@@ -214,16 +204,13 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
                 SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
         recyclerSearchHistory.addItemDecoration(line);
         recyclerSearchHistory.setAdapter(mHistoryListAdapter);
-        mHistoryListAdapter.setOnItemClickListener(new OnListItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if(his.size()>position && position>=0){
-                    KeyboardUtils.hideSoftInput(GanKSearchActivity.this);
-                    edSearch.setText(his.get(position).getContent());
-                    edSearch.setSelection(Objects.requireNonNull(
-                            edSearch.getText()).toString().length());
-                    presenter.search(his.get(position).getContent(), false);
-                }
+        mHistoryListAdapter.setOnItemClickListener((view, position) -> {
+            if(his.size()>position && position>=0){
+                KeyboardUtils.hideSoftInput(GanKSearchActivity.this);
+                edSearch.setText(his.get(position).getContent());
+                edSearch.setSelection(Objects.requireNonNull(
+                        edSearch.getText()).toString().length());
+                presenter.search(his.get(position).getContent(), false);
             }
         });
     }
@@ -239,20 +226,17 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
                 SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
         recyclerView.addItemDecoration(line);
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(adapter.getAllData().size()>position && position>=0){
-                    SearchResult.ResultsBean resultsBean = adapter.getAllData().get(position);
-                    if ("福利".equals(resultsBean.type)) {
-                        Log.e("福利",resultsBean.desc);
-                        ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
-                    } else {
-                        Bundle bundle = new Bundle();
-                        bundle.putString(Constant.URL,resultsBean.url);
-                        bundle.putString(Constant.TITLE,resultsBean.desc);
-                        ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
-                    }
+        adapter.setOnItemClickListener(position -> {
+            if(adapter.getAllData().size()>position && position>=0){
+                SearchResult.ResultsBean resultsBean = adapter.getAllData().get(position);
+                if ("福利".equals(resultsBean.type)) {
+                    Log.e("福利",resultsBean.desc);
+                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.URL,resultsBean.url);
+                    bundle.putString(Constant.TITLE,resultsBean.desc);
+                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
                 }
             }
         });
@@ -314,15 +298,13 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
         });
 
         //刷新
-        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    presenter.search(edSearch.getText().toString().trim(), false);
-                } else {
-                    recyclerView.setRefreshing(false);
-                    ToastUtils.showShort("网络不可用");
-                }
+        recyclerView.setRefreshListener(() -> {
+            if (NetworkUtils.isConnected()) {
+                presenter.search(Objects.requireNonNull(edSearch.getText())
+                        .toString().trim(), false);
+            } else {
+                recyclerView.setRefreshing(false);
+                ToastUtils.showShort("网络不可用");
             }
         });
     }

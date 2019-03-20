@@ -3,7 +3,6 @@ package com.ycbjie.gank.view.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
@@ -81,19 +80,16 @@ public class KnowledgeOtherFragment  extends BaseFragment {
 
     @Override
     public void initListener() {
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Bundle bundle = new Bundle();
-                // 2,大图显示当前页数，1,头像，不显示页数
-                bundle.putInt("selector", 2);
-                //第几张
-                bundle.putInt("code", position);
-                bundle.putStringArrayList("imageUri", imageList);
-                Intent intent = new Intent(activity, KnowledgeImageActivity.class);
-                intent.putExtras(bundle);
-                activity.startActivity(intent);
-            }
+        adapter.setOnItemClickListener(position -> {
+            Bundle bundle = new Bundle();
+            // 2,大图显示当前页数，1,头像，不显示页数
+            bundle.putInt("selector", 2);
+            //第几张
+            bundle.putInt("code", position);
+            bundle.putStringArrayList("imageUri", imageList);
+            Intent intent = new Intent(activity, KnowledgeImageActivity.class);
+            intent.putExtras(bundle);
+            activity.startActivity(intent);
         });
     }
 
@@ -161,16 +157,13 @@ public class KnowledgeOtherFragment  extends BaseFragment {
         });
 
         //刷新
-        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    mPage = 1;
-                    getData(type,mPage);
-                } else {
-                    recyclerView.setRefreshing(false);
-                    ToastUtils.showRoundRectToast("网络不可用");
-                }
+        recyclerView.setRefreshListener(() -> {
+            if (NetworkUtils.isConnected()) {
+                mPage = 1;
+                getData(type,mPage);
+            } else {
+                recyclerView.setRefreshing(false);
+                ToastUtils.showRoundRectToast("网络不可用");
             }
         });
     }

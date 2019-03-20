@@ -331,7 +331,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         linearLayoutHelper.setMargin(0, 0, 0, 0);
         linearLayoutHelper.setPadding(0, 0, 0, 10);
         return new BaseDelegateAdapter(activity,
-                linearLayoutHelper, R.layout.view_vlayout_news, 10, Constant.viewType.typeFooter) {
+                linearLayoutHelper, R.layout.item_news_base_view, 10, Constant.viewType.typeFooter) {
             @Override
             public void onBindViewHolder(@NonNull BaseViewHolder holder,
                                          @SuppressLint("RecyclerView") final int position) {

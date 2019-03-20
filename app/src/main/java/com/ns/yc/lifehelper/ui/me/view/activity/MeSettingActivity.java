@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.ns.yc.lifehelper.R;
@@ -45,7 +46,7 @@ import cn.ycbjie.ycthreadpoollib.PoolThread;
  *     revise:
  * </pre>
  */
-
+@Route(path = ARouterConstant.ACTIVITY_APP_SETTING_ACTIVITY)
 public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implements View.OnClickListener,
         MeSettingContract.View, SwitchButton.OnCheckedChangeListener {
 

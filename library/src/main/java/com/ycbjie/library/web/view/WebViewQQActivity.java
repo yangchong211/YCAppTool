@@ -21,7 +21,6 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.R;
 import com.ycbjie.library.constant.Constant;
@@ -147,7 +146,7 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.web_view_icon_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_web_view, menu);
         return true;
     }
 

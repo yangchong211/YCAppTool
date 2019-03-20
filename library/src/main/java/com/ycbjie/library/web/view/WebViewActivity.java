@@ -144,7 +144,7 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.web_view_icon_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_web_view, menu);
         return true;
     }
 

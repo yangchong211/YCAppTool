@@ -20,7 +20,6 @@ import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.utils.image.ImageUtils;
-import com.ycbjie.library.weight.CustomScrollView;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -53,10 +52,10 @@ public class DouBookDetailActivity extends BaseActivity {
     private Toolbar toolbar;
     private TextView tvName;
     private TextView tvCasts;
-    private Constant.CollapsingToolbarLayoutState state;
+    private int state;
     private String id;
     private String alt;
-    private CustomScrollView scrollView;
+    private NestedScrollView scrollView;
 
     @Override
     protected void onDestroy() {
@@ -122,38 +121,23 @@ public class DouBookDetailActivity extends BaseActivity {
     public void initListener() {
         appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
             if (verticalOffset == 0) {
-                if (state != Constant.CollapsingToolbarLayoutState.EXPANDED) {
+                if (state != Constant.STATES.EXPANDED) {
                     //修改状态标记为展开
-                    state = Constant.CollapsingToolbarLayoutState.EXPANDED;
+                    state = Constant.STATES.EXPANDED;
                 }
                 toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
             } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                if (state != Constant.CollapsingToolbarLayoutState.COLLAPSED) {
+                if (state != Constant.STATES.COLLAPSED) {
                     //修改状态标记为折叠
-                    state = Constant.CollapsingToolbarLayoutState.COLLAPSED;
+                    state = Constant.STATES.COLLAPSED;
                 }
                 toolbar.setBackgroundColor(getResources().getColor(R.color.colorTheme));
             } else {
-                if (state != Constant.CollapsingToolbarLayoutState.INTERNEDIATE) {
+                if (state != Constant.STATES.INTERMEDIATE) {
                     //修改状态标记为中间
-                    state = Constant.CollapsingToolbarLayoutState.INTERNEDIATE;
+                    state = Constant.STATES.INTERMEDIATE;
                 }
                 toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-            }
-        });
-        scrollView.setListener(new CustomScrollView.ScrollListener() {
-            @Override
-            public int onScrollListener() {
-                switch (state){
-                    case INTERNEDIATE:
-                        return CustomScrollView.STATES.INTERMEDIATE;
-                    case COLLAPSED:
-                        return CustomScrollView.STATES.COLLAPSED;
-                    case EXPANDED:
-                        return CustomScrollView.STATES.EXPANDED;
-                    default:
-                        return CustomScrollView.STATES.INTERMEDIATE;
-                }
             }
         });
     }

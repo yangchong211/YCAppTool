@@ -2,7 +2,6 @@ package com.ycbjie.gank.view.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,6 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pedaily.yc.ycdialoglib.dialogMenu.CustomBottomDialog;
-import com.pedaily.yc.ycdialoglib.dialogMenu.CustomItem;
-import com.pedaily.yc.ycdialoglib.dialogMenu.OnItemClickListener;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.api.GanKModel;
@@ -93,16 +90,13 @@ public class KnowledgeCustomFragment extends BaseFragment {
 
     @Override
     public void initListener() {
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (adapter.getAllData().size()>position && position>=0){
-                    GanKIoDataBean.ResultsBean resultsBean = adapter.getAllData().get(position);
-                    Bundle bundle = new Bundle();
-                    bundle.putString(Constant.URL,resultsBean.getUrl());
-                    bundle.putString(Constant.TITLE,resultsBean.getDesc());
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
-                }
+        adapter.setOnItemClickListener(position -> {
+            if (adapter.getAllData().size()>position && position>=0){
+                GanKIoDataBean.ResultsBean resultsBean = adapter.getAllData().get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString(Constant.URL,resultsBean.getUrl());
+                bundle.putString(Constant.TITLE,resultsBean.getDesc());
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
             }
         });
     }
@@ -179,16 +173,13 @@ public class KnowledgeCustomFragment extends BaseFragment {
         });
 
         //刷新
-        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    mPage = 1 ;
-                    getGanKAll(mType,mPage, PER_PAGE_MORE);
-                } else {
-                    recyclerView.setRefreshing(false);
-                    ToastUtils.showRoundRectToast("网络不可用");
-                }
+        recyclerView.setRefreshListener(() -> {
+            if (NetworkUtils.isConnected()) {
+                mPage = 1 ;
+                getGanKAll(mType,mPage, PER_PAGE_MORE);
+            } else {
+                recyclerView.setRefreshing(false);
+                ToastUtils.showRoundRectToast("网络不可用");
             }
         });
     }
@@ -221,15 +212,12 @@ public class KnowledgeCustomFragment extends BaseFragment {
                 .title("选择分类")
                 .setCancel(true,"取消选择")
                 .orientation(CustomBottomDialog.VERTICAL)
-                .inflateMenu(R.menu.gank_bottom_sheet, new OnItemClickListener() {
-                    @Override
-                    public void click(CustomItem item) {
-                        String title = item.getTitle();
-                        if (title!=null && title.length()>0){
-                            recyclerView.showProgress();
-                            mPage = 1;
-                            getGanKAll(title,mPage, PER_PAGE_MORE);
-                        }
+                .inflateMenu(R.menu.gank_bottom_sheet, item -> {
+                    String title = item.getTitle();
+                    if (title!=null && title.length()>0){
+                        recyclerView.showProgress();
+                        mPage = 1;
+                        getGanKAll(title,mPage, PER_PAGE_MORE);
                     }
                 });
         dialog.show();

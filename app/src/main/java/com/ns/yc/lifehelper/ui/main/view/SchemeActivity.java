@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.ns.yc.lifehelper.ui.guide.view.activity.SplashActivity;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ycbjie.library.utils.AppToolUtils;
 

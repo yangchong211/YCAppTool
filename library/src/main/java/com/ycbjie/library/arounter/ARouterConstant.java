@@ -84,4 +84,6 @@ public class ARouterConstant {
     public static final String ACTIVITY_OTHER_PIN_TU_ACTIVITY = "/book/PinTuGameActivity";
     //飞机大战
     public static final String ACTIVITY_OTHER_AIR_ACTIVITY = "/book/AirGameActivity";
+    //设置中心
+    public static final String ACTIVITY_APP_SETTING_ACTIVITY = "/app/MeSettingActivity";
 }

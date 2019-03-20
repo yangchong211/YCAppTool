@@ -10,12 +10,13 @@ import io.reactivex.Observable;
 
 public class GanKModel {
 
+    private static final String GAN_K_IO_API = "http://gank.io/api/";
     private static GanKModel model;
     private GanKApi mApiService;
 
     public GanKModel() {
         mApiService = RetrofitWrapper
-                .getInstance(ConstantGanKApi.GAN_K_IO_API)
+                .getInstance(GAN_K_IO_API)
                 .create(GanKApi.class);
     }
 

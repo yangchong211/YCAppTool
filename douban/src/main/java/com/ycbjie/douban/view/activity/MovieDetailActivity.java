@@ -69,7 +69,7 @@ public class MovieDetailActivity extends BaseActivity {
     private TextView tvCasts;
     private String id = "";
 
-    private Constant.CollapsingToolbarLayoutState state;
+    private int state;
     private String alt;
 
 
@@ -138,25 +138,22 @@ public class MovieDetailActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == 0) {
-                    if (state != Constant.CollapsingToolbarLayoutState.EXPANDED) {
-                        state = Constant.CollapsingToolbarLayoutState.EXPANDED;
-                    }
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
-                } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                    if (state != Constant.CollapsingToolbarLayoutState.COLLAPSED) {
-                        state = Constant.CollapsingToolbarLayoutState.COLLAPSED;
-                    }
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorTheme));
-                } else {
-                    if (state != Constant.CollapsingToolbarLayoutState.INTERNEDIATE) {
-                        state = Constant.CollapsingToolbarLayoutState.INTERNEDIATE;
-                    }
-                    toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
+        appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset == 0) {
+                if (state != Constant.STATES.EXPANDED) {
+                    state = Constant.STATES.EXPANDED;
                 }
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                if (state != Constant.STATES.COLLAPSED) {
+                    state = Constant.STATES.COLLAPSED;
+                }
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorTheme));
+            } else {
+                if (state != Constant.STATES.INTERMEDIATE) {
+                    state = Constant.STATES.INTERMEDIATE;
+                }
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorTransparent));
             }
         });
     }

@@ -10,20 +10,19 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.IntentUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.ui.me.view.activity.IndexJsActivity;
-import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.inter.listener.NoDoubleClickListener;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeFragmentPresenter;
+import com.ns.yc.lifehelper.ui.me.view.activity.IndexJsActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeCollectActivity;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
-import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeTimerActivity;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.base.mvp.BaseFragment;
+import com.ycbjie.library.inter.listener.NoDoubleClickListener;
 import com.ycbjie.library.utils.AppToolUtils;
 
 
@@ -148,7 +147,7 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
                 startActivity(MeCollectActivity.class);
                 break;
             case R.id.rl_me_setting:
-                startActivity(MeSettingActivity.class);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_APP_SETTING_ACTIVITY);
                 break;
             case R.id.rl_me_feed_back:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);

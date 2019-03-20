@@ -42,18 +42,22 @@ public class GanKHomeAdapter extends RecyclerArrayAdapter<CategoryResult.Results
         @Override
         public void setData(CategoryResult.ResultsBean data) {
             super.setData(data);
-            if (AppConfig.INSTANCE.isShowListImg()) {                          // 列表显示图片
+            // 列表显示图片
+            if (AppConfig.INSTANCE.isShowListImg()) {
                 iv_item_img.setVisibility(View.VISIBLE);
                 String quality = "";
                 if (data.images != null && data.images.size() > 0) {
                     switch (AppConfig.INSTANCE.getThumbnailQuality()) {
-                        case 0: // 原图
+                        // 原图
+                        case 0:
                             quality = "?imageView2/0/w/400";
                             break;
-                        case 1: // 默认
+                        // 默认
+                        case 1:
                             quality = "?imageView2/0/w/280";
                             break;
-                        case 2: // 省流
+                        // 省流
+                        case 2:
                             quality = "?imageView2/0/w/190";
                             break;
                         default:

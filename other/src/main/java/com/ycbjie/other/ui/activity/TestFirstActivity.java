@@ -30,6 +30,7 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.tv_5).setOnClickListener(this);
         findViewById(R.id.tv_6).setOnClickListener(this);
         findViewById(R.id.tv_7).setOnClickListener(this);
+        findViewById(R.id.tv_8).setOnClickListener(this);
     }
 
     @Override
@@ -64,6 +65,8 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
             test6();
         } else if (i == R.id.tv_7){
             test7();
+        } else if (i == R.id.tv_8){
+            test8();
         }
     }
 
@@ -245,4 +248,39 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
 
 
 
+    private void test8() {
+        localVarGc1();   // 没有GC
+//        localVarGc2();   // GC
+//        localVarGc3();   // 没有GC
+//        localVarGc4();   // GC
+//        localVarGc5();   // GC
+    }
+
+    private static final int SIZE = 6 * 1024 * 1024;
+    public static void localVarGc1() {
+        byte[] b = new byte[SIZE];
+        System.gc();
+    }
+    public static void localVarGc2() {
+        byte[] b = new byte[SIZE];
+        b = null;
+        System.gc();
+    }
+    public static void localVarGc3() {
+        {
+            byte[] b = new byte[SIZE];
+        }
+        System.gc();
+    }
+    public static void localVarGc4() {
+        {
+            byte[] b = new byte[SIZE];
+        }
+        int c = 0;
+        System.gc();
+    }
+    public static void localVarGc5() {
+        localVarGc1();
+        System.gc();
+    }
 }

@@ -9,7 +9,7 @@ ext {
     isDouBanApplication = true  //豆瓣模块开关，false:作为Lib组件存在， true:作为application存在
     isOtherApplication = true  //其他模块开关，false:作为Lib组件存在， true:作为application存在
     isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
-    isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
+    isGankApplication = true  //干货模块开关，false:作为Lib组件存在， true:作为application存在
     isToDoApplication = false  //todo模块开关，false:作为Lib组件存在， true:作为application存在
 
 

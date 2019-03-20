@@ -20,14 +20,14 @@
         android:orientation="horizontal">
         <TextView
             android:id="@+id/tv_text"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:text="3/48"
             android:textColor="#fff"
-            android:textSize="@dimen/textSize15" />
+            android:textSize="@dimen/textSize14" />
         <TextView
             android:id="@+id/tv_save_image"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tv_text"
             android:layout_marginLeft="10dp"

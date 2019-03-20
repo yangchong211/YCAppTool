@@ -38,7 +38,6 @@ import com.ns.yc.lifehelper.service.LoopRequestService;
 import com.ns.yc.lifehelper.ui.main.contract.MainContract;
 import com.ns.yc.lifehelper.ui.main.presenter.MainPresenter;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
-import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
 import com.ns.yc.ycutilslib.activityManager.AppManager;
 import com.ns.yc.ycutilslib.managerLeak.InputMethodManagerLeakUtils;
 import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
@@ -190,7 +189,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu_home, menu);
+        getMenuInflater().inflate(R.menu.menu_setting_app, menu);
         menu.add(0, 1, 0, "开发作者介绍");
         menu.add(0, 3, 1,"分享此软件");
         menu.add(0, 4, 2,"开源项目介绍");
@@ -476,7 +475,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                         ToastUtils.showRoundRectToast( "后期接入讯飞语音");
                         break;
                     case R.id.setting:
-                        ActivityUtils.startActivity(MeSettingActivity.class);
+                        ARouterUtils.navigation(ARouterConstant.ACTIVITY_APP_SETTING_ACTIVITY);
                         break;
                     case R.id.quit:
                         AppManager.getAppManager().appExit(false);

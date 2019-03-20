@@ -4,6 +4,8 @@ import android.os.Environment;
 
 import com.ycbjie.library.model.HomeBlogEntity;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +33,14 @@ public class Constant {
     public static final String ZHI_HU = "https://www.zhihu.com/people/yczbj/activities";
     public static final String FLUTTER = "https://github.com/yangchong211/ycflutter";
 
-    public enum CollapsingToolbarLayoutState {
-        // 完全展开
-        EXPANDED,
-        // 折叠
-        COLLAPSED,
-        // 中间状态
-        INTERNEDIATE
+    /**
+     * 配合CoordinatorLayout使用
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface STATES{
+        int EXPANDED = 3;
+        int COLLAPSED = 2;
+        int INTERMEDIATE = 1;
     }
 
 

@@ -1,15 +1,11 @@
 package com.ycbjie.gank.presenter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.graphics.Palette;
 
-import com.ycbjie.gank.R;
 import com.ycbjie.gank.api.GanKModel;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.gank.bean.bean.CategoryResult;
 import com.ycbjie.gank.contract.GanKHomeAContract;
+import com.ycbjie.library.base.config.AppConfig;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -65,20 +61,6 @@ public class GanKHomeAPresenter implements GanKHomeAContract.Presenter {
         getBanner(true);
     }
 
-    /**
-     * 设置主题颜色
-     */
-    @Override
-    public void setThemeColor(@Nullable Palette palette , Context context) {
-        if (palette != null) {
-            int colorPrimary = context.getResources().getColor(R.color.colorTheme);
-            // 设置 FabButton 的背景色
-            mHomeView.setFabButtonColor(colorPrimary);
-            // 停止 FabButton 加载中动画
-            mHomeView.enableFabButton();
-            mHomeView.stopBannerLoadingAnim();
-        }
-    }
 
     /**
      * 保存图片地址
@@ -121,7 +103,8 @@ public class GanKHomeAPresenter implements GanKHomeAContract.Presenter {
 
                     @Override
                     public void onNext(CategoryResult result) {
-                        if (result != null && result.results != null && result.results.size() > 0 && result.results.get(0).url != null) {
+                        if (result != null && result.results != null && result.results.size() > 0
+                                && result.results.get(0).url != null) {
                             String url = result.results.get(0).url;
                             mHomeView.setBanner(url);
                         } else {
@@ -166,7 +149,8 @@ public class GanKHomeAPresenter implements GanKHomeAContract.Presenter {
 
                     @Override
                     public void onNext(CategoryResult result) {
-                        if (result != null && result.results != null && result.results.size() > 0 && result.results.get(0).url != null) {
+                        if (result != null && result.results != null && result.results.size() > 0
+                                && result.results.get(0).url != null) {
                             mHomeView.cacheImg(result.results.get(0).url);
                         }
                     }

@@ -82,6 +82,14 @@
                 android:padding="10dp"
                 android:text="7.动态代理"/>
 
+            <TextView
+                android:id="@+id/tv_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorAccent"
+                android:padding="10dp"
+                android:text="8.java局部变量对垃圾回收的影响"/>
         </LinearLayout>
     </ScrollView>
 

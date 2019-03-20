@@ -40,7 +40,7 @@ public class TodayNewsAdapter extends RecyclerArrayAdapter<TodayNewsDetail.Resul
         TextView tv_title , tv_time , tv_author;
 
         ExpressDeliveryViewHolder(ViewGroup parent) {
-            super(parent, R.layout.item_home_list);
+            super(parent, R.layout.item_news_list);
             tv_title = $(R.id.tv_title);
             tv_time = $(R.id.tv_time);
             tv_author = $(R.id.tv_author);

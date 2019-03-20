@@ -1,31 +1,30 @@
 package com.ycbjie.gank.view.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.gank.R;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
-import com.ycbjie.library.base.mvp.BaseLazyFragment;
 import com.ycbjie.gank.bean.bean.CategoryResult;
 import com.ycbjie.gank.contract.GanKHomeFContract;
 import com.ycbjie.gank.presenter.GanKHomeFPresenter;
 import com.ycbjie.gank.view.activity.GanKHomeActivity;
 import com.ycbjie.gank.view.adapter.GanKHomeAdapter;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseLazyFragment;
 import com.ycbjie.library.constant.Constant;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 
 /**
@@ -207,7 +206,7 @@ public class GanKHomeFragment extends BaseLazyFragment implements GanKHomeFContr
                     }
                 } else {
                     adapter.pauseMore();
-                    ToastUtils.showToast("网络不可用");
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
 
@@ -224,7 +223,7 @@ public class GanKHomeFragment extends BaseLazyFragment implements GanKHomeFContr
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    ToastUtils.showToast("网络不可用");
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
 
@@ -233,7 +232,7 @@ public class GanKHomeFragment extends BaseLazyFragment implements GanKHomeFContr
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    ToastUtils.showToast("网络不可用");
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
         });
@@ -252,15 +251,12 @@ public class GanKHomeFragment extends BaseLazyFragment implements GanKHomeFContr
         });
 
         //刷新
-        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    presenter.getData(true);
-                } else {
-                    recyclerView.setRefreshing(false);
-                    ToastUtils.showToast("网络不可用");
-                }
+        recyclerView.setRefreshListener(() -> {
+            if (NetworkUtils.isConnected()) {
+                presenter.getData(true);
+            } else {
+                recyclerView.setRefreshing(false);
+                ToastUtils.showRoundRectToast("网络不可用");
             }
         });
     }

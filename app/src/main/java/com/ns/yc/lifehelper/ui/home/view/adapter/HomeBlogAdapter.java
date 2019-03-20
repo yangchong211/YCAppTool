@@ -57,7 +57,7 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
         LinearLayout llNewContent;
 
         MyViewHolder(ViewGroup parent) {
-            super(parent, R.layout.item_home_list);
+            super(parent, R.layout.item_news_list);
             llNewsHead = getView(R.id.ll_news_head);
             tvTitle = getView(R.id.tv_title);
             tvAuthor = getView(R.id.tv_author);
