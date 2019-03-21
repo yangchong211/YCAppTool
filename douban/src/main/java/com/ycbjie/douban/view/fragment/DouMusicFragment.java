@@ -12,15 +12,16 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ycbjie.douban.R;
-import com.ycbjie.douban.api.DouMusicModel;
-import com.ycbjie.library.base.mvp.BaseLazyFragment;
+import com.ycbjie.douban.api.DouBanModel;
+import com.ycbjie.douban.bean.DouMusicBean;
 import com.ycbjie.douban.view.activity.DouMusicActivity;
 import com.ycbjie.douban.view.activity.DouMusicDetailActivity;
 import com.ycbjie.douban.view.adapter.DouMusicAdapter;
-import com.ycbjie.douban.bean.DouMusicBean;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+import com.ycbjie.library.base.mvp.BaseLazyFragment;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -203,7 +204,7 @@ public class DouMusicFragment extends BaseLazyFragment {
     }
 
     private void getDouMusic(String mType , final int start, int count) {
-        DouMusicModel model = new DouMusicModel(activity);
+        DouBanModel model = DouBanModel.getInstance();
         model.getMusic(mType,start,count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

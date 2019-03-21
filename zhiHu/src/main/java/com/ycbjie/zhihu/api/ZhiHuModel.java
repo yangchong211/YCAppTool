@@ -1,16 +1,15 @@
 package com.ycbjie.zhihu.api;
 
-import com.ycbjie.library.api.ConstantALiYunApi;
 import com.ycbjie.zhihu.model.ZhiHuCommentBean;
-import com.ycbjie.zhihu.model.ZhiHuDailyListBean;
 import com.ycbjie.zhihu.model.ZhiHuDailyBeforeListBean;
+import com.ycbjie.zhihu.model.ZhiHuDailyListBean;
 import com.ycbjie.zhihu.model.ZhiHuDetailExtraBean;
 import com.ycbjie.zhihu.model.ZhiHuHotBean;
 import com.ycbjie.zhihu.model.ZhiHuSectionBean;
 import com.ycbjie.zhihu.model.ZhiHuSectionChildBean;
 import com.ycbjie.zhihu.model.ZhiHuThemeBean;
-import com.ycbjie.zhihu.model.ZhihuDetailBean;
 import com.ycbjie.zhihu.model.ZhiHuThemeChildBean;
+import com.ycbjie.zhihu.model.ZhihuDetailBean;
 
 import rx.Observable;
 
@@ -20,10 +19,14 @@ public class ZhiHuModel {
 
     private static ZhiHuModel model;
     private ZhiHuApi mApiService;
+    /**
+     * 知乎日报
+     */
+    private static final String ZHI_HU = "http://news-at.zhihu.com/api/4/";
 
     private ZhiHuModel() {
         mApiService = RetrofitWrapper
-                .getInstance(ConstantALiYunApi.ZHI_HU)
+                .getInstance(ZHI_HU)
                 .create(ZhiHuApi.class);
     }
 

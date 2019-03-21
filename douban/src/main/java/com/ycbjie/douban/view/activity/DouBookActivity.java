@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ycbjie.douban.R;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.douban.view.fragment.DouBookFragment;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.base.adapter.BasePagerAdapter;
+import com.ycbjie.library.base.mvp.BaseActivity;
 
 import java.util.ArrayList;
 
@@ -34,8 +34,6 @@ public class DouBookActivity extends BaseActivity implements View.OnClickListene
     TextView toolbarTitle;
     TabLayout tabLayout;
     ViewPager vpContent;
-    private ArrayList<String> mTitleList;
-    private ArrayList<Fragment> mFragments;
 
     @Override
     public int getContentView() {
@@ -51,7 +49,6 @@ public class DouBookActivity extends BaseActivity implements View.OnClickListene
 
         initToolBar();
         initFragmentList();
-        initViewPagerAndTab();
     }
 
     private void initToolBar() {
@@ -79,8 +76,8 @@ public class DouBookActivity extends BaseActivity implements View.OnClickListene
 
 
     private void initFragmentList() {
-        mTitleList = new ArrayList<>();
-        mFragments = new ArrayList<>();
+        ArrayList<String> mTitleList = new ArrayList<>();
+        ArrayList<Fragment> mFragments = new ArrayList<>();
         mTitleList.add("综合");
         mTitleList.add("文学");
         mTitleList.add("文化");
@@ -91,10 +88,7 @@ public class DouBookActivity extends BaseActivity implements View.OnClickListene
         mFragments.add(DouBookFragment.newInstance("文化"));
         mFragments.add(DouBookFragment.newInstance("生活"));
         mFragments.add(DouBookFragment.newInstance("励志"));
-    }
 
-
-    private void initViewPagerAndTab() {
         /*
          * 注意使用的是：getChildFragmentManager，
          * 这样setOffscreenPageLimit()就可以添加上，保留相邻2个实例，切换时不会卡
@@ -110,6 +104,5 @@ public class DouBookActivity extends BaseActivity implements View.OnClickListene
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(vpContent);
     }
-
 
 }

@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.ycbjie.douban.R;
-import com.ycbjie.douban.api.DetailMovieModel;
+import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouMovieDetailBean;
 import com.ycbjie.douban.view.adapter.MovieDetailAdapter;
 import com.ycbjie.library.arounter.ARouterConstant;
@@ -191,8 +191,8 @@ public class MovieDetailActivity extends BaseActivity {
     }
 
     private void getMovieDetailData(String id) {
-        DetailMovieModel model = DetailMovieModel.getInstance(this);
-        Observable<DouMovieDetailBean> hotMovie = model.getHotMovie(id);
+        DouBanModel model = DouBanModel.getInstance();
+        Observable<DouMovieDetailBean> hotMovie = model.getMovieDetail(id);
         hotMovie
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

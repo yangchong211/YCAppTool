@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 
 import com.pedaily.yc.ycdialoglib.loading.ViewLoading;
 import com.ycbjie.douban.R;
-import com.ycbjie.douban.api.DouBookModel;
+import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouBookDetailBean;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
@@ -170,8 +171,8 @@ public class DouBookDetailActivity extends BaseActivity {
     }
 
     private void getBookDetailData(String id) {
-        DouBookModel model = DouBookModel.getInstance();
-        model.getHotMovie(id)
+        DouBanModel model = DouBanModel.getInstance();
+        model.getBookDetail(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<DouBookDetailBean>() {

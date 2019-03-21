@@ -16,17 +16,18 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.douban.R;
-import com.ycbjie.douban.api.HotMovieModel;
-import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouHotMovieBean;
 import com.ycbjie.douban.view.adapter.DouMovieAdapter;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.utils.image.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -174,7 +175,7 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
 
 
     private void getHotMovieData() {
-        HotMovieModel model = HotMovieModel.getInstance(this);
+        DouBanModel model = DouBanModel.getInstance();
         model.getHotMovie()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

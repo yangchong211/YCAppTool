@@ -10,16 +10,17 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pedaily.yc.ycdialoglib.loading.ViewLoading;
-import com.ycbjie.library.api.ConstantALiYunApi;
 import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.news.R;
 import com.ycbjie.news.api.TodayNewsModel;
 import com.ycbjie.news.model.TodayNewsChannel;
 import com.ycbjie.news.ui.fragment.WyNewsFragment;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -45,6 +46,10 @@ public class WyNewsActivity extends BaseActivity implements View.OnClickListener
     private TabLayout tabLayout;
     private ViewPager vpContent;
     private ArrayList<String> channel = new ArrayList<>();
+    /**
+     * 请求头：Authorization APPCODE bad05976d99e41d198ff513a4fd519ea
+     */
+    public static final String Key = "APPCODE bad05976d99e41d198ff513a4fd519ea";
 
     @Override
     public int getContentView() {
@@ -120,7 +125,7 @@ public class WyNewsActivity extends BaseActivity implements View.OnClickListener
 
     private void getTodayDataChanel() {
         TodayNewsModel model = TodayNewsModel.getInstance(WyNewsActivity.this);
-        model.getTodayNewsChannel(ConstantALiYunApi.Key)
+        model.getTodayNewsChannel(WyNewsActivity.Key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TodayNewsChannel>() {

@@ -10,11 +10,11 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ycbjie.douban.R;
-import com.ycbjie.douban.api.TopMovieModel;
+import com.ycbjie.douban.api.DouBanModel;
+import com.ycbjie.douban.bean.DouHotMovieBean;
+import com.ycbjie.douban.view.adapter.MovieTopAdapter;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.douban.view.adapter.MovieTopAdapter;
-import com.ycbjie.douban.bean.DouHotMovieBean;
 import com.ycbjie.library.weight.FullyGridLayoutManager;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -189,7 +189,7 @@ public class MovieTopActivity extends BaseActivity implements View.OnClickListen
 
 
     private void getTopMovieData(final int start , int count) {
-        TopMovieModel model = TopMovieModel.getInstance(this);
+        DouBanModel model = DouBanModel.getInstance();
         model.getTopMovie(start,count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

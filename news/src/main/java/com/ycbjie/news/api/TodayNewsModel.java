@@ -2,7 +2,6 @@ package com.ycbjie.news.api;
 
 import android.content.Context;
 
-import com.ycbjie.library.api.ConstantALiYunApi;
 import com.ycbjie.library.http.RetrofitWrapper;
 import com.ycbjie.news.model.TodayNewsChannel;
 import com.ycbjie.news.model.TodayNewsDetail;
@@ -21,9 +20,15 @@ public class TodayNewsModel {
     private static TodayNewsModel model;
     private TodayNewsApi mApiService;
 
+    /**
+     * 阿里云极速数据
+     * 新闻
+     */
+    public static final String ALiYunJs = "http://jisuwxwzjx.market.alicloudapi.com";
+
     public TodayNewsModel(Context context) {
         mApiService = RetrofitWrapper
-                .getInstance(ConstantALiYunApi.ALiYunJs)
+                .getInstance(ALiYunJs)
                 .create(TodayNewsApi.class);
     }
 

@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ycbjie.douban.R;
-import com.ycbjie.douban.api.DouBookModel;
+import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouBookBean;
 import com.ycbjie.douban.contract.DouBookContract;
 import com.ycbjie.douban.presenter.DouBookPresenter;
@@ -207,8 +207,8 @@ public class DouBookFragment extends BaseLazyFragment implements DouBookContract
 
 
     private void getTopMovieData(String mType , final int start, int count) {
-        DouBookModel model = DouBookModel.getInstance();
-        model.getHotMovie(mType,start,count)
+        DouBanModel model = DouBanModel.getInstance();
+        model.getBook(mType,start,count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<DouBookBean>() {

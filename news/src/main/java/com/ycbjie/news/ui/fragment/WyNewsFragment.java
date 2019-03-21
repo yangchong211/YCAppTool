@@ -1,7 +1,6 @@
 package com.ycbjie.news.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,19 +12,19 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.ycbjie.library.api.ConstantALiYunApi;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseLazyFragment;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.news.R;
 import com.ycbjie.news.api.TodayNewsModel;
+import com.ycbjie.news.model.TodayNewsDetail;
 import com.ycbjie.news.ui.activity.WyNewsActivity;
 import com.ycbjie.news.ui.adapter.TodayNewsAdapter;
-import com.ycbjie.news.model.TodayNewsDetail;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -205,7 +204,7 @@ public class WyNewsFragment extends BaseLazyFragment {
 
     private void getTodayNews(String mType, int num, final int start) {
         TodayNewsModel model = TodayNewsModel.getInstance(activity);
-        model.getTodayNewsDetail(ConstantALiYunApi.Key,mType,String.valueOf(num),String.valueOf(start))
+        model.getTodayNewsDetail(WyNewsActivity.Key,mType,String.valueOf(num),String.valueOf(start))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<TodayNewsDetail>() {

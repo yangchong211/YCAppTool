@@ -25,7 +25,7 @@ import com.bumptech.glide.request.target.Target;
 import com.ns.yc.ycutilslib.scrollView.ReboundScrollView;
 import com.pedaily.yc.ycdialoglib.loading.ViewLoading;
 import com.ycbjie.douban.R;
-import com.ycbjie.douban.api.DouMusicDetailModel;
+import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouMusicDetailBean;
 import com.ycbjie.douban.weight.CustomChangeBounds;
 import com.ycbjie.library.base.glide.GlideApp;
@@ -310,7 +310,7 @@ public class DouMusicDetailActivity extends BaseActivity {
      * 获取网络数据
      */
     private void getMusicDetailData(String id) {
-        DouMusicDetailModel model = new DouMusicDetailModel(this);
+        DouBanModel model = DouBanModel.getInstance();
         model.getMusicDetail(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
