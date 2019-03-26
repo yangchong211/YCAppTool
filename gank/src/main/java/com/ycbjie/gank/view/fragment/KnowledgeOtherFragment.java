@@ -15,6 +15,7 @@ import com.ycbjie.gank.view.activity.KnowledgeImageActivity;
 import com.ycbjie.gank.view.activity.MyKnowledgeActivity;
 import com.ycbjie.gank.view.adapter.GanKOtherAdapter;
 import com.ycbjie.library.base.mvp.BaseFragment;
+import com.ycbjie.library.http.ExceptionUtils;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -214,7 +215,7 @@ public class KnowledgeOtherFragment  extends BaseFragment {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

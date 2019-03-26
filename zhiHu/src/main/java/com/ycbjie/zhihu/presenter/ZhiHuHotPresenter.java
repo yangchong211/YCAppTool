@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ycbjie.library.db.realm.RealmDbHelper;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.ycbjie.zhihu.api.ZhiHuModel;
 import com.ycbjie.zhihu.contract.ZhiHuHotContract;
@@ -77,6 +78,7 @@ public class ZhiHuHotPresenter implements ZhiHuHotContract.Presenter {
                         }else {
                             mView.setNetworkErrorView();
                         }
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override
@@ -85,6 +87,8 @@ public class ZhiHuHotPresenter implements ZhiHuHotContract.Presenter {
                             mView.setView(zhiHuHotBean);
                         }else {
                             mView.setEmptyView();
+                            int code = ExceptionUtils.CODE_NO_OTHER;
+                            ExceptionUtils.serviceException(code);
                         }
                     }
                 });

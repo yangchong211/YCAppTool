@@ -7,12 +7,14 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.ycbjie.library.db.realm.RealmDbHelper;
+import com.ycbjie.library.http.ExceptionUtils;
+import com.ycbjie.library.utils.rxUtils.RxBus;
+import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.ycbjie.zhihu.api.ZhiHuModel;
 import com.ycbjie.zhihu.contract.ZhiHuDailyContract;
 import com.ycbjie.zhihu.model.ZhiHuDailyBeforeListBean;
 import com.ycbjie.zhihu.model.ZhiHuDailyListBean;
-import com.ycbjie.library.utils.rxUtils.RxBus;
-import com.ycbjie.library.utils.rxUtils.RxUtil;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -66,7 +68,8 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
 
 
     private void registerEvent() {
-        Observable<CalendarDay> calendarDayObservable = RxBus.getDefault().toObservable(CalendarDay.class);
+        Observable<CalendarDay> calendarDayObservable =
+                RxBus.getDefault().toObservable(CalendarDay.class);
         Subscription rxSubscription = calendarDayObservable
                 .subscribeOn(Schedulers.io())
                 .map(new Func1<CalendarDay, String>() {
@@ -126,11 +129,12 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        /*if(NetworkUtils.isConnected()){
+                        if(NetworkUtils.isConnected()){
                             mView.setErrorView();
                         }else {
                             mView.setNetworkErrorView();
-                        }*/
+                        }
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override
@@ -142,6 +146,9 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
                             @SuppressLint("DefaultLocale")
                             String time = String.format("%d年%d月%d日", year, month, day);
                             mView.showMoreContent(time,zhiHuDailyBeforeListBean);
+                        }else {
+                            int code = ExceptionUtils.CODE_NO_OTHER;
+                            ExceptionUtils.serviceException(code);
                         }
                     }
                 });
@@ -166,6 +173,7 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
                         }else {
                             mView.setNetworkErrorView();
                         }
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

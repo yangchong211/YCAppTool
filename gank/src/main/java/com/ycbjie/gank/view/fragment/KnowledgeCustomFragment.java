@@ -21,6 +21,7 @@ import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.http.ExceptionUtils;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -233,6 +234,7 @@ public class KnowledgeCustomFragment extends BaseFragment {
                     public void onError(Throwable e) {
                         recyclerView.showError();
                         recyclerView.setErrorView(R.layout.view_custom_empty_data);
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

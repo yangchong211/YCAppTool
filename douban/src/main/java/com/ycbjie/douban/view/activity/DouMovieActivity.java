@@ -22,6 +22,7 @@ import com.ycbjie.douban.view.adapter.DouMovieAdapter;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.library.utils.image.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -206,6 +207,7 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
                     public void onError(Throwable e) {
                         recyclerView.showError();
                         recyclerView.setErrorView(R.layout.view_custom_empty_data);
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

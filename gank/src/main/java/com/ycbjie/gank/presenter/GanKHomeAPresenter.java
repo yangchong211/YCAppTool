@@ -6,6 +6,7 @@ import com.ycbjie.gank.api.GanKModel;
 import com.ycbjie.gank.bean.bean.CategoryResult;
 import com.ycbjie.gank.contract.GanKHomeAContract;
 import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.http.ExceptionUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -89,6 +90,7 @@ public class GanKHomeAPresenter implements GanKHomeAContract.Presenter {
                         mHomeView.errorImage();
                         mHomeView.enableFabButton();
                         mHomeView.stopBannerLoadingAnim();
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override
@@ -135,6 +137,7 @@ public class GanKHomeAPresenter implements GanKHomeAContract.Presenter {
                 .subscribe(new Observer<CategoryResult>() {
                     @Override
                     public void onError(Throwable e) {
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

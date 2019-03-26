@@ -2,6 +2,7 @@ package com.ycbjie.library.base.state;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -36,7 +37,8 @@ public abstract class BaseStateFragment<T extends BasePresenter>  extends Fragme
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.base_state_view, container , false);
         initStatusLayout();
         initBaseView(view);
@@ -44,7 +46,7 @@ public abstract class BaseStateFragment<T extends BasePresenter>  extends Fragme
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mPresenter != null){
             mPresenter.subscribe();
@@ -70,10 +72,10 @@ public abstract class BaseStateFragment<T extends BasePresenter>  extends Fragme
 
     /**
      * 获取到子布局
-     * @param view
+     * @param view              view
      */
     private void initBaseView(View view) {
-        LinearLayout flMain = (LinearLayout) view.findViewById(R.id.ll_main);
+        LinearLayout flMain = view.findViewById(R.id.ll_main);
         flMain.addView(statusLayoutManager.getRootLayout());
     }
 
@@ -81,7 +83,8 @@ public abstract class BaseStateFragment<T extends BasePresenter>  extends Fragme
     protected abstract void initStatusLayout();
 
     /** 初始化View的代码写在这个方法中
-     * @param view*/
+     * @param view          view
+     */
     public abstract void initView(View view);
 
     /** 初始化监听器的代码写在这个方法中 */

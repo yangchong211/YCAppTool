@@ -87,13 +87,12 @@ public class JsonUtils {
     }
 
 
-}
+    @Documented
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.FIELD)
+    @interface ParamNames {
+        String value();
+    }
 
 
-
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-@interface ParamNames {
-    String value();
 }

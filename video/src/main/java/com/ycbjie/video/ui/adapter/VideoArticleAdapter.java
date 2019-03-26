@@ -77,29 +77,29 @@ public class VideoArticleAdapter extends RecyclerArrayAdapter<MultiNewsArticleDa
             }
 
             if (null != item.getUser_info()) {
-                String avatar_url = item.getUser_info().getAvatar_url();
-                if (!TextUtils.isEmpty(avatar_url)) {
-                    ImageUtils.loadImgByPicasso(getContext(),avatar_url,R.drawable.image_default,ivMedia);
+                String avatarUrl = item.getUser_info().getAvatar_url();
+                if (!TextUtils.isEmpty(avatarUrl)) {
+                    ImageUtils.loadImgByPicasso(getContext(),avatarUrl,R.drawable.image_default,ivMedia);
                 }
             }
 
-            String tv_title = item.getTitle();
-            String tv_source = item.getSource();
-            String tv_comment_count = item.getComment_count() + "评论";
-            String tv_datetime = item.getBehot_time() + "";
-            if (!TextUtils.isEmpty(tv_datetime)) {
-                tv_datetime = TimeUtils.getFriendlyTimeSpanByNow(tv_datetime);
+            String tvTitle = item.getTitle();
+            String tvSource = item.getSource();
+            String tvCommentCount = item.getComment_count() + "评论";
+            String tvDatetime = item.getBehot_time() + "";
+            if (!TextUtils.isEmpty(tvDatetime)) {
+                tvDatetime = TimeUtils.getFriendlyTimeSpanByNow(tvDatetime);
             }
-            int video_duration = item.getVideo_duration();
-            String min = String.valueOf(video_duration / 60);
-            String second = String.valueOf(video_duration % 10);
+            int videoDuration = item.getVideo_duration();
+            String min = String.valueOf(videoDuration / 60);
+            String second = String.valueOf(videoDuration % 10);
             if (Integer.parseInt(second) < 10) {
                 second = "0" + second;
             }
-            String tv_video_time = min + ":" + second;
-            tvTitle.setText(tv_title);
-            tvExtra.setText(tv_source + " - " + tv_comment_count + " - " + tv_datetime);
-            tvVideoTime.setText(tv_video_time);
+            String tvVideoTime = min + ":" + second;
+            this.tvTitle.setText(tvTitle);
+            tvExtra.setText(tvSource + " - " + tvCommentCount + " - " + tvDatetime);
+            this.tvVideoTime.setText(tvVideoTime);
         }
     }
 }

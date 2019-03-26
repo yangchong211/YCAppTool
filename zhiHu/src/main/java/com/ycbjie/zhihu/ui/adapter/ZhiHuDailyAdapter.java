@@ -1,6 +1,7 @@
 package com.ycbjie.zhihu.ui.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,18 +59,21 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE.ITEM_TOP.ordinal()) {
             mAdapter = new BannerPagerAdapter(mContext, mTopList);
-            return new TopViewHolder(inflater.inflate(R.layout.base_wrap_banner, parent, false));
+            return new TopViewHolder(inflater.inflate(R.layout.base_wrap_banner,
+                    parent, false));
         } else if (viewType == ITEM_TYPE.ITEM_DATE.ordinal()) {
-            return new DateViewHolder(inflater.inflate(R.layout.base_title_view, parent, false));
+            return new DateViewHolder(inflater.inflate(R.layout.base_title_view,
+                    parent, false));
         }
-        return new ContentViewHolder(inflater.inflate(R.layout.item_zh_news_list, parent, false));
+        return new ContentViewHolder(inflater.inflate(R.layout.item_zh_news_list,
+                parent, false));
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ContentViewHolder) {
             final int contentPosition;
             if(isBefore) {
@@ -78,13 +82,11 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 contentPosition = position - 2;
             }
             ((ContentViewHolder)holder).tvTitle.setText(mList.get(contentPosition).getTitle());
-            ImageUtils.loadImgByPicasso(mContext,mList.get(contentPosition).getImages().get(0),R.drawable.image_default,((ContentViewHolder)holder).ivLogo);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(onItemClickListener != null) {
-                        onItemClickListener.onItemClick(view,contentPosition);
-                    }
+            ImageUtils.loadImgByPicasso(mContext,mList.get(contentPosition).getImages().get(0)
+                    ,R.drawable.image_default,((ContentViewHolder)holder).ivLogo);
+            holder.itemView.setOnClickListener(view -> {
+                if(onItemClickListener != null) {
+                    onItemClickListener.onItemClick(view,contentPosition);
                 }
             });
         } else if (holder instanceof DateViewHolder) {
@@ -130,9 +132,9 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         ImageView ivLogo;
         ContentViewHolder(View itemView) {
             super(itemView);
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-            tvTime = (TextView) itemView.findViewById(R.id.tv_time);
-            ivLogo = (ImageView) itemView.findViewById(R.id.iv_logo);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvTime = itemView.findViewById(R.id.tv_time);
+            ivLogo = itemView.findViewById(R.id.iv_logo);
         }
     }
 
@@ -142,8 +144,8 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView tvZhTime;
         DateViewHolder(View itemView) {
             super(itemView);
-            tvZhTitle = (TextView) itemView.findViewById(R.id.tv_zh_title);
-            tvZhTime = (TextView) itemView.findViewById(R.id.tv_zh_time);
+            tvZhTitle = itemView.findViewById(R.id.tv_zh_title);
+            tvZhTime = itemView.findViewById(R.id.tv_zh_time);
         }
     }
 
@@ -153,7 +155,7 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         BannerView banner;
         TopViewHolder(View itemView) {
             super(itemView);
-            banner = (BannerView) itemView.findViewById(R.id.banner);
+            banner = itemView.findViewById(R.id.banner);
         }
     }
 

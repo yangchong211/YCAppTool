@@ -105,6 +105,13 @@ public class CustomScrollView extends NestedScrollView {
         }
     }
 
+    /**
+     * 分发事件
+     * 根据内部拦截状态，向其child或者自己分发事件
+     *
+     * @param ev
+     * @return
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
@@ -147,6 +154,17 @@ public class CustomScrollView extends NestedScrollView {
         return !canScrollVertically(1);
     }
 
+    /**
+     * 触摸事件
+     * 如果返回结果为false表示不消费该事件，并且也不会截获接下来的事件序列，事件会继续传递
+     * 如果返回为true表示当前View消费该事件，阻止事件继续传递
+     *
+     * 在这里要强调View的OnTouchListener。如果View设置了该监听，那么OnTouch()将会回调。
+     * 如果返回为true那么该View的OnTouchEvent将不会在执行 这是因为设置的OnTouchListener执行时的优先级要比onTouchEvent高。
+     * 优先级：OnTouchListener > onTouchEvent > onClickListener
+     * @param event
+     * @return
+     */
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent e) {
@@ -210,6 +228,22 @@ public class CustomScrollView extends NestedScrollView {
             }
         }
         return super.onTouchEvent(e);
+    }
+
+    /**
+     * 拦截事件
+     * 默认实现是返回false，也就是默认不拦截任何事件
+     *
+     * 判断自己是否需要截取事件
+     * 如果该方法返回为true，那么View将消费该事件，即会调用onTouchEvent()方法
+     * 如果返回false,那么通过调用子View的dispatchTouchEvent()将事件交由子View来处理
+     * @param ev
+     * @return
+     */
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.e("onEvent","MyLinearLayout onInterceptTouchEvent");
+        return super.onInterceptTouchEvent(ev);
     }
 
 }

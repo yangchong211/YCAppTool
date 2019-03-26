@@ -1,6 +1,7 @@
 package com.ycbjie.library.http;
 
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ycbjie.library.constant.Constant;
 
@@ -166,29 +167,45 @@ public class InterceptorUtils {
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
-                    com.blankj.utilcode.util.LogUtils.d("addNetWorkInterceptor"+ "没有网络链接");
+                    LogUtils.d("addNetWorkInterceptor"+ "没有网络链接");
                 }
                 Response response = chain.proceed(request);
                 if (NetworkUtils.isConnected()) {
                     int maxAge = 0; // 有网络时 设置缓存超时时间0个小时
-                    com.blankj.utilcode.util.LogUtils.d("addNetWorkInterceptor"+ "网络已连接，缓存时间为：" + maxAge);
+                    LogUtils.d("addNetWorkInterceptor"+ "网络已连接，缓存时间为：" + maxAge);
                     response = response.newBuilder()
                             .addHeader("Cache-Control", "public, max-age=" + maxAge)
                             .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
                             .build();
                 } else {
                     int maxStale = Constant.TIME_CACHE;
-                    com.blankj.utilcode.util.LogUtils.d("addNetWorkInterceptor"+ "网络未连接，缓存时间为：" + maxStale);
+                    LogUtils.d("addNetWorkInterceptor"+ "网络未连接，缓存时间为：" + maxStale);
                     response = response.newBuilder()
                             .addHeader("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                             .removeHeader("Pragma")
                             .build();
                 }
                 String cookeHeader = response.header("Set-Cookie", "");
-                com.blankj.utilcode.util.LogUtils.e("cookeHeader1-----------"+cookeHeader);
+                LogUtils.e("cookeHeader1-----------"+cookeHeader);
                 return response;
             }
         };
         return interceptor;
     }
+
+
+
+    public static Interceptor addCallBack() {
+        Interceptor interceptor = new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                request = request.newBuilder().build();
+                Response response = chain.proceed(request);
+                return response;
+            }
+        };
+        return interceptor;
+    }
+    
 }

@@ -18,6 +18,7 @@ import com.ycbjie.douban.view.activity.DouMusicActivity;
 import com.ycbjie.douban.view.activity.DouMusicDetailActivity;
 import com.ycbjie.douban.view.adapter.DouMusicAdapter;
 import com.ycbjie.library.base.mvp.BaseLazyFragment;
+import com.ycbjie.library.http.ExceptionUtils;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -243,6 +244,7 @@ public class DouMusicFragment extends BaseLazyFragment {
                     public void onError(Throwable e) {
                         recyclerView.showError();
                         recyclerView.setErrorView(R.layout.view_custom_empty_data);
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

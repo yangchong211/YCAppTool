@@ -13,6 +13,7 @@ import com.pedaily.yc.ycdialoglib.loading.ViewLoading;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.news.R;
 import com.ycbjie.news.api.TodayNewsModel;
 import com.ycbjie.news.model.TodayNewsChannel;
@@ -146,7 +147,7 @@ public class WyNewsActivity extends BaseActivity implements View.OnClickListener
 
                     @Override
                     public void onError(Throwable e) {
-
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

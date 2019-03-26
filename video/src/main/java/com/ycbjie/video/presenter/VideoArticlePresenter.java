@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.TimeUtils;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.library.http.JsonUtils;
 import com.ycbjie.video.api.VideoModel;
 import com.ycbjie.video.contract.VideoArticleContract;
@@ -18,6 +19,8 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
@@ -39,20 +42,21 @@ public class VideoArticlePresenter implements VideoArticleContract.Presenter {
     private String time;
     private String category;
     private List<MultiNewsArticleDataBean> dataList = new ArrayList<>();
+    private final CompositeDisposable compositeDisposable;
 
     public VideoArticlePresenter(VideoArticleContract.View homeView) {
         this.mView = homeView;
-        this.time = TimeUtils.getNowString();
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
     public void subscribe() {
-
+        this.time = TimeUtils.getNowString();
     }
 
     @Override
     public void unSubscribe() {
-
+        compositeDisposable.dispose();
     }
 
     @Override
@@ -87,7 +91,7 @@ public class VideoArticlePresenter implements VideoArticleContract.Presenter {
             dataList.clear();
         }
         VideoModel model = VideoModel.getInstance();
-        model.getVideoArticle(this.category, time)
+        Disposable subscribe = model.getVideoArticle(this.category, time)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .switchMap(new Function<MultiNewsArticleBean, Observable<MultiNewsArticleDataBean>>() {
@@ -130,7 +134,7 @@ public class VideoArticlePresenter implements VideoArticleContract.Presenter {
                 .subscribe(new Consumer<List<MultiNewsArticleDataBean>>() {
                     @Override
                     public void accept(@NonNull List<MultiNewsArticleDataBean> list) throws Exception {
-                        if (list!=null && list.size()>0){
+                        if (list != null && list.size() > 0) {
                             dataList.addAll(list);
                             mView.setDataView(dataList);
                             mView.showRecyclerView();
@@ -138,9 +142,11 @@ public class VideoArticlePresenter implements VideoArticleContract.Presenter {
                     }
                 }, new Consumer<Throwable>() {
                     @Override
-                    public void accept(@NonNull Throwable throwable) throws Exception {
+                    public void accept(@NonNull Throwable e) throws Exception {
                         mView.showErrorView();
+                        ExceptionUtils.handleException(e);
                     }
                 });
+        compositeDisposable.add(subscribe);
     }
 }

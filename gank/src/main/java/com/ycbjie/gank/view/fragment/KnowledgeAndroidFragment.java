@@ -18,6 +18,7 @@ import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.http.ExceptionUtils;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -225,7 +226,7 @@ public class KnowledgeAndroidFragment extends BaseFragment {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

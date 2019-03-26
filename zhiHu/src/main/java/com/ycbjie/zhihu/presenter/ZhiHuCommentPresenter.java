@@ -3,10 +3,11 @@ package com.ycbjie.zhihu.presenter;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.ycbjie.library.http.ExceptionUtils;
+import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.ycbjie.zhihu.api.ZhiHuModel;
 import com.ycbjie.zhihu.contract.ZhiHuCommentContract;
 import com.ycbjie.zhihu.model.ZhiHuCommentBean;
-import com.ycbjie.library.utils.rxUtils.RxUtil;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -64,6 +65,7 @@ public class ZhiHuCommentPresenter implements ZhiHuCommentContract.Presenter {
                             }else {
                                 mView.setNetworkErrorView();
                             }
+                            ExceptionUtils.handleException(e);
                         }
 
                         @Override
@@ -92,6 +94,7 @@ public class ZhiHuCommentPresenter implements ZhiHuCommentContract.Presenter {
                             }else {
                                 mView.setNetworkErrorView();
                             }
+                            ExceptionUtils.handleException(e);
                         }
 
                         @Override

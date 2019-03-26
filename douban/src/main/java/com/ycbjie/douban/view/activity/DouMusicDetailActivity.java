@@ -30,6 +30,7 @@ import com.ycbjie.douban.bean.DouMusicDetailBean;
 import com.ycbjie.douban.weight.CustomChangeBounds;
 import com.ycbjie.library.base.glide.GlideApp;
 import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.library.utils.image.ImageUtils;
 
 import cn.ycbjie.ycstatusbarlib.StatusBarUtils;
@@ -331,7 +332,7 @@ public class DouMusicDetailActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

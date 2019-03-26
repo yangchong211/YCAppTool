@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import com.ycbjie.gank.api.GanKModel;
 import com.ycbjie.gank.bean.bean.SearchResult;
 import com.ycbjie.gank.contract.GanKSearchContract;
+import com.ycbjie.library.http.ExceptionUtils;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -104,6 +106,7 @@ public class GanKSearchPresenter implements GanKSearchContract.Presenter {
                     public void onError(Throwable e) {
                         mView.showTip("搜索出错了。");
                         mView.hideLoading();
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

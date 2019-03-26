@@ -17,6 +17,7 @@ import com.ycbjie.douban.view.activity.DouBookActivity;
 import com.ycbjie.douban.view.activity.DouBookDetailActivity;
 import com.ycbjie.douban.view.adapter.DouBookAdapter;
 import com.ycbjie.library.base.mvp.BaseLazyFragment;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.library.weight.FullyGridLayoutManager;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -246,6 +247,7 @@ public class DouBookFragment extends BaseLazyFragment implements DouBookContract
                     public void onError(Throwable e) {
                         recyclerView.showError();
                         recyclerView.setErrorView(R.layout.view_custom_empty_data);
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

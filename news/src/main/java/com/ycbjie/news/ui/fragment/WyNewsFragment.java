@@ -16,6 +16,7 @@ import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseLazyFragment;
 import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.news.R;
 import com.ycbjie.news.api.TodayNewsModel;
 import com.ycbjie.news.model.TodayNewsDetail;
@@ -245,6 +246,7 @@ public class WyNewsFragment extends BaseLazyFragment {
                     @Override
                     public void onError(Throwable e) {
                         recyclerView.showError();
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

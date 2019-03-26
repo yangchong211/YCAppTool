@@ -22,6 +22,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.tv_6).setOnClickListener(this);
         findViewById(R.id.tv_7).setOnClickListener(this);
         findViewById(R.id.tv_8).setOnClickListener(this);
+        findViewById(R.id.tv_9).setOnClickListener(this);
     }
 
     @Override
@@ -53,6 +54,8 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             startActivity(new Intent(this, ScrollActivity.class));
         } else if (i == R.id.tv_8){
             startActivity(new Intent(this, MixtureTextViewActivity.class));
+        }else if (i == R.id.tv_9){
+            startActivity(new Intent(this, CloneAbleActivity.class));
         }
     }
 }

@@ -6,21 +6,21 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.ycbjie.library.base.mvp.BackLazyFragment;
+import com.ycbjie.library.inter.listener.OnLoadMoreListener;
 import com.ycbjie.video.R;
 import com.ycbjie.video.contract.VideoArticleContract;
-import com.ycbjie.library.inter.listener.OnLoadMoreListener;
 import com.ycbjie.video.model.MultiNewsArticleDataBean;
 import com.ycbjie.video.presenter.VideoArticlePresenter;
 import com.ycbjie.video.ui.activity.VideoActivity;
 import com.ycbjie.video.ui.adapter.VideoArticleAdapter;
-import com.ycbjie.library.base.mvp.BackLazyFragment;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -130,24 +130,12 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
 
     @Override
     public void initListener() {
-
-    }
-
-    @Override
-    public void initData() {
-
-    }
-
-    private void initRecycleView() {
-        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    presenter.doRefresh();
-                } else {
-                    recyclerView.setRefreshing(false);
-                    ToastUtils.showToast("网络不可用");
-                }
+        recyclerView.setRefreshListener(() -> {
+            if (NetworkUtils.isConnected()) {
+                presenter.doRefresh();
+            } else {
+                recyclerView.setRefreshing(false);
+                ToastUtils.showToast("网络不可用");
             }
         });
         recyclerView.addOnScrollListener(new OnLoadMoreListener() {
@@ -159,7 +147,21 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
                 }
             }
         });
+        adapter.setOnItemClickListener(position -> {
+            if (adapter.getAllData().size()>position){
+                String videoId = adapter.getAllData().get(position).getVideo_id();
+                String url = getVideoContentApi(videoId);
+                showPlayingFragment(url);
+            }
+        });
+    }
 
+    @Override
+    public void initData() {
+
+    }
+
+    private void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         adapter = new VideoArticleAdapter(activity);
         final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
@@ -222,17 +224,6 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
                 adapter.resumeMore();
             }
         });
-
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if (adapter.getAllData().size()>position){
-                    String videoId = adapter.getAllData().get(position).getVideo_id();
-                    String url = getVideoContentApi(videoId);
-                    showPlayingFragment(url);
-                }
-            }
-        });
     }
 
     @Override
@@ -277,7 +268,6 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
     }
 
 
-
     /**
      * 展示页面
      */
@@ -288,7 +278,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
         FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.anim.fragment_slide_up, 0);
         if (videoPlayerFragment == null) {
-            videoPlayerFragment = VideoPlayerFragment.ShowFragment(url);
+            videoPlayerFragment = VideoPlayerFragment.showFragment(url);
             ft.add(android.R.id.content, videoPlayerFragment);
         } else {
             ft.show(videoPlayerFragment);

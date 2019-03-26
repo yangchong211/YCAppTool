@@ -35,6 +35,7 @@
         <activity android:name=".ui.activity.TestFirstActivity"/>
         <activity android:name=".ui.activity.ScrollActivity"/>
         <activity android:name=".ui.activity.MixtureTextViewActivity"/>
+        <activity android:name=".ui.activity.CloneAbleActivity"/>
     </application>
 
 

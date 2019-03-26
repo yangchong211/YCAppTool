@@ -5,15 +5,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ns.yc.ycutilslib.fragmentBack.BackHandlerHelper;
+import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.video.R;
 import com.ycbjie.video.ui.fragment.VideoArticleFragment;
 
@@ -47,7 +46,8 @@ public class VideoActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        StateAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.black));
+        StateAppBar.setStatusBarColor(this,
+                ContextCompat.getColor(this, R.color.black));
         initFindViewById();
         initToolBar();
     }
@@ -62,12 +62,7 @@ public class VideoActivity extends BaseActivity {
 
     private void initToolBar() {
         toolbarTitle.setText("我的视频");
-        llTitleMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        llTitleMenu.setOnClickListener(v -> finish());
     }
 
 

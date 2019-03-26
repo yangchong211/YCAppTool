@@ -3,17 +3,15 @@ package com.ycbjie.video.ui.fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.video.R;
 import com.ycbjie.video.api.VideoModel;
 import com.ycbjie.video.model.VideoContentBean;
@@ -59,19 +57,18 @@ public class VideoPlayerFragment extends BaseFragment {
         activity = null;
     }
 
-    //在此Fragment中设置代码如下
     @Override
     public void onStop() {
         super.onStop();
         VideoPlayerManager.instance().releaseVideoPlayer();
     }
 
-    public static VideoPlayerFragment ShowFragment(String url){
-        VideoPlayerFragment videoFragment = new VideoPlayerFragment();
+    public static VideoPlayerFragment showFragment(String url){
+        VideoPlayerFragment fragment = new VideoPlayerFragment();
         Bundle bundle = new Bundle();
         bundle.putString("url",url);
-        videoFragment.setArguments(bundle);
-        return videoFragment;
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
 
@@ -147,8 +144,8 @@ public class VideoPlayerFragment extends BaseFragment {
                     }
                 }, new Consumer<Throwable>() {
                     @Override
-                    public void accept(@io.reactivex.annotations.NonNull Throwable throwable) {
-
+                    public void accept(@io.reactivex.annotations.NonNull Throwable e) {
+                        ExceptionUtils.handleException(e);
                     }
                 });
     }

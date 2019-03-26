@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.ycbjie.library.db.realm.RealmDbHelper;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.ycbjie.zhihu.api.ZhiHuModel;
 import com.ycbjie.zhihu.contract.ZhiHuThemeListContract;
@@ -79,6 +80,7 @@ public class ZhiHuThemeListPresenter implements ZhiHuThemeListContract.Presenter
                         }else {
                             mView.setNetworkErrorView();
                         }
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

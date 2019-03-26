@@ -17,6 +17,7 @@
         <activity android:name="com.ycbjie.other.ui.activity.MonkeyGameActivity"/>
         <activity android:name=".ui.activity.ScrollActivity"/>
         <activity android:name=".ui.activity.MixtureTextViewActivity"/>
+        <activity android:name=".ui.activity.CloneAbleActivity"/>
     </application>
 
 

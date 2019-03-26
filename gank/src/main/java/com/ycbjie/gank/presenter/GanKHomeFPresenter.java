@@ -5,11 +5,9 @@ import android.annotation.SuppressLint;
 import com.ycbjie.gank.api.GanKModel;
 import com.ycbjie.gank.bean.bean.CategoryResult;
 import com.ycbjie.gank.contract.GanKHomeFContract;
+import com.ycbjie.library.http.ExceptionUtils;
 
-
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -76,7 +74,7 @@ public class GanKHomeFPresenter implements GanKHomeFContract.Presenter {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        ExceptionUtils.handleException(throwable);
                     }
                 });
     }

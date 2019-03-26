@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.db.cache.CacheZhLike;
 import com.ycbjie.library.db.realm.RealmDbHelper;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.ycbjie.zhihu.api.ZhiHuModel;
 import com.ycbjie.zhihu.model.ZhiHuDetailExtraBean;
@@ -69,7 +70,7 @@ public class WebViewAnimPresenter implements WebViewAnimContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override
@@ -94,7 +95,7 @@ public class WebViewAnimPresenter implements WebViewAnimContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

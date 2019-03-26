@@ -1,8 +1,7 @@
 package com.ycbjie.news.presenter;
 
-import android.support.annotation.NonNull;
-
 import com.blankj.utilcode.util.NetworkUtils;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.news.api.ConstantTxApi;
 import com.ycbjie.news.api.WeChatModel;
 import com.ycbjie.news.contract.TxWeChatContract;
@@ -12,7 +11,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
 
 /**
@@ -80,6 +78,7 @@ public class TxWeChatPresenter implements TxWeChatContract.Presenter {
                         } else {
                             mView.setNetworkErrorView();
                         }
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

@@ -13,17 +13,19 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
+import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.news.R;
 import com.ycbjie.news.api.ConstantTxApi;
-import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.news.api.TxNewsModel;
+import com.ycbjie.news.model.TxNewsBean;
 import com.ycbjie.news.ui.activity.TxNewsActivity;
 import com.ycbjie.news.ui.adapter.TxNewsAdapter;
-import com.ycbjie.news.model.TxNewsBean;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -240,6 +242,8 @@ public class TxNewsFragment extends BaseFragment {
                                 } else {
                                     recyclerView.showEmpty();
                                     recyclerView.setEmptyView(R.layout.view_custom_empty_data);
+                                    int code = ExceptionUtils.CODE_SHOW_TOAST;
+                                    ExceptionUtils.serviceException(code);
                                 }
                             } else {
                                 if(txNewsBean!=null && txNewsBean.getNewslist()!=null && txNewsBean.getNewslist().size()>0){
@@ -257,6 +261,7 @@ public class TxNewsFragment extends BaseFragment {
                                 recyclerView.showError();
                                 recyclerView.setErrorView(R.layout.view_custom_empty_data);
                             }
+                            ExceptionUtils.handleException(e);
                         }
 
                         @Override

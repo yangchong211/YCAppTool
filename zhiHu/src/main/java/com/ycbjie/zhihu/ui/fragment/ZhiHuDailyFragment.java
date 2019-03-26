@@ -14,20 +14,19 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.TimeUtils;
+import com.ns.yc.ycstatelib.StateLayoutManager;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.ycbjie.library.base.state.BaseStateFragment;
-import com.ycbjie.library.inter.listener.OnListItemClickListener;
+import com.ycbjie.library.utils.animation.AnimationViewUtil;
+import com.ycbjie.library.utils.rxUtils.RxBus;
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.contract.ZhiHuDailyContract;
 import com.ycbjie.zhihu.model.ZhiHuDailyBeforeListBean;
 import com.ycbjie.zhihu.model.ZhiHuDailyListBean;
 import com.ycbjie.zhihu.presenter.ZhiHuDailyPresenter;
-import com.ycbjie.zhihu.ui.activity.ZhiHuNewsActivity;
 import com.ycbjie.zhihu.ui.activity.ZhiHuCalendarActivity;
+import com.ycbjie.zhihu.ui.activity.ZhiHuNewsActivity;
 import com.ycbjie.zhihu.ui.adapter.ZhiHuDailyAdapter;
-import com.ycbjie.library.utils.animation.AnimationViewUtil;
-import com.ycbjie.library.utils.rxUtils.RxBus;
-import com.ns.yc.ycstatelib.StateLayoutManager;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.ycbjie.zhihu.web.activity.WebViewAnimActivity;
 
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
@@ -89,12 +88,12 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
     }
 
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void initView(View view) {
         refresher = view.findViewById(R.id.refresher);
         recyclerView = view.findViewById(R.id.recyclerView);
         fab = view.findViewById(R.id.fab);
-
         fab.setVisibility(View.VISIBLE);
         initTime();
         initRecycleView();
@@ -104,27 +103,25 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
     @Override
     public void initListener() {
         fab.setOnClickListener(this);
-        mAdapter.setOnItemClickListener(new OnListItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                presenter.insertReadToDB(mList.get(position).getId());
-                mAdapter.setReadState(position,true);
-                if(mAdapter.getIsBefore()) {
-                    mAdapter.notifyItemChanged(position + 1);
-                } else {
-                    mAdapter.notifyItemChanged(position + 2);
-                }
+        mAdapter.setOnItemClickListener((view, position) -> {
+            presenter.insertReadToDB(mList.get(position).getId());
+            mAdapter.setReadState(position,true);
+            if(mAdapter.getIsBefore()) {
+                mAdapter.notifyItemChanged(position + 1);
+            } else {
+                mAdapter.notifyItemChanged(position + 2);
+            }
 
-                Intent intent = new Intent();
-                intent.setClass(activity, WebViewAnimActivity.class);
-                intent.putExtra("id",mList.get(position).getId());
-                ActivityOptions options;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    options = ActivityOptions.makeSceneTransitionAnimation(activity, view, "view");
-                    activity.startActivity(intent,options.toBundle());
-                }else {
-                    activity.startActivity(intent);
-                }
+            Intent intent = new Intent();
+            intent.setClass(activity, WebViewAnimActivity.class);
+            intent.putExtra("id",mList.get(position).getId());
+            ActivityOptions options;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                options = ActivityOptions.makeSceneTransitionAnimation(
+                        activity, view, "view");
+                activity.startActivity(intent,options.toBundle());
+            }else {
+                activity.startActivity(intent);
             }
         });
     }
@@ -144,8 +141,6 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
             Intent it = new Intent();
             it.setClass(activity, ZhiHuCalendarActivity.class);
             AnimationViewUtil.startActivity(activity, it, fab, R.color.redTab);
-
-        } else {
         }
     }
 
@@ -162,19 +157,17 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
         final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
                 SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
         recyclerView.addItemDecoration(line);
-        refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        refresher.setOnRefreshListener(() -> {
             @SuppressLint("SimpleDateFormat")
-            @Override
-            public void onRefresh() {
-                if(currentDate.equals(TimeUtils.getNowString(new SimpleDateFormat("yyyyMMdd")))) {
-                    presenter.getData();
-                } else {
-                    int year = Integer.valueOf(currentDate.substring(0,4));
-                    int month = Integer.valueOf(currentDate.substring(4,6));
-                    int day = Integer.valueOf(currentDate.substring(6,8));
-                    CalendarDay date = CalendarDay.from(year, month - 1, day);
-                    RxBus.getDefault().post(date);
-                }
+            SimpleDateFormat yyyyMMdd = new SimpleDateFormat("yyyyMMdd");
+            if(currentDate.equals(TimeUtils.getNowString(yyyyMMdd))) {
+                presenter.getData();
+            } else {
+                int year = Integer.valueOf(currentDate.substring(0,4));
+                int month = Integer.valueOf(currentDate.substring(4,6));
+                int day = Integer.valueOf(currentDate.substring(6,8));
+                CalendarDay date = CalendarDay.from(year, month - 1, day);
+                RxBus.getDefault().post(date);
             }
         });
     }

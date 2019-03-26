@@ -15,6 +15,7 @@ import com.ycbjie.douban.bean.DouHotMovieBean;
 import com.ycbjie.douban.view.adapter.MovieTopAdapter;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.http.ExceptionUtils;
 import com.ycbjie.library.weight.FullyGridLayoutManager;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -228,6 +229,7 @@ public class MovieTopActivity extends BaseActivity implements View.OnClickListen
                     public void onError(Throwable e) {
                         recyclerView.showError();
                         recyclerView.setErrorView(R.layout.view_custom_empty_data);
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override

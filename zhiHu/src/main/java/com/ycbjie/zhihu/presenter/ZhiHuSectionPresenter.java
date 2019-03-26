@@ -3,10 +3,11 @@ package com.ycbjie.zhihu.presenter;
 import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.NetworkUtils;
+import com.ycbjie.library.http.ExceptionUtils;
+import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.ycbjie.zhihu.api.ZhiHuModel;
 import com.ycbjie.zhihu.contract.ZhiHuSectionContract;
 import com.ycbjie.zhihu.model.ZhiHuSectionBean;
-import com.ycbjie.library.utils.rxUtils.RxUtil;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -62,6 +63,7 @@ public class ZhiHuSectionPresenter implements ZhiHuSectionContract.Presenter {
                         }else {
                             mView.setNetworkErrorView();
                         }
+                        ExceptionUtils.handleException(e);
                     }
 
                     @Override
