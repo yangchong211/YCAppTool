@@ -22,24 +22,22 @@ import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
  */
 public class NotePadListAdapter extends RecyclerArrayAdapter<NotePadDetail> {
 
-    private Activity activity;
 
     public NotePadListAdapter(Activity activity) {
         super(activity);
-        this.activity = activity;
     }
 
     @Override
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ExpressDeliveryViewHolder(parent);
+        return new ViewHolder(parent);
     }
 
 
-    private class ExpressDeliveryViewHolder extends BaseViewHolder<NotePadDetail> {
+    private class ViewHolder extends BaseViewHolder<NotePadDetail> {
 
         TextView tv_list_title ,tv_id, tv_list_summary , tv_list_time , tv_list_group ;
 
-        ExpressDeliveryViewHolder(ViewGroup parent) {
+        ViewHolder(ViewGroup parent) {
             super(parent, R.layout.item_note_pad_list);
             tv_list_title = $(R.id.tv_list_title);
             tv_id = $(R.id.tv_id);

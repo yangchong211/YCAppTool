@@ -20,7 +20,6 @@ import java.util.List;
  */
 public interface SearchListContract {
 
-    //View(activity/fragment)继承，需要实现的方法
     interface View extends BaseView {
         Intent intent();
         void hideNoResults();
@@ -31,7 +30,6 @@ public interface SearchListContract {
         void startActivityAndForResult(Intent intent, int code);
     }
 
-    //Presenter控制器
     interface Presenter extends BasePresenter {
         void bindView(SearchListContract.View homeView);
         void onItemClick(int position, CacheTaskDetailEntity entity);

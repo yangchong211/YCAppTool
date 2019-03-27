@@ -3,13 +3,14 @@
     package="com.ycbjie.note" >
 
     <application
-        android:name=".NoteApp"
+        android:name=".app.NoteApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_note_name"
         android:theme="@style/AppTheme"
         android:supportsRtl="true"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:label">
 
         <activity android:name=".ui.activity.NoteTestActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

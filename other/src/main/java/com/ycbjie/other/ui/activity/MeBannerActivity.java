@@ -6,9 +6,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bumptech.glide.Glide;
 import com.ns.yc.ycutilslib.blurView.blur.CustomBlur;
 import com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView;
 import com.ycbjie.library.arounter.ARouterConstant;
@@ -57,6 +60,30 @@ public class MeBannerActivity extends BaseActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (mRecyclerView!=null){
+            mRecyclerView.onStart();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRecyclerView.addOnScrollListener(listener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mRecyclerView.removeOnScrollListener(listener);
+        if (mRecyclerView!=null){
+            mRecyclerView.onStop();
+        }
+    }
+
+
+    @Override
     public int getContentView() {
         return R.layout.activity_banner_view;
     }
@@ -79,23 +106,6 @@ public class MeBannerActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (mRecyclerView!=null){
-            mRecyclerView.onStart();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mRecyclerView!=null){
-            mRecyclerView.onStop();
-        }
-    }
-
-
     private void initRecyclerView() {
         MeBannerAdapter adapter = new MeBannerAdapter(this,false);
         adapter.setData(getData());
@@ -111,6 +121,27 @@ public class MeBannerActivity extends BaseActivity {
                 .setSize(adapter.getData().size())
                 .setUp();
     }
+
+
+    /**
+     * 报错提示：You cannot start a load for a destroyed activity
+     * 原因的出处是因为我在滑动那里做的图片滑动时停止加载，停止时加载图片导致的
+     * “You cannot start a load for a destroyed activity”,说白了就是activity在你按back键时候已经销毁了，
+     * 而那个滚动事件的Glide图片处理事件还在执行。
+     *
+     * 方案1：尝试在每个Glide使用时候，this改成getApplicationContext()，依然crash！
+     */
+    private RecyclerView.OnScrollListener listener =  new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                Glide.with(getApplicationContext()).resumeRequests();
+            }else {
+                Glide.with(getApplicationContext()).pauseRequests();
+            }
+        }
+    };
 
 
     private ArrayList<Integer> getData(){

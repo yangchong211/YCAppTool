@@ -1,4 +1,4 @@
-package com.ycbjie.note;
+package com.ycbjie.note.app;
 
 import android.content.Context;
 

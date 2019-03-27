@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -13,14 +12,12 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.ycbjie.library.R;
 import com.ycbjie.library.base.glide.GlideApp;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.weight.CircleTransform;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -255,6 +252,22 @@ public class ImageUtils {
                     .into(imageView);
         }
     }
+
+    /**
+     * 将gif图转换为静态图
+     */
+    public static void loadImgByGlide(Context context , int url, int resId ,ImageView imageView) {
+        if(imageView==null){
+            return;
+        }
+        GlideApp.with(context)
+                .asDrawable()
+                .load(url)
+                .placeholder(resId)
+                .error(resId)
+                .into(imageView);
+    }
+
 
     public static void loadImageWithRound(Context context, String url,
                                           @DrawableRes int defaultImg, ImageView iv, int radius) {

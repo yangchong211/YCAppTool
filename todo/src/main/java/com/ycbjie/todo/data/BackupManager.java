@@ -119,8 +119,9 @@ public class BackupManager {
 
 
     private static <T> boolean exportToFile(File des, List<T> list, ItemStringCreator<T> creator) {
-        if (des == null || list == null || list.isEmpty())
+        if (des == null || list == null || list.isEmpty()) {
             throw new IllegalArgumentException("Des file or list is null");
+        }
         BufferedWriter bw = null;
         if (creator == null){
             creator = new ItemStringCreator<T>() {
@@ -143,7 +144,9 @@ public class BackupManager {
             return false;
         } finally {
             try {
-                if (bw != null) bw.close();
+                if (bw != null) {
+                    bw.close();
+                }
             } catch (IOException ignored) {
 
             }

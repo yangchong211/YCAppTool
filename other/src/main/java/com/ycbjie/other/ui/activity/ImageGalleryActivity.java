@@ -97,6 +97,8 @@ public class ImageGalleryActivity extends BaseActivity {
                 .addBitmap(images);
     }
 
+
+
     private Bitmap toBitmap(int image) {
         return ((BitmapDrawable) getResources().getDrawable(image)).getBitmap();
     }

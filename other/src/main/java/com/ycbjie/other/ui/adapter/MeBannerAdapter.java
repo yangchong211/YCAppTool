@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.ycbjie.library.utils.image.ImageUtils;
 import com.ycbjie.other.R;
 
 import java.util.ArrayList;
@@ -54,7 +55,8 @@ public class MeBannerAdapter extends RecyclerView.Adapter <MeBannerAdapter.MyVie
         }
 
         Integer url = urlList.get(position%urlList.size());
-        holder.imageView.setBackgroundResource(url);
+        ImageUtils.loadImgByGlide(mContext,url,url,holder.imageView);
+        //holder.imageView.setBackgroundResource(url);
     }
 
 
