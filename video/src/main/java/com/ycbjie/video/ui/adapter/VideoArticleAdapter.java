@@ -69,7 +69,8 @@ public class VideoArticleAdapter extends RecyclerArrayAdapter<MultiNewsArticleDa
                 if (null != item.getVideo_detail_info().getDetail_video_large_image()) {
                     String image = item.getVideo_detail_info().getDetail_video_large_image().getUrl();
                     if (!TextUtils.isEmpty(image)) {
-                        ImageUtils.loadImgByPicasso(getContext(),image,R.drawable.image_default,ivVideoImage);
+                        ImageUtils.loadImgByPicasso(getContext(),image,
+                                R.drawable.image_default,ivVideoImage);
                     }
                 }
             } else {
@@ -79,7 +80,8 @@ public class VideoArticleAdapter extends RecyclerArrayAdapter<MultiNewsArticleDa
             if (null != item.getUser_info()) {
                 String avatarUrl = item.getUser_info().getAvatar_url();
                 if (!TextUtils.isEmpty(avatarUrl)) {
-                    ImageUtils.loadImgByPicasso(getContext(),avatarUrl,R.drawable.image_default,ivMedia);
+                    ImageUtils.loadImgByPicasso(getContext(),avatarUrl,
+                            R.drawable.image_default,ivMedia);
                 }
             }
 

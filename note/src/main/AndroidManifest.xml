@@ -3,7 +3,7 @@
 
     <application>
 
-        <activity android:name="com.ycbjie.note.NotePadActivity"/>
+        <activity android:name="com.ycbjie.note.ui.activity.NotePadActivity"/>
         <activity android:name="com.ycbjie.note.ui.activity.NotePadNewActivity"/>
         <activity android:name="com.ycbjie.note.ui.activity.NotePadDetailActivity"/>
         <activity android:name="com.ycbjie.note.ui.activity.MdMainActivity"/>

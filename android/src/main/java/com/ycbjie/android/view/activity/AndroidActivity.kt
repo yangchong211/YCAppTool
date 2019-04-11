@@ -124,6 +124,8 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         super.onNewIntent(intent)
         if (intent != null) {
             selectIndex = intent.getIntExtra("selectIndex", HOME)
+            //Kotlin 支持在字符串字面值中引用局部变量，只需要在变量名前加上字符$即可
+            LogUtils.e("索引-------$selectIndex")
             viewPager?.currentItem = selectIndex
         }
     }
@@ -281,9 +283,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         fragments.add(AndroidKnowledgeFragment())
         fragments.add(AndroidProjectFragment())
         fragments.add(AndroidProfileFragment())
-
         pageAdapter = BasePagerAdapter(supportFragmentManager, fragments)
-        //
         viewPager.run {
             this!!.adapter = pageAdapter
             addOnPageChangeListener(PagerChangeListener(this@AndroidActivity))

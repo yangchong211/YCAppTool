@@ -9,7 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.ycbjie.note.NotePadActivity;
+import com.ycbjie.note.ui.activity.NotePadActivity;
 import com.ycbjie.note.R;
 
 

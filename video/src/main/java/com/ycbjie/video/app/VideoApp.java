@@ -1,4 +1,4 @@
-package com.ycbjie.video;
+package com.ycbjie.video.app;
 
 import android.content.Context;
 

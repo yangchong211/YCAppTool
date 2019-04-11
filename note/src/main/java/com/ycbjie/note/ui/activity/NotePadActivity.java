@@ -1,4 +1,4 @@
-package com.ycbjie.note;
+package com.ycbjie.note.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,8 +21,6 @@ import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.note.model.cache.CacheNotePad;
 import com.ycbjie.note.model.bean.NotePadDetail;
-import com.ycbjie.note.ui.activity.NotePadDetailActivity;
-import com.ycbjie.note.ui.activity.NotePadNewActivity;
 import com.ycbjie.note.ui.adapter.NotePadListAdapter;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;

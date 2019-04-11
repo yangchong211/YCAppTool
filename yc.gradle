@@ -2,16 +2,16 @@
 ext {
 
     isApplication = false  //false:作为Lib组件存在， true:作为application存在，这个不建议改
-    isLoveApplication = false  //爱意表达模块开关，false:作为Lib组件存在， true:作为application存在
-    isVideoApplication = false  //视频模块开关，false:作为Lib组件存在， true:作为application存在
-    isZhiHuApplication = false  //知乎模块开关，false:作为Lib组件存在， true:作为application存在
-    isBookApplication = false  //book模块开关，false:作为Lib组件存在， true:作为application存在
-    isDouBanApplication = false  //豆瓣模块开关，false:作为Lib组件存在， true:作为application存在
-    isOtherApplication = false  //其他模块开关，false:作为Lib组件存在， true:作为application存在
-    isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
-    isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
-    isToDoApplication = false  //todo模块开关，false:作为Lib组件存在， true:作为application存在
-    isNoteApplication = false  //记事本模块开关，false:作为Lib组件存在， true:作为application存在
+    isLoveApplication = true  //爱意表达模块开关，false:作为Lib组件存在， true:作为application存在
+    isVideoApplication = true  //视频模块开关，false:作为Lib组件存在， true:作为application存在
+    isZhiHuApplication = true  //知乎模块开关，false:作为Lib组件存在， true:作为application存在
+    isBookApplication = true  //book模块开关，false:作为Lib组件存在， true:作为application存在
+    isDouBanApplication = true  //豆瓣模块开关，false:作为Lib组件存在， true:作为application存在
+    isOtherApplication = true  //其他模块开关，false:作为Lib组件存在， true:作为application存在
+    isAndroidApplication = true  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
+    isGankApplication = true  //干货模块开关，false:作为Lib组件存在， true:作为application存在
+    isToDoApplication = true  //todo模块开关，false:作为Lib组件存在， true:作为application存在
+    isNoteApplication = true  //记事本模块开关，false:作为Lib组件存在， true:作为application存在
 
     //下面组件先不要切换，后期待完善
     isNewsApplication = false  //新闻模块开关，false:作为Lib组件存在， true:作为application存在

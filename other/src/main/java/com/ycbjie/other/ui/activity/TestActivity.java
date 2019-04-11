@@ -58,4 +58,8 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             startActivity(new Intent(this, CloneAbleActivity.class));
         }
     }
+
+
+
+
 }

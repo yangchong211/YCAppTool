@@ -28,7 +28,7 @@ android {
     }
 
     //签名
-    /*signingConfigs {
+    signingConfigs {
         debug {
             v1SigningEnabled true
             v2SigningEnabled true
@@ -56,7 +56,7 @@ android {
                 ex.printStackTrace()
             }
         }
-    }*/
+    }
 
     buildTypes {
         //正式

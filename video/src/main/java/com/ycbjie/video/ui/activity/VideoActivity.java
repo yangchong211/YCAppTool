@@ -74,8 +74,8 @@ public class VideoActivity extends BaseActivity {
     @Override
     public void initData() {
         List<Fragment> fragmentList = new ArrayList<>();
-        String categoryId[] = this.getResources().getStringArray(R.array.mobile_video_id);
-        String categoryName[] = this.getResources().getStringArray(R.array.mobile_video_name);
+        String[] categoryId = this.getResources().getStringArray(R.array.mobile_video_id);
+        String[] categoryName = this.getResources().getStringArray(R.array.mobile_video_name);
         ArrayList<String> title = new ArrayList<>();
         for (int i = 0; i < categoryId.length; i++) {
             Fragment fragment = VideoArticleFragment.newInstance(categoryId[i]);
@@ -90,8 +90,11 @@ public class VideoActivity extends BaseActivity {
         vpContent.setOffscreenPageLimit(categoryId.length);
     }
 
-    //这个是处理返回键的逻辑
-    //具体可看：https://github.com/yangchong211中的工具类YCUtils开源库
+
+
+    /**
+     * 这个是处理返回键的逻辑
+     */
     private long lastBackPress;
     public boolean backHandled = true;
     @Override
