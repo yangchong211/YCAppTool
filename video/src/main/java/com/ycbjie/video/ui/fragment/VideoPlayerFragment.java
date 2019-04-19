@@ -100,10 +100,17 @@ public class VideoPlayerFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        initData(url);
+    }
+
+    /**
+     * update the url for reshow the fragment
+     * @param url
+     */
+    public void initData(String url){
         VideoModel model = VideoModel.getInstance();
         getVideoData(model,url);
     }
-
 
     @SuppressLint("CheckResult")
     private void getVideoData(VideoModel model, String url) {

@@ -282,7 +282,9 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
             ft.add(android.R.id.content, videoPlayerFragment);
         } else {
             ft.show(videoPlayerFragment);
+            videoPlayerFragment.initData(url);
         }
+
         ft.commitAllowingStateLoss();
         isPlayFragmentShow = true;
     }
