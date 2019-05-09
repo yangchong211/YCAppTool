@@ -5,20 +5,23 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
+import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
+import com.ns.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
+import com.ns.yc.lifehelper.ui.guide.view.activity.SelectFollowActivity;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
-import com.ns.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.ui.find.view.activity.MyVideoActivity;
 import com.ycbjie.library.constant.Constant;
-import com.yc.cn.ycbannerlib.banner.BannerView;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -251,7 +254,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_SNAPHELPER_ACTIVITY);
                 break;
             case 2:
-                startActivity(MyVideoActivity.class);
+                ActivityUtils.startActivity(SelectFollowActivity.class);
                 break;
             case 3:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_BOOK_DOODLE_ACTIVITY);

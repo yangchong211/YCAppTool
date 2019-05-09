@@ -19,8 +19,9 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.note.model.cache.CacheNotePad;
+import com.ycbjie.note.R;
 import com.ycbjie.note.model.bean.NotePadDetail;
+import com.ycbjie.note.model.cache.CacheNotePad;
 import com.ycbjie.note.ui.adapter.NotePadListAdapter;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;

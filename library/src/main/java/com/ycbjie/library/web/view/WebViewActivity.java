@@ -17,7 +17,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.SslErrorHandler;
@@ -40,17 +39,17 @@ import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.Utils;
+import com.ns.yc.ycutilslib.webView.ScrollWebView;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.R;
+import com.ycbjie.library.arounter.ARouterConstant;
+import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.arounter.DegradeServiceImpl;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
-import com.ycbjie.library.web.js.JsAppInterface;
 import com.ycbjie.library.utils.AppUtils;
 import com.ycbjie.library.utils.DoShareUtils;
-import com.ns.yc.ycutilslib.webView.ScrollWebView;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.ycbjie.library.web.js.JsAppInterface;
 
 
 /**
@@ -79,7 +78,7 @@ public class WebViewActivity extends BaseActivity {
     private View mErrorView;
     //是否可以调用app的js交互
     public boolean isJsToAppCallBack=true;
-    public static final String WebViewJsMethodName = "ycWebView";
+    public static final String WEB_VIEW_JS_METHOD_NAME = "ycWebView";
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onResume() {
@@ -323,7 +322,7 @@ public class WebViewActivity extends BaseActivity {
         });
 
         JsAppInterface jsAppInterface = new JsAppInterface(this, mWebView);
-        mWebView.addJavascriptInterface(jsAppInterface, WebViewJsMethodName);
+        mWebView.addJavascriptInterface(jsAppInterface, WEB_VIEW_JS_METHOD_NAME);
     }
 
 
@@ -363,17 +362,19 @@ public class WebViewActivity extends BaseActivity {
                 intent.setAction("android.intent.action.VIEW");
                 intent.addCategory("android.intent.category.DEFAULT");
                 intent.addCategory("android.intent.category.BROWSABLE");
-                Uri content_url = Uri.parse(url);
-                intent.setData(content_url);
+                Uri contentUrl = Uri.parse(url);
+                intent.setData(contentUrl);
                 WebViewActivity.this.startActivity(intent);
-            } else if (url.startsWith(WebView.SCHEME_TEL) || url.startsWith("sms:") || url.startsWith(WebView.SCHEME_MAILTO)) {
+            } else if (url.startsWith(WebView.SCHEME_TEL) || url.startsWith("sms:")
+                    || url.startsWith(WebView.SCHEME_MAILTO)) {
                 //电话、短信、邮箱
+                //noinspection CatchMayIgnoreException
                 try {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
                     WebViewActivity.this.startActivity(intent);
                 } catch (ActivityNotFoundException ignored) {
-
+                    System.out.println(ignored.getMessage());
                 }
             } else {
                 view.loadUrl(url);
@@ -631,19 +632,6 @@ public class WebViewActivity extends BaseActivity {
     }
 
 
-    private class FullscreenHolder extends FrameLayout {
-        public FullscreenHolder(Context ctx) {
-            super(ctx);
-            setBackgroundColor(ctx.getResources().getColor(android.R.color.black));
-        }
-        @SuppressLint("ClickableViewAccessibility")
-        @Override
-        public boolean onTouchEvent(MotionEvent event) {
-            return true;
-        }
-    }
-
-
     /**
      * 显示自定义错误提示页面，用一个View覆盖在WebView
      */
@@ -680,17 +668,15 @@ public class WebViewActivity extends BaseActivity {
     protected void initErrorPage() {
         if (mErrorView == null) {
             mErrorView = View.inflate(this, R.layout.view_custom_data_error, null);
-            LinearLayout ll_error_view = (LinearLayout) mErrorView.findViewById(R.id.ll_error_view);
-            ll_error_view.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    if(NetworkUtils.isConnected()){
-                        //如果有网络，则刷新页面
-                        mWebView.reload();
-                        recreate();
-                    }else {
-                        //没有网络，不处理
-                        ToastUtils.showToast("请检查是否连上网络");
-                    }
+            LinearLayout llErrorView = mErrorView.findViewById(R.id.ll_error_view);
+            llErrorView.setOnClickListener(v -> {
+                if(NetworkUtils.isConnected()){
+                    //如果有网络，则刷新页面
+                    mWebView.reload();
+                    recreate();
+                }else {
+                    //没有网络，不处理
+                    ToastUtils.showToast("请检查是否连上网络");
                 }
             });
             mErrorView.setOnClickListener(null);

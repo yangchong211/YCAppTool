@@ -27,6 +27,7 @@ import com.ycbjie.android.base.KotlinConstant
 import com.ycbjie.android.base.KotlinConstant.HOME
 import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.presenter.AndroidPresenter
+import com.ycbjie.android.util.KotlinTest
 import com.ycbjie.android.view.fragment.AndroidHomeFragment
 import com.ycbjie.android.view.fragment.AndroidKnowledgeFragment
 import com.ycbjie.android.view.fragment.AndroidProfileFragment
@@ -230,6 +231,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         initToolBar()
         initFragment()
         initTabLayout()
+        test()
     }
 
 
@@ -512,6 +514,9 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
     }
 
 
-
+    fun test(){
+        val test = KotlinTest()
+        test.test()
+    }
 
 }

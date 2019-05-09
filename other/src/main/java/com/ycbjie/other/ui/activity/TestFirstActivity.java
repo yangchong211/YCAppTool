@@ -10,6 +10,9 @@ import com.ycbjie.other.R;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class TestFirstActivity extends BaseActivity implements View.OnClickListener {
 
@@ -283,4 +286,50 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
         localVarGc1();
         System.gc();
     }
+
+
+    private void hashMap(){
+        HashMap<String, Integer> map = new HashMap<String, Integer>();
+        map.put("语文", 1);
+        map.put("数学", 2);
+        map.put("英语", 3);
+        map.put("历史", 4);
+        map.put("政治", 5);
+        map.put("地理", 6);
+        map.put("生物", 7);
+        map.put("化学", 8);
+
+        //第一种方式，for each 遍历
+        for(Map.Entry<String, Integer> entry : map.entrySet()) {
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            System.out.println( key + ": " + value);
+        }
+        for(Map.Entry<String, Integer> entry : map.entrySet()) {
+            String key = entry.getKey();
+            //通过key找键，效率相比比较低
+            Integer value = map.get(key);
+            System.out.println( key + ": " + value);
+        }
+
+        //第二种方式，使用迭代器
+        Iterator<Map.Entry<String, Integer>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, Integer> next = iterator.next();
+            String key = next.getKey();
+            Integer value = next.getValue();
+            System.out.println(key + ": " + value);
+        }
+        while (iterator.hasNext()){
+            Map.Entry<String, Integer> next = iterator.next();
+            String key = next.getKey();
+            //通过key找键，效率相比比较低
+            Integer value = map.get(key);
+            System.out.println(key + ": " + value);
+        }
+
+    }
+
+
+
 }

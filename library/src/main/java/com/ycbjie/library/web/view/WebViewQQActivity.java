@@ -310,16 +310,14 @@ public class WebViewQQActivity extends BaseActivity implements View.OnClickListe
         if (mErrorView == null) {
             mErrorView = View.inflate(this, R.layout.view_custom_data_error, null);
             LinearLayout ll_error_view = mErrorView.findViewById(R.id.ll_error_view);
-            ll_error_view.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    if(NetworkUtils.isConnected()){
-                        //如果有网络，则刷新页面
-                        webView.reload();
-                        recreate();
-                    }else {
-                        //没有网络，不处理
-                        ToastUtils.showToast("请检查是否连上网络");
-                    }
+            ll_error_view.setOnClickListener(v -> {
+                if(NetworkUtils.isConnected()){
+                    //如果有网络，则刷新页面
+                    webView.reload();
+                    recreate();
+                }else {
+                    //没有网络，不处理
+                    ToastUtils.showToast("请检查是否连上网络");
                 }
             });
             mErrorView.setOnClickListener(null);

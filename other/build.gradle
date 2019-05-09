@@ -4,6 +4,17 @@ if (rootProject.ext.isOtherApplication) {
 } else {
     apply plugin: 'com.android.library'
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -22,11 +33,11 @@ android {
             applicationId "com.ycbjie.other"
         }
 
-        javaCompileOptions {
+        /*javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
-        }
+        }*/
     }
 
     buildTypes {
@@ -64,4 +75,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':library')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    // Kotlin coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
 }

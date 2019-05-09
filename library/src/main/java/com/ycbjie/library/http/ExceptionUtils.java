@@ -113,16 +113,16 @@ public class ExceptionUtils {
             ex = new ApiException(resultException, ErrorCode.SERVER_ERROR);
             switch (code){
                 case CODE_TOKEN_INVALID:
-                    ex.setDisplayMessage("重新登陆，逗比");
+                    ex.setDisplayMessage("重新登陆");
                     break;
                 case CODE_NO_OTHER:
-                    ex.setDisplayMessage("其他情况，逗比");
+                    ex.setDisplayMessage("其他情况");
                     break;
                 case CODE_SHOW_TOAST:
-                    ex.setDisplayMessage("逗比");
+                    ex.setDisplayMessage("吐司");
                     break;
                 case CODE_NO_MISSING_PARAMETER:
-                    ex.setDisplayMessage("缺少参数，逗比");
+                    ex.setDisplayMessage("缺少参数");
                     break;
                 default:
                     break;
@@ -151,7 +151,7 @@ public class ExceptionUtils {
             ex.setDisplayMessage("未知错误");
         }
         String displayMessage = ex.getDisplayMessage();
-        //逗比，这里直接吐司日志异常内容，注意正式项目中一定要注意吐司合适的内容
+        //这里直接吐司日志异常内容，注意正式项目中一定要注意吐司合适的内容
         ToastUtils.showRoundRectToast(displayMessage);
     }
 

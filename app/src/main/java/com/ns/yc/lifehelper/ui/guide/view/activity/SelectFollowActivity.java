@@ -5,18 +5,17 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.model.bean.SelectPoint;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.SelectFollowPresenter;
 import com.ns.yc.lifehelper.ui.guide.view.adapter.SelectFollowAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycrecycleviewlib.select.SelectRecyclerView;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.constant.Constant;
 
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
 
@@ -30,7 +29,7 @@ import java.util.List;
  *     blog  : https://github.com/yangchong211
  *     time  : 2016/03/22
  *     desc  : 关注点页面
- *     revise:
+ *     revise: https://github.com/yangchong211/YCRecycleView
  * </pre>
  */
 public class SelectFollowActivity extends BaseActivity<SelectFollowPresenter>
@@ -146,7 +145,7 @@ public class SelectFollowActivity extends BaseActivity<SelectFollowPresenter>
 
     @Override
     public void toMainActivity() {
-        ActivityUtils.startActivity(MainActivity.class,R.anim.screen_zoom_in,R.anim.screen_zoom_out);
+        MainActivity.startActivity(this,MainActivity.FIND);
         SPUtils.getInstance(Constant.SP_NAME).put(Constant.KEY_FIRST_SPLASH, false);
         finish();
     }

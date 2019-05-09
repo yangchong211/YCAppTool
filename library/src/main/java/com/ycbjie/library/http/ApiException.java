@@ -1,5 +1,8 @@
 package com.ycbjie.library.http;
 
+/**
+ * @author yc
+ */
 public class ApiException extends Exception {
 
     private int code;

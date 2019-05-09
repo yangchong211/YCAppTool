@@ -789,7 +789,7 @@
 #### 9.2.6 对象池Pools优化频繁创建和销毁对象
 - 使用对象池，可以防止频繁创建和销毁对象而出现内存抖动
     - 在某些时候，我们需要频繁使用一些临时对象，如果每次使用的时候都申请新的资源，很有可能会引发频繁的 gc 而影响应用的流畅性。这个时候如果对象有明确的生命周期，那么就可以通过定义一个对象池来高效的完成复用对象。
-    - 具体参考案例，可以看该项目：
+    - 具体参考案例，可以看该项目：https://github.com/yangchong211/YCZoomImage
 
 
 
@@ -856,7 +856,7 @@
 #### 02.关于我的博客
 - 我的个人站点：www.yczbj.org，www.ycbjie.cn
 - github：https://github.com/yangchong211
-- 知乎：https://www.zhihu.com/people/yang-chong-69-24/pins/posts
+- 知乎：https://www.zhihu.com/people/yczbj/posts
 - 简书：http://www.jianshu.com/u/b7b2c6ed9284
 - csdn：http://my.csdn.net/m0_37700275
 - 喜马拉雅听书：http://www.ximalaya.com/zhubo/71989305/
