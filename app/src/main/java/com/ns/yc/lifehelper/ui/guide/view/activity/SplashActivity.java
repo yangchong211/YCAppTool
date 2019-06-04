@@ -38,6 +38,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //将window的背景图设置为空
         getWindow().setBackgroundDrawable(null);
+        StateAppBar.translucentStatusBar(this, true);
         super.onCreate(savedInstanceState);
     }
 
@@ -48,7 +49,6 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
 
     @Override
     public void initView() {
-        StateAppBar.translucentStatusBar(this, true);
         CountDownView cdvTime = findViewById(R.id.cdv_time);
         cdvTime.setVisibility(View.GONE);
         initPermissions();

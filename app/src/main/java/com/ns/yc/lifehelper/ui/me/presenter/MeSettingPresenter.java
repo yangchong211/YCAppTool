@@ -10,26 +10,19 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.blankj.utilcode.util.AppUtils;
-import com.blankj.utilcode.util.ToastUtils;
-import com.ns.yc.lifehelper.base.app.BaseApplication;
-import com.ycbjie.library.base.config.AppConfig;
-import com.ns.yc.lifehelper.model.bean.UpdateBean;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
-import com.ns.yc.lifehelper.ui.me.model.MeAppModel;
-import com.ycbjie.library.web.view.WebViewActivity;
 import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.lifehelper.utils.FileCacheUtils;
 import com.ns.yc.lifehelper.utils.GoToScoreUtils;
-import com.ycbjie.library.utils.rxUtils.RxUtil;
 import com.pedaily.yc.ycdialoglib.dialog.CustomSelectDialog;
+import com.ycbjie.library.base.config.AppConfig;
+import com.ycbjie.library.web.view.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
-import rx.Subscriber;
-import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -178,32 +171,7 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
 
     @Override
     public void checkVersion(final String currentVersion) {
-        MeAppModel model = MeAppModel.getInstance();
-        Subscription rxSubscription = model.getVersionInfo()
-                .compose(RxUtil.<UpdateBean>rxSchedulerHelper())
-                .compose(RxUtil.<UpdateBean>handleMyResult())
-                .subscribe(new Subscriber<UpdateBean>() {
-                    @Override
-                    public void onCompleted() {
 
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        ToastUtils.showShort("错误"+e.getLocalizedMessage());
-                    }
-
-                    @Override
-                    public void onNext(UpdateBean updateBean) {
-                        if (Integer.valueOf(currentVersion.replace(".", "")) <
-                                Integer.valueOf(updateBean.getCode().replace(".", ""))) {
-                            mMeSetView.showUpdateDialog(updateBean);
-                        } else {
-                            ToastUtils.showShort("已经是最新版本");
-                        }
-                    }
-                });
-        mSubscriptions.add(rxSubscription);
     }
 
     @Override

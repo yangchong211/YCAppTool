@@ -27,7 +27,6 @@ public interface SelectFollowContract {
 
     interface Presenter extends BasePresenter {
         void addData(Activity activity);
-        void addSelectToRealm(Integer[] selectedIndices);
     }
 
 

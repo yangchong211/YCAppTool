@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class BaseViewPagerRollAdapter extends PagerAdapter {
 
-    //View就二十GridView
     private List<View> viewList;
 
 

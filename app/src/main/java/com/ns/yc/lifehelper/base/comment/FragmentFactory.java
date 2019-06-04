@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.comment;
+package com.ns.yc.lifehelper.base.comment;
 
 import com.ns.yc.lifehelper.ui.data.view.fragment.DataFragment;
 import com.ns.yc.lifehelper.ui.find.view.fragment.FindFragment;

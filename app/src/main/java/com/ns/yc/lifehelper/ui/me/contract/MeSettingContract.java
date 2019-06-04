@@ -5,7 +5,6 @@ import android.app.Activity;
 
 import com.ycbjie.library.base.mvp.BasePresenter;
 import com.ycbjie.library.base.mvp.BaseView;
-import com.ns.yc.lifehelper.model.bean.UpdateBean;
 
 /**
  * ================================================
@@ -42,9 +41,6 @@ public interface MeSettingContract {
         void showCacheSize();
         //设置清理缓存后的文本
         void setClearText();
-        void setErrorView(Throwable e);
-        void showUpdateDialog(UpdateBean updateBean);
-        void finishActivity();
         void exitLogout();
     }
 

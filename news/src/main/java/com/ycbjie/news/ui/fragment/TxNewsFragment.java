@@ -3,7 +3,6 @@ package com.ycbjie.news.ui.fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -96,15 +95,12 @@ public class TxNewsFragment extends BaseFragment {
 
     @Override
     public void initListener() {
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(position>-1 && adapter.getAllData().size()>position){
-                    Bundle bundle1 = new Bundle();
-                    bundle1.putString(Constant.URL,adapter.getAllData().get(position).getUrl());
-                    bundle1.putString(Constant.TITLE,adapter.getAllData().get(position).getDescription());
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
-                }
+        adapter.setOnItemClickListener(position -> {
+            if(position>-1 && adapter.getAllData().size()>position){
+                Bundle bundle1 = new Bundle();
+                bundle1.putString(Constant.URL,adapter.getAllData().get(position).getUrl());
+                bundle1.putString(Constant.TITLE,adapter.getAllData().get(position).getDescription());
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
             }
         });
     }
@@ -180,15 +176,12 @@ public class TxNewsFragment extends BaseFragment {
         });
 
         //刷新
-        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    getTxNews(mType , num);
-                } else {
-                    recyclerView.setRefreshing(false);
-                    Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
-                }
+        recyclerView.setRefreshListener(() -> {
+            if (NetworkUtils.isConnected()) {
+                getTxNews(mType , num);
+            } else {
+                recyclerView.setRefreshing(false);
+                Toast.makeText(activity, "网络不可用", Toast.LENGTH_SHORT).show();
             }
         });
     }

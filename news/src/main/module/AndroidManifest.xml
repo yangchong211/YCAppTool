@@ -4,6 +4,7 @@
 
 
     <application
+        android:name=".app.NewsApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_news_name"
@@ -12,15 +13,12 @@
         tools:replace="android:label"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".ui.activity.TxNewsActivity">
+        <activity android:name=".ui.activity.TxWeChatNewsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.activity.TxWeChatNewsActivity"/>
-        <activity android:name=".ui.activity.WyNewsActivity"/>
     </application>
 
 

@@ -33,7 +33,7 @@ import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.comment.FragmentFactory;
+import com.ns.yc.lifehelper.base.comment.FragmentFactory;
 import com.ns.yc.lifehelper.service.LoopRequestService;
 import com.ns.yc.lifehelper.ui.main.contract.MainContract;
 import com.ns.yc.lifehelper.ui.main.presenter.MainPresenter;

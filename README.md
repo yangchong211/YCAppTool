@@ -30,7 +30,7 @@
 
 ### 02.项目运行
 - 运行环境要求
-    - Android studio 版本需要在3.0之上，compileSdkVersion是28，gradle版本是3.2.1，gradle-wrapper是4.6
+    - Android studio 版本需要在3.0之上，compileSdkVersion是28，gradle版本是3.2.1，gradle-wrapper是4.6，jdk建议是1.8以上(支持Lambda表达式)
 - 组件模式和集成模式如何切换
     - 默认模式下，都是属于library形式的组件【app作为空壳主工程依赖所有的组件】，如果想把某一个library形式的组件切换成一个独立可以run的application，则
     - 比如，我想把视频模块，也就是该项目中的video组件切换成可运行的项目。如果想了解组件化更多内容，可以着重看 04.项目组件化结构部分说明

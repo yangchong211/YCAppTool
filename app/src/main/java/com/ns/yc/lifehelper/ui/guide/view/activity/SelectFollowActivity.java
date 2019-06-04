@@ -109,11 +109,6 @@ public class SelectFollowActivity extends BaseActivity<SelectFollowPresenter>
                 }
                 break;
             case R.id.tv_start:
-                if(adapter!=null && adapter.data!=null){
-                    if(adapter.getSelectedIndices().length>0){
-                        presenter.addSelectToRealm(adapter.getSelectedIndices());
-                    }
-                }
                 toMainActivity();
                 break;
             default:

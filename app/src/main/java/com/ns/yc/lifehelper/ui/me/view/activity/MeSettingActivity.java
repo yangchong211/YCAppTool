@@ -1,9 +1,7 @@
 package com.ns.yc.lifehelper.ui.me.view.activity;
 
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -15,7 +13,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.model.bean.UpdateBean;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
@@ -375,40 +372,6 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
     @Override
     public void setClearText() {
         tvSetCacheSize.setText("0K");
-    }
-
-    @Override
-    public void setErrorView(Throwable e) {
-        ToastUtils.showToast("加载错误"+e.getMessage());
-    }
-
-    @Override
-    public void showUpdateDialog(UpdateBean updateBean) {
-        StringBuilder content = new StringBuilder("版本号: v");
-        content.append(updateBean.getCode());
-        content.append("\r\n");
-        content.append("版本大小: ");
-        content.append(updateBean.getSize());
-        content.append("\r\n");
-        content.append("更新内容:\r\n");
-        content.append(updateBean.getDes().replace("\\r\\n","\r\n"));
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("检测到新版本!");
-        builder.setMessage(content);
-        builder.setNegativeButton("取消", null);
-        builder.setPositiveButton("马上更新", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //写更新逻辑
-            }
-        });
-        builder.show();
-    }
-
-
-    @Override
-    public void finishActivity() {
-        finish();
     }
 
     @Override

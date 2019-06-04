@@ -5,8 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -15,19 +13,20 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.web.view.WebViewQQActivity;
 import com.ycbjie.news.R;
 import com.ycbjie.news.contract.TxWeChatContract;
 import com.ycbjie.news.model.WeChatBean;
 import com.ycbjie.news.presenter.TxWeChatPresenter;
 import com.ycbjie.news.ui.adapter.TxWeChatAdapter;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+
 import java.util.List;
 
 
@@ -90,11 +89,9 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onItemClick(int position) {
-                if(position>-1 && adapter.getAllData().size()>position){
+        adapter.setOnItemClickListener(position -> {
+            if(position>-1 && adapter.getAllData().size()>position){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     WebViewQQActivity.toWhere(new WebViewQQActivity.Builder()
                             .setContext(TxWeChatNewsActivity.this)
                             .setId(adapter.getAllData().get(position).getUrl())
@@ -188,16 +185,13 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
         });
 
         //刷新
-        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    page = 1;
-                    presenter.getNews(num,page);
-                } else {
-                    recyclerView.setRefreshing(false);
-                    ToastUtils.showToast("网络不可用");
-                }
+        recyclerView.setRefreshListener(() -> {
+            if (NetworkUtils.isConnected()) {
+                page = 1;
+                presenter.getNews(num,page);
+            } else {
+                recyclerView.setRefreshing(false);
+                ToastUtils.showToast("网络不可用");
             }
         });
     }
@@ -208,12 +202,7 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
         recyclerView.setErrorView(R.layout.view_custom_data_error);
         recyclerView.showError();
         LinearLayout ll_error_view = recyclerView.findViewById(R.id.ll_error_view);
-        ll_error_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initData();
-            }
-        });
+        ll_error_view.setOnClickListener(view -> initData());
     }
 
 
@@ -222,15 +211,12 @@ public class TxWeChatNewsActivity extends BaseActivity implements View.OnClickLi
         recyclerView.setErrorView(R.layout.view_custom_network_error);
         recyclerView.showError();
         LinearLayout ll_set_network = recyclerView.findViewById(R.id.ll_set_network);
-        ll_set_network.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(NetworkUtils.isConnected()){
-                    initData();
-                }else {
-                    Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
-                    startActivity(intent);
-                }
+        ll_set_network.setOnClickListener(view -> {
+            if(NetworkUtils.isConnected()){
+                initData();
+            }else {
+                Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                startActivity(intent);
             }
         });
     }
