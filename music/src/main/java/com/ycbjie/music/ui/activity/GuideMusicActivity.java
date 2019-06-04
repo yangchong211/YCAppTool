@@ -105,6 +105,7 @@ public class GuideMusicActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initFindViewById() {
+        ivSplashAd = findViewById(R.id.iv_splash_ad);
         cdvTime = findViewById(R.id.cdv_time);
     }
 
