@@ -104,21 +104,18 @@ public class ZhiHuHotFragment extends BaseStateFragment implements ZhiHuHotContr
 
     @Override
     public void initListener() {
-        mAdapter.setOnItemClickListener(new ZhiHuHotAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, View view) {
-                presenter.insertReadToDB(mList.get(position).getNews_id());
-                mAdapter.setReadState(position,true);
-                mAdapter.notifyItemChanged(position);
-                Intent intent = new Intent();
-                intent.setClass(activity, WebViewAnimActivity.class);
-                intent.putExtra("id",mList.get(position).getNews_id());
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, view, "view");
-                    activity.startActivity(intent,options.toBundle());
-                }else {
-                    activity.startActivity(intent);
-                }
+        mAdapter.setOnItemClickListener((position, view) -> {
+            presenter.insertReadToDB(mList.get(position).getNews_id());
+            mAdapter.setReadState(position,true);
+            mAdapter.notifyItemChanged(position);
+            Intent intent = new Intent();
+            intent.setClass(activity, WebViewAnimActivity.class);
+            intent.putExtra("id",mList.get(position).getNews_id());
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(activity, view, "view");
+                activity.startActivity(intent,options.toBundle());
+            }else {
+                activity.startActivity(intent);
             }
         });
     }

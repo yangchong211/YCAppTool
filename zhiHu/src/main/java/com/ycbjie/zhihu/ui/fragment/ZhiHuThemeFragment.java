@@ -98,14 +98,11 @@ public class ZhiHuThemeFragment extends BaseStateFragment implements ZhiHuThemeC
 
     @Override
     public void initListener() {
-        mAdapter.setOnItemClickListener(new ZhiHuThemeAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int id) {
-                Intent intent = new Intent();
-                intent.setClass(activity, ZhiHuThemeListActivity.class);
-                intent.putExtra(Constant.ID, id);
-                activity.startActivity(intent);
-            }
+        mAdapter.setOnItemClickListener(id -> {
+            Intent intent = new Intent();
+            intent.setClass(activity, ZhiHuThemeListActivity.class);
+            intent.putExtra(Constant.ID, id);
+            activity.startActivity(intent);
         });
     }
 
@@ -121,12 +118,9 @@ public class ZhiHuThemeFragment extends BaseStateFragment implements ZhiHuThemeC
         recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
         mAdapter = new ZhiHuThemeAdapter(activity, mList);
         recyclerView.setAdapter(mAdapter);
-        refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //刷新数据
-                presenter.getData();
-            }
+        refresher.setOnRefreshListener(() -> {
+            //刷新数据
+            presenter.getData();
         });
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_picture_name">picture</string>
+    <string name="app_music_name">小杨音乐</string>
 
     <string name="guideTime">Time © 2017&#045;%d 潇湘剑雨</string>
     <string name="menu_home">音乐中心</string>

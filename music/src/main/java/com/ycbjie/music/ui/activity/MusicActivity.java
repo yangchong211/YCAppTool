@@ -3,7 +3,6 @@ package com.ycbjie.music.ui.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -18,7 +17,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.ns.yc.ycutilslib.fragmentBack.BackHandlerHelper;
 import com.pedaily.yc.ycdialoglib.dialogFragment.BottomDialogFragment;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
@@ -33,7 +31,9 @@ import com.ycbjie.music.ui.adapter.DialogMusicListAdapter;
 import com.ycbjie.music.ui.fragment.MusicFragment;
 import com.ycbjie.music.ui.fragment.PlayMusicFragment;
 import com.ycbjie.music.utils.CoverLoader;
+
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
 import java.util.List;
 
 @Route(path = ARouterConstant.ACTIVITY_MUSIC_ACTIVITY)
@@ -64,10 +64,17 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
                 hidePlayingFragment();
                 return true;
             }
+            //双击返回桌面
+            /*if ((System.currentTimeMillis() - time > 1000)) {
+                ToastUtils.showRoundRectToast("再按一次返回桌面");
+                time = System.currentTimeMillis();
+            } else {
+                moveTaskToBack(true);
+            }
+            return true;*/
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
     @Override
     public int getContentView() {
@@ -169,12 +176,14 @@ public class MusicActivity extends BaseActivity implements View.OnClickListener 
                 if (BaseAppHelper.get().getMusicList().size() > 0) {
                     int mPlayPosition;
                     if (BaseAppHelper.get().getMusicService().getPlayingMusic() != null &&
-                            BaseAppHelper.get().getMusicService().getPlayingMusic().getType() == AudioBean.Type.LOCAL) {
+                            BaseAppHelper.get().getMusicService().getPlayingMusic().getType()
+                                    == AudioBean.Type.LOCAL) {
                         mPlayPosition = BaseAppHelper.get().getMusicService().getPlayingPosition();
                     } else {
                         mPlayPosition = 0;
                     }
-                    BaseAppHelper.get().getMusicService().play(BaseAppHelper.get().getMusicList().get(mPlayPosition));
+                    BaseAppHelper.get().getMusicService().play(BaseAppHelper.get()
+                            .getMusicList().get(mPlayPosition));
                 } else {
                     ToastUtils.showToast("请检查是否有音乐");
                 }

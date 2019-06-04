@@ -9,7 +9,7 @@
         android:id="@+id/iv_splash_ad"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"/>
+        android:background="@drawable/bg_cloud_night"/>
 
     <com.ns.yc.yccountdownviewlib.CountDownView
         android:id="@+id/cdv_time"

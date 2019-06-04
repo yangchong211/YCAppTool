@@ -148,7 +148,7 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
                             mView.showMoreContent(time,zhiHuDailyBeforeListBean);
                         }else {
                             int code = ExceptionUtils.CODE_NO_OTHER;
-                            ExceptionUtils.serviceException(code);
+                            ExceptionUtils.serviceException(code,"没有库存了");
                         }
                     }
                 });

@@ -3,12 +3,12 @@ package com.ycbjie.library.http;
 /**
  * @author yc
  */
-public class ApiException extends Exception {
+public class HttpException extends Exception {
 
     private int code;
     private String displayMessage;
 
-    public ApiException(Throwable throwable, int code) {
+    public HttpException(Throwable throwable, int code) {
         super(throwable);
         this.code = code;
     }

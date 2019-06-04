@@ -88,7 +88,7 @@ public class ZhiHuHotPresenter implements ZhiHuHotContract.Presenter {
                         }else {
                             mView.setEmptyView();
                             int code = ExceptionUtils.CODE_NO_OTHER;
-                            ExceptionUtils.serviceException(code);
+                            ExceptionUtils.serviceException(code,"没有更多商品呢");
                         }
                     }
                 });

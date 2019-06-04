@@ -200,7 +200,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_NOTE_ACTIVITY);
                 break;
             case 3:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_MUSIC_ACTIVITY);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_MUSIC_GUIDE_ACTIVITY);
                 break;
             case 4:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_ZHIHU_ACTIVITY);

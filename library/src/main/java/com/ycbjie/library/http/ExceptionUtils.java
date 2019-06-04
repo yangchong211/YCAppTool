@@ -10,8 +10,6 @@ import org.json.JSONException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
-import retrofit2.HttpException;
-
 public class ExceptionUtils {
 
     /*
@@ -44,6 +42,10 @@ public class ExceptionUtils {
 
     /**
      * 服务器定义的状态吗
+     * 比如：登录过期，提醒用户重新登录；
+     *      添加商品，但是服务端发现库存不足，这个时候接口请求成功，服务端定义业务层失败，服务端给出提示语，客户端进行吐司
+     *      请求接口，参数异常或者类型错误，请求code为200成功状态，不过给出提示，这个时候客户端用log打印服务端给出的提示语，方便快递查找问题
+     *      其他情况，接口请求成功，但是服务端定义业务层需要吐司服务端返回的对应提示语
      */
     /**
      * 完全成功
@@ -66,14 +68,17 @@ public class ExceptionUtils {
      */
     public static final int CODE_SHOW_TOAST = 400000;
 
+
+
     /**
      * 这个可以处理服务器请求成功，但是业务逻辑失败，比如token失效需要重新登陆
      * @param code                  自定义的code码
      */
-    public static void serviceException(int code){
+    public static void serviceException(int code , String content){
         if (code != CODE_SUCCESS){
             ServerException serverException = new ServerException();
             serverException.setCode(code);
+            serverException.setMessage(content);
             handleException(serverException);
         }
     }
@@ -83,11 +88,11 @@ public class ExceptionUtils {
      * @param e                     e异常
      */
     public static void handleException(Throwable e){
-        ApiException ex;
+        HttpException ex;
         //HTTP错误   网络请求异常 比如常见404 500之类的等
-        if (e instanceof HttpException){
-            HttpException httpException = (HttpException) e;
-            ex = new ApiException(e, ErrorCode.HTTP_ERROR);
+        if (e instanceof retrofit2.HttpException){
+            retrofit2.HttpException httpException = (retrofit2.HttpException) e;
+            ex = new HttpException(e, ErrorCode.HTTP_ERROR);
             switch(httpException.code()){
                 case BAD_REQUEST:
                 case UNAUTHORIZED:
@@ -110,7 +115,8 @@ public class ExceptionUtils {
             //服务器返回的错误
             ServerException resultException = (ServerException) e;
             int code = resultException.getCode();
-            ex = new ApiException(resultException, ErrorCode.SERVER_ERROR);
+            String message = resultException.getMessage();
+            ex = new HttpException(resultException, ErrorCode.SERVER_ERROR);
             switch (code){
                 case CODE_TOKEN_INVALID:
                     ex.setDisplayMessage("重新登陆");
@@ -125,58 +131,35 @@ public class ExceptionUtils {
                     ex.setDisplayMessage("缺少参数");
                     break;
                 default:
+                    ex.setDisplayMessage(message);
                     break;
             }
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException){
-            ex = new ApiException(e, ErrorCode.PARSE_ERROR);
+            ex = new HttpException(e, ErrorCode.PARSE_ERROR);
             //均视为解析错误
             ex.setDisplayMessage("解析错误");
         }else if(e instanceof ConnectException){
-            ex = new ApiException(e, ErrorCode.NETWORK_ERROR);
+            ex = new HttpException(e, ErrorCode.NETWORK_ERROR);
             //均视为网络错误
             ex.setDisplayMessage("连接失败");
         } else if(e instanceof java.net.UnknownHostException){
-            ex = new ApiException(e, ErrorCode.NETWORK_ERROR);
+            ex = new HttpException(e, ErrorCode.NETWORK_ERROR);
             //网络未连接
             ex.setDisplayMessage("网络未连接");
         } else if (e instanceof SocketTimeoutException) {
-            ex = new ApiException(e, ErrorCode.NETWORK_ERROR);
+            ex = new HttpException(e, ErrorCode.NETWORK_ERROR);
             //网络未连接
             ex.setDisplayMessage("服务器响应超时");
         }  else {
-            ex = new ApiException(e, ErrorCode.UNKNOWN);
+            ex = new HttpException(e, ErrorCode.UNKNOWN);
             //未知错误
             ex.setDisplayMessage("未知错误");
         }
         String displayMessage = ex.getDisplayMessage();
         //这里直接吐司日志异常内容，注意正式项目中一定要注意吐司合适的内容
         ToastUtils.showRoundRectToast(displayMessage);
-    }
-
-
-    public static class ServerException extends RuntimeException {
-
-        public int code;
-        public String message;
-
-        public int getCode() {
-            return code;
-        }
-
-        public void setCode(int code) {
-            this.code = code;
-        }
-
-        @Override
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
     }
 
 

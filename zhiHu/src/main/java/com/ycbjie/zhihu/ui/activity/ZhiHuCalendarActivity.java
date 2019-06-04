@@ -1,17 +1,15 @@
 package com.ycbjie.zhihu.ui.activity;
 
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.utils.time.TimeUtils;
-import com.ycbjie.library.utils.rxUtils.RxBus;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.utils.rxUtils.RxBus;
+import com.ycbjie.library.utils.time.TimeUtils;
 import com.ycbjie.zhihu.R;
 
 import java.util.Calendar;
@@ -67,13 +65,7 @@ public class ZhiHuCalendarActivity extends BaseActivity implements View.OnClickL
                         TimeUtils.getCurrentMonth(), TimeUtils.getCurrentDay()))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
-        viewCalender.setOnDateChangedListener(new OnDateSelectedListener() {
-            @Override
-            public void onDateSelected(@NonNull MaterialCalendarView widget,
-                                       @NonNull CalendarDay date, boolean selected) {
-                mDate = date;
-            }
-        });
+        viewCalender.setOnDateChangedListener((widget, date, selected) -> mDate = date);
     }
 
 
@@ -85,7 +77,6 @@ public class ZhiHuCalendarActivity extends BaseActivity implements View.OnClickL
         } else if (i == R.id.tv_calender_enter) {
             RxBus.getDefault().post(mDate);
             finish();
-        } else {
         }
     }
 }

@@ -243,7 +243,7 @@ public class TxNewsFragment extends BaseFragment {
                                     recyclerView.showEmpty();
                                     recyclerView.setEmptyView(R.layout.view_custom_empty_data);
                                     int code = ExceptionUtils.CODE_SHOW_TOAST;
-                                    ExceptionUtils.serviceException(code);
+                                    ExceptionUtils.serviceException(code,"逗比，缺少参数");
                                 }
                             } else {
                                 if(txNewsBean!=null && txNewsBean.getNewslist()!=null && txNewsBean.getNewslist().size()>0){

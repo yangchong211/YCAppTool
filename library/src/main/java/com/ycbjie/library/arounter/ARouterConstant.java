@@ -36,6 +36,8 @@ public class ARouterConstant {
     public static final String ACTIVITY_MARKDOWN_ACTIVITY = "/note/MdMainActivity";
     //音乐首页
     public static final String ACTIVITY_MUSIC_ACTIVITY = "/music/MusicActivity";
+    //音乐启动页
+    public static final String ACTIVITY_MUSIC_GUIDE_ACTIVITY = "/music/GuideMusicActivity";
     //知乎首页
     public static final String ACTIVITY_ZHIHU_ACTIVITY = "/zhihu/ZhiHuNewsActivity";
     //绘画页面

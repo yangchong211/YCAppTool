@@ -18,7 +18,6 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.music.base.BaseAppHelper;
-import com.ycbjie.music.base.BaseConfig;
 import com.ycbjie.music.inter.EventCallback;
 import com.ycbjie.music.inter.OnPlayerEventListener;
 import com.ycbjie.music.manager.AudioFocusManager;
@@ -222,7 +221,6 @@ public class PlayService extends Service {
                     break;
                 //添加锁屏界面
                 case Constant.LOCK_SCREEN_ACTION:
-                    mIsLocked = BaseConfig.INSTANCE.isLocked();
                     LogUtils.e("PlayService"+"---LOCK_SCREEN"+mIsLocked);
                     break;
                 //当屏幕灭了，添加锁屏页面
@@ -299,12 +297,9 @@ public class PlayService extends Service {
      * 初始化计时器
      */
     private void initQuitTimer() {
-        QuitTimer.getInstance().init(this, handler, new EventCallback<Long>() {
-            @Override
-            public void onEvent(Long aLong) {
-                if (mListener != null) {
-                    mListener.onTimer(aLong);
-                }
+        QuitTimer.getInstance().init(this, handler, aLong -> {
+            if (mListener != null) {
+                mListener.onTimer(aLong);
             }
         });
     }

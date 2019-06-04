@@ -43,7 +43,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
 
     @Override
     public int getContentView() {
-        return R.layout.activity_guide;
+        return R.layout.base_activity_guide;
     }
 
     @Override

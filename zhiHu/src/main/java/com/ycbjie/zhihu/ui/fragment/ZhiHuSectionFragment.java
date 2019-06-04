@@ -91,15 +91,12 @@ public class ZhiHuSectionFragment extends BaseStateFragment implements ZhiHuSect
 
     @Override
     public void initListener() {
-        mAdapter.setOnItemClickListener(new ZhiHuSectionAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view , int position) {
-                Intent intent = new Intent();
-                intent.setClass(activity, ZhiHuSectionListActivity.class);
-                intent.putExtra("id",mList.get(position).getId());
-                intent.putExtra("title",mList.get(position).getName());
-                activity.startActivity(intent);
-            }
+        mAdapter.setOnItemClickListener((view, position) -> {
+            Intent intent = new Intent();
+            intent.setClass(activity, ZhiHuSectionListActivity.class);
+            intent.putExtra("id",mList.get(position).getId());
+            intent.putExtra("title",mList.get(position).getName());
+            activity.startActivity(intent);
         });
     }
 
@@ -114,12 +111,7 @@ public class ZhiHuSectionFragment extends BaseStateFragment implements ZhiHuSect
         recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
         mAdapter = new ZhiHuSectionAdapter(activity, mList);
         recyclerView.setAdapter(mAdapter);
-        refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                presenter.getData();
-            }
-        });
+        refresher.setOnRefreshListener(() -> presenter.getData());
     }
 
 

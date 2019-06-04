@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -24,9 +23,11 @@ import com.ycbjie.zhihu.model.ZhiHuThemeChildBean;
 import com.ycbjie.zhihu.presenter.ZhiHuThemeListPresenter;
 import com.ycbjie.zhihu.ui.adapter.ZhiHuThemeListAdapter;
 import com.ycbjie.zhihu.web.activity.WebViewAnimActivity;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+
+import java.util.Objects;
 
 
 /**
@@ -87,29 +88,26 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
 
     private void initIntentData() {
         Intent intent = getIntent();
-        id = intent.getExtras().getInt("id");
+        id = Objects.requireNonNull(intent.getExtras()).getInt("id");
     }
 
 
     @Override
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
-        adapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                if(adapter.getAllData().size()>position && position>-1){
-                    presenter.insertReadToDB(adapter.getAllData().get(position).getId());
-                    adapter.setReadState(position, true);
-                    adapter.notifyItemChanged(position);
-                    Intent intent = new Intent();
-                    intent.setClass(ZhiHuThemeListActivity.this, WebViewAnimActivity.class);
-                    intent.putExtra("id", adapter.getAllData().get(position).getId());
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation
-                                (ZhiHuThemeListActivity.this).toBundle());
-                    }else {
-                        startActivity(intent);
-                    }
+        adapter.setOnItemClickListener(position -> {
+            if(adapter.getAllData().size()>position && position>-1){
+                presenter.insertReadToDB(adapter.getAllData().get(position).getId());
+                adapter.setReadState(position, true);
+                adapter.notifyItemChanged(position);
+                Intent intent = new Intent();
+                intent.setClass(ZhiHuThemeListActivity.this, WebViewAnimActivity.class);
+                intent.putExtra("id", adapter.getAllData().get(position).getId());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation
+                            (ZhiHuThemeListActivity.this).toBundle());
+                }else {
+                    startActivity(intent);
                 }
             }
         });
@@ -141,15 +139,12 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
                 SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
         recyclerView.addItemDecoration(line);
         //刷新
-        recyclerView.setRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (NetworkUtils.isConnected()) {
-                    presenter.getThemeChildData(id);
-                } else {
-                    recyclerView.setRefreshing(false);
-                    ToastUtils.showShort("网络不可用");
-                }
+        recyclerView.setRefreshListener(() -> {
+            if (NetworkUtils.isConnected()) {
+                presenter.getThemeChildData(id);
+            } else {
+                recyclerView.setRefreshing(false);
+                ToastUtils.showShort("网络不可用");
             }
         });
     }
@@ -179,29 +174,21 @@ public class ZhiHuThemeListActivity extends BaseActivity implements View.OnClick
     public void setErrorView() {
         recyclerView.setErrorView(R.layout.view_custom_data_error);
         recyclerView.showError();
-        LinearLayout ll_error_view = (LinearLayout) recyclerView.findViewById(R.id.ll_error_view);
-        ll_error_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initData();
-            }
-        });
+        LinearLayout ll_error_view = recyclerView.findViewById(R.id.ll_error_view);
+        ll_error_view.setOnClickListener(view -> initData());
     }
 
     @Override
     public void setNetworkErrorView() {
         recyclerView.setErrorView(R.layout.view_custom_network_error);
         recyclerView.showError();
-        LinearLayout ll_set_network = (LinearLayout) recyclerView.findViewById(R.id.ll_set_network);
-        ll_set_network.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(NetworkUtils.isConnected()){
-                    initData();
-                }else {
-                    Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
-                    startActivity(intent);
-                }
+        LinearLayout ll_set_network = recyclerView.findViewById(R.id.ll_set_network);
+        ll_set_network.setOnClickListener(view -> {
+            if(NetworkUtils.isConnected()){
+                initData();
+            }else {
+                Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                startActivity(intent);
             }
         });
     }

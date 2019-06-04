@@ -4,7 +4,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -96,7 +95,8 @@ public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListe
          * 但会内存溢出，在显示时加载数据
          */
         FragmentManager supportFragmentManager = getSupportFragmentManager();
-        BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager, mFragments, mTitleList);
+        BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager,
+                mFragments, mTitleList);
         vpContent.setAdapter(myAdapter);
         // 左右预加载页面的个数
         vpContent.setOffscreenPageLimit(mFragments.size());

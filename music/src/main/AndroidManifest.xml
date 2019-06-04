@@ -4,6 +4,8 @@
 
     <application>
 
+        <activity android:name=".ui.activity.GuideMusicActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".ui.activity.MusicActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".ui.activity.MusicInfoActivity"/>
