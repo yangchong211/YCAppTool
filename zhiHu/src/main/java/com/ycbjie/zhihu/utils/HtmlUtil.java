@@ -5,7 +5,6 @@ import java.util.List;
 /**
  *
  * 在html中引入外部css,js文件   常规拼接顺序css->html->js
- * https://github.com/HotBitmapGG/RxZhiHu/blob/https--github.com/HotBitmapGG/RxZhiHuDaily/app/src/main/java/com/hotbitmapgg/rxzhihu/utils/HtmlUtil.java#L13
  */
 
 public class HtmlUtil {

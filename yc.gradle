@@ -2,18 +2,18 @@
 ext {
 
     isApplication = false  //false:作为Lib组件存在， true:作为application存在，这个不建议改
-    isLoveApplication = false  //爱意表达模块开关，false:作为Lib组件存在， true:作为application存在
-    isVideoApplication = false  //视频模块开关，false:作为Lib组件存在， true:作为application存在
-    isZhiHuApplication = false  //知乎模块开关，false:作为Lib组件存在， true:作为application存在
-    isBookApplication = false  //book模块开关，false:作为Lib组件存在， true:作为application存在
-    isDouBanApplication = false  //豆瓣模块开关，false:作为Lib组件存在， true:作为application存在
-    isOtherApplication = false  //其他模块开关，false:作为Lib组件存在， true:作为application存在
-    isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
-    isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
-    isToDoApplication = false  //todo模块开关，false:作为Lib组件存在， true:作为application存在
-    isNoteApplication = false  //记事本模块开关，false:作为Lib组件存在， true:作为application存在
-    isMusicApplication = false  //音乐模块开关，false:作为Lib组件存在， true:作为application存在
-    isNewsApplication = false  //新闻模块开关，false:作为Lib组件存在， true:作为application存在
+    isLoveApplication = true  //爱意表达模块开关，false:作为Lib组件存在， true:作为application存在
+    isVideoApplication = true  //视频模块开关，false:作为Lib组件存在， true:作为application存在
+    isZhiHuApplication = true  //知乎模块开关，false:作为Lib组件存在， true:作为application存在
+    isBookApplication = true  //book模块开关，false:作为Lib组件存在， true:作为application存在
+    isDouBanApplication = true  //豆瓣模块开关，false:作为Lib组件存在， true:作为application存在
+    isOtherApplication = true  //其他模块开关，false:作为Lib组件存在， true:作为application存在
+    isAndroidApplication = true  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
+    isGankApplication = true  //干货模块开关，false:作为Lib组件存在， true:作为application存在
+    isToDoApplication = true  //todo模块开关，false:作为Lib组件存在， true:作为application存在
+    isNoteApplication = true  //记事本模块开关，false:作为Lib组件存在， true:作为application存在
+    isMusicApplication = true  //音乐模块开关，false:作为Lib组件存在， true:作为application存在
+    isNewsApplication = true  //新闻模块开关，false:作为Lib组件存在， true:作为application存在
 
     
     android = [
@@ -71,7 +71,7 @@ ext {
                 //image
                 "glide"                    : "com.github.bumptech.glide:glide:${version["glideSdkVersion"]}",
                 "glide-compiler"           : "com.github.bumptech.glide:compiler:${version["glideSdkVersion"]}",
-                "glide-transformations"    : "jp.wasabeef:glide-transformations:3.3.0",
+                //"glide-transformations"    : "jp.wasabeef:glide-transformations:3.3.0",
                 "picasso"                  : "com.squareup.picasso:picasso:2.5.2",
                 "takephoto"                : "com.jph.takephoto:takephoto_library:4.0.3",
                 "imagepicker"              : "com.lzy.widget:imagepicker:0.5.0",
@@ -81,8 +81,8 @@ ext {
                 "flowlayout"                : "com.zhy:flowlayout-lib:1.0.3",
 
                 //yc
-                "YCStateLib"                  : "cn.yc:YCStateLib:1.1.5",
-                "YCDialogLib"                 : "cn.yc:YCDialogLib:3.6.5",
+                "YCStateLib"                  : "cn.yc:YCStateLib:1.2.2",
+                "YCDialogLib"                 : "cn.yc:YCDialogLib:3.6.6",
                 "YCCountDownViewLib"          : "cn.yc:YCCountDownViewLib:1.0",
                 "YCUtilsLib"                  : "cn.yc:YCUtilsLib:1.6.2",
                 "YCMultiInputViewLib"         : "cn.yc:YCMultiInputViewLib:1.0",
@@ -95,9 +95,10 @@ ext {
                 "YCBannerLib"                 : "cn.yc:YCBannerLib:1.4.0",
                 "YCRefreshViewLib"            : "org.yczbj:YCRefreshViewLib:2.5.6",
                 "YCStatusBarLib"              : "cn.yc:YCStatusBarLib:1.4.0",
-                "YCVideoPlayerLib"            : "cn.yc:YCVideoPlayerLib:2.6.0",
+                "YCVideoPlayerLib"            : "cn.yc:YCVideoPlayerLib:2.6.6",
                 "YCThreadPoolLib"             : "cn.yc:YCThreadPoolLib:1.3.2",
                 "notificationLib"             : "cn.yc:notificationLib:1.0.3",
+                "WebViewLib"                  : "cn.yc:WebViewLib:1.1.7",
 
                 //tools
                 "eventbus"                  : "org.greenrobot:eventbus:3.0.0",

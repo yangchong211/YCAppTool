@@ -23,7 +23,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.ns.yc.ycutilslib.scrollView.ReboundScrollView;
-import com.pedaily.yc.ycdialoglib.loading.ViewLoading;
+import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouMusicDetailBean;
@@ -31,7 +31,7 @@ import com.ycbjie.douban.weight.CustomChangeBounds;
 import com.ycbjie.library.base.glide.GlideApp;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.http.ExceptionUtils;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 
 import cn.ycbjie.ycstatusbarlib.StatusBarUtils;
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;

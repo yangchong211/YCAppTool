@@ -14,9 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.TimeUtils;
+import com.yc.cn.ycbaseadapterlib.adapter.BaseViewHolder;
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.model.ZhiHuCommentBean;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 import java.util.List;
 
 /**
@@ -132,7 +133,7 @@ public class ZhiHuCommentAdapter extends RecyclerView.Adapter<ZhiHuCommentAdapte
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends BaseViewHolder {
 
         ImageView ivFace;
         TextView tvName;
@@ -144,13 +145,13 @@ public class ZhiHuCommentAdapter extends RecyclerView.Adapter<ZhiHuCommentAdapte
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ivFace = itemView.findViewById(R.id.iv_comment_face);
-            tvName = itemView.findViewById(R.id.tv_comment_name);
-            tvContent = itemView.findViewById(R.id.tv_comment_content);
-            tvTime = itemView.findViewById(R.id.tv_comment_time);
-            tvExpand = itemView.findViewById(R.id.tv_comment_expand);
-            tvLike = itemView.findViewById(R.id.tv_comment_like);
-            tvReply = itemView.findViewById(R.id.tv_comment_reply);
+            ivFace = getView(R.id.iv_comment_face);
+            tvName = getView(R.id.tv_comment_name);
+            tvContent = getView(R.id.tv_comment_content);
+            tvTime = getView(R.id.tv_comment_time);
+            tvExpand = getView(R.id.tv_comment_expand);
+            tvLike = getView(R.id.tv_comment_like);
+            tvReply = getView(R.id.tv_comment_reply);
         }
     }
 

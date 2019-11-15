@@ -132,7 +132,7 @@ public class ZhiHuSectionListActivity extends BaseActivity implements
         adapter = new ZhiHuSectionListAdapter(this);
         recyclerView.setAdapter(adapter);
         final RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
-                SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
+                1, Color.parseColor("#e5e5e5"));
         recyclerView.addItemDecoration(line);
         //刷新
         recyclerView.setRefreshListener(() -> {

@@ -1,15 +1,20 @@
 package com.ns.yc.lifehelper.ui.home.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.NetworkUtils;
@@ -20,7 +25,7 @@ import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.utils.DialogUtils;
+import com.ycbjie.library.utils.AppUtils;
 import com.ns.yc.yccardviewlib.CardViewLayout;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
@@ -30,8 +35,10 @@ import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.model.HomeBlogEntity;
+import com.ycbjie.library.utils.GoToScoreUtils;
+import com.ycbjie.library.utils.WindowUtils;
 import com.ycbjie.library.utils.handler.HandlerUtils;
-import com.ycbjie.library.web.view.WebViewActivity;
+import com.ycbjie.library.web.WebViewActivity;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -252,7 +259,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
         marqueeView.setOnItemClickListener((position, textView) -> {
             switch (position) {
                 case 0:
-                    DialogUtils.showCustomPopupWindow(activity);
+                    showCustomPopupWindow(activity);
                     break;
                 case 1:
                     Bundle bundle1 = new Bundle();
@@ -347,5 +354,47 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
             }
         });
     }
+
+
+
+    private static final String QQ_URL = "http://android.myapp.com/myapp/detail.htm?apkName=com.zero2ipo.harlanhu.pedaily";
+    /**
+     * 自定义PopupWindow
+     */
+    private void showCustomPopupWindow(final Activity activity){
+        if(AppUtils.isActivityLiving(activity)){
+            View popMenuView = activity.getLayoutInflater().inflate(R.layout.dialog_custom_window, null);
+            final PopupWindow popMenu = new PopupWindow(popMenuView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
+            popMenu.setClippingEnabled(false);
+            popMenu.setFocusable(true);
+            popMenu.showAtLocation(popMenuView, Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+            WindowUtils.setBackgroundAlpha(activity,0.5f);
+
+            TextView tvStar = popMenuView.findViewById(R.id.tv_star);
+            TextView tvFeedback = popMenuView.findViewById(R.id.tv_feedback);
+            TextView tvLook = popMenuView.findViewById(R.id.tv_look);
+            tvStar.setOnClickListener(v -> {
+                //吐槽跳转意见反馈页面
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);
+                popMenu.dismiss();
+            });
+            tvFeedback.setOnClickListener(v -> {
+                if(AppUtils.isPkgInstalled(activity,"com.tencent.android.qqdownloader")){
+                    ArrayList<String> installAppMarkets = GoToScoreUtils.getInstallAppMarkets(activity);
+                    ArrayList<String> filterInstallMarkets = GoToScoreUtils.getFilterInstallMarkets(activity, installAppMarkets);
+                    GoToScoreUtils.launchAppDetail(activity,"com.zero2ipo.harlanhu.pedaily",filterInstallMarkets.get(0));
+                }else {
+                    Intent intent = new Intent(activity, WebViewActivity.class);
+                    intent.putExtra("url", QQ_URL);
+                    activity.startActivity(intent);
+                }
+                popMenu.dismiss();
+            });
+            tvLook.setOnClickListener(v -> popMenu.dismiss());
+            popMenu.setOnDismissListener(() -> WindowUtils.setBackgroundAlpha(activity,1.0f));
+        }
+    }
+
+
 
 }

@@ -13,15 +13,15 @@
         android:supportsRtl="true"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="com.ycbjie.book.ui.activity.DoodleViewActivity"/>
-        <activity android:name="com.ycbjie.book.ui.activity.GameActivity">
+        <activity android:name="com.ycbjie.book.DoodleViewActivity"/>
+        <activity android:name="com.ycbjie.book.GameActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ycbjie.book.ui.activity.AirGameActivity"/>
-        <activity android:name="com.ycbjie.book.ui.activity.PinTuGameActivity"/>
+        <activity android:name="com.ycbjie.book.AirGameActivity"/>
+        <activity android:name="com.ycbjie.book.PinTuGameActivity"/>
     </application>
 
 

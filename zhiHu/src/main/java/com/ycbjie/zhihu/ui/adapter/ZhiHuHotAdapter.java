@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yc.cn.ycbaseadapterlib.adapter.BaseViewHolder;
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.model.ZhiHuHotBean;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class ZhiHuHotAdapter extends RecyclerView.Adapter<ZhiHuHotAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.item_zh_news_list, parent, false));
+        return new ViewHolder(inflater.inflate(R.layout.item_news_base_view, parent, false));
     }
 
     @Override
@@ -56,7 +57,7 @@ public class ZhiHuHotAdapter extends RecyclerView.Adapter<ZhiHuHotAdapter.ViewHo
         mList.get(position).setReadState(readState);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends BaseViewHolder {
 
         TextView tvTitle;
         TextView tvTime;
@@ -64,9 +65,9 @@ public class ZhiHuHotAdapter extends RecyclerView.Adapter<ZhiHuHotAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
-            tvTime = (TextView) itemView.findViewById(R.id.tv_time);
-            ivLogo = (ImageView) itemView.findViewById(R.id.iv_logo);
+            tvTitle = (TextView) getView(R.id.tv_title);
+            tvTime = (TextView) getView(R.id.tv_time);
+            ivLogo = (ImageView) getView(R.id.iv_logo);
         }
     }
 

@@ -17,7 +17,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.pedaily.yc.ycdialoglib.dialogFragment.BottomDialogFragment;
+import com.pedaily.yc.ycdialoglib.fragment.BottomDialogFragment;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;

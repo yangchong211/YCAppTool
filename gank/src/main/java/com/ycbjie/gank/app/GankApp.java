@@ -18,6 +18,8 @@ public class GankApp extends LibApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        //除了继承LibApplication做公共初始化
+        //自己也可以独立做一些初始化
     }
 
     @Override

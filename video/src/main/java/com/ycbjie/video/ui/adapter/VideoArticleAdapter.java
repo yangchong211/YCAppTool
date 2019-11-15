@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.TimeUtils;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 import com.ycbjie.video.R;
 import com.ycbjie.video.model.MultiNewsArticleDataBean;
 

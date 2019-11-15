@@ -25,6 +25,12 @@ import io.realm.RealmConfiguration;
  */
 public class LibApplication extends Application {
 
+    private static LibApplication instance;
+
+    public static LibApplication getInstance() {
+        return instance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

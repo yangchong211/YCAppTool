@@ -101,12 +101,12 @@ public class VideoPlayerFragment extends BaseFragment {
     @Override
     public void initData() {
         VideoModel model = VideoModel.getInstance();
-        getVideoData(model,url);
+        getVideoData(model,url,true);
     }
 
 
     @SuppressLint("CheckResult")
-    private void getVideoData(VideoModel model, String url) {
+    private void getVideoData(VideoModel model, String url , boolean init) {
         model.getVideoContent(url)
                 .subscribeOn(Schedulers.io())
                 .map(new Function<VideoContentBean, String>() {
@@ -140,7 +140,16 @@ public class VideoPlayerFragment extends BaseFragment {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@io.reactivex.annotations.NonNull String s) {
-                        initVideo(s);
+                        if (init){
+                            initVideo(s);
+                        } else {
+                            //释放播放器
+                            videoPlayer.releasePlayer();
+                            //设置视频Url，以及headers
+                            videoPlayer.setUp(s, null);
+                            //开始从此位置播放
+                            videoPlayer.start();
+                        }
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -175,6 +184,7 @@ public class VideoPlayerFragment extends BaseFragment {
             controller.setHideTime(5000);
             //设置背景图片
             controller.imageView().setBackgroundResource(R.color.black);
+            controller.setLength(98000);
             //监听播放与暂停
             //监听视频播放完成逻辑
             controller.setOnCompletedListener(new OnCompletedListener() {
@@ -187,9 +197,18 @@ public class VideoPlayerFragment extends BaseFragment {
             //设置视频控制器
             videoPlayer.setController(controller);
         }
-        videoPlayer.start();
+        videoPlayer.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                videoPlayer.start();
+            }
+        },200);
         loading.setVisibility(View.GONE);
     }
 
 
+    public void updateUrl(String url) {
+        VideoModel model = VideoModel.getInstance();
+        getVideoData(model,url,false);
+    }
 }

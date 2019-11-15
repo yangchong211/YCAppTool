@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.bean.DouBookBean;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;

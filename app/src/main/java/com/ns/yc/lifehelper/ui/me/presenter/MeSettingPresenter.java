@@ -10,13 +10,14 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.blankj.utilcode.util.AppUtils;
+import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
-import com.ns.yc.lifehelper.utils.DialogUtils;
-import com.ns.yc.lifehelper.utils.FileCacheUtils;
-import com.ns.yc.lifehelper.utils.GoToScoreUtils;
-import com.pedaily.yc.ycdialoglib.dialog.CustomSelectDialog;
+import com.ycbjie.library.utils.FileCacheUtils;
+import com.ycbjie.library.utils.GoToScoreUtils;
+import com.ns.yc.ycutilslib.loadingDialog.LoadDialog;
+import com.pedaily.yc.ycdialoglib.dialog.select.CustomSelectDialog;
 import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.web.view.WebViewActivity;
+import com.ycbjie.library.web.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,14 +148,14 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
         normalDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                DialogUtils.showProgressDialog(activity);
+                LoadDialog.show(activity);
                 PoolThread executor = AppConfig.INSTANCE.getExecutor();
                 executor.setName("load");
                 executor.setDelay(2, TimeUnit.MILLISECONDS);
                 executor.execute(new Runnable() {
                     @Override
                     public void run() {
-                        DialogUtils.dismissProgressDialog();
+                        LoadDialog.dismiss(activity);
                         FileCacheUtils.cleanInternalCache(activity);
                         mMeSetView.setClearText();
                     }
@@ -229,12 +230,16 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
                 String name = appInfo.getName();
                 names.add(name);
             }
-            DialogUtils.showDialog(context, new CustomSelectDialog.SelectDialogListener() {
+            CustomSelectDialog dialog = new CustomSelectDialog(context,
+                    R.style.TransparentFrameWindowStyle, new CustomSelectDialog.SelectDialogListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     GoToScoreUtils.launchAppDetail(context, "com.zero2ipo.harlanhu.pedaily", markets.get(position));
                 }
             }, names);
+            if(com.ycbjie.library.utils.AppUtils.isActivityLiving(context)){
+                dialog.show();
+            }
         } else {
             //投资界应用宝评分链接
             String qqUrl = "http://android.myapp.com/myapp/detail.htm?apkName=com.zero2ipo.harlanhu.pedaily";

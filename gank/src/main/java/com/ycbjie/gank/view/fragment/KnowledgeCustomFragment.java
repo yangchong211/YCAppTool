@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
-import com.pedaily.yc.ycdialoglib.dialogMenu.CustomBottomDialog;
+import com.pedaily.yc.ycdialoglib.dialog.menu.CustomBottomDialog;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.api.GanKModel;

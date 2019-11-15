@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:transitionName="view"
         android:fitsSystemWindows="true"
+        app:layout_behavior="com.ycbjie.library.weight.AppBarLayoutBehavior"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -66,13 +67,18 @@
         android:overScrollMode="never"
         android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <com.tencent.smtt.sdk.WebView
-            android:id="@+id/wv_detail_content"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:isScrollContainer="false"
-            android:overScrollMode="never"
-            android:scrollbars="vertical"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.ycbjie.webviewlib.X5WebView
+                android:id="@+id/wv_detail_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:isScrollContainer="false"
+                android:overScrollMode="never"
+                android:scrollbars="vertical"/>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <FrameLayout

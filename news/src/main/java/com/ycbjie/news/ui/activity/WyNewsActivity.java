@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.pedaily.yc.ycdialoglib.loading.ViewLoading;
+import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;

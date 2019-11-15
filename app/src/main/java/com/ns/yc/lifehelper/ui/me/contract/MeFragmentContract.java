@@ -16,7 +16,7 @@ import com.ycbjie.library.base.mvp.BaseView;
  */
 public interface MeFragmentContract {
 
-    //View(activity/fragment)继承，需要实现的方法
+    //View(activity_test/fragment)继承，需要实现的方法
     interface View extends BaseView {
 
     }

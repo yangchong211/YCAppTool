@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.facade.service.DegradeService;
 import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.web.view.WebViewActivity;
+import com.ycbjie.library.web.WebViewActivity;
 
 /**
  * <pre>
@@ -26,7 +26,7 @@ public class DegradeServiceImpl implements DegradeService {
 
     @Override
     public void onLost(Context context, Postcard postcard) {
-        if (context != null && postcard.getGroup().equals("activity")) {
+        if (context != null && postcard.getGroup().equals("activity_test")) {
             Intent intent = new Intent(context, WebViewActivity.class);
             intent.putExtra(Constant.URL, Constant.GITHUB);
             intent.putExtra(Constant.TITLE, "github地址");

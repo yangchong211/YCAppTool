@@ -20,7 +20,7 @@ public class VideoModel {
 
     private static VideoModel model;
     private VideoApi mApiService;
-    private static final String HOST = "http://toutiao.com/";
+    private static final String HOST = "https://toutiao.com/";
 
     private VideoModel() {
         mApiService = RetrofitWrapper

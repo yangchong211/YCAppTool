@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.model.ZhiHuThemeChildBean;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
@@ -33,7 +33,7 @@ public class ZhiHuThemeListAdapter extends RecyclerArrayAdapter<ZhiHuThemeChildB
         TextView tv_title , tv_time;
 
         ExpressDeliveryViewHolder(ViewGroup parent) {
-            super(parent, R.layout.item_zh_news_list);
+            super(parent, R.layout.item_news_base_view);
             tv_title = $(R.id.tv_title);
             tv_time = $(R.id.tv_time);
             iv_logo = $(R.id.iv_logo);

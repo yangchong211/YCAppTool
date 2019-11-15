@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.model.bean.ImageIconBean;
+import com.ns.yc.lifehelper.bean.ImageIconBean;
 
 import java.util.List;
 

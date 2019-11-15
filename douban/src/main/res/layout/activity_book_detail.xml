@@ -10,6 +10,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="270dp"
+        app:layout_behavior="com.ycbjie.library.weight.AppBarLayoutBehavior"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 

@@ -10,7 +10,7 @@ import io.reactivex.Observable;
 
 public class GanKModel {
 
-    private static final String GAN_K_IO_API = "http://gank.io/api/";
+    private static final String GAN_K_IO_API = "https://gank.io/api/";
     private static GanKModel model;
     private GanKApi mApiService;
 

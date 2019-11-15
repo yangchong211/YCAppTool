@@ -39,7 +39,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.tv_1) {
-            startActivity(new Intent(this, MeBannerActivity.class));
+            startActivity(new Intent(this, AnimActivity.class));
         } else if (i == R.id.tv_2) {
             startActivity(new Intent(this, BannerViewActivity.class));
         } else if (i == R.id.tv_3) {

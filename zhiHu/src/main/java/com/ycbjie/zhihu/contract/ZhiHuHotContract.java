@@ -16,7 +16,7 @@ import com.ycbjie.zhihu.model.ZhiHuHotBean;
  */
 public interface ZhiHuHotContract {
 
-    //View(activity/fragment)继承，需要实现的方法
+    //View(activity_test/fragment)继承，需要实现的方法
     interface View extends BaseView {
         void setView(ZhiHuHotBean zhiHuHotBean);
         void setEmptyView();

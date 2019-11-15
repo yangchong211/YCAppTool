@@ -26,7 +26,7 @@ import com.ycbjie.android.view.adapter.AndroidHomeAdapter
 import com.ycbjie.android.view.adapter.BannerPagerAdapter
 import com.ycbjie.library.base.mvp.BaseFragment
 import com.ycbjie.library.utils.DoShareUtils
-import com.ycbjie.library.web.view.WebViewActivity
+import com.ycbjie.library.web.WebViewActivity
 import org.yczbj.ycrefreshviewlib.YCRefreshView
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine
@@ -64,7 +64,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
         super.onAttach(context)
         //as 是一个中缀操作符，as是不安全的转换操作符，如果as转换失败，会抛出一个异常，这就是不安全的。
         activity = context as AndroidActivity?
-        //activity = context as? Activity
+        //activity_test = context as? Activity
     }
 
     override fun onDetach() {

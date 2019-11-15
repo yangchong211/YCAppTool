@@ -118,11 +118,6 @@ dependencies {
     api rootProject.ext.dependencies["rxjava"]
 
     api rootProject.ext.dependencies["glide"]
-    api (rootProject.ext.dependencies["glide-transformations"]){
-        exclude module: 'glide'
-    }
-
-
     api rootProject.ext.dependencies["eventbus"]
     api rootProject.ext.dependencies["picasso"]
     api rootProject.ext.dependencies["takephoto"]
@@ -148,7 +143,7 @@ dependencies {
     api rootProject.ext.dependencies["YCStatusBarLib"]
     api rootProject.ext.dependencies["YCThreadPoolLib"]
     api rootProject.ext.dependencies["notificationLib"]
-    api files('libs/tbs_sdk_thirdapp_v3.2.0.jar')
+    api rootProject.ext.dependencies["WebViewLib"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
 }

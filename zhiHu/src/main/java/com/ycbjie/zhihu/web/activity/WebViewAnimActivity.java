@@ -23,6 +23,7 @@ import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.webviewlib.X5WebView;
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.model.ZhiHuDetailExtraBean;
 import com.ycbjie.zhihu.model.ZhihuDetailBean;
@@ -32,7 +33,7 @@ import com.ycbjie.zhihu.web.contract.WebViewAnimContract;
 import com.ycbjie.zhihu.web.presenter.WebViewAnimPresenter;
 import com.ycbjie.library.utils.AppUtils;
 import com.ycbjie.library.utils.DoShareUtils;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
@@ -57,7 +58,7 @@ public class WebViewAnimActivity extends BaseActivity<WebViewAnimPresenter> impl
     private TextView tvBarCopyright;
     private Toolbar viewToolbar;
     private NestedScrollView nsvScroller;
-    private WebView wvDetailContent;
+    private X5WebView wvDetailContent;
     private FrameLayout llDetailBottom;
     private TextView tvDetailBottomLike;
     private TextView tvDetailBottomComment;
@@ -125,7 +126,7 @@ public class WebViewAnimActivity extends BaseActivity<WebViewAnimPresenter> impl
         tvBarCopyright = (TextView) findViewById(R.id.tv_bar_copyright);
         viewToolbar = (Toolbar) findViewById(R.id.view_toolbar);
         nsvScroller = (NestedScrollView) findViewById(R.id.nsv_scroller);
-        wvDetailContent = (WebView) findViewById(R.id.wv_detail_content);
+        wvDetailContent = (X5WebView) findViewById(R.id.wv_detail_content);
         llDetailBottom = (FrameLayout) findViewById(R.id.ll_detail_bottom);
         tvDetailBottomLike = (TextView) findViewById(R.id.tv_detail_bottom_like);
         tvDetailBottomComment = (TextView) findViewById(R.id.tv_detail_bottom_comment);
@@ -144,7 +145,6 @@ public class WebViewAnimActivity extends BaseActivity<WebViewAnimPresenter> impl
         if(intent!=null){
             id = intent.getExtras().getInt("id");
         }
-
     }
 
 
@@ -168,13 +168,10 @@ public class WebViewAnimActivity extends BaseActivity<WebViewAnimPresenter> impl
         int i = v.getId();
         if (i == R.id.tv_detail_bottom_comment) {
             goToComment();
-
         } else if (i == R.id.tv_detail_bottom_share) {
             DoShareUtils.shareImage(this, imgUrl);
-
         } else if (i == R.id.fab_like) {
             collectNews();
-
         } else {
         }
     }
@@ -194,21 +191,16 @@ public class WebViewAnimActivity extends BaseActivity<WebViewAnimPresenter> impl
             url = "about:blank";
             wvDetailContent.loadUrl("about:blank");
         }
-
         int i = item.getItemId();
         if (i == R.id.share) {
             DoShareUtils.shareText(this, url, "潇湘剑雨");
-
         } else if (i == R.id.collect) {
             ToastUtils.showShort("后期添加");
-
         } else if (i == R.id.cope) {
             AppUtils.copy("");
             ToastUtils.showShort("复制成功");
-
         } else if (i == R.id.open) {
             AppUtils.openLink(this, "");
-
         } else {
         }
         return super.onOptionsItemSelected(item);
@@ -284,20 +276,9 @@ public class WebViewAnimActivity extends BaseActivity<WebViewAnimPresenter> impl
         } else {
             settings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);
         }
-        settings.setJavaScriptEnabled(true);
         settings.setLoadWithOverviewMode(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setSupportZoom(true);
-        wvDetailContent.setWebViewClient(new MyWebViewClient());
-    }
-
-
-    private class MyWebViewClient extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
     }
 
 

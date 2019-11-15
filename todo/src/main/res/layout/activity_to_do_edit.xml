@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
+        app:layout_behavior="com.ycbjie.library.weight.AppBarLayoutBehavior"
         android:theme="@style/AppTheme.AppBarOverlay">
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"

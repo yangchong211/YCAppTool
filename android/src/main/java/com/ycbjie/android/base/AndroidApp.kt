@@ -1,5 +1,6 @@
 package com.ycbjie.android.base
 
+import android.content.Context
 import com.ycbjie.library.base.app.InitializeService
 import com.ycbjie.library.base.app.LibApplication
 import com.ycbjie.library.base.config.AppConfig
@@ -17,11 +18,10 @@ class AndroidApp : LibApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        AppConfig.INSTANCE.initConfig(this)
-        //在子线程中初始化
-        InitializeService.start(this)
     }
 
-
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(base)
+    }
 
 }

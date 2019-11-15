@@ -16,7 +16,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
-import com.ns.yc.lifehelper.utils.FileCacheUtils;
+import com.ycbjie.library.utils.FileCacheUtils;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
@@ -26,7 +26,7 @@ import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.utils.AppToolUtils;
-import com.ycbjie.library.web.view.WebViewActivity;
+import com.ycbjie.library.web.WebViewActivity;
 
 import java.util.concurrent.TimeUnit;
 

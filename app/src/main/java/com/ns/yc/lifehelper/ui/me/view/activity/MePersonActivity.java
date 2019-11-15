@@ -28,13 +28,13 @@ import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.base.adapter.BasePagerAdapter;
-import com.ycbjie.library.inter.listener.MePersonBaseListener;
 import com.ns.yc.lifehelper.ui.me.view.fragment.MePersonFragment;
-import com.ns.yc.lifehelper.utils.DialogUtils;
 import com.ns.yc.ycutilslib.viewPager.AutoHeightViewPager;
-import com.pedaily.yc.ycdialoglib.dialog.CustomSelectDialog;
+import com.pedaily.yc.ycdialoglib.dialog.select.CustomSelectDialog;
+import com.ycbjie.library.base.adapter.BasePagerAdapter;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.library.inter.listener.MePersonBaseListener;
+import com.ycbjie.library.utils.AppUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -201,7 +201,8 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
         List<String> names = new ArrayList<>();
         names.add("拍照");
         names.add("相册");
-        DialogUtils.showDialog(this,new CustomSelectDialog.SelectDialogListener() {
+        CustomSelectDialog dialog = new CustomSelectDialog(this,
+                R.style.TransparentFrameWindowStyle, new CustomSelectDialog.SelectDialogListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
@@ -212,9 +213,14 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
                     case 1:                 //相册
                         startGetPhotoFromFile();
                         break;
+                    default:
+                        break;
                 }
             }
         }, names);
+        if(AppUtils.isActivityLiving(this)){
+            dialog.show();
+        }
     }
 
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LifeHelper.iml" filepath="$PROJECT_DIR$/LifeHelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/LifeHelper.iml" filepath="$PROJECT_DIR$/.idea/LifeHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/android/android.iml" filepath="$PROJECT_DIR$/android/android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/book/book.iml" filepath="$PROJECT_DIR$/book/book.iml" />
@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/love/love.iml" filepath="$PROJECT_DIR$/love/love.iml" />
       <module fileurl="file://$PROJECT_DIR$/music/music.iml" filepath="$PROJECT_DIR$/music/music.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mvvm/mvvm.iml" filepath="$PROJECT_DIR$/mvvm/mvvm.iml" />
       <module fileurl="file://$PROJECT_DIR$/news/news.iml" filepath="$PROJECT_DIR$/news/news.iml" />
       <module fileurl="file://$PROJECT_DIR$/note/note.iml" filepath="$PROJECT_DIR$/note/note.iml" />
       <module fileurl="file://$PROJECT_DIR$/other/other.iml" filepath="$PROJECT_DIR$/other/other.iml" />

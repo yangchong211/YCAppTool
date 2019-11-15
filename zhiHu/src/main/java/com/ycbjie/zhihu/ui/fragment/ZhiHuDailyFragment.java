@@ -12,8 +12,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.TimeUtils;
+import com.ns.yc.ycstatelib.OnNetworkListener;
+import com.ns.yc.ycstatelib.OnRetryListener;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.ycbjie.library.base.state.BaseStateFragment;
@@ -84,6 +87,18 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
                 .errorView(R.layout.view_custom_data_error)
                 .loadingView(R.layout.view_custom_loading_data)
                 .netWorkErrorView(R.layout.view_custom_network_error)
+                .onRetryListener(new OnRetryListener() {
+                    @Override
+                    public void onRetry() {
+                        initData();
+                    }
+                })
+                .onNetworkListener(new OnNetworkListener() {
+                    @Override
+                    public void onNetwork() {
+                        initData();
+                    }
+                })
                 .build();
     }
 
@@ -155,7 +170,7 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
         mAdapter = new ZhiHuDailyAdapter(activity, mList);
         recyclerView.setAdapter(mAdapter);
         final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
-                SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
+                1, Color.parseColor("#e5e5e5"));
         recyclerView.addItemDecoration(line);
         refresher.setOnRefreshListener(() -> {
             @SuppressLint("SimpleDateFormat")
@@ -195,13 +210,14 @@ public class ZhiHuDailyFragment extends BaseStateFragment implements
 
     @Override
     public void setNetworkErrorView() {
-        statusLayoutManager.showError();
+        statusLayoutManager.showNetWorkError();
     }
 
 
     @Override
-    public void setErrorView() {
-        statusLayoutManager.showNetWorkError();
+    public void setErrorView(String message) {
+        LogUtils.d("setErrorView----"+message);
+        statusLayoutManager.showError();
     }
 
     @Override

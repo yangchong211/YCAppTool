@@ -49,8 +49,8 @@ import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.inter.listener.PerfectClickListener;
 import com.ycbjie.library.utils.animation.AnimatorUtils;
-import com.ycbjie.library.utils.image.ImageUtils;
-import com.ycbjie.library.web.view.WebViewActivity;
+import com.ycbjie.library.glide.ImageUtils;
+import com.ycbjie.library.web.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;

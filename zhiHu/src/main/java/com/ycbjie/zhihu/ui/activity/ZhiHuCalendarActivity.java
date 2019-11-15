@@ -58,7 +58,8 @@ public class ZhiHuCalendarActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void initData() {
-        viewCalender.state().edit()
+        viewCalender.state()
+                .edit()
                 .setFirstDayOfWeek(Calendar.WEDNESDAY)
                 .setMinimumDate(CalendarDay.from(2013, 5, 20))
                 .setMaximumDate(CalendarDay.from(TimeUtils.getCurrentYear(),

@@ -5,7 +5,7 @@ import android.app.Activity;
 
 import com.ycbjie.library.base.mvp.BasePresenter;
 import com.ycbjie.library.base.mvp.BaseView;
-import com.ns.yc.lifehelper.model.bean.SelectPoint;
+import com.ns.yc.lifehelper.bean.SelectPoint;
 
 import java.util.List;
 

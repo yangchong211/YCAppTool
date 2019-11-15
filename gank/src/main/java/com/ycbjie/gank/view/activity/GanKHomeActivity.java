@@ -232,7 +232,7 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
      */
     @Override
     public void errorImage() {
-        ToastUtils.showToast("图片加载失败");
+        ToastUtils.showRoundRectToast("图片加载失败");
     }
 
 

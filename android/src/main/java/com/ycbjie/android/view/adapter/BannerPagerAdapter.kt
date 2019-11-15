@@ -9,7 +9,7 @@ import android.widget.ImageView
 import com.ycbjie.android.model.bean.BannerBean
 import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter
 import com.ycbjie.android.R
-import com.ycbjie.library.utils.image.ImageUtils
+import com.ycbjie.library.glide.ImageUtils
 
 
 class BannerPagerAdapter constructor(private val ctx: Activity?, private val list: MutableList<BannerBean>) : AbsStaticPagerAdapter() {

@@ -15,7 +15,7 @@ import com.ycbjie.library.base.mvp.BaseView;
  */
 public interface GanKHomeAContract {
 
-    //View(activity/fragment)继承，需要实现的方法
+    //View(activity_test/fragment)继承，需要实现的方法
     interface View extends BaseView {
         //设置图片
         void setBanner(String imgUrl);

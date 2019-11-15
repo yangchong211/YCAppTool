@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 import com.ycbjie.news.R;
 import com.ycbjie.news.model.WeChatBean;
 

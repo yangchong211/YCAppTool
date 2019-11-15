@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pedaily.yc.ycdialoglib.dialogFragment.BaseDialogFragment;
+import com.pedaily.yc.ycdialoglib.fragment.BaseDialogFragment;
 import com.ycbjie.library.utils.handler.HandlerHolder;
 import com.ycbjie.music.R;
 

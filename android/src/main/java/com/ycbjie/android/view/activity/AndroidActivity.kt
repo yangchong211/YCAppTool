@@ -38,7 +38,7 @@ import com.ycbjie.library.base.adapter.BasePagerAdapter
 import com.ycbjie.library.base.mvp.BaseActivity
 import com.ycbjie.library.constant.Constant
 import com.ycbjie.library.model.entry.TabEntity
-import com.ycbjie.library.web.view.WebViewActivity
+import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.base_android_bar.*
 import kotlinx.coroutines.*
 import java.lang.ref.WeakReference

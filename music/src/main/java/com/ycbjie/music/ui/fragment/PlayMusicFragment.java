@@ -25,7 +25,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.pedaily.yc.ycdialoglib.dialogFragment.BottomDialogFragment;
+import com.pedaily.yc.ycdialoglib.fragment.BottomDialogFragment;
 import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
@@ -393,13 +393,10 @@ public class PlayMusicFragment extends BaseFragment implements View.OnClickListe
                         int i = v.getId();
                         if (i == R.id.tv_play_type) {
                             switchPlayMode();
-
                         } else if (i == R.id.tv_collect) {
                             ToastUtils.showLong("收藏，后期在做");
-
                         } else if (i == R.id.iv_close) {
                             dialog.dismissDialogFragment();
-
                         } else {
                         }
                     }

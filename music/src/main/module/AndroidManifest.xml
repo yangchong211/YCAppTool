@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ycbjie.music">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+
     <application
         android:name=".app.MusicApp"
         android:allowBackup="true"

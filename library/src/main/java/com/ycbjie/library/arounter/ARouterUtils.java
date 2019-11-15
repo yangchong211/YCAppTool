@@ -27,7 +27,7 @@ public class ARouterUtils {
 
     /**
      * 在activity中添加
-     * @param activity              activity
+     * @param activity              activity_test
      */
     public static void injectActivity(FragmentActivity activity){
         if (activity==null){

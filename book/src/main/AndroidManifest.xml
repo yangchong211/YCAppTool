@@ -3,10 +3,10 @@
 
 
     <application>
-        <activity android:name="com.ycbjie.book.ui.activity.DoodleViewActivity"/>
-        <activity android:name="com.ycbjie.book.ui.activity.GameActivity"/>
-        <activity android:name="com.ycbjie.book.ui.activity.AirGameActivity"/>
-        <activity android:name="com.ycbjie.book.ui.activity.PinTuGameActivity"/>
+        <activity android:name="com.ycbjie.book.DoodleViewActivity"/>
+        <activity android:name="com.ycbjie.book.GameActivity"/>
+        <activity android:name="com.ycbjie.book.AirGameActivity"/>
+        <activity android:name="com.ycbjie.book.PinTuGameActivity"/>
     </application>
 
 

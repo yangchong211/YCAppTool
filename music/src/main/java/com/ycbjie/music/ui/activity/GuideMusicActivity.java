@@ -20,7 +20,7 @@ import com.squareup.picasso.Callback;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 import com.ycbjie.music.R;
 import com.ycbjie.music.base.BaseAppHelper;
 import com.ycbjie.music.service.PlayService;

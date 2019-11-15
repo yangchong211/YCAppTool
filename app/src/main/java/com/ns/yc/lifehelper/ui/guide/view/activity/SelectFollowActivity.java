@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.model.bean.SelectPoint;
+import com.ns.yc.lifehelper.bean.SelectPoint;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.SelectFollowPresenter;
 import com.ns.yc.lifehelper.ui.guide.view.adapter.SelectFollowAdapter;

@@ -28,8 +28,8 @@
 
     <application>
 
-        <activity android:name="com.ycbjie.library.web.view.WebViewQQActivity"/>
-        <activity android:name="com.ycbjie.library.web.view.WebViewActivity"/>
+        <activity android:name="com.ycbjie.library.web.WebViewQQActivity"/>
+        <activity android:name="com.ycbjie.library.web.WebViewActivity"/>
 
         <meta-data
             android:name="com.ycbjie.library.base.glide.DiskCacheModule"

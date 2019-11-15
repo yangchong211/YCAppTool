@@ -12,6 +12,7 @@
         android:id="@+id/appbar_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_behavior="com.ycbjie.library.weight.AppBarLayoutBehavior"
         android:gravity="bottom">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_search"

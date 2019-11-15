@@ -130,7 +130,7 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
                     @Override
                     public void onError(Throwable e) {
                         if(NetworkUtils.isConnected()){
-                            mView.setErrorView();
+                            mView.setErrorView(e.getMessage());
                         }else {
                             mView.setNetworkErrorView();
                         }
@@ -169,7 +169,7 @@ public class ZhiHuDailyPresenter implements ZhiHuDailyContract.Presenter {
                     @Override
                     public void onError(Throwable e) {
                         if(NetworkUtils.isConnected()){
-                            mView.setErrorView();
+                            mView.setErrorView(e.getMessage());
                         }else {
                             mView.setNetworkErrorView();
                         }

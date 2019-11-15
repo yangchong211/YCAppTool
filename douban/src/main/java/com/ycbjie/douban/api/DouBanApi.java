@@ -74,7 +74,8 @@ public interface DouBanApi {
      * @param count 一次请求的数目，如"10"条，最多100
      */
     @GET("v2/movie/top250")
-    Observable<DouHotMovieBean> getMovieTop250(@Query("start") int start, @Query("count") int count);
+    Observable<DouHotMovieBean> getMovieTop250(@Query("start") int start,
+                                               @Query("count") int count);
 
 
 

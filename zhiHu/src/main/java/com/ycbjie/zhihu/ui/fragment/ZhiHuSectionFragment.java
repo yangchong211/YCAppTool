@@ -10,6 +10,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.ns.yc.ycstatelib.OnNetworkListener;
+import com.ns.yc.ycstatelib.OnRetryListener;
 import com.ycbjie.library.base.state.BaseStateFragment;
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.contract.ZhiHuSectionContract;
@@ -79,6 +81,18 @@ public class ZhiHuSectionFragment extends BaseStateFragment implements ZhiHuSect
                 .errorView(R.layout.view_custom_data_error)
                 .loadingView(R.layout.view_custom_loading_data)
                 .netWorkErrorView(R.layout.view_custom_network_error)
+                .onRetryListener(new OnRetryListener() {
+                    @Override
+                    public void onRetry() {
+                        initData();
+                    }
+                })
+                .onNetworkListener(new OnNetworkListener() {
+                    @Override
+                    public void onNetwork() {
+                        initData();
+                    }
+                })
                 .build();
     }
 

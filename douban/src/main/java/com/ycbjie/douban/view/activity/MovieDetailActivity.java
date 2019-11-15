@@ -25,7 +25,7 @@ import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.http.ExceptionUtils;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 

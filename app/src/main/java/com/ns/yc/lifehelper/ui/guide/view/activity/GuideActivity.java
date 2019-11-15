@@ -13,7 +13,7 @@ import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.yccountdownviewlib.CountDownView;
 import com.squareup.picasso.Callback;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 

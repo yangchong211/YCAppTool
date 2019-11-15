@@ -165,7 +165,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         adapter = new VideoArticleAdapter(activity);
         final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
-                SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
+                1, Color.parseColor("#e5e5e5"));
         recyclerView.addItemDecoration(line);
         recyclerView.setAdapter(adapter);
 
@@ -246,7 +246,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
 
 
     private static String getVideoContentApi(String videoId) {
-        String VIDEO_HOST = "http://ib.365yg.com";
+        String VIDEO_HOST = "https://ib.365yg.com";
         String VIDEO_URL = "/video/urls/v/1/toutiao/mp4/%s?r=%s";
         String r = getRandom();
         String s = String.format(VIDEO_URL, videoId, r);
@@ -282,11 +282,11 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
             ft.add(android.R.id.content, videoPlayerFragment);
         } else {
             ft.show(videoPlayerFragment);
+            videoPlayerFragment.updateUrl(url);
         }
         ft.commitAllowingStateLoss();
         isPlayFragmentShow = true;
     }
-
 
     /**
      * 隐藏页面

@@ -9,7 +9,7 @@ import com.blankj.utilcode.util.LogUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.presenter.AndroidPresenter
 import com.ycbjie.library.base.mvp.BaseActivity
-import com.ycbjie.library.web.view.WebViewActivity
+import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.activity_android_about.*
 import kotlinx.android.synthetic.main.base_android_bar.*
 

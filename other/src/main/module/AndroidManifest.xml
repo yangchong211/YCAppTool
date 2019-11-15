@@ -2,11 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ycbjie.other" >
 
+
+
     <application
         android:name="com.ycbjie.other.app.OtherApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_other_name"
+        android:label="@string/lf_other_name"
         android:theme="@style/AppTheme"
         android:supportsRtl="true"
         tools:replace="android:label"
@@ -36,6 +38,7 @@
         <activity android:name=".ui.activity.ScrollActivity"/>
         <activity android:name=".ui.activity.MixtureTextViewActivity"/>
         <activity android:name=".ui.activity.CloneAbleActivity"/>
+        <activity android:name=".ui.activity.AnimActivity"/>
     </application>
 
 

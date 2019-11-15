@@ -115,7 +115,7 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
         pageCount = (int) Math.ceil(iconData.size()*1.0 / pageSize);
         for(int a=0 ; a<pageCount ; a++){
             final GridView gridView = (GridView) inflater.inflate(R.layout.item_vp_grid_view,vpPager,false);
-            GridView gv = (GridView) gridView.findViewById(R.id.gridView);
+            GridView gv = gridView.findViewById(R.id.gridView);
             gv.setNumColumns(5);
             gridView.setAdapter(new VideoGridAdapter(MyVideoActivity.this, iconData, a, pageSize));
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

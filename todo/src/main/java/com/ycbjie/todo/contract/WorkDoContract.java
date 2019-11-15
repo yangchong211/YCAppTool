@@ -20,7 +20,7 @@ import com.ycbjie.todo.ui.adapter.WorkPageAdapter;
  */
 public interface WorkDoContract {
 
-    //View(activity/fragment)继承，需要实现的方法
+    //View(activity_test/fragment)继承，需要实现的方法
     interface View extends BaseView {
         //设置适配器
         void setViewPagerAdapter(WorkPageAdapter mAdapter);

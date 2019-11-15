@@ -14,7 +14,7 @@ import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.db.cache.CacheZhLike;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 import java.util.List;
 
 

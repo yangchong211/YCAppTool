@@ -17,7 +17,7 @@ import com.ycbjie.android.view.activity.AndroidCollectActivity
 import com.ycbjie.android.view.activity.AndroidLoginActivity
 import com.ycbjie.library.base.mvp.BaseLazyFragment
 import com.ycbjie.library.constant.Constant
-import com.ycbjie.library.web.view.WebViewActivity
+import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.fragment_android_profile.*
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope

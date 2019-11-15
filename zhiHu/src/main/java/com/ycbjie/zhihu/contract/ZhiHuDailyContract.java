@@ -18,12 +18,12 @@ import com.ycbjie.zhihu.model.ZhiHuDailyBeforeListBean;
 public interface ZhiHuDailyContract {
 
 
-    //View(activity/fragment)继承，需要实现的方法
+    //View(activity_test/fragment)继承，需要实现的方法
     interface View extends BaseView {
         void setView(ZhiHuDailyListBean zhiHuDailyBean);
         void setEmptyView();
         void setNetworkErrorView();
-        void setErrorView();
+        void setErrorView(String message);
         void doInterval(int i);
         void showMoreContent(String format, ZhiHuDailyBeforeListBean zhiHuDailyBeforeListBean);
     }

@@ -21,7 +21,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 import com.ycbjie.music.R;
 import com.ycbjie.music.api.OnLineMusicModel;
 import com.ycbjie.music.model.bean.ArtistInfo;

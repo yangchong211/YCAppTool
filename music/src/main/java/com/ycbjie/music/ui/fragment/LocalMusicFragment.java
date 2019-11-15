@@ -166,7 +166,7 @@ public class LocalMusicFragment extends BackLazyFragment implements View.OnClick
 
     private void getMusicData() {
         //第一种方法，直接扫描，推荐不要使用，如果本地音乐少可以使用。如果几百首，那么会导致线程阻塞和卡顿
-        //music = FileScanManager.getInstance().scanMusic(activity);
+        //music = FileScanManager.getInstance().scanMusic(activity_test);
         //第二种方法，在服务中扫描，推荐使用
         music = BaseAppHelper.get().getMusicList();
         if (music.size() > 0) {

@@ -9,6 +9,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.blankj.utilcode.util.LogUtils;
+import com.ns.yc.ycstatelib.OnNetworkListener;
+import com.ns.yc.ycstatelib.OnRetryListener;
 import com.ycbjie.library.base.state.BaseStateFragment;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.zhihu.R;
@@ -85,6 +89,18 @@ public class ZhiHuThemeFragment extends BaseStateFragment implements ZhiHuThemeC
                 .errorView(R.layout.view_custom_data_error)
                 .loadingView(R.layout.view_custom_loading_data)
                 .netWorkErrorView(R.layout.view_custom_network_error)
+                .onRetryListener(new OnRetryListener() {
+                    @Override
+                    public void onRetry() {
+                        initData();
+                    }
+                })
+                .onNetworkListener(new OnNetworkListener() {
+                    @Override
+                    public void onNetwork() {
+                        initData();
+                    }
+                })
                 .build();
     }
 
@@ -146,13 +162,14 @@ public class ZhiHuThemeFragment extends BaseStateFragment implements ZhiHuThemeC
 
     @Override
     public void setNetworkErrorView() {
-        statusLayoutManager.showError();
+        statusLayoutManager.showNetWorkError();
     }
 
 
     @Override
-    public void setErrorView() {
-        statusLayoutManager.showNetWorkError();
+    public void setErrorView(String message) {
+        LogUtils.d("setErrorView----"+message);
+        statusLayoutManager.showError();
     }
 
 

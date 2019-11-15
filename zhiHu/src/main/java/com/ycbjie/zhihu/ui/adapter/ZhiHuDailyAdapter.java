@@ -16,7 +16,7 @@ import com.ycbjie.library.inter.listener.OnListItemClickListener;
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.model.ZhiHuDailyBeforeListBean;
 import com.ycbjie.zhihu.model.ZhiHuDailyListBean;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 
 import java.util.List;
@@ -68,7 +68,7 @@ public class ZhiHuDailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             return new DateViewHolder(inflater.inflate(R.layout.base_title_view,
                     parent, false));
         }
-        return new ContentViewHolder(inflater.inflate(R.layout.item_zh_news_list,
+        return new ContentViewHolder(inflater.inflate(R.layout.item_news_base_view,
                 parent, false));
     }
 

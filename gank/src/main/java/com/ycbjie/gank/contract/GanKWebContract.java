@@ -16,7 +16,7 @@ import com.ycbjie.gank.bean.cache.CacheGanKFavorite;
  */
 public interface GanKWebContract {
 
-    //View(activity/fragment)继承，需要实现的方法
+    //View(activity_test/fragment)继承，需要实现的方法
     interface View extends BaseView {
         //设置fab按钮的颜色
         void setFabColor();

@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.pedaily.yc.ycdialoglib.dialogMenu.CustomBottomDialog;
+import com.pedaily.yc.ycdialoglib.dialog.menu.CustomBottomDialog;
 import com.pedaily.yc.ycdialoglib.snackbar.SnackBarUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;

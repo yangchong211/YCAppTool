@@ -22,7 +22,7 @@ import retrofit2.http.Query
 interface RequestApi {
 
     companion object {
-        var HOST: String = "http://www.wanandroid.com/"
+        var HOST: String = "https://www.wanandroid.com/"
     }
 
     /**

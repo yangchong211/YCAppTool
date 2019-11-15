@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ycbjie.music">
 
-    <application>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
+    <application>
         <activity android:name=".ui.activity.GuideMusicActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".ui.activity.MusicActivity"

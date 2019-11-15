@@ -105,7 +105,8 @@ public class FullyGridLayoutManager extends GridLayoutManager {
     private void measureScrapChild(RecyclerView.Recycler recycler, int position, int widthSpec, int heightSpec, int[] measuredDimension) {
         if (position < getItemCount()) {
             try {
-                View view = recycler.getViewForPosition(0);//fix 动态添加时报IndexOutOfBoundsException
+                View view = recycler.getViewForPosition(0);
+                //fix 动态添加时报IndexOutOfBoundsException
                 if (view != null) {
                     RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
                     int childWidthSpec = ViewGroup.getChildMeasureSpec(widthSpec,

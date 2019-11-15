@@ -16,7 +16,7 @@ import com.ycbjie.zhihu.model.ZhiHuThemeChildBean;
  */
 public interface ZhiHuThemeListContract {
 
-    //View(activity/fragment)继承，需要实现的方法
+    //View(activity_test/fragment)继承，需要实现的方法
     interface View extends BaseView {
         void setView(ZhiHuThemeChildBean zhiHuThemeChildBean);
         void setEmptyView();

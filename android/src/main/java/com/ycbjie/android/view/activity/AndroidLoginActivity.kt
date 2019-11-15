@@ -9,7 +9,7 @@ import android.text.TextWatcher
 import android.view.View
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
-import com.pedaily.yc.ycdialoglib.loading.ViewLoading
+import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.base.KotlinConstant

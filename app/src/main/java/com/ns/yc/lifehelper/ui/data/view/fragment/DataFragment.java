@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -19,18 +21,19 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
-import com.ns.yc.lifehelper.model.bean.ImageIconBean;
+import com.ns.yc.lifehelper.bean.ImageIconBean;
 import com.ns.yc.lifehelper.ui.data.contract.DataFragmentContract;
 import com.ns.yc.lifehelper.ui.data.presenter.DataFragmentPresenter;
 import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
 import com.ns.yc.lifehelper.ui.data.view.adapter.NarrowImageAdapter;
 import com.ns.yc.lifehelper.ui.data.view.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.weight.MyGridView;
+import com.yc.cn.ycbannerlib.snap.ScrollPageHelper;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
+import com.ycbjie.library.weight.MyGridView;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
@@ -286,8 +289,17 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
         mRecyclerView.setHorizontalScrollBarEnabled(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(
                 activity, LinearLayoutManager.HORIZONTAL, false));
-        //ScrollPageHelper snapHelper = new ScrollPageHelper(Gravity.START,false);
-        //snapHelper.attachToRecyclerView(mRecyclerView.getRecyclerView());
+        ScrollPageHelper snapHelper = new ScrollPageHelper(Gravity.START,false);
+        try {
+            //attachToRecyclerView源码上的方法可能会抛出IllegalStateException异常，这里手动捕获一下
+            RecyclerView.OnFlingListener onFlingListener = mRecyclerView.getRecyclerView().getOnFlingListener();
+            //源码中判断了，如果onFlingListener已经存在的话，再次设置就直接抛出异常，那么这里可以判断一下
+            if (onFlingListener==null){
+                snapHelper.attachToRecyclerView(mRecyclerView.getRecyclerView());
+            }
+        } catch (IllegalStateException e){
+            e.printStackTrace();
+        }
         mRecyclerView.addItemDecoration(new SpaceViewItemLine(SizeUtils.dp2px(8)));
         mRecyclerView.setRefreshListener(() -> {
             adapter.clear();
@@ -295,21 +307,11 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
         });
         adapter.addAll(list);
         adapter.setOnItemClickListener(position -> {
-            //ToastUtils.showToast(position + "被点击呢");
             ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
         });
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-            }
-        });
     }
+
+
+
 
 }

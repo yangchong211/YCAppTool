@@ -59,7 +59,7 @@ public class ZhiHuThemePresenter implements ZhiHuThemeContract.Presenter {
                     @Override
                     public void onError(Throwable e) {
                         if(NetworkUtils.isConnected()){
-                            mView.setErrorView();
+                            mView.setErrorView(e.getMessage());
                         }else {
                             mView.setNetworkErrorView();
                         }

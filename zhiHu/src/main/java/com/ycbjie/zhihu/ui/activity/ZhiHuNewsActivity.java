@@ -105,7 +105,7 @@ public class ZhiHuNewsActivity extends BaseActivity implements View.OnClickListe
         tabLayout.setupWithViewPager(vpContent);
         tabLayout.setTabTextColors(getResources().getColor(R.color.colorTheme),
                 getResources().getColor(R.color.redTab));
-        tabLayout.setSelectedTabIndicatorHeight(SizeUtils.dp2px(1));
+        tabLayout.setSelectedTabIndicatorHeight(SizeUtils.dp2px(3));
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorTheme));
     }
 

@@ -23,7 +23,7 @@ import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.http.ExceptionUtils;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

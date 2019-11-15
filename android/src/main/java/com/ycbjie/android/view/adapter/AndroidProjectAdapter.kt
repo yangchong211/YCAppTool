@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.HomeData
-import com.ycbjie.library.utils.image.ImageUtils
+import com.ycbjie.library.glide.ImageUtils
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
 

@@ -27,7 +27,7 @@ public class ConstantTxApi {
      * http://api.tianapi.com/qiwen/?key=APIKEY&num=10          奇闻异事
      */
     public static final String TX_KEY = "287b50acef572d1716e8a7c7ca504c22";
-    public static final String TX_HTTP = "http://api.tianapi.com/";
+    public static final String TX_HTTP = "https://api.tianapi.com/";
 
 
 }

@@ -11,6 +11,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="240dp"
+        app:layout_behavior="com.ycbjie.library.weight.AppBarLayoutBehavior"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout

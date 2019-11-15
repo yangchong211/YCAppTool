@@ -19,7 +19,7 @@ import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
 import com.blankj.utilcode.util.LogUtils
 import com.ycbjie.android.R
 import com.ycbjie.library.base.mvp.BaseActivity
-import com.ycbjie.library.web.view.WebViewActivity
+import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.activity_nav_website.*
 import com.ycbjie.android.network.SchedulerProvider
 import kotlinx.android.synthetic.main.base_android_bar.*

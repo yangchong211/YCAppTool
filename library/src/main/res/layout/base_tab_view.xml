@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorWhite"
+        app:tabIndicatorFullWidth="false"
         app:tabBackground="@drawable/ripple_tab_bg"
         app:tabIndicatorColor="@color/colorTheme"
         app:tabSelectedTextColor="@color/colorTheme"

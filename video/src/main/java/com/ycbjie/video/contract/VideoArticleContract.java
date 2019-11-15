@@ -19,7 +19,7 @@ import java.util.List;
 public interface VideoArticleContract {
 
 
-    //View(activity/fragment)继承，需要实现的方法
+    //View(activity_test/fragment)继承，需要实现的方法
     interface View extends BaseView {
         void showRecyclerView();
         void setDataView(List<MultiNewsArticleDataBean> dataList);

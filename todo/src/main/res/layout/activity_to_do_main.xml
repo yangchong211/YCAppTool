@@ -9,6 +9,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_behavior="com.ycbjie.library.weight.AppBarLayoutBehavior"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
         <android.support.v7.widget.Toolbar

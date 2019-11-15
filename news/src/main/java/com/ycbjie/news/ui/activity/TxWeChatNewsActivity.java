@@ -17,7 +17,7 @@ import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.web.view.WebViewQQActivity;
+import com.ycbjie.library.web.WebViewQQActivity;
 import com.ycbjie.news.R;
 import com.ycbjie.news.contract.TxWeChatContract;
 import com.ycbjie.news.model.WeChatBean;

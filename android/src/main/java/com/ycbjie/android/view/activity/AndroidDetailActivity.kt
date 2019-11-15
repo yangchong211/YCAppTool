@@ -9,7 +9,7 @@ import com.ycbjie.android.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidDetailContract
 import com.ycbjie.android.model.bean.HomeData
 import com.ycbjie.android.presenter.AndroidDetailPresenter
-import com.ycbjie.library.web.view.WebViewActivity
+import com.ycbjie.library.web.WebViewActivity
 
 
 /**

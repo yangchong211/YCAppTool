@@ -22,7 +22,7 @@ public class ZhiHuModel {
     /**
      * 知乎日报
      */
-    private static final String ZHI_HU = "http://news-at.zhihu.com/api/4/";
+    private static final String ZHI_HU = "https://news-at.zhihu.com/api/4/";
 
     private ZhiHuModel() {
         mApiService = RetrofitWrapper

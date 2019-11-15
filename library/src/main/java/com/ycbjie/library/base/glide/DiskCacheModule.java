@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
+import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.bumptech.glide.module.AppGlideModule;
 import com.ycbjie.library.utils.SDUtils;
 
@@ -13,7 +14,10 @@ import com.ycbjie.library.utils.SDUtils;
 @GlideModule
 public class DiskCacheModule extends AppGlideModule {
 
-    private static final int diskCacheSizeBytes = 1024 * 1024 * 500; // 200 MB
+    /**
+     * 缓存空间大小
+     */
+    private static final int DISK_CACHE_SIZE_BYTES = 1024 * 1024 * 500;
 
     @Override
     public boolean isManifestParsingEnabled() {
@@ -30,7 +34,7 @@ public class DiskCacheModule extends AppGlideModule {
         super.applyOptions(context, builder);
         //路径：
         builder.setDiskCache(new DiskLruCacheFactory(SDUtils.getLocalRootSavePathDir(
-                Utils.getApp(),"GlideDisk"), diskCacheSizeBytes ));
+                Utils.getApp(),"GlideDisk"), DISK_CACHE_SIZE_BYTES));
     }
 
 

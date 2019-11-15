@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.bean.bean.GanKIoDataBean;
 import com.ycbjie.library.utils.AppUtils;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;

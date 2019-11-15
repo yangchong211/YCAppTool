@@ -162,7 +162,7 @@ public class AppUtils {
 
     /**
      * 判断某Activity是否挂掉
-     * @param activity      activity
+     * @param activity      activity_test
      * @return
      */
     public static boolean isActivityLiving(Activity activity) {

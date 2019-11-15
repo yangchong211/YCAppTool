@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.pedaily.yc.ycdialoglib.loading.ViewLoading;
+import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouBookDetailBean;
@@ -21,7 +21,7 @@ import com.ycbjie.library.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
 import com.ycbjie.library.http.ExceptionUtils;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

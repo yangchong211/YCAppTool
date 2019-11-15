@@ -4,7 +4,7 @@ import android.content.res.TypedArray;
 
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.model.bean.ImageIconBean;
+import com.ns.yc.lifehelper.bean.ImageIconBean;
 import com.ns.yc.lifehelper.ui.data.contract.DataFragmentContract;
 
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.ui.guide.presenter;
 import android.app.Activity;
 
 import com.ns.yc.lifehelper.R;
-import com.ns.yc.lifehelper.model.bean.SelectPoint;
+import com.ns.yc.lifehelper.bean.SelectPoint;
 import com.ns.yc.lifehelper.ui.guide.contract.SelectFollowContract;
 
 import java.util.ArrayList;

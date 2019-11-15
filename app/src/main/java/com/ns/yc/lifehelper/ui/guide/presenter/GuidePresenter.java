@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
-import com.ns.yc.lifehelper.model.bean.ItemEntity;
+import com.ns.yc.lifehelper.bean.ItemEntity;
 import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.ycbjie.library.api.ConstantImageApi;
 import com.ycbjie.library.base.config.AppConfig;

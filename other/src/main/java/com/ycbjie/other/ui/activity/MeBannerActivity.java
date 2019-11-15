@@ -124,9 +124,9 @@ public class MeBannerActivity extends BaseActivity {
 
 
     /**
-     * 报错提示：You cannot start a load for a destroyed activity
+     * 报错提示：You cannot start a load for a destroyed activity_test
      * 原因的出处是因为我在滑动那里做的图片滑动时停止加载，停止时加载图片导致的
-     * “You cannot start a load for a destroyed activity”,说白了就是activity在你按back键时候已经销毁了，
+     * “You cannot start a load for a destroyed activity_test”,说白了就是activity在你按back键时候已经销毁了，
      * 而那个滚动事件的Glide图片处理事件还在执行。
      *
      * 方案1：尝试在每个Glide使用时候，this改成getApplicationContext()，依然crash！

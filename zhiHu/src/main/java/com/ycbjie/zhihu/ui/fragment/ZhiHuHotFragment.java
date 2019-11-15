@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.SizeUtils;
+import com.ns.yc.ycstatelib.OnNetworkListener;
+import com.ns.yc.ycstatelib.OnRetryListener;
 import com.ycbjie.library.base.state.BaseStateFragment;
 import com.ycbjie.zhihu.R;
 import com.ycbjie.zhihu.contract.ZhiHuHotContract;
@@ -91,6 +93,18 @@ public class ZhiHuHotFragment extends BaseStateFragment implements ZhiHuHotContr
                 .errorView(R.layout.view_custom_data_error)
                 .loadingView(R.layout.view_custom_loading_data)
                 .netWorkErrorView(R.layout.view_custom_network_error)
+                .onRetryListener(new OnRetryListener() {
+                    @Override
+                    public void onRetry() {
+                        initData();
+                    }
+                })
+                .onNetworkListener(new OnNetworkListener() {
+                    @Override
+                    public void onNetwork() {
+                        initData();
+                    }
+                })
                 .build();
     }
 
@@ -133,7 +147,7 @@ public class ZhiHuHotFragment extends BaseStateFragment implements ZhiHuHotContr
         mAdapter = new ZhiHuHotAdapter(activity, mList);
         recyclerView.setAdapter(mAdapter);
         final RecycleViewItemLine line = new RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
-                SizeUtils.dp2px(1), Color.parseColor("#e5e5e5"));
+                1, Color.parseColor("#e5e5e5"));
         recyclerView.addItemDecoration(line);
         refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

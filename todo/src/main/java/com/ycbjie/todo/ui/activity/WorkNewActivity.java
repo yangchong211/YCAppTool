@@ -40,7 +40,7 @@ import com.ycbjie.library.db.cache.CacheTaskDetailEntity;
 import com.ycbjie.todo.presenter.WorkNewPresenter;
 import com.ycbjie.todo.ui.adapter.ChoosePriorityAdapter;
 import com.ycbjie.todo.ui.dialog.WorkChooseColorDialog;
-import com.ycbjie.library.utils.image.ImageUtils;
+import com.ycbjie.library.glide.ImageUtils;
 
 import java.util.Calendar;
 import java.util.List;
