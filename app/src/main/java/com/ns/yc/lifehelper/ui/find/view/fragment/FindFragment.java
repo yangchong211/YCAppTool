@@ -17,8 +17,8 @@ import com.ns.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
 import com.ns.yc.lifehelper.ui.guide.view.activity.SelectFollowActivity;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.banner.BannerView;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
 
@@ -196,8 +196,9 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
             case 1:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_ANDROID_ACTIVITY);
                 break;
+                //富文本
             case 2:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_NOTE_ACTIVITY);
+                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ARTICLE);
                 break;
             case 3:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_MUSIC_GUIDE_ACTIVITY);

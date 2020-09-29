@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.glide.ImageUtils;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsStaticPagerAdapter;
+import com.yc.imageserver.utils.GlideImageUtils;
 
 import java.util.List;
 
@@ -35,19 +35,20 @@ public class BaseBannerPagerAdapter extends AbsStaticPagerAdapter {
     @Override
     public View getView(ViewGroup container, final int position) {
         ImageView imageView = new ImageView(ctx);
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         //加载图片
         if(list!=null){
             if(list.get(position) instanceof String){
-                ImageUtils.loadImgByPicasso(ctx,(String) list.get(position), R.drawable.image_default,imageView);
+                GlideImageUtils.loadImageNet(ctx,(String) list.get(position),imageView);
             }else if(list.get(position) instanceof Integer){
-                ImageUtils.loadImgByPicasso(ctx,(Integer) list.get(position), R.drawable.image_default,imageView);
+                GlideImageUtils.loadImageLocal(ctx,(Integer) list.get(position),imageView);
             }else if(list.get(position) instanceof Bitmap){
-                ImageUtils.loadImgByPicasso(ctx,(Bitmap) list.get(position), R.drawable.image_default,imageView);
+                GlideImageUtils.loadImageLocal(ctx,(Bitmap) list.get(position),imageView);
             }
         }else {
-            ImageUtils.loadImgByPicasso(ctx, R.drawable.image_default,imageView);
+            GlideImageUtils.loadImageLocal(ctx, R.drawable.image_default,imageView);
         }
         return imageView;
     }

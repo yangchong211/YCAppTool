@@ -14,9 +14,9 @@ import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.yc.configlayer.bean.HomeBlogEntity;
+import com.ycbjie.library.api.ConstantImageApi;
 import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.model.HomeBlogEntity;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -154,14 +154,12 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
     @Override
     public void getGalleryData() {
-        final TypedArray array = Utils.getApp().getResources().obtainTypedArray(R.array.image_girls);
+        ArrayList<Integer> narrowImage = ConstantImageApi.getNarrowImage();
         final ArrayList<Bitmap> images = new ArrayList<>();
-        for(int a=0 ; a<array.length() ; a++){
-            int resourceId = array.getResourceId(a, R.drawable.ic_data_picture);
-            Bitmap bitmap = toBitmap(resourceId);
+        for(int a=0 ; a<narrowImage.size() ; a++){
+            Bitmap bitmap = toBitmap(narrowImage.get(a));
             images.add(bitmap);
         }
-        array.recycle();
         mHomeView.downloadBitmapSuccess(images);
     }
 

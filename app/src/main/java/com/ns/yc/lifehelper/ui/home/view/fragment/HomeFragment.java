@@ -25,19 +25,21 @@ import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.yc.configlayer.bean.HomeBlogEntity;
+import com.yc.toollayer.FastClickUtils;
+import com.yc.toollayer.GoToScoreUtils;
+import com.yc.toollib.crash.CrashToolUtils;
 import com.ycbjie.library.utils.AppUtils;
 import com.ns.yc.yccardviewlib.CardViewLayout;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.model.HomeBlogEntity;
-import com.ycbjie.library.utils.GoToScoreUtils;
-import com.ycbjie.library.utils.WindowUtils;
-import com.ycbjie.library.utils.handler.HandlerUtils;
+import com.yc.toollayer.WindowUtils;
+import com.yc.toollayer.handler.HandlerUtils;
 import com.ycbjie.library.web.WebViewActivity;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -207,16 +209,23 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 marqueeView = header.findViewById(R.id.marqueeView);
                 cardViewLayout = header.findViewById(R.id.cardView);
                 View.OnClickListener listener = v -> {
+                    if (FastClickUtils.isFastDoubleClick()){
+                        return;
+                    }
                     switch (v.getId()) {
+                            //跳转视频
                         case R.id.tv_home_first:
                             ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
                             break;
+                            //飞机大战
                         case R.id.tv_home_second:
                             ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_AIR_ACTIVITY);
                             break;
+                            //跳转崩溃列表
                         case R.id.tv_home_third:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_TX_NEWS_ACTIVITY);
+                            CrashToolUtils.startCrashListActivity(activity);
                             break;
+                            //干活集中营
                         case R.id.tv_home_four:
                             ARouterUtils.navigation(ARouterConstant.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY);
                             break;
@@ -379,11 +388,9 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 popMenu.dismiss();
             });
             tvFeedback.setOnClickListener(v -> {
-                if(AppUtils.isPkgInstalled(activity,"com.tencent.android.qqdownloader")){
-                    ArrayList<String> installAppMarkets = GoToScoreUtils.getInstallAppMarkets(activity);
-                    ArrayList<String> filterInstallMarkets = GoToScoreUtils.getFilterInstallMarkets(activity, installAppMarkets);
-                    GoToScoreUtils.launchAppDetail(activity,"com.zero2ipo.harlanhu.pedaily",filterInstallMarkets.get(0));
-                }else {
+                if(GoToScoreUtils.isPkgInstalled(activity,"com.tencent.mm")){
+                    GoToScoreUtils.startMarket(activity,"com.tencent.mm");
+                } else {
                     Intent intent = new Intent(activity, WebViewActivity.class);
                     intent.putExtra("url", QQ_URL);
                     activity.startActivity(intent);

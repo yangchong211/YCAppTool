@@ -16,12 +16,12 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.OnePlusNLayoutHelper;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
+import com.yc.configlayer.bean.HomeBlogEntity;
+import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.library.constant.Constant;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
-import com.ycbjie.library.model.HomeBlogEntity;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ycbjie.library.glide.ImageUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
 import com.yc.cn.ycbaseadapterlib.adapter.BaseViewHolder;
@@ -204,7 +204,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, listTitle[position]);
                 ImageView iv = holder.getView(R.id.iv_image);
-                ImageUtils.loadImgByPicasso(activity, images.get(position), iv);
+                GlideImageUtils.loadImageLocal(activity, images.get(position), iv);
                 Objects.requireNonNull(holder.getItemView()).setOnClickListener(v ->
                         mView.setGridClick(position)
                 );
@@ -227,7 +227,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                     HomeBlogEntity model = Constant.findNews.get(position);
                     holder.setText(R.id.tv_title, model.getTitle());
                     ImageView imageView = holder.getView(R.id.iv_logo);
-                    ImageUtils.loadImgByPicasso(activity, model.getImageUrl(), R.drawable.image_default, imageView);
+                    GlideImageUtils.loadImageNet(activity, model.getImageUrl(), imageView);
                     holder.setText(R.id.tv_time, model.getTime());
                     Objects.requireNonNull(holder.getItemView()).setOnClickListener(v -> {
                         //点击事件
@@ -275,7 +275,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                 super.onBindViewHolder(holder, position);
                 holder.setText(R.id.tv_title, listTitle[position]);
                 ImageView iv = holder.getView(R.id.iv_image);
-                ImageUtils.loadImgByPicasso(activity, images.get(position), iv);
+                GlideImageUtils.loadImageLocal(activity, images.get(position), iv);
                 Objects.requireNonNull(holder.getItemView()).setOnClickListener(v -> {
                     //点击事件
                     mView.setGridClickThird(position);
@@ -340,8 +340,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                     HomeBlogEntity model = Constant.findBottomNews.get(position);
                     holder.setText(R.id.tv_title, model.getTitle());
                     ImageView imageView = holder.getView(R.id.iv_logo);
-                    ImageUtils.loadImgByPicasso(activity, model.getImageUrl()
-                            , R.drawable.image_default, imageView);
+                    GlideImageUtils.loadImageNet(activity, model.getImageUrl(), imageView);
                     holder.setText(R.id.tv_time, model.getTime());
                     Objects.requireNonNull(holder.getItemView()).setOnClickListener(v -> {
                         //点击事件

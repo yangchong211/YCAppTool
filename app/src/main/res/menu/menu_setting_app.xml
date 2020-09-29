@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/item_capture"
+        android:title="二维码"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_action_scan"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/item_setting"
+        android:title="我的设置"
+        android:orderInCategory="2"
+        android:icon="@drawable/home_menu_6"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/item_message"
+        android:title="我的消息"
+        android:orderInCategory="3"
+        android:icon="@drawable/home_menu_1"
+        app:showAsAction="never"/>
+
+    <!--
+    android：orderInCategory="100"
+    设置优先级，值越大优先级越低
+    -->
+
+    <!--
+    always：总是显示在界面上
+    never：不显示在界面上，只让出现在右边的三个点中
+    ifRoom：如果有位置才显示，不然就出现在右边的三个点中
+    -->
+
+</menu>

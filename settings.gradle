@@ -1,15 +1,49 @@
-include ':app', ':love', ':mvvm',
-        ':library',
-        ':book',
-        ':news',
-        ':video',
-        ':todo',
-        ':gank',
-        ':note',
-        ':douban',
-        ':music',
-        ':android',
-        ':zhiHu',
-        ':other'
+/* +++++++++ 主项目 +++++++++ */
+include ':app'
+
+/* +++++++++ 业务组件层 +++++++++ */
+include ':GameBusiness', ':AndroidBusiness', ':LoveBusiness', ':MusicBusiness', ':NoteBusiness',
+        ':VideoBusiness', ':GankBusiness', ':DemoBusiness', ':DouBanBusiness', ':BusinessInterface',
+        ':WebServer'
+project(':GameBusiness').projectDir = new File('business/GameBusiness')
+project(':AndroidBusiness').projectDir = new File('business/AndroidBusiness')
+project(':LoveBusiness').projectDir = new File('business/LoveBusiness')
+project(':MusicBusiness').projectDir = new File('business/MusicBusiness')
+project(':NoteBusiness').projectDir = new File('business/NoteBusiness')
+project(':VideoBusiness').projectDir = new File('business/VideoBusiness')
+project(':GankBusiness').projectDir = new File('business/GankBusiness')
+project(':DemoBusiness').projectDir = new File('business/DemoBusiness')
+project(':DouBanBusiness').projectDir = new File('business/DouBanBusiness')
+project(':WebServer').projectDir = new File('business/WebServer')
+project(':BusinessInterface').projectDir = new File('business/BusinessInterface')
+
+
+/* +++++++++ 框架业务服务层 +++++++++ */
+include ':ImageServer', ':HttpServer', ':ShareServer', ':ZxingServer',':XlogServer',':ServerInterface'
+project(':ImageServer').projectDir = new File('server/ImageServer')
+project(':HttpServer').projectDir = new File('server/HttpServer')
+project(':ShareServer').projectDir = new File('server/ShareServer')
+project(':ZxingServer').projectDir = new File('server/ZxingServer')
+project(':XlogServer').projectDir = new File('server/XlogServer')
+project(':ServerInterface').projectDir = new File('server/ServerInterface')
+
+
+
+/* +++++++++ 框架组件层 +++++++++ */
+include ':BannerWidget', ':PhotoWidget', ':CustomWidget'
+project(':BannerWidget').projectDir = new File('widget/BannerWidget')
+project(':PhotoWidget').projectDir = new File('widget/PhotoWidget')
+project(':CustomWidget').projectDir = new File('widget/CustomWidget')
+
+
+/* +++++++++ 框架公共组件层 +++++++++ */
+include ':CommonLayer', ':LibraryLayer',':ConfigLayer',':ToolLayer'
+project(':CommonLayer').projectDir = new File('common/CommonLayer')
+project(':LibraryLayer').projectDir = new File('common/LibraryLayer')
+project(':ConfigLayer').projectDir = new File('common/ConfigLayer')
+project(':ToolLayer').projectDir = new File('common/ToolLayer')
+
+
+
 
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <item
+        android:id="@+id/insert_image"
+        android:orderInCategory="100"
+        android:title="插入图片"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/save"
+        android:orderInCategory="100"
+        android:title="预览效果"
+        app:showAsAction="always" />
+</menu>

@@ -2,18 +2,15 @@
 ext {
 
     isApplication = false  //false:作为Lib组件存在， true:作为application存在，这个不建议改
-    isLoveApplication = true  //爱意表达模块开关，false:作为Lib组件存在， true:作为application存在
-    isVideoApplication = true  //视频模块开关，false:作为Lib组件存在， true:作为application存在
-    isZhiHuApplication = true  //知乎模块开关，false:作为Lib组件存在， true:作为application存在
-    isBookApplication = true  //book模块开关，false:作为Lib组件存在， true:作为application存在
-    isDouBanApplication = true  //豆瓣模块开关，false:作为Lib组件存在， true:作为application存在
-    isOtherApplication = true  //其他模块开关，false:作为Lib组件存在， true:作为application存在
-    isAndroidApplication = true  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
-    isGankApplication = true  //干货模块开关，false:作为Lib组件存在， true:作为application存在
-    isToDoApplication = true  //todo模块开关，false:作为Lib组件存在， true:作为application存在
-    isNoteApplication = true  //记事本模块开关，false:作为Lib组件存在， true:作为application存在
-    isMusicApplication = true  //音乐模块开关，false:作为Lib组件存在， true:作为application存在
-    isNewsApplication = true  //新闻模块开关，false:作为Lib组件存在， true:作为application存在
+    isLoveApplication = false  //爱意表达模块开关，false:作为Lib组件存在， true:作为application存在
+    isVideoApplication = false  //视频模块开关，false:作为Lib组件存在， true:作为application存在
+    isBookApplication = false  //book模块开关，false:作为Lib组件存在， true:作为application存在
+    isDouBanApplication = false  //豆瓣模块开关，false:作为Lib组件存在， true:作为application存在
+    isOtherApplication = false  //其他模块开关，false:作为Lib组件存在， true:作为application存在
+    isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
+    isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
+    isNoteApplication = false  //记事本模块开关，false:作为Lib组件存在， true:作为application存在
+    isMusicApplication = false  //音乐模块开关，false:作为Lib组件存在， true:作为application存在
 
     
     android = [
@@ -28,10 +25,11 @@ ext {
     version = [
                androidSupportSdkVersion: "28.0.0",
                retrofitSdkVersion      : "2.4.0",
-               glideSdkVersion         : "4.8.0",
+               glideSdkVersion         : "4.9.0",
                canarySdkVersion        : "1.5.4",
                constraintVersion       : "1.0.2",
-               okhttp                  : "3.8.1"
+               okhttp                  : "4.7.2",
+               zxing_version           : "3.3.3"
     ]
 
     dependencies = [
@@ -53,16 +51,9 @@ ext {
                 "retrofit-converter-gson"  : "com.squareup.retrofit2:converter-gson:${version["retrofitSdkVersion"]}",
                 "retrofit-adapter-rxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:${version["retrofitSdkVersion"]}",
                 "okhttp"                   : "com.squareup.okhttp3:okhttp:${version["okhttp"]}",
-                "logging-interceptor"      : "com.squareup.okhttp3:logging-interceptor:${version["okhttp"]}",
                 "rxandroid2"                : "io.reactivex.rxjava2:rxandroid:2.1.0",
                 "rxjava2"                   : "io.reactivex.rxjava2:rxjava:2.1.11",
                 "rxrelay"                  : "com.jakewharton.rxrelay2:rxrelay:2.0.0",
-
-                //由于项目在早期用rx 1.x版本，后期组件化更改内容太多，固后期将rx2替换rx1
-                "retrofit-adapter-rxjava"   :'com.squareup.retrofit2:adapter-rxjava:2.1.0',
-                "rxandroid"                : "io.reactivex.rxjava2:rxandroid:1.2.1",
-                "rxjava"                   : "io.reactivex.rxjava2:rxjava:1.2.1",
-
 
                 //router
                 "router"                      : "com.alibaba:arouter-api:1.4.1",
@@ -71,14 +62,10 @@ ext {
                 //image
                 "glide"                    : "com.github.bumptech.glide:glide:${version["glideSdkVersion"]}",
                 "glide-compiler"           : "com.github.bumptech.glide:compiler:${version["glideSdkVersion"]}",
-                //"glide-transformations"    : "jp.wasabeef:glide-transformations:3.3.0",
-                "picasso"                  : "com.squareup.picasso:picasso:2.5.2",
                 "takephoto"                : "com.jph.takephoto:takephoto_library:4.0.3",
-                "imagepicker"              : "com.lzy.widget:imagepicker:0.5.0",
 
                 //view
                 "tablayout"                 : "com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar",
-                "flowlayout"                : "com.zhy:flowlayout-lib:1.0.3",
 
                 //yc
                 "YCStateLib"                  : "cn.yc:YCStateLib:1.2.2",
@@ -88,24 +75,24 @@ ext {
                 "YCMultiInputViewLib"         : "cn.yc:YCMultiInputViewLib:1.0",
                 "YCProgressLib"               : "cn.yc:YCProgressLib:1.2.7",
                 "YCCardViewLib"               : "cn.yc:YCCardViewLib:1.2",
-                "YCCustomTextLib"             : "cn.yc:YCCustomTextLib:2.1",
+                "YCCustomTextLib"             : "cn.yc:YCCustomTextLib:2.1.4",
                 "YCRecycleViewLib"            : "cn.yc:YCRecycleViewLib:1.1",
                 "YCGalleryLib"                : "cn.yc:YCGalleryLib:1.1.5",
                 "YCBaseAdapterLib"            : "cn.yc:YCBaseAdapterLib:1.3.4",
                 "YCBannerLib"                 : "cn.yc:YCBannerLib:1.4.0",
                 "YCRefreshViewLib"            : "org.yczbj:YCRefreshViewLib:2.5.6",
-                "YCStatusBarLib"              : "cn.yc:YCStatusBarLib:1.4.0",
+                "YCStatusBarLib"              : "cn.yc:YCStatusBarLib:1.5.0",
                 "YCVideoPlayerLib"            : "cn.yc:YCVideoPlayerLib:2.6.6",
                 "YCThreadPoolLib"             : "cn.yc:YCThreadPoolLib:1.3.2",
                 "notificationLib"             : "cn.yc:notificationLib:1.0.3",
-                "WebViewLib"                  : "cn.yc:WebViewLib:1.1.7",
+                "WebViewLib"                  : "cn.yc:WebViewLib:1.4.1",
+                "YCAndroidTool"                  : "cn.yc:ToolLib:1.2.1",
 
                 //tools
                 "eventbus"                  : "org.greenrobot:eventbus:3.0.0",
-                "dagger"                    : "com.google.dagger:dagger:2.13",
                 "utilcode"                  : "com.blankj:utilcode:1.12.5",
                 "easypermissions"           : "pub.devrel:easypermissions:1.0.1",
-        ]
-
+                "zxing"                     : "com.google.zxing:core:${version["zxing_version"]}",
+    ]
 
 }

@@ -1,5 +1,6 @@
 package com.ns.yc.lifehelper.ui.main.view;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
@@ -11,6 +12,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IntDef;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -26,6 +29,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -42,20 +46,24 @@ import com.ns.yc.ycutilslib.activityManager.AppManager;
 import com.ns.yc.ycutilslib.managerLeak.InputMethodManagerLeakUtils;
 import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.imageserver.utils.GlideImageUtils;
+import com.yc.zxingserver.demo.EasyCaptureActivity;
+import com.yc.zxingserver.scan.Intents;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.inter.listener.PerfectClickListener;
-import com.ycbjie.library.utils.animation.AnimatorUtils;
-import com.ycbjie.library.glide.ImageUtils;
+import com.ycbjie.library.listener.PerfectClickListener;
+import com.yc.toollayer.animation.AnimatorUtils;
 import com.ycbjie.library.web.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import pub.devrel.easypermissions.EasyPermissions;
 
 
 /**
@@ -96,6 +104,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
 
     @IntDef({HOME, FIND, DATA, USER})
     private @interface PageIndex {}
+    public static final int REQUEST_CODE_SCAN = 0X01;
 
     /**
      * 定时任务工具类
@@ -190,31 +199,39 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_setting_app, menu);
-        menu.add(0, 1, 0, "开发作者介绍");
-        menu.add(0, 3, 1,"分享此软件");
-        menu.add(0, 4, 2,"开源项目介绍");
+        menu.add(4, 4, 4, "开发作者介绍");
+        menu.add(5, 5, 5,"分享此软件");
+        menu.add(6, 6, 6,"开源项目介绍");
+        menu.add(7, 7, 7,"我的掘金");
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_capture:
-                ToastUtils.showRoundRectToast("二维码扫描"+1000);
+            case R.id.item_setting:
+                ToastUtils.showRoundRectToast("设置");
                 break;
-            case R.id.action_about_us:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME);
+            case R.id.item_message:
+                ToastUtils.showRoundRectToast("消息");
                 break;
-            case 1:
-                WebViewActivity.lunch(this,Constant.GITHUB,"我的GitHub");
-                break;
-            case 2:
-                WebViewActivity.lunch(this,Constant.LIFE_HELPER,"开源项目介绍");
-                break;
-            case 3:
-                WebViewActivity.lunch(this,Constant.ZHI_HU,"我的知乎");
+            case R.id.item_capture:
+                String[] perms = {Manifest.permission.CAMERA};
+                if (EasyPermissions.hasPermissions(this, perms)) {//有权限
+                    Intent intent = new Intent(this, EasyCaptureActivity.class);
+                    this.startActivityForResult(intent,REQUEST_CODE_SCAN);
+                }
                 break;
             case 4:
+                WebViewActivity.lunch(this,Constant.GITHUB,"我的GitHub");
+                break;
+            case 5:
+                WebViewActivity.lunch(this,Constant.LIFE_HELPER,"开源项目介绍");
+                break;
+            case 6:
+                WebViewActivity.lunch(this,Constant.ZHI_HU,"我的知乎");
+                break;
+            case 7:
                 WebViewActivity.lunch(this,Constant.JUE_JIN,"我的掘金");
                 break;
             default:
@@ -223,6 +240,22 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK && data!=null){
+            if (requestCode == REQUEST_CODE_SCAN) {
+                String result = data.getStringExtra(Intents.Scan.RESULT);
+                if (result.contains("http") || result.contains("https")) {
+                    Intent intent = new Intent(this, WebViewActivity.class);
+                    intent.putExtra("url", result);
+                    startActivity(intent);
+                } else {
+                    ToastUtils.showRoundRectToast(result);
+                }
+            }
+        }
+    }
 
     @Override
     public void initView() {
@@ -425,7 +458,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         LinearLayout llNavAbout = view.findViewById(R.id.ll_nav_about);
         LinearLayout llNavLogin = view.findViewById(R.id.ll_nav_login);
         LinearLayout llNavVideo = view.findViewById(R.id.ll_nav_video);
-        ImageUtils.loadImgByPicassoWithCircle(this, R.drawable.ic_person_logo, ivAvatar);
+        GlideImageUtils.loadImageRound(this, R.drawable.ic_person_logo, ivAvatar);
         tvUsername.setText("杨充");
         ivAvatar.setOnClickListener(listener);
         llNavHomepage.setOnClickListener(listener);

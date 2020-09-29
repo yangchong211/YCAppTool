@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/android" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/book" />
-            <option value="$PROJECT_DIR$/douban" />
-            <option value="$PROJECT_DIR$/gank" />
-            <option value="$PROJECT_DIR$/library" />
-            <option value="$PROJECT_DIR$/love" />
-            <option value="$PROJECT_DIR$/music" />
-            <option value="$PROJECT_DIR$/mvvm" />
-            <option value="$PROJECT_DIR$/news" />
-            <option value="$PROJECT_DIR$/note" />
-            <option value="$PROJECT_DIR$/other" />
-            <option value="$PROJECT_DIR$/todo" />
-            <option value="$PROJECT_DIR$/video" />
-            <option value="$PROJECT_DIR$/zhiHu" />
+            <option value="$PROJECT_DIR$/business/AndroidBusiness" />
+            <option value="$PROJECT_DIR$/business/BusinessInterface" />
+            <option value="$PROJECT_DIR$/business/DemoBusiness" />
+            <option value="$PROJECT_DIR$/business/DouBanBusiness" />
+            <option value="$PROJECT_DIR$/business/GameBusiness" />
+            <option value="$PROJECT_DIR$/business/GankBusiness" />
+            <option value="$PROJECT_DIR$/business/LoveBusiness" />
+            <option value="$PROJECT_DIR$/business/MusicBusiness" />
+            <option value="$PROJECT_DIR$/business/NoteBusiness" />
+            <option value="$PROJECT_DIR$/business/VideoBusiness" />
+            <option value="$PROJECT_DIR$/business/WebServer" />
+            <option value="$PROJECT_DIR$/common/CommonLayer" />
+            <option value="$PROJECT_DIR$/common/ConfigLayer" />
+            <option value="$PROJECT_DIR$/common/LibraryLayer" />
+            <option value="$PROJECT_DIR$/common/ToolLayer" />
+            <option value="$PROJECT_DIR$/server/HttpServer" />
+            <option value="$PROJECT_DIR$/server/ImageServer" />
+            <option value="$PROJECT_DIR$/server/ServerInterface" />
+            <option value="$PROJECT_DIR$/server/ShareServer" />
+            <option value="$PROJECT_DIR$/server/XlogServer" />
+            <option value="$PROJECT_DIR$/server/ZxingServer" />
+            <option value="$PROJECT_DIR$/widget/BannerWidget" />
+            <option value="$PROJECT_DIR$/widget/CustomWidget" />
+            <option value="$PROJECT_DIR$/widget/PhotoWidget" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

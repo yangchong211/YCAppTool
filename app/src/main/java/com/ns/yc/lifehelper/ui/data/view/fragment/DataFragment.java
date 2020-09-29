@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.GridView;
@@ -17,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
@@ -28,12 +25,18 @@ import com.ns.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
 import com.ns.yc.lifehelper.ui.data.view.adapter.NarrowImageAdapter;
 import com.ns.yc.lifehelper.ui.data.view.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.snap.ScrollPageHelper;
-import com.ycbjie.library.arounter.ARouterConstant;
-import com.ycbjie.library.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.toollayer.FastClickUtils;
+import com.yc.toollayer.GoToScoreUtils;
+import com.yc.toollayer.calendar.CalendarReminderUtils;
+import com.yc.toollib.crash.CrashToolUtils;
+import com.yc.zxingserver.demo.CodeActivity;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.constant.Constant;
-import com.ycbjie.library.weight.MyGridView;
+import com.yc.customwidget.MyGridView;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
@@ -236,6 +239,9 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
         DataToolAdapter adapter = new DataToolAdapter(activity, toolName, logoList);
         mGridView.setAdapter(adapter);
         mGridView.setOnItemClickListener((parent, view, position, id) -> {
+            if (FastClickUtils.isFastDoubleClick()){
+                return;
+            }
             switch (position) {
                 case 0:
                     ARouterUtils.navigation(ARouterConstant.ACTIVITY_LARGE_IMAGE_ACTIVITY);
@@ -276,6 +282,38 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 case 11:
                     ARouterUtils.navigation(ARouterConstant.ACTIVITY_BOOK_DOODLE_ACTIVITY);
                     break;
+                    //去评分
+                case 12:
+                    if(GoToScoreUtils.isPkgInstalled(activity,"com.tencent.mm")){
+                        GoToScoreUtils.startMarket(activity,"com.tencent.mm");
+                    } else {
+                        ToastUtils.showRoundRectToast("请先安装应用宝");
+                    }
+                    break;
+                    //向系统日历插入事件
+                case 13:
+                    CalendarReminderUtils.test(activity);
+                    break;
+                    //测试崩溃
+                case 14:
+                    CrashToolUtils.startCrashTestActivity(activity);
+                    break;
+                    //跳转崩溃记录页面
+                case 15:
+                    CrashToolUtils.startCrashListActivity(activity);
+                    break;
+                    //生产条形码
+                case 16:
+                    Intent intent16 = new Intent(activity, CodeActivity.class);
+                    intent16.putExtra(CodeActivity.KEY_IS_QR_CODE,false);
+                    startActivity(intent16);
+                    break;
+                    //生产二维码
+                case 17:
+                    Intent intent17 = new Intent(activity, CodeActivity.class);
+                    intent17.putExtra(CodeActivity.KEY_IS_QR_CODE,true);
+                    startActivity(intent17);
+                    break;
                 default:
                     break;
             }
@@ -310,8 +348,5 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
             ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
         });
     }
-
-
-
 
 }

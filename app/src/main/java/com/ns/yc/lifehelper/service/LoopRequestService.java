@@ -31,9 +31,6 @@ public class LoopRequestService extends Service {
      * 是否已经绑定了推送设备id
      */
     private volatile int isBindDevId = BindDevId.NONE;
-    /*public enum isBindDevIdEnum {
-        NONE, RUN, SUCCESS
-    }*/
     @Retention(RetentionPolicy.SOURCE)
     public @interface BindDevId {
         int NONE = 1;

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:text="自带高性能刹车，顶配还带电磁悬架，30万的CT5终于找对了…"/>
+
+
+        <RelativeLayout
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:scaleType="centerCrop"/>
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_image"
+                android:layout_marginLeft="12dp"
+                android:layout_alignTop="@+id/iv_image"
+                android:text="杨充逗比原创"
+                android:textSize="12sp"
+                android:textColor="@color/gray_black"/>
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:layout_toRightOf="@id/iv_image"
+                android:layout_marginLeft="12dp"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:text="2019年12月26日"/>
+        </RelativeLayout>
+
+        <com.ns.yc.yccustomtextlib.edit.view.HyperTextView
+            android:id="@+id/htv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="12dp"
+            app:ht_view_right_left="16dp"
+            app:ht_view_top_bottom="16dp"
+            app:ht_view_text_line_space="6dp"
+            app:ht_view_image_height="0"
+            app:ht_view_image_bottom="10"
+            app:ht_view_text_size="16sp"
+            app:ht_view_text_color="@android:color/black"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

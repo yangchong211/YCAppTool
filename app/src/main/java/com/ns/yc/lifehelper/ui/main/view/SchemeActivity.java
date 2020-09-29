@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.ns.yc.lifehelper.ui.guide.view.activity.SplashActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
-import com.ycbjie.library.utils.AppToolUtils;
+import com.ycbjie.library.utils.AppUtils;
 
 import java.util.List;
 
@@ -148,7 +148,7 @@ public class SchemeActivity extends AppCompatActivity {
 
     private void readGoActivity(Intent intent, Context context) {
         // 如果app 运行中，直接打开页面，没有运行中就先打开主界面，在打开
-        if (AppToolUtils.isAppRunning(context, context.getPackageName())) {
+        if (AppUtils.isAppRunning(context, context.getPackageName())) {
             openActivity(intent, context);
         } else {
             reStartActivity(intent, context);

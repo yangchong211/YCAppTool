@@ -83,6 +83,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
             Manifest.permission.CAMERA,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
     };
 
     @AfterPermissionGranted(RC_LOCATION_CONTACTS_PERM)

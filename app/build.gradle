@@ -176,14 +176,6 @@ android {
         ignore 'TypographyQuotes'
     }
 
-    //过滤掉不支持的平台
-    packagingOptions {
-        exclude "lib/arm64-v8a/librealm-jni.so"
-        exclude "lib/mips/librealm-jni.so"
-        exclude "lib/x86/librealm-jni.so"
-        exclude "lib/x86_64/librealm-jni.so"
-    }
-
 }
 
 static def releaseTime() {
@@ -195,44 +187,42 @@ dependencies {
     implementation('com.alibaba.android:vlayout:1.2.2@aar') {
         transitive = true
     }
+    implementation project(path: ':CustomWidget')
+    implementation project(path: ':CustomWidget')
     if (!rootProject.ext.isBookApplication){
-        implementation project(':book')
+        implementation project(path: ':GameBusiness')
     }
     if (!rootProject.ext.isDouBanApplication){
-        implementation project(':douban')
+        implementation project(path: ':DouBanBusiness')
     }
     if (!rootProject.ext.isGankApplication){
-        implementation project(':gank')
+        implementation project(path: ':GankBusiness')
     }
     if (!rootProject.ext.isMusicApplication){
-        implementation project(':music')
-    }
-    if (!rootProject.ext.isNewsApplication){
-        implementation project(':news')
-    }
-    if (!rootProject.ext.isToDoApplication){
-        implementation project(':todo')
+        implementation project(path: ':MusicBusiness')
     }
     if (!rootProject.ext.isAndroidApplication){
-        implementation project(':android')
-    }
-    if (!rootProject.ext.isZhiHuApplication){
-        implementation project(':zhiHu')
+        implementation project(path: ':AndroidBusiness')
     }
     if (!rootProject.ext.isOtherApplication){
-        implementation project(':other')
+        implementation project(path: ':DemoBusiness')
     }
     if (!rootProject.ext.isLoveApplication){
-        implementation project(':love')
+        implementation project(path: ':LoveBusiness')
     }
     if (!rootProject.ext.isVideoApplication){
-        implementation project(':video')
+        implementation project(path: ':VideoBusiness')
     }
     if (!rootProject.ext.isNoteApplication){
-        implementation project(':note')
+        implementation project(path: ':NoteBusiness')
     }
-    implementation project(':library')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
+    implementation project(path: ':HttpServer')
+    implementation project(path: ':ConfigLayer')
+    implementation project(path: ':ToolLayer')
+    implementation project(path: ':LibraryLayer')
+    implementation project(path: ':ImageServer')
+    implementation project(path: ':ZxingServer')
 }
 
 

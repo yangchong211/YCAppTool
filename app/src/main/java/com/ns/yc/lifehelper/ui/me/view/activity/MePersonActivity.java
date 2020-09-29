@@ -33,7 +33,6 @@ import com.ns.yc.ycutilslib.viewPager.AutoHeightViewPager;
 import com.pedaily.yc.ycdialoglib.dialog.select.CustomSelectDialog;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.inter.listener.MePersonBaseListener;
 import com.ycbjie.library.utils.AppUtils;
 
 import java.io.File;
@@ -124,7 +123,7 @@ public class MePersonActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
-        basePersonView.setListener(new MePersonBaseListener() {
+        basePersonView.setListener(new MePersonBaseView.MePersonBaseListener() {
             @Override
             public void editPersonInfo(View view, String title, String editText) {
 

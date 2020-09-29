@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:ignore="MissingDefaultResource">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="44dip"
+        android:visibility="visible">
+        <!--中间标题-->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:gravity="center"
+            android:visibility="visible"
+            android:textColor="@color/black"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:lines="1"
+            android:text="发布文章"
+            android:textStyle="bold"
+            android:textSize="@dimen/textSize18" />
+
+        <!--左边返回键按钮-->
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:visibility="visible"
+            android:drawableRight="@drawable/common_button_back" />
+
+        <TextView
+            android:id="@+id/tv_save_article"
+            android:layout_width="wrap_content"
+            android:paddingRight="16dp"
+            android:layout_toLeftOf="@+id/tv_next"
+            android:textColor="@color/black"
+            android:text="存草稿"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/textSize14"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="wrap_content"
+            android:paddingRight="16dp"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/black"
+            android:text="下一步"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/textSize14"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <com.ns.yc.yccustomtextlib.edit.view.HyperTextEditor
+            android:id="@+id/hte_content"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp"
+            app:editor_layout_top_bottom="0dp"
+            app:editor_layout_right_left="16dp"
+            app:editor_text_line_space="6dp"
+            app:editor_image_height="200dp"
+            app:editor_image_bottom="10dp"
+            app:editor_text_init_hint="请输入正文（25-10000字之间）"
+            app:editor_text_size="16sp"
+            app:editor_del_icon_location = "bottom_right"
+            app:editor_hint_text_color = "@color/blackText1"
+            app:editor_text_color="@color/black"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:orientation="horizontal"
+        android:background="@color/whiteBg">
+        <TextView
+            android:id="@+id/tv_insert_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:drawableLeft="@drawable/icon_add_image"/>
+        <TextView
+            android:id="@+id/tv_length"
+            android:text="0/50"
+            android:paddingRight="10dp"
+            android:gravity="right|center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_soft"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="20dp"
+            android:drawableLeft="@drawable/icon_keyboard"/>
+    </LinearLayout>
+
+</LinearLayout>

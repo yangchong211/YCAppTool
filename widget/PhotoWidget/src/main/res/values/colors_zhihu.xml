@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="zhihu_primary">#1E8AE8</color>
+    <color name="zhihu_primary_dark">#176EB9</color>
+
+    <color name="zhihu_album_popup_bg">#FFFFFF</color>
+    <color name="zhihu_album_dropdown_title_text">#DE000000</color>
+    <color name="zhihu_album_dropdown_count_text">#999999</color>
+    <color name="zhihu_album_dropdown_thumbnail_placeholder">#EAEEF4</color>
+    <color name="zhihu_album_empty_view">#4D000000</color>
+
+    <color name="zhihu_item_placeholder">#EAEEF4</color>
+    <color name="zhihu_item_checkCircle_backgroundColor">#1E8AE8</color>
+    <color name="zhihu_item_checkCircle_borderColor">#FFFFFF</color>
+    <color name="zhihu_capture">#424242</color>
+
+    <color name="zhihu_page_bg">#FFFFFF</color>
+    <color name="zhihu_bottom_toolbar_bg">#FFFFFF</color>
+
+    <color name="zhihu_bottom_toolbar_preview_text">#DE000000</color>
+    <color name="zhihu_bottom_toolbar_preview_text_disable">#4D000000</color>
+    <color name="zhihu_bottom_toolbar_apply_text">#0077D9</color>
+    <color name="zhihu_bottom_toolbar_apply_text_disable">#4D0077D9</color>
+
+    <color name="zhihu_preview_bottom_toolbar_back_text">#FFFFFF</color>
+    <color name="zhihu_preview_bottom_toolbar_apply_text">#0077D9</color>
+    <color name="zhihu_preview_bottom_toolbar_apply_text_disable">#4D0077D9</color>
+
+    <color name="zhihu_check_original_radio_disable">#808080</color>
+</resources>

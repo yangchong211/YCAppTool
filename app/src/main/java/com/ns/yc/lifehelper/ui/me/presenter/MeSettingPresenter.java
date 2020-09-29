@@ -12,8 +12,8 @@ import android.widget.AdapterView;
 import com.blankj.utilcode.util.AppUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
-import com.ycbjie.library.utils.FileCacheUtils;
-import com.ycbjie.library.utils.GoToScoreUtils;
+import com.yc.toollayer.GoToScoreUtils;
+import com.yc.toollayer.file.FileCacheUtils;
 import com.ns.yc.ycutilslib.loadingDialog.LoadDialog;
 import com.pedaily.yc.ycdialoglib.dialog.select.CustomSelectDialog;
 import com.ycbjie.library.base.config.AppConfig;
@@ -212,40 +212,8 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
      */
     @Override
     public void goToStar(final Activity context) {
-        ArrayList<String> installAppMarkets = GoToScoreUtils.getInstallAppMarkets(context);
-        final ArrayList<String> filterInstallMarkets = GoToScoreUtils.getFilterInstallMarkets(context, installAppMarkets);
-        final ArrayList<String> markets = new ArrayList<>();
-        if (filterInstallMarkets.size() > 0) {
-            //过滤
-            for (int a = 0; a < filterInstallMarkets.size(); a++) {
-                Log.e("应用市场++++", filterInstallMarkets.get(a));
-                String pkg = filterInstallMarkets.get(a);
-                if (installAppMarkets.contains(pkg)) {
-                    markets.add(pkg);
-                }
-            }
-            List<String> names = new ArrayList<>();
-            for (int b = 0; b < markets.size(); b++) {
-                AppUtils.AppInfo appInfo = AppUtils.getAppInfo(markets.get(b));
-                String name = appInfo.getName();
-                names.add(name);
-            }
-            CustomSelectDialog dialog = new CustomSelectDialog(context,
-                    R.style.TransparentFrameWindowStyle, new CustomSelectDialog.SelectDialogListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    GoToScoreUtils.launchAppDetail(context, "com.zero2ipo.harlanhu.pedaily", markets.get(position));
-                }
-            }, names);
-            if(com.ycbjie.library.utils.AppUtils.isActivityLiving(context)){
-                dialog.show();
-            }
-        } else {
-            //投资界应用宝评分链接
-            String qqUrl = "http://android.myapp.com/myapp/detail.htm?apkName=com.zero2ipo.harlanhu.pedaily";
-            Intent intent = new Intent(context, WebViewActivity.class);
-            intent.putExtra("url", qqUrl);
-            context.startActivity(intent);
+        if(GoToScoreUtils.isPkgInstalled(context,"com.tencent.mm")){
+            GoToScoreUtils.startMarket(context,"com.tencent.mm");
         }
     }
 

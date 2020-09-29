@@ -14,8 +14,7 @@ import android.widget.TextView;
 
 import com.jph.takephoto.model.TResult;
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.inter.listener.MePersonBaseListener;
-import com.ycbjie.library.glide.ImageUtils;
+import com.yc.imageserver.utils.GlideImageUtils;
 
 
 public class MePersonBaseView extends FrameLayout implements View.OnClickListener {
@@ -46,6 +45,22 @@ public class MePersonBaseView extends FrameLayout implements View.OnClickListene
     }
 
     private MePersonBaseListener listener;
+
+    public interface MePersonBaseListener {
+
+        /*** 编辑个人信息*/
+        void editPersonInfo(View view, String title, String editText);
+        /*** 获取个人头像*/
+        void editPersonLogo(View view);
+        /*** 编辑个人城市定位*/
+        void editPersonCity(View view);
+        /*** 编辑个人收藏*/
+        void editPersonColl(View view);
+        /*** 编辑个人评论*/
+        void editPersonCom(View view);
+
+    }
+
     public void setListener(MePersonBaseListener listener) {
         this.listener = listener;
     }
@@ -132,7 +147,7 @@ public class MePersonBaseView extends FrameLayout implements View.OnClickListene
     /**设置logo图片*/
     public void setPersonLogo(String url , Activity activity){
         if(url!=null && url.length()>0){
-            ImageUtils.loadImgByPicasso(activity,url,iv_app_person_photo);
+            GlideImageUtils.loadImageNet(activity,url,iv_app_person_photo);
         }
     }
 

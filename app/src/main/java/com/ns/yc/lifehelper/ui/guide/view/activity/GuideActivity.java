@@ -11,10 +11,8 @@ import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.ns.yc.lifehelper.ui.guide.presenter.GuidePresenter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.yccountdownviewlib.CountDownView;
-import com.squareup.picasso.Callback;
+import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.glide.ImageUtils;
-
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 /**
@@ -119,19 +117,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements
      */
     @Override
     public void showGuideLogo(String logo) {
-        Callback callback = new Callback() {
-            @Override
-            public void onSuccess() {
-                //加载成功
-            }
-
-            @Override
-            public void onError() {
-                //加载失败
-                ivSplashAd.setBackgroundResource(R.drawable.bg_cloud_night);
-            }
-        };
-        ImageUtils.loadImgByPicasso(this,logo,R.drawable.bg_cloud_night,ivSplashAd,callback);
+        GlideImageUtils.loadImageNet(this,logo,R.drawable.bg_cloud_night,ivSplashAd,false);
     }
 
 

@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.model.HomeBlogEntity;
-import com.ycbjie.library.glide.ImageUtils;
-import com.ycbjie.library.utils.spannable.RoundBackgroundSpan;
-import com.ycbjie.library.utils.spannable.SpannableUtils;
+import com.yc.configlayer.bean.HomeBlogEntity;
+import com.yc.imageserver.utils.GlideImageUtils;
+import com.yc.toollayer.spannable.RoundBackgroundSpan;
+import com.yc.toollayer.spannable.SpannableUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
@@ -75,7 +75,7 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
             } else {
                 llNewContent.setVisibility(View.VISIBLE);
                 llNewsHead.setVisibility(View.GONE);
-                ImageUtils.loadImgByPicasso(getContext(), data.getImageUrl(), R.drawable.image_default, ivImg);
+                GlideImageUtils.loadImageNet(getContext(), data.getImageUrl(), R.drawable.image_default, ivImg);
                 tvAuthor.setText(data.getAuthor());
                 tvTime.setText(data.getTime());
                 if(getAdapterPosition()==2){
