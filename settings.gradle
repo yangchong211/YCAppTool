@@ -3,8 +3,7 @@ include ':app'
 
 /* +++++++++ 业务组件层 +++++++++ */
 include ':GameBusiness', ':AndroidBusiness', ':LoveBusiness', ':MusicBusiness', ':NoteBusiness',
-        ':VideoBusiness', ':GankBusiness', ':DemoBusiness', ':DouBanBusiness', ':BusinessInterface',
-        ':WebServer'
+        ':VideoBusiness', ':GankBusiness', ':DemoBusiness', ':DouBanBusiness', ':BusinessInterface'
 project(':GameBusiness').projectDir = new File('business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('business/AndroidBusiness')
 project(':LoveBusiness').projectDir = new File('business/LoveBusiness')
@@ -14,9 +13,7 @@ project(':VideoBusiness').projectDir = new File('business/VideoBusiness')
 project(':GankBusiness').projectDir = new File('business/GankBusiness')
 project(':DemoBusiness').projectDir = new File('business/DemoBusiness')
 project(':DouBanBusiness').projectDir = new File('business/DouBanBusiness')
-project(':WebServer').projectDir = new File('business/WebServer')
 project(':BusinessInterface').projectDir = new File('business/BusinessInterface')
-
 
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':ZxingServer',':XlogServer',':ServerInterface'
@@ -28,22 +25,20 @@ project(':XlogServer').projectDir = new File('server/XlogServer')
 project(':ServerInterface').projectDir = new File('server/ServerInterface')
 
 
+/* +++++++++ 框架公共组件层 +++++++++ */
+include ':LibraryLayer'
+project(':LibraryLayer').projectDir = new File('common/LibraryLayer')
 
-/* +++++++++ 框架组件层 +++++++++ */
+
+/* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerWidget', ':PhotoWidget', ':CustomWidget'
 project(':BannerWidget').projectDir = new File('widget/BannerWidget')
 project(':PhotoWidget').projectDir = new File('widget/PhotoWidget')
 project(':CustomWidget').projectDir = new File('widget/CustomWidget')
 
 
-/* +++++++++ 框架公共组件层 +++++++++ */
-include ':CommonLayer', ':LibraryLayer',':ConfigLayer',':ToolLayer'
-project(':CommonLayer').projectDir = new File('common/CommonLayer')
-project(':LibraryLayer').projectDir = new File('common/LibraryLayer')
-project(':ConfigLayer').projectDir = new File('common/ConfigLayer')
-project(':ToolLayer').projectDir = new File('common/ToolLayer')
-
-
-
-
-
+/* +++++++++ 框架基础组件层 +++++++++ */
+include ':CommonLayer', ':ConfigLayer', ':ToolLayer'
+project(':CommonLayer').projectDir = new File('basis/CommonLayer')
+project(':ConfigLayer').projectDir = new File('basis/ConfigLayer')
+project(':ToolLayer').projectDir = new File('basis/ToolLayer')

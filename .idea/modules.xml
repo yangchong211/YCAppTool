@@ -5,9 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/android/AndroidBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/android/AndroidBusiness.iml" group="LifeHelper/AndroidBusiness" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BannerWidget/BannerWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BannerWidget/BannerWidget.iml" group="LifeHelper/BannerWidget" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BusinessInterface/BusinessInterface.iml" filepath="$PROJECT_DIR$/.idea/modules/BusinessInterface/BusinessInterface.iml" group="LifeHelper/BusinessInterface" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CommonLayer/CommonLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/CommonLayer/CommonLayer.iml" group="LifeHelper/CommonLayer" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ConfigLayer/ConfigLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/ConfigLayer/ConfigLayer.iml" group="LifeHelper/ConfigLayer" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CustomWidget/CustomWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/CustomWidget/CustomWidget.iml" group="LifeHelper/CustomWidget" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/CommonLayer/CommonLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/CommonLayer/CommonLayer.iml" group="LifeHelper/CommonLayer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/ConfigLayer/ConfigLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/ConfigLayer/ConfigLayer.iml" group="LifeHelper/ConfigLayer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/CustomWidget/CustomWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/CustomWidget/CustomWidget.iml" group="LifeHelper/CustomWidget" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/other/DemoBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/other/DemoBusiness.iml" group="LifeHelper/DemoBusiness" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/douban/DouBanBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/douban/DouBanBusiness.iml" group="LifeHelper/DouBanBusiness" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/book/GameBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/book/GameBusiness.iml" group="LifeHelper/GameBusiness" />
@@ -21,10 +21,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/love/LoveBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/love/LoveBusiness.iml" group="LifeHelper/LoveBusiness" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/music/MusicBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/music/MusicBusiness.iml" group="LifeHelper/MusicBusiness" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/note/NoteBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/note/NoteBusiness.iml" group="LifeHelper/NoteBusiness" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/photo/PhotoWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/photo/PhotoWidget.iml" group="LifeHelper/PhotoWidget" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/PhotoWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/PhotoWidget.iml" group="LifeHelper/PhotoWidget" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ServerInterface/ServerInterface.iml" filepath="$PROJECT_DIR$/.idea/modules/ServerInterface/ServerInterface.iml" group="LifeHelper/ServerInterface" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ShareServer/ShareServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ShareServer/ShareServer.iml" group="LifeHelper/ShareServer" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToolLayer/ToolLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/ToolLayer/ToolLayer.iml" group="LifeHelper/ToolLayer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/ToolLayer/ToolLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/ToolLayer/ToolLayer.iml" group="LifeHelper/ToolLayer" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/video/VideoBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/video/VideoBusiness.iml" group="LifeHelper/VideoBusiness" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/WebServer/WebServer.iml" filepath="$PROJECT_DIR$/.idea/modules/business/WebServer/WebServer.iml" group="LifeHelper/WebServer" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/XlogServer/XlogServer.iml" filepath="$PROJECT_DIR$/.idea/modules/XlogServer/XlogServer.iml" group="LifeHelper/XlogServer" />

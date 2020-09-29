@@ -11,6 +11,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/basis/CommonLayer" />
+            <option value="$PROJECT_DIR$/basis/ConfigLayer" />
+            <option value="$PROJECT_DIR$/basis/ToolLayer" />
             <option value="$PROJECT_DIR$/business/AndroidBusiness" />
             <option value="$PROJECT_DIR$/business/BusinessInterface" />
             <option value="$PROJECT_DIR$/business/DemoBusiness" />
@@ -21,11 +24,7 @@
             <option value="$PROJECT_DIR$/business/MusicBusiness" />
             <option value="$PROJECT_DIR$/business/NoteBusiness" />
             <option value="$PROJECT_DIR$/business/VideoBusiness" />
-            <option value="$PROJECT_DIR$/business/WebServer" />
-            <option value="$PROJECT_DIR$/common/CommonLayer" />
-            <option value="$PROJECT_DIR$/common/ConfigLayer" />
             <option value="$PROJECT_DIR$/common/LibraryLayer" />
-            <option value="$PROJECT_DIR$/common/ToolLayer" />
             <option value="$PROJECT_DIR$/server/HttpServer" />
             <option value="$PROJECT_DIR$/server/ImageServer" />
             <option value="$PROJECT_DIR$/server/ServerInterface" />
