@@ -31,11 +31,11 @@ project(':LibraryLayer').projectDir = new File('common/LibraryLayer')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
-include ':BannerWidget', ':PhotoWidget', ':CustomWidget'
+include ':BannerWidget', ':PhotoWidget', ':CoverWidget', ':CustomWidget'
 project(':BannerWidget').projectDir = new File('widget/BannerWidget')
 project(':PhotoWidget').projectDir = new File('widget/PhotoWidget')
+project(':CoverWidget').projectDir = new File('widget/CoverWidget')
 project(':CustomWidget').projectDir = new File('widget/CustomWidget')
-
 
 /* +++++++++ 框架基础组件层 +++++++++ */
 include ':CommonLayer', ':ConfigLayer', ':ToolLayer'

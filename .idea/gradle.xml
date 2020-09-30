@@ -32,6 +32,7 @@
             <option value="$PROJECT_DIR$/server/XlogServer" />
             <option value="$PROJECT_DIR$/server/ZxingServer" />
             <option value="$PROJECT_DIR$/widget/BannerWidget" />
+            <option value="$PROJECT_DIR$/widget/CoverWidget" />
             <option value="$PROJECT_DIR$/widget/CustomWidget" />
             <option value="$PROJECT_DIR$/widget/PhotoWidget" />
           </set>

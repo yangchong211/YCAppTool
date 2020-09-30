@@ -211,10 +211,13 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 bundle1.putString(Constant.TITLE,"flutter极致体验的WanAndroid客户端");
                 ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
                 break;
+                //妹子画廊
             case 6:
                 ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_GALLERY_ACTIVITY);
                 break;
+                //相册画廊
             case 7:
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_COVER_ACTIVITY);
                 break;
             default:
                 break;

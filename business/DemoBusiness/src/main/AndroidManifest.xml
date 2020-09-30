@@ -17,10 +17,7 @@
         <activity android:name=".ui.activity.ScrollActivity"/>
         <activity android:name=".ui.activity.MixtureTextViewActivity"/>
         <activity android:name=".ui.activity.CloneAbleActivity"/>
-        <activity android:name="com.ycbjie.note.ui.activity.NewArticleActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name="com.ycbjie.note.ui.activity.PreviewArticleActivity"/>
+        <activity android:name=".ui.activity.GalleryCoverActivity"/>
     </application>
 
 

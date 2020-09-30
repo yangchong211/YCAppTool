@@ -5,6 +5,10 @@
         <activity android:name="com.ycbjie.note.ui.activity.MdMainActivity"/>
         <activity android:name="com.ycbjie.note.ui.activity.MdNoteActivity"/>
         <activity android:name="com.ycbjie.note.ui.activity.MdDisplayActivity"/>
+        <activity android:name="com.ycbjie.note.ui.activity.NewArticleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name="com.ycbjie.note.ui.activity.PreviewArticleActivity"/>
     </application>
 
 

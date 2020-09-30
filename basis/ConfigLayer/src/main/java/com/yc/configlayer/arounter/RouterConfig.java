@@ -129,6 +129,8 @@ public interface RouterConfig {
         String ACTIVITY_LOGIN_ACTIVITY = "/other/MeLoginActivity";
         //跳转到注册页面
         String ACTIVITY_REGISTER_ACTIVITY = "/other/MeRegisterActivity";
+        //跳转到画廊相册页面
+        String ACTIVITY_COVER_ACTIVITY = "/other/GalleryCoverActivity";
     }
 
     /**

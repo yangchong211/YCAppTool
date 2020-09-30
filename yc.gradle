@@ -87,6 +87,7 @@ ext {
                 "notificationLib"             : "cn.yc:notificationLib:1.0.3",
                 "WebViewLib"                  : "cn.yc:WebViewLib:1.4.1",
                 "YCAndroidTool"                  : "cn.yc:ToolLib:1.2.1",
+                "zoomImageLib"                  : "cn.yc:zoomImageLib:1.0.1",
 
                 //tools
                 "eventbus"                  : "org.greenrobot:eventbus:3.0.0",

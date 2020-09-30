@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BusinessInterface/BusinessInterface.iml" filepath="$PROJECT_DIR$/.idea/modules/BusinessInterface/BusinessInterface.iml" group="LifeHelper/BusinessInterface" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/CommonLayer/CommonLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/CommonLayer/CommonLayer.iml" group="LifeHelper/CommonLayer" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/ConfigLayer/ConfigLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/ConfigLayer/ConfigLayer.iml" group="LifeHelper/ConfigLayer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PhotoCoverLib/CoverWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/PhotoCoverLib/CoverWidget.iml" group="LifeHelper/CoverWidget" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/CustomWidget/CustomWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/CustomWidget/CustomWidget.iml" group="LifeHelper/CustomWidget" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/other/DemoBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/other/DemoBusiness.iml" group="LifeHelper/DemoBusiness" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/douban/DouBanBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/douban/DouBanBusiness.iml" group="LifeHelper/DouBanBusiness" />
