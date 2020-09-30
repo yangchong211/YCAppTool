@@ -1,4 +1,4 @@
-package com.ycbjie.other.weight;
+package com.ycbjie.book.weight.monkey;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.ycbjie.other.R;
+import com.ycbjie.book.R;
 
 
 public class PanelItemView extends FrameLayout implements ItemView {

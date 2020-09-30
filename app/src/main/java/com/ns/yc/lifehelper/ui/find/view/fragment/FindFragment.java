@@ -19,8 +19,9 @@ import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -191,7 +192,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         //通过路由跳转到某模块的某个页面
         switch (position){
             case 0:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_GANK_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Gank.ACTIVITY_GANK_ACTIVITY);
                 break;
             case 1:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_ANDROID_ACTIVITY);
@@ -216,7 +217,6 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
                 break;
             case 7:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_NEW_WX_ACTIVITY);
                 break;
             default:
                 break;
@@ -249,7 +249,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     public void setGridClick(int position) {
         switch (position){
             case 0:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
+                ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
                 break;
             case 1:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_SNAPHELPER_ACTIVITY);
@@ -258,19 +258,18 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 ActivityUtils.startActivity(SelectFollowActivity.class);
                 break;
             case 3:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_BOOK_DOODLE_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_BOOK_DOODLE_ACTIVITY);
                 break;
             case 4:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
                 break;
             case 5:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_AIR_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_AIR_ACTIVITY);
                 break;
             case 6:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_MONKEY_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_MONKEY_ACTIVITY);
                 break;
             case 7:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_WORK_ACTIVITY);
                 break;
             default:
                 break;
@@ -282,13 +281,13 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     public void setGridClickThird(int position) {
         switch (position){
             case 0:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_MOVIE_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.DouBan.ACTIVITY_DOU_MOVIE_ACTIVITY);
                 break;
             case 1:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_MUSIC_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.DouBan.ACTIVITY_DOU_MUSIC_ACTIVITY);
                 break;
             case 2:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_BOOK_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.DouBan.ACTIVITY_DOU_BOOK_ACTIVITY);
                 break;
             default:
                 break;

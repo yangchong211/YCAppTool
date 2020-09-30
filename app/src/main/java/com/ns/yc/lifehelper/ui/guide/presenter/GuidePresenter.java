@@ -9,7 +9,7 @@ import com.ns.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.yc.configlayer.bean.HomeBlogEntity;
 import com.ycbjie.library.api.ConstantImageApi;
 import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

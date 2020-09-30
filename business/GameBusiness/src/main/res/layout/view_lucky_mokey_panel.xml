@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.ycbjie.other.weight.PanelItemView
+            <com.ycbjie.book.weight.monkey.PanelItemView
                 android:id="@+id/item1"
                 android:layout_width="82dp"
                 android:layout_height="82dp"
@@ -41,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <com.ycbjie.other.weight.PanelItemView
+            <com.ycbjie.book.weight.monkey.PanelItemView
                 android:id="@+id/item2"
                 android:layout_width="82dp"
                 android:layout_height="82dp"
@@ -52,7 +52,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <com.ycbjie.other.weight.PanelItemView
+            <com.ycbjie.book.weight.monkey.PanelItemView
                 android:id="@+id/item3"
                 android:layout_width="82dp"
                 android:layout_height="82dp"
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.ycbjie.other.weight.PanelItemView
+            <com.ycbjie.book.weight.monkey.PanelItemView
                 android:id="@+id/item4"
                 android:layout_width="82dp"
                 android:layout_height="82dp"
@@ -91,7 +91,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <com.ycbjie.other.weight.PanelItemView
+            <com.ycbjie.book.weight.monkey.PanelItemView
                 android:id="@+id/item6"
                 android:layout_width="82dp"
                 android:layout_height="82dp"
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.ycbjie.other.weight.PanelItemView
+            <com.ycbjie.book.weight.monkey.PanelItemView
                 android:id="@+id/item7"
                 android:layout_width="82dp"
                 android:layout_height="82dp"
@@ -119,7 +119,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <com.ycbjie.other.weight.PanelItemView
+            <com.ycbjie.book.weight.monkey.PanelItemView
                 android:id="@+id/item8"
                 android:layout_width="82dp"
                 android:layout_height="82dp"
@@ -130,7 +130,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 
-            <com.ycbjie.other.weight.PanelItemView
+            <com.ycbjie.book.weight.monkey.PanelItemView
                 android:id="@+id/item9"
                 android:layout_width="82dp"
                 android:layout_height="82dp"

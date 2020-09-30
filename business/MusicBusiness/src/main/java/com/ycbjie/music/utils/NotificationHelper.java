@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.widget.RemoteViews;
 
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.music.R;
 import com.ycbjie.music.model.action.MusicPlayAction;
 import com.ycbjie.music.model.bean.AudioBean;

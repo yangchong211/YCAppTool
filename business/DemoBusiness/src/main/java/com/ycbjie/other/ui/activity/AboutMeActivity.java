@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.other.R;

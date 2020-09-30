@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.view.fragment.KnowledgeVideoFragment;
 import com.yc.configlayer.arounter.ARouterConstant;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY)
+@Route(path = RouterConfig.Gank.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY)
 public class MyKnowledgeActivity extends FragmentActivity implements View.OnClickListener {
 
     private FrameLayout llTitleMenu;

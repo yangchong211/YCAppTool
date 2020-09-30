@@ -24,6 +24,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.Utils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.contract.GanKHomeAContract;
@@ -33,7 +34,7 @@ import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.utils.MDTintUtil;
 import com.yc.toollayer.animation.AnimatorUtils;
 
@@ -52,7 +53,7 @@ import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_GANK_ACTIVITY)
+@Route(path = RouterConfig.Gank.ACTIVITY_GANK_ACTIVITY)
 public class GanKHomeActivity extends BaseActivity implements View.OnClickListener , GanKHomeAContract.View{
 
     private AppBarLayout appbar;
@@ -153,9 +154,9 @@ public class GanKHomeActivity extends BaseActivity implements View.OnClickListen
         } else if (i == R.id.fab_home_random) {
             presenter.getRandomBanner();
         } else if (i == R.id.iv_home_setting) {
-            ARouterUtils.navigation(ARouterConstant.ACTIVITY_APP_SETTING_ACTIVITY);
+            ARouterUtils.navigation(RouterConfig.App.ACTIVITY_APP_SETTING_ACTIVITY);
         } else if (i == R.id.iv_home_collection){
-            ARouterUtils.navigation(ARouterConstant.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY);
+            ARouterUtils.navigation(RouterConfig.Gank.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY);
         }
     }
 

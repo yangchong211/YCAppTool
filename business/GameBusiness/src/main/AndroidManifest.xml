@@ -6,6 +6,7 @@
         <activity android:name="com.ycbjie.book.activity.DoodleViewActivity"/>
         <activity android:name="com.ycbjie.book.activity.AirGameActivity"/>
         <activity android:name="com.ycbjie.book.activity.PinTuGameActivity"/>
+        <activity android:name="com.ycbjie.book.activity.MonkeyGameActivity"/>
     </application>
 
 

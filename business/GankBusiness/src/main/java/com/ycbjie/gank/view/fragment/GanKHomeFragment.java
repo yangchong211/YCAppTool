@@ -20,7 +20,7 @@ import com.ycbjie.gank.view.adapter.GanKHomeAdapter;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseLazyFragment;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

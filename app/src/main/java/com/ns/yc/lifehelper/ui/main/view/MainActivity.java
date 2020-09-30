@@ -12,8 +12,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.IntDef;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -29,7 +27,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -48,12 +45,13 @@ import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.listener.PerfectClickListener;
 import com.yc.toollayer.animation.AnimatorUtils;
 import com.ycbjie.library.web.WebViewActivity;
@@ -508,7 +506,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                         ToastUtils.showRoundRectToast( "后期接入讯飞语音");
                         break;
                     case R.id.setting:
-                        ARouterUtils.navigation(ARouterConstant.ACTIVITY_APP_SETTING_ACTIVITY);
+                        ARouterUtils.navigation(RouterConfig.App.ACTIVITY_APP_SETTING_ACTIVITY);
                         break;
                     case R.id.quit:
                         AppManager.getAppManager().appExit(false);

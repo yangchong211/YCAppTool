@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.douban.R;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_DOU_MUSIC_ACTIVITY)
+@Route(path = RouterConfig.DouBan.ACTIVITY_DOU_MUSIC_ACTIVITY)
 public class DouMusicActivity extends BaseActivity implements View.OnClickListener {
 
     FrameLayout llTitleMenu;

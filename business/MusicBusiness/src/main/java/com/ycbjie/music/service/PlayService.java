@@ -16,7 +16,7 @@ import android.support.annotation.Nullable;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.music.base.BaseAppHelper;
 import com.ycbjie.music.inter.EventCallback;
 import com.ycbjie.music.inter.OnPlayerEventListener;

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.httpserver.ExceptionUtils;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DouBanModel;
@@ -39,7 +40,7 @@ import io.reactivex.schedulers.Schedulers;
  * </pre>
  */
 
-@Route(path = ARouterConstant.ACTIVITY_DOU_TOP_ACTIVITY)
+@Route(path = RouterConfig.DouBan.ACTIVITY_DOU_TOP_ACTIVITY)
 public class MovieTopActivity extends BaseActivity implements View.OnClickListener {
 
     FrameLayout llTitleMenu;

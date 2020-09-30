@@ -21,7 +21,7 @@ import com.ycbjie.douban.bean.DouBookDetailBean;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

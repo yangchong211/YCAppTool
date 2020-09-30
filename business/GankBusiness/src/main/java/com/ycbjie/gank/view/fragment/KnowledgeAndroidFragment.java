@@ -18,7 +18,7 @@ import com.ycbjie.gank.view.adapter.GanKAndroidAdapter;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;

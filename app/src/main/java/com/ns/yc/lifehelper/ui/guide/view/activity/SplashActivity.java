@@ -14,7 +14,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.yccountdownviewlib.CountDownView;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 
 import java.util.List;
 

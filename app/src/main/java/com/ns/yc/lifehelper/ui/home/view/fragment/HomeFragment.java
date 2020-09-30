@@ -25,6 +25,7 @@ import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.bean.HomeBlogEntity;
 import com.yc.toollayer.FastClickUtils;
 import com.yc.toollayer.GoToScoreUtils;
@@ -37,7 +38,7 @@ import com.yc.cn.ycbannerlib.marquee.MarqueeView;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.yc.toollayer.WindowUtils;
 import com.yc.toollayer.handler.HandlerUtils;
 import com.ycbjie.library.web.WebViewActivity;
@@ -215,11 +216,11 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                     switch (v.getId()) {
                             //跳转视频
                         case R.id.tv_home_first:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
+                            ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
                             break;
                             //飞机大战
                         case R.id.tv_home_second:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_AIR_ACTIVITY);
+                            ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_AIR_ACTIVITY);
                             break;
                             //跳转崩溃列表
                         case R.id.tv_home_third:
@@ -227,7 +228,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                             break;
                             //干活集中营
                         case R.id.tv_home_four:
-                            ARouterUtils.navigation(ARouterConstant.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY);
+                            ARouterUtils.navigation(RouterConfig.Gank.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY);
                             break;
                         default:
                             break;

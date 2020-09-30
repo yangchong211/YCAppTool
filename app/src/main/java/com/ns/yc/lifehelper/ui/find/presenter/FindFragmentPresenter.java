@@ -18,7 +18,7 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.yc.configlayer.bean.HomeBlogEntity;
 import com.yc.imageserver.utils.GlideImageUtils;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;

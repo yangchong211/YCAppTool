@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_book_name">game</string>
+    <string name="lucky_monkey_title">小杨老虎机</string>
+    <string name="lucky_monkey_times_left">抽奖</string>
+    <string name="lucky_monkey_fortune_list">Check out your fortune list</string>
 </resources>

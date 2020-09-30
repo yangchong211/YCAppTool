@@ -15,6 +15,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.httpserver.ExceptionUtils;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.douban.R;
@@ -45,7 +46,7 @@ import io.reactivex.schedulers.Schedulers;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_DOU_MOVIE_ACTIVITY)
+@Route(path = RouterConfig.DouBan.ACTIVITY_DOU_MOVIE_ACTIVITY)
 public class DouMovieActivity extends BaseActivity implements View.OnClickListener {
 
     FrameLayout llTitleMenu;
@@ -157,12 +158,12 @@ public class DouMovieActivity extends BaseActivity implements View.OnClickListen
                 ImageView iv_img = view.findViewById(R.id.iv_img);
                 GlideImageUtils.loadImageLocal(DouMovieActivity.this, R.drawable.image_default,iv_img);
                 ll_movie_top.setOnClickListener(view1 -> {
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_TOP_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.DouBan.ACTIVITY_DOU_TOP_ACTIVITY);
                     //startActivity(MovieTopActivity.class);
                 });
                 iv_img.setOnClickListener(v -> {
                     //使用路由跳转到另一个模块中的页面
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
+                    ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
                 });
                 return view;
             }

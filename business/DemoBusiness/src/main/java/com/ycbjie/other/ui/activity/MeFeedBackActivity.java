@@ -19,7 +19,7 @@ import com.blankj.utilcode.util.KeyboardUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.ycmultiinputviewlib.MultiEditInputView;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.ycbjie.other.R;
 

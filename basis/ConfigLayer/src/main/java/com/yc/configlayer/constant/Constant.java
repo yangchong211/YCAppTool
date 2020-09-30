@@ -1,4 +1,4 @@
-package com.ycbjie.library.constant;
+package com.yc.configlayer.constant;
 
 import android.os.Environment;
 
@@ -61,66 +61,6 @@ public class Constant {
     public class status{
         public static final int success=200;
         public static final int error=-1;
-    }
-
-    /**-------------------------------------记事本----------------------------------------------**/
-    public static final int NEW_ACTIVITY_REQUEST_CODE = 0;
-    public static final int EDIT_ACTIVITY_REQUEST_CODE = 1;
-    public static final String INTENT_EXTRA_DAY_OF_WEEK = "DAY_OF_WEEK";
-    public static final String INTENT_BUNDLE_NEW_TASK_DETAIL = "NEW_TASK_DETAIL";
-    public static final String INTENT_EXTRA_EDIT_TASK_DETAIL_ENTITY = "EDIT_TASK_DETAIL_ENTITY";
-    public static final String INTENT_EXTRA_MODE_OF_NEW_ACT = "MODE_OF_NEW_ACT";
-    public static final String INTENT_EXTRA_SWITCH_TO_INDEX = "SWITCH_TO_INDEX";
-    public static final String CHOOSE_PAPER_DIALOG_CHECK_ITEM_BUNDLE_KEY = "CHECK_ITEM_BUNDLE_KEY";
-    public static final String DATABASE_FILE_PATH_FOLDER = "WeekToDo";
-    public static final String DATABASE_FILE_PATH_FILE_NAME = "data.realm";
-    public static final String DATABASE_FILE_BACKUP_PATH_FOLDER = "番茄周/备份";
-    public static final String DATABASE_FILE_EXPORT_PATH_FOLDER = "番茄周/导出";
-    public static final long AUTO_NOTIFY_INTERVAL_TIME = 60 * 60 * 1000;
-    public static final int AUTO_NOTIFY_NOTIFICATION_ID = 0;
-    public static final int DAY_OF_WEEK = 7;
-    public interface MODE_OF_NEW_ACT {
-        int MODE_EDIT = 5;
-        int MODE_CREATE = 6;
-        int MODE_QUICK = 7;
-    }
-
-
-    public interface CONFIG_KEY {
-        String SHOW_WEEK_TASK = "SHOW_WEEK_TASK";
-        String SHOW_AS_LIST = "SHOW_AS_LIST";
-        String SHOW_PRIORITY = "SHOW_PRIORITY";
-        String NIGHT_MODE = "NIGHT_MODE";
-        String AUTO_SWITCH_NIGHT_MODE = "AUTO_SWITCH_NIGHT_MODE";
-        String BACKUP = "BACKUP";
-        String RECOVERY = "RECOVERY";
-        String AUTO_NOTIFY = "AUTO_NOTIFY";
-    }
-
-
-    public interface TaskState {
-        int DEFAULT = 0;
-        int FINISHED = 1;
-    }
-
-
-    public interface LikeType{
-        int TYPE_ZHI_HU = 101;
-        int TYPE_GIRL = 105;
-        int TYPE_WE_CHAT = 106;
-        int TYPE_GOLD = 108;
-    }
-
-
-    public interface DetailKeys{
-        String IT_DETAIL_URL = "url";
-        String IT_DETAIL_IMG_URL = "img_url";
-        String IT_DETAIL_ID = "id";
-        String IT_DETAIL_TYPE = "type";
-        String IT_DETAIL_TITLE = "title";
-        String IT_GOLD_TYPE = "type";
-        String IT_GOLD_TYPE_STR = "type_str";
-        String IT_GOLD_MANAGER = "manager";
     }
 
 

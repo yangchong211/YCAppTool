@@ -25,7 +25,7 @@ import com.ycbjie.douban.view.adapter.MovieDetailAdapter;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.ycbjie.other.weight;
+package com.ycbjie.book.weight.monkey;
 
 
 

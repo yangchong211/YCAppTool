@@ -21,7 +21,7 @@ import com.pedaily.yc.ycdialoglib.fragment.BottomDialogFragment;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.listener.OnListItemClickListener;
 import com.ycbjie.music.R;
 import com.ycbjie.music.base.BaseAppHelper;

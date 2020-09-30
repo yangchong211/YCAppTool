@@ -28,7 +28,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.pedaily.yc.ycdialoglib.fragment.BottomDialogFragment;
 import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.listener.OnListItemClickListener;
 import com.yc.toollayer.time.TimeUtils;
 import com.ycbjie.music.R;

@@ -9,7 +9,7 @@ import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.BuildConfig;
 import com.ycbjie.library.base.callback.BaseLifecycleCallback;
 import com.ycbjie.library.base.callback.LogCallback;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 

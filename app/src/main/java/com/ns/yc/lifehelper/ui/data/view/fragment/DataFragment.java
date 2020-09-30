@@ -29,13 +29,14 @@ import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.snap.ScrollPageHelper;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.toollayer.FastClickUtils;
 import com.yc.toollayer.GoToScoreUtils;
 import com.yc.toollayer.calendar.CalendarReminderUtils;
 import com.yc.toollib.crash.CrashToolUtils;
 import com.yc.zxingserver.demo.CodeActivity;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.yc.customwidget.MyGridView;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -116,7 +117,6 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_note_edit:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_WORK_ACTIVITY);
                 break;
             case R.id.tv_news_zhi_hu:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_ZHIHU_ACTIVITY);
@@ -183,7 +183,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     private void toPage(int pos) {
         switch (pos) {
             case 0:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
+                ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
                 break;
             case 1:
                 Bundle bundle1 = new Bundle();
@@ -204,7 +204,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 }
                 break;
             case 4:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_TX_NEWS_ACTIVITY);
+
                 break;
             case 5:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_BANNER_ACTIVITY);
@@ -225,7 +225,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PROGRESS2_ACTIVITY);
                 break;
             case 9:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
                 break;
             default:
                 Toast.makeText(activity, pos+ "---", Toast.LENGTH_SHORT).show();
@@ -250,22 +250,21 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                     ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_BANNER_ACTIVITY);
                     break;
                 case 2:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LOVE_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.Love.ACTIVITY_LOVE_ACTIVITY);
                     break;
                 case 3:
                     ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PROGRESS1_ACTIVITY);
                     break;
                 case 4:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_NEW_WX_ACTIVITY);
                     break;
                 case 5:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_AIR_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_AIR_ACTIVITY);
                     break;
                 case 6:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_MONKEY_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_MONKEY_ACTIVITY);
                     break;
                 case 7:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_DOU_TOP_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.DouBan.ACTIVITY_DOU_TOP_ACTIVITY);
                     break;
                 case 8:
                     Bundle bundle8 = new Bundle();
@@ -274,13 +273,13 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                     ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle8);
                     break;
                 case 9:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_VIDEO_VIDEO);
+                    ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
                     break;
                 case 10:
                     ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PROGRESS3_ACTIVITY);
                     break;
                 case 11:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_BOOK_DOODLE_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_BOOK_DOODLE_ACTIVITY);
                     break;
                     //去评分
                 case 12:

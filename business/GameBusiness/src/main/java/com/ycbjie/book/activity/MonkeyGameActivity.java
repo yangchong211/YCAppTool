@@ -1,12 +1,13 @@
-package com.ycbjie.other.ui.activity;
+package com.ycbjie.book.activity;
 
 
 import android.widget.Button;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.ycbjie.book.R;
+import com.ycbjie.book.weight.monkey.LuckyMonkeyPanelView;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.other.R;
-import com.ycbjie.other.weight.LuckyMonkeyPanelView;
 
 import java.util.Random;
 
@@ -21,7 +22,7 @@ import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_OTHER_MONKEY_ACTIVITY)
+@Route(path = RouterConfig.Game.ACTIVITY_OTHER_MONKEY_ACTIVITY)
 public class MonkeyGameActivity extends BaseActivity {
 
 

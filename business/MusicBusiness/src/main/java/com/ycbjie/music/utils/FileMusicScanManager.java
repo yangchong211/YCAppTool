@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.music.model.bean.AudioBean;
 
 import java.lang.reflect.Method;

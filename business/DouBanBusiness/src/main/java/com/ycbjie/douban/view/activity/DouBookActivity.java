@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.view.fragment.DouBookFragment;
 import com.yc.configlayer.arounter.ARouterConstant;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_DOU_BOOK_ACTIVITY)
+@Route(path = RouterConfig.DouBan.ACTIVITY_DOU_BOOK_ACTIVITY)
 public class DouBookActivity extends BaseActivity implements View.OnClickListener {
 
     FrameLayout llTitleMenu;

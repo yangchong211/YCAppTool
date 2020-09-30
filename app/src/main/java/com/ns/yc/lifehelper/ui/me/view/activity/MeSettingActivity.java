@@ -16,6 +16,7 @@ import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.ns.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.toollayer.file.FileCacheUtils;
 import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
@@ -24,7 +25,7 @@ import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.utils.AppToolUtils;
 import com.ycbjie.library.web.WebViewActivity;
 
@@ -43,7 +44,7 @@ import cn.ycbjie.ycthreadpoollib.PoolThread;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_APP_SETTING_ACTIVITY)
+@Route(path = RouterConfig.App.ACTIVITY_APP_SETTING_ACTIVITY)
 public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implements View.OnClickListener,
         MeSettingContract.View, SwitchButton.OnCheckedChangeListener {
 

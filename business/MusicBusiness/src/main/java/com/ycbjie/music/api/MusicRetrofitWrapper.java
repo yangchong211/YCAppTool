@@ -6,7 +6,6 @@ import com.yc.httpserver.InterceptorUtils;
 import com.yc.httpserver.JsonUtils;
 import com.yc.httpserver.LoggerInterceptor;
 import com.ycbjie.library.BuildConfig;
-import com.ycbjie.library.constant.Constant;
 
 import java.io.File;
 import java.security.SecureRandom;

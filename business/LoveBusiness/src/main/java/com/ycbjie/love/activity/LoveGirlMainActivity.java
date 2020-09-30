@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.toollayer.FastClickUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.love.R;
@@ -55,7 +56,7 @@ import rx.schedulers.Schedulers;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_LOVE_ACTIVITY)
+@Route(path = RouterConfig.Love.ACTIVITY_LOVE_ACTIVITY)
 public class LoveGirlMainActivity extends BaseActivity {
 
     private static final String JPG = ".jpg";

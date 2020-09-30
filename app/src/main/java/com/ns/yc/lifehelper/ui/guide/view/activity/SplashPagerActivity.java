@@ -16,7 +16,7 @@ import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
 import com.yc.configlayer.bean.HomeBlogEntity;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

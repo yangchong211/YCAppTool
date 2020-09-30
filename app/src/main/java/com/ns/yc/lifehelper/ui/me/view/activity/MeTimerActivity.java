@@ -12,7 +12,7 @@ import com.ns.yc.lifehelper.R;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.weight.WatcherBoard;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 

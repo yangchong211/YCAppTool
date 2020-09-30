@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.ycbjie.library.constant.Constant;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.music.service.PlayService;
 
 

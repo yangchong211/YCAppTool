@@ -19,6 +19,7 @@ import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeTimerActivity;
 import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.utils.AppToolUtils;
@@ -134,10 +135,10 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
                 startActivity(IndexJsActivity.class);
                 break;
             case R.id.rl_me_project:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LOVE_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Love.ACTIVITY_LOVE_ACTIVITY);
                 break;
             case R.id.rl_me_setting:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_APP_SETTING_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.App.ACTIVITY_APP_SETTING_ACTIVITY);
                 break;
             case R.id.rl_me_feed_back:
                 ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);
