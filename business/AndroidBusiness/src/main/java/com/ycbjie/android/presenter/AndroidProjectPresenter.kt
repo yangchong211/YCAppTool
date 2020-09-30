@@ -1,16 +1,16 @@
 package com.ycbjie.android.presenter
 
-import com.ycbjie.android.contract.AndroidProjectContract
-import com.ycbjie.android.model.helper.AndroidHelper
-import com.ycbjie.android.network.ResponseTransformer
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.NetworkUtils
+import com.ycbjie.android.contract.AndroidProjectContract
+import com.ycbjie.android.model.helper.AndroidHelper
+import com.ycbjie.android.network.BaseSchedulerProvider
+import com.ycbjie.android.network.ResponseTransformer
+import com.ycbjie.android.network.SchedulerProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import com.ycbjie.android.network.BaseSchedulerProvider
-import com.ycbjie.android.network.SchedulerProvider
 
 
 class AndroidProjectPresenter : AndroidProjectContract.Presenter {

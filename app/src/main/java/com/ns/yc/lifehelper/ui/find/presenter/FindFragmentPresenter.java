@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
@@ -16,18 +17,20 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.OnePlusNLayoutHelper;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
-import com.yc.configlayer.bean.HomeBlogEntity;
-import com.yc.imageserver.utils.GlideImageUtils;
-import com.yc.configlayer.constant.Constant;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
 import com.yc.cn.ycbaseadapterlib.adapter.BaseViewHolder;
+import com.yc.configlayer.bean.HomeBlogEntity;
+import com.yc.configlayer.constant.Constant;
+import com.yc.imageserver.utils.GlideImageUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 import rx.subscriptions.CompositeSubscription;
 
 

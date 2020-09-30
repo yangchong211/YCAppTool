@@ -1,4 +1,4 @@
-package com.ycbjie.other.utils;
+package com.ycbjie.note.utils;
 
 
 import com.ns.yc.yccustomtextlib.edit.model.HyperEditData;

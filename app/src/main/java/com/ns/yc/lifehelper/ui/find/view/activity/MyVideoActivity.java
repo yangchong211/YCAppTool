@@ -13,9 +13,9 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ns.yc.lifehelper.ui.find.view.adapter.VideoGridAdapter;
 import com.ns.yc.lifehelper.ui.find.model.VideoIconBean;
+import com.ns.yc.lifehelper.ui.find.view.adapter.VideoGridAdapter;
+import com.ycbjie.library.base.mvp.BaseActivity;
 
 import java.util.ArrayList;
 

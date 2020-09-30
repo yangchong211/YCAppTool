@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ns.yc.ycutilslib.fragmentBack.BackHandlerHelper;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;

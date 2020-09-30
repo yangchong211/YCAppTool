@@ -7,6 +7,7 @@ import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
+import com.yc.configlayer.constant.Constant
 import com.ycbjie.android.R
 import com.ycbjie.android.base.KotlinConstant
 import com.ycbjie.android.util.AndroidUtils
@@ -16,7 +17,6 @@ import com.ycbjie.android.view.activity.AndroidActivity
 import com.ycbjie.android.view.activity.AndroidCollectActivity
 import com.ycbjie.android.view.activity.AndroidLoginActivity
 import com.ycbjie.library.base.mvp.BaseLazyFragment
-import com.yc.configlayer.constant.Constant
 import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.fragment_android_profile.*
 import kotlinx.coroutines.CoroutineStart

@@ -5,16 +5,16 @@ import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.LinearLayout
+import com.blankj.utilcode.util.SizeUtils
+import com.ycbjie.android.R
 import com.ycbjie.android.contract.AndroidKnowledgeContract
 import com.ycbjie.android.model.bean.TreeBean
+import com.ycbjie.android.network.ResponseBean
 import com.ycbjie.android.presenter.AndroidKnowledgePresenter
 import com.ycbjie.android.view.activity.AndroidActivity
 import com.ycbjie.android.view.activity.KnowledgeTreeDetailActivity
 import com.ycbjie.android.view.adapter.AndroidKnowledgeAdapter
-import com.blankj.utilcode.util.SizeUtils
-import com.ycbjie.android.R
 import com.ycbjie.library.base.mvp.BaseLazyFragment
-import com.ycbjie.android.network.ResponseBean
 import kotlinx.android.synthetic.main.base_android_recycle.*
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine
 

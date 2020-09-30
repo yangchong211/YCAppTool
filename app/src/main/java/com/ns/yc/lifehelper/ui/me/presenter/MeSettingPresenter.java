@@ -3,24 +3,14 @@ package com.ns.yc.lifehelper.ui.me.presenter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 
-import com.blankj.utilcode.util.AppUtils;
-import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.me.contract.MeSettingContract;
+import com.ns.yc.ycutilslib.loadingDialog.LoadDialog;
 import com.yc.toollayer.GoToScoreUtils;
 import com.yc.toollayer.file.FileCacheUtils;
-import com.ns.yc.ycutilslib.loadingDialog.LoadDialog;
-import com.pedaily.yc.ycdialoglib.dialog.select.CustomSelectDialog;
 import com.ycbjie.library.base.config.AppConfig;
-import com.ycbjie.library.web.WebViewActivity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;

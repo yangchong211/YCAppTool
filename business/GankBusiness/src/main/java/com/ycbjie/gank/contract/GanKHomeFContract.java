@@ -1,9 +1,9 @@
 package com.ycbjie.gank.contract;
 
 
+import com.ycbjie.gank.bean.bean.CategoryResult;
 import com.ycbjie.library.base.mvp.BasePresenter;
 import com.ycbjie.library.base.mvp.BaseView;
-import com.ycbjie.gank.bean.bean.CategoryResult;
 
 /**
  * ================================================

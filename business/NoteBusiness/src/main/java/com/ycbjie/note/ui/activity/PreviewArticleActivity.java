@@ -1,4 +1,4 @@
-package com.ycbjie.other.ui.activity;
+package com.ycbjie.note.ui.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,8 +16,8 @@ import com.ns.yc.yccustomtextlib.edit.model.HyperEditData;
 import com.ns.yc.yccustomtextlib.edit.view.HyperImageView;
 import com.ns.yc.yccustomtextlib.edit.view.HyperTextView;
 import com.yc.imageserver.transformations.TransformationScale;
-import com.ycbjie.other.R;
-import com.ycbjie.other.utils.ModelStorage;
+import com.ycbjie.note.R;
+import com.ycbjie.note.utils.ModelStorage;
 
 import java.util.List;
 

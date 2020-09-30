@@ -1,9 +1,8 @@
 package com.ycbjie.android.base
 
 import android.content.Context
-import com.ycbjie.library.base.app.InitializeService
 import com.ycbjie.library.base.app.LibApplication
-import com.ycbjie.library.base.config.AppConfig
+
 /**
  * <pre>
  *     @author 杨充

@@ -12,7 +12,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.view.fragment.DouBookFragment;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;
 

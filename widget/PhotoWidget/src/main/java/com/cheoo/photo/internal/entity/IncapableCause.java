@@ -5,7 +5,6 @@ import android.support.annotation.IntDef;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
-
 import com.cheoo.photo.internal.ui.widget.IncapableDialog;
 
 import java.lang.annotation.Retention;

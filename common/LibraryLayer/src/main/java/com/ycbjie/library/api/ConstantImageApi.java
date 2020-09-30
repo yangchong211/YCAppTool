@@ -1,10 +1,7 @@
 package com.ycbjie.library.api;
 
 
-
-
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
 
 import com.blankj.utilcode.util.Utils;
 import com.ycbjie.library.R;

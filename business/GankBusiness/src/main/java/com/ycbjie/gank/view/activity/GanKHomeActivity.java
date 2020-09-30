@@ -24,19 +24,18 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.Utils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
+import com.yc.toollayer.animation.AnimatorUtils;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.contract.GanKHomeAContract;
 import com.ycbjie.gank.presenter.GanKHomeAPresenter;
 import com.ycbjie.gank.view.fragment.GanKHomeFragment;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.utils.MDTintUtil;
-import com.yc.toollayer.animation.AnimatorUtils;
 
 import java.util.ArrayList;
 

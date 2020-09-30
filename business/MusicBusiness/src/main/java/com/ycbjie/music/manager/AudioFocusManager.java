@@ -3,7 +3,6 @@ package com.ycbjie.music.manager;
 import android.media.AudioManager;
 import android.support.annotation.NonNull;
 
-
 import com.ycbjie.music.service.PlayService;
 
 import static android.content.Context.AUDIO_SERVICE;

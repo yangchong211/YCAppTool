@@ -11,16 +11,16 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.bean.bean.CategoryResult;
 import com.ycbjie.gank.contract.GanKHomeFContract;
 import com.ycbjie.gank.presenter.GanKHomeFPresenter;
 import com.ycbjie.gank.view.activity.GanKHomeActivity;
 import com.ycbjie.gank.view.adapter.GanKHomeAdapter;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseLazyFragment;
-import com.yc.configlayer.constant.Constant;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
@@ -107,7 +107,7 @@ public class GanKHomeFragment extends BaseLazyFragment implements GanKHomeFContr
                 Bundle bundle = new Bundle();
                 bundle.putString(Constant.URL,mData.url);
                 bundle.putString(Constant.TITLE,mData.desc);
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
             }
         });
     }

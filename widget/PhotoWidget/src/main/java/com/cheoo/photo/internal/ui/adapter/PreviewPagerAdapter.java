@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-
 import com.cheoo.photo.internal.entity.Item;
 import com.cheoo.photo.internal.ui.PreviewItemFragment;
 

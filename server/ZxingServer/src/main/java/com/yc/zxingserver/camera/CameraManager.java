@@ -7,6 +7,7 @@ import android.hardware.Camera;
 import android.os.Handler;
 import android.support.annotation.FloatRange;
 import android.view.SurfaceHolder;
+
 import com.google.zxing.PlanarYUVLuminanceSource;
 import com.yc.zxingserver.camera.open.OpenCamera;
 import com.yc.zxingserver.camera.open.OpenCameraInterface;

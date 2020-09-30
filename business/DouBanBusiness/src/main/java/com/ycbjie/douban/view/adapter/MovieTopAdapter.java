@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.bean.DouHotMovieBean;
+
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 

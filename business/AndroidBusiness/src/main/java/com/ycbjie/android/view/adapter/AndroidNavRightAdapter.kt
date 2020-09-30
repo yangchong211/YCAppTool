@@ -4,9 +4,9 @@ package com.ycbjie.android.view.adapter
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.ViewGroup
-import android.widget.*
-import com.ycbjie.android.model.bean.NaviBean
+import android.widget.TextView
 import com.ycbjie.android.R
+import com.ycbjie.android.model.bean.NaviBean
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
 

@@ -16,6 +16,7 @@ import com.ycbjie.gank.view.activity.KnowledgeImageActivity;
 import com.ycbjie.gank.view.activity.MyKnowledgeActivity;
 import com.ycbjie.gank.view.adapter.GanKOtherAdapter;
 import com.ycbjie.library.base.mvp.BaseFragment;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 

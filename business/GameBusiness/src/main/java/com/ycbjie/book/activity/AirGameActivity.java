@@ -1,14 +1,12 @@
 package com.ycbjie.book.activity;
 
 
-
 import android.graphics.Color;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.book.R;
 import com.ycbjie.book.fjGame.GameView;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
 
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;

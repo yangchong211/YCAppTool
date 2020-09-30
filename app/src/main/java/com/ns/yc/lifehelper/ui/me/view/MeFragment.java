@@ -17,7 +17,6 @@ import com.ns.yc.lifehelper.ui.me.view.activity.IndexJsActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeTimerActivity;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.config.AppConfig;
@@ -141,7 +140,7 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
                 ARouterUtils.navigation(RouterConfig.App.ACTIVITY_APP_SETTING_ACTIVITY);
                 break;
             case R.id.rl_me_feed_back:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_FEEDBACK);
                 break;
             case R.id.rl_me_phone:
                 toCallMe();

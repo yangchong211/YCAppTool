@@ -19,6 +19,7 @@ import com.ycbjie.douban.view.activity.DouMusicActivity;
 import com.ycbjie.douban.view.activity.DouMusicDetailActivity;
 import com.ycbjie.douban.view.adapter.DouMusicAdapter;
 import com.ycbjie.library.base.mvp.BaseLazyFragment;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;

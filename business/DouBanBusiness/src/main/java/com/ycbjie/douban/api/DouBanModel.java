@@ -7,6 +7,7 @@ import com.ycbjie.douban.bean.DouHotMovieBean;
 import com.ycbjie.douban.bean.DouMovieDetailBean;
 import com.ycbjie.douban.bean.DouMusicBean;
 import com.ycbjie.douban.bean.DouMusicDetailBean;
+
 import io.reactivex.Observable;
 
 

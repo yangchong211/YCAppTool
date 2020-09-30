@@ -7,11 +7,11 @@ import android.support.v7.widget.ActionMenuView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.TextView
+import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.HomeData
 import com.ycbjie.android.model.bean.NaviBean
 import com.ycbjie.android.view.weight.FlowLayout
-import com.ycbjie.android.R
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
 

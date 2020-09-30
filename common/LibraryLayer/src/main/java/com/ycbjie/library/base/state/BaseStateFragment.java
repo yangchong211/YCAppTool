@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.ns.yc.ycstatelib.StateLayoutManager;
 import com.ycbjie.library.R;
 import com.ycbjie.library.base.mvp.BasePresenter;
-import com.ns.yc.ycstatelib.StateLayoutManager;
 
 
 /**

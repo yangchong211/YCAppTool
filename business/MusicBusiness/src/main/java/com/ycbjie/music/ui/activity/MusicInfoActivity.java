@@ -4,19 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.flyco.tablayout.SegmentTabLayout;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.music.R;
@@ -25,9 +21,6 @@ import com.ycbjie.music.utils.CoverLoader;
 
 import java.io.File;
 import java.util.Locale;
-
-
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 public class MusicInfoActivity extends BaseActivity {
 

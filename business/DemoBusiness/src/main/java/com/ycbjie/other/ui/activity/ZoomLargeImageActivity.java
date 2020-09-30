@@ -5,10 +5,11 @@ import android.support.v4.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.cn.ycgallerylib.zoom.view.ZoomLayoutView;
-import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
+
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 /**
@@ -20,7 +21,7 @@ import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_LARGE_IMAGE_ACTIVITY)
+@Route(path = RouterConfig.Demo.ACTIVITY_LARGE_IMAGE_ACTIVITY)
 public class ZoomLargeImageActivity extends BaseActivity {
 
     private ZoomLayoutView zoomView;

@@ -1,6 +1,5 @@
 package com.ycbjie.love.activity;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.text.TextUtils;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import com.ycbjie.love.R;
 
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;

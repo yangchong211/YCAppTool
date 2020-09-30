@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
+import com.ycbjie.library.base.mvp.BaseFragment;
 
 /**
  * ================================================

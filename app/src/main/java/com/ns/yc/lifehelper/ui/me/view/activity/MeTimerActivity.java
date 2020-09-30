@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ns.yc.lifehelper.weight.WatcherBoard;
 import com.ns.yc.ycutilslib.switchButton.SwitchButton;
-import com.yc.configlayer.constant.Constant;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
+import com.ycbjie.library.base.mvp.BaseActivity;
 
 
 /**
@@ -87,7 +87,7 @@ public class MeTimerActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.rl_set_time:
                 //跨模块实现ForResult返回数据，跳转逻辑
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK,
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_FEEDBACK,
                         null,this,666);
                 break;
             default:

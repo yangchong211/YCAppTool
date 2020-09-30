@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.library.utils.DoShareUtils;
 import com.ycbjie.music.utils.FileSaveUtils;
 import com.ycbjie.music.utils.share.bitmap.GoodShareBitmap;
 import com.ycbjie.music.utils.share.bitmap.GoodShareCircleBitmap;

@@ -14,7 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.ns.yc.ycutilslib.blurView.blur.CustomBlur;
 import com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView;
-import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 import com.ycbjie.other.ui.adapter.MeBannerAdapter;
@@ -37,7 +37,7 @@ import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
  *     revise: https://github.com/yangchong211/YCBanner
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_OTHER_BANNER_ACTIVITY)
+@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_BANNER_ACTIVITY)
 public class MeBannerActivity extends BaseActivity {
 
     private GalleryRecyclerView mRecyclerView;

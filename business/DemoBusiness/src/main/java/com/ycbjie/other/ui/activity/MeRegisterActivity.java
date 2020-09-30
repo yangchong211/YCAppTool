@@ -16,11 +16,11 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
 import com.yc.customwidget.PasswordEditText;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.yc.configlayer.constant.Constant;
 import com.ycbjie.other.R;
 
 /**
@@ -33,7 +33,7 @@ import com.ycbjie.other.R;
  *             demo地址，欢迎star：https://github.com/yangchong211/YCCustomText
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_REGISTER_ACTIVITY)
+@Route(path = RouterConfig.Demo.ACTIVITY_REGISTER_ACTIVITY)
 public class MeRegisterActivity extends BaseActivity implements View.OnClickListener {
 
     private FrameLayout llTitleMenu;
@@ -104,7 +104,7 @@ public class MeRegisterActivity extends BaseActivity implements View.OnClickList
             Bundle bundle = new Bundle();
             bundle.putString(Constant.URL,Constant.GITHUB);
             bundle.putString(Constant.TITLE,"关于更多内容");
-            ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+            ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
         }
     }
 

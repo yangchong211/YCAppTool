@@ -17,7 +17,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.book.R;
 import com.ycbjie.book.weight.doodleView.DoodleView;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.ycbjie.library.base.mvp.BaseActivity;
 
 

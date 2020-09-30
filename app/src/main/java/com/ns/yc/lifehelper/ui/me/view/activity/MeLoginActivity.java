@@ -19,8 +19,8 @@ import com.blankj.utilcode.util.LogUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.customwidget.PasswordEditText;
 import com.ycbjie.library.base.mvp.BaseActivity;
 /**
@@ -114,7 +114,7 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.tv_person_register:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_REGISTER_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_REGISTER_ACTIVITY);
                 break;
             case R.id.btn_person_login:
                 goToLogin();

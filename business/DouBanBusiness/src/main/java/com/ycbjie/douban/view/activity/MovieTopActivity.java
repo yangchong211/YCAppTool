@@ -15,9 +15,8 @@ import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouHotMovieBean;
 import com.ycbjie.douban.view.adapter.MovieTopAdapter;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.douban.weight.FullyGridLayoutManager;
+import com.ycbjie.library.base.mvp.BaseActivity;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

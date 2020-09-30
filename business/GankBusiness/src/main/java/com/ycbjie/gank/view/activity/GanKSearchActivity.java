@@ -23,15 +23,15 @@ import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.bean.bean.SearchResult;
 import com.ycbjie.gank.contract.GanKSearchContract;
 import com.ycbjie.gank.presenter.GanKSearchPresenter;
 import com.ycbjie.gank.view.adapter.GanKSearchListAdapter;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.utils.MDTintUtil;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -211,12 +211,12 @@ public class GanKSearchActivity extends BaseActivity implements GanKSearchContra
                 SearchResult.ResultsBean resultsBean = adapter.getAllData().get(position);
                 if ("福利".equals(resultsBean.type)) {
                     Log.e("福利",resultsBean.desc);
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_GALLERY_ACTIVITY);
                 } else {
                     Bundle bundle = new Bundle();
                     bundle.putString(Constant.URL,resultsBean.url);
                     bundle.putString(Constant.TITLE,resultsBean.desc);
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
                 }
             }
         });

@@ -9,19 +9,19 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import com.ycbjie.android.contract.NavWebsiteContract
-import com.ycbjie.android.model.bean.HomeData
-import com.ycbjie.android.model.bean.NaviBean
-import com.ycbjie.android.presenter.NavWebsitePresenter
-import com.ycbjie.android.view.adapter.AndroidNavRightAdapter
-import com.ycbjie.android.view.adapter.AndroidNavWebsiteAdapter
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
 import com.blankj.utilcode.util.LogUtils
 import com.ycbjie.android.R
+import com.ycbjie.android.contract.NavWebsiteContract
+import com.ycbjie.android.model.bean.HomeData
+import com.ycbjie.android.model.bean.NaviBean
+import com.ycbjie.android.network.SchedulerProvider
+import com.ycbjie.android.presenter.NavWebsitePresenter
+import com.ycbjie.android.view.adapter.AndroidNavRightAdapter
+import com.ycbjie.android.view.adapter.AndroidNavWebsiteAdapter
 import com.ycbjie.library.base.mvp.BaseActivity
 import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.activity_nav_website.*
-import com.ycbjie.android.network.SchedulerProvider
 import kotlinx.android.synthetic.main.base_android_bar.*
 
 /**

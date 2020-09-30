@@ -5,7 +5,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ns.yc.ycprogresslib.ProgressBarUtils;
 import com.ns.yc.ycprogresslib.RingProgressBar;
-import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
@@ -24,7 +24,7 @@ import java.util.TimerTask;
  *             关于仿杀毒软件进度条控件
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_OTHER_PROGRESS1_ACTIVITY)
+@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_PROGRESS1_ACTIVITY)
 public class ProgressFirstActivity extends BaseActivity implements View.OnClickListener {
 
 

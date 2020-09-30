@@ -2,7 +2,6 @@ package com.yc.zxingserver.scan;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.yc.zxingserver.camera.CameraManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
@@ -10,6 +9,7 @@ import android.preference.PreferenceManager;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
+import com.yc.zxingserver.camera.CameraManager;
 import com.yc.zxingserver.utils.ZxingLogUtils;
 
 import java.util.Collection;

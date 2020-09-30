@@ -22,12 +22,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.yc.toollayer.spannable.RoundedBackgroundSpan;
-import com.yc.toollayer.spannable.SpannableUtils;
-import com.ycbjie.other.R;
 import com.yc.toollayer.spannable.AlignImageSpan;
 import com.yc.toollayer.spannable.RoundBackgroundColorSpan;
+import com.yc.toollayer.spannable.RoundedBackgroundSpan;
+import com.yc.toollayer.spannable.SpannableUtils;
+import com.ycbjie.library.base.mvp.BaseActivity;
+import com.ycbjie.other.R;
 
 /**
  * <pre>

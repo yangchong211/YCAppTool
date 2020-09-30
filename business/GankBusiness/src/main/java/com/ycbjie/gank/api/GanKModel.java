@@ -1,10 +1,11 @@
 package com.ycbjie.gank.api;
 
 import com.yc.httpserver.RetrofitWrapper;
+import com.ycbjie.gank.bean.bean.CategoryResult;
 import com.ycbjie.gank.bean.bean.GanKEveryDay;
 import com.ycbjie.gank.bean.bean.GanKIoDataBean;
-import com.ycbjie.gank.bean.bean.CategoryResult;
 import com.ycbjie.gank.bean.bean.SearchResult;
+
 import io.reactivex.Observable;
 
 

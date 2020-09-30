@@ -4,9 +4,8 @@ package com.cheoo.photo.internal.entity;
 import android.content.pm.ActivityInfo;
 import android.support.annotation.StyleRes;
 
-
-import com.cheoo.photo.R;
 import com.cheoo.photo.MimeType;
+import com.cheoo.photo.R;
 import com.cheoo.photo.engine.ImageEngine;
 import com.cheoo.photo.engine.impl.GlideEngine;
 import com.cheoo.photo.filter.Filter;

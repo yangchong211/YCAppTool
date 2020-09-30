@@ -10,7 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.cn.ycbannerlib.snap.ScrollLinearHelper;
 import com.yc.cn.ycbannerlib.snap.ScrollPageHelper;
 import com.yc.cn.ycbannerlib.snap.ScrollSnapHelper;
-import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 import com.ycbjie.other.ui.adapter.MeBannerAdapter;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
  *              关于SnapHelper源码分析：https://www.jianshu.com/p/9b8e0696802d
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_OTHER_SNAPHELPER_ACTIVITY)
+@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_SNAPHELPER_ACTIVITY)
 public class SnapHelperActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;

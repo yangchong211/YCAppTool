@@ -22,6 +22,9 @@ import com.flyco.tablayout.CommonTabLayout
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
+import com.yc.configlayer.arounter.ARouterUtils
+import com.yc.configlayer.arounter.RouterConfig
+import com.yc.configlayer.constant.Constant
 import com.ycbjie.android.R
 import com.ycbjie.android.base.KotlinConstant
 import com.ycbjie.android.base.KotlinConstant.HOME
@@ -32,11 +35,8 @@ import com.ycbjie.android.view.fragment.AndroidHomeFragment
 import com.ycbjie.android.view.fragment.AndroidKnowledgeFragment
 import com.ycbjie.android.view.fragment.AndroidProfileFragment
 import com.ycbjie.android.view.fragment.AndroidProjectFragment
-import com.yc.configlayer.arounter.ARouterConstant
-import com.yc.configlayer.arounter.ARouterUtils
 import com.ycbjie.library.base.adapter.BasePagerAdapter
 import com.ycbjie.library.base.mvp.BaseActivity
-import com.yc.configlayer.constant.Constant
 import com.ycbjie.library.bean.TabEntity
 import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.base_android_bar.*
@@ -53,7 +53,7 @@ import java.util.*
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_ANDROID_ACTIVITY)
+@Route(path = RouterConfig.Android.ACTIVITY_ANDROID_ACTIVITY)
 class AndroidActivity : BaseActivity<AndroidPresenter>(){
 
     /**
@@ -163,7 +163,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
             }
             4 -> {
                 //ToastUtils.showRoundRectToast("开源项目介绍")
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME)
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME)
             }
             5 -> {
                 val a = count%7

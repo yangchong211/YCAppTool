@@ -26,11 +26,11 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.pedaily.yc.ycdialoglib.fragment.BottomDialogFragment;
+import com.yc.configlayer.constant.Constant;
+import com.yc.toollayer.time.TimeUtils;
 import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.listener.OnListItemClickListener;
-import com.yc.toollayer.time.TimeUtils;
 import com.ycbjie.music.R;
 import com.ycbjie.music.base.BaseAppHelper;
 import com.ycbjie.music.executor.search.AbsSearchLrc;
@@ -48,6 +48,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 
 

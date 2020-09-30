@@ -3,6 +3,7 @@ package com.ycbjie.gank.view.adapter;
 import android.app.Activity;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.bean.bean.GanKIoDataBean;

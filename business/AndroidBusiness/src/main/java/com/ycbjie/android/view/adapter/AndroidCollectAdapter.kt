@@ -15,10 +15,10 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.blankj.utilcode.util.Utils
+import com.yc.toollayer.spannable.RoundBackgroundSpan
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.HomeData
 import com.ycbjie.android.util.AndroidUtils
-import com.yc.toollayer.spannable.RoundBackgroundSpan
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
 

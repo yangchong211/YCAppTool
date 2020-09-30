@@ -11,10 +11,9 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.douban.R;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.douban.view.fragment.DouMusicFragment;
+import com.ycbjie.library.base.adapter.BasePagerAdapter;
+import com.ycbjie.library.base.mvp.BaseActivity;
 
 import java.util.ArrayList;
 

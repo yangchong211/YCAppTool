@@ -1,4 +1,4 @@
-package com.ycbjie.other.ui.activity;
+package com.ycbjie.note.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +19,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -47,10 +45,10 @@ import com.ns.yc.yccustomtextlib.utils.HyperLibUtils;
 import com.ns.yc.yccustomtextlib.utils.HyperLogUtils;
 import com.pedaily.yc.ycdialoglib.fragment.CustomDialogFragment;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.imageserver.transformations.TransformationScale;
-import com.ycbjie.other.R;
-import com.ycbjie.other.utils.ModelStorage;
+import com.ycbjie.note.R;
+import com.ycbjie.note.utils.ModelStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +63,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
-@Route(path = ARouterConstant.ACTIVITY_OTHER_ARTICLE)
+@Route(path = RouterConfig.Note.ACTIVITY_OTHER_ARTICLE)
 public class NewArticleActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_CHOOSE = 520;
@@ -77,8 +75,6 @@ public class NewArticleActivity extends AppCompatActivity {
     private TextView mTvInsertImage;
     private TextView mTvLength;
     private TextView mTvSoft;
-    private int screenWidth;
-    private int screenHeight;
     private Disposable subsInsert;
     /**
      * 是否已经成功保存草稿
@@ -102,8 +98,6 @@ public class NewArticleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new);
         StateAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary));
         initFindViewById();
-        screenWidth = getScreenWidth(this);
-        screenHeight = getScreenHeight(this);
         initListener();
         initHyper();
         //解决点击EditText弹出收起键盘时出现的黑屏闪现现象
@@ -509,30 +503,6 @@ public class NewArticleActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-    /**
-     * 获得屏幕宽度
-     * @param context
-     * @return
-     */
-    public static int getScreenWidth(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.widthPixels;
-    }
-
-    /**
-     * 获得屏幕高度
-     * @param context
-     * @return
-     */
-    public static int getScreenHeight(Context context) {
-        WindowManager wm = (WindowManager) context
-                .getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.heightPixels;
     }
 
     /**

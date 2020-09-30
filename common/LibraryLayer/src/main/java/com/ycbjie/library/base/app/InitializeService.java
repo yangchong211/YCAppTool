@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.ycbjie.webviewlib.utils.X5WebUtils;

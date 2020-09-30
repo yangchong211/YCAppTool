@@ -12,9 +12,8 @@ import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-
-import com.cheoo.photo.R;
 import com.cheoo.photo.MimeType;
+import com.cheoo.photo.R;
 import com.cheoo.photo.filter.Filter;
 import com.cheoo.photo.internal.entity.IncapableCause;
 import com.cheoo.photo.internal.entity.Item;

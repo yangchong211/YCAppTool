@@ -15,6 +15,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.httpserver.ExceptionUtils;
 import com.yc.imageserver.utils.GlideImageUtils;
@@ -22,8 +23,6 @@ import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouHotMovieBean;
 import com.ycbjie.douban.view.adapter.DouMovieAdapter;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.Utils;
 import com.yc.cn.ycgallerylib.gallery.GalleryImageView;
-import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
@@ -28,7 +28,7 @@ import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY)
+@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_GALLERY_ACTIVITY)
 public class ImageGalleryActivity extends BaseActivity {
 
     private GalleryImageView scrollGalleryView;

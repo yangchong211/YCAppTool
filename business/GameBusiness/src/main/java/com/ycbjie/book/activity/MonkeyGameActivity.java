@@ -2,8 +2,8 @@ package com.ycbjie.book.activity;
 
 
 import android.widget.Button;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.book.R;
 import com.ycbjie.book.weight.monkey.LuckyMonkeyPanelView;

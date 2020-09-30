@@ -11,9 +11,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.yc.configlayer.constant.Constant;
 import com.yc.customwidget.CustomScrollView;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;

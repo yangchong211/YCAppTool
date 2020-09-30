@@ -2,13 +2,13 @@ package com.ycbjie.music.executor.download;
 
 import android.app.Activity;
 
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.ycbjie.music.api.OnLineMusicModel;
 import com.ycbjie.music.model.bean.DownloadInfo;
 import com.ycbjie.music.model.bean.SearchMusic;
 import com.ycbjie.music.utils.FileMusicUtils;
 
 import java.io.File;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;

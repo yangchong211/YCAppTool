@@ -43,17 +43,16 @@ import com.ns.yc.ycutilslib.activityManager.AppManager;
 import com.ns.yc.ycutilslib.managerLeak.InputMethodManagerLeakUtils;
 import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
+import com.yc.toollayer.animation.AnimatorUtils;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.listener.PerfectClickListener;
-import com.yc.toollayer.animation.AnimatorUtils;
 import com.ycbjie.library.web.WebViewActivity;
 
 import java.util.ArrayList;
@@ -338,7 +337,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                 Bundle bundle1 = new Bundle();
                 bundle1.putString(Constant.URL,Constant.GITHUB);
                 bundle1.putString(Constant.TITLE,"关于更多博客内容");
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
                 break;
             default:
                 break;
@@ -492,11 +491,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                         break;
                     // 问题反馈
                     case R.id.ll_nav_feedback:
-                        ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);
+                        ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_FEEDBACK);
                         break;
                     // 关于
                     case R.id.ll_nav_about:
-                        ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME);
+                        ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME);
                         break;
                     // 个人
                     case R.id.ll_nav_login:

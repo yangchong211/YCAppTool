@@ -2,10 +2,8 @@ package com.ycbjie.douban.view.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,8 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.ns.yc.ycutilslib.scrollView.ReboundScrollView;
 import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading;
 import com.yc.httpserver.ExceptionUtils;

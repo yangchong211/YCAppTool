@@ -18,13 +18,15 @@ import com.yc.cn.ycbannerlib.gallery.GalleryLayoutManager;
 import com.yc.cn.ycbannerlib.gallery.GalleryLinearSnapHelper;
 import com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView;
 import com.yc.cn.ycbannerlib.gallery.GalleryScaleTransformer;
-import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 import com.ycbjie.other.ui.adapter.MeBannerAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 /**
@@ -36,7 +38,7 @@ import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
  *     revise: https://github.com/yangchong211/YCBanner
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_OTHER_BANNER_LIST_ACTIVITY)
+@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_BANNER_LIST_ACTIVITY)
 public class BannerViewActivity extends BaseActivity {
 
     private GalleryRecyclerView mRecyclerView;

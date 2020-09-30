@@ -8,10 +8,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.yc.configlayer.constant.Constant;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
 
@@ -24,7 +24,7 @@ import com.ycbjie.other.R;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_OTHER_ABOUT_ME)
+@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME)
 public class AboutMeActivity extends BaseActivity implements View.OnClickListener {
 
 

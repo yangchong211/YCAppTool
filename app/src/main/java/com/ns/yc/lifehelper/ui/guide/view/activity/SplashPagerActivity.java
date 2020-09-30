@@ -15,8 +15,8 @@ import com.ns.yc.lifehelper.R;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
 import com.yc.configlayer.bean.HomeBlogEntity;
-import com.ycbjie.library.base.mvp.BaseActivity;
 import com.yc.configlayer.constant.Constant;
+import com.ycbjie.library.base.mvp.BaseActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

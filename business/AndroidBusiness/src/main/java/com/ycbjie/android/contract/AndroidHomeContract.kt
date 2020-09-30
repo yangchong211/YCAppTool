@@ -3,10 +3,10 @@ package com.ycbjie.android.contract
 
 import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.model.bean.HomeListBean
+import com.ycbjie.android.network.ResponseBean
 import com.ycbjie.library.base.mvp.BasePresenter
 import com.ycbjie.library.base.mvp.BaseView
 import io.reactivex.Observable
-import com.ycbjie.android.network.ResponseBean
 import org.json.JSONObject
 
 interface AndroidHomeContract {

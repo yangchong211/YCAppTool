@@ -4,8 +4,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.book.R;
 import com.ycbjie.library.base.mvp.BaseActivity;

@@ -2,7 +2,6 @@ package com.yc.zxingserver.demo;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import com.google.zxing.BarcodeFormat;
 import com.yc.zxingserver.R;
 import com.yc.zxingserver.utils.BarCodeCreate;
 import com.yc.zxingserver.utils.ZxingCodeCreate;
-import com.yc.zxingserver.utils.ZxingCodeParse;
 
 
 public class CodeActivity extends AppCompatActivity {

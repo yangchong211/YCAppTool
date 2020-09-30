@@ -18,8 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.note.R;
 import com.ycbjie.note.ui.adapter.MdNoteAdapter;
@@ -36,7 +36,7 @@ import java.util.Calendar;
  *     revise:
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_MARKDOWN_ACTIVITY)
+@Route(path = RouterConfig.Note.ACTIVITY_MARKDOWN_ACTIVITY)
 public class MdMainActivity extends BaseActivity {
 
     public static final String CONFIG_FIRST_START = "isFirstStart";
@@ -80,7 +80,7 @@ public class MdMainActivity extends BaseActivity {
             startActivityForResult(intent, REQUEST_CODE_ADD);
             return true;
         } else if (id == R.id.action_about) {
-            ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME);
+            ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME);
             return true;
         }
         return super.onOptionsItemSelected(item);

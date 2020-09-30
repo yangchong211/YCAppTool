@@ -117,7 +117,6 @@ dependencies {
     api rootProject.ext.dependencies["YCMultiInputViewLib"]
     api rootProject.ext.dependencies["YCProgressLib"]
     api rootProject.ext.dependencies["YCCardViewLib"]
-    api rootProject.ext.dependencies["YCCustomTextLib"]
     api rootProject.ext.dependencies["YCRecycleViewLib"]
     api rootProject.ext.dependencies["YCGalleryLib"]
     api rootProject.ext.dependencies["YCBaseAdapterLib"]

@@ -10,7 +10,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
-
 import com.ycbjie.love.R;
 import com.ycbjie.love.util.DeviceInfo;
 

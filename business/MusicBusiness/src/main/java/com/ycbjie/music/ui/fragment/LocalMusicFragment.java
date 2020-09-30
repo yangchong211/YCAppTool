@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.ycbjie.library.base.mvp.BackLazyFragment;
@@ -29,8 +30,10 @@ import com.ycbjie.music.ui.adapter.LocalMusicAdapter;
 import com.ycbjie.music.utils.share.ShareComment;
 import com.ycbjie.music.utils.share.ShareDetailBean;
 import com.ycbjie.music.utils.share.ShareDialog;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+
 import java.util.List;
 import java.util.Objects;
 

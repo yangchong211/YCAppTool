@@ -1,6 +1,5 @@
 package com.cheoo.photo.internal.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;

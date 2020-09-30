@@ -9,16 +9,17 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
 import com.yc.httpserver.ExceptionUtils;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.api.GanKModel;
 import com.ycbjie.gank.bean.bean.GanKIoDataBean;
 import com.ycbjie.gank.view.activity.MyKnowledgeActivity;
 import com.ycbjie.gank.view.adapter.GanKAndroidAdapter;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.yc.configlayer.constant.Constant;
+
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
@@ -91,7 +92,7 @@ public class KnowledgeAndroidFragment extends BaseFragment {
                 Bundle bundle = new Bundle();
                 bundle.putString(Constant.URL,resultsBean.getUrl());
                 bundle.putString(Constant.TITLE,resultsBean.getDesc());
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
             }
         });
     }

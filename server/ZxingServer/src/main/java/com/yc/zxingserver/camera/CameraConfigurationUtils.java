@@ -6,6 +6,7 @@ import android.hardware.Camera;
 import android.os.Build;
 
 import com.yc.zxingserver.utils.ZxingLogUtils;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;

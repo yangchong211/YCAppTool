@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.music.R;

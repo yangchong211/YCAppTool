@@ -13,15 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
 import com.yc.httpserver.ExceptionUtils;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouBookDetailBean;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.yc.configlayer.constant.Constant;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -158,7 +158,7 @@ public class DouBookDetailActivity extends BaseActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString(Constant.URL,alt);
                 bundle.putString(Constant.TITLE,"");
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
             }
             return true;
         });

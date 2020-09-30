@@ -2,8 +2,8 @@ package com.ycbjie.android.model.model
 
 import com.ycbjie.android.contract.AndroidHomeContract
 import com.ycbjie.android.model.bean.BannerBean
-import com.ycbjie.android.model.helper.AndroidHelper
 import com.ycbjie.android.model.bean.HomeListBean
+import com.ycbjie.android.model.helper.AndroidHelper
 import com.ycbjie.android.network.ResponseBean
 import io.reactivex.Observable
 import org.json.JSONObject

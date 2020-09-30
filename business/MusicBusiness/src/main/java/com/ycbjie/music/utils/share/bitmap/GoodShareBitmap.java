@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.toollib.tool.ScreenShotsUtils;
 import com.ycbjie.library.base.config.AppConfig;
@@ -15,7 +16,6 @@ import com.ycbjie.music.utils.share.ShareDetailBean;
 import com.ycbjie.music.utils.share.ShareTypeBean;
 
 import java.util.concurrent.Callable;
-
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;

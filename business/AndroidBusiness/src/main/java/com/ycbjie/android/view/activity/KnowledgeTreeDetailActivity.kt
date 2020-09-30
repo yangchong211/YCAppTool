@@ -7,11 +7,11 @@ import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
+import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.TreeBean
 import com.ycbjie.android.presenter.KnowledgeTreeDetailPresenter
 import com.ycbjie.android.view.fragment.KnowledgeListFragment
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
-import com.ycbjie.android.R
 import com.ycbjie.library.base.adapter.BasePagerAdapter
 import com.ycbjie.library.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.base_tab_layout.*

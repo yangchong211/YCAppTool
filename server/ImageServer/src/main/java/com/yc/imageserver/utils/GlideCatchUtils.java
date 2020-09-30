@@ -4,6 +4,7 @@ import android.os.Looper;
 
 import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
+
 import java.io.File;
 import java.math.BigDecimal;
 

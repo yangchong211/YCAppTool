@@ -1,11 +1,11 @@
 package com.ycbjie.android.presenter
 import com.ycbjie.android.contract.KnowledgeListContract
 import com.ycbjie.android.model.helper.AndroidHelper
+import com.ycbjie.android.network.BaseSchedulerProvider
 import com.ycbjie.android.network.ResponseTransformer
+import com.ycbjie.android.network.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import com.ycbjie.android.network.BaseSchedulerProvider
-import com.ycbjie.android.network.SchedulerProvider
 
 class KnowledgeListPresenter : KnowledgeListContract.Presenter {
 

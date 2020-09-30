@@ -23,7 +23,8 @@ public interface RouterConfig {
      * Android模块
      */
     interface Android{
-
+        //跳转到玩Android模块的首页面
+        String ACTIVITY_ANDROID_ACTIVITY = "/android/AndroidActivity";
     }
 
     /**
@@ -76,14 +77,20 @@ public interface RouterConfig {
      * 音乐模块
      */
     interface Music{
-
+        //音乐首页
+        String ACTIVITY_MUSIC_ACTIVITY = "/music/MusicActivity";
+        //音乐启动页
+        String ACTIVITY_MUSIC_GUIDE_ACTIVITY = "/music/GuideMusicActivity";
     }
 
     /**
      * 笔记模块
      */
     interface Note{
-
+        //富文本文章页面
+        String ACTIVITY_OTHER_ARTICLE = "/note/NewArticleActivity";
+        //markdown首页
+        String ACTIVITY_MARKDOWN_ACTIVITY = "/note/MdMainActivity";
     }
 
     /**
@@ -97,7 +104,38 @@ public interface RouterConfig {
     /**
      * 基础模块
      */
-    interface Library{
+    interface Demo{
+        //画廊页面
+        String ACTIVITY_OTHER_GALLERY_ACTIVITY = "/other/ImageGalleryActivity";
+        //加载大图页面
+        String ACTIVITY_LARGE_IMAGE_ACTIVITY = "/other/ZoomLargeImageActivity";
+        //轮播图
+        String ACTIVITY_OTHER_BANNER_ACTIVITY = "/other/MeBannerActivity";
+        //轮播图
+        String ACTIVITY_OTHER_BANNER_LIST_ACTIVITY = "/other/BannerViewActivity";
+        //SnapHelper轮播图
+        String ACTIVITY_OTHER_SNAPHELPER_ACTIVITY = "/other/SnapHelperActivity";
+        //关于仿杀毒软件进度条控件
+        String ACTIVITY_OTHER_PROGRESS1_ACTIVITY = "/other/ProgressFirstActivity";
+        //下载圆形百分比进度条自定义控件
+        String ACTIVITY_OTHER_PROGRESS2_ACTIVITY = "/other/ProgressSecondActivity";
+        //直线百分比进度条自定义控件
+        String ACTIVITY_OTHER_PROGRESS3_ACTIVITY = "/other/ProgressThirdActivity";
+        //跳转到意见反馈页面
+        String ACTIVITY_OTHER_FEEDBACK = "/other/MeFeedBackActivity";
+        //跳转到关于项目更多页面
+        String ACTIVITY_OTHER_ABOUT_ME = "/other/AboutMeActivity";
+        //跳转到登陆页面
+        String ACTIVITY_LOGIN_ACTIVITY = "/other/MeLoginActivity";
+        //跳转到注册页面
+        String ACTIVITY_REGISTER_ACTIVITY = "/other/MeRegisterActivity";
+    }
 
+    /**
+     * 基础模块
+     */
+    interface Library{
+        //跳转到webView详情页面
+        String ACTIVITY_LIBRARY_WEB_VIEW = "/library/WebViewActivity";
     }
 }

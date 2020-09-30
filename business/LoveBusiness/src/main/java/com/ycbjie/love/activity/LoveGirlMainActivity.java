@@ -20,7 +20,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.toollayer.FastClickUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.bean.DouMusicBean;

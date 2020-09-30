@@ -17,13 +17,13 @@ import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.ycbjie.library.R;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
+import com.ycbjie.library.R;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.utils.AppUtils;
 import com.ycbjie.library.utils.DoShareUtils;
-import com.yc.configlayer.constant.Constant;
 import com.ycbjie.webviewlib.inter.InterWebListener;
 import com.ycbjie.webviewlib.utils.X5WebUtils;
 import com.ycbjie.webviewlib.view.X5WebView;
@@ -38,7 +38,7 @@ import com.ycbjie.webviewlib.widget.WebProgress;
  *     revise: 原生webView
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW)
+@Route(path = RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW)
 public class WebViewActivity extends BaseActivity {
 
     private Toolbar toolbar;
@@ -102,9 +102,9 @@ public class WebViewActivity extends BaseActivity {
         } else if (i == R.id.capture) {
             ToastUtils.showRoundRectToast("屏幕截图，后期处理");
         } else if (i == R.id.about){
-            ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME);
+            ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME);
         }else {
-            ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_ABOUT_ME,
+            ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME,
                     this, new NavCallback() {
                 @Override
                 public void onArrival(Postcard postcard) {

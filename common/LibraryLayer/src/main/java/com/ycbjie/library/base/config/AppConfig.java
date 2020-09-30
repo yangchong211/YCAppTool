@@ -6,10 +6,10 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.Utils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.library.BuildConfig;
 import com.ycbjie.library.base.callback.BaseLifecycleCallback;
 import com.ycbjie.library.base.callback.LogCallback;
-import com.yc.configlayer.constant.Constant;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 

@@ -10,7 +10,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.view.Display;
 import android.view.WindowManager;
-import com.yc.zxingserver.camera.CameraManager;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -21,6 +21,7 @@ import com.google.zxing.ResultPoint;
 import com.google.zxing.common.GlobalHistogramBinarizer;
 import com.google.zxing.common.HybridBinarizer;
 import com.yc.zxingserver.R;
+import com.yc.zxingserver.camera.CameraManager;
 import com.yc.zxingserver.utils.ZxingLogUtils;
 
 import java.io.ByteArrayOutputStream;

@@ -7,7 +7,6 @@ import android.graphics.Path;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.ycbjie.love.R;
 
 import java.util.Random;

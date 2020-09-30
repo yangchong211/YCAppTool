@@ -62,10 +62,13 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
+    api rootProject.ext.dependencies["YCCustomTextLib"]
+
 
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':ToolLayer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':LibraryLayer')
+    implementation project(path: ':PhotoWidget')
 }

@@ -19,9 +19,9 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.pedaily.yc.ycdialoglib.fragment.BottomDialogFragment;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.ycbjie.library.base.mvp.BaseActivity;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
+import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.listener.OnListItemClickListener;
 import com.ycbjie.music.R;
 import com.ycbjie.music.base.BaseAppHelper;
@@ -36,7 +36,7 @@ import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.List;
 
-@Route(path = ARouterConstant.ACTIVITY_MUSIC_ACTIVITY)
+@Route(path = RouterConfig.Music.ACTIVITY_MUSIC_ACTIVITY)
 public class MusicActivity extends BaseActivity implements View.OnClickListener {
 
 

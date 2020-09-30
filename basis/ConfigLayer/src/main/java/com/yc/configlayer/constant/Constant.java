@@ -2,7 +2,6 @@ package com.yc.configlayer.constant;
 
 import android.os.Environment;
 
-
 import com.yc.configlayer.bean.HomeBlogEntity;
 
 import java.lang.annotation.Retention;

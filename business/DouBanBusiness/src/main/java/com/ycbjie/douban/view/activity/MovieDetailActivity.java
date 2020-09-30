@@ -16,16 +16,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SizeUtils;
+import com.yc.configlayer.arounter.ARouterUtils;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
 import com.yc.httpserver.ExceptionUtils;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.douban.R;
 import com.ycbjie.douban.api.DouBanModel;
 import com.ycbjie.douban.bean.DouMovieDetailBean;
 import com.ycbjie.douban.view.adapter.MovieDetailAdapter;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.yc.configlayer.arounter.ARouterUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.yc.configlayer.constant.Constant;
+
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
 import java.util.List;
@@ -119,7 +120,7 @@ public class MovieDetailActivity extends BaseActivity {
                     Bundle bundle = new Bundle();
                     bundle.putString(Constant.URL,alt);
                     bundle.putString(Constant.TITLE,"");
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
                 }
             }
             return true;
@@ -225,7 +226,7 @@ public class MovieDetailActivity extends BaseActivity {
                                 Bundle bundle = new Bundle();
                                 bundle.putString(Constant.URL,movieDetailBean.getCasts().get(position).getAlt());
                                 bundle.putString(Constant.TITLE,movieDetailBean.getCasts().get(position).getName());
-                                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+                                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
                             });
                         }
                     }

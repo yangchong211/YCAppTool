@@ -2,12 +2,11 @@ package com.ycbjie.other.ui.activity;
 
 import android.view.View;
 
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ns.yc.ycprogresslib.NumberProgressbar;
 import com.ns.yc.ycprogresslib.OnNumberProgressListener;
 import com.ns.yc.ycprogresslib.ProgressBarUtils;
-import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
@@ -21,7 +20,7 @@ import com.ycbjie.other.R;
  *             案例地址：https://github.com/yangchong211/YCProgress
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_OTHER_PROGRESS3_ACTIVITY)
+@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_PROGRESS3_ACTIVITY)
 public class ProgressThirdActivity extends BaseActivity implements View.OnClickListener {
 
     private NumberProgressbar bar1;

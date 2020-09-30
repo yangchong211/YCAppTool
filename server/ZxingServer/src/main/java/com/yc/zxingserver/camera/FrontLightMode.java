@@ -1,7 +1,9 @@
 package com.yc.zxingserver.camera;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
 import com.yc.zxingserver.scan.Preferences;
 
 /**

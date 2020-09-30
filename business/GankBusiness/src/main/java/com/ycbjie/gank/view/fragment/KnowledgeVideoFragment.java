@@ -1,21 +1,13 @@
 package com.ycbjie.gank.view.fragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
+
 import com.ns.yc.ycutilslib.fragmentBack.BackHandledFragment;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.view.activity.MyKnowledgeActivity;

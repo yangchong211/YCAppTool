@@ -5,7 +5,6 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 
-
 import com.ycbjie.music.service.PlayService;
 
 import static android.content.Context.AUDIO_SERVICE;

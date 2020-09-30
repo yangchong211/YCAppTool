@@ -3,6 +3,7 @@ package com.ycbjie.video.api;
 import com.yc.httpserver.RetrofitWrapper;
 import com.ycbjie.video.model.MultiNewsArticleBean;
 import com.ycbjie.video.model.VideoContentBean;
+
 import io.reactivex.Observable;
 
 /**

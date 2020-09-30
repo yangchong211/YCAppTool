@@ -30,9 +30,9 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.yc.configlayer.constant.Constant;
 import com.ycbjie.gank.R;
 import com.ycbjie.library.base.mvp.BaseActivity;
-import com.yc.configlayer.constant.Constant;
 
 import java.io.File;
 import java.io.FileNotFoundException;

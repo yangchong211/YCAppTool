@@ -14,15 +14,15 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.ns.yc.ycutilslib.fragmentBack.BackHandlerHelper;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.gank.R;
-import com.ycbjie.gank.view.fragment.KnowledgeVideoFragment;
-import com.yc.configlayer.arounter.ARouterConstant;
-import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.gank.view.fragment.KnowledgeAndroidFragment;
 import com.ycbjie.gank.view.fragment.KnowledgeCustomFragment;
 import com.ycbjie.gank.view.fragment.KnowledgeOtherFragment;
-import com.ns.yc.ycutilslib.fragmentBack.BackHandlerHelper;
+import com.ycbjie.gank.view.fragment.KnowledgeVideoFragment;
+import com.ycbjie.library.base.adapter.BasePagerAdapter;
+
 import java.util.ArrayList;
 
 

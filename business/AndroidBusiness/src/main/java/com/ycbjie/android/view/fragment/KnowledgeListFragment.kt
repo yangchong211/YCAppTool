@@ -2,15 +2,15 @@ package com.ycbjie.android.view.fragment
 
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.blankj.utilcode.util.NetworkUtils
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils
+import com.ycbjie.android.R
 import com.ycbjie.android.contract.KnowledgeListContract
 import com.ycbjie.android.model.bean.HomeData
 import com.ycbjie.android.model.bean.ProjectListBean
 import com.ycbjie.android.model.bean.TreeBean
 import com.ycbjie.android.presenter.KnowledgeListPresenter
 import com.ycbjie.android.view.adapter.KnowledgeListAdapter
-import com.blankj.utilcode.util.NetworkUtils
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils
-import com.ycbjie.android.R
 import com.ycbjie.library.base.mvp.BaseLazyFragment
 import kotlinx.android.synthetic.main.base_android_recycle.*
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter

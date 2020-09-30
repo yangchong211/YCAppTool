@@ -1,9 +1,9 @@
 package com.yc.imageserver.transformations;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+
 import com.bumptech.glide.request.target.ImageViewTarget;
 
 

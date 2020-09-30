@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.ns.yc.ycprogresslib.CircleProgressbar;
 import com.ns.yc.ycprogresslib.OnCircleProgressListener;
 import com.ns.yc.ycprogresslib.ProgressBarUtils;
-import com.yc.configlayer.arounter.ARouterConstant;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
@@ -24,7 +24,7 @@ import com.ycbjie.other.R;
  *             案例地址：https://github.com/yangchong211/YCProgress
  * </pre>
  */
-@Route(path = ARouterConstant.ACTIVITY_OTHER_PROGRESS2_ACTIVITY)
+@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_PROGRESS2_ACTIVITY)
 public class ProgressSecondActivity extends BaseActivity {
 
     private CircleProgressbar pb_1;

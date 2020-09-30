@@ -25,22 +25,21 @@ import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.yc.configlayer.arounter.RouterConfig;
-import com.yc.configlayer.bean.HomeBlogEntity;
-import com.yc.toollayer.FastClickUtils;
-import com.yc.toollayer.GoToScoreUtils;
-import com.yc.toollib.crash.CrashToolUtils;
-import com.ycbjie.library.utils.AppUtils;
 import com.ns.yc.yccardviewlib.CardViewLayout;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
-import com.ycbjie.library.base.mvp.BaseFragment;
+import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.bean.HomeBlogEntity;
 import com.yc.configlayer.constant.Constant;
+import com.yc.toollayer.FastClickUtils;
+import com.yc.toollayer.GoToScoreUtils;
 import com.yc.toollayer.WindowUtils;
 import com.yc.toollayer.handler.HandlerUtils;
+import com.yc.toollib.crash.CrashToolUtils;
+import com.ycbjie.library.base.mvp.BaseFragment;
+import com.ycbjie.library.utils.AppUtils;
 import com.ycbjie.library.web.WebViewActivity;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
@@ -156,7 +155,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 WebViewActivity.lunch(activity,adapter.getAllData().get(position).getUrl()
                         ,adapter.getAllData().get(position).getTitle());
             } else if (position == 0) {
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_ZHIHU_ACTIVITY);
+
             }
         });
     }
@@ -275,13 +274,13 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                     Bundle bundle1 = new Bundle();
                     bundle1.putString(Constant.URL,Constant.GITHUB);
                     bundle1.putString(Constant.TITLE,"关于更多内容");
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
                     break;
                 case 2:
                     Bundle bundle2 = new Bundle();
                     bundle2.putString(Constant.URL,Constant.ZHI_HU);
                     bundle2.putString(Constant.TITLE,"关于我的知乎");
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle2);
+                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle2);
                     break;
                 default:
                     break;
@@ -360,7 +359,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
             @Override
             public void onItemClick(View view, int position) {
                 super.onItemClick(view, position);
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_GALLERY_ACTIVITY);
             }
         });
     }
@@ -385,7 +384,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
             TextView tvLook = popMenuView.findViewById(R.id.tv_look);
             tvStar.setOnClickListener(v -> {
                 //吐槽跳转意见反馈页面
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_FEEDBACK);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_FEEDBACK);
                 popMenu.dismiss();
             });
             tvFeedback.setOnClickListener(v -> {

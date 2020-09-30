@@ -3,10 +3,10 @@ package com.ns.yc.lifehelper.ui.home.contract;
 
 import android.graphics.Bitmap;
 
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.configlayer.bean.HomeBlogEntity;
 import com.ycbjie.library.base.mvp.BasePresenter;
 import com.ycbjie.library.base.mvp.BaseView;
-import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

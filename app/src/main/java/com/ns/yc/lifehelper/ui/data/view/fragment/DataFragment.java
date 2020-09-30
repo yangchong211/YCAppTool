@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
@@ -27,17 +28,16 @@ import com.ns.yc.lifehelper.ui.data.view.adapter.ViewPagerGridAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.snap.ScrollPageHelper;
-import com.yc.configlayer.arounter.ARouterConstant;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.configlayer.constant.Constant;
+import com.yc.customwidget.MyGridView;
 import com.yc.toollayer.FastClickUtils;
 import com.yc.toollayer.GoToScoreUtils;
 import com.yc.toollayer.calendar.CalendarReminderUtils;
 import com.yc.toollib.crash.CrashToolUtils;
 import com.yc.zxingserver.demo.CodeActivity;
 import com.ycbjie.library.base.mvp.BaseFragment;
-import com.yc.configlayer.constant.Constant;
-import com.yc.customwidget.MyGridView;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;
@@ -119,7 +119,6 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
             case R.id.tv_note_edit:
                 break;
             case R.id.tv_news_zhi_hu:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_ZHIHU_ACTIVITY);
                 break;
             default:
                 break;
@@ -189,10 +188,10 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 Bundle bundle1 = new Bundle();
                 bundle1.putString(Constant.URL,"https://github.com/yangchong211/YCMeiZiTu");
                 bundle1.putString(Constant.TITLE,"爬妹子图");
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
                 break;
             case 2:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_MARKDOWN_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Note.ACTIVITY_MARKDOWN_ACTIVITY);
                 break;
             case 3:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -207,22 +206,22 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
 
                 break;
             case 5:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_BANNER_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_BANNER_ACTIVITY);
                 break;
             case 6:
                 Bundle bundle6 = new Bundle();
                 bundle6.putString(Constant.URL,Constant.FLUTTER);
                 bundle6.putString(Constant.TITLE,"flutter极致体验的WanAndroid客户端");
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle6);
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle6);
                 break;
             case 7:
                 Bundle bundle7 = new Bundle();
                 bundle7.putString(Constant.URL,"https://github.com/yangchong211/YCStateLayout");
                 bundle7.putString(Constant.TITLE,"状态切换，View状态的切换和Activity彻底分离开");
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle7);
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle7);
                 break;
             case 8:
-                ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PROGRESS2_ACTIVITY);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_PROGRESS2_ACTIVITY);
                 break;
             case 9:
                 ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
@@ -244,16 +243,16 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
             }
             switch (position) {
                 case 0:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LARGE_IMAGE_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_LARGE_IMAGE_ACTIVITY);
                     break;
                 case 1:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_BANNER_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_BANNER_ACTIVITY);
                     break;
                 case 2:
                     ARouterUtils.navigation(RouterConfig.Love.ACTIVITY_LOVE_ACTIVITY);
                     break;
                 case 3:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PROGRESS1_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_PROGRESS1_ACTIVITY);
                     break;
                 case 4:
                     break;
@@ -270,13 +269,13 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                     Bundle bundle8 = new Bundle();
                     bundle8.putString(Constant.URL,"https://github.com/yangchong211/YCThreadPool");
                     bundle8.putString(Constant.TITLE,"轻量级线程池封装库");
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_LIBRARY_WEB_VIEW,bundle8);
+                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle8);
                     break;
                 case 9:
                     ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
                     break;
                 case 10:
-                    ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_PROGRESS3_ACTIVITY);
+                    ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_PROGRESS3_ACTIVITY);
                     break;
                 case 11:
                     ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_BOOK_DOODLE_ACTIVITY);
@@ -344,7 +343,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
         });
         adapter.addAll(list);
         adapter.setOnItemClickListener(position -> {
-            ARouterUtils.navigation(ARouterConstant.ACTIVITY_OTHER_GALLERY_ACTIVITY);
+            ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_GALLERY_ACTIVITY);
         });
     }
 

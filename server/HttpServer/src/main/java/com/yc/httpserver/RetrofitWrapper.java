@@ -7,7 +7,6 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.yc.toollib.network.stetho.NetworkInterceptor;
 import com.yc.toollib.network.stetho.NetworkListener;
-import com.yc.toollib.network.utils.NetworkTool;
 
 import java.lang.reflect.Type;
 import java.security.SecureRandom;

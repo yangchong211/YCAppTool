@@ -2,9 +2,9 @@ package com.ycbjie.android.contract
 
 import com.ycbjie.android.model.bean.ProjectListBean
 import com.ycbjie.android.model.bean.TreeBean
+import com.ycbjie.android.network.ResponseBean
 import com.ycbjie.library.base.mvp.BasePresenter
 import com.ycbjie.library.base.mvp.BaseView
-import com.ycbjie.android.network.ResponseBean
 
 interface AndroidProjectContract {
 
