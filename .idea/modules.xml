@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/android/AndroidBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/android/AndroidBusiness.iml" group="LifeHelper/AndroidBusiness" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BannerWidget/BannerWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BannerWidget/BannerWidget.iml" group="LifeHelper/BannerWidget" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BaseLayer/BaseLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/BaseLayer/BaseLayer.iml" group="LifeHelper/BaseLayer" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/BusinessInterface/BusinessInterface.iml" filepath="$PROJECT_DIR$/.idea/modules/BusinessInterface/BusinessInterface.iml" group="LifeHelper/BusinessInterface" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/CommonLayer/CommonLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/CommonLayer/CommonLayer.iml" group="LifeHelper/CommonLayer" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/ConfigLayer/ConfigLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/ConfigLayer/ConfigLayer.iml" group="LifeHelper/ConfigLayer" />

@@ -26,8 +26,10 @@ project(':ServerInterface').projectDir = new File('server/ServerInterface')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':LibraryLayer'
+include ':LibraryLayer', ':BaseLayer'
 project(':LibraryLayer').projectDir = new File('common/LibraryLayer')
+project(':BaseLayer').projectDir = new File('common/BaseLayer')
+
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -36,6 +38,7 @@ project(':BannerWidget').projectDir = new File('widget/BannerWidget')
 project(':PhotoWidget').projectDir = new File('widget/PhotoWidget')
 project(':CoverWidget').projectDir = new File('widget/CoverWidget')
 project(':CustomWidget').projectDir = new File('widget/CustomWidget')
+
 
 /* +++++++++ 框架基础组件层 +++++++++ */
 include ':CommonLayer', ':ConfigLayer', ':ToolLayer'
