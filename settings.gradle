@@ -16,12 +16,13 @@ project(':DouBanBusiness').projectDir = new File('business/DouBanBusiness')
 project(':BusinessInterface').projectDir = new File('business/BusinessInterface')
 
 /* +++++++++ 框架业务服务层 +++++++++ */
-include ':ImageServer', ':HttpServer', ':ShareServer', ':ZxingServer',':XlogServer',':ServerInterface'
+include ':ImageServer', ':HttpServer', ':ShareServer', ':ZxingServer',':XlogServer', ':NfcServer',':ServerInterface'
 project(':ImageServer').projectDir = new File('server/ImageServer')
 project(':HttpServer').projectDir = new File('server/HttpServer')
 project(':ShareServer').projectDir = new File('server/ShareServer')
 project(':ZxingServer').projectDir = new File('server/ZxingServer')
 project(':XlogServer').projectDir = new File('server/XlogServer')
+project(':NfcServer').projectDir = new File('server/NfcServer')
 project(':ServerInterface').projectDir = new File('server/ServerInterface')
 
 

@@ -1,0 +1,68 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.nfcserver">
+
+    <!--允许开发nfc的权限-->
+    <uses-permission android:name="android.permission.NFC"/>
+    <!--声明只有带有nfc功能的手机才能下载你在google市场发布的具有NFC功能的app-->
+    <!--uses-feature android:name="android.hardware.nfc" android:required="true" />-->
+    <!--声明支持的最小的Android Version 为10-->
+    <!--<uses-sdk android:minSdkVersion="10"/>-->
+
+    <application>
+
+        <!-- NFC-->
+        <activity android:name=".NfcYcActivity"
+            android:launchMode="singleTask">
+            <!--上面设置为单例模式，处理NFC的Activity都要设置launchMode属性为singleTop或者singleTask，保证activity唯一实例-->
+            <intent-filter>
+                <!--以NDEF类型为-->
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="https"/>
+                <data android:scheme="http"/>
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".ui.NfcMainActivity"
+            android:launchMode="singleTop"
+            android:label="@string/str_run_app"/>
+        <activity android:name=".ui.RunAppActivity"
+            android:launchMode="singleTop"
+            android:label="@string/str_run_app"/>
+        <activity android:name=".ui.RunUrlActivity"
+            android:launchMode="singleTop"
+            android:label="@string/str_run_url"/>
+        <activity android:name=".ui.ReadTextActivity"
+            android:launchMode="singleTop"
+            android:label="@string/str_read_text"/>
+        <activity android:name=".ui.WriteTextActivity"
+            android:launchMode="singleTop"
+            android:label="@string/str_write_text"/>
+        <activity android:name=".ui.ReadUriActivity"
+            android:launchMode="singleTop"
+            android:label="@string/str_read_uri"/>
+        <activity android:name=".ui.WriteUriActivity"
+            android:launchMode="singleTop"
+            android:label="@string/str_write_uri"/>
+        <activity android:name=".ui.ReadMUActivity"
+            android:launchMode="singleTop"
+            android:label="@string/str_read_mu"/>
+        <activity android:name=".ui.WriteMUActivity"
+            android:launchMode="singleTop"
+            android:label="@string/str_write_mu"/>
+
+    </application>
+
+</manifest>

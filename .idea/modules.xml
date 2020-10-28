@@ -22,6 +22,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LifeHelper-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LifeHelper-app.iml" group="LifeHelper/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/love/LoveBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/love/LoveBusiness.iml" group="LifeHelper/LoveBusiness" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/music/MusicBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/music/MusicBusiness.iml" group="LifeHelper/MusicBusiness" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/NfcServer/NfcServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/NfcServer/NfcServer.iml" group="LifeHelper/NfcServer" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/note/NoteBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/note/NoteBusiness.iml" group="LifeHelper/NoteBusiness" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/PhotoWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/PhotoWidget.iml" group="LifeHelper/PhotoWidget" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ServerInterface/ServerInterface.iml" filepath="$PROJECT_DIR$/.idea/modules/ServerInterface/ServerInterface.iml" group="LifeHelper/ServerInterface" />

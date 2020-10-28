@@ -254,7 +254,9 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 case 3:
                     ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_PROGRESS1_ACTIVITY);
                     break;
+                    //nfc测试
                 case 4:
+                    ARouterUtils.navigation(RouterConfig.Nfc.ACTIVITY_NFC_MAIN);
                     break;
                 case 5:
                     ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_AIR_ACTIVITY);

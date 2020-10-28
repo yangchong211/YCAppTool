@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nfc</string>
+    <string name="str_run_app">自动打开短信界面</string>
+    <string name="str_run_url">自动打开百度页面</string>
+    <string name="str_read_text">读NFC标签中的文本数据</string>
+    <string name="str_write_text">写NFC标签中的文本数据</string>
+    <string name="str_read_uri">读NFC标签中的Uri数据</string>
+    <string name="str_write_uri">写NFC标签中的Uri数据</string>
+    <string name="str_read_mu">读NFC标签非NDEF格式的数据</string>
+    <string name="str_write_mu">写NFC标签非NDEF格式的数据</string>
+</resources>

@@ -223,6 +223,7 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':ZxingServer')
+    implementation project(path: ':NfcServer')
 }
 
 

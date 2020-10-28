@@ -28,6 +28,7 @@
             <option value="$PROJECT_DIR$/common/LibraryLayer" />
             <option value="$PROJECT_DIR$/server/HttpServer" />
             <option value="$PROJECT_DIR$/server/ImageServer" />
+            <option value="$PROJECT_DIR$/server/NfcServer" />
             <option value="$PROJECT_DIR$/server/ServerInterface" />
             <option value="$PROJECT_DIR$/server/ShareServer" />
             <option value="$PROJECT_DIR$/server/XlogServer" />

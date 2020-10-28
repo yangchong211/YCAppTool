@@ -140,4 +140,12 @@ public interface RouterConfig {
         //跳转到webView详情页面
         String ACTIVITY_LIBRARY_WEB_VIEW = "/library/WebViewActivity";
     }
+
+    /**
+     * nfc
+     */
+    interface Nfc {
+        //跳转测试nfc页面
+        String ACTIVITY_NFC_MAIN = "/nfc/NfcMainActivity";
+    }
 }
