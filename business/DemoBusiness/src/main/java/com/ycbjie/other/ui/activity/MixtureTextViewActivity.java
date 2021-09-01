@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.customwidget.VerticalImageSpan;
 import com.yc.toollayer.spannable.AlignImageSpan;
 import com.yc.toollayer.spannable.RoundBackgroundColorSpan;
 import com.yc.toollayer.spannable.RoundedBackgroundSpan;
@@ -234,18 +235,43 @@ public class MixtureTextViewActivity extends BaseActivity {
     /**
      * 使用SpannableStringBuilder设置样式——图片
      */
+//    private void mode8() {
+//        SpannableStringBuilder spannableString = new SpannableStringBuilder();
+//        spannableString.append("暗影IV已经开始暴走了");
+//        ImageSpan imageSpan = new ImageSpan(this, R.mipmap.ic_launcher);
+//        //也可以这样
+//        //Drawable drawable = getResources().getDrawable(R.mipmap.ic_launcher);
+//        //drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+//        //ImageSpan imageSpan1 = new ImageSpan(drawable);
+//        //将index为6、7的字符用图片替代
+//        spannableString.setSpan(imageSpan, 6, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+//        tv8.setText(spannableString);
+//    }
+
+    /**
+     * 使用SpannableStringBuilder设置样式——图片
+     */
     private void mode8() {
         SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
-        ImageSpan imageSpan = new ImageSpan(this, R.mipmap.ic_launcher);
+        spannableString.append("暗影IV已经开始暴走了暗影IV已经开始暴走了暗影IV已经开始暴走了");
+        spannableString.append("*");
+        //ImageSpan imageSpan = new ImageSpan(this, R.mipmap.ic_launcher);
+
+
+        Drawable drawable = getResources().getDrawable(R.mipmap.ic_launcher);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        VerticalImageSpan imageSpan = new VerticalImageSpan(drawable, 0, 0);
+
         //也可以这样
         //Drawable drawable = getResources().getDrawable(R.mipmap.ic_launcher);
         //drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         //ImageSpan imageSpan1 = new ImageSpan(drawable);
         //将index为6、7的字符用图片替代
-        spannableString.setSpan(imageSpan, 6, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(imageSpan, spannableString.length()-1,
+                spannableString.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         tv8.setText(spannableString);
     }
+
 
     /**
      * 使用SpannableStringBuilder设置样式——下划线
