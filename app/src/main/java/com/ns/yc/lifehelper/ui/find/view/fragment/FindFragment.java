@@ -204,6 +204,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 ARouterUtils.navigation(RouterConfig.Music.ACTIVITY_MUSIC_GUIDE_ACTIVITY);
                 break;
             case 4:
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_TEST_ACTIVITY);
                 break;
             case 5:
                 Bundle bundle1 = new Bundle();

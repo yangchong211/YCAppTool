@@ -33,7 +33,6 @@
         <activity android:name="com.ycbjie.other.ui.activity.ProgressFirstActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.ProgressSecondActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.ProgressThirdActivity"/>
-        <activity android:name="com.ycbjie.other.com.ycbjie.book.activity.MonkeyGameActivity"/>
         <activity android:name=".ui.activity.TestFirstActivity"/>
         <activity android:name=".ui.activity.ScrollActivity"/>
         <activity android:name=".ui.activity.MixtureTextViewActivity"/>

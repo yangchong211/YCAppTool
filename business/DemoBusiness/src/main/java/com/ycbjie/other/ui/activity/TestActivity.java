@@ -3,9 +3,12 @@ package com.ycbjie.other.ui.activity;
 import android.content.Intent;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
+@Route(path = RouterConfig.Music.ACTIVITY_MUSIC_GUIDE_ACTIVITY)
 public class TestActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public int getContentView() {

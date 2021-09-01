@@ -2,14 +2,6 @@ package com.yc.configlayer.arounter;
 
 public interface RouterConfig {
 
-
-    String SCHEME = "yc";
-    String ROUTER_SCHEME = "yc://";
-    String ROUTER_HOST = "cc、om.ns.yc.lifehelper";
-    String ROUTER_PRE = ROUTER_SCHEME + ROUTER_HOST;
-    String PATH_TOP_LEVEL_VIEW = "/view";
-    String PATH_TOP_LEVEL_ACTION = "/action";
-
     /**
      * 主App
      */
@@ -105,6 +97,8 @@ public interface RouterConfig {
      * 基础模块
      */
     interface Demo{
+        //画廊页面
+        String ACTIVITY_OTHER_TEST_ACTIVITY = "/other/TestActivity";
         //画廊页面
         String ACTIVITY_OTHER_GALLERY_ACTIVITY = "/other/ImageGalleryActivity";
         //加载大图页面
