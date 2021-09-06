@@ -7,14 +7,10 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.text.style.ImageSpan;
 
+
 /**
- * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2019/03/13
- *     desc  : 解决原生 ImageSpan 无法设置垂直局中及左右边距问题
- *     revise: 参考：https://www.jianshu.com/p/79a14a3af54b
- * </pre>
+ * 解决原生 ImageSpan 无法设置垂直局中及左右边距问题
+ * 参考：https://www.jianshu.com/p/79a14a3af54b
  */
 public class VerticalImageSpan extends ImageSpan {
 

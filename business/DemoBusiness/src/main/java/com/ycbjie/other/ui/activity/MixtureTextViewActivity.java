@@ -20,6 +20,7 @@ import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.customwidget.VerticalImageSpan;
@@ -256,21 +257,26 @@ public class MixtureTextViewActivity extends BaseActivity {
         spannableString.append("暗影IV已经开始暴走了暗影IV已经开始暴走了暗影IV已经开始暴走了");
         spannableString.append("*");
         //ImageSpan imageSpan = new ImageSpan(this, R.mipmap.ic_launcher);
-
-
         Drawable drawable = getResources().getDrawable(R.mipmap.ic_launcher);
         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        VerticalImageSpan imageSpan = new VerticalImageSpan(drawable, 0, 0);
+        VerticalImageSpan imageSpan = new VerticalImageSpan(drawable, 9, 0);
 
-        //也可以这样
-        //Drawable drawable = getResources().getDrawable(R.mipmap.ic_launcher);
-        //drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        //ImageSpan imageSpan1 = new ImageSpan(drawable);
-        //将index为6、7的字符用图片替代
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.showRoundRectToast("吐司");
+            }
+        };
+
+        //想要ClickableSpan 触发点击事件
+        tv8.setMovementMethod(LinkMovementMethod.getInstance());
         spannableString.setSpan(imageSpan, spannableString.length()-1,
+                spannableString.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(clickableSpan, spannableString.length()-1,
                 spannableString.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         tv8.setText(spannableString);
     }
+
 
 
     /**
