@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MockLocationLib</string>
+    <string name="dk_gpsmock_open">开启模拟定位</string>
+    <string name="dk_gps_location_change_toast">地址变为: %1$s , %2$s</string>
+
+</resources>

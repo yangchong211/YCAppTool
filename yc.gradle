@@ -5,7 +5,6 @@ ext {
     isLoveApplication = false  //爱意表达模块开关，false:作为Lib组件存在， true:作为application存在
     isVideoApplication = false  //视频模块开关，false:作为Lib组件存在， true:作为application存在
     isBookApplication = false  //book模块开关，false:作为Lib组件存在， true:作为application存在
-    isDouBanApplication = false  //豆瓣模块开关，false:作为Lib组件存在， true:作为application存在
     isOtherApplication = false  //其他模块开关，false:作为Lib组件存在， true:作为application存在
     isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
     isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
@@ -86,8 +85,8 @@ ext {
                 "YCThreadPoolLib"             : "cn.yc:YCThreadPoolLib:1.3.2",
                 "notificationLib"             : "cn.yc:notificationLib:1.0.3",
                 "WebViewLib"                  : "cn.yc:WebViewLib:1.4.1",
-                "YCAndroidTool"                  : "cn.yc:ToolLib:1.2.1",
-                "zoomImageLib"                  : "cn.yc:zoomImageLib:1.0.1",
+                "YCAndroidTool"               : "cn.yc:ToolLib:1.2.1",
+                "zoomImageLib"                : "cn.yc:zoomImageLib:1.0.1",
 
                 //tools
                 "eventbus"                  : "org.greenrobot:eventbus:3.0.0",

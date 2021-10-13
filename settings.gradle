@@ -1,48 +1,66 @@
 /* +++++++++ 主项目 +++++++++ */
 include ':app'
 
+
 /* +++++++++ 业务组件层 +++++++++ */
-include ':GameBusiness', ':AndroidBusiness', ':LoveBusiness', ':MusicBusiness', ':NoteBusiness',
-        ':VideoBusiness', ':GankBusiness', ':DemoBusiness', ':DouBanBusiness', ':BusinessInterface'
-project(':GameBusiness').projectDir = new File('business/GameBusiness')
-project(':AndroidBusiness').projectDir = new File('business/AndroidBusiness')
-project(':LoveBusiness').projectDir = new File('business/LoveBusiness')
-project(':MusicBusiness').projectDir = new File('business/MusicBusiness')
-project(':NoteBusiness').projectDir = new File('business/NoteBusiness')
-project(':VideoBusiness').projectDir = new File('business/VideoBusiness')
-project(':GankBusiness').projectDir = new File('business/GankBusiness')
-project(':DemoBusiness').projectDir = new File('business/DemoBusiness')
-project(':DouBanBusiness').projectDir = new File('business/DouBanBusiness')
-project(':BusinessInterface').projectDir = new File('business/BusinessInterface')
+include ':GameBusiness', ':AndroidBusiness', ':LoveBusiness', ':MusicBusiness',
+        ':VideoBusiness', ':GankBusiness', ':DemoBusiness', ':BusinessInterface'
+project(':GameBusiness').projectDir = new File('Business/GameBusiness')
+project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
+project(':LoveBusiness').projectDir = new File('Business/LoveBusiness')
+project(':MusicBusiness').projectDir = new File('Business/MusicBusiness')
+project(':VideoBusiness').projectDir = new File('Business/VideoBusiness')
+project(':GankBusiness').projectDir = new File('Business/GankBusiness')
+project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
+project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 
 /* +++++++++ 框架业务服务层 +++++++++ */
-include ':ImageServer', ':HttpServer', ':ShareServer', ':ZxingServer',':XlogServer', ':NfcServer',':ServerInterface'
-project(':ImageServer').projectDir = new File('server/ImageServer')
-project(':HttpServer').projectDir = new File('server/HttpServer')
-project(':ShareServer').projectDir = new File('server/ShareServer')
-project(':ZxingServer').projectDir = new File('server/ZxingServer')
-project(':XlogServer').projectDir = new File('server/XlogServer')
-project(':NfcServer').projectDir = new File('server/NfcServer')
-project(':ServerInterface').projectDir = new File('server/ServerInterface')
+include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',':ServerInterface'
+project(':ImageServer').projectDir = new File('Server/ImageServer')
+project(':HttpServer').projectDir = new File('Server/HttpServer')
+project(':ShareServer').projectDir = new File('Server/ShareServer')
+project(':XlogServer').projectDir = new File('Server/XlogServer')
+project(':NfcServer').projectDir = new File('Server/NfcServer')
+project(':ServerInterface').projectDir = new File('Server/ServerInterface')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':LibraryLayer', ':BaseLayer'
-project(':LibraryLayer').projectDir = new File('common/LibraryLayer')
-project(':BaseLayer').projectDir = new File('common/BaseLayer')
+project(':LibraryLayer').projectDir = new File('Common/LibraryLayer')
+project(':BaseLayer').projectDir = new File('Common/BaseLayer')
 
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
-include ':BannerWidget', ':PhotoWidget', ':CoverWidget', ':CustomWidget'
-project(':BannerWidget').projectDir = new File('widget/BannerWidget')
-project(':PhotoWidget').projectDir = new File('widget/PhotoWidget')
-project(':CoverWidget').projectDir = new File('widget/CoverWidget')
-project(':CustomWidget').projectDir = new File('widget/CustomWidget')
+include ':BannerWidget', ':PhotoWidget', ':CoverWidget', ':CustomWidget', ':BlurView',
+        ':FragmentLib',':WidgetViewLib',':CustomWidget'
+project(':BannerWidget').projectDir = new File('Widget/BannerWidget')
+project(':PhotoWidget').projectDir = new File('Widget/PhotoWidget')
+project(':CoverWidget').projectDir = new File('Widget/CoverWidget')
+project(':CustomWidget').projectDir = new File('Widget/CustomWidget')
+project(':BlurView').projectDir = new File('Widget/BlurView')
+project(':FragmentLib').projectDir = new File('Widget/FragmentLib')
+project(':WidgetViewLib').projectDir = new File('Widget/WidgetViewLib')
 
 
 /* +++++++++ 框架基础组件层 +++++++++ */
 include ':CommonLayer', ':ConfigLayer', ':ToolLayer'
-project(':CommonLayer').projectDir = new File('basis/CommonLayer')
-project(':ConfigLayer').projectDir = new File('basis/ConfigLayer')
-project(':ToolLayer').projectDir = new File('basis/ToolLayer')
+project(':CommonLayer').projectDir = new File('Basis/CommonLayer')
+project(':ConfigLayer').projectDir = new File('Basis/ConfigLayer')
+project(':ToolLayer').projectDir = new File('Basis/ToolLayer')
+
+
+/* +++++++++ 框架基础工具库 +++++++++ */
+include ':ZxingServerLib', ':WebSocketLib', ':ToolUtilsLib', ':SocketIoLib', ':SerialTaskLib' ,
+        ':NetHelperLib', ':MapToolLib' ,':LocaleHelperLib' ,':CountTimerLib' ,':MapLocationLib'
+project(':ZxingServerLib').projectDir = new File('Tool/ZxingServerLib')
+project(':WebSocketLib').projectDir = new File('Tool/WebSocketLib')
+project(':ToolUtilsLib').projectDir = new File('Tool/ToolUtilsLib')
+project(':SocketIoLib').projectDir = new File('Tool/SocketIoLib')
+project(':SerialTaskLib').projectDir = new File('Tool/SerialTaskLib')
+project(':NetHelperLib').projectDir = new File('Tool/NetHelperLib')
+project(':MapToolLib').projectDir = new File('Tool/MapToolLib')
+project(':LocaleHelperLib').projectDir = new File('Tool/LocaleHelperLib')
+project(':CountTimerLib').projectDir = new File('Tool/CountTimerLib')
+project(':MapLocationLib').projectDir = new File('Tool/MapLocationLib')
+

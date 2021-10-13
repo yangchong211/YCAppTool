@@ -198,7 +198,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 break;
                 //富文本
             case 2:
-                ARouterUtils.navigation(RouterConfig.Note.ACTIVITY_OTHER_ARTICLE);
+                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ARTICLE);
                 break;
             case 3:
                 ARouterUtils.navigation(RouterConfig.Music.ACTIVITY_MUSIC_GUIDE_ACTIVITY);

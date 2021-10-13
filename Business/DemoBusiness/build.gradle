@@ -64,7 +64,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation 'com.airbnb.android:lottie:2.7.0'
-
+    api rootProject.ext.dependencies["YCCustomTextLib"]
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':ToolLayer')
@@ -72,4 +72,5 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':CoverWidget')
     implementation project(path: ':CustomWidget')
+    implementation project(path: ':PhotoWidget')
 }

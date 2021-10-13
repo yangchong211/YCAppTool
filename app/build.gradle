@@ -192,9 +192,6 @@ dependencies {
     if (!rootProject.ext.isBookApplication){
         implementation project(path: ':GameBusiness')
     }
-    if (!rootProject.ext.isDouBanApplication){
-        implementation project(path: ':DouBanBusiness')
-    }
     if (!rootProject.ext.isGankApplication){
         implementation project(path: ':GankBusiness')
     }
@@ -213,16 +210,13 @@ dependencies {
     if (!rootProject.ext.isVideoApplication){
         implementation project(path: ':VideoBusiness')
     }
-    if (!rootProject.ext.isNoteApplication){
-        implementation project(path: ':NoteBusiness')
-    }
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':ToolLayer')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ImageServer')
-    implementation project(path: ':ZxingServer')
+    implementation project(path: ':ZxingServerLib')
     implementation project(path: ':NfcServer')
 }
 
