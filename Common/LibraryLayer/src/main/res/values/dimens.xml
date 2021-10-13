@@ -45,4 +45,6 @@
     <dimen name="textSize19">19sp</dimen>
     <dimen name="textSize20">20sp</dimen>
     <dimen name="textSize22">22sp</dimen>
+    <dimen name="textSize23">23sp</dimen>
+    <dimen name="textSize24">24sp</dimen>
 </resources>

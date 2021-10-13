@@ -97,7 +97,7 @@ public interface RouterConfig {
      * 基础模块
      */
     interface Demo{
-        //画廊页面
+        //测试案例
         String ACTIVITY_OTHER_TEST_ACTIVITY = "/other/TestActivity";
         //画廊页面
         String ACTIVITY_OTHER_GALLERY_ACTIVITY = "/other/ImageGalleryActivity";

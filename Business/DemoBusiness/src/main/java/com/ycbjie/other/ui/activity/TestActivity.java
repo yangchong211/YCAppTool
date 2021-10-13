@@ -8,7 +8,7 @@ import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
-@Route(path = RouterConfig.Music.ACTIVITY_MUSIC_GUIDE_ACTIVITY)
+@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_TEST_ACTIVITY)
 public class TestActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public int getContentView() {

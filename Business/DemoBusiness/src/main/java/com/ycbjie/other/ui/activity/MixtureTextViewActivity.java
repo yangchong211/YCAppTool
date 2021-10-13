@@ -193,12 +193,22 @@ public class MixtureTextViewActivity extends BaseActivity {
      */
     private void mode5() {
         SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
-        AbsoluteSizeSpan absoluteSizeSpan = new AbsoluteSizeSpan(20);
-        spannableString.setSpan(absoluteSizeSpan,
-                0, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableString.append("暗影IV");
+        float dimension1 = this.getResources().getDimension(R.dimen.textSize20);
+        AbsoluteSizeSpan absoluteSizeSpan1 = new AbsoluteSizeSpan((int) dimension1);
+        int length1 = spannableString.toString().length();
+        spannableString.setSpan(absoluteSizeSpan1,
+                0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableString.append("\n");
+        spannableString.append("已经开始暴走了");
+        int length2 = spannableString.toString().length();
+        float dimension2 = this.getResources().getDimension(R.dimen.textSize14);
+        AbsoluteSizeSpan absoluteSizeSpan2 = new AbsoluteSizeSpan((int) dimension2);
+        spannableString.setSpan(absoluteSizeSpan2,
+                length1, length2, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         tv5.setText(spannableString);
     }
+
     /**
      * 使用SpannableStringBuilder设置样式——粗体\斜体
      */

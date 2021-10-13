@@ -203,6 +203,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
             case 3:
                 ARouterUtils.navigation(RouterConfig.Music.ACTIVITY_MUSIC_GUIDE_ACTIVITY);
                 break;
+                //测试案例
             case 4:
                 ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_TEST_ACTIVITY);
                 break;
