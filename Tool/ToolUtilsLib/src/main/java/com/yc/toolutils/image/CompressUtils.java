@@ -1,4 +1,4 @@
-package com.yc.toolutils;
+package com.yc.toolutils.image;
 
 import android.content.Context;
 import android.graphics.Bitmap;

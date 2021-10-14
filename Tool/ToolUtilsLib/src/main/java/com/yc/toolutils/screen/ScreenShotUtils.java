@@ -19,7 +19,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.logger.AppLogUtils;
 import com.yc.toolutils.process.ProcessUtils;
 
 import java.lang.ref.WeakReference;

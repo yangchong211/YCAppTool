@@ -1,4 +1,4 @@
-package com.yc.toolutils;
+package com.yc.toolutils.memory;
 
 import android.app.ActivityManager;
 import android.content.Context;
