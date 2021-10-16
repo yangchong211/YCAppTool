@@ -218,7 +218,6 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 break;
                 //相册画廊
             case 7:
-                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_COVER_ACTIVITY);
                 break;
             default:
                 break;

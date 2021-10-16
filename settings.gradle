@@ -32,11 +32,10 @@ project(':BaseLayer').projectDir = new File('Common/BaseLayer')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
-include ':BannerWidget', ':PhotoWidget', ':CoverWidget', ':CustomWidget', ':BlurView',
+include ':BannerWidget', ':PhotoWidget', ':CustomWidget', ':BlurView',
         ':FragmentLib',':WidgetViewLib',':CustomWidget'
 project(':BannerWidget').projectDir = new File('Widget/BannerWidget')
 project(':PhotoWidget').projectDir = new File('Widget/PhotoWidget')
-project(':CoverWidget').projectDir = new File('Widget/CoverWidget')
 project(':CustomWidget').projectDir = new File('Widget/CustomWidget')
 project(':BlurView').projectDir = new File('Widget/BlurView')
 project(':FragmentLib').projectDir = new File('Widget/FragmentLib')
