@@ -121,6 +121,8 @@ public interface RouterConfig {
         String ACTIVITY_LOGIN_ACTIVITY = "/other/MeLoginActivity";
         //富文本文章页面
         String ACTIVITY_OTHER_ARTICLE = "/other/NewArticleActivity";
+        //倒计时页面
+        String ACTIVITY_OTHER_TIMER = "/other/TimerMainActivity";
     }
 
     /**

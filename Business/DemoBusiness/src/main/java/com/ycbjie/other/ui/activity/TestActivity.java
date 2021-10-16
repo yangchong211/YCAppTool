@@ -1,10 +1,15 @@
 package com.ycbjie.other.ui.activity;
 
 import android.content.Intent;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.widget.blurview.RealTimeBlurView;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
@@ -26,6 +31,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.tv_7).setOnClickListener(this);
         findViewById(R.id.tv_8).setOnClickListener(this);
         findViewById(R.id.tv_9).setOnClickListener(this);
+        findViewById(R.id.tv_10).setOnClickListener(this);
     }
 
     @Override
@@ -59,9 +65,23 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             startActivity(new Intent(this, MixtureTextViewActivity.class));
         }else if (i == R.id.tv_9){
             startActivity(new Intent(this, CloneAbleActivity.class));
+        }else if (i == R.id.tv_10){
+            startShowDialog();
         }
     }
 
+
+    private void startShowDialog() {
+        View popMenuView = this.getLayoutInflater().inflate(R.layout.view_real_blur_view, null);
+        RealTimeBlurView blur_view = (RealTimeBlurView) popMenuView.findViewById(R.id.blur_view);
+        float v = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, this.getResources().getDisplayMetrics());
+        blur_view.setBlurRadius(v);
+        final PopupWindow popMenu = new PopupWindow(popMenuView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
+        popMenu.setClippingEnabled(false);
+        popMenu.setFocusable(true);         //点击其他地方关闭
+        popMenu.setAnimationStyle(R.style.dialog_custom_view);
+        popMenu.showAtLocation(popMenuView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+    }
 
 
 

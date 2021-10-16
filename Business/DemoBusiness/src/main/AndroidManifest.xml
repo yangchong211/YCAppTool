@@ -7,7 +7,6 @@
         <activity android:name="com.ycbjie.other.ui.activity.MeFeedBackActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.ImageGalleryActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.MeLoginActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.MeRegisterActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.ZoomLargeImageActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.MeBannerActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.BannerViewActivity"/>
@@ -18,7 +17,13 @@
         <activity android:name="com.ycbjie.other.ui.activity.ScrollActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.MixtureTextViewActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.CloneAbleActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.GalleryCoverActivity"/>
+        <activity android:name=".ui.timer.TimerActivity"/>
+        <activity android:name=".ui.timer.TimerMainActivity"/>
+        <activity android:name=".ui.timer.MyCountActivity"/>
+        <activity android:name=".ui.timer.ChronometerActivity"/>
+        <activity android:name=".ui.timer.CountActivity"/>
+        <activity android:name=".ui.timer.CountViewActivity"/>
+        <activity android:name=".ui.timer.HandlerActivity"/>
     </application>
 
 

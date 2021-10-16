@@ -42,7 +42,7 @@
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_four"
-            android:text="干货定制" />
+            android:text="测试案例" />
     </LinearLayout>
 
     <include layout="@layout/view_vlayout_marquee"/>

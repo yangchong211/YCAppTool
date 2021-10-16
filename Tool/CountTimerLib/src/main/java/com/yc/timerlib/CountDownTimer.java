@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 
 /**
  * <pre>

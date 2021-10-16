@@ -87,4 +87,10 @@
         <attr name="speed" />
     </declare-styleable>
 
+    <!--模糊视图控件-->
+    <declare-styleable name="RealTimeBlurView">
+        <attr name="realtimeBlurRadius" format="dimension"/>
+        <attr name="realtimeDownsampleFactor" format="float"/>
+        <attr name="realtimeOverlayColor" format="color"/>
+    </declare-styleable>
 </resources>

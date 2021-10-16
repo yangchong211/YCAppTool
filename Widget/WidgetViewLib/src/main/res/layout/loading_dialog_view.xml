@@ -9,18 +9,18 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-    <com.ns.yc.ycutilslib.loadingDialog.stateLoad.CircularRingView
+    <com.yc.widget.loadingDialog.stateLoad.CircularRingView
         android:id="@+id/lv_ring"
         android:layout_width="60dp"
         android:layout_height="60dp" />
 
-    <com.ns.yc.ycutilslib.loadingDialog.stateLoad.CustomRightView
+    <com.yc.widget.loadingDialog.stateLoad.CustomRightView
         android:id="@+id/crv_right"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:visibility="gone" />
 
-    <com.ns.yc.ycutilslib.loadingDialog.stateLoad.CustomWrongView
+    <com.yc.widget.loadingDialog.stateLoad.CustomWrongView
         android:id="@+id/cwv_wrong"
         android:layout_width="60dp"
         android:layout_height="60dp"

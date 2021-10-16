@@ -88,7 +88,7 @@
         <item>拼图</item>
         <item>游戏</item>
         <item>抽奖</item>
-        <item>番茄</item>
+        <item>倒计时</item>
     </string-array>
     <integer-array name="find_list1_image">
         <item>@drawable/ic_data_picture</item>

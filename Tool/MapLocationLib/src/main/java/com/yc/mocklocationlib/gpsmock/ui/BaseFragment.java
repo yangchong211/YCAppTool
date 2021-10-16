@@ -3,6 +3,11 @@ package com.yc.mocklocationlib.gpsmock.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,13 +15,6 @@ import android.view.ViewGroup;
 import android.view.View.OnTouchListener;
 
 
-import androidx.annotation.IdRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import java.util.Objects;
 
 public class BaseFragment extends Fragment {
 
@@ -85,7 +83,7 @@ public class BaseFragment extends Fragment {
     }
 
     public void finish() {
-        Objects.requireNonNull(getActivity()).finish();
+
     }
 
 }
