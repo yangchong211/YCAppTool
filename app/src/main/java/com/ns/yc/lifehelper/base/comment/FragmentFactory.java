@@ -3,7 +3,7 @@ package com.ns.yc.lifehelper.base.comment;
 import com.ns.yc.lifehelper.ui.data.view.fragment.DataFragment;
 import com.ns.yc.lifehelper.ui.find.view.fragment.FindFragment;
 import com.ns.yc.lifehelper.ui.home.view.fragment.HomeFragment;
-import com.ns.yc.lifehelper.ui.me.view.MeFragment;
+import com.ns.yc.lifehelper.ui.me.view.fragment.MeFragment;
 
 
 /**

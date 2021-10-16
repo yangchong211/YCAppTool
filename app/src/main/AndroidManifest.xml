@@ -45,14 +45,8 @@
         <activity android:name=".ui.guide.view.activity.SplashPagerActivity"/>
         <activity android:name=".ui.main.view.MainActivity"/>
         <activity android:name=".ui.guide.view.activity.GuideActivity"/>
-        <activity android:name=".ui.guide.view.activity.SelectFollowActivity"/>
-        <activity android:name=".ui.me.view.activity.MeTimerActivity"/>
-        <activity android:name=".ui.find.view.activity.MyVideoActivity"/>
-        <activity android:name=".ui.me.view.activity.MeCollectActivity"/>
         <activity android:name=".ui.me.view.activity.MeSettingActivity"/>
-        <activity android:name=".ui.me.view.activity.MePersonActivity"/>
         <activity android:name=".ui.me.view.activity.MeLoginActivity"/>
-        <activity android:name=".ui.me.view.activity.IndexJsActivity"/>
         <service android:name="com.ycbjie.library.base.app.InitializeService"/>
         <service android:name=".service.LoopRequestService"/>
     </application>

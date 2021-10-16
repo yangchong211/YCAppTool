@@ -1,15 +1,10 @@
 package com.ns.yc.lifehelper.ui.main.view;
 
 import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.IntDef;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -22,13 +17,11 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -38,7 +31,6 @@ import com.ns.yc.lifehelper.base.comment.FragmentFactory;
 import com.ns.yc.lifehelper.service.LoopRequestService;
 import com.ns.yc.lifehelper.ui.main.contract.MainContract;
 import com.ns.yc.lifehelper.ui.main.presenter.MainPresenter;
-import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
 import com.ns.yc.ycutilslib.activityManager.AppManager;
 import com.ns.yc.ycutilslib.managerLeak.InputMethodManagerLeakUtils;
 import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
@@ -47,7 +39,6 @@ import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
-import com.yc.toollayer.animation.AnimatorUtils;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
@@ -57,8 +48,6 @@ import com.ycbjie.library.web.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -84,9 +73,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     private Toolbar mToolbar;
     private FrameLayout mFlTitleMenu;
     private TextView mTvTitle;
-    private LinearLayout llMainButton;
-    private TextView tvAnimView;
-    private ImageView ivAnimView;
 
     private long time;
     public static final int HOME = 0;
@@ -95,7 +81,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     public static final int USER = 3;
     private MainContract.Presenter presenter = new MainPresenter(this);
     private int selectIndex;
-    private int tvAnimViewWidth;
     protected ValueAnimator mAnimExpand;
     protected ValueAnimator mAnimReduce;
 
@@ -103,25 +88,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     private @interface PageIndex {}
     public static final int REQUEST_CODE_SCAN = 0X01;
 
-    /**
-     * 定时任务工具类
-     */
-    public Timer timer;
     private boolean isTimerRunning = false;
 
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case HOME:
-                    initRetractAnim();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
 
     /**
      * 跳转首页* @param context     上下文
@@ -158,15 +126,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
 
     @Override
     protected void onDestroy() {
-        cancelAllAnim();
-        cancelTimer();
         super.onDestroy();
         LoopRequestService.quitLoopService(this);
         InputMethodManagerLeakUtils.fixInputMethodManagerLeak(this);
-        if (mHandler!=null){
-            mHandler.removeCallbacksAndMessages(null);
-            mHandler = null;
-        }
     }
 
 
@@ -263,7 +225,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         initViewPager();
         initNav();
         LoopRequestService.startLoopService(this);
-        startTimer();
     }
 
     private void initFindViewID() {
@@ -276,24 +237,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         mToolbar = findViewById(R.id.toolbar);
         mFlTitleMenu = findViewById(R.id.fl_title_menu);
         mTvTitle = findViewById(R.id.tv_title);
-        llMainButton = findViewById(R.id.ll_main_button);
-        tvAnimView = findViewById(R.id.tv_anim_view);
-        ivAnimView = findViewById(R.id.iv_anim_view);
-
-        tvAnimView.post(() -> {
-            //获取宽度
-            tvAnimViewWidth = tvAnimView.getWidth();
-        });
-        /*ViewTreeObserver observer = tvAnimView.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                tvAnimView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                tvAnimViewWidth = tvAnimView.getMeasuredWidth();
-                //int height = tvAnimView.getMeasuredHeight();
-            }
-        });*/
-        tvAnimView.setVisibility(View.VISIBLE);
     }
 
 
@@ -301,9 +244,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     public void initListener() {
         mFlTitleMenu.setOnClickListener(MainActivity.this);
         mNavView.setOnClickListener(MainActivity.this);
-        llMainButton.setOnClickListener(this);
-        ivAnimView.setOnClickListener(this);
-        tvAnimView.setOnClickListener(this);
         mSetting.setOnClickListener(listener);
         mQuit.setOnClickListener(listener);
     }
@@ -320,24 +260,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
         switch (view.getId()) {
             case R.id.fl_title_menu:
                 mDrawerLayout.openDrawer(GravityCompat.START);
-                break;
-            case R.id.ll_main_button:
-
-                break;
-            case R.id.iv_anim_view:
-                if (tvAnimView.getVisibility() == View.INVISIBLE){
-                    LogUtils.e("动画按钮","伸展");
-                    initExpandAnim();
-                } else {
-                    LogUtils.e("动画按钮","收缩");
-                    initRetractAnim();
-                }
-                break;
-            case R.id.tv_anim_view:
-                Bundle bundle1 = new Bundle();
-                bundle1.putString(Constant.URL,Constant.GITHUB);
-                bundle1.putString(Constant.TITLE,"关于更多博客内容");
-                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
                 break;
             default:
                 break;
@@ -499,7 +421,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                         break;
                     // 个人
                     case R.id.ll_nav_login:
-                        ActivityUtils.startActivity(MePersonActivity.class);
                         break;
                     case R.id.ll_nav_video:
                         ToastUtils.showRoundRectToast( "后期接入讯飞语音");
@@ -516,145 +437,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
             }, 0);
         }
     };
-
-
-    /**
-     * 悬浮控件收缩动画
-     */
-    private void initRetractAnim() {
-        LogUtils.e("动画按钮","控件宽度-----"+tvAnimViewWidth);
-        cancelAllAnim();
-        mAnimReduce = AnimatorUtils.setValueAnimator(llMainButton,
-                0, 1, 300, 300, 1);
-        mAnimReduce.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                Object animatedValue = animation.getAnimatedValue();
-                LogUtils.e("动画按钮","收缩结束onAnimationUpdate"+animatedValue);
-                //int a = (int) animatedValue;
-                //tv_anim.scrollTo(a, 0);
-                //逐渐减小
-                int value = (int) animatedValue;
-                ViewGroup.LayoutParams layoutParams = tvAnimView.getLayoutParams();
-                if (value!=0){
-                    layoutParams.width = (int) (tvAnimViewWidth - value*tvAnimViewWidth);
-                    tvAnimView.setLayoutParams(layoutParams);
-                }
-            }
-        });
-        mAnimReduce.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                LogUtils.e("动画按钮","收缩结束");
-                tvAnimView.setVisibility(View.INVISIBLE);
-                cancelTimer();
-            }
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-        });
-        mAnimReduce.start();
-    }
-
-    /**
-     * 悬浮控件伸展动画
-     */
-    private void initExpandAnim() {
-        LogUtils.e("动画按钮","控件宽度-----"+tvAnimViewWidth);
-        cancelAllAnim();
-        mAnimExpand = AnimatorUtils.setValueAnimator(llMainButton,
-                1, 0, 300, 300, 1);
-        mAnimExpand.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                Object animatedValue = animation.getAnimatedValue();
-                LogUtils.e("动画按钮","伸展结束onAnimationUpdate"+animatedValue);
-                //int a = (int) animatedValue;
-                //tv_anim.scrollTo(a, 0);
-                int value = (int) animatedValue;
-                ViewGroup.LayoutParams layoutParams = tvAnimView.getLayoutParams();
-                if (value!=0){
-                    layoutParams.width = (int) (tvAnimViewWidth - value*tvAnimViewWidth);
-                    tvAnimView.setLayoutParams(layoutParams);
-                }else {
-                    layoutParams.width = tvAnimViewWidth;
-                    tvAnimView.setLayoutParams(layoutParams);
-                }
-            }
-        });
-        mAnimExpand.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                LogUtils.e("动画按钮","伸展结束");
-                tvAnimView.setVisibility(View.VISIBLE);
-                startTimer();
-            }
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-        });
-        mAnimExpand.start();
-    }
-
-    /**
-     * 暂停所有动画
-     */
-    private void cancelAllAnim() {
-        if (mAnimExpand != null && mAnimExpand.isRunning()) {
-            mAnimExpand.setTarget(null);
-            mAnimExpand.cancel();
-        }
-        if (mAnimReduce != null && mAnimReduce.isRunning()) {
-            mAnimReduce.setTarget(null);
-            mAnimReduce.cancel();
-        }
-    }
-
-
-    /**
-     * 开启倒计时
-     */
-    private void startTimer() {
-        if (isTimerRunning){
-            return;
-        }
-        if (timer == null) {
-            timer = new Timer();
-        }
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                isTimerRunning = true;
-                if (tvAnimView.getVisibility() == View.INVISIBLE){
-                    LogUtils.e("动画按钮","伸展");
-                } else {
-                    LogUtils.e("动画按钮","收缩");
-                    Message msg = new Message();
-                    msg.what = HOME;
-                    mHandler.sendMessage(msg);
-                    //initRetractAnim();
-                }
-            }
-        }, 3000, 3 * 1000);
-    }
-
-
-    /**
-     * 取消倒计时
-     */
-    private void cancelTimer(){
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-            isTimerRunning = false;
-        }
-    }
-
-
 
     /**
      * 是当某个按键被按下是触发。所以也有人在点击返回键的时候去执行该方法来做判断

@@ -1,4 +1,4 @@
-package com.ns.yc.lifehelper.ui.me.view;
+package com.ns.yc.lifehelper.ui.me.view.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,15 +11,9 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.IntentUtils;
 import com.ns.yc.lifehelper.R;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.lifehelper.ui.me.contract.MeFragmentContract;
-import com.ns.yc.lifehelper.ui.me.presenter.MeFragmentPresenter;
-import com.ns.yc.lifehelper.ui.me.view.activity.IndexJsActivity;
 import com.ns.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
-import com.ns.yc.lifehelper.ui.me.view.activity.MePersonActivity;
-import com.ns.yc.lifehelper.ui.me.view.activity.MeTimerActivity;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.utils.AppToolUtils;
 
@@ -34,8 +28,7 @@ import com.ycbjie.library.utils.AppToolUtils;
  *             v1.5 17年10月3日修改
  * </pre>
  */
-public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
-        View.OnClickListener , MeFragmentContract.View{
+public class MeFragment extends BaseFragment implements View.OnClickListener{
 
 
     private LinearLayout mLlPerson;
@@ -50,10 +43,7 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
     private RelativeLayout mRlMeFeedBack;
     private LinearLayout mRlMePhone;
     private TextView mTvMePhoneNumber;
-
-
     private MainActivity activity;
-    private MeFragmentContract.Presenter presenter = new MeFragmentPresenter(this);
 
     @Override
     public void onAttach(Context context) {
@@ -121,17 +111,15 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
 
     @Override
     public void initData() {
-        presenter.getRedHotMessageData();
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rl_me_timer:
-                startActivity(MeTimerActivity.class);
                 break;
             case R.id.rl_me_qone:
-                startActivity(IndexJsActivity.class);
                 break;
             case R.id.rl_me_project:
                 ARouterUtils.navigation(RouterConfig.Love.ACTIVITY_LOVE_ACTIVITY);
@@ -146,11 +134,7 @@ public class MeFragment extends BaseFragment<MeFragmentPresenter> implements
                 toCallMe();
                 break;
             case R.id.iv_person_image:
-                if(AppConfig.INSTANCE.isLogin()){
-                    startActivity(MePersonActivity.class);
-                }else {
-                    startActivity(MeLoginActivity.class);
-                }
+                startActivity(MeLoginActivity.class);
                 break;
             default:
                 break;

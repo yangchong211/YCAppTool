@@ -14,7 +14,6 @@ import com.ns.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
 import com.ns.yc.lifehelper.base.adapter.BaseDelegateAdapter;
 import com.ns.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.ns.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
-import com.ns.yc.lifehelper.ui.guide.view.activity.SelectFollowActivity;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.configlayer.arounter.ARouterUtils;
@@ -258,7 +257,6 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_SNAPHELPER_ACTIVITY);
                 break;
             case 2:
-                ActivityUtils.startActivity(SelectFollowActivity.class);
                 break;
             case 3:
                 ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_BOOK_DOODLE_ACTIVITY);

@@ -51,7 +51,6 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
     TextView tvQqLogin;
     TextView tvSinaLogin;
 
-    private boolean progressShow;
     private static final String TAG = "MeLoginActivity";
 
 
@@ -97,7 +96,6 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void initListener() {
         llTitleMenu.setOnClickListener(this);
-        tvPersonRegister.setOnClickListener(this);
         btnPersonLogin.setOnClickListener(this);
     }
 
@@ -112,9 +110,6 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()){
             case R.id.ll_title_menu:
                 finish();
-                break;
-            case R.id.tv_person_register:
-                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_REGISTER_ACTIVITY);
                 break;
             case R.id.btn_person_login:
                 goToLogin();
@@ -169,7 +164,6 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
             ToastUtils.showToast("密码不能为空");
             return;
         }
-        progressShow = true;
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setCanceledOnTouchOutside(false);
         pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -177,7 +171,6 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onCancel(DialogInterface dialog) {
                 LogUtils.e(TAG +"EMClient.getInstance().onCancel");
-                progressShow = false;
                 MainActivity.startActivity(MeLoginActivity.this,MainActivity.USER);
             }
         });

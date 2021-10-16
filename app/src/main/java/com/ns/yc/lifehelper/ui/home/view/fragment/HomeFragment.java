@@ -25,7 +25,6 @@ import com.ns.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.ns.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.ns.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
 import com.ns.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.yccardviewlib.CardViewLayout;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
@@ -72,7 +71,6 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
     private MarqueeView marqueeView;
     private HomeBlogAdapter adapter;
     private View headerView;
-    private CardViewLayout cardViewLayout;
 
 
     private HandlerUtils.HandlerReference handler = new HandlerUtils.HandlerReference(
@@ -81,15 +79,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
         public void handlerMessage(Message msg) {
             switch (msg.what){
                 case 1:
-                    if (cardViewLayout!=null){
-                        cardViewLayout.setVisibility(View.VISIBLE);
-                    }
-                    updateGalleryView();
                     break;
                 case 2:
-                    if (cardViewLayout!=null){
-                        cardViewLayout.setVisibility(View.GONE);
-                    }
                     break;
                 default:
                     break;
@@ -207,7 +198,6 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 TextView tvHomeThird = header.findViewById(R.id.tv_home_third);
                 TextView tvHomeFour = header.findViewById(R.id.tv_home_four);
                 marqueeView = header.findViewById(R.id.marqueeView);
-                cardViewLayout = header.findViewById(R.id.cardView);
                 View.OnClickListener listener = v -> {
                     if (FastClickUtils.isFastDoubleClick()){
                         return;
@@ -309,61 +299,6 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
             handler.sendEmptyMessageAtTime(2,200);
         }
     }
-
-
-    private void updateGalleryView() {
-        if(cardViewLayout==null || bitmaps==null || bitmaps.size()==0){
-            return;
-        }
-        cardViewLayout.setAdapter(new CardViewLayout.Adapter() {
-
-            private SoftReference<Bitmap> bitmapSoftReference;
-
-            class ViewHolder {
-                ImageView imageView;
-            }
-
-            @Override
-            public int getLayoutId() {
-                return R.layout.item_card_layout;
-            }
-
-            @Override
-            public void bindView(View view, int position) {
-                ViewHolder viewHolder = (ViewHolder) view.getTag();
-                if (viewHolder == null) {
-                    viewHolder = new ViewHolder();
-                    viewHolder.imageView = view.findViewById(R.id.imageView);
-                    view.setTag(viewHolder);
-                }
-                Bitmap bitmap = bitmaps.get(position);
-                //正常是用来处理图片这种占用内存大的情况
-                bitmapSoftReference = new SoftReference<>(bitmap);
-                if(bitmapSoftReference.get() != null) {
-                    viewHolder.imageView.setImageBitmap(bitmapSoftReference.get());
-                } else {
-                    viewHolder.imageView.setImageBitmap(bitmap);
-                }
-            }
-
-            @Override
-            public int getItemCount() {
-                return bitmaps==null ? 0 : bitmaps.size();
-            }
-
-            @Override
-            public void displaying(int position) {
-
-            }
-
-            @Override
-            public void onItemClick(View view, int position) {
-                super.onItemClick(view, position);
-                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_GALLERY_ACTIVITY);
-            }
-        });
-    }
-
 
 
     private static final String QQ_URL = "http://android.myapp.com/myapp/detail.htm?apkName=com.zero2ipo.harlanhu.pedaily";

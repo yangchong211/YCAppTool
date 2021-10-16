@@ -12,6 +12,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
+import com.ns.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.banner.adapter.AbsDynamicPagerAdapter;
 import com.yc.configlayer.bean.HomeBlogEntity;
@@ -86,7 +87,7 @@ public class SplashPagerActivity extends BaseActivity {
     @Override
     public void initListener() {
         btnGo.setOnClickListener(v -> {
-            ActivityUtils.startActivity(SelectFollowActivity.class);
+            ActivityUtils.startActivity(MainActivity.class);
             finish();
             SPUtils.getInstance(Constant.SP_NAME).put(Constant.KEY_FIRST_SPLASH, false);
         });
