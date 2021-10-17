@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.v4.util.LongSparseArray;
 
 import com.blankj.utilcode.util.Utils;
-import com.ns.yc.ycutilslib.activityManager.AppManager;
+import com.yc.toolutils.activity.ActivityManager;
 import com.ycbjie.music.model.bean.AudioBean;
 import com.ycbjie.music.model.bean.DownloadMusicInfo;
 import com.ycbjie.music.model.bean.OnLineSongListInfo;
@@ -124,7 +124,7 @@ public class BaseAppHelper {
 
     public boolean checkServiceAlive() {
         if (BaseAppHelper.get().getMusicService() == null) {
-            AppManager.getAppManager().finishActivity(MusicActivity.class);
+            ActivityManager.getInstance().remove(MusicActivity.class);
             return false;
         }
         return true;

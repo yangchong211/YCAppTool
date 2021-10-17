@@ -23,7 +23,6 @@ import com.yc.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
 import com.yc.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.yc.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
 import com.yc.yc.lifehelper.ui.home.view.adapter.HomeBlogAdapter;
-import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
@@ -64,7 +63,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
     private YCRefreshView mRecyclerView;
     private HomeFragmentContract.Presenter presenter = new HomeFragmentPresenter(this);
     private ArrayList<Bitmap> bitmaps;
-    private MainActivity activity;
+    private Activity activity;
     private BannerView banner;
     private MarqueeView marqueeView;
     private HomeBlogAdapter adapter;
@@ -89,7 +88,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (MainActivity) context;
+        activity = (Activity) context;
         presenter.bindActivity(activity);
     }
 

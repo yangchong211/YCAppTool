@@ -5,9 +5,8 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.LocaleList;
+import android.support.v4.os.LocaleListCompat;
 import android.util.DisplayMetrics;
-
-import androidx.core.os.LocaleListCompat;
 
 import java.util.Locale;
 

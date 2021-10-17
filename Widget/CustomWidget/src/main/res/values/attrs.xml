@@ -6,5 +6,12 @@
         <attr format="integer" name="pet_iconHide"/>
     </declare-styleable>
 
+    <declare-styleable name="MultiEditInputView">
+        <attr format="integer" name="maxCount"/>
+        <attr format="boolean" name="IgnoreCnOrEn"/>
+        <attr format="string" name="hintText"/>
+        <attr format="string" name="contentText"/>
+        <attr format="dimension" name="contentHeight"/>
+    </declare-styleable>
 
 </resources>

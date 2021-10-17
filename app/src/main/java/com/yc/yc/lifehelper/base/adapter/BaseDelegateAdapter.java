@@ -2,13 +2,11 @@ package com.yc.yc.lifehelper.base.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.yc.cn.ycbaseadapterlib.adapter.BaseViewHolder;
-
+import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
 
 
 /**
@@ -45,9 +43,16 @@ public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder>
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == mViewTypeItem) {
-            return new BaseViewHolder(LayoutInflater.from(mContext).inflate(mLayoutId, parent, false));
+            MyViewHolder holder = new MyViewHolder(parent,mLayoutId);
+            return holder;
         }
         return null;
+    }
+
+    private class MyViewHolder extends BaseViewHolder<Object> {
+        public MyViewHolder(ViewGroup parent, int res) {
+            super(parent, res);
+        }
     }
 
     @Override

@@ -75,19 +75,20 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
     }
 
 
-    @Override
-    public boolean interceptBackPressed() {
-        if (activity.backHandled) {
-            if (videoPlayerFragment != null && isPlayFragmentShow) {
-                hidePlayingFragment();
-                VideoPlayerManager.instance().onBackPressed();
-                return true;
-            }else {
-                return false;
-            }
-        }
-        return false;
-    }
+
+//    @Override
+//    public boolean interceptBackPressed() {
+//        if (activity.backHandled) {
+//            if (videoPlayerFragment != null && isPlayFragmentShow) {
+//                hidePlayingFragment();
+//                VideoPlayerManager.instance().onBackPressed();
+//                return true;
+//            }else {
+//                return false;
+//            }
+//        }
+//        return false;
+//    }
 
 
     @Override

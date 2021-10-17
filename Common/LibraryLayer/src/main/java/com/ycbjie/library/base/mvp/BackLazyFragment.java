@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ns.yc.ycutilslib.fragmentBack.BackHandledFragment;
+import com.yc.fragmentlib.BackHandledFragment;
 
 /**
  * <pre>
@@ -20,7 +21,7 @@ import com.ns.yc.ycutilslib.fragmentBack.BackHandledFragment;
  *     revise:
  * </pre>
  */
-public abstract class BackLazyFragment extends BackHandledFragment {
+public abstract class BackLazyFragment extends Fragment {
 
     /**
      * 懒加载过

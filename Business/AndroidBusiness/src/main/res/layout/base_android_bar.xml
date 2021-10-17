@@ -35,7 +35,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_arrow_back" />
+            android:src="@drawable/ic_back_white" />
     </FrameLayout>
 
     <!--中间标题-->

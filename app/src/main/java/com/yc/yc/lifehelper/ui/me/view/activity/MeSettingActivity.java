@@ -13,11 +13,11 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.ns.yc.lifehelper.R;
+import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading;
+import com.yc.widget.switchButton.SwitchButton;
 import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.yc.yc.lifehelper.ui.me.presenter.MeSettingPresenter;
-import com.ns.yc.ycutilslib.loadingDialog.ViewLoading;
-import com.ns.yc.ycutilslib.switchButton.SwitchButton;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
@@ -165,7 +165,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
                 presenter.goToStar(this);
                 break;
             case R.id.ll_pic_quality:
-                if (switchPic.isChecked()) {
+                if (switchPic.isOpened()) {
                     presenter.showPicQualityDialog(this);
                 } else {
                     ToastUtils.showRoundRectToast("请开启显示缩略图");
@@ -203,8 +203,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
     }
 
 
-    @Override
-    public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+    private void onCheckedChanged(SwitchButton view, boolean isChecked) {
         switch (view.getId()) {
             case R.id.switch_button:
 
@@ -213,20 +212,20 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
 
                 break;
             case R.id.switch_pic:
-                switchPic.setChecked(isChecked);
+                switchPic.setOpened(isChecked);
                 presenter.saveIsListShowImg(isChecked);
                 break;
             case R.id.switch_random:
-                if (switchGirl.isChecked()) {
-                    switchRandom.setChecked(isChecked);
+                if (switchGirl.isOpened()) {
+                    switchRandom.setOpened(isChecked);
                     presenter.saveIsLauncherShowImg(isChecked);
                 } else {
-                    switchRandom.setChecked(false);
+                    switchRandom.setOpened(false);
                     ToastUtils.showToast( "请开启启动页显示美女图");
                 }
                 break;
             case R.id.switch_girl:
-                switchGirl.setChecked(isChecked);
+                switchGirl.setOpened(isChecked);
                 presenter.saveIsLauncherAlwaysShowImg(isChecked);
                 break;
             default:
@@ -239,27 +238,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
      */
     @Override
     public void startLoading() {
-        // 添加Loading
-        mLoading = new ViewLoading(this, R.style.loading_dialog,"") {
-            @Override
-            public void loadCancel() {
-
-            }
-        };
-        if (!mLoading.isShowing()) {
-            mLoading.show();
-        }
-        PoolThread executor = AppConfig.INSTANCE.getExecutor();
-        executor.setName("load");
-        executor.setDelay(2, TimeUnit.MILLISECONDS);
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                if (mLoading != null && mLoading.isShowing()) {
-                    mLoading.dismiss();
-                }
-            }
-        });
+        ViewLoading.show(this,"load");
     }
 
 
@@ -268,7 +247,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
      */
     @Override
     public void changeSwitchState(boolean isChecked) {
-        switchPic.setChecked(isChecked);
+        switchPic.setOpened(isChecked);
     }
 
     /**
@@ -276,7 +255,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
      */
     @Override
     public void changeIsShowLauncherImgSwitchState(boolean isChecked) {
-        switchGirl.setChecked(isChecked);
+        switchGirl.setOpened(isChecked);
     }
 
     /**
@@ -284,7 +263,7 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
      */
     @Override
     public void changeIsAlwaysShowLauncherImgSwitchState(boolean isChecked) {
-        switchRandom.setChecked(isChecked);
+        switchRandom.setOpened(isChecked);
     }
 
     /**
@@ -381,4 +360,13 @@ public class MeSettingActivity extends BaseActivity<MeSettingPresenter> implemen
     }
 
 
+    @Override
+    public void toggleToOn(SwitchButton view) {
+        onCheckedChanged(view,true);
+    }
+
+    @Override
+    public void toggleToOff(SwitchButton view) {
+        onCheckedChanged(view,false);
+    }
 }

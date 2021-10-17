@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ns.yc.ycutilslib.scrollView.NoNestedScrollview
+<com.yc.widget.scrollView.NoNestedScrollview
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -192,4 +192,4 @@
 
     </LinearLayout>
 
-</com.ns.yc.ycutilslib.scrollView.NoNestedScrollview>
+</com.yc.widget.scrollView.NoNestedScrollview>

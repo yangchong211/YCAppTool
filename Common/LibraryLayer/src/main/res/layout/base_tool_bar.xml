@@ -35,7 +35,7 @@
             android:layout_width="@dimen/back_width"
             android:layout_height="@dimen/back_height"
             android:layout_gravity="center"
-            android:src="@drawable/ic_arrow_back" />
+            android:src="@drawable/ic_back_white" />
     </FrameLayout>
 
     <!--中间标题-->

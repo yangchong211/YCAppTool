@@ -1,5 +1,6 @@
 package com.yc.yc.lifehelper.ui.home.presenter;
 
+import android.app.Activity;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -13,7 +14,6 @@ import android.text.style.URLSpan;
 import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
 import com.yc.yc.lifehelper.ui.home.contract.HomeFragmentContract;
-import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.configlayer.bean.HomeBlogEntity;
 import com.ycbjie.library.api.ConstantImageApi;
 import com.ycbjie.library.base.config.AppConfig;
@@ -46,7 +46,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     private HomeFragmentContract.View mHomeView;
     @NonNull
     private CompositeSubscription mSubscriptions;
-    private MainActivity activity;
+    private Activity activity;
 
     public HomeFragmentPresenter(HomeFragmentContract.View homeView) {
         this.mHomeView = homeView;
@@ -71,7 +71,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
 
     @Override
-    public void bindActivity(MainActivity activity) {
+    public void bindActivity(Activity activity) {
         this.activity = activity;
     }
 

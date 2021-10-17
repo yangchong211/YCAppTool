@@ -10,9 +10,9 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.os.Build.VERSION;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 
 import com.yc.mocklocationlib.gpsmock.bean.LatLng;
 import com.yc.mocklocationlib.gpsmock.point.GcjPointer;

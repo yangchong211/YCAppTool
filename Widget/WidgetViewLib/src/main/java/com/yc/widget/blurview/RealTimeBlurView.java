@@ -20,7 +20,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-import com.ns.yc.ycutilslib.R;
+import com.yc.widget.R;
 
 
 /**

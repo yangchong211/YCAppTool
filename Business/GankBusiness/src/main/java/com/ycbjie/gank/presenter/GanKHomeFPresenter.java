@@ -10,7 +10,6 @@ import com.ycbjie.gank.contract.GanKHomeFContract;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
 
 /**
@@ -25,14 +24,12 @@ import rx.subscriptions.CompositeSubscription;
 public class GanKHomeFPresenter implements GanKHomeFContract.Presenter {
 
     private GanKHomeFContract.View fragmentView;
-    private CompositeSubscription mSubscriptions;
 
     private final int number = 10;
     private int mPage = 1;
 
     public GanKHomeFPresenter(GanKHomeFContract.View androidView) {
         this.fragmentView = androidView;
-        mSubscriptions = new CompositeSubscription();
     }
 
     @Override
@@ -42,7 +39,6 @@ public class GanKHomeFPresenter implements GanKHomeFContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        mSubscriptions.clear();
     }
 
     @SuppressLint("CheckResult")

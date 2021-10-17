@@ -104,5 +104,21 @@
             android:background="@color/colorAccent"
             android:padding="10dp"
             android:text="10.毛玻璃效果"/>
+        <TextView
+            android:id="@+id/tv_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:text="11.locale测试案例"/>
+        <TextView
+            android:id="@+id/tv_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:text="12.线程执行测试"/>
     </LinearLayout>
 </com.yc.widget.scrollView.NoNestedScrollview>

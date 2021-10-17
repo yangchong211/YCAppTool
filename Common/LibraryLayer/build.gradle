@@ -105,29 +105,29 @@ dependencies {
     api rootProject.ext.dependencies["router"]
 
     api rootProject.ext.dependencies["eventbus"]
-    api rootProject.ext.dependencies["takephoto"]
     api rootProject.ext.dependencies["tablayout"]
     api rootProject.ext.dependencies["utilcode"]
     api rootProject.ext.dependencies["easypermissions"]
 
     api rootProject.ext.dependencies["YCStateLib"]
     api rootProject.ext.dependencies["YCDialogLib"]
-    api rootProject.ext.dependencies["YCCountDownViewLib"]
-    api rootProject.ext.dependencies["YCUtilsLib"]
-    api rootProject.ext.dependencies["YCMultiInputViewLib"]
     api rootProject.ext.dependencies["YCProgressLib"]
     api rootProject.ext.dependencies["YCGalleryLib"]
-    api rootProject.ext.dependencies["YCBaseAdapterLib"]
     api rootProject.ext.dependencies["YCBannerLib"]
     api rootProject.ext.dependencies["YCRefreshViewLib"]
     api rootProject.ext.dependencies["YCStatusBarLib"]
     api rootProject.ext.dependencies["YCThreadPoolLib"]
     api rootProject.ext.dependencies["notificationLib"]
     api rootProject.ext.dependencies["WebViewLib"]
+    implementation project(path: ':WidgetViewLib')
+    implementation project(path: ':ToolUtilsLib')
+
 
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':HttpServer')
     implementation project(path: ':ImageServer')
+    implementation project(path: ':FragmentLib')
+    implementation project(path: ':CountTimerLib')
 }

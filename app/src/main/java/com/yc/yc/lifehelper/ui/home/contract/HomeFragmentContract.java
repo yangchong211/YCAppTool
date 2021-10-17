@@ -1,9 +1,8 @@
 package com.yc.yc.lifehelper.ui.home.contract;
 
 
+import android.app.Activity;
 import android.graphics.Bitmap;
-
-import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.configlayer.bean.HomeBlogEntity;
 import com.ycbjie.library.base.mvp.BasePresenter;
 import com.ycbjie.library.base.mvp.BaseView;
@@ -34,7 +33,7 @@ public interface HomeFragmentContract {
         void getHomeNewsData();
         ArrayList<String> getMarqueeTitle();
         List<Object> getBannerData();
-        void bindActivity(MainActivity activity);
+        void bindActivity(Activity activity);
         void getGalleryData();
     }
 

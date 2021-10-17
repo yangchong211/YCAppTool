@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 
 
-import com.ns.yc.ycutilslib.R;
+import com.yc.widget.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,9 +12,9 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
-import com.ns.yc.ycutilslib.blurView.blur.CustomBlur;
 import com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView;
 import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.widget.blurview.blur.CustomBlur;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 import com.ycbjie.other.ui.adapter.MeBannerAdapter;

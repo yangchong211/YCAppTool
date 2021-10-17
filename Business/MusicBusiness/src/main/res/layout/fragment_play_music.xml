@@ -34,7 +34,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@drawable/btn_action_bg_selector"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_arrow_back" />
+                android:src="@drawable/ic_back_white" />
 
             <LinearLayout
                 android:layout_width="0dp"

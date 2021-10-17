@@ -19,7 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
-import com.ns.yc.ycutilslib.R;
+import com.yc.widget.R;
 
 public class SwitchButton extends View {
 
@@ -431,13 +431,13 @@ public class SwitchButton extends View {
         mOnClickListener = l;
     }
 
-    public interface OnStateChangedListener {
+    public interface OnCheckedChangeListener {
         void toggleToOn(SwitchButton view);
 
         void toggleToOff(SwitchButton view);
     }
 
-    private OnStateChangedListener listener = new OnStateChangedListener() {
+    private OnCheckedChangeListener listener = new OnCheckedChangeListener() {
         @Override
         public void toggleToOn(SwitchButton view) {
             toggleSwitch(true);
@@ -449,7 +449,7 @@ public class SwitchButton extends View {
         }
     };
 
-    public void setOnStateChangedListener(OnStateChangedListener listener) {
+    public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
         if (listener == null) throw new IllegalArgumentException("empty listener");
         this.listener = listener;
     }

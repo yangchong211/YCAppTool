@@ -7,8 +7,8 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.Utils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.configlayer.constant.Constant;
+import com.yc.toolutils.activity.ActivityManager;
 import com.ycbjie.library.BuildConfig;
-import com.ycbjie.library.base.callback.BaseLifecycleCallback;
 import com.ycbjie.library.base.callback.LogCallback;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
@@ -42,7 +42,7 @@ public enum AppConfig {
         Utils.init(application);
         initThreadPool();
         ToastUtils.init(application);
-        BaseLifecycleCallback.getInstance().init(application);
+        ActivityManager.getInstance().init(application);
         initARouter();
         //1.是否是登录状态
         isLogin = SPUtils.getInstance(Constant.SP_NAME).getBoolean(Constant.KEY_IS_LOGIN, false);

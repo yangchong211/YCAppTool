@@ -27,17 +27,19 @@ import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.ns.yc.lifehelper.R;
-import com.yc.yc.lifehelper.base.comment.FragmentFactory;
+import com.yc.toolutils.activity.ActivityManager;
+import com.yc.widget.viewPager.NoSlidingViewPager;
+import com.yc.yc.lifehelper.ui.data.view.fragment.DataFragment;
+import com.yc.yc.lifehelper.ui.find.view.fragment.FindFragment;
+import com.yc.yc.lifehelper.ui.home.view.fragment.HomeFragment;
 import com.yc.yc.lifehelper.ui.main.contract.MainContract;
 import com.yc.yc.lifehelper.ui.main.presenter.MainPresenter;
-import com.ns.yc.ycutilslib.activityManager.AppManager;
-import com.ns.yc.ycutilslib.managerLeak.InputMethodManagerLeakUtils;
-import com.ns.yc.ycutilslib.viewPager.NoSlidingViewPager;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
+import com.yc.yc.lifehelper.ui.me.view.fragment.MeFragment;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
@@ -80,15 +82,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     public static final int USER = 3;
     private MainContract.Presenter presenter = new MainPresenter(this);
     private int selectIndex;
-    protected ValueAnimator mAnimExpand;
-    protected ValueAnimator mAnimReduce;
 
     @IntDef({HOME, FIND, DATA, USER})
     private @interface PageIndex {}
     public static final int REQUEST_CODE_SCAN = 0X01;
-
-    private boolean isTimerRunning = false;
-
 
     /**
      * 跳转首页* @param context     上下文
@@ -126,7 +123,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        InputMethodManagerLeakUtils.fixInputMethodManagerLeak(this);
     }
 
 
@@ -334,10 +330,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
      */
     private void initViewPager() {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(FragmentFactory.getInstance().getHomeFragment());
-        fragments.add(FragmentFactory.getInstance().getFindFragment());
-        fragments.add(FragmentFactory.getInstance().getDataFragment());
-        fragments.add(FragmentFactory.getInstance().getMeFragment());
+        fragments.add(new HomeFragment());
+        fragments.add(new FindFragment());
+        fragments.add(new DataFragment());
+        fragments.add(new MeFragment());
         BasePagerAdapter adapter = new BasePagerAdapter(getSupportFragmentManager(), fragments);
         mVpHome.setAdapter(adapter);
         mVpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -426,7 +422,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
                         ARouterUtils.navigation(RouterConfig.App.ACTIVITY_APP_SETTING_ACTIVITY);
                         break;
                     case R.id.quit:
-                        AppManager.getAppManager().appExit(false);
+                        ActivityManager.getInstance().appExist();
                         break;
                     default:
                         break;

@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg_cloud_night"/>
 
-    <com.ns.yc.yccountdownviewlib.CountDownView
+    <com.yc.timerlib.view.CountDownView
         android:id="@+id/cdv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,13 +20,13 @@
         android:layout_marginEnd="20dp"
         app:cd_animator_time="3"
         app:cd_animator_time_unit="秒"
-        app:cd_arc_color="@color/blackText"
+        app:cd_arc_color="@color/white"
         app:cd_arc_width="2dp"
-        app:cd_bg_color="@color/alpha_10_black"
+        app:cd_bg_color="@color/alpha_50_black"
         app:cd_circle_radius="20dp"
         app:cd_location="top"
         app:cd_retreat_type="forward"
-        app:cd_text_color="@color/blackText"
+        app:cd_text_color="@color/white"
         app:cd_text_size="9sp" />
 
 </FrameLayout>

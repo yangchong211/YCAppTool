@@ -12,7 +12,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
 
 /**
@@ -27,12 +26,10 @@ import rx.subscriptions.CompositeSubscription;
 public class GanKSearchPresenter implements GanKSearchContract.Presenter {
 
     private GanKSearchContract.View mView;
-    private CompositeSubscription mSubscriptions;
 
 
     public GanKSearchPresenter(GanKSearchContract.View androidView) {
         this.mView = androidView;
-        mSubscriptions = new CompositeSubscription();
     }
 
     @Override
@@ -42,7 +39,6 @@ public class GanKSearchPresenter implements GanKSearchContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        mSubscriptions.clear();
     }
 
     /**

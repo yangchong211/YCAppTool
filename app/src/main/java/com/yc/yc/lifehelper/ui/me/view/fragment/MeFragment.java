@@ -1,5 +1,6 @@
 package com.yc.yc.lifehelper.ui.me.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.IntentUtils;
 import com.ns.yc.lifehelper.R;
-import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
@@ -43,12 +43,12 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
     private RelativeLayout mRlMeFeedBack;
     private LinearLayout mRlMePhone;
     private TextView mTvMePhoneNumber;
-    private MainActivity activity;
+    private Activity activity;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (MainActivity) context;
+        activity = (Activity) context;
     }
 
     @Override

@@ -15,9 +15,9 @@ import android.widget.ImageView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.ns.yc.yccountdownviewlib.CountDownView;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.imageserver.utils.GlideImageUtils;
+import com.yc.timerlib.view.CountDownView;
 import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.music.R;
@@ -213,7 +213,7 @@ public class GuideMusicActivity extends BaseActivity implements View.OnClickList
     private void initCountDownView() {
         cdvTime.setTime(2);
         cdvTime.start();
-        cdvTime.setOnLoadingFinishListener(this::toMainActivity);
+        cdvTime.setFinishListener(this::toMainActivity);
     }
 
     private void toMainActivity() {

@@ -32,6 +32,8 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.tv_8).setOnClickListener(this);
         findViewById(R.id.tv_9).setOnClickListener(this);
         findViewById(R.id.tv_10).setOnClickListener(this);
+        findViewById(R.id.tv_11).setOnClickListener(this);
+        findViewById(R.id.tv_12).setOnClickListener(this);
     }
 
     @Override
@@ -67,6 +69,10 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             startActivity(new Intent(this, CloneAbleActivity.class));
         }else if (i == R.id.tv_10){
             startShowDialog();
+        } else if (i == R.id.tv_11){
+            startActivity(new Intent(this, LocaleActivity.class));
+        } else if (i == R.id.tv_12){
+            startActivity(new Intent(this, SerialTaskActivity.class));
         }
     }
 

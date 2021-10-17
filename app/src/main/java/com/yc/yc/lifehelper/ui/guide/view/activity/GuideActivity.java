@@ -7,10 +7,10 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.ns.yc.lifehelper.R;
+import com.yc.timerlib.view.CountDownView;
 import com.yc.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.yc.yc.lifehelper.ui.guide.presenter.GuidePresenter;
 import com.yc.yc.lifehelper.ui.main.view.MainActivity;
-import com.ns.yc.yccountdownviewlib.CountDownView;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.ycbjie.library.base.mvp.BaseActivity;
 
@@ -92,7 +92,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements
     private void initCountDownView() {
         cdvTime.setTime(5);
         cdvTime.start();
-        cdvTime.setOnLoadingFinishListener(this::toMainActivity);
+        cdvTime.setFinishListener(this::toMainActivity);
     }
 
     private void toMainActivity() {

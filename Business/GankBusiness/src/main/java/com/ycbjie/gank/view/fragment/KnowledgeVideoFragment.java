@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ns.yc.ycutilslib.fragmentBack.BackHandledFragment;
+import com.yc.fragmentlib.BackHandledFragment;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.view.activity.MyKnowledgeActivity;
 import com.ycbjie.webviewlib.view.X5WebView;

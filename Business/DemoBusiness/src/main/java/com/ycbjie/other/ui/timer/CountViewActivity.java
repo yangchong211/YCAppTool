@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.ycbjie.other.R;
 import android.support.annotation.Nullable;
-import com.yc.timerlib.TimerTextView;
+import com.yc.timerlib.view.TimerTextView;
 
 public class CountViewActivity extends AppCompatActivity implements View.OnClickListener {
 

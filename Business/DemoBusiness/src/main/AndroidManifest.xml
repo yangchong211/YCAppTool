@@ -24,6 +24,8 @@
         <activity android:name=".ui.timer.CountActivity"/>
         <activity android:name=".ui.timer.CountViewActivity"/>
         <activity android:name=".ui.timer.HandlerActivity"/>
+        <activity android:name=".ui.activity.LocaleActivity"/>
+        <activity android:name=".ui.activity.SerialTaskActivity"/>
     </application>
 
 

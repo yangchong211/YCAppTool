@@ -9,8 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.ns.yc.ycutilslib.fragmentBack.BackHandlerHelper;
 import com.yc.configlayer.arounter.RouterConfig;
+import com.yc.fragmentlib.BackHandlerHelper;
 import com.ycbjie.library.base.adapter.BasePagerAdapter;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.video.R;

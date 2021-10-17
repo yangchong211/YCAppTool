@@ -1,5 +1,6 @@
 package com.yc.yc.lifehelper.ui.data.view.adapter;
 
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -7,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ns.yc.lifehelper.R;
-import com.yc.yc.lifehelper.ui.main.view.MainActivity;
-
 import java.util.ArrayList;
 
 /**
@@ -24,9 +23,9 @@ public class DataToolAdapter extends BaseAdapter {
 
     private String[] toolName;
     private ArrayList<Integer> toolLogo;
-    private MainActivity activity;
+    private Activity activity;
 
-    public DataToolAdapter(MainActivity activity, String[] toolName, ArrayList<Integer> toolLogo) {
+    public DataToolAdapter(Activity activity, String[] toolName, ArrayList<Integer> toolLogo) {
         this.activity = activity;
         this.toolName = toolName;
         this.toolLogo = toolLogo;

@@ -17,7 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Checkable;
 
-import com.ns.yc.ycutilslib.R;
+import com.yc.widget.R;
 
 
 /**

@@ -61,7 +61,6 @@ ext {
                 //image
                 "glide"                    : "com.github.bumptech.glide:glide:${version["glideSdkVersion"]}",
                 "glide-compiler"           : "com.github.bumptech.glide:compiler:${version["glideSdkVersion"]}",
-                "takephoto"                : "com.jph.takephoto:takephoto_library:4.0.3",
 
                 //view
                 "tablayout"                 : "com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar",
@@ -69,13 +68,9 @@ ext {
                 //yc
                 "YCStateLib"                  : "cn.yc:YCStateLib:1.2.2",
                 "YCDialogLib"                 : "cn.yc:YCDialogLib:3.6.6",
-                "YCCountDownViewLib"          : "cn.yc:YCCountDownViewLib:1.0",
-                "YCUtilsLib"                  : "cn.yc:YCUtilsLib:1.6.2",
-                "YCMultiInputViewLib"         : "cn.yc:YCMultiInputViewLib:1.0",
                 "YCProgressLib"               : "cn.yc:YCProgressLib:1.2.7",
                 "YCCustomTextLib"             : "cn.yc:YCCustomTextLib:2.1.4",
                 "YCGalleryLib"                : "cn.yc:YCGalleryLib:1.1.5",
-                "YCBaseAdapterLib"            : "cn.yc:YCBaseAdapterLib:1.3.4",
                 "YCBannerLib"                 : "cn.yc:YCBannerLib:1.4.0",
                 "YCRefreshViewLib"            : "org.yczbj:YCRefreshViewLib:2.5.6",
                 "YCStatusBarLib"              : "cn.yc:YCStatusBarLib:1.5.0",
@@ -84,7 +79,6 @@ ext {
                 "notificationLib"             : "cn.yc:notificationLib:1.0.3",
                 "WebViewLib"                  : "cn.yc:WebViewLib:1.4.1",
                 "YCAndroidTool"               : "cn.yc:ToolLib:1.2.1",
-                "zoomImageLib"                : "cn.yc:zoomImageLib:1.0.1",
 
                 //tools
                 "eventbus"                  : "org.greenrobot:eventbus:3.0.0",

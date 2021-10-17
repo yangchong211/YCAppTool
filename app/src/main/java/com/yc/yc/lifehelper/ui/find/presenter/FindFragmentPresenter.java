@@ -1,6 +1,7 @@
 package com.yc.yc.lifehelper.ui.find.presenter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -19,7 +20,6 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
 import com.yc.yc.lifehelper.base.adapter.BaseDelegateAdapter;
 import com.yc.yc.lifehelper.ui.find.contract.FindFragmentContract;
-import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
 import com.yc.cn.ycbaseadapterlib.adapter.BaseViewHolder;
@@ -48,7 +48,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
 
     private FindFragmentContract.View mView;
     private CompositeSubscription mSubscriptions;
-    private MainActivity activity;
+    private Activity activity;
 
     public FindFragmentPresenter(FindFragmentContract.View androidView) {
         this.mView = androidView;
@@ -72,7 +72,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
     }
 
     @Override
-    public void bindActivity(MainActivity activity) {
+    public void bindActivity(Activity activity) {
         this.activity = activity;
     }
 

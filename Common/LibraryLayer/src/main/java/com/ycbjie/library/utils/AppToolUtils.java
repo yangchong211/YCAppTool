@@ -5,7 +5,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 
-import com.ns.yc.ycutilslib.rippleLayout.MaterialRippleLayout;
+
+import com.yc.widget.rippleLayout.MaterialRippleLayout;
 
 import java.util.List;
 

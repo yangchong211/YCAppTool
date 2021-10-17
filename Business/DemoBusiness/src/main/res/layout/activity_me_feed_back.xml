@@ -7,7 +7,7 @@
 
     <include layout="@layout/base_tool_bar"/>
 
-    <com.ns.yc.ycmultiinputviewlib.MultiEditInputView
+    <com.yc.customwidget.MultiEditInputView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/mev_view"
         android:layout_width="match_parent"

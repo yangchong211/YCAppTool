@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerWidget.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/BaseLayer/LifeHelper.BaseLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/common/BaseLayer/LifeHelper.BaseLayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/BusinessInterface/LifeHelper.BusinessInterface.iml" filepath="$PROJECT_DIR$/.idea/modules/business/BusinessInterface/LifeHelper.BusinessInterface.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/CommonLayer/LifeHelper.CommonLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/CommonLayer/LifeHelper.CommonLayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/ConfigLayer/LifeHelper.ConfigLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/ConfigLayer/LifeHelper.ConfigLayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/CustomWidget/LifeHelper.CustomWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/CustomWidget/LifeHelper.CustomWidget.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/DemoBusiness/LifeHelper.DemoBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/DemoBusiness/LifeHelper.DemoBusiness.iml" />
@@ -27,6 +26,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/ToolLayer/LifeHelper.ToolLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/ToolLayer/LifeHelper.ToolLayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/VideoBusiness/LifeHelper.VideoBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/VideoBusiness/LifeHelper.VideoBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/XlogServer/LifeHelper.XlogServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/XlogServer/LifeHelper.XlogServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/ZoomImageLib/LifeHelper.ZoomImageLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/ZoomImageLib/LifeHelper.ZoomImageLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ZxingServer/LifeHelper.ZxingServerLib.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ZxingServer/LifeHelper.ZxingServerLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/CountTimerLib/Tool.LifeHelper.CountTimerLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/CountTimerLib/Tool.LifeHelper.CountTimerLib.iml" />

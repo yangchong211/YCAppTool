@@ -5,13 +5,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.ycbjie.other.R;
 import android.support.annotation.Nullable;
-import com.yc.timerlib.CountDownTimer;
-import com.yc.timerlib.CountTimeTools;
-import com.yc.timerlib.TimerListener;
+import com.yc.timerlib.timer.CountDownTimer;
+import com.yc.timerlib.timer.CountTimeTools;
+import com.yc.timerlib.timer.TimerListener;
 
 public class MyCountActivity extends AppCompatActivity implements View.OnClickListener {
 

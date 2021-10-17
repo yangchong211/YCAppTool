@@ -72,5 +72,6 @@ dependencies {
     implementation project(path: ':ToolLayer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':LibraryLayer')
+    implementation project(path: ':FragmentLib')
 }
 

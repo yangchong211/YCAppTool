@@ -11,7 +11,7 @@
 
     <include layout="@layout/base_tool_bar"/>
 
-    <com.ns.yc.ycutilslib.scrollView.BounceScrollView
+    <com.yc.widget.scrollView.BounceScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -58,7 +58,7 @@
                 <TextView
                     style="@style/MeInfoTextLeftStyle"
                     android:text="显示缩略图"/>
-                <com.ns.yc.ycutilslib.switchButton.SwitchButton
+                <com.yc.widget.switchButton.SwitchButton
                     android:id="@+id/switch_pic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 <TextView
                     style="@style/MeInfoTextLeftStyle"
                     android:text="启动页是否显示美女图"/>
-                <com.ns.yc.ycutilslib.switchButton.SwitchButton
+                <com.yc.widget.switchButton.SwitchButton
                     android:id="@+id/switch_girl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                     android:id="@+id/tv_girl"
                     style="@style/MeInfoTextLeftStyle"
                     android:text="美女图片随机出现"/>
-                <com.ns.yc.ycutilslib.switchButton.SwitchButton
+                <com.yc.widget.switchButton.SwitchButton
                     android:id="@+id/switch_random"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
                 <TextView
                     style="@style/MeInfoTextLeftStyle"
                     android:text="推送开关"/>
-                <com.ns.yc.ycutilslib.switchButton.SwitchButton
+                <com.yc.widget.switchButton.SwitchButton
                     android:id="@+id/switch_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                 <TextView
                     style="@style/MeInfoTextLeftStyle"
                     android:text="夜间模式"/>
-                <com.ns.yc.ycutilslib.switchButton.SwitchButton
+                <com.yc.widget.switchButton.SwitchButton
                     android:id="@+id/switch_night"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -384,7 +384,7 @@
                 android:text="退出登录"/>
 
         </LinearLayout>
-    </com.ns.yc.ycutilslib.scrollView.BounceScrollView>
+    </com.yc.widget.scrollView.BounceScrollView>
 
 
 </LinearLayout>

@@ -10,9 +10,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Basis/CommonLayer" />
-            <option value="$PROJECT_DIR$/Basis/ConfigLayer" />
-            <option value="$PROJECT_DIR$/Basis/ToolLayer" />
             <option value="$PROJECT_DIR$/Business/AndroidBusiness" />
             <option value="$PROJECT_DIR$/Business/BusinessInterface" />
             <option value="$PROJECT_DIR$/Business/DemoBusiness" />
@@ -22,7 +19,9 @@
             <option value="$PROJECT_DIR$/Business/MusicBusiness" />
             <option value="$PROJECT_DIR$/Business/VideoBusiness" />
             <option value="$PROJECT_DIR$/Common/BaseLayer" />
+            <option value="$PROJECT_DIR$/Common/ConfigLayer" />
             <option value="$PROJECT_DIR$/Common/LibraryLayer" />
+            <option value="$PROJECT_DIR$/Common/ToolLayer" />
             <option value="$PROJECT_DIR$/Server/HttpServer" />
             <option value="$PROJECT_DIR$/Server/ImageServer" />
             <option value="$PROJECT_DIR$/Server/NfcServer" />
@@ -45,6 +44,7 @@
             <option value="$PROJECT_DIR$/Widget/FragmentLib" />
             <option value="$PROJECT_DIR$/Widget/PhotoWidget" />
             <option value="$PROJECT_DIR$/Widget/WidgetViewLib" />
+            <option value="$PROJECT_DIR$/Widget/ZoomImageLib" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

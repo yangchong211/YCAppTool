@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yc.timerlib.CountTimeTools;
+import com.yc.timerlib.timer.CountTimeTools;
 import com.ycbjie.other.R;
 
 public class CountActivity extends AppCompatActivity implements View.OnClickListener {

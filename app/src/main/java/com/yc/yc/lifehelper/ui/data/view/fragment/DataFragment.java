@@ -1,5 +1,6 @@
 package com.yc.yc.lifehelper.ui.data.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -25,7 +26,6 @@ import com.yc.yc.lifehelper.ui.data.presenter.DataFragmentPresenter;
 import com.yc.yc.lifehelper.ui.data.view.adapter.DataToolAdapter;
 import com.yc.yc.lifehelper.ui.data.view.adapter.NarrowImageAdapter;
 import com.yc.yc.lifehelper.ui.data.view.adapter.ViewPagerGridAdapter;
-import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.cn.ycbannerlib.snap.ScrollPageHelper;
 import com.yc.configlayer.arounter.ARouterUtils;
@@ -65,14 +65,14 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
     private TextView mTvNewsZhiHu;
     private YCRefreshView mRecyclerView;
     private MyGridView mGridView;
-    private MainActivity activity;
+    private Activity activity;
     private NarrowImageAdapter adapter;
     private DataFragmentContract.Presenter presenter = new DataFragmentPresenter(this);
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (MainActivity) context;
+        activity = (Activity) context;
     }
 
     @Override

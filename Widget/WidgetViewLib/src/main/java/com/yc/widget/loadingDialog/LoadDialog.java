@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.ns.yc.ycutilslib.R;
+import com.yc.widget.R;
 
 
 /**
@@ -43,9 +43,9 @@ public class LoadDialog extends Dialog {
         this.canNotCancel = canNotCancel;
         this.tipMsg = tipMsg;
         this.getContext().setTheme(android.R.style.Theme_InputMethod);
-        setContentView(R.layout.layout_progress_loading);
+        setContentView(R.layout.layout_dialog_loading);
 
-        TextView mShowMessage = (TextView) findViewById(R.id.show_message);
+        TextView mShowMessage = (TextView) findViewById(R.id.message);
         if(showMsg){
             mShowMessage.setVisibility(View.VISIBLE);
             if (!TextUtils.isEmpty(this.tipMsg)) {

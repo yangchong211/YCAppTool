@@ -5,8 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 
+import com.yc.widget.loadingDialog.LoadDialog;
 import com.yc.yc.lifehelper.ui.me.contract.MeSettingContract;
-import com.ns.yc.ycutilslib.loadingDialog.LoadDialog;
 import com.yc.toollayer.GoToScoreUtils;
 import com.yc.toollayer.file.FileCacheUtils;
 import com.ycbjie.library.base.config.AppConfig;

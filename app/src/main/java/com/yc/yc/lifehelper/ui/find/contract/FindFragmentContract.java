@@ -1,11 +1,11 @@
 package com.yc.yc.lifehelper.ui.find.contract;
 
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.yc.yc.lifehelper.base.adapter.BaseDelegateAdapter;
-import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.ycbjie.library.base.mvp.BasePresenter;
 import com.ycbjie.library.base.mvp.BaseView;
@@ -49,7 +49,7 @@ public interface FindFragmentContract {
         BaseDelegateAdapter initList3();
         BaseDelegateAdapter initList4();
         BaseDelegateAdapter initList5();
-        void bindActivity(MainActivity activity);
+        void bindActivity(Activity activity);
     }
 
 

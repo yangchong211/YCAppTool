@@ -9,7 +9,7 @@
     android:padding="10dp">
 
 
-    <com.yc.timerlib.TimerTextView
+    <com.yc.timerlib.view.TimerTextView
         android:id="@+id/tv_count"
         android:layout_width="match_parent"
         android:layout_height="48dp"

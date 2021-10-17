@@ -1,5 +1,6 @@
 package com.yc.yc.lifehelper.ui.find.view.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +14,6 @@ import com.yc.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
 import com.yc.yc.lifehelper.base.adapter.BaseDelegateAdapter;
 import com.yc.yc.lifehelper.ui.find.contract.FindFragmentContract;
 import com.yc.yc.lifehelper.ui.find.presenter.FindFragmentPresenter;
-import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.cn.ycbannerlib.banner.BannerView;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
@@ -38,7 +38,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         FindFragmentContract.View {
 
     private RecyclerView mRecyclerView;
-    private MainActivity activity;
+    private Activity activity;
     private FindFragmentContract.Presenter presenter = new FindFragmentPresenter(this);
     private List<DelegateAdapter.Adapter> mAdapters;
     private BannerView mBanner;
@@ -46,7 +46,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity = (MainActivity) context;
+        activity = (Activity) context;
         presenter.bindActivity(activity);
     }
 

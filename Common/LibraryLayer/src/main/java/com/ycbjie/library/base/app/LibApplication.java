@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
-import com.bumptech.glide.Glide;
 import com.yc.businessinterface.BusinessTransfer;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.toollib.crash.CrashHandler;
@@ -69,7 +68,6 @@ public class LibApplication extends Application {
     public void onLowMemory() {
         Log.d("Application", "onLowMemory");
         super.onLowMemory();
-        Glide.get(this).clearMemory();
     }
 
 
@@ -81,10 +79,6 @@ public class LibApplication extends Application {
     public void onTrimMemory(int level) {
         Log.d("Application", "onTrimMemory");
         super.onTrimMemory(level);
-        if (level == TRIM_MEMORY_UI_HIDDEN){
-            Glide.get(this).clearMemory();
-        }
-        Glide.get(this).trimMemory(level);
     }
 
 

@@ -3,8 +3,8 @@ package com.yc.mocklocationlib.gpsmock.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 
-import androidx.annotation.Nullable;
 
 public final class SharedPrefsUtil {
 
