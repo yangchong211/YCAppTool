@@ -62,6 +62,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
+    api rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    api rootProject.ext.dependencies["rxrelay"]
+
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':ToolLayer')

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/AnimBusiness/Business.LifeHelper.AnimBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/AnimBusiness/Business.LifeHelper.AnimBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LifeHelper.iml" filepath="$PROJECT_DIR$/.idea/modules/LifeHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/AndroidBusiness/LifeHelper.AndroidBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/AndroidBusiness/LifeHelper.AndroidBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerWidget.iml" />
@@ -15,7 +16,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/HttpServer/LifeHelper.HttpServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/HttpServer/LifeHelper.HttpServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ImageServer/LifeHelper.ImageServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ImageServer/LifeHelper.ImageServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/LoveBusiness/LifeHelper.LoveBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/LoveBusiness/LifeHelper.LoveBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MapLocationLib/LifeHelper.MapLocationLib.iml" filepath="$PROJECT_DIR$/.idea/modules/MapLocationLib/LifeHelper.MapLocationLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/MusicBusiness/LifeHelper.MusicBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/MusicBusiness/LifeHelper.MusicBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/NetHelperLib/LifeHelper.NetHelperLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/NetHelperLib/LifeHelper.NetHelperLib.iml" />
@@ -29,6 +29,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/ZoomImageLib/LifeHelper.ZoomImageLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/ZoomImageLib/LifeHelper.ZoomImageLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ZxingServer/LifeHelper.ZxingServerLib.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ZxingServer/LifeHelper.ZxingServerLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/AnimatorLib/Tool.LifeHelper.AnimatorToolLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/AnimatorLib/Tool.LifeHelper.AnimatorToolLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/CountTimerLib/Tool.LifeHelper.CountTimerLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/CountTimerLib/Tool.LifeHelper.CountTimerLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/LocaleHelperLib/Tool.LifeHelper.LocaleHelperLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/LocaleHelperLib/Tool.LifeHelper.LocaleHelperLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/MapToolLib/Tool.LifeHelper.MapToolLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/MapToolLib/Tool.LifeHelper.MapToolLib.iml" />

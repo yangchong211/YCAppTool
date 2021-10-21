@@ -61,7 +61,6 @@
                 android:id="@+id/btn_action"
                 android:layout_width="82dp"
                 android:layout_height="82dp"
-                android:background="@drawable/bg_lucky_monkey_go"
                 android:text="开始"
                 android:layout_centerInParent="true"
                 android:textColor="#4d1c01"

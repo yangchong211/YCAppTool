@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="line_rotate_duration">300</integer>
+    <integer name="line_translate_duration">100</integer>
+    <integer name="line_translate_delay_duration">200</integer>
+</resources>

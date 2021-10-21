@@ -3,15 +3,15 @@ include ':app'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
-include ':GameBusiness', ':AndroidBusiness', ':LoveBusiness', ':MusicBusiness',
+include ':GameBusiness', ':AndroidBusiness', ':MusicBusiness',':AnimBusiness',
         ':VideoBusiness', ':GankBusiness', ':DemoBusiness', ':BusinessInterface'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
-project(':LoveBusiness').projectDir = new File('Business/LoveBusiness')
 project(':MusicBusiness').projectDir = new File('Business/MusicBusiness')
 project(':VideoBusiness').projectDir = new File('Business/VideoBusiness')
 project(':GankBusiness').projectDir = new File('Business/GankBusiness')
 project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
+project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
 project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 
 /* +++++++++ 框架业务服务层 +++++++++ */
@@ -47,7 +47,8 @@ project(':ZoomImageLib').projectDir = new File('Widget/ZoomImageLib')
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib', ':ToolUtilsLib', ':SocketIoLib', ':SerialTaskLib' ,
-        ':NetHelperLib', ':MapToolLib' ,':LocaleHelperLib' ,':CountTimerLib' ,':MapLocationLib'
+        ':NetHelperLib', ':MapToolLib' ,':LocaleHelperLib' ,':CountTimerLib' ,':MapLocationLib',
+        ':AnimatorToolLib'
 project(':ZxingServerLib').projectDir = new File('Tool/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('Tool/WebSocketLib')
 project(':ToolUtilsLib').projectDir = new File('Tool/ToolUtilsLib')
@@ -58,5 +59,5 @@ project(':MapToolLib').projectDir = new File('Tool/MapToolLib')
 project(':LocaleHelperLib').projectDir = new File('Tool/LocaleHelperLib')
 project(':CountTimerLib').projectDir = new File('Tool/CountTimerLib')
 project(':MapLocationLib').projectDir = new File('Tool/MapLocationLib')
-
+project(':AnimatorToolLib').projectDir = new File('Tool/AnimatorToolLib')
 

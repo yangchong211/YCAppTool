@@ -3,6 +3,9 @@ package com.ycbjie.music.ui.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -18,8 +21,8 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.widget.loadingDialog.LoadDialog;
 import com.ycbjie.library.base.mvp.BaseActivity;
@@ -260,17 +263,17 @@ public class OnlineMusicActivity extends BaseActivity implements View.OnClickLis
                 tv_title.setText(onlineMusicList.getBillboard().getName());
                 tv_update_date.setText(getString(R.string.recent_update, onlineMusicList.getBillboard().getUpdate_date()));
                 tv_comment.setText(onlineMusicList.getBillboard().getComment());
+
                 Glide.with(OnlineMusicActivity.this)
                         .load(onlineMusicList.getBillboard().getPic_s640())
-                        .asBitmap()
                         .placeholder(R.drawable.default_cover)
                         .error(R.drawable.default_cover)
                         .override(200, 200)
-                        .into(new SimpleTarget<Bitmap>() {
+                        .into(new SimpleTarget<Drawable>() {
                             @Override
-                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                                iv_cover.setImageBitmap(resource);
-                                iv_header_bg.setImageBitmap(ImageUtils.blur(resource));
+                            public void onResourceReady(@NonNull Drawable drawable, @Nullable Transition<? super Drawable> transition) {
+                                iv_cover.setImageDrawable(drawable);
+                                //iv_header_bg.setImageBitmap(ImageUtils.blur(resource));
                             }
                         });
             }

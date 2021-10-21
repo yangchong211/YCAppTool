@@ -10,7 +10,6 @@ import com.ycbjie.library.bean.TabEntity;
 
 import java.util.ArrayList;
 
-import rx.subscriptions.CompositeSubscription;
 
 
 /**
@@ -25,11 +24,9 @@ import rx.subscriptions.CompositeSubscription;
 public class MainPresenter implements MainContract.Presenter {
 
     private MainContract.View mView;
-    private CompositeSubscription mSubscriptions;
 
     public MainPresenter(MainContract.View androidView) {
         this.mView = androidView;
-        mSubscriptions = new CompositeSubscription();
     }
 
     @Override
@@ -39,7 +36,6 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        mSubscriptions.unsubscribe();
     }
 
 

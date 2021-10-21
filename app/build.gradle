@@ -184,9 +184,6 @@ static def releaseTime() {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation('com.alibaba.android:vlayout:1.2.2@aar') {
-        transitive = true
-    }
     implementation project(path: ':CustomWidget')
     implementation project(path: ':CustomWidget')
     implementation project(path: ':CountTimerLib')
@@ -207,12 +204,10 @@ dependencies {
     if (!rootProject.ext.isOtherApplication){
         implementation project(path: ':DemoBusiness')
     }
-    if (!rootProject.ext.isLoveApplication){
-        implementation project(path: ':LoveBusiness')
-    }
     if (!rootProject.ext.isVideoApplication){
         implementation project(path: ':VideoBusiness')
     }
+    implementation project(path: ':AnimBusiness')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')

@@ -5,10 +5,10 @@ ext {
     isLoveApplication = false  //爱意表达模块开关，false:作为Lib组件存在， true:作为application存在
     isVideoApplication = false  //视频模块开关，false:作为Lib组件存在， true:作为application存在
     isBookApplication = false  //book模块开关，false:作为Lib组件存在， true:作为application存在
-    isOtherApplication = false  //其他模块开关，false:作为Lib组件存在， true:作为application存在
+    isOtherApplication = true  //其他模块开关，false:作为Lib组件存在， true:作为application存在
     isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
     isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
-    isNoteApplication = false  //记事本模块开关，false:作为Lib组件存在， true:作为application存在
+    isAnimApplication = false
     isMusicApplication = false  //音乐模块开关，false:作为Lib组件存在， true:作为application存在
 
     

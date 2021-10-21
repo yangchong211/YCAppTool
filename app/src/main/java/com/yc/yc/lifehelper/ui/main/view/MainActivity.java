@@ -1,7 +1,6 @@
 package com.yc.yc.lifehelper.ui.main.view;
 
 import android.Manifest;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +29,6 @@ import com.ns.yc.lifehelper.R;
 import com.yc.toolutils.activity.ActivityManager;
 import com.yc.widget.viewPager.NoSlidingViewPager;
 import com.yc.yc.lifehelper.ui.data.view.fragment.DataFragment;
-import com.yc.yc.lifehelper.ui.find.view.fragment.FindFragment;
 import com.yc.yc.lifehelper.ui.home.view.fragment.HomeFragment;
 import com.yc.yc.lifehelper.ui.main.contract.MainContract;
 import com.yc.yc.lifehelper.ui.main.presenter.MainPresenter;
@@ -331,7 +329,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements View.On
     private void initViewPager() {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
-        fragments.add(new FindFragment());
+        fragments.add(new HomeFragment());
         fragments.add(new DataFragment());
         fragments.add(new MeFragment());
         BasePagerAdapter adapter = new BasePagerAdapter(getSupportFragmentManager(), fragments);

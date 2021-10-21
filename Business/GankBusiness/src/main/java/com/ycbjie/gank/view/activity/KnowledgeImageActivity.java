@@ -9,11 +9,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -26,11 +28,11 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.yc.configlayer.constant.Constant;
 import com.ycbjie.gank.R;
 import com.ycbjie.library.base.mvp.BaseActivity;
 
@@ -42,11 +44,6 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 
 /**
@@ -247,23 +244,12 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
                     case 0:
                         toSaveImage();
                         if(bitmap!=null){
-                            Observable<Bitmap> observable = Observable.just(bitmap);
-                            observable.map(new Func1<Bitmap, Integer>() {
-                                @Override
-                                public Integer call(Bitmap bitmap) {
-                                    WallpaperManager wallpaperManager = WallpaperManager.getInstance(KnowledgeImageActivity.this);
-                                    try {
-                                        wallpaperManager.setBitmap(bitmap);
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                        return Constant.status.error;
-                                    }
-                                    return Constant.status.success;
-                                }
-                            })
-                                    .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(callbackSubscriber);
+                            WallpaperManager wallpaperManager = WallpaperManager.getInstance(KnowledgeImageActivity.this);
+                            try {
+                                wallpaperManager.setBitmap(bitmap);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                         break;
                     case 1:
@@ -348,16 +334,16 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
             spinner.setClickable(false);
             Glide.with(KnowledgeImageActivity.this)
                     .load(imageUrl)
-                    .listener(new RequestListener<String, GlideDrawable>() {
+                    .listener(new RequestListener<Drawable>() {
                         @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
                             Toast.makeText(getApplicationContext(), "资源加载异常", Toast.LENGTH_SHORT).show();
                             spinner.setVisibility(View.GONE);
                             return false;
                         }
 
                         @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
                             spinner.setVisibility(View.GONE);
 
                             /*这里应该是加载成功后图片的高*/
@@ -459,28 +445,5 @@ public class KnowledgeImageActivity extends BaseActivity implements View.OnClick
         return path;
     }
 
-    /**
-     * 设置事件发生后的消费该事件的观察者
-     */
-    Subscriber<Integer> callbackSubscriber = new Subscriber<Integer>() {
-        @Override
-        public void onNext(Integer integer) {
-            if (integer == Constant.status.success) {
-                ToastUtils.showShort("设置失败");
-            } else {
-                ToastUtils.showShort("设置成功");
-            }
-        }
-
-        @Override
-        public void onCompleted() {
-
-        }
-
-        @Override
-        public void onError(Throwable e) {
-
-        }
-    };
 
 }

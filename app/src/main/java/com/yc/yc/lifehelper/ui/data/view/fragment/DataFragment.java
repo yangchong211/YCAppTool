@@ -17,8 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
+import com.yc.animbusiness.AnimMainActivity;
 import com.yc.yc.lifehelper.base.adapter.BaseViewPagerRollAdapter;
 import com.yc.yc.lifehelper.bean.ImageIconBean;
 import com.yc.yc.lifehelper.ui.data.contract.DataFragmentContract;
@@ -203,7 +205,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 }
                 break;
             case 4:
-
+                ActivityUtils.startActivity(AnimMainActivity.class);
                 break;
             case 5:
                 ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_BANNER_ACTIVITY);

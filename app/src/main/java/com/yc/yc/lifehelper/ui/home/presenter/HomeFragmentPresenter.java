@@ -27,7 +27,6 @@ import java.util.List;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;
-import rx.subscriptions.CompositeSubscription;
 
 
 /**
@@ -44,13 +43,10 @@ import rx.subscriptions.CompositeSubscription;
 public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
     private HomeFragmentContract.View mHomeView;
-    @NonNull
-    private CompositeSubscription mSubscriptions;
     private Activity activity;
 
     public HomeFragmentPresenter(HomeFragmentContract.View homeView) {
         this.mHomeView = homeView;
-        mSubscriptions = new CompositeSubscription();
     }
 
 
@@ -61,9 +57,6 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        if(mSubscriptions.isUnsubscribed()){
-            mSubscriptions.unsubscribe();
-        }
         if(activity!=null){
             activity = null;
         }

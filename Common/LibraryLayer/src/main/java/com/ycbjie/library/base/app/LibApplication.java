@@ -124,9 +124,16 @@ public class LibApplication extends Application {
      * 初始化网络拦截器
      */
     private void initNetwork() {
+        if (!isNetWork()){
+            return;
+        }
         NetworkTool.getInstance().init(this);
         //建议只在debug环境下显示，点击去网络拦截列表页面查看网络请求数据
         NetworkTool.getInstance().setFloat(this);
+    }
+
+    public boolean isNetWork(){
+        return true;
     }
 
     private void initSetTransfer() {

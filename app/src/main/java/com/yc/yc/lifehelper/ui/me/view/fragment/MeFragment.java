@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.IntentUtils;
 import com.ns.yc.lifehelper.R;
-import com.yc.yc.lifehelper.ui.me.view.activity.MeLoginActivity;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.ycbjie.library.base.mvp.BaseFragment;
@@ -134,7 +133,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
                 toCallMe();
                 break;
             case R.id.iv_person_image:
-                startActivity(MeLoginActivity.class);
                 break;
             default:
                 break;

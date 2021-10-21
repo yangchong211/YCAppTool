@@ -10,7 +10,6 @@ import com.yc.yc.lifehelper.ui.data.contract.DataFragmentContract;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * <pre>
@@ -26,12 +25,10 @@ import rx.subscriptions.CompositeSubscription;
 public class DataFragmentPresenter implements DataFragmentContract.Presenter {
 
     private DataFragmentContract.View mView;
-    private CompositeSubscription mSubscriptions;
 
 
     public DataFragmentPresenter(DataFragmentContract.View androidView) {
         this.mView = androidView;
-        mSubscriptions = new CompositeSubscription();
     }
 
     @Override
@@ -42,9 +39,7 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        if(mSubscriptions.isUnsubscribed()){
-            mSubscriptions.unsubscribe();
-        }
+
     }
 
 

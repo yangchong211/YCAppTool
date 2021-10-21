@@ -14,7 +14,6 @@ import com.ycbjie.library.base.config.AppConfig;
 import java.util.concurrent.TimeUnit;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * ================================================
@@ -30,13 +29,11 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
 
     private MeSettingContract.View mMeSetView;
     @NonNull
-    private CompositeSubscription mSubscriptions;
     private String[] items = {"原图", "默认", "省流"};
     private int yourChoice;
 
     public MeSettingPresenter(MeSettingContract.View meSetView) {
         this.mMeSetView = meSetView;
-        mSubscriptions = new CompositeSubscription();
     }
 
     /**
@@ -52,7 +49,6 @@ public class MeSettingPresenter implements MeSettingContract.Presenter {
      */
     @Override
     public void unSubscribe() {
-        mSubscriptions.clear();
     }
 
     /**

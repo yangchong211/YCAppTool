@@ -104,6 +104,9 @@ dependencies {
     api rootProject.ext.dependencies["rxjava2"]
     api rootProject.ext.dependencies["router"]
 
+    api rootProject.ext.dependencies["glide"]
+    //annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+
     api rootProject.ext.dependencies["eventbus"]
     api rootProject.ext.dependencies["tablayout"]
     api rootProject.ext.dependencies["utilcode"]
@@ -122,7 +125,7 @@ dependencies {
     implementation project(path: ':WidgetViewLib')
     implementation project(path: ':ToolUtilsLib')
 
-
+    api(rootProject.ext.dependencies["router"])
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':ConfigLayer')

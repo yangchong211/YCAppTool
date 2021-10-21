@@ -18,7 +18,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * <pre>
@@ -32,11 +31,9 @@ import rx.subscriptions.CompositeSubscription;
 public class GuidePresenter implements GuideContract.Presenter {
 
     private GuideContract.View mView;
-    private CompositeSubscription mSubscriptions;
 
     public GuidePresenter(GuideContract.View androidView) {
         this.mView = androidView;
-        mSubscriptions = new CompositeSubscription();
     }
 
     @Override
@@ -47,7 +44,6 @@ public class GuidePresenter implements GuideContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        mSubscriptions.unsubscribe();
     }
 
 

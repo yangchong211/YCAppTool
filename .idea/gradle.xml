@@ -11,11 +11,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Business/AndroidBusiness" />
+            <option value="$PROJECT_DIR$/Business/AnimBusiness" />
             <option value="$PROJECT_DIR$/Business/BusinessInterface" />
             <option value="$PROJECT_DIR$/Business/DemoBusiness" />
             <option value="$PROJECT_DIR$/Business/GameBusiness" />
             <option value="$PROJECT_DIR$/Business/GankBusiness" />
-            <option value="$PROJECT_DIR$/Business/LoveBusiness" />
             <option value="$PROJECT_DIR$/Business/MusicBusiness" />
             <option value="$PROJECT_DIR$/Business/VideoBusiness" />
             <option value="$PROJECT_DIR$/Common/BaseLayer" />
@@ -28,6 +28,7 @@
             <option value="$PROJECT_DIR$/Server/ServerInterface" />
             <option value="$PROJECT_DIR$/Server/ShareServer" />
             <option value="$PROJECT_DIR$/Server/XlogServer" />
+            <option value="$PROJECT_DIR$/Tool/AnimatorToolLib" />
             <option value="$PROJECT_DIR$/Tool/CountTimerLib" />
             <option value="$PROJECT_DIR$/Tool/LocaleHelperLib" />
             <option value="$PROJECT_DIR$/Tool/MapLocationLib" />

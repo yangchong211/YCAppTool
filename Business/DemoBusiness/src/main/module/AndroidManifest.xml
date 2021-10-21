@@ -25,7 +25,6 @@
         <activity android:name="com.ycbjie.other.ui.activity.MeFeedBackActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.ImageGalleryActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.MeLoginActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.MeRegisterActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.ZoomLargeImageActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.MeBannerActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.BannerViewActivity"/>
@@ -33,11 +32,18 @@
         <activity android:name="com.ycbjie.other.ui.activity.ProgressFirstActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.ProgressSecondActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.ProgressThirdActivity"/>
-        <activity android:name=".ui.activity.TestFirstActivity"/>
-        <activity android:name=".ui.activity.ScrollActivity"/>
-        <activity android:name=".ui.activity.MixtureTextViewActivity"/>
-        <activity android:name=".ui.activity.CloneAbleActivity"/>
-        <activity android:name=".ui.activity.AnimActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.ScrollActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.MixtureTextViewActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.CloneAbleActivity"/>
+        <activity android:name="com.ycbjie.other.ui.timer.TimerActivity"/>
+        <activity android:name="com.ycbjie.other.ui.timer.TimerMainActivity"/>
+        <activity android:name="com.ycbjie.other.ui.timer.MyCountActivity"/>
+        <activity android:name="com.ycbjie.other.ui.timer.ChronometerActivity"/>
+        <activity android:name="com.ycbjie.other.ui.timer.CountActivity"/>
+        <activity android:name="com.ycbjie.other.ui.timer.CountViewActivity"/>
+        <activity android:name="com.ycbjie.other.ui.timer.HandlerActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.LocaleActivity"/>
+        <activity android:name="com.ycbjie.other.ui.activity.SerialTaskActivity"/>
     </application>
 
 

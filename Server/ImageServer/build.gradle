@@ -39,8 +39,8 @@ dependencies {
         exclude module: "support-v4"
         exclude module: "support-annotations"
     }
-    implementation rootProject.ext.dependencies["utilcode"]
-    implementation rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["utilcode"]
+    api rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     api rootProject.ext.dependencies["okhttp"]
 }
