@@ -3,11 +3,10 @@ include ':app'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
-include ':GameBusiness', ':AndroidBusiness', ':MusicBusiness',':AnimBusiness',
+include ':GameBusiness', ':AndroidBusiness',':AnimBusiness',
         ':VideoBusiness', ':GankBusiness', ':DemoBusiness', ':BusinessInterface'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
-project(':MusicBusiness').projectDir = new File('Business/MusicBusiness')
 project(':VideoBusiness').projectDir = new File('Business/VideoBusiness')
 project(':GankBusiness').projectDir = new File('Business/GankBusiness')
 project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')

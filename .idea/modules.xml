@@ -17,7 +17,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ImageServer/LifeHelper.ImageServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ImageServer/LifeHelper.ImageServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MapLocationLib/LifeHelper.MapLocationLib.iml" filepath="$PROJECT_DIR$/.idea/modules/MapLocationLib/LifeHelper.MapLocationLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/MusicBusiness/LifeHelper.MusicBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/MusicBusiness/LifeHelper.MusicBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/NetHelperLib/LifeHelper.NetHelperLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/NetHelperLib/LifeHelper.NetHelperLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/NfcServer/LifeHelper.NfcServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/NfcServer/LifeHelper.NfcServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/LifeHelper.PhotoWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/LifeHelper.PhotoWidget.iml" />

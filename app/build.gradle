@@ -195,9 +195,6 @@ dependencies {
     if (!rootProject.ext.isGankApplication){
         implementation project(path: ':GankBusiness')
     }
-    if (!rootProject.ext.isMusicApplication){
-        implementation project(path: ':MusicBusiness')
-    }
     if (!rootProject.ext.isAndroidApplication){
         implementation project(path: ':AndroidBusiness')
     }

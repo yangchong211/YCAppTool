@@ -9,7 +9,6 @@ ext {
     isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
     isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
     isAnimApplication = false
-    isMusicApplication = false  //音乐模块开关，false:作为Lib组件存在， true:作为application存在
 
     
     android = [
