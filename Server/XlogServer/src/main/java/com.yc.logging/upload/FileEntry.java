@@ -2,6 +2,7 @@ package com.yc.logging.upload;
 
 import android.support.annotation.RestrictTo;
 import com.google.gson.annotations.SerializedName;
+import com.yc.logging.annotation.KeepClass;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ import java.util.List;
 
 /**
  * 文件或目录封装
- * Created by zhengtao on 17/3/9.
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 @KeepClass

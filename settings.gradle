@@ -47,7 +47,7 @@ project(':ZoomImageLib').projectDir = new File('Widget/ZoomImageLib')
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib', ':ToolUtilsLib', ':SocketIoLib', ':SerialTaskLib' ,
         ':NetHelperLib', ':MapToolLib' ,':LocaleHelperLib' ,':CountTimerLib' ,':MapLocationLib',
-        ':AnimatorToolLib'
+        ':AnimatorToolLib', ':AppTraceTool'
 project(':ZxingServerLib').projectDir = new File('Tool/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('Tool/WebSocketLib')
 project(':ToolUtilsLib').projectDir = new File('Tool/ToolUtilsLib')
@@ -59,4 +59,4 @@ project(':LocaleHelperLib').projectDir = new File('Tool/LocaleHelperLib')
 project(':CountTimerLib').projectDir = new File('Tool/CountTimerLib')
 project(':MapLocationLib').projectDir = new File('Tool/MapLocationLib')
 project(':AnimatorToolLib').projectDir = new File('Tool/AnimatorToolLib')
-
+project(':AppTraceTool').projectDir = new File('Tool/AppTraceTool')

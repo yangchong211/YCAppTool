@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LifeHelper.iml" filepath="$PROJECT_DIR$/.idea/modules/LifeHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/AndroidBusiness/LifeHelper.AndroidBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/AndroidBusiness/LifeHelper.AndroidBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/AppStatusLib/LifeHelper.AppStatusLib.iml" filepath="$PROJECT_DIR$/.idea/modules/common/AppStatusLib/LifeHelper.AppStatusLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tracesdk/LifeHelper.AppTraceTool.iml" filepath="$PROJECT_DIR$/.idea/modules/tracesdk/LifeHelper.AppTraceTool.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerWidget.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/BaseLayer/LifeHelper.BaseLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/common/BaseLayer/LifeHelper.BaseLayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/BusinessInterface/LifeHelper.BusinessInterface.iml" filepath="$PROJECT_DIR$/.idea/modules/business/BusinessInterface/LifeHelper.BusinessInterface.iml" />
