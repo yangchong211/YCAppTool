@@ -24,12 +24,12 @@ project(':ServerInterface').projectDir = new File('Server/ServerInterface')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':LibraryLayer', ':BaseLayer', ':ConfigLayer', ':ToolLayer'
+include ':LibraryLayer', ':BaseLayer', ':ConfigLayer', ':ToolLayer', ':AppStatusLib'
 project(':LibraryLayer').projectDir = new File('Common/LibraryLayer')
 project(':BaseLayer').projectDir = new File('Common/BaseLayer')
 project(':ConfigLayer').projectDir = new File('Common/ConfigLayer')
 project(':ToolLayer').projectDir = new File('Common/ToolLayer')
-
+project(':AppStatusLib').projectDir = new File('Common/AppStatusLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */

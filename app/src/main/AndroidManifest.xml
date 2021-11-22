@@ -46,7 +46,6 @@
         <activity android:name="com.yc.yc.lifehelper.ui.main.view.MainActivity"/>
         <activity android:name="com.yc.yc.lifehelper.ui.guide.view.activity.GuideActivity"/>
         <activity android:name="com.yc.yc.lifehelper.ui.me.view.activity.MeSettingActivity"/>
-        <activity android:name="com.yc.yc.lifehelper.ui.me.view.activity.MeLoginActivity"/>
         <service android:name="com.ycbjie.library.base.app.InitializeService"/>
     </application>
 

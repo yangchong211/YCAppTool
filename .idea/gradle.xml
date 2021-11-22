@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/Business/GameBusiness" />
             <option value="$PROJECT_DIR$/Business/GankBusiness" />
             <option value="$PROJECT_DIR$/Business/VideoBusiness" />
+            <option value="$PROJECT_DIR$/Common/AppStatusLib" />
             <option value="$PROJECT_DIR$/Common/BaseLayer" />
             <option value="$PROJECT_DIR$/Common/ConfigLayer" />
             <option value="$PROJECT_DIR$/Common/LibraryLayer" />
