@@ -24,9 +24,7 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.concurrent.atomic.AtomicReference;
 
-/**
- * Created by liuchuang on 2015/9/21.
- */
+
 public class LogHelper {
 
     private static String packageName = "";
@@ -114,15 +112,9 @@ public class LogHelper {
         if (mBamaiPath == null) {
             return;
         }
-        //lcc：apollo开关控制是否写日志。
-//        if (!Apollo.getToggle(Const.APOLLO_ALLOW_BAMAI_LOG).allow()) {
-//            return;
-//        }
-
         Handler handler = mDataWorkHandler.get();
         if (handler != null) {
             final long threadid = Thread.currentThread().getId();
-
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -334,15 +326,6 @@ public class LogHelper {
     public static void setBamaiLogPath(File path) {
         if (null != path) {
             mBamaiPath = path;
-//            try {
-//                if (!mBamaiPath.exists() || !mBamaiPath.isDirectory()) {
-//                    if (!mBamaiPath.mkdirs()) {
-//                        mBamaiPath = null;
-//                    }
-//                }
-//            } catch (Exception e) {
-//                mBamaiPath = null;
-//            }
         }
     }
 }

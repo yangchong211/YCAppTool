@@ -1,6 +1,8 @@
 package com.yc.location.mode.gps;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.Location;
@@ -9,6 +11,7 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.os.Looper;
+import android.support.v4.app.ActivityCompat;
 
 import com.yc.location.constant.Constants;
 import com.yc.location.manager.DefaultLocationManager;
@@ -35,12 +38,13 @@ public class GpsManager {
     private LocationManager mLocationManager;
     private Location gpsLocation = null;
     private long mLastGpsEvent = 0;
-    private GpsStatus mGpsStat = null;
-    private float mGpsSignalLevel = 0.0f;
-    private int mSatelliteNumber = 0;
     private volatile long timeGpsM = 0;
-    private long mGpsValidateInterval;
+    private final long mGpsValidateInterval;
+    private long mGetGpsSignalTime = 0;
+    //为控制写日志间隔
+    private long mGpsLogTime = 0L;
     private LocationUpdateInternalListener mLocationInternalListener;
+    private static final String TAG = "GpsManager : ";
 
     public GpsManager(Context context) {
         mContext = context;
@@ -51,85 +55,90 @@ public class GpsManager {
         if (mContext == null) {
             return;
         }
+        //1.获取位置管理器
         mLocationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
         if (!LocationUtils.hasGpsProvider(mLocationManager)) {
-            LogHelper.logFile("initGpsListeners: does not found gps provider");
+            LogHelper.logFile(TAG+"initGpsListeners: does not found gps provider");
+            return;
+        }
+        //添加用户权限申请判断
+        if (ActivityCompat.checkSelfPermission(mContext,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(mContext,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
 
+        //第二步：获取位置提供器
+        //GPS 定位的精准度比较高，但是非常耗电。
         String strC = "force_xtra_injection";
         String strGpsProvider = LocationManager.GPS_PROVIDER;
         try {
             boolean b = mLocationManager.sendExtraCommand(strGpsProvider, strC, null);
-            LogHelper.logFile("using agps: " + b);
+            LogHelper.logFile(TAG+"using agps: " + b);
         } catch (Exception e) {
             //
         }
-
         try {
             mLocationManager.addGpsStatusListener(mGpsStatusListener);
+            //第四步：监视地理位置变化
+            /*
+             * 参1:选择定位的方式
+             * 参2:定位的间隔时间
+             * 参3:当位置改变多少时进行重新定位
+             * 参4:位置的回调监听
+             * 参5:looper
+             */
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     interval, 0, mLocationListener, Looper.myLooper());
-        } catch (Throwable e) {//fix crash:http://omega.xiaojukeji.com/app/quality/crash/detail?app_id=1&msgid=QmMM3u-uT5ygJigMoU7opQ
-            LogHelper.logFile("initGpsListeners exception, " + e.getMessage());
+        } catch (Throwable e) {
+            //fix crash:http://omega.xiaojukeji.com/app/quality/crash/detail?app_id=1&msgid=QmMM3u-uT5ygJigMoU7opQ
+            LogHelper.logFile(TAG+"initGpsListeners exception, " + e.getMessage());
             int status;
             if (e instanceof SecurityException) {
+                //GPS定位权限被禁止
                 status = DefaultLocation.STATUS_GPS_DENIED;
             } else {
+                //GPS模块定位是不可用的
                 status = DefaultLocation.STATUS_GPS_UNAVAILABLE;
             }
             if (null != mLocationInternalListener) {
                 mLocationInternalListener.onStatusUpdate(DefaultLocation.STATUS_GPS, status);
             }
-
         }
     }
 
-    private long mGetGpsSignalTime = 0;
-    private GpsStatus.Listener mGpsStatusListener = new GpsStatus.Listener() {
+    private final GpsStatus.Listener mGpsStatusListener = new GpsStatus.Listener() {
         @Override
         public void onGpsStatusChanged(int event) {
             mGetGpsSignalTime = LocationUtils.getTimeBoot();
             dispatchGpsStatusChange(event);
-
         }
     };
 
-    //为控制写日志间隔
-    private long mGpsBamaiLogTime = 0l;
-    private LocationListener mLocationListener = new LocationListener() {
+    private final LocationListener mLocationListener = new GpsLocationListener() {
         @Override
         public void onLocationChanged(Location location) {
             mGetGpsSignalTime = LocationUtils.getTimeBoot();
-
             if (!LocationUtils.locCorrect(location)) {
                 return;
             }
-
             boolean isMockLocation = LocationUtils.isMockLocation(location);
             LocationUtils.setIsGpsMocked(isMockLocation);
-
             if (isMockLocation && !DefaultLocationManager.enableMockLocation) {
-                LogHelper.logFile("on gps callback, mock loc and disable mock!");
+                LogHelper.logFile(TAG+"on gps callback, mock loc and disable mock!");
                 return;
             }
-
-//            if (regularGpsCount != null) {
-//                regularGpsCount.count();
-//            }
             //有间隔地写日志。
-            long nowTime = System.currentTimeMillis();
-            if((nowTime - mGpsBamaiLogTime) > Constants.MIN_INTERVAL_BAMAI_GPS_NLP_LOCATION) {
-                LogHelper.logFile("-onLocationChanged-: type gps, location: " + location.getLongitude()
+            long nowTime = LocationUtils.getNowTime();
+            if((nowTime - mGpsLogTime) > Constants.MIN_INTERVAL_BAMAI_GPS_NLP_LOCATION) {
+                LogHelper.logFile(TAG+"-onLocationChanged-: type gps, location: " + location.getLongitude()
                         + "," + location.getLatitude() + ", " +location.getSpeed() + ", " + location.getBearing());
-                mGpsBamaiLogTime = nowTime;
+                mGpsLogTime = nowTime;
             }
-
             gpsLocation = location;
-            timeGpsM = System.currentTimeMillis();
-
+            timeGpsM = LocationUtils.getNowTime();
             LocationSensorMonitor.getInstance(mContext).setGpsFixedTimestamp(timeGpsM);
-
         }
 
         @Override
@@ -140,44 +149,39 @@ public class GpsManager {
                         if (null != mLocationInternalListener) {
                             mLocationInternalListener.onStatusUpdate(DefaultLocation.STATUS_GPS, DefaultLocation.STATUS_GPS_UNAVAILABLE);
                         }
-                        LogHelper.logFile("gps provider out of service");
+                        LogHelper.logFile(TAG+"gps provider out of service");
                         gpsLocation = null;
                         break;
                     case LocationProvider.AVAILABLE:
                         if (null != mLocationInternalListener) {
                             mLocationInternalListener.onStatusUpdate(DefaultLocation.STATUS_GPS, DefaultLocation.STATUS_GPS_AVAILABLE);
                         }
-                        LogHelper.logFile("gps provider available");
+                        LogHelper.logFile(TAG+"gps provider available");
                         break;
                     case LocationProvider.TEMPORARILY_UNAVAILABLE:
-                        LogHelper.logFile("gps provider temporarily unavailable");
-//                        gpsLocation = null;
+                        LogHelper.logFile(TAG+"gps provider temporarily unavailable");
                         break;
                     default:
                         break;
-
                 }
             }
-
         }
 
         @Override
         public void onProviderEnabled(String provider) {
-            LogHelper.logFile("gps provider enabled");
+            LogHelper.logFile(TAG+"gps provider enabled");
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-            LogHelper.logFile("gps provider disabled");
+            LogHelper.logFile(TAG+"gps provider disabled");
             gpsLocation = null;
         }
     };
 
     /**
      * 处理手机GPS状态切换的回调
-     *
-     * @param
-     * @return void
+     * @param iEvent                        event
      */
     private void dispatchGpsStatusChange(int iEvent) {
         if (mLocationManager == null) {
@@ -191,33 +195,31 @@ public class GpsManager {
         } catch (Throwable e) {
             return;
         }
-
         switch (iEvent) {
             case GpsStatus.GPS_EVENT_STARTED:
-                LogHelper.logFile("gps event started");
+                LogHelper.logFile(TAG+"gps event started");
                 break;
             case GpsStatus.GPS_EVENT_STOPPED:
-                LogHelper.logFile("gps event stopped");
+                LogHelper.logFile(TAG+"gps event stopped");
                 gpsLocation = null;
                 break;
             case GpsStatus.GPS_EVENT_FIRST_FIX:
-                LogHelper.logFile("gps event first fix");
-
+                LogHelper.logFile(TAG+"gps event first fix");
                 break;
             case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
-                if (isGpsEventOverFreq()) {
+                boolean gpsEventOverFreq = isGpsEventOverFreq();
+                LogHelper.d(TAG,gpsEventOverFreq ? "gps event too often" : "gps event normal");
+                if (gpsEventOverFreq) {
                     return;
                 }
-                //liuchangcheng: fix bug: 5171
                 try {
                     mLastGpsEvent = LocationUtils.getTimeBoot();
-
-                    mGpsSignalLevel = 0.0f;
-                    mGpsStat = mLocationManager.getGpsStatus(null);
+                    float mGpsSignalLevel = 0.0f;
+                    GpsStatus mGpsStat = mLocationManager.getGpsStatus(null);
                     int iMaxSate = mGpsStat.getMaxSatellites();
                     Iterator<GpsSatellite> iter = null;
                     iter = mGpsStat.getSatellites().iterator();
-                    mSatelliteNumber = 0;
+                    int mSatelliteNumber = 0;
                     int iFix = 0;
                     while (iter.hasNext() && mSatelliteNumber <= iMaxSate) {
                         GpsSatellite gs = iter.next();
@@ -227,7 +229,7 @@ public class GpsManager {
                             iFix++;
                         }
                     }
-                    LogHelper.logFile("gps satellite number:" + "(" + iFix + ")/" + mSatelliteNumber
+                    LogHelper.logFile(TAG+"gps satellite number:" + "(" + iFix + ")/" + mSatelliteNumber
                             + " level:" + mGpsSignalLevel);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -240,23 +242,22 @@ public class GpsManager {
 
     /**
      * 判断GPSEVENT通知是否过于频繁
-     *
-     * @param
      * @return boolean
      */
     private boolean isGpsEventOverFreq() {
-        if (mLastGpsEvent == 0l) {
+        if (mLastGpsEvent == 0L) {
             return false;
         }
-
         return (LocationUtils.getTimeBoot() - mLastGpsEvent) < Constants.MIN_GPS_EVENT_GAP;
     }
 
-    /** 移除gps监听器 */
-    public void rmGpsListeners() {
-
-        if (mContext == null || mLocationManager == null) return;
-
+    /**
+     * 移除gps监听器
+     */
+    public void removeGpsListeners() {
+        if (mContext == null || mLocationManager == null) {
+            return;
+        }
         try {
             mLocationManager.removeGpsStatusListener(mGpsStatusListener);
             mLocationManager.removeUpdates(mLocationListener);
@@ -268,49 +269,46 @@ public class GpsManager {
         mLocationInternalListener = null;
     }
 
-    /** 检测gps数据是否最新 - 30s */
+    /**
+     * 检测gps数据是否最新 - 30s
+     * @return                      是否是最新
+     */
     public boolean isGpsLocationValid() {
-
-        if (!LocationUtils.locCorrect(gpsLocation)) {
+        LogHelper.d(TAG,"isGpsLocationValid");
+        boolean locCorrect = LocationUtils.locCorrect(gpsLocation);
+        LogHelper.d(TAG,"locCorrect , " + locCorrect);
+        if (!locCorrect) {
             return false;
         }
-
         boolean validGPS;
         long cur = System.currentTimeMillis();
-        validGPS = (cur - timeGpsM < mGpsValidateInterval); // 动态配置：默认30s内有效
-
+        validGPS = (cur - timeGpsM < mGpsValidateInterval);
+        LogHelper.i(TAG,"validGPS " + validGPS);
+        // 动态配置：默认30s内有效
         if (!validGPS) {
-//            LogHelper.logBamai("CHECK GPS out of date");
-
             gpsLocation = null;
         }
-
         if (validGPS) {
-            if (DefaultLocationManager.enableMockLocation) {                      // 允许mock时，直接返回
+            // 允许mock时，直接返回
+            if (DefaultLocationManager.enableMockLocation) {
+                LogHelper.logFile(TAG+"Mock GPS Enable , return");
                 return true;
             }
-            if (LocationUtils.isMockSettingsON(mContext)) {                            // 系统mock开关开启时，阻止
-                LogHelper.logFile("Mock GPS switch is ON, SDK ignore GPS");
+            // 系统mock开关开启时，阻止
+            if (LocationUtils.isMockSettingsON(mContext)) {
+                LogHelper.logFile(TAG+"Mock GPS switch is ON, SDK ignore GPS");
                 return false;
             }
-            if (LocationUtils.isMockLocation(gpsLocation)) {                                       // mock检测生效时，阻止
-                LogHelper.logFile("Mock GPS location tested, SDK ignore GPS");
+            // mock检测生效时，阻止
+            if (LocationUtils.isMockLocation(gpsLocation)) {
+                LogHelper.logFile(TAG+"Mock GPS location tested, SDK ignore GPS");
                 return false;
             }
             // 不确定，暂时判断为真GPS
             return true;
         }
-
         return false;
     }
-
-//    /**
-//     * 设置GPS失效时间间隔
-//     * @param gpsValidateInterval
-//     */
-//    void setGpsValidateInterval(long gpsValidateInterval) {
-//        this.mGpsValidateInterval = gpsValidateInterval;
-//    }
 
     public Location getGpsLocation() {
         return gpsLocation;
@@ -318,7 +316,6 @@ public class GpsManager {
 
     public void setLocationInternalListener(LocationUpdateInternalListener locationInternalListener) {
         this.mLocationInternalListener = locationInternalListener;
-
     }
     
     public long getReceiveGpsSignalTime() {

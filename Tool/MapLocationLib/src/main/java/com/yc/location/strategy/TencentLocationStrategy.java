@@ -17,6 +17,7 @@ import com.yc.location.monitor.LocationSensorMonitor;
 import com.yc.location.utils.LocationUtils;
 import com.yc.location.bean.DefaultLocation;
 import com.yc.location.listener.LocationUpdateInternalListener;
+import com.yc.location.utils.NetworkUtils;
 
 /**
  * 腾讯定位策略类：对腾讯定位sdk的封装
@@ -82,7 +83,7 @@ public class TencentLocationStrategy implements ILocationStrategy {
                     if (!LocationUtils.isLocationPermissionGranted(mContext) || !LocationSensorMonitor.getInstance(mContext).isGpsEnabled()) {
                         errInfo.setErrNo(ErrorInfo.ERROR_LOCATION_PERMISSION);
                         errInfo.setErrMessage(mContext.getString(R.string.location_err_location_permission));
-                    } else if (!LocationUtils.isNetWorkConnected(mContext)) {
+                    } else if (!NetworkUtils.isNetWorkConnected(mContext)) {
                         errInfo.setErrNo(ErrorInfo.ERROR_NETWORK_CONNECTION);
                         errInfo.setErrMessage(mContext.getString(R.string.location_err_network_connection));
                     } else if (errInfo.getErrNo() == 0) {
@@ -159,7 +160,7 @@ public class TencentLocationStrategy implements ILocationStrategy {
     static void handleErrByTencentErr(Context mContext, int tencentLocationErr, ErrorInfo currentErrInfo) {
         switch (tencentLocationErr) {
             case TencentLocation.ERROR_NETWORK:
-                if (LocationUtils.isNetWorkConnected(mContext)) {
+                if (NetworkUtils.isNetWorkConnected(mContext)) {
                     currentErrInfo.setErrNo(ErrorInfo.ERROR_TENCENT_NETWORK);
                     currentErrInfo.setErrMessage(mContext.getString(R.string.location_err_http_request_exception));
                 } else {

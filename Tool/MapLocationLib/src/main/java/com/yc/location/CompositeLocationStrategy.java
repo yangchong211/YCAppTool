@@ -33,6 +33,7 @@ import com.yc.location.mode.wifi.WifiManagerWrapper;
 import com.yc.location.monitor.LocationSensorMonitor;
 import com.yc.location.strategy.ILocationStrategy;
 import com.yc.location.strategy.TencentLocationStrategy;
+import com.yc.location.utils.NetworkUtils;
 import com.yc.location.utils.TransformUtils;
 import com.yc.location.utils.LocationUtils;
 
@@ -161,7 +162,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
         mWorkHandler = null;
         if (null != mGpsManager) {
             mGpsManager.setLocationInternalListener(null);
-            mGpsManager.rmGpsListeners();
+            mGpsManager.removeGpsListeners();
             mGpsManager = null;
         }
         rmWifiListeners();
@@ -228,7 +229,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
             if (!airPlaneMode &&
                     LocationSensorMonitor.getInstance(mContext).isGpsEnabled()) {
                 LogHelper.logFile("restart gps");
-                mGpsManager.rmGpsListeners();
+                mGpsManager.removeGpsListeners();
                 mGpsManager.init(mGpsMonitorInterval);
                 mStartGpsTime = now;
             }
@@ -855,7 +856,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
         } else if (instantReqData != null && instantReqData.wifis.size() == 0 && instantReqData.cell.cellid_bsid == 0 && instantReqData.cell.neighcells.size() == 0) {
             errInfo.setErrNo(ErrorInfo.ERROR_NO_ELEMENT_FOR_LOCATION);
             errInfo.setErrMessage(context.getString(R.string.location_err_no_element));
-        } else if (!LocationUtils.isNetWorkConnected(context)) {
+        } else if (!NetworkUtils.isNetWorkConnected(context)) {
             errInfo.setErrNo(ErrorInfo.ERROR_NETWORK_CONNECTION);
             errInfo.setErrMessage(context.getString(R.string.location_err_network_connection));
         } else if (errInfo.getErrNo() == 0){

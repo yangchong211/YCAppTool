@@ -44,24 +44,12 @@ public final class LocationUtils {
         return SystemClock.elapsedRealtime();
     }
 
-
-    public static boolean isNetWorkConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm != null) {
-
-            //如果仅仅是用来判断网络连接
-            //则可以使用 cm.getActiveNetworkInfo().isAvailable();?
-            NetworkInfo[] info = cm.getAllNetworkInfo();
-            if (info != null) {
-                for (int i = 0; i < info.length; i++) {
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+    /**
+     * 获取当前时间
+     * @return                  当前时间戳
+     */
+    public static long getNowTime(){
+        return System.currentTimeMillis();
     }
 
     /**
@@ -245,9 +233,8 @@ public final class LocationUtils {
 
     /**
      * 判断位置记录是否正确
-     *
-     * @param
-     * @return boolean
+     * @param loc                           location
+     * @return                              是否正确
      */
     public static boolean locCorrect(Location loc) {
         if (loc == null) {
@@ -263,7 +250,6 @@ public final class LocationUtils {
             bFine = false;
         } else if (dLon < -180.0d || dLat < -90.0d) {
             LogHelper.logFile("invalid loc lon:lat : " + dLon + ":" + dLat);
-
             bFine = false;
         }
         return bFine;

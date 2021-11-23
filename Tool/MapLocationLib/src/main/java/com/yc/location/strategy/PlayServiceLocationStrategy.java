@@ -17,6 +17,7 @@ import com.yc.location.utils.LocationUtils;
 import com.yc.location.bean.DefaultLocation;
 import com.yc.location.data.ETraceSource;
 import com.yc.location.listener.LocationUpdateInternalListener;
+import com.yc.location.utils.NetworkUtils;
 
 /**
  * 通过google推荐的使用google play service来定位，辅助其他方式兜底
@@ -164,7 +165,7 @@ public class PlayServiceLocationStrategy implements ILocationStrategy {
             errInfo.setErrNo(ErrorInfo.ERROR_LOCATION_PERMISSION);
             errInfo.setErrMessage(mContext.getString(R.string.location_err_location_permission));
             //lcc: fix bug: 4999, deepClone异常，可能导致instantReqData为空。
-        } else if (!LocationUtils.isNetWorkConnected(mContext)) {
+        } else if (!NetworkUtils.isNetWorkConnected(mContext)) {
             errInfo.setErrNo(ErrorInfo.ERROR_NETWORK_CONNECTION);
             errInfo.setErrMessage(mContext.getString(R.string.location_err_network_connection));
         } else {

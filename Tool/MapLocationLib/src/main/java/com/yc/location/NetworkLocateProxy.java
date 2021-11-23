@@ -9,6 +9,7 @@ import com.yc.location.constant.Constants;
 import com.yc.location.log.LogHelper;
 import com.yc.location.net.OkHttpUtils;
 import com.yc.location.data.ETraceSource;
+import com.yc.location.utils.NetworkUtils;
 import com.yc.location.utils.TransformUtils;
 import com.yc.location.utils.LocationUtils;
 
@@ -149,7 +150,7 @@ public class NetworkLocateProxy {
                     errInfo.setErrMessage(mContext.getString(R.string.location_err_http_request_exception));
                     errInfo.setRequestExceptionMessage(e.getMessage());
                     resdata = null;
-                    if (LocationUtils.isNetWorkConnected(mContext)) {
+                    if (NetworkUtils.isNetWorkConnected(mContext)) {
                         Map<String, Object> param = new HashMap<>();
                         param.put("sdk_ver", BuildConfig.VERSION_NAME);
                         param.put("exception", e.getMessage());

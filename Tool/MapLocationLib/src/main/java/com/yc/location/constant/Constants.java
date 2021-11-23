@@ -215,12 +215,11 @@ public class Constants {
     /**
      * GPSEVENT处理的最小时间间隔（毫秒）
      */
-    public static final long MIN_GPS_EVENT_GAP = 10000l;
-
+    public static final long MIN_GPS_EVENT_GAP = 10000L;
     /**
      * CGI强制刷新的默认时间间隔（毫秒）
      */
-    public static final long lDefCgiUpdate = 30000l;
+    public static final long lDefCgiUpdate = 30000L;
     //腾讯位置的有效时间, 30ms
     public static final long VALIDATE_INTERVAL_TENCENT_LOCATION = 30*1000;
     //定位轨迹上传的默认时间间隔
