@@ -25,7 +25,22 @@ public class LocationUpdateOption {
     }
 
     public enum IntervalMode{
-        HIGH_FREQUENCY(1000), NORMAL(3000), LOW_FREQUENCY(9000), BATTERY_SAVE(36000);
+        /**
+         * 高频率
+         */
+        HIGH_FREQUENCY(1000),
+        /**
+         * 正常
+         */
+        NORMAL(3000),
+        /**
+         * 低频率
+         */
+        LOW_FREQUENCY(9000),
+        /**
+         *
+         */
+        BATTERY_SAVE(36000);
         private long mInterval;
         IntervalMode(long interval) {
             mInterval = interval;

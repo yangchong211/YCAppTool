@@ -472,6 +472,34 @@ public class DefaultLocation {
         return didiLocation;
     }
 
+
+    public static DefaultLocation convert2DidiLocation(Location location, String provider, int coordinateType, long localTime) {
+        if (location == null) {
+            return null;
+        } else {
+            double[] lonlat = new double[]{location.getLongitude(), location.getLatitude()};
+            if (coordinateType == 1) {
+                lonlat = TransformUtils.transform(location.getLongitude(), location.getLatitude());
+            }
+
+            DefaultLocation didiLocation = new DefaultLocation();
+            didiLocation.longtitude = lonlat[0];
+            didiLocation.latitude = lonlat[1];
+            didiLocation.coordinateType = coordinateType;
+            didiLocation.time = "gps".equals(provider) ? location.getTime() : System.currentTimeMillis();
+            didiLocation.accuracy = location.getAccuracy();
+            didiLocation.altitude = location.getAltitude();
+            didiLocation.bearing = location.getBearing();
+            didiLocation.provider = provider;
+            didiLocation.speed = location.getSpeed();
+            didiLocation.elapsedrealtime = LocationUtils.getSystemLocationElapsedRealtime(location);
+            didiLocation.isMockGps = LocationUtils.isMockLocation(location) ? 1 : 0;
+            didiLocation.localTime = localTime;
+            return didiLocation;
+        }
+    }
+
+
     /**
      * 获得到VDR模块计算得到的位置信息。(此分支只是为了兼容司机端国际版能编译正确)
      * @return

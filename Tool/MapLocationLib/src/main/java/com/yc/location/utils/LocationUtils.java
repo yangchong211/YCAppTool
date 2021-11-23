@@ -484,6 +484,10 @@ public final class LocationUtils {
         return fromMock != null && (boolean)fromMock;
     }
 
+    public static long getSystemLocationElapsedRealtime(Location location) {
+        return location != null && Build.VERSION.SDK_INT >= 17 ? location.getElapsedRealtimeNanos() / 1000000L : SystemClock.elapsedRealtime();
+    }
+
     public  static int getCoordinateType(Context context) {
         return mCoordinateType;
     }

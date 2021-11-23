@@ -22,7 +22,7 @@
 <!--            </intent-filter>-->
 <!--        </activity>-->
 
-        <activity android:name="com.ycbjie.other.ui.location.InnerTestActivity">
+        <activity android:name="com.ycbjie.other.ui.location.LocationTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

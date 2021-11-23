@@ -26,7 +26,7 @@
         <activity android:name="com.ycbjie.other.ui.timer.HandlerActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.LocaleActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.SerialTaskActivity"/>
-        <activity android:name="com.ycbjie.other.ui.location.InnerTestActivity"/>
+        <activity android:name="com.ycbjie.other.ui.location.LocationTestActivity"/>
     </application>
 
 

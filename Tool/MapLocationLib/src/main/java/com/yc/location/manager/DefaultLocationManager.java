@@ -394,7 +394,6 @@ public class DefaultLocationManager {
 
     public void enableMockLocation(boolean enableMockLocation) {
         DefaultLocationManager.enableMockLocation = enableMockLocation;
-
         // 此版本腾讯不含有mock过滤，故不处理腾讯接收的mock
     }
 

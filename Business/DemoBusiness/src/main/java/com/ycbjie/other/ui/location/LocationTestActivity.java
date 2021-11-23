@@ -39,7 +39,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 
 
-public class InnerTestActivity extends AppCompatActivity implements View.OnClickListener, Runnable {
+public class LocationTestActivity extends AppCompatActivity implements View.OnClickListener, Runnable {
 
     protected DefaultLocationManager locManager = null;
     protected SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");
@@ -184,16 +184,8 @@ public class InnerTestActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inner_test);
-
-        findViewById(R.id.start_btn).setOnClickListener(this);
-        findViewById(R.id.stop_btn).setOnClickListener(this);
-        findViewById(R.id.start_btn1).setOnClickListener(this);
-        findViewById(R.id.stop_btn1).setOnClickListener(this);
-        findViewById(R.id.once).setOnClickListener(this);
-        findViewById(R.id.get_status).setOnClickListener(this);
-
-//        findViewById(R.id.setfreq_btn).setOnClickListener(this);
+        setContentView(R.layout.activity_location_test);
+        initView();
 
         handler = new Handler();
         handler.post(this);
@@ -207,6 +199,15 @@ public class InnerTestActivity extends AppCompatActivity implements View.OnClick
         registerMapDrag();
 
         zoomOnce = true;
+    }
+
+    private void initView() {
+        findViewById(R.id.start_btn).setOnClickListener(this);
+        findViewById(R.id.stop_btn).setOnClickListener(this);
+        findViewById(R.id.start_btn1).setOnClickListener(this);
+        findViewById(R.id.stop_btn1).setOnClickListener(this);
+        findViewById(R.id.once).setOnClickListener(this);
+        findViewById(R.id.get_status).setOnClickListener(this);
     }
 
     @Override
@@ -240,18 +241,12 @@ public class InnerTestActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     protected void onDestroy() {
-
         if(handler != null) handler.removeCallbacks(this);
         handler = null;
-
-
         mMapView.onDestroy();
-
         zoomOnce = true;
-
         locManager.removeLocationUpdates(locListener0);
         locManager.removeLocationUpdates(locListener1);
-
         super.onDestroy();
     }
 
@@ -330,7 +325,7 @@ public class InnerTestActivity extends AppCompatActivity implements View.OnClick
 
                 }
 
-                Log.i(InnerTestActivity.class.getSimpleName(), "SDK VER " + locManager.getVersion());
+                Log.i(LocationTestActivity.class.getSimpleName(), "SDK VER " + locManager.getVersion());
 
 
             }

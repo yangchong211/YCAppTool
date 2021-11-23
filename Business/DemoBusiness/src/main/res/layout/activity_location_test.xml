@@ -31,22 +31,19 @@
                         android:layout_height="wrap_content"
                         android:hint="填1，3，9，36其一"
                         android:textSize="10dp"
-                        android:id="@+id/edit_freq"
-                         />
+                        android:id="@+id/edit_freq" />
                     <Button
                         android:text="start"
                         android:textSize="10sp"
                         android:id="@+id/start_btn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
+                        android:layout_height="wrap_content" />
                     <Button
                         android:text="stop"
                         android:textSize="10sp"
                         android:id="@+id/stop_btn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
 
