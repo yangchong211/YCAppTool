@@ -36,15 +36,14 @@ public class TransformUtils {
     }
 
     /**
-     * 计算距离
-     *
-     * @param lon1
-     * @param lat1
-     * @param lon2
-     * @param lat2
-     * @return 距离，单位米
+     * 计算两个定位点的距离
+     * @param lon1                  定位点1的经度
+     * @param lat1                  定位点1的纬度
+     * @param lon2                  定位点2的经度
+     * @param lat2                  定位点2的纬度
+     * @return                      两点距离，单位米
      */
-    public static double calcdistance(double lon1, double lat1, double lon2, double lat2) {
+    public static double calcDistance(double lon1, double lat1, double lon2, double lat2) {
         double Rc = 6378137.0;
         double Rj = 6356725.0;
         double r_lat_1 = lat1 * pi / 180.0;

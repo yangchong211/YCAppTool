@@ -59,7 +59,7 @@ public class LocationBuffer {
         // 计算各距离差, 统计跨越数量
         int distOutCount = 0;
         for(LonLat each : locBuffer) {
-            if(TransformUtils.calcdistance(
+            if(TransformUtils.calcDistance(
                     curLonLat.lon, curLonLat.lat,
                     each.lon, each.lat) > DISTOUT) {
                 distOutCount++;

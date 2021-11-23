@@ -370,7 +370,7 @@ public class DefaultLocation {
      * @return 两点距离，单位米
      */
     public double distanceTo(double lng, double lat) {
-        return TransformUtils.calcdistance(longtitude, latitude, lng, lat);
+        return TransformUtils.calcDistance(longtitude, latitude, lng, lat);
     }
 
     /**
@@ -395,7 +395,7 @@ public class DefaultLocation {
      * @return 两点距离，单位米
      */
     public static double distanceBetween(double lng1, double lat1, double lng2, double lat2) {
-        return TransformUtils.calcdistance(lng1, lat1, lng2, lat2);
+        return TransformUtils.calcDistance(lng1, lat1, lng2, lat2);
     }
 
     /**

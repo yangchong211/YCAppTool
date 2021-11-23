@@ -239,7 +239,7 @@ public class NetworkLocateProxy {
                     continue;
                 }
 
-                double dist = TransformUtils.calcdistance(lastLocCache.lonlat.lon, lastLocCache.lonlat.lat, locCache.lonlat.lon, locCache.lonlat.lat);
+                double dist = TransformUtils.calcDistance(lastLocCache.lonlat.lon, lastLocCache.lonlat.lat, locCache.lonlat.lon, locCache.lonlat.lat);
 
                 LogHelper.write("-DiDiNetworkLocateProxy- ["
                         + String.format(Locale.CHINA, "%.6f,%.6f,%.6f,%.6f] dist=%.2f", lastLocCache.lonlat.lon, lastLocCache.lonlat.lat, locCache.lonlat.lon, locCache.lonlat.lat, dist));
