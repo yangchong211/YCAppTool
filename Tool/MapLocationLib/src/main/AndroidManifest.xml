@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.yc.mocklocationlib">
+    package="com.yc.location">
 
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <!--允许程序访问WiFi网络信息-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
@@ -14,11 +18,8 @@
         tools:ignore="MockLocation,ProtectedPermissions" />
 
     <application>
-        <activity
-            android:name=".easymock.PermissionUtils$PermissionActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:multiprocess="true"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <meta-data
+            android:name="TencentGeoLocationSDK"
+            android:value="" />
     </application>
-
 </manifest>

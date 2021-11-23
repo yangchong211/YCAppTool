@@ -30,6 +30,9 @@ dependencies {
     api(rootProject.ext.dependencies["appcompat-v7"])
     api(rootProject.ext.dependencies["annotations"])
     api(rootProject.ext.dependencies["recyclerview-v7"])
+    implementation files('libs/TencentLocationSdk_v6.3.5.8_rb0bbfcba_20180109_113453.jar')
+    api(rootProject.ext.dependencies["okhttp"])
+    implementation 'com.google.android.gms:play-services-location:10.2.1'
     implementation project(path: ':ToolUtilsLib')
     //参考：https://github.com/tiann/FreeReflection
     //是一个允许你在Android P(包括Q和R)之上不受任何限制地使用反射的库。

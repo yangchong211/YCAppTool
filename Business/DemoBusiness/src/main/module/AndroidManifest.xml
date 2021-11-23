@@ -21,6 +21,13 @@
             </intent-filter>
         </activity>
 
+
+
+        <activity android:name="com.ycbjie.other.ui.location.InnerTestActivity"/>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="c633d7562d94d936f43e3153fdfb6060" />
+
         <activity android:name="com.ycbjie.other.ui.activity.AboutMeActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.MeFeedBackActivity"/>
         <activity android:name="com.ycbjie.other.ui.activity.ImageGalleryActivity"/>

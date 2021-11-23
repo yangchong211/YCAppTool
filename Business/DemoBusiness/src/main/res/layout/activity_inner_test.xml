@@ -1,0 +1,150 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/operation_area"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/hello_tv"
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:id="@+id/operation_wrapper_listener0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/hello_tv">
+                    <EditText
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:hint="填1，3，9，36其一"
+                        android:textSize="10dp"
+                        android:id="@+id/edit_freq"
+                         />
+                    <Button
+                        android:text="start"
+                        android:textSize="10sp"
+                        android:id="@+id/start_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                    <Button
+                        android:text="stop"
+                        android:textSize="10sp"
+                        android:id="@+id/stop_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
+
+
+                <TextView
+                    android:text="BUILD TEXT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/buildText"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    android:gravity="end"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@android:color/darker_gray" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/location_info1"
+                    android:text="info" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:id="@+id/operation_wrapper_listener1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/location_info1">
+                    <EditText
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="10dp"
+                        android:hint="填1，3，9，36其一"
+                        android:id="@+id/edit_freq1"
+                        />
+                    <Button
+                        android:text="start"
+                        android:textSize="10sp"
+                        android:id="@+id/start_btn1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                    <Button
+                        android:text="stop"
+                        android:textSize="10sp"
+                        android:id="@+id/stop_btn1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:text="once"
+                    android:textSize="10sp"
+                    android:id="@+id/once"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:id="@+id/once_location_info1"
+                    android:text="info" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <Button
+                    android:text="获得状态"
+                    android:textSize="10sp"
+                    android:id="@+id/get_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:id="@+id/status"
+                    android:text="info" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+    <com.amap.api.maps2d.MapView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginTop="3dp"
+        android:id="@+id/map1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+</LinearLayout>

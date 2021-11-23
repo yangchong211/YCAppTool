@@ -13,8 +13,16 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.yc.yc.lifehelper.ui.guide.view.activity.SplashActivity"
-            android:theme="@style/SplashTheme">
+<!--        <activity android:name="com.yc.yc.lifehelper.ui.guide.view.activity.SplashActivity"-->
+<!--            android:theme="@style/SplashTheme">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
+        <activity android:name="com.ycbjie.other.ui.location.InnerTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

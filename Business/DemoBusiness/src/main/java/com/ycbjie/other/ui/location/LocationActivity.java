@@ -12,10 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.yc.mocklocationlib.easymock.LocationManagerHelper;
-import com.yc.mocklocationlib.easymock.LocationToolUtils;
-import com.yc.mocklocationlib.gpsmock.GpsMockFragment;
-import com.yc.mocklocationlib.gpsmock.GpsMockManager;
+import com.yc.location.easymock.LocationManagerHelper;
+import com.yc.location.easymock.LocationToolUtils;
 import com.ycbjie.other.R;
 
 
@@ -86,14 +84,6 @@ public class LocationActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GpsMockManager.onAppInit(LocationActivity.this);
-                GpsMockFragment fragment = new GpsMockFragment();
-                FragmentManager fragmentManager = LocationActivity.this.getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                //transaction.setCustomAnimations(R.anim.push_bottom_in, 0);
-                //transaction.show(fragment);       //暂时不用这个
-                transaction.add(android.R.id.content, fragment, "GpsMockFragment");
-                transaction.commitAllowingStateLoss();
             }
         });
     }
