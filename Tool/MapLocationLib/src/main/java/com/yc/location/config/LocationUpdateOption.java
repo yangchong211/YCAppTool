@@ -49,6 +49,7 @@ public class LocationUpdateOption {
             return mInterval;
         }
     }
+
     /**
      * 设置监听位置时间间隔。
      * @param mode 时间间隔的枚举变量。见此类内部定义的{@link IntervalMode}
@@ -60,4 +61,7 @@ public class LocationUpdateOption {
     public IntervalMode getInterval() {
         return mIntervalMode;
     }
+
+
+
 }

@@ -11,12 +11,12 @@ import com.yc.location.listener.LocationListener;
 
 import java.io.File;
 
-public final class LocationService implements LocationServiceProvider {
+public final class LocationService implements ILocationProvider {
 
-    private final LocationServiceProvider mDelegate;
+    private final ILocationProvider mDelegate;
 
     private LocationService() {
-        this.mDelegate = new LocationPerformerImpl();
+        this.mDelegate = new LocationImpl();
     }
 
     public static LocationService getInstance() {
@@ -37,15 +37,15 @@ public final class LocationService implements LocationServiceProvider {
 
     }
 
-    public final LocationServiceProvider registerLocationListener(AbsBaseLocationListener arg0) {
+    public final ILocationProvider registerLocationListener(AbsBaseLocationListener arg0) {
         return null != this.mDelegate ? this.mDelegate.registerLocationListener(arg0) : null;
     }
 
-    public final LocationServiceProvider unRegisterLocationListener(AbsBaseLocationListener arg0) {
+    public final ILocationProvider unRegisterLocationListener(AbsBaseLocationListener arg0) {
         return null != this.mDelegate ? this.mDelegate.unRegisterLocationListener(arg0) : null;
     }
 
-    public final LocationServiceProvider startLocation(Context arg0) {
+    public final ILocationProvider startLocation(Context arg0) {
         return null != this.mDelegate ? this.mDelegate.startLocation(arg0) : null;
     }
 
@@ -61,23 +61,23 @@ public final class LocationService implements LocationServiceProvider {
         return null != this.mDelegate ? this.mDelegate.getLongitude() : 0.0D;
     }
 
-    public final LocationServiceProvider setLocateMode(LocateMode arg0) {
+    public final ILocationProvider setLocateMode(LocateMode arg0) {
         return null != this.mDelegate ? this.mDelegate.setLocateMode(arg0) : null;
     }
 
-    public final LocationServiceProvider setInterval(LocationUpdateOption.IntervalMode arg0) {
+    public final ILocationProvider setInterval(LocationUpdateOption.IntervalMode arg0) {
         return null != this.mDelegate ? this.mDelegate.setInterval(arg0) : null;
     }
 
-    public final LocationServiceProvider setCoordinateType(int arg0) {
+    public final ILocationProvider setCoordinateType(int arg0) {
         return null != this.mDelegate ? this.mDelegate.setCoordinateType(arg0) : null;
     }
 
-    public final LocationServiceProvider stopLocation() {
+    public final ILocationProvider stopLocation() {
         return null != this.mDelegate ? this.mDelegate.stopLocation() : null;
     }
 
-    public final LocationServiceProvider enableMock(boolean arg0) {
+    public final ILocationProvider enableMock(boolean arg0) {
         return null != this.mDelegate ? this.mDelegate.enableMock(arg0) : null;
     }
 
@@ -99,7 +99,7 @@ public final class LocationService implements LocationServiceProvider {
         return null != this.mDelegate && this.mDelegate.isMockEnabled();
     }
 
-    public final LocationServiceProvider setLogPath(File arg0) {
+    public final ILocationProvider setLogPath(File arg0) {
         return null != this.mDelegate ? this.mDelegate.setLogPath(arg0) : null;
     }
 

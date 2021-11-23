@@ -10,17 +10,17 @@ import com.yc.location.listener.AbsBaseLocationListener;
 import com.yc.location.listener.LocationListener;
 import java.io.File;
 
-public interface LocationServiceProvider {
+public interface ILocationProvider {
 
     void initLocationManager(Context var1);
 
     void requestOnceLocation(LocationListener var1);
 
-    LocationServiceProvider registerLocationListener(AbsBaseLocationListener var1);
+    ILocationProvider registerLocationListener(AbsBaseLocationListener var1);
 
-    LocationServiceProvider unRegisterLocationListener(AbsBaseLocationListener var1);
+    ILocationProvider unRegisterLocationListener(AbsBaseLocationListener var1);
 
-    LocationServiceProvider startLocation(Context var1);
+    ILocationProvider startLocation(Context var1);
 
     DefaultLocation getLastKnownLocation();
 
@@ -28,15 +28,15 @@ public interface LocationServiceProvider {
 
     double getLongitude();
 
-    LocationServiceProvider setLocateMode(LocateMode var1);
+    ILocationProvider setLocateMode(LocateMode var1);
 
-    LocationServiceProvider setInterval(LocationUpdateOption.IntervalMode var1);
+    ILocationProvider setInterval(LocationUpdateOption.IntervalMode var1);
 
-    LocationServiceProvider setCoordinateType(int var1);
+    ILocationProvider setCoordinateType(int var1);
 
-    LocationServiceProvider stopLocation();
+    ILocationProvider stopLocation();
 
-    LocationServiceProvider enableMock(boolean var1);
+    ILocationProvider enableMock(boolean var1);
 
     void setMockLatLng(Location var1);
 
@@ -44,6 +44,6 @@ public interface LocationServiceProvider {
 
     boolean isMockEnabled();
 
-    LocationServiceProvider setLogPath(File var1);
+    ILocationProvider setLogPath(File var1);
 
 }

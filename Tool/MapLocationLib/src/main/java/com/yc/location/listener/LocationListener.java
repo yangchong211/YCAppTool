@@ -10,9 +10,10 @@ public interface LocationListener {
 
     /**
      * 获得位置回调函数
-     * DIDILocation：获得的位置信息。
+     * Location：获得的位置信息。
      */
     void onLocationChanged(DefaultLocation didiLocation);
+
     /**
      * 定位出错的回调函数。
      *  <p>

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MonitorLocationListener implements LocationListener {
+public class MonitorLocListener implements LocationListener {
 
     private static final String TAG = "MonitorLocationListener";
     private boolean mockEnabled = false;

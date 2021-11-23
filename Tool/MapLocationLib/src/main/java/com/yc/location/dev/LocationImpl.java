@@ -16,13 +16,13 @@ import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class LocationPerformerImpl implements LocationServiceProvider {
+public class LocationImpl implements ILocationProvider {
 
     private static final String TAG = "LocationPerformerImpl";
     private static boolean sMockEnable = false;
     private DefaultLocationManager mLocationManager;
     private LocationUpdateOption mLocationUpdateOption;
-    private MonitorLocationListener mDelegateListener = new MonitorLocationListener();
+    private MonitorLocListener mDelegateListener = new MonitorLocListener();
     private String mModelKey;
     private LocateMode mLocateMode;
     private LocationUpdateOption.IntervalMode mFrequency;
@@ -56,7 +56,7 @@ public class LocationPerformerImpl implements LocationServiceProvider {
     }
 
     @Override
-    public LocationServiceProvider registerLocationListener(AbsBaseLocationListener locationListener) {
+    public ILocationProvider registerLocationListener(AbsBaseLocationListener locationListener) {
         mDelegateListener.add(locationListener);
         return this;
     }
@@ -69,7 +69,7 @@ public class LocationPerformerImpl implements LocationServiceProvider {
     }
 
     @Override
-    public LocationServiceProvider setInterval(LocationUpdateOption.IntervalMode frequency) {
+    public ILocationProvider setInterval(LocationUpdateOption.IntervalMode frequency) {
         if (frequency == null) {
             return this;
         }
@@ -78,7 +78,7 @@ public class LocationPerformerImpl implements LocationServiceProvider {
     }
 
     @Override
-    public LocationServiceProvider setLocateMode(LocateMode mode) {
+    public ILocationProvider setLocateMode(LocateMode mode) {
         if (mode == null) {
             return this;
         }
@@ -87,7 +87,7 @@ public class LocationPerformerImpl implements LocationServiceProvider {
     }
 
     @Override
-    public LocationServiceProvider setCoordinateType(@CordinateType int type) {
+    public ILocationProvider setCoordinateType(@CordinateType int type) {
         sCordinateType = type;
         if (mLocationManager != null) {
             if (mLocationManager.isRunning()) {
@@ -100,7 +100,7 @@ public class LocationPerformerImpl implements LocationServiceProvider {
     }
 
     @Override
-    public LocationServiceProvider setLogPath(File file) {
+    public ILocationProvider setLogPath(File file) {
         if (mLocationManager != null) {
             mLocationManager.setLogPath(file);
         }
@@ -108,7 +108,7 @@ public class LocationPerformerImpl implements LocationServiceProvider {
     }
 
     @Override
-    public LocationServiceProvider startLocation(Context context) {
+    public ILocationProvider startLocation(Context context) {
         LogHelper.d(TAG, "⚠️startLocation() called with: context = [" + context + "]");
         if (mLocationManager != null && mLocationManager.isRunning()) {
             return this;
@@ -116,13 +116,14 @@ public class LocationPerformerImpl implements LocationServiceProvider {
         if (mLocationManager == null) {
             initLocationManager(context);
         }
+        //开始请求连续定位
         int code = mLocationManager.requestLocationUpdates(mDelegateListener, mLocationUpdateOption);
         LogHelper.d(TAG,"code: " + code);
         return this;
     }
 
     @Override
-    public LocationServiceProvider stopLocation() {
+    public ILocationProvider stopLocation() {
         LogHelper.d(TAG, "⚠️stopLocation() called");
         if (mLocationManager != null) {
             mLocationManager.removeLocationUpdates(mDelegateListener);
@@ -131,7 +132,7 @@ public class LocationPerformerImpl implements LocationServiceProvider {
     }
 
     @Override
-    public LocationServiceProvider enableMock(boolean enable) {
+    public ILocationProvider enableMock(boolean enable) {
         sMockEnable = enable;
         mDelegateListener.setMockEnabled(enable);
         // 允许 mock 定位 true：允许模拟定位 false：禁用模拟定位
@@ -159,15 +160,18 @@ public class LocationPerformerImpl implements LocationServiceProvider {
     }
 
     @Override
-    public LocationServiceProvider unRegisterLocationListener(AbsBaseLocationListener locationListener) {
+    public ILocationProvider unRegisterLocationListener(AbsBaseLocationListener locationListener) {
         mDelegateListener.remove(locationListener);
         return this;
     }
 
     public void initLocationManager(Context context) {
+        //获取定位管理者
         this.mLocationManager = DefaultLocationManager.getInstance(context);
+        //获取定位更新配置对象
         this.mLocationUpdateOption = mLocationManager.getDefaultLocationUpdateOption();
         this.mModelKey = context.getPackageName();
+        //设置定位的的监听频率
         if (mFrequency != null) {
             mLocationUpdateOption.setInterval(mFrequency);
         } else {
@@ -175,6 +179,7 @@ public class LocationPerformerImpl implements LocationServiceProvider {
         }
         mLocationUpdateOption.setModuleKey(mModelKey);
         mLocationManager.setAppid(mModelKey);
+        //注意：国内使用的应用不要调用此函数。
         //设置返回的定位坐标类型。默认为GCJ02坐标(国内定位时使用的坐标)。
         //1.当前只有做国际版业务时，才需要调用此函数。别的业务线或其他情况下禁止调用此函数。
         //2.若需要调用，请在初始化阶段、请求定位之前调用。

@@ -258,14 +258,14 @@ public class DefaultLocationManager {
 
     /**
      * 异步获取一次位置。会回调通知当前最新位置。
-     * @param listener 回调的listener
+     * @param listener  回调的listener
      * @param moduleKey 分配给各业务线的key（暂时使用POI业务分配的key）。务必传入各业务线自己正确的key。
      */
     public int requestLocationUpdateOnce(final LocationListener listener, final String moduleKey) {
         if (null == listener) {
             return -1;
         }
-//        LogHelper.write("DIDILocationManager#requestLocationUpdateOnce: listener" + listener.hashCode() + " key:" + moduleKey);
+        LogHelper.write("LocationManager#requestLocationUpdateOnce: listener" + listener.hashCode() + " key:" + moduleKey);
         if (TextUtils.isEmpty(moduleKey)) {
             final ErrorInfo errInfo = new ErrorInfo(ErrorInfo.ERROR_MODULE_PERMISSION);
             errInfo.setErrMessage(context.getString(R.string.location_err_module_permission));
@@ -277,7 +277,6 @@ public class DefaultLocationManager {
             });
             return -1;
         }
-
         /*用handler post，fix bug：当遍历通知listener错误时，业务方重试将同一listener又request，会crash。
         同时，用handler post已起到同步作用，synchronized可以去掉了，下个版本去掉。
          */
@@ -340,9 +339,7 @@ public class DefaultLocationManager {
     private void requestLocationUpdatesInternal(LocationListener listener, LocationUpdateOption option) {
         final LocationListenerWrapper listenerWraper = new LocationListenerWrapper(listener, option);
         if (isRunning && mLocCenter != null) {
-
-                /*如果已经运行定位服务，则此处立刻回调通知一下此listener。
-                 */
+            //如果已经运行定位服务，则此处立刻回调通知一下此listener。
             if (lastKnownLocation != null && !lastKnownLocation.isCacheLocation()) {
                 if (mLocCenter.getLastErrInfo() != null
                         && mLocCenter.getLastErrInfo().getLocalTime() > lastKnownLocation.getLocalTime()) {
