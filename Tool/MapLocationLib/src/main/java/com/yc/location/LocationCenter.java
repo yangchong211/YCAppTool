@@ -282,7 +282,9 @@ public class LocationCenter {
         }
 
         @Override
-        public void handleMessage(Message msg) { onHandleIntent((int)msg.obj); }
+        public void handleMessage(Message msg) {
+            onHandleIntent((int)msg.obj);
+        }
 
         @Override
         protected void finalize() throws Throwable {

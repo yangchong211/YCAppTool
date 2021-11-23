@@ -728,14 +728,12 @@ public class CompositeLocationStrategy implements ILocationStrategy {
         }
 
         try {
-            if (null != locReqData.user_info) {//fix crash bug 5079
+            if (null != locReqData.user_info) {
+                //fix crash bug 5079
                 locReqData.user_info.timestamp = System.currentTimeMillis();
                 locReqData.user_info.imei = mCellManager.getDeviceId();
                 locReqData.user_info.modellevel = Build.MODEL+"/"+Build.VERSION.SDK_INT;
-                locReqData.user_info.app_id = DefaultLocationManager.appid;
-                locReqData.user_info.phone = LocationUtils.getPhonenum(DefaultLocationManager.getAppContext());
                 locReqData.user_info.user_id = (mContext == null ? "" : mContext.getPackageName());
-                locReqData.user_info.app_version = LocationUtils.readAppVersion(mContext);
             }
             locReqData.version = BuildConfig.VERSION_CODE;
             locReqData.trace_id = (long) (Math.random() * 1e5);

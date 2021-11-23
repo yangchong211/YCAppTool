@@ -21,21 +21,6 @@ import javax.crypto.spec.SecretKeySpec;
 public class Constants {
 
     public static final boolean isDebug = true;
-
-    /**
-     * apollo开关名称：减少轨迹缺失而进行的灰度测试：现在的修改为：当上次位置为基站定位，本次优先选择wifi定位结果；
-     * 当网络定位出现跳点时，依然保留上次位置作为之后跳点过滤。
-     */
-    public static final String APOLLO_SWITCH_REDUCE_LACK_OF_TRACE = "loc_sdk_reduce_lack_of_trace";
-    //apollo开关名称：是否直接使用腾讯定位SDK
-    public static final String APOLLO_SWITCH_USE_TENCNET = "loc_sdk_use_tencent";
-    //apollo开关名称：根据外部监听位置频率变化，而减少内部监听系统GPS、wifi扫描等的频率以省电。
-    public static final String APOLLO_REDUCE_INNER_FREQUECY = "locsdk_reduce_inner_frequecy";
-    //apollo开关名称：在台湾使用滴滴网络定位
-    public static final String APOLLO_USE_DIDI_NLP_TAIWAN = "locsdk_use_didi_nlp_taiwan";
-
-    public static final String PACKAGE_NAME_DRIVER = "com.sdu.didi.gsui";
-    public static final String PACKAGE_NAME_PASSENGER = "com.sdu.didi.psnger";
     //考虑弱网情况下等待网络结果时间
     public static final int START2LOCATION_INTERVAL_MILLIS     = 5*1000;
 
@@ -169,16 +154,7 @@ public class Constants {
     public  static final SimpleDateFormat simpleDateFormatExt1 = new SimpleDateFormat("HH:mm:ss.SSS");
     public  static final SimpleDateFormat simpleDateFormatExt2 = new SimpleDateFormat("yyyyMMdd");
 
-    public static final String PREFS_NAME_APPVERSION = "prefs_name_appversion";
-    public static final String PREFS_NAME_PHONE = "prefs_name_phone";
-
-    public static final String PREFS_SETTING = "prefs_setting";
-
-    //sp中存坐标类型的key。
-    public static final String PREFS_KEY_COORDINATE_TYPE = "prefs_key_coordinate_type";
-
     private static final byte[] KEY = "0123456789abcdef".getBytes();
-    public static final String SDK_TAG = "DIDI_LOC_SDK";
 //
 //    public static final int COORDINATE_TYPE_GCJ02 = 1;
 //    public static final int COORDINATE_TYPE_WGS84 = 0;

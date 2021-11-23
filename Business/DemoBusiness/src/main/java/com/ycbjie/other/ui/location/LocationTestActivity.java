@@ -267,9 +267,6 @@ public class LocationTestActivity extends AppCompatActivity implements View.OnCl
             if (locManager != null) {
                 locManager = DefaultLocationManager.getInstance(this.getApplicationContext());
                 int b = LocationUtils.isGooglePlayServicesAvailable(this);
-                locManager.setAppid("didi_loc_test");
-                locManager.setPhonenum("15901080503");
-                locManager.setAppVersionName("1.0.0");
 
                 //locManager.startLocService(locListener0, 1000);
                 locManager.enableMockLocation(true);

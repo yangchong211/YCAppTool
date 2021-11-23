@@ -17,6 +17,7 @@ import com.yc.location.constant.Constants;
 import com.yc.location.manager.DefaultLocationManager;
 import com.yc.location.log.LogHelper;
 import com.yc.location.monitor.LocationSensorMonitor;
+import com.yc.location.utils.AppToolUtils;
 import com.yc.location.utils.LocationUtils;
 import com.yc.location.bean.DefaultLocation;
 import com.yc.location.listener.LocationUpdateInternalListener;
@@ -130,14 +131,14 @@ public class GpsManager {
                 return;
             }
             //有间隔地写日志。
-            long nowTime = LocationUtils.getNowTime();
+            long nowTime = AppToolUtils.getNowTime();
             if((nowTime - mGpsLogTime) > Constants.MIN_INTERVAL_BAMAI_GPS_NLP_LOCATION) {
                 LogHelper.logFile(TAG+"-onLocationChanged-: type gps, location: " + location.getLongitude()
                         + "," + location.getLatitude() + ", " +location.getSpeed() + ", " + location.getBearing());
                 mGpsLogTime = nowTime;
             }
             gpsLocation = location;
-            timeGpsM = LocationUtils.getNowTime();
+            timeGpsM = AppToolUtils.getNowTime();
             LocationSensorMonitor.getInstance(mContext).setGpsFixedTimestamp(timeGpsM);
         }
 

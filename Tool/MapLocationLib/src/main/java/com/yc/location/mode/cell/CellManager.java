@@ -14,6 +14,7 @@ import android.telephony.gsm.GsmCellLocation;
 import com.yc.location.constant.Constants;
 import com.yc.location.listener.LocationUpdateInternalListener;
 import com.yc.location.log.LogHelper;
+import com.yc.location.utils.AppToolUtils;
 import com.yc.location.utils.ReflectUtils;
 import com.yc.location.utils.LocationUtils;
 import com.yc.location.bean.DefaultLocation;
@@ -464,7 +465,7 @@ public class CellManager {
         }
 
 //        lstCgi.clear();
-        if (LocationUtils.getSdk() < 5) {
+        if (AppToolUtils.getSdk() < 5) {
             LogHelper.logFile("do not support cdma");
             return;
         }
@@ -964,8 +965,8 @@ public class CellManager {
      * @return Cgi
      */
     private Cgi getGsm(NeighboringCellInfo nbCellInfo) {
-        if (LocationUtils.getSdk() < 5) {
-            LogHelper.logFile("api" + LocationUtils.getSdk() + " do not support NeighboringCellInfo");
+        if (AppToolUtils.getSdk() < 5) {
+            LogHelper.logFile("api" + AppToolUtils.getSdk() + " do not support NeighboringCellInfo");
             return null;
         }
 
@@ -1091,7 +1092,7 @@ public class CellManager {
         String strPsl = "android.telephony.PhoneStateListener";
         String strProp = "";
         int iListenSignal = PhoneStateListener.LISTEN_NONE;
-        if (LocationUtils.getSdk() < 7) {
+        if (AppToolUtils.getSdk() < 7) {
             strProp = "LISTEN_SIGNAL_STRENGTH";
             try {
                 iListenSignal = ReflectUtils.getStaticIntProp(strPsl, strProp);

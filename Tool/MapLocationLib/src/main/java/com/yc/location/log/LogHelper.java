@@ -28,7 +28,6 @@ import java.util.concurrent.atomic.AtomicReference;
 public class LogHelper {
 
     private static String packageName = "";
-    private static String phonenum = "";
 
     //处理收集数据相关操作的handler，工作在异步线程中。
     private static AtomicReference<Handler> mDataWorkHandler = new AtomicReference<>();
@@ -82,10 +81,6 @@ public class LogHelper {
         LogHelper.logFile("init  DataWorkThread");
     }
 
-    public static void setPhonenum(String phone) {
-        phonenum = phone;
-    }
-
     /**
      * 强制写日志，如果外部设置日志路径，则写入设置路径文件中；否则，用公共日志组件写到组件默认路径下。
      * @param log
@@ -119,10 +114,7 @@ public class LogHelper {
                 @Override
                 public void run() {
                     try {
-                        phonenum = LocationUtils.getPhonenum(mContext);
-
-                        if (TextUtils.isEmpty(phonenum)
-                                || TextUtils.isEmpty(log)) {
+                        if (TextUtils.isEmpty(log)) {
                             return;
                         }
 
@@ -143,7 +135,7 @@ public class LogHelper {
                             separator = File.separator;
                         }
 
-                        String fileName = bamaiPath + separator + phonenum + "_locsdk_" + Constants.simpleDateFormatExt2.format(System.currentTimeMillis()) + ".txt";
+                        String fileName = bamaiPath + separator + "_locsdk_" + Constants.simpleDateFormatExt2.format(System.currentTimeMillis()) + ".txt";
 
                         String timeStr = Constants.simpleDateFormatExt1.format(System.currentTimeMillis()) + "-" + threadid + " ";
                         FileOutputStream fos = null;

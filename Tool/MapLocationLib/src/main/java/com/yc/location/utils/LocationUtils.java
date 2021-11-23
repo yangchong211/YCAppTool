@@ -44,44 +44,6 @@ public final class LocationUtils {
         return SystemClock.elapsedRealtime();
     }
 
-    /**
-     * 获取当前时间
-     * @return                  当前时间戳
-     */
-    public static long getNowTime(){
-        return System.currentTimeMillis();
-    }
-
-    /**
-     * 获取手机SDK版本
-     *
-     * @param
-     * @return int
-     */
-    public static int getSdk() {
-        if (iSdk > 0) {
-            return iSdk;
-        }
-        int iLv = 0;
-        String strVersion = "android.os.Build$VERSION";
-        try {
-            iLv = ReflectUtils.getStaticIntProp(strVersion, "SDK_INT");
-        } catch (Exception e) {
-            try {
-                Object obj = ReflectUtils.getStaticProp(strVersion, "SDK");
-                iLv = Integer.parseInt(obj.toString());
-            } catch (Exception e1) {
-                LogHelper.logFile(e1.toString());
-            }
-        }
-
-        if (iLv > 0) {
-            iSdk = iLv;
-        }
-
-        return iLv;
-    }
-
     public  static boolean isLocationSwitchOff(Context context) {
         if (getLocationSwitchLevel(context) == Settings.Secure.LOCATION_MODE_OFF) {
             return true;
@@ -177,26 +139,6 @@ public final class LocationUtils {
         return iNetT;
     }
 
-
-    public  static void saveAppVersion(Context context, String version) {
-        SharedPreferences settings = context.getSharedPreferences(Constants.PREFS_NAME_APPVERSION, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString(Constants.PREFS_NAME_APPVERSION, version);
-        editor.apply();
-    }
-
-    public  static String readAppVersion(Context context) {
-        SharedPreferences settings = context.getSharedPreferences(Constants.PREFS_NAME_APPVERSION, Context.MODE_PRIVATE);
-        String version = "";
-        try {
-            version = settings.getString(Constants.PREFS_NAME_APPVERSION, "");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return version;
-    }
-
-
     public static Object getServ(Context ctx, String strServName) {
         if (ctx == null) {
             return null;
@@ -286,7 +228,7 @@ public final class LocationUtils {
         }
         ContentResolver cr = ctx.getContentResolver();
         Object obj = null;
-        if (getSdk() < 17) {
+        if (AppToolUtils.getSdk() < 17) {
             try {
                 String strSystem = "android.provider.Settings$System";
                 obj = ReflectUtils.getStaticProp(strSystem, "AIRPLANE_MODE_ON");
@@ -417,7 +359,7 @@ public final class LocationUtils {
                     return false;
                 }
             }
-            if (getSdk() >= 19) {
+            if (AppToolUtils.getSdk() >= 19) {
                 pi = null;
                 String[] saWhitelst = { "GmsCore.apk", "PrebuiltGmsCore.apk" };
                 for (String str : saWhitelst) {
@@ -490,14 +432,6 @@ public final class LocationUtils {
 
     public  static int getCoordinateType(Context context) {
         return mCoordinateType;
-    }
-
-    public   static String getPhonenum(Context context) {
-        SharedPreferences settings = context.getSharedPreferences(Constants.PREFS_NAME_PHONE, Context.MODE_PRIVATE);
-        if (null != settings) {
-            return settings.getString(Constants.PREFS_NAME_PHONE, "");
-        }
-        return "";
     }
 
     public  static void setCoordinateType(int type) {

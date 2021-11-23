@@ -178,7 +178,6 @@ public class LocationImpl implements ILocationProvider {
             mLocationUpdateOption.setInterval(LocationUpdateOption.IntervalMode.NORMAL);
         }
         mLocationUpdateOption.setModuleKey(mModelKey);
-        mLocationManager.setAppid(mModelKey);
         //注意：国内使用的应用不要调用此函数。
         //设置返回的定位坐标类型。默认为GCJ02坐标(国内定位时使用的坐标)。
         //1.当前只有做国际版业务时，才需要调用此函数。别的业务线或其他情况下禁止调用此函数。

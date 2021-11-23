@@ -12,6 +12,7 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
+import com.yc.location.utils.AppToolUtils;
 import com.yc.location.utils.ReflectUtils;
 import com.yc.location.utils.LocationUtils;
 
@@ -125,7 +126,7 @@ public class LocationSensorMonitor {
         if (mWifiManager == null) {
             return bWifiEnabled;
         }
-        if (LocationUtils.getSdk() > 17) {
+        if (AppToolUtils.getSdk() > 17) {
       /*
        * 判断是否开启了WIFI持续扫描
        */

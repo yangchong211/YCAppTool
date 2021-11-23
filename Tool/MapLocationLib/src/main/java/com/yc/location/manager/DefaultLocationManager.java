@@ -1,13 +1,7 @@
 package com.yc.location.manager;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Handler;
-import android.os.HandlerThread;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import com.yc.location.BuildConfig;
@@ -16,68 +10,47 @@ import com.yc.location.R;
 import com.yc.location.bean.DefaultLocation;
 import com.yc.location.bean.ErrorInfo;
 import com.yc.location.config.LocationUpdateOption;
-import com.yc.location.constant.Constants;
 import com.yc.location.listener.LocationListener;
 import com.yc.location.listener.LocationListenerWrapper;
 import com.yc.location.log.LogHelper;
-import com.yc.location.monitor.LocationSensorMonitor;
 import com.yc.location.utils.LocationUtils;
-
+import com.yc.location.utils.StatusUtils;
 import java.io.File;
 import java.util.HashSet;
 
-
-
 public class DefaultLocationManager {
 
-    public static String appid = "test";
     public  static volatile DefaultLocation lastKnownLocation = null;
-    public  static volatile long startstamp = 0L;
     public static boolean enableMockLocation = false;
     private static volatile DefaultLocationManager instance = null;
     private static Context context = null;
     private boolean isRunning = false;
     private LocationCenter mLocCenter = null;
-    //处理收集数据相关操作的handler，工作在异步线程中。
-    private Handler mDataWorkHandler;
-    private HashSet<LocationListener> mLocOnceListeners;
-    private LocationListener mOnceListener;
-    private LocationUpdateOption mOnceListenerOption;
-    private Handler mMainHandler;
-
-
-    private void notifyLocOnceListeners(DefaultLocation loc) {
-        if (mLocOnceListeners != null) {
-            //StringBuilder log = new StringBuilder("notify loc " + (loc == null ? null : loc.toString()) + " to once listeners:");
-            for (LocationListener l : mLocOnceListeners) {
-                //log.append("{" + "listener").append(l.hashCode()).append("}");
-                l.onLocationChanged(loc);
-            }
-            //LogHelper.write(log.toString());
-        }
-    }
+    private final HashSet<LocationListener> mLocOnceListeners;
+    private final LocationListener mOnceListener;
+    private final LocationUpdateOption mOnceListenerOption;
+    private final Handler mMainHandler;
+    private static final String TAG = "DefaultLocationManager";
 
     private DefaultLocationManager(Context context) {
         DefaultLocationManager.context = context.getApplicationContext();
-
-        mDataWorkThread = new HandlerThread("DataWorkThread");
-        mDataWorkThread.start();
-        mDataWorkHandler = new Handler(mDataWorkThread.getLooper());
         LogHelper.init(DefaultLocationManager.context);
-
         mMainHandler = new Handler(context.getMainLooper());
-
         mLocOnceListeners = new HashSet<>();
         mOnceListener = new LocationListener() {
             @Override
             public void onLocationChanged(DefaultLocation didiLocation) {
-                notifyLocOnceListeners(didiLocation);
+                for (LocationListener l : mLocOnceListeners) {
+                    l.onLocationChanged(didiLocation);
+                }
                 finishLocOnce();
             }
 
             @Override
             public void onLocationError(int errNo, ErrorInfo errInfo) {
-                notifyErrOnceListeners(errNo, errInfo);
+                for (LocationListener l : mLocOnceListeners) {
+                    l.onLocationError(errNo, errInfo);
+                }
                 finishLocOnce();
             }
 
@@ -91,47 +64,22 @@ public class DefaultLocationManager {
 		LogHelper.logFile("DIDILocationManager single instance constructed!!");
     }
 
-    private void notifyErrOnceListeners(int errNo, ErrorInfo errInfo) {
-        if (mLocOnceListeners != null) {
-//            String log = "notify error " + (errInfo == null ? null : errInfo.getErrNo()) + " to once listeners:";
-            for (LocationListener l : mLocOnceListeners) {
-                //Log.i("lcc", "lcc, notify once listener " + l.hashCode());
-//                log += "{" + "listener" + l.hashCode() + "}";
-                l.onLocationError(errNo, errInfo);
-            }
-//            LogHelper.write(log);
-        }
-    }
-
     private void finishLocOnce() {
         mLocOnceListeners.clear();
         mOnceListenerOption.setModuleKey(null);
-
-//        mIsOnceLocating = false;
         //当连续定位服务和单次定位服务、都不需要时，停止定位服务。
-        removeLocationUpdates(mOnceListener);//listener回调中嵌套操作 包含listener的list，调封装函数经handler中转一下。
+        removeLocationUpdates(mOnceListener);
+        //listener回调中嵌套操作 包含listener的list，调封装函数经handler中转一下。
     }
 
     /**
-     * <p>
-     *     LocManager是一个单例，使用getInstance去获取实例。
-     * </p>
-     * <p>
-     *     需要一个ApplicationContext作为参数且不能为空，否则会导致LocManager无法实例化，
-     *     因此返回无效值。
-     * </p>
-     * <p>
-     *     参数ApplicationContext用于程序package name的获取，会影响到case的标注，
-     *     为了保证context的生命周期，不要将某个activity的context作为ApplicationContext。
-     * </p>
-     *
+     * DefaultLocationManager是一个单例，使用getInstance去获取实例。
      * @param c 应用程序的Context
-     * @return 返回LocManager实例，用于启动定位，使用一些public方法等。
+     * @return 返回DefaultLocationManager实例，用于启动定位，使用一些public方法等。
      */
     public static DefaultLocationManager getInstance(Context c) {
         if(c == null) return null;
         context = c.getApplicationContext();
-
         if(instance == null) {
             synchronized (DefaultLocationManager.class) {
                 if(instance == null) {
@@ -142,8 +90,6 @@ public class DefaultLocationManager {
         return instance;
     }
 
-    //收集数据相关操作的工作线程。
-    private HandlerThread mDataWorkThread = null;
     /**
      * WARNNING: multi calling cannot replace DIDILocationListener to new one,
      * you should call stop - start to replace new DIDILocationListener.
@@ -151,90 +97,42 @@ public class DefaultLocationManager {
      * @return 0=ok
      */
     private synchronized int startLocService(LocationListenerWrapper locListener) {
-
-        if (Build.VERSION.SDK_INT < 9) return 1;
-        startstamp = System.currentTimeMillis();
         if (null != lastKnownLocation) {
             lastKnownLocation.setCacheLocation(true);
         }
-
 		LogHelper.logFile("LocManager # startLocService called, locListener hash " + locListener.hashCode());
         LogHelper.logFile("SDK VER : " + BuildConfig.VERSION_NAME);
-
-
-
         if (mLocCenter == null) {
             mLocCenter = new LocationCenter(context);
         }
-        mLocCenter.start(locListener); // listener 队列
-
-        //LocService.maptype = -1;
-        if (LocationUtils.getCoordinateType(context) == DefaultLocation.COORDINATE_TYPE_GCJ02) {//国际应用不采集
-            startTrace();
-        }
-
+        // listener 队列
+        mLocCenter.start(locListener);
         isRunning = true;
-
-
         LogHelper.logFile("-startLocService- : success!");
-
         return 0;
-    }
-
-    /** give/update phonenum to locsdk, '15802348421', etc. */
-    public void setPhonenum(String num) {
-
-        SharedPreferences settings = context.getSharedPreferences(Constants.PREFS_NAME_PHONE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString(Constants.PREFS_NAME_PHONE, num);
-
-        editor.apply();
-
-        LogHelper.setPhonenum(num);
-    }
-
-    protected static String getPhonenum(Context context) {
-        SharedPreferences settings = context.getSharedPreferences(Constants.PREFS_NAME_PHONE, Context.MODE_PRIVATE);
-        return settings.getString(Constants.PREFS_NAME_PHONE, "");
     }
 
     public static Context getAppContext() {
         return context;
     }
 
-    public void setAppVersionName(String version) {
-        LocationUtils.saveAppVersion(context, version);
-
-    }
-
-    /** give/update appid to locsdk, 'gs','taxi','passenger','test',etc. */
-    public void setAppid(String id) { appid = id; }
-
     private void stopLocService() {
-
-        if (Build.VERSION.SDK_INT < 9) return;
         //if (!isNormalStop()) return;
         if (!isRunning && mLocCenter == null) {
             LogHelper.logFile("LocManager # loc service is not running");
             return;
         }
-
         LogHelper.logFile("LocManager # stop loc service");
-
-        if (mLocCenter != null) mLocCenter.stop();
-        mLocCenter = null;
-        if (LocationUtils.getCoordinateType(context) == DefaultLocation.COORDINATE_TYPE_GCJ02) {//国际应用就没有开启采集
-            stopTrace();
+        if (mLocCenter != null) {
+            mLocCenter.stop();
         }
-
-
+        mLocCenter = null;
         isRunning = false;
         //useTencentSDK = false;
         if (null != lastKnownLocation) {
             lastKnownLocation.setCacheLocation(true);
         }
         LogHelper.stopWorkThread();
-
     }
 
     public String getVersion() {
@@ -290,11 +188,6 @@ public class DefaultLocationManager {
     }
 
     private void requestLocationUpdateOnceInternal(LocationListener listener, String moduleKey) {
-//        if (!mIsOnceLocating) {
-//            //Log.i("lcc", "lcc, requestLocationUpdateOnceInternal");
-//            startLocServiceOnce(mOnceListener);
-//            mIsOnceLocating = true;
-//        }
         mLocOnceListeners.add(listener);
         String originModuleKey = mOnceListenerOption.getModuleKey();
         if (TextUtils.isEmpty(originModuleKey)) {
@@ -307,15 +200,16 @@ public class DefaultLocationManager {
     }
 
     /**
-     * 注册listener连续监听获取位置，可以多次调用注册多个listener，SDK会按option配置参数不断回调通知listener最新位置。首次调用时SDK内部会自动开启定位服务。
-     * @param listener 监听位置结果的listener。
-     * @param option 本listener监听配置选项，如监听时间间隔等, 其中务必配置moduleKey，负责无法定位，直接出错。支持不同的listener配置不同的监听选项。
+     * 注册listener连续监听获取位置，可以多次调用注册多个listener，SDK会按option配置参数不断回调通知listener最新位置。
+     * 首次调用时SDK内部会自动开启定位服务。
+     * @param listener  监听位置结果的listener。
+     * @param option    本listener监听配置选项，如监听时间间隔等, 其中务必配置moduleKey，负责无法定位，直接出错。
+     *                  支持不同的listener配置不同的监听选项。
      */
     public int requestLocationUpdates(final LocationListener listener, final LocationUpdateOption option) {
         if (null == listener || null == option) {
             return -1;
         }
-//        LogHelper.write("DIDILocationManager#requestLocationUpdates: listener" + listener.hashCode() + " key:" + option.getModuleKey());
         if (TextUtils.isEmpty(option.getModuleKey())) {
             final ErrorInfo errInfo = new ErrorInfo(ErrorInfo.ERROR_MODULE_PERMISSION);
             errInfo.setErrMessage(context.getString(R.string.location_err_module_permission));
@@ -361,11 +255,10 @@ public class DefaultLocationManager {
      * SDK内部发现当所有注册的listener都被移除时，会停止定位服务。
      */
     public int removeLocationUpdates(final LocationListener listener) {
-        //Log.i("lcc", "lcc, in removeLocationUpdates, listener is:" + listener.hashCode());
         if (null == listener) {
             return -1;
         }
-//        LogHelper.write("DIDILocationManager#removeLocationUpdates: listener" + listener.hashCode());
+        LogHelper.i(TAG, "lcc, in removeLocationUpdates, listener is:" + listener.hashCode());
         mMainHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -394,14 +287,6 @@ public class DefaultLocationManager {
         // 此版本腾讯不含有mock过滤，故不处理腾讯接收的mock
     }
 
-    private void startTrace() {
-
-    }
-
-    private void stopTrace() {
-
-    }
-
     /**
      * 获得一个默认的配置选项，使用方根据情况决定是否更改其中选项。
      * @return 默认的配置选项对象。其中更新位置时间间隔模式为NORMAL, 3s。
@@ -410,69 +295,16 @@ public class DefaultLocationManager {
         return new LocationUpdateOption();
     }
 
-    /**
-     * 获得手机GPS状态，返回结果会同时包含是否开启、权限是否被禁止，请用{@link DefaultLocation}中gps状态标示与此返回值与运算，得到所有状态。
-     * 如返回值为status，则status&DIDILocation.STATUS_GPS_DISABLED = DIDILocation.STATUS_GPS_DISABLED,则代表gps没有打开。
-     * 与运算用到的常量范围：{@link DefaultLocation} STATUS_GPS_DISABLED, STATUS_GPS_DENIED。
-     * @return 手机GPS状态值。
-     */
     public int getGpsStatus() {
-        int gpsEnableState = 0;
-        boolean gpsenable = LocationSensorMonitor.getInstance(context).isGpsEnabled();
-        gpsEnableState = !gpsenable ? DefaultLocation.STATUS_GPS_DISABLED : 0;
-        int gpsPermissionState = 0;
-        if (LocationUtils.checkSystemPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            gpsPermissionState = DefaultLocation.STATUS_GPS_DENIED;
-        }
-
-        return gpsEnableState|gpsPermissionState;
+        return StatusUtils.getGpsStatus(context);
     }
 
-    /**
-     * 获得手机wifi状态，返回结果会同时包含是否开启、权限是否被禁止、定位开关是否关闭（在android M系统中，此时禁止进行wifi扫描），请用{@link DefaultLocation}中wifi状态标示与此返回值与运算，得到所有状态。
-     * 如返回值为status，则status&DIDILocation.STATUS_WIFI_DISABLED = DIDILocation.STATUS_WIFI_DISABLED,则代表wifi没有打开。
-     * 与运算用到的常量范围：{@link DefaultLocation} STATUS_WIFI_DISABLED, STATUS_WIFI_DENIED, STATUS_WIFI_LOCATION_SWITCH_OFF。
-     * @return 手机wifi状态值。
-     */
     public int getWifiStatus() {
-        boolean wifiEnabled = LocationSensorMonitor.getInstance(context).isWifiEnabled();
-        int wifiEnableState = !wifiEnabled ? DefaultLocation.STATUS_WIFI_DISABLED : 0;
-        int wifiPermissionState = 0;
-        if (!LocationUtils.isLocationPermissionGranted(context)) {
-            wifiPermissionState = DefaultLocation.STATUS_WIFI_DENIED;
-        }
-        int locationSwithState = LocationUtils.isLocationSwitchOff(context) ? DefaultLocation.STATUS_WIFI_LOCATION_SWITCH_OFF : 0;
-
-        return wifiEnableState|wifiPermissionState|locationSwithState;
-
+        return StatusUtils.getWifiStatus(context);
     }
 
-    /**
-     * 获得手机基站状态，返回结果会同时包含是否插入sim卡、权限是否被禁止（对android M以上系统不能使用基站定位），请用{@link DefaultLocation}中cell状态标示与此返回值与运算，得到所有状态。
-     * 如返回值为status，则status&DIDILocation.STATUS_CELL_UNAVAILABLE = DIDILocation.STATUS_CELL_UNAVAILABLE,则代表基站信息不可得（没安装sim卡）。
-     * 与运算用到的常量范围：{@link DefaultLocation} STATUS_CELL_UNAVAILABLE, STATUS_CELL_DENIED。
-     * @return 手机基站（sim卡）状态值。
-     */
     public int getCellStatus() {
-        TelephonyManager manager = (TelephonyManager)
-                context.getSystemService(Context.TELEPHONY_SERVICE);
-        int simState = manager.getSimState();
-        boolean hasSim = true;
-        switch (simState) {
-            case TelephonyManager.SIM_STATE_ABSENT:
-            case TelephonyManager.SIM_STATE_UNKNOWN:
-                hasSim = false; // 没有SIM卡
-                break;
-            default:
-                break;
-        }
-        int cellPermissionState = 0;
-        if (!LocationUtils.isLocationPermissionGranted(context) && Build.VERSION.SDK_INT >= 23) {
-            cellPermissionState = DefaultLocation.STATUS_CELL_DENIED;
-        }
-        int simAvailable = !hasSim ? DefaultLocation.STATUS_CELL_UNAVAILABLE : 0;
-        return simAvailable|cellPermissionState;
+        return StatusUtils.getCellStatus(context);
     }
 
     /**

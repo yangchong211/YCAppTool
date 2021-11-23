@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.yc.location.log.LogHelper;
+import com.yc.location.utils.AppToolUtils;
 import com.yc.location.utils.ReflectUtils;
 import com.yc.location.utils.LocationUtils;
 
@@ -158,7 +159,7 @@ public class WifiManagerWrapper {
         } catch (Exception e) {
             //
         }
-        if (!bWifiEnabled && LocationUtils.getSdk() > 17) {
+        if (!bWifiEnabled && AppToolUtils.getSdk() > 17) {
       /*
        * 判断是否开启了WIFI持续扫描
        */
@@ -190,7 +191,7 @@ public class WifiManagerWrapper {
         if (mWifiManager == null || ctx == null || !bPermWriteSettings) {
             return;
         }
-        if (LocationUtils.getSdk() <= 17) {
+        if (AppToolUtils.getSdk() <= 17) {
             return;
         }
 

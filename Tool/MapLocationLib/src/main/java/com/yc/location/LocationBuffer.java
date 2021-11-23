@@ -28,11 +28,9 @@ public class LocationBuffer {
     }
 
     public boolean isCompatible(LocationServiceResponse response) {
-
         if(response == null || response.locations.size() <= 0) {
             return false;
         }
-
         LonLat curLonLat = getMaxConfiPoint(response);
 
         // 缓存集合为空，直接添加

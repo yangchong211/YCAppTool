@@ -170,11 +170,10 @@ public class LocationConfessor {
         }
 
         //omega埋点：为检验权限状态获取是否正确（司机端定位相关新业务功能），记录权限状态值及基本信息。
-        if (context.getPackageName().equals(Constants.PACKAGE_NAME_DRIVER) && (intervalMillis == LocationUpdateOption.IntervalMode.NORMAL.getValue()
+        if ((intervalMillis == LocationUpdateOption.IntervalMode.NORMAL.getValue()
                 || intervalMillis == LocationUpdateOption.IntervalMode.BATTERY_SAVE.getValue())) {
             PermissionSwitchUtils.PermissionSwitchState state = PermissionSwitchUtils.getPermissionSwitchState(context);
             HashMap<String, String> params = new HashMap<>();
-            params.put("phone", LocationUtils.getPhonenum(context));
             params.put("ui_version", Build.ID);
             params.put("sdk_version", String.valueOf(BuildConfig.VERSION_CODE));
             params.put("location_switch_level", String.valueOf(LocationUtils.getLocationSwitchLevel(context)));
