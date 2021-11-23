@@ -66,6 +66,9 @@ public class Constants {
     public static final long wifiScanExpiredMillis       = 60*1000;
     public static final long wifiValidDeadlineMillis     = 5*60*1000;
     public static final long DEF_GPS_FLP_MONITOR_INTERVAL = 1000;
+    /**
+     * gps定位
+     */
     public static final long gpsLocTimeIntevalMillis     = 30*1000;
     public static final long minQpsIntervalMillis        = 8*1000;
     public static final long tencentLocTimeIntevalMillis     = 10*1000;

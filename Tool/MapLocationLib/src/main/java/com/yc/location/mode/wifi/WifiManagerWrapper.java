@@ -171,7 +171,7 @@ public class WifiManagerWrapper {
                 }
 
             } catch (Exception e) {
-                LogHelper.logBamai(e.toString());
+                LogHelper.logFile(e.toString());
             }
         }
         return bWifiEnabled;
@@ -218,10 +218,10 @@ public class WifiManagerWrapper {
                 ReflectUtils.invokeStaticMethod(strGlobal, "putInt", oa, ca);
             }
 
-            LogHelper.logBamai("wifi| always scan :" + iStat);
+            LogHelper.logFile("wifi| always scan :" + iStat);
 
         } catch (Exception e) {
-            LogHelper.logBamai("wifi| always scan Exception :" + e.toString());
+            LogHelper.logFile("wifi| always scan Exception :" + e.toString());
         }
         oa = null;
         ca = null;
@@ -265,11 +265,11 @@ public class WifiManagerWrapper {
         try {
             bSucc = startScanActive();
             if (bSucc) {
-                LogHelper.logBamai("start wifi active scan success");
+                LogHelper.logFile("start wifi active scan success");
 //                wifiScanTimestamp = System.currentTimeMillis();
             }
         } catch (Exception e) {
-            LogHelper.logBamai("start wifi active scan failed");
+            LogHelper.logFile("start wifi active scan failed");
         }
 
         try {
@@ -279,7 +279,7 @@ public class WifiManagerWrapper {
 //                wifiScanTimestamp = Utils.getTimeBoot();
             }
         } catch (Exception e) {
-            LogHelper.logBamai("start wifi scan failed");
+            LogHelper.logFile("start wifi scan failed");
         }
     }
 
@@ -298,7 +298,7 @@ public class WifiManagerWrapper {
                 mContext.registerReceiver(receiver, intentFilter);
             }
         } catch (SecurityException e) {
-            LogHelper.logBamai("initWifiListeners exception, " + e.getMessage());
+            LogHelper.logFile("initWifiListeners exception, " + e.getMessage());
         }
     }
 

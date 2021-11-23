@@ -77,7 +77,7 @@ public class CellManager {
         }
 
         if (iT == Constants.iSim2Def) {
-            LogHelper.logBamai("sim2 default");
+            LogHelper.logFile("sim2 default");
         }
 
         return iT;
@@ -85,7 +85,7 @@ public class CellManager {
 
     public void init() {
         if (mContext == null) {
-            LogHelper.logBamai("CellManager::init context is null");
+            LogHelper.logFile("CellManager::init context is null");
 
             return;
         }
@@ -171,10 +171,10 @@ public class CellManager {
     public void destroy() {
         if (mTelephonyManager != null && mListener != null) {
             try {
-                LogHelper.logBamai("cell unregister listener");
+                LogHelper.logFile("cell unregister listener");
                 mTelephonyManager.listen(mListener, PhoneStateListener.LISTEN_NONE);
             } catch (Exception e) {
-                LogHelper.logBamai(e.toString());
+                LogHelper.logFile(e.toString());
             }
         }
         if (null != lstCgi) {
@@ -197,13 +197,13 @@ public class CellManager {
         switch (iCgiT) {
             case Cgi.iGsmT:
                 if (null != lstCgi && lstCgi.isEmpty()) {
-                    LogHelper.logBamai("refine cgi gsm2def");
+                    LogHelper.logFile("refine cgi gsm2def");
                     iCgiT = Cgi.iDefCgiT;
                 }
                 break;
             case Cgi.iCdmaT:
                 if (null != lstCgi && lstCgi.isEmpty()) {
-                    LogHelper.logBamai("refine cell cdma2def");
+                    LogHelper.logFile("refine cell cdma2def");
 
                     iCgiT = Cgi.iDefCgiT;
                 }
@@ -286,7 +286,7 @@ public class CellManager {
                     case 8:
                     case 10:
                     case 33:
-                        LogHelper.logBamai("cgi|fake");
+                        LogHelper.logFile("cgi|fake");
                         break;
                     default:
                         break;
@@ -304,7 +304,7 @@ public class CellManager {
                         bFine = false;
                     }
                 } catch (Exception e) {
-                    LogHelper.logBamai(e.toString());
+                    LogHelper.logFile(e.toString());
                 }
                 break;
             default:
@@ -371,20 +371,20 @@ public class CellManager {
             //LogHelper.logBamai("try to found cell");
             lstCgi = getSim1Cgis();
             if (lstCgi == null || lstCgi.size() == 0) {
-                LogHelper.logBamai("sim1 miss");
+                LogHelper.logFile("sim1 miss");
         /*
          * 获取副卡基站
          */
                 lstCgi = getSim2Cgis();
             }
             if (lstCgi == null || lstCgi.size() == 0) {//lcc:此分支只是为了日志
-                LogHelper.logBamai("sim2 miss");
+                LogHelper.logFile("sim2 miss");
         /*
          * 使用onCellLocationChange中回调的值
          */
             }
             if (!cgiUseful(lastCellLoc)) {
-                LogHelper.logBamai("non sim found");
+                LogHelper.logFile("non sim found");
                 return;
             }
             if (lstCgi == null) {
@@ -405,7 +405,7 @@ public class CellManager {
                     hdlCdmaLocChange(lastCellLoc);
                     break;
                 default:
-                    LogHelper.logBamai("cell: type unknown " + iCellLocT);
+                    LogHelper.logFile("cell: type unknown " + iCellLocT);
 
                     break;
             }
@@ -465,7 +465,7 @@ public class CellManager {
 
 //        lstCgi.clear();
         if (LocationUtils.getSdk() < 5) {
-            LogHelper.logBamai("do not support cdma");
+            LogHelper.logFile("do not support cdma");
             return;
         }
         try {
@@ -485,7 +485,7 @@ public class CellManager {
                     GsmCellLocation gsmCellLoc = null;
                     gsmCellLoc = (GsmCellLocation) fieldCdma.get(oCdmaCellLoc);
                     if (gsmCellLoc != null && cgiUseful(gsmCellLoc)) {
-                        LogHelper.logBamai("get gsm cell loc");
+                        LogHelper.logFile("get gsm cell loc");
                         lastCellLoc = gsmCellLoc;
                         //lstCgi中存在的第一个元素就是原lastCellLoc对应的Cgi
                         if (lstCgi != null && lstCgi.size() > 0) {
@@ -495,7 +495,7 @@ public class CellManager {
                         bSim2Fine = true;
                     }
                 } catch (Exception e) {
-                    LogHelper.logBamai("can not found gsm cell loc");
+                    LogHelper.logFile("can not found gsm cell loc");
                 }
                 if (bSim2Fine) {
           /*
@@ -515,7 +515,7 @@ public class CellManager {
                 lstCgi.add(cgi);
             }
         } catch (Exception e) {
-            LogHelper.logBamai(e.toString());
+            LogHelper.logFile(e.toString());
         }
     }
 
@@ -553,7 +553,7 @@ public class CellManager {
                 bCoordFine = false;
             }
             if (!bCoordFine) {
-                LogHelper.logBamai("cdma coordinate is invalid");
+                LogHelper.logFile("cdma coordinate is invalid");
             }
         } catch (Exception e) {
             cgi = null;
@@ -581,11 +581,11 @@ public class CellManager {
             lstCellInfo = (List<?>) ReflectUtils.invokeMethod(tm, "getAllCellInfo");
             list = retrieveCgis(lstCellInfo);
         } catch (Exception e) {
-            LogHelper.logBamai(e.toString());
+            LogHelper.logFile(e.toString());
         }
 
         if (list != null && list.size() > 0) {
-            LogHelper.logBamai("sim1 cellLocation got 1");
+            LogHelper.logFile("sim1 cellLocation got 1");
             return list;
         }
         list = new ArrayList<>();
@@ -598,7 +598,7 @@ public class CellManager {
         if (cgiUseful(cellLoc)) {
             lastCellLoc = cellLoc;
             addCellLoc(cellLoc, list);
-            LogHelper.logBamai("sim1 cellLocation got 2");
+            LogHelper.logFile("sim1 cellLocation got 2");
             return list;
         }
     /*
@@ -611,13 +611,13 @@ public class CellManager {
                 cellLoc = (CellLocation) o;
             }
         } catch (NoSuchMethodException e) {
-            LogHelper.logBamai("sim1 getAllCellInfo failed 2");
+            LogHelper.logFile("sim1 getAllCellInfo failed 2");
         } catch (Exception e) {
-            LogHelper.logBamai(e.toString());
+            LogHelper.logFile(e.toString());
         }
         o = null;
         if (cgiUseful(cellLoc)) {
-            LogHelper.logBamai("sim1 getAllCellInfo got 3");
+            LogHelper.logFile("sim1 getAllCellInfo got 3");
             lastCellLoc = cellLoc;
             addCellLoc(cellLoc, list);
             return list;
@@ -634,13 +634,13 @@ public class CellManager {
                 cellLoc = (CellLocation) o;
             }
         } catch (NoSuchMethodException e) {
-            LogHelper.logBamai("sim1 getCellLocationGemini failed");
+            LogHelper.logFile("sim1 getCellLocationGemini failed");
         } catch (Exception e) {
-            LogHelper.logBamai(e.toString());
+            LogHelper.logFile(e.toString());
         }
         o = null;
         if (cgiUseful(cellLoc)) {
-            LogHelper.logBamai("sim1 getAllCellInfo got 4");
+            LogHelper.logFile("sim1 getAllCellInfo got 4");
             lastCellLoc = cellLoc;
             addCellLoc(cellLoc, list);
             return list;
@@ -699,7 +699,7 @@ public class CellManager {
                 try {
                     lstCI = (List<?>) ReflectUtils.invokeMethod(oTm2, s);
                 } catch (Exception e) {
-                    LogHelper.logBamai("sim2 exception 3: " + e.toString());
+                    LogHelper.logFile("sim2 exception 3: " + e.toString());
                 }
                 cgiList = retrieveCgis(lstCI);
 
@@ -712,15 +712,15 @@ public class CellManager {
                     try {
                         o = ReflectUtils.invokeMethod(oTm2, s);
                     } catch (Exception e) {
-                        LogHelper.logBamai("sim2 exception 0: " + e.toString());
+                        LogHelper.logFile("sim2 exception 0: " + e.toString());
                     }
                     if (o == null) {
                         try {
                             o = ReflectUtils.invokeMethod(oTm2, s, 1);
                         } catch (NoSuchMethodException e) {
-                            LogHelper.logBamai("sim2 NoSuchMethodException: getCellLocation 2");
+                            LogHelper.logFile("sim2 NoSuchMethodException: getCellLocation 2");
                         } catch (Exception e) {
-                            LogHelper.logBamai("sim2 exception 1: " + e.toString());
+                            LogHelper.logFile("sim2 exception 1: " + e.toString());
                         }
                     }
 
@@ -729,9 +729,9 @@ public class CellManager {
                         try {
                             o = ReflectUtils.invokeMethod(oTm2, s, 1);
                         } catch (NoSuchMethodException e) {
-                            LogHelper.logBamai("sim2 NoSuchMethodException: getCellLocationGemini");
+                            LogHelper.logFile("sim2 NoSuchMethodException: getCellLocationGemini");
                         } catch (Exception e) {
-                            LogHelper.logBamai("sim2 exception 2: " + e.toString());
+                            LogHelper.logFile("sim2 exception 2: " + e.toString());
                         }
                     } else {
 //                    LogHelper.logBamai("sim2 celllocation found 2");
@@ -746,7 +746,7 @@ public class CellManager {
                 }
             }
         } catch (Exception e) {
-            LogHelper.logBamai(e.toString());
+            LogHelper.logFile(e.toString());
         }
 
         return cgiList;
@@ -785,7 +785,7 @@ public class CellManager {
        * m.getReturnType().getName()); } } }
        */
         } catch (Exception e) {
-            LogHelper.logBamai(e.toString());
+            LogHelper.logFile(e.toString());
         }
         return cTm2;
     }
@@ -930,7 +930,7 @@ public class CellManager {
                     }
                 }
             } catch (Exception e) {
-                LogHelper.logBamai(e.toString());
+                LogHelper.logFile(e.toString());
                 continue;
             }
         }
@@ -965,7 +965,7 @@ public class CellManager {
      */
     private Cgi getGsm(NeighboringCellInfo nbCellInfo) {
         if (LocationUtils.getSdk() < 5) {
-            LogHelper.logBamai("api" + LocationUtils.getSdk() + " do not support NeighboringCellInfo");
+            LogHelper.logFile("api" + LocationUtils.getSdk() + " do not support NeighboringCellInfo");
             return null;
         }
 
@@ -983,7 +983,7 @@ public class CellManager {
          * 扰码
          */
             if (nbCellInfo.getPsc() != NeighboringCellInfo.UNKNOWN_CID) {
-                LogHelper.logBamai("nb Primary Scrambling Code #" + nbCellInfo.getPsc());
+                LogHelper.logFile("nb Primary Scrambling Code #" + nbCellInfo.getPsc());
             }
 
             return cgi;
@@ -1004,7 +1004,7 @@ public class CellManager {
         try {
             CellLocation.requestLocationUpdate();
         } catch (Exception e) {
-            LogHelper.logBamai(e.toString());
+            LogHelper.logFile(e.toString());
         }
         lLastCgiUpdate = LocationUtils.getTimeBoot();
     }
@@ -1014,7 +1014,7 @@ public class CellManager {
             @Override
             public void onCellLocationChanged(CellLocation cellLoc) {
                 if (!cgiUseful(cellLoc)) {
-                    LogHelper.logBamai("cell state change: cellloc invalid");
+                    LogHelper.logFile("cell state change: cellloc invalid");
                     return;
                 }
 
@@ -1071,13 +1071,13 @@ public class CellManager {
                 int iState = servState.getState();
                 switch (iState) {
                     case ServiceState.STATE_OUT_OF_SERVICE:
-                        LogHelper.logBamai("phone: STATE_OUT_OF_SERVICE");
+                        LogHelper.logFile("phone: STATE_OUT_OF_SERVICE");
                         resetCgiData();
                         if (mLocationInternalListener != null)
                             mLocationInternalListener.onStatusUpdate(DefaultLocation.STATUS_CELL, DefaultLocation.STATUS_CELL_UNAVAILABLE);
                         break;
                     case ServiceState.STATE_IN_SERVICE:
-                        LogHelper.logBamai("phone: STATE_IN_SERVICE");
+                        LogHelper.logFile("phone: STATE_IN_SERVICE");
                         updateCgi();
                         if (mLocationInternalListener != null)
                             mLocationInternalListener.onStatusUpdate(DefaultLocation.STATUS_CELL, DefaultLocation.STATUS_CELL_AVAILABLE);
@@ -1096,14 +1096,14 @@ public class CellManager {
             try {
                 iListenSignal = ReflectUtils.getStaticIntProp(strPsl, strProp);
             } catch (Exception e) {
-                LogHelper.logBamai(e.toString());
+                LogHelper.logFile(e.toString());
             }
         } else {
             strProp = "LISTEN_SIGNAL_STRENGTHS";
             try {
                 iListenSignal = ReflectUtils.getStaticIntProp(strPsl, strProp);
             } catch (Exception e) {
-                LogHelper.logBamai(e.toString());
+                LogHelper.logFile(e.toString());
             }
         }
         if (iListenSignal == PhoneStateListener.LISTEN_NONE) {
@@ -1113,7 +1113,7 @@ public class CellManager {
                 int iLcl = PhoneStateListener.LISTEN_CELL_LOCATION;
                 mTelephonyManager.listen(mListener, iLcl | iListenSignal);
             } catch (Exception e) {
-                LogHelper.logBamai(e.toString());
+                LogHelper.logFile(e.toString());
             }
         }
         try {
@@ -1130,13 +1130,13 @@ public class CellManager {
                     break;
             }
         } catch (Throwable e) {
-            LogHelper.logBamai(e.toString());
+            LogHelper.logFile(e.toString());
         }
 
         if (mTelephonyManagerSub != null) {
-            LogHelper.logBamai("set sim2 state listener success " + mTelephonyManagerSub.getClass().getName());
+            LogHelper.logFile("set sim2 state listener success " + mTelephonyManagerSub.getClass().getName());
         } else {
-            LogHelper.logBamai("set sim2 state listener failed");
+            LogHelper.logFile("set sim2 state listener failed");
         }
     }
 
@@ -1161,7 +1161,7 @@ public class CellManager {
                     try {
                         lstCgi.get(0).sig = iCgiSig;//cdma只支持单个基站
                     } catch (Exception e) {
-                        LogHelper.logBamai(e.toString());
+                        LogHelper.logFile(e.toString());
                     }
                 }
                 break;

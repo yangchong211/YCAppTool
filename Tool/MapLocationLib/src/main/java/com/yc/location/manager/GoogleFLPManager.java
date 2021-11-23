@@ -102,7 +102,7 @@ public class GoogleFLPManager {
                 //有间隔地写日志。
                 long nowTime = System.currentTimeMillis();
                 if((nowTime - mFlpBamaiLogTime) > Constants.MIN_INTERVAL_BAMAI_GPS_NLP_LOCATION) {
-                    LogHelper.logBamai("callback gms location: " + location.getLongitude()
+                    LogHelper.logFile("callback gms location: " + location.getLongitude()
                             + "," + location.getLatitude() + ", " +location.getSpeed() + ", " + location.getBearing());
                     mFlpBamaiLogTime = nowTime;
                 }

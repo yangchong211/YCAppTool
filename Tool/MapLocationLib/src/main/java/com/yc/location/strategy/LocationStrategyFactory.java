@@ -31,16 +31,16 @@ public class LocationStrategyFactory {
         if (useTecent) {
             // request tencent location
             locateStrategy = new TencentLocationStrategy(mContext);
-            LogHelper.logBamai("loc type tencent");
+            LogHelper.logFile("loc type tencent");
         } else {
             if (requestCoordinateType == DefaultLocation.COORDINATE_TYPE_WGS84) {
                 //国际版应用使用
                 locateStrategy = new PlayServiceLocationStrategy(mContext);
-                LogHelper.logBamai("loc type wgs84");
+                LogHelper.logFile("loc type wgs84");
             } else {
                 //国内版应用使用
                 locateStrategy = new CompositeLocationStrategy(mContext);
-                LogHelper.logBamai("loc type gcj02");
+                LogHelper.logFile("loc type gcj02");
             }
         }
         return locateStrategy;

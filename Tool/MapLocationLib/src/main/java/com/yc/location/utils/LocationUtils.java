@@ -38,9 +38,7 @@ public final class LocationUtils {
 
     /**
      * 获取系统自启用以来的时间（单位：毫秒）
-     *
-     * @param
-     * @return long
+     * @return                  long时间戳
      */
     public static long getTimeBoot() {
         return SystemClock.elapsedRealtime();
@@ -85,7 +83,7 @@ public final class LocationUtils {
                 Object obj = ReflectUtils.getStaticProp(strVersion, "SDK");
                 iLv = Integer.parseInt(obj.toString());
             } catch (Exception e1) {
-                LogHelper.logBamai(e1.toString());
+                LogHelper.logFile(e1.toString());
             }
         }
 
@@ -261,10 +259,10 @@ public final class LocationUtils {
         if (dLon == 0.0d && dLat == 0.0d && !loc.hasAccuracy()) {
             bFine = false;
         } else if (dLon > 180.0d || dLat > 90.0d) {
-            LogHelper.logBamai("invalid loc lon:lat : " + dLon + ":" + dLat);
+            LogHelper.logFile("invalid loc lon:lat : " + dLon + ":" + dLat);
             bFine = false;
         } else if (dLon < -180.0d || dLat < -90.0d) {
-            LogHelper.logBamai("invalid loc lon:lat : " + dLon + ":" + dLat);
+            LogHelper.logFile("invalid loc lon:lat : " + dLon + ":" + dLat);
 
             bFine = false;
         }
@@ -290,7 +288,7 @@ public final class LocationUtils {
                 Class.forName("android.telephony.cdma.CdmaCellLocation");
                 iType = Cgi.iCdmaT;
             } catch (Exception e) {
-                LogHelper.logBamai(e.toString());
+                LogHelper.logFile(e.toString());
             }
         }
         return iType;
@@ -316,7 +314,7 @@ public final class LocationUtils {
                 obj = ReflectUtils.invokeStaticMethod(strSystem, "getInt", oa, ca);
                 return ((Integer) obj).intValue() == 1;
             } catch (Exception e) {
-                LogHelper.logBamai("AIRPLANE_MODE: exceptioin 0: " + e.toString());
+                LogHelper.logFile("AIRPLANE_MODE: exceptioin 0: " + e.toString());
             }
         } else {
             try {
@@ -332,7 +330,7 @@ public final class LocationUtils {
                 obj = ReflectUtils.invokeStaticMethod(strGlobal, "getInt", oa, ca);
                 return ((Integer) obj).intValue() == 1;
             } catch (Exception e) {
-                LogHelper.logBamai("AIRPLANE_MODE: exceptioin 1: " + e.toString());
+                LogHelper.logFile("AIRPLANE_MODE: exceptioin 1: " + e.toString());
             }
         }
 
@@ -387,7 +385,7 @@ public final class LocationUtils {
         } else if (saMccMnc[0].equals("0") && saMccMnc[1].equals("0")) {
             if (saCacheMccMnc != null) {
                 saMccMnc = saCacheMccMnc;
-                LogHelper.logBamai("try to fix mnc_sid mcc");
+                LogHelper.logFile("try to fix mnc_sid mcc");
             }
         }
 
@@ -429,7 +427,7 @@ public final class LocationUtils {
                     //
                 }
                 if (pi != null) {
-                    LogHelper.logBamai("nlp provider: " + str);
+                    LogHelper.logFile("nlp provider: " + str);
                     return false;
                 }
             }
@@ -445,7 +443,7 @@ public final class LocationUtils {
                     }
 
                     if ("com.google.android.gms".equals(pi.packageName)) {
-                        LogHelper.logBamai("nlp provider: " + pi.packageName);
+                        LogHelper.logFile("nlp provider: " + pi.packageName);
 
                         return true;
                     }
@@ -455,7 +453,7 @@ public final class LocationUtils {
                     int iFlag = PackageManager.GET_SERVICES;
                     pi = pm.getPackageInfo("com.google.android.location", iFlag);
                 } catch (Exception e) {
-                    LogHelper.logBamai(e.toString());
+                    LogHelper.logFile(e.toString());
                 }
                 if (pi != null) {
                     ServiceInfo[] sis = pi.services;
@@ -466,7 +464,7 @@ public final class LocationUtils {
                                 continue;
                             }
                             if (si.name.startsWith(strPkgName)) {
-                                LogHelper.logBamai("nlp provider: " + si.name);
+                                LogHelper.logFile("nlp provider: " + si.name);
                                 return true;
                             }
                         }
@@ -474,7 +472,7 @@ public final class LocationUtils {
                 }
             }
         } catch (Throwable e) {
-            LogHelper.logBamai(e.toString());
+            LogHelper.logFile(e.toString());
         }
         return false;
     }

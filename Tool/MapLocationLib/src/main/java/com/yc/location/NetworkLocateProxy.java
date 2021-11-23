@@ -90,7 +90,7 @@ public class NetworkLocateProxy {
             // 上一次返回无效，需要请求
             needRequestForLoc = true;
         } else {
-            LogHelper.logBamai("use cache" );
+            LogHelper.logFile("use cache" );
         }
 
         if(needRequestForLoc) {
@@ -108,7 +108,7 @@ public class NetworkLocateProxy {
             if ((int) (locReqData.valid_flag) != ValidFlagEnum.invalid.ordinal()) {
                 // 请求网络位置
                 long timeb = System.currentTimeMillis();
-				LogHelper.logBamai("req:\n" + locReqData.toBamaiLog());
+				LogHelper.logFile("req:\n" + locReqData.toBamaiLog());
                 try {
                     OkHttpUtils.HttpResponse response = sendRequest(locReqData);
                     if (response == null) {
@@ -162,12 +162,12 @@ public class NetworkLocateProxy {
             }
 
 			if (resdata == null || resdata.ret_code != 0 || resdata.locations.size() <= 0) {
-                LogHelper.logBamai("req failed.");
+                LogHelper.logFile("req failed.");
                 if (resdata != null && resdata.ret_code != 0) {
                     // todo - 定位失败
                 }
             } else {
-                LogHelper.logBamai("response\n" + resdata.toJson());
+                LogHelper.logFile("response\n" + resdata.toJson());
             }
 
             now_ts = System.currentTimeMillis();
@@ -267,7 +267,7 @@ public class NetworkLocateProxy {
             LogHelper.write("-DiDiNetworkLocateProxy- lastLocCache=null");
         }
         if(locCaches.size() <= 0) {
-            LogHelper.logBamai("locations is empty after remove.");
+            LogHelper.logFile("locations is empty after remove.");
             return null;
         }
         //choose loc 注：第一次网络定位会进入
@@ -278,7 +278,7 @@ public class NetworkLocateProxy {
                 LogHelper.write("-DiDiNetworkLocateProxy- ret: in low transprob, first loc or cur confidence >= last's : ret=" + ret.toJson());
                 return ret;
             }
-            LogHelper.logBamai("-DiDiNetworkLocateProxy- ret: in low transprob, cur confidence < last's");
+            LogHelper.logFile("-DiDiNetworkLocateProxy- ret: in low transprob, cur confidence < last's");
             //第一次网络定位时为null
             //1、保留上次定位位置(不清空lastLocCache)，以对后续出现的位置过滤跳点。也是为了降低轨迹缺失，不至于一次取到基站定位点，后面wifi定位点都被跳点策略（isAllCandiLowTransprob）过滤掉了。前期AB测试，结合下面第2点。
             if (mReduceLackOfTrace) {

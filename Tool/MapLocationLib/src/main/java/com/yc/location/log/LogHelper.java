@@ -70,7 +70,7 @@ public class LogHelper {
         }
 
         if (mDataWorkHandler.get() != null && mDataWorkThread.get() != null) {
-            LogHelper.logBamai("DataWorkThread has started already");
+            LogHelper.logFile("DataWorkThread has started already");
 
             return;
         }
@@ -81,7 +81,7 @@ public class LogHelper {
         mDataWorkThread.set(new HandlerThread("DataWorkThread"));
         mDataWorkThread.get().start();
         mDataWorkHandler.set(new Handler(mDataWorkThread.get().getLooper()));
-        LogHelper.logBamai("init  DataWorkThread");
+        LogHelper.logFile("init  DataWorkThread");
     }
 
     public static void setPhonenum(String phone) {
@@ -99,7 +99,7 @@ public class LogHelper {
         if (mBamaiPath == null) {
             logBamaiWithoutPath(log);
         } else {
-            logBamai(log);
+            logFile(log);
         }
 
     }
@@ -107,7 +107,7 @@ public class LogHelper {
      * 按设置路径写日志
      * @param log 日志内容
      */
-    public static void logBamai(final String log) {
+    public static void logFile(final String log) {
         if (Constants.isDebug) {
             Log.i("UTILSLOG", log);
         }

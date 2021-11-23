@@ -88,7 +88,7 @@ public class DefaultLocationManager {
         };
         mOnceListenerOption = getDefaultLocationUpdateOption();
         mOnceListenerOption.setInterval(LocationUpdateOption.IntervalMode.HIGH_FREQUENCY);
-		LogHelper.logBamai("DIDILocationManager single instance constructed!!");
+		LogHelper.logFile("DIDILocationManager single instance constructed!!");
     }
 
     private void notifyErrOnceListeners(int errNo, ErrorInfo errInfo) {
@@ -158,8 +158,8 @@ public class DefaultLocationManager {
             lastKnownLocation.setCacheLocation(true);
         }
 
-		LogHelper.logBamai("LocManager # startLocService called, locListener hash " + locListener.hashCode());
-        LogHelper.logBamai("SDK VER : " + BuildConfig.VERSION_NAME);
+		LogHelper.logFile("LocManager # startLocService called, locListener hash " + locListener.hashCode());
+        LogHelper.logFile("SDK VER : " + BuildConfig.VERSION_NAME);
 
 
 
@@ -176,7 +176,7 @@ public class DefaultLocationManager {
         isRunning = true;
 
 
-        LogHelper.logBamai("-startLocService- : success!");
+        LogHelper.logFile("-startLocService- : success!");
 
         return 0;
     }
@@ -215,11 +215,11 @@ public class DefaultLocationManager {
         if (Build.VERSION.SDK_INT < 9) return;
         //if (!isNormalStop()) return;
         if (!isRunning && mLocCenter == null) {
-            LogHelper.logBamai("LocManager # loc service is not running");
+            LogHelper.logFile("LocManager # loc service is not running");
             return;
         }
 
-        LogHelper.logBamai("LocManager # stop loc service");
+        LogHelper.logFile("LocManager # stop loc service");
 
         if (mLocCenter != null) mLocCenter.stop();
         mLocCenter = null;

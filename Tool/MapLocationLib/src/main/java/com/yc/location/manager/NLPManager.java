@@ -38,9 +38,9 @@ public class NLPManager {
             try {
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0f, locationListener, mWorkHandler.getLooper());
             } catch (SecurityException e) {
-                LogHelper.logBamai("mNLPManager#start: exception:" + e.getMessage());
+                LogHelper.logFile("mNLPManager#start: exception:" + e.getMessage());
             } catch (Exception e) {
-                LogHelper.logBamai("mNLPManager#start: exception:" + e.getMessage());
+                LogHelper.logFile("mNLPManager#start: exception:" + e.getMessage());
             }
         }
     }
@@ -52,9 +52,9 @@ public class NLPManager {
             try {
                 locationManager.removeUpdates(locationListener);
             } catch (SecurityException e) {
-                LogHelper.logBamai("mNLPManager#stop: exception:" + e.getMessage());
+                LogHelper.logFile("mNLPManager#stop: exception:" + e.getMessage());
             } catch (Exception e) {
-                LogHelper.logBamai("mNLPManager#stop: exception:" + e.getMessage());
+                LogHelper.logFile("mNLPManager#stop: exception:" + e.getMessage());
 
             }
 
@@ -107,7 +107,7 @@ public class NLPManager {
 
             if ((location.getLatitude() == 0.0d && location.getLongitude() == 0.0d)
                     || location.getAccuracy() <= 0.0f) {
-                LogHelper.logBamai("zero nlp location: " + String.valueOf(location));
+                LogHelper.logFile("zero nlp location: " + String.valueOf(location));
             } else {
                 originNLPLocation = location;
                 updateNlpStamp = LocationUtils.getTimeBoot();

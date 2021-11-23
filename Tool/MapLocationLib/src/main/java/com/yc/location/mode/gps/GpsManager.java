@@ -20,10 +20,18 @@ import com.yc.location.listener.LocationUpdateInternalListener;
 
 import java.util.Iterator;
 
-
+/**
+ * <pre>
+ *     @author  yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2017/07/22
+ *     desc   : gps定位
+ *     revise :
+ * </pre>
+ */
 public class GpsManager {
 
-    private Context mContext;
+    private final Context mContext;
     private LocationManager mLocationManager;
     private Location gpsLocation = null;
     private long mLastGpsEvent = 0;
@@ -34,22 +42,18 @@ public class GpsManager {
     private long mGpsValidateInterval;
     private LocationUpdateInternalListener mLocationInternalListener;
 
-
     public GpsManager(Context context) {
         mContext = context;
         mGpsValidateInterval = Constants.gpsLocTimeIntevalMillis;
-
     }
 
     public void init(long interval) {
         if (mContext == null) {
             return;
         }
-
         mLocationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
         if (!LocationUtils.hasGpsProvider(mLocationManager)) {
-            LogHelper.logBamai("initGpsListeners: does not found gps provider");
-
+            LogHelper.logFile("initGpsListeners: does not found gps provider");
             return;
         }
 
@@ -57,7 +61,7 @@ public class GpsManager {
         String strGpsProvider = LocationManager.GPS_PROVIDER;
         try {
             boolean b = mLocationManager.sendExtraCommand(strGpsProvider, strC, null);
-            LogHelper.logBamai("using agps: " + b);
+            LogHelper.logFile("using agps: " + b);
         } catch (Exception e) {
             //
         }
@@ -67,7 +71,7 @@ public class GpsManager {
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     interval, 0, mLocationListener, Looper.myLooper());
         } catch (Throwable e) {//fix crash:http://omega.xiaojukeji.com/app/quality/crash/detail?app_id=1&msgid=QmMM3u-uT5ygJigMoU7opQ
-            LogHelper.logBamai("initGpsListeners exception, " + e.getMessage());
+            LogHelper.logFile("initGpsListeners exception, " + e.getMessage());
             int status;
             if (e instanceof SecurityException) {
                 status = DefaultLocation.STATUS_GPS_DENIED;
@@ -106,7 +110,7 @@ public class GpsManager {
             LocationUtils.setIsGpsMocked(isMockLocation);
 
             if (isMockLocation && !DefaultLocationManager.enableMockLocation) {
-                LogHelper.logBamai("on gps callback, mock loc and disable mock!");
+                LogHelper.logFile("on gps callback, mock loc and disable mock!");
                 return;
             }
 
@@ -116,7 +120,7 @@ public class GpsManager {
             //有间隔地写日志。
             long nowTime = System.currentTimeMillis();
             if((nowTime - mGpsBamaiLogTime) > Constants.MIN_INTERVAL_BAMAI_GPS_NLP_LOCATION) {
-                LogHelper.logBamai("-onLocationChanged-: type gps, location: " + location.getLongitude()
+                LogHelper.logFile("-onLocationChanged-: type gps, location: " + location.getLongitude()
                         + "," + location.getLatitude() + ", " +location.getSpeed() + ", " + location.getBearing());
                 mGpsBamaiLogTime = nowTime;
             }
@@ -136,17 +140,17 @@ public class GpsManager {
                         if (null != mLocationInternalListener) {
                             mLocationInternalListener.onStatusUpdate(DefaultLocation.STATUS_GPS, DefaultLocation.STATUS_GPS_UNAVAILABLE);
                         }
-                        LogHelper.logBamai("gps provider out of service");
+                        LogHelper.logFile("gps provider out of service");
                         gpsLocation = null;
                         break;
                     case LocationProvider.AVAILABLE:
                         if (null != mLocationInternalListener) {
                             mLocationInternalListener.onStatusUpdate(DefaultLocation.STATUS_GPS, DefaultLocation.STATUS_GPS_AVAILABLE);
                         }
-                        LogHelper.logBamai("gps provider available");
+                        LogHelper.logFile("gps provider available");
                         break;
                     case LocationProvider.TEMPORARILY_UNAVAILABLE:
-                        LogHelper.logBamai("gps provider temporarily unavailable");
+                        LogHelper.logFile("gps provider temporarily unavailable");
 //                        gpsLocation = null;
                         break;
                     default:
@@ -159,12 +163,12 @@ public class GpsManager {
 
         @Override
         public void onProviderEnabled(String provider) {
-            LogHelper.logBamai("gps provider enabled");
+            LogHelper.logFile("gps provider enabled");
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-            LogHelper.logBamai("gps provider disabled");
+            LogHelper.logFile("gps provider disabled");
             gpsLocation = null;
         }
     };
@@ -190,14 +194,14 @@ public class GpsManager {
 
         switch (iEvent) {
             case GpsStatus.GPS_EVENT_STARTED:
-                LogHelper.logBamai("gps event started");
+                LogHelper.logFile("gps event started");
                 break;
             case GpsStatus.GPS_EVENT_STOPPED:
-                LogHelper.logBamai("gps event stopped");
+                LogHelper.logFile("gps event stopped");
                 gpsLocation = null;
                 break;
             case GpsStatus.GPS_EVENT_FIRST_FIX:
-                LogHelper.logBamai("gps event first fix");
+                LogHelper.logFile("gps event first fix");
 
                 break;
             case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
@@ -223,7 +227,7 @@ public class GpsManager {
                             iFix++;
                         }
                     }
-                    LogHelper.logBamai("gps satellite number:" + "(" + iFix + ")/" + mSatelliteNumber
+                    LogHelper.logFile("gps satellite number:" + "(" + iFix + ")/" + mSatelliteNumber
                             + " level:" + mGpsSignalLevel);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -257,7 +261,7 @@ public class GpsManager {
             mLocationManager.removeGpsStatusListener(mGpsStatusListener);
             mLocationManager.removeUpdates(mLocationListener);
         } catch (Throwable e) {
-            LogHelper.logBamai("rmGpsListeners exception, " + e.getMessage());
+            LogHelper.logFile("rmGpsListeners exception, " + e.getMessage());
         }
         gpsLocation = null;
         mLocationManager = null;
@@ -286,11 +290,11 @@ public class GpsManager {
                 return true;
             }
             if (LocationUtils.isMockSettingsON(mContext)) {                            // 系统mock开关开启时，阻止
-                LogHelper.logBamai("Mock GPS switch is ON, SDK ignore GPS");
+                LogHelper.logFile("Mock GPS switch is ON, SDK ignore GPS");
                 return false;
             }
             if (LocationUtils.isMockLocation(gpsLocation)) {                                       // mock检测生效时，阻止
-                LogHelper.logBamai("Mock GPS location tested, SDK ignore GPS");
+                LogHelper.logFile("Mock GPS location tested, SDK ignore GPS");
                 return false;
             }
             // 不确定，暂时判断为真GPS

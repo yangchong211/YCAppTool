@@ -158,7 +158,7 @@ public class LocationCenter {
                 break;
             case Constants.serviceCmdStart:
                 //
-                LogHelper.logBamai("-LocCenter- start cmd");
+                LogHelper.logFile("-LocCenter- start cmd");
                 try {
                     locConfessor.start(serviceLooper, new LocationUpdateInternalListener(){
 
@@ -182,7 +182,7 @@ public class LocationCenter {
                                     mainHander.sendMessage(msg);
                                 }
                             } else {
-                                LogHelper.logBamai("internal listener # on location update but zero loc, provider:" + (null != loc ? loc.getProvider() : null));
+                                LogHelper.logFile("internal listener # on location update but zero loc, provider:" + (null != loc ? loc.getProvider() : null));
                             }
                         }
 
@@ -202,18 +202,18 @@ public class LocationCenter {
                         }
                     });
                 } catch (Throwable e) {
-                    LogHelper.logBamai("LocCenter # start request didi location exception, "+ e.getMessage());
+                    LogHelper.logFile("LocCenter # start request didi location exception, "+ e.getMessage());
                 }
 
                 break;
             case Constants.serviceCmdStop:
-                LogHelper.logBamai("-LocCenter- stop cmd");
+                LogHelper.logFile("-LocCenter- stop cmd");
                 try {
                     if (locConfessor != null) {
                         locConfessor.stop();
                     }
                 } catch (Throwable e) {
-                    LogHelper.logBamai("LocCenter # stop remove didi location exception, "+ e.getMessage());
+                    LogHelper.logFile("LocCenter # stop remove didi location exception, "+ e.getMessage());
                 }
 
                 serviceHandler.removeCallbacksAndMessages(null);
@@ -278,7 +278,7 @@ public class LocationCenter {
         public ServiceHandler(Looper looper) {
             super(looper);
 
-            LogHelper.logBamai("ServiceHandler # NEW: new object, hash " + this.hashCode());
+            LogHelper.logFile("ServiceHandler # NEW: new object, hash " + this.hashCode());
         }
 
         @Override
@@ -287,7 +287,7 @@ public class LocationCenter {
         @Override
         protected void finalize() throws Throwable {
 
-            LogHelper.logBamai("ServiceHandler # WARN: finalize called, hash " + this.hashCode());
+            LogHelper.logFile("ServiceHandler # WARN: finalize called, hash " + this.hashCode());
 
             super.finalize();
         }
@@ -296,13 +296,13 @@ public class LocationCenter {
     private final class LocHandlerThread extends HandlerThread {
         public LocHandlerThread(String name, int priority) {
             super(name, priority);
-            LogHelper.logBamai("LocHandlerThread # NEW: new object, hash " + this.hashCode());
+            LogHelper.logFile("LocHandlerThread # NEW: new object, hash " + this.hashCode());
         }
 
         @Override
         protected void finalize() throws Throwable {
 
-            LogHelper.logBamai("LocHandlerThread # WARN: finalize called, hash " + this.hashCode());
+            LogHelper.logFile("LocHandlerThread # WARN: finalize called, hash " + this.hashCode());
 
             super.finalize();
         }
@@ -319,7 +319,7 @@ public class LocationCenter {
 		@Override
         protected void finalize() throws Throwable {
 
-            LogHelper.logBamai("MainHandler # WARN: finalize called, hash " + this.hashCode());
+            LogHelper.logFile("MainHandler # WARN: finalize called, hash " + this.hashCode());
 
             super.finalize();
         }

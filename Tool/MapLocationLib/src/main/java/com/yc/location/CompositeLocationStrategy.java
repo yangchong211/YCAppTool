@@ -116,7 +116,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
         mWorkHandler.post(scanWifiLoop);
         isWifiScanRunning = true;
         isStarted = true;
-        LogHelper.logBamai("loc type didi, nlp is google: " + LocationUtils.isGoogleNlp(mContext));
+        LogHelper.logFile("loc type didi, nlp is google: " + LocationUtils.isGoogleNlp(mContext));
     }
 
     private void initGoogleFlpManager(Looper looper) {
@@ -144,7 +144,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
             mWifiManager.updateWifi();
             timeWifiM = System.currentTimeMillis(); // think first wifi are fresh, avoid call to deadwifi
         } catch (SecurityException e) {
-            LogHelper.logBamai("initWifiManager exception, " + e.getMessage());
+            LogHelper.logFile("initWifiManager exception, " + e.getMessage());
         }
         mWifiManager.enableWifiAlwaysScan(true);
     }
@@ -204,7 +204,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
                     if (LocationUtils.locCorrect(loc) && timestamp - loc.getTime() < Constants.minQpsIntervalMillis) {
                         validgps = true;
                         gpsLocation = loc;
-                        LogHelper.logBamai("loop: getLastKnownLocation success");
+                        LogHelper.logFile("loop: getLastKnownLocation success");
                     }
                 }
             } catch (Exception e) {
@@ -215,7 +215,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
         // when gps valid, don't request net
         if (validgps && gpsLocation != null) {
             DefaultLocation loc = DefaultLocation.loadFromSystemLoc(gpsLocation, ETraceSource.gps, TransformUtils.isOutOfMainLand(gpsLocation.getLongitude(), gpsLocation.getLatitude()) ? DefaultLocation.COORDINATE_TYPE_WGS84 : DefaultLocation.COORDINATE_TYPE_GCJ02);
-            LogHelper.logBamai("loop gps valid!");
+            LogHelper.logFile("loop gps valid!");
             diDiNetworkLocateProxy.cleanHistoryWithGps(loc);
             lastLocCache = diDiNetworkLocateProxy.generateLocCacheFromGps(loc);
             return loc;
@@ -227,7 +227,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
             boolean airPlaneMode = LocationUtils.airPlaneModeOn(mContext);
             if (!airPlaneMode &&
                     LocationSensorMonitor.getInstance(mContext).isGpsEnabled()) {
-                LogHelper.logBamai("restart gps");
+                LogHelper.logFile("restart gps");
                 mGpsManager.rmGpsListeners();
                 mGpsManager.init(mGpsMonitorInterval);
                 mStartGpsTime = now;
@@ -298,17 +298,17 @@ public class CompositeLocationStrategy implements ILocationStrategy {
         boolean outOfMainLand = false;
         if (flpLoc != null) {
             if (TransformUtils.isOutOfMainLand(flpLoc.getLongitude(), flpLoc.getLatitude())) {
-                LogHelper.logBamai(String.format("boundary flp: %.6f, %.6f, %d", flpLoc.getLongitude(), flpLoc.getLatitude(), flpLoc.getTime()));
+                LogHelper.logFile(String.format("boundary flp: %.6f, %.6f, %d", flpLoc.getLongitude(), flpLoc.getLatitude(), flpLoc.getTime()));
                 outOfMainLand = true;
             }
         } else if (nlpLocation != null) {
             if (TransformUtils.isOutOfMainLand(nlpLocation.getLongitude(), nlpLocation.getLatitude())) {
-                LogHelper.logBamai(String.format("boundary nlp: %.6f, %.6f, %d", nlpLocation.getLongitude(), nlpLocation.getLatitude(), nlpLocation.getTime()));
+                LogHelper.logFile(String.format("boundary nlp: %.6f, %.6f, %d", nlpLocation.getLongitude(), nlpLocation.getLatitude(), nlpLocation.getTime()));
                 outOfMainLand = true;
             }
         } else if (tencentLocation != null) {
             if (tencentLocation.getCoordinateType() == TencentLocationManager.COORDINATE_TYPE_WGS84 && TransformUtils.isOutOfMainLand(tencentLocation.getLongitude(), tencentLocation.getLatitude())) {
-                LogHelper.logBamai(String.format("boundary tencent: %.6f, %.6f, %d", tencentLocation.getLongitude(), tencentLocation.getLatitude(), tencentLocation.getTime()));
+                LogHelper.logFile(String.format("boundary tencent: %.6f, %.6f, %d", tencentLocation.getLongitude(), tencentLocation.getLatitude(), tencentLocation.getTime()));
                 outOfMainLand = true;
             }
         } else {
@@ -347,10 +347,10 @@ public class CompositeLocationStrategy implements ILocationStrategy {
             lock.lock();
             validcell = mCellManager.isCellValid();
             validwifi = checkReqWifiData();
-            LogHelper.logBamai(String.format("loop: cell[%s] wifi[%s]", validcell, validwifi));
+            LogHelper.logFile(String.format("loop: cell[%s] wifi[%s]", validcell, validwifi));
             instantReqData = (LocationServiceRequest) locReqData.deepClone();
         } catch (Throwable e) {//fix crash bug:5078
-            LogHelper.logBamai("Exception when deep clone request data, exception:" + e.getMessage());
+            LogHelper.logFile("Exception when deep clone request data, exception:" + e.getMessage());
         } finally {
             lock.unlock();
         }
@@ -391,7 +391,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
         }
 
         if (nlpLocation != null) {//先保留司机端SDK逻辑，用NLP兜底。实际在LocStrategy中已经兜底过。
-            LogHelper.logBamai("loop[network]: use nlp as backup");
+            LogHelper.logFile("loop[network]: use nlp as backup");
             locCache = new LocCache(nlpLocation.getLongitude(),
                     nlpLocation.getLatitude(), (int) nlpLocation.getAccuracy(), Constants.nlpLocConfi, (int) nlpLocation.getSpeed(), nlpLocation.getTime(), ETraceSource.nlp.toString(), nlpLocation.getCoordinateType());
             locCache.altitude = nlpLocation.getAltitude();
@@ -481,7 +481,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
                         wifiEnable = mWifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED;
                     } catch (SecurityException e) {
                     }
-                    LogHelper.logBamai("wifi enable state change: " + wifiEnable);
+                    LogHelper.logFile("wifi enable state change: " + wifiEnable);
                     if(wifiEnable) {
                         mWifiManager.updateWifi();
                         if (null != mLocationInternalListener) {
@@ -510,12 +510,12 @@ public class CompositeLocationStrategy implements ILocationStrategy {
                     }
                 }
             } else if (intent != null && intent.getAction().equals(Intent.ACTION_AIRPLANE_MODE_CHANGED)) {
-                LogHelper.logBamai("AIRPLANE_MODE change");
+                LogHelper.logFile("AIRPLANE_MODE change");
             } else if (intent != null && intent.getAction().equals("android.location.GPS_FIX_CHANGE")) {
 //                Toast.makeText(mContext, "GPS_FIX_CHANGE", Toast.LENGTH_SHORT).show();
-                LogHelper.logBamai("GPS_FIX_CHANGE");
+                LogHelper.logFile("GPS_FIX_CHANGE");
             } else if (intent != null && intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                LogHelper.logBamai("connectivity changed");
+                LogHelper.logFile("connectivity changed");
             }
         }
     };
@@ -670,7 +670,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
 
         boolean bAirPlaneMode = LocationUtils.airPlaneModeOn(mContext);
         if (bAirPlaneMode) {
-            LogHelper.logBamai("air plane mode on");
+            LogHelper.logFile("air plane mode on");
             mCellManager.reset();
         } else {
             mCellManager.refineCellT();
@@ -831,7 +831,7 @@ public class CompositeLocationStrategy implements ILocationStrategy {
                 try {
                     mWifiManager.updateWifi();
                 } catch (SecurityException e) {
-                    LogHelper.logBamai("scanWifiLoop exception, " + e.getMessage());
+                    LogHelper.logFile("scanWifiLoop exception, " + e.getMessage());
                     if (null != mLocationInternalListener) {
                         mLocationInternalListener.onStatusUpdate(DefaultLocation.STATUS_WIFI, DefaultLocation.STATUS_WIFI_DENIED);
                     }
