@@ -26,7 +26,7 @@ public class OkHttpUtils {
         }
     }
 
-    public static HttpResponse post(String url, final byte[] bytearray, String cer) throws IOException {
+    public static HttpResponse post(String url, final byte[] bytearray) throws IOException {
         try {
             RequestBody requestBody = RequestBody.create(
                     MediaType.parse("application/x-www-form-urlencoded"),bytearray);

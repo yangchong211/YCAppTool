@@ -1,24 +1,25 @@
 package com.yc.location.easymock;
 
 import android.location.Location;
-import android.location.LocationListener;
-import android.os.Bundle;
+import com.yc.location.bean.DefaultLocation;
+import com.yc.location.listener.AbsBaseLocationListener;
+import com.yc.location.listener.LocationListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonitorLocationListener extends BaseLocationListener {
+public class MonitorLocationListener extends AbsBaseLocationListener {
 
     private boolean mockEnabled = false;
-    private LocationModel mockMonitorLocation;
-    private Location mLocation;
+    private Location mockLatLng = null;
+    private DefaultLocation mockDidiLocation;
     private final List<LocationListener> mCallback = new ArrayList<>();
 
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(DefaultLocation location) {
+        super.onLocationChanged(location);
         if (isMockEnabled()) {
-            LocationModel locationModel = updateMockLocation();
-            location = locationModel.getLocation();
+            location = this.updateMockLocation();
         }
         for (int i = 0; i < mCallback.size(); i++) {
             if (mCallback.get(i) == null) {
@@ -29,37 +30,21 @@ public class MonitorLocationListener extends BaseLocationListener {
     }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-        for (int i = 0; i < mCallback.size(); i++) {
-            if (mCallback.get(i) == null) {
-                continue;
+    public void onStatusUpdate(String name, int status, String desc) {
+        super.onStatusUpdate(name, status, desc);
+        for(int i = 0; i < this.mCallback.size(); ++i) {
+            if (this.mCallback.get(i) != null) {
+                if (mCallback.get(i) == null) {
+                    continue;
+                }
+                ((LocationListener)this.mCallback.get(i)).onStatusUpdate(name, status, desc);
             }
-            mCallback.get(i).onStatusChanged(provider, status, extras);
         }
     }
 
-    @Override
-    public void onProviderEnabled(String provider) {
-        for (int i = 0; i < mCallback.size(); i++) {
-            if (mCallback.get(i) == null) {
-                continue;
-            }
-            mCallback.get(i).onProviderEnabled(provider);
-        }
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-        for (int i = 0; i < mCallback.size(); i++) {
-            if (mCallback.get(i) == null) {
-                continue;
-            }
-            mCallback.get(i).onProviderDisabled(provider);
-        }
-    }
 
     public boolean isMockEnabled() {
-        return mockEnabled && mLocation != null;
+        return mockEnabled && mockLatLng != null;
     }
 
     public void setMockEnabled(boolean mockEnabled) {
@@ -67,23 +52,26 @@ public class MonitorLocationListener extends BaseLocationListener {
     }
 
     public void setMockLatLng(Location location) {
-        mLocation = location;
+        mockLatLng = location;
         updateMockLocation();
         if (isMockEnabled()) {
             onLocationChanged(null);
         }
     }
 
-    public LocationModel getMockLocation() {
-        return mockMonitorLocation;
+    public DefaultLocation getMockLocation() {
+        return mockDidiLocation;
     }
 
-    public LocationModel updateMockLocation() {
-        if (mLocation != null) {
+    public DefaultLocation updateMockLocation() {
+        if (this.mockLatLng != null) {
+            this.mockLatLng.setAccuracy(10.0F);
             long localTime = System.currentTimeMillis();
-            mockMonitorLocation = new LocationModel(mLocation,localTime);
+            this.mockLatLng.setTime(localTime);
+            this.mockDidiLocation = DefaultLocation.convert2DidiLocation(
+                    this.mockLatLng, "测试", 0, localTime);
         }
-        return mockMonitorLocation;
+        return this.mockDidiLocation;
     }
 
     public int add(LocationListener listener) {

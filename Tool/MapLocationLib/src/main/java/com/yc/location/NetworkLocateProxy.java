@@ -435,7 +435,7 @@ public class NetworkLocateProxy {
         OkHttpUtils.HttpResponse response = null;
 
         try {
-            response = OkHttpUtils.post(Constants.serverUrl, bytes, "");
+            response = OkHttpUtils.post(Constants.serverUrl, bytes);
         } catch (Exception e) {
             if (e instanceof SocketTimeoutException) {
 

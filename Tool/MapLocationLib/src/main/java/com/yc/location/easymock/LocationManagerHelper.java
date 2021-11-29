@@ -17,6 +17,8 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 
 
+import com.yc.location.listener.BaseSystemLocationListener;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -352,7 +354,7 @@ public final class LocationManagerHelper {
         }
     }
 
-    private final LocationListener locationListener = new BaseLocationListener() {
+    private final LocationListener locationListener = new BaseSystemLocationListener() {
         //当坐标改变时触发此函数，如果Provider传进相同的坐标，它就不会被触发
         @Override
         public void onLocationChanged(Location loc) {

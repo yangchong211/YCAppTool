@@ -23,29 +23,12 @@ public class Constants {
     public static final boolean isDebug = true;
     //考虑弱网情况下等待网络结果时间
     public static final int START2LOCATION_INTERVAL_MILLIS     = 5*1000;
-
     public static final int MESSAGE_WHAT_LACATION     = 0xDD000010;
     public static final int MESSAGE_WHAT_ERRINFO     = 0xDD000011;
-
-    public static final int serviceCmdNone     = 0xDD000000;
-    public static final int serviceCmdStart    = 0xDD000001;
-    public static final int serviceCmdStop     = 0xDD000002;
-    public static final int serviceCmdStartLocOnce     = 0xDD000003;
-//    static final int serviceCmdStopLocOnce     = 0xDD000004;
-
-    public static final int serciceDefMsg      = 0;
     public static final int wifiMaxCount       = 30;
-    //protected static final int wifiSSIDMaxLen     = 16;
-    //protected static final int httpThreadCount    = 1;
     public static final int gpslocAccuracyConf = 25;
     public static final int lonlatDots         = 6;
     public static final int confiprobDots      = 3;
-    //protected static final int gpsHighSpeed       = 10;
-
-    //protected static final long firstReqIntervalMillis      = 1000;
-    //protected static final long regulReqIntervalMillis      = 10*1000;
-    public static final long regulReqIntervalTurboMillis = 1000;
-    public static final long cellDataExpiredMillis       = 60*60*1000;
     public static final long wifiScanIntervalMillis      = 15*1000;
     public static final long wifiScanCheckMillis         = 8*1000;
     public static final long wifiScanExpiredMillis       = 60*1000;
@@ -56,22 +39,10 @@ public class Constants {
      */
     public static final long gpsLocTimeIntevalMillis     = 30*1000;
     public static final long minQpsIntervalMillis        = 8*1000;
-    public static final long tencentLocTimeIntevalMillis     = 10*1000;
-
-    //protected static final long minDriverIntervalMillis     = 3*1000;
-    //protected static final long apolloRefreshMillis         = 20*1000;
-    public  static final long WORKER_LOOPER_CHECK_INTERVAl_MS = 60*10000;
     public  static final long GPS_CHECK_INTERVAL_MS = 120*1000;
     //GPS/NLP监听到位置打日志的最小时间间隔
     public  static final long MIN_INTERVAL_BAMAI_GPS_NLP_LOCATION = 15*1000;
-
-    public static final float gpsUpdatesMindistMeter = 0f;
-
-    public static final double cdmaLocCoef = 14400.0;
-    public static final double gpslocConfiExtra = 0.5;
     public static final double transprobLowThreshold = 0.02;
-    //protected static final double wifiChangeThreshold = 0.6;
-    //protected static final double wifiChangeThresholdMax = 1.5;
     public static final double nlpLocConfi = 0.8;
     public static final double googleFlpLocConfi = 1.0f;
 
@@ -82,12 +53,6 @@ public class Constants {
     public static final String userDefException                  = "UserDevException";
     public static final String paramCharset                      = "UTF-8";
     public static final String serverUrl                         = "https://map.diditaxi.com.cn/v1/location";
-    //protected static final String serverUrl                         = "http://indoor.map.xiaojukeji.com/v1/location";
-    //protected static final String serverUrlTest                     = "http://10.242.151.164:8080/v1/location";
-    //protected static final String omegaEventId_FirstLocDuration     = "locs_first";
-    //protected static final String omegaEventId_LocFailed            = "locs_fail";
-    //protected static final String omegaEventId_LocTotalTimes        = "locs_totaltimes";
-
     public static final String joLeft = "{";
     public static final String joRight = "}";
     public static final String jsAssi = ":";

@@ -18,6 +18,9 @@ import com.yc.location.utils.StatusUtils;
 import java.io.File;
 import java.util.HashSet;
 
+/**
+ * 定位管理者，从这里开始调用
+ */
 public class DefaultLocationManager {
 
     public  static volatile DefaultLocation lastKnownLocation = null;
@@ -64,6 +67,9 @@ public class DefaultLocationManager {
 		LogHelper.logFile("DIDILocationManager single instance constructed!!");
     }
 
+    /**
+     * 结束一次定位操作
+     */
     private void finishLocOnce() {
         mLocOnceListeners.clear();
         mOnceListenerOption.setModuleKey(null);

@@ -82,21 +82,6 @@ public class LogHelper {
     }
 
     /**
-     * 强制写日志，如果外部设置日志路径，则写入设置路径文件中；否则，用公共日志组件写到组件默认路径下。
-     * @param log
-     */
-    public static void forceLogBamai(final String log) {
-        if (TextUtils.isEmpty(log)) {
-            return;
-        }
-        if (mBamaiPath == null) {
-            logBamaiWithoutPath(log);
-        } else {
-            logFile(log);
-        }
-
-    }
-    /**
      * 按设置路径写日志
      * @param log 日志内容
      */
