@@ -36,6 +36,14 @@ import com.com.yc.blurview.R;
 public class RealTimeBlurView extends View {
 
 	/**
+	 * 模糊视图
+	 * 1.使用高斯模糊，太复杂了，网上绝大部分都是这样，这种做法依赖硬件绘制
+	 * 2.自定义控件取得背景图片自己通过canvas画出来，简单
+	 * 实现了 ViewTreeObserver.OnPreDrawListener View的这个接口：此接口是系统要绘制视图树的时候调用的方法。
+	 * 当系统要开始绘制视图树，说明视图已经改变，这样就做到了实时更新，
+	 * 接下来要做的就是虚化，然后drawCanvas（bitmap），更新invalidate();
+	 */
+	/**
 	 * 默认4
 	 */
 	private float mDownsampleFactor;
