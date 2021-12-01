@@ -17,6 +17,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/GankBusiness/LifeHelper.GankBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/GankBusiness/LifeHelper.GankBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/HttpServer/LifeHelper.HttpServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/HttpServer/LifeHelper.HttpServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ImageServer/LifeHelper.ImageServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ImageServer/LifeHelper.ImageServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/library/LifeHelper.LargeImageLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/library/LifeHelper.LargeImageLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MapLocationLib/LifeHelper.MapLocationLib.iml" filepath="$PROJECT_DIR$/.idea/modules/MapLocationLib/LifeHelper.MapLocationLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/NetHelperLib/LifeHelper.NetHelperLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/NetHelperLib/LifeHelper.NetHelperLib.iml" />

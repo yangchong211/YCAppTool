@@ -44,6 +44,7 @@
             <option value="$PROJECT_DIR$/Widget/BlurView" />
             <option value="$PROJECT_DIR$/Widget/CustomWidget" />
             <option value="$PROJECT_DIR$/Widget/FragmentLib" />
+            <option value="$PROJECT_DIR$/Widget/LargeImageLib" />
             <option value="$PROJECT_DIR$/Widget/PhotoWidget" />
             <option value="$PROJECT_DIR$/Widget/WidgetViewLib" />
             <option value="$PROJECT_DIR$/Widget/ZoomImageLib" />
