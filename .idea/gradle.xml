@@ -18,10 +18,10 @@
             <option value="$PROJECT_DIR$/Business/GankBusiness" />
             <option value="$PROJECT_DIR$/Business/VideoBusiness" />
             <option value="$PROJECT_DIR$/Common/AppStatusLib" />
-            <option value="$PROJECT_DIR$/Common/BaseLayer" />
             <option value="$PROJECT_DIR$/Common/ConfigLayer" />
             <option value="$PROJECT_DIR$/Common/LibraryLayer" />
             <option value="$PROJECT_DIR$/Common/ToolLayer" />
+            <option value="$PROJECT_DIR$/Common/ToolUtilsLib" />
             <option value="$PROJECT_DIR$/Server/HttpServer" />
             <option value="$PROJECT_DIR$/Server/ImageServer" />
             <option value="$PROJECT_DIR$/Server/NfcServer" />
@@ -37,7 +37,6 @@
             <option value="$PROJECT_DIR$/Tool/NetHelperLib" />
             <option value="$PROJECT_DIR$/Tool/SerialTaskLib" />
             <option value="$PROJECT_DIR$/Tool/SocketIoLib" />
-            <option value="$PROJECT_DIR$/Tool/ToolUtilsLib" />
             <option value="$PROJECT_DIR$/Tool/WebSocketLib" />
             <option value="$PROJECT_DIR$/Tool/ZxingServerLib" />
             <option value="$PROJECT_DIR$/Widget/BannerWidget" />

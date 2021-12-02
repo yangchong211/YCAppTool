@@ -50,22 +50,6 @@ public final class CompressUtils {
     }
 
     /**
-     * 将drawable转化成bitmap
-     * @param drawable                              图片
-     * @return
-     */
-    public static Bitmap drawableToBitmap(Drawable drawable) {
-        int intrinsicWidth = drawable.getIntrinsicWidth();
-        int intrinsicHeight = drawable.getIntrinsicHeight();
-        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
-        Bitmap bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight,config);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, intrinsicWidth, intrinsicHeight);
-        drawable.draw(canvas);
-        return bitmap;
-    }
-
-    /**
      * 通过大小压缩，将修改图片宽高
      * 此处默认设置图片的压缩宽高是屏幕宽高
      * @param is                                    图片流
@@ -86,7 +70,7 @@ public final class CompressUtils {
      * @return
      */
     public static Bitmap compressDrawableByBmp(Drawable drawable , Context context){
-        Bitmap bitmap = drawableToBitmap(drawable);
+        Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);
         return compressBitmapByBmp(bitmap,context);
     }
 
@@ -123,7 +107,7 @@ public final class CompressUtils {
      * @return
      */
     public static Bitmap compressBitmapByBmp(Drawable drawable, int pixelW, int pixelH){
-        Bitmap bitmap = drawableToBitmap(drawable);
+        Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);
         return compressBitmapByBmp(bitmap,pixelW,pixelH);
     }
 

@@ -24,12 +24,13 @@ project(':ServerInterface').projectDir = new File('Server/ServerInterface')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':LibraryLayer', ':BaseLayer', ':ConfigLayer', ':ToolLayer', ':AppStatusLib'
+include ':LibraryLayer', ':ConfigLayer', ':ToolLayer',
+        ':AppStatusLib',':ToolUtilsLib'
 project(':LibraryLayer').projectDir = new File('Common/LibraryLayer')
-project(':BaseLayer').projectDir = new File('Common/BaseLayer')
 project(':ConfigLayer').projectDir = new File('Common/ConfigLayer')
 project(':ToolLayer').projectDir = new File('Common/ToolLayer')
 project(':AppStatusLib').projectDir = new File('Common/AppStatusLib')
+project(':ToolUtilsLib').projectDir = new File('Common/ToolUtilsLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -45,12 +46,11 @@ project(':ZoomImageLib').projectDir = new File('Widget/ZoomImageLib')
 project(':LargeImageLib').projectDir = new File('Widget/LargeImageLib')
 
 /* +++++++++ 框架基础工具库 +++++++++ */
-include ':ZxingServerLib', ':WebSocketLib', ':ToolUtilsLib', ':SocketIoLib', ':SerialTaskLib' ,
+include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':NetHelperLib', ':MapToolLib' ,':LocaleHelperLib' ,':CountTimerLib' ,':MapLocationLib',
         ':AnimatorToolLib', ':AppTraceTool'
 project(':ZxingServerLib').projectDir = new File('Tool/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('Tool/WebSocketLib')
-project(':ToolUtilsLib').projectDir = new File('Tool/ToolUtilsLib')
 project(':SocketIoLib').projectDir = new File('Tool/SocketIoLib')
 project(':SerialTaskLib').projectDir = new File('Tool/SerialTaskLib')
 project(':NetHelperLib').projectDir = new File('Tool/NetHelperLib')
