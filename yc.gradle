@@ -81,7 +81,6 @@ ext {
                 "YCAndroidTool"               : "cn.yc:ToolLib:1.2.1",
 
                 //tools
-                "eventbus"                  : "org.greenrobot:eventbus:3.0.0",
                 "utilcode"                  : "com.blankj:utilcode:1.12.5",
                 "easypermissions"           : "pub.devrel:easypermissions:1.0.1",
                 "zxing"                     : "com.google.zxing:core:${version["zxing_version"]}",

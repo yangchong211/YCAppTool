@@ -4,10 +4,15 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Debug;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.StatFs;
+import android.text.TextUtils;
+import android.text.format.Formatter;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -24,7 +29,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * </pre>
  */
 public final class MemoryUtils {
-
     /**
      * 获取当前应用进程的pid
      */
@@ -273,6 +277,75 @@ public final class MemoryUtils {
         }
         BigDecimal result4 = new BigDecimal(teraBytes);
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
+    }
+
+    /**
+     * 获得机身可用内存
+     *
+     * @return
+     */
+    private static String getRomAvailableSize(Context context) {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long availableBlocks = stat.getAvailableBlocks();
+        return Formatter.formatFileSize(context, blockSize * availableBlocks);
+    }
+
+
+    /**
+     * 获得机身内存总大小
+     *
+     * @return
+     */
+    private static String getRomTotalSize(Context context) {
+        File path = Environment.getDataDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long totalBlocks = stat.getBlockCount();
+        return Formatter.formatFileSize(context, blockSize * totalBlocks);
+    }
+
+
+    /**
+     * 手机总内存
+     * @param context
+     * @return 手机总内存(兆)
+     */
+    public static long getTotalMemory(Context context) {
+        String str1 = "/proc/meminfo";// 系统内存信息文件
+        String str2;
+        String[] arrayOfString;
+        long initial_memory = 0;
+        try {
+            FileReader localFileReader = new FileReader(str1);
+            BufferedReader localBufferedReader = new BufferedReader(
+                    localFileReader, 8192);
+            str2 = localBufferedReader.readLine();// 读取meminfo第一行，系统总内存大小
+            if (!TextUtils.isEmpty(str2)) {
+                arrayOfString = str2.split("\\s+");
+                // 获得系统总内存，单位是KB，乘以1024转换为Byte
+                initial_memory = Integer.valueOf(arrayOfString[1]).intValue() / 1024;
+            }
+            localBufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return initial_memory;// Byte转换为KB或者MB，内存大小规格化
+    }
+
+    /**
+     * 手机当前可用内存
+     * @param context
+     * @return 手机当前可用内存(兆)
+     */
+    public static long getAvailMemory(Context context) {// 获取android当前可用内存大小
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+        if (am != null) {
+            am.getMemoryInfo(mi);
+        }
+        return mi.availMem / 1024 / 1024;
     }
 
 }

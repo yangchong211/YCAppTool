@@ -214,6 +214,7 @@ dependencies {
     implementation project(path: ':ImageServer')
     implementation project(path: ':ZxingServerLib')
     implementation project(path: ':NfcServer')
+    implementation project(path: ':LongevityLib')
 }
 
 

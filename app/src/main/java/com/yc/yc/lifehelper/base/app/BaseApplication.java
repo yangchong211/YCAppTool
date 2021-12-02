@@ -6,11 +6,14 @@ import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.BatteryInfo;
 import com.yc.appstatuslib.info.ThreadInfo;
 import com.yc.appstatuslib.listener.BaseStatusListener;
+import com.yc.longevitylib.LongevityMonitor;
+import com.yc.longevitylib.LongevityMonitorConfig;
 import com.yc.toollib.tool.ToolFileUtils;
 import com.yc.toollib.tool.ToolLogUtils;
 import com.ycbjie.library.base.app.LibApplication;
 
 import java.io.File;
+import java.util.HashMap;
 
 
 /**
@@ -32,7 +35,34 @@ public class BaseApplication extends LibApplication {
     public void onCreate() {
         Log.d("Application", "onCreate");
         super.onCreate();
+        LongevityMonitor();
         initAppStatusListener();
+    }
+
+    private void LongevityMonitor() {
+        LongevityMonitor.init(new LongevityMonitorConfig.Builder(this)
+                // 业务埋点
+                .setEventTrack(new LongevityMonitorConfig.ILongevityMonitorOmegaEventTrack() {
+                    @Override
+                    public void onEvent(HashMap<String, String> hashMap) {
+
+                    }
+                })
+                // 保活监控 Apollo
+                .setToggle(new LongevityMonitorConfig.ILongevityMonitorApolloToggle() {
+                    @Override
+                    public boolean isOpen() {
+                        return true;
+                    }
+                })
+                // 日志输出
+                .setLogger(new LongevityMonitorConfig.ILongevityMonitorLogger() {
+                    @Override
+                    public void log(String var1) {
+                        ToolLogUtils.i("Longevity--"+var1);
+                    }
+                })
+                .build());
     }
 
 
@@ -44,7 +74,7 @@ public class BaseApplication extends LibApplication {
                 .context(this)
                 .interval(5)
                 .file(file)
-                .threadSwitchOn(true)
+                .threadSwitchOn(false)
                 .builder();
         manager.registerAppStatusListener(new BaseStatusListener() {
             @Override
@@ -127,7 +157,6 @@ public class BaseApplication extends LibApplication {
                 ToolLogUtils.i("app status wait线程数量 " + threadInfo.getWaitingThreadCount().size());
                 ToolLogUtils.i("app status block线程数量 " + threadInfo.getBlockThreadCount().size());
                 ToolLogUtils.i("app status timewait线程数量 " + threadInfo.getTimeWaitingThreadCount().size());
-
             }
         });
     }

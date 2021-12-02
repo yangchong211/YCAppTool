@@ -107,7 +107,6 @@ dependencies {
     api rootProject.ext.dependencies["glide"]
     //annotationProcessor rootProject.ext.dependencies["glide-compiler"]
 
-    api rootProject.ext.dependencies["eventbus"]
     api rootProject.ext.dependencies["tablayout"]
     api rootProject.ext.dependencies["utilcode"]
     api rootProject.ext.dependencies["easypermissions"]
