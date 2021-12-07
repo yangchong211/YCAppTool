@@ -33,7 +33,6 @@
             <option value="$PROJECT_DIR$/Tool/CountTimerLib" />
             <option value="$PROJECT_DIR$/Tool/LocaleHelperLib" />
             <option value="$PROJECT_DIR$/Tool/LongevityLib" />
-            <option value="$PROJECT_DIR$/Tool/MapLocationLib" />
             <option value="$PROJECT_DIR$/Tool/MapToolLib" />
             <option value="$PROJECT_DIR$/Tool/NetHelperLib" />
             <option value="$PROJECT_DIR$/Tool/SerialTaskLib" />

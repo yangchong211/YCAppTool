@@ -64,9 +64,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api(rootProject.ext.dependencies["router"])
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
-    implementation files('libs/AMap_2DMap_V2.8.1_20160202.jar')
     implementation project(path: ':LocaleHelperLib')
-    implementation project(path: ':MapLocationLib')
     implementation project(path: ':SerialTaskLib')
     implementation 'com.airbnb.android:lottie:2.7.0'
     api rootProject.ext.dependencies["YCCustomTextLib"]
