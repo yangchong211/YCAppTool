@@ -47,14 +47,13 @@ project(':LargeImageLib').projectDir = new File('Widget/LargeImageLib')
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
-        ':NetHelperLib', ':MapToolLib' ,':LocaleHelperLib' ,':CountTimerLib' ,
+        ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,
         ':AnimatorToolLib', ':AppTraceTool', ':LongevityLib'
 project(':ZxingServerLib').projectDir = new File('Tool/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('Tool/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('Tool/SocketIoLib')
 project(':SerialTaskLib').projectDir = new File('Tool/SerialTaskLib')
 project(':NetHelperLib').projectDir = new File('Tool/NetHelperLib')
-project(':MapToolLib').projectDir = new File('Tool/MapToolLib')
 project(':LocaleHelperLib').projectDir = new File('Tool/LocaleHelperLib')
 project(':CountTimerLib').projectDir = new File('Tool/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('Tool/AnimatorToolLib')
