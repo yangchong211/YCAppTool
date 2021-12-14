@@ -24,11 +24,9 @@ project(':ServerInterface').projectDir = new File('Server/ServerInterface')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':LibraryLayer', ':ConfigLayer', ':ToolLayer',
-        ':AppStatusLib',':ToolUtilsLib'
+include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib'
 project(':LibraryLayer').projectDir = new File('Common/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('Common/ConfigLayer')
-project(':ToolLayer').projectDir = new File('Common/ToolLayer')
 project(':AppStatusLib').projectDir = new File('Common/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('Common/ToolUtilsLib')
 

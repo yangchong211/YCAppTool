@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 
 import com.yc.widget.loadingDialog.LoadDialog;
 import com.yc.yc.lifehelper.ui.me.contract.MeSettingContract;
-import com.yc.toollayer.GoToScoreUtils;
+import com.yc.toolutils.score.GoToScoreUtils;
 import com.yc.toollayer.file.FileCacheUtils;
 import com.ycbjie.library.base.config.AppConfig;
 

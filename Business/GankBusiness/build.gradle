@@ -61,6 +61,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':AnimatorToolLib')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     api rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
@@ -68,7 +69,6 @@ dependencies {
 
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
-    implementation project(path: ':ToolLayer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':FragmentLib')

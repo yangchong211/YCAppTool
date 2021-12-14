@@ -28,7 +28,7 @@ import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
-import com.yc.toollayer.animation.AnimatorUtils;
+import com.yc.animation.animation.AnimatorUtils;
 import com.ycbjie.gank.R;
 import com.ycbjie.gank.contract.GanKHomeAContract;
 import com.ycbjie.gank.presenter.GanKHomeAPresenter;

@@ -174,6 +174,7 @@ public class BannerView extends FrameLayout implements OnPageChangeListener {
         if (attrs == null) {
             return;
         }
+        //attr属性的读取。如何读取？
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.BannerView);
         mIndicatorWidth = typedArray.getDimensionPixelSize(
                 R.styleable.BannerView_indicator_width, indicatorSize);

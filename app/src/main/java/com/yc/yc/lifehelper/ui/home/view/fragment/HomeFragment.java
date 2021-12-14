@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.View;
@@ -30,10 +29,9 @@ import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.bean.HomeBlogEntity;
 import com.yc.configlayer.constant.Constant;
-import com.yc.toollayer.FastClickUtils;
-import com.yc.toollayer.GoToScoreUtils;
-import com.yc.toollayer.WindowUtils;
-import com.yc.toollayer.handler.HandlerUtils;
+import com.yc.toolutils.click.FastClickUtils;
+import com.yc.toolutils.score.GoToScoreUtils;
+import com.yc.toolutils.window.WindowUtils;
 import com.yc.toollib.crash.CrashToolUtils;
 import com.ycbjie.library.base.mvp.BaseFragment;
 import com.ycbjie.library.utils.AppUtils;
@@ -62,28 +60,11 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
 
     private YCRefreshView mRecyclerView;
     private HomeFragmentContract.Presenter presenter = new HomeFragmentPresenter(this);
-    private ArrayList<Bitmap> bitmaps;
     private Activity activity;
     private BannerView banner;
     private MarqueeView marqueeView;
     private HomeBlogAdapter adapter;
     private View headerView;
-
-
-    private HandlerUtils.HandlerReference handler = new HandlerUtils.HandlerReference(
-            this, new HandlerUtils.HandlerReference.OnReceiveMessageListener() {
-        @Override
-        public void handlerMessage(Message msg) {
-            switch (msg.what){
-                case 1:
-                    break;
-                case 2:
-                    break;
-                default:
-                    break;
-            }
-        }
-    });
 
     @Override
     public void onAttach(Context context) {
@@ -289,12 +270,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
 
     @Override
     public void downloadBitmapSuccess(final ArrayList<Bitmap> bitmapList) {
-        if(bitmapList!=null && bitmapList.size()>0){
-            bitmaps = bitmapList;
-            handler.sendEmptyMessageAtTime(1,200);
-        }else {
-            handler.sendEmptyMessageAtTime(2,200);
-        }
+
     }
 
 

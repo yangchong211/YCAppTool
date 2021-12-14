@@ -65,6 +65,5 @@ dependencies {
 
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
-    implementation project(path: ':ToolLayer')
     implementation project(path: ':LibraryLayer')
 }

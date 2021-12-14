@@ -59,6 +59,5 @@ dependencies {
     api(rootProject.ext.dependencies["appcompat-v7"])
     api(rootProject.ext.dependencies["annotations"])
     implementation project(path: ':AnimatorToolLib')
-    implementation project(path: ':ToolLayer')
     implementation project(path: ':LibraryLayer')
 }

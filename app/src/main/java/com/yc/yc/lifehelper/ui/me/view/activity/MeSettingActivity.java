@@ -23,15 +23,9 @@ import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
 import com.yc.toollayer.file.FileCacheUtils;
-import com.ycbjie.library.base.config.AppConfig;
 import com.ycbjie.library.base.mvp.BaseActivity;
 import com.ycbjie.library.utils.AppToolUtils;
 import com.ycbjie.library.web.WebViewActivity;
-
-import java.util.concurrent.TimeUnit;
-
-import cn.ycbjie.ycthreadpoollib.PoolThread;
-
 
 
 /**

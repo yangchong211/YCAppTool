@@ -18,8 +18,8 @@ import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
 import com.yc.configlayer.bean.HomeBlogEntity;
 import com.yc.imageserver.utils.GlideImageUtils;
-import com.yc.toollayer.spannable.RoundBackgroundSpan;
-import com.yc.toollayer.spannable.SpannableUtils;
+import com.yc.customwidget.spannable.RoundBackgroundSpan;
+import com.yc.customwidget.spannable.SpannableUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
