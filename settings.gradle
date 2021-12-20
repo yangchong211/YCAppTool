@@ -31,7 +31,8 @@ project(':ToolUtilsLib').projectDir = new File('Common/ToolUtilsLib')
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerWidget', ':PhotoWidget', ':CustomWidget', ':BlurView',
-        ':FragmentLib',':WidgetViewLib',':ZoomImageLib', ':LargeImageLib'
+        ':FragmentLib',':WidgetViewLib',':ZoomImageLib', ':LargeImageLib',
+        ':SwipeBackLib'
 project(':BannerWidget').projectDir = new File('Widget/BannerWidget')
 project(':PhotoWidget').projectDir = new File('Widget/PhotoWidget')
 project(':CustomWidget').projectDir = new File('Widget/CustomWidget')
@@ -40,6 +41,7 @@ project(':FragmentLib').projectDir = new File('Widget/FragmentLib')
 project(':WidgetViewLib').projectDir = new File('Widget/WidgetViewLib')
 project(':ZoomImageLib').projectDir = new File('Widget/ZoomImageLib')
 project(':LargeImageLib').projectDir = new File('Widget/LargeImageLib')
+project(':SwipeBackLib').projectDir = new File('Widget/SwipeBackLib')
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
