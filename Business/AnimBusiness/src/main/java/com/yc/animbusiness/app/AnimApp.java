@@ -1,7 +1,7 @@
 package com.yc.animbusiness.app;
 
 
-import com.ycbjie.library.base.app.LibApplication;
+import com.yc.library.base.app.LibApplication;
 
 /**
  * <pre>

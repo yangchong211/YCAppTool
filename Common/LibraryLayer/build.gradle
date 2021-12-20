@@ -98,13 +98,9 @@ dependencies {
     api rootProject.ext.dependencies["constraint-layout"]
     api rootProject.ext.dependencies["percent"]
     api rootProject.ext.dependencies["multidex"]
-
-    api rootProject.ext.dependencies["rxrelay"]
-    api rootProject.ext.dependencies["rxandroid2"]
-    api rootProject.ext.dependencies["rxjava2"]
     api rootProject.ext.dependencies["router"]
-
     api rootProject.ext.dependencies["glide"]
+    api(rootProject.ext.dependencies["rxandroid2"])
     //annotationProcessor rootProject.ext.dependencies["glide-compiler"]
 
     api rootProject.ext.dependencies["tablayout"]

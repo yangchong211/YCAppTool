@@ -56,5 +56,15 @@
       <option name="name" value="MavenLocal" />
       <option name="url" value="file:$USER_HOME$/.m2/repository/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="$USER_HOME$/Library/Android/sdk/extras/android/m2repository" />
+      <option name="name" value="$USER_HOME$/Library/Android/sdk/extras/android/m2repository" />
+      <option name="url" value="file:$USER_HOME$/Library/Android/sdk/extras/android/m2repository/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="Google2" />
+      <option name="name" value="Google2" />
+      <option name="url" value="https://maven.google.com/" />
+    </remote-repository>
   </component>
 </project>

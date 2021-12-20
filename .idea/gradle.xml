@@ -10,12 +10,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Business/AndroidBusiness" />
             <option value="$PROJECT_DIR$/Business/AnimBusiness" />
             <option value="$PROJECT_DIR$/Business/BusinessInterface" />
             <option value="$PROJECT_DIR$/Business/DemoBusiness" />
             <option value="$PROJECT_DIR$/Business/GameBusiness" />
-            <option value="$PROJECT_DIR$/Business/GankBusiness" />
             <option value="$PROJECT_DIR$/Business/VideoBusiness" />
             <option value="$PROJECT_DIR$/Common/AppStatusLib" />
             <option value="$PROJECT_DIR$/Common/ConfigLayer" />

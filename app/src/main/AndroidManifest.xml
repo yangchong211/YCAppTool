@@ -13,24 +13,14 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label"
         tools:ignore="GoogleAppIndexingWarning">
-<!--        <activity android:name="com.yc.yc.lifehelper.ui.guide.view.activity.SplashActivity"-->
-<!--            android:theme="@style/SplashTheme">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-        <activity android:name="com.ycbjie.other.ui.location.LocationTestActivity">
+        <activity android:name="com.yc.yc.lifehelper.ui.guide.view.activity.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name="com.yc.yc.lifehelper.ui.main.view.SchemeActivity"
             android:screenOrientation="portrait">
@@ -54,7 +44,7 @@
         <activity android:name="com.yc.yc.lifehelper.ui.main.view.MainActivity"/>
         <activity android:name="com.yc.yc.lifehelper.ui.guide.view.activity.GuideActivity"/>
         <activity android:name="com.yc.yc.lifehelper.ui.me.view.activity.MeSettingActivity"/>
-        <service android:name="com.ycbjie.library.base.app.InitializeService"/>
+        <service android:name="com.yc.library.base.app.InitializeService"/>
     </application>
 
 </manifest>

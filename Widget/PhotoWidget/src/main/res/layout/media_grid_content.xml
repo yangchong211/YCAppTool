@@ -13,7 +13,7 @@
         android:layout_marginRight="4dp"
         android:layout_marginTop="4dp"
         android:layout_gravity="top|right">
-        <com.cheoo.photo.internal.ui.widget.CheckView
+        <com.yc.photo.internal.ui.widget.CheckView
             android:id="@+id/check_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

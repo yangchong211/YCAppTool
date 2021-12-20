@@ -15,7 +15,7 @@
         android:layout_margin="10dp"
         android:text="拼图游戏规则：点击选中一张图片，然后点击另外一张图片，即可教皇两张图片的位置，直到拼接成完整图片为止。"/>
 
-    <com.ycbjie.book.mzGame.GamePinTuLayout
+    <com.yc.book.mzGame.GamePinTuLayout
         android:id="@+id/game_view"
         android:layout_marginTop="20dp"
         android:layout_width="fill_parent"

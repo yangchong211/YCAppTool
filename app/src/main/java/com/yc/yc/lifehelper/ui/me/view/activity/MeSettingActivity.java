@@ -14,6 +14,7 @@ import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.ns.yc.lifehelper.R;
 import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading;
+import com.yc.toolutils.file.FileCacheUtils;
 import com.yc.widget.switchButton.SwitchButton;
 import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.yc.lifehelper.ui.me.contract.MeSettingContract;
@@ -22,10 +23,9 @@ import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
-import com.yc.toollayer.file.FileCacheUtils;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.utils.AppToolUtils;
-import com.ycbjie.library.web.WebViewActivity;
+import com.yc.library.base.mvp.BaseActivity;
+import com.yc.library.utils.AppToolUtils;
+import com.yc.library.web.WebViewActivity;
 
 
 /**

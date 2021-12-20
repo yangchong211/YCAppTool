@@ -3,7 +3,7 @@
     package="com.ycbjie.video" >
 
     <application>
-        <activity android:name="com.ycbjie.video.ui.activity.VideoActivity"
+        <activity android:name="com.ycbjie.video.com.yc.video.ui.activity.VideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
     </application>

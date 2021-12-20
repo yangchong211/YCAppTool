@@ -12,7 +12,7 @@ import com.yc.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.yc.yc.lifehelper.ui.guide.presenter.GuidePresenter;
 import com.yc.yc.lifehelper.ui.main.view.MainActivity;
 import com.yc.imageserver.utils.GlideImageUtils;
-import com.ycbjie.library.base.mvp.BaseActivity;
+import com.yc.library.base.mvp.BaseActivity;
 
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 

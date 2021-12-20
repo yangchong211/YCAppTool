@@ -52,7 +52,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_height="316dp">
 
-            <com.ycbjie.book.weight.monkey.LuckyMonkeyPanelView
+            <com.yc.book.weight.monkey.LuckyMonkeyPanelView
                 android:id="@+id/lucky_panel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

@@ -5,7 +5,7 @@
 
 
     <application
-        android:name="com.ycbjie.other.app.OtherApp"
+        android:name="com.ycbjie.other.com.yc.other.app.OtherApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/lf_other_name"
@@ -14,7 +14,7 @@
         tools:replace="android:label"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name="com.ycbjie.other.ui.activity.TestActivity">
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,29 +28,29 @@
             android:name="com.amap.api.v2.apikey"
             android:value="c633d7562d94d936f43e3153fdfb6060" />
 
-        <activity android:name="com.ycbjie.other.ui.activity.AboutMeActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.MeFeedBackActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.ImageGalleryActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.MeLoginActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.ZoomLargeImageActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.MeBannerActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.BannerViewActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.SnapHelperActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.ProgressFirstActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.ProgressSecondActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.ProgressThirdActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.ScrollActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.MixtureTextViewActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.CloneAbleActivity"/>
-        <activity android:name="com.ycbjie.other.ui.timer.TimerActivity"/>
-        <activity android:name="com.ycbjie.other.ui.timer.TimerMainActivity"/>
-        <activity android:name="com.ycbjie.other.ui.timer.MyCountActivity"/>
-        <activity android:name="com.ycbjie.other.ui.timer.ChronometerActivity"/>
-        <activity android:name="com.ycbjie.other.ui.timer.CountActivity"/>
-        <activity android:name="com.ycbjie.other.ui.timer.CountViewActivity"/>
-        <activity android:name="com.ycbjie.other.ui.timer.HandlerActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.LocaleActivity"/>
-        <activity android:name="com.ycbjie.other.ui.activity.SerialTaskActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.AboutMeActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.MeFeedBackActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ImageGalleryActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.MeLoginActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ZoomLargeImageActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.MeBannerActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.BannerViewActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.SnapHelperActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ProgressFirstActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ProgressSecondActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ProgressThirdActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ScrollActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.MixtureTextViewActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.CloneAbleActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.TimerActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.TimerMainActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.MyCountActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.ChronometerActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.CountActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.CountViewActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.HandlerActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.LocaleActivity"/>
+        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.SerialTaskActivity"/>
     </application>
 
 

@@ -33,9 +33,9 @@ import com.yc.toolutils.click.FastClickUtils;
 import com.yc.toolutils.score.GoToScoreUtils;
 import com.yc.toolutils.window.WindowUtils;
 import com.yc.toollib.crash.CrashToolUtils;
-import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.utils.AppUtils;
-import com.ycbjie.library.web.WebViewActivity;
+import com.yc.library.base.mvp.BaseFragment;
+import com.yc.library.utils.AppUtils;
+import com.yc.library.web.WebViewActivity;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;

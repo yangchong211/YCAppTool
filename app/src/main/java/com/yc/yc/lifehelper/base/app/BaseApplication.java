@@ -10,7 +10,7 @@ import com.yc.longevitylib.LongevityMonitor;
 import com.yc.longevitylib.LongevityMonitorConfig;
 import com.yc.toollib.tool.ToolFileUtils;
 import com.yc.toollib.tool.ToolLogUtils;
-import com.ycbjie.library.base.app.LibApplication;
+import com.yc.library.base.app.LibApplication;
 
 import java.io.File;
 import java.util.HashMap;

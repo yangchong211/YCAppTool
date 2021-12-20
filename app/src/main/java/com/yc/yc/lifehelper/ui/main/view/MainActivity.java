@@ -40,10 +40,10 @@ import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.yc.lifehelper.ui.me.view.fragment.MeFragment;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
-import com.ycbjie.library.base.adapter.BasePagerAdapter;
-import com.ycbjie.library.base.mvp.BaseActivity;
-import com.ycbjie.library.listener.PerfectClickListener;
-import com.ycbjie.library.web.WebViewActivity;
+import com.yc.library.base.adapter.BasePagerAdapter;
+import com.yc.library.base.mvp.BaseActivity;
+import com.yc.library.listener.PerfectClickListener;
+import com.yc.library.web.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;

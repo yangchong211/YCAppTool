@@ -13,7 +13,7 @@ import com.yc.animation.listener.AbsAnimatorListener;
 import com.yc.animation.listener.AnimatorUpdateListener;
 import com.yc.animation.utils.LoggerUtil;
 import com.yc.animation.AnimatorCompat;
-import com.ycbjie.library.base.mvp.BaseActivity;
+import com.yc.library.base.mvp.BaseActivity;
 
 public class AnimMainActivity extends BaseActivity implements View.OnClickListener {
 

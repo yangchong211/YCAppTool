@@ -192,12 +192,6 @@ dependencies {
     if (!rootProject.ext.isBookApplication){
         implementation project(path: ':GameBusiness')
     }
-    if (!rootProject.ext.isGankApplication){
-        implementation project(path: ':GankBusiness')
-    }
-    if (!rootProject.ext.isAndroidApplication){
-        implementation project(path: ':AndroidBusiness')
-    }
     if (!rootProject.ext.isOtherApplication){
         implementation project(path: ':DemoBusiness')
     }

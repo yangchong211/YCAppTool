@@ -6,7 +6,7 @@ import com.blankj.utilcode.util.Utils;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.ns.yc.lifehelper.R;
 import com.yc.yc.lifehelper.ui.main.contract.MainContract;
-import com.ycbjie.library.bean.TabEntity;
+import com.yc.library.bean.TabEntity;
 
 import java.util.ArrayList;
 

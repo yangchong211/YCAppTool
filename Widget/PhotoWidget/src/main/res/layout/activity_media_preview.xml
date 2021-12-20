@@ -7,7 +7,7 @@
     android:background="@android:color/white">
 
 
-    <com.cheoo.photo.internal.ui.widget.PreviewViewPager
+    <com.yc.photo.internal.ui.widget.PreviewViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,7 +53,7 @@
                 tools:showIn="@layout/activity_matisse">
 
 
-                <com.cheoo.photo.internal.ui.widget.CheckRadioView
+                <com.yc.photo.internal.ui.widget.CheckRadioView
                     android:id="@+id/original"
                     android:src="@drawable/icon_photo_select"
                     android:layout_gravity="center_vertical"
@@ -107,7 +107,7 @@
         android:layout_margin="4dp"
         android:fitsSystemWindows="true">
 
-        <com.cheoo.photo.internal.ui.widget.CheckView
+        <com.yc.photo.internal.ui.widget.CheckView
             android:id="@+id/check_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

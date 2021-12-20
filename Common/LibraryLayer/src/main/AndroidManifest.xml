@@ -27,7 +27,7 @@
 
 
     <application>
-        <activity android:name="com.ycbjie.library.web.WebViewActivity"/>
+        <activity android:name="com.ycbjie.library.com.yc.library.web.WebViewActivity"/>
     </application>
 
 </manifest>

@@ -3,7 +3,7 @@
     package="com.ycbjie.video" >
 
     <application
-        android:name=".app.VideoApp"
+        android:name="com.yc.video.app.VideoApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_video_name"
@@ -12,7 +12,7 @@
         tools:replace="android:label"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".ui.activity.VideoActivity"
+        <activity android:name="com.yc.video.ui.activity.VideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" >
             <intent-filter>

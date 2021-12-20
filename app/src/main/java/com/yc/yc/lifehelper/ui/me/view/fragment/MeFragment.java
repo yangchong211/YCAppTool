@@ -13,8 +13,8 @@ import com.blankj.utilcode.util.IntentUtils;
 import com.ns.yc.lifehelper.R;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
-import com.ycbjie.library.base.mvp.BaseFragment;
-import com.ycbjie.library.utils.AppToolUtils;
+import com.yc.library.base.mvp.BaseFragment;
+import com.yc.library.utils.AppToolUtils;
 
 
 /**

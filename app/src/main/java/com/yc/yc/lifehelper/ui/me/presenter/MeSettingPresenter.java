@@ -5,11 +5,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 
+import com.yc.toolutils.file.FileCacheUtils;
 import com.yc.widget.loadingDialog.LoadDialog;
 import com.yc.yc.lifehelper.ui.me.contract.MeSettingContract;
 import com.yc.toolutils.score.GoToScoreUtils;
-import com.yc.toollayer.file.FileCacheUtils;
-import com.ycbjie.library.base.config.AppConfig;
+import com.yc.library.base.config.AppConfig;
 
 import java.util.concurrent.TimeUnit;
 

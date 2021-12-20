@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -15,8 +14,8 @@ import com.blankj.utilcode.util.Utils;
 import com.ns.yc.lifehelper.R;
 import com.yc.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.yc.configlayer.bean.HomeBlogEntity;
-import com.ycbjie.library.api.ConstantImageApi;
-import com.ycbjie.library.base.config.AppConfig;
+import com.yc.library.api.ConstantImageApi;
+import com.yc.library.base.config.AppConfig;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

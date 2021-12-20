@@ -72,7 +72,7 @@
             tools:showIn="@layout/activity_matisse">
 
 
-            <com.cheoo.photo.internal.ui.widget.CheckRadioView
+            <com.yc.photo.internal.ui.widget.CheckRadioView
                 android:id="@+id/original"
                 android:src="@drawable/icon_photo_select"
                 android:layout_gravity="center_vertical"

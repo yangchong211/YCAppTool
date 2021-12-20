@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.yc.toolutils.window.WindowUtils;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -24,30 +26,6 @@ import java.io.InputStream;
  * </pre>
  */
 public final class CompressUtils {
-
-    /**
-     * 获得屏幕宽度
-     * @param context                               上下文
-     * @return
-     */
-    public static int getScreenWidth(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.widthPixels;
-    }
-
-    /**
-     * 获得屏幕高度
-     * @param context                               上下文
-     * @return
-     */
-    public static int getScreenHeight(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.heightPixels;
-    }
 
     /**
      * 通过大小压缩，将修改图片宽高
@@ -82,8 +60,8 @@ public final class CompressUtils {
      * @return
      */
     public static Bitmap compressBitmapByBmp(Bitmap image, Context context){
-        int screenHeight = getScreenHeight(context);
-        int screenWidth = getScreenWidth(context);
+        int screenHeight = WindowUtils.getScreenHeight(context);
+        int screenWidth = WindowUtils.getScreenWidth(context);
         return compressBitmapByBmp(image,screenWidth,screenHeight);
     }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.cheoo.photo.internal.ui.widget.MediaGrid
+<com.yc.photo.internal.ui.widget.MediaGrid
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

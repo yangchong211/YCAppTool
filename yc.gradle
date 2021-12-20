@@ -52,7 +52,6 @@ ext {
                 "okhttp"                   : "com.squareup.okhttp3:okhttp:${version["okhttp"]}",
                 "rxandroid2"                : "io.reactivex.rxjava2:rxandroid:2.1.0",
                 "rxjava2"                   : "io.reactivex.rxjava2:rxjava:2.1.11",
-                "rxrelay"                  : "com.jakewharton.rxrelay2:rxrelay:2.0.0",
 
                 //router
                 "router"                      : "com.alibaba:arouter-api:1.4.1",

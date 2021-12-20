@@ -8,8 +8,8 @@ import com.yc.yc.lifehelper.bean.ItemEntity;
 import com.yc.yc.lifehelper.ui.guide.contract.GuideContract;
 import com.yc.configlayer.bean.HomeBlogEntity;
 import com.yc.configlayer.constant.Constant;
-import com.ycbjie.library.api.ConstantImageApi;
-import com.ycbjie.library.base.config.AppConfig;
+import com.yc.library.api.ConstantImageApi;
+import com.yc.library.base.config.AppConfig;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

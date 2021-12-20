@@ -39,7 +39,7 @@ import com.yc.toolutils.score.GoToScoreUtils;
 import com.yc.toolutils.calendar.CalendarReminderUtils;
 import com.yc.toollib.crash.CrashToolUtils;
 import com.yc.zxingserver.demo.CodeActivity;
-import com.ycbjie.library.base.mvp.BaseFragment;
+import com.yc.library.base.mvp.BaseFragment;
 
 import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.item.SpaceViewItemLine;

@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.yc.yc.lifehelper.ui.guide.view.activity.SplashActivity;
 import com.yc.yc.lifehelper.ui.me.view.activity.MeSettingActivity;
-import com.ycbjie.library.utils.AppUtils;
+import com.yc.library.utils.AppUtils;
 
 import java.util.List;
 
