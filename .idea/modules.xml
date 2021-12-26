@@ -6,7 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LifeHelper.iml" filepath="$PROJECT_DIR$/.idea/modules/LifeHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/AppStatusLib/LifeHelper.AppStatusLib.iml" filepath="$PROJECT_DIR$/.idea/modules/common/AppStatusLib/LifeHelper.AppStatusLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tracesdk/LifeHelper.AppTraceTool.iml" filepath="$PROJECT_DIR$/.idea/modules/tracesdk/LifeHelper.AppTraceTool.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerWidget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerViewLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/BusinessInterface/LifeHelper.BusinessInterface.iml" filepath="$PROJECT_DIR$/.idea/modules/business/BusinessInterface/LifeHelper.BusinessInterface.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/basis/ConfigLayer/LifeHelper.ConfigLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/basis/ConfigLayer/LifeHelper.ConfigLayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/CustomWidget/LifeHelper.CustomWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/CustomWidget/LifeHelper.CustomWidget.iml" />
@@ -35,7 +35,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/SerialTaskLib/Tool.LifeHelper.SerialTaskLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/SerialTaskLib/Tool.LifeHelper.SerialTaskLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/SocketIoLib/Tool.LifeHelper.SocketIoLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/SocketIoLib/Tool.LifeHelper.SocketIoLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/WebSocketLib/Tool.LifeHelper.WebSocketLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/WebSocketLib/Tool.LifeHelper.WebSocketLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BlurView/Widget.LifeHelper.BlurView.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BlurView/Widget.LifeHelper.BlurView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BlurView/Widget.LifeHelper.BlurViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BlurView/Widget.LifeHelper.BlurViewLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/FragmentLib/Widget.LifeHelper.FragmentLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/FragmentLib/Widget.LifeHelper.FragmentLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/WidgetViewLib/github.LifeHelper.WidgetViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/WidgetViewLib/github.LifeHelper.WidgetViewLib.iml" />
     </modules>

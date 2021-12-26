@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
+//迁移到jitpack
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -26,6 +29,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    api(rootProject.ext.dependencies["appcompat-v7"])
-    api(rootProject.ext.dependencies["annotations"])
+    implementation(rootProject.ext.dependencies["appcompat-v7"])
+    implementation(rootProject.ext.dependencies["annotations"])
 }

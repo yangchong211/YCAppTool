@@ -208,6 +208,9 @@ dependencies {
     implementation project(path: ':ZxingServerLib')
     implementation project(path: ':NfcServer')
     implementation project(path: ':LongevityLib')
+
+    implementation project(path: ':BannerViewLib')
+    implementation project(path: ':BlurViewLib')
 }
 
 

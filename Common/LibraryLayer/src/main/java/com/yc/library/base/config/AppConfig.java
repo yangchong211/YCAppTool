@@ -8,7 +8,6 @@ import com.blankj.utilcode.util.Utils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.configlayer.constant.Constant;
 import com.yc.toolutils.activity.ActivityManager;
-import com.yc.library.BuildConfig;
 import com.yc.library.base.callback.LogCallback;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
@@ -93,12 +92,10 @@ public enum AppConfig {
 
 
     private void initARouter(){
-        if (BuildConfig.IS_DEBUG) {
-            //打印日志
-            ARouter.openLog();
-            //开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
-            ARouter.openDebug();
-        }
+        //打印日志
+        ARouter.openLog();
+        //开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
+        ARouter.openDebug();
         //推荐在Application中初始化
         ARouter.init(Utils.getApp());
     }

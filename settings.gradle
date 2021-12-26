@@ -30,13 +30,13 @@ project(':ToolUtilsLib').projectDir = new File('Common/ToolUtilsLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
-include ':BannerWidget', ':PhotoWidget', ':CustomWidget', ':BlurView',
+include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':FragmentLib',':WidgetViewLib',':ZoomImageLib', ':LargeImageLib',
         ':SwipeBackLib'
-project(':BannerWidget').projectDir = new File('Widget/BannerWidget')
+project(':BannerViewLib').projectDir = new File('Widget/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('Widget/PhotoWidget')
 project(':CustomWidget').projectDir = new File('Widget/CustomWidget')
-project(':BlurView').projectDir = new File('Widget/BlurView')
+project(':BlurViewLib').projectDir = new File('Widget/BlurViewLib')
 project(':FragmentLib').projectDir = new File('Widget/FragmentLib')
 project(':WidgetViewLib').projectDir = new File('Widget/WidgetViewLib')
 project(':ZoomImageLib').projectDir = new File('Widget/ZoomImageLib')
