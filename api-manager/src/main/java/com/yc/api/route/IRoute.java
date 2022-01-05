@@ -1,4 +1,4 @@
-package com.yc.api;
+package com.yc.api.route;
 
 /**
  * <pre>

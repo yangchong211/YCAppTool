@@ -9,7 +9,7 @@ import org.gradle.api.tasks.TaskAction;
 import java.io.File;
 
 
-public class ServiceRegistryGenerationTask extends DefaultTask {
+public class SpiTask extends DefaultTask {
 
     private File sourceDir;
 
@@ -17,7 +17,7 @@ public class ServiceRegistryGenerationTask extends DefaultTask {
 
     private FileCollection classpath;
 
-    public ServiceRegistryGenerationTask() {
+    public SpiTask() {
         this.classpath = this.getProject().files();
     }
 
@@ -50,6 +50,6 @@ public class ServiceRegistryGenerationTask extends DefaultTask {
 
     @TaskAction
     protected void generate() {
-        this.setDidWork(new ServiceRegistryGenerationAction(this.classpath, this.servicesDir, this.sourceDir).execute());
+        this.setDidWork(new SpiAction(this.classpath, this.servicesDir, this.sourceDir).execute());
     }
 }

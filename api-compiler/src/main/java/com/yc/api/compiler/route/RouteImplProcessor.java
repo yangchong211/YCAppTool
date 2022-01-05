@@ -6,8 +6,8 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterSpec;
 import com.squareup.javapoet.TypeSpec;
-import com.yc.api.RouteConstants;
-import com.yc.api.RouteImpl;
+import com.yc.api.route.RouteConstants;
+import com.yc.api.route.RouteImpl;
 
 import java.io.IOException;
 import java.util.Set;
@@ -84,7 +84,7 @@ public class RouteImplProcessor extends AbstractProcessor {
             Set<? extends Element> annotated = roundEnvironment.getElementsAnnotatedWith(typeElement);
             for (Element apiImplElement : annotated) {
                 //被 RouteImpl 注解的节点集合
-                //注意断点打印：@com.yc.api.RouteImpl(value=com.zwwl.moduleinterface.IShowDialogManager)
+                //注意断点打印：@com.yc.api.route.RouteImpl(value=com.zwwl.moduleinterface.IShowDialogManager)
                 RouteImpl annotation = apiImplElement.getAnnotation(RouteImpl.class);
                 if (annotation == null || !(apiImplElement instanceof TypeElement)) {
                     continue;
@@ -124,7 +124,7 @@ public class RouteImplProcessor extends AbstractProcessor {
             //注意断点打印：IShowDialogManager
             System.out.println("RouteImplProcessor--------buildClass-------simpleName---"+simpleName);
         }
-        //获取 com.yc.api.IRouteContract 信息，也就是IRouteContract接口的路径
+        //获取 com.yc.api.route.IRouteContract 信息，也就是IRouteContract接口的路径
         TypeElement typeElement = elements.getTypeElement(RouteConstants.INTERFACE_NAME_CONTRACT);
         ClassName className = ClassName.get(typeElement);
         if (RouteConstants.LOG){
@@ -175,7 +175,7 @@ public class RouteImplProcessor extends AbstractProcessor {
     }
 
     private ParameterSpec buildParameterSpec() {
-        //获取 com.yc.api.IRegister 信息，也就是IRegister接口的路径
+        //获取 com.yc.api.route.IRegister 信息，也就是IRegister接口的路径
         TypeElement typeElement = elements.getTypeElement(RouteConstants.INTERFACE_TYPE_REGISTER);
         ClassName className = ClassName.get(typeElement);
         if (RouteConstants.LOG){

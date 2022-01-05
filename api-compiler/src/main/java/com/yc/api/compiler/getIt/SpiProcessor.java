@@ -7,7 +7,7 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
-import com.yc.api.ServiceProviderInterface;
+import com.yc.api.getIt.ServiceProviderInterface;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -30,7 +30,7 @@ import javax.lang.model.util.Elements;
 
 
 @AutoService(Processor.class)
-public class ServiceProviderInterfaceProcessor extends AbstractProcessor {
+public class SpiProcessor extends AbstractProcessor {
 
     private Elements utils;
 

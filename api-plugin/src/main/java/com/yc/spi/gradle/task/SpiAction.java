@@ -11,7 +11,7 @@ import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.TypeVariableName;
 import com.squareup.javapoet.WildcardTypeName;
-import com.yc.api.ServiceProvider;
+import com.yc.api.getIt.ServiceProvider;
 import com.yc.api.compiler.getIt.ServiceLoader;
 
 import org.gradle.api.GradleException;
@@ -53,17 +53,15 @@ import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.MemberValue;
 
 
-class ServiceRegistryGenerationAction {
+class SpiAction {
 
     private final FileCollection classpath;
-
     private final File serviceDir;
-
     private final File sourcesDir;
-
     private final ClassPool pool;
 
-    public ServiceRegistryGenerationAction(final FileCollection classpath, final File servicesDir, final File sourceDir) {
+    public SpiAction(final FileCollection classpath,
+                     final File servicesDir, final File sourceDir) {
         this.classpath = classpath;
         this.serviceDir = servicesDir;
         this.sourcesDir = sourceDir;
@@ -77,80 +75,18 @@ class ServiceRegistryGenerationAction {
 
     private List<CtClass> loadClasses() throws NotFoundException, IOException {
         final List<CtClass> classes = new LinkedList<CtClass>();
-
         for (final File file : this.classpath) {
             this.pool.appendClassPath(file.getAbsolutePath());
         }
-
         for (final File file : this.classpath) {
-            loadClasses(this.pool, classes, file);
+            SpiTaskUtils.loadClasses(this.pool, classes, file);
         }
-
-        return classes;
-    }
-
-    private List<CtClass> loadClasses(final ClassPool pool, final List<CtClass> classes, final File file) throws IOException {
-        final Stack<File> stack = new Stack<File>();
-        stack.push(file);
-
-        while (!stack.isEmpty()) {
-            final File f = stack.pop();
-
-            if (f.isDirectory()) {
-                final File[] files = f.listFiles();
-                if (null != files) {
-                    for (final File child : files) {
-                        stack.push(child);
-                    }
-                }
-            } else if (f.getName().endsWith(".class")) {
-                FileInputStream stream = null;
-
-                try {
-                    stream = new FileInputStream(f);
-                    classes.add(pool.makeClass(stream));
-                } finally {
-                    if (null != stream) {
-                        try {
-                            stream.close();
-                        } catch (final IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            } else if (f.getName().endsWith(".jar")) {
-                loadClasses(pool, classes, new JarFile(f));
-            }
-        }
-
-        return classes;
-    }
-
-    private List<CtClass> loadClasses(final ClassPool pool, final List<CtClass> classes, final JarFile jar) throws IOException {
-        InputStream stream = null;
-
-        final Enumeration<JarEntry> entries = jar.entries();
-        while (entries.hasMoreElements()) {
-            final JarEntry entry = entries.nextElement();
-            if (entry.getName().endsWith(".class")) {
-                try {
-                    stream = jar.getInputStream(entry);
-                    classes.add(pool.makeClass(stream));
-                } finally {
-                    if (null != stream) {
-                        stream.close();
-                    }
-                }
-            }
-        }
-
         return classes;
     }
 
     public boolean execute() {
-        delete(this.serviceDir);
-        delete(this.sourcesDir);
-
+        SpiTaskUtils.delete(this.serviceDir);
+        SpiTaskUtils.delete(this.sourcesDir);
         try {
             final List<CtClass> classes = loadClasses();
             if (null != classes && classes.size() > 0) {
@@ -158,12 +94,10 @@ class ServiceRegistryGenerationAction {
                     processClass(cc);
                 }
             }
-
             generateSourceCode();
         } catch (Exception e) {
             throw new GradleException("Could not generate ServiceRegistry", e);
         }
-
         return true;
     }
 
@@ -327,13 +261,11 @@ class ServiceRegistryGenerationAction {
         if (!cc.hasAnnotation(ServiceProvider.class)) {
             return;
         }
-
         final ClassFile cf = cc.getClassFile();
-        final Annotation annotation = getServiceProviderAnnotation(cf);
+        final Annotation annotation = SpiTaskUtils.getServiceProviderAnnotation(cf);
         if (null == annotation) {
             return;
         }
-
         final ArrayMemberValue value = (ArrayMemberValue) annotation.getMemberValue("value");
         final IntegerMemberValue priority = (IntegerMemberValue) annotation.getMemberValue("priority");
         final int priorityValue = null != priority ? priority.getValue() : 0;
@@ -342,11 +274,9 @@ class ServiceRegistryGenerationAction {
             final ClassMemberValue cmv = (ClassMemberValue) mv;
             final String serviceName = cmv.getValue();
             final File spi = new File(this.serviceDir, serviceName);
-
             if (!spi.exists()) {
                 spi.createNewFile();
             }
-
             final PrintWriter out = new PrintWriter(new FileWriter(spi, true));
             out.printf("%s %d", cc.getName(), priorityValue).println();
             out.flush();
@@ -354,91 +284,4 @@ class ServiceRegistryGenerationAction {
         }
     }
 
-    private Annotation getServiceProviderAnnotation(final ClassFile cf) {
-        final AnnotationsAttribute visibleAttr = (AnnotationsAttribute) cf.getAttribute(AnnotationsAttribute.visibleTag);
-        if (null != visibleAttr) {
-            final Annotation sp = visibleAttr.getAnnotation(ServiceProvider.class.getName());
-            if (null != sp) {
-                return sp;
-            }
-        }
-
-        final AnnotationsAttribute invisibleAttr = (AnnotationsAttribute) cf.getAttribute(AnnotationsAttribute.invisibleTag);
-        if (null != invisibleAttr) {
-            final Annotation sp = invisibleAttr.getAnnotation(ServiceProvider.class.getName());
-            if (null != sp) {
-                return sp;
-            }
-        }
-
-        return null;
-    }
-
-    private static void delete(final File file) {
-        final Stack<File> stack = new Stack<File>();
-
-        stack.push(file);
-
-        while (!stack.isEmpty()) {
-            final File f = stack.pop();
-
-            if (f.isFile()) {
-                f.delete();
-            } else if (f.isDirectory()) {
-                final File[] files = f.listFiles();
-                if (null != files && files.length > 0) {
-                    for (int i = 0, n = files.length; i < n; i++) {
-                        stack.push(files[i]);
-                    }
-                }
-            }
-        }
-    }
-
-    private static final class SpiElement implements Comparable<SpiElement> {
-        final String name;
-        final int priority;
-
-        private SpiElement(final String name, final int priority) {
-            this.name = name;
-            this.priority = priority;
-        }
-
-        private SpiElement(final String name, final String priority) {
-            this(name, parsePriority(priority));
-        }
-
-        @Override
-        public int compareTo(final SpiElement o) {
-            return this.priority > o.priority ? 1 : this.priority < o.priority ? -1 : 0;
-        }
-
-        private static final int parsePriority(final String s) {
-            try {
-                return Integer.parseInt(s);
-            } catch (final NumberFormatException e) {
-                return 0;
-            }
-        }
-
-        @Override
-        public boolean equals(final Object o) {
-            if (this == o) {
-                return true;
-            }
-
-            if (!(o instanceof SpiElement)) {
-                return false;
-            }
-
-            final SpiElement e = (SpiElement) o;
-            return this.name.equals(e.name);
-        }
-
-        @Override
-        public int hashCode() {
-            return this.name.hashCode();
-        }
-
-    }
 }

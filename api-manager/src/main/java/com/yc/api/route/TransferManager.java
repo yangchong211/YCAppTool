@@ -1,4 +1,4 @@
-package com.yc.api;
+package com.yc.api.route;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;

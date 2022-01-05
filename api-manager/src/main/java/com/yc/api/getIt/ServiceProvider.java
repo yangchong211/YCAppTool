@@ -1,4 +1,4 @@
-package com.yc.api;
+package com.yc.api.getIt;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
