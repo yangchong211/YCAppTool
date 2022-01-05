@@ -57,3 +57,6 @@ project(':CountTimerLib').projectDir = new File('Tool/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('Tool/AnimatorToolLib')
 project(':AppTraceTool').projectDir = new File('Tool/AppTraceTool')
 project(':LongevityLib').projectDir = new File('Tool/LongevityLib')
+include ':api-compiler'
+include ':api-manager'
+include ':api-plugin'

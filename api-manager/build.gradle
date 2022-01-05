@@ -1,0 +1,15 @@
+apply plugin: 'java-library'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'api-manager',
+                'Implementation-Version': '1.0.0'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"

@@ -44,6 +44,9 @@
             <option value="$PROJECT_DIR$/Widget/SwipeBackLib" />
             <option value="$PROJECT_DIR$/Widget/WidgetViewLib" />
             <option value="$PROJECT_DIR$/Widget/ZoomImageLib" />
+            <option value="$PROJECT_DIR$/api-compiler" />
+            <option value="$PROJECT_DIR$/api-manager" />
+            <option value="$PROJECT_DIR$/api-plugin" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

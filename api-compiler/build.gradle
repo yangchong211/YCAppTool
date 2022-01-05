@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'api-compiler',
+                'Implementation-Version': '1.0.0'
+    }
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+dependencies{
+    implementation 'com.google.auto.service:auto-service:1.0-rc2'
+    implementation 'com.squareup:javapoet:1.7.0'
+    implementation project(path: ':api-manager')
+}
