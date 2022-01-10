@@ -6,10 +6,11 @@ import java.util.LinkedHashSet;
 import java.util.ServiceConfigurationError;
 import java.util.Set;
 
+
 public final class ServiceLoader<S> implements Iterable<S> {
 
     public static <S> ServiceLoader<S> load(final Class<S> serviceClass) {
-        return new ServiceLoader<S>(serviceClass);
+        return new ServiceLoader<>(serviceClass);
     }
 
     private final Class<S> mService;

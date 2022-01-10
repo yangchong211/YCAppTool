@@ -76,4 +76,7 @@ dependencies {
     implementation project(path: ':PhotoWidget')
     implementation project(path: ':WidgetViewLib')
     implementation project(path: ':CountTimerLib')
+
+    implementation project(path: ':api-manager')
+    annotationProcessor project(path: ':api-compiler')
 }

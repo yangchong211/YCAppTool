@@ -15,9 +15,11 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.ns.yc.lifehelper.R;
+import com.yc.animbusiness.AnimMainActivity;
 import com.yc.yc.lifehelper.base.adapter.BaseBannerPagerAdapter;
 import com.yc.yc.lifehelper.ui.home.contract.HomeFragmentContract;
 import com.yc.yc.lifehelper.ui.home.presenter.HomeFragmentPresenter;
@@ -195,7 +197,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                             break;
                             //干活集中营
                         case R.id.tv_home_four:
-                            ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_TEST_ACTIVITY);
+                            ActivityUtils.startActivity(AnimMainActivity.class);
+                            //ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_TEST_ACTIVITY);
                             break;
                         default:
                             break;

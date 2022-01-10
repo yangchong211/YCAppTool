@@ -51,6 +51,7 @@ import javassist.bytecode.annotation.ArrayMemberValue;
 import javassist.bytecode.annotation.ClassMemberValue;
 import javassist.bytecode.annotation.IntegerMemberValue;
 import javassist.bytecode.annotation.MemberValue;
+import sun.rmi.runtime.Log;
 
 
 class SpiAction {
@@ -68,7 +69,9 @@ class SpiAction {
         this.pool = new ClassPool(true) {
             @Override
             public ClassLoader getClassLoader() {
-                return new Loader(this);
+                Loader loader = new Loader(this);
+                ClassLoader parent = loader.getParent();
+                return loader;
             }
         };
     }

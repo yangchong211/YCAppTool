@@ -61,4 +61,8 @@ dependencies {
 //    implementation project(path: ':AnimatorToolLib')
     implementation 'com.github.yangchong211.YCAppTool:AnimatorToolLib:1.3.7'
     implementation project(path: ':LibraryLayer')
+
+    implementation project(path: ':api-manager')
+    implementation project(path: ':api-compiler')
+    annotationProcessor project(path: ':api-compiler')
 }

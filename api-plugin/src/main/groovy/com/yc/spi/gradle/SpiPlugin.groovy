@@ -8,6 +8,8 @@ import org.gradle.api.tasks.compile.JavaCompile
 
 class SpiPlugin implements Plugin<Project> {
 
+
+
     @Override
     void apply(final Project project) {
         project.afterEvaluate {
@@ -23,9 +25,10 @@ class SpiPlugin implements Plugin<Project> {
                 def spiSourceDir = project.file("${project.buildDir}/intermediates/spi/${variant.dirName}/src")
                 def spiServicesDir = project.file("${project.buildDir}/intermediates/spi/${variant.dirName}/services")
                 def spiClasspath = project.files(project.android.bootClasspath, variant.javaCompile.classpath, variant.javaCompile.destinationDir)
-
-                def generateTask = project.task(
-                        "generateServiceRegistry${variant.name.capitalize()}",
+                print("SpiPlugin , spiSourceDir : " + spiSourceDir)
+                print("SpiPlugin , spiServicesDir : " + spiServicesDir)
+                print("SpiPlugin , spiClasspath : " + spiClasspath)
+                def generateTask = project.task("generateServiceRegistry${variant.name.capitalize()}",
                         type: ServiceRegistryGenerationTask) {
                     description = "Generate ServiceRegistry for ${variant.name.capitalize()}"
                     classpath += spiClasspath
