@@ -16,7 +16,7 @@
         android:padding="10dp"
         android:layout_margin="10dp"
         android:orientation="vertical">
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <AutoCompleteTextView
@@ -27,8 +27,8 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.yc.customwidget.PasswordEditText
@@ -43,7 +43,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 tools:ignore="InvalidImeActionId" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <Button

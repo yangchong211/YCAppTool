@@ -3,17 +3,16 @@ package com.yc.other.ui.timer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.TextView;
 
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ycbjie.other.R;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public class ChronometerActivity extends AppCompatActivity implements View.OnClickListener {
 

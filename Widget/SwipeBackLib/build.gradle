@@ -18,6 +18,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation(rootProject.ext.dependencies["appcompat-v7"])
-    implementation(rootProject.ext.dependencies["annotations"])
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
 }

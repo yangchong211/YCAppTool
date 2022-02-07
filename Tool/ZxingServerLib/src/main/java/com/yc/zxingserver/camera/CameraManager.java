@@ -5,7 +5,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Handler;
-import android.support.annotation.FloatRange;
+import androidx.annotation.FloatRange;
 import android.view.SurfaceHolder;
 
 import com.google.zxing.PlanarYUVLuminanceSource;

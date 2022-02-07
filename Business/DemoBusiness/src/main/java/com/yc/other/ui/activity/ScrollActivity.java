@@ -1,10 +1,12 @@
 package com.yc.other.ui.activity;
 
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+
 import android.util.Log;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
@@ -12,7 +14,6 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.yc.configlayer.constant.Constant;
-import com.yc.customwidget.CustomScrollView;
 import com.yc.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
@@ -33,7 +34,7 @@ public class ScrollActivity extends BaseActivity {
     private AppBarLayout appBar;
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
-    private CustomScrollView scrollView;
+    private NestedScrollView scrollView;
     private int state;
     private ImageView ivImage;
     private int height;
@@ -145,7 +146,6 @@ public class ScrollActivity extends BaseActivity {
                 }
                 ivImage.setLayoutParams(layoutParams);
             }
-            scrollView.setStates(state);
         });
     }
 

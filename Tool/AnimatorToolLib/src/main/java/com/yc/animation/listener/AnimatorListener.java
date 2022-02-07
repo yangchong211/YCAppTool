@@ -1,6 +1,6 @@
 package com.yc.animation.listener;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 
 import com.yc.animation.animator.Animator;

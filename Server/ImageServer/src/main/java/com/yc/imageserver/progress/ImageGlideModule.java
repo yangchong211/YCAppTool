@@ -1,7 +1,7 @@
 package com.yc.imageserver.progress;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;

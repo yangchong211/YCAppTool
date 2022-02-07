@@ -3,11 +3,9 @@ package com.yc.customwidget.spannable;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-
-import com.yc.customwidget.R;
 
 
 /**

@@ -1,0 +1,9 @@
+<resources>
+
+    <!--1像素保活透明Activity-->
+    <style name="OnePixelActivity" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+</resources>

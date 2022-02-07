@@ -1,6 +1,6 @@
 package com.yc.logging.upload;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import com.google.gson.annotations.SerializedName;
 import com.yc.logging.annotation.KeepClass;
 

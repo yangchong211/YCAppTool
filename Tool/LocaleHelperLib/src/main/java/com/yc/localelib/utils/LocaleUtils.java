@@ -5,7 +5,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.LocaleList;
-import android.support.v4.os.LocaleListCompat;
+import androidx.core.os.LocaleListCompat;
 import android.util.DisplayMetrics;
 
 import java.util.Locale;
@@ -63,6 +63,7 @@ public final class LocaleUtils {
     public static Locale getSysLocale() {
         Locale locale;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //大于24
             locale = Resources.getSystem().getConfiguration().getLocales().get(0);
         } else {
             locale = Resources.getSystem().getConfiguration().locale;

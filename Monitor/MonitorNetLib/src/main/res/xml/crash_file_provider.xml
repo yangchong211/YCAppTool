@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+
+    <!--升级-->
+    <external-cache-path
+        name="crash_external_cache"
+        path="." />
+
+    <cache-path
+        name="crash_cache"
+        path="." />
+
+    <external-path
+        name="crash_external_path"
+        path="." />
+
+    <files-path
+        name="crash_files_path"
+        path="." />
+
+    <external-files-path
+        name="crash_external_files_path"
+        path="." />
+
+    <root-path
+        name="crash_root_path"
+        path="." />
+
+</paths>

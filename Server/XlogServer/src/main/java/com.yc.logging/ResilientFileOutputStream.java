@@ -1,6 +1,6 @@
 package com.yc.logging;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 
 import java.io.*;
 import java.nio.channels.FileChannel;

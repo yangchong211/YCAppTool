@@ -1,6 +1,6 @@
 package com.yc.logging.util;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

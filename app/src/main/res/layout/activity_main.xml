@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
@@ -7,60 +7,17 @@
     android:background="@color/colorWhite">
 
     <!--主页面布局-->
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <include layout="@layout/base_title_bar"/>
-            <FrameLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical" >
-                <com.yc.widget.viewPager.NoSlidingViewPager
-                    android:id="@+id/vp_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/whiteBg"/>
-            </FrameLayout>
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                xmlns:tl="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/base_title_bar"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/gray_black"/>
-
-                <com.flyco.tablayout.CommonTabLayout
-                    android:id="@+id/ctl_table"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="#90ffffff"
-                    tl:tl_iconHeight="23dp"
-                    tl:tl_iconWidth="23dp"
-                    tl:tl_indicator_color="#2C97DE"
-                    tl:tl_indicator_height="0dp"
-                    tl:tl_textSelectColor="#2C97DE"
-                    tl:tl_textUnselectColor="#66000000"
-                    tl:tl_textsize="12sp"
-                    tl:tl_underline_color="#DDDDDD"
-                    tl:tl_underline_height="1dp"/>
-            </LinearLayout>
-        </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 
 
     <!--主页面侧滑菜单-->
-    <android.support.design.widget.NavigationView
+    <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -68,13 +25,11 @@
         android:background="@color/colorWhite"
         android:clickable="true"
         android:focusable="true">
-
         <include
             layout="@layout/nav_bottom_set"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom" />
+    </com.google.android.material.navigation.NavigationView>
 
-    </android.support.design.widget.NavigationView>
-
-</android.support.v4.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

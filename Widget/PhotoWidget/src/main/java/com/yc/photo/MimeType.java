@@ -2,9 +2,10 @@ package com.yc.photo;
 
 import android.content.ContentResolver;
 import android.net.Uri;
-import android.support.v4.util.ArraySet;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
+
+import androidx.collection.ArraySet;
 
 import com.yc.photo.internal.utils.PhotoMetadataUtils;
 

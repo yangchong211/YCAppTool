@@ -9,7 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import android.text.TextUtils;
 import com.yc.logging.annotation.KeepSource;
 

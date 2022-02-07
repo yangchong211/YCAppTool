@@ -3,10 +3,10 @@ package com.yc.other.ui.timer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ycbjie.other.R;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import com.yc.timerlib.view.TimerTextView;
 
 public class CountViewActivity extends AppCompatActivity implements View.OnClickListener {

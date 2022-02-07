@@ -1,9 +1,9 @@
 package com.yc.logging.upload.persist;
 
 
-import android.arch.persistence.room.Entity;
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
+import androidx.room.Entity;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 import com.yc.logging.annotation.KeepClass;
 
 @SuppressWarnings("EqualsReplaceableByObjectsCall")

@@ -21,7 +21,6 @@ ext {
     ]
 
     version = [
-               androidSupportSdkVersion: "28.0.0",
                retrofitSdkVersion      : "2.4.0",
                glideSdkVersion         : "4.9.0",
                canarySdkVersion        : "1.5.4",
@@ -30,20 +29,27 @@ ext {
                zxing_version           : "3.3.3"
     ]
 
+    constraintLayoutVersion = '1.0.0'
+    appcompatVersion = '1.2.0'
+    constraintlayoutVersion = '1.1.3'
+    annotationVersion = '1.1.0'
+    cardviewVersion = '1.0.0'
+    recyclerviewVersion = '1.0.0'
+    mediaVersion = '1.0.1'
+    materialVersion = '1.0.0'
+    swiperefreshlayoutVersion = '1.0.0'
+
     dependencies = [
-                //support
-                "appcompat"             : "com.android.support:appcompat-v7:${version["androidSupportSdkVersion"]}",
-                "appcompat-v7"             : "com.android.support:appcompat-v7:${version["androidSupportSdkVersion"]}",
-                "design"                   : "com.android.support:design:${version["androidSupportSdkVersion"]}",
-                "palette"                  : "com.android.support:palette-v7:${version["androidSupportSdkVersion"]}",
-                "support-v4"               : "com.android.support:support-v4:${version["androidSupportSdkVersion"]}",
-                "cardview-v7"              : "com.android.support:cardview-v7:${version["androidSupportSdkVersion"]}",
-                "annotations"              : "com.android.support:support-annotations:${version["androidSupportSdkVersion"]}",
-                "recyclerview-v7"          : "com.android.support:recyclerview-v7:${version["androidSupportSdkVersion"]}",
-                "constraint-layout"        : "com.android.support.constraint:constraint-layout:${version["constraintVersion"]}",
-                "percent"                  : "com.android.support:percent:${version["androidSupportSdkVersion"]}",
-                "dynamic"                  : "com.android.support:support-dynamic-animation:${version["androidSupportSdkVersion"]}",
-                "multidex"                 : "com.android.support:multidex:1.0.2",
+                coordinatorlayout   : "androidx.coordinatorlayout:coordinatorlayout:${constraintLayoutVersion}",
+                appcompat           : "androidx.appcompat:appcompat:${appcompatVersion}",
+                constraintlayout    : "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
+                annotation          : "androidx.annotation:annotation:${annotationVersion}",
+                cardview            : "androidx.cardview:cardview:${cardviewVersion}",
+                recyclerview        : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
+                media               : "androidx.media:media:${mediaVersion}",
+                material            : "com.google.android.material:material:${materialVersion}",
+                swiperefreshlayout  : "androidx.swiperefreshlayout:swiperefreshlayout:${swiperefreshlayoutVersion}",
+                "multidex"          : "com.android.support:multidex:1.0.2",
 
                 //network
                 "retrofit"                 : "com.squareup.retrofit2:retrofit:${version["retrofitSdkVersion"]}",
@@ -61,8 +67,6 @@ ext {
                 "glide"                    : "com.github.bumptech.glide:glide:${version["glideSdkVersion"]}",
                 "glide-compiler"           : "com.github.bumptech.glide:compiler:${version["glideSdkVersion"]}",
 
-                //view
-                "tablayout"                 : "com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar",
 
                 //yc
                 "YCStateLib"                  : "cn.yc:YCStateLib:1.2.2",

@@ -10,15 +10,24 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AptHelper/api-compiler" />
+            <option value="$PROJECT_DIR$/AptHelper/api-manager" />
+            <option value="$PROJECT_DIR$/AptHelper/api-plugin" />
             <option value="$PROJECT_DIR$/Business/AnimBusiness" />
             <option value="$PROJECT_DIR$/Business/BusinessInterface" />
             <option value="$PROJECT_DIR$/Business/DemoBusiness" />
             <option value="$PROJECT_DIR$/Business/GameBusiness" />
             <option value="$PROJECT_DIR$/Business/VideoBusiness" />
             <option value="$PROJECT_DIR$/Common/AppStatusLib" />
+            <option value="$PROJECT_DIR$/Common/ComponentLib" />
             <option value="$PROJECT_DIR$/Common/ConfigLayer" />
             <option value="$PROJECT_DIR$/Common/LibraryLayer" />
             <option value="$PROJECT_DIR$/Common/ToolUtilsLib" />
+            <option value="$PROJECT_DIR$/Monitor/MonitorAliveLib" />
+            <option value="$PROJECT_DIR$/Monitor/MonitorAnrLib" />
+            <option value="$PROJECT_DIR$/Monitor/MonitorCatonLib" />
+            <option value="$PROJECT_DIR$/Monitor/MonitorCrashLib" />
+            <option value="$PROJECT_DIR$/Monitor/MonitorNetLib" />
             <option value="$PROJECT_DIR$/Server/HttpServer" />
             <option value="$PROJECT_DIR$/Server/ImageServer" />
             <option value="$PROJECT_DIR$/Server/NfcServer" />
@@ -44,9 +53,6 @@
             <option value="$PROJECT_DIR$/Widget/SwipeBackLib" />
             <option value="$PROJECT_DIR$/Widget/WidgetViewLib" />
             <option value="$PROJECT_DIR$/Widget/ZoomImageLib" />
-            <option value="$PROJECT_DIR$/api-compiler" />
-            <option value="$PROJECT_DIR$/api-manager" />
-            <option value="$PROJECT_DIR$/api-plugin" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

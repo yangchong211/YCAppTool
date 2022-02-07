@@ -27,6 +27,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api(rootProject.ext.dependencies["appcompat-v7"])
-    api(rootProject.ext.dependencies["annotations"])
+    api(rootProject.ext.dependencies["appcompat"])
+    api(rootProject.ext.dependencies["annotation"])
 }

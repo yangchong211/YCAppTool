@@ -1,0 +1,155 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/total_sec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/total_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:text="总计已为您抓包"
+            android:textSize="10sp"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/total_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="22sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:text="抓包数量"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/total_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="22sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:text="数据上传"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/total_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="22sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center"
+                    android:text="数据下载"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/icon_network_bar"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="HTTP方法"
+                android:textSize="14sp" />
+
+            <com.yc.netlib.ui.NetBarChart
+                android:id="@+id/network_bar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="284dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/icon_network_pie"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="数据类型"
+                android:textSize="14sp" />
+
+            <com.yc.netlib.ui.NetPieChart
+                android:id="@+id/network_pier_chart"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

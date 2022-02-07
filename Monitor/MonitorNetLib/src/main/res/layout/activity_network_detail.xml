@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/crash_tool_bar_color">
+
+        <LinearLayout
+            android:id="@+id/ll_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_back_arrow_24dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_show_error"
+                android:text="日志详情信息"
+                android:textColor="@color/crash_white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_screenshot"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/tv_delete"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="5dp"
+            android:text="截图"
+            android:textColor="@color/crash_white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
+            android:text="删除"
+            android:textColor="@color/crash_white"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="30dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/DetailTitle"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:text="General"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="#999999"
+                        android:layout_marginLeft="5dp"
+                        android:text="长按或者点击可以复制信息"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_url_content"
+                    android:textColor="#196EB2"
+                    android:background="@drawable/shape_url_content"
+                    style="@style/DetailContent"/>
+
+                <TextView
+                    style="@style/DetailTitle"
+                    android:text="Request Headers"/>
+
+                <TextView
+                    android:id="@+id/tv_request_headers"
+                    android:textColor="#8033b7"
+                    android:background="@drawable/shape_request_headers"
+                    style="@style/DetailContent"/>
+
+                <TextView
+                    style="@style/DetailTitle"
+                    android:text="Response Headers"/>
+
+                <TextView
+                    android:id="@+id/tv_response_headers"
+                    android:textColor="#257ada"
+                    android:background="@drawable/shape_response_headers"
+                    style="@style/DetailContent"/>
+
+                <TextView
+                    style="@style/DetailTitle"
+                    android:text="Response"/>
+
+                <TextView
+                    android:id="@+id/tv_body"
+                    android:textColor="#4dac41"
+                    android:background="@drawable/shape_response"
+                    style="@style/DetailContent"/>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <!--显示截图的图片-->
+        <ImageView
+            android:id="@+id/iv_screen_shot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <include layout="@layout/layout_progress_loading" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

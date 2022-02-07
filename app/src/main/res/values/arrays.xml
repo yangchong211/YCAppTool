@@ -56,28 +56,6 @@
     <!--///////////////////////////////////////发现/////////////////////////////////////-->
 
 
-    <!--发现页图片-->
-    <integer-array name="find_gv_image">
-        <item>@drawable/ic_category_16</item>
-        <item>@drawable/ic_category_18</item>
-        <item>@drawable/ic_category_2</item>
-        <item>@drawable/ic_category_6</item>
-        <item>@drawable/ic_category_27</item>
-        <item>@drawable/ic_category_24</item>
-        <item>@drawable/ic_category_22</item>
-        <item>@drawable/ic_category_14</item>
-    </integer-array>
-    <!--发现页图片对应的位子-->
-    <string-array name="find_gv_title">
-        <item>干货集中营</item>
-        <item>玩Android</item>
-        <item>超文本</item>
-        <item>我的音乐</item>
-        <item>知乎日报</item>
-        <item>flutter</item>
-        <item>妹子画廊</item>
-        <item>微信精选</item>
-    </string-array>
 
 
     <string-array name="find_list1_title">

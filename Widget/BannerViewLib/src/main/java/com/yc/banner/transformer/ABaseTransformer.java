@@ -16,13 +16,14 @@
 
 package com.yc.banner.transformer;
 
-import android.support.v4.view.ViewPager.PageTransformer;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * 参照：https://github.com/ToxicBakery/ViewPagerTransforms
  */
-public abstract class ABaseTransformer implements PageTransformer {
+public abstract class ABaseTransformer implements ViewPager.PageTransformer {
 
 	/**
 	 * Called each {@link #transformPage(View, float)}.

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.catonhelperlib">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <application>
+        <activity android:name="com.yc.catonhelperlib.fps.PerformanceActivity"/>
+        <activity
+            android:name=".canary.ui.DisplayActivity"
+            android:enabled="false"
+            android:icon="@drawable/block_canary_icon"
+            android:label="@string/block_canary_display_activity_label"
+            android:taskAffinity="com.yc.catonhelperlib.canary">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

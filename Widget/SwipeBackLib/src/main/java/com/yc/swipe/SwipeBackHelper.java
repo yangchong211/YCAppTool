@@ -3,8 +3,8 @@ package com.yc.swipe;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.FloatRange;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.FloatRange;
 import android.view.View;
 
 import java.util.List;

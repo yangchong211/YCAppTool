@@ -3,7 +3,7 @@ package com.yc.other.ui.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;

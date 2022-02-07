@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/crash_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:lineSpacingExtra="4dp"
+            android:text="V1.0_2018年_空指针异常"
+            android:textColor="@color/crash_black_text_color_01"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
+            tools:text="文件路径"
+            android:textColor="@color/crash_black_text_color_02"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1.2px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/crash_line_color" />
+
+</RelativeLayout>

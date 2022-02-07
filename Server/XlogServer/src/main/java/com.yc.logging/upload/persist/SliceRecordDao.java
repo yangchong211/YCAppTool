@@ -1,8 +1,8 @@
 package com.yc.logging.upload.persist;
 
 
-import android.arch.persistence.room.*;
-import android.support.annotation.RestrictTo;
+import androidx.room.*;
+import androidx.annotation.RestrictTo;
 
 import java.util.List;
 

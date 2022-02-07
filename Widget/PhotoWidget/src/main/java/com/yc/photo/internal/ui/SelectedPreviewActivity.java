@@ -16,7 +16,7 @@
 package com.yc.photo.internal.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.yc.photo.internal.entity.Item;
 import com.yc.photo.internal.entity.SelectionSpec;

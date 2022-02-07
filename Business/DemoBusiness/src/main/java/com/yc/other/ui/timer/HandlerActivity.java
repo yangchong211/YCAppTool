@@ -5,10 +5,10 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ycbjie.other.R;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import com.yc.timerlib.timer.CountTimeTools;
 
 public class HandlerActivity extends AppCompatActivity implements View.OnClickListener {

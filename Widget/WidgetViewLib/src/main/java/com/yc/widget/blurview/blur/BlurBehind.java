@@ -6,8 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
-import android.support.v4.util.LruCache;
 import android.view.View;
+
+import androidx.collection.LruCache;
 
 
 /**

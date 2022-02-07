@@ -2,7 +2,7 @@ package com.yc.largeimage;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 import com.yc.largeimage.factory.BitmapDecoderFactory;
 

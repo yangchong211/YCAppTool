@@ -1,8 +1,8 @@
 package com.yc.serialtasklib;
 
 
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import java.util.ArrayDeque;

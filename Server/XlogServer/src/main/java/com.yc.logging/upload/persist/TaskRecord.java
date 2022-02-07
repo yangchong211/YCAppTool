@@ -1,10 +1,10 @@
 package com.yc.logging.upload.persist;
 
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 import android.text.TextUtils;
 import com.yc.logging.annotation.KeepClass;
 import com.google.gson.Gson;

@@ -16,8 +16,8 @@
 
 package com.yc.logging.util;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
 /**
  * A task executor that can divide tasks into logical groups.

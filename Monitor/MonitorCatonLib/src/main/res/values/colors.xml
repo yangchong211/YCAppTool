@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="fps_color_4c00C9F4">#4c00C9F4</color>
+    <color name="fps_color_3300BFFF">#3300BFFF</color>
+    <color name="fps_color_3300E0DC">#3300E0DC</color>
+    <color name="fps_color_ff00C9F4">#ff00C9F4</color>
+    <color name="fps_color_999999">#999999</color>
+    <color name="fps_color_33434352">#33434352</color>
+    <color name="fps_color_333339">#333339</color>
+    <color name="fps_color_7FFFFFFF">#7FFFFFFF</color>
+    <color name="fps_color_FFFFFF">#FFFFFF</color>
+    <color name="fps_color_50000000">#80000000</color>
+    <color name="fps_color_30000000">#4D000000</color>
+    <color name="fps_color_70000000">#B3000000</color>
+
+</resources>

@@ -1,7 +1,7 @@
 package com.yc.logging.util;
 
 import android.os.Bundle;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import android.text.TextUtils;
 
 import java.security.MessageDigest;

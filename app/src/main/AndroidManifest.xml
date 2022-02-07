@@ -5,7 +5,7 @@
 
 
     <application
-        android:name="com.yc.yc.lifehelper.base.app.BaseApplication"
+        android:name="com.yc.yc.lifehelper.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_yc_name"
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.yc.yc.lifehelper.ui.guide.view.activity.SplashActivity"
+        <activity android:name="com.yc.yc.lifehelper.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yc.yc.lifehelper.ui.main.view.SchemeActivity"
+            android:name="com.yc.yc.lifehelper.SchemeActivity"
             android:screenOrientation="portrait">
             <!--Android 接收外部跳转过滤器-->
             <!--要想在别的App上能成功调起App，必须添加intent过滤器-->
@@ -40,10 +40,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.yc.yc.lifehelper.ui.guide.view.activity.SplashPagerActivity"/>
-        <activity android:name="com.yc.yc.lifehelper.ui.main.view.MainActivity"/>
-        <activity android:name="com.yc.yc.lifehelper.ui.guide.view.activity.GuideActivity"/>
-        <activity android:name="com.yc.yc.lifehelper.ui.me.view.activity.MeSettingActivity"/>
+        <activity android:name="com.yc.yc.lifehelper.MainActivity"/>
         <service android:name="com.yc.library.base.app.InitializeService"/>
     </application>
 

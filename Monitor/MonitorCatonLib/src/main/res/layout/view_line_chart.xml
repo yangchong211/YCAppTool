@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:background="@color/fps_color_70000000">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/fps_color_FFFFFF"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="25dp"
+        android:background="@color/fps_color_33434352"/>
+
+    <com.yc.catonhelperlib.fps.CardiogramView
+        android:id="@+id/line_chart_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/fps_color_FFFFFF"
+        android:textSize="14sp"/>
+
+</FrameLayout>

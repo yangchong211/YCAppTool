@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -17,14 +17,14 @@
 
         <!--AppBarLayout跟它的名字一样，把容器类的组件全部作为AppBar。-->
         <!--将AppBarLayout放在CoordinatorLayout中，就可以实现滚动效果。-->
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="com.yc.library.weight.AppBarLayoutBehavior"
             android:fitsSystemWindows="true">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 <include layout="@layout/include_app_layout"/>
 
                 <!--app:layout_collapseMode="pin"   折叠后固定在顶部-->
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
@@ -94,16 +94,16 @@
                             tools:ignore="VectorDrawableCompat" />
                     </RelativeLayout>
 
-                </android.support.v7.widget.Toolbar>
+                </androidx.appcompat.widget.Toolbar>
 
-            </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <!--app:layout_behavior 属性-->
         <!--如果你使用CoordinatorLayout来实现Toolbar滚动渐变消失动画效果，那就必须在它下面的那个控件中加入-->
         <include layout="@layout/include_scroll_view"/>
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 

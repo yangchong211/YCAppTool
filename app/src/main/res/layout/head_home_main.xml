@@ -45,6 +45,5 @@
             android:text="测试案例" />
     </LinearLayout>
 
-    <include layout="@layout/view_vlayout_marquee"/>
 
 </LinearLayout>

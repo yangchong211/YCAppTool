@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -22,7 +22,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.customwidget.VerticalImageSpan;
+import com.yc.customwidget.spannable.VerticalImageSpan;
 import com.yc.customwidget.spannable.AlignImageSpan;
 import com.yc.customwidget.spannable.RoundBackgroundColorSpan;
 import com.yc.customwidget.spannable.RoundedBackgroundSpan;

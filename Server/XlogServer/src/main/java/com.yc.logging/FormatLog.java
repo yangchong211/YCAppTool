@@ -1,6 +1,6 @@
 package com.yc.logging;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import com.yc.logging.impl.LoggerBinder;
 
 import java.util.Map;

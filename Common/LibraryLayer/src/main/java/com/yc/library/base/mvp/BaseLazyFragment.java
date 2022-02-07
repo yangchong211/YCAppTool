@@ -2,8 +2,8 @@ package com.yc.library.base.mvp;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.UiThread;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 
 /**
  * ================================================

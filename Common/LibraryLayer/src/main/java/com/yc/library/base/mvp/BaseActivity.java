@@ -3,9 +3,9 @@ package com.yc.library.base.mvp;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;

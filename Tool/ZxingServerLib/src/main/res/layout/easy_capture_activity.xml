@@ -7,7 +7,7 @@
 
     <include layout="@layout/zxl_capture"/>
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +37,6 @@
                 android:layout_gravity="center_horizontal"
                 android:text="二维码扫描"/>
         </LinearLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 </RelativeLayout>

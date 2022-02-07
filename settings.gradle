@@ -22,11 +22,12 @@ project(':ServerInterface').projectDir = new File('Server/ServerInterface')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib'
+include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib','ComponentLib'
 project(':LibraryLayer').projectDir = new File('Common/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('Common/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('Common/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('Common/ToolUtilsLib')
+project(':ComponentLib').projectDir = new File('Common/ComponentLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -57,6 +58,21 @@ project(':CountTimerLib').projectDir = new File('Tool/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('Tool/AnimatorToolLib')
 project(':AppTraceTool').projectDir = new File('Tool/AppTraceTool')
 project(':LongevityLib').projectDir = new File('Tool/LongevityLib')
-include ':api-compiler'
-include ':api-manager'
-include ':api-plugin'
+
+
+/* +++++++++ Apt框架基础工具库 +++++++++ */
+include ':api-compiler',':api-manager',':api-plugin'
+project(':api-compiler').projectDir = new File('AptHelper/api-compiler')
+project(':api-manager').projectDir = new File('AptHelper/api-manager')
+project(':api-plugin').projectDir = new File('AptHelper/api-plugin')
+
+
+/* +++++++++ App监控库 +++++++++ */
+include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',':MonitorNetLib'
+project(':MonitorAliveLib').projectDir = new File('Monitor/MonitorAliveLib')
+project(':MonitorCatonLib').projectDir = new File('Monitor/MonitorCatonLib')
+project(':MonitorAnrLib').projectDir = new File('Monitor/MonitorAnrLib')
+project(':MonitorCrashLib').projectDir = new File('Monitor/MonitorCrashLib')
+project(':MonitorNetLib').projectDir = new File('Monitor/MonitorNetLib')
+
+

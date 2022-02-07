@@ -4,8 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;

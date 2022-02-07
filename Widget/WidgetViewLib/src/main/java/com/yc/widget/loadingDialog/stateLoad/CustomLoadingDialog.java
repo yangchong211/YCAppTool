@@ -5,7 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -1,8 +1,8 @@
 package com.yc.serialtasklib;
 
 
-import android.support.annotation.MainThread;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.MainThread;
+import androidx.annotation.WorkerThread;
 
 public interface DispatchRunnable {
 

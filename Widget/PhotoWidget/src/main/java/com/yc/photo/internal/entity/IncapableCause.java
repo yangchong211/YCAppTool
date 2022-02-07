@@ -1,8 +1,9 @@
 package com.yc.photo.internal.entity;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
-import android.support.v4.app.FragmentActivity;
+import androidx.annotation.IntDef;
+import androidx.fragment.app.FragmentActivity;
+
 import android.widget.Toast;
 
 import com.yc.photo.internal.ui.widget.IncapableDialog;

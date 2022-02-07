@@ -11,7 +11,7 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -38,11 +38,11 @@ configurations.all {
 }
 
 dependencies {
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     api rootProject.ext.dependencies["okhttp"]
     implementation "com.google.code.gson:gson:2.8.5"
     implementation "com.squareup.okhttp3:okhttp:3.0.0"
-    implementation "android.arch.persistence.room:runtime:1.1.1"
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    implementation 'androidx.room:room-runtime:2.0.0'
+    annotationProcessor 'androidx.room:room-compiler:2.0.0'
 }

@@ -62,7 +62,6 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         } else if (i == R.id.tv_6){
             startActivity(new Intent(this, TestFirstActivity.class));
         } else if (i == R.id.tv_7){
-            startActivity(new Intent(this, ScrollActivity.class));
         } else if (i == R.id.tv_8){
             startActivity(new Intent(this, MixtureTextViewActivity.class));
         }else if (i == R.id.tv_9){

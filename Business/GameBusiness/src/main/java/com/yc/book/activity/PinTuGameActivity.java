@@ -1,7 +1,7 @@
 package com.yc.book.activity;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 

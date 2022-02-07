@@ -5,8 +5,8 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
-import android.support.annotation.IntDef;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.IntDef;
+import androidx.annotation.RequiresApi;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

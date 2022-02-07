@@ -1,7 +1,7 @@
 package com.yc.zxingserver.utils;
 
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.google.zxing.BarcodeFormat;

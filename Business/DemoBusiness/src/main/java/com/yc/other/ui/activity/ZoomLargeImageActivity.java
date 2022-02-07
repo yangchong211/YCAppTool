@@ -1,7 +1,7 @@
 package com.yc.other.ui.activity;
 
 import android.graphics.Bitmap;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.cn.ycgallerylib.zoom.view.ZoomLayoutView;

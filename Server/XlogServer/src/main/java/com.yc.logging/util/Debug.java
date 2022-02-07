@@ -1,6 +1,6 @@
 package com.yc.logging.util;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import android.util.Log;
 import com.yc.logging.LoggerFactory;
 import com.yc.logging.BuildConfig;

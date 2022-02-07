@@ -1,7 +1,7 @@
 package com.yc.animation.animator;
 
 import android.animation.TypeEvaluator;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.view.animation.Interpolator;
 

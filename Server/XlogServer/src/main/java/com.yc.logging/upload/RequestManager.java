@@ -1,6 +1,6 @@
 package com.yc.logging.upload;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import android.util.Pair;
 import com.yc.logging.LoggerContext;
 import com.yc.logging.LoggerFactory;

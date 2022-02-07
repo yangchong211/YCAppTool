@@ -1,7 +1,7 @@
 package com.yc.logging.upload;
 
 import android.content.Context;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import com.yc.logging.upload.persist.*;
 import com.yc.logging.util.ArchTaskExecutor;
 import com.yc.logging.util.Debug;

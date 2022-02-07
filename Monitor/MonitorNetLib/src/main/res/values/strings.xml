@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">ToolLib</string>
+
+
+    <string name="network_summary_total_time_default">0秒</string>
+    <string name="network_summary_total_time_second">%d秒</string>
+    <string name="network_summary_total_time_minute">%1$d分%2$d秒</string>
+    <string name="network_summary_total_time_hour">%1$d小时%2$d分</string>
+    <string name="network_summary_total_time_day">%1$d天%2$d小时</string>
+
+
+    <string-array name="timeout_ms">
+        <item>No limit</item>
+        <item>10ms</item>
+        <item>30ms</item>
+        <item>50ms</item>
+        <item>100ms</item>
+        <item>150ms</item>
+        <item>200ms</item>
+        <item>250ms</item>
+        <item>300ms</item>
+        <item>350ms</item>
+        <item>400ms</item>
+        <item>450ms</item>
+        <item>500ms</item>
+        <item>600ms</item>
+        <item>700ms</item>
+        <item>800ms</item>
+        <item>900ms</item>
+        <item>1000ms</item>
+        <item>1200ms</item>
+        <item>1400ms</item>
+        <item>1600ms</item>
+        <item>2000ms</item>
+    </string-array>
+
+    <string-array name="timeout_ms_value">
+        <item>0</item>
+        <item>10</item>
+        <item>30</item>
+        <item>50</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>250</item>
+        <item>300</item>
+        <item>350</item>
+        <item>400</item>
+        <item>450</item>
+        <item>500</item>
+        <item>600</item>
+        <item>700</item>
+        <item>800</item>
+        <item>900</item>
+        <item>1000</item>
+        <item>1200</item>
+        <item>1400</item>
+        <item>1600</item>
+        <item>2000</item>
+    </string-array>
+
+</resources>

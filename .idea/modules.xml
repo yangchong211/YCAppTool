@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/AnimBusiness/Business.LifeHelper.AnimBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/AnimBusiness/Business.LifeHelper.AnimBusiness.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/ComponentLib/Common.LifeHelper.ComponentLib.iml" filepath="$PROJECT_DIR$/.idea/modules/common/ComponentLib/Common.LifeHelper.ComponentLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LifeHelper.iml" filepath="$PROJECT_DIR$/.idea/modules/LifeHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/AppStatusLib/LifeHelper.AppStatusLib.iml" filepath="$PROJECT_DIR$/.idea/modules/common/AppStatusLib/LifeHelper.AppStatusLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tracesdk/LifeHelper.AppTraceTool.iml" filepath="$PROJECT_DIR$/.idea/modules/tracesdk/LifeHelper.AppTraceTool.iml" />
@@ -17,6 +18,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/library/LifeHelper.LargeImageLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/library/LifeHelper.LargeImageLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LongevityLib/LifeHelper.LongevityLib.iml" filepath="$PROJECT_DIR$/.idea/modules/LongevityLib/LifeHelper.LongevityLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Monitor/MonitorAliveLib/LifeHelper.MonitorAliveLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Monitor/MonitorAliveLib/LifeHelper.MonitorAliveLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Monitor/MonitorAnrLib/LifeHelper.MonitorAnrLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Monitor/MonitorAnrLib/LifeHelper.MonitorAnrLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Monitor/MonitorCatonLib/LifeHelper.MonitorCatonLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Monitor/MonitorCatonLib/LifeHelper.MonitorCatonLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Monitor/MonitorCrashLib/LifeHelper.MonitorCrashLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Monitor/MonitorCrashLib/LifeHelper.MonitorCrashLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Monitor/MonitorNetLib/LifeHelper.MonitorNetLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Monitor/MonitorNetLib/LifeHelper.MonitorNetLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/NetHelperLib/LifeHelper.NetHelperLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/NetHelperLib/LifeHelper.NetHelperLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/NfcServer/LifeHelper.NfcServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/NfcServer/LifeHelper.NfcServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/LifeHelper.PhotoWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/LifeHelper.PhotoWidget.iml" />

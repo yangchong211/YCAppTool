@@ -1,0 +1,30 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ycbjie.alivelib" >
+
+    <!--兼容Android9.0权限-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+
+    <application>
+        <receiver android:name="com.ycbjie.live.receiver.NotificationClickReceiver" />
+        <activity
+            android:name="com.ycbjie.live.activity.OnePixelActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/OnePixelActivity" />
+        <service android:name="com.ycbjie.live.service.LocalService" />
+        <service android:name="com.ycbjie.live.service.HideForegroundService" />
+        <service
+            android:name="com.ycbjie.live.service.JobHandlerService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name="com.ycbjie.live.service.RemoteService"
+            android:process=":remote" />
+    </application>
+
+</manifest>

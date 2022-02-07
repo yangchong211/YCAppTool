@@ -1,6 +1,6 @@
 package com.yc.logging.upload;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import android.text.TextUtils;
 import com.yc.logging.annotation.KeepClass;
 import com.google.gson.Gson;

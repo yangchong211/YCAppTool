@@ -2,7 +2,7 @@ package com.yc.photo.internal.ui;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.yc.photo.internal.entity.Album;
 import com.yc.photo.internal.entity.Item;

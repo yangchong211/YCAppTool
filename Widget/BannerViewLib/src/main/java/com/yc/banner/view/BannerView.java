@@ -7,9 +7,10 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -38,8 +39,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.support.v4.view.ViewPager.OnPageChangeListener;
-import static android.support.v4.view.ViewPager.PageTransformer;
 
 /**
  * <pre>
@@ -50,9 +49,9 @@ import static android.support.v4.view.ViewPager.PageTransformer;
  *     revise:
  * </pre>
  */
-public class BannerView extends FrameLayout implements OnPageChangeListener {
+public class BannerView extends FrameLayout implements ViewPager.OnPageChangeListener {
 
-    public String tag = "banner_view";
+    public static final String tag = "banner_view";
     private int mIndicatorMargin = BannerConstant.PADDING_SIZE;
     private int mIndicatorWidth;
     private int mIndicatorHeight;
@@ -85,7 +84,7 @@ public class BannerView extends FrameLayout implements OnPageChangeListener {
     private LinearLayout indicator, indicatorInside, titleView;
     private ImageLoaderInterface imageLoader;
     private BannerPagerAdapter adapter;
-    private OnPageChangeListener mOnPageChangeListener;
+    private ViewPager.OnPageChangeListener mOnPageChangeListener;
     private OnBannerListener listener;
     private long mRecentTouchTime;
     /**
@@ -276,7 +275,7 @@ public class BannerView extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    public BannerView setBannerAnimation(Class<? extends PageTransformer> transformer) {
+    public BannerView setBannerAnimation(Class<? extends ViewPager.PageTransformer> transformer) {
         try {
             viewPager.setPageTransformer(true, transformer.newInstance());
         } catch (Exception e) {
@@ -698,7 +697,7 @@ public class BannerView extends FrameLayout implements OnPageChangeListener {
         return this;
     }
 
-    public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
         mOnPageChangeListener = onPageChangeListener;
     }
 

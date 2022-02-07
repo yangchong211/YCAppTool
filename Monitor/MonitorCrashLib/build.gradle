@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
+
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            buildConfigField "boolean", "IS_NET_DEBUG", "false"
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            buildConfigField "boolean", "IS_NET_DEBUG", "true"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
+    implementation(rootProject.ext.dependencies["recyclerview"])
+    implementation(rootProject.ext.dependencies["media"])
+    implementation(rootProject.ext.dependencies["swiperefreshlayout"])
+    implementation(rootProject.ext.dependencies["coordinatorlayout"])
+
+
+    //参考：https://github.com/tiann/FreeReflection
+    //是一个允许你在Android P(包括Q和R)之上不受任何限制地使用反射的库。
+    implementation 'me.weishu:free_reflection:1.2.0'
+}

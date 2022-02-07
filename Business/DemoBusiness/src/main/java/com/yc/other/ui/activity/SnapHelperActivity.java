@@ -1,9 +1,9 @@
 package com.yc.other.ui.activity;
 
 import android.content.res.TypedArray;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;

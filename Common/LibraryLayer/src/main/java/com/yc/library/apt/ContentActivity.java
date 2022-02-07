@@ -3,7 +3,7 @@ package com.yc.library.apt;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 @SuppressLint("Registered")
 public class ContentActivity extends AppCompatActivity {

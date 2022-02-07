@@ -8,8 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.hardware.Camera;
-import android.support.annotation.FloatRange;
-import android.support.v4.app.Fragment;
+import androidx.annotation.FloatRange;
+import androidx.fragment.app.Fragment;
+
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="crash_tool_bar_color">#333333</color>
+    <color name="crash_white">#FFFFFF</color>
+    <color name="crash_background_color">#ececec</color>
+    <color name="crash_black_text_color_01">#545454</color>
+    <color name="crash_black_text_color_02">#8c8c8c</color>
+    <color name="crash_line_color">#DFDFDF</color>
+    <color name="gray_background">#F6F6F6</color>
+    <color name="dark_gray">#464646</color>
+    <color name="light_gray">#999999</color>
+    <color name="gray_line">#dadada</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="green">#8fcc73</color>
+    <color name="red">#e25245</color>
+    <color name="trace_normal">#3C8858</color>
+
+</resources>

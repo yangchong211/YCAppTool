@@ -2,7 +2,7 @@ package com.yc.timerlib.view;
 
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;

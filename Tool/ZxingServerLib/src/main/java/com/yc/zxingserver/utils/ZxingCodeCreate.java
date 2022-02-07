@@ -3,7 +3,7 @@ package com.yc.zxingserver.utils;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.support.annotation.FloatRange;
+import androidx.annotation.FloatRange;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.google.zxing.BarcodeFormat;

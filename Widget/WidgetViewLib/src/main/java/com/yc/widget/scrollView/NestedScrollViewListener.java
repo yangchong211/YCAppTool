@@ -1,7 +1,7 @@
 package com.yc.widget.scrollView;
 
 
-import android.support.v4.widget.NestedScrollView;
+import androidx.core.widget.NestedScrollView;
 
 /**
  * Created by PC on 2017/5/3.

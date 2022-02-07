@@ -4,11 +4,11 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.SwitchCompat;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.SwitchCompat;
 import android.widget.EditText;
 import android.widget.TextView;
 

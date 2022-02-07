@@ -10,7 +10,7 @@
 
         <!--添加provider，主要解决7.0拍照后存储图片的问题-->
         <!--<provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.content.FileProvider"
             android:authorities="com.cheoo.photo.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">

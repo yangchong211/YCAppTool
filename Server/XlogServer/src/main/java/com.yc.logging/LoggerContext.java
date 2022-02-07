@@ -2,7 +2,7 @@ package com.yc.logging;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 import android.text.TextUtils;
 import com.yc.logging.annotation.KeepSource;
 import com.yc.logging.util.Debug;

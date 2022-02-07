@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -205,7 +205,7 @@
                 android:text="夜间模式"
                 android:textColor="@color/blackText1"
                 android:textSize="15sp" />
-            <android.support.v7.widget.SwitchCompat
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/day_night_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -309,4 +309,4 @@
 
     </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

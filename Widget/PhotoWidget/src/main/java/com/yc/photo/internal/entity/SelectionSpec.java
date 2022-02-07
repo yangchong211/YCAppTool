@@ -2,7 +2,7 @@
 package com.yc.photo.internal.entity;
 
 import android.content.pm.ActivityInfo;
-import android.support.annotation.StyleRes;
+import androidx.annotation.StyleRes;
 
 import com.yc.photo.MimeType;
 import com.yc.photo.R;
