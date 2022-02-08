@@ -26,6 +26,7 @@ import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.web.WebViewActivity;
+import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.toolutils.activity.ActivityManager;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
@@ -53,8 +54,6 @@ public class MainActivity extends BaseActivity{
     private FrameLayout mFlTitleMenu;
     private TextView mTvTitle;
     private long time;
-    private int selectIndex;
-
     public static final int REQUEST_CODE_SCAN = 0X01;
 
     @Override
@@ -195,7 +194,7 @@ public class MainActivity extends BaseActivity{
     /**
      * 自定义菜单点击事件
      */
-    private PerfectClickListener listener = new PerfectClickListener() {
+    private final PerfectClickListener listener = new PerfectClickListener() {
         @Override
         protected void onNoDoubleClick(final View v) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -215,7 +214,7 @@ public class MainActivity extends BaseActivity{
                         break;
                     //扫码下载
                     case R.id.ll_nav_scan_download:
-
+                        FileExplorerActivity.startActivity(MainActivity.this);
                         break;
                     // 问题反馈
                     case R.id.ll_nav_feedback:

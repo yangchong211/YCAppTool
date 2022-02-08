@@ -12,14 +12,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include layout="@layout/base_title_bar"/>
-
+        <org.yczbj.ycrefreshviewlib.YCRefreshView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
 
     <!--主页面侧滑菜单-->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/colorWhite"

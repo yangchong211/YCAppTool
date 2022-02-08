@@ -27,6 +27,7 @@
             <option value="$PROJECT_DIR$/Monitor/MonitorAnrLib" />
             <option value="$PROJECT_DIR$/Monitor/MonitorCatonLib" />
             <option value="$PROJECT_DIR$/Monitor/MonitorCrashLib" />
+            <option value="$PROJECT_DIR$/Monitor/MonitorFileLib" />
             <option value="$PROJECT_DIR$/Monitor/MonitorNetLib" />
             <option value="$PROJECT_DIR$/Server/HttpServer" />
             <option value="$PROJECT_DIR$/Server/ImageServer" />
