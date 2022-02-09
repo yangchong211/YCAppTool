@@ -277,7 +277,6 @@ public final class FileExplorerUtils {
      * @return                                      boolean 成功true、失败false
      */
     public static boolean copyFile(File src, File dest) {
-        boolean result = false;
         if ((src == null) || (dest == null)) {
             return false;
         }
@@ -296,28 +295,30 @@ public final class FileExplorerUtils {
 
         FileChannel srcChannel = null;
         FileChannel dstChannel = null;
-
         try {
             srcChannel = new FileInputStream(src).getChannel();
             dstChannel = new FileOutputStream(dest).getChannel();
             srcChannel.transferTo(0, srcChannel.size(), dstChannel);
-            result = true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return result;
+            return false;
         } catch (IOException e) {
             e.printStackTrace();
-            return result;
+            return false;
+        } finally {
+            try {
+                if (srcChannel != null) {
+                    srcChannel.close();
+                }
+                if (dstChannel != null) {
+                    dstChannel.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            srcChannel.close();
-            dstChannel.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
+        return true;
     }
-
 
     /**
      * 判断文件是否创建，如果没有创建，则新建
