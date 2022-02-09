@@ -35,7 +35,6 @@ public abstract class BaseStateBarActivity extends AppCompatActivity{
         setContentView(R.layout.base_state_bar_view);
         initStatusLayout();
         initBaseView();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         initView();
         initListener();
         initData();

@@ -37,9 +37,7 @@ public abstract class BaseStateActivity extends AppCompatActivity{
         setContentView(R.layout.base_state_view);
         initStatusLayout();
         initBaseView();
-        //避免切换横竖屏
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        StateAppBar.setStatusBarColor(this, R.color.colorTheme);
+        StateAppBar.setStatusBarColor(this, getResources().getColor(R.color.colorTheme));
         initView();
         initListener();
         initData();
