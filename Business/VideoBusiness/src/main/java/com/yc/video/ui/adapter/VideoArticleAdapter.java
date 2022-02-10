@@ -14,7 +14,7 @@ import com.ycbjie.video.R;
 import com.yc.video.model.MultiNewsArticleDataBean;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder;
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
 
 
 /**
@@ -38,7 +38,7 @@ public class VideoArticleAdapter extends RecyclerArrayAdapter<MultiNewsArticleDa
     }
 
 
-    private class MyViewHolder extends BaseViewHolder<MultiNewsArticleDataBean> {
+    private static class MyViewHolder extends BaseViewHolder<MultiNewsArticleDataBean> {
 
         ImageView ivMedia;
         TextView tvExtra;

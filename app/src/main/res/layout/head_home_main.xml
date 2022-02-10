@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <com.yc.cn.ycbannerlib.banner.BannerView
+    <com.yc.banner.view.BannerView
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="150dp"/>
@@ -24,25 +24,25 @@
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_first"
-            android:text="我的视频" />
+            android:text="沙盒File" />
         <TextView
             android:id="@+id/tv_home_second"
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_second"
-            android:text="飞机大战" />
+            android:text="崩溃监控" />
         <TextView
             android:id="@+id/tv_home_third"
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_third"
-            android:text="崩溃列表" />
+            android:text="网络工具" />
         <TextView
             android:id="@+id/tv_home_four"
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_four"
-            android:text="测试案例" />
+            android:text="ANR监控" />
     </LinearLayout>
 
 

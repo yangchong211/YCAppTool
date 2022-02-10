@@ -22,9 +22,12 @@ import com.yc.video.presenter.VideoArticlePresenter;
 import com.yc.video.ui.activity.VideoActivity;
 import com.yc.video.ui.adapter.VideoArticleAdapter;
 
-import org.yczbj.ycrefreshviewlib.YCRefreshView;
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
+import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
+import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 import org.yczbj.ycvideoplayerlib.manager.VideoPlayerManager;
 
 import java.util.List;
@@ -171,7 +174,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
         recyclerView.setAdapter(adapter);
 
         //加载更多
-        adapter.setMore(R.layout.view_recycle_more, new RecyclerArrayAdapter.OnMoreListener() {
+        adapter.setMore(R.layout.view_recycle_more, new OnMoreListener() {
             @Override
             public void onMoreShow() {
                 if (NetworkUtils.isConnected()) {
@@ -193,7 +196,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
         });
 
         //设置没有数据
-        adapter.setNoMore(R.layout.view_recycle_no_more, new RecyclerArrayAdapter.OnNoMoreListener() {
+        adapter.setNoMore(R.layout.view_recycle_no_more, new OnNoMoreListener() {
             @Override
             public void onNoMoreShow() {
                 if (NetworkUtils.isConnected()) {
@@ -214,7 +217,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
         });
 
         //设置错误
-        adapter.setError(R.layout.view_recycle_error, new RecyclerArrayAdapter.OnErrorListener() {
+        adapter.setError(R.layout.view_recycle_error, new OnErrorListener() {
             @Override
             public void onErrorShow() {
                 adapter.resumeMore();

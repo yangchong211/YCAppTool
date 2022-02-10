@@ -2,16 +2,22 @@ package com.yc.lifehelper;
 
 import android.Manifest;
 import android.content.Intent;
+
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.SizeUtils;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.graphics.Color;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +25,8 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.banner.view.BannerView;
+import com.yc.cn.ycbannerlib.marquee.MarqueeView;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
@@ -26,10 +34,19 @@ import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.web.WebViewActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
+import com.yc.toollib.crash.CrashToolUtils;
 import com.yc.toolutils.activity.ActivityManager;
+import com.yc.toolutils.click.FastClickUtils;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
+
+import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
+import org.yczbj.ycrefreshviewlib.inter.InterItemView;
+import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
+import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
+
+import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -52,7 +69,11 @@ public class MainActivity extends BaseActivity{
     private Toolbar mToolbar;
     private FrameLayout mFlTitleMenu;
     private TextView mTvTitle;
+    private YCRefreshView mRecyclerView;
     private long time;
+    private MainAdapter mainAdapter;
+    private BannerView banner;
+    private View headerView;
     public static final int REQUEST_CODE_SCAN = 0X01;
 
     @Override
@@ -125,6 +146,7 @@ public class MainActivity extends BaseActivity{
     public void initView() {
         initFindViewID();
         initBar();
+        initRecyclerView();
         initNav();
     }
 
@@ -136,6 +158,7 @@ public class MainActivity extends BaseActivity{
         mToolbar = findViewById(R.id.toolbar);
         mFlTitleMenu = findViewById(R.id.fl_title_menu);
         mTvTitle = findViewById(R.id.tv_title);
+        mRecyclerView = findViewById(R.id.recyclerView);
     }
 
 
@@ -163,6 +186,66 @@ public class MainActivity extends BaseActivity{
             //去除默认Title显示
             actionBar.setDisplayShowTitleEnabled(false);
         }
+    }
+
+    private void initRecyclerView() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
+                SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
+        mRecyclerView.addItemDecoration(line);
+        mainAdapter = new MainAdapter(this);
+        initAddHeader();
+        mRecyclerView.setAdapter(mainAdapter);
+    }
+
+    private void initAddHeader() {
+        mainAdapter.addHeader(new InterItemView() {
+            @Override
+            public View onCreateView(ViewGroup parent) {
+                headerView = View.inflate(parent.getContext(), R.layout.head_home_main, null);
+                return headerView;
+            }
+
+            @Override
+            public void onBindView(View header) {
+                banner = header.findViewById(R.id.banner);
+                TextView tvHomeFirst = header.findViewById(R.id.tv_home_first);
+                TextView tvHomeSecond =header.findViewById(R.id.tv_home_second);
+                TextView tvHomeThird = header.findViewById(R.id.tv_home_third);
+                TextView tvHomeFour = header.findViewById(R.id.tv_home_four);
+                View.OnClickListener listener = v -> {
+                    if (FastClickUtils.isFastDoubleClick()){
+                        return;
+                    }
+                    switch (v.getId()) {
+                        //沙盒File
+                        case R.id.tv_home_first:
+                            FileExplorerActivity.startActivity(MainActivity.this);
+                            break;
+                        case R.id.tv_home_second:
+                            break;
+                        case R.id.tv_home_third:
+                            break;
+                        case R.id.tv_home_four:
+                            break;
+                        default:
+                            break;
+                    }
+                };
+                tvHomeFirst.setOnClickListener(listener);
+                tvHomeSecond.setOnClickListener(listener);
+                tvHomeThird.setOnClickListener(listener);
+                tvHomeFour.setOnClickListener(listener);
+                initBanner();
+            }
+        });
+    }
+
+    /**
+     * 初始化轮播图
+     */
+    private void initBanner() {
+
     }
 
     /**

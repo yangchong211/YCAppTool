@@ -105,7 +105,17 @@ dependencies {
     api rootProject.ext.dependencies["YCProgressLib"]
     api rootProject.ext.dependencies["YCGalleryLib"]
     api rootProject.ext.dependencies["YCBannerLib"]
-    api rootProject.ext.dependencies["YCRefreshViewLib"]
+
+    //https://github.com/yangchong211/YCRefreshView
+    //recyclerView封装库
+    api 'com.github.yangchong211.YCRefreshView:RefreshViewLib:3.0.1'
+    //整体item侧滑库
+    api 'com.github.yangchong211.YCRefreshView:SlideViewLib:3.0.1'
+    //仿汽车之家画廊库
+    api 'com.github.yangchong211.YCRefreshView:PhotoCoverLib:3.0.1'
+    //标签多选单选库
+    api 'com.github.yangchong211.YCRefreshView:SelectViewLib:3.0.1'
+
     api rootProject.ext.dependencies["YCStatusBarLib"]
     api rootProject.ext.dependencies["YCThreadPoolLib"]
     api rootProject.ext.dependencies["notificationLib"]
