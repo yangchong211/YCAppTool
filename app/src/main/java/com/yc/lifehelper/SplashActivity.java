@@ -1,4 +1,4 @@
-package com.yc.yc.lifehelper;
+package com.yc.lifehelper;
 
 import android.Manifest;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.ns.yc.lifehelper.R;
 import com.yc.timerlib.view.CountDownView;
 import com.yc.library.base.mvp.BaseActivity;
 

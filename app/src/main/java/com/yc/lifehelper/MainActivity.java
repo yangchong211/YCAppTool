@@ -1,4 +1,4 @@
-package com.yc.yc.lifehelper;
+package com.yc.lifehelper;
 
 import android.Manifest;
 import android.content.Intent;
@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.ns.yc.lifehelper.R;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;

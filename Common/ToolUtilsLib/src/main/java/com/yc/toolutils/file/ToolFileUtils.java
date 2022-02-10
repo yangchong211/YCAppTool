@@ -28,13 +28,88 @@ import java.util.List;
 public class ToolFileUtils {
 
     /**
+     * 机身内存缓存文件
+     * cache-->存放缓存文件
+     * code_cache-->存放运行时代码优化等产生的缓存
+     * databases-->存放数据库文件
+     * files-->存放一般文件
+     * lib-->存放App依赖的so库 是软链接，指向/data/app/ 某个子目录下
+     * shared_prefs-->存放SharedPreferences 文件
+     */
+    public static String getCachePath(Context context){
+        File cacheDir = context.getCacheDir();
+        if (cacheDir!=null && cacheDir.exists()){
+            return cacheDir.getAbsolutePath();
+        }
+        return null;
+    }
+
+    public static String getCodeCachePath(Context context){
+        File cacheDir = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            cacheDir = context.getCodeCacheDir();
+        }
+        if (cacheDir!=null && cacheDir.exists()){
+            return cacheDir.getAbsolutePath();
+        }
+        return null;
+    }
+
+    public static String getFilesPath(Context context){
+        File filesDir = context.getFilesDir();
+        if (filesDir!=null && filesDir.exists()){
+            return filesDir.getAbsolutePath();
+        }
+        return null;
+    }
+
+    /*------------------------------------------------------------------------------------*/
+
+    /**
+     * 机身外部存储，/storage/emulated/0/
+     * App外部私有目录
+     * /sdcard/Android/data/com.yc.helper
+     * cache-->存放缓存文件
+     * files-->存放一般文件
+     */
+    public static String getExternalCachePath(Context context){
+        File cacheDir = context.getExternalCacheDir();
+        if (cacheDir!=null && cacheDir.exists()){
+            return cacheDir.getAbsolutePath();
+        }
+        return null;
+    }
+
+    public static String getExternalFilePath(Context context){
+        File filesDir = context.getExternalFilesDir(null);
+        if (filesDir!=null && filesDir.exists()){
+            return filesDir.getAbsolutePath();
+        }
+        return null;
+    }
+
+    /**
+     * 机身外部存储，/storage/emulated/0/
+     * 只要拿到根目录，就可以遍历寻找其它子目录/文件。
+     */
+    public static String getRootFilePath(){
+        File rootDir = Environment.getExternalStorageDirectory();
+        if (rootDir!=null && rootDir.exists()){
+            return rootDir.getAbsolutePath();
+        }
+        return null;
+    }
+
+    /*------------------------------------------------------------------------------------*/
+
+    /**
      * 目录地址
      * 崩溃日志记录地址
      * SDCard/Android/data/<application package>/cache
      * data/data/<application package>/cache
      */
     public static String getCrashLogPath(Context context) {
-        String path = getCachePath(context) + File.separator + "crashLogs";
+        String path = getAppCachePath(context) + File.separator + "crashLogs";
         return path;
     }
 
@@ -45,7 +120,7 @@ public class ToolFileUtils {
      * data/data/<application package>/cache
      */
     public static String getCrashPicPath(Context context) {
-        String path = getCachePath(context) + File.separator + "crashPics";
+        String path = getAppCachePath(context) + File.separator + "crashPics";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -74,19 +149,20 @@ public class ToolFileUtils {
      * @param context                       上下文
      * @return
      */
-    public static String getCachePath(Context context) {
+    public static String getAppCachePath(Context context) {
         String cachePath;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
                 || !Environment.isExternalStorageRemovable()) {
             //外部存储可用
-            if (context.getExternalCacheDir()!=null){
-                cachePath = context.getExternalCacheDir().getAbsolutePath();
+            String externalCachePath = getExternalCachePath(context);
+            if (externalCachePath!=null){
+                cachePath = externalCachePath;
             } else {
-                cachePath = context.getCacheDir().getAbsolutePath();
+                cachePath =  getCachePath(context);
             }
         } else {
             //外部存储不可用
-            cachePath = context.getCacheDir().getAbsolutePath();
+            cachePath = getCachePath(context);
         }
         return cachePath;
     }

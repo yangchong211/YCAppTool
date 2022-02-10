@@ -89,8 +89,7 @@ public class FileExplorerFragment extends Fragment {
         mFileInfoAdapter = new FileListAdapter(getContext(), mFileList);
         mFileInfoAdapter.setOnViewClickListener(new FileListAdapter.OnViewClickListener() {
             public void onViewClick(View v, File fileInfo) {
-                if (fileInfo.isFile()) {
-                    //如果是文件夹，则继续打开
+                if (fileInfo.exists() && fileInfo.isFile()) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("file_key", fileInfo);
                     showContent(TextDetailFragment.class, bundle);

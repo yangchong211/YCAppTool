@@ -1,4 +1,4 @@
-package com.yc.yc.lifehelper;
+package com.yc.lifehelper;
 
 import android.content.Context;
 import android.content.Intent;

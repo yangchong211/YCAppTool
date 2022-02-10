@@ -1,4 +1,4 @@
-package com.yc.yc.lifehelper;
+package com.yc.lifehelper;
 
 import android.util.Log;
 
@@ -26,7 +26,7 @@ import java.util.HashMap;
  *     GitHub       https://github.com/yangchong211
  * </pre>
  */
-public class BaseApplication extends LibApplication {
+public class MainApplication extends LibApplication {
 
     /**
      * 程序启动的时候执行
