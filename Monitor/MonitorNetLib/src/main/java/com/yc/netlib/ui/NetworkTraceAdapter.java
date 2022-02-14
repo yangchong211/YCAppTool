@@ -4,6 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import com.yc.eastadapterlib.BaseRecycleAdapter;
+import com.yc.eastadapterlib.BaseViewHolder;
 import com.yc.netlib.R;
 import com.yc.netlib.data.NetworkTraceBean;
 import com.yc.netlib.utils.NetWorkUtils;

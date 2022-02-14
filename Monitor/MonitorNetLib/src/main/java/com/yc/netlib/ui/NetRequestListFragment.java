@@ -12,10 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.netlib.R;
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
-import com.yc.netlib.tool.OnItemClickListener;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -79,11 +79,6 @@ public class NetRequestListFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 NetworkFeedBean networkFeedBean = mNetworkFeedList.get(position);
                 NetworkDetailActivity.start(activity, networkFeedBean.getRequestId());
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
             }
         });
     }

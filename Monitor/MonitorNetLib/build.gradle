@@ -36,6 +36,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["swiperefreshlayout"])
     implementation(rootProject.ext.dependencies["coordinatorlayout"])
 
+    implementation 'com.github.yangchong211.YCRefreshView:EastAdapterLib:3.0.2'
     implementation 'com.squareup.okhttp3:okhttp:4.7.2'
     implementation 'com.github.yangchong211.YCVideoPlayer:VideoView:1.1.0'
 }

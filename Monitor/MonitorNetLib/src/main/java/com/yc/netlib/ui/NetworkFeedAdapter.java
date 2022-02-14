@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.yc.eastadapterlib.BaseRecycleAdapter;
+import com.yc.eastadapterlib.BaseViewHolder;
 import com.yc.netlib.R;
 import com.yc.netlib.data.NetworkFeedBean;
 
