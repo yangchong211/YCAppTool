@@ -22,6 +22,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public final class FileExplorerUtils {
@@ -80,7 +82,8 @@ public final class FileExplorerUtils {
                 Uri uri;
                 //判断7.0以上
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    uri = FileProvider.getUriForFile(context, context.getPackageName() + ".crashFileProvider", file);
+                    uri = FileProvider.getUriForFile(context,
+                            context.getPackageName() + ".fileExplorerProvider", file);
                 } else {
                     uri = Uri.fromFile(file);
                 }
@@ -99,6 +102,49 @@ public final class FileExplorerUtils {
         }
     }
 
+    /**
+     * 系统分享文件
+     * 需要使用Provider
+     * @param context               上下文
+     * @param file                  文件
+     */
+    @Deprecated
+    public static void systemShare(Context context, File file) {
+        if (file != null && file.exists()) {
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            try {
+                Uri uri = FileProvider.getUriForFile(context,
+                        context.getPackageName() + ".fileExplorerProvider", file);
+                String type = context.getContentResolver().getType(uri);
+                share.setDataAndType(uri, type);
+                share.putExtra("android.intent.extra.STREAM", uri);
+                if (share.resolveActivity(context.getPackageManager()) == null) {
+                    share.setDataAndType(uri, "*/*");
+                }
+                context.startActivity(share);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(context, "分享失败：" + e.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    /**
+     * 文件创建时间，方便测试查看缓存文件的最后修改时间
+     * @param context               上下文
+     * @param file                  文件
+     */
+    public static String getFileTime(Context context, File file){
+        if (file != null && file.exists()) {
+            long lastModified = file.lastModified();
+            String time = new SimpleDateFormat("yyyy-MM-dd")
+                    .format(new Date(lastModified));
+            return time;
+        }
+        return "";
+    }
 
     // 根据文件后缀名获得对应的MIME类型。
     private static String getMimeType(String filePath) {

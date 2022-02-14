@@ -16,19 +16,36 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="14dp" />
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="0dp"
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="16dp"
             android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="left"
-            android:singleLine="true"
-            android:textSize="14sp"
-            android:text="文件"/>
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:singleLine="true"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:text="文件"/>
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:singleLine="true"
+                android:textSize="10sp"
+                android:text="日期"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_size"

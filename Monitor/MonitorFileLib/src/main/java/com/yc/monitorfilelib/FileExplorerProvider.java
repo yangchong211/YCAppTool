@@ -5,5 +5,4 @@ import androidx.core.content.FileProvider;
 
 public class FileExplorerProvider extends FileProvider {
 
-
 }

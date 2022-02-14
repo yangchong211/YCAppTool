@@ -10,7 +10,7 @@
         <activity android:name="com.yc.monitorfilelib.FileExplorerActivity"/>
         <provider
             android:name="com.yc.monitorfilelib.FileExplorerProvider"
-            android:authorities="com.yc.monitorfilelib.fileExplorerProvider"
+            android:authorities="${applicationId}.fileExplorerProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

@@ -38,6 +38,7 @@ public class FileExplorerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_file_main);
         showContent(FileExplorerFragment.class);
     }
 
@@ -58,7 +59,7 @@ public class FileExplorerActivity extends AppCompatActivity {
             }
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.add(android.R.id.content, fragment);
+            fragmentTransaction.add(R.id.fl_file_content, fragment);
             //push等同于addFirst，添加到第一个
             mFragments.push(fragment);
             //add等同于addLast，添加到最后

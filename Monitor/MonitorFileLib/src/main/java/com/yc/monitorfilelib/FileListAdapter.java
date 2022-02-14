@@ -60,6 +60,7 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             File fileInfo = mFileList.get(position);
 
             myViewHolder.mName.setText(fileInfo.getName());
+            myViewHolder.mDate.setText(FileExplorerUtils.getFileTime(context,fileInfo));
             if (fileInfo.isDirectory()) {
                 myViewHolder.mIcon.setImageResource(R.drawable.sand_box_dir_icon);
                 myViewHolder.mMoreBtn.setVisibility(View.VISIBLE);
@@ -111,6 +112,7 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private final ImageView mIcon;
         private final ImageView mMoreBtn;
         private final TextView mSize;
+        private final TextView mDate;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -118,6 +120,7 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             mIcon = itemView.findViewById(R.id.iv_icon);
             mMoreBtn = itemView.findViewById(R.id.iv_more);
             mSize = itemView.findViewById(R.id.tv_size);
+            mDate = itemView.findViewById(R.id.tv_date);
         }
     }
 
