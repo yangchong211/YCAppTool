@@ -61,18 +61,18 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             myViewHolder.mName.setText(fileInfo.getName());
             if (fileInfo.isDirectory()) {
-                myViewHolder.mIcon.setImageResource(R.drawable.dk_dir_icon);
+                myViewHolder.mIcon.setImageResource(R.drawable.sand_box_dir_icon);
                 myViewHolder.mMoreBtn.setVisibility(View.VISIBLE);
                 myViewHolder.mSize.setVisibility(View.GONE);
             } else {
                 if (FileExplorerUtils.getSuffix(fileInfo).equals("jpg")) {
-                    myViewHolder.mIcon.setImageResource(R.drawable.dk_jpg_icon);
+                    myViewHolder.mIcon.setImageResource(R.drawable.sand_box_jpg_icon);
                 } else if (FileExplorerUtils.getSuffix(fileInfo).equals("txt")) {
-                    myViewHolder.mIcon.setImageResource(R.drawable.dk_txt_icon);
+                    myViewHolder.mIcon.setImageResource(R.drawable.sand_box_txt_icon);
                 } else if (FileExplorerUtils.getSuffix(fileInfo).equals("db")) {
-                    myViewHolder.mIcon.setImageResource(R.drawable.dk_file_db);
+                    myViewHolder.mIcon.setImageResource(R.drawable.sand_box_file_db);
                 } else {
-                    myViewHolder.mIcon.setImageResource(R.drawable.dk_file_icon);
+                    myViewHolder.mIcon.setImageResource(R.drawable.sand_box_file_icon);
                 }
                 myViewHolder.mMoreBtn.setVisibility(View.GONE);
                 myViewHolder.mSize.setVisibility(View.VISIBLE);

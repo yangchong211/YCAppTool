@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yc.localelib.service.LocaleService;
-import com.yc.localelib.utils.LocaleUtils;
+import com.yc.localelib.utils.LocaleToolUtils;
 import com.ycbjie.other.R;
 
 import java.util.List;
@@ -39,16 +39,16 @@ public class LocaleActivity extends AppCompatActivity {
         mTv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LocaleUtils.updateLocale(LocaleActivity.this,new Locale("ja"));
+                LocaleToolUtils.setLocale(LocaleActivity.this,new Locale("ja"));
             }
         });
     }
 
     private void initData() {
         StringBuilder stringBuilder = new StringBuilder();
-        Locale sysLocale = LocaleUtils.getSysLocale();
+        Locale sysLocale = LocaleToolUtils.getSysLocale();
         stringBuilder.append("获取系统locale的属性 : ").append(sysLocale.toString()).append("\n");
-        stringBuilder.append("获取系统locale的tag1 : ").append(LocaleUtils.getSysLocaleTag()).append("\n");
+        stringBuilder.append("获取系统locale的tag1 : ").append(LocaleToolUtils.getSysLocale()).append("\n");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             stringBuilder.append("获取系统locale的tag2 : ").append(sysLocale.toLanguageTag()).append("\n");
             stringBuilder.append("获取系统locale的language : ").append(sysLocale.getLanguage()).append("\n");
@@ -63,9 +63,9 @@ public class LocaleActivity extends AppCompatActivity {
         }
         Log.d("locale data : ",stringBuilder.toString());
 
-        stringBuilder.append("获取手机locale的属性 : ").append(LocaleUtils.getAppLocale(mTv1.getContext()).toString()).append("\n");
-        stringBuilder.append("获取手机locale的tag : ").append(LocaleUtils.getAppLocaleTag(mTv1.getContext())).append("\n");
-        stringBuilder.append("根据tag获取locale : ").append(LocaleUtils.tagToLocale("US").toString()).append("\n");
+        stringBuilder.append("获取手机locale的属性 : ").append(LocaleToolUtils.getAppLocale(mTv1.getContext()).toString()).append("\n");
+        stringBuilder.append("获取手机locale的tag : ").append(LocaleToolUtils.getAppLocale(mTv1.getContext())).append("\n");
+        stringBuilder.append("根据tag获取locale : ").append(LocaleToolUtils.tagToLocale("US").toString()).append("\n");
         mTv1.setText(stringBuilder.toString());
 
 
@@ -73,14 +73,14 @@ public class LocaleActivity extends AppCompatActivity {
     }
 
     private void setData2() {
-        Locale appLocale = LocaleUtils.getAppLocale(this);
+        Locale appLocale = LocaleToolUtils.getAppLocale(this);
         StringBuilder stringBuilder2 = new StringBuilder();
         List<Locale> supportLocaleList = LocaleService.getInstance().getSupportLocaleList();
         for (int i=0 ; i<supportLocaleList.size() ; i++){
             Locale locale = supportLocaleList.get(i);
             String displayLanguage = locale.getDisplayLanguage();
             //boolean isSame = LocaleUtils.localeToTag(appLocale).equals(LocaleUtils.localeToTag(locale));
-            boolean isSame = LocaleUtils.equalLocales(appLocale, locale);
+            boolean isSame = LocaleToolUtils.equalLocales(appLocale, locale);
             stringBuilder2.append("语言 ")
                     .append(isSame ? "当前语言 : " : " : ")
                     .append(displayLanguage)

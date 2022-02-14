@@ -13,11 +13,20 @@ import java.util.HashMap;
  *     revise:
  * </pre>
  */
-public class FastClickUtils {
+public final class FastClickUtils {
 
+    /**
+     * 默认最大点击间隔时间
+     */
     private static final int MAX_INTERVAL = 500;
+    /**
+     * 最后一次点击的时间戳
+     */
     private static long mLastClickTime;
-    private static HashMap<String, Long> tagMaps = new HashMap<>();
+    /**
+     * tag标记的集合
+     */
+    private static final HashMap<String, Long> tagMaps = new HashMap<>();
 
     /**
      * 判断一个控件是否短时间内重复点击
@@ -27,6 +36,11 @@ public class FastClickUtils {
         return isFastDoubleClick(MAX_INTERVAL);
     }
 
+    /**
+     * 判断一个控件是否xx时间内重复点击
+     * @param maxInterval           设置间隔时间
+     * @return                      true表示是重复点击
+     */
     public static boolean isFastDoubleClick(int maxInterval) {
         long current = System.currentTimeMillis();
         long interval = current - mLastClickTime;
@@ -37,6 +51,12 @@ public class FastClickUtils {
         return false;
     }
 
+    /**
+     * 判断一个控件是否xx时间内重复点击
+     * @param maxInterval           设置间隔时间
+     * @param tag                   标记
+     * @return                      true表示是重复点击
+     */
     public static boolean isFastDoubleClickWithTag(int maxInterval, String tag) {
         if (TextUtils.isEmpty(tag)) {
             return true;

@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class ProxyActivityListener extends ActivityLifecycleListener {
 
-    private Map<Class, List<ActivityLifecycleListener>> mActivityLifecycleListeners = new HashMap<>();
-    private ActivityManager mActivityManager;
+    private final Map<Class, List<ActivityLifecycleListener>> mActivityLifecycleListeners = new HashMap<>();
+    private final ActivityManager mActivityManager;
 
     ProxyActivityListener(ActivityManager manager) {
         this.mActivityManager = manager;
