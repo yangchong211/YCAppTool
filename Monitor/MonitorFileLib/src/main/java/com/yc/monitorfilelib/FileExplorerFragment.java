@@ -45,7 +45,6 @@ public class FileExplorerFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_file_list, container, false);
         return view;
-
     }
 
     @Override
@@ -90,12 +89,21 @@ public class FileExplorerFragment extends Fragment {
         mFileInfoAdapter.setOnViewClickListener(new FileListAdapter.OnViewClickListener() {
             public void onViewClick(View v, File fileInfo) {
                 if (fileInfo.exists() && fileInfo.isFile()) {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("file_key", fileInfo);
-                    showContent(TextDetailFragment.class, bundle);
+                    //如果是文件，则直接打开文件
+                    if (FileExplorerUtils.isImage(fileInfo)){
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("file_key", fileInfo);
+                        showContent(ImageDetailFragment.class, bundle);
+                    } else {
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("file_key", fileInfo);
+                        showContent(TextDetailFragment.class, bundle);
+                    }
                 } else {
+                    //否则是文件夹，则继续打开对应的list列表
                     mCurDir = fileInfo;
                     mTvTitle.setText(mCurDir.getName());
+                    //拿到当前目录的列表数据
                     setAdapterData(getFileInfos(mCurDir));
                 }
             }
@@ -201,7 +209,7 @@ public class FileExplorerFragment extends Fragment {
     }
 
     /**
-     * 获取某个file
+     * 获取某个file对应的子file列表
      * @param dir                       file文件
      * @return
      */

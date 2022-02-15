@@ -201,6 +201,20 @@ public final class FileExplorerUtils {
     }
 
     /**
+     * 是否是图片文件
+     * @param file                      文件
+     * @return
+     */
+    public static boolean isImage(File file) {
+        if (file == null) {
+            return false;
+        }
+        String suffix = getSuffix(file);
+        return "jpg".equals(suffix) || "jpeg".equals(suffix)
+                || "png".equals(suffix) || "bmp".equals(suffix);
+    }
+
+    /**
      * 是否是sp文件
      * @param file                      文件
      * @return

@@ -5,15 +5,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import java.util.ArrayDeque;
 
+
 /**
- * description: 文件管理
- * @author  杨充
- * @since   2021/8/11
+ * <pre>
+ *     @author  yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2021/8/11
+ *     desc   : 文件管理
+ *     revise :
+ * </pre>
  */
 public class FileExplorerActivity extends AppCompatActivity {
 
@@ -39,6 +46,7 @@ public class FileExplorerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_main);
+        //StateAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorTheme));
         showContent(FileExplorerFragment.class);
     }
 

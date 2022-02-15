@@ -31,4 +31,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["recyclerview"])
     implementation(rootProject.ext.dependencies["media"])
+    //状态栏：https://github.com/yangchong211/YCStatusBar
+    //implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
 }

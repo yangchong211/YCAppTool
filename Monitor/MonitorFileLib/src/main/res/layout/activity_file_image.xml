@@ -4,7 +4,8 @@
     android:orientation="vertical" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/gray_background">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,20 +40,20 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_look"
+            android:id="@+id/tv_share"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:gravity="center"
             android:paddingLeft="34dp"
             android:paddingRight="16dp"
-            android:text="查看路径"
+            android:text="分享"
             android:textColor="@color/white"
             android:textSize="15sp" />
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <ImageView
+        android:id="@+id/iv_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
