@@ -3,7 +3,6 @@ package com.yc.lifehelper;
 import android.Manifest;
 import android.content.Intent;
 
-import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;

@@ -10,7 +10,6 @@ import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.ycbjie.other.R;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 /**
  * <pre>
@@ -33,8 +32,7 @@ public class ZoomLargeImageActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        StateAppBar.setStatusBarColor(this,
-                ContextCompat.getColor(this, R.color.black));
+        //StateAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.black));
         zoomView = findViewById(R.id.zoomView);
         zoomView.setLoadingVisibility(true);
         zoomView.getImageView().setMaxScale(5);

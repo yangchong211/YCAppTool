@@ -12,8 +12,6 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ns.yc.ycstatelib.StateLayoutManager;
 import com.ycbjie.library.R;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
-
 
 /**
  * <pre>
@@ -37,7 +35,7 @@ public abstract class BaseStateActivity extends AppCompatActivity{
         setContentView(R.layout.base_state_view);
         initStatusLayout();
         initBaseView();
-        StateAppBar.setStatusBarColor(this, getResources().getColor(R.color.colorTheme));
+        //StateAppBar.setStatusBarColor(this, getResources().getColor(R.color.colorTheme));
         initView();
         initListener();
         initData();
