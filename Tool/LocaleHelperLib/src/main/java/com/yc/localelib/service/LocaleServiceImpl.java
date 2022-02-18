@@ -1,16 +1,10 @@
 package com.yc.localelib.service;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Build;
-import android.os.LocaleList;
-import android.text.TextUtils;
 
-import com.yc.localelib.utils.LocaleUtils;
+import com.yc.localelib.utils.LocaleToolUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,27 +13,6 @@ import java.util.Locale;
 
 public class LocaleServiceImpl implements LocaleServiceProvider {
 
-    private static final String KEY_SP = "locale_sp";
-    //current_locale，旧版locale与lang混用，为了兼容旧apk，这个key不变
-    private static final String KEY_CURRENT_LANG = "current_locale";
-    private static final String KEY_CURRENT_REAL_LOCALE = "current_real_locale";
-    private static final String KEY_CURRENT_RLAB_LOCALE = "current_rlab_locale";
-    private final ArrayList<OnLocaleChangedListener> mListeners = new ArrayList<>();
-    private SharedPreferences mPreferences;
-    private Context mContext;
-    private boolean mIsInitial;
-    /**
-     * 当前语言包
-     */
-    private String lang = "";
-    /**
-     * 公参Locale
-     */
-    private String locale = "";
-    /**
-     * SDK内部进行查表的locale
-     */
-    private String rlab_locale;
 
     public List<Locale> getDefaultList() {
         List<Locale> defaultList = new ArrayList<>();
@@ -56,10 +29,6 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
         if (context == null) {
             throw new NullPointerException("context is null!");
         }
-        mIsInitial = true;
-        mContext = context;
-        mPreferences = context.getSharedPreferences(KEY_SP, Context.MODE_PRIVATE);
-        LocaleUtils.initConfigLocale();
     }
 
     @Override
@@ -67,8 +36,8 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
         // 8.0需要使用createConfigurationContext处理
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             // getSetLocale方法是获取新设置的语言
-            Locale locale = LocaleUtils.tagToLocale(getRlabLocale());
-            return LocaleUtils.updateLocale2(context,locale);
+            Locale locale = LocaleToolUtils.tagToLocale(getRlabLocale());
+            return LocaleToolUtils.setLocale(context,locale);
         } else {
             return context;
         }
@@ -77,7 +46,7 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
     @Override
     public Locale getCurrentLocale() {
         String localeFromPre = getLocaleFromPre();
-        return LocaleUtils.tagToLocale(localeFromPre);
+        return LocaleToolUtils.tagToLocale(localeFromPre);
     }
 
     @Override
@@ -87,7 +56,7 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
 
     @Override
     public Locale getCurrentLang() {
-        return LocaleUtils.tagToLocale(getLang());
+        return LocaleToolUtils.tagToLocale(getLang());
     }
 
     @Override
@@ -109,7 +78,7 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
 
     @Override
     public Locale switchLocale(Intent intent, String targetLocaleTag) {
-        return switchLocale(intent, LocaleUtils.tagToLocale(targetLocaleTag));
+        return switchLocale(intent, LocaleToolUtils.tagToLocale(targetLocaleTag));
     }
 
     @Override
@@ -129,37 +98,19 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
 
     @Override
     public void refreshLocale(Context context) {
-        // getSetLocale方法是获取新设置的语言
-        LocaleUtils.refreshLocale(context,getRlabLocale());
+
     }
 
     private String getLocaleFromPre() {
-        if (mPreferences == null) {
-            return "";
-        }
-        String localeTag = mPreferences.getString(KEY_CURRENT_REAL_LOCALE, locale);
-        if (!TextUtils.isEmpty(localeTag)) {
-            localeTag = localeTag.replace("_", "-");
-        }
-        if (localeTag == null) {
-            localeTag = "en-US";
-        }
-        return localeTag;
+        return "";
     }
 
     private String getRlabLocale() {
-        if (mPreferences == null) {
-            return "";
-        }
-        return mPreferences.getString(KEY_CURRENT_RLAB_LOCALE, lang)
-                .replace("_", "-");
+        return "";
     }
 
     private String getLang() {
-        if (mPreferences == null) {
-            return "";
-        }
-        return mPreferences.getString(KEY_CURRENT_LANG, lang);
+        return "";
     }
 
 }

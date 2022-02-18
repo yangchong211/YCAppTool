@@ -14,7 +14,7 @@ public final class LocaleService implements LocaleServiceProvider {
 
     }
 
-    public static final LocaleService getInstance() {
+    public static synchronized LocaleService getInstance() {
         return Singleton.INSTANCE;
     }
 
