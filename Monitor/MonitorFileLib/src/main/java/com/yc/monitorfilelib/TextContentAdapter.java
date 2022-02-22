@@ -5,21 +5,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
+
 /**
- * description: 文本适配器
- * @author  杨充
- * @since   2021/8/11
+ * <pre>
+ *     author : 杨充
+ *     email  : yangchong211@163.com
+ *     time   : 2021/8/11
+ *     desc   : 文本适配器
+ *     revise :
+ * </pre>
  */
 public class TextContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final Context mContext;
     private final List<String> mContentList;
 
-    public TextContentAdapter(Context context , List<String> contentList) {
+    public TextContentAdapter(Context context, List<String> contentList) {
         mContext = context;
         mContentList = contentList;
     }
@@ -28,7 +35,7 @@ public class TextContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (item != null) {
             int start = mContentList.size();
             mContentList.add(item);
-            notifyItemRangeInserted(start,1);
+            notifyItemRangeInserted(start, 1);
         }
     }
 
@@ -51,7 +58,7 @@ public class TextContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-        return mContentList==null ? 0 : mContentList.size();
+        return mContentList == null ? 0 : mContentList.size();
     }
 
     private static class MyViewHolder extends RecyclerView.ViewHolder {

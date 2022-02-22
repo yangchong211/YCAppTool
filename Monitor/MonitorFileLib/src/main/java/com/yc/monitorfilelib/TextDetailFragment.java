@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -28,13 +29,18 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * description: 文本详情页面
- * @author  杨充
- * @since   2021/8/11
+ * <pre>
+ *     author : 杨充
+ *     email  : yangchong211@163.com
+ *     time   : 2021/8/11
+ *     desc   : 文本详情页面
+ *     revise :
+ * </pre>
  */
 public class TextDetailFragment extends Fragment {
-    
+
     private LinearLayout mLlBackLayout;
     private TextView mTvTitle;
     private TextView mTvShare;
@@ -56,7 +62,7 @@ public class TextDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_file_content, 
+        View view = inflater.inflate(R.layout.activity_file_content,
                 container, false);
         return view;
     }
@@ -99,7 +105,7 @@ public class TextDetailFragment extends Fragment {
      */
     private void shareFile() {
         //分享
-        if (mFile!=null){
+        if (mFile != null) {
             //先把文件转移到外部存储文件
             //请求权限
             //检查版本是否大于M
@@ -129,14 +135,14 @@ public class TextDetailFragment extends Fragment {
 
     private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mTextContentAdapter = new TextContentAdapter(mActivity,mContentList);
+        mTextContentAdapter = new TextContentAdapter(mActivity, mContentList);
         mRecyclerView.setAdapter(mTextContentAdapter);
     }
 
     private void initData() {
         Bundle data = getArguments();
         if (data != null) {
-            mFile = (File)data.getSerializable("file_key");
+            mFile = (File) data.getSerializable("file_key");
         }
         if (mFile != null) {
             mTvTitle.setText(mFile.getName());
@@ -146,7 +152,7 @@ public class TextDetailFragment extends Fragment {
     }
 
     public void finish() {
-        FileExplorerActivity activity = (FileExplorerActivity)getActivity();
+        FileExplorerActivity activity = (FileExplorerActivity) getActivity();
         if (activity != null) {
             activity.doBack(this);
         }
@@ -168,12 +174,12 @@ public class TextDetailFragment extends Fragment {
                 fileReader = new FileReader(files[0]);
                 br = new BufferedReader(fileReader);
                 String textLine;
-                while((textLine = br.readLine()) != null) {
+                while ((textLine = br.readLine()) != null) {
                     //一次读取一行
                     publishProgress(new String[]{textLine});
                 }
             } catch (IOException exception) {
-                FileExplorerUtils.logError(TAG+exception.toString());
+                FileExplorerUtils.logError(TAG + exception.toString());
             } finally {
                 if (fileReader != null) {
                     try {

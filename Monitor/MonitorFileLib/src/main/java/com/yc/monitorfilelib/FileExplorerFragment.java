@@ -23,10 +23,15 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+
 /**
- * description: 文件管理页面fragment
- * @author  杨充
- * @since   2021/8/11
+ * <pre>
+ *     author : yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2021/8/11
+ *     desc   : 文件管理页面fragment
+ *     revise :
+ * </pre>
  */
 public class FileExplorerFragment extends Fragment {
 
@@ -90,7 +95,7 @@ public class FileExplorerFragment extends Fragment {
             public void onViewClick(View v, File fileInfo) {
                 if (fileInfo.exists() && fileInfo.isFile()) {
                     //如果是文件，则直接打开文件
-                    if (FileExplorerUtils.isImage(fileInfo)){
+                    if (FileExplorerUtils.isImage(fileInfo)) {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("file_key", fileInfo);
                         showContent(ImageDetailFragment.class, bundle);
@@ -110,7 +115,7 @@ public class FileExplorerFragment extends Fragment {
         });
         mFileInfoAdapter.setOnViewLongClickListener(new FileListAdapter.OnViewLongClickListener() {
             @Override
-            public boolean onViewLongClick(View v, File fileInfo,int position) {
+            public boolean onViewLongClick(View v, File fileInfo, int position) {
                 //长按弹窗，让测试可以选择是否删除文件
                 delFile(position);
                 return false;
@@ -122,7 +127,7 @@ public class FileExplorerFragment extends Fragment {
     }
 
     private void delFile(int position) {
-        if (mFileList.size()>position && position>=0){
+        if (mFileList.size() > position && position >= 0) {
             //弹出Dialog是否删除当前
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle("提示");
@@ -137,7 +142,7 @@ public class FileExplorerFragment extends Fragment {
                         public void run() {
                             File file = mFileList.get(position);
                             boolean isDel = FileExplorerUtils.deleteDirectory(file);
-                            if (isDel){
+                            if (isDel) {
                                 mRecyclerView.post(new Runnable() {
                                     @Override
                                     public void run() {
@@ -210,7 +215,8 @@ public class FileExplorerFragment extends Fragment {
 
     /**
      * 获取某个file对应的子file列表
-     * @param dir                       file文件
+     *
+     * @param dir file文件
      * @return
      */
     private List<File> getFileInfos(File dir) {
@@ -253,7 +259,8 @@ public class FileExplorerFragment extends Fragment {
      * 初始化默认文件。注意：加External和不加的比较
      * 相同点:1.都可以做app缓存目录。2.app卸载后，两个目录下的数据都会被清空。
      * 不同点:1.目录的路径不同。前者的目录存在外部SD卡上的。后者的目录存在app的内部存储上。
-     *       2.前者的路径在手机里可以直接看到。后者的路径需要root以后，用Root Explorer 文件管理器才能看到。
+     * 2.前者的路径在手机里可以直接看到。后者的路径需要root以后，用Root Explorer 文件管理器才能看到。
+     *
      * @param context 上下文
      * @return
      */
@@ -261,23 +268,23 @@ public class FileExplorerFragment extends Fragment {
         List<File> fileInfos = new ArrayList<>();
         //第一个是文件父路径
         File parentFile = context.getFilesDir().getParentFile();
-        if (parentFile!=null){
+        if (parentFile != null) {
             fileInfos.add(parentFile);
-            FileExplorerUtils.logInfo(TAG+parentFile.getPath());
+            FileExplorerUtils.logInfo(TAG + parentFile.getPath());
         }
 
         //第二个是缓存文件路径
         File externalCacheDir = context.getExternalCacheDir();
-        if (externalCacheDir!=null){
+        if (externalCacheDir != null) {
             fileInfos.add(externalCacheDir);
-            FileExplorerUtils.logInfo(TAG+externalCacheDir.getPath());
+            FileExplorerUtils.logInfo(TAG + externalCacheDir.getPath());
         }
 
         //第三个是外部file路径
         File externalFilesDir = context.getExternalFilesDir((String) null);
-        if (externalFilesDir!=null){
+        if (externalFilesDir != null) {
             fileInfos.add(externalFilesDir);
-            FileExplorerUtils.logInfo(TAG+externalFilesDir.getPath());
+            FileExplorerUtils.logInfo(TAG + externalFilesDir.getPath());
         }
         return fileInfos;
     }

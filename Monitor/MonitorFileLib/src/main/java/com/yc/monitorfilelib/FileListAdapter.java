@@ -13,10 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.File;
 import java.util.List;
 
+
 /**
- * description: 文件管理适配器
- * @author  杨充
- * @since   2021/8/11
+ * <pre>
+ *     author : 杨充
+ *     email  : yangchong211@163.com
+ *     time   : 2021/8/11
+ *     desc   : 文件管理适配器
+ *     revise :
+ * </pre>
  */
 public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

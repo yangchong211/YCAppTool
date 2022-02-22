@@ -3,6 +3,7 @@ package com.yc.monitorfilelib;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -15,7 +16,7 @@ import java.util.ArrayDeque;
 
 /**
  * <pre>
- *     @author  yangchong
+ *     @author yangchong
  *     email  : yangchong211@163.com
  *     time   : 2021/8/11
  *     desc   : 文件管理
@@ -33,9 +34,10 @@ public class FileExplorerActivity extends AppCompatActivity {
 
     /**
      * 开启页面
-     * @param context                   上下文
+     *
+     * @param context 上下文
      */
-    public static void startActivity(Context context){
+    public static void startActivity(Context context) {
         Intent target = new Intent();
         target.setClass(context, FileExplorerActivity.class);
         target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -56,8 +58,9 @@ public class FileExplorerActivity extends AppCompatActivity {
 
     /**
      * 添加fragment
-     * @param target                        target对象
-     * @param bundle                        bundle数据
+     *
+     * @param target target对象
+     * @param bundle bundle数据
      */
     public void showContent(Class<? extends Fragment> target, Bundle bundle) {
         try {
@@ -89,7 +92,7 @@ public class FileExplorerActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (!mFragments.isEmpty()) {
             Fragment fragment = mFragments.getFirst();
-            if (fragment!=null){
+            if (fragment != null) {
                 //移除最上面的一个
                 mFragments.removeFirst();
             }
@@ -105,7 +108,8 @@ public class FileExplorerActivity extends AppCompatActivity {
 
     /**
      * 回退fragment任务栈操作
-     * @param fragment                  fragment
+     *
+     * @param fragment fragment
      */
     public void doBack(Fragment fragment) {
         if (mFragments.contains(fragment)) {

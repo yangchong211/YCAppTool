@@ -16,6 +16,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,6 +27,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * <pre>
+ *     author : yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2021/8/11
+ *     desc   : 工具类
+ *     revise :
+ * </pre>
+ */
 public final class FileExplorerUtils {
 
     public static final String DB = "db";
@@ -40,28 +50,31 @@ public final class FileExplorerUtils {
 
     /**
      * 日志
-     * @param log                       日志
+     *
+     * @param log 日志
      */
-    public static void logInfo(String log){
-        if (IS_DEBUG){
-            Log.i("FileExplorer",log);
+    public static void logInfo(String log) {
+        if (IS_DEBUG) {
+            Log.i("FileExplorer", log);
         }
     }
 
     /**
      * 日志
-     * @param log                       日志
+     *
+     * @param log 日志
      */
-    public static void logError(String log){
-        if (IS_DEBUG){
-            Log.e("FileExplorer",log);
+    public static void logError(String log) {
+        if (IS_DEBUG) {
+            Log.e("FileExplorer", log);
         }
     }
 
     /**
      * 这个是获取文件的后缀名
-     * @param file                      file文件
-     * @return                          后缀名
+     *
+     * @param file file文件
+     * @return 后缀名
      */
     public static String getSuffix(File file) {
         return file != null && file.exists() ?
@@ -72,8 +85,9 @@ public final class FileExplorerUtils {
     /**
      * 系统分享文件
      * 需要使用Provider
-     * @param context               上下文
-     * @param file                  文件
+     *
+     * @param context 上下文
+     * @param file    文件
      */
     public static void shareFile(Context context, File file) {
         try {
@@ -105,8 +119,9 @@ public final class FileExplorerUtils {
     /**
      * 系统分享文件
      * 需要使用Provider
-     * @param context               上下文
-     * @param file                  文件
+     *
+     * @param context 上下文
+     * @param file    文件
      */
     @Deprecated
     public static void systemShare(Context context, File file) {
@@ -133,10 +148,11 @@ public final class FileExplorerUtils {
 
     /**
      * 文件创建时间，方便测试查看缓存文件的最后修改时间
-     * @param context               上下文
-     * @param file                  文件
+     *
+     * @param context 上下文
+     * @param file    文件
      */
-    public static String getFileTime(Context context, File file){
+    public static String getFileTime(Context context, File file) {
         if (file != null && file.exists()) {
             long lastModified = file.lastModified();
             String time = new SimpleDateFormat("yyyy-MM-dd")
@@ -167,13 +183,14 @@ public final class FileExplorerUtils {
 
     /**
      * 复制内容到剪切板
-     * @param context                   上下文
-     * @param content                   内容
+     *
+     * @param context 上下文
+     * @param content 内容
      */
-    public static void copyToClipBoard(Context context , String content){
-        if (!TextUtils.isEmpty(content)){
+    public static void copyToClipBoard(Context context, String content) {
+        if (!TextUtils.isEmpty(content)) {
             //获取剪贴版
-            ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             //创建ClipData对象
             //第一个参数只是一个标记，随便传入。
             //第二个参数是要复制到剪贴版的内容
@@ -181,14 +198,15 @@ public final class FileExplorerUtils {
             //传入clipdata对象.
             if (clipboard != null) {
                 clipboard.setPrimaryClip(clip);
-                Toast.makeText(context, "复制成功：" + content , Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "复制成功：" + content, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     /**
      * 是否是db文件
-     * @param file                      文件
+     *
+     * @param file 文件
      * @return
      */
     public static boolean isDB(File file) {
@@ -202,7 +220,8 @@ public final class FileExplorerUtils {
 
     /**
      * 是否是图片文件
-     * @param file                      文件
+     *
+     * @param file 文件
      * @return
      */
     public static boolean isImage(File file) {
@@ -216,7 +235,8 @@ public final class FileExplorerUtils {
 
     /**
      * 是否是sp文件
-     * @param file                      文件
+     *
+     * @param file 文件
      * @return
      */
     public static boolean isSp(File file) {
@@ -227,7 +247,8 @@ public final class FileExplorerUtils {
 
     /**
      * 将文件大小转化为具体的kb单位
-     * @param size                          大小，字节
+     *
+     * @param size 大小，字节
      * @return
      */
     public static SpannableString getPrintSizeForSpannable(long size) {
@@ -266,14 +287,15 @@ public final class FileExplorerUtils {
 
     /**
      * 删除文件
-     * @param file                      文件
+     *
+     * @param file 文件
      */
     public static boolean deleteDirectory(File file) {
-        if (file!=null){
+        if (file != null) {
             if (file.isDirectory()) {
                 File[] listFiles = file.listFiles();
                 int length = listFiles.length;
-                for(int i = 0; i < length; ++i) {
+                for (int i = 0; i < length; ++i) {
                     File f = listFiles[i];
                     deleteDirectory(f);
                 }
@@ -281,7 +303,7 @@ public final class FileExplorerUtils {
             file.delete();
         }
         // 如果删除的文件路径所对应的文件存在，并且是一个文件，则表示删除失败
-        if (file!=null && file.exists() && file.isFile()) {
+        if (file != null && file.exists() && file.isFile()) {
             return false;
         } else {
             //删除成功
@@ -291,7 +313,8 @@ public final class FileExplorerUtils {
 
     /**
      * 获取文件大小
-     * @param directory                 文件
+     *
+     * @param directory 文件
      * @return
      */
     public static long getDirectorySize(File directory) {
@@ -317,7 +340,8 @@ public final class FileExplorerUtils {
 
     /**
      * 获取分享路径地址
-     * @return                              路径
+     *
+     * @return 路径
      */
     public static String getFileSharePath() {
         String path = Environment.getExternalStorageDirectory() + "";
@@ -332,9 +356,9 @@ public final class FileExplorerUtils {
     /**
      * 根据文件路径拷贝文件
      *
-     * @param src                                   源文件
-     * @param dest                                  目标文件
-     * @return                                      boolean 成功true、失败false
+     * @param src  源文件
+     * @param dest 目标文件
+     * @return boolean 成功true、失败false
      */
     public static boolean copyFile(File src, File dest) {
         if ((src == null) || (dest == null)) {
@@ -382,7 +406,8 @@ public final class FileExplorerUtils {
 
     /**
      * 判断文件是否创建，如果没有创建，则新建
-     * @param file                                  file文件
+     *
+     * @param file file文件
      * @return
      */
     public static boolean createOrExistsDir(final File file) {

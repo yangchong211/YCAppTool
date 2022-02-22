@@ -34,12 +34,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * description: 图片详情页面
- * @author  杨充
- * @since   2021/8/11
+ * <pre>
+ *     author : 杨充
+ *     email  : yangchong211@163.com
+ *     time   : 2021/8/11
+ *     desc   : 图片详情页面
+ *     revise :
+ * </pre>
  */
 public class ImageDetailFragment extends Fragment {
-    
+
     private LinearLayout mLlBackLayout;
     private TextView mTvTitle;
     private TextView mTvShare;
@@ -109,7 +113,7 @@ public class ImageDetailFragment extends Fragment {
      */
     private void shareFile() {
         //分享
-        if (mFile!=null){
+        if (mFile != null) {
             //先把文件转移到外部存储文件
             //请求权限
             //检查版本是否大于M
@@ -140,7 +144,7 @@ public class ImageDetailFragment extends Fragment {
     private void initData() {
         Bundle data = getArguments();
         if (data != null) {
-            mFile = (File)data.getSerializable("file_key");
+            mFile = (File) data.getSerializable("file_key");
         }
         if (mFile != null) {
             mTvTitle.setText(mFile.getName());
@@ -156,7 +160,7 @@ public class ImageDetailFragment extends Fragment {
     }
 
     public void finish() {
-        FileExplorerActivity activity = (FileExplorerActivity)getActivity();
+        FileExplorerActivity activity = (FileExplorerActivity) getActivity();
         if (activity != null) {
             activity.doBack(this);
         }
@@ -178,14 +182,14 @@ public class ImageDetailFragment extends Fragment {
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
-            if (mReference.get() != null && bitmap!=null) {
+            if (mReference.get() != null && bitmap != null) {
                 mReference.get().mIvImageView.setImageBitmap(bitmap);
             }
         }
     }
 
     private static Bitmap decodeSampledBitmapFromFilePath(String imagePath, int reqWidth, int reqHeight) {
-        if (imagePath == null || imagePath.length()==0){
+        if (imagePath == null || imagePath.length() == 0) {
             return null;
         }
         final BitmapFactory.Options options = new BitmapFactory.Options();
@@ -193,7 +197,7 @@ public class ImageDetailFragment extends Fragment {
         BitmapFactory.decodeFile(imagePath, options);
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
         options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(imagePath,options);
+        return BitmapFactory.decodeFile(imagePath, options);
     }
 
     private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
