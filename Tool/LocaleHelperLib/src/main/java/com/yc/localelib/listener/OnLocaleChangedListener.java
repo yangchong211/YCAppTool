@@ -3,7 +3,13 @@ package com.yc.localelib.listener;
 import java.util.Locale;
 
 /**
- * 语种变化监听器
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : 变化监听器
+ *     revise :
+ * </pre>
  */
 public interface OnLocaleChangedListener {
 

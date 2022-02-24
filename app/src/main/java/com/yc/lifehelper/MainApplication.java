@@ -1,11 +1,17 @@
 package com.yc.lifehelper;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
+
+import androidx.multidex.MultiDex;
 
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.BatteryInfo;
 import com.yc.appstatuslib.info.ThreadInfo;
 import com.yc.appstatuslib.listener.BaseStatusListener;
+import com.yc.localelib.listener.OnLocaleChangedListener;
+import com.yc.localelib.service.LocaleService;
 import com.yc.longevitylib.LongevityMonitor;
 import com.yc.longevitylib.LongevityMonitorConfig;
 import com.yc.toollib.tool.ToolFileUtils;
@@ -14,6 +20,7 @@ import com.yc.library.base.app.LibApplication;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Locale;
 
 
 /**
@@ -37,6 +44,13 @@ public class MainApplication extends LibApplication {
         super.onCreate();
         LongevityMonitor();
         initAppStatusListener();
+        initLang();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        // 绑定语种
+        super.attachBaseContext(LocaleService.getInstance().attachBaseContext(base));
     }
 
     private void LongevityMonitor() {
@@ -157,6 +171,24 @@ public class MainApplication extends LibApplication {
                 ToolLogUtils.i("app status wait线程数量 " + threadInfo.getWaitingThreadCount().size());
                 ToolLogUtils.i("app status block线程数量 " + threadInfo.getBlockThreadCount().size());
                 ToolLogUtils.i("app status timewait线程数量 " + threadInfo.getTimeWaitingThreadCount().size());
+            }
+        });
+    }
+
+    private void initLang(){
+        // 初始化多语种框架
+        LocaleService.getInstance().init(this);
+        // 设置语种变化监听器
+        LocaleService.getInstance().addOnLocaleChangedListener(new OnLocaleChangedListener() {
+
+            @Override
+            public void onAppLocaleChange(Locale oldLocale, Locale newLocale) {
+                Log.d("MultiLanguages", "监听到应用切换了语种，旧语种：" + oldLocale + "，新语种：" + newLocale);
+            }
+
+            @Override
+            public void onSystemLocaleChange(Locale oldLocale, Locale newLocale) {
+                Log.d("MultiLanguages", "监听到系统切换了语种，旧语种：" + oldLocale + "，新语种：" + newLocale + "，是否跟随系统：" + LocaleService.getInstance().isSystemLanguage());
             }
         });
     }

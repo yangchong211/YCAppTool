@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yc.timerlib.timer.CountTimeTools;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 public class CountActivity extends AppCompatActivity implements View.OnClickListener {
 

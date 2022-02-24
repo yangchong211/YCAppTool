@@ -48,7 +48,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     public void initView() {
         CountDownView cdvTime = findViewById(R.id.cdv_time);
         cdvTime.setVisibility(View.GONE);
-        initPermissions();
+        startPermissionsTask();
     }
 
     @Override
@@ -110,16 +110,6 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     private boolean hasPermissions() {
         return EasyPermissions.hasPermissions(this, LOCATION_AND_CONTACTS);
     }
-
-
-    /**
-     * 初始化权限
-     */
-    private void initPermissions() {
-        startPermissionsTask();
-    }
-
-
 
     /**
      * 将结果转发到EasyPermissions

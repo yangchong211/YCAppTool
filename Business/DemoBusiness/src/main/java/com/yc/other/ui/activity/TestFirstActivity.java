@@ -5,7 +5,7 @@ import android.view.View;
 import com.blankj.utilcode.util.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.library.base.mvp.BaseActivity;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

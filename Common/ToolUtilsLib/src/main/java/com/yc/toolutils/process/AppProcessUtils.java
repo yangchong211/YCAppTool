@@ -19,6 +19,8 @@ import androidx.annotation.RequiresPermission;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.yc.toolutils.BuildConfig;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -39,7 +41,7 @@ import static android.Manifest.permission.KILL_BACKGROUND_PROCESSES;
  *     revise:
  * </pre>
  */
-public final class ProcessUtils {
+public final class AppProcessUtils {
 
     private static String currentProcessName;
 
@@ -72,6 +74,7 @@ public final class ProcessUtils {
 
     /**
      * 通过Application新的API获取进程名，无需反射，无需IPC，效率最高。
+     * 这不就是我们想要的API吗！但是这个方法只有在android9【也就是aip28】之后的系统才能调用。
      */
     public static String getCurrentProcessNameByApplication() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -89,6 +92,10 @@ public final class ProcessUtils {
         String processName = null;
         try {
             //ActivityThread.currentProcessName()方法居然是public static的
+            //ActivityThread类是hide的，app无法直接调用。
+            //继续翻源码，看看这个方法是什么时候新增的。发现这个方法在android4.3.1上就已经有了这个方法了。
+            //在android4.0.4上没有找到currentProcessName()方法。
+            //那么意味着，我们是不是可以反射调用 ActivityThread.currentProcessName()
             @SuppressLint("PrivateApi")
             final Method declaredMethod = Class.forName("android.app.ActivityThread",
                     false, Application.class.getClassLoader())
@@ -107,9 +114,11 @@ public final class ProcessUtils {
     /**
      * 通过ActivityManager 获取进程名，需要IPC通信
      * 1。ActivityManager.getRunningAppProcesses() 方法需要跨进程通信，效率不高。
-     * 需要 和 系统进程的 ActivityManagerService 通信。必然会导致该方法调用耗时。
+     *    需要 和 系统进程的 ActivityManagerService 通信。必然会导致该方法调用耗时。
      * 2。拿到RunningAppProcessInfo的列表之后，还需要遍历一遍找到与当前进程的信息。
-     * 3。ActivityManager.getRunningAppProcesses() 有可能调用失败，返回null，也可能 AIDL 调用失败。调用失败是极低的概率。
+     * 3。ActivityManager.getRunningAppProcesses()有可能调用失败，返回null，也可能 AIDL 调用失败。
+     *    当然ActivityManager.getRunningAppProcesses()调用失败是极低的概率。
+     *    当你的APP用户量达到一定的数量级别时，一定会有用户遇到ActivityManager.getRunningAppProcesses()调用失败的情况。
      */
     public static String getCurrentProcessNameByActivityManager(@NonNull Context context) {
         if (context == null) {
@@ -291,12 +300,18 @@ public final class ProcessUtils {
     }
 
     /**
-     * Return whether app running in the main process.
+     * 判断是否在主线程
      *
      * @return {@code true}: yes<br>{@code false}: no
      */
     public static boolean isMainProcess(Context context) {
-        return context.getPackageName().equals(getCurrentProcessName(context));
+        if (context == null){
+            return false;
+        }
+        //获取当前进程名，并与主进程对比，来判断是否为主进程
+        String packageName = context.getPackageName();
+        String currentProcessName = getCurrentProcessName(context);
+        return packageName.equals(currentProcessName);
     }
 
     /**

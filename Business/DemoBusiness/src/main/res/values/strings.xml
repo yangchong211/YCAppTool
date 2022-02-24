@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="lf_other_name">小杨测试</string>
-
+    <string name="lf_other_name" translatable="false">小杨测试</string>
 </resources>

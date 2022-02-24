@@ -4,12 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import com.yc.localelib.observer.MultiLanguages;
+import com.yc.localelib.service.LocaleService;
 
 import java.util.Locale;
 
 /**
- * 语种配置保存类
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : 配置保存类
+ *     revise :
+ * </pre>
  */
 public final class LocaleSpUtils {
 
@@ -22,6 +28,9 @@ public final class LocaleSpUtils {
 
     }
 
+    /**
+     * 设置保存的 SharedPreferences 文件名（请在 Application 初始化之前设置，可以放在 Application 中的代码块或者静态代码块）
+     */
     public static synchronized void setSharedPreferencesName(String name) {
         sSharedPreferencesName = name;
     }
@@ -45,7 +54,7 @@ public final class LocaleSpUtils {
             if (!TextUtils.isEmpty(language)) {
                 sCurrentLanguage = new Locale(language, country);
             } else {
-                sCurrentLanguage = LanguagesUtils.getLocale(context);
+                sCurrentLanguage = LocaleToolUtils.getLocale(context);
             }
         }
         return sCurrentLanguage;
@@ -57,7 +66,7 @@ public final class LocaleSpUtils {
     }
 
     public static synchronized void clearLanguage(Context context) {
-        sCurrentLanguage = MultiLanguages.getSystemLanguage();
+        sCurrentLanguage = LocaleService.getInstance().getSystemLanguage();
         getSharedPreferences(context).edit()
                 .remove(KEY_LANGUAGE)
                 .remove(KEY_COUNTRY)

@@ -21,7 +21,7 @@ import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.customwidget.PasswordEditText;
 import com.yc.library.base.mvp.BaseActivity;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 /**
  * <pre>

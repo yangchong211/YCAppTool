@@ -14,7 +14,7 @@ import com.blankj.utilcode.util.Utils;
 import com.yc.cn.ycgallerylib.gallery.GalleryImageView;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.library.base.mvp.BaseActivity;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -201,6 +201,7 @@ dependencies {
     implementation project(path: ':AnimBusiness')
     implementation project(path: ':AppStatusLib')
     implementation project(path: ':MonitorFileLib')
+    implementation project(path: ':LocaleHelperLib')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')

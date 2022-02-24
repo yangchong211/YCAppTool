@@ -42,6 +42,7 @@
 
         <activity android:name="com.yc.lifehelper.MainActivity"/>
         <service android:name="com.yc.library.base.app.InitializeService"/>
+        <activity android:name="com.yc.lifehelper.LocaleActivity"/>
     </application>
 
 </manifest>

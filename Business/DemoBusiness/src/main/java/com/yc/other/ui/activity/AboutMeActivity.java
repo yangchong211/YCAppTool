@@ -12,7 +12,7 @@ import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
 import com.yc.library.base.mvp.BaseActivity;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 
 /**

@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.configlayer.arounter.RouterConfig;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 /**
  * <pre>

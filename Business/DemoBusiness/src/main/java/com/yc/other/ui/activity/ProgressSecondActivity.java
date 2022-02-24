@@ -11,7 +11,7 @@ import com.ns.yc.ycprogresslib.OnCircleProgressListener;
 import com.ns.yc.ycprogresslib.ProgressBarUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.library.base.mvp.BaseActivity;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 
 /**

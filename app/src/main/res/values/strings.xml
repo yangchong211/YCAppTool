@@ -2,4 +2,5 @@
 <resources>
     <string name="app_yc_name">生活助手</string>
     <string name="about_me_more">关于博客汇总</string>
+    <string name="current_language" >跟随系统</string>
 </resources>

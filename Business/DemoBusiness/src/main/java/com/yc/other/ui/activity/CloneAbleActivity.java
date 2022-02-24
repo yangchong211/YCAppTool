@@ -1,7 +1,7 @@
 package com.yc.other.ui.activity;
 
 import com.yc.library.base.mvp.BaseActivity;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

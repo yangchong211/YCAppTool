@@ -1,14 +1,30 @@
 package com.yc.localelib.service;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+
+import com.yc.localelib.listener.OnLocaleChangedListener;
+
 import java.util.List;
 import java.util.Locale;
 
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : 服务接口
+ *     revise :
+ * </pre>
+ */
 public interface LocaleServiceProvider {
 
-    void init(Context context);
+    void init(Application context);
+
+
+    Application getApplication();
 
     /**
      * 用这个方法替换 Activity 的 attachBaseContext 内部处理了 7.0 及之后版本切换 locale 的逻辑
@@ -25,6 +41,14 @@ public interface LocaleServiceProvider {
      */
     Locale getCurrentLocale();
 
+    /**
+     * 获取当前 系统 使用的 locale
+     *
+     * @return locale
+     */
+    Locale getSystemLanguage();
+
+    boolean isSystemLanguage();
     /**
      * 获取当前 app 使用的 locale tag
      *
@@ -53,19 +77,9 @@ public interface LocaleServiceProvider {
      */
     List<Locale> getSupportLocaleList();
 
-    /**
-     * @param intent 需要重启的 activity 的 intent，一般为初始页面；如果不传，则不重启，只修改 configuration
-     * @param targetLocale 需要切换到的 locale
-     * @return 切换后的 locale tag
-     */
-    Locale switchLocale(Intent intent, Locale targetLocale);
+    boolean clearAppLanguage(Context context);
 
-    /**
-     * @param intent 需要重启的 activity 的 intent，一般为初始页面；如果不传，则不重启，只修改 configuration
-     * @param targetLocaleTag 需要切换到的 locale tag
-     * @return 切换后的 locale tag
-     */
-    Locale switchLocale(Intent intent, String targetLocaleTag);
+    boolean setAppLanguage(Context context, Locale newLocale);
 
     void addOnLocaleChangedListener(OnLocaleChangedListener listener);
 
@@ -74,10 +88,5 @@ public interface LocaleServiceProvider {
     List<OnLocaleChangedListener> getOnLocaleChangedListeners();
 
     void refreshLocale(Context context);
-
-    interface OnLocaleChangedListener {
-        void onLocaleChanged(Locale oldLocale, Locale newLocale);
-    }
-
 
 }

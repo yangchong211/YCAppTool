@@ -124,6 +124,7 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
 
     api(rootProject.ext.dependencies["router"])
+    implementation project(path: ':LocaleHelperLib')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':ConfigLayer')

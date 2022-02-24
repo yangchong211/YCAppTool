@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 
 import com.yc.toolutils.logger.AppLogUtils;
-import com.yc.toolutils.process.ProcessUtils;
+import com.yc.toolutils.process.AppProcessUtils;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
@@ -457,7 +457,7 @@ public final class ScreenShotUtils {
              * 判断依据：应用在前台
              */
             if (null != mContext && null != mContext.get()) {
-                boolean runningInForeground = ProcessUtils
+                boolean runningInForeground = AppProcessUtils
                         .isRunningInForeground(mContext.get().getApplicationContext());
                 if (runningInForeground) {
                     handleMediaContentChange(mContentUri);

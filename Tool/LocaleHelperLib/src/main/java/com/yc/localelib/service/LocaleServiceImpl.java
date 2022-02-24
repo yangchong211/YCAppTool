@@ -1,116 +1,208 @@
 package com.yc.localelib.service;
 
+import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
+import android.content.res.Resources;
 
+import com.yc.localelib.listener.OnLocaleChangedListener;
+import com.yc.localelib.observer.ActivityCallback;
+import com.yc.localelib.observer.LanguagesObserver;
+import com.yc.localelib.utils.LocaleSpUtils;
 import com.yc.localelib.utils.LocaleToolUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : 服务接口实现具体类
+ *     revise :
+ * </pre>
+ */
 public class LocaleServiceImpl implements LocaleServiceProvider {
 
+    /**
+     * 应用上下文对象
+     */
+    private static Application sApplication;
+    private final List<OnLocaleChangedListener> listeners = new ArrayList<>();
 
-    public List<Locale> getDefaultList() {
-        List<Locale> defaultList = new ArrayList<>();
-        defaultList.add(new Locale("en"));
-        defaultList.add(new Locale("es"));
-        defaultList.add(new Locale("pt"));
-        defaultList.add(new Locale("ja"));
-        defaultList.add(new Locale("zh"));
-        return defaultList;
+    /**
+     * 获取应用上下文
+     */
+    public Application getApplication() {
+        return sApplication;
     }
 
     @Override
-    public void init(Context context) {
+    public void init(Application context) {
         if (context == null) {
             throw new NullPointerException("context is null!");
         }
+        init(context, false);
     }
 
+    private void init(Application application, boolean inject) {
+        sApplication = application;
+        LanguagesObserver.register(application);
+        LocaleToolUtils.setDefaultLocale(application);
+        if (inject) {
+            ActivityCallback.inject(application);
+        }
+    }
+
+    /**
+     * 在上下文的子类中重写 attachBaseContext 方法（用于更新 Context 的语种）
+     */
     @Override
     public Context attachBaseContext(Context context) {
         // 8.0需要使用createConfigurationContext处理
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             // getSetLocale方法是获取新设置的语言
             Locale locale = LocaleToolUtils.tagToLocale(getRlabLocale());
             return LocaleToolUtils.setLocale(context,locale);
         } else {
             return context;
+        }*/
+
+        if (LocaleToolUtils.getLocale(context).equals(LocaleSpUtils.getAppLanguage(context))) {
+            return context;
         }
+        return LocaleToolUtils.attachLanguages(context, LocaleSpUtils.getAppLanguage(context));
     }
 
     @Override
     public Locale getCurrentLocale() {
-        String localeFromPre = getLocaleFromPre();
-        return LocaleToolUtils.tagToLocale(localeFromPre);
+        return LocaleSpUtils.getAppLanguage(sApplication);
+    }
+
+    /**
+     * 获取系统的语种
+     */
+    @Override
+    public Locale getSystemLanguage() {
+        return LanguagesObserver.getSystemLanguage();
+    }
+
+    /**
+     * 是否跟随系统的语种
+     */
+    @Override
+    public boolean isSystemLanguage() {
+        return LocaleSpUtils.isSystemLanguage(sApplication);
     }
 
     @Override
     public String getCurrentLocaleTag() {
-        return getLocaleFromPre();
+        return "";
     }
 
     @Override
     public Locale getCurrentLang() {
-        return LocaleToolUtils.tagToLocale(getLang());
+        return null;
     }
 
     @Override
     public String getCurrentLangTag() {
-        return getLang();
+        return "";
     }
 
     @Override
     public List<Locale> getSupportLocaleList() {
         List<Locale> resultList = new ArrayList<>();
-        resultList.addAll(getDefaultList());
         return resultList;
     }
 
+    /**
+     * 跟随系统语种
+     *
+     * @return              语种是否发生改变了
+     */
     @Override
-    public Locale switchLocale(Intent intent, Locale targetLocale) {
-       return null;
+    public boolean clearAppLanguage(Context context) {
+        LocaleSpUtils.clearLanguage(context);
+        if (LocaleToolUtils.getLocale(context).equals(getSystemLanguage())) {
+            return false;
+        }
+
+        LocaleToolUtils.updateLanguages(context.getResources(), getSystemLanguage());
+        LocaleToolUtils.setDefaultLocale(context);
+        if (context != sApplication) {
+            // 更新 Application 的语种
+            LocaleToolUtils.updateLanguages(sApplication.getResources(), getSystemLanguage());
+        }
+        return true;
     }
 
+    /**
+     * 设置 App 的语种
+     *
+     * @return              语种是否发生改变了
+     */
     @Override
-    public Locale switchLocale(Intent intent, String targetLocaleTag) {
-        return switchLocale(intent, LocaleToolUtils.tagToLocale(targetLocaleTag));
+    public boolean setAppLanguage(Context context, Locale newLocale) {
+        LocaleSpUtils.setAppLanguage(context, newLocale);
+        if (LocaleToolUtils.getLocale(context).equals(newLocale)) {
+            return false;
+        }
+
+        Locale oldLocale = LocaleToolUtils.getLocale(context);
+        // 更新 Context 的语种
+        LocaleToolUtils.updateLanguages(context.getResources(), newLocale);
+        if (context != sApplication) {
+            // 更新 Application 的语种
+            LocaleToolUtils.updateLanguages(sApplication.getResources(), newLocale);
+        }
+
+        LocaleToolUtils.setDefaultLocale(context);
+        List<OnLocaleChangedListener> onLocaleChangedListeners = getOnLocaleChangedListeners();
+        if (onLocaleChangedListeners!=null && onLocaleChangedListeners.size()>0){
+            for (int i=0 ; i<onLocaleChangedListeners.size() ; i++){
+                OnLocaleChangedListener onLocaleChangedListener = onLocaleChangedListeners.get(i);
+                if (onLocaleChangedListener != null) {
+                    onLocaleChangedListener.onAppLocaleChange(oldLocale, newLocale);
+                }
+            }
+        }
+        return true;
     }
 
     @Override
     public void addOnLocaleChangedListener(OnLocaleChangedListener listener) {
-
+        listeners.add(listener);
     }
 
     @Override
     public void removeOnLocaleChangedListener(OnLocaleChangedListener listener) {
-
+        listeners.remove(listener);
     }
 
     @Override
     public List<OnLocaleChangedListener> getOnLocaleChangedListeners() {
-        return null;
+        return listeners;
     }
 
     @Override
     public void refreshLocale(Context context) {
-
+        updateAppLanguage(context.getResources());
     }
 
-    private String getLocaleFromPre() {
-        return "";
+    /**
+     * 更新 Resources 的语种
+     */
+    public void updateAppLanguage(Resources resources) {
+        if (resources == null) {
+            return;
+        }
+        if (LocaleToolUtils.getLocale(resources.getConfiguration()).equals(getCurrentLocale())) {
+            return;
+        }
+        LocaleToolUtils.updateLanguages(resources, getCurrentLocale());
     }
 
-    private String getRlabLocale() {
-        return "";
-    }
-
-    private String getLang() {
-        return "";
-    }
 
 }

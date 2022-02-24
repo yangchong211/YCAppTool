@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.yc.serialtasklib.AppendMode;
 import com.yc.serialtasklib.SerialTaskQueue;
 import com.yc.serialtasklib.Task;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

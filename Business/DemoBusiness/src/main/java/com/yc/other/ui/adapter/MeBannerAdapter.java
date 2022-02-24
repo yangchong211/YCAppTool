@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.yc.imageserver.utils.GlideImageUtils;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 import java.util.ArrayList;
 import java.util.List;

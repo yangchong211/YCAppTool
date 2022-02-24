@@ -10,6 +10,16 @@ import android.util.DisplayMetrics;
 
 import java.util.Locale;
 
+
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : 工具类
+ *     revise :
+ * </pre>
+ */
 public final class LocaleToolUtils {
 
     /**
@@ -110,6 +120,97 @@ public final class LocaleToolUtils {
 
 
     /**
+     * 获取语种对象
+     */
+    public static Locale getLocale(Context context) {
+        return getLocale(context.getResources().getConfiguration());
+    }
+
+    public static Locale getLocale(Configuration config) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return config.getLocales().get(0);
+        } else  {
+            return config.locale;
+        }
+    }
+
+    /**
+     * 设置语种对象
+     */
+    public static void setLocale(Configuration config, Locale locale) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                LocaleList localeList = new LocaleList(locale);
+                config.setLocales(localeList);
+            } else {
+                config.setLocale(locale);
+            }
+        } else {
+            config.locale = locale;
+        }
+    }
+
+    /**
+     * 设置默认的语种环境（日期格式化会用到）
+     */
+    public static void setDefaultLocale(Context context) {
+        Configuration configuration = context.getResources().getConfiguration();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            LocaleList.setDefault(configuration.getLocales());
+        } else {
+            Locale.setDefault(configuration.locale);
+        }
+    }
+
+    /**
+     * 绑定当前 App 的语种
+     */
+    public static Context attachLanguages(Context context, Locale locale) {
+        Resources resources = context.getResources();
+        Configuration config = new Configuration(resources.getConfiguration());
+        setLocale(config, locale);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            context = context.createConfigurationContext(config);
+        }
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+        return context;
+    }
+
+    /**
+     * 更新 Resources 语种
+     */
+    public static void updateLanguages(Resources resources, Locale locale) {
+        Configuration config = resources.getConfiguration();
+        setLocale(config, locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+    }
+
+    /**
+     * 更新手机配置信息变化
+     */
+    public static void updateConfigurationChanged(Context context, Configuration newConfig) {
+        Configuration config = new Configuration(newConfig);
+        // 绑定当前语种到这个新的配置对象中
+        setLocale(config, LocaleSpUtils.getAppLanguage(context));
+        Resources resources = context.getResources();
+        // 更新上下文的配置信息
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+    }
+
+    /**
+     * 获取某个语种下的 Resources 对象
+     */
+    public static Resources getLanguageResources(Context context, Locale locale) {
+        Configuration config = new Configuration();
+        setLocale(config, locale);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return context.createConfigurationContext(config).getResources();
+        }
+        return new Resources(context.getAssets(),
+                context.getResources().getDisplayMetrics(), config);
+    }
+
+    /**
      * 根据localeTag获取对应的locale
      * @param localeTag                         localeTag
      * @return
@@ -123,12 +224,28 @@ public final class LocaleToolUtils {
 
     /**
      * 比较两个语言，是否相同
-     * @return true：同一语言，false：不同语言
+
      */
     public static boolean equalLocales(Locale cur, Locale tar) {
         String curLang = cur.getLanguage();
         String tarLang = tar.getLanguage();
         return curLang.startsWith(tarLang);
+    }
+
+
+    /**
+     * 获取某个语种下的 String
+     */
+    public static String getLanguageString(Context context, Locale locale, int id) {
+        return getLanguageResources(context, locale).getString(id);
+    }
+
+    /**
+     * 对比两个语言是否是同一个语种（比如：中文的简体和繁体，英语的美式和英式）
+     * @return true：同一语言，false：不同语言
+     */
+    public static boolean equalsLanguage(Locale locale1, Locale locale2) {
+        return locale1.getLanguage().equals(locale2.getLanguage());
     }
 
     /**

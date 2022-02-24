@@ -1,32 +1,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ycbjie.other" >
+    package="com.yc.other" >
 
     <application>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.TestActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.AboutMeActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.MeFeedBackActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ImageGalleryActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.MeLoginActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ZoomLargeImageActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.MeBannerActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.BannerViewActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.SnapHelperActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ProgressFirstActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ProgressSecondActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ProgressThirdActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.ScrollActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.MixtureTextViewActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.CloneAbleActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.TimerActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.TimerMainActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.MyCountActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.ChronometerActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.CountActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.CountViewActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.timer.HandlerActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.LocaleActivity"/>
-        <activity android:name="com.ycbjie.other.com.yc.other.ui.activity.SerialTaskActivity"/>
-        <activity android:name="com.ycbjie.other.ui.location.LocationTestActivity"/>
+        <activity android:name="com.yc.other.ui.activity.TestActivity"/>
+        <activity android:name="com.yc.other.ui.activity.AboutMeActivity"/>
+        <activity android:name="com.yc.other.ui.activity.MeFeedBackActivity"/>
+        <activity android:name="com.yc.other.ui.activity.ImageGalleryActivity"/>
+        <activity android:name="com.yc.other.ui.activity.MeLoginActivity"/>
+        <activity android:name="com.yc.other.ui.activity.ZoomLargeImageActivity"/>
+        <activity android:name="com.yc.other.ui.activity.MeBannerActivity"/>
+        <activity android:name="com.yc.other.ui.activity.BannerViewActivity"/>
+        <activity android:name="com.yc.other.ui.activity.SnapHelperActivity"/>
+        <activity android:name="com.yc.other.ui.activity.ProgressFirstActivity"/>
+        <activity android:name="com.yc.other.ui.activity.ProgressSecondActivity"/>
+        <activity android:name="com.yc.other.ui.activity.ProgressThirdActivity"/>
+        <activity android:name="com.yc.other.ui.activity.ScrollActivity"/>
+        <activity android:name="com.yc.other.ui.activity.MixtureTextViewActivity"/>
+        <activity android:name="com.yc.other.ui.activity.CloneAbleActivity"/>
+        <activity android:name="com.yc.other.ui.timer.TimerActivity"/>
+        <activity android:name="com.yc.other.ui.timer.TimerMainActivity"/>
+        <activity android:name="com.yc.other.ui.timer.MyCountActivity"/>
+        <activity android:name="com.yc.other.ui.timer.ChronometerActivity"/>
+        <activity android:name="com.yc.other.ui.timer.CountActivity"/>
+        <activity android:name="com.yc.other.ui.timer.CountViewActivity"/>
+        <activity android:name="com.yc.other.ui.timer.HandlerActivity"/>
+        <activity android:name="com.yc.other.ui.activity.SerialTaskActivity"/>
     </application>
 
 

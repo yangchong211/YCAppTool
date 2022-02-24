@@ -9,7 +9,6 @@ import org.gradle.api.tasks.compile.JavaCompile
 class SpiPlugin implements Plugin<Project> {
 
 
-
     @Override
     void apply(final Project project) {
         project.afterEvaluate {

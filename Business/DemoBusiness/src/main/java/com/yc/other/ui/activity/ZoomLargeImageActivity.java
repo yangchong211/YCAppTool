@@ -8,7 +8,7 @@ import com.yc.cn.ycgallerylib.zoom.view.ZoomLayoutView;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.base.mvp.BaseActivity;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 
 /**

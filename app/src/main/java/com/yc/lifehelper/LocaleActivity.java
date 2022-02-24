@@ -1,16 +1,18 @@
-package com.yc.other.ui.activity;
+package com.yc.lifehelper;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.yc.localelib.service.LocaleService;
 import com.yc.localelib.utils.LocaleToolUtils;
-import com.ycbjie.other.R;
 
 import java.util.List;
 import java.util.Locale;
@@ -20,6 +22,27 @@ public class LocaleActivity extends AppCompatActivity {
     private TextView mTv1;
     private TextView mTv2;
     private TextView mTv3;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        // 绑定语种
+        super.attachBaseContext(LocaleService.getInstance().attachBaseContext(newBase));
+    }
+
+    /**
+     * 开启页面
+     *
+     * @param context 上下文
+     */
+    public static void startActivity(Context context) {
+        try {
+            Intent target = new Intent();
+            target.setClass(context, LocaleActivity.class);
+            context.startActivity(target);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +56,59 @@ public class LocaleActivity extends AppCompatActivity {
 
         initListener();
         initData();
+
+        //((TextView) findViewById(R.id.tv_language_activity)).setText(this.getResources().getString(R.string.current_language));
+        ((TextView) findViewById(R.id.tv_main_language_application)).setText(getApplication().getResources().getString(R.string.current_language));
+        ((TextView) findViewById(R.id.tv_main_language_system)).setText(LocaleToolUtils.getLanguageString(this, LocaleService.getInstance().getSystemLanguage(), R.string.current_language));
+        RadioGroup radioGroup = findViewById(R.id.rg_main_languages);
+        if (LocaleService.getInstance().isSystemLanguage()) {
+            radioGroup.check(R.id.rb_main_language_auto);
+        } else {
+            Locale locale = LocaleService.getInstance().getCurrentLocale();
+            if (Locale.CHINA.equals(locale)) {
+                radioGroup.check(R.id.rb_main_language_cn);
+            } else if (Locale.TAIWAN.equals(locale)) {
+                radioGroup.check(R.id.rb_main_language_tw);
+            } else if (Locale.ENGLISH.equals(locale)) {
+                radioGroup.check(R.id.rb_main_language_en);
+            } else {
+                radioGroup.check(R.id.rb_main_language_auto);
+            }
+        }
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // 是否需要重启
+                boolean restart = false;
+
+                if (checkedId == R.id.rb_main_language_auto) {
+                    // 跟随系统
+                    restart = LocaleService.getInstance().clearAppLanguage(LocaleActivity.this);
+                } else if (checkedId == R.id.rb_main_language_cn) {
+                    // 简体中文
+                    restart = LocaleService.getInstance().setAppLanguage(LocaleActivity.this, Locale.CHINA);
+                } else if (checkedId == R.id.rb_main_language_tw) {
+                    // 繁体中文
+                    restart = LocaleService.getInstance().setAppLanguage(LocaleActivity.this, Locale.TAIWAN);
+                } else if (checkedId == R.id.rb_main_language_en) {
+                    // 英语
+                    restart = LocaleService.getInstance().setAppLanguage(LocaleActivity.this, Locale.ENGLISH);
+                }
+
+                if (restart) {
+                    // 1.使用recreate来重启Activity的效果差，有闪屏的缺陷
+                    // recreate();
+
+                    // 2.使用常规startActivity来重启Activity，有从左向右的切换动画，稍微比recreate的效果好一点，但是这种并不是最佳的效果
+                    // startActivity(new Intent(this, LanguageActivity.class));
+                    // finish();
+
+                    // 3.我们可以充分运用 Activity 跳转动画，在跳转的时候设置一个渐变的效果，相比前面的两种带来的体验是最佳的
+                    startActivity(new Intent(LocaleActivity.this, MainActivity.class));
+                    finish();
+                }
+            }
+        });
     }
 
     private void initListener() {

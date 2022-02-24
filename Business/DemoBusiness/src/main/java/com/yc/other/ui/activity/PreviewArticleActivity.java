@@ -16,7 +16,7 @@ import com.ns.yc.yccustomtextlib.edit.model.HyperEditData;
 import com.ns.yc.yccustomtextlib.edit.view.HyperImageView;
 import com.ns.yc.yccustomtextlib.edit.view.HyperTextView;
 import com.yc.imageserver.transformations.TransformationScale;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 import com.yc.other.tool.ModelStorage;
 
 import java.util.List;

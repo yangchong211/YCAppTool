@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ycbjie.other.R;
+import com.yc.other.R;
 import androidx.annotation.Nullable;
 import com.yc.timerlib.view.TimerTextView;
 

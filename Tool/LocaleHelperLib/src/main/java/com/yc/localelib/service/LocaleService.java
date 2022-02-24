@@ -1,11 +1,23 @@
 package com.yc.localelib.service;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+
+import com.yc.localelib.listener.OnLocaleChangedListener;
 
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : 服务
+ *     revise :
+ * </pre>
+ */
 public final class LocaleService implements LocaleServiceProvider {
 
     private final LocaleServiceProvider mDelegate = new LocaleServiceImpl();
@@ -19,20 +31,35 @@ public final class LocaleService implements LocaleServiceProvider {
     }
 
     @Override
-    public final void init(final Context arg0) {
+    public final void init(final Application context) {
         if (null != this.mDelegate) {
-            this.mDelegate.init(arg0);
+            this.mDelegate.init(context);
         }
     }
 
     @Override
-    public final Context attachBaseContext(final Context arg0) {
-        return null != this.mDelegate ? this.mDelegate.attachBaseContext(arg0) : null;
+    public Application getApplication() {
+        return null != this.mDelegate ? this.mDelegate.getApplication() : null;
+    }
+
+    @Override
+    public final Context attachBaseContext(final Context context) {
+        return null != this.mDelegate ? this.mDelegate.attachBaseContext(context) : null;
     }
 
     @Override
     public final Locale getCurrentLocale() {
         return null != this.mDelegate ? this.mDelegate.getCurrentLocale() : null;
+    }
+
+    @Override
+    public Locale getSystemLanguage() {
+        return null != this.mDelegate ? this.mDelegate.getSystemLanguage() : null;
+    }
+
+    @Override
+    public boolean isSystemLanguage() {
+        return false;
     }
 
     @Override
@@ -56,38 +83,38 @@ public final class LocaleService implements LocaleServiceProvider {
     }
 
     @Override
-    public final Locale switchLocale(final Intent arg0, final Locale arg1) {
-        return null != this.mDelegate ? this.mDelegate.switchLocale(arg0, arg1) : null;
+    public boolean clearAppLanguage(Context context) {
+        return null != this.mDelegate ? this.mDelegate.clearAppLanguage(context) : false;
     }
 
     @Override
-    public final Locale switchLocale(final Intent arg0, final String arg1) {
-        return null != this.mDelegate ? this.mDelegate.switchLocale(arg0, arg1) : null;
+    public boolean setAppLanguage(Context context, Locale newLocale) {
+        return null != this.mDelegate ? this.mDelegate.setAppLanguage(context,newLocale) : false;
     }
 
     @Override
-    public final void addOnLocaleChangedListener(final LocaleServiceProvider.OnLocaleChangedListener arg0) {
+    public final void addOnLocaleChangedListener(final OnLocaleChangedListener arg0) {
         if (null != this.mDelegate) {
             this.mDelegate.addOnLocaleChangedListener(arg0);
         }
     }
 
     @Override
-    public final void removeOnLocaleChangedListener(final LocaleServiceProvider.OnLocaleChangedListener arg0) {
+    public final void removeOnLocaleChangedListener(final OnLocaleChangedListener arg0) {
         if (null != this.mDelegate) {
             this.mDelegate.removeOnLocaleChangedListener(arg0);
         }
     }
 
     @Override
-    public final List<LocaleServiceProvider.OnLocaleChangedListener> getOnLocaleChangedListeners() {
+    public final List<OnLocaleChangedListener> getOnLocaleChangedListeners() {
         return null != this.mDelegate ? this.mDelegate.getOnLocaleChangedListeners() : null;
     }
 
     @Override
-    public final void refreshLocale(final Context arg0) {
+    public final void refreshLocale(final Context context) {
         if (null != this.mDelegate) {
-            this.mDelegate.refreshLocale(arg0);
+            this.mDelegate.refreshLocale(context);
         }
     }
 

@@ -25,7 +25,6 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.banner.view.BannerView;
-import com.yc.cn.ycbannerlib.marquee.MarqueeView;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
@@ -33,19 +32,15 @@ import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.web.WebViewActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
-import com.yc.toollib.crash.CrashToolUtils;
 import com.yc.toolutils.activity.ActivityManager;
 import com.yc.toolutils.click.FastClickUtils;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
 
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
-
-import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -222,6 +217,7 @@ public class MainActivity extends BaseActivity{
                             FileExplorerActivity.startActivity(MainActivity.this);
                             break;
                         case R.id.tv_home_second:
+                            LocaleActivity.startActivity(MainActivity.this);
                             break;
                         case R.id.tv_home_third:
                             break;

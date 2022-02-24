@@ -38,10 +38,14 @@ public class FileExplorerActivity extends AppCompatActivity {
      * @param context 上下文
      */
     public static void startActivity(Context context) {
-        Intent target = new Intent();
-        target.setClass(context, FileExplorerActivity.class);
-        target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(target);
+        try {
+            Intent target = new Intent();
+            target.setClass(context, FileExplorerActivity.class);
+            target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(target);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

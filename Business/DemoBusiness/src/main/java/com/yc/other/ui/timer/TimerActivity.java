@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 
 import com.yc.timerlib.timer.CountTimeTools;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

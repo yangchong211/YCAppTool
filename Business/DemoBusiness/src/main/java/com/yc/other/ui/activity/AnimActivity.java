@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 public class AnimActivity extends AppCompatActivity implements View.OnClickListener {
 

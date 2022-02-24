@@ -11,7 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.widget.blurview.RealTimeBlurView;
 import com.yc.library.base.mvp.BaseActivity;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 @Route(path = RouterConfig.Demo.ACTIVITY_OTHER_TEST_ACTIVITY)
 public class TestActivity extends BaseActivity implements View.OnClickListener {
@@ -68,8 +68,6 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             startActivity(new Intent(this, CloneAbleActivity.class));
         }else if (i == R.id.tv_10){
             startShowDialog();
-        } else if (i == R.id.tv_11){
-            startActivity(new Intent(this, LocaleActivity.class));
         } else if (i == R.id.tv_12){
             startActivity(new Intent(this, SerialTaskActivity.class));
         }

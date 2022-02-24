@@ -48,7 +48,7 @@ import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.imageserver.transformations.TransformationScale;
 import com.yc.other.tool.ModelStorage;
-import com.ycbjie.other.R;
+import com.yc.other.R;
 
 
 import java.util.ArrayList;
