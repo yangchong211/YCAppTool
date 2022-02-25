@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,6 +44,9 @@ import com.yc.zxingserver.scan.Intents;
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -135,6 +139,30 @@ public class MainActivity extends BaseActivity{
                     ToastUtils.showRoundRectToast(result);
                 }
             }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (banner!=null){
+            banner.startAutoPlay();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (banner!=null){
+            banner.stopAutoPlay();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (banner!=null){
+            banner.releaseBanner();
         }
     }
 
@@ -246,7 +274,19 @@ public class MainActivity extends BaseActivity{
      * 初始化轮播图
      */
     private void initBanner() {
-
+        if (banner!=null){
+            List<Integer> list = new ArrayList<>();
+            list.add(R.drawable.bg_small_autumn_tree_min);
+            list.add(R.drawable.bg_small_kites_min);
+            list.add(R.drawable.bg_small_leaves_min);
+            list.add(R.drawable.bg_small_tulip_min);
+            list.add(R.drawable.bg_small_tree_min);
+            banner.setAnimationDuration(3000);
+            banner.setDelayTime(2000);
+            banner.setImages(list);
+            banner.setImageLoader(new BannerImageLoader());
+            banner.start();
+        }
     }
 
     /**

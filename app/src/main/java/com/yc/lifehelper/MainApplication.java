@@ -212,7 +212,7 @@ public class MainApplication extends LibApplication {
             @Override
             public void againStartApp() {
                 System.out.println("崩溃重启----------againStartApp------");
-                CrashToolUtils.reStartApp1(MainApplication.this,2000);
+                //CrashToolUtils.reStartApp1(MainApplication.this,2000);
                 //CrashToolUtils.reStartApp2(App.this,2000, MainActivity.class);
                 //CrashToolUtils.reStartApp3(App.this);
             }
