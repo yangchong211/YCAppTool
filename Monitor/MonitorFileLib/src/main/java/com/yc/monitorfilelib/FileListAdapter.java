@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yc.toolutils.file.AppFileUtils;
+
 import java.io.File;
 import java.util.List;
 
@@ -65,7 +67,7 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             File fileInfo = mFileList.get(position);
 
             myViewHolder.mName.setText(fileInfo.getName());
-            myViewHolder.mDate.setText(FileExplorerUtils.getFileTime(context,fileInfo));
+            myViewHolder.mDate.setText(AppFileUtils.getFileTime(fileInfo));
             if (fileInfo.isDirectory()) {
                 myViewHolder.mIcon.setImageResource(R.drawable.sand_box_dir_icon);
                 myViewHolder.mMoreBtn.setVisibility(View.VISIBLE);
@@ -82,7 +84,7 @@ public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 }
                 myViewHolder.mMoreBtn.setVisibility(View.GONE);
                 myViewHolder.mSize.setVisibility(View.VISIBLE);
-                long directorySize = FileExplorerUtils.getDirectorySize(fileInfo);
+                long directorySize = AppFileUtils.getDirectorySize(fileInfo);
                 SpannableString printSizeForSpannable = FileExplorerUtils.getPrintSizeForSpannable(directorySize);
                 myViewHolder.mSize.setText(printSizeForSpannable);
             }

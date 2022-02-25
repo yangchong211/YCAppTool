@@ -7,7 +7,8 @@ package com.yc.netlib.stetho;
 
 import androidx.annotation.Nullable;
 
-import com.yc.netlib.utils.NetLogUtils;
+
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -46,7 +47,7 @@ public class NetworkReporterImpl implements NetworkEventReporter {
      */
     @Override
     public void requestWillBeSent(InspectorRequest request) {
-        NetLogUtils.d(TAG, "requestWillBeSent");
+        AppLogUtils.d(TAG, "requestWillBeSent");
         //这里改为自己实现，可以把信息保存到map集合中
         mDataTranslator.saveInspectorRequest(request);
     }
@@ -57,13 +58,13 @@ public class NetworkReporterImpl implements NetworkEventReporter {
      */
     @Override
     public void responseHeadersReceived(InspectorResponse response) {
-        NetLogUtils.d(TAG, "responseHeadersReceived");
+        AppLogUtils.d(TAG, "responseHeadersReceived");
         mDataTranslator.saveInspectorResponse(response);
     }
 
     @Override
     public void httpExchangeFailed(String requestId, String errorText) {
-        NetLogUtils.d(TAG, "httpExchangeFailed");
+        AppLogUtils.d(TAG, "httpExchangeFailed");
     }
 
     @Nullable
@@ -71,68 +72,68 @@ public class NetworkReporterImpl implements NetworkEventReporter {
     public InputStream interpretResponseStream(String requestId, @Nullable String contentType,
                                                @Nullable String contentEncoding,
                                                @Nullable InputStream inputStream, ResponseHandler responseHandler) {
-        NetLogUtils.d(TAG, "interpretResponseStream");
+        AppLogUtils.d(TAG, "interpretResponseStream");
         return mDataTranslator.saveInterpretResponseStream(requestId, contentType, contentEncoding, inputStream);
     }
 
     @Override
     public void responseReadFailed(String requestId, String errorText) {
-        NetLogUtils.d(TAG, "responseReadFailed");
+        AppLogUtils.d(TAG, "responseReadFailed");
     }
 
     @Override
     public void responseReadFinished(String requestId) {
-        NetLogUtils.d(TAG, "responseReadFinished");
+        AppLogUtils.d(TAG, "responseReadFinished");
     }
 
     @Override
     public void dataSent(String requestId, int dataLength, int encodedDataLength) {
-        NetLogUtils.d(TAG, "dataSent");
+        AppLogUtils.d(TAG, "dataSent");
     }
 
     @Override
     public void dataReceived(String requestId, int dataLength, int encodedDataLength) {
-        NetLogUtils.d(TAG, "dataReceived");
+        AppLogUtils.d(TAG, "dataReceived");
     }
 
     @Override
     public String nextRequestId() {
-        NetLogUtils.d(TAG, "nextRequestId");
+        AppLogUtils.d(TAG, "nextRequestId");
         return String.valueOf(mNextRequestId.getAndIncrement());
     }
 
     @Override
     public void webSocketCreated(String requestId, String url) {
-        NetLogUtils.d(TAG, "webSocketCreated");
+        AppLogUtils.d(TAG, "webSocketCreated");
     }
 
     @Override
     public void webSocketClosed(String requestId) {
-        NetLogUtils.d(TAG, "webSocketClosed");
+        AppLogUtils.d(TAG, "webSocketClosed");
     }
 
     @Override
     public void webSocketWillSendHandshakeRequest(InspectorWebSocketRequest request) {
-        NetLogUtils.d(TAG, "webSocketWillSendHandshakeRequest");
+        AppLogUtils.d(TAG, "webSocketWillSendHandshakeRequest");
     }
 
     @Override
     public void webSocketHandshakeResponseReceived(InspectorWebSocketResponse response) {
-        NetLogUtils.d(TAG, "webSocketHandshakeResponseReceived");
+        AppLogUtils.d(TAG, "webSocketHandshakeResponseReceived");
     }
 
     @Override
     public void webSocketFrameSent(InspectorWebSocketFrame frame) {
-        NetLogUtils.d(TAG, "webSocketFrameSent");
+        AppLogUtils.d(TAG, "webSocketFrameSent");
     }
 
     @Override
     public void webSocketFrameReceived(InspectorWebSocketFrame frame) {
-        NetLogUtils.d(TAG, "webSocketFrameReceived");
+        AppLogUtils.d(TAG, "webSocketFrameReceived");
     }
 
     @Override
     public void webSocketFrameError(String requestId, String errorMessage) {
-        NetLogUtils.d(TAG, "webSocketFrameError");
+        AppLogUtils.d(TAG, "webSocketFrameError");
     }
 }

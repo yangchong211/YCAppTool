@@ -61,14 +61,6 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
     @Override
     public Context attachBaseContext(Context context) {
         // 8.0需要使用createConfigurationContext处理
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            // getSetLocale方法是获取新设置的语言
-            Locale locale = LocaleToolUtils.tagToLocale(getRlabLocale());
-            return LocaleToolUtils.setLocale(context,locale);
-        } else {
-            return context;
-        }*/
-
         if (LocaleToolUtils.getLocale(context).equals(LocaleSpUtils.getAppLanguage(context))) {
             return context;
         }
@@ -84,7 +76,7 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
      * 获取系统的语种
      */
     @Override
-    public Locale getSystemLanguage() {
+    public Locale getSystemLocale() {
         return LanguagesObserver.getSystemLanguage();
     }
 
@@ -92,7 +84,7 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
      * 是否跟随系统的语种
      */
     @Override
-    public boolean isSystemLanguage() {
+    public boolean isSystemLocale() {
         return LocaleSpUtils.isSystemLanguage(sApplication);
     }
 
@@ -125,15 +117,15 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
     @Override
     public boolean clearAppLanguage(Context context) {
         LocaleSpUtils.clearLanguage(context);
-        if (LocaleToolUtils.getLocale(context).equals(getSystemLanguage())) {
+        if (LocaleToolUtils.getLocale(context).equals(getSystemLocale())) {
             return false;
         }
 
-        LocaleToolUtils.updateLanguages(context.getResources(), getSystemLanguage());
+        LocaleToolUtils.updateLanguages(context.getResources(), getSystemLocale());
         LocaleToolUtils.setDefaultLocale(context);
         if (context != sApplication) {
             // 更新 Application 的语种
-            LocaleToolUtils.updateLanguages(sApplication.getResources(), getSystemLanguage());
+            LocaleToolUtils.updateLanguages(sApplication.getResources(), getSystemLocale());
         }
         return true;
     }

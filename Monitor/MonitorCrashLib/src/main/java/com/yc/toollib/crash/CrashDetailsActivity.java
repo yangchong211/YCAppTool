@@ -28,10 +28,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yc.toollib.R;
-import com.yc.toollib.tool.CompressUtils;
-import com.yc.toollib.tool.ScreenShotsUtils;
-import com.yc.toollib.tool.ToolFileUtils;
 import com.yc.toollib.tool.ToolAppManager;
+import com.yc.toolutils.file.AppFileUtils;
+import com.yc.toolutils.file.FileSaveUtils;
+import com.yc.toolutils.file.FileShareUtils;
+import com.yc.toolutils.image.CompressUtils;
+import com.yc.toolutils.screen.AppShotsUtils;
+import com.yc.toolutils.window.AppWindowUtils;
 
 import java.io.File;
 import java.util.List;
@@ -125,7 +128,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
                     }
                 }
                 //获取内容
-                crashContent = ToolFileUtils.readFile2String(filePath);
+                crashContent = AppFileUtils.readFile2String(filePath);
                 if (handler == null) {
                     return;
                 }
@@ -202,7 +205,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     private void saveScreenShot() {
         showProgressLoading("正在保存截图...");
         //生成截图
-        final Bitmap bitmap = ScreenShotsUtils.measureSize(this,mScrollViewCrashDetails);
+        final Bitmap bitmap = AppShotsUtils.measureSize(this,mScrollViewCrashDetails);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -213,8 +216,8 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
 
     private void savePicture(Bitmap bitmap) {
         if (bitmap != null) {
-            String crashPicPath = ToolFileUtils.getCrashPicPath(CrashDetailsActivity.this) + "/crash_pic_" + System.currentTimeMillis() + ".jpg";
-            boolean saveBitmap = CrashLibUtils.saveBitmap(CrashDetailsActivity.this, bitmap, crashPicPath);
+            String crashPicPath = CrashLibUtils.getCrashPicPath(CrashDetailsActivity.this) + "/crash_pic_" + System.currentTimeMillis() + ".jpg";
+            boolean saveBitmap = FileSaveUtils.saveBitmap(CrashDetailsActivity.this, bitmap, crashPicPath);
             if (saveBitmap) {
                 showToast("保存截图成功，请到相册查看\n路径：" + crashPicPath);
                 final Bitmap bitmapCompress = CompressUtils.getBitmap(new File(crashPicPath), 200, 200);
@@ -228,7 +231,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
                         mIvScreenShot.setVisibility(View.VISIBLE);
                         //设置宽高
                         ViewGroup.LayoutParams layoutParams = mIvScreenShot.getLayoutParams();
-                        layoutParams.width = CrashLibUtils.getScreenWidth(CrashDetailsActivity.this);
+                        layoutParams.width = AppWindowUtils.getScreenWidth(CrashDetailsActivity.this);
                         layoutParams.height = bitmapCompress.getHeight() * layoutParams.width / bitmapCompress.getWidth();
                         mIvScreenShot.setLayoutParams(layoutParams);
                         //设置显示动画
@@ -318,12 +321,12 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     private void shareLogs() {
         //先把文件转移到外部存储文件
         File srcFile = new File(filePath);
-        String destFilePath = ToolFileUtils.getCrashSharePath() + "/CrashShare.txt";
+        String destFilePath = AppFileUtils.getFileSharePath() + "/CrashShare.txt";
         File destFile = new File(destFilePath);
-        boolean copy = ToolFileUtils.copyFile(srcFile, destFile);
+        boolean copy = AppFileUtils.copyFile(srcFile, destFile);
         if (copy) {
             //分享
-            CrashLibUtils.shareFile(CrashDetailsActivity.this, destFile);
+            FileShareUtils.shareFile(CrashDetailsActivity.this, destFile);
         } else {
             Toast.makeText(CrashDetailsActivity.this, "文件保存失败", Toast.LENGTH_SHORT).show();
         }

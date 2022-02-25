@@ -185,7 +185,6 @@ static def releaseTime() {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(path: ':CustomWidget')
-    implementation project(path: ':CustomWidget')
     implementation project(path: ':CountTimerLib')
     implementation project(path: ':WidgetViewLib')
     implementation project(path: ':ToolUtilsLib')
@@ -200,8 +199,9 @@ dependencies {
     }
     implementation project(path: ':AnimBusiness')
     implementation project(path: ':AppStatusLib')
-    implementation project(path: ':MonitorFileLib')
+
     implementation project(path: ':LocaleHelperLib')
+    implementation project(path: ':StatusBarLib')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
@@ -210,10 +210,16 @@ dependencies {
     implementation project(path: ':ZxingServerLib')
     implementation project(path: ':NfcServer')
     implementation project(path: ':LongevityLib')
-
+    implementation project(path: ':MonitorNetLib')
     implementation project(path: ':BannerViewLib')
     implementation project(path: ':BlurViewLib')
 
+    implementation project(path: ':MonitorFileLib')
+    implementation project(path: ':MonitorNetLib')
+    implementation project(path: ':MonitorCrashLib')
+    implementation project(path: ':MonitorCatonLib')
+    implementation project(path: ':MonitorAnrLib')
+    implementation project(path: ':MonitorAliveLib')
 //    implementation 'com.github.yangchong211.YCAppTool:BlurViewLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:BannerViewLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:NfcServer:1.3.7'

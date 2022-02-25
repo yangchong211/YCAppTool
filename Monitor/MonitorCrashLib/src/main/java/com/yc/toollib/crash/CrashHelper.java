@@ -12,7 +12,7 @@ import com.yc.toollib.crash.compat.ActivityKillerV24_V25;
 import com.yc.toollib.crash.compat.ActivityKillerV26;
 import com.yc.toollib.crash.compat.ActivityKillerV28;
 import com.yc.toollib.crash.compat.IActivityKiller;
-import com.yc.toollib.tool.ToolLogUtils;
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.lang.reflect.Field;
 
@@ -276,12 +276,12 @@ public final class CrashHelper {
     }
 
     protected void setSafe(Thread thread, Throwable ex) {
-        ToolLogUtils.w(CrashHandler.TAG, "setSafe--- thread-----"+thread.getName());
+        AppLogUtils.w(CrashHandler.TAG, "setSafe--- thread-----"+thread.getName());
         //判断是否是同一个线程
         if (thread == Looper.getMainLooper().getThread()) {
             CrashHelper.getInstance().isChoreographerException(ex);
             CrashHelper.getInstance().safeMode();
-            ToolLogUtils.w(CrashHandler.TAG, "setSafe--- safeMode-----");
+            AppLogUtils.w(CrashHandler.TAG, "setSafe--- safeMode-----");
         }
     }
 

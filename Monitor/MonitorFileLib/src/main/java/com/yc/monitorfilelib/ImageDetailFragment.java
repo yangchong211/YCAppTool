@@ -25,6 +25,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yc.toolutils.file.AppFileUtils;
+import com.yc.toolutils.file.FileShareUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -125,13 +128,18 @@ public class ImageDetailFragment extends Fragment {
             } else {
                 //先把文件转移到外部存储文件
                 File srcFile = new File(mFile.getPath());
-                String newFilePath = FileExplorerUtils.getFileSharePath() + "/imageShare.png";
+                String newFilePath = AppFileUtils.getFileSharePath() + "/imageShare.png";
                 File destFile = new File(newFilePath);
                 //拷贝文件，将data/data源文件拷贝到新的目标文件路径下
-                boolean copy = FileExplorerUtils.copyFile(srcFile, destFile);
+                boolean copy = AppFileUtils.copyFile(srcFile, destFile);
                 if (copy) {
                     //分享
-                    FileExplorerUtils.shareFile(mActivity, destFile);
+                    boolean shareFile = FileShareUtils.shareFile(mActivity, destFile);
+                    if (shareFile){
+                        Toast.makeText(getContext(), "文件分享成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "文件分享失败", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(getContext(), "文件保存失败", Toast.LENGTH_SHORT).show();
                 }

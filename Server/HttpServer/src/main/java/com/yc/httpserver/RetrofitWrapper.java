@@ -5,9 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.yc.toollib.network.stetho.NetworkInterceptor;
-import com.yc.toollib.network.stetho.NetworkListener;
-
 import java.lang.reflect.Type;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -81,8 +78,8 @@ public class RetrofitWrapper {
      */
     public RetrofitWrapper(String url , ArrayList<Interceptor> interceptors) {
         builder = new OkHttpClient.Builder();
-        builder.eventListenerFactory(NetworkListener.get());
-        builder.addNetworkInterceptor(new NetworkInterceptor());
+        //builder.eventListenerFactory(NetworkListener.get());
+        //builder.addNetworkInterceptor(new NetworkInterceptor());
         //拦截日志，依赖
         builder.addInterceptor(new LoggerInterceptor());
         OkHttpClient build = builder.build();

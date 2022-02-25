@@ -1,7 +1,8 @@
 package com.yc.netlib.ping;
 
 
-import com.yc.netlib.utils.NetLogUtils;
+
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -59,7 +60,7 @@ public class NetSocket {
             //获取长度
             int len = _remoteInet.length;
             isConnnected = new boolean[len];
-            NetLogUtils.i("NetSocket----------isConnnected---"+isConnnected.length);
+            AppLogUtils.i("NetSocket----------isConnnected---"+isConnnected.length);
             for (int i = 0; i < len; i++) {
                 if (i != 0) {
                     this.listener.OnNetSocketUpdated("\n");
@@ -68,7 +69,7 @@ public class NetSocket {
                 //www.jianshu.com/47.92.108.93
                 String ip = _remoteIpList.get(i);
                 //47.92.108.93
-                NetLogUtils.i("NetSocket--------execIP---"+inetAddresses + "----"+ip);
+                AppLogUtils.i("NetSocket--------execIP---"+inetAddresses + "----"+ip);
                 isConnnected[i] = execIP(inetAddresses, ip);
             }
             for (Boolean i : isConnnected) {

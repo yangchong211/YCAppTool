@@ -12,6 +12,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.yc.netlib.utils.NetWorkUtils;
+import com.yc.toolutils.size.AppSizeUtils;
 
 import java.util.List;
 
@@ -206,7 +207,7 @@ public class NetPieChart extends View {
      * @param space
      */
     public void setSliceSpace(float space) {
-        mSliceSpace = NetWorkUtils.dp2px(getContext(),space);
+        mSliceSpace = AppSizeUtils.dp2px(getContext(),space);
     }
 
     /**
@@ -215,7 +216,7 @@ public class NetPieChart extends View {
      * @param ringWidth
      */
     public void setRingWidth(float ringWidth) {
-        mRingWidth = NetWorkUtils.dp2px(getContext(),ringWidth);
+        mRingWidth = AppSizeUtils.dp2px(getContext(),ringWidth);
     }
 
     /**

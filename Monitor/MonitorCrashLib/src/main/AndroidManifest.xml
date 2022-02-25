@@ -17,31 +17,6 @@
         <activity
             android:name=".crash.CrashTestActivity"
             android:screenOrientation="portrait"/>
-        <provider
-            android:name=".crash.CrashFileProvider"
-            android:authorities="${applicationId}.crashFileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/crash_file_provider" />
-        </provider>
-
-
-
-        <activity
-            android:name="com.yc.netlib.ui.NetRequestActivity"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTask"/>
-        <activity
-            android:name="com.yc.netlib.ui.NetworkDetailActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.yc.netlib.floating.FloatActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="standard"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"/>
     </application>
 
 </manifest>

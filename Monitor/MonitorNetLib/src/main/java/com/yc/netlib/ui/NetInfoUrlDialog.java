@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.yc.netlib.R;
-import com.yc.netlib.utils.NetWorkUtils;
+import com.yc.toolutils.window.AppWindowUtils;
 
 
 public class NetInfoUrlDialog extends Dialog {
@@ -63,7 +63,7 @@ public class NetInfoUrlDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 if (mConfig.content!=null){
-                    NetWorkUtils.copyToClipBoard(mContext, mConfig.content);
+                    AppWindowUtils.copyToClipBoard(mContext, mConfig.content);
                 }
                 dismiss();
             }

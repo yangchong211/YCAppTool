@@ -32,6 +32,8 @@ import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.web.WebViewActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
+import com.yc.other.ui.activity.net.NetworkActivity;
+import com.yc.toollib.crash.CrashToolUtils;
 import com.yc.toolutils.activity.ActivityManager;
 import com.yc.toolutils.click.FastClickUtils;
 import com.yc.toolutils.click.PerfectClickListener;
@@ -216,12 +218,16 @@ public class MainActivity extends BaseActivity{
                         case R.id.tv_home_first:
                             FileExplorerActivity.startActivity(MainActivity.this);
                             break;
+                        //崩溃监控
                         case R.id.tv_home_second:
-                            LocaleActivity.startActivity(MainActivity.this);
+                            CrashToolUtils.startCrashTestActivity(MainActivity.this);
                             break;
+                        //网络工具
                         case R.id.tv_home_third:
+                            NetworkActivity.start(MainActivity.this);
                             break;
                         case R.id.tv_home_four:
+                            LocaleActivity.startActivity(MainActivity.this);
                             break;
                         default:
                             break;

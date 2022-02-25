@@ -3,13 +3,9 @@ package com.yc.toolutils.image;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
-import com.yc.toolutils.window.WindowUtils;
+import com.yc.toolutils.window.AppWindowUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -60,8 +56,8 @@ public final class CompressUtils {
      * @return
      */
     public static Bitmap compressBitmapByBmp(Bitmap image, Context context){
-        int screenHeight = WindowUtils.getScreenHeight(context);
-        int screenWidth = WindowUtils.getScreenWidth(context);
+        int screenHeight = AppWindowUtils.getScreenHeight(context);
+        int screenWidth = AppWindowUtils.getScreenWidth(context);
         return compressBitmapByBmp(image,screenWidth,screenHeight);
     }
 

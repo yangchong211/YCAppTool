@@ -11,10 +11,12 @@ import android.text.TextUtils;
 
 import com.yc.toollib.BuildConfig;
 import com.yc.toollib.R;
-import com.yc.toollib.tool.NetDeviceUtils;
 import com.yc.toollib.tool.ToolAppManager;
-import com.yc.toollib.tool.ToolFileUtils;
-import com.yc.toollib.tool.ToolLogUtils;
+import com.yc.toolutils.device.AppDeviceUtils;
+import com.yc.toolutils.file.AppFileUtils;
+import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.memory.AppMemoryUtils;
+import com.yc.toolutils.process.AppProcessUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,6 +41,8 @@ import java.util.Locale;
 public final class CrashFileUtils {
 
 
+    public static final String CRASH_LOGS = "crashLogs";
+    public static final String CRASH_PICS = "crashPics";
     /**
      * 错误报告文件的扩展名
      */
@@ -97,14 +101,14 @@ public final class CrashFileUtils {
         sb.append("\n软件App的Id:").append(BuildConfig.APPLICATION_ID);
         sb.append("\n是否是DEBUG版本:").append(BuildConfig.BUILD_TYPE);
         sb.append("\n崩溃的时间:").append(crashTime);
-        sb.append("\n是否root:").append(NetDeviceUtils.isDeviceRooted());
-        sb.append("\n系统硬件商:").append(NetDeviceUtils.getManufacturer());
-        sb.append("\n设备的品牌:").append(NetDeviceUtils.getBrand());
-        sb.append("\n手机的型号:").append(NetDeviceUtils.getModel());
-        sb.append("\n设备版本号:").append(NetDeviceUtils.getId());
-        sb.append("\nCPU的类型:").append(NetDeviceUtils.getCpuType());
-        sb.append("\n系统的版本:").append(NetDeviceUtils.getSDKVersionName());
-        sb.append("\n系统版本值:").append(NetDeviceUtils.getSDKVersionCode());
+        sb.append("\n是否root:").append(AppDeviceUtils.isDeviceRooted());
+        sb.append("\n系统硬件商:").append(AppDeviceUtils.getManufacturer());
+        sb.append("\n设备的品牌:").append(AppDeviceUtils.getBrand());
+        sb.append("\n手机的型号:").append(AppDeviceUtils.getModel());
+        sb.append("\n设备版本号:").append(AppDeviceUtils.getId());
+        sb.append("\nCPU的类型:").append(AppDeviceUtils.getCpuType());
+        sb.append("\n系统的版本:").append(AppDeviceUtils.getSDKVersionName());
+        sb.append("\n系统版本值:").append(AppDeviceUtils.getSDKVersionCode());
         sb.append("\n当前的版本:").append(versionName).append("—").append(versionCode);
         sb.append("\n\n");
         crashHead = sb.toString();
@@ -114,20 +118,20 @@ public final class CrashFileUtils {
     private static void initPhoneHead(Context context) {
         StringBuilder sb = new StringBuilder();
         sb.append("手机内存分析:");
-        final int pid = MemoryUtils.getCurrentPid();
-        MemoryUtils.PssInfo pssInfo = MemoryUtils.getAppPssInfo(context, pid);
-        sb.append("\ndalvik堆大小:").append(MemoryUtils.getFormatSize(pssInfo.dalvikPss));
-        sb.append("\n手机堆大小:").append(MemoryUtils.getFormatSize(pssInfo.nativePss));
-        sb.append("\nPSS内存使用量:").append(MemoryUtils.getFormatSize(pssInfo.totalPss));
-        sb.append("\n其他比例大小:").append(MemoryUtils.getFormatSize(pssInfo.otherPss));
+        final int pid = AppMemoryUtils.getCurrentPid();
+        AppMemoryUtils.PssInfo pssInfo = AppMemoryUtils.getAppPssInfo(context, pid);
+        sb.append("\ndalvik堆大小:").append(AppMemoryUtils.getFormatSize(pssInfo.dalvikPss));
+        sb.append("\n手机堆大小:").append(AppMemoryUtils.getFormatSize(pssInfo.nativePss));
+        sb.append("\nPSS内存使用量:").append(AppMemoryUtils.getFormatSize(pssInfo.totalPss));
+        sb.append("\n其他比例大小:").append(AppMemoryUtils.getFormatSize(pssInfo.otherPss));
 
-        final MemoryUtils.DalvikHeapMem dalvikHeapMem = MemoryUtils.getAppDalvikHeapMem();
-        sb.append("\n已用内存:").append(MemoryUtils.getFormatSize(dalvikHeapMem.allocated));
-        sb.append("\n最大内存:").append(MemoryUtils.getFormatSize(dalvikHeapMem.maxMem));
-        sb.append("\n空闲内存:").append(MemoryUtils.getFormatSize(dalvikHeapMem.freeMem));
+        final AppMemoryUtils.DalvikHeapMem dalvikHeapMem = AppMemoryUtils.getAppDalvikHeapMem();
+        sb.append("\n已用内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.allocated));
+        sb.append("\n最大内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.maxMem));
+        sb.append("\n空闲内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.freeMem));
 
-        long appTotalDalvikHeapSize = MemoryUtils.getAppTotalDalvikHeapSize(context);
-        sb.append("\n应用占用内存:").append(MemoryUtils.getFormatSize(appTotalDalvikHeapSize));
+        long appTotalDalvikHeapSize = AppMemoryUtils.getAppTotalDalvikHeapSize(context);
+        sb.append("\n应用占用内存:").append(AppMemoryUtils.getFormatSize(appTotalDalvikHeapSize));
         sb.append("\n\n");
         crashMem = sb.toString();
     }
@@ -136,7 +140,7 @@ public final class CrashFileUtils {
     private static void initThreadHead(Context context, Throwable ex) {
         StringBuilder sb = new StringBuilder();
         sb.append("该App信息:");
-        String currentProcessName = ProcessUtils.getCurrentProcessName(context);
+        String currentProcessName = AppProcessUtils.getCurrentProcessName(context);
         if (currentProcessName!=null){
             sb.append("\nApp进程名称:").append(currentProcessName);
         }
@@ -164,7 +168,7 @@ public final class CrashFileUtils {
             //Log保存路径
             // SDCard/Android/data/<application package>/cache
             // data/data/<application package>/cache
-            File dir = new File(ToolFileUtils.getCrashLogPath(context));
+            File dir = new File(CrashLibUtils.getCrashLogPath(context));
             if (!dir.exists()) {
                 boolean ok = dir.mkdirs();
                 if (!ok) {
@@ -180,8 +184,8 @@ public final class CrashFileUtils {
                     return;
                 }
             }
-            ToolLogUtils.i(CrashHandler.TAG, "保存异常的log文件名称：" + fileName);
-            ToolLogUtils.i(CrashHandler.TAG, "保存异常的log文件file：" + file);
+            AppLogUtils.i(CrashHandler.TAG, "保存异常的log文件名称：" + fileName);
+            AppLogUtils.i(CrashHandler.TAG, "保存异常的log文件file：" + file);
             //开始写日志
             pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
             //判断有没有额外信息需要写入
@@ -212,13 +216,13 @@ public final class CrashFileUtils {
             String newName = "V" + versionName + "_" + crashTime + "_" + splitEx + CRASH_REPORTER_EXTENSION;
             File newFile = new File(dir, newName);
             //重命名文件
-            ToolFileUtils.renameFile(file.getPath(), newFile.getPath());
+            AppFileUtils.renameFile(file.getPath(), newFile.getPath());
             //路径：/storage/emulated/0/Android/data/包名/cache/crashLogs
             //file       V1.0_2020-09-02_09:05:01.txt
             //newFile    V1.0_2020-09-02_09:05:01_java.lang.NullPointerException.txt
-            ToolLogUtils.i(CrashHandler.TAG, "保存异常的log文件路径：" + file.getPath() + "----新路径---"+newFile.getPath());
+            AppLogUtils.i(CrashHandler.TAG, "保存异常的log文件路径：" + file.getPath() + "----新路径---"+newFile.getPath());
         } catch (Exception e) {
-            ToolLogUtils.e(CrashHandler.TAG, "保存日志失败：" + e.toString());
+            AppLogUtils.e(CrashHandler.TAG, "保存日志失败：" + e.toString());
         } finally {
             if (pw != null) {
                 pw.close();
@@ -233,7 +237,7 @@ public final class CrashFileUtils {
             String fileName = stackTrace.getFileName();
             int lineNumber = stackTrace.getLineNumber();
             String methodName = stackTrace.getMethodName();
-            ToolLogUtils.i("printThrowable------"+clazzName+"----"
+            AppLogUtils.i("printThrowable------"+clazzName+"----"
                     +fileName+"------"+lineNumber+"----"+methodName);
         }
     }
@@ -255,7 +259,7 @@ public final class CrashFileUtils {
                 String fileName = element.getFileName();
                 int lineNumber = element.getLineNumber();
                 String methodName = element.getMethodName();
-                ToolLogUtils.i("printThrowable----1--"+clazzName+"----"
+                AppLogUtils.i("printThrowable----1--"+clazzName+"----"
                         +fileName+"------"+lineNumber+"----"+methodName);
                 return element;
             }
@@ -265,27 +269,9 @@ public final class CrashFileUtils {
         String fileName = element.getFileName();
         int lineNumber = element.getLineNumber();
         String methodName = element.getMethodName();
-        ToolLogUtils.i("printThrowable----2--"+clazzName+"----"
+        AppLogUtils.i("printThrowable----2--"+clazzName+"----"
                 +fileName+"------"+lineNumber+"----"+methodName);
         return element;
-    }
-
-    /**
-     * 获取错误报告文件路径
-     *
-     * @param ctx
-     * @return
-     */
-    @Deprecated
-    public static String[] getCrashReportFiles(Context ctx) {
-        File filesDir = new File(getCrashFilePath(ctx));
-        String[] fileNames = filesDir.list();
-        int length = fileNames.length;
-        String[] filePaths = new String[length];
-        for (int i = 0; i < length; i++) {
-            filePaths[i] = getCrashFilePath(ctx) + fileNames[i];
-        }
-        return filePaths;
     }
 
 
@@ -324,7 +310,7 @@ public final class CrashFileUtils {
         String crashFilePath = getCrashFilePath(context);
         if (crashFilePath!=null && crashFilePath.length()>0){
             try {
-                ToolLogUtils.w(CrashHandler.TAG, "handleException---输出路径-----"+crashFilePath);
+                AppLogUtils.w(CrashHandler.TAG, "handleException---输出路径-----"+crashFilePath);
                 FileWriter writer = new FileWriter( crashFilePath+ now + CRASH_REPORTER_EXTENSION);
                 writer.write(sb.toString());
                 writer.flush();

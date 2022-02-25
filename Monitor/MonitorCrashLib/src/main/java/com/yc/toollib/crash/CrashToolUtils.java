@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.yc.toollib.tool.ToolAppManager;
-import com.yc.toollib.tool.ToolLogUtils;
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.util.List;
 
@@ -99,7 +99,7 @@ public final class CrashToolUtils {
         intent.putExtra("PackageName",context.getPackageName());
         intent.putExtra("Delayed",Delayed);
         context.startService(intent);
-        ToolLogUtils.w(CrashHandler.TAG, "reStartApp--- 用来重启本APP--1---");
+        AppLogUtils.w(CrashHandler.TAG, "reStartApp--- 用来重启本APP--1---");
         //exitApp();
         killCurrentProcess(true);
     }
@@ -134,7 +134,7 @@ public final class CrashToolUtils {
         //退出程序
         AlarmManager mgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + Delayed,restartIntent);
-        ToolLogUtils.w(CrashHandler.TAG, "reStartApp--- 用来重启本APP--2---"+clazz);
+        AppLogUtils.w(CrashHandler.TAG, "reStartApp--- 用来重启本APP--2---"+clazz);
         //exitApp();
         killCurrentProcess(true);
     }
@@ -143,7 +143,7 @@ public final class CrashToolUtils {
         String packageName = context.getPackageName();
         Activity activity = ToolAppManager.getAppManager().currentActivity();
         Class<? extends Activity> clazz = guessRestartActivityClass(activity);
-        ToolLogUtils.w(CrashHandler.TAG, "reStartApp--- 用来重启本APP--3-"+packageName + "--"+clazz);
+        AppLogUtils.w(CrashHandler.TAG, "reStartApp--- 用来重启本APP--3-"+packageName + "--"+clazz);
         Intent intent = new Intent(activity, clazz);
         restartApplicationWithIntent(activity, intent);
     }
@@ -236,7 +236,7 @@ public final class CrashToolUtils {
             try {
                 return (Class<? extends Activity>) Class.forName(info.activityInfo.name);
             } catch (ClassNotFoundException e) {
-                ToolLogUtils.e(CrashHandler.TAG+e.getMessage());
+                AppLogUtils.e(CrashHandler.TAG+e.getMessage());
             }
         }
         return null;
@@ -250,7 +250,7 @@ public final class CrashToolUtils {
             try {
                 return (Class<? extends Activity>) Class.forName(intent.getComponent().getClassName());
             } catch (ClassNotFoundException e) {
-                ToolLogUtils.e(CrashHandler.TAG+e.getLocalizedMessage());
+                AppLogUtils.e(CrashHandler.TAG+e.getLocalizedMessage());
             }
         }
         return null;

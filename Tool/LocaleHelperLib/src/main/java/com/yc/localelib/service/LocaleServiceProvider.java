@@ -21,9 +21,18 @@ import java.util.Locale;
  */
 public interface LocaleServiceProvider {
 
+    /**
+     * 初始化操作
+     *
+     * @param context 上下文
+     */
     void init(Application context);
 
-
+    /**
+     * 获取上下文
+     *
+     * @return 上下文Application对象
+     */
     Application getApplication();
 
     /**
@@ -46,9 +55,15 @@ public interface LocaleServiceProvider {
      *
      * @return locale
      */
-    Locale getSystemLanguage();
+    Locale getSystemLocale();
 
-    boolean isSystemLanguage();
+    /**
+     * 判断是否是系统使用的locale
+     *
+     * @return true表示系统locale
+     */
+    boolean isSystemLocale();
+
     /**
      * 获取当前 app 使用的 locale tag
      *
@@ -72,21 +87,54 @@ public interface LocaleServiceProvider {
 
     /**
      * 获取支持的语言列表
-     *
+     * <p>
      * 用于侧边栏选择语言 可能是从Apollo读出来的
      */
     List<Locale> getSupportLocaleList();
 
+    /**
+     * 跟随系统语种（返回 true 表示需要重启 App）
+     *
+     * @param context 上下文
+     * @return 返回 true 表示需要重启 Ap
+     */
     boolean clearAppLanguage(Context context);
 
+    /**
+     * 设置当前的语种（返回 true 表示需要重启 App）
+     *
+     * @param context   上下文
+     * @param newLocale 新的locale
+     * @return 返回 true 表示需要重启 Ap
+     */
     boolean setAppLanguage(Context context, Locale newLocale);
 
+    /**
+     * 添加locale变化监听
+     *
+     * @param listener listener监听事件
+     */
     void addOnLocaleChangedListener(OnLocaleChangedListener listener);
 
+    /**
+     * 移除locale变化监听
+     *
+     * @param listener listener监听事件
+     */
     void removeOnLocaleChangedListener(OnLocaleChangedListener listener);
 
+    /**
+     * 获取locale变化监听集合数组
+     *
+     * @return list数组
+     */
     List<OnLocaleChangedListener> getOnLocaleChangedListeners();
 
+    /**
+     * 更新locale操作
+     *
+     * @param context 上下文
+     */
     void refreshLocale(Context context);
 
 }

@@ -10,6 +10,16 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:multiprocess="true"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+
+        <provider
+            android:name="com.yc.toolutils.file.ExplorerProvider"
+            android:authorities="${applicationId}.fileExplorerProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_explorer_provider" />
+        </provider>
     </application>
 
 </manifest>

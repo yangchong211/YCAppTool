@@ -1,10 +1,7 @@
 package com.yc.lifehelper;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.util.Log;
-
-import androidx.multidex.MultiDex;
 
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.BatteryInfo;
@@ -14,9 +11,13 @@ import com.yc.localelib.listener.OnLocaleChangedListener;
 import com.yc.localelib.service.LocaleService;
 import com.yc.longevitylib.LongevityMonitor;
 import com.yc.longevitylib.LongevityMonitorConfig;
-import com.yc.toollib.tool.ToolFileUtils;
-import com.yc.toollib.tool.ToolLogUtils;
 import com.yc.library.base.app.LibApplication;
+import com.yc.netlib.utils.NetworkTool;
+import com.yc.toollib.crash.CrashHandler;
+import com.yc.toollib.crash.CrashListener;
+import com.yc.toollib.crash.CrashToolUtils;
+import com.yc.toolutils.file.AppFileUtils;
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.io.File;
 import java.util.HashMap;
@@ -45,6 +46,8 @@ public class MainApplication extends LibApplication {
         LongevityMonitor();
         initAppStatusListener();
         initLang();
+        initNetWork();
+        initCrash();
     }
 
     @Override
@@ -73,7 +76,7 @@ public class MainApplication extends LibApplication {
                 .setLogger(new LongevityMonitorConfig.ILongevityMonitorLogger() {
                     @Override
                     public void log(String var1) {
-                        ToolLogUtils.i("Longevity--"+var1);
+                        AppLogUtils.i("Longevity--"+var1);
                     }
                 })
                 .build());
@@ -81,7 +84,7 @@ public class MainApplication extends LibApplication {
 
 
     private void initAppStatusListener() {
-        String cachePath = ToolFileUtils.getCrashPicPath(this);
+        String cachePath = AppFileUtils.getSrcFilePath(this,"cache");
         String path = cachePath + File.separator + "status";
         File file = new File(path);
         AppStatusManager manager = new AppStatusManager.Builder()
@@ -95,9 +98,9 @@ public class MainApplication extends LibApplication {
             public void wifiStatusChange(boolean isWifiOn) {
                 super.wifiStatusChange(isWifiOn);
                 if (isWifiOn){
-                    ToolLogUtils.i("app status Wifi 打开");
+                    AppLogUtils.i("app status Wifi 打开");
                 } else {
-                    ToolLogUtils.i("app status Wifi 关闭");
+                    AppLogUtils.i("app status Wifi 关闭");
                 }
             }
 
@@ -105,9 +108,9 @@ public class MainApplication extends LibApplication {
             public void gpsStatusChange(boolean isGpsOn) {
                 super.gpsStatusChange(isGpsOn);
                 if (isGpsOn){
-                    ToolLogUtils.i("app status Gps 打开");
+                    AppLogUtils.i("app status Gps 打开");
                 } else {
-                    ToolLogUtils.i("app status Gps 关闭");
+                    AppLogUtils.i("app status Gps 关闭");
                 }
             }
 
@@ -115,9 +118,9 @@ public class MainApplication extends LibApplication {
             public void networkStatusChange(boolean isConnect) {
                 super.networkStatusChange(isConnect);
                 if (isConnect){
-                    ToolLogUtils.i("app status Network 打开");
+                    AppLogUtils.i("app status Network 打开");
                 } else {
-                    ToolLogUtils.i("app status Network 关闭");
+                    AppLogUtils.i("app status Network 关闭");
                 }
             }
 
@@ -125,25 +128,25 @@ public class MainApplication extends LibApplication {
             public void screenStatusChange(boolean isScreenOn) {
                 super.screenStatusChange(isScreenOn);
                 if (isScreenOn){
-                    ToolLogUtils.i("app status Screen 打开");
+                    AppLogUtils.i("app status Screen 打开");
                 } else {
-                    ToolLogUtils.i("app status Screen 关闭");
+                    AppLogUtils.i("app status Screen 关闭");
                 }
             }
 
             @Override
             public void screenUserPresent() {
                 super.screenUserPresent();
-                ToolLogUtils.i("app status Screen 使用了");
+                AppLogUtils.i("app status Screen 使用了");
             }
 
             @Override
             public void appOnFrontOrBackChange(boolean isBack) {
                 super.appOnFrontOrBackChange(isBack);
                 if (isBack){
-                    ToolLogUtils.i("app status app 推到后台");
+                    AppLogUtils.i("app status app 推到后台");
                 } else {
-                    ToolLogUtils.i("app status app 回到前台");
+                    AppLogUtils.i("app status app 回到前台");
                 }
             }
 
@@ -151,26 +154,26 @@ public class MainApplication extends LibApplication {
             public void bluetoothStatusChange(boolean isBluetoothOn) {
                 super.bluetoothStatusChange(isBluetoothOn);
                 if (isBluetoothOn){
-                    ToolLogUtils.i("app status 蓝牙 打开");
+                    AppLogUtils.i("app status 蓝牙 打开");
                 } else {
-                    ToolLogUtils.i("app status 蓝牙 关闭");
+                    AppLogUtils.i("app status 蓝牙 关闭");
                 }
             }
 
             @Override
             public void batteryStatusChange(BatteryInfo batteryInfo) {
                 super.batteryStatusChange(batteryInfo);
-                ToolLogUtils.i("app status 电量 " + batteryInfo.toStringInfo());
+                AppLogUtils.i("app status 电量 " + batteryInfo.toStringInfo());
             }
 
             @Override
             public void appThreadStatusChange(ThreadInfo threadInfo) {
                 super.appThreadStatusChange(threadInfo);
-                ToolLogUtils.i("app status 所有线程数量 " + threadInfo.getThreadCount());
-                ToolLogUtils.i("app status run线程数量 " + threadInfo.getRunningThreadCount().size());
-                ToolLogUtils.i("app status wait线程数量 " + threadInfo.getWaitingThreadCount().size());
-                ToolLogUtils.i("app status block线程数量 " + threadInfo.getBlockThreadCount().size());
-                ToolLogUtils.i("app status timewait线程数量 " + threadInfo.getTimeWaitingThreadCount().size());
+                AppLogUtils.i("app status 所有线程数量 " + threadInfo.getThreadCount());
+                AppLogUtils.i("app status run线程数量 " + threadInfo.getRunningThreadCount().size());
+                AppLogUtils.i("app status wait线程数量 " + threadInfo.getWaitingThreadCount().size());
+                AppLogUtils.i("app status block线程数量 " + threadInfo.getBlockThreadCount().size());
+                AppLogUtils.i("app status timewait线程数量 " + threadInfo.getTimeWaitingThreadCount().size());
             }
         });
     }
@@ -188,7 +191,39 @@ public class MainApplication extends LibApplication {
 
             @Override
             public void onSystemLocaleChange(Locale oldLocale, Locale newLocale) {
-                Log.d("MultiLanguages", "监听到系统切换了语种，旧语种：" + oldLocale + "，新语种：" + newLocale + "，是否跟随系统：" + LocaleService.getInstance().isSystemLanguage());
+                Log.d("MultiLanguages", "监听到系统切换了语种，旧语种：" + oldLocale + "，新语种：" + newLocale + "，是否跟随系统：" + LocaleService.getInstance().isSystemLocale());
+            }
+        });
+    }
+
+
+    private void initNetWork() {
+        NetworkTool.getInstance().init(this);
+    }
+
+    private void initCrash() {
+        //ThreadHandler.getInstance().init(this);
+        CrashHandler.getInstance().init(this, new CrashListener() {
+            /**
+             * 重启app
+             */
+            @Override
+            public void againStartApp() {
+                System.out.println("崩溃重启----------againStartApp------");
+                CrashToolUtils.reStartApp1(MainApplication.this,2000);
+                //CrashToolUtils.reStartApp2(App.this,2000, MainActivity.class);
+                //CrashToolUtils.reStartApp3(App.this);
+            }
+
+            /**
+             * 自定义上传crash，支持开发者上传自己捕获的crash数据
+             * @param ex                        ex
+             */
+            @Override
+            public void recordException(Throwable ex) {
+                System.out.println("崩溃重启----------recordException------");
+                //自定义上传crash，支持开发者上传自己捕获的crash数据
+                //StatService.recordException(getApplication(), ex);
             }
         });
     }

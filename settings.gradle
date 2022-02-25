@@ -33,7 +33,7 @@ project(':ComponentLib').projectDir = new File('Common/ComponentLib')
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':FragmentLib',':WidgetViewLib',':ZoomImageLib', ':LargeImageLib',
-        ':SwipeBackLib'
+        ':SwipeBackLib', ':StatusBarLib', ':AppStateLib'
 project(':BannerViewLib').projectDir = new File('Widget/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('Widget/PhotoWidget')
 project(':CustomWidget').projectDir = new File('Widget/CustomWidget')
@@ -43,11 +43,14 @@ project(':WidgetViewLib').projectDir = new File('Widget/WidgetViewLib')
 project(':ZoomImageLib').projectDir = new File('Widget/ZoomImageLib')
 project(':LargeImageLib').projectDir = new File('Widget/LargeImageLib')
 project(':SwipeBackLib').projectDir = new File('Widget/SwipeBackLib')
+project(':StatusBarLib').projectDir = new File('Widget/StatusBarLib')
+project(':AppStateLib').projectDir = new File('Widget/AppStateLib')
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,
-        ':AnimatorToolLib', ':AppTraceTool', ':LongevityLib'
+        ':AnimatorToolLib', ':AppTraceTool', ':LongevityLib',
+        ':ThreadPoolLib', ':ThreadTaskLib'
 project(':ZxingServerLib').projectDir = new File('Tool/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('Tool/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('Tool/SocketIoLib')
@@ -58,6 +61,8 @@ project(':CountTimerLib').projectDir = new File('Tool/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('Tool/AnimatorToolLib')
 project(':AppTraceTool').projectDir = new File('Tool/AppTraceTool')
 project(':LongevityLib').projectDir = new File('Tool/LongevityLib')
+project(':ThreadPoolLib').projectDir = new File('Tool/ThreadPoolLib')
+project(':ThreadTaskLib').projectDir = new File('Tool/ThreadTaskLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -76,4 +81,5 @@ project(':MonitorAnrLib').projectDir = new File('Monitor/MonitorAnrLib')
 project(':MonitorCrashLib').projectDir = new File('Monitor/MonitorCrashLib')
 project(':MonitorNetLib').projectDir = new File('Monitor/MonitorNetLib')
 project(':MonitorFileLib').projectDir = new File('Monitor/MonitorFileLib')
+
 

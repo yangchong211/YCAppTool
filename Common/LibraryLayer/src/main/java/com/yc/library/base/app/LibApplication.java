@@ -8,10 +8,6 @@ import android.util.Log;
 
 import com.yc.businessinterface.BusinessTransfer;
 import com.yc.configlayer.arounter.ARouterUtils;
-import com.yc.toollib.crash.CrashHandler;
-import com.yc.toollib.crash.CrashListener;
-import com.yc.toollib.crash.CrashToolUtils;
-import com.yc.toollib.network.utils.NetworkTool;
 import com.yc.library.base.config.AppConfig;
 
 /**
@@ -38,8 +34,6 @@ public class LibApplication extends Application {
         AppConfig.INSTANCE.initConfig(this);
         //在子线程中初始化
         InitializeService.start(this);
-        initCrash();
-        initNetwork();
         initSetTransfer();
     }
 
@@ -89,51 +83,6 @@ public class LibApplication extends Application {
     public void onConfigurationChanged(Configuration newConfig) {
         Log.d("Application", "onConfigurationChanged");
         super.onConfigurationChanged(newConfig);
-    }
-
-    /**
-     * 崩溃日志记录
-     */
-    private void initCrash() {
-        CrashHandler.getInstance().init(this, new CrashListener() {
-            /**
-             * 重启app
-             */
-            @Override
-            public void againStartApp() {
-                System.out.println("崩溃重启----------againStartApp------");
-                CrashToolUtils.reStartApp1(LibApplication.this,2000);
-                //CrashToolUtils.reStartApp2(App.this,2000, MainActivity.class);
-                //CrashToolUtils.reStartApp3(App.this);
-            }
-
-            /**
-             * 自定义上传crash，支持开发者上传自己捕获的crash数据
-             * @param ex                        ex
-             */
-            @Override
-            public void recordException(Throwable ex) {
-                System.out.println("崩溃重启----------recordException------");
-                //自定义上传crash，支持开发者上传自己捕获的crash数据
-                //StatService.recordException(getApplication(), ex);
-            }
-        });
-    }
-
-    /**
-     * 初始化网络拦截器
-     */
-    private void initNetwork() {
-        if (!isNetWork()){
-            return;
-        }
-        NetworkTool.getInstance().init(this);
-        //建议只在debug环境下显示，点击去网络拦截列表页面查看网络请求数据
-        NetworkTool.getInstance().setFloat(this);
-    }
-
-    public boolean isNetWork(){
-        return true;
     }
 
     private void initSetTransfer() {

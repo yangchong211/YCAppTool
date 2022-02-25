@@ -18,10 +18,10 @@ import com.ns.yc.yccustomtextlib.edit.view.HyperTextView;
 import com.yc.imageserver.transformations.TransformationScale;
 import com.yc.other.R;
 import com.yc.other.tool.ModelStorage;
+import com.yc.statusbar.bar.StateAppBar;
 
 import java.util.List;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;

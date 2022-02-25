@@ -7,11 +7,11 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.book.weight.monkey.LuckyMonkeyPanelView;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.statusbar.bar.StateAppBar;
 import com.ycbjie.book.R;
 
 import java.util.Random;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 /**
  * <pre>

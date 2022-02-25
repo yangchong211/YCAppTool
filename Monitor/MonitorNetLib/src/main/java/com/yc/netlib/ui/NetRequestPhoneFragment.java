@@ -31,10 +31,11 @@ import com.yc.netlib.connect.DeviceBandwidthSampler;
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
 import com.yc.netlib.ping.PingView;
-import com.yc.netlib.utils.NetDeviceUtils;
-import com.yc.netlib.utils.NetLogUtils;
 import com.yc.netlib.utils.NetWorkUtils;
 import com.yc.netlib.utils.NetworkTool;
+import com.yc.toolutils.device.AppDeviceUtils;
+import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.window.AppWindowUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -191,26 +192,26 @@ public class NetRequestPhoneFragment extends Fragment {
     private void setPhoneInfo() {
         Application application = NetworkTool.getInstance().getApplication();
         final StringBuilder sb = new StringBuilder();
-        sb.append("是否root:").append(NetDeviceUtils.isDeviceRooted());
-        sb.append("\n系统硬件商:").append(NetDeviceUtils.getManufacturer());
-        sb.append("\n设备的品牌:").append(NetDeviceUtils.getBrand());
-        sb.append("\n手机的型号:").append(NetDeviceUtils.getModel());
-        sb.append("\n设备版本号:").append(NetDeviceUtils.getId());
-        sb.append("\nCPU的类型:").append(NetDeviceUtils.getCpuType());
-        sb.append("\n系统的版本:").append(NetDeviceUtils.getSDKVersionName());
-        sb.append("\n系统版本值:").append(NetDeviceUtils.getSDKVersionCode());
-        sb.append("\nSd卡剩余控件:").append(NetDeviceUtils.getSDCardSpace(application));
-        sb.append("\n系统剩余控件:").append(NetDeviceUtils.getRomSpace(application));
-        sb.append("\n手机总内存:").append(NetDeviceUtils.getTotalMemory(application));
-        sb.append("\n手机可用内存:").append(NetDeviceUtils.getAvailMemory(application));
-        sb.append("\n手机分辨率:").append(NetDeviceUtils.getWidthPixels(application))
-                .append("x").append(NetDeviceUtils.getRealHeightPixels(application));
-        sb.append("\n屏幕尺寸:").append(NetDeviceUtils.getScreenInch(activity));
+        sb.append("是否root:").append(AppDeviceUtils.isDeviceRooted());
+        sb.append("\n系统硬件商:").append(AppDeviceUtils.getManufacturer());
+        sb.append("\n设备的品牌:").append(AppDeviceUtils.getBrand());
+        sb.append("\n手机的型号:").append(AppDeviceUtils.getModel());
+        sb.append("\n设备版本号:").append(AppDeviceUtils.getId());
+        sb.append("\nCPU的类型:").append(AppDeviceUtils.getCpuType());
+        sb.append("\n系统的版本:").append(AppDeviceUtils.getSDKVersionName());
+        sb.append("\n系统版本值:").append(AppDeviceUtils.getSDKVersionCode());
+        sb.append("\nSd卡剩余控件:").append(AppDeviceUtils.getSDCardSpace(application));
+        sb.append("\n系统剩余控件:").append(AppDeviceUtils.getRomSpace(application));
+        sb.append("\n手机总内存:").append(AppDeviceUtils.getTotalMemory(application));
+        sb.append("\n手机可用内存:").append(AppDeviceUtils.getAvailMemory(application));
+        sb.append("\n手机分辨率:").append(AppDeviceUtils.getWidthPixels(application))
+                .append("x").append(AppDeviceUtils.getRealHeightPixels(application));
+        sb.append("\n屏幕尺寸:").append(AppDeviceUtils.getScreenInch(activity));
         tvPhoneContent.setText(sb.toString());
         tvPhoneContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NetWorkUtils.copyToClipBoard(activity,sb.toString());
+                AppWindowUtils.copyToClipBoard(activity,sb.toString());
             }
         });
     }
@@ -256,27 +257,27 @@ public class NetRequestPhoneFragment extends Fragment {
     private void setLocationInfo() {
         Application application = NetworkTool.getInstance().getApplication();
         StringBuilder sb = new StringBuilder();
-        sb.append("wifi信号强度:").append(NetDeviceUtils.getWifiState(application));
-        sb.append("\nAndroidID:").append(NetDeviceUtils.getAndroidID(application));
+        sb.append("wifi信号强度:").append(AppDeviceUtils.getWifiState(application));
+        sb.append("\nAndroidID:").append(AppDeviceUtils.getAndroidID(application));
         boolean wifiProxy = NetWorkUtils.isWifiProxy(application);
         if (wifiProxy){
             sb.append("\nwifi是否代理:").append("已经链接代理");
         } else {
             sb.append("\nwifi是否代理:").append("未链接代理");
         }
-        sb.append("\nMac地址:").append(NetDeviceUtils.getMacAddress(application));
-        sb.append("\nWifi名称:").append(NetDeviceUtils.getWifiName(application));
-        int wifiIp = NetDeviceUtils.getWifiIp(application);
-        String ip = NetDeviceUtils.intToIp(wifiIp);
+        sb.append("\nMac地址:").append(AppDeviceUtils.getMacAddress(application));
+        sb.append("\nWifi名称:").append(AppDeviceUtils.getWifiName(application));
+        int wifiIp = AppDeviceUtils.getWifiIp(application);
+        String ip = AppDeviceUtils.intToIp(wifiIp);
         sb.append("\nWifi的Ip地址:").append(ip);
-        DhcpInfo dhcpInfo = NetDeviceUtils.getDhcpInfo(application);
+        DhcpInfo dhcpInfo = AppDeviceUtils.getDhcpInfo(application);
         if (dhcpInfo!=null){
-            //sb.append("\nipAddress：").append(NetDeviceUtils.intToIp(dhcpInfo.ipAddress));
-            sb.append("\n子网掩码地址：").append(NetDeviceUtils.intToIp(dhcpInfo.netmask));
-            sb.append("\n网关地址：").append(NetDeviceUtils.intToIp(dhcpInfo.gateway));
-            sb.append("\nserverAddress：").append(NetDeviceUtils.intToIp(dhcpInfo.serverAddress));
-            sb.append("\nDns1：").append(NetDeviceUtils.intToIp(dhcpInfo.dns1));
-            sb.append("\nDns2：").append(NetDeviceUtils.intToIp(dhcpInfo.dns2));
+            //sb.append("\nipAddress：").append(AppDeviceUtils.intToIp(dhcpInfo.ipAddress));
+            sb.append("\n子网掩码地址：").append(AppDeviceUtils.intToIp(dhcpInfo.netmask));
+            sb.append("\n网关地址：").append(AppDeviceUtils.intToIp(dhcpInfo.gateway));
+            sb.append("\nserverAddress：").append(AppDeviceUtils.intToIp(dhcpInfo.serverAddress));
+            sb.append("\nDns1：").append(AppDeviceUtils.intToIp(dhcpInfo.dns1));
+            sb.append("\nDns2：").append(AppDeviceUtils.intToIp(dhcpInfo.dns2));
         }
         tvContentInfo.setText(sb.toString());
     }
@@ -289,8 +290,8 @@ public class NetRequestPhoneFragment extends Fragment {
                     String curl = mNetworkFeedList.get(0).getCURL();
                     String host = Uri.parse(curl).getHost();
                     StringBuilder sb = new StringBuilder();
-                    sb.append("域名ip地址:").append(NetDeviceUtils.getHostIP(host));
-                    sb.append("\n域名host名称:").append(NetDeviceUtils.getHostName(host));
+                    sb.append("域名ip地址:").append(AppDeviceUtils.getHostIP(host));
+                    sb.append("\n域名host名称:").append(AppDeviceUtils.getHostName(host));
                     sb.append("\n待完善:").append("获取服务端ip，mac，是ipv4还是ipv6等信息");
                     String string = sb.toString();
                     Message message = new Message();
@@ -304,7 +305,7 @@ public class NetRequestPhoneFragment extends Fragment {
 
     private void setPingInfo() {
         Application application = NetworkTool.getInstance().getApplication();
-        tvNetInfo.setDeviceId(NetDeviceUtils.getAndroidID(application));
+        tvNetInfo.setDeviceId(AppDeviceUtils.getAndroidID(application));
         tvNetInfo.setUserId(application.getPackageName());
         //版本信息
         String versionName = "";
@@ -347,7 +348,7 @@ public class NetRequestPhoneFragment extends Fragment {
             @SuppressLint("SetTextI18n")
             @Override
             public void run() {
-                NetLogUtils.e("DownloadImage-----onBandwidthStateChange----"+mConnectionClass);
+                AppLogUtils.e("DownloadImage-----onBandwidthStateChange----"+mConnectionClass);
                 StringBuffer sb = new StringBuffer();
                 sb.append("网络宽带:");
                 if (mConnectionClass==ConnectionQuality.UNKNOWN){
@@ -375,7 +376,7 @@ public class NetRequestPhoneFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             mDeviceBandwidthSampler.startSampling();
-            NetLogUtils.e("DownloadImage-----onPreExecute-----开始");
+            AppLogUtils.e("DownloadImage-----onPreExecute-----开始");
         }
 
         @Override
@@ -395,9 +396,9 @@ public class NetRequestPhoneFragment extends Fragment {
                     input.close();
                 }
             } catch (IOException e) {
-                NetLogUtils.e("Error while downloading image.");
+                AppLogUtils.e("Error while downloading image.");
             } finally {
-                NetLogUtils.e("DownloadImage-----doInBackground-----");
+                AppLogUtils.e("DownloadImage-----doInBackground-----");
             }
             return null;
         }
@@ -408,7 +409,7 @@ public class NetRequestPhoneFragment extends Fragment {
             // 重试10次，直到我们找到一个ConnectionClass
             if (mConnectionClass == ConnectionQuality.UNKNOWN && mTries < 10) {
                 mTries++;
-                NetLogUtils.e("DownloadImage-----onPostExecute-----"+mTries);
+                AppLogUtils.e("DownloadImage-----onPostExecute-----"+mTries);
                 new DownloadImage().execute(mURL);
             }
             if (mTries==10){

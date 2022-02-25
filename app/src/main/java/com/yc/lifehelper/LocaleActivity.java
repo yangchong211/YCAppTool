@@ -59,9 +59,9 @@ public class LocaleActivity extends AppCompatActivity {
 
         //((TextView) findViewById(R.id.tv_language_activity)).setText(this.getResources().getString(R.string.current_language));
         ((TextView) findViewById(R.id.tv_main_language_application)).setText(getApplication().getResources().getString(R.string.current_language));
-        ((TextView) findViewById(R.id.tv_main_language_system)).setText(LocaleToolUtils.getLanguageString(this, LocaleService.getInstance().getSystemLanguage(), R.string.current_language));
+        ((TextView) findViewById(R.id.tv_main_language_system)).setText(LocaleToolUtils.getLanguageString(this, LocaleService.getInstance().getSystemLocale(), R.string.current_language));
         RadioGroup radioGroup = findViewById(R.id.rg_main_languages);
-        if (LocaleService.getInstance().isSystemLanguage()) {
+        if (LocaleService.getInstance().isSystemLocale()) {
             radioGroup.check(R.id.rb_main_language_auto);
         } else {
             Locale locale = LocaleService.getInstance().getCurrentLocale();

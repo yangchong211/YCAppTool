@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/AnimBusiness/Business.LifeHelper.AnimBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/AnimBusiness/Business.LifeHelper.AnimBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/ComponentLib/Common.LifeHelper.ComponentLib.iml" filepath="$PROJECT_DIR$/.idea/modules/common/ComponentLib/Common.LifeHelper.ComponentLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LifeHelper.iml" filepath="$PROJECT_DIR$/.idea/modules/LifeHelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/AppStateLib/LifeHelper.AppStateLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/AppStateLib/LifeHelper.AppStateLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/AppStatusLib/LifeHelper.AppStatusLib.iml" filepath="$PROJECT_DIR$/.idea/modules/common/AppStatusLib/LifeHelper.AppStatusLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tracesdk/LifeHelper.AppTraceTool.iml" filepath="$PROJECT_DIR$/.idea/modules/tracesdk/LifeHelper.AppTraceTool.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerViewLib.iml" />
@@ -44,9 +45,12 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/LocaleHelperLib/Tool.LifeHelper.LocaleHelperLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/LocaleHelperLib/Tool.LifeHelper.LocaleHelperLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/SerialTaskLib/Tool.LifeHelper.SerialTaskLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/SerialTaskLib/Tool.LifeHelper.SerialTaskLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/SocketIoLib/Tool.LifeHelper.SocketIoLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/SocketIoLib/Tool.LifeHelper.SocketIoLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/ThreadPoolLib/Tool.LifeHelper.ThreadPoolLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/ThreadPoolLib/Tool.LifeHelper.ThreadPoolLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/ThreadTaskLib/Tool.LifeHelper.ThreadTaskLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/ThreadTaskLib/Tool.LifeHelper.ThreadTaskLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/WebSocketLib/Tool.LifeHelper.WebSocketLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/WebSocketLib/Tool.LifeHelper.WebSocketLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BlurView/Widget.LifeHelper.BlurViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BlurView/Widget.LifeHelper.BlurViewLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/FragmentLib/Widget.LifeHelper.FragmentLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/FragmentLib/Widget.LifeHelper.FragmentLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/StatusBarLib/Widget.LifeHelper.StatusBarLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/StatusBarLib/Widget.LifeHelper.StatusBarLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/WidgetViewLib/github.LifeHelper.WidgetViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/WidgetViewLib/github.LifeHelper.WidgetViewLib.iml" />
     </modules>
   </component>

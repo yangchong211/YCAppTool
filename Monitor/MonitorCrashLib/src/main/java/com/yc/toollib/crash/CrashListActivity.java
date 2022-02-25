@@ -20,14 +20,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.yc.eastadapterlib.OnItemClickListener;
+import com.yc.eastadapterlib.OnItemLongClickListener;
 import com.yc.toollib.R;
-import com.yc.toollib.tool.OnItemClickListener;
-import com.yc.toollib.tool.ToolFileUtils;
+import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static com.yc.toollib.crash.CrashFileUtils.CRASH_LOGS;
 
 
 /**
@@ -47,7 +51,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
     private TextView tvAbout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecycleView;
-    private List<File> fileList;
+    private List<File> fileList = new ArrayList<>();
     private Handler handler = new Handler();
     private CrashInfoAdapter crashInfoAdapter;
     private ProgressDialog progressDialog;
@@ -128,7 +132,8 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
 
     private void getCrashList() {
         //重新获取
-        fileList = ToolFileUtils.getCrashFileList(this);
+        fileList.clear();
+        fileList = AppFileUtils.getFileList(this,CRASH_LOGS);
         //排序
         Collections.sort(fileList, new Comparator<File>() {
             @Override
@@ -163,21 +168,12 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
 
     private void initAdapter() {
         if (crashInfoAdapter == null) {
-            crashInfoAdapter = new CrashInfoAdapter(this, fileList);
+            crashInfoAdapter = new CrashInfoAdapter(this);
+            mRecycleView.setLayoutManager(new LinearLayoutManager(this));
             mRecycleView.setAdapter(crashInfoAdapter);
-            crashInfoAdapter.setOnItemClickLitener(new OnItemClickListener() {
+            crashInfoAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
                 @Override
-                public void onItemClick(View view, int position) {
-                    if (fileList.size()>position && position>=0){
-                        Intent intent = new Intent(CrashListActivity.this, CrashDetailsActivity.class);
-                        File file = fileList.get(position);
-                        intent.putExtra(CrashDetailsActivity.IntentKey_FilePath, file.getAbsolutePath());
-                        startActivity(intent);
-                    }
-                }
-
-                @Override
-                public void onLongClick(View view, final int position) {
+                public boolean onItemLongClick(View view, int position) {
                     if (fileList.size()>position && position>=0){
                         //弹出Dialog是否删除当前
                         AlertDialog.Builder builder = new AlertDialog.Builder(CrashListActivity.this);
@@ -194,7 +190,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
                                     @Override
                                     public void run() {
                                         File file = fileList.get(position);
-                                        ToolFileUtils.deleteFile(file.getPath());
+                                        AppFileUtils.deleteFile(file.getPath());
                                         //重新获取
                                         getCrashList();
                                     }
@@ -203,10 +199,22 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
                         });
                         builder.show();
                     }
+                    return false;
+                }
+            });
+            crashInfoAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    if (fileList.size()>position && position>=0){
+                        Intent intent = new Intent(CrashListActivity.this, CrashDetailsActivity.class);
+                        File file = fileList.get(position);
+                        intent.putExtra(CrashDetailsActivity.IntentKey_FilePath, file.getAbsolutePath());
+                        startActivity(intent);
+                    }
                 }
             });
         } else {
-            crashInfoAdapter.updateDatas(fileList);
+            crashInfoAdapter.setData(fileList);
         }
         mSwipeRefreshLayout.setRefreshing(false);
     }
@@ -252,8 +260,8 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        File fileCrash = new File(ToolFileUtils.getCrashLogPath(CrashListActivity.this));
-                        ToolFileUtils.deleteAllFiles(fileCrash);
+                        File fileCrash = new File(CrashLibUtils.getCrashLogPath(CrashListActivity.this));
+                        AppFileUtils.deleteAllFiles(fileCrash);
                         //重新获取
                         getCrashList();
                     }

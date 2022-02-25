@@ -16,8 +16,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.yc.configlayer.constant.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
-
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
+import com.yc.statusbar.bar.StateAppBar;
 
 
 /**

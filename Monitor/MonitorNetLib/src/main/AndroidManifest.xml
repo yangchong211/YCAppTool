@@ -23,11 +23,5 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".connect.ConnectionActivity"
             android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.yc.netlib.floating.FloatActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="standard"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"/>
     </application>
 </manifest>

@@ -14,6 +14,7 @@ import com.yc.netlib.stetho.NetworkListener;
 import com.yc.netlib.ui.NetRequestActivity;
 import com.yc.netlib.ui.NetworkDetailActivity;
 import com.yc.netlib.ui.NetworkManager;
+import com.yc.toolutils.logger.AppLogUtils;
 import com.yc.videoview.FloatWindow;
 import com.yc.videoview.MoveType;
 import com.yc.videoview.PermissionActivity;
@@ -45,7 +46,7 @@ public class NetworkTool {
 
     public void init(Application application){
         this.app = application;
-        setOkHttpHook();
+        //setOkHttpHook();
         NetworkManager.get().startMonitor();
     }
 
@@ -54,6 +55,9 @@ public class NetworkTool {
     }
 
     public Application getApplication() {
+        if (app == null){
+            throw new NullPointerException("please set init at first");
+        }
         return app;
     }
 
@@ -76,7 +80,7 @@ public class NetworkTool {
      */
     private OkHttpClient.Builder localBuild;
     public OkHttpClient.Builder addOkHttp(OkHttpClient.Builder builder,boolean isProxy){
-        NetLogUtils.i("OkHttpHook"+"-------addOkHttp");
+        AppLogUtils.i("OkHttpHook"+"-------addOkHttp");
         if (localBuild==null){
             localBuild = builder
                     .eventListenerFactory(NetworkListener.get())

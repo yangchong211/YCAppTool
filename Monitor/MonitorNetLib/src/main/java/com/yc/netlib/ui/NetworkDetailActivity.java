@@ -23,10 +23,11 @@ import android.widget.Toast;
 import com.yc.netlib.R;
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
-import com.yc.netlib.utils.CompressUtils;
-import com.yc.netlib.utils.NetToolUtils;
-import com.yc.netlib.utils.ScreenShotsUtils;
-import com.yc.netlib.utils.ToolFileUtils;
+import com.yc.toolutils.file.AppFileUtils;
+import com.yc.toolutils.file.FileSaveUtils;
+import com.yc.toolutils.screen.AppShotsUtils;
+import com.yc.toolutils.image.CompressUtils;
+import com.yc.toolutils.window.AppWindowUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -268,7 +269,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
     private void saveScreenShot() {
         showProgressLoading("正在保存截图...");
         //生成截图
-        final Bitmap bitmap = ScreenShotsUtils.measureSize(this,mScrollView);
+        final Bitmap bitmap = AppShotsUtils.measureSize(this,mScrollView);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -280,8 +281,8 @@ public class NetworkDetailActivity extends AppCompatActivity {
 
     private void savePicture(Bitmap bitmap) {
         if (bitmap != null) {
-            String crashPicPath = ToolFileUtils.getCrashPicPath(NetworkDetailActivity.this) + "/net_pic_" + System.currentTimeMillis() + ".jpg";
-            boolean saveBitmap = NetToolUtils.saveBitmap(NetworkDetailActivity.this, bitmap, crashPicPath);
+            String crashPicPath = AppFileUtils.getSrcFilePath(NetworkDetailActivity.this,"crashPics") + "/net_pic_" + System.currentTimeMillis() + ".jpg";
+            boolean saveBitmap = FileSaveUtils.saveBitmap(NetworkDetailActivity.this, bitmap, crashPicPath);
             if (saveBitmap) {
                 showToast("保存截图成功，请到相册查看\n路径：" + crashPicPath);
                 final Bitmap bitmapCompress = CompressUtils.getBitmap(new File(crashPicPath), 200, 200);
@@ -295,7 +296,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
                         mIvScreenShot.setVisibility(View.VISIBLE);
                         //设置宽高
                         ViewGroup.LayoutParams layoutParams = mIvScreenShot.getLayoutParams();
-                        layoutParams.width = NetToolUtils.getScreenWidth(NetworkDetailActivity.this);
+                        layoutParams.width = AppWindowUtils.getScreenWidth(NetworkDetailActivity.this);
                         layoutParams.height = bitmapCompress.getHeight() * layoutParams.width / bitmapCompress.getWidth();
                         mIvScreenShot.setLayoutParams(layoutParams);
                         //设置显示动画

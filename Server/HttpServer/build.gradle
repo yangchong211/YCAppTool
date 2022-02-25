@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
+//迁移到jitpack
+apply plugin: 'com.github.dcendents.android-maven'
+
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -28,5 +32,4 @@ dependencies {
     api rootProject.ext.dependencies["retrofit-converter-gson"]
     api rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
     api rootProject.ext.dependencies["utilcode"]
-    api rootProject.ext.dependencies["YCAndroidTool"]
 }

@@ -99,8 +99,6 @@ dependencies {
 
     api rootProject.ext.dependencies["utilcode"]
     api rootProject.ext.dependencies["easypermissions"]
-
-    api rootProject.ext.dependencies["YCStateLib"]
     api rootProject.ext.dependencies["YCDialogLib"]
     api rootProject.ext.dependencies["YCProgressLib"]
     api rootProject.ext.dependencies["YCGalleryLib"]
@@ -116,7 +114,6 @@ dependencies {
     //标签多选单选库
     api 'com.github.yangchong211.YCRefreshView:SelectViewLib:3.0.1'
 
-    api rootProject.ext.dependencies["YCStatusBarLib"]
     api rootProject.ext.dependencies["YCThreadPoolLib"]
     api rootProject.ext.dependencies["notificationLib"]
     api rootProject.ext.dependencies["WebViewLib"]
@@ -125,6 +122,8 @@ dependencies {
 
     api(rootProject.ext.dependencies["router"])
     implementation project(path: ':LocaleHelperLib')
+    implementation project(path: ':AppStateLib')
+    implementation project(path: ':StatusBarLib')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':ConfigLayer')

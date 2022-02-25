@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.graphics.Color;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -14,13 +15,13 @@ import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.fragmentlib.BackHandlerHelper;
 import com.yc.library.base.adapter.BasePagerAdapter;
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.video.ui.fragment.VideoArticleFragment;
 import com.ycbjie.video.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 
 /**
@@ -48,7 +49,7 @@ public class VideoActivity extends BaseActivity {
     @Override
     public void initView() {
         StateAppBar.setStatusBarColor(this,
-                ContextCompat.getColor(this, R.color.black));
+                ContextCompat.getColor(this, R.color.blackText));
         initFindViewById();
         initToolBar();
     }

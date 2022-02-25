@@ -6,7 +6,7 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.yc.toollib.tool.ToolAppManager;
-import com.yc.toollib.tool.ToolLogUtils;
+import com.yc.toolutils.logger.AppLogUtils;
 
 /**
  * <pre>
@@ -40,38 +40,38 @@ public class LifecycleCallback implements Application.ActivityLifecycleCallbacks
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        ToolLogUtils.e("Activity生命周期","onActivityCreated");
+        AppLogUtils.e("Activity生命周期","onActivityCreated");
         ToolAppManager.getAppManager().addActivity(activity);
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
-        ToolLogUtils.e("Activity生命周期","onActivityStarted");
+        AppLogUtils.e("Activity生命周期","onActivityStarted");
     }
 
     @Override
     public void onActivityResumed(Activity activity) {
-        ToolLogUtils.e("Activity生命周期","onActivityResumed");
+        AppLogUtils.e("Activity生命周期","onActivityResumed");
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
-        ToolLogUtils.e("Activity生命周期","onActivityPaused");
+        AppLogUtils.e("Activity生命周期","onActivityPaused");
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        ToolLogUtils.e("Activity生命周期","onActivityStopped");
+        AppLogUtils.e("Activity生命周期","onActivityStopped");
     }
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-        ToolLogUtils.e("Activity生命周期","onActivitySaveInstanceState");
+        AppLogUtils.e("Activity生命周期","onActivitySaveInstanceState");
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        ToolLogUtils.e("Activity生命周期","onActivityDestroyed");
+        AppLogUtils.e("Activity生命周期","onActivityDestroyed");
         //将当前Activity移除到容器
         ToolAppManager.getAppManager().removeActivity(activity);
     }

@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
-import com.yc.netlib.utils.NetLogUtils;
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,9 +51,9 @@ public class NetworkInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         // 构造一个独特的eventID，一对网络事件（请求和回包）对应一个eventID
         String requestId = mEventReporter.nextRequestId();
-        NetLogUtils.d(TAG+"-----requestId-----"+requestId);
+        AppLogUtils.d(TAG+"-----requestId-----"+requestId);
         Request request = chain.request();
-        NetLogUtils.d(TAG+"-----request-----"+request.toString());
+        AppLogUtils.d(TAG+"-----request-----"+request.toString());
 
         //从map集合中取数据，如果有则直接返回，如果没有则存储该数据到map中
         NetworkFeedBean networkFeedModel = IDataPoolHandleImpl.getInstance().getNetworkFeedModel(requestId);

@@ -66,7 +66,7 @@ public final class LocaleSpUtils {
     }
 
     public static synchronized void clearLanguage(Context context) {
-        sCurrentLanguage = LocaleService.getInstance().getSystemLanguage();
+        sCurrentLanguage = LocaleService.getInstance().getSystemLocale();
         getSharedPreferences(context).edit()
                 .remove(KEY_LANGUAGE)
                 .remove(KEY_COUNTRY)

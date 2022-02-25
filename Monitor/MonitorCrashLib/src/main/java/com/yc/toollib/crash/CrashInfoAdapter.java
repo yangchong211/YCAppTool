@@ -12,98 +12,41 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yc.eastadapterlib.BaseRecycleAdapter;
+import com.yc.eastadapterlib.BaseViewHolder;
 import com.yc.toollib.R;
-import com.yc.toollib.tool.OnItemClickListener;
 
 import java.io.File;
 import java.util.List;
 
-public class CrashInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CrashInfoAdapter extends BaseRecycleAdapter<File> {
 
-    private Context context;
-    private LayoutInflater layoutInflater;
-    private List<File> fileList;
-    private OnItemClickListener mOnItemClickLitener;
-
-    public CrashInfoAdapter(Context context, List<File> fileList) {
-        this.context = context;
-        this.fileList = fileList;
-        layoutInflater = LayoutInflater.from(context);
-    }
-
-    public void setOnItemClickLitener(OnItemClickListener mOnItemClickLitener) {
-        this.mOnItemClickLitener = mOnItemClickLitener;
-    }
-
-    public void updateDatas(List<File> fileList) {
-        this.fileList = fileList;
-        notifyDataSetChanged();
+    public CrashInfoAdapter(Context context) {
+        super(context, R.layout.item_crash_view);
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflate = layoutInflater.inflate(R.layout.item_crash_view, parent, false);
-        return new MyViewHolder(inflate);
-    }
+    protected void bindData(BaseViewHolder holder, File file) {
+        TextView tv_title = holder.getView(R.id.tv_title);
+        TextView tv_path = holder.getView(R.id.tv_path);
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        if (holder instanceof MyViewHolder) {
-            MyViewHolder myViewHolder = (MyViewHolder) holder;
-            File file = fileList.get(position);
-            myViewHolder.tv_path.setText(file.getAbsolutePath());
-
-            //动态修改颜色
-            String fileName = file.getName().replace(".txt", "");
-            String[] splitNames = fileName.split("_");
-            Spannable spannable = null;
-            if (splitNames.length == 3) {
-                String errorMsgType = splitNames[2];
-                if (!TextUtils.isEmpty(errorMsgType)) {
-                    spannable = Spannable.Factory.getInstance().newSpannable(fileName);
-                    spannable = CrashLibUtils.addNewSpan(context, spannable, fileName, errorMsgType,
-                            Color.parseColor("#FF0006"), 0);
-                }
+        tv_path.setText(file.getAbsolutePath());
+        //动态修改颜色
+        String fileName = file.getName().replace(".txt", "");
+        String[] splitNames = fileName.split("_");
+        Spannable spannable = null;
+        if (splitNames.length == 3) {
+            String errorMsgType = splitNames[2];
+            if (!TextUtils.isEmpty(errorMsgType)) {
+                spannable = Spannable.Factory.getInstance().newSpannable(fileName);
+                spannable = CrashLibUtils.addNewSpan(context, spannable, fileName, errorMsgType,
+                        Color.parseColor("#FF0006"), 0);
             }
-            if (spannable != null) {
-                myViewHolder.tv_title.setText(spannable);
-            } else {
-                myViewHolder.tv_title.setText(fileName);
-            }
-            if (mOnItemClickLitener != null) {
-                myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mOnItemClickLitener.onItemClick(view, position);
-                    }
-                });
-                myViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View view) {
-                        mOnItemClickLitener.onLongClick(view, position);
-                        return false;
-                    }
-                });
-            }
-
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return fileList.size();
-    }
-
-    static class MyViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView tv_title;
-        private TextView tv_path;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            tv_title = itemView.findViewById(R.id.tv_title);
-            tv_path = itemView.findViewById(R.id.tv_path);
-
+        if (spannable != null) {
+            tv_title.setText(spannable);
+        } else {
+            tv_title.setText(fileName);
         }
     }
 

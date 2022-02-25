@@ -35,6 +35,7 @@ public class CrashTestActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.tv_4).setOnClickListener(this);
         findViewById(R.id.tv_5).setOnClickListener(this);
         findViewById(R.id.tv_6).setOnClickListener(this);
+        findViewById(R.id.tv_7).setOnClickListener(this);
     }
 
 
@@ -48,7 +49,7 @@ public class CrashTestActivity extends AppCompatActivity implements View.OnClick
             list.get(5);
         } else if (id == R.id.tv_3) {
             Activity activity = null;
-            activity.finish();
+            activity.isDestroyed();
         } else if (id == R.id.tv_4){
             new Thread(new Runnable() {
                 @Override
@@ -75,7 +76,8 @@ public class CrashTestActivity extends AppCompatActivity implements View.OnClick
                     list.remove(integer);
                 }
             }
-
+        } else if ( id == R.id.tv_7){
+            CrashToolUtils.startCrashListActivity(this);
         }
     }
 

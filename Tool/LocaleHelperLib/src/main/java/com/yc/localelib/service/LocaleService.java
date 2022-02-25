@@ -2,7 +2,6 @@ package com.yc.localelib.service;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 
 import com.yc.localelib.listener.OnLocaleChangedListener;
 
@@ -53,12 +52,12 @@ public final class LocaleService implements LocaleServiceProvider {
     }
 
     @Override
-    public Locale getSystemLanguage() {
-        return null != this.mDelegate ? this.mDelegate.getSystemLanguage() : null;
+    public Locale getSystemLocale() {
+        return null != this.mDelegate ? this.mDelegate.getSystemLocale() : null;
     }
 
     @Override
-    public boolean isSystemLanguage() {
+    public boolean isSystemLocale() {
         return false;
     }
 

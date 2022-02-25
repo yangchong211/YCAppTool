@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.yc.netlib.R;
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkTraceBean;
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -28,22 +29,6 @@ public final class NetWorkUtils {
     public final static long MINUTE = SECOND * 60;
     public final static long HOUR = MINUTE * 60;
     public final static long DAY = HOUR * 24;
-
-    public static void copyToClipBoard(Context context , String content){
-        if (!TextUtils.isEmpty(content)){
-            //获取剪贴版
-            ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
-            //创建ClipData对象
-            //第一个参数只是一个标记，随便传入。
-            //第二个参数是要复制到剪贴版的内容
-            ClipData clip = ClipData.newPlainText("", content);
-            //传入clipdata对象.
-            if (clipboard != null) {
-                clipboard.setPrimaryClip(clip);
-                Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     /**
      * 判断设备 是否使用代理上网
@@ -109,7 +94,7 @@ public final class NetWorkUtils {
     private static void check(String key, String url , Map<String , Long> traceItemList){
         Context context = NetworkTool.getInstance().getApplication();
         if (context == null) {
-            NetLogUtils.d("OkNetworkMonitor", "context is null.");
+            AppLogUtils.d("OkNetworkMonitor", "context is null.");
             return;
         }
         Long costTime = traceItemList.get(key);
@@ -141,44 +126,6 @@ public final class NetWorkUtils {
             e.printStackTrace();
             return 0;
         }
-    }
-
-
-    /**
-     * sp 转 px
-     * @param spValue               sp 值
-     * @return                      px 值
-     */
-    public static int sp2px(Context context, final float spValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
-    }
-
-    public static int dp2px(Context context, float dp) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dp * scale + 0.5f);
-    }
-
-    /**
-     * 获取屏幕宽
-     * @param context               上下文
-     * @return
-     */
-    public static int getScreenWidth(Context context) {
-        Resources resources = context.getResources();
-        DisplayMetrics dm = resources.getDisplayMetrics();
-        return dm.widthPixels;
-    }
-
-    /**
-     * 获取屏幕高
-     * @param context               上下文
-     * @return
-     */
-    public static int getScreenHeight(Context context) {
-        Resources resources = context.getResources();
-        DisplayMetrics dm = resources.getDisplayMetrics();
-        return dm.heightPixels;
     }
 
     public static SpannableString formatTime(Context context, long time) {

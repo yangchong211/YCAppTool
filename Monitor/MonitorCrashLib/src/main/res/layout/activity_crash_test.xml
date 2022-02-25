@@ -64,5 +64,15 @@
         android:padding="10dp"
         android:text="6.ConcurrentModificationException异常"/>
 
+    <TextView
+        android:id="@+id/tv_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/red"
+        android:padding="10dp"
+        android:text="7.跳转到崩溃日志记录页面"/>
+
+
 
 </LinearLayout>

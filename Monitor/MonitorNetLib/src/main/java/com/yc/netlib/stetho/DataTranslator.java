@@ -7,7 +7,7 @@ import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
 import com.yc.netlib.data.NetworkRecord;
 import com.yc.netlib.ui.NetworkManager;
-import com.yc.netlib.utils.NetLogUtils;
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -31,7 +31,7 @@ public class DataTranslator {
     public void saveInspectorRequest(NetworkEventReporter.InspectorRequest request) {
         String requestId = request.id();
         mStartTimeMap.put(request.id(), System.currentTimeMillis());
-        NetLogUtils.i("DataTranslator-----saveInspectorRequest----"+request);
+        AppLogUtils.i("DataTranslator-----saveInspectorRequest----"+request);
         NetworkFeedBean networkFeedModel = IDataPoolHandleImpl.getInstance().getNetworkFeedModel(requestId);
         //请求url
         String url = request.url();
@@ -77,14 +77,14 @@ public class DataTranslator {
     }
 
     public void saveInspectorResponse(NetworkEventReporter.InspectorResponse response) {
-        NetLogUtils.i("DataTranslator-----saveInspectorResponse----"+response);
+        AppLogUtils.i("DataTranslator-----saveInspectorResponse----"+response);
         String requestId = response.requestId();
         long costTime;
         if (mStartTimeMap!=null){
             if (mStartTimeMap.containsKey(requestId)) {
                 long aLong = mStartTimeMap.get(requestId);
                 costTime = System.currentTimeMillis() - aLong;
-                NetLogUtils.d(TAG, "cost time = " + costTime + "ms");
+                AppLogUtils.d(TAG, "cost time = " + costTime + "ms");
             } else {
                 costTime = -1;
             }
@@ -114,7 +114,7 @@ public class DataTranslator {
             try {
                 byteArrayOutputStream.close();
             } catch (IOException e) {
-                NetLogUtils.e(TAG+ "----saveInterpretResponseStream---"+ e);
+                AppLogUtils.e(TAG+ "----saveInterpretResponseStream---"+ e);
             }
             return newInputStream;
         } else {
@@ -154,7 +154,7 @@ public class DataTranslator {
             NetworkRecord record = NetworkManager.get().getRecord(networkFeedModel.getRequestId());
             record.setResponseLength(body.getBytes().length);
         } catch (IOException e) {
-            NetLogUtils.e(TAG+ "----parseAndSaveBody---"+ e);
+            AppLogUtils.e(TAG+ "----parseAndSaveBody---"+ e);
         }
         return byteArrayOutputStream;
     }

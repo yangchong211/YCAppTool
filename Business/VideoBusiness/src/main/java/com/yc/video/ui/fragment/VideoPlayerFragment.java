@@ -184,7 +184,7 @@ public class VideoPlayerFragment extends BaseFragment {
             //设置不操作后，5秒自动隐藏头部和底部布局
             controller.setHideTime(5000);
             //设置背景图片
-            controller.imageView().setBackgroundResource(R.color.black);
+            controller.imageView().setBackgroundResource(R.color.blackText);
             controller.setLength(98000);
             //监听播放与暂停
             //监听视频播放完成逻辑

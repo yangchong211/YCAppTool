@@ -4,7 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
-import com.yc.toollib.tool.ToolLogUtils;
+
+import com.yc.toolutils.logger.AppLogUtils;
 
 /**
  * <pre>
@@ -89,13 +90,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         this.listener = listener;
         //获取系统默认的UncaughtExceptionHandler
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-        ToolLogUtils.d(TAG, "init mDefaultHandler : " + mDefaultHandler);
+        AppLogUtils.d(TAG, "init mDefaultHandler : " + mDefaultHandler);
         //打印：init mDefaultHandler : com.android.internal.os.RuntimeInit$KillApplicationHandler@7b5887e
         //将当前实例设为系统默认的异常处理器
         //设置一个处理者当一个线程突然因为一个未捕获的异常而终止时将自动被调用。
         //未捕获的异常处理的控制第一个被当前线程处理，如果该线程没有捕获并处理该异常，其将被线程的ThreadGroup对象处理，最后被默认的未捕获异常处理器处理。
         Thread.setDefaultUncaughtExceptionHandler(this);
-        ToolLogUtils.d(TAG, "init mDefaultHandler : " + Thread.getDefaultUncaughtExceptionHandler());
+        AppLogUtils.d(TAG, "init mDefaultHandler : " + Thread.getDefaultUncaughtExceptionHandler());
         //打印：init mDefaultHandler : com.yc.toollib.crash.CrashHandler@755b1df
     }
 
@@ -106,18 +107,18 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
         boolean isHandle = handleException(ex);
-        ToolLogUtils.d(TAG, "uncaughtException--- handleException----"+isHandle);
+        AppLogUtils.d(TAG, "uncaughtException--- handleException----"+isHandle);
         initCustomBug(ex);
         if (mDefaultHandler != null && !isHandle) {
             //收集完信息后，交给系统自己处理崩溃
             //uncaughtException (Thread t, Throwable e) 是一个抽象方法
             //当给定的线程因为发生了未捕获的异常而导致终止时将通过该方法将线程对象和异常对象传递进来。
-            ToolLogUtils.d(TAG, "uncaughtException--- ex----");
+            AppLogUtils.d(TAG, "uncaughtException--- ex----");
             mDefaultHandler.uncaughtException(thread, ex);
         } else {
             //否则自己处理
             if (mContext instanceof Application){
-                ToolLogUtils.w(TAG, "handleException--- ex----重启activity-");
+                AppLogUtils.w(TAG, "handleException--- ex----重启activity-");
                 if (listener!=null){
                     listener.againStartApp();
                 }
@@ -152,7 +153,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     private boolean handleException(Throwable ex) {
         if (ex == null) {
-            ToolLogUtils.w(TAG, "handleException--- ex==null");
+            AppLogUtils.w(TAG, "handleException--- ex==null");
             return false;
         }
         //收集crash信息
@@ -160,7 +161,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (msg == null) {
             return false;
         }
-        ToolLogUtils.w(TAG, "handleException--- ex-----"+msg);
+        AppLogUtils.w(TAG, "handleException--- ex-----"+msg);
         ex.printStackTrace();
         //收集设备信息
         //保存错误报告文件

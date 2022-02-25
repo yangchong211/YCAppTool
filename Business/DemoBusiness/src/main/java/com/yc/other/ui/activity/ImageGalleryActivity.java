@@ -3,6 +3,7 @@ package com.yc.other.ui.activity;
 import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -15,11 +16,11 @@ import com.yc.cn.ycgallerylib.gallery.GalleryImageView;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
+import com.yc.statusbar.bar.StateAppBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 /**
  * <pre>
  *     @author 杨充
@@ -43,7 +44,7 @@ public class ImageGalleryActivity extends BaseActivity {
     @Override
     public void initView() {
         StateAppBar.setStatusBarColor(this,
-                ContextCompat.getColor(this, com.ycbjie.library.R.color.black));
+                ContextCompat.getColor(this, R.color.blackText));
         scrollGalleryView = findViewById(R.id.scroll_gallery_view);
         tag = findViewById(R.id.tag);
     }

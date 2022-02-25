@@ -33,4 +33,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["recyclerview"])
+    implementation project(path: ':ToolUtilsLib')
 }

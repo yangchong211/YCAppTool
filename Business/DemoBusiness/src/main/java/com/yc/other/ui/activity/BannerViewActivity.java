@@ -20,14 +20,13 @@ import com.yc.cn.ycbannerlib.gallery.GalleryScaleTransformer;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.ui.adapter.MeBannerAdapter;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.widget.blurview.blur.CustomBlur;
 import com.yc.other.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 /**
  * <pre>

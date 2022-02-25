@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.yc.statusbar.bar.StateAppBar;
 import com.ycbjie.library.R;
-
 
 
 /**
@@ -33,7 +33,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
-        //StateAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorTheme));
+        StateAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorTheme));
         //避免切换横竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         if (mPresenter != null){

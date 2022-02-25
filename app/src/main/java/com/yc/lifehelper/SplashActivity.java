@@ -10,12 +10,12 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.timerlib.view.CountDownView;
 import com.yc.library.base.mvp.BaseActivity;
 
 import java.util.List;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 
 
-import com.yc.netlib.utils.NetLogUtils;
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -51,7 +51,7 @@ public class Ping {
         File commonFilePath = new File(getPingPath(context));
         if (!commonFilePath.exists()) {
             commonFilePath.mkdirs();
-            NetLogUtils.w(TAG, "create path: " + commonFilePath);
+            AppLogUtils.w(TAG, "create path: " + commonFilePath);
         }
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
         String date = df.format(new Date());
@@ -60,7 +60,7 @@ public class Ping {
         try {
             transUrl = new URL(url);
             String hostName = transUrl.getHost();
-            NetLogUtils.e(TAG, "hostName: " + hostName);
+            AppLogUtils.e(TAG, "hostName: " + hostName);
             runtime = Runtime.getRuntime();
             process = runtime.exec("ping " + hostName);
             BufferedReader buf = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -70,10 +70,10 @@ public class Ping {
                     String string = line.substring(line.indexOf("time="));
                     int index = string.indexOf("time=");
                     String str = string.substring(index + 5, index + 9);
-                    NetLogUtils.e(TAG, "time=: " + str);
+                    AppLogUtils.e(TAG, "time=: " + str);
                     String result = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss")
                             .format(new Date()) + ", " + hostName + ", " + str + "\r\n";
-                    NetLogUtils.e(TAG, "result: " + result);
+                    AppLogUtils.e(TAG, "result: " + result);
                     write(pingFile, result);
                 }
             }
@@ -125,7 +125,7 @@ public class Ping {
     public static void killPing() {
         if (process != null) {
             process.destroy();
-            NetLogUtils.e(TAG, "process: " + process);
+            AppLogUtils.e(TAG, "process: " + process);
         }
     }
 
@@ -166,7 +166,7 @@ public class Ping {
 
     public static void write(File file, String content) {
         BufferedWriter out = null;
-        NetLogUtils.e(TAG, "file: " + file);
+        AppLogUtils.e(TAG, "file: " + file);
         try {
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
             out.write(content);

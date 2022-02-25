@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
-
+//迁移到jitpack
+apply plugin: 'com.github.dcendents.android-maven'
 
 def releaseTime() {
     return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("PRC"))

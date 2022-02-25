@@ -17,6 +17,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yc.toolutils.file.AppFileUtils;
+import com.yc.toolutils.window.AppWindowUtils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,7 +83,10 @@ public class FileExplorerFragment extends Fragment {
             public void onClick(View v) {
                 if (mCurDir != null) {
                     String path = mCurDir.getPath();
-                    FileExplorerUtils.copyToClipBoard(getContext(), path);
+                    boolean copyToClipBoard = AppWindowUtils.copyToClipBoard(getContext(), path);
+                    if (copyToClipBoard){
+                        Toast.makeText(getContext(), "拷贝成功", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(getContext(), "当前为空", Toast.LENGTH_SHORT).show();
                 }
@@ -141,7 +147,7 @@ public class FileExplorerFragment extends Fragment {
                         @Override
                         public void run() {
                             File file = mFileList.get(position);
-                            boolean isDel = FileExplorerUtils.deleteDirectory(file);
+                            boolean isDel = AppFileUtils.deleteDirectory(file);
                             if (isDel) {
                                 mRecyclerView.post(new Runnable() {
                                     @Override

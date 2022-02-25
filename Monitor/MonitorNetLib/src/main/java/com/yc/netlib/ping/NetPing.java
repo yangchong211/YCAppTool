@@ -1,6 +1,7 @@
 package com.yc.netlib.ping;
 
-import com.yc.netlib.utils.NetLogUtils;
+
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class NetPing {
         BufferedReader reader = null;
         try {
             String pingCmd = cmd + this._sendCount + " " + ping.getHost();
-            NetLogUtils.i("NetPing--------pingCmd---"+pingCmd);
+            AppLogUtils.i("NetPing--------pingCmd---"+pingCmd);
             //比如 ping -c 4 10.3.140.254
             Runtime runtime = Runtime.getRuntime();
             process = runtime.exec(pingCmd);
@@ -93,7 +94,7 @@ public class NetPing {
         StringBuilder log = new StringBuilder(256);
         String status = execPing(pingTask, isNeedL);
         if (Pattern.compile(MATCH_PING_IP).matcher(status).find()) {
-            NetLogUtils.i("NetPing--------status---"+status);
+            AppLogUtils.i("NetPing--------status---"+status);
             log.append("\t").append(status);
         } else {
             if (status.length() == 0) {
@@ -102,9 +103,9 @@ public class NetPing {
                 log.append("timeout");
             }
         }
-        NetLogUtils.i("NetPing--------exec---"+host);
+        AppLogUtils.i("NetPing--------exec---"+host);
         String logStr = PingParseTool.getFormattingStr(host, log.toString());
-        NetLogUtils.i("NetPing--------logStr---"+logStr);
+        AppLogUtils.i("NetPing--------logStr---"+logStr);
         this.listener.OnNetPingFinished(logStr);
     }
 

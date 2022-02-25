@@ -7,9 +7,9 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.book.fjGame.GameView;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.statusbar.bar.StateAppBar;
 import com.ycbjie.book.R;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 
 /**

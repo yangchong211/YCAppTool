@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.ns.yc.ycstatelib.StateLayoutManager;
+import com.yc.ycstatelib.StateLayoutManager;
 import com.ycbjie.library.R;
 
 
