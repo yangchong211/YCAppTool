@@ -14,57 +14,57 @@ project(':BusinessInterface').projectDir = new File('Business/BusinessInterface'
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
         ':ServerInterface', ':GsonServer'
-project(':ImageServer').projectDir = new File('Server/ImageServer')
-project(':HttpServer').projectDir = new File('Server/HttpServer')
-project(':ShareServer').projectDir = new File('Server/ShareServer')
-project(':XlogServer').projectDir = new File('Server/XlogServer')
-project(':NfcServer').projectDir = new File('Server/NfcServer')
-project(':GsonServer').projectDir = new File('Server/GsonServer')
-project(':ServerInterface').projectDir = new File('Server/ServerInterface')
+project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
+project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
+project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
+project(':XlogServer').projectDir = new File('ServerLib/XlogServer')
+project(':NfcServer').projectDir = new File('ServerLib/NfcServer')
+project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
+project(':ServerInterface').projectDir = new File('ServerLib/ServerInterface')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib','ComponentLib'
-project(':LibraryLayer').projectDir = new File('Common/LibraryLayer')
-project(':ConfigLayer').projectDir = new File('Common/ConfigLayer')
-project(':AppStatusLib').projectDir = new File('Common/AppStatusLib')
-project(':ToolUtilsLib').projectDir = new File('Common/ToolUtilsLib')
-project(':ComponentLib').projectDir = new File('Common/ComponentLib')
+project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
+project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
+project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
+project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
+project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':FragmentLib',':WidgetViewLib',':ZoomImageLib', ':LargeImageLib',
         ':SwipeBackLib', ':StatusBarLib', ':AppStateLib'
-project(':BannerViewLib').projectDir = new File('Widget/BannerViewLib')
-project(':PhotoWidget').projectDir = new File('Widget/PhotoWidget')
-project(':CustomWidget').projectDir = new File('Widget/CustomWidget')
-project(':BlurViewLib').projectDir = new File('Widget/BlurViewLib')
-project(':FragmentLib').projectDir = new File('Widget/FragmentLib')
-project(':WidgetViewLib').projectDir = new File('Widget/WidgetViewLib')
-project(':ZoomImageLib').projectDir = new File('Widget/ZoomImageLib')
-project(':LargeImageLib').projectDir = new File('Widget/LargeImageLib')
-project(':SwipeBackLib').projectDir = new File('Widget/SwipeBackLib')
-project(':StatusBarLib').projectDir = new File('Widget/StatusBarLib')
-project(':AppStateLib').projectDir = new File('Widget/AppStateLib')
+project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
+project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
+project(':CustomWidget').projectDir = new File('WidgetLib/CustomWidget')
+project(':BlurViewLib').projectDir = new File('WidgetLib/BlurViewLib')
+project(':FragmentLib').projectDir = new File('WidgetLib/FragmentLib')
+project(':WidgetViewLib').projectDir = new File('WidgetLib/WidgetViewLib')
+project(':ZoomImageLib').projectDir = new File('WidgetLib/ZoomImageLib')
+project(':LargeImageLib').projectDir = new File('WidgetLib/LargeImageLib')
+project(':SwipeBackLib').projectDir = new File('WidgetLib/SwipeBackLib')
+project(':StatusBarLib').projectDir = new File('WidgetLib/StatusBarLib')
+project(':AppStateLib').projectDir = new File('WidgetLib/AppStateLib')
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,
         ':AnimatorToolLib', ':AppTraceTool', ':LongevityLib',
         ':ThreadPoolLib', ':ThreadTaskLib'
-project(':ZxingServerLib').projectDir = new File('Tool/ZxingServerLib')
-project(':WebSocketLib').projectDir = new File('Tool/WebSocketLib')
-project(':SocketIoLib').projectDir = new File('Tool/SocketIoLib')
-project(':SerialTaskLib').projectDir = new File('Tool/SerialTaskLib')
-project(':NetHelperLib').projectDir = new File('Tool/NetHelperLib')
-project(':LocaleHelperLib').projectDir = new File('Tool/LocaleHelperLib')
-project(':CountTimerLib').projectDir = new File('Tool/CountTimerLib')
-project(':AnimatorToolLib').projectDir = new File('Tool/AnimatorToolLib')
-project(':AppTraceTool').projectDir = new File('Tool/AppTraceTool')
-project(':LongevityLib').projectDir = new File('Tool/LongevityLib')
-project(':ThreadPoolLib').projectDir = new File('Tool/ThreadPoolLib')
-project(':ThreadTaskLib').projectDir = new File('Tool/ThreadTaskLib')
+project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
+project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
+project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
+project(':SerialTaskLib').projectDir = new File('ToolLib/SerialTaskLib')
+project(':NetHelperLib').projectDir = new File('ToolLib/NetHelperLib')
+project(':LocaleHelperLib').projectDir = new File('ToolLib/LocaleHelperLib')
+project(':CountTimerLib').projectDir = new File('ToolLib/CountTimerLib')
+project(':AnimatorToolLib').projectDir = new File('ToolLib/AnimatorToolLib')
+project(':AppTraceTool').projectDir = new File('ToolLib/AppTraceTool')
+project(':LongevityLib').projectDir = new File('ToolLib/LongevityLib')
+project(':ThreadPoolLib').projectDir = new File('ToolLib/ThreadPoolLib')
+project(':ThreadTaskLib').projectDir = new File('ToolLib/ThreadTaskLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -77,10 +77,10 @@ project(':api-plugin').projectDir = new File('AptHelper/api-plugin')
 /* +++++++++ App监控库 +++++++++ */
 include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',':MonitorNetLib',
         ':MonitorFileLib'
-project(':MonitorAliveLib').projectDir = new File('Monitor/MonitorAliveLib')
-project(':MonitorCatonLib').projectDir = new File('Monitor/MonitorCatonLib')
-project(':MonitorAnrLib').projectDir = new File('Monitor/MonitorAnrLib')
-project(':MonitorCrashLib').projectDir = new File('Monitor/MonitorCrashLib')
-project(':MonitorNetLib').projectDir = new File('Monitor/MonitorNetLib')
-project(':MonitorFileLib').projectDir = new File('Monitor/MonitorFileLib')
+project(':MonitorAliveLib').projectDir = new File('MonitorLib/MonitorAliveLib')
+project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
+project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
+project(':MonitorCrashLib').projectDir = new File('MonitorLib/MonitorCrashLib')
+project(':MonitorNetLib').projectDir = new File('MonitorLib/MonitorNetLib')
+project(':MonitorFileLib').projectDir = new File('MonitorLib/MonitorFileLib')
 
