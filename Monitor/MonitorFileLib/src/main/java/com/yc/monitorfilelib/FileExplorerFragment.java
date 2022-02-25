@@ -105,6 +105,10 @@ public class FileExplorerFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("file_key", fileInfo);
                         showContent(ImageDetailFragment.class, bundle);
+                    } else if (FileExplorerUtils.isSp(fileInfo)) {
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("file_key", fileInfo);
+                        showContent(SpDetailFragment.class, bundle);
                     } else {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("file_key", fileInfo);

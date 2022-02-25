@@ -16,6 +16,7 @@ import com.yc.netlib.utils.NetworkTool;
 import com.yc.toollib.crash.CrashHandler;
 import com.yc.toollib.crash.CrashListener;
 import com.yc.toollib.crash.CrashToolUtils;
+import com.yc.toolutils.AppToolUtils;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.logger.AppLogUtils;
 
@@ -48,6 +49,7 @@ public class MainApplication extends LibApplication {
         initLang();
         initNetWork();
         initCrash();
+        AppToolUtils.init(this);
     }
 
     @Override
