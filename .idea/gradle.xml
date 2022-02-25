@@ -29,6 +29,7 @@
             <option value="$PROJECT_DIR$/Monitor/MonitorCrashLib" />
             <option value="$PROJECT_DIR$/Monitor/MonitorFileLib" />
             <option value="$PROJECT_DIR$/Monitor/MonitorNetLib" />
+            <option value="$PROJECT_DIR$/Server/GsonServer" />
             <option value="$PROJECT_DIR$/Server/HttpServer" />
             <option value="$PROJECT_DIR$/Server/ImageServer" />
             <option value="$PROJECT_DIR$/Server/NfcServer" />

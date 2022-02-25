@@ -12,12 +12,14 @@ project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
 project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 
 /* +++++++++ 框架业务服务层 +++++++++ */
-include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',':ServerInterface'
+include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
+        ':ServerInterface', ':GsonServer'
 project(':ImageServer').projectDir = new File('Server/ImageServer')
 project(':HttpServer').projectDir = new File('Server/HttpServer')
 project(':ShareServer').projectDir = new File('Server/ShareServer')
 project(':XlogServer').projectDir = new File('Server/XlogServer')
 project(':NfcServer').projectDir = new File('Server/NfcServer')
+project(':GsonServer').projectDir = new File('Server/GsonServer')
 project(':ServerInterface').projectDir = new File('Server/ServerInterface')
 
 
@@ -81,5 +83,4 @@ project(':MonitorAnrLib').projectDir = new File('Monitor/MonitorAnrLib')
 project(':MonitorCrashLib').projectDir = new File('Monitor/MonitorCrashLib')
 project(':MonitorNetLib').projectDir = new File('Monitor/MonitorNetLib')
 project(':MonitorFileLib').projectDir = new File('Monitor/MonitorFileLib')
-
 

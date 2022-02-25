@@ -7,6 +7,7 @@ import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.BatteryInfo;
 import com.yc.appstatuslib.info.ThreadInfo;
 import com.yc.appstatuslib.listener.BaseStatusListener;
+import com.yc.library.utils.AppLogHelper;
 import com.yc.localelib.listener.OnLocaleChangedListener;
 import com.yc.localelib.service.LocaleService;
 import com.yc.longevitylib.LongevityMonitor;
@@ -44,6 +45,7 @@ public class MainApplication extends LibApplication {
     public void onCreate() {
         Log.d("Application", "onCreate");
         super.onCreate();
+        AppLogHelper.config(this);
         LongevityMonitor();
         initAppStatusListener();
         initLang();

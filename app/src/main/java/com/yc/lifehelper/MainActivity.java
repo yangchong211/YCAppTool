@@ -32,6 +32,8 @@ import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.web.WebViewActivity;
+import com.yc.logging.LoggerService;
+import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.other.ui.activity.net.NetworkActivity;
 import com.yc.toollib.crash.CrashToolUtils;
@@ -75,6 +77,7 @@ public class MainActivity extends BaseActivity{
     private BannerView banner;
     private View headerView;
     public static final int REQUEST_CODE_SCAN = 0X01;
+    private Logger logger = LoggerService.getInstance().getLogger("MainActivity");
 
     @Override
     public int getContentView() {
@@ -245,17 +248,22 @@ public class MainActivity extends BaseActivity{
                         //沙盒File
                         case R.id.tv_home_first:
                             FileExplorerActivity.startActivity(MainActivity.this);
+                            logger.debug("file app tool");
                             break;
                         //崩溃监控
                         case R.id.tv_home_second:
                             CrashToolUtils.startCrashTestActivity(MainActivity.this);
+                            logger.info("crash app log");
                             break;
                         //网络工具
                         case R.id.tv_home_third:
                             NetworkActivity.start(MainActivity.this);
+                            logger.warn("net work tool");
                             break;
+                        //ANR监控
                         case R.id.tv_home_four:
                             LocaleActivity.startActivity(MainActivity.this);
+                            logger.error("net work tool");
                             break;
                         default:
                             break;

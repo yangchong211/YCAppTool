@@ -103,6 +103,7 @@ dependencies {
     api rootProject.ext.dependencies["YCProgressLib"]
     api rootProject.ext.dependencies["YCGalleryLib"]
     api rootProject.ext.dependencies["YCBannerLib"]
+    implementation project(path: ':XlogServer')
 
     //https://github.com/yangchong211/YCRefreshView
     //recyclerView封装库

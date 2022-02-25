@@ -40,6 +40,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-manager/LifeHelper.api-manager.iml" filepath="$PROJECT_DIR$/.idea/modules/api-manager/LifeHelper.api-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-plugin/LifeHelper.api-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/api-plugin/LifeHelper.api-plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/GsonServer/Server.LifeHelper.GsonServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/GsonServer/Server.LifeHelper.GsonServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/AnimatorLib/Tool.LifeHelper.AnimatorToolLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/AnimatorLib/Tool.LifeHelper.AnimatorToolLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/CountTimerLib/Tool.LifeHelper.CountTimerLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/CountTimerLib/Tool.LifeHelper.CountTimerLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/LocaleHelperLib/Tool.LifeHelper.LocaleHelperLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/LocaleHelperLib/Tool.LifeHelper.LocaleHelperLib.iml" />

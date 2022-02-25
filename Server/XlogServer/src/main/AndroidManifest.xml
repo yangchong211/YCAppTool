@@ -7,7 +7,7 @@
 
     <application>
         <provider
-            android:name="com.yc.logging.InitProvider"
+            android:name="com.yc.logging.config.LogInitProvider"
             android:authorities="${applicationId}.LoggerInitProvider"
             android:exported="false" />
     </application>
