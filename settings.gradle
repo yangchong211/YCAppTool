@@ -75,8 +75,8 @@ project(':api-plugin').projectDir = new File('AptHelper/api-plugin')
 
 
 /* +++++++++ App监控库 +++++++++ */
-include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',':MonitorNetLib',
-        ':MonitorFileLib'
+include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',
+        ':MonitorNetLib', ':MonitorFileLib'
 project(':MonitorAliveLib').projectDir = new File('MonitorLib/MonitorAliveLib')
 project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
 project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
