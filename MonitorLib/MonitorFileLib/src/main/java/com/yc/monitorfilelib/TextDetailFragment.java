@@ -127,7 +127,7 @@ public class TextDetailFragment extends Fragment {
                 if (copy) {
                     //分享
                     boolean shareFile = FileShareUtils.shareFile(mActivity, destFile);
-                    if (shareFile){
+                    if (shareFile) {
                         Toast.makeText(getContext(), "文件分享成功", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getContext(), "文件分享失败", Toast.LENGTH_SHORT).show();

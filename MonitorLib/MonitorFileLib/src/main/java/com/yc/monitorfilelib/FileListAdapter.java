@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yc.eastadapterlib.BaseRecycleAdapter;
+import com.yc.eastadapterlib.BaseViewHolder;
 import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.File;
@@ -25,109 +27,42 @@ import java.util.List;
  *     revise :
  * </pre>
  */
-public class FileListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FileListAdapter extends BaseRecycleAdapter<File> {
+    
 
-    private final Context context;
-    private final List<File> mFileList;
-    private OnViewClickListener mOnViewClickListener;
-    private OnViewLongClickListener mOnViewLongClickListener;
-
-    public FileListAdapter(Context context, List<File> fileList) {
-        this.context = context;
-        mFileList = fileList;
-    }
-
-    public void setOnViewClickListener(OnViewClickListener onViewClickListener) {
-        this.mOnViewClickListener = onViewClickListener;
-    }
-
-    public void setOnViewLongClickListener(OnViewLongClickListener onViewLongClickListener) {
-        this.mOnViewLongClickListener = onViewLongClickListener;
-    }
-
-    public interface OnViewLongClickListener {
-        boolean onViewLongClick(View var1, File var2 ,int pos);
-    }
-
-    public interface OnViewClickListener {
-        void onViewClick(View var1, File var2);
+    public FileListAdapter(Context context) {
+        super(context, R.layout.item_list_file_view);
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.item_list_file_view,
-                parent, false);
-        return new MyViewHolder(inflate);
-    }
+    protected void bindData(BaseViewHolder holder, File file) {
+        ImageView ivIcon = holder.getView(R.id.iv_icon);
+        TextView tvName = holder.getView(R.id.tv_name);
+        TextView tvDate = holder.getView(R.id.tv_date);
+        TextView tvSize = holder.getView(R.id.tv_size);
+        ImageView ivMore = holder.getView(R.id.iv_more);
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder,final int position) {
-        if (holder instanceof MyViewHolder) {
-            MyViewHolder myViewHolder = (MyViewHolder) holder;
-            File fileInfo = mFileList.get(position);
-
-            myViewHolder.mName.setText(fileInfo.getName());
-            myViewHolder.mDate.setText(AppFileUtils.getFileTime(fileInfo));
-            if (fileInfo.isDirectory()) {
-                myViewHolder.mIcon.setImageResource(R.drawable.sand_box_dir_icon);
-                myViewHolder.mMoreBtn.setVisibility(View.VISIBLE);
-                myViewHolder.mSize.setVisibility(View.GONE);
+        tvName.setText(file.getName());
+        tvDate.setText(AppFileUtils.getFileTime(file));
+        if (file.isDirectory()) {
+            ivIcon.setImageResource(R.drawable.sand_box_dir_icon);
+            ivMore.setVisibility(View.VISIBLE);
+            tvSize.setVisibility(View.GONE);
+        } else {
+            if (FileExplorerUtils.getSuffix(file).equals("jpg")) {
+                ivIcon.setImageResource(R.drawable.sand_box_jpg_icon);
+            } else if (FileExplorerUtils.getSuffix(file).equals("txt")) {
+                ivIcon.setImageResource(R.drawable.sand_box_txt_icon);
+            } else if (FileExplorerUtils.getSuffix(file).equals("db")) {
+                ivIcon.setImageResource(R.drawable.sand_box_file_db);
             } else {
-                if (FileExplorerUtils.getSuffix(fileInfo).equals("jpg")) {
-                    myViewHolder.mIcon.setImageResource(R.drawable.sand_box_jpg_icon);
-                } else if (FileExplorerUtils.getSuffix(fileInfo).equals("txt")) {
-                    myViewHolder.mIcon.setImageResource(R.drawable.sand_box_txt_icon);
-                } else if (FileExplorerUtils.getSuffix(fileInfo).equals("db")) {
-                    myViewHolder.mIcon.setImageResource(R.drawable.sand_box_file_db);
-                } else {
-                    myViewHolder.mIcon.setImageResource(R.drawable.sand_box_file_icon);
-                }
-                myViewHolder.mMoreBtn.setVisibility(View.GONE);
-                myViewHolder.mSize.setVisibility(View.VISIBLE);
-                long directorySize = AppFileUtils.getDirectorySize(fileInfo);
-                SpannableString printSizeForSpannable = FileExplorerUtils.getPrintSizeForSpannable(directorySize);
-                myViewHolder.mSize.setText(printSizeForSpannable);
+                ivIcon.setImageResource(R.drawable.sand_box_file_icon);
             }
-
-            if (mOnViewClickListener != null) {
-                myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mOnViewClickListener.onViewClick(view, fileInfo);
-                    }
-                });
-                myViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View view) {
-                        return mOnViewLongClickListener != null &&
-                                mOnViewLongClickListener.onViewLongClick(view, fileInfo,position);
-                    }
-                });
-            }
-
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        return mFileList==null ? 0 : mFileList.size();
-    }
-
-    private static class MyViewHolder extends RecyclerView.ViewHolder {
-
-        private final TextView mName;
-        private final ImageView mIcon;
-        private final ImageView mMoreBtn;
-        private final TextView mSize;
-        private final TextView mDate;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            mName = itemView.findViewById(R.id.tv_name);
-            mIcon = itemView.findViewById(R.id.iv_icon);
-            mMoreBtn = itemView.findViewById(R.id.iv_more);
-            mSize = itemView.findViewById(R.id.tv_size);
-            mDate = itemView.findViewById(R.id.tv_date);
+            ivMore.setVisibility(View.GONE);
+            tvSize.setVisibility(View.VISIBLE);
+            long directorySize = AppFileUtils.getDirectorySize(file);
+            SpannableString printSizeForSpannable = FileExplorerUtils.getPrintSizeForSpannable(directorySize);
+            tvSize.setText(printSizeForSpannable);
         }
     }
 

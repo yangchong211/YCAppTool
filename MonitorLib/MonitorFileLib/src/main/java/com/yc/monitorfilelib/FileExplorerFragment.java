@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yc.eastadapterlib.OnItemClickListener;
+import com.yc.eastadapterlib.OnItemLongClickListener;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.window.AppWindowUtils;
 
@@ -96,36 +98,40 @@ public class FileExplorerFragment extends Fragment {
 
     private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mFileInfoAdapter = new FileListAdapter(getContext(), mFileList);
-        mFileInfoAdapter.setOnViewClickListener(new FileListAdapter.OnViewClickListener() {
-            public void onViewClick(View v, File fileInfo) {
-                if (fileInfo.exists() && fileInfo.isFile()) {
-                    //如果是文件，则直接打开文件
-                    if (FileExplorerUtils.isImage(fileInfo)) {
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("file_key", fileInfo);
-                        showContent(ImageDetailFragment.class, bundle);
-                    } else if (FileExplorerUtils.isSp(fileInfo)) {
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("file_key", fileInfo);
-                        showContent(SpDetailFragment.class, bundle);
+        mFileInfoAdapter = new FileListAdapter(getContext());
+        mFileInfoAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int i) {
+                if (mFileList.size()>i && i>=0){
+                    File fileInfo = mFileList.get(i);
+                    if (fileInfo.exists() && fileInfo.isFile()) {
+                        //如果是文件，则直接打开文件
+                        if (FileExplorerUtils.isImage(fileInfo)) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("file_key", fileInfo);
+                            showContent(ImageDetailFragment.class, bundle);
+                        } else if (FileExplorerUtils.isSp(fileInfo)) {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("file_key", fileInfo);
+                            showContent(SpDetailFragment.class, bundle);
+                        } else {
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("file_key", fileInfo);
+                            showContent(TextDetailFragment.class, bundle);
+                        }
                     } else {
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("file_key", fileInfo);
-                        showContent(TextDetailFragment.class, bundle);
+                        //否则是文件夹，则继续打开对应的list列表
+                        mCurDir = fileInfo;
+                        mTvTitle.setText(mCurDir.getName());
+                        //拿到当前目录的列表数据
+                        setAdapterData(getFileInfos(mCurDir));
                     }
-                } else {
-                    //否则是文件夹，则继续打开对应的list列表
-                    mCurDir = fileInfo;
-                    mTvTitle.setText(mCurDir.getName());
-                    //拿到当前目录的列表数据
-                    setAdapterData(getFileInfos(mCurDir));
                 }
             }
         });
-        mFileInfoAdapter.setOnViewLongClickListener(new FileListAdapter.OnViewLongClickListener() {
+        mFileInfoAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
-            public boolean onViewLongClick(View v, File fileInfo, int position) {
+            public boolean onItemLongClick(View view, int position) {
                 //长按弹窗，让测试可以选择是否删除文件
                 delFile(position);
                 return false;
