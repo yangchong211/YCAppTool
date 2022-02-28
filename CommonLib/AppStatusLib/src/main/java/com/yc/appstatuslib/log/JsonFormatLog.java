@@ -1,5 +1,7 @@
 package com.yc.appstatuslib.log;
 
+import android.util.Log;
+
 import com.yc.appstatuslib.info.CollectionInfo;
 
 import java.io.File;
@@ -14,7 +16,8 @@ public class JsonFormatLog extends BaseFormatStrategy {
     }
 
     public String log(CollectionInfo info) {
-        this.write(this.mFile, info.toString());
+        //this.write(this.mFile, info.toString());
+        Log.d("CsvFormatLog log",info.toString());
         return null;
     }
 }

@@ -5,6 +5,8 @@ import android.widget.TextView;
 
 import com.yc.leetbusiness.R;
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.logging.LoggerService;
+import com.yc.logging.logger.Logger;
 
 import java.util.Arrays;
 
@@ -22,7 +24,7 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
     private TextView tv10;
     private TextView tv11;
     private TextView tv12;
-    private static final String TAG = "ArrayTestActivity: ";
+    private final Logger logger = LoggerService.getInstance().getLogger("ArrayTestActivity");
 
     @Override
     public int getContentView() {
@@ -48,6 +50,7 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void initListener() {
         tv1.setOnClickListener(this);
+        tv2.setOnClickListener(this);
     }
 
     @Override
@@ -57,9 +60,9 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v == tv1){
+        if (v == tv1) {
             testArray1();
-        } else if (v == tv2){
+        } else if (v == tv2) {
             delete();
         }
     }
@@ -77,7 +80,7 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
         array.display();
         //根据下标为0的元素
         int i = array.get(0);
-        System.out.println(i);
+        logger.debug("索引0的值" + i);
         //删除4的元素
         array.delete(4);
         //将元素3修改为33
@@ -88,29 +91,28 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
     /**
      * 删除数组中重复内容
      */
-    private void delete(){
-        int[] nums1 =  {0,0,1,1,1,2,2,3,3,4};
-        int[] nums2 = {1,1,2};
-        removeDuplicates(nums1);
-        removeDuplicates(nums2);
+    private void delete() {
+        int[] nums1 = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+        int[] nums2 = {1, 1, 2};
+        removeData(nums1);
+        removeData(nums2);
     }
 
-    private void removeDuplicates(int[] num){
-        if (num == null || num.length == 0){
-            return;
+    private int removeData(int[] num) {
+        if (num == null || num.length == 0) {
+            return 0;
         }
-        int cur = num[0];
-        int index = 0;
-        for (int i=0 ; i<num.length ; i++){
-            if (num[i] != cur){
-                //数据不相同
-                index ++ ;
-                cur = num[i];
-                num[index] = cur;
+        int currentV = num[0];
+        int count = 0;
+        for (int i = 1; i < num.length; i++) {
+            if (num[i] != currentV) {
+                count++;
+                currentV = num[i];
+                num[count] = currentV;
             }
         }
-        int count = num.length;
-        System.out.println(TAG+"数组数量"+count + "  " + Arrays.toString(num));
+        logger.debug("数据数组数量" + count + "  " + Arrays.toString(num));
+        return count + 1;
     }
 
 }

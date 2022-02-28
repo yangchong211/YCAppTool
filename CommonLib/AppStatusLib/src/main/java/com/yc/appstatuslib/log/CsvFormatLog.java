@@ -1,5 +1,7 @@
 package com.yc.appstatuslib.log;
 
+import android.util.Log;
+
 import com.yc.appstatuslib.info.CollectionInfo;
 
 import java.io.File;
@@ -41,7 +43,8 @@ public class CsvFormatLog extends BaseFormatStrategy {
         builder.append("cpuTemperature");
         builder.append(",");
         builder.append("appStatus");
-        this.write(this.mFile, builder.toString());
+        //this.write(this.mFile, builder.toString());
+        Log.d("printCsvHeader",builder.toString());
     }
 
     public String log(CollectionInfo info) {
@@ -75,7 +78,8 @@ public class CsvFormatLog extends BaseFormatStrategy {
         builder.append(info.cpuInfo.cpuTemperature);
         builder.append(",");
         builder.append(info.appStatus);
-        this.write(this.mFile, builder.toString());
+        //this.write(this.mFile, builder.toString());
+        Log.d("CsvFormatLog log",builder.toString());
         return builder.toString();
     }
 }

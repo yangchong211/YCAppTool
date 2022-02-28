@@ -1,10 +1,15 @@
 package com.yc.leetbusiness.array;
 
 
+import com.yc.logging.LoggerService;
+import com.yc.logging.logger.Logger;
+
 /// 题目，使用类实现简单数组
 public class MyArray {
 
     private static final String TAG = "MyArray: ";
+    private final Logger logger = LoggerService.getInstance().getLogger("ArrayTestActivity");
+
     //定义一个数组
     private final int[] intArray;
     //定义数组的实际有效长度
@@ -36,9 +41,9 @@ public class MyArray {
      */
     public void display() {
         for (int i = 0; i < elems; i++) {
-            System.out.print(TAG+intArray[i] + " ");
+            logger.debug(TAG+intArray[i] + " ");
         }
-        System.out.println(TAG+"display");
+        logger.debug(TAG+"display");
     }
 
     /**
@@ -68,7 +73,7 @@ public class MyArray {
             throw new IndexOutOfBoundsException("访问下标越界");
         }
         int data = intArray[i];
-        System.out.println(TAG+data);
+        logger.debug(TAG+data);
         return data;
     }
 
@@ -100,7 +105,7 @@ public class MyArray {
     public boolean delete(int value) {
         int k = find(value);
         if (k == -1) {
-            System.out.println(TAG+"删除失败，找不到");
+            logger.debug(TAG+"删除失败，找不到");
             return false;
         } else {
             if (k == elems - 1) {
@@ -111,7 +116,7 @@ public class MyArray {
                 }
                 elems--;
             }
-            System.out.println(TAG+"删除成功"+value);
+            logger.debug(TAG+"删除成功"+value);
             return true;
         }
     }
@@ -129,7 +134,7 @@ public class MyArray {
             throw new IndexOutOfBoundsException("需要修改的数据不存在");
         } else {
             intArray[i] = newValue;
-            System.out.println(TAG+"修改成功"+intArray[i]);
+            logger.debug(TAG+"修改成功"+intArray[i]);
             return true;
         }
     }
