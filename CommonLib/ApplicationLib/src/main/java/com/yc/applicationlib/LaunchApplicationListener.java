@@ -4,16 +4,19 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
-import java.util.ServiceLoader;
+import com.yc.api.compiler.getIt.ServiceLoader;
+import com.yc.api.getIt.ServiceProvider;
+
 
 /**
  * 分发 lifecycle 时确保各个 listener 出现异常时不相互影响
  */
+@ServiceProvider(value = ApplicationListener.class, priority = -1)
 public class LaunchApplicationListener extends AbstractLifecycleListener {
 
     private final Iterable<ApplicationListener> mApplicationListener =
             ServiceLoader.load(ApplicationListener.class);
-    private Iterable<AppLifecycleListener> mAppListener =
+    private final Iterable<AppLifecycleListener> mAppListener =
             ServiceLoader.load(AppLifecycleListener.class);
 
 

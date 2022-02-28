@@ -8,7 +8,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'maven'
+apply plugin: 'com.github.dcendents.android-maven'
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
