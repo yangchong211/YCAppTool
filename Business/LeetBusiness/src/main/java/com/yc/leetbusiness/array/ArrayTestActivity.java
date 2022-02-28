@@ -51,6 +51,8 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
     public void initListener() {
         tv1.setOnClickListener(this);
         tv2.setOnClickListener(this);
+        tv3.setOnClickListener(this);
+        tv4.setOnClickListener(this);
     }
 
     @Override
@@ -64,6 +66,10 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
             testArray1();
         } else if (v == tv2) {
             delete();
+        } else if (v == tv3) {
+            beerAndDrink();
+        } else if (v == tv4) {
+            singleNumber();
         }
     }
 
@@ -113,6 +119,29 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
         }
         logger.debug("数据数组数量" + count + "  " + Arrays.toString(num));
         return count + 1;
+    }
+
+    /**
+     * 啤酒每罐2.3元，饮料每罐1.9元。小明买了若干啤酒和饮料，一共花了82.3元。
+     * 我们还知道他买的啤酒比饮料的数量少，请你计算他买了几罐啤酒。
+     */
+    private void beerAndDrink() {
+        int x = (int) (82.3 / 2.3);
+        int y = (int) (82.3 / 1.9);
+        logger.debug("打印值 "+x + " " + y);
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                // 钱刚好花光了，并且啤酒比饮料少
+                if ((i * 2.3 + j * 1.9) == 82.3 && i<j) {
+                    logger.debug("打印值"+"----啤酒买了" + i);
+                    logger.debug("打印值"+"----饮料买了" + j);
+                }
+            }
+        }
+    }
+
+    private void singleNumber(){
+
     }
 
 }
