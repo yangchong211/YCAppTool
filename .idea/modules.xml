@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/AppStateLib/LifeHelper.AppStateLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/AppStateLib/LifeHelper.AppStateLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/AppStatusLib/LifeHelper.AppStatusLib.iml" filepath="$PROJECT_DIR$/.idea/modules/common/AppStatusLib/LifeHelper.AppStatusLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tracesdk/LifeHelper.AppTraceTool.iml" filepath="$PROJECT_DIR$/.idea/modules/tracesdk/LifeHelper.AppTraceTool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ApplicationLib/LifeHelper.ApplicationLib.iml" filepath="$PROJECT_DIR$/.idea/modules/ApplicationLib/LifeHelper.ApplicationLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/BannerWidget/LifeHelper.BannerViewLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/WidgetLib/BlurViewLib/LifeHelper.BlurViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/WidgetLib/BlurViewLib/LifeHelper.BlurViewLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/BusinessInterface/LifeHelper.BusinessInterface.iml" filepath="$PROJECT_DIR$/.idea/modules/business/BusinessInterface/LifeHelper.BusinessInterface.iml" />
@@ -31,6 +32,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Monitor/MonitorCrashLib/LifeHelper.MonitorCrashLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Monitor/MonitorCrashLib/LifeHelper.MonitorCrashLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Monitor/MonitorFileLib/LifeHelper.MonitorFileLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Monitor/MonitorFileLib/LifeHelper.MonitorFileLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Monitor/MonitorNetLib/LifeHelper.MonitorNetLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Monitor/MonitorNetLib/LifeHelper.MonitorNetLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MonitorOomLib/LifeHelper.MonitorOomLib.iml" filepath="$PROJECT_DIR$/.idea/modules/MonitorOomLib/LifeHelper.MonitorOomLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tool/NetHelperLib/LifeHelper.NetHelperLib.iml" filepath="$PROJECT_DIR$/.idea/modules/Tool/NetHelperLib/LifeHelper.NetHelperLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/NfcServer/LifeHelper.NfcServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/NfcServer/LifeHelper.NfcServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/LifeHelper.PhotoWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/LifeHelper.PhotoWidget.iml" />

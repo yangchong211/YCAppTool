@@ -11,6 +11,7 @@ project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
 project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
 project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 
+
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
         ':ServerInterface', ':GsonServer'
@@ -24,13 +25,14 @@ project(':ServerInterface').projectDir = new File('ServerLib/ServerInterface')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib','ComponentLib'
+include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
+        'ComponentLib',':ApplicationLib'
 project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
-
+project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
@@ -84,3 +86,5 @@ project(':MonitorCrashLib').projectDir = new File('MonitorLib/MonitorCrashLib')
 project(':MonitorNetLib').projectDir = new File('MonitorLib/MonitorNetLib')
 project(':MonitorFileLib').projectDir = new File('MonitorLib/MonitorFileLib')
 
+
+include ':MonitorOomLib'

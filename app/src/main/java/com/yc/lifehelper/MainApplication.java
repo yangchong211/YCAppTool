@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.yc.appstatuslib.AppStatusManager;
+import com.yc.appstatuslib.backgroud.AppStateMonitor;
 import com.yc.appstatuslib.info.BatteryInfo;
 import com.yc.appstatuslib.info.ThreadInfo;
 import com.yc.appstatuslib.listener.BaseStatusListener;
@@ -178,6 +179,18 @@ public class MainApplication extends LibApplication {
                 AppLogUtils.i("app status wait线程数量 " + threadInfo.getWaitingThreadCount().size());
                 AppLogUtils.i("app status block线程数量 " + threadInfo.getBlockThreadCount().size());
                 AppLogUtils.i("app status timewait线程数量 " + threadInfo.getTimeWaitingThreadCount().size());
+            }
+        });
+
+        AppStateMonitor.getInstance().registerAppStateListener(new AppStateMonitor.AppStateListener() {
+            @Override
+            public void onInForeground() {
+                AppLogUtils.i("app status 在后台");
+            }
+
+            @Override
+            public void onInBackground() {
+                AppLogUtils.i("app status 在前台");
             }
         });
     }

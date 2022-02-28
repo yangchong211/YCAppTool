@@ -8,7 +8,9 @@ import android.os.LocaleList;
 import androidx.core.os.LocaleListCompat;
 import android.util.DisplayMetrics;
 
+import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 
 /**
@@ -263,4 +265,20 @@ public final class LocaleToolUtils {
         return localeListCompat.toLanguageTags();
     }
 
+    public static int getTimeZoneUtcOffset(TimeZone timezone) {
+        if (timezone != null) {
+            int rawOffset = timezone.getRawOffset() / '\uea60';
+            if (timezone.inDaylightTime(new Date())) {
+                rawOffset += 60;
+            }
+
+            return rawOffset;
+        } else {
+            return -1;
+        }
+    }
+
+    public static int getTimeZoneUtcOffset() {
+        return getTimeZoneUtcOffset(TimeZone.getDefault());
+    }
 }

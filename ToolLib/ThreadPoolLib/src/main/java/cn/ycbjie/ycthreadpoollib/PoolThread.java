@@ -27,6 +27,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import cn.ycbjie.ycthreadpoollib.builder.CachedBuilder;
+import cn.ycbjie.ycthreadpoollib.builder.FixedBuilder;
+import cn.ycbjie.ycthreadpoollib.builder.ScheduledBuilder;
+import cn.ycbjie.ycthreadpoollib.builder.SingleBuilder;
 import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;
 import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
 import cn.ycbjie.ycthreadpoollib.config.ThreadConfigs;
@@ -52,19 +56,19 @@ public final class PoolThread implements Executor {
     /**
      * 线程池
      */
-    private ExecutorService pool;
+    private final ExecutorService pool;
     /**
      * 默认线程名字
      */
-    private String defName;
+    private final String defName;
     /**
      * 默认线程回调
      */
-    private ThreadCallback defCallback;
+    private final ThreadCallback defCallback;
     /**
      * 默认线程传递
      */
-    private Executor defDeliver;
+    private final Executor defDeliver;
 
     /**
      * 确保多线程配置没有冲突
@@ -236,20 +240,21 @@ public final class PoolThread implements Executor {
      * @return
      */
     private synchronized ExecutorService createPool(int type, int size, int priority) {
+        MyThreadFactory myThreadFactory = new MyThreadFactory(priority);
         switch (type) {
             case ThreadBuilder.TYPE_CACHE:
                 //它是一个数量无限多的线程池，都是非核心线程，适合执行大量耗时小的任务
-                return Executors.newCachedThreadPool(new MyThreadFactory(priority));
+                return new CachedBuilder().builder(myThreadFactory);
             case ThreadBuilder.TYPE_FIXED:
                 //线程数量固定的线程池，全部为核心线程，响应较快，不用担心线程会被回收。
-                return Executors.newFixedThreadPool(size, new MyThreadFactory(priority));
+                return new FixedBuilder().setSize(size).builder(myThreadFactory);
             case ThreadBuilder.TYPE_SCHEDULED:
                 //有数量固定的核心线程，且有数量无限多的非核心线程，适合用于执行定时任务和固定周期的重复任务
-                return Executors.newScheduledThreadPool(size, new MyThreadFactory(priority));
+                return new ScheduledBuilder().setSize(size).builder(myThreadFactory);
             case ThreadBuilder.TYPE_SINGLE:
             default:
                 //内部只有一个核心线程，所有任务进来都要排队按顺序执行
-                return Executors.newSingleThreadExecutor(new MyThreadFactory(priority));
+                return new SingleBuilder().builder(myThreadFactory);
         }
     }
 

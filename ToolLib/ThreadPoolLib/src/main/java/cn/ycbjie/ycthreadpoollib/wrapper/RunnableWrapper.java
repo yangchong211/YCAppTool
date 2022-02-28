@@ -34,8 +34,8 @@ import cn.ycbjie.ycthreadpoollib.config.ThreadConfigs;
  */
 public final class RunnableWrapper implements Runnable {
 
-    private String name;
-    private NormalCallback normal;
+    private final String name;
+    private final NormalCallback normal;
     private Runnable runnable;
     private Callable callable;
 

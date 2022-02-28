@@ -215,6 +215,8 @@ dependencies {
     implementation project(path: ':BannerViewLib')
     implementation project(path: ':BlurViewLib')
 
+    implementation project(path: ':ApplicationLib')
+
     implementation project(path: ':MonitorFileLib')
     implementation project(path: ':MonitorNetLib')
     implementation project(path: ':MonitorCrashLib')
