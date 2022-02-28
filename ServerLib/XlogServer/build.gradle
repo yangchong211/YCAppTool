@@ -40,7 +40,7 @@ configurations.all {
 dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    api rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["okhttp"]
     implementation "com.google.code.gson:gson:2.8.5"
     implementation "com.squareup.okhttp3:okhttp:3.0.0"
     implementation 'androidx.room:room-runtime:2.0.0'

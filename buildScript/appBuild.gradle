@@ -1,0 +1,43 @@
+//ifconfig en0 | grep inet | grep -v inet6 | cut -d ' ' -f2
+static def getLocalIPv4() {
+    def p = "ifconfig en0".execute() |
+            "grep inet".execute() |
+            "grep -v inet6".execute() |
+            ["cut", "-d", " ", "-f2"].execute()
+    p.waitFor()
+    return p.text.trim()
+}
+
+//获取git最新提交的hash
+static String getHeadHash() {
+    String name = 'git rev-parse --verify --short HEAD'.execute().text.trim()
+    return name
+}
+
+//获取分支信息
+static String getBranch() {
+    String name = 'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
+    return name
+}
+
+ext {
+    compileSdkVersion = 30
+    buildToolsVersion = '28.0.3'
+    minSdkVersion = 21
+    targetSdkVersion = 30
+
+    support_version = "28.0.0"
+    leakCanaryVersion = '1.5'
+
+    // Android support
+    supportAppCompat = 'androidx.appcompat:appcompat:1.0.0'
+    supportAnnotations = "com.android.support:support-annotations:$support_version"
+
+    leakCanary = "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+    leakCanaryNoOp = "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+
+
+    getLocalIPv4 = this.&getLocalIPv4
+    GIT_HEAD = getHeadHash()
+    GIT_BRANCH = getBranch()
+}

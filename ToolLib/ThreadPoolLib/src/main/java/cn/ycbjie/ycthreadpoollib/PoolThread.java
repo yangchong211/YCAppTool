@@ -23,14 +23,13 @@ import androidx.annotation.NonNull;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import cn.ycbjie.ycthreadpoollib.builder.CachedBuilder;
-import cn.ycbjie.ycthreadpoollib.builder.FixedBuilder;
-import cn.ycbjie.ycthreadpoollib.builder.ScheduledBuilder;
-import cn.ycbjie.ycthreadpoollib.builder.SingleBuilder;
+import cn.ycbjie.ycthreadpoollib.builder.CachedBuilderImpl;
+import cn.ycbjie.ycthreadpoollib.builder.FixedBuilderImpl;
+import cn.ycbjie.ycthreadpoollib.builder.ScheduledBuilderImpl;
+import cn.ycbjie.ycthreadpoollib.builder.SingleBuilderImpl;
 import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;
 import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
 import cn.ycbjie.ycthreadpoollib.config.ThreadConfigs;
@@ -244,17 +243,17 @@ public final class PoolThread implements Executor {
         switch (type) {
             case ThreadBuilder.TYPE_CACHE:
                 //它是一个数量无限多的线程池，都是非核心线程，适合执行大量耗时小的任务
-                return new CachedBuilder().builder(myThreadFactory);
+                return new CachedBuilderImpl().builder(myThreadFactory);
             case ThreadBuilder.TYPE_FIXED:
                 //线程数量固定的线程池，全部为核心线程，响应较快，不用担心线程会被回收。
-                return new FixedBuilder().setSize(size).builder(myThreadFactory);
+                return new FixedBuilderImpl().setSize(size).builder(myThreadFactory);
             case ThreadBuilder.TYPE_SCHEDULED:
                 //有数量固定的核心线程，且有数量无限多的非核心线程，适合用于执行定时任务和固定周期的重复任务
-                return new ScheduledBuilder().setSize(size).builder(myThreadFactory);
+                return new ScheduledBuilderImpl().setSize(size).builder(myThreadFactory);
             case ThreadBuilder.TYPE_SINGLE:
             default:
                 //内部只有一个核心线程，所有任务进来都要排队按顺序执行
-                return new SingleBuilder().builder(myThreadFactory);
+                return new SingleBuilderImpl().builder(myThreadFactory);
         }
     }
 

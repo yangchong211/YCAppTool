@@ -11,7 +11,7 @@
         android:label="@string/app_yc_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:label"
+        tools:replace="android:theme,android:label,android:allowBackup,android:name"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name="com.yc.lifehelper.SplashActivity"
             android:theme="@style/SplashTheme">

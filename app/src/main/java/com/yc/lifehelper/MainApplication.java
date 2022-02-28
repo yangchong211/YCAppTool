@@ -44,7 +44,7 @@ public class MainApplication extends LibApplication {
      */
     @Override
     public void onCreate() {
-        Log.d("Application", "onCreate");
+        Log.d("Application : ", "onCreate");
         super.onCreate();
         AppLogHelper.config(this);
         LongevityMonitor();

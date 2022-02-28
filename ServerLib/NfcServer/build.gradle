@@ -40,7 +40,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
     implementation 'com.google.guava:guava:25.1-android'
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':LibraryLayer')

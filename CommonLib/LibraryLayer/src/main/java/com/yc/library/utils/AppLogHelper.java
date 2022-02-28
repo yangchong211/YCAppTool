@@ -1,6 +1,7 @@
 package com.yc.library.utils;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import com.yc.logging.config.LoggerConfig;
@@ -14,7 +15,7 @@ public final class AppLogHelper {
 
     }
 
-    public static void config(@NonNull Application application) {
+    public static void config(Application application) {
         /*
          * - serverHost 日志上传服务器地址，默认为国内地址，国外 APP 需要设置该参数。
          * - totalFileSize 总日志文件大小限制，默认 70 M，超出限制时将删除最老的文件。
@@ -47,12 +48,15 @@ public final class AppLogHelper {
         configBuilder.phoneNumSupplier(new Supplier<String>() {
             @Override
             public String get() {
-                return "";
+                return "13667225184";
             }
         });
+        Log.i("Log server host :" ,"start");
         LoggerConfig loggerConfig = configBuilder.build();
+        String serverHost1 = loggerConfig.getServerHost();
+        Log.i("Log server host :" ,serverHost1);
         // application 中调用
-        LoggerFactory.init(application, loggerConfig);
+        LoggerFactory.init2(application, loggerConfig);
     }
 
 }

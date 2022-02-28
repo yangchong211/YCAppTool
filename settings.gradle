@@ -3,12 +3,13 @@ include ':app'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
-include ':GameBusiness', ':AnimBusiness',
+include ':GameBusiness', ':AnimBusiness',':LeetBusiness',
         ':VideoBusiness', ':DemoBusiness', ':BusinessInterface'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':VideoBusiness').projectDir = new File('Business/VideoBusiness')
 project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
 project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
+project(':LeetBusiness').projectDir = new File('Business/LeetBusiness')
 project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 
 
@@ -50,6 +51,7 @@ project(':SwipeBackLib').projectDir = new File('WidgetLib/SwipeBackLib')
 project(':StatusBarLib').projectDir = new File('WidgetLib/StatusBarLib')
 project(':AppStateLib').projectDir = new File('WidgetLib/AppStateLib')
 
+
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,
@@ -78,13 +80,12 @@ project(':api-plugin').projectDir = new File('AptHelper/api-plugin')
 
 /* +++++++++ App监控库 +++++++++ */
 include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',
-        ':MonitorNetLib', ':MonitorFileLib'
+        ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib'
 project(':MonitorAliveLib').projectDir = new File('MonitorLib/MonitorAliveLib')
 project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
 project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
 project(':MonitorCrashLib').projectDir = new File('MonitorLib/MonitorCrashLib')
 project(':MonitorNetLib').projectDir = new File('MonitorLib/MonitorNetLib')
 project(':MonitorFileLib').projectDir = new File('MonitorLib/MonitorFileLib')
+project(':MonitorOomLib').projectDir = new File('MonitorLib/MonitorOomLib')
 
-
-include ':MonitorOomLib'

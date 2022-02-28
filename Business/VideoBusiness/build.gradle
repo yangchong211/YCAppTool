@@ -67,7 +67,7 @@ dependencies {
     implementation project(path: ':StatusBarLib')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     api rootProject.ext.dependencies["YCVideoPlayerLib"]
-
+    implementation(rootProject.ext.dependencies["gson"])
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':ImageServer')

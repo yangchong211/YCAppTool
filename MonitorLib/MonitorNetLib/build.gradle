@@ -40,6 +40,6 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
 
     implementation 'com.github.yangchong211.YCRefreshView:EastAdapterLib:3.0.2'
-    implementation 'com.squareup.okhttp3:okhttp:4.7.2'
+    implementation(rootProject.ext.dependencies["okHttp"])
     implementation 'com.github.yangchong211.YCVideoPlayer:VideoView:1.1.0'
 }

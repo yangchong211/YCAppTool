@@ -37,6 +37,6 @@ ext{
 
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project.ext.SocketIoServiceDependencies['socketio']
 }

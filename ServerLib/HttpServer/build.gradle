@@ -26,10 +26,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    api rootProject.ext.dependencies["okhttp"]
-    api rootProject.ext.dependencies["retrofit"]
-    api rootProject.ext.dependencies["retrofit-converter-gson"]
-    api rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
-    api rootProject.ext.dependencies["utilcode"]
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["retrofit-converter-gson"]
+    implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
+    implementation rootProject.ext.dependencies["utilcode"]
 }

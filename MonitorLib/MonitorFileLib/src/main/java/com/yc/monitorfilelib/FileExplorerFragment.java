@@ -192,7 +192,8 @@ public class FileExplorerFragment extends Fragment {
             }
             mFileList.addAll(fileInfos);
         }
-        mFileInfoAdapter.notifyDataSetChanged();
+        mFileInfoAdapter.clearAll();
+        mFileInfoAdapter.setData(mFileList);
     }
 
     public void showContent(Class<? extends Fragment> fragmentClass, Bundle bundle) {

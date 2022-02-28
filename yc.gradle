@@ -58,10 +58,12 @@ ext {
                 "okhttp"                   : "com.squareup.okhttp3:okhttp:${version["okhttp"]}",
                 "rxandroid2"                : "io.reactivex.rxjava2:rxandroid:2.1.0",
                 "rxjava2"                   : "io.reactivex.rxjava2:rxjava:2.1.11",
+                "okHttp"                    : "com.squareup.okhttp3:okhttp:4.7.2",
+                "gson"                      : "com.google.code.gson:gson:2.8.5",
 
                 //router
-                "router"                      : "com.alibaba:arouter-api:1.4.1",
-                "router-compiler"             : "com.alibaba:arouter-compiler:1.2.2",
+                "router"                      : "com.alibaba:arouter-api:1.5.2",
+                "router-compiler"             : "com.alibaba:arouter-compiler:1.5.2",
 
                 //image
                 "glide"                    : "com.github.bumptech.glide:glide:${version["glideSdkVersion"]}",

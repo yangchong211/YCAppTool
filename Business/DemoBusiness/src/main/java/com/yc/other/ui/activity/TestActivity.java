@@ -58,7 +58,6 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         } else if (i == R.id.tv_4) {
             startActivity(new Intent(this, ProgressThirdActivity.class));
         } else if (i == R.id.tv_5) {
-            startActivity(new Intent(this, ZoomLargeImageActivity.class));
         } else if (i == R.id.tv_6){
             startActivity(new Intent(this, TestFirstActivity.class));
         } else if (i == R.id.tv_7){

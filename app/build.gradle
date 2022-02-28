@@ -203,6 +203,7 @@ dependencies {
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':StatusBarLib')
     implementation project(path: ':XlogServer')
+    implementation project(path: ':LeetBusiness')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')

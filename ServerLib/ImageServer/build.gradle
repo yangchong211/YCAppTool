@@ -38,9 +38,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    api(rootProject.ext.dependencies["appcompat"])
-    api rootProject.ext.dependencies["utilcode"]
-    api rootProject.ext.dependencies["glide"]
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation rootProject.ext.dependencies["utilcode"]
+    implementation rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
-    api rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["okhttp"]
 }

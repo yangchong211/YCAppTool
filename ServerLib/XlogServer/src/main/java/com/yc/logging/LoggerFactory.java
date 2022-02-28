@@ -2,6 +2,7 @@ package com.yc.logging;
 
 import android.app.Application;
 import android.content.Context;
+
 import com.yc.logging.annotation.KeepSource;
 import com.yc.logging.config.LoggerConfig;
 import com.yc.logging.config.LoggerContext;
@@ -16,13 +17,12 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-
 @KeepSource
 public abstract class LoggerFactory {
 
-    private static LoggerConfig sLoggerConfig = LoggerConfig.newBuilder().build();
+    private static LoggerConfig sLoggerConfig;
     @SuppressWarnings("WeakerAccess")
-    static Map<String, WeakReference<Logger>> sCachedLoggerMap = new ConcurrentHashMap<>();
+    private static final Map<String, WeakReference<Logger>> sCachedLoggerMap = new ConcurrentHashMap<>();
     private static boolean sInitial;
 
     public synchronized static void init(Context context, LoggerConfig config) {
@@ -31,7 +31,6 @@ public abstract class LoggerFactory {
 
         Objects.requireNonNull(context);
         Objects.requireNonNull(config);
-
         sLoggerConfig = config;
         Context appContext = context instanceof Application ? context : context.getApplicationContext();
         LoggerContext.getDefault().init(appContext);

@@ -30,6 +30,7 @@ import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
+import com.yc.leetbusiness.LeetCodeActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.web.WebViewActivity;
 import com.yc.logging.LoggerService;
@@ -77,7 +78,7 @@ public class MainActivity extends BaseActivity{
     private BannerView banner;
     private View headerView;
     public static final int REQUEST_CODE_SCAN = 0X01;
-    private Logger logger = LoggerService.getInstance().getLogger("MainActivity");
+    private final Logger logger = LoggerService.getInstance().getLogger("MainActivity");
 
     @Override
     public int getContentView() {
@@ -247,8 +248,8 @@ public class MainActivity extends BaseActivity{
                     switch (v.getId()) {
                         //沙盒File
                         case R.id.tv_home_first:
-                            FileExplorerActivity.startActivity(MainActivity.this);
                             logger.debug("file app tool");
+                            FileExplorerActivity.startActivity(MainActivity.this);
                             break;
                         //崩溃监控
                         case R.id.tv_home_second:
@@ -262,7 +263,7 @@ public class MainActivity extends BaseActivity{
                             break;
                         //ANR监控
                         case R.id.tv_home_four:
-                            LocaleActivity.startActivity(MainActivity.this);
+                            LeetCodeActivity.startActivity(MainActivity.this);
                             logger.error("net work tool");
                             break;
                         default:

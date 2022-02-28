@@ -1,0 +1,39 @@
+package cn.ycbjie.ycthreadpoollib.builder;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
+import cn.ycbjie.ycthreadpoollib.config.ThreadPoolType;
+import cn.ycbjie.ycthreadpoollib.factory.MyThreadFactory;
+
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2019/05/17
+ *     desc  : SingleBuilder
+ *     revise:
+ * </pre>
+ */
+public class ScheduledBuilderImpl extends AbsThreadPoolBuilder<ExecutorService> {
+
+    private int mSize = 1;
+
+    public ScheduledBuilderImpl() {
+    }
+
+    public ScheduledExecutorService create(MyThreadFactory myThreadFactory) {
+        return Executors.newScheduledThreadPool(this.mSize, myThreadFactory);
+    }
+
+    public ThreadPoolType getType() {
+        return ThreadPoolType.SCHEDULED;
+    }
+
+    public ScheduledBuilderImpl setSize(int size) {
+        this.mSize = size;
+        return this;
+    }
+}
+
