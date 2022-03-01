@@ -68,8 +68,11 @@ public class InternalLogger extends AbstractLogger {
     @Override
     public void write(byte[] bytes) {
         Objects.requireNonNull(bytes);
-        if (bytes.length == 0) return;
-        BinaryExecutor.getInstance(mBuffer).enqueue(new BinaryLog(bytes.clone()));
+        if (bytes.length == 0) {
+            return;
+        }
+        byte[] clone = bytes.clone();
+        BinaryExecutor.getInstance(mBuffer).enqueue(new BinaryLog(clone));
     }
 
     public void trace(String msg, Throwable t) {

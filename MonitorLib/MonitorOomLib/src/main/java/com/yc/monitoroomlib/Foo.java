@@ -24,5 +24,8 @@ public class Foo {
         Integer integer = Integer.valueOf(123);
     }
 
+    private void test(){
+
+    }
 
 }

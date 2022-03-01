@@ -150,56 +150,115 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
      * 数组中只出现一次的数字
      */
     private void singleNumber(){
-        Method method = null;
-        try {
-            //反射
-            method = ArrayTestActivity.class.getMethod("applyMap", Map.class);
-            //获取方法的泛型参数的类型
-            Type[] types = method.getGenericParameterTypes();
-            System.out.println(types[0]);
-            //参数化的类型
-            ParameterizedType pType  = (ParameterizedType)types[0];
-            //原始类型
-            logger.debug("test applyMap 0 " + pType.getRawType());
-            //实际类型参数
-            logger.debug("test applyMap 1 " + pType.getActualTypeArguments()[0]);
-            logger.debug("test applyMap 2 " + pType.getActualTypeArguments()[1]);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
+//        ArrayList<String> listStr = new ArrayList<>();
+//        for(int i = 0 ; i < 3 ;i++){
+//            listStr.add(i+"");
+//        }
+//        //clone一次
+//        ArrayList<String> listStrCopy = (ArrayList<String>) listStr.clone();
+//        //修改clone后对象的值
+//        listStrCopy.remove(2);
+//        listStrCopy.add(100+"");
+//        for (int i = 0; i < listStr.size(); i++) {
+//            logger.debug("打印值 原始数据："+ listStr.get(i).toString());
+//            logger.debug("打印值 clone数据："+ listStrCopy.get(i).toString());
+//        }
 
-        testType();
+        // 原始对象
+        Student stud = new Student("杨充", "潇湘剑雨");
+        System.out.println("原始对象: " + stud.getName() + " - " + stud.getSubj().getName());
+
+        // 拷贝对象
+        Student clonedStud = (Student) stud.clone();
+        System.out.println("拷贝对象: " + clonedStud.getName() + " - " + clonedStud.getSubj().getName());
+
+        // 原始对象和拷贝对象是否一样：
+        System.out.println("原始对象和拷贝对象是否一样: " + (stud == clonedStud));
+        // 原始对象和拷贝对象的name属性是否一样
+        System.out.println("原始对象和拷贝对象的name属性是否一样: " + (stud.getName() == clonedStud.getName()));
+        // 原始对象和拷贝对象的subj属性是否一样
+        System.out.println("原始对象和拷贝对象的subj属性是否一样: " + (stud.getSubj() == clonedStud.getSubj()));
+
+        //修改原始对象
+        stud.setName("小杨逗比");
+        stud.getSubj().setName("潇湘剑雨大侠");
+        System.out.println("更新后的原始对象: " + stud.getName() + " - " + stud.getSubj().getName());
+        System.out.println("更新原始对象后的克隆对象: " + clonedStud.getName() + " - " + clonedStud.getSubj().getName());
+
+        //修改拷贝对象
+//        clonedStud.setName("小杨逗比");
+//        clonedStud.getSubj().setName("潇湘剑雨大侠");
+//        System.out.println("更新后的原始对象: " + stud.getName() + " - " + stud.getSubj().getName());
+//        System.out.println("更新原始对象后的克隆对象: " + clonedStud.getName() + " - " + clonedStud.getSubj().getName());
     }
 
-    public void testType(){
-        ArrayList<Integer> collection1 = new ArrayList<Integer>();
-        ArrayList<String> collection2= new ArrayList<String>();
-        logger.debug("test testType 0 " + (collection1.getClass()==collection2.getClass()));
-        //两者class类型一样,即字节码一致
-        logger.debug("test testType 1 " + collection1.getClass().getName());
-        logger.debug("test testType 2 " + collection2.getClass().getName());
-        //class均为java.util.ArrayList,并无实际类型参数信息
 
-        //使用反射获取list的add方法
-        Method method = null;
-        try {
-            method = collection2.getClass().getMethod("add", Object.class);
-            //将这个字符串添加进入list集合中
-            method.invoke(collection2, "Java反射机制实例。");
-            //打印出list中的数据,只有一条,因为我们只添加了一条
-            logger.debug("test testType 3 " + collection2.get(0));
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+    public class Subject implements Cloneable{
+
+        private String name;
+        public Subject(String s) {
+            name = s;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String s) {
+            name = s;
+        }
+
+        /**
+         *  重写clone()方法
+         * @return
+         */
+        public Object clone() {
+            //浅拷贝
+            try {
+                // 直接调用父类的clone()方法
+                return super.clone();
+            } catch (CloneNotSupportedException e) {
+                return null;
+            }
         }
     }
 
-    /*供测试参数类型的方法*/
-    public static void applyMap(Map<Integer,String> map){
+    public class Student implements Cloneable {
 
+        // 对象引用
+        private Subject subj;
+        private String name;
+
+        public Student(String s, String sub) {
+            name = s;
+            subj = new Subject(sub);
+        }
+
+        public Subject getSubj() {
+            return subj;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String s) {
+            name = s;
+        }
+
+        /**
+         *  重写clone()方法
+         * @return
+         */
+        public Object clone() {
+            //浅拷贝
+            try {
+                // 直接调用父类的clone()方法
+                return super.clone();
+            } catch (CloneNotSupportedException e) {
+                return null;
+            }
+        }
     }
 
 }

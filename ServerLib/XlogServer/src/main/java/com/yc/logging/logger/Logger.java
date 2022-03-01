@@ -74,6 +74,10 @@ public interface Logger {
      */
     void println(String msg);
 
+    /**
+     * 写数据
+     * @param bytes
+     */
     void write(byte[] bytes);
 
     /**

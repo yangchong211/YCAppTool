@@ -16,8 +16,17 @@ import java.util.Stack;
  */
 public class ActivityManager implements IActivityManager<Activity> {
 
+    /**
+     * 单例对象
+     */
     private static ActivityManager sInstance;
+    /**
+     * 记录activity任务栈
+     */
     private final Stack<Activity> mActivityStacks = new Stack<>();
+    /**
+     * 常见代理类监听
+     */
     private final ProxyActivityListener mProxyActivityListener =
             new ProxyActivityListener(this);
 
@@ -63,8 +72,8 @@ public class ActivityManager implements IActivityManager<Activity> {
         }
 
         for (int i = 0; i < mActivityStacks.size(); i++) {
-            if (mActivityStacks.get(i).getClass().getSimpleName()
-                    .equals(clazz.getSimpleName())) {
+            Activity activity = mActivityStacks.get(i);
+            if (activity.getClass().getSimpleName().equals(clazz.getSimpleName())) {
                 return mActivityStacks.get(i);
             }
         }
@@ -72,6 +81,7 @@ public class ActivityManager implements IActivityManager<Activity> {
     }
 
     public void init(Application application) {
+        //注册全局监听
         application.registerActivityLifecycleCallbacks(mProxyActivityListener);
     }
 
@@ -212,6 +222,7 @@ public class ActivityManager implements IActivityManager<Activity> {
         } catch (Exception ignored) {
             //ignored.printStackTrace();
         } finally {
+            //推出
             System.exit(0);
         }
     }
