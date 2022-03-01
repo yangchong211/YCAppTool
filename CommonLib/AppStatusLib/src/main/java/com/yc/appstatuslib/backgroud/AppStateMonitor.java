@@ -1,6 +1,7 @@
 package com.yc.appstatuslib.backgroud;
 
 import android.app.Activity;
+import android.app.Application;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -15,11 +16,16 @@ public class AppStateMonitor implements ActivityLifecycleRegister.ActivityLifecy
     private int mState = 0;
     private final ArrayList<Activity> mStartedActivities = new ArrayList<>();
 
-    public AppStateMonitor() {
+    private AppStateMonitor() {
+
     }
 
     public static AppStateMonitor getInstance() {
         return sInstance;
+    }
+
+    public synchronized void init(Application application){
+        ActivityLifecycleRegister.init(application);
     }
 
     public int getState() {
@@ -105,7 +111,6 @@ public class AppStateMonitor implements ActivityLifecycleRegister.ActivityLifecy
             if (this.mAppStateListeners.size() > 0) {
                 callbacks = this.mAppStateListeners.toArray();
             }
-
             return callbacks;
         }
     }

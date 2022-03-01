@@ -39,9 +39,13 @@ public class MyThreadFactory implements ThreadFactory {
      * ThreadFactory是一个接口，里面只有一个newThread方法
      * 线程工厂，为线程池提供新线程的创建
      */
-    private int priority;
+    private final int priority;
+    /**
+     * 使用线程安全的Integer
+     */
     private final AtomicInteger mCount = new AtomicInteger(1);
     private String name;
+
     /**
      * 构造方法，默认为优先级是：Thread.NORM_PRIORITY
      */
@@ -51,7 +55,8 @@ public class MyThreadFactory implements ThreadFactory {
 
     /**
      * 构造方法
-     * @param priority                  优先级
+     *
+     * @param priority 优先级
      */
     public MyThreadFactory(int priority) {
         this.priority = priority;
@@ -59,9 +64,10 @@ public class MyThreadFactory implements ThreadFactory {
 
     /**
      * 设置名称
-     * @param name                      名称
+     *
+     * @param name 名称
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -71,7 +77,7 @@ public class MyThreadFactory implements ThreadFactory {
         Thread thread = new Thread(runnable);
         // 设置线程优先级
         thread.setPriority(priority);
-        if (name!=null && name.length()>0){
+        if (name != null && name.length() > 0) {
             //设置名称
             thread.setName(this.name + "#" + this.mCount.getAndIncrement());
         }

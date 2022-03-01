@@ -3,6 +3,7 @@ package com.yc.lifehelper;
 import android.content.Context;
 import android.util.Log;
 
+import com.yc.applicationlib.activity.ActivityManager;
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.backgroud.AppStateMonitor;
 import com.yc.appstatuslib.info.BatteryInfo;
@@ -53,6 +54,7 @@ public class MainApplication extends LibApplication {
         initNetWork();
         initCrash();
         AppToolUtils.init(this);
+        ActivityManager.getInstance().init(this);
     }
 
     @Override

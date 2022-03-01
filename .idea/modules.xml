@@ -48,6 +48,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/ToolUtilsLib/LifeHelper.ToolUtilsLib.iml" filepath="$PROJECT_DIR$/.idea/modules/common/ToolUtilsLib/LifeHelper.ToolUtilsLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/VideoBusiness/LifeHelper.VideoBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/VideoBusiness/LifeHelper.VideoBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToolLib/WebSocketLib/LifeHelper.WebSocketLib.iml" filepath="$PROJECT_DIR$/.idea/modules/ToolLib/WebSocketLib/LifeHelper.WebSocketLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WebViewLib/LifeHelper.WebViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/WebViewLib/LifeHelper.WebViewLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/WidgetLib/WidgetViewLib/LifeHelper.WidgetViewLib.iml" filepath="$PROJECT_DIR$/.idea/modules/WidgetLib/WidgetViewLib/LifeHelper.WidgetViewLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/XlogServer/LifeHelper.XlogServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/XlogServer/LifeHelper.XlogServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/ZoomImageLib/LifeHelper.ZoomImageLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/ZoomImageLib/LifeHelper.ZoomImageLib.iml" />
@@ -56,6 +57,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-manager/LifeHelper.api-manager.iml" filepath="$PROJECT_DIR$/.idea/modules/api-manager/LifeHelper.api-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-plugin/LifeHelper.api-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/api-plugin/LifeHelper.api-plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WidgetLib/YCDialogLib/WidgetLib.LifeHelper.YCDialogLib.iml" filepath="$PROJECT_DIR$/.idea/modules/WidgetLib/YCDialogLib/WidgetLib.LifeHelper.YCDialogLib.iml" />
     </modules>
   </component>
 </project>

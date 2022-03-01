@@ -3,7 +3,7 @@
     package="com.yc.applicationlib">
 
     <application
-        android:name="com.yc.applicationlib.LaunchApplication">
+        android:name="com.yc.applicationlib.application.LaunchApplication">
     </application>
 
 </manifest>

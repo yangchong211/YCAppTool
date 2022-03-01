@@ -38,7 +38,8 @@ project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':FragmentLib',':WidgetViewLib',':ZoomImageLib', ':LargeImageLib',
-        ':SwipeBackLib', ':StatusBarLib', ':AppStateLib'
+        ':SwipeBackLib', ':StatusBarLib', ':AppStateLib', ':WebViewLib',
+        ':YCDialogLib'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
 project(':CustomWidget').projectDir = new File('WidgetLib/CustomWidget')
@@ -50,6 +51,8 @@ project(':LargeImageLib').projectDir = new File('WidgetLib/LargeImageLib')
 project(':SwipeBackLib').projectDir = new File('WidgetLib/SwipeBackLib')
 project(':StatusBarLib').projectDir = new File('WidgetLib/StatusBarLib')
 project(':AppStateLib').projectDir = new File('WidgetLib/AppStateLib')
+project(':WebViewLib').projectDir = new File('WidgetLib/WebViewLib')
+project(':YCDialogLib').projectDir = new File('WidgetLib/YCDialogLib')
 
 
 /* +++++++++ 框架基础工具库 +++++++++ */
@@ -88,4 +91,5 @@ project(':MonitorCrashLib').projectDir = new File('MonitorLib/MonitorCrashLib')
 project(':MonitorNetLib').projectDir = new File('MonitorLib/MonitorNetLib')
 project(':MonitorFileLib').projectDir = new File('MonitorLib/MonitorFileLib')
 project(':MonitorOomLib').projectDir = new File('MonitorLib/MonitorOomLib')
+
 

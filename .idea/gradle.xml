@@ -60,7 +60,9 @@
             <option value="$PROJECT_DIR$/WidgetLib/PhotoWidget" />
             <option value="$PROJECT_DIR$/WidgetLib/StatusBarLib" />
             <option value="$PROJECT_DIR$/WidgetLib/SwipeBackLib" />
+            <option value="$PROJECT_DIR$/WidgetLib/WebViewLib" />
             <option value="$PROJECT_DIR$/WidgetLib/WidgetViewLib" />
+            <option value="$PROJECT_DIR$/WidgetLib/YCDialogLib" />
             <option value="$PROJECT_DIR$/WidgetLib/ZoomImageLib" />
             <option value="$PROJECT_DIR$/app" />
           </set>

@@ -8,7 +8,13 @@ import com.yc.library.base.mvp.BaseActivity;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 public class ArrayTestActivity extends BaseActivity implements View.OnClickListener {
 
@@ -144,6 +150,55 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
      * 数组中只出现一次的数字
      */
     private void singleNumber(){
+        Method method = null;
+        try {
+            //反射
+            method = ArrayTestActivity.class.getMethod("applyMap", Map.class);
+            //获取方法的泛型参数的类型
+            Type[] types = method.getGenericParameterTypes();
+            System.out.println(types[0]);
+            //参数化的类型
+            ParameterizedType pType  = (ParameterizedType)types[0];
+            //原始类型
+            logger.debug("test applyMap 0 " + pType.getRawType());
+            //实际类型参数
+            logger.debug("test applyMap 1 " + pType.getActualTypeArguments()[0]);
+            logger.debug("test applyMap 2 " + pType.getActualTypeArguments()[1]);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        testType();
+    }
+
+    public void testType(){
+        ArrayList<Integer> collection1 = new ArrayList<Integer>();
+        ArrayList<String> collection2= new ArrayList<String>();
+        logger.debug("test testType 0 " + (collection1.getClass()==collection2.getClass()));
+        //两者class类型一样,即字节码一致
+        logger.debug("test testType 1 " + collection1.getClass().getName());
+        logger.debug("test testType 2 " + collection2.getClass().getName());
+        //class均为java.util.ArrayList,并无实际类型参数信息
+
+        //使用反射获取list的add方法
+        Method method = null;
+        try {
+            method = collection2.getClass().getMethod("add", Object.class);
+            //将这个字符串添加进入list集合中
+            method.invoke(collection2, "Java反射机制实例。");
+            //打印出list中的数据,只有一条,因为我们只添加了一条
+            logger.debug("test testType 3 " + collection2.get(0));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*供测试参数类型的方法*/
+    public static void applyMap(Map<Integer,String> map){
 
     }
 

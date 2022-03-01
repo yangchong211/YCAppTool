@@ -69,13 +69,13 @@ public final class TaskScheduler {
 
     private TaskScheduler() {
         mParallelExecutor = new ThreadPoolExecutor(CORE_POOL_SIZE,MAXIMUM_POOL_SIZE,
-                KEEP_ALIVE,TimeUnit.SECONDS,POOL_WORK_QUEUE,ThreadFactory.TASKSCHEDULER_FACTORY);
+                KEEP_ALIVE,TimeUnit.SECONDS,POOL_WORK_QUEUE, MyThreadFactory.TASK_SCHEDULER_FACTORY);
         /*
           没有核心线程的线程池要用 SynchronousQueue 而不是LinkedBlockingQueue，SynchronousQueue是一个只有一个任务的队列，
           这样每次就会创建非核心线程执行任务,因为线程池任务放入队列的优先级比创建非核心线程优先级大.
          */
         mTimeOutExecutor = new ThreadPoolExecutor(0,MAXIMUM_POOL_SIZE,
-                KEEP_ALIVE,TimeUnit.SECONDS,new SynchronousQueue<Runnable>(),ThreadFactory.TIME_OUT_THREAD_FACTORY);
+                KEEP_ALIVE,TimeUnit.SECONDS,new SynchronousQueue<Runnable>(), MyThreadFactory.TIME_OUT_THREAD_FACTORY);
         mIOHandler = provideHandler("IoHandler");
     }
 
@@ -114,7 +114,7 @@ public final class TaskScheduler {
     public static void scheduleTask(final SchedulerTask task) {
         task.canceled.compareAndSet(true,false);
         final ScheduledExecutorService service = new ScheduledThreadPoolExecutor(
-                1,ThreadFactory.SCHEDULER_THREAD_FACTORY);
+                1, MyThreadFactory.SCHEDULER_THREAD_FACTORY);
         service.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {

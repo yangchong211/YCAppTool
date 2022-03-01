@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.applicationlib.activity.ActivityManager;
 import com.yc.banner.view.BannerView;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
@@ -38,7 +39,6 @@ import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.other.ui.activity.net.NetworkActivity;
 import com.yc.toollib.crash.CrashToolUtils;
-import com.yc.toolutils.activity.ActivityManager;
 import com.yc.toolutils.click.FastClickUtils;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
