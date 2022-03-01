@@ -9,6 +9,8 @@ import android.os.Build;
 
 import androidx.core.content.FileProvider;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.io.File;
 
 public final class FileShareUtils {
@@ -26,20 +28,37 @@ public final class FileShareUtils {
         try {
             if (null != file && file.exists()) {
                 Intent share = new Intent(Intent.ACTION_SEND);
+                //此处可发送多种文件
+                String absolutePath = file.getAbsolutePath();
+                //通过扩展名找到mimeType
+                String mimeType = getMimeType(absolutePath);
+                share.setType(mimeType);
                 Uri uri;
                 //判断7.0以上
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    uri = FileProvider.getUriForFile(context,
-                            context.getPackageName() + ".fileExplorerProvider", file);
+                    //第二个参数表示要用哪个ContentProvider，这个唯一值在AndroidManifest.xml里定义了
+                    //若是没有定义MyFileProvider，可直接使用FileProvider替代
+                    String authority = context.getPackageName() + ".fileExplorerProvider";
+                    uri = FileProvider.getUriForFile(context,authority, file);
                 } else {
                     uri = Uri.fromFile(file);
                 }
+                //content://com.yc.lifehelper.fileExplorerProvider/external_path/fileShare.txt
+                //content 作为scheme；
+                //com.yc.lifehelper.fileExplorerProvider 即为我们定义的 authorities，作为host；
+                LogUtils.d("share file uri : " + uri);
+                String encodedPath = uri.getEncodedPath();
+                //external_path/fileShare.txt
+                //如此构造后，第三方应用收到此Uri后，并不能从路径看出我们传递的真实路径，这就解决了第一个问题：
+                //发送方传递的文件路径接收方完全知晓，一目了然，没有安全保障。
+                LogUtils.d("share file uri encode path : " + encodedPath);
                 share.putExtra(Intent.EXTRA_STREAM, uri);
-                //此处可发送多种文件
-                share.setType(getMimeType(file.getAbsolutePath()));
                 share.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //赋予读写权限
                 share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                context.startActivity(Intent.createChooser(share, "分享文件"));
+                Intent intent = Intent.createChooser(share, "分享文件");
+                //交由系统处理
+                context.startActivity(intent);
                 isShareSuccess = true;
             } else {
                 isShareSuccess = false;

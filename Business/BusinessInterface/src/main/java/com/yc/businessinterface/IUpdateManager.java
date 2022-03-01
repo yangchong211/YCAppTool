@@ -1,6 +1,8 @@
 package com.yc.businessinterface;
 
-public interface IUpdateManager {
+import com.yc.api.route.IRoute;
+
+public interface IUpdateManager extends IRoute {
 
     /**
      * 检测升级

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
+@Deprecated
 public class BusinessTransfer {
 
     private static final String UPDATE_MANAGER = "updateManager";
@@ -67,8 +67,8 @@ public class BusinessTransfer {
     //这个是将IUpdateManager接口的实现类UpdateManagerImpl注入
     public void injectBusinessImpl() {
         BusinessTransfer businessTransfer = BusinessTransfer.$();
-        businessTransfer.setImpl(UPDATE_MANAGER, "com.ycbjie.library.impl.UpdateManagerImpl");
-        businessTransfer.setImpl(USER_MANAGER, "com.ycbjie.library.impl.UserManagerImpl");
+        businessTransfer.setImpl(UPDATE_MANAGER, "com.ycbjie.library.com.yc.other.impl.UpdateManagerImpl");
+        businessTransfer.setImpl(USER_MANAGER, "com.ycbjie.library.com.yc.other.impl.UserManagerImpl");
     }
 
 }

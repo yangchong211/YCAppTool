@@ -1,4 +1,4 @@
-package com.yc.library.impl;
+package com.yc.other.impl;
 
 
 import com.yc.businessinterface.IUpdateManager;

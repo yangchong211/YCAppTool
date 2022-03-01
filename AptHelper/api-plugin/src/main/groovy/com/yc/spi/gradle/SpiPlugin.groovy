@@ -13,7 +13,8 @@ class SpiPlugin implements Plugin<Project> {
     void apply(final Project project) {
         project.afterEvaluate {
             try {
-                if (!project.plugins.hasPlugin(Class.forName('com.android.build.gradle.AppPlugin'))) {
+                Class aClass = Class.forName('com.android.build.gradle.AppPlugin')
+                if (!project.plugins.hasPlugin(aClass)) {
                     return;
                 }
             } catch (final ClassNotFoundException e) {

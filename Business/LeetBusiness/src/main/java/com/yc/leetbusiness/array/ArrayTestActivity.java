@@ -140,6 +140,9 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * 数组中只出现一次的数字
+     */
     private void singleNumber(){
 
     }

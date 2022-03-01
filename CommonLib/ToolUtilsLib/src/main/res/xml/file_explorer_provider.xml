@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
 
+    <!--FileProvider需要读取映射表。-->
+    <!--root-path 标签表示要给根目录下的子目录取别名(包括内部存储、自带外部存储、扩展外部存储，统称用"/"表示)，
+    path 属性表示需要被更改的目录名，其值为:"."，表示不区分目录，name 属性表示将path 目录更改后的别名。-->
+    <!--假若有个文件路径：/storage/emulated/0/com.yc.app/yc.txt，而我们只配置了root-path 标签，
+    那么最终该文件路径被替换为：/myroot/storage/emulated/0/com.yc.app/myTxt.txt。可以看出，因为path="."，
+    因此任何目录前都被追加了myroot。-->
     <!--路径映射表，默认-->
-    <external-cache-path
-        name="external_cache"
-        path="." />
-    <cache-path
-        name="cache"
-        path="." />
-    <external-path
-        name="external_path"
-        path="." />
-    <files-path
-        name="files_path"
-        path="." />
-    <external-files-path
-        name="external_files_path"
-        path="." />
-    <root-path
-        name="root_path"
-        path="." />
+    <external-cache-path name="external_cache" path="." />
+    <cache-path name="cache" path="." />
+    <external-path name="external_path" path="." />
+    <files-path name="files_path" path="." />
+    <external-files-path name="external_files_path" path="." />
+    <root-path name="root_path" path="." />
 
 </paths>

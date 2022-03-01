@@ -67,6 +67,7 @@ dependencies {
     }
     implementation project(path: ':MonitorNetLib')
     implementation project(path: ':StatusBarLib')
+    implementation project(path: ':BusinessInterface')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':SerialTaskLib')
@@ -80,8 +81,8 @@ dependencies {
     implementation project(path: ':PhotoWidget')
     implementation project(path: ':WidgetViewLib')
     implementation project(path: ':CountTimerLib')
-    implementation project(path: ':api-manager')
     implementation(rootProject.ext.dependencies["okHttp"])
     implementation(rootProject.ext.dependencies["gson"])
+    implementation project(path: ':api-manager')
     annotationProcessor project(path: ':api-compiler')
 }

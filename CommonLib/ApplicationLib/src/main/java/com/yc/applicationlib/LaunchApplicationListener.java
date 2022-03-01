@@ -4,8 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
-import com.yc.api.compiler.getIt.ServiceLoader;
 import com.yc.api.getIt.ServiceProvider;
+
+import java.util.ServiceLoader;
 
 
 /**

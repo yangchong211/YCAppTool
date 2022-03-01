@@ -1,7 +1,9 @@
-package com.yc.library.impl;
+package com.yc.other.impl;
 
+import com.yc.api.route.RouteImpl;
 import com.yc.businessinterface.IUserManager;
 
+@RouteImpl(IUserManager.class)
 public class UserManagerImpl implements IUserManager {
 
     /**

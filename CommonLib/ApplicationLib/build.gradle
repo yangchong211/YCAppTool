@@ -31,7 +31,6 @@ dependencies {
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["annotation"]
 
-
-    implementation project(path: ':api-compiler')
     implementation project(path: ':api-manager')
+    annotationProcessor project(path: ':api-compiler')
 }

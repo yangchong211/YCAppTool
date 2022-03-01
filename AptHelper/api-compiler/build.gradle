@@ -1,4 +1,7 @@
 apply plugin: 'java'
+//迁移到jitpack
+apply plugin: 'com.github.dcendents.android-maven'
+
 
 jar {
     manifest {

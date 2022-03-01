@@ -1,6 +1,8 @@
 package com.yc.businessinterface;
 
 
+import com.yc.api.route.IRoute;
+
 /**
  * <pre>
  *     @author yangchong
@@ -10,7 +12,7 @@ package com.yc.businessinterface;
  *     revise:
  * </pre>
  */
-public interface IUserManager{
+public interface IUserManager extends IRoute {
 
     /**
      * 获取用户token
