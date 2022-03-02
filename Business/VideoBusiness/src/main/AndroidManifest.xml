@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ycbjie.video" >
+    package="com.yc.video" >
 
     <application>
-        <activity android:name="com.ycbjie.video.com.yc.video.ui.activity.VideoActivity"
+        <activity android:name="com.yc.video.ui.activity.VideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
     </application>

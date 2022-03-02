@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import com.blankj.utilcode.util.LogUtils;
 import com.yc.httpserver.ExceptionUtils;
 import com.yc.library.base.mvp.BaseFragment;
-import com.ycbjie.video.R;
+import com.yc.video.R;
 import com.yc.video.api.VideoModel;
 import com.yc.video.model.VideoContentBean;
 

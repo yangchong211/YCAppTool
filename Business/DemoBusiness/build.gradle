@@ -71,6 +71,7 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':SerialTaskLib')
+    implementation project(path: ':ThreadPoolLib')
     implementation 'com.airbnb.android:lottie:2.7.0'
     implementation rootProject.ext.dependencies["YCCustomTextLib"]
     implementation project(path: ':HttpServer')

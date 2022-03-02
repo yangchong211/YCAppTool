@@ -13,10 +13,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package cn.ycbjie.ycthreadpoollib.callback;
+package cn.ycbjie.ycthreadpoollib.wrapper;
 
 
 import java.util.concurrent.Executor;
+
+import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;
+import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
 
 /**
  * <pre>
@@ -27,14 +30,13 @@ import java.util.concurrent.Executor;
  *     revise:
  * </pre>
  */
-public final class NormalCallback implements ThreadCallback, AsyncCallback {
+ final class NormalCallback implements ThreadCallback, AsyncCallback {
 
+    private final ThreadCallback callback;
+    private final AsyncCallback async;
+    private final Executor deliver;
 
-    private ThreadCallback callback;
-    private AsyncCallback async;
-    private Executor deliver;
-
-    public NormalCallback(ThreadCallback callback, Executor deliver, AsyncCallback async) {
+    NormalCallback(ThreadCallback callback, Executor deliver, AsyncCallback async) {
         this.callback = callback;
         this.deliver = deliver;
         this.async = async;

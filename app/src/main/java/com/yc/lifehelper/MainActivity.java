@@ -37,10 +37,12 @@ import com.yc.library.web.WebViewActivity;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
+import com.yc.other.thread.MainThreadActivity;
 import com.yc.other.ui.activity.net.NetworkActivity;
 import com.yc.toollib.crash.CrashToolUtils;
 import com.yc.toolutils.click.FastClickUtils;
 import com.yc.toolutils.click.PerfectClickListener;
+import com.yc.video.ui.activity.VideoActivity;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
 
@@ -241,6 +243,10 @@ public class MainActivity extends BaseActivity{
                 TextView tvHomeSecond =header.findViewById(R.id.tv_home_second);
                 TextView tvHomeThird = header.findViewById(R.id.tv_home_third);
                 TextView tvHomeFour = header.findViewById(R.id.tv_home_four);
+                TextView tvHomeFive = header.findViewById(R.id.tv_home_five);
+                TextView tvHomeSix =header.findViewById(R.id.tv_home_six);
+                TextView tvHomeSeven = header.findViewById(R.id.tv_home_seven);
+                TextView tvHomeEight = header.findViewById(R.id.tv_home_eight);
                 View.OnClickListener listener = v -> {
                     if (FastClickUtils.isFastDoubleClick()){
                         return;
@@ -263,8 +269,24 @@ public class MainActivity extends BaseActivity{
                             break;
                         //ANR监控
                         case R.id.tv_home_four:
-                            LeetCodeActivity.startActivity(MainActivity.this);
                             logger.error("net work tool");
+                            break;
+                        //算法试题
+                        case R.id.tv_home_five:
+                            LeetCodeActivity.startActivity(MainActivity.this);
+                            logger.error("leet code");
+                            break;
+                        //国际化
+                        case R.id.tv_home_six:
+                            LocaleActivity.startActivity(MainActivity.this);
+                            break;
+                        //线程库
+                        case R.id.tv_home_seven:
+                            MainThreadActivity.startActivity(MainActivity.this);
+                            break;
+                        //视频播放器
+                        case R.id.tv_home_eight:
+                            VideoActivity.startActivity(MainActivity.this);
                             break;
                         default:
                             break;
@@ -274,6 +296,10 @@ public class MainActivity extends BaseActivity{
                 tvHomeSecond.setOnClickListener(listener);
                 tvHomeThird.setOnClickListener(listener);
                 tvHomeFour.setOnClickListener(listener);
+                tvHomeFive.setOnClickListener(listener);
+                tvHomeSix.setOnClickListener(listener);
+                tvHomeSeven.setOnClickListener(listener);
+                tvHomeEight.setOnClickListener(listener);
                 initBanner();
             }
         });

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0.使用intentService，查看日志打印"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="1.最简单的runnable线程调用方式"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="2.最简单的异步回调，时间为2秒"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="3.延迟时间执行任务"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="4.1 使用submit提交事务线程"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="5.使用线程池管理线程，查看几种不同线程池特点"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="6.线程调试测试模拟"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+</LinearLayout>

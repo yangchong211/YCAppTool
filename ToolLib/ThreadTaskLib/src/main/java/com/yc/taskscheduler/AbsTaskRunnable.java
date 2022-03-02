@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public abstract class AbsTaskRunnable<R> implements Runnable {
 
     private static final String TAG = "Task";
-    private AtomicBoolean mCanceledAtomic = new AtomicBoolean(false);
-    private AtomicReference<Thread> mTaskThread = new AtomicReference<>();
+    private final AtomicBoolean mCanceledAtomic = new AtomicBoolean(false);
+    private final AtomicReference<Thread> mTaskThread = new AtomicReference<>();
 
 
     /**

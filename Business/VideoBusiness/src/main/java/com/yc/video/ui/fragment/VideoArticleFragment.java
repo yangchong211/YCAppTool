@@ -15,7 +15,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.library.base.mvp.BackLazyFragment;
-import com.ycbjie.video.R;
+import com.yc.video.R;
 import com.yc.video.contract.VideoArticleContract;
 import com.yc.video.model.MultiNewsArticleDataBean;
 import com.yc.video.presenter.VideoArticlePresenter;

@@ -174,7 +174,7 @@ public final class TaskScheduler {
      *                        不能100%保证实际的超时时间就是timeOutMillis，但一般没必要那么精确
      * */
     public static <R> void executeTimeOutTask(final long timeOutMillis, final AbsTaskRunnable<R> timeOutTask) {
-        final Future future =getInstance().mTimeOutExecutor.submit(timeOutTask);
+        final Future future = getInstance().mTimeOutExecutor.submit(timeOutTask);
         getInstance().mTimeOutExecutor.execute(new Runnable() {
             @Override
             public void run() {

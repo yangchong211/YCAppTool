@@ -240,7 +240,7 @@ public class MainApplication extends LibApplication {
              */
             @Override
             public void recordException(Throwable ex) {
-                System.out.println("崩溃重启----------recordException------");
+                AppLogUtils.e("record exception : " + ex.getMessage());
                 //自定义上传crash，支持开发者上传自己捕获的crash数据
                 //StatService.recordException(getApplication(), ex);
             }

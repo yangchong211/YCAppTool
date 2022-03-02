@@ -19,7 +19,6 @@ package cn.ycbjie.ycthreadpoollib.wrapper;
 
 import java.util.concurrent.Callable;
 
-import cn.ycbjie.ycthreadpoollib.callback.NormalCallback;
 import cn.ycbjie.ycthreadpoollib.utils.ThreadToolUtils;
 import cn.ycbjie.ycthreadpoollib.config.ThreadConfigs;
 

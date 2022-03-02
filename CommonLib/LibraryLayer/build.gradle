@@ -115,7 +115,6 @@ dependencies {
     //标签多选单选库
     api 'com.github.yangchong211.YCRefreshView:SelectViewLib:3.0.1'
 
-    api rootProject.ext.dependencies["YCThreadPoolLib"]
     api rootProject.ext.dependencies["notificationLib"]
     api rootProject.ext.dependencies["WebViewLib"]
     implementation project(path: ':WidgetViewLib')
@@ -125,6 +124,7 @@ dependencies {
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':AppStateLib')
     implementation project(path: ':StatusBarLib')
+    implementation project(path: ':ThreadPoolLib')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':ConfigLayer')

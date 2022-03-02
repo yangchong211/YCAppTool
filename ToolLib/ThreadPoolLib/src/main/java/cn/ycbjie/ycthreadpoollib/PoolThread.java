@@ -17,7 +17,6 @@ limitations under the License.
 package cn.ycbjie.ycthreadpoollib;
 
 
-
 import androidx.annotation.NonNull;
 
 import java.util.concurrent.Callable;
@@ -74,6 +73,16 @@ public final class PoolThread implements Executor {
      */
     private ThreadLocal<ThreadConfigs> local;
 
+    /**
+     * 构造对象
+     * @param type
+     * @param size
+     * @param priority
+     * @param name
+     * @param callback
+     * @param deliver
+     * @param pool
+     */
     private PoolThread(int type, int size, int priority, String name, ThreadCallback callback,
                        Executor deliver, ExecutorService pool) {
         if (pool == null) {
@@ -88,11 +97,11 @@ public final class PoolThread implements Executor {
     }
 
 
-
     /**
      * 为当前的任务设置线程名。
-     * @param name              线程名字
-     * @return                  PoolThread
+     *
+     * @param name 线程名字
+     * @return PoolThread
      */
     public PoolThread setName(String name) {
         getLocalConfigs().name = name;
@@ -102,10 +111,11 @@ public final class PoolThread implements Executor {
 
     /**
      * 设置当前任务的线程回调，如果未设置，则应使用默认回调。
-     * @param callback          线程回调
-     * @return                  PoolThread
+     *
+     * @param callback 线程回调
+     * @return PoolThread
      */
-    public PoolThread setCallback (ThreadCallback callback) {
+    public PoolThread setCallback(ThreadCallback callback) {
         getLocalConfigs().callback = callback;
         return this;
     }
@@ -113,11 +123,12 @@ public final class PoolThread implements Executor {
     /**
      * 设置当前任务的延迟时间.
      * 只有当您的线程池创建时，它才会产生效果。
-     * @param time              时长
-     * @param unit              time unit
-     * @return                  PoolThread
+     *
+     * @param time 时长
+     * @param unit time unit
+     * @return PoolThread
      */
-    public PoolThread setDelay (long time, TimeUnit unit) {
+    public PoolThread setDelay(long time, TimeUnit unit) {
         long delay = unit.toMillis(time);
         getLocalConfigs().delay = Math.max(0, delay);
         return this;
@@ -125,10 +136,11 @@ public final class PoolThread implements Executor {
 
     /**
      * 设置当前任务的线程传递。如果未设置，则应使用默认传递。
-     * @param deliver           thread deliver
-     * @return                  PoolThread
+     *
+     * @param deliver thread deliver
+     * @return PoolThread
      */
-    public PoolThread setDeliver(Executor deliver){
+    public PoolThread setDeliver(Executor deliver) {
         getLocalConfigs().deliver = deliver;
         return this;
     }
@@ -140,12 +152,20 @@ public final class PoolThread implements Executor {
      * 在将来的某个时间执行给定的命令。该命令可以在新线程、池线程或调用线程中执行，这取决于{@code Executor}实现。
      * 提交任务无返回值
      * 当我们使用execute来提交任务时，由于execute方法没有返回值，所以说我们也就无法判定任务是否被线程池执行成功。
-     * @param runnable              task，注意添加非空注解
+     *
+     * @param runnable task，注意添加非空注解
      */
     @Override
-    public void execute (@NonNull Runnable runnable) {
+    public void execute(@NonNull Runnable runnable) {
         //获取线程thread配置信息
         ThreadConfigs configs = getLocalConfigs();
+        if (configs.deliver == null) {
+            if (ThreadToolUtils.isAndroid) {
+                configs.deliver = AndroidDeliver.getInstance();
+            } else {
+                configs.deliver = JavaDeliver.getInstance();
+            }
+        }
         //设置runnable任务
         runnable = new RunnableWrapper(configs).setRunnable(runnable);
         //启动任务
@@ -157,9 +177,10 @@ public final class PoolThread implements Executor {
 
     /**
      * 启动异步任务，回调用于接收可调用任务的结果。
-     * @param callable              callable
-     * @param callback              callback
-     * @param <T> type
+     *
+     * @param callable callable
+     * @param callback callback
+     * @param <T>      type
      */
     public <T> void async(@NonNull Callable<T> callable, AsyncCallback<T> callback) {
         ThreadConfigs configs = getLocalConfigs();
@@ -176,11 +197,12 @@ public final class PoolThread implements Executor {
      * 当我们使用submit来提交任务时,它会返回一个future,我们就可以通过这个future来判断任务是否执行成功，
      * 还可以通过future的get方法来获取返回值。如果子线程任务没有完成，get方法会阻塞住直到任务完成，
      * 而使用get(long timeout, TimeUnit unit)方法则会阻塞一段时间后立即返回，这时候有可能任务并没有执行完。
-     * @param callable              callable
-     * @param <T>                   type
+     *
+     * @param callable callable
+     * @param <T>      type
      * @return {@link Future}
      */
-    public <T> Future<T> submit (Callable<T> callable) {
+    public <T> Future<T> submit(Callable<T> callable) {
         callable = new CallableWrapper<>(getLocalConfigs(), callable);
         Future<T> result = pool.submit(callable);
         resetLocalConfigs();
@@ -193,13 +215,13 @@ public final class PoolThread implements Executor {
      * shutdown原理：将线程池状态设置成SHUTDOWN状态，然后中断所有没有正在执行任务的线程。
      * shutdownNow原理：将线程池的状态设置成STOP状态，然后中断所有任务(包括正在执行的)的线程，并返回等待执行任务的列表。
      */
-    public void stop(){
+    public void stop() {
         try {
             // shutdown只是起到通知的作用
             // 只调用shutdown方法结束线程池是不够的
             pool.shutdown();
             // (所有的任务都结束的时候，返回TRUE)
-            if(!pool.awaitTermination(0, TimeUnit.MILLISECONDS)){
+            if (!pool.awaitTermination(0, TimeUnit.MILLISECONDS)) {
                 // 超时的时候向线程池中所有的线程发出中断(interrupted)。
                 pool.shutdownNow();
             }
@@ -214,7 +236,8 @@ public final class PoolThread implements Executor {
 
     /**
      * 获取要创建的线程池。
-     * @return                      线程池
+     *
+     * @return 线程池
      */
     public ExecutorService getExecutor() {
         return pool;
@@ -224,8 +247,8 @@ public final class PoolThread implements Executor {
     /**
      * 销毁的时候可以调用这个方法
      */
-    public void close(){
-        if(local!=null){
+    public void close() {
+        if (local != null) {
             local.remove();
             local = null;
         }
@@ -233,9 +256,10 @@ public final class PoolThread implements Executor {
 
     /**
      * 创建线程池，目前支持以下四种
-     * @param type                  类型
-     * @param size                  数量size
-     * @param priority              优先级
+     *
+     * @param type     类型
+     * @param size     数量size
+     * @param priority 优先级
      * @return
      */
     private synchronized ExecutorService createPool(int type, int size, int priority) {
@@ -258,7 +282,6 @@ public final class PoolThread implements Executor {
     }
 
 
-
     /**
      * 当启动任务或者发射任务之后需要调用该方法
      * 重置本地配置，置null
@@ -271,6 +294,7 @@ public final class PoolThread implements Executor {
     /**
      * 注意需要用synchronized修饰，解决了多线程的安全问题
      * 获取本地配置参数
+     *
      * @return
      */
     private synchronized ThreadConfigs getLocalConfigs() {
@@ -301,7 +325,7 @@ public final class PoolThread implements Executor {
         Executor deliver;
         ExecutorService pool;
 
-        private ThreadBuilder(int size,  int type, ExecutorService pool) {
+        private ThreadBuilder(int size, int type, ExecutorService pool) {
             this.size = Math.max(1, size);
             this.type = type;
             this.pool = pool;
@@ -351,8 +375,8 @@ public final class PoolThread implements Executor {
         /**
          * 将默认线程名设置为“已使用”。
          */
-        public ThreadBuilder setName (@NonNull String name) {
-            if (name.length()>0) {
+        public ThreadBuilder setName(@NonNull String name) {
+            if (name.length() > 0) {
                 this.name = name;
             }
             return this;
@@ -361,7 +385,7 @@ public final class PoolThread implements Executor {
         /**
          * 将默认线程优先级设置为“已使用”。
          */
-        public ThreadBuilder setPriority (int priority) {
+        public ThreadBuilder setPriority(int priority) {
             this.priority = priority;
             return this;
         }
@@ -369,7 +393,7 @@ public final class PoolThread implements Executor {
         /**
          * 将默认线程回调设置为“已使用”。
          */
-        public ThreadBuilder setCallback (ThreadCallback callback) {
+        public ThreadBuilder setCallback(ThreadCallback callback) {
             this.callback = callback;
             return this;
         }
@@ -384,7 +408,8 @@ public final class PoolThread implements Executor {
 
         /**
          * 创建用于某些配置的线程管理器。
-         * @return                  对象
+         *
+         * @return 对象
          */
         public PoolThread build() {
             //最大值
@@ -393,7 +418,7 @@ public final class PoolThread implements Executor {
             priority = Math.min(Thread.MAX_PRIORITY, priority);
 
             size = Math.max(1, size);
-            if (name==null || name.length()==0) {
+            if (name == null || name.length() == 0) {
                 // 如果没有设置名字，那么就使用下面默认的线程名称
                 switch (type) {
                     case TYPE_CACHE:

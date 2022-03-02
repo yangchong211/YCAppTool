@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -16,8 +18,8 @@ import com.yc.fragmentlib.BackHandlerHelper;
 import com.yc.library.base.adapter.BasePagerAdapter;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.statusbar.bar.StateAppBar;
+import com.yc.video.R;
 import com.yc.video.ui.fragment.VideoArticleFragment;
-import com.ycbjie.video.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,22 @@ public class VideoActivity extends BaseActivity {
     private TextView toolbarTitle;
     private TabLayout tabLayout;
     private ViewPager vpContent;
+
+    /**
+     * 开启页面
+     *
+     * @param context 上下文
+     */
+    public static void startActivity(Context context) {
+        try {
+            Intent target = new Intent();
+            target.setClass(context, VideoActivity.class);
+            context.startActivity(target);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public int getContentView() {

@@ -45,4 +45,38 @@
             android:text="ANR监控" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
+        <TextView
+            android:id="@+id/tv_home_five"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_first"
+            android:text="算法试题" />
+        <TextView
+            android:id="@+id/tv_home_six"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_second"
+            android:text="国际化" />
+        <TextView
+            android:id="@+id/tv_home_seven"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_third"
+            android:text="线程库" />
+        <TextView
+            android:id="@+id/tv_home_eight"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_four"
+            android:text="视频播放器" />
+    </LinearLayout>
+
+
 </LinearLayout>

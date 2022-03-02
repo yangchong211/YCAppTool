@@ -7,7 +7,6 @@
         <activity android:name="com.yc.other.ui.activity.MeFeedBackActivity"/>
         <activity android:name="com.yc.other.ui.activity.ImageGalleryActivity"/>
         <activity android:name="com.yc.other.ui.activity.MeLoginActivity"/>
-        <activity android:name="com.yc.other.ui.activity.ZoomLargeImageActivity"/>
         <activity android:name="com.yc.other.ui.activity.MeBannerActivity"/>
         <activity android:name="com.yc.other.ui.activity.BannerViewActivity"/>
         <activity android:name="com.yc.other.ui.activity.SnapHelperActivity"/>
@@ -26,6 +25,11 @@
         <activity android:name="com.yc.other.ui.timer.HandlerActivity"/>
         <activity android:name="com.yc.other.ui.activity.SerialTaskActivity"/>
         <activity android:name="com.yc.other.ui.activity.net.NetworkActivity"/>
+
+        <activity android:name=".thread.ThreadActivity"/>
+        <activity android:name=".thread.ThreadPoolExecutorActivity"/>
+        <activity android:name=".thread.MainThreadActivity"/>
+        <activity android:name=".thread.ExecutorsTestActivity"/>
     </application>
 
 

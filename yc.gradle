@@ -77,7 +77,6 @@ ext {
                 "YCGalleryLib"                : "cn.yc:YCGalleryLib:1.1.5",
                 "YCBannerLib"                 : "cn.yc:YCBannerLib:1.4.0",
                 "YCVideoPlayerLib"            : "cn.yc:YCVideoPlayerLib:2.6.6",
-                "YCThreadPoolLib"             : "cn.yc:YCThreadPoolLib:1.3.2",
                 "notificationLib"             : "cn.yc:notificationLib:1.0.3",
                 "WebViewLib"                  : "cn.yc:WebViewLib:1.4.1",
 

@@ -35,8 +35,8 @@ import java.util.concurrent.Executor;
  */
 public final class AndroidDeliver implements Executor {
 
-    private static AndroidDeliver instance = new AndroidDeliver();
-    private Handler main = new Handler(Looper.getMainLooper());
+    private static final AndroidDeliver instance = new AndroidDeliver();
+    private final Handler main = new Handler(Looper.getMainLooper());
 
     public static AndroidDeliver getInstance() {
         return instance;

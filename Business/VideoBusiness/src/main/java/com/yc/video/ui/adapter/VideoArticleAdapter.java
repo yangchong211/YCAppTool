@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.yc.imageserver.utils.GlideImageUtils;
-import com.ycbjie.video.R;
+import com.yc.video.R;
 import com.yc.video.model.MultiNewsArticleDataBean;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
