@@ -11,8 +11,8 @@ import android.util.Log;
 import androidx.annotation.IntDef;
 import androidx.annotation.IntRange;
 
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.Utils;
+
+import com.yc.toolutils.AppToolUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -441,9 +441,9 @@ public final class AppLogUtils {
         String versionName = "";
         int versionCode = 0;
         try {
-            PackageInfo pi = Utils.getApp()
+            PackageInfo pi = AppToolUtils.getApp()
                     .getPackageManager()
-                    .getPackageInfo(Utils.getApp().getPackageName(), 0);
+                    .getPackageInfo(AppToolUtils.getApp().getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
                 versionCode = pi.versionCode;
@@ -516,10 +516,10 @@ public final class AppLogUtils {
         private Config() {
             if (sDefaultDir != null) return;
             if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                    && Utils.getApp().getExternalCacheDir() != null)
-                sDefaultDir = Utils.getApp().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
+                    && AppToolUtils.getApp().getExternalCacheDir() != null)
+                sDefaultDir = AppToolUtils.getApp().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
             else {
-                sDefaultDir = Utils.getApp().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
+                sDefaultDir = AppToolUtils.getApp().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
             }
         }
 

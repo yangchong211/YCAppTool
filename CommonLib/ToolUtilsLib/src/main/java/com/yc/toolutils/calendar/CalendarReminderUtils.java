@@ -13,9 +13,7 @@ import android.os.Build;
 import android.provider.CalendarContract;
 import android.text.TextUtils;
 
-import com.blankj.utilcode.constant.TimeConstants;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.TimeUtils;
+import com.yc.toolutils.logger.AppLogUtils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -195,7 +193,7 @@ public class CalendarReminderUtils {
         }
         //获取日历账户的id
         int calId = checkAndAddCalendarAccount(context,calendarEvent);
-        LogUtils.i("addCalendarEvent----获取日历账户的id---"+calId);
+        AppLogUtils.i("addCalendarEvent----获取日历账户的id---"+calId);
         //获取账户id失败直接返回，添加日历事件失败
         if (calId < 0) {
             // 获取日历失败直接返回
@@ -301,7 +299,7 @@ public class CalendarReminderUtils {
                         int id = eventCursor.getInt(eventCursor.getColumnIndex(CalendarContract.Calendars._ID));
                         Uri deleteUri = ContentUris.withAppendedId(Uri.parse(CALENDER_EVENT_URL), id);
                         int rows = context.getContentResolver().delete(deleteUri, null, null);
-                        LogUtils.i("addCalendarEvent----取得id---"+id);
+                        AppLogUtils.i("addCalendarEvent----取得id---"+id);
                         if (rows == -1) {
                             // 删除提醒失败直接返回
                             if(null != callback){
@@ -357,20 +355,20 @@ public class CalendarReminderUtils {
         calendarEvent.setTitle("杨充同学需要每一周写博客连载");
         calendarEvent.setDescription("写博客");
         //long remindTimeCalculator = remindTimeCalculator(2020, 9, 16, 10, 20);
-        long millis = TimeUtils.getMillis(new Date(), 5 * 60* 60, TimeConstants.SEC);
-        LogUtils.i("addCalendarEvent------onFailed-"+millis);
-        calendarEvent.setReminderTime(millis);
+        //long millis = TimeUtils.getMillis(new Date(), 5 * 60* 60, TimeConstants.SEC);
+        //AppLogUtils.i("addCalendarEvent------onFailed-"+millis);
+        calendarEvent.setReminderTime(100);
         calendarEvent.setPrevious(5);
         //添加到日历中
         addCalendarEvent(context, calendarEvent, new CalendarRemindListener() {
             @Override
             public void onFailed(Status error_code) {
-                LogUtils.i("addCalendarEvent------onFailed-"+error_code);
+                AppLogUtils.i("addCalendarEvent------onFailed-"+error_code);
             }
 
             @Override
             public void onSuccess() {
-                LogUtils.i("addCalendarEvent------onSuccess-");
+                AppLogUtils.i("addCalendarEvent------onSuccess-");
             }
         });
     }

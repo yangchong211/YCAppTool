@@ -11,8 +11,7 @@ import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.blankj.utilcode.util.Utils;
+import com.yc.toolutils.AppToolUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -89,7 +88,7 @@ public final class FileSaveUtils {
      * @return                      路径
      */
     public static String getLocalVideoPathDir(String name){
-        String video = getLocalFileSavePathDir(Utils.getApp(), "video", name);
+        String video = getLocalFileSavePathDir(AppToolUtils.getApp(), "video", name);
         return video;
     }
 
@@ -163,7 +162,7 @@ public final class FileSaveUtils {
      * @return
      */
     public static String getLocalImgSavePath() {
-        return getLocalFileSavePathDir(Utils.getApp(),"images",
+        return getLocalFileSavePathDir(AppToolUtils.getApp(),"images",
                 generateRandomName() + ".png");
     }
 
