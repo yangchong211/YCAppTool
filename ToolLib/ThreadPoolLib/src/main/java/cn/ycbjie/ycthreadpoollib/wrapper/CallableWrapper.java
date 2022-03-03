@@ -34,9 +34,9 @@ import cn.ycbjie.ycthreadpoollib.utils.ThreadToolUtils;
  */
 public final class CallableWrapper<T> implements Callable<T> {
 
-    private String name;
-    private ThreadCallback callback;
-    private Callable<T> proxy;
+    private final String name;
+    private final ThreadCallback callback;
+    private final Callable<T> proxy;
 
     /**
      * 构造方法

@@ -5,10 +5,8 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,10 +14,16 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+
 import com.pedaily.yc.ycdialoglib.utils.DialogUtils;
 import com.pedaily.yc.ycdialoglib.R;
 
 import java.lang.ref.SoftReference;
+import java.lang.reflect.Field;
 
 /**
  * <pre>
@@ -242,6 +246,10 @@ public final class ToastUtils {
                 mToast.get().cancel();
             }
             Toast toast = new Toast(context);
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1){
+                //android 7.1.1 版本
+                HookToast.hook(toast);
+            }
             if (isFill) {
                 toast.setGravity(gravity | Gravity.FILL_HORIZONTAL, 0, yOffset);
             } else {
@@ -275,6 +283,72 @@ public final class ToastUtils {
             }
             mToast = new SoftReference<>(toast);
             return toast;
+        }
+    }
+
+
+
+    /**
+     * <pre>
+     *     @author yangchong
+     *     email  : yangchong211@163.com
+     *     time  : 20120/5/6
+     *     desc  : 利用hook解决toast崩溃问题
+     *     revise: 7.1.1Toast崩溃解决方案
+     *             首先Toast显示依赖于一个窗口，这个窗口被WMS管理（WindowManagerService），
+     *             当需要show的时候这个请求会放在WMS请求队列中，并且会传递一个TN类型的Bider对象给WMS，
+     *             WMS并生成一个token传递给Android进行显示与隐藏，但是如果UI线程的某个线程发生了阻塞，
+     *             并且已经NotificationManager检测已经超时就不删除token记录，此时token已经过期，
+     *             阻塞结束的时候再显示的时候就发生了异常。
+     * </pre>
+     */
+    public static class HookToast {
+
+        private static Field sField_TN;
+        private static Field sField_TN_Handler;
+
+        static {
+            try {
+                Class<?> clazz =  Toast.class;
+                sField_TN = clazz.getDeclaredField("mTN");
+                sField_TN.setAccessible(true);
+                sField_TN_Handler = sField_TN.getType().getDeclaredField("mHandler");
+                sField_TN_Handler.setAccessible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        public static void hook(Toast toast) {
+            try {
+                Object tn = sField_TN.get(toast);
+                Handler preHandler = (Handler) sField_TN_Handler.get(tn);
+                sField_TN_Handler.set(tn, new HookToast.SafelyHandler(preHandler));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        public static class SafelyHandler extends Handler {
+
+            private final Handler impl;
+
+            public SafelyHandler(Handler impl) {
+                this.impl = impl;
+            }
+
+            public void dispatchMessage(Message msg) {
+                try {
+                    super.dispatchMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            public void handleMessage(Message msg) {
+                //需要委托给原Handler执行
+                impl.handleMessage(msg);
+            }
         }
     }
 

@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.collection.SimpleArrayMap;
-
-import com.blankj.utilcode.util.Utils;
 import com.yc.toolutils.AppToolUtils;
 
 import java.util.Collections;

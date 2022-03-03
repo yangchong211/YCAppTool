@@ -33,7 +33,7 @@ public final class ThreadToolUtils {
     /**
      * 标志：在android平台上
      */
-    public static boolean isAndroid;
+    private static boolean isAndroid;
 
     /*
      * 静态代码块
@@ -50,17 +50,28 @@ public final class ThreadToolUtils {
         }
     }
 
+    /**
+     * 判断是否是Android
+     *
+     * @return true表示Android
+     */
+    public static boolean isIsAndroid() {
+        return isAndroid;
+    }
 
     /**
      * 重置线程名并设置UnCaughtExceptionHandler包装回调，以便在发生异常时通知用户
-     * @param thread The thread who should be reset.
-     * @param name  non-null, thread name
+     *
+     * @param thread   The thread who should be reset.
+     * @param name     non-null, thread name
      * @param callback a callback to notify user.
      */
     public static void resetThread(Thread thread, final String name, final ThreadCallback callback) {
+        //捕获单个线程的异常
         thread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override
             public void uncaughtException(Thread t, Throwable e) {
+                //如果线程出现了异常，则会回调该方法
                 if (callback != null) {
                     callback.onError(name, e);
                 }

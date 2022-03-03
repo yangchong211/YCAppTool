@@ -407,11 +407,25 @@ public class ThreadActivity extends AppCompatActivity {
 
     private void test7_1() {
         // 创建对象
-        MyThread t1 = new MyThread() ;
+        MyThread thread = new MyThread() ;
         // 启动线程: 需要使用start方法启动线程, 如果我们在这里调用的是run方法,那么我们只是把该方法作为普通方法进行执行
         //		t1.run() ;
-        t1.start() ;		// 告诉jvm开启一个线程调用run方法
-         t1.start() ;		// 一个线程只能被启动一次
+        thread.start() ;		// 告诉jvm开启一个线程调用run方法
+        thread.start() ;		// 一个线程只能被启动一次
+        //为单个线程设置一个属于线程自己的uncaughtExceptionHandler，捕获单个线程异常
+        thread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                System.out.println("捕获单个线程："+t.toString() + " throwable : " + e.getMessage());
+            }
+        });
+        //所有线程中的Exception在抛出并且未捕获的情况下，都会从此路过
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                System.out.println("捕获所有线程："+t.toString() + " throwable : " + e.getMessage());
+            }
+        });
         try {
             //让当前线程sleep一下，不会释放对象锁，当前线程等待
             Thread.sleep(0);

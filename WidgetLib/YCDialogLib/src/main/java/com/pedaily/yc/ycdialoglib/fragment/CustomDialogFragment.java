@@ -2,12 +2,13 @@ package com.pedaily.yc.ycdialoglib.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.fragment.app.FragmentManager;
 
 import com.pedaily.yc.ycdialoglib.R;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;

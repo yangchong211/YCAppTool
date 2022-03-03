@@ -159,7 +159,7 @@ public final class PoolThread implements Executor {
         //获取线程thread配置信息
         ThreadConfigs configs = getLocalConfigs();
         if (configs.deliver == null) {
-            if (ThreadToolUtils.isAndroid) {
+            if (ThreadToolUtils.isIsAndroid()) {
                 configs.deliver = AndroidDeliver.getInstance();
             } else {
                 configs.deliver = JavaDeliver.getInstance();
@@ -436,7 +436,7 @@ public final class PoolThread implements Executor {
             }
 
             if (deliver == null) {
-                if (ThreadToolUtils.isAndroid) {
+                if (ThreadToolUtils.isIsAndroid()) {
                     deliver = AndroidDeliver.getInstance();
                 } else {
                     deliver = JavaDeliver.getInstance();
