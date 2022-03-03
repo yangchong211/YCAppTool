@@ -67,7 +67,6 @@ public final class PoolThread implements Executor {
      * 默认线程传递
      */
     private final Executor defDeliver;
-
     /**
      * 确保多线程配置没有冲突
      */

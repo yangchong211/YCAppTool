@@ -19,6 +19,9 @@ import cn.ycbjie.ycthreadpoollib.factory.MyThreadFactory;
  */
 public abstract class AbsThreadPoolBuilder<T extends ExecutorService> implements IThreadPoolBuilder<T>{
 
+    /**
+     * ConcurrentHashMap 多线程下数据安全
+     */
     protected static Map<String, ExecutorService> mThreadPoolMap = new ConcurrentHashMap<>();
     protected ExecutorService mExecutorService = null;
     protected String mPoolName = "default";

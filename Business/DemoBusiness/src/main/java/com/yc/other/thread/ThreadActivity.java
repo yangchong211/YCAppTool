@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.other.R;
 
+import java.util.HashMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -426,7 +427,6 @@ public class ThreadActivity extends AppCompatActivity {
     }
 
 
-
     private void test8_1() {
         Object co = new Object();
         System.out.println(co);
@@ -501,6 +501,10 @@ public class ThreadActivity extends AppCompatActivity {
         } catch (Exception e) {
             System.err.println("捕获到异常了");
         }
+
+        HashMap<String,String> map = new HashMap<>();
+        map.put("1","doubi");
+        String s = map.get("1");
     }
 
     public class ExceptionThread1 implements Runnable {
