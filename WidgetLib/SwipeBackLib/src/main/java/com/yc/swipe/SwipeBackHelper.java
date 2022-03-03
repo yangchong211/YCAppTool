@@ -9,7 +9,6 @@ import android.view.View;
 
 import java.util.List;
 
-import cn.bingoogolapple.swipebacklayout.R;
 
 
 public class SwipeBackHelper {

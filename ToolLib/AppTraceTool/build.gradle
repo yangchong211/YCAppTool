@@ -9,7 +9,7 @@ def releaseTime() {
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
         //applicationId "com.ddtaxi.common.tracesdk"

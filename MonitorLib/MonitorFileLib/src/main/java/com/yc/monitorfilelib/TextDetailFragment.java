@@ -109,8 +109,8 @@ public class TextDetailFragment extends Fragment {
     private void shareFile() {
         //分享
         if (mFile != null) {
-            //先把文件转移到外部存储文件
             //请求权限
+            //先把文件转移到外部存储文件
             //检查版本是否大于M
             if (ContextCompat.checkSelfPermission(mActivity,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)

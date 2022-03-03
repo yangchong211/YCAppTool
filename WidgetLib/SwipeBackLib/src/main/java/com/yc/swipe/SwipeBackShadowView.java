@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import java.lang.ref.WeakReference;
-import cn.bingoogolapple.swipebacklayout.R;
 
 
 public class SwipeBackShadowView extends FrameLayout {

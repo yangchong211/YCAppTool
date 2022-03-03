@@ -86,7 +86,7 @@ public class FileExplorerFragment extends Fragment {
                 if (mCurDir != null) {
                     String path = mCurDir.getPath();
                     boolean copyToClipBoard = AppWindowUtils.copyToClipBoard(getContext(), path);
-                    if (copyToClipBoard){
+                    if (copyToClipBoard) {
                         Toast.makeText(getContext(), "拷贝成功", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -102,7 +102,7 @@ public class FileExplorerFragment extends Fragment {
         mFileInfoAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int i) {
-                if (mFileList.size()>i && i>=0){
+                if (mFileList.size() > i && i >= 0) {
                     File fileInfo = mFileList.get(i);
                     if (fileInfo.exists() && fileInfo.isFile()) {
                         //如果是文件，则直接打开文件
@@ -273,13 +273,13 @@ public class FileExplorerFragment extends Fragment {
     }
 
     /**
-     * 初始化默认文件。注意：加External和不加的比较
+     * 初始化默认文件。注意：加External和不加(默认)的比较
      * 相同点:1.都可以做app缓存目录。2.app卸载后，两个目录下的数据都会被清空。
      * 不同点:1.目录的路径不同。前者的目录存在外部SD卡上的。后者的目录存在app的内部存储上。
-     * 2.前者的路径在手机里可以直接看到。后者的路径需要root以后，用Root Explorer 文件管理器才能看到。
+     *       2.前者的路径在手机里可以直接看到。后者的路径需要root以后，用Root Explorer 文件管理器才能看到。
      *
      * @param context 上下文
-     * @return
+     * @return 列表
      */
     private List<File> initDefaultRootFileInfos(Context context) {
         List<File> fileInfos = new ArrayList<>();
@@ -289,6 +289,7 @@ public class FileExplorerFragment extends Fragment {
             fileInfos.add(parentFile);
             FileExplorerUtils.logInfo(TAG + parentFile.getPath());
         }
+        //路径：/data/user/0/com.yc.lifehelper
 
         //第二个是缓存文件路径
         File externalCacheDir = context.getExternalCacheDir();
@@ -296,6 +297,7 @@ public class FileExplorerFragment extends Fragment {
             fileInfos.add(externalCacheDir);
             FileExplorerUtils.logInfo(TAG + externalCacheDir.getPath());
         }
+        //路径：/storage/emulated/0/Android/data/com.yc.lifehelper/cache
 
         //第三个是外部file路径
         File externalFilesDir = context.getExternalFilesDir((String) null);
@@ -303,6 +305,7 @@ public class FileExplorerFragment extends Fragment {
             fileInfos.add(externalFilesDir);
             FileExplorerUtils.logInfo(TAG + externalFilesDir.getPath());
         }
+        //路径：/storage/emulated/0/Android/data/com.yc.lifehelper/files
         return fileInfos;
     }
 
