@@ -6,8 +6,8 @@ import android.os.HandlerThread;
 
 public final class HandlerThreadFactory {
 
-    private static HandlerThreadWrapper sLoopThread = new HandlerThreadWrapper("loop");
-    private static HandlerThreadWrapper sWriteLogThread = new HandlerThreadWrapper("writer");
+    private static final HandlerThreadWrapper sLoopThread = new HandlerThreadWrapper("loop");
+    private static final HandlerThreadWrapper sWriteLogThread = new HandlerThreadWrapper("writer");
 
     private HandlerThreadFactory() {
         throw new InstantiationError("Must not instantiate this class");
@@ -22,7 +22,7 @@ public final class HandlerThreadFactory {
     }
 
     private static class HandlerThreadWrapper {
-        private Handler handler = null;
+        private final Handler handler;
 
         public HandlerThreadWrapper(String threadName) {
             HandlerThread handlerThread = new HandlerThread("BlockCanary-" + threadName);

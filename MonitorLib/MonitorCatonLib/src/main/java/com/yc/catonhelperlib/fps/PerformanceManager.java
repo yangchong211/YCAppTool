@@ -79,6 +79,7 @@ public final class PerformanceManager {
     private PerformanceManager() {
         fpsFileName = "fps.txt";
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //默认是60
         mLastFrameRate = 60;
         mMainHandler = new Handler(Looper.getMainLooper());
         mRateRunnable = new FrameRateRunnable();

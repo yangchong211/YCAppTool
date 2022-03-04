@@ -27,6 +27,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.applicationlib.activity.ActivityManager;
 import com.yc.banner.view.BannerView;
+import com.yc.catonhelperlib.fps.PerformanceActivity;
 import com.yc.configlayer.arounter.ARouterUtils;
 import com.yc.configlayer.arounter.RouterConfig;
 import com.yc.configlayer.constant.Constant;
@@ -270,6 +271,7 @@ public class MainActivity extends BaseActivity{
                         //ANR监控
                         case R.id.tv_home_four:
                             logger.error("net work tool");
+                            PerformanceActivity.startActivity(MainActivity.this);
                             break;
                         //算法试题
                         case R.id.tv_home_five:
@@ -389,7 +391,6 @@ public class MainActivity extends BaseActivity{
                         ToastUtils.showRoundRectToast( "后期接入讯飞语音");
                         break;
                     case R.id.setting:
-                        ARouterUtils.navigation(RouterConfig.App.ACTIVITY_APP_SETTING_ACTIVITY);
                         break;
                     case R.id.quit:
                         ActivityManager.getInstance().appExist();

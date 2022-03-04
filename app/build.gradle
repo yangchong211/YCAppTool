@@ -204,6 +204,7 @@ dependencies {
     implementation project(path: ':StatusBarLib')
     implementation project(path: ':XlogServer')
     implementation project(path: ':LeetBusiness')
+    implementation project(path: ':MonitorKeepAlive')
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')

@@ -1,0 +1,160 @@
+<resources>
+    <string name="ka_accessibility_description">借助此功能设置保活开关，只要一键全搞定。</string>
+
+    <string name="ka_common_allow">允许</string>
+    <string name="ka_">允许</string>
+
+    <string name="ka_float_window_allow_show_above_other_app">允许在其他应用的上层显示</string>
+    <string name="ka_float_window_allow_license">允许许可</string>
+    <string name="ka_float_window_allow_show_above_other_app_emui_11">在其他应用上层显示</string>
+    <string name="ka_float_window_allow_show_above_other_app_miui_11">@string/ka_float_window_allow_show_above_other_app</string>
+    <string name="ka_float_window_show">显示悬浮窗</string>
+
+    <string name="ka_notification">通知</string>
+    <string name="ka_notification_miui_v9">通知管理</string>
+    <string name="ka_notification_allow">允许通知</string>
+    <string name="ka_notification_push_allow">允许推送通知</string>
+    <string name="ka_notification_show">显示通知</string>
+    <string name="ka_notification_manager">通知管理</string>
+
+    <string name="ka_wifi_configuration">配置</string>
+    <string name="ka_wifi_advanced_setting">高级设置</string>
+    <string name="ka_wifi_keep_live">在休眠状态下保持 WLAN 网络连接</string>
+    <string name="ka_wifi_keep_live_v2">在休眠状态下保持 WLAN 连接</string>
+    <string name="ka_wifi_keep_live_v3">睡眠期间保持 WLAN 开启</string>
+    <string name="ka_wifi_keep_live_v4">WLAN 休眠策略</string>
+    <string name="ka_wifi_keep_live_v5">系统休眠状态下保持连接</string>
+    <string name="ka_wifi_keep_live_v6">屏幕熄灭状态下保持连接</string>
+    <string name="ka_wifi_keep_live_emui_v11">在休眠状态下保持 WLAN 连接</string>
+    <string name="ka_wifi_keep_live_always">始终</string>
+    <string name="ka_wifi_keep_live_always_v2">总是</string>
+    <string name="ka_wifi_keep_live_always_v3">永不休眠</string>
+
+    <string name="ka_self_start">自启动</string>
+    <string name="ka_self_start_allow">允许</string>
+    <string name="ka_self_start_system_allow">允许系统唤醒</string>
+    <string name="ka_self_start_other_allow">允许被其他应用唤醒</string>
+    <string name="ka_self_start_manager">自启动管理</string>
+
+    <string name="ka_battery_no_limit">无限制</string>
+    <string name="ka_battery_enter_other">其他</string>
+    <string name="ka_battery_enter_protect">耗电保护</string>
+    <string name="ka_battery_background_freeze">后台冻结</string>
+    <string name="ka_battery_auto_optimize">检测到异常时自动优化</string>
+    <string name="ka_battery_auto_optimize_2">异常耗电自动优化</string>
+    <string name="ka_battery_sleep">深度睡眠</string>
+    <string name="ka_battery_saving">省电策略</string>
+
+    <!-- emui -->
+    <string name="ka_notification_route_tip_emui_default">设置 - 应用管理 - 找到应用 - 通知 - 允许通知</string>
+    <string name="ka_notification_route_tip_emui_10">@string/ka_notification_route_tip_emui_default</string>
+    <string name="ka_notification_route_tip_emui_11">@string/ka_notification_route_tip_emui_default</string>
+    <string name="ka_notification_route_tip_emui_13">@string/ka_notification_route_tip_emui_default</string>
+    <string name="ka_notification_route_tip_emui_14">设置 - 应用和通知 - 应用管理- 找到应用 - 通知 - 允许通知</string>
+    <string name="ka_notification_route_tip_emui_15">@string/ka_notification_route_tip_emui_14</string>
+
+    <string name="ka_wifi_route_tip_emui_default">设置 - WLAN - 菜单 - 高级设置 - 在休眠状态下保持 WLAN 连接 - 始终</string>
+    <string name="ka_wifi_route_tip_emui_10">@string/ka_wifi_route_tip_emui_default</string>
+    <string name="ka_wifi_route_tip_emui_11">@string/ka_wifi_route_tip_emui_default</string>
+    <string name="ka_wifi_route_tip_emui_13">@string/ka_wifi_route_tip_emui_default</string>
+    <string name="ka_wifi_route_tip_emui_14">设置 - 无线和网络 - WLAN - 配置 - 在休眠状态下保持 WLAN 连接 - 始终</string>
+    <string name="ka_wifi_route_tip_emui_15">@string/ka_wifi_route_tip_emui_14</string>
+
+    <string name="ka_self_start_route_tip_emui_default">设置 - 应用管理 - 找到应用 - 权限- 设置单项权限 - 应用自动启动</string>
+    <string name="ka_self_start_route_tip_emui_10">@string/ka_self_start_route_tip_emui_default</string>
+    <string name="ka_self_start_route_tip_emui_11">@string/ka_self_start_route_tip_emui_default</string>
+    <string name="ka_self_start_route_tip_emui_13">@string/ka_self_start_route_tip_emui_default</string>
+    <string name="ka_self_start_route_tip_emui_14">设置 - 电池 - 启动管理 - 找到应用- 手动管理 - 开启所有选项</string>
+    <string name="ka_self_start_route_tip_emui_15">@string/ka_self_start_route_tip_emui_14</string>
+
+    <string name="ka_battery_route_tip_emui_default">手机管家 - 电池管理 - 受保护应用 - 找到应用 - 开启保护</string>
+    <string name="ka_battery_route_tip_emui_10">@string/ka_battery_route_tip_emui_default</string>
+    <string name="ka_battery_route_tip_emui_11">设置 - 电池 - 锁屏清理应用 - 找到应用 - 设置不清理</string>
+    <string name="ka_battery_route_tip_emui_13">@string/ka_battery_route_tip_emui_11</string>
+    <string name="ka_battery_route_tip_emui_14">设置 - 电池 - 启动管理 - 找到应用 - 手动管理 - 开启所有选项</string>
+    <string name="ka_battery_route_tip_emui_15">@string/ka_battery_route_tip_emui_14</string>
+
+    <!-- miui -->
+    <string name="ka_notification_route_tip_miui_default">设置 - 更多应用 - 找到应用 - 通知管理 - 允许通知</string>
+    <string name="ka_notification_route_tip_miui_v9">@string/ka_notification_route_tip_miui_default</string>
+
+    <string name="ka_wifi_route_tip_miui_default">设置 - WLAN - 高级设置 - 在休眠状态下保持 WLAN 网络连接 - 始终</string>
+    <string name="ka_wifi_route_tip_miui_v9">@string/ka_wifi_route_tip_miui_default</string>
+
+    <string name="ka_self_start_route_tip_miui_default">设置 - 更多应用 - 找到应用 - 自启动 - 允许</string>
+    <string name="ka_self_start_route_tip_miui_v9">@string/ka_self_start_route_tip_miui_default</string>
+
+    <string name="ka_battery_route_tip_miui_default">设置 - 更多应用 - 找到应用 - 省电策略 - 无限制</string>
+    <string name="ka_battery_route_tip_miui_v9">@string/ka_battery_route_tip_miui_default</string>
+
+    <!-- vivo -->
+    <string name="ka_notification_route_tip_vivo_default">设置 - 更多设置 - 应用程序 - 找到应用 - 显示通知</string>
+    <string name="ka_notification_route_tip_vivo_v2_5">@string/ka_notification_route_tip_vivo_default</string>
+    <string name="ka_notification_route_tip_vivo_v3_1">@string/ka_notification_route_tip_vivo_default</string>
+    <string name="ka_notification_route_tip_vivo_v3_0">设置 - 更多设置 - 应用程序 - 找到应用 - 通知 - 允许通知</string>
+    <string name="ka_notification_route_tip_vivo_v4_0">@string/ka_notification_route_tip_vivo_v3_0</string>
+
+    <string name="ka_wifi_route_tip_vivo_default">设置 - WLAN - 高级设置 - WLAN 休眠策略 - 永不休眠</string>
+    <string name="ka_wifi_route_tip_vivo_v2_5">@string/ka_wifi_route_tip_vivo_default</string>
+    <string name="ka_wifi_route_tip_vivo_v3_0">@string/ka_wifi_route_tip_vivo_default</string>
+    <string name="ka_wifi_route_tip_vivo_v3_1">@string/ka_wifi_route_tip_vivo_default</string>
+    <string name="ka_wifi_route_tip_vivo_v4_0">@string/ka_wifi_route_tip_vivo_default</string>
+
+    <string name="ka_self_start_route_tip_vivo_default">i 管家 - 软件管理 - 自启动管理- 找到应用 - 开启</string>
+    <string name="ka_self_start_route_tip_vivo_v2_5">@string/ka_self_start_route_tip_vivo_default</string>
+    <string name="ka_self_start_route_tip_vivo_v3_1">@string/ka_self_start_route_tip_vivo_default</string>
+    <string name="ka_self_start_route_tip_vivo_v3_0">设置 - 更多设置 - 权限管理 - 找到应用 - 自启动 - 开启</string>
+
+    <string name="ka_battery_route_tip_vivo_default">i 管家 - 省电管理 - 后台高耗电 - 找到应用 - 开启</string>
+    <string name="ka_battery_route_tip_vivo_v2_5">@string/ka_battery_route_tip_vivo_default</string>
+    <string name="ka_battery_route_tip_vivo_v3_1">@string/ka_battery_route_tip_vivo_default</string>
+    <string name="ka_battery_route_tip_vivo_v3_0">设置 - 电池 - 后台高耗电 - 找到应用 - 开启</string>
+
+    <!-- oppo -->
+    <string name="ka_notification_route_tip_oppo_default">设置 - 应用管理 - 找到应用 - 通知管理 - 允许通知</string>
+    <string name="ka_notification_route_tip_oppo_v3_0">@string/ka_notification_route_tip_oppo_default</string>
+    <string name="ka_notification_route_tip_oppo_v3_0_0">设置 - 其他设置 - 应用程序管理 - 找到应用 - 通知管理 - 允许通知</string>
+
+    <string name="ka_wifi_route_tip_oppo_default">设置 - WLAN - 高级设置 - 在休眠状态下保持 WLAN 连接 - 选中</string>
+    <string name="ka_wifi_route_tip_oppo_v3_0">@string/ka_wifi_route_tip_oppo_default</string>
+    <string name="ka_wifi_route_tip_oppo_v3_0_0">@string/ka_wifi_route_tip_oppo_default</string>
+
+    <string name="ka_self_start_route_tip_oppo_default">手机管家 - 权限隐私 - 自启动管理 - 找到应用 - 开启</string>
+    <string name="ka_self_start_route_tip_oppo_v3_0">@string/ka_self_start_route_tip_oppo_default</string>
+    <string name="ka_self_start_route_tip_oppo_v3_0_0">@string/ka_self_start_route_tip_oppo_default</string>
+
+    <string name="ka_battery_route_tip_oppo_default">设置 - 电池 - 耗电保护 - 找到应用 - 关掉全部开关</string>
+    <string name="ka_battery_route_tip_oppo_v3_0">@string/ka_battery_route_tip_oppo_default</string>
+    <string name="ka_battery_route_tip_oppo_v3_0_0">设置 - 电池 - 其他 - 找到应用 - 关掉全部开关</string>
+
+    <!-- smart -->
+    <string name="ka_notification_route_tip_smart_default">设置 - 通知中心  - 找到应用 - 开启</string>
+    <string name="ka_notification_route_tip_smart_v2_5_0">@string/ka_notification_route_tip_smart_default</string>
+
+    <string name="ka_wifi_route_tip_smart_default">设置 - 无线网络 - 系统休眠状态下保持连接 - 选中</string>
+    <string name="ka_wifi_route_tip_smart_v2_5_0">@string/ka_wifi_route_tip_smart_default</string>
+    <string name="ka_wifi_route_tip_smart_v4_2">设置 - 无线网络 - 屏幕熄灭状态下保持连接 - 选中</string>
+
+    <string name="ka_self_start_route_tip_smart_default">设置 - 安全中心 - 应用程序权限管理 - 第三方应用权限管理 - 找到应用 - 开启后台自启动</string>
+    <string name="ka_self_start_route_tip_smart_v2_5_0">@string/ka_self_start_route_tip_smart_default</string>
+    <string name="ka_self_start_route_tip_smart_v4_2">设置 - 应用管理 - 应用程序管理 - 找到应用 - 权限管理 - 开启自启动权限</string>
+
+    <string name="ka_battery_route_tip_smart_default">设置 - 更多应用 - 找到应用 - 省电策略 - 无限制</string>
+    <string name="ka_battery_route_tip_smart_v2_5_0">@string/ka_battery_route_tip_miui_default</string>
+
+    <!-- samsung -->
+    <string name="ka_notification_route_tip_samsung_default">设置 - 通知  - 找到应用 - 开启</string>
+    <string name="ka_wifi_route_tip_samsung_default">设置 - WLAN - 高级设置 - 在休眠状态下保持 WLAN 网络连接 - 始终</string>
+    <string name="ka_self_start_route_tip_samsung_default">设置 - 应用管理 - 找到应用 - 权限- 设置单项权限 - 应用自动启动</string>
+    <string name="ka_battery_route_tip_samsung_default">设置 - 常规管理 - 电池 - 未监视的应用程序 - 添加当前应用</string>
+
+    <!-- default -->
+    <string name="ka_notification_route_tip_default">设置 - 应用管理 - 找到应用 - 通知 - 允许通知</string>
+    <string name="ka_wifi_route_tip_default">设置 - WLAN - 高级设置 - 在休眠状态下保持 WLAN 网络连接 - 始终</string>
+    <string name="ka_self_start_route_tip_default">设置 - 应用管理 - 找到应用 - 权限- 设置单项权限 - 应用自动启动</string>
+    <string name="ka_battery_route_tip_default">设置 - 电池 - 启动管理 - 找到应用 - 手动管理 - 开启所有选项</string>
+
+    <!-- sunmi -->
+    <string name="ka_wifi_route_tip_sunmi_default">设置 - WLAN - 设置 - 在休眠状态下保持 WLAN 连接 - 始终</string>
+    <string name="ka_battery_route_tip_sunmi_default">设置 - 电池 - 电池优化 - 找到应用 - 不优化</string>
+</resources>

@@ -230,15 +230,16 @@ public final class CrashFileUtils {
         }
     }
 
-    public static void print(Throwable thr) {
-        StackTraceElement[] stackTraces = thr.getStackTrace();
+    public static void print(Throwable throwable) {
+        //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
+        //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
+        StackTraceElement[] stackTraces = throwable.getStackTrace();
         for (StackTraceElement stackTrace : stackTraces) {
             String clazzName = stackTrace.getClassName();
             String fileName = stackTrace.getFileName();
             int lineNumber = stackTrace.getLineNumber();
             String methodName = stackTrace.getMethodName();
-            AppLogUtils.i("printThrowable------"+clazzName+"----"
-                    +fileName+"------"+lineNumber+"----"+methodName);
+            AppLogUtils.i("printThrowable------"+clazzName+"----" +fileName+"------"+lineNumber+"----"+methodName);
         }
     }
 
@@ -251,16 +252,14 @@ public final class CrashFileUtils {
         }
         StackTraceElement[] stackTrace = ex.getStackTrace();
         StackTraceElement element;
-        String packageName = context.getPackageName();
         for (StackTraceElement ele : stackTrace) {
-            if (ele.getClassName().contains(packageName)) {
+            if (ele.getClassName().contains(context.getPackageName())) {
                 element = ele;
                 String clazzName = element.getClassName();
                 String fileName = element.getFileName();
                 int lineNumber = element.getLineNumber();
                 String methodName = element.getMethodName();
-                AppLogUtils.i("printThrowable----1--"+clazzName+"----"
-                        +fileName+"------"+lineNumber+"----"+methodName);
+                AppLogUtils.i("printThrowable----1--"+clazzName+"----" +fileName+"------"+lineNumber+"----"+methodName);
                 return element;
             }
         }
@@ -269,8 +268,7 @@ public final class CrashFileUtils {
         String fileName = element.getFileName();
         int lineNumber = element.getLineNumber();
         String methodName = element.getMethodName();
-        AppLogUtils.i("printThrowable----2--"+clazzName+"----"
-                +fileName+"------"+lineNumber+"----"+methodName);
+        AppLogUtils.i("printThrowable----2--"+clazzName+"----" +fileName+"------"+lineNumber+"----"+methodName);
         return element;
     }
 
@@ -307,7 +305,7 @@ public final class CrashFileUtils {
         sb.append("\nSDK:").append(Build.VERSION.SDK_INT);
         sb.append("\nEXCEPTION:").append(ex.getLocalizedMessage());
         sb.append("\nSTACK_TRACE:").append(result);
-        String crashFilePath = getCrashFilePath(context);
+        String crashFilePath = AppFileUtils.getSrcFilePath(context,CRASH_LOGS);
         if (crashFilePath!=null && crashFilePath.length()>0){
             try {
                 AppLogUtils.w(CrashHandler.TAG, "handleException---输出路径-----"+crashFilePath);
@@ -319,28 +317,6 @@ public final class CrashFileUtils {
                 e.printStackTrace();
             }
         }
-    }
-
-    /**
-     * 获取文件夹路径
-     *
-     * @param context
-     * @return
-     */
-    @Deprecated
-    private static String getCrashFilePath(Context context) {
-        String path = null;
-        try {
-            path = Environment.getExternalStorageDirectory().getCanonicalPath()
-                    + "/" + context.getResources().getString(R.string.app_name) + "/Crash/";
-            File file = new File(path);
-            if (!file.exists()) {
-                file.mkdirs();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return path;
     }
 
 }

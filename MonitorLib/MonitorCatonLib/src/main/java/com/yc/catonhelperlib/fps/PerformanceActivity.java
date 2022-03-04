@@ -1,5 +1,7 @@
 package com.yc.catonhelperlib.fps;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +32,22 @@ public class PerformanceActivity extends AppCompatActivity {
     private TextView time;
     private TextView date;
 
+    /**
+     * 开启页面
+     *
+     * @param context 上下文
+     */
+    public static void startActivity(Context context) {
+        try {
+            Intent target = new Intent();
+            target.setClass(context, PerformanceActivity.class);
+            //target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(target);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +60,7 @@ public class PerformanceActivity extends AppCompatActivity {
         time = findViewById(R.id.time);
         date = findViewById(R.id.date);
         
-        PolyLineAdapter.Builder builder = new PolyLineAdapter.Builder(
-                this, 10);
+        PolyLineAdapter.Builder builder = new PolyLineAdapter.Builder(this, 10);
         dataShow.setLayoutManager(new LinearLayoutManager(this,
                 RecyclerView.HORIZONTAL, false));
         builder.setMaxValue(100).setMinValue(0);
@@ -68,9 +85,14 @@ public class PerformanceActivity extends AppCompatActivity {
             }
         });
         
-        PerformanceManager.getInstance().startMonitorFrameInfo();
+        PerformanceManager.getInstance().startMonitor();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        PerformanceManager.getInstance().stopMonitor();
+    }
 
     @Override
     public void onDestroy() {
@@ -93,7 +115,7 @@ public class PerformanceActivity extends AppCompatActivity {
 
         protected void onPostExecute(List<PerformanceData> result) {
             performanceDataAdapter.append(result);
-            adapter.setData(result);
+            adapter.addData(result);
             if (result.size() > 1) {
                 updateTips((PerformanceData)result.get(1));
             }

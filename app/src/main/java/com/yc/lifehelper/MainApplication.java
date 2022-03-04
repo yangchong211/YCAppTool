@@ -3,6 +3,7 @@ package com.yc.lifehelper;
 import android.content.Context;
 import android.util.Log;
 
+import com.yc.alive.KeepAliveHelper;
 import com.yc.applicationlib.activity.ActivityManager;
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.backgroud.AppStateMonitor;
@@ -47,6 +48,7 @@ public class MainApplication extends LibApplication {
     public void onCreate() {
         Log.d("Application : ", "onCreate");
         super.onCreate();
+        AppToolUtils.init(this);
         AppLogHelper.config(this);
         LongevityMonitor();
         initAppStatusListener();
@@ -55,6 +57,7 @@ public class MainApplication extends LibApplication {
         initCrash();
         AppToolUtils.init(this);
         ActivityManager.getInstance().init(this);
+        KeepAliveHelper.init(this);
     }
 
     @Override

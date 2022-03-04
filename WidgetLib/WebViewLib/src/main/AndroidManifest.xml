@@ -32,7 +32,7 @@
 
 
         <activity
-            android:name=".view.X5WebViewActivity"
+            android:name="com.yc.webviewlib.view.X5WebViewActivity"
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
             android:launchMode="singleTask"

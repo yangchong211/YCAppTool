@@ -3,7 +3,6 @@ package com.yc.library.utils;
 import android.app.Application;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import com.yc.logging.config.LoggerConfig;
 import com.yc.logging.LoggerFactory;
 import com.yc.logging.util.Supplier;

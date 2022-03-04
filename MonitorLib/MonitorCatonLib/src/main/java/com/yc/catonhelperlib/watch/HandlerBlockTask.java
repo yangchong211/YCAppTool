@@ -8,6 +8,11 @@ import android.util.Printer;
 
 public final class HandlerBlockTask {
 
+    /**
+     * 1.代码中，使用了一个工作线程mBlockThread来监控UI线程的卡顿。每次Looper的loop方法对消息进行处理之前，我们添加一个定时监控器。
+     * 2.如果UI线程中的消息处理时间小于我们设定的阈值BLOCK_TIME，则取消已添加的定时器。
+     */
+
     private final static String TAG = "HandlerBlockTask";
     private static final int BLOCK_TIME = 1000;
     private final HandlerThread mBlockThread = new HandlerThread("blockThread");

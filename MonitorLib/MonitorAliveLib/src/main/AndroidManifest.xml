@@ -11,19 +11,19 @@
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
 
     <application>
-        <receiver android:name="com.ycbjie.live.receiver.NotificationClickReceiver" />
+        <receiver android:name="com.yc.alive.receiver.NotificationClickReceiver" />
         <activity
-            android:name="com.ycbjie.live.activity.OnePixelActivity"
+            android:name="com.yc.alive.activity.OnePixelActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
             android:theme="@style/OnePixelActivity" />
-        <service android:name="com.ycbjie.live.service.LocalService" />
-        <service android:name="com.ycbjie.live.service.HideForegroundService" />
+        <service android:name="com.yc.alive.service.LocalService" />
+        <service android:name="com.yc.alive.service.HideForegroundService" />
         <service
-            android:name="com.ycbjie.live.service.JobHandlerService"
+            android:name="com.yc.alive.service.JobHandlerService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name="com.ycbjie.live.service.RemoteService"
+            android:name="com.yc.alive.service.RemoteService"
             android:process=":remote" />
     </application>
 

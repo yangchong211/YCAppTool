@@ -42,7 +42,6 @@ public class PolyLineAdapter extends Adapter<PolyLineAdapter.ViewHolder> {
             this.data.addAll(d);
             this.notifyDataSetChanged();
         }
-
     }
 
     public void addData(PerformanceData bean) {

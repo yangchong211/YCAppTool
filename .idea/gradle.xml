@@ -30,6 +30,7 @@
             <option value="$PROJECT_DIR$/MonitorLib/MonitorCatonLib" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorCrashLib" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorFileLib" />
+            <option value="$PROJECT_DIR$/MonitorLib/MonitorKeepAlive" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorNetLib" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorOomLib" />
             <option value="$PROJECT_DIR$/ServerLib/GsonServer" />
@@ -55,8 +56,11 @@
             <option value="$PROJECT_DIR$/WidgetLib/BannerViewLib" />
             <option value="$PROJECT_DIR$/WidgetLib/BlurViewLib" />
             <option value="$PROJECT_DIR$/WidgetLib/CustomWidget" />
+            <option value="$PROJECT_DIR$/WidgetLib/FloatPageLib" />
             <option value="$PROJECT_DIR$/WidgetLib/FragmentLib" />
             <option value="$PROJECT_DIR$/WidgetLib/LargeImageLib" />
+            <option value="$PROJECT_DIR$/WidgetLib/NotificationLib" />
+            <option value="$PROJECT_DIR$/WidgetLib/NotifyMessage" />
             <option value="$PROJECT_DIR$/WidgetLib/PhotoWidget" />
             <option value="$PROJECT_DIR$/WidgetLib/StatusBarLib" />
             <option value="$PROJECT_DIR$/WidgetLib/SwipeBackLib" />

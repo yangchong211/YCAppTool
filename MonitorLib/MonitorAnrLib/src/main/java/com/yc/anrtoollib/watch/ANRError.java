@@ -5,6 +5,7 @@ import android.os.Looper;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import androidx.annotation.NonNull;
@@ -35,7 +36,8 @@ public class ANRError extends Error {
 
     @NonNull
     static ANRError New(long duration, @Nullable String prefix, boolean logThreadsWithoutStackTrace) {
-        final Thread mainThread = Looper.getMainLooper().getThread();
+        Looper mainLooper = Looper.getMainLooper();
+        final Thread mainThread = mainLooper.getThread();
 
         final Map<Thread, StackTraceElement[]> stackTraces = new TreeMap<Thread, StackTraceElement[]>(new Comparator<Thread>() {
             @Override
@@ -49,8 +51,9 @@ public class ANRError extends Error {
                 return rhs.getName().compareTo(lhs.getName());
             }
         });
-
-        for (Map.Entry<Thread, StackTraceElement[]> entry : Thread.getAllStackTraces().entrySet()){
+        Map<Thread, StackTraceElement[]> allStackTraces = Thread.getAllStackTraces();
+        Set<Map.Entry<Thread, StackTraceElement[]>> entries = allStackTraces.entrySet();
+        for (Map.Entry<Thread, StackTraceElement[]> entry : entries){
             Thread key = entry.getKey();
             StackTraceElement[] value = entry.getValue();
             if (key == mainThread ||  (key.getName().startsWith(prefix)
@@ -87,6 +90,7 @@ public class ANRError extends Error {
         String threadTitle = getThreadTitle(mainThread);
         //创建包装类
         ANRStackTrace threadStackTrace = new ANRStackTrace(threadTitle, mainStackTrace);
+        //构建thread对象
         ANRStackTrace.MyThread thread = threadStackTrace.new MyThread(null);
         //最后返回构造好的ANRError实例
         return new ANRError(thread, duration);

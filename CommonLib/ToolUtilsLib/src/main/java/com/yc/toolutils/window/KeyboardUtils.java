@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.InputMethodManager;
 
-import com.blankj.utilcode.util.Utils;
+
+import com.yc.toolutils.AppToolUtils;
 
 import java.lang.reflect.Field;
 
@@ -57,7 +58,7 @@ public final class KeyboardUtils {
      */
     public static void showSoftInput(final View view) {
         InputMethodManager imm =
-                (InputMethodManager) Utils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) AppToolUtils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;
         view.setFocusable(true);
         view.setFocusableInTouchMode(true);
@@ -86,7 +87,7 @@ public final class KeyboardUtils {
      */
     public static void hideSoftInput(final View view) {
         InputMethodManager imm =
-                (InputMethodManager) Utils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) AppToolUtils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
@@ -96,7 +97,7 @@ public final class KeyboardUtils {
      */
     public static void toggleSoftInput() {
         InputMethodManager imm =
-                (InputMethodManager) Utils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) AppToolUtils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
@@ -164,7 +165,7 @@ public final class KeyboardUtils {
     public static void fixSoftInputLeaks(final Context context) {
         if (context == null) return;
         InputMethodManager imm =
-                (InputMethodManager) Utils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) AppToolUtils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;
         String[] strArr = new String[]{"mCurRootView", "mServedView", "mNextServedView"};
         for (int i = 0; i < 3; i++) {

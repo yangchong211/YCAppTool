@@ -2,8 +2,8 @@ package com.pedaily.yc.ycdialoglib.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 

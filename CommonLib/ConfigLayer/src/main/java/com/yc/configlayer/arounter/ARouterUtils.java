@@ -239,8 +239,6 @@ public class ARouterUtils {
 
                 //无法找到路径，作替换处理
                 PathReplaceServiceImpl pathReplaceService = new PathReplaceServiceImpl();
-                pathReplaceService.replacePath(RouterConfig.Android.ACTIVITY_ANDROID_ACTIVITY,
-                        RouterConfig.DouBan.ACTIVITY_DOU_MUSIC_ACTIVITY);
             }
         };
         return callback;
