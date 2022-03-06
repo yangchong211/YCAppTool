@@ -33,6 +33,7 @@
             <option value="$PROJECT_DIR$/MonitorLib/MonitorKeepAlive" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorNetLib" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorOomLib" />
+            <option value="$PROJECT_DIR$/MonitorLib/MonitorXposed" />
             <option value="$PROJECT_DIR$/ServerLib/GsonServer" />
             <option value="$PROJECT_DIR$/ServerLib/HttpServer" />
             <option value="$PROJECT_DIR$/ServerLib/ImageServer" />

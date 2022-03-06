@@ -52,7 +52,17 @@ public abstract class BaseStateBarActivity extends AppCompatActivity{
 
 
     /** 状态切换 **/
-    protected abstract void initStatusLayout();
+    public void initStatusLayout(){
+        statusLayoutManager = StateLayoutManager.newBuilder(this)
+                .contentView(getLayoutId())
+                .emptyDataView(R.layout.view_custom_empty_data)
+                .errorView(R.layout.view_custom_data_error)
+                .loadingView(R.layout.view_custom_loading_data)
+                .netWorkErrorView(R.layout.view_custom_network_error)
+                .build();
+    }
+
+    protected abstract int getLayoutId();
 
     /** 初始化View的代码写在这个方法中 */
     public abstract void initView();

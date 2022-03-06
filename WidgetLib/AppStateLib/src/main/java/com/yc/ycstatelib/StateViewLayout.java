@@ -20,13 +20,12 @@ import android.widget.FrameLayout.LayoutParams;
  *             参考链接：https://github.com/luckybilly/Gloading
  * </pre>
  */
-public class StateViewLayout {
+public final class StateViewLayout {
 
     public static final int STATUS_LOADING = 1;
     public static final int STATUS_LOAD_SUCCESS = 2;
     public static final int STATUS_LOAD_FAILED = 3;
     public static final int STATUS_EMPTY_DATA = 4;
-    
     private static volatile StateViewLayout mDefault;
     private Adapter mAdapter;
     private static boolean DEBUG = false;
@@ -145,13 +144,13 @@ public class StateViewLayout {
      */
     public static class Holder {
 
-        private Adapter mAdapter;
-        private Context mContext;
+        private final Adapter mAdapter;
+        private final Context mContext;
         private Runnable mRetryTask;
         private View mCurStatusView;
-        private ViewGroup mWrapper;
+        private final ViewGroup mWrapper;
         private int curState;
-        private SparseArray<View> mStatusViews = new SparseArray<>(4);
+        private final SparseArray<View> mStatusViews = new SparseArray<>(4);
         private Object mData;
 
         private Holder(Adapter adapter, Context context, ViewGroup wrapper) {

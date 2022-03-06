@@ -29,6 +29,7 @@ import androidx.annotation.Nullable;
  *     revise:
  * </pre>
  */
+@Deprecated
 public class CommonPaddingView extends FrameLayout implements View.OnClickListener {
 
     private Context mContext;
@@ -349,11 +350,6 @@ public class CommonPaddingView extends FrameLayout implements View.OnClickListen
                 this.viewFooterFill.getLayoutParams();
         linearParams.height = (int) height;
         this.viewFooterFill.setLayoutParams(linearParams);
-    }
-
-
-    public static class Builder{
-
     }
 
 }

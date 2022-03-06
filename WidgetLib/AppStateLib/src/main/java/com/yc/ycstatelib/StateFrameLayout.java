@@ -66,7 +66,7 @@ public class StateFrameLayout extends FrameLayout {
     /**
      *  存放布局集合
      */
-    private SparseArray<View> layoutSparseArray = new SparseArray<>();
+    private final SparseArray<View> layoutSparseArray = new SparseArray<>();
 
     //private HashMap<Integer,View> map = new HashMap<>();
 
@@ -301,9 +301,11 @@ public class StateFrameLayout extends FrameLayout {
             //显示该view
             if(key == id) {
                 //显示该视图
-                valueView.setVisibility(View.VISIBLE);
-                if(mStatusLayoutManager.onShowHideViewListener != null) {
-                    mStatusLayoutManager.onShowHideViewListener.onShowView(valueView, key);
+                if (valueView.getVisibility() != View.VISIBLE){
+                    valueView.setVisibility(View.VISIBLE);
+                    if(mStatusLayoutManager.onShowHideViewListener != null) {
+                        mStatusLayoutManager.onShowHideViewListener.onShowView(valueView, key);
+                    }
                 }
             } else {
                 //隐藏该视图
@@ -330,7 +332,7 @@ public class StateFrameLayout extends FrameLayout {
     private boolean inflateLayout(int id) {
         boolean isShow = true;
         if (layoutSparseArray.get(id) != null) {
-            return isShow;
+            return true;
         }
         switch (id) {
                 //网络异常

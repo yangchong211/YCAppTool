@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/ll_main">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/base_tool_bar"/>
+    <include layout="@layout/base_tool_bar" />
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/ll_main"
+        android:layout_marginTop="@dimen/dp50"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

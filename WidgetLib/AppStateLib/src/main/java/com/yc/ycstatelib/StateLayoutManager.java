@@ -200,7 +200,7 @@ public class StateLayoutManager {
 
     public static final class Builder {
 
-        private Context context;
+        private final Context context;
         /**
          * StateFrameLayout布局创建时，是否包裹内容，默认是MATCH_PARENT
          */
