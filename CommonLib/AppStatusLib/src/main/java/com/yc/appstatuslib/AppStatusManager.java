@@ -71,24 +71,41 @@ public final class AppStatusManager {
         this.mAppStatus.init((Application)this.mContext.getApplicationContext());
     }
 
+    /**
+     * 注册电量监听广播
+     * 因为系统规定监听电量变化的广播接收器不能静态注册，所以这里只能使用动态注册的方式
+     * @param context   上下文
+     */
     private void initBatteryReceiver(Context context) {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.intent.action.BATTERY_CHANGED");
         context.registerReceiver(this.mBatteryReceiver, filter);
     }
 
+    /**
+     * 注册GPS监听广播
+     * @param context   上下文
+     */
     private void initGpsReceiver(Context context) {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.location.PROVIDERS_CHANGED");
         context.registerReceiver(this.mGpsReceiver, filter);
     }
 
+    /**
+     * 注册网络广播
+     * @param context   上下文
+     */
     private void initNetworkReceiver(Context context) {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         context.registerReceiver(this.mNetWorkReceiver, filter);
     }
 
+    /**
+     * 注册屏幕监听广播
+     * @param context   上下文
+     */
     private void initScreenReceiver(Context context) {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.intent.action.SCREEN_ON");
@@ -97,12 +114,21 @@ public final class AppStatusManager {
         context.registerReceiver(this.mScreenReceiver, filter);
     }
 
+    /**
+     * 注册Wi-Fi监听广播
+     * @param context   上下文
+     */
     private void initWifiReceiver(Context context) {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
         context.registerReceiver(this.mWifiBroadcastReceiver, filter);
     }
 
+
+    /**
+     * 注册蓝牙监听广播
+     * @param context   上下文
+     */
     private void initBluetoothReceiver(Context context) {
         IntentFilter filter = new IntentFilter();
         filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
@@ -111,7 +137,9 @@ public final class AppStatusManager {
         context.registerReceiver(this.mBluetoothReceiver, filter);
     }
 
-
+    /**
+     * 解绑操作
+     */
     public void destroy() {
         this.mContext.unregisterReceiver(this.mBatteryReceiver);
         this.mContext.unregisterReceiver(this.mGpsReceiver);
@@ -122,7 +150,6 @@ public final class AppStatusManager {
         if (this.mResourceCollect != null) {
             this.mResourceCollect.destroy();
         }
-
     }
 
     public void collection() {
@@ -153,53 +180,67 @@ public final class AppStatusManager {
 
     public void dispatcherWifiState(boolean state) {
         Object[] listeners = this.mAppStatusListener.toArray();
-        for (Object listener : listeners) {
-            ((AppStatusListener) listener).wifiStatusChange(state);
+        if (listeners!=null){
+            for (Object listener : listeners) {
+                ((AppStatusListener) listener).wifiStatusChange(state);
+            }
         }
     }
 
     public void dispatcherBluetoothState(boolean state) {
         Object[] listeners = this.mAppStatusListener.toArray();
-        for (Object listener : listeners) {
-            ((AppStatusListener) listener).bluetoothStatusChange(state);
+        if (listeners!=null){
+            for (Object listener : listeners) {
+                ((AppStatusListener) listener).bluetoothStatusChange(state);
+            }
         }
     }
 
     public void dispatcherScreenState(boolean state) {
         Object[] listeners = this.mAppStatusListener.toArray();
-        for (Object listener : listeners) {
-            ((AppStatusListener) listener).screenStatusChange(state);
+        if (listeners!=null){
+            for (Object listener : listeners) {
+                ((AppStatusListener) listener).screenStatusChange(state);
+            }
         }
     }
 
     public void dispatcherGpsState(boolean state) {
         Object[] listeners = this.mAppStatusListener.toArray();
-        for (Object listener : listeners) {
-            ((AppStatusListener) listener).gpsStatusChange(state);
+        if (listeners!=null){
+            for (Object listener : listeners) {
+                ((AppStatusListener) listener).gpsStatusChange(state);
+            }
         }
     }
 
     public void dispatcherNetworkState(boolean state) {
         if (this.mAppStatusListener != null && this.mAppStatusListener.size() != 0) {
             Object[] listeners = this.mAppStatusListener.toArray();
-            for (Object listener : listeners) {
-                ((AppStatusListener) listener).networkStatusChange(state);
+            if (listeners!=null){
+                for (Object listener : listeners) {
+                    ((AppStatusListener) listener).networkStatusChange(state);
+                }
             }
         }
     }
 
     public void dispatcherBatteryState(BatteryInfo batteryInfo) {
         Object[] listeners = this.mAppStatusListener.toArray();
-        for (Object listener : listeners) {
-            ((AppStatusListener) listener).batteryStatusChange(batteryInfo);
+        if (listeners!=null){
+            for (Object listener : listeners) {
+                ((AppStatusListener) listener).batteryStatusChange(batteryInfo);
+            }
+            collection();
         }
-        collection();
     }
 
     public void dispatcherUserPresent() {
         Object[] listeners = this.mAppStatusListener.toArray();
-        for (Object listener : listeners) {
-            ((AppStatusListener) listener).screenUserPresent();
+        if (listeners!=null){
+            for (Object listener : listeners) {
+                ((AppStatusListener) listener).screenUserPresent();
+            }
         }
     }
 
@@ -213,8 +254,10 @@ public final class AppStatusManager {
             threadInfo.setRunningThreadCount(threadManager.getRunningThread());
             threadInfo.setTimeWaitingThreadCount(threadManager.getTimeWaitingThread());
             threadInfo.setWaitingThreadCount(threadManager.getWaitingThread());
-            for (Object listener : listeners) {
-                ((AppStatusListener) listener).appThreadStatusChange(threadInfo);
+            if (listeners!=null){
+                for (Object listener : listeners) {
+                    ((AppStatusListener) listener).appThreadStatusChange(threadInfo);
+                }
             }
         }
     }
@@ -232,6 +275,9 @@ public final class AppStatusManager {
          * file文件
          */
         private File file;
+        /**
+         * 日志监听
+         */
         private TraceLogListener traceLog;
         /**
          * 是否开启线程监控，默认false

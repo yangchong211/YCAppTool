@@ -42,7 +42,8 @@ public final class ServiceLoader<S> implements Iterable<S> {
                 final S p = ServiceRegistry.newProvider(provider);
                 this.mProviders.add(p);
             } catch (final Throwable t) {
-                throw new ServiceConfigurationError("Provider " + provider.getName() + " could not be initialized", t);
+                throw new ServiceConfigurationError("Provider "
+                        + provider.getName() + " could not be initialized", t);
             }
         }
     }

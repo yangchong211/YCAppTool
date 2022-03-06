@@ -422,7 +422,8 @@
     - fork出app进程后，在ActivityThread中，在main方法的最后调用了 Looper.loop()，在这个方法中处理主线程的任务调度，一旦执行完这个方法就意味着APP被退出了。
     - 果主线程发生了异常，就会退出循环，意味着APP崩溃，所以我们我们需要进行try-catch，避免APP退出，再启动一个 Looper.loop() 去执行主线程任务，就不会退出。
     - looper拦截崩溃或者anr，存在一个巨大的问题，就是按钮点不动或者无反应。有可能导致出现其他问题……这个需要慎重使用
-
+- 小说阅读
+    - https://github.com/bifan-wei/HwTxtReader
 
 
 ### 09.其他内容说明

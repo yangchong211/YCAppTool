@@ -18,6 +18,7 @@ public class LaunchApplication extends Application {
     private final HashMap<String, Method> mMethod = new HashMap<>();
 
     public boolean isMainProcess() {
+        //判断是否是主进程
         return isMainProcess(this);
     }
 

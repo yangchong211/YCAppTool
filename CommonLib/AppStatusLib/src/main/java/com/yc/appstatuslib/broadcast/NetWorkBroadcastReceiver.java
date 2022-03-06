@@ -10,7 +10,8 @@ import android.net.NetworkInfo;
 import com.yc.appstatuslib.AppStatusManager;
 
 public class NetWorkBroadcastReceiver extends BroadcastReceiver {
-    private AppStatusManager mManager;
+
+    private final AppStatusManager mManager;
 
     public NetWorkBroadcastReceiver(AppStatusManager resourceManager) {
         this.mManager = resourceManager;
@@ -30,6 +31,7 @@ public class NetWorkBroadcastReceiver extends BroadcastReceiver {
             }
         }
     }
+
 
     public void onReceive(Context context, Intent intent) {
         if (this.mManager != null) {

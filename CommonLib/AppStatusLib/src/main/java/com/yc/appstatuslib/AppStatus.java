@@ -48,7 +48,7 @@ public class AppStatus {
         return mActivityResumedCount;
     }
 
-    public void destory() {
+    public void destroy() {
         mAppStatusListener.clear();
         mApplication.unregisterActivityLifecycleCallbacks(mAppCallbacks);
     }
@@ -63,14 +63,18 @@ public class AppStatus {
             Object[] listeners = mAppStatusListener.toArray();
             int index;
             if (front) {
-                for(index = 0; index < listeners.length; ++index) {
-                    ((AppStatusListener)listeners[index]).appOnFrontOrBackChange(false);
-                    mResourceManager.dispatcherThreadInfo();
+                if (listeners != null) {
+                    for(index = 0; index < listeners.length; ++index) {
+                        ((AppStatusListener)listeners[index]).appOnFrontOrBackChange(false);
+                        mResourceManager.dispatcherThreadInfo();
+                    }
                 }
             } else {
-                for(index = 0; index < listeners.length; ++index) {
-                    ((AppStatusListener)listeners[index]).appOnFrontOrBackChange(true);
-                    mResourceManager.dispatcherThreadInfo();
+                if (listeners != null) {
+                    for(index = 0; index < listeners.length; ++index) {
+                        ((AppStatusListener)listeners[index]).appOnFrontOrBackChange(true);
+                        mResourceManager.dispatcherThreadInfo();
+                    }
                 }
             }
         }

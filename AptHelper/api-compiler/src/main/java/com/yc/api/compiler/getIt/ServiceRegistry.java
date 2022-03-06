@@ -9,7 +9,8 @@ public abstract class ServiceRegistry {
 
     }
 
-    public static synchronized <S, P extends S> void register(final Class<S> serviceClass, final Class<P> providerClass) {
+    public static synchronized <S, P extends S> void register(final Class<S> serviceClass,
+                                                              final Class<P> providerClass) {
         throw new RuntimeException("Stub!");
     }
 
