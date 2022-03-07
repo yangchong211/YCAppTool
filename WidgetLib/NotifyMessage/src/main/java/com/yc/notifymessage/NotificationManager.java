@@ -22,7 +22,13 @@ import java.util.LinkedList;
  */
 public class NotificationManager {
 
+    /**
+     * 展示消息
+     */
     public static final int MSG_SHOW = 1;
+    /**
+     * 隐藏消息
+     */
     public static final int MSG_HIDE = 2;
 
     public static final String BUNDLE_NOTIFICATION = "notification";
