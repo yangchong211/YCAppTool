@@ -1,10 +1,12 @@
 package com.yc.notifymessage;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
 import androidx.annotation.NonNull;
 
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 /**
@@ -31,13 +33,13 @@ public class MyHandler extends Handler {
     @Override
     public void handleMessage(@NonNull Message msg) {
         super.handleMessage(msg);
-        if (mWeakReference == null || mWeakReference.get() == null) {
+        if (checkNull(mWeakReference)) {
             return;
         }
         int action = msg.what;
         if (action == NotificationManager.MSG_SHOW) {
-            CustomNotification notification = msg.getData()
-                    .getParcelable(NotificationManager.BUNDLE_NOTIFICATION);
+            Bundle bundle = msg.getData();
+            CustomNotification notification = bundle.getParcelable(NotificationManager.BUNDLE_NOTIFICATION);
             if (notification != null) {
                 mWeakReference.get().showNotification(notification);
             }
@@ -46,5 +48,13 @@ public class MyHandler extends Handler {
             mWeakReference.get().hideNotification(type);
         }
     }
+
+    private boolean checkNull(WeakReference<NotificationManager> weakReference) {
+        if (weakReference == null || weakReference.get() == null) {
+            return true;
+        }
+        return false;
+    }
+
 
 }

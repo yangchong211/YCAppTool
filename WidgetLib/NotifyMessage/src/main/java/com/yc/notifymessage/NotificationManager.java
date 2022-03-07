@@ -30,12 +30,22 @@ public class NotificationManager {
      * 隐藏消息
      */
     public static final int MSG_HIDE = 2;
-
+    /**
+     * key
+     */
     public static final String BUNDLE_NOTIFICATION = "notification";
     public static final String BUNDLE_TYPE = "type";
+    /**
+     * 单例对象
+     */
     private static volatile NotificationManager sInstance;
-
+    /**
+     * node节点链表
+     */
     private final LinkedList<NotificationNode> mNodeLinkedList = new LinkedList<>();
+    /**
+     * 采用弱引用管理handler
+     */
     private final MyHandler mHandler = new MyHandler(this);
 
 
