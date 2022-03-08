@@ -50,17 +50,23 @@ public class ProgressInterceptor implements Interceptor {
         LISTENER_MAP.remove(url);
     }
 
-
+    @NotNull
     @Override
     public Response intercept(@NotNull Interceptor.Chain chain) throws IOException {
         //拦截到了OkHttp的请求，然后调用proceed()方法去处理这个请求，最终将服务器响应的Response返回。
         Request request = chain.request();
         Response response = chain.proceed(request);
+        //拿到请求url
         String url = request.url().toString();
+        //拿到相应body对象
         ResponseBody body = response.body();
         LogUtils.d("加载图片进度值------自定义拦截器--");
-        Response newResponse = response.newBuilder().body(new ProgressResponseBody(url, body)).build();
+        ProgressResponseBody progressResponseBody = new ProgressResponseBody(url, body);
+        Response.Builder builder = response.newBuilder();
+        Response newResponse = builder.body(progressResponseBody).build();
+        ResponseBody responseBody = newResponse.body();
         return newResponse;
     }
+
 }
 

@@ -40,7 +40,8 @@ public class OkHttpUrlLoader implements ModelLoader<GlideUrl, InputStream> {
 
     @Override
     public LoadData<InputStream> buildLoadData(@NotNull GlideUrl model, int width, int height, @NotNull Options options) {
-        return new LoadData<>(model, new OkHttpStreamFetcher(client, model));
+        OkHttpStreamFetcher okHttpStreamFetcher = new OkHttpStreamFetcher(client, model);
+        return new LoadData<>(model, okHttpStreamFetcher);
     }
 
     /**
@@ -67,6 +68,7 @@ public class OkHttpUrlLoader implements ModelLoader<GlideUrl, InputStream> {
          * Constructor for a new Factory that runs requests using a static singleton client.
          */
         public Factory() {
+            //获取 OkHttpClient 对象
             this(getInternalClient());
         }
 
@@ -79,6 +81,7 @@ public class OkHttpUrlLoader implements ModelLoader<GlideUrl, InputStream> {
             this.client = client;
         }
 
+        @NotNull
         @Override
         public ModelLoader<GlideUrl, InputStream> build(@NotNull MultiModelLoaderFactory multiFactory) {
             return new OkHttpUrlLoader(client);

@@ -47,7 +47,7 @@ public class BaseWebView extends WebView {
     @SuppressLint("HandlerLeak")
     private class MyHandler extends Handler {
 
-        private WeakReference<Context> mContextReference;
+        private final WeakReference<Context> mContextReference;
 
         MyHandler(Context context) {
             super(Looper.getMainLooper());

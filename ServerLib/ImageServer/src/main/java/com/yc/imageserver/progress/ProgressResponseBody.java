@@ -29,7 +29,7 @@ import okio.Source;
 public class ProgressResponseBody extends ResponseBody {
 
     private BufferedSource bufferedSource;
-    private ResponseBody responseBody;
+    private final ResponseBody responseBody;
     private ProgressListener listener;
 
     /**
@@ -85,6 +85,9 @@ public class ProgressResponseBody extends ResponseBody {
     private class ProgressSource extends ForwardingSource {
 
         long totalBytesRead = 0;
+        /**
+         * 当前进度
+         */
         int currentProgress;
 
         ProgressSource(Source source) {
@@ -103,6 +106,7 @@ public class ProgressResponseBody extends ResponseBody {
         @Override
         public long read(@NotNull Buffer sink, long byteCount) throws IOException {
             long bytesRead = super.read(sink, byteCount);
+            //读取相应body实体对象中的数据长度
             long fullLength = responseBody.contentLength();
             if (bytesRead == -1) {
                 totalBytesRead = fullLength;

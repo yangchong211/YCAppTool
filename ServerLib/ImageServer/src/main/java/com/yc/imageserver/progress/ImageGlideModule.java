@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.Registry;
+import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
@@ -31,7 +32,7 @@ import okhttp3.OkHttpClient;
  *             下版本准备设置缓存，设置拦截监听等功能，第一版先不做
  * </pre>
  */
-//@GlideModule
+@GlideModule
 public class ImageGlideModule extends AppGlideModule {
 
     /*
@@ -59,13 +60,16 @@ public class ImageGlideModule extends AppGlideModule {
     public void registerComponents(@NotNull Context context, @NotNull Glide glide, @NotNull Registry registry) {
         //添加拦截器到Glide
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        //添加拦截器
         builder.addInterceptor(new ProgressInterceptor());
+        //build
         builder.build();
         LogUtils.d("加载图片进度值------registerComponents--");
         //原来的是  new OkHttpUrlLoader.Factory()；
         //在registerComponents()方法中将我们刚刚创建的OkHttpUrlLoader和OkHttpStreamFetcher注册到Glide当中，
         //将原来的HTTP通讯组件给替换掉
-        registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory());
+        OkHttpUrlLoader.Factory factory = new OkHttpUrlLoader.Factory();
+        registry.replace(GlideUrl.class, InputStream.class, factory);
     }
 
 
