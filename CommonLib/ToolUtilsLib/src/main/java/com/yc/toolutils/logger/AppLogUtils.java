@@ -56,13 +56,39 @@ import javax.xml.transform.stream.StreamSource;
 public final class AppLogUtils {
 
 
+    /**
+     * Log.v 的输出颜色为黑色的，输出大于或等于VERBOSE日志级别的信息，也就是可见级别，一般是最低的信息提示
+     */
     public static final int V = Log.VERBOSE;
+    /**
+     * debug调试
+     * Log.d的输出颜色是蓝色的，也就是调式级别，一般不会中止程序，一般是程序员为了调试而打印的log
+     */
     public static final int D = Log.DEBUG;
+    /**
+     * info信息
+     * Log.i的输出为绿色，输出大于或等于INFO日志级别的信息，也就是信息界级别，不会中止程序，一般是系统中执行操作的信息提示
+     */
     public static final int I = Log.INFO;
+    /**
+     * warn警告
+     * Log.w的输出为橙色, 输出大于或等于WARN日志级别的信息，也就是警告级别，一般不会中止程序，但是可能会影响程序执行结果
+     */
     public static final int W = Log.WARN;
+    /**
+     * error误差
+     * Log.e的输出为红色，仅输出ERROR日志级别的信息，也就是错误级别，一般会中止程序运行，是最严重的Log级别。
+     */
     public static final int E = Log.ERROR;
+    /**
+     * 断言
+     */
     public static final int A = Log.ASSERT;
 
+    /**
+     * Log.v()，Log.d()，Log.i()，Log.w()，Log.e()等方法都是底层都是调用了println方法，
+     * 然后在源码中查看，其实其内部调用的是println_native方法，也就是通过JNI调用底层的c++输出日志。
+     */
     @IntDef({V, D, I, W, E, A})
     @Retention(RetentionPolicy.SOURCE)
     private @interface TYPE {

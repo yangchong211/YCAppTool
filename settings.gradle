@@ -15,7 +15,7 @@ project(':BusinessInterface').projectDir = new File('Business/BusinessInterface'
 
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
-        ':ServerInterface', ':GsonServer'
+        ':ServerInterface', ':GsonServer', ':IpcServer'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -23,6 +23,8 @@ project(':XlogServer').projectDir = new File('ServerLib/XlogServer')
 project(':NfcServer').projectDir = new File('ServerLib/NfcServer')
 project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
 project(':ServerInterface').projectDir = new File('ServerLib/ServerInterface')
+project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
+
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
@@ -34,6 +36,8 @@ project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
+
+
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
@@ -56,6 +60,7 @@ project(':YCDialogLib').projectDir = new File('WidgetLib/YCDialogLib')
 project(':FloatPageLib').projectDir = new File('WidgetLib/FloatPageLib')
 project(':NotifyMessage').projectDir = new File('WidgetLib/NotifyMessage')
 project(':NotificationLib').projectDir = new File('WidgetLib/NotificationLib')
+
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
@@ -96,4 +101,5 @@ project(':MonitorFileLib').projectDir = new File('MonitorLib/MonitorFileLib')
 project(':MonitorOomLib').projectDir = new File('MonitorLib/MonitorOomLib')
 project(':MonitorKeepAlive').projectDir = new File('MonitorLib/MonitorKeepAlive')
 project(':MonitorXposed').projectDir = new File('MonitorLib/MonitorXposed')
+
 

@@ -1,12 +1,13 @@
 package com.yc.library.base.mvp;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,26 @@ public abstract class BackLazyFragment extends Fragment {
      * Fragment的View加载完毕的标记
      */
     private boolean isPrepared;
+    /**
+     * 上下文
+     */
+    public Activity activity;
+    /**
+     * tag标签
+     */
+    private static final String TAG = "BackLazyFragment";
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        activity = (Activity) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        activity = null;
+    }
 
     /**
      * 第一步,改变isPrepared标记
@@ -68,12 +89,25 @@ public abstract class BackLazyFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        //当使用add()+show()，hide()跳转新的Fragment时，旧的Fragment回调onHiddenChanged()，
+        //不会回调onStop()等生命周期方法，而新的Fragment在创建时是不会回调onHiddenChanged()，这点要切记。
+        if(activity!=null){
+            if(hidden){
+                //当该页面隐藏时
+            }else {
+                //当页面展现时
+            }
+        }
+    }
+
     /**
      * 第四步:定义抽象方法onLazyLoad(),具体加载数据的工作,交给子类去完成
      */
     @UiThread
     public abstract void onLazyLoad();
-
 
 
     @Nullable
@@ -90,11 +124,6 @@ public abstract class BackLazyFragment extends Fragment {
         initView(view);
         initListener();
         initData();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 
     /** 返回一个用于显示界面的布局id */

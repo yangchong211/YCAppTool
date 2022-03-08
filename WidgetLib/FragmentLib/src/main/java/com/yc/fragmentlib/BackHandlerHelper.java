@@ -81,8 +81,10 @@ public class BackHandlerHelper {
         int currentItem = viewPager.getCurrentItem();
         Fragment fragment;
         if (adapter instanceof FragmentPagerAdapter) {
+            //
             fragment = ((FragmentPagerAdapter) adapter).getItem(currentItem);
         } else if (adapter instanceof FragmentStatePagerAdapter) {
+            //
             fragment = ((FragmentStatePagerAdapter) adapter).getItem(currentItem);
         } else {
             fragment = null;

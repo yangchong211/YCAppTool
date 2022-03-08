@@ -1,6 +1,7 @@
 package com.yc.toolutils.file;
 
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -52,14 +53,16 @@ public final class FileSaveUtils {
             bos.close();
             //把文件插入到系统图库
             try {
-                MediaStore.Images.Media.insertImage(context.getContentResolver(),
-                        file.getAbsolutePath(), file.getName(), null);
+                ContentResolver contentResolver = context.getContentResolver();
+                String absolutePath = file.getAbsolutePath();
+                String name = file.getName();
+                MediaStore.Images.Media.insertImage(contentResolver, absolutePath, name, null);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
             // 最后通知图库更新
-            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                    Uri.parse("file://" + file)));
+            Uri uri = Uri.parse("file://" + file);
+            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
             return true;
         } catch (IOException e) {
             e.printStackTrace();

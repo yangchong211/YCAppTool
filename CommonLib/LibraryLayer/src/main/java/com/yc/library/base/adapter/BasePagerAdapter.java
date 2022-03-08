@@ -15,7 +15,7 @@ import java.util.List;
  *     blog  : https://github.com/yangchong211
  *     time  : 2017/01/30
  *     desc  : 指示器adapter的公共类
- *     revise:
+ *     revise: FragmentPageAdapter在每次切换页面时，只是将Fragment进行分离，适合页面较少的Fragment使用以保存一些内存，对系统内存不会多大影响
  * </pre>
  */
 public class BasePagerAdapter extends FragmentPagerAdapter {

@@ -145,6 +145,10 @@ public class MatisseActivity extends AppCompatActivity implements
         });
     }
 
+    /**
+     * 调用 onSavaInstanceState() 来保存状态
+     * @param outState              bundle
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

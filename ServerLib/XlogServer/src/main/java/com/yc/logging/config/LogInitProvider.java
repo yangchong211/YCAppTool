@@ -19,6 +19,7 @@ public final class LogInitProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         try {
+            //
             Context context = getContext();
             LoggerContext.getDefault().init(context);
             UploadTaskManager.getInstance().init(context);

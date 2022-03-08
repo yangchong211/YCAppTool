@@ -23,6 +23,9 @@ public class NotifyContainerView extends FrameLayout {
 
     private static final int SLOP = 10;
     private float mLastY;
+    /**
+     * 是否上滑隐藏布局
+     */
     private boolean mIsCollapsible;
     private boolean mIsConsumeTouchEvent;
     private OnDismissListener mOnDismissListener;

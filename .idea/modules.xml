@@ -23,6 +23,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ServerLib/GsonServer/LifeHelper.GsonServer.iml" filepath="$PROJECT_DIR$/.idea/modules/ServerLib/GsonServer/LifeHelper.GsonServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/HttpServer/LifeHelper.HttpServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/HttpServer/LifeHelper.HttpServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ImageServer/LifeHelper.ImageServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ImageServer/LifeHelper.ImageServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hermes/LifeHelper.IpcServer.iml" filepath="$PROJECT_DIR$/.idea/modules/hermes/LifeHelper.IpcServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/library/LifeHelper.LargeImageLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/library/LifeHelper.LargeImageLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LeetBusiness/LifeHelper.LeetBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/LeetBusiness/LifeHelper.LeetBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" />

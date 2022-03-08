@@ -37,6 +37,7 @@
             <option value="$PROJECT_DIR$/ServerLib/GsonServer" />
             <option value="$PROJECT_DIR$/ServerLib/HttpServer" />
             <option value="$PROJECT_DIR$/ServerLib/ImageServer" />
+            <option value="$PROJECT_DIR$/ServerLib/IpcServer" />
             <option value="$PROJECT_DIR$/ServerLib/NfcServer" />
             <option value="$PROJECT_DIR$/ServerLib/ServerInterface" />
             <option value="$PROJECT_DIR$/ServerLib/ShareServer" />
