@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.Utils;
 import com.yc.cn.ycgallerylib.gallery.GalleryImageView;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.statusbar.bar.StateAppBar;
@@ -30,7 +30,6 @@ import java.util.List;
  *     revise:
  * </pre>
  */
-@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_GALLERY_ACTIVITY)
 public class ImageGalleryActivity extends BaseActivity {
 
     private GalleryImageView scrollGalleryView;

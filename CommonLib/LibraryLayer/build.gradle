@@ -12,12 +12,6 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         multiDexEnabled true
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
     }
 
     buildTypes {
@@ -87,19 +81,18 @@ dependencies {
     //api rootProject.ext.dependencies["appcompat-v7"]
     api(rootProject.ext.dependencies["appcompat"])
     api rootProject.ext.dependencies["media"]
+    implementation rootProject.ext.dependencies["material"]
     api rootProject.ext.dependencies["cardview"]
     api rootProject.ext.dependencies["annotation"]
     api rootProject.ext.dependencies["recyclerview"]
     api rootProject.ext.dependencies["coordinatorlayout"]
     api rootProject.ext.dependencies["multidex"]
-    api rootProject.ext.dependencies["router"]
     api rootProject.ext.dependencies["glide"]
     api(rootProject.ext.dependencies["rxandroid2"])
     //annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     api(rootProject.ext.dependencies["retrofit"])
     api rootProject.ext.dependencies["utilcode"]
     api rootProject.ext.dependencies["easypermissions"]
-    api rootProject.ext.dependencies["YCDialogLib"]
     api rootProject.ext.dependencies["YCProgressLib"]
     api rootProject.ext.dependencies["YCGalleryLib"]
     api rootProject.ext.dependencies["YCBannerLib"]
@@ -115,21 +108,19 @@ dependencies {
     //标签多选单选库
     api 'com.github.yangchong211.YCRefreshView:SelectViewLib:3.0.1'
 
-    api rootProject.ext.dependencies["notificationLib"]
-    api rootProject.ext.dependencies["WebViewLib"]
     implementation project(path: ':WidgetViewLib')
     implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':WebViewLib')
 
-    api(rootProject.ext.dependencies["router"])
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':AppStateLib')
     implementation project(path: ':StatusBarLib')
     implementation project(path: ':ThreadPoolLib')
-    annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':HttpServer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':FragmentLib')
     implementation project(path: ':CountTimerLib')
+    implementation project(path: ':YCDialogLib')
 }

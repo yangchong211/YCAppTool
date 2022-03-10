@@ -46,6 +46,10 @@ public class MimeTypeMapUtils {
 
     /**
      * 根据url获取mine类型
+     * 举个例子：
+     * 文件名是picture.jpg那么getMimeType()返回image/jpeg
+     * 文件名是yc.gif那么getMimeType()返回image/gif
+     * 文件名是yc.txt那么getMimeType()返回text/plain
      * @param url                                 url链接
      * @return
      */

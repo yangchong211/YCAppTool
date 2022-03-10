@@ -4,7 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
+
 import android.view.View;
 
 /**

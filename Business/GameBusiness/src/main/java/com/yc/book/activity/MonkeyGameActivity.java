@@ -5,7 +5,7 @@ import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.book.weight.monkey.LuckyMonkeyPanelView;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.statusbar.bar.StateAppBar;
 import com.ycbjie.book.R;
@@ -22,7 +22,6 @@ import java.util.Random;
  *     revise:
  * </pre>
  */
-@Route(path = RouterConfig.Game.ACTIVITY_OTHER_MONKEY_ACTIVITY)
 public class MonkeyGameActivity extends BaseActivity {
 
 

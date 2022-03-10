@@ -61,24 +61,17 @@ ext {
                 "okHttp"                    : "com.squareup.okhttp3:okhttp:4.7.2",
                 "gson"                      : "com.google.code.gson:gson:2.8.5",
 
-                //router
-                "router"                      : "com.alibaba:arouter-api:1.5.2",
-                "router-compiler"             : "com.alibaba:arouter-compiler:1.5.2",
-
                 //image
                 "glide"                    : "com.github.bumptech.glide:glide:${version["glideSdkVersion"]}",
                 "glide-compiler"           : "com.github.bumptech.glide:compiler:${version["glideSdkVersion"]}",
 
 
                 //yc
-                "YCDialogLib"                 : "cn.yc:YCDialogLib:3.6.6",
                 "YCProgressLib"               : "cn.yc:YCProgressLib:1.2.7",
                 "YCCustomTextLib"             : "cn.yc:YCCustomTextLib:2.1.4",
                 "YCGalleryLib"                : "cn.yc:YCGalleryLib:1.1.5",
                 "YCBannerLib"                 : "cn.yc:YCBannerLib:1.4.0",
                 "YCVideoPlayerLib"            : "cn.yc:YCVideoPlayerLib:2.6.6",
-                "notificationLib"             : "cn.yc:notificationLib:1.0.3",
-                "WebViewLib"                  : "cn.yc:WebViewLib:1.4.1",
 
                 //tools
                 "utilcode"                  : "com.blankj:utilcode:1.12.5",

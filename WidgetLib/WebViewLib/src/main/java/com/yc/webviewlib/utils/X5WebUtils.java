@@ -26,9 +26,11 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Looper;
+
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 
 import com.tencent.smtt.sdk.QbSdk;
@@ -62,16 +64,17 @@ public final class X5WebUtils {
     /**
      * 不能直接new，否则抛个异常
      */
-    private X5WebUtils() throws WebViewException {
-        throw new WebViewException(1,"u can't instantiate me...");
+    private X5WebUtils() {
+        throw new WebViewException(1, "u can't instantiate me...");
     }
 
     /**
      * 初始化腾讯x5浏览器webView，建议在application初始化
-     * @param context                       上下文
+     *
+     * @param context 上下文
      */
-    public static void init(Context context){
-        if(context instanceof Application){
+    public static void init(Context context) {
+        if (context instanceof Application) {
             application = (Application) context;
             //搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。
             QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
@@ -79,30 +82,31 @@ public final class X5WebUtils {
                 public void onViewInitFinished(boolean arg0) {
                     //x5內核初始化完成的回调，为true表示x5内核加载成功
                     //否则表示x5内核加载失败，会自动切换到系统内核。
-                    X5LogUtils.i("app"+" onViewInitFinished is " + arg0);
+                    X5LogUtils.i("app" + " onViewInitFinished is " + arg0);
                 }
 
                 @Override
                 public void onCoreInitFinished() {
-                    X5LogUtils.i("app"+"onCoreInitFinished ");
+                    X5LogUtils.i("app" + "onCoreInitFinished ");
                 }
             };
             //x5内核初始化接口
-            QbSdk.initX5Environment(context,  cb);
+            QbSdk.initX5Environment(context, cb);
             ToastUtils.init(application);
             X5WebView.isLongClick = true;
             X5LogUtils.setIsLog(true);
-        }else {
+        } else {
             throw new UnsupportedOperationException("context must be application...");
         }
     }
 
     /**
      * 初始化缓存
-     * @param application                       上下文
+     *
+     * @param application 上下文
      */
-    public static void initCache(Application application , String path){
-        if (path==null || path.length()==0){
+    public static void initCache(Application application, String path) {
+        if (path == null || path.length() == 0) {
             path = "YcCacheWebView";
         }
         //1.创建委托对象
@@ -110,9 +114,9 @@ public final class X5WebUtils {
         //2.创建调用处理器对象，实现类
         WebViewCacheWrapper.Builder builder = new WebViewCacheWrapper.Builder(application);
         //设置缓存路径，默认getCacheDir，名称CacheWebViewCache
-        builder.setCachePath(new File(application.getCacheDir().toString(),path))
+        builder.setCachePath(new File(application.getCacheDir().toString(), path))
                 //设置缓存大小，默认100M
-                .setCacheSize(1024*1024*100)
+                .setCacheSize(1024 * 1024 * 100)
                 //设置本地路径
                 //.setAssetsDir("yc")
                 //设置http请求链接超时，默认20秒
@@ -126,7 +130,8 @@ public final class X5WebUtils {
 
     /**
      * 获取全局上下文
-     * @return                                  上下文
+     *
+     * @return 上下文
      */
     public static Application getApplication() {
         return application;
@@ -134,15 +139,16 @@ public final class X5WebUtils {
 
     /**
      * 判断当前url是否在白名单中
-     * @param arrayList                         白名单集合
-     * @param url                               url
+     *
+     * @param arrayList 白名单集合
+     * @param url       url
      * @return
      */
-    public static boolean isWhiteList(ArrayList<String> arrayList, String url){
-        if (url == null){
+    public static boolean isWhiteList(ArrayList<String> arrayList, String url) {
+        if (url == null) {
             return false;
         }
-        if (arrayList==null || arrayList.size()==0){
+        if (arrayList == null || arrayList.size() == 0) {
             return false;
         }
         //重要提醒：建议只使用https协议通信，避免中间人攻击
@@ -154,11 +160,11 @@ public final class X5WebUtils {
         try {
             //提取host，如果需要校验Path可以通过url.getPath()获取
             host = Uri.parse(url).getHost();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        for (int i=0 ; i<arrayList.size() ; i++){
-            if (host!=null && host.equals(arrayList.get(i))){
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (host != null && host.equals(arrayList.get(i))) {
                 //是咱们自己的host
                 return true;
             }
@@ -176,7 +182,7 @@ public final class X5WebUtils {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isConnected(Context context) {
-        if (context==null){
+        if (context == null) {
             return false;
         }
         NetworkInfo info = getActiveNetworkInfo(context);
@@ -242,14 +248,14 @@ public final class X5WebUtils {
     }
 
 
-
     /**
      * 注解限定符
      */
-    @IntDef({ErrorMode.NO_NET,ErrorMode.STATE_404, ErrorMode.RECEIVED_ERROR, ErrorMode.SSL_ERROR,
-            ErrorMode.TIME_OUT,ErrorMode.STATE_500,ErrorMode.ERROR_PROXY})
+    @IntDef({ErrorMode.NO_NET, ErrorMode.STATE_404, ErrorMode.RECEIVED_ERROR, ErrorMode.SSL_ERROR,
+            ErrorMode.TIME_OUT, ErrorMode.STATE_500, ErrorMode.ERROR_PROXY})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ErrorType{}
+    public @interface ErrorType {
+    }
 
     /**
      * 异常状态模式
@@ -274,7 +280,8 @@ public final class X5WebUtils {
 
     /**
      * 判断是否为重定向url
-     * @param url                   原始链接
+     *
+     * @param url 原始链接
      * @return True                 为重定向链接
      */
     public static boolean shouldSkipUrl(@Nullable String url) {
@@ -299,7 +306,7 @@ public final class X5WebUtils {
         return uri.isOpaque() ? null : uri.getQueryParameter("redirect_uri");
     }
 
-    public static boolean isMainThread(){
+    public static boolean isMainThread() {
         return Looper.getMainLooper() == Looper.myLooper();
     }
 

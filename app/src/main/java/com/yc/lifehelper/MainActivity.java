@@ -29,7 +29,7 @@ import com.yc.applicationlib.activity.ActivityManager;
 import com.yc.banner.view.BannerView;
 import com.yc.catonhelperlib.fps.PerformanceActivity;
 import com.yc.configlayer.arounter.ARouterUtils;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.leetbusiness.LeetCodeActivity;
@@ -378,11 +378,9 @@ public class MainActivity extends BaseActivity{
                         break;
                     // 问题反馈
                     case R.id.ll_nav_feedback:
-                        ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_FEEDBACK);
                         break;
                     // 关于
                     case R.id.ll_nav_about:
-                        ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME);
                         break;
                     // 个人
                     case R.id.ll_nav_login:

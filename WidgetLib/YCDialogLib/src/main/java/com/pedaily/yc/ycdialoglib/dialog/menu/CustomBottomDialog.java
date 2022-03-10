@@ -2,7 +2,8 @@ package com.pedaily.yc.ycdialoglib.dialog.menu;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v7.widget.OrientationHelper;
+
+import androidx.recyclerview.widget.OrientationHelper;
 
 import java.util.List;
 

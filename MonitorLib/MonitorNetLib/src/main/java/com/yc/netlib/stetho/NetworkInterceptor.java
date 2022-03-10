@@ -66,7 +66,6 @@ public class NetworkInterceptor implements Interceptor {
             OkHttpInspectorRequest inspectorRequest = new OkHttpInspectorRequest(requestId, request, requestBodyHelper);
             // 请求即将发送，构造一个OkHttpInspectorRequest，报告给Chrome，此时Network会显示一条请求，处于Pending状态
             mEventReporter.requestWillBeSent(inspectorRequest);
-
         }
         Response response;
         try {

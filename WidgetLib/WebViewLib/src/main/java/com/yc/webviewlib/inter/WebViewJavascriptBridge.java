@@ -26,11 +26,21 @@ package com.yc.webviewlib.inter;
  * </pre>
  */
 public interface WebViewJavascriptBridge {
-	
+
+	/**
+	 * native调用js方法
+	 * @param handlerName
+	 */
 	void callHandler(String handlerName);
 	void callHandler(String handlerName, String data);
 	void callHandler(String handlerName, String data, CallBackFunction callBack);
-	void unregisterHandler(String handlerName);
+
+	/**
+	 * js调用native方法
+	 * @param handlerName
+	 * @param handler
+	 */
 	void registerHandler(String handlerName, BridgeHandler handler);
+	void unregisterHandler(String handlerName);
 
 }

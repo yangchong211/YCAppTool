@@ -17,7 +17,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.IntentUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.configlayer.constant.Constant;
 import com.yc.customwidget.MultiEditInputView;
 import com.yc.library.base.mvp.BaseActivity;
@@ -33,7 +33,6 @@ import com.yc.other.R;
  *     revise:
  * </pre>
  */
-@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_FEEDBACK)
 public class MeFeedBackActivity extends BaseActivity implements View.OnClickListener {
 
     private FrameLayout llTitleMenu;

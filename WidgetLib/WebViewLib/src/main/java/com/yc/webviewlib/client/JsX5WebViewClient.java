@@ -18,6 +18,7 @@ package com.yc.webviewlib.client;
 import android.content.Context;
 import android.os.Build;
 import android.text.TextUtils;
+
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.sdk.WebView;
 import com.yc.webviewlib.bridge.BridgeUtil;
@@ -41,13 +42,13 @@ import com.yc.webviewlib.view.X5WebView;
  */
 public class JsX5WebViewClient extends X5WebViewClient {
 
-    private Context context;
-    private X5WebView mWebView;
+    private final Context context;
+    private final X5WebView mWebView;
 
     /**
      * 构造方法
      *
-     * @param webView 需要传进来webview
+     * @param webView 需要传进来webView
      * @param context 上下文
      */
     public JsX5WebViewClient(X5WebView webView, Context context) {
@@ -60,16 +61,17 @@ public class JsX5WebViewClient extends X5WebViewClient {
      * 这个方法中可以做拦截
      * 主要的作用是处理各种通知和请求事件
      * 返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-     * @param view                              view
-     * @param url                               链接
-     * @return                                  是否自己处理，true表示自己处理
+     *
+     * @param view view
+     * @param url  链接
+     * @return 是否自己处理，true表示自己处理
      */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        X5LogUtils.i("-------shouldOverrideUrlLoading----1---"+url);
+        X5LogUtils.i("-------shouldOverrideUrlLoading----1---" + url);
         //页面关闭后，直接返回，不要执行网络请求和js方法
         boolean activityAlive = X5WebUtils.isActivityAlive(context);
-        if (!activityAlive){
+        if (!activityAlive) {
             return false;
         }
         url = EncodeUtils.urlDecode(url);
@@ -78,13 +80,15 @@ public class JsX5WebViewClient extends X5WebViewClient {
         }
         // 如果是返回数据
         if (url.startsWith(BridgeUtil.YY_RETURN_DATA)) {
+            //处理有返回数据的
             mWebView.handlerReturnData(url);
             return true;
         } else if (url.startsWith(BridgeUtil.YY_OVERRIDE_SCHEMA)) {
+            //刷新消息队列
             mWebView.flushMessageQueue();
             return true;
         } else {
-            if (this.onCustomShouldOverrideUrlLoading(url)){
+            if (this.onCustomShouldOverrideUrlLoading(url)) {
                 return true;
             } else {
                 return super.shouldOverrideUrlLoading(view, url);
@@ -94,7 +98,8 @@ public class JsX5WebViewClient extends X5WebViewClient {
 
     /**
      * 子类可以自己去实现
-     * @param url                               url链接
+     *
+     * @param url url链接
      * @return
      */
     public boolean onCustomShouldOverrideUrlLoading(String url) {
@@ -105,16 +110,17 @@ public class JsX5WebViewClient extends X5WebViewClient {
      * 增加shouldOverrideUrlLoading在api>=24时
      * 主要的作用是处理各种通知和请求事件
      * 返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-     * @param view                              view
-     * @param request                           request
+     *
+     * @param view    view
+     * @param request request
      * @return
      */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-        X5LogUtils.i("-------shouldOverrideUrlLoading----2---"+request.getUrl().toString());
+        X5LogUtils.i("-------shouldOverrideUrlLoading----2---" + request.getUrl().toString());
         //页面关闭后，直接返回，不要执行网络请求和js方法
         boolean activityAlive = X5WebUtils.isActivityAlive(context);
-        if (!activityAlive){
+        if (!activityAlive) {
             return false;
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -131,21 +137,22 @@ public class JsX5WebViewClient extends X5WebViewClient {
                 mWebView.flushMessageQueue();
                 return true;
             } else {
-                if (this.onCustomShouldOverrideUrlLoading(url)){
+                if (this.onCustomShouldOverrideUrlLoading(url)) {
                     return true;
                 } else {
                     return super.shouldOverrideUrlLoading(view, request);
                 }
             }
-        }else {
+        } else {
             return super.shouldOverrideUrlLoading(view, request);
         }
     }
 
     /**
      * 当页面加载完成会调用该方法
-     * @param view                              view
-     * @param url                               url链接
+     *
+     * @param view view
+     * @param url  url链接
      */
     @Override
     public void onPageFinished(WebView view, String url) {

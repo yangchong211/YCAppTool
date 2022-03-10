@@ -10,11 +10,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.nfcserver.BaseNfcActivity;
 import com.yc.nfcserver.R;
 
-@Route(path = RouterConfig.Nfc.ACTIVITY_NFC_MAIN)
 public class NfcMainActivity extends BaseNfcActivity {
     private TextView ifo_NFC;
     private static final String[] strs = new String[]{

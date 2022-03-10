@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.book.weight.doodleView.DoodleView;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.library.base.mvp.BaseActivity;
 import com.ycbjie.book.R;
 
@@ -29,7 +29,6 @@ import com.ycbjie.book.R;
  *     revise:
  * </pre>
  */
-@Route(path = RouterConfig.Game.ACTIVITY_BOOK_DOODLE_ACTIVITY)
 public class DoodleViewActivity extends BaseActivity {
 
     private Toolbar toolbar;

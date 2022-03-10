@@ -17,7 +17,7 @@ import com.yc.cn.ycbannerlib.gallery.GalleryLayoutManager;
 import com.yc.cn.ycbannerlib.gallery.GalleryLinearSnapHelper;
 import com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView;
 import com.yc.cn.ycbannerlib.gallery.GalleryScaleTransformer;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.ui.adapter.MeBannerAdapter;
 import com.yc.statusbar.bar.StateAppBar;
@@ -37,7 +37,6 @@ import java.util.Map;
  *     revise: https://github.com/yangchong211/YCBanner
  * </pre>
  */
-@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_BANNER_LIST_ACTIVITY)
 public class BannerViewActivity extends BaseActivity {
 
     private GalleryRecyclerView mRecyclerView;

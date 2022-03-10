@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.customwidget.PasswordEditText;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
@@ -33,7 +33,6 @@ import com.yc.other.R;
  *             demo地址，欢迎star：https://github.com/yangchong211/YCCustomText
  * </pre>
  */
-@Route(path = RouterConfig.Demo.ACTIVITY_LOGIN_ACTIVITY)
 public class MeLoginActivity extends BaseActivity implements View.OnClickListener {
 
     TextView tvTitleLeft;

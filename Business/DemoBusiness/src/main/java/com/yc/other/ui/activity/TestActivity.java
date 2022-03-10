@@ -8,12 +8,11 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.widget.blurview.RealTimeBlurView;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 
-@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_TEST_ACTIVITY)
 public class TestActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public int getContentView() {

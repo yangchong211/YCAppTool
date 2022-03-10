@@ -31,7 +31,7 @@ import okhttp3.Response;
  *     email  : yangchong211@163.com
  *     time  : 2019/07/22
  *     desc  : EventListener子类
- *     revise:
+ *     revise: 这个是统计耗时的监听
  * </pre>
  */
 public class NetworkListener extends EventListener {

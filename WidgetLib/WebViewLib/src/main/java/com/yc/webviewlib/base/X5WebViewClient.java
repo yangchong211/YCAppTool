@@ -21,10 +21,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 import android.view.KeyEvent;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.tencent.smtt.export.external.interfaces.ClientCertRequest;
 import com.tencent.smtt.export.external.interfaces.HttpAuthHandler;
@@ -41,8 +43,6 @@ import com.yc.webviewlib.utils.EncodeUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 
-import java.util.Stack;
-
 /**
  * <pre>
  *     @author yangchong
@@ -58,39 +58,26 @@ import java.util.Stack;
 public class X5WebViewClient extends WebViewClient {
 
     private InterWebListener webListener;
-    private WebView webView;
-    private Context context;
+    private final WebView webView;
+    private final Context context;
     /**
      * 是否加载完毕
      */
     private boolean isLoadFinish = false;
-    /**
-     * 记录上次出现重定向的时间.
-     * 避免由于刷新造成循环重定向.
-     */
-    private long mLastRedirectTime = 0;
-    /**
-     * 默认重定向间隔.
-     * 避免由于刷新造成循环重定向.
-     */
-    private static final long DEFAULT_REDIRECT_INTERVAL = 3000;
-    /**
-     * URL栈
-     */
-    private final Stack<String> mUrlStack = new Stack<>();
+
     /**
      * 判断页面是否正在加载
      * 在onPageStarted中为true，在onPageFinished中为false
      */
     private boolean mIsLoading = false;
     /**
-     * 记录重定向前的链接
+     * 栈管理
      */
-    private String mUrlBeforeRedirect;
-
+    private final WebViewStack webViewStack;
     /**
      * 获取是否加载完毕
-     * @return                                  布尔值
+     *
+     * @return 布尔值
      */
     public boolean isLoadFinish() {
         return isLoadFinish;
@@ -98,139 +85,50 @@ public class X5WebViewClient extends WebViewClient {
 
     /**
      * 设置监听时间，包括常见状态页面切换，进度条变化等
-     * @param listener                          listener
+     *
+     * @param listener listener
      */
-    public void setWebListener(InterWebListener listener){
+    public void setWebListener(InterWebListener listener) {
         this.webListener = listener;
     }
 
     /**
      * 构造方法
-     * @param webView                           需要传进来webview
-     * @param context                           上下文
+     *
+     * @param webView 需要传进来webview
+     * @param context 上下文
      */
-    public X5WebViewClient(WebView webView ,Context context) {
+    public X5WebViewClient(WebView webView, Context context) {
         this.context = context;
         this.webView = webView;
+        webViewStack = new WebViewStack();
         //将js对象与java对象进行映射
         //webView.addJavascriptInterface(new ImageJavascriptInterface(context), "imagelistener");
     }
 
     /**
-     * 记录非重定向链接.
-     * 并且控制相同链接链接不入栈
-     *
-     * @param url                               链接
-     */
-    private void recordUrl(String url) {
-        //判断当前url，是否和栈中栈顶部的url是否相同。如果不相同，则入栈操作
-        if (!TextUtils.isEmpty(url) && !url.equals(getUrl())) {
-            //如果重定向之前的链接不为空
-            if (!TextUtils.isEmpty(mUrlBeforeRedirect)) {
-                mUrlStack.push(mUrlBeforeRedirect);
-                mUrlBeforeRedirect = null;
-            }
-        }
-    }
-
-    /**
-     * 获取最后停留页面的链接.
-     *
-     * @return url
-     */
-    @Nullable
-    public String getUrl() {
-        //peek方法，查看此堆栈顶部的对象，而不将其从堆栈中删除。
-        return mUrlStack.size() > 0 ? mUrlStack.peek() : null;
-    }
-
-    /**
-     * 出栈操作
-     * @return
-     */
-    String popUrl() {
-        //pop方法，移除此堆栈顶部的对象并将该对象作为此函数的值返回。
-        return mUrlStack.size() > 0 ? mUrlStack.pop() : null;
-    }
-
-    /**
-     * 是否可以回退操作
-     * @return                      如果栈中数量大于2，则表示可以回退操作
-     */
-    public boolean pageCanGoBack() {
-        return mUrlStack.size() >= 2;
-    }
-
-    /**
-     * 回退操作
-     * @param webView                           webView
-     * @return
-     */
-    public final boolean pageGoBack(@NonNull WebView webView) {
-        //判断是否可以回退操作
-        if (pageCanGoBack()) {
-            //获取最后停留的页面url
-            final String url = popBackUrl();
-            //如果不为空
-            if (!TextUtils.isEmpty(url)) {
-                webView.loadUrl(url);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 将最后停留的页面url弹出
-     * 获取最后停留的页面url
-     * @return null 表示已经没有上一页了
-     */
-    @Nullable
-    public final String popBackUrl() {
-        if (mUrlStack.size() >= 2) {
-            //pop current page url
-            mUrlStack.pop();
-            return mUrlStack.pop();
-        }
-        return null;
-    }
-
-    /**
-     * 解决重定向
-     * @param view                              webView
-     */
-    private void resolveRedirect(WebView view) {
-        //记录当前时间
-        final long now = System.currentTimeMillis();
-        //mLastRedirectTime 记录上次出现重定向的时间
-        if (now - mLastRedirectTime > DEFAULT_REDIRECT_INTERVAL) {
-            mLastRedirectTime = System.currentTimeMillis();
-            view.reload();
-        }
-    }
-
-    /**
      * 这个方法中可以做拦截
      * 主要的作用是处理各种通知和请求事件
-     *
+     * <p>
      * 不准确的说法如下：
      * 1.返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
      * 2.返回: return true; 表示webView处理url是根据程序来执行的。 返回: return false; 表示webView处理url是在webView内部执行。
      * 3.还有一种错误说法：WebView上的所有加载都经过这个方法。
-     *
+     * <p>
      * 准确说法，该方法说明如下所示：
      * 若没有设置 WebViewClient 则由系统（Activity Manager）处理该 url，通常是使用浏览器打开或弹出浏览器选择对话框。
      * 若设置 WebViewClient 且该方法返回 true ，则说明由应用的代码处理该 url，WebView 不处理，也就是程序员自己做处理。
      * 若设置 WebViewClient 且该方法返回 false，则说明由 WebView 处理该 url，即用 WebView 加载该 url。
-     * @param view                              view
-     * @param url                               链接
-     * @return                                  是否自己处理，true表示自己处理
+     *
+     * @param view view
+     * @param url  链接
+     * @return 是否自己处理，true表示自己处理
      */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         //页面关闭后，直接返回，不要执行网络请求和js方法
         boolean activityAlive = X5WebUtils.isActivityAlive(context);
-        if (!activityAlive){
+        if (!activityAlive) {
             return false;
         }
         url = EncodeUtils.urlDecode(url);
@@ -243,7 +141,7 @@ public class X5WebViewClient extends WebViewClient {
         }*/
         final Uri uri = Uri.parse(url);
         //scheme跳转支持
-        if (uri!=null && uri.getScheme()!=null && WebSchemeIntent.isSilentType(uri.getScheme())) {
+        if (uri != null && uri.getScheme() != null && WebSchemeIntent.isSilentType(uri.getScheme())) {
             return WebSchemeIntent.handleSilently(context, uri);
         }
         WebView.HitTestResult hitTestResult = view.getHitTestResult();
@@ -263,7 +161,7 @@ public class X5WebViewClient extends WebViewClient {
             return false;
         }
         boolean handleAlive = WebSchemeIntent.handleAlive(context, uri);
-        if (handleAlive){
+        if (handleAlive) {
             return true;
         }
         return super.shouldOverrideUrlLoading(view, url);
@@ -273,15 +171,16 @@ public class X5WebViewClient extends WebViewClient {
      * 增加shouldOverrideUrlLoading在api>=24时
      * 主要的作用是处理各种通知和请求事件
      * 返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-     * @param view                              view
-     * @param request                           request，添加于API21，封装了一个Web资源的请求信息，
-     *                                          包含：请求地址，请求方法，请求头，是否主框架，是否用户点击，是否重定向
+     *
+     * @param view    view
+     * @param request request，添加于API21，封装了一个Web资源的请求信息，
+     *                包含：请求地址，请求方法，请求头，是否主框架，是否用户点击，是否重定向
      * @return
      */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
         boolean activityAlive = X5WebUtils.isActivityAlive(context);
-        if (!activityAlive){
+        if (!activityAlive) {
             return false;
         }
         String url = request.getUrl().toString();
@@ -291,7 +190,7 @@ public class X5WebViewClient extends WebViewClient {
         }
         final Uri uri = Uri.parse(url);
         //scheme跳转支持
-        if (uri!=null && uri.getScheme()!=null && WebSchemeIntent.isSilentType(uri.getScheme())) {
+        if (uri != null && uri.getScheme() != null && WebSchemeIntent.isSilentType(uri.getScheme())) {
             return WebSchemeIntent.handleSilently(context, uri);
         }
         /*WebView.HitTestResult hitTestResult = null;
@@ -315,7 +214,7 @@ public class X5WebViewClient extends WebViewClient {
             return false;
         }
         boolean handleAlive = WebSchemeIntent.handleAlive(context, uri);
-        if (handleAlive){
+        if (handleAlive) {
             return true;
         }
         return super.shouldOverrideUrlLoading(view, request);
@@ -323,41 +222,39 @@ public class X5WebViewClient extends WebViewClient {
 
     /**
      * 作用：开始载入页面调用的，我们可以设定一个loading的页面，告诉用户程序在等待网络响应。
-     * @param webView                           view
-     * @param url                               url
-     * @param bitmap                            bitmap
+     *
+     * @param webView view
+     * @param url     url
+     * @param bitmap  bitmap
      */
     @Override
     public void onPageStarted(WebView webView, String url, Bitmap bitmap) {
         super.onPageStarted(webView, url, bitmap);
         //设定加载开始的操作
-        X5LogUtils.i("-------onPageStarted-------"+url);
-        if (!X5WebUtils.isConnected(webView.getContext()) && webListener!=null) {
+        X5LogUtils.i("-------onPageStarted-------" + url);
+        if (!X5WebUtils.isConnected(webView.getContext()) && webListener != null) {
             //显示异常页面
             webListener.showErrorView(X5WebUtils.ErrorMode.NO_NET);
         }
         isLoadFinish = false;
-        if (mIsLoading && mUrlStack.size() > 0) {
-            //从url栈中取出栈顶的链接
-            X5LogUtils.i("-------onPageStarted-------"+mIsLoading);
-            mUrlBeforeRedirect = mUrlStack.pop();
-        }
-        recordUrl(url);
+        webViewStack.popUrlStack();
+        webViewStack.recordUrl(url);
         mIsLoading = true;
     }
 
     /**
      * 当页面加载完成会调用该方法
-     * @param view                              view
-     * @param url                               url链接
+     *
+     * @param view view
+     * @param url  url链接
      */
     @Override
     public void onPageFinished(WebView view, String url) {
-        X5LogUtils.i("-------onPageFinished-------"+url);
+        X5LogUtils.i("-------onPageFinished-------" + url);
         if (mIsLoading) {
             mIsLoading = false;
         }
-        if (webListener!=null){
+        if (webListener != null) {
             //隐藏进度条方法
             //这个方法会执行多次
             webListener.hindProgressBar();
@@ -366,14 +263,14 @@ public class X5WebViewClient extends WebViewClient {
         //设置网页在加载的时候暂时不加载图片
         //webView.getSettings().setBlockNetworkImage(false);
         //页面finish后再发起图片加载
-        if(!webView.getSettings().getLoadsImagesAutomatically()) {
+        if (!webView.getSettings().getLoadsImagesAutomatically()) {
             webView.getSettings().setLoadsImagesAutomatically(true);
         }
         //html加载完成之后，添加监听图片的点击js函数
         //addImageClickListener();
         addImageArrayClickListener(webView);
         isLoadFinish = true;
-        if (webListener!=null){
+        if (webListener != null) {
             webListener.onPageFinished(url);
         }
     }
@@ -381,14 +278,15 @@ public class X5WebViewClient extends WebViewClient {
 
     /**
      * 当缩放改变的时候会调用该方法
-     * @param view                              view
-     * @param oldScale                          之前的缩放比例
-     * @param newScale                          现在缩放比例
+     *
+     * @param view     view
+     * @param oldScale 之前的缩放比例
+     * @param newScale 现在缩放比例
      */
     @Override
     public void onScaleChanged(WebView view, float oldScale, float newScale) {
         super.onScaleChanged(view, oldScale, newScale);
-        X5LogUtils.i("-------onScaleChanged-------"+newScale);
+        X5LogUtils.i("-------onScaleChanged-------" + newScale);
         //视频全屏播放按返回页面被放大的问题
         if (newScale - oldScale > 7) {
             //异常放大，缩回去。
@@ -404,35 +302,35 @@ public class X5WebViewClient extends WebViewClient {
      * 该方法传回了错误码，根据错误类型可以进行不同的错误分类处理
      * onReceivedError只有在遇到不可用的(unrecoverable)错误时，才会被调用）
      * 当WebView加载链接www.ycdoubi.com时，"不可用"的情况有可以包括有：
-     *          1.没有网络连接
-     *          2.连接超时
-     *          3.找不到页面www.ycdoubi.com
+     * 1.没有网络连接
+     * 2.连接超时
+     * 3.找不到页面www.ycdoubi.com
      *
-     * @param view                              view
-     * @param errorCode                         错误🐎
-     * @param description                       description
-     * @param failingUrl                        失败链接
+     * @param view        view
+     * @param errorCode   错误🐎
+     * @param description description
+     * @param failingUrl  失败链接
      */
     @Override
     public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         super.onReceivedError(view, errorCode, description, failingUrl);
-        X5LogUtils.i("-------onReceivedError------1-"+failingUrl+"---"+errorCode+ "----"+description);
+        X5LogUtils.i("-------onReceivedError------1-" + failingUrl + "---" + errorCode + "----" + description);
         if (Build.VERSION.SDK_INT < 23) {
             //错误重定向循环
             if (errorCode == ERROR_REDIRECT_LOOP) {
                 //避免由于缓存造成的循环重定向
-                resolveRedirect(view);
+                webViewStack.resolveRedirect(view);
                 return;
             }
         }
-        if (webListener!=null){
-            if (errorCode == ERROR_TIMEOUT){
+        if (webListener != null) {
+            if (errorCode == ERROR_TIMEOUT) {
                 //网络连接超时
                 webListener.showErrorView(X5WebUtils.ErrorMode.TIME_OUT);
-            } else if (errorCode == ERROR_CONNECT){
+            } else if (errorCode == ERROR_CONNECT) {
                 //断网
                 webListener.showErrorView(X5WebUtils.ErrorMode.NO_NET);
-            } else if (errorCode == ERROR_PROXY_AUTHENTICATION){
+            } else if (errorCode == ERROR_PROXY_AUTHENTICATION) {
                 //代理异常
                 webListener.showErrorView(X5WebUtils.ErrorMode.ERROR_PROXY);
             } else {
@@ -449,29 +347,29 @@ public class X5WebViewClient extends WebViewClient {
      * 该方法传回了错误码，根据错误类型可以进行不同的错误分类处理，比如
      * onReceivedError只有在遇到不可用的(unrecoverable)错误时，才会被调用）
      * 当WebView加载链接www.ycdoubi.com时，"不可用"的情况有可以包括有：
-     *          1.没有网络连接
-     *          2.连接超时
-     *          3.找不到页面www.ycdoubi.com
+     * 1.没有网络连接
+     * 2.连接超时
+     * 3.找不到页面www.ycdoubi.com
      *
-     * @param view                              view
-     * @param request                           request，添加于API21，封装了一个Web资源的请求信息，
-     *                                          包含：请求地址，请求方法，请求头，是否主框架，是否用户点击，是否重定向
-     * @param error                             error，添加于API23，封装了一个Web资源的错误信息，包含错误码和描述
+     * @param view    view
+     * @param request request，添加于API21，封装了一个Web资源的请求信息，
+     *                包含：请求地址，请求方法，请求头，是否主框架，是否用户点击，是否重定向
+     * @param error   error，添加于API23，封装了一个Web资源的错误信息，包含错误码和描述
      */
     @Override
     public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
         super.onReceivedError(view, request, error);
-        X5LogUtils.i("-------onReceivedError------2-"+error.getDescription()+"---"+error.getErrorCode());
+        X5LogUtils.i("-------onReceivedError------2-" + error.getDescription() + "---" + error.getErrorCode());
         if (Build.VERSION.SDK_INT >= 23) {
             //错误重定向循环
             if (error != null && error.getErrorCode() == ERROR_REDIRECT_LOOP) {
                 //避免由于缓存造成的循环重定向
-                resolveRedirect(view);
+                webViewStack.resolveRedirect(view);
                 return;
             }
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            X5LogUtils.d("服务器异常"+error.getDescription().toString());
+            X5LogUtils.d("服务器异常" + error.getDescription().toString());
 
         }
         //ToastUtils.showToast("服务器异常6.0之后");
@@ -481,14 +379,14 @@ public class X5WebViewClient extends WebViewClient {
         //获取当前的网络请求是否是为main frame创建的.
         boolean forMainFrame = request.isForMainFrame();
         boolean redirect = request.isRedirect();
-        if (webListener!=null){
-            if (errorCode == ERROR_TIMEOUT){
+        if (webListener != null) {
+            if (errorCode == ERROR_TIMEOUT) {
                 //网络连接超时
                 webListener.showErrorView(X5WebUtils.ErrorMode.TIME_OUT);
-            } else if (errorCode == ERROR_CONNECT){
+            } else if (errorCode == ERROR_CONNECT) {
                 //断网
                 webListener.showErrorView(X5WebUtils.ErrorMode.NO_NET);
-            } else if (errorCode == ERROR_PROXY_AUTHENTICATION){
+            } else if (errorCode == ERROR_PROXY_AUTHENTICATION) {
                 //代理异常
                 webListener.showErrorView(X5WebUtils.ErrorMode.ERROR_PROXY);
             } else {
@@ -501,11 +399,12 @@ public class X5WebViewClient extends WebViewClient {
 
     /**
      * 通知主机应用程序在加载资源时从服务器接收到HTTP错误
-     * @param view                              view
-     * @param request                           request，添加于API21，封装了一个Web资源的请求信息，
-     *                                          包含：请求地址，请求方法，请求头，是否主框架，是否用户点击，是否重定向
-     * @param errorResponse                     errorResponse，封装了一个Web资源的响应信息，
-     *                                          包含：响应数据流，编码，MIME类型，API21后添加了响应头，状态码与状态描述
+     *
+     * @param view          view
+     * @param request       request，添加于API21，封装了一个Web资源的请求信息，
+     *                      包含：请求地址，请求方法，请求头，是否主框架，是否用户点击，是否重定向
+     * @param errorResponse errorResponse，封装了一个Web资源的响应信息，
+     *                      包含：响应数据流，编码，MIME类型，API21后添加了响应头，状态码与状态描述
      */
     @Override
     public void onReceivedHttpError(WebView view, WebResourceRequest request,
@@ -513,22 +412,22 @@ public class X5WebViewClient extends WebViewClient {
         super.onReceivedHttpError(view, request, errorResponse);
         int statusCode = errorResponse.getStatusCode();
         String reasonPhrase = errorResponse.getReasonPhrase();
-        X5LogUtils.i("-------onReceivedHttpError------3-"+ statusCode + "-------"+reasonPhrase);
+        X5LogUtils.i("-------onReceivedHttpError------3-" + statusCode + "-------" + reasonPhrase);
         if (statusCode == 404) {
             //用javascript隐藏系统定义的404页面信息
             //String data = "Page NO FOUND！";
             //view.loadUrl("javascript:document.body.innerHTML=\"" + data + "\"");
-            if (webListener!=null){
+            if (webListener != null) {
                 webListener.showErrorView(X5WebUtils.ErrorMode.STATE_404);
             }
-        } else if (statusCode == 500){
+        } else if (statusCode == 500) {
             //避免出现默认的错误界面
             //view.loadUrl("about:blank");
-            if (webListener!=null){
+            if (webListener != null) {
                 webListener.showErrorView(X5WebUtils.ErrorMode.STATE_500);
             }
         } else {
-            if (webListener!=null){
+            if (webListener != null) {
                 webListener.showErrorView(X5WebUtils.ErrorMode.RECEIVED_ERROR);
             }
         }
@@ -536,40 +435,42 @@ public class X5WebViewClient extends WebViewClient {
 
     /**
      * 通知主机应用程序已自动处理用户登录请求
-     * @param view                              view
-     * @param realm                             数据
-     * @param account                           account
-     * @param args                              args
+     *
+     * @param view    view
+     * @param realm   数据
+     * @param account account
+     * @param args    args
      */
     @Override
     public void onReceivedLoginRequest(WebView view, String realm, String account, String args) {
         super.onReceivedLoginRequest(view, realm, account, args);
-        X5LogUtils.i("-------onReceivedLoginRequest-------"+ args);
+        X5LogUtils.i("-------onReceivedLoginRequest-------" + args);
     }
 
     /**
      * 在加载资源时通知主机应用程序发生SSL错误
      * 作用：处理https请求
-     *      webView加载一些别人的url时候，有时候会发生证书认证错误的情况，这时候希望能够正常的呈现页面给用户，
-     *      我们需要忽略证书错误，需要调用WebViewClient类的onReceivedSslError方法，
-     *      调用handler.proceed()来忽略该证书错误。
-     * @param view                              view
-     * @param handler                           handler，表示一个处理SSL错误的请求，提供了方法操作(proceed/cancel)请求
-     * @param error                             error
+     * webView加载一些别人的url时候，有时候会发生证书认证错误的情况，这时候希望能够正常的呈现页面给用户，
+     * 我们需要忽略证书错误，需要调用WebViewClient类的onReceivedSslError方法，
+     * 调用handler.proceed()来忽略该证书错误。
+     *
+     * @param view    view
+     * @param handler handler，表示一个处理SSL错误的请求，提供了方法操作(proceed/cancel)请求
+     * @param error   error
      */
     @Override
     public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
         super.onReceivedSslError(view, handler, error);
-        X5LogUtils.i("-------onReceivedSslError-------"+ error.getUrl());
-        if (error!=null){
+        X5LogUtils.i("-------onReceivedSslError-------" + error.getUrl());
+        if (error != null) {
             String url = error.getUrl();
-            if (webListener!=null){
+            if (webListener != null) {
                 webListener.showErrorView(X5WebUtils.ErrorMode.SSL_ERROR);
             }
-            X5LogUtils.i("onReceivedSslError----异常url----"+url);
+            X5LogUtils.i("onReceivedSslError----异常url----" + url);
         }
         //https忽略证书问题
-        if (handler!=null){
+        if (handler != null) {
             //表示等待证书响应
             handler.proceed();
             // handler.cancel();      //表示挂起连接，为默认方式
@@ -577,10 +478,29 @@ public class X5WebViewClient extends WebViewClient {
         }
     }
 
+
+    /**
+     * 是否可以回退操作
+     * @return                      如果栈中数量大于2，则表示可以回退操作
+     */
+    public boolean pageCanGoBack() {
+        return webViewStack.pageCanGoBack();
+    }
+
+    /**
+     * 回退操作
+     * @param webView                           webView
+     * @return
+     */
+    public final boolean pageGoBack(@NonNull WebView webView) {
+        return webViewStack.pageCanGoBack();
+    }
+
     /**
      * 作用：在加载页面资源时会调用，每一个资源（比如图片）的加载都会调用一次。
-     * @param webView                           view
-     * @param s                                 s
+     *
+     * @param webView view
+     * @param s       s
      */
     @Override
     public void onLoadResource(WebView webView, String s) {
@@ -597,8 +517,9 @@ public class X5WebViewClient extends WebViewClient {
      * 这个回调发生在文档加载的早期，因此它的资源(css,和图像)可能不可用。
      * 如果需要更细粒度的视图更新，查看 postVisualStateCallback(long, WebView.VisualStateCallback).
      * 请注意这上边的所有条件也支持 postVisualStateCallback(long ,WebView.VisualStateCallback)
-     * @param webView                           view
-     * @param s                                 s
+     *
+     * @param webView view
+     * @param s       s
      */
     @Override
     public void onPageCommitVisible(WebView webView, String s) {
@@ -608,15 +529,16 @@ public class X5WebViewClient extends WebViewClient {
     /**
      * 此方法废弃于API21，调用于非UI线程，拦截资源请求并返回响应数据，返回null时WebView将继续加载资源
      * 注意：API21以下的AJAX请求会走onLoadResource，无法通过此方法拦截
-     *
+     * <p>
      * 其中 WebResourceRequest 封装了请求，WebResourceResponse 封装了响应
      * 封装了一个Web资源的响应信息，包含：响应数据流，编码，MIME类型，API21后添加了响应头，状态码与状态描述
-     * @param webView                           view
-     * @param s                                 s
+     *
+     * @param webView view
+     * @param s       s
      */
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView webView, String s) {
-        X5LogUtils.i("---shouldInterceptRequest-------->---"+s);
+        X5LogUtils.i("---shouldInterceptRequest-------->---" + s);
         WebResourceResponse webResourceResponse = super.shouldInterceptRequest(webView, s);
         return webResourceResponse;
         //return super.shouldInterceptRequest(webView, s);
@@ -624,18 +546,19 @@ public class X5WebViewClient extends WebViewClient {
 
     /**
      * 此方法添加于API21，调用于非UI线程，拦截资源请求并返回数据，返回null时WebView将继续加载资源
-     *
+     * <p>
      * 其中 WebResourceRequest 封装了请求，WebResourceResponse 封装了响应
      * 封装了一个Web资源的响应信息，包含：响应数据流，编码，MIME类型，API21后添加了响应头，状态码与状态描述
-     * @param webView                           view
-     * @param webResourceRequest                request，添加于API21，封装了一个Web资源的请求信息，
-     *                                          包含：请求地址，请求方法，请求头，是否主框架，是否用户点击，是否重定向
+     *
+     * @param webView            view
+     * @param webResourceRequest request，添加于API21，封装了一个Web资源的请求信息，
+     *                           包含：请求地址，请求方法，请求头，是否主框架，是否用户点击，是否重定向
      * @return
      */
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView webView, WebResourceRequest webResourceRequest) {
         String method = webResourceRequest.getMethod();
-        X5LogUtils.i("---shouldInterceptRequest-------->21---"+method + "----" +webResourceRequest.getUrl());
+        X5LogUtils.i("---shouldInterceptRequest-------->21---" + method + "----" + webResourceRequest.getUrl());
         WebResourceResponse webResourceResponse = super.shouldInterceptRequest(webView, webResourceRequest);
         return webResourceResponse;
         //return super.shouldInterceptRequest(webView, webResourceRequest);
@@ -644,10 +567,11 @@ public class X5WebViewClient extends WebViewClient {
     /**
      * 其中 WebResourceRequest 封装了请求，WebResourceResponse 封装了响应
      * 封装了一个Web资源的响应信息，包含：响应数据流，编码，MIME类型，API21后添加了响应头，状态码与状态描述
-     * @param webView                           view
-     * @param webResourceRequest                request，添加于API21，封装了一个Web资源的请求信息，
-     *                                          包含：请求地址，请求方法，请求头，是否主框架，是否用户点击，是否重定向
-     * @param bundle                            bundle
+     *
+     * @param webView            view
+     * @param webResourceRequest request，添加于API21，封装了一个Web资源的请求信息，
+     *                           包含：请求地址，请求方法，请求头，是否主框架，是否用户点击，是否重定向
+     * @param bundle             bundle
      * @return
      */
     @Override
@@ -658,10 +582,9 @@ public class X5WebViewClient extends WebViewClient {
     }
 
     /**
-     *
-     * @param webView                           view
-     * @param message                           message
-     * @param message1                          message1
+     * @param webView  view
+     * @param message  message
+     * @param message1 message1
      */
     @Override
     public void onTooManyRedirects(WebView webView, Message message, Message message1) {
@@ -670,9 +593,10 @@ public class X5WebViewClient extends WebViewClient {
 
     /**
      * 是否重新提交表单，默认不重发
-     * @param webView                           view
-     * @param message                           message
-     * @param message1                          message1
+     *
+     * @param webView  view
+     * @param message  message
+     * @param message1 message1
      */
     @Override
     public void onFormResubmission(WebView webView, Message message, Message message1) {
@@ -680,11 +604,12 @@ public class X5WebViewClient extends WebViewClient {
     }
 
     /**
-     *  通知应用可以将当前的url存储在数据库中，意味着当前的访问url已经生效并被记录在内核当中。
-     *  此方法在网页加载过程中只会被调用一次，网页前进后退并不会回调这个函数。
-     * @param webView                           view
-     * @param s                                 s
-     * @param b                                 b
+     * 通知应用可以将当前的url存储在数据库中，意味着当前的访问url已经生效并被记录在内核当中。
+     * 此方法在网页加载过程中只会被调用一次，网页前进后退并不会回调这个函数。
+     *
+     * @param webView view
+     * @param s       s
+     * @param b       b
      */
     @Override
     public void doUpdateVisitedHistory(WebView webView, String s, boolean b) {
@@ -697,8 +622,9 @@ public class X5WebViewClient extends WebViewClient {
      * 有三种响应方式：proceed()/cancel()/ignore()，默认行为是取消请求
      * 如果调用proceed()或cancel()，Webview 将在内存中保存响应结果且对相同的"host:port"不会再次调用 onReceivedClientCertRequest
      * 多数情况下，可通过KeyChain.choosePrivateKeyAlias启动一个Activity供用户选择合适的私钥
-     * @param webView                           view
-     * @param clientCertRequest                 request，表示一个证书请求，提供了方法操作(proceed/cancel/ignore)请求
+     *
+     * @param webView           view
+     * @param clientCertRequest request，表示一个证书请求，提供了方法操作(proceed/cancel/ignore)请求
      */
     @Override
     public void onReceivedClientCertRequest(WebView webView, ClientCertRequest clientCertRequest) {
@@ -707,10 +633,11 @@ public class X5WebViewClient extends WebViewClient {
 
     /**
      * 处理HTTP认证请求，默认行为是取消请求
-     * @param webView                           view
-     * @param httpAuthHandler                   handler，表示一个HTTP认证请求，提供了方法操作(proceed/cancel)请求
-     * @param s                                 s
-     * @param s1                                s1
+     *
+     * @param webView         view
+     * @param httpAuthHandler handler，表示一个HTTP认证请求，提供了方法操作(proceed/cancel)请求
+     * @param s               s
+     * @param s1              s1
      */
     @Override
     public void onReceivedHttpAuthRequest(WebView webView, HttpAuthHandler httpAuthHandler, String s, String s1) {
@@ -720,8 +647,9 @@ public class X5WebViewClient extends WebViewClient {
     /**
      * 给应用一个机会处理按键事件
      * 如果返回true，WebView不处理该事件，否则WebView会一直处理，默认返回false
-     * @param webView                           view
-     * @param keyEvent                          event
+     *
+     * @param webView  view
+     * @param keyEvent event
      * @return
      */
     @Override
@@ -733,8 +661,9 @@ public class X5WebViewClient extends WebViewClient {
      * 处理未被WebView消费的按键事件
      * WebView总是消费按键事件，除非是系统按键或shouldOverrideKeyEvent返回true
      * 此方法在按键事件分派时被异步调用
-     * @param webView                           view
-     * @param keyEvent                          event
+     *
+     * @param webView  view
+     * @param keyEvent event
      * @return
      */
     @Override
@@ -751,7 +680,8 @@ public class X5WebViewClient extends WebViewClient {
      * 这个循环将所图片放入数组，当js调用本地方法时传入。
      * 当然如果采用方式一获取图片的话，本地方法可以不需要传入这个数组
      * 通过js代码找到标签为img的代码块，设置点击的监听方法与本地的openImage方法进行连接
-     * @param webView                       webview
+     *
+     * @param webView webview
      */
     private void addImageArrayClickListener(WebView webView) {
         webView.loadUrl("javascript:(function(){" +
@@ -759,7 +689,7 @@ public class X5WebViewClient extends WebViewClient {
                 "var array=new Array(); " +
                 "for(var j=0;j<objs.length;j++){" +
                 "    array[j]=objs[j].src; " +
-                "}"+
+                "}" +
                 "for(var i=0;i<objs.length;i++)  " +
                 "{"
                 + "    objs[i].onclick=function()  " +
@@ -772,7 +702,8 @@ public class X5WebViewClient extends WebViewClient {
 
     /**
      * 通过js代码找到标签为img的代码块，设置点击的监听方法与本地的openImage方法进行连接
-     * @param webView                       webview
+     *
+     * @param webView webview
      */
     private void addImageClickListener(WebView webView) {
         webView.loadUrl("javascript:(function(){" +

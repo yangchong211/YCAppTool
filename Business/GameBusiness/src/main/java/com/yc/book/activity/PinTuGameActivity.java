@@ -6,7 +6,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.library.base.mvp.BaseActivity;
 import com.ycbjie.book.R;
 
@@ -20,7 +20,6 @@ import com.ycbjie.book.R;
  *     revise:
  * </pre>
  */
-@Route(path = RouterConfig.Game.ACTIVITY_OTHER_PIN_TU_ACTIVITY)
 public class PinTuGameActivity extends BaseActivity {
 
     private FrameLayout llTitleMenu;

@@ -24,8 +24,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
-
+import androidx.core.app.ActivityCompat;
 import com.tencent.smtt.export.external.interfaces.ConsoleMessage;
 import com.tencent.smtt.export.external.interfaces.GeolocationPermissionsCallback;
 import com.tencent.smtt.export.external.interfaces.JsPromptResult;
@@ -65,7 +64,7 @@ public class X5WebChromeClient extends VideoWebChromeClient {
     public static int FILE_CHOOSER_RESULT_CODE_5 = 2;
     private InterWebListener webListener;
     private boolean isShowContent = false;
-    private Context context;
+    private final Context context;
     private WebView webView;
     public static final int REQUEST_LOCATION = 100;
 

@@ -2,22 +2,30 @@ package com.yc.webviewlib.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.View;
 
 import com.tencent.smtt.sdk.CookieManager;
+import com.tencent.smtt.sdk.DownloadListener;
 import com.tencent.smtt.sdk.GeolocationPermissions;
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.ValueCallback;
 import com.tencent.smtt.sdk.WebIconDatabase;
+import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebStorage;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewDatabase;
 import com.yc.webviewlib.base.RequestInfo;
+import com.yc.webviewlib.helper.SaveImageProcessor;
 import com.yc.webviewlib.utils.FastClickUtils;
+import com.yc.webviewlib.utils.ToastUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 
@@ -35,8 +43,17 @@ import java.util.Map;
  */
 public class BaseWebView extends WebView {
 
+    /**
+     * 调用 evaluateJavascriptUrl 方法加载
+     */
     private static final int EXEC_SCRIPT = 1;
+    /**
+     * 调用 loadUrl 直接加载
+     */
     private static final int LOAD_URL = 2;
+    /**
+     * 调用 loadUrl 加载并且带有header
+     */
     private static final int LOAD_URL_WITH_HEADERS = 3;
     /**
      * loadUrl方法在19以上超过2097152个字符失效
@@ -206,6 +223,33 @@ public class BaseWebView extends WebView {
         WebIconDatabase.getInstance().removeAllIcons();
         //删除地理位置授权，也可以删除某个域名的授权（参考接口类）
         GeolocationPermissions.getInstance().clearAll();
+    }
+
+    /**
+     * 清除网页访问留下的缓存
+     * 由于内核缓存是全局的因此这个方法不仅仅针对webView而是针对整个应用程序
+     * @param b         是否清除
+     */
+    @Override
+    public void clearCache(boolean b) {
+        super.clearCache(b);
+    }
+
+    /**
+     * 清除当前webView访问的历史记录
+     * 只会webView访问历史记录里的所有记录除了当前访问记录
+     */
+    @Override
+    public void clearHistory() {
+        super.clearHistory();
+    }
+
+    /**
+     * 这个api仅仅清除自动完成填充的表单数据，并不会清除WebView存储到本地的数据
+     */
+    @Override
+    public void clearFormData() {
+        super.clearFormData();
     }
 
     /**
@@ -416,5 +460,84 @@ public class BaseWebView extends WebView {
         }
     }
 
+
+    /**
+     * 设置字体大小
+     * @param type                      类型
+     */
+    public void setTextSize(int type){
+        WebSettings settings = this.getSettings();
+        settings.setSupportZoom( true);
+        switch (type) {
+            case  1:
+                settings.setTextSize(WebSettings.TextSize.SMALLEST);
+                break;
+            case  2:
+                settings.setTextSize(WebSettings.TextSize.SMALLER);
+                break;
+            case  3:
+                settings.setTextSize(WebSettings.TextSize.NORMAL);
+                break;
+            case  4:
+                settings.setTextSize(WebSettings.TextSize.LARGER);
+                break;
+            case  5:
+                settings.setTextSize(WebSettings.TextSize.LARGEST);
+                break;
+            default:
+                settings.setTextSize(WebSettings.TextSize.NORMAL);
+                break;
+        }
+    }
+
+
+    /**
+     * 通过屏幕密度调整分辨率
+     */
+    public void setDensityZoom(){
+        WebSettings settings = this.getSettings();
+        int screenDensity = getResources().getDisplayMetrics().densityDpi;
+        WebSettings.ZoomDensity zoomDensity = WebSettings.ZoomDensity.MEDIUM;
+        switch (screenDensity) {
+            case DisplayMetrics.DENSITY_LOW:
+                //75
+                zoomDensity = WebSettings.ZoomDensity.CLOSE;
+                break;
+            case DisplayMetrics.DENSITY_MEDIUM:
+                //100
+                zoomDensity = WebSettings.ZoomDensity.MEDIUM;
+                break;
+            case DisplayMetrics.DENSITY_HIGH:
+                //150
+                zoomDensity = WebSettings.ZoomDensity.FAR;
+                break;
+        }
+        settings.setDefaultZoom(zoomDensity);
+    }
+
+    /**
+     * 添加下载监听操作。跳转外部浏览器进行下载
+     */
+    public void setDownloadListener(){
+        setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition,
+                                        String mimetype, long contentLength) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(url));
+                Context context = getContext();
+                if (intent.resolveActivity(context.getPackageManager()) != null) {
+                    context.startActivity(intent);
+                } else {
+                    if (Build.VERSION.SDK_INT >= 30) {
+                        context.startActivity(intent);
+                    } else {
+                        ToastUtils.showRoundRectToast("can not find browser");
+                    }
+                }
+            }
+        });
+    }
 
 }

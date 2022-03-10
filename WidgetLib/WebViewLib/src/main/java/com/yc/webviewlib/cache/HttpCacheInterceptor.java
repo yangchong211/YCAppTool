@@ -28,7 +28,7 @@ public class HttpCacheInterceptor implements Interceptor {
         Request request = chain.request();
         String cache = request.header(WebViewCacheWrapper.KEY_CACHE);
         Response originResponse = chain.proceed(request);
-        if (!TextUtils.isEmpty(cache)&&cache.equals(WebCacheType.NORMAL.ordinal()+"")){
+        if (cache != null && cache.equals(WebCacheType.NORMAL.ordinal() + "")) {
             return originResponse;
         }
         //Cache-Control 是最重要的规则。常见的取值有private、public、no-cache、max-age、no-store、默认是private

@@ -38,9 +38,12 @@ public final class BridgeUtil {
 
 	public final static String YY_OVERRIDE_SCHEMA = "yy://";
 	/**
-	 * 格式为   yy://return/{function}/returncontent
+	 * 格式为   yy://return/
 	 */
 	public final static String YY_RETURN_DATA = YY_OVERRIDE_SCHEMA + "return/";
+	/**
+	 * 格式为   yy://return/_fetchQueue/
+	 */
 	private final static String YY_FETCH_QUEUE = YY_RETURN_DATA + "_fetchQueue/";
 	private final static String EMPTY_STR = "";
 	public final static String UNDERLINE_STR = "_";

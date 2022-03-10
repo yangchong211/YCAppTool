@@ -169,10 +169,9 @@ public class WebAssetsLoader {
 
     /**
      * 初始化资源，拿到缓存路径，然后遍历中的所有文件。将文件的路径保存到集合中
-     * @param dir
-     * @return
+     * @param dir       文件
      */
-    private WebAssetsLoader initResourceNoneRecursion(String dir){
+    private void initResourceNoneRecursion(String dir){
         try {
             LinkedList<String> list = new LinkedList<>();
             String[] resData = mContext.getAssets().list(dir);
@@ -215,7 +214,6 @@ public class WebAssetsLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return this;
     }
 
     /**

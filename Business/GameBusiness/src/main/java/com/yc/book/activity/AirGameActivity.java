@@ -5,7 +5,7 @@ import android.graphics.Color;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.book.fjGame.GameView;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.statusbar.bar.StateAppBar;
 import com.ycbjie.book.R;
@@ -21,7 +21,6 @@ import com.ycbjie.book.R;
  *     revise:
  * </pre>
  */
-@Route(path = RouterConfig.Game.ACTIVITY_OTHER_AIR_ACTIVITY)
 public class AirGameActivity extends BaseActivity {
 
     private GameView gameView;

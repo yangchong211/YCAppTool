@@ -12,12 +12,6 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         applicationId "com.yc.lifehelper"
-        //配置阿里ARouter路由
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
         ndk {
             abiFilters "armeabi", "armeabi-v7a" //, "x86", "mips"
         }
@@ -205,7 +199,6 @@ dependencies {
     implementation project(path: ':XlogServer')
     implementation project(path: ':LeetBusiness')
     implementation project(path: ':MonitorKeepAlive')
-    annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':LibraryLayer')

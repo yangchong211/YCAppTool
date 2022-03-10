@@ -45,26 +45,26 @@ import okhttp3.Response;
  */
 public class WebViewCacheWrapper implements WebViewRequestClient {
 
-    private File mCacheFile;
-    private long mCacheSize;
-    private long mConnectTimeout;
-    private long mReadTimeout;
-    private CacheExtensionConfig mCacheExtensionConfig;
-    private Context mContext;
+    private final File mCacheFile;
+    private final long mCacheSize;
+    private final long mConnectTimeout;
+    private final long mReadTimeout;
+    private final CacheExtensionConfig mCacheExtensionConfig;
+    private final Context mContext;
     private WebCacheType mCacheType;
     /**
      * 资源文件
      */
-    private String mAssetsDir;
+    private final String mAssetsDir;
     /**
      * 是否是信任的host
      */
-    private boolean mTrustAllHostname;
-    private SSLSocketFactory mSSLSocketFactory;
-    private X509TrustManager mX509TrustManager;
-    private Dns mDns;
-    private InterResourceInterceptor mResourceInterceptor;
-    private boolean mIsSuffixMod;
+    private final boolean mTrustAllHostname;
+    private final SSLSocketFactory mSSLSocketFactory;
+    private final X509TrustManager mX509TrustManager;
+    private final Dns mDns;
+    private final InterResourceInterceptor mResourceInterceptor;
+    private final boolean mIsSuffixMod;
 
     //==============
     private OkHttpClient mHttpClient = null;
@@ -136,14 +136,16 @@ public class WebViewCacheWrapper implements WebViewRequestClient {
     }
 
     /**
-     * 拦截处理的入口
+     * 拦截处理的入口，可以直接从这里拓展
      * @param request                                   request请求
      * @return
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public WebResourceResponse interceptRequest(WebResourceRequest request) {
+        //获取请求链接
         String url = request.getUrl().toString();
+        //获取请求链接header
         Map<String, String> requestHeaders = request.getRequestHeaders();
         return interceptRequest(url, requestHeaders);
     }

@@ -1,7 +1,6 @@
 #### 问题汇总目录介绍
 - 4.4.6 mWebView.scrollTo(0, 0)回顶部失效
 - 4.4.7 部分手机监听滑动顶部或底部失效
-- 4.4.8 prompt的一个坑导致js挂掉
 - 4.4.9 webView背景设置为透明无效探索
 - 4.5.0 如何屏蔽掉WebView中长按事件
 - 4.5.1 WeView出现OOM影响主进程如何避免
@@ -10,8 +9,6 @@
 - 4.5.4 WebView中http和https混合使用问题
 - 4.5.5 调用系统EMAIL发送邮件崩溃
 - 4.5.7 WebView访问部分网页崩溃问题
-- 4.5.8 WebView在fragment不可见停止播放视频
-- 4.5.9 JsPrompt方法message长度限制问题
 - 4.6.1 在web页面android软键盘覆盖问题
 - 4.6.2 为什么打包之后JS调用出现失败
 - 4.6.3 ViewPager里非首屏WebView点击事件不响应
@@ -53,14 +50,6 @@
 
 
 
-
-### 4.4.8 prompt的一个坑导致js挂掉
-- 使用onJsPrompt实现js通信，在js调用​window.alert​，​window.confirm​，​window.prompt​时，​会调用WebChromeClient​对应方法，可以此为入口，作为消息传递通道，​通常会选Prompt作为入口，在App中就是onJsPrompt作为jsbridge的调用入口。
-- 从表现上来看，onJsPrompt必须执行完毕，prompt函数才会返回，否则js线程会一直阻塞在这里。实际使用中确实会发生这种情况，尤其是APP中有很多线程的场景下，怀疑是这么一种场景：
-    - 第一步：js线程在执行prompt时被挂起，
-    - 第二部 ：UI线程被调度，恰好销毁了Webview，调用了 （webview的detroy），detroy之后，导致 onJsPrompt不会被回调，prompt一直等着，js线程就一直阻塞，导致所有webview打不开，一旦出现可能需要杀进程才能解决。
-- 解决方案
-    - 使用onJsPrompt实现js通信，建议使用handler处理消息，避免某些方法因为做了耗时操作导致js等待状态；还需要注意销毁webView的过程，在onStop设置setJavaScriptEnabled(false)，然后销毁。
 
 
 
@@ -213,13 +202,6 @@
         android:theme="@style/AppTheme">
     ```
 
-
-### 4.5.8 WebView在fragment不可见停止播放视频
-
-
-### 4.5.9 JsPrompt方法message长度限制问题
-- 问题描述
-    - 在调用WebViewChromeClient的onJsPrompt()时，利用message来实现Js与native之间的交互，在不同的手机中，对于message的长度限制不同，华为超长会自动截取，目前发现最长10225 char。
 
 
 

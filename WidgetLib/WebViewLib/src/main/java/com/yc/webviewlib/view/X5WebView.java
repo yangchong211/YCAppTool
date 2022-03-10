@@ -17,11 +17,15 @@ package com.yc.webviewlib.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.tencent.smtt.sdk.DownloadListener;
 import com.tencent.smtt.sdk.ValueCallback;
 import com.tencent.smtt.sdk.WebBackForwardList;
 import com.tencent.smtt.sdk.WebChromeClient;
@@ -35,6 +39,7 @@ import com.yc.webviewlib.client.JsX5WebViewClient;
 import com.yc.webviewlib.helper.SaveImageProcessor;
 import com.yc.webviewlib.inter.InterValueCallback;
 import com.yc.webviewlib.tools.WebViewException;
+import com.yc.webviewlib.utils.ToastUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 
@@ -58,6 +63,7 @@ public class X5WebView extends BridgeWebView {
     private X5WebChromeClient x5WebChromeClient;
     private volatile boolean mInitialized;
     public static boolean isLongClick = true;
+    private Context context;
 
     @Override
     protected void onDetachedFromWindow() {
@@ -65,14 +71,14 @@ public class X5WebView extends BridgeWebView {
         mInitialized = false;
     }
 
-    public X5WebView(Context arg0) {
-        this(arg0,null);
+    public X5WebView(Context context) {
+        this(context,null);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    public X5WebView(Context arg0, AttributeSet arg1) {
-        super(arg0, arg1);
-        initWebViewSettings();
+    public X5WebView(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        this.context = context;
         if (getCustomWebViewClient() == null){
             x5WebViewClient = new JsX5WebViewClient(this , getContext());
             this.setWebViewClient(x5WebViewClient);
@@ -85,10 +91,12 @@ public class X5WebView extends BridgeWebView {
         } else {
             this.setWebChromeClient(getCustomWebChromeClient());
         }
+        initWebViewSettings();
         //设置可以点击
         this.getView().setClickable(true);
         mInitialized = true;
         initListener();
+        setDownloadListener();
     }
 
     /**
@@ -162,58 +170,8 @@ public class X5WebView extends BridgeWebView {
     }
 
     /**
-     * 设置字体大小
-     * @param fontSize                      字体大小
+     * 设置长按监听
      */
-    public void setTextSize(int fontSize){
-        WebSettings settings = this.getSettings();
-        settings.setSupportZoom( true);
-        switch (fontSize) {
-            case  1:
-                settings.setTextSize(WebSettings.TextSize.SMALLEST);
-                break;
-            case  2:
-                settings.setTextSize(WebSettings.TextSize.SMALLER);
-                break;
-            case  3:
-                settings.setTextSize(WebSettings.TextSize.NORMAL);
-                break;
-            case  4:
-                settings.setTextSize(WebSettings.TextSize.LARGER);
-                break;
-            case  5:
-                settings.setTextSize(WebSettings.TextSize.LARGEST);
-                break;
-            default:
-                settings.setTextSize(WebSettings.TextSize.NORMAL);
-                break;
-        }
-    }
-
-    /**
-     * 通过屏幕密度调整分辨率
-     */
-    public void setDensityZoom(){
-        WebSettings settings = this.getSettings();
-        int screenDensity = getResources().getDisplayMetrics().densityDpi;
-        WebSettings.ZoomDensity zoomDensity = WebSettings.ZoomDensity.MEDIUM;
-        switch (screenDensity) {
-            case DisplayMetrics.DENSITY_LOW:
-                //75
-                zoomDensity = WebSettings.ZoomDensity.CLOSE;
-                break;
-            case DisplayMetrics.DENSITY_MEDIUM:
-                //100
-                zoomDensity = WebSettings.ZoomDensity.MEDIUM;
-                break;
-            case DisplayMetrics.DENSITY_HIGH:
-                //150
-                zoomDensity = WebSettings.ZoomDensity.FAR;
-                break;
-        }
-        settings.setDefaultZoom(zoomDensity);
-    }
-
     private void initListener() {
         if (isLongClick){
             this.setOnLongClickListener(new View.OnLongClickListener() {

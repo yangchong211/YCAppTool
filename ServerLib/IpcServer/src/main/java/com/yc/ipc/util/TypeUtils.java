@@ -7,9 +7,9 @@ import android.app.Application;
 import android.app.IntentService;
 import android.app.Service;
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -32,7 +32,6 @@ public class TypeUtils {
     private static final HashSet<Class<?>> CONTEXT_CLASSES = new HashSet<Class<?>>() {
         {
             add(Context.class);
-            add(ActionBarActivity.class);
             add(Activity.class);
             add(AppCompatActivity.class);
             add(Application.class);

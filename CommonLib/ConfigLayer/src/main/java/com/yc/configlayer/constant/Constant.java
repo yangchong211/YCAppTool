@@ -1,13 +1,8 @@
 package com.yc.configlayer.constant;
 
-import android.os.Environment;
-
-import com.yc.configlayer.bean.HomeBlogEntity;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * ================================================
@@ -20,11 +15,7 @@ import java.util.List;
  */
 public class Constant {
 
-    public static final int REALM_VERSION = 1;
-    public static final String REALM_NAME = "life";
     public static final String SP_NAME = "yc";
-    public static final String EXTERNAL_STORAGE_DIRECTORY =
-            Environment.getExternalStorageDirectory().getAbsolutePath() + "/";
 
     public static final String GITHUB = "https://github.com/yangchong211/YCBlogs";
     public static final String LIFE_HELPER = "https://github.com/yangchong211/LifeHelper";
@@ -43,26 +34,6 @@ public class Constant {
         int INTERMEDIATE = 1;
     }
 
-
-    public interface viewType{
-        int typeBanner = 1;         //轮播图
-        int typeGv = 2;             //九宫格
-        int typeTitle = 3;          //标题
-        int typeList = 4;           //list
-        int typeNews = 5;           //新闻
-        int typeMarquee = 6;        //跑马灯
-        int typePlus = 7 ;          //不规则视图
-        int typeSticky = 8;         //指示器
-        int typeFooter = 9;         //底部
-        int typeGvSecond = 10;      //九宫格
-    }
-
-    public class status{
-        public static final int success=200;
-        public static final int error=-1;
-    }
-
-
     /**-------------------------------------键-------------------------------------------------**/
     //Sp键
     public static final String KEY_FIRST_SPLASH = "first_splash";                 //是否第一次启动
@@ -75,28 +46,11 @@ public class Constant {
     public static final String KEY_NIGHT_STATE = "night_state";                   //启动页夜间模式
 
 
-    /**-------------------------------------集合-------------------------------------------------**/
-    //
-    public static List<HomeBlogEntity> findNews = new ArrayList<>();
-    public static List<HomeBlogEntity> findBottomNews = new ArrayList<>();
 
     /**-------------------------------------集合-------------------------------------------------**/
     public static final String URL = "url";
-    public static final String ID = "id";
     public static final String TITLE = "title";
     public static final String CONTENT = "content";
 
-
-    /**-------------------------------------music-------------------------------------------------**/
-    public static final String EXTRA_NOTIFICATION = "extra_notification";
-    public static final String LOCK_SCREEN = "lock_screen";
-    public static final String LOCK_SCREEN_ACTION = "cn.ycbjie.lock";
-    public static final String FILTER_SIZE = "filter_size";
-    public static final String FILTER_TIME = "filter_time";
-    public static final String MUSIC_ID = "music_id";
-    public static final String PLAY_MODE = "play_mode";
-    public static final String IS_SCREEN_LOCK = "is_screen_lock";
-    public static final String APP_OPEN_COUNT = "app_open_count";
-    public static final String PLAY_POSITION = "play_position";
 
 }

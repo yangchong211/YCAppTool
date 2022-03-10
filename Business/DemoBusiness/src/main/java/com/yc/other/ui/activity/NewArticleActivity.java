@@ -25,12 +25,13 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.pedaily.yc.ycdialoglib.fragment.CustomDialogFragment;
+import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.photo.Matisse;
 import com.yc.photo.MimeType;
 import com.yc.photo.MyGlideEngine;
@@ -43,9 +44,7 @@ import com.ns.yc.yccustomtextlib.edit.view.HyperImageView;
 import com.ns.yc.yccustomtextlib.edit.view.HyperTextEditor;
 import com.ns.yc.yccustomtextlib.utils.HyperLibUtils;
 import com.ns.yc.yccustomtextlib.utils.HyperLogUtils;
-import com.pedaily.yc.ycdialoglib.fragment.CustomDialogFragment;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.imageserver.transformations.TransformationScale;
 import com.yc.other.tool.ModelStorage;
 import com.yc.other.R;
@@ -64,7 +63,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 
-@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_ARTICLE)
 public class NewArticleActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_CHOOSE = 520;

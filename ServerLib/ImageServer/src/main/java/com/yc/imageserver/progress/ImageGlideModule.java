@@ -32,7 +32,7 @@ import okhttp3.OkHttpClient;
  *             下版本准备设置缓存，设置拦截监听等功能，第一版先不做
  * </pre>
  */
-@GlideModule
+//@GlideModule
 public class ImageGlideModule extends AppGlideModule {
 
     /*

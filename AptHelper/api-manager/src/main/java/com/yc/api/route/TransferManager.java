@@ -23,7 +23,7 @@ public class TransferManager implements IRegister {
      * key表示的是自定义通信接口
      * value表示自定义通信接口的实现类
      */
-    private Map<Class, Class> apiImplementMap = new HashMap<>();
+    private final Map<Class, Class> apiImplementMap = new HashMap<>();
 
     private TransferManager() {
         //只允许自己内部构造

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.other.R;
 
 /**
@@ -18,7 +18,6 @@ import com.yc.other.R;
  *     revise:
  * </pre>
  */
-@Route(path = RouterConfig.Demo.ACTIVITY_OTHER_TIMER)
 public class TimerMainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override

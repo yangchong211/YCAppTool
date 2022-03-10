@@ -3,8 +3,9 @@ package com.pedaily.yc.ycdialoglib.animator;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.View;
+
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 /**
  * Description: 背景Shadow动画器，负责执行半透明的渐入渐出动画

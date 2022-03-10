@@ -17,8 +17,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class NetworkReporterImpl implements NetworkEventReporter {
 
     private static final String TAG = "NetworkReporterImpl";
-    private static AtomicInteger mNextRequestId = new AtomicInteger(0);
-    private DataTranslator mDataTranslator;
+    private static final AtomicInteger mNextRequestId = new AtomicInteger(0);
+    private final DataTranslator mDataTranslator;
     private static NetworkReporterImpl sInstance;
 
     public static NetworkReporterImpl getInstance() {

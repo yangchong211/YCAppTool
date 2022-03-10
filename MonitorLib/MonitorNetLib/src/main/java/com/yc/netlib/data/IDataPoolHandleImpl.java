@@ -33,7 +33,7 @@ public class IDataPoolHandleImpl implements IDataPoolHandle {
     @Override
     public void initDataPool() {
         if (mNetworkFeedMap == null) {
-            mNetworkFeedMap = new HashMap();
+            mNetworkFeedMap = new HashMap<>();
         }
         mNetworkFeedMap.clear();
     }

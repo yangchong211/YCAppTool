@@ -24,7 +24,7 @@ import com.yc.webviewlib.utils.X5LogUtils;
  */
 public class VideoWebChromeClient extends WebChromeClient {
 
-    private Context context;
+    private final Context context;
     private View customView;
     private IX5WebChromeClient.CustomViewCallback customViewCallback;
     private FullscreenHolder videoFullView;

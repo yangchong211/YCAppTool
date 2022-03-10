@@ -9,11 +9,6 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
     }
 
     buildTypes {
@@ -27,7 +22,5 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation(rootProject.ext.dependencies["appcompat"])
-    annotationProcessor rootProject.ext.dependencies["router-compiler"]
-    implementation rootProject.ext.dependencies["router"]
 
 }

@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.ycbjie.webviewlib.utils.X5WebUtils;
+import com.yc.webviewlib.utils.X5WebUtils;
 
 /**
  * <pre>

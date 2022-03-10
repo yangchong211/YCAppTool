@@ -11,23 +11,22 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.Postcard;
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.facade.callback.NavCallback;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.configlayer.arounter.ARouterUtils;
-import com.yc.configlayer.arounter.RouterConfig;
+
 import com.yc.configlayer.constant.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.utils.AppUtils;
 import com.yc.library.utils.DoShareUtils;
+import com.yc.webviewlib.inter.BridgeHandler;
+import com.yc.webviewlib.inter.CallBackFunction;
+import com.yc.webviewlib.inter.InterWebListener;
+import com.yc.webviewlib.utils.X5LogUtils;
+import com.yc.webviewlib.utils.X5WebUtils;
+import com.yc.webviewlib.view.X5WebView;
+import com.yc.webviewlib.widget.WebProgress;
 import com.ycbjie.library.R;
-import com.ycbjie.webviewlib.inter.InterWebListener;
-import com.ycbjie.webviewlib.utils.X5WebUtils;
-import com.ycbjie.webviewlib.view.X5WebView;
-import com.ycbjie.webviewlib.widget.WebProgress;
 
 /**
  * <pre>
@@ -38,7 +37,6 @@ import com.ycbjie.webviewlib.widget.WebProgress;
  *     revise: 原生webView
  * </pre>
  */
-@Route(path = RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW)
 public class WebViewActivity extends BaseActivity {
 
     private Toolbar toolbar;
@@ -52,6 +50,7 @@ public class WebViewActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         if (mWebView != null) {
+            mWebView.unregisterHandler("doPhone");
             mWebView.destroy();
         }
         super.onDestroy();
@@ -102,33 +101,9 @@ public class WebViewActivity extends BaseActivity {
         } else if (i == R.id.capture) {
             ToastUtils.showRoundRectToast("屏幕截图，后期处理");
         } else if (i == R.id.about){
-            ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME);
-        }else {
-            ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME,
-                    this, new NavCallback() {
-                @Override
-                public void onArrival(Postcard postcard) {
-                    LogUtils.i("ARouterUtils"+"---跳转完了");
-                }
 
-                @Override
-                public void onFound(Postcard postcard) {
-                    super.onFound(postcard);
-                    LogUtils.i("ARouterUtils"+"---找到了");
-                }
+        } else {
 
-                @Override
-                public void onInterrupt(Postcard postcard) {
-                    super.onInterrupt(postcard);
-                    LogUtils.i("ARouterUtils"+"---被拦截了");
-                }
-
-                @Override
-                public void onLost(Postcard postcard) {
-                    super.onLost(postcard);
-                    LogUtils.i("ARouterUtils"+"---找不到了");
-                }
-            });
         }
         return super.onOptionsItemSelected(item);
     }
@@ -142,7 +117,6 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        ARouterUtils.injectActivity(this);
         initFindById();
         initToolBar();
         initIntentData();
@@ -194,9 +168,23 @@ public class WebViewActivity extends BaseActivity {
         mWebView.loadUrl(url);
         mWebView.getX5WebChromeClient().setWebListener(interWebListener);
         mWebView.getX5WebViewClient().setWebListener(interWebListener);
+        //Android调用js
+        mWebView.callHandler("go", "", new CallBackFunction() {
+            @Override
+            public void onCallBack(String data) {
+                X5LogUtils.d("js call back data : " + data);
+            }
+        });
+        //js调用Android
+        mWebView.registerHandler("toPhone", new BridgeHandler() {
+            @Override
+            public void handler(String data, CallBackFunction function) {
+
+            }
+        });
     }
 
-    private InterWebListener interWebListener = new InterWebListener() {
+    private final InterWebListener interWebListener = new InterWebListener() {
         @Override
         public void hindProgressBar() {
             progress.hide();
@@ -226,12 +214,18 @@ public class WebViewActivity extends BaseActivity {
 
         @Override
         public void startProgress(int newProgress) {
+            //设置进度
             progress.setWebProgress(newProgress);
         }
 
         @Override
         public void showTitle(String title) {
             toolbarTitle.setText(StringUtils.null2Length0(title));
+        }
+
+        @Override
+        public void onPageFinished(String url) {
+
         }
     };
 

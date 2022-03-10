@@ -3,7 +3,8 @@
 package com.yc.ipc.util;
 
 import android.os.RemoteException;
-import android.support.v4.util.Pair;
+
+import androidx.core.util.Pair;
 
 import java.lang.ref.PhantomReference;
 import java.lang.ref.ReferenceQueue;

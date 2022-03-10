@@ -15,14 +15,14 @@ import java.util.HashSet;
  */
 public final class CacheExtensionConfig {
 
-    //单独webview实例的
-    private HashSet<String> statics = new HashSet(STATIC);
-    private HashSet<String> no_cache = new HashSet(NO_CACH);
+    //单独webView实例的
+    private final HashSet<String> statics = new HashSet<>(STATIC);
+    private final HashSet<String> no_cache = new HashSet<>(NO_CACH);
 
     /**
      * 全局默认的
      */
-    private static HashSet STATIC = new HashSet() {
+    private static final HashSet<String> STATIC = new HashSet<String>() {
         {
             add("html");
             add("htm");
@@ -52,7 +52,7 @@ public final class CacheExtensionConfig {
     /**
      * 下面这些是不用进行缓存的
      */
-    private static HashSet NO_CACH = new HashSet() {
+    private static final HashSet<String> NO_CACH = new HashSet<String>() {
         {
             add("mp4");
             add("mp3");

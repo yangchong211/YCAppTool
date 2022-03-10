@@ -13,13 +13,6 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         multiDexEnabled true
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
-
     }
 
 
@@ -43,7 +36,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation 'com.google.guava:guava:25.1-android'
-    annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ConfigLayer')
 }
