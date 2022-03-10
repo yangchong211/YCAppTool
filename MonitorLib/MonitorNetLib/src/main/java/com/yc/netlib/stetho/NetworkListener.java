@@ -37,7 +37,7 @@ import okhttp3.Response;
 public class NetworkListener extends EventListener {
 
     private static final String TAG = "NetworkEventListener";
-    private static AtomicInteger mNextRequestId = new AtomicInteger(0);
+    private static final AtomicInteger mNextRequestId = new AtomicInteger(0);
     private String mRequestId ;
 
     public static Factory get(){

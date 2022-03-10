@@ -15,7 +15,7 @@ project(':BusinessInterface').projectDir = new File('Business/BusinessInterface'
 
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
-        ':ServerInterface', ':GsonServer', ':IpcServer'
+        ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -24,19 +24,19 @@ project(':NfcServer').projectDir = new File('ServerLib/NfcServer')
 project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
 project(':ServerInterface').projectDir = new File('ServerLib/ServerInterface')
 project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
-
+project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
-        'ComponentLib',':ApplicationLib'
+        'ComponentLib',':ApplicationLib',':AppStartLib'
 project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
-
+project(':AppStartLib').projectDir = new File('CommonLib/AppStartLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */

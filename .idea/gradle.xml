@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/Business/GameBusiness" />
             <option value="$PROJECT_DIR$/Business/LeetBusiness" />
             <option value="$PROJECT_DIR$/Business/VideoBusiness" />
+            <option value="$PROJECT_DIR$/CommonLib/AppStartLib" />
             <option value="$PROJECT_DIR$/CommonLib/AppStatusLib" />
             <option value="$PROJECT_DIR$/CommonLib/ApplicationLib" />
             <option value="$PROJECT_DIR$/CommonLib/ComponentLib" />
@@ -39,6 +40,7 @@
             <option value="$PROJECT_DIR$/ServerLib/ImageServer" />
             <option value="$PROJECT_DIR$/ServerLib/IpcServer" />
             <option value="$PROJECT_DIR$/ServerLib/NfcServer" />
+            <option value="$PROJECT_DIR$/ServerLib/ObjectEqualLib" />
             <option value="$PROJECT_DIR$/ServerLib/ServerInterface" />
             <option value="$PROJECT_DIR$/ServerLib/ShareServer" />
             <option value="$PROJECT_DIR$/ServerLib/XlogServer" />

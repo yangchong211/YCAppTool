@@ -79,7 +79,6 @@ public class SerialTaskQueue {
                 if (!work.cancel && !work.finished) {
                     work.onCancel();
                 }
-
             }
         };
     }
