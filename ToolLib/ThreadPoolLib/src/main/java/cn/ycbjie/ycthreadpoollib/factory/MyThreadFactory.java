@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *     blog  : https://github.com/yangchong211
  *     time  : 2017/08/22
  *     desc  : 默认Thread工厂
- *     revise:
+ *     revise: 线程工厂，为线程池提供新线程的创建
  * </pre>
  */
 public class MyThreadFactory implements ThreadFactory {
@@ -44,6 +44,9 @@ public class MyThreadFactory implements ThreadFactory {
      * 使用线程安全的Integer
      */
     private final AtomicInteger mCount = new AtomicInteger(1);
+    /**
+     * 线程名称
+     */
     private String name;
 
     /**

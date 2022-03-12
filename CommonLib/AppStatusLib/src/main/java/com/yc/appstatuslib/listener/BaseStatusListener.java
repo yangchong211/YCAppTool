@@ -5,6 +5,15 @@ import com.yc.appstatuslib.info.ThreadInfo;
 
 public class BaseStatusListener implements AppStatusListener{
 
+    /*
+     * 监控app的电量变化
+     * 监控app的屏幕变化
+     * 监控app的网络变化
+     * 监控app的线程状态
+     * 监控app的内存变化
+     * 监控app的前后台变化
+     */
+
     /**
      * wifi状态监听
      * @param isWifiOn              true表示Wi-Fi可以打开，false表示关闭

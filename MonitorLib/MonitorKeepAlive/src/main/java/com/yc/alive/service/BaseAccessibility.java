@@ -6,11 +6,11 @@ import android.view.accessibility.AccessibilityNodeInfo;
 
 import com.yc.alive.constant.AliveSettingConst;
 import com.yc.alive.model.AliveOptionModel;
-import com.yc.alive.util.KAAccessibilityUtils;
-import com.yc.alive.util.KAAppUtils;
-import com.yc.alive.util.KAExecutorUtils;
+import com.yc.alive.util.AccessibilityUtils;
+import com.yc.alive.util.AliveAppUtils;
+import com.yc.alive.util.AliveExecutorUtils;
 import com.yc.alive.util.AliveLogUtils;
-import com.yc.alive.util.KAStringUtils;
+import com.yc.alive.util.AliveStringUtils;
 
 import static android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK;
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
@@ -19,10 +19,10 @@ import static com.yc.alive.constant.AliveSettingType.TYPE_FLOAT_WINDOW;
 import static com.yc.alive.constant.AliveSettingType.TYPE_NOTIFICATION;
 import static com.yc.alive.constant.AliveSettingType.TYPE_SELF_START;
 import static com.yc.alive.constant.AliveSettingType.TYPE_WIFI_NEVER_SLEEP;
-import static com.yc.alive.util.KAAccessibilityUtils.findNodeByText;
-import static com.yc.alive.util.KAAccessibilityUtils.findNodeByTextContains;
-import static com.yc.alive.util.KAAccessibilityUtils.getCheckableNode;
-import static com.yc.alive.util.KAAccessibilityUtils.getClickableNode;
+import static com.yc.alive.util.AccessibilityUtils.findNodeByText;
+import static com.yc.alive.util.AccessibilityUtils.findNodeByTextContains;
+import static com.yc.alive.util.AccessibilityUtils.getCheckableNode;
+import static com.yc.alive.util.AccessibilityUtils.getClickableNode;
 
 /**
  * Accessibility 事件处理基类
@@ -46,9 +46,9 @@ public class BaseAccessibility {
     protected static final String CLASS_NAME_DIALOG = AliveSettingConst.CLASS_DIALOG;
 
     public void process(AccessibilityService service, AccessibilityNodeInfo rootNode, String className,
-                        AliveOptionModel option, KAProcessCallback callback) {
+                        AliveOptionModel option, OnProcessCallback callback) {
 
-        if (service == null || rootNode == null || KAStringUtils.isEmpty(className) || option == null) {
+        if (service == null || rootNode == null || AliveStringUtils.isEmpty(className) || option == null) {
             AliveLogUtils.d(TAG,
                 "service " + service + ", rootNode " + rootNode + ", className " + className + ", option " + option);
 
@@ -82,7 +82,7 @@ public class BaseAccessibility {
     }
 
     protected void processFloatWindow(final AccessibilityService service, AccessibilityNodeInfo rootNode, String className,
-                                      AliveOptionModel option, final KAProcessCallback callback) {
+                                      AliveOptionModel option, final OnProcessCallback callback) {
 
         if (CLASS_NAME_FLOAT_WINDOW.equals(className)) {
             // 悬浮窗设置页面
@@ -115,10 +115,10 @@ public class BaseAccessibility {
                 return;
             }
 
-            KAExecutorUtils.getInstance().runWorker(new KAExecutorUtils.KARunnable() {
+            AliveExecutorUtils.getInstance().runWorker(new AliveExecutorUtils.KARunnable() {
                 @Override
                 public void runWorker() {
-                    KAAppUtils.sleep(500);
+                    AliveAppUtils.sleep(500);
                 }
 
                 @Override
@@ -135,11 +135,11 @@ public class BaseAccessibility {
     }
 
     protected void processNotification(AccessibilityService service, AccessibilityNodeInfo rootNode,
-                                       String className, AliveOptionModel option, KAProcessCallback callback) {
+                                       String className, AliveOptionModel option, OnProcessCallback callback) {
     }
 
     protected void processWifi(AccessibilityService service, AccessibilityNodeInfo rootNode, String className,
-                               AliveOptionModel option, KAProcessCallback callback) {
+                               AliveOptionModel option, OnProcessCallback callback) {
 
         if (CLASS_NAME_WIFI_ADVANCED_SETTING.equals(className)) {
             // wifi 高级设置页面
@@ -171,7 +171,7 @@ public class BaseAccessibility {
             if (node == null) {
                 node = findNodeByTextContains(rootNode, service.getString(option.wifiKeepLiveAlwaysRes));
             }
-            node = KAAccessibilityUtils.getCheckableNode(node);
+            node = AccessibilityUtils.getCheckableNode(node);
             if (node == null) {
                 option.failWithMessage("node null");
             } else {
@@ -188,10 +188,10 @@ public class BaseAccessibility {
     }
 
     protected void processSelfStart(AccessibilityService service, AccessibilityNodeInfo rootNode, String className,
-                                    AliveOptionModel option, KAProcessCallback callback) {
+                                    AliveOptionModel option, OnProcessCallback callback) {
     }
 
     protected void processBattery(AccessibilityService service, AccessibilityNodeInfo rootNode, String className,
-                                  AliveOptionModel option, KAProcessCallback callback) {
+                                  AliveOptionModel option, OnProcessCallback callback) {
     }
 }

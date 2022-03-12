@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings("ALL")
 public final class DelayTaskExecutor {
 
-    private ScheduledExecutorService dispatcher;
+    private volatile ScheduledExecutorService dispatcher;
 
     /**
      * 单利模式，创建线程池对象
@@ -53,7 +53,7 @@ public final class DelayTaskExecutor {
         });
     }
 
-    public static DelayTaskExecutor get() {
+    public static synchronized DelayTaskExecutor get() {
         return instance;
     }
 

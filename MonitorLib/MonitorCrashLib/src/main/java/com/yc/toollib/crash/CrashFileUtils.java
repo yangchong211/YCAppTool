@@ -235,10 +235,16 @@ public final class CrashFileUtils {
         //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
         StackTraceElement[] stackTraces = throwable.getStackTrace();
         for (StackTraceElement stackTrace : stackTraces) {
+            //获取class的名称，该类包含由该堆栈跟踪元素所表示的执行点
             String clazzName = stackTrace.getClassName();
+            //返回源文件名，该文件包含由该堆栈跟踪元素所表示的执行点。
             String fileName = stackTrace.getFileName();
+            //返回源行的行号，该行包含由该堆栈该跟踪元素所表示的执行点。
             int lineNumber = stackTrace.getLineNumber();
+            //返回方法名，此方法包含由该堆栈跟踪元素所表示的执行点。
             String methodName = stackTrace.getMethodName();
+            //如果包含由该堆栈跟踪元素所表示的执行点的方法是一个本机方法，则返回 true。
+            boolean nativeMethod = stackTrace.isNativeMethod();
             AppLogUtils.i("printThrowable------"+clazzName+"----" +fileName+"------"+lineNumber+"----"+methodName);
         }
     }

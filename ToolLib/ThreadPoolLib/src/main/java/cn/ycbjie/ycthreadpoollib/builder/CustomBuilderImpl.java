@@ -14,8 +14,8 @@ import cn.ycbjie.ycthreadpoollib.factory.MyThreadFactory;
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2019/05/17
- *     desc  : SingleBuilder
- *     revise:
+ *     desc  : 自定义线程池
+ *     revise: 这个是高级的用法，需要对线程池有较深入的理解才可以使用。否则建议直接使用系统提供api创建线程池
  * </pre>
  */
 public class CustomBuilderImpl extends AbsThreadPoolBuilder<ExecutorService> {
@@ -28,12 +28,17 @@ public class CustomBuilderImpl extends AbsThreadPoolBuilder<ExecutorService> {
 
     public CustomBuilderImpl() {
         this.mUnit = TimeUnit.SECONDS;
+        //设置默认的线程处理的队列
+        //作用是，把提交的runnable存储到队列里面
         this.mWorkQueue = new SynchronousQueue<>();
     }
 
     public ExecutorService create(MyThreadFactory myThreadFactory) {
-        return new ThreadPoolExecutor(this.mCorePoolSize, this.mMaximumPoolSize,
-                this.mKeepAliveTime, this.mUnit, this.mWorkQueue, myThreadFactory);
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+                this.mCorePoolSize, this.mMaximumPoolSize,
+                this.mKeepAliveTime, this.mUnit,
+                this.mWorkQueue, myThreadFactory);
+        return threadPoolExecutor;
     }
 
     public ThreadPoolType getType() {

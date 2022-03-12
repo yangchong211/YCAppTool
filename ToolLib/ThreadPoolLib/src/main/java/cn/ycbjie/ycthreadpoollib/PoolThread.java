@@ -202,7 +202,9 @@ public final class PoolThread implements Executor {
      * @return {@link Future}
      */
     public <T> Future<T> submit(Callable<T> callable) {
+        //把外部传来的callable封装到CallableWrapper对象中
         callable = new CallableWrapper<>(getLocalConfigs(), callable);
+        //提交事物
         Future<T> result = pool.submit(callable);
         resetLocalConfigs();
         return result;

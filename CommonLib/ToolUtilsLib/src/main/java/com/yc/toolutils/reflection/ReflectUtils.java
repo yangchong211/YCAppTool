@@ -7,14 +7,18 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 public final class ReflectUtils {
+
     static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
     static final Class<?>[] EMPTY_CLASS_ARRAY = new Class[0];
 
-    public ReflectUtils() {
+    private ReflectUtils() {
+
     }
 
     static boolean isSameLength(Object[] array1, Object[] array2) {
-        return (array1 != null || array2 == null || array2.length <= 0) && (array2 != null || array1 == null || array1.length <= 0) && (array1 == null || array2 == null || array1.length == array2.length);
+        return (array1 != null || array2 == null || array2.length <= 0)
+                && (array2 != null || array1 == null || array1.length <= 0)
+                && (array1 == null || array2 == null || array1.length == array2.length);
     }
 
     static Class<?>[] toClass(Object... array) {
@@ -45,25 +49,22 @@ public final class ReflectUtils {
         if (cls == null) {
             return null;
         } else {
-            LinkedHashSet<Class<?>> interfacesFound = new LinkedHashSet();
+            LinkedHashSet<Class<?>> interfacesFound = new LinkedHashSet<>();
             getAllInterfaces(cls, interfacesFound);
-            return new ArrayList(interfacesFound);
+            return new ArrayList<>(interfacesFound);
         }
     }
 
     private static void getAllInterfaces(Class<?> cls, HashSet<Class<?>> interfacesFound) {
         while(cls != null) {
             Class<?>[] interfaces = cls.getInterfaces();
-            Class[] var3 = interfaces;
-            int var4 = interfaces.length;
-
-            for(int var5 = 0; var5 < var4; ++var5) {
-                Class<?> i = var3[var5];
-                if (interfacesFound.add(i)) {
-                    getAllInterfaces(i, interfacesFound);
+            int length = interfaces.length;
+            for(int i = 0; i < length; ++i) {
+                Class<?> aClass = interfaces[i];
+                if (interfacesFound.add(aClass)) {
+                    getAllInterfaces(aClass, interfacesFound);
                 }
             }
-
             cls = cls.getSuperclass();
         }
 

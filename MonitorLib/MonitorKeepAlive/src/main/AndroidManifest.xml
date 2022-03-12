@@ -5,7 +5,7 @@
 
         <!-- 1 像素 Activity -->
         <activity
-            android:name="com.yc.alive.ui.KAOnePxActivity"
+            android:name="com.yc.alive.ui.AliveOnePxActivity"
             android:excludeFromRecents="true"
             android:exported="false"
             android:finishOnTaskLaunch="true"
@@ -13,11 +13,11 @@
             android:theme="@style/KAOnePxStyle" />
 
         <!-- 1 像素 服务 -->
-        <service android:name="com.yc.alive.service.KAOnePxService" />
+        <service android:name="com.yc.alive.service.AliveOnePxService" />
 
         <!-- 辅助功能 服务 -->
         <service
-            android:name="com.yc.alive.service.KAAccessibilityService"
+            android:name="com.yc.alive.service.AccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />

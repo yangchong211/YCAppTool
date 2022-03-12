@@ -9,12 +9,12 @@ import com.yc.alive.constant.AliveErrorConst.CODE;
 import com.yc.alive.constant.AliveSettingType.TYPE;
 import com.yc.alive.model.AliveIntentModel;
 import com.yc.alive.model.AliveOptionModel;
-import com.yc.alive.service.KAAccessibilityService;
-import com.yc.alive.service.KAOnePxService;
-import com.yc.alive.util.KAAppUtils;
-import com.yc.alive.util.KAExecutorUtils;
+import com.yc.alive.service.AccessibilityService;
+import com.yc.alive.service.AliveOnePxService;
+import com.yc.alive.util.AliveAppUtils;
+import com.yc.alive.util.AliveExecutorUtils;
 import com.yc.alive.util.AliveLogUtils;
-import com.yc.alive.util.KAPermissionUtils;
+import com.yc.alive.util.AlivePermissionUtils;
 
 import java.util.LinkedList;
 
@@ -29,7 +29,7 @@ import static com.yc.alive.constant.AliveSettingType.TYPE_FLOAT_WINDOW;
 import static com.yc.alive.constant.AliveSettingType.TYPE_NOTIFICATION;
 import static com.yc.alive.constant.AliveSettingType.TYPE_SELF_START;
 import static com.yc.alive.constant.AliveSettingType.TYPE_WIFI_NEVER_SLEEP;
-import static com.yc.alive.util.KAPermissionUtils.isFloatWindowEnabled;
+import static com.yc.alive.util.AlivePermissionUtils.isFloatWindowEnabled;
 
 /**
  * 自动助手管理类
@@ -80,7 +80,7 @@ public class AssistantManager {
             return;
         }
         mContext = context.getApplicationContext();
-        mAppName = KAAppUtils.getAppName(mContext);
+        mAppName = AliveAppUtils.getAppName(mContext);
         mIsInit = true;
     }
 
@@ -120,7 +120,7 @@ public class AssistantManager {
         if (notInit()) {
             return;
         }
-        KAOnePxService.launch(mContext);
+        AliveOnePxService.launch(mContext);
     }
 
     /**
@@ -130,7 +130,7 @@ public class AssistantManager {
         if (notInit()) {
             return false;
         }
-        return KAPermissionUtils.isAccessibilityServiceEnabled(mContext, KAAccessibilityService.class);
+        return AlivePermissionUtils.isAccessibilityServiceEnabled(mContext, AccessibilityService.class);
     }
 
     /**
@@ -140,7 +140,7 @@ public class AssistantManager {
         if (notInit()) {
             return false;
         }
-        return KAPermissionUtils.isWifiNeverSleepEnabled(mContext);
+        return AlivePermissionUtils.isWifiNeverSleepEnabled(mContext);
     }
 
     /**
@@ -150,7 +150,7 @@ public class AssistantManager {
         if (notInit()) {
             return false;
         }
-        return KAPermissionUtils.isNotificationEnabled(mContext);
+        return AlivePermissionUtils.isNotificationEnabled(mContext);
     }
 
     public AliveIntentModel getIntentModel(@TYPE int type) {
@@ -214,11 +214,11 @@ public class AssistantManager {
             case TYPE_ACCESSIBILITY_SERVICE: {
                 // 1. 获取辅助功能权限
                 boolean serviceEnabled =
-                    KAPermissionUtils.isAccessibilityServiceEnabled(mContext, KAAccessibilityService.class);
+                    AlivePermissionUtils.isAccessibilityServiceEnabled(mContext, AccessibilityService.class);
                 if (!serviceEnabled) {
                     // 没有辅助功能权限，去开启
                     AliveOptionManager.getInstance().setCurrentOption(option);
-                    boolean opened = KAAppUtils.open(mContext, option);
+                    boolean opened = AliveAppUtils.open(mContext, option);
                     if (!opened) {
                         processError(option.type, ERROR_CODE_OPEN_FAIL);
                     }
@@ -231,7 +231,7 @@ public class AssistantManager {
             }
             case TYPE_FLOAT_WINDOW: {
                 // 2. 获取悬浮窗权限
-                KAExecutorUtils.getInstance().runWorker(new KAExecutorUtils.KARunnable() {
+                AliveExecutorUtils.getInstance().runWorker(new AliveExecutorUtils.KARunnable() {
 
                     private boolean floatWindowEnabled;
 
@@ -239,7 +239,7 @@ public class AssistantManager {
                     public void runWorker() {
                         floatWindowEnabled = isFloatWindowEnabled(mContext);
                         if (!floatWindowEnabled) {
-                            KAAppUtils.sleep(1000);
+                            AliveAppUtils.sleep(1000);
                             floatWindowEnabled = isFloatWindowEnabled(mContext);
                         }
                     }
@@ -249,7 +249,7 @@ public class AssistantManager {
                         if (!floatWindowEnabled) {
                             // 没有悬浮窗权限，去开启
                             AliveOptionManager.getInstance().setCurrentOption(option);
-                            boolean opened = KAAppUtils.open(mContext, option);
+                            boolean opened = AliveAppUtils.open(mContext, option);
                             if (!opened) {
                                 processError(option.type, ERROR_CODE_OPEN_FAIL);
                             }
@@ -275,7 +275,7 @@ public class AssistantManager {
                     notifyBack();
                     return;
                 }
-                boolean opened = KAAppUtils.open(mContext, option);
+                boolean opened = AliveAppUtils.open(mContext, option);
                 if (!opened) {
                     processError(option.type, ERROR_CODE_OPEN_FAIL);
                 }
@@ -310,7 +310,7 @@ public class AssistantManager {
             case TYPE_ACCESSIBILITY_SERVICE: {
                 // 设置辅助开关后, 重新判断权限
                 boolean serviceEnabled =
-                    KAPermissionUtils.isAccessibilityServiceEnabled(mContext, KAAccessibilityService.class);
+                    AlivePermissionUtils.isAccessibilityServiceEnabled(mContext, AccessibilityService.class);
                 AliveLogUtils.d(TAG, "notifyBack serviceEnabled " + serviceEnabled);
                 if (serviceEnabled) {
                     // 获取权限成功，可以继续设置
@@ -339,7 +339,7 @@ public class AssistantManager {
                 break;
             }
             case TYPE_NOTIFICATION: {
-                boolean notificationEnabled = KAPermissionUtils.isNotificationEnabled(mContext);
+                boolean notificationEnabled = AlivePermissionUtils.isNotificationEnabled(mContext);
                 if (notificationEnabled) {
                     // 获取权限成功, 继续设置
                     processSuccess(type);
@@ -351,7 +351,7 @@ public class AssistantManager {
                 break;
             }
             case TYPE_WIFI_NEVER_SLEEP: {
-                boolean wifiNeverSleep = KAPermissionUtils.isWifiNeverSleepEnabled(mContext);
+                boolean wifiNeverSleep = AlivePermissionUtils.isWifiNeverSleepEnabled(mContext);
                 if (wifiNeverSleep) {
                     // 获取权限成功, 继续设置
                     processSuccess(type);

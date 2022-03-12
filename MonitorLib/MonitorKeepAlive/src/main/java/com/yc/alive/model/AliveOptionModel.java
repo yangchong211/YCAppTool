@@ -5,13 +5,13 @@ import androidx.annotation.StringRes;
 
 import com.yc.alive.constant.AliveSettingType;
 import com.yc.alive.constant.AliveSettingType.TYPE;
-import com.yc.alive.service.KAAccessibilityService;
+import com.yc.alive.service.AccessibilityService;
 import com.yc.alive.util.AliveLogUtils;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
- * 操作模型：用于记录 {@link KAAccessibilityService} 处理事件
+ * 操作模型：用于记录 {@link AccessibilityService} 处理事件
  */
 @RestrictTo(LIBRARY)
 public class AliveOptionModel implements Cloneable {

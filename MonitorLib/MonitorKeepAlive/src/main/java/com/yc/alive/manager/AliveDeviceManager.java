@@ -3,15 +3,15 @@ package com.yc.alive.manager;
 import androidx.annotation.RestrictTo;
 
 import com.yc.alive.model.AliveDeviceModel;
-import com.yc.alive.service.KAEmuiAccessibility;
-import com.yc.alive.service.KAMiuiAccessibility;
-import com.yc.alive.service.KAOppoAccessibility;
-import com.yc.alive.service.KASamsungAccessibility;
-import com.yc.alive.service.KASmartAccessibility;
-import com.yc.alive.service.KAVivoAccessibility;
+import com.yc.alive.service.EmuiAccessibility;
+import com.yc.alive.service.MiuiAccessibility;
+import com.yc.alive.service.OppoAccessibility;
+import com.yc.alive.service.SamsungAccessibility;
+import com.yc.alive.service.SmartAccessibility;
+import com.yc.alive.service.VivoAccessibility;
 import com.yc.alive.util.AliveLogUtils;
-import com.yc.alive.util.KARomUtils;
-import com.yc.alive.util.KASystemPropertiesUtils;
+import com.yc.alive.util.AliveRomUtils;
+import com.yc.alive.util.SystemPropertiesUtils;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 import static com.yc.alive.constant.AliveRomConst.SupportModel.EMUI_10;
@@ -68,23 +68,23 @@ public class AliveDeviceManager {
     }
 
     private void init() {
-        device.manufacturer = KASystemPropertiesUtils.BUILD_MANUFACTURER;
-        device.model = KASystemPropertiesUtils.BUILD_MODEL;
-        device.sdkInt = KASystemPropertiesUtils.BUILD_SDK_INT;
-        device.sdkStr = KASystemPropertiesUtils.BUILD_SDK_STR;
+        device.manufacturer = SystemPropertiesUtils.BUILD_MANUFACTURER;
+        device.model = SystemPropertiesUtils.BUILD_MODEL;
+        device.sdkInt = SystemPropertiesUtils.BUILD_SDK_INT;
+        device.sdkStr = SystemPropertiesUtils.BUILD_SDK_STR;
 
-        device.romOppoVersionName = KASystemPropertiesUtils.ROM_OPPO_VERSION_NAME;
+        device.romOppoVersionName = SystemPropertiesUtils.ROM_OPPO_VERSION_NAME;
 
-        device.romVivoVersionName = KASystemPropertiesUtils.ROM_VIVO_VERSION_NAME;
-        device.romVivoVersionCode = KASystemPropertiesUtils.ROM_VIVO_VERSION_CODE;
+        device.romVivoVersionName = SystemPropertiesUtils.ROM_VIVO_VERSION_NAME;
+        device.romVivoVersionCode = SystemPropertiesUtils.ROM_VIVO_VERSION_CODE;
 
-        device.romEmuiVersionName = KASystemPropertiesUtils.ROM_EMUI_VERSION_NAME;
-        device.romEmuiVersionCode = String.valueOf(KASystemPropertiesUtils.ROM_EMUI_VERSION_CODE);
+        device.romEmuiVersionName = SystemPropertiesUtils.ROM_EMUI_VERSION_NAME;
+        device.romEmuiVersionCode = String.valueOf(SystemPropertiesUtils.ROM_EMUI_VERSION_CODE);
 
-        device.romMiuiVersionName = KASystemPropertiesUtils.ROM_MIUI_VERSION_NAME;
-        device.romMiuiVersionCode = KASystemPropertiesUtils.ROM_MIUI_VERSION_CODE;
+        device.romMiuiVersionName = SystemPropertiesUtils.ROM_MIUI_VERSION_NAME;
+        device.romMiuiVersionCode = SystemPropertiesUtils.ROM_MIUI_VERSION_CODE;
 
-        device.romSmartisanVersionName = KASystemPropertiesUtils.ROM_SMARTISAN_VERSION_NAME;
+        device.romSmartisanVersionName = SystemPropertiesUtils.ROM_SMARTISAN_VERSION_NAME;
 
         AliveLogUtils.d(TAG, device.print());
 
@@ -124,25 +124,25 @@ public class AliveDeviceManager {
     }
 
     private void initSupport() {
-        if (KARomUtils.isOppo(device)) {
+        if (AliveRomUtils.isOppo(device)) {
             device.type = TYPE_OPPO;
             initOppo();
-        } else if (KARomUtils.isVivo(device)) {
+        } else if (AliveRomUtils.isVivo(device)) {
             device.type = TYPE_VIVO;
             initVivo();
-        } else if (KARomUtils.isEmui(device)) {
+        } else if (AliveRomUtils.isEmui(device)) {
             device.type = TYPE_EMUI;
             initEmui();
-        } else if (KARomUtils.isMiui(device)) {
+        } else if (AliveRomUtils.isMiui(device)) {
             device.type = TYPE_MIUI;
             initMiui();
-        } else if (KARomUtils.isSmart(device)) {
+        } else if (AliveRomUtils.isSmart(device)) {
             device.type = TYPE_SMART;
             initSmart();
-        } else if (KARomUtils.isSamsung(device)) {
+        } else if (AliveRomUtils.isSamsung(device)) {
             device.type = TYPE_SAMSUNG;
             initSamsung();
-        } else if (KARomUtils.isSunMi(device)) {
+        } else if (AliveRomUtils.isSunMi(device)) {
             device.type = TYPE_SAMSUNG;
             initSunMi();
         } else {
@@ -156,19 +156,19 @@ public class AliveDeviceManager {
         device.romVersionName = device.romOppoVersionName;
         if (OPPO_V3_0.equals(device.romOppoVersionName)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createOppoV3_0());
-            AliveOptionManager.getInstance().setAccessibility(new KAOppoAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new OppoAccessibility());
             sIsSupport = true;
         } else if (OPPP_V3_0_0.equals(device.romOppoVersionName)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createOppoV3_0_0());
-            AliveOptionManager.getInstance().setAccessibility(new KAOppoAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new OppoAccessibility());
             sIsSupport = true;
         } else if (OPPO_V3_2.equals(device.romOppoVersionName)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createOppoV3_2());
-            AliveOptionManager.getInstance().setAccessibility(new KAOppoAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new OppoAccessibility());
             sIsSupport = true;
         } else if (OPPO_V5_0.equals(device.romOppoVersionName)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createOppoV5_0());
-            AliveOptionManager.getInstance().setAccessibility(new KAOppoAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new OppoAccessibility());
             sIsSupport = true;
         } else {
             sIsSupport = false;
@@ -181,19 +181,19 @@ public class AliveDeviceManager {
         device.romVersionCode = device.romVivoVersionCode;
         if (VIVO_2_5.equals(device.romVivoVersionCode)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createVivo2_5());
-            AliveOptionManager.getInstance().setAccessibility(new KAVivoAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new VivoAccessibility());
             sIsSupport = true;
         } else if (VIVO_3_0.equals(device.romVivoVersionCode)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createVivoV3_0());
-            AliveOptionManager.getInstance().setAccessibility(new KAVivoAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new VivoAccessibility());
             sIsSupport = true;
         } else if (VIVO_3_1.equals(device.romVivoVersionCode)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createVivo3_1());
-            AliveOptionManager.getInstance().setAccessibility(new KAVivoAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new VivoAccessibility());
             sIsSupport = true;
         } else if (VIVO_4_0.equals(device.romVivoVersionCode)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createVivo4_0());
-            AliveOptionManager.getInstance().setAccessibility(new KAVivoAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new VivoAccessibility());
             sIsSupport = true;
         } else {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createOppoDefault());
@@ -206,23 +206,23 @@ public class AliveDeviceManager {
         device.romVersionCode = device.romEmuiVersionCode;
         if (EMUI_10.equals(device.romEmuiVersionCode)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createEMUIV10());
-            AliveOptionManager.getInstance().setAccessibility(new KAEmuiAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new EmuiAccessibility());
             sIsSupport = true;
         } else if (EMUI_11.equals(device.romEmuiVersionCode)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createEMUIV11());
-            AliveOptionManager.getInstance().setAccessibility(new KAEmuiAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new EmuiAccessibility());
             sIsSupport = true;
         } else if (EMUI_13.equals(device.romEmuiVersionCode)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createEMUIV13());
-            AliveOptionManager.getInstance().setAccessibility(new KAEmuiAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new EmuiAccessibility());
             sIsSupport = true;
         } else if (EMUI_14.equals(device.romEmuiVersionCode)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createEMUIV14());
-            AliveOptionManager.getInstance().setAccessibility(new KAEmuiAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new EmuiAccessibility());
             sIsSupport = true;
         } else if (EMUI_15.equals(device.romEmuiVersionCode)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createEMUIV15());
-            AliveOptionManager.getInstance().setAccessibility(new KAEmuiAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new EmuiAccessibility());
             sIsSupport = true;
         } else {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createEMUIDefault());
@@ -234,7 +234,7 @@ public class AliveDeviceManager {
         device.romVersionName = device.romMiuiVersionName;
         device.romVersionCode = String.valueOf(device.romMiuiVersionCode);
         if (MIUI_V9.equals(device.romMiuiVersionName)) {
-            AliveOptionManager.getInstance().setAccessibility(new KAMiuiAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new MiuiAccessibility());
             if (MIUI_V9_MIX_2.equals(device.model)) {
                 device.romVersionName = MIUI_V9_MIX_2;
                 AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createMIUIV9_MIX_2());
@@ -258,11 +258,11 @@ public class AliveDeviceManager {
         device.romVersionName = device.romSmartisanVersionName;
         if (device.romSmartisanVersionName.startsWith(SMART_V2_5)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createSmartV2_5());
-            AliveOptionManager.getInstance().setAccessibility(new KASmartAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new SmartAccessibility());
             sIsSupport = true;
         } else if (device.romSmartisanVersionName.startsWith(SMART_V4_2)) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createSmartV4_2());
-            AliveOptionManager.getInstance().setAccessibility(new KASmartAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new SmartAccessibility());
             sIsSupport = true;
         } else {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createSmartDefault());
@@ -273,7 +273,7 @@ public class AliveDeviceManager {
     private void initSamsung() {
         if (SAMSUNG_24.equals(String.valueOf(device.sdkInt))) {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createSamsungV24());
-            AliveOptionManager.getInstance().setAccessibility(new KASamsungAccessibility());
+            AliveOptionManager.getInstance().setAccessibility(new SamsungAccessibility());
             sIsSupport = true;
         } else {
             AliveOptionManager.getInstance().initOptions(AliveOptionFactory.createSamsungDefault());
