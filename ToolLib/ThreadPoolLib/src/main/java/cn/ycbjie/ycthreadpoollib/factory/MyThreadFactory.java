@@ -80,9 +80,11 @@ public class MyThreadFactory implements ThreadFactory {
         Thread thread = new Thread(runnable);
         // 设置线程优先级
         thread.setPriority(priority);
+        //获取线程id
+        long threadId = thread.getId();
         if (name != null && name.length() > 0) {
             //设置名称
-            thread.setName(this.name + "#" + this.mCount.getAndIncrement());
+            thread.setName(this.name + "#" + this.mCount.getAndIncrement() + "-id:" + threadId);
         }
         return thread;
     }

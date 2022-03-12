@@ -69,6 +69,7 @@ public final class PoolThread implements Executor {
     private final Executor defDeliver;
     /**
      * 确保多线程配置没有冲突
+     * ThreadLocal是线程内部的数据存储类，通过它可以在指定线程中存储数据，其他线程则无法获取到
      */
     private ThreadLocal<ThreadConfigs> local;
 

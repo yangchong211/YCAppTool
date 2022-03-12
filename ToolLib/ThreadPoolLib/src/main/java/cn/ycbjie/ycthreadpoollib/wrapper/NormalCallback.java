@@ -34,6 +34,9 @@ import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
 
     private final ThreadCallback callback;
     private final AsyncCallback async;
+    /**
+     * Executor
+     */
     private final Executor deliver;
 
     NormalCallback(ThreadCallback callback, Executor deliver, AsyncCallback async) {

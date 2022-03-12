@@ -32,7 +32,7 @@ import java.util.concurrent.Executor;
  */
 public final class JavaDeliver implements Executor {
 
-    private static JavaDeliver instance = new JavaDeliver();
+    private static final JavaDeliver instance = new JavaDeliver();
 
     /**
      * 使用单利模式获取对象

@@ -25,6 +25,7 @@ public final class HandlerThreadFactory {
         private final Handler handler;
 
         public HandlerThreadWrapper(String threadName) {
+            //创建一个有自带looper的线程
             HandlerThread handlerThread = new HandlerThread("BlockCanary-" + threadName);
             handlerThread.start();
             handler = new Handler(handlerThread.getLooper());

@@ -35,8 +35,10 @@ public class LoggerUtils {
     private static final Pattern DEFAULT_LOG_FILE_NAME_REGEX_PATTERN =
             Pattern.compile("^(logback|binary)-(\\w+)-(\\d{4}-\\d{2}-\\d{2})-(\\d{1,3})\\.log");
 
-
-    private static ThreadLocal<DateFormat> sDateFormatThreadLocal = new ThreadLocal<DateFormat>() {
+    /**
+     * ThreadLocal是线程内部的数据存储类，通过它可以在指定线程中存储数据，其他线程则无法获取到
+     */
+    private static final ThreadLocal<DateFormat> sDateFormatThreadLocal = new ThreadLocal<DateFormat>() {
         @Override
         protected DateFormat initialValue() {
             return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault());
@@ -149,7 +151,11 @@ public class LoggerUtils {
     }
 
     public static String formatForLogHead(final Date date) {
-        return sDateFormatThreadLocal.get().format(date.getTime());
+        DateFormat dateFormat = sDateFormatThreadLocal.get();
+        if (dateFormat == null){
+            return "";
+        }
+        return dateFormat.format(date.getTime());
     }
 
     public static String formatFileSize(long size) {
