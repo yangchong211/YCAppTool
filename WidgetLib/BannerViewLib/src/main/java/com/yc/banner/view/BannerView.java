@@ -531,8 +531,10 @@ public class BannerView extends FrameLayout implements ViewPager.OnPageChangeLis
             int action = ev.getAction();
             if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL
                     || action == MotionEvent.ACTION_OUTSIDE) {
+                //手指抬起，结束，滑动到外面，开始轮播图
                 startAutoPlay();
             } else if (action == MotionEvent.ACTION_DOWN) {
+                //手指触摸的时候，停止轮播图
                 stopAutoPlay();
             }
         }

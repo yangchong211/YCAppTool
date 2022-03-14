@@ -62,7 +62,6 @@ public class NotifyContainerView extends FrameLayout {
                 mLastY = event.getY();
                 mIsConsumeTouchEvent = false;
                 break;
-
             case MotionEvent.ACTION_MOVE:
                 if (mIsConsumeTouchEvent) {
                     break;
@@ -75,6 +74,7 @@ public class NotifyContainerView extends FrameLayout {
                             mOnDismissListener.onDismiss();
                         }
                         mIsConsumeTouchEvent = true;
+                        //表示自己消费事件
                         return true;
                     }
                 }

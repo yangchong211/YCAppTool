@@ -30,6 +30,8 @@ dependencies {
   implementation(rootProject.ext.dependencies["annotation"])
   api project(path: ':LeakWatcher')
   implementation 'com.squareup.haha:haha:2.0.3'
+
+  testImplementation 'junit:junit:4.12'
 }
 
 

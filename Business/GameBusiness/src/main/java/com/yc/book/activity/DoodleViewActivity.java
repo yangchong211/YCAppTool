@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
 import com.yc.book.weight.doodleView.DoodleView;
 
 import com.yc.library.base.mvp.BaseActivity;

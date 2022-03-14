@@ -176,7 +176,7 @@ public class UploadLeakService extends DisplayLeakService {
     }
 
     @SuppressLint("MemberName")
-    public class Entity {
+    public static class Entity {
 
         private String htmlText;
 

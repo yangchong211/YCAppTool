@@ -47,8 +47,10 @@ public class BannerViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        //拦截事件
         if(this.scrollable) {
             if (getCurrentItem() == 0 && getChildCount() == 0) {
+                //当前ViewGroup不准备拦截该事件，事件正常向下分发给其child
                 return false;
             }
             //捕获滑动过程中，和其他控件组合起来用时，可能出现的异常

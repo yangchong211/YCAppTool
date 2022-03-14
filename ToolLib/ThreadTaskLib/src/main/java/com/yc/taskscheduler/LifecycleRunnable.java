@@ -26,7 +26,6 @@ public class LifecycleRunnable implements Runnable {
         mLifecycleObserver = new GenericLifecycleObserver() {
             @Override
             public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
-
                 if(event == targetEvent) {
                     if(mLifecycleOwner!=null ) {
                         mLifecycleOwner.getLifecycle().removeObserver(this);

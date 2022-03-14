@@ -45,26 +45,56 @@ public class CustomBuilderImpl extends AbsThreadPoolBuilder<ExecutorService> {
         return ThreadPoolType.CUSTOM;
     }
 
+    /**
+     * 线程池中核心线程的数量
+     *
+     * @param corePoolSize
+     * @return
+     */
     public CustomBuilderImpl corePoolSize(int corePoolSize) {
         this.mCorePoolSize = corePoolSize;
         return this;
     }
 
+    /**
+     * 线程池中的最大线程数，当任务数量超过最大线程数时其它任务可能就会被阻塞
+     *
+     * @param maximumPoolSize
+     * @return
+     */
     public CustomBuilderImpl maximumPoolSize(int maximumPoolSize) {
         this.mMaximumPoolSize = maximumPoolSize;
         return this;
     }
 
+    /**
+     * 非核心线程的超时时长，当执行时间超过这个时间时，非核心线程就会被回收
+     *
+     * @param keepAliveTime
+     * @return
+     */
     public CustomBuilderImpl keepAliveTime(long keepAliveTime) {
         this.mKeepAliveTime = keepAliveTime;
         return this;
     }
 
+    /**
+     * 枚举时间单位
+     *
+     * @param unit
+     * @return
+     */
     public CustomBuilderImpl unit(TimeUnit unit) {
         this.mUnit = unit;
         return this;
     }
 
+    /**
+     * 线程池中的任务队列，我们提交给线程池的runnable会被存储在这个对象上
+     *
+     * @param workQueue
+     * @return
+     */
     public CustomBuilderImpl workQueue(BlockingQueue<Runnable> workQueue) {
         this.mWorkQueue = workQueue;
         return this;
