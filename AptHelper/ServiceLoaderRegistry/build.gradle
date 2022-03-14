@@ -1,0 +1,20 @@
+apply plugin: 'java'
+//迁移到jitpack
+apply plugin: 'com.github.dcendents.android-maven'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+
+}
+
+

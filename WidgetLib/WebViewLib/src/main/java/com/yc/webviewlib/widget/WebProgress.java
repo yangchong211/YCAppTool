@@ -198,7 +198,12 @@ public class WebProgress extends FrameLayout {
      * @param color                     颜色
      */
     public void setColor(String color) {
-        this.setColor(Color.parseColor(color));
+        try {
+            int parseColor = Color.parseColor(color);
+            this.setColor(parseColor);
+        } catch (IllegalArgumentException exception){
+            exception.printStackTrace();
+        }
     }
 
     /**
@@ -230,35 +235,65 @@ public class WebProgress extends FrameLayout {
 
     /**
      * 测量方法
+     * MeasureSpec由两部分组成，一部分是测量模式，另一部分是测量的尺寸大小
      * @param widthMeasureSpec                  widthMeasureSpec
      * @param heightMeasureSpec                 heightMeasureSpec
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        //获取宽高的测量模式
         int wMode = MeasureSpec.getMode(widthMeasureSpec);
         int hMode = MeasureSpec.getMode(heightMeasureSpec);
+        //获取测量到的尺寸大小，获取View的宽/高
         int w = MeasureSpec.getSize(widthMeasureSpec);
         int h = MeasureSpec.getSize(heightMeasureSpec);
 
+        //UNSPECIFIED ：不对View进行任何限制，要多大给多大，一般用于系统内部
+        //EXACTLY：对应LayoutParams中的match_parent和具体数值这两种模式。
+        //AT_MOST ：对应LayoutParams中的wrap_content
         if (wMode == MeasureSpec.AT_MOST) {
             DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
-            w = w <= displayMetrics.widthPixels ? w : displayMetrics.widthPixels;
+            int metrics = displayMetrics.widthPixels;
+            w = (w <= metrics ? w : displayMetrics.widthPixels);
         }
         if (hMode == MeasureSpec.AT_MOST) {
             h = mTargetHeight;
         }
+        //指定View的宽高，完成测量工作
         this.setMeasuredDimension(w, h);
     }
 
+    /**
+     * ①绘制背景 background.draw(canvas)
+     * ②绘制自己（onDraw）
+     * ③绘制Children(dispatchDraw)
+     * ④绘制装饰（onDrawScrollBars）
+     * @param canvas        canvas
+     */
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+    }
+
+    /**
+     * ②绘制自己（onDraw）
+     * @param canvas        canvas
+     */
     @Override
     protected void onDraw(Canvas canvas) {
 
     }
 
+    /**
+     * ③绘制Children(dispatchDraw)
+     * @param canvas        canvas
+     */
     @Override
     protected void dispatchDraw(Canvas canvas) {
+        //绘制线
+        int width = this.getWidth();
         canvas.drawRect(0, 0,
-                mCurrentProgress / 100 * Float.valueOf(this.getWidth()), this.getHeight(), mPaint);
+                mCurrentProgress / 100 * Float.valueOf(width), this.getHeight(), mPaint);
     }
 
     @Override

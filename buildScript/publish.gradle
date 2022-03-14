@@ -1,0 +1,33 @@
+
+/**
+ * publish库
+ */
+
+apply plugin: 'maven-publish'
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+                // You can then customize attributes of the publication as shown below.
+                groupId = "com.yc.player"
+                artifactId = "VideoPlayer"
+                version = '1.0.6'
+            }
+        }
+        repositories {
+            maven {
+                name = "yc"
+                allowInsecureProtocol true
+                credentials {
+                    //上传lib到私服上的用户名和密码
+                    username = "develop"
+                    password = "develop123"
+                }
+                url = "这里写上公司的服务地址"
+            }
+        }
+    }
+}

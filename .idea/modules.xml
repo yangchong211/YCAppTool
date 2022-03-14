@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/AnimBusiness/Business.LifeHelper.AnimBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/AnimBusiness/Business.LifeHelper.AnimBusiness.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CommonLib/AppBaseStore/CommonLib.LifeHelper.AppBaseStore.iml" filepath="$PROJECT_DIR$/.idea/modules/CommonLib/AppBaseStore/CommonLib.LifeHelper.AppBaseStore.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LifeHelper.iml" filepath="$PROJECT_DIR$/.idea/modules/LifeHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToolLib/AnimatorToolLib/LifeHelper.AnimatorToolLib.iml" filepath="$PROJECT_DIR$/.idea/modules/ToolLib/AnimatorToolLib/LifeHelper.AnimatorToolLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CommonLib/AppStartLib/LifeHelper.AppStartLib.iml" filepath="$PROJECT_DIR$/.idea/modules/CommonLib/AppStartLib/LifeHelper.AppStartLib.iml" />
@@ -26,6 +27,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ImageServer/LifeHelper.ImageServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ImageServer/LifeHelper.ImageServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hermes/LifeHelper.IpcServer.iml" filepath="$PROJECT_DIR$/.idea/modules/hermes/LifeHelper.IpcServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/library/LifeHelper.LargeImageLib.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/library/LifeHelper.LargeImageLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/leakcanary-analyzer/LifeHelper.leakcanary-analyzer.iml" filepath="$PROJECT_DIR$/.idea/modules/leakcanary-analyzer/LifeHelper.leakcanary-analyzer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/leakcanary-android/LifeHelper.LeakAndroid.iml" filepath="$PROJECT_DIR$/.idea/modules/leakcanary-android/LifeHelper.LeakAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LeakCanarySdk/LifeHelper.LeakCanarySdk.iml" filepath="$PROJECT_DIR$/.idea/modules/LeakCanarySdk/LifeHelper.LeakCanarySdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/leakcanary-watcher/LifeHelper.LeakWatcher.iml" filepath="$PROJECT_DIR$/.idea/modules/leakcanary-watcher/LifeHelper.LeakWatcher.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LeetBusiness/LifeHelper.LeetBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/LeetBusiness/LifeHelper.LeetBusiness.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" filepath="$PROJECT_DIR$/.idea/modules/common/LibraryLayer/LifeHelper.LibraryLayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToolLib/LocaleHelperLib/LifeHelper.LocaleHelperLib.iml" filepath="$PROJECT_DIR$/.idea/modules/ToolLib/LocaleHelperLib/LifeHelper.LocaleHelperLib.iml" />
@@ -47,6 +52,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/LifeHelper.PhotoWidget.iml" filepath="$PROJECT_DIR$/.idea/modules/widget/PhotoWidget/LifeHelper.PhotoWidget.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToolLib/SerialTaskLib/LifeHelper.SerialTaskLib.iml" filepath="$PROJECT_DIR$/.idea/modules/ToolLib/SerialTaskLib/LifeHelper.SerialTaskLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ServerInterface/LifeHelper.ServerInterface.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ServerInterface/LifeHelper.ServerInterface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AptHelper/ServiceLoaderAnnotations/LifeHelper.ServiceLoaderAnnotations.iml" filepath="$PROJECT_DIR$/.idea/modules/AptHelper/ServiceLoaderAnnotations/LifeHelper.ServiceLoaderAnnotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/loader/LifeHelper.ServiceLoaderApi.iml" filepath="$PROJECT_DIR$/.idea/modules/loader/LifeHelper.ServiceLoaderApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AptHelper/ServiceLoaderPlugin/LifeHelper.ServiceLoaderPlugin.iml" filepath="$PROJECT_DIR$/.idea/modules/AptHelper/ServiceLoaderPlugin/LifeHelper.ServiceLoaderPlugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/service/LifeHelper.ServiceLoaderProcessor.iml" filepath="$PROJECT_DIR$/.idea/modules/service/LifeHelper.ServiceLoaderProcessor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/registry/LifeHelper.ServiceLoaderRegistry.iml" filepath="$PROJECT_DIR$/.idea/modules/registry/LifeHelper.ServiceLoaderRegistry.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ShareServer/LifeHelper.ShareServer.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ShareServer/LifeHelper.ShareServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToolLib/SocketIoLib/LifeHelper.SocketIoLib.iml" filepath="$PROJECT_DIR$/.idea/modules/ToolLib/SocketIoLib/LifeHelper.SocketIoLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/WidgetLib/StatusBarLib/LifeHelper.StatusBarLib.iml" filepath="$PROJECT_DIR$/.idea/modules/WidgetLib/StatusBarLib/LifeHelper.StatusBarLib.iml" />
@@ -63,7 +73,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/ZxingServer/LifeHelper.ZxingServerLib.iml" filepath="$PROJECT_DIR$/.idea/modules/server/ZxingServer/LifeHelper.ZxingServerLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-compiler/LifeHelper.api-compiler.iml" filepath="$PROJECT_DIR$/.idea/modules/api-compiler/LifeHelper.api-compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-manager/LifeHelper.api-manager.iml" filepath="$PROJECT_DIR$/.idea/modules/api-manager/LifeHelper.api-manager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-plugin/LifeHelper.api-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/api-plugin/LifeHelper.api-plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/WidgetLib/YCDialogLib/WidgetLib.LifeHelper.YCDialogLib.iml" filepath="$PROJECT_DIR$/.idea/modules/WidgetLib/YCDialogLib/WidgetLib.LifeHelper.YCDialogLib.iml" />
     </modules>

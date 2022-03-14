@@ -65,5 +65,6 @@ dependencies {
 
     implementation project(path: ':api-manager')
     implementation project(path: ':api-compiler')
+    implementation project(path: ':ServiceLoaderAnnotations')
     annotationProcessor project(path: ':api-compiler')
 }

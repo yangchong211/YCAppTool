@@ -4,9 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
-import com.yc.api.getIt.ServiceProvider;
-
-import java.util.ServiceLoader;
+import com.yc.spi.annotation.ServiceProvider;
+import com.yc.spi.loader.ServiceLoader;
 
 
 /**
@@ -23,81 +22,53 @@ public class LaunchApplicationListener extends AbstractLifecycleListener {
 
     @Override
     public void attachBaseContext(Context base) {
-        try {
-            for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
-                applicationLifecycleListener.attachBaseContext(base);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+            applicationLifecycleListener.attachBaseContext(base);
         }
     }
 
     @Override
     public void onConfigurationChanged(Application app, Configuration config) {
-        try {
-            for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
-                applicationLifecycleListener.onConfigurationChanged(app, config);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+            applicationLifecycleListener.onConfigurationChanged(app, config);
         }
     }
 
     @Override
     public void onCreate(Application app) {
-        try {
-            for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
-                applicationLifecycleListener.onCreate(app);
-            }
-            for (AppLifecycleListener appLifecycleListener : mAppListener) {
-                appLifecycleListener.onCreate(app);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+            applicationLifecycleListener.onCreate(app);
+        }
+        for (AppLifecycleListener appLifecycleListener : mAppListener) {
+            appLifecycleListener.onCreate(app);
         }
         dispatcherOnCreate(app);
     }
 
     @Override
     public void onLowMemory(Application app) {
-        try {
-            for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
-                applicationLifecycleListener.onLowMemory(app);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+            applicationLifecycleListener.onLowMemory(app);
         }
     }
 
     @Override
     public void onTerminate(Application app) {
-        try {
-            for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
-                applicationLifecycleListener.onTerminate(app);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+            applicationLifecycleListener.onTerminate(app);
         }
     }
 
     @Override
     public void onTrimMemory(Application app, int level) {
-        try {
-            for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
-                applicationLifecycleListener.onTrimMemory(app, level);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+            applicationLifecycleListener.onTrimMemory(app, level);
         }
     }
 
     private void dispatcherOnCreate(Application app) {
-        try {
-            for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
-                applicationLifecycleListener.onCreate(app);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+            applicationLifecycleListener.onCreate(app);
         }
     }
 

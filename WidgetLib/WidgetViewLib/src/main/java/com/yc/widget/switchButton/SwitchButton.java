@@ -123,6 +123,7 @@ public class SwitchButton extends View {
         colorOff = newColorOff;
         colorOffDark = newColorOffDark;
         colorShadow = newColorShadow;
+        //刷新
         invalidate();
     }
 

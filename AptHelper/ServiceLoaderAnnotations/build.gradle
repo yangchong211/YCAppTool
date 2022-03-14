@@ -1,0 +1,13 @@
+apply plugin: 'java-library'
+//迁移到jitpack
+apply plugin: 'com.github.dcendents.android-maven'
+
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+

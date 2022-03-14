@@ -1,0 +1,23 @@
+apply plugin: 'java'
+//迁移到jitpack
+apply plugin: 'com.github.dcendents.android-maven'
+
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+    implementation 'com.google.auto.service:auto-service:1.0-rc3'
+    implementation 'com.squareup:javapoet:1.7.0'
+    implementation project(':ServiceLoaderAnnotations')
+    implementation project(':ServiceLoaderApi')
+}
+

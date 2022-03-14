@@ -52,7 +52,7 @@ public class CountDownView extends View {
     /**
      * 上下文
      */
-    private Context mContext;
+    private final Context mContext;
     /**
      * 背景画笔
      */
@@ -68,15 +68,15 @@ public class CountDownView extends View {
     /**
      * 圆弧绘制方式（增加和减少）
      */
-    private int mRetreatType;
+    private final int mRetreatType;
     /**
      * 最外层圆弧的宽度
      */
-    private float mPaintArcWidth;
+    private final float mPaintArcWidth;
     /**
      * 圆圈的半径
      */
-    private int mCircleRadius;
+    private final int mCircleRadius;
     /**
      * 初始值
      */
@@ -100,7 +100,7 @@ public class CountDownView extends View {
     /**
      * 字体大小
      */
-    private int mTextSize;
+    private final int mTextSize;
     /**
      * 从哪个位置开始
      */
@@ -271,7 +271,7 @@ public class CountDownView extends View {
         canvas.drawArc(rectF, startAngle, mSweepAngle, false, mPaintArc);
         //画文字
         float mTextWidth = mPaintText.measureText(mText, 0, mText.length());
-        float dx = mWidth / 2 - mTextWidth / 2;
+        float dx = (mWidth / 2) - mTextWidth / 2;
         Paint.FontMetricsInt fontMetricsInt = mPaintText.getFontMetricsInt();
         float dy = (fontMetricsInt.bottom - fontMetricsInt.top) / 2 - fontMetricsInt.bottom;
         float baseLine = mHeight / 2 + dy;
@@ -290,6 +290,7 @@ public class CountDownView extends View {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 mSweepAngle = (float) valueAnimator.getAnimatedValue();
                 //获取到需要绘制的角度，重新绘制
+                //在UI线程自身中使用
                 invalidate();
             }
         });

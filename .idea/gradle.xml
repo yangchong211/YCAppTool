@@ -10,15 +10,20 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AptHelper/ServiceLoaderAnnotations" />
+            <option value="$PROJECT_DIR$/AptHelper/ServiceLoaderApi" />
+            <option value="$PROJECT_DIR$/AptHelper/ServiceLoaderPlugin" />
+            <option value="$PROJECT_DIR$/AptHelper/ServiceLoaderProcessor" />
+            <option value="$PROJECT_DIR$/AptHelper/ServiceLoaderRegistry" />
             <option value="$PROJECT_DIR$/AptHelper/api-compiler" />
             <option value="$PROJECT_DIR$/AptHelper/api-manager" />
-            <option value="$PROJECT_DIR$/AptHelper/api-plugin" />
             <option value="$PROJECT_DIR$/Business/AnimBusiness" />
             <option value="$PROJECT_DIR$/Business/BusinessInterface" />
             <option value="$PROJECT_DIR$/Business/DemoBusiness" />
             <option value="$PROJECT_DIR$/Business/GameBusiness" />
             <option value="$PROJECT_DIR$/Business/LeetBusiness" />
             <option value="$PROJECT_DIR$/Business/VideoBusiness" />
+            <option value="$PROJECT_DIR$/CommonLib/AppBaseStore" />
             <option value="$PROJECT_DIR$/CommonLib/AppStartLib" />
             <option value="$PROJECT_DIR$/CommonLib/AppStatusLib" />
             <option value="$PROJECT_DIR$/CommonLib/ApplicationLib" />
@@ -26,6 +31,10 @@
             <option value="$PROJECT_DIR$/CommonLib/ConfigLayer" />
             <option value="$PROJECT_DIR$/CommonLib/LibraryLayer" />
             <option value="$PROJECT_DIR$/CommonLib/ToolUtilsLib" />
+            <option value="$PROJECT_DIR$/MonitorLib/LeakAnalyzer" />
+            <option value="$PROJECT_DIR$/MonitorLib/LeakAndroid" />
+            <option value="$PROJECT_DIR$/MonitorLib/LeakCanarySdk" />
+            <option value="$PROJECT_DIR$/MonitorLib/LeakWatcher" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorAliveLib" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorAnrLib" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorCatonLib" />

@@ -3,6 +3,7 @@ package com.yc.lifehelper;
 import android.content.Context;
 import android.util.Log;
 
+import com.yc.memoryleakupload.DMemoryLeak;
 import com.yc.alive.KeepAliveHelper;
 import com.yc.applicationlib.activity.ActivityManager;
 import com.yc.appstatuslib.AppStatusManager;
@@ -19,7 +20,6 @@ import com.yc.library.base.app.LibApplication;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.toollib.crash.CrashHandler;
 import com.yc.toollib.crash.CrashListener;
-import com.yc.toollib.crash.CrashToolUtils;
 import com.yc.toolutils.AppToolUtils;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.logger.AppLogUtils;
@@ -58,6 +58,7 @@ public class MainApplication extends LibApplication {
         AppToolUtils.init(this);
         ActivityManager.getInstance().init(this);
         KeepAliveHelper.init(this);
+        DMemoryLeak.installLeakCanary(this,true);
     }
 
     @Override

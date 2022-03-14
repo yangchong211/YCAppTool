@@ -16,61 +16,61 @@ import java.io.File;
 class ResourceCollect {
 
     private Handler mHandler;
-    private AppStatusManager mResourceManager;
+    private final AppStatusManager mResourceManager;
     private HandlerThread mHandlerThread;
-    private FormatStrategy mFormatStrategy;
-    private int mInterval;
-    private TraceLogListener mTraceLog;
+    private final FormatStrategy mFormatStrategy;
+    private final int mInterval;
+    private final TraceLogListener mTraceLog;
     private static final int MESSAGE_WHAT = 520;
 
     ResourceCollect(ResourceCollect.Builder builder) {
-        this.mResourceManager = builder.manager;
-        this.mFormatStrategy = builder.formatStrategy;
-        this.mTraceLog = builder.traceLog;
-        this.mInterval = builder.interval;
+        mResourceManager = builder.manager;
+        mFormatStrategy = builder.formatStrategy;
+        mTraceLog = builder.traceLog;
+        mInterval = builder.interval;
     }
 
     void init() {
-        this.mHandlerThread = new HandlerThread("resource-collect-thread");
-        this.mHandlerThread.start();
-        this.mHandler = new Handler(this.mHandlerThread.getLooper()) {
+        mHandlerThread = new HandlerThread("resource-collect-thread");
+        mHandlerThread.start();
+        mHandler = new Handler(mHandlerThread.getLooper()) {
             public void handleMessage(Message msg) {
                 if (msg!=null && msg.what == MESSAGE_WHAT){
                     ResourceCollect.this.collection();
                 }
             }
         };
-        Message message = this.mHandler.obtainMessage();
+        Message message = mHandler.obtainMessage();
         message.what = MESSAGE_WHAT;
-        this.mHandler.sendMessageDelayed(message, (long)this.mInterval);
+        mHandler.sendMessageDelayed(message, (long)mInterval);
     }
 
     private void collection() {
-        this.mHandler.removeCallbacksAndMessages((Object)null);
+        mHandler.removeCallbacksAndMessages((Object)null);
         CollectionInfo collectionInfo = CollectionInfo.builder(
-                this.mResourceManager.getBatteryInfo(), this.mResourceManager.getAppStatus());
-        this.mFormatStrategy.log(collectionInfo);
-        if (this.mTraceLog != null) {
-            this.mTraceLog.log(collectionInfo);
+                mResourceManager.getBatteryInfo(), mResourceManager.getAppStatus());
+        mFormatStrategy.log(collectionInfo);
+        if (mTraceLog != null) {
+            mTraceLog.log(collectionInfo);
         }
-        Message message = this.mHandler.obtainMessage();
+        Message message = mHandler.obtainMessage();
         message.what = MESSAGE_WHAT;
-        this.mHandler.sendMessageDelayed(message, (long)this.mInterval);
+        mHandler.sendMessageDelayed(message, (long)mInterval);
     }
 
     void sendCollectionMsg() {
-        this.mHandler.sendEmptyMessage(MESSAGE_WHAT);
+        mHandler.sendEmptyMessage(MESSAGE_WHAT);
     }
 
     void destroy() {
-        if (this.mHandler != null) {
-            this.mHandler.removeCallbacksAndMessages((Object)null);
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages((Object)null);
         }
-        if (this.mHandlerThread != null) {
+        if (mHandlerThread != null) {
             if (VERSION.SDK_INT >= 18) {
-                this.mHandlerThread.quitSafely();
+                mHandlerThread.quitSafely();
             } else {
-                this.mHandlerThread.quit();
+                mHandlerThread.quit();
             }
         }
     }
@@ -112,14 +112,12 @@ class ResourceCollect {
         }
 
         ResourceCollect builder() {
-            if (this.interval == 0) {
-                this.interval = 60000;
+            if (interval == 0) {
+                interval = 60000;
             }
-
-            if (this.formatStrategy == null) {
-                this.formatStrategy = new CsvFormatLog(this.file);
+            if (formatStrategy == null) {
+                formatStrategy = new CsvFormatLog(file);
             }
-
             return new ResourceCollect(this);
         }
     }

@@ -1,6 +1,7 @@
 package com.yc.animbusiness;
 
-import com.yc.api.getIt.ServiceProviderInterface;
+
+import com.yc.spi.annotation.ServiceProviderInterface;
 
 @ServiceProviderInterface
 public interface IAnimProvider {

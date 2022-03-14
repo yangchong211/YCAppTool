@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'org.javassist:javassist:3.18.2-GA'
+    implementation 'com.squareup:javapoet:1.7.0'
+    implementation 'com.android.tools.build:gradle:3.0.0'
+    implementation project(path: ':ServiceLoaderApi')
+    implementation project(':ServiceLoaderAnnotations')
+}
+

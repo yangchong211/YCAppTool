@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.memoryleakupload">
+
+    <application>
+        <service android:name="com.yc.memoryleakupload.UploadLeakService"/>
+        <service
+            android:name="com.yc.memoryleakupload.SelfKillService"
+            android:process=":leakcanary"
+            />
+    </application>
+</manifest>

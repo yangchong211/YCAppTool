@@ -16,6 +16,7 @@ project(':BusinessInterface').projectDir = new File('Business/BusinessInterface'
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib'
+//        ':signal-hooker'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -25,11 +26,11 @@ project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
 project(':ServerInterface').projectDir = new File('ServerLib/ServerInterface')
 project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
 project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')
-
+//project(':signal-hooker').projectDir = new File('ServerLib/signal-hooker')
 
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
-        'ComponentLib',':ApplicationLib',':AppStartLib'
+        'ComponentLib',':ApplicationLib',':AppStartLib',':AppBaseStore'
 project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
@@ -37,6 +38,7 @@ project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
 project(':AppStartLib').projectDir = new File('CommonLib/AppStartLib')
+project(':AppBaseStore').projectDir = new File('CommonLib/AppBaseStore')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -82,16 +84,23 @@ project(':ThreadTaskLib').projectDir = new File('ToolLib/ThreadTaskLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
-include ':api-compiler',':api-manager',':api-plugin'
+include ':api-compiler',':api-manager',
+        ':ServiceLoaderApi', ':ServiceLoaderAnnotations', ':ServiceLoaderRegistry',
+        ':ServiceLoaderPlugin', ':ServiceLoaderProcessor'
 project(':api-compiler').projectDir = new File('AptHelper/api-compiler')
 project(':api-manager').projectDir = new File('AptHelper/api-manager')
-project(':api-plugin').projectDir = new File('AptHelper/api-plugin')
+project(':ServiceLoaderApi').projectDir = new File('AptHelper/ServiceLoaderApi')
+project(':ServiceLoaderAnnotations').projectDir = new File('AptHelper/ServiceLoaderAnnotations')
+project(':ServiceLoaderRegistry').projectDir = new File('AptHelper/ServiceLoaderRegistry')
+project(':ServiceLoaderPlugin').projectDir = new File('AptHelper/ServiceLoaderPlugin')
+project(':ServiceLoaderProcessor').projectDir = new File('AptHelper/ServiceLoaderProcessor')
+
 
 
 /* +++++++++ App监控库 +++++++++ */
 include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
-        ':MonitorXposed'
+        ':MonitorXposed', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher', ':LeakCanarySdk'
 project(':MonitorAliveLib').projectDir = new File('MonitorLib/MonitorAliveLib')
 project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
 project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
@@ -101,5 +110,9 @@ project(':MonitorFileLib').projectDir = new File('MonitorLib/MonitorFileLib')
 project(':MonitorOomLib').projectDir = new File('MonitorLib/MonitorOomLib')
 project(':MonitorKeepAlive').projectDir = new File('MonitorLib/MonitorKeepAlive')
 project(':MonitorXposed').projectDir = new File('MonitorLib/MonitorXposed')
+project(':LeakAndroid').projectDir = new File('MonitorLib/LeakAndroid')
+project(':LeakAnalyzer').projectDir = new File('MonitorLib/LeakAnalyzer')
+project(':LeakWatcher').projectDir = new File('MonitorLib/LeakWatcher')
+project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 
 
