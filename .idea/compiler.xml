@@ -7,7 +7,6 @@
       <module name="LifeHelper.AnimatorToolLib" target="1.8" />
       <module name="LifeHelper.api-compiler" target="1.8" />
       <module name="LifeHelper.api-manager" target="1.8" />
-      <module name="LifeHelper.api-plugin" target="1.8" />
       <module name="LifeHelper.app" target="1.8" />
       <module name="LifeHelper.ApplicationLib" target="1.8" />
       <module name="LifeHelper.AppStartLib" target="1.8" />
