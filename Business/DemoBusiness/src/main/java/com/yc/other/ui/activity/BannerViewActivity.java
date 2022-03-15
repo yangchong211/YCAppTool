@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.yc.cn.ycbannerlib.gallery.GalleryLayoutManager;
 import com.yc.cn.ycbannerlib.gallery.GalleryLinearSnapHelper;

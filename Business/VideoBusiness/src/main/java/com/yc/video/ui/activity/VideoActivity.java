@@ -5,22 +5,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
-import com.alibaba.android.arouter.facade.annotation.Route;
-
 import com.yc.fragmentlib.BackHandlerHelper;
 import com.yc.library.base.adapter.BasePagerAdapter;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.video.R;
 import com.yc.video.ui.fragment.VideoArticleFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -28,7 +28,6 @@ import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.applicationlib.activity.ActivityManager;
 import com.yc.banner.view.BannerView;
 import com.yc.catonhelperlib.fps.PerformanceActivity;
-import com.yc.configlayer.arounter.ARouterUtils;
 
 import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;

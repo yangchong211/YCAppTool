@@ -63,6 +63,7 @@ import static android.text.format.DateUtils.FORMAT_SHOW_TIME;
 import static android.text.format.Formatter.formatShortFileSize;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.squareup.leakcanary.BuildConfig.GIT_SHA;
 import static com.squareup.leakcanary.LeakCanary.leakInfo;
 import static com.squareup.leakcanary.internal.LeakCanaryInternals.newSingleThreadExecutor;
 

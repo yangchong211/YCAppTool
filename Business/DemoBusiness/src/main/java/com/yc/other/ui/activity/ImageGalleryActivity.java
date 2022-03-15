@@ -10,7 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 import com.blankj.utilcode.util.Utils;
 import com.yc.cn.ycgallerylib.gallery.GalleryImageView;
 

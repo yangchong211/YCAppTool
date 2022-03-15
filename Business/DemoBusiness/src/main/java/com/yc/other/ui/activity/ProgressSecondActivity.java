@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 import com.ns.yc.ycprogresslib.CircleProgressbar;
 import com.ns.yc.ycprogresslib.OnCircleProgressListener;
 import com.ns.yc.ycprogresslib.ProgressBarUtils;

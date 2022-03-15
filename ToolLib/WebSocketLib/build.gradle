@@ -38,6 +38,6 @@ ext{
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project.ext.WebSocketServiceDependencies['okhttp']
+    implementation(rootProject.ext.dependencies["okhttp"])
     implementation 'com.squareup.okhttp3:mockwebserver:3.10.0'
 }

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.widget.LinearLayout;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 import com.bumptech.glide.Glide;
 import com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView;
 

@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 import com.blankj.utilcode.util.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 

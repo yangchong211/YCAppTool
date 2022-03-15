@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 
 import com.yc.other.R;
 

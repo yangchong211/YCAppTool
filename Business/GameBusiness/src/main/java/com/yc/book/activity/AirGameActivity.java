@@ -3,7 +3,7 @@ package com.yc.book.activity;
 
 import android.graphics.Color;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 import com.yc.book.fjGame.GameView;
 
 import com.yc.library.base.mvp.BaseActivity;

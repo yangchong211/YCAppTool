@@ -217,14 +217,13 @@ public class ActivityManager implements IActivityManager<Activity> {
             }
             //finish所有activity
             finishAll();
-            //杀死进程
-            android.os.Process.killProcess(android.os.Process.myPid());
         } catch (Exception ignored) {
             //ignored.printStackTrace();
-        } finally {
-            //推出
-            System.exit(0);
         }
+        //杀死进程
+        android.os.Process.killProcess(android.os.Process.myPid());
+        //推出
+        System.exit(0);
     }
 
 }

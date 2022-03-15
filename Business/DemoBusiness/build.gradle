@@ -56,6 +56,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
+    implementation(rootProject.ext.dependencies["material"])
     implementation project(path: ':MonitorNetLib')
     implementation project(path: ':StatusBarLib')
     implementation project(path: ':BusinessInterface')

@@ -178,6 +178,9 @@ static def releaseTime() {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
+    implementation(rootProject.ext.dependencies["material"])
     implementation project(path: ':CustomWidget')
     implementation project(path: ':CountTimerLib')
     implementation project(path: ':WidgetViewLib')

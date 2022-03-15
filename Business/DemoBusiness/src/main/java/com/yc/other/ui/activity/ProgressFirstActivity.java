@@ -2,7 +2,7 @@ package com.yc.other.ui.activity;
 
 import android.view.View;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 import com.ns.yc.ycprogresslib.ProgressBarUtils;
 import com.ns.yc.ycprogresslib.RingProgressBar;
 

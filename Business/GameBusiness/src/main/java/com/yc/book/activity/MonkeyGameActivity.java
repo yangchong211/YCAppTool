@@ -3,7 +3,7 @@ package com.yc.book.activity;
 
 import android.widget.Button;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 import com.yc.book.weight.monkey.LuckyMonkeyPanelView;
 
 import com.yc.library.base.mvp.BaseActivity;

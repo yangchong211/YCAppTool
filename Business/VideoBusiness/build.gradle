@@ -64,6 +64,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(rootProject.ext.dependencies["material"])
     implementation project(path: ':StatusBarLib')
     api rootProject.ext.dependencies["YCVideoPlayerLib"]
     implementation(rootProject.ext.dependencies["gson"])
@@ -72,5 +73,6 @@ dependencies {
     implementation project(path: ':ImageServer')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':FragmentLib')
+    implementation project(path: ':YCDialogLib')
 }
 

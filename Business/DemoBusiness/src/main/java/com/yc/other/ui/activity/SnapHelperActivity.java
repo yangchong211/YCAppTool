@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 import com.yc.cn.ycbannerlib.snap.ScrollLinearHelper;
 import com.yc.cn.ycbannerlib.snap.ScrollPageHelper;
 import com.yc.cn.ycbannerlib.snap.ScrollSnapHelper;

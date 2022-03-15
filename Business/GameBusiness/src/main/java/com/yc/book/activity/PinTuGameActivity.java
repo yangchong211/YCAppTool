@@ -5,7 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 
 import com.yc.library.base.mvp.BaseActivity;
 import com.ycbjie.book.R;

@@ -35,7 +35,7 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
         }
         synchronized (mActivityLifecycleListeners) {
             List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(clazz);
-            if (lifecycleListener == null) {
+            if (lifecycleListeners == null) {
                 return false;
             }
             boolean result = lifecycleListeners.remove(lifecycleListener);

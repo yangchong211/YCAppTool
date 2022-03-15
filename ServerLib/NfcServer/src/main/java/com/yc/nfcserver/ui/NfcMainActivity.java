@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.annotation.Route;
+
 
 import com.yc.nfcserver.BaseNfcActivity;
 import com.yc.nfcserver.R;
