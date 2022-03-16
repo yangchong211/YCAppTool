@@ -2,7 +2,8 @@ plugins {
     id 'com.android.library'
 }
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
-
+//迁移到jitpack
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -12,7 +13,6 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -31,15 +31,4 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
-    implementation(rootProject.ext.dependencies["recyclerview"])
-    implementation(rootProject.ext.dependencies["material"]){
-        exclude group: 'com.google.android.material', module: 'material'
-    }
-    implementation(rootProject.ext.dependencies["swiperefreshlayout"])
-    implementation(rootProject.ext.dependencies["coordinatorlayout"])
-    implementation project(path: ':ToolUtilsLib')
-
-    implementation 'com.github.yangchong211.YCRefreshView:EastAdapterLib:3.0.2'
-    implementation(rootProject.ext.dependencies["okhttp"])
-    implementation 'com.github.yangchong211.YCVideoPlayer:VideoView:1.1.0'
 }

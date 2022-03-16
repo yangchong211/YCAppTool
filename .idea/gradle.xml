@@ -55,6 +55,7 @@
             <option value="$PROJECT_DIR$/ServerLib/XlogServer" />
             <option value="$PROJECT_DIR$/ToolLib/AnimatorToolLib" />
             <option value="$PROJECT_DIR$/ToolLib/AppTraceTool" />
+            <option value="$PROJECT_DIR$/ToolLib/AutoCloserLib" />
             <option value="$PROJECT_DIR$/ToolLib/CountTimerLib" />
             <option value="$PROJECT_DIR$/ToolLib/LocaleHelperLib" />
             <option value="$PROJECT_DIR$/ToolLib/LongevityLib" />

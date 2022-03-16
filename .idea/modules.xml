@@ -75,6 +75,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-manager/LifeHelper.api-manager.iml" filepath="$PROJECT_DIR$/.idea/modules/api-manager/LifeHelper.api-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-plugin/LifeHelper.api-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/api-plugin/LifeHelper.api-plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LifeHelper.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToolLib/AutoCloserLib/ToolLib.LifeHelper.AutoCloserLib.iml" filepath="$PROJECT_DIR$/.idea/modules/ToolLib/AutoCloserLib/ToolLib.LifeHelper.AutoCloserLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/WidgetLib/YCDialogLib/WidgetLib.LifeHelper.YCDialogLib.iml" filepath="$PROJECT_DIR$/.idea/modules/WidgetLib/YCDialogLib/WidgetLib.LifeHelper.YCDialogLib.iml" />
     </modules>
   </component>

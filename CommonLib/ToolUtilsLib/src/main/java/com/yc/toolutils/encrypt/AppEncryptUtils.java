@@ -1,4 +1,4 @@
-package com.yc.toolutils.other;
+package com.yc.toolutils.encrypt;
 
 import android.util.Base64;
 
@@ -63,122 +63,6 @@ public final class AppEncryptUtils {
      */
     public static byte[] encryptMD2(final byte[] data) {
         return hashTemplate(data, "MD2");
-    }
-
-    /**
-     * MD5 加密
-     *
-     * @param data 明文字符串
-     * @return 16 进制密文
-     */
-    public static String encryptMD5ToString(final String data) {
-        return encryptMD5ToString(data.getBytes());
-    }
-
-    /**
-     * MD5 加密
-     *
-     * @param data 明文字符串
-     * @param salt 盐
-     * @return 16 进制加盐密文
-     */
-    public static String encryptMD5ToString(final String data, final String salt) {
-        return bytes2HexString(encryptMD5((data + salt).getBytes()));
-    }
-
-    /**
-     * MD5 加密
-     *
-     * @param data 明文字节数组
-     * @return 16 进制密文
-     */
-    public static String encryptMD5ToString(final byte[] data) {
-        return bytes2HexString(encryptMD5(data));
-    }
-
-    /**
-     * MD5 加密
-     *
-     * @param data 明文字节数组
-     * @param salt 盐字节数组
-     * @return 16 进制加盐密文
-     */
-    public static String encryptMD5ToString(final byte[] data, final byte[] salt) {
-        if (data == null || salt == null) return null;
-        byte[] dataSalt = new byte[data.length + salt.length];
-        System.arraycopy(data, 0, dataSalt, 0, data.length);
-        System.arraycopy(salt, 0, dataSalt, data.length, salt.length);
-        return bytes2HexString(encryptMD5(dataSalt));
-    }
-
-    /**
-     * MD5 加密
-     *
-     * @param data 明文字节数组
-     * @return 密文字节数组
-     */
-    public static byte[] encryptMD5(final byte[] data) {
-        return hashTemplate(data, "MD5");
-    }
-
-    /**
-     * MD5 加密文件
-     *
-     * @param filePath 文件路径
-     * @return 文件的 16 进制密文
-     */
-    public static String encryptMD5File2String(final String filePath) {
-        File file = isSpace(filePath) ? null : new File(filePath);
-        return encryptMD5File2String(file);
-    }
-
-    /**
-     * MD5 加密文件
-     *
-     * @param filePath 文件路径
-     * @return 文件的 MD5 校验码
-     */
-    public static byte[] encryptMD5File(final String filePath) {
-        File file = isSpace(filePath) ? null : new File(filePath);
-        return encryptMD5File(file);
-    }
-
-    /**
-     * MD5 加密文件
-     *
-     * @param file 文件
-     * @return 文件的 16 进制密文
-     */
-    public static String encryptMD5File2String(final File file) {
-        return bytes2HexString(encryptMD5File(file));
-    }
-
-    /**
-     * MD5 加密文件
-     *
-     * @param file 文件
-     * @return 文件的 MD5 校验码
-     */
-    public static byte[] encryptMD5File(final File file) {
-        if (file == null) return null;
-        FileInputStream fis = null;
-        DigestInputStream digestInputStream;
-        try {
-            fis = new FileInputStream(file);
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            digestInputStream = new DigestInputStream(fis, md);
-            byte[] buffer = new byte[256 * 1024];
-            while (true) {
-                if (!(digestInputStream.read(buffer) > 0)) break;
-            }
-            md = digestInputStream.getMessageDigest();
-            return md.digest();
-        } catch (NoSuchAlgorithmException | IOException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            closeIO(fis);
-        }
     }
 
     /**
@@ -988,22 +872,5 @@ public final class AppEncryptUtils {
         return true;
     }
 
-    /**
-     * 关闭 IO
-     *
-     * @param closeables closeables
-     */
-    private static void closeIO(final Closeable... closeables) {
-        if (closeables == null) return;
-        for (Closeable closeable : closeables) {
-            if (closeable != null) {
-                try {
-                    closeable.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
 }

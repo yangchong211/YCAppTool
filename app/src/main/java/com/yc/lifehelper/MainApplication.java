@@ -3,6 +3,7 @@ package com.yc.lifehelper;
 import android.content.Context;
 import android.util.Log;
 
+import com.yc.autocloserlib.AppAutoCloser;
 import com.yc.memoryleakupload.DMemoryLeak;
 import com.yc.alive.KeepAliveHelper;
 import com.yc.applicationlib.activity.ActivityManager;
@@ -48,17 +49,26 @@ public class MainApplication extends LibApplication {
     public void onCreate() {
         Log.d("Application : ", "onCreate");
         super.onCreate();
+        //工具库
         AppToolUtils.init(this);
+        //日志库
         AppLogHelper.config(this);
+        //保活
         LongevityMonitor();
+        //各种状态监听回调
         initAppStatusListener();
+        //初始化国际化语言
         initLang();
+        //网络拦截库
         initNetWork();
+        //崩溃库
         initCrash();
-        AppToolUtils.init(this);
+        //activity栈自动管理
         ActivityManager.getInstance().init(this);
         KeepAliveHelper.init(this);
+        //OOM上报日志操作库
         DMemoryLeak.installLeakCanary(this,true);
+        AppAutoCloser.getInstance().init(this);
     }
 
     @Override

@@ -68,7 +68,7 @@ project(':NotificationLib').projectDir = new File('WidgetLib/NotificationLib')
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,
         ':AnimatorToolLib', ':AppTraceTool', ':LongevityLib',
-        ':ThreadPoolLib', ':ThreadTaskLib'
+        ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
@@ -81,7 +81,7 @@ project(':AppTraceTool').projectDir = new File('ToolLib/AppTraceTool')
 project(':LongevityLib').projectDir = new File('ToolLib/LongevityLib')
 project(':ThreadPoolLib').projectDir = new File('ToolLib/ThreadPoolLib')
 project(':ThreadTaskLib').projectDir = new File('ToolLib/ThreadTaskLib')
-
+project(':AutoCloserLib').projectDir = new File('ToolLib/AutoCloserLib')
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
 include ':api-compiler',':api-manager',':api-plugin',
