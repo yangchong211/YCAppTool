@@ -1,6 +1,8 @@
 package com.yc.monitoroomlib;
 
 
+import java.util.HashMap;
+
 public class Foo {
 
     private static volatile int count;
@@ -23,6 +25,9 @@ public class Foo {
             e.printStackTrace();
         }
         System.out.println("count is : " + count);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put(null,"");
     }
 
 

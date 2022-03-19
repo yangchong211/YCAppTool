@@ -52,6 +52,9 @@ public class AppAutoCloser implements Runnable {
 
 
     public void start() {
+        if (!mInitialized){
+            throw new NullPointerException("please init app auto closer lib at first");
+        }
         AppStateMonitor.getInstance().registerStateListener(new AppStateMonitor.StateListener() {
             @Override
             public void onInForeground() {

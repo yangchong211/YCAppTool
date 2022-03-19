@@ -82,7 +82,6 @@
             <option value="$PROJECT_DIR$/WidgetLib/WidgetViewLib" />
             <option value="$PROJECT_DIR$/WidgetLib/YCDialogLib" />
             <option value="$PROJECT_DIR$/WidgetLib/ZoomImageLib" />
-            <option value="$PROJECT_DIR$/api-plugin" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

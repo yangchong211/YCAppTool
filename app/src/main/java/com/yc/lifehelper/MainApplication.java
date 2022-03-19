@@ -3,6 +3,8 @@ package com.yc.lifehelper;
 import android.content.Context;
 import android.util.Log;
 
+import com.yc.appstart.AppStartTask;
+import com.yc.appstart.AppTaskDispatcher;
 import com.yc.autocloserlib.AppAutoCloser;
 import com.yc.memoryleakupload.DMemoryLeak;
 import com.yc.alive.KeepAliveHelper;
@@ -64,11 +66,32 @@ public class MainApplication extends LibApplication {
         //崩溃库
         initCrash();
         //activity栈自动管理
-        ActivityManager.getInstance().init(this);
+        initActivityManager();
+        //保活方案
         KeepAliveHelper.init(this);
         //OOM上报日志操作库
         DMemoryLeak.installLeakCanary(this,true);
+        //app 进入后台一定时间后执行退出或者重启操作，有助于释放内存，减少用户电量消耗
         AppAutoCloser.getInstance().init(this);
+        //执行task任务
+        AppTaskDispatcher.create().addAppStartTask(new AppStartTask() {
+            @Override
+            public void run() {
+
+            }
+
+            @Override
+            public boolean isRunOnMainThread() {
+                return false;
+            }
+        }).start();
+    }
+
+    private void initActivityManager() {
+        //初始化activity栈管理
+        ActivityManager.getInstance().init(this);
+        ActivityManager.getInstance().registerActivityLifecycleListener(MainActivity.class,
+                new MainActivityListener());
     }
 
     @Override
@@ -96,8 +119,8 @@ public class MainApplication extends LibApplication {
                 // 日志输出
                 .setLogger(new LongevityMonitorConfig.ILongevityMonitorLogger() {
                     @Override
-                    public void log(String var1) {
-                        AppLogUtils.i("Longevity--"+var1);
+                    public void log(String log) {
+                        AppLogUtils.i("Longevity--"+log);
                     }
                 })
                 .build());

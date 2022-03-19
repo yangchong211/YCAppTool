@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.applicationlib.activity.ActivityManager;
+import com.yc.autocloserlib.AppAutoCloser;
 import com.yc.banner.view.BannerView;
 import com.yc.catonhelperlib.fps.PerformanceActivity;
 
@@ -178,6 +179,7 @@ public class MainActivity extends BaseActivity{
         initBar();
         initRecyclerView();
         initNav();
+        AppAutoCloser.getInstance().start();
     }
 
     private void initFindViewID() {

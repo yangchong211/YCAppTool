@@ -125,7 +125,7 @@ public class ActivityManager implements IActivityManager<Activity> {
      * @param lifecycleListener 对应的监听器
      */
     @Override
-    public void registerActivityLifecycleListener(Class<Activity> clazz,
+    public void registerActivityLifecycleListener(Class clazz,
                                                   ActivityLifecycleListener lifecycleListener) {
         if (clazz == null || lifecycleListener == null) {
             return;
@@ -134,7 +134,7 @@ public class ActivityManager implements IActivityManager<Activity> {
     }
 
     @Override
-    public void unregisterActivityLifecycleListener(Class<Activity> clazz,
+    public void unregisterActivityLifecycleListener(Class clazz,
                                                     ActivityLifecycleListener lifecycleListener) {
         if (clazz == null || lifecycleListener == null) {
             return;

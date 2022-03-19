@@ -2,8 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
+      <module name="AptHelper.LifeHelper.api-plugin" target="1.8" />
       <module name="Business.LifeHelper.AnimBusiness" target="1.8" />
       <module name="CommonLib.LifeHelper.AppBaseStore" target="1.8" />
+      <module name="LifeHelper.alpha-android" target="1.8" />
       <module name="LifeHelper.AnimatorToolLib" target="1.8" />
       <module name="LifeHelper.api-compiler" target="1.8" />
       <module name="LifeHelper.api-manager" target="1.8" />

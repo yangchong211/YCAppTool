@@ -223,6 +223,7 @@ dependencies {
     implementation project(path: ':MonitorAliveLib')
     implementation project(path: ':LeakCanarySdk')
     implementation project(path: ':AutoCloserLib')
+    implementation project(path: ':AppStartLib')
 //    implementation 'com.github.yangchong211.YCAppTool:BlurViewLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:BannerViewLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:NfcServer:1.3.7'
