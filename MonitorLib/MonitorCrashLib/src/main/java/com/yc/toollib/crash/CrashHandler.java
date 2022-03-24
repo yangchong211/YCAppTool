@@ -16,7 +16,7 @@ import com.yc.toolutils.logger.AppLogUtils;
  *     revise:
  * </pre>
  */
-public class CrashHandler implements Thread.UncaughtExceptionHandler {
+public final class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     public static final String TAG = "CrashHandler";
     /**
@@ -30,7 +30,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     /**
      * CrashHandler实例
      */
-    private static CrashHandler INSTANCE;
+    private static volatile CrashHandler INSTANCE;
     /**
      * 监听
      */
