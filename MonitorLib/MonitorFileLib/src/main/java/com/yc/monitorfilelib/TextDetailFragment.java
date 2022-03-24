@@ -168,10 +168,13 @@ public class TextDetailFragment extends Fragment {
 
     private static class FileReadTask extends AsyncTask<File, String, Void> {
 
+        /**
+         * 采用弱引用管理fragment对象
+         */
         private final WeakReference<TextDetailFragment> mReference;
 
         public FileReadTask(TextDetailFragment fragment) {
-            mReference = new WeakReference(fragment);
+            mReference = new WeakReference<>(fragment);
         }
 
         protected Void doInBackground(File... files) {

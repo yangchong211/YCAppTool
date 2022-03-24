@@ -40,10 +40,16 @@ public final class ToastUtils {
     @SuppressLint("StaticFieldLeak")
     private static Application mApp;
     private static int toastBackColor;
+    /**
+     * 采用软引用管理toast对象
+     * 如果一个对象只具有软引用，那么如果内存空间足够，垃圾回收器就不会回收它；
+     * 如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。
+     */
     private static SoftReference<Toast> mToast;
 
     /**
      * 初始化吐司工具类
+     *
      * @param app 应用
      */
     public static void init(@NonNull final Application app) {
@@ -55,7 +61,7 @@ public final class ToastUtils {
         return mApp;
     }
 
-    public static void setToastBackColor(@ColorInt int color){
+    public static void setToastBackColor(@ColorInt int color) {
         toastBackColor = color;
     }
 
@@ -70,8 +76,8 @@ public final class ToastUtils {
     /**
      * 检查上下文不能为空，必须先进性初始化操作
      */
-    private static void checkContext(){
-        if(mApp==null){
+    private static void checkContext() {
+        if (mApp == null) {
             throw new NullPointerException("ToastUtils context is not null，please first init");
         }
     }
@@ -80,9 +86,11 @@ public final class ToastUtils {
     /**
      * 吐司工具类    避免点击多次导致吐司多次，最后导致Toast就长时间关闭不掉了
      * 注意：这里如果传入context会报内存泄漏；传递activity..getApplicationContext()
+     *
      * @param content       吐司内容
      */
     private static Toast toast;
+
     @SuppressLint("ShowToast")
     public static void showToast(String content) {
         DialogUtils.checkMainThread();
@@ -103,12 +111,13 @@ public final class ToastUtils {
      * 2:替代方案 SnackBarUtils.showSnack(topActivity, noticeStr);
      * 圆角
      * 屏幕中间
-     * @param notice                        内容
+     *
+     * @param notice 内容
      */
     public static void showRoundRectToast(CharSequence notice) {
         DialogUtils.checkMainThread();
         checkContext();
-        if (TextUtils.isEmpty(notice)){
+        if (TextUtils.isEmpty(notice)) {
             return;
         }
         new Builder(mApp)
@@ -126,10 +135,10 @@ public final class ToastUtils {
     }
 
 
-    public static void showRoundRectToast(CharSequence notice,CharSequence desc) {
+    public static void showRoundRectToast(CharSequence notice, CharSequence desc) {
         DialogUtils.checkMainThread();
         checkContext();
-        if (TextUtils.isEmpty(notice)){
+        if (TextUtils.isEmpty(notice)) {
             return;
         }
         new Builder(mApp)
@@ -148,11 +157,10 @@ public final class ToastUtils {
     }
 
 
-
     public static void showRoundRectToast(@LayoutRes int layout) {
         DialogUtils.checkMainThread();
         checkContext();
-        if (layout==0){
+        if (layout == 0) {
             return;
         }
         new Builder(mApp)
@@ -191,7 +199,7 @@ public final class ToastUtils {
             return this;
         }
 
-        public Builder setDesc(CharSequence desc){
+        public Builder setDesc(CharSequence desc) {
             this.desc = desc;
             return this;
         }
@@ -246,7 +254,7 @@ public final class ToastUtils {
                 mToast.get().cancel();
             }
             Toast toast = new Toast(context);
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1){
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
                 //android 7.1.1 版本
                 HookToast.hook(toast);
             }
@@ -257,7 +265,7 @@ public final class ToastUtils {
             }
             toast.setDuration(duration);
             toast.setMargin(0, 0);
-            if(layout==0){
+            if (layout == 0) {
                 CardView rootView = (CardView) LayoutInflater.from(context).inflate(R.layout.view_toast_custom, null);
                 TextView textView = rootView.findViewById(R.id.toastTextView);
                 TextView descTv = rootView.findViewById(R.id.desc);
@@ -270,14 +278,14 @@ public final class ToastUtils {
                 //rootView.setBackgroundColor(backgroundColor);
                 textView.setTextColor(textColor);
                 textView.setText(title);
-                if(TextUtils.isEmpty(desc)){
+                if (TextUtils.isEmpty(desc)) {
                     descTv.setVisibility(View.GONE);
-                }else{
+                } else {
                     descTv.setText(desc);
                     descTv.setVisibility(View.VISIBLE);
                 }
                 toast.setView(rootView);
-            }else {
+            } else {
                 View view = LayoutInflater.from(context).inflate(layout, null);
                 toast.setView(view);
             }
@@ -285,7 +293,6 @@ public final class ToastUtils {
             return toast;
         }
     }
-
 
 
     /**
@@ -309,7 +316,7 @@ public final class ToastUtils {
 
         static {
             try {
-                Class<?> clazz =  Toast.class;
+                Class<?> clazz = Toast.class;
                 sField_TN = clazz.getDeclaredField("mTN");
                 sField_TN.setAccessible(true);
                 sField_TN_Handler = sField_TN.getType().getDeclaredField("mHandler");

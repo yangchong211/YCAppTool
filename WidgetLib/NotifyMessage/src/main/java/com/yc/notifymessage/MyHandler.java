@@ -6,7 +6,6 @@ import android.os.Message;
 
 import androidx.annotation.NonNull;
 
-import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 /**
