@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import com.yc.store.cache.Cache;
+import com.yc.store.model.Entry;
 import com.yc.store.store.util.ByteUtils;
 import com.yc.store.store.util.ParcelableUtil;
 
@@ -116,7 +117,7 @@ public abstract class BaseStore {
             return dentry;
         }
 
-        Cache.Entry entry = mDiskCache.get(key);
+        Entry entry = mDiskCache.get(key);
         if (entry != null) {
             dentry.data = entry.data;
         }

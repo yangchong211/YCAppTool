@@ -2,6 +2,8 @@ package com.yc.store.cache;
 
 import android.os.SystemClock;
 
+import com.yc.store.model.Entry;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.EOFException;
@@ -483,7 +485,7 @@ public class DiskBasedCache implements Cache {
         public CacheHeader(String key, Entry entry) {
             this.key = key;
             this.size = entry.data.length;
-            this.etag = entry.etag;
+            this.etag = entry.eTag;
             this.serverDate = entry.serverDate;
             this.lastModified = entry.lastModified;
             this.ttl = entry.ttl;
@@ -524,7 +526,7 @@ public class DiskBasedCache implements Cache {
         public Entry toCacheEntry(byte[] data) {
             Entry e = new Entry();
             e.data = data;
-            e.etag = etag;
+            e.eTag = etag;
             e.serverDate = serverDate;
             e.lastModified = lastModified;
             e.ttl = ttl;

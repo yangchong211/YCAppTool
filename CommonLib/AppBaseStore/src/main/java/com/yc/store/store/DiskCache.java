@@ -4,16 +4,12 @@ import android.content.Context;
 
 import com.yc.store.cache.Cache;
 import com.yc.store.cache.DiskBasedCache;
+import com.yc.store.model.Entry;
 
 
 import java.io.File;
-import java.io.IOException;
 
 /**
- * Created by tomchen on 2015/8/21.
- *
- * @author tom
- * <p/>
  * 支持本地加密持久化
  */
 public class DiskCache implements Cache {
