@@ -68,16 +68,16 @@ public class MainApplication extends LibApplication {
         //activity栈自动管理
         initActivityManager();
         //保活方案
-        KeepAliveHelper.init(this);
+        //KeepAliveHelper.init(this);
         //OOM上报日志操作库
         DMemoryLeak.installLeakCanary(this,true);
         //app 进入后台一定时间后执行退出或者重启操作，有助于释放内存，减少用户电量消耗
-        AppAutoCloser.getInstance().init(this);
+        //AppAutoCloser.getInstance().init(this);
         //执行task任务
         AppTaskDispatcher.create().addAppStartTask(new AppStartTask() {
             @Override
             public void run() {
-
+                AppLogUtils.i("AppTaskDispatcher is run");
             }
 
             @Override

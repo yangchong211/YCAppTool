@@ -22,6 +22,9 @@
             <option value="$PROJECT_DIR$/Business/DemoBusiness" />
             <option value="$PROJECT_DIR$/Business/GameBusiness" />
             <option value="$PROJECT_DIR$/Business/LeetBusiness" />
+            <option value="$PROJECT_DIR$/Business/MvpTodoBusiness" />
+            <option value="$PROJECT_DIR$/Business/MvvmDatabinding" />
+            <option value="$PROJECT_DIR$/Business/MvvmTodoLive" />
             <option value="$PROJECT_DIR$/Business/VideoBusiness" />
             <option value="$PROJECT_DIR$/CommonLib/AppBaseStore" />
             <option value="$PROJECT_DIR$/CommonLib/AppStartLib" />

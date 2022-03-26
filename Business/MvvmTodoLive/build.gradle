@@ -1,0 +1,66 @@
+plugins {
+    id 'com.android.library'
+}
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        //指定room.schemaLocation生成的文件路径  处理Room 警告 Schema export Error
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    //jdk1.8
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    // App dependencies
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
+    implementation(rootProject.ext.dependencies["cardview"])
+    implementation(rootProject.ext.dependencies["material"])
+    implementation(rootProject.ext.dependencies["recyclerview"])
+    implementation(rootProject.ext.dependencies["room-runtime"])
+    annotationProcessor(rootProject.ext.dependencies["room-compiler"])
+    implementation(rootProject.ext.dependencies["lifecycle"])
+    annotationProcessor(rootProject.ext.dependencies["lifecycle-compiler"])
+    implementation project(path: ':LibraryLayer')
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "com.google.guava:guava:27.0.1-android"
+}

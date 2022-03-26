@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yc.todoapp">
+
+    <application>
+        <activity android:name="com.yc.todoapp.tasks.TasksActivity"/>
+        <activity android:name="com.yc.todoapp.taskdetail.TaskDetailActivity" />
+        <activity android:name="com.yc.todoapp.addedittask.AddEditTaskActivity" />
+        <activity
+            android:name="com.yc.todoapp.statistics.StatisticsActivity"
+            android:parentActivityName="com.yc.todoapp.tasks.TasksActivity"
+            tools:ignore="UnusedAttribute">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.yc.todoapp.tasks.TasksActivity" />
+        </activity>
+    </application>
+
+</manifest>

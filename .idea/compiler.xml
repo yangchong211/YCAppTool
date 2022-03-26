@@ -4,6 +4,9 @@
     <bytecodeTargetLevel target="1.7">
       <module name="AptHelper.LifeHelper.api-plugin" target="1.8" />
       <module name="Business.LifeHelper.AnimBusiness" target="1.8" />
+      <module name="Business.LifeHelper.MvpTodoBusiness" target="1.8" />
+      <module name="Business.LifeHelper.MvvmDatabinding" target="1.8" />
+      <module name="Business.LifeHelper.MvvmTodoLive" target="1.8" />
       <module name="CommonLib.LifeHelper.AppBaseStore" target="1.8" />
       <module name="LifeHelper.alpha-android" target="1.8" />
       <module name="LifeHelper.AnimatorToolLib" target="1.8" />
@@ -49,6 +52,7 @@
       <module name="LifeHelper.MonitorNetLib" target="1.8" />
       <module name="LifeHelper.MonitorOomLib" target="1.8" />
       <module name="LifeHelper.MonitorXposed" target="1.8" />
+      <module name="LifeHelper.MvvmTodoLive" target="1.8" />
       <module name="LifeHelper.NetHelperLib" target="1.8" />
       <module name="LifeHelper.NfcServer" target="1.8" />
       <module name="LifeHelper.NotificationLib" target="1.8" />

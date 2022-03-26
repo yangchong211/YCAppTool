@@ -32,12 +32,15 @@ ext {
     constraintLayoutVersion = '1.0.0'
     appcompatVersion = '1.2.0'
     constraintlayoutVersion = '1.1.3'
+    roomVersion = '2.0.0'
     annotationVersion = '1.1.0'
     cardviewVersion = '1.0.0'
     recyclerviewVersion = '1.0.0'
     mediaVersion = '1.0.1'
     materialVersion = '1.0.0-rc01'
     swiperefreshlayoutVersion = '1.0.0'
+    archLifecycleVersion = '2.0.0'
+    databindingVersion = '3.2.1'
 
     dependencies = [
                 coordinatorlayout   : "androidx.coordinatorlayout:coordinatorlayout:${constraintLayoutVersion}",
@@ -50,6 +53,11 @@ ext {
                 material            : "com.google.android.material:material:${materialVersion}",
                 swiperefreshlayout  : "androidx.swiperefreshlayout:swiperefreshlayout:${swiperefreshlayoutVersion}",
                 "multidex"          : "com.android.support:multidex:1.0.2",
+                "room-runtime"      : "androidx.room:room-runtime:${roomVersion}",
+                "room-compiler"     : "androidx.room:room-compiler:${roomVersion}",
+                "databinding"       : "androidx.databinding:databinding-common:${databindingVersion}",
+                "lifecycle"         : "androidx.lifecycle:lifecycle-extensions:${archLifecycleVersion}",
+                "lifecycle-compiler": "androidx.lifecycle:lifecycle-compiler:${archLifecycleVersion}",
 
                 //network
                 "retrofit"                 : "com.squareup.retrofit2:retrofit:${version["retrofitSdkVersion"]}",

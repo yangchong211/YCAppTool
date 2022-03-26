@@ -3,13 +3,17 @@ include ':app'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
-include ':GameBusiness', ':AnimBusiness',':LeetBusiness',
-        ':VideoBusiness', ':DemoBusiness', ':BusinessInterface'
+include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
+        ':VideoBusiness', ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
+        ':BusinessInterface'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':VideoBusiness').projectDir = new File('Business/VideoBusiness')
 project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
 project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
 project(':LeetBusiness').projectDir = new File('Business/LeetBusiness')
+project(':MvpTodoBusiness').projectDir = new File('Business/MvpTodoBusiness')
+project(':MvvmDatabinding').projectDir = new File('Business/MvvmDatabinding')
+project(':MvvmTodoLive').projectDir = new File('Business/MvvmTodoLive')
 project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 
 
@@ -118,4 +122,6 @@ project(':LeakAnalyzer').projectDir = new File('MonitorLib/LeakAnalyzer')
 project(':LeakWatcher').projectDir = new File('MonitorLib/LeakWatcher')
 project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
+
+
 

@@ -16,7 +16,6 @@ import com.yc.alive.utils.NotificationUtils;
 import com.yc.alive.utils.ServiceUtils;
 import com.yc.alive.constant.YcConstant;
 import com.yc.alive.receiver.NotificationClickReceiver;
-import com.yc.live.service.GuardAidl;
 
 
 /**
@@ -43,7 +42,7 @@ public final class RemoteService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return mBinder;
+        return null;
     }
 
     @Override
@@ -68,15 +67,16 @@ public final class RemoteService extends Service {
         }
     }
 
-    private final class GuardBinder extends GuardAidl.Stub {
+    private final class GuardBinder //extends GuardAidl.Stub
+    {
 
-        @Override
-        public void wakeUp(String title, String description, int iconRes) throws RemoteException {
-            Intent intent = new Intent(getApplicationContext(), NotificationClickReceiver.class);
-            intent.setAction(YcConstant.ACTION_CLICK_NOTIFICATION);
-            Notification notification = NotificationUtils.createNotification(RemoteService.this, title, description, iconRes, intent);
-            RemoteService.this.startForeground(YcConstant.KEY_NOTIFICATION_ID, notification);
-        }
+//        @Override
+//        public void wakeUp(String title, String description, int iconRes) throws RemoteException {
+//            Intent intent = new Intent(getApplicationContext(), NotificationClickReceiver.class);
+//            intent.setAction(YcConstant.ACTION_CLICK_NOTIFICATION);
+//            Notification notification = NotificationUtils.createNotification(RemoteService.this, title, description, iconRes, intent);
+//            RemoteService.this.startForeground(YcConstant.KEY_NOTIFICATION_ID, notification);
+//        }
 
     }
 

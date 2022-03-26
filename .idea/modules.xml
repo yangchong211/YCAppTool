@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/AnimBusiness/Business.LifeHelper.AnimBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/AnimBusiness/Business.LifeHelper.AnimBusiness.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/MvpTodoBusiness/Business.LifeHelper.MvpTodoBusiness.iml" filepath="$PROJECT_DIR$/.idea/modules/business/MvpTodoBusiness/Business.LifeHelper.MvpTodoBusiness.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/MvvmDatabinding/Business.LifeHelper.MvvmDatabinding.iml" filepath="$PROJECT_DIR$/.idea/modules/business/MvvmDatabinding/Business.LifeHelper.MvvmDatabinding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/business/MvvmTodoLive/Business.LifeHelper.MvvmTodoLive.iml" filepath="$PROJECT_DIR$/.idea/modules/business/MvvmTodoLive/Business.LifeHelper.MvvmTodoLive.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CommonLib/AppBaseStore/CommonLib.LifeHelper.AppBaseStore.iml" filepath="$PROJECT_DIR$/.idea/modules/CommonLib/AppBaseStore/CommonLib.LifeHelper.AppBaseStore.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LifeHelper.iml" filepath="$PROJECT_DIR$/.idea/modules/LifeHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ToolLib/AnimatorToolLib/LifeHelper.AnimatorToolLib.iml" filepath="$PROJECT_DIR$/.idea/modules/ToolLib/AnimatorToolLib/LifeHelper.AnimatorToolLib.iml" />

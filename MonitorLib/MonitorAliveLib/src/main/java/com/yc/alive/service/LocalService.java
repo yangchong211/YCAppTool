@@ -19,7 +19,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.yc.alive.alive.YcKeepAlive;
 import com.yc.alive.utils.NotificationUtils;
 import com.yc.alive.utils.ServiceUtils;
-import com.yc.live.service.GuardAidl;
 import com.ycbjie.alivelib.R;
 import com.yc.alive.constant.YcConstant;
 import com.yc.alive.receiver.DeviceStatusReceiver;
@@ -65,7 +64,7 @@ public final class LocalService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return mBinder;
+        return null;
     }
 
     @Override
@@ -188,12 +187,9 @@ public final class LocalService extends Service {
         }
     }
 
-    private final class GuardBinder extends GuardAidl.Stub {
-
-        @Override
-        public void wakeUp(String title, String description, int iconRes) throws RemoteException {
-
-        }
+    private final class GuardBinder
+            //extends GuardAidl.Stub
+    {
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -220,14 +216,14 @@ public final class LocalService extends Service {
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            try {
-                if (mBinder != null && YcKeepAlive.sForegroundNotification != null) {
-                    GuardAidl guardAidl = GuardAidl.Stub.asInterface(service);
-                    guardAidl.wakeUp(YcKeepAlive.sForegroundNotification.getTitle(), YcKeepAlive.sForegroundNotification.getDescription(), YcKeepAlive.sForegroundNotification.getIconRes());
-                }
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                if (mBinder != null && YcKeepAlive.sForegroundNotification != null) {
+//                    GuardAidl guardAidl = GuardAidl.Stub.asInterface(service);
+//                    guardAidl.wakeUp(YcKeepAlive.sForegroundNotification.getTitle(), YcKeepAlive.sForegroundNotification.getDescription(), YcKeepAlive.sForegroundNotification.getIconRes());
+//                }
+//            } catch (RemoteException e) {
+//                e.printStackTrace();
+//            }
         }
     };
 
