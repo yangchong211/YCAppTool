@@ -37,6 +37,7 @@
             <option value="$PROJECT_DIR$/MonitorLib/LeakWatcher" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorAliveLib" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorAnrLib" />
+            <option value="$PROJECT_DIR$/MonitorLib/MonitorApmLib" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorCatonLib" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorCrashLib" />
             <option value="$PROJECT_DIR$/MonitorLib/MonitorFileLib" />

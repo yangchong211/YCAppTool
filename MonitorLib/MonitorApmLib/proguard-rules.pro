@@ -19,6 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-
--keep class com.didi.rider.signal_hooker.SigQuitHooker { *; }
--keep class com.didi.rider.signal_hooker.ISignalListener { *; }

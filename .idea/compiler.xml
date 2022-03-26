@@ -77,6 +77,7 @@
       <module name="LifeHelper.XlogServer" target="1.8" />
       <module name="LifeHelper.ZoomImageLib" target="1.8" />
       <module name="LifeHelper.ZxingServerLib" target="1.8" />
+      <module name="MonitorLib.LifeHelper.MonitorApmLib" target="1.8" />
       <module name="ToolLib.LifeHelper.AutoCloserLib" target="1.8" />
       <module name="WidgetLib.LifeHelper.YCDialogLib" target="1.8" />
     </bytecodeTargetLevel>

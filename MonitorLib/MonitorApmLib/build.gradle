@@ -3,7 +3,6 @@ plugins {
 }
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
-
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
@@ -12,16 +11,7 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-
-        consumerProguardFiles "consumer-rules.pro"
-        externalNativeBuild {
-            cmake {
-                cppFlags ''
-            }
-        }
-        ndk {
-            abiFilters "armeabi-v7a", "arm64-v8a"
-        }
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -34,16 +24,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    externalNativeBuild {
-        cmake {
-            path file('src/main/cpp/CMakeLists.txt')
-            version '3.10.2'
-        }
-    }
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
 }
-
