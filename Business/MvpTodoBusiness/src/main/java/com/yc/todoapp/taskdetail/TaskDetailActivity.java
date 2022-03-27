@@ -8,7 +8,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.yc.todoapp.Injection;
+import com.yc.todoapp.util.Injection;
 import com.yc.todoapp.R;
 import com.yc.todoapp.util.ActivityUtils;
 

@@ -6,6 +6,7 @@ import com.yc.todoapp.BasePresenter;
 import com.yc.todoapp.BaseView;
 
 /**
+ * 定义了契约类（接口）
  * This specifies the contract between the view and the presenter.
  */
 public interface AddEditTaskContract {

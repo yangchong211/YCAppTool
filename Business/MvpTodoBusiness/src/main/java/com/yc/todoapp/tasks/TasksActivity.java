@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.yc.todoapp.Injection;
+import com.yc.todoapp.util.Injection;
 import com.yc.todoapp.R;
 import com.yc.todoapp.statistics.StatisticsActivity;
 import com.yc.todoapp.util.ActivityUtils;

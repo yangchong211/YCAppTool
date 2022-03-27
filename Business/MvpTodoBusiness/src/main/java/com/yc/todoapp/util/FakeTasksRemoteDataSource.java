@@ -1,6 +1,6 @@
 
 
-package com.yc.todoapp;
+package com.yc.todoapp.util;
 
 import com.yc.todoapp.data.Task;
 import com.yc.todoapp.data.source.TasksDataSource;

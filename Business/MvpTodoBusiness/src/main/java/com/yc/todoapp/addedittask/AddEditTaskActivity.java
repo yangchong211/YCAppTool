@@ -4,7 +4,7 @@ package com.yc.todoapp.addedittask;
 
 import android.os.Bundle;
 
-import com.yc.todoapp.Injection;
+import com.yc.todoapp.util.Injection;
 import com.yc.todoapp.R;
 import com.yc.todoapp.util.ActivityUtils;
 import androidx.annotation.Nullable;
@@ -37,7 +37,8 @@ public class AddEditTaskActivity extends AppCompatActivity {
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setDisplayShowHomeEnabled(true);
 
-        AddEditTaskFragment addEditTaskFragment = (AddEditTaskFragment) getSupportFragmentManager()
+        AddEditTaskFragment addEditTaskFragment = (AddEditTaskFragment)
+                getSupportFragmentManager()
                 .findFragmentById(R.id.contentFrame);
 
         String taskId = getIntent().getStringExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID);

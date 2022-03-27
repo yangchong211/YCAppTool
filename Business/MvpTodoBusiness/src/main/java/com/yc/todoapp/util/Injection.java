@@ -1,6 +1,6 @@
 
 
-package com.yc.todoapp;
+package com.yc.todoapp.util;
 
 import android.content.Context;
 
@@ -8,7 +8,6 @@ import com.yc.todoapp.data.source.TasksDataSource;
 import com.yc.todoapp.data.source.TasksRepository;
 import com.yc.todoapp.data.source.local.TasksLocalDataSource;
 import com.yc.todoapp.data.source.local.ToDoDatabase;
-import com.yc.todoapp.util.AppExecutors;
 
 import androidx.annotation.NonNull;
 
