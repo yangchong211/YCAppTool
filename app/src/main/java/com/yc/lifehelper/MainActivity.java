@@ -33,7 +33,6 @@ import com.yc.library.web.WebViewActivity;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
-import com.yc.other.ui.activity.net.NetworkActivity;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
