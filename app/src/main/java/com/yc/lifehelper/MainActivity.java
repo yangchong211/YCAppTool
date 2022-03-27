@@ -30,6 +30,12 @@ import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.web.WebViewActivity;
+import com.yc.lifehelper.adapter.MainAdapter;
+import com.yc.lifehelper.component.AdListComponent;
+import com.yc.lifehelper.component.BannerComponent;
+import com.yc.lifehelper.component.HeaderComponent;
+import com.yc.lifehelper.component.ListNewsComponent;
+import com.yc.lifehelper.component.RecommendComponent;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -212,14 +218,39 @@ public class MainActivity extends BaseActivity{
                 SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
         mRecyclerView.addItemDecoration(line);
         mainAdapter = new MainAdapter(this);
+        initAddBanner();
         initAddHeader();
+        initAddListNews();
+        initRecommend();
+        initAdListNews();
         mRecyclerView.setAdapter(mainAdapter);
+    }
+
+    private void initAddBanner() {
+        BannerComponent bannerComponent = new BannerComponent();
+        mainAdapter.addHeader(bannerComponent);
+        banner = bannerComponent.getBannerView();
     }
 
     private void initAddHeader() {
         HeaderComponent headerComponent = new HeaderComponent();
         mainAdapter.addHeader(headerComponent);
-        banner = headerComponent.getBannerView();
+    }
+
+    private void initAddListNews() {
+        ListNewsComponent listNewsComponent = new ListNewsComponent();
+        mainAdapter.addHeader(listNewsComponent);
+    }
+
+    private void initRecommend() {
+        RecommendComponent recommendComponent = new RecommendComponent();
+        mainAdapter.addHeader(recommendComponent);
+    }
+
+
+    private void initAdListNews() {
+        AdListComponent adListComponent = new AdListComponent();
+        mainAdapter.addHeader(adListComponent);
     }
 
     /**

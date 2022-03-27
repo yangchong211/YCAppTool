@@ -5,89 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    android:padding="@dimen/dp10">
 
     <LinearLayout
-        android:id="@+id/ll_news_head"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:gravity="center_vertical"
-        android:background="@color/whiteBg"
-        android:visibility="gone">
-        <View
-            android:layout_width="5dp"
-            android:layout_height="match_parent"
-            android:background="@color/redTab"/>
+        android:orientation="vertical">
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
             android:textColor="@color/blackText"
-            android:textSize="18sp"
-            android:text="推荐新闻"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_back_right"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/ll_new_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:padding="10dp"
-        android:orientation="horizontal">
+            android:textSize="16sp"
+            android:text="深度好文：脱虚向实的唯一出路，也许就是一场金融危机"
+            android:maxLines="2"/>
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
             <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:textColor="@color/blackText"
-                android:textSize="16sp"
-                android:maxLines="2"/>
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/tv_author"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/blackText2"
-                    android:textSize="12sp"/>
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@color/blackText2"
-                    android:textSize="12sp"/>
-                <TextView
-                    android:id="@+id/tv_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/blackText2"
-                    android:textSize="12sp"/>
-            </LinearLayout>
+                android:textColor="@color/blackText2"
+                android:text="作者"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/blackText2"
+                android:text="时间"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp6"
+                android:textColor="@color/blackText2"
+                android:text="类型"
+                android:textSize="12sp"/>
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_img"
-            android:layout_width="90dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="25dp"
-            android:scaleType="fitXY"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_img"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="25dp"
+        android:scaleType="fitXY"/>
 
 </LinearLayout>

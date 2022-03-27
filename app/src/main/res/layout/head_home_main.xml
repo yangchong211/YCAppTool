@@ -7,10 +7,6 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <com.yc.banner.view.BannerView
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,6 +41,7 @@
             android:text="ANR监控" />
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,40 +74,5 @@
             android:drawableTop="@drawable/ic_home_four"
             android:text="视频播放器" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        android:orientation="horizontal"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp">
-        <TextView
-            android:id="@+id/tv_home_nine"
-            style="@style/WeightAttr"
-            android:drawablePadding="8dp"
-            android:drawableTop="@drawable/ic_home_first"
-            android:text="MVP案例" />
-        <TextView
-            android:id="@+id/tv_home_ten"
-            style="@style/WeightAttr"
-            android:drawablePadding="8dp"
-            android:drawableTop="@drawable/ic_home_second"
-            android:text="MVVM案例" />
-        <TextView
-            android:id="@+id/tv_home_eleven"
-            style="@style/WeightAttr"
-            android:drawablePadding="8dp"
-            android:drawableTop="@drawable/ic_home_third"
-            android:text="MVVM案例1" />
-        <TextView
-            android:id="@+id/tv_home_twelve"
-            style="@style/WeightAttr"
-            android:drawablePadding="8dp"
-            android:drawableTop="@drawable/ic_home_four"
-            android:text="MVVM案例2" />
-    </LinearLayout>
-
-
 
 </LinearLayout>

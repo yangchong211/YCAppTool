@@ -19,29 +19,7 @@ import java.util.List;
  * 修订历史：
  * ================================================
  */
-public class ConstantImageApi {
-
-    /**
-     * 初始化页面随机图片
-     */
-    private static final String SPALSH_01 = "http://or4ceksby.bkt.clouddn.com/b_1.jpg";
-    private static final String SPALSH_02 = "http://or4ceksby.bkt.clouddn.com/b_2.jpg";
-    private static final String SPALSH_03 = "http://or4ceksby.bkt.clouddn.com/b_3.jpg";
-    private static final String SPALSH_04 = "http://or4ceksby.bkt.clouddn.com/b_4.jpg";
-    private static final String SPALSH_05 = "http://or4ceksby.bkt.clouddn.com/b_5.jpg";
-    private static final String SPALSH_06 = "http://or4ceksby.bkt.clouddn.com/b_6.jpg";
-    private static final String SPALSH_07 = "http://or4ceksby.bkt.clouddn.com/b_7.jpg";
-    private static final String SPALSH_08 = "http://or4ceksby.bkt.clouddn.com/b_8.jpg";
-    private static final String SPALSH_09 = "http://or4ceksby.bkt.clouddn.com/b_9.jpg";
-    private static final String SPALSH_10 = "http://or4ceksby.bkt.clouddn.com/b_10.jpg";
-    public static final String[] SPALSH_URLS = new String[]{
-            SPALSH_01, SPALSH_02, SPALSH_03, SPALSH_04,
-            SPALSH_05, SPALSH_06, SPALSH_07, SPALSH_08,
-            SPALSH_09,SPALSH_10
-    };
-
-    // 电影栏头部的图片
-    public static final String MOVIE_URL_01 = "http://ojyz0c8un.bkt.clouddn.com/one_01.png";
+public final class ConstantImageApi {
 
     private static final int[] priorityIcons = new int[]{
             R.drawable.ic_priority_1,
@@ -105,17 +83,6 @@ public class ConstantImageApi {
         for (int i = 0; i < NarrowImage.length; i++) {
             arrayList.add(NarrowImage[i]);
         }
-        return arrayList;
-    }
-
-    public static ArrayList<Integer> getGildImage(){
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        final TypedArray array = Utils.getApp().getResources().obtainTypedArray(R.array.image_girls);
-        for(int a=0 ; a<array.length() ; a++){
-            int resourceId = array.getResourceId(a, R.drawable.ic_data_picture);
-            arrayList.add(resourceId);
-        }
-        array.recycle();
         return arrayList;
     }
 

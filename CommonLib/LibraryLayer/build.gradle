@@ -107,6 +107,8 @@ dependencies {
     api 'com.github.yangchong211.YCRefreshView:PhotoCoverLib:3.0.1'
     //标签多选单选库
     api 'com.github.yangchong211.YCRefreshView:SelectViewLib:3.0.1'
+    //简单adapter封装库
+    api 'com.github.yangchong211.YCRefreshView:EastAdapterLib:3.0.2'
 
     implementation project(path: ':WidgetViewLib')
     implementation project(path: ':ToolUtilsLib')

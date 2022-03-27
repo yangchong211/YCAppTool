@@ -1,4 +1,4 @@
-package com.yc.lifehelper;
+package com.yc.lifehelper.adapter;
 
 import android.content.Context;
 import android.view.View;

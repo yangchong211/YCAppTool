@@ -3,10 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:paddingLeft="@dimen/dp20"
+    android:paddingRight="@dimen/dp20"
+    android:paddingTop="@dimen/dp10"
+    android:paddingBottom="@dimen/dp10"
     android:foreground="?android:attr/selectableItemBackground"
     android:orientation="horizontal"
     android:background="@color/colorWhite">
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
@@ -20,16 +24,18 @@
             android:maxLines="2"
             android:ellipsize="end"
             android:textColor="@color/blackText1"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:text="深度好文：脱虚向实的唯一出路，也许就是一场金融危机"/>
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
             android:textSize="12sp"
             android:textColor="@color/gray3"
             android:text="2017年8月28日"/>
     </LinearLayout>
+
     <ImageView
         android:id="@+id/iv_logo"
         android:layout_width="90dp"

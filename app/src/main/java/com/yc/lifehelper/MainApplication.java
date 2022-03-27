@@ -5,9 +5,8 @@ import android.util.Log;
 
 import com.yc.appstart.AppStartTask;
 import com.yc.appstart.AppTaskDispatcher;
-import com.yc.autocloserlib.AppAutoCloser;
+import com.yc.lifehelper.listener.MainActivityListener;
 import com.yc.memoryleakupload.DMemoryLeak;
-import com.yc.alive.KeepAliveHelper;
 import com.yc.applicationlib.activity.ActivityManager;
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.backgroud.AppStateMonitor;

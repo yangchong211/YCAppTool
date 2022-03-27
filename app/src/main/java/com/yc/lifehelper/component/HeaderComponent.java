@@ -1,4 +1,4 @@
-package com.yc.lifehelper;
+package com.yc.lifehelper.component;
 
 import android.content.Context;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.yc.banner.view.BannerView;
 import com.yc.catonhelperlib.fps.PerformanceActivity;
 import com.yc.leetbusiness.LeetCodeActivity;
+import com.yc.lifehelper.LocaleActivity;
+import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -28,8 +30,8 @@ import java.util.List;
 public class HeaderComponent implements InterItemView {
 
     private final Logger logger = LoggerService.getInstance().getLogger("HeaderComponent");
-    private BannerView banner;
     private Context context;
+
     @Override
     public View onCreateView(ViewGroup parent) {
         View headerView = View.inflate(parent.getContext(), R.layout.head_home_main, null);
@@ -39,7 +41,6 @@ public class HeaderComponent implements InterItemView {
 
     @Override
     public void onBindView(View header) {
-        banner = header.findViewById(R.id.banner);
         TextView tvHomeFirst = header.findViewById(R.id.tv_home_first);
         TextView tvHomeSecond =header.findViewById(R.id.tv_home_second);
         TextView tvHomeThird = header.findViewById(R.id.tv_home_third);
@@ -48,9 +49,6 @@ public class HeaderComponent implements InterItemView {
         TextView tvHomeSix =header.findViewById(R.id.tv_home_six);
         TextView tvHomeSeven = header.findViewById(R.id.tv_home_seven);
         TextView tvHomeEight = header.findViewById(R.id.tv_home_eight);
-        TextView tvHomeNine = header.findViewById(R.id.tv_home_nine);
-        TextView tvHomeTen = header.findViewById(R.id.tv_home_ten);
-        TextView tvHomeEleven = header.findViewById(R.id.tv_home_eleven);
 
         View.OnClickListener listener = v -> {
             if (FastClickUtils.isFastDoubleClick()){
@@ -94,18 +92,6 @@ public class HeaderComponent implements InterItemView {
                 case R.id.tv_home_eight:
                     VideoActivity.startActivity(context);
                     break;
-                //MVP经典todo案例
-                case R.id.tv_home_nine:
-                    TasksActivity.startActivity(context);
-                    break;
-                //MVVM案例经典todo案例
-                case R.id.tv_home_ten:
-                    TasksMvvmActivity.startActivity(context);
-                    break;
-                //MVVM案例经典todo案例
-                case R.id.tv_home_eleven:
-                    TasksLiveActivity.startActivity(context);
-                    break;
                 default:
                     break;
             }
@@ -118,32 +104,7 @@ public class HeaderComponent implements InterItemView {
         tvHomeSix.setOnClickListener(listener);
         tvHomeSeven.setOnClickListener(listener);
         tvHomeEight.setOnClickListener(listener);
-        tvHomeNine.setOnClickListener(listener);
-        tvHomeTen.setOnClickListener(listener);
-        tvHomeEleven.setOnClickListener(listener);
-        initBanner();
     }
 
-    /**
-     * 初始化轮播图
-     */
-    private void initBanner() {
-        if (banner!=null){
-            List<Integer> list = new ArrayList<>();
-            list.add(R.drawable.bg_small_autumn_tree_min);
-            list.add(R.drawable.bg_small_kites_min);
-            list.add(R.drawable.bg_small_leaves_min);
-            list.add(R.drawable.bg_small_tulip_min);
-            list.add(R.drawable.bg_small_tree_min);
-            banner.setAnimationDuration(3000);
-            banner.setDelayTime(4000);
-            banner.setImages(list);
-            banner.setImageLoader(new BannerImageLoader());
-            banner.start();
-        }
-    }
 
-    public BannerView getBannerView() {
-        return banner;
-    }
 }
