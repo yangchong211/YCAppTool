@@ -1,4 +1,4 @@
-package com.yc.other.ui.activity.net;
+package com.yc.mvctodo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.netlib.ui.NetRequestActivity;
-import com.yc.other.R;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,7 +20,15 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-
+/**
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/8/22
+ *     desc  : MVC中的Controller层
+ *     revise:
+ * </pre>
+ */
 public class NetworkActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -115,85 +122,57 @@ public class NetworkActivity extends AppCompatActivity {
 
     private void sendRequest2() {
         mResponseTextView.setText("loading...");
-        new Thread(){
+        String testUrl = "https://www.wanandroid.com/banner/json";
+        NetworkModel networkModel = new NetworkModel();
+        networkModel.getData(testUrl,new NetworkModel.DataListener<String>() {
             @Override
-            public void run() {
-                super.run();
-                String testUrl = "https://www.wanandroid.com/banner/json";
-                OkHttpManager.getInstance().get(testUrl, new Callback() {
+            public void onSuccess(String body) {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onFailure(Call call, final IOException e) {
-                        Log.e(TAG, "e = "+e.getMessage());
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mResponseTextView.setText(e.getMessage());
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                final String body;
-                                try {
-                                    body = response.body().string();
-                                    Log.d(TAG, body);
-                                    mResponseTextView.setText(body);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                    mResponseTextView.setText(e.getMessage());
-                                }
-                            }
-                        });
+                    public void run() {
+                        mResponseTextView.setText(body);
                     }
                 });
             }
-        }.start();
+
+            @Override
+            public void onError(String error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mResponseTextView.setText(error);
+                    }
+                });
+            }
+        });
     }
 
 
     private void sendRequest3() {
         mResponseTextView.setText("loading...");
-        new Thread(){
+        String testUrl = "https://www.wanandroid.com/friend/json";
+        NetworkModel networkModel = new NetworkModel();
+        networkModel.getData(testUrl,new NetworkModel.DataListener<String>() {
             @Override
-            public void run() {
-                super.run();
-                String testUrl = "https://www.wanandroid.com/friend/json";
-                OkHttpManager.getInstance().get(testUrl, new Callback() {
+            public void onSuccess(String body) {
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onFailure(Call call, final IOException e) {
-                        Log.e(TAG, "e = "+e.getMessage());
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mResponseTextView.setText(e.getMessage());
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                final String body;
-                                try {
-                                    body = response.body().string();
-                                    Log.d(TAG, body);
-                                    mResponseTextView.setText(body);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                    mResponseTextView.setText(e.getMessage());
-                                }
-                            }
-                        });
+                    public void run() {
+                        mResponseTextView.setText(body);
                     }
                 });
             }
-        }.start();
+
+            @Override
+            public void onError(String error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mResponseTextView.setText(error);
+                    }
+                });
+            }
+        });
     }
 
 }

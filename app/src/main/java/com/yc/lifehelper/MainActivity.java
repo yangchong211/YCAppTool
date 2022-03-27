@@ -12,12 +12,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,34 +24,22 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.applicationlib.activity.ActivityManager;
-import com.yc.autocloserlib.AppAutoCloser;
 import com.yc.banner.view.BannerView;
-import com.yc.catonhelperlib.fps.PerformanceActivity;
 
 import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
-import com.yc.leetbusiness.LeetCodeActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.web.WebViewActivity;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
-import com.yc.other.thread.MainThreadActivity;
 import com.yc.other.ui.activity.net.NetworkActivity;
-import com.yc.todoapp.tasks.TasksActivity;
-import com.yc.toollib.crash.CrashToolUtils;
-import com.yc.toolutils.click.FastClickUtils;
 import com.yc.toolutils.click.PerfectClickListener;
-import com.yc.video.ui.activity.VideoActivity;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
 
-import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 

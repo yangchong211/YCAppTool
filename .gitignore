@@ -9,3 +9,7 @@
 .externalNativeBuild
 .idea/
 /.idea/
+.idea
+.idea/compiler.xml
+.idea/gradle.xml
+.idea/modules.xml

@@ -24,7 +24,7 @@
         <activity android:name="com.yc.other.ui.timer.CountViewActivity"/>
         <activity android:name="com.yc.other.ui.timer.HandlerActivity"/>
         <activity android:name="com.yc.other.ui.activity.SerialTaskActivity"/>
-        <activity android:name="com.yc.other.ui.activity.net.NetworkActivity"/>
+
 
         <activity android:name=".thread.ThreadActivity"/>
         <activity android:name=".thread.ThreadPoolExecutorActivity"/>
