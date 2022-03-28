@@ -20,7 +20,16 @@ import androidx.fragment.app.Fragment;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Main UI for the add task screen. Users can enter a task title and description.
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time  : 2020/7/10
+ *     desc  :
+ *     revise: Fragment 作为 view 层的实现类，为什么是 Fragment 呢
+ *             有两个原因：
+ *             1.把 Activity 作为一个全局控制类来创建对象，把 Fragment 作为 view，这样两者就能各司其职。
+ *             2.因为 Fragment 比较灵活，能够方便的处理界面适配的问题
+ * </pre>
  */
 public class AddEditTaskFragment extends Fragment implements AddEditTaskContract.View {
 

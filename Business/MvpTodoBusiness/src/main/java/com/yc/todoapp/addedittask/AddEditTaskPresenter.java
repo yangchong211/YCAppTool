@@ -101,6 +101,7 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter, Task
         if (newTask.isEmpty()) {
             mAddTaskView.showEmptyTaskError();
         } else {
+            //保存数据
             mTasksRepository.saveTask(newTask);
             mAddTaskView.showTasksList();
         }
@@ -110,6 +111,7 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter, Task
         if (isNewTask()) {
             throw new RuntimeException("updateTask() was called but task is new.");
         }
+        //保存数据
         mTasksRepository.saveTask(new Task(title, description, mTaskId));
         mAddTaskView.showTasksList(); // After an edit, go back to the list.
     }

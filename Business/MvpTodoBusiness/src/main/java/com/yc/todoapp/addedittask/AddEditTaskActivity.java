@@ -4,16 +4,25 @@ package com.yc.todoapp.addedittask;
 
 import android.os.Bundle;
 
+import com.yc.todoapp.data.source.TasksRepository;
 import com.yc.todoapp.util.Injection;
 import com.yc.todoapp.R;
 import com.yc.todoapp.util.ActivityUtils;
+import com.yc.toolutils.activity.FragmentUtils;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 /**
- * Displays an add or edit task screen.
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time  : 2020/7/10
+ *     desc  :
+ *     revise: Activity 在项目中是一个全局的控制者，负责创建 view 以及 presenter 实例，并将二者联系起来
+ * </pre>
  */
 public class AddEditTaskActivity extends AppCompatActivity {
 
@@ -29,20 +38,14 @@ public class AddEditTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addtask_act);
+        initActionBar();
 
-        // Set up the toolbar.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        mActionBar = getSupportActionBar();
-        mActionBar.setDisplayHomeAsUpEnabled(true);
-        mActionBar.setDisplayShowHomeEnabled(true);
 
         AddEditTaskFragment addEditTaskFragment = (AddEditTaskFragment)
                 getSupportFragmentManager()
                 .findFragmentById(R.id.contentFrame);
 
         String taskId = getIntent().getStringExtra(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID);
-
         setToolbarTitle(taskId);
 
         if (addEditTaskFragment == null) {
@@ -53,9 +56,7 @@ public class AddEditTaskActivity extends AppCompatActivity {
                 bundle.putString(AddEditTaskFragment.ARGUMENT_EDIT_TASK_ID, taskId);
                 addEditTaskFragment.setArguments(bundle);
             }
-
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    addEditTaskFragment, R.id.contentFrame);
+            FragmentUtils.add(getSupportFragmentManager(),addEditTaskFragment,R.id.contentFrame);
         }
 
         boolean shouldLoadDataFromRepo = true;
@@ -66,12 +67,22 @@ public class AddEditTaskActivity extends AppCompatActivity {
             shouldLoadDataFromRepo = savedInstanceState.getBoolean(SHOULD_LOAD_DATA_FROM_REPO_KEY);
         }
 
+        TasksRepository tasksRepository = Injection.provideTasksRepository(getApplicationContext());
         // Create the presenter
         mAddEditTaskPresenter = new AddEditTaskPresenter(
                 taskId,
-                Injection.provideTasksRepository(getApplicationContext()),
+                tasksRepository,
                 addEditTaskFragment,
                 shouldLoadDataFromRepo);
+    }
+
+    private void initActionBar() {
+        // Set up the toolbar.
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        mActionBar = getSupportActionBar();
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setDisplayShowHomeEnabled(true);
     }
 
     private void setToolbarTitle(@Nullable String taskId) {
