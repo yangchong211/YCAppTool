@@ -28,7 +28,8 @@ public class ServiceLoaderPlugin implements Plugin<Project> {
             }
             final AppExtension android = project.getExtensions().getByType(AppExtension.class);
             android.getApplicationVariants().forEach(variant -> {
-                final File spiRoot = project.file(project.getBuildDir() + File.separator + "intermediates" + File.separator + "spi" + File.separator + variant.getDirName() + File.separator);
+                final File spiRoot = project.file(project.getBuildDir() + File.separator + "intermediates"
+                        + File.separator + "spi" + File.separator + variant.getDirName() + File.separator);
                 ServiceLoaderUtils.log("spi root file absolute path : " + spiRoot.getAbsolutePath());
                 ServiceLoaderUtils.log("spi root file path : " + spiRoot.getPath());
                 List<File> bootClasspath = android.getBootClasspath();
