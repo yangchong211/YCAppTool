@@ -20,8 +20,8 @@ public class ServiceLoaderPlugin implements Plugin<Project> {
     @Override
     @SuppressWarnings("deprecation")
     public void apply(final Project project) {
-        //String spiLoaderName = "com.github.yangchong211.spi:spi-loader:1.0.0";
-        //project.getDependencies().add("implementation", spiLoaderName);
+        String spiLoaderName = "com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.2.4";
+        project.getDependencies().add("implementation", spiLoaderName);
         project.afterEvaluate(p -> {
             if (!project.getPlugins().hasPlugin("com.android.application")) {
                 return;

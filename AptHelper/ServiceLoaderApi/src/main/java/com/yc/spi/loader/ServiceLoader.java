@@ -48,7 +48,8 @@ public final class ServiceLoader<S> implements Iterable<S> {
     }
 
     private void load() {
-        for (final Class<? extends S> provider : getServiceProviders()) {
+        Set<Class<? extends S>> serviceProviders = getServiceProviders();
+        for (final Class<? extends S> provider : serviceProviders) {
             try {
                 final S p = ServiceRegistry.newProvider(provider);
                 this.mProviders.add(p);

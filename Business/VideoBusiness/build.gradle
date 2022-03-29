@@ -74,5 +74,7 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':FragmentLib')
     implementation project(path: ':YCDialogLib')
+
+    api project(path: ':BusinessInterface')
 }
 

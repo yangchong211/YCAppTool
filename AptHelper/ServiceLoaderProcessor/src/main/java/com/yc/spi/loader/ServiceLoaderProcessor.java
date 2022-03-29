@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
@@ -30,7 +31,15 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : https://github.com/yangchong211/
+ *     time  : 2020/7/10
+ *     desc  : apt
+ *     revise: 使用javaopet库，然后通过拼接类的路径，类的修饰符，返回值，参数等多个元素，最后用jarvFile写到指定的目录文件。
+ * </pre>
+ */
 @AutoService(Processor.class)
 public class ServiceLoaderProcessor extends AbstractProcessor {
 
@@ -156,12 +165,14 @@ public class ServiceLoaderProcessor extends AbstractProcessor {
                 }
 
                 try {
+                    Filer filer = processingEnv.getFiler();
+                    log("write java filer content : " + filer.toString());
                     JavaFile.builder(getPackageName(typeElement), tsb.build())
                             .indent("    ")
                             .addFileComment("\nAutomatically generated file. DO NOT MODIFY\n")
                             .skipJavaLangImports(true)
                             .build()
-                            .writeTo(processingEnv.getFiler());
+                            .writeTo(filer);
                 } catch (final IOException e) {
                     e.printStackTrace();
                 }
@@ -200,8 +211,7 @@ public class ServiceLoaderProcessor extends AbstractProcessor {
     }
 
     private void log(String string){
-        Logger logger = Logger.getLogger("processor log : ");
-        logger.log(Level.INFO,string);
+        System.out.println("processor log : " + string);
     }
 
 }

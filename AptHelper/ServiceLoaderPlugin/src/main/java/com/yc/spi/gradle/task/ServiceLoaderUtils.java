@@ -1,6 +1,7 @@
 package com.yc.spi.gradle.task;
 
 
+import com.android.ddmlib.Log;
 import com.yc.spi.annotation.ServiceProvider;
 
 import java.io.File;
@@ -12,8 +13,6 @@ import java.util.List;
 import java.util.Stack;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -117,7 +116,7 @@ public final class ServiceLoaderUtils {
     }
 
     public static void log(String string){
-        Logger logger = Logger.getLogger("processor log : ");
-        logger.log(Level.INFO,string);
+        Log.d("spi plugin log : ",string);
+        System.out.println("system out spi plugin log : " + string);
     }
 }

@@ -3,7 +3,7 @@ package com.yc.animbusiness;
 import com.blankj.utilcode.util.LogUtils;
 import com.yc.spi.annotation.ServiceProvider;
 
-//@ServiceProvider(IAnimProvider.class)
+@ServiceProvider(IAnimProvider.class)
 public class AnimProviderImpl implements IAnimProvider{
 
     public static final String TAG = "AnimProviderImpl";

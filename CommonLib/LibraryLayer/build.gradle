@@ -117,6 +117,10 @@ dependencies {
     //轮播图，使用recyclerView实现，https://github.com/yangchong211/YCBannerView
     api 'com.github.yangchong211.YCBannerView:GalleryBannerLib:2.3.6'
 
+    //ServiceLoader
+    api 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.2.4'
+    annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.2.4'
+
     implementation project(path: ':WidgetViewLib')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':WebViewLib')
