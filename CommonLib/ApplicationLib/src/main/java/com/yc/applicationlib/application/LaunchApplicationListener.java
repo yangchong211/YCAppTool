@@ -11,7 +11,7 @@ import com.yc.spi.loader.ServiceLoader;
 /**
  * 分发 lifecycle 时确保各个 listener 出现异常时不相互影响
  */
-@ServiceProvider(value = ApplicationListener.class, priority = -1)
+//@ServiceProvider(value = ApplicationListener.class, priority = -1)
 public class LaunchApplicationListener extends AbstractLifecycleListener {
 
     private final Iterable<ApplicationListener> mApplicationListener =

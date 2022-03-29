@@ -70,19 +70,21 @@ public class ServiceLoaderProcessor extends AbstractProcessor {
                 String simpleName = clazzService.simpleName();
                 log("get simple name : " + serviceName);
                 final ClassName clazzSingleton = ClassName.get(packageName, simpleName, "Singleton");
+                log("get clazz singleton name : " + clazzSingleton);
                 final TypeSpec.Builder tsb = TypeSpec.classBuilder(clazzService)
+                        // 写入注释
                         .addJavadoc("Represents the service of {@link $T}\n", clazzSpi)
+                        //写入 public final
                         .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
+                        //写入
                         .addSuperinterface(clazzSpi)
-                        .addType(TypeSpec.classBuilder(clazzSingleton.simpleName())
-                                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
-                                .addField(FieldSpec.builder(clazzService, "INSTANCE", Modifier.STATIC, Modifier.FINAL)
-                                        .initializer("new $T()", clazzService)
-                                        .build())
-                                .build())
+                        //写入方法
+                        .addType(getClazzTypeSpec(clazzSingleton,clazzService))
+                        //添加成员属性
                         .addField(FieldSpec.builder(clazzSpi, "mDelegate", Modifier.PRIVATE, Modifier.FINAL)
                                 .initializer("$T.load($T.class).get()", clazzLoader, clazzSpi)
                                 .build())
+                        //添加私有方法
                         .addMethod(MethodSpec.constructorBuilder()
                                 .addModifiers(Modifier.PRIVATE)
                                 .build())
@@ -116,24 +118,30 @@ public class ServiceLoaderProcessor extends AbstractProcessor {
                     }
 
                     switch (returnType.getKind()) {
+                        //布尔类型
                         case BOOLEAN:
                             msb.addStatement("return null != this.mDelegate && this.mDelegate.$L($L)", methodName, args);
                             break;
+                        //字节
                         case BYTE:
                             msb.addStatement("return null != this.mDelegate ? this.mDelegate.$L($L) : (byte) 0", methodName, args);
                             break;
+                        //short类型
                         case SHORT:
                             msb.addStatement("return null != this.mDelegate ? this.mDelegate.$L($L) : (short) 0", methodName, args);
                             break;
+                        //int，float，long，double类型
                         case INT:
                         case FLOAT:
                         case LONG:
                         case DOUBLE:
                             msb.addStatement("return null != this.mDelegate ? this.mDelegate.$L($L) : 0", methodName, args);
                             break;
+                        //char字符类型
                         case CHAR:
                             msb.addStatement("return null != this.mDelegate ? this.mDelegate.$L($L) : '\0'", methodName, args);
                             break;
+                        //void，无返回值类型
                         case VOID:
                             msb.beginControlFlow("if (null != this.mDelegate)")
                                     .addStatement("this.mDelegate.$L($L)", methodName, args)
@@ -161,6 +169,20 @@ public class ServiceLoaderProcessor extends AbstractProcessor {
         }
 
         return true;
+    }
+
+    private TypeSpec getClazzTypeSpec(ClassName clazzSingleton,ClassName clazzService){
+        TypeSpec instance = TypeSpec.classBuilder(clazzSingleton.simpleName())
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .addField(FieldSpec.builder(clazzService, "INSTANCE", Modifier.STATIC, Modifier.FINAL)
+                        .initializer("new $T()", clazzService)
+                        .build())
+                .build();
+        String name = instance.name;
+        log("get clazz type spec name : " + name);
+        String s = instance.toString();
+        log("get clazz type spec to string : " + s);
+        return instance;
     }
 
     private String getServiceName(final TypeElement typeElement) {

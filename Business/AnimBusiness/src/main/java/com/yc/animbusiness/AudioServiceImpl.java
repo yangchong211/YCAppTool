@@ -3,7 +3,7 @@ package com.yc.animbusiness;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.spi.annotation.ServiceProvider;
 
-@ServiceProvider(AudioServiceProvider.class)
+//@ServiceProvider(AudioServiceProvider.class)
 public class AudioServiceImpl implements AudioServiceProvider{
 
     @Override

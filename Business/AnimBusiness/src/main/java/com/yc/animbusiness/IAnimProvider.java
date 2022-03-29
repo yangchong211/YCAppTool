@@ -3,7 +3,7 @@ package com.yc.animbusiness;
 
 import com.yc.spi.annotation.ServiceProviderInterface;
 
-@ServiceProviderInterface
+//@ServiceProviderInterface
 public interface IAnimProvider {
 
     void setStartAnim();
