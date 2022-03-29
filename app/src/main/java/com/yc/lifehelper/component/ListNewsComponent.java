@@ -36,7 +36,7 @@ public class ListNewsComponent implements InterItemView {
 
     @Override
     public View onCreateView(ViewGroup parent) {
-        View headerView = View.inflate(parent.getContext(), R.layout.base_recycler_view, null);
+        View headerView = View.inflate(parent.getContext(), R.layout.base_title_list_view, null);
         logger.debug("banner on create view");
         context = headerView.getContext();
         return headerView;
@@ -44,7 +44,9 @@ public class ListNewsComponent implements InterItemView {
 
     @Override
     public void onBindView(View header) {
+        TextView tvTitle = header.findViewById(R.id.tv_title);
         recyclerView = header.findViewById(R.id.recyclerView);
+        tvTitle.setText("头条新闻");
         logger.debug("banner on bind view");
         if (newsAdapter == null){
             initRecyclerView();

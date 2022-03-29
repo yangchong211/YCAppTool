@@ -37,7 +37,7 @@ public class SnapBannerComponent implements InterItemView {
 
     @Override
     public View onCreateView(ViewGroup parent) {
-        View headerView = View.inflate(parent.getContext(), R.layout.base_recycler_view, null);
+        View headerView = View.inflate(parent.getContext(), R.layout.base_title_list_view, null);
         logger.debug("banner on create view");
         context = headerView.getContext();
         return headerView;
@@ -45,7 +45,9 @@ public class SnapBannerComponent implements InterItemView {
 
     @Override
     public void onBindView(View header) {
+        TextView tvTitle = header.findViewById(R.id.tv_title);
         recyclerView = header.findViewById(R.id.recyclerView);
+        tvTitle.setText("热门活动");
         logger.debug("banner on bind view");
         if (adapter == null){
             initRecyclerView();
@@ -101,7 +103,6 @@ public class SnapBannerComponent implements InterItemView {
             GlideImageUtils.loadImageLocal(context,data.getImage(),iv_image);
             //iv_image.setBackgroundResource(data.getImage());
         }
-
     }
     
     private static class SpaceItemLine extends RecyclerView.ItemDecoration{
