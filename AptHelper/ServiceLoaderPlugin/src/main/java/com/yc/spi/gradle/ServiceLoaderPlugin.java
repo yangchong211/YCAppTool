@@ -4,12 +4,15 @@ package com.yc.spi.gradle;
 import com.android.build.gradle.AppExtension;
 import com.google.common.base.Strings;
 import com.yc.spi.gradle.task.ServiceLoaderTask;
+import com.yc.spi.gradle.task.ServiceLoaderUtils;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.file.FileCollection;
+import org.gradle.api.tasks.TaskContainer;
 import org.gradle.api.tasks.compile.JavaCompile;
 import java.io.File;
+import java.util.List;
 
 
 public class ServiceLoaderPlugin implements Plugin<Project> {
@@ -26,9 +29,19 @@ public class ServiceLoaderPlugin implements Plugin<Project> {
             final AppExtension android = project.getExtensions().getByType(AppExtension.class);
             android.getApplicationVariants().forEach(variant -> {
                 final File spiRoot = project.file(project.getBuildDir() + File.separator + "intermediates" + File.separator + "spi" + File.separator + variant.getDirName() + File.separator);
-                final FileCollection spiClasspath = project.files(android.getBootClasspath(), variant.getJavaCompile().getClasspath(), variant.getJavaCompile().getDestinationDir());
+                ServiceLoaderUtils.log("spi root file absolute path : " + spiRoot.getAbsolutePath());
+                ServiceLoaderUtils.log("spi root file path : " + spiRoot.getPath());
+                List<File> bootClasspath = android.getBootClasspath();
+                FileCollection classpath = variant.getJavaCompile().getClasspath();
+                ServiceLoaderUtils.log("spi file classpath : " + classpath.getAsPath());
+                File destinationDir = variant.getJavaCompile().getDestinationDir();
+                ServiceLoaderUtils.log("spi destination dir file path : " + destinationDir.getPath());
+                final FileCollection spiClasspath = project.files(bootClasspath, classpath,destinationDir);
 
-                final ServiceLoaderTask generateTask = project.getTasks().create("generateServiceRegistry" + capitalize(variant.getName()), ServiceLoaderTask.class, task -> {
+                TaskContainer tasks = project.getTasks();
+                String capitalize = capitalize(variant.getName());
+                ServiceLoaderUtils.log("spi capitalize name : " + capitalize);
+                final ServiceLoaderTask generateTask = tasks.create("generateServiceRegistry" + capitalize, ServiceLoaderTask.class, task -> {
                     task.setDescription("Generate ServiceRegistry for " + capitalize(variant.getName()));
                     task.setClasspath(task.getClasspath().plus(spiClasspath));
                     task.setSourceDir(new File(spiRoot, "src"));

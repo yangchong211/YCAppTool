@@ -1,4 +1,4 @@
-package com.yc.spi.service;
+package com.yc.spi.loader;
 
 import com.yc.spi.annotation.ServiceProviderInterface;
 import com.google.auto.service.AutoService;
@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
@@ -56,10 +58,18 @@ public class ServiceLoaderProcessor extends AbstractProcessor {
             if (element instanceof TypeElement) {
                 final TypeElement typeElement = (TypeElement) element;
                 final String packageName = getPackageName(typeElement);
+                log("package name : " + packageName);
                 final ClassName clazzSpi = ClassName.get(typeElement);
-                final ClassName clazzLoader = ClassName.get(getClass().getPackage().getName(), "ServiceLoader");
-                final ClassName clazzService = ClassName.get(packageName, getServiceName(typeElement));
-                final ClassName clazzSingleton = ClassName.get(packageName, clazzService.simpleName(), "Singleton");
+                log("class name spi : " + clazzSpi.packageName());
+                String name = getClass().getPackage().getName();
+                log("get class package name : " + packageName);
+                final ClassName clazzLoader = ClassName.get(name, "ServiceLoader");
+                String serviceName = getServiceName(typeElement);
+                log("get service name : " + serviceName);
+                final ClassName clazzService = ClassName.get(packageName,serviceName);
+                String simpleName = clazzService.simpleName();
+                log("get simple name : " + serviceName);
+                final ClassName clazzSingleton = ClassName.get(packageName, simpleName, "Singleton");
                 final TypeSpec.Builder tsb = TypeSpec.classBuilder(clazzService)
                         .addJavadoc("Represents the service of {@link $T}\n", clazzSpi)
                         .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
@@ -82,7 +92,7 @@ public class ServiceLoaderProcessor extends AbstractProcessor {
                                 .returns(clazzService)
                                 .build());
 
-                System.out.println("Generate " + clazzService.toString());
+                log("generate name : " + clazzService.toString());
 
                 for (final ExecutableElement method : ElementFilter.methodsIn(typeElement.getEnclosedElements())) {
                     System.out.println(" + " + method);
@@ -155,15 +165,21 @@ public class ServiceLoaderProcessor extends AbstractProcessor {
 
     private String getServiceName(final TypeElement typeElement) {
         final String simpleName = typeElement.getSimpleName().toString();
+        log("type element simple name : " + simpleName);
         if (simpleName.endsWith("ServiceProvider")) {
             return simpleName.substring(0, simpleName.length() - 8);
         }
-
+        //注意：这个必须是包名
         return simpleName + "Service";
     }
 
     private String getPackageName(final TypeElement typeElement) {
         return this.utils.getPackageOf(typeElement).getQualifiedName().toString();
+    }
+
+    private void log(String string){
+        Logger logger = Logger.getLogger("processor log : ");
+        logger.log(Level.INFO,string);
     }
 
 }

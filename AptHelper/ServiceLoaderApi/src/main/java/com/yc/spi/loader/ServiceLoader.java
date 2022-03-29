@@ -1,7 +1,6 @@
 package com.yc.spi.loader;
 
 import com.yc.spi.annotation.ServiceProvider;
-import com.yc.spi.registry.ServiceRegistry;
 
 import java.util.Collections;
 import java.util.Iterator;

@@ -64,7 +64,10 @@ dependencies {
     implementation project(path: ':LibraryLayer')
 
     implementation project(path: ':api-manager')
-    implementation project(path: ':api-compiler')
-    implementation project(path: ':ServiceLoaderAnnotations')
     annotationProcessor project(path: ':api-compiler')
+
+    implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.2'
+    annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.2'
+    //implementation project(path: ':ServiceLoaderAnnotations')
+    //annotationProcessor project(path: ':api-compiler')
 }

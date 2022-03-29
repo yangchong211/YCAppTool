@@ -79,4 +79,7 @@ dependencies {
     implementation project(path: ':api-manager')
     implementation project(path: ':YCDialogLib')
     annotationProcessor project(path: ':api-compiler')
+
+    implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.2'
+    annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.2'
 }

@@ -1,4 +1,4 @@
-package com.yc.spi.registry;
+package com.yc.spi.loader;
 
 import java.util.Set;
 

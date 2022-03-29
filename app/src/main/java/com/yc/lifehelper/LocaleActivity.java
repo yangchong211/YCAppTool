@@ -11,8 +11,10 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.yc.animbusiness.AudioServiceProvider;
 import com.yc.localelib.service.LocaleService;
 import com.yc.localelib.utils.LocaleToolUtils;
+import com.yc.spi.loader.ServiceLoader;
 
 import java.util.List;
 import java.util.Locale;
@@ -22,6 +24,7 @@ public class LocaleActivity extends AppCompatActivity {
     private TextView mTv1;
     private TextView mTv2;
     private TextView mTv3;
+    private final AudioServiceProvider audioService = ServiceLoader.load(AudioServiceProvider.class).get();
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -83,12 +86,15 @@ public class LocaleActivity extends AppCompatActivity {
 
                 if (checkedId == R.id.rb_main_language_auto) {
                     // 跟随系统
+                    audioService.stop();
                     restart = LocaleService.getInstance().clearAppLanguage(LocaleActivity.this);
                 } else if (checkedId == R.id.rb_main_language_cn) {
                     // 简体中文
+                    audioService.pause();
                     restart = LocaleService.getInstance().setAppLanguage(LocaleActivity.this, Locale.CHINA);
                 } else if (checkedId == R.id.rb_main_language_tw) {
                     // 繁体中文
+                    audioService.resume();
                     restart = LocaleService.getInstance().setAppLanguage(LocaleActivity.this, Locale.TAIWAN);
                 } else if (checkedId == R.id.rb_main_language_en) {
                     // 英语
@@ -115,6 +121,7 @@ public class LocaleActivity extends AppCompatActivity {
         mTv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                audioService.stop();
                 LocaleToolUtils.setLocale(LocaleActivity.this,new Locale("ja"));
             }
         });
