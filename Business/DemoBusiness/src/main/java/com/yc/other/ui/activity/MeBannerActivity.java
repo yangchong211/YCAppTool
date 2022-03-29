@@ -12,8 +12,8 @@ import android.widget.LinearLayout;
 
 
 import com.bumptech.glide.Glide;
-import com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView;
 
+import com.yc.gallerybannerlib.GalleryRecyclerView;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.ui.adapter.MeBannerAdapter;
 import com.yc.statusbar.bar.StateAppBar;

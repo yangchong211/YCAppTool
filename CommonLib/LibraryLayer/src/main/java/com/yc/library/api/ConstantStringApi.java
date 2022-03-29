@@ -1,7 +1,9 @@
 package com.yc.library.api;
 
+import com.yc.library.bean.ListNewsData;
 import com.ycbjie.library.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,4 +48,46 @@ public final class ConstantStringApi {
             "杨充",
             "杨充",
     };
+
+    public static List<ListNewsData> getNewsList(){
+        List<ListNewsData> newsDataList = new ArrayList<>();
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(0),"", ConstantImageApi.createSmallImage().get(0)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(1),"", ConstantImageApi.createSmallImage().get(1)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(2),"", ConstantImageApi.createSmallImage().get(2)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(3),"", ConstantImageApi.createSmallImage().get(3)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(4),"", ConstantImageApi.createSmallImage().get(4)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(5),"", ConstantImageApi.createSmallImage().get(5)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(0),"", ConstantImageApi.createSmallImage().get(0)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(1),"", ConstantImageApi.createSmallImage().get(1)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(2),"", ConstantImageApi.createSmallImage().get(2)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(3),"", ConstantImageApi.createSmallImage().get(3)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(4),"", ConstantImageApi.createSmallImage().get(4)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(5),"", ConstantImageApi.createSmallImage().get(5)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(0),"", ConstantImageApi.createSmallImage().get(0)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(1),"", ConstantImageApi.createSmallImage().get(1)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(2),"", ConstantImageApi.createSmallImage().get(2)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(3),"", ConstantImageApi.createSmallImage().get(3)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(4),"", ConstantImageApi.createSmallImage().get(4)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(5),"", ConstantImageApi.createSmallImage().get(5)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(0),"", ConstantImageApi.createSmallImage().get(0)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(1),"", ConstantImageApi.createSmallImage().get(1)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(2),"", ConstantImageApi.createSmallImage().get(2)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(3),"", ConstantImageApi.createSmallImage().get(3)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(4),"", ConstantImageApi.createSmallImage().get(4)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(5),"", ConstantImageApi.createSmallImage().get(5)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(0),"", ConstantImageApi.createSmallImage().get(0)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(1),"", ConstantImageApi.createSmallImage().get(1)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(2),"", ConstantImageApi.createSmallImage().get(2)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(3),"", ConstantImageApi.createSmallImage().get(3)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(4),"", ConstantImageApi.createSmallImage().get(4)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(5),"", ConstantImageApi.createSmallImage().get(5)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(0),"", ConstantImageApi.createSmallImage().get(0)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(1),"", ConstantImageApi.createSmallImage().get(1)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(2),"", ConstantImageApi.createSmallImage().get(2)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(3),"", ConstantImageApi.createSmallImage().get(3)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(4),"", ConstantImageApi.createSmallImage().get(4)));
+        newsDataList.add(new ListNewsData(ConstantStringApi.createStringTitle().get(5),"", ConstantImageApi.createSmallImage().get(5)));
+        return newsDataList;
+    }
+
 }

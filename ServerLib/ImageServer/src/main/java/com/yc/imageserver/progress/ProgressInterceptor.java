@@ -22,6 +22,7 @@ import okhttp3.ResponseBody;
  *     revise: 自定义拦截器
  *             向OkHttp中添加一个自定义的拦截器，就可以在拦截器中捕获到整个HTTP的通讯过程，
  *             然后加入一些自己的逻辑来计算下载进度，这样就可以实现下载进度监听的功能了。
+ *             可以参考：https://github.com/JessYanCoding/ProgressManager
  * </pre>
  */
 public class ProgressInterceptor implements Interceptor {

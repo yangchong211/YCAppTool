@@ -28,14 +28,19 @@ import com.yc.banner.view.BannerView;
 
 import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
+import com.yc.library.api.ConstantImageApi;
+import com.yc.library.api.ConstantStringApi;
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.library.bean.ListNewsData;
 import com.yc.library.web.WebViewActivity;
 import com.yc.lifehelper.adapter.MainAdapter;
 import com.yc.lifehelper.component.AdListComponent;
 import com.yc.lifehelper.component.BannerComponent;
 import com.yc.lifehelper.component.HeaderComponent;
 import com.yc.lifehelper.component.ListNewsComponent;
+import com.yc.lifehelper.component.MarqueeComponent;
 import com.yc.lifehelper.component.RecommendComponent;
+import com.yc.lifehelper.component.SnapBannerComponent;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -45,6 +50,9 @@ import com.yc.zxingserver.scan.Intents;
 
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -215,15 +223,18 @@ public class MainActivity extends BaseActivity{
     private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
-                SizeUtils.dp2px(1), Color.parseColor("#f5f5f7"));
+                SizeUtils.px2dp(1), Color.parseColor("#f5f5f7"));
         mRecyclerView.addItemDecoration(line);
         mainAdapter = new MainAdapter(this);
         initAddBanner();
         initAddHeader();
         initAddListNews();
+        initMarquee();
         initRecommend();
+        initSnapBanner();
         initAdListNews();
         mRecyclerView.setAdapter(mainAdapter);
+        mainAdapter.addAll(ConstantStringApi.getNewsList());
     }
 
     private void initAddBanner() {
@@ -242,11 +253,20 @@ public class MainActivity extends BaseActivity{
         mainAdapter.addHeader(listNewsComponent);
     }
 
+    private void initMarquee() {
+        MarqueeComponent marqueeComponent = new MarqueeComponent();
+        mainAdapter.addHeader(marqueeComponent);
+    }
+
     private void initRecommend() {
         RecommendComponent recommendComponent = new RecommendComponent();
         mainAdapter.addHeader(recommendComponent);
     }
 
+    private void initSnapBanner() {
+        SnapBannerComponent snapBannerComponent = new SnapBannerComponent();
+        mainAdapter.addHeader(snapBannerComponent);
+    }
 
     private void initAdListNews() {
         AdListComponent adListComponent = new AdListComponent();

@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingBottom="15dp"
-    android:paddingTop="15dp"
-    android:background="@color/white">
+    android:paddingTop="15dp">
 
     <TextView
         android:id="@+id/tv_home_nine"

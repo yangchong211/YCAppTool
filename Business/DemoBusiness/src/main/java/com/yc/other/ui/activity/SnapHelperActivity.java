@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 
 
-import com.yc.cn.ycbannerlib.snap.ScrollLinearHelper;
-import com.yc.cn.ycbannerlib.snap.ScrollPageHelper;
-import com.yc.cn.ycbannerlib.snap.ScrollSnapHelper;
-
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.other.ui.adapter.MeBannerAdapter;
+import com.yc.snapbannerlib.ScrollLinearHelper;
+import com.yc.snapbannerlib.ScrollPageHelper;
+import com.yc.snapbannerlib.ScrollSnapHelper;
 
 import java.util.ArrayList;
 

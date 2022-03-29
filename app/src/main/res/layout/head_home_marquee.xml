@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp20"
+        android:textSize="@dimen/textSize18"
+        android:textColor="@color/black"
+        android:text="精彩活动"/>
+
+    <!--上下滚动TextView-->
+    <com.yc.cn.ycbannerlib.marquee.MarqueeView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/marqueeView"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginBottom="@dimen/dp10"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginRight="@dimen/dp20"
+        android:layout_gravity="center_vertical"
+        app:paddingStart="0dp"
+        app:mvAnimDuration="1000"
+        app:mvInterval="2000"
+        app:mvTextColor="@color/colorAccent"
+        app:mvTextSize="@dimen/textSize14"
+        app:mvSingleLine="true"/>
+
+</LinearLayout>

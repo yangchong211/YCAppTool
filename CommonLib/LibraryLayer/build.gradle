@@ -95,7 +95,6 @@ dependencies {
     api rootProject.ext.dependencies["easypermissions"]
     api rootProject.ext.dependencies["YCProgressLib"]
     api rootProject.ext.dependencies["YCGalleryLib"]
-    api rootProject.ext.dependencies["YCBannerLib"]
     implementation project(path: ':XlogServer')
 
     //https://github.com/yangchong211/YCRefreshView
@@ -109,6 +108,14 @@ dependencies {
     api 'com.github.yangchong211.YCRefreshView:SelectViewLib:3.0.1'
     //简单adapter封装库
     api 'com.github.yangchong211.YCRefreshView:EastAdapterLib:3.0.2'
+
+    //SnapHelper相关封装，https://github.com/yangchong211/YCBannerView
+    //轮播图，https://github.com/yangchong211/YCBannerView
+    api 'com.github.yangchong211.YCBannerView:YCBannerLib:2.3.6'
+    //SnapHelper相关封装，https://github.com/yangchong211/YCBannerView
+    api 'com.github.yangchong211.YCBannerView:SnapBannerLib:2.3.6'
+    //轮播图，使用recyclerView实现，https://github.com/yangchong211/YCBannerView
+    api 'com.github.yangchong211.YCBannerView:GalleryBannerLib:2.3.6'
 
     implementation project(path: ':WidgetViewLib')
     implementation project(path: ':ToolUtilsLib')

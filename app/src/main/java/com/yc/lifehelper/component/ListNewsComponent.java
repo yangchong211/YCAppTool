@@ -32,6 +32,7 @@ public class ListNewsComponent implements InterItemView {
     private final Logger logger = LoggerService.getInstance().getLogger("HeaderComponent");
     private RecyclerView recyclerView;
     private Context context;
+    private ListNewsAdapter newsAdapter;
 
     @Override
     public View onCreateView(ViewGroup parent) {
@@ -45,11 +46,15 @@ public class ListNewsComponent implements InterItemView {
     public void onBindView(View header) {
         recyclerView = header.findViewById(R.id.recyclerView);
         logger.debug("banner on bind view");
-        initRecyclerView();
+        if (newsAdapter == null){
+            initRecyclerView();
+        } else {
+            newsAdapter.notifyDataSetChanged();
+        }
     }
 
     private void initRecyclerView() {
-        ListNewsAdapter newsAdapter = new ListNewsAdapter(context);
+        newsAdapter = new ListNewsAdapter(context);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(newsAdapter);
         final RecycleViewItemLine line = new RecycleViewItemLine(context, LinearLayout.HORIZONTAL,

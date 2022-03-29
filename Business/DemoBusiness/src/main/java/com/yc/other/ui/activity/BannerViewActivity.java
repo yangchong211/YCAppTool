@@ -13,11 +13,11 @@ import android.widget.FrameLayout;
 
 
 import com.blankj.utilcode.util.LogUtils;
-import com.yc.cn.ycbannerlib.gallery.GalleryLayoutManager;
-import com.yc.cn.ycbannerlib.gallery.GalleryLinearSnapHelper;
-import com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView;
-import com.yc.cn.ycbannerlib.gallery.GalleryScaleTransformer;
 
+import com.yc.gallerybannerlib.GalleryLayoutManager;
+import com.yc.gallerybannerlib.GalleryLinearSnapHelper;
+import com.yc.gallerybannerlib.GalleryRecyclerView;
+import com.yc.gallerybannerlib.GalleryScaleTransformer;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.ui.adapter.MeBannerAdapter;
 import com.yc.statusbar.bar.StateAppBar;
