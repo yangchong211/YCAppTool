@@ -75,8 +75,10 @@ dependencies {
     implementation project(path: ':CountTimerLib')
     implementation(rootProject.ext.dependencies["okhttp"])
     implementation(rootProject.ext.dependencies["gson"])
-    implementation project(path: ':RouteManager')
     implementation project(path: ':YCDialogLib')
+
+    implementation project(path: ':RouteManager')
+    implementation project(path: ':RouteAnnotations')
     annotationProcessor project(path: ':RouteCompiler')
 
     implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.2.4'

@@ -14,7 +14,8 @@ public class AppTaskRunnable implements Runnable {
 
     @Override
     public void run() {
-        Process.setThreadPriority(appStartTask.priority());
+        int priority = appStartTask.priority();
+        Process.setThreadPriority(priority);
         appStartTask.waitToNotify();
         appStartTask.run();
         appStartTaskDispatcher.setNotifyChildren(appStartTask);

@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AppTaskDispatcher {
+public final class AppTaskDispatcher {
     //所有任务需要等待的时间
     private static final int WAITING_TIME = 10000;
     //存放每个Task  （key= Class < ? extends AppStartTask>）
@@ -112,7 +112,9 @@ public class AppTaskDispatcher {
     private void dispatchAppStartTask() {
         //再发送非主线程的任务
         for (AppStartTask appStartTask : mSortThreadPoolTaskList) {
-            appStartTask.runOnExecutor().execute(new AppTaskRunnable(appStartTask, this));
+            AppTaskRunnable runnable = new AppTaskRunnable(appStartTask, this);
+            //提交一个事务
+            appStartTask.runOnExecutor().execute(runnable);
         }
         //再发送主线程的任务，防止主线程任务阻塞，导致子线程任务不能立刻执行
         for (AppStartTask appStartTask : mSortMainThreadTaskList) {
@@ -121,7 +123,7 @@ public class AppTaskDispatcher {
     }
 
     //通知Children一个前置任务已完成
-    public void setNotifyChildren(AppStartTask appStartTask) {
+    void setNotifyChildren(AppStartTask appStartTask) {
         List<Class<? extends AppStartTask>> arrayList = mTaskChildHashMap.get(appStartTask.getClass());
         if (arrayList != null && arrayList.size() > 0) {
             for (Class<? extends AppStartTask> aclass : arrayList) {
@@ -134,7 +136,7 @@ public class AppTaskDispatcher {
     }
 
     //标记已经完成的Task
-    public void markAppStartTaskFinish(AppStartTask appStartTask) {
+    void markAppStartTaskFinish(AppStartTask appStartTask) {
         AppTaskUtils.showLog(isShowLog, "任务完成了：" + appStartTask.getClass().getSimpleName());
         if (ifNeedWait(appStartTask)) {
             mCountDownLatch.countDown();

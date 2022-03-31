@@ -10,6 +10,7 @@ import androidx.annotation.IntRange;
 
 
 public interface TaskInterface {
+
     //线程的优先级
     @IntRange(from = Process.THREAD_PRIORITY_FOREGROUND, to = Process.THREAD_PRIORITY_LOWEST)
     int priority();
