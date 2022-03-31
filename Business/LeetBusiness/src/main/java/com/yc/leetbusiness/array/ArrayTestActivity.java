@@ -1,5 +1,6 @@
 package com.yc.leetbusiness.array;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -76,6 +77,11 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
             beerAndDrink();
         } else if (v == tv4) {
             singleNumber();
+        } else if (v == tv5){
+            int[] nums = {1,1,2};
+            RemoveDuplicates removeDuplicates = new RemoveDuplicates();
+            int i = removeDuplicates.removeDuplicates(nums);
+            Log.d("","");
         }
     }
 
