@@ -1,6 +1,6 @@
 //设置app空壳始终是application模式
 apply plugin: 'com.android.application'
-//apply plugin: 'com.yc.spi.loader'
+apply plugin: 'com.yc.spi.loader'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
