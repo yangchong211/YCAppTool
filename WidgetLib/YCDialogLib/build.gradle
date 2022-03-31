@@ -1,27 +1,38 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+}
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 android {
-    compileSdkVersion 28
-
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 16
-        versionName "2.5.6"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+        renderscriptSupportModeEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation  'com.android.support:appcompat-v7:28.0.0'
-    implementation  'com.android.support:recyclerview-v7:28.0.0'
-    implementation  'com.android.support:cardview-v7:28.0.0'
-    implementation  'com.android.support:design:28.0.0'
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
+    implementation(rootProject.ext.dependencies["recyclerview"])
+    implementation(rootProject.ext.dependencies["cardview"])
+    implementation(rootProject.ext.dependencies["material"])
 }
 

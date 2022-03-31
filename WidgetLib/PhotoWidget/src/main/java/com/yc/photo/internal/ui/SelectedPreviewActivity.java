@@ -21,10 +21,10 @@ import androidx.annotation.Nullable;
 import com.yc.photo.internal.entity.Item;
 import com.yc.photo.internal.entity.SelectionSpec;
 import com.yc.photo.internal.model.SelectedItemCollection;
+import com.yc.statusbar.bar.StateAppBar;
 
 import java.util.List;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 public class SelectedPreviewActivity extends BasePreviewActivity {
 

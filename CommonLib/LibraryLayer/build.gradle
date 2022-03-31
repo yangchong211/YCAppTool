@@ -97,6 +97,10 @@ dependencies {
     api rootProject.ext.dependencies["YCGalleryLib"]
     implementation project(path: ':XlogServer')
 
+    //状态栏
+    //https://github.com/yangchong211/YCStatusBar
+    api 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
+
     //https://github.com/yangchong211/YCRefreshView
     //recyclerView封装库
     api 'com.github.yangchong211.YCRefreshView:RefreshViewLib:3.0.1'

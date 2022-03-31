@@ -1,4 +1,4 @@
-package com.yc.spi.gradle.task;
+package com.yc.spi.loader.gradle.task;
 
 public class SpiElement implements Comparable<SpiElement> {
 

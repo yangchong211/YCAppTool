@@ -199,7 +199,6 @@ dependencies {
     implementation project(path: ':AppStatusLib')
 
     implementation project(path: ':LocaleHelperLib')
-    implementation project(path: ':StatusBarLib')
     implementation project(path: ':XlogServer')
     implementation project(path: ':LeetBusiness')
     implementation project(path: ':MonitorKeepAlive')

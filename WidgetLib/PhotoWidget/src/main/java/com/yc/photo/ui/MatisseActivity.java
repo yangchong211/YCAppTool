@@ -41,10 +41,10 @@ import com.yc.photo.internal.utils.MediaStoreCompat;
 import com.yc.photo.internal.utils.PathUtils;
 import com.yc.photo.internal.utils.PhotoMetadataUtils;
 import com.yc.photo.internal.utils.SingleMediaScanner;
+import com.yc.statusbar.bar.StateAppBar;
 
 import java.util.ArrayList;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 
 public class MatisseActivity extends AppCompatActivity implements

@@ -60,7 +60,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["material"])
     implementation project(path: ':MonitorNetLib')
-    implementation project(path: ':StatusBarLib')
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':SerialTaskLib')

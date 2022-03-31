@@ -1,10 +1,10 @@
-package com.yc.spi.gradle;
+package com.yc.spi.loader.gradle;
 
 
 import com.android.build.gradle.AppExtension;
 import com.google.common.base.Strings;
-import com.yc.spi.gradle.task.ServiceLoaderTask;
-import com.yc.spi.gradle.task.ServiceLoaderUtils;
+import com.yc.spi.loader.gradle.task.ServiceLoaderTask;
+import com.yc.spi.loader.gradle.task.ServiceLoaderUtils;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;

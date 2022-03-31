@@ -56,9 +56,12 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["recyclerview"])
     implementation 'androidx.legacy:legacy-support-v4:1.0.0-rc01'
-    implementation 'cn.yc:YCStatusBarLib:1.5.0'
+    //https://github.com/yangchong211/YCStatusBar
+    implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
     //glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation(rootProject.ext.dependencies["glide"])
+    annotationProcessor(rootProject.ext.dependencies["glide-compiler"])
+    //implementation 'com.github.bumptech.glide:glide:4.9.0'
+    //annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'it.sephiroth.android.library.imagezoom:library:1.0.4'
 }

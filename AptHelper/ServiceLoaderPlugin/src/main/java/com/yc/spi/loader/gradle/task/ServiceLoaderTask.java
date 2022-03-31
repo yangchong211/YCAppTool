@@ -1,4 +1,4 @@
-package com.yc.spi.gradle.task;
+package com.yc.spi.loader.gradle.task;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.file.FileCollection;

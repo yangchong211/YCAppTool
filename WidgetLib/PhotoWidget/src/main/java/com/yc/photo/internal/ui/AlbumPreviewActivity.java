@@ -9,11 +9,11 @@ import com.yc.photo.internal.entity.Item;
 import com.yc.photo.internal.entity.SelectionSpec;
 import com.yc.photo.internal.model.AlbumMediaCollection;
 import com.yc.photo.internal.ui.adapter.PreviewPagerAdapter;
+import com.yc.statusbar.bar.StateAppBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 public class AlbumPreviewActivity extends BasePreviewActivity implements
         AlbumMediaCollection.AlbumMediaCallbacks {

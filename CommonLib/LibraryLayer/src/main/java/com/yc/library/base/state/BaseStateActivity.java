@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.ycstatelib.StateLayoutManager;
 import com.ycbjie.library.R;
 
@@ -35,7 +36,7 @@ public abstract class BaseStateActivity extends AppCompatActivity{
         setContentView(R.layout.base_state_view);
         initStatusLayout();
         initBaseView();
-        //StateAppBar.setStatusBarColor(this, getResources().getColor(R.color.colorTheme));
+        StateAppBar.setStatusBarColor(this, getResources().getColor(R.color.colorTheme));
         initView();
         initListener();
         initData();
