@@ -12,7 +12,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 
-public class ElementTool {
+public final class ElementTool {
 
     public static RouteContract<ClassName> getApiClassNameContract(
             Elements elements, MyAnAnnotationValueVisitor annotationValueVisitor, TypeElement apiImplElement) {

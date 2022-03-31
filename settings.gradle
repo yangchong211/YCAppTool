@@ -92,11 +92,12 @@ project(':AutoCloserLib').projectDir = new File('ToolLib/AutoCloserLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
-include ':api-compiler',':api-manager',
+include ':RouteCompiler', ':RouteManager', ':RouteAnnotations',
         ':ServiceLoaderApi', ':ServiceLoaderAnnotations', ':ServiceLoaderRegistry',
         ':ServiceLoaderPlugin', ':ServiceLoaderProcessor'
-project(':api-compiler').projectDir = new File('AptHelper/api-compiler')
-project(':api-manager').projectDir = new File('AptHelper/api-manager')
+project(':RouteCompiler').projectDir = new File('AptHelper/RouteCompiler')
+project(':RouteManager').projectDir = new File('AptHelper/RouteManager')
+project(':RouteAnnotations').projectDir = new File('AptHelper/RouteAnnotations')
 project(':ServiceLoaderApi').projectDir = new File('AptHelper/ServiceLoaderApi')
 project(':ServiceLoaderAnnotations').projectDir = new File('AptHelper/ServiceLoaderAnnotations')
 project(':ServiceLoaderRegistry').projectDir = new File('AptHelper/ServiceLoaderRegistry')

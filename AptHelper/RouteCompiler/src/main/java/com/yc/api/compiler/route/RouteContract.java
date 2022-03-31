@@ -2,8 +2,8 @@ package com.yc.api.compiler.route;
 
 public class RouteContract<T> {
 
-    private T api;
-    private T apiImpl;
+    private final T api;
+    private final T apiImpl;
 
     public RouteContract(T api, T apiImpl) {
         this.api = api;

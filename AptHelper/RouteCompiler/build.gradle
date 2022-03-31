@@ -5,7 +5,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'api-compiler',
+        attributes 'Implementation-Title': 'RouteCompiler',
                 'Implementation-Version': '1.0.0'
     }
 }
@@ -16,5 +16,6 @@ targetCompatibility = "1.8"
 dependencies{
     implementation 'com.google.auto.service:auto-service:1.0-rc2'
     implementation 'com.squareup:javapoet:1.7.0'
-    implementation project(path: ':api-manager')
+    implementation project(path: ':RouteManager')
+    implementation project(path: ':RouteAnnotations')
 }

@@ -426,6 +426,17 @@
     - https://github.com/bifan-wei/HwTxtReader
 
 
+### 好的学习笔记
+- https://github.com/Omooo/Android-Notes
+- https://github.com/leavesCZY/AndroidGuide
+
+### 学习
+- **AppStartFaster**：包含两部分，一部分是冷启动任务分发，一部分是Multdex冷启动优化  
+    - https://github.com/aiceking/AppStartFaster
+- IPC学习案例
+    - https://github.com/Xiaofei-it/Hermes
+
+
 ### 09.其他内容说明
 - 崩溃重启和异常库混淆
     - -keep class com.com.yc.toollib.** { *; }

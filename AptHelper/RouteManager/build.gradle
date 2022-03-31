@@ -5,7 +5,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'api-manager',
+        attributes 'Implementation-Title': 'RouteManager',
                 'Implementation-Version': '1.0.0'
     }
 }
