@@ -63,10 +63,10 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        if(mSubscriptions.isUnsubscribed()){
+        if (mSubscriptions.isUnsubscribed()) {
             mSubscriptions.unsubscribe();
         }
-        if(activity!=null){
+        if (activity != null) {
             activity = null;
         }
     }
@@ -111,7 +111,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 layoutParams.height = SizeUtils.dp2px(120);
                 mBanner.setLayoutParams(layoutParams);
-                mView.setBanner(mBanner,arrayList);
+                mView.setBanner(mBanner, arrayList);
             }
         };
     }
@@ -124,8 +124,8 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         final TypedArray proPic = activity.getResources().obtainTypedArray(R.array.find_gv_image);
         final String[] proName = activity.getResources().getStringArray(R.array.find_gv_title);
         final List<Integer> images = new ArrayList<>();
-        for(int a=0 ; a<proName.length ; a++){
-            images.add(proPic.getResourceId(a,R.drawable.ic_data_picture));
+        for (int a = 0; a < proName.length; a++) {
+            images.add(proPic.getResourceId(a, R.drawable.ic_data_picture));
         }
         proPic.recycle();
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4);
@@ -153,7 +153,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
     @Override
     public BaseDelegateAdapter initMarqueeView() {
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-        return new BaseDelegateAdapter(activity,linearLayoutHelper , R.layout.view_vlayout_marquee, 1, Constant.viewType.typeMarquee) {
+        return new BaseDelegateAdapter(activity, linearLayoutHelper, R.layout.view_vlayout_marquee, 1, Constant.viewType.typeMarquee) {
             @Override
             public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -189,8 +189,8 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         final TypedArray listImage = activity.getResources().obtainTypedArray(R.array.find_list1_image);
         final String[] listTitle = activity.getResources().getStringArray(R.array.find_list1_title);
         final List<Integer> images = new ArrayList<>();
-        for(int a=0 ; a<listTitle.length ; a++){
-            images.add(listImage.getResourceId(a,R.drawable.ic_data_picture));
+        for (int a = 0; a < listTitle.length; a++) {
+            images.add(listImage.getResourceId(a, R.drawable.ic_data_picture));
         }
         listImage.recycle();
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(4);
@@ -198,7 +198,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         gridLayoutHelper.setPadding(0, 20, 0, 10);
         gridLayoutHelper.setVGap(10);
         gridLayoutHelper.setHGap(0);
-        gridLayoutHelper.setWeights(new float[]{25, 25, 25 , 25});
+        gridLayoutHelper.setWeights(new float[]{25, 25, 25, 25});
         gridLayoutHelper.setBgColor(Color.WHITE);
         //gridLayoutHelper.setAutoExpand(true);//是否自动填充空白区域
         return new BaseDelegateAdapter(activity, gridLayoutHelper, R.layout.view_vlayout_grid, 8, Constant.viewType.typeGvSecond) {
@@ -234,7 +234,7 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
                     holder.setText(R.id.tv_time, model.getTime());
                     Objects.requireNonNull(holder.getItemView()).setOnClickListener(v -> {
                         //点击事件
-                        mView.setNewsList2Click(position,Constant.findNews.get(position).getUrl());
+                        mView.setNewsList2Click(position, Constant.findNews.get(position).getUrl());
                     });
                 } else {
                     ImageView imageView = holder.getView(R.id.iv_logo);
@@ -252,8 +252,8 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         final TypedArray listImage = activity.getResources().obtainTypedArray(R.array.find_list3_image);
         final String[] listTitle = activity.getResources().getStringArray(R.array.find_list3_title);
         final List<Integer> images = new ArrayList<>();
-        for(int a=0 ; a<listTitle.length ; a++){
-            images.add(listImage.getResourceId(a,R.drawable.ic_data_picture));
+        for (int a = 0; a < listTitle.length; a++) {
+            images.add(listImage.getResourceId(a, R.drawable.ic_data_picture));
         }
         listImage.recycle();
         GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(3);
@@ -293,8 +293,8 @@ public class FindFragmentPresenter implements FindFragmentContract.Presenter {
         final TypedArray listImage = activity.getResources().obtainTypedArray(R.array.find_list4_image);
         final String[] listTitle = activity.getResources().getStringArray(R.array.find_list4_title);
         final List<Integer> images = new ArrayList<>();
-        for(int a=0 ; a<listTitle.length ; a++){
-            images.add(listImage.getResourceId(a,R.drawable.ic_data_picture));
+        for (int a = 0; a < listTitle.length; a++) {
+            images.add(listImage.getResourceId(a, R.drawable.ic_data_picture));
         }
         listImage.recycle();
         OnePlusNLayoutHelper onePlusNLayoutHelper = new OnePlusNLayoutHelper();

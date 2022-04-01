@@ -101,7 +101,7 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
         for (int i = 0; i < titles.length; i++) {
             //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
             int imageId = getResources().getIdentifier("ic_category_" + i, "mipmap", getPackageName());
-            iconData.add(new VideoIconBean(titles[i], imageId,i));
+            iconData.add(new VideoIconBean(titles[i], imageId, i));
         }
     }
 
@@ -112,9 +112,9 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
         LayoutInflater inflater = LayoutInflater.from(this);
         ArrayList<View> mPagerList = new ArrayList<>();
         //总的页数=总数/每页数量，并取整
-        pageCount = (int) Math.ceil(iconData.size()*1.0 / pageSize);
-        for(int a=0 ; a<pageCount ; a++){
-            final GridView gridView = (GridView) inflater.inflate(R.layout.item_vp_grid_view,vpPager,false);
+        pageCount = (int) Math.ceil(iconData.size() * 1.0 / pageSize);
+        for (int a = 0; a < pageCount; a++) {
+            final GridView gridView = (GridView) inflater.inflate(R.layout.item_vp_grid_view, vpPager, false);
             GridView gv = gridView.findViewById(R.id.gridView);
             gv.setNumColumns(5);
             gridView.setAdapter(new VideoGridAdapter(MyVideoActivity.this, iconData, a, pageSize));
@@ -123,9 +123,9 @@ public class MyVideoActivity extends BaseActivity implements View.OnClickListene
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Object obj = gridView.getItemAtPosition(position);
                     //int pos = position + pageCount * pageSize;
-                    if(obj!=null && obj instanceof VideoIconBean){
+                    if (obj != null && obj instanceof VideoIconBean) {
                         int pos = ((VideoIconBean) obj).getId();
-                        ToastUtils.showShort("被点击呢"+pos + "---"+position);
+                        ToastUtils.showShort("被点击呢" + pos + "---" + position);
                     }
                 }
             });

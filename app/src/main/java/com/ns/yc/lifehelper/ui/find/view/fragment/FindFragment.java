@@ -56,7 +56,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     @Override
     public void onDetach() {
         super.onDetach();
-        if(activity!=null){
+        if (activity != null) {
             activity = null;
         }
     }
@@ -65,7 +65,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     @Override
     public void onPause() {
         super.onPause();
-        if(mBanner!=null){
+        if (mBanner != null) {
             mBanner.pause();
         }
     }
@@ -74,7 +74,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     @Override
     public void onResume() {
         super.onResume();
-        if(mBanner!=null){
+        if (mBanner != null) {
             mBanner.resume();
         }
     }
@@ -181,7 +181,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         mBanner.setHintGravity(2);
         mBanner.setAnimationDuration(1000);
         mBanner.setPlayDelay(2000);
-        mBanner.setHintPadding(0,0,0, SizeUtils.dp2px(10));
+        mBanner.setHintPadding(0, 0, 0, SizeUtils.dp2px(10));
         mBanner.setAdapter(new BaseBannerPagerAdapter(activity, arrayList));
     }
 
@@ -189,14 +189,14 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
     @Override
     public void setOnclick(int position) {
         //通过路由跳转到某模块的某个页面
-        switch (position){
+        switch (position) {
             case 0:
                 ARouterUtils.navigation(RouterConfig.Gank.ACTIVITY_GANK_ACTIVITY);
                 break;
             case 1:
                 ARouterUtils.navigation(RouterConfig.Android.ACTIVITY_ANDROID_ACTIVITY);
                 break;
-                //富文本
+            //富文本
             case 2:
                 ARouterUtils.navigation(RouterConfig.Note.ACTIVITY_OTHER_ARTICLE);
                 break;
@@ -207,15 +207,15 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
                 break;
             case 5:
                 Bundle bundle1 = new Bundle();
-                bundle1.putString(Constant.URL,Constant.FLUTTER);
-                bundle1.putString(Constant.TITLE,"flutter极致体验的WanAndroid客户端");
-                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                bundle1.putString(Constant.URL, Constant.FLUTTER);
+                bundle1.putString(Constant.TITLE, "flutter极致体验的WanAndroid客户端");
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle1);
                 break;
-                //妹子画廊
+            //妹子画廊
             case 6:
                 ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_GALLERY_ACTIVITY);
                 break;
-                //相册画廊
+            //相册画廊
             case 7:
                 ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_COVER_ACTIVITY);
                 break;
@@ -230,15 +230,15 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
         switch (position) {
             case 0:
                 Bundle bundle1 = new Bundle();
-                bundle1.putString(Constant.URL,Constant.GITHUB);
-                bundle1.putString(Constant.TITLE,"关于更多内容");
-                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                bundle1.putString(Constant.URL, Constant.GITHUB);
+                bundle1.putString(Constant.TITLE, "关于更多内容");
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle1);
                 break;
             case 1:
                 Bundle bundle2 = new Bundle();
-                bundle2.putString(Constant.URL,Constant.ZHI_HU);
-                bundle2.putString(Constant.TITLE,"关于我的知乎");
-                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle2);
+                bundle2.putString(Constant.URL, Constant.ZHI_HU);
+                bundle2.putString(Constant.TITLE, "关于我的知乎");
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle2);
                 break;
             default:
                 break;
@@ -248,7 +248,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
 
     @Override
     public void setGridClick(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
                 break;
@@ -280,7 +280,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
 
     @Override
     public void setGridClickThird(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 ARouterUtils.navigation(RouterConfig.DouBan.ACTIVITY_DOU_MOVIE_ACTIVITY);
                 break;
@@ -298,7 +298,7 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
 
     @Override
     public void setGridClickFour(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_BANNER_LIST_ACTIVITY);
                 break;
@@ -315,22 +315,21 @@ public class FindFragment extends BaseFragment<FindFragmentPresenter> implements
 
     @Override
     public void setNewsList2Click(int position, String url) {
-        if(position>-1 && url!=null && url.length()>0){
+        if (position > -1 && url != null && url.length() > 0) {
             Bundle bundle = new Bundle();
-            bundle.putString(Constant.URL,url);
-            ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+            bundle.putString(Constant.URL, url);
+            ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle);
         }
     }
 
     @Override
     public void setNewsList5Click(int position, String url) {
-        if(position>-1 && url!=null && url.length()>0){
+        if (position > -1 && url != null && url.length() > 0) {
             Bundle bundle = new Bundle();
-            bundle.putString(Constant.URL,url);
-            ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle);
+            bundle.putString(Constant.URL, url);
+            ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle);
         }
     }
-
 
 
 }

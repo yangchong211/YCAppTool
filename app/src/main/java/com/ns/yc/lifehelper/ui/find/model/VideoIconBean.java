@@ -9,7 +9,7 @@ public class VideoIconBean implements Serializable {
     private int resId;
     private int id;
 
-    public VideoIconBean(String name, int resId , int id) {
+    public VideoIconBean(String name, int resId, int id) {
         //super();
         this.name = name;
         this.resId = resId;
