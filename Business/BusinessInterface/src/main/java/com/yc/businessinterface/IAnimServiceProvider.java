@@ -1,10 +1,10 @@
-package com.yc.animbusiness;
+package com.yc.businessinterface;
 
 
 import com.yc.spi.annotation.ServiceProviderInterface;
 
 @ServiceProviderInterface
-public interface IAnimProvider {
+public interface IAnimServiceProvider {
 
     void setStartAnim();
 

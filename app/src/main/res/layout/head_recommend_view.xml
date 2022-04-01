@@ -25,12 +25,12 @@
         style="@style/WeightAttr"
         android:drawablePadding="8dp"
         android:drawableTop="@drawable/ic_home_third"
-        android:text="MVVM案例1" />
+        android:text="MVI案例" />
     <TextView
         android:id="@+id/tv_home_twelve"
         style="@style/WeightAttr"
         android:drawablePadding="8dp"
         android:drawableTop="@drawable/ic_home_four"
-        android:text="MVVM案例2" />
+        android:text="其他" />
 
 </LinearLayout>

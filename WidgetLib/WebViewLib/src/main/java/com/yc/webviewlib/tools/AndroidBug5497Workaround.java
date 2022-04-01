@@ -61,7 +61,8 @@ public class AndroidBug5497Workaround {
         }
     }
 
-    private ViewTreeObserver.OnGlobalLayoutListener listener = new ViewTreeObserver.OnGlobalLayoutListener() {
+    private final ViewTreeObserver.OnGlobalLayoutListener listener =
+            new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override
         public void onGlobalLayout() {
             //设置一个Listener监听View树变化，界面变化之后，获取"可用高度"，最后重新设置高度

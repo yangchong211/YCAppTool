@@ -32,15 +32,15 @@ android {
 
 }
 
-configurations.all {
-    resolutionStrategy.force 'com.android.support:support-annotations:26.1.0'
-}
+//configurations.all {
+//    resolutionStrategy.force 'com.android.support:support-annotations:26.1.0'
+//}
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation rootProject.ext.dependencies["annotation"]
     implementation rootProject.ext.dependencies["okhttp"]
-    implementation "com.google.code.gson:gson:2.8.5"
-    implementation "com.squareup.okhttp3:okhttp:3.0.0"
-    implementation 'androidx.room:room-runtime:2.0.0'
-    annotationProcessor 'androidx.room:room-compiler:2.0.0'
+    implementation rootProject.ext.dependencies["gson"]
+    implementation(rootProject.ext.dependencies["room-runtime"])
+    annotationProcessor(rootProject.ext.dependencies["room-compiler"])
 }

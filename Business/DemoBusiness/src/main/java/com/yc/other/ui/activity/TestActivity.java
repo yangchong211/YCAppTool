@@ -1,5 +1,6 @@
 package com.yc.other.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -8,11 +9,34 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 
+import com.yc.businessinterface.IAnimServiceProvider;
+import com.yc.spi.loader.ServiceLoader;
 import com.yc.widget.blurview.RealTimeBlurView;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 
 public class TestActivity extends BaseActivity implements View.OnClickListener {
+
+    private final IAnimServiceProvider mDelegate = ServiceLoader.load(IAnimServiceProvider.class).get();
+
+
+    /**
+     * 开启页面
+     *
+     * @param context 上下文
+     */
+    public static void startActivity(Context context) {
+        try {
+            Intent target = new Intent();
+            target.setClass(context, TestActivity.class);
+            //target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(target);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     public int getContentView() {
         return R.layout.activity_test_other;
@@ -49,10 +73,13 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         int i = v.getId();
         if (i == R.id.tv_1) {
         } else if (i == R.id.tv_2) {
+            mDelegate.setAnimTime(10);
             startActivity(new Intent(this, BannerViewActivity.class));
         } else if (i == R.id.tv_3) {
+            mDelegate.getAnimTime();
             startActivity(new Intent(this, ImageGalleryActivity.class));
         } else if (i == R.id.tv_4) {
+            mDelegate.setStartAnim();
             startActivity(new Intent(this, ProgressThirdActivity.class));
         } else if (i == R.id.tv_5) {
         } else if (i == R.id.tv_6){

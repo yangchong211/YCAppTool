@@ -81,8 +81,8 @@ dependencies {
     implementation project(path: ':RouteAnnotations')
     annotationProcessor project(path: ':RouteCompiler')
 
-    implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.2.4'
-    annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.2.4'
+    implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3'
+    annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 
 
     api project(path: ':BusinessInterface')

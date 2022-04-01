@@ -103,7 +103,7 @@ public class BuildTimeCostPlugin implements Plugin<Project> {
     }
 
     public static void log(String string){
-        System.out.print("task time log : " + string);
+        System.out.println("task time log : " + string);
     }
 
 }

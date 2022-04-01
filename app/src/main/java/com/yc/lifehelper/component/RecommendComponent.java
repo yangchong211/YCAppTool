@@ -26,6 +26,7 @@ import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.mvctodo.NetworkActivity;
 import com.yc.other.thread.MainThreadActivity;
+import com.yc.other.ui.activity.TestActivity;
 import com.yc.todoapp.tasks.TasksActivity;
 import com.yc.todoapplive.tasks.TasksLiveActivity;
 import com.yc.todoappmvvm.tasks.TasksMvvmActivity;
@@ -57,6 +58,7 @@ public class RecommendComponent implements InterItemView {
         TextView tvHomeNine = header.findViewById(R.id.tv_home_nine);
         TextView tvHomeTen = header.findViewById(R.id.tv_home_ten);
         TextView tvHomeEleven = header.findViewById(R.id.tv_home_eleven);
+        TextView tvHomeTwelve = header.findViewById(R.id.tv_home_twelve);
 
         View.OnClickListener listener = v -> {
             if (FastClickUtils.isFastDoubleClick()){
@@ -75,6 +77,10 @@ public class RecommendComponent implements InterItemView {
                 case R.id.tv_home_eleven:
                     TasksLiveActivity.startActivity(context);
                     break;
+                //其他案例
+                case R.id.tv_home_twelve:
+                    TestActivity.startActivity(context);
+                    break;
                 default:
                     break;
             }
@@ -82,6 +88,7 @@ public class RecommendComponent implements InterItemView {
         tvHomeNine.setOnClickListener(listener);
         tvHomeTen.setOnClickListener(listener);
         tvHomeEleven.setOnClickListener(listener);
+        tvHomeTwelve.setOnClickListener(listener);
     }
 
 }

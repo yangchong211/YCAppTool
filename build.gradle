@@ -15,8 +15,8 @@ buildscript {
         //jitpack
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         //自定义插件
-        classpath 'com.github.yangchong211.YCAppTool:ServiceLoaderPlugin:1.4.2.9'
-        classpath 'com.github.yangchong211.YCAppTool:BuildTimeCostPlugin:1.4.2.9'
+        classpath 'com.github.yangchong211.YCAppTool:ServiceLoaderPlugin:1.4.3'
+        classpath 'com.github.yangchong211.YCAppTool:BuildTimeCostPlugin:1.4.3'
     }
 }
 
