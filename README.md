@@ -21,11 +21,6 @@
 - 项目整体架构模式采用：组件化+MVP+Rx+Retrofit+design+Dagger2+阿里VLayout+腾讯X5+腾讯bugly
 - 包含的模块：wanAndroid【kotlin】+干货集中营+知乎日报+番茄Todo+微信精选新闻+豆瓣音乐电影小说+小说读书+简易记事本+搞笑视频+经典游戏+其他更多等等
 - 此项目属于业余时间练手的项目，接口数据来源均来自网络，如果存在侵权情况，请第一时间告知。本项目仅做学习交流使用，API数据内容所有权归原作公司所有，请勿用于其他用途。
-- 可以先下载apk运行到手机上看看效果，下载链接地址：
-    - apk如下所示
-    - ![image](https://upload-images.jianshu.io/upload_images/4432347-fb9217757051fe88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-    - [组件化apk的下载地址](https://github.com/yangchong211/LifeHelper/tree/master/read/apk)
-
 
 
 ### 02.项目运行
