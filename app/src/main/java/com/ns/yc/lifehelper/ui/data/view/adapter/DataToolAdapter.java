@@ -49,22 +49,22 @@ public class DataToolAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder ;
-        if(convertView == null){
+        ViewHolder holder;
+        if (convertView == null) {
             holder = new ViewHolder();
             convertView = View.inflate(activity, R.layout.item_vp_grid_iv, null);
             holder.tv_name = convertView.findViewById(R.id.tv_new_seed_title);
             holder.iv_nul = convertView.findViewById(R.id.iv_new_seed_ic);
             convertView.setTag(holder);
-        }else {
-            holder = (ViewHolder)convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
         holder.tv_name.setText(toolName[position]);
         holder.iv_nul.setImageResource(toolLogo.get(position));
         return convertView;
     }
 
-    private static class ViewHolder{
+    private static class ViewHolder {
         private TextView tv_name;
         private ImageView iv_nul;
     }

@@ -23,12 +23,15 @@ public interface DataFragmentContract {
 
     interface View extends BaseView {
         void setGridView(String[] toolName, ArrayList<Integer> logoList);
+
         void setRecycleView(ArrayList<Integer> list);
     }
 
     interface Presenter extends BasePresenter {
         List<ImageIconBean> getVpData();
+
         void initGridViewData();
+
         void initRecycleViewData();
     }
 

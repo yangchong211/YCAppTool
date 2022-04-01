@@ -42,7 +42,7 @@ public class ViewPagerGridAdapter extends BaseAdapter {
      */
     @Override
     public int getCount() {
-        return lists.size() > (mIndex + 1) * mPagerSize ? mPagerSize : (lists.size() - mIndex*mPagerSize);
+        return lists.size() > (mIndex + 1) * mPagerSize ? mPagerSize : (lists.size() - mIndex * mPagerSize);
     }
 
     @Override
@@ -57,15 +57,15 @@ public class ViewPagerGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder ;
-        if(convertView == null){
+        ViewHolder holder;
+        if (convertView == null) {
             holder = new ViewHolder();
             convertView = View.inflate(context, R.layout.item_vp_grid_iv, null);
             holder.tv_name = convertView.findViewById(R.id.tv_new_seed_title);
             holder.iv_nul = convertView.findViewById(R.id.iv_new_seed_ic);
             convertView.setTag(holder);
-        }else {
-            holder = (ViewHolder)convertView.getTag();
+        } else {
+            holder = (ViewHolder) convertView.getTag();
         }
         //重新确定position因为拿到的总是数据源，数据源是分页加载到每页的GridView上的
         final int pos = position + mIndex * mPagerSize;//假设mPageSiez
@@ -76,7 +76,7 @@ public class ViewPagerGridAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private static class ViewHolder{
+    private static class ViewHolder {
         private TextView tv_name;
         private ImageView iv_nul;
     }

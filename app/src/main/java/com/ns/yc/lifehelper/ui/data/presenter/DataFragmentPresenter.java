@@ -42,11 +42,10 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        if(mSubscriptions.isUnsubscribed()){
+        if (mSubscriptions.isUnsubscribed()) {
             mSubscriptions.unsubscribe();
         }
     }
-
 
 
     @Override
@@ -56,7 +55,7 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
         String[] proName = Utils.getApp().getResources().getStringArray(R.array.data_pro_title);
         for (int i = 0; i < proName.length; i++) {
             int proPicId = proPic.getResourceId(i, R.drawable.ic_investment);
-            listData.add(new ImageIconBean(proName[i], proPicId,i));
+            listData.add(new ImageIconBean(proName[i], proPicId, i));
         }
         proPic.recycle();
         return listData;
@@ -68,8 +67,8 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
         TypedArray toolLogo = Utils.getApp().getResources().obtainTypedArray(R.array.data_tool_pro_pic);
         String[] toolName = Utils.getApp().getResources().getStringArray(R.array.data_tool_pro_title);
         ArrayList<Integer> logoList = new ArrayList<>();
-        for(int a=0 ; a<toolName.length ; a++){
-            logoList.add(toolLogo.getResourceId(a,R.drawable.ic_investment));
+        for (int a = 0; a < toolName.length; a++) {
+            logoList.add(toolLogo.getResourceId(a, R.drawable.ic_investment));
         }
         toolLogo.recycle();
         mView.setGridView(toolName, logoList);
@@ -82,7 +81,7 @@ public class DataFragmentPresenter implements DataFragmentContract.Presenter {
         TypedArray typedArray = Utils.getApp().getResources().obtainTypedArray(R.array.data_narrow_Image);
         final ArrayList<Integer> list = new ArrayList<>();
         int b = 8;
-        for(int a=0 ; a<b ; a++){
+        for (int a = 0; a < b; a++) {
             list.add(typedArray.getResourceId(a, R.drawable.bg_small_autumn_tree_min));
         }
         typedArray.recycle();

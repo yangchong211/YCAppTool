@@ -186,9 +186,9 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 break;
             case 1:
                 Bundle bundle1 = new Bundle();
-                bundle1.putString(Constant.URL,"https://github.com/yangchong211/YCMeiZiTu");
-                bundle1.putString(Constant.TITLE,"爬妹子图");
-                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                bundle1.putString(Constant.URL, "https://github.com/yangchong211/YCMeiZiTu");
+                bundle1.putString(Constant.TITLE, "爬妹子图");
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle1);
                 break;
             case 2:
                 ARouterUtils.navigation(RouterConfig.Note.ACTIVITY_MARKDOWN_ACTIVITY);
@@ -210,15 +210,15 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 break;
             case 6:
                 Bundle bundle6 = new Bundle();
-                bundle6.putString(Constant.URL,Constant.FLUTTER);
-                bundle6.putString(Constant.TITLE,"flutter极致体验的WanAndroid客户端");
-                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle6);
+                bundle6.putString(Constant.URL, Constant.FLUTTER);
+                bundle6.putString(Constant.TITLE, "flutter极致体验的WanAndroid客户端");
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle6);
                 break;
             case 7:
                 Bundle bundle7 = new Bundle();
-                bundle7.putString(Constant.URL,"https://github.com/yangchong211/YCStateLayout");
-                bundle7.putString(Constant.TITLE,"状态切换，View状态的切换和Activity彻底分离开");
-                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle7);
+                bundle7.putString(Constant.URL, "https://github.com/yangchong211/YCStateLayout");
+                bundle7.putString(Constant.TITLE, "状态切换，View状态的切换和Activity彻底分离开");
+                ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle7);
                 break;
             case 8:
                 ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_PROGRESS2_ACTIVITY);
@@ -227,7 +227,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_PIN_TU_ACTIVITY);
                 break;
             default:
-                Toast.makeText(activity, pos+ "---", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, pos + "---", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -238,7 +238,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
         DataToolAdapter adapter = new DataToolAdapter(activity, toolName, logoList);
         mGridView.setAdapter(adapter);
         mGridView.setOnItemClickListener((parent, view, position, id) -> {
-            if (FastClickUtils.isFastDoubleClick()){
+            if (FastClickUtils.isFastDoubleClick()) {
                 return;
             }
             switch (position) {
@@ -254,7 +254,7 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 case 3:
                     ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_PROGRESS1_ACTIVITY);
                     break;
-                    //nfc测试
+                //nfc测试
                 case 4:
                     ARouterUtils.navigation(RouterConfig.Nfc.ACTIVITY_NFC_MAIN);
                     break;
@@ -269,9 +269,9 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                     break;
                 case 8:
                     Bundle bundle8 = new Bundle();
-                    bundle8.putString(Constant.URL,"https://github.com/yangchong211/YCThreadPool");
-                    bundle8.putString(Constant.TITLE,"轻量级线程池封装库");
-                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle8);
+                    bundle8.putString(Constant.URL, "https://github.com/yangchong211/YCThreadPool");
+                    bundle8.putString(Constant.TITLE, "轻量级线程池封装库");
+                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle8);
                     break;
                 case 9:
                     ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
@@ -282,36 +282,36 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
                 case 11:
                     ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_BOOK_DOODLE_ACTIVITY);
                     break;
-                    //去评分
+                //去评分
                 case 12:
-                    if(GoToScoreUtils.isPkgInstalled(activity,"com.tencent.mm")){
-                        GoToScoreUtils.startMarket(activity,"com.tencent.mm");
+                    if (GoToScoreUtils.isPkgInstalled(activity, "com.tencent.mm")) {
+                        GoToScoreUtils.startMarket(activity, "com.tencent.mm");
                     } else {
                         ToastUtils.showRoundRectToast("请先安装应用宝");
                     }
                     break;
-                    //向系统日历插入事件
+                //向系统日历插入事件
                 case 13:
                     CalendarReminderUtils.test(activity);
                     break;
-                    //测试崩溃
+                //测试崩溃
                 case 14:
                     CrashToolUtils.startCrashTestActivity(activity);
                     break;
-                    //跳转崩溃记录页面
+                //跳转崩溃记录页面
                 case 15:
                     CrashToolUtils.startCrashListActivity(activity);
                     break;
-                    //生产条形码
+                //生产条形码
                 case 16:
                     Intent intent16 = new Intent(activity, CodeActivity.class);
-                    intent16.putExtra(CodeActivity.KEY_IS_QR_CODE,false);
+                    intent16.putExtra(CodeActivity.KEY_IS_QR_CODE, false);
                     startActivity(intent16);
                     break;
-                    //生产二维码
+                //生产二维码
                 case 17:
                     Intent intent17 = new Intent(activity, CodeActivity.class);
-                    intent17.putExtra(CodeActivity.KEY_IS_QR_CODE,true);
+                    intent17.putExtra(CodeActivity.KEY_IS_QR_CODE, true);
                     startActivity(intent17);
                     break;
                 default:
@@ -327,15 +327,15 @@ public class DataFragment extends BaseFragment<DataFragmentPresenter> implements
         mRecyclerView.setHorizontalScrollBarEnabled(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(
                 activity, LinearLayoutManager.HORIZONTAL, false));
-        ScrollPageHelper snapHelper = new ScrollPageHelper(Gravity.START,false);
+        ScrollPageHelper snapHelper = new ScrollPageHelper(Gravity.START, false);
         try {
             //attachToRecyclerView源码上的方法可能会抛出IllegalStateException异常，这里手动捕获一下
             RecyclerView.OnFlingListener onFlingListener = mRecyclerView.getRecyclerView().getOnFlingListener();
             //源码中判断了，如果onFlingListener已经存在的话，再次设置就直接抛出异常，那么这里可以判断一下
-            if (onFlingListener==null){
+            if (onFlingListener == null) {
                 snapHelper.attachToRecyclerView(mRecyclerView.getRecyclerView());
             }
-        } catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
         mRecyclerView.addItemDecoration(new SpaceViewItemLine(SizeUtils.dp2px(8)));
