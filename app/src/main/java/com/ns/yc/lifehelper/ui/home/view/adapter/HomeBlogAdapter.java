@@ -78,11 +78,11 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
                 GlideImageUtils.loadImageNet(getContext(), data.getImageUrl(), R.drawable.image_default, ivImg);
                 tvAuthor.setText(data.getAuthor());
                 tvTime.setText(data.getTime());
-                if(getAdapterPosition()==2){
+                if (getAdapterPosition() == 2) {
                     SpannableStringBuilder string = SpannableUtils.appendString(
                             getContext(), "杨充", data.getTitle());
                     tvTitle.setText(string);
-                }else if(getAdapterPosition()==3 || getAdapterPosition()==4){
+                } else if (getAdapterPosition() == 3 || getAdapterPosition() == 4) {
                     String text1 = "杨充";
                     String text2 = "潇湘剑雨";
                     String titleContent = text1 + text2 + data.getTitle();
@@ -109,7 +109,7 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
                     //tvTitle.setText(titleSpannable.toString());
                     //用下面这种，否则span不会生效
                     tvTitle.setText(titleSpannable);
-                }else {
+                } else {
                     tvTitle.setText(data.getTitle());
                 }
             }
@@ -117,8 +117,8 @@ public class HomeBlogAdapter extends RecyclerArrayAdapter<HomeBlogEntity> {
     }
 
 
-    private void spannable(SpannableString titleSpannable,RoundBackgroundSpan spannable,
-                          int start,int end) {
+    private void spannable(SpannableString titleSpannable, RoundBackgroundSpan spannable,
+                           int start, int end) {
         titleSpannable.setSpan(spannable, start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         titleSpannable.setSpan(new AbsoluteSizeSpan(Utils.getApp().getResources().getDimensionPixelSize(
                 R.dimen.textSize9)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

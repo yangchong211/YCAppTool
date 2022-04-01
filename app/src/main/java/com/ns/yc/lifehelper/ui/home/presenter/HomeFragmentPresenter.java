@@ -37,8 +37,8 @@ import rx.subscriptions.CompositeSubscription;
  * 创建日期：2017/3/21
  * 描    述：Home主页面
  * 修订历史：
- *
- *       v1.5 修改于11月3日，改写代码为MVP架构
+ * <p>
+ * v1.5 修改于11月3日，改写代码为MVP架构
  * ================================================
  */
 public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
@@ -61,10 +61,10 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
 
     @Override
     public void unSubscribe() {
-        if(mSubscriptions.isUnsubscribed()){
+        if (mSubscriptions.isUnsubscribed()) {
             mSubscriptions.unsubscribe();
         }
-        if(activity!=null){
+        if (activity != null) {
             activity = null;
         }
     }
@@ -74,7 +74,6 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     public void bindActivity(MainActivity activity) {
         this.activity = activity;
     }
-
 
 
     @Override
@@ -128,10 +127,10 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
         ArrayList<String> list = new ArrayList<>();
         String[] title = activity.getResources().getStringArray(R.array.main_marquee_title);
         SpannableString ss1 = new SpannableString(title[0]);
-        ss1.setSpan(new ForegroundColorSpan(Color.BLACK),  2, title[0].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss1.setSpan(new ForegroundColorSpan(Color.BLACK), 2, title[0].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         list.add(ss1.toString());
         SpannableString ss2 = new SpannableString(title[1]);
-        ss2.setSpan(new ForegroundColorSpan(Color.BLACK),  2, title[1].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss2.setSpan(new ForegroundColorSpan(Color.BLACK), 2, title[1].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         list.add(ss2.toString());
         SpannableString ss3 = new SpannableString(title[2]);
         ss3.setSpan(new URLSpan("http://www.ximalaya.com/zhubo/71989305/"), 2, title[2].length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -144,7 +143,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     public List<Object> getBannerData() {
         List<Object> lists = new ArrayList<>();
         TypedArray bannerImage = activity.getResources().obtainTypedArray(R.array.banner_image);
-        for (int i = 0; i < 8 ; i++) {
+        for (int i = 0; i < 8; i++) {
             int image = bannerImage.getResourceId(i, R.drawable.ic_investment);
             lists.add(image);
         }
@@ -157,7 +156,7 @@ public class HomeFragmentPresenter implements HomeFragmentContract.Presenter {
     public void getGalleryData() {
         ArrayList<Integer> narrowImage = ConstantImageApi.getNarrowImage();
         final ArrayList<Bitmap> images = new ArrayList<>();
-        for(int a=0 ; a<narrowImage.size() ; a++){
+        for (int a = 0; a < narrowImage.size(); a++) {
             Bitmap bitmap = toBitmap(narrowImage.get(a));
             images.add(bitmap);
         }

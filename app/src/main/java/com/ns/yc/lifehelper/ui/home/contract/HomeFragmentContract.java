@@ -19,22 +19,27 @@ import java.util.List;
  * 创建日期：2017/3/21
  * 描    述：Home主页面
  * 修订历史：
- *
- *       v1.5 修改于11月3日，改写代码为MVP架构
+ * <p>
+ * v1.5 修改于11月3日，改写代码为MVP架构
  * ================================================
  */
 public interface HomeFragmentContract {
 
     interface View extends BaseView {
         void setNewsData(List<HomeBlogEntity> list);
+
         void downloadBitmapSuccess(ArrayList<Bitmap> bitmapList);
     }
 
     interface Presenter extends BasePresenter {
         void getHomeNewsData();
+
         ArrayList<String> getMarqueeTitle();
+
         List<Object> getBannerData();
+
         void bindActivity(MainActivity activity);
+
         void getGalleryData();
     }
 

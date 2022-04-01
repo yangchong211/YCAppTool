@@ -51,7 +51,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 /**
  * <pre>
  *     @author yangchong
@@ -79,15 +78,15 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
             this, new HandlerUtils.HandlerReference.OnReceiveMessageListener() {
         @Override
         public void handlerMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
-                    if (cardViewLayout!=null){
+                    if (cardViewLayout != null) {
                         cardViewLayout.setVisibility(View.VISIBLE);
                     }
                     updateGalleryView();
                     break;
                 case 2:
-                    if (cardViewLayout!=null){
+                    if (cardViewLayout != null) {
                         cardViewLayout.setVisibility(View.GONE);
                     }
                     break;
@@ -152,8 +151,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
     public void initListener() {
         adapter.setOnItemClickListener(position -> {
             if (position > 0 && adapter.getAllData().size() > position) {
-                WebViewActivity.lunch(activity,adapter.getAllData().get(position).getUrl()
-                        ,adapter.getAllData().get(position).getTitle());
+                WebViewActivity.lunch(activity, adapter.getAllData().get(position).getUrl()
+                        , adapter.getAllData().get(position).getTitle());
             } else if (position == 0) {
 
             }
@@ -203,29 +202,29 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
             public void onBindView(View header) {
                 banner = header.findViewById(R.id.banner);
                 TextView tvHomeFirst = header.findViewById(R.id.tv_home_first);
-                TextView tvHomeSecond =header.findViewById(R.id.tv_home_second);
+                TextView tvHomeSecond = header.findViewById(R.id.tv_home_second);
                 TextView tvHomeThird = header.findViewById(R.id.tv_home_third);
                 TextView tvHomeFour = header.findViewById(R.id.tv_home_four);
                 marqueeView = header.findViewById(R.id.marqueeView);
                 cardViewLayout = header.findViewById(R.id.cardView);
                 View.OnClickListener listener = v -> {
-                    if (FastClickUtils.isFastDoubleClick()){
+                    if (FastClickUtils.isFastDoubleClick()) {
                         return;
                     }
                     switch (v.getId()) {
-                            //跳转视频
+                        //跳转视频
                         case R.id.tv_home_first:
                             ARouterUtils.navigation(RouterConfig.Video.ACTIVITY_VIDEO_VIDEO);
                             break;
-                            //飞机大战
+                        //飞机大战
                         case R.id.tv_home_second:
                             ARouterUtils.navigation(RouterConfig.Game.ACTIVITY_OTHER_AIR_ACTIVITY);
                             break;
-                            //跳转崩溃列表
+                        //跳转崩溃列表
                         case R.id.tv_home_third:
                             CrashToolUtils.startCrashListActivity(activity);
                             break;
-                            //干活集中营
+                        //干活集中营
                         case R.id.tv_home_four:
                             ARouterUtils.navigation(RouterConfig.Gank.ACTIVITY_GANK_KNOWLEDGE_ACTIVITY);
                             break;
@@ -272,15 +271,15 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                     break;
                 case 1:
                     Bundle bundle1 = new Bundle();
-                    bundle1.putString(Constant.URL,Constant.GITHUB);
-                    bundle1.putString(Constant.TITLE,"关于更多内容");
-                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle1);
+                    bundle1.putString(Constant.URL, Constant.GITHUB);
+                    bundle1.putString(Constant.TITLE, "关于更多内容");
+                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle1);
                     break;
                 case 2:
                     Bundle bundle2 = new Bundle();
-                    bundle2.putString(Constant.URL,Constant.ZHI_HU);
-                    bundle2.putString(Constant.TITLE,"关于我的知乎");
-                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW,bundle2);
+                    bundle2.putString(Constant.URL, Constant.ZHI_HU);
+                    bundle2.putString(Constant.TITLE, "关于我的知乎");
+                    ARouterUtils.navigation(RouterConfig.Library.ACTIVITY_LIBRARY_WEB_VIEW, bundle2);
                     break;
                 default:
                     break;
@@ -295,24 +294,24 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
             adapter.clear();
             adapter.addAll(list);
             adapter.notifyDataSetChanged();
-            mRecyclerView.scrollTo(0,0);
+            mRecyclerView.scrollTo(0, 0);
             mRecyclerView.setRefreshing(false);
         }
     }
 
     @Override
     public void downloadBitmapSuccess(final ArrayList<Bitmap> bitmapList) {
-        if(bitmapList!=null && bitmapList.size()>0){
+        if (bitmapList != null && bitmapList.size() > 0) {
             bitmaps = bitmapList;
-            handler.sendEmptyMessageAtTime(1,200);
-        }else {
-            handler.sendEmptyMessageAtTime(2,200);
+            handler.sendEmptyMessageAtTime(1, 200);
+        } else {
+            handler.sendEmptyMessageAtTime(2, 200);
         }
     }
 
 
     private void updateGalleryView() {
-        if(cardViewLayout==null || bitmaps==null || bitmaps.size()==0){
+        if (cardViewLayout == null || bitmaps == null || bitmaps.size() == 0) {
             return;
         }
         cardViewLayout.setAdapter(new CardViewLayout.Adapter() {
@@ -339,7 +338,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 Bitmap bitmap = bitmaps.get(position);
                 //正常是用来处理图片这种占用内存大的情况
                 bitmapSoftReference = new SoftReference<>(bitmap);
-                if(bitmapSoftReference.get() != null) {
+                if (bitmapSoftReference.get() != null) {
                     viewHolder.imageView.setImageBitmap(bitmapSoftReference.get());
                 } else {
                     viewHolder.imageView.setImageBitmap(bitmap);
@@ -348,7 +347,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
 
             @Override
             public int getItemCount() {
-                return bitmaps==null ? 0 : bitmaps.size();
+                return bitmaps == null ? 0 : bitmaps.size();
             }
 
             @Override
@@ -365,19 +364,19 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
     }
 
 
-
     private static final String QQ_URL = "http://android.myapp.com/myapp/detail.htm?apkName=com.zero2ipo.harlanhu.pedaily";
+
     /**
      * 自定义PopupWindow
      */
-    private void showCustomPopupWindow(final Activity activity){
-        if(AppUtils.isActivityLiving(activity)){
+    private void showCustomPopupWindow(final Activity activity) {
+        if (AppUtils.isActivityLiving(activity)) {
             View popMenuView = activity.getLayoutInflater().inflate(R.layout.dialog_custom_window, null);
             final PopupWindow popMenu = new PopupWindow(popMenuView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
             popMenu.setClippingEnabled(false);
             popMenu.setFocusable(true);
             popMenu.showAtLocation(popMenuView, Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
-            WindowUtils.setBackgroundAlpha(activity,0.5f);
+            WindowUtils.setBackgroundAlpha(activity, 0.5f);
 
             TextView tvStar = popMenuView.findViewById(R.id.tv_star);
             TextView tvFeedback = popMenuView.findViewById(R.id.tv_feedback);
@@ -388,8 +387,8 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 popMenu.dismiss();
             });
             tvFeedback.setOnClickListener(v -> {
-                if(GoToScoreUtils.isPkgInstalled(activity,"com.tencent.mm")){
-                    GoToScoreUtils.startMarket(activity,"com.tencent.mm");
+                if (GoToScoreUtils.isPkgInstalled(activity, "com.tencent.mm")) {
+                    GoToScoreUtils.startMarket(activity, "com.tencent.mm");
                 } else {
                     Intent intent = new Intent(activity, WebViewActivity.class);
                     intent.putExtra("url", QQ_URL);
@@ -398,10 +397,9 @@ public class HomeFragment extends BaseFragment<HomeFragmentPresenter> implements
                 popMenu.dismiss();
             });
             tvLook.setOnClickListener(v -> popMenu.dismiss());
-            popMenu.setOnDismissListener(() -> WindowUtils.setBackgroundAlpha(activity,1.0f));
+            popMenu.setOnDismissListener(() -> WindowUtils.setBackgroundAlpha(activity, 1.0f));
         }
     }
-
 
 
 }
