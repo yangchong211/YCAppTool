@@ -26,7 +26,7 @@ import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
  * </pre>
  */
 public class GuideActivity extends BaseActivity<GuidePresenter> implements
-        GuideContract.View ,View.OnClickListener {
+        GuideContract.View, View.OnClickListener {
 
     private ImageView ivSplashAd;
     private CountDownView cdvTime;
@@ -36,7 +36,7 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(cdvTime!=null && cdvTime.isShown()){
+        if (cdvTime != null && cdvTime.isShown()) {
             cdvTime.stop();
         }
     }
@@ -59,7 +59,6 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements
     public int getContentView() {
         return R.layout.base_activity_guide;
     }
-
 
 
     @Override
@@ -118,10 +117,8 @@ public class GuideActivity extends BaseActivity<GuidePresenter> implements
      */
     @Override
     public void showGuideLogo(String logo) {
-        GlideImageUtils.loadImageNet(this,logo,R.drawable.bg_cloud_night,ivSplashAd,false);
+        GlideImageUtils.loadImageNet(this, logo, R.drawable.bg_cloud_night, ivSplashAd, false);
     }
-
-
 
 
 }

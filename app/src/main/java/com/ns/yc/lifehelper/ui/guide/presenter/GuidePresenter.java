@@ -41,7 +41,7 @@ public class GuidePresenter implements GuideContract.Presenter {
 
     @Override
     public void subscribe() {
-        LogUtils.e("GuideActivity"+"------"+"subscribe");
+        LogUtils.e("GuideActivity" + "------" + "subscribe");
     }
 
 
@@ -53,13 +53,13 @@ public class GuidePresenter implements GuideContract.Presenter {
 
     @Override
     public void startGuideImage() {
-        if(AppConfig.INSTANCE.isShowGirlImg()){
+        if (AppConfig.INSTANCE.isShowGirlImg()) {
             String bannerUrl = AppConfig.INSTANCE.getBannerUrl();
-            if(TextUtils.isEmpty(bannerUrl)){
+            if (TextUtils.isEmpty(bannerUrl)) {
                 int i = new Random().nextInt(ConstantImageApi.SPALSH_URLS.length);
                 String splashUrl = ConstantImageApi.SPALSH_URLS[i];
                 mView.showGuideLogo(splashUrl);
-            }else {
+            } else {
                 mView.showGuideLogo(bannerUrl);
             }
         } else {
@@ -150,7 +150,6 @@ public class GuidePresenter implements GuideContract.Presenter {
             e.printStackTrace();
         }
     }
-
 
 
 }

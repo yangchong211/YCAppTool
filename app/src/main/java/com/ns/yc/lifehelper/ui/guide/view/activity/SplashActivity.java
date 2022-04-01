@@ -32,7 +32,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  *     revise: 针对启动页闪屏优化处理，可以看我这篇博客：https://www.jianshu.com/p/4dcc8e0e6966
  * </pre>
  */
-public class SplashActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks{
+public class SplashActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -113,6 +113,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
 
     /**
      * 判断是否添加了权限
+     *
      * @return true
      */
     private boolean hasPermissions() {
@@ -126,7 +127,6 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     private void initPermissions() {
         startPermissionsTask();
     }
-
 
 
     /**

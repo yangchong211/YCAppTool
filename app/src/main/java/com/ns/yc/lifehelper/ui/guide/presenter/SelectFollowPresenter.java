@@ -47,7 +47,7 @@ public class SelectFollowPresenter implements SelectFollowContract.Presenter {
     @Override
     public void addData(Activity activity) {
         String[] titles = activity.getResources().getStringArray(R.array.select_follow);
-        for(int a=0 ; a<titles.length ; a++){
+        for (int a = 0; a < titles.length; a++) {
             SelectPoint selectPoint = new SelectPoint();
             selectPoint.setName(titles[a]);
             list.add(selectPoint);

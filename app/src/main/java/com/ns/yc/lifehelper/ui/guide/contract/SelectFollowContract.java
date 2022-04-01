@@ -22,6 +22,7 @@ public interface SelectFollowContract {
 
     interface View extends BaseView {
         void refreshData(List<SelectPoint> list);
+
         void toMainActivity();
     }
 

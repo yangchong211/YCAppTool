@@ -39,19 +39,19 @@ public class SelectFollowAdapter extends SelectRecyclerViewAdapter<SelectFollowA
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(activity).inflate(R.layout.tag_select_follow, parent, false);
-        return new MyViewHolder(view , mItemClickListener);
+        return new MyViewHolder(view, mItemClickListener);
     }
 
 
     @SuppressLint("MissingSuperCall")
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        if(data!=null && data.size()>0){
+        if (data != null && data.size() > 0) {
             holder.tvName.setText(data.get(position).getName());
-            if(isIndexSelected(position)){
+            if (isIndexSelected(position)) {
                 holder.tvName.setBackgroundResource(R.drawable.shape_btn_color_bg_press);
                 holder.tvName.setTextColor(activity.getResources().getColor(R.color.colorWhite));
-            }else {
+            } else {
                 holder.tvName.setBackgroundResource(R.drawable.shape_btn_color_bg);
                 holder.tvName.setTextColor(activity.getResources().getColor(R.color.blackText));
             }
@@ -61,22 +61,23 @@ public class SelectFollowAdapter extends SelectRecyclerViewAdapter<SelectFollowA
 
     @Override
     public int getItemCount() {
-        return data!=null ? data.size() : 0;
+        return data != null ? data.size() : 0;
     }
 
 
-    class MyViewHolder extends  RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private  OnListItemClickListener listener;
+        private OnListItemClickListener listener;
         TextView tvName;
-        MyViewHolder(View itemView , OnListItemClickListener mItemClickListener) {
+
+        MyViewHolder(View itemView, OnListItemClickListener mItemClickListener) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
             this.listener = mItemClickListener;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClick(v,getAdapterPosition());
+                    listener.onItemClick(v, getAdapterPosition());
                 }
             });
         }
@@ -84,6 +85,7 @@ public class SelectFollowAdapter extends SelectRecyclerViewAdapter<SelectFollowA
     }
 
     private OnListItemClickListener mItemClickListener;
+
     public void setOnItemClickListener(OnListItemClickListener listener) {
         this.mItemClickListener = listener;
     }

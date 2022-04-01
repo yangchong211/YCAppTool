@@ -104,7 +104,7 @@ public class SelectFollowActivity extends BaseActivity<SelectFollowPresenter>
                 toMainActivity();
                 break;
             case R.id.tv_clean:
-                if(adapter!=null && adapter.data!=null){
+                if (adapter != null && adapter.data != null) {
                     adapter.clearSelected();
                 }
                 break;
@@ -140,7 +140,7 @@ public class SelectFollowActivity extends BaseActivity<SelectFollowPresenter>
 
     @Override
     public void toMainActivity() {
-        MainActivity.startActivity(this,MainActivity.FIND);
+        MainActivity.startActivity(this, MainActivity.FIND);
         SPUtils.getInstance(Constant.SP_NAME).put(Constant.KEY_FIRST_SPLASH, false);
         finish();
     }
