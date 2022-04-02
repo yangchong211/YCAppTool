@@ -37,7 +37,7 @@ public class BuildTimeCostPlugin implements Plugin<Project> {
         // 在 task 执行完成后，记录其执行结束时间，这样就能统计出该 task 的执行时长。
         project.getGradle().addListener(new AppTaskExecutionListener() {
             @Override
-            public void beforeExecute(Task task) {
+            public void beforeExecute(@NotNull Task task) {
                 //task开始执行之前搜集task的信息
                 TaskExecTimeInfo timeInfo = new TaskExecTimeInfo();
                 //记录开始时间
@@ -48,7 +48,7 @@ public class BuildTimeCostPlugin implements Plugin<Project> {
             }
 
             @Override
-            public void afterExecute(Task task, TaskState taskState) {
+            public void afterExecute(@NotNull Task task, @NotNull TaskState taskState) {
                 //task执行完之后，记录结束时的时间
                 TaskExecTimeInfo timeInfo = timeCostMap.get(task.getPath());
                 //记录结束时间
@@ -103,6 +103,7 @@ public class BuildTimeCostPlugin implements Plugin<Project> {
     }
 
     public static void log(String string){
+        //打印日志
         System.out.println("task time log : " + string);
     }
 

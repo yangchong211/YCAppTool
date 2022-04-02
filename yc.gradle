@@ -41,6 +41,7 @@ ext {
     swiperefreshlayoutVersion = '1.0.0'
     archLifecycleVersion = '2.0.0'
     databindingVersion = '3.2.1'
+    coreVersion = '1.0.0'
 
     dependencies = [
                 coordinatorlayout   : "androidx.coordinatorlayout:coordinatorlayout:${coordinatorlayoutVersion}",
@@ -52,6 +53,7 @@ ext {
                 media               : "androidx.media:media:${mediaVersion}",
                 material            : "com.google.android.material:material:${materialVersion}",
                 swiperefreshlayout  : "androidx.swiperefreshlayout:swiperefreshlayout:${swiperefreshlayoutVersion}",
+                core                : "androidx.core:core:${coreVersion}",
                 "multidex"          : "com.android.support:multidex:1.0.2",
                 "room-runtime"      : "androidx.room:room-runtime:${roomVersion}",
                 "room-compiler"     : "androidx.room:room-compiler:${roomVersion}",

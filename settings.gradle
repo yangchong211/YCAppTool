@@ -94,7 +94,7 @@ project(':AutoCloserLib').projectDir = new File('ToolLib/AutoCloserLib')
 /* +++++++++ Apt框架基础工具库 +++++++++ */
 include ':RouteCompiler', ':RouteManager', ':RouteAnnotations',':BuildTimeCostPlugin',
         ':ServiceLoaderApi', ':ServiceLoaderAnnotations', ':ServiceLoaderRegistry',
-        ':ServiceLoaderPlugin', ':ServiceLoaderProcessor'
+        ':ServiceLoaderPlugin', ':ServiceLoaderProcessor', ':MethodTimePlugin'
 project(':RouteCompiler').projectDir = new File('AptHelper/RouteCompiler')
 project(':RouteManager').projectDir = new File('AptHelper/RouteManager')
 project(':RouteAnnotations').projectDir = new File('AptHelper/RouteAnnotations')
@@ -104,7 +104,7 @@ project(':ServiceLoaderAnnotations').projectDir = new File('AptHelper/ServiceLoa
 project(':ServiceLoaderRegistry').projectDir = new File('AptHelper/ServiceLoaderRegistry')
 project(':ServiceLoaderPlugin').projectDir = new File('AptHelper/ServiceLoaderPlugin')
 project(':ServiceLoaderProcessor').projectDir = new File('AptHelper/ServiceLoaderProcessor')
-
+project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 
 
 /* +++++++++ App监控库 +++++++++ */
@@ -126,5 +126,6 @@ project(':LeakAnalyzer').projectDir = new File('MonitorLib/LeakAnalyzer')
 project(':LeakWatcher').projectDir = new File('MonitorLib/LeakWatcher')
 project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
+
 
 

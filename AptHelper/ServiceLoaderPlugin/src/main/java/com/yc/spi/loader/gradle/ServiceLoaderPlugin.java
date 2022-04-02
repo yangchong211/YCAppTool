@@ -54,7 +54,7 @@ public class ServiceLoaderPlugin implements Plugin<Project> {
                 ///Users/didi/yc/github/LifeHelper/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes
                 ServiceLoaderUtils.log("spi destination dir file path : " + destinationDir.getPath());
                 final FileCollection spiClasspath = project.files(bootClasspath, classpath,destinationDir);
-                ServiceLoaderUtils.log("spi file collection path : " + spiClasspath.getAsPath());
+                //ServiceLoaderUtils.log("spi file collection path : " + spiClasspath.getAsPath());
                 String capitalize = capitalize(variant.getName());
                 //Debug
                 ServiceLoaderUtils.log("spi capitalize name : " + capitalize);

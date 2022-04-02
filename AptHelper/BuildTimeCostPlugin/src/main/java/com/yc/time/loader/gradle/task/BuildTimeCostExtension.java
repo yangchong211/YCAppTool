@@ -1,6 +1,6 @@
 package com.yc.time.loader.gradle.task;
 
-public class BuildTimeCostExtension {
+public final class BuildTimeCostExtension {
 
     //task执行时间超过该值才会统计
     private int threshold;

@@ -1,6 +1,6 @@
 package com.yc.longevitylib;
 
-public class LongevityConstant {
+public final class LongevityConstant {
     public static final String LONGEVITY_MONITOR_NAME = "longevity_monitor";
     public static final String LONGEVITY_MONITOR_KEY_TIMESTAMP = "ts";
     public static final String LONGEVITY_MONITOR_KEY_PID = "pid";

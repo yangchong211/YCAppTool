@@ -21,7 +21,7 @@ import java.util.HashMap;
  *     revise:
  * </pre>
  */
-public class LongevityMonitor {
+public final class LongevityMonitor {
 
     private static final long INIT_DELAY_TIME_OFFSET = 5000L;
     private static final long WATCH_DOG_TIMER_INTERVAL = 15000L;
@@ -43,6 +43,7 @@ public class LongevityMonitor {
     private static int sLastScreenState;
     public static int sCurrentScreenState = LongevityConstant.LONGEVITY_SCREEN_STATE_ON;
     private static Bundle sSavedInstanceState;
+
     private static final Runnable sWatchDogRunnable = new Runnable() {
         public void run() {
             if (LongevityMonitor.sToggle.isOpen()) {

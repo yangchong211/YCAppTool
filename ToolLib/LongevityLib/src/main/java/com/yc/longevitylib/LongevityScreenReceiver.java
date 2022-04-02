@@ -22,16 +22,16 @@ public class LongevityScreenReceiver extends BroadcastReceiver {
     private int mLastScreenType = -1;
 
     public LongevityScreenReceiver() {
-        this.log("LongevityScreenReceiver" );
+        this.log("LongevityScreenReceiver");
     }
 
     public static void register(Context context) {
         if (context != null) {
             LongevityScreenReceiver receiver = new LongevityScreenReceiver();
             IntentFilter filter = new IntentFilter();
-            filter.addAction("android.intent.action.SCREEN_ON");
-            filter.addAction("android.intent.action.SCREEN_OFF");
-            filter.addAction("android.intent.action.USER_PRESENT");
+            filter.addAction(Intent.ACTION_SCREEN_ON);
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
+            filter.addAction(Intent.ACTION_USER_PRESENT);
             context.registerReceiver(receiver, filter);
             LongevityMonitor.sLogger.log("LongevityScreenReceiver is register" );
         }
@@ -52,15 +52,16 @@ public class LongevityScreenReceiver extends BroadcastReceiver {
                         if (this.mLastScreenType == 2) {
                             return;
                         }
-
+                        // 锁屏
                         this.mLastScreenType = 2;
                         this.log("onReceive screen off");
-                        LongevityMonitor.sCurrentScreenState = 2;
+                        LongevityMonitor.sCurrentScreenState = LongevityConstant.LONGEVITY_SCREEN_STATE_OFF;
                     }
                 } else {
+                    // 开屏
                     this.mLastScreenType = 1;
                     this.log("onReceive screen on");
-                    LongevityMonitor.sCurrentScreenState = 1;
+                    LongevityMonitor.sCurrentScreenState = LongevityConstant.LONGEVITY_SCREEN_STATE_ON;
                 }
             }
         }
