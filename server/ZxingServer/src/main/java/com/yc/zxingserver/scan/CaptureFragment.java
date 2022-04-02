@@ -38,8 +38,8 @@ public class CaptureFragment extends Fragment implements OnCaptureCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         int layoutId = getLayoutId();
-        if(isContentView(layoutId)){
-            mRootView = inflater.inflate(getLayoutId(),container,false);
+        if (isContentView(layoutId)) {
+            mRootView = inflater.inflate(getLayoutId(), container, false);
         }
         initUI();
         return mRootView;
@@ -48,80 +48,87 @@ public class CaptureFragment extends Fragment implements OnCaptureCallback {
     /**
      * 初始化
      */
-    public void initUI(){
+    public void initUI() {
         surfaceView = mRootView.findViewById(getSurfaceViewId());
         int viewfinderViewId = getViewfinderViewId();
-        if(viewfinderViewId != 0){
+        if (viewfinderViewId != 0) {
             viewfinderView = mRootView.findViewById(viewfinderViewId);
         }
         int ivTorchId = getIvTorchId();
-        if(ivTorchId != 0){
+        if (ivTorchId != 0) {
             ivTorch = mRootView.findViewById(ivTorchId);
             ivTorch.setVisibility(View.INVISIBLE);
         }
         initCaptureHelper();
     }
 
-    public void initCaptureHelper(){
-        mCaptureHelper = new CaptureHelper(this,surfaceView,viewfinderView,ivTorch);
+    public void initCaptureHelper() {
+        mCaptureHelper = new CaptureHelper(this, surfaceView, viewfinderView, ivTorch);
         mCaptureHelper.setOnCaptureCallback(this);
     }
 
     /**
      * 返回true时会自动初始化{@link #mRootView}，返回为false时需自己去通过{@link #setRootView(View)}初始化{@link #mRootView}
+     *
      * @param layoutId
      * @return 默认返回true
      */
-    public boolean isContentView(@LayoutRes int layoutId){
+    public boolean isContentView(@LayoutRes int layoutId) {
         return true;
     }
 
     /**
      * 布局id
+     *
      * @return
      */
-    public int getLayoutId(){
+    public int getLayoutId() {
         return R.layout.zxl_capture;
     }
 
     /**
      * {@link ViewfinderView} 的 id
+     *
      * @return 默认返回{@code R.id.viewfinderView}, 如果不需要扫码框可以返回0
      */
-    public int getViewfinderViewId(){
+    public int getViewfinderViewId() {
         return R.id.viewfinderView;
     }
 
     /**
      * 预览界面{@link #surfaceView} 的id
+     *
      * @return
      */
-    public int getSurfaceViewId(){
+    public int getSurfaceViewId() {
         return R.id.surfaceView;
     }
 
     /**
      * 获取 {@link #ivTorch} 的ID
-     * @return  默认返回{@code R.id.ivTorch}, 如果不需要手电筒按钮可以返回0
+     *
+     * @return 默认返回{@code R.id.ivTorch}, 如果不需要手电筒按钮可以返回0
      */
-    public int getIvTorchId(){
+    public int getIvTorchId() {
         return R.id.ivTorch;
     }
 
     /**
      * Get {@link CaptureHelper}
+     *
      * @return {@link #mCaptureHelper}
      */
-    public CaptureHelper getCaptureHelper(){
+    public CaptureHelper getCaptureHelper() {
         return mCaptureHelper;
     }
 
     /**
      * Get {@link CameraManager} use {@link #getCaptureHelper()#getCameraManager()}
+     *
      * @return {@link #mCaptureHelper#getCameraManager()}
      */
     @Deprecated
-    public CameraManager getCameraManager(){
+    public CameraManager getCameraManager() {
         return mCaptureHelper.getCameraManager();
     }
 
@@ -164,6 +171,7 @@ public class CaptureFragment extends Fragment implements OnCaptureCallback {
 
     /**
      * 接收扫码结果回调
+     *
      * @param result 扫码结果
      * @return 返回true表示拦截，将不自动执行后续逻辑，为false表示不拦截，默认不拦截
      */

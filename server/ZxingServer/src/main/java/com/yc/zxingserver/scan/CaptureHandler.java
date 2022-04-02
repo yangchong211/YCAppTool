@@ -58,14 +58,14 @@ public class CaptureHandler extends Handler implements ResultPointCallback {
         DONE
     }
 
-    CaptureHandler(Activity activity,ViewfinderView viewfinderView,OnCaptureListener onCaptureListener,
+    CaptureHandler(Activity activity, ViewfinderView viewfinderView, OnCaptureListener onCaptureListener,
                    Collection<BarcodeFormat> decodeFormats,
-                   Map<DecodeHintType,Object> baseHints,
+                   Map<DecodeHintType, Object> baseHints,
                    String characterSet,
                    CameraManager cameraManager) {
         this.viewfinderView = viewfinderView;
         this.onCaptureListener = onCaptureListener;
-        decodeThread = new DecodeThread(activity,cameraManager,this, decodeFormats, baseHints, characterSet, this);
+        decodeThread = new DecodeThread(activity, cameraManager, this, decodeFormats, baseHints, characterSet, this);
         decodeThread.start();
         state = State.SUCCESS;
 
@@ -125,7 +125,7 @@ public class CaptureHandler extends Handler implements ResultPointCallback {
         if (state == State.SUCCESS) {
             state = State.PREVIEW;
             cameraManager.requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
-            if(viewfinderView!= null){
+            if (viewfinderView != null) {
                 viewfinderView.drawViewfinder();
             }
         }
@@ -133,13 +133,13 @@ public class CaptureHandler extends Handler implements ResultPointCallback {
 
     @Override
     public void foundPossibleResultPoint(ResultPoint point) {
-        if(viewfinderView!=null){
+        if (viewfinderView != null) {
             ResultPoint resultPoint = transform(point);
             viewfinderView.addPossibleResultPoint(resultPoint);
         }
     }
 
-    private boolean isScreenPortrait(Context context){
+    private boolean isScreenPortrait(Context context) {
         WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = manager.getDefaultDisplay();
         Point screenResolution = new Point();
@@ -148,7 +148,6 @@ public class CaptureHandler extends Handler implements ResultPointCallback {
     }
 
     /**
-     *
      * @return
      */
     private ResultPoint transform(ResultPoint originPoint) {
@@ -160,22 +159,22 @@ public class CaptureHandler extends Handler implements ResultPointCallback {
         float x;
         float y;
 
-        if(screenPoint.x < screenPoint.y){
+        if (screenPoint.x < screenPoint.y) {
             scaleX = 1.0f * screenPoint.x / cameraPoint.y;
             scaleY = 1.0f * screenPoint.y / cameraPoint.x;
 
-            x = originPoint.getX() * scaleX - Math.max(screenPoint.x,cameraPoint.y)/2;
-            y = originPoint.getY() * scaleY - Math.min(screenPoint.y,cameraPoint.x)/2;
-        }else{
+            x = originPoint.getX() * scaleX - Math.max(screenPoint.x, cameraPoint.y) / 2;
+            y = originPoint.getY() * scaleY - Math.min(screenPoint.y, cameraPoint.x) / 2;
+        } else {
             scaleX = 1.0f * screenPoint.x / cameraPoint.x;
             scaleY = 1.0f * screenPoint.y / cameraPoint.y;
 
-            x = originPoint.getX() * scaleX - Math.min(screenPoint.y,cameraPoint.y)/2;
-            y = originPoint.getY() * scaleY - Math.max(screenPoint.x,cameraPoint.x)/2;
+            x = originPoint.getX() * scaleX - Math.min(screenPoint.y, cameraPoint.y) / 2;
+            y = originPoint.getY() * scaleY - Math.max(screenPoint.x, cameraPoint.x) / 2;
         }
 
 
-        return new ResultPoint(x,y);
+        return new ResultPoint(x, y);
     }
 
     public boolean isSupportVerticalCode() {

@@ -17,6 +17,7 @@ public class EasyCaptureActivity extends CaptureActivity {
 
     public static final String KEY_TITLE = "key_title";
     private boolean isContinuousScan;
+
     @Override
     public int getLayoutId() {
         return R.layout.easy_capture_activity;
@@ -59,13 +60,14 @@ public class EasyCaptureActivity extends CaptureActivity {
 
     /**
      * 扫码结果回调
+     *
      * @param result 扫码结果
      * @return
      */
     @Override
     public boolean onResultCallback(String result) {
-        if(isContinuousScan){//连续扫码时，直接弹出结果
-            Toast.makeText(this,result,Toast.LENGTH_SHORT).show();
+        if (isContinuousScan) {//连续扫码时，直接弹出结果
+            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
         }
         return super.onResultCallback(result);
     }

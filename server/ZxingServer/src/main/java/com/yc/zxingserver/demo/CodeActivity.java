@@ -38,12 +38,11 @@ public class CodeActivity extends AppCompatActivity {
         mTv4 = findViewById(R.id.tv_4);
 
 
-
-        boolean isQRCode = getIntent().getBooleanExtra(KEY_IS_QR_CODE,false);
-        if(isQRCode){
+        boolean isQRCode = getIntent().getBooleanExtra(KEY_IS_QR_CODE, false);
+        if (isQRCode) {
             tvTitle.setText("二维码");
             createQRCode("杨充");
-        }else{
+        } else {
             tvTitle.setText("条形码");
             createBarCode("1234567890");
         }
@@ -81,14 +80,15 @@ public class CodeActivity extends AppCompatActivity {
 
     /**
      * 生成二维码
+     *
      * @param content
      */
-    private void createQRCode(String content){
+    private void createQRCode(String content) {
         new Thread(() -> {
             //生成二维码相关放在子线程里面
-            Bitmap logo = BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher);
-            Bitmap bitmap =  ZxingCodeCreate.createQRCode(content,600,logo);
-            runOnUiThread(()->{
+            Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+            Bitmap bitmap = ZxingCodeCreate.createQRCode(content, 600, logo);
+            runOnUiThread(() -> {
                 //显示二维码
                 ivCode.setImageBitmap(bitmap);
             });
@@ -98,14 +98,15 @@ public class CodeActivity extends AppCompatActivity {
 
     /**
      * 生成条形码
+     *
      * @param content
      */
-    private void createBarCode(String content){
+    private void createBarCode(String content) {
         new Thread(() -> {
             //生成条形码相关放在子线程里面
             Bitmap bitmap = BarCodeCreate.createBarCode(content, BarcodeFormat.CODE_128,
-                    800,200,null,true);
-            runOnUiThread(()->{
+                    800, 200, null, true);
+            runOnUiThread(() -> {
                 //显示条形码
                 ivCode.setImageBitmap(bitmap);
             });

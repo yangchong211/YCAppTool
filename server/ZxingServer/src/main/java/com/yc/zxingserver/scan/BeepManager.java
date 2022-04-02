@@ -36,11 +36,11 @@ public final class BeepManager implements MediaPlayer.OnErrorListener, Closeable
         updatePrefs();
     }
 
-    public void setVibrate(boolean vibrate){
+    public void setVibrate(boolean vibrate) {
         this.vibrate = vibrate;
     }
 
-    public void setPlayBeep(boolean playBeep){
+    public void setPlayBeep(boolean playBeep) {
         this.playBeep = playBeep;
     }
 
@@ -90,7 +90,7 @@ public final class BeepManager implements MediaPlayer.OnErrorListener, Closeable
             mediaPlayer.prepare();
             return mediaPlayer;
         } catch (IOException ioe) {
-            ZxingLogUtils.w( ioe);
+            ZxingLogUtils.w(ioe);
             mediaPlayer.release();
             return null;
         }

@@ -65,18 +65,18 @@ final class AmbientLightManager implements SensorEventListener {
         float ambientLightLux = sensorEvent.values[0];
         if (cameraManager != null) {
             if (ambientLightLux <= tooDarkLux) {
-                cameraManager.sensorChanged(true,ambientLightLux);
+                cameraManager.sensorChanged(true, ambientLightLux);
             } else if (ambientLightLux >= brightEnoughLux) {
-                cameraManager.sensorChanged(false,ambientLightLux);
+                cameraManager.sensorChanged(false, ambientLightLux);
             }
         }
     }
 
-    public void setTooDarkLux(float tooDarkLux){
+    public void setTooDarkLux(float tooDarkLux) {
         this.tooDarkLux = tooDarkLux;
     }
 
-    public void setBrightEnoughLux(float brightEnoughLux){
+    public void setBrightEnoughLux(float brightEnoughLux) {
         this.brightEnoughLux = brightEnoughLux;
     }
 
