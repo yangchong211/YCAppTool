@@ -9,6 +9,7 @@ public interface OnCaptureListener {
 
     /**
      * 接收解码后的扫码结果
+     *
      * @param result
      * @param barcode
      * @param scaleFactor

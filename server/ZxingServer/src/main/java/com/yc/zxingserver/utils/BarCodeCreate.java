@@ -21,33 +21,36 @@ public final class BarCodeCreate {
 
     /**
      * 生成条形码
+     *
      * @param content
      * @param desiredWidth
      * @param desiredHeight
      * @return
      */
     public static Bitmap createBarCode(String content, int desiredWidth, int desiredHeight) {
-        return createBarCode(content, BarcodeFormat.CODE_128,desiredWidth,desiredHeight,null);
+        return createBarCode(content, BarcodeFormat.CODE_128, desiredWidth, desiredHeight, null);
     }
 
     /**
      * 生成条形码
+     *
      * @param content
      * @param format
      * @param desiredWidth
      * @param desiredHeight
      * @return
      */
-    public static Bitmap createBarCode(String content,BarcodeFormat format, int desiredWidth, int desiredHeight) {
-        return createBarCode(content,format,desiredWidth,desiredHeight,null);
+    public static Bitmap createBarCode(String content, BarcodeFormat format, int desiredWidth, int desiredHeight) {
+        return createBarCode(content, format, desiredWidth, desiredHeight, null);
     }
 
     public static Bitmap createBarCode(String content, int desiredWidth, int desiredHeight, boolean isShowText) {
-        return createBarCode(content,BarcodeFormat.CODE_128,desiredWidth,desiredHeight,null,isShowText,40, Color.BLACK);
+        return createBarCode(content, BarcodeFormat.CODE_128, desiredWidth, desiredHeight, null, isShowText, 40, Color.BLACK);
     }
 
     /**
      * 生成条形码
+     *
      * @param content
      * @param desiredWidth
      * @param desiredHeight
@@ -55,12 +58,13 @@ public final class BarCodeCreate {
      * @param codeColor
      * @return
      */
-    public static Bitmap createBarCode(String content, int desiredWidth, int desiredHeight, boolean isShowText,@ColorInt int codeColor) {
-        return createBarCode(content,BarcodeFormat.CODE_128,desiredWidth,desiredHeight,null,isShowText,40,codeColor);
+    public static Bitmap createBarCode(String content, int desiredWidth, int desiredHeight, boolean isShowText, @ColorInt int codeColor) {
+        return createBarCode(content, BarcodeFormat.CODE_128, desiredWidth, desiredHeight, null, isShowText, 40, codeColor);
     }
 
     /**
      * 生成条形码
+     *
      * @param content
      * @param format
      * @param desiredWidth
@@ -68,12 +72,13 @@ public final class BarCodeCreate {
      * @param hints
      * @return
      */
-    public static Bitmap createBarCode(String content, BarcodeFormat format, int desiredWidth, int desiredHeight, Map<EncodeHintType,?> hints) {
-        return createBarCode(content,format,desiredWidth,desiredHeight,hints,false,40,Color.BLACK);
+    public static Bitmap createBarCode(String content, BarcodeFormat format, int desiredWidth, int desiredHeight, Map<EncodeHintType, ?> hints) {
+        return createBarCode(content, format, desiredWidth, desiredHeight, hints, false, 40, Color.BLACK);
     }
 
     /**
      * 生成条形码
+     *
      * @param content
      * @param format
      * @param desiredWidth
@@ -82,12 +87,13 @@ public final class BarCodeCreate {
      * @param isShowText
      * @return
      */
-    public static Bitmap createBarCode(String content, BarcodeFormat format, int desiredWidth, int desiredHeight, Map<EncodeHintType,?> hints, boolean isShowText) {
-        return createBarCode(content,format,desiredWidth,desiredHeight,hints,isShowText,40,Color.BLACK);
+    public static Bitmap createBarCode(String content, BarcodeFormat format, int desiredWidth, int desiredHeight, Map<EncodeHintType, ?> hints, boolean isShowText) {
+        return createBarCode(content, format, desiredWidth, desiredHeight, hints, isShowText, 40, Color.BLACK);
     }
 
     /**
      * 生成条形码
+     *
      * @param content
      * @param format
      * @param desiredWidth
@@ -96,12 +102,13 @@ public final class BarCodeCreate {
      * @param codeColor
      * @return
      */
-    public static Bitmap createBarCode(String content, BarcodeFormat format, int desiredWidth, int desiredHeight,  boolean isShowText,@ColorInt int codeColor) {
-        return createBarCode(content,format,desiredWidth,desiredHeight,null,isShowText,40,codeColor);
+    public static Bitmap createBarCode(String content, BarcodeFormat format, int desiredWidth, int desiredHeight, boolean isShowText, @ColorInt int codeColor) {
+        return createBarCode(content, format, desiredWidth, desiredHeight, null, isShowText, 40, codeColor);
     }
 
     /**
      * 生成条形码
+     *
      * @param content
      * @param format
      * @param desiredWidth
@@ -110,12 +117,13 @@ public final class BarCodeCreate {
      * @param isShowText
      * @return
      */
-    public static Bitmap createBarCode(String content, BarcodeFormat format, int desiredWidth, int desiredHeight, Map<EncodeHintType,?> hints, boolean isShowText,@ColorInt int codeColor) {
-        return createBarCode(content,format,desiredWidth,desiredHeight,hints,isShowText,40,codeColor);
+    public static Bitmap createBarCode(String content, BarcodeFormat format, int desiredWidth, int desiredHeight, Map<EncodeHintType, ?> hints, boolean isShowText, @ColorInt int codeColor) {
+        return createBarCode(content, format, desiredWidth, desiredHeight, hints, isShowText, 40, codeColor);
     }
 
     /**
      * 生成条形码
+     *
      * @param content
      * @param format
      * @param desiredWidth
@@ -126,8 +134,8 @@ public final class BarCodeCreate {
      * @param codeColor
      * @return
      */
-    public static Bitmap createBarCode(String content,BarcodeFormat format, int desiredWidth, int desiredHeight,Map<EncodeHintType,?> hints,boolean isShowText,int textSize,@ColorInt int codeColor) {
-        if(TextUtils.isEmpty(content)){
+    public static Bitmap createBarCode(String content, BarcodeFormat format, int desiredWidth, int desiredHeight, Map<EncodeHintType, ?> hints, boolean isShowText, int textSize, @ColorInt int codeColor) {
+        if (TextUtils.isEmpty(content)) {
             return null;
         }
         final int WHITE = Color.WHITE;
@@ -151,8 +159,8 @@ public final class BarCodeCreate {
             Bitmap bitmap = Bitmap.createBitmap(width, height,
                     Bitmap.Config.ARGB_8888);
             bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-            if(isShowText){
-                return addCode(bitmap,content,textSize,codeColor,textSize/2);
+            if (isShowText) {
+                return addCode(bitmap, content, textSize, codeColor, textSize / 2);
             }
             return bitmap;
         } catch (WriterException e) {
@@ -163,13 +171,14 @@ public final class BarCodeCreate {
 
     /**
      * 条形码下面添加文本信息
+     *
      * @param src
      * @param code
      * @param textSize
      * @param textColor
      * @return
      */
-    private static Bitmap addCode(Bitmap src,String code,int textSize,@ColorInt int textColor,int offset) {
+    private static Bitmap addCode(Bitmap src, String code, int textSize, @ColorInt int textColor, int offset) {
         if (src == null) {
             return null;
         }
@@ -194,7 +203,7 @@ public final class BarCodeCreate {
             paint.setTextSize(textSize);
             paint.setColor(textColor);
             paint.setTextAlign(Paint.Align.CENTER);
-            canvas.drawText(code,srcWidth/2,srcHeight + textSize /2 + offset,paint);
+            canvas.drawText(code, srcWidth / 2, srcHeight + textSize / 2 + offset, paint);
             canvas.save();
             canvas.restore();
         } catch (Exception e) {
@@ -203,7 +212,6 @@ public final class BarCodeCreate {
         }
         return bitmap;
     }
-
 
 
 }
