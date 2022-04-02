@@ -35,7 +35,7 @@ public class UriRecord implements InterNdefRecord {
         this.mUri = Preconditions.checkNotNull(uri);
     }
 
-    public String getViewText(){
+    public String getViewText() {
         return mUri.toString();
     }
 
@@ -48,7 +48,7 @@ public class UriRecord implements InterNdefRecord {
      * This will handle both TNF_WELL_KNOWN / RTD_URI and TNF_ABSOLUTE_URI.
      *
      * @throws IllegalArgumentException if the NdefRecord is not a record
-     *         containing a URI.
+     *                                  containing a URI.
      */
     public static UriRecord parse(NdefRecord record) {
         short tnf = record.getTnf();
@@ -60,14 +60,18 @@ public class UriRecord implements InterNdefRecord {
         throw new IllegalArgumentException("Unknown TNF " + tnf);
     }
 
-    /** Parse and absolute URI record */
+    /**
+     * Parse and absolute URI record
+     */
     private static UriRecord parseAbsolute(NdefRecord record) {
         byte[] payload = record.getPayload();
         Uri uri = Uri.parse(new String(payload, StandardCharsets.UTF_8));
         return new UriRecord(uri);
     }
 
-    /** Parse an well known URI record */
+    /**
+     * Parse an well known URI record
+     */
     private static UriRecord parseWellKnown(NdefRecord record) {
         Preconditions.checkArgument(Arrays.equals(record.getType(), NdefRecord.RTD_URI));
         byte[] payload = record.getPayload();

@@ -24,12 +24,12 @@ public class BaseNfcActivity extends AppCompatActivity {
      * 使用前台调度系统
      * 借助前台调度系统，Activity 可以拦截 Intent 并声明自己可优先于其他 Activity 处理同一 Intent。
      * 使用此系统涉及为 Android 系统构造一些数据结构，以便将合适的 Intent 发送到您的应用。
-     *
+     * <p>
      * 具体实践步骤
      * 1.创建一个 PendingIntent 对象，这样 Android 系统会使用扫描到的标签的详情对其进行填充
      * 2.替换以下 Activity 生命周期回调，并添加相应逻辑，以分别在 Activity 失去 (onPause()) 焦点和重新获得 (onResume()) 焦点时启用和停用前台调度。
-     *  enableForegroundDispatch() 必须从主线程调用，并且只能在 Activity 在前台运行时调用（在 onResume() 中调用可确保这一点）。
-     *  您还需要实现 onNewIntent 回调以处理扫描到的 NFC 标签中的数据。
+     * enableForegroundDispatch() 必须从主线程调用，并且只能在 Activity 在前台运行时调用（在 onResume() 中调用可确保这一点）。
+     * 您还需要实现 onNewIntent 回调以处理扫描到的 NFC 标签中的数据。
      */
     protected static final String TAG = "Nfc------";
     protected NfcAdapter mNfcAdapter;
@@ -49,7 +49,7 @@ public class BaseNfcActivity extends AppCompatActivity {
         //1.创建一个 PendingIntent 对象，这样 Android 系统会使用扫描到的标签的详情对其进行填充
         Intent intent = new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         mPendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-        Log.e(TAG,"onCreate----mNfcAdapter创建-");
+        Log.e(TAG, "onCreate----mNfcAdapter创建-");
         //https://developer.android.google.cn/guide/topics/connectivity/nfc/advanced-nfc#foreground-dispatch
         IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
         try {
@@ -58,8 +58,8 @@ public class BaseNfcActivity extends AppCompatActivity {
         } catch (IntentFilter.MalformedMimeTypeException e) {
             throw new RuntimeException("fail", e);
         }
-        intentFiltersArray = new IntentFilter[] {ndef, };
-        techListsArray = new String[][] { new String[] { NfcF.class.getName() } };
+        intentFiltersArray = new IntentFilter[]{ndef,};
+        techListsArray = new String[][]{new String[]{NfcF.class.getName()}};
     }
 
     /**
@@ -74,11 +74,11 @@ public class BaseNfcActivity extends AppCompatActivity {
             if (mNfcAdapter.isEnabled()) {
                 //nfc功能打开了
                 //隐式启动
-                Log.e(TAG,"onResume----mNfcAdapter-隐式启动-");
+                Log.e(TAG, "onResume----mNfcAdapter-隐式启动-");
                 //mNfcAdapter.enableForegroundDispatch(this, mPendingIntent, null, null);
                 mNfcAdapter.enableForegroundDispatch(this, mPendingIntent, intentFiltersArray, techListsArray);
             } else {
-                Log.e(TAG,"onResume----mNfcAdapter-请打开nfc功能-");
+                Log.e(TAG, "onResume----mNfcAdapter-请打开nfc功能-");
                 Toast.makeText(BaseNfcActivity.this, "请打开nfc功能", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -92,8 +92,8 @@ public class BaseNfcActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         //恢复默认状态
-        if (mNfcAdapter != null){
-            Log.e(TAG,"onResume----mNfcAdapter-恢复默认状态-");
+        if (mNfcAdapter != null) {
+            Log.e(TAG, "onResume----mNfcAdapter-恢复默认状态-");
             mNfcAdapter.disableForegroundDispatch(this);
         }
     }

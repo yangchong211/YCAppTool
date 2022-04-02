@@ -34,7 +34,7 @@ public class SmartPoster implements InterNdefRecord {
 
     /**
      * NFC Forum Smart Poster Record Type Definition section 3.2.1.
-     *
+     * <p>
      * "The Title record for the service (there can be many of these in
      * different languages, but a language MUST NOT be repeated). This record is
      * optional."
@@ -43,7 +43,7 @@ public class SmartPoster implements InterNdefRecord {
 
     /**
      * NFC Forum Smart Poster Record Type Definition section 3.2.1.
-     *
+     * <p>
      * "The URI record. This is the core of the Smart Poster, and all other
      * records are just metadata about this record. There MUST be one URI record
      * and there MUST NOT be more than one."
@@ -52,7 +52,7 @@ public class SmartPoster implements InterNdefRecord {
 
     /**
      * NFC Forum Smart Poster Record Type Definition section 3.2.1.
-     *
+     * <p>
      * "The Action record. This record describes how the service should be
      * treated. For example, the action may indicate that the device should save
      * the URI as a bookmark or open a browser. The Action record is optional.
@@ -65,7 +65,7 @@ public class SmartPoster implements InterNdefRecord {
 
     /**
      * NFC Forum Smart Poster Record Type Definition section 3.2.1.
-     *
+     * <p>
      * "The Type record. If the URI references an external entity (e.g., via a
      * URL), the Type record may be used to declare the MIME type of the entity.
      * This can be used to tell the mobile device what kind of an object it can
@@ -141,6 +141,7 @@ public class SmartPoster implements InterNdefRecord {
     private enum RecommendedAction {
         UNKNOWN((byte) -1), DO_ACTION((byte) 0), SAVE_FOR_LATER((byte) 1), OPEN_FOR_EDITING((byte) 2);
         private static final ImmutableMap<Byte, RecommendedAction> LOOKUP;
+
         static {
             ImmutableMap.Builder<Byte, RecommendedAction> builder = ImmutableMap.builder();
             for (RecommendedAction action : RecommendedAction.values()) {
@@ -169,7 +170,7 @@ public class SmartPoster implements InterNdefRecord {
         return null;
     }
 
-    private static final byte[] ACTION_RECORD_TYPE = new byte[] {'a', 'c', 't'};
+    private static final byte[] ACTION_RECORD_TYPE = new byte[]{'a', 'c', 't'};
 
     private static RecommendedAction parseRecommendedAction(NdefRecord[] records) {
         NdefRecord record = getByType(ACTION_RECORD_TYPE, records);
@@ -183,7 +184,7 @@ public class SmartPoster implements InterNdefRecord {
         return RecommendedAction.UNKNOWN;
     }
 
-    private static final byte[] TYPE_TYPE = new byte[] {'t'};
+    private static final byte[] TYPE_TYPE = new byte[]{'t'};
 
     private static String parseType(NdefRecord[] records) {
         NdefRecord type = getByType(TYPE_TYPE, records);
@@ -193,12 +194,12 @@ public class SmartPoster implements InterNdefRecord {
         return new String(type.getPayload(), Charsets.UTF_8);
     }
 
-	@Override
-	public String getViewText() {
+    @Override
+    public String getViewText() {
         if (mTitleRecord != null) {
             return mTitleRecord.getText();
         }
         //返回空字符串
-		return "";
-	}
+        return "";
+    }
 }

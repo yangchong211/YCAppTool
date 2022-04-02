@@ -20,6 +20,7 @@ public class NfcUtil {
 
     /**
      * 解析 ndefRecord 文本数据
+     *
      * @param ndefRecord
      * @return
      */
@@ -58,7 +59,7 @@ public class NfcUtil {
 
     //初次判断是什么类型的NFC卡
     public static NdefMessage[] getNdefMsg(Intent intent) {
-        if (intent == null){
+        if (intent == null) {
             return null;
         }
         //nfc卡支持的格式
@@ -98,7 +99,6 @@ public class NfcUtil {
         }
         return null;
     }
-
 
 
     //一般公家卡，扫描的信息
@@ -169,7 +169,6 @@ public class NfcUtil {
     }
 
 
-
     private static String getHex(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
         for (int i = bytes.length - 1; i >= 0; --i) {
@@ -209,12 +208,13 @@ public class NfcUtil {
 
     /**
      * 判断字符串是否为URL
+     *
      * @param urls 需要判断的String类型url
      * @return true:是URL；false:不是URL
      */
     public static boolean isHttpUrl(String urls) {
         boolean isurl = false;
-        try{
+        try {
             String regex = "(((https|http)?://)?([a-z0-9]+[.])|(www.))"
                     + "\\w+[.|\\/]([a-z0-9]{0,})?[[.]([a-z0-9]{0,})]+((/[\\S&&[^,;\u4E00-\u9FA5]]+)+)?([.][a-z0-9]{0,}+|/?)";//设置正则表达式
 
@@ -224,8 +224,8 @@ public class NfcUtil {
             if (isurl) {
                 isurl = true;
             }
-        }catch (Exception ex){
-            isurl=false;
+        } catch (Exception ex) {
+            isurl = false;
         }
         return isurl;
     }

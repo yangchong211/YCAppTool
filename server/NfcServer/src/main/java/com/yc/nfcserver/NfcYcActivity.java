@@ -63,7 +63,7 @@ public class NfcYcActivity extends BaseNfcActivity {
     //初次判断是什么类型的NFC卡
     private void resolveIntent(Intent intent) {
         NdefMessage[] msgs = NfcUtil.getNdefMsg(intent); //重点功能，解析nfc标签中的数据
-        Log.e(TAG, "resolveIntent: "+msgs);
+        Log.e(TAG, "resolveIntent: " + msgs);
         if (msgs == null) {
             Toast.makeText(NfcYcActivity.this, "识别失败", Toast.LENGTH_SHORT).show();
             finish();
@@ -80,7 +80,7 @@ public class NfcYcActivity extends BaseNfcActivity {
      */
     @SuppressLint("SetTextI18n")
     private void setNFCMsgView(NdefMessage[] ndefMessages) {
-        try{
+        try {
             if (ndefMessages == null || ndefMessages.length == 0) {
                 Toast.makeText(NfcYcActivity.this, "识别失败", Toast.LENGTH_SHORT).show();
                 finish();
@@ -93,20 +93,21 @@ public class NfcYcActivity extends BaseNfcActivity {
                 InterNdefRecord record = records.get(i);
                 tvNFCMessage.append(record.getViewText());
             }
-            if (!TextUtils.isEmpty(tvNFCMessage.getText().toString())){
-                Log.e(TAG, "setNFCMsgView: "+tvNFCMessage.getText().toString());
-                if (NfcUtil.isHttpUrl(tvNFCMessage.getText().toString())){
+            if (!TextUtils.isEmpty(tvNFCMessage.getText().toString())) {
+                Log.e(TAG, "setNFCMsgView: " + tvNFCMessage.getText().toString());
+                if (NfcUtil.isHttpUrl(tvNFCMessage.getText().toString())) {
                     startBrowser(tvNFCMessage.getText().toString());
                     finish();
                 }
             }
-        }catch (Exception ex ){
+        } catch (Exception ex) {
             finish();
         }
     }
 
     /**
      * 启动浏览器
+     *
      * @param url
      */
     public void startBrowser(String url) {

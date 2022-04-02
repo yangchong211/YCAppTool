@@ -27,7 +27,9 @@ import java.util.Arrays;
  */
 public class TextRecord implements InterNdefRecord {
 
-    /** ISO/IANA language code */
+    /**
+     * ISO/IANA language code
+     */
     private final String mLanguageCode;
 
     private final String mText;
@@ -36,11 +38,11 @@ public class TextRecord implements InterNdefRecord {
         mLanguageCode = Preconditions.checkNotNull(languageCode);
         mText = Preconditions.checkNotNull(text);
     }
-    
-	@Override
-	public String getViewText() {
+
+    @Override
+    public String getViewText() {
         return mText;
-	}
+    }
 
     public String getText() {
         return mText;
@@ -72,12 +74,12 @@ public class TextRecord implements InterNdefRecord {
              *
              * Bits 5 to 0 are the length of the IANA language code.
              */
-            
+
             //��payloadΪ�յ�ʱ��ᱨ����Ϊrecord.getPayload()û��ֵ
             if (payload.length <= 0) {
-            	payload = record.getType();
-            	return null;
-			}
+                payload = record.getType();
+                return null;
+            }
             String textEncoding = ((payload[0] & 0200) == 0) ? "UTF-8" : "UTF-16";
             int languageCodeLength = payload[0] & 0077;
             String languageCode = new String(payload, 1, languageCodeLength, "US-ASCII");
