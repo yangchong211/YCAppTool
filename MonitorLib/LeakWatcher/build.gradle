@@ -1,8 +1,15 @@
 apply plugin: 'java-library'
 
-sourceCompatibility = JavaVersion.VERSION_1_7
-targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'LeakWatcher',
+            'Implementation-Version': '1.0.0'
+  }
+}
 
 dependencies {
-  testImplementation 'junit:junit:4.12'
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

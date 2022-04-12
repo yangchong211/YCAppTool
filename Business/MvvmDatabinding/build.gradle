@@ -55,6 +55,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["cardview"])
     implementation(rootProject.ext.dependencies["material"])
+    implementation(rootProject.ext.dependencies["swiperefreshlayout"])
     implementation(rootProject.ext.dependencies["recyclerview"])
     implementation(rootProject.ext.dependencies["databinding"])
     implementation(rootProject.ext.dependencies["room-runtime"])

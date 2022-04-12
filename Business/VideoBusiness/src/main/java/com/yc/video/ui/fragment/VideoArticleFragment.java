@@ -134,14 +134,14 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
 
     @Override
     public void initListener() {
-        recyclerView.setRefreshListener(() -> {
-            if (NetworkUtils.isConnected()) {
-                presenter.doRefresh();
-            } else {
-                recyclerView.setRefreshing(false);
-                ToastUtils.showToast("网络不可用");
-            }
-        });
+//        recyclerView.setRefreshListener(() -> {
+//            if (NetworkUtils.isConnected()) {
+//                presenter.doRefresh();
+//            } else {
+//                recyclerView.setRefreshing(false);
+//                ToastUtils.showToast("网络不可用");
+//            }
+//        });
         recyclerView.addOnScrollListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {

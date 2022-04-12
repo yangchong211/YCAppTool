@@ -71,13 +71,13 @@ class RequestManager {
         param.put("status", status);
         param.put("ts", ts);
         param.put("taskId", taskId);
-        param.put("sdk_ver", BuildConfig.VERSION_NAME);
+        //param.put("sdk_ver", BuildConfig.VERSION_NAME);
 
         RequestBody formBody = new FormBody.Builder()
                 .add("status", String.valueOf(status))
                 .add("message", message)
                 .add("ts", String.valueOf(ts))
-                .add("sdk_ver", BuildConfig.VERSION_NAME)
+                //.add("sdk_ver", BuildConfig.VERSION_NAME)
                 .build();
 
         Request request = new Request.Builder()
@@ -116,7 +116,7 @@ class RequestManager {
         param.put(PARAM_FILE_LENGTH, zipFile.length());
         param.put(PARAM_SLICE_ID, sliceId);
         param.put(PARAM_SLICE_AT, startPos);
-        param.put("sdk_ver", BuildConfig.VERSION_NAME);
+        //param.put("sdk_ver", BuildConfig.VERSION_NAME);
         param.put("slice_length", endPos - startPos);
 
         String url = LoggerFactory.getConfig().getServerHost() + API_UPLOAD_LOGFILE;
@@ -135,7 +135,7 @@ class RequestManager {
                 .addFormDataPart(PARAM_FILE_LENGTH, String.valueOf(zipFile.length()))
                 .addFormDataPart(PARAM_SLICE_ID, String.valueOf(sliceId))
                 .addFormDataPart(PARAM_SLICE_AT, String.valueOf(startPos))
-                .addFormDataPart("sdk_ver", BuildConfig.VERSION_NAME)
+                //.addFormDataPart("sdk_ver", BuildConfig.VERSION_NAME)
                 .build();
 
         Request request = new Request.Builder()
@@ -194,7 +194,7 @@ class RequestManager {
         HashMap<String, Object> param = new HashMap<>();
         param.put("phone", phoneNum);
         param.put("ts", ts);
-        param.put("sdk_ver", BuildConfig.VERSION_NAME);
+        //param.put("sdk_ver", BuildConfig.VERSION_NAME);
 
         RequestBody formBody = new FormBody.Builder()
                 .add("phone", phoneNum)
@@ -240,7 +240,7 @@ class RequestManager {
                 .add(PARAM_APPNAME, LoggerContext.getDefault().getPackageName())
                 .add(PARAM_TIME_STAMP, String.valueOf(ts))
                 .add(PARAM_NETWORKTYPE, networkType)
-                .add("sdk_ver", BuildConfig.VERSION_NAME)
+                //.add("sdk_ver", BuildConfig.VERSION_NAME)
                 .add("taskid", taskId)
                 .add("content", fileTree.toJson())
                 .build();

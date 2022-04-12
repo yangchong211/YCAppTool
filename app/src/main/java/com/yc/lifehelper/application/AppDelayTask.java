@@ -8,7 +8,6 @@ import com.yc.appstatuslib.backgroud.AppStateMonitor;
 import com.yc.appstatuslib.info.BatteryInfo;
 import com.yc.appstatuslib.info.ThreadInfo;
 import com.yc.appstatuslib.listener.BaseStatusListener;
-import com.yc.memoryleakupload.DMemoryLeak;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.logger.AppLogUtils;
 
@@ -23,7 +22,7 @@ public class AppDelayTask extends AppStartTask {
         //各种状态监听回调
         initAppStatusListener();
         //OOM上报日志操作库
-        DMemoryLeak.installLeakCanary(MainApplication.getInstance(),true);
+        //DMemoryLeak.installLeakCanary(MainApplication.getInstance(),true);
         try {
             Thread.sleep(100);
         }catch (Exception e){

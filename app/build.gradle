@@ -222,7 +222,7 @@ dependencies {
     implementation project(path: ':MonitorCatonLib')
     implementation project(path: ':MonitorAnrLib')
     implementation project(path: ':MonitorAliveLib')
-    implementation project(path: ':LeakCanarySdk')
+//    implementation project(path: ':LeakCanarySdk')
     implementation project(path: ':AutoCloserLib')
     implementation project(path: ':AppStartLib')
     implementation project(path: ':MvpTodoBusiness')
