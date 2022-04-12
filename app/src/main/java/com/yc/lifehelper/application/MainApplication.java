@@ -30,6 +30,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Locale;
 
+import cn.ycbjie.ycthreadpoollib.ScheduleTask;
+
 
 /**
  * <pre>
@@ -67,6 +69,13 @@ public class MainApplication extends LibApplication {
                 .addAppStartTask(new AppLazyTask())
                 .start()
                 .await();
+        ScheduleTask.getInstance().schedule(new Runnable() {
+            @Override
+            public void run() {
+                //创建一个核心线程池管理线程
+
+            }
+        });
     }
 
     @Override

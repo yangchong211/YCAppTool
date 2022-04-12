@@ -75,8 +75,8 @@ public class ServiceLoaderPlugin implements Plugin<Project> {
                     task.include("**/*.java");
                     task.setClasspath(spiClasspath);
                     task.setDestinationDir(variant.getJavaCompile().getDestinationDir());
-                    task.setSourceCompatibility("1.5");
-                    task.setTargetCompatibility("1.5");
+                    task.setSourceCompatibility("1.6");
+                    task.setTargetCompatibility("1.6");
                     ServiceLoaderUtils.log("spi task compileGenerated finish");
                 });
                 ServiceLoaderUtils.log("spi task generateTask : " + generateTask);

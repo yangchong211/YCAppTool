@@ -231,6 +231,7 @@ dependencies {
     implementation project(path: ':MvcTodoBusiness')
     implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3'
     implementation project(path: ':BusinessInterface')
+    implementation project(path: ':ThreadPoolLib')
     annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 //    implementation 'com.github.yangchong211.YCAppTool:BlurViewLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:BannerViewLib:1.3.7'
