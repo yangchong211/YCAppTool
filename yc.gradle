@@ -2,7 +2,7 @@
 ext {
 
     isApplication = false  //false:作为Lib组件存在， true:作为application存在，这个不建议改
-    isLoveApplication = false  //爱意表达模块开关，false:作为Lib组件存在， true:作为application存在
+    isJetpackApplication = false
     isVideoApplication = false  //视频模块开关，false:作为Lib组件存在， true:作为application存在
     isBookApplication = false  //book模块开关，false:作为Lib组件存在， true:作为application存在
     isOtherApplication = false  //其他模块开关，false:作为Lib组件存在， true:作为application存在

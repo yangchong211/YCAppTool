@@ -5,9 +5,11 @@ include ':app'
 /* +++++++++ 业务组件层 +++++++++ */
 include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
         ':VideoBusiness', ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
-        ':MvcTodoBusiness',
+        ':MvcTodoBusiness',':JetpackBusiness',//':AndroidBusiness',
         ':BusinessInterface'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
+//project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
+project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
 project(':VideoBusiness').projectDir = new File('Business/VideoBusiness')
 project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
 project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')

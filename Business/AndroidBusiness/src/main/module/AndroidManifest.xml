@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ycbjie.android">
+
+    <application
+        android:name=".base.AndroidApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_android_name"
+        android:theme="@style/AppTheme"
+        android:supportsRtl="true"
+        tools:replace="android:label"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity android:name=".view.activity.AndroidActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.AndroidDetailActivity"/>
+        <activity android:name=".view.activity.AndroidAboutActivity"/>
+        <activity android:name=".view.activity.AndroidLoginActivity"/>
+        <activity android:name=".view.activity.AndroidSearchActivity"/>
+        <activity android:name=".view.activity.KnowledgeTreeDetailActivity"/>
+        <activity android:name=".view.activity.NavWebsiteActivity"/>
+        <activity android:name=".view.activity.AndroidCollectActivity"/>
+        <activity android:name=".view.activity.AndroidRegisterActivity"/>
+        <activity android:name=".view.activity.CollectNetActivity"/>
+    </application>
+
+
+</manifest>

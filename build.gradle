@@ -1,6 +1,7 @@
 apply from: "yc.gradle"
 
 buildscript {
+    ext.kotlin_version = '1.3.50'
     repositories {
         google()
         jcenter()
@@ -13,11 +14,16 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.1'
         //classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //jitpack
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        //jetpack
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.0.0"
         //自定义插件
-        classpath 'com.github.yangchong211.YCAppTool:ServiceLoaderPlugin:1.4.3'
+        //classpath 'com.github.yangchong211.YCAppTool:ServiceLoaderPlugin:1.4.3'
         classpath 'com.github.yangchong211.YCAppTool:BuildTimeCostPlugin:1.4.3'
+
+
     }
 }
 

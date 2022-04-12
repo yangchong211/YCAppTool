@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.yc.catonhelperlib.fps.PerformanceActivity;
 import com.yc.eastadapterlib.BaseRecycleAdapter;
 import com.yc.eastadapterlib.BaseViewHolder;
+import com.yc.jetpack.ui.activity.LoginActivity;
 import com.yc.leetbusiness.LeetCodeActivity;
 import com.yc.library.api.ConstantImageApi;
 import com.yc.library.api.ConstantStringApi;
@@ -77,9 +78,9 @@ public class RecommendComponent implements InterItemView {
                 case R.id.tv_home_eleven:
                     TasksLiveActivity.startActivity(context);
                     break;
-                //其他案例
+                //jetpack案例
                 case R.id.tv_home_twelve:
-                    TestActivity.startActivity(context);
+                    LoginActivity.Companion.startActivity(context);
                     break;
                 default:
                     break;

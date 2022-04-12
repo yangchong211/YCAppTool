@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_nav_graph"
+    app:startDestination="@id/welcomeFragment">
+    <!--app:startDestination 默认的起始位置-->
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.yc.jetpack.ui.fragment.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" />
+
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.yc.jetpack.ui.fragment.WelcomeFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_welcome_to_login"
+            app:destination="@id/loginFragment"/>
+        <action
+            android:id="@+id/action_welcome_to_register"
+            app:enterAnim="@anim/common_slide_in_right"
+            app:exitAnim="@anim/common_slide_out_left"
+            app:popEnterAnim="@anim/common_slide_in_left"
+            app:popExitAnim="@anim/common_slide_out_right"
+            app:destination="@id/registerFragment"/>
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.yc.jetpack.ui.fragment.RegisterFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_register" >
+
+        <argument
+            android:name="EMAIL"
+            android:defaultValue="yangchong211@163.com"
+            app:argType="string"/>
+    </fragment>
+
+</navigation>

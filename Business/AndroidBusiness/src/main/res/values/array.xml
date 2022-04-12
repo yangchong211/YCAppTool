@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--首页底部导航栏的标题，未选中时-->
+    <integer-array name="android_tab_un_select">
+        <item name="tab_home">@drawable/ic_tab_main_art_uncheck</item>
+        <item name="tab_find">@drawable/ic_tab_main_practice_uncheck</item>
+        <item name="tab_data">@drawable/ic_tab_main_course_uncheck</item>
+        <item name="tab_me">@drawable/ic_tab_main_personal_uncheck</item>
+    </integer-array>
+
+    <!--首页底部导航栏的标题，选中时-->
+    <integer-array name="android_tab_select">
+        <item name="tab_home">@drawable/ic_tab_main_art_checked</item>
+        <item name="tab_find">@drawable/ic_tab_main_practice_checked</item>
+        <item name="tab_data">@drawable/ic_tab_main_course_checked</item>
+        <item name="tab_me">@drawable/ic_tab_main_personal_checked</item>
+    </integer-array>
+
+    <!--首页底部导航栏文字-->
+    <string-array name="android_title">
+        <item>首页</item>
+        <item>发现</item>
+        <item>其他</item>
+        <item>我的</item>
+    </string-array>
+
+</resources>
