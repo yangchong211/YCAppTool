@@ -2,6 +2,10 @@ package com.yc.jetpack
 
 import android.content.Context
 import com.yc.library.base.app.LibApplication
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidFileProperties
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 /**
  * <pre>
@@ -16,9 +20,20 @@ class JetpackApp : LibApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        initKoin()
     }
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
+    }
+
+
+    private fun initKoin() {
+        startKoin {
+            androidLogger()
+            androidContext(this@JetpackApp)
+            androidFileProperties()
+            modules(mainModule)
+        }
     }
 }

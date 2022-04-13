@@ -47,7 +47,7 @@ class WelcomeFragment : Fragment() {
             bundle.putString(BaseConstant.ARGS_NAME,name)
 
             //跳转到指定页面并且传递参数
-            findNavController().navigate(R.id.loginFragment, bundle,navOption)
+            findNavController().navigate(R.id.login, bundle,navOption)
         }
         btnRegister.setOnClickListener {
             // 利用SafeArgs传递参数

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.yc.jetpack.R
+import com.yc.jetpack.common.navigate
 import com.yc.jetpack.ui.activity.JetpackActivity
 
 class LoginFragment : Fragment() {
