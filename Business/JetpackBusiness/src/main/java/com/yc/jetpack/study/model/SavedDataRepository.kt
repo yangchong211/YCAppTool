@@ -11,4 +11,8 @@ class SavedDataRepository {
         return "yc"
     }
 
+    suspend fun getData(): String {
+        return "yc"
+    }
+
 }

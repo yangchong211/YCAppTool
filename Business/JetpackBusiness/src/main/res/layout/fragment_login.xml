@@ -52,7 +52,6 @@
         android:layout_marginTop="20dp"
         android:hint="password"
         android:text=""
-        android:onTextChanged="@{model::onPwdChanged}"
         android:drawableStart="@drawable/common_ic_pwd"
         android:inputType="textPassword"
         tools:ignore="MissingConstraints"/>

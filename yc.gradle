@@ -1,4 +1,3 @@
-
 ext {
 
     isApplication = false  //false:作为Lib组件存在， true:作为application存在，这个不建议改
@@ -10,24 +9,25 @@ ext {
     isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
     isAnimApplication = false
 
-    
+
     android = [
-               compileSdkVersion       : 29,
-               buildToolsVersion       : "29.0.0",
-               minSdkVersion           : 17,
-               targetSdkVersion        : 29,
-               versionCode             : 22,
-               versionName             : "1.8.2"    //必须是int或者float，否则影响线上升级
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.0",
+            minSdkVersion    : 17,
+            targetSdkVersion : 29,
+            versionCode      : 22,
+            versionName      : "1.8.2"    //必须是int或者float，否则影响线上升级
     ]
 
     version = [
-               retrofitSdkVersion      : "2.4.0",
-               glideSdkVersion         : "4.9.0",
-               canarySdkVersion        : "1.5.4",
-               constraintVersion       : "1.0.2",
-               okhttp                  : "4.7.2",
-               zxing_version           : "3.3.3"
+            retrofitSdkVersion: "2.4.0",
+            glideSdkVersion   : "4.9.0",
+            canarySdkVersion  : "1.5.4",
+            constraintVersion : "1.0.2",
+            okhttp            : "4.7.2",
+            zxing_version     : "3.3.3"
     ]
+
 
     coordinatorlayoutVersion = '1.0.0'
     appcompatVersion = '1.2.0'
@@ -43,48 +43,65 @@ ext {
     databindingVersion = '3.2.1'
     coreVersion = '1.0.0'
 
+
+    //AndroidX系列
+    annotation = "androidx.appcompat:appcompat:$appcompatVersion"
+    appcompat = "androidx.annotation:annotation:$appcompatVersion"
+    coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:${coordinatorlayoutVersion}"
+    constraintlayout = "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}"
+
+    //kotlin系列
+    kotlin_version = '1.4.31'
+    kotlinxVersion = '1.0.1'
+    kotlinxCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxVersion"
+    kotlinxCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinxVersion"
+
+    //jetpack系列
+
+    //第三方库系列
+
     dependencies = [
-                coordinatorlayout   : "androidx.coordinatorlayout:coordinatorlayout:${coordinatorlayoutVersion}",
-                appcompat           : "androidx.appcompat:appcompat:${appcompatVersion}",
-                constraintlayout    : "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
-                annotation          : "androidx.annotation:annotation:${annotationVersion}",
-                cardview            : "androidx.cardview:cardview:${cardviewVersion}",
-                recyclerview        : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
-                media               : "androidx.media:media:${mediaVersion}",
-                material            : "com.google.android.material:material:${materialVersion}",
-                swiperefreshlayout  : "androidx.swiperefreshlayout:swiperefreshlayout:${swiperefreshlayoutVersion}",
-                core                : "androidx.core:core:${coreVersion}",
-                "multidex"          : "com.android.support:multidex:1.0.2",
-                "room-runtime"      : "androidx.room:room-runtime:${roomVersion}",
-                "room-compiler"     : "androidx.room:room-compiler:${roomVersion}",
-                "databinding"       : "androidx.databinding:databinding-common:${databindingVersion}",
-                "lifecycle"         : "androidx.lifecycle:lifecycle-extensions:${archLifecycleVersion}",
-                "lifecycle-compiler": "androidx.lifecycle:lifecycle-compiler:${archLifecycleVersion}",
+            coordinatorlayout         : "androidx.coordinatorlayout:coordinatorlayout:${coordinatorlayoutVersion}",
+            appcompat                 : "androidx.appcompat:appcompat:${appcompatVersion}",
+            constraintlayout          : "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
+            annotation                : "androidx.annotation:annotation:${annotationVersion}",
+            cardview                  : "androidx.cardview:cardview:${cardviewVersion}",
+            recyclerview              : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
+            media                     : "androidx.media:media:${mediaVersion}",
+            material                  : "com.google.android.material:material:${materialVersion}",
+            swiperefreshlayout        : "androidx.swiperefreshlayout:swiperefreshlayout:${swiperefreshlayoutVersion}",
+            core                      : "androidx.core:core:${coreVersion}",
+            "multidex"                : "com.android.support:multidex:1.0.2",
+            "room-runtime"            : "androidx.room:room-runtime:${roomVersion}",
+            "room-compiler"           : "androidx.room:room-compiler:${roomVersion}",
+            "databinding"             : "androidx.databinding:databinding-common:${databindingVersion}",
+            "lifecycle"               : "androidx.lifecycle:lifecycle-extensions:${archLifecycleVersion}",
+            "lifecycle-compiler"      : "androidx.lifecycle:lifecycle-compiler:${archLifecycleVersion}",
 
-                //network
-                "retrofit"                 : "com.squareup.retrofit2:retrofit:${version["retrofitSdkVersion"]}",
-                "retrofit-converter-gson"  : "com.squareup.retrofit2:converter-gson:${version["retrofitSdkVersion"]}",
-                "retrofit-adapter-rxjava2"  : "com.squareup.retrofit2:adapter-rxjava2:${version["retrofitSdkVersion"]}",
-                "okhttp"                   : "com.squareup.okhttp3:okhttp:${version["okhttp"]}",
-                "rxandroid2"                : "io.reactivex.rxjava2:rxandroid:2.1.0",
-                "rxjava2"                   : "io.reactivex.rxjava2:rxjava:2.1.11",
-                "gson"                      : "com.google.code.gson:gson:2.8.5",
+            //network
+            "retrofit"                : "com.squareup.retrofit2:retrofit:${version["retrofitSdkVersion"]}",
+            "retrofit-converter-gson" : "com.squareup.retrofit2:converter-gson:${version["retrofitSdkVersion"]}",
+            "retrofit-adapter-rxjava2": "com.squareup.retrofit2:adapter-rxjava2:${version["retrofitSdkVersion"]}",
+            "okhttp"                  : "com.squareup.okhttp3:okhttp:${version["okhttp"]}",
+            "rxandroid2"              : "io.reactivex.rxjava2:rxandroid:2.1.0",
+            "rxjava2"                 : "io.reactivex.rxjava2:rxjava:2.1.11",
+            "gson"                    : "com.google.code.gson:gson:2.8.5",
 
-                //image
-                "glide"                    : "com.github.bumptech.glide:glide:${version["glideSdkVersion"]}",
-                "glide-compiler"           : "com.github.bumptech.glide:compiler:${version["glideSdkVersion"]}",
+            //image
+            "glide"                   : "com.github.bumptech.glide:glide:${version["glideSdkVersion"]}",
+            "glide-compiler"          : "com.github.bumptech.glide:compiler:${version["glideSdkVersion"]}",
 
 
-                //yc
-                "YCProgressLib"               : "cn.yc:YCProgressLib:1.2.7",
-                "YCCustomTextLib"             : "cn.yc:YCCustomTextLib:2.1.4",
-                "YCGalleryLib"                : "cn.yc:YCGalleryLib:1.1.5",
-                "YCVideoPlayerLib"            : "cn.yc:YCVideoPlayerLib:2.6.6",
+            //yc
+            "YCProgressLib"           : "cn.yc:YCProgressLib:1.2.7",
+            "YCCustomTextLib"         : "cn.yc:YCCustomTextLib:2.1.4",
+            "YCGalleryLib"            : "cn.yc:YCGalleryLib:1.1.5",
+            "YCVideoPlayerLib"        : "cn.yc:YCVideoPlayerLib:2.6.6",
 
-                //tools
-                "utilcode"                  : "com.blankj:utilcode:1.12.5",
-                "easypermissions"           : "pub.devrel:easypermissions:1.0.1",
-                "zxing"                     : "com.google.zxing:core:${version["zxing_version"]}",
+            //tools
+            "utilcode"                : "com.blankj:utilcode:1.12.5",
+            "easypermissions"         : "pub.devrel:easypermissions:1.0.1",
+            "zxing"                   : "com.google.zxing:core:${version["zxing_version"]}",
     ]
 
 }

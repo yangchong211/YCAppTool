@@ -1,7 +1,7 @@
 package com.ycbjie.android.contract
 import com.ycbjie.android.model.bean.NaviBean
-import com.ycbjie.library.base.mvp.BasePresenter
-import com.ycbjie.library.base.mvp.BaseView
+import com.yc.library.base.mvp.BasePresenter
+import com.yc.library.base.mvp.BaseView
 
 
 /**

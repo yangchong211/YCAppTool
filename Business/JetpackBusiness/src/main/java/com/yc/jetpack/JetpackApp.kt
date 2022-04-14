@@ -8,13 +8,11 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
 /**
- * <pre>
- * @author 杨充
- * blog  : https://github.com/yangchong211
- * time  : 2017/05/23
- * desc  : 注意，只有从组件library切换到application才会用到
- * revise:
-</pre> *
+ * @author: 杨充
+ * email  : yangchong211@163.com
+ * time   : 2017/05/23
+ * desc   : 注意，只有从组件library切换到application才会用到
+ * revise : v1.2.1 修改了koin初始化
  */
 class JetpackApp : LibApplication() {
 

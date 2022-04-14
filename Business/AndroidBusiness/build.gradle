@@ -7,7 +7,8 @@ if (rootProject.ext.isAndroidApplication) {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'androidx.navigation.safeargs'
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -63,16 +64,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
+    implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation project(path: ':LibraryLayer')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    // Kotlin coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
-
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':ImageServer')
-}
-repositories {
-    mavenCentral()
+    
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    // Kotlin coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
+
 }

@@ -14,7 +14,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
-import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.LogUtils
 import com.flyco.tablayout.CommonTabLayout
@@ -30,13 +29,12 @@ import com.ycbjie.android.base.KotlinConstant
 import com.ycbjie.android.base.KotlinConstant.HOME
 import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.presenter.AndroidPresenter
-import com.ycbjie.android.util.KotlinTest
+import com.ycbjie.android.tools.KotlinTest
 import com.ycbjie.android.view.fragment.AndroidHomeFragment
 import com.ycbjie.android.view.fragment.AndroidKnowledgeFragment
 import com.ycbjie.android.view.fragment.AndroidProfileFragment
 import com.ycbjie.android.view.fragment.AndroidProjectFragment
 import com.ycbjie.library.base.adapter.BasePagerAdapter
-import com.ycbjie.library.base.mvp.BaseActivity
 import com.ycbjie.library.bean.TabEntity
 import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.base_android_bar.*

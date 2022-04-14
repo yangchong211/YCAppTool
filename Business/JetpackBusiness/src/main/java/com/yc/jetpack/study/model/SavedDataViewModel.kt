@@ -1,10 +1,9 @@
 package com.yc.jetpack.study.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.blankj.utilcode.util.LogUtils
+import com.bumptech.glide.load.engine.Resource
+import kotlinx.coroutines.launch
 
 class SavedDataViewModel(private val repository : SavedDataRepository) : ViewModel() {
 
@@ -22,6 +21,13 @@ class SavedDataViewModel(private val repository : SavedDataRepository) : ViewMod
     fun getName(): LiveData<String> {
         LogUtils.d("name : ${repository.getName()}")
         return name
+    }
+
+    fun getSupportDeviceList() {
+        viewModelScope.launch {
+            val resource = repository.getName()
+            val data = repository.getData()
+        }
     }
 
     fun saveNewName(newName: String) {
