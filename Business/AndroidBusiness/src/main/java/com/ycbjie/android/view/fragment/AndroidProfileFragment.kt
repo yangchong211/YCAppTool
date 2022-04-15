@@ -9,7 +9,7 @@ import com.blankj.utilcode.util.SPUtils
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.yc.configlayer.constant.Constant
 import com.ycbjie.android.R
-import com.ycbjie.android.base.KotlinConstant
+import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.tools.AndroidUtils
 import com.ycbjie.android.tools.KotlinUtils
 import com.ycbjie.android.view.activity.AndroidAboutActivity

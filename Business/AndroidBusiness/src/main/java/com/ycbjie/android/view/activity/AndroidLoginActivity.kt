@@ -12,7 +12,7 @@ import com.blankj.utilcode.util.SPUtils
 import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.ycbjie.android.R
-import com.ycbjie.android.base.KotlinConstant
+import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidLoginContract
 import com.ycbjie.android.model.bean.LoginBean
 import com.ycbjie.android.presenter.AndroidLoginPresenter

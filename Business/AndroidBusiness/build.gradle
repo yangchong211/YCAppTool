@@ -71,10 +71,12 @@ dependencies {
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':ImageServer')
+    implementation project(path: ':CustomWidget')
     
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     // Kotlin coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
+
 
 }

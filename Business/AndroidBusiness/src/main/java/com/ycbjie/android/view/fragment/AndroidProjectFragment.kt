@@ -3,13 +3,15 @@ package com.ycbjie.android.view.fragment
 import android.content.Intent
 import android.graphics.Color
 import android.provider.Settings
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.LinearLayout
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.NetworkUtils
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
+import com.yc.library.base.mvp.BaseLazyFragment
+import com.yc.library.utils.DoShareUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.AndroidProjectContract
 import com.ycbjie.android.model.bean.HomeData
@@ -20,10 +22,10 @@ import com.ycbjie.android.presenter.AndroidProjectPresenter
 import com.ycbjie.android.view.activity.AndroidDetailActivity
 import com.ycbjie.android.view.adapter.AndroidProjectAdapter
 import com.ycbjie.android.view.adapter.AndroidProjectTreeAdapter
-import com.ycbjie.library.base.mvp.BaseLazyFragment
-import com.ycbjie.library.utils.DoShareUtils
 import kotlinx.android.synthetic.main.fragment_android_project.*
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
+import org.yczbj.ycrefreshviewlib.inter.OnErrorListener
+import org.yczbj.ycrefreshviewlib.inter.OnMoreListener
+import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener
 
 class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View, View.OnClickListener {
 
@@ -106,7 +108,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
         })
 
         //加载更多
-        listsAdapter.setMore(R.layout.view_recycle_more, object : RecyclerArrayAdapter.OnMoreListener {
+        listsAdapter.setMore(R.layout.view_recycle_more, object : OnMoreListener {
             override fun onMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     if (listsAdapter.allData.size > 0) {
@@ -136,7 +138,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
         })
 
         //设置没有数据
-        listsAdapter.setNoMore(R.layout.view_recycle_no_more, object : RecyclerArrayAdapter.OnNoMoreListener {
+        listsAdapter.setNoMore(R.layout.view_recycle_no_more, object : OnNoMoreListener {
             override fun onNoMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     listsAdapter.resumeMore()
@@ -155,7 +157,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
         })
 
         //设置错误
-        listsAdapter.setError(R.layout.view_recycle_error, object : RecyclerArrayAdapter.OnErrorListener {
+        listsAdapter.setError(R.layout.view_recycle_error, object : OnErrorListener {
             override fun onErrorShow() {
                 listsAdapter.resumeMore()
             }

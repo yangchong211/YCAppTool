@@ -25,8 +25,8 @@ import com.yc.configlayer.arounter.RouterConfig
 import com.yc.configlayer.constant.Constant
 import com.yc.library.base.mvp.BaseActivity
 import com.ycbjie.android.R
-import com.ycbjie.android.base.KotlinConstant
-import com.ycbjie.android.base.KotlinConstant.HOME
+import com.ycbjie.android.tools.base.KotlinConstant
+import com.ycbjie.android.tools.base.KotlinConstant.HOME
 import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.presenter.AndroidPresenter
 import com.ycbjie.android.tools.KotlinTest

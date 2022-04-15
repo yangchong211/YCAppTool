@@ -2,17 +2,20 @@ package com.ycbjie.android.view.fragment
 
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.NetworkUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
-import com.yc.cn.ycbannerlib.banner.BannerView
+import com.yc.cn.ycbannerlib.banner.view.BannerView
+import com.yc.library.base.mvp.BaseFragment
+import com.yc.library.utils.DoShareUtils
+import com.yc.library.web.WebViewActivity
 import com.ycbjie.android.R
-import com.ycbjie.android.base.BaseItemView
-import com.ycbjie.android.base.KotlinConstant
+import com.ycbjie.android.tools.base.BaseItemView
+import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidHomeContract
 import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.model.bean.HomeData
@@ -24,18 +27,18 @@ import com.ycbjie.android.view.activity.AndroidDetailActivity
 import com.ycbjie.android.view.activity.AndroidLoginActivity
 import com.ycbjie.android.view.adapter.AndroidHomeAdapter
 import com.ycbjie.android.view.adapter.BannerPagerAdapter
-import com.ycbjie.library.base.mvp.BaseFragment
-import com.ycbjie.library.utils.DoShareUtils
-import com.ycbjie.library.web.WebViewActivity
-import org.yczbj.ycrefreshviewlib.YCRefreshView
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
+import org.yczbj.ycrefreshviewlib.inter.OnErrorListener
+import org.yczbj.ycrefreshviewlib.inter.OnMoreListener
+import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine
+import org.yczbj.ycrefreshviewlib.view.YCRefreshView
 
 
 class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeContract.View{
 
 
-    private var recyclerView : YCRefreshView ?=null
+    private var recyclerView : YCRefreshView?=null
     private var activity: AndroidActivity? = null
     private var presenter: AndroidHomePresenter? = null
     private var page: Int = 0
@@ -161,7 +164,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
             }
         }
         //加载更多
-        adapter.setMore(R.layout.view_recycle_more, object : RecyclerArrayAdapter.OnMoreListener {
+        adapter.setMore(R.layout.view_recycle_more, object : OnMoreListener {
             override fun onMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     if (adapter.allData.size > 0) {
@@ -181,7 +184,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
         })
 
         //设置没有数据
-        adapter.setNoMore(R.layout.view_recycle_no_more, object : RecyclerArrayAdapter.OnNoMoreListener {
+        adapter.setNoMore(R.layout.view_recycle_no_more, object : OnNoMoreListener {
             override fun onNoMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore()
@@ -200,7 +203,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
         })
 
         //设置错误
-        adapter.setError(R.layout.view_recycle_error, object : RecyclerArrayAdapter.OnErrorListener {
+        adapter.setError(R.layout.view_recycle_error, object : OnErrorListener {
             override fun onErrorShow() {
                 adapter.resumeMore()
             }
@@ -232,7 +235,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                     mBanner?.setOnBannerClickListener { position: Int ->
                         if(position>=0 && bannerLists.size>position){
                             val bannerBean = bean.data!![position]
-                            WebViewActivity.lunch(activity, bannerBean.url!!, bannerBean.title!!)
+                            WebViewActivity.lunch(activity, bannerBean.url, bannerBean.title)
                         }
                     }
                 }

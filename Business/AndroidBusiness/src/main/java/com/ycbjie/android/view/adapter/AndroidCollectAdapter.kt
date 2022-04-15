@@ -4,7 +4,6 @@ package com.ycbjie.android.view.adapter
 import android.app.Activity
 import android.graphics.Color
 import android.os.Build
-import android.support.annotation.RequiresApi
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
@@ -15,12 +14,12 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.blankj.utilcode.util.Utils
-import com.yc.toollayer.spannable.RoundBackgroundSpan
+import com.yc.customwidget.spannable.RoundBackgroundSpan
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.HomeData
 import com.ycbjie.android.tools.AndroidUtils
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder
 
 
 class AndroidCollectAdapter : RecyclerArrayAdapter<HomeData>{

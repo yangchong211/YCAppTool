@@ -68,12 +68,10 @@ public class WebViewActivity extends BaseActivity {
 
 
     public static void lunch(Activity activity, String url, String title) {
-        if(activity!=null){
-            Intent intent = new Intent(activity, WebViewActivity.class);
-            intent.putExtra(Constant.URL, url);
-            intent.putExtra(Constant.TITLE, title);
-            activity.startActivity(intent);
-        }
+        Intent intent = new Intent(activity, WebViewActivity.class);
+        intent.putExtra(Constant.URL, url);
+        intent.putExtra(Constant.TITLE, title);
+        activity.startActivity(intent);
     }
 
 

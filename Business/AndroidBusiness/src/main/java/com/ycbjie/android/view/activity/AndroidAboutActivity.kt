@@ -2,14 +2,12 @@ package com.ycbjie.android.view.activity
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v4.content.ContextCompat
 import android.view.View
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
+import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.LogUtils
+import com.yc.library.base.mvp.BaseActivity
+import com.yc.statusbar.bar.StateAppBar
 import com.ycbjie.android.R
-import com.ycbjie.android.presenter.AndroidPresenter
-import com.ycbjie.library.base.mvp.BaseActivity
-import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.activity_android_about.*
 import kotlinx.android.synthetic.main.base_android_bar.*
 
@@ -22,7 +20,7 @@ import kotlinx.android.synthetic.main.base_android_bar.*
  *     revise:
  * </pre>
  */
-class AndroidAboutActivity : BaseActivity<AndroidPresenter>() {
+class AndroidAboutActivity : BaseActivity() {
 
 
     object DataProviderManager {

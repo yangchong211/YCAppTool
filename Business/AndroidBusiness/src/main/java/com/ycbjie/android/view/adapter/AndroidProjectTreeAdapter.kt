@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.TreeBean
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder
 
 
 /**

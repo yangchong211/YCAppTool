@@ -3,14 +3,16 @@ package com.ycbjie.android.view.activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
+import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.LogUtils
+import com.yc.library.base.mvp.BaseActivity
+import com.yc.library.web.WebViewActivity
+import com.yc.statusbar.bar.StateAppBar
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.NavWebsiteContract
 import com.ycbjie.android.model.bean.HomeData
@@ -19,8 +21,6 @@ import com.ycbjie.android.network.SchedulerProvider
 import com.ycbjie.android.presenter.NavWebsitePresenter
 import com.ycbjie.android.view.adapter.AndroidNavRightAdapter
 import com.ycbjie.android.view.adapter.AndroidNavWebsiteAdapter
-import com.ycbjie.library.base.mvp.BaseActivity
-import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.activity_nav_website.*
 import kotlinx.android.synthetic.main.base_android_bar.*
 

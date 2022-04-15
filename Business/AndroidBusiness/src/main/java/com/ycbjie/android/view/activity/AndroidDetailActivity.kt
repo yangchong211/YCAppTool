@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import com.ycbjie.android.R
-import com.ycbjie.android.base.KotlinConstant
+import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidDetailContract
 import com.ycbjie.android.model.bean.HomeData
 import com.ycbjie.android.presenter.AndroidDetailPresenter

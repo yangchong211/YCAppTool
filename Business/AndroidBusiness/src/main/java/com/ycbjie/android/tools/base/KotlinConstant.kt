@@ -1,5 +1,5 @@
 
-package com.ycbjie.android.base
+package com.ycbjie.android.tools.base
 
 /**
  * <pre>

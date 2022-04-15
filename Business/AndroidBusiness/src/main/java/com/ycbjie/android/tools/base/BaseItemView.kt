@@ -1,12 +1,14 @@
-package com.ycbjie.android.base
+package com.ycbjie.android.tools.base
 
 import android.app.Activity
-import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
+import org.yczbj.ycrefreshviewlib.inter.InterItemView
+
 /**
  * <pre>
  *     @author 杨充
@@ -18,7 +20,7 @@ import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
  */
 
 abstract class BaseItemView(private val activity: Activity?, @param:LayoutRes private val id: Int)
-    : RecyclerArrayAdapter.ItemView {
+    : InterItemView {
 
     override fun onCreateView(parent: ViewGroup): View {
         return LayoutInflater.from(activity).inflate(id, parent, false)

@@ -4,7 +4,7 @@
     package="com.ycbjie.android">
 
     <application
-        android:name=".base.AndroidApp"
+        android:name=".tools.base.AndroidApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_android_name"

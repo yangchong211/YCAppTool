@@ -1,9 +1,10 @@
 package com.ycbjie.android.view.fragment
 
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.NetworkUtils
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
+import com.yc.library.base.mvp.BaseLazyFragment
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.KnowledgeListContract
 import com.ycbjie.android.model.bean.HomeData
@@ -11,9 +12,10 @@ import com.ycbjie.android.model.bean.ProjectListBean
 import com.ycbjie.android.model.bean.TreeBean
 import com.ycbjie.android.presenter.KnowledgeListPresenter
 import com.ycbjie.android.view.adapter.KnowledgeListAdapter
-import com.ycbjie.library.base.mvp.BaseLazyFragment
 import kotlinx.android.synthetic.main.base_android_recycle.*
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
+import org.yczbj.ycrefreshviewlib.inter.OnErrorListener
+import org.yczbj.ycrefreshviewlib.inter.OnMoreListener
+import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener
 
 
 class KnowledgeListFragment : BaseLazyFragment()  , KnowledgeListContract.View{
@@ -81,7 +83,7 @@ class KnowledgeListFragment : BaseLazyFragment()  , KnowledgeListContract.View{
 
 
         //加载更多
-        listsAdapter.setMore(R.layout.view_recycle_more, object : RecyclerArrayAdapter.OnMoreListener {
+        listsAdapter.setMore(R.layout.view_recycle_more, object : OnMoreListener {
             override fun onMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     if (listsAdapter.allData.size > 0) {
@@ -111,7 +113,7 @@ class KnowledgeListFragment : BaseLazyFragment()  , KnowledgeListContract.View{
         })
 
         //设置没有数据
-        listsAdapter.setNoMore(R.layout.view_recycle_no_more, object : RecyclerArrayAdapter.OnNoMoreListener {
+        listsAdapter.setNoMore(R.layout.view_recycle_no_more, object : OnNoMoreListener {
             override fun onNoMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     listsAdapter.resumeMore()
@@ -130,7 +132,7 @@ class KnowledgeListFragment : BaseLazyFragment()  , KnowledgeListContract.View{
         })
 
         //设置错误
-        listsAdapter.setError(R.layout.view_recycle_error, object : RecyclerArrayAdapter.OnErrorListener {
+        listsAdapter.setError(R.layout.view_recycle_error, object : OnErrorListener {
             override fun onErrorShow() {
                 listsAdapter.resumeMore()
             }

@@ -2,7 +2,7 @@ package com.ycbjie.android.network
 
 
 import com.blankj.utilcode.util.SPUtils
-import com.ycbjie.android.base.KotlinConstant
+import com.ycbjie.android.tools.base.KotlinConstant
 import okhttp3.Interceptor
 import okhttp3.Response
 

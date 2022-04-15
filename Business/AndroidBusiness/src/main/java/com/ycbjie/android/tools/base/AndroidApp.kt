@@ -1,7 +1,7 @@
-package com.ycbjie.android.base
+package com.ycbjie.android.tools.base
 
 import android.content.Context
-import com.ycbjie.library.base.app.LibApplication
+import com.yc.library.base.app.LibApplication
 
 /**
  * <pre>

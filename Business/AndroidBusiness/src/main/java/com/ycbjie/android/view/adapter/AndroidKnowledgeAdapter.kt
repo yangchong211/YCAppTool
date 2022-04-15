@@ -1,17 +1,17 @@
 package com.ycbjie.android.view.adapter
 
 
-import android.support.v4.app.FragmentActivity
-import android.support.v7.widget.ActionMenuView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.ActionMenuView
+import androidx.fragment.app.FragmentActivity
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.TreeBean
 import com.ycbjie.android.view.weight.FlowLayout
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
-import org.yczbj.ycrefreshviewlib.viewHolder.BaseViewHolder
+import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder
 
 
 class AndroidKnowledgeAdapter : RecyclerArrayAdapter<TreeBean>{

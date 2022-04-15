@@ -22,7 +22,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.ycbjie.android.R
-import com.ycbjie.android.base.KotlinConstant
+import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidSearchContract
 import com.ycbjie.android.model.bean.ProjectListBean
 import com.ycbjie.android.model.bean.SearchTag
