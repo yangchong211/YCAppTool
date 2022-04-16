@@ -25,6 +25,10 @@ class AndroidHelper private constructor() {
     }
 
 
+    /**
+     * 当你的类包含太多的东西，你想把它们隔离到另外一个类，又不想使用类引用的方式，你就可以使用companion object。
+     * companion object的好处是，外部类可以直接访问对象，不需要通过对象指针
+     */
     companion object {
         private var model: AndroidHelper? = null
         // 初始化单例

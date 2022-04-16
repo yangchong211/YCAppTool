@@ -2,9 +2,6 @@ package com.ycbjie.android.view.activity
 
 import android.content.Intent
 import android.graphics.Color
-import android.support.v4.app.FragmentActivity
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -13,7 +10,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
 import android.widget.TextView
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.NetworkUtils
 import com.blankj.utilcode.util.SPUtils
@@ -21,6 +20,8 @@ import com.blankj.utilcode.util.SizeUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
+import com.yc.library.base.mvp.BaseActivity
+import com.yc.statusbar.bar.StateAppBar
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidSearchContract
@@ -29,9 +30,11 @@ import com.ycbjie.android.model.bean.SearchTag
 import com.ycbjie.android.network.SchedulerProvider
 import com.ycbjie.android.presenter.AndroidSearchPresenter
 import com.ycbjie.android.view.adapter.AndroidSearchAdapter
-import com.ycbjie.library.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.activity_android_search.*
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
+import org.yczbj.ycrefreshviewlib.inter.OnErrorListener
+import org.yczbj.ycrefreshviewlib.inter.OnMoreListener
+import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine
 
 /**
@@ -118,7 +121,7 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
             }
         }
         //加载更多
-        adapter.setMore(R.layout.view_recycle_more, object : RecyclerArrayAdapter.OnMoreListener {
+        adapter.setMore(R.layout.view_recycle_more, object : OnMoreListener {
             override fun onMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     if (adapter.allData.size > 0) {
@@ -136,7 +139,7 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
         })
 
         //设置没有数据
-        adapter.setNoMore(R.layout.view_recycle_no_more, object : RecyclerArrayAdapter.OnNoMoreListener {
+        adapter.setNoMore(R.layout.view_recycle_no_more, object : OnNoMoreListener {
             override fun onNoMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore()
@@ -154,7 +157,7 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
         })
 
         //设置错误
-        adapter.setError(R.layout.view_recycle_error, object : RecyclerArrayAdapter.OnErrorListener {
+        adapter.setError(R.layout.view_recycle_error, object : OnErrorListener {
             override fun onErrorShow() {
                 adapter.resumeMore()
             }

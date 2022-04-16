@@ -26,13 +26,6 @@ public enum AppConfig {
     //对象
     INSTANCE;
 
-    private boolean isLogin;
-    private boolean isShowListImg;
-    private boolean isShowGirlImg;
-    private boolean isProbabilityShowImg;
-    private int thumbnailQuality;
-    private String bannerUrl;
-    private boolean isNight;
     private PoolThread executor;
 
 

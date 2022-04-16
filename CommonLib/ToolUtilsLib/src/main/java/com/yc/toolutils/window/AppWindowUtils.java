@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.yc.toolutils.AppToolUtils;
 import com.yc.toolutils.activity.AppActivityUtils;
 
 
@@ -50,6 +51,10 @@ public final class AppWindowUtils {
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.heightPixels;
+    }
+
+    public static boolean copyToClipBoard(String content){
+        return copyToClipBoard(AppToolUtils.getApp(),content);
     }
 
     public static boolean copyToClipBoard(Context context , String content){

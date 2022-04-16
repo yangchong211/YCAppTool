@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar
+<androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
@@ -35,7 +35,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_arrow_back" />
+            android:src="@drawable/ic_back_white" />
     </FrameLayout>
 
     <!--中间标题-->
@@ -82,4 +82,4 @@
         android:textSize="16sp"
         android:visibility="gone" />
 
-</android.support.v7.widget.Toolbar>
+</androidx.appcompat.widget.Toolbar>

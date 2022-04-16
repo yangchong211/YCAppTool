@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.yc.cn.ycbannerlib.banner.BannerView
+    <com.yc.cn.ycbannerlib.banner.view.BannerView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/banner"
         android:layout_width="match_parent"

@@ -8,7 +8,7 @@
 
     <include layout="@layout/base_android_bar"/>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -19,19 +19,10 @@
         android:layout_height="1px"
         android:background="@color/gray_black"/>
 
-    <com.flyco.tablayout.CommonTabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/ctl_table"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#90ffffff"
-        tl:tl_iconHeight="23dp"
-        tl:tl_iconWidth="23dp"
-        tl:tl_indicator_color="#2C97DE"
-        tl:tl_indicator_height="0dp"
-        tl:tl_textSelectColor="#2C97DE"
-        tl:tl_textUnselectColor="#66000000"
-        tl:tl_textsize="12sp"
-        tl:tl_underline_color="#DDDDDD"
-        tl:tl_underline_height="1dp"/>
+        android:background="#90ffffff"/>
 
 </LinearLayout>

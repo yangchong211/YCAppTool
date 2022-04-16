@@ -10,6 +10,14 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 
+/**
+ * @author: 杨充
+ * email  : yangchong211@163.com
+ * time   : 2017/05/23
+ * desc   : 拓展类
+ * revise :
+ */
+
 
 fun Fragment.findNavController(activity : Activity, id : Int): NavController {
     //在activity中找到NavController
@@ -32,6 +40,7 @@ fun Fragment.navigate(@IdRes resId: Int, args: Bundle?, navOptions: NavOptions?)
 fun Fragment.navigate(directions: NavDirections, navOptions: NavOptions) {
     findNavController().navigate(directions, navOptions)
 }
+
 
 
 

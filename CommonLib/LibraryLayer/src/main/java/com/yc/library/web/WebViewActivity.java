@@ -5,20 +5,21 @@ import android.app.Activity;
 import android.content.Intent;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+
+import android.net.Uri;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 
 import com.yc.configlayer.constant.Constant;
 import com.yc.library.base.mvp.BaseActivity;
-import com.yc.library.utils.AppUtils;
-import com.yc.library.utils.DoShareUtils;
+import com.yc.toolutils.other.DoShareUtils;
+import com.yc.toolutils.window.AppWindowUtils;
 import com.yc.webviewlib.inter.BridgeHandler;
 import com.yc.webviewlib.inter.CallBackFunction;
 import com.yc.webviewlib.inter.InterWebListener;
@@ -92,10 +93,12 @@ public class WebViewActivity extends BaseActivity {
         } else if (i == R.id.collect) {
             ToastUtils.showRoundRectToast("后期添加");
         } else if (i == R.id.cope) {
-            AppUtils.copy(url);
+            AppWindowUtils.copyToClipBoard(url);
             ToastUtils.showRoundRectToast("复制成功");
         } else if (i == R.id.open) {
-            AppUtils.openLink(this, url);
+            Uri issuesUrl = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
+            startActivity(intent);
         } else if (i == R.id.capture) {
             ToastUtils.showRoundRectToast("屏幕截图，后期处理");
         } else if (i == R.id.about){

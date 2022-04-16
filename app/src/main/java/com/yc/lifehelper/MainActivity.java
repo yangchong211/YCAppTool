@@ -41,6 +41,7 @@ import com.yc.lifehelper.component.ListNewsComponent;
 import com.yc.lifehelper.component.MarqueeComponent;
 import com.yc.lifehelper.component.RecommendComponent;
 import com.yc.lifehelper.component.SnapBannerComponent;
+import com.yc.lifehelper.component.ToolComponent;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -233,6 +234,7 @@ public class MainActivity extends BaseActivity{
         initRecommend();
         initSnapBanner();
         initAdListNews();
+        initAboutTool();
         mRecyclerView.setAdapter(mainAdapter);
         mainAdapter.addAll(ConstantStringApi.getNewsList());
     }
@@ -271,6 +273,11 @@ public class MainActivity extends BaseActivity{
     private void initAdListNews() {
         AdListComponent adListComponent = new AdListComponent();
         mainAdapter.addHeader(adListComponent);
+    }
+
+    private void initAboutTool() {
+        ToolComponent toolComponent = new ToolComponent();
+        mainAdapter.addHeader(toolComponent);
     }
 
     /**

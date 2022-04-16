@@ -4,40 +4,35 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.view.ViewPager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.LogUtils
-import com.flyco.tablayout.CommonTabLayout
-import com.flyco.tablayout.listener.CustomTabEntity
-import com.flyco.tablayout.listener.OnTabSelectListener
+import com.google.android.material.tabs.TabLayout
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
-import com.yc.configlayer.arounter.ARouterUtils
-import com.yc.configlayer.arounter.RouterConfig
 import com.yc.configlayer.constant.Constant
+import com.yc.library.base.adapter.BasePagerAdapter
 import com.yc.library.base.mvp.BaseActivity
+import com.yc.library.web.WebViewActivity
+import com.yc.statusbar.bar.StateAppBar
 import com.ycbjie.android.R
-import com.ycbjie.android.tools.base.KotlinConstant
-import com.ycbjie.android.tools.base.KotlinConstant.HOME
 import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.presenter.AndroidPresenter
 import com.ycbjie.android.tools.KotlinTest
+import com.ycbjie.android.tools.base.KotlinConstant.HOME
 import com.ycbjie.android.view.fragment.AndroidHomeFragment
 import com.ycbjie.android.view.fragment.AndroidKnowledgeFragment
 import com.ycbjie.android.view.fragment.AndroidProfileFragment
 import com.ycbjie.android.view.fragment.AndroidProjectFragment
-import com.ycbjie.library.base.adapter.BasePagerAdapter
-import com.ycbjie.library.bean.TabEntity
-import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.base_android_bar.*
+import kotlinx.android.synthetic.main.base_android_bar.toolbar
+import kotlinx.android.synthetic.main.base_tab_layout.*
 import kotlinx.coroutines.*
 import java.lang.ref.WeakReference
 import java.util.*
@@ -80,7 +75,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
     private var mToolbarTitle :TextView?=null
     private var mIvRightImg :ImageView?=null
     private var viewPager: ViewPager? = null
-    private var ctlTable : CommonTabLayout? =null
+    private var tabLayout : TabLayout? =null
     /**
      * 创建集合
      *
@@ -147,7 +142,6 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
                 NavWebsiteActivity.lunch(this)
             }
             1 -> {
-                this.toast("登录玩Android")
                 ActivityUtils.startActivity(AndroidLoginActivity::class.java)
             }
             2 -> {
@@ -160,7 +154,6 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
             }
             4 -> {
                 //ToastUtils.showRoundRectToast("开源项目介绍")
-                ARouterUtils.navigation(RouterConfig.Demo.ACTIVITY_OTHER_ABOUT_ME)
             }
             5 -> {
                 val a = count%7
@@ -245,7 +238,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         mToolbarTitle = findViewById(R.id.toolbar_title)
         mIvRightImg = findViewById(R.id.iv_right_img)
         viewPager = findViewById(R.id.vp_pager)
-        ctlTable = findViewById(R.id.ctl_table)
+        tabLayout = findViewById(R.id.ctl_table)
         mTvTitleLeft?.visibility = View.VISIBLE
         mTvTitleLeft?.textSize = 16.0f
         mTvTitleLeft?.typeface = Typeface.DEFAULT
@@ -267,6 +260,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         mTvTitleLeft?.text = "首页"
         ll_title_menu.visibility = View.GONE
         toolbar_title.visibility = View.GONE
+        //
         toolbar.run {
             setSupportActionBar(toolbar)
             supportActionBar?.title = ""
@@ -282,103 +276,26 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         fragments.add(AndroidKnowledgeFragment())
         fragments.add(AndroidProjectFragment())
         fragments.add(AndroidProfileFragment())
-        pageAdapter = BasePagerAdapter(supportFragmentManager, fragments)
-        viewPager.run {
-            this!!.adapter = pageAdapter
-            addOnPageChangeListener(PagerChangeListener(this@AndroidActivity))
-            offscreenPageLimit = fragments.size
-        }
     }
 
     private fun initTabLayout() {
-        val mTabEntities = ArrayList<CustomTabEntity>()
+        pageAdapter = BasePagerAdapter(supportFragmentManager, fragments)
         val mIconUnSelectIds = this.resources.obtainTypedArray(R.array.android_tab_un_select)
         val mIconSelectIds = this.resources.obtainTypedArray(R.array.android_tab_select)
         val mainTitles = this.resources.getStringArray(R.array.android_title)
-        for (i in mainTitles.indices) {
-            val unSelectId = mIconUnSelectIds.getResourceId(i, R.drawable.ic_tab_main_art_uncheck)
-            val selectId = mIconSelectIds.getResourceId(i, R.drawable.ic_tab_main_art_checked)
-            mTabEntities.add(TabEntity(mainTitles[i], selectId, unSelectId))
-        }
         mIconUnSelectIds.recycle()
         mIconSelectIds.recycle()
-
-        ctlTable?.setTabData(mTabEntities)
-        //匿名内部类
-        //Kotlin 用对象表达式和对象声明巧妙的实现了这一概念。
-        ctlTable?.setOnTabSelectListener(object : OnTabSelectListener {
-            override fun onTabSelect(position: Int) {
-                if(position>=0 && position<fragments.size){
-                    viewPager?.currentItem = position
-                }
-            }
-
-            override fun onTabReselect(position: Int) {
-
-            }
-        })
-    }
-
-    class PagerChangeListener constructor(activity: AndroidActivity) : ViewPager.OnPageChangeListener {
-        private var weakActivity: WeakReference<AndroidActivity>? = null
-        init {
-            this.weakActivity = WeakReference(activity)
-        }
-
-        override fun onPageScrollStateChanged(state: Int) {}
-
-        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-
-        override fun onPageSelected(position: Int) {
-            val activity: AndroidActivity? = weakActivity?.get()
-            if (activity != null) {
-                activity.index = position
-                activity.selectByIndex(position)
-            }
+        val manager = supportFragmentManager
+        val adapter = BasePagerAdapter(manager, fragments, mainTitles.toMutableList())
+        viewPager?.adapter = adapter
+        tabLayout?.setupWithViewPager(viewPager)
+        tabLayout?.tabMode = TabLayout.MODE_SCROLLABLE
+        viewPager?.offscreenPageLimit = mainTitles.size
+        viewPager.run {
+            this!!.adapter = pageAdapter
+            offscreenPageLimit = fragments.size
         }
     }
-
-    /**
-     * 使用when表达式
-     * when表达式就相当于Java的switch表达式，省去了case和break，并且支持各种类型。
-     *
-     * 控制流(Control Flow)：Kotlin的控制流有if``when``for``while四种
-     */
-    private fun selectByIndex(position: Int) {
-        mTvTitleLeft?.visibility = View.VISIBLE
-        when (position){
-            0 ->{
-                ctlTable?.currentTab = 0
-                mTvTitleLeft?.text = "首页"
-                //supportActionBar!!.title = "首页"
-            }
-            1 ->{
-                ctlTable?.currentTab = 1
-                mTvTitleLeft?.text = "体系"
-                //supportActionBar!!.title = "项目"
-            }
-            2 ->{
-                ctlTable?.currentTab = 2
-                mTvTitleLeft?.text = "项目"
-                //supportActionBar!!.title = "博客"
-            }
-            3 ->{
-                ctlTable?.currentTab = 3
-                mTvTitleLeft?.text = "用户"
-                //supportActionBar!!.title = "我的"
-            }
-            else -> {
-                // 默认，相当于switch中default
-                print("x is neither 1 nor 2")
-                print(Foo(10, 20))
-                print(Foo(10, 20))
-                KotlinConstant.NEW_ID
-                KotlinConstant.IS_CACHE
-                this.toast("拓展函数")
-            }
-        }
-    }
-
 
     // 一个简单的数据类
     // 用于重载运算符的所有函数都必须使用operator关键字标记。
@@ -422,13 +339,6 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
      *
      */
 
-
-    /**
-     * 拓展函数，此处duration已经赋了默认值，所以这个参数可传可不传。
-     */
-    fun FragmentActivity.toast(message: CharSequence,duration: Int = Toast.LENGTH_SHORT) {
-        Toast.makeText(this, message, duration).show()
-    }
 
 
     private fun startRun1(){

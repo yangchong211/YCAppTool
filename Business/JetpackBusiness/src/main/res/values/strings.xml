@@ -3,4 +3,6 @@
     <string name="top_line">M5,10 l14,0</string>
     <string name="middle_line">M5,12 l14,0</string>
     <string name="bottom_line">M5,14 l14,0</string>
+    <string name="home">Home</string>
+    <string name="deeplink">Deep Link</string>
 </resources>

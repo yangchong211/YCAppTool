@@ -41,6 +41,6 @@ dependencies {
     implementation rootProject.ext.dependencies["annotation"]
     implementation rootProject.ext.dependencies["okhttp"]
     implementation rootProject.ext.dependencies["gson"]
-    implementation(rootProject.ext.dependencies["room-runtime"])
-    annotationProcessor(rootProject.ext.dependencies["room-compiler"])
+    implementation(rootProject.ext.dependencies["roomRuntime"])
+    annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
 }

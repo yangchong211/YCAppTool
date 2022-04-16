@@ -11,12 +11,12 @@ import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
+import com.yc.library.base.mvp.BaseActivity
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidLoginContract
 import com.ycbjie.android.model.bean.LoginBean
 import com.ycbjie.android.presenter.AndroidLoginPresenter
-import com.ycbjie.library.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.activity_android_login.*
 import kotlinx.android.synthetic.main.base_android_bar.*
 import kotlinx.coroutines.Dispatchers

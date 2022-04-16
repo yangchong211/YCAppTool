@@ -1,4 +1,9 @@
 package com.yc.lifehelper;
 
-public class DebugApplication {
+import android.app.Application;
+
+public class DebugApplication extends Application {
+
+
+
 }

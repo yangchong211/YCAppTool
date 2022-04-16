@@ -1,4 +1,4 @@
-package com.yc.library.utils;
+package com.yc.toolutils.other;
 
 import android.content.Context;
 import android.content.Intent;

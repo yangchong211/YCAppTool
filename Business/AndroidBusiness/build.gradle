@@ -66,8 +66,15 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
+    implementation(rootProject.ext.dependencies["material"])
+    implementation(rootProject.ext.dependencies["swiperefreshlayout"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
+    implementation(rootProject.ext.dependencies["coordinatorlayout"])
+    implementation(rootProject.ext.dependencies["lifecycle"])
+    implementation(rootProject.ext.dependencies["lifecycleRuntime"])
+    implementation(rootProject.ext.dependencies["gson"])
     implementation project(path: ':LibraryLayer')
+    implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':HttpServer')
     implementation project(path: ':ConfigLayer')
     implementation project(path: ':ImageServer')
@@ -77,6 +84,7 @@ dependencies {
     // Kotlin coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
+    implementation project(path: ':AppStateLib')
 
 
 }

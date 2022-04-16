@@ -58,8 +58,8 @@ dependencies {
     implementation(rootProject.ext.dependencies["swiperefreshlayout"])
     implementation(rootProject.ext.dependencies["recyclerview"])
     implementation(rootProject.ext.dependencies["databinding"])
-    implementation(rootProject.ext.dependencies["room-runtime"])
-    annotationProcessor(rootProject.ext.dependencies["room-compiler"])
+    implementation(rootProject.ext.dependencies["roomRuntime"])
+    annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
     implementation project(path: ':LibraryLayer')
     implementation "com.google.guava:guava:27.0.1-android"
 }

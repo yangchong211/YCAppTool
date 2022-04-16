@@ -7,7 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
-import com.yc.library.utils.AppUtils;
+import com.yc.toolutils.process.AppProcessUtils;
 
 import java.util.List;
 
@@ -139,7 +139,7 @@ public class SchemeActivity extends AppCompatActivity {
 
     private void readGoActivity(Intent intent, Context context) {
         // 如果app 运行中，直接打开页面，没有运行中就先打开主界面，在打开
-        if (AppUtils.isAppRunning(context, context.getPackageName())) {
+        if (AppProcessUtils.isAppRunning(context, context.getPackageName())) {
             openActivity(intent, context);
         } else {
             reStartActivity(intent, context);

@@ -30,7 +30,7 @@ ext {
     leakCanaryVersion = '1.5'
 
     // Android support
-    supportAppCompat = 'androidx.appcompat:appcompat:1.0.0'
+    supportAppCompat = 'androidx.appcompat:appcompat:1.2.0'
     supportAnnotations = "com.android.support:support-annotations:$support_version"
 
     leakCanary = "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"

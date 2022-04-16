@@ -269,6 +269,7 @@ class ServiceLoaderAction {
             return;
         }
 
+        //获取 ServiceProvider 的属性值
         final ArrayMemberValue value = (ArrayMemberValue) annotation.getMemberValue("value");
         final IntegerMemberValue priority = (IntegerMemberValue) annotation.getMemberValue("priority");
         final int priorityValue = null != priority ? priority.getValue() : 0;

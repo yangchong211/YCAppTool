@@ -2,9 +2,9 @@ package com.ycbjie.android.view.activity
 
 import android.content.Context
 import android.content.Intent
-import com.ns.yc.ycstatelib.StateLayoutManager
+import com.yc.library.base.state.BaseStateActivity
+import com.yc.ycstatelib.StateLayoutManager
 import com.ycbjie.android.R
-import com.ycbjie.library.base.state.BaseStateActivity
 
 class CollectNetActivity : BaseStateActivity(){
 

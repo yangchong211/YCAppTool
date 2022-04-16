@@ -52,8 +52,8 @@ dependencies {
     implementation(rootProject.ext.dependencies["cardview"])
     implementation(rootProject.ext.dependencies["material"])
     implementation(rootProject.ext.dependencies["recyclerview"])
-    implementation(rootProject.ext.dependencies["room-runtime"])
-    annotationProcessor(rootProject.ext.dependencies["room-compiler"])
+    implementation(rootProject.ext.dependencies["roomRuntime"])
+    annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
     implementation "androidx.legacy:legacy-support-v4:1.0.0"

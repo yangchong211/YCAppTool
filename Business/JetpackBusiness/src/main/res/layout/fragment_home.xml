@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/dp10">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="这个是文本"/>
+        android:padding="@dimen/dp10"
+        android:text="Navigation学习案例"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

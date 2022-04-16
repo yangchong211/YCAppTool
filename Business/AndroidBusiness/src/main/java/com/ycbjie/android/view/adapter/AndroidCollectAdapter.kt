@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.blankj.utilcode.util.Utils
 import com.yc.customwidget.spannable.RoundBackgroundSpan
 import com.ycbjie.android.R

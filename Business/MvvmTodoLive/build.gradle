@@ -56,10 +56,10 @@ dependencies {
     implementation(rootProject.ext.dependencies["cardview"])
     implementation(rootProject.ext.dependencies["material"])
     implementation(rootProject.ext.dependencies["recyclerview"])
-    implementation(rootProject.ext.dependencies["room-runtime"])
-    annotationProcessor(rootProject.ext.dependencies["room-compiler"])
+    implementation(rootProject.ext.dependencies["roomRuntime"])
+    annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
     implementation(rootProject.ext.dependencies["lifecycle"])
-    annotationProcessor(rootProject.ext.dependencies["lifecycle-compiler"])
+    annotationProcessor(rootProject.ext.dependencies["lifecycleCompiler"])
     implementation project(path: ':LibraryLayer')
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "com.google.guava:guava:27.0.1-android"

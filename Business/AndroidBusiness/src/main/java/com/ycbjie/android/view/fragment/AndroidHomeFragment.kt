@@ -11,7 +11,7 @@ import com.blankj.utilcode.util.SizeUtils
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.yc.cn.ycbannerlib.banner.view.BannerView
 import com.yc.library.base.mvp.BaseFragment
-import com.yc.library.utils.DoShareUtils
+import com.yc.toolutils.other.DoShareUtils
 import com.yc.library.web.WebViewActivity
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.BaseItemView
@@ -27,7 +27,6 @@ import com.ycbjie.android.view.activity.AndroidDetailActivity
 import com.ycbjie.android.view.activity.AndroidLoginActivity
 import com.ycbjie.android.view.adapter.AndroidHomeAdapter
 import com.ycbjie.android.view.adapter.BannerPagerAdapter
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener
@@ -62,8 +61,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
     var c : Array<Int?> = arrayOf(null)
     var d : Array<String> = arrayOf()
 
-
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         //as 是一个中缀操作符，as是不安全的转换操作符，如果as转换失败，会抛出一个异常，这就是不安全的。
         activity = context as AndroidActivity?
@@ -95,7 +93,9 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
     }
 
     override fun initView(view: View) {
-        recyclerView = view.findViewById(R.id.recyclerView) as YCRefreshView
+        view.run {
+            recyclerView = view.findViewById(R.id.recyclerView) as YCRefreshView
+        }
         presenter = AndroidHomePresenter(this)
         initRecyclerView()
     }

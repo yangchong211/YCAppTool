@@ -26,6 +26,7 @@ public final class ServiceLoaderUtils {
         final AnnotationsAttribute visibleAttr = (AnnotationsAttribute)
                 cf.getAttribute(AnnotationsAttribute.visibleTag);
         if (null != visibleAttr) {
+            //找到修饰了注解 ServiceProvider 的类
             final Annotation sp = visibleAttr.getAnnotation(ServiceProvider.class.getName());
             if (null != sp) {
                 return sp;
@@ -34,6 +35,7 @@ public final class ServiceLoaderUtils {
         final AnnotationsAttribute invisibleAttr = (AnnotationsAttribute)
                 cf.getAttribute(AnnotationsAttribute.invisibleTag);
         if (null != invisibleAttr) {
+            //找到修饰了注解 ServiceProvider 的类
             final Annotation sp = invisibleAttr.getAnnotation(ServiceProvider.class.getName());
             if (null != sp) {
                 return sp;

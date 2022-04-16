@@ -2,18 +2,18 @@ package com.ycbjie.android.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
+import androidx.core.content.ContextCompat
+import com.google.android.material.tabs.TabLayout
+import com.yc.library.base.adapter.BasePagerAdapter
+import com.yc.library.base.mvp.BaseActivity
+import com.yc.statusbar.bar.StateAppBar
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.TreeBean
 import com.ycbjie.android.presenter.KnowledgeTreeDetailPresenter
 import com.ycbjie.android.view.fragment.KnowledgeListFragment
-import com.ycbjie.library.base.adapter.BasePagerAdapter
-import com.ycbjie.library.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.base_tab_layout.*
 
 /**
@@ -125,11 +125,6 @@ class KnowledgeTreeDetailActivity : BaseActivity<KnowledgeTreeDetailPresenter>()
             Toast.makeText(this,"添加shortcut成功", Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        outState!!.classLoader = classLoader
-        super.onSaveInstanceState(outState)
     }
 
 }

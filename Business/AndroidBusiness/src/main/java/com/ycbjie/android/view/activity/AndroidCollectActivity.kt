@@ -5,11 +5,13 @@ import android.content.Intent
 import android.graphics.Color
 import android.view.View
 import android.widget.LinearLayout
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.NetworkUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.yc.library.base.mvp.BaseActivity
+import com.yc.statusbar.bar.StateAppBar
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.AndroidCollectContract
 import com.ycbjie.android.model.bean.ProjectListBean
@@ -18,7 +20,9 @@ import com.ycbjie.android.presenter.AndroidCollectPresenter
 import com.ycbjie.android.view.adapter.AndroidCollectAdapter
 import kotlinx.android.synthetic.main.base_android_bar.*
 import kotlinx.android.synthetic.main.base_android_recycle.*
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
+import org.yczbj.ycrefreshviewlib.inter.OnErrorListener
+import org.yczbj.ycrefreshviewlib.inter.OnMoreListener
+import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine
 
 
@@ -86,7 +90,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
             }
         }
         //加载更多
-        adapter.setMore(R.layout.view_recycle_more, object : RecyclerArrayAdapter.OnMoreListener {
+        adapter.setMore(R.layout.view_recycle_more, object : OnMoreListener {
             override fun onMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     if (adapter.allData.size > 0) {
@@ -106,7 +110,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
         })
 
         //设置没有数据
-        adapter.setNoMore(R.layout.view_recycle_no_more, object : RecyclerArrayAdapter.OnNoMoreListener {
+        adapter.setNoMore(R.layout.view_recycle_no_more, object : OnNoMoreListener {
             override fun onNoMoreShow() {
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore()
@@ -125,7 +129,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
         })
 
         //设置错误
-        adapter.setError(R.layout.view_recycle_error, object : RecyclerArrayAdapter.OnErrorListener {
+        adapter.setError(R.layout.view_recycle_error, object : OnErrorListener {
             override fun onErrorShow() {
                 adapter.resumeMore()
             }

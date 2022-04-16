@@ -4,9 +4,9 @@ package com.ycbjie.android.view.activity
 import android.app.Activity
 import android.content.Intent
 import android.view.View
+import com.yc.library.base.mvp.BaseActivity
 import com.ycbjie.android.R
 import com.ycbjie.android.presenter.AndroidLoginPresenter
-import com.ycbjie.library.base.mvp.BaseActivity
 import kotlinx.android.synthetic.main.activity_android_register.*
 import kotlinx.android.synthetic.main.base_android_bar.*
 

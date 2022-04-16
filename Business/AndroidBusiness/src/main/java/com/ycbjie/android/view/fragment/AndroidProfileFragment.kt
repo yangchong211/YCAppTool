@@ -8,16 +8,15 @@ import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.yc.configlayer.constant.Constant
+import com.yc.library.base.mvp.BaseLazyFragment
+import com.yc.library.web.WebViewActivity
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.tools.AndroidUtils
 import com.ycbjie.android.tools.KotlinUtils
-import com.ycbjie.android.view.activity.AndroidAboutActivity
 import com.ycbjie.android.view.activity.AndroidActivity
 import com.ycbjie.android.view.activity.AndroidCollectActivity
 import com.ycbjie.android.view.activity.AndroidLoginActivity
-import com.ycbjie.library.base.mvp.BaseLazyFragment
-import com.ycbjie.library.web.WebViewActivity
 import kotlinx.android.synthetic.main.fragment_android_profile.*
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope
@@ -113,7 +112,7 @@ class AndroidProfileFragment : BaseLazyFragment(), View.OnClickListener {
                 }
             }
             R.id.rlAbout ->{
-                AndroidAboutActivity.lunch(activity)
+
             }
             R.id.rlMore ->{
                 WebViewActivity.lunch(activity, Constant.GITHUB, "我的GitHub")
