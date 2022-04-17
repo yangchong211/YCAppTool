@@ -48,16 +48,15 @@ class NavigationFragment : Fragment(), View.OnClickListener {
         when(v?.id){
             R.id.btn_action ->{
                 // 利用SafeArgs传递参数
-                Navigation.createNavigateOnClickListener(R.id.next_two_action, null)
+                Navigation.createNavigateOnClickListener(R.id.next_one_action, null)
 
-                val action = FlowStepFragmentDirections
+                /*val action = FlowStepFragmentDirections
                     .nextOneAction()
                     .setFlowStepNumber(2)
-                findNavController().navigate(action)
+                findNavController().navigate(action)*/
 
                 //val navController = Navigation.findNavController(activity!!,R.id.my_nav_host_fragment)
                 //navController.navigate(R.id.next_action)
-
             }
             R.id.btn_destination->{
                 //findNavController().navigate(R.id.flow_step_one_dest, null)

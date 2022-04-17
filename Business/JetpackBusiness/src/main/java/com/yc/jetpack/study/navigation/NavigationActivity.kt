@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -52,9 +53,13 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     private fun initNavController() {
-        val host: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
-        navController = host.navController
+        //val host: NavHostFragment = supportFragmentManager
+        //    .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
+        //navController = host.navController
+
+        navController = Navigation.findNavController(this, R.id.my_nav_host_fragment)
+        //下面这个是简化版
+        //navController = findNavController(R.id.my_nav_host_fragment)
         navController?.addOnDestinationChangedListener { _, destination, _ ->
             val dest: String = try {
                 resources.getResourceName(destination.id)

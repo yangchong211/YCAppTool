@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_navigation_step_one">
         <action
             android:id="@+id/next_one_action"
-            app:destination="@+id/flow_step_two_dest"/>
+            app:destination="@id/flow_step_two_dest"/>
         <argument
             android:name="flowStepNumber"
             app:argType="integer"
