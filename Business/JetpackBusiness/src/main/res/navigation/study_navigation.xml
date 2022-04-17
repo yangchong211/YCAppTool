@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/flow_step_one_dest"
         android:name="com.yc.jetpack.study.navigation.FlowStepFragment"
-        android:label="FlowStepFragment1"
+        android:label="FlowStepFragment"
         tools:layout="@layout/fragment_navigation_step_one">
         <action
             android:id="@+id/next_one_action"
@@ -33,13 +33,12 @@
     <fragment
         android:id="@+id/flow_step_two_dest"
         android:name="com.yc.jetpack.study.navigation.FlowStepFragment"
-        android:label="FlowStepFragment2"
+        android:label="FlowStepFragment"
         tools:layout="@layout/fragment_navigation_step_two">
         <argument
             android:name="flowStepNumber"
             app:argType="integer"
             android:defaultValue="2"/>
-
         <action
             android:id="@+id/next_two_action"
             app:popUpTo="@id/home_dest">
