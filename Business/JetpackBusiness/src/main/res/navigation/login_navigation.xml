@@ -23,10 +23,6 @@
 			app:destination="@id/login"/>
 		<action
 			android:id="@+id/action_welcome_to_register"
-			app:enterAnim="@anim/common_slide_in_right"
-			app:exitAnim="@anim/common_slide_out_left"
-			app:popEnterAnim="@anim/common_slide_in_left"
-			app:popExitAnim="@anim/common_slide_out_right"
 			app:destination="@id/register"/>
 	</fragment>
 
