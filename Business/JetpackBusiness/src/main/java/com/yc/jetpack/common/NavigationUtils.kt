@@ -24,11 +24,16 @@ fun Fragment.findNavController(activity : Activity, id : Int): NavController {
     return Navigation.findNavController(activity , id)
 }
 
-//返回到上一个页面
+/**
+ * 返回到上一个页面
+ */
 fun Fragment.navigateUp() {
     findNavController().navigateUp()
 }
 
+/**
+ * 跳转到目标页面
+ */
 fun Fragment.navigate(directions : NavDirections) {
     findNavController().navigate(directions)
 }
@@ -41,6 +46,33 @@ fun Fragment.navigate(directions: NavDirections, navOptions: NavOptions) {
     findNavController().navigate(directions, navOptions)
 }
 
+
+
+/**
+ * A页面跳转到B 页面
+ * - enterAnim 是指 B页面进入的动画
+ * - exitAnim 是指A页面退出时的动画
+ * - popEnterAnim 是指 B退出时，A进入的动画
+ * - popExitAnim 是指 B退出时,B退出的动画
+ */
+private fun buildNavOptions(
+    singleTop: Boolean,
+    popUpToFragmentId: Int,
+    popUpToInclusive: Boolean,
+    enterAnim: Int,
+    exitAnim: Int,
+    popEnterAnim: Int,
+    popExitAnim: Int
+): NavOptions {
+    return NavOptions.Builder()
+        .setLaunchSingleTop(singleTop)
+        .setPopUpTo(popUpToFragmentId, popUpToInclusive)
+        .setEnterAnim(enterAnim)
+        .setExitAnim(exitAnim)
+        .setPopEnterAnim(popEnterAnim)
+        .setPopExitAnim(popExitAnim)
+        .build()
+}
 
 
 
