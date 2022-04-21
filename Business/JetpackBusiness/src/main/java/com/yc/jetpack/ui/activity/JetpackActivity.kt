@@ -14,8 +14,6 @@ import com.yc.jetpack.ui.fragment.SplashFragment
 
 class JetpackActivity : AppCompatActivity(){
 
-    private lateinit var navController : NavController
-
     companion object{
         fun startActivity(context : Context){
             context.startActivity(Intent(context,JetpackActivity::class.java))
@@ -29,16 +27,7 @@ class JetpackActivity : AppCompatActivity(){
     }
 
     private fun initNavController() {
-        navController = findNavController(R.id.home_nav_host_fragment)
-        navController.navigate(R.id.homeFragment)
-        /*navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            if ((destination as FragmentNavigator.Destination).className != SplashFragment::class.java.name){
 
-            }
-            if ((destination as FragmentNavigator.Destination).className != HomeFragment::class.java.name){
-
-            }
-        }*/
     }
 
 

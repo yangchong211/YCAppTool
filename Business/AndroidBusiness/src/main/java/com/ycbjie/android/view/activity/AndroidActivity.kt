@@ -81,7 +81,6 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
      *
      */
     private var fragments = mutableListOf<Fragment>()
-    private var pageAdapter : BasePagerAdapter? = null
     private var index: Int = 0      //定义具体的类型
     private var selectIndex: Int = 0
     private var count = 0
@@ -221,7 +220,6 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         initToolBar()
         initFragment()
         initTabLayout()
-        test()
     }
 
 
@@ -260,7 +258,6 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         mTvTitleLeft?.text = "首页"
         ll_title_menu.visibility = View.GONE
         toolbar_title.visibility = View.GONE
-        //
         toolbar.run {
             setSupportActionBar(toolbar)
             supportActionBar?.title = ""
@@ -279,22 +276,18 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
     }
 
     private fun initTabLayout() {
-        pageAdapter = BasePagerAdapter(supportFragmentManager, fragments)
         val mIconUnSelectIds = this.resources.obtainTypedArray(R.array.android_tab_un_select)
         val mIconSelectIds = this.resources.obtainTypedArray(R.array.android_tab_select)
         val mainTitles = this.resources.getStringArray(R.array.android_title)
+        val listTitle = mainTitles.toMutableList()
         mIconUnSelectIds.recycle()
         mIconSelectIds.recycle()
-        val manager = supportFragmentManager
-        val adapter = BasePagerAdapter(manager, fragments, mainTitles.toMutableList())
-        viewPager?.adapter = adapter
+        val adapter = BasePagerAdapter(supportFragmentManager, fragments, listTitle)
         tabLayout?.setupWithViewPager(viewPager)
-        tabLayout?.tabMode = TabLayout.MODE_SCROLLABLE
+        //?.tabMode = TabLayout.MODE_SCROLLABLE
         viewPager?.offscreenPageLimit = mainTitles.size
-        viewPager.run {
-            this!!.adapter = pageAdapter
-            offscreenPageLimit = fragments.size
-        }
+        viewPager?.adapter = adapter
+        viewPager?.offscreenPageLimit = fragments.size
     }
 
     // 一个简单的数据类

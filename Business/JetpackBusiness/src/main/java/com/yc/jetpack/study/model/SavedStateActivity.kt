@@ -37,8 +37,8 @@ class SavedStateActivity : AppCompatActivity() {
     //这种方式报错
     //var mySavedStateViewModel1: SavedStateViewModel by viewModel()
     // 这种是在koin初始化时候，将model添加进去，因此可以通过该种方式获取viewModel对象
-    val mySavedStateViewModel2  by viewModel<SavedStateViewModel>()
-    val myViewModel: SavedDataViewModel by viewModel()
+    //val mySavedStateViewModel2  by viewModel<SavedStateViewModel>()
+    //val myViewModel: SavedDataViewModel by viewModel()
 
     //下面这两种，是使用原始的方式获取viewModel对象
     private var mSavedStateViewModel: SavedStateViewModel? = null

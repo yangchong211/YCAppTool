@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/base_android_bar"/>
@@ -23,6 +23,10 @@
         android:id="@+id/ctl_table"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#90ffffff"/>
+        android:background="@color/colorWhite"
+        app:tabBackground="@drawable/ripple_tab_bg"
+        app:tabIndicatorColor="@color/colorTheme"
+        app:tabSelectedTextColor="@color/colorTheme"
+        app:tabTextColor="@color/blackText"/>
 
 </LinearLayout>

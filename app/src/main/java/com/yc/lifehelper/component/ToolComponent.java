@@ -48,7 +48,7 @@ public class ToolComponent implements InterItemView {
                 return;
             }
             switch (v.getId()) {
-                //MVP经典todo案例
+                //玩Android
                 case R.id.tv_home_nine:
                     AndroidActivity.Companion.startActivity((Activity) context,0);
                     break;

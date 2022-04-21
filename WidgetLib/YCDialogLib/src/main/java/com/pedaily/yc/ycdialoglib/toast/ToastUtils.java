@@ -40,12 +40,6 @@ public final class ToastUtils {
     @SuppressLint("StaticFieldLeak")
     private static Application mApp;
     private static int toastBackColor;
-    /**
-     * 采用软引用管理toast对象
-     * 如果一个对象只具有软引用，那么如果内存空间足够，垃圾回收器就不会回收它；
-     * 如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。
-     */
-    private static SoftReference<Toast> mToast;
 
     /**
      * 初始化吐司工具类
@@ -81,29 +75,6 @@ public final class ToastUtils {
             throw new NullPointerException("ToastUtils context is not null，please first init");
         }
     }
-
-
-    /**
-     * 吐司工具类    避免点击多次导致吐司多次，最后导致Toast就长时间关闭不掉了
-     * 注意：这里如果传入context会报内存泄漏；传递activity..getApplicationContext()
-     *
-     * @param content       吐司内容
-     */
-    private static Toast toast;
-
-    @SuppressLint("ShowToast")
-    public static void showToast(String content) {
-        DialogUtils.checkMainThread();
-        checkContext();
-        if (!DialogUtils.checkNull(mToast)) {
-            mToast.get().cancel();
-        }
-        Toast toast = Toast.makeText(mApp, "", Toast.LENGTH_SHORT);
-        toast.setText(content);
-        toast.show();
-        mToast = new SoftReference<>(toast);
-    }
-
 
     /**
      * 某些系统可能屏蔽通知
@@ -176,7 +147,7 @@ public final class ToastUtils {
 
     public static final class Builder {
 
-        private Context context;
+        private final Context context;
         private CharSequence title;
         private CharSequence desc;
         private int gravity = Gravity.TOP;
@@ -249,6 +220,13 @@ public final class ToastUtils {
             return this;
         }
 
+        /**
+         * 采用软引用管理toast对象
+         * 如果一个对象只具有软引用，那么如果内存空间足够，垃圾回收器就不会回收它；
+         * 如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。
+         */
+        private SoftReference<Toast> mToast;
+
         public Toast build() {
             if (!DialogUtils.checkNull(mToast)) {
                 mToast.get().cancel();
@@ -301,6 +279,7 @@ public final class ToastUtils {
      *     email  : yangchong211@163.com
      *     time  : 20120/5/6
      *     desc  : 利用hook解决toast崩溃问题
+     *              https://www.jianshu.com/p/437f473017d6
      *     revise: 7.1.1Toast崩溃解决方案
      *             首先Toast显示依赖于一个窗口，这个窗口被WMS管理（WindowManagerService），
      *             当需要show的时候这个请求会放在WMS请求队列中，并且会传递一个TN类型的Bider对象给WMS，
@@ -317,8 +296,10 @@ public final class ToastUtils {
         static {
             try {
                 Class<?> clazz = Toast.class;
+                //通过反射拿到，获取class对象的指定属性，拿到tn对象
                 sField_TN = clazz.getDeclaredField("mTN");
                 sField_TN.setAccessible(true);
+                //然后通过反射拿到Toast中内部类TN的mHandler
                 sField_TN_Handler = sField_TN.getType().getDeclaredField("mHandler");
                 sField_TN_Handler.setAccessible(true);
             } catch (Exception e) {
@@ -346,6 +327,7 @@ public final class ToastUtils {
 
             public void dispatchMessage(Message msg) {
                 try {
+                    // 捕获这个异常，避免程序崩溃
                     super.dispatchMessage(msg);
                 } catch (Exception e) {
                     e.printStackTrace();
