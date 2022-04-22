@@ -75,6 +75,7 @@ ext {
             //kotlin
             kotlinxCoroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxVersion",
             kotlinxCoroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinxVersion",
+            kotlinxJdk                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
 
             //network
             retrofit                  : "com.squareup.retrofit2:retrofit:$retrofitSdkVersion",

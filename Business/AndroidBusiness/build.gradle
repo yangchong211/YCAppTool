@@ -80,10 +80,10 @@ dependencies {
     implementation project(path: ':ImageServer')
     implementation project(path: ':CustomWidget')
     
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation(rootProject.ext.dependencies["kotlinxJdk"])
     // Kotlin coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
+    implementation(rootProject.ext.dependencies["kotlinxCoroutinesCore"])
+    implementation(rootProject.ext.dependencies["kotlinxCoroutinesAndroid"])
     implementation project(path: ':AppStateLib')
 
 

@@ -1,4 +1,4 @@
-package com.yc.store;
+package com.yc.store.store;
 
 
 import androidx.annotation.NonNull;
