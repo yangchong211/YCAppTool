@@ -86,7 +86,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
                 presenter?.getCollectArticleList(page)
             }else{
                 recyclerView?.setRefreshing(false)
-                ToastUtils.showToast( "没有网络")
+                ToastUtils.showRoundRectToast( "没有网络")
             }
         }
         //加载更多
@@ -101,7 +101,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
                     }
                 } else {
                     adapter.pauseMore()
-                    ToastUtils.showToast( "网络不可用")
+                    ToastUtils.showRoundRectToast( "网络不可用")
                 }
             }
 
@@ -115,7 +115,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore()
                 } else {
-                    ToastUtils.showToast( "网络不可用")
+                    ToastUtils.showRoundRectToast( "网络不可用")
                 }
             }
 
@@ -123,7 +123,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore()
                 } else {
-                    ToastUtils.showToast( "网络不可用")
+                    ToastUtils.showRoundRectToast( "网络不可用")
                 }
             }
         })

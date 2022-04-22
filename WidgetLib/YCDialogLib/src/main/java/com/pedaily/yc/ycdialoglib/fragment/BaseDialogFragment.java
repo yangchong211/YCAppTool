@@ -238,7 +238,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
             ft.commitAllowingStateLoss();
         }else {
             throw new NullPointerException("需要设置setFragmentManager");
-            //ToastUtils.showToast("需要设置setFragmentManager");
+            //ToastUtils.showRoundRectToast("需要设置setFragmentManager");
         }
     }
 

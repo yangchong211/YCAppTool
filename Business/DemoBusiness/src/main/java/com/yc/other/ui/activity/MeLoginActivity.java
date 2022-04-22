@@ -160,11 +160,11 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
         final String name = tvPersonUsername.getText().toString().trim();
         final String pwd = tvPersonPassword.getText().toString().trim();
         if(TextUtils.isEmpty(name)){
-            ToastUtils.showToast("用户名不能为空");
+            ToastUtils.showRoundRectToast("用户名不能为空");
             return;
         }
         if(TextUtils.isEmpty(pwd)){
-            ToastUtils.showToast("密码不能为空");
+            ToastUtils.showRoundRectToast("密码不能为空");
             return;
         }
         progressShow = true;

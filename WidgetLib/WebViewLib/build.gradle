@@ -31,7 +31,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     implementation(rootProject.ext.dependencies["appcompat"])
-    implementation(rootProject.ext.dependencies["annotation"])
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["coordinatorlayout"])
     implementation(rootProject.ext.dependencies["okhttp"])
     //okhttp库
     //implementation 'com.squareup.okhttp3:okhttp:3.10.0'

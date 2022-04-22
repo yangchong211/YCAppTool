@@ -139,7 +139,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
 //                presenter.doRefresh();
 //            } else {
 //                recyclerView.setRefreshing(false);
-//                ToastUtils.showToast("网络不可用");
+//                ToastUtils.showRoundRectToast("网络不可用");
 //            }
 //        });
         recyclerView.addOnScrollListener(new OnLoadMoreListener() {
@@ -185,7 +185,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
                     }
                 } else {
                     adapter.pauseMore();
-                    ToastUtils.showToast("网络不可用");
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
 
@@ -202,7 +202,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    ToastUtils.showToast("网络不可用");
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
 
@@ -211,7 +211,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
-                    ToastUtils.showToast("网络不可用");
+                    ToastUtils.showRoundRectToast("网络不可用");
                 }
             }
         });

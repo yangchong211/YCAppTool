@@ -160,7 +160,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                 presenter?.getHomeList(page)
             } else {
                 recyclerView?.setRefreshing(false)
-                ToastUtils.showToast( "没有网络")
+                ToastUtils.showRoundRectToast( "没有网络")
             }
         }
         //加载更多
@@ -175,7 +175,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                     }
                 } else {
                     adapter.pauseMore()
-                    ToastUtils.showToast( "网络不可用")
+                    ToastUtils.showRoundRectToast( "网络不可用")
                 }
             }
 
@@ -189,7 +189,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore()
                 } else {
-                    ToastUtils.showToast( "网络不可用")
+                    ToastUtils.showRoundRectToast( "网络不可用")
                 }
             }
 
@@ -197,7 +197,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                 if (NetworkUtils.isConnected()) {
                     adapter.resumeMore()
                 } else {
-                    ToastUtils.showToast( "网络不可用")
+                    ToastUtils.showRoundRectToast( "网络不可用")
                 }
             }
         })
@@ -276,7 +276,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
     }
 
     override fun unCollectArticleSuccess() {
-        ToastUtils.showToast("取消收藏成功")
+        ToastUtils.showRoundRectToast("取消收藏成功")
     }
 
     override fun unCollectArticleFail(t: Throwable) {

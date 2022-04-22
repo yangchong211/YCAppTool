@@ -20,6 +20,7 @@ public class A {
             }
         });
 
+        HashMap<String,String> hashMap = new HashMap<>();
 
     }
 

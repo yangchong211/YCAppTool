@@ -103,7 +103,7 @@ public class MeFeedBackActivity extends BaseActivity implements View.OnClickList
         } else if (i == R.id.tv_commit_feedback){
             contentText = mevView.getContentText();
             if(TextUtils.isEmpty(contentText)){
-                ToastUtils.showToast("输入内容不能为空");
+                ToastUtils.showRoundRectToast("输入内容不能为空");
                 return;
             }
             Intent intent = new Intent();
@@ -122,7 +122,7 @@ public class MeFeedBackActivity extends BaseActivity implements View.OnClickList
     private void toSendSms() {
         contentText = mevView.getContentText();
         if(TextUtils.isEmpty(contentText)){
-            ToastUtils.showToast("输入内容不能为空");
+            ToastUtils.showRoundRectToast("输入内容不能为空");
             return;
         }
         Intent smsIntent = IntentUtils.getSendSmsIntent(phone, contentText);
@@ -132,7 +132,7 @@ public class MeFeedBackActivity extends BaseActivity implements View.OnClickList
     private void toSendEmail() {
         contentText = mevView.getContentText();
         if(TextUtils.isEmpty(contentText)){
-            ToastUtils.showToast("输入内容不能为空");
+            ToastUtils.showRoundRectToast("输入内容不能为空");
             return;
         }
         Uri uri = Uri.parse("yangchong211@163.com");
@@ -152,7 +152,7 @@ public class MeFeedBackActivity extends BaseActivity implements View.OnClickList
             intent.setComponent(cmp);
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            ToastUtils.showToast("检查到您手机没有安装微信，请安装后使用该功能");
+            ToastUtils.showRoundRectToast("检查到您手机没有安装微信，请安装后使用该功能");
         }
     }
 

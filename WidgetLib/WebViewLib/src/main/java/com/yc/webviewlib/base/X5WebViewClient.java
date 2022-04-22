@@ -372,7 +372,7 @@ public class X5WebViewClient extends WebViewClient {
             X5LogUtils.d("服务器异常" + error.getDescription().toString());
 
         }
-        //ToastUtils.showToast("服务器异常6.0之后");
+        //ToastUtils.showRoundRectToast("服务器异常6.0之后");
         //当加载错误时，就让它加载本地错误网页文件
         //mWebView.loadUrl("file:///android_asset/errorpage/error.html");
         int errorCode = error.getErrorCode();
