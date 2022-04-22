@@ -1,48 +1,32 @@
 package com.ycbjie.android.model.bean
 
-import android.os.Parcel
-import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
-class ProjectListBean() : Parcelable {
+data class ProjectListBean(
+    @SerializedName("curPage")
+    val curPage: Int,
+    @SerializedName("datas")
+    val datas: MutableList<HomeData>? = null,
+    @SerializedName("offset")
+    val offset: Int,
+    @SerializedName("isOver")
+    val isOver: Boolean = false,
+    @SerializedName("pageCount")
+    val pageCount: Int = 0,
+    @SerializedName("size")
+    val size: Int = 0,
+    @SerializedName("total")
+    val total: Int,
+) : Serializable {
 
-    var curPage: Int = 0
-    var datas: MutableList<HomeData>? = null
-    var offset: Int = 0
-    var isOver: Boolean = false
-    var pageCount: Int = 0
-    var size: Int = 0
-    var total: Int = 0
-
-    constructor(parcel: Parcel) : this() {
-        curPage = parcel.readInt()
-        offset = parcel.readInt()
-        isOver = parcel.readByte() != 0.toByte()
-        pageCount = parcel.readInt()
-        size = parcel.readInt()
-        total = parcel.readInt()
+    companion object{
+        const val NO_MORE = false
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(curPage)
-        parcel.writeInt(offset)
-        parcel.writeByte(if (isOver) 1 else 0)
-        parcel.writeInt(pageCount)
-        parcel.writeInt(size)
-        parcel.writeInt(total)
+    fun getHomeDataSize(): Int {
+        return datas?.size ?: 0
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<ProjectListBean> {
-        override fun createFromParcel(parcel: Parcel): ProjectListBean {
-            return ProjectListBean(parcel)
-        }
-
-        override fun newArray(size: Int): Array<ProjectListBean?> {
-            return arrayOfNulls(size)
-        }
-    }
 }
