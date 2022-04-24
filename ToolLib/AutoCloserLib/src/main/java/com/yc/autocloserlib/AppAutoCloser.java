@@ -12,20 +12,25 @@ import android.util.Log;
 import java.util.concurrent.TimeUnit;
 
 /**
- * app 进入后台一定时间后执行退出或者重启操作，有助于释放内存，减少用户电量消耗
+ * @author: 杨充
+ * @email  : yangchong211@163.com
+ * @time   : 2022/04/18
+ * @desc   : app 进入后台一定时间后执行退出或者重启操作，有助于释放内存，减少用户电量消耗
+ * @revise :
  */
 public class AppAutoCloser implements Runnable {
 
     private static final String TAG = "AppAutoCloser";
     private static final int CONFIG_ARG_RESTART_DELAY = 30;
     @SuppressLint("StaticFieldLeak")
-    private static AppAutoCloser sInstance;
+    private volatile static AppAutoCloser sInstance;
     private Context mContext;
     private boolean mInitialized;
     private final Handler mHandler = BackgroundThread.get().getHandler();
     private int mCloseType = CLOSE_TYPE_CLOSE;
     private static final int CLOSE_TYPE_CLOSE = 0;
     private static final int CLOSE_TYPE_RESTART = 1;
+    private int mTime = -1;
 
     private AppAutoCloser() {
 
@@ -42,7 +47,7 @@ public class AppAutoCloser implements Runnable {
         if (mInitialized){
             return;
         }
-        if (mContext == null){
+        if (context == null){
             throw new NullPointerException("context is not null");
         }
         mInitialized = true;
@@ -50,10 +55,16 @@ public class AppAutoCloser implements Runnable {
         AppStateMonitor.getInstance().init(mContext);
     }
 
+    public void setTime(int time){
+        this.mTime = time;
+    }
 
     public void start() {
         if (!mInitialized){
             throw new NullPointerException("please init app auto closer lib at first");
+        }
+        if (mTime<0){
+            mTime = CONFIG_ARG_RESTART_DELAY;
         }
         AppStateMonitor.getInstance().registerStateListener(new AppStateMonitor.StateListener() {
             @Override
@@ -88,13 +99,8 @@ public class AppAutoCloser implements Runnable {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                //unit s
-                int delay = CONFIG_ARG_RESTART_DELAY;
-                if (delay <= 0) {
-                    return;
-                }
                 mCloseType = CLOSE_TYPE_CLOSE;
-                scheduleClose(TimeUnit.SECONDS.toMillis(delay));
+                scheduleClose(TimeUnit.SECONDS.toMillis(mTime));
             }
         });
     }

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.yc.appstart.AppStartTask;
 import com.yc.appstart.AppTaskDispatcher;
+import com.yc.autocloserlib.AppAutoCloser;
 import com.yc.lifehelper.MainActivity;
 import com.yc.lifehelper.listener.MainActivityListener;
 import com.yc.applicationlib.activity.ActivityManager;
@@ -45,12 +46,6 @@ import cn.ycbjie.ycthreadpoollib.ScheduleTask;
  */
 public class MainApplication extends LibApplication {
 
-    private static Context context;
-
-    public static Context getContext() {
-        return context;
-    }
-
     /**
      * 程序启动的时候执行
      */
@@ -58,7 +53,6 @@ public class MainApplication extends LibApplication {
     public void onCreate() {
         Log.d("Application : ", "onCreate");
         super.onCreate();
-        context = this;
         //执行task任务
         AppTaskDispatcher.create()
                 .setShowLog(true)
