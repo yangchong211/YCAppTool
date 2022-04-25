@@ -6,7 +6,11 @@ import android.os.HandlerThread;
 import android.os.Looper;
 
 /**
- * Shared singleton background thread for each process.
+ * @author: 杨充
+ * @email  : yangchong211@163.com
+ * @time   : 2018/04/15
+ * @desc   : Shared singleton background thread for each process.
+ * @revise :
  */
 public final class BackgroundThread extends HandlerThread {
 

@@ -3,6 +3,7 @@ package com.pedaily.yc.ycdialoglib.fragment;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -136,6 +137,12 @@ public abstract class BaseDialogFragment extends DialogFragment {
     public void onDetach() {
         super.onDetach();
         activity = null;
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        dialog.dismiss();
     }
 
     /**

@@ -13,6 +13,13 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @author: 杨充
+ * @email  : yangchong211@163.com
+ * @time   : 2018/04/15
+ * @desc   : 前后台监听
+ * @revise :
+ */
 public class AppStateMonitor implements Application.ActivityLifecycleCallbacks, ComponentCallbacks2 {
 
     public static final String TAG = "ApplicationState";

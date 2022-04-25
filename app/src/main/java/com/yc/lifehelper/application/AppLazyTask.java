@@ -43,7 +43,7 @@ public class AppLazyTask extends AppStartTask {
     private void initAutoCloser() {
         AppAutoCloser appAutoCloser = AppAutoCloser.getInstance();
         appAutoCloser.init(MainApplication.getInstance());
-        appAutoCloser.setTime(1);
+        appAutoCloser.setTime(60);
         appAutoCloser.start();
     }
 

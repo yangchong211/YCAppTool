@@ -166,4 +166,11 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     }
 
 
+    private void test(){
+        StringBuilder stringBuilder = new StringBuilder();
+        if (stringBuilder.length()>1){
+            stringBuilder.deleteCharAt(stringBuilder.length());
+        }
+    }
+
 }
