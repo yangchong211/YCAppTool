@@ -15,6 +15,9 @@
         <action
             android:id="@+id/home_dest_one"
             app:destination="@id/flow_step_one_dest"/>
+
+        <action android:id="@+id/action_to_argsSampleFragment"
+            app:destination="@id/args_sample_fragment"/>
     </fragment>
 
     <fragment

@@ -76,10 +76,24 @@ class NavigationFragment : Fragment(), View.OnClickListener {
                 findNavController().navigate(R.id.home_dest_one, null)
             }
             R.id.btn_arguments ->{
-
+                val bean = ArgumentBean()
+                bean.title = "逗比"
+                val directions = NavigationFragmentDirections.actionToArgsSampleFragment(
+                        0,
+                        "我是传递过来基本类型String参数",
+                        bean
+                    )
+                findNavController().navigate(directions)
             }
             R.id.btn_bean ->{
-
+                val bean = ArgumentBean()
+                bean.title = "傻逼"
+                val directions = NavigationFragmentDirections.actionToArgsSampleFragment(
+                    1,
+                    "",
+                    bean
+                )
+                findNavController().navigate(directions)
             }
         }
     }
