@@ -15,5 +15,67 @@
         android:padding="@dimen/dp10"
         android:text="Navigation学习案例"/>
 
+    <TextView
+        android:id="@+id/tv_live_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/dp10"
+        android:text="LiveData学习案例"/>
+
+    <TextView
+        android:id="@+id/tv_view_model"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/dp10"
+        android:text="ViewModel学习案例"/>
+
+    <TextView
+        android:id="@+id/tv_data_binding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/dp10"
+        android:text="DataBinding学习案例"/>
+
+    <TextView
+        android:id="@+id/tv_lifecycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/dp10"
+        android:text="Lifecycle学习案例"/>
+
+    <TextView
+        android:id="@+id/tv_paging"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/dp10"
+        android:text="Paging学习案例"/>
+
+    <TextView
+        android:id="@+id/tv_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/dp10"
+        android:text="Room学习案例"/>
+
+    <TextView
+        android:id="@+id/tv_work_manager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/dp10"
+        android:text="WorkManager学习案例"/>
 
 </LinearLayout>
