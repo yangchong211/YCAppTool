@@ -12,7 +12,22 @@
         android:name="com.yc.jetpack.ui.fragment.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigationFragment"
+        android:name="com.yc.jetpack.ui.fragment.NavigationFragment"
+        android:label="NavigationFragment"
+        tools:layout="@layout/fragment_navigation">
 
     </fragment>
+
+    <activity
+        android:id="@+id/navigationActivity"
+        android:name="com.yc.jetpack.study.navigation.NavigationActivity"
+        android:label="NavigationActivity"
+        tools:layout="@layout/activity_navigation_home">
+
+    </activity>
 
 </navigation>

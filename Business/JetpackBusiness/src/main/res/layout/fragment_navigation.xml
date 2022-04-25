@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/dp20"
+    android:paddingRight="@dimen/dp20"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_nav_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"
+        android:textSize="@dimen/textSize18"
+        android:text="处理应用内导航所需的一切"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_nav"
+        android:gravity="center"
+        android:text="跳转activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/btn_bottom"
+        android:layout_marginBottom="@dimen/dp20" />
+
+    <Button
+        android:id="@+id/btn_bottom"
+        android:layout_marginBottom="50dp"
+        android:text="BottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

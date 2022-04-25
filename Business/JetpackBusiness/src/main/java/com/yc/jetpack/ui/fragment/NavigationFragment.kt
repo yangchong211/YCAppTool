@@ -9,20 +9,21 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
 import com.yc.jetpack.R
 import com.yc.jetpack.study.navigation.NavigationActivity
 
-class HomeFragment : Fragment(), View.OnClickListener {
+class NavigationFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var tvNavigation: TextView
-
+    private lateinit var btnNav: Button
+    private lateinit var btnBottom: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_navigation, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,15 +33,20 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     private fun initView(view: View) {
         view.run {
-            tvNavigation = view.findViewById(R.id.tv_navigation)
+            btnNav = view.findViewById(R.id.btn_nav)
+            btnBottom = view.findViewById(R.id.btn_bottom)
         }
-        tvNavigation.setOnClickListener(this)
+        btnNav.setOnClickListener(this)
+        btnBottom.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.tv_navigation ->{
-                findNavController().navigate(R.id.navigationFragment)
+            R.id.btn_nav ->{
+
+            }
+            R.id.btn_bottom ->{
+                findNavController().navigate(R.id.navigationActivity)
             }
         }
     }
