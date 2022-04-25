@@ -5,6 +5,10 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
     <item
+        android:id="@id/dash_board"
+        android:icon="@drawable/common_ic_account"
+        android:title="@string/dashboard" />
+    <item
         android:id="@id/deeplink_dest"
         android:icon="@drawable/ic_android"
         android:title="@string/deeplink" />

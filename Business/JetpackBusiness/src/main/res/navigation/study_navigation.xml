@@ -46,6 +46,14 @@
     </fragment>
 
     <fragment
+        android:id="@+id/dash_board"
+        android:name="com.yc.jetpack.study.navigation.DashBoardFragment"
+        android:label="DashBoardFragment"
+        tools:layout="@layout/fragment_navigation_deeplink">
+
+    </fragment>
+
+    <fragment
         android:id="@+id/deeplink_dest"
         android:name="com.yc.jetpack.study.navigation.DeepLinkFragment"
         android:label="DeepLinkFragment"
