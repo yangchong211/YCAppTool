@@ -66,6 +66,8 @@ class NavigationActivity : AppCompatActivity() {
             } catch (e: Resources.NotFoundException) {
                 destination.id.toString()
             }
+
+            toolbar?.title = destination.label
             Toast.makeText(
                 this@NavigationActivity, "Navigated to $dest",
                 Toast.LENGTH_SHORT

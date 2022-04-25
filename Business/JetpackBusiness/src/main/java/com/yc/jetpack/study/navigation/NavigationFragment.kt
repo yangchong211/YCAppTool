@@ -15,6 +15,8 @@ class NavigationFragment : Fragment(), View.OnClickListener {
     private var tvText: TextView? = null
     private var btnDestination: Button? = null
     private var btnAction: Button? = null
+    private var btnArguments: Button? = null
+    private var btnBean: Button? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,22 +41,18 @@ class NavigationFragment : Fragment(), View.OnClickListener {
             tvText = view.findViewById(R.id.tv_text)
             btnDestination = view.findViewById(R.id.btn_destination)
             btnAction = view.findViewById(R.id.btn_action)
+            btnArguments = view.findViewById(R.id.btn_arguments)
+            btnBean = view.findViewById(R.id.btn_bean)
         }
         btnDestination?.setOnClickListener(this)
         btnAction?.setOnClickListener(this)
+        btnArguments?.setOnClickListener(this)
+        btnBean?.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.btn_action ->{
-                // 利用SafeArgs传递参数
-                Navigation.createNavigateOnClickListener(R.id.next_one_action, null)
-
-                /*val action = FlowStepFragmentDirections
-                    .nextOneAction()
-                    .setFlowStepNumber(1)
-                findNavController().navigate(action)*/
-            }
+            //这种是直接指向 fragment 标签的ID
             R.id.btn_destination->{
                 //val navController = Navigation.findNavController(activity!!,R.id.my_nav_host_fragment)
                 //navController.navigate(R.id.flow_step_one_dest)
@@ -70,6 +68,18 @@ class NavigationFragment : Fragment(), View.OnClickListener {
                     }
                 }
                 findNavController().navigate(R.id.flow_step_one_dest, null, navOption)
+            }
+            //这种是直接指向 fragment 标签的action
+            //注意，这个action的id必须是在 NavigationFragment 下面
+            R.id.btn_action ->{
+                //Navigation.createNavigateOnClickListener(R.id.home_dest_one, null)
+                findNavController().navigate(R.id.home_dest_one, null)
+            }
+            R.id.btn_arguments ->{
+
+            }
+            R.id.btn_bean ->{
+
             }
         }
     }

@@ -10,9 +10,11 @@
     <fragment
         android:id="@+id/home_dest"
         android:name="com.yc.jetpack.study.navigation.NavigationFragment"
-        android:label="NavigationFragment"
+        android:label="NavigationFragment首页"
         tools:layout="@layout/fragment_navigation_home">
-
+        <action
+            android:id="@+id/home_dest_one"
+            app:destination="@id/flow_step_one_dest"/>
     </fragment>
 
     <fragment
@@ -62,5 +64,26 @@
             android:name="myarg"
             android:defaultValue="Android!"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/args_sample_fragment"
+        android:name="com.yc.jetpack.study.navigation.SampleArgsFragment"
+        android:label="SampleArgsFragment"
+        tools:layout="@layout/fragment_sample_args">
+        <argument
+            android:name="argument_flag"
+            app:argType="integer"/>
+        <argument
+            android:name="argument_normal"
+            app:argType="string"/>
+        <argument
+            android:name="argument_bean"
+            app:argType="com.yc.jetpack.study.navigation.ArgumentBean"/>
+
+        <action
+            android:id="@+id/action_to_home_dest"
+            app:popUpTo="@id/home_dest"/>
+    </fragment>
+
 
 </navigation>
