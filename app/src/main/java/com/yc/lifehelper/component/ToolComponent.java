@@ -8,13 +8,10 @@ import android.widget.TextView;
 
 import com.yc.jetpack.study.navigation.NavigationActivity;
 import com.yc.jetpack.ui.activity.JetpackActivity;
-import com.yc.jetpack.ui.activity.LoginActivity;
 import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
-import com.yc.todoapp.tasks.TasksActivity;
 import com.yc.todoapplive.tasks.TasksLiveActivity;
-import com.yc.todoappmvvm.tasks.TasksMvvmActivity;
 import com.yc.toolutils.click.FastClickUtils;
 import com.ycbjie.android.view.activity.AndroidActivity;
 
@@ -40,7 +37,7 @@ public class ToolComponent implements InterItemView {
         TextView tvHomeTwelve = header.findViewById(R.id.tv_home_twelve);
 
         tvHomeNine.setText("玩Android");
-        tvHomeTen.setText("飞机大战");
+        tvHomeTen.setText("Jetpack");
         tvHomeEleven.setText("好玩工具");
         tvHomeTwelve.setText("音视频播放器");
         View.OnClickListener listener = v -> {
@@ -52,7 +49,7 @@ public class ToolComponent implements InterItemView {
                 case R.id.tv_home_nine:
                     AndroidActivity.Companion.startActivity((Activity) context,0);
                     break;
-                //飞机大战
+                //jetpack
                 case R.id.tv_home_ten:
                     NavigationActivity.Companion.startActivity(context);
                     break;
@@ -62,7 +59,6 @@ public class ToolComponent implements InterItemView {
                     break;
                 //音视频播放器
                 case R.id.tv_home_twelve:
-                    LoginActivity.Companion.startActivity(context);
                     break;
                 default:
                     break;

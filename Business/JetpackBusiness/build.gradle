@@ -51,6 +51,10 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    dataBinding {
+        enabled true
+    }
 }
 
 
@@ -66,10 +70,10 @@ dependencies {
     implementation project(path: ':BusinessInterface')
 
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation(rootProject.ext.dependencies["kotlinxJdk"])
     // Kotlin coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1'
+    implementation(rootProject.ext.dependencies["kotlinxCoroutinesCore"])
+    implementation(rootProject.ext.dependencies["kotlinxCoroutinesAndroid"])
     // koin框架
     implementation "org.koin:koin-core:2.2.0"
     implementation "org.koin:koin-android:2.2.0"

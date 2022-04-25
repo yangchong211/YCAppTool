@@ -8,19 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.TimeUtils;
-import com.yc.catonhelperlib.fps.PerformanceActivity;
-import com.yc.eastadapterlib.BaseRecycleAdapter;
-import com.yc.eastadapterlib.BaseViewHolder;
-import com.yc.jetpack.ui.activity.LoginActivity;
-import com.yc.leetbusiness.LeetCodeActivity;
-import com.yc.library.api.ConstantImageApi;
-import com.yc.library.api.ConstantStringApi;
-import com.yc.library.bean.ListNewsData;
-import com.yc.lifehelper.LocaleActivity;
+import com.yc.jetpack.ui.activity.JetpackActivity;
 import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
@@ -80,7 +69,7 @@ public class RecommendComponent implements InterItemView {
                     break;
                 //jetpack案例
                 case R.id.tv_home_twelve:
-                    LoginActivity.Companion.startActivity(context);
+                    JetpackActivity.Companion.startActivity(context);
                     break;
                 default:
                     break;

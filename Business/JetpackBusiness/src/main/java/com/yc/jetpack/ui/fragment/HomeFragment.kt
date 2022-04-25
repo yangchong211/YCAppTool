@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.yc.jetpack.R
 import com.yc.jetpack.study.navigation.NavigationActivity
 
 class HomeFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var tvNavigation: Button
+    private lateinit var tvNavigation: TextView
 
 
     override fun onCreateView(
