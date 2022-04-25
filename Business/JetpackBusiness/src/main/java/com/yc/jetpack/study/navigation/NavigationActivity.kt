@@ -78,6 +78,9 @@ class NavigationActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         appBarConfiguration = AppBarConfiguration(navController!!.graph)
         setupActionBarWithNavController(navController!!, appBarConfiguration)
+        toolbar?.setNavigationOnClickListener {
+            navController?.navigateUp()
+        }
     }
 
     private fun setupBottomNavMenu() {
