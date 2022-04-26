@@ -29,7 +29,7 @@ interface AndroidHomeContract {
         fun collectInArticle(selectId: Int)
     }
 
-    interface mode {
+    interface IHomeMode {
         fun getHomeList(page: Int): Observable<ResponseBean<HomeListBean>>
         fun getBannerData(): Observable<ResponseBean<List<BannerBean>>>
         fun unCollectArticle(selectId: Int): Observable<ResponseBean<JSONObject>>

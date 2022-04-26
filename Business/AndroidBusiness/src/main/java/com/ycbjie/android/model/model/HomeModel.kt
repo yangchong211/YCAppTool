@@ -8,7 +8,7 @@ import com.ycbjie.android.network.ResponseBean
 import io.reactivex.Observable
 import org.json.JSONObject
 
-class HomeModel : AndroidHomeContract.mode{
+class HomeModel : AndroidHomeContract.IHomeMode{
 
     override fun getHomeList(page: Int): Observable<ResponseBean<HomeListBean>> {
         val instance = AndroidHelper.instance()
