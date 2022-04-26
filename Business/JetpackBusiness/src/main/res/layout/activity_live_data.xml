@@ -41,4 +41,14 @@
         app:layout_constraintStart_toStartOf="@+id/btn_save"
         app:layout_constraintTop_toBottomOf="@+id/btn_save" />
 
+    <TextView
+        android:id="@+id/tv_text_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Saved in ViewModel:"
+        app:layout_constraintStart_toStartOf="@+id/tv_saved_vm"
+        app:layout_constraintTop_toBottomOf="@+id/tv_saved_vm" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

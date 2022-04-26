@@ -12,7 +12,7 @@ class SavedDataRepository {
     }
 
     suspend fun getData(): String {
-        return "yc"
+        return "你就是个逗比"
     }
 
 }

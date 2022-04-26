@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.yc.jetpack.R
+import com.yc.jetpack.study.model.ViewModelActivity
 
 class HomeFragment : Fragment(), View.OnClickListener {
     
@@ -60,6 +61,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
             R.id.tv_live_data ->{
                 findNavController().navigate(R.id.liveDataActivity)
+            }
+            R.id.tv_view_model ->{
+                activity?.let {
+                    ViewModelActivity.startActivity(it)
+                }
             }
         }
     }

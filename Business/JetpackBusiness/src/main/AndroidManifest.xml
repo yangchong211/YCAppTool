@@ -6,6 +6,7 @@
         <activity android:name="com.yc.jetpack.ui.activity.JetpackActivity"/>
         <activity android:name="com.yc.jetpack.study.navigation.NavigationActivity"/>
         <activity android:name="com.yc.jetpack.study.livedata.LiveDataActivity"/>
+        <activity android:name="com.yc.jetpack.study.model.ViewModelActivity"/>
     </application>
 
 </manifest>

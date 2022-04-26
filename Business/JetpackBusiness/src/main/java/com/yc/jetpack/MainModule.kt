@@ -12,9 +12,9 @@ val mainModule = module {
     single { SavedDataRepository() }
 
     //添加viewModel
-    viewModel { SavedDataViewModel(get()) }
+    viewModel { HasParamsViewModel(get()) }
     //添加无参数viewModel
-    viewModel { SavedStateViewModel() }
+    viewModel { NoParamsViewModel() }
     //添加多个参数viewModel
     viewModel { parameters ->
         SavedDataViewModel2(correction = parameters.get() , repository = get())

@@ -9,12 +9,17 @@ class TextViewModel : ViewModel() {
      */
     private var mCurrentText: MutableLiveData<String>? = null
 
+    private val mNextText: MutableLiveData<String> by lazy {
+        MutableLiveData()
+    }
 
-    val currentText: MutableLiveData<String>
-        get() {
-            if (mCurrentText == null) {
-                mCurrentText = MutableLiveData()
-            }
-            return mCurrentText as MutableLiveData<String>
+    fun getCurrentText(): MutableLiveData<String>{
+        if (mCurrentText == null) {
+            mCurrentText = MutableLiveData()
         }
+        return mCurrentText as MutableLiveData<String>
+    }
+
+    fun getNextText() : MutableLiveData<String> = mNextText
+
 }

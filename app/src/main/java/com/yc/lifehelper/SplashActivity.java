@@ -167,8 +167,8 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     }
 
 
-    private void test(){
 
+    private void test(){
 
 
 

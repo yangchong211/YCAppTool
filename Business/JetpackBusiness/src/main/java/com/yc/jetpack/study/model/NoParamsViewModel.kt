@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SavedStateViewModel : ViewModel() {
+class NoParamsViewModel : ViewModel() {
 
     //数据观察对象
     private val name = MutableLiveData<String>()
