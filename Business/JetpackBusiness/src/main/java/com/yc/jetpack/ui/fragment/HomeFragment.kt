@@ -1,21 +1,24 @@
 package com.yc.jetpack.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.yc.jetpack.R
-import com.yc.jetpack.study.navigation.NavigationActivity
 
 class HomeFragment : Fragment(), View.OnClickListener {
-
-    private lateinit var tvNavigation: TextView
-
+    
+    private var tvNavigation: TextView? = null
+    private var tvLiveData: TextView? = null
+    private var tvViewModel: TextView? = null
+    private var tvDataBinding: TextView? = null
+    private var tvLifecycle: TextView? = null
+    private var tvPaging: TextView? = null
+    private var tvRoom: TextView? = null
+    private var tvWorkManager: TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,16 +34,32 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initView(view: View) {
-        view.run {
-            tvNavigation = view.findViewById(R.id.tv_navigation)
-        }
-        tvNavigation.setOnClickListener(this)
+        tvNavigation = view.findViewById(R.id.tv_navigation)
+        tvLiveData = view.findViewById(R.id.tv_live_data)
+        tvViewModel = view.findViewById(R.id.tv_view_model)
+        tvDataBinding = view.findViewById(R.id.tv_data_binding)
+        tvLifecycle = view.findViewById(R.id.tv_lifecycle)
+        tvPaging = view.findViewById(R.id.tv_paging)
+        tvRoom = view.findViewById(R.id.tv_room)
+        tvWorkManager = view.findViewById(R.id.tv_work_manager)
+
+        tvNavigation?.setOnClickListener(this)
+        tvLiveData?.setOnClickListener(this)
+        tvViewModel?.setOnClickListener(this)
+        tvDataBinding?.setOnClickListener(this)
+        tvLifecycle?.setOnClickListener(this)
+        tvPaging?.setOnClickListener(this)
+        tvRoom?.setOnClickListener(this)
+        tvWorkManager?.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.tv_navigation ->{
                 findNavController().navigate(R.id.navigationFragment)
+            }
+            R.id.tv_live_data ->{
+                findNavController().navigate(R.id.liveDataActivity)
             }
         }
     }

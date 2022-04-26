@@ -1,31 +1,54 @@
 package com.yc.jetpack.study.livedata
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.yc.jetpack.R
+import com.yc.jetpack.study.navigation.NavigationActivity
 
 class LiveDataActivity : AppCompatActivity() {
 
     private var liveData : MutableLiveData<String> ?= null
     private var viewModel: TextViewModel ?= null
     private var count = 0
+    private var tvName: TextView? = null
+    private var btnSave: Button? = null
+    private var tvSavedVm: TextView? = null
+
+    companion object {
+        fun startActivity(context: Context) {
+            context.startActivity(Intent(context, LiveDataActivity::class.java))
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_saved_state)
+        setContentView(R.layout.activity_live_data)
+        initView()
         initLive()
         initLiveData()
+    }
+
+    private fun initView() {
+        tvName = findViewById(R.id.tv_name);
+        btnSave = findViewById(R.id.btn_save);
+        tvSavedVm = findViewById(R.id.tv_saved_vm);
     }
 
     private fun initLive(){
         liveData = MutableLiveData()
         liveData?.observe(this, Observer<String?> { newText ->
             // 更新数据
-            //tv.setText(newText)
+            tvName?.text = newText
         })
         liveData?.value = "小杨真的是一个逗比么"
     }
@@ -35,15 +58,13 @@ class LiveDataActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(TextViewModel::class.java)
         // 创建一个定义了onChange()方法的观察者
         // 开始订阅
-        val nameObserver: Observer<String?> =
-            Observer<String?> { newText -> // 更新数据
-                //tvText.setText(newText)
+        val nameObserver: Observer<String?> = Observer<String?> { newText -> // 更新数据
+                tvSavedVm?.text = newText
             }
         // 通过 observe()方法连接观察者和LiveData，注意：observe()方法需要携带一个LifecycleOwner类
-        val liveData = viewModel?.currentText
-        liveData?.observe(this, nameObserver)
+        viewModel?.currentText?.observe(this, nameObserver)
         // 发送数据
-        findViewById<View>(R.id.tv_btn).setOnClickListener(object : View.OnClickListener {
+        btnSave?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 count++
                 val text: String = when (count % 5) {

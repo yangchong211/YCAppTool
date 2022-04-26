@@ -30,4 +30,13 @@
 
     </activity>
 
+
+    <activity
+        android:id="@+id/liveDataActivity"
+        android:name="com.yc.jetpack.study.livedata.LiveDataActivity"
+        android:label="LiveDataActivity"
+        tools:layout="@layout/activity_live_data">
+
+    </activity>
+
 </navigation>

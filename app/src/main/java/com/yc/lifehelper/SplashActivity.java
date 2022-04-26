@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -167,10 +168,10 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
 
 
     private void test(){
-        StringBuilder stringBuilder = new StringBuilder();
-        if (stringBuilder.length()>1){
-            stringBuilder.deleteCharAt(stringBuilder.length());
-        }
+
+
+
+
     }
 
 }
