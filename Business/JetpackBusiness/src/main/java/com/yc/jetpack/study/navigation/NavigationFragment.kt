@@ -73,7 +73,9 @@ class NavigationFragment : Fragment(), View.OnClickListener {
             //注意，这个action的id必须是在 NavigationFragment 下面
             R.id.btn_action ->{
                 //Navigation.createNavigateOnClickListener(R.id.home_dest_one, null)
-                findNavController().navigate(R.id.home_dest_one, null)
+                findNavController().navigate(R.id.home_dest_one)
+
+                //Navigation.findNavController(v).navigate(R.id.home_dest_one)
             }
             R.id.btn_arguments ->{
                 val bean = ArgumentBean()
