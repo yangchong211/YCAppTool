@@ -42,7 +42,8 @@ project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
         'ComponentLib',':ApplicationLib',':AppStartLib',':AppBaseStore',
-        ':BaseClassLib',':ReflectionLib'
+        ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
+        ':AppInitCompiler'
 project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
@@ -53,6 +54,10 @@ project(':AppStartLib').projectDir = new File('CommonLib/AppStartLib')
 project(':AppBaseStore').projectDir = new File('CommonLib/AppBaseStore')
 project(':BaseClassLib').projectDir = new File('CommonLib/BaseClassLib')
 project(':ReflectionLib').projectDir = new File('CommonLib/ReflectionLib')
+project(':AppInitApi').projectDir = new File('CommonLib/AppInitApi')
+project(':AppInitCommon').projectDir = new File('CommonLib/AppInitCommon')
+project(':AppInitCompiler').projectDir = new File('CommonLib/AppInitCompiler')
+
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -139,6 +144,3 @@ project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
 
 
-include ':EasyExecutor'
-include ':LocalShareLib'
-include ':LongAliveLib'
