@@ -111,6 +111,14 @@ android {
         preDexLibraries = false
     }
 
+    //fix：Failed resolution of: Landroidx/databinding/DataBinderMapperImpl;
+    //问题：使用dataBinding 时报错
+    //原因：使用模块化项目时，子模块使用dataBinding ,主app 也要添加dataBinding支持
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
     //出现错误的原因是：AndroidStudio严格审查png图片，就是png没有达到AndroidStudio的要求
     //注：最重要的就是.9图要严格要求做好。禁止Gradle检查PNG的合法性
     aaptOptions.cruncherEnabled = false
@@ -223,8 +231,10 @@ dependencies {
     implementation project(path: ':MonitorAnrLib')
     implementation project(path: ':MonitorAliveLib')
 //    implementation project(path: ':LeakCanarySdk')
-    implementation project(path: ':AutoCloserLib')
-    implementation project(path: ':AppStartLib')
+    implementation(rootProject.ext.dependencies["AutoCloserLib"])
+    //implementation project(path: ':AutoCloserLib')
+    implementation(rootProject.ext.dependencies["AppStartLib"])
+    //implementation project(path: ':AppStartLib')
     implementation project(path: ':MvpTodoBusiness')
     implementation project(path: ':MvvmDatabinding')
     implementation project(path: ':MvvmTodoLive')
@@ -234,6 +244,9 @@ dependencies {
     implementation project(path: ':ThreadPoolLib')
     implementation project(path: ':JetpackBusiness')
     implementation project(path: ':AndroidBusiness')
+    implementation project(path: ':AppProcessLib')
+    implementation project(path: ':NotifyMessage')
+    implementation project(path: ':BaseClassLib')
     annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 //    implementation 'com.github.yangchong211.YCAppTool:BlurViewLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:BannerViewLib:1.3.7'
@@ -241,6 +254,19 @@ dependencies {
 //    implementation 'com.github.yangchong211.YCAppTool:ZxingServerLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:AppStatusLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:SerialTaskLib:1.3.7'
+
+    implementation 'com.github.yangchong211.YCDialog:DialogLib:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:PopupWindow:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:SnackBar:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:DialogFragment:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:BaseDialog:3.6.8'
+
+    implementation(rootProject.ext.dependencies["RoundCorners"])
+    implementation(rootProject.ext.dependencies["CardViewLib"])
+    implementation(rootProject.ext.dependencies["RedDotView"])
+    implementation(rootProject.ext.dependencies["EasyExecutor"])
+    implementation(rootProject.ext.dependencies["ThreadTaskLib"])
 }
 
 

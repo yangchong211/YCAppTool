@@ -23,15 +23,12 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.applicationlib.activity.ActivityManager;
 import com.yc.banner.view.BannerView;
-
+import com.yc.baseclasslib.activity.ActivityManager;
 import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
-import com.yc.library.api.ConstantImageApi;
 import com.yc.library.api.ConstantStringApi;
 import com.yc.library.base.mvp.BaseActivity;
-import com.yc.library.bean.ListNewsData;
 import com.yc.library.web.WebViewActivity;
 import com.yc.lifehelper.adapter.MainAdapter;
 import com.yc.lifehelper.component.AdListComponent;
@@ -48,13 +45,8 @@ import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
-
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import pub.devrel.easypermissions.EasyPermissions;
 
 
