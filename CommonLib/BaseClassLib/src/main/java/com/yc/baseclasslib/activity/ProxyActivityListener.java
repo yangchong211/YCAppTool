@@ -1,4 +1,4 @@
-package com.yc.applicationlib.activity;
+package com.yc.baseclasslib.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,6 +8,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : 代理类
+ *     revise:
+ * </pre>
+ */
 public class ProxyActivityListener extends ActivityLifecycleListener {
 
     private final Map<Class<Activity>, List<ActivityLifecycleListener>> mActivityLifecycleListeners = new HashMap<>();
@@ -46,6 +55,7 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
         }
     }
 
+    @Override
     public void onActivityResumed(Activity activity) {
         List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
@@ -58,6 +68,7 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
         }
     }
 
+    @Override
     public void onActivityStopped(Activity activity) {
         List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
@@ -70,6 +81,7 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
         }
     }
 
+    @Override
     public void onActivityPaused(Activity activity) {
         List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
@@ -82,6 +94,7 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
         }
     }
 
+    @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
         List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
@@ -94,6 +107,7 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
         }
     }
 
+    @Override
     public void onActivityDestroyed(Activity activity) {
         mActivityManager.remove(activity);
         List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
@@ -107,6 +121,7 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
         }
     }
 
+    @Override
     public void onActivityStarted(Activity activity) {
         List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
@@ -119,6 +134,7 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
         }
     }
 
+    @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         mActivityManager.add(activity);
         List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());

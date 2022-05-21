@@ -1,4 +1,4 @@
-package com.yc.applicationlib.activity;
+package com.yc.baseclasslib.activity;
 
 import android.app.Activity;
 import android.app.Application;
@@ -19,7 +19,7 @@ public class ActivityManager implements IActivityManager<Activity> {
     /**
      * 单例对象
      */
-    private static ActivityManager sInstance;
+    private volatile static ActivityManager sInstance;
     /**
      * 记录activity任务栈
      */
@@ -29,6 +29,10 @@ public class ActivityManager implements IActivityManager<Activity> {
      */
     private final ProxyActivityListener mProxyActivityListener =
             new ProxyActivityListener(this);
+    /**
+     * 是否初始化
+     */
+    private boolean mInit = false;
 
     public static ActivityManager getInstance() {
         if (sInstance == null) {
@@ -81,8 +85,19 @@ public class ActivityManager implements IActivityManager<Activity> {
     }
 
     public void init(Application application) {
+        if (mInit) {
+            return;
+        }
+        if (application == null){
+            throw new NullPointerException("init activity manager , context must be null");
+        }
         //注册全局监听
         application.registerActivityLifecycleCallbacks(mProxyActivityListener);
+        mInit = true;
+    }
+
+    public void remove(){
+
     }
 
     @Override
@@ -156,6 +171,7 @@ public class ActivityManager implements IActivityManager<Activity> {
 
     /**
      * 移除 activity
+     *
      * @param activity {@link Activity}
      */
     @Override
@@ -167,6 +183,7 @@ public class ActivityManager implements IActivityManager<Activity> {
 
     /**
      * 结束指定的Activity
+     *
      * @param activity {@link Activity}
      */
     @Override
@@ -211,7 +228,7 @@ public class ActivityManager implements IActivityManager<Activity> {
     public void appExist() {
         try {
             Activity activity = peek();
-            if (activity!=null && !activity.isDestroyed()){
+            if (activity != null && !activity.isDestroyed()) {
                 //先回退到桌面，然后在杀死进程
                 activity.moveTaskToBack(true);
             }

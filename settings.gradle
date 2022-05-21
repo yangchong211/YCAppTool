@@ -38,7 +38,8 @@ project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')
 
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
-        'ComponentLib',':ApplicationLib',':AppStartLib',':AppBaseStore'
+        'ComponentLib',':ApplicationLib',':AppStartLib',':AppBaseStore',
+        ':BaseClassLib',':ReflectionLib'
 project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
@@ -47,6 +48,8 @@ project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
 project(':AppStartLib').projectDir = new File('CommonLib/AppStartLib')
 project(':AppBaseStore').projectDir = new File('CommonLib/AppBaseStore')
+project(':BaseClassLib').projectDir = new File('CommonLib/BaseClassLib')
+project(':ReflectionLib').projectDir = new File('CommonLib/ReflectionLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -130,4 +133,3 @@ project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
 
 
-include ':BaseClassLib'

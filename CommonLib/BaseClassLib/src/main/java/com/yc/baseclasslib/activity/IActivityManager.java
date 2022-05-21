@@ -1,7 +1,20 @@
-package com.yc.applicationlib.activity;
-
+package com.yc.baseclasslib.activity;
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : 接口
+ *     revise:
+ * </pre>
+ */
 public interface IActivityManager<T> {
 
+    /**
+     *
+     * @param clazz
+     * @return
+     */
     T get(Class<T> clazz);
 
     T peek();

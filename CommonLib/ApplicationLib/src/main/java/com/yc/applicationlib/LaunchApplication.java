@@ -1,21 +1,36 @@
-package com.yc.applicationlib.application;
+package com.yc.applicationlib;
 
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Process;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : 应用app
+ *     revise:
+ * </pre>
+ */
 public class LaunchApplication extends Application {
 
-    private static final String FOUNDATION_APPLICATION_START_CLASS =
-            "com.yc.applicationlib.application.ApplicationListener.LaunchApplicationListener";
+    private static final String APPLICATION_START_CLASS =
+            "com.yc.applicationlib.ApplicationListener.LaunchApplicationListener";
     private Object mInstance;
     private final HashMap<String, Method> mMethod = new HashMap<>();
+    private static Application application;
+
+    public static Application getInstance() {
+        return application;
+    }
+
 
     public boolean isMainProcess() {
         //判断是否是主进程
@@ -33,6 +48,7 @@ public class LaunchApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        application = this;
         if (isMainProcess()) {
             invokeMethod(mInstance, "onCreate", this);
         }
@@ -73,7 +89,7 @@ public class LaunchApplication extends Application {
 
     private void loadLaunchClass() {
         try {
-            Class launchClass = Class.forName(FOUNDATION_APPLICATION_START_CLASS, true, getClassLoader());
+            Class launchClass = Class.forName(APPLICATION_START_CLASS, true, getClassLoader());
             mInstance = launchClass.newInstance();
             Method[] methods = launchClass.getDeclaredMethods();
             for (Method method : methods) {

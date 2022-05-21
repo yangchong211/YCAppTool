@@ -1,4 +1,4 @@
-package com.yc.applicationlib.application;
+package com.yc.applicationlib;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,15 +9,19 @@ import com.yc.spi.loader.ServiceLoader;
 
 
 /**
- * 分发 lifecycle 时确保各个 listener 出现异常时不相互影响
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : 分发 lifecycle 时确保各个 listener 出现异常时不相互影响
+ *     revise:
+ * </pre>
  */
-//@ServiceProvider(value = ApplicationListener.class, priority = -1)
+@ServiceProvider(value = ApplicationListener.class, priority = -1)
 public class LaunchApplicationListener extends AbstractLifecycleListener {
 
-    private final Iterable<ApplicationListener> mApplicationListener =
-            ServiceLoader.load(ApplicationListener.class);
-    private final Iterable<AppLifecycleListener> mAppListener =
-            ServiceLoader.load(AppLifecycleListener.class);
+    private final Iterable<ApplicationListener> mApplicationListener = ServiceLoader.load(ApplicationListener.class);
+    private final Iterable<AppLifecycleListener> mAppListener = ServiceLoader.load(AppLifecycleListener.class);
 
 
     @Override

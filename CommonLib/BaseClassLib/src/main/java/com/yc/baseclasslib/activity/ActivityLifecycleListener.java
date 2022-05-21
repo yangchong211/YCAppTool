@@ -1,9 +1,18 @@
-package com.yc.applicationlib.activity;
+package com.yc.baseclasslib.activity;
 
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : activity生命周期
+ *     revise:
+ * </pre>
+ */
 public abstract class ActivityLifecycleListener implements Application.ActivityLifecycleCallbacks {
 
     @Override

@@ -1,4 +1,4 @@
-package com.yc.applicationlib.application;
+package com.yc.applicationlib;
 
 public class BaseAppListener extends AbstractLifecycleListener{
 
