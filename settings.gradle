@@ -24,7 +24,7 @@ project(':BusinessInterface').projectDir = new File('Business/BusinessInterface'
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
-        ':EasyBleServer'
+        ':EasyBleServer', ':LogUpload'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -35,6 +35,7 @@ project(':ServerInterface').projectDir = new File('ServerLib/ServerInterface')
 project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
 project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')
 project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')
+project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
 
 
 
@@ -79,9 +80,9 @@ project(':NotificationLib').projectDir = new File('WidgetLib/NotificationLib')
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
-        ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,
-        ':AnimatorToolLib', ':AppTraceTool', ':LongevityLib',
-        ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib'
+        ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,
+        ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib',':EasyExecutor',
+        ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib', ':AppProcessLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
@@ -91,11 +92,13 @@ project(':LocaleHelperLib').projectDir = new File('ToolLib/LocaleHelperLib')
 project(':CountTimerLib').projectDir = new File('ToolLib/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('ToolLib/AnimatorToolLib')
 project(':AppTraceTool').projectDir = new File('ToolLib/AppTraceTool')
-project(':LongevityLib').projectDir = new File('ToolLib/LongevityLib')
+project(':LongAliveLib').projectDir = new File('ToolLib/LongAliveLib')
 project(':ThreadPoolLib').projectDir = new File('ToolLib/ThreadPoolLib')
 project(':ThreadTaskLib').projectDir = new File('ToolLib/ThreadTaskLib')
 project(':AutoCloserLib').projectDir = new File('ToolLib/AutoCloserLib')
-project(':AutoCloserLib').projectDir = new File('ToolLib/AutoCloserLib')
+project(':AppProcessLib').projectDir = new File('ToolLib/AppProcessLib')
+project(':EasyExecutor').projectDir = new File('ToolLib/EasyExecutor')
+project(':LocalShareLib').projectDir = new File('ToolLib/LocalShareLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -136,4 +139,6 @@ project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
 
 
-
+include ':EasyExecutor'
+include ':LocalShareLib'
+include ':LongAliveLib'

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.logupload">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <provider
+            android:name="com.yc.logupload.config.UploadInitProvider"
+            android:authorities="${applicationId}.UploadInitProvider"
+            android:exported="false" />
+    </application>
+
+
+</manifest>
