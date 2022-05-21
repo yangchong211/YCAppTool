@@ -14,6 +14,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.yc.jetpack.R
+import com.yc.jetpack.study.lifecycle.LifecycleActivity
 import com.yc.jetpack.study.navigation.NavigationActivity
 
 class LiveDataActivity : AppCompatActivity() {
@@ -40,6 +41,31 @@ class LiveDataActivity : AppCompatActivity() {
         initLiveData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        liveData?.value = "onResume"
+    }
+
+    override fun onPause() {
+        super.onPause()
+        liveData?.value = "onPause"
+    }
+
+    override fun onStop() {
+        super.onStop()
+        liveData?.value = "onStop"
+    }
+
+    override fun onStart() {
+        super.onStart()
+        liveData?.value = "onStart"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        liveData?.value = "onDestroy"
+    }
+
     private fun initView() {
         tvName = findViewById(R.id.tv_name)
         btnSave = findViewById(R.id.btn_save)
@@ -48,12 +74,13 @@ class LiveDataActivity : AppCompatActivity() {
     }
 
     private fun initLive(){
-        liveData = MutableLiveData()
+        liveData = MutableLiveData<String>()
         liveData?.observe(this, Observer<String?> { newText ->
             // 更新数据
             tvName?.text = newText
+            Log.i("LiveDataActivity: " , lifecycle.currentState.toString())
         })
-        liveData?.value = "小杨真的是一个逗比么"
+        liveData?.value = "onCreate"
     }
 
     private fun initLiveData() {
@@ -88,6 +115,10 @@ class LiveDataActivity : AppCompatActivity() {
                 }
                 viewModel?.getCurrentText()?.value = text
                 viewModel?.getNextText()?.value = "yc: $text"
+
+                if (count % 5 == 3){
+                    LifecycleActivity.startActivity(this@LiveDataActivity)
+                }
             }
         })
     }

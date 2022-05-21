@@ -22,4 +22,8 @@ class TextViewModel : ViewModel() {
 
     fun getNextText() : MutableLiveData<String> = mNextText
 
+    fun getNextText2() : MutableLiveData<String> {
+        return mNextText
+    }
+
 }

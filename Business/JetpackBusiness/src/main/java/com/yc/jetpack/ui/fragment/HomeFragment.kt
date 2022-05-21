@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.yc.jetpack.study.workmanager.WorkManagerActivity
 import com.yc.jetpack.R
+import com.yc.jetpack.study.binding.SolutionActivity
 import com.yc.jetpack.study.model.ViewModelActivity
+import com.yc.jetpack.study.room.RoomActivity
 
 class HomeFragment : Fragment(), View.OnClickListener {
     
@@ -65,6 +68,21 @@ class HomeFragment : Fragment(), View.OnClickListener {
             R.id.tv_view_model ->{
                 activity?.let {
                     ViewModelActivity.startActivity(it)
+                }
+            }
+            R.id.tv_data_binding ->{
+                activity?.let {
+                    SolutionActivity.startActivity(it)
+                }
+            }
+            R.id.tv_room ->{
+                activity?.let {
+                    RoomActivity.startActivity(it)
+                }
+            }
+            R.id.tv_work_manager ->{
+                activity?.let {
+                    WorkManagerActivity.startActivity(it)
                 }
             }
         }
