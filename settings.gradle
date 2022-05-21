@@ -130,4 +130,4 @@ project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
 
 
-
+include ':BaseClassLib'

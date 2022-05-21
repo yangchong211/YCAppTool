@@ -2,7 +2,13 @@ package com.yc.spi.loader;
 
 import java.util.Set;
 
-
+/**
+ * @author: 杨充
+ * @email : yangchong211@163.com
+ * @time : 2021/04/15
+ * @desc : 自定义ServiceRegistry，替代原生的
+ * @revise :
+ */
 public abstract class ServiceRegistry {
 
     private ServiceRegistry() {

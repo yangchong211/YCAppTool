@@ -5,8 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
+
 /**
- * 监听Home键按下的Wathcer
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2017/5/18
+ *     desc   : 监听Home键按下的Wathcer
+ *     revise :
+ * </pre>
  */
 public class HomeKeyWatcher {
 

@@ -3,15 +3,10 @@ package com.yc.lifehelper.application;
 import android.os.Looper;
 
 import com.yc.appstart.AppStartTask;
-import com.yc.appstart.TaskExecutorManager;
-import com.yc.netlib.utils.NetworkTool;
-import com.yc.toollib.crash.CrashHandler;
-import com.yc.toollib.crash.CrashListener;
 import com.yc.toolutils.logger.AppLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
 
 public class AppThreadTask extends AppStartTask {
     @Override

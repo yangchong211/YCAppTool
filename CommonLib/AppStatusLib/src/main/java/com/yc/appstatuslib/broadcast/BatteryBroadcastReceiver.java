@@ -7,14 +7,20 @@ import android.content.Intent;
 import android.os.BatteryManager;
 
 import com.yc.appstatuslib.AppStatusManager;
-import com.yc.appstatuslib.info.BatteryInfo;
+import com.yc.appstatuslib.info.AppBatteryInfo;
 
 /**
- * 因为系统规定监听电量变化的广播接收器不能静态注册，所以这里只能使用动态注册的方式了。
+ * <pre>
+ *     @author: yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2017/5/18
+ *     desc   : 因为系统规定监听电量变化的广播接收器不能静态注册，所以这里只能使用动态注册的方式了。
+ *     revise :
+ * </pre>
  */
 public class BatteryBroadcastReceiver extends BroadcastReceiver {
 
-    private BatteryInfo mBatteryInfo = new BatteryInfo();
+    private AppBatteryInfo mBatteryInfo = new AppBatteryInfo();
     private final AppStatusManager mManager;
 
     public BatteryBroadcastReceiver(AppStatusManager manger) {
@@ -36,7 +42,7 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
             int voltage = intent.getIntExtra("voltage", 0);
             int temperature = intent.getIntExtra("temperature", 0);
             String technology = intent.getStringExtra("technology");
-            BatteryInfo batteryInfo = BatteryInfo.buildBattery(status, health, level,
+            AppBatteryInfo batteryInfo = AppBatteryInfo.buildBattery(status, health, level,
                     scale, plugged, voltage, temperature, technology);
             if (this.notify(batteryInfo) && this.mManager != null) {
                 this.mBatteryInfo = batteryInfo;
@@ -46,7 +52,7 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
-    public boolean notify(BatteryInfo batteryInfo) {
+    public boolean notify(AppBatteryInfo batteryInfo) {
         return this.mBatteryInfo == null ||
                 this.mBatteryInfo.level != batteryInfo.level ||
                 !this.mBatteryInfo.status.equals(batteryInfo.status) ||
@@ -55,7 +61,7 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
                 this.mBatteryInfo.temperature != batteryInfo.temperature;
     }
 
-    public BatteryInfo getBatteryInfo() {
+    public AppBatteryInfo getBatteryInfo() {
         return this.mBatteryInfo;
     }
 }

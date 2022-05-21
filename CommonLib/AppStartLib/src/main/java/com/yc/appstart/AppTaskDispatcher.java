@@ -2,7 +2,6 @@ package com.yc.appstart;
 
 import android.os.Looper;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,32 +9,67 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @author: 杨充
+ * @email : yangchong211@163.com
+ * @time : 2019/03/15
+ * @desc : task分发
+ * @revise :
+ * GitHub ：https://github.com/yangchong211/YCEfficient
+ */
 public final class AppTaskDispatcher {
-    //所有任务需要等待的时间
+
+    /**
+     * 所有任务需要等待的时间
+     */
     private static final int WAITING_TIME = 10000;
-    //存放每个Task  （key= Class < ? extends AppStartTask>）
+    /**
+     * 存放每个Task  （key= Class < ? extends AppStartTask>）
+     */
     private final HashMap<Class<? extends AppStartTask>, AppStartTask> mTaskHashMap;
-    //每个Task的孩子 （key= Class < ? extends AppStartTask>）
+    /**
+     * 每个Task的孩子 （key= Class < ? extends AppStartTask>）
+     */
     private final HashMap<Class<? extends AppStartTask>, List<Class<? extends AppStartTask>>> mTaskChildHashMap;
-    //通过Add添加进来的所有任务
+    /**
+     * 通过Add添加进来的所有任务
+     */
     private final List<AppStartTask> mStartTaskList;
-    //拓扑排序后的所有任务
+    /**
+     * 拓扑排序后的所有任务
+     */
     private List<AppStartTask> mSortTaskList;
-    //拓扑排序后的主线程的任务
+    /**
+     * 拓扑排序后的主线程的任务
+     */
     private final List<AppStartTask> mSortMainThreadTaskList;
-    //拓扑排序后的子线程的任务
+    /**
+     * 拓扑排序后的子线程的任务
+     */
     private final List<AppStartTask> mSortThreadPoolTaskList;
-    //需要等待的任务总数，用于阻塞
+    /**
+     * 需要等待的任务总数，用于阻塞
+     */
     private CountDownLatch mCountDownLatch;
-    //需要等待的任务总数，用于CountDownLatch
+    /**
+     * 需要等待的任务总数，用于CountDownLatch
+     */
     private final AtomicInteger mNeedWaitCount;
-    //所有的任务开始时间，结束时间
+    /**
+     * 所有的任务开始时间，结束时间
+     */
     private long mStartTime, mFinishTime;
-    //所有阻塞任务的总超时时间
+    /**
+     * 所有阻塞任务的总超时时间
+     */
     private long mAllTaskWaitTimeOut;
+    /**
+     * 是否展示日志log
+     */
     private boolean isShowLog;
 
     public static synchronized AppTaskDispatcher create() {
+        //使用单例模式
         return new AppTaskDispatcher();
     }
 
@@ -83,7 +117,9 @@ public final class AppTaskDispatcher {
         return this;
     }
 
-    //分别处理主线程和子线程的任务
+    /**
+     * 分别处理主线程和子线程的任务
+     */
     private void initRealSortTask() {
         for (AppStartTask appStartTask : mSortTaskList) {
             if (appStartTask.isRunOnMainThread()) {
@@ -94,7 +130,9 @@ public final class AppTaskDispatcher {
         }
     }
 
-    //输出排好序的Task
+    /**
+     * 输出排好序的Task
+     */
     private void printSortTask() {
         StringBuilder sb = new StringBuilder();
         sb.append("当前所有任务排好的顺序为：");
@@ -108,7 +146,9 @@ public final class AppTaskDispatcher {
         AppTaskUtils.showLog(isShowLog, sb.toString());
     }
 
-    //发送任务
+    /**
+     * 发送任务
+     */
     private void dispatchAppStartTask() {
         //再发送非主线程的任务
         for (AppStartTask appStartTask : mSortThreadPoolTaskList) {
@@ -122,7 +162,10 @@ public final class AppTaskDispatcher {
         }
     }
 
-    //通知Children一个前置任务已完成
+    /**
+     * 通知Children一个前置任务已完成
+     * @param appStartTask      task
+     */
     void setNotifyChildren(AppStartTask appStartTask) {
         List<Class<? extends AppStartTask>> arrayList = mTaskChildHashMap.get(appStartTask.getClass());
         if (arrayList != null && arrayList.size() > 0) {
@@ -135,7 +178,10 @@ public final class AppTaskDispatcher {
         }
     }
 
-    //标记已经完成的Task
+    /**
+     * 标记已经完成的Task
+     * @param appStartTask      task
+     */
     void markAppStartTaskFinish(AppStartTask appStartTask) {
         AppTaskUtils.showLog(isShowLog, "任务完成了：" + appStartTask.getClass().getSimpleName());
         if (ifNeedWait(appStartTask)) {
@@ -144,12 +190,18 @@ public final class AppTaskDispatcher {
         }
     }
 
-    //是否需要等待，主线程的任务本来就是阻塞的，所以不用管
+    /**
+     * 是否需要等待，主线程的任务本来就是阻塞的
+     * @param task      task任务
+     * @return          是否阻塞
+     */
     private boolean ifNeedWait(AppStartTask task) {
         return !task.isRunOnMainThread() && task.needWait();
     }
 
-    //等待，阻塞主线程
+    /**
+     * 等待，阻塞主线程
+     */
     public void await() {
         try {
             if (mCountDownLatch == null) {

@@ -2,7 +2,15 @@ package com.yc.appstart;
 
 import java.io.Serializable;
 
-public class TaskSortModel implements Serializable {
+/**
+ * @author: 杨充
+ * @email : yangchong211@163.com
+ * @time : 2019/03/15
+ * @desc : task数据实体
+ * @revise :
+ * GitHub ：https://github.com/yangchong211/YCEfficient
+ */
+public final class TaskSortModel implements Serializable {
 
     private int in;
 

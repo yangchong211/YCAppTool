@@ -9,6 +9,14 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author: 杨充
+ * @email : yangchong211@163.com
+ * @time : 2019/03/15
+ * @desc : task工具类
+ * @revise :
+ * GitHub ：https://github.com/yangchong211/YCEfficient
+ */
 public final class AppTaskUtils {
 
     private static final String TAG = "AppStartTask ";

@@ -1,8 +1,17 @@
 package com.yc.appstatuslib.listener;
 
-import com.yc.appstatuslib.info.BatteryInfo;
-import com.yc.appstatuslib.info.ThreadInfo;
+import com.yc.appstatuslib.info.AppBatteryInfo;
+import com.yc.appstatuslib.info.AppThreadInfo;
 
+/**
+ * <pre>
+ *     @author: yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2017/5/18
+ *     desc   : base实现
+ *     revise :
+ * </pre>
+ */
 public class BaseStatusListener implements AppStatusListener{
 
     /*
@@ -72,16 +81,7 @@ public class BaseStatusListener implements AppStatusListener{
      * @param batteryInfo           电量信息
      */
     @Override
-    public void batteryStatusChange(BatteryInfo batteryInfo) {
-
-    }
-
-    /**
-     * app前后台状态监听
-     * @param isBack                true表示在推到后台，false表示回到前台
-     */
-    @Override
-    public void appOnFrontOrBackChange(boolean isBack) {
+    public void batteryStatusChange(AppBatteryInfo batteryInfo) {
 
     }
 
@@ -90,7 +90,7 @@ public class BaseStatusListener implements AppStatusListener{
      * @param threadInfo            线程属性
      */
     @Override
-    public void appThreadStatusChange(ThreadInfo threadInfo) {
+    public void appThreadStatusChange(AppThreadInfo threadInfo) {
 
     }
 }

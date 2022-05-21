@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.yc.applicationlib.activity.ActivityManager;
 import com.yc.appstart.AppStartTask;
-import com.yc.appstart.TaskExecutorManager;
 import com.yc.library.utils.AppLogHelper;
 import com.yc.lifehelper.MainActivity;
 import com.yc.lifehelper.listener.MainActivityListener;

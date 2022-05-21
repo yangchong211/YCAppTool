@@ -2,7 +2,16 @@ package com.yc.appstatuslib.info;
 
 import java.util.List;
 
-public class ThreadInfo {
+/**
+ * <pre>
+ *     @author: yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2017/5/18
+ *     desc   : 线程信息
+ *     revise :
+ * </pre>
+ */
+public final class AppThreadInfo {
 
     private int threadCount;
     private List<Thread> runningThreadCount;

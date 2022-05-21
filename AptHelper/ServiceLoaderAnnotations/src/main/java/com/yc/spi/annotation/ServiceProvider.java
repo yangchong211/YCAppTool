@@ -5,6 +5,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * @author: 杨充
+ * @email : yangchong211@163.com
+ * @time : 2021/04/15
+ * @desc : 接口注解类
+ * @revise :
+ */
 //@Target用来表示这个注解可以使用在哪些地方。比如：类、方法、属性、接口等等。
 //这里ElementType.TYPE 表示这个注解可以用来修饰：Class, interface or enum declaration。
 //当你用ContentView修饰一个方法时，编译器会提示错误。

@@ -6,6 +6,15 @@ import android.content.Intent;
 
 import com.yc.appstatuslib.AppStatusManager;
 
+/**
+ * <pre>
+ *     @author: yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2017/5/18
+ *     desc   : 屏幕监听广播
+ *     revise :
+ * </pre>
+ */
 public class ScreenBroadcastReceiver extends BroadcastReceiver {
 
     private AppStatusManager mManager;

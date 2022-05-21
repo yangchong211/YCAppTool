@@ -9,6 +9,15 @@ import android.net.NetworkInfo;
 
 import com.yc.appstatuslib.AppStatusManager;
 
+/**
+ * <pre>
+ *     @author: yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2017/5/18
+ *     desc   : 网络监听广播
+ *     revise :
+ * </pre>
+ */
 public class NetWorkBroadcastReceiver extends BroadcastReceiver {
 
     private final AppStatusManager mManager;

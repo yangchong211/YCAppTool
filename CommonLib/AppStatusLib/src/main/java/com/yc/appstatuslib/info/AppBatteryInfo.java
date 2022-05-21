@@ -4,7 +4,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public final class BatteryInfo {
+/**
+ * <pre>
+ *     @author: yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2017/5/18
+ *     desc   : app电量信息
+ *     revise :
+ * </pre>
+ */
+public final class AppBatteryInfo {
 
     public String technology = "";
     public int temperature;
@@ -16,13 +25,13 @@ public final class BatteryInfo {
     public String plugged = "";
     public String humanTime = "";
 
-    public BatteryInfo() {
+    public AppBatteryInfo() {
     }
 
-    public static BatteryInfo buildBattery(int status, int health, int level, int scale,
-                                           int plugged, int voltage, int temperature,
-                                           String technology) {
-        BatteryInfo batteryInfo = new BatteryInfo();
+    public static AppBatteryInfo buildBattery(int status, int health, int level, int scale,
+                                              int plugged, int voltage, int temperature,
+                                              String technology) {
+        AppBatteryInfo batteryInfo = new AppBatteryInfo();
         batteryInfo.status = getStatus(status);
         batteryInfo.health = getHealth(health);
         batteryInfo.level = level;
@@ -60,11 +69,11 @@ public final class BatteryInfo {
                 return "plugged ac";
             case 2:
                 return "plugged usb";
+            case 4:
+                return "plugged wireless";
             case 3:
             default:
                 return "unknown-Plugged - " + plugged;
-            case 4:
-                return "plugged wireless";
         }
     }
 
@@ -89,11 +98,9 @@ public final class BatteryInfo {
         }
     }
 
+    @Override
     public String toString() {
-        return "BatteryInfo{technology='" + this.technology + '\'' + ", temperature=" +
-                this.temperature + ", voltage=" + this.voltage + ", level=" +
-                this.level + ", scale=" + this.scale + ", status=" + this.status + ", health=" +
-                this.health + ", plugged=" + this.plugged + '}';
+        return toStringInfo();
     }
 
     public String toStringInfo(){

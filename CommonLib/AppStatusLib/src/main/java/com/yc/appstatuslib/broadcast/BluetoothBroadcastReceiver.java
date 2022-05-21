@@ -8,6 +8,15 @@ import android.content.Intent;
 
 import com.yc.appstatuslib.AppStatusManager;
 
+/**
+ * <pre>
+ *     @author: yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2017/5/18
+ *     desc   : 蓝牙监听广播
+ *     revise :
+ * </pre>
+ */
 public final class BluetoothBroadcastReceiver extends BroadcastReceiver {
 
     private final AppStatusManager mManager;

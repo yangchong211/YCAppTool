@@ -8,7 +8,7 @@ ext {
     isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
     isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
     isAnimApplication = false
-    
+
     android = [
             compileSdkVersion: 29,
             buildToolsVersion: "29.0.0",
@@ -30,6 +30,9 @@ ext {
     recyclerviewVersion = '1.0.0'
     multidexVersion = '1.0.2'
 
+    //AndroidX系列ktx
+    activityKtx = '1.4.0'
+
     //kotlin系列
     kotlin_version = '1.4.31'
     kotlinxVersion = '1.0.1'
@@ -39,8 +42,10 @@ ext {
     coreVersion = '1.0.0'
     databindingVersion = '3.2.1'
     lifecycleVersion = '2.2.0'
+    liveDataVersion = '2.2.0'
     archLifecycleVersion = '2.2.0'
     roomVersion = '2.0.0'
+    workVersion = '2.0.0'
 
     //第三方库系列
     retrofitSdkVersion = "2.4.0"
@@ -49,6 +54,7 @@ ext {
     gsonVersion = "2.8.5"
     zxingVersion = "3.3.3"
     permissionsVersion = "1.0.1"
+
 
     dependencies = [
             //AndroidX系列
@@ -65,25 +71,30 @@ ext {
 
             //jetpack系列
             core                      : "androidx.core:core:${coreVersion}",
-            roomRuntime            : "androidx.room:room-runtime:${roomVersion}",
-            roomCompiler           : "androidx.room:room-compiler:${roomVersion}",
+            roomRuntime               : "androidx.room:room-runtime:${roomVersion}",
+            roomCompiler              : "androidx.room:room-compiler:${roomVersion}",
             databinding               : "androidx.databinding:databinding-common:${databindingVersion}",
             lifecycle                 : "androidx.lifecycle:lifecycle-extensions:${archLifecycleVersion}",
-            lifecycleCompiler      : "androidx.lifecycle:lifecycle-compiler:${archLifecycleVersion}",
+            lifecycleCompiler         : "androidx.lifecycle:lifecycle-compiler:${archLifecycleVersion}",
             lifecycleRuntime          : "androidx.lifecycle:lifecycle-runtime:${archLifecycleVersion}",
+            livedataCore              : "androidx.lifecycle:lifecycle-livedata-core:${liveDataVersion}",
+            livedataKtx               : "androidx.lifecycle:lifecycle-livedata-ktx:${liveDataVersion}",
+            workKtx                   : "androidx.work:work-runtime-ktx:${workVersion}",
+            activityKtx               : "androidx.activity:activity-ktx:${activityKtx}",
+
 
             //kotlin
             kotlinxCoroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxVersion",
             kotlinxCoroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinxVersion",
-            kotlinxJdk                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+            kotlinxJdk                : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
 
             //network
             retrofit                  : "com.squareup.retrofit2:retrofit:$retrofitSdkVersion",
             "retrofit-converter-gson" : "com.squareup.retrofit2:converter-gson:$retrofitSdkVersion",
             "retrofit-adapter-rxjava2": "com.squareup.retrofit2:adapter-rxjava2:$retrofitSdkVersion",
             okhttp                    : "com.squareup.okhttp3:okhttp:$okhttpVersion",
-            rxandroid2              : "io.reactivex.rxjava2:rxandroid:2.1.0",
-            rxjava2                 : "io.reactivex.rxjava2:rxjava:2.1.11",
+            rxandroid2                : "io.reactivex.rxjava2:rxandroid:2.1.0",
+            rxjava2                   : "io.reactivex.rxjava2:rxjava:2.1.11",
             gson                      : "com.google.code.gson:gson:$gsonVersion",
             glide                     : "com.github.bumptech.glide:glide:$glideSdkVersion",
             "glide-compiler"          : "com.github.bumptech.glide:compiler:$glideSdkVersion",
@@ -94,6 +105,28 @@ ext {
             "YCCustomTextLib"         : "cn.yc:YCCustomTextLib:2.1.4",
             "YCGalleryLib"            : "cn.yc:YCGalleryLib:1.1.5",
             "YCVideoPlayerLib"        : "cn.yc:YCVideoPlayerLib:2.6.6",
+            //widget库
+            //https://github.com/yangchong211/YCWidgetLib
+            "ShadowConfig"            : "com.github.yangchong211.YCWidgetLib:ShadowConfig:1.0.5",
+            "RedDotView"              : "com.github.yangchong211.YCWidgetLib:RedDotView:1.0.5",
+            "ExpandPager"             : "com.github.yangchong211.YCWidgetLib:ExpandPager:1.0.5",
+            "ExpandLib"               : "com.github.yangchong211.YCWidgetLib:ExpandLib:1.0.5",
+            "CardViewLib"             : "com.github.yangchong211.YCWidgetLib:CardViewLib:1.0.5",
+            "RoundCorners"            : "com.github.yangchong211.YCWidgetLib:RoundCorners:1.0.5",
+
+            //线程池
+            //https://github.com/yangchong211/YCThreadPool
+            "ThreadPoolLib"           : "com.github.yangchong211.YCThreadPool:ThreadPoolLib:1.3.7",
+            "ThreadTaskLib"           : "com.github.yangchong211.YCThreadPool:ThreadTaskLib:1.3.7",
+            "EasyExecutor"            : "com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.7",
+
+            //效率优化
+            //https://github.com/yangchong211/YCEfficient
+            "AppStartLib"             : "com.github.yangchong211.YCEfficient:AppStartLib:1.3.1",
+            "AppProcessLib"           : "com.github.yangchong211.YCEfficient:AppProcessLib:1.3.1",
+            "AutoCloserLib"           : "com.github.yangchong211.YCEfficient:AutoCloserLib:1.3.1",
+
+            //弹窗库
 
             //tools
             "utilcode"                : "com.blankj:utilcode:1.12.5",

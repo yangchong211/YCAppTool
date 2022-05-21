@@ -8,7 +8,13 @@ import java.util.LinkedHashSet;
 import java.util.ServiceConfigurationError;
 import java.util.Set;
 
-
+/**
+ * @author: 杨充
+ * @email : yangchong211@163.com
+ * @time : 2021/04/15
+ * @desc : 自定义ServiceLoader，替代原生的
+ * @revise :
+ */
 public final class ServiceLoader<S> implements Iterable<S> {
 
     public static <S> ServiceLoader<S> load(final Class<S> serviceClass) {

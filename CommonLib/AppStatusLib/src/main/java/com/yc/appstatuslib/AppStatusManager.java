@@ -1,74 +1,70 @@
 package com.yc.appstatuslib;
 
-import android.app.Application;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.IntentFilter;
 
+import com.yc.appprocesslib.AppStateMonitor;
 import com.yc.appstatuslib.broadcast.BatteryBroadcastReceiver;
 import com.yc.appstatuslib.broadcast.BluetoothBroadcastReceiver;
 import com.yc.appstatuslib.broadcast.GpsBroadcastReceiver;
 import com.yc.appstatuslib.broadcast.NetWorkBroadcastReceiver;
 import com.yc.appstatuslib.broadcast.ScreenBroadcastReceiver;
 import com.yc.appstatuslib.broadcast.WifiBroadcastReceiver;
-import com.yc.appstatuslib.info.BatteryInfo;
-import com.yc.appstatuslib.info.ThreadInfo;
+import com.yc.appstatuslib.info.AppBatteryInfo;
+import com.yc.appstatuslib.info.AppThreadInfo;
+import com.yc.appstatuslib.listener.AppLogListener;
 import com.yc.appstatuslib.listener.AppStatusListener;
-import com.yc.appstatuslib.listener.TraceLogListener;
 import com.yc.appstatuslib.utils.ThreadManagerUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2017/5/18
+ *     desc   : app广播状态管理
+ *     revise :
+ * </pre>
+ */
 public final class AppStatusManager {
 
     private final List<AppStatusListener> mAppStatusListener;
-    private final ResourceCollect mResourceCollect;
     private final BatteryBroadcastReceiver mBatteryReceiver;
     private final GpsBroadcastReceiver mGpsReceiver;
     private final NetWorkBroadcastReceiver mNetWorkReceiver;
     private final ScreenBroadcastReceiver mScreenReceiver;
     private final WifiBroadcastReceiver mWifiBroadcastReceiver;
     private final BluetoothBroadcastReceiver mBluetoothReceiver;
-    private final AppStatus mAppStatus;
     private final Context mContext;
     private final boolean threadSwitchOn;
 
-    private AppStatusManager(AppStatusManager.Builder builder) {
-        this.mAppStatusListener = new ArrayList<>();
-        this.mBatteryReceiver = new BatteryBroadcastReceiver(this);
-        this.mGpsReceiver = new GpsBroadcastReceiver(this);
-        this.mNetWorkReceiver = new NetWorkBroadcastReceiver(this);
-        this.mScreenReceiver = new ScreenBroadcastReceiver(this);
-        this.mWifiBroadcastReceiver = new WifiBroadcastReceiver(this);
-        this.mBluetoothReceiver = new BluetoothBroadcastReceiver(this);
-        this.mAppStatus = new AppStatus(this);
-        this.mContext = builder.context;
-        this.threadSwitchOn = builder.threadSwitchOn;
-        this.mResourceCollect = (new ResourceCollect.Builder())
-                .manager(this)
-                .traceLog(builder.traceLog)
-                .file(builder.file)
-                .interval(builder.interval)
-                .builder();
-        this.init();
+    private AppStatusManager(Builder builder) {
+        mAppStatusListener = new ArrayList<>();
+        mBatteryReceiver = new BatteryBroadcastReceiver(this);
+        mGpsReceiver = new GpsBroadcastReceiver(this);
+        mNetWorkReceiver = new NetWorkBroadcastReceiver(this);
+        mScreenReceiver = new ScreenBroadcastReceiver(this);
+        mWifiBroadcastReceiver = new WifiBroadcastReceiver(this);
+        mBluetoothReceiver = new BluetoothBroadcastReceiver(this);
+        mContext = builder.context;
+        threadSwitchOn = builder.threadSwitchOn;
+        init();
     }
 
+    /**
+     * 注册广播
+     */
     private void init() {
-        if (this.mResourceCollect != null) {
-            this.mResourceCollect.destroy();
-        }
-        this.initBatteryReceiver(this.mContext);
-        this.initGpsReceiver(this.mContext);
-        this.initNetworkReceiver(this.mContext);
-        this.initScreenReceiver(this.mContext);
-        this.initWifiReceiver(this.mContext);
-        this.initBluetoothReceiver(this.mContext);
-        if (this.mResourceCollect != null) {
-            this.mResourceCollect.init();
-        }
-        this.mAppStatus.init((Application)this.mContext.getApplicationContext());
+        initBatteryReceiver(mContext);
+        initGpsReceiver(mContext);
+        initNetworkReceiver(mContext);
+        initScreenReceiver(mContext);
+        initWifiReceiver(mContext);
+        initBluetoothReceiver(mContext);
     }
 
     /**
@@ -79,7 +75,7 @@ public final class AppStatusManager {
     private void initBatteryReceiver(Context context) {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.intent.action.BATTERY_CHANGED");
-        context.registerReceiver(this.mBatteryReceiver, filter);
+        context.registerReceiver(mBatteryReceiver, filter);
     }
 
     /**
@@ -89,7 +85,7 @@ public final class AppStatusManager {
     private void initGpsReceiver(Context context) {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.location.PROVIDERS_CHANGED");
-        context.registerReceiver(this.mGpsReceiver, filter);
+        context.registerReceiver(mGpsReceiver, filter);
     }
 
     /**
@@ -99,7 +95,7 @@ public final class AppStatusManager {
     private void initNetworkReceiver(Context context) {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        context.registerReceiver(this.mNetWorkReceiver, filter);
+        context.registerReceiver(mNetWorkReceiver, filter);
     }
 
     /**
@@ -111,7 +107,7 @@ public final class AppStatusManager {
         filter.addAction("android.intent.action.SCREEN_ON");
         filter.addAction("android.intent.action.SCREEN_OFF");
         filter.addAction("android.intent.action.USER_PRESENT");
-        context.registerReceiver(this.mScreenReceiver, filter);
+        context.registerReceiver(mScreenReceiver, filter);
     }
 
     /**
@@ -121,7 +117,7 @@ public final class AppStatusManager {
     private void initWifiReceiver(Context context) {
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
-        context.registerReceiver(this.mWifiBroadcastReceiver, filter);
+        context.registerReceiver(mWifiBroadcastReceiver, filter);
     }
 
 
@@ -134,52 +130,41 @@ public final class AppStatusManager {
         filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
         filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
         //filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        context.registerReceiver(this.mBluetoothReceiver, filter);
+        context.registerReceiver(mBluetoothReceiver, filter);
     }
 
     /**
      * 解绑操作
      */
     public void destroy() {
-        this.mContext.unregisterReceiver(this.mBatteryReceiver);
-        this.mContext.unregisterReceiver(this.mGpsReceiver);
-        this.mContext.unregisterReceiver(this.mNetWorkReceiver);
-        this.mContext.unregisterReceiver(this.mScreenReceiver);
-        this.mContext.unregisterReceiver(this.mBluetoothReceiver);
-        this.mAppStatusListener.clear();
-        if (this.mResourceCollect != null) {
-            this.mResourceCollect.destroy();
-        }
+        mContext.unregisterReceiver(mBatteryReceiver);
+        mContext.unregisterReceiver(mGpsReceiver);
+        mContext.unregisterReceiver(mNetWorkReceiver);
+        mContext.unregisterReceiver(mScreenReceiver);
+        mContext.unregisterReceiver(mBluetoothReceiver);
+        mAppStatusListener.clear();
     }
 
-    public void collection() {
-        if (this.mResourceCollect != null) {
-            this.mResourceCollect.sendCollectionMsg();
-        }
-    }
-
-    public BatteryInfo getBatteryInfo() {
-        return this.mBatteryReceiver.getBatteryInfo();
+    public AppBatteryInfo getBatteryInfo() {
+        return mBatteryReceiver.getBatteryInfo();
     }
 
     public void registerAppStatusListener(AppStatusListener listener) {
-        if (this.mAppStatusListener != null) {
-            this.mAppStatusListener.add(listener);
-            this.mAppStatus.registerAppStatusListener(listener);
+        if (mAppStatusListener != null) {
+            mAppStatusListener.add(listener);
         }
     }
 
     public boolean unregisterAppStatusListener(AppStatusListener listener) {
-        this.mAppStatus.unregisterAppStatusListener(listener);
-        return mAppStatusListener != null && this.mAppStatusListener.remove(listener);
+        return mAppStatusListener != null && mAppStatusListener.remove(listener);
     }
 
     public int getAppStatus() {
-        return this.mAppStatus.getAppStatus();
+        return AppStateMonitor.getInstance().getState();
     }
 
     public void dispatcherWifiState(boolean state) {
-        Object[] listeners = this.mAppStatusListener.toArray();
+        Object[] listeners = mAppStatusListener.toArray();
         if (listeners!=null){
             for (Object listener : listeners) {
                 ((AppStatusListener) listener).wifiStatusChange(state);
@@ -188,7 +173,7 @@ public final class AppStatusManager {
     }
 
     public void dispatcherBluetoothState(boolean state) {
-        Object[] listeners = this.mAppStatusListener.toArray();
+        Object[] listeners = mAppStatusListener.toArray();
         if (listeners!=null){
             for (Object listener : listeners) {
                 ((AppStatusListener) listener).bluetoothStatusChange(state);
@@ -197,7 +182,7 @@ public final class AppStatusManager {
     }
 
     public void dispatcherScreenState(boolean state) {
-        Object[] listeners = this.mAppStatusListener.toArray();
+        Object[] listeners = mAppStatusListener.toArray();
         if (listeners!=null){
             for (Object listener : listeners) {
                 ((AppStatusListener) listener).screenStatusChange(state);
@@ -206,7 +191,7 @@ public final class AppStatusManager {
     }
 
     public void dispatcherGpsState(boolean state) {
-        Object[] listeners = this.mAppStatusListener.toArray();
+        Object[] listeners = mAppStatusListener.toArray();
         if (listeners!=null){
             for (Object listener : listeners) {
                 ((AppStatusListener) listener).gpsStatusChange(state);
@@ -215,8 +200,8 @@ public final class AppStatusManager {
     }
 
     public void dispatcherNetworkState(boolean state) {
-        if (this.mAppStatusListener != null && this.mAppStatusListener.size() != 0) {
-            Object[] listeners = this.mAppStatusListener.toArray();
+        if (mAppStatusListener != null && mAppStatusListener.size() != 0) {
+            Object[] listeners = mAppStatusListener.toArray();
             if (listeners!=null){
                 for (Object listener : listeners) {
                     ((AppStatusListener) listener).networkStatusChange(state);
@@ -225,18 +210,17 @@ public final class AppStatusManager {
         }
     }
 
-    public void dispatcherBatteryState(BatteryInfo batteryInfo) {
-        Object[] listeners = this.mAppStatusListener.toArray();
+    public void dispatcherBatteryState(AppBatteryInfo batteryInfo) {
+        Object[] listeners = mAppStatusListener.toArray();
         if (listeners!=null){
             for (Object listener : listeners) {
                 ((AppStatusListener) listener).batteryStatusChange(batteryInfo);
             }
-            collection();
         }
     }
 
     public void dispatcherUserPresent() {
-        Object[] listeners = this.mAppStatusListener.toArray();
+        Object[] listeners = mAppStatusListener.toArray();
         if (listeners!=null){
             for (Object listener : listeners) {
                 ((AppStatusListener) listener).screenUserPresent();
@@ -245,10 +229,10 @@ public final class AppStatusManager {
     }
 
     public void dispatcherThreadInfo(){
-        Object[] listeners = this.mAppStatusListener.toArray();
+        Object[] listeners = mAppStatusListener.toArray();
         if (threadSwitchOn){
             ThreadManagerUtils threadManager = ThreadManagerUtils.getInstance();
-            ThreadInfo threadInfo = new ThreadInfo();
+            AppThreadInfo threadInfo = new AppThreadInfo();
             threadInfo.setThreadCount(threadManager.getThreadCount());
             threadInfo.setBlockThreadCount(threadManager.getBlockThread());
             threadInfo.setRunningThreadCount(threadManager.getRunningThread());
@@ -278,7 +262,7 @@ public final class AppStatusManager {
         /**
          * 日志监听
          */
-        private TraceLogListener traceLog;
+        private AppLogListener traceLog;
         /**
          * 是否开启线程监控，默认false
          */
@@ -287,27 +271,27 @@ public final class AppStatusManager {
         public Builder() {
         }
 
-        public AppStatusManager.Builder interval(int interval) {
+        public Builder interval(int interval) {
             this.interval = interval;
             return this;
         }
 
-        public AppStatusManager.Builder file(File file) {
+        public Builder file(File file) {
             this.file = file;
             return this;
         }
 
-        public AppStatusManager.Builder context(Context context) {
+        public Builder context(Context context) {
             this.context = context;
             return this;
         }
 
-        public AppStatusManager.Builder traceLog(TraceLogListener trace) {
+        public Builder traceLog(AppLogListener trace) {
             this.traceLog = trace;
             return this;
         }
 
-        public AppStatusManager.Builder threadSwitchOn(boolean threadSwitchOn) {
+        public Builder threadSwitchOn(boolean threadSwitchOn) {
             this.threadSwitchOn = threadSwitchOn;
             return this;
         }
