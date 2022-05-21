@@ -23,8 +23,8 @@ project(':BusinessInterface').projectDir = new File('Business/BusinessInterface'
 
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
-        ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib'
-//        ':signal-hooker'
+        ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
+        ':EasyBleServer'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -34,7 +34,9 @@ project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
 project(':ServerInterface').projectDir = new File('ServerLib/ServerInterface')
 project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
 project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')
-//project(':signal-hooker').projectDir = new File('ServerLib/signal-hooker')
+project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')
+
+
 
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
@@ -93,13 +95,14 @@ project(':LongevityLib').projectDir = new File('ToolLib/LongevityLib')
 project(':ThreadPoolLib').projectDir = new File('ToolLib/ThreadPoolLib')
 project(':ThreadTaskLib').projectDir = new File('ToolLib/ThreadTaskLib')
 project(':AutoCloserLib').projectDir = new File('ToolLib/AutoCloserLib')
-
+project(':AutoCloserLib').projectDir = new File('ToolLib/AutoCloserLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
 include ':RouteCompiler', ':RouteManager', ':RouteAnnotations',':BuildTimeCostPlugin',
         ':ServiceLoaderApi', ':ServiceLoaderAnnotations', ':ServiceLoaderRegistry',
-        ':ServiceLoaderPlugin', ':ServiceLoaderProcessor', ':MethodTimePlugin'
+        ':ServiceLoaderPlugin', ':ServiceLoaderProcessor', ':MethodTimePlugin',
+        ':ServiceLoaderPlugin'
 project(':RouteCompiler').projectDir = new File('AptHelper/RouteCompiler')
 project(':RouteManager').projectDir = new File('AptHelper/RouteManager')
 project(':RouteAnnotations').projectDir = new File('AptHelper/RouteAnnotations')
@@ -131,5 +134,6 @@ project(':LeakAnalyzer').projectDir = new File('MonitorLib/LeakAnalyzer')
 project(':LeakWatcher').projectDir = new File('MonitorLib/LeakWatcher')
 project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
+
 
 

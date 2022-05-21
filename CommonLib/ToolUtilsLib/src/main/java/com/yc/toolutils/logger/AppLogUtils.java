@@ -11,7 +11,6 @@ import android.util.Log;
 import androidx.annotation.IntDef;
 import androidx.annotation.IntRange;
 
-
 import com.yc.toolutils.AppToolUtils;
 
 import org.json.JSONArray;
@@ -22,7 +21,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.lang.annotation.Retention;

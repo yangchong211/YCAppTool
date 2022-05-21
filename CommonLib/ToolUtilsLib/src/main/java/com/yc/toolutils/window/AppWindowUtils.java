@@ -11,7 +11,6 @@ import android.util.DisplayMetrics;
 import android.view.Surface;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.yc.toolutils.AppToolUtils;
 import com.yc.toolutils.activity.AppActivityUtils;

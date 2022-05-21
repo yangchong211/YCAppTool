@@ -18,7 +18,6 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-
 import com.yc.toolutils.logger.AppLogUtils;
 import com.yc.toolutils.process.AppProcessUtils;
 

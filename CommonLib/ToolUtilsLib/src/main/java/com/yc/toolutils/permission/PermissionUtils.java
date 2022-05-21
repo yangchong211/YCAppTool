@@ -7,13 +7,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.WindowManager;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;

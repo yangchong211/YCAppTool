@@ -8,7 +8,6 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 
-
 import com.yc.toolutils.AppToolUtils;
 
 import java.lang.reflect.Method;
