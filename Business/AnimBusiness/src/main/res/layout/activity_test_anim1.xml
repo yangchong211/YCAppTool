@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/holo_blue_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn1"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="移动" />
+        <Button
+            android:id="@+id/btn2"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="透明"/>
+
+        <Button
+            android:id="@+id/btn3"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="旋转"/>
+        <Button
+            android:id="@+id/btn4"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="缩放"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/bg_lake_min"/>
+
+</LinearLayout>

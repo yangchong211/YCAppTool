@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.toastutils">
+
+    <application>
+        <provider
+            android:name="com.yc.toastutils.ToastProvider"
+            android:authorities="${applicationId}.UploadInitProvider"
+            android:exported="false" />
+    </application>
+
+</manifest>

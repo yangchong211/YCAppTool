@@ -139,5 +139,4 @@ dependencies {
     implementation project(path: ':ImageServer')
     implementation project(path: ':FragmentLib')
     implementation project(path: ':CountTimerLib')
-    api project(path: ':YCDialogLib')
 }

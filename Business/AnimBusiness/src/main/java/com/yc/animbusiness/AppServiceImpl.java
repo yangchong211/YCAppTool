@@ -1,8 +1,8 @@
 package com.yc.animbusiness;
 
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.businessinterface.AppServiceProvider;
 import com.yc.spi.annotation.ServiceProvider;
+import com.yc.toastutils.ToastUtils;
 
 @ServiceProvider(AppServiceProvider.class)
 public class AppServiceImpl implements AppServiceProvider {

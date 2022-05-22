@@ -1,9 +1,9 @@
 package com.yc.animbusiness;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.businessinterface.IAnimServiceProvider;
 import com.yc.spi.annotation.ServiceProvider;
+import com.yc.toastutils.ToastUtils;
 
 @ServiceProvider(IAnimServiceProvider.class)
 public class AnimProviderImpl implements IAnimServiceProvider {

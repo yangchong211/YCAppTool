@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha
+        android:duration="1000"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0" />
+    <!--
+    透明度控制动画效果 alpha
+    浮点型值：
+    fromAlpha 属性为动画起始时透明度
+    toAlpha   属性为动画结束时透明度
+    说明:
+    0.0表示完全透明
+    1.0表示完全不透明
+    以上值取0.0-1.0之间的float数据类型的数字
+    长整型值：
+    duration  属性为动画持续时间
+    说明:时间以毫秒为单位
+    -->
+</set>

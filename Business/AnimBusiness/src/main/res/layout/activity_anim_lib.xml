@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/base_tool_bar"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:background="@android:color/holo_blue_light"
+        android:gravity="center"
+        android:text="Hello World!"
+        android:textColor="@android:color/white"
+        android:layout_marginRight="8dp" />
+
+    <TextView
+        android:id="@+id/topView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/darker_gray"
+        android:gravity="center"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/topView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:gravity="center"
+        android:textColor="@android:color/white"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="81dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="HardcodedText,ContentDescription">
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/stop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="43dp" />
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="停止"
+            app:layout_constraintRight_toLeftOf="@+id/change"
+            app:layout_constraintLeft_toRightOf="@+id/start"
+            app:layout_constraintBottom_toBottomOf="@+id/start" />
+        <Button
+            android:id="@+id/change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="变化"
+            app:layout_constraintRight_toLeftOf="@+id/stop"
+            app:layout_constraintLeft_toRightOf="@+id/reverse"
+            app:layout_constraintBottom_toBottomOf="@+id/start" />
+
+        <Button
+            android:id="@+id/reverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="反转"
+            app:layout_constraintLeft_toRightOf="@+id/change"
+            app:layout_constraintBottom_toBottomOf="@+id/change"
+            android:layout_marginBottom="0dp"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintHorizontal_bias="0.262"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.305"
+            app:srcCompat="@mipmap/ic_launcher_round"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <ImageView
+            android:id="@+id/imageView_large"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@mipmap/ic_launcher_round"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintHorizontal_bias="0.708"
+            app:layout_constraintVertical_bias="0.704"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ShowUseCase"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/start" />
+
+
+        <TextView
+            android:id="@+id/vector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="vector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="50dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <com.yc.animbusiness.MyTextView
+            android:id="@+id/custom_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="92dp"
+            android:text="Custom view"
+            android:textSize="24sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_small" />
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RealAnimation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="-1dp"
+            app:layout_constraintRight_toRightOf="@+id/reverse" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

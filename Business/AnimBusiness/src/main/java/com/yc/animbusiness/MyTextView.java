@@ -1,9 +1,10 @@
 package com.yc.animbusiness;
 
 import android.content.Context;
+import android.util.AttributeSet;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
-import android.util.AttributeSet;
 
 import com.yc.animation.utils.LoggerUtil;
 

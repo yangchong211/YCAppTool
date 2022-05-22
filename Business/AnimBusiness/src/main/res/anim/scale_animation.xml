@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <scale
+        android:duration="1000"
+        android:fillAfter="false"
+        android:fromXScale="0.0"
+        android:fromYScale="0.0"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="1.4"
+        android:toYScale="1.4" />
+    <!--
+    尺寸伸缩动画效果 scale
+    属性：interpolator 指定一个动画的插入器
+    在我试验过程中，使用android.res.anim中的资源时候发现
+    有三种动画插入器:
+    accelerate_decelerate_interpolator  加速-减速 动画插入器
+    accelerate_interpolator             加速-动画插入器
+    decelerate_interpolator             减速- 动画插入器
+    其他的属于特定的动画效果
+    浮点型值：
+    fromXScale 属性为动画起始时 X坐标上的伸缩尺寸
+    toXScale   属性为动画结束时 X坐标上的伸缩尺寸
+    fromYScale 属性为动画起始时Y坐标上的伸缩尺寸
+    toYScale   属性为动画结束时Y坐标上的伸缩尺寸
+    说明:
+    以上四种属性值
+    0.0表示收缩到没有
+    1.0表示正常无伸缩
+    值小于1.0表示收缩
+    值大于1.0表示放大
+    pivotX     属性为动画相对于物件的X坐标的开始位置
+    pivotY     属性为动画相对于物件的Y坐标的开始位置
+    说明:
+    以上两个属性值 从0%-100%中取值
+    50%为物件的X或Y方向坐标上的中点位置
+    长整型值：
+    duration  属性为动画持续时间
+    说明:   时间以毫秒为单位
+    布尔型值:
+    fillAfter 属性 当设置为true ，该动画转化在动画结束后被应用
+    -->
+</set>

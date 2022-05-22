@@ -64,7 +64,8 @@ project(':AppInitCompiler').projectDir = new File('CommonLib/AppInitCompiler')
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':FragmentLib',':WidgetViewLib',':ZoomImageLib', ':LargeImageLib',
         ':SwipeBackLib', ':StatusBarLib', ':AppStateLib', ':WebViewLib',
-        ':YCDialogLib', ':FloatPageLib', ':NotifyMessage', ':NotificationLib'
+        ':ToastUtils', ':FloatPageLib', ':NotifyMessage', ':NotificationLib',
+        ':DialogFragment', ':SnackBar', ':PopupWindow', ':BaseDialog', ':RoundCorners'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
 project(':CustomWidget').projectDir = new File('WidgetLib/CustomWidget')
@@ -77,17 +78,23 @@ project(':SwipeBackLib').projectDir = new File('WidgetLib/SwipeBackLib')
 project(':StatusBarLib').projectDir = new File('WidgetLib/StatusBarLib')
 project(':AppStateLib').projectDir = new File('WidgetLib/AppStateLib')
 project(':WebViewLib').projectDir = new File('WidgetLib/WebViewLib')
-project(':YCDialogLib').projectDir = new File('WidgetLib/YCDialogLib')
 project(':FloatPageLib').projectDir = new File('WidgetLib/FloatPageLib')
 project(':NotifyMessage').projectDir = new File('WidgetLib/NotifyMessage')
 project(':NotificationLib').projectDir = new File('WidgetLib/NotificationLib')
+project(':DialogFragment').projectDir = new File('WidgetLib/DialogFragment')
+project(':SnackBar').projectDir = new File('WidgetLib/SnackBar')
+project(':PopupWindow').projectDir = new File('WidgetLib/PopupWindow')
+project(':BaseDialog').projectDir = new File('WidgetLib/BaseDialog')
+project(':ToastUtils').projectDir = new File('WidgetLib/ToastUtils')
+project(':RoundCorners').projectDir = new File('WidgetLib/RoundCorners')
 
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib',':EasyExecutor',
-        ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib', ':AppProcessLib'
+        ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib', ':AppProcessLib',
+        ':AnimatorHelper'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
@@ -104,6 +111,8 @@ project(':AutoCloserLib').projectDir = new File('ToolLib/AutoCloserLib')
 project(':AppProcessLib').projectDir = new File('ToolLib/AppProcessLib')
 project(':EasyExecutor').projectDir = new File('ToolLib/EasyExecutor')
 project(':LocalShareLib').projectDir = new File('ToolLib/LocalShareLib')
+project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
+
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */

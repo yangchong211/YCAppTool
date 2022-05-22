@@ -7,14 +7,13 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.yc.animation.AnimatorCompat;
 import com.yc.animation.animator.Animator;
 import com.yc.animation.listener.AbsAnimatorListener;
 import com.yc.animation.listener.AnimatorUpdateListener;
 import com.yc.animation.utils.LoggerUtil;
-import com.yc.animation.AnimatorCompat;
 import com.yc.library.base.mvp.BaseActivity;
 
 public class AnimMainActivity extends BaseActivity implements View.OnClickListener {
@@ -39,7 +38,7 @@ public class AnimMainActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public int getContentView() {
-        return R.layout.activity_anim_main;
+        return R.layout.activity_anim_lib;
     }
 
     @Override
