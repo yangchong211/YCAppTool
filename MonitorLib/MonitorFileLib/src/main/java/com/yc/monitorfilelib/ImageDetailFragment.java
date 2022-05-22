@@ -128,7 +128,7 @@ public class ImageDetailFragment extends Fragment {
             } else {
                 //先把文件转移到外部存储文件
                 File srcFile = new File(mFile.getPath());
-                String newFilePath = AppFileUtils.getFileSharePath() + "/imageShare.png";
+                String newFilePath = AppFileUtils.getExternalCachePath(mActivity) + "/imageShare.png";
                 File destFile = new File(newFilePath);
                 //拷贝文件，将data/data源文件拷贝到新的目标文件路径下
                 boolean copy = AppFileUtils.copyFile(srcFile, destFile);

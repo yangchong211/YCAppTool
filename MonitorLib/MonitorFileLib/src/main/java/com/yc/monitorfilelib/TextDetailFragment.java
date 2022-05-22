@@ -120,7 +120,7 @@ public class TextDetailFragment extends Fragment {
             } else {
                 //先把文件转移到外部存储文件
                 File srcFile = new File(mFile.getPath());
-                String newFilePath = AppFileUtils.getFileSharePath() + "/fileShare.txt";
+                String newFilePath = AppFileUtils.getExternalCachePath(mActivity) + "/fileShare.txt";
                 File destFile = new File(newFilePath);
                 //拷贝文件，将data/data源文件拷贝到新的目标文件路径下
                 boolean copy = AppFileUtils.copyFile(srcFile, destFile);
