@@ -43,7 +43,7 @@ project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
 include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
         'ComponentLib',':ApplicationLib',':AppStartLib',':AppBaseStore',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
-        ':AppInitCompiler',':AppLogLib'
+        ':AppInitCompiler',':AppLogLib',':AppRestartLib'
 project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
@@ -58,7 +58,7 @@ project(':AppInitApi').projectDir = new File('CommonLib/AppInitApi')
 project(':AppInitCommon').projectDir = new File('CommonLib/AppInitCommon')
 project(':AppInitCompiler').projectDir = new File('CommonLib/AppInitCompiler')
 project(':AppLogLib').projectDir = new File('CommonLib/AppLogLib')
-
+project(':AppRestartLib').projectDir = new File('CommonLib/AppRestartLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
