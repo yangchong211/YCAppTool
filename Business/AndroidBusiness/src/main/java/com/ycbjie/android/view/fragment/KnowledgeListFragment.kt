@@ -3,8 +3,8 @@ package com.ycbjie.android.view.fragment
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.NetworkUtils
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.yc.library.base.mvp.BaseLazyFragment
+import com.yc.toastutils.ToastUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.KnowledgeListContract
 import com.ycbjie.android.model.bean.HomeData

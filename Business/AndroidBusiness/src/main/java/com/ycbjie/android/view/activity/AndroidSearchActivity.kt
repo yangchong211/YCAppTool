@@ -19,9 +19,9 @@ import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.statusbar.bar.StateAppBar
+import com.yc.toastutils.ToastUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidSearchContract

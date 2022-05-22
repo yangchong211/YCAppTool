@@ -2,10 +2,7 @@ package com.yc.library.base.config;
 
 import android.app.Application;
 
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.Utils;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.configlayer.constant.Constant;
 import com.yc.library.base.callback.LogCallback;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
@@ -32,7 +29,6 @@ public enum AppConfig {
     public void initConfig(Application application){
         Utils.init(application);
         initThreadPool();
-        ToastUtils.init(application);
     }
 
 

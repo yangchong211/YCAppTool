@@ -13,7 +13,7 @@ apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
@@ -52,8 +52,19 @@ android {
         abortOnError false
     }
 
+    //fix：Failed resolution of: Landroidx/databinding/DataBinderMapperImpl;
+    //问题：使用dataBinding 时报错
+    //原因：使用模块化项目时，子模块使用dataBinding ,主app 也要添加dataBinding支持
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
     dataBinding {
         enabled true
+    }
+    viewBinding {
+        enabled = true
     }
 }
 
@@ -67,8 +78,9 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':XlogServer')
     implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':ApplicationLib')
     implementation project(path: ':BusinessInterface')
-
+    implementation project(path: ':BaseClassLib')
 
     implementation(rootProject.ext.dependencies["kotlinxJdk"])
     // Kotlin coroutines
@@ -83,9 +95,15 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:2.0.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.0.0"
     // liveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-core:2.2.0"
+    implementation(rootProject.ext.dependencies["livedataKtx"])
+    implementation(rootProject.ext.dependencies["livedataCore"])
     // viewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    // room 使用kapt，fix RoomDatabase_Impl does not exist
+    implementation(rootProject.ext.dependencies["roomRuntime"])
+    //kapt(rootProject.ext.dependencies["roomCompiler"])
+    annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
+    //WorkManager
+    implementation(rootProject.ext.dependencies["workKtx"])
 }

@@ -14,7 +14,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.StringUtils;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 
 import com.yc.configlayer.constant.Constant;
 import com.yc.library.base.mvp.BaseActivity;
@@ -23,6 +22,7 @@ import com.yc.toolutils.window.AppWindowUtils;
 import com.yc.webviewlib.inter.BridgeHandler;
 import com.yc.webviewlib.inter.CallBackFunction;
 import com.yc.webviewlib.inter.InterWebListener;
+import com.yc.webviewlib.utils.ToastUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 import com.yc.webviewlib.view.X5WebView;

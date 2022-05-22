@@ -5,11 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * 作者:王浩
- * 创建时间:2018/1/18
- * 描述:
- */
+
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.CLASS)
 public @interface AppInit {

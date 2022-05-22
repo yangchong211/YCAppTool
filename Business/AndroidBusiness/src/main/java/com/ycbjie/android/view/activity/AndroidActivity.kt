@@ -15,12 +15,12 @@ import androidx.viewpager.widget.ViewPager
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.LogUtils
 import com.google.android.material.tabs.TabLayout
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.yc.configlayer.constant.Constant
 import com.yc.library.base.adapter.BasePagerAdapter
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.library.web.WebViewActivity
 import com.yc.statusbar.bar.StateAppBar
+import com.yc.toastutils.ToastUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.presenter.AndroidPresenter

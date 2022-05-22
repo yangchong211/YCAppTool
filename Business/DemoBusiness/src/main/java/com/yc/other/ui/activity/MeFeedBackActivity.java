@@ -15,12 +15,12 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.IntentUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 
 import com.yc.configlayer.constant.Constant;
 import com.yc.customwidget.MultiEditInputView;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
+import com.yc.toastutils.ToastUtils;
 
 
 /**

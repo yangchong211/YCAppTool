@@ -6,10 +6,10 @@ import android.view.View
 import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.yc.configlayer.constant.Constant
 import com.yc.library.base.mvp.BaseLazyFragment
 import com.yc.library.web.WebViewActivity
+import com.yc.toastutils.ToastUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.tools.AndroidUtils

@@ -9,8 +9,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.NetworkUtils
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.yc.library.base.mvp.BaseLazyFragment
+import com.yc.toastutils.ToastUtils
 import com.yc.toolutils.other.DoShareUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.AndroidProjectContract

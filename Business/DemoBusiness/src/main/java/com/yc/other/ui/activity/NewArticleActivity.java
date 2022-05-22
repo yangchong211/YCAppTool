@@ -30,8 +30,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.pedaily.yc.ycdialoglib.fragment.CustomDialogFragment;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
+import com.yc.dialogfragment.CustomDialogFragment;
 import com.yc.photo.Matisse;
 import com.yc.photo.MimeType;
 import com.yc.photo.MyGlideEngine;
@@ -49,6 +48,7 @@ import com.yc.imageserver.transformations.TransformationScale;
 import com.yc.other.tool.ModelStorage;
 import com.yc.other.R;
 import com.yc.statusbar.bar.StateAppBar;
+import com.yc.toastutils.ToastUtils;
 
 
 import java.util.ArrayList;

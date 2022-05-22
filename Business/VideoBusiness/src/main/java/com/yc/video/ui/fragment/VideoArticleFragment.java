@@ -13,8 +13,8 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.library.base.mvp.BackLazyFragment;
+import com.yc.toastutils.ToastUtils;
 import com.yc.video.R;
 import com.yc.video.contract.VideoArticleContract;
 import com.yc.video.model.MultiNewsArticleDataBean;
@@ -22,7 +22,6 @@ import com.yc.video.presenter.VideoArticlePresenter;
 import com.yc.video.ui.activity.VideoActivity;
 import com.yc.video.ui.adapter.VideoArticleAdapter;
 
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener;
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener;
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener;

@@ -9,9 +9,9 @@ import android.text.TextWatcher
 import android.view.View
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
-import com.pedaily.yc.ycdialoglib.dialog.loading.ViewLoading
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils
+import com.yc.basedialog.loading.ViewLoading
 import com.yc.library.base.mvp.BaseActivity
+import com.yc.toastutils.ToastUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidLoginContract

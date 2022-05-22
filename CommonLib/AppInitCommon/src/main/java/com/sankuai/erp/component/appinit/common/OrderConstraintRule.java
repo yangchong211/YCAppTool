@@ -1,8 +1,6 @@
 package com.sankuai.erp.component.appinit.common;
 
 /**
- * 作者:王浩
- * 创建时间:2018/1/18
  * 描述:排序类型
  */
 public enum OrderConstraintRule {

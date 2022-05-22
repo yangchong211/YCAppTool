@@ -6,4 +6,5 @@
     <string name="home">首页</string>
     <string name="dashboard">工作台</string>
     <string name="deeplink">通知</string>
+    <string name="add_word">添加单词</string>
 </resources>

@@ -72,6 +72,7 @@ dependencies {
     implementation project(path: ':ImageServer')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':FragmentLib')
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.8'
 
     api project(path: ':BusinessInterface')
 }

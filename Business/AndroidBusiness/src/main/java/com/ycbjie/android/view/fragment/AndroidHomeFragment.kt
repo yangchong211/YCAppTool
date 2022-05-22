@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.NetworkUtils
 import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SizeUtils
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils
 import com.yc.cn.ycbannerlib.banner.view.BannerView
 import com.yc.library.base.mvp.BaseFragment
 import com.yc.toolutils.other.DoShareUtils
 import com.yc.library.web.WebViewActivity
+import com.yc.toastutils.ToastUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.BaseItemView
 import com.ycbjie.android.tools.base.KotlinConstant

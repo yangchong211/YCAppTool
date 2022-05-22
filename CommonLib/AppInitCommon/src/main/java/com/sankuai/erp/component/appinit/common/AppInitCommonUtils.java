@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 作者:王浩
- * 创建时间:2018/10/26
  * 描述:
  */
 public final class AppInitCommonUtils {

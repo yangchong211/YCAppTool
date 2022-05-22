@@ -1,10 +1,5 @@
 package com.sankuai.erp.component.appinit.common;
 
-/**
- * 作者:王浩
- * 创建时间:2018/1/18
- * 描述:
- */
 public class AppInitItem implements Comparable<AppInitItem> {
     public String appInitClassName;
     public IAppInit appInit;

@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 作者:王浩
- * 创建时间:2018/10/30
  * 描述:初始化配置回调接口
  */
 public interface AppInitCallback {

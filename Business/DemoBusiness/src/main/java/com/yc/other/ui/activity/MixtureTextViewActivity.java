@@ -21,7 +21,6 @@ import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.TextView;
 
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
 import com.yc.customwidget.spannable.VerticalImageSpan;
 import com.yc.customwidget.spannable.AlignImageSpan;
 import com.yc.customwidget.spannable.RoundBackgroundColorSpan;
@@ -29,6 +28,7 @@ import com.yc.customwidget.spannable.RoundedBackgroundSpan;
 import com.yc.customwidget.spannable.SpannableUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
+import com.yc.toastutils.ToastUtils;
 
 /**
  * <pre>

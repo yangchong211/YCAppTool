@@ -1,10 +1,6 @@
 package com.sankuai.erp.component.appinit.common;
 
-/**
- * 作者:王浩
- * 创建时间:2018/1/18
- * 描述:
- */
+
 public interface ModuleConsts {
     // 该库对应的 apt 模块坐标参数 key
     String APT_MODULE_COORDINATE_KEY = "AppInitAptModuleCoordinate";

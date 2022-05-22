@@ -71,7 +71,7 @@ public class PreviewArticleActivity extends AppCompatActivity {
         showDataSync(hyperEditData);
         Glide.with(getApplicationContext())
                 .asBitmap()
-                .load(R.drawable.shape_load_bg)
+                .load(R.drawable.shape_bg)
                 .placeholder(R.drawable.img_load_fail)
                 .error(R.drawable.img_load_fail)
                 .into(iv_image);

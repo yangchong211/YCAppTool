@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.blankj.utilcode.util.SizeUtils;
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -22,9 +23,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
-import com.pedaily.yc.ycdialoglib.toast.ToastUtils;
-import com.yc.banner.view.BannerView;
 import com.yc.baseclasslib.activity.ActivityManager;
+import com.yc.banner.view.BannerView;
+
 import com.yc.configlayer.constant.Constant;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.api.ConstantStringApi;
@@ -39,14 +40,19 @@ import com.yc.lifehelper.component.MarqueeComponent;
 import com.yc.lifehelper.component.RecommendComponent;
 import com.yc.lifehelper.component.SnapBannerComponent;
 import com.yc.lifehelper.component.ToolComponent;
+import com.yc.lifehelper.view.MyNotifyView;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
+import com.yc.notifymessage.CustomNotification;
+import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
+
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
+
 import pub.devrel.easypermissions.EasyPermissions;
 
 
@@ -172,7 +178,7 @@ public class MainActivity extends BaseActivity{
         initBar();
         initRecyclerView();
         initNav();
-        //AppAutoCloser.getInstance().start();
+        initNotify();
     }
 
     private void initFindViewID() {
@@ -296,6 +302,15 @@ public class MainActivity extends BaseActivity{
         llNavVideo.setOnClickListener(listener);
     }
 
+    private void initNotify() {
+        mNavView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sendNotification();
+            }
+        },8000);
+    }
+
 
     /**
      * 自定义菜单点击事件
@@ -335,6 +350,7 @@ public class MainActivity extends BaseActivity{
                         ToastUtils.showRoundRectToast( "后期接入讯飞语音");
                         break;
                     case R.id.setting:
+
                         break;
                     case R.id.quit:
                         ActivityManager.getInstance().appExist();
@@ -369,5 +385,14 @@ public class MainActivity extends BaseActivity{
         return super.onKeyDown(keyCode, event);
     }
 
+    private void sendNotification(){
+        new CustomNotification<Void>()
+                .setType(1)
+                .setCollapsible(false)
+                .setTimeOut(10000)
+                .setPriority(100)
+                .setNotificationView(new MyNotifyView(this))
+                .show();
+    }
 
 }
