@@ -3,15 +3,21 @@ package com.yc.lifehelper.application;
 import android.os.Looper;
 import android.util.Log;
 
-import com.yc.applicationlib.activity.ActivityManager;
+import com.yc.appprocesslib.AppStateMonitor;
+import com.yc.appprocesslib.StateListener;
 import com.yc.appstart.AppStartTask;
+import com.yc.baseclasslib.activity.ActivityManager;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.library.utils.AppLogHelper;
 import com.yc.lifehelper.MainActivity;
 import com.yc.lifehelper.listener.MainActivityListener;
 import com.yc.localelib.listener.OnLocaleChangedListener;
 import com.yc.localelib.service.LocaleService;
-import com.yc.longevitylib.LongevityMonitor;
-import com.yc.longevitylib.LongevityMonitorConfig;
+import com.yc.longalive.ILongAliveEventTrack;
+import com.yc.longalive.ILongAliveLogger;
+import com.yc.longalive.ILongAliveMonitorToggle;
+import com.yc.longalive.LongAliveMonitor;
+import com.yc.longalive.LongAliveMonitorConfig;
 import com.yc.toolutils.AppToolUtils;
 import com.yc.toolutils.logger.AppLogUtils;
 
@@ -34,8 +40,8 @@ public class AppCoreTask extends AppStartTask {
         LongevityMonitor();
         //activity栈自动管理
         initActivityManager();
-        //保活方案
-        //KeepAliveHelper.init(this);
+        //前后台
+        initAppProcess();
         long end = System.currentTimeMillis();
         boolean isMainThread = (Looper.myLooper() == Looper.getMainLooper());
         AppLogUtils.i("app init 1 task core total time : " + (end-start)
@@ -54,7 +60,7 @@ public class AppCoreTask extends AppStartTask {
 
     @Override
     public Executor runOnExecutor() {
-        return TaskExecutorManager.getInstance().getCPUThreadPoolExecutor();
+        return DelegateTaskExecutor.getInstance().getCpuThreadExecutor();
     }
 
     private void initLang(){
@@ -77,23 +83,23 @@ public class AppCoreTask extends AppStartTask {
 
 
     private void LongevityMonitor() {
-        LongevityMonitor.init(new LongevityMonitorConfig.Builder(MainApplication.getInstance())
+        LongAliveMonitor.init(new LongAliveMonitorConfig.Builder(MainApplication.getInstance())
                 // 业务埋点
-                .setEventTrack(new LongevityMonitorConfig.ILongevityMonitorOmegaEventTrack() {
+                .setEventTrack(new ILongAliveEventTrack() {
                     @Override
                     public void onEvent(HashMap<String, String> hashMap) {
 
                     }
                 })
                 // 保活监控 Apollo
-                .setToggle(new LongevityMonitorConfig.ILongevityMonitorApolloToggle() {
+                .setToggle(new ILongAliveMonitorToggle() {
                     @Override
                     public boolean isOpen() {
                         return true;
                     }
                 })
                 // 日志输出
-                .setLogger(new LongevityMonitorConfig.ILongevityMonitorLogger() {
+                .setLogger(new ILongAliveLogger() {
                     @Override
                     public void log(String log) {
                         AppLogUtils.i("Longevity--"+log);
@@ -108,6 +114,22 @@ public class AppCoreTask extends AppStartTask {
         ActivityManager.getInstance().init(MainApplication.getInstance());
         ActivityManager.getInstance().registerActivityLifecycleListener(MainActivity.class,
                 new MainActivityListener());
+    }
+
+    private void initAppProcess() {
+        AppStateMonitor.getInstance().registerStateListener(new StateListener() {
+            @Override
+            public void onInForeground() {
+                AppLogUtils.i("app state in foreground");
+                //ToastUtils.showRoundRectToast("前台");
+            }
+
+            @Override
+            public void onInBackground() {
+                AppLogUtils.i("app state in background");
+                //ToastUtils.showRoundRectToast("后台");
+            }
+        });
     }
 
 }

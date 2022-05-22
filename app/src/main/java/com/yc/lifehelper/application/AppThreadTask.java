@@ -3,6 +3,7 @@ package com.yc.lifehelper.application;
 import android.os.Looper;
 
 import com.yc.appstart.AppStartTask;
+import com.yc.autocloserlib.AppAutoCloser;
 import com.yc.toolutils.logger.AppLogUtils;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.List;
 public class AppThreadTask extends AppStartTask {
     @Override
     public void run() {
+        //app 进入后台一定时间后执行退出或者重启操作，有助于释放内存，减少用户电量消耗
+        initAutoCloser();
         long start = System.currentTimeMillis();
         try {
             Thread.sleep(100);
@@ -34,6 +37,13 @@ public class AppThreadTask extends AppStartTask {
         List<Class<? extends AppStartTask>> dependsTaskList = new ArrayList<>();
         dependsTaskList.add(AppDelayTask.class);
         return dependsTaskList;
+    }
+
+    private void initAutoCloser() {
+        AppAutoCloser appAutoCloser = AppAutoCloser.getInstance();
+        appAutoCloser.init(MainApplication.getInstance());
+        appAutoCloser.setTime(60);
+        appAutoCloser.start();
     }
 
 }

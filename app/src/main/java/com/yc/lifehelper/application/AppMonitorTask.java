@@ -3,6 +3,7 @@ package com.yc.lifehelper.application;
 import android.os.Looper;
 
 import com.yc.appstart.AppStartTask;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.toollib.crash.CrashHandler;
 import com.yc.toollib.crash.CrashListener;
@@ -45,9 +46,8 @@ public class AppMonitorTask extends AppStartTask {
 
     @Override
     public Executor runOnExecutor() {
-        return TaskExecutorManager.getInstance().getCPUThreadPoolExecutor();
+        return DelegateTaskExecutor.getInstance().getCpuThreadExecutor();
     }
-
 
 
     private void initCrash() {

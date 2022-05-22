@@ -4,9 +4,8 @@ import android.os.Looper;
 
 import com.yc.appstart.AppStartTask;
 import com.yc.appstatuslib.AppStatusManager;
-import com.yc.appstatuslib.backgroud.AppStateMonitor;
-import com.yc.appstatuslib.info.BatteryInfo;
-import com.yc.appstatuslib.info.ThreadInfo;
+import com.yc.appstatuslib.info.AppBatteryInfo;
+import com.yc.appstatuslib.info.AppThreadInfo;
 import com.yc.appstatuslib.listener.BaseStatusListener;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.logger.AppLogUtils;
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppDelayTask extends AppStartTask {
+
     @Override
     public void run() {
         long start = System.currentTimeMillis();
@@ -104,16 +104,6 @@ public class AppDelayTask extends AppStartTask {
             }
 
             @Override
-            public void appOnFrontOrBackChange(boolean isBack) {
-                super.appOnFrontOrBackChange(isBack);
-                if (isBack){
-                    AppLogUtils.i("app status app 推到后台");
-                } else {
-                    AppLogUtils.i("app status app 回到前台");
-                }
-            }
-
-            @Override
             public void bluetoothStatusChange(boolean isBluetoothOn) {
                 super.bluetoothStatusChange(isBluetoothOn);
                 if (isBluetoothOn){
@@ -124,31 +114,19 @@ public class AppDelayTask extends AppStartTask {
             }
 
             @Override
-            public void batteryStatusChange(BatteryInfo batteryInfo) {
+            public void batteryStatusChange(AppBatteryInfo batteryInfo) {
                 super.batteryStatusChange(batteryInfo);
                 AppLogUtils.i("app status 电量 " + batteryInfo.toStringInfo());
             }
 
             @Override
-            public void appThreadStatusChange(ThreadInfo threadInfo) {
+            public void appThreadStatusChange(AppThreadInfo threadInfo) {
                 super.appThreadStatusChange(threadInfo);
                 AppLogUtils.i("app status 所有线程数量 " + threadInfo.getThreadCount());
                 AppLogUtils.i("app status run线程数量 " + threadInfo.getRunningThreadCount().size());
                 AppLogUtils.i("app status wait线程数量 " + threadInfo.getWaitingThreadCount().size());
                 AppLogUtils.i("app status block线程数量 " + threadInfo.getBlockThreadCount().size());
                 AppLogUtils.i("app status timewait线程数量 " + threadInfo.getTimeWaitingThreadCount().size());
-            }
-        });
-
-        AppStateMonitor.getInstance().registerAppStateListener(new AppStateMonitor.AppStateListener() {
-            @Override
-            public void onInForeground() {
-                AppLogUtils.i("app status 在后台");
-            }
-
-            @Override
-            public void onInBackground() {
-                AppLogUtils.i("app status 在前台");
             }
         });
     }

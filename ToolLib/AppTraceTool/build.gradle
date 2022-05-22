@@ -35,5 +35,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.squareup.wire:wire-runtime:1.6.1'
+    implementation(rootProject.ext.dependencies["annotation"])
+    implementation project(path: ':AppLogLib')
 }

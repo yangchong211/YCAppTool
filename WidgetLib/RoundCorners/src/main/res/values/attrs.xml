@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="rRadius" format="dimension" />
+    <attr name="rLeftRadius" format="dimension" />
+    <attr name="rRightRadius" format="dimension" />
+    <attr name="rTopRadius" format="dimension" />
+    <attr name="rBottomRadius" format="dimension" />
+    <attr name="rTopLeftRadius" format="dimension" />
+    <attr name="rTopRightRadius" format="dimension" />
+    <attr name="rBottomLeftRadius" format="dimension" />
+    <attr name="rBottomRightRadius" format="dimension" />
+    <attr name="rStrokeWidth" format="dimension" />
+    <attr name="rStrokeColor" format="reference|color" />
+    <attr name="rNewLayer" format="boolean" />
+
+    <declare-styleable name="RoundCorner">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+        <attr name="rNewLayer" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundLinearLayout">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+        <attr name="rNewLayer" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundRelativeLayout">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+        <attr name="rNewLayer" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundFrameLayout">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+        <attr name="rNewLayer" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundTextView">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundView">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundButton">
+        <attr name="rRadius" />
+        <attr name="rLeftRadius" />
+        <attr name="rRightRadius" />
+        <attr name="rTopRadius" />
+        <attr name="rBottomRadius" />
+        <attr name="rTopLeftRadius" />
+        <attr name="rTopRightRadius" />
+        <attr name="rBottomLeftRadius" />
+        <attr name="rBottomRightRadius" />
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="rStrokeWidth" />
+        <attr name="rStrokeColor" />
+    </declare-styleable>
+</resources>
