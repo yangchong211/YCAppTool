@@ -2,7 +2,7 @@ package com.yc.netlib.ping;
 
 
 
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.IOException;
 import java.net.InetAddress;

@@ -5,7 +5,7 @@ import android.os.SystemClock;
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkTraceBean;
 import com.yc.netlib.utils.NetWorkUtils;
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

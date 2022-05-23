@@ -1,4 +1,4 @@
-package com.yc.toolutils.net;
+package com.yc.toolutils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,12 +17,15 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
+
 /**
  * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/08/02
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAppTool
+ *     email  : yangchong211@163.com
+ *     time  : 2016/09/23
  *     desc  : 网络相关工具类
+ *     revise:
  * </pre>
  */
 public final class AppNetworkUtils {
@@ -32,11 +35,29 @@ public final class AppNetworkUtils {
     }
 
     public enum NetworkType {
+        /**
+         * wifi
+         */
         NETWORK_WIFI,
+        /**
+         * 4g
+         */
         NETWORK_4G,
+        /**
+         * 3g
+         */
         NETWORK_3G,
+        /**
+         * 2g
+         */
         NETWORK_2G,
+        /**
+         * 未知网络
+         */
         NETWORK_UNKNOWN,
+        /**
+         * 其他
+         */
         NETWORK_NO
     }
 
@@ -59,7 +80,9 @@ public final class AppNetworkUtils {
     private static NetworkInfo getActiveNetworkInfo() {
         ConnectivityManager manager =
                 (ConnectivityManager) AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (manager == null) return null;
+        if (manager == null) {
+            return null;
+        }
         return manager.getActiveNetworkInfo();
     }
 
@@ -85,7 +108,9 @@ public final class AppNetworkUtils {
         try {
             TelephonyManager tm =
                     (TelephonyManager) AppToolUtils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
-            if (tm == null) return false;
+            if (tm == null) {
+                return false;
+            }
             @SuppressLint("PrivateApi")
             Method getMobileDataEnabledMethod = tm.getClass().getDeclaredMethod("getDataEnabled");
             if (null != getMobileDataEnabledMethod) {
@@ -108,7 +133,9 @@ public final class AppNetworkUtils {
         try {
             TelephonyManager tm =
                     (TelephonyManager) AppToolUtils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
-            if (tm == null) return;
+            if (tm == null) {
+                return;
+            }
             Method setMobileDataEnabledMethod =
                     tm.getClass().getDeclaredMethod("setDataEnabled", boolean.class);
             if (null != setMobileDataEnabledMethod) {
@@ -172,7 +199,9 @@ public final class AppNetworkUtils {
     public static void setWifiEnabled(final boolean enabled) {
         @SuppressLint("WifiManagerLeak")
         WifiManager manager = (WifiManager) AppToolUtils.getApp().getSystemService(Context.WIFI_SERVICE);
-        if (manager == null) return;
+        if (manager == null) {
+            return;
+        }
         if (enabled) {
             if (!manager.isWifiEnabled()) {
                 manager.setWifiEnabled(true);
@@ -299,7 +328,9 @@ public final class AppNetworkUtils {
                  NetworkInterface.getNetworkInterfaces(); nis.hasMoreElements(); ) {
                 NetworkInterface ni = nis.nextElement();
                 // 防止小米手机返回 10.0.2.15
-                if (!ni.isUp()) continue;
+                if (!ni.isUp()) {
+                    continue;
+                }
                 Enumeration<InetAddress> addresses = ni.getInetAddresses();
                 while (addresses.hasMoreElements()) {
                     InetAddress inetAddress = addresses.nextElement();
@@ -307,7 +338,9 @@ public final class AppNetworkUtils {
                         String hostAddress = inetAddress.getHostAddress();
                         boolean isIPv4 = hostAddress.indexOf(':') < 0;
                         if (useIPv4) {
-                            if (isIPv4) return hostAddress;
+                            if (isIPv4) {
+                                return hostAddress;
+                            }
                         } else {
                             if (!isIPv4) {
                                 int index = hostAddress.indexOf('%');

@@ -7,7 +7,7 @@ import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
 import com.yc.netlib.data.NetworkRecord;
 import com.yc.netlib.ui.NetworkManager;
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;

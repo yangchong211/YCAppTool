@@ -10,7 +10,7 @@ import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.yc.cn.ycbannerlib.banner.view.BannerView
 import com.yc.library.base.mvp.BaseFragment
-import com.yc.toolutils.other.DoShareUtils
+import com.yc.ycshare.DoShareUtils
 import com.yc.library.web.WebViewActivity
 import com.yc.toastutils.ToastUtils
 import com.ycbjie.android.R
@@ -130,7 +130,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                     //分享
                     R.id.ivMore ->{
                         val data = adapter.allData[position]
-                        DoShareUtils.shareText(activity,data.link,data.title)
+                        com.yc.ycshare.DoShareUtils.shareText(activity,data.link,data.title)
                     }
                 }
             }

@@ -12,7 +12,7 @@ import com.yc.toollib.crash.compat.ActivityKillerV24_V25;
 import com.yc.toollib.crash.compat.ActivityKillerV26;
 import com.yc.toollib.crash.compat.ActivityKillerV28;
 import com.yc.toollib.crash.compat.IActivityKiller;
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.lang.reflect.Field;
 

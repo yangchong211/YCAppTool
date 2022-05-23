@@ -1,6 +1,6 @@
 package com.ycbjie.android.tools.utils
 
-import com.yc.toolutils.logger.AppLogUtils
+import com.yc.toolutils.AppLogUtils
 
 class OnceInvokeUtils {
 

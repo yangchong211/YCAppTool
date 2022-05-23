@@ -11,8 +11,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.yc.netlib.utils.NetWorkUtils;
-import com.yc.toolutils.size.AppSizeUtils;
+import com.yc.toolutils.AppSizeUtils;
 
 import java.util.List;
 

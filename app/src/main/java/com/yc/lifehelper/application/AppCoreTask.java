@@ -19,7 +19,7 @@ import com.yc.longalive.ILongAliveMonitorToggle;
 import com.yc.longalive.LongAliveMonitor;
 import com.yc.longalive.LongAliveMonitorConfig;
 import com.yc.toolutils.AppToolUtils;
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.HashMap;
 import java.util.List;

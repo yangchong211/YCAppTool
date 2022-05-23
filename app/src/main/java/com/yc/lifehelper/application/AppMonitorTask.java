@@ -7,7 +7,7 @@ import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.toollib.crash.CrashHandler;
 import com.yc.toollib.crash.CrashListener;
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

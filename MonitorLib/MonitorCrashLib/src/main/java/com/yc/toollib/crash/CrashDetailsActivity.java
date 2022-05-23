@@ -32,9 +32,9 @@ import com.yc.toollib.tool.ToolAppManager;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.file.FileSaveUtils;
 import com.yc.toolutils.file.FileShareUtils;
-import com.yc.toolutils.image.CompressUtils;
+import com.yc.toolutils.CompressUtils;
 import com.yc.toolutils.screen.AppShotsUtils;
-import com.yc.toolutils.window.AppWindowUtils;
+import com.yc.toolutils.AppWindowUtils;
 
 import java.io.File;
 import java.util.List;

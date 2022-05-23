@@ -6,22 +6,19 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Environment;
 import android.text.TextUtils;
 
 import com.yc.toollib.BuildConfig;
-import com.yc.toollib.R;
 import com.yc.toollib.tool.ToolAppManager;
-import com.yc.toolutils.device.AppDeviceUtils;
+import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.file.AppFileUtils;
-import com.yc.toolutils.logger.AppLogUtils;
-import com.yc.toolutils.memory.AppMemoryUtils;
-import com.yc.toolutils.process.AppProcessUtils;
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppMemoryUtils;
+import com.yc.toolutils.AppProcessUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;

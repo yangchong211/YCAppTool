@@ -4,7 +4,7 @@ import android.os.Looper;
 
 import com.yc.appstart.AppStartTask;
 import com.yc.autocloserlib.AppAutoCloser;
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

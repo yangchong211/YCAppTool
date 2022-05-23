@@ -1,4 +1,4 @@
-package com.yc.toolutils.process;
+package com.yc.toolutils;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -202,7 +202,9 @@ public final class AppProcessUtils {
                             .queryUsageStats(UsageStatsManager.INTERVAL_BEST,
                                     beginTime, endTime);
                 }
-                if (usageStatsList == null || usageStatsList.isEmpty()) return "";
+                if (usageStatsList == null || usageStatsList.isEmpty()) {
+                    return "";
+                }
                 UsageStats recentStats = null;
                 for (UsageStats usageStats : usageStatsList) {
                     if (recentStats == null
@@ -252,7 +254,9 @@ public final class AppProcessUtils {
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> info = am.getRunningAppProcesses();
         Set<String> set = new HashSet<>();
-        if (info == null) return set;
+        if (info == null) {
+            return set;
+        }
         for (ActivityManager.RunningAppProcessInfo aInfo : info) {
             for (String pkg : aInfo.pkgList) {
                 am.killBackgroundProcesses(pkg);
@@ -280,16 +284,22 @@ public final class AppProcessUtils {
     public static boolean killBackgroundProcesses(Context context,@NonNull final String packageName) {
         ActivityManager am =
                 (ActivityManager) context.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
-        if (am == null) return false;
+        if (am == null) {
+            return false;
+        }
         List<ActivityManager.RunningAppProcessInfo> info = am.getRunningAppProcesses();
-        if (info == null || info.size() == 0) return true;
+        if (info == null || info.size() == 0) {
+            return true;
+        }
         for (ActivityManager.RunningAppProcessInfo aInfo : info) {
             if (Arrays.asList(aInfo.pkgList).contains(packageName)) {
                 am.killBackgroundProcesses(packageName);
             }
         }
         info = am.getRunningAppProcesses();
-        if (info == null || info.size() == 0) return true;
+        if (info == null || info.size() == 0) {
+            return true;
+        }
         for (ActivityManager.RunningAppProcessInfo aInfo : info) {
             if (Arrays.asList(aInfo.pkgList).contains(packageName)) {
                 return false;

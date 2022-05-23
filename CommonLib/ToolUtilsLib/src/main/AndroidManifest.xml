@@ -6,7 +6,7 @@
 
     <application>
         <activity
-            android:name=".permission.PermissionUtils$PermissionActivity"
+            android:name=".PermissionUtils$PermissionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:multiprocess="true"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />

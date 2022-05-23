@@ -1,4 +1,4 @@
-package com.yc.toolutils.activity;
+package com.yc.toolutils;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -24,10 +24,11 @@ import java.util.List;
 /**
  * <pre>
  *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAppTool
  *     email  : yangchong211@163.com
  *     time  : 2018/09/23
  *     desc  : Fragment 相关工具类
- *     revise:
+ *     revise: 借鉴AndroidUtils
  * </pre>
  */
 public final class FragmentUtils {

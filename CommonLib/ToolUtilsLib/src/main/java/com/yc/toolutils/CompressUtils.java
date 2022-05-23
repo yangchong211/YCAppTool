@@ -1,11 +1,9 @@
-package com.yc.toolutils.image;
+package com.yc.toolutils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-
-import com.yc.toolutils.window.AppWindowUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

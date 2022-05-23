@@ -1,4 +1,4 @@
-package com.yc.toolutils.permission;
+package com.yc.toolutils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,7 +23,16 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAppTool
+ *     email  : yangchong211@163.com
+ *     time  : 2016/09/23
+ *     desc  : 权限 相关工具类
+ *     revise:
+ * </pre>
+ */
 public final class PermissionUtils {
 
 

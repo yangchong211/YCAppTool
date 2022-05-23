@@ -18,7 +18,7 @@ import com.blankj.utilcode.util.StringUtils;
 import com.yc.configlayer.constant.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.toolutils.other.DoShareUtils;
-import com.yc.toolutils.window.AppWindowUtils;
+import com.yc.toolutils.AppWindowUtils;
 import com.yc.webviewlib.inter.BridgeHandler;
 import com.yc.webviewlib.inter.CallBackFunction;
 import com.yc.webviewlib.inter.InterWebListener;

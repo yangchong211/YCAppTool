@@ -1,30 +1,16 @@
 package com.yc.toollib.crash;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.media.MediaMetadataRetriever;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.MediaStore;
 
 import androidx.annotation.ColorInt;
-import androidx.core.content.FileProvider;
+
 import android.text.Spannable;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.DisplayMetrics;
-import android.widget.Toast;
 
 import com.yc.toolutils.file.AppFileUtils;
-import com.yc.toolutils.size.AppSizeUtils;
+import com.yc.toolutils.AppSizeUtils;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

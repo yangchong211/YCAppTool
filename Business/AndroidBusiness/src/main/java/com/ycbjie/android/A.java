@@ -2,9 +2,6 @@ package com.ycbjie.android;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.yc.toolutils.logger.AppLogUtils;
-import com.ycbjie.android.tools.utils.OnceInvokeUtils;
-
 import org.yczbj.ycrefreshviewlib.view.YCRefreshView;
 
 import java.util.HashMap;

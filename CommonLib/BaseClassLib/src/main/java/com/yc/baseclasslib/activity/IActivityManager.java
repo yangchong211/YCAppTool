@@ -11,8 +11,8 @@ package com.yc.baseclasslib.activity;
 public interface IActivityManager<T> {
 
     /**
-     *
-     * @param clazz
+     * 获取某个class
+     * @param clazz     clazz
      * @return
      */
     T get(Class<T> clazz);

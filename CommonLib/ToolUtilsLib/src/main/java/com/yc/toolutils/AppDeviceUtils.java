@@ -1,4 +1,4 @@
-package com.yc.toolutils.device;
+package com.yc.toolutils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -20,7 +20,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

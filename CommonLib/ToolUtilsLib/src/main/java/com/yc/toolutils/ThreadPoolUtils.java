@@ -1,4 +1,4 @@
-package com.yc.toolutils.thread;
+package com.yc.toolutils;
 
 
 import androidx.annotation.IntDef;
@@ -139,14 +139,7 @@ public final class ThreadPoolUtils {
         return exec.shutdownNow();
     }
 
-    /**
-     * 判断线程池是否已关闭
-     *
-     * @return {@code true}: 是<br>{@code false}: 否
-     */
-    public boolean isShutDown() {
-        return exec.isShutdown();
-    }
+
 
     /**
      * 关闭线程池后判断所有任务是否都已完成

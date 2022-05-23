@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

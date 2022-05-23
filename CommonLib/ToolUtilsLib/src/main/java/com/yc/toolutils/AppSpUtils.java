@@ -1,4 +1,4 @@
-package com.yc.toolutils.sp;
+package com.yc.toolutils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.collection.SimpleArrayMap;
-
-import com.yc.toolutils.AppToolUtils;
 
 import java.util.Collections;
 import java.util.Map;
@@ -44,7 +42,9 @@ public final class AppSpUtils {
      * @return {@link AppSpUtils}
      */
     public static AppSpUtils getInstance(String spName) {
-        if (isSpace(spName)) spName = "spUtils";
+        if (isSpace(spName)) {
+            spName = "spUtils";
+        }
         AppSpUtils spUtils = SP_UTILS_MAP.get(spName);
         if (spUtils == null) {
             spUtils = new AppSpUtils(spName);
@@ -409,7 +409,9 @@ public final class AppSpUtils {
     }
 
     private static boolean isSpace(final String s) {
-        if (s == null) return true;
+        if (s == null) {
+            return true;
+        }
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;

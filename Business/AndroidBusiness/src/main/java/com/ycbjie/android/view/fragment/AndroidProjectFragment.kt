@@ -11,7 +11,7 @@ import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.NetworkUtils
 import com.yc.library.base.mvp.BaseLazyFragment
 import com.yc.toastutils.ToastUtils
-import com.yc.toolutils.other.DoShareUtils
+import com.yc.ycshare.DoShareUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.AndroidProjectContract
 import com.ycbjie.android.model.bean.HomeData
@@ -101,7 +101,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
                     }
                     R.id.ivMore->{
                         val homeData = listsAdapter.allData[position]
-                        DoShareUtils.shareText(activity,homeData.link,homeData.title)
+                        com.yc.ycshare.DoShareUtils.shareText(activity,homeData.link,homeData.title)
                     }
                 }
             }

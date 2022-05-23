@@ -1,4 +1,4 @@
-package com.yc.toolutils.calendar;
+package com.yc.toolutils;
 
 import android.Manifest;
 import android.content.ContentResolver;
@@ -13,7 +13,7 @@ import android.os.Build;
 import android.provider.CalendarContract;
 import android.text.TextUtils;
 
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.Calendar;
 import java.util.TimeZone;

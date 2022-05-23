@@ -1,4 +1,4 @@
-package com.yc.toolutils.window;
+package com.yc.toolutils;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
@@ -13,7 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.yc.toolutils.AppToolUtils;
-import com.yc.toolutils.activity.AppActivityUtils;
+import com.yc.toolutils.AppActivityUtils;
 
 
 /**

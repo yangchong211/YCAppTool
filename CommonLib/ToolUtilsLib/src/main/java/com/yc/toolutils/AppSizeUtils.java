@@ -1,4 +1,4 @@
-package com.yc.toolutils.size;
+package com.yc.toolutils;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package com.yc.toolutils.other;
+package com.yc.toolutils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

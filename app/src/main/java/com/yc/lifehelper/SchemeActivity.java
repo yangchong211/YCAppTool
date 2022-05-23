@@ -7,7 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
-import com.yc.toolutils.process.AppProcessUtils;
+import com.yc.toolutils.AppProcessUtils;
 
 import java.util.List;
 

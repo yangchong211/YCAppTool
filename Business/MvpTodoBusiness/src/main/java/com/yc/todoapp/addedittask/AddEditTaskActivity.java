@@ -7,8 +7,7 @@ import android.os.Bundle;
 import com.yc.todoapp.data.source.TasksRepository;
 import com.yc.todoapp.util.Injection;
 import com.yc.todoapp.R;
-import com.yc.todoapp.util.ActivityUtils;
-import com.yc.toolutils.activity.FragmentUtils;
+import com.yc.toolutils.FragmentUtils;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;

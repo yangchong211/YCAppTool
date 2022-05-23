@@ -6,7 +6,7 @@ import android.app.Application;
 import android.os.Bundle;
 
 import com.yc.toollib.tool.ToolAppManager;
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 /**
  * <pre>

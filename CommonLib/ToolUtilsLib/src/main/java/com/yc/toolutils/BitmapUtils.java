@@ -1,4 +1,4 @@
-package com.yc.toolutils.image;
+package com.yc.toolutils;
 
 import android.content.Context;
 import android.content.Intent;

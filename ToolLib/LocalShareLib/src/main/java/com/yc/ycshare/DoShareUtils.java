@@ -1,4 +1,4 @@
-package com.yc.toolutils.other;
+package com.yc.ycshare;
 
 import android.content.Context;
 import android.content.Intent;

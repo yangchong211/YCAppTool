@@ -33,9 +33,9 @@ import com.yc.netlib.data.NetworkFeedBean;
 import com.yc.netlib.ping.PingView;
 import com.yc.netlib.utils.NetWorkUtils;
 import com.yc.netlib.utils.NetworkTool;
-import com.yc.toolutils.device.AppDeviceUtils;
-import com.yc.toolutils.logger.AppLogUtils;
-import com.yc.toolutils.window.AppWindowUtils;
+import com.yc.toolutils.AppDeviceUtils;
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppWindowUtils;
 
 import org.jetbrains.annotations.NotNull;
 

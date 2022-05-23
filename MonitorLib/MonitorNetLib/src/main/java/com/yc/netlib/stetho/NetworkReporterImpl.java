@@ -8,7 +8,7 @@ package com.yc.netlib.stetho;
 import androidx.annotation.Nullable;
 
 
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicInteger;

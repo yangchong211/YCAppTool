@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.yc.netlib.R;
-import com.yc.toolutils.window.AppWindowUtils;
+import com.yc.toolutils.AppWindowUtils;
 
 
 public class NetInfoUrlDialog extends Dialog {

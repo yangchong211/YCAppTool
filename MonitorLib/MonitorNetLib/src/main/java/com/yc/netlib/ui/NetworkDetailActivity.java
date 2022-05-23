@@ -26,8 +26,8 @@ import com.yc.netlib.data.NetworkFeedBean;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.file.FileSaveUtils;
 import com.yc.toolutils.screen.AppShotsUtils;
-import com.yc.toolutils.image.CompressUtils;
-import com.yc.toolutils.window.AppWindowUtils;
+import com.yc.toolutils.CompressUtils;
+import com.yc.toolutils.AppWindowUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -8,7 +8,7 @@ import com.yc.appstatuslib.info.AppBatteryInfo;
 import com.yc.appstatuslib.info.AppThreadInfo;
 import com.yc.appstatuslib.listener.BaseStatusListener;
 import com.yc.toolutils.file.AppFileUtils;
-import com.yc.toolutils.logger.AppLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.File;
 import java.util.ArrayList;

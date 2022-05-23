@@ -1,4 +1,4 @@
-package com.yc.toolutils.logger;
+package com.yc.toolutils;
 
 
 import android.annotation.SuppressLint;
