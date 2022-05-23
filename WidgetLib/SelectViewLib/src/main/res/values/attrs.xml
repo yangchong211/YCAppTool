@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SelectRecyclerView">
+        <attr format="dimension" name="spotHeight"/>
+        <attr format="boolean" name="scrollEnabled"/>
+        <attr format="dimension" name="spot_offsetTop"/>
+        <attr format="dimension" name="spot_offsetBottom"/>
+    </declare-styleable>
+</resources>

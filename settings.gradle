@@ -21,6 +21,7 @@ project(':MvcTodoBusiness').projectDir = new File('Business/MvcTodoBusiness')
 project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 
 
+
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
@@ -36,6 +37,7 @@ project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
 project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')
 project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')
 project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
+
 
 
 
@@ -61,12 +63,15 @@ project(':AppLogLib').projectDir = new File('CommonLib/AppLogLib')
 project(':AppRestartLib').projectDir = new File('CommonLib/AppRestartLib')
 
 
+
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':FragmentLib',':WidgetViewLib',':ZoomImageLib', ':LargeImageLib',
         ':SwipeBackLib', ':StatusBarLib', ':AppStateLib', ':WebViewLib',
         ':ToastUtils', ':FloatPageLib', ':NotifyMessage', ':NotificationLib',
-        ':DialogFragment', ':SnackBar', ':PopupWindow', ':BaseDialog', ':RoundCorners'
+        ':DialogFragment', ':SnackBar', ':PopupWindow', ':BaseDialog', ':RoundCorners',
+        ':EastAdapterLib', ':PhotoCoverLib', ':RefreshViewLib', ':SelectViewLib',
+        ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
 project(':CustomWidget').projectDir = new File('WidgetLib/CustomWidget')
@@ -88,6 +93,16 @@ project(':PopupWindow').projectDir = new File('WidgetLib/PopupWindow')
 project(':BaseDialog').projectDir = new File('WidgetLib/BaseDialog')
 project(':ToastUtils').projectDir = new File('WidgetLib/ToastUtils')
 project(':RoundCorners').projectDir = new File('WidgetLib/RoundCorners')
+project(':EastAdapterLib').projectDir = new File('WidgetLib/EastAdapterLib')
+project(':PhotoCoverLib').projectDir = new File('WidgetLib/PhotoCoverLib')
+project(':RefreshViewLib').projectDir = new File('WidgetLib/RefreshViewLib')
+project(':SelectViewLib').projectDir = new File('WidgetLib/SelectViewLib')
+project(':GroupAdapterLib').projectDir = new File('WidgetLib/GroupAdapterLib')
+project(':BaseProgress').projectDir = new File('WidgetLib/BaseProgress')
+project(':CircleProgress').projectDir = new File('WidgetLib/CircleProgress')
+project(':SlideViewLib').projectDir = new File('WidgetLib/SlideViewLib')
+
+
 
 
 /* +++++++++ 框架基础工具库 +++++++++ */
@@ -133,6 +148,7 @@ project(':ServiceLoaderProcessor').projectDir = new File('AptHelper/ServiceLoade
 project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 
 
+
 /* +++++++++ App监控库 +++++++++ */
 include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
@@ -152,5 +168,6 @@ project(':LeakAnalyzer').projectDir = new File('MonitorLib/LeakAnalyzer')
 project(':LeakWatcher').projectDir = new File('MonitorLib/LeakWatcher')
 project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
+
 
 
