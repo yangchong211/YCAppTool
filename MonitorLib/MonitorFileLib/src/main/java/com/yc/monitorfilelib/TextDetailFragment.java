@@ -50,7 +50,6 @@ public class TextDetailFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private TextContentAdapter mTextContentAdapter;
     private File mFile;
-    private final List<String> mContentList = new ArrayList<>();
     private static final String TAG = "TextDetailFragment";
     private static final int CODE = 1000;
     private Activity mActivity;
@@ -143,7 +142,7 @@ public class TextDetailFragment extends Fragment {
 
     private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mTextContentAdapter = new TextContentAdapter(mActivity, mContentList);
+        mTextContentAdapter = new TextContentAdapter(mActivity);
         mRecyclerView.setAdapter(mTextContentAdapter);
     }
 
@@ -213,7 +212,7 @@ public class TextDetailFragment extends Fragment {
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             if (mReference.get() != null) {
-                mReference.get().mTextContentAdapter.append(values[0]);
+                mReference.get().mTextContentAdapter.setData(values[0]);
             }
         }
     }

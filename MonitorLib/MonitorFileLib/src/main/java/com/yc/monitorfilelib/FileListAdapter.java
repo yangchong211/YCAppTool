@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yc.eastadapterlib.BaseRecycleAdapter;
 import com.yc.eastadapterlib.BaseViewHolder;
+import com.yc.toolutils.AppTimeUtils;
 import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -43,7 +46,10 @@ public class FileListAdapter extends BaseRecycleAdapter<File> {
         ImageView ivMore = holder.getView(R.id.iv_more);
 
         tvName.setText(file.getName());
-        tvDate.setText(AppFileUtils.getFileTime(file));
+        long fileTime = AppFileUtils.getFileTime(file);
+        String time = AppTimeUtils.date2String(new Date(fileTime),
+                new SimpleDateFormat("yyyy-MM-dd HH:mm"));
+        tvDate.setText(time);
         if (file.isDirectory()) {
             ivIcon.setImageResource(R.drawable.sand_box_dir_icon);
             ivMore.setVisibility(View.VISIBLE);

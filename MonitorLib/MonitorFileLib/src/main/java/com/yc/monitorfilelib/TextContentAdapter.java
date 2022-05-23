@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yc.eastadapterlib.BaseRecycleAdapter;
+import com.yc.eastadapterlib.BaseViewHolder;
+
 import java.util.List;
 
 
@@ -21,53 +24,16 @@ import java.util.List;
  *     revise :
  * </pre>
  */
-public class TextContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TextContentAdapter extends BaseRecycleAdapter<String> {
 
-    private final Context mContext;
-    private final List<String> mContentList;
-
-    public TextContentAdapter(Context context, List<String> contentList) {
-        mContext = context;
-        mContentList = contentList;
-    }
-
-    public void append(String item) {
-        if (item != null) {
-            int start = mContentList.size();
-            mContentList.add(item);
-            notifyItemRangeInserted(start, 1);
-        }
-    }
-
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View inflate = LayoutInflater.from(mContext).inflate(R.layout.item_text_content_view,
-                parent, false);
-        return new MyViewHolder(inflate);
+    public TextContentAdapter(Context context) {
+        super(context, R.layout.item_text_content_view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        if (viewHolder instanceof MyViewHolder) {
-            MyViewHolder myViewHolder = (MyViewHolder) viewHolder;
-            String s = mContentList.get(position);
-            myViewHolder.mTextView.setText(s);
-        }
+    protected void bindData(BaseViewHolder holder, String s) {
+        TextView tv_name = holder.getView(R.id.tv_name);
+        tv_name.setText(s);
     }
 
-    @Override
-    public int getItemCount() {
-        return mContentList == null ? 0 : mContentList.size();
-    }
-
-    private static class MyViewHolder extends RecyclerView.ViewHolder {
-
-        private final TextView mTextView;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            mTextView = itemView.findViewById(R.id.tv_name);
-        }
-    }
 }

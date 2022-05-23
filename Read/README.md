@@ -53,9 +53,8 @@
 - 专题2：Wi-Fi
 
 
-
-
-### 专题12：jetpack系列，nav，liveData，viewModel等
+# jetpack系列
+- nav，liveData，viewModel等
 
 
 

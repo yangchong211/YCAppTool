@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.yc.statusbar.bar.StateAppBar;
+
 import java.util.ArrayDeque;
 
 
@@ -52,7 +54,7 @@ public class FileExplorerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_main);
-        //StateAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorTheme));
+        StateAppBar.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorTheme));
         showContent(FileExplorerFragment.class);
     }
 

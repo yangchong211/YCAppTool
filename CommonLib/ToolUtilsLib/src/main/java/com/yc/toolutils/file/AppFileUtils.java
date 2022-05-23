@@ -211,14 +211,12 @@ public final class AppFileUtils {
      *
      * @param file    文件
      */
-    public static String getFileTime(File file) {
+    public static long getFileTime(File file) {
         if (file != null && file.exists()) {
             long lastModified = file.lastModified();
-            String time = new SimpleDateFormat("yyyy-MM-dd")
-                    .format(new Date(lastModified));
-            return time;
+            return lastModified;
         }
-        return "";
+        return 0L;
     }
 
     /**

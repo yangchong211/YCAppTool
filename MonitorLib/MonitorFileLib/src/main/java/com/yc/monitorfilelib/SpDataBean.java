@@ -41,6 +41,8 @@ public final class SpDataBean {
             case SpInputType.BOOLEAN:
                 value = Boolean.valueOf(string);
                 break;
+            default:
+                break;
         }
     }
 

@@ -40,7 +40,6 @@ public class SpDetailFragment extends Fragment {
     private TextView mTvShare;
     private RecyclerView mRecyclerView;
     private SpContentAdapter mSpContentAdapter;
-    private final List<SpDataBean> mContentList = new ArrayList<>();
     private static final String TAG = "SpDetailFragment";
     private Activity mActivity;
     private String spTableName;
@@ -102,7 +101,7 @@ public class SpDetailFragment extends Fragment {
 
     private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mSpContentAdapter = new SpContentAdapter(mActivity, mContentList);
+        mSpContentAdapter = new SpContentAdapter(mActivity);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL));
         mRecyclerView.setAdapter(mSpContentAdapter);
     }
@@ -112,8 +111,7 @@ public class SpDetailFragment extends Fragment {
         if (spBeans.isEmpty()) {
             finish();
         }
-        mContentList.clear();
-        mContentList.addAll(spBeans);
+        mSpContentAdapter.setData(spBeans);
         mSpContentAdapter.notifyDataSetChanged();
     }
 
