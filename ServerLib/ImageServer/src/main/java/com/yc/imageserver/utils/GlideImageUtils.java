@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.widget.ImageView;
 
-import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.MultiTransformation;
@@ -24,6 +23,7 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.yc.imageserver.R;
 import com.yc.imageserver.transformations.CornerGlideTransform;
 import com.yc.imageserver.transformations.RoundedCornersTransformation;
+import com.yc.toolutils.AppToolUtils;
 
 /**
  * <pre>
@@ -899,7 +899,7 @@ public final class GlideImageUtils {
     private static int Dp2Px(Context context, float dp) {
         if (context==null){
             //避免空指针异常
-            context = Utils.getApp();
+            context = AppToolUtils.getApp();
         }
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);

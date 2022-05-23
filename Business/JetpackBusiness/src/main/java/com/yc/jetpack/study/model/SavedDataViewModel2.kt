@@ -3,8 +3,7 @@ package com.yc.jetpack.study.model
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.blankj.utilcode.util.LogUtils
+import com.yc.toolutils.AppLogUtils
 
 class SavedDataViewModel2(private val correction: String ,
                           private val repository : SavedDataRepository) : ViewModel() {
@@ -14,7 +13,7 @@ class SavedDataViewModel2(private val correction: String ,
 
     //数据观察类
     fun getName(): LiveData<String> {
-        LogUtils.d("name : ${repository.getName()}")
+        AppLogUtils.d("name : ${repository.getName()}")
         return name
     }
 

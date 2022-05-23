@@ -7,11 +7,11 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.NetworkUtils
-import com.blankj.utilcode.util.SizeUtils
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.statusbar.bar.StateAppBar
 import com.yc.toastutils.ToastUtils
+import com.yc.toolutils.AppNetworkUtils
+import com.yc.toolutils.AppSizeUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.AndroidCollectContract
 import com.ycbjie.android.model.bean.ProjectListBean
@@ -76,12 +76,12 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
         val linearLayoutManager = LinearLayoutManager(this)
         recyclerView.setLayoutManager(linearLayoutManager)
         val line = RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
-                SizeUtils.dp2px(1f), Color.parseColor("#f5f5f7"))
+                AppSizeUtils.dp2px(this,1f), Color.parseColor("#f5f5f7"))
         recyclerView.addItemDecoration(line)
         adapter = AndroidCollectAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.setRefreshListener {
-            if (NetworkUtils.isConnected()){
+            if (AppNetworkUtils.isConnected()){
                 page = 0
                 presenter?.getCollectArticleList(page)
             }else{
@@ -92,7 +92,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
         //加载更多
         adapter.setMore(R.layout.view_recycle_more, object : OnMoreListener {
             override fun onMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     if (adapter.allData.size > 0) {
                         page++
                         presenter?.getCollectArticleList(page)
@@ -112,7 +112,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
         //设置没有数据
         adapter.setNoMore(R.layout.view_recycle_no_more, object : OnNoMoreListener {
             override fun onNoMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     adapter.resumeMore()
                 } else {
                     ToastUtils.showRoundRectToast( "网络不可用")
@@ -120,7 +120,7 @@ class AndroidCollectActivity : BaseActivity<AndroidCollectPresenter>()
             }
 
             override fun onNoMoreClick() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     adapter.resumeMore()
                 } else {
                     ToastUtils.showRoundRectToast( "网络不可用")

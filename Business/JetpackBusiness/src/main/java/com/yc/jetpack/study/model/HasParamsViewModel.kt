@@ -2,7 +2,7 @@ package com.yc.jetpack.study.model
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.blankj.utilcode.util.LogUtils
+import com.yc.toolutils.AppLogUtils
 import kotlinx.coroutines.launch
 
 class HasParamsViewModel(private val repository : SavedDataRepository) : ViewModel() {
@@ -17,7 +17,7 @@ class HasParamsViewModel(private val repository : SavedDataRepository) : ViewMod
 
     //数据观察类
     fun getName(): LiveData<String> {
-        LogUtils.d("name : ${repository.getName()}")
+        AppLogUtils.d("name : ${repository.getName()}")
         return nameLiveData
     }
 

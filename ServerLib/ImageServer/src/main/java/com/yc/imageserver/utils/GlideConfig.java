@@ -3,12 +3,12 @@ package com.yc.imageserver.utils;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
-import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
 import com.bumptech.glide.module.AppGlideModule;
+import com.yc.toolutils.AppToolUtils;
 
 /**
  * <pre>
@@ -54,7 +54,7 @@ public class GlideConfig extends AppGlideModule {
         super.applyOptions(context, builder);
         //路径：
         builder.setDiskCache(new DiskLruCacheFactory(GlideSaveUtils.getLocalFileSavePathDir(
-                Utils.getApp(),"GlideDisk",null), GLIDE_CATCH_SIZE ));
+                AppToolUtils.getApp(),"GlideDisk",null), GLIDE_CATCH_SIZE ));
     }
 
 }

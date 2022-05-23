@@ -7,11 +7,11 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.SPUtils
 import com.yc.basedialog.loading.ViewLoading
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.toastutils.ToastUtils
+import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.AppSpUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidLoginContract
@@ -158,19 +158,19 @@ class AndroidLoginActivity : BaseActivity<AndroidLoginPresenter>(),
         //这段代码先打印出next，然后延迟1秒钟后打印出now，像是android里handler的post和postDelay方法。
         GlobalScope.launch(Dispatchers.Default){
             ViewLoading.dismiss(this@AndroidLoginActivity)
-            LogUtils.i("AndroidLoginActivity"+"协程间是如何切换的")
-            LogUtils.i("AndroidLoginActivity---${Thread.currentThread().name}")
+            AppLogUtils.i("AndroidLoginActivity"+"协程间是如何切换的")
+            AppLogUtils.i("AndroidLoginActivity---${Thread.currentThread().name}")
             launch {
                 delay(1000)
-                LogUtils.i("AndroidLoginActivity"+"now")
+                AppLogUtils.i("AndroidLoginActivity"+"now")
                 finish()
                 AndroidActivity.startActivity(this@AndroidLoginActivity,KotlinConstant.HOME)
             }
-            SPUtils.getInstance().put(KotlinConstant.USER_ID,bean.id)
-            SPUtils.getInstance().put(KotlinConstant.USER_NAME, bean.username!!)
-            SPUtils.getInstance().put(KotlinConstant.USER_EMAIL, bean.email!!)
+            AppSpUtils.getInstance().put(KotlinConstant.USER_ID,bean.id)
+            AppSpUtils.getInstance().put(KotlinConstant.USER_NAME, bean.username!!)
+            AppSpUtils.getInstance().put(KotlinConstant.USER_EMAIL, bean.email!!)
             ToastUtils.showRoundRectToast("登陆成功")
-            LogUtils.i("AndroidLoginActivity"+"next")
+            AppLogUtils.i("AndroidLoginActivity"+"next")
         }
     }
 

@@ -1,8 +1,8 @@
 package com.yc.httpserver;
 
 
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.NetworkUtils;
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppNetworkUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,14 +83,14 @@ public class InterceptorUtils {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                if (!NetworkUtils.isConnected()) {
+                if (!AppNetworkUtils.isConnected()) {
                     //无网络下强制使用缓存，无论缓存是否过期,此时该请求实际上不会被发送出去。
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
                 }
                 Response response = chain.proceed(request);
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     //有网络情况下，根据请求接口的设置，配置缓存。
                     // 这样在下次请求时，根据缓存决定是否真正发出请求。
                     String cacheControl = request.cacheControl().toString();
@@ -145,30 +145,30 @@ public class InterceptorUtils {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
-                if (!NetworkUtils.isConnected()) {
+                if (!AppNetworkUtils.isConnected()) {
                     request = request.newBuilder()
                             .cacheControl(CacheControl.FORCE_CACHE)
                             .build();
-                    LogUtils.d("addNetWorkInterceptor"+ "没有网络链接");
+                    AppLogUtils.d("addNetWorkInterceptor"+ "没有网络链接");
                 }
                 Response response = chain.proceed(request);
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     int maxAge = 0; // 有网络时 设置缓存超时时间0个小时
-                    LogUtils.d("addNetWorkInterceptor"+ "网络已连接，缓存时间为：" + maxAge);
+                    AppLogUtils.d("addNetWorkInterceptor"+ "网络已连接，缓存时间为：" + maxAge);
                     response = response.newBuilder()
                             .addHeader("Cache-Control", "public, max-age=" + maxAge)
                             .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
                             .build();
                 } else {
                     int maxStale = HttpConstant.TIME_CACHE;
-                    LogUtils.d("addNetWorkInterceptor"+ "网络未连接，缓存时间为：" + maxStale);
+                    AppLogUtils.d("addNetWorkInterceptor"+ "网络未连接，缓存时间为：" + maxStale);
                     response = response.newBuilder()
                             .addHeader("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                             .removeHeader("Pragma")
                             .build();
                 }
                 String cookeHeader = response.header("Set-Cookie", "");
-                LogUtils.e("cookeHeader1-----------"+cookeHeader);
+                AppLogUtils.e("cookeHeader1-----------"+cookeHeader);
                 return response;
             }
         };

@@ -31,5 +31,5 @@ dependencies {
     implementation rootProject.ext.dependencies["retrofit"]
     implementation rootProject.ext.dependencies["retrofit-converter-gson"]
     implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
-    implementation rootProject.ext.dependencies["utilcode"]
+    implementation project(path: ':ToolUtilsLib')
 }

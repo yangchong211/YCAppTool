@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.StringUtils;
 
 import com.yc.configlayer.constant.Constant;
 import com.yc.library.base.mvp.BaseActivity;
@@ -220,7 +219,7 @@ public class WebViewActivity extends BaseActivity {
 
         @Override
         public void showTitle(String title) {
-            toolbarTitle.setText(StringUtils.null2Length0(title));
+            toolbarTitle.setText(title);
         }
 
         @Override

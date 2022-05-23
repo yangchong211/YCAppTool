@@ -3,13 +3,12 @@ package com.ycbjie.android.view.fragment
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
-import com.blankj.utilcode.util.ActivityUtils
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.SPUtils
 import com.yc.configlayer.constant.Constant
 import com.yc.library.base.mvp.BaseLazyFragment
 import com.yc.library.web.WebViewActivity
 import com.yc.toastutils.ToastUtils
+import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.AppSpUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.tools.AndroidUtils
@@ -59,7 +58,7 @@ class AndroidProfileFragment : BaseLazyFragment(), View.OnClickListener {
     override fun initView(view: View) {
         tvVersionName.text = "V" + KotlinUtils.getVersionCode(activity!!)
         val versionCode = AndroidUtils.getVersionCode(activity!!)
-        LogUtils.e("Android$versionCode")
+        AppLogUtils.e("Android$versionCode")
     }
 
     override fun initListener() {
@@ -82,11 +81,11 @@ class AndroidProfileFragment : BaseLazyFragment(), View.OnClickListener {
 
 
     private fun checkLoginStates() {
-        if (SPUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
+        if (AppSpUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
             tvName.text = "未登录，点击去登陆"
             tvOther.text = "未登录，点击去登陆"
         }else{
-            tvName.text = SPUtils.getInstance().getString(KotlinConstant.USER_NAME)
+            tvName.text = AppSpUtils.getInstance().getString(KotlinConstant.USER_NAME)
             tvOther.text = "登陆状态：已登录，点击即可退出登陆"
         }
     }
@@ -95,8 +94,8 @@ class AndroidProfileFragment : BaseLazyFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.llProfile ->{
-                if (SPUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
-                    ActivityUtils.startActivity(AndroidLoginActivity::class.java)
+                if (AppSpUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
+//                    ActivityUtils.startActivity(AndroidLoginActivity::class.java)
                 }else{
                     ToastUtils.showRoundRectToast("已经登陆啦")
                 }
@@ -105,8 +104,8 @@ class AndroidProfileFragment : BaseLazyFragment(), View.OnClickListener {
 
             }
             R.id.rlCollect ->{
-                if (SPUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
-                    ActivityUtils.startActivity(AndroidLoginActivity::class.java)
+                if (AppSpUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
+//                    ActivityUtils.startActivity(AndroidLoginActivity::class.java)
                 }else{
                     AndroidCollectActivity.lunch(activity)
                 }
@@ -118,7 +117,7 @@ class AndroidProfileFragment : BaseLazyFragment(), View.OnClickListener {
                 WebViewActivity.lunch(activity, Constant.GITHUB, "我的GitHub")
             }
             R.id.rlOther ->{
-                if (SPUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
+                if (AppSpUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
                     //ToastUtils.showRoundRectToast("还未登陆")
                     AndroidLoginActivity.lunch(activity)
                 }else{
@@ -127,12 +126,12 @@ class AndroidProfileFragment : BaseLazyFragment(), View.OnClickListener {
                     val job = GlobalScope.launch(start = CoroutineStart.LAZY) {
                         delay(500L)
                         AndroidActivity.startActivity(activity,KotlinConstant.FIND)
-                        LogUtils.i("AndroidActivity"+"设置启动模式")
+                        AppLogUtils.i("AndroidActivity"+"设置启动模式")
                     }
-                    LogUtils.i("AndroidActivity"+"hello world")
-                    SPUtils.getInstance().put(KotlinConstant.USER_ID,0)
-                    SPUtils.getInstance().put(KotlinConstant.USER_NAME, "")
-                    SPUtils.getInstance().put(KotlinConstant.USER_EMAIL, "")
+                    AppLogUtils.i("AndroidActivity"+"hello world")
+                    AppSpUtils.getInstance().put(KotlinConstant.USER_ID,0)
+                    AppSpUtils.getInstance().put(KotlinConstant.USER_NAME, "")
+                    AppSpUtils.getInstance().put(KotlinConstant.USER_EMAIL, "")
                     ToastUtils.showRoundRectToast("退出登陆")
                     job.start()
                 }

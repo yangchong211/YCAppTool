@@ -12,15 +12,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.IntentUtils;
-import com.blankj.utilcode.util.KeyboardUtils;
-
 import com.yc.configlayer.constant.Constant;
 import com.yc.customwidget.MultiEditInputView;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.KeyboardUtils;
 
 
 /**
@@ -114,8 +111,7 @@ public class MeFeedBackActivity extends BaseActivity implements View.OnClickList
     }
 
     private void toCallMe() {
-        Intent callIntent = IntentUtils.getCallIntent(phone);
-        startActivity(callIntent);
+
     }
 
 
@@ -125,8 +121,8 @@ public class MeFeedBackActivity extends BaseActivity implements View.OnClickList
             ToastUtils.showRoundRectToast("输入内容不能为空");
             return;
         }
-        Intent smsIntent = IntentUtils.getSendSmsIntent(phone, contentText);
-        startActivity(smsIntent);
+//        Intent smsIntent = IntentUtils.getSendSmsIntent(phone, contentText);
+//        startActivity(smsIntent);
     }
 
     private void toSendEmail() {

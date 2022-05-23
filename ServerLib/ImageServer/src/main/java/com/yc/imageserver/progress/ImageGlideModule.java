@@ -3,8 +3,6 @@ package com.yc.imageserver.progress;
 import android.content.Context;
 import androidx.annotation.NonNull;
 
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.Registry;
@@ -13,6 +11,8 @@ import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
 import com.yc.imageserver.utils.GlideSaveUtils;
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppToolUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -64,7 +64,7 @@ public class ImageGlideModule extends AppGlideModule {
         builder.addInterceptor(new ProgressInterceptor());
         //build
         builder.build();
-        LogUtils.d("加载图片进度值------registerComponents--");
+        AppLogUtils.d("加载图片进度值------registerComponents--");
         //原来的是  new OkHttpUrlLoader.Factory()；
         //在registerComponents()方法中将我们刚刚创建的OkHttpUrlLoader和OkHttpStreamFetcher注册到Glide当中，
         //将原来的HTTP通讯组件给替换掉
@@ -82,10 +82,10 @@ public class ImageGlideModule extends AppGlideModule {
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
         super.applyOptions(context, builder);
-        LogUtils.d("加载图片进度值------applyOptions--");
+        AppLogUtils.d("加载图片进度值------applyOptions--");
         //路径：
         builder.setDiskCache(new DiskLruCacheFactory(GlideSaveUtils.getLocalFileSavePathDir(
-                Utils.getApp(),"GlideDisk",null), GLIDE_CATCH_SIZE ));
+                AppToolUtils.getApp(),"GlideDisk",null), GLIDE_CATCH_SIZE ));
     }
 
     /**

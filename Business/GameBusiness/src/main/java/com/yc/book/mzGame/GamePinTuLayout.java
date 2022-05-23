@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.LogUtils;
+import com.yc.toolutils.AppLogUtils;
 import com.ycbjie.book.R;
 
 import java.util.ArrayList;
@@ -135,7 +135,7 @@ public class GamePinTuLayout extends RelativeLayout implements View.OnClickListe
         List<ImagePiece> pieces = new ArrayList<>(piece * piece);
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        LogUtils.e("TAG", "bitmap Width = " + width + " , height = " + height);
+        AppLogUtils.e("TAG", "bitmap Width = " + width + " , height = " + height);
         int pieceWidth = Math.min(width, height) / piece;
         for (int i = 0; i < piece; i++){
             for (int j = 0; j < piece; j++){
@@ -220,7 +220,7 @@ public class GamePinTuLayout extends RelativeLayout implements View.OnClickListe
      */
     @Override
     public void onClick(View view) {
-        LogUtils.d("TAG", "onClick: "+view.getTag());
+        AppLogUtils.d("TAG", "onClick: "+view.getTag());
         // 如果正在执行动画，则屏蔽
         if(isAniming)
             return;
@@ -337,7 +337,7 @@ public class GamePinTuLayout extends RelativeLayout implements View.OnClickListe
         boolean isSuccess = true;
         for (int i = 0; i < mGamePinTuItems.length; i++) {
             ImageView first = mGamePinTuItems[i];
-            LogUtils.e("TAG", getIndexByTag((String) first.getTag()) + "");
+            AppLogUtils.e("TAG", getIndexByTag((String) first.getTag()) + "");
             if (getIndexByTag((String) first.getTag()) != i) {
                 isSuccess = false;
             }

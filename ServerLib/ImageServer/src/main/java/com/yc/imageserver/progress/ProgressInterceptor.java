@@ -1,6 +1,7 @@
 package com.yc.imageserver.progress;
 
-import com.blankj.utilcode.util.LogUtils;
+
+import com.yc.toolutils.AppLogUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -61,7 +62,7 @@ public class ProgressInterceptor implements Interceptor {
         String url = request.url().toString();
         //拿到相应body对象
         ResponseBody body = response.body();
-        LogUtils.d("加载图片进度值------自定义拦截器--");
+        AppLogUtils.d("加载图片进度值------自定义拦截器--");
         ProgressResponseBody progressResponseBody = new ProgressResponseBody(url, body);
         Response.Builder builder = response.newBuilder();
         Response newResponse = builder.body(progressResponseBody).build();

@@ -1,9 +1,8 @@
 package com.yc.imageserver.utils;
 
 import android.os.Looper;
-
-import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
+import com.yc.toolutils.AppToolUtils;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -36,7 +35,7 @@ public class GlideCatchUtils {
     public String getCacheSize() {
         try {
             return getFormatSize(getFolderSize(new File(
-                    Utils.getApp().getCacheDir() + "/" + GlideConfig.GLIDE_CATCH_DIR)));
+                    AppToolUtils.getApp().getCacheDir() + "/" + GlideConfig.GLIDE_CATCH_DIR)));
         } catch (Exception e) {
             e.printStackTrace();
             return "获取失败";
@@ -48,7 +47,7 @@ public class GlideCatchUtils {
      * @return
      */
     public boolean cleanCatchDisk() {
-        return deleteFolderFile(Utils.getApp().getCacheDir()
+        return deleteFolderFile(AppToolUtils.getApp().getCacheDir()
                 + "/" + GlideConfig.GLIDE_CATCH_DIR, true);
     }
 
@@ -62,11 +61,11 @@ public class GlideCatchUtils {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Glide.get(Utils.getApp()).clearDiskCache();
+                        Glide.get(AppToolUtils.getApp()).clearDiskCache();
                     }
                 }).start();
             } else {
-                Glide.get(Utils.getApp()).clearDiskCache();
+                Glide.get(AppToolUtils.getApp()).clearDiskCache();
             }
             return true;
         } catch (Exception e) {
@@ -83,7 +82,7 @@ public class GlideCatchUtils {
         try {
             //只能在主线程执行
             if (Looper.myLooper() == Looper.getMainLooper()) {
-                Glide.get(Utils.getApp()).clearMemory();
+                Glide.get(AppToolUtils.getApp()).clearMemory();
                 return true;
             }
         } catch (Exception e) {

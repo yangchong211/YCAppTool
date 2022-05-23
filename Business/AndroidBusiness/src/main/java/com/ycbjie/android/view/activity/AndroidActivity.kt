@@ -12,8 +12,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import com.blankj.utilcode.util.ActivityUtils
-import com.blankj.utilcode.util.LogUtils
 import com.google.android.material.tabs.TabLayout
 import com.yc.configlayer.constant.Constant
 import com.yc.library.base.adapter.BasePagerAdapter
@@ -21,6 +19,7 @@ import com.yc.library.base.mvp.BaseActivity
 import com.yc.library.web.WebViewActivity
 import com.yc.statusbar.bar.StateAppBar
 import com.yc.toastutils.ToastUtils
+import com.yc.toolutils.AppLogUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.presenter.AndroidPresenter
@@ -117,7 +116,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         if (intent != null) {
             selectIndex = intent.getIntExtra("selectIndex", HOME)
             //Kotlin 支持在字符串字面值中引用局部变量，只需要在变量名前加上字符$即可
-            LogUtils.e("索引-------$selectIndex")
+            AppLogUtils.e("索引-------$selectIndex")
             viewPager?.currentItem = selectIndex
         }
     }
@@ -141,7 +140,6 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
                 NavWebsiteActivity.lunch(this)
             }
             1 -> {
-                ActivityUtils.startActivity(AndroidLoginActivity::class.java)
             }
             2 -> {
                 ToastUtils.showRoundRectToast("开发作者介绍")
@@ -339,15 +337,15 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         /*GlobalScope.launch {
             //延迟（挂起）1000毫秒，注意这不会阻塞线程
             delay(1000L)
-            LogUtils.i("AndroidActivity"+"启动一个协程")
+            AppLogUtils.i("AndroidActivity"+"启动一个协程")
         }*/
 
         //设置启动模式
         val job = GlobalScope.launch(start = CoroutineStart.LAZY) {
             delay(1000L)
-            LogUtils.i("AndroidActivity"+"设置启动模式")
+            AppLogUtils.i("AndroidActivity"+"设置启动模式")
         }
-        LogUtils.i("AndroidActivity"+"hello world")
+        AppLogUtils.i("AndroidActivity"+"hello world")
         job.start()
     }
 
@@ -355,13 +353,13 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         //协程间是如何切换的
         //这段代码先打印出next，然后延迟1秒钟后打印出now，像是android里handler的post和postDelay方法。
         GlobalScope.launch(Dispatchers.Default){
-            LogUtils.i("AndroidActivity"+"协程间是如何切换的")
-            LogUtils.i("AndroidActivity---${Thread.currentThread().name}")
+            AppLogUtils.i("AndroidActivity"+"协程间是如何切换的")
+            AppLogUtils.i("AndroidActivity---${Thread.currentThread().name}")
             launch {
                 delay(1000)
-                LogUtils.i("AndroidActivity"+"now")
+                AppLogUtils.i("AndroidActivity"+"now")
             }
-            LogUtils.i("AndroidActivity"+"next")
+            AppLogUtils.i("AndroidActivity"+"next")
         }
     }
 
@@ -369,22 +367,22 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         //取消协程
         val job = GlobalScope.launch {
             delay(1000L)
-            LogUtils.i("AndroidActivity"+"World!")
+            AppLogUtils.i("AndroidActivity"+"World!")
         }
         job.cancel()
-        LogUtils.i("AndroidActivity"+"Hello,")
+        AppLogUtils.i("AndroidActivity"+"Hello,")
     }
 
 
     private suspend fun startRun4(){
         val job = GlobalScope.launch {
             delay(1000L)
-            LogUtils.i("AndroidActivity"+"World!")
+            AppLogUtils.i("AndroidActivity"+"World!")
             delay(1000L)
         }
-        LogUtils.i("AndroidActivity"+"Hello,")
+        AppLogUtils.i("AndroidActivity"+"Hello,")
         job.join()
-        LogUtils.i("AndroidActivity"+"Good！")
+        AppLogUtils.i("AndroidActivity"+"Good！")
         //依次打印
         //Hello,
         //World!
@@ -395,12 +393,12 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
     private fun coroutineScope() {
         val uiScope = CoroutineScope(Dispatchers.Main)
         val job = uiScope.launch {
-            LogUtils.i("AndroidActivity" + "模拟发送请求")
+            AppLogUtils.i("AndroidActivity" + "模拟发送请求")
             val deffer = async(Dispatchers.Default) {
                 getResult()
             }
             val result = deffer.await()
-            LogUtils.i("AndroidActivity---获取 $result")
+            AppLogUtils.i("AndroidActivity---获取 $result")
         }
         //调用该方法取消这个协程的进行
         //job.cancel()
@@ -409,7 +407,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
 
     private suspend fun getResult(): String {
         delay(2000L)
-        LogUtils.i("AndroidActivity"+"模拟请求时间")
+        AppLogUtils.i("AndroidActivity"+"模拟请求时间")
         return "result"
     }
 

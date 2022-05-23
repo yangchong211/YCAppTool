@@ -1,7 +1,7 @@
 package com.ycbjie.android.presenter
 
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.NetworkUtils
+import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.AppNetworkUtils
 import com.ycbjie.android.contract.AndroidKnowledgeContract
 import com.ycbjie.android.model.helper.AndroidHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -39,11 +39,11 @@ class AndroidKnowledgePresenter : AndroidKnowledgeContract.Presenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe ({ bean ->
-                    LogUtils.e("getHomeList-----"+"成功")
+                    AppLogUtils.e("getHomeList-----"+"成功")
                     mView.getTreeSuccess(bean)
                 }, { t ->
-                    LogUtils.e("getHomeList-----"+"onError"+t.localizedMessage)
-                    if(NetworkUtils.isConnected()){
+                    AppLogUtils.e("getHomeList-----"+"onError"+t.localizedMessage)
+                    if(AppNetworkUtils.isConnected()){
 
                     }else{
 

@@ -15,7 +15,8 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.blankj.utilcode.util.ToastUtils;
+import com.yc.toastutils.ToastUtils;
+
 
 /**
  * <pre>
@@ -105,7 +106,7 @@ public class ValueAnimatorAct extends AppCompatActivity implements View.OnClickL
             @Override
             public void onAnimationCancel(Animator animation) {
                 super.onAnimationCancel(animation);
-                ToastUtils.showShort("动画结束了");
+                ToastUtils.showRoundRectToast("动画结束了");
             }
         });
         mAnim.start();

@@ -9,10 +9,9 @@ import androidx.fragment.app.FragmentActivity;
 import android.util.Base64;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import com.blankj.utilcode.util.LogUtils;
 import com.yc.httpserver.ExceptionUtils;
 import com.yc.library.base.mvp.BaseFragment;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.video.R;
 import com.yc.video.api.VideoModel;
 import com.yc.video.model.VideoContentBean;
@@ -117,21 +116,21 @@ public class VideoPlayerFragment extends BaseFragment {
                         if (videoList.getVideo_3() != null) {
                             String base64 = videoList.getVideo_3().getMain_url();
                             String url = (new String(Base64.decode(base64.getBytes(), Base64.DEFAULT)));
-                            LogUtils.d("getVideoUrls: " + url);
+                            AppLogUtils.d("getVideoUrls: " + url);
                             return url;
                         }
 
                         if (videoList.getVideo_2() != null) {
                             String base64 = videoList.getVideo_2().getMain_url();
                             String url = (new String(Base64.decode(base64.getBytes(), Base64.DEFAULT)));
-                            LogUtils.d("getVideoUrls: " + url);
+                            AppLogUtils.d("getVideoUrls: " + url);
                             return url;
                         }
 
                         if (videoList.getVideo_1() != null) {
                             String base64 = videoList.getVideo_1().getMain_url();
                             String url = (new String(Base64.decode(base64.getBytes(), Base64.DEFAULT)));
-                            LogUtils.d( "getVideoUrls: " + url);
+                            AppLogUtils.d( "getVideoUrls: " + url);
                             return url;
                         }
                         return null;
@@ -191,7 +190,7 @@ public class VideoPlayerFragment extends BaseFragment {
             controller.setOnCompletedListener(new OnCompletedListener() {
                 @Override
                 public void onCompleted() {
-                    LogUtils.e("播放结束-------------------");
+                    AppLogUtils.e("播放结束-------------------");
                     //关闭当前页面
                 }
             });

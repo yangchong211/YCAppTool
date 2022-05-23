@@ -10,7 +10,8 @@ import android.os.storage.StorageManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.blankj.utilcode.util.Utils;
+
+import com.yc.toolutils.AppToolUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,7 +57,7 @@ public final class GlideSaveUtils {
      * @return                      路径
      */
     public static String getLocalVideoPathDir(String name){
-        String video = getLocalFileSavePathDir(Utils.getApp(), "video", name);
+        String video = getLocalFileSavePathDir(AppToolUtils.getApp(), "video", name);
         return video;
     }
 
@@ -130,7 +131,7 @@ public final class GlideSaveUtils {
      * @return
      */
     public static String getLocalImgSavePath() {
-        return getLocalFileSavePathDir(Utils.getApp(),"images",
+        return getLocalFileSavePathDir(AppToolUtils.getApp(),"images",
                 generateRandomName() + ".png");
     }
 

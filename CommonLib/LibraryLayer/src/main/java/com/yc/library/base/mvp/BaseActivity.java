@@ -7,8 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.blankj.utilcode.util.NetworkUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.yc.statusbar.bar.StateAppBar;
 import com.ycbjie.library.R;
 
@@ -42,9 +40,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         initView();
         initListener();
         initData();
-        if(!NetworkUtils.isConnected()){
-            ToastUtils.showShort("请检查网络是否连接");
-        }
     }
 
     @Override

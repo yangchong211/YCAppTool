@@ -73,7 +73,7 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':FragmentLib')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.8'
-
+    implementation project(path: ':ToolUtilsLib')
     api project(path: ':BusinessInterface')
 }
 

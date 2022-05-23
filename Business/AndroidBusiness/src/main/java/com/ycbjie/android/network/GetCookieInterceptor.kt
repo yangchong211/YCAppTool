@@ -1,7 +1,7 @@
 package com.ycbjie.android.network
 
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.SPUtils
+import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.AppSpUtils
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -46,10 +46,10 @@ class GetCookieInterceptor : Interceptor {
      */
     private fun saveCookie(url: String?, domain: String?, cookies: String) {
         url ?: return
-        SPUtils.getInstance().put(url, cookies)
+        AppSpUtils.getInstance().put(url, cookies)
 
         domain ?: return
-        SPUtils.getInstance().put(domain, cookies)
+        AppSpUtils.getInstance().put(domain, cookies)
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -63,9 +63,9 @@ class GetCookieInterceptor : Interceptor {
         // 登录之后保存cookies
         if (requestUrl.contains(SAVE_USER_LOGIN_KEY) && !response.header(SET_COOKIE_KEY)?.isEmpty()!!) {
             val cookies = response.headers(SET_COOKIE_KEY)
-            LogUtils.i("GetCookieInterceptor----cookies",cookies.size)
+            AppLogUtils.i("GetCookieInterceptor----cookies",cookies.size)
             val cookie = encodeCookie(cookies)
-            LogUtils.i("GetCookieInterceptor----cookie",cookie)
+            AppLogUtils.i("GetCookieInterceptor----cookie",cookie)
             saveCookie(requestUrl, domain, cookie)
         }
         return response

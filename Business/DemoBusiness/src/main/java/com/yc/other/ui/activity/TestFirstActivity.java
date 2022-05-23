@@ -1,12 +1,10 @@
 package com.yc.other.ui.activity;
 
 import android.view.View;
-
-import com.blankj.utilcode.util.LogUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
-import com.yc.spi.loader.ServiceLoader;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -84,7 +82,7 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
                 @Override
                 public void run() {
                     a++;
-                    LogUtils.e("测试普通数据"+a);
+                    AppLogUtils.e("测试普通数据"+a);
                 }
             }).start();
         }
@@ -99,7 +97,7 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
                 @Override
                 public void run() {
                     b++;
-                    LogUtils.e("测试volatile数据"+b);
+                    AppLogUtils.e("测试volatile数据"+b);
                 }
             }).start();
         }
@@ -128,15 +126,15 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
         private volatile boolean flag = false;
         public void writer(){
             a = 1;          //1
-            LogUtils.e("测试volatile数据1--"+a);
+            AppLogUtils.e("测试volatile数据1--"+a);
             flag = true;   //2
-            LogUtils.e("测试volatile数据2--"+flag);
+            AppLogUtils.e("测试volatile数据2--"+flag);
         }
         public void reader(){
-            LogUtils.e("测试volatile数据3--"+flag);
+            AppLogUtils.e("测试volatile数据3--"+flag);
             if(flag){      //3
                 int i = a; //4
-                LogUtils.e("测试volatile数据4--"+i);
+                AppLogUtils.e("测试volatile数据4--"+i);
             }
         }
     }
@@ -148,7 +146,7 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void run() {
                 while (!isOver) {
-                    LogUtils.e("测试volatile数据"+isOver);
+                    AppLogUtils.e("测试volatile数据"+isOver);
                 }
             }
         });
@@ -169,7 +167,7 @@ public class TestFirstActivity extends BaseActivity implements View.OnClickListe
                 @Override
                 public void run() {
                     c++;
-                    LogUtils.e("小杨逗比Thread-------------"+c);
+                    AppLogUtils.e("小杨逗比Thread-------------"+c);
                 }
             }).start();
         }

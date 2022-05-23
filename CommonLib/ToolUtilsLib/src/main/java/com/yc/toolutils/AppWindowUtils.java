@@ -6,6 +6,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Point;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Surface;
@@ -27,29 +29,61 @@ import com.yc.toolutils.AppActivityUtils;
  */
 public final class AppWindowUtils {
 
+    /**
+     * 获取屏幕的宽度（单位：px）
+     *
+     * @return 屏幕宽
+     */
+    public static int getScreenWidth() {
+        WindowManager wm = (WindowManager) AppToolUtils.getApp().getSystemService(Context.WINDOW_SERVICE);
+        if (wm == null) {
+            return AppToolUtils.getApp().getResources().getDisplayMetrics().widthPixels;
+        }
+        Point point = new Point();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            wm.getDefaultDisplay().getRealSize(point);
+        } else {
+            wm.getDefaultDisplay().getSize(point);
+        }
+        return point.x;
+    }
+
 
     /**
-     * 获得屏幕宽度
-     * @param context                               上下文
-     * @return
+     * 获取屏幕的高度（单位：px）
+     *
+     * @return 屏幕高
      */
-    public static int getScreenWidth(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.widthPixels;
+    public static int getScreenHeight() {
+        WindowManager wm = (WindowManager) AppToolUtils.getApp().getSystemService(Context.WINDOW_SERVICE);
+        if (wm == null) {
+            return AppToolUtils.getApp().getResources().getDisplayMetrics().heightPixels;
+        }
+        Point point = new Point();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            wm.getDefaultDisplay().getRealSize(point);
+        } else {
+            wm.getDefaultDisplay().getSize(point);
+        }
+        return point.y;
     }
 
     /**
-     * 获得屏幕高度
-     * @param context                               上下文
-     * @return
+     * 获取屏幕密度
+     *
+     * @return 屏幕密度
      */
-    public static int getScreenHeight(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.heightPixels;
+    public static float getScreenDensity() {
+        return AppToolUtils.getApp().getResources().getDisplayMetrics().density;
+    }
+
+    /**
+     * 获取屏幕密度 DPI
+     *
+     * @return 屏幕密度 DPI
+     */
+    public static int getScreenDensityDpi() {
+        return AppToolUtils.getApp().getResources().getDisplayMetrics().densityDpi;
     }
 
     public static boolean copyToClipBoard(String content){

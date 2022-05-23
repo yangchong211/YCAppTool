@@ -1,9 +1,9 @@
 package com.yc.animbusiness;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.yc.businessinterface.IAnimServiceProvider;
 import com.yc.spi.annotation.ServiceProvider;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppLogUtils;
 
 @ServiceProvider(IAnimServiceProvider.class)
 public class AnimProviderImpl implements IAnimServiceProvider {
@@ -12,19 +12,19 @@ public class AnimProviderImpl implements IAnimServiceProvider {
 
     @Override
     public void setStartAnim() {
-        LogUtils.d(TAG,"setStartAnim");
+        AppLogUtils.d(TAG,"setStartAnim");
         ToastUtils.showRoundRectToast("开始动画");
     }
 
     @Override
     public void setAnimTime(int time) {
-        LogUtils.d(TAG,"setAnimTime : "+time);
+        AppLogUtils.d(TAG,"setAnimTime : "+time);
         ToastUtils.showRoundRectToast("设置动画时间");
     }
 
     @Override
     public int getAnimTime() {
-        LogUtils.d(TAG,"getAnimTime");
+        AppLogUtils.d(TAG,"getAnimTime");
         ToastUtils.showRoundRectToast("获取动画时间");
         return 10;
     }

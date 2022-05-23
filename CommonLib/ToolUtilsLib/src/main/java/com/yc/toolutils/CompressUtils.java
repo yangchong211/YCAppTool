@@ -54,8 +54,8 @@ public final class CompressUtils {
      * @return
      */
     public static Bitmap compressBitmapByBmp(Bitmap image, Context context){
-        int screenHeight = AppWindowUtils.getScreenHeight(context);
-        int screenWidth = AppWindowUtils.getScreenWidth(context);
+        int screenHeight = AppWindowUtils.getScreenHeight();
+        int screenWidth = AppWindowUtils.getScreenWidth();
         return compressBitmapByBmp(image,screenWidth,screenHeight);
     }
 

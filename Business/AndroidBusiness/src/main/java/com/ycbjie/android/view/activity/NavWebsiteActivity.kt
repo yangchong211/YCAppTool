@@ -9,10 +9,10 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.LogUtils
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.library.web.WebViewActivity
 import com.yc.statusbar.bar.StateAppBar
+import com.yc.toolutils.AppLogUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.NavWebsiteContract
 import com.ycbjie.android.model.bean.HomeData
@@ -170,7 +170,7 @@ class NavWebsiteActivity : BaseActivity<NavWebsitePresenter>() , NavWebsiteContr
     }
 
     override fun getNaiWebSiteFail(message: String) {
-        LogUtils.e(message)
+        AppLogUtils.e(message)
     }
 
 

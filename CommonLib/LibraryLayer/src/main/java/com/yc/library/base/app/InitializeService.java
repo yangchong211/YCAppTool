@@ -5,7 +5,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import com.blankj.utilcode.util.LogUtils;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 
 /**
@@ -52,7 +52,7 @@ public class InitializeService extends IntentService {
      * 初始化utils工具类
      */
     private void initUtils() {
-        LogUtils.Config config = LogUtils.getConfig();
+        AppLogUtils.Config config = AppLogUtils.getConfig();
         //边框开关，设置打开
         config.setBorderSwitch(true);
         //logcat 是否打印，设置打印

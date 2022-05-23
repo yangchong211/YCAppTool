@@ -3,7 +3,6 @@ package com.yc.lifehelper;
 import android.Manifest;
 import android.content.Intent;
 
-import com.blankj.utilcode.util.SizeUtils;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.view.GravityCompat;
@@ -21,8 +20,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.LogUtils;
 import com.yc.baseclasslib.activity.ActivityManager;
 import com.yc.banner.view.BannerView;
 
@@ -46,6 +43,8 @@ import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.notifymessage.CustomNotification;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppSizeUtils;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.zxingserver.demo.EasyCaptureActivity;
 import com.yc.zxingserver.scan.Intents;
@@ -78,7 +77,6 @@ public class MainActivity extends BaseActivity{
     private long time;
     private MainAdapter mainAdapter;
     public static final int REQUEST_CODE_SCAN = 0X01;
-    private final Logger logger = LoggerService.getInstance().getLogger("MainActivity");
     private BannerView banner;
 
 
@@ -222,7 +220,7 @@ public class MainActivity extends BaseActivity{
     private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecycleViewItemLine line = new RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
-                SizeUtils.px2dp(1), Color.parseColor("#f5f5f7"));
+                AppSizeUtils.dp2px(this,1), Color.parseColor("#f5f5f7"));
         mRecyclerView.addItemDecoration(line);
         mainAdapter = new MainAdapter(this);
         initAddBanner();
@@ -367,7 +365,7 @@ public class MainActivity extends BaseActivity{
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        LogUtils.e("触摸监听", "onKeyDown");
+        AppLogUtils.e("触摸监听", "onKeyDown");
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (mDrawerLayout!=null && mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);

@@ -5,13 +5,13 @@ import android.graphics.Color
 import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.NetworkUtils
-import com.blankj.utilcode.util.SPUtils
-import com.blankj.utilcode.util.SizeUtils
 import com.yc.cn.ycbannerlib.banner.view.BannerView
 import com.yc.library.base.mvp.BaseFragment
 import com.yc.library.web.WebViewActivity
 import com.yc.toastutils.ToastUtils
+import com.yc.toolutils.AppNetworkUtils
+import com.yc.toolutils.AppSizeUtils
+import com.yc.toolutils.AppSpUtils
 import com.yc.ycshare.DoShareUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.BaseItemView
@@ -111,7 +111,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                 when (view.id){
                     //收藏
                     R.id.flLike ->{
-                        if (SPUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
+                        if (AppSpUtils.getInstance().getInt(KotlinConstant.USER_ID)==0){
                             ToastUtils.showRoundRectToast(activity?.resources?.
                                     getString(R.string.collect_fail_pls_login))
                             AndroidLoginActivity.lunch(activity)
@@ -147,7 +147,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
         val linearLayoutManager = LinearLayoutManager(activity)
         recyclerView?.setLayoutManager(linearLayoutManager)
         val line = RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
-                SizeUtils.dp2px(1f), Color.parseColor("#f5f5f7"))
+                AppSizeUtils.dp2px(activity,1f), Color.parseColor("#f5f5f7"))
         recyclerView?.addItemDecoration(line)
         adapter = AndroidHomeAdapter(activity)
         recyclerView?.adapter = adapter
@@ -155,7 +155,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
         recyclerView?.scrollTo(0, 0)
         recyclerView?.scrollBy(0, 0)
         recyclerView?.setRefreshListener {
-            if (NetworkUtils.isConnected()) {
+            if (AppNetworkUtils.isConnected()) {
                 page = 0
                 presenter?.getHomeList(page)
             } else {
@@ -166,7 +166,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
         //加载更多
         adapter.setMore(R.layout.view_recycle_more, object : OnMoreListener {
             override fun onMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     if (adapter.allData.size > 0) {
                         page++
                         presenter?.getHomeList(page)
@@ -186,7 +186,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
         //设置没有数据
         adapter.setNoMore(R.layout.view_recycle_no_more, object : OnNoMoreListener {
             override fun onNoMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     adapter.resumeMore()
                 } else {
                     ToastUtils.showRoundRectToast( "网络不可用")
@@ -194,7 +194,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
             }
 
             override fun onNoMoreClick() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     adapter.resumeMore()
                 } else {
                     ToastUtils.showRoundRectToast( "网络不可用")
@@ -230,7 +230,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                     mBanner?.setHintGravity(1)
                     mBanner?.setAnimationDuration(1000)
                     mBanner?.setPlayDelay(2000)
-                    mBanner?.setHintPadding(0, 0, 0, SizeUtils.dp2px(10f))
+                    mBanner?.setHintPadding(0, 0, 0, AppSizeUtils.dp2px(mBanner?.context,10f))
                     mBanner?.setAdapter(BannerPagerAdapter(activity, bannerLists))
                     mBanner?.setOnBannerClickListener { position: Int ->
                         if(position>=0 && bannerLists.size>position){

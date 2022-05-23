@@ -7,13 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.TextView;
-
-import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.timerlib.view.CountDownView;
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.List;
 
@@ -89,7 +86,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
         //检查是否获取该权限
         if (hasPermissions()) {
             //具备权限 直接进行操作
-            ActivityUtils.startActivity(MainActivity.class);
+            //ActivityUtils.startActivity(MainActivity.class);
             finish();
         } else {
             //权限拒绝 申请权限
@@ -130,7 +127,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
         //某些权限已被授予
-        LogUtils.d("权限", "onPermissionsGranted:" + requestCode + ":" + perms.size());
+        AppLogUtils.d("权限", "onPermissionsGranted:" + requestCode + ":" + perms.size());
     }
 
     /**
@@ -139,7 +136,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
         //某些权限已被拒绝
-        LogUtils.d("权限", "onPermissionsDenied:" + requestCode + ":" + perms.size());
+        AppLogUtils.d("权限", "onPermissionsDenied:" + requestCode + ":" + perms.size());
         // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
         // This will display a dialog directing them to enable the permission in app settings.
         if (EasyPermissions.somePermissionPermanentlyDenied(SplashActivity.this, perms)) {
@@ -160,20 +157,10 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
         if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
             // Do something after user returned from app settings screen, like showing a Toast.
             // 当用户从应用设置界面返回的时候，可以做一些事情，比如弹出一个土司。
-            LogUtils.d("权限", "onPermissionsDenied:" + requestCode + ":");
-            ActivityUtils.startActivity(MainActivity.class);
+            AppLogUtils.d("权限", "onPermissionsDenied:" + requestCode + ":");
+            startActivity(new Intent(this,MainActivity.class));
             finish();
         }
-    }
-
-
-
-    private void test(){
-
-
-
-
-
     }
 
 }

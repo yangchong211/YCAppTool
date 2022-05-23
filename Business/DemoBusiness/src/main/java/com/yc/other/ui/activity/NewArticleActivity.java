@@ -24,9 +24,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -49,6 +46,8 @@ import com.yc.other.tool.ModelStorage;
 import com.yc.other.R;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppWindowUtils;
 
 
 import java.util.ArrayList;
@@ -238,7 +237,7 @@ public class NewArticleActivity extends AppCompatActivity {
                 List<HyperEditData> hyperEditData = mHteContent.buildEditData();
                 Gson gson = new Gson();
                 String content = gson.toJson(hyperEditData);
-                LogUtils.json("content---"+content);
+                AppLogUtils.json("content---"+content);
             } catch (Exception e){
                 e.printStackTrace();
             } finally {
@@ -367,7 +366,7 @@ public class NewArticleActivity extends AppCompatActivity {
      * 调用图库选择
      */
     private void callGallery(){
-        int screenWidth = ScreenUtils.getScreenWidth();
+        int screenWidth = AppWindowUtils.getScreenWidth();
         //参考案例：
         Matisse.from(NewArticleActivity.this)
                 .choose(MimeType.ofImage())//照片视频全部显示MimeType.allOf()
@@ -379,10 +378,10 @@ public class NewArticleActivity extends AppCompatActivity {
                 .gridExpectedSize(screenWidth/4)//图片显示表格的大小
                 .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)//图像选择和预览活动所需的方向
                 .setOnSelectedListener((uriList, pathList) -> {
-                    LogUtils.e("onSelected", "onSelected: pathList=" + pathList);
+                    AppLogUtils.e("onSelected", "onSelected: pathList=" + pathList);
                 })
                 .setOnCheckedListener(isChecked -> {
-                    LogUtils.e("isChecked", "onCheck: isChecked=" + isChecked);
+                    AppLogUtils.e("isChecked", "onCheck: isChecked=" + isChecked);
                 })
                 .thumbnailScale(0.85f)//缩放比例
                 .maxOriginalSize(2)//限制设置最大图片为2MB，大于则提示图片大于2MB无法上传

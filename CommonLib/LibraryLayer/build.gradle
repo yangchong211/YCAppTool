@@ -91,7 +91,6 @@ dependencies {
     api(rootProject.ext.dependencies["rxandroid2"])
     //annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     api(rootProject.ext.dependencies["retrofit"])
-    api rootProject.ext.dependencies["utilcode"]
     api rootProject.ext.dependencies["easypermissions"]
     api rootProject.ext.dependencies["YCProgressLib"]
     api rootProject.ext.dependencies["YCGalleryLib"]

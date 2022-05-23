@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.TimeUtils;
 import com.yc.imageserver.utils.GlideImageUtils;
+import com.yc.toolutils.AppTimeUtils;
 import com.yc.video.R;
 import com.yc.video.model.MultiNewsArticleDataBean;
 
@@ -87,9 +87,6 @@ public class VideoArticleAdapter extends RecyclerArrayAdapter<MultiNewsArticleDa
             String tvSource = item.getSource();
             String tvCommentCount = item.getComment_count() + "评论";
             String tvDatetime = item.getBehot_time() + "";
-            if (!TextUtils.isEmpty(tvDatetime)) {
-                tvDatetime = TimeUtils.getFriendlyTimeSpanByNow(tvDatetime);
-            }
             int videoDuration = item.getVideo_duration();
             String min = String.valueOf(videoDuration / 60);
             String second = String.valueOf(videoDuration % 10);

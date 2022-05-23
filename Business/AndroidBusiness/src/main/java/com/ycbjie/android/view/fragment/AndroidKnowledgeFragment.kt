@@ -5,8 +5,8 @@ import android.graphics.Color
 import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.SizeUtils
 import com.yc.library.base.mvp.BaseLazyFragment
+import com.yc.toolutils.AppSizeUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.AndroidKnowledgeContract
 import com.ycbjie.android.model.bean.TreeBean
@@ -72,7 +72,7 @@ class AndroidKnowledgeFragment : BaseLazyFragment()  , AndroidKnowledgeContract.
         val linearLayoutManager = LinearLayoutManager(activity)
         recyclerView!!.setLayoutManager(linearLayoutManager)
         val line = RecycleViewItemLine(activity, LinearLayout.HORIZONTAL,
-                SizeUtils.dp2px(1f), Color.parseColor("#f5f5f7"))
+                AppSizeUtils.dp2px(activity,1f), Color.parseColor("#f5f5f7"))
         recyclerView!!.addItemDecoration(line)
         adapter = AndroidKnowledgeAdapter(activity)
         recyclerView!!.adapter = adapter

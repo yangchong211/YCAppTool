@@ -10,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.blankj.utilcode.util.SizeUtils;
 import com.yc.eastadapterlib.BaseRecycleAdapter;
 import com.yc.eastadapterlib.BaseViewHolder;
 import com.yc.imageserver.utils.GlideImageUtils;
@@ -22,6 +20,7 @@ import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.snapbannerlib.ScrollLinearHelper;
+import com.yc.toolutils.AppSizeUtils;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 
@@ -112,14 +111,14 @@ public class SnapBannerComponent implements InterItemView {
                                    @NonNull  RecyclerView.State state) {
             super.getItemOffsets(outRect, view, parent, state);
             int position = parent.getChildAdapterPosition(view);
-            outRect.left = SizeUtils.dp2px(20);
+            outRect.left = AppSizeUtils.dp2px(parent.getContext(),20);
             RecyclerView.Adapter adapter = parent.getAdapter();
             RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
             if (adapter == null || layoutManager == null){
                 return;
             }
             if (position == layoutManager.getItemCount()){
-                outRect.right = SizeUtils.dp2px(20);
+                outRect.right = AppSizeUtils.dp2px(parent.getContext(),20);
             }
         }
     }

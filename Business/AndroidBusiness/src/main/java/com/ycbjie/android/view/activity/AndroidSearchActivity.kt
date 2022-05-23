@@ -13,15 +13,15 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.KeyboardUtils
-import com.blankj.utilcode.util.NetworkUtils
-import com.blankj.utilcode.util.SPUtils
-import com.blankj.utilcode.util.SizeUtils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.statusbar.bar.StateAppBar
 import com.yc.toastutils.ToastUtils
+import com.yc.toolutils.AppNetworkUtils
+import com.yc.toolutils.AppSizeUtils
+import com.yc.toolutils.AppSpUtils
+import com.yc.toolutils.KeyboardUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.KotlinConstant
 import com.ycbjie.android.contract.AndroidSearchContract
@@ -106,7 +106,7 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
         val linearLayoutManager = LinearLayoutManager(this)
         recyclerView.setLayoutManager(linearLayoutManager)
         val line = RecycleViewItemLine(this, LinearLayout.HORIZONTAL,
-                SizeUtils.dp2px(1f), Color.parseColor("#f5f5f7"))
+                AppSizeUtils.dp2px(this,1f), Color.parseColor("#f5f5f7"))
         recyclerView.addItemDecoration(line)
         adapter = AndroidSearchAdapter(this)
         recyclerView?.adapter = adapter
@@ -114,7 +114,7 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
         recyclerView?.scrollTo(0, 0)
         recyclerView?.scrollBy(0, 0)
         recyclerView?.setRefreshListener {
-            if (NetworkUtils.isConnected()) {
+            if (AppNetworkUtils.isConnected()) {
                 presenter.search(edSearch.text.toString(), true)
             } else {
                 recyclerView?.setRefreshing(false)
@@ -123,7 +123,7 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
         //加载更多
         adapter.setMore(R.layout.view_recycle_more, object : OnMoreListener {
             override fun onMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     if (adapter.allData.size > 0) {
                         presenter.search(edSearch.text.toString(), false)
                     } else {
@@ -141,14 +141,14 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
         //设置没有数据
         adapter.setNoMore(R.layout.view_recycle_no_more, object : OnNoMoreListener {
             override fun onNoMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     adapter.resumeMore()
                 } else {
                 }
             }
 
             override fun onNoMoreClick() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     adapter.resumeMore()
                 } else {
 
@@ -213,12 +213,12 @@ class AndroidSearchActivity : BaseActivity<AndroidSearchPresenter>() , AndroidSe
         }
         historyTags.add(str)
         val jsonString = Gson().toJson(historyTags, object : TypeToken<MutableList<String>>() {}.type)
-        SPUtils.getInstance().put(KotlinConstant.HISTORY_SEARCH, jsonString)
+        AppSpUtils.getInstance().put(KotlinConstant.HISTORY_SEARCH, jsonString)
     }
 
 
     private fun getHistory() {
-        val jsonString = SPUtils.getInstance().getString(KotlinConstant.HISTORY_SEARCH)
+        val jsonString = AppSpUtils.getInstance().getString(KotlinConstant.HISTORY_SEARCH)
         if (!TextUtils.isEmpty(jsonString)) {
             historyTags = Gson().fromJson(jsonString, object : TypeToken<MutableList<String>>() {}.type)
         }

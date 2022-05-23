@@ -3,11 +3,10 @@ package com.yc.video.presenter;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
-
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.TimeUtils;
 import com.yc.httpserver.ExceptionUtils;
 import com.yc.httpserver.JsonUtils;
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppTimeUtils;
 import com.yc.video.api.VideoModel;
 import com.yc.video.contract.VideoArticleContract;
 import com.yc.video.model.MultiNewsArticleBean;
@@ -51,7 +50,7 @@ public class VideoArticlePresenter implements VideoArticleContract.Presenter {
 
     @Override
     public void subscribe() {
-        this.time = TimeUtils.getNowString();
+        this.time = AppTimeUtils.getNowString();
     }
 
     @Override
@@ -63,7 +62,7 @@ public class VideoArticlePresenter implements VideoArticleContract.Presenter {
     public void doRefresh() {
         if (dataList.size() != 0) {
             dataList.clear();
-            time = TimeUtils.getNowString();
+            time = AppTimeUtils.getNowString();
         }
         getVideoData();
     }
@@ -83,7 +82,7 @@ public class VideoArticlePresenter implements VideoArticleContract.Presenter {
                 this.category = category[0];
             }
         } catch (Exception e) {
-            LogUtils.e(e.getLocalizedMessage());
+            AppLogUtils.e(e.getLocalizedMessage());
         }
 
         // 释放内存
@@ -119,7 +118,7 @@ public class VideoArticlePresenter implements VideoArticleContract.Presenter {
                                 return false;
                             }
                         } catch (NullPointerException e) {
-                            LogUtils.e(e.getLocalizedMessage());
+                            AppLogUtils.e(e.getLocalizedMessage());
                         }
                         // 过滤重复新闻(与上次刷新的数据比较)
                         for (MultiNewsArticleDataBean bean : dataList) {

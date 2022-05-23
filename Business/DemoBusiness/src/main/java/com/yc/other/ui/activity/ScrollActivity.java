@@ -11,12 +11,11 @@ import android.util.Log;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
-import com.blankj.utilcode.util.LogUtils;
 import com.yc.configlayer.constant.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.statusbar.bar.StateAppBar;
+import com.yc.toolutils.AppLogUtils;
 
 
 /**
@@ -61,7 +60,7 @@ public class ScrollActivity extends BaseActivity {
             height = ivImage.getHeight();
             width = ivImage.getWidth();
             top = ivImage.getTop();
-            LogUtils.e("CustomScrollView"+"++++++"+height+"-----"+width+"-----"+top);
+            AppLogUtils.e("CustomScrollView"+"++++++"+height+"-----"+width+"-----"+top);
         });
     }
 
@@ -69,9 +68,9 @@ public class ScrollActivity extends BaseActivity {
     public void initListener() {
         ViewParent parent = scrollView.getParent();
         if (parent instanceof CoordinatorLayout){
-            LogUtils.e("initListener"+"------");
+            AppLogUtils.e("initListener"+"------");
         }else {
-            LogUtils.e("initListener"+"++++++");
+            AppLogUtils.e("initListener"+"++++++");
         }
 
         appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {

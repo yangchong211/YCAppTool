@@ -2,7 +2,6 @@ package com.yc.library.base.config;
 
 import android.app.Application;
 
-import com.blankj.utilcode.util.Utils;
 import com.yc.library.base.callback.LogCallback;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
@@ -27,7 +26,6 @@ public enum AppConfig {
 
 
     public void initConfig(Application application){
-        Utils.init(application);
         initThreadPool();
     }
 

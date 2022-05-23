@@ -2,9 +2,9 @@ package com.ycbjie.android.view.fragment
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.NetworkUtils
 import com.yc.library.base.mvp.BaseLazyFragment
 import com.yc.toastutils.ToastUtils
+import com.yc.toolutils.AppNetworkUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.KnowledgeListContract
 import com.ycbjie.android.model.bean.HomeData
@@ -85,7 +85,7 @@ class KnowledgeListFragment : BaseLazyFragment()  , KnowledgeListContract.View{
         //加载更多
         listsAdapter.setMore(R.layout.view_recycle_more, object : OnMoreListener {
             override fun onMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     if (listsAdapter.allData.size > 0) {
 
                     } else {
@@ -99,7 +99,7 @@ class KnowledgeListFragment : BaseLazyFragment()  , KnowledgeListContract.View{
             }
 
             override fun onMoreClick() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     if (listsAdapter.allData.size > 0) {
 
                     } else {
@@ -115,7 +115,7 @@ class KnowledgeListFragment : BaseLazyFragment()  , KnowledgeListContract.View{
         //设置没有数据
         listsAdapter.setNoMore(R.layout.view_recycle_no_more, object : OnNoMoreListener {
             override fun onNoMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     listsAdapter.resumeMore()
                 } else {
                     ToastUtils.showRoundRectToast("网络不可用")
@@ -123,7 +123,7 @@ class KnowledgeListFragment : BaseLazyFragment()  , KnowledgeListContract.View{
             }
 
             override fun onNoMoreClick() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     listsAdapter.resumeMore()
                 } else {
                     ToastUtils.showRoundRectToast("网络不可用")
@@ -145,7 +145,7 @@ class KnowledgeListFragment : BaseLazyFragment()  , KnowledgeListContract.View{
 
     private fun initRefresh() {
         recyclerView.setRefreshListener {
-            if (NetworkUtils.isConnected()) {
+            if (AppNetworkUtils.isConnected()) {
                 onLazyLoad()
             } else {
                 recyclerView.setRefreshing(false)
@@ -165,7 +165,7 @@ class KnowledgeListFragment : BaseLazyFragment()  , KnowledgeListContract.View{
     }
 
     override fun getKnowledgeFail(message: String, refresh: Boolean) {
-        if(NetworkUtils.isConnected()){
+        if(AppNetworkUtils.isConnected()){
             recyclerView?.showError()
         }else{
             recyclerView.showError()

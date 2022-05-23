@@ -14,14 +14,11 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-
-import com.blankj.utilcode.util.LogUtils;
-
 import com.yc.customwidget.PasswordEditText;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppLogUtils;
 
 /**
  * <pre>
@@ -174,7 +171,7 @@ public class MeLoginActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onCancel(DialogInterface dialog) {
-                LogUtils.e(TAG +"EMClient.getInstance().onCancel");
+                AppLogUtils.e(TAG +"EMClient.getInstance().onCancel");
                 progressShow = false;
                 //跳转首页
             }

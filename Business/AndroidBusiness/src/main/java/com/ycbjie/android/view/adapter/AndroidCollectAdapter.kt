@@ -14,8 +14,8 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import com.blankj.utilcode.util.Utils
 import com.yc.customwidget.spannable.RoundBackgroundSpan
+import com.yc.toolutils.AppToolUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.HomeData
 import com.ycbjie.android.tools.AndroidUtils
@@ -85,7 +85,7 @@ class AndroidCollectAdapter : RecyclerArrayAdapter<HomeData>{
                         Color.parseColor("#ffffff"),
                         AndroidUtils.SingleObject.getApp().
                                 resources.getDimensionPixelOffset(R.dimen.dp1),
-                        Utils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4))
+                    AppToolUtils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4))
                 spannable(titleSpannable, exclusiveSpannable, 0, text1.length)
 
                 // text2 不等于空 在绘制text
@@ -94,8 +94,8 @@ class AndroidCollectAdapter : RecyclerArrayAdapter<HomeData>{
                     val borderColor = Color.parseColor("#ff3d51")
                     val textColor = Color.parseColor("#f25057")
                     val spannable = RoundBackgroundSpan(bgColor, borderColor, textColor,
-                            Utils.getApp().resources.getDimensionPixelOffset(R.dimen.dp1),
-                            Utils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4))
+                            AppToolUtils.getApp().resources.getDimensionPixelOffset(R.dimen.dp1),
+                        AppToolUtils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4))
                     spannable(titleSpannable, spannable, 2, 2 + text2.length)
                 }
 
@@ -109,7 +109,7 @@ class AndroidCollectAdapter : RecyclerArrayAdapter<HomeData>{
     private fun spannable(titleSpannable: SpannableString, spannable: RoundBackgroundSpan,
                           start: Int, end: Int) {
         titleSpannable.setSpan(spannable, start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-        titleSpannable.setSpan(AbsoluteSizeSpan(Utils.getApp().resources.getDimensionPixelSize(
+        titleSpannable.setSpan(AbsoluteSizeSpan(AppToolUtils.getApp().resources.getDimensionPixelSize(
                 R.dimen.textSize9)), start,
                 end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     }

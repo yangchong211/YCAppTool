@@ -9,14 +9,12 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.widget.TextView;
-
-
-import com.blankj.utilcode.util.Utils;
 import com.yc.cn.ycgallerylib.gallery.GalleryImageView;
 
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.statusbar.bar.StateAppBar;
+import com.yc.toolutils.AppToolUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +54,7 @@ public class ImageGalleryActivity extends BaseActivity {
     @SuppressLint("SetTextI18n")
     @Override
     public void initData() {
-        final TypedArray array = Utils.getApp().getResources().obtainTypedArray(R.array.image_girls);
+        final TypedArray array = AppToolUtils.getApp().getResources().obtainTypedArray(R.array.image_girls);
         final List<Bitmap> images = new ArrayList<>();
         for(int a=0 ; a<array.length() ; a++){
             int resourceId = array.getResourceId(a, R.drawable.ic_data_picture);

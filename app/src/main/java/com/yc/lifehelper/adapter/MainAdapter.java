@@ -5,10 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.TimeUtils;
 import com.yc.library.bean.ListNewsData;
 import com.yc.lifehelper.R;
+import com.yc.toolutils.AppTimeUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;
@@ -43,7 +42,7 @@ public class MainAdapter extends RecyclerArrayAdapter<ListNewsData> {
         public void setData(ListNewsData data) {
             super.setData(data);
             tv_title.setText(data.getTitle());
-            tv_time.setText(TimeUtils.date2String(new Date()));
+            tv_time.setText(AppTimeUtils.date2String(new Date()));
             iv_logo.setBackgroundResource(data.getImage());
         }
     }

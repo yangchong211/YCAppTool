@@ -1,9 +1,5 @@
 package com.yc.library.api;
 
-
-import android.content.res.TypedArray;
-
-import com.blankj.utilcode.util.Utils;
 import com.ycbjie.library.R;
 
 import java.util.ArrayList;

@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.blankj.utilcode.util.TimeUtils;
 import com.yc.eastadapterlib.BaseRecycleAdapter;
 import com.yc.eastadapterlib.BaseViewHolder;
 import com.yc.library.api.ConstantImageApi;
@@ -20,6 +18,8 @@ import com.yc.library.bean.ListNewsData;
 import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
+import com.yc.toolutils.AppTimeUtils;
+
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
 
@@ -81,7 +81,7 @@ public class ListNewsComponent implements InterItemView {
             TextView tv_time = holder.getView(R.id.tv_time);
             ImageView iv_logo = holder.getView(R.id.iv_logo);
             tv_title.setText(data.getTitle());
-            tv_time.setText(TimeUtils.date2String(new Date()));
+            tv_time.setText(AppTimeUtils.date2String(new Date()));
             iv_logo.setBackgroundResource(data.getImage());
         }
 

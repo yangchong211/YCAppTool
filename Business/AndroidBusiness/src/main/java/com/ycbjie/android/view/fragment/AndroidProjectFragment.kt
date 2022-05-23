@@ -7,10 +7,10 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.NetworkUtils
 import com.yc.library.base.mvp.BaseLazyFragment
 import com.yc.toastutils.ToastUtils
+import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.AppNetworkUtils
 import com.yc.ycshare.DoShareUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.contract.AndroidProjectContract
@@ -110,7 +110,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
         //加载更多
         listsAdapter.setMore(R.layout.view_recycle_more, object : OnMoreListener {
             override fun onMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     if (listsAdapter.allData.size > 0) {
                         presenter?.getProjectTreeList(selectProject!!.id, false)
                     } else {
@@ -124,7 +124,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
             }
 
             override fun onMoreClick() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     if (listsAdapter.allData.size > 0) {
                         presenter?.getProjectTreeList(selectProject!!.id, false)
                     } else {
@@ -140,7 +140,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
         //设置没有数据
         listsAdapter.setNoMore(R.layout.view_recycle_no_more, object : OnNoMoreListener {
             override fun onNoMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     listsAdapter.resumeMore()
                 } else {
                     ToastUtils.showRoundRectToast("没有网络")
@@ -148,7 +148,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
             }
 
             override fun onNoMoreClick() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     listsAdapter.resumeMore()
                 } else {
                     ToastUtils.showRoundRectToast("没有网络")
@@ -192,7 +192,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
 
     private fun initRefresh() {
         rvList.setRefreshListener {
-            if (NetworkUtils.isConnected()) {
+            if (AppNetworkUtils.isConnected()) {
                 presenter?.getProjectTreeList(selectProject!!.id, true)
             } else {
                 rvList.setRefreshing(false)
@@ -220,7 +220,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
         if (refresh) {
             val data = bean.data
             val size = data?.size
-            LogUtils.e("size数量-----$size")
+            AppLogUtils.e("size数量-----$size")
             listsAdapter.clear()
             //这种为什么不行？？？？
             listsAdapter.addAll(data?.datas!!)
@@ -239,7 +239,7 @@ class AndroidProjectFragment : BaseLazyFragment()  , AndroidProjectContract.View
         rvList.showError()
         val network = rvList.findViewById(R.id.ll_set_network) as LinearLayout
         network.setOnClickListener {
-            if (NetworkUtils.isConnected()) {
+            if (AppNetworkUtils.isConnected()) {
                 onLazyLoad()
             } else {
                 val intent = Intent(Settings.ACTION_WIRELESS_SETTINGS)

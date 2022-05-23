@@ -4,14 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import androidx.annotation.FloatRange;
-
-import com.blankj.utilcode.util.LogUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -126,7 +125,7 @@ public final class ZxingCodeCreate {
             }
             return bitmap;
         } catch (WriterException e) {
-            LogUtils.w(e.getMessage());
+            AppLogUtils.w(e.getMessage());
         }
         return null;
     }
@@ -169,7 +168,7 @@ public final class ZxingCodeCreate {
             canvas.restore();
         } catch (Exception e) {
             bitmap = null;
-            LogUtils.w(e.getMessage());
+            AppLogUtils.w(e.getMessage());
         }
         return bitmap;
     }

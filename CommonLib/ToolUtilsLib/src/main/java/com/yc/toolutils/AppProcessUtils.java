@@ -151,8 +151,8 @@ public final class AppProcessUtils {
      *
      * @return 前台应用包名
      */
-    public static String getForegroundProcessName(Context context) {
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+    public static String getForegroundProcessName() {
+        ActivityManager am = (ActivityManager) AppToolUtils.getApp().getSystemService(Context.ACTIVITY_SERVICE);
         //noinspection ConstantConditions
         List<ActivityManager.RunningAppProcessInfo> pInfo = am.getRunningAppProcesses();
         if (pInfo != null && pInfo.size() > 0) {
@@ -164,7 +164,7 @@ public final class AppProcessUtils {
             }
         }
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            PackageManager pm = context.getPackageManager();
+            PackageManager pm = AppToolUtils.getApp().getPackageManager();
             Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
             List<ResolveInfo> list =
                     pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
@@ -176,14 +176,14 @@ public final class AppProcessUtils {
             }
             try {// Access to usage information.
                 ApplicationInfo info =
-                        pm.getApplicationInfo(context.getPackageName(), 0);
+                        pm.getApplicationInfo(AppToolUtils.getApp().getPackageName(), 0);
                 AppOpsManager aom =
-                        (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+                        (AppOpsManager) AppToolUtils.getApp().getSystemService(Context.APP_OPS_SERVICE);
                 if (aom.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
                         info.uid,
                         info.packageName) != AppOpsManager.MODE_ALLOWED) {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                    AppToolUtils.getApp().startActivity(intent);
                 }
                 if (aom.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
                         info.uid,
@@ -192,7 +192,7 @@ public final class AppProcessUtils {
                             "getForegroundProcessName: refuse to device usage stats.");
                     return "";
                 }
-                UsageStatsManager usageStatsManager = (UsageStatsManager) context
+                UsageStatsManager usageStatsManager = (UsageStatsManager) AppToolUtils.getApp()
                         .getSystemService(Context.USAGE_STATS_SERVICE);
                 List<UsageStats> usageStatsList = null;
                 if (usageStatsManager != null) {

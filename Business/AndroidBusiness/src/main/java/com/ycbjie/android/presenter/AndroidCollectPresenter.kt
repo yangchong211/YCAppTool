@@ -1,7 +1,7 @@
 package com.ycbjie.android.presenter
 
 import android.annotation.SuppressLint
-import com.blankj.utilcode.util.NetworkUtils
+import com.yc.toolutils.AppNetworkUtils
 import com.ycbjie.android.contract.AndroidCollectContract
 import com.ycbjie.android.model.helper.AndroidHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -32,7 +32,7 @@ class AndroidCollectPresenter : AndroidCollectContract.Presenter{
                 .subscribe({bean->
                     mView.setDataView(bean)
                 },{t ->
-                    if(NetworkUtils.isConnected()){
+                    if(AppNetworkUtils.isConnected()){
                         mView.setDataErrorView(t.message)
                     }else{
                         mView.setNetWorkErrorView()

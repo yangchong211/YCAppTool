@@ -231,7 +231,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
                         mIvScreenShot.setVisibility(View.VISIBLE);
                         //设置宽高
                         ViewGroup.LayoutParams layoutParams = mIvScreenShot.getLayoutParams();
-                        layoutParams.width = AppWindowUtils.getScreenWidth(CrashDetailsActivity.this);
+                        layoutParams.width = AppWindowUtils.getScreenWidth();
                         layoutParams.height = bitmapCompress.getHeight() * layoutParams.width / bitmapCompress.getWidth();
                         mIvScreenShot.setLayoutParams(layoutParams);
                         //设置显示动画

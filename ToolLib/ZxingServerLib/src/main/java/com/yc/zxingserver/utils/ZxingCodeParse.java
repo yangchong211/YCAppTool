@@ -3,7 +3,6 @@ package com.yc.zxingserver.utils;
 import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -13,6 +12,7 @@ import com.google.zxing.Result;
 import com.google.zxing.common.GlobalHistogramBinarizer;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.zxingserver.scan.DecodeFormatManager;
 
 import java.util.HashMap;
@@ -135,7 +135,7 @@ public final class ZxingCodeParse {
                 reader.reset();
             }
         }catch (Exception e){
-            LogUtils.w(e.getMessage());
+            AppLogUtils.w(e.getMessage());
         }
 
         return result;
@@ -230,7 +230,7 @@ public final class ZxingCodeParse {
                 reader.reset();
             }
         }catch (Exception e){
-            LogUtils.w(e.getMessage());
+            AppLogUtils.w(e.getMessage());
         }
         return result;
     }

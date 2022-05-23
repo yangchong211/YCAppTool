@@ -35,6 +35,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation rootProject.ext.dependencies["zxing"]
-    implementation rootProject.ext.dependencies["utilcode"]
-
+    implementation project(path: ':ToolUtilsLib')
 }

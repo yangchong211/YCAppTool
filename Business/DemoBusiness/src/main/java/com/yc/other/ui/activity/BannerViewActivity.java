@@ -12,8 +12,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 
-import com.blankj.utilcode.util.LogUtils;
-
 import com.yc.gallerybannerlib.GalleryLayoutManager;
 import com.yc.gallerybannerlib.GalleryLinearSnapHelper;
 import com.yc.gallerybannerlib.GalleryRecyclerView;
@@ -21,6 +19,7 @@ import com.yc.gallerybannerlib.GalleryScaleTransformer;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.ui.adapter.MeBannerAdapter;
 import com.yc.statusbar.bar.StateAppBar;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.widget.blurview.blur.CustomBlur;
 import com.yc.other.R;
 
@@ -86,7 +85,7 @@ public class BannerViewActivity extends BaseActivity {
         mRecyclerView.setOnItemSelectedListener(new GalleryRecyclerView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(RecyclerView recyclerView, View item, int position) {
-                LogUtils.e("onItemSelected-----", position + "");
+                AppLogUtils.e("onItemSelected-----", position + "");
                 //设置高斯模糊背景
                 setBlurImage(true);
             }

@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.NetworkUtils;
 import com.yc.library.base.mvp.BackLazyFragment;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppNetworkUtils;
 import com.yc.video.R;
 import com.yc.video.contract.VideoArticleContract;
 import com.yc.video.model.MultiNewsArticleDataBean;
@@ -134,7 +134,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
     @Override
     public void initListener() {
 //        recyclerView.setRefreshListener(() -> {
-//            if (NetworkUtils.isConnected()) {
+//            if (AppNetworkUtils.isConnected()) {
 //                presenter.doRefresh();
 //            } else {
 //                recyclerView.setRefreshing(false);
@@ -176,7 +176,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
         adapter.setMore(R.layout.view_recycle_more, new OnMoreListener() {
             @Override
             public void onMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     if (adapter.getAllData().size() > 0) {
                         presenter.doLoadMoreData();
                     } else {
@@ -198,7 +198,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
         adapter.setNoMore(R.layout.view_recycle_no_more, new OnNoMoreListener() {
             @Override
             public void onNoMoreShow() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
                     ToastUtils.showRoundRectToast("网络不可用");
@@ -207,7 +207,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
 
             @Override
             public void onNoMoreClick() {
-                if (NetworkUtils.isConnected()) {
+                if (AppNetworkUtils.isConnected()) {
                     adapter.resumeMore();
                 } else {
                     ToastUtils.showRoundRectToast("网络不可用");
@@ -318,7 +318,7 @@ public class VideoArticleFragment extends BackLazyFragment implements VideoArtic
                 itemCount = layoutManager.getItemCount();
                 lastPosition = layoutManager.findLastCompletelyVisibleItemPosition();
             } else {
-                LogUtils.e("OnLoadMoreListener", "The OnLoadMoreListener only support LinearLayoutManager");
+                AppLogUtils.e("OnLoadMoreListener", "The OnLoadMoreListener only support LinearLayoutManager");
                 return;
             }
             if (lastItemCount != itemCount && lastPosition == itemCount - 1) {

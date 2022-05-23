@@ -1,7 +1,8 @@
 package com.ycbjie.android.presenter
 
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.NetworkUtils
+
+import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.AppNetworkUtils
 import com.ycbjie.android.contract.AndroidProjectContract
 import com.ycbjie.android.model.helper.AndroidHelper
 import com.ycbjie.android.network.BaseSchedulerProvider
@@ -48,14 +49,8 @@ class AndroidProjectPresenter : AndroidProjectContract.Presenter {
                 .compose(scheduler?.applySchedulers())
                 .subscribe ({ bean ->
                     mView.setProjectTreeSuccess(bean)
-                    LogUtils.e("getProjectTree-----"+"成功")
                 }, { t ->
-                    LogUtils.e("getProjectTree-----"+"onError"+t.localizedMessage)
-                    if(NetworkUtils.isConnected()){
 
-                    }else{
-
-                    }
                 })
         compositeDisposable.add(disposable)
     }
@@ -74,10 +69,10 @@ class AndroidProjectPresenter : AndroidProjectContract.Presenter {
                 .subscribe ({ bean ->
                     mView.setProjectListByCidSuccess(bean, b)
                     page++
-                    LogUtils.e("getProjectTreeList-----"+"成功"+ (bean.data?.size))
+                    AppLogUtils.e("getProjectTreeList-----"+"成功"+ (bean.data?.size))
                 }, { t ->
-                    LogUtils.e("getProjectTreeList-----"+"onError"+t.localizedMessage)
-                    if(NetworkUtils.isConnected()){
+                    AppLogUtils.e("getProjectTreeList-----"+"onError"+t.localizedMessage)
+                    if(AppNetworkUtils.isConnected()){
                         mView.setProjectListByCidError()
                     }else{
                         mView.setProjectListByCidNetError()

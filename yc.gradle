@@ -129,7 +129,6 @@ ext {
             //弹窗库
 
             //tools
-            "utilcode"                : "com.blankj:utilcode:1.12.5",
             "easypermissions"         : "pub.devrel:easypermissions:$permissionsVersion",
             zxing                     : "com.google.zxing:core:$zxingVersion",
     ]

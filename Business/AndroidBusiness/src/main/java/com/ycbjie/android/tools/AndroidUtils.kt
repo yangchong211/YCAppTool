@@ -3,7 +3,7 @@ package com.ycbjie.android.tools
 import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
-import com.blankj.utilcode.util.Utils
+import com.yc.toolutils.AppToolUtils
 
 
 /**
@@ -42,8 +42,8 @@ class AndroidUtils{
     //Kt文件中的声明方式： object 关键字声明,其内部不允许声明构造方法
     object SingleObject {
         fun getApp(): Application {
-            if (Utils.getApp()!=null){
-                return Utils.getApp()
+            if (AppToolUtils.getApp()!=null){
+                return AppToolUtils.getApp()
             }
             throw NullPointerException("u should init first")
         }
