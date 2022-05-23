@@ -86,7 +86,7 @@ public class SplashActivity extends BaseActivity implements EasyPermissions.Perm
         //检查是否获取该权限
         if (hasPermissions()) {
             //具备权限 直接进行操作
-            //ActivityUtils.startActivity(MainActivity.class);
+            startActivity(new Intent(this,MainActivity.class));
             finish();
         } else {
             //权限拒绝 申请权限
