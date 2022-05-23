@@ -87,4 +87,5 @@ dependencies {
     implementation project(path: ':AppStateLib')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.8'
     implementation 'com.github.yangchong211.YCDialog:BaseDialog:3.6.8'
+    implementation project(path: ':LocalShareLib')
 }

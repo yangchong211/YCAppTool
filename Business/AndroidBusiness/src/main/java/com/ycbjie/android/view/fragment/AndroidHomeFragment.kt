@@ -10,9 +10,9 @@ import com.blankj.utilcode.util.SPUtils
 import com.blankj.utilcode.util.SizeUtils
 import com.yc.cn.ycbannerlib.banner.view.BannerView
 import com.yc.library.base.mvp.BaseFragment
-import com.yc.ycshare.DoShareUtils
 import com.yc.library.web.WebViewActivity
 import com.yc.toastutils.ToastUtils
+import com.yc.ycshare.DoShareUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.tools.base.BaseItemView
 import com.ycbjie.android.tools.base.KotlinConstant
@@ -130,7 +130,7 @@ class AndroidHomeFragment : BaseFragment<AndroidHomePresenter>() , AndroidHomeCo
                     //分享
                     R.id.ivMore ->{
                         val data = adapter.allData[position]
-                        com.yc.ycshare.DoShareUtils.shareText(activity,data.link,data.title)
+                        DoShareUtils.shareText(activity,data.link,data.title)
                     }
                 }
             }
