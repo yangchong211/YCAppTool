@@ -39,7 +39,10 @@ dependencies {
     implementation(rootProject.ext.dependencies["swiperefreshlayout"])
     implementation(rootProject.ext.dependencies["coordinatorlayout"])
     implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':BaseClassLib')
     implementation 'com.github.yangchong211.YCRefreshView:EastAdapterLib:3.0.2'
+    implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.7'
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.8'
     //参考：https://github.com/tiann/FreeReflection
     //是一个允许你在Android P(包括Q和R)之上不受任何限制地使用反射的库。
     implementation 'me.weishu:free_reflection:1.2.0'

@@ -111,7 +111,6 @@ public class AppCoreTask extends AppStartTask {
 
     private void initActivityManager() {
         //初始化activity栈管理
-        ActivityManager.getInstance().init(MainApplication.getInstance());
         ActivityManager.getInstance().registerActivityLifecycleListener(MainActivity.class,
                 new MainActivityListener());
     }

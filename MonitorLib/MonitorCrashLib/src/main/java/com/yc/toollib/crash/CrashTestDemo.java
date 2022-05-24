@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.util.Printer;
 
+import com.yc.toolutils.ExceptionReporter;
+
 /**
  * <pre>
  *     @author yangchong
@@ -55,6 +57,20 @@ public class CrashTestDemo {
             public void uncaughtException(Thread t, Throwable e) {
                 e.printStackTrace();
                 Log.e("Application-----","uncaughtException---异步线程崩溃，自行上报崩溃信息");
+            }
+        });
+
+        //主要是logService是一个独立的进程，跨进程异常捕获，仅仅只是设置一个默认全局异常处理器是不够的
+        //因此这里采用拿到当前独立进程的当前线程，然后捕获该线程异常
+        //弊端：仅仅只是捕获当前线程异常，比如logService如果是开启其他线程操作出现崩溃，则捕获不了
+        //获取当前线程，然后捕获当前线程的异常
+        Thread thread = Thread.currentThread();
+        thread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                Log.d("LogService", t.getName() + " uncaught exception " + e.getMessage());
+                //上报
+                ExceptionReporter.report(thread.getName(), e);
             }
         });
     }

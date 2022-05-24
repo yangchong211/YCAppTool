@@ -109,7 +109,7 @@ public final class AppFileUtils {
      * SDCard/Android/data/<application package>/cache
      * data/data/<application package>/cache
      */
-    public static String getSrcFilePath(Context context , String name) {
+    public static String getCacheFilePath(Context context , String name) {
         String path = getAppCachePath(context) + File.separator + name;
         File file = new File(path);
         if (!file.exists()) {
@@ -118,6 +118,19 @@ public final class AppFileUtils {
         return path;
     }
 
+    /**
+     * 目录地址
+     * SDCard/Android/data/<application package>/cache
+     * data/data/<application package>/cache
+     */
+    public static String getExternalFilePath(Context context , String name) {
+        String path = getExternalCachePath(context) + File.separator + name;
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return path;
+    }
 
     /**
      * 获取分享路径地址
@@ -159,12 +172,11 @@ public final class AppFileUtils {
     }
 
     /**
-     * 获取崩溃crash的list集合
-     * @param context                               上下文
+     * 获取file的list集合
      * @return                                      集合
      */
-    public static List<File> getFileList(Context context ,String name) {
-        File file = new File(AppFileUtils.getSrcFilePath(context,name));
+    public static List<File> getFileList(String path) {
+        File file = new File(path);
         List<File> mFileList = new ArrayList<>();
         File[] fileArray = file.listFiles();
         if (fileArray == null || fileArray.length <= 0) {

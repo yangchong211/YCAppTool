@@ -14,9 +14,6 @@ import com.yc.toolutils.AppSizeUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.yc.toollib.crash.CrashFileUtils.CRASH_LOGS;
-import static com.yc.toollib.crash.CrashFileUtils.CRASH_PICS;
-
 /**
  * <pre>
  *     @author yangchong
@@ -28,6 +25,8 @@ import static com.yc.toollib.crash.CrashFileUtils.CRASH_PICS;
  */
 public class CrashLibUtils {
 
+    public static final String CRASH_LOGS = "crashLogs";
+    public static final String CRASH_PICS = "crashPics";
 
     /**
      * 目录地址
@@ -36,7 +35,7 @@ public class CrashLibUtils {
      * data/data/<application package>/cache
      */
     public static String getCrashLogPath(Context context) {
-        String crashLogs = AppFileUtils.getSrcFilePath(context, CRASH_LOGS);
+        String crashLogs = AppFileUtils.getExternalFilePath(context, CRASH_LOGS);
         return crashLogs;
     }
 
@@ -47,7 +46,7 @@ public class CrashLibUtils {
      * data/data/<application package>/cache
      */
     public static String getCrashPicPath(Context context) {
-        String crashLogs = AppFileUtils.getSrcFilePath(context, CRASH_PICS);
+        String crashLogs = AppFileUtils.getExternalFilePath(context, CRASH_PICS);
         return crashLogs;
     }
 

@@ -8,8 +8,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.text.TextUtils;
 
+import com.yc.baseclasslib.activity.ActivityManager;
 import com.yc.toollib.BuildConfig;
-import com.yc.toollib.tool.ToolAppManager;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.AppLogUtils;
@@ -37,9 +37,6 @@ import java.util.Locale;
  */
 public final class CrashFileUtils {
 
-
-    public static final String CRASH_LOGS = "crashLogs";
-    public static final String CRASH_PICS = "crashPics";
     /**
      * 错误报告文件的扩展名
      */
@@ -149,7 +146,7 @@ public final class CrashFileUtils {
         sb.append("\n主线程ID:").append(context.getMainLooper().getThread().getId());
         sb.append("\n主线程名称:").append(context.getMainLooper().getThread().getName());
         sb.append("\n主线程优先级:").append(context.getMainLooper().getThread().getPriority());
-        Activity activity = ToolAppManager.getAppManager().currentActivity();
+        Activity activity = ActivityManager.getInstance().peek();
         if (activity!=null){
             sb.append("\n当前Activity名称:").append(activity.getComponentName().getClassName());
             sb.append("\n当前Activity所在栈的ID:").append(activity.getTaskId());
@@ -308,8 +305,8 @@ public final class CrashFileUtils {
         sb.append("\nSDK:").append(Build.VERSION.SDK_INT);
         sb.append("\nEXCEPTION:").append(ex.getLocalizedMessage());
         sb.append("\nSTACK_TRACE:").append(result);
-        String crashFilePath = AppFileUtils.getSrcFilePath(context,CRASH_LOGS);
-        if (crashFilePath!=null && crashFilePath.length()>0){
+        String crashFilePath = CrashLibUtils.getCrashLogPath(context);
+        if (crashFilePath.length()>0){
             try {
                 AppLogUtils.w(CrashHandler.TAG, "handleException---输出路径-----"+crashFilePath);
                 FileWriter writer = new FileWriter( crashFilePath+ now + CRASH_REPORTER_EXTENSION);

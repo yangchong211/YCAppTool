@@ -281,7 +281,7 @@ public class NetworkDetailActivity extends AppCompatActivity {
 
     private void savePicture(Bitmap bitmap) {
         if (bitmap != null) {
-            String crashPicPath = AppFileUtils.getSrcFilePath(NetworkDetailActivity.this,"crashPics") + "/net_pic_" + System.currentTimeMillis() + ".jpg";
+            String crashPicPath = AppFileUtils.getExternalFilePath(this, System.currentTimeMillis() + ".jpg");
             boolean saveBitmap = FileSaveUtils.saveBitmap(NetworkDetailActivity.this, bitmap, crashPicPath);
             if (saveBitmap) {
                 showToast("保存截图成功，请到相册查看\n路径：" + crashPicPath);

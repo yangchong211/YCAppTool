@@ -27,8 +27,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yc.baseclasslib.activity.ActivityManager;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.toollib.R;
-import com.yc.toollib.tool.ToolAppManager;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.file.FileSaveUtils;
 import com.yc.toolutils.file.FileShareUtils;
@@ -133,7 +134,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
                     return;
                 }
                 //获取所有Activity
-                activitiesClass = ToolAppManager.getActivitiesClass(CrashDetailsActivity.this, getPackageName(), null);
+                activitiesClass = ActivityManager.getInstance().getActivitiesClass(CrashDetailsActivity.this, getPackageName(), null);
 
                 //富文本显示
                 Spannable spannable = Spannable.Factory.getInstance().newSpannable(crashContent);
@@ -206,12 +207,12 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
         showProgressLoading("正在保存截图...");
         //生成截图
         final Bitmap bitmap = AppShotsUtils.measureSize(this,mScrollViewCrashDetails);
-        new Thread(new Runnable() {
+        DelegateTaskExecutor.getInstance().executeOnCpu(new Runnable() {
             @Override
             public void run() {
                 savePicture(bitmap);
             }
-        }).start();
+        });
     }
 
     private void savePicture(Bitmap bitmap) {
@@ -321,7 +322,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     private void shareLogs() {
         //先把文件转移到外部存储文件
         File srcFile = new File(filePath);
-        String destFilePath = AppFileUtils.getFileSharePath() + "/CrashShare.txt";
+        String destFilePath = AppFileUtils.getExternalFilePath(this,"CrashShare.txt");
         File destFile = new File(destFilePath);
         boolean copy = AppFileUtils.copyFile(srcFile, destFile);
         if (copy) {

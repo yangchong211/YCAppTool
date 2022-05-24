@@ -47,7 +47,7 @@ public class AppDelayTask extends AppStartTask {
     }
 
     private void initAppStatusListener() {
-        String cachePath = AppFileUtils.getSrcFilePath(MainApplication.getInstance(),"cache");
+        String cachePath = AppFileUtils.getCacheFilePath(MainApplication.getInstance(),"cache");
         String path = cachePath + File.separator + "status";
         File file = new File(path);
         AppStatusManager manager = new AppStatusManager.Builder()

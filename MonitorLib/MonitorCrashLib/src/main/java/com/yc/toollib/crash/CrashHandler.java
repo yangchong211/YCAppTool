@@ -18,7 +18,7 @@ import com.yc.toolutils.AppLogUtils;
  */
 public final class CrashHandler implements Thread.UncaughtExceptionHandler {
 
-    public static final String TAG = "CrashHandler";
+    public static final String TAG = "CrashHandler : ";
     /**
      * 系统默认的UncaughtException处理类
      */
@@ -82,7 +82,6 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      * @param ctx                       上下文
      */
     public void init(Application ctx , CrashListener listener) {
-        LifecycleCallback.getInstance().init(ctx);
         if (isFinishActivity){
             CrashHelper.getInstance().install(ctx);
         }

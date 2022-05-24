@@ -13,7 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.yc.toollib.tool.ToolAppManager;
+import com.yc.baseclasslib.activity.ActivityManager;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.List;
@@ -65,7 +65,7 @@ public final class CrashToolUtils {
     }
 
     private static void finishActivity() {
-        Activity activity = ToolAppManager.getAppManager().currentActivity();
+        Activity activity = ActivityManager.getInstance().peek();
         if (activity!=null && !activity.isFinishing()){
             //可将activity 退到后台，注意不是finish()退出。
             //判断Activity是否是task根
@@ -82,7 +82,7 @@ public final class CrashToolUtils {
     }
 
     private static void finishAllActivity(){
-        ToolAppManager.getAppManager().finishAllActivity();
+        ActivityManager.getInstance().finishAll();
     }
 
     /**
@@ -140,7 +140,7 @@ public final class CrashToolUtils {
 
     public static void reStartApp3(Context context) {
         String packageName = context.getPackageName();
-        Activity activity = ToolAppManager.getAppManager().currentActivity();
+        Activity activity = ActivityManager.getInstance().peek();
         Class<? extends Activity> clazz = guessRestartActivityClass(activity);
         AppLogUtils.w(CrashHandler.TAG, "reStartApp--- 用来重启本APP--3-"+packageName + "--"+clazz);
         Intent intent = new Intent(activity, clazz);
@@ -273,7 +273,9 @@ public final class CrashToolUtils {
                         | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
         );
         context.startActivity(intent);
-        if (!isKillProcess) return;
+        if (!isKillProcess) {
+            return;
+        }
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(0);
     }
@@ -301,7 +303,9 @@ public final class CrashToolUtils {
         PackageManager pm = context.getApplicationContext().getPackageManager();
         List<ResolveInfo> info = pm.queryIntentActivities(intent, 0);
         int size = info.size();
-        if (size == 0) return "";
+        if (size == 0) {
+            return "";
+        }
         for (int i = 0; i < size; i++) {
             ResolveInfo ri = info.get(i);
             if (ri.activityInfo.processName.equals(pkg)) {

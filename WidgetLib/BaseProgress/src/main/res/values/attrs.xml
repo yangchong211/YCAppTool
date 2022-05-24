@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RingProgressBar">
+        <attr name="progressMax" format="integer" />
+        <!--完成进度点的颜色-->
+        <attr name="dotColor" format="color" />
+        <!--未完成进度点的颜色-->
+        <attr name="dotBgColor" format="color" />
+
+        <!--显示模式-->
+        <attr name="showMode" >
+            <!--空-->
+            <enum name="NULL" value="0" />
+            <!--只有百分比和单位-->
+            <enum name="PERCENT" value="1" />
+            <!--全显，包括百分比和单位、按钮-->
+            <enum name="ALL" value="2" />
+        </attr>
+
+        <!--显示的百分比-->
+        <attr name="percentTextSize" format="dimension" />
+        <attr name="percentTextColor" format="color" />
+        <!--百分比瘦身大小-->
+        <attr name="percentThinPadding" format="integer" />
+
+        <!--百分比单位-->
+        <attr name="unitText" format="string" />
+        <attr name="unitTextSize" format="dimension" />
+        <attr name="unitTextColor" format="color" />
+        <!--单位与百分比的底部对齐方式-->
+        <attr name="unitTextAlignMode">
+            <!--默认对齐-->
+            <enum name="DEFAULT" value="0" />
+            <!--中文对齐-->
+            <enum name="CN" value="1" />
+            <!--英文对齐：主要针对底部长的字母或字符，如：g、j、p、q、y、$、@等，其他几乎字母或字符都可以使用默认对齐-->
+            <enum name="EN" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="NumberProgressbar">
+        <attr name="progress_current" format="integer"/>
+        <attr name="progress_max" format="integer"/>
+
+        <attr name="progress_unreached_color" format="color"/>
+        <attr name="progress_reached_color" format="color"/>
+        <attr name="progress_reached_bar_height" format="dimension"/>
+        <attr name="progress_unreached_bar_height" format="dimension"/>
+
+        <attr name="progress_text_size" format="dimension"/>
+        <attr name="progress_text_color" format="color"/>
+        <attr name="progress_text_offset" format="dimension"/>
+        <attr name="progress_text_visibility" format="enum">
+            <enum name="visible" value="0"/>
+            <enum name="invisible" value="1"/>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="CarlProgressbar">
+        <!-- 进度条当前进度 -->
+        <attr name="carl_progress_current" format="integer"/>
+        <!-- 进度条最大进度，默认100，需要开发者自己设置 -->
+        <attr name="carl_progress_max" format="integer"/>
+        <!-- 未到达进度条颜色 -->
+        <attr name="carl_progress_unreached_color" format="color"/>
+        <!-- 到达进度条颜色 -->
+        <attr name="carl_progress_reached_color" format="color"/>
+        <!-- 到达进度条高度 -->
+        <attr name="carl_progress_reached_bar_height" format="dimension"/>
+        <!-- 未到达进度条高度 -->
+        <attr name="carl_progress_unreached_bar_height" format="dimension"/>
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CircleProgressLib</string>
+    <string name="progress_btn">一键加速</string>
+</resources>

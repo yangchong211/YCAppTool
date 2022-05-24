@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">YCProgressLib</string>
+    <string name="progress_out_of_range">progress must between 0 and max(%1$d)</string>
+
+</resources>

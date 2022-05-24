@@ -22,6 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.eastadapterlib.OnItemLongClickListener;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.toollib.R;
 import com.yc.toolutils.file.AppFileUtils;
 
@@ -30,9 +31,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static com.yc.toollib.crash.CrashFileUtils.CRASH_LOGS;
-
 
 /**
  * <pre>
@@ -45,7 +43,6 @@ import static com.yc.toollib.crash.CrashFileUtils.CRASH_LOGS;
  */
 public class CrashListActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private LinearLayout mActivityCrashList;
     private LinearLayout mLlBack;
     private TextView mTvDelete;
     private TextView tvAbout;
@@ -76,7 +73,6 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initFindViewById() {
-        mActivityCrashList = findViewById(R.id.activity_crash_list);
         mLlBack = findViewById(R.id.ll_back);
         mTvDelete = findViewById(R.id.tv_delete);
         tvAbout = findViewById(R.id.tv_about);
@@ -91,13 +87,11 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
         mRecycleView.setLayoutManager(linearLayoutManager);
     }
 
-
     private void initListener() {
         mLlBack.setOnClickListener(this);
         mTvDelete.setOnClickListener(this);
         tvAbout.setOnClickListener(this);
     }
-
 
     private void initRefreshView() {
         //设置刷新球颜色
@@ -119,21 +113,21 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
-
     private void initCrashFileList() {
         //获取日志
-        new Thread(new Runnable() {
+        DelegateTaskExecutor.getInstance().executeOnCpu(new Runnable() {
             @Override
             public void run() {
                 getCrashList();
             }
-        }).start();
+        });
     }
 
     private void getCrashList() {
         //重新获取
         fileList.clear();
-        fileList = AppFileUtils.getFileList(this,CRASH_LOGS);
+        String filePath = CrashLibUtils.getCrashLogPath(this);
+        fileList = AppFileUtils.getFileList(filePath);
         //排序
         Collections.sort(fileList, new Comparator<File>() {
             @Override
@@ -185,8 +179,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 progressDialog = ProgressDialog.show(CrashListActivity.this, "提示", "正在删除...");
                                 progressDialog.show();
-                                //删除单个
-                                new Thread(new Runnable() {
+                                DelegateTaskExecutor.getInstance().executeOnCpu(new Runnable() {
                                     @Override
                                     public void run() {
                                         File file = fileList.get(position);
@@ -194,7 +187,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
                                         //重新获取
                                         getCrashList();
                                     }
-                                }).start();
+                                });
                             }
                         });
                         builder.show();
@@ -255,9 +248,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
                 progressDialog = ProgressDialog.show(
                         CrashListActivity.this, "提示", "正在删除...");
                 progressDialog.show();
-
-                //删除全部
-                new Thread(new Runnable() {
+                DelegateTaskExecutor.getInstance().executeOnCpu(new Runnable() {
                     @Override
                     public void run() {
                         File fileCrash = new File(CrashLibUtils.getCrashLogPath(CrashListActivity.this));
@@ -265,7 +256,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
                         //重新获取
                         getCrashList();
                     }
-                }).start();
+                });
             }
         });
         builder.show();

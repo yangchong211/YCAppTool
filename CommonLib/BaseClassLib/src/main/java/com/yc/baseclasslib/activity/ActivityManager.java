@@ -2,7 +2,14 @@ package com.yc.baseclasslib.activity;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.text.TextUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -84,7 +91,7 @@ public class ActivityManager implements IActivityManager<Activity> {
         return null;
     }
 
-    public void init(Application application) {
+    protected void init(Application application) {
         if (mInit) {
             return;
         }
@@ -94,10 +101,6 @@ public class ActivityManager implements IActivityManager<Activity> {
         //注册全局监听
         application.registerActivityLifecycleCallbacks(mProxyActivityListener);
         mInit = true;
-    }
-
-    public void remove(){
-
     }
 
     @Override
@@ -243,4 +246,63 @@ public class ActivityManager implements IActivityManager<Activity> {
         System.exit(0);
     }
 
+    /**
+     * 返回AndroidManifest.xml中注册的所有Activity的class
+     *
+     * @param context     环境
+     * @param packageName 包名
+     * @param excludeList 排除class列表
+     * @return
+     */
+    public List<Class> getActivitiesClass(Context context, String packageName, List<Class> excludeList) {
+        List<Class> returnClassList = new ArrayList<>();
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(
+                    packageName, PackageManager.GET_ACTIVITIES);
+            if (packageInfo.activities != null) {
+                for (ActivityInfo ai : packageInfo.activities) {
+                    Class c;
+                    try {
+                        c = Class.forName(ai.name);
+                        if (Activity.class.isAssignableFrom(c)) {
+                            returnClassList.add(c);
+                        }
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (excludeList != null) {
+                    returnClassList.removeAll(excludeList);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returnClassList;
+    }
+
+    /**
+     *
+     * 判断activity是否处于栈顶
+     * @return  true在栈顶false不在栈顶
+     */
+    public boolean isActivityTop(Context context,String activityName){
+        if(TextUtils.isEmpty(activityName)){
+            return false;
+        }
+        android.app.ActivityManager manager = (android.app.ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        if(manager.getRunningTasks(1)==null || (manager.getRunningTasks(1)!=null && manager.getRunningTasks(1).size()<=0)){
+            return false;
+        }
+        if((manager.getRunningTasks(1).get(0)==null
+                || (manager.getRunningTasks(1).get(0)!=null
+                && manager.getRunningTasks(1).get(0).topActivity==null))){
+            return false;
+        }
+        String name = manager.getRunningTasks(1).get(0).topActivity.getClassName();
+        if(TextUtils.isEmpty(name)){
+            return false;
+        }
+        return name.equals(activityName);
+    }
 }
