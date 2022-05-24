@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import com.yc.baseclasslib.activity.ActivityManager;
 import com.yc.toollib.BuildConfig;
 import com.yc.toolutils.AppDeviceUtils;
+import com.yc.toolutils.AppUtils;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppMemoryUtils;
@@ -48,7 +49,8 @@ public final class CrashFileUtils {
     /**
      * 时间转换
      */
-    private static final SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+    private static final SimpleDateFormat dataFormat = new SimpleDateFormat(
+            "yyyy-MM-dd HH:mm:ss", Locale.CHINA);
     private static String crashTime;
     private static String crashHead;
     private static String crashMem;
@@ -293,12 +295,13 @@ public final class CrashFileUtils {
         StringBuilder sb = new StringBuilder();
         @SuppressLint("SimpleDateFormat")
         String now = dataFormat.format(new Date());
-        sb.append("TIME:").append(now);//崩溃时间
+        //崩溃时间
+        sb.append("TIME:").append(now);
         //程序信息
-        sb.append("\nAPPLICATION_ID:").append(context.getPackageName());//软件APPLICATION_ID
-        //sb.append("\nVERSION_CODE:").append(BuildConfig.VERSION_CODE);//软件版本号
-        //sb.append("\nVERSION_NAME:").append(BuildConfig.VERSION_NAME);//VERSION_NAME
-        sb.append("\nBUILD_TYPE:").append(BuildConfig.BUILD_TYPE);//是否是DEBUG版本
+        sb.append("\nAPPLICATION_ID:").append(context.getPackageName());
+        sb.append("\nVERSION_CODE:").append(AppUtils.getAppVersionCode());
+        sb.append("\nVERSION_NAME:").append(AppUtils.getAppVersionName());
+        sb.append("\nBUILD_TYPE:").append(BuildConfig.BUILD_TYPE);
         //设备信息
         sb.append("\nMODEL:").append(Build.MODEL);
         sb.append("\nRELEASE:").append(Build.VERSION.RELEASE);

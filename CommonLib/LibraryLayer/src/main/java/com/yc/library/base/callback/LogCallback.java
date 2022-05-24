@@ -23,7 +23,7 @@ public class LogCallback implements ThreadCallback {
     @Override
     public void onError(String name, Throwable t) {
         AppLogUtils.e("LogCallback"+"------onError");
-        AppLogUtils.e(TAG, String.format("[任务线程%s]/[回调线程%s]执行失败: %s", name, Thread.currentThread(), t.getMessage()), t);
+        AppLogUtils.e(TAG, String.format("[任务线程%s]/[回调线程%s]执行失败: %s", name, Thread.currentThread(), t.getMessage()));
     }
 
     @Override

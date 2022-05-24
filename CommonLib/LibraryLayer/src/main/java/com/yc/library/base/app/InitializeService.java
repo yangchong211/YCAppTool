@@ -45,20 +45,6 @@ public class InitializeService extends IntentService {
 
     private void initApplication() {
         X5WebUtils.init(LibApplication.getInstance());
-        initUtils();
-    }
-
-    /**
-     * 初始化utils工具类
-     */
-    private void initUtils() {
-        AppLogUtils.Config config = AppLogUtils.getConfig();
-        //边框开关，设置打开
-        config.setBorderSwitch(true);
-        //logcat 是否打印，设置打印
-        config.setConsoleSwitch(true);
-        //设置打印日志总开关，线上时关闭
-        config.setLogSwitch(true);
     }
 
 }

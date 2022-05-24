@@ -42,6 +42,7 @@ import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.notifymessage.CustomNotification;
+import com.yc.notifymessage.OnDismissListener;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppSizeUtils;
@@ -389,6 +390,12 @@ public class MainActivity extends BaseActivity{
                 .setCollapsible(false)
                 .setTimeOut(10000)
                 .setPriority(100)
+                .setDismissListener(new OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+
+                    }
+                })
                 .setNotificationView(new MyNotifyView(this))
                 .show();
     }

@@ -1,46 +1,7 @@
 package com.yc.toolutils;
 
 
-import android.annotation.SuppressLint;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.os.Environment;
 import android.util.Log;
-
-import androidx.annotation.IntDef;
-import androidx.annotation.IntRange;
-
-import com.yc.toolutils.AppToolUtils;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Formatter;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Source;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
 /**
  * <pre>
@@ -53,599 +14,309 @@ import javax.xml.transform.stream.StreamSource;
  */
 public final class AppLogUtils {
 
+    public static final String TAG = "AppLogUtils";
+    public static final String COLON = ":";
+    public static final String VERTICAL = "|";
+    /** 是否显示Log日志 */
+    private static boolean isShowLog = true;
+    /** Log日志优先权 */
+    private static int priority = 1;
+    public static final int PRINTLN = 1;
+    public static final int VERBOSE = 2;
+    public static final int DEBUG = 3;
+    public static final int INFO = 4;
+    public static final int WARN = 5;
+    public static final int ERROR = 6;
+    public static final int ASSERT = 7;
+
+    public static final String TAG_FORMAT = "%s.%s(L:%d)";
+
+    private AppLogUtils(){
+        throw new AssertionError();
+    }
+
+    public static void setShowLog(boolean isShowLog) {
+        AppLogUtils.isShowLog = isShowLog;
+    }
+
+    public static boolean isShowLog() {
+        return isShowLog;
+    }
+
+    public static int getPriority() {
+        return priority;
+    }
+
+    public static void setPriority(int priority) {
+        AppLogUtils.priority = priority;
+    }
 
     /**
-     * Log.v 的输出颜色为黑色的，输出大于或等于VERBOSE日志级别的信息，也就是可见级别，一般是最低的信息提示
+     * 根据堆栈生成TAG
+     * @return TAG|className.methodName(L:lineNumber)
      */
-    public static final int V = Log.VERBOSE;
-    /**
-     * debug调试
-     * Log.d的输出颜色是蓝色的，也就是调式级别，一般不会中止程序，一般是程序员为了调试而打印的log
-     */
-    public static final int D = Log.DEBUG;
-    /**
-     * info信息
-     * Log.i的输出为绿色，输出大于或等于INFO日志级别的信息，也就是信息界级别，不会中止程序，一般是系统中执行操作的信息提示
-     */
-    public static final int I = Log.INFO;
-    /**
-     * warn警告
-     * Log.w的输出为橙色, 输出大于或等于WARN日志级别的信息，也就是警告级别，一般不会中止程序，但是可能会影响程序执行结果
-     */
-    public static final int W = Log.WARN;
-    /**
-     * error误差
-     * Log.e的输出为红色，仅输出ERROR日志级别的信息，也就是错误级别，一般会中止程序运行，是最严重的Log级别。
-     */
-    public static final int E = Log.ERROR;
-    /**
-     * 断言
-     */
-    public static final int A = Log.ASSERT;
+    private static String generateTag(StackTraceElement caller) {
+        String tag = TAG_FORMAT;
+        String callerClazzName = caller.getClassName();
+        callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1);
+        tag = String.format(tag,new Object[] { callerClazzName, caller.getMethodName(),Integer.valueOf(caller.getLineNumber()) });
+        return new StringBuilder().append(TAG).append(VERTICAL).append(tag).toString();
+    }
 
     /**
-     * Log.v()，Log.d()，Log.i()，Log.w()，Log.e()等方法都是底层都是调用了println方法，
-     * 然后在源码中查看，其实其内部调用的是println_native方法，也就是通过JNI调用底层的c++输出日志。
+     * 获取堆栈
+     * @param n
+     * 		n=0		VMStack
+     * 		n=1		Thread
+     * 		n=3		CurrentStack
+     * 		n=4		CallerStack
+     * 		...
+     * @return
      */
-    @IntDef({V, D, I, W, E, A})
-    @Retention(RetentionPolicy.SOURCE)
-    private @interface TYPE {
+    public static StackTraceElement getStackTraceElement(int n) {
+        return Thread.currentThread().getStackTrace()[n];
     }
 
-    private static final char[] T = new char[]{'V', 'D', 'I', 'W', 'E', 'A'};
-
-    private static final int FILE = 0x10;
-    private static final int JSON = 0x20;
-    private static final int XML  = 0x30;
-
-    private static final String FILE_SEP       = System.getProperty("file.separator");
-    private static final String LINE_SEP       = System.getProperty("line.separator");
-    private static final String TOP_CORNER     = "┌";
-    private static final String MIDDLE_CORNER  = "├";
-    private static final String LEFT_BORDER    = "│ ";
-    private static final String BOTTOM_CORNER  = "└";
-    private static final String SIDE_DIVIDER   = "────────────────────────────────────────────────────────";
-    private static final String MIDDLE_DIVIDER = "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄";
-    private static final String TOP_BORDER     = TOP_CORNER + SIDE_DIVIDER + SIDE_DIVIDER;
-    private static final String MIDDLE_BORDER  = MIDDLE_CORNER + MIDDLE_DIVIDER + MIDDLE_DIVIDER;
-    private static final String BOTTOM_BORDER  = BOTTOM_CORNER + SIDE_DIVIDER + SIDE_DIVIDER;
-    private static final int    MAX_LEN        = 4000;
-    @SuppressLint("SimpleDateFormat")
-    private static final Format FORMAT         = new SimpleDateFormat("MM-dd HH:mm:ss.SSS ");
-    private static final String NOTHING        = "log nothing";
-    private static final String NULL           = "null";
-    private static final String ARGS           = "args";
-    private static final Config CONFIG         = new Config();
-
-    private static ExecutorService sExecutor;
-    private static String          sDefaultDir;// log 默认存储目录
-    private static String          sDir;       // log 存储目录
-    private static String  sFilePrefix        = "util";// log 文件前缀
-    private static boolean sLogSwitch         = true;  // log 总开关，默认开
-    private static boolean sLog2ConsoleSwitch = true;  // logcat 是否打印，默认打印
-    private static String  sGlobalTag         = null;  // log 标签
-    private static boolean sTagIsSpace        = true;  // log 标签是否为空白
-    private static boolean sLogHeadSwitch     = true;  // log 头部开关，默认开
-    private static boolean sLog2FileSwitch    = false; // log 写入文件开关，默认关
-    private static boolean sLogBorderSwitch   = true;  // log 边框开关，默认开
-    private static int     sConsoleFilter     = V;     // log 控制台过滤器
-    private static int     sFileFilter        = V;     // log 文件过滤器
-    private static int     sStackDeep         = 1;     // log 栈深度
-
-    private AppLogUtils() {
-        throw new UnsupportedOperationException("u can't instantiate me...");
+    /**
+     * 获取调用方的堆栈TAG
+     * @return
+     */
+    private static String getCallerStackLogTag(){
+        return generateTag(getStackTraceElement(5));
     }
 
-    public static Config getConfig() {
-        return CONFIG;
+    /**
+     *
+     * @param t
+     * @return
+     */
+    private static String getStackTraceString(Throwable t){
+        return Log.getStackTraceString(t);
     }
 
-    public static void v(final Object... contents) {
-        log(V, sGlobalTag, contents);
-    }
+    // -----------------------------------Log.v
 
-    public static void vTag(final String tag, final Object... contents) {
-        log(V, tag, contents);
-    }
-
-    public static void d(final Object... contents) {
-        log(D, sGlobalTag, contents);
-    }
-
-    public static void dTag(final String tag, final Object... contents) {
-        log(D, tag, contents);
-    }
-
-    public static void i(final Object... contents) {
-        log(I, sGlobalTag, contents);
-    }
-
-    public static void iTag(final String tag, final Object... contents) {
-        log(I, tag, contents);
-    }
-
-    public static void w(final Object... contents) {
-        log(W, sGlobalTag, contents);
-    }
-
-    public static void wTag(final String tag, final Object... contents) {
-        log(W, tag, contents);
-    }
-
-    public static void e(final Object... contents) {
-        log(E, sGlobalTag, contents);
-    }
-
-    public static void eTag(final String tag, final Object... contents) {
-        log(E, tag, contents);
-    }
-
-    public static void a(final Object... contents) {
-        log(A, sGlobalTag, contents);
-    }
-
-    public static void aTag(final String tag, final Object... contents) {
-        log(A, tag, contents);
-    }
-
-    public static void file(final Object content) {
-        log(FILE | D, sGlobalTag, content);
-    }
-
-    public static void file(@TYPE final int type, final Object content) {
-        log(FILE | type, sGlobalTag, content);
-    }
-
-    public static void file(final String tag, final Object content) {
-        log(FILE | D, tag, content);
-    }
-
-    public static void file(@TYPE final int type, final String tag, final Object content) {
-        log(FILE | type, tag, content);
-    }
-
-    public static void json(final String content) {
-        log(JSON | D, sGlobalTag, content);
-    }
-
-    public static void json(@TYPE final int type, final String content) {
-        log(JSON | type, sGlobalTag, content);
-    }
-
-    public static void json(final String tag, final String content) {
-        log(JSON | D, tag, content);
-    }
-
-    public static void json(@TYPE final int type, final String tag, final String content) {
-        log(JSON | type, tag, content);
-    }
-
-    public static void xml(final String content) {
-        log(XML | D, sGlobalTag, content);
-    }
-
-    public static void xml(@TYPE final int type, final String content) {
-        log(XML | type, sGlobalTag, content);
-    }
-
-    public static void xml(final String tag, final String content) {
-        log(XML | D, tag, content);
-    }
-
-    public static void xml(@TYPE final int type, final String tag, final String content) {
-        log(XML | type, tag, content);
-    }
-
-    private static void log(final int type, final String tag, final Object... contents) {
-        if (!sLogSwitch || (!sLog2ConsoleSwitch && !sLog2FileSwitch)) return;
-        int type_low = type & 0x0f, type_high = type & 0xf0;
-        if (type_low < sConsoleFilter && type_low < sFileFilter) return;
-        final TagHead tagHead = processTagAndHead(tag);
-        String body = processBody(type_high, contents);
-        if (sLog2ConsoleSwitch && type_low >= sConsoleFilter && type_high != FILE) {
-            print2Console(type_low, tagHead.tag, tagHead.consoleHead, body);
+    /**
+     * Log.v
+     * @param msg
+     */
+    public static void v(String msg) {
+        if (isShowLog && priority <= VERBOSE) {
+            Log.v(getCallerStackLogTag(), String.valueOf(msg));
         }
-        if ((sLog2FileSwitch || type_high == FILE) && type_low >= sFileFilter) {
-            print2File(type_low, tagHead.tag, tagHead.fileHead + body);
+
+    }
+
+    public static void v(Throwable t) {
+        if (isShowLog && priority <= VERBOSE) {
+            Log.v(getCallerStackLogTag(), getStackTraceString(t));
         }
     }
 
-    private static TagHead processTagAndHead(String tag) {
-        if (!sTagIsSpace && !sLogHeadSwitch) {
-            tag = sGlobalTag;
-        } else {
-            final StackTraceElement[] stackTrace = new Throwable().getStackTrace();
-            StackTraceElement targetElement = stackTrace[3];
-            String fileName = targetElement.getFileName();
-            String className;
-            // 混淆可能会导致获取为空 加-keepattributes SourceFile,LineNumberTable
-            if (fileName == null) {
-                className = targetElement.getClassName();
-                String[] classNameInfo = className.split("\\.");
-                if (classNameInfo.length > 0) {
-                    className = classNameInfo[classNameInfo.length - 1];
-                }
-                int index = className.indexOf('$');
-                if (index != -1) {
-                    className = className.substring(0, index);
-                }
-                fileName = className + ".java";
-            } else {
-                int index = fileName.indexOf('.');// 混淆可能导致文件名被改变从而找不到"."
-                className = index == -1 ? fileName : fileName.substring(0, index);
-            }
-            if (sTagIsSpace) tag = isSpace(tag) ? className : tag;
-            if (sLogHeadSwitch) {
-                String tName = Thread.currentThread().getName();
-                final String head = new Formatter()
-                        .format("%s, %s(%s:%d)",
-                                tName,
-                                targetElement.getMethodName(),
-                                fileName,
-                                targetElement.getLineNumber())
-                        .toString();
-                final String fileHead = " [" + head + "]: ";
-                if (sStackDeep <= 1) {
-                    return new TagHead(tag, new String[]{head}, fileHead);
-                } else {
-                    final String[] consoleHead =
-                            new String[Math.min(sStackDeep, stackTrace.length - 3)];
-                    consoleHead[0] = head;
-                    int spaceLen = tName.length() + 2;
-                    String space = new Formatter().format("%" + spaceLen + "s", "").toString();
-                    for (int i = 1, len = consoleHead.length; i < len; ++i) {
-                        targetElement = stackTrace[i + 3];
-                        consoleHead[i] = new Formatter()
-                                .format("%s%s(%s:%d)",
-                                        space,
-                                        targetElement.getMethodName(),
-                                        targetElement.getFileName(),
-                                        targetElement.getLineNumber())
-                                .toString();
-                    }
-                    return new TagHead(tag, consoleHead, fileHead);
-                }
-            }
-        }
-        return new TagHead(tag, null, ": ");
-    }
-
-    private static String processBody(final int type, final Object... contents) {
-        String body = NULL;
-        if (contents != null) {
-            if (contents.length == 1) {
-                Object object = contents[0];
-                if (object != null) body = object.toString();
-                if (type == JSON) {
-                    body = formatJson(body);
-                } else if (type == XML) {
-                    body = formatXml(body);
-                }
-            } else {
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0, len = contents.length; i < len; ++i) {
-                    Object content = contents[i];
-                    sb.append(ARGS)
-                            .append("[")
-                            .append(i)
-                            .append("]")
-                            .append(" = ")
-                            .append(content == null ? NULL : content.toString())
-                            .append(LINE_SEP);
-                }
-                body = sb.toString();
-            }
-        }
-        return body.length() == 0 ? NOTHING : body;
-    }
-
-    private static String formatJson(String json) {
-        try {
-            if (json.startsWith("{")) {
-                json = new JSONObject(json).toString(4);
-            } else if (json.startsWith("[")) {
-                json = new JSONArray(json).toString(4);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return json;
-    }
-
-    private static String formatXml(String xml) {
-        try {
-            Source xmlInput = new StreamSource(new StringReader(xml));
-            StreamResult xmlOutput = new StreamResult(new StringWriter());
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-            transformer.transform(xmlInput, xmlOutput);
-            xml = xmlOutput.getWriter().toString().replaceFirst(">", ">" + LINE_SEP);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return xml;
-    }
-
-    private static void print2Console(final int type,
-                                      final String tag,
-                                      final String[] head,
-                                      final String msg) {
-        printBorder(type, tag, true);
-        printHead(type, tag, head);
-        printMsg(type, tag, msg);
-        printBorder(type, tag, false);
-    }
-
-    private static void printBorder(final int type, final String tag, boolean isTop) {
-        if (sLogBorderSwitch) {
-            Log.println(type, tag, isTop ? TOP_BORDER : BOTTOM_BORDER);
+    public static void v(String tag,String msg) {
+        if (isShowLog && priority <= VERBOSE) {
+            Log.d(tag, String.valueOf(msg));
         }
     }
 
-    private static void printHead(final int type, final String tag, final String[] head) {
-        if (head != null) {
-            for (String aHead : head) {
-                Log.println(type, tag, sLogBorderSwitch ? LEFT_BORDER + aHead : aHead);
-            }
-            if (sLogBorderSwitch) Log.println(type, tag, MIDDLE_BORDER);
+    public static void v(String msg,Throwable t) {
+        if (isShowLog && priority <= VERBOSE) {
+            Log.v(getCallerStackLogTag(), String.valueOf(msg), t);
         }
     }
 
-    private static void printMsg(final int type, final String tag, final String msg) {
-        int len = msg.length();
-        int countOfSub = len / MAX_LEN;
-        if (countOfSub > 0) {
-            int index = 0;
-            for (int i = 0; i < countOfSub; i++) {
-                printSubMsg(type, tag, msg.substring(index, index + MAX_LEN));
-                index += MAX_LEN;
-            }
-            if (index != len) {
-                printSubMsg(type, tag, msg.substring(index, len));
-            }
-        } else {
-            printSubMsg(type, tag, msg);
+    // -----------------------------------Log.d
+
+    /**
+     * Log.d
+     * @param msg
+     */
+    public static void d(String msg) {
+        if (isShowLog && priority <= DEBUG) {
+            Log.d(getCallerStackLogTag(), String.valueOf(msg));
         }
     }
 
-    private static void printSubMsg(final int type, final String tag, final String msg) {
-        if (!sLogBorderSwitch) {
-            Log.println(type, tag, msg);
-            return;
-        }
-        StringBuilder sb = new StringBuilder();
-        String[] lines = msg.split(LINE_SEP);
-        for (String line : lines) {
-            Log.println(type, tag, LEFT_BORDER + line);
+    public static void d(Throwable t) {
+        if (isShowLog && priority <= DEBUG) {
+            Log.d(getCallerStackLogTag(), getStackTraceString(t));
         }
     }
 
-    private static void print2File(final int type, final String tag, final String msg) {
-        Date now = new Date(System.currentTimeMillis());
-        String format = FORMAT.format(now);
-        String date = format.substring(0, 5);
-        String time = format.substring(6);
-        final String fullPath =
-                (sDir == null ? sDefaultDir : sDir) + sFilePrefix + "-" + date + ".txt";
-        if (!createOrExistsFile(fullPath)) {
-            Log.e(tag, "log to " + fullPath + " failed!");
-            return;
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append(time)
-                .append(T[type - V])
-                .append("/")
-                .append(tag)
-                .append(msg)
-                .append(LINE_SEP);
-        final String content = sb.toString();
-        if (input2File(content, fullPath)) {
-            Log.d(tag, "log to " + fullPath + " success!");
-        } else {
-            Log.e(tag, "log to " + fullPath + " failed!");
+    public static void d(String tag,String msg) {
+        if (isShowLog && priority <= DEBUG) {
+            Log.d(tag, String.valueOf(msg));
         }
     }
 
-    private static boolean createOrExistsFile(final String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) return file.isFile();
-        if (!createOrExistsDir(file.getParentFile())) return false;
-        try {
-            boolean isCreate = file.createNewFile();
-            if (isCreate) printDeviceInfo(filePath);
-            return isCreate;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+    public static void d(String msg,Throwable t) {
+        if (isShowLog && priority <= DEBUG) {
+            Log.d(getCallerStackLogTag(), String.valueOf(msg), t);
         }
     }
 
-    private static void printDeviceInfo(final String filePath) {
-        String versionName = "";
-        int versionCode = 0;
-        try {
-            PackageInfo pi = AppToolUtils.getApp()
-                    .getPackageManager()
-                    .getPackageInfo(AppToolUtils.getApp().getPackageName(), 0);
-            if (pi != null) {
-                versionName = pi.versionName;
-                versionCode = pi.versionCode;
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        final String head = "************* Log Head ****************" +
-                "\nDevice Manufacturer: " + Build.MANUFACTURER +// 设备厂商
-                "\nDevice Model       : " + Build.MODEL +// 设备型号
-                "\nAndroid Version    : " + Build.VERSION.RELEASE +// 系统版本
-                "\nAndroid SDK        : " + Build.VERSION.SDK_INT +// SDK 版本
-                "\nApp VersionName    : " + versionName +
-                "\nApp VersionCode    : " + versionCode +
-                "\n************* Log Head ****************\n\n";
-        input2File(head, filePath);
-    }
+    // -----------------------------------Log.i
 
-    private static boolean createOrExistsDir(final File file) {
-        return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
-    }
-
-    private static boolean isSpace(final String s) {
-        if (s == null) return true;
-        for (int i = 0, len = s.length(); i < len; ++i) {
-            if (!Character.isWhitespace(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static boolean input2File(final String input, final String filePath) {
-        if (sExecutor == null) {
-            sExecutor = Executors.newSingleThreadExecutor();
-        }
-        Future<Boolean> submit = sExecutor.submit(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                BufferedWriter bw = null;
-                try {
-                    bw = new BufferedWriter(new FileWriter(filePath, true));
-                    bw.write(input);
-                    return true;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return false;
-                } finally {
-                    try {
-                        if (bw != null) {
-                            bw.close();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        try {
-            return submit.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public static class Config {
-        private Config() {
-            if (sDefaultDir != null) return;
-            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                    && AppToolUtils.getApp().getExternalCacheDir() != null)
-                sDefaultDir = AppToolUtils.getApp().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
-            else {
-                sDefaultDir = AppToolUtils.getApp().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
-            }
-        }
-
-        public Config setLogSwitch(final boolean logSwitch) {
-            sLogSwitch = logSwitch;
-            return this;
-        }
-
-        public Config setConsoleSwitch(final boolean consoleSwitch) {
-            sLog2ConsoleSwitch = consoleSwitch;
-            return this;
-        }
-
-        public Config setGlobalTag(final String tag) {
-            if (isSpace(tag)) {
-                sGlobalTag = "";
-                sTagIsSpace = true;
-            } else {
-                sGlobalTag = tag;
-                sTagIsSpace = false;
-            }
-            return this;
-        }
-
-        public Config setLogHeadSwitch(final boolean logHeadSwitch) {
-            sLogHeadSwitch = logHeadSwitch;
-            return this;
-        }
-
-        public Config setLog2FileSwitch(final boolean log2FileSwitch) {
-            sLog2FileSwitch = log2FileSwitch;
-            return this;
-        }
-
-        public Config setDir(final String dir) {
-            if (isSpace(dir)) {
-                sDir = null;
-            } else {
-                sDir = dir.endsWith(FILE_SEP) ? dir : dir + FILE_SEP;
-            }
-            return this;
-        }
-
-        public Config setDir(final File dir) {
-            sDir = dir == null ? null : dir.getAbsolutePath() + FILE_SEP;
-            return this;
-        }
-
-        public Config setFilePrefix(final String filePrefix) {
-            if (isSpace(filePrefix)) {
-                sFilePrefix = "util";
-            } else {
-                sFilePrefix = filePrefix;
-            }
-            return this;
-        }
-
-        public Config setBorderSwitch(final boolean borderSwitch) {
-            sLogBorderSwitch = borderSwitch;
-            return this;
-        }
-
-        public Config setConsoleFilter(@TYPE final int consoleFilter) {
-            sConsoleFilter = consoleFilter;
-            return this;
-        }
-
-        public Config setFileFilter(@TYPE final int fileFilter) {
-            sFileFilter = fileFilter;
-            return this;
-        }
-
-        public Config setStackDeep(@IntRange(from = 1) final int stackDeep) {
-            sStackDeep = stackDeep;
-            return this;
-        }
-
-        @Override
-        public String toString() {
-            return "switch: " + sLogSwitch
-                    + LINE_SEP + "console: " + sLog2ConsoleSwitch
-                    + LINE_SEP + "tag: " + (sTagIsSpace ? "null" : sGlobalTag)
-                    + LINE_SEP + "head: " + sLogHeadSwitch
-                    + LINE_SEP + "file: " + sLog2FileSwitch
-                    + LINE_SEP + "dir: " + (sDir == null ? sDefaultDir : sDir)
-                    + LINE_SEP + "filePrefix" + sFilePrefix
-                    + LINE_SEP + "border: " + sLogBorderSwitch
-                    + LINE_SEP + "consoleFilter: " + T[sConsoleFilter - V]
-                    + LINE_SEP + "fileFilter: " + T[sFileFilter - V]
-                    + LINE_SEP + "stackDeep: " + sStackDeep;
+    /**
+     * Log.i
+     * @param msg
+     */
+    public static void i(String msg) {
+        if (isShowLog && priority <= INFO) {
+            Log.i(getCallerStackLogTag(), String.valueOf(msg));
         }
     }
 
-    private static class TagHead {
-        String   tag;
-        String[] consoleHead;
-        String   fileHead;
+    public static void i(Throwable t) {
+        if (isShowLog && priority <= INFO) {
+            Log.i(getCallerStackLogTag(), getStackTraceString(t));
+        }
+    }
 
-        TagHead(String tag, String[] consoleHead, String fileHead) {
-            this.tag = tag;
-            this.consoleHead = consoleHead;
-            this.fileHead = fileHead;
+    public static void i(String tag,String msg) {
+        if (isShowLog && priority <= INFO) {
+            Log.d(tag, String.valueOf(msg));
+        }
+    }
+
+    public static void i(String msg,Throwable t) {
+        if (isShowLog && priority <= INFO) {
+            Log.i(getCallerStackLogTag(), String.valueOf(msg), t);
+        }
+    }
+
+    // -----------------------------------Log.w
+
+    /**
+     * Log.w
+     * @param msg
+     */
+    public static void w(String msg) {
+        if (isShowLog && priority <= WARN) {
+            Log.w(getCallerStackLogTag(), String.valueOf(msg));
+        }
+    }
+
+    public static void w(Throwable t) {
+        if (isShowLog && priority <= WARN) {
+            Log.w(getCallerStackLogTag(), getStackTraceString(t));
+        }
+    }
+
+    public static void w(String tag,String msg) {
+        if (isShowLog && priority <= WARN) {
+            Log.d(tag, String.valueOf(msg));
+        }
+    }
+
+    public static void w(String msg,Throwable t) {
+        if (isShowLog && priority <= WARN) {
+            Log.w(getCallerStackLogTag(), String.valueOf(msg), t);
+        }
+    }
+
+    // -----------------------------------Log.e
+
+    /**
+     * Log.e
+     * @param msg
+     */
+    public static void e(String msg) {
+        if (isShowLog && priority <= ERROR) {
+            Log.e(getCallerStackLogTag(), String.valueOf(msg));
+        }
+    }
+
+    public static void e(Throwable t) {
+        if (isShowLog && priority <= ERROR) {
+            Log.e(getCallerStackLogTag(), getStackTraceString(t));
+        }
+    }
+
+    public static void e(String tag,String msg) {
+        if (isShowLog && priority <= ERROR) {
+            Log.d(tag, String.valueOf(msg));
+        }
+    }
+
+    public static void e(String msg,Throwable t) {
+        if (isShowLog && priority <= ERROR) {
+            Log.e(getCallerStackLogTag(), String.valueOf(msg), t);
+        }
+    }
+
+    // -----------------------------------Log.wtf
+
+    /**
+     * Log.wtf
+     * @param msg
+     */
+    public static void wtf(String msg) {
+        if (isShowLog && priority <= ASSERT) {
+            Log.wtf(getCallerStackLogTag(), String.valueOf(msg));
+        }
+    }
+
+    public static void wtf(Throwable t) {
+        if (isShowLog && priority <= ASSERT) {
+            Log.wtf(getCallerStackLogTag(), getStackTraceString(t));
+        }
+    }
+
+    public static void wtf(String msg,Throwable t) {
+        if (isShowLog && priority <= ASSERT) {
+            Log.wtf(getCallerStackLogTag(), String.valueOf(msg), t);
+        }
+    }
+
+    // -----------------------------------System.out.print
+
+    /**
+     * System.out.print
+     *
+     * @param msg
+     */
+    public static void print(String msg) {
+        if (isShowLog && priority <= PRINTLN) {
+            System.out.print(msg);
+        }
+    }
+
+    public static void print(Object obj) {
+        if (isShowLog && priority <= PRINTLN) {
+            System.out.print(obj);
+        }
+    }
+
+    // -----------------------------------System.out.printf
+
+    /**
+     * System.out.printf
+     *
+     * @param msg
+     */
+    public static void printf(String msg) {
+        if (isShowLog && priority <= PRINTLN) {
+            System.out.printf(msg);
+        }
+    }
+
+    // -----------------------------------System.out.println
+
+    /**
+     * System.out.println
+     *
+     * @param msg
+     */
+    public static void println(String msg) {
+        if (isShowLog && priority <= PRINTLN) {
+            System.out.println(msg);
+        }
+    }
+
+    public static void println(Object obj) {
+        if (isShowLog && priority <= PRINTLN) {
+            System.out.println(obj);
         }
     }
 }

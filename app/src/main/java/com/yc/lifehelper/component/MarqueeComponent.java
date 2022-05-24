@@ -17,12 +17,6 @@ import com.yc.lifehelper.LocaleActivity;
 import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
-import com.yc.monitorfilelib.FileExplorerActivity;
-import com.yc.mvctodo.NetworkActivity;
-import com.yc.other.thread.MainThreadActivity;
-import com.yc.toollib.crash.CrashToolUtils;
-import com.yc.toolutils.click.FastClickUtils;
-import com.yc.video.ui.activity.VideoActivity;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 

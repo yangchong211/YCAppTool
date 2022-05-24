@@ -20,9 +20,7 @@ import com.yc.other.ui.activity.TestActivity;
 import com.yc.todoapp.tasks.TasksActivity;
 import com.yc.todoapplive.tasks.TasksLiveActivity;
 import com.yc.todoappmvvm.tasks.TasksMvvmActivity;
-import com.yc.toollib.crash.CrashToolUtils;
 import com.yc.toolutils.click.FastClickUtils;
-import com.yc.video.ui.activity.VideoActivity;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;

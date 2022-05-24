@@ -2,4 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yc.apprestartlib">
 
+    <application>
+        <service android:name="com.yc.apprestartlib.KillSelfService"/>
+    </application>
 </manifest>

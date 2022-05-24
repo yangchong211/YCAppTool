@@ -77,7 +77,7 @@ public class CrashTestActivity extends AppCompatActivity implements View.OnClick
                 }
             }
         } else if ( id == R.id.tv_7){
-            CrashToolUtils.startCrashListActivity(this);
+            CrashLibUtils.startCrashListActivity(this);
         }
     }
 

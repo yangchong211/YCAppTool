@@ -79,10 +79,10 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 获取系统默认的UncaughtException处理器,
      * 设置该CrashHandler为程序的默认处理器
      *
-     * @param ctx                       上下文
+     * @param ctx 上下文
      */
-    public void init(Application ctx , CrashListener listener) {
-        if (isFinishActivity){
+    public void init(Application ctx, CrashListener listener) {
+        if (isFinishActivity) {
             CrashHelper.getInstance().install(ctx);
         }
         mContext = ctx;
@@ -106,7 +106,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
         boolean isHandle = handleException(ex);
-        AppLogUtils.d(TAG, "uncaughtException--- handleException----"+isHandle);
+        AppLogUtils.d(TAG, "uncaughtException--- handleException----" + isHandle);
         initCustomBug(ex);
         if (mDefaultHandler != null && !isHandle) {
             //收集完信息后，交给系统自己处理崩溃
@@ -116,30 +116,30 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
             mDefaultHandler.uncaughtException(thread, ex);
         } else {
             //否则自己处理
-            if (mContext instanceof Application){
+            if (mContext instanceof Application) {
                 AppLogUtils.w(TAG, "handleException--- ex----重启activity-");
-                if (listener!=null){
+                if (listener != null) {
                     listener.againStartApp();
                 }
             }
         }
-        if (isFinishActivity){
-            CrashHelper.getInstance().setSafe(thread,ex);
+        if (isFinishActivity) {
+            CrashHelper.getInstance().setSafe(thread, ex);
         }
     }
 
     /**
      * 初始化百度
+     *
      * @param ex
      */
     private void initCustomBug(Throwable ex) {
         //自定义上传crash，支持开发者上传自己捕获的crash数据
-        //StatService.recordException(mContext, ex);
-        if (listener!=null){
+        if (listener != null) {
             //捕获监听中异常，防止外部开发者使用方代码抛出异常时导致的反复调用
             try {
                 listener.recordException(ex);
-            } catch (Throwable e){
+            } catch (Throwable e) {
                 e.printStackTrace();
             }
         }
@@ -160,12 +160,12 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (msg == null) {
             return false;
         }
-        AppLogUtils.w(TAG, "handleException--- ex-----"+msg);
+        AppLogUtils.w(TAG, "handleException--- ex-----" + msg);
         ex.printStackTrace();
         //收集设备信息
         //保存错误报告文件
-        if (isWriteLog){
-            CrashFileUtils.saveCrashInfoInFile(mContext,ex);
+        if (isWriteLog) {
+            CrashFileUtils.saveCrashInfoInFile(mContext, ex);
         }
         return true;
     }

@@ -5,9 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.*
 import com.yc.jetpack.R
 import com.yc.jetpack.study.livedata.LiveDataActivity
 import com.yc.jetpack.study.livedata.TextViewModel
@@ -28,15 +26,10 @@ class LifecycleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_saved_state)
         initLive()
-        initLiveData()
     }
 
     private fun initLive(){
-
-    }
-
-    private fun initLiveData() {
-
+        this.lifecycle.addObserver(MyLifecycleObserver())
     }
 
 }

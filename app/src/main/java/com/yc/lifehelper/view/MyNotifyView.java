@@ -42,4 +42,5 @@ public class MyNotifyView extends NotificationView<Void> {
     public void bindNotification(CustomNotification<Void> notification) {
         super.bindNotification(notification);
     }
+
 }

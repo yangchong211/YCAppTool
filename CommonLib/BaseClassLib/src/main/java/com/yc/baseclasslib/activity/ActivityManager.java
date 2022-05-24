@@ -240,11 +240,28 @@ public class ActivityManager implements IActivityManager<Activity> {
         } catch (Exception ignored) {
             //ignored.printStackTrace();
         }
-        //杀死进程
-        android.os.Process.killProcess(android.os.Process.myPid());
-        //推出
-        System.exit(0);
+        killCurrentProcess(false);
     }
+
+
+    /**
+     * 杀死进程操作，默认为异常退出
+     * System.exit(0)是正常退出程序，而System.exit(1)或者说非0表示非正常退出程序
+     * System.exit(1)一般放在catch块中，当捕获到异常，需要停止程序。这个status=1是用来表示这个程序是非正常退出。
+     *
+     * 为何要杀死进程：如果不主动退出进程，重启后会一直黑屏，所以加入主动杀掉进程
+     * @param isThrow                           是否是异常退出
+     */
+    public void killCurrentProcess(boolean isThrow) {
+        //需要杀掉原进程，否则崩溃的app处于黑屏,卡死状态
+        android.os.Process.killProcess(android.os.Process.myPid());
+        if (isThrow){
+            System.exit(10);
+        } else {
+            System.exit(0);
+        }
+    }
+
 
     /**
      * 返回AndroidManifest.xml中注册的所有Activity的class

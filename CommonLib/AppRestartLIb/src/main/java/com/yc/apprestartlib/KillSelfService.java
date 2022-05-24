@@ -1,4 +1,4 @@
-package com.yc.toollib.crash;
+package com.yc.apprestartlib;
 
 import android.app.Service;
 import android.content.Intent;
@@ -34,10 +34,10 @@ public class KillSelfService extends Service {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                AppLogUtils.w(CrashHandler.TAG, "KillSelfService---打开app---"+packageName);
-                Intent LaunchIntent = getPackageManager().getLaunchIntentForPackage(packageName);
+                AppLogUtils.w("KillSelfService", "post delayed restart app : "+packageName);
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage(packageName);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(LaunchIntent);
+                startActivity(launchIntent);
                 KillSelfService.this.stopSelf();
             }
         },stopDelayed);

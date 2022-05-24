@@ -237,7 +237,6 @@ public class NewArticleActivity extends AppCompatActivity {
                 List<HyperEditData> hyperEditData = mHteContent.buildEditData();
                 Gson gson = new Gson();
                 String content = gson.toJson(hyperEditData);
-                AppLogUtils.json("content---"+content);
             } catch (Exception e){
                 e.printStackTrace();
             } finally {

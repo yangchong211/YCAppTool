@@ -15,10 +15,7 @@ import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.mvctodo.NetworkActivity;
 import com.yc.other.thread.MainThreadActivity;
-import com.yc.todoapp.tasks.TasksActivity;
-import com.yc.todoapplive.tasks.TasksLiveActivity;
-import com.yc.todoappmvvm.tasks.TasksMvvmActivity;
-import com.yc.toollib.crash.CrashToolUtils;
+import com.yc.toollib.crash.CrashLibUtils;
 import com.yc.toolutils.click.FastClickUtils;
 import com.yc.video.ui.activity.VideoActivity;
 
@@ -62,7 +59,7 @@ public class HeaderComponent implements InterItemView {
                     break;
                 //崩溃监控
                 case R.id.tv_home_second:
-                    CrashToolUtils.startCrashTestActivity(context);
+                    CrashLibUtils.startCrashTestActivity(context);
                     logger.info("crash app log");
                     break;
                 //网络工具

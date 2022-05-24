@@ -4,10 +4,13 @@ import android.content.Context;
 
 import androidx.annotation.ColorInt;
 
+import android.content.Intent;
 import android.text.Spannable;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 
+import com.yc.apprestartlib.RestartAppHelper;
+import com.yc.apprestartlib.RestartFactory;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.AppSizeUtils;
 
@@ -77,6 +80,59 @@ public class CrashLibUtils {
         }
         return spannable;
     }
+
+    /**
+     * 开启一个新的服务，用来重启本APP【使用handler延迟】
+     * 软件重启，不清临时数据。
+     * 重启整个APP
+     * @param context                       上下文
+     * @param Delayed                       延迟多少毫秒
+     */
+    public static void reStartApp1(Context context, long Delayed){
+        RestartAppHelper.restartApp(context, RestartFactory.SERVICE);
+    }
+
+    /**
+     * 用来重启本APP[使用闹钟，整体重启，临时数据清空（推荐）]
+     * 重启整个APP
+     * @param context                       上下文
+     * @param Delayed                       延迟多少毫秒
+     */
+    public static void reStartApp2(Context context , long Delayed , Class clazz){
+        RestartAppHelper.restartApp(context, RestartFactory.ALARM);
+    }
+
+    public static void reStartApp3(Context context) {
+        RestartAppHelper.restartApp(context, RestartFactory.LAUNCHER);
+    }
+
+
+    public static void reStartApp4(Context context) {
+        RestartAppHelper.restartApp(context, RestartFactory.MAINIFEST);
+    }
+
+    /**
+     * 日志列表页面
+     *
+     * @param context                       上下文
+     */
+    public static void startCrashListActivity(Context context) {
+        Intent intent = new Intent(context.getApplicationContext(), CrashListActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.getApplicationContext().startActivity(intent);
+    }
+
+    /**
+     * 测试异常类
+     *
+     * @param context                       上下文
+     */
+    public static void startCrashTestActivity(Context context) {
+        Intent intent = new Intent(context, CrashTestActivity.class);
+        context.startActivity(intent);
+    }
+
+
 
 
 }

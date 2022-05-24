@@ -7,7 +7,7 @@
 
     <application
         android:label="@string/app_name">
-        <service android:name=".crash.KillSelfService"/>
+
         <activity
             android:name=".crash.CrashListActivity"
             android:screenOrientation="portrait"/>

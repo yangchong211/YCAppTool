@@ -47,6 +47,7 @@ public class CustomNotification<T> implements Parcelable {
     int mType = TYPE_UNKNOWN;
     // 与 view 绑定的 data 类
     T mData;
+    OnDismissListener mListener;
 
     public CustomNotification() {
     }
@@ -123,6 +124,11 @@ public class CustomNotification<T> implements Parcelable {
         return this;
     }
 
+    public CustomNotification<T> setDismissListener(OnDismissListener listener) {
+        mListener = listener;
+        return this;
+    }
+
     public NotificationView<T> getNotificationView() {
         return mView;
     }
@@ -156,6 +162,10 @@ public class CustomNotification<T> implements Parcelable {
     @Nullable
     public T getData() {
         return mData;
+    }
+
+    public OnDismissListener getListener() {
+        return mListener;
     }
 
     /**

@@ -63,7 +63,7 @@ class GetCookieInterceptor : Interceptor {
         // 登录之后保存cookies
         if (requestUrl.contains(SAVE_USER_LOGIN_KEY) && !response.header(SET_COOKIE_KEY)?.isEmpty()!!) {
             val cookies = response.headers(SET_COOKIE_KEY)
-            AppLogUtils.i("GetCookieInterceptor----cookies",cookies.size)
+            AppLogUtils.i("GetCookieInterceptor----cookies",cookies.size.toString())
             val cookie = encodeCookie(cookies)
             AppLogUtils.i("GetCookieInterceptor----cookie",cookie)
             saveCookie(requestUrl, domain, cookie)
