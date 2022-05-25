@@ -78,19 +78,48 @@ public final class StateAppBar {
 
     /**
      * 隐藏状态栏
+     * 第一种，在onCreate设置，网络上大部分方案是这样的。但是隐藏状态栏后，用户手指滑动让状态栏出现，则可能会有视觉上bug
+     * 第二种，监听页面状态栏变化，实现状态之间的无缝切换，界面控件的可见性与系统栏保持同步。当应用进入沉浸模式后，任何界面控件也应随系统栏一起隐藏，然后在系统界面重新出现时也再次显示出来。为此，可以在 View.OnSystemUiVisibilityChangeListener 以接收回调
+     * 第三种，实现 onWindowFocusChanged()。 如果您获得窗口焦点，则可能需要再次隐藏系统栏。
      * @param activity      activity
      */
-    public static void hideStatusBar(Activity activity){
+    public static void hideStatusBar(Activity activity , int type){
         if (activity!=null){
             View decorView = activity.getWindow().getDecorView();
             int uiOptions = decorView.getSystemUiVisibility();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                //视图要求暂时隐藏系统导航，隐藏导航栏
-                uiOptions |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                //视图希望在隐藏状态栏时保持交互式
-                uiOptions |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+            if (type == StatusBarUtils.HideBarStatus.LEAN_BACK){
+                //全屏幕模式，允许交互
+                uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
+                        //视图要求暂时隐藏系统导航，隐藏导航栏
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+            } else if (type == StatusBarUtils.HideBarStatus.IMMERSION_MODE){
+                //全屏幕模式，允许交互
+                uiOptions |= View.SYSTEM_UI_FLAG_FULLSCREEN
+                        //视图要求暂时隐藏系统导航，隐藏导航栏
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    uiOptions |= View.SYSTEM_UI_FLAG_IMMERSIVE;
+                }
+            } else if (type == StatusBarUtils.HideBarStatus.VISCOUS_IMMERSION){
+                //全屏幕模式，允许交互
+                uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
+                        //视图要求暂时隐藏系统导航，隐藏导航栏
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    //视图希望在隐藏状态栏时保持交互式
+                    uiOptions |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+                }
+            } else {
+                uiOptions |= View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        //视图要求暂时隐藏系统导航，隐藏导航栏
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        //全屏幕模式，允许交互
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    uiOptions |= View.SYSTEM_UI_FLAG_IMMERSIVE;
+                }
             }
             //给根布局设置属性
             decorView.setSystemUiVisibility(uiOptions);

@@ -3,22 +3,22 @@ package com.yc.statusbar.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
-import android.content.res.Resources;
 import android.os.Build;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.IntDef;
 import androidx.core.view.ViewCompat;
 
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.statusbar.view.StatusBarView;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import static com.yc.toolutils.StatusBarUtils.getStatusBarHeight;
 
@@ -203,5 +203,39 @@ public final class StatusBarUtils {
             throw new NullPointerException("object is not null");
         }
     }
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface HideBarStatus {
+        /**
+         * 向后倾斜
+         * 向后倾斜模式适用于用户不会与屏幕进行大量互动的全屏体验，例如在观看视频时。
+         * 当用户希望调出系统栏时，只需点按屏幕上的任意位置即可。
+         */
+        int LEAN_BACK = 0;
+        /**
+         * 沉浸模式
+         * 沉浸模式适用于用户将与屏幕进行大量互动的应用。
+         * 当用户需要调出系统栏时，他们可从隐藏系统栏的任一边滑动。
+         * 要求使用这种这种意图更强的手势是为了确保用户与您应用的互动不会因意外轻触和滑动而中断。
+         */
+        int IMMERSION_MODE = 1;
+        /**
+         * 粘性沉浸模式
+         * 在普通的沉浸模式中，只要用户从边缘滑动，系统就会负责显示系统栏
+         * 在粘性沉浸模式下，如果用户从隐藏了系统栏的边缘滑动，系统栏会显示出来，是半透明的，并且轻触手势会传递给应用，因此应用也会响应该手势。
+         * 无互动几秒钟后，或者用户在系统栏之外的任何位置轻触或做手势时，系统栏会自动消失。
+         */
+        int VISCOUS_IMMERSION = 2;
+        /**
+         * 全屏幕模式
+         * 上面三种模式的综合体，上面三种搞不定，就用这种，把上面所有标签都设置
+         */
+        int FULL_ALL = 3;
+    }
+
+    @IntDef({HideBarStatus.LEAN_BACK,HideBarStatus.IMMERSION_MODE,
+            HideBarStatus.FULL_ALL, HideBarStatus.VISCOUS_IMMERSION})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface HideBarType{}
 
 }
