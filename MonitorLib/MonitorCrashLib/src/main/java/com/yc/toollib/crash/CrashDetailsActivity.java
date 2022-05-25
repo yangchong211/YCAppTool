@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.yc.baseclasslib.activity.ActivityManager;
 import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toollib.R;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.file.FileSaveUtils;
@@ -91,6 +92,8 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crash_details);
+        StateAppBar.setStatusBarColor(this,
+                ContextCompat.getColor(this, R.color.crash_tool_bar_color));
         initFindViewById();
         initView();
         initIntent();

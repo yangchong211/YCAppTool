@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.eastadapterlib.OnItemLongClickListener;
 import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toollib.R;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.file.AppFileUtils;
@@ -67,6 +69,8 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crash_list);
+        StateAppBar.setStatusBarColor(this,
+                ContextCompat.getColor(this, R.color.crash_tool_bar_color));
         initFindViewById();
         initViews();
         initRefreshView();

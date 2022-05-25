@@ -30,7 +30,6 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/ic_show_error"
                 android:text="日志详情"
                 android:textColor="@color/crash_white"
                 android:textSize="20sp"
