@@ -89,7 +89,7 @@ public class DlStatusBar {
             contentLayout.getChildAt(0).setBackgroundColor(calculateStatusColor(color, statusBarAlpha));
         } else {
             //创建一个StatusBarView，和状态栏的高度相同，并且设置颜色
-            StatusBarView statusBarView = createStatusBarView(activity, color);
+            StatusBarView statusBarView = StatusBarUtils.createStatusBarView(activity, color);
             contentLayout.addView(statusBarView, 0);
         }
         // 内容布局不是 LinearLayout 时,设置padding top
@@ -110,29 +110,6 @@ public class DlStatusBar {
 
         //添加透明view
         addTranslucentView(activity, statusBarAlpha);
-    }
-
-    /**
-     * 生成一个和状态栏大小相同的彩色矩形条
-     *
-     * @param activity 需要设置的 activity
-     * @param color    状态栏颜色值
-     * @return 状态栏矩形条
-     */
-    private static StatusBarView createStatusBarView(Activity activity, @ColorInt int color) {
-        StatusBarUtils.checkNull(activity);
-        // 绘制一个和状态栏一样高的矩形
-        StatusBarView statusBarView = new StatusBarView(activity);
-        // 获取状态栏的高度
-        int statusBarHeight = getStatusBarHeight(activity);
-        // 设置view的属性，包括高度和背景颜色
-        LinearLayout.LayoutParams params =
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight);
-        //设置属性
-        statusBarView.setLayoutParams(params);
-        //设置颜色
-        statusBarView.setBackgroundColor(color);
-        return statusBarView;
     }
 
     /**

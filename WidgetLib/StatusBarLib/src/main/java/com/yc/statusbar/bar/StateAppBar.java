@@ -95,6 +95,7 @@ public final class StateAppBar {
             //给根布局设置属性
             decorView.setSystemUiVisibility(uiOptions);
             //设置全屏幕
+            //FLAG_FULLSCREEN 窗口标志:显示此窗口时，隐藏所有屏幕装饰(如状态栏)。
             activity.getWindow().setFlags(
                     WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -155,7 +156,9 @@ public final class StateAppBar {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     //5.0
                     //给状态栏设置颜色
+                    //FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS 表示此窗口负责绘制系统栏的背景
                     activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    //请求一个半透明的状态栏，系统提供最小的状态栏背景的保护。
                     activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                     activity.getWindow().setStatusBarColor(color);
                     //BarStatusLollipop.setStatusBarColor(activity, color);

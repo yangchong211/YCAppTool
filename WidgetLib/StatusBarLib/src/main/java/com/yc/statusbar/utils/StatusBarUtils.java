@@ -7,14 +7,20 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
+import androidx.annotation.ColorInt;
 import androidx.core.view.ViewCompat;
 
 import com.yc.statusbar.bar.StateAppBar;
+import com.yc.statusbar.view.StatusBarView;
+
+import static com.yc.toolutils.StatusBarUtils.getStatusBarHeight;
 
 
 /**
@@ -31,11 +37,17 @@ import com.yc.statusbar.bar.StateAppBar;
 public final class StatusBarUtils {
 
     private static final String TAG = "StatusBarUtils";
+    /**
+     * 添加一个状态栏高度的自定义view
+     */
+    private static final String TAG_FAKE_STATUS_BAR_VIEW = "statusBarView";
+
 
     /**
      * 设置 fitSystemWindows 属性
-     * @param window            window窗口
-     * @param fitSystemWindows  是否设置fitSystemWindows
+     *
+     * @param window           window窗口
+     * @param fitSystemWindows 是否设置fitSystemWindows
      */
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public static void setFitsSystemWindows(Window window, boolean fitSystemWindows) {
@@ -54,8 +66,9 @@ public final class StatusBarUtils {
 
     /**
      * 设置content布局的top的padding间距值
-     * @param activity                      activity
-     * @param padding                       padding值
+     *
+     * @param activity activity
+     * @param padding  padding值
      */
     public static void setContentTopPadding(Activity activity, int padding) {
         StatusBarUtils.checkNull(activity);
@@ -64,61 +77,107 @@ public final class StatusBarUtils {
         mContentView.setPadding(0, padding, 0, 0);
     }
 
+
+    /**
+     * 生成一个和状态栏大小相同的彩色矩形条
+     *
+     * @param activity 需要设置的 activity
+     * @param color    状态栏颜色值
+     * @return 状态栏矩形条
+     */
+    public static StatusBarView createStatusBarView(Activity activity, @ColorInt int color) {
+        StatusBarUtils.checkNull(activity);
+        // 绘制一个和状态栏一样高的矩形
+        StatusBarView statusBarView = new StatusBarView(activity);
+        // 获取状态栏的高度
+        int statusBarHeight = getStatusBarHeight(activity);
+        // 设置view的属性，包括高度和背景颜色
+        LinearLayout.LayoutParams params =
+                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight);
+        params.gravity = Gravity.TOP;
+        //设置属性
+        statusBarView.setLayoutParams(params);
+        //设置颜色
+        statusBarView.setBackgroundColor(color);
+        //设置标签
+        statusBarView.setTag(TAG_FAKE_STATUS_BAR_VIEW);
+        return statusBarView;
+    }
+
+    /**
+     * 如果已经存在假状态栏则移除，假状态栏是指StatusBarView，添加之前可以先移除操作，避免重复添加
+     * TAG_FAKE_STATUS_BAR_VIEW    给假的状态栏StatusBarView打的tag标签
+     *
+     * @param activity activity
+     */
+    public static void removeFakeStatusBarViewIfExist(Activity activity) {
+        Window window = activity.getWindow();
+        ViewGroup mDecorView = (ViewGroup) window.getDecorView();
+        //通过DecorView找到状态栏view，然后移除
+        View fakeView = mDecorView.findViewWithTag(TAG_FAKE_STATUS_BAR_VIEW);
+        if (fakeView != null) {
+            mDecorView.removeView(fakeView);
+        }
+    }
+
     /**
      * 设置状态栏字体图标颜色
      *
      * @param activity 当前activity
      * @param dark     是否深色 true为深色 false 为白色
      */
-    public static void setMeiZu(Activity activity , boolean dark){
-        if (RomUtils.isFlyme()){
-            StatusBarColorUtils.setStatusBarDarkIcon(activity , dark);
+    public static void setMeiZu(Activity activity, boolean dark) {
+        if (RomUtils.isFlyme()) {
+            StatusBarColorUtils.setStatusBarDarkIcon(activity, dark);
         }
     }
 
     /**
      * 状态栏亮色模式，设置状态栏黑色文字、图标，
      * 适配4.4以上版本MIUIV、Flyme和6.0以上版本其他Android
-     * @param activity      activity
-     * @return              1:MIUUI 2:Flyme 3:android6.0
-     * */
-    public static int StatusBarLightMode(Activity activity){
-        int result=0;
+     *
+     * @param activity activity
+     * @return 1:MIUUI 2:Flyme 3:android6.0
+     */
+    public static int StatusBarLightMode(Activity activity) {
+        int result = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if(StateAppBar.setStatusBarLightMode(activity, true)){
+            if (StateAppBar.setStatusBarLightMode(activity, true)) {
                 //是否是MIUI
-                result=1;
-            }else if(StateAppBar.FlymeSetStatusBarLightMode(activity, true)){
+                result = 1;
+            } else if (StateAppBar.FlymeSetStatusBarLightMode(activity, true)) {
                 //是否是Flyme
-                result=2;
-            }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                result = 2;
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 //其他
                 activity.getWindow().getDecorView().
-                        setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|
+                        setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
                                 View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-                result=3;
+                result = 3;
             }
-        } return result;
+        }
+        return result;
     }
 
 
     /**
      * 已知系统类型时，设置状态栏黑色文字、图标。
      * 适配4.4以上版本MIUIV、Flyme和6.0以上版本其他Android
-     * @param activity      activity
-     * @param type          1:MIUUI 2:Flyme 3:android6.0
+     *
+     * @param activity activity
+     * @param type     1:MIUUI 2:Flyme 3:android6.0
      */
-    public static void StatusBarLightMode(Activity activity,int type){
-        if(type==1){
+    public static void StatusBarLightMode(Activity activity, int type) {
+        if (type == 1) {
             StateAppBar.setStatusBarLightMode(activity, true);
-        }else if(type==2){
+        } else if (type == 2) {
             StateAppBar.FlymeSetStatusBarLightMode(activity, true);
-        }else if(type==3){
+        } else if (type == 3) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     activity.getWindow().getDecorView().setSystemUiVisibility(
                             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                                    |View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                                    | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 }
             }
         }
@@ -128,19 +187,19 @@ public final class StatusBarUtils {
     /**
      * 状态栏暗色模式，清除MIUI、flyme或6.0以上版本状态栏黑色文字、图标
      */
-    public static void StatusBarDarkMode(Activity activity,int type){
-        if(type==1){
+    public static void StatusBarDarkMode(Activity activity, int type) {
+        if (type == 1) {
             StateAppBar.setStatusBarLightMode(activity, false);
-        }else if(type==2){
+        } else if (type == 2) {
             StateAppBar.FlymeSetStatusBarLightMode(activity, false);
-        }else if(type==3){
+        } else if (type == 3) {
             activity.getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_VISIBLE);
         }
     }
 
-    public static void checkNull(Object object){
-        if (object == null){
+    public static void checkNull(Object object) {
+        if (object == null) {
             throw new NullPointerException("object is not null");
         }
     }
