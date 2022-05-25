@@ -122,6 +122,8 @@ dependencies {
 
     //ServiceLoader
     api 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3'
+    implementation project(path: ':BaseClassLib')
+    implementation project(path: ':BaseClassLib')
     annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 
     implementation project(path: ':WidgetViewLib')

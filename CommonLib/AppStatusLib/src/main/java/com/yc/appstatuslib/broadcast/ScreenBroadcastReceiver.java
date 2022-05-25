@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.yc.appstatuslib.AppStatusManager;
+import com.yc.baseclasslib.receiver.BaseReceiver;
 
 /**
  * <pre>
@@ -15,7 +16,7 @@ import com.yc.appstatuslib.AppStatusManager;
  *     revise :
  * </pre>
  */
-public class ScreenBroadcastReceiver extends BroadcastReceiver {
+public class ScreenBroadcastReceiver extends BaseReceiver {
 
     private AppStatusManager mManager;
 
@@ -23,6 +24,7 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
         this.mManager = resourceManager;
     }
 
+    @Override
     public void onReceive(Context context, Intent intent) {
         if (this.mManager != null) {
             String action = intent.getAction();

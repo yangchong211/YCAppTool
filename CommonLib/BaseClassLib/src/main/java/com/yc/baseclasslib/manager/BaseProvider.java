@@ -1,4 +1,4 @@
-package com.yc.baseclasslib.activity;
+package com.yc.baseclasslib.manager;
 
 import android.app.Application;
 import android.content.ContentProvider;
@@ -9,8 +9,6 @@ import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-
-import com.yc.baseclasslib.activity.ActivityManager;
 
 /**
  * <pre>

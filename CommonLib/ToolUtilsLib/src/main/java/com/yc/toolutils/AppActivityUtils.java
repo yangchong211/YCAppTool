@@ -7,6 +7,7 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -123,6 +124,15 @@ public final class AppActivityUtils {
             }
         }
         return "no " + packageName;
+    }
+
+
+    /**
+     * 是否为竖屏
+     */
+    public static boolean isPortrait(Activity activity) {
+        return activity.getResources().getConfiguration().orientation ==
+                Configuration.ORIENTATION_PORTRAIT;
     }
 
 }

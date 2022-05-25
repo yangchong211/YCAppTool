@@ -9,6 +9,7 @@ import android.provider.Settings.System;
 import android.text.TextUtils;
 
 import com.yc.appstatuslib.AppStatusManager;
+import com.yc.baseclasslib.receiver.BaseReceiver;
 
 
 /**
@@ -20,7 +21,7 @@ import com.yc.appstatuslib.AppStatusManager;
  *     revise :
  * </pre>
  */
-public final class GpsBroadcastReceiver extends BroadcastReceiver {
+public final class GpsBroadcastReceiver extends BaseReceiver {
 
     private final AppStatusManager mManager;
     private boolean isGpsEnable = false;

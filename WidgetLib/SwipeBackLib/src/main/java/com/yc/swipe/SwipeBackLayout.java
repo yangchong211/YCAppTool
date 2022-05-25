@@ -39,6 +39,10 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.yc.toolutils.AppActivityUtils;
+import com.yc.toolutils.AppWindowUtils;
+import com.yc.toolutils.StatusBarUtils;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -556,9 +560,9 @@ public class SwipeBackLayout extends ViewGroup {
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         // ======================== 新加的 START ========================
 //        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int widthSize = SwipeUiUtils.getRealScreenWidth(mActivity);
+        int widthSize = AppWindowUtils.getRealScreenWidth(mActivity);
 //        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        int heightSize = SwipeUiUtils.getRealScreenHeight(mActivity);
+        int heightSize = AppWindowUtils.getRealScreenHeight(mActivity);
         // ======================== 新加的 END ========================
 
         if (widthMode != MeasureSpec.EXACTLY) {
@@ -602,12 +606,12 @@ public class SwipeBackLayout extends ViewGroup {
         }
 
         // ======================== 新加的 START ========================
-        if (!mIsNavigationBarOverlap && SwipeUiUtils.isPortrait(mActivity)) {
-            maxLayoutHeight -= SwipeUiUtils.getNavigationBarHeight(mActivity);
+        if (!mIsNavigationBarOverlap && AppActivityUtils.isPortrait(mActivity)) {
+            maxLayoutHeight -= StatusBarUtils.getNavigationBarHeight(mActivity);
         }
 
-        if (mIsNavigationBarOverlap && !SwipeUiUtils.isPortrait(mActivity)) {
-            widthSize += SwipeUiUtils.getNavigationBarHeight(mActivity);
+        if (mIsNavigationBarOverlap && !AppActivityUtils.isPortrait(mActivity)) {
+            widthSize += StatusBarUtils.getNavigationBarHeight(mActivity);
         }
         // ======================== 新加的 END ========================
 
@@ -1108,6 +1112,7 @@ public class SwipeBackLayout extends ViewGroup {
         dispatchOnPanelSlide(mSlideableView);
     }
 
+    @SuppressLint("WrongConstant")
     private void dimChildView(View v, float mag, int fadeColor) {
         final LayoutParams lp = (LayoutParams) v.getLayoutParams();
 
@@ -1335,7 +1340,9 @@ public class SwipeBackLayout extends ViewGroup {
         final int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View v = getChildAt(i);
-            if (v == mSlideableView) continue;
+            if (v == mSlideableView) {
+                continue;
+            }
 
             final int oldOffset = (int) ((1 - mParallaxOffset) * mParallaxBy);
             mParallaxOffset = slideOffset;

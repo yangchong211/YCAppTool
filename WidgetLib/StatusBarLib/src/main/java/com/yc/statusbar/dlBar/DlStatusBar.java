@@ -28,7 +28,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.yc.statusbar.view.StatusBarView;
 import com.yc.statusbar.utils.StatusBarUtils;
 
-import static com.yc.statusbar.utils.StatusBarUtils.getStatusBarHeight;
+import static com.yc.toolutils.StatusBarUtils.getStatusBarHeight;
 
 
 /**
@@ -128,7 +128,9 @@ public class DlStatusBar {
         // 设置view的属性，包括高度和背景颜色
         LinearLayout.LayoutParams params =
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusBarHeight);
+        //设置属性
         statusBarView.setLayoutParams(params);
+        //设置颜色
         statusBarView.setBackgroundColor(color);
         return statusBarView;
     }

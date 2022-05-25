@@ -812,8 +812,12 @@ public final class FragmentUtils {
                         ft.remove(fragmentByTag);
                     }
                     ft.add(args.getInt(ARGS_ID), fragment, name);
-                    if (args.getBoolean(ARGS_IS_HIDE)) ft.hide(fragment);
-                    if (args.getBoolean(ARGS_IS_ADD_STACK)) ft.addToBackStack(name);
+                    if (args.getBoolean(ARGS_IS_HIDE)) {
+                        ft.hide(fragment);
+                    }
+                    if (args.getBoolean(ARGS_IS_ADD_STACK)) {
+                        ft.addToBackStack(name);
+                    }
                 }
                 break;
             case TYPE_HIDE_FRAGMENT:

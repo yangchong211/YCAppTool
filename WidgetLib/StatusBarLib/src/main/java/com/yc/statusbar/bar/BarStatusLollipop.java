@@ -29,12 +29,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.yc.statusbar.utils.StatusBarUtils;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import static com.yc.statusbar.utils.StatusBarUtils.getStatusBarHeight;
+import static com.yc.toolutils.StatusBarUtils.getStatusBarHeight;
 
 
 /**
@@ -66,16 +68,7 @@ final class BarStatusLollipop {
         //设置系统状态栏处于可见状态
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
         //让view不根据系统窗口来调整自己的布局，实际上就是content布局
-        ViewGroup mContentView = (ViewGroup) window.findViewById(Window.ID_ANDROID_CONTENT);
-        //获取getChildAt(0)
-        View mChildView = mContentView.getChildAt(0);
-        if (mChildView != null) {
-            //setFitsSystemWindows(boolean):设置系统是否需要考虑System Bar占据的区域来显示。
-            //如果需要的话就会执行 fitSystemWindows(Rect)方法。
-            //即设置为true的是时候系统会适应System Bar的区域，让内容不被遮住。
-            mChildView.setFitsSystemWindows(false);
-            ViewCompat.requestApplyInsets(mChildView);
-        }
+        StatusBarUtils.setFitsSystemWindows(window,false);
     }
 
     /**
@@ -103,13 +96,7 @@ final class BarStatusLollipop {
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
         }
         //view不根据系统窗口来调整自己的布局
-        //将根rootView直接顶上去，和状态栏的顶部对齐。
-        ViewGroup mContentView = (ViewGroup) window.findViewById(Window.ID_ANDROID_CONTENT);
-        View mChildView = mContentView.getChildAt(0);
-        if (mChildView != null) {
-            mChildView.setFitsSystemWindows(false);
-            ViewCompat.requestApplyInsets(mChildView);
-        }
+        StatusBarUtils.setFitsSystemWindows(window,false);
     }
 
     /**

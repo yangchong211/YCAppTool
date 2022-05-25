@@ -20,7 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.yc.baseclasslib.activity.ActivityManager;
+import com.yc.baseclasslib.manager.ActivityManager;
 import com.yc.banner.view.BannerView;
 
 import com.yc.configlayer.constant.Constant;
@@ -38,8 +38,6 @@ import com.yc.lifehelper.component.RecommendComponent;
 import com.yc.lifehelper.component.SnapBannerComponent;
 import com.yc.lifehelper.component.ToolComponent;
 import com.yc.lifehelper.view.MyNotifyView;
-import com.yc.logging.LoggerService;
-import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.notifymessage.CustomNotification;
 import com.yc.notifymessage.OnDismissListener;

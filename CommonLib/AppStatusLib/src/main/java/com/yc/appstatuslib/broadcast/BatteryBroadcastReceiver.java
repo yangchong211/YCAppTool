@@ -8,6 +8,7 @@ import android.os.BatteryManager;
 
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.AppBatteryInfo;
+import com.yc.baseclasslib.receiver.BaseReceiver;
 
 /**
  * <pre>
@@ -18,7 +19,7 @@ import com.yc.appstatuslib.info.AppBatteryInfo;
  *     revise :
  * </pre>
  */
-public class BatteryBroadcastReceiver extends BroadcastReceiver {
+public class BatteryBroadcastReceiver extends BaseReceiver {
 
     private AppBatteryInfo mBatteryInfo = new AppBatteryInfo();
     private final AppStatusManager mManager;
@@ -27,6 +28,7 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
         this.mManager = manger;
     }
 
+    @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {

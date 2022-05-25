@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_statusbar_color"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:background="@color/colorPrimary"
+            android:text="设置状态栏颜色"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_color_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置状态栏和toolbar颜色"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_translucent"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置状态栏透明"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_color_coordinator"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置状态栏coordinatorLayout颜色"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_translucent_coordinator"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置状态栏coordinatorLayout颜色透明"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_white"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置状态栏颜色为白色"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_white_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置状态栏和toolbar颜色为白色"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_white_coordinator"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置状态栏和coordinatorLayout为白色1"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_white_coordinator2"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置状态栏和coordinatorLayout为白色2"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置一个activity中不同Fragment的状态栏颜色"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_fragment2"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置一个activity中不同Fragment的状态栏颜色"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/btn_statusbar_fragment3"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:layout_marginTop="16dip"
+            android:background="@color/colorPrimary"
+            android:text="设置一个activity中不同Fragment的状态栏颜色"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+</ScrollView>

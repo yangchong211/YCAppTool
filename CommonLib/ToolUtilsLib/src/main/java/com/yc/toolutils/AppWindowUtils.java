@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Surface;
 import android.view.Window;
 import android.view.WindowManager;
@@ -66,6 +67,36 @@ public final class AppWindowUtils {
             wm.getDefaultDisplay().getSize(point);
         }
         return point.y;
+    }
+
+    /**
+     * 获取屏幕高度，包括底部导航栏
+     */
+    public static int getRealScreenHeight(Activity activity) {
+        WindowManager windowManager = activity.getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            display.getRealMetrics(displayMetrics);
+        } else {
+            display.getMetrics(displayMetrics);
+        }
+        return displayMetrics.heightPixels;
+    }
+
+    /**
+     * 获取屏幕宽度，不包括右侧导航栏
+     */
+    public static int getRealScreenWidth(Activity activity) {
+        WindowManager windowManager = activity.getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            display.getRealMetrics(displayMetrics);
+        } else {
+            display.getMetrics(displayMetrics);
+        }
+        return displayMetrics.widthPixels;
     }
 
     /**

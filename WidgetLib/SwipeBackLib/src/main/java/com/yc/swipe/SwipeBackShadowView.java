@@ -12,6 +12,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import com.yc.toolutils.AppActivityUtils;
+import com.yc.toolutils.AppWindowUtils;
+import com.yc.toolutils.StatusBarUtils;
+
 import java.lang.ref.WeakReference;
 
 
@@ -152,9 +157,9 @@ public class SwipeBackShadowView extends FrameLayout {
             ViewGroup.LayoutParams lp = null;
             if (!(mPreContentView instanceof SwipeBackLayout)) {
                 int width = mPreDecorView.getWidth();
-                int height = mPreDecorView.getHeight() - SwipeUiUtils.getNavigationBarHeight(activity);
-                if (!SwipeUiUtils.isPortrait(activity)) {
-                    width = mPreDecorView.getWidth() - SwipeUiUtils.getNavigationBarHeight(activity);
+                int height = mPreDecorView.getHeight() - StatusBarUtils.getNavigationBarHeight(activity);
+                if (!AppActivityUtils.isPortrait(activity)) {
+                    width = mPreDecorView.getWidth() - StatusBarUtils.getNavigationBarHeight(activity);
                     height = mPreDecorView.getHeight();
                 }
                 if (mPreDecorView instanceof FrameLayout) {
@@ -198,8 +203,8 @@ public class SwipeBackShadowView extends FrameLayout {
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
         Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache(), 0, 0,
-                SwipeUiUtils.getRealScreenWidth(mActivity),
-                SwipeUiUtils.getRealScreenHeight(mActivity) - SwipeUiUtils.getNavigationBarHeight(mActivity));
+                AppWindowUtils.getRealScreenWidth(mActivity),
+                AppWindowUtils.getRealScreenHeight(mActivity) - StatusBarUtils.getNavigationBarHeight(mActivity));
         view.destroyDrawingCache();
         return bitmap;
     }

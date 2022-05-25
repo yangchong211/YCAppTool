@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.yc.appstatuslib.AppStatusManager;
+import com.yc.baseclasslib.receiver.BaseReceiver;
 
 /**
  * <pre>
@@ -18,7 +19,7 @@ import com.yc.appstatuslib.AppStatusManager;
  *     revise :
  * </pre>
  */
-public class NetWorkBroadcastReceiver extends BroadcastReceiver {
+public class NetWorkBroadcastReceiver extends BaseReceiver {
 
     private final AppStatusManager mManager;
 
@@ -42,6 +43,7 @@ public class NetWorkBroadcastReceiver extends BroadcastReceiver {
     }
 
 
+    @Override
     public void onReceive(Context context, Intent intent) {
         if (this.mManager != null) {
             if (!this.isNetworkEnable(context)) {

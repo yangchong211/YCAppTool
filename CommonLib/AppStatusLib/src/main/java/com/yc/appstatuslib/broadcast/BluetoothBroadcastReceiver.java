@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.yc.appstatuslib.AppStatusManager;
+import com.yc.baseclasslib.receiver.BaseReceiver;
 
 /**
  * <pre>
@@ -17,7 +18,7 @@ import com.yc.appstatuslib.AppStatusManager;
  *     revise :
  * </pre>
  */
-public final class BluetoothBroadcastReceiver extends BroadcastReceiver {
+public final class BluetoothBroadcastReceiver extends BaseReceiver {
 
     private final AppStatusManager mManager;
 
@@ -47,6 +48,8 @@ public final class BluetoothBroadcastReceiver extends BroadcastReceiver {
                         break;
                     case BluetoothAdapter.STATE_ON:
                         this.notifyBluetoothSwitchState(true);
+                        break;
+                    default:
                         break;
                 }
                 break;

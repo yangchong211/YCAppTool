@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.yc.appstatuslib.AppStatusManager;
+import com.yc.baseclasslib.receiver.BaseReceiver;
 
 /**
  * <pre>
@@ -16,7 +17,7 @@ import com.yc.appstatuslib.AppStatusManager;
  *     revise :
  * </pre>
  */
-public class WifiBroadcastReceiver extends BroadcastReceiver {
+public class WifiBroadcastReceiver extends BaseReceiver {
 
     private final AppStatusManager mManager;
 
@@ -24,6 +25,7 @@ public class WifiBroadcastReceiver extends BroadcastReceiver {
         this.mManager = mManager;
     }
 
+    @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.net.wifi.WIFI_STATE_CHANGED")) {
             switch(intent.getIntExtra("wifi_state", 4)) {

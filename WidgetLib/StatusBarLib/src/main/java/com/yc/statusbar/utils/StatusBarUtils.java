@@ -1,13 +1,18 @@
 package com.yc.statusbar.utils;
 
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.core.view.ViewCompat;
 
 import com.yc.statusbar.bar.StateAppBar;
 
@@ -23,41 +28,40 @@ import com.yc.statusbar.bar.StateAppBar;
  *             则可以设置状态栏文字和图标为黑色
  * </pre>
  */
-public class StatusBarUtils {
+public final class StatusBarUtils {
 
-    private static final String TAG = "StatusBarHeightUtils";
+    private static final String TAG = "StatusBarUtils";
 
     /**
-     * 获取状态栏高度
-     * @param context       context
-     * @return              状态栏高度
+     * 设置 fitSystemWindows 属性
+     * @param window            window窗口
+     * @param fitSystemWindows  是否设置fitSystemWindows
      */
-    public static int getStatusBarHeight(Context context) {
-        checkNull(context);
-        int statusBarHeight = 0;
-        Resources res = context.getResources();
-        int resourceId = res.getIdentifier("status_bar_height",
-                "dimen", "android");
-        if (resourceId > 0) {
-            statusBarHeight = res.getDimensionPixelSize(resourceId);
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    public static void setFitsSystemWindows(Window window, boolean fitSystemWindows) {
+        ViewGroup mContentView = (ViewGroup) window.findViewById(Window.ID_ANDROID_CONTENT);
+        //获取第一个孩子
+        View mChildView = mContentView.getChildAt(0);
+        if (mChildView != null) {
+            //setFitsSystemWindows(boolean):设置系统是否需要考虑System Bar占据的区域来显示。
+            //如果需要的话就会执行 fitSystemWindows(Rect)方法。
+            //即设置为true的是时候系统会适应System Bar的区域，让内容不被遮住。
+            //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子View，预留出系统View的空间.
+            mChildView.setFitsSystemWindows(fitSystemWindows);
+            ViewCompat.requestApplyInsets(mChildView);
         }
-        return statusBarHeight;
     }
 
     /**
-     * 判断状态栏是否存在
-     * @param activity                  activity
-     * @return
+     * 设置content布局的top的padding间距值
+     * @param activity                      activity
+     * @param padding                       padding值
      */
-    public static boolean isStatusBarVisible(Activity activity){
-        if ((activity.getWindow().getAttributes().flags &
-                WindowManager.LayoutParams.FLAG_FULLSCREEN) == 0){
-            Log.d(TAG,"status bar is visible");
-            return true;
-        } else {
-            Log.d(TAG,"status bar is not visible");
-            return false;
-        }
+    public static void setContentTopPadding(Activity activity, int padding) {
+        StatusBarUtils.checkNull(activity);
+        ViewGroup mContentView = (ViewGroup) activity.getWindow()
+                .findViewById(Window.ID_ANDROID_CONTENT);
+        mContentView.setPadding(0, padding, 0, 0);
     }
 
     /**

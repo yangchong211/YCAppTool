@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
+        <TextView
+            android:id="@+id/tv_tool1"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_first"
+            android:text="玩Android" />
+        <TextView
+            android:id="@+id/tv_tool2"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_second"
+            android:text="状态栏" />
+        <TextView
+            android:id="@+id/tv_tool3"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_third"
+            android:text="" />
+        <TextView
+            android:id="@+id/tv_tool4"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_four"
+            android:text="" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
+        <TextView
+            android:id="@+id/tv_tool5"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_first"
+            android:text="" />
+        <TextView
+            android:id="@+id/tv_tool6"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_second"
+            android:text="" />
+        <TextView
+            android:id="@+id/tv_tool7"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_third"
+            android:text="" />
+        <TextView
+            android:id="@+id/tv_tool8"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_four"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
+        <TextView
+            android:id="@+id/tv_tool9"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_first"
+            android:text="" />
+        <TextView
+            android:id="@+id/tv_tool10"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_second"
+            android:text="" />
+        <TextView
+            android:id="@+id/tv_tool11"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_third"
+            android:text="" />
+        <TextView
+            android:id="@+id/tv_tool12"
+            style="@style/WeightAttr"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/ic_home_four"
+            android:text="" />
+    </LinearLayout>
+</LinearLayout>
+
+
+

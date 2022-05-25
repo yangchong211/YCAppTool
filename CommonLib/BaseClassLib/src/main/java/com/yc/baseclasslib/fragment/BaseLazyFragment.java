@@ -28,12 +28,19 @@ public abstract class BaseLazyFragment extends BaseVisibilityFragment {
      */
     private boolean isPrepared = false;
 
+    /**
+     * 当Fragment与宿主Activity建立联系的时候调用
+     * @param context 上下文
+     */
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         addOnVisibilityChangedListener(listener);
     }
 
+    /**
+     * Fragment与宿主Activity脱离联系时调用
+     */
     @Override
     public void onDetach() {
         super.onDetach();

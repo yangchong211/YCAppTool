@@ -1,0 +1,18 @@
+package com.yc.baseclasslib.provider;
+
+import android.content.ContentProvider;
+
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : 父类ContentProvider
+ *     revise:
+ * </pre>
+ */
+public abstract class BaseContentProvider extends ContentProvider {
+
+
+
+}

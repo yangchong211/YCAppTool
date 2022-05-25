@@ -21,11 +21,8 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.view.ViewCompat;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import android.util.TypedValue;
@@ -39,9 +36,11 @@ import android.widget.FrameLayout;
 import java.lang.reflect.Field;
 
 import com.yc.statusbar.R;
+import com.yc.statusbar.utils.StatusBarUtils;
 import com.yc.statusbar.view.StatusBarView;
 
-import static com.yc.statusbar.utils.StatusBarUtils.getStatusBarHeight;
+import static com.yc.toolutils.StatusBarUtils.getStatusBarHeight;
+
 
 /**
  * <pre>
@@ -98,7 +97,7 @@ final class BarStatusKitKat {
             if (activity.getTheme().resolveAttribute(R.attr.actionBarSize, typedValue, true)) {
                 int actionBarHeight = TypedValue.complexToDimensionPixelSize(
                         typedValue.data, activity.getResources().getDisplayMetrics());
-                StateAppBar.setContentTopPadding(activity, actionBarHeight);
+                StatusBarUtils.setContentTopPadding(activity, actionBarHeight);
             }
         }
     }
@@ -115,7 +114,7 @@ final class BarStatusKitKat {
         //获取content布局
         ViewGroup mContentView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
         View mContentChild = mContentView.getChildAt(0);
-        //移除已经存在假状态栏则,并且取消它的Margin间距
+        //移除已经存在假状态栏则，并且取消它的Margin间距
         removeFakeStatusBarViewIfExist(activity);
         //获取状态栏的高度
         int statusBarHeight = getStatusBarHeight(activity);
@@ -285,6 +284,7 @@ final class BarStatusKitKat {
     private static void removeFakeStatusBarViewIfExist(Activity activity) {
         Window window = activity.getWindow();
         ViewGroup mDecorView = (ViewGroup) window.getDecorView();
+        //通过DecorView找到状态栏view，然后移除
         View fakeView = mDecorView.findViewWithTag(TAG_FAKE_STATUS_BAR_VIEW);
         if (fakeView != null) {
             mDecorView.removeView(fakeView);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_autumn_tree_min" />
+
+    <TextView
+        android:id="@+id/tv_search_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开启搜索"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary"/>
+
+
+    <TextView
+        android:id="@+id/tv_search_open"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="关闭搜索"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary"/>
+
+</LinearLayout>

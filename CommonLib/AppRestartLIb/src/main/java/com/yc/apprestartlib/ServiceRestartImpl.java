@@ -3,7 +3,7 @@ package com.yc.apprestartlib;
 import android.content.Context;
 import android.content.Intent;
 
-import com.yc.baseclasslib.activity.ActivityManager;
+import com.yc.baseclasslib.manager.ActivityManager;
 import com.yc.toolutils.AppLogUtils;
 
 public class ServiceRestartImpl implements IRestartApp {

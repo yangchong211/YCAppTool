@@ -17,6 +17,7 @@ package com.yc.statusbar.bar;
 
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
@@ -57,10 +58,10 @@ public final class StateAppBar {
     public static void setStatusBarColor(Activity activity,@ColorInt int statusColor) {
         StatusBarUtils.checkNull(activity);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //21，大于21设置状态栏颜色
+            //21，大于21设置状态栏颜色，也就是5.0
             BarStatusLollipop.setStatusBarColor(activity, statusColor);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //19
+            //19，也就是4.4
             BarStatusKitKat.setStatusBarColor(activity, statusColor);
         }
     }
@@ -73,6 +74,31 @@ public final class StateAppBar {
         StatusBarUtils.checkNull(activity);
         //设置透明状态栏，不隐藏状态栏
         translucentStatusBar(activity, false);
+    }
+
+    /**
+     * 隐藏状态栏
+     * @param activity      activity
+     */
+    public static void hideStatusBar(Activity activity){
+        if (activity!=null){
+            View decorView = activity.getWindow().getDecorView();
+            int uiOptions = decorView.getSystemUiVisibility();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                //视图要求暂时隐藏系统导航，隐藏导航栏
+                uiOptions |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                //视图希望在隐藏状态栏时保持交互式
+                uiOptions |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+            }
+            //给根布局设置属性
+            decorView.setSystemUiVisibility(uiOptions);
+            //设置全屏幕
+            activity.getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
     }
 
     /**
@@ -149,17 +175,7 @@ public final class StateAppBar {
                         setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
                                 View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 activity.getWindow().setStatusBarColor(color);
-                //fitsSystemWindow 为 false, 不预留系统栏位置.
-                ViewGroup mContentView = (ViewGroup) activity.getWindow()
-                        .findViewById(Window.ID_ANDROID_CONTENT);
-                View mChildView = mContentView.getChildAt(0);
-                if (mChildView != null) {
-                    //setFitsSystemWindows(boolean):设置系统是否需要考虑System Bar占据的区域来显示。
-                    //如果需要的话就会执行 fitSystemWindows(Rect)方法。
-                    //即设置为true的是时候系统会适应System Bar的区域，让内容不被遮住。
-                    mChildView.setFitsSystemWindows(true);
-                    ViewCompat.requestApplyInsets(mChildView);
-                }
+                StatusBarUtils.setFitsSystemWindows(activity.getWindow(),true);
             }
         }
     }
@@ -240,16 +256,6 @@ public final class StateAppBar {
         return StatusBarColorUtils.setStatusBarDarkIcon(activity,darkmode);
     }
 
-    /**
-     * 设置content布局的top的padding间距值
-     * @param activity                      activity
-     * @param padding                       padding值
-     */
-    static void setContentTopPadding(Activity activity, int padding) {
-        StatusBarUtils.checkNull(activity);
-        ViewGroup mContentView = (ViewGroup) activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT);
-        mContentView.setPadding(0, padding, 0, 0);
-    }
 
     static int getPxFromDp(Context context, float dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
