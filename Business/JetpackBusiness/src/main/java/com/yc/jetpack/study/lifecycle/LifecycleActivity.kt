@@ -9,6 +9,7 @@ import androidx.lifecycle.*
 import com.yc.jetpack.R
 import com.yc.jetpack.study.livedata.LiveDataActivity
 import com.yc.jetpack.study.livedata.TextViewModel
+import com.yc.toolutils.AppLogUtils
 
 class LifecycleActivity : AppCompatActivity() {
 
@@ -26,6 +27,22 @@ class LifecycleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_saved_state)
         initLive()
+        AppLogUtils.d("LifecycleActivity" , "onCreate")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        AppLogUtils.d("LifecycleActivity" , "onResume")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        AppLogUtils.d("LifecycleActivity" , "onStart")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        AppLogUtils.d("LifecycleActivity" , "onStop")
     }
 
     private fun initLive(){
