@@ -20,6 +20,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.yc.apploglib.AppLogHelper;
 import com.yc.baseclasslib.manager.ActivityManager;
 import com.yc.banner.view.BannerView;
 
@@ -81,6 +83,7 @@ public class MainActivity extends BaseActivity{
 
     @Override
     public int getContentView() {
+        AppLogHelper.d("getContentView");
         return R.layout.activity_main;
     }
 
@@ -151,6 +154,7 @@ public class MainActivity extends BaseActivity{
         if (banner!=null){
             banner.startAutoPlay();
         }
+        AppLogHelper.d("onPause");
     }
 
     @Override
@@ -159,6 +163,7 @@ public class MainActivity extends BaseActivity{
         if (banner!=null){
             banner.stopAutoPlay();
         }
+        AppLogHelper.d("onStop");
     }
 
     @Override
@@ -167,6 +172,7 @@ public class MainActivity extends BaseActivity{
         if (banner!=null){
             banner.releaseBanner();
         }
+        AppLogHelper.d("onDestroy");
     }
 
     @Override
@@ -176,6 +182,7 @@ public class MainActivity extends BaseActivity{
         initRecyclerView();
         initNav();
         initNotify();
+        AppLogHelper.d("initView");
     }
 
     private void initFindViewID() {

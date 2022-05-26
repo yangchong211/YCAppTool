@@ -1,7 +1,9 @@
-package com.yc.apploglib;
+package com.yc.apploglib.config;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+
+import com.yc.apploglib.printer.AbsPrinter;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -12,11 +14,21 @@ import static android.util.Log.INFO;
 import static android.util.Log.VERBOSE;
 import static android.util.Log.WARN;
 
-class LogDispatcher {
-    static final int OFF = Integer.MAX_VALUE;
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : log日志分发
+ *     revise:
+ * </pre>
+ */
+public final class LogDispatcher {
 
+    public static final int OFF = Integer.MAX_VALUE;
     private volatile int sMinLogLevel = OFF;
-    private final CopyOnWriteArrayList<Printer> sPrinters = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<AbsPrinter> sPrinters = new CopyOnWriteArrayList<>();
     private volatile boolean hasPrinters = false;
 
     void setMinLogLevel(int minLogLevel) {
@@ -28,13 +40,13 @@ class LogDispatcher {
     }
 
     @VisibleForTesting
-    void reset() {
+    public void reset() {
         sMinLogLevel = OFF;
         sPrinters.clear();
         updateHasPrinter();
     }
 
-    boolean addPrinter(@NonNull Printer printer) {
+    public boolean addPrinter(@NonNull AbsPrinter printer) {
         try {
             return sPrinters.addIfAbsent(printer);
         } finally {
@@ -43,7 +55,7 @@ class LogDispatcher {
     }
 
     // for test.
-    boolean removePrinter(@NonNull Printer printer) {
+    boolean removePrinter(@NonNull AbsPrinter printer) {
         try {
             return sPrinters.remove(printer);
         } finally {
@@ -52,7 +64,7 @@ class LogDispatcher {
     }
 
     boolean hasPrinter(@NonNull String name) {
-        for (Printer printer : sPrinters) {
+        for (AbsPrinter printer : sPrinters) {
             if (printer.name().equals(name)) {
                 return true;
             }
@@ -64,7 +76,7 @@ class LogDispatcher {
             int level, String tag, String format, Throwable tr, Object... args) {
         final String msg = genMsg(format, args);
 
-        for (Printer printer : sPrinters) {
+        for (AbsPrinter printer : sPrinters) {
             printer.println(level, tag, msg, tr);
         }
     }

@@ -1,6 +1,6 @@
 package com.yc.tracesdk;
 
-import com.yc.apploglib.SLog;
+import com.yc.apploglib.AppLogHelper;
 
 class SLogPrinter implements InterPrinter {
     @Override
@@ -10,6 +10,6 @@ class SLogPrinter implements InterPrinter {
 
     @Override
     public void print(String tag, String format, Object... args) {
-        SLog.d(tag, format, args);
+        AppLogHelper.d(tag, format, args);
     }
 }

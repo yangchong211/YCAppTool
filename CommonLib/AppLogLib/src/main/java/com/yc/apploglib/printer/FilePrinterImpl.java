@@ -1,4 +1,4 @@
-package com.yc.apploglib;
+package com.yc.apploglib.printer;
 
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -12,31 +12,41 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class FilePrinter extends Printer {
-    //8MB
-    private static final long MAX_LOG_FILE = 1024 * 1024 * 8;
-    static final String PRINTER_NAME = "FilePrinter";
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : Printer写入文件
+ *     revise:
+ * </pre>
+ */
+public class FilePrinterImpl extends AbsPrinter {
     /**
-     * base dir to save logs.
-     * */
+     * 10MB
+     */
+    private static final long MAX_LOG_FILE = 1024 * 1024 * 10;
+    /**
+     * 名字
+     */
+    private static final String PRINTER_NAME = "FilePrinter";
+    /**
+     * file文件
+     */
     private final File mLogDir;
-
-
     /**
-     * header for each line.
-     * */
+     * header格式
+     */
     private SimpleDateFormat sInfoHeaderFormat = null;
-
-
     /**
-     * file name format.
-     * */
+     * file文件格式
+     */
     private SimpleDateFormat mFileNameFormat = null;
 
     /**
      * File Thread handler.
-     * */
+     */
     private final DelayInitializer<Handler> mHandler = new DelayInitializer<>(() -> {
         HandlerThread thread = new HandlerThread("CommonFileLogThread");
         thread.start();
@@ -45,10 +55,9 @@ public class FilePrinter extends Printer {
 
     private PrintWriter mWriter;
 
-    public FilePrinter(File logDir) {
+    public FilePrinterImpl(File logDir) {
         mLogDir = logDir;
     }
-
 
     private SimpleDateFormat getInfoHeaderFormat() {
         if (sInfoHeaderFormat == null) {

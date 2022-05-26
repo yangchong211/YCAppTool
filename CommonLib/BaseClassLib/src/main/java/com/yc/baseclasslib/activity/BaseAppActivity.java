@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 /**
  * <pre>
  *     @author yangchong
- *     blog  : https://github.com/yangchong211
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
  *     time  : 2018/11/9
  *     desc  : 父类activity
  *     revise:

@@ -1,7 +1,18 @@
-package com.yc.apploglib;
+package com.yc.apploglib.log;
 
 
-public interface Logger {
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : log日志接口
+ *     revise:
+ * </pre>
+ */
+public interface InterLogger {
+
     String tagName();
 
     void v(String format, Object... args);

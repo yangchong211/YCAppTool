@@ -1,12 +1,16 @@
 package com.yc.lifehelper.application;
 
 import android.os.Looper;
+import android.util.Log;
 
+import com.yc.apploglib.config.AppLogConfig;
+import com.yc.apploglib.config.AppLogFactory;
 import com.yc.appstart.AppStartTask;
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.AppBatteryInfo;
 import com.yc.appstatuslib.info.AppThreadInfo;
 import com.yc.appstatuslib.listener.BaseStatusListener;
+import com.yc.logging.LoggerFactory;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.AppLogUtils;
 
@@ -28,6 +32,12 @@ public class AppDelayTask extends AppStartTask {
         }catch (Exception e){
             e.printStackTrace();
         }
+        AppLogConfig config = new AppLogConfig.Builder()
+                .enableDbgLog(true)
+                .minLogLevel(Log.VERBOSE)
+                .isWriteFile(true)
+                .build();
+        AppLogFactory.init(config);
         long end = System.currentTimeMillis();
         boolean isMainThread = (Looper.myLooper() == Looper.getMainLooper());
         AppLogUtils.i("app init 3 task delay total time : " + (end-start)

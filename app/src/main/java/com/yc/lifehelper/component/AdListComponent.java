@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.yc.apploglib.AppLogHelper;
 import com.yc.eastadapterlib.BaseRecycleAdapter;
 import com.yc.eastadapterlib.BaseViewHolder;
 import com.yc.library.api.ConstantImageApi;
@@ -29,7 +31,6 @@ import java.util.List;
 
 public class AdListComponent implements InterItemView {
 
-    private final Logger logger = LoggerService.getInstance().getLogger("HeaderComponent");
     private RecyclerView recyclerView;
     private Context context;
     private ListNewsAdapter newsAdapter;
@@ -37,7 +38,7 @@ public class AdListComponent implements InterItemView {
     @Override
     public View onCreateView(ViewGroup parent) {
         View headerView = View.inflate(parent.getContext(), R.layout.base_title_list_view, null);
-        logger.debug("banner on create view");
+        AppLogHelper.d("banner on create view");
         context = headerView.getContext();
         return headerView;
     }
@@ -47,7 +48,7 @@ public class AdListComponent implements InterItemView {
         TextView tvTitle = header.findViewById(R.id.tv_title);
         recyclerView = header.findViewById(R.id.recyclerView);
         tvTitle.setText("广告新闻");
-        logger.debug("banner on bind view");
+        AppLogHelper.d("banner on bind view");
         if (newsAdapter == null){
             initRecyclerView();
         } else {

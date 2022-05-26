@@ -1,10 +1,23 @@
-package com.yc.apploglib;
+package com.yc.apploglib.log;
 
-class DefaultLogger implements Logger {
+import com.yc.apploglib.config.LogDispatcher;
+
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : log日志接口默认实现类
+ *     revise:
+ * </pre>
+ */
+public class DefaultLoggerImpl implements InterLogger {
+
     private final String mTag;
     private final LogDispatcher mLogDispatcher;
 
-    DefaultLogger(String mTag, LogDispatcher mLogDispatcher) {
+    public DefaultLoggerImpl(String mTag, LogDispatcher mLogDispatcher) {
         this.mTag = mTag;
         this.mLogDispatcher = mLogDispatcher;
     }

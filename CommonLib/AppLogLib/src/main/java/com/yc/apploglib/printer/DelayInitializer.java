@@ -1,15 +1,21 @@
-package com.yc.apploglib;
+package com.yc.apploglib.printer;
 
-public class DelayInitializer<T> {
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 延迟初始化
+ *     revise:
+ * </pre>
+ */
+public final class DelayInitializer<T> {
+
     private volatile T mT = null;
 
     private final Creator<T> mCreator;
 
-    /**
-     * Constructor.
-     *
-     * @param creator non null.
-     */
     public DelayInitializer(Creator<T> creator) {
         mCreator = creator;
         if (mCreator == null) {
@@ -17,11 +23,6 @@ public class DelayInitializer<T> {
         }
     }
 
-    /**
-     * Retrieve the object.
-     *
-     * @return the target object.
-     */
     public T get() {
         if (mT == null) {
             synchronized (this) {
@@ -36,18 +37,8 @@ public class DelayInitializer<T> {
         return mT;
     }
 
-    /**
-     * Creator for create the object.
-     *
-     * @param <T> traget object class.
-     */
     public interface Creator<T> {
 
-        /**
-         * Create the target object.
-         *
-         * @return target object, nonnull.
-         */
         T create();
     }
 }

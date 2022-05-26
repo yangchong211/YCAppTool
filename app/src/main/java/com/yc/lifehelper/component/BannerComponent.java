@@ -5,11 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.yc.apploglib.AppLogHelper;
 import com.yc.banner.loader.ImageLoaderInterface;
 import com.yc.banner.view.BannerView;
 import com.yc.lifehelper.R;
-import com.yc.logging.LoggerService;
-import com.yc.logging.logger.Logger;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 
@@ -18,20 +17,19 @@ import java.util.List;
 
 public class BannerComponent implements InterItemView {
 
-    private final Logger logger = LoggerService.getInstance().getLogger("HeaderComponent");
     private BannerView banner;
 
     @Override
     public View onCreateView(ViewGroup parent) {
         View headerView = View.inflate(parent.getContext(), R.layout.head_home_banner, null);
-        logger.debug("banner on create view");
+        AppLogHelper.d("banner on create view");
         return headerView;
     }
 
     @Override
     public void onBindView(View header) {
         banner = header.findViewById(R.id.banner);
-        logger.debug("banner on bind view");
+        AppLogHelper.d("banner on bind view");
         initBanner();
     }
 

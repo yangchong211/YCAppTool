@@ -249,6 +249,7 @@ dependencies {
     implementation project(path: ':NotifyMessage')
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':AppTraceTool')
+    implementation project(path: ':AppLogLib')
     annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 //    implementation 'com.github.yangchong211.YCAppTool:BlurViewLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:BannerViewLib:1.3.7'

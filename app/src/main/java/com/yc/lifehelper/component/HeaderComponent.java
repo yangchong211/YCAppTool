@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.yc.apploglib.AppLogHelper;
 import com.yc.banner.view.BannerView;
 import com.yc.catonhelperlib.fps.PerformanceActivity;
 import com.yc.leetbusiness.LeetCodeActivity;
@@ -26,7 +27,6 @@ import java.util.List;
 
 public class HeaderComponent implements InterItemView {
 
-    private final Logger logger = LoggerService.getInstance().getLogger("HeaderComponent");
     private Context context;
 
     @Override
@@ -54,28 +54,28 @@ public class HeaderComponent implements InterItemView {
             switch (v.getId()) {
                 //沙盒File
                 case R.id.tv_home_first:
-                    logger.debug("file app tool");
+                    AppLogHelper.d("file app tool");
                     FileExplorerActivity.startActivity(context);
                     break;
                 //崩溃监控
                 case R.id.tv_home_second:
                     CrashLibUtils.startCrashTestActivity(context);
-                    logger.info("crash app log");
+                    AppLogHelper.d("crash app log");
                     break;
                 //网络工具
                 case R.id.tv_home_third:
                     NetworkActivity.start(context);
-                    logger.warn("net work tool");
+                    AppLogHelper.w("net work tool");
                     break;
                 //ANR监控
                 case R.id.tv_home_four:
-                    logger.error("net work tool");
+                    AppLogHelper.w("net work tool");
                     PerformanceActivity.startActivity(context);
                     break;
                 //算法试题
                 case R.id.tv_home_five:
                     LeetCodeActivity.startActivity(context);
-                    logger.error("leet code");
+                    AppLogHelper.v("leet code");
                     break;
                 //国际化
                 case R.id.tv_home_six:
