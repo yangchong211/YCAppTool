@@ -24,6 +24,8 @@ import cn.ycbjie.ycthreadpoollib.ScheduleTask;
  */
 public class MainApplication extends LibApplication {
 
+
+
     /**
      * 程序启动的时候执行
      */
