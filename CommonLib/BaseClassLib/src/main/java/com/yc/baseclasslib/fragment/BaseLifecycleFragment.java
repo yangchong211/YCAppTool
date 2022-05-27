@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
  *     revise :
  * </pre>
  */
+@Deprecated
 public class BaseLifecycleFragment extends Fragment {
     
     
