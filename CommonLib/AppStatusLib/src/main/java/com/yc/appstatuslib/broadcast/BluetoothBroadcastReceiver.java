@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.yc.appstatuslib.AppStatusManager;
-import com.yc.baseclasslib.receiver.BaseReceiver;
 
 /**
  * <pre>
@@ -18,7 +17,7 @@ import com.yc.baseclasslib.receiver.BaseReceiver;
  *     revise :
  * </pre>
  */
-public final class BluetoothBroadcastReceiver extends BaseReceiver {
+public final class BluetoothBroadcastReceiver extends BroadcastReceiver {
 
     private final AppStatusManager mManager;
 

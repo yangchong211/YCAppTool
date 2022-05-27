@@ -8,7 +8,6 @@ import android.os.BatteryManager;
 
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.AppBatteryInfo;
-import com.yc.baseclasslib.receiver.BaseReceiver;
 
 /**
  * <pre>
@@ -19,7 +18,7 @@ import com.yc.baseclasslib.receiver.BaseReceiver;
  *     revise :
  * </pre>
  */
-public class BatteryBroadcastReceiver extends BaseReceiver {
+public class BatteryBroadcastReceiver extends BroadcastReceiver {
 
     private AppBatteryInfo mBatteryInfo = new AppBatteryInfo();
     private final AppStatusManager mManager;

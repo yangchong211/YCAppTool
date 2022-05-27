@@ -57,7 +57,8 @@
 - nav，liveData，viewModel等
 
 
-
+# 每周讲笔记
+- 5月23-5月29日，讲述Android中四大组件
 
 
 

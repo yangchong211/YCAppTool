@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.yc.appstatuslib.AppStatusManager;
-import com.yc.baseclasslib.receiver.BaseReceiver;
 
 /**
  * <pre>
@@ -16,7 +15,7 @@ import com.yc.baseclasslib.receiver.BaseReceiver;
  *     revise :
  * </pre>
  */
-public class ScreenBroadcastReceiver extends BaseReceiver {
+public class ScreenBroadcastReceiver extends BroadcastReceiver {
 
     private AppStatusManager mManager;
 

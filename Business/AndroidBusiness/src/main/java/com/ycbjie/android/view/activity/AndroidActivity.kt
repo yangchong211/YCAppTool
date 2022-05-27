@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.yc.configlayer.constant.Constant
+import com.yc.intent.log.IntentLogger
 import com.yc.library.base.adapter.BasePagerAdapter
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.library.web.WebViewActivity
@@ -31,10 +33,7 @@ import com.ycbjie.android.view.fragment.AndroidProfileFragment
 import com.ycbjie.android.view.fragment.AndroidProjectFragment
 import kotlinx.android.synthetic.main.base_android_bar.*
 import kotlinx.android.synthetic.main.base_android_bar.toolbar
-import kotlinx.android.synthetic.main.base_tab_layout.*
 import kotlinx.coroutines.*
-import java.lang.ref.WeakReference
-import java.util.*
 
 /**
  * <pre>
@@ -103,6 +102,11 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        IntentLogger.dump("intent test : ", intent)
+    }
+
     /**
      * 处理onNewIntent()，以通知碎片管理器 状态未保存。
      * 如果您正在处理新的意图，并且可能是 对碎片状态进行更改时，要确保调用先到这里。
@@ -118,6 +122,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
             //Kotlin 支持在字符串字面值中引用局部变量，只需要在变量名前加上字符$即可
             AppLogUtils.e("索引-------$selectIndex")
             viewPager?.currentItem = selectIndex
+            IntentLogger.dump("intent test : ", intent)
         }
     }
 
@@ -286,32 +291,6 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         viewPager?.offscreenPageLimit = mainTitles.size
         viewPager?.adapter = adapter
         viewPager?.offscreenPageLimit = fragments.size
-    }
-
-    // 一个简单的数据类
-    // 用于重载运算符的所有函数都必须使用operator关键字标记。
-    // 算术运算符：https://www.jianshu.com/p/d445209091f0
-    data class Foo(private val x: Int, private val y: Int) {
-        // a + b
-        operator fun plus(other: Foo) {
-            Foo(x + other.x, y + other.y)
-        }
-        // a * b
-        operator fun times(other: Foo): Foo = Foo(x * other.x, y * other.y)
-        // a % b
-        operator fun rem(other: Foo): Foo = Foo(x % other.x, y % other.y)
-        // a / b
-        operator fun div(other: Foo): Foo = Foo(x % other.x, y % other.y)
-        // a - b
-        operator fun minus(other: Foo): Foo = Foo(x % other.x, y % other.y)
-
-        // 支持运算符两边互换使用
-        operator fun Double.times(other: Foo): Foo = Foo((this * other.x).toInt(), (this * other.y).toInt())
-
-        //?: 的意思是，左边的表达式没有成功，则使用右边的结果；
-        //如下，person是null,所以person?.name不会执行，所以最终a == "null"
-        var bannerBean : BannerBean? = null
-        var a = bannerBean?.title ?: "null"
     }
 
     /**

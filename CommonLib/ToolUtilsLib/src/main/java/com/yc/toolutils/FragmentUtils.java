@@ -855,7 +855,9 @@ public final class FragmentUtils {
                 for (int i = dest.length - 1; i >= 0; --i) {
                     Fragment fragment = dest[i];
                     if (fragment == dest[0]) {
-                        if (src != null) ft.remove(fragment);
+                        if (src != null) {
+                            ft.remove(fragment);
+                        }
                         break;
                     }
                     ft.remove(fragment);
@@ -1077,7 +1079,9 @@ public final class FragmentUtils {
      */
     public static boolean dispatchBackPress(@NonNull final FragmentManager fm) {
         List<Fragment> fragments = getFragments(fm);
-        if (fragments == null || fragments.isEmpty()) return false;
+        if (fragments == null || fragments.isEmpty()) {
+            return false;
+        }
         for (int i = fragments.size() - 1; i >= 0; --i) {
             Fragment fragment = fragments.get(i);
             if (fragment != null
