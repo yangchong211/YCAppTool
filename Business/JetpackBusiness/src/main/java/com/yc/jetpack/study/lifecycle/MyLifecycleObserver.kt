@@ -34,7 +34,7 @@ class MyLifecycleObserver : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onDestroy() {
-
+        AppLogUtils.d("MyLifecycleObserver" , "onDestroy")
     }
 
 }
