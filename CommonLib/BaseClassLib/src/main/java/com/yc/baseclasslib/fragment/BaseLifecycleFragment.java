@@ -22,7 +22,7 @@ import com.yc.baseclasslib.BuildConfig;
  *     revise :
  * </pre>
  */
-public class BaseLifecycleFragment extends Fragment {
+public class BaseLifecycleFragment extends BaseVisibilityFragment {
 
     /**
      * 当Fragment与宿主Activity建立联系的时候调用

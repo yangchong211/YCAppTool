@@ -53,9 +53,9 @@ public final class PendingIntentLogger {
 
     public static void dumpContentIntent(String tag, PendingIntent intent) {
         try {
-            Method getIntent = intent.getClass().getDeclaredMethod("getIntent", null);
+            Method getIntent = intent.getClass().getDeclaredMethod("getIntent");
             getIntent.setAccessible(true);
-            Intent content = (Intent) getIntent.invoke(intent, null);
+            Intent content = (Intent) getIntent.invoke(intent);
             IntentLogger.dump(tag, content);
         } catch (NoSuchMethodException e) {
             Log.e(tag, "", e);

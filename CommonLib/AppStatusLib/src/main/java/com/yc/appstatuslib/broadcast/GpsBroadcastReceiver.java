@@ -1,6 +1,7 @@
 package com.yc.appstatuslib.broadcast;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
@@ -8,7 +9,6 @@ import android.provider.Settings.System;
 import android.text.TextUtils;
 
 import com.yc.appstatuslib.AppStatusManager;
-import com.yc.baseclasslib.receiver.BaseReceiver;
 
 
 /**
@@ -20,7 +20,7 @@ import com.yc.baseclasslib.receiver.BaseReceiver;
  *     revise :
  * </pre>
  */
-public final class GpsBroadcastReceiver extends BaseReceiver {
+public final class GpsBroadcastReceiver extends BroadcastReceiver {
 
     private final AppStatusManager mManager;
     private boolean isGpsEnable = false;

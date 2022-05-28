@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter;
 import com.yc.netlib.R;
 import com.yc.netlib.utils.NetWorkUtils;
 import java.util.ArrayList;
@@ -74,8 +75,8 @@ public class NetRequestActivity extends AppCompatActivity {
          * 但会内存溢出，在显示时加载数据
          */
         FragmentManager supportFragmentManager = getSupportFragmentManager();
-        BasePagerAdapter myAdapter = new BasePagerAdapter(supportFragmentManager,
-                mFragments, mTitleList);
+        BaseFragmentPagerAdapter myAdapter = new BaseFragmentPagerAdapter(supportFragmentManager);
+        myAdapter.addFragmentList(mFragments,mTitleList);
         mViewPager.setAdapter(myAdapter);
         // 左右预加载页面的个数
         mViewPager.setOffscreenPageLimit(mFragments.size());

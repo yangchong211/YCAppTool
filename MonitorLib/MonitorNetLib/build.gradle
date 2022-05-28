@@ -38,6 +38,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["swiperefreshlayout"])
     implementation(rootProject.ext.dependencies["coordinatorlayout"])
     implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':BaseClassLib')
 
     implementation 'com.github.yangchong211.YCRefreshView:EastAdapterLib:3.0.2'
     implementation(rootProject.ext.dependencies["okhttp"])
