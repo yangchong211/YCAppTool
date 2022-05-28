@@ -123,9 +123,9 @@ public final class BaseFragmentPagerAdapter extends FragmentPagerAdapter {
         }
     }
 
-    public void addFragmentList(List<Fragment> fragment , List<String> titleList) {
+    public void addFragmentList(List<Fragment> fragmentList , List<String> titleList) {
         this.mFragmentSet.clear();
-        mFragmentSet.addAll(fragment);
+        mFragmentSet.addAll(fragmentList);
         this.mFragmentTitle.clear();
         mFragmentTitle.addAll(titleList);
         notifyDataSetChanged();

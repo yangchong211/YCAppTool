@@ -14,9 +14,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter
 import com.yc.configlayer.constant.Constant
 import com.yc.intent.log.IntentLogger
-import com.yc.library.base.adapter.BasePagerAdapter
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.library.web.WebViewActivity
 import com.yc.statusbar.bar.StateAppBar
@@ -285,7 +285,8 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
         val listTitle = mainTitles.toMutableList()
         mIconUnSelectIds.recycle()
         mIconSelectIds.recycle()
-        val adapter = BasePagerAdapter(supportFragmentManager, fragments, listTitle)
+        val adapter = BaseFragmentPagerAdapter(supportFragmentManager)
+        adapter.addFragmentList(fragments, listTitle)
         tabLayout?.setupWithViewPager(viewPager)
         //?.tabMode = TabLayout.MODE_SCROLLABLE
         viewPager?.offscreenPageLimit = mainTitles.size

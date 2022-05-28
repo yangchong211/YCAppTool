@@ -16,8 +16,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter
 import com.yc.jetpack.R
-import com.yc.library.base.adapter.BasePagerAdapter
 
 class ViewModelActivity : AppCompatActivity() {
 
@@ -62,7 +62,8 @@ class ViewModelActivity : AppCompatActivity() {
         fragments.add(ViewModelFragmentA())
         fragments.add(ViewModelFragmentB())
         val mutableList = mutableListOf("无参数", "有参数")
-        val adapter = BasePagerAdapter(supportFragmentManager, fragments, mutableList)
+        val adapter = BaseFragmentPagerAdapter(supportFragmentManager)
+        adapter.addFragmentList(fragments,mutableList)
         tabLayout?.setupWithViewPager(viewPager)
         viewPager?.offscreenPageLimit = mutableList.size
         viewPager?.adapter = adapter

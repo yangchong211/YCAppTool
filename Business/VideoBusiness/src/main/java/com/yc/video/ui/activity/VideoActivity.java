@@ -9,8 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter;
 import com.yc.fragmentlib.BackHandlerHelper;
-import com.yc.library.base.adapter.BasePagerAdapter;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.video.R;
@@ -96,7 +97,8 @@ public class VideoActivity extends BaseActivity {
             title.add(categoryName[i]);
         }
         FragmentManager manager = getSupportFragmentManager();
-        BasePagerAdapter adapter = new BasePagerAdapter(manager, fragmentList, title);
+        BaseFragmentPagerAdapter adapter = new BaseFragmentPagerAdapter(manager);
+        adapter.addFragmentList(fragmentList,title);
         vpContent.setAdapter(adapter);
         tabLayout.setupWithViewPager(vpContent);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);

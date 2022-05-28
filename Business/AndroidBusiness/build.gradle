@@ -89,4 +89,5 @@ dependencies {
     implementation 'com.github.yangchong211.YCDialog:BaseDialog:3.6.8'
     implementation project(path: ':LocalShareLib')
     implementation project(path: ':SafeIntentLib')
+    implementation project(path: ':BaseClassLib')
 }

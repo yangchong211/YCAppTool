@@ -1,4 +1,4 @@
-package com.yc.library.base.adapter;
+package com.yc.baseclasslib.adapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

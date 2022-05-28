@@ -6,10 +6,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
-import com.yc.library.base.adapter.BasePagerAdapter
+import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.statusbar.bar.StateAppBar
+import com.yc.toastutils.ToastUtils
 import com.ycbjie.android.R
 import com.ycbjie.android.model.bean.TreeBean
 import com.ycbjie.android.presenter.KnowledgeTreeDetailPresenter
@@ -31,9 +33,6 @@ class KnowledgeTreeDetailActivity : BaseActivity<KnowledgeTreeDetailPresenter>()
     private var treeBean: TreeBean? = null
     private var initIndex: Int = 0
     private var fragments = mutableListOf<KnowledgeListFragment>()
-    private val viewPagerAdapter: BasePagerAdapter by lazy {
-        BasePagerAdapter(supportFragmentManager, fragments)
-    }
 
     companion object {
 
@@ -97,8 +96,10 @@ class KnowledgeTreeDetailActivity : BaseActivity<KnowledgeTreeDetailPresenter>()
             fragment.arguments = bundle
             fragments.add(fragment)
         }
+        val adapter = BaseFragmentPagerAdapter(supportFragmentManager)
+        adapter.addFragmentList(fragments as List<Fragment>?, null)
         viewPager.run {
-            adapter = viewPagerAdapter
+            setAdapter(adapter)
             offscreenPageLimit = fragments.size
             setCurrentItem(initIndex, false)
         }
@@ -122,7 +123,7 @@ class KnowledgeTreeDetailActivity : BaseActivity<KnowledgeTreeDetailPresenter>()
             finish()
         } else if (item.itemId == 0) {
             //ShortCutUtils.addShortcut(this,treeBean!!,initIndex)
-            Toast.makeText(this,"添加shortcut成功", Toast.LENGTH_SHORT).show()
+            ToastUtils.showRoundRectToast("添加shortcut成功")
         }
         return super.onOptionsItemSelected(item)
     }

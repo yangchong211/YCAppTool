@@ -19,6 +19,13 @@ import androidx.viewpager.widget.PagerAdapter;
 public abstract class BasePagerAdapter extends PagerAdapter {
 
     /**
+     * 返回view的数量
+     * @return  数量
+     */
+    @Override
+    public abstract int getCount();
+
+    /**
      * 获取item索引
      *
      * POSITION_UNCHANGED表示位置没有变化，即在添加或移除一页或多页之后该位置的页面保持不变，
@@ -62,7 +69,11 @@ public abstract class BasePagerAdapter extends PagerAdapter {
      */
     @Override
     public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
+        try {
+            super.notifyDataSetChanged();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
