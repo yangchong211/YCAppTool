@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
  *     time   : 2018/4/17
  *     desc   : 初始化操作
  *     revise :

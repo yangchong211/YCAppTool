@@ -95,7 +95,7 @@
                 style="@style/DetailTitle"
                 android:text="Ping网络诊断"/>
 
-            <com.yc.netlib.ping.PingView
+            <com.yc.monitorpinglib.PingView
                 android:id="@+id/tv_net_info"
                 android:textColor="#4dac41"
                 style="@style/DetailContent"

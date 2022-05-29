@@ -1,4 +1,4 @@
-package com.yc.netlib.ping;
+package com.yc.monitorpinglib;
 
 
 import com.yc.toolutils.AppLogUtils;
@@ -11,13 +11,24 @@ import java.util.regex.Pattern;
 
 
 /**
- * 直接通过ping命令监测网络
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 直接通过ping命令监测网络
+ *     revise: 之前投资界公共库
+ * </pre>
  */
 public class NetPing {
 
-    // 回传ping的结果
+    /**
+     * 回传ping的结果
+     */
     LDNetPingListener listener;
-    // 每次ping发送数据包的个数
+    /**
+     * 每次ping发送数据包的个数
+     */
     private final int _sendCount;
 
     public NetPing(LDNetPingListener listener, int theSendCount) {
@@ -112,7 +123,7 @@ public class NetPing {
     /**
      * Ping任务
      */
-    private class PingTask {
+    private static class PingTask {
 
         private String host;
         private static final String MATCH_PING_HOST_IP = "(?<=\\().*?(?=\\))";

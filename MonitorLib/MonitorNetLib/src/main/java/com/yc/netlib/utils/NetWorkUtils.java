@@ -25,26 +25,6 @@ public final class NetWorkUtils {
     public final static long HOUR = MINUTE * 60;
     public final static long DAY = HOUR * 24;
 
-    /**
-     * 判断设备 是否使用代理上网
-     * @param context                               上下文
-     * @return                                      设备是否链接代理
-     */
-    public static boolean isWifiProxy(Context context) {
-        // 是否大于等于4.0
-        final boolean IS_ICS_OR_LATER = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
-        String proxyAddress;
-        int proxyPort;
-        if (IS_ICS_OR_LATER) {
-            proxyAddress = System.getProperty("http.proxyHost");
-            String portStr = System.getProperty("http.proxyPort");
-            proxyPort = Integer.parseInt((portStr != null ? portStr : "-1"));
-        } else {
-            proxyAddress = android.net.Proxy.getHost(context);
-            proxyPort = android.net.Proxy.getPort(context);
-        }
-        return (!TextUtils.isEmpty(proxyAddress)) && (proxyPort != -1);
-    }
 
     public static LinkedHashMap<String, Long> transformToTraceDetail(Map<String, Long> eventsTimeMap){
         LinkedHashMap<String, Long> traceDetailList = new LinkedHashMap<>();

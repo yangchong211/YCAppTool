@@ -1,11 +1,22 @@
-package com.yc.netlib.ping;
+package com.yc.monitorpinglib;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 解析工具类
+ *     revise: 之前投资界公共库
+ * </pre>
+ */
 public class PingParseTool {
+
     public static String getFormattingStr(String host, String log) {
         StringBuilder logRes = new StringBuilder();
         if (log.contains("timeout")) {

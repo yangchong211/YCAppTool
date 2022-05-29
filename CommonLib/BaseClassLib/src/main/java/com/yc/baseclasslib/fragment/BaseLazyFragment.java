@@ -12,6 +12,7 @@ import androidx.annotation.UiThread;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
  *     time   : 2017/5/18
  *     desc   : 懒加载Fragment基类
  *     revise :

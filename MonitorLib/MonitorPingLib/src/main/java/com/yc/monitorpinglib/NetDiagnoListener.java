@@ -1,7 +1,15 @@
-package com.yc.netlib.ping;
+package com.yc.monitorpinglib;
+
 
 /**
- * 监控网络诊断的跟踪信息
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 监控网络诊断的跟踪信息
+ *     revise: 之前投资界公共库
+ * </pre>
  */
 public interface NetDiagnoListener {
 

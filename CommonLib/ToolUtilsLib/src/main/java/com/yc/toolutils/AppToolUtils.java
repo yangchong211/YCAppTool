@@ -2,6 +2,15 @@ package com.yc.toolutils;
 
 import android.app.Application;
 
+/**
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/05/23
+ *     desc  : 初始化工具类，获取上下文，会自动初始化
+ *     revise:
+ * </pre>
+ */
 public final class AppToolUtils {
 
     private static Application sApplication;

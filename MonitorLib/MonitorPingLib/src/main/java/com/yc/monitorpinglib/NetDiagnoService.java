@@ -1,4 +1,4 @@
-package com.yc.netlib.ping;
+package com.yc.monitorpinglib;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;
@@ -20,8 +20,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
+
 /**
- * 网络诊断服务 通过对制定域名进行ping诊断和traceroute诊断收集诊断日志
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  :  网络诊断服务 通过对制定域名进行ping诊断和traceroute诊断收集诊断日志
+ *     revise: 之前投资界公共库
+ * </pre>
  */
 public class NetDiagnoService extends NetAsyncTaskEx<String, String, String>
         implements NetPing.LDNetPingListener,

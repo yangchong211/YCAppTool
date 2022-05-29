@@ -1,4 +1,4 @@
-package com.yc.netlib.ping;
+package com.yc.monitorpinglib;
 
 
 
@@ -11,7 +11,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 通过ping模拟traceroute过程
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 通过ping模拟traceroute过程
+ *     revise: 之前投资界公共库
+ * </pre>
  */
 public class PingNetTraceRoute {
 

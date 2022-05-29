@@ -4,7 +4,17 @@ import android.os.Environment;
 
 import java.io.File;
 
-public class AppCleanUtils {
+
+/**
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/05/23
+ *     desc  : 缓存工具类
+ *     revise:
+ * </pre>
+ */
+public final class AppCleanUtils {
 
     private AppCleanUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");

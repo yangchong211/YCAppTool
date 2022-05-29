@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.yc.monitorpinglib.PingView;
 import com.yc.netlib.BuildConfig;
 import com.yc.netlib.R;
 import com.yc.netlib.connect.ConnectionManager;
@@ -30,11 +31,10 @@ import com.yc.netlib.connect.ConnectionStateChangeListener;
 import com.yc.netlib.connect.DeviceBandwidthSampler;
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
-import com.yc.netlib.ping.PingView;
-import com.yc.netlib.utils.NetWorkUtils;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppNetworkUtils;
 import com.yc.toolutils.AppWindowUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -259,7 +259,7 @@ public class NetRequestPhoneFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         sb.append("wifi信号强度:").append(AppDeviceUtils.getWifiState(application));
         sb.append("\nAndroidID:").append(AppDeviceUtils.getAndroidID(application));
-        boolean wifiProxy = NetWorkUtils.isWifiProxy(application);
+        boolean wifiProxy = AppNetworkUtils.isWifiProxy(application);
         if (wifiProxy){
             sb.append("\nwifi是否代理:").append("已经链接代理");
         } else {

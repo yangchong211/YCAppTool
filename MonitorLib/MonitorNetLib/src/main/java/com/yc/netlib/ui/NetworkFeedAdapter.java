@@ -28,7 +28,6 @@ public class NetworkFeedAdapter extends BaseRecycleAdapter<NetworkFeedBean> {
     @SuppressLint("SetTextI18n")
     @Override
     protected void bindData(BaseViewHolder holder, final NetworkFeedBean networkFeedModel) {
-        LinearLayout mRootLayout = holder.getView(R.id.ll_feed_root_layout);
         final TextView mUrlTextView = holder.getView(R.id.tv_network_feed_url);
         TextView mStatusCodeTextView = holder.getView(R.id.tv_feed_status);
         TextView mSizeTextView = holder.getView(R.id.tv_feed_size);

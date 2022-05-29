@@ -1,4 +1,4 @@
-package com.yc.netlib.ping;
+package com.yc.monitorpinglib;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -6,7 +6,16 @@ import android.util.AttributeSet;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : PingView
+ *     revise: 之前投资界公共库
+ * </pre>
+ */
 public class PingView extends ScrollView implements NetDiagnoListener {
 
     private NetDiagnoService _netDiagnoService;

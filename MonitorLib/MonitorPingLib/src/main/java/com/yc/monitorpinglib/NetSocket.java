@@ -1,4 +1,4 @@
-package com.yc.netlib.ping;
+package com.yc.monitorpinglib;
 
 
 
@@ -11,6 +11,16 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.List;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : Socket
+ *     revise: 之前投资界公共库
+ * </pre>
+ */
 public class NetSocket {
 
     private static final int PORT = 80;

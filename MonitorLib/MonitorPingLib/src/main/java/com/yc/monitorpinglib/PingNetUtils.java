@@ -1,4 +1,4 @@
-package com.yc.netlib.ping;
+package com.yc.monitorpinglib;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,6 +22,16 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 工具类
+ *     revise: 之前投资界公共库
+ * </pre>
+ */
 @SuppressLint("DefaultLocale")
 public class PingNetUtils {
 

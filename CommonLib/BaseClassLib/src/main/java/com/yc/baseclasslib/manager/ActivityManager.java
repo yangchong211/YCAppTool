@@ -16,6 +16,7 @@ import java.util.Stack;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
  *     time  : 2016/8/10
  *     desc  : 堆栈管理
  *     revise:

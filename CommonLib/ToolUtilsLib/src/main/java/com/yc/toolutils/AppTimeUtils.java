@@ -11,7 +11,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class AppTimeUtils {
+/**
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/05/23
+ *     desc  : 时间工具类
+ *     revise: 具体可看：AndroidUtils项目，https://github.com/Blankj/AndroidUtilCode
+ * </pre>
+ */
+public final class AppTimeUtils {
 
     @SuppressLint("SimpleDateFormat")
     private static final DateFormat DEFAULT_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

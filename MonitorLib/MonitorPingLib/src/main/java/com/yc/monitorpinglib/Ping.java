@@ -1,4 +1,4 @@
-package com.yc.netlib.ping;
+package com.yc.monitorpinglib;
 
 import android.content.Context;
 import android.os.Environment;
@@ -20,6 +20,16 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : Ping
+ *     revise: 之前投资界公共库
+ * </pre>
+ */
 public class Ping {
 
     private static final String TAG = "Ping";

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
  * <pre>
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
  *     time  : 2018/11/9
  *     desc  : 父类Service，没有界面的后台服务
  *     revise:

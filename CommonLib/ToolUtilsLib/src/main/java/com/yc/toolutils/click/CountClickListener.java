@@ -34,6 +34,9 @@ public abstract class CountClickListener implements View.OnClickListener {
     };
 
     public CountClickListener(long targetCount){
+        if (targetCount < 0){
+            throw new IllegalStateException("please set count > 0");
+        }
         this.targetCount = targetCount;
     }
 

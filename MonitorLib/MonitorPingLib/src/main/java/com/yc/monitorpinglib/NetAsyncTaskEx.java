@@ -1,4 +1,4 @@
-package com.yc.netlib.ping;
+package com.yc.monitorpinglib;
 
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -11,18 +11,15 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- *         The most part is copied for {@link AsyncTask}.
- *         <p>
- *         What's we do here is to control the executor and the core
- *         <p>
- *         number of thread parallely.
- *         <p>
- *         <p>
- *         Since Starting with HONEYCOMB, tasks are executed on a single thread
- *         <p>
- *         to avoid common application errors caused by parallel execution.
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : AsyncTask
+ *     revise: 之前投资界公共库
+ * </pre>
  */
-
 public abstract class NetAsyncTaskEx<Params, Progress, Result> {
     private static final int MESSAGE_POST_RESULT = 0x1;
     private static final int MESSAGE_POST_PROGRESS = 0x2;
