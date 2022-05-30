@@ -1,11 +1,11 @@
-package com.yc.easyble.scan;
+package com.yc.easyble.config;
 
 
 import com.yc.easyble.BleManager;
 
 import java.util.UUID;
 
-public class BleScanRuleConfig {
+public final class BleScanRuleConfig {
 
     private UUID[] mServiceUuids = null;
     private String[] mDeviceNames = null;

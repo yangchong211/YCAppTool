@@ -44,7 +44,7 @@ import com.yc.easyble.callback.BleRssiCallback;
 import com.yc.easyble.callback.BleScanCallback;
 import com.yc.easyble.data.BleDevice;
 import com.yc.easyble.exception.BleException;
-import com.yc.easyble.scan.BleScanRuleConfig;
+import com.yc.easyble.config.BleScanRuleConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -385,36 +385,38 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void onPermissionGranted(String permission) {
-        switch (permission) {
-            case Manifest.permission.ACCESS_FINE_LOCATION:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !checkGPSIsOpen()) {
-                    new AlertDialog.Builder(this)
-                            .setTitle(R.string.notifyTitle)
-                            .setMessage(R.string.gpsNotifyMsg)
-                            .setNegativeButton(R.string.cancel,
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            finish();
-                                        }
-                                    })
-                            .setPositiveButton(R.string.setting,
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                            startActivityForResult(intent, REQUEST_CODE_OPEN_GPS);
-                                        }
-                                    })
-
-                            .setCancelable(false)
-                            .show();
-                } else {
-                    setScanRule();
-                    startScan();
-                }
-                break;
+        if (Manifest.permission.ACCESS_FINE_LOCATION.equals(permission)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !checkGPSIsOpen()) {
+                showDialog();
+            } else {
+                setScanRule();
+                startScan();
+            }
         }
+    }
+
+    private void showDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.notifyTitle)
+                .setMessage(R.string.gpsNotifyMsg)
+                .setNegativeButton(R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
+                .setPositiveButton(R.string.setting,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivityForResult(intent, REQUEST_CODE_OPEN_GPS);
+                            }
+                        })
+
+                .setCancelable(false)
+                .show();
     }
 
     private boolean checkGPSIsOpen() {
