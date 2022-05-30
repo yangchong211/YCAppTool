@@ -60,14 +60,15 @@ class NavigationActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.my_nav_host_fragment)
         //下面这个是简化版
         //navController = findNavController(R.id.my_nav_host_fragment)
-        navController?.addOnDestinationChangedListener { _, destination, _ ->
+        navController?.addOnDestinationChangedListener { controller, destination, arguments ->
             val dest: String = try {
+                //获取
                 resources.getResourceName(destination.id)
             } catch (e: Resources.NotFoundException) {
                 destination.id.toString()
             }
 
-            toolbar?.title = destination.label
+            toolbar?.title = "目标：" + destination.label
             Toast.makeText(
                 this@NavigationActivity, "Navigated to $dest",
                 Toast.LENGTH_SHORT

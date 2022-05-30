@@ -91,6 +91,7 @@ dependencies {
     implementation "org.koin:koin-android:2.2.0"
     implementation "org.koin:koin-android-viewmodel:2.2.0"
     // jetpack系列
+    //Navigation
     implementation 'androidx.navigation:navigation-fragment:2.0.0'
     implementation "androidx.navigation:navigation-fragment-ktx:2.0.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.0.0"
