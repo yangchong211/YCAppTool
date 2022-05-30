@@ -31,6 +31,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation project(path: ':EasyBleServer')
     implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':AppLogLib')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.8'
 }
 

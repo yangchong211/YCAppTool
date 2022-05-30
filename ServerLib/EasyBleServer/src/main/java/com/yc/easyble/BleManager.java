@@ -741,13 +741,14 @@ public class BleManager {
     }
 
     /**
-     * is support ble?
+     * 判断是否支持蓝牙
      *
      * @return
      */
     public boolean isSupportBle() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2
-                && context.getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE);
+                && context.getApplicationContext().getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE);
     }
 
     /**

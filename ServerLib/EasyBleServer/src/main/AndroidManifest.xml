@@ -1,9 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yc.easyble">
 
+    <!--蓝牙必备权限-->
+    <!--需要此权限才能执行任何蓝牙通信，例如请求连接、接受连接和传输数据等。-->
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!--如果您想让应用启动设备发现或操纵蓝牙设置，则除了 BLUETOOTH 权限以外，您还必须声明 BLUETOOTH_ADMIN 权限。-->
+    <!--大多数应用只是需利用此权限发现本地蓝牙设备。除非应用是根据用户请求修改蓝牙设置的“超级管理员”，否则不应使用此权限所授予的其他功能。-->
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--需要此权限，因为蓝牙扫描可用于收集用户的位置信息-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
