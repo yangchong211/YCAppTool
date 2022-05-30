@@ -45,6 +45,7 @@ import com.yc.easyble.callback.BleScanCallback;
 import com.yc.easyble.data.BleDevice;
 import com.yc.easyble.exception.BleException;
 import com.yc.easyble.config.BleScanRuleConfig;
+import com.yc.toastutils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
 
     private LinearLayout layout_setting;
     private TextView txt_setting;
+    private TextView tvContent;
     private Button btn_scan;
     private Button btnEasy;
     private EditText et_name, et_mac, et_uuid;
@@ -92,6 +94,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_ble_main);
         initView();
 
+
         BleManager.getInstance().init(getApplication());
         BleManager.getInstance()
                 .enableLog(true)
@@ -118,6 +121,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         int id = v.getId();
         if (id == R.id.btn_scan) {
             if (btn_scan.getText().equals(getString(R.string.start_scan))) {
+                //开始扫描
                 checkPermissions();
             } else if (btn_scan.getText().equals(getString(R.string.stop_scan))) {
                 BleManager.getInstance().cancelScan();
@@ -139,6 +143,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        tvContent = findViewById(R.id.tv_content);
         btn_scan = (Button) findViewById(R.id.btn_scan);
         btn_scan.setText(getString(R.string.start_scan));
         btn_scan.setOnClickListener(this);
@@ -164,6 +169,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         mDeviceAdapter.setOnDeviceClickListener(new DeviceAdapter.OnDeviceClickListener() {
             @Override
             public void onConnect(BleDevice bleDevice) {
+                //开始连接
                 if (!BleManager.getInstance().isConnected(bleDevice)) {
                     BleManager.getInstance().cancelScan();
                     connect(bleDevice);
@@ -172,6 +178,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onDisConnect(final BleDevice bleDevice) {
+                //取消连接
                 if (BleManager.getInstance().isConnected(bleDevice)) {
                     BleManager.getInstance().disconnect(bleDevice);
                 }
@@ -179,11 +186,17 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onDetail(BleDevice bleDevice) {
+                //详情
                 if (BleManager.getInstance().isConnected(bleDevice)) {
                     Intent intent = new Intent(BleMainActivity.this, OperationActivity.class);
                     intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
                     startActivity(intent);
                 }
+            }
+
+            @Override
+            public void readRssi(BleDevice bleDevice) {
+                readBleDeviceRssi(bleDevice);
             }
         });
         ListView listView_device = (ListView) findViewById(R.id.list_device);
@@ -199,6 +212,9 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         mDeviceAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * 设置扫描规则
+     */
     private void setScanRule() {
         String[] uuids;
         String str_uuid = et_uuid.getText().toString();
@@ -243,6 +259,9 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         BleManager.getInstance().initScanRule(scanRuleConfig);
     }
 
+    /**
+     * 开始扫描
+     */
     private void startScan() {
         BleManager.getInstance().scan(new BleScanCallback() {
             @Override
@@ -274,11 +293,16 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
+    /**
+     * 连接
+     * @param bleDevice
+     */
     private void connect(final BleDevice bleDevice) {
         BleManager.getInstance().connect(bleDevice, new BleGattCallback() {
             @Override
             public void onStartConnect() {
                 progressDialog.show();
+                tvContent.setText("开始连接");
             }
 
             @Override
@@ -287,6 +311,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 img_loading.setVisibility(View.INVISIBLE);
                 btn_scan.setText(getString(R.string.start_scan));
                 progressDialog.dismiss();
+                tvContent.setText("连接失败"+exception.getDescription());
                 Toast.makeText(BleMainActivity.this, getString(R.string.connect_fail), Toast.LENGTH_LONG).show();
             }
 
@@ -295,6 +320,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 progressDialog.dismiss();
                 mDeviceAdapter.addDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
+                tvContent.setText("连接成功");
             }
 
             @Override
@@ -305,8 +331,10 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 mDeviceAdapter.notifyDataSetChanged();
 
                 if (isActiveDisConnected) {
+                    tvContent.setText("断开了");
                     Toast.makeText(BleMainActivity.this, getString(R.string.active_disconnected), Toast.LENGTH_LONG).show();
                 } else {
+                    tvContent.setText("连接断开");
                     Toast.makeText(BleMainActivity.this, getString(R.string.disconnected), Toast.LENGTH_LONG).show();
                     ObserverManager.getInstance().notifyObserver(bleDevice);
                 }
@@ -315,16 +343,18 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
-    private void readRssi(BleDevice bleDevice) {
+    private void readBleDeviceRssi(BleDevice bleDevice) {
         BleManager.getInstance().readRssi(bleDevice, new BleRssiCallback() {
             @Override
             public void onRssiFailure(BleException exception) {
                 Log.i(TAG, "onRssiFailure" + exception.toString());
+                tvContent.setText("onRssiFailure" + exception.toString());
             }
 
             @Override
             public void onRssiSuccess(int rssi) {
                 Log.i(TAG, "onRssiSuccess: " + rssi);
+                tvContent.setText("onRssiSuccess" + rssi);
             }
         });
     }
@@ -358,12 +388,13 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 }
                 break;
+            default:
+                break;
         }
     }
 
     private void checkPermissions() {
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (!bluetoothAdapter.isEnabled()) {
+        if (!BleManager.getInstance().isBlueEnable()) {
             Toast.makeText(this, getString(R.string.please_open_blue), Toast.LENGTH_LONG).show();
             return;
         }

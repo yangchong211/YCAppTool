@@ -34,6 +34,7 @@ import com.yc.easyble.data.BleScanState;
 import com.yc.easyble.exception.OtherException;
 import com.yc.easyble.scan.BleScanner;
 import com.yc.easyble.utils.BleLog;
+import com.yc.easyble.utils.BleToolUtils;
 
 import java.util.List;
 import java.util.UUID;
@@ -41,10 +42,24 @@ import java.util.UUID;
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public final class BleManager {
 
+    /**
+     * 上下文
+     */
     private Application context;
+    /**
+     * 配置类
+     */
     private BleScanRuleConfig bleScanRuleConfig;
+    /**
+     * 表示本地蓝牙适配器（蓝牙无线装置），是所有蓝牙交互的入口点。
+     * 借助该类，您可以发现其他蓝牙设备、查询已绑定（已配对）设备的列表、使用已知的 MAC 地址实例化 BluetoothDevice，
+     * 以及通过创建 BluetoothServerSocket 侦听来自其他设备的通信。
+     */
     private BluetoothAdapter bluetoothAdapter;
     private MultipleBluetoothController multipleBluetoothController;
+    /**
+     *
+     */
     private BluetoothManager bluetoothManager;
 
     public static final int DEFAULT_SCAN_TIME = 10000;
@@ -72,10 +87,14 @@ public final class BleManager {
         private static final BleManager sBleManager = new BleManager();
     }
 
+    /**
+     * 初始化操作
+     * @param app       上下文
+     */
     public void init(Application app) {
         if (context == null && app != null) {
             context = app;
-            if (isSupportBle()) {
+            if (BleToolUtils.isSupportBle(app)) {
                 bluetoothManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
             }
             bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -743,19 +762,9 @@ public final class BleManager {
         return false;
     }
 
-    /**
-     * 判断是否支持蓝牙
-     *
-     * @return
-     */
-    public boolean isSupportBle() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2
-                && context.getApplicationContext().getPackageManager()
-                .hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE);
-    }
 
     /**
-     * Open bluetooth
+     * 判断是否打开蓝牙
      */
     public void enableBluetooth() {
         if (bluetoothAdapter != null) {

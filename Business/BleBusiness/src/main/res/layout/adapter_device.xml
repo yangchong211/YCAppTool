@@ -68,6 +68,13 @@
                 android:text="@string/connect"
                 android:textSize="12sp" />
 
+            <Button
+                android:id="@+id/btn_read"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Rssi"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -100,6 +107,7 @@
                 android:layout_marginLeft="5dp"
                 android:text="@string/enter"
                 android:textSize="12sp" />
+
 
         </LinearLayout>
 

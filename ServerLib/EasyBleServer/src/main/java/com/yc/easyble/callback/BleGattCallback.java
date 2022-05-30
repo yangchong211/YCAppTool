@@ -1,16 +1,17 @@
 
 package com.yc.easyble.callback;
 
-import android.annotation.TargetApi;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.yc.easyble.data.BleDevice;
 import com.yc.easyble.exception.BleException;
 
 
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
 public abstract class BleGattCallback extends BluetoothGattCallback {
 
     public abstract void onStartConnect();

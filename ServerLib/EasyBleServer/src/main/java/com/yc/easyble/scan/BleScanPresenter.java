@@ -11,7 +11,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 
-import com.yc.easyble.callback.BleScanPresenterImp;
+import com.yc.easyble.callback.IBleScanCallback;
 import com.yc.easyble.data.BleDevice;
 import com.yc.easyble.data.BleMsg;
 import com.yc.easyble.utils.BleLog;
@@ -30,7 +30,7 @@ public abstract class BleScanPresenter implements BluetoothAdapter.LeScanCallbac
     private boolean mFuzzy;
     private boolean mNeedConnect;
     private long mScanTimeout;
-    private BleScanPresenterImp mBleScanPresenterImp;
+    private IBleScanCallback mBleScanPresenterImp;
 
     private final List<BleDevice> mBleDeviceList = new ArrayList<>();
 
@@ -73,7 +73,7 @@ public abstract class BleScanPresenter implements BluetoothAdapter.LeScanCallbac
     }
 
     public void prepare(String[] names, String mac, boolean fuzzy, boolean needConnect,
-                        long timeOut, BleScanPresenterImp bleScanPresenterImp) {
+                        long timeOut, IBleScanCallback bleScanPresenterImp) {
         mDeviceNames = names;
         mDeviceMac = mac;
         mFuzzy = fuzzy;
@@ -91,7 +91,7 @@ public abstract class BleScanPresenter implements BluetoothAdapter.LeScanCallbac
         return mNeedConnect;
     }
 
-    public BleScanPresenterImp getBleScanPresenterImp() {
+    public IBleScanCallback getBleScanPresenterImp() {
         return mBleScanPresenterImp;
     }
 

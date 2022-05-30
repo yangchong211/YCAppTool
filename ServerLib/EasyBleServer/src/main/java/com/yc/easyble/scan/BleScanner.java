@@ -9,7 +9,7 @@ import android.os.Looper;
 import com.yc.easyble.BleManager;
 import com.yc.easyble.callback.BleScanAndConnectCallback;
 import com.yc.easyble.callback.BleScanCallback;
-import com.yc.easyble.callback.BleScanPresenterImp;
+import com.yc.easyble.callback.IBleScanCallback;
 import com.yc.easyble.data.BleDevice;
 import com.yc.easyble.data.BleScanState;
 import com.yc.easyble.utils.BleLog;
@@ -34,7 +34,7 @@ public class BleScanner {
 
         @Override
         public void onScanStarted(boolean success) {
-            BleScanPresenterImp callback = mBleScanPresenter.getBleScanPresenterImp();
+            IBleScanCallback callback = mBleScanPresenter.getBleScanPresenterImp();
             if (callback != null) {
                 callback.onScanStarted(success);
             }
@@ -58,7 +58,7 @@ public class BleScanner {
 
         @Override
         public void onScanning(BleDevice result) {
-            BleScanPresenterImp callback = mBleScanPresenter.getBleScanPresenterImp();
+            IBleScanCallback callback = mBleScanPresenter.getBleScanPresenterImp();
             if (callback != null) {
                 callback.onScanning(result);
             }
@@ -107,7 +107,7 @@ public class BleScanner {
     }
 
     private synchronized void startLeScan(UUID[] serviceUuids, String[] names, String mac, boolean fuzzy,
-                                          boolean needConnect, long timeOut, BleScanPresenterImp imp) {
+                                          boolean needConnect, long timeOut, IBleScanCallback imp) {
 
         if (mBleScanState != BleScanState.STATE_IDLE) {
             BleLog.w("scan action already exists, complete the previous scan action first");
