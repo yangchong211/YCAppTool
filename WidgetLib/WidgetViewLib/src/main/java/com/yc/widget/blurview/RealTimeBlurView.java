@@ -349,7 +349,8 @@ public class RealTimeBlurView extends View {
 
 	static {
 		try {
-			RealTimeBlurView.class.getClassLoader().loadClass("android.support.v8.renderscript.RenderScript");
+			ClassLoader classLoader = RealTimeBlurView.class.getClassLoader();
+			classLoader.loadClass("android.support.v8.renderscript.RenderScript");
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("RenderScript support not enabled. Add \"android { defaultConfig { renderscriptSupportModeEnabled true }}\" in your build.gradle");
 		}

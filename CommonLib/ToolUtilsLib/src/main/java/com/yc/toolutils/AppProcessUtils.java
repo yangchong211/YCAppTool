@@ -95,9 +95,10 @@ public final class AppProcessUtils {
             //继续翻源码，看看这个方法是什么时候新增的。发现这个方法在android4.3.1上就已经有了这个方法了。
             //在android4.0.4上没有找到currentProcessName()方法。
             //那么意味着，我们是不是可以反射调用 ActivityThread.currentProcessName()
+            ClassLoader classLoader = Application.class.getClassLoader();
             @SuppressLint("PrivateApi")
             final Method declaredMethod = Class.forName("android.app.ActivityThread",
-                    false, Application.class.getClassLoader())
+                    false, classLoader)
                     .getDeclaredMethod("currentProcessName", (Class<?>[]) new Class[0]);
             declaredMethod.setAccessible(true);
             final Object invoke = declaredMethod.invoke(null, new Object[0]);

@@ -16,7 +16,7 @@ import java.util.Objects;
  *     revise: https://github.com/yangchong211/
  * </pre>
  */
-public class FieldInfo {
+public final class FieldInfo {
     /**
      * 字段名称
      */
