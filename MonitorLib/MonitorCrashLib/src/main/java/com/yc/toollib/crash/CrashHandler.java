@@ -66,12 +66,14 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         return INSTANCE;
     }
 
-    public void setWriteLog(boolean writeLog) {
+    public CrashHandler setWriteLog(boolean writeLog) {
         isWriteLog = writeLog;
+        return this;
     }
 
-    public void setFinishActivity(boolean finishActivity) {
+    public CrashHandler setFinishActivity(boolean finishActivity) {
         isFinishActivity = finishActivity;
+        return this;
     }
 
     /**

@@ -18,7 +18,8 @@ public interface CrashListener {
 
     /**
      * 自定义上传crash，支持开发者上传自己捕获的crash数据
-     * @param ex                        ex
+     *
+     * @param ex ex
      */
     void recordException(Throwable ex);
 

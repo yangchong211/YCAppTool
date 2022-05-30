@@ -36,7 +36,7 @@
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_four"
-            android:text="" />
+            android:text="蓝牙" />
     </LinearLayout>
 
 

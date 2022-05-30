@@ -52,7 +52,9 @@ public class AppMonitorTask extends AppStartTask {
 
     private void initCrash() {
         //ThreadHandler.getInstance().init(this);
-        CrashHandler.getInstance().init(MainApplication.getInstance(), new CrashListener() {
+        CrashHandler.getInstance()
+                .setWriteLog(false)
+                .init(MainApplication.getInstance(), new CrashListener() {
             /**
              * 重启app
              */

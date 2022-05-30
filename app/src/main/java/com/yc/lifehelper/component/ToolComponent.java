@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yc.apploglib.AppLogHelper;
+import com.yc.blesample.BleMainActivity;
 import com.yc.easy.demo.NetMainActivity;
 import com.yc.jetpack.study.navigation.NavigationActivity;
 import com.yc.jetpack.ui.activity.JetpackActivity;
@@ -60,12 +61,13 @@ public class ToolComponent implements InterItemView {
                 case R.id.tv_tool2:
                     BarActivity.startActivity(context);
                     break;
-                //好玩工具
+                //网络
                 case R.id.tv_tool3:
                     NetMainActivity.startActivity(context);
                     break;
-                //音视频播放器
+                //蓝牙
                 case R.id.tv_tool4:
+                    BleMainActivity.startActivity(context);
                     break;
                 //音视频播放器
                 case R.id.tv_tool5:
