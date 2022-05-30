@@ -10,6 +10,7 @@
     <application>
         <activity android:name="com.yc.blesample.BleMainActivity"/>
         <activity android:name="com.yc.blesample.operation.OperationActivity" />
+        <activity android:name="com.yc.blesample.BleEasyActivity"/>
     </application>
 
 </manifest>

@@ -60,6 +60,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout layout_setting;
     private TextView txt_setting;
     private Button btn_scan;
+    private Button btnEasy;
     private EditText et_name, et_mac, et_uuid;
     private Switch sw_auto;
     private ImageView img_loading;
@@ -129,6 +130,8 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 layout_setting.setVisibility(View.VISIBLE);
                 txt_setting.setText(getString(R.string.retrieve_search_settings));
             }
+        } else if (id == R.id.btn_easy) {
+            startActivity(new Intent(this,BleEasyActivity.class));
         }
     }
 
@@ -139,7 +142,8 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         btn_scan = (Button) findViewById(R.id.btn_scan);
         btn_scan.setText(getString(R.string.start_scan));
         btn_scan.setOnClickListener(this);
-
+        btnEasy = findViewById(R.id.btn_easy);
+        btnEasy.setOnClickListener(this);
         et_name = (EditText) findViewById(R.id.et_name);
         et_mac = (EditText) findViewById(R.id.et_mac);
         et_uuid = (EditText) findViewById(R.id.et_uuid);

@@ -34,8 +34,42 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:padding="10dp"
-        android:text="2.超找蓝牙设备"/>
+        android:text="2.查找匹配蓝牙设备"/>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <TextView
+            android:id="@+id/tv_find_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text=""/>
+    </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tv_get_ble"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_7f000000"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:text="3.获取连接的蓝牙设备"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <TextView
+            android:id="@+id/tv_ble_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text=""/>
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>
