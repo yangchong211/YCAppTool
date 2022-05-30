@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yc.apploglib.AppLogHelper;
+import com.yc.easy.demo.NetMainActivity;
 import com.yc.jetpack.study.navigation.NavigationActivity;
 import com.yc.jetpack.ui.activity.JetpackActivity;
 import com.yc.lifehelper.R;
@@ -61,9 +62,7 @@ public class ToolComponent implements InterItemView {
                     break;
                 //好玩工具
                 case R.id.tv_tool3:
-                    for (int i=0 ;i<1000 ; i++){
-                        AppLogHelper.w("逗比"+i,"this is message : " +i);
-                    }
+                    NetMainActivity.startActivity(context);
                     break;
                 //音视频播放器
                 case R.id.tv_tool4:

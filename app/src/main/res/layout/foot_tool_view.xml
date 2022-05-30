@@ -30,7 +30,7 @@
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_third"
-            android:text="" />
+            android:text="网络库" />
         <TextView
             android:id="@+id/tv_tool4"
             style="@style/WeightAttr"

@@ -6,7 +6,7 @@ include ':app'
 include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
         ':VideoBusiness', ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
         ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',
-        ':BusinessInterface', ':StatusBusiness'
+        ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -20,12 +20,14 @@ project(':MvvmTodoLive').projectDir = new File('Business/MvvmTodoLive')
 project(':MvcTodoBusiness').projectDir = new File('Business/MvcTodoBusiness')
 project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 project(':StatusBusiness').projectDir = new File('Business/StatusBusiness')
+project(':OkHttpBusiness').projectDir = new File('Business/OkHttpBusiness')
+
 
 
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
-        ':EasyBleServer', ':LogUpload'
+        ':EasyBleServer', ':LogUpload', ':OkHttpServer'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -37,7 +39,7 @@ project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
 project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')
 project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')
 project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
-
+project(':OkHttpServer').projectDir = new File('ServerLib/OkHttpServer')
 
 
 
@@ -169,5 +171,6 @@ project(':LeakWatcher').projectDir = new File('MonitorLib/LeakWatcher')
 project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
 project(':MonitorPingLib').projectDir = new File('MonitorLib/MonitorPingLib')
+
 
 
