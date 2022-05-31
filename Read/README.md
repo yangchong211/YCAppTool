@@ -110,7 +110,10 @@ https://github.com/Kyson/AndroidGodEye/blob/master/README_zh.md
     - https://mp.weixin.qq.com/s/DWOQ9MSTkKSCBFQjPswPIQ
 - 从 jCenter 迁移到 MavenCentral 完整方案
     - https://www.jianshu.com/p/a243d3c96cea
-
+- aidl优化工具
+    - https://github.com/JeremyLiao/InterfaceLoader
+- gradle系统学习
+    - https://github.com/JeremyLiao/android-gradle-study
 
 ### JVM
 - https://github.com/doocs/jvm
