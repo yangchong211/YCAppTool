@@ -1,0 +1,59 @@
+
+//debug下依赖
+println('gradle debug , init start')
+if (!isNeedUsedDebug()) {
+    println('gradle debug , not need debug')
+    return
+}
+println('gradle debug isNeedUsedebug = ture')
+
+android {
+    defaultConfig {
+        buildTypes {
+            debug {
+                println 'gradle debug debug test =====>'
+            }
+            release {
+                println 'gradle debug release test =====>'
+            }
+        }
+    }
+}
+
+dependencies {
+    // 只是在debug下依赖，各种测试工具lib可以放到这里
+    implementation project(path: ':MonitorFileLib')
+}
+
+//过滤，只在debug下使用
+def isNeedUsedDebug() {
+    Map<String, String> map = System.getenv()
+    if (map == null) {
+        return false
+    }
+    //拿到编译后的 BUILD_TYPE 和 CONFIG。具体看 BuildConfig 生成类的代码
+    boolean hasBuildType = map.containsKey("BUILD_TYPE")
+    boolean hasConfig = map.containsKey("CONFIG")
+    println 'gradle debug isNeedUsedebug hasBuildType =====>' + hasBuildType + ',hasConfig = ' + hasConfig
+    String buildType = "debug"
+    String config = "debug"
+    if (hasBuildType) {
+        buildType = map.get("BUILD_TYPE")
+    }
+    if (hasConfig) {
+        config = map.get("CONFIG")
+    }
+    println 'gradle debug isNeeddebug buildType  =====>' + buildType + ',config = ' + config
+    if (buildType.toLowerCase() == "debug" && config.toLowerCase() == "debug" && isUseDebug()) {
+        println('gradle debug debug use debug')
+        return true
+    }
+    println('gradle debug not use debug')
+    return false
+}
+
+static def isUseDebug() {
+    return true
+}
+
+

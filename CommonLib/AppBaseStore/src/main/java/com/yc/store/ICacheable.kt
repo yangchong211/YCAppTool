@@ -1,6 +1,6 @@
 package com.yc.store
 
-interface Cacheable {
+interface ICacheable {
 
     fun saveInt(key: String, value: Int)
 

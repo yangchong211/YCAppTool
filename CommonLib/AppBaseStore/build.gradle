@@ -35,4 +35,7 @@ dependencies {
     // Kotlin coroutines
     implementation(rootProject.ext.dependencies["kotlinxCoroutinesCore"])
     implementation(rootProject.ext.dependencies["kotlinxCoroutinesAndroid"])
+
+    //腾讯mmkv库
+    api "com.tencent:mmkv-static:1.2.7"
 }

@@ -1,8 +1,9 @@
-package com.yc.store
+package com.yc.store.memory
 
+import com.yc.store.ICacheable
 import kotlin.collections.HashMap
 
-class MemoryCache: Cacheable {
+class MemoryCacheImpl: ICacheable {
 
     private var dataSource : HashMap<String,Any> = HashMap()
 
@@ -52,7 +53,7 @@ class MemoryCache: Cacheable {
     }
 
     override fun totalSize(): Long {
-        return 0L
+        return dataSource.size.toLong()
     }
 
     override fun clearData() {

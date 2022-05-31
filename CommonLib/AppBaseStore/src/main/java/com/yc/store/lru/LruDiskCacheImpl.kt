@@ -1,6 +1,13 @@
-package com.yc.store
+package com.yc.store.lru
 
-class LruDiskCache : Cacheable {
+import com.yc.store.ICacheable
+
+class LruDiskCacheImpl : ICacheable {
+
+    init {
+
+    }
+
     override fun saveInt(key: String, value: Int) {
         TODO("Not yet implemented")
     }
