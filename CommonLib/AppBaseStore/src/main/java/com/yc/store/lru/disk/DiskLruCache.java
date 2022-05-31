@@ -19,7 +19,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -95,8 +94,8 @@ public final class DiskLruCache implements Closeable {
     private final int valueCount;
     private long size = 0;
     private Writer journalWriter;
-    private final LinkedHashMap<String, Entry> lruEntries =
-            new LinkedHashMap<String, Entry>(0, 0.75f, true);
+    private final LinkedHashMap<String, DiskLruEntry> lruEntries =
+            new LinkedHashMap<String, DiskLruEntry>(0, 0.75f, true);
     /**
      * 记录用户操作的次数，每执行一次写入、读取或移除缓存的操作，这个变量值都会加 1
      * 当变量值达到 2000 时就会触发重构 journal 的事件，这时会自动把 journal 中多余的、不必要的记录全部清除掉，
@@ -115,7 +114,7 @@ public final class DiskLruCache implements Closeable {
     final ThreadPoolExecutor executorService = new ThreadPoolExecutor(
             0, 1, 60L,
                     TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(),
-                    new DiskLruCacheThreadFactory());
+                    new DiskThreadFactory());
 
     /**
      * 创建清除callable
@@ -298,10 +297,10 @@ public final class DiskLruCache implements Closeable {
         }
 
         //取出当前key对应的缓存Entry
-        Entry entry = lruEntries.get(key);
+        DiskLruEntry entry = lruEntries.get(key);
         if (entry == null) {
             //若不是 REMOVE ，如果该 key 没有加入到 lruEntries ，则创建并且加入
-            entry = new Entry(key);
+            entry = new DiskLruEntry(key,valueCount,directory);
             lruEntries.put(key, entry);
         }
         // 如果是CLEAN、DIRTY或READ
@@ -328,8 +327,8 @@ public final class DiskLruCache implements Closeable {
      */
     private void processJournal() throws IOException {
         deleteIfExists(journalFileTmp);
-        for (Iterator<Entry> i = lruEntries.values().iterator(); i.hasNext(); ) {
-            Entry entry = i.next();
+        for (Iterator<DiskLruEntry> i = lruEntries.values().iterator(); i.hasNext(); ) {
+            DiskLruEntry entry = i.next();
             if (entry.currentEditor == null) {
                 for (int t = 0; t < valueCount; t++) {
                     size += entry.lengths[t];
@@ -374,7 +373,7 @@ public final class DiskLruCache implements Closeable {
             //空行
             writer.write("\n");
 
-            for (Entry entry : lruEntries.values()) {
+            for (DiskLruEntry entry : lruEntries.values()) {
                 if (entry.currentEditor != null) {
                     //看到DIRTY这个字样都不代表着什么好事情，意味着这是一条脏数据。
                     //没错，每当我们调用一次DiskLruCache的edit()方法时，都会向journal文件中写入一条DIRTY记录，
@@ -420,7 +419,7 @@ public final class DiskLruCache implements Closeable {
     public synchronized Value get(String key) throws IOException {
         checkNotClosed();
         //取出当前key对应的缓存Entry
-        Entry entry = lruEntries.get(key);
+        DiskLruEntry entry = lruEntries.get(key);
         if (entry == null) {
             return null;
         }
@@ -474,14 +473,14 @@ public final class DiskLruCache implements Closeable {
     private synchronized Editor edit(String key, long expectedSequenceNumber) throws IOException {
         checkNotClosed();
         //取出当前key对应的缓存Entry
-        Entry entry = lruEntries.get(key);
+        DiskLruEntry entry = lruEntries.get(key);
         if (expectedSequenceNumber != ANY_SEQUENCE_NUMBER && (entry == null
                 || entry.sequenceNumber != expectedSequenceNumber)) {
             return null; // Value is stale.
         }
         if (entry == null) {
             //如果Entry不存在则新建并添加到lruEntries中
-            entry = new Entry(key);
+            entry = new DiskLruEntry(key,valueCount,directory);
             lruEntries.put(key, entry);
         } else if (entry.currentEditor != null) {
             //如果存在且entry.currentEditor不为空，表示Entry正在进行缓存编辑
@@ -540,7 +539,7 @@ public final class DiskLruCache implements Closeable {
      * @throws IOException
      */
     private synchronized void completeEdit(Editor editor, boolean success) throws IOException {
-        Entry entry = editor.entry;
+        DiskLruEntry entry = editor.entry;
         if (entry.currentEditor != editor) {
             throw new IllegalStateException();
         }
@@ -623,7 +622,7 @@ public final class DiskLruCache implements Closeable {
     public synchronized boolean remove(String key) throws IOException {
         checkNotClosed();
         //取出当前key对应的缓存Entry
-        Entry entry = lruEntries.get(key);
+        DiskLruEntry entry = lruEntries.get(key);
         if (entry == null || entry.currentEditor != null) {
             return false;
         }
@@ -688,7 +687,7 @@ public final class DiskLruCache implements Closeable {
         if (journalWriter == null) {
             return; // Already closed.
         }
-        for (Entry entry : new ArrayList<Entry>(lruEntries.values())) {
+        for (DiskLruEntry entry : new ArrayList<DiskLruEntry>(lruEntries.values())) {
             if (entry.currentEditor != null) {
                 entry.currentEditor.abort();
             }
@@ -700,7 +699,7 @@ public final class DiskLruCache implements Closeable {
 
     private void trimToSize() throws IOException {
         while (size > maxSize) {
-            Map.Entry<String, Entry> toEvict = lruEntries.entrySet().iterator().next();
+            Map.Entry<String, DiskLruEntry> toEvict = lruEntries.entrySet().iterator().next();
             remove(toEvict.getKey());
         }
     }
@@ -767,11 +766,11 @@ public final class DiskLruCache implements Closeable {
      * 编辑条目的值。
      */
     public final class Editor {
-        private final Entry entry;
+        private final DiskLruEntry entry;
         private final boolean[] written;
         private boolean committed;
 
-        private Editor(Entry entry) {
+        private Editor(DiskLruEntry entry) {
             this.entry = entry;
             this.written = (entry.readable) ? null : new boolean[valueCount];
         }
@@ -870,102 +869,4 @@ public final class DiskLruCache implements Closeable {
         }
     }
 
-    private final class Entry {
-        private final String key;
-
-        /**
-         * 条目的文件长度
-         */
-        private final long[] lengths;
-
-        /**
-         * Memoized File objects for this entry to avoid char[] allocations.
-         */
-        File[] cleanFiles;
-        File[] dirtyFiles;
-
-        /**
-         * 如果这个条目曾经被发表过，则为真。
-         */
-        private boolean readable;
-
-        /**
-         * 正在进行的编辑，如果该条目没有被编辑，则为空。
-         */
-        private Editor currentEditor;
-
-        /**
-         * 最近提交到该条目的编辑的序列号
-         */
-        private long sequenceNumber;
-
-        private Entry(String key) {
-            this.key = key;
-            this.lengths = new long[valueCount];
-            cleanFiles = new File[valueCount];
-            dirtyFiles = new File[valueCount];
-
-            // The names are repetitive so re-use the same builder to avoid allocations.
-            StringBuilder fileBuilder = new StringBuilder(key).append('.');
-            int truncateTo = fileBuilder.length();
-            for (int i = 0; i < valueCount; i++) {
-                fileBuilder.append(i);
-                cleanFiles[i] = new File(directory, fileBuilder.toString());
-                fileBuilder.append(".tmp");
-                dirtyFiles[i] = new File(directory, fileBuilder.toString());
-                fileBuilder.setLength(truncateTo);
-            }
-        }
-
-        public String getLengths() throws IOException {
-            StringBuilder result = new StringBuilder();
-            for (long size : lengths) {
-                result.append(' ').append(size);
-            }
-            return result.toString();
-        }
-
-        /**
-         * Set lengths using decimal numbers like "10123".
-         */
-        private void setLengths(String[] strings) throws IOException {
-            if (strings.length != valueCount) {
-                throw invalidLengths(strings);
-            }
-
-            try {
-                for (int i = 0; i < strings.length; i++) {
-                    lengths[i] = Long.parseLong(strings[i]);
-                }
-            } catch (NumberFormatException e) {
-                throw invalidLengths(strings);
-            }
-        }
-
-        private IOException invalidLengths(String[] strings) throws IOException {
-            throw new IOException("unexpected journal line: " + java.util.Arrays.toString(strings));
-        }
-
-        public File getCleanFile(int i) {
-            return cleanFiles[i];
-        }
-
-        public File getDirtyFile(int i) {
-            return dirtyFiles[i];
-        }
-    }
-
-    /**
-     * A {@link ThreadFactory} that builds a thread with a specific thread name
-     * and with minimum priority.
-     */
-    private static final class DiskLruCacheThreadFactory implements ThreadFactory {
-        @Override
-        public synchronized Thread newThread(Runnable runnable) {
-            //设置线程优先级
-            Thread result = new Thread(runnable, "video-disk-lru-cache-thread");
-            result.setPriority(Thread.MIN_PRIORITY);
-            return result;
-        }
-    }
 }

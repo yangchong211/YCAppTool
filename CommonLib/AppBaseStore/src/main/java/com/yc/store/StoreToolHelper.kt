@@ -27,4 +27,6 @@ object StoreToolHelper {
         } else {
             throw NullPointerException("u should init first")
         }
+
+
 }

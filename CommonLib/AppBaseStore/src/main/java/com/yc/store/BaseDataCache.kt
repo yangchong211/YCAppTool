@@ -1,6 +1,6 @@
 package com.yc.store
 
-open class DataCacheService : ICacheable {
+open class BaseDataCache : ICacheable {
 
     private lateinit var cacheImpl: ICacheable
 

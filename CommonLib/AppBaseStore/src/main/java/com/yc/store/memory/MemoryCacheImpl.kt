@@ -3,9 +3,9 @@ package com.yc.store.memory
 import com.yc.store.ICacheable
 import kotlin.collections.HashMap
 
-class MemoryCacheImpl: ICacheable {
+class MemoryCacheImpl : ICacheable {
 
-    private var dataSource : HashMap<String,Any> = HashMap()
+    private var dataSource: HashMap<String, Any> = HashMap()
 
     override fun saveInt(key: String, value: Int) {
         dataSource[key] = value
@@ -14,7 +14,6 @@ class MemoryCacheImpl: ICacheable {
     override fun readInt(key: String, default: Int): Int {
         return dataSource[key] as Int
     }
-
 
     override fun saveFloat(key: String, value: Float) {
         dataSource[key] = value
