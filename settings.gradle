@@ -47,7 +47,8 @@ project(':OkHttpServer').projectDir = new File('ServerLib/OkHttpServer')
 include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
         'ComponentLib',':ApplicationLib',':AppStartLib',':AppBaseStore',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
-        ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib'
+        ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
+        ':ArchitectureLib'
 project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
@@ -64,6 +65,8 @@ project(':AppInitCompiler').projectDir = new File('CommonLib/AppInitCompiler')
 project(':AppLogLib').projectDir = new File('CommonLib/AppLogLib')
 project(':AppRestartLib').projectDir = new File('CommonLib/AppRestartLib')
 project(':SafeIntentLib').projectDir = new File('CommonLib/SafeIntentLib')
+project(':ArchitectureLib').projectDir = new File('CommonLib/ArchitectureLib')
+
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */

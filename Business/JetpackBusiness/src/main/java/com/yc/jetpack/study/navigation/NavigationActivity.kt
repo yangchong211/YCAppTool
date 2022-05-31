@@ -61,6 +61,7 @@ class NavigationActivity : AppCompatActivity() {
         //下面这个是简化版
         //navController = findNavController(R.id.my_nav_host_fragment)
         navController?.addOnDestinationChangedListener { controller, destination, arguments ->
+            //目标发生了变化的回调方法
             val dest: String = try {
                 //获取
                 resources.getResourceName(destination.id)

@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["annotation"]
+
+    // jetpack系列
+    //Navigation
+    implementation 'androidx.navigation:navigation-fragment:2.0.0'
+    implementation "androidx.navigation:navigation-fragment-ktx:2.0.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.0.0"
+    // liveData
+    implementation(rootProject.ext.dependencies["livedataKtx"])
+    implementation(rootProject.ext.dependencies["livedataCore"])
+    // viewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    // room 使用kapt，fix RoomDatabase_Impl does not exist
+    implementation(rootProject.ext.dependencies["roomRuntime"])
+    //kapt(rootProject.ext.dependencies["roomCompiler"])
+    annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
+    //WorkManager
+    implementation(rootProject.ext.dependencies["workKtx"])
+
+}
