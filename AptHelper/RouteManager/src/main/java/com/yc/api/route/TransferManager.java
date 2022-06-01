@@ -69,6 +69,7 @@ public class TransferManager implements IRegister {
                 if (RouteConstants.LOG){
                     System.out.println("interface-----TransferManager--get-"+name);
                 }
+                //通过反射去创建对象
                 Class<?> aClass = Class.forName(name);
                 //Object o = aClass.newInstance();
                 //该种方式只能反射那种带有无参构造方法的类，否则创建会失败……

@@ -24,6 +24,7 @@ public final class XposedUtils {
     public boolean isXposedExists() {
         try {
             ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+            //调用 loadClass 加载类
             Class<?> aClass = systemClassLoader.loadClass(XPOSED_HELPERS);
             Object xpHelperObj = aClass.newInstance();
         } catch (InstantiationException e) {
@@ -39,6 +40,7 @@ public final class XposedUtils {
 
         try {
             ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+            //调用 loadClass 加载类
             Class<?> aClass = systemClassLoader.loadClass(XPOSED_BRIDGE);
             Object xpBridgeObj = aClass.newInstance();
         } catch (InstantiationException e) {

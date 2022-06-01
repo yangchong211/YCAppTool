@@ -1,8 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -31,11 +29,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["annotation"]
-    implementation(rootProject.ext.dependencies["kotlinxJdk"])
-    // Kotlin coroutines
-    implementation(rootProject.ext.dependencies["kotlinxCoroutinesCore"])
-    implementation(rootProject.ext.dependencies["kotlinxCoroutinesAndroid"])
-
     //腾讯mmkv库
-    api "com.tencent:mmkv-static:1.2.7"
+    implementation "com.tencent:mmkv-static:1.2.7"
 }
