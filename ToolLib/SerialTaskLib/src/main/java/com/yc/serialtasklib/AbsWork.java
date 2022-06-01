@@ -1,11 +1,11 @@
 package com.yc.serialtasklib;
 
-public abstract class Work implements DispatchRunnable {
+public abstract class AbsWork implements IDispatchRunnable {
 
     volatile boolean cancel;
     volatile boolean finished;
 
-    Work() {
+    AbsWork() {
 
     }
 

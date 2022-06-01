@@ -1,15 +1,15 @@
 package com.yc.serialtasklib;
 
-public abstract class Task implements DispatchRunnable {
+public abstract class AbsTask implements IDispatchRunnable {
 
-    public Task() {
+    public AbsTask() {
 
     }
 
     public abstract void onCancel();
 
     public String getCategory() {
-        Class<? extends Task> aClass = this.getClass();
+        Class<? extends AbsTask> aClass = this.getClass();
         return aClass.getName();
     }
 }

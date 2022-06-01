@@ -1,5 +1,5 @@
 package com.yc.serialtasklib;
 
-public interface Cancelable {
+public interface ICancelable {
     void cancel();
 }

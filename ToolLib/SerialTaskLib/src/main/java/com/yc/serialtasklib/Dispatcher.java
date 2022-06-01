@@ -26,24 +26,26 @@ public class Dispatcher {
         (new InnerAsyncTask0()).executeOnExecutor(threadGroup, new Runnable[]{task});
     }
 
-    public static void async(DispatchRunnable task) {
+    public static void async(IDispatchRunnable task) {
         async(poolGroup(), task);
     }
 
-    public static void async(Executor threadGroup, DispatchRunnable task) {
-        (new InnerAsyncTask1()).executeOnExecutor(threadGroup, new DispatchRunnable[]{task});
+    public static void async(Executor threadGroup, IDispatchRunnable task) {
+        (new InnerAsyncTask1()).executeOnExecutor(threadGroup, new IDispatchRunnable[]{task});
     }
 
-    private static class InnerAsyncTask1 extends AsyncTask<DispatchRunnable, Void, DispatchRunnable> {
+    private static class InnerAsyncTask1 extends AsyncTask<IDispatchRunnable, Void, IDispatchRunnable> {
         private InnerAsyncTask1() {
         }
 
-        protected DispatchRunnable doInBackground(DispatchRunnable... tasks) {
+        @Override
+        protected IDispatchRunnable doInBackground(IDispatchRunnable... tasks) {
             tasks[0].onWorkThread();
             return tasks[0];
         }
 
-        protected void onPostExecute(DispatchRunnable task) {
+        @Override
+        protected void onPostExecute(IDispatchRunnable task) {
             task.onMainThread();
         }
     }
@@ -52,6 +54,7 @@ public class Dispatcher {
         private InnerAsyncTask0() {
         }
 
+        @Override
         protected Void doInBackground(Runnable... tasks) {
             tasks[0].run();
             return null;

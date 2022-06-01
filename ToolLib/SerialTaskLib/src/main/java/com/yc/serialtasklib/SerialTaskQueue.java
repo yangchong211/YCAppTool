@@ -8,10 +8,10 @@ import android.util.Log;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
-public class SerialTaskQueue {
+public final class SerialTaskQueue {
     
-    private final ArrayDeque<Work> mWorks = new ArrayDeque<>();
-    private Work mActive;
+    private final ArrayDeque<AbsWork> mWorks = new ArrayDeque<>();
+    private AbsWork mActive;
 
     public SerialTaskQueue() {
 
@@ -19,7 +19,7 @@ public class SerialTaskQueue {
 
     @MainThread
     @NonNull
-    public Cancelable append(Task task, AppendMode mode) {
+    public ICancelable append(AbsTask task, AppendMode mode) {
         if (mode != AppendMode.Normal) {
             if (mode == AppendMode.ReplaceStrict) {
                 if (mActive != null && mActive.getCategory().equals(task.getCategory())) {
@@ -31,33 +31,32 @@ public class SerialTaskQueue {
             } else if (mode == AppendMode.DiscardStrict && mActive != null && mActive.getCategory().equals(task.getCategory())) {
                 logInfo("Cancel " + task + " category: " + task.getCategory() + " mode: " + mode);
                 task.onCancel();
-                return new EmptyCancelable();
+                return new EmptyCancelableImpl();
             }
 
-            ArrayDeque works;
+            ArrayDeque<AbsWork> works;
             synchronized(mWorks) {
                 works = new ArrayDeque<>(mWorks);
             }
 
-            Iterator iter = works.iterator();
+            Iterator<AbsWork> iterator = works.iterator();
 
             label66:
             while(true) {
                 while(true) {
-                    Work work;
+                    AbsWork work;
                     do {
-                        if (!iter.hasNext()) {
+                        if (!iterator.hasNext()) {
                             break label66;
                         }
-
-                        work = (Work)iter.next();
+                        work = iterator.next();
                     } while(!work.getCategory().equals(task.getCategory()));
 
                     if (mode != AppendMode.Replace && mode != AppendMode.ReplaceStrict) {
                         if (mode == AppendMode.Discard || mode == AppendMode.DiscardStrict) {
                             logInfo("Cancel " + task + " category: " + task.getCategory() + " mode: " + mode);
                             task.onCancel();
-                            return new EmptyCancelable();
+                            return new EmptyCancelableImpl();
                         }
                     } else {
                         logInfo("Cancel " + work + " mode: " + mode);
@@ -72,9 +71,10 @@ public class SerialTaskQueue {
             }
         }
 
-        final Work work = execute(task);
+        final AbsWork work = execute(task);
         logInfo("Execute " + work + " mode: " + mode + "\n\tmActive: " + mActive);
-        return new Cancelable() {
+        return new ICancelable() {
+            @Override
             public void cancel() {
                 if (!work.cancel && !work.finished) {
                     work.onCancel();
@@ -84,15 +84,13 @@ public class SerialTaskQueue {
     }
 
     public void clear() {
-        Iterator var1 = mWorks.iterator();
-
-        while(var1.hasNext()) {
-            Work work = (Work)var1.next();
+        Iterator<AbsWork> iterator = mWorks.iterator();
+        while(iterator.hasNext()) {
+            AbsWork work = iterator.next();
             if (!work.finished) {
                 work.onCancel();
             }
         }
-
         synchronized(mWorks) {
             mWorks.clear();
         }
@@ -101,13 +99,14 @@ public class SerialTaskQueue {
     private void logInfo(String info) {
         try {
             Log.i("SerialTaskQueue : ",info);
-        } catch (Throwable var3) {
-            var3.printStackTrace();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
     }
 
-    private synchronized Work execute(final Task task) {
-        Work work = new Work() {
+    private synchronized AbsWork execute(final AbsTask task) {
+        AbsWork work = new AbsWork() {
+            @Override
             public void onWorkThread() {
                 logInfo("onWorkThread " + this);
                 if (!finished) {
@@ -120,6 +119,7 @@ public class SerialTaskQueue {
                 }
             }
 
+            @Override
             public void onMainThread() {
                 logInfo("onMainThread " + this + "\n\tmActive: " + mActive);
                 if (finished) {
@@ -139,6 +139,7 @@ public class SerialTaskQueue {
                 }
             }
 
+            @Override
             public void onCancel() {
                 logInfo("onCancel " + this + "\n\tmActive: " + mActive);
                 task.onCancel();
@@ -149,10 +150,12 @@ public class SerialTaskQueue {
 
             }
 
+            @Override
             String getCategory() {
                 return task.getCategory();
             }
 
+            @Override
             public String toString() {
                 return task.toString() + " category: " + getCategory() + " cancel: " + cancel + " finished: " + finished;
             }
@@ -170,7 +173,7 @@ public class SerialTaskQueue {
 
     private void scheduleNext() {
         synchronized(mWorks) {
-            mActive = (Work)mWorks.poll();
+            mActive = mWorks.poll();
         }
         if (mActive != null) {
             if (mActive.cancel) {

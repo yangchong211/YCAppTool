@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.yc.serialtasklib.AppendMode;
 import com.yc.serialtasklib.SerialTaskQueue;
-import com.yc.serialtasklib.Task;
+import com.yc.serialtasklib.AbsTask;
 import com.yc.other.R;
 
 import java.util.Timer;
@@ -74,7 +74,7 @@ public class SerialTaskActivity extends AppCompatActivity implements View.OnClic
         serialTaskQueue.append(task, AppendMode.ReplaceStrict);
     }
 
-    class MyTask extends Task {
+    class MyTask extends AbsTask {
 
         @Override
         public void onCancel() {
