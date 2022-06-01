@@ -34,7 +34,6 @@ public class UploadTaskManager extends BroadcastReceiver {
 
     @SuppressLint("StaticFieldLeak")
     private static UploadTaskManager sInstance;
-    //private Context mContext;
     private boolean mInitial = false;
     private Handler mScheduledHandler = new Handler(Looper.getMainLooper());
     private ConnectivityManager mConnectivityManager;

@@ -10,22 +10,12 @@ import com.google.gson.annotations.SerializedName;
  * 获取文件目录树
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-
 public class GetTreeTask {
 
-
-    //push时间和客户端接收到的最大时间差,超过该值,忽略消息
-    public static final long MAX_MESSAGE_TIME_DELTA = 20 * 1000;
-
     /**
-     * {
-     * "timestamp":"1432331241000",
-     * "task_id":"a3f0e19e-6ccd-425e-8737-4b9170f145a2",
-     * "event_type":100,
-     * "event_id":"bamai_get_tree"
-     * }
+     * push时间和客户端接收到的最大时间差,超过该值,忽略消息
      */
-
+    public static final long MAX_MESSAGE_TIME_DELTA = 20 * 1000;
 
     @SerializedName("event_id")
     private String eventId;
