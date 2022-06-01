@@ -75,83 +75,103 @@ public class InternalLogger extends AbstractLogger {
         BinaryExecutor.getInstance(mBuffer).enqueue(new BinaryLog(clone));
     }
 
+    @Override
     public void trace(String msg, Throwable t) {
         println(Level.TRACE, msg, t);
     }
 
+    @Override
     public void debug(String msg, Throwable t) {
         println(Level.DEBUG, msg, t);
     }
 
+    @Override
     public void info(String msg, Throwable t) {
         println(Level.INFO, msg, t);
     }
 
+    @Override
     public void warn(String msg, Throwable t) {
         println(Level.WARN, msg, t);
     }
 
+    @Override
     public void error(String msg, Throwable t) {
         println(Level.WARN, msg, t);
     }
 
 
+    @Override
     public void trace(String msg, Object... args) {
         printf(Level.TRACE, msg, args);
     }
 
+    @Override
     public void debug(String msg, Object... args) {
         printf(Level.DEBUG, msg, args);
     }
 
+    @Override
     public void info(String msg, Object... args) {
         printf(Level.INFO, msg, args);
     }
 
+    @Override
     public void warn(String msg, Object... args) {
         printf(Level.WARN, msg, args);
     }
 
+    @Override
     public void error(String msg, Object... args) {
         printf(Level.ERROR, msg, args);
     }
 
+    @Override
     public void traceEvent(String event, Map<?, ?> map) {
         println(Level.TRACE, event, mapCopy(map));
     }
 
+    @Override
     public void debugEvent(String event, Map<?, ?> map) {
         println(Level.DEBUG, event, mapCopy(map));
     }
 
+    @Override
     public void infoEvent(String event, Map<?, ?> map) {
         println(Level.INFO, event, mapCopy(map));
     }
 
+    @Override
     public void warnEvent(String event, Map<?, ?> map) {
         println(Level.WARN, event, mapCopy(map));
     }
 
+    @Override
     public void errorEvent(String event, Map<?, ?> map) {
         println(Level.ERROR, event, mapCopy(map));
     }
 
+    @Override
     public void traceEvent(String event, Object... args) {
         println(Level.TRACE, event, toMap(args));
     }
 
+    @Override
     public void debugEvent(String event, Object... args) {
         println(Level.DEBUG, event, toMap(args));
     }
 
+    @Override
     public void infoEvent(String event, Object... args) {
         println(Level.INFO, event, toMap(args));
     }
 
+    @Override
     public void warnEvent(String event, Object... args) {
         println(Level.WARN, event, toMap(args));
     }
 
+    @Override
     public void errorEvent(String event, Object... args) {
         println(Level.ERROR, event, toMap(args));
     }
@@ -221,7 +241,9 @@ public class InternalLogger extends AbstractLogger {
 
     @Override
     public void println(String msg) {
-        if (TextUtils.isEmpty(msg)) return;
+        if (TextUtils.isEmpty(msg)) {
+            return;
+        }
         LongLog log = new LongLog.Builder()
                 .setTag("logging")
                 .setLogLevel(Level.INFO)

@@ -1,12 +1,9 @@
 package com.yc.logging.logger;
 
 import com.yc.logging.constant.HeaderType;
-import com.yc.logging.annotation.KeepSource;
 
 import java.util.Map;
 
-
-@KeepSource
 public interface Logger {
 
     /**

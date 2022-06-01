@@ -21,14 +21,14 @@ public abstract class AppStartTask implements TaskInterface {
     /**
      * 当前Task依赖的Task数量（等父亲们执行完了，孩子才能执行），默认没有依赖
      */
-    private final CountDownLatch mDepends = new CountDownLatch(getTaskSize());
+    private final CountDownLatch countDownLatch = new CountDownLatch(getTaskSize());
 
     /**
      * 当前Task等待，让父亲Task先执行
      */
     public void waitToNotify() {
         try {
-            mDepends.await();
+            countDownLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -40,6 +40,10 @@ public abstract class AppStartTask implements TaskInterface {
         return Process.THREAD_PRIORITY_BACKGROUND;
     }
 
+    /**
+     * 获取所有任务的大小
+     * @return      大小
+     */
     private int getTaskSize() {
         return getDependsTaskList() == null ? 0 : getDependsTaskList().size();
     }
@@ -53,7 +57,7 @@ public abstract class AppStartTask implements TaskInterface {
      * 刷新
      */
     public void notifyTask() {
-        mDepends.countDown();
+        countDownLatch.countDown();
     }
 
     @Override

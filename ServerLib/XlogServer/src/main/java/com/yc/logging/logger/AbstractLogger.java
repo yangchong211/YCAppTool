@@ -21,10 +21,12 @@ public abstract class AbstractLogger implements Logger {
         this.mName = clazz.getName();
     }
 
+    @Override
     public String getName() {
         return this.mName;
     }
 
+    @Override
     public void setName(String str) {
         if (str == null || str.length() == 0) {
             return;
@@ -32,58 +34,72 @@ public abstract class AbstractLogger implements Logger {
         this.mName = str;
     }
 
+    @Override
     public boolean isTraceEnabled() {
         return true;
     }
 
+    @Override
     public boolean isDebugEnabled() {
         return true;
     }
 
+    @Override
     public boolean isInfoEnabled() {
         return true;
     }
 
+    @Override
     public boolean isWarnEnabled() {
         return true;
     }
 
+    @Override
     public boolean isErrorEnabled() {
         return true;
     }
 
+    @Override
     @Deprecated
     public HeaderType getHeaderType() {
         return this.mHeaderType;
     }
 
+    @Override
     @Deprecated
     public void setHeaderType(final HeaderType type) {
         this.mHeaderType = type;
     }
 
+    @Override
     public void traceEvent(final String event, final Object... args) {
         traceEvent(event, toMap(args));
     }
 
+    @Override
     public void debugEvent(final String event, final Object... args) {
         debugEvent(event, toMap(args));
     }
 
+    @Override
     public void infoEvent(final String event, final Object... args) {
         infoEvent(event, toMap(args));
     }
 
+    @Override
     public void warnEvent(final String event, final Object... args) {
         warnEvent(event, toMap(args));
     }
 
+    @Override
     public void errorEvent(final String event, final Object... args) {
         errorEvent(event, toMap(args));
     }
 
     protected static Map<?, ?> toMap(final Object... args) {
-        if (args == null) return null;
+        if (args == null) {
+            return null;
+        }
 
         final Map<Object, Object> map = new HashMap<>();
         for (int i = 0; i < args.length - 1; i += 2) {
