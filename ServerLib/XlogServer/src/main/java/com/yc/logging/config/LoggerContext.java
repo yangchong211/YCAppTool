@@ -2,16 +2,11 @@ package com.yc.logging.config;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import androidx.annotation.RestrictTo;
 import android.text.TextUtils;
-import com.yc.logging.annotation.KeepSource;
 import com.yc.logging.util.Debug;
 
 import java.io.File;
 
-
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-@KeepSource
 public class LoggerContext {
 
     private String mPackageName;
@@ -30,7 +25,9 @@ public class LoggerContext {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public synchronized void init(Context context) {
-        if (mInitial) return;
+        if (mInitial) {
+            return;
+        }
         mInitial = true;
         mPackageName = context.getPackageName();
         File filesDir = context.getFilesDir();

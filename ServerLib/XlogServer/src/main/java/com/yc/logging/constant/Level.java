@@ -1,18 +1,31 @@
 package com.yc.logging.constant;
 
-import com.yc.logging.annotation.KeepSource;
 
-@KeepSource
 public enum Level {
 
+    /**
+     * t
+     */
     TRACE(1, "T"),
 
+    /**
+     * d
+     */
     DEBUG(2, "D"),
 
+    /**
+     * i
+     */
     INFO(3, "I"),
 
+    /**
+     * w
+     */
     WARN(4, "W"),
 
+    /**
+     * e
+     */
     ERROR(5, "E");
 
     public final int level;

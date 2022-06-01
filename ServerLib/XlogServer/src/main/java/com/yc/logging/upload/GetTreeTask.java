@@ -2,7 +2,7 @@ package com.yc.logging.upload;
 
 import androidx.annotation.RestrictTo;
 import android.text.TextUtils;
-import com.yc.logging.annotation.KeepClass;
+
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * 获取文件目录树
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-@KeepClass
+
 public class GetTreeTask {
 
 

@@ -11,7 +11,6 @@ import android.util.Log;
 
 import com.yc.logging.upload.UploadTaskManager;
 
-@RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class LogInitProvider extends ContentProvider {
 
     private static final String TAG = "LogInitProvider";

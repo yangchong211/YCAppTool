@@ -1,20 +1,12 @@
 package com.yc.logging.config;
 
-import com.yc.logging.annotation.KeepSource;
 import com.yc.logging.constant.Level;
-import com.yc.logging.util.Objects;
 import com.yc.logging.util.Supplier;
+import com.yc.toolutils.ObjectsUtils;
 
 import java.io.File;
 
-@KeepSource
 public class LoggerConfig {
-
-    @Deprecated
-    public enum LogMode {
-        MODE_NORMAL,
-        MODE_UPLOAD
-    }
 
     private String serverHost;
     private final int fileMaxHistory;
@@ -118,7 +110,6 @@ public class LoggerConfig {
         return new Builder();
     }
 
-    @KeepSource
     public static final class Builder {
         private String serverHost;
         private int fileMaxHistory = 7;
@@ -141,7 +132,7 @@ public class LoggerConfig {
         }
 
         public Builder serverHost(String serverHost) {
-            Objects.requireNonNull(serverHost);
+            ObjectsUtils.requireNonNull(serverHost);
             this.serverHost = serverHost;
             return this;
         }
@@ -202,13 +193,13 @@ public class LoggerConfig {
         }
 
         public Builder fileLogLevel(Level fileLogLevel) {
-            Objects.requireNonNull(fileLogLevel);
+            ObjectsUtils.requireNonNull(fileLogLevel);
             this.fileLogLevel = fileLogLevel;
             return this;
         }
 
         public Builder logcatLogLevel(Level logcatLogLevel) {
-            Objects.requireNonNull(logcatLogLevel);
+            ObjectsUtils.requireNonNull(logcatLogLevel);
             this.logcatLogLevel = logcatLogLevel;
             return this;
         }

@@ -123,9 +123,13 @@ public final class AppCleanUtils {
         if (files != null && files.length != 0) {
             for (File file : files) {
                 if (file.isFile()) {
-                    if (!file.delete()) return false;
+                    if (!file.delete()) {
+                        return false;
+                    }
                 } else if (file.isDirectory()) {
-                    if (!deleteDir(file)) return false;
+                    if (!deleteDir(file)) {
+                        return false;
+                    }
                 }
             }
         }

@@ -3,13 +3,12 @@ package com.yc.logging;
 import android.app.Application;
 import android.content.Context;
 
-import com.yc.logging.annotation.KeepSource;
 import com.yc.logging.config.LoggerConfig;
 import com.yc.logging.config.LoggerContext;
 import com.yc.logging.logger.Logger;
 import com.yc.logging.logger.InternalLogger;
 import com.yc.logging.upload.UploadTaskManager;
-import com.yc.logging.util.Objects;
+import com.yc.toolutils.ObjectsUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -17,7 +16,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-@KeepSource
 public abstract class LoggerFactory {
 
     private static LoggerConfig sLoggerConfig;
@@ -26,11 +24,13 @@ public abstract class LoggerFactory {
     private static boolean sInitial;
 
     public synchronized static void init(Context context, LoggerConfig config) {
-        if (sInitial) return;
+        if (sInitial) {
+            return;
+        }
         sInitial = true;
 
-        Objects.requireNonNull(context);
-        Objects.requireNonNull(config);
+        ObjectsUtils.requireNonNull(context);
+        ObjectsUtils.requireNonNull(config);
         sLoggerConfig = config;
         Context appContext = context instanceof Application ? context : context.getApplicationContext();
         LoggerContext.getDefault().init(appContext);
@@ -51,24 +51,24 @@ public abstract class LoggerFactory {
     }
 
     public static Logger getLogger(final Class<?> clazz) {
-        Objects.requireNonNull(clazz);
+        ObjectsUtils.requireNonNull(clazz);
         return getLogger(clazz.getName(), "main");
     }
 
     public static Logger getLogger(final String name) {
-        Objects.requireNonNull(name);
+        ObjectsUtils.requireNonNull(name);
         return getLogger(name, "main");
     }
 
     public static Logger getLogger(final Class<?> clazz, String bufferId) {
-        Objects.requireNonNull(clazz);
-        Objects.requireNonNull(bufferId);
+        ObjectsUtils.requireNonNull(clazz);
+        ObjectsUtils.requireNonNull(bufferId);
         return internalGetLogger(clazz.getName(), bufferId);
     }
 
     public static Logger getLogger(final String name, String bufferId) {
-        Objects.requireNonNull(name);
-        Objects.requireNonNull(bufferId);
+        ObjectsUtils.requireNonNull(name);
+        ObjectsUtils.requireNonNull(bufferId);
         return internalGetLogger(name, bufferId);
     }
 

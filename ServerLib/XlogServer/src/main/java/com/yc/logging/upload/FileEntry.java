@@ -2,7 +2,7 @@ package com.yc.logging.upload;
 
 import androidx.annotation.RestrictTo;
 import com.google.gson.annotations.SerializedName;
-import com.yc.logging.annotation.KeepClass;
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
  * 文件或目录封装
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-@KeepClass
+
 public class FileEntry {
 
     @SerializedName("name")

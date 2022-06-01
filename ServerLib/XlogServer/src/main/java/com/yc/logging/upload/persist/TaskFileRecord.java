@@ -4,14 +4,14 @@ package com.yc.logging.upload.persist;
 import androidx.room.Entity;
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
-import com.yc.logging.annotation.KeepClass;
+
 
 @SuppressWarnings("EqualsReplaceableByObjectsCall")
 @Entity(tableName = "TaskFileRecord",
         primaryKeys = {"taskId", "file"}
 )
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-@KeepClass
+
 public class TaskFileRecord {
 
     @NonNull

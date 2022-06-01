@@ -11,7 +11,8 @@ import android.os.Bundle;
 import android.os.Looper;
 import androidx.annotation.RestrictTo;
 import android.text.TextUtils;
-import com.yc.logging.annotation.KeepSource;
+
+import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -25,7 +26,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-@KeepSource
 public class LoggerUtils {
 
     private static final String DATE_PATTERN = "yyyy-MM-dd";
@@ -89,8 +89,12 @@ public class LoggerUtils {
             @Override
             public boolean accept(File dir, String name) {
                 File file = new File(dir, name);
-                if (file.isDirectory()) return false;
-                if (file.length() == 0) return false;
+                if (file.isDirectory()) {
+                    return false;
+                }
+                if (file.length() == 0) {
+                    return false;
+                }
 
                 Matcher m = fileNamePattern.matcher(name);
                 if (!m.matches()) {
@@ -141,7 +145,7 @@ public class LoggerUtils {
     public static List<File> collectExtraLogFiles(File dir) {
         List<File> catchFiles = new ArrayList<>();
         if (dir != null && dir.exists() && dir.isDirectory()) {
-            catchFiles.addAll(FileUtils.collectAllFiles(dir));
+            catchFiles.addAll(AppFileUtils.collectAllFiles(dir));
         }
         return catchFiles;
     }

@@ -10,11 +10,16 @@ import androidx.annotation.RestrictTo;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Pair;
+
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.logging.config.LoggerConfig;
 import com.yc.logging.config.LoggerContext;
 import com.yc.logging.LoggerFactory;
 import com.yc.logging.upload.persist.*;
 import com.yc.logging.util.*;
+import com.yc.toolutils.AppCleanUtils;
+import com.yc.toolutils.AppZipUtils;
+import com.yc.toolutils.ExceptionReporter;
 
 import java.io.File;
 import java.util.*;
@@ -51,7 +56,9 @@ public class UploadTaskManager extends BroadcastReceiver {
     }
 
     public synchronized void init(final Context context) {
-        if (mInitial) return;
+        if (mInitial) {
+            return;
+        }
         mInitial = true;
         mContext = context;
         LOG("init");
@@ -70,7 +77,7 @@ public class UploadTaskManager extends BroadcastReceiver {
             }
         }
         registerReceiver(context);
-        ArchTaskExecutor.getInstance()
+        DelegateTaskExecutor.getInstance()
                 .executeOnDiskIO(new Runnable() {
                     @Override
                     public void run() {
@@ -80,7 +87,7 @@ public class UploadTaskManager extends BroadcastReceiver {
                             loopQueryTask();
                         } catch (Throwable e) {
                             Debug.logOrThrow("init err", e);
-                            ReportUtils.reportProgramError("logging_init_err", e);
+                            ExceptionReporter.report("logging_init_err", e);
                         } finally {
                             synchronized (mLock) {
                                 mDatabaseLoaded = true;
@@ -98,10 +105,8 @@ public class UploadTaskManager extends BroadcastReceiver {
 
         if (Debug.isDebuggable()) {
             context.registerReceiver(this, filter1);
-            LocalBroadcastManager.getInstance(context).registerReceiver(this, filter1);
-        } else {
-            LocalBroadcastManager.getInstance(context).registerReceiver(this, filter1);
         }
+        LocalBroadcastManager.getInstance(context).registerReceiver(this, filter1);
 
         IntentFilter filter2 = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         context.registerReceiver(this, filter2);
@@ -109,8 +114,10 @@ public class UploadTaskManager extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
-        if (intent == null) return;
-        ArchTaskExecutor.getInstance()
+        if (intent == null) {
+            return;
+        }
+        DelegateTaskExecutor.getInstance()
                 .executeOnDiskIO(new Runnable() {
                     @Override
                     public void run() {
@@ -119,7 +126,7 @@ public class UploadTaskManager extends BroadcastReceiver {
                             performReceive(intent);
                         } catch (Exception e) {
                             Debug.logOrThrow("perform receive err", e);
-                            ReportUtils.reportProgramError("logging_receiver_err", e);
+                            ExceptionReporter.report("logging_receiver_err", e);
                         }
                     }
                 });
@@ -144,10 +151,8 @@ public class UploadTaskManager extends BroadcastReceiver {
         if (ConnectivityManager.CONNECTIVITY_ACTION.equals(action)) {
             startUploadService();
         } else if (ACTION_UPLOAD_LOG.equals(action)) {
-            ReportUtils.reportReceivePush(action, extra);
             receiveNewTask(extra);
         } else if (ACTION_GET_TREE.equals(action)) {
-            ReportUtils.reportReceivePush(action, extra);
             uploadFileTree(extra);
         }
     }
@@ -193,13 +198,12 @@ public class UploadTaskManager extends BroadcastReceiver {
             if (supplier != null && !TextUtils.isEmpty(supplier.get())) {
                 Pair<TaskRecord, String> result = RequestManager.queryTask(supplier.get());
                 if (result.first != null) {
-                    ReportUtils.reportReceivePush("query_task_result", result.second);
                     createNewTask(result.first);
                 }
             }
         } catch (Exception e) {
             Debug.logOrThrow("query Task err", e);
-            ReportUtils.reportProgramError("logging_query_task_err", e);
+            ExceptionReporter.report("logging_query_task_err", e);
         }
 
     }
@@ -220,7 +224,7 @@ public class UploadTaskManager extends BroadcastReceiver {
         Runnable loopTask = new Runnable() {
             @Override
             public void run() {
-                ArchTaskExecutor.getInstance().executeOnDiskIO(queryTask);
+                DelegateTaskExecutor.getInstance().executeOnDiskIO(queryTask);
                 mScheduledHandler.postDelayed(this, delayMillis);
             }
         };
@@ -254,7 +258,6 @@ public class UploadTaskManager extends BroadcastReceiver {
 
         if (record == null || !record.isValid()) {
             String err = "参数异常:" + (record != null ? record.getRawData() : null);
-            ReportUtils.reportUploadTaskResult(false, "", "", err);
             if (record != null && !record.isValid()) {
                 RequestManager.uploadTaskStatus(record.getTaskId(), 102, err);
             }
@@ -308,23 +311,23 @@ public class UploadTaskManager extends BroadcastReceiver {
             }
 
             File zipFile = new File(LoggerContext.getDefault().getLogCacheDir(), taskId + ".zip");
-            List<ZipUtil.EntrySet> entrySets = new ArrayList<>();
+            List<AppZipUtils.EntrySet> entrySets = new ArrayList<>();
 
             if (!LoggerUtils.isEmpty(mainLogFiles)) {
                 File baseDir = LoggerContext.getDefault().getMainLogPathDir();
-                entrySets.add(new ZipUtil.EntrySet(null, baseDir, mainLogFiles));
+                entrySets.add(new AppZipUtils.EntrySet(null, baseDir, mainLogFiles));
             }
 
             if (!LoggerUtils.isEmpty(secondaryLogFiles)) {
-                entrySets.add(new ZipUtil.EntrySet("secondary_log", secondaryLogPathDir, secondaryLogFiles));
+                entrySets.add(new AppZipUtils.EntrySet("secondary_log", secondaryLogPathDir, secondaryLogFiles));
             }
 
             if (!LoggerUtils.isEmpty(extraLogFiles)) {
                 File baseDir = LoggerFactory.getConfig().getExtraLogDir();
-                entrySets.add(new ZipUtil.EntrySet("extra_log", baseDir, extraLogFiles));
+                entrySets.add(new AppZipUtils.EntrySet("extra_log", baseDir, extraLogFiles));
             }
 
-            ZipUtil.writeToZip(entrySets, zipFile);
+            AppZipUtils.writeToZip(entrySets, zipFile);
 
             List<SliceRecord> sliceRecords = splitTask(taskId, zipFile);
             TaskFileRecord taskFileRecord = new TaskFileRecord(taskId, zipFile.getAbsolutePath());
@@ -379,8 +382,6 @@ public class UploadTaskManager extends BroadcastReceiver {
         //report
         String message = reason == null ? "文件上传失败" : reason;
         RequestManager.uploadTaskStatus(taskId, 102, message);
-        String networkType = LoggerUtils.getNetworkType(context);
-        ReportUtils.reportUploadTaskResult(false, networkType, taskId, message);
 
         //delete records
         UploadTaskDatabase.getDatabase().getTaskRecordDao().deleteByTaskId(taskId);
@@ -393,9 +394,6 @@ public class UploadTaskManager extends BroadcastReceiver {
         LOG("task success:" + taskId);
 
         mPreferences.edit().putBoolean(taskId, true).apply();
-
-        String networkType = LoggerUtils.getNetworkType(context);
-        ReportUtils.reportUploadTaskResult(true, networkType, taskId, "success");
 
         //delete records
         UploadTaskDatabase.getDatabase().getTaskRecordDao().deleteByTaskId(taskId);
@@ -419,7 +417,7 @@ public class UploadTaskManager extends BroadcastReceiver {
         LoggerConfig config = LoggerFactory.getConfig();
         if (config.isExtraLogCleanEnabled()) {
             File extraDir = config.getExtraLogDir();
-            FileUtils.cleanDir(extraDir);
+            AppCleanUtils.cleanCustomCache(extraDir);
         }
     }
 

@@ -1,7 +1,7 @@
 package com.yc.logging.upload;
 
 import androidx.annotation.RestrictTo;
-import com.yc.logging.annotation.KeepClass;
+
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-@KeepClass
+
 public class FileTree {
 
     @SerializedName("timestamp")

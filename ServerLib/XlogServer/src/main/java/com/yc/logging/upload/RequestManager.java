@@ -7,11 +7,11 @@ import com.yc.logging.LoggerFactory;
 import com.yc.logging.BuildConfig;
 import com.yc.logging.upload.persist.TaskRecord;
 import com.yc.logging.util.Debug;
-import com.yc.logging.util.ReportUtils;
-import com.yc.logging.util.StringUtils;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.yc.toolutils.AppStringUtils;
+
 import okhttp3.*;
 import org.json.JSONObject;
 
@@ -87,7 +87,6 @@ class RequestManager {
                 .build();
         try {
             Response response = sHttpClient.newCall(request).execute();
-            ReportUtils.reportRequest(url, param, response.toString());
             response.body().close();
         } catch (IOException e) {
             Debug.e("uploadTaskStatus error", e);
@@ -150,7 +149,6 @@ class RequestManager {
             Response response = sHttpClient.newCall(request).execute();
             ResponseBody body = response.body();
             String responseString = body.string();
-            ReportUtils.reportRequest(url, param, responseString);
             msg = responseString;
             int status = response.code();
             if (response.isSuccessful()) {
@@ -169,14 +167,6 @@ class RequestManager {
                 }
             }
             requestResult.setCode(status);
-            ReportUtils.reportUploadSliceResult(
-                    response.isSuccessful(),
-                    networkType,
-                    zipFile.length(),
-                    sliceId, startPos,
-                    endPos - startPos,
-                    taskId, status, responseString,
-                    zipFile.getName());
 
             body.close();
         } catch (Exception e) {
@@ -212,11 +202,9 @@ class RequestManager {
         String rawResp = null;
         try {
             Response response = sHttpClient.newCall(request).execute();
-            ReportUtils.reportRequest(url, param, response.toString());
             ResponseBody body = response.body();
             rawResp = body.string();
             if (response.isSuccessful()) {
-                ReportUtils.reportQueryTaskResult(rawResp);
                 JsonElement element = new JsonParser().parse(rawResp);
                 JsonObject object = element.getAsJsonObject();
                 JsonElement data = object.get("data");
@@ -247,14 +235,13 @@ class RequestManager {
 
         Request request = new Request.Builder()
                 .url(url)
-                .header(PARAM_TOKEN, StringUtils.MD5(OMG + ts + PARAM_API))
+                .header(PARAM_TOKEN, AppStringUtils.MD5(OMG + ts + PARAM_API))
                 .post(formBody)
                 .build();
         try {
             Response response = sHttpClient.newCall(request).execute();
             ResponseBody body = response.body();
             String resp = body.string();
-            ReportUtils.reportUploadFileTreeResult(response.isSuccessful(), networkType, taskId, resp);
             body.close();
         } catch (IOException e) {
             Debug.e("uploadFileTree error", e);

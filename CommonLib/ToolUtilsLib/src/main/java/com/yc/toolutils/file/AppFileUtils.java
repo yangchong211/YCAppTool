@@ -15,6 +15,7 @@ import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -188,6 +189,41 @@ public final class AppFileUtils {
             }
         }
         return mFileList;
+    }
+
+    /**
+     * 获取file文件下的文件集合
+     * @param file
+     * @return
+     */
+    public static List<File> collectAllFiles(final File file) {
+        if (!file.exists()) {
+            final String message = file + " does not exist";
+            throw new IllegalArgumentException(message);
+        }
+        List<File> list = new ArrayList<>();
+        if (!file.isDirectory()) {
+            return list;
+        }
+
+        LinkedList<File> dirStack = new LinkedList<>();
+        dirStack.push(file);
+
+        while (!dirStack.isEmpty()) {
+            File dir = dirStack.pop();
+            File[] files = dir.listFiles();
+            if (files == null) {
+                continue;
+            }
+            for (File f : files) {
+                if (!f.isDirectory()) {
+                    list.add(f);
+                } else {
+                    dirStack.push(f);
+                }
+            }
+        }
+        return list;
     }
 
 

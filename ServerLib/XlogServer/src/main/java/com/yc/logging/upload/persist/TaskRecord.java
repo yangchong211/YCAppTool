@@ -6,14 +6,14 @@ import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 import android.text.TextUtils;
-import com.yc.logging.annotation.KeepClass;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.annotations.SerializedName;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 @Entity(tableName = "TaskRecord")
-@KeepClass
+
 public class TaskRecord {
 
     @PrimaryKey

@@ -2,11 +2,12 @@ package com.yc.logging.upload;
 
 import android.content.Context;
 import androidx.annotation.RestrictTo;
+
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.logging.upload.persist.*;
-import com.yc.logging.util.ArchTaskExecutor;
 import com.yc.logging.util.Debug;
 import com.yc.logging.util.LoggerUtils;
-import com.yc.logging.util.ReportUtils;
+import com.yc.toolutils.ExceptionReporter;
 
 import java.io.File;
 import java.util.Collections;
@@ -35,14 +36,14 @@ public class UploadService {
     }
 
     public void start(final Context context) {
-        ArchTaskExecutor.getInstance().executeOnDiskIO(new Runnable() {
+        DelegateTaskExecutor.getInstance().executeOnDiskIO(new Runnable() {
             @Override
             public void run() {
                 try {
                     resumeUploadTask(context);
                 } catch (Exception e) {
                     Debug.logOrThrow("init err", e);
-                    ReportUtils.reportProgramError("logging_upload_err", e);
+                    ExceptionReporter.report("logging_upload_err", e);
                 }
             }
         });

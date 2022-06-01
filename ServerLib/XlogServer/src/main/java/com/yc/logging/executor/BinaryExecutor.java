@@ -59,7 +59,9 @@ public class BinaryExecutor {
     }
 
     public void enqueue(final AbstractLog log) {
-        if (log == null) return;
+        if (log == null) {
+            return;
+        }
         if (mLogConsumerStarted.compareAndSet(false, true)) {
             start();
         }

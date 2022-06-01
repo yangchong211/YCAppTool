@@ -4,7 +4,7 @@ package com.yc.logging.upload.persist;
 import androidx.room.Entity;
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
-import com.yc.logging.annotation.KeepClass;
+
 
 import java.util.Arrays;
 
@@ -13,7 +13,7 @@ import java.util.Arrays;
         primaryKeys = {"taskId", "sliceId"}
 )
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-@KeepClass
+
 public class SliceRecord {
 
     @NonNull
@@ -120,8 +120,12 @@ public class SliceRecord {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SliceRecord that = (SliceRecord) o;
         return sliceId == that.sliceId &&
                 startPos == that.startPos &&

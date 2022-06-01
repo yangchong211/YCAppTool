@@ -13,8 +13,8 @@ import com.yc.logging.config.LoggerContext;
 import com.yc.logging.log.BinaryLog;
 import com.yc.logging.log.FormatLog;
 import com.yc.logging.log.LongLog;
-import com.yc.logging.util.Objects;
-import com.yc.logging.util.StringUtils;
+import com.yc.toolutils.AppStringUtils;
+import com.yc.toolutils.ObjectsUtils;
 
 import java.util.Date;
 import java.util.Map;
@@ -67,7 +67,7 @@ public class InternalLogger extends AbstractLogger {
 
     @Override
     public void write(byte[] bytes) {
-        Objects.requireNonNull(bytes);
+        ObjectsUtils.requireNonNull(bytes);
         if (bytes.length == 0) {
             return;
         }
@@ -214,7 +214,7 @@ public class InternalLogger extends AbstractLogger {
                 .setTag(mName)
                 .setMsg(msg)
                 .setTid(Process.myTid())
-                .setTnm(StringUtils.ellipsize(Thread.currentThread().getName(), 20, 4))
+                .setTnm(AppStringUtils.ellipsize(Thread.currentThread().getName(), 20, 4))
                 .build();
         LogbackExecutor.getInstance(mBuffer).enqueue(longLog);
     }
