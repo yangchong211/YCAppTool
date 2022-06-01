@@ -17,10 +17,6 @@
         <activity
             android:name=".crash.CrashTestActivity"
             android:screenOrientation="portrait"/>
-        <provider
-            android:name="com.yc.baseclasslib.manager.BaseProvider"
-            android:authorities="${applicationId}.baseProvider"
-            android:exported="false" />
     </application>
 
 </manifest>

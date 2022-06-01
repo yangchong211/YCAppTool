@@ -19,9 +19,6 @@ import java.io.File;
  */
 public class HttpUploadImpl extends BaseUploadLog {
 
-    public HttpUploadImpl(Context context) {
-        super(context);
-    }
 
     @Override
     protected void sendReport(File file, OnUploadListener onUploadListener) {

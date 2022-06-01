@@ -1,4 +1,4 @@
-package com.yc.baseclasslib.manager;
+package com.yc.activitymanager;
 /**
  * <pre>
  *     @author yangchong

@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.text.TextUtils;
 
-import com.yc.baseclasslib.manager.ActivityManager;
+import com.yc.activitymanager.ActivityManager;
 import com.yc.toollib.BuildConfig;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppUtils;

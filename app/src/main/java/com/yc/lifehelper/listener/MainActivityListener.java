@@ -3,7 +3,7 @@ package com.yc.lifehelper.listener;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.yc.baseclasslib.manager.ActivityLifecycleListener;
+import com.yc.activitymanager.ActivityLifecycleListener;
 
 
 public class MainActivityListener extends ActivityLifecycleListener {

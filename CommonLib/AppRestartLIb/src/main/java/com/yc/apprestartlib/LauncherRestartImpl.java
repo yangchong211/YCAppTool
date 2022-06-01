@@ -9,7 +9,7 @@ import android.content.pm.ResolveInfo;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.yc.baseclasslib.manager.ActivityManager;
+import com.yc.activitymanager.ActivityManager;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.List;

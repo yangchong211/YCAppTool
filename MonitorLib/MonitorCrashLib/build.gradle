@@ -49,4 +49,5 @@ dependencies {
     //是一个允许你在Android P(包括Q和R)之上不受任何限制地使用反射的库。
     implementation 'me.weishu:free_reflection:1.2.0'
     implementation project(path: ':AppRestartLib')
+    implementation project(path: ':ActivityManager')
 }

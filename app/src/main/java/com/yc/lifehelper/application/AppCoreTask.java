@@ -6,7 +6,7 @@ import android.util.Log;
 import com.yc.appprocesslib.AppStateMonitor;
 import com.yc.appprocesslib.StateListener;
 import com.yc.appstart.AppStartTask;
-import com.yc.baseclasslib.manager.ActivityManager;
+import com.yc.activitymanager.ActivityManager;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.library.utils.AppLogHelper;
 import com.yc.lifehelper.MainActivity;

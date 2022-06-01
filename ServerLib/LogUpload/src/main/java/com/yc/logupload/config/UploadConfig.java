@@ -1,8 +1,5 @@
 package com.yc.logupload.config;
 
-
-import android.content.Context;
-
 import com.yc.logupload.inter.IUploadLog;
 import com.yc.logupload.report.HttpUploadImpl;
 
@@ -22,7 +19,7 @@ public final class UploadConfig {
     /**
      * 网络上报接口
      */
-    private final String serverHost;
+    private final String serverUrl;
     /**
      * 总的文件大小限制
      */
@@ -48,8 +45,8 @@ public final class UploadConfig {
      */
     private final IUploadLog iUploadLog;
 
-    public String getServerHost() {
-        return serverHost;
+    public String getServerUrl() {
+        return serverUrl;
     }
 
     public long getTotalFileSize() {
@@ -77,9 +74,9 @@ public final class UploadConfig {
     }
 
     private UploadConfig(Builder builder) {
-        serverHost = builder.serverHost;
-        if(serverHost==null || serverHost.length()==0){
-            throw new NullPointerException("serverHost must be not null");
+        serverUrl = builder.serverUrl;
+        if(serverUrl ==null || serverUrl.length()==0){
+            throw new NullPointerException("serverUrl must be not null");
         }
         totalFileSize = builder.totalFileSize;
         maxFileSize = builder.maxFileSize;
@@ -94,7 +91,8 @@ public final class UploadConfig {
     }
 
     public static final class Builder {
-        private String serverHost;
+
+        private String serverUrl;
         private long totalFileSize = 50 * 1024 * 1024;
         private long maxFileSize = 5 * 1024 * 1024;
         private boolean debuggable;
@@ -106,8 +104,8 @@ public final class UploadConfig {
 
         }
 
-        public Builder serverHost(String serverHost) {
-            this.serverHost = serverHost;
+        public Builder serverUrl(String serverHost) {
+            this.serverUrl = serverHost;
             return this;
         }
 
@@ -141,9 +139,9 @@ public final class UploadConfig {
             return this;
         }
 
-        public UploadConfig build(Context context) {
+        public UploadConfig build() {
             if (iUploadLog == null){
-                iUploadLog = new HttpUploadImpl(context);
+                iUploadLog = new HttpUploadImpl();
             }
             return new UploadConfig(this);
         }

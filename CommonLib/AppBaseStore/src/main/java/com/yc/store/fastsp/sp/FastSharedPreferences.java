@@ -334,7 +334,8 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
 
     private static class FspCache extends SystemLruCache<String, FastSharedPreferences> {
 
-        private static final int DEFAULT_MAX_SIZE = (int) (Runtime.getRuntime().maxMemory() / 1024 / 16);
+        private static final int DEFAULT_MAX_SIZE =
+                (int) (Runtime.getRuntime().maxMemory() / 1024 / 16);
 
         public FspCache() {
             this(DEFAULT_MAX_SIZE);

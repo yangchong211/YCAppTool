@@ -2,6 +2,8 @@ package com.yc.logupload.inter;
 
 import android.content.Context;
 
+import com.yc.logupload.config.UploadInitHelper;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,13 +20,8 @@ import java.util.Locale;
  */
 public abstract class BaseUploadLog implements IUploadLog{
 
-    public Context mContext;
     public final static SimpleDateFormat mTime = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss:SS", Locale.getDefault());
-
-    public BaseUploadLog(Context context) {
-        mContext = context;
-    }
 
     /**
      * 发送报告
@@ -35,14 +32,14 @@ public abstract class BaseUploadLog implements IUploadLog{
 
     @Override
     public void uploadFile(final File file, final String content, final OnUploadListener onUploadListener) {
-        buildTitle(mContext);
+        buildTitle(UploadInitHelper.getContext());
         buildBody(content);
         sendReport(file, onUploadListener);
     }
 
     @Override
     public void uploadZipFile(File file, String content, OnUploadListener onUploadListener) {
-        buildTitle(mContext);
+        buildTitle(UploadInitHelper.getContext());
         buildBody(content);
         sendReport(file, onUploadListener);
     }

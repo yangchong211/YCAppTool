@@ -222,6 +222,7 @@ dependencies {
     implementation project(path: ':MonitorNetLib')
     implementation project(path: ':BannerViewLib')
     implementation project(path: ':BlurViewLib')
+    implementation project(path: ':ActivityManager')
 
     implementation project(path: ':ApplicationLib')
 

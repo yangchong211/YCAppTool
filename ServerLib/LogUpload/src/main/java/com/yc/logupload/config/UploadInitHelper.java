@@ -3,8 +3,6 @@ package com.yc.logupload.config;
 import android.app.Application;
 import android.content.Context;
 
-import com.yc.logupload.report.email.EmailConfig;
-
 /**
  * <pre>
  *     @author yangchong
@@ -18,7 +16,7 @@ public final class UploadInitHelper {
 
     private static boolean sInitial;
     private static UploadConfig sLoggerConfig;
-    private static EmailConfig sEmailConfig;
+    private static Context sContext;
 
     public synchronized static void init(Context context, UploadConfig config) {
         if (sInitial) {
@@ -26,12 +24,16 @@ public final class UploadInitHelper {
         }
         sInitial = true;
         sLoggerConfig = config;
-        Context appContext = context instanceof Application ?
+        sContext = context instanceof Application ?
                 context : context.getApplicationContext();
     }
 
     public static boolean isInitial() {
         return sInitial;
+    }
+
+    public static Context getContext() {
+        return sContext;
     }
 
     public static void setUploadConfig(UploadConfig config){
@@ -42,11 +44,4 @@ public final class UploadInitHelper {
         return sLoggerConfig;
     }
 
-    public static EmailConfig getEmailConfig() {
-        return sEmailConfig;
-    }
-
-    public static void setEmailConfig(EmailConfig sEmailConfig) {
-        UploadInitHelper.sEmailConfig = sEmailConfig;
-    }
 }

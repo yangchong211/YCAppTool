@@ -1,4 +1,4 @@
-package com.yc.baseclasslib.manager;
+package com.yc.activitymanager;
 
 import android.app.Activity;
 import android.app.Application;
