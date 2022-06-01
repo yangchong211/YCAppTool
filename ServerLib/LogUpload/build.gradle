@@ -1,4 +1,7 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 android {
@@ -33,8 +36,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["annotation"]
     implementation rootProject.ext.dependencies["okhttp"]
-    implementation rootProject.ext.dependencies["gson"]
+    implementation project(path: ':ActivityManager')
+    implementation project(path: ':ToolUtilsLib')
     implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.7'
+    implementation 'com.github.yangchong211.YCEfficient:AppProcessLib:1.3.1'
 }
