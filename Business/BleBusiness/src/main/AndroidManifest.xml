@@ -8,9 +8,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application>
-        <activity android:name="com.yc.blesample.BleMainActivity"/>
-        <activity android:name="com.yc.blesample.operation.OperationActivity" />
+        <activity android:name="com.yc.blesample.ble.BleMainActivity"/>
+        <activity android:name="com.yc.blesample.ble.operation.OperationActivity" />
         <activity android:name="com.yc.blesample.BleEasyActivity"/>
+        <activity android:name="com.yc.blesample.chat.base.BleChatActivity"/>
+        <activity android:name="com.yc.blesample.chat.client.DeviceActivity"/>
+        <activity android:name="com.yc.blesample.chat.chat.ChatActivity"/>
+        <activity android:name="com.yc.blesample.ble.BleDetailActivity"/>
     </application>
 
 </manifest>

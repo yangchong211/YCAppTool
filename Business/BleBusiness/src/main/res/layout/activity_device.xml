@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="蓝牙设备详情"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@id/tvBar"
+        android:background="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/tvDeviceNameHint"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/line"
+        android:gravity="center_vertical"
+        android:minWidth="100dp"
+        android:paddingLeft="10dp"
+        android:text="设备名：" />
+
+    <TextView
+        android:id="@+id/tvDeviceName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/line"
+        android:layout_toRightOf="@id/tvDeviceNameHint"
+        android:gravity="center_vertical"
+        android:minWidth="100dp"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:id="@+id/tvDeviceAddressHint"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvDeviceNameHint"
+        android:gravity="center_vertical"
+        android:minWidth="100dp"
+        android:paddingLeft="10dp"
+        android:text="MAC：" />
+
+    <TextView
+        android:id="@+id/tvDeviceAddress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvDeviceName"
+        android:layout_toRightOf="@id/tvDeviceAddressHint"
+        android:gravity="center_vertical"
+        android:minWidth="100dp"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:id="@+id/tvDeviceStateHint"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvDeviceAddressHint"
+        android:gravity="center_vertical"
+        android:minWidth="100dp"
+        android:paddingLeft="10dp"
+        android:text="连接状态：" />
+
+    <TextView
+        android:id="@+id/tvDeviceState"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvDeviceAddressHint"
+        android:layout_toRightOf="@id/tvDeviceStateHint"
+        android:gravity="center_vertical"
+        android:minWidth="100dp"
+        android:paddingLeft="10dp" />
+
+    <TextView
+        android:id="@+id/tvDeviceTypeHint"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvDeviceStateHint"
+        android:gravity="center_vertical"
+        android:minWidth="100dp"
+        android:paddingLeft="10dp"
+        android:text="类型：" />
+
+    <TextView
+        android:id="@+id/tvDeviceType"
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@id/tvDeviceTypeHint"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvDeviceStateHint"
+        android:gravity="center_vertical"
+        android:minWidth="100dp"
+        android:paddingLeft="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tvDeviceUUIDHint"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvDeviceTypeHint"
+        android:gravity="center_vertical"
+        android:minWidth="100dp"
+        android:paddingLeft="10dp"
+        android:text="UUID：" />
+
+    <TextView
+        android:id="@+id/tvDeviceUUID"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/tvDeviceUUIDHint"
+        android:layout_below="@id/tvDeviceTypeHint"
+        android:gravity="center_vertical"
+        android:minWidth="100dp"
+        android:paddingLeft="10dp" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvDeviceUUIDHint"
+        android:layout_margin="20dp"
+        android:text="连 接" />
+
+
+    <ListView
+        android:id="@+id/lvUUID"
+        android:layout_below="@id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

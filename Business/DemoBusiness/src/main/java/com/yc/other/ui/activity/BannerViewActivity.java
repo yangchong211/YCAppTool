@@ -133,7 +133,7 @@ public class BannerViewActivity extends BaseActivity {
         ArrayList<Integer> data = new ArrayList<>();
         TypedArray bannerImage = getResources().obtainTypedArray(R.array.image_girls);
         for (int i = 0; i < 12 ; i++) {
-            int image = bannerImage.getResourceId(i, R.drawable.girl2);
+            int image = bannerImage.getResourceId(i, R.drawable.bg_lake_min);
             data.add(image);
         }
         bannerImage.recycle();

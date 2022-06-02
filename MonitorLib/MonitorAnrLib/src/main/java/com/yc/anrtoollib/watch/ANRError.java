@@ -35,19 +35,22 @@ public class ANRError extends Error {
     }
 
     @NonNull
-    static ANRError New(long duration, @Nullable String prefix, boolean logThreadsWithoutStackTrace) {
+    public static ANRError New(long duration, @Nullable String prefix, boolean logThreadsWithoutStackTrace) {
         Looper mainLooper = Looper.getMainLooper();
         final Thread mainThread = mainLooper.getThread();
 
         final Map<Thread, StackTraceElement[]> stackTraces = new TreeMap<Thread, StackTraceElement[]>(new Comparator<Thread>() {
             @Override
             public int compare(Thread lhs, Thread rhs) {
-                if (lhs == rhs)
+                if (lhs == rhs) {
                     return 0;
-                if (lhs == mainThread)
+                }
+                if (lhs == mainThread) {
                     return 1;
-                if (rhs == mainThread)
+                }
+                if (rhs == mainThread) {
                     return -1;
+                }
                 return rhs.getName().compareTo(lhs.getName());
             }
         });
@@ -81,7 +84,7 @@ public class ANRError extends Error {
     }
 
     @NonNull
-    static ANRError NewMainOnly(long duration) {
+    public static ANRError NewMainOnly(long duration) {
         //通过mainLooper拿到主线程
         final Thread mainThread = Looper.getMainLooper().getThread();
         //通过主线程拿到现场的堆栈信息

@@ -2,26 +2,24 @@
 <resources>
 
     <string-array name="image_girls">
-        <item>@drawable/girl2</item>
-        <item>@drawable/girl3</item>
-        <item>@drawable/girl4</item>
-        <item>@drawable/girl5</item>
-        <item>@drawable/girl6</item>
-        <item>@drawable/girl7</item>
-        <item>@drawable/girl2</item>
-        <item>@drawable/girl9</item>
-        <item>@drawable/girl10</item>
-        <item>@drawable/girl11</item>
-        <item>@drawable/girl12</item>
-        <item>@drawable/girl4</item>
-        <item>@drawable/girl5</item>
-        <item>@drawable/girl6</item>
-        <item>@drawable/girl7</item>
-        <item>@drawable/girl2</item>
-        <item>@drawable/girl7</item>
-        <item>@drawable/girl2</item>
-        <item>@drawable/girl9</item>
-        <item>@drawable/girl10</item>
+        <item>@drawable/bg_lake_min</item>
+        <item>@drawable/bg_autumn_tree_min</item>
+        <item>@drawable/bg_kites_min</item>
+        <item>@drawable/bg_leaves_min</item>
+        <item>@drawable/bg_magnolia_trees_min</item>
+        <item>@drawable/bg_solda_min</item>
+        <item>@drawable/bg_stack_blur_default</item>
+        <item>@drawable/bg_tree_min</item>
+        <item>@drawable/bg_tulip_min</item>
+        <item>@drawable/bg_lake_min</item>
+        <item>@drawable/bg_autumn_tree_min</item>
+        <item>@drawable/bg_kites_min</item>
+        <item>@drawable/bg_leaves_min</item>
+        <item>@drawable/bg_magnolia_trees_min</item>
+        <item>@drawable/bg_solda_min</item>
+        <item>@drawable/bg_stack_blur_default</item>
+        <item>@drawable/bg_tree_min</item>
+        <item>@drawable/bg_tulip_min</item>
     </string-array>
 
 

@@ -118,7 +118,7 @@ public class GamePinTuLayout extends RelativeLayout implements View.OnClickListe
     @SuppressWarnings("ComparatorMethodParameterNotUsed")
     private void initBitmap() {
         if (mBitmap == null){
-            mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.girl10);
+            mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg_autumn_tree_min);
         }
         mItemBitmaps = split(mBitmap, mColumn);
         //对图片进行排序

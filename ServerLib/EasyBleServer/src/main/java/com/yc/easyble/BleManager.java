@@ -58,7 +58,7 @@ public final class BleManager {
     private BluetoothAdapter bluetoothAdapter;
     private MultipleBluetoothController multipleBluetoothController;
     /**
-     *
+     * 蓝牙管理者
      */
     private BluetoothManager bluetoothManager;
 
@@ -97,7 +97,10 @@ public final class BleManager {
             if (BleToolUtils.isSupportBle(app)) {
                 bluetoothManager = (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
             }
+            //方式一
             bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            //方式二
+            //bluetoothAdapter= bluetoothManager.getAdapter();
             multipleBluetoothController = new MultipleBluetoothController();
             bleScanRuleConfig = new BleScanRuleConfig();
         }

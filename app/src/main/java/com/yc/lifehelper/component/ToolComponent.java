@@ -6,15 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.yc.apploglib.AppLogHelper;
-import com.yc.blesample.BleMainActivity;
+import com.yc.blesample.ble.BleMainActivity;
 import com.yc.easy.demo.NetMainActivity;
-import com.yc.jetpack.study.navigation.NavigationActivity;
-import com.yc.jetpack.ui.activity.JetpackActivity;
 import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
-import com.yc.todoapplive.tasks.TasksLiveActivity;
 import com.yc.toolutils.click.FastClickUtils;
 import com.ycbjie.android.view.activity.AndroidActivity;
 import com.ycbjie.ycstatusbar.BarActivity;

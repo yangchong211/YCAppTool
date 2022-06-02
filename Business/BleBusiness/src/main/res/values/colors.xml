@@ -3,4 +3,9 @@
     <color name="colorPrimary">#1DE9B6</color>
     <color name="colorPrimaryDark">#1DE9B6</color>
     <color name="colorAccent">#FF5722</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorChatLeft">#ffffff</color>
+    <color name="colorChatRight">#008577</color>
+    <color name="colorBackground">#efefef</color>
 </resources>
