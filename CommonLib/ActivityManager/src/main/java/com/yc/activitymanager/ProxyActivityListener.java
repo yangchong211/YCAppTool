@@ -20,14 +20,16 @@ import java.util.Map;
  */
 public class ProxyActivityListener extends ActivityLifecycleListener {
 
-    private final Map<Class<Activity>, List<ActivityLifecycleListener>> mActivityLifecycleListeners = new HashMap<>();
+    private final Map<Class<Activity>, List<ActivityLifecycleListener>>
+            mActivityLifecycleListeners = new HashMap<>();
     private final ActivityManager mActivityManager;
 
     ProxyActivityListener(ActivityManager manager) {
         this.mActivityManager = manager;
     }
 
-    public void registerActivityLifecycleListener(Class<Activity> clazz, ActivityLifecycleListener lifecycleListener) {
+    public void registerActivityLifecycleListener(Class<Activity> clazz,
+                                                  ActivityLifecycleListener lifecycleListener) {
         if (clazz == null || lifecycleListener == null) {
             return;
         }

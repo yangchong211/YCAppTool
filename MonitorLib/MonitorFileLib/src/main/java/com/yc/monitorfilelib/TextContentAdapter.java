@@ -32,8 +32,8 @@ public class TextContentAdapter extends BaseRecycleAdapter<String> {
 
     @Override
     protected void bindData(BaseViewHolder holder, String s) {
-        TextView tv_name = holder.getView(R.id.tv_name);
-        tv_name.setText(s);
+        TextView tvName = holder.getView(R.id.tv_name);
+        tvName.setText(s);
     }
 
 }

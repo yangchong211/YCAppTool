@@ -178,17 +178,29 @@ public final class AppFileUtils {
      */
     public static List<File> getFileList(String path) {
         File file = new File(path);
-        List<File> mFileList = new ArrayList<>();
-        File[] fileArray = file.listFiles();
-        if (fileArray == null || fileArray.length <= 0) {
-            return mFileList;
-        }
-        for (File f : fileArray) {
-            if (f.isFile()) {
-                mFileList.add(f);
+        return getFileList(file);
+    }
+
+    /**
+     * 获取某个file对应的子file列表
+     *
+     * @param dir file文件
+     * @return
+     */
+    public static List<File> getFileList(File dir) {
+        List<File> fileList = new ArrayList<>();
+        if (dir.listFiles() != null) {
+            File[] files = dir.listFiles();
+            if (files == null || files.length <= 0) {
+                return fileList;
+            }
+            int length = files.length;
+            for (int i = 0; i < length; ++i) {
+                File file = files[i];
+                fileList.add(file);
             }
         }
-        return mFileList;
+        return fileList;
     }
 
     /**

@@ -96,7 +96,7 @@ public class ActivityManager implements IActivityManager<Activity> {
         if (mInit) {
             return;
         }
-        if (application == null){
+        if (application == null) {
             throw new NullPointerException("init activity manager , context must be null");
         }
         //注册全局监听
@@ -249,14 +249,15 @@ public class ActivityManager implements IActivityManager<Activity> {
      * 杀死进程操作，默认为异常退出
      * System.exit(0)是正常退出程序，而System.exit(1)或者说非0表示非正常退出程序
      * System.exit(1)一般放在catch块中，当捕获到异常，需要停止程序。这个status=1是用来表示这个程序是非正常退出。
-     *
+     * <p>
      * 为何要杀死进程：如果不主动退出进程，重启后会一直黑屏，所以加入主动杀掉进程
-     * @param isThrow                           是否是异常退出
+     *
+     * @param isThrow 是否是异常退出
      */
     public void killCurrentProcess(boolean isThrow) {
         //需要杀掉原进程，否则崩溃的app处于黑屏,卡死状态
         android.os.Process.killProcess(android.os.Process.myPid());
-        if (isThrow){
+        if (isThrow) {
             System.exit(10);
         } else {
             System.exit(0);
@@ -272,7 +273,8 @@ public class ActivityManager implements IActivityManager<Activity> {
      * @param excludeList 排除class列表
      * @return
      */
-    public List<Class> getActivitiesClass(Context context, String packageName, List<Class> excludeList) {
+    public List<Class> getActivitiesClass(Context context, String packageName,
+                                          List<Class> excludeList) {
         List<Class> returnClassList = new ArrayList<>();
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(
@@ -300,25 +302,27 @@ public class ActivityManager implements IActivityManager<Activity> {
     }
 
     /**
-     *
      * 判断activity是否处于栈顶
-     * @return  true在栈顶false不在栈顶
+     *
+     * @return true在栈顶false不在栈顶
      */
-    public boolean isActivityTop(Context context,String activityName){
-        if(TextUtils.isEmpty(activityName)){
+    public boolean isActivityTop(Context context, String activityName) {
+        if (TextUtils.isEmpty(activityName)) {
             return false;
         }
-        android.app.ActivityManager manager = (android.app.ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        if(manager.getRunningTasks(1)==null || (manager.getRunningTasks(1)!=null && manager.getRunningTasks(1).size()<=0)){
+        android.app.ActivityManager manager = (android.app.ActivityManager)
+                context.getSystemService(Context.ACTIVITY_SERVICE);
+        if (manager.getRunningTasks(1) == null || (manager.getRunningTasks(1)
+                != null && manager.getRunningTasks(1).size() <= 0)) {
             return false;
         }
-        if((manager.getRunningTasks(1).get(0)==null
-                || (manager.getRunningTasks(1).get(0)!=null
-                && manager.getRunningTasks(1).get(0).topActivity==null))){
+        if ((manager.getRunningTasks(1).get(0) == null
+                || (manager.getRunningTasks(1).get(0) != null
+                && manager.getRunningTasks(1).get(0).topActivity == null))) {
             return false;
         }
         String name = manager.getRunningTasks(1).get(0).topActivity.getClassName();
-        if(TextUtils.isEmpty(name)){
+        if (TextUtils.isEmpty(name)) {
             return false;
         }
         return name.equals(activityName);

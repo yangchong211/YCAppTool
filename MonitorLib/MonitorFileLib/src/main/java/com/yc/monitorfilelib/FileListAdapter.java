@@ -1,5 +1,6 @@
 package com.yc.monitorfilelib;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -23,7 +24,7 @@ import java.util.List;
 
 /**
  * <pre>
- *     author : 杨充
+ *     @author : 杨充
  *     email  : yangchong211@163.com
  *     time   : 2021/8/11
  *     desc   : 文件管理适配器
@@ -31,7 +32,7 @@ import java.util.List;
  * </pre>
  */
 public class FileListAdapter extends BaseRecycleAdapter<File> {
-    
+
 
     public FileListAdapter(Context context) {
         super(context, R.layout.item_list_file_view);
@@ -47,6 +48,7 @@ public class FileListAdapter extends BaseRecycleAdapter<File> {
 
         tvName.setText(file.getName());
         long fileTime = AppFileUtils.getFileTime(file);
+        @SuppressLint("SimpleDateFormat")
         String time = AppTimeUtils.date2String(new Date(fileTime),
                 new SimpleDateFormat("yyyy-MM-dd HH:mm"));
         tvDate.setText(time);
@@ -59,7 +61,7 @@ public class FileListAdapter extends BaseRecycleAdapter<File> {
                 ivIcon.setImageResource(R.drawable.sand_box_jpg_icon);
             } else if (FileExplorerUtils.getSuffix(file).equals("txt")) {
                 ivIcon.setImageResource(R.drawable.sand_box_txt_icon);
-            } else if (FileExplorerUtils.getSuffix(file).equals("db")) {
+            } else if (FileExplorerUtils.getSuffix(file).equals(FileExplorerUtils.DB)) {
                 ivIcon.setImageResource(R.drawable.sand_box_file_db);
             } else {
                 ivIcon.setImageResource(R.drawable.sand_box_file_icon);
@@ -67,7 +69,8 @@ public class FileListAdapter extends BaseRecycleAdapter<File> {
             ivMore.setVisibility(View.GONE);
             tvSize.setVisibility(View.VISIBLE);
             long directorySize = AppFileUtils.getDirectorySize(file);
-            SpannableString printSizeForSpannable = FileExplorerUtils.getPrintSizeForSpannable(directorySize);
+            SpannableString printSizeForSpannable =
+                    FileExplorerUtils.getPrintSizeForSpannable(directorySize);
             tvSize.setText(printSizeForSpannable);
         }
     }

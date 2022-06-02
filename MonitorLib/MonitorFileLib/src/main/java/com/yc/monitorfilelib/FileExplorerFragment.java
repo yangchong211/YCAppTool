@@ -3,13 +3,12 @@ package com.yc.monitorfilelib;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -19,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.eastadapterlib.OnItemLongClickListener;
+import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.AppWindowUtils;
 
@@ -27,6 +27,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
+
+import cn.ycbjie.ycthreadpoollib.PoolThread;
+import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;
 
 
 /**
@@ -87,10 +92,10 @@ public class FileExplorerFragment extends Fragment {
                     String path = mCurDir.getPath();
                     boolean copyToClipBoard = AppWindowUtils.copyToClipBoard(getContext(), path);
                     if (copyToClipBoard) {
-                        Toast.makeText(getContext(), "拷贝成功", Toast.LENGTH_SHORT).show();
+                        ToastUtils.showRoundRectToast("拷贝成功");
                     }
                 } else {
-                    Toast.makeText(getContext(), "当前为空", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("当前为空");
                 }
             }
         });
@@ -124,7 +129,7 @@ public class FileExplorerFragment extends Fragment {
                         mCurDir = fileInfo;
                         mTvTitle.setText(mCurDir.getName());
                         //拿到当前目录的列表数据
-                        setAdapterData(getFileInfos(mCurDir));
+                        setAdapterData(AppFileUtils.getFileList(mCurDir));
                     }
                 }
             }
@@ -152,31 +157,39 @@ public class FileExplorerFragment extends Fragment {
             builder.setPositiveButton("删除", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    //删除文件
-                    new Thread(new Runnable() {
+                    PoolThread executor = PoolThread.ThreadBuilder.createSingle().build();
+                    executor.setName("delete_file");
+                    //executor.setDelay(2, TimeUnit.SECONDS);
+                    // 启动异步任务
+                    executor.async(new Callable<Boolean>(){
                         @Override
-                        public void run() {
+                        public Boolean call() throws Exception {
                             File file = mFileList.get(position);
-                            boolean isDel = AppFileUtils.deleteDirectory(file);
+                            return AppFileUtils.deleteDirectory(file);
+                        }
+                    }, new AsyncCallback<Boolean>() {
+                        @Override
+                        public void onSuccess(Boolean isDel) {
+                            Log.e("PoolThreadAsyncCallback","成功");
                             if (isDel) {
-                                mRecyclerView.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(getContext(), "删除成功", Toast.LENGTH_SHORT).show();
-                                        mFileList.remove(position);
-                                        mFileInfoAdapter.notifyItemRemoved(position);
-                                    }
-                                });
+                                ToastUtils.showRoundRectToast("删除成功");
+                                mFileList.remove(position);
+                                mFileInfoAdapter.notifyItemRemoved(position);
                             } else {
-                                mRecyclerView.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(getContext(), "删除失败", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                                ToastUtils.showRoundRectToast("删除失败");
                             }
                         }
-                    }).start();
+
+                        @Override
+                        public void onFailed(Throwable t) {
+                            Log.e("PoolThreadAsyncCallback","失败");
+                        }
+
+                        @Override
+                        public void onStart(String threadName) {
+                            Log.e("PoolThreadAsyncCallback","开始");
+                        }
+                    });
                 }
             });
             builder.show();
@@ -203,20 +216,23 @@ public class FileExplorerFragment extends Fragment {
         }
     }
 
-    protected void onBackPressed() {
+    protected boolean onBackPressed() {
         if (mCurDir == null) {
             finish();
+            return true;
         } else if (isRootFile(getContext(), mCurDir)) {
             mTvTitle.setText("沙盒游览");
             setAdapterData(initRootFileInfo(getContext()));
             mCurDir = null;
+            return false;
         } else {
             mCurDir = mCurDir.getParentFile();
             if (mCurDir != null) {
                 mTvTitle.setText(mCurDir.getName());
-                List<File> fileInfos = getFileInfos(mCurDir);
+                List<File> fileInfos = AppFileUtils.getFileList(mCurDir);
                 setAdapterData(fileInfos);
             }
+            return false;
         }
     }
 
@@ -228,27 +244,6 @@ public class FileExplorerFragment extends Fragment {
         if (activity != null) {
             activity.doBack(this);
         }
-    }
-
-    /**
-     * 获取某个file对应的子file列表
-     *
-     * @param dir file文件
-     * @return
-     */
-    private List<File> getFileInfos(File dir) {
-        List<File> fileInfos = new ArrayList<>();
-        if (dir.listFiles() != null) {
-            File[] files = dir.listFiles();
-            if (files != null) {
-                int length = files.length;
-                for (int i = 0; i < length; ++i) {
-                    File file = files[i];
-                    fileInfos.add(file);
-                }
-            }
-        }
-        return fileInfos;
     }
 
     /**

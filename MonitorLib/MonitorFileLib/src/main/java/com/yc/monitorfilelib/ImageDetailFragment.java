@@ -25,6 +25,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.CompressUtils;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.file.FileShareUtils;
 
@@ -136,16 +138,16 @@ public class ImageDetailFragment extends Fragment {
                     //分享
                     boolean shareFile = FileShareUtils.shareFile(mActivity, destFile);
                     if (shareFile){
-                        Toast.makeText(getContext(), "文件分享成功", Toast.LENGTH_SHORT).show();
+                        ToastUtils.showRoundRectToast("文件ok");
                     } else {
-                        Toast.makeText(getContext(), "文件分享失败", Toast.LENGTH_SHORT).show();
+                        ToastUtils.showRoundRectToast("文件分享失败");
                     }
                 } else {
-                    Toast.makeText(getContext(), "文件保存失败", Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("文件保存失败");
                 }
             }
         } else {
-            Toast.makeText(getContext(), "file当前为空", Toast.LENGTH_SHORT).show();
+            ToastUtils.showRoundRectToast("file当前为空");
         }
     }
 
@@ -183,7 +185,7 @@ public class ImageDetailFragment extends Fragment {
 
         @Override
         protected Bitmap doInBackground(File... files) {
-            return decodeSampledBitmapFromFilePath(files[0].getPath(),
+            return CompressUtils.getSmallBitmap(files[0].getPath(),
                     1080, 1920);
         }
 
@@ -194,30 +196,6 @@ public class ImageDetailFragment extends Fragment {
                 mReference.get().mIvImageView.setImageBitmap(bitmap);
             }
         }
-    }
-
-    private static Bitmap decodeSampledBitmapFromFilePath(String imagePath, int reqWidth, int reqHeight) {
-        if (imagePath == null || imagePath.length() == 0) {
-            return null;
-        }
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(imagePath, options);
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(imagePath, options);
-    }
-
-    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-        if (height > reqHeight || width > reqWidth) {
-            final int heightRatio = Math.round((float) height / (float) reqHeight);
-            final int widthRatio = Math.round((float) width / (float) reqWidth);
-            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
-        }
-        return inSampleSize;
     }
 
 }
