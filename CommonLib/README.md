@@ -165,7 +165,7 @@
     ``` java
     RestartAppHelper.restartApp(this,RestartFactory.SERVICE);
     ```
-- 第二种方式，使用闹钟延时，然后重启app
+- 第二种方式，使用闹钟延时，使用PendingIntent延迟意图，然后重启app
     ``` java
     RestartAppHelper.restartApp(this,RestartFactory.ALARM);
     ```
@@ -176,6 +176,9 @@
 
 
 ### 08.通用工具类库
+- ToolUtils 是一个 Android 工具库。便于开发人员，快捷高效开发需求。
+- 常用的基本上都有，还包括图片压缩，日历事件，异常上报工具，网络，手机方向监听，防爆力点击等工具类。
+
 
 
 ### 09.通用基类封装库
