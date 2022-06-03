@@ -23,13 +23,21 @@ class CacheConfig private constructor(builder: Builder) {
     val isDebuggable: Boolean
 
     /**
-     * log路径
-     *
+     * log路径，通常这个缓存比较私有的内容
+     * 比如sp，mmkv，存储的用户数据
+     * 内部存储，举个例子：
+     * file:data/user/0/包名/files
+     * cache:/data/user/0/包名/cache
      */
     val logDir: String?
 
     /**
-     * 额外的log路径
+     * 额外的log路径，通常缓存一些不私密的内存
+     * 比如缓存图片，缓存视频，缓存下载文件，缓存日志等
+     *
+     * 外部存储根目录，举个例子
+     * files:/storage/emulated/0/Android/data/包名/files
+     * cache:/storage/emulated/0/Android/data/包名/cache
      */
     val extraLogDir: File?
 

@@ -19,6 +19,7 @@ object CacheInitHelper {
     private var config : CacheConfig?= null
     private var mmkvPath: String? = null
     private var filePath: String? = null
+    private var externalFilePath: String? = null
 
     @Synchronized
     fun init(config: CacheConfig?) {
@@ -27,13 +28,22 @@ object CacheInitHelper {
         }
         CacheInitHelper.config = config
         val logFile = config?.logDir
+        val extraFile = config?.extraLogDir
         if (logFile == null) {
-            filePath = AppFileUtils.getCacheFilePath(AppToolUtils.getApp(), "ycCache")
+            val cacheFiles = AppFileUtils.getCachePath(AppToolUtils.getApp())
+            filePath = cacheFiles +  File.separator + "ycCache"
+            //路径：/data/user/0/你的包名/cache/ycCache
         } else {
             filePath = logFile
         }
+        if (extraFile == null) {
+            val externalCacheFiles = AppFileUtils.getExternalCachePath(AppToolUtils.getApp())
+            externalFilePath = externalCacheFiles +  File.separator + "ycCache"
+            //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache
+        } else {
+            externalFilePath = logFile
+        }
         Log.d("CacheHelper : " , "file path : $filePath")
-        //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache
         //初始化腾讯mmkv
         mmkvPath = filePath + File.separator + "mmkv"
         //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache/mmkv
@@ -41,6 +51,12 @@ object CacheInitHelper {
         MMKV.initialize(mmkvPath)
     }
 
+    /**
+     * 获取mmkv设置的缓存路径，建议放到机身内存缓存文件
+     * 内部存储，举个例子：
+     * file:data/user/0/包名/files
+     * cache:/data/user/0/包名/cache
+     */
     fun getMmkvPath() : String{
         if (mmkvPath == null || mmkvPath?.length == 0){
             throw NullPointerException("please init store lib at fist")
@@ -48,10 +64,29 @@ object CacheInitHelper {
         return mmkvPath as String
     }
 
+    /**
+     * 获取该库机身内存文件的总路径
+     * 内部存储，举个例子：
+     * file:data/user/0/包名/files
+     * cache:/data/user/0/包名/cache
+     */
     fun getBaseCachePath() : String{
         if (filePath == null || filePath?.length == 0){
             throw NullPointerException("please init store lib at fist")
         }
         return filePath as String
+    }
+
+    /**
+     * 获取该库机身外部存储总路径
+     * 外部存储根目录，举个例子
+     * files:/storage/emulated/0/Android/data/包名/files
+     * cache:/storage/emulated/0/Android/data/包名/cache
+     */
+    fun getExternalCachePath() : String{
+        if (externalFilePath == null || externalFilePath?.length == 0){
+            throw NullPointerException("please init store lib at fist")
+        }
+        return externalFilePath as String
     }
 }

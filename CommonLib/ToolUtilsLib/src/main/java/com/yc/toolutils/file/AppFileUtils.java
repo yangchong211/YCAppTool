@@ -38,6 +38,10 @@ public final class AppFileUtils {
      * files-->存放一般文件
      * lib-->存放App依赖的so库 是软链接，指向/data/app/ 某个子目录下
      * shared_prefs-->存放SharedPreferences 文件
+     *
+     * 内部存储，举个例子：
+     * file:data/user/0/包名/files
+     * cache:/data/user/0/包名/cache
      */
     public static String getCachePath(Context context){
         File cacheDir = context.getCacheDir();
@@ -47,6 +51,11 @@ public final class AppFileUtils {
         return null;
     }
 
+    /**
+     * code_cache-->存放运行时代码优化等产生的缓存
+     * @param context       上下文
+     * @return              路径
+     */
     public static String getCodeCachePath(Context context){
         File cacheDir = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
@@ -58,6 +67,11 @@ public final class AppFileUtils {
         return null;
     }
 
+    /**
+     * files-->存放一般文件
+     * @param context       上下文
+     * @return              路径
+     */
     public static String getFilesPath(Context context){
         File filesDir = context.getFilesDir();
         if (filesDir!=null && filesDir.exists()){
@@ -71,9 +85,13 @@ public final class AppFileUtils {
     /**
      * 机身外部存储，/storage/emulated/0/
      * App外部私有目录
-     * /sdcard/Android/data/com.yc.helper
+     * /sdcard/Android/data/包名
      * cache-->存放缓存文件
      * files-->存放一般文件
+     *
+     * 外部存储根目录，举个例子
+     * files:/storage/emulated/0/Android/data/包名/files
+     * cache:/storage/emulated/0/Android/data/包名/cache
      */
     public static String getExternalCachePath(Context context){
         File cacheDir = context.getExternalCacheDir();
@@ -83,6 +101,12 @@ public final class AppFileUtils {
         return null;
     }
 
+    /**
+     * 获取外部存储根目录的files文件路径
+     * files:/storage/emulated/0/Android/data/包名/files
+     * @param context   上下文
+     * @return          路径
+     */
     public static String getExternalFilePath(Context context){
         File filesDir = context.getExternalFilesDir(null);
         if (filesDir!=null && filesDir.exists()){
@@ -90,6 +114,8 @@ public final class AppFileUtils {
         }
         return null;
     }
+
+    /*------------------------------------------------------------------------------------*/
 
     /**
      * 机身外部存储，/storage/emulated/0/
@@ -147,7 +173,7 @@ public final class AppFileUtils {
     }
 
     /**
-     * 获取app缓存路径
+     * 获取app缓存路径。优先使用外部存储空间
      * SDCard/Android/data/<application package>/cache
      * data/data/<application package>/cache
      *
