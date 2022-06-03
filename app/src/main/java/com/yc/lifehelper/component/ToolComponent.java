@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yc.blesample.ble.BleMainActivity;
+import com.yc.common.CommonActivity;
 import com.yc.easy.demo.NetMainActivity;
 import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
@@ -65,8 +66,9 @@ public class ToolComponent implements InterItemView {
                 case R.id.tv_tool4:
                     BleMainActivity.startActivity(context);
                     break;
-                //音视频播放器
+                //基础组件案例
                 case R.id.tv_tool5:
+                    CommonActivity.startActivity(context);
                     break;
                 case R.id.tv_tool6:
                     break;

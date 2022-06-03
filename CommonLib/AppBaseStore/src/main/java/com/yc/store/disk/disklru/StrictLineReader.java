@@ -1,5 +1,5 @@
 
-package com.yc.store.lru.disk;
+package com.yc.store.disk.disklru;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -82,6 +82,7 @@ public class StrictLineReader implements Closeable {
      *
      * @throws IOException for errors when closing the underlying {@code InputStream}.
      */
+    @Override
     public void close() throws IOException {
         synchronized (in) {
             if (buf != null) {

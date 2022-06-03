@@ -9,6 +9,7 @@ import com.yc.appstart.AppStartTask;
 import com.yc.activitymanager.ActivityManager;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.library.utils.AppLogHelper;
+import com.yc.lifehelper.BuildConfig;
 import com.yc.lifehelper.MainActivity;
 import com.yc.lifehelper.listener.MainActivityListener;
 import com.yc.localelib.listener.OnLocaleChangedListener;
@@ -18,6 +19,8 @@ import com.yc.longalive.ILongAliveLogger;
 import com.yc.longalive.ILongAliveMonitorToggle;
 import com.yc.longalive.LongAliveMonitor;
 import com.yc.longalive.LongAliveMonitorConfig;
+import com.yc.store.config.CacheConfig;
+import com.yc.store.config.CacheInitHelper;
 import com.yc.toolutils.AppToolUtils;
 import com.yc.toolutils.AppLogUtils;
 
@@ -42,6 +45,8 @@ public class AppCoreTask extends AppStartTask {
         initActivityManager();
         //前后台
         initAppProcess();
+        //初始化通用缓存方案
+        initAppCache();
         long end = System.currentTimeMillis();
         boolean isMainThread = (Looper.myLooper() == Looper.getMainLooper());
         AppLogUtils.i("app init 1 task core total time : " + (end-start)
@@ -129,6 +134,18 @@ public class AppCoreTask extends AppStartTask {
                 //ToastUtils.showRoundRectToast("后台");
             }
         });
+    }
+
+    private void initAppCache() {
+        CacheConfig.Builder builder = new CacheConfig.Builder();
+        builder.debuggable(BuildConfig.DEBUG)
+                .extraLogDir(null)
+                .maxCacheSize(100)
+                .setLogDir(null);
+        CacheConfig config = builder.build();
+        CacheInitHelper.INSTANCE.init(config);
+
+        //CacheInitHelper.INSTANCE.init(CacheConfig.Companion.newBuilder().build());
     }
 
 }

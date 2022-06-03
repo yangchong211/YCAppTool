@@ -1,21 +1,15 @@
-package com.yc.store.disk
+package com.yc.store.mmkv
 
 import android.util.Log
 import com.tencent.mmkv.MMKV
 import com.yc.store.ICacheable
+import com.yc.store.config.CacheInitHelper
 import java.io.File
 
-class DiskCacheImpl(var builder: Builder) : ICacheable {
+class MmkvCacheImpl(builder: Builder) : ICacheable {
 
     private var mmkv: MMKV = MMKV.mmkvWithID(builder.fileName) ?: MMKV.defaultMMKV()!!
     private var fileName: String? = builder.fileName
-
-    companion object {
-        var rootPath: String? = null
-        fun initRootPath(path: String) {
-            rootPath = MMKV.initialize(path)
-        }
-    }
 
     class Builder {
         var fileName: String? = null
@@ -24,8 +18,8 @@ class DiskCacheImpl(var builder: Builder) : ICacheable {
             return this
         }
 
-        fun build(): DiskCacheImpl {
-            return DiskCacheImpl(this)
+        fun build(): MmkvCacheImpl {
+            return MmkvCacheImpl(this)
         }
     }
 
@@ -79,14 +73,14 @@ class DiskCacheImpl(var builder: Builder) : ICacheable {
     }
 
     override fun clearData() {
-        File(rootPath, fileName).apply {
+        File(CacheInitHelper.getMmkvPath(), fileName).apply {
             if (exists()) {
                 Log.d("DiskCacheImpl","before fileSize:" +
                         "${this.length() / 1024}K,path:${this.absolutePath}")
             }
         }
         mmkv.clearAll()
-        File(rootPath, fileName).apply {
+        File(CacheInitHelper.getMmkvPath(), fileName).apply {
             if (exists()) {
                 Log.d("DiskCacheImpl","after fileSize:" +
                         "${this.length() / 1024}K,path:${this.absolutePath}")

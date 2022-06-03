@@ -1,13 +1,10 @@
 package com.yc.store.fastsp.sp;
 
-import android.content.Context;
 import android.os.FileObserver;
 import android.util.Log;
-
 import androidx.annotation.Nullable;
-
+import com.yc.store.config.CacheInitHelper;
 import com.yc.store.lru.cache.SystemLruCache;
-
 import java.io.File;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -28,14 +25,6 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
     private static final FspCache FSP_CACHE = new FspCache();
     //    private static final ExecutorService SYNC_EXECUTOR = Executors.newSingleThreadExecutor();
     private static final ExecutorService SYNC_EXECUTOR = Executors.newFixedThreadPool(4);
-    private static Context sContext = null;
-
-    public static void init(Context context) {
-        if (context == null) {
-            return;
-        }
-        sContext = context.getApplicationContext();
-    }
 
     public static void setMaxSize(int maxSize) {
         FSP_CACHE.resize(maxSize);
@@ -63,7 +52,11 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
         this.name = name;
         this.keyValueMap = new ConcurrentHashMap<>();
         reload();
-        observer = new DataChangeObserver(ReadWriteManager.getFilePath(sContext, name));
+        String logDir = CacheInitHelper.INSTANCE.getBaseCachePath() + File.separator + "fast";
+        String filePath = ReadWriteManager.getFilePath(logDir, name);
+        //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache/fast/fast_sp
+        Log.d("CacheHelper : " , "fast sp file path : " + filePath);
+        observer = new DataChangeObserver(filePath);
         observer.startWatching();
     }
 
@@ -152,7 +145,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
 
     private void reload() {
         Log.d(TAG, "reload data");
-        Object loadedData = new ReadWriteManager(sContext, name).read();
+        Object loadedData = new ReadWriteManager(name).read();
         this.keyValueMap.clear();
         if (loadedData != null) {
             this.keyValueMap.putAll((Map<? extends String, ?>) loadedData);
@@ -160,7 +153,9 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
     }
 
     private int sizeOf() {
-        File file = new File(ReadWriteManager.getFilePath(sContext, name));
+        String logDir = CacheInitHelper.INSTANCE.getBaseCachePath();
+        String filePath = ReadWriteManager.getFilePath(logDir, name);
+        File file = new File(filePath);
         if (!file.exists()) {
             return 0;
         }
@@ -272,7 +267,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
                 //把needSync置为false，如果在此之后有数据写入，则需要重新同步
                 needSync.compareAndSet(true, false);
                 observer.stopWatching();
-                ReadWriteManager manager = new ReadWriteManager(sContext, name);
+                ReadWriteManager manager = new ReadWriteManager(name);
                 manager.write(storeMap);
                 //解除同步过程
                 syncing.compareAndSet(true, false);

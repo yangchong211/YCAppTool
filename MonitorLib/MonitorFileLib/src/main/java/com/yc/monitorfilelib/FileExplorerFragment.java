@@ -173,8 +173,9 @@ public class FileExplorerFragment extends Fragment {
                             Log.e("PoolThreadAsyncCallback","成功");
                             if (isDel) {
                                 ToastUtils.showRoundRectToast("删除成功");
-                                mFileList.remove(position);
-                                mFileInfoAdapter.notifyItemRemoved(position);
+                                mFileInfoAdapter.remove(position);
+                                //mFileList.remove(position);
+                                //mFileInfoAdapter.notifyItemRemoved(position);
                             } else {
                                 ToastUtils.showRoundRectToast("删除失败");
                             }

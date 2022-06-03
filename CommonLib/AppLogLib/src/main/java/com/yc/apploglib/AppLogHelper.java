@@ -17,6 +17,10 @@ public final class AppLogHelper {
     /**
      * Verbose
      */
+    public static void v(String tag, Object message) {
+        AppLogFactory.sLogDispatcher.v(tag, message.toString());
+    }
+
     public static void v(String format, Object... args) {
         v(AppLogFactory.getAppLogConfig().getTag(), format, args);
     }
@@ -32,6 +36,10 @@ public final class AppLogHelper {
     /**
      * Debug
      */
+    public static void d(String tag, Object message) {
+        AppLogFactory.sLogDispatcher.d(tag, message.toString());
+    }
+
     public static void d(String format, Object... args) {
         d(AppLogFactory.getAppLogConfig().getTag(), format, args);
     }
@@ -47,6 +55,10 @@ public final class AppLogHelper {
     /**
      * INFO.
      */
+    public static void i(String tag, Object message) {
+        AppLogFactory.sLogDispatcher.i(tag, message.toString());
+    }
+
     public static void i(String format, Object... args) {
         i(AppLogFactory.getAppLogConfig().getTag(), format, args);
     }
@@ -62,6 +74,10 @@ public final class AppLogHelper {
     /**
      * WARN.
      */
+    public static void w(String tag, Object message) {
+        AppLogFactory.sLogDispatcher.w(tag, message.toString());
+    }
+
     public static void w(String format, Object... args) {
         w(AppLogFactory.getAppLogConfig().getTag(), format, args);
     }
@@ -81,6 +97,10 @@ public final class AppLogHelper {
     /**
      * ERROR.
      */
+    public static void e(String tag, Object message) {
+        AppLogFactory.sLogDispatcher.e(tag, message.toString());
+    }
+
     public static void e(String format, Object... args) {
         e(AppLogFactory.getAppLogConfig().getTag(), format, args);
     }
@@ -100,6 +120,10 @@ public final class AppLogHelper {
     /**
      * ASSERT
      */
+    public static void wtf(String tag, Object message) {
+        AppLogFactory.sLogDispatcher.wtf(tag, message.toString());
+    }
+
     public static void wtf(String tag, String format, Object... args) {
         AppLogFactory.sLogDispatcher.wtf(tag, format, args);
     }

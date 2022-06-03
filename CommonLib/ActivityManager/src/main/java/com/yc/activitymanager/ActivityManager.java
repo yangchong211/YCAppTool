@@ -92,6 +92,11 @@ public class ActivityManager implements IActivityManager<Activity> {
         return null;
     }
 
+    /**
+     * 初始化操作
+     *
+     * @param application 全局上下文
+     */
     protected void init(Application application) {
         if (mInit) {
             return;
@@ -152,6 +157,12 @@ public class ActivityManager implements IActivityManager<Activity> {
         mProxyActivityListener.registerActivityLifecycleListener(clazz, lifecycleListener);
     }
 
+    /**
+     * 解绑注册activity的声明周期变换
+     *
+     * @param clazz             目标activity
+     * @param lifecycleListener 对应的监听器
+     */
     @Override
     public void unregisterActivityLifecycleListener(Class clazz,
                                                     ActivityLifecycleListener lifecycleListener) {

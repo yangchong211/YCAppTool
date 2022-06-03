@@ -8,7 +8,6 @@ class FastSpCacheImpl : ICacheable {
     private var sp: FastSharedPreferences? = null
 
     init {
-        FastSharedPreferences.init(null)
         sp = FastSharedPreferences.get("fast_sp")
     }
 

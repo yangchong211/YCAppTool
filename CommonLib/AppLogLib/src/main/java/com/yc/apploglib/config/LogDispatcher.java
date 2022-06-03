@@ -72,10 +72,31 @@ public final class LogDispatcher {
         return false;
     }
 
-    private void println(
-            int level, String tag, String format, Throwable tr, Object... args) {
-        final String msg = genMsg(format, args);
+    /**
+     * 这个是普通的日志
+     *
+     * @param level
+     * @param tag
+     * @param msg
+     * @param tr
+     */
+    private void println(int level, String tag, String msg, Throwable tr) {
+        for (AbsPrinter printer : sPrinters) {
+            printer.println(level, tag, msg, tr);
+        }
+    }
 
+    /**
+     * 这个是带有format格式化的日志
+     *
+     * @param level
+     * @param tag
+     * @param format
+     * @param tr
+     * @param args
+     */
+    private void println(int level, String tag, String format, Throwable tr, Object... args) {
+        final String msg = genMsg(format, args);
         for (AbsPrinter printer : sPrinters) {
             printer.println(level, tag, msg, tr);
         }
@@ -99,6 +120,13 @@ public final class LogDispatcher {
     /**
      * verbose. lowest level.
      */
+    public void v(String tag, String message) {
+        if (!isLoggable(VERBOSE)) {
+            return;
+        }
+        println(VERBOSE, tag, message, null);
+    }
+
     public void v(String tag, String format, Object... args) {
         if (!isLoggable(VERBOSE)) {
             return;
@@ -120,6 +148,13 @@ public final class LogDispatcher {
      * DEBUG.
      * 发布版手动创建日志目录，不会记录到文件
      */
+    public void d(String tag, String message) {
+        if (!isLoggable(DEBUG)) {
+            return;
+        }
+        println(DEBUG, tag, message, null);
+    }
+
     public void d(String tag, String format, Object... args) {
         if (!isLoggable(DEBUG)) {
             return;
@@ -137,6 +172,13 @@ public final class LogDispatcher {
     /**
      * INFO.
      */
+    public void i(String tag, String message) {
+        if (!isLoggable(INFO)) {
+            return;
+        }
+        println(INFO, tag, message, null);
+    }
+
     public void i(String tag, String format, Object... args) {
         if (!isLoggable(INFO)) {
             return;
@@ -154,6 +196,13 @@ public final class LogDispatcher {
     /**
      * WARN.
      */
+    public void w(String tag, String message) {
+        if (!isLoggable(WARN)) {
+            return;
+        }
+        println(WARN, tag, message, null);
+    }
+
     public void w(String tag, String format, Object... args) {
         if (!isLoggable(WARN)) {
             return;
@@ -178,6 +227,13 @@ public final class LogDispatcher {
     /**
      * ERROR.
      */
+    public void e(String tag, String message) {
+        if (!isLoggable(ERROR)) {
+            return;
+        }
+        println(ERROR, tag, message, null);
+    }
+
     public void e(String tag, String format, Object... args) {
         if (!isLoggable(ERROR)) {
             return;
@@ -202,6 +258,13 @@ public final class LogDispatcher {
     /**
      * ASSERT
      */
+    public void wtf(String tag, String message) {
+        if (!isLoggable(ASSERT)) {
+            return;
+        }
+        println(ASSERT, tag, message, null);
+    }
+
     public void wtf(String tag, String format, Object... args) {
         if (!isLoggable(ASSERT)) {
             return;

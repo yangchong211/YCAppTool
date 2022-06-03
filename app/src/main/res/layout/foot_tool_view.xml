@@ -51,7 +51,7 @@
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_first"
-            android:text="" />
+            android:text="基础组件案例" />
         <TextView
             android:id="@+id/tv_tool6"
             style="@style/WeightAttr"

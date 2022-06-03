@@ -32,16 +32,30 @@ public class AppDelayTask extends AppStartTask {
         }catch (Exception e){
             e.printStackTrace();
         }
-        AppLogConfig config = new AppLogConfig.Builder()
-                .enableDbgLog(true)
-                .minLogLevel(Log.VERBOSE)
-                .isWriteFile(true)
-                .build();
-        AppLogFactory.init(config);
+        initAppLog();
         long end = System.currentTimeMillis();
         boolean isMainThread = (Looper.myLooper() == Looper.getMainLooper());
         AppLogUtils.i("app init 3 task delay total time : " + (end-start)
                 + " ; 线程是否是主线程" + isMainThread);
+    }
+
+    private void initAppLog() {
+
+        String ycLogPath = AppFileUtils.getCacheFilePath(MainApplication.getInstance(), "ycLog");
+        AppLogConfig config = new AppLogConfig.Builder()
+                //设置日志tag总的标签
+                .setLogTag("yc")
+                //是否将log日志写到文件
+                .isWriteFile(true)
+                //是否是debug
+                .enableDbgLog(true)
+                //设置日志最小级别
+                .minLogLevel(Log.VERBOSE)
+                //设置输出日志到file文件的路径。前提是将log日志写入到文件设置成true
+                .setFilePath(ycLogPath)
+                .build();
+        //配置
+        AppLogFactory.init(config);
     }
 
     @Override

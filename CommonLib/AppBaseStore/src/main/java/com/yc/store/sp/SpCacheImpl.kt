@@ -3,14 +3,14 @@ package com.yc.store.sp
 import android.content.Context
 import android.content.SharedPreferences
 import com.yc.store.ICacheable
-import com.yc.store.StoreToolHelper
+import com.yc.toolutils.AppToolUtils
 
 class SpCacheImpl : ICacheable {
 
     private var sp: SharedPreferences? = null
 
     init {
-        sp = StoreToolHelper.app?.getSharedPreferences("sp", Context.MODE_PRIVATE)
+        sp = AppToolUtils.getApp()?.getSharedPreferences("sp", Context.MODE_PRIVATE)
     }
 
     override fun saveInt(key: String, value: Int) {
