@@ -23,6 +23,7 @@ object CacheInitHelper {
     private var mmkvPath: String? = null
     private var filePath: String? = null
     private var externalFilePath: String? = null
+    private var maxLruSize: Int? = null
 
     @Synchronized
     fun init(context: Application,config: CacheConfig?) {
@@ -47,6 +48,7 @@ object CacheInitHelper {
         } else {
             externalFilePath = logFile
         }
+        maxLruSize = config?.maxCacheSize
         Log.d("CacheHelper : " , "file path : $filePath")
         //初始化腾讯mmkv
         mmkvPath = filePath + File.separator + "mmkv"
@@ -92,5 +94,15 @@ object CacheInitHelper {
             throw NullPointerException("please init store lib at fist")
         }
         return externalFilePath as String
+    }
+
+    /**
+     * 获取最大lru缓存大小
+     */
+    fun getMaxLruSize() : Int{
+        if (maxLruSize == null){
+            maxLruSize = 100
+        }
+        return maxLruSize as Int
     }
 }

@@ -23,16 +23,16 @@ public class DiskLruCacheHelper {
     private static final int APP_VERSION = 1;
     private static final int VALUE_COUNT = 1;
     private DiskLruCache diskLruCache;
-    private static final int maxSize = 100;
     private final DiskCacheWriteLocker writeLocker = new DiskCacheWriteLocker();
 
     private synchronized DiskLruCache getDiskCache() throws IOException {
         if (diskLruCache == null) {
             String baseCachePath = CacheInitHelper.INSTANCE.getBaseCachePath();
+            int maxLruSize = CacheInitHelper.INSTANCE.getMaxLruSize();
             File directory = new File(baseCachePath + File.separator + "disk");
             Log.d("CacheHelper : " , "lru disk file path : " + directory.getPath());
             //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache/disk
-            diskLruCache = DiskLruCache.open(directory, APP_VERSION, VALUE_COUNT, maxSize);
+            diskLruCache = DiskLruCache.open(directory, APP_VERSION, VALUE_COUNT, maxLruSize);
         }
         return diskLruCache;
     }
