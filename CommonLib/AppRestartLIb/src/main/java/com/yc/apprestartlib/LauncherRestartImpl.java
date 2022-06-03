@@ -32,8 +32,10 @@ public class LauncherRestartImpl implements IRestartApp {
         Activity activity = ActivityManager.getInstance().peek();
         Class<? extends Activity> clazz = guessRestartActivityClass(activity);
         AppLogUtils.w("IRestartApp:", "restart app launcher " + packageName + " " + clazz);
-        Intent intent = new Intent(activity, clazz);
-        restartApplicationWithIntent(activity, intent);
+        if (clazz != null) {
+            Intent intent = new Intent(activity, clazz);
+            restartApplicationWithIntent(context, intent, false);
+        }
     }
 
     @Nullable
@@ -71,7 +73,9 @@ public class LauncherRestartImpl implements IRestartApp {
         Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
         if (intent != null && intent.getComponent() != null) {
             try {
-                return (Class<? extends Activity>) Class.forName(intent.getComponent().getClassName());
+                String className = intent.getComponent().getClassName();
+                AppLogUtils.w("IRestartApp:", "restart app launcher , get launcher " + className);
+                return (Class<? extends Activity>) Class.forName(className);
             } catch (ClassNotFoundException e) {
                 AppLogUtils.e(e.getLocalizedMessage());
             }
@@ -80,7 +84,7 @@ public class LauncherRestartImpl implements IRestartApp {
     }
 
 
-    private static void restartApplicationWithIntent(@NonNull Activity activity, @NonNull Intent intent) {
+    private static void restartApplicationWithIntent(Context context, Intent intent, final boolean isKillProcess) {
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK |
@@ -94,9 +98,11 @@ public class LauncherRestartImpl implements IRestartApp {
             intent.setAction(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
         }
-        activity.startActivity(intent);
-        //activity.finish();
-        ActivityManager.getInstance().killCurrentProcess(true);
+        context.startActivity(intent);
+        if (!isKillProcess) {
+            return;
+        }
+        ActivityManager.getInstance().killCurrentProcess(false);
     }
 
 
