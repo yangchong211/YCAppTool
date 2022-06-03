@@ -33,6 +33,17 @@ class LruMemoryCacheImpl : ICacheable {
         return default
     }
 
+    override fun saveDouble(key: String, value: Double) {
+        cache?.put(key, value)
+    }
+
+    override fun readDouble(key: String, default: Double): Double {
+        if (cache != null) {
+            cache?.get(key) as Double
+        }
+        return default
+    }
+
     override fun saveLong(key: String, value: Long) {
         cache?.put(key, value)
     }

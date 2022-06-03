@@ -1,7 +1,10 @@
 package com.yc.store.config
 
+import android.app.Application
+import android.content.Context
 import android.util.Log
 import com.tencent.mmkv.MMKV
+import com.yc.store.StoreToolHelper
 import com.yc.toolutils.AppToolUtils
 import com.yc.toolutils.file.AppFileUtils
 import java.io.File
@@ -22,10 +25,11 @@ object CacheInitHelper {
     private var externalFilePath: String? = null
 
     @Synchronized
-    fun init(config: CacheConfig?) {
+    fun init(context: Application,config: CacheConfig?) {
         if (config == null){
             this.config = CacheConfig.newBuilder().build()
         }
+        StoreToolHelper.instance.setApp(context)
         CacheInitHelper.config = config
         val logFile = config?.logDir
         val extraFile = config?.extraLogDir

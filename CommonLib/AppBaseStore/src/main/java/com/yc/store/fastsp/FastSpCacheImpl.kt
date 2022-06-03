@@ -28,6 +28,14 @@ class FastSpCacheImpl : ICacheable {
         return sp?.getFloat(key, default) ?: 0f
     }
 
+    override fun saveDouble(key: String, value: Double) {
+        sp?.edit()?.putFloat(key, value.toFloat())?.apply()
+    }
+
+    override fun readDouble(key: String, default: Double): Double {
+        return sp?.getFloat(key, default.toFloat())?.toDouble() ?: 0.0
+    }
+
     override fun saveLong(key: String, value: Long) {
         sp?.edit()?.putLong(key, value)?.apply()
     }

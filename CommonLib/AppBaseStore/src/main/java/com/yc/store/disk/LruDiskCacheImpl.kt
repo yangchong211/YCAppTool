@@ -26,6 +26,15 @@ class LruDiskCacheImpl : ICacheable {
         return AppNumberUtils.convertToFloat(value, default)
     }
 
+    override fun saveDouble(key: String, value: Double) {
+        diskLruCacheHelper.put(key, value)
+    }
+
+    override fun readDouble(key: String, default: Double): Double {
+        val value = diskLruCacheHelper.get(key)
+        return AppNumberUtils.convertToDouble(value, default)
+    }
+
     override fun saveLong(key: String, value: Long) {
         diskLruCacheHelper.put(key, value)
     }

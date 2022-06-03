@@ -11,9 +11,10 @@ import com.yc.toolutils.AppLogUtils;
 /**
  * <pre>
  *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     time  : 2018/5/6
- *     desc  : 重启开启app
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 重启APP接口，使用service方式重启实现
  *     revise:
  * </pre>
  */

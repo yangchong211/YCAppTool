@@ -14,13 +14,24 @@ import com.yc.toolutils.AppLogUtils;
 
 import java.util.List;
 
-public class LauncherRestartImpl implements IRestartApp{
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 重启APP接口，使用launcher方式重启实现
+ *     revise:
+ * </pre>
+ */
+public class LauncherRestartImpl implements IRestartApp {
+
     @Override
-    public void reStartApp(Context context) {
+    public void restartApp(Context context) {
         String packageName = context.getPackageName();
         Activity activity = ActivityManager.getInstance().peek();
         Class<? extends Activity> clazz = guessRestartActivityClass(activity);
-        AppLogUtils.w("LauncherRestartImpl", "reStartApp--- 用来重启本APP--3-"+packageName + "--"+clazz);
+        AppLogUtils.w("IRestartApp:", "restart app launcher " + packageName + " " + clazz);
         Intent intent = new Intent(activity, clazz);
         restartApplicationWithIntent(activity, intent);
     }
@@ -70,6 +81,7 @@ public class LauncherRestartImpl implements IRestartApp{
 
 
     private static void restartApplicationWithIntent(@NonNull Activity activity, @NonNull Intent intent) {
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK |
                 Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
@@ -83,7 +95,7 @@ public class LauncherRestartImpl implements IRestartApp{
             intent.addCategory(Intent.CATEGORY_LAUNCHER);
         }
         activity.startActivity(intent);
-        activity.finish();
+        //activity.finish();
         ActivityManager.getInstance().killCurrentProcess(true);
     }
 

@@ -24,6 +24,14 @@ open class BaseDataCache : ICacheable {
         return cacheImpl.readFloat(key, default)
     }
 
+    override fun saveDouble(key: String, value: Double) {
+        cacheImpl.saveDouble(key, value)
+    }
+
+    override fun readDouble(key: String, default: Double): Double {
+        return cacheImpl.readDouble(key, default)
+    }
+
     override fun saveLong(key: String, value: Long) {
         cacheImpl.saveLong(key, value)
     }

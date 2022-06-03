@@ -124,6 +124,46 @@
             android:text="disk清除"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_restart1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="使用服务重启APP"/>
+        <Button
+            android:id="@+id/btn_restart2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="使用闹钟重启App"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_restart3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="3"/>
+        <Button
+            android:id="@+id/btn_restart4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="4"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/btn_3"
         android:layout_width="wrap_content"

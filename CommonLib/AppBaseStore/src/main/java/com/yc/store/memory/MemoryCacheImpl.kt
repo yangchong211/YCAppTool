@@ -23,6 +23,14 @@ class MemoryCacheImpl : ICacheable {
         return dataSource[key] as Float
     }
 
+    override fun saveDouble(key: String, value: Double) {
+        dataSource[key] = value
+    }
+
+    override fun readDouble(key: String, default: Double): Double {
+        return dataSource[key] as Double
+    }
+
     override fun saveLong(key: String, value: Long) {
         dataSource[key] = value
     }

@@ -25,7 +25,7 @@ class CacheConfig private constructor(builder: Builder) {
     /**
      * log路径，通常这个缓存比较私有的内容
      * 比如sp，mmkv，存储的用户数据
-     * 内部存储，举个例子：
+     * 内部存储根目录，举个例子：
      * file:data/user/0/包名/files
      * cache:/data/user/0/包名/cache
      */

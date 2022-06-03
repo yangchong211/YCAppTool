@@ -40,6 +40,14 @@ class MmkvCacheImpl(builder: Builder) : ICacheable {
         return mmkv.decodeFloat(key, default)
     }
 
+    override fun saveDouble(key: String, value: Double) {
+        mmkv.encode(key, value)
+    }
+
+    override fun readDouble(key: String, default: Double): Double {
+        return mmkv.decodeDouble(key, default)
+    }
+
     override fun saveLong(key: String, value: Long) {
         mmkv.encode(key, value)
     }

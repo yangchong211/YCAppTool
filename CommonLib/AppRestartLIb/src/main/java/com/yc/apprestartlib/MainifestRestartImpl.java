@@ -9,23 +9,30 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.yc.activitymanager.ActivityManager;
+
 import java.util.List;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 重启APP接口，使用清单文件方式重启实现
+ *     revise:
+ * </pre>
+ */
 public class MainifestRestartImpl implements IRestartApp {
 
     @Override
-    public void reStartApp(Context context) {
-        relaunchApp(context,false);
+    public void restartApp(Context context) {
+        relaunchApp(context,true);
     }
 
-    /**
-     * Relaunch the application.
-     *
-     * @param context
-     * @param isKillProcess True to kill the process, false otherwise.
-     */
     public static void relaunchApp(Context context, final boolean isKillProcess) {
-        Intent intent = getLaunchAppIntent(context,context.getApplicationContext().getPackageName(), true);
+        String packageName = context.getApplicationContext().getPackageName();
+        Intent intent = getLaunchAppIntent(context,packageName, true);
         if (intent == null) {
             Log.e("AppUtils", "Didn't exist launcher activity.");
             return;
@@ -38,8 +45,7 @@ public class MainifestRestartImpl implements IRestartApp {
         if (!isKillProcess) {
             return;
         }
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(0);
+        ActivityManager.getInstance().killCurrentProcess(false);
     }
 
 

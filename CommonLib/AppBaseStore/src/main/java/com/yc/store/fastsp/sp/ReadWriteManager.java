@@ -1,6 +1,5 @@
 package com.yc.store.fastsp.sp;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.yc.store.config.CacheInitHelper;
@@ -10,12 +9,10 @@ import java.io.BufferedOutputStream;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.util.HashMap;

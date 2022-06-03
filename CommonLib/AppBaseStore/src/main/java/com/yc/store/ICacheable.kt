@@ -10,6 +10,10 @@ interface ICacheable {
 
     fun readFloat(key: String, default: Float = 0F): Float
 
+    fun saveDouble(key: String, value: Double)
+
+    fun readDouble(key: String, default: Double = 0.0): Double
+
     fun saveLong(key: String, value: Long)
 
     fun readLong(key: String, default: Long = 0L): Long

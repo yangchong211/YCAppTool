@@ -15,13 +15,16 @@ import com.yc.activitymanager.ActivityManager;
 import com.yc.apploglib.AppLogHelper;
 import com.yc.apploglib.config.AppLogFactory;
 import com.yc.apploglib.printer.AbsPrinter;
-import com.yc.common.cache.CacheToolHelper;
+import com.yc.apprestartlib.IRestartApp;
+import com.yc.apprestartlib.RestartAppHelper;
+import com.yc.apprestartlib.RestartFactory;
+import com.yc.store.StoreToolHelper;
 import com.yc.store.BaseDataCache;
 import com.yc.toolutils.AppUtils;
 
 public class CommonActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private BaseDataCache spCache;
+    private BaseDataCache dataCache;
     private BaseDataCache mmkvCache;
     private BaseDataCache memoryCache;
     private BaseDataCache lruMemoryCache;
@@ -53,12 +56,12 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void initCache() {
-        spCache = CacheToolHelper.getInstance().getSpCache();
-        mmkvCache = CacheToolHelper.getInstance().getMkkvDiskCache();
-        memoryCache = CacheToolHelper.getInstance().getMemoryCache();
-        lruMemoryCache = CacheToolHelper.getInstance().getLruMemoryCache();
-        lruDiskCache = CacheToolHelper.getInstance().getLruDiskCache();
-        fastSpCache = CacheToolHelper.getInstance().getFastSpCache();
+        dataCache = StoreToolHelper.getInstance().getSpCache();
+        mmkvCache = StoreToolHelper.getInstance().getMmkvDiskCache();
+        memoryCache = StoreToolHelper.getInstance().getMemoryCache();
+        lruMemoryCache = StoreToolHelper.getInstance().getLruMemoryCache();
+        lruDiskCache = StoreToolHelper.getInstance().getLruDiskCache();
+        fastSpCache = StoreToolHelper.getInstance().getFastSpCache();
     }
 
     private void init() {
@@ -77,6 +80,11 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_disk1).setOnClickListener(this);
         findViewById(R.id.btn_disk2).setOnClickListener(this);
         findViewById(R.id.btn_disk3).setOnClickListener(this);
+
+        findViewById(R.id.btn_restart1).setOnClickListener(this);
+        findViewById(R.id.btn_restart2).setOnClickListener(this);
+        findViewById(R.id.btn_restart3).setOnClickListener(this);
+        findViewById(R.id.btn_restart4).setOnClickListener(this);
 
         findViewById(R.id.btn_3).setOnClickListener(this);
         findViewById(R.id.btn_4).setOnClickListener(this);
@@ -112,6 +120,14 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
             disk2();
         } else if (id == R.id.btn_disk3) {
             disk3();
+        } else if (id == R.id.btn_restart1) {
+            RestartAppHelper.restartApp(this,RestartFactory.SERVICE);
+        }else if (id == R.id.btn_restart2) {
+            RestartAppHelper.restartApp(this,RestartFactory.ALARM);
+        }else if (id == R.id.btn_restart3) {
+            RestartAppHelper.restartApp(this,RestartFactory.LAUNCHER);
+        }else if (id == R.id.btn_restart4) {
+            RestartAppHelper.restartApp(this,RestartFactory.MAINIFEST);
         }else if (id == R.id.btn_3) {
 
         } else if (id == R.id.btn_4) {
@@ -187,24 +203,27 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void sp1() {
-        spCache.saveBoolean("spkey1",true);
-        spCache.saveFloat("spkey2",2.0f);
-        spCache.saveInt("spkey3",3);
-        spCache.saveLong("spkey4",4);
-        spCache.saveString("spkey5","doubi5");
+        dataCache.saveBoolean("cacheKey1",true);
+        dataCache.saveFloat("cacheKey2",2.0f);
+        dataCache.saveInt("cacheKey3",3);
+        dataCache.saveLong("cacheKey4",4);
+        dataCache.saveString("cacheKey5","doubi5");
+        dataCache.saveDouble("cacheKey6",5.20);
     }
 
     private void sp2() {
-        boolean spkey1 = spCache.readBoolean("spkey1", false);
-        float spkey2 = spCache.readFloat("spkey2", 0);
-        int spkey3 = spCache.readInt("spkey3", 0);
-        long spkey4 = spCache.readLong("spkey4", 0);
-        String spkey5 = spCache.readString("spkey5", "");
-        AppLogHelper.d("sp取数据 spkey1: ",spkey1);
-        AppLogHelper.d("sp取数据 spkey2: ",spkey2);
-        AppLogHelper.d("sp取数据 spkey3: ",spkey3);
-        AppLogHelper.d("sp取数据 spkey4: ",spkey4);
-        AppLogHelper.d("sp取数据 spkey5: ",spkey5);
+        boolean data1 = dataCache.readBoolean("cacheKey1", false);
+        float data2 = dataCache.readFloat("cacheKey2", 0);
+        int data3 = dataCache.readInt("cacheKey3", 0);
+        long data4 = dataCache.readLong("cacheKey4", 0);
+        String data5 = dataCache.readString("cacheKey5", "");
+        double data6 = dataCache.readDouble("cacheKey5", 0.0);
+        AppLogHelper.d("取数据 cacheKey1: ",data1);
+        AppLogHelper.d("取数据 cacheKey2: ",data2);
+        AppLogHelper.d("取数据 cacheKey3: ",data3);
+        AppLogHelper.d("取数据 cacheKey4: ",data4);
+        AppLogHelper.d("取数据 cacheKey5: ",data5);
+        AppLogHelper.d("取数据 cacheKey6: ",data6);
     }
 
     private void sp3() {

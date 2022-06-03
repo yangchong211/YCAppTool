@@ -137,14 +137,19 @@ public class AppCoreTask extends AppStartTask {
     }
 
     private void initAppCache() {
-        CacheConfig.Builder builder = new CacheConfig.Builder();
-        builder.debuggable(BuildConfig.DEBUG)
+        CacheConfig.Builder builder = CacheConfig.Companion.newBuilder();
+        //设置是否是debug模式
+        CacheConfig cacheConfig = builder.debuggable(BuildConfig.DEBUG)
+                //设置外部存储根目录
                 .extraLogDir(null)
+                //设置lru缓存最大值
                 .maxCacheSize(100)
-                .setLogDir(null);
-        CacheConfig config = builder.build();
-        CacheInitHelper.INSTANCE.init(config);
-
+                //内部存储根目录
+                .logDir(null)
+                //创建
+                .build();
+        CacheInitHelper.INSTANCE.init(MainApplication.getInstance(),cacheConfig);
+        //最简单的初始化
         //CacheInitHelper.INSTANCE.init(CacheConfig.Companion.newBuilder().build());
     }
 
