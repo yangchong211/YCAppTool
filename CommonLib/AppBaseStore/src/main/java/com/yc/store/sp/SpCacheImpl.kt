@@ -3,14 +3,27 @@ package com.yc.store.sp
 import android.content.Context
 import android.content.SharedPreferences
 import com.yc.store.ICacheable
+import com.yc.store.mmkv.MmkvCacheImpl
 import com.yc.toolutils.AppToolUtils
 
-class SpCacheImpl : ICacheable {
+class SpCacheImpl(builder: Builder) : ICacheable {
 
     private var sp: SharedPreferences? = null
 
     init {
-        sp = AppToolUtils.getApp()?.getSharedPreferences("sp", Context.MODE_PRIVATE)
+        sp = AppToolUtils.getApp()?.getSharedPreferences(builder.fileName, Context.MODE_PRIVATE)
+    }
+
+    class Builder {
+        var fileName: String? = null
+        fun setFileId(name: String): Builder {
+            fileName = name
+            return this
+        }
+
+        fun build(): SpCacheImpl {
+            return SpCacheImpl(this)
+        }
     }
 
     override fun saveInt(key: String, value: Int) {

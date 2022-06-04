@@ -58,7 +58,10 @@ class StoreToolHelper {
     fun getSpCache(): BaseDataCache {
         if (spCache == null) {
             spCache = BaseDataCache()
-            spCache?.setCacheImpl(SpCacheImpl())
+            val builder = SpCacheImpl.Builder()
+            builder.fileName = "ycSp"
+            val spCacheImpl = builder.build()
+            spCache?.setCacheImpl(spCacheImpl)
         }
         return spCache as BaseDataCache
     }
@@ -101,7 +104,10 @@ class StoreToolHelper {
     fun getFastSpCache(): BaseDataCache {
         if (fastSpCache == null) {
             fastSpCache = BaseDataCache()
-            fastSpCache?.setCacheImpl(FastSpCacheImpl())
+            val builder = FastSpCacheImpl.Builder()
+            builder.fileName = "fastSp"
+            val fastSpCacheImpl = builder.build()
+            fastSpCache?.setCacheImpl(fastSpCacheImpl)
         }
         return fastSpCache as BaseDataCache
     }

@@ -2,15 +2,27 @@ package com.yc.store.fastsp
 
 import com.yc.store.ICacheable
 import com.yc.store.fastsp.sp.FastSharedPreferences
+import com.yc.store.sp.SpCacheImpl
 
-class FastSpCacheImpl : ICacheable {
+class FastSpCacheImpl (builder: Builder) : ICacheable {
 
     private var sp: FastSharedPreferences? = null
 
     init {
-        sp = FastSharedPreferences.get("fast_sp")
+        sp = FastSharedPreferences.get(builder.fileName)
     }
 
+    class Builder {
+        var fileName: String? = null
+        fun setFileId(name: String): Builder {
+            fileName = name
+            return this
+        }
+
+        fun build(): FastSpCacheImpl {
+            return FastSpCacheImpl(this)
+        }
+    }
 
     override fun saveInt(key: String, value: Int) {
         sp?.edit()?.putInt(key, value)?.apply()
