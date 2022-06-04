@@ -1,7 +1,11 @@
 package com.yc.easyexecutor;
 
+import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import java.util.concurrent.Executor;
 
@@ -116,6 +120,18 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
+    public Handler getMainHandler() {
+        return mDelegate.getMainHandler();
+    }
+
+    @Override
+    public void postIoHandler(@NonNull Runnable runnable) {
+        if (runnable != null) {
+            mDelegate.postIoHandler(runnable);
+        }
+    }
+
+    @Override
     public void executeOnMainThread(@NonNull Runnable runnable) {
         super.executeOnMainThread(runnable);
     }
@@ -169,4 +185,45 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     public boolean isMainThread() {
         return mDelegate.isMainThread();
     }
+
+
+    /**
+     * 执行有生命周期的任务
+     */
+    public Runnable postToMainThread(LifecycleOwner lifecycleOwner, Runnable runnable) {
+        LifecycleRunnable lifecycleRunnableDelegate = new LifecycleRunnable(lifecycleOwner,
+                getMainHandler(), Lifecycle.Event.ON_DESTROY,runnable);
+        mDelegate.postToMainThread(lifecycleRunnableDelegate);
+        return lifecycleRunnableDelegate;
+    }
+
+
+    /**
+     * 执行有生命周期的任务,指定Lifecycle.Event
+     */
+    public Runnable postToMainThread(LifecycleOwner lifecycleOwner,
+                                         Lifecycle.Event targetEvent,
+                                         Runnable runnable) {
+        LifecycleRunnable lifecycleRunnableDelegate = new LifecycleRunnable(lifecycleOwner,
+                getMainHandler(),targetEvent,runnable);
+        mDelegate.postToMainThread(lifecycleRunnableDelegate);
+        return lifecycleRunnableDelegate;
+    }
+
+
+    public void postToMainThread(Runnable runnable,long delayed) {
+        getMainHandler().postDelayed(runnable,delayed);
+    }
+
+    public Runnable postToMainThread(LifecycleOwner lifecycleOwner,Runnable runnable,long delayed) {
+        LifecycleRunnable lifecycleRunnableDelegate = new LifecycleRunnable(lifecycleOwner,
+                getMainHandler(),Lifecycle.Event.ON_DESTROY,runnable);
+        getMainHandler().postDelayed(lifecycleRunnableDelegate,delayed);
+        return lifecycleRunnableDelegate;
+    }
+
+    public void removeUICallback(Runnable runnable) {
+        getMainHandler().removeCallbacks(runnable);
+    }
+
 }

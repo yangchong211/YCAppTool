@@ -31,8 +31,16 @@ import java.util.concurrent.atomic.AtomicLong;
 public class DefaultTaskExecutor extends AbsTaskExecutor {
 
     private final Object mLock = new Object();
+    /**
+     * UI主线程共有handler对象
+     */
     @Nullable
     private volatile Handler mMainHandler;
+    /**
+     * 配合handlerThread使用的handler，一般用来执行大量任务
+     */
+    @Nullable
+    private volatile Handler mIoHandler;
     /**
      * 核心任务的线程池
      */
@@ -78,16 +86,10 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     };
 
     public DefaultTaskExecutor() {
-        mDiskIO = Executors.newFixedThreadPool(4, new ThreadFactory() {
-
-            private final AtomicLong mCount = new AtomicLong(0);
-
-            @Override
-            public Thread newThread(@NonNull Runnable r) {
-                return new Thread(r, "LoggerTask #" + mCount.getAndIncrement());
-            }
-        });
-        mCoreExecutor = Executors.newSingleThreadExecutor(new ThreadFactory() {
+        //主要是处理io密集流
+        mDiskIO = Executors.newFixedThreadPool(4, new MyThreadFactory("LoggerTask #"));
+        //处理比较核心的任务
+        mCoreExecutor = Executors.newSingleThreadExecutor(new MyThreadFactory("ScheduleTask") {
             @Override
             public Thread newThread(Runnable r) {
                 //创建线程
@@ -96,6 +98,7 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
                 return scheduleTask;
             }
         });
+        //处理cpu密集任务
         mCPUThreadPoolExecutor = new ThreadPoolExecutor(
                 CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_SECONDS, TimeUnit.SECONDS,
                 mPoolWorkQueue, Executors.defaultThreadFactory(), mHandler);
@@ -126,15 +129,36 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
 
     @Override
     public void postToMainThread(@NonNull Runnable runnable) {
+        mMainHandler = getMainHandler();
+        if (mMainHandler != null && runnable != null) {
+            mMainHandler.post(runnable);
+        }
+    }
+
+    @Override
+    public Handler getMainHandler() {
         if (mMainHandler == null) {
             synchronized (mLock) {
                 if (mMainHandler == null) {
-                    mMainHandler = new Handler(Looper.getMainLooper());
+                    mMainHandler = new SafeHandler(Looper.getMainLooper());
                 }
             }
         }
-        if (mMainHandler != null && runnable != null) {
-            mMainHandler.post(runnable);
+        return mMainHandler;
+    }
+
+    @Override
+    public void postIoHandler(@NonNull Runnable runnable) {
+        if (mIoHandler == null){
+            synchronized (mLock) {
+                if (mIoHandler == null) {
+                    mIoHandler = TaskHandlerThread.get("postIoHandler")
+                            .getHandler("postIoHandler");
+                }
+            }
+        }
+        if (mIoHandler != null && runnable != null) {
+            mIoHandler.post(runnable);
         }
     }
 

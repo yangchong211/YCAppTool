@@ -1,4 +1,4 @@
-package com.yc.taskscheduler;
+package com.yc.easyexecutor;
 
 
 import android.os.Handler;
@@ -34,17 +34,16 @@ public class LifecycleRunnable implements Runnable {
                 }
             }
         };
-        if(TaskScheduler.isMainThread()) {
+        if(DelegateTaskExecutor.getInstance().isMainThread()) {
             mLifecycleOwner.getLifecycle().addObserver(mLifecycleObserver);
         }else {
-            TaskScheduler.runOnUIThread(new Runnable() {
+            DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                 @Override
                 public void run() {
                     mLifecycleOwner.getLifecycle().addObserver(mLifecycleObserver);
                 }
             });
         }
-
     }
 
 

@@ -2,6 +2,8 @@ package com.yc.taskscheduler;
 
 import android.util.Log;
 
+import com.yc.easyexecutor.DelegateTaskExecutor;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -57,8 +59,7 @@ public abstract class AbsTaskRunnable<R> implements Runnable {
             Log.d(TAG,"Task cancel: "+t.getName());
             t.interrupt();
         }
-
-        TaskScheduler.runOnUIThread(new Runnable() {
+        DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
             @Override
             public void run() {
                 onCancel();
@@ -85,8 +86,7 @@ public abstract class AbsTaskRunnable<R> implements Runnable {
             mCanceledAtomic.set(false);
 
             final R result = doInBackground();
-
-            TaskScheduler.runOnUIThread(new Runnable() {
+            DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                 @Override
                 public void run() {
                     if(!isCanceled()){
@@ -97,7 +97,7 @@ public abstract class AbsTaskRunnable<R> implements Runnable {
         }  catch (final Throwable throwable) {
 
             Log.e(TAG,"handle background Task  error " +throwable);
-            TaskScheduler.runOnUIThread(new Runnable() {
+            DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                 @Override
                 public void run() {
                     if(!isCanceled()){

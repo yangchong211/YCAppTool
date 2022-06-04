@@ -1,5 +1,7 @@
 package com.yc.easyexecutor;
 
+import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
 
@@ -23,6 +25,10 @@ public abstract class AbsTaskExecutor {
     public abstract void executeOnCpu(@NonNull Runnable runnable);
 
     public abstract void postToMainThread(@NonNull Runnable runnable);
+
+    public abstract Handler getMainHandler();
+
+    public abstract void postIoHandler(@NonNull Runnable runnable);
 
     public void executeOnMainThread(@NonNull Runnable runnable) {
         if (isMainThread()) {
