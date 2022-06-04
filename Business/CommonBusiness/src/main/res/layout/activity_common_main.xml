@@ -154,14 +154,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="3"/>
+            android:text="launcher页面重启app"/>
         <Button
             android:id="@+id/btn_restart4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="4"/>
+            android:text="查询mainifest重启App"/>
     </LinearLayout>
 
     <Button

@@ -3,7 +3,6 @@ package com.yc.store.sp
 import android.content.Context
 import android.content.SharedPreferences
 import com.yc.store.ICacheable
-import com.yc.store.mmkv.MmkvCacheImpl
 import com.yc.toolutils.AppToolUtils
 
 class SpCacheImpl(builder: Builder) : ICacheable {
@@ -42,12 +41,26 @@ class SpCacheImpl(builder: Builder) : ICacheable {
         return sp?.getFloat(key, default) ?: 0f
     }
 
+    @Deprecated("may be error")
     override fun saveDouble(key: String, value: Double) {
-        sp?.edit()?.putFloat(key, value.toFloat())?.apply()
+        val data: Float = value.toFloat()
+        sp?.edit()?.putFloat(key, data)?.apply()
     }
 
+    /**
+     * 注意：sp由于没有存储double的api，因此这里有double转化为float存储和读取。可能会有误差
+     * todo 如何解决误差
+     * 存储：5.20
+     * 获取：5.199999809265137
+     */
+    @Deprecated("may be error")
     override fun readDouble(key: String, default: Double): Double {
-        return sp?.getFloat(key, default.toFloat())?.toDouble() ?: 0.0
+        //需要去显式的转换，否则直接转化会抛出异常
+        //val data = default.toFloat()
+        val data: Float = default.toFloat()
+        val float = sp?.getFloat(key, data)
+        val toDouble = float?.toDouble()
+        return toDouble ?: 0.0
     }
 
     override fun saveLong(key: String, value: Long) {

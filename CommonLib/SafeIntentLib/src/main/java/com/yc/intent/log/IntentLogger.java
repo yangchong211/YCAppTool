@@ -57,13 +57,10 @@ public final class IntentLogger {
         FLAGS.put(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET, "FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET");
     }
 
-    /**
-     * Conceal ctor to avoid creating instance.
-     */
     private IntentLogger() {
     }
 
-    public static void dump(String tag, Intent intent) {
+    public static void print(String tag, Intent intent) {
         if (intent == null) {
             Log.v(tag, "no intent found");
             return;
@@ -73,20 +70,20 @@ public final class IntentLogger {
         Log.v(tag, "Action   : " + intent.getAction());
         Log.v(tag, "Category : " + intent.getCategories());
         Log.v(tag, "Data     : " + intent.getDataString());
-        dumpComponentName(tag, intent.getComponent());
-        dumpFlags(tag, intent.getFlags());
+        printComponentName(tag, intent.getComponent());
+        printFlags(tag, intent.getFlags());
         Log.v(tag, "HasExtras: " + hasExtras(extras));
-        dumpExtras(tag, extras);
+        printExtras(tag, extras);
     }
 
-    public static void dumpComponentName(String tag, Intent intent) {
+    public static void printComponentName(String tag, Intent intent) {
         if (intent == null) {
             return;
         }
-        dumpComponentName(tag, intent.getComponent());
+        printComponentName(tag, intent.getComponent());
     }
 
-    public static void dumpComponentName(String tag, ComponentName componentName) {
+    public static void printComponentName(String tag, ComponentName componentName) {
         if (componentName != null) {
             Log.v(tag, "Component: " + componentName.getPackageName()
                     + "/" + componentName.getClassName());
@@ -95,14 +92,14 @@ public final class IntentLogger {
         }
     }
 
-    public static void dumpFlags(String tag, Intent intent) {
+    public static void printFlags(String tag, Intent intent) {
         if (intent == null) {
             return;
         }
-        dumpFlags(tag, intent.getFlags());
+        printFlags(tag, intent.getFlags());
     }
 
-    public static void dumpFlags(String tag, int flags) {
+    public static void printFlags(String tag, int flags) {
         Log.v(tag, "Flags    : " + Integer.toBinaryString(flags));
         for (int flag : FLAGS.keySet()) {
             if ((flag & flags) != 0) {
@@ -111,21 +108,21 @@ public final class IntentLogger {
         }
     }
 
-    public static void dumpExtras(String tag, Intent intent) {
+    public static void printExtras(String tag, Intent intent) {
         if (intent == null) {
             return;
         }
-        dumpExtras(tag, intent.getExtras());
+        printExtras(tag, intent.getExtras());
     }
 
-    public static void dumpExtras(String tag, Bundle extras) {
+    public static void printExtras(String tag, Bundle extras) {
         if (extras == null) {
             return;
         }
         for (String key : extras.keySet()) {
             Object value = extras.get(key);
             if (value instanceof Bundle) {
-                dumpExtras(tag, (Bundle) value);
+                printExtras(tag, (Bundle) value);
             } else {
                 try {
                     Log.v(tag, "Extra[" + key + "] :" + String.valueOf(extras.get(key)));

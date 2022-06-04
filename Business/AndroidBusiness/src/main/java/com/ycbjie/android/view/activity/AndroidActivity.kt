@@ -23,7 +23,6 @@ import com.yc.statusbar.bar.StateAppBar
 import com.yc.toastutils.ToastUtils
 import com.yc.toolutils.AppLogUtils
 import com.ycbjie.android.R
-import com.ycbjie.android.model.bean.BannerBean
 import com.ycbjie.android.presenter.AndroidPresenter
 import com.ycbjie.android.tools.KotlinTest
 import com.ycbjie.android.tools.base.KotlinConstant.HOME
@@ -104,7 +103,7 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        IntentLogger.dump("intent test : ", intent)
+        IntentLogger.print("intent test : ", intent)
     }
 
     /**
@@ -122,7 +121,10 @@ class AndroidActivity : BaseActivity<AndroidPresenter>(){
             //Kotlin 支持在字符串字面值中引用局部变量，只需要在变量名前加上字符$即可
             AppLogUtils.e("索引-------$selectIndex")
             viewPager?.currentItem = selectIndex
-            IntentLogger.dump("intent test : ", intent)
+            IntentLogger.print("intent test : ", intent)
+            IntentLogger.printComponentName("intent component : " , intent)
+            IntentLogger.printExtras("intent test : ", intent)
+            IntentLogger.printFlags("intent test : ", intent)
         }
     }
 

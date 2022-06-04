@@ -11,6 +11,11 @@
             android:multiprocess="true"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
 
+        <provider
+            android:name="com.yc.toolutils.init.ToolInitProvider"
+            android:authorities="${applicationId}.ToolInitProvider"
+            android:exported="false" />
+
         <!--既然是ContentProvider，那么需要像Activity一样在AndroidManifest.xml里声明：-->
         <!--android:authorities 标识ContentProvider的唯一性，可以自己任意定义，最好是全局唯一的。-->
         <!--android:name 是指之前定义的FileProvider 子类。-->

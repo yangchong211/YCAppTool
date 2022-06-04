@@ -178,7 +178,23 @@
 ### 08.通用工具类库
 - ToolUtils 是一个 Android 工具库。便于开发人员，快捷高效开发需求。
 - 常用的基本上都有，还包括图片压缩，日历事件，异常上报工具，网络，手机方向监听，防爆力点击等工具类。
-
+    ``` java
+    FastClickUtils              防爆力点击，可以自定义设置间距时间
+    PerfectClickListener        避免在1秒内出发多次点击
+    AppFileUtils                file文件工具类
+    FileShareUtils              file文件分享工具类
+    ScreenShotUtils             监听屏幕被截图事件
+    SensorManagerUtils          手机系统方向监听器工具类
+    AppNetworkUtils             网络工具类
+    AppProcessUtils             进程工具类，高效获取进程名称
+    CompressUtils               图片压缩工具类
+    ExceptionReporter           异常上报工具类
+    OnceInvokeUtils             避免多次执行工具类
+    StatusBarUtils              状态栏工具类
+    
+    //还有很多其他常用工具类，这里就不一一罗列呢
+    ……
+    ```
 
 
 ### 09.通用基类封装库
@@ -188,7 +204,25 @@
 
 
 ### 11.Intent封装库
-
+- 通用打印Intent对象内容到log日志栏中，支持普通intent和延迟PendingIntent。超级方便检查，可以打印action，category，data，flags，extras等等
+    ``` java
+    //打印intent所有的数据
+    IntentLogger.print("intent test : ", intent)
+    //打印intent中component
+    IntentLogger.printComponentName("intent component : " , intent)
+    //打印intent中extras参数
+    IntentLogger.printExtras("intent test : ", intent)
+    //打印intent中flags参数
+    IntentLogger.printFlags("intent test : ", intent)
+    
+    //PendingIntent
+    //打印intent所有的数据
+    PendingIntentLogger.print("intent test : ", intent)
+    //打印intent中content
+    PendingIntentLogger.printContentIntent("intent content : " , intent)
+    //打印intent的tag
+    PendingIntentLogger.printTag("intent tag : " , intent)
+    ```
 
 
 

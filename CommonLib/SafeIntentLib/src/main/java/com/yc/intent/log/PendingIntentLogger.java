@@ -31,14 +31,11 @@ public final class PendingIntentLogger {
         FLAGS.put(PendingIntent.FLAG_UPDATE_CURRENT, "FLAG_UPDATE_CURRENT");
     }
 
-    /**
-     * Conceal ctor to avoid creating instance.
-     */
     private PendingIntentLogger() {
         throw new AssertionError();
     }
 
-    public static void dump(String tag, PendingIntent intent) {
+    public static void print(String tag, PendingIntent intent) {
         if (intent == null) {
             Log.v(tag, "no pending intent found");
             return;
@@ -51,12 +48,12 @@ public final class PendingIntentLogger {
         }
     }
 
-    public static void dumpContentIntent(String tag, PendingIntent intent) {
+    public static void printContentIntent(String tag, PendingIntent intent) {
         try {
             Method getIntent = intent.getClass().getDeclaredMethod("getIntent");
             getIntent.setAccessible(true);
             Intent content = (Intent) getIntent.invoke(intent);
-            IntentLogger.dump(tag, content);
+            IntentLogger.print(tag, content);
         } catch (NoSuchMethodException e) {
             Log.e(tag, "", e);
         } catch (InvocationTargetException e) {
@@ -66,7 +63,7 @@ public final class PendingIntentLogger {
         }
     }
 
-    public static void dumpTag(String tag, PendingIntent intent) {
+    public static void printTag(String tag, PendingIntent intent) {
         try {
             Method getIntent = intent.getClass().getDeclaredMethod("getTag", String.class);
             getIntent.setAccessible(true);
@@ -84,13 +81,13 @@ public final class PendingIntentLogger {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private static void dumpJellyBeanMr1(String tag, PendingIntent intent) {
         Log.v(tag, "Who has created: " + intent.getCreatorPackage() + ", uid=[" + intent.getCreatorUid() + "]");
-        dumpTag(tag, intent);
-        dumpContentIntent(tag, intent);
+        printTag(tag, intent);
+        printContentIntent(tag, intent);
     }
 
     private static void dumpDefault(String tag, PendingIntent intent) {
         Log.v(tag, "Who has created: " + intent.getTargetPackage());
-        dumpTag(tag, intent);
-        dumpContentIntent(tag, intent);
+        printTag(tag, intent);
+        printContentIntent(tag, intent);
     }
 }
