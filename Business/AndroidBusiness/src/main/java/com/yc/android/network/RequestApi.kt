@@ -1,6 +1,6 @@
 package com.yc.android.network
 
-import com.ycbjie.android.model.bean.*
+import com.yc.android.model.bean.*
 import io.reactivex.Observable
 import org.json.JSONObject
 import retrofit2.http.GET

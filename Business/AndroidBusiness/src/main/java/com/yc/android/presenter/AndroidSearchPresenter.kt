@@ -1,10 +1,10 @@
 package com.yc.android.presenter
 
-import com.ycbjie.android.contract.AndroidSearchContract
-import com.ycbjie.android.model.helper.AndroidHelper
-import com.ycbjie.android.network.BaseSchedulerProvider
-import com.ycbjie.android.network.ResponseTransformer
-import com.ycbjie.android.network.SchedulerProvider
+import com.yc.android.contract.AndroidSearchContract
+import com.yc.android.model.helper.AndroidHelper
+import com.yc.android.network.BaseSchedulerProvider
+import com.yc.android.network.ResponseTransformer
+import com.yc.android.network.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 

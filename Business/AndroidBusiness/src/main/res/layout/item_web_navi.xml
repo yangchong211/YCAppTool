@@ -22,7 +22,7 @@
         android:background="@color/colorWhite"
         app:cardElevation="0dp">
 
-        <com.ycbjie.android.view.weight.FlowLayout
+        <com.yc.android.view.weight.FlowLayout
             android:id="@+id/flowLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

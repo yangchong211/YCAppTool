@@ -7,31 +7,14 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/tv_0"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="0.最简单的线程调用方式"
-        android:background="@android:color/darker_gray"
-        android:padding="10dp"/>
-
-    <TextView
         android:id="@+id/tv_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="1.1 最简单的runnable线程调用方式"
+        android:text="1.最简单的runnable线程调用方式"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
-
-    <TextView
-        android:id="@+id/tv_1_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="1.2 最简单的runnable线程调用方式，监听抛出异常"
-        android:background="@android:color/darker_gray"
-        android:padding="10dp"/>
     <TextView
         android:id="@+id/tv_2_1"
         android:layout_width="match_parent"
@@ -77,22 +60,5 @@
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
-    <TextView
-        android:id="@+id/tv_5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="5.使用线程池管理线程，查看几种不同线程池特点"
-        android:background="@android:color/darker_gray"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/tv_6_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="6.1 线程调试测试模拟"
-        android:background="@android:color/darker_gray"
-        android:padding="10dp"/>
 
 </LinearLayout>

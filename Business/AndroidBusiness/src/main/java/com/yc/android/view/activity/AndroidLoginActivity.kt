@@ -12,11 +12,11 @@ import com.yc.library.base.mvp.BaseActivity
 import com.yc.toastutils.ToastUtils
 import com.yc.toolutils.AppLogUtils
 import com.yc.toolutils.AppSpUtils
-import com.ycbjie.android.R
-import com.ycbjie.android.tools.base.KotlinConstant
-import com.ycbjie.android.contract.AndroidLoginContract
-import com.ycbjie.android.model.bean.LoginBean
-import com.ycbjie.android.presenter.AndroidLoginPresenter
+import com.yc.android.R
+import com.yc.android.tools.base.KotlinConstant
+import com.yc.android.contract.AndroidLoginContract
+import com.yc.android.model.bean.LoginBean
+import com.yc.android.presenter.AndroidLoginPresenter
 import kotlinx.android.synthetic.main.activity_android_login.*
 import kotlinx.android.synthetic.main.base_android_bar.*
 import kotlinx.coroutines.Dispatchers

@@ -15,7 +15,6 @@ import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.mvctodo.NetworkActivity;
-import com.yc.other.thread.MainThreadActivity;
 import com.yc.toollib.crash.CrashLibUtils;
 import com.yc.toolutils.click.FastClickUtils;
 import com.yc.video.ui.activity.VideoActivity;
@@ -83,7 +82,7 @@ public class HeaderComponent implements InterItemView {
                     break;
                 //线程库
                 case R.id.tv_home_seven:
-                    MainThreadActivity.startActivity(context);
+
                     break;
                 //视频播放器
                 case R.id.tv_home_eight:

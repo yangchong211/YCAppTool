@@ -1,18 +1,18 @@
-package com.yc.other.thread;
+package com.yc.ycthreadpool;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.other.R;
+import android.util.Log;
+import android.view.View;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
 
 
 public class ExecutorsTestActivity extends AppCompatActivity implements View.OnClickListener {
@@ -22,7 +22,7 @@ public class ExecutorsTestActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thread_test);
+        setContentView(R.layout.activity_executors_test);
         findViewById(R.id.tv_0).setOnClickListener(this);
         findViewById(R.id.tv_1).setOnClickListener(this);
         findViewById(R.id.tv_2).setOnClickListener(this);
@@ -68,8 +68,6 @@ public class ExecutorsTestActivity extends AppCompatActivity implements View.OnC
             }).start();
         }
         //todo 模拟线程导致OOM操作
-
-
     }
 
     /**

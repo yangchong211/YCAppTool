@@ -5,11 +5,11 @@ import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import com.yc.library.web.WebViewActivity
-import com.ycbjie.android.R
-import com.ycbjie.android.tools.base.KotlinConstant
-import com.ycbjie.android.contract.AndroidDetailContract
-import com.ycbjie.android.model.bean.HomeData
-import com.ycbjie.android.presenter.AndroidDetailPresenter
+import com.yc.android.R
+import com.yc.android.tools.base.KotlinConstant
+import com.yc.android.contract.AndroidDetailContract
+import com.yc.android.model.bean.HomeData
+import com.yc.android.presenter.AndroidDetailPresenter
 
 
 /**

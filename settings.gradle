@@ -6,7 +6,8 @@ include ':app'
 include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
         ':VideoBusiness', ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
         ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',':CommonBusiness',
-        ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness'
+        ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
+        ':ThreadBusiness'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -23,6 +24,8 @@ project(':StatusBusiness').projectDir = new File('Business/StatusBusiness')
 project(':OkHttpBusiness').projectDir = new File('Business/OkHttpBusiness')
 project(':BleBusiness').projectDir = new File('Business/BleBusiness')
 project(':CommonBusiness').projectDir = new File('Business/CommonBusiness')
+project(':ThreadBusiness').projectDir = new File('Business/ThreadBusiness')
+
 
 
 /* +++++++++ 框架业务服务层 +++++++++ */
@@ -107,7 +110,6 @@ project(':GroupAdapterLib').projectDir = new File('WidgetLib/GroupAdapterLib')
 project(':BaseProgress').projectDir = new File('WidgetLib/BaseProgress')
 project(':CircleProgress').projectDir = new File('WidgetLib/CircleProgress')
 project(':SlideViewLib').projectDir = new File('WidgetLib/SlideViewLib')
-
 
 
 

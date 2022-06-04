@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.ycbjie.android.view.activity.AndroidActivity
+import com.yc.android.view.activity.AndroidActivity
 
 class InitActivity : AppCompatActivity() {
 

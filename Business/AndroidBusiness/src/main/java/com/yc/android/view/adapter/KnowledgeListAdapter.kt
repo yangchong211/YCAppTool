@@ -8,8 +8,8 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.ycbjie.android.R
-import com.ycbjie.android.model.bean.HomeData
+import com.yc.android.R
+import com.yc.android.model.bean.HomeData
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder
 

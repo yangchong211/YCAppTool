@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1.核心任务的线程池，执行任务"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="2.IO 密集型任务的线程池，执行任务"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="3.CPU 密集型任务的线程池，执行任务"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="4.UI主线程共有handler对象，执行任务"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="5.配合HandlerThread使用的handler，执行任务"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+
+</LinearLayout>

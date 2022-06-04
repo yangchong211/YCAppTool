@@ -1,8 +1,8 @@
 package com.yc.android.contract
 
-import com.ycbjie.android.model.bean.ProjectListBean
-import com.ycbjie.android.model.bean.TreeBean
-import com.ycbjie.android.network.ResponseBean
+import com.yc.android.model.bean.ProjectListBean
+import com.yc.android.model.bean.TreeBean
+import com.yc.android.network.ResponseBean
 import com.yc.library.base.mvp.BasePresenter
 import com.yc.library.base.mvp.BaseView
 

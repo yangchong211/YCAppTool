@@ -1,8 +1,8 @@
 package com.yc.android.contract
 
 
-import com.ycbjie.android.model.bean.ProjectListBean
-import com.ycbjie.android.model.bean.SearchTag
+import com.yc.android.model.bean.ProjectListBean
+import com.yc.android.model.bean.SearchTag
 import com.yc.library.base.mvp.BasePresenter
 import com.yc.library.base.mvp.BaseView
 

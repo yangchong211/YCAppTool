@@ -1,12 +1,10 @@
-package com.yc.other.thread;
+package com.yc.ycthreadpool;
 
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.yc.other.R;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +17,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
 
 public class ThreadPoolExecutorActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -147,12 +146,14 @@ public class ThreadPoolExecutorActivity extends AppCompatActivity implements Vie
          * @return
          */
         public boolean isPrime(final int number) {
-            if (number <= 1)
+            if (number <= 1) {
                 return false;
+            }
 
             for (int i = 2; i <= Math.sqrt(number); i++) {
-                if (number % i == 0)
+                if (number % i == 0) {
                     return false;
+                }
             }
             return true;
         }
@@ -160,12 +161,14 @@ public class ThreadPoolExecutorActivity extends AppCompatActivity implements Vie
         public int countPrimes(final int lower, final int upper) {
             int total = 0;
             for (int i = lower; i <= upper; i++) {
-                if (isPrime(i))
+                if (isPrime(i)) {
                     total++;
+                }
             }
             return total;
         }
 
+        @Override
         public void run() {
             long start = System.currentTimeMillis();
             try {

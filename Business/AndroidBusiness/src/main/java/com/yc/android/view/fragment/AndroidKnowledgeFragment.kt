@@ -7,14 +7,14 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yc.library.base.mvp.BaseLazyFragment
 import com.yc.toolutils.AppSizeUtils
-import com.ycbjie.android.R
-import com.ycbjie.android.contract.AndroidKnowledgeContract
-import com.ycbjie.android.model.bean.TreeBean
-import com.ycbjie.android.network.ResponseBean
-import com.ycbjie.android.presenter.AndroidKnowledgePresenter
-import com.ycbjie.android.view.activity.AndroidActivity
-import com.ycbjie.android.view.activity.KnowledgeTreeDetailActivity
-import com.ycbjie.android.view.adapter.AndroidKnowledgeAdapter
+import com.yc.android.R
+import com.yc.android.contract.AndroidKnowledgeContract
+import com.yc.android.model.bean.TreeBean
+import com.yc.android.network.ResponseBean
+import com.yc.android.presenter.AndroidKnowledgePresenter
+import com.yc.android.view.activity.AndroidActivity
+import com.yc.android.view.activity.KnowledgeTreeDetailActivity
+import com.yc.android.view.adapter.AndroidKnowledgeAdapter
 import kotlinx.android.synthetic.main.base_android_recycle.*
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine
 

@@ -1,9 +1,9 @@
 package com.yc.android.contract
 
 
-import com.ycbjie.android.model.bean.BannerBean
-import com.ycbjie.android.model.bean.HomeListBean
-import com.ycbjie.android.network.ResponseBean
+import com.yc.android.model.bean.BannerBean
+import com.yc.android.model.bean.HomeListBean
+import com.yc.android.network.ResponseBean
 import com.yc.library.base.mvp.BasePresenter
 import com.yc.library.base.mvp.BaseView
 import io.reactivex.Observable

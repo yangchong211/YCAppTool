@@ -71,7 +71,7 @@ dependencies {
     annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
     //implementation project(path: ':ServiceLoaderAnnotations')
     //annotationProcessor project(path: ':api-compiler')
-    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     api project(path: ':BusinessInterface')
     implementation project(path: ':ToolUtilsLib')
 }

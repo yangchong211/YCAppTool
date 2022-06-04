@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yc.ycthreadpool">
+
+    <application>
+        <activity android:name="com.yc.ycthreadpool.ThreadMainActivity"/>
+        <activity android:name="com.yc.ycthreadpool.ExecutorsTestActivity"/>
+        <activity android:name="com.yc.ycthreadpool.ThreadActivity"/>
+        <activity android:name="com.yc.ycthreadpool.EasyExecutorActivity"/>
+        <activity android:name="com.yc.ycthreadpool.ThreadPollActivity"/>
+    </application>
+
+</manifest>

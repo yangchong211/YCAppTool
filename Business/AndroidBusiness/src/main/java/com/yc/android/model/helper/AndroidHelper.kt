@@ -1,11 +1,11 @@
 package com.yc.android.model.helper
 
 import com.yc.httpserver.RetrofitWrapper
-import com.ycbjie.android.model.bean.*
-import com.ycbjie.android.network.AddCookieInterceptor
-import com.ycbjie.android.network.GetCookieInterceptor
-import com.ycbjie.android.network.RequestApi
-import com.ycbjie.android.network.ResponseBean
+import com.yc.android.model.bean.*
+import com.yc.android.network.AddCookieInterceptor
+import com.yc.android.network.GetCookieInterceptor
+import com.yc.android.network.RequestApi
+import com.yc.android.network.ResponseBean
 import io.reactivex.Observable
 import okhttp3.Interceptor
 import org.json.JSONObject

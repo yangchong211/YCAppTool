@@ -2,7 +2,7 @@ package com.yc.android.network
 
 
 import com.yc.toolutils.AppSpUtils
-import com.ycbjie.android.tools.base.KotlinConstant
+import com.yc.android.tools.base.KotlinConstant
 import okhttp3.Interceptor
 import okhttp3.Response
 

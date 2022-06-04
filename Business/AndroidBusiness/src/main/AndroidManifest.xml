@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ycbjie.android" >
+    package="com.yc.android" >
 
 
     <application>
-        <activity android:name="com.ycbjie.android.view.activity.AndroidActivity"/>
-        <activity android:name="com.ycbjie.android.view.activity.AndroidDetailActivity"/>
-        <activity android:name="com.ycbjie.android.view.activity.AndroidAboutActivity"/>
-        <activity android:name="com.ycbjie.android.view.activity.AndroidLoginActivity"/>
-        <activity android:name="com.ycbjie.android.view.activity.AndroidSearchActivity"/>
-        <activity android:name="com.ycbjie.android.view.activity.KnowledgeTreeDetailActivity"/>
-        <activity android:name="com.ycbjie.android.view.activity.NavWebsiteActivity"/>
-        <activity android:name="com.ycbjie.android.view.activity.AndroidCollectActivity"/>
-        <activity android:name="com.ycbjie.android.view.activity.AndroidRegisterActivity"/>
-        <activity android:name="com.ycbjie.android.view.activity.CollectNetActivity"/>
+        <activity android:name="com.yc.android.view.activity.AndroidActivity"/>
+        <activity android:name="com.yc.android.view.activity.AndroidDetailActivity"/>
+        <activity android:name="com.yc.android.view.activity.AndroidAboutActivity"/>
+        <activity android:name="com.yc.android.view.activity.AndroidLoginActivity"/>
+        <activity android:name="com.yc.android.view.activity.AndroidSearchActivity"/>
+        <activity android:name="com.yc.android.view.activity.KnowledgeTreeDetailActivity"/>
+        <activity android:name="com.yc.android.view.activity.NavWebsiteActivity"/>
+        <activity android:name="com.yc.android.view.activity.AndroidCollectActivity"/>
+        <activity android:name="com.yc.android.view.activity.AndroidRegisterActivity"/>
+        <activity android:name="com.yc.android.view.activity.CollectNetActivity"/>
     </application>
 
 

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.yc.android.view.activity.AndroidActivity;
 import com.yc.blesample.ble.BleMainActivity;
 import com.yc.common.CommonActivity;
 import com.yc.easy.demo.NetMainActivity;
@@ -13,8 +14,8 @@ import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.toolutils.click.FastClickUtils;
-import com.ycbjie.android.view.activity.AndroidActivity;
 import com.yc.ycstatusbar.BarActivity;
+import com.yc.ycthreadpool.ThreadMainActivity;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 
@@ -70,7 +71,9 @@ public class ToolComponent implements InterItemView {
                 case R.id.tv_tool5:
                     CommonActivity.startActivity(context);
                     break;
+                //线程池组件案例
                 case R.id.tv_tool6:
+                    ThreadMainActivity.startActivity(context);
                     break;
                 case R.id.tv_tool7:
                     break;

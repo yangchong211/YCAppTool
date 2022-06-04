@@ -11,10 +11,10 @@ import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.statusbar.bar.StateAppBar
 import com.yc.toastutils.ToastUtils
-import com.ycbjie.android.R
-import com.ycbjie.android.model.bean.TreeBean
-import com.ycbjie.android.presenter.KnowledgeTreeDetailPresenter
-import com.ycbjie.android.view.fragment.KnowledgeListFragment
+import com.yc.android.R
+import com.yc.android.model.bean.TreeBean
+import com.yc.android.presenter.KnowledgeTreeDetailPresenter
+import com.yc.android.view.fragment.KnowledgeListFragment
 import kotlinx.android.synthetic.main.base_tab_layout.*
 
 /**

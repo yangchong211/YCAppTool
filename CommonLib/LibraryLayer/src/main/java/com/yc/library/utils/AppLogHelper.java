@@ -6,7 +6,7 @@ import android.util.Log;
 import com.yc.logging.config.LoggerConfig;
 import com.yc.logging.LoggerFactory;
 import com.yc.logging.util.Supplier;
-import com.yc.library.BuildConfig;
+import com.yc.logging.BuildConfig;
 
 public final class AppLogHelper {
 
@@ -33,7 +33,7 @@ public final class AppLogHelper {
         final String serverHost = "https://baidu.com/log";
         configBuilder.serverHost(serverHost);
         // 日志输出相关配置
-        final boolean debug = BuildConfig.IS_DEBUG;
+        final boolean debug = BuildConfig.DEBUG;
         configBuilder.debuggable(debug);
         // -- Debug 模式默认输出到 logcat
         configBuilder.logcatLogEnabled(debug);

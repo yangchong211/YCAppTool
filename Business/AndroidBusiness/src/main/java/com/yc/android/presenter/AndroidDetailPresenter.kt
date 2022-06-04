@@ -1,8 +1,8 @@
 package com.yc.android.presenter
 
-import com.ycbjie.android.contract.AndroidDetailContract
-import com.ycbjie.android.network.BaseSchedulerProvider
-import com.ycbjie.android.network.SchedulerProvider
+import com.yc.android.contract.AndroidDetailContract
+import com.yc.android.network.BaseSchedulerProvider
+import com.yc.android.network.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 
 class AndroidDetailPresenter : AndroidDetailContract.Presenter {

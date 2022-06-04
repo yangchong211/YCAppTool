@@ -3,11 +3,11 @@ package com.yc.android.presenter
 
 import com.yc.toolutils.AppLogUtils
 import com.yc.toolutils.AppNetworkUtils
-import com.ycbjie.android.contract.AndroidProjectContract
-import com.ycbjie.android.model.helper.AndroidHelper
-import com.ycbjie.android.network.BaseSchedulerProvider
-import com.ycbjie.android.network.ResponseTransformer
-import com.ycbjie.android.network.SchedulerProvider
+import com.yc.android.contract.AndroidProjectContract
+import com.yc.android.model.helper.AndroidHelper
+import com.yc.android.network.BaseSchedulerProvider
+import com.yc.android.network.ResponseTransformer
+import com.yc.android.network.SchedulerProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

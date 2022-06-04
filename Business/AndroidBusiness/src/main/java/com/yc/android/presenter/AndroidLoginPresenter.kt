@@ -1,11 +1,11 @@
 package com.yc.android.presenter
 
 import android.annotation.SuppressLint
-import com.ycbjie.android.contract.AndroidLoginContract
-import com.ycbjie.android.model.helper.AndroidHelper
-import com.ycbjie.android.network.BaseSchedulerProvider
-import com.ycbjie.android.network.ResponseTransformer
-import com.ycbjie.android.network.SchedulerProvider
+import com.yc.android.contract.AndroidLoginContract
+import com.yc.android.model.helper.AndroidHelper
+import com.yc.android.network.BaseSchedulerProvider
+import com.yc.android.network.ResponseTransformer
+import com.yc.android.network.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 
 class AndroidLoginPresenter : AndroidLoginContract.Presenter {

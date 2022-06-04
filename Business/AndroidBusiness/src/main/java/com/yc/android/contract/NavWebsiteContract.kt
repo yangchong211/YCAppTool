@@ -1,5 +1,5 @@
 package com.yc.android.contract
-import com.ycbjie.android.model.bean.NaviBean
+import com.yc.android.model.bean.NaviBean
 import com.yc.library.base.mvp.BasePresenter
 import com.yc.library.base.mvp.BaseView
 

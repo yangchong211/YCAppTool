@@ -22,7 +22,7 @@ android {
         multiDexEnabled true
         if (rootProject.ext.isAndroidApplication){
             //组件模式下设置applicationId
-            applicationId "com.ycbjie.android"
+            applicationId "com.yc.android"
         }
         //如果是集成模式下，则设置ARouter的配置，用于组件间通信的实现
         /*javaCompileOptions {
@@ -85,7 +85,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["kotlinxCoroutinesCore"])
     implementation(rootProject.ext.dependencies["kotlinxCoroutinesAndroid"])
     implementation project(path: ':AppStateLib')
-    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     implementation 'com.github.yangchong211.YCDialog:BaseDialog:3.6.8'
     implementation project(path: ':LocalShareLib')
     implementation project(path: ':SafeIntentLib')

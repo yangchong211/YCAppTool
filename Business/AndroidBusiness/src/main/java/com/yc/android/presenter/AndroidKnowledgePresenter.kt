@@ -2,8 +2,8 @@ package com.yc.android.presenter
 
 import com.yc.toolutils.AppLogUtils
 import com.yc.toolutils.AppNetworkUtils
-import com.ycbjie.android.contract.AndroidKnowledgeContract
-import com.ycbjie.android.model.helper.AndroidHelper
+import com.yc.android.contract.AndroidKnowledgeContract
+import com.yc.android.model.helper.AndroidHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

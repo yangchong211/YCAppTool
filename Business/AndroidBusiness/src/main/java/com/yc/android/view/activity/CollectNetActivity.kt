@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import com.yc.library.base.state.BaseStateActivity
 import com.yc.ycstatelib.StateLayoutManager
-import com.ycbjie.android.R
+import com.yc.android.R
 
 class CollectNetActivity : BaseStateActivity(){
 

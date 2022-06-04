@@ -16,8 +16,8 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.yc.customwidget.spannable.RoundBackgroundSpan
 import com.yc.toolutils.AppToolUtils
-import com.ycbjie.android.R
-import com.ycbjie.android.model.bean.HomeData
+import com.yc.android.R
+import com.yc.android.model.bean.HomeData
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder
 

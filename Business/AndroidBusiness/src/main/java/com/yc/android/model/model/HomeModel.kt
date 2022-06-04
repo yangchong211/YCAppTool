@@ -1,10 +1,10 @@
 package com.yc.android.model.model
 
-import com.ycbjie.android.contract.AndroidHomeContract
-import com.ycbjie.android.model.bean.BannerBean
-import com.ycbjie.android.model.bean.HomeListBean
-import com.ycbjie.android.model.helper.AndroidHelper
-import com.ycbjie.android.network.ResponseBean
+import com.yc.android.contract.AndroidHomeContract
+import com.yc.android.model.bean.BannerBean
+import com.yc.android.model.bean.HomeListBean
+import com.yc.android.model.helper.AndroidHelper
+import com.yc.android.network.ResponseBean
 import io.reactivex.Observable
 import org.json.JSONObject
 

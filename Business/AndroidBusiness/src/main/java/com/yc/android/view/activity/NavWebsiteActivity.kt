@@ -13,14 +13,14 @@ import com.yc.library.base.mvp.BaseActivity
 import com.yc.library.web.WebViewActivity
 import com.yc.statusbar.bar.StateAppBar
 import com.yc.toolutils.AppLogUtils
-import com.ycbjie.android.R
-import com.ycbjie.android.contract.NavWebsiteContract
-import com.ycbjie.android.model.bean.HomeData
-import com.ycbjie.android.model.bean.NaviBean
-import com.ycbjie.android.network.SchedulerProvider
-import com.ycbjie.android.presenter.NavWebsitePresenter
-import com.ycbjie.android.view.adapter.AndroidNavRightAdapter
-import com.ycbjie.android.view.adapter.AndroidNavWebsiteAdapter
+import com.yc.android.R
+import com.yc.android.contract.NavWebsiteContract
+import com.yc.android.model.bean.HomeData
+import com.yc.android.model.bean.NaviBean
+import com.yc.android.network.SchedulerProvider
+import com.yc.android.presenter.NavWebsitePresenter
+import com.yc.android.view.adapter.AndroidNavRightAdapter
+import com.yc.android.view.adapter.AndroidNavWebsiteAdapter
 import kotlinx.android.synthetic.main.activity_nav_website.*
 import kotlinx.android.synthetic.main.base_android_bar.*
 
