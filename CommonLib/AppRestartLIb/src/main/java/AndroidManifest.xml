@@ -3,8 +3,7 @@
     package="com.yc.apprestartlib">
 
     <application>
-        <!--<service android:name="com.yc.apprestartlib.KillSelfService"
-            android:process=":restart"/>-->
-        <service android:name="com.yc.apprestartlib.KillSelfService" />
+        <service android:name=".KillSelfService"
+            android:process=":restart"/>
     </application>
 </manifest>

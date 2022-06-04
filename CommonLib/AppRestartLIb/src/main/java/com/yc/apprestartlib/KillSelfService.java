@@ -26,19 +26,29 @@ public class KillSelfService extends Service {
 
     public KillSelfService() {
         handler = new Handler();
+        AppLogUtils.d("KillSelfService: ", "new handler");
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        AppLogUtils.d("KillSelfService: ", "onCreate");
     }
 
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
-        long stopDelayed = intent.getLongExtra("Delayed", 2000);
+        AppLogUtils.d("KillSelfService: ", "onStartCommand "+startId);
+        long stopDelayed = intent.getIntExtra("Delayed", 2000);
         packageName = intent.getStringExtra("PackageName");
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                AppLogUtils.w("KillSelfService", "post delayed restart app : "+packageName);
+                AppLogUtils.d("KillSelfService: ", "post delayed restart app : "+packageName);
                 Intent launchIntent = getPackageManager().getLaunchIntentForPackage(packageName);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(launchIntent);
+
+                //销毁自己
                 KillSelfService.this.stopSelf();
             }
         },stopDelayed);

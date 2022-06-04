@@ -24,7 +24,7 @@ public class ServiceRestartImpl implements IRestartApp {
         intent.putExtra("PackageName",context.getPackageName());
         intent.putExtra("Delayed",2000);
         context.startService(intent);
-        AppLogUtils.w("ServiceRestartImpl", "restart app");
-        ActivityManager.getInstance().killCurrentProcess(true);
+        AppLogUtils.d("KillSelfService: ", "restart app");
+        ActivityManager.getInstance().killCurrentProcess(false);
     }
 }

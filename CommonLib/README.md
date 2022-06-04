@@ -14,6 +14,7 @@
 
 
 ### 01.框架公共组件层
+- 组件化开发中基础公共库，activity栈管理；Log日志；通用缓存库(支持sp，mmkv，lru，disk，fastsp等多种存储方式切换)；App重启；通用全面的工具类Utils；通用基类fragment，adpater，activity等简单封装；intent内容打印到控制台库
 
 
 ### 02.组件化建设
