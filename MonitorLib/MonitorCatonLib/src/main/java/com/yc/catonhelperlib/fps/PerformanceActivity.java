@@ -136,14 +136,14 @@ public class PerformanceActivity extends AppCompatActivity {
                     }
 
                     reader.close();
-                } catch (Exception var15) {
-                    var15.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 } finally {
                     if (reader != null) {
                         try {
                             reader.close();
-                        } catch (IOException var14) {
-                            var14.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
 

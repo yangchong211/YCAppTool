@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Process;
 import android.util.Log;
 import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.yc.easyexecutor.InterExecutorLog;
 import com.yc.easyexecutor.SafeHandler;
 import com.yc.easyexecutor.TaskHandlerThread;
 
@@ -27,7 +28,7 @@ public final class TaskScheduler {
     private static final String TAG = "TaskScheduler";
     private final ExecutorService mParallelExecutor ;
     private final ExecutorService mTimeOutExecutor ;
-    private InterLog mILog = new InterLog() {
+    private InterExecutorLog mILog = new InterExecutorLog() {
         @Override
         public void info(String info) {
             Log.i(TAG,info);
@@ -68,7 +69,7 @@ public final class TaskScheduler {
                 KEEP_ALIVE,TimeUnit.SECONDS,new SynchronousQueue<Runnable>(), MyThreadFactory.TIME_OUT_THREAD_FACTORY);
     }
 
-    public static void addLogImpl(InterLog taskLog) {
+    public static void addLogImpl(InterExecutorLog taskLog) {
         if(taskLog != null) {
             getInstance().mILog = taskLog;
         }
@@ -157,7 +158,7 @@ public final class TaskScheduler {
      *                        不能100%保证实际的超时时间就是timeOutMillis，但一般没必要那么精确
      * */
     public static <R> void executeTimeOutTask(final long timeOutMillis, final AbsTaskRunnable<R> timeOutTask) {
-        final Future future = getInstance().mTimeOutExecutor.submit(timeOutTask);
+        Future<?> future = getInstance().mTimeOutExecutor.submit(timeOutTask);
         getInstance().mTimeOutExecutor.execute(new Runnable() {
             @Override
             public void run() {

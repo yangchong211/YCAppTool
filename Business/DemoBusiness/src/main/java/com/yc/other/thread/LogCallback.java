@@ -2,7 +2,7 @@ package com.yc.other.thread;
 
 import android.util.Log;
 
-import cn.ycbjie.ycthreadpoollib.callback.ThreadCallback;
+import com.yc.ycthreadpoollib.callback.ThreadCallback;
 
 
 /**

@@ -6,7 +6,7 @@ import android.util.Log;
 import com.yc.logging.config.LoggerConfig;
 import com.yc.logging.LoggerFactory;
 import com.yc.logging.util.Supplier;
-import com.ycbjie.library.BuildConfig;
+import com.yc.library.BuildConfig;
 
 public final class AppLogHelper {
 

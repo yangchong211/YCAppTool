@@ -4,20 +4,20 @@
     package="cn.ycbjie.ycstatusbar">
 
     <application>
-        <activity android:name="com.ycbjie.ycstatusbar.BarActivity"/>
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarColorActivity" />
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarColorToolBarActivity" />
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarTranslucent"/>
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarColorCoordinatorActivity" />
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarTranslucentCoordinatorActivity"/>
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarWhiteActivity"/>
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarWhiteToolBarActivity"/>
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarWhiteCoordinatorActivity"/>
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarWhiteCoordinatorActivity2"/>
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarWhiteCoordinatorActivity3"/>
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarFragmentActivity"/>
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarFragment2Activity"/>
-        <activity android:name="com.ycbjie.ycstatusbar.StatusBarFragment3Activity"/>
+        <activity android:name="com.yc.ycstatusbar.BarActivity"/>
+        <activity android:name="com.yc.ycstatusbar.StatusBarColorActivity" />
+        <activity android:name="com.yc.ycstatusbar.StatusBarColorToolBarActivity" />
+        <activity android:name="com.yc.ycstatusbar.StatusBarTranslucent"/>
+        <activity android:name="com.yc.ycstatusbar.StatusBarColorCoordinatorActivity" />
+        <activity android:name="com.yc.ycstatusbar.StatusBarTranslucentCoordinatorActivity"/>
+        <activity android:name="com.yc.ycstatusbar.StatusBarWhiteActivity"/>
+        <activity android:name="com.yc.ycstatusbar.StatusBarWhiteToolBarActivity"/>
+        <activity android:name="com.yc.ycstatusbar.StatusBarWhiteCoordinatorActivity"/>
+        <activity android:name="com.yc.ycstatusbar.StatusBarWhiteCoordinatorActivity2"/>
+        <activity android:name="com.yc.ycstatusbar.StatusBarWhiteCoordinatorActivity3"/>
+        <activity android:name="com.yc.ycstatusbar.StatusBarFragmentActivity"/>
+        <activity android:name="com.yc.ycstatusbar.StatusBarFragment2Activity"/>
+        <activity android:name="com.yc.ycstatusbar.StatusBarFragment3Activity"/>
     </application>
 
 </manifest>

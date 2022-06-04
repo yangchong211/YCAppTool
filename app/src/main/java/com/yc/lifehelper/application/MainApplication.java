@@ -9,7 +9,7 @@ import com.yc.localelib.service.LocaleService;
 import com.yc.tracesdk.TimeTrace;
 import com.yc.tracesdk.TimeTraceFactory;
 
-import cn.ycbjie.ycthreadpoollib.ScheduleTask;
+import com.yc.ycthreadpoollib.ScheduleTask;
 
 
 /**

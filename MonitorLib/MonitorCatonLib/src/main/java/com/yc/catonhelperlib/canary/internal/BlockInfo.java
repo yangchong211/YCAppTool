@@ -9,6 +9,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.yc.catonhelperlib.canary.monitor.BlockCanaryInternals;
+import com.yc.toolutils.AppProcessUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -126,7 +127,7 @@ public class BlockInfo {
         blockInfo.qualifier = sQualifier;
         blockInfo.imei = sImei;
         blockInfo.uid = BlockCanaryInternals.getContext().provideUid();
-        blockInfo.processName = ProcessUtils.myProcessName();
+        blockInfo.processName = AppProcessUtils.getCurrentProcessName(BlockCanaryInternals.getContext().provideContext());
         blockInfo.network = BlockCanaryInternals.getContext().provideNetworkType();
         blockInfo.freeMemory = String.valueOf(PerformanceUtils.getFreeMemory());
         blockInfo.totalMemory = String.valueOf(PerformanceUtils.getTotalMemory());

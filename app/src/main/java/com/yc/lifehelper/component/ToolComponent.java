@@ -14,7 +14,7 @@ import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.toolutils.click.FastClickUtils;
 import com.ycbjie.android.view.activity.AndroidActivity;
-import com.ycbjie.ycstatusbar.BarActivity;
+import com.yc.ycstatusbar.BarActivity;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 

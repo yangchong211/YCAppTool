@@ -3,8 +3,8 @@ package com.yc.catonhelperlib.canary.ui;
 import android.text.TextUtils;
 
 import com.yc.catonhelperlib.canary.internal.BlockInfo;
-import com.yc.catonhelperlib.canary.internal.ProcessUtils;
 import com.yc.catonhelperlib.canary.monitor.BlockCanaryInternals;
+import com.yc.toolutils.AppProcessUtils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,7 +21,7 @@ final class BlockCanaryUtils {
             CONCERN_LIST.addAll(BlockCanaryInternals.getContext().concernPackages());
         }
         if (CONCERN_LIST.isEmpty()) {
-            CONCERN_LIST.add(ProcessUtils.myProcessName());
+            CONCERN_LIST.add(AppProcessUtils.getCurrentProcessName(BlockCanaryInternals.getContext().provideContext()));
         }
     }
 
