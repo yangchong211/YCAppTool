@@ -17,6 +17,7 @@ import com.yc.apploglib.config.AppLogFactory;
 import com.yc.apploglib.printer.AbsPrinter;
 import com.yc.apprestartlib.RestartAppHelper;
 import com.yc.apprestartlib.RestartFactory;
+import com.yc.intent.log.IntentLogger;
 import com.yc.store.BaseDataCache;
 import com.yc.store.StoreToolHelper;
 import com.yc.toolutils.AppUtils;
@@ -85,7 +86,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_restart3).setOnClickListener(this);
         findViewById(R.id.btn_restart4).setOnClickListener(this);
 
-        findViewById(R.id.btn_3).setOnClickListener(this);
+        findViewById(R.id.btn_intent).setOnClickListener(this);
         findViewById(R.id.btn_4).setOnClickListener(this);
     }
 
@@ -127,8 +128,8 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
             RestartAppHelper.restartApp(this,RestartFactory.LAUNCHER);
         }else if (id == R.id.btn_restart4) {
             RestartAppHelper.restartApp(this,RestartFactory.MAINIFEST);
-        }else if (id == R.id.btn_3) {
-
+        }else if (id == R.id.btn_intent) {
+            intentLog();
         } else if (id == R.id.btn_4) {
 
         }
@@ -304,4 +305,18 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
     private void disk3() {
         lruDiskCache.clearData();
     }
+
+
+    private void intentLog() {
+        Intent intent = getIntent();
+        //打印intent所有的数据
+        IntentLogger.print("intent log all: ", intent);
+        //打印intent中component
+        IntentLogger.printComponentName("intent log component : " , intent);
+        //打印intent中extras参数
+        IntentLogger.printExtras("intent log extras : ", intent);
+        //打印intent中flags参数
+        IntentLogger.printFlags("intent log flags : ", intent);
+    }
+
 }

@@ -165,12 +165,12 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_3"
+        android:id="@+id/btn_intent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left|center"
         android:layout_marginTop="10dp"
-        android:text="3.直线百分比进度条自定义控件"/>
+        android:text="intent内容输出到控制栏"/>
 
     <Button
         android:id="@+id/btn_4"

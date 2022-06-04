@@ -21,10 +21,27 @@
 
 
 ### 03.公共组件库依赖
+- 关于依赖库如下所示，可以根据需求选择性使用：
+    ``` java
+    //base基类
+    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.3.0'
+    //工具类utils
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.3.0'
+    //activity栈管理
+    implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.3.0'
+    //通用缓存存储库，支持sp，fastsp，mmkv，lruCache，DiskLruCache等
+    implementation 'com.github.yangchong211.YCCommonLib:AppBaseStore:1.3.0'
+    //通用日志输出库
+    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.3.0'
+    //app重启库
+    implementation 'com.github.yangchong211.YCCommonLib:AppRestartLib:1.3.0'
+    //intent内容输出到控制台
+    implementation 'com.github.yangchong211.YCCommonLib:SafeIntentLib:1.3.0'
+    ```
 
 
 ### 04.Activity栈管理库
-- 非常好用的activity任务栈管理库，自动化注册。拿来即可用，或者栈顶Activity，移除添加，推出某个页面，获取应用注册Activity列表等，可以注册监听某个页面的生命周期，小巧好用。
+- 非常好用的activity任务栈管理库，自动化注册。完全解耦合的activity栈管理，拿来即可用，或者栈顶Activity，移除添加，推出某个页面，获取应用注册Activity列表等，可以注册监听某个页面的生命周期，小巧好用。
     ``` java
     //添加 activity
     ActivityManager.getInstance().add(this);
