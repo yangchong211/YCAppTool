@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--应用场景-->
+    <!--举个例子，一个按钮的背景，默认时是一个形状，按下时是一个形状，不可操作时又是另一个形状-->
+    <!--有时候，不同状态下改变的不只是背景、图片等，文字颜色也会相应改变。而要处理这些不同状态下展示什么的问题，就要用selector来实现-->
+
+    <!--在Xml中标签说明-->
+    <!--作为drawable资源使用时，一般和shape一样放于drawable目录下，item必须指定android:drawable属性-->
+    <!--作为color资源使用时，则放于color目录下，item必须指定android:color属性-->
+
+
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="@color/colorPageBg" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/colorWhiteBg" />
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape>
+            <solid android:color="@color/colorPageBg" />
+        </shape>
+    </item>
+
+</selector>

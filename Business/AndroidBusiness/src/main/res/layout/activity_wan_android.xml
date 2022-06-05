@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorWhite"
-        app:tabBackground="@drawable/ripple_tab_bg"
+        app:tabBackground="@drawable/select_base_item_bg"
         app:tabIndicatorColor="@color/colorTheme"
         app:tabSelectedTextColor="@color/colorTheme"
         app:tabTextColor="@color/blackText"/>

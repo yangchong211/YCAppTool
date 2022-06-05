@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_margin="10dp"
-            app:srcCompat="@drawable/ic_gank_un_favorite"
+            app:srcCompat="@drawable/ic_base_un_favorite"
             tools:ignore="VectorDrawableCompat" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_top"

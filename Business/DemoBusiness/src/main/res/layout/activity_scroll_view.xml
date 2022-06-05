@@ -50,7 +50,6 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/shape_alpha_bg"
                     android:contentDescription="@null"
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax"

@@ -1,8 +1,5 @@
 <resources>
-    <string name="app_name">EasyHttp</string>
-
     <string name="http_loading">加载中&#8230;</string>
-
     <string name="http_unknown_error">请求出错，未知错误</string>
     <string name="http_token_error">登录失效，请重新登录</string>
     <string name="http_data_explain_error">数据解析异常，请稍后</string>

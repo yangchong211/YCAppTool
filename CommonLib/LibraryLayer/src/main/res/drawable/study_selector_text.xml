@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--举例子，用于按钮的文本颜色-->
+
+    <!-- 当前窗口失去焦点时 -->
+    <item android:color="@android:color/black"
+        android:state_window_focused="false" />
+    <!-- 不可用时 -->
+    <item android:color="@android:color/background_light"
+        android:state_enabled="false" />
+    <!-- 按压时 -->
+    <item android:color="@android:color/holo_blue_light"
+        android:state_pressed="true" />
+    <!-- 被选中时 -->
+    <item android:color="@android:color/holo_green_dark"
+        android:state_selected="true" />
+    <!-- 被激活时 -->
+    <item android:color="@android:color/holo_green_light"
+        android:state_activated="true" />
+    <!-- 默认时 -->
+    <item android:color="@android:color/white" />
+</selector>

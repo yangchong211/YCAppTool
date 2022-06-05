@@ -105,7 +105,6 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         final PopupWindow popMenu = new PopupWindow(popMenuView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
         popMenu.setClippingEnabled(false);
         popMenu.setFocusable(true);         //点击其他地方关闭
-        popMenu.setAnimationStyle(R.style.dialog_custom_view);
         popMenu.showAtLocation(popMenuView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 

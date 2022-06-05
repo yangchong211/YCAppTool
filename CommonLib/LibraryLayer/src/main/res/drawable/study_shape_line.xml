@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="line">
+    <!---实际显示的线 -->
+    <stroke
+        android:width="1dp"
+        android:color="#2F90BD"
+        android:dashGap="2dp"
+        android:dashWidth="4dp" />
+    <!---形状的高度 -->
+    <size android:height="4dp" />
+
+
+    <!--1.只能画水平线，画不了竖线；-->
+    <!--2.线的高度是通过stroke的android:width属性设置的；-->
+    <!--3.size的android:height属性定义的是整个形状区域的高度；-->
+    <!--4.size的height必须大于stroke的width，否则，线无法显示；-->
+    <!--5.线在整个形状区域中是居中显示的；-->
+    <!--6.线左右两边会留有空白间距，线越粗，空白越大；-->
+    <!--7.引用虚线的view需要添加属性android:layerType，值设为"software"，否则显示不了虚线。-->
+
+
+</shape>

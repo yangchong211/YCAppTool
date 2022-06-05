@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--举例子，在按钮的背景中-->
+
+    <!-- 当前窗口失去焦点时 -->
+    <item android:drawable="@drawable/ic_base_favorite"
+        android:state_window_focused="false" />
+    <!-- 不可用时 -->
+    <item android:drawable="@drawable/ic_base_favorite"
+        android:state_enabled="false" />
+    <!-- 按压时 -->
+    <item android:drawable="@drawable/ic_base_favorite"
+        android:state_pressed="true" />
+    <!-- 被选中时 -->
+    <item android:drawable="@drawable/ic_base_favorite"
+        android:state_selected="true" />
+    <!-- 被激活时 -->
+    <item android:drawable="@drawable/ic_base_favorite"
+        android:state_activated="true" />
+    <!-- 默认时 -->
+    <item android:drawable="@drawable/ic_base_favorite" />
+</selector>

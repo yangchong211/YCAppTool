@@ -54,16 +54,6 @@
         <item name="android:windowCloseOnTouchOutside">false</item>
     </style>
 
-    <style name="TransparentFrameWindowStyle" parent="android:style/Theme.Dialog">
-        <item name="android:windowBackground">@drawable/photo_choose_bg</item>
-    </style>
-
-    <!--自定义弹窗动画-->
-    <style name="dialog_custom_view">
-        <item name="android:windowEnterAnimation">@anim/photo_dialog_in_anim</item>
-        <item name="android:windowExitAnimation">@anim/photo_dialog_out_anim</item>
-    </style>
-
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

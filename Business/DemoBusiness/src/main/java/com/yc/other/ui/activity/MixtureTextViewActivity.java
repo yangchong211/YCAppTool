@@ -109,14 +109,14 @@ public class MixtureTextViewActivity extends BaseActivity {
     private void mode14() {
         SpannableStringBuilder spannableString = new SpannableStringBuilder();
         spannableString.append("暗影IV已经开始暴走了暗影IV已经开始暴走了");
-        //Drawable drawable = getResources().getDrawable(R.drawable.shape_find_icon);
-        ImageSpan imageSpan1 = new ImageSpan(this,R.drawable.shape_find_icon);
+        //Drawable drawable = getResources().getDrawable(R.drawable.study_shape_oval);
+        ImageSpan imageSpan1 = new ImageSpan(this,R.drawable.study_shape_oval);
         spannableString.setSpan(imageSpan1, 0, 0, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ImageSpan imageSpan2 = new ImageSpan(this,R.drawable.shape_find_icon);
+        ImageSpan imageSpan2 = new ImageSpan(this,R.drawable.study_shape_oval);
         spannableString.setSpan(imageSpan2, 3, 4, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ImageSpan imageSpan3 = new ImageSpan(this,R.drawable.shape_find_icon);
+        ImageSpan imageSpan3 = new ImageSpan(this,R.drawable.study_shape_oval);
         spannableString.setSpan(imageSpan3, 7, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ImageSpan imageSpan4 = new ImageSpan(this,R.drawable.shape_find_icon);
+        ImageSpan imageSpan4 = new ImageSpan(this,R.drawable.study_shape_oval);
         spannableString.setSpan(imageSpan4, 11, 12, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         tv14.setText(spannableString);
     }

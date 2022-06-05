@@ -28,11 +28,11 @@
                 android:textColor="@color/blackText"
                 android:text="介绍与帮助"/>
 
-            <RelativeLayout
+            <com.yc.roundcorner.viewgroup.RoundRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:background="@drawable/shape_common_gray_bg">
+                app:rRadius="@dimen/dp10"
+                android:padding="16dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/blackText2"
                     android:text="@string/introduce"/>
-            </RelativeLayout>
+            </com.yc.roundcorner.viewgroup.RoundRelativeLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -57,10 +57,10 @@
                 android:textColor="@color/blackText"
                 android:text="开发人员"/>
 
-            <RelativeLayout
+            <com.yc.roundcorner.viewgroup.RoundRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_common_gray_bg">
+                app:rRadius="@dimen/dp10">
 
                 <ImageView
                     android:id="@+id/ig_avatar"
@@ -116,7 +116,7 @@
                     android:textColor="@color/blackText1"
                     android:text="服务端开发"/>
 
-            </RelativeLayout>
+            </com.yc.roundcorner.viewgroup.RoundRelativeLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -132,12 +132,12 @@
                 android:textColor="@color/blackText"
                 android:text="使用到的开源库"/>
 
-            <RelativeLayout
+            <com.yc.roundcorner.viewgroup.RoundRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:padding="16dp"
-                android:background="@drawable/shape_common_gray_bg">
+                app:rRadius="@dimen/dp10"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -146,7 +146,7 @@
                     tools:ignore="HardcodedText"
                     android:textColor="@color/blackText1"
                     android:text="稍后添加"/>
-            </RelativeLayout>
+            </com.yc.roundcorner.viewgroup.RoundRelativeLayout>
 
         </LinearLayout>
     </com.yc.widget.scrollView.BounceScrollView>
