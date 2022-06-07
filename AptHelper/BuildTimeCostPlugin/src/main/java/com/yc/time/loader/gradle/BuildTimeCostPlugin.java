@@ -10,7 +10,6 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
 import org.gradle.api.tasks.TaskState;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +36,7 @@ public class BuildTimeCostPlugin implements Plugin<Project> {
         // 在 task 执行完成后，记录其执行结束时间，这样就能统计出该 task 的执行时长。
         project.getGradle().addListener(new AppTaskExecutionListener() {
             @Override
-            public void beforeExecute(@NotNull Task task) {
+            public void beforeExecute(Task task) {
                 //task开始执行之前搜集task的信息
                 TaskExecTimeInfo timeInfo = new TaskExecTimeInfo();
                 //记录开始时间
@@ -48,7 +47,7 @@ public class BuildTimeCostPlugin implements Plugin<Project> {
             }
 
             @Override
-            public void afterExecute(@NotNull Task task, @NotNull TaskState taskState) {
+            public void afterExecute(Task task,TaskState taskState) {
                 //task执行完之后，记录结束时的时间
                 TaskExecTimeInfo timeInfo = timeCostMap.get(task.getPath());
                 //记录结束时间
@@ -64,7 +63,7 @@ public class BuildTimeCostPlugin implements Plugin<Project> {
         //编译结束之后：
         project.getGradle().addBuildListener(new AppBuildListener() {
             @Override
-            public void buildFinished(@NotNull BuildResult buildResult) {
+            public void buildFinished( BuildResult buildResult) {
                 log("build finished, now println all task execution time:");
                 //按 task 执行顺序打印出执行时长信息
                 if (timeCostExt.isSorted()){

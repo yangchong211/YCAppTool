@@ -12,6 +12,7 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.util.ContentLengthInputStream;
 import com.bumptech.glide.util.Preconditions;
 import com.bumptech.glide.util.Synthetic;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

@@ -27,6 +27,7 @@ import com.yc.http.exception.ServerException;
 import com.yc.http.exception.TimeoutException;
 import com.yc.http.request.HttpRequest;
 
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -169,7 +170,6 @@ public final class RequestHandler implements IRequestHandler {
     }
 
     @Nullable
-    @org.jetbrains.annotations.Nullable
     @Override
     public Object readCache(@NonNull @NotNull HttpRequest<?> httpRequest, @NonNull @NotNull Type type, long cacheTime) {
         return null;

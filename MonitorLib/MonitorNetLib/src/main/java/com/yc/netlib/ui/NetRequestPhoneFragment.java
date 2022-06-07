@@ -36,9 +36,6 @@ import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppNetworkUtils;
 import com.yc.toolutils.AppWindowUtils;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -86,7 +83,7 @@ public class NetRequestPhoneFragment extends Fragment {
 
 
     @Override
-    public void onAttach(@NotNull Context context) {
+    public void onAttach(Context context) {
         super.onAttach(context);
         activity = (Activity) context;
     }

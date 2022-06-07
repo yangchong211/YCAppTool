@@ -2,13 +2,13 @@ package com.yc.netlib.stetho;
 
 import android.os.SystemClock;
 
+import androidx.annotation.Nullable;
+
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkTraceBean;
 import com.yc.netlib.utils.NetWorkUtils;
 import com.yc.toolutils.AppLogUtils;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -42,9 +42,8 @@ public class NetworkListener extends EventListener {
 
     public static Factory get(){
         Factory factory = new Factory() {
-            @NotNull
             @Override
-            public EventListener create(@NotNull Call call) {
+            public EventListener create(Call call) {
                 return new NetworkListener();
             }
         };
@@ -52,7 +51,7 @@ public class NetworkListener extends EventListener {
     }
 
     @Override
-    public void callStart(@NotNull Call call) {
+    public void callStart(Call call) {
         super.callStart(call);
         //mRequestId = mNextRequestId.getAndIncrement() + "";
         //getAndAdd，在多线程下使用cas保证原子性
@@ -63,112 +62,112 @@ public class NetworkListener extends EventListener {
     }
 
     @Override
-    public void dnsStart(@NotNull Call call, @NotNull String domainName) {
+    public void dnsStart(Call call, String domainName) {
         super.dnsStart(call, domainName);
         AppLogUtils.d(TAG, "dnsStart");
         saveEvent(NetworkTraceBean.DNS_START);
     }
 
     @Override
-    public void dnsEnd(@NotNull Call call, @NotNull String domainName, @NotNull List<InetAddress> inetAddressList) {
+    public void dnsEnd(Call call, String domainName, List<InetAddress> inetAddressList) {
         super.dnsEnd(call, domainName, inetAddressList);
         AppLogUtils.d(TAG, "dnsEnd");
         saveEvent(NetworkTraceBean.DNS_END);
     }
 
     @Override
-    public void connectStart(@NotNull Call call, @NotNull InetSocketAddress inetSocketAddress, @NotNull Proxy proxy) {
+    public void connectStart(Call call, InetSocketAddress inetSocketAddress, Proxy proxy) {
         super.connectStart(call, inetSocketAddress, proxy);
         AppLogUtils.d(TAG, "connectStart");
         saveEvent(NetworkTraceBean.CONNECT_START);
     }
 
     @Override
-    public void secureConnectStart(@NotNull Call call) {
+    public void secureConnectStart(Call call) {
         super.secureConnectStart(call);
         AppLogUtils.d(TAG, "secureConnectStart");
         saveEvent(NetworkTraceBean.SECURE_CONNECT_START);
     }
 
     @Override
-    public void secureConnectEnd(@NotNull Call call, @Nullable Handshake handshake) {
+    public void secureConnectEnd(Call call, @Nullable Handshake handshake) {
         super.secureConnectEnd(call, handshake);
         AppLogUtils.d(TAG, "secureConnectEnd");
         saveEvent(NetworkTraceBean.SECURE_CONNECT_END);
     }
 
     @Override
-    public void connectEnd(@NotNull Call call, @NotNull InetSocketAddress inetSocketAddress,
-                           @NotNull Proxy proxy, @Nullable Protocol protocol) {
+    public void connectEnd(Call call, InetSocketAddress inetSocketAddress,
+                           Proxy proxy, @Nullable Protocol protocol) {
         super.connectEnd(call, inetSocketAddress, proxy, protocol);
         AppLogUtils.d(TAG, "connectEnd");
         saveEvent(NetworkTraceBean.CONNECT_END);
     }
 
     @Override
-    public void connectFailed(@NotNull Call call, @NotNull InetSocketAddress inetSocketAddress, @NotNull Proxy proxy, @Nullable Protocol protocol, @NotNull IOException ioe) {
+    public void connectFailed(Call call, InetSocketAddress inetSocketAddress, Proxy proxy, @Nullable Protocol protocol, IOException ioe) {
         super.connectFailed(call, inetSocketAddress, proxy, protocol, ioe);
         AppLogUtils.d(TAG, "connectFailed");
     }
 
     @Override
-    public void requestHeadersStart(@NotNull Call call) {
+    public void requestHeadersStart(Call call) {
         super.requestHeadersStart(call);
         AppLogUtils.d(TAG, "requestHeadersStart");
         saveEvent(NetworkTraceBean.REQUEST_HEADERS_START);
     }
 
     @Override
-    public void requestHeadersEnd(@NotNull Call call, @NotNull Request request) {
+    public void requestHeadersEnd(Call call, Request request) {
         super.requestHeadersEnd(call, request);
         AppLogUtils.d(TAG, "requestHeadersEnd");
         saveEvent(NetworkTraceBean.REQUEST_HEADERS_END);
     }
 
     @Override
-    public void requestBodyStart(@NotNull Call call) {
+    public void requestBodyStart(Call call) {
         super.requestBodyStart(call);
         AppLogUtils.d(TAG, "requestBodyStart");
         saveEvent(NetworkTraceBean.REQUEST_BODY_START);
     }
 
     @Override
-    public void requestBodyEnd(@NotNull Call call, long byteCount) {
+    public void requestBodyEnd(Call call, long byteCount) {
         super.requestBodyEnd(call, byteCount);
         AppLogUtils.d(TAG, "requestBodyEnd");
         saveEvent(NetworkTraceBean.REQUEST_BODY_END);
     }
 
     @Override
-    public void responseHeadersStart(@NotNull Call call) {
+    public void responseHeadersStart(Call call) {
         super.responseHeadersStart(call);
         AppLogUtils.d(TAG, "responseHeadersStart");
         saveEvent(NetworkTraceBean.RESPONSE_HEADERS_START);
     }
 
     @Override
-    public void responseHeadersEnd(@NotNull Call call, @NotNull Response response) {
+    public void responseHeadersEnd(Call call, Response response) {
         super.responseHeadersEnd(call, response);
         AppLogUtils.d(TAG, "responseHeadersEnd");
         saveEvent(NetworkTraceBean.RESPONSE_HEADERS_END);
     }
 
     @Override
-    public void responseBodyStart(@NotNull Call call) {
+    public void responseBodyStart(Call call) {
         super.responseBodyStart(call);
         AppLogUtils.d(TAG, "responseBodyStart");
         saveEvent(NetworkTraceBean.RESPONSE_BODY_START);
     }
 
     @Override
-    public void responseBodyEnd(@NotNull Call call, long byteCount) {
+    public void responseBodyEnd(Call call, long byteCount) {
         super.responseBodyEnd(call, byteCount);
         AppLogUtils.d(TAG, "responseBodyEnd");
         saveEvent(NetworkTraceBean.RESPONSE_BODY_END);
     }
 
     @Override
-    public void callEnd(@NotNull Call call) {
+    public void callEnd(Call call) {
         super.callEnd(call);
         AppLogUtils.d(TAG, "callEnd");
         saveEvent(NetworkTraceBean.CALL_END);
@@ -177,7 +176,7 @@ public class NetworkListener extends EventListener {
     }
 
     @Override
-    public void callFailed(@NotNull Call call, @NotNull IOException ioe) {
+    public void callFailed(Call call, IOException ioe) {
         super.callFailed(call, ioe);
         AppLogUtils.d(TAG, "callFailed");
     }

@@ -4,7 +4,6 @@ import com.android.build.gradle.AppExtension;
 
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.jetbrains.annotations.NotNull;
 
 public class MonitorPlugin implements Plugin<Project> {
 
@@ -16,7 +15,7 @@ public class MonitorPlugin implements Plugin<Project> {
     private static final String SPLIT = ",";
 
     @Override
-    public void apply(@NotNull Project project) {
+    public void apply(Project project) {
         boolean isOpenMonitor = false;
         if (project.hasProperty(KEY_OPEN)) {
             Object openValue = project.property(KEY_OPEN);

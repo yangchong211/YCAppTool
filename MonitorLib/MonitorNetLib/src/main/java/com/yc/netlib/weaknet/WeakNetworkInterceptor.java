@@ -1,8 +1,6 @@
 package com.yc.netlib.weaknet;
 
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -16,9 +14,8 @@ public class WeakNetworkInterceptor implements Interceptor {
 
     private static final String TAG = "WeakNetworkInterceptor";
 
-    @NotNull
     @Override
-    public Response intercept(@NotNull Chain chain) throws IOException {
+    public Response intercept(Chain chain) throws IOException {
         if (!WeakNetworkManager.get().isActive()) {
             Request request = chain.request();
             return chain.proceed(request);

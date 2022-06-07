@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.yc.netlib.R;
 import com.yc.netlib.utils.NetWorkUtils;
-import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class NetRequestInfoFragment extends Fragment {
     private NetPieChart mNetworkPierChart;
 
     @Override
-    public void onAttach(@NotNull Context context) {
+    public void onAttach(Context context) {
         super.onAttach(context);
         activity = (Activity) context;
     }

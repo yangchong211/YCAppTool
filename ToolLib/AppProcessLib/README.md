@@ -17,14 +17,14 @@
 
 ###  02.常见思路和做法
 - 第一种：一个思路就是通过统计当前活动的 Activity 数目来计算。
-    - 在 Activity#onStart 中来检测前一个状态是否是“后台”，如果是，则触发“切换到前台”事件，并将活动 Activity 数目加1。 在 Activity#onStop 中并将活动 Activity 数目减1。如果活动的 Activity 数目等于0， 就认为当前应用处于“后台”状态， 并触发“切换到后台”事件。
-          
+    - 在 Activity#onStart 中来检测前一个状态是否是“后台”，如果是，则触发“切换到前台”事件，并将活动 Activity 数目加1。 
+    - 在 Activity#onStop 中并将活动 Activity 数目减1。如果活动的 Activity 数目等于0，就认为当前应用处于“后台”状态，并触发“切换到后台”事件。
+- 第二种：增强版本统计统计
 
 
 ### 03.遇到的坑分析
 - 在关掉/点亮屏幕的情况下，不会触发 onStart 和 onStop 回调。只会触发 onPause 和 onResume。
     - 测试好像部分手机存在这种情况
-
 
 
 

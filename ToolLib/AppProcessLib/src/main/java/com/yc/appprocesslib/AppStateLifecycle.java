@@ -58,7 +58,6 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
      * 延迟500ms
      */
     private static final long TIMEOUT_MS = 500;
-    private final AtomicBoolean mActive = new AtomicBoolean(true);
 
     private final Runnable mDelayedPauseRunnable = new Runnable() {
         @Override
@@ -115,8 +114,6 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
         mStartedCounter++;
         //start调用，并且之前stop是true
         if (mStartedCounter == 1 && mStopSent) {
-            //在前台
-            mActive.set(true);
             onStateChanged(STATE_FOREGROUND);
             //设置stop当前状态是false
             mStopSent = false;
@@ -126,18 +123,13 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
     @Override
     public void onActivityStopped(@NonNull Activity activity) {
         mStartedCounter--;
-        if (mStartedCounter == 0 && mPauseSent) {
-            mActive.set(false);
-            mStopSent = true;
-            onStateChanged(STATE_BACKGROUND);
-        }
+        dispatchStopIfNeeded();
     }
 
     @Override
     public void onActivityPaused(@NonNull Activity activity) {
         mResumedCounter--;
         if (mResumedCounter == 0) {
-            mActive.set(false);
             mHandler.postDelayed(mDelayedPauseRunnable, TIMEOUT_MS);
         }
     }
@@ -146,9 +138,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
     public void onActivityResumed(@NonNull Activity activity) {
         mResumedCounter++;
         if (mResumedCounter == 1) {
-            mActive.set(true);
             if (mPauseSent) {
-                onStateChanged(STATE_FOREGROUND);
                 mPauseSent = false;
             } else {
                 mHandler.removeCallbacks(mDelayedPauseRunnable);
@@ -159,7 +149,6 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
     void dispatchPauseIfNeeded() {
         if (mResumedCounter == 0) {
             mPauseSent = true;
-            onStateChanged(STATE_BACKGROUND);
         }
     }
 
@@ -172,11 +161,11 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
 
     private void onStateChanged(int newState) {
         mState = newState;
-        if (!mActive.get() && newState == STATE_BACKGROUND) {
+        if (newState == STATE_BACKGROUND) {
             loggingAppState("App into background");
             dispatchOnInBackground();
         }
-        if (mActive.get() && newState == STATE_FOREGROUND) {
+        if (newState == STATE_FOREGROUND) {
             loggingAppState("App into foreground");
             dispatchOnInForeground();
         }

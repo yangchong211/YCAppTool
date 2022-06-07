@@ -16,9 +16,6 @@ import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.netlib.R;
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +29,7 @@ public class NetRequestListFragment extends Fragment {
     private Activity activity;
 
     @Override
-    public void onAttach(@NotNull Context context) {
+    public void onAttach(Context context) {
         super.onAttach(context);
         activity = (Activity) context;
     }

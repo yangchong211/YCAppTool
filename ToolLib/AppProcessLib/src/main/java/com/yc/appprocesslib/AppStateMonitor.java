@@ -8,7 +8,6 @@ import android.content.res.Configuration;
 import android.os.Handler;
 import android.util.Log;
 
-
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
