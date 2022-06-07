@@ -381,7 +381,17 @@ public class MainActivity extends BaseActivity{
                     ToastUtils.showRoundRectToast("再按一次返回桌面");
                     time = System.currentTimeMillis();
                 } else {
-                    moveTaskToBack(true);
+                    //可将activity 退到后台，注意不是finish()退出。
+                    //判断Activity是否是task根
+                    //使用moveTaskToBack是为了让app退出时，不闪屏，退出柔和一些
+                    if (this.isTaskRoot()){
+                        //参数为false——代表只有当前activity是task根，指应用启动的第一个activity时，才有效;
+                        moveTaskToBack(false);
+                    } else {
+                        //参数为true——则忽略这个限制，任何activity都可以有效。
+                        //使用此方法，便不会执行Activity的onDestroy()方法
+                        moveTaskToBack(true);
+                    }
                 }
             }
             return true;
