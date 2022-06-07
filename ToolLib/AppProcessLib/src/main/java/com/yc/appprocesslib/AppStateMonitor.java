@@ -48,10 +48,10 @@ public class AppStateMonitor implements Application.ActivityLifecycleCallbacks, 
         if (mInitialized) {
             return;
         }
-        mInitialized = true;
         Application application = (Application) context.getApplicationContext();
         application.registerActivityLifecycleCallbacks(this);
         sendDelayedMessage();
+        mInitialized = true;
     }
 
     private void sendDelayedMessage() {

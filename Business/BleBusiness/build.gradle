@@ -34,6 +34,8 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':AppLogLib')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
+    implementation project(path: ':AppInitCommon')
+    implementation project(path: ':AppInitApi')
 }
 
 

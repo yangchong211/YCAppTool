@@ -82,6 +82,9 @@ dependencies {
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':BaseClassLib')
 
+    implementation project(path: ':AppInitCommon')
+    implementation project(path: ':AppInitApi')
+
     implementation(rootProject.ext.dependencies["kotlinxJdk"])
     // Kotlin coroutines
     implementation(rootProject.ext.dependencies["kotlinxCoroutinesCore"])
