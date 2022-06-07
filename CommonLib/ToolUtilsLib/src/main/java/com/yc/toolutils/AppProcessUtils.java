@@ -356,9 +356,13 @@ public final class AppProcessUtils {
      * 方案一：利用ActivityManager的RunningAppProcessInfo类
      * 方案二：监听Home键点击
      * 方案三：利用ActivityLifecycleCallbacks监听所有activity的生命周期
+     *
+     * 建议使用：https://github.com/yangchong211/YCEfficient
+     *
      * @param context                           上下文
      * @return                                  返回true表示在后台
      */
+    @Deprecated
     public static boolean isRunningInForeground(Context context) {
         if (Build.VERSION.SDK_INT >= 21){
             return LollipopRunningProcessCompat.isRunningInForeground(context);
@@ -372,6 +376,7 @@ public final class AppProcessUtils {
 
         }
 
+        @Deprecated
         public static boolean isRunningInForeground(Context context) {
             try {
                 Class clazz = ActivityManager.RunningAppProcessInfo.class;
@@ -411,6 +416,7 @@ public final class AppProcessUtils {
 
         }
 
+        @Deprecated
         public static boolean isRunningInForeground(Context context) {
             try {
                 ActivityManager am = (ActivityManager)context.getSystemService(
@@ -433,7 +439,6 @@ public final class AppProcessUtils {
      */
     @Deprecated
     public static boolean isAppOnForeground() {
-
         ActivityManager activityManager = (ActivityManager) AppToolUtils.getApp()
                 .getSystemService(Context.ACTIVITY_SERVICE);
         String packageName = AppToolUtils.getApp().getPackageName();
@@ -443,7 +448,6 @@ public final class AppProcessUtils {
         if (appProcesses == null) {
             return false;
         }
-
         for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
             if (appProcess.processName.equals(packageName)
                     && appProcess.importance ==
@@ -451,7 +455,6 @@ public final class AppProcessUtils {
                 return true;
             }
         }
-
         return false;
     }
 
