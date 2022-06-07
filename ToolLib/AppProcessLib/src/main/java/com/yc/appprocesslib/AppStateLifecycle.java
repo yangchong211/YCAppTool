@@ -8,12 +8,10 @@ import android.content.res.Configuration;
 import android.os.Handler;
 import android.util.Log;
 
-
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author: 杨充
@@ -23,13 +21,18 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @revise :
  * GitHub ：https://github.com/yangchong211/YCEfficient
  */
-public class AppStateMonitor extends BaseLifecycleCallbacks implements ComponentCallbacks2 {
+public class AppStateLifecycle extends BaseLifecycleCallbacks implements ComponentCallbacks2 {
 
     public static final String TAG = "AppStateMonitor";
-    private static final AppStateMonitor S_INSTANCE = new AppStateMonitor();
+    private static final AppStateLifecycle S_INSTANCE = new AppStateLifecycle();
     private final ArrayList<StateListener> mStateListeners = new ArrayList<>();
-    private final AtomicInteger mActiveActivitiesCount = new AtomicInteger(0);
+    /**
+     * 表示前台
+     */
     public static final int STATE_FOREGROUND = 1;
+    /**
+     * 表示后台
+     */
     public static final int STATE_BACKGROUND = 0;
     private int mState = STATE_BACKGROUND;
     private final Handler mHandler = BackgroundThread.get().getHandler();
@@ -37,13 +40,35 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
      * 判断是否初始化
      */
     private static final AtomicBoolean mInitialized = new AtomicBoolean(false);
-    private Runnable mInitialReportTask;
     /**
      * 是否打印日志
      */
-    private final boolean mIsLog = false;
+    private boolean mIsLog = false;
+    /**
+     * 记录start次数
+     */
+    private int mStartedCounter = 0;
+    /**
+     * 记录resume次数
+     */
+    private int mResumedCounter = 0;
+    private boolean mPauseSent = true;
+    private boolean mStopSent = true;
+    /**
+     * 延迟500ms
+     */
+    private static final long TIMEOUT_MS = 500;
+    private final AtomicBoolean mActive = new AtomicBoolean(true);
 
-    public static AppStateMonitor getInstance() {
+    private final Runnable mDelayedPauseRunnable = new Runnable() {
+        @Override
+        public void run() {
+            dispatchPauseIfNeeded();
+            dispatchStopIfNeeded();
+        }
+    };
+
+    public static AppStateLifecycle getInstance() {
         //静态单例
         return S_INSTANCE;
     }
@@ -54,20 +79,7 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
         }
         Application application = (Application) context.getApplicationContext();
         application.registerActivityLifecycleCallbacks(this);
-        sendDelayedMessage();
         mInitialized.set(true);
-    }
-
-    private void sendDelayedMessage() {
-        mInitialReportTask = new Runnable() {
-            @Override
-            public void run() {
-                if (mActiveActivitiesCount.get() == 0) {
-                    onStateChanged(STATE_BACKGROUND);
-                }
-            }
-        };
-        mHandler.postDelayed(mInitialReportTask, 15 * 1000);
     }
 
     /**
@@ -99,53 +111,72 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
 
     @Override
     public void onActivityStarted(@NonNull Activity activity) {
-        String msg = TAG + "onActivityStarted: " + activity;
-        loggingAppState(msg);
-        int old = mActiveActivitiesCount.getAndIncrement();
-        if (old == 0) {
+        //start调用+1
+        mStartedCounter++;
+        //start调用，并且之前stop是true
+        if (mStartedCounter == 1 && mStopSent) {
+            //在前台
+            mActive.set(true);
             onStateChanged(STATE_FOREGROUND);
-        }
-
-        if (mInitialReportTask != null) {
-            mHandler.removeCallbacks(mInitialReportTask);
-            mInitialReportTask = null;
+            //设置stop当前状态是false
+            mStopSent = false;
         }
     }
 
     @Override
     public void onActivityStopped(@NonNull Activity activity) {
-        int newState = mActiveActivitiesCount.decrementAndGet();
-        if (newState == 0) {
+        mStartedCounter--;
+        if (mStartedCounter == 0 && mPauseSent) {
+            mActive.set(false);
+            mStopSent = true;
             onStateChanged(STATE_BACKGROUND);
         }
     }
 
-
     @Override
-    public void onTrimMemory(int level) {
-        String msg = TAG + "onTrimMemory: level:" + level;
-        loggingAppState(msg);
+    public void onActivityPaused(@NonNull Activity activity) {
+        mResumedCounter--;
+        if (mResumedCounter == 0) {
+            mActive.set(false);
+            mHandler.postDelayed(mDelayedPauseRunnable, TIMEOUT_MS);
+        }
     }
 
     @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        String msg = TAG + "onConfigurationChanged: " + newConfig;
-        loggingAppState(msg);
+    public void onActivityResumed(@NonNull Activity activity) {
+        mResumedCounter++;
+        if (mResumedCounter == 1) {
+            mActive.set(true);
+            if (mPauseSent) {
+                onStateChanged(STATE_FOREGROUND);
+                mPauseSent = false;
+            } else {
+                mHandler.removeCallbacks(mDelayedPauseRunnable);
+            }
+        }
     }
 
-    @Override
-    public void onLowMemory() {
-        String msg = TAG + "onLowMemory: ";
-        loggingAppState(msg);
+    void dispatchPauseIfNeeded() {
+        if (mResumedCounter == 0) {
+            mPauseSent = true;
+            onStateChanged(STATE_BACKGROUND);
+        }
+    }
+
+    void dispatchStopIfNeeded() {
+        if (mStartedCounter == 0 && mPauseSent) {
+            mStopSent = true;
+            onStateChanged(STATE_BACKGROUND);
+        }
     }
 
     private void onStateChanged(int newState) {
         mState = newState;
-        if (newState == STATE_BACKGROUND) {
+        if (!mActive.get() && newState == STATE_BACKGROUND) {
             loggingAppState("App into background");
             dispatchOnInBackground();
         }
-        if (newState == STATE_FOREGROUND) {
+        if (mActive.get() && newState == STATE_FOREGROUND) {
             loggingAppState("App into foreground");
             dispatchOnInForeground();
         }
@@ -197,9 +228,27 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
         }
     }
 
+    @Override
+    public void onTrimMemory(int level) {
+        String msg = TAG + "onTrimMemory: level:" + level;
+        loggingAppState(msg);
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        String msg = TAG + "onConfigurationChanged: " + newConfig;
+        loggingAppState(msg);
+    }
+
+    @Override
+    public void onLowMemory() {
+        String msg = TAG + "onLowMemory: ";
+        loggingAppState(msg);
+    }
+
     private void loggingAppState(String msg) {
-        if (msg != null) {
-            Log.d("app auto closer msg : ", msg);
+        if (msg != null && mIsLog) {
+            Log.d("app state : ", msg);
         }
     }
 

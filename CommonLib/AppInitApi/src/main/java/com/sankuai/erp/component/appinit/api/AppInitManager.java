@@ -4,7 +4,8 @@ import android.app.Application;
 import android.content.ComponentCallbacks;
 import android.content.ComponentCallbacks2;
 import android.content.res.Configuration;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.sankuai.erp.component.appinit.common.AppInitCallback;
 import com.sankuai.erp.component.appinit.common.AppInitCommonUtils;

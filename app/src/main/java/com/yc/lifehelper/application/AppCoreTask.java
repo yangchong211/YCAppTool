@@ -3,6 +3,7 @@ package com.yc.lifehelper.application;
 import android.os.Looper;
 import android.util.Log;
 
+import com.yc.appprocesslib.AppStateLifecycle;
 import com.yc.appprocesslib.AppStateMonitor;
 import com.yc.appprocesslib.StateListener;
 import com.yc.appstart.AppStartTask;
@@ -132,6 +133,18 @@ public class AppCoreTask extends AppStartTask {
             public void onInBackground() {
                 AppLogUtils.i("app state in background");
                 //ToastUtils.showRoundRectToast("后台");
+            }
+        });
+        AppStateLifecycle.getInstance().init(MainApplication.getInstance());
+        AppStateLifecycle.getInstance().registerStateListener(new StateListener() {
+            @Override
+            public void onInForeground() {
+                AppLogUtils.i("app lifecycle state in foreground");
+            }
+
+            @Override
+            public void onInBackground() {
+                AppLogUtils.i("app lifecycle state in background");
             }
         });
     }
