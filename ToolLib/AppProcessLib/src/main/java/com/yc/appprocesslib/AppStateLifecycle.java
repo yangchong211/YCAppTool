@@ -41,10 +41,6 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
      */
     private static final AtomicBoolean mInitialized = new AtomicBoolean(false);
     /**
-     * 是否打印日志
-     */
-    private boolean mIsLog = false;
-    /**
      * 记录start次数
      */
     private int mStartedCounter = 0;
@@ -236,12 +232,9 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
     }
 
     private void loggingAppState(String msg) {
-        if (msg != null && mIsLog) {
+        if (msg != null && BuildConfig.DEBUG) {
             Log.d("app state : ", msg);
         }
     }
 
-    public boolean getLogDebug() {
-        return mIsLog;
-    }
 }

@@ -37,10 +37,6 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
      */
     private static final AtomicBoolean mInitialized = new AtomicBoolean(false);
     private Runnable mInitialReportTask;
-    /**
-     * 是否打印日志
-     */
-    private final boolean mIsLog = false;
 
     public static AppStateMonitor getInstance() {
         //静态单例
@@ -202,7 +198,4 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
         }
     }
 
-    public boolean getLogDebug() {
-        return mIsLog;
-    }
 }

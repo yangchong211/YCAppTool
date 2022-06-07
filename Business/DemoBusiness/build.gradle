@@ -89,6 +89,5 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
     api project(path: ':BusinessInterface')
 
-    implementation project(path: ':AppInitCommon')
-    implementation project(path: ':AppInitApi')
+
 }
