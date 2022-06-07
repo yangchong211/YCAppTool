@@ -147,6 +147,10 @@ public class AppCoreTask extends AppStartTask {
                 AppLogUtils.i("app lifecycle state in background");
             }
         });
+        //判断是否在后台
+        boolean inBackground = AppStateLifecycle.getInstance().isInBackground();
+        //判断是否在前台
+        boolean inForeground = AppStateLifecycle.getInstance().isInForeground();
     }
 
     private void initAppCache() {
