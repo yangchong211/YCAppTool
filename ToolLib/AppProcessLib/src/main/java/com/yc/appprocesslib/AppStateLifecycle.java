@@ -1,6 +1,7 @@
 package com.yc.appprocesslib;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
@@ -18,7 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @email : yangchong211@163.com
  * @time : 2018/04/15
  * @desc : 前后台监听
- * @revise :
+ * @revise : 如果对前后台实时性要求不是那么严格，建议使用该类
  * GitHub ：https://github.com/yangchong211/YCEfficient
  */
 public class AppStateLifecycle extends BaseLifecycleCallbacks implements ComponentCallbacks2 {

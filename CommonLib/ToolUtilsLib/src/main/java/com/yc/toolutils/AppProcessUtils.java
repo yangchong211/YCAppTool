@@ -415,14 +415,44 @@ public final class AppProcessUtils {
             try {
                 ActivityManager am = (ActivityManager)context.getSystemService(
                         Context.ACTIVITY_SERVICE);
+                String packageName = context.getPackageName();
                 List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
                 return null != tasks && !tasks.isEmpty() &&
-                        tasks.get(0).topActivity.getPackageName().equals(context.getPackageName());
+                        tasks.get(0).topActivity.getPackageName().equals(packageName);
             } catch (Exception var3) {
                 return false;
             }
         }
     }
 
+    /**
+     * 判断app是否处于前台
+     * 建议使用：https://github.com/yangchong211/YCEfficient
+     *
+     * @return  true表示前台
+     */
+    @Deprecated
+    public static boolean isAppOnForeground() {
+
+        ActivityManager activityManager = (ActivityManager) AppToolUtils.getApp()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        String packageName = AppToolUtils.getApp().getPackageName();
+        //获取Android设备中所有正在运行的App
+        List<ActivityManager.RunningAppProcessInfo> appProcesses =
+                activityManager.getRunningAppProcesses();
+        if (appProcesses == null) {
+            return false;
+        }
+
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            if (appProcess.processName.equals(packageName)
+                    && appProcess.importance ==
+                    ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }

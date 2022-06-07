@@ -22,7 +22,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @revise :
  * GitHub ：https://github.com/yangchong211/YCEfficient
  */
-@Deprecated
 public class AppStateMonitor extends BaseLifecycleCallbacks implements ComponentCallbacks2 {
 
     public static final String TAG = "AppStateMonitor";
