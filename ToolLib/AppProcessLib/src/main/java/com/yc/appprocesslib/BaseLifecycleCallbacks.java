@@ -16,7 +16,7 @@ import android.util.Log;
  */
 public class BaseLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
 
-    public static final String TAG = "AppStateMonitor";
+    public static final String TAG = "AppStateMonitor ";
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {

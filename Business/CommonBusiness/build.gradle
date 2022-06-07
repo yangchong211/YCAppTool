@@ -36,5 +36,5 @@ dependencies {
     implementation project(path: ':AppRestartLib')
     implementation project(path: ':SafeIntentLib')
 
-
+    implementation project(path: ':AppProcessLib')
 }

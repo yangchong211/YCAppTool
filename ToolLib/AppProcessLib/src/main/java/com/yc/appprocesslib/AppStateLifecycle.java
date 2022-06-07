@@ -36,6 +36,9 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
      */
     public static final int STATE_BACKGROUND = 0;
     private int mState = STATE_BACKGROUND;
+    /**
+     * 使用 HandlerThread + Handler
+     */
     private final Handler mHandler = BackgroundThread.get().getHandler();
     /**
      * 判断是否初始化
@@ -107,6 +110,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
 
     @Override
     public void onActivityStarted(@NonNull Activity activity) {
+        super.onActivityStarted(activity);
         //start调用+1
         mStartedCounter++;
         //start调用，并且之前stop是true
@@ -119,12 +123,14 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
 
     @Override
     public void onActivityStopped(@NonNull Activity activity) {
+        super.onActivityStopped(activity);
         mStartedCounter--;
         dispatchStopIfNeeded();
     }
 
     @Override
     public void onActivityPaused(@NonNull Activity activity) {
+        super.onActivityPaused(activity);
         mResumedCounter--;
         if (mResumedCounter == 0) {
             mHandler.postDelayed(mDelayedPauseRunnable, TIMEOUT_MS);
@@ -133,6 +139,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
 
     @Override
     public void onActivityResumed(@NonNull Activity activity) {
+        super.onActivityResumed(activity);
         mResumedCounter++;
         if (mResumedCounter == 1) {
             if (mPauseSent) {
@@ -234,7 +241,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
 
     private void loggingAppState(String msg) {
         if (msg != null && BuildConfig.DEBUG) {
-            Log.d("app state : ", msg);
+            Log.d("app state lifecycle : ", msg);
         }
     }
 

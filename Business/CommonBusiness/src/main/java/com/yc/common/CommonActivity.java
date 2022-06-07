@@ -15,11 +15,14 @@ import com.yc.activitymanager.ActivityManager;
 import com.yc.apploglib.AppLogHelper;
 import com.yc.apploglib.config.AppLogFactory;
 import com.yc.apploglib.printer.AbsPrinter;
+import com.yc.appprocesslib.AppStateLifecycle;
+import com.yc.appprocesslib.StateListener;
 import com.yc.apprestartlib.RestartAppHelper;
 import com.yc.apprestartlib.RestartFactory;
 import com.yc.intent.log.IntentLogger;
 import com.yc.store.BaseDataCache;
 import com.yc.store.StoreToolHelper;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppUtils;
 
 public class CommonActivity extends AppCompatActivity implements View.OnClickListener {
@@ -53,7 +56,26 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_common_main);
         init();
         initCache();
+        AppStateLifecycle.getInstance().registerStateListener(stateListener);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppStateLifecycle.getInstance().unregisterStateListener(stateListener);
+    }
+
+    private final StateListener stateListener = new StateListener() {
+        @Override
+        public void onInForeground() {
+            AppLogUtils.i("app common state in 前台");
+        }
+
+        @Override
+        public void onInBackground() {
+            AppLogUtils.i("app common state in 后台");
+        }
+    };
 
     private void initCache() {
         dataCache = StoreToolHelper.getInstance().getSpCache();

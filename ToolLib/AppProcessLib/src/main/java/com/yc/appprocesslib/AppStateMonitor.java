@@ -67,6 +67,8 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
 
     /**
      * 获取状态
+     * 前台切换到后台：onActivityPaused ---> onActivityStopped
+     * 后台切换到前台：onActivityStarted ---> onActivityResumed
      *
      * @return state状态
      */
@@ -94,8 +96,7 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
 
     @Override
     public void onActivityStarted(@NonNull Activity activity) {
-        String msg = TAG + "onActivityStarted: " + activity;
-        loggingAppState(msg);
+        super.onActivityStarted(activity);
         int old = mActiveActivitiesCount.getAndIncrement();
         if (old == 0) {
             onStateChanged(STATE_FOREGROUND);
@@ -108,13 +109,13 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
     }
 
     @Override
-    public void onActivityStopped(@NonNull Activity activity) {
+    public void onActivityStopped(Activity activity) {
+        super.onActivityStopped(activity);
         int newState = mActiveActivitiesCount.decrementAndGet();
         if (newState == 0) {
             onStateChanged(STATE_BACKGROUND);
         }
     }
-
 
     @Override
     public void onTrimMemory(int level) {
@@ -194,7 +195,7 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
 
     private void loggingAppState(String msg) {
         if (msg != null) {
-            Log.d("app auto closer msg : ", msg);
+            Log.d("app state monitor : ", msg);
         }
     }
 

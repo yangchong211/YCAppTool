@@ -122,7 +122,7 @@ public class AppCoreTask extends AppStartTask {
     }
 
     private void initAppProcess() {
-        AppStateMonitor.getInstance().registerStateListener(new StateListener() {
+        /*AppStateMonitor.getInstance().registerStateListener(new StateListener() {
             @Override
             public void onInForeground() {
                 AppLogUtils.i("app state in foreground");
@@ -134,7 +134,7 @@ public class AppCoreTask extends AppStartTask {
                 AppLogUtils.i("app state in background");
                 //ToastUtils.showRoundRectToast("后台");
             }
-        });
+        });*/
         AppStateLifecycle.getInstance().init(MainApplication.getInstance());
         AppStateLifecycle.getInstance().registerStateListener(new StateListener() {
             @Override
