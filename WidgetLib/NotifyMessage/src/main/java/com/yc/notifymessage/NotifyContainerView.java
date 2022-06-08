@@ -83,6 +83,8 @@ public class NotifyContainerView extends FrameLayout {
             case MotionEvent.ACTION_CANCEL:
                 mIsConsumeTouchEvent = false;
                 break;
+            default:
+                break;
         }
         return super.dispatchTouchEvent(event);
     }

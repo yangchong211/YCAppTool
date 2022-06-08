@@ -7,7 +7,7 @@ include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
         ':VideoBusiness', ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
         ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',':CommonBusiness',
         ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
-        ':ThreadBusiness', ':NotifyBusiness'
+        ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -26,6 +26,8 @@ project(':BleBusiness').projectDir = new File('Business/BleBusiness')
 project(':CommonBusiness').projectDir = new File('Business/CommonBusiness')
 project(':ThreadBusiness').projectDir = new File('Business/ThreadBusiness')
 project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')
+project(':KotlinBusiness').projectDir = new File('Business/KotlinBusiness')
+
 
 
 /* +++++++++ 框架业务服务层 +++++++++ */
@@ -52,7 +54,7 @@ include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
         'ComponentLib',':ApplicationLib',':AppStartLib',':AppBaseStore',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
-        ':ArchitectureLib',':ActivityManager'
+        ':ArchitectureLib',':ActivityManager',':AppFileLib'
 project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
@@ -71,7 +73,7 @@ project(':AppRestartLib').projectDir = new File('CommonLib/AppRestartLib')
 project(':SafeIntentLib').projectDir = new File('CommonLib/SafeIntentLib')
 project(':ArchitectureLib').projectDir = new File('CommonLib/ArchitectureLib')
 project(':ActivityManager').projectDir = new File('CommonLib/ActivityManager')
-
+project(':AppFileLib').projectDir = new File('CommonLib/AppFileLib')
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
