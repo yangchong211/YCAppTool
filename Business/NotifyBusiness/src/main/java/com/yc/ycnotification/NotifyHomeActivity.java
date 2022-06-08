@@ -5,17 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.cn.ycnotification.R;
 import com.yc.ycnotification.service.ServiceActivity;
 
 public class NotifyHomeActivity extends AppCompatActivity {
-
-    private TextView tv1;
-    private TextView tv2;
 
 
     /**
@@ -46,8 +41,9 @@ public class NotifyHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notify_home);
 
 
-        tv1 = findViewById(R.id.tv_1);
-        tv2 = findViewById(R.id.tv_2);
+        TextView tv1 = findViewById(R.id.tv_1);
+        TextView tv2 = findViewById(R.id.tv_2);
+        TextView tv3 = findViewById(R.id.tv_2);
 
         tv1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +53,13 @@ public class NotifyHomeActivity extends AppCompatActivity {
         });
 
         tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NotifyHomeActivity.this, NotifyActivity.class));
+            }
+        });
+
+        tv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(NotifyHomeActivity.this, ServiceActivity.class));

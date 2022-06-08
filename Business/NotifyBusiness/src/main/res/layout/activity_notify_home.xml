@@ -22,10 +22,18 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2.在Service中开启通知"
+            android:text="2.完全自定义通知栏"
             android:background="@color/bg"
             android:padding="10dp"/>
 
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3.在Service中开启通知"
+            android:background="@color/bg"
+            android:padding="10dp"/>
     </LinearLayout>
 
 </ScrollView>

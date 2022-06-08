@@ -22,8 +22,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
-import com.yc.cn.ycnotification.R;
-import com.yc.ycnotification.TestActivity;
+
+import com.yc.ycnotification.R;
+import com.yc.ycnotification.NotifyIntentActivity;
 
 import java.util.List;
 
@@ -120,7 +121,7 @@ public class ServiceActivity extends AppCompatActivity {
                     "Channel Notifications", NotificationManager.IMPORTANCE_HIGH);
             mNotificationManager.createNotificationChannel(mChannel);
         }
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, NotifyIntentActivity.class);
         //添加为栈顶Activity
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,

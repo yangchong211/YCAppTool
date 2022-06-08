@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.yc.cn.ycnotification.R;
+import com.yc.ycnotification.R;
 import com.yc.notifymessage.CustomNotification;
 import com.yc.notifymessage.NotificationView;
 import com.yc.toastutils.ToastUtils;

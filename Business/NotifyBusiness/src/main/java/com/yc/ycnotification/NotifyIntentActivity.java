@@ -5,23 +5,21 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import com.yc.ycnotification.R;
 
-import com.yc.cn.ycnotification.R;
 
 /**
  * Created by PC on 2017/12/7.
  * 作者：PC
  */
 
-public class TestActivity extends AppCompatActivity {
+public class NotifyIntentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notify_test);
-
         TextView tv = (TextView) findViewById(R.id.tv);
-
         int what = getIntent().getIntExtra("what", 0);
         switch (what){
             case 1:

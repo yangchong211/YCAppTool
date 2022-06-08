@@ -21,13 +21,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.appprocesslib.AppStateMonitor;
 import com.yc.appprocesslib.StateListener;
+
 import com.yc.notificationlib.NotificationParams;
 import com.yc.notificationlib.NotificationUtils;
 import com.yc.notifymessage.CustomNotification;
 import com.yc.toastutils.ToastUtils;
 import com.yc.ycnotification.R;
 
-public class NotificationActivity extends AppCompatActivity implements View.OnClickListener {
+public class NotifyActivity extends AppCompatActivity implements View.OnClickListener {
 
     private NotificationManager mNotificationManager;
 
@@ -192,14 +193,10 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     private void sendNotification1() {
         ToastUtils.showRoundRectToast("发送最简单通知");
         //这三个属性是必须要的，否则异常
-//        NotificationUtils notificationUtils = new NotificationUtils(
-//                this,"channel_1","通知1");
-//        notificationUtils.sendNotification(1,
-//                "这个是标题","这个是内容",R.mipmap.ic_launcher);
-
-
-        NotificationUtil notificationUtil = new NotificationUtil();
-        notificationUtil.showFloatNotify(this);
+        NotificationUtils notificationUtils = new NotificationUtils(
+                this,"channel_1","通知1");
+        notificationUtils.sendNotification(1,
+                "这个是标题","这个是内容",R.mipmap.ic_launcher);
     }
 
 
@@ -253,7 +250,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                 //设置自定义view通知栏布局
                 .setContent(getRemoteViews())
                 //设置sound
-                .setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI)
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 //设置优先级
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 //自定义震动效果
@@ -361,7 +358,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                 .setContent(getRemoteViews())
                 .setDefaults(Notification.DEFAULT_ALL)
                 //设置sound
-                .setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI)
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 //设置优先级
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 //自定义震动效果
@@ -449,7 +446,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         String description = "123";
         int importance = NotificationManager.IMPORTANCE_HIGH;
         NotificationChannel mChannel = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mChannel = new NotificationChannel(id, "123", importance);
             //  mChannel.setDescription(description);
             //  mChannel.enableLights(true);

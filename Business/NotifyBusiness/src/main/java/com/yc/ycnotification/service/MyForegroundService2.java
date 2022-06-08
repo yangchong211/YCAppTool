@@ -14,8 +14,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.yc.cn.ycnotification.R;
+
 import com.yc.ycnotification.NotifyHomeActivity;
+import com.yc.ycnotification.R;
 
 public class MyForegroundService2 extends Service {
 

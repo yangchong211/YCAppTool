@@ -31,22 +31,23 @@ public final class AppNotifyHelper {
      * @return              true表示可以展示通知栏
      */
     public boolean canShowNotification(Context context) {
-        return NotificationManagerCompat.from(context).areNotificationsEnabled();
+        return areNotificationsEnabled(context);
     }
-
 
     public boolean areNotificationsEnabled(Context context) {
         NotificationManagerCompat mNotificationManager = NotificationManagerCompat.from(context);
-        if (Build.VERSION.SDK_INT >= 24) {
-            // android 8.0引导
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            // 大于24
             return mNotificationManager.areNotificationsEnabled();
-        } else if (Build.VERSION.SDK_INT >= 19) {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // 大于19
             AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
             ApplicationInfo appInfo = context.getApplicationInfo();
             String pkg = context.getApplicationContext().getPackageName();
             int uid = appInfo.uid;
             try {
-                Class<?> appOpsClass = Class.forName(AppOpsManager.class.getName());
+                String name = AppOpsManager.class.getName();
+                Class<?> appOpsClass = Class.forName(name);
                 Method checkOpNoThrowMethod = appOpsClass.getMethod(CHECK_OP_NO_THROW,
                         Integer.TYPE, Integer.TYPE, String.class);
                 Field opPostNotificationValue = appOpsClass.getDeclaredField(OP_POST_NOTIFICATION);

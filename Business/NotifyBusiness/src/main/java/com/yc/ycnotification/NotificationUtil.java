@@ -1,6 +1,7 @@
 package com.yc.ycnotification;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -8,12 +9,13 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
-
+import com.yc.ycnotification.R;
 import androidx.core.app.NotificationCompat;
 
-import com.yc.cn.ycnotification.R;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,7 +31,7 @@ public class NotificationUtil {
      *
      * @param context 上下文
      */
-    public static void showNotification(Context context) {
+    public  void showNotification(Context context) {
         Notification notification = new NotificationCompat.Builder(context)
                 /**设置通知左边的大图标**/
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
@@ -63,7 +65,7 @@ public class NotificationUtil {
      *
      * @param context 上下文
      */
-    public static void showNotificationProgress(Context context) {
+    public  void showNotificationProgress(Context context) {
         //进度条通知
         final NotificationCompat.Builder builderProgress = new NotificationCompat.Builder(context);
         builderProgress.setContentTitle("下载中");
@@ -109,7 +111,7 @@ public class NotificationUtil {
      *
      * @param context
      */
-    public static void showFullScreen(Context context) {
+    public  void showFullScreen(Context context) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         Intent mIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://blog.csdn.net/itachi85/"));
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, mIntent, 0);
@@ -133,7 +135,7 @@ public class NotificationUtil {
      *
      * @param context
      */
-    public static void shwoNotify(Context context) {
+    public void shwoNotify(Context context) {
         //先设定RemoteViews
         RemoteViews view_custom = new RemoteViews(context.getPackageName(), R.layout.view_notify_custom);
         //设置对应IMAGEVIEW的ID的资源图片
@@ -154,4 +156,46 @@ public class NotificationUtil {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         notificationManager.notify(4, notify);
     }
+
+    public void showFloatNotify(Context context){
+        NotificationManager manager = (NotificationManager) 
+                context.getSystemService(Context.NOTIFICATION_SERVICE);
+        //自定义的字符串
+        String CHANNEL_ID = "float";
+        String CHANNEL_NAME = "TEST";
+        NotificationChannel notificationChannel = null;
+        NotificationCompat.Builder builder = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel = new NotificationChannel(
+                    CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager notificationManager = (NotificationManager) 
+                    context.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+        Intent intent = new Intent(context, NotifyHomeActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        builder = new NotificationCompat.Builder(context, CHANNEL_ID).
+                setContentTitle(context.getResources().getString(R.string.app_name)).
+                setContentText("这个是消息体内容").
+                setWhen(System.currentTimeMillis()).
+                setSmallIcon(R.mipmap.ic_launcher).
+                setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher)).
+                setContentIntent(pendingIntent).setDefaults(NotificationCompat.FLAG_ONGOING_EVENT)
+                .setPriority(NotificationCompat.PRIORITY_MAX);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //SDK版本>=21才能设置悬挂式通知栏
+            builder.setCategory(String.valueOf(Notification.FLAG_ONGOING_EVENT))
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                    .setColor(context.getResources().getColor(R.color.white));
+            Intent intent2 = new Intent();
+            PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent2, 0);
+            builder.setFullScreenIntent(pi, true);
+        }
+        Notification notification = builder.build();
+        manager.notify(1, notification);
+    }
+
 }

@@ -34,10 +34,10 @@ dependencies {
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
 
     
-    implementation 'com.github.yangchong211.YCNotification:NotificationLib:1.0.4'
-    implementation 'com.github.yangchong211.YCNotification:NotifyMessage:1.0.4'
+//    implementation 'com.github.yangchong211.YCNotification:NotificationLib:1.0.4'
+//    implementation 'com.github.yangchong211.YCNotification:NotifyMessage:1.0.4'
 
-//    implementation project(path: ':NotificationLib')
-//    implementation project(path: ':NotifyMessage')
+    implementation project(path: ':NotificationLib')
+    implementation project(path: ':NotifyMessage')
 }
 
