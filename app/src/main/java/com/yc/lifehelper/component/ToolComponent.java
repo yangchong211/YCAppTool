@@ -14,6 +14,7 @@ import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 import com.yc.toolutils.click.FastClickUtils;
+import com.yc.ycnotification.NotifyHomeActivity;
 import com.yc.ycstatusbar.BarActivity;
 import com.yc.ycthreadpool.ThreadMainActivity;
 
@@ -76,6 +77,7 @@ public class ToolComponent implements InterItemView {
                     ThreadMainActivity.startActivity(context);
                     break;
                 case R.id.tv_tool7:
+                    NotifyHomeActivity.startActivity(context);
                     break;
                 case R.id.tv_tool8:
                     break;

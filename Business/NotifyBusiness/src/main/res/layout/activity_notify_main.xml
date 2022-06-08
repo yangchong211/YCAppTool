@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.清除所有的Notification通知"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.在Activity中发送通知1，最简单的通知"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3.在Activity中发送通知2，添加action"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="4.在Activity中发送通知3，设置通知栏左右滑动不删除"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5.在Activity中发送自定义布局通知"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6.在广播接收者中发送通知"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="7.在服务中发送通知"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="8.在Activity中连续发送3条通知"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="9.在Activity中发通知，设置通知不能被状态栏的清除按钮给清除掉,也不能被手动清除,但能通过 cancel() 方法清除"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="10.在Activity中发通知，设置用户单击通知后自动消失"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="11.设置铃声效果"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12.设置震动效果"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="13.通知只执行一次,与默认的效果一样"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="14.带有进度条的通知栏"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="15.Android 8.0 适配问题"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="16.发送自定义通知"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="17.发送多个自定义通知"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+    </LinearLayout>
+
+</ScrollView>

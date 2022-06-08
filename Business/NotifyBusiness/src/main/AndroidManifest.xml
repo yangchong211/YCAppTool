@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yc.cn.ycnotification">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application>
+        <activity android:name="com.yc.ycnotification.NotifyHomeActivity"/>
+        <activity android:name="com.yc.ycnotification.NotificationActivity"/>
+        <activity android:name="com.yc.ycnotification.TestActivity"/>
+        <activity android:name="com.yc.ycnotification.service.ServiceActivity"/>
+        <receiver android:name="com.yc.ycnotification.ReminderReceiver"/>
+        <service android:name="com.yc.ycnotification.service.MyService"
+            android:foregroundServiceType="location"
+            tools:ignore="Instantiatable" />
+        <service android:name="com.yc.ycnotification.service.MyForegroundService"
+            android:foregroundServiceType="location" />
+
+        <service android:name="com.yc.ycnotification.service.MyService2"
+            android:foregroundServiceType="location"
+            tools:ignore="Instantiatable" />
+        <service android:name="com.yc.ycnotification.service.MyForegroundService2"
+            android:foregroundServiceType="location" />
+    </application>
+
+</manifest>

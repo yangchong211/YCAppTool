@@ -7,7 +7,7 @@ include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
         ':VideoBusiness', ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
         ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',':CommonBusiness',
         ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
-        ':ThreadBusiness'
+        ':ThreadBusiness', ':NotifyBusiness'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -25,7 +25,7 @@ project(':OkHttpBusiness').projectDir = new File('Business/OkHttpBusiness')
 project(':BleBusiness').projectDir = new File('Business/BleBusiness')
 project(':CommonBusiness').projectDir = new File('Business/CommonBusiness')
 project(':ThreadBusiness').projectDir = new File('Business/ThreadBusiness')
-
+project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')
 
 
 /* +++++++++ 框架业务服务层 +++++++++ */

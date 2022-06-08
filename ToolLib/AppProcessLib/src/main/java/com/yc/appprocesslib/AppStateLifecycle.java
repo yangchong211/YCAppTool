@@ -83,6 +83,8 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
 
     /**
      * 获取状态
+     * 前台切换到后台：onActivityPaused ---> onActivityStopped
+     * 后台切换到前台：onActivityStarted ---> onActivityResumed
      *
      * @return state状态
      */

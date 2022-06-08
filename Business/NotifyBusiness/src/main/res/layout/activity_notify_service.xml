@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.开启通知"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.关闭通知"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.开启通知2"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.关闭通知2"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_5"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="5.测试通知栏"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_6"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6.移除通知栏"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_7"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="7.删除通知栏"
+            android:background="@color/bg"
+            android:padding="10dp"/>
+    </LinearLayout>
+
+</ScrollView>
