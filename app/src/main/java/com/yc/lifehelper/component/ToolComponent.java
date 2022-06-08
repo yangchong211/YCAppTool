@@ -10,6 +10,7 @@ import com.yc.android.view.activity.AndroidActivity;
 import com.yc.blesample.ble.BleMainActivity;
 import com.yc.common.CommonActivity;
 import com.yc.easy.demo.NetMainActivity;
+import com.yc.kotlinbusiness.KotlinHomeActivity;
 import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
@@ -76,10 +77,13 @@ public class ToolComponent implements InterItemView {
                 case R.id.tv_tool6:
                     ThreadMainActivity.startActivity(context);
                     break;
+                //通知栏
                 case R.id.tv_tool7:
                     NotifyHomeActivity.startActivity(context);
                     break;
+                //kotlin原理
                 case R.id.tv_tool8:
+                    KotlinHomeActivity.Companion.startActivity(context);
                     break;
                 default:
                     break;

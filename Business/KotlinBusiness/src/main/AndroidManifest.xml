@@ -2,4 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yc.kotlinbusiness">
 
+    <application>
+        <activity android:name="com.yc.kotlinbusiness.KotlinHomeActivity"/>
+        <activity android:name="com.yc.kotlinbusiness.KotlinScopeActivity"/>
+    </application>
+
 </manifest>
