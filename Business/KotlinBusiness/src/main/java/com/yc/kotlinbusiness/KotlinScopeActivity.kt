@@ -41,11 +41,7 @@ class KotlinScopeActivity : AppCompatActivity(){
      * 拓展函数
      */
     private fun CoroutineDispatcher.launchCoroutine(
-        s1: String,
-        s2: String,
-        s3: String,
-        time: Int,
-        latch: CountDownLatch
+        s1: String, s2: String, s3: String, time: Int, latch: CountDownLatch
     ) {
         GlobalScope.launch(this) {
             // 任务1
@@ -70,5 +66,26 @@ class KotlinScopeActivity : AppCompatActivity(){
             latch.countDown()
         }
     }
+
+    private fun coroutineSend() {
+        val uiScope = CoroutineScope(Dispatchers.Main)
+        uiScope.launch {
+            println("coroutineSend get 1 ")
+            val deffer = async(Dispatchers.Default) {
+                val coroutineResult = getCoroutineResult()
+                println("coroutineSend get 2 $coroutineResult")
+            }
+
+            val coroutineResult = deffer.await()
+            println("coroutineSend get 3 $coroutineResult")
+        }
+
+    }
+
+    private suspend fun getCoroutineResult(): String {
+        delay(9000L)
+        return "coroutine result"
+    }
+
 
 }

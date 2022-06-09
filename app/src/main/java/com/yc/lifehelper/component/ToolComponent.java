@@ -37,14 +37,14 @@ public class ToolComponent implements InterItemView {
     public void onBindView(View header) {
         TextView tvTool1 = header.findViewById(R.id.tv_tool1);
         TextView tvTool2 = header.findViewById(R.id.tv_tool2);
-        TextView tv_tool3 = header.findViewById(R.id.tv_tool3);
-        TextView tv_tool4 = header.findViewById(R.id.tv_tool4);
-        TextView tv_tool5 = header.findViewById(R.id.tv_tool5);
-        TextView tv_tool6 = header.findViewById(R.id.tv_tool6);
-        TextView tv_tool7 = header.findViewById(R.id.tv_tool7);
-        TextView tv_tool8 = header.findViewById(R.id.tv_tool8);
-        TextView tv_tool9 = header.findViewById(R.id.tv_tool9);
-        TextView tv_tool10 = header.findViewById(R.id.tv_tool10);
+        TextView tvTool3 = header.findViewById(R.id.tv_tool3);
+        TextView tvTool4 = header.findViewById(R.id.tv_tool4);
+        TextView tvTool5 = header.findViewById(R.id.tv_tool5);
+        TextView tvTool6 = header.findViewById(R.id.tv_tool6);
+        TextView tvTool7 = header.findViewById(R.id.tv_tool7);
+        TextView tvTool8 = header.findViewById(R.id.tv_tool8);
+        TextView tvTool9 = header.findViewById(R.id.tv_tool9);
+        TextView tvTool10 = header.findViewById(R.id.tv_tool10);
         TextView tv_tool11 = header.findViewById(R.id.tv_tool11);
         TextView tv_tool12 = header.findViewById(R.id.tv_tool12);
 
@@ -91,14 +91,14 @@ public class ToolComponent implements InterItemView {
         };
         tvTool1.setOnClickListener(listener);
         tvTool2.setOnClickListener(listener);
-        tv_tool3.setOnClickListener(listener);
-        tv_tool4.setOnClickListener(listener);
-        tv_tool5.setOnClickListener(listener);
-        tv_tool6.setOnClickListener(listener);
-        tv_tool7.setOnClickListener(listener);
-        tv_tool8.setOnClickListener(listener);
-        tv_tool9.setOnClickListener(listener);
-        tv_tool10.setOnClickListener(listener);
+        tvTool3.setOnClickListener(listener);
+        tvTool4.setOnClickListener(listener);
+        tvTool5.setOnClickListener(listener);
+        tvTool6.setOnClickListener(listener);
+        tvTool7.setOnClickListener(listener);
+        tvTool8.setOnClickListener(listener);
+        tvTool9.setOnClickListener(listener);
+        tvTool10.setOnClickListener(listener);
         tv_tool11.setOnClickListener(listener);
         tv_tool12.setOnClickListener(listener);
     }
