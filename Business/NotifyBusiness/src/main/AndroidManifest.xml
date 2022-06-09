@@ -4,6 +4,8 @@
     package="com.yc.ycnotification">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!--USE_FULL_SCREEN_INTENT权限，这是一个普通权限。比如微信来语音或者视频通话时，弹出的接听页面就是使用这一功能。-->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
 
     <application>
         <activity android:name="com.yc.ycnotification.NotifyHomeActivity"/>

@@ -61,6 +61,8 @@ public final class AppNotifyHelper {
         }
     }
 
+
+
     private static boolean areNotificationsEnabled(Context context) {
         NotificationManagerCompat mNotificationManager = NotificationManagerCompat.from(context);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

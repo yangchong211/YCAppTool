@@ -31,8 +31,6 @@ import com.yc.ycnotification.R;
 
 public class NotifyActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private NotificationManager mNotificationManager;
-
     private TextView tv_1;
     private TextView tv_2;
     private TextView tv_3;
@@ -63,7 +61,6 @@ public class NotifyActivity extends AppCompatActivity implements View.OnClickLis
     private void init() {
         initView();
         initListener();
-        initNotificationManager();
         AppStateMonitor.getInstance().registerStateListener(new StateListener() {
             @Override
             public void onInForeground() {
@@ -122,11 +119,6 @@ public class NotifyActivity extends AppCompatActivity implements View.OnClickLis
         tv_15.setOnClickListener(this);
         tv_16.setOnClickListener(this);
         tv_17.setOnClickListener(this);
-    }
-
-    private void initNotificationManager() {
-        // 创建一个NotificationManager的引用
-        mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
 
@@ -400,23 +392,6 @@ public class NotifyActivity extends AppCompatActivity implements View.OnClickLis
     private void sendNotification12() {
         //震动也有两种设置方法,与设置铃声一样,在此不再赘述
         long[] vibrate = new long[]{0, 500, 1000, 1500};
-//        Notification.Builder builder = new Notification.Builder(this)
-//                .setSmallIcon(R.mipmap.ic_launcher)
-//                .setContentTitle("我是伴有震动效果的通知")
-//                .setContentText("颤抖吧,逗比哈哈哈哈哈~")
-//                //使用系统默认的震动参数,会与自定义的冲突
-//                //.setDefaults(Notification.DEFAULT_VIBRATE)
-//                //自定义震动效果
-//                .setVibrate(vibrate);
-//        //另一种设置震动的方法
-//        //Notification notify = builder.build();
-//        //调用系统默认震动
-//        //notify.defaults = Notification.DEFAULT_VIBRATE;
-//        //调用自己设置的震动
-//        //notify.vibrate = vibrate;
-//        //mManager.notify(3,notify);
-//        mNotificationManager.notify(12, builder.build());
-
         NotificationUtils notificationUtils = new NotificationUtils(this);
         NotificationParams notificationParams = new NotificationParams();
         notificationParams
@@ -448,38 +423,6 @@ public class NotifyActivity extends AppCompatActivity implements View.OnClickLis
                 .setFlags(Notification.FLAG_ONLY_ALERT_ONCE);
         notificationUtils.setNotificationParams(notificationParams).sendNotification(14,"显示进度条14","显示进度条内容，自定定义",R.mipmap.ic_launcher);
     }
-
-
-    /**
-     * 错误代码
-     */
-    private void ssendNotification151() {
-        String id = "channel_1";
-        String description = "123";
-        int importance = NotificationManager.IMPORTANCE_HIGH;
-        NotificationChannel mChannel = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mChannel = new NotificationChannel(id, "123", importance);
-            //  mChannel.setDescription(description);
-            //  mChannel.enableLights(true);
-            //  mChannel.setLightColor(Color.RED);
-            //  mChannel.enableVibration(true);
-            //  mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-            mNotificationManager.createNotificationChannel(mChannel);
-            Notification notification = new Notification.Builder(this, id)
-                    .setContentTitle("Title")
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
-                    .setContentTitle("您有一条新通知")
-                    .setContentText("这是一条逗你玩的消息")
-                    .setAutoCancel(true)
-//                    .setContentIntent(pintent)
-                    .build();
-            mNotificationManager.notify(1, notification);
-        }
-    }
-
-
 
     private void sendNotification15() {
         NotificationUtils notificationUtils = new NotificationUtils(this);
