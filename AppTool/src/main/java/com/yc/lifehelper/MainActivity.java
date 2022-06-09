@@ -367,7 +367,11 @@ public class MainActivity extends BaseActivity{
     };
 
     /**
-     * 是当某个按键被按下是触发。所以也有人在点击返回键的时候去执行该方法来做判断
+     * 当某个按键被按下是触发。所以也有人在点击返回键的时候去执行该方法来做判断
+     * onBackPressed方法和onKeyDown方法同时存在的时候，按back键，系统调用的是onKeyDown这个方法，不会调用onBackPressed方法
+     * onKeyDown 监听返回键逻辑，当某个按键被按下时触发
+     * onKeyUp  监听返回键逻辑，当某个按键手指抬起时触发
+     * onBackPressed  监听返回键逻辑，在onKeyDown源码内部可以看到
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

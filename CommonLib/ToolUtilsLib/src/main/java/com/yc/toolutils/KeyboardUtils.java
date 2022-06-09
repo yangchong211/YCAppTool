@@ -3,6 +3,7 @@ package com.yc.toolutils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -65,10 +66,15 @@ public final class KeyboardUtils {
         if (imm == null) {
             return;
         }
+        //给view设置焦点
         view.setFocusable(true);
         view.setFocusableInTouchMode(true);
         view.requestFocus();
+        // SHOW_FORCED 强制显示，用于指示用户已强制打开输入法（例如通过长按菜单）的标志
+        // showSoftInput(View, int)因此在他们明确这样做之前不应将其关闭。此常量在 API 级别 33 中已弃用。
         imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+        // SHOW_IMPLICIT，用于指示这是显示输入窗口的隐式请求的标志，而不是用户直接请求的结果。在这种情况下，窗口可能不会显示。
+        //imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }
 
     /**
@@ -86,7 +92,9 @@ public final class KeyboardUtils {
         if (view == null) {
             view = new View(activity);
         }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        IBinder windowToken = view.getWindowToken();
+        //指示软输入窗口仅在用户未明确显示时才应隐藏。
+        imm.hideSoftInputFromWindow(windowToken, 0);
     }
 
     /**
@@ -100,7 +108,8 @@ public final class KeyboardUtils {
         if (imm == null) {
             return;
         }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        IBinder windowToken = view.getWindowToken();
+        imm.hideSoftInputFromWindow(windowToken, 0);
     }
 
     /**
