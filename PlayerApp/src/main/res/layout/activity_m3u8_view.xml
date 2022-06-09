@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="下载地址"
+        android:singleLine="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onGetInfo"
+            android:text="获取M3U8信息" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onLiveDownload"
+            android:text="直播缓存" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onGetLiveCache"
+            android:text="获取到当前时间的缓存" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_savepath_tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="默认保存在/sdcard/111/******.ts" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onPlay"
+            android:text="播放" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onDownload"
+            android:text="下载" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onStopTask1"
+            android:text="停止" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onMergin"
+            android:text="合并" />
+
+        <TextView
+            android:id="@+id/tv_speed1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 kb/s" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#232323">
+
+        <TextView
+            android:id="@+id/tv_console"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="console:"
+            android:textColor="#fff" />
+    </ScrollView>
+</LinearLayout>

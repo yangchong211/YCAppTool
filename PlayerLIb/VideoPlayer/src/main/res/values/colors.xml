@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dialog_bg">#bc000000</color>
+    <color name="alpha_25_black">#40000000</color>
+    <color name="redTab">#D03E49</color>
+</resources>

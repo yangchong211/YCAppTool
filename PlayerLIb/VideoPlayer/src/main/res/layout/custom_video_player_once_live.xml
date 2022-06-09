@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="开播倒计时"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="10:20秒"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tv_retry"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:drawablePadding="2dp"
+            android:background="@drawable/bg_retry"
+            android:gravity="center"
+            android:paddingLeft="12dp"
+            android:paddingTop="4dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="4dp"
+            android:textSize="14sp"
+            android:text="即将开播"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</FrameLayout>
+

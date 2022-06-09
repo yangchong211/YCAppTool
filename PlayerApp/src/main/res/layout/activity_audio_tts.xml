@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_init"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="初始化tts" />
+
+        <Button
+            android:id="@+id/btn_speak_tts1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="简单播放tts" />
+
+        <Button
+            android:id="@+id/btn_speak_tts2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="循环简单播放tts，有问题的" />
+
+        <Button
+            android:id="@+id/btn_speak_tts3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="循环简单播放tts，增加判断" />
+
+        <Button
+            android:id="@+id/btn_speak_tts4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="正确循环播放tts" />
+
+        <Button
+            android:id="@+id/btn_speak_tts5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="正确循环播放tts" />
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="stop" />
+
+        <Button
+            android:id="@+id/btn_high_priority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HIGH_PRIORITY" />
+
+        <Button
+            android:id="@+id/btn_release"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="release" />
+        <Button
+            android:id="@+id/btn_brazil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="葡萄牙语言"/>
+        <Button
+            android:id="@+id/btn_tts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="play_tts"/>
+    </LinearLayout>
+
+</RelativeLayout>

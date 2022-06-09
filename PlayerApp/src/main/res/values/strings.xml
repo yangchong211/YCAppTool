@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">YCVideoPlayer</string>
+
+    <string name="start">开始</string>
+    <string name="pause">暂停</string>
+    <string name="delete">删除</string>
+    <string name="network_error">网络不给力</string>
+    <string name="retry">重试</string>
+    <string name="loading">加载中</string>
+    <string name="error">发生错误</string>
+    <string name="easy_permissions">该APP需要您允许访问设备上的文件的权限</string>
+
+</resources>

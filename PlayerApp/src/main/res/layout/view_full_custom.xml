@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/color_7f000000"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:gravity="center"
+        android:id="@+id/container"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/color_7f000000"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="22dp"
+            android:text="VIP会员"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_pop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@android:color/holo_blue_bright"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="8dp"
+            android:text="去购买会员"
+            android:textColor="@color/blackText"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

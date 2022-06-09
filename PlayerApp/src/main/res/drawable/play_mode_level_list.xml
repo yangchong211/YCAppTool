@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/play_btn_loop_selector"
+        android:maxLevel="0" />
+    <item
+        android:drawable="@drawable/play_btn_shuffle_selector"
+        android:maxLevel="1" />
+    <item
+        android:drawable="@drawable/play_btn_one_selector"
+        android:maxLevel="2" />
+</level-list>

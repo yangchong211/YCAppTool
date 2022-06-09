@@ -1,5 +1,6 @@
 /* +++++++++ 主项目 +++++++++ */
-include ':app'
+include ':AppTool'
+include ':PlayerApp'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
@@ -181,4 +182,16 @@ project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
 project(':MonitorPingLib').projectDir = new File('MonitorLib/MonitorPingLib')
 
 
+/* +++++++++ 音视频 +++++++++ */
+include ':VideoSqlLite',':VideoTool',':VideoCache',':AudioPlayer',
+        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView'
+project(':VideoSqlLite').projectDir = new File('PlayerLib/VideoSqlLite')
+project(':VideoTool').projectDir = new File('PlayerLib/VideoTool')
+project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
+project(':AudioPlayer').projectDir = new File('PlayerLib/AudioPlayer')
+project(':MusicPlayer').projectDir = new File('PlayerLib/MusicPlayer')
+project(':VideoKernel').projectDir = new File('PlayerLib/VideoKernel')
+project(':VideoPlayer').projectDir = new File('PlayerLib/VideoPlayer')
+project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
+project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 

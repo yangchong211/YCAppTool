@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteBg">
+
+    <androidx.appcompat.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorTheme"
+        android:theme="@style/AppTheme.ActionBar"
+        app:contentInsetStart="0.0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:visibility="visible">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="音频播放器的原生案例"
+            android:textSize="18sp"
+            android:textColor="@color/blackText"/>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <include layout="@layout/include_play_bar"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+    </FrameLayout>
+
+
+</LinearLayout>

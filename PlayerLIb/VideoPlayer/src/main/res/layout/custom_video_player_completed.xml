@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/complete_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/player_mask_top"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/iv_stop_fullscreen"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_player_back"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/ll_replay"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/iv_replay"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_retry"
+                android:padding="10dp"
+                android:src="@drawable/ic_player_replay" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/replay"
+                android:layout_marginTop="12dp"
+                android:textSize="14sp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_share"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/iv_share"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_retry"
+                android:padding="10dp"
+                android:src="@drawable/ic_palyer_share" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/share"
+                android:layout_marginTop="12dp"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</FrameLayout>

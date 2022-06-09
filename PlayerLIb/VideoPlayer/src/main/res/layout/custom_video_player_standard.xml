@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/lock"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center|start"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_back_bg"
+        android:padding="10dp"
+        android:src="@drawable/selector_lock_button"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:indeterminateDrawable="@drawable/pb_loading_ring"
+        android:indeterminateDuration="2000"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</FrameLayout>

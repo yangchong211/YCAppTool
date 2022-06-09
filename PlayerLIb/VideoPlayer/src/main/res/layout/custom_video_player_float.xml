@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/iv_start_play"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:src="@drawable/selector_play_button" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:indeterminateDrawable="@drawable/pb_loading_ring"
+        android:visibility="gone"
+        tools:visibility="visible" />
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="end"
+        android:layout_margin="4dp"
+        android:src="@drawable/ic_back_close" />
+    <ImageView
+        android:id="@+id/iv_skip"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="4dp"
+        android:src="@drawable/ic_player_open" />
+
+    <ProgressBar
+        android:id="@+id/pb_bottom_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_gravity="bottom"
+        android:max="1000"
+        android:progressDrawable="@drawable/progress_bar_style"
+        android:visibility="visible" />
+
+</FrameLayout>

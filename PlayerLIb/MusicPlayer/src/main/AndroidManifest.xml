@@ -1,0 +1,27 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.music">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!--识别音频文件权限-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <application>
+        <service android:name=".service.PlayAudioService" />
+        <receiver android:name=".receiver.NotificationStatusBarReceiver">
+            <intent-filter>
+                <action android:name="YC_ACTION_STATUS_BAR" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.EarphoneControlReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.AudioBroadcastReceiver">
+            <intent-filter>
+                <action android:name="cn.ycbjie.lock" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

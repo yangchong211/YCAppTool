@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@android:color/black"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="0dp"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:cardUseCompatPadding="false"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/toastTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:gravity="center"
+            android:minEms="10"
+            android:minHeight="30dp"
+            android:padding="5dp"
+            android:text="提示标题!"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="200dp"
+            android:text="提示内容"
+            android:textColor="#ffcecece"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

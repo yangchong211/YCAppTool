@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/player_mask_top"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/iv_stop_fullscreen"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_player_back"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="@string/error_message"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tv_retry"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_retry"
+            android:gravity="center"
+            android:paddingLeft="18dp"
+            android:paddingTop="4dp"
+            android:paddingRight="18dp"
+            android:paddingBottom="4dp"
+            android:textSize="14sp"
+            android:text="@string/retry"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</FrameLayout>
+

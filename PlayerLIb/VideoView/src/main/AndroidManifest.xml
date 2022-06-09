@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.videoview">
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application>
+        <activity android:name="com.yc.videoview.PermissionActivity"/>
+    </application>
+
+</manifest>
