@@ -193,10 +193,13 @@ public class NotifyActivity extends AppCompatActivity implements View.OnClickLis
     private void sendNotification1() {
         ToastUtils.showRoundRectToast("发送最简单通知");
         //这三个属性是必须要的，否则异常
-        NotificationUtils notificationUtils = new NotificationUtils(
-                this,"channel_1","通知1");
-        notificationUtils.sendNotification(1,
-                "这个是标题","这个是内容",R.mipmap.ic_launcher);
+//        NotificationUtils notificationUtils = new NotificationUtils(
+//                this,"channel_1","通知1");
+//        notificationUtils.sendNotification(1,
+//                "这个是标题","这个是内容",R.mipmap.ic_launcher);
+
+        NotificationUtil notificationUtil = new NotificationUtil();
+        notificationUtil.showFloatNotify(this);
     }
 
 

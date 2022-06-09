@@ -158,8 +158,7 @@ public class NotificationUtil {
     }
 
     public void showFloatNotify(Context context){
-        NotificationManager manager = (NotificationManager) 
-                context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         //自定义的字符串
         String CHANNEL_ID = "float";
         String CHANNEL_NAME = "TEST";
@@ -168,11 +167,8 @@ public class NotificationUtil {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationChannel = new NotificationChannel(
-                    CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager notificationManager = (NotificationManager) 
-                    context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(notificationChannel);
+            notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            manager.createNotificationChannel(notificationChannel);
         }
 
         Intent intent = new Intent(context, NotifyHomeActivity.class);
@@ -182,9 +178,7 @@ public class NotificationUtil {
                 setContentText("这个是消息体内容").
                 setWhen(System.currentTimeMillis()).
                 setSmallIcon(R.mipmap.ic_launcher).
-                setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher)).
-                setContentIntent(pendingIntent).setDefaults(NotificationCompat.FLAG_ONGOING_EVENT)
-                .setPriority(NotificationCompat.PRIORITY_MAX);
+                setContentIntent(pendingIntent);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -195,10 +189,9 @@ public class NotificationUtil {
             builder.setCategory(String.valueOf(Notification.FLAG_ONGOING_EVENT))
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                     .setColor(context.getResources().getColor(R.color.white));
-            Intent intent2 = new Intent();
-            PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent2, 0);
             //悬挂式关键点
-            builder.setFullScreenIntent(pi, true);
+            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+            builder.setFullScreenIntent(pendingIntent, true);
         }
         Notification notification = builder.build();
         manager.notify(1, notification);
@@ -219,9 +212,7 @@ public class NotificationUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationChannel = new NotificationChannel(
                     CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager notificationManager = (NotificationManager)
-                    context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(notificationChannel);
+            manager.createNotificationChannel(notificationChannel);
         }
 
         Intent intent = new Intent(context, NotifyHomeActivity.class);
@@ -245,10 +236,9 @@ public class NotificationUtil {
             builder.setCategory(String.valueOf(Notification.FLAG_ONGOING_EVENT))
                     .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                     .setColor(context.getResources().getColor(R.color.white));
-            Intent intent2 = new Intent();
-            PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent2, 0);
             //悬挂式关键点
-            builder.setFullScreenIntent(pi, true);
+            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+            builder.setFullScreenIntent(pendingIntent, true);
         }
         Notification notification = builder.build();
         manager.notify(2, notification);
