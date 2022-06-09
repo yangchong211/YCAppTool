@@ -2,8 +2,10 @@ package com.yc.notificationlib;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
+import android.provider.Settings;
 
 import androidx.core.app.NotificationManagerCompat;
 
@@ -26,15 +28,40 @@ public final class AppNotifyHelper {
     private static final String OP_POST_NOTIFICATION = "OP_POST_NOTIFICATION";
 
     /**
-     * 判断是否可以展示通知栏
+     * 是否有通知权限
      * @param context       上下文
-     * @return              true表示可以展示通知栏
+     * @return      true表示有权限
      */
-    public boolean canShowNotification(Context context) {
-        return areNotificationsEnabled(context);
+    public static boolean isOpenNotify(Context context) {
+        boolean isOpened = false;
+        try {
+            isOpened = areNotificationsEnabled(context);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isOpened;
     }
 
-    public boolean areNotificationsEnabled(Context context) {
+    /**
+     * 跳转通知栏权限中心
+     * @param context       上下文
+     */
+    public static void goToSetNotify(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, context.getPackageName());
+            context.startActivity(intent);
+        } else {
+            Intent intent = new Intent();
+            intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+            intent.putExtra("app_package", context.getApplicationContext().getPackageName());
+            intent.putExtra("app_uid", context.getApplicationInfo().uid);
+            context.startActivity(intent);
+        }
+    }
+
+    private static boolean areNotificationsEnabled(Context context) {
         NotificationManagerCompat mNotificationManager = NotificationManagerCompat.from(context);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             // 大于24

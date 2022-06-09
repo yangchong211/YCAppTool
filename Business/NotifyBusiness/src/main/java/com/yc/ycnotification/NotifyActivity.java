@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.yc.appprocesslib.AppStateMonitor;
 import com.yc.appprocesslib.StateListener;
 
+import com.yc.notificationlib.AppNotifyHelper;
 import com.yc.notificationlib.NotificationParams;
 import com.yc.notificationlib.NotificationUtils;
 import com.yc.notifymessage.CustomNotification;
@@ -198,34 +199,42 @@ public class NotifyActivity extends AppCompatActivity implements View.OnClickLis
 //        notificationUtils.sendNotification(1,
 //                "这个是标题","这个是内容",R.mipmap.ic_launcher);
 
-        NotificationUtil notificationUtil = new NotificationUtil();
-        notificationUtil.showFloatNotify(this);
+        if (AppNotifyHelper.isOpenNotify(this)){
+            NotificationUtil notificationUtil = new NotificationUtil();
+            notificationUtil.showFloatNotify(this);
+        } else {
+            AppNotifyHelper.goToSetNotify(this);
+        }
     }
 
 
     private void sendNotification2() {
         //处理点击Notification的逻辑
         //创建intent
-        Intent resultIntent = new Intent(this, NotifyIntentActivity.class);
-        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);           //添加为栈顶Activity
-        resultIntent.putExtra("what",2);
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(this,2,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+//        Intent resultIntent = new Intent(this, NotifyIntentActivity.class);
+//        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);           //添加为栈顶Activity
+//        resultIntent.putExtra("what",2);
+//        PendingIntent resultPendingIntent = PendingIntent.getActivity(this,2,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        // 定义Notification的各种属性
+//        NotificationUtils notificationUtils = new NotificationUtils(
+//                this,"channel_2","通知2");
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            NotificationChannel notificationChannel =
+//                    notificationUtils.getNotificationChannel("channel_2");
+//            if (notificationUtils.isNoImportance(notificationChannel)){
+//                notificationUtils.openChannelSetting(notificationChannel);
+//            }
+//        }
+//        NotificationParams notificationParams = new NotificationParams();
+//        notificationParams.setContentIntent(resultPendingIntent);
+//        notificationUtils
+//                .setNotificationParams(notificationParams)
+//                .sendNotificationCompat(2,"这个是标题2", "这个是内容2", R.mipmap.ic_launcher);
 
-        // 定义Notification的各种属性
-        NotificationUtils notificationUtils = new NotificationUtils(
-                this,"channel_2","通知2");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel =
-                    notificationUtils.getNotificationChannel("channel_2");
-            if (notificationUtils.isNoImportance(notificationChannel)){
-                notificationUtils.openChannelSetting(notificationChannel);
-            }
-        }
-        NotificationParams notificationParams = new NotificationParams();
-        notificationParams.setContentIntent(resultPendingIntent);
-        notificationUtils
-                .setNotificationParams(notificationParams)
-                .sendNotificationCompat(2,"这个是标题2", "这个是内容2", R.mipmap.ic_launcher);
+
+        NotificationUtil notificationUtil = new NotificationUtil();
+        notificationUtil.showFloatNotify2(this);
     }
 
 

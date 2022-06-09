@@ -161,22 +161,21 @@ public class NotificationUtil {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         //自定义的字符串
         String CHANNEL_ID = "float";
-        String CHANNEL_NAME = "TEST";
         NotificationChannel notificationChannel = null;
         NotificationCompat.Builder builder = null;
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            //必须最高级别
+            notificationChannel = new NotificationChannel(CHANNEL_ID, "TEST", NotificationManager.IMPORTANCE_HIGH);
             manager.createNotificationChannel(notificationChannel);
         }
 
         Intent intent = new Intent(context, NotifyHomeActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, 0);
         builder = new NotificationCompat.Builder(context, CHANNEL_ID).
                 setContentTitle(context.getResources().getString(R.string.app_name)).
                 setContentText("这个是消息体内容").
-                setWhen(System.currentTimeMillis()).
                 setSmallIcon(R.mipmap.ic_launcher).
                 setContentIntent(pendingIntent);
 
@@ -216,7 +215,7 @@ public class NotificationUtil {
         }
 
         Intent intent = new Intent(context, NotifyHomeActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, 0);
         builder = new NotificationCompat.Builder(context, CHANNEL_ID).
                 setContent(view_custom).
                 setContentTitle(context.getResources().getString(R.string.app_name)).
