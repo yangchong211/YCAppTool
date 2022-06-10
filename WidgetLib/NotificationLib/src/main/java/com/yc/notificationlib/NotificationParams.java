@@ -17,17 +17,18 @@ import static android.app.Notification.PRIORITY_DEFAULT;
  */
 public final class NotificationParams {
 
-    public boolean ongoing = false;
-    public RemoteViews remoteViews = null;
-    public PendingIntent intent = null;
-    public String ticker = "";
-    public int priority = PRIORITY_DEFAULT;
+    public boolean ongoing;
+    public RemoteViews remoteViews;
+    public PendingIntent intent;
+    public String ticker;
+    public int priority;
     public boolean onlyAlertOnce = false;
-    public long when = 0;
-    public Uri sound = null;
+    public long when;
+    public Uri sound;
     public int defaults = 0;
     public long[] pattern = null;
     public int[] flags;
+    public boolean isFullScreen;
 
     public NotificationParams(){
         this.ongoing = false;
@@ -37,6 +38,7 @@ public final class NotificationParams {
         this.priority = PRIORITY_DEFAULT;
         this.when = 0;
         this.sound = null;
+        this.isFullScreen = false;
     }
 
     /**
@@ -155,4 +157,13 @@ public final class NotificationParams {
         return this;
     }
 
+    /**
+     * 设置flag标签
+     * @param isFullScreen                   是否是悬挂式
+     * @return
+     */
+    public NotificationParams setFullScreen(boolean isFullScreen){
+        this.isFullScreen = isFullScreen;
+        return this;
+    }
 }

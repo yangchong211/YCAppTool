@@ -199,16 +199,8 @@ public class NotificationUtils extends ContextWrapper {
      * @param content                   content
      */
     public Notification getNotification(String title, String content , int icon){
-        Notification build;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //android 8.0以上需要特殊处理，也就是targetSDKVersion为26以上
-            //通知用到NotificationCompat()这个V4库中的方法。但是在实际使用时发现书上的代码已经过时并且Android8.0已经不支持这种写法
-            Notification.Builder builder = getNotificationV4(title, content, icon);
-            build = builder.build();
-        } else {
-            NotificationCompat.Builder builder = getNotificationCompat(title, content, icon);
-            build = builder.build();
-        }
+        NotificationCompat.Builder builder = getNotificationCompat(title, content, icon);
+        Notification build = builder.build();
         NotificationParams notificationParams = getNotificationParams();
         if (notificationParams.flags!=null && notificationParams.flags.length>0){
             for (int a=0 ; a<notificationParams.flags.length ; a++){
@@ -226,16 +218,8 @@ public class NotificationUtils extends ContextWrapper {
      * @param content                   content
      */
     public void sendNotification(int notifyId, String title, String content , int icon) {
-        Notification build;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            //android 8.0以上需要特殊处理，也就是targetSDKVersion为26以上
-            //通知用到NotificationCompat()这个V4库中的方法。但是在实际使用时发现书上的代码已经过时并且Android8.0已经不支持这种写法
-            Notification.Builder builder = getNotificationV4(title, content, icon);
-            build = builder.build();
-        } else {
-            NotificationCompat.Builder builder = getNotificationCompat(title, content, icon);
-            build = builder.build();
-        }
+        NotificationCompat.Builder builder = getNotificationCompat(title, content, icon);
+        Notification build = builder.build();
         NotificationParams notificationParams = getNotificationParams();
         if (notificationParams.flags!=null && notificationParams.flags.length>0){
             for (int a=0 ; a<notificationParams.flags.length ; a++){
@@ -271,7 +255,6 @@ public class NotificationUtils extends ContextWrapper {
         } else {
             //注意用下面这个方法，在8.0以上无法出现通知栏。8.0之前是正常的。这里需要增强判断逻辑
             builder = new NotificationCompat.Builder(getApplicationContext());
-            builder.setPriority(PRIORITY_DEFAULT);
         }
         builder.setContentTitle(title);
         builder.setContentText(content);
@@ -303,55 +286,6 @@ public class NotificationUtils extends ContextWrapper {
         //点击自动删除通知
         builder.setAutoCancel(true);
         return builder;
-    }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private Notification.Builder getNotificationV4(String title, String content, int icon){
-        NotificationParams notificationParams = getNotificationParams();
-        Notification.Builder builder = new Notification.Builder(getApplicationContext(), CHANNEL_ID);
-        Notification.Builder notificationBuilder = builder
-                //设置标题
-                .setContentTitle(title)
-                //消息内容
-                .setContentText(content)
-                //设置通知的图标
-                .setSmallIcon(icon)
-                //让通知左右滑的时候是否可以取消通知
-                .setOngoing(notificationParams.ongoing)
-                //设置优先级
-                .setPriority(notificationParams.priority)
-                //是否提示一次.true - 如果Notification已经存在状态栏即使在调用notify函数也不会更新
-                .setOnlyAlertOnce(notificationParams.onlyAlertOnce)
-                .setAutoCancel(true);
-        if (notificationParams.remoteViews!=null){
-            //设置自定义view通知栏
-            notificationBuilder.setContent(notificationParams.remoteViews);
-        }
-        if (notificationParams.intent!=null){
-            notificationBuilder.setContentIntent(notificationParams.intent);
-        }
-        if (notificationParams.ticker!=null && notificationParams.ticker.length()>0){
-            //设置状态栏的标题
-            notificationBuilder.setTicker(notificationParams.ticker);
-        }
-        if (notificationParams.when!=0){
-            //设置通知时间，默认为系统发出通知的时间，通常不用设置
-            notificationBuilder.setWhen(notificationParams.when);
-        }
-        if (notificationParams.sound!=null){
-            //设置sound
-            notificationBuilder.setSound(notificationParams.sound);
-        }
-        if (notificationParams.defaults!=0){
-            //设置默认的提示音
-            notificationBuilder.setDefaults(notificationParams.defaults);
-        }
-        if (notificationParams.pattern!=null){
-            //自定义震动效果
-            notificationBuilder.setVibrate(notificationParams.pattern);
-        }
-        return notificationBuilder;
     }
 
     private NotificationParams params;
