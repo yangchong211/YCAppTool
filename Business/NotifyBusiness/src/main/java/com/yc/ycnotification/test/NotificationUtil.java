@@ -1,4 +1,4 @@
-package com.yc.ycnotification;
+package com.yc.ycnotification.test;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -12,6 +12,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
+
+import com.yc.ycnotification.NotificationActivity;
+import com.yc.ycnotification.NotifyHomeActivity;
 import com.yc.ycnotification.R;
 import androidx.core.app.NotificationCompat;
 
@@ -177,6 +180,8 @@ public class NotificationUtil {
                 setContentTitle(context.getResources().getString(R.string.app_name)).
                 setContentText("这个是消息体内容").
                 setSmallIcon(R.mipmap.ic_launcher).
+                setPriority(NotificationCompat.PRIORITY_HIGH).
+                setCategory(NotificationCompat.CATEGORY_CALL).
                 setContentIntent(pendingIntent);
 
 

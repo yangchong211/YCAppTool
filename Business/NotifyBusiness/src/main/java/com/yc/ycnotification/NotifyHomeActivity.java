@@ -43,7 +43,7 @@ public class NotifyHomeActivity extends AppCompatActivity {
 
         TextView tv1 = findViewById(R.id.tv_1);
         TextView tv2 = findViewById(R.id.tv_2);
-        TextView tv3 = findViewById(R.id.tv_2);
+        TextView tv3 = findViewById(R.id.tv_3);
 
         tv1.setOnClickListener(new View.OnClickListener() {
             @Override

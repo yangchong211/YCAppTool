@@ -2,11 +2,8 @@ package com.yc.ycnotification;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,15 +18,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.appprocesslib.AppStateMonitor;
 import com.yc.appprocesslib.StateListener;
+import com.yc.notificationlib.AppNotifyHelper;
 import com.yc.notificationlib.NotificationParams;
 import com.yc.notificationlib.NotificationUtils;
 import com.yc.notifymessage.CustomNotification;
 import com.yc.toastutils.ToastUtils;
-import com.yc.ycnotification.R;
+import com.yc.ycnotification.notifyview.MyNotifyView;
+import com.yc.ycnotification.notifyview.MyNotifyView2;
+import com.yc.ycnotification.test.NotificationUtil;
 
 public class NotificationActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private NotificationManager mNotificationManager;
 
     private TextView tv_1;
     private TextView tv_2;
@@ -61,7 +59,6 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     private void init() {
         initView();
         initListener();
-        initNotificationManager();
         AppStateMonitor.getInstance().registerStateListener(new StateListener() {
             @Override
             public void onInForeground() {
@@ -120,11 +117,6 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         tv_15.setOnClickListener(this);
         tv_16.setOnClickListener(this);
         tv_17.setOnClickListener(this);
-    }
-
-    private void initNotificationManager() {
-        // 创建一个NotificationManager的引用
-        mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
 
@@ -192,14 +184,18 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     private void sendNotification1() {
         ToastUtils.showRoundRectToast("发送最简单通知");
         //这三个属性是必须要的，否则异常
-        NotificationUtils notificationUtils = new NotificationUtils(
-                this,"channel_1","通知1");
-        notificationUtils.sendNotification(1,
-                "这个是标题","这个是内容",R.mipmap.ic_launcher);
+//        NotificationUtils notificationUtils = new NotificationUtils(
+//                this,"channel_1","通知1");
+//        notificationUtils.sendNotification(1,
+//                "这个是标题","这个是内容",R.mipmap.ic_launcher);
 
 
-//        NotificationUtil notificationUtil = new NotificationUtil();
-//        notificationUtil.showFloatNotify2(this);
+        if (AppNotifyHelper.isOpenNotify(this)){
+            NotificationUtil notificationUtil = new NotificationUtil();
+            notificationUtil.showFloatNotify(this);
+        } else {
+            AppNotifyHelper.goToSetNotify(this);
+        }
     }
 
 
@@ -439,37 +435,6 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                 .setFlags(Notification.FLAG_ONLY_ALERT_ONCE);
         notificationUtils.setNotificationParams(notificationParams).sendNotification(14,"显示进度条14","显示进度条内容，自定定义",R.mipmap.ic_launcher);
     }
-
-
-    /**
-     * 错误代码
-     */
-    private void ssendNotification151() {
-        String id = "channel_1";
-        String description = "123";
-        int importance = NotificationManager.IMPORTANCE_HIGH;
-        NotificationChannel mChannel = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            mChannel = new NotificationChannel(id, "123", importance);
-            //  mChannel.setDescription(description);
-            //  mChannel.enableLights(true);
-            //  mChannel.setLightColor(Color.RED);
-            //  mChannel.enableVibration(true);
-            //  mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-            mNotificationManager.createNotificationChannel(mChannel);
-            Notification notification = new Notification.Builder(this, id)
-                    .setContentTitle("Title")
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
-                    .setContentTitle("您有一条新通知")
-                    .setContentText("这是一条逗你玩的消息")
-                    .setAutoCancel(true)
-//                    .setContentIntent(pintent)
-                    .build();
-            mNotificationManager.notify(1, notification);
-        }
-    }
-
 
 
     private void sendNotification15() {

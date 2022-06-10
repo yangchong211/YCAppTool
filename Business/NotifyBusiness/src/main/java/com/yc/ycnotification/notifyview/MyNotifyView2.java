@@ -1,23 +1,25 @@
-package com.yc.ycnotification;
+package com.yc.ycnotification.notifyview;
 
 import android.app.Activity;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+
 import com.yc.ycnotification.R;
 import com.yc.notifymessage.CustomNotification;
 import com.yc.notifymessage.NotificationView;
 import com.yc.toastutils.ToastUtils;
 
-public class MyNotifyView extends NotificationView<Void> {
+public class MyNotifyView2 extends NotificationView<Void> {
 
-    public MyNotifyView(@NonNull Activity activity) {
+    public MyNotifyView2(@NonNull Activity activity) {
         super(activity);
     }
 
     @Override
     public int provideLayoutResourceId() {
-        return R.layout.notify_custom_view;
+        return R.layout.notify_custom_view2;
     }
 
     @Override

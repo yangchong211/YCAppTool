@@ -1,12 +1,8 @@
 package com.yc.ycnotification;
 
 import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,7 +23,9 @@ import com.yc.notificationlib.NotificationParams;
 import com.yc.notificationlib.NotificationUtils;
 import com.yc.notifymessage.CustomNotification;
 import com.yc.toastutils.ToastUtils;
-import com.yc.ycnotification.R;
+import com.yc.ycnotification.notifyview.MyNotifyView;
+import com.yc.ycnotification.notifyview.MyNotifyView2;
+import com.yc.ycnotification.test.NotificationUtil;
 
 public class NotifyActivity extends AppCompatActivity implements View.OnClickListener {
 
