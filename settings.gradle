@@ -120,7 +120,7 @@ include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib',':EasyExecutor',
         ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib', ':AppProcessLib',
-        ':AnimatorHelper'
+        ':AnimatorHelper', ':ThreadDebugLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
@@ -138,7 +138,7 @@ project(':AppProcessLib').projectDir = new File('ToolLib/AppProcessLib')
 project(':EasyExecutor').projectDir = new File('ToolLib/EasyExecutor')
 project(':LocalShareLib').projectDir = new File('ToolLib/LocalShareLib')
 project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
-
+project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -193,4 +193,5 @@ project(':VideoKernel').projectDir = new File('PlayerLib/VideoKernel')
 project(':VideoPlayer').projectDir = new File('PlayerLib/VideoPlayer')
 project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
+
 
