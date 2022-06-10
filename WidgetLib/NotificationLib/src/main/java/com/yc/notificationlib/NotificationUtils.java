@@ -273,10 +273,11 @@ public class NotificationUtils extends ContextWrapper {
         if (notificationParams.isFullScreen) {
             //悬挂式
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                //悬挂式关键点
-                builder.setFullScreenIntent(notificationParams.intent, true);
                 builder.setPriority(NotificationCompat.PRIORITY_HIGH)
                         .setCategory(NotificationCompat.CATEGORY_CALL);
+                //悬挂式关键点
+                //使用全屏意图仅为最高优先级的警报，如果你的应用瞄准Android 10 或更高级别，你需要请求USE_FULL_SCREEN_INTENT权限
+                builder.setFullScreenIntent(notificationParams.intent, true);
             }
         }
         //点击自动删除通知

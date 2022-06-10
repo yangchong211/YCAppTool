@@ -166,4 +166,5 @@ public final class NotificationParams {
         this.isFullScreen = isFullScreen;
         return this;
     }
+
 }

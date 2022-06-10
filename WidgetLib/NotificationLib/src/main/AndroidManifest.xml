@@ -1,2 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ycbjie.notificationlib" />
+    package="com.ycbjie.notificationlib" >
+
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
+
+</manifest>

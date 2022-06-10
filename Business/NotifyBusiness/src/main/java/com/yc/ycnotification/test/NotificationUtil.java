@@ -179,7 +179,7 @@ public class NotificationUtil {
                 setContentTitle("杨充正在邀请你语音电话").
                 setContentText("点击进入").
                 setSmallIcon(R.drawable.ic_notification_music_logo).
-                setLargeIcon(BitmapUtils.getBitmap(R.drawable.ic_notification_music_logo)).
+                setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_notification_music_logo)).
                 setPriority(NotificationCompat.PRIORITY_HIGH).
                 setCategory(NotificationCompat.CATEGORY_CALL).
                 setContentIntent(pendingIntent);
