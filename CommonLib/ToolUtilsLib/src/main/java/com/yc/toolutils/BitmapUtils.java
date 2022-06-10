@@ -1,5 +1,6 @@
 package com.yc.toolutils;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -12,10 +13,14 @@ import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -37,6 +42,24 @@ import java.net.URL;
  * </pre>
  */
 public final class BitmapUtils {
+
+    public static Drawable getDrawable(@DrawableRes int id){
+        Application context = AppToolUtils.getApp();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return context.getResources().getDrawable(id,context.getTheme());
+        } else {
+            return context.getResources().getDrawable(id);
+        }
+    }
+
+    public static Drawable getCompatDrawable(@DrawableRes int id){
+        return ContextCompat.getDrawable(AppToolUtils.getApp(), id);
+    }
+
+    public static Bitmap getBitmap(@DrawableRes int id){
+        Drawable compatDrawable = getCompatDrawable(id);
+        return drawableToBitmap(compatDrawable);
+    }
 
     /**
      * 请求网络图片转化成bitmap

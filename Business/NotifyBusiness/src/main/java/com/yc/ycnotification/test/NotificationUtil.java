@@ -13,6 +13,7 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.yc.toolutils.BitmapUtils;
 import com.yc.ycnotification.NotificationActivity;
 import com.yc.ycnotification.NotifyHomeActivity;
 import com.yc.ycnotification.R;
@@ -173,28 +174,20 @@ public class NotificationUtil {
             notificationChannel = new NotificationChannel(CHANNEL_ID, "TEST", NotificationManager.IMPORTANCE_HIGH);
             manager.createNotificationChannel(notificationChannel);
         }
-
         Intent intent = new Intent(context, NotifyHomeActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, 0);
         builder = new NotificationCompat.Builder(context, CHANNEL_ID).
-                setContentTitle(context.getResources().getString(R.string.app_name)).
-                setContentText("这个是消息体内容").
+                setContentTitle("杨充正在邀请你语音电话").
+                setContentText("点击进入").
                 setSmallIcon(R.mipmap.ic_launcher).
+                setLargeIcon(BitmapUtils.getBitmap(R.mipmap.ic_launcher)).
                 setPriority(NotificationCompat.PRIORITY_HIGH).
                 setCategory(NotificationCompat.CATEGORY_CALL).
                 setContentIntent(pendingIntent);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //SDK版本>=21才能设置悬挂式通知栏
-            //VISIBILITY_PUBLIC: 任何情况的显示
-            //VISIBILITY_PRIVATE: 只有在没有锁屏时显示
-            //VISIBILITY_SECRET: 在安全锁下或者没锁屏下显示
-            builder.setCategory(String.valueOf(Notification.FLAG_ONGOING_EVENT))
-                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                    .setColor(context.getResources().getColor(R.color.white));
             //悬挂式关键点
-            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
             builder.setFullScreenIntent(pendingIntent, true);
         }
         Notification notification = builder.build();
@@ -223,25 +216,16 @@ public class NotificationUtil {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, 0);
         builder = new NotificationCompat.Builder(context, CHANNEL_ID).
                 setContent(view_custom).
-                setContentTitle(context.getResources().getString(R.string.app_name)).
-                setContentText("这个是消息体内容").
+                setContentTitle("杨充正在邀请你语音电话").
+                setContentText("点击进入").
                 setSmallIcon(R.mipmap.icon).
-                setWhen(System.currentTimeMillis()).
-                setContentIntent(pendingIntent)
-                .setDefaults(NotificationCompat.FLAG_ONGOING_EVENT)
-                .setPriority(NotificationCompat.PRIORITY_MAX);
+                setPriority(NotificationCompat.PRIORITY_HIGH).
+                setCategory(NotificationCompat.CATEGORY_CALL).
+                setContentIntent(pendingIntent);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //SDK版本>=21才能设置悬挂式通知栏
-            //VISIBILITY_PUBLIC: 任何情况的显示
-            //VISIBILITY_PRIVATE: 只有在没有锁屏时显示
-            //VISIBILITY_SECRET: 在安全锁下或者没锁屏下显示
-            builder.setCategory(String.valueOf(Notification.FLAG_ONGOING_EVENT))
-                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                    .setColor(context.getResources().getColor(R.color.white));
             //悬挂式关键点
-            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
             builder.setFullScreenIntent(pendingIntent, true);
         }
         Notification notification = builder.build();
