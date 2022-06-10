@@ -15,11 +15,6 @@ import androidx.annotation.Nullable;
 public class ANRError extends Error {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * The minimum duration, in ms, for which the main thread has been blocked. May be more.
-     */
-    @SuppressWarnings("WeakerAccess")
     public final long duration;
 
     private ANRError(ANRStackTrace.MyThread st, long duration) {

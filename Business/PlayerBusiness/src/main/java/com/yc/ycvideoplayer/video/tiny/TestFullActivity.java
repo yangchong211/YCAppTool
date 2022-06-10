@@ -94,15 +94,11 @@ public class TestFullActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_tiny_1:
-                mVideoPlayer.startFullScreen();
-                break;
-            case R.id.btn_tiny_2:
-                mVideoPlayer.startTinyScreen();
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.btn_tiny_1) {
+            mVideoPlayer.startFullScreen();
+        } else if (id == R.id.btn_tiny_2) {
+            mVideoPlayer.startTinyScreen();
         }
     }
 

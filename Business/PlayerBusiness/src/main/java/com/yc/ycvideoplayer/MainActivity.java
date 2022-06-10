@@ -92,33 +92,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_1:
-                break;
-            case R.id.tv_2:
-                startActivity(TypeActivity.class);
-                break;
-            case R.id.tv_3:
-                break;
-            case R.id.tv_4:
-                startCheckService();
-                startActivity(MusicPlayerActivity.class);
-                break;
-            case R.id.tv_5:
-                startActivity(M3u8Activity.class);
-                break;
-            case R.id.tv_6:
-                if (Build.VERSION.SDK_INT >= 23) {
-                    if (!FloatWindowUtils.hasPermission(this)) {
-                        requestAlertWindowPermission();
-                    } else {
-                        windowDialog();
-                    }
+        int id = v.getId();
+        if (id == R.id.tv_1) {
+        } else if (id == R.id.tv_2) {
+            startActivity(TypeActivity.class);
+        } else if (id == R.id.tv_3) {
+        } else if (id == R.id.tv_4) {
+            startCheckService();
+            startActivity(MusicPlayerActivity.class);
+        } else if (id == R.id.tv_5) {
+            startActivity(M3u8Activity.class);
+        } else if (id == R.id.tv_6) {
+            if (Build.VERSION.SDK_INT >= 23) {
+                if (!FloatWindowUtils.hasPermission(this)) {
+                    requestAlertWindowPermission();
+                } else {
+                    windowDialog();
                 }
-                break;
-            case R.id.tv_7:
-                startActivity(AudioActivity.class);
-                break;
+            }
+        } else if (id == R.id.tv_7) {
+            startActivity(AudioActivity.class);
         }
     }
 

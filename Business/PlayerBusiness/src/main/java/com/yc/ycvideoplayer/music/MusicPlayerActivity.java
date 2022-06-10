@@ -158,32 +158,28 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.tv_start:
-                BaseAppHelper.get().getMusicService().start();
-                break;
-            case R.id.fl_play_bar:
-                showPlayingFragment();
-                break;
-            case R.id.iv_play_bar_next:
-                BaseAppHelper.get().getMusicService().next();
-                break;
-            case R.id.iv_play_bar_play:
-                if (BaseAppHelper.get().getMusicService().isDefault()) {
-                    if (BaseAppHelper.get().getMusicList().size() > 0) {
-                        int mPlayPosition;
-                        if (BaseAppHelper.get().getMusicService().getPlayingMusic() != null ) {
-                            mPlayPosition = BaseAppHelper.get().getMusicService().getPlayingPosition();
-                        } else {
-                            mPlayPosition = 0;
-                        }
-                        BaseAppHelper.get().getMusicService().play(BaseAppHelper.get()
-                                .getMusicList().get(mPlayPosition));
+        int id = v.getId();
+        if (id == R.id.tv_start) {
+            BaseAppHelper.get().getMusicService().start();
+        } else if (id == R.id.fl_play_bar) {
+            showPlayingFragment();
+        } else if (id == R.id.iv_play_bar_next) {
+            BaseAppHelper.get().getMusicService().next();
+        } else if (id == R.id.iv_play_bar_play) {
+            if (BaseAppHelper.get().getMusicService().isDefault()) {
+                if (BaseAppHelper.get().getMusicList().size() > 0) {
+                    int mPlayPosition;
+                    if (BaseAppHelper.get().getMusicService().getPlayingMusic() != null) {
+                        mPlayPosition = BaseAppHelper.get().getMusicService().getPlayingPosition();
+                    } else {
+                        mPlayPosition = 0;
                     }
-                } else {
-                    BaseAppHelper.get().getMusicService().playPause();
+                    BaseAppHelper.get().getMusicService().play(BaseAppHelper.get()
+                            .getMusicList().get(mPlayPosition));
                 }
-                break;
+            } else {
+                BaseAppHelper.get().getMusicService().playPause();
+            }
         }
     }
 

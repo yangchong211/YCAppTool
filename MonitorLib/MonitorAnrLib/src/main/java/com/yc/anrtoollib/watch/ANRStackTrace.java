@@ -6,25 +6,25 @@ import java.io.Serializable;
 
 public class ANRStackTrace implements Serializable {
 
-    public final String _name;
-    public final StackTraceElement[] _stackTrace;
+    public final String name;
+    public final StackTraceElement[] stackTrace;
 
     public class MyThread extends Throwable {
 
         public MyThread(ANRStackTrace.MyThread other) {
-            super(_name, other);
+            super(name, other);
         }
 
         @Override
         @NonNull
         public Throwable fillInStackTrace() {
-            setStackTrace(_stackTrace);
+            setStackTrace(stackTrace);
             return this;
         }
     }
 
     public ANRStackTrace(String name, StackTraceElement[] stackTrace) {
-        _name = name;
-        _stackTrace = stackTrace;
+        this.name = name;
+        this.stackTrace = stackTrace;
     }
 }

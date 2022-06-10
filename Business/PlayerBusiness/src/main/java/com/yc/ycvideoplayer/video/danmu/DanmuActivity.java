@@ -124,21 +124,15 @@ public class DanmuActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_show:
-                mMyDanmakuView.show();
-                break;
-            case R.id.btn_hide:
-                mMyDanmakuView.hide();
-                break;
-            case R.id.btn_add_dan:
-                mMyDanmakuView.addDanmakuWithDrawable();
-                break;
-            case R.id.btn_add_custom_dan:
-                mMyDanmakuView.addDanmaku("小杨逗比自定义弹幕~", true);
-                break;
-            default:
-                break;
+        int id = v.getId();
+        if (id == R.id.btn_show) {
+            mMyDanmakuView.show();
+        } else if (id == R.id.btn_hide) {
+            mMyDanmakuView.hide();
+        } else if (id == R.id.btn_add_dan) {
+            mMyDanmakuView.addDanmakuWithDrawable();
+        } else if (id == R.id.btn_add_custom_dan) {
+            mMyDanmakuView.addDanmaku("小杨逗比自定义弹幕~", true);
         }
     }
 
