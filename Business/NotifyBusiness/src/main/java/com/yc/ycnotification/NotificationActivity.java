@@ -163,11 +163,9 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     private void cancelAllNotification() {
         NotificationUtils notificationUtils = new NotificationUtils(this);
         notificationUtils.clearNotification();
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationUtils.getManager().deleteNotificationChannel("channel_1");
+            notificationUtils.clearAllNotification();
         }
-
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //            //判断通知是否是静默不重要的通知
 //            boolean isNoImportance = notificationUtils.isNoImportance("channel_id");
@@ -202,30 +200,20 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     private void sendNotification2() {
         //处理点击Notification的逻辑
         //创建intent
-//        Intent resultIntent = new Intent(this, NotifyIntentActivity.class);
-//        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);           //添加为栈顶Activity
-//        resultIntent.putExtra("what",2);
-//        PendingIntent resultPendingIntent = PendingIntent.getActivity(this,2,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-//
-//        // 定义Notification的各种属性
-//        NotificationUtils notificationUtils = new NotificationUtils(
-//                this,"channel_2","通知2");
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            NotificationChannel notificationChannel =
-//                    notificationUtils.getNotificationChannel("channel_2");
-//            if (notificationUtils.isNoImportance(notificationChannel)){
-//                notificationUtils.openChannelSetting(notificationChannel);
-//            }
-//        }
-//        NotificationParams notificationParams = new NotificationParams();
-//        notificationParams.setContentIntent(resultPendingIntent);
-//        notificationUtils
-//                .setNotificationParams(notificationParams)
-//                .sendNotificationCompat(2,"这个是标题2", "这个是内容2", R.mipmap.ic_launcher);
+        Intent resultIntent = new Intent(this, NotifyIntentActivity.class);
+        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);           //添加为栈顶Activity
+        resultIntent.putExtra("what",2);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this,2,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
-
-        NotificationUtil notificationUtil = new NotificationUtil();
-        notificationUtil.showFloatNotify2(this);
+        // 定义Notification的各种属性
+        NotificationUtils notificationUtils = new NotificationUtils(
+                this,"channel_2","通知2");
+        NotificationParams notificationParams = new NotificationParams();
+        notificationParams.setContentIntent(resultPendingIntent)
+                .setFullScreen(true);
+        notificationUtils
+                .setNotificationParams(notificationParams)
+                .sendNotification(2,"这个是标题2", "这个是内容2", R.mipmap.ic_launcher);
     }
 
 

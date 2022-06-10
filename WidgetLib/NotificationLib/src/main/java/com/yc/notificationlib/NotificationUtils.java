@@ -78,9 +78,7 @@ public class NotificationUtils extends ContextWrapper {
         if (!TextUtils.isEmpty(channelName)){
             CHANNEL_NAME = channelName;
         }
-        channel = new NotificationChannel(
-                CHANNEL_ID,
-                CHANNEL_NAME,
+        channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_DEFAULT);
         /*channel.canBypassDnd();//是否绕过请勿打扰模式
         channel.enableLights(true);//闪光灯
@@ -152,7 +150,7 @@ public class NotificationUtils extends ContextWrapper {
     }
 
     /**
-     * 清空所有的通知
+     * 清空所有的channel
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void clearAllNotification(){
@@ -173,7 +171,7 @@ public class NotificationUtils extends ContextWrapper {
     }
 
     /**
-     * 清空所有的通知
+     * 清空所有channel的通知
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void clearAllGroupNotification(){
@@ -229,24 +227,6 @@ public class NotificationUtils extends ContextWrapper {
         getManager().notify(notifyId, build);
     }
 
-    /**
-     * 调用该方法可以发送通知
-     * @param notifyId                  notifyId
-     * @param title                     title
-     * @param content                   content
-     */
-    public void sendNotificationCompat(int notifyId, String title, String content , int icon) {
-        NotificationCompat.Builder builder = getNotificationCompat(title, content, icon);
-        Notification build = builder.build();
-        NotificationParams notificationParams = getNotificationParams();
-        if (notificationParams.flags!=null && notificationParams.flags.length>0){
-            for (int a=0 ; a<notificationParams.flags.length ; a++){
-                build.flags |= notificationParams.flags[a];
-            }
-        }
-        getManager().notify(notifyId, build);
-    }
-
     private NotificationCompat.Builder getNotificationCompat(String title, String content, int icon) {
         NotificationCompat.Builder builder;
         NotificationParams notificationParams = getNotificationParams();
@@ -256,6 +236,7 @@ public class NotificationUtils extends ContextWrapper {
             //注意用下面这个方法，在8.0以上无法出现通知栏。8.0之前是正常的。这里需要增强判断逻辑
             builder = new NotificationCompat.Builder(getApplicationContext());
         }
+        //这三个参数比传
         builder.setContentTitle(title);
         builder.setContentText(content);
         builder.setSmallIcon(icon);
@@ -265,6 +246,7 @@ public class NotificationUtils extends ContextWrapper {
         builder.setOnlyAlertOnce(notificationParams.onlyAlertOnce);
         //让通知左右滑的时候是否可以取消通知
         builder.setOngoing(notificationParams.ongoing);
+        //设置自定义布局
         if (notificationParams.remoteViews!=null){
             builder.setContent(notificationParams.remoteViews);
         }
@@ -282,6 +264,15 @@ public class NotificationUtils extends ContextWrapper {
         }
         if (notificationParams.defaults!=0){
             builder.setDefaults(notificationParams.defaults);
+        }
+        if (notificationParams.isFullScreen){
+            //悬挂式
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                //悬挂式关键点
+                builder.setFullScreenIntent(notificationParams.intent, true);
+                builder.setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setCategory(NotificationCompat.CATEGORY_CALL);
+            }
         }
         //点击自动删除通知
         builder.setAutoCancel(true);

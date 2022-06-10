@@ -57,7 +57,7 @@ public final class BitmapUtils {
     }
 
     public static Bitmap getBitmap(@DrawableRes int id){
-        Drawable compatDrawable = getCompatDrawable(id);
+        Drawable compatDrawable = getDrawable(id);
         return drawableToBitmap(compatDrawable);
     }
 

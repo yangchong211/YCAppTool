@@ -17,18 +17,18 @@ import static android.app.Notification.PRIORITY_DEFAULT;
  */
 public final class NotificationParams {
 
-    public boolean ongoing;
-    public RemoteViews remoteViews;
-    public PendingIntent intent;
-    public String ticker;
-    public int priority;
-    public boolean onlyAlertOnce = false;
-    public long when;
-    public Uri sound;
-    public int defaults = 0;
-    public long[] pattern = null;
-    public int[] flags;
-    public boolean isFullScreen;
+    protected boolean ongoing;
+    protected RemoteViews remoteViews;
+    protected PendingIntent intent;
+    protected String ticker;
+    protected int priority;
+    protected boolean onlyAlertOnce = false;
+    protected long when;
+    protected Uri sound;
+    protected int defaults = 0;
+    protected long[] pattern = null;
+    protected int[] flags;
+    protected boolean isFullScreen;
 
     public NotificationParams(){
         this.ongoing = false;
