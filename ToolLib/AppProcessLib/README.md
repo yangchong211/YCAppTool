@@ -33,6 +33,9 @@
     - 1、利用ActivityManager的RunningAppProcessInfo类，直接粗暴，官方摒弃，不推荐；
     - 2、监听Home键点击，官方不支持，兼容性差，不稳定，不推荐；
     - 3、利用ActivityLifecycleCallbacks监听所有activity的生命周期，
+- 官方建议
+    - 判断前后台，使用ActivityLifecycleCallbacks实现，但是需要注意，建议结合onStart 和 onStop 回调，onPause 和 onResume两种回调综合判断
+
 
 
 ### 03.Api调用说明

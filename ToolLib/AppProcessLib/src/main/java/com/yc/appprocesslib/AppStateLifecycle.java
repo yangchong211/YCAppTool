@@ -1,7 +1,6 @@
 package com.yc.appprocesslib;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;

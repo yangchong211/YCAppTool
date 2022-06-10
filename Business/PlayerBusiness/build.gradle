@@ -1,11 +1,12 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.library'
+}
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
-        applicationId "com.yc.ycvideoplayer"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]

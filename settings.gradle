@@ -1,6 +1,5 @@
 /* +++++++++ 主项目 +++++++++ */
 include ':AppTool'
-include ':PlayerApp'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
@@ -8,7 +7,7 @@ include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
         ':VideoBusiness', ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
         ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',':CommonBusiness',
         ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
-        ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness'
+        ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness', ':PlayerBusiness'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -28,7 +27,7 @@ project(':CommonBusiness').projectDir = new File('Business/CommonBusiness')
 project(':ThreadBusiness').projectDir = new File('Business/ThreadBusiness')
 project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')
 project(':KotlinBusiness').projectDir = new File('Business/KotlinBusiness')
-
+project(':PlayerBusiness').projectDir = new File('Business/PlayerBusiness')
 
 
 /* +++++++++ 框架业务服务层 +++++++++ */
