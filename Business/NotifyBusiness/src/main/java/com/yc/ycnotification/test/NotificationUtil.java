@@ -168,7 +168,6 @@ public class NotificationUtil {
         NotificationChannel notificationChannel = null;
         NotificationCompat.Builder builder = null;
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //必须最高级别
             notificationChannel = new NotificationChannel(CHANNEL_ID, "TEST", NotificationManager.IMPORTANCE_HIGH);

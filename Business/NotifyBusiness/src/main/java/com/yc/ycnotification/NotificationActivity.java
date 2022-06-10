@@ -2,6 +2,7 @@ package com.yc.ycnotification;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
@@ -206,8 +207,8 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this,2,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         // 定义Notification的各种属性
-        NotificationUtils notificationUtils = new NotificationUtils(
-                this,"channel_2","通知2");
+        NotificationUtils notificationUtils = new NotificationUtils(this);
+        notificationUtils.createNotificationChannel( "float3","TEST2", NotificationManager.IMPORTANCE_HIGH);
         NotificationParams notificationParams = new NotificationParams();
         notificationParams.setContentIntent(resultPendingIntent)
                 .setFullScreen(true);

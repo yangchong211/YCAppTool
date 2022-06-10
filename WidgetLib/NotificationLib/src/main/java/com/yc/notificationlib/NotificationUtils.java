@@ -42,23 +42,23 @@ public class NotificationUtils extends ContextWrapper {
         super(base);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //android 8.0以上需要特殊处理，也就是targetSDKVersion为26以上
-            createNotificationChannel(null,null);
+            createNotificationChannel(CHANNEL_ID, CHANNEL_NAME,NotificationManager.IMPORTANCE_DEFAULT);
         }
     }
 
-    public NotificationUtils(Context base , String channelId) {
+    public NotificationUtils(Context base, String channelId) {
         super(base);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //android 8.0以上需要特殊处理，也就是targetSDKVersion为26以上
-            createNotificationChannel(channelId,null);
+            createNotificationChannel(channelId, CHANNEL_NAME,NotificationManager.IMPORTANCE_DEFAULT);
         }
     }
 
-    public NotificationUtils(Context base ,String channelId, String channelName) {
+    public NotificationUtils(Context base, String channelId, String channelName) {
         super(base);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //android 8.0以上需要特殊处理，也就是targetSDKVersion为26以上
-            createNotificationChannel(channelId,channelName);
+            createNotificationChannel(channelId, channelName,NotificationManager.IMPORTANCE_DEFAULT);
         }
     }
 
@@ -66,20 +66,19 @@ public class NotificationUtils extends ContextWrapper {
      * 8.0以上需要创建通知栏渠道channel
      */
     @TargetApi(Build.VERSION_CODES.O)
-    private NotificationChannel createNotificationChannel(String channelId , String channelName) {
+    public NotificationChannel createNotificationChannel(String channelId, String channelName , int importance) {
         //第一个参数：channel_id
         //第二个参数：channel_name，这个是用来展示给用户看的
         //第三个参数：设置通知重要性级别
         //注意：该级别必须要在 NotificationChannel 的构造函数中指定，总共要五个级别；
         //范围是从 NotificationManager.IMPORTANCE_NONE(0) ~ NotificationManager.IMPORTANCE_HIGH(4)
-        if (!TextUtils.isEmpty(channelId)){
+        if (!TextUtils.isEmpty(channelId)) {
             CHANNEL_ID = channelId;
         }
-        if (!TextUtils.isEmpty(channelName)){
+        if (!TextUtils.isEmpty(channelName)) {
             CHANNEL_NAME = channelName;
         }
-        channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT);
+        channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance);
         /*channel.canBypassDnd();//是否绕过请勿打扰模式
         channel.enableLights(true);//闪光灯
         channel.setLockscreenVisibility(VISIBILITY_SECRET);//锁屏显示通知
@@ -97,7 +96,8 @@ public class NotificationUtils extends ContextWrapper {
 
     /**
      * 获取创建一个NotificationManager的对象
-     * @return                          NotificationManager对象
+     *
+     * @return NotificationManager对象
      */
     public NotificationManager getManager() {
         if (mManager == null) {
@@ -108,22 +108,25 @@ public class NotificationUtils extends ContextWrapper {
 
     /**
      * 获取创建一个NotificationChannel的对象
-     * @return                          NotificationChannel对象
+     *
+     * @return NotificationChannel对象
      */
-    public NotificationChannel getNotificationChannel(){
-        if (channel == null){
-            channel = createNotificationChannel(null,null);
+    private NotificationChannel getNotificationChannel() {
+        if (channel == null) {
+            channel = createNotificationChannel(CHANNEL_ID, CHANNEL_NAME,
+                    NotificationManager.IMPORTANCE_DEFAULT);
         }
         return channel;
     }
 
     /**
      * 获取创建一个NotificationChannel的对象
-     * @return                          NotificationChannel对象
+     *
+     * @return NotificationChannel对象
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public NotificationChannel getNotificationChannel(String channelId){
-        if (TextUtils.isEmpty(channelId)){
+    public NotificationChannel getNotificationChannel(String channelId) {
+        if (TextUtils.isEmpty(channelId)) {
             return getNotificationChannel();
         }
         NotificationManager manager = getManager();
@@ -133,7 +136,7 @@ public class NotificationUtils extends ContextWrapper {
     /**
      * 清空所有的通知
      */
-    public void clearNotification(){
+    public void clearNotification() {
         getManager().cancelAll();
     }
 
@@ -141,8 +144,8 @@ public class NotificationUtils extends ContextWrapper {
      * 清空特定的通知
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void clearNotificationChannel(String channelId){
-        if (channelId == null || channelId.length() == 0){
+    public void clearNotificationChannel(String channelId) {
+        if (channelId == null || channelId.length() == 0) {
             return;
         }
         NotificationManager manager = getManager();
@@ -153,18 +156,18 @@ public class NotificationUtils extends ContextWrapper {
      * 清空所有的channel
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void clearAllNotification(){
+    public void clearAllNotification() {
         NotificationManager manager = getManager();
         List<NotificationChannel> notificationChannels = manager.getNotificationChannels();
-        if (notificationChannels!=null){
-            for (int i=0 ; i<notificationChannels.size() ; i++){
+        if (notificationChannels != null) {
+            for (int i = 0; i < notificationChannels.size(); i++) {
                 NotificationChannel notificationChannel = notificationChannels.get(i);
-                if (notificationChannel == null){
+                if (notificationChannel == null) {
                     continue;
                 }
                 String id = notificationChannel.getId();
                 CharSequence name = notificationChannel.getName();
-                Log.d("notification channel " , id + " , " + name);
+                Log.d("notification channel ", id + " , " + name);
                 manager.deleteNotificationChannel(id);
             }
         }
@@ -174,18 +177,18 @@ public class NotificationUtils extends ContextWrapper {
      * 清空所有channel的通知
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void clearAllGroupNotification(){
+    public void clearAllGroupNotification() {
         NotificationManager manager = getManager();
         List<NotificationChannelGroup> notificationChannelGroups = manager.getNotificationChannelGroups();
-        if (notificationChannelGroups!=null){
-            for (int i=0 ; i<notificationChannelGroups.size() ; i++){
+        if (notificationChannelGroups != null) {
+            for (int i = 0; i < notificationChannelGroups.size(); i++) {
                 NotificationChannelGroup notificationChannelGroup = notificationChannelGroups.get(i);
-                if (notificationChannelGroup == null){
+                if (notificationChannelGroup == null) {
                     continue;
                 }
                 String id = notificationChannelGroup.getId();
                 CharSequence name = notificationChannelGroup.getName();
-                Log.d("notification group " , id + " , " + name);
+                Log.d("notification group ", id + " , " + name);
                 manager.deleteNotificationChannel(id);
             }
         }
@@ -193,15 +196,16 @@ public class NotificationUtils extends ContextWrapper {
 
     /**
      * 获取Notification
-     * @param title                     title
-     * @param content                   content
+     *
+     * @param title   title
+     * @param content content
      */
-    public Notification getNotification(String title, String content , int icon){
+    public Notification getNotification(String title, String content, int icon) {
         NotificationCompat.Builder builder = getNotificationCompat(title, content, icon);
         Notification build = builder.build();
         NotificationParams notificationParams = getNotificationParams();
-        if (notificationParams.flags!=null && notificationParams.flags.length>0){
-            for (int a=0 ; a<notificationParams.flags.length ; a++){
+        if (notificationParams.flags != null && notificationParams.flags.length > 0) {
+            for (int a = 0; a < notificationParams.flags.length; a++) {
                 build.flags |= notificationParams.flags[a];
             }
         }
@@ -211,16 +215,17 @@ public class NotificationUtils extends ContextWrapper {
     /**
      * 建议使用这个发送通知
      * 调用该方法可以发送通知
-     * @param notifyId                  notifyId
-     * @param title                     title
-     * @param content                   content
+     *
+     * @param notifyId notifyId
+     * @param title    title
+     * @param content  content
      */
-    public void sendNotification(int notifyId, String title, String content , int icon) {
+    public void sendNotification(int notifyId, String title, String content, int icon) {
         NotificationCompat.Builder builder = getNotificationCompat(title, content, icon);
         Notification build = builder.build();
         NotificationParams notificationParams = getNotificationParams();
-        if (notificationParams.flags!=null && notificationParams.flags.length>0){
-            for (int a=0 ; a<notificationParams.flags.length ; a++){
+        if (notificationParams.flags != null && notificationParams.flags.length > 0) {
+            for (int a = 0; a < notificationParams.flags.length; a++) {
                 build.flags |= notificationParams.flags[a];
             }
         }
@@ -247,25 +252,25 @@ public class NotificationUtils extends ContextWrapper {
         //让通知左右滑的时候是否可以取消通知
         builder.setOngoing(notificationParams.ongoing);
         //设置自定义布局
-        if (notificationParams.remoteViews!=null){
+        if (notificationParams.remoteViews != null) {
             builder.setContent(notificationParams.remoteViews);
         }
-        if (notificationParams.intent!=null){
+        if (notificationParams.intent != null) {
             builder.setContentIntent(notificationParams.intent);
         }
-        if (notificationParams.ticker!=null && notificationParams.ticker.length()>0){
+        if (notificationParams.ticker != null && notificationParams.ticker.length() > 0) {
             builder.setTicker(notificationParams.ticker);
         }
-        if (notificationParams.when!=0){
+        if (notificationParams.when != 0) {
             builder.setWhen(notificationParams.when);
         }
-        if (notificationParams.sound!=null){
+        if (notificationParams.sound != null) {
             builder.setSound(notificationParams.sound);
         }
-        if (notificationParams.defaults!=0){
+        if (notificationParams.defaults != 0) {
             builder.setDefaults(notificationParams.defaults);
         }
-        if (notificationParams.isFullScreen){
+        if (notificationParams.isFullScreen) {
             //悬挂式
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 //悬挂式关键点
@@ -282,7 +287,7 @@ public class NotificationUtils extends ContextWrapper {
     private NotificationParams params;
 
     public NotificationParams getNotificationParams() {
-        if (params == null){
+        if (params == null) {
             return new NotificationParams();
         }
         return params;
@@ -296,12 +301,13 @@ public class NotificationUtils extends ContextWrapper {
     /**
      * 判断通知是否是静默不重要的通知。
      * 主要是该类通知被用户手动给关闭
-     * @param channel                           通知栏channel
+     *
+     * @param channel 通知栏channel
      * @return
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public boolean isNoImportance(NotificationChannel channel){
-        if (channel.getImportance() == NotificationManager.IMPORTANCE_NONE){
+    public boolean isNoImportance(NotificationChannel channel) {
+        if (channel.getImportance() == NotificationManager.IMPORTANCE_NONE) {
             return true;
         }
         return false;
@@ -310,24 +316,25 @@ public class NotificationUtils extends ContextWrapper {
     /**
      * 判断通知是否是静默不重要的通知。
      * 主要是该类通知被用户手动给关闭
-     * @param channelId                           通知栏channelId
+     *
+     * @param channelId 通知栏channelId
      * @return
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public boolean isNoImportance(String channelId){
+    public boolean isNoImportance(String channelId) {
         NotificationChannel channel = getNotificationChannel(channelId);
         return isNoImportance(channel);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void openChannelSetting(String channelId){
+    public void openChannelSetting(String channelId) {
         NotificationChannel channel = getNotificationChannel(channelId);
         openChannelSetting(channel);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void openChannelSetting(NotificationChannel channel){
-        if (channel == null){
+    public void openChannelSetting(NotificationChannel channel) {
+        if (channel == null) {
             return;
         }
         if (channel.getImportance() == NotificationManager.IMPORTANCE_NONE) {
