@@ -33,7 +33,7 @@ project(':PlayerBusiness').projectDir = new File('Business/PlayerBusiness')
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
-        ':EasyBleServer', ':LogUpload', ':OkHttpServer'
+        ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -46,7 +46,7 @@ project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')
 project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')
 project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
 project(':OkHttpServer').projectDir = new File('ServerLib/OkHttpServer')
-
+project(':PrivateServer').projectDir = new File('ServerLib/PrivateServer')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
@@ -193,5 +193,6 @@ project(':VideoKernel').projectDir = new File('PlayerLib/VideoKernel')
 project(':VideoPlayer').projectDir = new File('PlayerLib/VideoPlayer')
 project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
+
 
 
