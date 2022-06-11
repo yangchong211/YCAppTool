@@ -4,6 +4,7 @@ package com.yc.threaddebug;
 
 
 public interface CommonThreadKey {
+
     interface OpenSource {
         String OKHTTP = "OkHttp";
         String RETROFIT = "Retrofit";

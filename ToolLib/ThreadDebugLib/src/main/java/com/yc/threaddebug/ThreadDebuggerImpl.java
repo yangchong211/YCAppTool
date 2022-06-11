@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class DefaultThreadDebugger implements IThreadDebugger {
+class ThreadDebuggerImpl implements IThreadDebugger {
 
     private boolean mAlwaysPrintUnknown = true;
 
@@ -96,7 +96,7 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
     @Override
     public void refresh() {
-        final Thread[] threads = ThreadUtils.getAllThreads();
+        final Thread[] threads = ThreadToolUtils.getAllThreads();
 
         mBuilder.reset();
 
@@ -216,9 +216,12 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
     @Override
     public boolean isSizeChanged() {
-        if (mAlwaysPrintUnknown) return mSize != mPreviousSize;
-        else return mCurThreadCategoryList != null && mPreThreadCategoryList != null
-                && mCurThreadCategoryList.size() != mPreThreadCategoryList.size();
+        if (mAlwaysPrintUnknown) {
+            return mSize != mPreviousSize;
+        } else {
+            return mCurThreadCategoryList != null && mPreThreadCategoryList != null
+                    && mCurThreadCategoryList.size() != mPreThreadCategoryList.size();
+        }
     }
 
     @Override

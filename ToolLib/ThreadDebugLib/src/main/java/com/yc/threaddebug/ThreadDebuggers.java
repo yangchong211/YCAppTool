@@ -6,7 +6,7 @@ package com.yc.threaddebug;
 public class ThreadDebuggers {
 
     public static IThreadDebugger create() {
-        return new DefaultThreadDebugger();
+        return new ThreadDebuggerImpl();
     }
 
     public static IThreadDebugger createWithCommonThreadKey() {

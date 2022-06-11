@@ -2,11 +2,7 @@
 
 package com.yc.threaddebug;
 
-/**
- * @author jacks
- * @since 2019-07-29 12:03
- */
-public class ThreadUtils {
+public class ThreadToolUtils {
 
     private static ThreadGroup rootGroup = null;
 
@@ -14,14 +10,14 @@ public class ThreadUtils {
      * @return threads but its count not equal to real thread count, you need filter null manually.
      */
     public static Thread[] getAllThreads() {
-        ThreadGroup rootGroup = ThreadUtils.rootGroup;
+        ThreadGroup rootGroup = ThreadToolUtils.rootGroup;
         if (rootGroup == null) {
             rootGroup = Thread.currentThread().getThreadGroup();
             ThreadGroup parentGroup;
             while ((parentGroup = rootGroup.getParent()) != null) {
                 rootGroup = parentGroup;
             }
-            ThreadUtils.rootGroup = rootGroup;
+            ThreadToolUtils.rootGroup = rootGroup;
         }
 
         Thread[] threads = new Thread[rootGroup.activeCount()];

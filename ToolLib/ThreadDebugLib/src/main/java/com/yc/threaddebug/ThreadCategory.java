@@ -10,9 +10,10 @@ import java.util.Map;
 
 
 public class ThreadCategory implements Cloneable {
+
     private String mStartWidthKey;
     private String mAlias;
-    private List<ThreadInfo> mInfoList;
+    private List<ThreadInfoBean> mInfoList;
     private final static Map<String, String> THREAD_NAME_LOW_CACHE = new HashMap<>();
 
     boolean is(String threadName) {
@@ -21,7 +22,9 @@ public class ThreadCategory implements Cloneable {
         }
 
         final int diff = threadName.length() - mStartWidthKey.length();
-        if (diff < 0) return false;
+        if (diff < 0) {
+            return false;
+        }
 
         String lowCaseThreadName = THREAD_NAME_LOW_CACHE.get(threadName);
         if (lowCaseThreadName == null) {
@@ -44,9 +47,9 @@ public class ThreadCategory implements Cloneable {
             builder.append("[]");
         } else {
             builder.append('[');
-            Iterator<ThreadInfo> it = mInfoList.iterator();
+            Iterator<ThreadInfoBean> it = mInfoList.iterator();
             while (it.hasNext()) {
-                ThreadInfo next = it.next();
+                ThreadInfoBean next = it.next();
                 builder.append(next.threadName);
                 if (it.hasNext()) {
                     builder.append(", ");
@@ -62,7 +65,7 @@ public class ThreadCategory implements Cloneable {
     }
 
     private final static List<String> EMPTY = new ArrayList<>();
-    private final static List<ThreadInfo> EMPTY_INFO = new ArrayList<>();
+    private final static List<ThreadInfoBean> EMPTY_INFO = new ArrayList<>();
 
     public List<String> diff(ThreadCategory category) {
         if (mInfoList == null && (category == null || category.mInfoList == null)) {
@@ -72,16 +75,16 @@ public class ThreadCategory implements Cloneable {
 
         final List<String> diffNameList = new ArrayList<>();
 
-        final List<ThreadInfo> curNameList = (List<ThreadInfo>) ((ArrayList) mInfoList).clone();
-        final List<ThreadInfo> preNameList = (category == null || category.mInfoList == null) ?
-                EMPTY_INFO : (List<ThreadInfo>) ((ArrayList) category.mInfoList).clone();
-        for (ThreadInfo info : curNameList) {
+        final List<ThreadInfoBean> curNameList = (List<ThreadInfoBean>) ((ArrayList) mInfoList).clone();
+        final List<ThreadInfoBean> preNameList = (category == null || category.mInfoList == null) ?
+                EMPTY_INFO : (List<ThreadInfoBean>) ((ArrayList) category.mInfoList).clone();
+        for (ThreadInfoBean info : curNameList) {
             if (!preNameList.contains(info)) {
                 diffNameList.add("(+)" + info.threadName);
             }
         }
 
-        for (ThreadInfo info : preNameList) {
+        for (ThreadInfoBean info : preNameList) {
             if (!curNameList.contains(info)) {
                 diffNameList.add("(-)" + info.threadName);
             }
@@ -130,7 +133,7 @@ public class ThreadCategory implements Cloneable {
                 mCategory.mInfoList = new ArrayList<>();
             }
 
-            mCategory.mInfoList.add(new ThreadInfo(hashCode, threadName));
+            mCategory.mInfoList.add(new ThreadInfoBean(hashCode, threadName));
         }
 
         public void reset() {
@@ -157,28 +160,9 @@ public class ThreadCategory implements Cloneable {
 
         //noinspection unchecked
         clone.mInfoList = mInfoList == null ? null :
-                (List<ThreadInfo>) ((ArrayList) mInfoList).clone();
+                (List<ThreadInfoBean>) ((ArrayList) mInfoList).clone();
 
         return clone;
     }
 
-    private static class ThreadInfo {
-        private final int hashCode;
-        private final String threadName;
-
-        ThreadInfo(int hashCode, String threadName) {
-            this.hashCode = hashCode;
-            this.threadName = threadName;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (!(o instanceof ThreadInfo)) {
-                return false;
-            }
-
-            final ThreadInfo another = (ThreadInfo) o;
-            return another.hashCode == hashCode && threadName.equals(another.threadName);
-        }
-    }
 }

@@ -8,7 +8,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
 
-public class ThreadDebugger {
+public final class ThreadDebugger {
 
     public static boolean NEED_PRINT_COST = false;
 
@@ -27,7 +27,7 @@ public class ThreadDebugger {
      *                 some threads has changed in the process.
      */
     public static IThreadDebugger install(final IThreadDebugger debugger,
-                                          ThreadChangedCallback callback) {
+                                          IThreadChangedCallback callback) {
         return install(debugger, 2000, callback);
     }
 
@@ -52,7 +52,7 @@ public class ThreadDebugger {
      */
     public static synchronized IThreadDebugger install(final IThreadDebugger debugger,
                                                        final int updateMilliSecond,
-                                                       final ThreadChangedCallback callback) {
+                                                       final IThreadChangedCallback callback) {
         uninstall();
 
         HandlerThread handlerThread = new HandlerThread(CommonThreadKey.Others.THREAD_DEBUGGER);
@@ -98,19 +98,7 @@ public class ThreadDebugger {
         }
         HANDLER.removeMessages(0);
         HANDLER.getLooper().quit();
-
         return true;
     }
 
-    /**
-     * The thread changed callback.
-     */
-    public interface ThreadChangedCallback {
-        /**
-         * This method will be invoked when there are some threads has changed in the process.
-         *
-         * @param debugger the thread debugger.
-         */
-        void onChanged(IThreadDebugger debugger);
-    }
 }
