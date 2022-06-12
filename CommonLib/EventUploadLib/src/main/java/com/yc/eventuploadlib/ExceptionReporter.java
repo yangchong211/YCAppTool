@@ -1,4 +1,4 @@
-package com.yc.toolutils;
+package com.yc.eventuploadlib;
 
 import androidx.annotation.NonNull;
 
