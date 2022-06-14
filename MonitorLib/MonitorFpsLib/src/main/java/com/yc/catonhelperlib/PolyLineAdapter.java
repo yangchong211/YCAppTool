@@ -1,4 +1,4 @@
-package com.yc.catonhelperlib.fps;
+package com.yc.catonhelperlib;
 
 
 import android.content.Context;

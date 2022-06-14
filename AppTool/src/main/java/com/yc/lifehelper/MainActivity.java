@@ -41,6 +41,7 @@ import com.yc.lifehelper.component.SnapBannerComponent;
 import com.yc.lifehelper.component.ToolComponent;
 import com.yc.lifehelper.view.MyNotifyView;
 import com.yc.monitorfilelib.FileExplorerActivity;
+import com.yc.netlib.utils.NetworkTool;
 import com.yc.notifymessage.CustomNotification;
 import com.yc.notifymessage.OnDismissListener;
 import com.yc.toastutils.ToastUtils;

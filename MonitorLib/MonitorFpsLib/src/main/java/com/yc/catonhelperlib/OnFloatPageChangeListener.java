@@ -1,4 +1,4 @@
-package com.yc.catonhelperlib.fps;
+package com.yc.catonhelperlib;
 
 public interface OnFloatPageChangeListener {
     void onFloatPageClose(String var1);

@@ -22,7 +22,7 @@
         android:layout_marginLeft="25dp"
         android:background="@color/fps_color_33434352"/>
 
-    <com.yc.catonhelperlib.fps.CardiogramView
+    <com.yc.catonhelperlib.CardiogramView
         android:id="@+id/line_chart_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

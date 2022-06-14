@@ -1,4 +1,4 @@
-package com.yc.catonhelperlib.fps;
+package com.yc.catonhelperlib;
 
 
 import android.content.Context;
@@ -20,20 +20,19 @@ public class FloatPageManager {
     }
 
     public void notifyBackground() {
-        Iterator var1 = this.mPages.iterator();
-
-        while(var1.hasNext()) {
-            BaseFloatPage page = (BaseFloatPage)var1.next();
+        Iterator<BaseFloatPage> iterator = mPages.iterator();
+        while(iterator.hasNext()) {
+            BaseFloatPage page = (BaseFloatPage)iterator.next();
             page.onEnterBackground();
         }
 
     }
 
     public void notifyForeground() {
-        Iterator var1 = this.mPages.iterator();
+        Iterator<BaseFloatPage> iterator = mPages.iterator();
 
-        while(var1.hasNext()) {
-            BaseFloatPage page = (BaseFloatPage)var1.next();
+        while(iterator.hasNext()) {
+            BaseFloatPage page = (BaseFloatPage)iterator.next();
             page.onEnterForeground();
         }
 
@@ -55,10 +54,10 @@ public class FloatPageManager {
             }
 
             if (pageIntent.mode == 1) {
-                Iterator var2 = this.mPages.iterator();
+                Iterator<BaseFloatPage> iterator = mPages.iterator();
 
-                while(var2.hasNext()) {
-                    BaseFloatPage page = (BaseFloatPage)var2.next();
+                while(iterator.hasNext()) {
+                    BaseFloatPage page = (BaseFloatPage)iterator.next();
                     if (pageIntent.targetClass.isInstance(page)) {
                         return;
                     }
@@ -71,10 +70,10 @@ public class FloatPageManager {
             this.mPages.add(page);
             page.performCreate(this.mContext);
             this.mWindowManager.addView(page.getRootView(), page.getLayoutParams());
-            Iterator var8 = this.mListeners.iterator();
+            Iterator<FloatPageManagerListener> iterator = this.mListeners.iterator();
 
-            while(var8.hasNext()) {
-                FloatPageManager.FloatPageManagerListener listener = (FloatPageManager.FloatPageManagerListener)var8.next();
+            while(iterator.hasNext()) {
+                FloatPageManager.FloatPageManagerListener listener = (FloatPageManager.FloatPageManagerListener)iterator.next();
                 listener.onPageAdd(page);
             }
         } catch (InstantiationException var5) {
@@ -87,15 +86,15 @@ public class FloatPageManager {
 
     public void remove(String tag) {
         if (!TextUtils.isEmpty(tag)) {
-            Iterator var2 = this.mPages.iterator();
+            Iterator<BaseFloatPage> iterator = this.mPages.iterator();
 
             BaseFloatPage page;
             do {
-                if (!var2.hasNext()) {
+                if (!iterator.hasNext()) {
                     return;
                 }
 
-                page = (BaseFloatPage)var2.next();
+                page = (BaseFloatPage)iterator.next();
             } while(!tag.equals(page.getTag()));
 
             this.mWindowManager.removeView(page.getRootView());
@@ -111,7 +110,7 @@ public class FloatPageManager {
     }
 
     public void removeAll(Class<? extends BaseFloatPage> pageClass) {
-        Iterator it = this.mPages.iterator();
+        Iterator<BaseFloatPage> it = mPages.iterator();
 
         while(it.hasNext()) {
             BaseFloatPage page = (BaseFloatPage)it.next();
@@ -125,28 +124,27 @@ public class FloatPageManager {
     }
 
     public boolean hasPage(Class<? extends BaseFloatPage> pageClass) {
-        Iterator it = this.mPages.iterator();
+        Iterator<BaseFloatPage> iterator = mPages.iterator();
 
         BaseFloatPage page;
         do {
-            if (!it.hasNext()) {
+            if (!iterator.hasNext()) {
                 return false;
             }
 
-            page = (BaseFloatPage)it.next();
+            page = (BaseFloatPage)iterator.next();
         } while(!pageClass.isInstance(page));
 
         return true;
     }
 
     public void removeAll() {
-        Iterator it = this.mPages.iterator();
-
-        while(it.hasNext()) {
-            BaseFloatPage page = (BaseFloatPage)it.next();
+        Iterator<BaseFloatPage> iterator = mPages.iterator();
+        while(iterator.hasNext()) {
+            BaseFloatPage page = (BaseFloatPage)iterator.next();
             this.mWindowManager.removeView(page.getRootView());
             page.performDestroy();
-            it.remove();
+            iterator.remove();
         }
 
     }
@@ -155,15 +153,15 @@ public class FloatPageManager {
         if (TextUtils.isEmpty(tag)) {
             return null;
         } else {
-            Iterator var2 = this.mPages.iterator();
+            Iterator<BaseFloatPage> iterator = mPages.iterator();
 
             BaseFloatPage page;
             do {
-                if (!var2.hasNext()) {
+                if (!iterator.hasNext()) {
                     return null;
                 }
 
-                page = (BaseFloatPage)var2.next();
+                page = (BaseFloatPage)iterator.next();
             } while(!tag.equals(page.getTag()));
 
             return page;
@@ -183,7 +181,7 @@ public class FloatPageManager {
     }
 
     private static class Holder {
-        private static FloatPageManager INSTANCE = new FloatPageManager();
+        private static final FloatPageManager INSTANCE = new FloatPageManager();
 
         private Holder() {
         }

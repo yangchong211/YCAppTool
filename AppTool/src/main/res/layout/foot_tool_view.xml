@@ -83,7 +83,7 @@
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_first"
-            android:text="" />
+            android:text="国际化" />
         <TextView
             android:id="@+id/tv_tool10"
             style="@style/WeightAttr"

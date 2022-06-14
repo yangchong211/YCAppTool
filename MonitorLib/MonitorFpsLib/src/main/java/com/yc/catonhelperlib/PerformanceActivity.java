@@ -1,4 +1,4 @@
-package com.yc.catonhelperlib.fps;
+package com.yc.catonhelperlib;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.yc.catonhelperlib.R;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -69,6 +67,7 @@ public class PerformanceActivity extends AppCompatActivity {
         adapter = builder.build();
         dataShow.setAdapter(adapter);
         adapter.setOnViewClickListener(new PolyLineAdapter.OnViewClickListener() {
+            @Override
             public void onViewClick(int position, PerformanceData data) {
                 updateTips(data);
             }
@@ -113,6 +112,7 @@ public class PerformanceActivity extends AppCompatActivity {
 
         }
 
+        @Override
         protected void onPostExecute(List<PerformanceData> result) {
             performanceDataAdapter.append(result);
             adapter.addData(result);
@@ -121,6 +121,7 @@ public class PerformanceActivity extends AppCompatActivity {
             }
         }
 
+        @Override
         protected List doInBackground(String... strings) {
             File file = new File(strings[0]);
             ArrayList<PerformanceData> datas = new ArrayList();

@@ -1,4 +1,4 @@
-package com.yc.catonhelperlib.fps;
+package com.yc.catonhelperlib;
 
 
 import android.content.Context;
@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.yc.catonhelperlib.R;
 
 public class PerformanceDataAdapter extends AbsRecyclerAdapter<AbsViewBinder<PerformanceData>, PerformanceData> {
     private PerformanceDataAdapter.OnViewClickListener mOnViewClickListener;

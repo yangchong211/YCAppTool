@@ -10,10 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.yc.catonhelperlib.fps.PerformanceActivity;
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
-import com.yc.leetbusiness.LeetCodeActivity;
-import com.yc.lifehelper.LocaleActivity;
 import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;

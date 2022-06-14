@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application>
-        <activity android:name="com.yc.catonhelperlib.fps.PerformanceActivity"/>
         <activity
             android:name=".canary.ui.DisplayActivity"
             android:enabled="false"

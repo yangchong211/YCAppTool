@@ -1,4 +1,4 @@
-package com.yc.catonhelperlib.fps;
+package com.yc.catonhelperlib;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

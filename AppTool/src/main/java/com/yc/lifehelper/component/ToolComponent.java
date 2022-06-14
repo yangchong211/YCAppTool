@@ -11,6 +11,7 @@ import com.yc.blesample.ble.BleMainActivity;
 import com.yc.common.CommonActivity;
 import com.yc.easy.demo.NetMainActivity;
 import com.yc.kotlinbusiness.KotlinHomeActivity;
+import com.yc.lifehelper.LocaleActivity;
 import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
@@ -84,6 +85,10 @@ public class ToolComponent implements InterItemView {
                 //kotlin原理
                 case R.id.tv_tool8:
                     KotlinHomeActivity.Companion.startActivity(context);
+                    break;
+                //国际化
+                case R.id.tv_tool9:
+                    LocaleActivity.startActivity(context);
                     break;
                 default:
                     break;

@@ -1,4 +1,4 @@
-package com.yc.catonhelperlib.fps;
+package com.yc.catonhelperlib;
 
 
 import android.content.Context;
@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-
-import com.yc.catonhelperlib.R;
 
 public class RealTimeChartIconPage extends BaseFloatPage implements View.OnClickListener {
 

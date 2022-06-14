@@ -6,13 +6,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yc.apploglib.AppLogHelper;
-import com.yc.banner.view.BannerView;
-import com.yc.catonhelperlib.fps.PerformanceActivity;
+import com.yc.catonhelperlib.PerformanceActivity;
 import com.yc.leetbusiness.LeetCodeActivity;
 import com.yc.lifehelper.LocaleActivity;
 import com.yc.lifehelper.R;
-import com.yc.logging.LoggerService;
-import com.yc.logging.logger.Logger;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.mvctodo.NetworkActivity;
 import com.yc.toollib.crash.CrashLibUtils;
@@ -20,9 +17,6 @@ import com.yc.toolutils.click.FastClickUtils;
 import com.yc.video.ui.activity.VideoActivity;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HeaderComponent implements InterItemView {
 
@@ -76,9 +70,9 @@ public class HeaderComponent implements InterItemView {
                     LeetCodeActivity.startActivity(context);
                     AppLogHelper.v("leet code");
                     break;
-                //国际化
+                //卡顿
                 case R.id.tv_home_six:
-                    LocaleActivity.startActivity(context);
+
                     break;
                 //线程库
                 case R.id.tv_home_seven:

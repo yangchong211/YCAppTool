@@ -1,4 +1,4 @@
-package com.yc.catonhelperlib.fps;
+package com.yc.catonhelperlib;
 
 
 import android.content.Context;
@@ -8,8 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pools.SimplePool;
-
-import com.yc.catonhelperlib.R;
 
 public class LineChart extends FrameLayout {
     private TextView mTitle;

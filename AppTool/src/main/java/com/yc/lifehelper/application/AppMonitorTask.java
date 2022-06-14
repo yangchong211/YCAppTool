@@ -82,7 +82,7 @@ public class AppMonitorTask extends AppStartTask {
 
     private void initNetWork() {
         NetworkTool.getInstance().init(MainApplication.getInstance());
+        NetworkTool.getInstance().setFloat(MainApplication.getInstance());
     }
-
 
 }

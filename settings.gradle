@@ -165,7 +165,7 @@ project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
         ':MonitorXposed', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher',
-        ':LeakCanarySdk', ':MonitorApmLib', ':MonitorPingLib'
+        ':LeakCanarySdk', ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib'
 project(':MonitorAliveLib').projectDir = new File('MonitorLib/MonitorAliveLib')
 project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
 project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
@@ -181,6 +181,8 @@ project(':LeakWatcher').projectDir = new File('MonitorLib/LeakWatcher')
 project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
 project(':MonitorPingLib').projectDir = new File('MonitorLib/MonitorPingLib')
+project(':MonitorFpsLib').projectDir = new File('MonitorLib/MonitorFpsLib')
+
 
 
 /* +++++++++ 音视频 +++++++++ */

@@ -15,8 +15,8 @@ import com.yc.netlib.ui.NetworkDetailActivity;
 import com.yc.netlib.ui.NetworkManager;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.videoview.FloatWindow;
-import com.yc.videoview.MoveType;
-import com.yc.videoview.WindowScreen;
+import com.yc.videoview.tool.FloatMoveType;
+import com.yc.videoview.tool.FloatScreenType;
 
 import java.net.Proxy;
 
@@ -115,9 +115,9 @@ public class NetworkTool {
                 .with(context)
                 .setView(frameLayout)
                 //设置控件初始位置
-                .setX(WindowScreen.WIDTH, 0.8f)
-                .setY(WindowScreen.HEIGHT, 0.3f)
-                .setMoveType(MoveType.slide)
+                .setX(FloatScreenType.WIDTH, 0.8f)
+                .setY(FloatScreenType.HEIGHT, 0.3f)
+                .setMoveType(FloatMoveType.SLIDE)
                 .setMoveStyle(500, new BounceInterpolator())
                 //设置这两个页面隐藏
                 .setFilter(false, NetRequestActivity.class , NetworkDetailActivity.class)
