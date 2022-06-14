@@ -16,6 +16,7 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import com.yc.appprocesslib.AppStateMonitor;
 import com.yc.appprocesslib.StateListener;
@@ -213,6 +214,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         NotificationParams notificationParams = new NotificationParams();
         notificationParams
                 .setContentIntent(resultPendingIntent)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setFullScreen(true);
         notificationUtils
                 .setNotificationParams(notificationParams)

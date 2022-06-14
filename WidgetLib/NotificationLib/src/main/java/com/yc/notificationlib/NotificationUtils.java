@@ -280,6 +280,8 @@ public class NotificationUtils extends ContextWrapper {
                 builder.setFullScreenIntent(notificationParams.intent, true);
             }
         }
+        //设置锁定屏幕公开范围
+        builder.setVisibility(notificationParams.visibility);
         //点击自动删除通知
         builder.setAutoCancel(true);
         return builder;

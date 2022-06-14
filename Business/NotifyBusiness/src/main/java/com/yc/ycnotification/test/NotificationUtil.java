@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.RemoteViews;
 

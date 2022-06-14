@@ -4,6 +4,8 @@ import android.app.PendingIntent;
 import android.net.Uri;
 import android.widget.RemoteViews;
 
+import androidx.core.app.NotificationCompat;
+
 import static android.app.Notification.PRIORITY_DEFAULT;
 
 /**
@@ -29,6 +31,8 @@ public final class NotificationParams {
     protected long[] pattern = null;
     protected int[] flags;
     protected boolean isFullScreen;
+    @NotificationCompat.NotificationVisibility
+    protected int visibility;
 
     public NotificationParams(){
         this.ongoing = false;
@@ -39,6 +43,7 @@ public final class NotificationParams {
         this.when = 0;
         this.sound = null;
         this.isFullScreen = false;
+        this.visibility = NotificationCompat.VISIBILITY_PRIVATE;
     }
 
     /**
@@ -158,7 +163,7 @@ public final class NotificationParams {
     }
 
     /**
-     * 设置flag标签
+     * 设置设置悬浮式通知栏
      * @param isFullScreen                   是否是悬挂式
      * @return
      */
@@ -167,4 +172,18 @@ public final class NotificationParams {
         return this;
     }
 
+    /**
+     * 控制锁定屏幕中通知的可见详情级别，请调用 setVisibility() 并指定以下值之一：
+     * VISIBILITY_PUBLIC 显示通知的完整内容。
+     * VISIBILITY_SECRET 不在锁定屏幕上显示该通知的任何部分。
+     * VISIBILITY_PRIVATE 显示基本信息，例如通知图标和内容标题，但隐藏通知的完整内容。
+     * 对于通知在锁定屏幕上是否可见，用户始终拥有最终控制权，甚至可以根据应用的通知渠道来控制公开范围。
+     * @param visibility                    可见参数
+     * @return
+     */
+    public NotificationParams setVisibility(
+            @NotificationCompat.NotificationVisibility int visibility){
+        this.visibility = visibility;
+        return this;
+    }
 }
