@@ -3,8 +3,8 @@ package com.yc.store.disk.disklru;
 
 import android.util.Log;
 
+import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.store.config.CacheInitHelper;
-import com.yc.toolutils.ExceptionReporter;
 
 import java.io.File;
 import java.io.IOException;

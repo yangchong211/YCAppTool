@@ -202,7 +202,8 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         //处理点击Notification的逻辑
         //创建intent
         Intent resultIntent = new Intent(this, NotifyIntentActivity.class);
-        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);           //添加为栈顶Activity
+        //添加为栈顶Activity
+        resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         resultIntent.putExtra("what",2);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(this,2,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -210,11 +211,13 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         NotificationUtils notificationUtils = new NotificationUtils(this);
         notificationUtils.createNotificationChannel( "float3","TEST2", NotificationManager.IMPORTANCE_HIGH);
         NotificationParams notificationParams = new NotificationParams();
-        notificationParams.setContentIntent(resultPendingIntent)
+        notificationParams
+                .setContentIntent(resultPendingIntent)
                 .setFullScreen(true);
         notificationUtils
                 .setNotificationParams(notificationParams)
-                .sendNotification(2,"这个是标题2", "这个是内容2", R.mipmap.ic_launcher);
+                .sendNotification(1002,"这个是标题2",
+                        "这个是内容2", R.mipmap.ic_launcher);
     }
 
 
@@ -245,6 +248,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                 .setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI)
                 //设置优先级
                 .setPriority(Notification.PRIORITY_DEFAULT)
+                .setFullScreen(true)
                 //自定义震动效果
                 .setVibrate(vibrate);
             //必须设置的属性，发送通知

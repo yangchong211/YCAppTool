@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Pair;
 
 import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.logging.config.LoggerConfig;
 import com.yc.logging.config.LoggerContext;
 import com.yc.logging.LoggerFactory;
@@ -19,7 +20,6 @@ import com.yc.logging.upload.persist.*;
 import com.yc.logging.util.*;
 import com.yc.toolutils.AppCleanUtils;
 import com.yc.toolutils.AppZipUtils;
-import com.yc.toolutils.ExceptionReporter;
 
 import java.io.File;
 import java.util.*;

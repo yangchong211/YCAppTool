@@ -4,10 +4,10 @@ import android.content.Context;
 import androidx.annotation.RestrictTo;
 
 import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.logging.upload.persist.*;
 import com.yc.logging.util.Debug;
 import com.yc.logging.util.LoggerUtils;
-import com.yc.toolutils.ExceptionReporter;
 
 import java.io.File;
 import java.util.Collections;
