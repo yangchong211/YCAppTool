@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="2."
+        android:text="2.最简单协程创建案例"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="3."
+        android:text="3.选择协程的启动模式"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="4."
+        android:text="4.协程一个简单切换案例"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="5."
+        android:text="5.协程绑定到指定线程"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="6."
+        android:text="6.协程job取消操作实践"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -65,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="7."
+        android:text="7.协程job加入操作实践"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 

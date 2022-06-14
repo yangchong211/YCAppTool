@@ -40,6 +40,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation project(path: ':LibraryLayer')
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
 
     implementation(rootProject.ext.dependencies["kotlinxJdk"])
     // Kotlin coroutines

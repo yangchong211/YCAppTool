@@ -3,6 +3,7 @@ package com.yc.kotlinbusiness
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.yc.toastutils.ToastUtils
 import kotlinx.coroutines.*
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
@@ -16,6 +17,24 @@ class KotlinScopeActivity : AppCompatActivity(){
 
         findViewById<TextView>(R.id.tv_1).setOnClickListener {
             dispatcherScope1()
+        }
+        findViewById<TextView>(R.id.tv_2).setOnClickListener {
+            dispatcherScope2()
+        }
+        findViewById<TextView>(R.id.tv_3).setOnClickListener {
+            dispatcherScope3()
+        }
+        findViewById<TextView>(R.id.tv_4).setOnClickListener {
+            dispatcherScope4()
+        }
+        findViewById<TextView>(R.id.tv_5).setOnClickListener {
+            dispatcherScope5()
+        }
+        findViewById<TextView>(R.id.tv_6).setOnClickListener {
+            dispatcherScope6()
+        }
+        findViewById<TextView>(R.id.tv_7).setOnClickListener {
+            dispatcherScope7()
         }
     }
 
@@ -85,6 +104,82 @@ class KotlinScopeActivity : AppCompatActivity(){
     private suspend fun getCoroutineResult(): String {
         delay(9000L)
         return "coroutine result"
+    }
+
+
+    private fun dispatcherScope2() {
+        //这段代码就是启动一个协程，并启动，延迟1秒后打印world，就从这个launch方法进行切入
+        GlobalScope.launch { 
+            delay(1000L) //  延迟（挂起）1000毫秒，注意这不会阻塞线程
+            println("dispatcher scope2 World!")
+        }
+    }
+
+
+    private fun dispatcherScope3() {
+        //设置启动模式
+        val job = GlobalScope.launch(start = CoroutineStart.LAZY) {
+            delay(1000L)
+            println("dispatcher scope3 设置启动模式!")
+        }
+        println("dispatcher scope3 hello world!")
+        job.start()
+    }
+
+    private fun dispatcherScope4() {
+        //协程间是如何切换的
+        //这段代码先打印出next，然后延迟1秒钟后打印出now，像是android里handler的post和postDelay方法。
+        GlobalScope.launch(Dispatchers.Default){
+            println("dispatcher scope4 "+"协程间是如何切换的")
+            println("dispatcher scope4 ---${Thread.currentThread().name}")
+            launch {
+                delay(1000)
+                println("dispatcher scope4 "+"now")
+            }
+            println("dispatcher scope4 "+"next")
+        }
+    }
+
+    var launch5 : Job ?= null
+
+    private fun dispatcherScope5() {
+        val uiScope = CoroutineScope(Dispatchers.Main)
+        launch5 = uiScope.launch {
+            println("dispatcher scope5 " + "模拟发送请求")
+            val deffer = async(Dispatchers.Default) {
+                getResult()
+            }
+            val result = deffer.await()
+            println("dispatcher scope5 ---获取 $result")
+        }
+    }
+
+    private suspend fun getResult(): String {
+        delay(5000L)
+        println("dispatcher scope5 "+"模拟请求时间")
+        return "result"
+    }
+
+    private fun dispatcherScope6() {
+        if (launch5 == null){
+            ToastUtils.showRoundRectToast("请先点击按钮5开启协程")
+            return
+        }
+        launch5?.cancel()
+        println("dispatcher scope5 "+"协程取消")
+    }
+
+    private fun dispatcherScope7() {
+        val job = GlobalScope.launch {
+            delay(1000L)
+            println("dispatcher scope7 "+"World")
+            delay(1000L)
+        }
+        println("dispatcher scope7 "+"Hello")
+        runBlocking {
+            job.join()
+        }
+        println("dispatcher scope7 "+"Good")
     }
 
 
