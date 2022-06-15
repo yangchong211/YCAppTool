@@ -29,4 +29,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
+
+    implementation 'de.robv.android.xposed:api:82'
+    //https://github.com/tiann/epic
+    //implementation 'com.github.tiann:epic:0.11.2'
+    implementation 'me.weishu:epic:1.0.0'
+    implementation 'me.weishu.exposed:exposed-xposedapi:0.4.5'
 }
