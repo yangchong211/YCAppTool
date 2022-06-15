@@ -7,10 +7,20 @@ import android.net.Uri;
 
 import com.yc.privacymonitor.method.NormalMethodList;
 
-public class AppMonitorInstaller extends ContentProvider {
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2021/05/09
+ *     desc  : 初始化操作
+ *     revise:
+ * </pre>
+ */
+public class PrivacyProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
-        PrivacyMonitor.start(new NormalMethodList());
+        PrivacyHelper.start(new NormalMethodList());
         return true;
     }
 

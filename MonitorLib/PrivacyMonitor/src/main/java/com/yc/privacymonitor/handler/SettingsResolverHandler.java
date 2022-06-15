@@ -2,13 +2,13 @@ package com.yc.privacymonitor.handler;
 
 import android.util.Log;
 
-import com.yc.privacymonitor.helper.PrivacyMonitor;
+import com.yc.privacymonitor.helper.PrivacyHelper;
 
-public class SettingsResolverHandler extends MethodHandler{
+public class SettingsResolverHandler extends MethodHookImpl {
 
     @Override
     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-        Log.i(PrivacyMonitor.TAG, "**检测到风险Settings查询: "+param.args[1].toString());
+        Log.i(PrivacyHelper.TAG, "**检测到风险Settings查询: "+param.args[1].toString());
         super.beforeHookedMethod(param);
     }
 }

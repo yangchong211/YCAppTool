@@ -2,15 +2,20 @@ package com.yc.privacymonitor.method;
 
 import android.os.Build;
 
+
 import androidx.annotation.RequiresApi;
 
 import java.util.LinkedList;
 import java.util.Objects;
 
 public final class ClassMethodGroup {
-    //android.accounts.AbstractAccountAuthenticator$Transport
+    /**
+     * 当前class类名称
+     */
     private String targetClassName;
-    //所有需要监测的风险函数
+    /**
+     * 所有需要监测的风险函数
+     */
     private LinkedList<String> methodGroup = new LinkedList<>();
 
     public ClassMethodGroup(String className) {

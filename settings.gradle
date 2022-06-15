@@ -165,7 +165,8 @@ project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
         ':MonitorXposed', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher',
-        ':LeakCanarySdk', ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib'
+        ':LeakCanarySdk', ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',
+        ':PrivacyMonitor'
 project(':MonitorAliveLib').projectDir = new File('MonitorLib/MonitorAliveLib')
 project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
 project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
@@ -182,7 +183,7 @@ project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
 project(':MonitorPingLib').projectDir = new File('MonitorLib/MonitorPingLib')
 project(':MonitorFpsLib').projectDir = new File('MonitorLib/MonitorFpsLib')
-
+project(':PrivacyMonitor').projectDir = new File('MonitorLib/PrivacyMonitor')
 
 
 /* +++++++++ 音视频 +++++++++ */
@@ -199,4 +200,4 @@ project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 
 
-include ':PrivacyMonitor'
+
