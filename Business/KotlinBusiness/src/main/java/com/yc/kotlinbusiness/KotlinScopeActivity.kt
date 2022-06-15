@@ -36,6 +36,9 @@ class KotlinScopeActivity : AppCompatActivity(){
         findViewById<TextView>(R.id.tv_7).setOnClickListener {
             dispatcherScope7()
         }
+        findViewById<TextView>(R.id.tv_8).setOnClickListener {
+            dispatcherScope8()
+        }
     }
 
     /**
@@ -182,5 +185,38 @@ class KotlinScopeActivity : AppCompatActivity(){
         println("dispatcher scope7 "+"Good")
     }
 
+
+    private fun dispatcherScope8() {
+        runBlocking {
+            val user = getUserInfo()
+            println("dispatcher scope8 user $user")
+            val friendList = getFriendList(user)
+            println("dispatcher scope8 friendList $friendList")
+            val feedList = getFeedList(friendList)
+            println("dispatcher scope8 feedList $feedList")
+        }
+    }
+
+    private suspend fun getUserInfo(): String {
+        withContext(Dispatchers.IO) {
+            delay(1000L)
+        }
+
+        return "BoyCoder"
+    }
+
+    private suspend fun getFriendList(user: String): String {
+        withContext(Dispatchers.IO) {
+            delay(1000L)
+        }
+        return "Tom, Jack"
+    }
+
+    private suspend fun getFeedList(list: String): String {
+        withContext(Dispatchers.IO) {
+            delay(1000L)
+        }
+        return "{FeedList..}"
+    }
 
 }

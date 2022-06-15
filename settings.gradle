@@ -199,4 +199,4 @@ project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 
 
-
+include ':PrivacyMonitor'
