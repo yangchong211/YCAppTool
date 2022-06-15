@@ -2,7 +2,7 @@ package com.yc.privacymonitor.handler;
 
 import android.util.Log;
 
-import com.yc.privacymonitor.PrivacyMonitor;
+import com.yc.privacymonitor.helper.PrivacyMonitor;
 
 import de.robv.android.xposed.XC_MethodHook;
 

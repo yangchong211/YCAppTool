@@ -1,4 +1,4 @@
-package com.yc.privacymonitor;
+package com.yc.privacymonitor.helper;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

@@ -1,4 +1,4 @@
-package com.yc.privacymonitor;
+package com.yc.privacymonitor.helper;
 
 import android.util.Log;
 
@@ -10,12 +10,32 @@ import com.yc.privacymonitor.method.MethodWrapper;
 import java.lang.reflect.Method;
 
 import de.robv.android.xposed.DexposedBridge;
-
+/**
+ * 示例：
+ *         XposedHelpers.findAndHookMethod(
+ *                 "需要hook的方法所在类的完整类名",
+ *                 lpparam.classLoader,      // 类加载器，固定这么写就行了
+ *                 "需要hook的方法名",
+ *                 参数类型.class,
+ *                 new XC_MethodHook() {
+ *                     @Override
+ *                     protected void beforeHookedMethod(MethodHookParam param) {
+ *                         XposedBridge.log("调用getDeviceId()获取了imei");
+ *                     }
+ *
+ *                     @Override
+ *                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+ *                         XposedBridge.log(getMethodStack());
+ *                         super.afterHookedMethod(param);
+ *                     }
+ *                 }
+ *         );
+ *
+ */
 public class PrivacyMonitor {
 
     public static final String TAG = "PrivacyMonitor";
-    public static final MethodHandler defaultMethodHandler = new MethodHandler();
-
+    public static final MethodHandler DEFAULT_METHOD_HANDLER = new MethodHandler();
 
     /**
      * 开启监控
@@ -38,7 +58,10 @@ public class PrivacyMonitor {
 
     private static void registerMethod(MethodWrapper methodWrapper){
         try{
-            DexposedBridge.findAndHookMethod(methodWrapper.getTargetClass(),methodWrapper.getTargetMethod(),methodWrapper.getParamsWithDefaultHandler());
+            Class<?> targetClass = methodWrapper.getTargetClass();
+            String targetMethod = methodWrapper.getTargetMethod();
+            Object[] paramsWithDefaultHandler = methodWrapper.getParamsWithDefaultHandler();
+            DexposedBridge.findAndHookMethod(targetClass,targetMethod,paramsWithDefaultHandler);
         }catch (NoSuchMethodError error){
             Log.wtf(TAG, "registeredMethod: NoSuchMethodError->"+error.getMessage());
         }
@@ -50,7 +73,7 @@ public class PrivacyMonitor {
 
             for (Method method : declareMethods) {
                 if (classMethodGroup.getMethodGroup().contains(method.getName())){
-                    DexposedBridge.hookMethod(method,defaultMethodHandler);
+                    DexposedBridge.hookMethod(method, DEFAULT_METHOD_HANDLER);
                 }
             }
         } catch (Exception e) {

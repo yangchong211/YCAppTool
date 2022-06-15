@@ -4,7 +4,7 @@
 
     <application>
         <provider
-            android:name="com.yc.privacymonitor.AppMonitorInstaller"
+            android:name="com.yc.privacymonitor.helper.AppMonitorInstaller"
             android:authorities="${applicationId}.privacy-monitor-installer"
             android:enabled="@bool/privacy_monitor_auto_install"
             android:exported="false" />

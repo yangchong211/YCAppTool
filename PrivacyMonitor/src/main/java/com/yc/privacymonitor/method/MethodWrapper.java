@@ -1,6 +1,6 @@
 package com.yc.privacymonitor.method;
 
-import com.yc.privacymonitor.PrivacyMonitor;
+import com.yc.privacymonitor.helper.PrivacyMonitor;
 import com.yc.privacymonitor.handler.MethodHandler;
 
 public class MethodWrapper {
@@ -36,7 +36,7 @@ public class MethodWrapper {
         Object[] temp = new Object[params.length+1];
         System.arraycopy(params, 0, temp, 0, params.length);
         if (methodHandler == null){
-            temp[params.length] = PrivacyMonitor.defaultMethodHandler;
+            temp[params.length] = PrivacyMonitor.DEFAULT_METHOD_HANDLER;
         }else {
             temp[params.length] = methodHandler;
         }
