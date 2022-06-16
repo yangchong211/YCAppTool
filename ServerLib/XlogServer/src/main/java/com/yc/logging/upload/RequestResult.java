@@ -7,6 +7,7 @@ class RequestResult<T> {
     private T result;
 
     RequestResult() {
+
     }
 
     RequestResult(boolean success, int code, String msg, T result) {

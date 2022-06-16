@@ -27,13 +27,17 @@ public final class PrivacyHelper {
     public static final String TAG = "PrivacyHelper";
     public static final MethodHookImpl DEFAULT_METHOD_HANDLER = new MethodHookImpl();
     private static Context sContext;
-    public static IPrivacyLogger sLogger;
+    private static IPrivacyLogger sLogger;
     
     public static void init(PrivacyConfig config) {
         sContext = config.getApplication();
         sLogger = config.getLogger();
     }
-    
+
+    public static IPrivacyLogger getLogger(){
+        return sLogger;
+    }
+
     /**
      * 开启监控
      * 建议开启严格模式,普通模式只监测常见的问题
@@ -62,7 +66,7 @@ public final class PrivacyHelper {
             //核心方法
             DexposedBridge.findAndHookMethod(targetClass,targetMethod,paramsWithDefaultHandler);
         }catch (NoSuchMethodError error){
-            sLogger.log( "registeredMethod: NoSuchMethodError->"+error.getMessage());
+            sLogger.log( "NoSuchMethodError->"+error.getMessage());
         }
     }
 

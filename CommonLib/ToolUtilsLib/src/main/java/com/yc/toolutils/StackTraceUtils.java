@@ -1,6 +1,7 @@
 package com.yc.toolutils;
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * <pre>
@@ -12,10 +13,111 @@ import android.content.Context;
  */
 public final class StackTraceUtils {
 
-    public static void print(Throwable throwable) {
+
+    /**
+     * 打印throwable堆栈日志
+     * @param throwable     异常
+     */
+    public static void print1(Throwable throwable) {
         //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
         //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
         StackTraceElement[] stackTraces = throwable.getStackTrace();
+        String print = printToString1(stackTraces);
+        Log.i("print1",print);
+    }
+
+    /**
+     * 打印throwable堆栈日志
+     * @param throwable     异常
+     */
+    public static void print2(Throwable throwable) {
+        //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
+        //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
+        StackTraceElement[] stackTraces = throwable.getStackTrace();
+        String print = printToString1(stackTraces);
+        Log.i("print2",print);
+    }
+
+    /**
+     * 打印线程堆栈日志
+     * @param thread        线程
+     */
+    public static void print3(Thread thread) {
+        //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
+        //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
+        StackTraceElement[] stackTraces = thread.getStackTrace();
+        String print = printToString1(stackTraces);
+        Log.i("print3",print);
+    }
+
+    /**
+     * 打印线程堆栈日志
+     * @param thread        线程
+     */
+    public static void print4(Thread thread) {
+        //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
+        //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
+        StackTraceElement[] stackTraces = thread.getStackTrace();
+        String print = printToString1(stackTraces);
+        Log.i("print4",print);
+    }
+
+    /**
+     * 打印线程堆栈日志
+     */
+    public static void print5() {
+        Thread thread = Thread.currentThread();
+        //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
+        //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
+        StackTraceElement[] stackTraces = thread.getStackTrace();
+        String print = printToString1(stackTraces);
+        Log.i("print5",print);
+    }
+
+    /**
+     * 打印线程堆栈日志
+     */
+    public static void print6() {
+        String methodStack = getMethodStack();
+        Log.i("print6",methodStack);
+    }
+
+    /**
+     * 获取当前线程的方法堆栈调用链路信息
+     * @return          堆栈信息
+     */
+    public static String getMethodStack() {
+        Thread thread = Thread.currentThread();
+        StringBuilder stringBuilder = new StringBuilder();
+        //获取线程信息
+        String threadInfo = getThreadInfo(thread);
+        stringBuilder.append(threadInfo);
+        // 返回表示此线程的堆栈转储的堆栈跟踪元素数组。
+        // 如果这个线程还没有启动，已经启动但还没有被系统计划运行，或者已经终止，这个方法将返回一个零长度的数组。
+        StackTraceElement[] stackTraceElements = thread.getStackTrace();
+        String print = printToString2(stackTraceElements);
+        stringBuilder.append("线程堆栈日志：").append(print);
+        return stringBuilder.toString();
+    }
+
+    private static String getThreadInfo(Thread thread){
+        StringBuilder stringBuilder = new StringBuilder();
+        // 记录线程id
+        stringBuilder.append("线程thread的id：").append(thread.getId()).append("\n");
+        // 记录线程名称
+        stringBuilder.append("线程thread的name：").append(thread.getName()).append("\n");
+        // 记录线程优先级
+        stringBuilder.append("线程thread的priority：").append(thread.getPriority()).append("\n");
+        // 记录线程状态
+        // new新建，runnable正在执行，blocked等待(锁)，waiting挂起(wait)，timed_waiting超时，terminated终止
+        stringBuilder.append("线程thread的state：").append(thread.getState().toString()).append("\n");
+        // 记录classLoader
+        stringBuilder.append("线程thread的classLoader：").append(thread.getContextClassLoader()).append("\n");
+        return stringBuilder.toString();
+    }
+
+    private static String printToString1(StackTraceElement[] stackTraces) {
+        StringBuilder result = new StringBuilder();
         for (StackTraceElement stackTrace : stackTraces) {
             //获取class的名称，该类包含由该堆栈跟踪元素所表示的执行点
             String clazzName = stackTrace.getClassName();
@@ -27,14 +129,42 @@ public final class StackTraceUtils {
             String methodName = stackTrace.getMethodName();
             //如果包含由该堆栈跟踪元素所表示的执行点的方法是一个本机方法，则返回 true。
             boolean nativeMethod = stackTrace.isNativeMethod();
-            AppLogUtils.i("print clazzName : "+clazzName
-                    +" fileName " +fileName+" lineNumber "
-                    +lineNumber+" methodName "+methodName + " " + nativeMethod);
+            result.append(clazzName).append(".").append(methodName);
+            if (nativeMethod) {
+                //这种是 native 方法
+                result.append("(Native Method)");
+            } else if (fileName != null) {
+                //有方法名称
+                if (lineNumber >= 0) {
+                    result.append("(").append(fileName).append(":").append(lineNumber).append(")");
+                } else {
+                    result.append("(").append(fileName).append(")");
+                }
+            } else {
+                //没有方法名称
+                if (lineNumber >= 0) {
+                    result.append("(Unknown Source:").append(lineNumber).append(")");
+                } else {
+                    result.append("(Unknown Source)");
+                }
+            }
+            result.append("\n");
         }
+        return result.toString();
     }
 
+
+    private static String printToString2(StackTraceElement[] stackTraces) {
+        StringBuilder result = new StringBuilder();
+        for (StackTraceElement temp : stackTraces) {
+            result.append(temp.toString()).append("\n");
+        }
+        return result.toString();
+    }
+
+
     private static StackTraceElement parseThrowable(Throwable ex , Context context) {
-        if (ex == null || ex.getStackTrace() == null || ex.getStackTrace().length == 0) {
+        if (ex == null || ex.getStackTrace().length == 0) {
             return null;
         }
         if (context == null){
@@ -43,40 +173,15 @@ public final class StackTraceUtils {
         StackTraceElement[] stackTrace = ex.getStackTrace();
         StackTraceElement element;
         for (StackTraceElement ele : stackTrace) {
+            //只打印当前包名所在堆栈的信息
             if (ele.getClassName().contains(context.getPackageName())) {
                 element = ele;
-                String clazzName = element.getClassName();
-                String fileName = element.getFileName();
-                int lineNumber = element.getLineNumber();
-                String methodName = element.getMethodName();
-                boolean nativeMethod = element.isNativeMethod();
-                AppLogUtils.i("StackTraceUtils clazzName : "+clazzName
-                        +" fileName " +fileName+" lineNumber "
-                        +lineNumber+" methodName "+methodName + " " + nativeMethod);
                 return element;
             }
         }
         element = stackTrace[0];
-        String clazzName = element.getClassName();
-        String fileName = element.getFileName();
-        int lineNumber = element.getLineNumber();
-        String methodName = element.getMethodName();
-        boolean nativeMethod = element.isNativeMethod();
-        AppLogUtils.i("parseThrowable clazzName : "+clazzName
-                +" fileName " +fileName+" lineNumber "
-                +lineNumber+" methodName "+methodName + " " + nativeMethod);
         return element;
     }
-
-    public static String getMethodStack() {
-        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (StackTraceElement temp : stackTraceElements) {
-            stringBuilder.append(temp.toString()).append("\n");
-        }
-        return stringBuilder.toString();
-    }
-
 
 
 }

@@ -30,7 +30,8 @@ public class MethodHookImpl extends XC_MethodHook {
         String methodName = param.method.getName();
         //getTelephonyProperty
         Log.i(PrivacyHelper.TAG, "检测到风险函数被调用: " +className +"#"+ methodName);
-        Log.d(PrivacyHelper.TAG, StackTraceUtils.getMethodStack());
+        String methodStack = StackTraceUtils.getMethodStack();
+        Log.d(PrivacyHelper.TAG, methodStack);
     }
 
     @Override

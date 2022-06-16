@@ -87,9 +87,6 @@ public class LoggerConfig {
 
     private LoggerConfig(Builder builder) {
         serverHost = builder.serverHost;
-        if(serverHost==null || serverHost.length()==0){
-            throw new NullPointerException("serverHost must be not null");
-        }
         fileMaxHistory = builder.fileMaxHistory;
         totalFileSize = builder.totalFileSize;
         fileSectionLength = builder.fileSectionLength;

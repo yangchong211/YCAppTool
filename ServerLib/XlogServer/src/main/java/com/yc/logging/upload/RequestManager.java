@@ -65,6 +65,9 @@ class RequestManager {
     }
 
     public static void uploadTaskStatus(String taskId, int status, String message) {
+        if (LoggerFactory.getConfig().getServerHost() == null){
+            throw new NullPointerException("please init , set server url");
+        }
         long ts = System.currentTimeMillis();
         String url = LoggerFactory.getConfig().getServerHost() + API_UPLOAD_STATUS;
         HashMap<String, Object> param = new HashMap<>();
@@ -103,6 +106,9 @@ class RequestManager {
      */
     static RequestResult<String> uploadSectionFile(String taskId, File zipFile, String networkType,
             int sliceId, long startPos, long endPos) {
+        if (LoggerFactory.getConfig().getServerHost() == null){
+            throw new NullPointerException("please init , set server url");
+        }
         long ts = System.currentTimeMillis();
 
         RequestResult<String> requestResult = new RequestResult<>();
@@ -178,6 +184,9 @@ class RequestManager {
     }
 
     static Pair<TaskRecord, String> queryTask(String phoneNum) {
+        if (LoggerFactory.getConfig().getServerHost() == null){
+            throw new NullPointerException("please init , set server url");
+        }
         long ts = System.currentTimeMillis();
         String url = LoggerFactory.getConfig().getServerHost() + API_QUERY_TASK;
 
@@ -221,6 +230,9 @@ class RequestManager {
 
 
     public static void uploadFileTree(String taskId, String networkType, FileTree fileTree) {
+        if (LoggerFactory.getConfig().getServerHost() == null){
+            throw new NullPointerException("please init , set server url");
+        }
         long ts = System.currentTimeMillis();
         String url = LoggerFactory.getConfig().getServerHost() + API_UPLOAD_FILETREE;
 
