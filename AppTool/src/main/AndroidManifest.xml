@@ -14,7 +14,12 @@
         android:networkSecurityConfig="@xml/network_security_config_debug"
         tools:replace="android:theme,android:label,android:allowBackup,android:name"
         tools:ignore="GoogleAppIndexingWarning">
+        <!--android:exported = true-->
+        <!--在Activity中该属性用来标示：当前Activity是否可以被另一个Application的组件启动：true允许被启动；false不允许被启动。-->
+        <!--android:exported 是Android中的四大组件 Activity，Service，Provider，Receiver 四大组件中都会有的一个属性。-->
+        <!--总体来说它的主要作用是：是否支持其它应用调用当前组件。-->
         <activity android:name="com.yc.lifehelper.SplashActivity"
+            android:exported="false"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
