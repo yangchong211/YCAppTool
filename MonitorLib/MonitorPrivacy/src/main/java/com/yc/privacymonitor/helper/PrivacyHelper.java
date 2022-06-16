@@ -1,9 +1,10 @@
 package com.yc.privacymonitor.helper;
 
-import android.util.Log;
-
+import android.content.Context;
+import com.yc.privacymonitor.config.IPrivacyLogger;
+import com.yc.privacymonitor.config.PrivacyConfig;
 import com.yc.privacymonitor.handler.MethodHookImpl;
-import com.yc.privacymonitor.method.ClassMethodGroup;
+import com.yc.privacymonitor.bean.ClassMethodBean;
 import com.yc.privacymonitor.method.HookMethodList;
 import com.yc.privacymonitor.bean.MethodBean;
 
@@ -25,7 +26,14 @@ public final class PrivacyHelper {
 
     public static final String TAG = "PrivacyHelper";
     public static final MethodHookImpl DEFAULT_METHOD_HANDLER = new MethodHookImpl();
-
+    private static Context sContext;
+    public static IPrivacyLogger sLogger;
+    
+    public static void init(PrivacyConfig config) {
+        sContext = config.getApplication();
+        sLogger = config.getLogger();
+    }
+    
     /**
      * 开启监控
      * 建议开启严格模式,普通模式只监测常见的问题
@@ -41,7 +49,7 @@ public final class PrivacyHelper {
         for (MethodBean methodWrapper : methodList.getMethodList()) {
             registerMethod(methodWrapper);
         }
-        for (ClassMethodGroup classMethodGroup : methodList.getAbsMethodList()) {
+        for (ClassMethodBean classMethodGroup : methodList.getAbsMethodList()) {
             registerClass(classMethodGroup);
         }
     }
@@ -54,12 +62,12 @@ public final class PrivacyHelper {
             //核心方法
             DexposedBridge.findAndHookMethod(targetClass,targetMethod,paramsWithDefaultHandler);
         }catch (NoSuchMethodError error){
-            Log.wtf(TAG, "registeredMethod: NoSuchMethodError->"+error.getMessage());
+            sLogger.log( "registeredMethod: NoSuchMethodError->"+error.getMessage());
         }
     }
 
 
-    private static void registerClass(ClassMethodGroup classMethodGroup) {
+    private static void registerClass(ClassMethodBean classMethodGroup) {
         try {
             Class<?> clazz = Class.forName(classMethodGroup.getTargetClassName());
             Method[] declareMethods = clazz.getDeclaredMethods();
@@ -69,14 +77,14 @@ public final class PrivacyHelper {
                 }
             }
         } catch (Exception e) {
-            Log.wtf(TAG,"registerClass Error-> " + e.getMessage());
+            sLogger.log("registerClass Error-> " + e.getMessage());
         }
     }
 
     private static void printWarning() {
-        Log.i(TAG, "########################################");
-        Log.i(TAG, "隐私合规检测库已经开启【注意在debug下使用即可】");
-        Log.i(TAG, "########################################");
+        sLogger.log( "########################################");
+        sLogger.log( "隐私合规检测库已经开启【注意在debug下使用即可】");
+        sLogger.log( "########################################");
     }
 }
 

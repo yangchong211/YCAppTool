@@ -1,10 +1,13 @@
 package com.yc.privacymonitor.helper;
 
+import android.app.Application;
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
+import com.yc.privacymonitor.config.PrivacyConfig;
 import com.yc.privacymonitor.method.NormalMethodList;
 
 /**
@@ -20,6 +23,9 @@ import com.yc.privacymonitor.method.NormalMethodList;
 public class PrivacyProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
+        Context context = getContext();
+        PrivacyConfig config = new PrivacyConfig.Builder(context).build();
+        PrivacyHelper.init(config);
         PrivacyHelper.start(new NormalMethodList());
         return true;
     }

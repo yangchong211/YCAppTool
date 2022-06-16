@@ -1,4 +1,4 @@
-package com.yc.privacymonitor.method;
+package com.yc.privacymonitor.bean;
 
 import android.os.Build;
 
@@ -8,17 +8,27 @@ import androidx.annotation.RequiresApi;
 import java.util.LinkedList;
 import java.util.Objects;
 
-public final class ClassMethodGroup {
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAndroidTool
+ *     email : yangchong211@163.com
+ *     time  : 2021/05/09
+ *     desc  : 方法包装类
+ *     revise:
+ * </pre>
+ */
+public final class ClassMethodBean {
     /**
      * 当前class类名称
      */
-    private String targetClassName;
+    private final String targetClassName;
     /**
      * 所有需要监测的风险函数
      */
-    private LinkedList<String> methodGroup = new LinkedList<>();
+    private final LinkedList<String> methodGroup = new LinkedList<>();
 
-    public ClassMethodGroup(String className) {
+    public ClassMethodBean(String className) {
         this.targetClassName = className;
     }
 
@@ -43,7 +53,7 @@ public final class ClassMethodGroup {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ClassMethodGroup that = (ClassMethodGroup) o;
+        ClassMethodBean that = (ClassMethodBean) o;
         return Objects.equals(targetClassName, that.targetClassName);
     }
 

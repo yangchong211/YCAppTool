@@ -26,8 +26,9 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.view.SurfaceControl;
 
+import com.yc.privacymonitor.bean.ClassMethodBean;
 import com.yc.privacymonitor.bean.MethodBean;
-import com.yc.privacymonitor.handler.SettingsResolverHandler;
+import com.yc.privacymonitor.handler.SettingsResolverImpl;
 
 import java.net.NetworkInterface;
 import java.util.LinkedList;
@@ -66,10 +67,10 @@ public class NormalMethodList implements HookMethodList{
 
 
         MethodBean s1 = new MethodBean(Settings.Secure.class,"getString", ContentResolver.class,String.class);
-        s1.setMethodHandler(new SettingsResolverHandler());
+        s1.setMethodHandler(new SettingsResolverImpl());
         list.add(s1);
         MethodBean s2 = new MethodBean(Settings.System.class,"getString", ContentResolver.class,String.class);
-        s2.setMethodHandler(new SettingsResolverHandler());
+        s2.setMethodHandler(new SettingsResolverImpl());
         list.add(s2);
         //-----定位
         list.add(new MethodBean(LocationManager.class,"getLastLocation"));
@@ -122,15 +123,15 @@ public class NormalMethodList implements HookMethodList{
     }
 
     @Override
-    public LinkedList<ClassMethodGroup> getAbsMethodList() {
-        LinkedList<ClassMethodGroup> list = new LinkedList<>();
+    public LinkedList<ClassMethodBean> getAbsMethodList() {
+        LinkedList<ClassMethodBean> list = new LinkedList<>();
         //PackageManager
-        ClassMethodGroup pkgManagerHook = new ClassMethodGroup("android.app.ApplicationPackageManager");
+        ClassMethodBean pkgManagerHook = new ClassMethodBean("android.app.ApplicationPackageManager");
         pkgManagerHook.addMethod("getInstalledPackagesAsUser");
         pkgManagerHook.addMethod("getInstalledApplicationsAsUser");
         list.add(pkgManagerHook);
         //SmsManager    短信
-        ClassMethodGroup smsManagerHook = new ClassMethodGroup("android.telephony.SmsManager");
+        ClassMethodBean smsManagerHook = new ClassMethodBean("android.telephony.SmsManager");
         smsManagerHook.addMethod("sendTextMessageInternal");
         smsManagerHook.addMethod("getDefault");
         list.add(smsManagerHook);
