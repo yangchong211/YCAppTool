@@ -26,7 +26,8 @@
 
 
     <application>
-        <activity android:name="com.yc.library.web.WebViewActivity"/>
+        <activity android:name="com.yc.library.web.WebViewActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
