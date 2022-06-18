@@ -10,6 +10,10 @@ import android.os.Looper;
 import android.os.Process;
 import android.text.TextUtils;
 
+import com.yc.appcommoninter.IEventTrack;
+import com.yc.appcommoninter.ILogger;
+import com.yc.appcommoninter.IMonitorToggle;
+
 import java.util.HashMap;
 
 /**
@@ -30,9 +34,9 @@ public final class LongAliveMonitor {
     private static final long TIMESTAMP_NO_VALUE = 0L;
     private static final int PID_NO_VALUE = 0;
     private static Application sApplication;
-    private static ILongAliveMonitorToggle sToggle;
-    private static ILongAliveEventTrack sEventTrack;
-    public static ILongAliveLogger sLogger;
+    private static IMonitorToggle sToggle;
+    private static IEventTrack sEventTrack;
+    public static ILogger sLogger;
     /**
      * 获取handler对象，并且指定main主线程
      */

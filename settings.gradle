@@ -57,7 +57,8 @@ include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
         'ComponentLib',':ApplicationLib',':AppStartLib',':AppBaseStore',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
-        ':ArchitectureLib',':ActivityManager',':AppFileLib',':EventUploadLib'
+        ':ArchitectureLib',':ActivityManager',':AppFileLib',':EventUploadLib',
+        ':AppCommonInter'
 project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
 project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
@@ -78,6 +79,7 @@ project(':ArchitectureLib').projectDir = new File('CommonLib/ArchitectureLib')
 project(':ActivityManager').projectDir = new File('CommonLib/ActivityManager')
 project(':AppFileLib').projectDir = new File('CommonLib/AppFileLib')
 project(':EventUploadLib').projectDir = new File('CommonLib/EventUploadLib')
+project(':AppCommonInter').projectDir = new File('CommonLib/AppCommonInter')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */

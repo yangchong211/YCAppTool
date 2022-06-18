@@ -3,8 +3,10 @@ package com.yc.lifehelper.application;
 import android.os.Looper;
 import android.util.Log;
 
+import com.yc.appcommoninter.IEventTrack;
+import com.yc.appcommoninter.ILogger;
+import com.yc.appcommoninter.IMonitorToggle;
 import com.yc.appprocesslib.AppStateLifecycle;
-import com.yc.appprocesslib.AppStateMonitor;
 import com.yc.appprocesslib.StateListener;
 import com.yc.appstart.AppStartTask;
 import com.yc.activitymanager.ActivityManager;
@@ -15,9 +17,6 @@ import com.yc.lifehelper.MainActivity;
 import com.yc.lifehelper.listener.MainActivityListener;
 import com.yc.localelib.listener.OnLocaleChangedListener;
 import com.yc.localelib.service.LocaleService;
-import com.yc.longalive.ILongAliveEventTrack;
-import com.yc.longalive.ILongAliveLogger;
-import com.yc.longalive.ILongAliveMonitorToggle;
 import com.yc.longalive.LongAliveMonitor;
 import com.yc.longalive.LongAliveMonitorConfig;
 import com.yc.store.config.CacheConfig;
@@ -91,24 +90,29 @@ public class AppCoreTask extends AppStartTask {
     private void LongevityMonitor() {
         LongAliveMonitor.init(new LongAliveMonitorConfig.Builder(MainApplication.getInstance())
                 // 业务埋点
-                .setEventTrack(new ILongAliveEventTrack() {
+                .setEventTrack(new IEventTrack() {
                     @Override
                     public void onEvent(HashMap<String, String> hashMap) {
 
                     }
                 })
                 // 保活监控 Apollo
-                .setToggle(new ILongAliveMonitorToggle() {
+                .setToggle(new IMonitorToggle() {
                     @Override
                     public boolean isOpen() {
                         return true;
                     }
                 })
                 // 日志输出
-                .setLogger(new ILongAliveLogger() {
+                .setLogger(new ILogger() {
                     @Override
                     public void log(String log) {
                         AppLogUtils.i("Longevity--"+log);
+                    }
+
+                    @Override
+                    public void error(String error) {
+                        AppLogUtils.e("Longevity--"+error);
                     }
                 })
                 .build());

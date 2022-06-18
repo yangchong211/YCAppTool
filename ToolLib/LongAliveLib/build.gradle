@@ -31,5 +31,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["core"])
+    implementation project(path: ':AppCommonInter')
     implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.7'
 }

@@ -1,4 +1,4 @@
-package com.yc.longalive;
+package com.yc.appcommoninter;
 
 import java.util.HashMap;
 
@@ -12,7 +12,12 @@ import java.util.HashMap;
  *     GitHub :
  * </pre>
  */
-public interface ILongAliveEventTrack {
+public interface IEventTrack {
 
+    /**
+     * 事件统计
+     *
+     * @param map map集合
+     */
     void onEvent(HashMap<String, String> map);
 }

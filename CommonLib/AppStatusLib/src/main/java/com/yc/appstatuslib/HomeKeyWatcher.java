@@ -17,8 +17,8 @@ import android.content.IntentFilter;
  */
 public class HomeKeyWatcher {
 
-    private Context mContext;
-    private IntentFilter mFilter;
+    private final Context mContext;
+    private final IntentFilter mFilter;
     private OnHomePressedListener mListener;
     private HomeReceiver mReceiver;
 
@@ -26,7 +26,7 @@ public class HomeKeyWatcher {
         //短按Home键
         void onHomePressed();
         //长按Home键
-        //void onHomeLongPressed();
+        void onHomeLongPressed();
     }
 
     public HomeKeyWatcher(Context context) {
@@ -79,7 +79,7 @@ public class HomeKeyWatcher {
                             mListener.onHomePressed();
                         } else if (reason.equals(SYSTEM_DIALOG_REASON_RECENT_APPS)) {
                             // 长按home键
-                            //mListener.onHomeLongPressed();
+                            mListener.onHomeLongPressed();
                         }
                     }
                 }

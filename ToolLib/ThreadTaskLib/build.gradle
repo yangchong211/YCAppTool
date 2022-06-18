@@ -32,4 +32,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["EasyExecutor"])
     implementation project(path: ':EasyExecutor')
+    implementation project(path: ':AppCommonInter')
 }

@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.IntentFilter;
 
+import com.yc.appcommoninter.ILogger;
 import com.yc.appprocesslib.AppStateMonitor;
 import com.yc.appstatuslib.broadcast.BatteryBroadcastReceiver;
 import com.yc.appstatuslib.broadcast.BluetoothBroadcastReceiver;
@@ -13,7 +14,6 @@ import com.yc.appstatuslib.broadcast.ScreenBroadcastReceiver;
 import com.yc.appstatuslib.broadcast.WifiBroadcastReceiver;
 import com.yc.appstatuslib.info.AppBatteryInfo;
 import com.yc.appstatuslib.info.AppThreadInfo;
-import com.yc.appstatuslib.listener.AppLogListener;
 import com.yc.appstatuslib.listener.AppStatusListener;
 import com.yc.appstatuslib.utils.ThreadManagerUtils;
 
@@ -262,7 +262,7 @@ public final class AppStatusManager {
         /**
          * 日志监听
          */
-        private AppLogListener traceLog;
+        private ILogger traceLog;
         /**
          * 是否开启线程监控，默认false
          */
@@ -286,7 +286,7 @@ public final class AppStatusManager {
             return this;
         }
 
-        public Builder traceLog(AppLogListener trace) {
+        public Builder traceLog(ILogger trace) {
             this.traceLog = trace;
             return this;
         }

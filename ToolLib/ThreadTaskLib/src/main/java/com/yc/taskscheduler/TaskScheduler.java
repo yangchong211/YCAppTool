@@ -4,8 +4,9 @@ package com.yc.taskscheduler;
 import android.os.Handler;
 import android.os.Process;
 import android.util.Log;
+
+import com.yc.appcommoninter.ILogger;
 import com.yc.easyexecutor.DelegateTaskExecutor;
-import com.yc.easyexecutor.InterExecutorLog;
 import com.yc.easyexecutor.SafeHandler;
 import com.yc.easyexecutor.TaskHandlerThread;
 
@@ -28,10 +29,11 @@ public final class TaskScheduler {
     private static final String TAG = "TaskScheduler";
     private final ExecutorService mParallelExecutor ;
     private final ExecutorService mTimeOutExecutor ;
-    private InterExecutorLog mILog = new InterExecutorLog() {
+    private ILogger iLogger = new ILogger() {
+
         @Override
-        public void info(String info) {
-            Log.i(TAG,info);
+        public void log(String log) {
+            Log.i(TAG,log);
         }
 
         @Override
@@ -69,9 +71,9 @@ public final class TaskScheduler {
                 KEEP_ALIVE,TimeUnit.SECONDS,new SynchronousQueue<Runnable>(), MyThreadFactory.TIME_OUT_THREAD_FACTORY);
     }
 
-    public static void addLogImpl(InterExecutorLog taskLog) {
+    public static void addLogImpl(ILogger taskLog) {
         if(taskLog != null) {
-            getInstance().mILog = taskLog;
+            getInstance().iLogger = taskLog;
         }
     }
 
@@ -128,7 +130,7 @@ public final class TaskScheduler {
      *执行一个后台任务，无回调
      * **/
     public static void execute(Runnable task) {
-        getInstance().mILog.info("execute Runnable"+task.toString());
+        getInstance().iLogger.log("execute Runnable"+task.toString());
         getInstance().mParallelExecutor.execute(task);
     }
 
@@ -137,7 +139,7 @@ public final class TaskScheduler {
      * @see #execute(Runnable)
      **/
     public static <R> void execute(AbsTaskRunnable<R> task) {
-        getInstance().mILog.info("execute task"+task.toString());
+        getInstance().iLogger.log("execute task"+task.toString());
         getInstance().mParallelExecutor.execute(task);
     }
 
