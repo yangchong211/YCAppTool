@@ -2,7 +2,7 @@ package com.yc.android.presenter
 
 
 import com.yc.toolutils.AppLogUtils
-import com.yc.toolutils.AppNetworkUtils
+import com.yc.toolutils.net.AppNetworkUtils
 import com.yc.android.contract.AndroidProjectContract
 import com.yc.android.model.helper.AndroidHelper
 import com.yc.android.network.BaseSchedulerProvider

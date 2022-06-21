@@ -1,0 +1,30 @@
+
+//debug下依赖
+println('gradle debug , sign start')
+//读取项目中的sign.properties签名文件，安全
+static String[] getSigningProperties(boolean isDebug) {
+    File propFile = new File('sign.properties')
+    if (propFile.exists()) {
+        Properties props = new Properties()
+        props.load(new FileInputStream(propFile))
+        if (isDebug) {
+            def signP = new String[4]
+            signP[0] = props['DEBUG_STORE_FILE']
+            signP[1] = props['STORE_PASSWORD']
+            signP[2] = props['KEY_ALIAS']
+            signP[3] = props['KEY_PASSWORD']
+            return signP
+        } else {
+            def signP = new String[4]
+            signP[0] = props['STORE_FILE']
+            signP[1] = props['STORE_PASSWORD']
+            signP[2] = props['KEY_ALIAS']
+            signP[3] = props['KEY_PASSWORD']
+            return signP
+        }
+    }
+}
+println('gradle debug sign end')
+
+
+

@@ -10,7 +10,8 @@ import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.AppBatteryInfo;
 import com.yc.appstatuslib.info.AppThreadInfo;
 import com.yc.appstatuslib.listener.BaseStatusListener;
-import com.yc.logging.LoggerFactory;
+import com.yc.logclient.LogUtils;
+import com.yc.logclient.client.LogClient;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.AppLogUtils;
 
@@ -56,6 +57,16 @@ public class AppDelayTask extends AppStartTask {
                 .build();
         //配置
         AppLogFactory.init(config);
+
+
+        String aLogPath = AppFileUtils.getCacheFilePath(MainApplication.getInstance(), "ALog");
+        LogUtils.initLogEngine(MainApplication.getInstance());
+        LogUtils.setLogSaveFoloder(aLogPath);
+        LogUtils.setShowLog(true);
+        LogUtils.enableTooLargeAutoDevide(true);
+        LogUtils.setAutoDivideRatio(0.5f);
+        LogUtils.setBaseStackIndex(LogClient.mBaseIndex);
+        LogUtils.setLogPre("ALog");
     }
 
     @Override

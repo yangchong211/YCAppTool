@@ -36,13 +36,16 @@ project(':SocketBusiness').projectDir = new File('Business/SocketBusiness')
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
-        ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer'
+        ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
+        ':AppLogHelper', ':AppLogProcess'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
 project(':XlogServer').projectDir = new File('ServerLib/XlogServer')
 project(':NfcServer').projectDir = new File('ServerLib/NfcServer')
 project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
+project(':AppLogHelper').projectDir = new File('ServerLib/AppLogHelper')
+project(':AppLogProcess').projectDir = new File('ServerLib/AppLogProcess')
 project(':ServerInterface').projectDir = new File('ServerLib/ServerInterface')
 project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
 project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')

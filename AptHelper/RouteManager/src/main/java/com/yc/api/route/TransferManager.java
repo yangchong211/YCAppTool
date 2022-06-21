@@ -103,6 +103,7 @@ public class TransferManager implements IRegister {
                 }
             }
         }
+        //获取classLoader
         ClassLoader classLoader = tClass.getClassLoader();
         InvocationHandler invocationHandler = new InvocationHandler() {
             @Override
@@ -113,7 +114,7 @@ public class TransferManager implements IRegister {
                 if (RouteConstants.LOG){
                     System.out.println("interface-----创建对象出现异常---"+method.getName());
                 }
-                if (method.getName().equals("isPresent")) {
+                if ("isPresent".equals(method.getName())) {
                     return false;
                 }
                 if (method.getReturnType() == void.class) {
@@ -124,6 +125,7 @@ public class TransferManager implements IRegister {
             }
         };
         Class<?>[] classes = new Class[]{tClass};
+        //使用
         Object proxyInstance = Proxy.newProxyInstance(classLoader, classes, invocationHandler);
         if (RouteConstants.LOG){
             System.out.println("interface-----proxyInstance---"+proxyInstance);

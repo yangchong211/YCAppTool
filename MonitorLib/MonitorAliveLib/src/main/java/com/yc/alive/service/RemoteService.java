@@ -1,6 +1,5 @@
 package com.yc.alive.service;
 
-import android.app.Notification;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
@@ -8,14 +7,12 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.PowerManager;
-import android.os.RemoteException;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.yc.alive.utils.NotificationUtils;
-import com.yc.alive.utils.ServiceUtils;
+import com.yc.toolutils.AppProcessUtils;
+import com.yc.toolutils.ServiceUtils;
 import com.yc.alive.constant.YcConstant;
-import com.yc.alive.receiver.NotificationClickReceiver;
 
 
 /**
@@ -83,7 +80,7 @@ public final class RemoteService extends Service {
     private final ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            if (ServiceUtils.isRunningTaskExist(getApplicationContext(), getPackageName() + ":remote")) {
+            if (AppProcessUtils.isRunningTaskExist(getApplicationContext(), getPackageName() + ":remote")) {
                 Intent localService = new Intent(RemoteService.this, LocalService.class);
                 RemoteService.this.startService(localService);
                 mIsBoundLocalService = RemoteService.this.bindService(new Intent(RemoteService.this, LocalService.class), mConnection, Context.BIND_ABOVE_CLIENT);

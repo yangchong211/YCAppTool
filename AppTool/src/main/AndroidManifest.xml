@@ -19,7 +19,7 @@
         <!--android:exported 是Android中的四大组件 Activity，Service，Provider，Receiver 四大组件中都会有的一个属性。-->
         <!--总体来说它的主要作用是：是否支持其它应用调用当前组件。-->
         <activity android:name="com.yc.lifehelper.SplashActivity"
-            android:exported="false"
+            android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

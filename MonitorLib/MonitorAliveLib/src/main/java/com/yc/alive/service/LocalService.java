@@ -12,13 +12,12 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
-import android.os.RemoteException;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.yc.alive.alive.YcKeepAlive;
 import com.yc.alive.utils.NotificationUtils;
-import com.yc.alive.utils.ServiceUtils;
+import com.yc.toolutils.ServiceUtils;
 import com.ycbjie.alivelib.R;
 import com.yc.alive.constant.YcConstant;
 import com.yc.alive.receiver.DeviceStatusReceiver;

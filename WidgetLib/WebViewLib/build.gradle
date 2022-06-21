@@ -34,6 +34,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["coordinatorlayout"])
     implementation(rootProject.ext.dependencies["okhttp"])
+    implementation project(path: ':ToolUtilsLib')
     //okhttp库
     //implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     //查询地址：https://mvnrepository.com/artifact/com.tencent.tbs.tbssdk/sdk?repo=jcenter

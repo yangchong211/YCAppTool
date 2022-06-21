@@ -21,6 +21,8 @@ import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 
+import com.yc.toolutils.file.AppSdFileUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -98,7 +100,7 @@ public final class WebFileUtils {
     public static File getImageDir(Context context) {
         String path = null;
         try {
-            if (isMounted()) {
+            if (AppSdFileUtils.isMounted()) {
                 File extPath = context.getExternalFilesDir(null);
                 if (extPath != null) {
                     path = extPath.getAbsolutePath() + PROPERTY + APP_ROOT_SAVE_PATH + PROPERTY + IMAGE_FILE_PATH;
@@ -129,11 +131,11 @@ public final class WebFileUtils {
      */
     public static String getLocalFileSavePathDir(Context context , String fileName , String name){
         //获得SDCard 的路径,storage/sdcard
-        String sdPath = getSDCardPath();
+        String sdPath = AppSdFileUtils.getSDCardPath();
         //判断 SD 卡是否可用
-        if (!isSDCardEnable(context) || TextUtils.isEmpty(sdPath)) {
+        if (!AppSdFileUtils.isSDCardEnable(context) || TextUtils.isEmpty(sdPath)) {
             //获取 SD 卡路径
-            List<String> sdPathList = getSDCardPaths(context);
+            List<String> sdPathList = AppSdFileUtils.getSDCardPaths(context);
             if (sdPathList != null && sdPathList.size() > 0 && !TextUtils.isEmpty(sdPathList.get(0))) {
                 sdPath = sdPathList.get(0);
             }
@@ -184,72 +186,6 @@ public final class WebFileUtils {
         }
         return savePath;
     }
-
-    /**
-     * 判断SDCard是否挂载
-     * Environment.MEDIA_MOUNTED,表示SDCard已经挂载
-     * Environment.getExternalStorageState()，获得当前SDCard的挂载状态
-     */
-    private static boolean isMounted() {
-        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
-    }
-
-    /**
-     * 获得SDCard 的路径,storage/sdcard
-     * @return          路径
-     */
-    public static String getSDCardPath() {
-        String path = null;
-        if (isMounted()) {
-            path = Environment.getExternalStorageDirectory().getPath();
-        }
-        return path;
-    }
-
-
-    /**
-     * 判断 SD 卡是否可用
-     *
-     * @return true : 可用<br>false : 不可用
-     */
-    private static boolean isSDCardEnable(Context context) {
-        return !getSDCardPaths(context).isEmpty();
-    }
-
-    /**
-     * 判断是否有sd卡
-     * @return                      是否有sd
-     */
-    private static boolean isExistSDCard() {
-        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-    }
-
-
-    /**
-     * 获取 SD 卡路径
-     *
-     * @return SD 卡路径
-     */
-    @SuppressWarnings("TryWithIdenticalCatches")
-    private static List<String> getSDCardPaths(Context context) {
-        StorageManager storageManager = (StorageManager) context.getApplicationContext()
-                .getSystemService(Context.STORAGE_SERVICE);
-        List<String> paths = new ArrayList<>();
-        try {
-            Method getVolumePathsMethod = StorageManager.class.getMethod("getVolumePaths");
-            getVolumePathsMethod.setAccessible(true);
-            Object invoke = getVolumePathsMethod.invoke(storageManager);
-            paths = Arrays.asList((String[]) invoke);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return paths;
-    }
-
 
 
 }

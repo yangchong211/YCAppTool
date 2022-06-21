@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yc.library.base.mvp.BaseLazyFragment
 import com.yc.toastutils.ToastUtils
-import com.yc.toolutils.AppNetworkUtils
+import com.yc.toolutils.net.AppNetworkUtils
 import com.yc.android.R
 import com.yc.android.contract.KnowledgeListContract
 import com.yc.android.model.bean.HomeData

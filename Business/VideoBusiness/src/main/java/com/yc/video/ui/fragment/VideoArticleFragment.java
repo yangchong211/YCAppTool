@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import com.yc.library.base.mvp.BackLazyFragment;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppNetworkUtils;
+import com.yc.toolutils.net.AppNetworkUtils;
 import com.yc.video.R;
 import com.yc.video.contract.VideoArticleContract;
 import com.yc.video.model.MultiNewsArticleDataBean;

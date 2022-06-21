@@ -2,7 +2,7 @@ package com.yc.httpserver;
 
 
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppNetworkUtils;
+import com.yc.toolutils.net.AppNetworkUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;

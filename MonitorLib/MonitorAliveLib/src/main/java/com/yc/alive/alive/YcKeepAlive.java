@@ -11,7 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.yc.alive.config.ForegroundNotification;
-import com.yc.alive.utils.ServiceUtils;
+import com.yc.toolutils.AppProcessUtils;
+import com.yc.toolutils.ServiceUtils;
 import com.yc.alive.whitelist.IWhiteListProvider;
 import com.yc.alive.whitelist.WhiteList;
 import com.yc.alive.whitelist.WhiteListIntentWrapper;
@@ -70,7 +71,7 @@ public final class YcKeepAlive {
     public static void startWork(@NonNull Application application, @NonNull RunMode runMode,
                                  @NonNull ForegroundNotification foregroundNotification,
                                  @NonNull KeepLiveService keepLiveService) {
-        if (ServiceUtils.isMainProcess(application)) {
+        if (AppProcessUtils.isMainProcess(application)) {
             YcKeepAlive.sApplication = application;
             YcKeepAlive.sForegroundNotification = foregroundNotification;
             YcKeepAlive.sKeepLiveService = keepLiveService;

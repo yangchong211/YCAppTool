@@ -15,7 +15,8 @@ import androidx.annotation.RequiresApi;
 
 import com.yc.alive.alive.YcKeepAlive;
 import com.yc.alive.utils.NotificationUtils;
-import com.yc.alive.utils.ServiceUtils;
+import com.yc.toolutils.AppProcessUtils;
+import com.yc.toolutils.ServiceUtils;
 import com.yc.alive.constant.YcConstant;
 import com.yc.alive.receiver.NotificationClickReceiver;
 
@@ -94,7 +95,7 @@ public final class JobHandlerService extends JobService {
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
         if (!ServiceUtils.isServiceRunning(getApplicationContext(), YcConstant.KEY_LOCAL_SERVICE_NAME)
-                || !ServiceUtils.isRunningTaskExist(getApplicationContext(), getPackageName() + ":remote")) {
+                || !AppProcessUtils.isRunningTaskExist(getApplicationContext(), getPackageName() + ":remote")) {
             startService(this);
         }
         return false;
@@ -103,7 +104,7 @@ public final class JobHandlerService extends JobService {
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
         if (!ServiceUtils.isServiceRunning(getApplicationContext(), YcConstant.KEY_LOCAL_SERVICE_NAME)
-                || !ServiceUtils.isRunningTaskExist(getApplicationContext(), getPackageName() + ":remote")) {
+                || !AppProcessUtils.isRunningTaskExist(getApplicationContext(), getPackageName() + ":remote")) {
             startService(this);
         }
         return false;

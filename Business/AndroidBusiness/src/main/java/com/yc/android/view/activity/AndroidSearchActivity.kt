@@ -18,7 +18,7 @@ import com.google.gson.reflect.TypeToken
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.statusbar.bar.StateAppBar
 import com.yc.toastutils.ToastUtils
-import com.yc.toolutils.AppNetworkUtils
+import com.yc.toolutils.net.AppNetworkUtils
 import com.yc.toolutils.AppSizeUtils
 import com.yc.toolutils.AppSpUtils
 import com.yc.toolutils.KeyboardUtils
@@ -31,7 +31,6 @@ import com.yc.android.network.SchedulerProvider
 import com.yc.android.presenter.AndroidSearchPresenter
 import com.yc.android.view.adapter.AndroidSearchAdapter
 import kotlinx.android.synthetic.main.activity_android_search.*
-import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter
 import org.yczbj.ycrefreshviewlib.inter.OnErrorListener
 import org.yczbj.ycrefreshviewlib.inter.OnMoreListener
 import org.yczbj.ycrefreshviewlib.inter.OnNoMoreListener

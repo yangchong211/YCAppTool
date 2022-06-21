@@ -351,6 +351,25 @@ public final class AppProcessUtils {
 
 
     /**
+     * 判断某个进程是否在运行中
+     * @param context                           上下文
+     * @param processName                       进程名称
+     * @return
+     */
+    public static boolean isRunningTaskExist(Context context, String processName) {
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> processList = am.getRunningAppProcesses();
+        if (processList != null) {
+            for (ActivityManager.RunningAppProcessInfo info : processList) {
+                if (info.processName.equals(processName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * 判断是否运行在后台
      * 参考链接：https://www.cnblogs.com/zhujiabin/p/9336663.html
      * 方案一：利用ActivityManager的RunningAppProcessInfo类

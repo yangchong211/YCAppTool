@@ -1,7 +1,7 @@
 package com.yc.android.presenter
 
 import android.annotation.SuppressLint
-import com.yc.toolutils.AppNetworkUtils
+import com.yc.toolutils.net.AppNetworkUtils
 import com.yc.android.contract.AndroidCollectContract
 import com.yc.android.model.helper.AndroidHelper
 import io.reactivex.android.schedulers.AndroidSchedulers

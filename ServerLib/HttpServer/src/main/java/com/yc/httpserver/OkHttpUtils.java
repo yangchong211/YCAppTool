@@ -18,6 +18,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * ================================================
@@ -117,6 +118,30 @@ public class OkHttpUtils {
         call.enqueue(callback);
     }
 
+
+    /**
+     * @param url   服务器地址
+     * @param file  所要上传的文件
+     * @return      响应结果
+     * @throws IOException
+     */
+    public ResponseBody upload(String url, File file) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", file.getName(),
+                        RequestBody.create(MediaType.parse("multipart/form-data"), file))
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (!response.isSuccessful()) {
+            throw new IOException("Unexpected code " + response);
+        }
+        return response.body();
+    }
 
     /**
      * 上传文件，post请求

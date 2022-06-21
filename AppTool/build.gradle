@@ -61,7 +61,6 @@ android {
         release {
             buildConfigField "boolean", "IS_DEBUG", "false"
             buildConfigField "String", "buildTime", "\"" + releaseTime() + "\""
-            buildConfigField "int", "URL_CONFIG", "" + getUrl(2) + ""
             //混淆
             minifyEnabled true
             //Zipalign优化
@@ -75,7 +74,6 @@ android {
         release {
             buildConfigField "boolean", "IS_DEBUG", "false"
             buildConfigField "String", "buildTime", "\"" + releaseTime() + "\""
-            buildConfigField "int", "URL_CONFIG", "" + getUrl(1) + ""
             //混淆
             minifyEnabled false
             //Zipalign优化
@@ -89,7 +87,6 @@ android {
         debug{
             buildConfigField "boolean", "IS_DEBUG", "true"
             buildConfigField "String", "buildTime", "\"" + releaseTime() + "\""
-            buildConfigField "int", "URL_CONFIG", "" + getUrl(0) + ""
             //混淆
             minifyEnabled false
             //Zipalign优化
@@ -261,6 +258,8 @@ dependencies {
     implementation project(path: ':NotifyBusiness')
     implementation project(path: ':KotlinBusiness')
     implementation project(path: ':MonitorFpsLib')
+    implementation project(path: ':AppCommonInter')
+    implementation project(path: ':AppLogHelper')
 //    implementation project(path: ':MonitorPrivacy')
     annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 //    implementation 'com.github.yangchong211.YCAppTool:BlurViewLib:1.3.7'
@@ -284,50 +283,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["ThreadTaskLib"])
 }
 
-
-//读取项目中的url.properties配置文件
-static int getUrl(int status) {
-    File propFile = new File('url.properties')//这个文件不可写注释
-    if (propFile.exists()) {
-        Properties props = new Properties()
-        props.load(new FileInputStream(propFile))
-        switch (status) {
-            case 0:
-                return Integer.parseInt(props['TEST_URL'])  //测试
-            case 1:
-                return Integer.parseInt(props['PREVIEW_URL'])//仿真
-            case 2:
-                return Integer.parseInt(props['RELEASE_URL'])//线上
-            default:
-                return Integer.parseInt(props['RELEASE_URL'])//线上
-        }
-    }
-    return 2//线上
-}
-
-
-//读取项目中的sign.properties签名文件，安全
-static String[] getSigningProperties(boolean isDebug) {
-    File propFile = new File('sign.properties')
-    if (propFile.exists()) {
-        Properties props = new Properties()
-        props.load(new FileInputStream(propFile))
-        if (isDebug) {
-            def signP = new String[4]
-            signP[0] = props['DEBUG_STORE_FILE']
-            signP[1] = props['STORE_PASSWORD']
-            signP[2] = props['KEY_ALIAS']
-            signP[3] = props['KEY_PASSWORD']
-            return signP
-        } else {
-            def signP = new String[4]
-            signP[0] = props['STORE_FILE']
-            signP[1] = props['STORE_PASSWORD']
-            signP[2] = props['KEY_ALIAS']
-            signP[3] = props['KEY_PASSWORD']
-            return signP
-        }
-    }
-}
 
 

@@ -1,7 +1,7 @@
 package com.yc.android.presenter
 
 import com.yc.toolutils.AppLogUtils
-import com.yc.toolutils.AppNetworkUtils
+import com.yc.toolutils.net.AppNetworkUtils
 import com.yc.android.contract.AndroidKnowledgeContract
 import com.yc.android.model.helper.AndroidHelper
 import io.reactivex.android.schedulers.AndroidSchedulers

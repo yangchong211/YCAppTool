@@ -26,6 +26,7 @@ import com.yc.activitymanager.ActivityManager;
 import com.yc.banner.view.BannerView;
 
 import com.yc.configlayer.constant.Constant;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.api.ConstantStringApi;
 import com.yc.library.base.mvp.BaseActivity;
@@ -40,6 +41,7 @@ import com.yc.lifehelper.component.RecommendComponent;
 import com.yc.lifehelper.component.SnapBannerComponent;
 import com.yc.lifehelper.component.ToolComponent;
 import com.yc.lifehelper.view.MyNotifyView;
+import com.yc.logclient.LogUtils;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.notifymessage.CustomNotification;
@@ -347,6 +349,14 @@ public class MainActivity extends BaseActivity{
                         break;
                     // 关于
                     case R.id.ll_nav_about:
+                        DelegateTaskExecutor.getInstance().executeOnDiskIO(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (int i= 0 ; i<10000 ; i++){
+                                    LogUtils.d("main activity log test " + i);
+                                }
+                            }
+                        });
                         break;
                     // 个人
                     case R.id.ll_nav_login:

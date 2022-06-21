@@ -34,7 +34,7 @@ import com.yc.netlib.data.NetworkFeedBean;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppNetworkUtils;
+import com.yc.toolutils.net.AppNetworkUtils;
 import com.yc.toolutils.AppWindowUtils;
 import java.io.IOException;
 import java.io.InputStream;

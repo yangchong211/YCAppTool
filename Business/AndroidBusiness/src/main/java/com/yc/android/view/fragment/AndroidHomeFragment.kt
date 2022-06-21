@@ -9,7 +9,7 @@ import com.yc.cn.ycbannerlib.banner.view.BannerView
 import com.yc.library.base.mvp.BaseFragment
 import com.yc.library.web.WebViewActivity
 import com.yc.toastutils.ToastUtils
-import com.yc.toolutils.AppNetworkUtils
+import com.yc.toolutils.net.AppNetworkUtils
 import com.yc.toolutils.AppSizeUtils
 import com.yc.toolutils.AppSpUtils
 import com.yc.ycshare.DoShareUtils

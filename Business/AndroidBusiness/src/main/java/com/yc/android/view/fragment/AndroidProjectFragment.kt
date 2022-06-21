@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.yc.library.base.mvp.BaseLazyFragment
 import com.yc.toastutils.ToastUtils
 import com.yc.toolutils.AppLogUtils
-import com.yc.toolutils.AppNetworkUtils
-import com.yc.ycshare.DoShareUtils
+import com.yc.toolutils.net.AppNetworkUtils
 import com.yc.android.R
 import com.yc.android.contract.AndroidProjectContract
 import com.yc.android.model.bean.HomeData
