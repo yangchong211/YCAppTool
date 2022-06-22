@@ -1,50 +1,36 @@
-package com.yc.appstatuslib.broadcast;
+package com.yc.appstatuslib.broadcast
 
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-
-import com.yc.appstatuslib.AppStatusManager;
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.net.wifi.WifiManager
+import com.yc.appstatuslib.AppStatusManager
 
 /**
- * <pre>
- *     @author: yangchong
- *     email  : yangchong211@163.com
- *     time   : 2017/5/18
- *     desc   : 网络监听广播
- *     revise :
- * </pre>
+ * @author: yangchong
+ * email  : yangchong211@163.com
+ * time   : 2017/5/18
+ * desc   : 网络监听广播
+ * revise :
  */
-public class WifiBroadcastReceiver extends BroadcastReceiver {
+class WifiBroadcastReceiver(private val mManager: AppStatusManager?) : BroadcastReceiver() {
 
-    private final AppStatusManager mManager;
+    override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action == WifiManager.WIFI_STATE_CHANGED_ACTION) {
+            when (intent.getIntExtra("wifi_state", 4)) {
+                0, 2, 4 -> {
 
-    public WifiBroadcastReceiver(AppStatusManager mManager) {
-        this.mManager = mManager;
-    }
+                }
+                1 -> notifyGpsSwitchState(false)
+                3 -> notifyGpsSwitchState(true)
+                else -> {
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals("android.net.wifi.WIFI_STATE_CHANGED")) {
-            switch(intent.getIntExtra("wifi_state", 4)) {
-                case 0:
-                case 2:
-                case 4:
-                default:
-                    break;
-                case 1:
-                    this.notifyGpsSwitchState(false);
-                    break;
-                case 3:
-                    this.notifyGpsSwitchState(true);
+                }
             }
         }
     }
 
-    private void notifyGpsSwitchState(boolean state) {
-        if (this.mManager != null) {
-            this.mManager.dispatcherWifiState(state);
-        }
+    private fun notifyGpsSwitchState(state: Boolean) {
+        mManager?.dispatcherWifiState(state)
     }
 }

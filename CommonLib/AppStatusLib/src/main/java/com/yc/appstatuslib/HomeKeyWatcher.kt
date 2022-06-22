@@ -1,89 +1,80 @@
-package com.yc.appstatuslib;
+package com.yc.appstatuslib
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 
 /**
- * <pre>
- *     @author yangchong
- *     email  : yangchong211@163.com
- *     time   : 2017/5/18
- *     desc   : 监听Home键按下的Wathcer
- *     revise :
- * </pre>
+ * @author yangchong
+ * email  : yangchong211@163.com
+ * time   : 2017/5/18
+ * desc   : 监听Home键按下的Wathcer
+ * revise :
  */
-public class HomeKeyWatcher {
+class HomeKeyWatcher(private val mContext: Context) {
 
-    private final Context mContext;
-    private final IntentFilter mFilter;
-    private OnHomePressedListener mListener;
-    private HomeReceiver mReceiver;
+    private val mFilter: IntentFilter = IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
+    private var mListener: OnHomePressedListener? = null
+    private var mReceiver: HomeReceiver? = null
 
-    public interface OnHomePressedListener {
+    interface OnHomePressedListener {
         //短按Home键
-        void onHomePressed();
-        //长按Home键
-        void onHomeLongPressed();
-    }
+        fun onHomePressed()
 
-    public HomeKeyWatcher(Context context) {
-        mContext = context;
-        mFilter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+        //长按Home键
+        fun onHomeLongPressed()
     }
 
     /**
      * 设置监听
      * @param listener
      */
-    public void setOnHomePressedListener(OnHomePressedListener listener) {
-        mListener = listener;
-        mReceiver = new HomeReceiver();
+    fun setOnHomePressedListener(listener: OnHomePressedListener?) {
+        mListener = listener
+        mReceiver = HomeReceiver()
     }
 
     /**
      * 开始监听，注册广播
      */
-    public void startWatch() {
+    fun startWatch() {
         if (mReceiver != null) {
-            mContext.registerReceiver(mReceiver, mFilter);
+            mContext.registerReceiver(mReceiver, mFilter)
         }
     }
 
     /**
      * 停止监听，注销广播
      */
-    public void stopWatch() {
+    fun stopWatch() {
         if (mReceiver != null) {
-            mContext.unregisterReceiver(mReceiver);
+            mContext.unregisterReceiver(mReceiver)
         }
     }
 
-    class HomeReceiver extends BroadcastReceiver {
+    internal inner class HomeReceiver : BroadcastReceiver() {
+        private val SYSTEM_DIALOG_REASON_KEY = "reason"
+        private val SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps"
+        private val SYSTEM_DIALOG_REASON_HOME_KEY = "homekey"
 
-        final String SYSTEM_DIALOG_REASON_KEY = "reason";
-        final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
-        final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action!=null && action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
-                String reason = intent.getStringExtra(SYSTEM_DIALOG_REASON_KEY);
+        override fun onReceive(context: Context, intent: Intent) {
+            val action = intent.action
+            if (action != null && action == Intent.ACTION_CLOSE_SYSTEM_DIALOGS) {
+                val reason = intent.getStringExtra(SYSTEM_DIALOG_REASON_KEY)
                 if (reason != null) {
                     if (mListener != null) {
-                        if (reason.equals(SYSTEM_DIALOG_REASON_HOME_KEY)) {
+                        if (reason == SYSTEM_DIALOG_REASON_HOME_KEY) {
                             // 短按home键
-                            mListener.onHomePressed();
-                        } else if (reason.equals(SYSTEM_DIALOG_REASON_RECENT_APPS)) {
+                            mListener?.onHomePressed()
+                        } else if (reason == SYSTEM_DIALOG_REASON_RECENT_APPS) {
                             // 长按home键
-                            mListener.onHomeLongPressed();
+                            mListener?.onHomeLongPressed()
                         }
                     }
                 }
             }
         }
     }
+
 }

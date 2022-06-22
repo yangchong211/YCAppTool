@@ -1,70 +1,52 @@
-package com.yc.appstatuslib;
+package com.yc.appstatuslib
 
-import android.bluetooth.BluetoothDevice;
-import android.content.Context;
-import android.content.IntentFilter;
-
-import com.yc.appcommoninter.ILogger;
-import com.yc.appprocesslib.AppStateMonitor;
-import com.yc.appstatuslib.broadcast.BatteryBroadcastReceiver;
-import com.yc.appstatuslib.broadcast.BluetoothBroadcastReceiver;
-import com.yc.appstatuslib.broadcast.GpsBroadcastReceiver;
-import com.yc.appstatuslib.broadcast.NetWorkBroadcastReceiver;
-import com.yc.appstatuslib.broadcast.ScreenBroadcastReceiver;
-import com.yc.appstatuslib.broadcast.WifiBroadcastReceiver;
-import com.yc.appstatuslib.info.AppBatteryInfo;
-import com.yc.appstatuslib.info.AppThreadInfo;
-import com.yc.appstatuslib.listener.AppStatusListener;
-import com.yc.appstatuslib.utils.ThreadManagerUtils;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
+import android.content.Context
+import android.content.IntentFilter
+import com.yc.appcommoninter.IEventTrack
+import com.yc.appcommoninter.ILogger
+import com.yc.appcommoninter.IMonitorToggle
+import com.yc.appprocesslib.AppStateMonitor
+import com.yc.appstatuslib.broadcast.*
+import com.yc.appstatuslib.info.AppBatteryInfo
+import com.yc.appstatuslib.info.AppThreadInfo
+import com.yc.appstatuslib.listener.AppStatusListener
+import com.yc.appstatuslib.utils.ThreadManagerUtils.Companion.instance
+import java.io.File
+import java.util.*
 
 /**
  * <pre>
- *     @author yangchong
- *     email  : yangchong211@163.com
- *     time   : 2017/5/18
- *     desc   : app广播状态管理
- *     revise :
- * </pre>
+ * @author yangchong
+ * email  : yangchong211@163.com
+ * time   : 2017/5/18
+ * desc   : app广播状态管理
+ * revise :
+</pre> *
  */
-public final class AppStatusManager {
-
-    private final List<AppStatusListener> mAppStatusListener;
-    private final BatteryBroadcastReceiver mBatteryReceiver;
-    private final GpsBroadcastReceiver mGpsReceiver;
-    private final NetWorkBroadcastReceiver mNetWorkReceiver;
-    private final ScreenBroadcastReceiver mScreenReceiver;
-    private final WifiBroadcastReceiver mWifiBroadcastReceiver;
-    private final BluetoothBroadcastReceiver mBluetoothReceiver;
-    private final Context mContext;
-    private final boolean threadSwitchOn;
-
-    private AppStatusManager(Builder builder) {
-        mAppStatusListener = new ArrayList<>();
-        mBatteryReceiver = new BatteryBroadcastReceiver(this);
-        mGpsReceiver = new GpsBroadcastReceiver(this);
-        mNetWorkReceiver = new NetWorkBroadcastReceiver(this);
-        mScreenReceiver = new ScreenBroadcastReceiver(this);
-        mWifiBroadcastReceiver = new WifiBroadcastReceiver(this);
-        mBluetoothReceiver = new BluetoothBroadcastReceiver(this);
-        mContext = builder.context;
-        threadSwitchOn = builder.threadSwitchOn;
-        init();
-    }
+class AppStatusManager private constructor(builder: Builder) {
+    
+    private val mAppStatusListener: MutableList<AppStatusListener>?
+    private val mBatteryReceiver: BatteryBroadcastReceiver
+    private val mGpsReceiver: GpsBroadcastReceiver
+    private val mNetWorkReceiver: NetWorkBroadcastReceiver
+    private val mScreenReceiver: ScreenBroadcastReceiver
+    private val mWifiBroadcastReceiver: WifiBroadcastReceiver
+    private val mBluetoothReceiver: BluetoothBroadcastReceiver
+    private val mContext: Context?
+    private val threadSwitchOn: Boolean
 
     /**
      * 注册广播
      */
-    private void init() {
-        initBatteryReceiver(mContext);
-        initGpsReceiver(mContext);
-        initNetworkReceiver(mContext);
-        initScreenReceiver(mContext);
-        initWifiReceiver(mContext);
-        initBluetoothReceiver(mContext);
+    private fun init() {
+        initBatteryReceiver(mContext)
+        initGpsReceiver(mContext)
+        initNetworkReceiver(mContext)
+        initScreenReceiver(mContext)
+        initWifiReceiver(mContext)
+        initBluetoothReceiver(mContext)
     }
 
     /**
@@ -72,241 +54,271 @@ public final class AppStatusManager {
      * 因为系统规定监听电量变化的广播接收器不能静态注册，所以这里只能使用动态注册的方式
      * @param context   上下文
      */
-    private void initBatteryReceiver(Context context) {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("android.intent.action.BATTERY_CHANGED");
-        context.registerReceiver(mBatteryReceiver, filter);
+    private fun initBatteryReceiver(context: Context?) {
+        val filter = IntentFilter()
+        filter.addAction("android.intent.action.BATTERY_CHANGED")
+        context?.registerReceiver(mBatteryReceiver, filter)
     }
 
     /**
      * 注册GPS监听广播
      * @param context   上下文
      */
-    private void initGpsReceiver(Context context) {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("android.location.PROVIDERS_CHANGED");
-        context.registerReceiver(mGpsReceiver, filter);
+    private fun initGpsReceiver(context: Context?) {
+        val filter = IntentFilter()
+        filter.addAction("android.location.PROVIDERS_CHANGED")
+        context?.registerReceiver(mGpsReceiver, filter)
     }
 
     /**
      * 注册网络广播
      * @param context   上下文
      */
-    private void initNetworkReceiver(Context context) {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        context.registerReceiver(mNetWorkReceiver, filter);
+    private fun initNetworkReceiver(context: Context?) {
+        val filter = IntentFilter()
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
+        context?.registerReceiver(mNetWorkReceiver, filter)
     }
 
     /**
      * 注册屏幕监听广播
      * @param context   上下文
      */
-    private void initScreenReceiver(Context context) {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("android.intent.action.SCREEN_ON");
-        filter.addAction("android.intent.action.SCREEN_OFF");
-        filter.addAction("android.intent.action.USER_PRESENT");
-        context.registerReceiver(mScreenReceiver, filter);
+    private fun initScreenReceiver(context: Context?) {
+        val filter = IntentFilter()
+        filter.addAction("android.intent.action.SCREEN_ON")
+        filter.addAction("android.intent.action.SCREEN_OFF")
+        filter.addAction("android.intent.action.USER_PRESENT")
+        context?.registerReceiver(mScreenReceiver, filter)
     }
 
     /**
      * 注册Wi-Fi监听广播
      * @param context   上下文
      */
-    private void initWifiReceiver(Context context) {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
-        context.registerReceiver(mWifiBroadcastReceiver, filter);
+    private fun initWifiReceiver(context: Context?) {
+        val filter = IntentFilter()
+        filter.addAction("android.net.wifi.WIFI_STATE_CHANGED")
+        context?.registerReceiver(mWifiBroadcastReceiver, filter)
     }
-
 
     /**
      * 注册蓝牙监听广播
      * @param context   上下文
      */
-    private void initBluetoothReceiver(Context context) {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
-        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
-        //filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        context.registerReceiver(mBluetoothReceiver, filter);
+    private fun initBluetoothReceiver(context: Context?) {
+        val filter = IntentFilter()
+        filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED)
+        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED)
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
+        context?.registerReceiver(mBluetoothReceiver, filter)
     }
 
     /**
      * 解绑操作
      */
-    public void destroy() {
-        mContext.unregisterReceiver(mBatteryReceiver);
-        mContext.unregisterReceiver(mGpsReceiver);
-        mContext.unregisterReceiver(mNetWorkReceiver);
-        mContext.unregisterReceiver(mScreenReceiver);
-        mContext.unregisterReceiver(mBluetoothReceiver);
-        mAppStatusListener.clear();
+    fun destroy() {
+        mContext?.unregisterReceiver(mBatteryReceiver)
+        mContext?.unregisterReceiver(mGpsReceiver)
+        mContext?.unregisterReceiver(mNetWorkReceiver)
+        mContext?.unregisterReceiver(mScreenReceiver)
+        mContext?.unregisterReceiver(mBluetoothReceiver)
+        mAppStatusListener?.clear()
     }
 
-    public AppBatteryInfo getBatteryInfo() {
-        return mBatteryReceiver.getBatteryInfo();
+    val batteryInfo: AppBatteryInfo?
+        get() = mBatteryReceiver.batteryInfo
+
+    fun registerAppStatusListener(listener: AppStatusListener) {
+        mAppStatusListener?.add(listener)
     }
 
-    public void registerAppStatusListener(AppStatusListener listener) {
-        if (mAppStatusListener != null) {
-            mAppStatusListener.add(listener);
-        }
+    fun unregisterAppStatusListener(listener: AppStatusListener): Boolean {
+        return mAppStatusListener != null && mAppStatusListener.remove(listener)
     }
 
-    public boolean unregisterAppStatusListener(AppStatusListener listener) {
-        return mAppStatusListener != null && mAppStatusListener.remove(listener);
-    }
+    val appStatus: Int
+        get() = AppStateMonitor.getInstance().state
 
-    public int getAppStatus() {
-        return AppStateMonitor.getInstance().getState();
-    }
-
-    public void dispatcherWifiState(boolean state) {
-        Object[] listeners = mAppStatusListener.toArray();
-        if (listeners!=null){
-            for (Object listener : listeners) {
-                ((AppStatusListener) listener).wifiStatusChange(state);
+    fun dispatcherWifiState(state: Boolean) {
+        val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
+        if (listeners != null) {
+            for (listener in listeners) {
+                (listener as AppStatusListener).wifiStatusChange(state)
             }
         }
     }
 
-    public void dispatcherBluetoothState(boolean state) {
-        Object[] listeners = mAppStatusListener.toArray();
-        if (listeners!=null){
-            for (Object listener : listeners) {
-                ((AppStatusListener) listener).bluetoothStatusChange(state);
+    fun dispatcherBluetoothState(state: Boolean) {
+        val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
+        if (listeners != null) {
+            for (listener in listeners) {
+                (listener as AppStatusListener).bluetoothStatusChange(state)
             }
         }
     }
 
-    public void dispatcherScreenState(boolean state) {
-        Object[] listeners = mAppStatusListener.toArray();
-        if (listeners!=null){
-            for (Object listener : listeners) {
-                ((AppStatusListener) listener).screenStatusChange(state);
+    fun dispatcherScreenState(state: Boolean) {
+        val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
+        if (listeners != null) {
+            for (listener in listeners) {
+                (listener as AppStatusListener).screenStatusChange(state)
             }
         }
     }
 
-    public void dispatcherGpsState(boolean state) {
-        Object[] listeners = mAppStatusListener.toArray();
-        if (listeners!=null){
-            for (Object listener : listeners) {
-                ((AppStatusListener) listener).gpsStatusChange(state);
+    fun dispatcherGpsState(state: Boolean) {
+        val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
+        if (listeners != null) {
+            for (listener in listeners) {
+                (listener as AppStatusListener).gpsStatusChange(state)
             }
         }
     }
 
-    public void dispatcherNetworkState(boolean state) {
-        if (mAppStatusListener != null && mAppStatusListener.size() != 0) {
-            Object[] listeners = mAppStatusListener.toArray();
-            if (listeners!=null){
-                for (Object listener : listeners) {
-                    ((AppStatusListener) listener).networkStatusChange(state);
+    fun dispatcherNetworkState(state: Boolean) {
+        val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
+        if (listeners != null) {
+            for (listener in listeners) {
+                (listener as AppStatusListener).networkStatusChange(state)
+            }
+        }
+    }
+
+    fun dispatcherBatteryState(batteryInfo: AppBatteryInfo?) {
+        val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
+        if (listeners != null) {
+            for (listener in listeners) {
+                (listener as AppStatusListener).batteryStatusChange(batteryInfo)
+            }
+        }
+    }
+
+    fun dispatcherUserPresent() {
+        val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
+        if (listeners != null) {
+            for (listener in listeners) {
+                (listener as AppStatusListener).screenUserPresent()
+            }
+        }
+    }
+
+    fun dispatcherThreadInfo() {
+        val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
+        if (threadSwitchOn && listeners != null) {
+            val threadManager = instance
+            val threadInfo = AppThreadInfo()
+            if (threadManager != null) {
+                threadInfo.threadCount = threadManager.threadCount
+                threadInfo.blockThreadCount = threadManager.blockThread
+                threadInfo.runningThreadCount = threadManager.runningThread
+                threadInfo.timeWaitingThreadCount = threadManager.timeWaitingThread
+                threadInfo.waitingThreadCount = threadManager.waitingThread
+                for (listener in listeners) {
+                    (listener as AppStatusListener).appThreadStatusChange(threadInfo)
                 }
             }
         }
     }
 
-    public void dispatcherBatteryState(AppBatteryInfo batteryInfo) {
-        Object[] listeners = mAppStatusListener.toArray();
-        if (listeners!=null){
-            for (Object listener : listeners) {
-                ((AppStatusListener) listener).batteryStatusChange(batteryInfo);
-            }
-        }
-    }
-
-    public void dispatcherUserPresent() {
-        Object[] listeners = mAppStatusListener.toArray();
-        if (listeners!=null){
-            for (Object listener : listeners) {
-                ((AppStatusListener) listener).screenUserPresent();
-            }
-        }
-    }
-
-    public void dispatcherThreadInfo(){
-        Object[] listeners = mAppStatusListener.toArray();
-        if (threadSwitchOn){
-            ThreadManagerUtils threadManager = ThreadManagerUtils.getInstance();
-            AppThreadInfo threadInfo = new AppThreadInfo();
-            threadInfo.setThreadCount(threadManager.getThreadCount());
-            threadInfo.setBlockThreadCount(threadManager.getBlockThread());
-            threadInfo.setRunningThreadCount(threadManager.getRunningThread());
-            threadInfo.setTimeWaitingThreadCount(threadManager.getTimeWaitingThread());
-            threadInfo.setWaitingThreadCount(threadManager.getWaitingThread());
-            if (listeners!=null){
-                for (Object listener : listeners) {
-                    ((AppStatusListener) listener).appThreadStatusChange(threadInfo);
-                }
-            }
-        }
-    }
-
-    public static class Builder {
+    class Builder {
         /**
          * 时间间隔
          */
-        private int interval;
+        private var interval = 0
+
         /**
          * 上下文
          */
-        private Context context;
+        var context: Context? = null
+
         /**
          * file文件
          */
-        private File file;
+        private var file: File? = null
+
         /**
          * 日志监听
          */
-        private ILogger traceLog;
+        private var traceLog: ILogger? = null
+
+        /**
+         * ab测试
+         */
+        var monitorToggle: IMonitorToggle? = null
+
+        /**
+         * 事件统计
+         */
+        var eventTrack: IEventTrack? = null
+
         /**
          * 是否开启线程监控，默认false
          */
-        private boolean threadSwitchOn = false;
-
-        public Builder() {
+        var threadSwitchOn = false
+        fun interval(interval: Int): Builder {
+            this.interval = interval
+            return this
         }
 
-        public Builder interval(int interval) {
-            this.interval = interval;
-            return this;
+        fun file(file: File?): Builder {
+            this.file = file
+            return this
         }
 
-        public Builder file(File file) {
-            this.file = file;
-            return this;
+        fun context(context: Context?): Builder {
+            this.context = context
+            return this
         }
 
-        public Builder context(Context context) {
-            this.context = context;
-            return this;
+        fun traceLog(trace: ILogger?): Builder {
+            traceLog = trace
+            return this
         }
 
-        public Builder traceLog(ILogger trace) {
-            this.traceLog = trace;
-            return this;
+        fun setMonitorToggle(toggle: IMonitorToggle): Builder {
+            this.monitorToggle = toggle
+            return this
         }
 
-        public Builder threadSwitchOn(boolean threadSwitchOn) {
-            this.threadSwitchOn = threadSwitchOn;
-            return this;
+        fun setEventTrack(eventTrack: IEventTrack): Builder {
+            this.eventTrack = eventTrack
+            return this
         }
 
-        public AppStatusManager builder() {
-            if (this.context == null) {
-                throw new NullPointerException("context is null");
-            } else if (this.file == null) {
-                throw new NullPointerException("file is null");
-            } else {
-                if (this.interval == 0) {
-                    this.interval = 6000;
+        fun threadSwitchOn(threadSwitchOn: Boolean): Builder {
+            this.threadSwitchOn = threadSwitchOn
+            return this
+        }
+
+        fun builder(): AppStatusManager {
+            return when {
+                context == null -> {
+                    throw NullPointerException("context is null")
                 }
-                return new AppStatusManager(this);
+                file == null -> {
+                    throw NullPointerException("file is null")
+                }
+                else -> {
+                    if (interval == 0) {
+                        interval = 6000
+                    }
+                    AppStatusManager(this)
+                }
             }
         }
+    }
+
+    init {
+        mAppStatusListener = ArrayList()
+        mBatteryReceiver = BatteryBroadcastReceiver(this)
+        mGpsReceiver = GpsBroadcastReceiver(this)
+        mNetWorkReceiver = NetWorkBroadcastReceiver(this)
+        mScreenReceiver = ScreenBroadcastReceiver(this)
+        mWifiBroadcastReceiver = WifiBroadcastReceiver(this)
+        mBluetoothReceiver = BluetoothBroadcastReceiver(this)
+        mContext = builder.context
+        threadSwitchOn = builder.threadSwitchOn
+        init()
     }
 }

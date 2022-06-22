@@ -1,98 +1,92 @@
-package com.yc.appstatuslib.utils;
+package com.yc.appstatuslib.utils
 
-
-
-import java.lang.Thread.State;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
+import java.util.*
 
 /**
  * <pre>
- *     @author yangchong
- *     email  : yangchong211@163.com
- *     time   : 2017/5/18
- *     desc   : 线程工具类
- *     revise :
- * </pre>
+ * @author yangchong
+ * email  : yangchong211@163.com
+ * time   : 2017/5/18
+ * desc   : 线程工具类
+ * revise :
+</pre> *
  */
-public final class ThreadManagerUtils {
+class ThreadManagerUtils private constructor() {
 
-    private static ThreadManagerUtils INSTANCE;
+    val threadCount: Int
+        get() = Thread.getAllStackTraces().keys.size
 
-    public static ThreadManagerUtils getInstance() {
-        if (INSTANCE == null) {
-            synchronized (ThreadManagerUtils.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new ThreadManagerUtils();
+    val runningThread: List<Thread>
+        get() {
+            val threadSet: Set<Thread> = Thread.getAllStackTraces().keys
+            val threads = threadSet.toTypedArray()
+            val runnableThread: MutableList<Thread> = ArrayList()
+            val var5 = threads.size
+            for (i in 0 until var5) {
+                val thread = threads[i]
+                if (thread.state == Thread.State.RUNNABLE) {
+                    runnableThread.add(thread)
                 }
             }
+            return runnableThread
         }
-        return INSTANCE;
-    }
 
-
-    private ThreadManagerUtils() {
-
-    }
-
-    public int getThreadCount() {
-        return Thread.getAllStackTraces().keySet().size();
-    }
-
-    public List<Thread> getRunningThread() {
-        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-        Thread[] threads = (Thread[])threadSet.toArray(new Thread[threadSet.size()]);
-        List<Thread> runnableThread = new ArrayList<>();
-        int var5 = threads.length;
-        for(int i = 0; i < var5; ++i) {
-            Thread thread = threads[i];
-            if (thread.getState() == State.RUNNABLE) {
-                runnableThread.add(thread);
+    val blockThread: List<Thread>
+        get() {
+            val threadSet: Set<Thread> = Thread.getAllStackTraces().keys
+            val threads = threadSet.toTypedArray()
+            val runnableThread: MutableList<Thread> = ArrayList()
+            val length = threads.size
+            for (i in 0 until length) {
+                val thread = threads[i]
+                if (thread.state == Thread.State.BLOCKED) {
+                    runnableThread.add(thread)
+                }
             }
+            return runnableThread
         }
-        return runnableThread;
-    }
 
-    public List<Thread> getBlockThread() {
-        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-        Thread[] threads = (Thread[])threadSet.toArray(new Thread[threadSet.size()]);
-        List<Thread> runnableThread = new ArrayList<>();
-        int length = threads.length;
-        for(int i = 0; i < length; ++i) {
-            Thread thread = threads[i];
-            if (thread.getState() == State.BLOCKED) {
-                runnableThread.add(thread);
+    val timeWaitingThread: List<Thread>
+        get() {
+            val threadSet: Set<Thread> = Thread.getAllStackTraces().keys
+            val threads = threadSet.toTypedArray()
+            val runnableThread: MutableList<Thread> = ArrayList()
+            for (i in threads.indices) {
+                val thread = threads[i]
+                if (thread.state == Thread.State.TIMED_WAITING) {
+                    runnableThread.add(thread)
+                }
             }
+            return runnableThread
         }
-        return runnableThread;
-    }
 
-    public List<Thread> getTimeWaitingThread() {
-        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-        Thread[] threads = (Thread[])threadSet.toArray(new Thread[threadSet.size()]);
-        List<Thread> runnableThread = new ArrayList<>();
-        for(int i = 0; i < threads.length; ++i) {
-            Thread thread = threads[i];
-            if (thread.getState() == State.TIMED_WAITING) {
-                runnableThread.add(thread);
+    val waitingThread: List<Thread>
+        get() {
+            val threadSet: Set<Thread> = Thread.getAllStackTraces().keys
+            val threads = threadSet.toTypedArray()
+            val runnableThread: MutableList<Thread> = ArrayList()
+            for (i in threads.indices) {
+                val thread = threads[i]
+                if (thread.state == Thread.State.WAITING) {
+                    runnableThread.add(thread)
+                }
             }
+            return runnableThread
         }
-        return runnableThread;
-    }
 
-    public List<Thread> getWaitingThread() {
-        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-        Thread[] threads = (Thread[])threadSet.toArray(new Thread[threadSet.size()]);
-        List<Thread> runnableThread = new ArrayList<>();
-        for(int i = 0; i < threads.length; ++i) {
-            Thread thread = threads[i];
-            if (thread.getState() == State.WAITING) {
-                runnableThread.add(thread);
+    companion object {
+        private var INSTANCE: ThreadManagerUtils? = null
+        @JvmStatic
+        val instance: ThreadManagerUtils?
+            get() {
+                if (INSTANCE == null) {
+                    synchronized(ThreadManagerUtils::class.java) {
+                        if (INSTANCE == null) {
+                            INSTANCE = ThreadManagerUtils()
+                        }
+                    }
+                }
+                return INSTANCE
             }
-        }
-        return runnableThread;
     }
 }
-

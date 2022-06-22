@@ -1,56 +1,42 @@
-package com.yc.appstatuslib.broadcast;
+package com.yc.appstatuslib.broadcast
 
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-
-import com.yc.appstatuslib.AppStatusManager;
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.net.ConnectivityManager
+import com.yc.appstatuslib.AppStatusManager
 
 /**
  * <pre>
- *     @author: yangchong
- *     email  : yangchong211@163.com
- *     time   : 2017/5/18
- *     desc   : 网络监听广播
- *     revise :
- * </pre>
+ * @author: yangchong
+ * email  : yangchong211@163.com
+ * time   : 2017/5/18
+ * desc   : 网络监听广播
+ * revise :
+</pre> *
  */
-public class NetWorkBroadcastReceiver extends BroadcastReceiver {
+class NetWorkBroadcastReceiver(private val mManager: AppStatusManager?) : BroadcastReceiver() {
 
-    private final AppStatusManager mManager;
-
-    public NetWorkBroadcastReceiver(AppStatusManager resourceManager) {
-        this.mManager = resourceManager;
-    }
-
-    public boolean isNetworkEnable(Context context) {
-        if (context == null) {
-            return false;
+    private fun isNetworkEnable(context: Context?): Boolean {
+        return if (context == null) {
+            false
         } else {
-            ConnectivityManager connectivityManager = (ConnectivityManager)
-                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            if (connectivityManager == null) {
-                return false;
-            } else {
-                NetworkInfo aActiveInfo = connectivityManager.getActiveNetworkInfo();
-                return aActiveInfo != null && aActiveInfo.isAvailable();
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            run {
+                val aActiveInfo = connectivityManager.activeNetworkInfo
+                aActiveInfo != null && aActiveInfo.isAvailable
             }
         }
     }
 
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        if (this.mManager != null) {
-            if (!this.isNetworkEnable(context)) {
-                this.mManager.dispatcherNetworkState(false);
+    override fun onReceive(context: Context, intent: Intent) {
+        if (mManager != null) {
+            if (!isNetworkEnable(context)) {
+                mManager.dispatcherNetworkState(false)
             } else {
-                this.mManager.dispatcherNetworkState(true);
+                mManager.dispatcherNetworkState(true)
             }
         }
     }
 }
-
