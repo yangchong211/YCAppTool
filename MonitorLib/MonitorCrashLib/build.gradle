@@ -49,7 +49,7 @@ dependencies {
     //implementation project(path: ':ActivityManager')
     implementation 'com.github.yangchong211.YCRefreshView:EastAdapterLib:3.0.2'
     //轻量级异步线程封装库：https://github.com/yangchong211/YCThreadPool
-    implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.7'
+    implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
     //吐司工具库：https://github.com/yangchong211/YCDialog
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     //状态栏：https://github.com/yangchong211/YCStatusBar

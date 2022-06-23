@@ -119,7 +119,7 @@ ext {
             //https://github.com/yangchong211/YCThreadPool
             "ThreadPoolLib"           : "com.github.yangchong211.YCThreadPool:ThreadPoolLib:1.3.7",
             "ThreadTaskLib"           : "com.github.yangchong211.YCThreadPool:ThreadTaskLib:1.3.7",
-            "EasyExecutor"            : "com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.7",
+            "EasyExecutor"            : "com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8",
 
             //效率优化
             //https://github.com/yangchong211/YCEfficient
