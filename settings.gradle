@@ -8,7 +8,7 @@ include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
         ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',':CommonBusiness',
         ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
         ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness', ':PlayerBusiness',
-        ':SocketBusiness'
+        ':SocketBusiness',':LibraryLayer', ':ConfigLayer'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -30,7 +30,8 @@ project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')
 project(':KotlinBusiness').projectDir = new File('Business/KotlinBusiness')
 project(':PlayerBusiness').projectDir = new File('Business/PlayerBusiness')
 project(':SocketBusiness').projectDir = new File('Business/SocketBusiness')
-
+project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
+project(':ConfigLayer').projectDir = new File('Business/ConfigLayer')
 
 
 /* +++++++++ 框架业务服务层 +++++++++ */
@@ -56,14 +57,12 @@ project(':PrivateServer').projectDir = new File('ServerLib/PrivateServer')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':LibraryLayer', ':ConfigLayer', ':AppStatusLib',':ToolUtilsLib',
+include ':AppStatusLib',':ToolUtilsLib',
         'ComponentLib',':ApplicationLib',':AppStartLib',':AppBaseStore',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
         ':ArchitectureLib',':ActivityManager',':AppFileLib',':EventUploadLib',
         ':AppCommonInter'
-project(':LibraryLayer').projectDir = new File('CommonLib/LibraryLayer')
-project(':ConfigLayer').projectDir = new File('CommonLib/ConfigLayer')
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
