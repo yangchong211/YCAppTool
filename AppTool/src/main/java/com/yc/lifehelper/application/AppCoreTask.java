@@ -92,6 +92,11 @@ public class AppCoreTask extends AppStartTask {
                 // 业务埋点
                 .setEventTrack(new IEventTrack() {
                     @Override
+                    public void onEvent(String name, HashMap<String, String> map) {
+
+                    }
+
+                    @Override
                     public void onEvent(HashMap<String, String> hashMap) {
 
                     }

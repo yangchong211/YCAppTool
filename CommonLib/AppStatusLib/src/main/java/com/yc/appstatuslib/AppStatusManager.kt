@@ -222,10 +222,6 @@ class AppStatusManager private constructor(builder: Builder) {
     }
 
     class Builder {
-        /**
-         * 时间间隔
-         */
-        private var interval = 0
 
         /**
          * 上下文
@@ -245,21 +241,17 @@ class AppStatusManager private constructor(builder: Builder) {
         /**
          * ab测试
          */
-        var monitorToggle: IMonitorToggle? = null
+        private var monitorToggle: IMonitorToggle? = null
 
         /**
          * 事件统计
          */
-        var eventTrack: IEventTrack? = null
+        private var eventTrack: IEventTrack? = null
 
         /**
          * 是否开启线程监控，默认false
          */
         var threadSwitchOn = false
-        fun interval(interval: Int): Builder {
-            this.interval = interval
-            return this
-        }
 
         fun file(file: File?): Builder {
             this.file = file
@@ -300,9 +292,6 @@ class AppStatusManager private constructor(builder: Builder) {
                     throw NullPointerException("file is null")
                 }
                 else -> {
-                    if (interval == 0) {
-                        interval = 6000
-                    }
                     AppStatusManager(this)
                 }
             }

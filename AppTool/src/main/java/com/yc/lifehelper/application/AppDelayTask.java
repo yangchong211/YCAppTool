@@ -87,7 +87,6 @@ public class AppDelayTask extends AppStartTask {
         File file = new File(path);
         AppStatusManager manager = new AppStatusManager.Builder()
                 .context(MainApplication.getInstance())
-                .interval(5)
                 .file(file)
                 .threadSwitchOn(false)
                 .builder();

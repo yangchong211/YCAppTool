@@ -44,6 +44,11 @@ public final class LongAliveMonitorConfig {
         } else {
             this.mEventTrack = new IEventTrack() {
                 @Override
+                public void onEvent(String name, HashMap<String, String> map) {
+
+                }
+
+                @Override
                 public void onEvent(HashMap<String, String> params) {
                 }
             };

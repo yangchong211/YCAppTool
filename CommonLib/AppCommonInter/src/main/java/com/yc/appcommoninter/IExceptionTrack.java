@@ -7,25 +7,26 @@ import java.util.HashMap;
  *     @author yangchong
  *     email  : yangchong211@163.com
  *     time   : 2017/5/11
- *     desc   : event事件接口
+ *     desc   : 异常上报接口
  *     revise :
  *     GitHub :
  * </pre>
  */
-public interface IEventTrack {
+public interface IExceptionTrack {
 
     /**
-     * 事件统计
+     * 异常上报
      *
      * @param name 名称
-     * @param map  map集合
+     * @param exception  异常
      */
-    void onEvent(String name, HashMap<String, String> map);
+    void onException(String name, Exception exception);
 
     /**
-     * 事件统计
+     * 异常上报
      *
-     * @param map map集合
+     * @param exception  异常
      */
-    void onEvent(HashMap<String, String> map);
+    void onException(Exception exception);
+
 }
