@@ -76,7 +76,6 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':HttpServer')
-    implementation project(path: ':ConfigLayer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':CustomWidget')
     

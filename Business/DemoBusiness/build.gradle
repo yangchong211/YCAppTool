@@ -66,7 +66,6 @@ dependencies {
     implementation project(path: ':ThreadPoolLib')
     implementation rootProject.ext.dependencies["YCCustomTextLib"]
     implementation project(path: ':HttpServer')
-    implementation project(path: ':ConfigLayer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':CustomWidget')

@@ -37,5 +37,4 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation 'com.google.guava:guava:25.1-android'
     implementation project(path: ':LibraryLayer')
-    implementation project(path: ':ConfigLayer')
 }

@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter
-import com.yc.configlayer.constant.Constant
 import com.yc.intent.log.IntentLogger
 import com.yc.library.base.mvp.BaseActivity
 import com.yc.library.web.WebViewActivity
@@ -30,6 +29,7 @@ import com.yc.android.view.fragment.AndroidHomeFragment
 import com.yc.android.view.fragment.AndroidKnowledgeFragment
 import com.yc.android.view.fragment.AndroidProfileFragment
 import com.yc.android.view.fragment.AndroidProjectFragment
+import com.yc.library.base.config.Constant
 import kotlinx.android.synthetic.main.base_android_bar.*
 import kotlinx.android.synthetic.main.base_android_bar.toolbar
 import kotlinx.coroutines.*

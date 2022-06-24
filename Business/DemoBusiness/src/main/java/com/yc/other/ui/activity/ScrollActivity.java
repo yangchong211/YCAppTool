@@ -11,7 +11,8 @@ import android.util.Log;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import com.yc.configlayer.constant.Constant;
+
+import com.yc.library.base.config.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.statusbar.bar.StateAppBar;

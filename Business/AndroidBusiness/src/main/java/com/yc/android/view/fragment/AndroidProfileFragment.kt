@@ -3,7 +3,6 @@ package com.yc.android.view.fragment
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
-import com.yc.configlayer.constant.Constant
 import com.yc.library.base.mvp.BaseLazyFragment
 import com.yc.library.web.WebViewActivity
 import com.yc.toastutils.ToastUtils
@@ -16,6 +15,7 @@ import com.yc.android.tools.KotlinUtils
 import com.yc.android.view.activity.AndroidActivity
 import com.yc.android.view.activity.AndroidCollectActivity
 import com.yc.android.view.activity.AndroidLoginActivity
+import com.yc.library.base.config.Constant
 import kotlinx.android.synthetic.main.fragment_android_profile.*
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.GlobalScope

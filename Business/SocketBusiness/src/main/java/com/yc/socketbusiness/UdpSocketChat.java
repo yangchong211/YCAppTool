@@ -12,8 +12,6 @@ public class UdpSocketChat {
     /**
      * 分别启动发送方和接收方
      */
-
-
     public static void sendMessage(String host,int port){
         System.out.println("Sender Start...");
 

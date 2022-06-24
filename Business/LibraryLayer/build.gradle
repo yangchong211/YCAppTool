@@ -135,7 +135,6 @@ dependencies {
     implementation project(path: ':StatusBarLib')
     implementation project(path: ':ThreadPoolLib')
     implementation project(path: ':BusinessInterface')
-    implementation project(path: ':ConfigLayer')
     implementation project(path: ':HttpServer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':FragmentLib')

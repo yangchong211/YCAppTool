@@ -212,7 +212,6 @@ dependencies {
     implementation project(path: ':LeetBusiness')
     implementation project(path: ':MonitorKeepAlive')
     implementation project(path: ':HttpServer')
-    implementation project(path: ':ConfigLayer')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':ZxingServerLib')

@@ -5,7 +5,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.yc.configlayer.constant.Constant;
+import com.yc.library.base.config.Constant;
 import com.yc.library.web.WebViewActivity;
 import com.yc.lifehelper.R;
 import com.yc.notifymessage.CustomNotification;

@@ -68,7 +68,6 @@ dependencies {
     api rootProject.ext.dependencies["YCVideoPlayerLib"]
     implementation(rootProject.ext.dependencies["gson"])
     implementation project(path: ':HttpServer')
-    implementation project(path: ':ConfigLayer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':FragmentLib')

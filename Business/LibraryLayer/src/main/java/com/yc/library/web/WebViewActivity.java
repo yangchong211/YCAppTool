@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
-import com.yc.configlayer.constant.Constant;
+import com.yc.library.base.config.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.toolutils.AppWindowUtils;
 import com.yc.webviewlib.inter.BridgeHandler;

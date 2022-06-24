@@ -25,10 +25,10 @@ import com.yc.apploglib.AppLogHelper;
 import com.yc.activitymanager.ActivityManager;
 import com.yc.banner.view.BannerView;
 
-import com.yc.configlayer.constant.Constant;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.api.ConstantStringApi;
+import com.yc.library.base.config.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.web.WebViewActivity;
 import com.yc.lifehelper.adapter.MainAdapter;
@@ -43,7 +43,6 @@ import com.yc.lifehelper.component.ToolComponent;
 import com.yc.lifehelper.view.MyNotifyView;
 import com.yc.logclient.LogUtils;
 import com.yc.monitorfilelib.FileExplorerActivity;
-import com.yc.netlib.utils.NetworkTool;
 import com.yc.notifymessage.CustomNotification;
 import com.yc.notifymessage.OnDismissListener;
 import com.yc.toastutils.ToastUtils;
@@ -117,7 +116,7 @@ public class MainActivity extends BaseActivity{
                 }
                 break;
             case 4:
-                WebViewActivity.lunch(this,Constant.GITHUB,"我的GitHub");
+                WebViewActivity.lunch(this, Constant.GITHUB,"我的GitHub");
                 break;
             case 5:
                 WebViewActivity.lunch(this,Constant.LIFE_HELPER,"开源项目介绍");
