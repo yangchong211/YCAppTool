@@ -91,7 +91,8 @@ include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':ToastUtils', ':FloatPageLib', ':NotifyMessage', ':NotificationLib',
         ':DialogFragment', ':SnackBar', ':PopupWindow', ':BaseDialog', ':RoundCorners',
         ':EastAdapterLib', ':PhotoCoverLib', ':RefreshViewLib', ':SelectViewLib',
-        ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib'
+        ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib',
+        ':FloatWindow'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
 project(':CustomWidget').projectDir = new File('WidgetLib/CustomWidget')
@@ -121,7 +122,7 @@ project(':GroupAdapterLib').projectDir = new File('WidgetLib/GroupAdapterLib')
 project(':BaseProgress').projectDir = new File('WidgetLib/BaseProgress')
 project(':CircleProgress').projectDir = new File('WidgetLib/CircleProgress')
 project(':SlideViewLib').projectDir = new File('WidgetLib/SlideViewLib')
-
+project(':FloatWindow').projectDir = new File('WidgetLib/FloatWindow')
 
 
 /* +++++++++ 框架基础工具库 +++++++++ */

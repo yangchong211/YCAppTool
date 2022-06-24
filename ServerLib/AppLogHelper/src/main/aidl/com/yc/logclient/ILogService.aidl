@@ -5,12 +5,16 @@ package com.yc.logclient;
 import com.yc.logclient.bean.AppLogBean;
 interface ILogService {
     /**
+    * 服务端提供的方法
     * 输出单个日志实体
     */
     void log(in AppLogBean bean);
 
      /**
        * 输出单个日志实体数组
+           1.定义的方法不能有修饰符
+           2.不能有方法体
+           3.除了基本数据类型，要加上方向参数  in 输入性（作为参数传入）  out 输出型（返回值
        */
     void logs(in List<AppLogBean> beans);
 

@@ -260,6 +260,7 @@ dependencies {
     implementation project(path: ':MonitorFpsLib')
     implementation project(path: ':AppCommonInter')
     implementation project(path: ':AppLogHelper')
+    implementation project(path: ':AppLogProcess')
     implementation project(path: ':MonitorTimeLib')
 //    implementation project(path: ':MonitorPrivacy')
     annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'

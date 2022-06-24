@@ -40,29 +40,19 @@ object LogToolUtils {
         var errorMsg: StringBuilder? = null
         var os: DataOutputStream? = null
         try {
-//            Log.d("feifei","---Runtime.getRuntime()");
             val runtime = Runtime.getRuntime()
-            //            Log.d("feifei","---Runtime.getRuntime() sucess");
-
-//            Log.d("feifei","---runtime.exe:"+(isRoot ? COMMAND_SU : COMMAND_SH));
             process = runtime.exec(if (isRoot) COMMAND_SU else COMMAND_SH)
-            //            Log.d("feifei","---runtime.exe finish");
             os = DataOutputStream(process.outputStream)
             for (command in commands) {
                 if (command == null) {
                     continue
                 }
-
-
-// donnot use os.writeBytes(commmand), avoid chinese charset error
                 os.write(command.toByteArray())
                 os.writeBytes(COMMAND_LINE_END)
                 os.flush()
             }
             os.writeBytes(COMMAND_EXIT)
             os.flush()
-
-//            Log.d("feifei","process.waitFor");
             result = process.waitFor()
             // get command result
             if (isNeedResultMsg) {
