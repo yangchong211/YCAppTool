@@ -4,6 +4,8 @@ package com.yc.privacymonitor.config;
 import android.content.Context;
 import android.util.Log;
 
+import com.yc.appcommoninter.ILogger;
+
 /**
  * <pre>
  *     @author 杨充
@@ -16,17 +18,22 @@ import android.util.Log;
 public final class PrivacyConfig {
 
     private final Context mApplication;
-    private final IPrivacyLogger mLogger;
+    private final ILogger mLogger;
 
     private PrivacyConfig(Builder builder) {
         this.mApplication = builder.mApplication;
         if (builder.mLogger != null) {
             this.mLogger = builder.mLogger;
         } else {
-            this.mLogger = new IPrivacyLogger() {
+            this.mLogger = new ILogger() {
                 @Override
                 public void log(String log) {
                     Log.i("PrivacyHelper: ",log);
+                }
+
+                @Override
+                public void error(String error) {
+                    Log.e("PrivacyHelper: ",error);
                 }
             };
         }
@@ -36,19 +43,19 @@ public final class PrivacyConfig {
         return this.mApplication;
     }
 
-    public IPrivacyLogger getLogger() {
+    public ILogger getLogger() {
         return this.mLogger;
     }
 
     public static class Builder {
         private final Context mApplication;
-        private IPrivacyLogger mLogger;
+        private ILogger mLogger;
 
         public Builder(Context context) {
             this.mApplication = context;
         }
 
-        public Builder setLogger(IPrivacyLogger logger) {
+        public Builder setLogger(ILogger logger) {
             this.mLogger = logger;
             return this;
         }

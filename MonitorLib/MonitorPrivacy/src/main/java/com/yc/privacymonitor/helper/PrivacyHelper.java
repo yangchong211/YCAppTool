@@ -1,7 +1,8 @@
 package com.yc.privacymonitor.helper;
 
 import android.content.Context;
-import com.yc.privacymonitor.config.IPrivacyLogger;
+
+import com.yc.appcommoninter.ILogger;
 import com.yc.privacymonitor.config.PrivacyConfig;
 import com.yc.privacymonitor.handler.MethodHookImpl;
 import com.yc.privacymonitor.bean.ClassMethodBean;
@@ -27,14 +28,14 @@ public final class PrivacyHelper {
     public static final String TAG = "PrivacyHelper";
     public static final MethodHookImpl DEFAULT_METHOD_HANDLER = new MethodHookImpl();
     private static Context sContext;
-    private static IPrivacyLogger sLogger;
+    private static ILogger sLogger;
     
     public static void init(PrivacyConfig config) {
         sContext = config.getApplication();
         sLogger = config.getLogger();
     }
 
-    public static IPrivacyLogger getLogger(){
+    public static ILogger getLogger(){
         return sLogger;
     }
 
