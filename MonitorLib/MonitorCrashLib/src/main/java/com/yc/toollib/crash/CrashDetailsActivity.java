@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.yc.activitymanager.ActivityManager;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.statusbar.bar.StateAppBar;
+import com.yc.toastutils.ToastUtils;
 import com.yc.toollib.R;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.file.FileSaveUtils;
@@ -118,7 +119,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
 
     private void initDatas() {
         showProgressLoading("加载中...");
-        new Thread(new Runnable() {
+        DelegateTaskExecutor.getInstance().executeOnDiskIO(new Runnable() {
             @Override
             public void run() {
                 dismissProgressLoading();
@@ -173,7 +174,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
             }
-        }).start();
+        });
     }
 
     private void initView() {
@@ -197,7 +198,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 shareLogs();
             } else {
-                Toast.makeText(CrashDetailsActivity.this, "权限已拒绝", Toast.LENGTH_SHORT).show();
+                ToastUtils.showRoundRectToast("权限已拒绝");
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
