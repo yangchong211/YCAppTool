@@ -32,9 +32,6 @@ android {
 
 }
 
-//configurations.all {
-//    resolutionStrategy.force 'com.android.support:support-annotations:26.1.0'
-//}
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -42,9 +39,9 @@ dependencies {
     implementation rootProject.ext.dependencies["okhttp"]
     implementation rootProject.ext.dependencies["gson"]
     implementation(rootProject.ext.dependencies["roomRuntime"])
-    implementation project(path: ':EventUploadLib')
     annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
+    implementation project(path: ':EventUploadLib')
     implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':SafeIntentLib')
+    implementation project(path: ':XlogServer')
     implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
 }

@@ -11,6 +11,7 @@ package com.yc.appcommoninter;
  * </pre>
  */
 public interface ILogger {
+
     /**
      * 普通log日志
      *
@@ -20,7 +21,8 @@ public interface ILogger {
 
     /**
      * 异常日志
-     * @param error
+     *
+     * @param error error信息
      */
     void error(String error);
 

@@ -25,14 +25,6 @@ public class CachingDateFormatter {
     }
 
     public final String format(long now) {
-        // SimpleDateFormat is not thread safe.
-
-        // See also the discussion in http://jira.qos.ch/browse/LBCLASSIC-36
-        // DateFormattingThreadedThroughputCalculator and
-        // SelectiveDateFormattingRunnable
-        // are also note worthy
-
-        // The now == mLastTimeStamp guard minimizes synchronization
         synchronized (this) {
             if (now != this.mLastTimeStamp) {
                 this.mLastTimeStamp = now;

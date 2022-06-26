@@ -17,15 +17,15 @@ public interface IExceptionTrack {
     /**
      * 异常上报
      *
-     * @param name 名称
-     * @param exception  异常
+     * @param name      名称
+     * @param exception 异常
      */
     void onException(String name, Exception exception);
 
     /**
      * 异常上报
      *
-     * @param exception  异常
+     * @param exception 异常
      */
     void onException(Exception exception);
 

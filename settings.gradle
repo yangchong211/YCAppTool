@@ -37,7 +37,7 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
-        ':AppLogHelper', ':AppLogProcess'
+        ':AppLogHelper', ':AppLogProcess', ':XlogUpload'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -53,7 +53,7 @@ project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')
 project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
 project(':OkHttpServer').projectDir = new File('ServerLib/OkHttpServer')
 project(':PrivateServer').projectDir = new File('ServerLib/PrivateServer')
-
+project(':XlogUpload').projectDir = new File('ServerLib/XlogUpload')
 
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':AppStatusLib',':ToolUtilsLib',

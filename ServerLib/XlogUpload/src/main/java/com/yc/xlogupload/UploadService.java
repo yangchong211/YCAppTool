@@ -1,11 +1,12 @@
-package com.yc.logging.upload;
+package com.yc.xlogupload;
 
 import android.content.Context;
 import androidx.annotation.RestrictTo;
 
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.eventuploadlib.ExceptionReporter;
-import com.yc.logging.upload.persist.*;
+import com.yc.toolutils.file.AppFileUtils;
+import com.yc.xlogupload.persist.*;
 import com.yc.logging.util.Debug;
 import com.yc.logging.util.LoggerUtils;
 
@@ -142,7 +143,7 @@ public class UploadService {
 
         int sliceIndex = record.getSliceId() + 1;
         String taskId = record.getTaskId();
-        String fileSize = LoggerUtils.formatFileSize(record.getFileSize());
+        String fileSize = AppFileUtils.getFormatSize(record.getFileSize());
         RequestManager.uploadTaskStatus(
                 taskId,
                 4,

@@ -1,6 +1,5 @@
 package com.yc.toolutils;
 
-import android.content.Context;
 import android.util.Log;
 
 /**
@@ -18,7 +17,7 @@ public final class StackTraceUtils {
      * 打印throwable堆栈日志
      * @param throwable     异常
      */
-    public static void print1(Throwable throwable) {
+    public static synchronized void print1(Throwable throwable) {
         //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
         //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
         StackTraceElement[] stackTraces = throwable.getStackTrace();
@@ -30,7 +29,7 @@ public final class StackTraceUtils {
      * 打印throwable堆栈日志
      * @param throwable     异常
      */
-    public static void print2(Throwable throwable) {
+    public static synchronized void print2(Throwable throwable) {
         //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
         //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
         StackTraceElement[] stackTraces = throwable.getStackTrace();
@@ -42,7 +41,7 @@ public final class StackTraceUtils {
      * 打印线程堆栈日志
      * @param thread        线程
      */
-    public static void print3(Thread thread) {
+    public static synchronized void print3(Thread thread) {
         //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
         //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
         StackTraceElement[] stackTraces = thread.getStackTrace();
@@ -54,7 +53,7 @@ public final class StackTraceUtils {
      * 打印线程堆栈日志
      * @param thread        线程
      */
-    public static void print4(Thread thread) {
+    public static synchronized void print4(Thread thread) {
         //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
         //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
         StackTraceElement[] stackTraces = thread.getStackTrace();
@@ -65,7 +64,7 @@ public final class StackTraceUtils {
     /**
      * 打印线程堆栈日志
      */
-    public static void print5() {
+    public static synchronized void print5() {
         Thread thread = Thread.currentThread();
         //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
         //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。
@@ -77,7 +76,7 @@ public final class StackTraceUtils {
     /**
      * 打印线程堆栈日志
      */
-    public static void print6() {
+    public static synchronized void print6() {
         String methodStack = getMethodStack();
         Log.i("print6",methodStack);
     }
@@ -86,7 +85,7 @@ public final class StackTraceUtils {
      * 获取当前线程的方法堆栈调用链路信息
      * @return          堆栈信息
      */
-    public static String getMethodStack() {
+    public static synchronized String getMethodStack() {
         Thread thread = Thread.currentThread();
         StringBuilder stringBuilder = new StringBuilder();
         //获取线程信息
@@ -100,7 +99,7 @@ public final class StackTraceUtils {
         return stringBuilder.toString();
     }
 
-    private static String getThreadInfo(Thread thread){
+    private static synchronized String getThreadInfo(Thread thread){
         StringBuilder stringBuilder = new StringBuilder();
         // 记录线程id
         stringBuilder.append("线程thread的id：").append(thread.getId()).append("\n");
@@ -157,30 +156,10 @@ public final class StackTraceUtils {
     private static String printToString2(StackTraceElement[] stackTraces) {
         StringBuilder result = new StringBuilder();
         for (StackTraceElement temp : stackTraces) {
-            result.append(temp.toString()).append("\n");
+            result.append(temp.toString())
+                    .append("\n");
         }
         return result.toString();
-    }
-
-
-    private static StackTraceElement parseThrowable(Throwable ex , Context context) {
-        if (ex == null || ex.getStackTrace().length == 0) {
-            return null;
-        }
-        if (context == null){
-            return null;
-        }
-        StackTraceElement[] stackTrace = ex.getStackTrace();
-        StackTraceElement element;
-        for (StackTraceElement ele : stackTrace) {
-            //只打印当前包名所在堆栈的信息
-            if (ele.getClassName().contains(context.getPackageName())) {
-                element = ele;
-                return element;
-            }
-        }
-        element = stackTrace[0];
-        return element;
     }
 
 

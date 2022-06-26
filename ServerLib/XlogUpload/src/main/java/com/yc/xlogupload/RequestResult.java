@@ -1,6 +1,7 @@
-package com.yc.logging.upload;
+package com.yc.xlogupload;
 
 class RequestResult<T> {
+
     private boolean success;
     private int code;
     private String msg;

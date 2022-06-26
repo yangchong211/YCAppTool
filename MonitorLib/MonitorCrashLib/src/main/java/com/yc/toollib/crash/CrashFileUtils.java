@@ -72,7 +72,7 @@ public final class CrashFileUtils {
     public static void saveCrashInfoInFile(Context context , Throwable ex){
         initCrashHead(context);
         initPhoneHead(context);
-        initThreadHead(context,ex);
+        initThreadHead(context);
         dumpExceptionToFile(context,ex);
         //saveCrashInfoToFile(context,ex);
     }
@@ -133,7 +133,7 @@ public final class CrashFileUtils {
     }
 
 
-    private static void initThreadHead(Context context, Throwable ex) {
+    private static void initThreadHead(Context context) {
         StringBuilder sb = new StringBuilder();
         sb.append("该App信息:");
         String currentProcessName = AppProcessUtils.getCurrentProcessName(context);

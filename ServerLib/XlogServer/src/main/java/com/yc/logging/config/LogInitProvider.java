@@ -6,10 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import androidx.annotation.NonNull;
-import androidx.annotation.RestrictTo;
+
 import android.util.Log;
 
-import com.yc.logging.upload.UploadTaskManager;
 
 public final class LogInitProvider extends ContentProvider {
 

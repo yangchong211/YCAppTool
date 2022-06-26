@@ -1,4 +1,4 @@
-package com.yc.logging.upload;
+package com.yc.xlogupload;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -55,17 +55,23 @@ public class FileRequestBody extends RequestBody {
 
     public static FileRequestBody create(final MediaType contentType, final File file,
             long offset, long contentLength) {
-        if (file == null) throw new NullPointerException("content == null");
+        if (file == null) {
+            throw new NullPointerException("content == null");
+        }
         return new FileRequestBody(contentType, file, offset, contentLength);
     }
 
     public static FileRequestBody create(final File file, long offset, long contentLength) {
-        if (file == null) throw new NullPointerException("content == null");
+        if (file == null) {
+            throw new NullPointerException("content == null");
+        }
         return new FileRequestBody(DEFAULT_CONTENT_TYPE, file, offset, contentLength);
     }
 
     public static FileRequestBody create(final File file) {
-        if (file == null) throw new NullPointerException("content == null");
+        if (file == null) {
+            throw new NullPointerException("content == null");
+        }
         return new FileRequestBody(DEFAULT_CONTENT_TYPE, file, 0, file.length());
     }
 }

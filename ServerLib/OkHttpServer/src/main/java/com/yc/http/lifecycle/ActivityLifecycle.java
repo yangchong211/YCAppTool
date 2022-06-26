@@ -17,8 +17,7 @@ import androidx.lifecycle.LifecycleRegistry;
  *    time   : 2020/09/01
  *    desc   : Activity 生命周期策略
  */
-public final class ActivityLifecycle implements
-        LifecycleOwner, LifecycleEventObserver,
+public final class ActivityLifecycle implements LifecycleOwner, LifecycleEventObserver,
         Application.ActivityLifecycleCallbacks {
 
     private final LifecycleRegistry mLifecycle = new LifecycleRegistry(this);

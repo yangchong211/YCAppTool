@@ -1,4 +1,4 @@
-package com.yc.logging.upload.persist;
+package com.yc.xlogupload.persist;
 
 import androidx.room.Database;
 import androidx.room.Room;

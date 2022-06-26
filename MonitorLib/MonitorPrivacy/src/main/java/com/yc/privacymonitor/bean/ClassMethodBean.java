@@ -1,12 +1,7 @@
 package com.yc.privacymonitor.bean;
 
-import android.os.Build;
-
-
-import androidx.annotation.RequiresApi;
-
+import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Objects;
 
 /**
  * <pre>
@@ -44,7 +39,6 @@ public final class ClassMethodBean {
         return methodGroup;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -54,13 +48,20 @@ public final class ClassMethodBean {
             return false;
         }
         ClassMethodBean that = (ClassMethodBean) o;
-        return Objects.equals(targetClassName, that.targetClassName);
+        return equals(targetClassName, that.targetClassName);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
-        return Objects.hash(targetClassName);
+        return hash(targetClassName);
+    }
+
+    private boolean equals(Object a, Object b) {
+        return (a == b) || (a != null && a.equals(b));
+    }
+
+    private int hash(Object... values) {
+        return Arrays.hashCode(values);
     }
 }
 

@@ -1,11 +1,10 @@
-package com.yc.logging.upload;
+package com.yc.xlogupload;
 
 import androidx.annotation.RestrictTo;
 import android.util.Pair;
 import com.yc.logging.config.LoggerContext;
 import com.yc.logging.LoggerFactory;
-import com.yc.logging.BuildConfig;
-import com.yc.logging.upload.persist.TaskRecord;
+import com.yc.xlogupload.persist.TaskRecord;
 import com.yc.logging.util.Debug;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

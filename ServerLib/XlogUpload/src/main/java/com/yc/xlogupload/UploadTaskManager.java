@@ -1,4 +1,4 @@
-package com.yc.logging.upload;
+package com.yc.xlogupload;
 
 import android.annotation.SuppressLint;
 import android.content.*;
@@ -16,7 +16,9 @@ import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.logging.config.LoggerConfig;
 import com.yc.logging.config.LoggerContext;
 import com.yc.logging.LoggerFactory;
-import com.yc.logging.upload.persist.*;
+import com.yc.toolutils.CollectionUtils;
+import com.yc.toolutils.net.AppNetworkUtils;
+import com.yc.xlogupload.persist.*;
 import com.yc.logging.util.*;
 import com.yc.toolutils.AppCleanUtils;
 import com.yc.toolutils.AppZipUtils;
@@ -29,8 +31,8 @@ import java.util.concurrent.TimeUnit;
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class UploadTaskManager extends BroadcastReceiver {
 
-    public static final String ACTION_UPLOAD_LOG = "bamai_upload_log";
-    public static final String ACTION_GET_TREE = "bamai_get_tree";
+    public static final String ACTION_UPLOAD_LOG = "yc_upload_log";
+    public static final String ACTION_GET_TREE = "yc_get_tree";
 
     @SuppressLint("StaticFieldLeak")
     private static UploadTaskManager sInstance;
@@ -172,13 +174,13 @@ public class UploadTaskManager extends BroadcastReceiver {
 
     private void startUploadService() {
         //mScheduledHandler.removeCallbacksAndMessages(null);
-        if (isNetworkConnected()) {
+        if (AppNetworkUtils.isConnected()) {
             UploadService.getInstance().start(mContext);
         }
     }
 
     void delayStart() {
-        if (!isNetworkConnected()) {
+        if (!AppNetworkUtils.isConnected()) {
             return;
         }
         mScheduledHandler.postDelayed(new Runnable() {
@@ -302,9 +304,9 @@ public class UploadTaskManager extends BroadcastReceiver {
 
             List<File> extraLogFiles = LoggerUtils.collectExtraLogFiles(LoggerFactory.getConfig().getExtraLogDir());
 
-            if (LoggerUtils.isEmpty(mainLogFiles)
-                    && LoggerUtils.isEmpty(secondaryLogFiles)
-                    && LoggerUtils.isEmpty(extraLogFiles)) {
+            if (CollectionUtils.isEmpty(mainLogFiles)
+                    && CollectionUtils.isEmpty(secondaryLogFiles)
+                    && CollectionUtils.isEmpty(extraLogFiles)) {
                 RequestManager.uploadTaskStatus(taskId, 101, "该任务时间段无待上传文件");
                 return;
             }
@@ -312,16 +314,16 @@ public class UploadTaskManager extends BroadcastReceiver {
             File zipFile = new File(LoggerContext.getDefault().getLogCacheDir(), taskId + ".zip");
             List<AppZipUtils.EntrySet> entrySets = new ArrayList<>();
 
-            if (!LoggerUtils.isEmpty(mainLogFiles)) {
+            if (!CollectionUtils.isEmpty(mainLogFiles)) {
                 File baseDir = LoggerContext.getDefault().getMainLogPathDir();
                 entrySets.add(new AppZipUtils.EntrySet(null, baseDir, mainLogFiles));
             }
 
-            if (!LoggerUtils.isEmpty(secondaryLogFiles)) {
+            if (!CollectionUtils.isEmpty(secondaryLogFiles)) {
                 entrySets.add(new AppZipUtils.EntrySet("secondary_log", secondaryLogPathDir, secondaryLogFiles));
             }
 
-            if (!LoggerUtils.isEmpty(extraLogFiles)) {
+            if (!CollectionUtils.isEmpty(extraLogFiles)) {
                 File baseDir = LoggerFactory.getConfig().getExtraLogDir();
                 entrySets.add(new AppZipUtils.EntrySet("extra_log", baseDir, extraLogFiles));
             }
@@ -418,11 +420,6 @@ public class UploadTaskManager extends BroadcastReceiver {
             File extraDir = config.getExtraLogDir();
             AppCleanUtils.cleanCustomCache(extraDir);
         }
-    }
-
-    private boolean isNetworkConnected() {
-        NetworkInfo networkInfo = mConnectivityManager.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isConnected();
     }
 
     private static void LOG(String msg) {
