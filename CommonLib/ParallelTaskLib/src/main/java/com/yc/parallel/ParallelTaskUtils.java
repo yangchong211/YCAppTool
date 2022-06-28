@@ -1,4 +1,4 @@
-package com.yc.appstart;
+package com.yc.parallel;
 
 
 import android.util.Log;
@@ -17,7 +17,7 @@ import java.util.List;
  * @revise :
  * GitHub ：https://github.com/yangchong211/YCEfficient
  */
-public final class AppTaskUtils {
+public final class ParallelTaskUtils {
 
     private static final String TAG = "AppStartTask ";
 
@@ -34,18 +34,18 @@ public final class AppTaskUtils {
      * taskChildHashMap每个Task的孩子  （key= Class < ? extends AppStartTask>）
      * deque 入度为0的Task
      */
-    public static List<AppStartTask> getSortResult(
-            List<AppStartTask> startTaskList,
-            HashMap<Class<? extends AppStartTask>, AppStartTask> taskHashMap,
-            HashMap<Class<? extends AppStartTask>, List<Class<? extends AppStartTask>>> taskChildHashMap) {
-        List<AppStartTask> sortTaskList = new ArrayList<>();
-        HashMap<Class<? extends AppStartTask>, TaskSortModel> taskIntegerHashMap = new HashMap<>();
-        Deque<Class<? extends AppStartTask>> deque = new ArrayDeque<>();
-        for (AppStartTask task : startTaskList) {
+    public static List<AbsParallelTask> getSortResult(
+            List<AbsParallelTask> startTaskList,
+            HashMap<Class<? extends AbsParallelTask>, AbsParallelTask> taskHashMap,
+            HashMap<Class<? extends AbsParallelTask>, List<Class<? extends AbsParallelTask>>> taskChildHashMap) {
+        List<AbsParallelTask> sortTaskList = new ArrayList<>();
+        HashMap<Class<? extends AbsParallelTask>, TaskSortModel> taskIntegerHashMap = new HashMap<>();
+        Deque<Class<? extends AbsParallelTask>> deque = new ArrayDeque<>();
+        for (AbsParallelTask task : startTaskList) {
             if (!taskIntegerHashMap.containsKey(task.getClass())) {
                 taskHashMap.put(task.getClass(), task);
                 taskIntegerHashMap.put(task.getClass(), new TaskSortModel(task.getDependsTaskList() == null ? 0 : task.getDependsTaskList().size()));
-                taskChildHashMap.put(task.getClass(), new ArrayList<Class<? extends AppStartTask>>());
+                taskChildHashMap.put(task.getClass(), new ArrayList<Class<? extends AbsParallelTask>>());
                 //入度为0的队列
                 TaskSortModel taskSortModel = taskIntegerHashMap.get(task.getClass());
                 if (taskSortModel != null && taskSortModel.getIn() == 0) {
@@ -56,10 +56,10 @@ public final class AppTaskUtils {
             }
         }
         //把孩子都加进去
-        for (AppStartTask task : startTaskList) {
+        for (AbsParallelTask task : startTaskList) {
             if (task.getDependsTaskList() != null) {
-                for (Class<? extends AppStartTask> aclass : task.getDependsTaskList()) {
-                    List<Class<? extends AppStartTask>> classes = taskChildHashMap.get(aclass);
+                for (Class<? extends AbsParallelTask> aclass : task.getDependsTaskList()) {
+                    List<Class<? extends AbsParallelTask>> classes = taskChildHashMap.get(aclass);
                     if (classes != null) {
                         classes.add(task.getClass());
                     }
@@ -68,13 +68,13 @@ public final class AppTaskUtils {
         }
         //循环去除入度0的，再把孩子入度变成0的加进去
         while (!deque.isEmpty()) {
-            Class<? extends AppStartTask> aclass = deque.poll();
+            Class<? extends AbsParallelTask> aclass = deque.poll();
             sortTaskList.add(taskHashMap.get(aclass));
-            List<Class<? extends AppStartTask>> classes = taskChildHashMap.get(aclass);
+            List<Class<? extends AbsParallelTask>> classes = taskChildHashMap.get(aclass);
             if (classes == null || classes.size() == 0) {
                 continue;
             }
-            for (Class<? extends AppStartTask> classChild : classes) {
+            for (Class<? extends AbsParallelTask> classChild : classes) {
                 TaskSortModel taskSortModel = taskIntegerHashMap.get(classChild);
                 if (taskSortModel != null) {
                     taskSortModel.setIn(taskSortModel.getIn() - 1);

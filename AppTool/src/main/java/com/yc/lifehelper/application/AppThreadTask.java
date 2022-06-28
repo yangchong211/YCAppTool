@@ -2,14 +2,14 @@ package com.yc.lifehelper.application;
 
 import android.os.Looper;
 
-import com.yc.appstart.AppStartTask;
+import com.yc.parallel.AbsParallelTask;
 import com.yc.autocloserlib.AppAutoCloser;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppThreadTask extends AppStartTask {
+public class AppThreadTask extends AbsParallelTask {
     @Override
     public void run() {
         //app 进入后台一定时间后执行退出或者重启操作，有助于释放内存，减少用户电量消耗
@@ -33,8 +33,8 @@ public class AppThreadTask extends AppStartTask {
     }
 
     @Override
-    public List<Class<? extends AppStartTask>> getDependsTaskList() {
-        List<Class<? extends AppStartTask>> dependsTaskList = new ArrayList<>();
+    public List<Class<? extends AbsParallelTask>> getDependsTaskList() {
+        List<Class<? extends AbsParallelTask>> dependsTaskList = new ArrayList<>();
         dependsTaskList.add(AppDelayTask.class);
         return dependsTaskList;
     }

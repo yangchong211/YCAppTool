@@ -1,4 +1,4 @@
-package com.yc.appstart;
+package com.yc.parallel;
 
 import java.io.Serializable;
 

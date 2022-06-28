@@ -2,13 +2,13 @@ package com.yc.lifehelper.application;
 
 import android.os.Looper;
 
-import com.yc.appstart.AppStartTask;
+import com.yc.parallel.AbsParallelTask;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppLazyTask extends AppStartTask {
+public class AppLazyTask extends AbsParallelTask {
 
     @Override
     public void run() {
@@ -30,8 +30,8 @@ public class AppLazyTask extends AppStartTask {
     }
 
     @Override
-    public List<Class<? extends AppStartTask>> getDependsTaskList() {
-        List<Class<? extends AppStartTask>> dependsTaskList = new ArrayList<>();
+    public List<Class<? extends AbsParallelTask>> getDependsTaskList() {
+        List<Class<? extends AbsParallelTask>> dependsTaskList = new ArrayList<>();
         dependsTaskList.add(AppDelayTask.class);
         return dependsTaskList;
     }

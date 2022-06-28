@@ -234,7 +234,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["AutoCloserLib"])
     //implementation project(path: ':AutoCloserLib')
 //    implementation(rootProject.ext.dependencies["AppStartLib"])
-    implementation project(path: ':AppStartLib')
+    implementation project(path: ':ParallelTaskLib')
     implementation project(path: ':MvpTodoBusiness')
     implementation project(path: ':MvvmDatabinding')
     implementation project(path: ':MvvmTodoLive')

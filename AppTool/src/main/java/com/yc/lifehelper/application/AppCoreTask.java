@@ -8,7 +8,7 @@ import com.yc.appcommoninter.ILogger;
 import com.yc.appcommoninter.IMonitorToggle;
 import com.yc.appprocesslib.AppStateLifecycle;
 import com.yc.appprocesslib.StateListener;
-import com.yc.appstart.AppStartTask;
+import com.yc.parallel.AbsParallelTask;
 import com.yc.activitymanager.ActivityManager;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.library.utils.AppLogHelper;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 
-public class AppCoreTask extends AppStartTask {
+public class AppCoreTask extends AbsParallelTask {
     @Override
     public void run() {
         long start = System.currentTimeMillis();
@@ -59,7 +59,7 @@ public class AppCoreTask extends AppStartTask {
     }
 
     @Override
-    public List<Class<? extends AppStartTask>> getDependsTaskList() {
+    public List<Class<? extends AbsParallelTask>> getDependsTaskList() {
         return null;
     }
 

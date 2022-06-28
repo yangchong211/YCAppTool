@@ -2,7 +2,7 @@ package com.yc.lifehelper.application;
 
 import android.os.Looper;
 
-import com.yc.appstart.AppStartTask;
+import com.yc.parallel.AbsParallelTask;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.toollib.crash.CrashHandler;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-public class AppMonitorTask extends AppStartTask {
+public class AppMonitorTask extends AbsParallelTask {
     @Override
     public void run() {
         long start = System.currentTimeMillis();
@@ -38,8 +38,8 @@ public class AppMonitorTask extends AppStartTask {
     }
 
     @Override
-    public List<Class<? extends AppStartTask>> getDependsTaskList() {
-        List<Class<? extends AppStartTask>> dependsTaskList = new ArrayList<>();
+    public List<Class<? extends AbsParallelTask>> getDependsTaskList() {
+        List<Class<? extends AbsParallelTask>> dependsTaskList = new ArrayList<>();
         dependsTaskList.add(AppCoreTask.class);
         return dependsTaskList;
     }

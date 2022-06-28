@@ -1,4 +1,4 @@
-package com.yc.appstart;
+package com.yc.parallel;
 
 import android.os.Process;
 
@@ -37,7 +37,7 @@ public interface TaskInterface {
      *
      * @return 集合
      */
-    List<Class<? extends AppStartTask>> getDependsTaskList();
+    List<Class<? extends AbsParallelTask>> getDependsTaskList();
 
     /**
      * 在非主线程执行的Task是否需要在被调用await的时候等待，默认不需要

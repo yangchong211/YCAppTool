@@ -36,7 +36,7 @@
 # 启动任务，在Application的oncreate中调用，Demo有完整的测试AppStartTask
 ## add顺序无所谓，不影响图的关系，注意await()会阻塞等待所有非主线程AppStartTask中needWait返回true的任务，所以需要按需使用，主线程的任务本来就是阻塞的，所以，如果不需要等待非主线程任务的执行，则不用重写AppStartTask的needWait方法，也不用调用AppStartTaskDispatcher.await()方法。
 ``` java
-AppStartTaskDispatcher.create()
+ParallelTaskDispatcher.create()
 		.setShowLog(true)
 		.setAllTaskWaitTimeOut(5000)
                 .addAppStartTask(new TestAppStartTaskTwo())

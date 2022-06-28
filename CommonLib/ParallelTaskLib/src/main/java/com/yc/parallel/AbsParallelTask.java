@@ -1,4 +1,4 @@
-package com.yc.appstart;
+package com.yc.parallel;
 
 import android.os.Process;
 
@@ -16,7 +16,7 @@ import java.util.concurrent.Executor;
  * @revise :
  * GitHub ：https://github.com/yangchong211/YCEfficient
  */
-public abstract class AppStartTask implements TaskInterface {
+public abstract class AbsParallelTask implements TaskInterface {
 
     /**
      * 当前Task依赖的Task数量（等父亲们执行完了，孩子才能执行），默认没有依赖
@@ -66,7 +66,7 @@ public abstract class AppStartTask implements TaskInterface {
     }
 
     @Override
-    public List<Class<? extends AppStartTask>> getDependsTaskList() {
+    public List<Class<? extends AbsParallelTask>> getDependsTaskList() {
         return null;
     }
 

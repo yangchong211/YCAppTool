@@ -3,7 +3,7 @@ package com.yc.lifehelper.application;
 import android.content.Context;
 import android.util.Log;
 
-import com.yc.appstart.AppTaskDispatcher;
+import com.yc.parallel.ParallelTaskDispatcher;
 import com.yc.library.base.app.LibApplication;
 import com.yc.localelib.service.LocaleService;
 import com.yc.tracesdk.TimeTrace;
@@ -36,7 +36,7 @@ public class MainApplication extends LibApplication {
         TimeTrace timeTrace = TimeTraceFactory.countByNanoseconds("MainApplication");
         timeTrace.step("start onCreate: %s");
         //执行task任务
-        AppTaskDispatcher.create()
+        ParallelTaskDispatcher.create()
                 .setShowLog(true)
                 .addAppStartTask(new AppCoreTask())
                 .addAppStartTask(new AppMonitorTask())

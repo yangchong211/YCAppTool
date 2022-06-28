@@ -57,7 +57,7 @@ project(':XlogUpload').projectDir = new File('ServerLib/XlogUpload')
 
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':AppStatusLib',':ToolUtilsLib',
-        'ComponentLib',':ApplicationLib',':AppStartLib',':AppBaseStore',
+        'ComponentLib',':ApplicationLib', ':ParallelTaskLib',':AppBaseStore',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
         ':ArchitectureLib',':ActivityManager',':AppFileLib',':EventUploadLib',
@@ -66,7 +66,7 @@ project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
-project(':AppStartLib').projectDir = new File('CommonLib/AppStartLib')
+project(':ParallelTaskLib').projectDir = new File('CommonLib/ParallelTaskLib')
 project(':AppBaseStore').projectDir = new File('CommonLib/AppBaseStore')
 project(':BaseClassLib').projectDir = new File('CommonLib/BaseClassLib')
 project(':ReflectionLib').projectDir = new File('CommonLib/ReflectionLib')

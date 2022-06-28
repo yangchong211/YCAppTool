@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.yc.apploglib.config.AppLogConfig;
 import com.yc.apploglib.config.AppLogFactory;
-import com.yc.appstart.AppStartTask;
+import com.yc.parallel.AbsParallelTask;
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.AppBatteryInfo;
 import com.yc.appstatuslib.info.AppThreadInfo;
@@ -19,7 +19,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppDelayTask extends AppStartTask {
+public class AppDelayTask extends AbsParallelTask {
 
     @Override
     public void run() {
@@ -75,8 +75,8 @@ public class AppDelayTask extends AppStartTask {
     }
 
     @Override
-    public List<Class<? extends AppStartTask>> getDependsTaskList() {
-        List<Class<? extends AppStartTask>> dependsTaskList = new ArrayList<>();
+    public List<Class<? extends AbsParallelTask>> getDependsTaskList() {
+        List<Class<? extends AbsParallelTask>> dependsTaskList = new ArrayList<>();
         dependsTaskList.add(AppMonitorTask.class);
         return dependsTaskList;
     }

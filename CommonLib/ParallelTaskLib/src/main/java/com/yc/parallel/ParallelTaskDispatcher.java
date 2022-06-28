@@ -1,4 +1,4 @@
-package com.yc.appstart;
+package com.yc.parallel;
 
 import android.os.Looper;
 
@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @revise :
  * GitHub ：https://github.com/yangchong211/YCEfficient
  */
-public final class AppTaskDispatcher {
+public final class ParallelTaskDispatcher {
 
     /**
      * 所有任务需要等待的时间
@@ -26,27 +26,27 @@ public final class AppTaskDispatcher {
     /**
      * 存放每个Task  （key= Class < ? extends AppStartTask>）
      */
-    private final HashMap<Class<? extends AppStartTask>, AppStartTask> mTaskHashMap;
+    private final HashMap<Class<? extends AbsParallelTask>, AbsParallelTask> mTaskHashMap;
     /**
      * 每个Task的孩子 （key= Class < ? extends AppStartTask>）
      */
-    private final HashMap<Class<? extends AppStartTask>, List<Class<? extends AppStartTask>>> mTaskChildHashMap;
+    private final HashMap<Class<? extends AbsParallelTask>, List<Class<? extends AbsParallelTask>>> mTaskChildHashMap;
     /**
      * 通过Add添加进来的所有任务
      */
-    private final List<AppStartTask> mStartTaskList;
+    private final List<AbsParallelTask> mStartTaskList;
     /**
      * 拓扑排序后的所有任务
      */
-    private List<AppStartTask> mSortTaskList;
+    private List<AbsParallelTask> mSortTaskList;
     /**
      * 拓扑排序后的主线程的任务
      */
-    private final List<AppStartTask> mSortMainThreadTaskList;
+    private final List<AbsParallelTask> mSortMainThreadTaskList;
     /**
      * 拓扑排序后的子线程的任务
      */
-    private final List<AppStartTask> mSortThreadPoolTaskList;
+    private final List<AbsParallelTask> mSortThreadPoolTaskList;
     /**
      * 需要等待的任务总数，用于阻塞
      */
@@ -68,12 +68,12 @@ public final class AppTaskDispatcher {
      */
     private boolean isShowLog;
 
-    public static synchronized AppTaskDispatcher create() {
+    public static synchronized ParallelTaskDispatcher create() {
         //使用单例模式
-        return new AppTaskDispatcher();
+        return new ParallelTaskDispatcher();
     }
 
-    private AppTaskDispatcher() {
+    private ParallelTaskDispatcher() {
         mTaskHashMap = new HashMap<>();
         mTaskChildHashMap = new HashMap<>();
         mStartTaskList = new ArrayList<>();
@@ -82,17 +82,17 @@ public final class AppTaskDispatcher {
         mSortThreadPoolTaskList = new ArrayList<>();
     }
 
-    public AppTaskDispatcher setAllTaskWaitTimeOut(long allTaskWaitTimeOut) {
+    public ParallelTaskDispatcher setAllTaskWaitTimeOut(long allTaskWaitTimeOut) {
         mAllTaskWaitTimeOut = allTaskWaitTimeOut;
         return this;
     }
 
-    public AppTaskDispatcher setShowLog(boolean showLog) {
+    public ParallelTaskDispatcher setShowLog(boolean showLog) {
         isShowLog = showLog;
         return this;
     }
 
-    public AppTaskDispatcher addAppStartTask(AppStartTask appStartTask) {
+    public ParallelTaskDispatcher addAppStartTask(AbsParallelTask appStartTask) {
         if (appStartTask == null) {
             throw new RuntimeException("addAppStartTask() 传入的appStartTask为null");
         }
@@ -103,13 +103,13 @@ public final class AppTaskDispatcher {
         return this;
     }
 
-    public AppTaskDispatcher start() {
+    public ParallelTaskDispatcher start() {
         if (Looper.getMainLooper() != Looper.myLooper()) {
             throw new RuntimeException("start方法必须在主线程调用");
         }
         mStartTime = System.currentTimeMillis();
         //拓扑排序，拿到排好序之后的任务队列
-        mSortTaskList = AppTaskUtils.getSortResult(mStartTaskList, mTaskHashMap, mTaskChildHashMap);
+        mSortTaskList = ParallelTaskUtils.getSortResult(mStartTaskList, mTaskHashMap, mTaskChildHashMap);
         initRealSortTask();
         printSortTask();
         mCountDownLatch = new CountDownLatch(mNeedWaitCount.get());
@@ -121,7 +121,7 @@ public final class AppTaskDispatcher {
      * 分别处理主线程和子线程的任务
      */
     private void initRealSortTask() {
-        for (AppStartTask appStartTask : mSortTaskList) {
+        for (AbsParallelTask appStartTask : mSortTaskList) {
             if (appStartTask.isRunOnMainThread()) {
                 mSortMainThreadTaskList.add(appStartTask);
             } else {
@@ -143,7 +143,7 @@ public final class AppTaskDispatcher {
             }
             sb.append(taskName);
         }
-        AppTaskUtils.showLog(isShowLog, sb.toString());
+        ParallelTaskUtils.showLog(isShowLog, sb.toString());
     }
 
     /**
@@ -151,14 +151,14 @@ public final class AppTaskDispatcher {
      */
     private void dispatchAppStartTask() {
         //再发送非主线程的任务
-        for (AppStartTask appStartTask : mSortThreadPoolTaskList) {
-            AppTaskRunnable runnable = new AppTaskRunnable(appStartTask, this);
+        for (AbsParallelTask appStartTask : mSortThreadPoolTaskList) {
+            TaskRunnable runnable = new TaskRunnable(appStartTask, this);
             //提交一个事务
             appStartTask.runOnExecutor().execute(runnable);
         }
         //再发送主线程的任务，防止主线程任务阻塞，导致子线程任务不能立刻执行
-        for (AppStartTask appStartTask : mSortMainThreadTaskList) {
-            new AppTaskRunnable(appStartTask, this).run();
+        for (AbsParallelTask appStartTask : mSortMainThreadTaskList) {
+            new TaskRunnable(appStartTask, this).run();
         }
     }
 
@@ -166,11 +166,11 @@ public final class AppTaskDispatcher {
      * 通知Children一个前置任务已完成
      * @param appStartTask      task
      */
-    void setNotifyChildren(AppStartTask appStartTask) {
-        List<Class<? extends AppStartTask>> arrayList = mTaskChildHashMap.get(appStartTask.getClass());
+    void setNotifyChildren(AbsParallelTask appStartTask) {
+        List<Class<? extends AbsParallelTask>> arrayList = mTaskChildHashMap.get(appStartTask.getClass());
         if (arrayList != null && arrayList.size() > 0) {
-            for (Class<? extends AppStartTask> aclass : arrayList) {
-                AppStartTask startTask = mTaskHashMap.get(aclass);
+            for (Class<? extends AbsParallelTask> aclass : arrayList) {
+                AbsParallelTask startTask = mTaskHashMap.get(aclass);
                 if (startTask != null) {
                     startTask.notifyTask();
                 }
@@ -182,8 +182,8 @@ public final class AppTaskDispatcher {
      * 标记已经完成的Task
      * @param appStartTask      task
      */
-    void markAppStartTaskFinish(AppStartTask appStartTask) {
-        AppTaskUtils.showLog(isShowLog, "任务完成了：" + appStartTask.getClass().getSimpleName());
+    void markAppStartTaskFinish(AbsParallelTask appStartTask) {
+        ParallelTaskUtils.showLog(isShowLog, "任务完成了：" + appStartTask.getClass().getSimpleName());
         if (ifNeedWait(appStartTask)) {
             mCountDownLatch.countDown();
             mNeedWaitCount.getAndDecrement();
@@ -195,7 +195,7 @@ public final class AppTaskDispatcher {
      * @param task      task任务
      * @return          是否阻塞
      */
-    private boolean ifNeedWait(AppStartTask task) {
+    private boolean ifNeedWait(AbsParallelTask task) {
         return !task.isRunOnMainThread() && task.needWait();
     }
 
@@ -212,7 +212,7 @@ public final class AppTaskDispatcher {
             }
             mCountDownLatch.await(mAllTaskWaitTimeOut, TimeUnit.MILLISECONDS);
             mFinishTime = System.currentTimeMillis() - mStartTime;
-            AppTaskUtils.showLog(isShowLog, "启动耗时：" + mFinishTime);
+            ParallelTaskUtils.showLog(isShowLog, "启动耗时：" + mFinishTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

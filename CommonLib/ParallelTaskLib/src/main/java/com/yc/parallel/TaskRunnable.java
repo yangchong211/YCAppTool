@@ -1,4 +1,4 @@
-package com.yc.appstart;
+package com.yc.parallel;
 
 import android.os.Process;
 
@@ -10,12 +10,12 @@ import android.os.Process;
  * @revise :
  * GitHub ：https://github.com/yangchong211/YCEfficient
  */
-public class AppTaskRunnable implements Runnable {
+public class TaskRunnable implements Runnable {
 
-    private final AppStartTask appStartTask;
-    private final AppTaskDispatcher appStartTaskDispatcher;
+    private final AbsParallelTask appStartTask;
+    private final ParallelTaskDispatcher appStartTaskDispatcher;
 
-    public AppTaskRunnable(AppStartTask appStartTask, AppTaskDispatcher appStartTaskDispatcher) {
+    public TaskRunnable(AbsParallelTask appStartTask, ParallelTaskDispatcher appStartTaskDispatcher) {
         this.appStartTask = appStartTask;
         this.appStartTaskDispatcher = appStartTaskDispatcher;
     }
