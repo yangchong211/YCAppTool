@@ -302,6 +302,18 @@ public class NotificationUtils extends ContextWrapper {
     }
 
     /**
+     * 判断是否开启悬浮通知
+     * @return
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public boolean isFloatImportance(){
+        if (channel.getImportance() == NotificationManager.IMPORTANCE_HIGH) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 判断通知是否是静默不重要的通知。
      * 主要是该类通知被用户手动给关闭
      *
@@ -335,6 +347,10 @@ public class NotificationUtils extends ContextWrapper {
         openChannelSetting(channel);
     }
 
+    /**
+     * 跳转到相关设置页面
+     * @param channel
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void openChannelSetting(NotificationChannel channel) {
         if (channel == null) {
