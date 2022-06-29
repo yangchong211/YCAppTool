@@ -23,7 +23,7 @@ import java.util.Locale;
  *     revise :
  * </pre>
  */
-public class LocaleServiceImpl implements LocaleServiceProvider {
+public class LocaleServiceImpl implements ILocaleService {
 
     /**
      * 应用上下文对象
@@ -34,6 +34,7 @@ public class LocaleServiceImpl implements LocaleServiceProvider {
     /**
      * 获取应用上下文
      */
+    @Override
     public Application getApplication() {
         return sApplication;
     }

@@ -56,6 +56,12 @@ public class TransferManager implements IRegister {
         apiImplementMap.clear();
     }
 
+    /**
+     * 使用动态代理
+     * @param tClass    当前class
+     * @param <T>       T
+     * @return          返回T
+     */
     public <T extends IRoute> T getApi(Class<T> tClass) {
         Class<? extends T> implementClass = apiImplementMap.get(tClass);
         if (RouteConstants.LOG){

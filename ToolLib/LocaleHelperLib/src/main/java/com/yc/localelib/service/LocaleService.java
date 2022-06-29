@@ -17,9 +17,9 @@ import java.util.Locale;
  *     revise :
  * </pre>
  */
-public final class LocaleService implements LocaleServiceProvider {
+public final class LocaleService implements ILocaleService {
 
-    private final LocaleServiceProvider mDelegate = new LocaleServiceImpl();
+    private final ILocaleService mDelegate = new LocaleServiceImpl();
 
     private LocaleService() {
 

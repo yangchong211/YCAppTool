@@ -19,7 +19,7 @@ import java.util.Locale;
  *     revise :
  * </pre>
  */
-public interface LocaleServiceProvider {
+public interface ILocaleService {
 
     /**
      * 初始化操作

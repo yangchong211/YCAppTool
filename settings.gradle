@@ -8,7 +8,7 @@ include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
         ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',':CommonBusiness',
         ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
         ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness', ':PlayerBusiness',
-        ':SocketBusiness',':LibraryLayer'
+        ':SocketBusiness',':DesignBusiness',':LibraryLayer'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -30,6 +30,7 @@ project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')
 project(':KotlinBusiness').projectDir = new File('Business/KotlinBusiness')
 project(':PlayerBusiness').projectDir = new File('Business/PlayerBusiness')
 project(':SocketBusiness').projectDir = new File('Business/SocketBusiness')
+project(':DesignBusiness').projectDir = new File('Business/DesignBusiness')
 project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 
 

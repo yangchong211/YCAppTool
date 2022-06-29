@@ -70,6 +70,7 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     };
 
     private DelegateTaskExecutor() {
+        //创建委托类
         mDefaultTaskExecutor = new DefaultTaskExecutor();
         mDelegate = mDefaultTaskExecutor;
     }

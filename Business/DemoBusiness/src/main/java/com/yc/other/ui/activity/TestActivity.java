@@ -108,6 +108,31 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         popMenu.showAtLocation(popMenuView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
+    private void test(){
+        DelegateSubject delegateSubject = new DelegateSubject();
+        delegateSubject.request();
+    }
 
+
+    public interface ISubject{
+        void request();
+    }
+
+    public class SubjectImpl implements ISubject{
+        @Override
+        public void request() {
+            System.out.println("request");
+        }
+    }
+
+    public class DelegateSubject implements ISubject{
+
+        private final ISubject subject = new SubjectImpl();
+
+        @Override
+        public void request() {
+            subject.request();
+        }
+    }
 
 }

@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicLong;
  *     @author yangchong
  *     email  : yangchong211@163.com
  *     time   : 2019/5/11
- *     desc   : task具体实现类
+ *     desc   : task具体实现类，委托类
  *     revise :
  *     GitHub : https://github.com/yangchong211/YCThreadPool
  * </pre>
