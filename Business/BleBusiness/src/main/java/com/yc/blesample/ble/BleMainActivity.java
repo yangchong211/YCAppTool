@@ -126,6 +126,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 //开始扫描
                 checkPermissions();
             } else if (btn_scan.getText().equals(getString(R.string.stop_scan))) {
+                //停止扫描
                 BleManager.getInstance().cancelScan();
             }
         } else if (id == R.id.txt_setting) {
@@ -215,8 +216,10 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
     private void showConnectedDevice() {
         List<BleDevice> deviceList = BleManager.getInstance().getAllConnectedDevice();
         mDeviceAdapter.clearConnectedDevice();
-        for (BleDevice bleDevice : deviceList) {
-            mDeviceAdapter.addDevice(bleDevice);
+        if (deviceList != null) {
+            for (BleDevice bleDevice : deviceList) {
+                mDeviceAdapter.addDevice(bleDevice);
+            }
         }
         mDeviceAdapter.notifyDataSetChanged();
     }
@@ -341,13 +344,10 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
 
                 if (isActiveDisConnected) {
                     tvContent.setText("断开了");
-                    Toast.makeText(BleMainActivity.this, getString(R.string.active_disconnected), Toast.LENGTH_LONG).show();
                 } else {
                     tvContent.setText("连接断开");
-                    Toast.makeText(BleMainActivity.this, getString(R.string.disconnected), Toast.LENGTH_LONG).show();
                     ObserverManager.getInstance().notifyObserver(bleDevice);
                 }
-
             }
         });
     }

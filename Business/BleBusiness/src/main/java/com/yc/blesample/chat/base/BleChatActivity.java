@@ -41,25 +41,13 @@ import java.util.Set;
 public class BleChatActivity extends AppCompatActivity {
 
     public static final String TAG = "GitCode";
-
     public static final int REQUEST_BLE_OPEN = 1;
-
     private ListView lvBle;
-
     private Button btnSearch;
-
-    private TextView tvDevice;
-
     private List<BluetoothDevice> list;
-
-    private Set<String> set = new HashSet<>();
-
     private BleAdapter bleAdapter;
-
     private BluetoothAdapter mBluetoothAdapter;
-
     private BluetoothLeScanner scanner;
-
     private BluetoothDevice selectedDevice;
 
     public static final int REQUEST_ACCESS_COARSE_LOCATION_PERMISSION = 100;
@@ -70,25 +58,15 @@ public class BleChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_ble);
-
         isSupportBle();
-
         bindView();
-
         initData();
-
         initView();
-
         registerBluetoothReceiver();
-
         requestPermissions();
-
         startDiscovery();
-
         beDiscovered();
-
         startAcceptService();
-
     }
 
     //启动监听蓝牙连接服务
@@ -190,7 +168,7 @@ public class BleChatActivity extends AppCompatActivity {
 
         btnSearch = findViewById(R.id.btnSearch);
 
-        tvDevice = findViewById(R.id.tvDevice);
+        TextView tvDevice = findViewById(R.id.tvDevice);
     }
 
     private void initView() {

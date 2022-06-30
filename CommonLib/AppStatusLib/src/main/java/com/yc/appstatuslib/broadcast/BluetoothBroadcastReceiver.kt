@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import com.yc.appstatuslib.AppStatusManager
 
 /**
@@ -25,7 +26,9 @@ class BluetoothBroadcastReceiver(private val mManager: AppStatusManager?) : Broa
             BluetoothDevice.ACTION_ACL_DISCONNECTED -> notifyBluetoothSwitchState(false)
             //上面的两个链接监听，其实也可以BluetoothAdapter实现，修改状态码即可
             BluetoothAdapter.ACTION_STATE_CHANGED -> {
-                when (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, 0)) {
+                val state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
+                Log.d("BluetoothReceiver" , state.toString())
+                when (state) {
                     BluetoothAdapter.STATE_OFF -> notifyBluetoothSwitchState(false)
                     BluetoothAdapter.STATE_ON -> notifyBluetoothSwitchState(true)
                     else -> {

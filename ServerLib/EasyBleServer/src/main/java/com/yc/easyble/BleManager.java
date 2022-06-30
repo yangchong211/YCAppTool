@@ -322,6 +322,7 @@ public final class BleManager {
             return;
         }
 
+        //首先拿到配置的规则
         UUID[] serviceUuids = bleScanRuleConfig.getServiceUuids();
         String[] deviceNames = bleScanRuleConfig.getDeviceNames();
         String deviceMac = bleScanRuleConfig.getDeviceMac();

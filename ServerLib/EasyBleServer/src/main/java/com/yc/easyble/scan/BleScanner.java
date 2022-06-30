@@ -2,6 +2,11 @@ package com.yc.easyble.scan;
 
 
 import android.annotation.TargetApi;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanResult;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,11 +26,11 @@ import java.util.UUID;
 public class BleScanner {
 
     public static BleScanner getInstance() {
-        return BleScannerHolder.sBleScanner;
+        return BleScannerHolder.S_BLE_SCANNER;
     }
 
     private static class BleScannerHolder {
-        private static final BleScanner sBleScanner = new BleScanner();
+        private static final BleScanner S_BLE_SCANNER = new BleScanner();
     }
 
     private BleScanState mBleScanState = BleScanState.STATE_IDLE;
@@ -118,15 +123,61 @@ public class BleScanner {
         }
 
         mBleScanPresenter.prepare(names, mac, fuzzy, needConnect, timeOut, imp);
+        BluetoothAdapter bluetoothAdapter = BleManager.getInstance().getBluetoothAdapter();
+        //是否扫描成功启动
+        boolean success = bluetoothAdapter.startLeScan(serviceUuids, mBleScanPresenter);
 
-        boolean success = BleManager.getInstance().getBluetoothAdapter()
-                .startLeScan(serviceUuids, mBleScanPresenter);
+        //使用默认参数启动蓝牙LE扫描，不使用过滤器。扫描结果将通过{@code回调}传递。对于未过滤的扫描，扫描在屏幕关闭时停止，以节省电力。
+        //当屏幕再次打开时，将恢复扫描。
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            BluetoothLeScanner bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+//            bluetoothLeScanner.startScan(new ScanCallback() {
+//                /**
+//                 * 发现有蓝牙设备时回调
+//                 * @param callbackType      type类型
+//                 * @param result            结果
+//                 */
+//                @Override
+//                public void onScanResult(int callbackType, ScanResult result) {
+//                    super.onScanResult(callbackType, result);
+//                    BluetoothDevice device = result.getDevice();
+//                }
+//
+//                /**
+//                 * 在交付批处理结果时回调
+//                 * @param results   先前扫描的扫描结果列表
+//                 */
+//                @Override
+//                public void onBatchScanResults(List<ScanResult> results) {
+//                    super.onBatchScanResults(results);
+//                }
+//
+//                /**
+//                 * 扫描失败回调
+//                 * @param errorCode     异常码
+//                 */
+//                @Override
+//                public void onScanFailed(int errorCode) {
+//                    super.onScanFailed(errorCode);
+//                }
+//            });
+        }
         mBleScanState = success ? BleScanState.STATE_SCANNING : BleScanState.STATE_IDLE;
         mBleScanPresenter.notifyScanStarted(success);
     }
 
     public synchronized void stopLeScan() {
-        BleManager.getInstance().getBluetoothAdapter().stopLeScan(mBleScanPresenter);
+        BluetoothAdapter bluetoothAdapter = BleManager.getInstance().getBluetoothAdapter();
+        bluetoothAdapter.stopLeScan(mBleScanPresenter);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            BluetoothLeScanner bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+//            bluetoothLeScanner.stopScan(new ScanCallback() {
+//                @Override
+//                public void onScanResult(int callbackType, ScanResult result) {
+//                    super.onScanResult(callbackType, result);
+//                }
+//            });
+        }
         mBleScanState = BleScanState.STATE_IDLE;
         mBleScanPresenter.notifyScanStopped();
     }

@@ -92,7 +92,6 @@ public final class X5WebUtils {
             };
             //x5内核初始化接口
             QbSdk.initX5Environment(context, cb);
-            ToastUtils.init(application);
             X5WebView.isLongClick = true;
             X5LogUtils.setIsLog(true);
         } else {

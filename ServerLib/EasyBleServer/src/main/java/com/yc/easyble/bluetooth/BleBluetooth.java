@@ -1,11 +1,13 @@
 package com.yc.easyble.bluetooth;
 
 import android.annotation.TargetApi;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothProfile;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -163,14 +165,23 @@ public class BleBluetooth {
         addConnectGattCallback(callback);
 
         lastState = LastState.CONNECT_CONNECTING;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            bluetoothGatt = bleDevice.getDevice().connectGatt(BleManager.getInstance().getContext(),
-                    autoConnect, coreGattCallback, TRANSPORT_LE);
+        BluetoothDevice bluetoothDevice = bleDevice.getDevice();
+        Context context = BleManager.getInstance().getContext();
+        //connectGatt 蓝牙链接比较核心方法
+        //连接到此设备托管的GATT服务器
+        //该方法返回一个BluetoothGatt实例。您可以使用BluetoothGatt来执行GATT客户端操作。
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            bluetoothGatt = bluetoothDevice.connectGatt(context, autoConnect, coreGattCallback, BluetoothDevice.TRANSPORT_LE, BluetoothDevice.PHY_LE_1M_MASK);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            bluetoothGatt = bluetoothDevice.connectGatt(context, autoConnect, coreGattCallback, BluetoothDevice.TRANSPORT_LE);
         } else {
-            bluetoothGatt = bleDevice.getDevice().connectGatt(BleManager.getInstance().getContext(),
-                    autoConnect, coreGattCallback);
+            bluetoothGatt = bluetoothDevice.connectGatt(context, autoConnect, coreGattCallback);
         }
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bluetoothGatt = bluetoothDevice.connectGatt(context, autoConnect, coreGattCallback, TRANSPORT_LE);
+        } else {
+            bluetoothGatt = bluetoothDevice.connectGatt(context, autoConnect, coreGattCallback);
+        }*/
         if (bluetoothGatt != null) {
             if (bleGattCallback != null) {
                 bleGattCallback.onStartConnect();
@@ -185,8 +196,9 @@ public class BleBluetooth {
             closeBluetoothGatt();
             lastState = LastState.CONNECT_FAILURE;
             BleManager.getInstance().getMultipleBluetoothController().removeConnectingBle(BleBluetooth.this);
-            if (bleGattCallback != null)
+            if (bleGattCallback != null) {
                 bleGattCallback.onConnectFail(bleDevice, new OtherException("GATT connect exception occurred!"));
+            }
 
         }
         return bluetoothGatt;
@@ -261,8 +273,9 @@ public class BleBluetooth {
 
                         BleConnectStateParameter para = (BleConnectStateParameter) msg.obj;
                         int status = para.getStatus();
-                        if (bleGattCallback != null)
+                        if (bleGattCallback != null) {
                             bleGattCallback.onConnectFail(bleDevice, new ConnectException(bluetoothGatt, status));
+                        }
                     }
                 }
                 break;
@@ -282,8 +295,9 @@ public class BleBluetooth {
                     BleConnectStateParameter para = (BleConnectStateParameter) msg.obj;
                     boolean isActive = para.isActive();
                     int status = para.getStatus();
-                    if (bleGattCallback != null)
+                    if (bleGattCallback != null) {
                         bleGattCallback.onDisConnected(isActive, bleDevice, bluetoothGatt, status);
+                    }
                 }
                 break;
 
@@ -300,8 +314,9 @@ public class BleBluetooth {
                     lastState = LastState.CONNECT_FAILURE;
                     BleManager.getInstance().getMultipleBluetoothController().removeConnectingBle(BleBluetooth.this);
 
-                    if (bleGattCallback != null)
+                    if (bleGattCallback != null) {
                         bleGattCallback.onConnectFail(bleDevice, new TimeoutException());
+                    }
                 }
                 break;
 
@@ -329,9 +344,10 @@ public class BleBluetooth {
                     lastState = LastState.CONNECT_FAILURE;
                     BleManager.getInstance().getMultipleBluetoothController().removeConnectingBle(BleBluetooth.this);
 
-                    if (bleGattCallback != null)
+                    if (bleGattCallback != null) {
                         bleGattCallback.onConnectFail(bleDevice,
                                 new OtherException("GATT discover services exception occurred!"));
+                    }
                 }
                 break;
 
@@ -343,8 +359,9 @@ public class BleBluetooth {
 
                     BleConnectStateParameter para = (BleConnectStateParameter) msg.obj;
                     int status = para.getStatus();
-                    if (bleGattCallback != null)
+                    if (bleGattCallback != null) {
                         bleGattCallback.onConnectSuccess(bleDevice, bluetoothGatt, status);
+                    }
                 }
                 break;
 

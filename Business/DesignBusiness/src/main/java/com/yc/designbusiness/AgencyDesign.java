@@ -16,6 +16,10 @@ import java.lang.reflect.Proxy;
  */
 public class AgencyDesign {
 
+    /*-------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------静态代理---------------------------------*/
+    /*-------------------------------------------------------------------------------------------*/
+
     /**
      * 静态代理伪代码
      */
@@ -100,19 +104,26 @@ public class AgencyDesign {
 
 
     /*-------------------------------------------------------------------------------------------*/
+    /*------------------------------------------------动态代理------------------------------*/
+    /*-------------------------------------------------------------------------------------------*/
 
     /**
      * 动态代理伪代码
      */
     private void test2() {
         //1.创建委托对象
-        RealSubjectImpl realSubject = new RealSubjectImpl();
+        ISubject subject = new RealSubjectImpl1();
+        ISubject realSubject2 = new RealSubjectImpl1();
+        ISubject realSubject3 = new RealSubjectImpl1();
+
+
+
         //2.创建调用处理器对象
-        ProxyHandler handler = new ProxyHandler(realSubject);
+        ProxyHandler handler = new ProxyHandler(subject);
         //3.动态生成代理对象
         Subject proxySubject = (Subject) Proxy.newProxyInstance(
-                RealSubject.class.getClassLoader(),
-                RealSubject.class.getInterfaces(), handler);
+                subject.getClass().getClassLoader(),
+                subject.getClass().getInterfaces(), handler);
         //4.通过代理对象调用方法
         proxySubject.request();
     }
@@ -121,10 +132,24 @@ public class AgencyDesign {
         void request();
     }
 
-    static class RealSubjectImpl implements ISubject{
+    static class RealSubjectImpl1 implements ISubject{
         @Override
         public void request(){
-            System.out.println("request");
+            System.out.println("request real1");
+        }
+    }
+
+    static class RealSubjectImpl2 implements ISubject{
+        @Override
+        public void request(){
+            System.out.println("request real2");
+        }
+    }
+
+    static class RealSubjectImpl3 implements ISubject{
+        @Override
+        public void request(){
+            System.out.println("request real3");
         }
     }
 

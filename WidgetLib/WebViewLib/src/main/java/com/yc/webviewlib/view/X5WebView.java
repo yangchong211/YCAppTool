@@ -39,7 +39,6 @@ import com.yc.webviewlib.client.JsX5WebViewClient;
 import com.yc.webviewlib.helper.SaveImageProcessor;
 import com.yc.webviewlib.inter.InterValueCallback;
 import com.yc.webviewlib.tools.WebViewException;
-import com.yc.webviewlib.utils.ToastUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 

@@ -95,17 +95,26 @@ public abstract class BleScanPresenter implements BluetoothAdapter.LeScanCallbac
         return mBleScanPresenterImp;
     }
 
+    /**
+     * 回调方法
+     * @param device        蓝牙设备
+     * @param rssi          rssi
+     * @param scanRecord    scanRecord
+     */
     @Override
     public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
-        if (device == null)
+        if (device == null) {
             return;
+        }
 
-        if (!mHandling)
+        if (!mHandling) {
             return;
-
+        }
+        //将识别到的蓝牙包装成BleDevice对象
+        BleDevice bleDevice = new BleDevice(device, rssi, scanRecord, System.currentTimeMillis());
         Message message = mHandler.obtainMessage();
         message.what = BleMsg.MSG_SCAN_DEVICE;
-        message.obj = new BleDevice(device, rssi, scanRecord, System.currentTimeMillis());
+        message.obj = bleDevice;
         mHandler.sendMessage(message);
     }
 
@@ -116,16 +125,18 @@ public abstract class BleScanPresenter implements BluetoothAdapter.LeScanCallbac
         }
 
         if (!TextUtils.isEmpty(mDeviceMac)) {
-            if (!mDeviceMac.equalsIgnoreCase(bleDevice.getMac()))
+            if (!mDeviceMac.equalsIgnoreCase(bleDevice.getMac())) {
                 return;
+            }
         }
 
         if (mDeviceNames != null && mDeviceNames.length > 0) {
             AtomicBoolean equal = new AtomicBoolean(false);
             for (String name : mDeviceNames) {
                 String remoteName = bleDevice.getName();
-                if (remoteName == null)
+                if (remoteName == null) {
                     remoteName = "";
+                }
                 if (mFuzzy ? remoteName.contains(name) : remoteName.equals(name)) {
                     equal.set(true);
                 }
@@ -218,6 +229,7 @@ public abstract class BleScanPresenter implements BluetoothAdapter.LeScanCallbac
         mMainHandler.removeCallbacksAndMessages(null);
         mHandler.removeCallbacksAndMessages(null);
     }
+
 
     public abstract void onScanStarted(boolean success);
 

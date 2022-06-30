@@ -16,11 +16,11 @@ import android.widget.TextView;
 
 import com.yc.library.base.config.Constant;
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppWindowUtils;
 import com.yc.webviewlib.inter.BridgeHandler;
 import com.yc.webviewlib.inter.CallBackFunction;
 import com.yc.webviewlib.inter.InterWebListener;
-import com.yc.webviewlib.utils.ToastUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 import com.yc.webviewlib.view.X5WebView;

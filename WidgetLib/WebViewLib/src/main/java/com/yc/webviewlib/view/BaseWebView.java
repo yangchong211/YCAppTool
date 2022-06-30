@@ -22,10 +22,9 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebStorage;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewDatabase;
+import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.click.FastClickUtils;
 import com.yc.webviewlib.base.RequestInfo;
-import com.yc.webviewlib.helper.SaveImageProcessor;
-import com.yc.webviewlib.utils.FastClickUtils;
-import com.yc.webviewlib.utils.ToastUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 
@@ -301,6 +300,7 @@ public class BaseWebView extends WebView {
      * 夜间模式
      * @param dayOrNight                            true(日间模式)
      */
+    @Override
     public void setDayOrNight(boolean dayOrNight){
         // enable:true(日间模式)，enable：false（夜间模式）
         this.getSettingsExtension().setDayOrNight(dayOrNight);

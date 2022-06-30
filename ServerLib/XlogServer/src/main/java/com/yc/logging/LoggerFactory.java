@@ -7,7 +7,6 @@ import com.yc.logging.config.LoggerConfig;
 import com.yc.logging.config.LoggerContext;
 import com.yc.logging.logger.Logger;
 import com.yc.logging.logger.InternalLogger;
-import com.yc.logging.upload.UploadTaskManager;
 import com.yc.toolutils.ObjectsUtils;
 
 import java.lang.ref.WeakReference;
@@ -39,7 +38,6 @@ public abstract class LoggerFactory {
 
     public synchronized static void init2(Context context, LoggerConfig config) {
         init(context, config);
-        UploadTaskManager.getInstance().init(context);
     }
 
     public static boolean isInitial() {
