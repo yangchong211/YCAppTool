@@ -58,13 +58,13 @@ public class WebViewActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (mWebView!=null && mWebView.pageGoBack()){
-                mWebView.pageGoBack();
+            if (mWebView!=null && mWebView.canGoBack()){
+                mWebView.goBack();
+                return true;
             }
         }
-        return false;
+        return super.onKeyDown(keyCode, event);
     }
-
 
     public static void lunch(Activity activity, String url, String title) {
         Intent intent = new Intent(activity, WebViewActivity.class);

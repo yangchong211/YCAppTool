@@ -277,34 +277,6 @@ public final class X5WebUtils {
         int ERROR_PROXY = 1007;
     }
 
-    /**
-     * 判断是否为重定向url
-     *
-     * @param url 原始链接
-     * @return True                 为重定向链接
-     */
-    public static boolean shouldSkipUrl(@Nullable String url) {
-        if (TextUtils.isEmpty(url)) {
-            return true;
-        }
-        Uri uri = Uri.parse(url);
-        final String host = uri.getHost();
-        //skip redirect
-        if (!TextUtils.isEmpty(getKdtUnionUrl(uri))) {
-            return true;
-        }
-        //skip 'about:blank'
-        if (TextUtils.isEmpty(host)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Nullable
-    private static String getKdtUnionUrl(@NonNull Uri uri) {
-        return uri.isOpaque() ? null : uri.getQueryParameter("redirect_uri");
-    }
-
     public static boolean isMainThread() {
         return Looper.getMainLooper() == Looper.myLooper();
     }

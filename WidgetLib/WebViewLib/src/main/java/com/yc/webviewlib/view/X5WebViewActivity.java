@@ -58,9 +58,10 @@ public class X5WebViewActivity extends AppCompatActivity {
                 x5WebChromeClient.hideCustomView();
                 return true;
                 //返回网页上一页
-            } else if (mWebView.pageCanGoBack()) {
+            } else if (mWebView.canGoBack()) {
                 //退出网页
-                return mWebView.pageGoBack();
+                mWebView.goBack();
+                return false;
             } else {
                 handleFinish();
             }
@@ -153,9 +154,9 @@ public class X5WebViewActivity extends AppCompatActivity {
                 if (x5WebChromeClient!=null && x5WebChromeClient.inCustomView()) {
                     x5WebChromeClient.hideCustomView();
                     //返回网页上一页
-                } else if (mWebView.pageCanGoBack()) {
+                } else if (mWebView.canGoBack()) {
                     //退出网页
-                    mWebView.pageGoBack();
+                    mWebView.goBack();
                 } else {
                     handleFinish();
                 }

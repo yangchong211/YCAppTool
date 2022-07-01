@@ -317,84 +317,6 @@ public class X5WebView extends BridgeWebView {
     }
 
     /**
-     * WebView返回上一页.
-     * 1.强制在{@link WebView}初始化的前内不能关闭所在的Activity,
-     * 否则在Android6.x的手机上频繁快速打开/关闭所在的Activity会造成chrome内核崩溃, 崩溃后除非kill进程否则一直是白屏.
-     * 2.在Android4.4及以下版本的webview会出现调用{@link #goBack()}失效的问题, 这边采用{@link #loadUrl(String)}自建URL栈来处理这个问题.
-     *
-     * @return True 表示处理返回成功
-     */
-    public final boolean pageGoBack() {
-        if (mInitialized) {
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-                return getX5WebViewClient().pageGoBack(this);
-            } else {
-                if (!pageCanGoBack()) {
-                    return false;
-                } else if (X5WebUtils.shouldSkipUrl(getPreviousUrl())) {
-                    goBackOrForward(-2);
-                } else {
-                    goBack();
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 判断以前Url是否是有效的
-     * @return                          是否是有效的
-     */
-    public boolean validPreviousUrl() {
-        //获取webView加载栈
-        WebBackForwardList list = this.copyBackForwardList();
-        //获取当前加载在加载栈中的位置
-        final int curIndex = list.getCurrentIndex();
-        //获取上一个索引的位置
-        final int preIndex = curIndex > 0 ? curIndex - 1 : -1;
-        if (preIndex >= 0) {
-            //获取加载栈中第index页面
-            WebHistoryItem item = list.getItemAtIndex(preIndex);
-            return item != null && (!X5WebUtils.shouldSkipUrl(item.getUrl()) || preIndex != 0);
-        }
-        return false;
-    }
-
-    /**
-     * 获取先前的url
-     * @return                          先前的url
-     */
-    public String getPreviousUrl() {
-        //获取webView加载栈
-        WebBackForwardList list = this.copyBackForwardList();
-        //获取当前加载在加载栈中的位置
-        final int curIndex = list.getCurrentIndex();
-        //获取上一个索引的位置
-        final int preIndex = curIndex > 0 ? curIndex - 1 : -1;
-        if (preIndex >= 0) {
-            //获取加载栈中第index页面
-            WebHistoryItem item = list.getItemAtIndex(preIndex);
-            return item != null ? item.getUrl() : null;
-        }
-        return null;
-    }
-
-    /**
-     * 是否能返回上一页.
-     * 配合{@link #pageGoBack}使用.
-     *
-     * @return True 可以返回上一页
-     */
-    public final boolean pageCanGoBack() {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-            return getX5WebViewClient().pageCanGoBack();
-        } else {
-            return validPreviousUrl() && this.canGoBack();
-        }
-    }
-
-    /**
      * WebView 默认开启密码保存功能，但是存在漏洞。
      * 如果该功能未关闭，在用户输入密码时，会弹出提示框，询问用户是否保存密码，如果选择”是”，
      * 密码会被明文保到 /data/data/com.package.name/databases/webview.db 中，这样就有被盗取密码的危险
@@ -420,6 +342,7 @@ public class X5WebView extends BridgeWebView {
     /**
      * 销毁时候调用该方法
      */
+    @Override
     public void destroy() {
         try {
             //有音频播放的web页面的销毁逻辑

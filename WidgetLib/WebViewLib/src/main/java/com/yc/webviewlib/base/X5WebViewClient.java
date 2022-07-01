@@ -25,9 +25,6 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.tencent.smtt.export.external.interfaces.ClientCertRequest;
 import com.tencent.smtt.export.external.interfaces.HttpAuthHandler;
 import com.tencent.smtt.export.external.interfaces.SslError;
@@ -39,7 +36,7 @@ import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 import com.yc.webviewlib.helper.WebSchemeIntent;
 import com.yc.webviewlib.inter.InterWebListener;
-import com.yc.webviewlib.utils.EncodeUtils;
+import com.yc.toolutils.EncodeUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 
@@ -71,10 +68,6 @@ public class X5WebViewClient extends WebViewClient {
      */
     private boolean mIsLoading = false;
     /**
-     * 栈管理
-     */
-    private final WebViewStack webViewStack;
-    /**
      * 获取是否加载完毕
      *
      * @return 布尔值
@@ -101,7 +94,6 @@ public class X5WebViewClient extends WebViewClient {
     public X5WebViewClient(WebView webView, Context context) {
         this.context = context;
         this.webView = webView;
-        webViewStack = new WebViewStack();
         //将js对象与java对象进行映射
         //webView.addJavascriptInterface(new ImageJavascriptInterface(context), "imagelistener");
     }
@@ -237,8 +229,6 @@ public class X5WebViewClient extends WebViewClient {
             webListener.showErrorView(X5WebUtils.ErrorMode.NO_NET);
         }
         isLoadFinish = false;
-        webViewStack.popUrlStack();
-        webViewStack.recordUrl(url);
         mIsLoading = true;
     }
 
@@ -319,7 +309,6 @@ public class X5WebViewClient extends WebViewClient {
             //错误重定向循环
             if (errorCode == ERROR_REDIRECT_LOOP) {
                 //避免由于缓存造成的循环重定向
-                webViewStack.resolveRedirect(view);
                 return;
             }
         }
@@ -364,7 +353,6 @@ public class X5WebViewClient extends WebViewClient {
             //错误重定向循环
             if (error != null && error.getErrorCode() == ERROR_REDIRECT_LOOP) {
                 //避免由于缓存造成的循环重定向
-                webViewStack.resolveRedirect(view);
                 return;
             }
         }
@@ -476,24 +464,6 @@ public class X5WebViewClient extends WebViewClient {
             // handler.cancel();      //表示挂起连接，为默认方式
             // handler.handleMessage(null);    //可做其他处理
         }
-    }
-
-
-    /**
-     * 是否可以回退操作
-     * @return                      如果栈中数量大于2，则表示可以回退操作
-     */
-    public boolean pageCanGoBack() {
-        return webViewStack.pageCanGoBack();
-    }
-
-    /**
-     * 回退操作
-     * @param webView                           webView
-     * @return
-     */
-    public final boolean pageGoBack(@NonNull WebView webView) {
-        return webViewStack.pageCanGoBack();
     }
 
     /**

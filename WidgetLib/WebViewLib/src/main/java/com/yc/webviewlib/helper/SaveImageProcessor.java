@@ -28,7 +28,7 @@ import android.text.TextUtils;
 
 import com.tencent.smtt.sdk.WebView;
 import com.yc.toastutils.ToastUtils;
-import com.yc.webviewlib.utils.EncodeUtils;
+import com.yc.toolutils.EncodeUtils;
 import com.yc.webviewlib.utils.OkHttpUtils;
 import com.yc.webviewlib.utils.WebFileUtils;
 

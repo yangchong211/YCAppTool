@@ -10,12 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar">
-        <com.ycbjie.webviewlib.view.X5WebView
+        <com.yc.webviewlib.view.X5WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <!--仿微信横向进度条-->
-        <com.ycbjie.webviewlib.widget.WebProgress
+        <com.yc.webviewlib.widget.WebProgress
             android:id="@+id/progress"
             android:layout_width="match_parent"
             android:layout_height="3dp"/>

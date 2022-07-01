@@ -23,7 +23,7 @@ import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.sdk.WebView;
 import com.yc.webviewlib.bridge.BridgeUtil;
 import com.yc.webviewlib.bridge.WebJsMessage;
-import com.yc.webviewlib.utils.EncodeUtils;
+import com.yc.toolutils.EncodeUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 import com.yc.webviewlib.base.X5WebViewClient;

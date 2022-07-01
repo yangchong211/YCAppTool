@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package com.yc.webviewlib.utils;
+package com.yc.toolutils;
 
 import android.os.Build;
 import android.text.Html;
@@ -57,9 +57,9 @@ public final class EncodeUtils {
         try {
             return URLEncoder.encode(input, charsetName);
         } catch (UnsupportedEncodingException e) {
-            X5LogUtils.e("urlEncode"+e.getMessage());
+            AppLogUtils.e("urlEncode"+e.getMessage());
         } catch (Exception e) {
-            X5LogUtils.e("urlEncode"+e.getMessage());
+            AppLogUtils.e("urlEncode"+e.getMessage());
         }
         return "";
     }
@@ -85,9 +85,9 @@ public final class EncodeUtils {
         try {
             return URLDecoder.decode(input, charsetName);
         } catch (UnsupportedEncodingException e) {
-            X5LogUtils.e("urlDecode"+ e.getMessage());
+            AppLogUtils.e("urlDecode"+ e.getMessage());
         } catch (Exception e) {
-            X5LogUtils.e("urlDecode"+e.getMessage());
+            AppLogUtils.e("urlDecode"+e.getMessage());
         }
         return "";
     }
