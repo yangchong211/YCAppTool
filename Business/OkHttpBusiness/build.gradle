@@ -37,6 +37,7 @@ dependencies {
     implementation project(path: ':GsonServer')
     implementation project(path: ':ToolUtilsLib')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
+    implementation project(path: ':NetInterceptor')
 }
 
 

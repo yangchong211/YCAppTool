@@ -146,7 +146,7 @@ public class ExceptionUtils {
         } else if(e instanceof java.net.UnknownHostException){
             ex = new HttpException(e, ErrorCode.NETWORK_ERROR);
             //网络未连接
-            ex.setDisplayMessage("网络未连接");
+            ex.setDisplayMessage("未知网络未连接");
         } else if (e instanceof SocketTimeoutException) {
             ex = new HttpException(e, ErrorCode.NETWORK_ERROR);
             //网络未连接

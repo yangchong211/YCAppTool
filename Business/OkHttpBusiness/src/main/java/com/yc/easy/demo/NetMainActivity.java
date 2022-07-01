@@ -36,6 +36,8 @@ import com.yc.http.model.HttpMethod;
 import com.yc.http.model.HttpParams;
 import com.yc.http.model.ResponseClass;
 import com.yc.http.request.HttpRequest;
+import com.yc.netinterceptor.HttpLoggerLevel;
+import com.yc.netinterceptor.HttpLoggingInterceptor;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppToolUtils;
 
@@ -56,6 +58,7 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
         // 网络请求框架初始化
         IRequestServer server = new ReleaseServer();
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BASIC))
                 .build();
 
         EasyConfig.with(okHttpClient)

@@ -2,6 +2,7 @@
 include ':AppTool'
 include ':AppTest'
 
+
 /* +++++++++ 业务组件层 +++++++++ */
 include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
         ':VideoBusiness', ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
@@ -38,7 +39,7 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
-        ':AppLogHelper', ':AppLogProcess', ':XlogUpload'
+        ':AppLogHelper', ':AppLogProcess', ':XlogUpload', ':NetInterceptor'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -55,6 +56,9 @@ project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
 project(':OkHttpServer').projectDir = new File('ServerLib/OkHttpServer')
 project(':PrivateServer').projectDir = new File('ServerLib/PrivateServer')
 project(':XlogUpload').projectDir = new File('ServerLib/XlogUpload')
+project(':NetInterceptor').projectDir = new File('ServerLib/NetInterceptor')
+
+
 
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':AppStatusLib',':ToolUtilsLib',
@@ -125,6 +129,7 @@ project(':SlideViewLib').projectDir = new File('WidgetLib/SlideViewLib')
 project(':FloatWindow').projectDir = new File('WidgetLib/FloatWindow')
 
 
+
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,
@@ -150,6 +155,7 @@ project(':LocalShareLib').projectDir = new File('ToolLib/LocalShareLib')
 project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
 project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
 project(':LiveDataBus').projectDir = new File('ToolLib/LiveDataBus')
+
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -194,6 +200,8 @@ project(':MonitorPingLib').projectDir = new File('MonitorLib/MonitorPingLib')
 project(':MonitorFpsLib').projectDir = new File('MonitorLib/MonitorFpsLib')
 project(':MonitorPrivacy').projectDir = new File('MonitorLib/MonitorPrivacy')
 project(':MonitorTimeLib').projectDir = new File('MonitorLib/MonitorTimeLib')
+
+
 
 /* +++++++++ 音视频 +++++++++ */
 include ':VideoSqlLite',':VideoTool',':VideoCache',':AudioPlayer',
