@@ -1,6 +1,17 @@
 package com.yc.netinterceptor
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     GitHub : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : http输出信息level
+ *     revise:
+ * </pre>
+ */
 enum class HttpLoggerLevel {
+
     /** No logs. */
     NONE,
 

@@ -58,7 +58,7 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
         // 网络请求框架初始化
         IRequestServer server = new ReleaseServer();
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BASIC))
+                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BODY))
                 .build();
 
         EasyConfig.with(okHttpClient)

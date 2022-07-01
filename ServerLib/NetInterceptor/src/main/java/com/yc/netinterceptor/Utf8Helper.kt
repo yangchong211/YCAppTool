@@ -3,6 +3,16 @@ package com.yc.netinterceptor
 import okio.Buffer
 import java.io.EOFException
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     GitHub : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : 拓展函数
+ *     revise:
+ * </pre>
+ */
 internal fun Buffer.isProbablyUtf8(): Boolean {
     try {
         val prefix = Buffer()

@@ -13,14 +13,26 @@ import java.nio.charset.StandardCharsets
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     GitHub : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : 日志打印拦截器
+ *     revise:
+ * </pre>
+ */
 class HttpLoggingInterceptor @JvmOverloads constructor(
     private val logger: IHttpLogger = IHttpLogger.DEFAULT
 ) : Interceptor {
 
-    @Volatile private var headersToRedact = emptySet<String>()
+    @Volatile
+    private var headersToRedact = emptySet<String>()
 
     @set:JvmName("level")
-    private @Volatile var level = HttpLoggerLevel.NONE
+    @Volatile
+    private var level = HttpLoggerLevel.NONE
 
 
     fun redactHeader(name: String) {
@@ -53,6 +65,7 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
         val logBody = level == HttpLoggerLevel.BODY
         val logHeaders = logBody || level == HttpLoggerLevel.HEADERS
 
+        //请求体
         val requestBody = request.body
 
         val connection = chain.connection()
@@ -101,13 +114,15 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
                 if (buffer.isProbablyUtf8()) {
                     val contentType = requestBody.contentType()
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        val charset = contentType?.charset(StandardCharsets.UTF_8) ?: StandardCharsets.UTF_8
+                        val charset =
+                            contentType?.charset(StandardCharsets.UTF_8) ?: StandardCharsets.UTF_8
                         logger.log(buffer.readString(charset))
                     }
                     logger.log("--> END ${request.method} (${requestBody.contentLength()}-byte body)")
                 } else {
                     logger.log(
-                        "--> END ${request.method} (binary ${requestBody.contentLength()}-byte body omitted)")
+                        "--> END ${request.method} (binary ${requestBody.contentLength()}-byte body omitted)"
+                    )
                 }
             }
         }
@@ -127,7 +142,8 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
         val contentLength = responseBody.contentLength()
         val bodySize = if (contentLength != -1L) "$contentLength-byte" else "unknown-length"
         logger.log(
-            "<-- ${response.code}${if (response.message.isEmpty()) "" else ' ' + response.message} ${response.request.url} (${tookMs}ms${if (!logHeaders) ", $bodySize body" else ""})")
+            "<-- ${response.code}${if (response.message.isEmpty()) "" else ' ' + response.message} ${response.request.url} (${tookMs}ms${if (!logHeaders) ", $bodySize body" else ""})"
+        )
 
         if (logHeaders) {
             val headers = response.headers
@@ -165,7 +181,8 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
                     logger.log("")
                     val contentType = responseBody.contentType()
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        val charset: Charset = contentType?.charset(StandardCharsets.UTF_8) ?: StandardCharsets.UTF_8
+                        val charset: Charset =
+                            contentType?.charset(StandardCharsets.UTF_8) ?: StandardCharsets.UTF_8
                         logger.log(buffer.clone().readString(charset))
                     }
                 }
@@ -177,7 +194,6 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
                 }
             }
         }
-
         return response
     }
 

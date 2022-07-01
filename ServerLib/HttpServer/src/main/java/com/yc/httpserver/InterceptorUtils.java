@@ -28,29 +28,6 @@ public class InterceptorUtils {
 
 
     /**
-     * 请求头拦截器
-     * 使用addHeader()不会覆盖之前设置的header,若使用header()则会覆盖之前的header
-     * @return
-     */
-    public static Interceptor getRequestHeader() {
-        Interceptor headerInterceptor = new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request originalRequest = chain.request();
-                Request.Builder builder = originalRequest.newBuilder();
-                builder.addHeader("version", "1");
-                builder.addHeader("time", System.currentTimeMillis() + "");
-                String method = originalRequest.method();
-                RequestBody body = originalRequest.body();
-                Request.Builder requestBuilder = builder.method(method,body);
-                Request request = requestBuilder.build();
-                return chain.proceed(request);
-            }
-        };
-        return headerInterceptor;
-    }
-
-    /**
      * 统一请求拦截器
      * 统一的请求参数
      * 公共参数：可能接口有某些参数是公共的，不可能一个个接口都去加吧
