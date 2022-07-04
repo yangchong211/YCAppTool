@@ -66,10 +66,7 @@ public class DiffFragmentStateAdapter extends BaseFragmentStateAdapter {
         return super.containsItem(itemId);
     }
 
-    @Override
-    public void update(List<Fragment> newFragments) {
-        //super.update(newFragments);
-
+    public void diffUpdate(List<Fragment> newFragments){
         //助DiffUtil更新数据
         DiffUtil.Callback callback = new ViewPagerDiffCallback<>(mFragments, newFragments);
         //经过比对得到差异结果
@@ -79,6 +76,11 @@ public class DiffFragmentStateAdapter extends BaseFragmentStateAdapter {
         mFragments.addAll(newFragments);
         //将数据传给adapter，最终通过adapter.notifyItemXXX更新数据
         diff.dispatchUpdatesTo(this);
+    }
+
+    @Override
+    public void update(List<Fragment> newFragments) {
+        super.update(newFragments);
     }
 
 }

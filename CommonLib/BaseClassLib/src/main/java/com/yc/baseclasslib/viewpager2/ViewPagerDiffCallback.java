@@ -41,6 +41,8 @@ public class ViewPagerDiffCallback<T extends Fragment> extends DiffUtil.Callback
 
     /**
      * 判断item是否相同
+     * DiffUtil调用来决定两个对象是否代表相同的Item。true表示两个Item相同(表示View可以复用)，false表示不相同(View不可以复用)
+     * 例如，如果你的项目有唯一的id，这个方法应该检查它们的id是否相等。
      *
      * @param oldItemPosition 老数据
      * @param newItemPosition 新数据
@@ -56,7 +58,8 @@ public class ViewPagerDiffCallback<T extends Fragment> extends DiffUtil.Callback
     }
 
     /**
-     * 判断item的数据是否相同
+     * 比较两个Item是否有相同的内容(用于判断Item的内容是否发生了改变)，
+     * 该方法只有当areItemsTheSame (int, int)返回true时才会被调用。
      *
      * @param oldItemPosition 老数据
      * @param newItemPosition 新数据
