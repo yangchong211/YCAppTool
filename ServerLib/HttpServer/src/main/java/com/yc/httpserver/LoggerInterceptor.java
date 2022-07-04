@@ -38,8 +38,8 @@ public class LoggerInterceptor implements Interceptor {
                     if (isText(mediaType)) {
                         String resp = body.string();
                         Log.e(TAG, "Response Content[\nType: " + mediaType.toString() + ", \nContent: " + resp + " ]");
-                        body = ResponseBody.create(mediaType, resp);
-                        return response.newBuilder().body(body).build();
+                        Response build = response.newBuilder().body(ResponseBody.create(mediaType, resp)).build();
+                        return build;
                     } else {
                         Log.e(TAG, "Response Content[\nType: " + mediaType.toString() + ",\nContent: maybe [file part] , too large too print , ignored! ]");
                     }

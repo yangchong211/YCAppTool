@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.yc.netinterceptor.HttpLoggerLevel;
+import com.yc.netinterceptor.HttpLoggingInterceptor;
+
 import java.lang.reflect.Type;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -30,7 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * 作    者：杨充
  * 版    本：1.0
  * 创建日期：2016/5/18
- * 描    述：统一接口实例的管理类RetrofitWrapper
+ * 描    述：统一接口实例的管理类RetrofitWrapper，清科网络库
  * 修订历史：
  * 特性：
  * 单例形式创建Retrofit实例；
@@ -81,7 +84,7 @@ public class RetrofitWrapper {
         //builder.eventListenerFactory(NetworkListener.get());
         //builder.addNetworkInterceptor(new NetworkInterceptor());
         //拦截日志，依赖
-        builder.addInterceptor(new LoggerInterceptor());
+        builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BODY));
         OkHttpClient build = builder.build();
         builder.addInterceptor(InterceptorUtils.getCacheInterceptor());
         if (interceptors!=null && interceptors.size()>0){

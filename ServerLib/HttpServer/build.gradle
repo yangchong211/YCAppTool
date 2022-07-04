@@ -32,4 +32,5 @@ dependencies {
     implementation rootProject.ext.dependencies["retrofit-converter-gson"]
     implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
     implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':NetInterceptor')
 }

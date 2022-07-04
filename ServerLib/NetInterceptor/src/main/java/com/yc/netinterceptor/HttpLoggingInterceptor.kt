@@ -1,9 +1,7 @@
 package com.yc.netinterceptor
 
 import android.os.Build
-import okhttp3.Headers
-import okhttp3.Interceptor
-import okhttp3.Response
+import okhttp3.*
 import okhttp3.internal.http.promisesBody
 import okio.Buffer
 import okio.GzipSource
@@ -61,7 +59,23 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
         if (level == HttpLoggerLevel.NONE) {
             return chain.proceed(request)
         }
+        logForRequest(chain,request)
 
+        val startNs = System.nanoTime()
+        val response: Response
+        try {
+            response = chain.proceed(request)
+        } catch (e: Exception) {
+            logger.log("<-- HTTP FAILED: $e")
+            throw e
+        }
+        return logForResponse(startNs,response)
+    }
+
+    /**
+     * 打印request日志信息
+     */
+    private fun logForRequest(chain: Interceptor.Chain,request: Request) {
         val logBody = level == HttpLoggerLevel.BODY
         val logHeaders = logBody || level == HttpLoggerLevel.HEADERS
 
@@ -74,6 +88,8 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
         if (!logHeaders && requestBody != null) {
             requestStartMessage += " (${requestBody.contentLength()}-byte body)"
         }
+        logger.log("--> REQUEST START\n")
+        //--> GET https://www.wanandroid.com/wxarticle/chapters/json?token=6666666&id=190000
         logger.log(requestStartMessage)
 
         if (logHeaders) {
@@ -126,24 +142,45 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
                 }
             }
         }
+    }
 
-        val startNs = System.nanoTime()
-        val response: Response
-        try {
-            response = chain.proceed(request)
-        } catch (e: Exception) {
-            logger.log("<-- HTTP FAILED: $e")
-            throw e
-        }
-
+    /**
+     * 打印response日志信息
+     */
+    private fun logForResponse(startNs: Long,response: Response) : Response{
+        val logBody = level == HttpLoggerLevel.BODY
+        val logHeaders = logBody || level == HttpLoggerLevel.HEADERS
         val tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs)
-
         val responseBody = response.body!!
         val contentLength = responseBody.contentLength()
         val bodySize = if (contentLength != -1L) "$contentLength-byte" else "unknown-length"
-        logger.log(
-            "<-- ${response.code}${if (response.message.isEmpty()) "" else ' ' + response.message} ${response.request.url} (${tookMs}ms${if (!logHeaders) ", $bodySize body" else ""})"
-        )
+        //<-- 200 OK https://www.wanandroid.com/article/list/0/json (254ms)
+        val stringBuffer = StringBuffer()
+        stringBuffer.append("<-- ${response.code} ")
+        if (response.message.isEmpty()){
+            stringBuffer.append("")
+        } else {
+            stringBuffer.append(response.message+" ")
+        }
+
+        stringBuffer.append(response.request.url)
+        stringBuffer.append(" (${tookMs}ms")
+        if (!logHeaders){
+            stringBuffer.append(", $bodySize body)")
+        } else{
+            stringBuffer.append(")")
+        }
+        stringBuffer.append(" ")
+        val mediaType = responseBody.contentType()
+        if (mediaType != null) {
+            if (isText(mediaType)) {
+                val resp = responseBody.string()
+                stringBuffer.append(resp)
+                logger.log(stringBuffer.toString())
+                return response.newBuilder().body(ResponseBody.create(mediaType, resp)).build()
+            }
+        }
+        logger.log(stringBuffer.toString())
 
         if (logHeaders) {
             val headers = response.headers
@@ -201,6 +238,13 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
         val value = if (headers.name(i) in headersToRedact) "██" else headers.value(i)
         logger.log(headers.name(i) + ": " + value)
     }
+
+    private fun isText(mediaType: MediaType): Boolean {
+        return mediaType.type == "text" || (mediaType.subtype == "json" ||
+                mediaType.subtype == "xml" || mediaType.subtype == "html" ||
+                mediaType.subtype == "x-www-form-urlencoded")
+    }
+
 
     private fun bodyHasUnknownEncoding(headers: Headers): Boolean {
         val contentEncoding = headers["Content-Encoding"] ?: return false
