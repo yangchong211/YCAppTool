@@ -1,4 +1,4 @@
-package com.yc.widget.viewPager;
+package com.yc.baseclasslib.viewpager;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,14 +7,16 @@ import android.view.View;
 import androidx.viewpager.widget.ViewPager;
 
 
+
 /**
- * ================================================
- * 作    者：杨充
- * 版    本：1.0
- * 创建日期：2017/5/27
- * 描    述：自适应子View高度的viewPager
- * 修订历史：
- * ================================================
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     time  : 2018/11/9
+ *     desc  : 自适应子View高度的viewPager
+ *     revise:
+ * </pre>
  */
 public class AutoHeightViewPager extends ViewPager {
 

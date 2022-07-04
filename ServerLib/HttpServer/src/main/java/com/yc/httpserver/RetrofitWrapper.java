@@ -47,7 +47,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitWrapper {
 
     private Retrofit mRetrofit;
-    private OkHttpClient.Builder builder;
+    private OkHttpClient.Builder okHttpBuilder;
 
 
     /**
@@ -80,20 +80,20 @@ public class RetrofitWrapper {
      * @param url               baseUrl
      */
     public RetrofitWrapper(String url , ArrayList<Interceptor> interceptors) {
-        builder = new OkHttpClient.Builder();
+        okHttpBuilder = new OkHttpClient.Builder();
         //builder.eventListenerFactory(NetworkListener.get());
         //builder.addNetworkInterceptor(new NetworkInterceptor());
         //拦截日志，依赖
-        builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BODY));
-        OkHttpClient build = builder.build();
-        builder.addInterceptor(InterceptorUtils.getCacheInterceptor());
+        okHttpBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BODY));
+        OkHttpClient build = okHttpBuilder.build();
+        okHttpBuilder.addInterceptor(InterceptorUtils.getCacheInterceptor());
         if (interceptors!=null && interceptors.size()>0){
             for (Interceptor interceptor : interceptors){
-                builder.addInterceptor(interceptor);
+                okHttpBuilder.addInterceptor(interceptor);
             }
         }
         //添加自定义CookieJar
-        InterceptorUtils.addCookie(builder);
+        InterceptorUtils.addCookie(okHttpBuilder);
         initBuilder(url,build);
     }
 
@@ -103,10 +103,10 @@ public class RetrofitWrapper {
         initTimeOut();
         if(BuildConfig.DEBUG){
             //不需要错误重连
-            builder.retryOnConnectionFailure(false);
+            okHttpBuilder.retryOnConnectionFailure(false);
         }else {
             //错误重连
-            builder.retryOnConnectionFailure(true);
+            okHttpBuilder.retryOnConnectionFailure(true);
         }
         //获取实例
         mRetrofit = new Retrofit
@@ -157,13 +157,33 @@ public class RetrofitWrapper {
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, trustAllCerts, new SecureRandom());
             SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-            builder.sslSocketFactory(sslSocketFactory);
-            builder.hostnameVerifier(new HostnameVerifier() {
+            HostnameVerifier hostnameVerifier = new HostnameVerifier() {
                 @Override
                 public boolean verify(String hostname, SSLSession session) {
                     return true;
                 }
-            });
+            };
+            X509TrustManager x509TrustManager = new X509TrustManager() {
+                @Override
+                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+                }
+
+                @Override
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }
+            };
+            //不建议使用这个，方法过时，使用反射机制寻找X509信任管理类，消耗了不必要的性能。
+            okHttpBuilder.sslSocketFactory(sslSocketFactory);
+            //会传入信任管理类数组中的第一条
+            okHttpBuilder.sslSocketFactory(sslSocketFactory,x509TrustManager);
+            okHttpBuilder.hostnameVerifier(hostnameVerifier);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -174,11 +194,11 @@ public class RetrofitWrapper {
      * 设置读取超时时间，连接超时时间，写入超时时间值
      */
     private void initTimeOut() {
-        builder.readTimeout(20000, TimeUnit.SECONDS);
-        builder.connectTimeout(10000, TimeUnit.SECONDS);
-        builder.writeTimeout(20000, TimeUnit.SECONDS);
+        okHttpBuilder.readTimeout(20000, TimeUnit.SECONDS);
+        okHttpBuilder.connectTimeout(10000, TimeUnit.SECONDS);
+        okHttpBuilder.writeTimeout(20000, TimeUnit.SECONDS);
         //错误重连
-        builder.retryOnConnectionFailure(true);
+        okHttpBuilder.retryOnConnectionFailure(true);
     }
 
 

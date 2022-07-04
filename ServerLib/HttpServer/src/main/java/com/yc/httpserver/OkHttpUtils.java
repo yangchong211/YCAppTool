@@ -31,7 +31,7 @@ import okhttp3.ResponseBody;
  */
 public class OkHttpUtils {
 
-    private static OkHttpClient client = null;
+    private static OkHttpClient okHttpClient = null;
 
     private OkHttpUtils() {}
 
@@ -40,10 +40,10 @@ public class OkHttpUtils {
      * @return                  返回OkHttpClient实例对象
      */
     public static OkHttpClient getInstance() {
-        if (client == null) {
+        if (okHttpClient == null) {
             synchronized (OkHttpUtils.class) {
-                if (client == null){
-                    client = new OkHttpClient.Builder()
+                if (okHttpClient == null){
+                    okHttpClient = new OkHttpClient.Builder()
                             .addInterceptor(new LoggerInterceptor())
                             .connectTimeout(15, TimeUnit.SECONDS)
                             .writeTimeout(20, TimeUnit.SECONDS)
@@ -52,7 +52,31 @@ public class OkHttpUtils {
                 }
             }
         }
-        return client;
+        return okHttpClient;
+    }
+
+    /**
+     * 普通的get请求
+     * @param url               请求地址，比如：http://api.tianapi.com/social/?key=APIKEY&num=10
+     *
+     *                          使用场景：比如投资界，新芽的新闻，数据等详情页面用get请求
+     */
+    public static String getWebRequest(String url){
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            ResponseBody body = response.body();
+            String content = null;
+            if (body != null) {
+                content = body.toString();
+            }
+            return content;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -66,8 +90,7 @@ public class OkHttpUtils {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        Call call = getInstance().newCall(request);
-        call.enqueue(callback);
+        okHttpClient.newCall(request).enqueue(callback);
     }
 
 
@@ -94,8 +117,7 @@ public class OkHttpUtils {
                 .url(url)
                 .post(requestBody)
                 .build();
-        Call call = getInstance().newCall(request);
-        call.enqueue(callback);
+        okHttpClient.newCall(request).enqueue(callback);
     }
 
 

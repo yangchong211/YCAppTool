@@ -29,9 +29,11 @@ ext {
     constraintlayoutVersion = '1.1.3'
     recyclerviewVersion = '1.0.0'
     multidexVersion = '1.0.2'
+    viewpagerVersion = '1.0.0'
 
     //AndroidX系列ktx
     activityKtx = '1.4.0'
+
 
     //kotlin系列
     kotlin_version = '1.4.31'
@@ -68,6 +70,7 @@ ext {
             material                  : "com.google.android.material:material:${materialVersion}",
             swiperefreshlayout        : "androidx.swiperefreshlayout:swiperefreshlayout:${swiperefreshlayoutVersion}",
             "multidex"                : "com.android.support:multidex:$multidexVersion",
+            viewpager2                : "androidx.viewpager2:viewpager2:${viewpagerVersion}",
 
             //jetpack系列
             core                      : "androidx.core:core:${coreVersion}",
@@ -76,7 +79,7 @@ ext {
             databinding               : "androidx.databinding:databinding-common:${databindingVersion}",
             lifecycle                 : "androidx.lifecycle:lifecycle-extensions:${archLifecycleVersion}",
             lifecycleCompiler         : "androidx.lifecycle:lifecycle-common:${archLifecycleVersion}",
-            lifecycleCommon          : "androidx.lifecycle:lifecycle-runtime:${archLifecycleVersion}",
+            lifecycleCommon           : "androidx.lifecycle:lifecycle-runtime:${archLifecycleVersion}",
             lifecycleRuntime          : "androidx.lifecycle:lifecycle-runtime:${archLifecycleVersion}",
             livedataCore              : "androidx.lifecycle:lifecycle-livedata-core:${liveDataVersion}",
             livedataKtx               : "androidx.lifecycle:lifecycle-livedata-ktx:${liveDataVersion}",

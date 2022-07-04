@@ -3,6 +3,8 @@ package com.yc.lifehelper.application;
 import android.content.Context;
 import android.util.Log;
 
+import com.bumptech.glide.request.target.ViewTarget;
+import com.yc.lifehelper.R;
 import com.yc.parallel.ParallelTaskDispatcher;
 import com.yc.library.base.app.LibApplication;
 import com.yc.localelib.service.LocaleService;
@@ -35,6 +37,8 @@ public class MainApplication extends LibApplication {
         super.onCreate();
         TimeTrace timeTrace = TimeTraceFactory.countByNanoseconds("MainApplication");
         timeTrace.step("start onCreate: %s");
+        //fix java.lang.IllegalArgumentException: You must not call setTag() on a view Glide is targeting
+        ViewTarget.setTagId(R.id.glide_tag);
         //执行task任务
         ParallelTaskDispatcher.create()
                 .setShowLog(true)

@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.yc.apploglib.AppLogHelper;
 import com.yc.catonhelperlib.PerformanceActivity;
-import com.yc.leetbusiness.LeetCodeActivity;
 import com.yc.lifehelper.LocaleActivity;
 import com.yc.lifehelper.R;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -67,8 +66,7 @@ public class HeaderComponent implements InterItemView {
                     break;
                 //算法试题
                 case R.id.tv_home_five:
-                    LeetCodeActivity.startActivity(context);
-                    AppLogHelper.v("leet code");
+
                     break;
                 //卡顿
                 case R.id.tv_home_six:

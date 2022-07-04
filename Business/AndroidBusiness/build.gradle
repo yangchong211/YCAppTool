@@ -73,6 +73,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["lifecycle"])
     implementation(rootProject.ext.dependencies["lifecycleRuntime"])
     implementation(rootProject.ext.dependencies["gson"])
+    implementation(rootProject.ext.dependencies["viewpager2"])
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':HttpServer')

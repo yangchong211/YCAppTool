@@ -9,7 +9,7 @@ package com.yc.dialogfragment;
  *     GitHub: https://github.com/yangchong211/YCDialog
  * </pre>
  */
-public enum DialogLocal {
+public enum DialogLocalStyle {
 
     /**
      * 顶部

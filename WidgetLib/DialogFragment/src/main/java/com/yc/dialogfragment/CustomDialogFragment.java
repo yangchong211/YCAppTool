@@ -56,7 +56,7 @@ public class CustomDialogFragment extends BaseDialogFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setLocal(DialogLocal.CENTER);
+        setLocal(DialogLocalStyle.CENTER);
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             mHeight = savedInstanceState.getInt(KEY_HEIGHT);

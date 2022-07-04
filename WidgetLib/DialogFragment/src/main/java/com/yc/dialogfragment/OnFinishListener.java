@@ -14,6 +14,6 @@ public interface OnFinishListener {
     /**
      * 监听
      */
-    void listener();
+    void onFinish();
 
 }
