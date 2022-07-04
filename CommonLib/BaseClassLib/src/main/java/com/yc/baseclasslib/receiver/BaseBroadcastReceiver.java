@@ -14,7 +14,7 @@ import android.content.Intent;
  *     revise:
  * </pre>
  */
-public abstract class BaseReceiver extends BroadcastReceiver {
+public abstract class BaseBroadcastReceiver extends BroadcastReceiver {
 
     /**
      * 不建议做耗时操作。
