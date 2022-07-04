@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]

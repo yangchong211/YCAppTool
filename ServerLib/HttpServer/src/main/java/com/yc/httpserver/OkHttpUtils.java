@@ -126,7 +126,6 @@ public class OkHttpUtils {
      * @throws IOException
      */
     public ResponseBody upload(String url, File file) throws IOException {
-        OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("file", file.getName(),
@@ -136,7 +135,7 @@ public class OkHttpUtils {
                 .url(url)
                 .post(requestBody)
                 .build();
-        Response response = client.newCall(request).execute();
+        Response response = getInstance().newCall(request).execute();
         if (!response.isSuccessful()) {
             throw new IOException("Unexpected code " + response);
         }

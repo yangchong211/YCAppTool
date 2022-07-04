@@ -1,6 +1,4 @@
-plugins {
-    id 'com.android.library'
-}
+apply plugin: 'com.android.application'
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 
