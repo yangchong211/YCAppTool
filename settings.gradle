@@ -1,10 +1,11 @@
 /* +++++++++ 主项目 +++++++++ */
 include ':AppTool'
 include ':AppTest'
+include ':AppLeet'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
-include ':GameBusiness', ':AnimBusiness',':LeetBusiness',':MvvmDatabinding',
+include ':GameBusiness', ':AnimBusiness',':MvvmDatabinding',
         ':VideoBusiness', ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
         ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',':CommonBusiness',
         ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
@@ -16,7 +17,6 @@ project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
 project(':VideoBusiness').projectDir = new File('Business/VideoBusiness')
 project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
 project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
-project(':LeetBusiness').projectDir = new File('Business/LeetBusiness')
 project(':MvpTodoBusiness').projectDir = new File('Business/MvpTodoBusiness')
 project(':MvvmDatabinding').projectDir = new File('Business/MvvmDatabinding')
 project(':MvvmTodoLive').projectDir = new File('Business/MvvmTodoLive')
