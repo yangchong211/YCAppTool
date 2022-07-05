@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.yc.logclient.inter.ILogSend;
+import com.yc.logclient.state.ConnectingState;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.ServiceUtils;
 import com.yc.logclient.ILogService;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 /**
  * 职责描述: 将日志对象 从client端发送到server端
  */
-
 public class LogManager implements ILogSend, IBinder.DeathRecipient {
 
     private static final String TAG = LogManager.class.getSimpleName();
@@ -53,11 +53,11 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
      * MsgBean/String 占用内存设定的比例,用于调整打印字符串的单条字符串的大小。
      */
     public static float ratio = 1.2F;
-
-    private static LogManager instance;
-
-    //上下文
-    private Context mConext;
+    private volatile static LogManager instance;
+    /**
+     * 上下文
+     */
+    private final Context mContext;
     /**
      * LogCache缓存队列的长度
      * 当Logservice 是内部进程，启动晚于主进程，为了保证不丢日志
@@ -93,31 +93,9 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
      */
     private ConnectingState mConnectState = ConnectingState.NotConnected;
 
-    /**
-     * LogService连接状态
-     */
-    public enum ConnectingState {
-        /**
-         * 未连接
-         */
-        NotConnected(0),
-        /**
-         * 连接中
-         */
-        Connecting(1),
-        /**
-         * 连接成功
-         */
-        Connected(2);
-        int value;
-        ConnectingState(int v) {
-            this.value = v;
-        }
-    }
-
     private LogManager(Context context) {
         Log.i(TAG, "LogManager init");
-        mConext = context;
+        mContext = context;
         bindService();
         startLogQueue();
         registerReceiver();
@@ -156,15 +134,24 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         doSend2Service(beans);
     }
 
-
+    /**
+     * aidl接口对象
+     */
     private ILogService mStub = null;
+
+    /**
+     * 创建 serviceConnection 对象，用于建立绑定连接
+     */
     private final ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            //获取
             mStub = ILogService.Stub.asInterface(service);
+            //设置连接状态
             mConnectState = ConnectingState.Connected;
             Log.i(TAG, "bind service , start connect");
             try {
+                //通过aidl将路径传递给服务端
                 mStub.setDefaultLogSaveFolder(LOG_FILE_DIR);
                 service.linkToDeath(LogManager.this, 0);
                 Log.i(TAG, "bind service , connect link to death");
@@ -199,7 +186,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
 
     public String getPackageName() {
         if (mPackageShortName == null) {
-            mPackageShortName = mConext.getPackageName();
+            mPackageShortName = mContext.getPackageName();
             AppLogUtils.d(TAG, "get package name:" + mPackageShortName);
         }
         return mPackageShortName;
@@ -208,7 +195,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
 
     private void registerReceiver() {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SHUTDOWN);
-        mConext.registerReceiver(mBroadcastReceiver, intentFilter);
+        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
         Log.i(TAG, "register receiver");
     }
 
@@ -221,7 +208,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         try {
             Log.i(TAG, "bind service");
             Intent intent = getLogServiceIntent();
-            mConext.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+            mContext.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
             Log.i(TAG, "bind service end");
         } catch (Exception e) {
             mConnectState = ConnectingState.NotConnected;
@@ -258,7 +245,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
      * @return
      */
     private boolean isRunning() {
-        boolean isRuning = ServiceUtils.isServiceRunning(mConext, getLogServiceIntent().getComponent().getClassName());
+        boolean isRuning = ServiceUtils.isServiceRunning(mContext, getLogServiceIntent().getComponent().getClassName());
         Log.e(TAG, "isRuning:" + isRuning);
         return isRuning;
     }
@@ -267,7 +254,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
      * 解除绑定
      */
     public void release() {
-        mConext.unbindService(serviceConnection);
+        mContext.unbindService(serviceConnection);
         Log.i(TAG, "bind service release ");
     }
 
@@ -344,7 +331,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
                 intent.putExtra(ACTION_TYPE, ACTION_TYPE_WRITE_LOG);
                 intent.putExtra(KEY_BEAN, beans.get(0));
             }
-            mConext.startService(intent);
+            mContext.startService(intent);
             Log.i(TAG, "service log send start success");
         } catch (Exception e) {
             Log.i(TAG, "start service exception " + e.getMessage());
@@ -391,7 +378,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
                     intent.putExtra(KEY_LOG_SAVE_PATH, savepath);
                     intent.putExtra(KEY_LOGCAT_CLEAR, delaytime);
                     intent.putExtra(KEY_LOGCAT_COLLECT_DELAYTIME, clearlogcat);
-                    mConext.startService(intent);
+                    mContext.startService(intent);
                 } catch (Exception e) {
                     Log.i(TAG, e.getMessage());
                 }
@@ -420,7 +407,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
                     Intent intent = getLogServiceIntent();
                     intent.putExtra(KEY_LOG_SAVE_PATH, path);
                     intent.putExtra(KEY_LOG_CONTENT, log);
-                    mConext.startService(intent);
+                    mContext.startService(intent);
 
                 } catch (Exception e) {
                     Log.i(TAG, e.getMessage());

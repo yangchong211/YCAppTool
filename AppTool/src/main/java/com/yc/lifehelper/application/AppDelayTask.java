@@ -59,9 +59,10 @@ public class AppDelayTask extends AbsParallelTask {
         AppLogFactory.init(config);
 
 
+        //通过跨进程写日志
         String aLogPath = AppFileUtils.getCacheFilePath(MainApplication.getInstance(), "ALog");
         LogUtils.initLogEngine(MainApplication.getInstance());
-        LogUtils.setLogSaveFoloder(aLogPath);
+        LogUtils.setLogSaveFolder(aLogPath);
         LogUtils.setShowLog(true);
         LogUtils.enableTooLargeAutoDevide(true);
         LogUtils.setAutoDivideRatio(0.5f);

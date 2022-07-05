@@ -345,15 +345,35 @@ public class MainActivity extends BaseActivity{
                         break;
                     // 问题反馈
                     case R.id.ll_nav_feedback:
+                        DelegateTaskExecutor.getInstance().executeOnDiskIO(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (int i= 0 ; i<100 ; i++){
+                                    LogUtils.d("问题反馈 main activity log test " + i);
+                                }
+                                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ToastUtils.showRoundRectToast("日志输出完1");
+                                    }
+                                });
+                            }
+                        });
                         break;
                     // 关于
                     case R.id.ll_nav_about:
                         DelegateTaskExecutor.getInstance().executeOnDiskIO(new Runnable() {
                             @Override
                             public void run() {
-                                for (int i= 0 ; i<10000 ; i++){
-                                    LogUtils.d("main activity log test " + i);
+                                for (int i= 0 ; i<1000 ; i++){
+                                    LogUtils.d("关于 main activity log test " + i);
                                 }
+                                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ToastUtils.showRoundRectToast("日志输出完2");
+                                    }
+                                });
                             }
                         });
                         break;

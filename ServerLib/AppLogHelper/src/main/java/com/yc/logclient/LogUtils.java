@@ -267,8 +267,7 @@ public class LogUtils {
         doLog(LogConstant.Log_Type_App, Log_Level_debug, false, tag, info, null, statckIndex);
     }
 
-
-    public static void setLogSaveFoloder(String logFolder) {
+    public static void setLogSaveFolder(String logFolder) {
         LogManager.setLogSaveFolder(logFolder);
     }
 
