@@ -30,6 +30,10 @@ import java.util.concurrent.atomic.AtomicLong;
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class DefaultTaskExecutor extends AbsTaskExecutor {
 
+    /**
+     * 创建对象锁
+     * 锁是加在单个对象上，不同的对象没有竞争关系。单个对象，在多线程条件下调用数据是安全的
+     */
     private final Object mLock = new Object();
     /**
      * UI主线程共有handler对象
