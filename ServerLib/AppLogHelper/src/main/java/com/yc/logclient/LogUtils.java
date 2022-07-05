@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.yc.logclient.client.LogClient;
 import com.yc.logclient.client.LogDecrator;
-import com.yc.logclient.client.LogManager;
 
 import static com.yc.logclient.LogConstant.Log_Level_debug;
 import static com.yc.logclient.LogConstant.Log_Level_error;

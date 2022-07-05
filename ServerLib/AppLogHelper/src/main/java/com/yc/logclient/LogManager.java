@@ -1,4 +1,4 @@
-package com.yc.logclient.client;
+package com.yc.logclient;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -12,13 +12,15 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.yc.logclient.client.IPCLargeProcessor;
+import com.yc.logclient.client.LogCache;
+import com.yc.logclient.client.LogQueueThread;
 import com.yc.logclient.inter.ILogSend;
 import com.yc.logclient.state.ConnectingState;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.ServiceUtils;
-import com.yc.logclient.ILogService;
-import com.yc.logclient.LogUtils;
 import com.yc.logclient.bean.AppLogBean;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -135,38 +137,49 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
     }
 
     /**
-     * aidl接口对象
+     * aidl接口对象，这个是编译器生成的ILogService类(生成的是.java文件)
      */
-    private ILogService mStub = null;
+    private ILogService mLogServiceStub = null;
 
     /**
      * 创建 serviceConnection 对象，用于建立绑定连接
      */
     private final ServiceConnection serviceConnection = new ServiceConnection() {
+        /**
+         * 绑定服务连接
+         * @param name          name
+         * @param service       binder
+         */
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            //获取
-            mStub = ILogService.Stub.asInterface(service);
+            //首先当bindService之后，客户端会得到一个Binder引用
+            //在拿到Binder引用后，调用IxxService.Stub.asInterface(IBinder obj) 即可得到一个IxxService实例
+            mLogServiceStub = ILogService.Stub.asInterface(service);
             //设置连接状态
             mConnectState = ConnectingState.Connected;
             Log.i(TAG, "bind service , start connect");
             try {
                 //通过aidl将路径传递给服务端
-                mStub.setDefaultLogSaveFolder(LOG_FILE_DIR);
+                mLogServiceStub.setDefaultLogSaveFolder(LOG_FILE_DIR);
+                //如果该活页夹消失，请为收件人注册一个通知。如果绑定器对象意外消失(通常是因为它的宿主进程被杀死)
                 service.linkToDeath(LogManager.this, 0);
                 Log.i(TAG, "bind service , connect link to death");
             } catch (RemoteException e) {
                 e.printStackTrace();
                 Log.i(TAG, "bind service , connect exception" + e.getLocalizedMessage());
             }
-            Log.i(TAG, "bind service , connect end" );
+            Log.i(TAG, "bind service , connect end");
         }
 
+        /**
+         * 断开连接
+         * @param name              name
+         */
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            mStub = null;
+            mLogServiceStub = null;
             mConnectState = ConnectingState.NotConnected;
-            Log.i(TAG, "bind service , connect disconnected" );
+            Log.i(TAG, "bind service , connect disconnected");
         }
     };
 
@@ -225,10 +238,10 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
 
     @Override
     public void binderDied() {
-        if (mStub != null) {
+        if (mLogServiceStub != null) {
             //解除死亡代理
-            mStub.asBinder().unlinkToDeath(this, 0);
-            mStub = null;
+            mLogServiceStub.asBinder().unlinkToDeath(this, 0);
+            mLogServiceStub = null;
         }
         mConnectState = ConnectingState.NotConnected;
     }
@@ -242,6 +255,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
 
     /**
      * 查询是否存在
+     *
      * @return
      */
     private boolean isRunning() {
@@ -280,7 +294,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
             return;
         }
         try {
-            Log.i(TAG, "service send bean size" +beans.size()+" is bind : "+isLogBound());
+            Log.i(TAG, "service send bean size" + beans.size() + " is bind : " + isLogBound());
             if (isLogBound()) {
                 log2Binder(beans);
             } else {
@@ -302,9 +316,9 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
     public void log2Binder(ArrayList<AppLogBean> beans) {
         try {
             if (beans.size() > 1) {
-                mStub.logs(beans);
+                mLogServiceStub.logs(beans);
             } else {
-                mStub.log(beans.get(0));
+                mLogServiceStub.log(beans.get(0));
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -356,7 +370,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
      * @return
      */
     private boolean isLogBound() {
-        return mConnectState == ConnectingState.Connected && mStub != null;
+        return mConnectState == ConnectingState.Connected && mLogServiceStub != null;
     }
 
     /**
@@ -370,7 +384,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         try {
             if (isLogBound()) {
                 Log.i(TAG, "mStub.collectlogcat");
-                mStub.collectlogcat(savepath, delaytime, clearlogcat);
+                mLogServiceStub.collectlogcat(savepath, delaytime, clearlogcat);
             } else {
                 Log.i(TAG, "collectLogcatByStartService");
                 try {
@@ -400,7 +414,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         try {
             if (isLogBound()) {
                 Log.i(TAG, "mStub.collectlogcat");
-                mStub.saveLogWithPath(log, path);
+                mLogServiceStub.saveLogWithPath(log, path);
             } else {
                 Log.i(TAG, "collectLogcatByStartService");
                 try {

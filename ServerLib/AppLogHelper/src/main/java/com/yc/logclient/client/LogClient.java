@@ -3,6 +3,7 @@ package com.yc.logclient.client;
 import android.content.Context;
 import android.util.Log;
 
+import com.yc.logclient.LogManager;
 import com.yc.logclient.bean.AppLogBean;
 import com.yc.logclient.bean.ThrowableBean;
 import com.yc.logclient.inter.ILogInterface;
