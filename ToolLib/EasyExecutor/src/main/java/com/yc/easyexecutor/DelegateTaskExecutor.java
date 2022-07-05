@@ -93,7 +93,8 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
 
     /**
      * 外部开发者，可以调用该方法设置自己的taskExecutor
-     * @param taskExecutor          AbsTaskExecutor实现类
+     *
+     * @param taskExecutor AbsTaskExecutor实现类
      */
     public void setDelegate(@Nullable AbsTaskExecutor taskExecutor) {
         mDelegate = taskExecutor == null ? mDefaultTaskExecutor : taskExecutor;
@@ -195,7 +196,7 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
      */
     public Runnable postToMainThread(LifecycleOwner lifecycleOwner, Runnable runnable) {
         LifecycleRunnable lifecycleRunnableDelegate = new LifecycleRunnable(lifecycleOwner,
-                getMainHandler(), Lifecycle.Event.ON_DESTROY,runnable);
+                getMainHandler(), Lifecycle.Event.ON_DESTROY, runnable);
         mDelegate.postToMainThread(lifecycleRunnableDelegate);
         return lifecycleRunnableDelegate;
     }
@@ -205,22 +206,22 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
      * 执行有生命周期的任务,指定Lifecycle.Event
      */
     public Runnable postToMainThread(LifecycleOwner lifecycleOwner,
-                                         Lifecycle.Event targetEvent,
-                                         Runnable runnable) {
+                                     Lifecycle.Event targetEvent,
+                                     Runnable runnable) {
         LifecycleRunnable lifecycleRunnableDelegate = new LifecycleRunnable(lifecycleOwner,
-                getMainHandler(),targetEvent,runnable);
+                getMainHandler(), targetEvent, runnable);
         mDelegate.postToMainThread(lifecycleRunnableDelegate);
         return lifecycleRunnableDelegate;
     }
 
-    public void postToMainThread(Runnable runnable,long delayed) {
-        getMainHandler().postDelayed(runnable,delayed);
+    public void postToMainThread(Runnable runnable, long delayed) {
+        getMainHandler().postDelayed(runnable, delayed);
     }
 
-    public Runnable postToMainThread(LifecycleOwner lifecycleOwner,Runnable runnable,long delayed) {
+    public Runnable postToMainThread(LifecycleOwner lifecycleOwner, Runnable runnable, long delayed) {
         LifecycleRunnable lifecycleRunnableDelegate = new LifecycleRunnable(lifecycleOwner,
-                getMainHandler(),Lifecycle.Event.ON_DESTROY,runnable);
-        getMainHandler().postDelayed(lifecycleRunnableDelegate,delayed);
+                getMainHandler(), Lifecycle.Event.ON_DESTROY, runnable);
+        getMainHandler().postDelayed(lifecycleRunnableDelegate, delayed);
         return lifecycleRunnableDelegate;
     }
 

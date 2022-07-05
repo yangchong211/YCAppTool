@@ -18,8 +18,12 @@ public class MyThreadFactory implements ThreadFactory {
     private final AtomicLong mCount = new AtomicLong(0);
     private final String threadName;
 
-    public MyThreadFactory(String threadName){
-        this.threadName = threadName;
+    public MyThreadFactory(String threadName) {
+        if (threadName == null || threadName.length() == 0) {
+            this.threadName = "MyThreadFactory";
+        } else {
+            this.threadName = threadName;
+        }
     }
 
     @Override
