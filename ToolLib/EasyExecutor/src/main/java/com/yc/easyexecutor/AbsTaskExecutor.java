@@ -18,16 +18,46 @@ import androidx.annotation.RestrictTo;
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public abstract class AbsTaskExecutor {
 
+    /**
+     * 使用核心任务的线程池执行给定的任务
+     *
+     * @param runnable 核心任务
+     */
     public abstract void executeOnCore(@NonNull Runnable runnable);
 
+    /**
+     * 在磁盘IO线程池中执行给定的任务
+     *
+     * @param runnable 在磁盘IO线程池中运行的可运行程序
+     */
     public abstract void executeOnDiskIO(@NonNull Runnable runnable);
 
+    /**
+     * 使用 CPU 密集型任务的线程池执行给定的任务
+     *
+     * @param runnable runnable
+     */
     public abstract void executeOnCpu(@NonNull Runnable runnable);
 
+    /**
+     * 使用UI主线程共有handler对象，执行post任务【将给定的任务提交给主线程】
+     *
+     * @param runnable runnable
+     */
     public abstract void postToMainThread(@NonNull Runnable runnable);
 
+    /**
+     * 获取UI主线程共有handler对象
+     *
+     * @return handler
+     */
     public abstract Handler getMainHandler();
 
+    /**
+     * 配合handlerThread使用的handler，一般用来执行大量任务
+     *
+     * @param runnable runnable
+     */
     public abstract void postIoHandler(@NonNull Runnable runnable);
 
     public void executeOnMainThread(@NonNull Runnable runnable) {
@@ -38,5 +68,10 @@ public abstract class AbsTaskExecutor {
         }
     }
 
+    /**
+     * 判断是否是主线程
+     *
+     * @return true表示主线程
+     */
     public abstract boolean isMainThread();
 }

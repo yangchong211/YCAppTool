@@ -21,6 +21,9 @@ import java.util.concurrent.Executor;
  */
 public class DelegateTaskExecutor extends AbsTaskExecutor {
 
+    /**
+     * 使用 volatile 保证代理对象是唯一的
+     */
     private static volatile DelegateTaskExecutor sInstance;
 
     @NonNull
@@ -88,6 +91,10 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
         return sInstance;
     }
 
+    /**
+     * 外部开发者，可以调用该方法设置自己的taskExecutor
+     * @param taskExecutor          AbsTaskExecutor实现类
+     */
     public void setDelegate(@Nullable AbsTaskExecutor taskExecutor) {
         mDelegate = taskExecutor == null ? mDefaultTaskExecutor : taskExecutor;
     }
@@ -130,11 +137,6 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
         if (runnable != null) {
             mDelegate.postIoHandler(runnable);
         }
-    }
-
-    @Override
-    public void executeOnMainThread(@NonNull Runnable runnable) {
-        super.executeOnMainThread(runnable);
     }
 
     /**
@@ -210,7 +212,6 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
         mDelegate.postToMainThread(lifecycleRunnableDelegate);
         return lifecycleRunnableDelegate;
     }
-
 
     public void postToMainThread(Runnable runnable,long delayed) {
         getMainHandler().postDelayed(runnable,delayed);
