@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable;
 
 import java.io.ByteArrayOutputStream;
 
-public class Utils {
+public class ACacheUtils {
 
 
     /**

@@ -31,6 +31,7 @@ dependencies {
     implementation rootProject.ext.dependencies["annotation"]
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':EventUploadLib')
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
     //腾讯mmkv库
     implementation "com.tencent:mmkv-static:1.2.7"
 }

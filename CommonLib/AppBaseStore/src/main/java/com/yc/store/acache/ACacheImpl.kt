@@ -9,6 +9,7 @@ import com.yc.toolutils.AppToolUtils
 import com.yc.toolutils.file.AppFileUtils
 import java.io.File
 
+@Deprecated("不建议使用ACache库")
 class ACacheImpl (builder: Builder) : ICacheable {
 
     private var cache: ACache? = null
@@ -20,7 +21,6 @@ class ACacheImpl (builder: Builder) : ICacheable {
         } else {
             cache = ACache.get(AppToolUtils.getApp())
         }
-
     }
 
     class Builder {
@@ -36,7 +36,7 @@ class ACacheImpl (builder: Builder) : ICacheable {
     }
 
     override fun saveInt(key: String, value: Int) {
-
+        cache?.put(key,value)
     }
 
     override fun readInt(key: String, default: Int): Int {
