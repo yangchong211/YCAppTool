@@ -33,8 +33,6 @@ public class AppCoreTask extends AbsParallelTask {
     @Override
     public void run() {
         long start = System.currentTimeMillis();
-        //工具库
-        AppToolUtils.init(MainApplication.getInstance());
         //日志库
         AppLogHelper.config(MainApplication.getInstance());
         //初始化国际化语言

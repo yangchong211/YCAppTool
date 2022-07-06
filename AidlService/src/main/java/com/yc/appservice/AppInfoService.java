@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
 import androidx.annotation.Nullable;
-import com.yc.logclient.LogUtils;
 import com.yc.statusbar.BuildConfig;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppSignUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,20 +25,20 @@ public class AppInfoService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        LogUtils.i("AppInfoService--IBinder:");
+        AppLogUtils.i("AppInfoService--IBinder:");
         return binder;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        LogUtils.i("AppInfoService--onCreate:");
+        AppLogUtils.i("AppInfoService--onCreate:");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        LogUtils.i("AppInfoService--onDestroy:");
+        AppLogUtils.i("AppInfoService--onDestroy:");
     }
 
     /**
@@ -53,7 +53,7 @@ public class AppInfoService extends Service {
         public List<AppInfo> getAppInfo(String sign) throws RemoteException {
             List<AppInfo> list=new ArrayList<>();
             String aidlCheckAppInfoSign = AppSignUtils.getAidlCheckAppInfoSign();
-            LogUtils.e("AppInfoService--AppInfoService",aidlCheckAppInfoSign+"-------------"+sign);
+            AppLogUtils.e("AppInfoService--AppInfoService",aidlCheckAppInfoSign+"-------------"+sign);
             if(!aidlCheckAppInfoSign.equals(sign)){
                 return list;
             }
@@ -73,7 +73,7 @@ public class AppInfoService extends Service {
             if(!AppSignUtils.getAidlCheckAppInfoSign().equals(sign)){
                 return false;
             }
-            LogUtils.i("AppInfoService--setToken:"+ token);
+            AppLogUtils.i("AppInfoService--setToken:"+ token);
             return true;
         }
 
@@ -82,7 +82,7 @@ public class AppInfoService extends Service {
             if(!AppSignUtils.getAidlCheckAppInfoSign().equals(sign)){
                 return false;
             }
-            LogUtils.i("AppInfoService--setChannel:"+ channel);
+            AppLogUtils.i("AppInfoService--setChannel:"+ channel);
             return true;
         }
 
@@ -91,7 +91,7 @@ public class AppInfoService extends Service {
             if(!AppSignUtils.getAidlCheckAppInfoSign().equals(sign)){
                 return false;
             }
-            LogUtils.i("AppInfoService--setAppAuthorName:"+ name);
+            AppLogUtils.i("AppInfoService--setAppAuthorName:"+ name);
             return true;
         }
     };

@@ -124,12 +124,12 @@ public final class AppSignUtils {
         return fingerprint;
     }
 
-
-
     public static String getSign(String packageName){
+        //设置日期格式
         @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");//设置日期格式
-        String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
+        // new Date()为获取当前系统时间，也可使用当前时间戳
+        String date = df.format(new Date());
         String dataMd5= AppSignUtils.md5(date+"_"+packageName);
         return dataMd5;
     }

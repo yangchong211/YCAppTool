@@ -4,7 +4,7 @@ import com.yc.appservice.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.library.base.state.BaseStateActivity;
 
-public class MainActivity extends BaseActivity {
+public class ServiceActivity extends BaseActivity {
 
 
     @Override
