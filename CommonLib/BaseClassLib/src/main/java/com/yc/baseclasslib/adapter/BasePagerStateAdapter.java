@@ -11,7 +11,7 @@ import java.util.List;
  *     @author 杨充
  *     GitHub : https://github.com/yangchong211/YCCommonLib
  *     time  : 2017/01/30
- *     desc  :
+ *     desc  : ViewPager的适配器
  *     revise: FragmentPageStateAdapter在每次切换页面的时候，是将Fragment进行回收，适合页面较多的Fragment使用，这样就不会消耗更多的内存
  * </pre>
  */

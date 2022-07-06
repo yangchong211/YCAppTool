@@ -20,6 +20,14 @@ public class ScrollViewPager extends ViewPager {
 
     private boolean scrollable = true;
 
+    /**
+     * 设置是否支持滚动
+     * @param scrollable        是否滚动
+     */
+    public void setScrollable(boolean scrollable) {
+        this.scrollable = scrollable;
+    }
+
     public ScrollViewPager(Context context) {
         super(context);
     }
@@ -54,8 +62,15 @@ public class ScrollViewPager extends ViewPager {
         }
     }
 
-    public void setScrollable(boolean scrollable) {
-        this.scrollable = scrollable;
+    /**
+     * ViewPager有预加载机制，即默认情况下当前页面左右两侧的1个页面会被加载
+     * 以方便用户滑动切换到相邻的界面时，可以更加顺畅的显示出来。
+     * 可以设置预加载页面数量，当前页面相邻的limit个页面会被预加载进内存。
+     * @param limit     数量，默认是1
+     */
+    @Override
+    public void setOffscreenPageLimit(int limit) {
+        super.setOffscreenPageLimit(limit);
     }
 
 }

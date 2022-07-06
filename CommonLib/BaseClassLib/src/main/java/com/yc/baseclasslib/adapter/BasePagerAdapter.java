@@ -13,7 +13,7 @@ import androidx.viewpager.widget.PagerAdapter;
  *     GitHub : https://github.com/yangchong211/YCCommonLib
  *     time  : 2018/11/9
  *     desc  : PagerAdapter 简单封装
- *     revise:
+ *     revise: ViewPager的适配器
  * </pre>
  */
 public abstract class BasePagerAdapter extends PagerAdapter {

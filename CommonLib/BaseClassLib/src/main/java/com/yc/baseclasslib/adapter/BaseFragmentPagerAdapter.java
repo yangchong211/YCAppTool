@@ -18,7 +18,7 @@ import java.util.List;
  *     GitHub : https://github.com/yangchong211/YCCommonLib
  *     time  : 2018/11/9
  *     desc  : FragmentPagerAdapter 简单封装
- *     revise:
+ *     revise: ViewPager的适配器
  * </pre>
  */
 public final class BaseFragmentPagerAdapter extends FragmentPagerAdapter {
