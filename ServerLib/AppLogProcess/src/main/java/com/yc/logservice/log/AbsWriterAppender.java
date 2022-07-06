@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.yc.toolutils.AppLogUtils;
 
-import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
@@ -27,7 +26,7 @@ public class AbsWriterAppender implements IWriteLogger {
     //编码方式
     protected String encoding;
 
-    protected InnerWriter mInnerWriter;
+    protected CatchFilterWriter mInnerWriter;
 
     public AbsWriterAppender() {
     }
@@ -106,7 +105,7 @@ public class AbsWriterAppender implements IWriteLogger {
      */
     public synchronized void setWriter(Writer writer) {
         reset();
-        this.mInnerWriter = new InnerWriter(writer);
+        this.mInnerWriter = new CatchFilterWriter(writer);
         this.closed = false;
         writeHeader();
     }
@@ -209,31 +208,5 @@ public class AbsWriterAppender implements IWriteLogger {
         return immediateFlush;
     }
 
-    public static class InnerWriter extends FilterWriter {
-
-        public InnerWriter(Writer writer) {
-            super(writer);
-        }
-
-        @Override
-        public void write(String string) {
-            if (string != null) {
-                try {
-                    out.write(string);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        @Override
-        public void flush() {
-            try {
-                out.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
 

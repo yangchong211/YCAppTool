@@ -9,16 +9,13 @@ import android.content.ServiceConnection;
 import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.text.TextUtils;
 import android.util.Log;
-
 import com.yc.logclient.client.IPCLargeProcessor;
 import com.yc.logclient.client.LogCache;
 import com.yc.logclient.client.LogQueueThread;
 import com.yc.logclient.inter.ILogSend;
 import com.yc.logclient.state.ConnectingState;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.ServiceUtils;
 import com.yc.logclient.bean.AppLogBean;
 
 import java.io.File;
@@ -152,6 +149,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
          */
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            //绑定成功后，将服务端返回的Binder对象转换成AIDL接口所属的类型
             //首先当bindService之后，客户端会得到一个Binder引用
             //在拿到Binder引用后，调用IxxService.Stub.asInterface(IBinder obj) 即可得到一个IxxService实例
             mLogServiceStub = ILogService.Stub.asInterface(service);
@@ -160,6 +158,9 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
             Log.i(TAG, "bind service , start connect");
             try {
                 //通过aidl将路径传递给服务端
+                //客户端调用远程服务的方法，被调用的方法运行在服务端的 Binder 线程池中，同时客户端的线程会被挂起
+                //如果服务端方法执行比较耗时，就会导致客户端线程长时间阻塞，导致 ANR 。
+                //客户端的 onServiceConnected 和 onServiceDisconnected 方法都在 UI 线程中。
                 mLogServiceStub.setDefaultLogSaveFolder(LOG_FILE_DIR);
                 //如果该活页夹消失，请为收件人注册一个通知。如果绑定器对象意外消失(通常是因为它的宿主进程被杀死)
                 service.linkToDeath(LogManager.this, 0);
@@ -183,28 +184,9 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         }
     };
 
-
-    /**
-     * 计算包名,只保留最后一个字段
-     */
-    private String shortPackageName = "";
-
     public String getShortPackageName() {
-        if (TextUtils.isEmpty(shortPackageName)) {
-            shortPackageName = getPackageName().substring(getPackageName().lastIndexOf(".") + 1);
-            Log.i(TAG, " get short package name : " + shortPackageName);
-        }
-        return shortPackageName;
+        return LogClientUtils.getShortPackageName(mContext);
     }
-
-    public String getPackageName() {
-        if (mPackageShortName == null) {
-            mPackageShortName = mContext.getPackageName();
-            AppLogUtils.d(TAG, "get package name:" + mPackageShortName);
-        }
-        return mPackageShortName;
-    }
-
 
     private void registerReceiver() {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SHUTDOWN);
@@ -220,20 +202,13 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         mConnectState = ConnectingState.Connecting;
         try {
             Log.i(TAG, "bind service");
-            Intent intent = getLogServiceIntent();
+            Intent intent = LogClientUtils.getLogServiceIntent(mContext);
             mContext.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
             Log.i(TAG, "bind service end");
         } catch (Exception e) {
             mConnectState = ConnectingState.NotConnected;
             Log.i(TAG, "bind service exception " + e.getMessage());
         }
-    }
-
-    public Intent getLogServiceIntent() {
-        String packageName = getPackageName();
-        Intent intent = new Intent("com.yc.logservice.action.log");
-        intent.setComponent(new ComponentName(packageName, "com.yc.logservice.LogService"));
-        return intent;
     }
 
     @Override
@@ -250,18 +225,6 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
     public static void setLogSaveFolder(String logFolder) {
         LOG_FILE_DIR = logFolder;
         AppLogUtils.d(TAG, "setLogSaveFolder:" + logFolder);
-    }
-
-
-    /**
-     * 查询是否存在
-     *
-     * @return
-     */
-    private boolean isRunning() {
-        boolean isRuning = ServiceUtils.isServiceRunning(mContext, getLogServiceIntent().getComponent().getClassName());
-        Log.e(TAG, "isRuning:" + isRuning);
-        return isRuning;
     }
 
     /**
@@ -337,7 +300,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         }
         try {
             Log.i(TAG, "service log send start");
-            Intent intent = getLogServiceIntent();
+            Intent intent = LogClientUtils.getLogServiceIntent(mContext);
             if (beans.size() > 1) {
                 intent.putExtra(ACTION_TYPE, ACTION_TYPE_WRITE_LOGS);
                 intent.putParcelableArrayListExtra(KEY_BEANS, beans);
@@ -388,7 +351,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
             } else {
                 Log.i(TAG, "collectLogcatByStartService");
                 try {
-                    Intent intent = getLogServiceIntent();
+                    Intent intent = LogClientUtils.getLogServiceIntent(mContext);
                     intent.putExtra(KEY_LOG_SAVE_PATH, savepath);
                     intent.putExtra(KEY_LOGCAT_CLEAR, delaytime);
                     intent.putExtra(KEY_LOGCAT_COLLECT_DELAYTIME, clearlogcat);
@@ -418,7 +381,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
             } else {
                 Log.i(TAG, "collectLogcatByStartService");
                 try {
-                    Intent intent = getLogServiceIntent();
+                    Intent intent = LogClientUtils.getLogServiceIntent(mContext);
                     intent.putExtra(KEY_LOG_SAVE_PATH, path);
                     intent.putExtra(KEY_LOG_CONTENT, log);
                     mContext.startService(intent);

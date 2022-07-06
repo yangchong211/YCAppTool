@@ -379,12 +379,53 @@ public class MainActivity extends BaseActivity{
                         break;
                     // 个人
                     case R.id.ll_nav_login:
+                        DelegateTaskExecutor.getInstance().executeOnDiskIO(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (int i= 0 ; i<600 ; i++){
+                                    LogUtils.w("设置 main activity log test " + i);
+                                }
+                                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ToastUtils.showRoundRectToast("日志输出完4");
+                                    }
+                                });
+                            }
+                        });
                         break;
                     case R.id.ll_nav_video:
-                        ToastUtils.showRoundRectToast( "后期接入讯飞语音");
+                        DelegateTaskExecutor.getInstance().executeOnDiskIO(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (int i= 0 ; i<500 ; i++){
+                                    LogUtils.i("设置 main activity log test " + i);
+                                }
+                                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ToastUtils.showRoundRectToast("日志输出完4");
+                                    }
+                                });
+                            }
+                        });
+                        //ToastUtils.showRoundRectToast( "后期接入讯飞语音");
                         break;
                     case R.id.setting:
-
+                        DelegateTaskExecutor.getInstance().executeOnDiskIO(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (int i= 0 ; i<500 ; i++){
+                                    LogUtils.e("设置 main activity log test " + i);
+                                }
+                                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ToastUtils.showRoundRectToast("日志输出完3");
+                                    }
+                                });
+                            }
+                        });
                         break;
                     case R.id.quit:
                         ActivityManager.getInstance().appExist();
