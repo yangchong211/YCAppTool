@@ -16,7 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ycbjie.aptools.R;
+import com.yc.appservice.ICheckAppInfoManager;
+import com.yc.toolutils.AppSignUtils;
 
 
 /**
@@ -106,7 +107,7 @@ public class SetAppActivity extends AppCompatActivity implements View.OnClickLis
         intent.setAction("cn.ycbjie.ycaudioplayer.service.aidl.AppInfoService");
         //Android5.0后无法只通过隐式Intent绑定远程Service
         //需要通过setPackage()方法指定包名
-        intent.setPackage(MainActivity.packName);
+        intent.setPackage(ClientMainActivity.PACK_NAME);
         //绑定服务,传入intent和ServiceConnection对象
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
     }
@@ -187,13 +188,13 @@ public class SetAppActivity extends AppCompatActivity implements View.OnClickLis
         try {
             switch (type){
                 case SET_TOKEN:
-                    isSuccess=messageCenter.setToken(Utils.getSign(MainActivity.packName),content);
+                    isSuccess=messageCenter.setToken(AppSignUtils.getSign(ClientMainActivity.PACK_NAME),content);
                     break;
                 case SET_CHANNEL:
-                    isSuccess=messageCenter.setChannel(Utils.getSign(MainActivity.packName),content);
+                    isSuccess=messageCenter.setChannel(AppSignUtils.getSign(ClientMainActivity.PACK_NAME),content);
                     break;
                 case SET_AUTHOR:
-                    isSuccess=messageCenter.setAppAuthorName(Utils.getSign(MainActivity.packName),content);
+                    isSuccess=messageCenter.setAppAuthorName(AppSignUtils.getSign(ClientMainActivity.PACK_NAME),content);
                     break;
             }
             if(isSuccess){

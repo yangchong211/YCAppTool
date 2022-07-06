@@ -6,6 +6,8 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import androidx.annotation.Nullable;
 import com.yc.logclient.LogUtils;
+import com.yc.statusbar.BuildConfig;
+import com.yc.toolutils.AppSignUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +52,7 @@ public class AppInfoService extends Service {
         @Override
         public List<AppInfo> getAppInfo(String sign) throws RemoteException {
             List<AppInfo> list=new ArrayList<>();
-            String aidlCheckAppInfoSign = AppToolUtils.getAidlCheckAppInfoSign();
+            String aidlCheckAppInfoSign = AppSignUtils.getAidlCheckAppInfoSign();
             LogUtils.e("AppInfoService--AppInfoService",aidlCheckAppInfoSign+"-------------"+sign);
             if(!aidlCheckAppInfoSign.equals(sign)){
                 return list;
@@ -61,14 +63,14 @@ public class AppInfoService extends Service {
             list.add(new AppInfo("app作者", "杨充"));
             list.add(new AppInfo("app渠道", "channel"));
             list.add(new AppInfo("token", "token"));
-            list.add(new AppInfo("App签名", AppToolUtils.getSingInfo(getApplicationContext(), getPackageName(), AppToolUtils.SHA1)));
+            list.add(new AppInfo("App签名", AppSignUtils.getSingInfo(getApplicationContext(), getPackageName(), AppSignUtils.SHA1)));
             return list;
         }
 
 
         @Override
         public boolean setToken(String sign, String token) throws RemoteException {
-            if(!AppToolUtils.getAidlCheckAppInfoSign().equals(sign)){
+            if(!AppSignUtils.getAidlCheckAppInfoSign().equals(sign)){
                 return false;
             }
             LogUtils.i("AppInfoService--setToken:"+ token);
@@ -77,7 +79,7 @@ public class AppInfoService extends Service {
 
         @Override
         public boolean setChannel(String sign, String channel) throws RemoteException {
-            if(!AppToolUtils.getAidlCheckAppInfoSign().equals(sign)){
+            if(!AppSignUtils.getAidlCheckAppInfoSign().equals(sign)){
                 return false;
             }
             LogUtils.i("AppInfoService--setChannel:"+ channel);
@@ -86,7 +88,7 @@ public class AppInfoService extends Service {
 
         @Override
         public boolean setAppAuthorName(String sign, String name) throws RemoteException {
-            if(!AppToolUtils.getAidlCheckAppInfoSign().equals(sign)){
+            if(!AppSignUtils.getAidlCheckAppInfoSign().equals(sign)){
                 return false;
             }
             LogUtils.i("AppInfoService--setAppAuthorName:"+ name);

@@ -1,17 +1,13 @@
 package com.yc.toolutils;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -304,7 +300,7 @@ public class AppUtils {
     /**
      * 封装 App 信息的 Bean 类
      */
-    public static class AppInfo {
+    public static class AppAllInfo {
 
         private String   name;
         private Drawable icon;
@@ -379,8 +375,8 @@ public class AppUtils {
          * @param versionCode 版本码
          * @param isSystem    是否系统应用
          */
-        public AppInfo(String packageName, String name, Drawable icon, String packagePath,
-                       String versionName, int versionCode, boolean isSystem) {
+        public AppAllInfo(String packageName, String name, Drawable icon, String packagePath,
+                          String versionName, int versionCode, boolean isSystem) {
             this.setName(name);
             this.setIcon(icon);
             this.setPackageName(packageName);
@@ -407,7 +403,7 @@ public class AppUtils {
      *
      * @return 当前应用的 AppInfo
      */
-    public static AppInfo getAppInfo() {
+    public static AppAllInfo getAppInfo() {
         return getAppInfo(AppToolUtils.getApp().getPackageName());
     }
 
@@ -418,7 +414,7 @@ public class AppUtils {
      * @param packageName 包名
      * @return 当前应用的 AppInfo
      */
-    public static AppInfo getAppInfo(final String packageName) {
+    public static AppAllInfo getAppInfo(final String packageName) {
         try {
             PackageManager pm = AppToolUtils.getApp().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
@@ -436,7 +432,7 @@ public class AppUtils {
      * @param pi 包的信息
      * @return AppInfo 类
      */
-    private static AppInfo getBean(final PackageManager pm, final PackageInfo pi) {
+    private static AppAllInfo getBean(final PackageManager pm, final PackageInfo pi) {
         if (pm == null || pi == null) {
             return null;
         }
@@ -448,7 +444,7 @@ public class AppUtils {
         String versionName = pi.versionName;
         int versionCode = pi.versionCode;
         boolean isSystem = (ApplicationInfo.FLAG_SYSTEM & ai.flags) != 0;
-        return new AppInfo(packageName, name, icon, packagePath, versionName, versionCode, isSystem);
+        return new AppAllInfo(packageName, name, icon, packagePath, versionName, versionCode, isSystem);
     }
 
     /**
@@ -459,13 +455,13 @@ public class AppUtils {
      *
      * @return 所有已安装的 AppInfo 列表
      */
-    public static List<AppInfo> getAppsInfo() {
-        List<AppInfo> list = new ArrayList<>();
+    public static List<AppAllInfo> getAppsInfo() {
+        List<AppAllInfo> list = new ArrayList<>();
         PackageManager pm = AppToolUtils.getApp().getPackageManager();
         // 获取系统中安装的所有软件信息
         List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
         for (PackageInfo pi : installedPackages) {
-            AppInfo ai = getBean(pm, pi);
+            AppAllInfo ai = getBean(pm, pi);
             if (ai == null) {
                 continue;
             }

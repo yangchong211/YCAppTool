@@ -19,14 +19,18 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.yc.appservice.AppInfo;
+import com.yc.appservice.ICheckAppInfoManager;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppSignUtils;
+import com.yc.toolutils.net.AppNetworkUtils;
 
 import java.util.List;
 
-import com.ycbjie.aptools.R;
-import com.yc.lifehelper.AppInfo;
 
 /**
  * <pre>
@@ -37,7 +41,7 @@ import com.yc.lifehelper.AppInfo;
  *     revise:
  * </pre>
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class ClientMainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mTvBindService;
     private TextView mTvNetName;
@@ -45,12 +49,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mRecyclerView;
     private Button mBtnSetApp;
 
-    public static final String packName = "com.yc.lifehelper";
-    public static final String action = "cn.ycbjie.ycaudioplayer.service.aidl.AppInfoService";
+    public static final String PACK_NAME = "com.yc.appservice";
+    public static final String ACTION = "com.yc.appservice.AppInfoService.action";
 
-    //由AIDL文件生成的Java类
+    /**
+     * 由AIDL文件生成的Java类
+     */
     private ICheckAppInfoManager messageCenter = null;
-    //标志当前与服务端连接状况的布尔值，false为未连接，true为连接中
+    /**
+     * 标志当前与服务端连接状况的布尔值，false为未连接，true为连接中
+     */
     private boolean mBound = false;
 
 
@@ -65,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_client_main);
 
         initView();
         initListener();
@@ -107,15 +115,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @SuppressLint("SetTextI18n")
     private void initData() {
-        if(NetWorkUtils.checkWifiState(this)){
-            WifiManager wifiManager = (WifiManager) getApplicationContext()
-                    .getSystemService(WIFI_SERVICE);
-            WifiInfo wifiInfo ;
+        if(AppNetworkUtils.isWifiConnected()){
+            WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
             if (wifiManager != null) {
-                wifiInfo = wifiManager.getConnectionInfo();
+                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
                 mTvNetName.setText("wifi名称"+wifiInfo.getSSID()+"   /  "+"SSID"+wifiInfo.getBSSID());
             }
-        }else if(NetWorkUtils.is4G(this)){
+        }else if(AppNetworkUtils.is4G()){
             mTvNetName.setText("4G网络");
         }else {
             mTvNetName.setText("其他情况");
@@ -127,15 +133,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //如果与服务端的连接处于未连接状态，则尝试连接
         if (!mBound) {
             attemptToBindService();
-            Toast.makeText(this, "当前与服务端处于未连接状态，正在尝试重连，请稍后再试",
-                    Toast.LENGTH_SHORT).show();
+            ToastUtils.showRoundRectToast("当前与服务端处于未连接状态，正在尝试重连，请稍后再试");
             return;
         }
         if (messageCenter == null) {
             return;
         }
         try {
-            List<AppInfo> info = messageCenter.getAppInfo(Utils.getSign(packName));
+            List<AppInfo> info = messageCenter.getAppInfo(AppSignUtils.getSign(PACK_NAME));
             if(info==null || (info.size()==0)){
                 Toast.makeText(this, "无法获取数据，可能是签名错误！", Toast.LENGTH_SHORT).show();
             }else {
@@ -161,10 +166,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent();
         //通过Intent指定服务端的服务名称和所在包，与远程Service进行绑定
         //参数与服务器端的action要一致,即"服务器包名.aidl接口文件名"
-        intent.setAction(action);
+        intent.setAction(ACTION);
         //Android5.0后无法只通过隐式Intent绑定远程Service
         //需要通过setPackage()方法指定包名
-        intent.setPackage(packName);
+        intent.setPackage(PACK_NAME);
         //绑定服务,传入intent和ServiceConnection对象
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
     }
@@ -173,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 创建ServiceConnection的匿名类
      */
-    private ServiceConnection connection = new ServiceConnection() {
+    private final ServiceConnection connection = new ServiceConnection() {
         //重写onServiceConnected()方法和onServiceDisconnected()方法
         // 在Activity与Service建立关联和解除关联的时候调用
         @Override public void onServiceDisconnected(ComponentName name) {
@@ -187,13 +192,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ToastUtils.showRoundRectToast("完成绑定aidlServer的AIDLService服务");
             Log.e(getLocalClassName(), "完成绑定aidlServer的AIDLService服务");
             //使用IAppInfoManager.Stub.asInterface()方法获取服务器端返回的IBinder对象
-            //将IBinder对象传换成了mAIDL_Service接口对象
+            //将IBinder对象传换成了接口对象
             messageCenter = ICheckAppInfoManager.Stub.asInterface(service);
             mBound = true;
             if (messageCenter != null) {
                 try {
                     //链接成功
-                    Toast.makeText(MainActivity.this,"链接成功",Toast.LENGTH_SHORT).show();
+                    ToastUtils.showRoundRectToast("链接成功");
                     // 在创建ServiceConnection的匿名类中的onServiceConnected方法中
                     // 设置死亡代理
                     //messageCenter.asBinder().linkToDeath(deathRecipient, 0);
@@ -208,8 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * 给binder设置死亡代理
      */
-    /*private IBinder.DeathRecipient deathRecipient = new IBinder.DeathRecipient() {
-
+    private final IBinder.DeathRecipient deathRecipient = new IBinder.DeathRecipient() {
         @Override
         public void binderDied() {
             if(messageCenter == null){
@@ -220,7 +224,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //这里重新绑定服务
             attemptToBindService();
         }
-    };*/
-
+    };
 
 }

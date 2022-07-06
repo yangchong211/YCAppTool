@@ -1,4 +1,4 @@
-package com.yc.appclient;
+package com.yc.toolutils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,18 +6,27 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.text.TextUtils;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-public class Utils {
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAppTool
+ *     email  : yangchong211@163.com
+ *     time  : 2016/09/23
+ *     desc  : app签名相关工具类
+ *     revise:
+ * </pre>
+ */
+public final class AppSignUtils {
 
 
     public static String getAidlCheckAppInfoSign(){
         String appPackageName = AppUtils.getAppPackageName();
-        //String appPackageName = "cn.ycbjie.ycaudioplayer";
         @SuppressLint("SimpleDateFormat")
         // 设置日期格式
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
@@ -121,7 +130,7 @@ public class Utils {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");//设置日期格式
         String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
-        String dataMd5= Utils.md5(date+"_"+packageName);
+        String dataMd5= AppSignUtils.md5(date+"_"+packageName);
         return dataMd5;
     }
 

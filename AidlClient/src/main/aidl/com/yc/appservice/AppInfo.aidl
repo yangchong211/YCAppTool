@@ -1,5 +1,5 @@
 // AppInfo.aidl
-package cn.ycbjie.ycaudioplayer;
+package com.yc.appservice;
 
 // Declare any non-default types here with import statements
 
