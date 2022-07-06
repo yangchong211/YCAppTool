@@ -313,54 +313,60 @@ public class LogService extends Service {
             Log.e(TAG, "sdcard unmounted");
             return;
         }
-        if (bean != null) {
-            int type = bean.getType();
-            int leve = bean.getLeve();
-            IWriteLogger logger = getLogger(type);
-            if (type == LogConstant.LogType.crash.value()) { //crash
-                if (logger != null) {
-                    logger.log(leve, bean.getMsg());
-                    logger.flush();
-                }
-
-                ThrowableBean throwableBean = bean.getThrowableBean();
-                if (throwableBean != null) {
-                    Throwable throwable = null;
-                    try {
-                        throwable = (Throwable) Class.forName(throwableBean.throwableClsName).newInstance();
-                        Field field = Throwable.class.getDeclaredField("detailMessage");
-                        field.setAccessible(true);
-                        field.set(throwable, throwableBean.msg);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    if (throwable == null) {
-                        throwable = new Throwable(throwableBean.msg);
-                    }
-                    if (throwableBean.stackTraceElements != null) {
-                        throwable.setStackTrace(throwableBean.stackTraceElements);
-                    }
-                    AppLogUtils.e("LogService", "crash throwable detail"+throwable);
-                }
-            } else if (type == LogConstant.LogType.anr.value()) { //Anr
-                if (logger != null) {
-                    logger.log(leve, bean.getMsg());
-                    logger.flush();
-                }
-                AppLogUtils.d("LogService", "write anr:" + bean.getMsg());
-            } else if (type == LogConstant.LogType.statistics.value()) { //打点数据
-                if (logger != null) {
-                    logger.log(leve, bean.getMsg());
-                    logger.flush();
-                }
-            } else { //正常的app业务日志
-                String logStr = bean.getMsg();
-                if (logger != null) {
-                    logger.log(leve, logStr);
-                }
-            }
-            deleteByOverdue();
+        if (bean == null) {
+            Log.e(TAG, "bean is null");
+            return;
         }
+        int type = bean.getType();
+        int leve = bean.getLeve();
+        IWriteLogger logger = getLogger(type);
+        if (type == LogConstant.LogType.crash.value()) {
+            //crash
+            if (logger != null) {
+                logger.log(leve, bean.getMsg());
+                logger.flush();
+            }
+
+            ThrowableBean throwableBean = bean.getThrowableBean();
+            if (throwableBean != null) {
+                Throwable throwable = null;
+                try {
+                    throwable = (Throwable) Class.forName(throwableBean.throwableClsName).newInstance();
+                    Field field = Throwable.class.getDeclaredField("detailMessage");
+                    field.setAccessible(true);
+                    field.set(throwable, throwableBean.msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (throwable == null) {
+                    throwable = new Throwable(throwableBean.msg);
+                }
+                if (throwableBean.stackTraceElements != null) {
+                    throwable.setStackTrace(throwableBean.stackTraceElements);
+                }
+                AppLogUtils.e("LogService", "crash throwable detail"+throwable);
+            }
+        } else if (type == LogConstant.LogType.anr.value()) {
+            //Anr
+            if (logger != null) {
+                logger.log(leve, bean.getMsg());
+                logger.flush();
+            }
+            AppLogUtils.d("LogService", "write anr:" + bean.getMsg());
+        } else if (type == LogConstant.LogType.statistics.value()) {
+            //打点数据
+            if (logger != null) {
+                logger.log(leve, bean.getMsg());
+                logger.flush();
+            }
+        } else {
+            //正常的app业务日志
+            String logStr = bean.getMsg();
+            if (logger != null) {
+                logger.log(leve, logStr);
+            }
+        }
+        deleteByOverdue();
     }
 
     /**
