@@ -26,6 +26,12 @@ public class BaseFragmentStateAdapter extends FragmentStateAdapter {
      */
     public final List<Fragment> mFragments = new ArrayList<>();
 
+    /**
+     * 如果宿主是Activity，则使用这个
+     *
+     * @param fragmentActivity activity
+     * @param fragments        fragment集合
+     */
     public BaseFragmentStateAdapter(@NonNull FragmentActivity fragmentActivity, List<Fragment> fragments) {
         super(fragmentActivity);
         if (fragments != null) {
@@ -33,6 +39,12 @@ public class BaseFragmentStateAdapter extends FragmentStateAdapter {
         }
     }
 
+    /**
+     * 如果宿主是Fragment，则使用这个
+     *
+     * @param fragment  fragment
+     * @param fragments fragment集合
+     */
     public BaseFragmentStateAdapter(@NonNull Fragment fragment, List<Fragment> fragments) {
         super(fragment);
         if (fragments != null) {
@@ -40,6 +52,13 @@ public class BaseFragmentStateAdapter extends FragmentStateAdapter {
         }
     }
 
+    /**
+     * 如果宿主是Fragment，则使用这个。和第二个构造没什么区别
+     *
+     * @param fragmentManager fragmentManager
+     * @param lifecycle       lifecycle
+     * @param fragments       fragment集合
+     */
     public BaseFragmentStateAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> fragments) {
         super(fragmentManager, lifecycle);
         if (fragments != null) {
