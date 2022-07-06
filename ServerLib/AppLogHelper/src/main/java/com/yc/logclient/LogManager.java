@@ -65,11 +65,6 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
     private final int MAX_LOG_BEANS = 200;
 
     /**
-     * 包名简称:去最后一个.分割的单词，如com.sogou.example,包名简称为example
-     */
-    private String mPackageShortName;
-
-    /**
      * 检测到关机广播时,flush日志,防止日志丢失
      */
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {

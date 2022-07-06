@@ -1,6 +1,6 @@
 /* +++++++++ 主项目 +++++++++ */
 include ':AppTool'
-include ':AppTest'
+include ':AidlService'
 include ':AppLeet'
 include ':AppDesign'
 
@@ -217,4 +217,4 @@ project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 
 
-
+include ':AidlClient'
