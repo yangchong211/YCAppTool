@@ -21,6 +21,7 @@ import android.text.TextUtils;
 
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.sdk.WebView;
+import com.yc.toolutils.AppActivityUtils;
 import com.yc.webviewlib.bridge.BridgeUtil;
 import com.yc.webviewlib.bridge.WebJsMessage;
 import com.yc.toolutils.EncodeUtils;
@@ -70,7 +71,7 @@ public class JsX5WebViewClient extends X5WebViewClient {
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         X5LogUtils.i("-------shouldOverrideUrlLoading----1---" + url);
         //页面关闭后，直接返回，不要执行网络请求和js方法
-        boolean activityAlive = X5WebUtils.isActivityAlive(context);
+        boolean activityAlive = AppActivityUtils.isActivityAlive(context);
         if (!activityAlive) {
             return false;
         }
@@ -119,7 +120,7 @@ public class JsX5WebViewClient extends X5WebViewClient {
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
         X5LogUtils.i("-------shouldOverrideUrlLoading----2---" + request.getUrl().toString());
         //页面关闭后，直接返回，不要执行网络请求和js方法
-        boolean activityAlive = X5WebUtils.isActivityAlive(context);
+        boolean activityAlive = AppActivityUtils.isActivityAlive(context);
         if (!activityAlive) {
             return false;
         }

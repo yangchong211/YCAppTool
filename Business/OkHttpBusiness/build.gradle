@@ -32,7 +32,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["gson"])
     implementation(rootProject.ext.dependencies["okhttp"])
     implementation(rootProject.ext.dependencies["lifecycleRuntime"])
-    implementation(rootProject.ext.dependencies["lifecycleCommon"])
     implementation project(path: ':OkHttpServer')
     implementation project(path: ':GsonServer')
     implementation project(path: ':ToolUtilsLib')

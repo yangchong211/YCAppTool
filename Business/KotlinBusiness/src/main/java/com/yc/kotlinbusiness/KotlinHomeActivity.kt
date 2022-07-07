@@ -21,6 +21,9 @@ class KotlinHomeActivity : AppCompatActivity(){
         findViewById<TextView>(R.id.tv_1).setOnClickListener {
             startActivity(Intent(this,KotlinScopeActivity::class.java))
         }
+        findViewById<TextView>(R.id.tv_2).setOnClickListener {
+            startActivity(Intent(this,LifecycleScopeActivity::class.java))
+        }
     }
 
 }

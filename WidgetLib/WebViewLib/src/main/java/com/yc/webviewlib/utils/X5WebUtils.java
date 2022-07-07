@@ -16,34 +16,21 @@ limitations under the License.
 package com.yc.webviewlib.utils;
 
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.ContextWrapper;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Looper;
 
 import androidx.annotation.IntDef;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import android.text.TextUtils;
 
 import com.tencent.smtt.sdk.QbSdk;
-import com.yc.webviewlib.tools.WebViewException;
 import com.yc.webviewlib.cache.WebCacheType;
 import com.yc.webviewlib.cache.WebViewCacheDelegate;
 import com.yc.webviewlib.cache.WebViewCacheWrapper;
+import com.yc.webviewlib.tools.WebViewException;
 import com.yc.webviewlib.view.X5WebView;
 
 import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.ArrayList;
 
 /**
  * <pre>
@@ -137,117 +124,6 @@ public final class X5WebUtils {
     }
 
     /**
-     * 判断当前url是否在白名单中
-     *
-     * @param arrayList 白名单集合
-     * @param url       url
-     * @return
-     */
-    public static boolean isWhiteList(ArrayList<String> arrayList, String url) {
-        if (url == null) {
-            return false;
-        }
-        if (arrayList == null || arrayList.size() == 0) {
-            return false;
-        }
-        //重要提醒：建议只使用https协议通信，避免中间人攻击
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            return false;
-        }
-        //提取host
-        String host = "";
-        try {
-            //提取host，如果需要校验Path可以通过url.getPath()获取
-            host = Uri.parse(url).getHost();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        for (int i = 0; i < arrayList.size(); i++) {
-            if (host != null && host.equals(arrayList.get(i))) {
-                //是咱们自己的host
-                return true;
-            }
-        }
-        //不在白名单内
-        return false;
-    }
-
-
-    /**
-     * 判断网络是否连接
-     * <p>需添加权限
-     * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
-     *
-     * @return {@code true}: 是<br>{@code false}: 否
-     */
-    public static boolean isConnected(Context context) {
-        if (context == null) {
-            return false;
-        }
-        NetworkInfo info = getActiveNetworkInfo(context);
-        return info != null && info.isConnected();
-    }
-
-    /**
-     * 获取活动网络信息
-     * <p>需添加权限
-     * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
-     *
-     * @return NetworkInfo
-     */
-    @SuppressLint("MissingPermission")
-    private static NetworkInfo getActiveNetworkInfo(Context context) {
-        ConnectivityManager manager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (manager == null) {
-            return null;
-        }
-        return manager.getActiveNetworkInfo();
-    }
-
-    /**
-     * Return whether the activity is alive.
-     *
-     * @param context The context.
-     * @return {@code true}: yes<br>{@code false}: no
-     */
-    public static boolean isActivityAlive(final Context context) {
-        return isActivityAlive(getActivityByContext(context));
-    }
-
-    /**
-     * Return the activity by context.
-     *
-     * @param context The context.
-     * @return the activity by context.
-     */
-    public static Activity getActivityByContext(Context context) {
-        if (context instanceof Activity) {
-            return (Activity) context;
-        }
-        while (context instanceof ContextWrapper) {
-            if (context instanceof Activity) {
-                return (Activity) context;
-            }
-            context = ((ContextWrapper) context).getBaseContext();
-        }
-        return null;
-    }
-
-
-    /**
-     * Return whether the activity is alive.
-     *
-     * @param activity The activity.
-     * @return {@code true}: yes<br>{@code false}: no
-     */
-    public static boolean isActivityAlive(final Activity activity) {
-        return activity != null && !activity.isFinishing()
-                && (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1 || !activity.isDestroyed());
-    }
-
-
-    /**
      * 注解限定符
      */
     @IntDef({ErrorMode.NO_NET, ErrorMode.STATE_404, ErrorMode.RECEIVED_ERROR, ErrorMode.SSL_ERROR,
@@ -276,10 +152,5 @@ public final class X5WebUtils {
         int STATE_500 = 1006;
         int ERROR_PROXY = 1007;
     }
-
-    public static boolean isMainThread() {
-        return Looper.getMainLooper() == Looper.myLooper();
-    }
-
 
 }

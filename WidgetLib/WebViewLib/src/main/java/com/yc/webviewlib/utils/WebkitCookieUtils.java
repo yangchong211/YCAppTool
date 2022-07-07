@@ -52,6 +52,16 @@ public final class WebkitCookieUtils {
         CookieSyncManager.createInstance(context);
         CookieSyncManager.getInstance().startSync();
         CookieManager.getInstance().removeSessionCookie();
+        flush();
+    }
+
+    /**
+     * 清除cookie操作，所有的
+     * @param context                       上下文
+     */
+    public static void removeAppCookie(Context context){
+        CookieManager.getInstance().removeAllCookies(null);
+        flush();
     }
 
     /**

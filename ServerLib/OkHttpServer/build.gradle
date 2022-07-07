@@ -30,7 +30,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["okhttp"])
     implementation(rootProject.ext.dependencies["lifecycleRuntime"])
-    implementation(rootProject.ext.dependencies["lifecycleCommon"])
 }
 
 

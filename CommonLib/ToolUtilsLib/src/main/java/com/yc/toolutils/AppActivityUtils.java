@@ -81,6 +81,39 @@ public final class AppActivityUtils {
 
 
     /**
+     * Return whether the activity is alive.
+     *
+     * @param context The context.
+     * @return {@code true}: yes<br>{@code false}: no
+     */
+    public static boolean isActivityAlive(final Context context) {
+        return isActivityLiving(getActivityByContext(context));
+    }
+
+    /**
+     * Return the activity by context.
+     *
+     * @param context The context.
+     * @return the activity by context.
+     */
+    public static Activity getActivityByContext(Context context) {
+        if (context == null) {
+            return null;
+        }
+        if (context instanceof Activity) {
+            return (Activity) context;
+        }
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity) context;
+            }
+            context = ((ContextWrapper) context).getBaseContext();
+        }
+        return null;
+    }
+
+
+    /**
      * 通过context上下文找到activity
      * @param context           上下文
      * @return  activity

@@ -2,6 +2,7 @@ package com.yc.webviewlib.cache;
 
 import android.text.TextUtils;
 
+import com.yc.toolutils.net.AppNetworkUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 
 import java.io.IOException;
@@ -52,13 +53,13 @@ public class HttpCacheInterceptor implements Interceptor {
     private void setCacheBuilder(Request originalRequest, Response.Builder builder) {
         //清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
         builder.removeHeader("Pragma");
-        if (!X5WebUtils.isConnected(X5WebUtils.getApplication())) {
+        if (!AppNetworkUtils.isConnected()) {
             //无网络下强制使用缓存，无论缓存是否过期,此时该请求实际上不会被发送出去。
             originalRequest = originalRequest.newBuilder()
                     .cacheControl(CacheControl.FORCE_CACHE)
                     .build();
         }
-        if (X5WebUtils.isConnected(X5WebUtils.getApplication())) {
+        if (AppNetworkUtils.isConnected()) {
             //有网络情况下，根据请求接口的设置，配置缓存。
             // 这样在下次请求时，根据缓存决定是否真正发出请求。
             String cacheControl = originalRequest.cacheControl().toString();

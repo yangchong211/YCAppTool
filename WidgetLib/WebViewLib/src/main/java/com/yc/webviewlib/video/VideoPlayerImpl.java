@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient;
 import com.tencent.smtt.sdk.WebView;
+import com.yc.toolutils.AppActivityUtils;
 import com.yc.webviewlib.inter.VideoWebListener;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
@@ -57,7 +58,7 @@ public class VideoPlayerImpl implements InterVideo, EventInterceptor {
     @Override
     public void onShowCustomView(View view, IX5WebChromeClient.CustomViewCallback callback) {
         if (isShowCustomVideo){
-            if (!X5WebUtils.isActivityAlive(mActivity)) {
+            if (!AppActivityUtils.isActivityAlive(mActivity)) {
                 return;
             }
             mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -175,7 +176,7 @@ public class VideoPlayerImpl implements InterVideo, EventInterceptor {
     public boolean event() {
         if (isVideoState()) {
             this.onHideCustomView();
-            if (X5WebUtils.isActivityAlive(mActivity)){
+            if (AppActivityUtils.isActivityAlive(mActivity)){
                 mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
             return true;

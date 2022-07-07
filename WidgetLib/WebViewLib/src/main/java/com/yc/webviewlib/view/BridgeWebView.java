@@ -22,6 +22,7 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
+import com.yc.toolutils.ThreadPoolUtils;
 import com.yc.webviewlib.bridge.BridgeUtil;
 import com.yc.webviewlib.bridge.DefaultHandler;
 import com.yc.webviewlib.bridge.WebJsMessage;
@@ -350,7 +351,7 @@ public class BridgeWebView extends BaseWebView implements WebViewJavascriptBridg
      */
     @Override
     public void callHandler(final String handlerName, final String data, final CallBackFunction callBack) {
-        if (X5WebUtils.isMainThread()) {
+        if (ThreadPoolUtils.isMainThread()) {
             //判断如果是主线程
             doSend(handlerName, data, callBack);
         } else {

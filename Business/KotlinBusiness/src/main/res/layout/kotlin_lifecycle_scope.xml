@@ -10,7 +10,7 @@
         android:id="@+id/tv_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1.kotlin协程原理学习"
+        android:text="1.开启一个普通耗时任务A"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="2.将Kotlin协程与生命周期组件一起使用"
+        android:text="2.结束普通耗时任务A"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="3."
+        android:text="3.在子线程中做耗时任务操作"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="4."
+        android:text="4.协程一个简单切换案例"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="5."
+        android:text="5.协程绑定到指定线程"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="6."
+        android:text="6.协程job取消操作实践"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 
@@ -65,7 +65,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="7."
+        android:text="7.协程job加入操作实践"
+        android:background="@android:color/darker_gray"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="8.串行执行多个任务"
         android:background="@android:color/darker_gray"
         android:padding="10dp"/>
 

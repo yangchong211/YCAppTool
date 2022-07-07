@@ -9,6 +9,7 @@ import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.URLUtil;
 import com.tencent.smtt.sdk.WebView;
+import com.yc.toolutils.net.AppNetworkUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 
@@ -342,7 +343,7 @@ public class WebViewCacheWrapper implements WebViewRequestClient {
                 headers.put(KEY_CACHE, mCacheType.ordinal() + "");
             }
             addHeader(reqBuilder, headers);
-            if (!X5WebUtils.isConnected(mContext)) {
+            if (!AppNetworkUtils.isConnected()) {
                 //设置缓存策略
                 //仅使用缓存的缓存控制请求指令，即使缓存的响应已经过时。
                 //如果响应在缓存中不可用或需要服务器验证，调用将失败，并带有{@code 504 unsatisrequest}。
@@ -368,7 +369,7 @@ public class WebViewCacheWrapper implements WebViewRequestClient {
                 webResourceResponse = new WebResourceResponse(mimeType, "", response.body().byteStream());
             }
             //没有联网，或者504，直接返回为空
-            if (response.code() == 504 && !X5WebUtils.isConnected(mContext)){
+            if (response.code() == 504 && !AppNetworkUtils.isConnected()){
                 return null;
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

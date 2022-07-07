@@ -34,6 +34,8 @@ import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
+import com.yc.toolutils.AppActivityUtils;
+import com.yc.toolutils.net.AppNetworkUtils;
 import com.yc.webviewlib.helper.WebSchemeIntent;
 import com.yc.webviewlib.inter.InterWebListener;
 import com.yc.toolutils.EncodeUtils;
@@ -119,7 +121,7 @@ public class X5WebViewClient extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
         //页面关闭后，直接返回，不要执行网络请求和js方法
-        boolean activityAlive = X5WebUtils.isActivityAlive(context);
+        boolean activityAlive = AppActivityUtils.isActivityAlive(context);
         if (!activityAlive) {
             return false;
         }
@@ -171,7 +173,7 @@ public class X5WebViewClient extends WebViewClient {
      */
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-        boolean activityAlive = X5WebUtils.isActivityAlive(context);
+        boolean activityAlive = AppActivityUtils.isActivityAlive(context);
         if (!activityAlive) {
             return false;
         }
@@ -224,7 +226,7 @@ public class X5WebViewClient extends WebViewClient {
         super.onPageStarted(webView, url, bitmap);
         //设定加载开始的操作
         X5LogUtils.i("-------onPageStarted-------" + url);
-        if (!X5WebUtils.isConnected(webView.getContext()) && webListener != null) {
+        if (!AppNetworkUtils.isConnected() && webListener != null) {
             //显示异常页面
             webListener.showErrorView(X5WebUtils.ErrorMode.NO_NET);
         }

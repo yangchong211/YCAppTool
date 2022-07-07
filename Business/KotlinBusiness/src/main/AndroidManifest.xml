@@ -5,6 +5,7 @@
     <application>
         <activity android:name="com.yc.kotlinbusiness.KotlinHomeActivity"/>
         <activity android:name="com.yc.kotlinbusiness.KotlinScopeActivity"/>
+        <activity android:name="com.yc.kotlinbusiness.LifecycleScopeActivity"/>
     </application>
 
 </manifest>

@@ -40,9 +40,17 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation project(path: ':LibraryLayer')
+    implementation project(path: ':ToolUtilsLib')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
 
+    implementation(rootProject.ext.dependencies["lifecycleRuntime"])
     implementation(rootProject.ext.dependencies["kotlinxJdk"])
+    implementation(rootProject.ext.dependencies["lifecycle"])
+
+    implementation(rootProject.ext.dependencies["lifecycleKtx"])
+    implementation(rootProject.ext.dependencies["livedataKtx"])
+    implementation(rootProject.ext.dependencies["viewmodelKtx"])
+
     // Kotlin coroutines
     implementation(rootProject.ext.dependencies["kotlinxCoroutinesCore"])
     implementation(rootProject.ext.dependencies["kotlinxCoroutinesAndroid"])

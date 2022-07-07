@@ -1,6 +1,8 @@
 package com.yc.toolutils;
 
 
+import android.os.Looper;
+
 import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
@@ -42,6 +44,10 @@ public final class ThreadPoolUtils {
 
     private ThreadPoolUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
+    }
+
+    public static boolean isMainThread() {
+        return Looper.getMainLooper() == Looper.myLooper();
     }
 
     /**
