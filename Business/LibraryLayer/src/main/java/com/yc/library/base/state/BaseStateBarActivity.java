@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
 import com.yc.ycstatelib.StateLayoutManager;
-import com.ycbjie.library.R;
+import com.yc.library.R;
 
 
 /**

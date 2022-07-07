@@ -64,7 +64,6 @@ dependencies {
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':SerialTaskLib')
     implementation project(path: ':ThreadPoolLib')
-    implementation rootProject.ext.dependencies["YCCustomTextLib"]
     implementation project(path: ':HttpServer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':LibraryLayer')
@@ -79,6 +78,8 @@ dependencies {
 
     implementation project(path: ':RouteManager')
     implementation project(path: ':RouteAnnotations')
+    implementation project(path: ':BaseProgress')
+    implementation project(path: ':CircleProgress')
     annotationProcessor project(path: ':RouteCompiler')
 
     implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3'

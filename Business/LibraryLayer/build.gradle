@@ -92,8 +92,6 @@ dependencies {
     //annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     api(rootProject.ext.dependencies["retrofit"])
     api rootProject.ext.dependencies["easypermissions"]
-    api rootProject.ext.dependencies["YCProgressLib"]
-    api rootProject.ext.dependencies["YCGalleryLib"]
     implementation project(path: ':XlogServer')
 
     //状态栏

@@ -6,12 +6,11 @@ import android.view.View;
 import android.widget.Button;
 
 
-import com.ns.yc.ycprogresslib.CircleProgressbar;
-import com.ns.yc.ycprogresslib.OnCircleProgressListener;
-import com.ns.yc.ycprogresslib.ProgressBarUtils;
-
+import com.yc.circleprogresslib.CircleProgressbar;
+import com.yc.circleprogresslib.OnCircleProgressListener;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
+import com.yc.ycprogresslib.ProgressBarUtils;
 
 
 /**

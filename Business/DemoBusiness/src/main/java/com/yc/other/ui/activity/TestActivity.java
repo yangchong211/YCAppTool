@@ -77,7 +77,6 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             startActivity(new Intent(this, BannerViewActivity.class));
         } else if (i == R.id.tv_3) {
             mDelegate.getAnimTime();
-            startActivity(new Intent(this, ImageGalleryActivity.class));
         } else if (i == R.id.tv_4) {
             mDelegate.setStartAnim();
             startActivity(new Intent(this, ProgressThirdActivity.class));

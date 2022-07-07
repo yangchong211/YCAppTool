@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.yc.ycstatelib.StateLayoutManager;
-import com.ycbjie.library.R;
+import com.yc.library.R;
 import com.yc.library.base.mvp.BasePresenter;
 
 

@@ -103,12 +103,6 @@ ext {
             glide                     : "com.github.bumptech.glide:glide:$glideSdkVersion",
             "glide-compiler"          : "com.github.bumptech.glide:compiler:$glideSdkVersion",
 
-
-            //yc
-            "YCProgressLib"           : "cn.yc:YCProgressLib:1.2.7",
-            "YCCustomTextLib"         : "cn.yc:YCCustomTextLib:2.1.4",
-            "YCGalleryLib"            : "cn.yc:YCGalleryLib:1.1.5",
-            "YCVideoPlayerLib"        : "cn.yc:YCVideoPlayerLib:2.6.6",
             //widget库
             //https://github.com/yangchong211/YCWidgetLib
             "ShadowConfig"            : "com.github.yangchong211.YCWidgetLib:ShadowConfig:1.0.5",

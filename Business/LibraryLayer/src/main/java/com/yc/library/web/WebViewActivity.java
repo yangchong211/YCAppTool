@@ -25,7 +25,7 @@ import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 import com.yc.webviewlib.view.X5WebView;
 import com.yc.webviewlib.widget.WebProgress;
-import com.ycbjie.library.R;
+import com.yc.library.R;
 
 /**
  * <pre>

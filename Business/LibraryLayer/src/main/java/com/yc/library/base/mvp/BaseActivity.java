@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.statusbar.bar.StateAppBar;
-import com.ycbjie.library.R;
+import com.yc.library.R;
 
 
 /**

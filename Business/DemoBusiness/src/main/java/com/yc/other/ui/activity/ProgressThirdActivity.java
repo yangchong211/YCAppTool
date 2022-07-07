@@ -2,13 +2,11 @@ package com.yc.other.ui.activity;
 
 import android.view.View;
 
-
-import com.ns.yc.ycprogresslib.NumberProgressbar;
-import com.ns.yc.ycprogresslib.OnNumberProgressListener;
-import com.ns.yc.ycprogresslib.ProgressBarUtils;
-
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
+import com.yc.ycprogresslib.NumberProgressbar;
+import com.yc.ycprogresslib.OnNumberProgressListener;
+import com.yc.ycprogresslib.ProgressBarUtils;
 
 /**
  * <pre>

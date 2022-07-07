@@ -1,7 +1,7 @@
 package com.yc.library.api;
 
 import com.yc.library.bean.ListNewsData;
-import com.ycbjie.library.R;
+import com.yc.library.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

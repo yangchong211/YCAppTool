@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/back"
+            android:padding="6dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_back_bg"
+            android:src="@drawable/ic_player_back" />
+
+
+        <TextView
+            android:id="@+id/ad_time"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:textSize="12sp"
+            android:background="@drawable/shape_ad_bg"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            tools:text="2s|跳过" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|end"
+        android:gravity="end">
+
+        <ImageView
+            android:id="@+id/iv_play"
+            android:padding="6dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_back_bg"
+            android:src="@drawable/selector_play_button" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/ad_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:textSize="12sp"
+            android:background="@drawable/shape_ad_bg"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            tools:text="了解详情>" />
+
+        <ImageView
+            android:id="@+id/iv_volume"
+            android:padding="6dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_back_bg"
+            android:src="@drawable/ic_player_volume_off" />
+
+        <ImageView
+            android:id="@+id/fullscreen"
+            android:padding="6dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_back_bg"
+            android:src="@drawable/selector_full_screen_button" />
+    </LinearLayout>
+</FrameLayout>

@@ -200,9 +200,6 @@ dependencies {
     if (!rootProject.ext.isOtherApplication){
         implementation project(path: ':DemoBusiness')
     }
-    if (!rootProject.ext.isVideoApplication){
-        implementation project(path: ':VideoBusiness')
-    }
     implementation project(path: ':AnimBusiness')
     implementation project(path: ':StatusBusiness')
     implementation project(path: ':AppStatusLib')

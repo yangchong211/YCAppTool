@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteBg">
+
+    <androidx.appcompat.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorTheme"
+        android:theme="@style/AppTheme.ActionBar"
+        app:contentInsetStart="0.0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:visibility="visible">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="视频内核"
+            android:textSize="18sp"
+            android:textColor="@color/blackText"/>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_1_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@color/colorAccent"
+                    android:text="1.1 ijk内核"/>
+
+                <TextView
+                    android:id="@+id/tv_1_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="10dp"
+                    android:background="@color/colorAccent"
+                    android:text="1.3 谷歌Exo内核"/>
+
+                <TextView
+                    android:id="@+id/tv_1_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="10dp"
+                    android:background="@color/colorAccent"
+                    android:text="1.3 普通内核"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_2_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@color/colorAccent"
+                    android:text="2.1 视频api"/>
+
+                <TextView
+                    android:id="@+id/tv_2_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="10dp"
+                    android:background="@color/colorAccent"
+                    android:text="2.3 缓存api"/>
+
+                <TextView
+                    android:id="@+id/tv_2_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:padding="10dp"
+                    android:background="@color/colorAccent"
+                    android:text="2.3 封装思路"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_3_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="3.1 最简单的播放视频，也是最常见"/>
+            <TextView
+                android:id="@+id/tv_3_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="3.2 竖屏全屏播放/横屏全屏播放"/>
+            <TextView
+                android:id="@+id/tv_3_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="3.3 一个页面播放多个视频"/>
+            <TextView
+                android:id="@+id/tv_4_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="4.1 页面悬浮可拖动小窗口播放视频"/>
+            <TextView
+                android:id="@+id/tv_4_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="4.2 视频列表中自动悬浮播放视频"/>
+            <TextView
+                android:id="@+id/tv_4_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="4.3 视频列表中小窗口播放视频"/>
+            <TextView
+                android:id="@+id/tv_5_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="5.1 全屏播放可以切换视频清晰度"/>
+            <TextView
+                android:id="@+id/tv_6_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="6.1 在fragment的列表播放"/>
+            <TextView
+                android:id="@+id/tv_6_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="6.2 在fragment的列表播放，自动播放"/>
+            <TextView
+                android:id="@+id/tv_6_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="6.3 在列表中播放，类似抖音，使用ViewPager"/>
+            <TextView
+                android:id="@+id/tv_6_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="6.4 在列表中播放，类似抖音，使用RecyclerView"/>
+            <TextView
+                android:id="@+id/tv_6_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="6.5 在fragment的列表播放无缝切换"/>
+            <TextView
+                android:id="@+id/tv_6_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="6.6 在列表播放，一次滑动一个item"/>
+            <TextView
+                android:id="@+id/tv_7_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="7.1 播放器添加视频自定义弹幕视图"/>
+            <TextView
+                android:id="@+id/tv_8_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="8.1 播放器添加自定义广告"/>
+            <TextView
+                android:id="@+id/tv_8_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="8.2 播放器添加新手引导视图"/>
+            <TextView
+                android:id="@+id/tv_9_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="9.1 保存视频播放位置，类似爱奇艺进入从上一位置播放"/>
+            <TextView
+                android:id="@+id/tv_10_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="10.1 连续性播放视频"/>
+            <TextView
+                android:id="@+id/tv_11_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="11.1 视频播放器切换清晰度操作"/>
+            <TextView
+                android:id="@+id/tv_13_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:background="@color/colorAccent"
+                android:text="13.1 使用自定义SurfaceView学习demo"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

@@ -13,8 +13,6 @@ import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.mvctodo.NetworkActivity;
 import com.yc.toollib.crash.CrashLibUtils;
 import com.yc.toolutils.click.FastClickUtils;
-import com.yc.video.ui.activity.VideoActivity;
-
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 
 public class HeaderComponent implements InterItemView {
@@ -78,7 +76,7 @@ public class HeaderComponent implements InterItemView {
                     break;
                 //视频播放器
                 case R.id.tv_home_eight:
-                    VideoActivity.startActivity(context);
+
                     break;
                 default:
                     break;

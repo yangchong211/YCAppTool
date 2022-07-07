@@ -1,13 +1,15 @@
 /* +++++++++ 主项目 +++++++++ */
 include ':AppTool'
 include ':AidlService'
+include ':AidlClient'
+include ':AppPlayer'
 include ':AppLeet'
 include ':AppDesign'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
 include ':GameBusiness', ':AnimBusiness',':MvvmDatabinding',
-        ':VideoBusiness', ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
+        ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
         ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',':CommonBusiness',
         ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
         ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness', ':PlayerBusiness',
@@ -15,7 +17,6 @@ include ':GameBusiness', ':AnimBusiness',':MvvmDatabinding',
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
-project(':VideoBusiness').projectDir = new File('Business/VideoBusiness')
 project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
 project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
 project(':MvpTodoBusiness').projectDir = new File('Business/MvpTodoBusiness')
@@ -217,4 +218,4 @@ project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 
 
-include ':AidlClient'
+

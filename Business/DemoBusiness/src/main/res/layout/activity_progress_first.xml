@@ -37,7 +37,7 @@
 
 
 
-    <com.ns.yc.ycprogresslib.RingProgressBar
+    <com.yc.ycprogresslib.RingProgressBar
         android:id="@+id/bar_percent"
         android:layout_marginTop="10dp"
         android:layout_width="100dp"
@@ -65,7 +65,7 @@
     </LinearLayout>
 
 
-    <com.ns.yc.ycprogresslib.RingProgressBar
+    <com.yc.ycprogresslib.RingProgressBar
         android:id="@+id/bar_null"
         android:layout_marginTop="10dp"
         android:layout_width="100dp"
@@ -94,7 +94,7 @@
             android:text="暂停"/>
     </LinearLayout>
 
-    <com.ns.yc.ycprogresslib.RingProgressBar
+    <com.yc.ycprogresslib.RingProgressBar
         android:id="@+id/bar_all"
         android:layout_marginTop="10dp"
         android:layout_width="100dp"

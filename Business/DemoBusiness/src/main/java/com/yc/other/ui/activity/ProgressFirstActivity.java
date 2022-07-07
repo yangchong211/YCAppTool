@@ -3,11 +3,10 @@ package com.yc.other.ui.activity;
 import android.view.View;
 
 
-import com.ns.yc.ycprogresslib.ProgressBarUtils;
-import com.ns.yc.ycprogresslib.RingProgressBar;
-
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
+import com.yc.ycprogresslib.ProgressBarUtils;
+import com.yc.ycprogresslib.RingProgressBar;
 
 import java.util.Timer;
 import java.util.TimerTask;

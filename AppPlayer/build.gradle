@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    defaultConfig {
+        applicationId "com.yc.ycvideoplayer"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        // dex突破65535的限制
+        multiDexEnabled true
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi', 'armeabi-v7a'
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    //jdk1.8
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
+    //其他库
+    implementation 'com.github.bumptech.glide:glide:4.9.0'                 //谷歌图片加载库
+    implementation 'jp.wasabeef:glide-transformations:2.0.1'
+
+    //exo的UI库
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.3'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.3'
+
+    //这两个是必须要加的，其它的可供选择
+    implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
+    //其他库文件
+    //implementation 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
+    //implementation 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
+    //implementation 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
+    //implementation 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
+
+    //弹幕
+    implementation 'com.github.ctiao:DanmakuFlameMaster:0.9.25'
+    implementation 'com.github.ctiao:ndkbitmap-armv7a:0.9.21'
+
+
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
+
+
+//    implementation 'com.github.yangchong211.YCVideoPlayer:VideoPlayer:1.1.0'
+//    implementation 'com.github.yangchong211.YCVideoPlayer:VideoKernel:1.1.0'
+//    implementation 'com.github.yangchong211.YCVideoPlayer:VideoView:1.1.0'
+//    implementation 'com.github.yangchong211.YCVideoPlayer:MusicPlayer:1.1.0'
+//    implementation 'com.github.yangchong211.YCVideoPlayer:VideoM3u8:1.1.0'
+//    implementation 'com.github.yangchong211.YCVideoPlayer:VideoSqlLite:1.1.0'
+//    implementation 'com.github.yangchong211.YCVideoPlayer:AudioPlayer:1.1.0'
+//    implementation 'com.github.yangchong211.YCVideoPlayer:VideoTool:1.1.0'
+//    implementation 'com.github.yangchong211.YCVideoPlayer:VideoCache:1.1.0'
+
+    implementation project(path: ':VideoCache')
+    implementation project(path: ':VideoPlayer')
+    implementation project(path: ':VideoKernel')
+    implementation project(path: ':VideoView')
+    implementation project(path: ':MusicPlayer')
+    implementation project(path: ':VideoM3u8')
+    implementation project(path: ':VideoSqlLite')
+    implementation project(path: ':AudioPlayer')
+    implementation project(path: ':VideoTool')
+
+    //自己封装的库，都有对应的案例项目【欢迎star】：https://github.com/yangchong211
+    implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
+    implementation 'com.github.yangchong211:YCScrollPager:1.0.5'
+    implementation 'com.github.yangchong211:YCStateLayout:1.2.5'
+
+}
