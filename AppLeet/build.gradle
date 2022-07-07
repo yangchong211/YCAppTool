@@ -30,5 +30,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation project(path: ':LibraryLayer')
+    implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':XlogServer')
 }

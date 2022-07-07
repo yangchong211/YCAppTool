@@ -1,15 +1,14 @@
-package com.yc.leetbusiness;
+package com.yc.leetbusiness.code;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yc.leetbusiness.array.ArrayTestActivity;
-import com.yc.leetbusiness.code.CodeTestActivity;
+import com.yc.leetbusiness.R;
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.logging.LoggerService;
+import com.yc.logging.logger.Logger;
 
-public class LeetCodeActivity extends BaseActivity implements View.OnClickListener {
+public class CodeTestActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tv1;
     private TextView tv2;
@@ -24,25 +23,9 @@ public class LeetCodeActivity extends BaseActivity implements View.OnClickListen
     private TextView tv11;
     private TextView tv12;
 
-    /**
-     * 开启页面
-     *
-     * @param context 上下文
-     */
-    public static void startActivity(Context context) {
-        try {
-            Intent target = new Intent();
-            target.setClass(context, LeetCodeActivity.class);
-            //target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(target);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public int getContentView() {
-        return R.layout.activity_leet_test;
+        return R.layout.activity_leet_code;
     }
 
     @Override
@@ -66,6 +49,7 @@ public class LeetCodeActivity extends BaseActivity implements View.OnClickListen
         tv1.setOnClickListener(this);
         tv2.setOnClickListener(this);
         tv3.setOnClickListener(this);
+        tv4.setOnClickListener(this);
     }
 
     @Override
@@ -75,10 +59,17 @@ public class LeetCodeActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if (v == tv1){
-            startActivity(CodeTestActivity.class);
-        } else if (v == tv2){
-            startActivity(ArrayTestActivity.class);
+        if (v == tv1) {
+
+        } else if (v == tv2) {
+
+        } else if (v == tv3) {
+
+        } else if (v == tv4) {
+
+        } else if (v == tv5){
+
         }
     }
+
 }
