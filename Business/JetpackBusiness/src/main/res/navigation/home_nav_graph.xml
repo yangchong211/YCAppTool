@@ -13,14 +13,22 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
     </fragment>
+    <action
+        android:id="@+id/actionHomeFragment"
+        app:destination="@id/homeFragment" />
+
+
 
     <fragment
         android:id="@+id/navigationFragment"
         android:name="com.yc.jetpack.ui.fragment.NavigationFragment"
         android:label="NavigationFragment"
         tools:layout="@layout/fragment_navigation">
-
     </fragment>
+    <action
+        android:id="@+id/actionNavigationFragment"
+        app:destination="@id/navigationFragment" />
+
 
     <activity
         android:id="@+id/navigationActivity"
@@ -36,9 +44,21 @@
         android:name="com.yc.jetpack.study.livedata.LiveDataActivity"
         android:label="LiveDataActivity"
         tools:layout="@layout/activity_live_data">
-
     </activity>
+    <action
+        android:id="@+id/actionLiveDataActivity"
+        app:destination="@id/liveDataActivity" />
 
+
+    <activity
+        android:id="@+id/viewModelActivity"
+        android:name="com.yc.jetpack.study.model.ViewModelActivity"
+        android:label="ViewModelActivity"
+        tools:layout="@layout/activity_saved_state">
+    </activity>
+    <action
+        android:id="@+id/actionViewModelActivity"
+        app:destination="@id/viewModelActivity" />
 
 
 </navigation>

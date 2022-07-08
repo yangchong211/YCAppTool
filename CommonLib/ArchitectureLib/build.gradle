@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -22,6 +23,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -31,15 +35,15 @@ dependencies {
 
     // jetpack系列
     //Navigation
-    implementation 'androidx.navigation:navigation-fragment:2.0.0'
-    implementation "androidx.navigation:navigation-fragment-ktx:2.0.0"
-    implementation "androidx.navigation:navigation-ui-ktx:2.0.0"
+    implementation(rootProject.ext.dependencies["navigationFragment"])
+    implementation(rootProject.ext.dependencies["navigationFragmentKtx"])
+    implementation(rootProject.ext.dependencies["navigationUiKtx"])
     // liveData
     implementation(rootProject.ext.dependencies["livedataKtx"])
     implementation(rootProject.ext.dependencies["livedataCore"])
     // viewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation(rootProject.ext.dependencies["viewmodelKtx"])
+    implementation(rootProject.ext.dependencies["lifecycle"])
     // room 使用kapt，fix RoomDatabase_Impl does not exist
     implementation(rootProject.ext.dependencies["roomRuntime"])
     //kapt(rootProject.ext.dependencies["roomCompiler"])

@@ -1,7 +1,6 @@
-package com.yc.architecturelib;
+package com.yc.architecturelib.livedata
 
-public enum LiveDataStatus {
-
+enum class LiveDataStatus {
     /**
      * 数据状态发生改变之前
      * 当进行数据处理操作(请求网络，查询数据库...）操作发生之前
@@ -32,14 +31,11 @@ public enum LiveDataStatus {
      */
     RESET;
 
-    private String message;
+    var message: String? = null
+        private set
 
-    public LiveDataStatus setMessage(String msg) {
-        this.message = msg;
-        return this;
-    }
-
-    public String getMessage() {
-        return message;
+    fun setMessage(msg: String?): LiveDataStatus {
+        message = msg
+        return this
     }
 }

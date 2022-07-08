@@ -27,7 +27,14 @@ class JetpackActivity : AppCompatActivity(){
 
     private fun initNavController() {
         navController = Navigation.findNavController(this, R.id.fragment_home)
+        //通过id跳转
         navController.navigate(R.id.homeFragment)
+        //通过action跳转
+        //navController.navigate(HomeNavGraphDirections.actionHomeFragment())
+
+
+        //通过action跳转
+        //navigate(R.id.fragment_home, HomeNavGraphDirections.actionHomeFragment())
     }
 
 

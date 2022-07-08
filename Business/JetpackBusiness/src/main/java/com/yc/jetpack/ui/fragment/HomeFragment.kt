@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.yc.architecturelib.navigation.navigate
 import com.yc.jetpack.study.workmanager.WorkManagerActivity
 import com.yc.jetpack.R
 import com.yc.jetpack.study.binding.SolutionActivity
@@ -60,15 +61,13 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.tv_navigation ->{
-                findNavController().navigate(R.id.navigationFragment)
+                navigate(R.id.navigationFragment)
             }
             R.id.tv_live_data ->{
-                findNavController().navigate(R.id.liveDataActivity)
+                navigate(NavigationFragmentDirections.actionLiveDataActivity())
             }
             R.id.tv_view_model ->{
-                activity?.let {
-                    ViewModelActivity.startActivity(it)
-                }
+                navigate(R.id.viewModelActivity)
             }
             R.id.tv_data_binding ->{
                 activity?.let {

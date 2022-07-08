@@ -37,6 +37,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     sourceSets {
         main {
             if (rootProject.ext.isAnimApplication) {
@@ -81,7 +85,7 @@ dependencies {
     implementation project(path: ':ApplicationLib')
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':BaseClassLib')
-
+    implementation project(path: ':ArchitectureLib')
 
 
     implementation(rootProject.ext.dependencies["kotlinxJdk"])
