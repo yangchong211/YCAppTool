@@ -18,7 +18,7 @@ public interface IActivityManager<T> {
      * @param clazz clazz
      * @return T
      */
-    T get(Class<T> clazz);
+    T get(Class<?> clazz);
 
     /**
      * 获取栈顶的class
@@ -78,7 +78,7 @@ public interface IActivityManager<T> {
      * @param clazz clazz
      * @return true表示存在
      */
-    boolean isExist(Class<T> clazz);
+    boolean isExist(Class<?> clazz);
 
     /**
      * 推出app

@@ -149,7 +149,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         }else if (id == R.id.btn_restart3) {
             RestartAppHelper.restartApp(this,RestartFactory.LAUNCHER);
         }else if (id == R.id.btn_restart4) {
-            RestartAppHelper.restartApp(this,RestartFactory.MAINIFEST);
+            RestartAppHelper.restartApp(this,RestartFactory.MANIFEST);
         }else if (id == R.id.btn_intent) {
             intentLog();
         } else if (id == R.id.btn_4) {
@@ -339,6 +339,45 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         IntentLogger.printExtras("intent log extras : ", intent);
         //打印intent中flags参数
         IntentLogger.printFlags("intent log flags : ", intent);
+    }
+
+    private void activityManager(){
+        //退出应用程序
+        ActivityManager.getInstance().appExist();
+        //查找指定的Activity
+        Activity commonActivity = ActivityManager.getInstance().get(CommonActivity.class);
+        //判断界面Activity是否存在
+        boolean exist = ActivityManager.getInstance().isExist(CommonActivity.class);
+        //移除栈顶的activity
+        ActivityManager.getInstance().pop();
+        //结束所有Activity
+        ActivityManager.getInstance().finishAll();
+        //结束指定的Activity
+        ActivityManager.getInstance().finish(CommonActivity.this);
+        //判断activity任务栈是否为空
+        ActivityManager.getInstance().isEmpty();
+        //获取栈顶的Activity
+        Activity activity = ActivityManager.getInstance().peek();
+        //判断activity是否处于栈顶
+        ActivityManager.getInstance().isActivityTop(this,"MainActivity");
+        //添加 activity 入栈
+        ActivityManager.getInstance().add(CommonActivity.this);
+        //移除 activity 出栈
+        ActivityManager.getInstance().remove(CommonActivity.this);
+        //监听某个activity的生命周期，完全解耦合
+        ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.class, new ActivityLifecycleListener() {
+            @Override
+            public void onActivityCreated(@Nullable Activity activity, Bundle savedInstanceState) {
+                super.onActivityCreated(activity, savedInstanceState);
+            }
+
+            @Override
+            public void onActivityStarted(@Nullable Activity activity) {
+                super.onActivityStarted(activity);
+            }
+        });
+        //移除某个activity的生命周期，完全解耦合
+        //ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.this,listener);
     }
 
 }

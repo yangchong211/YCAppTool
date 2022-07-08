@@ -23,7 +23,7 @@ import java.util.List;
  *     revise:
  * </pre>
  */
-public class MainifestRestartImpl implements IRestartApp {
+public class ManifestRestartImpl implements IRestartApp {
 
     @Override
     public void restartApp(Context context) {

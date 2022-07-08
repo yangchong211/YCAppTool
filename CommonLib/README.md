@@ -45,34 +45,44 @@
 ### 04.Activity栈管理库
 - 非常好用的activity任务栈管理库，自动化注册。完全解耦合的activity栈管理，拿来即可用，或者栈顶Activity，移除添加，推出某个页面，获取应用注册Activity列表等，可以注册监听某个页面的生命周期，小巧好用。
     ``` java
-    //添加 activity
-    ActivityManager.getInstance().add(this);
-    //移除 activity
-    ActivityManager.getInstance().remove(this);
-    //结束指定的Activity
-    ActivityManager.getInstance().finish(this);
-    //结束所有Activity
-    ActivityManager.getInstance().finishAll();
-    //退出应用程序。先回退到桌面，然后在杀死进程
+    //退出应用程序
     ActivityManager.getInstance().appExist();
-    //这个是监听目标Activity的生命周期变化
-    ActivityManager.getInstance().registerActivityLifecycleListener(
-            CommonActivity.class,new ActivityLifecycleListener(){
-                @Override
-                public void onActivityCreated(@Nullable Activity activity, Bundle savedInstanceState) {
-                    super.onActivityCreated(activity, savedInstanceState);
-                }
-            });
+    //查找指定的Activity
+    Activity commonActivity = ActivityManager.getInstance().get(CommonActivity.class);
+    //判断界面Activity是否存在
+    boolean exist = ActivityManager.getInstance().isExist(CommonActivity.class);
     //移除栈顶的activity
     ActivityManager.getInstance().pop();
+    //结束所有Activity
+    ActivityManager.getInstance().finishAll();
+    //结束指定的Activity
+    ActivityManager.getInstance().finish(CommonActivity.this);
+    //判断activity任务栈是否为空
+    ActivityManager.getInstance().isEmpty();
     //获取栈顶的Activity
     Activity activity = ActivityManager.getInstance().peek();
     //判断activity是否处于栈顶
     ActivityManager.getInstance().isActivityTop(this,"MainActivity");
-    //返回AndroidManifest.xml中注册的所有Activity的class
-    ActivityManager.getInstance().getActivitiesClass(
-            this, AppUtils.getAppPackageName(),null);
+    //添加 activity 入栈
+    ActivityManager.getInstance().add(CommonActivity.this);
+    //移除 activity 出栈
+    ActivityManager.getInstance().remove(CommonActivity.this);
+    //监听某个activity的生命周期，完全解耦合
+    ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.class, new ActivityLifecycleListener() {
+        @Override
+        public void onActivityCreated(@Nullable Activity activity, Bundle savedInstanceState) {
+            super.onActivityCreated(activity, savedInstanceState);
+        }
+    
+        @Override
+        public void onActivityStarted(@Nullable Activity activity) {
+            super.onActivityStarted(activity);
+        }
+    });
+    //移除某个activity的生命周期，完全解耦合
+    //ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.this,listener);
     ```
+
 
 
 
@@ -181,6 +191,8 @@
 
 
 ### 07.App重新启动库
+- 使用场景说明
+    - 比如App切换了debug或者release环境，需要进行app重新启动，可以使用该库，小巧好用。一行代码搞定，傻瓜式使用！
 - 第一种方式，开启一个新的服务KillSelfService，用来重启本APP。
     ``` java
     RestartAppHelper.restartApp(this,RestartFactory.SERVICE);
@@ -248,6 +260,17 @@
     PendingIntentLogger.printTag("intent tag : " , intent)
     ```
 
+
+### 12.基础接口库
+- 背景说明：由于组件化开发中有很多基础组件，由于某些需求，需要统计一些事件，异常上报到平台上，获取控制降级，自定义日志打印等，因此采用接口回调方式实现
+- IEventTrack，event事件接口，一般用于特殊事件上报作用
+- IExceptionTrack，异常事件接口，一般可以用在组件库中catch捕获的时候，上报日志到服务平台操作
+- ILogger，log自定义日志接口，一般用于组件库日志打印，暴露给外部开发者
+- IMonitorToggle，AB测试开关接口，也可以叫降级开关，一般用于组件库某功能降级操作，暴露给开发者设置
+
+
+
+### 13.异常上报接口库
 
 
 

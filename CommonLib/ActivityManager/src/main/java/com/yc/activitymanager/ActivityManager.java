@@ -54,10 +54,10 @@ public class ActivityManager implements IActivityManager<Activity> {
     }
 
     /**
-     * 主界面Activity是否存在
+     * 判断界面Activity是否存在
      */
     @Override
-    public boolean isExist(Class<Activity> clazz) {
+    public boolean isExist(Class<?> clazz) {
         if (mActivityStacks == null || mActivityStacks.empty()) {
             return false;
         }
@@ -78,7 +78,7 @@ public class ActivityManager implements IActivityManager<Activity> {
      * @param clazz 目标Activity
      */
     @Override
-    public Activity get(Class<Activity> clazz) {
+    public Activity get(Class<?> clazz) {
         if (mActivityStacks == null || mActivityStacks.empty()) {
             return null;
         }
@@ -109,6 +109,10 @@ public class ActivityManager implements IActivityManager<Activity> {
         mInit = true;
     }
 
+    /**
+     * 判断activity任务栈是否为空
+     * @return  是否为空
+     */
     @Override
     public boolean isEmpty() {
         return mActivityStacks == null || mActivityStacks.empty();
@@ -173,7 +177,7 @@ public class ActivityManager implements IActivityManager<Activity> {
     }
 
     /**
-     * 添加 activity
+     * 添加 activity 入栈
      *
      * @param activity {@link Activity}
      */
@@ -185,7 +189,7 @@ public class ActivityManager implements IActivityManager<Activity> {
     }
 
     /**
-     * 移除 activity
+     * 移除 activity 出栈
      *
      * @param activity {@link Activity}
      */

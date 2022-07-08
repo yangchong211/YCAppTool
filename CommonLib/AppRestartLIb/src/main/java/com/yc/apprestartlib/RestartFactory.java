@@ -1,5 +1,10 @@
 package com.yc.apprestartlib;
 
+import androidx.annotation.StringDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * <pre>
  *     @author yangchong
@@ -15,9 +20,9 @@ public final class RestartFactory {
     public static final String ALARM = "alarm";
     public static final String SERVICE = "service";
     public static final String LAUNCHER = "launcher";
-    public static final String MAINIFEST = "mainifest";
+    public static final String MANIFEST = "manifest";
 
-    static IRestartApp create(String type){
+    static IRestartApp create(@RestartType String type) {
         switch (type) {
             case ALARM:
                 return new AlarmRestartImpl();
@@ -25,11 +30,16 @@ public final class RestartFactory {
                 return new ServiceRestartImpl();
             case LAUNCHER:
                 return new LauncherRestartImpl();
-            case MAINIFEST:
-                return new MainifestRestartImpl();
+            case MANIFEST:
+                return new ManifestRestartImpl();
             default:
                 return new EmptyRestartImpl();
         }
+    }
+
+    @StringDef({ALARM, SERVICE, LAUNCHER, MANIFEST})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface RestartType {
     }
 
 }
