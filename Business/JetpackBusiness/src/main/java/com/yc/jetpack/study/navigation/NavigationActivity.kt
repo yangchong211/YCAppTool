@@ -22,6 +22,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.yc.architecturelib.navigation.findNavController2
+import com.yc.architecturelib.navigation.navigateUp
 import com.yc.jetpack.R
 import com.yc.jetpack.ui.activity.JetpackActivity
 
@@ -95,12 +97,12 @@ class NavigationActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = findNavController(R.id.my_nav_host_fragment)
+        val navController = findNavController2(R.id.my_nav_host_fragment)
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return findNavController(R.id.my_nav_host_fragment).navigateUp()
+        return navigateUp(R.id.my_nav_host_fragment)
     }
 
 }

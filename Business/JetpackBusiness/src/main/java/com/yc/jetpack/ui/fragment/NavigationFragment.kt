@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
+import com.yc.architecturelib.navigation.navigate
 import com.yc.jetpack.R
 import com.yc.jetpack.study.navigation.NavigationActivity
 
@@ -46,7 +47,8 @@ class NavigationFragment : Fragment(), View.OnClickListener {
 
             }
             R.id.btn_bottom ->{
-                findNavController().navigate(R.id.navigationActivity)
+                navigate(R.id.navigationActivity)
+                //findNavController().navigate(R.id.navigationActivity)
             }
         }
     }

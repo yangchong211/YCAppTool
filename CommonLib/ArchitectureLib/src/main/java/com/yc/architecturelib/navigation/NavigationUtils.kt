@@ -1,6 +1,7 @@
 package com.yc.architecturelib.navigation
 
 import android.app.Activity
+import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -10,11 +11,15 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.yc.architecturelib.R
 
-val ANIM_ARRAY_SLIDE = intArrayOf(R.anim.slide_enter, R.anim.slide_exit,
-    R.anim.slide_pop_enter, R.anim.slide_pop_exit)
+val ANIM_ARRAY_SLIDE = intArrayOf(
+    R.anim.slide_enter, R.anim.slide_exit,
+    R.anim.slide_pop_enter, R.anim.slide_pop_exit
+)
 
-val ANIM_ARRAY_TOP = intArrayOf(R.anim.bottom_enter, R.anim.bottom_exit,
-    R.anim.bottom_pop_enter, R.anim.bottom_pop_exit)
+val ANIM_ARRAY_TOP = intArrayOf(
+    R.anim.bottom_enter, R.anim.bottom_exit,
+    R.anim.bottom_pop_enter, R.anim.bottom_pop_exit
+)
 
 /*------------------------------------------------------------------------------*/
 /*--------------------------Activity拓展函数--------------------------------------*/
@@ -25,6 +30,10 @@ val ANIM_ARRAY_TOP = intArrayOf(R.anim.bottom_enter, R.anim.bottom_exit,
  */
 fun Activity.findNavController2(@IdRes viewId: Int): NavController {
     return Navigation.findNavController(this, viewId)
+}
+
+fun Activity.navigateUp(@IdRes viewId: Int): Boolean {
+    return findNavController2(viewId).navigateUp()
 }
 
 fun Activity.navigate(@IdRes viewId: Int, directions: NavDirections, navOptions: NavOptions) {
@@ -53,8 +62,10 @@ fun Activity.navigate(
 }
 
 @Suppress("unused")
-fun Activity.popCurrentBackStackAndNavigate(@IdRes viewId: Int, directions: NavDirections,
-    animArray: IntArray = ANIM_ARRAY_SLIDE) {
+fun Activity.popCurrentBackStackAndNavigate(
+    @IdRes viewId: Int, directions: NavDirections,
+    animArray: IntArray = ANIM_ARRAY_SLIDE
+) {
     navigate(
         viewId,
         directions,
@@ -65,8 +76,10 @@ fun Activity.popCurrentBackStackAndNavigate(@IdRes viewId: Int, directions: NavD
     )
 }
 
-fun Activity.popAllBackStackAndNavigate(@IdRes viewId: Int, directions: NavDirections,
-    animArray: IntArray = ANIM_ARRAY_SLIDE) {
+fun Activity.popAllBackStackAndNavigate(
+    @IdRes viewId: Int, directions: NavDirections,
+    animArray: IntArray = ANIM_ARRAY_SLIDE
+) {
     navigate(
         viewId,
         directions,
@@ -88,16 +101,28 @@ fun Fragment.findNavController2(): NavController {
 /**
  * Fragment拓展函数
  */
+fun Fragment.navigate(@IdRes resId: Int) {
+    //通过id跳转
+    findNavController2().navigate(resId)
+}
+
+fun Fragment.navigate(@IdRes resId: Int, args: Bundle?) {
+    //通过id跳转
+    findNavController2().navigate(resId, args)
+}
+
+fun Fragment.navigate(@IdRes resId: Int, args: Bundle?, navOptions: NavOptions?) {
+    //通过id跳转
+    findNavController2().navigate(resId, args, navOptions)
+}
+
 fun Fragment.navigate(directions: NavDirections, navOptions: NavOptions) {
+    //通过action跳转
     findNavController2().navigate(directions, navOptions)
 }
 
-fun Fragment.navigateUp() {
-    findNavController2().navigateUp()
-}
-
-fun Fragment.navigate(@IdRes resId : Int) {
-    findNavController2().navigate(resId)
+fun Fragment.navigateUp(): Boolean {
+    return findNavController2().navigateUp()
 }
 
 fun Fragment.navigate(

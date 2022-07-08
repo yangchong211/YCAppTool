@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import com.yc.architecturelib.navigation.navigate
 import com.yc.baseclasslib.fragment.BaseVisibilityFragment
 import com.yc.baseclasslib.fragment.OnFragmentVisibilityListener
 import com.yc.jetpack.R
@@ -56,9 +57,9 @@ class FlowStepFragment : BaseVisibilityFragment() {
                 )
             }
             else->{
-                btn.setOnClickListener(
-                    Navigation.createNavigateOnClickListener(R.id.next_one_action)
-                )
+                btn.setOnClickListener {
+                    navigate(R.id.next_one_action)
+                }
             }
         }
     }
