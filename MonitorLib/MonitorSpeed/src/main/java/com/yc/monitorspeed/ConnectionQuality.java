@@ -1,4 +1,4 @@
-package com.yc.netlib.connect;
+package com.yc.monitorspeed;
 
 /**
  * 不同连接质量的一般枚举

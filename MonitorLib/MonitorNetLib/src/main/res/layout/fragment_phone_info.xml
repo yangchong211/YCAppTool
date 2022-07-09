@@ -19,18 +19,6 @@
             android:paddingBottom="30dp"
             android:orientation="vertical">
 
-
-            <TextView
-                style="@style/DetailTitle"
-                android:text="网络宽带信息"/>
-
-            <TextView
-                android:id="@+id/tv_band_width"
-                android:textColor="#8033b7"
-                android:background="@drawable/shape_request_headers"
-                style="@style/DetailContent"/>
-
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

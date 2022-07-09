@@ -5,7 +5,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.util.Printer;
 
-import com.yc.toolutils.ExceptionReporter;
+import com.yc.eventuploadlib.ExceptionReporter;
+
 
 /**
  * <pre>

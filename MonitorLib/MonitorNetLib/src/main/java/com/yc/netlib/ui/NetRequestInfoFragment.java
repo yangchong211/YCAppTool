@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.yc.netlib.R;
 import com.yc.netlib.utils.NetWorkUtils;
+import com.yc.toolutils.file.AppFileUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,8 +71,8 @@ public class NetRequestInfoFragment extends Fragment {
         mTotalSec.setText(NetWorkUtils.formatTime(getContext(), time));
         long requestSize = NetworkManager.get().getTotalRequestSize();
         long responseSize = NetworkManager.get().getTotalResponseSize();
-        mTotalUpload.setText(NetWorkUtils.getPrintSizeForSpannable(requestSize));
-        mTotalDown.setText(NetWorkUtils.getPrintSizeForSpannable(responseSize));
+        mTotalUpload.setText(AppFileUtils.getPrintSizeForSpannable(requestSize));
+        mTotalDown.setText(AppFileUtils.getPrintSizeForSpannable(responseSize));
         List<NetPieChart.PieData> data = new ArrayList<>();
         Resources resource = getResources();
         if (postCount != 0) {

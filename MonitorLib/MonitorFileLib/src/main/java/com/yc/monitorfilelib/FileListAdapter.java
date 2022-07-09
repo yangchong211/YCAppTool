@@ -70,7 +70,7 @@ public class FileListAdapter extends BaseRecycleAdapter<File> {
             tvSize.setVisibility(View.VISIBLE);
             long directorySize = AppFileUtils.getDirectorySize(file);
             SpannableString printSizeForSpannable =
-                    FileExplorerUtils.getPrintSizeForSpannable(directorySize);
+                    AppFileUtils.getPrintSizeForSpannable(directorySize);
             tvSize.setText(printSizeForSpannable);
         }
     }

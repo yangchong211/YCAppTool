@@ -21,7 +21,5 @@
         <activity
             android:name="com.yc.netlib.ui.NetworkDetailActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".connect.ConnectionActivity"
-            android:screenOrientation="portrait"/>
     </application>
 </manifest>

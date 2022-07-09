@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.yc.toolutils.AppIntentUtils;
 import com.yc.webviewlib.base.X5WebChromeClient;
 import com.yc.webviewlib.base.X5WebViewClient;
 import com.yc.webviewlib.inter.DefaultVideoListener;
@@ -165,23 +166,11 @@ public class X5WebViewActivity extends AppCompatActivity {
         mIvMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openLink(X5WebViewActivity.this,
+                AppIntentUtils.openLink(X5WebViewActivity.this,
                         "https://github.com/yangchong211/YCWebView");
             }
         });
     }
-
-    /**
-     * 使用外部浏览器打开链接
-     * @param context
-     * @param content
-     */
-    public static void openLink(Context context, String content) {
-        Uri issuesUrl = Uri.parse(content);
-        Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
-        context.startActivity(intent);
-    }
-
 
     private void initWebView() {
         x5WebChromeClient = mWebView.getX5WebChromeClient();

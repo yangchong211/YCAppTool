@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.yc.library.base.config.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppIntentUtils;
 import com.yc.toolutils.AppWindowUtils;
 import com.yc.webviewlib.inter.BridgeHandler;
 import com.yc.webviewlib.inter.CallBackFunction;
@@ -94,9 +95,7 @@ public class WebViewActivity extends BaseActivity {
             AppWindowUtils.copyToClipBoard(url);
             ToastUtils.showRoundRectToast("复制成功");
         } else if (i == R.id.open) {
-            Uri issuesUrl = Uri.parse(url);
-            Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
-            startActivity(intent);
+            AppIntentUtils.openLink(this,url);
         } else if (i == R.id.capture) {
             ToastUtils.showRoundRectToast("屏幕截图，后期处理");
         } else if (i == R.id.about){

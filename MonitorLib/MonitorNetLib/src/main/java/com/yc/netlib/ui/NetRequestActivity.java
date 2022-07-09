@@ -20,6 +20,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter;
 import com.yc.netlib.R;
 import com.yc.netlib.utils.NetWorkUtils;
+import com.yc.toolutils.AppIntentUtils;
+import com.yc.toolutils.AppUtils;
+
 import java.util.ArrayList;
 
 public class NetRequestActivity extends AppCompatActivity {
@@ -96,7 +99,7 @@ public class NetRequestActivity extends AppCompatActivity {
         mTvAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NetWorkUtils.openLink(NetRequestActivity.this,
+                AppIntentUtils.openLink(NetRequestActivity.this,
                         "https://github.com/yangchong211/YCAndroidTool");
             }
         });

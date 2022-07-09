@@ -26,6 +26,7 @@ import com.yc.eastadapterlib.OnItemLongClickListener;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toollib.R;
+import com.yc.toolutils.AppIntentUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.file.AppFileUtils;
 
@@ -224,19 +225,8 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
         } else if (i == R.id.ll_back) {
             finish();
         } else if (i == R.id.tv_about){
-            openLink(this, "https://github.com/yangchong211/YCAndroidTool");
+            AppIntentUtils.openLink(this, "https://github.com/yangchong211/YCAndroidTool");
         }
-    }
-
-    /**
-     * 使用外部浏览器打开链接
-     * @param context
-     * @param content
-     */
-    public static void openLink(Context context, String content) {
-        Uri issuesUrl = Uri.parse(content);
-        Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
-        context.startActivity(intent);
     }
 
     private void deleteAll() {

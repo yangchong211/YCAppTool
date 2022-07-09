@@ -1,4 +1,4 @@
-package com.yc.netlib.connect;
+package com.yc.monitorspeed;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.netlib.R;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;

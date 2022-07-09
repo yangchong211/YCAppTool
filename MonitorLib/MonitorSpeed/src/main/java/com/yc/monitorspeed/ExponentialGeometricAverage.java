@@ -1,4 +1,4 @@
-package com.yc.netlib.connect;
+package com.yc.monitorspeed;
 
 /**
  * Connection移动平均计算

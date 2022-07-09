@@ -25,21 +25,12 @@ import android.widget.TextView;
 import com.yc.monitorpinglib.PingView;
 import com.yc.netlib.BuildConfig;
 import com.yc.netlib.R;
-import com.yc.netlib.connect.ConnectionManager;
-import com.yc.netlib.connect.ConnectionQuality;
-import com.yc.netlib.connect.ConnectionStateChangeListener;
-import com.yc.netlib.connect.DeviceBandwidthSampler;
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.toolutils.AppDeviceUtils;
-import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.net.AppNetworkUtils;
 import com.yc.toolutils.AppWindowUtils;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -47,12 +38,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.yc.netlib.connect.ConnectionQuality.UNKNOWN;
-
 public class NetRequestPhoneFragment extends Fragment {
 
     private Activity activity;
-    private TextView mTvBandWidth;
     private TextView tvPhoneContent;
     private TextView mTvAppInfo;
     private TextView tvContentInfo;
@@ -60,14 +48,6 @@ public class NetRequestPhoneFragment extends Fragment {
     private PingView tvNetInfo;
     private List<NetworkFeedBean> mNetworkFeedList;
     private static final int MESSAGE = 1;
-    private ConnectionManager mConnectionClassManager;
-    private DeviceBandwidthSampler mDeviceBandwidthSampler;
-    private ConnectionChangedListener mListener;
-    private ConnectionQuality mConnectionClass = UNKNOWN;
-    //网上弄的一个图片
-    private final String mURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601463169772&di=80c295c40c3c236a6434a5c66cb84c41&imgtype=0&src=http%3A%2F%2Fimg1.kchuhai.com%2Felite%2F20200324%2Fhead20200324162648.jpg";
-    private int mTries = 0;
-    private boolean isSetCon = false;
 
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler(){
@@ -103,52 +83,12 @@ public class NetRequestPhoneFragment extends Fragment {
         initData();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mConnectionClassManager.remove(mListener);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mConnectionClassManager.register(mListener);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mConnectionClassManager = ConnectionManager.getInstance();
-        mDeviceBandwidthSampler = DeviceBandwidthSampler.getInstance();
-        mListener = new ConnectionChangedListener();
-        mConnectionClassManager.reset();
-        isSetCon = false;
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mDeviceBandwidthSampler!=null){
-            mDeviceBandwidthSampler.stopSampling();
-        }
-    }
-
-
     private void initFindViewById(View view) {
-        mTvBandWidth = view.findViewById(R.id.tv_band_width);
         tvPhoneContent = view.findViewById(R.id.tv_phone_content);
         mTvAppInfo = view.findViewById(R.id.tv_app_info);
         tvContentInfo = view.findViewById(R.id.tv_content_info);
         tvWebInfo = view.findViewById(R.id.tv_web_info);
         tvNetInfo = view.findViewById(R.id.tv_net_info);
-        mTvBandWidth.setText("网络宽带:测试中……");
-        mTvBandWidth.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                new DownloadImage().execute(mURL);
-            }
-        },100);
     }
 
     private void initData() {
@@ -324,95 +264,5 @@ public class NetRequestPhoneFragment extends Fragment {
         }
     }
 
-    /**
-     * 侦听器在connectionclass更改时更新UI
-     */
-    private class ConnectionChangedListener implements ConnectionStateChangeListener {
-        @Override
-        public void onBandwidthStateChange(ConnectionQuality bandwidthState) {
-            mConnectionClass = bandwidthState;
-            setConnText(mConnectionClass);
-        }
-    }
 
-
-    private void setConnText(final ConnectionQuality mConnectionClass) {
-        if (isSetCon){
-            return;
-        }
-        isSetCon = true;
-        mTvBandWidth.postDelayed(new Runnable() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void run() {
-                AppLogUtils.e("DownloadImage-----onBandwidthStateChange----"+mConnectionClass);
-                StringBuffer sb = new StringBuffer();
-                sb.append("网络宽带:");
-                if (mConnectionClass==ConnectionQuality.UNKNOWN){
-                    sb.append("未知带宽");
-                } else if (mConnectionClass==ConnectionQuality.EXCELLENT){
-                    sb.append("带宽超过2000kbps");
-                } else if (mConnectionClass==ConnectionQuality.GOOD){
-                    sb.append("带宽在550到2000kbps之间");
-                } else if (mConnectionClass==ConnectionQuality.MODERATE){
-                    sb.append("带宽在150到550kbps之间");
-                } else if (mConnectionClass==ConnectionQuality.POOR){
-                    sb.append("带宽小于150kbps");
-                } else {
-                    sb.append("未知带宽");
-                }
-                double downloadKBitsPerSecond = ConnectionManager.getInstance().getDownloadKBitsPerSecond();
-                sb.append("\n平均宽带值:").append(downloadKBitsPerSecond);
-                mTvBandWidth.setText(sb.toString());
-            }
-        },300);
-    }
-
-
-    private class DownloadImage extends AsyncTask<String, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            mDeviceBandwidthSampler.startSampling();
-            AppLogUtils.e("DownloadImage-----onPreExecute-----开始");
-        }
-
-        @Override
-        protected Void doInBackground(String... url) {
-            String imageURL = url[0];
-            try {
-                URLConnection connection = new URL(imageURL).openConnection();
-                connection.setUseCaches(false);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                try {
-                    byte[] buffer = new byte[1024];
-                    while (input.read(buffer) != -1) {
-
-                    }
-                } finally {
-                    input.close();
-                }
-            } catch (IOException e) {
-                AppLogUtils.e("Error while downloading image.");
-            } finally {
-                AppLogUtils.e("DownloadImage-----doInBackground-----");
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void v) {
-            mDeviceBandwidthSampler.stopSampling();
-            // 重试10次，直到我们找到一个ConnectionClass
-            if (mConnectionClass == ConnectionQuality.UNKNOWN && mTries < 10) {
-                mTries++;
-                AppLogUtils.e("DownloadImage-----onPostExecute-----"+mTries);
-                new DownloadImage().execute(mURL);
-            }
-            if (mTries==10){
-                ConnectionQuality quality = ConnectionManager.getInstance().getCurrentBandwidthQuality();
-                setConnText(quality);
-            }
-        }
-    }
 }

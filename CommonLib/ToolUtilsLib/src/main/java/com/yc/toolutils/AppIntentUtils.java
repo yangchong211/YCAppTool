@@ -1,6 +1,7 @@
 package com.yc.toolutils;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,17 @@ public final class AppIntentUtils {
     }
 
     /**
+     * 使用外部浏览器打开链接
+     * @param context
+     * @param content
+     */
+    public static void openLink(Context context, String content) {
+        Uri issuesUrl = Uri.parse(content);
+        Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
+        context.startActivity(intent);
+    }
+
+    /**
      * 获取打开 App 的意图
      *
      * @param packageName 包名
@@ -44,7 +56,9 @@ public final class AppIntentUtils {
      */
     public static Intent getLaunchAppIntent(final String packageName, final boolean isNewTask) {
         Intent intent = AppToolUtils.getApp().getPackageManager().getLaunchIntentForPackage(packageName);
-        if (intent == null) return null;
+        if (intent == null) {
+            return null;
+        }
         return getIntent(intent, isNewTask);
     }
 
@@ -231,7 +245,9 @@ public final class AppIntentUtils {
                                             final Bundle bundle,
                                             final boolean isNewTask) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        if (bundle != null) intent.putExtras(bundle);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
         ComponentName cn = new ComponentName(packageName, className);
         intent.setComponent(cn);
         return getIntent(intent, isNewTask);

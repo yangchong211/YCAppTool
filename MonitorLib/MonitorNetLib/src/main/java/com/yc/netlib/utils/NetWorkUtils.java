@@ -176,15 +176,4 @@ public final class NetWorkUtils {
         }
     }
 
-    /**
-     * 使用外部浏览器打开链接
-     * @param context
-     * @param content
-     */
-    public static void openLink(Context context, String content) {
-        Uri issuesUrl = Uri.parse(content);
-        Intent intent = new Intent(Intent.ACTION_VIEW, issuesUrl);
-        context.startActivity(intent);
-    }
-
 }
