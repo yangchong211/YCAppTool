@@ -36,6 +36,8 @@ import com.yc.http.model.HttpMethod;
 import com.yc.http.model.HttpParams;
 import com.yc.http.model.ResponseClass;
 import com.yc.http.request.HttpRequest;
+import com.yc.monitorinterceptor.WeakNetworkInterceptor;
+import com.yc.monitorinterceptor.WeakNetworkManager;
 import com.yc.netinterceptor.HttpLoggerLevel;
 import com.yc.netinterceptor.HttpLoggingInterceptor;
 import com.yc.toastutils.ToastUtils;
@@ -59,6 +61,7 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
         IRequestServer server = new ReleaseServer();
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BODY))
+                .addInterceptor(new WeakNetworkInterceptor())
                 .build();
 
         EasyConfig.with(okHttpClient)
@@ -316,6 +319,21 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
                     })
                     .start();
         }
+    }
+
+    private void test(){
+        //设置网络拦截模拟异常工具生效
+        WeakNetworkManager.get().setActive(true);
+        //模拟断网400
+        WeakNetworkManager.get().setType(WeakNetworkManager.TYPE_OFF_NETWORK);
+        //模拟服务端异常500
+        WeakNetworkManager.get().setType(WeakNetworkManager.TYPE_SERVER_ERROR);
+        //模拟重定向300
+        WeakNetworkManager.get().setType(WeakNetworkManager.TYPE_REDIRECTED);
+        //模拟网路超时
+        WeakNetworkManager.get().setType(WeakNetworkManager.TYPE_TIMEOUT);
+        //模拟弱网限速
+        WeakNetworkManager.get().setType(WeakNetworkManager.TYPE_SPEED_LIMIT);
     }
 
 }

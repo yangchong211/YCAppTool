@@ -37,6 +37,9 @@ public class WeakNetworkInterceptor implements Interceptor {
             //重定向
             case WeakNetworkManager.TYPE_REDIRECTED:
                 return WeakNetworkManager.get().simulateRedirectNetwork(chain);
+            //服务端异常
+            case WeakNetworkManager.TYPE_SERVER_ERROR:
+                return WeakNetworkManager.get().simulateServerErrorNetwork(chain);
             //断网
             default:
                 return WeakNetworkManager.get().simulateOffNetwork(chain);

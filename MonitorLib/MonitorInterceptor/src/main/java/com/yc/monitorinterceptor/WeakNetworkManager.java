@@ -39,7 +39,11 @@ public class WeakNetworkManager {
      * 重定向
      */
     public static final int TYPE_REDIRECTED = 3;
-    public static final int DEFAULT_TIMEOUT_MILLIS = 2000;
+    /**
+     * 服务端异常
+     */
+    public static final int TYPE_SERVER_ERROR = 4;
+    public static final int DEFAULT_TIMEOUT_MILLIS = 5000;
     public static final int DEFAULT_REQUEST_SPEED = 1;
     public static final int DEFAULT_RESPONSE_SPEED = 1;
 
