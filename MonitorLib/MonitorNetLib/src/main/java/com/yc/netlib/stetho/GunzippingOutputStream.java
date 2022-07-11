@@ -93,7 +93,7 @@ class GunzippingOutputStream extends FilterOutputStream {
     public Void call() throws IOException {
       GZIPInputStream in = new GZIPInputStream(mIn);
       try {
-        StethoUtils.copy(in, mOut, new byte[1024]);
+        copy(in, mOut, new byte[1024]);
       } finally {
         in.close();
         mOut.close();
@@ -101,4 +101,13 @@ class GunzippingOutputStream extends FilterOutputStream {
       return null;
     }
   }
+
+  private static void copy(InputStream input, OutputStream output, byte[] buffer)
+          throws IOException {
+    int n;
+    while ((n = input.read(buffer)) != -1) {
+      output.write(buffer, 0, n);
+    }
+  }
+
 }

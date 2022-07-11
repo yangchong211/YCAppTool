@@ -1,4 +1,4 @@
-package com.yc.netlib.weaknet;
+package com.yc.monitorinterceptor;
 
 import android.annotation.SuppressLint;
 import android.os.SystemClock;
@@ -23,10 +23,22 @@ import okhttp3.ResponseBody;
  */
 public class WeakNetworkManager {
 
+    /**
+     * 没有网络
+     */
     public static final int TYPE_OFF_NETWORK = 0;
+    /**
+     * 网络超时
+     */
     public static final int TYPE_TIMEOUT = 1;
+    /**
+     * 限速
+     */
     public static final int TYPE_SPEED_LIMIT = 2;
-
+    /**
+     * 重定向
+     */
+    public static final int TYPE_REDIRECTED = 3;
     public static final int DEFAULT_TIMEOUT_MILLIS = 2000;
     public static final int DEFAULT_REQUEST_SPEED = 1;
     public static final int DEFAULT_RESPONSE_SPEED = 1;
@@ -35,11 +47,10 @@ public class WeakNetworkManager {
     private long mTimeOutMillis = DEFAULT_TIMEOUT_MILLIS;
     private long mRequestSpeed = DEFAULT_REQUEST_SPEED;
     private long mResponseSpeed = DEFAULT_RESPONSE_SPEED;
-
-    private AtomicBoolean mIsActive = new AtomicBoolean(false);
+    private final AtomicBoolean mIsActive = new AtomicBoolean(false);
 
     private static class Holder {
-        private static WeakNetworkManager INSTANCE = new WeakNetworkManager();
+        private static final WeakNetworkManager INSTANCE = new WeakNetworkManager();
     }
 
     public static WeakNetworkManager get() {
@@ -49,7 +60,8 @@ public class WeakNetworkManager {
 
     /**
      * 判断是否可用
-     * @return
+     *
+     * @return true表示可用
      */
     public boolean isActive() {
         return mIsActive.get();
@@ -57,7 +69,8 @@ public class WeakNetworkManager {
 
     /**
      * 设置是否可用
-     * @param isActive                      是否可用
+     *
+     * @param isActive 是否可用
      */
     public void setActive(boolean isActive) {
         mIsActive.set(isActive);
@@ -65,9 +78,10 @@ public class WeakNetworkManager {
 
     /**
      * 设置相关参数
-     * @param timeOutMillis                 超时时间
-     * @param requestSpeed                  请求限速值
-     * @param responseSpeed                 响应限速值
+     *
+     * @param timeOutMillis 超时时间
+     * @param requestSpeed  请求限速值
+     * @param responseSpeed 响应限速值
      */
     public void setParameter(long timeOutMillis, long requestSpeed, long responseSpeed) {
         if (timeOutMillis > 0) {
@@ -79,6 +93,7 @@ public class WeakNetworkManager {
 
     /**
      * 设置类型
+     *
      * @param type
      */
     public void setType(int type) {
@@ -87,6 +102,7 @@ public class WeakNetworkManager {
 
     /**
      * 获取类型
+     *
      * @return
      */
     public int getType() {
@@ -94,60 +110,81 @@ public class WeakNetworkManager {
     }
 
     /**
-     * 获取网络超时时间
-     * @return
-     */
-    public long getTimeOutMillis() {
-        return mTimeOutMillis;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public long getRequestSpeed() {
-        return mRequestSpeed;
-    }
-
-    public long getResponseSpeed() {
-        return mResponseSpeed;
-    }
-
-    /**
      * 模拟断网
+     * 400（错误请求），401（未授权），403（已禁止），404（未找到）……
+     * 此类状态代码表示，相应请求可能出错，已阻止了服务器对请求的处理。
      */
     public Response simulateOffNetwork(Interceptor.Chain chain) throws IOException {
         final Response response = chain.proceed(chain.request());
-        ResponseBody responseBody = ResponseBody.create(response.body().contentType(), "");
-        Response newResponse = response.newBuilder()
+        ResponseBody body = response.body();
+        ResponseBody responseBody = null;
+        if (body != null) {
+            responseBody = ResponseBody.create(body.contentType(), "");
+        }
+        return response.newBuilder()
                 .code(400)
                 .message(String.format("Unable to resolve host %s: No address associated with hostname",
                         chain.request().url().host()))
                 .body(responseBody)
                 .build();
-        return newResponse;
+    }
+
+    /**
+     * 模拟服务端网络异常
+     * 500（服务器内部错误），501（尚未实施），502（错误网关），503（服务不可用），504（网关超时）
+     * 此类状态代码表示，服务器在尝试处理相应请求时发生内部错误。此类错误往往与服务器本身有关（与请求无关）。
+     */
+    public Response simulateServerErrorNetwork(Interceptor.Chain chain) throws IOException {
+        final Response response = chain.proceed(chain.request());
+        ResponseBody body = response.body();
+        ResponseBody responseBody = null;
+        if (body != null) {
+            responseBody = ResponseBody.create(body.contentType(), "");
+        }
+        return response.newBuilder()
+                .code(500)
+                .message(String.format("Unable to resolve host %s: internal server error",
+                        chain.request().url().host()))
+                .body(responseBody)
+                .build();
+    }
+
+
+    /**
+     * 模拟重定向
+     */
+    public Response simulateRedirectNetwork(Interceptor.Chain chain) throws IOException {
+        final Response response = chain.proceed(chain.request());
+        ResponseBody body = response.body();
+        ResponseBody responseBody = null;
+        if (body != null) {
+            responseBody = ResponseBody.create(body.contentType(), "");
+        }
+        return response.newBuilder()
+                .code(300)
+                .message(String.format("Unable to resolve host %s: The target address has been redirected",
+                        chain.request().url().host()))
+                .body(responseBody)
+                .build();
     }
 
     /**
      * 模拟超时
-     *
-     * @param chain url
      */
     public Response simulateTimeOut(Interceptor.Chain chain) throws IOException {
         SystemClock.sleep(mTimeOutMillis);
         final Response response = chain.proceed(chain.request());
         ResponseBody body = response.body();
-        if (body!=null && body.contentType()!=null){
+        if (body != null && body.contentType() != null) {
             ResponseBody responseBody = ResponseBody.create(body.contentType(), "");
             String host = chain.request().url().host();
             @SuppressLint("DefaultLocale")
             String format = String.format("failed to connect to %s  after %dms", host, mTimeOutMillis);
-            Response newResponse = response.newBuilder()
+            return response.newBuilder()
                     .code(400)
                     .message(format)
                     .body(responseBody)
                     .build();
-            return newResponse;
         }
         return response;
     }

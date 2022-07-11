@@ -1,5 +1,7 @@
-package com.yc.netlib.weaknet;
+package com.yc.monitorinterceptor;
 
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -15,7 +17,13 @@ import okio.Source;
 import okio.Timeout;
 
 /**
- * 可以设置每次写入大小的BufferedSink
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/01/30
+ *     desc  : 可以设置每次写入大小的BufferedSink
+ *     revise:
+ * </pre>
  */
 public class ByteCountBufferedSink implements BufferedSink {
 
@@ -42,6 +50,7 @@ public class ByteCountBufferedSink implements BufferedSink {
         return totalBytesRead;
     }
 
+    @NotNull
     @Override
     public BufferedSink write(byte[] source, int offset, int byteCount) throws IOException {
         if (!isOpen()){
@@ -59,6 +68,7 @@ public class ByteCountBufferedSink implements BufferedSink {
         return this;
     }
 
+    @NotNull
     @Override
     public BufferedSink emitCompleteSegments() throws IOException {
         final Buffer buffer = buffer();
@@ -66,66 +76,79 @@ public class ByteCountBufferedSink implements BufferedSink {
         return this;
     }
 
+    @NotNull
     @Override
     public Buffer buffer() {
         return mDelegate.buffer();
     }
 
+    @NotNull
     @Override
     public BufferedSink write(ByteString byteString) throws IOException {
         return mDelegate.write(byteString);
     }
 
+    @NotNull
     @Override
     public BufferedSink write(byte[] source) throws IOException {
         return mDelegate.write(source);
     }
 
+    @NotNull
     @Override
     public BufferedSink write(Source source, long byteCount) throws IOException {
         return mDelegate.write(source, byteCount);
     }
 
+    @NotNull
     @Override
     public BufferedSink writeUtf8(String string) throws IOException {
         return mDelegate.writeUtf8(string);
     }
 
+    @NotNull
     @Override
     public BufferedSink writeUtf8(String string, int beginIndex, int endIndex) throws IOException {
         return mDelegate.writeUtf8(string, beginIndex, endIndex);
     }
 
+    @NotNull
     @Override
     public BufferedSink writeUtf8CodePoint(int codePoint) throws IOException {
         return mDelegate.writeUtf8CodePoint(codePoint);
     }
 
+    @NotNull
     @Override
     public BufferedSink writeString(String string, Charset charset) throws IOException {
         return mDelegate.writeString(string, charset);
     }
 
+    @NotNull
     @Override
     public BufferedSink writeString(String string, int beginIndex, int endIndex, Charset charset) throws IOException {
         return mDelegate.writeString(string, beginIndex, endIndex, charset);
     }
 
+    @NotNull
     @Override
     public BufferedSink writeByte(int b) throws IOException {
         return mDelegate.writeByte(b);
     }
 
+    @NotNull
     @Override
     public BufferedSink writeShort(int s) throws IOException {
         return mDelegate.writeShort(s);
     }
 
+    @NotNull
     @Override
     public BufferedSink writeShortLe(int s) throws IOException {
         return mDelegate.writeShortLe(s);
     }
 
+    @NotNull
     @Override
     public BufferedSink writeInt(int i) throws IOException {
         return mDelegate.writeInt(i);
@@ -161,11 +184,13 @@ public class ByteCountBufferedSink implements BufferedSink {
         mDelegate.flush();
     }
 
+    @NotNull
     @Override
     public BufferedSink emit() throws IOException {
         return mDelegate.emit();
     }
 
+    @NotNull
     @Override
     public OutputStream outputStream() {
         return mDelegate.outputStream();
@@ -186,6 +211,7 @@ public class ByteCountBufferedSink implements BufferedSink {
         mDelegate.write(source, byteCount);
     }
 
+    @NotNull
     @Override
     public Timeout timeout() {
         return mDelegate.timeout();
@@ -196,11 +222,13 @@ public class ByteCountBufferedSink implements BufferedSink {
         mDelegate.close();
     }
 
+    @NotNull
     @Override
     public Buffer getBuffer() {
         return mDelegate.getBuffer();
     }
 
+    @NotNull
     @Override
     public BufferedSink write(ByteString byteString, int i, int i1) throws IOException {
         return mDelegate.write(byteString, i, i1);

@@ -1,5 +1,7 @@
-package com.yc.netlib.weaknet;
+package com.yc.monitorinterceptor;
 
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -8,28 +10,35 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 用于模拟弱网的拦截器
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/01/30
+ *     desc  : 用于模拟弱网的拦截器
+ *     revise:
+ * </pre>
  */
 public class WeakNetworkInterceptor implements Interceptor {
 
-    private static final String TAG = "WeakNetworkInterceptor";
-
+    @NotNull
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NotNull Chain chain) throws IOException {
         if (!WeakNetworkManager.get().isActive()) {
-            Request request = chain.request();
-            return chain.proceed(request);
+            return chain.proceed(chain.request());
         }
         final int type = WeakNetworkManager.get().getType();
         switch (type) {
+            //超时
             case WeakNetworkManager.TYPE_TIMEOUT:
-                //超时
                 return WeakNetworkManager.get().simulateTimeOut(chain);
+            //限速
             case WeakNetworkManager.TYPE_SPEED_LIMIT:
-                //限速
                 return WeakNetworkManager.get().simulateSpeedLimit(chain);
+            //重定向
+            case WeakNetworkManager.TYPE_REDIRECTED:
+                return WeakNetworkManager.get().simulateRedirectNetwork(chain);
+            //断网
             default:
-                //断网
                 return WeakNetworkManager.get().simulateOffNetwork(chain);
         }
     }
