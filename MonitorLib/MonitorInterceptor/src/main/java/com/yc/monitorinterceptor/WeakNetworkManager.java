@@ -43,6 +43,10 @@ public class WeakNetworkManager {
      * 服务端异常
      */
     public static final int TYPE_SERVER_ERROR = 4;
+    /**
+     * 网络超时，响应超时
+     */
+    public static final int TYPE_TIMEOUT_RESPOND = 5;
     public static final int DEFAULT_TIMEOUT_MILLIS = 5000;
     public static final int DEFAULT_REQUEST_SPEED = 1;
     public static final int DEFAULT_RESPONSE_SPEED = 1;
@@ -173,11 +177,33 @@ public class WeakNetworkManager {
     }
 
     /**
-     * 模拟超时
+     * 模拟超时，请求超时
      */
     public Response simulateTimeOut(Interceptor.Chain chain) throws IOException {
         SystemClock.sleep(mTimeOutMillis);
         final Response response = chain.proceed(chain.request());
+        ResponseBody body = response.body();
+        if (body != null && body.contentType() != null) {
+            ResponseBody responseBody = ResponseBody.create(body.contentType(), "");
+            String host = chain.request().url().host();
+            @SuppressLint("DefaultLocale")
+            String format = String.format("failed to connect to %s  after %dms", host, mTimeOutMillis);
+            return response.newBuilder()
+                    .code(400)
+                    .message(format)
+                    .body(responseBody)
+                    .build();
+        }
+        return response;
+    }
+
+
+    /**
+     * 模拟超时，响应超时
+     */
+    public Response simulateRespondTimeOut(Interceptor.Chain chain) throws IOException {
+        final Response response = chain.proceed(chain.request());
+        SystemClock.sleep(mTimeOutMillis);
         ResponseBody body = response.body();
         if (body != null && body.contentType() != null) {
             ResponseBody responseBody = ResponseBody.create(body.contentType(), "");

@@ -334,6 +334,8 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
         WeakNetworkManager.get().setType(WeakNetworkManager.TYPE_TIMEOUT);
         //模拟弱网限速
         WeakNetworkManager.get().setType(WeakNetworkManager.TYPE_SPEED_LIMIT);
+        //网络超时，响应超时
+        WeakNetworkManager.get().setType(WeakNetworkManager.TYPE_TIMEOUT_RESPOND);
     }
 
 }

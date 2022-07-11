@@ -40,6 +40,9 @@ public class WeakNetworkInterceptor implements Interceptor {
             //服务端异常
             case WeakNetworkManager.TYPE_SERVER_ERROR:
                 return WeakNetworkManager.get().simulateServerErrorNetwork(chain);
+            //超时，响应超时
+            case WeakNetworkManager.TYPE_TIMEOUT_RESPOND:
+                return WeakNetworkManager.get().simulateRespondTimeOut(chain);
             //断网
             default:
                 return WeakNetworkManager.get().simulateOffNetwork(chain);

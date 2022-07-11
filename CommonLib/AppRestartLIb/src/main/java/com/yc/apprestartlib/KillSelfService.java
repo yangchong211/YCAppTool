@@ -45,8 +45,12 @@ public class KillSelfService extends Service {
             public void run() {
                 AppLogUtils.d("KillSelfService: ", "post delayed restart app : "+packageName);
                 Intent launchIntent = getPackageManager().getLaunchIntentForPackage(packageName);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(launchIntent);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                launchIntent.addFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                );
+                startActivity(intent);
 
                 //销毁自己
                 KillSelfService.this.stopSelf();
