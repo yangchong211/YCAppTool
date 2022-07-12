@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_drawable_text"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <com.yc.apptextview.DrawableTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:text="@string/camera"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:leftDrawable="@mipmap/camera"
+            app:leftDrawableHeight="20dp"
+            app:leftDrawableWidth="20dp"/>
+
+        <com.yc.apptextview.DrawableTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:text="@string/camera"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:rightDrawable="@mipmap/camera"
+            app:rightDrawableHeight="20dp"
+            app:rightDrawableWidth="20dp"/>
+
+        <com.yc.apptextview.DrawableTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:text="@string/camera"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:topDrawable="@mipmap/camera"
+            app:topDrawableHeight="20dp"
+            app:topDrawableWidth="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+
+        <com.yc.apptextview.DrawableTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:text="@string/camera"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:bottomDrawable="@mipmap/camera"
+            app:bottomDrawableHeight="20dp"
+            app:bottomDrawableWidth="20dp"/>
+
+        <com.yc.apptextview.DrawableTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:text="@string/camera"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:bottomDrawable="@mipmap/camera"
+            app:bottomDrawableHeight="20dp"
+            app:bottomDrawableWidth="20dp"
+            app:topDrawable="@mipmap/camera"
+            app:topDrawableHeight="20dp"
+            app:topDrawableWidth="20dp"/>
+
+        <com.yc.apptextview.DrawableTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:text="@string/camera"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:leftDrawable="@mipmap/camera"
+            app:leftDrawableHeight="20dp"
+            app:leftDrawableWidth="20dp"
+            app:rightDrawable="@mipmap/camera"
+            app:rightDrawableHeight="20dp"
+            app:rightDrawableWidth="20dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <com.yc.apptextview.DrawableTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:text="@string/camera"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:leftDrawable="@mipmap/camera"
+            app:leftDrawableHeight="20dp"
+            app:leftDrawableWidth="20dp"
+            app:topDrawable="@mipmap/camera"
+            app:topDrawableHeight="20dp"
+            app:topDrawableWidth="20dp"/>
+
+        <com.yc.apptextview.DrawableTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:text="@string/camera"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:leftDrawable="@mipmap/camera"
+            app:leftDrawableHeight="20dp"
+            app:leftDrawableWidth="20dp"
+            app:rightDrawable="@mipmap/camera"
+            app:rightDrawableHeight="20dp"
+            app:rightDrawableWidth="20dp"
+            app:topDrawable="@mipmap/camera"
+            app:topDrawableHeight="20dp"
+            app:topDrawableWidth="20dp"/>
+
+        <com.yc.apptextview.DrawableTextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:text="@string/camera"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:bottomDrawable="@mipmap/camera"
+            app:bottomDrawableHeight="20dp"
+            app:bottomDrawableWidth="20dp"
+            app:leftDrawable="@mipmap/camera"
+            app:leftDrawableHeight="20dp"
+            app:leftDrawableWidth="20dp"
+            app:rightDrawable="@mipmap/camera"
+            app:rightDrawableHeight="20dp"
+            app:rightDrawableWidth="20dp"
+            app:topDrawable="@mipmap/camera"
+            app:topDrawableHeight="20dp"
+            app:topDrawableWidth="20dp"/>
+    </LinearLayout>
+
+    <com.yc.apptextview.DrawableTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:drawablePadding="5dp"
+        android:text="@string/camera_full_screen"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp"
+        app:leftDrawable="@mipmap/camera"
+        app:leftDrawableHeight="20dp"
+        app:leftDrawableWidth="20dp"/>
+
+    <com.yc.apptextview.DrawableTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:drawablePadding="5dp"
+        android:hint="@string/hint_attribute_test"
+        android:textColor="@android:color/darker_gray"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="16sp"
+        app:leftDrawable="@mipmap/camera"
+        app:leftDrawableHeight="20dp"
+        app:leftDrawableWidth="20dp"/>
+
+</LinearLayout>
