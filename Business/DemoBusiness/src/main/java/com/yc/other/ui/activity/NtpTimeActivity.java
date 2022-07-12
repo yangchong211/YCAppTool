@@ -63,20 +63,21 @@ public class NtpTimeActivity extends AppCompatActivity {
             return;
         }
         Toast.makeText(this, "刷新时间", Toast.LENGTH_SHORT).show();
-
+        //获取校对后时间
         Date trueTime = NtpGetTime.now();
+        //获取当前设备时间
         Date deviceTime = new Date();
 
         tvTimeGmt.setText(getString(R.string.tt_time_gmt,
-                                  _formatDate(trueTime, "yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("GMT"))));
+                                  _formatDate(trueTime, "yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("GMT+8"))));
         tvTimePst.setText(getString(R.string.tt_time_pst,
-                                  _formatDate(trueTime, "yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("GMT-07:00"))));
+                                  _formatDate(trueTime, "yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("GMT+8"))));
         tvTimeDevice.setText(getString(R.string.tt_time_device,
-                                         _formatDate(deviceTime, "yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("GMT-07:00"))));
+                                         _formatDate(deviceTime, "yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("GMT+8"))));
     }
 
     private String _formatDate(Date date, String pattern, TimeZone timeZone) {
-        DateFormat format = new SimpleDateFormat(pattern, Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat(pattern, Locale.CHINESE);
         format.setTimeZone(timeZone);
         return format.format(date);
     }

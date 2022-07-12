@@ -10,7 +10,16 @@ import java.net.InetAddress;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class SntpClient {
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : ntp时间校验帮助类
+ *     revise :
+ * </pre>
+ */
+public class NtpClientHelper {
 
     public static final int RESPONSE_INDEX_ORIGINATE_TIME = 0;
     public static final int RESPONSE_INDEX_RECEIVE_TIME = 1;
@@ -22,7 +31,7 @@ public class SntpClient {
     public static final int RESPONSE_INDEX_RESPONSE_TICKS = 7;
     public static final int RESPONSE_INDEX_SIZE = 8;
 
-    private static final String TAG = SntpClient.class.getSimpleName();
+    private static final String TAG = NtpClientHelper.class.getSimpleName();
 
     private static final int NTP_PORT = 123;
     private static final int NTP_MODE = 3;
@@ -35,11 +44,10 @@ public class SntpClient {
     private static final int INDEX_ORIGINATE_TIME = 24;
     private static final int INDEX_RECEIVE_TIME = 32;
     private static final int INDEX_TRANSMIT_TIME = 40;
-    // 70 years plus 17 leap days
     private static final long OFFSET_1900_TO_1970 = ((365L * 70L) + 17L) * 24L * 60L * 60L;
-    private final AtomicLong _cachedDeviceUptime = new AtomicLong();
-    private final AtomicLong _cachedSntpTime = new AtomicLong();
-    private final AtomicBoolean _sntpInitialized = new AtomicBoolean(false);
+    private final AtomicLong cachedDeviceUptime = new AtomicLong();
+    private final AtomicLong cachedNtpTime = new AtomicLong();
+    private final AtomicBoolean ntpInitialized = new AtomicBoolean(false);
 
     public static long getRoundTripDelay(long[] response) {
         return (response[RESPONSE_INDEX_RESPONSE_TIME] - response[RESPONSE_INDEX_ORIGINATE_TIME]) -
@@ -52,20 +60,13 @@ public class SntpClient {
     }
 
     /**
-     * Sends an NTP request to the given host and processes the response.
+     * 向给定主机发送NTP请求并处理响应
      *
-     * @param ntpHost           host name of the server.
+     * @param ntpHost           服务器的主机名
      */
-    synchronized long[] requestTime(String ntpHost,
-        float rootDelayMax,
-        float rootDispersionMax,
-        int serverResponseDelayMax,
-        int timeoutInMillis
-    )
-        throws IOException {
-
+    synchronized void requestTime(String ntpHost, float rootDelayMax, float rootDispersionMax,
+                                  int serverResponseDelayMax, int timeoutInMillis) throws IOException {
         DatagramSocket socket = null;
-
         try {
 
             byte[] buffer = new byte[NTP_PACKET_SIZE];
@@ -166,16 +167,15 @@ public class SntpClient {
                                                             timeElapsedSinceRequest);
             }
 
-            _sntpInitialized.set(true);
-            AppLogUtils.i(TAG, "---- SNTP successful response from " + ntpHost);
+            ntpInitialized.set(true);
+            AppLogUtils.i(TAG, "---- NTP successful response from " + ntpHost);
 
             // -----------------------------------------------------------------------------------
             // TODO:
             cacheTrueTimeInfo(t);
-            return t;
 
         } catch (Exception e) {
-            AppLogUtils.d(TAG, "---- SNTP request failed for " + ntpHost);
+            AppLogUtils.d(TAG, "---- NTP request failed for " + ntpHost);
             throw e;
         } finally {
             if (socket != null) {
@@ -185,8 +185,8 @@ public class SntpClient {
     }
 
     void cacheTrueTimeInfo(long[] response) {
-        _cachedSntpTime.set(sntpTime(response));
-        _cachedDeviceUptime.set(response[RESPONSE_INDEX_RESPONSE_TICKS]);
+        cachedNtpTime.set(sntpTime(response));
+        cachedDeviceUptime.set(response[RESPONSE_INDEX_RESPONSE_TICKS]);
     }
 
     long sntpTime(long[] response) {
@@ -196,21 +196,21 @@ public class SntpClient {
     }
 
     boolean wasInitialized() {
-        return _sntpInitialized.get();
+        return ntpInitialized.get();
     }
 
     /**
-     * @return time value computed from NTP server response
+     * @return 从NTP服务器响应计算的时间值
      */
-    long getCachedSntpTime() {
-        return _cachedSntpTime.get();
+    long getCachedNtpTime() {
+        return cachedNtpTime.get();
     }
 
     /**
-     * @return device uptime computed at time of executing the NTP request
+     * @return 在执行NTP请求时计算的设备正常运行时间
      */
     long getCachedDeviceUptime() {
-        return _cachedDeviceUptime.get();
+        return cachedDeviceUptime.get();
     }
 
     // -----------------------------------------------------------------------------------

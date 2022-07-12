@@ -9,39 +9,45 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Locale;
 
-public class NtpGetTime {
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : ntp时间校验工具
+ *     revise :
+ * </pre>
+ */
+public final class NtpGetTime {
 
     private static final String TAG = NtpGetTime.class.getSimpleName();
 
     private static final NtpGetTime INSTANCE = new NtpGetTime();
     private static final DiskCacheClient DISK_CACHE_CLIENT = new DiskCacheClient();
-    private static final SntpClient SNTP_CLIENT = new SntpClient();
+    private static final NtpClientHelper NTP_CLIENT_HELPER = new NtpClientHelper();
 
-    private static float _rootDelayMax = 100;
-    private static float _rootDispersionMax = 100;
-    private static int _serverResponseDelayMax = 750;
-    private static int _udpSocketTimeoutInMillis = 30_000;
-
-    private String _ntpHost = "1.us.pool.ntp.org";
-
+    private static float rootDelayMax = 100;
+    private static float rootDispersionMax = 100;
+    private static int serverResponseDelayMax = 750;
+    private static int udpSocketTimeoutInMillis = 30_000;
     /**
-     * @return Date object that returns the current time in the default Timezone
+     * 中国科学技术大学NTP服务器
      */
+    private String ntpHost = "time.ustc.edu.cn";
+
     public static Date now() {
         if (!isInitialized()) {
             throw new IllegalStateException("You need to call init() on TrueTime at least once.");
         }
-
-        long cachedSntpTime = _getCachedSntpTime();
-        long cachedDeviceUptime = _getCachedDeviceUptime();
+        long cachedNtpTime = getCachedNtpTime();
+        long cachedDeviceUptime = getCachedDeviceUptime();
         long deviceUptime = SystemClock.elapsedRealtime();
-        long now = cachedSntpTime + (deviceUptime - cachedDeviceUptime);
-
+        long now = cachedNtpTime + (deviceUptime - cachedDeviceUptime);
         return new Date(now);
     }
 
     public static boolean isInitialized() {
-        return SNTP_CLIENT.wasInitialized() || DISK_CACHE_CLIENT.isTrueTimeCachedFromAPreviousBoot();
+        return NTP_CLIENT_HELPER.wasInitialized() || DISK_CACHE_CLIENT.isTrueTimeCachedFromAPreviousBoot();
     }
 
     public static NtpGetTime build() {
@@ -49,12 +55,11 @@ public class NtpGetTime {
     }
 
     public void initialize() throws IOException {
-        initialize(_ntpHost);
+        initialize(ntpHost);
     }
 
     /**
-     * Cache TrueTime initialization information in SharedPreferences
-     * This can help avoid additional TrueTime initialization on app kills
+     * 在SharedPreferences中缓存NtpGetTime初始化信息，这可以帮助避免应用程序杀死时附加的NtpGetTime初始化
      */
     public synchronized NtpGetTime withSharedPreferencesCache(Context context) {
         DISK_CACHE_CLIENT.enableCacheInterface(new SpCacheImpl(context));
@@ -62,7 +67,7 @@ public class NtpGetTime {
     }
 
     /**
-     * Customized TrueTime Cache implementation.
+     * 自定义的NtpGetTime缓存实现。
      */
     public synchronized NtpGetTime withCustomizedCache(CacheInterface cacheInterface) {
         DISK_CACHE_CLIENT.enableCacheInterface(cacheInterface);
@@ -70,48 +75,48 @@ public class NtpGetTime {
     }
 
     /**
-     * clear the cached TrueTime info on device reboot.
+     * 清除设备重启时缓存的NtpGetTime信息
      */
     public static void clearCachedInfo() {
         DISK_CACHE_CLIENT.clearCachedInfo();
     }
 
     public synchronized NtpGetTime withConnectionTimeout(int timeoutInMillis) {
-        _udpSocketTimeoutInMillis = timeoutInMillis;
+        udpSocketTimeoutInMillis = timeoutInMillis;
         return INSTANCE;
     }
 
     public synchronized NtpGetTime withRootDelayMax(float rootDelayMax) {
-        if (rootDelayMax > _rootDelayMax) {
+        if (rootDelayMax > NtpGetTime.rootDelayMax) {
           String log = String.format(Locale.getDefault(),
               "The recommended max rootDelay value is %f. You are setting it at %f",
-              _rootDelayMax, rootDelayMax);
+                  NtpGetTime.rootDelayMax, rootDelayMax);
           AppLogUtils.w(TAG, log);
         }
 
-        _rootDelayMax = rootDelayMax;
+        NtpGetTime.rootDelayMax = rootDelayMax;
         return INSTANCE;
     }
 
     public synchronized NtpGetTime withRootDispersionMax(float rootDispersionMax) {
-      if (rootDispersionMax > _rootDispersionMax) {
+      if (rootDispersionMax > NtpGetTime.rootDispersionMax) {
         String log = String.format(Locale.getDefault(),
             "The recommended max rootDispersion value is %f. You are setting it at %f",
-            _rootDispersionMax, rootDispersionMax);
+                NtpGetTime.rootDispersionMax, rootDispersionMax);
         AppLogUtils.w(TAG, log);
       }
 
-      _rootDispersionMax = rootDispersionMax;
+      NtpGetTime.rootDispersionMax = rootDispersionMax;
       return INSTANCE;
     }
 
     public synchronized NtpGetTime withServerResponseDelayMax(int serverResponseDelayInMillis) {
-        _serverResponseDelayMax = serverResponseDelayInMillis;
+        serverResponseDelayMax = serverResponseDelayInMillis;
         return INSTANCE;
     }
 
     public synchronized NtpGetTime withNtpHost(String ntpHost) {
-        _ntpHost = ntpHost;
+        this.ntpHost = ntpHost;
         return INSTANCE;
     }
 
@@ -127,31 +132,26 @@ public class NtpGetTime {
         saveTrueTimeInfoToDisk();
     }
 
-    long[] requestTime(String ntpHost) throws IOException {
-        return SNTP_CLIENT.requestTime(ntpHost,
-            _rootDelayMax,
-            _rootDispersionMax,
-            _serverResponseDelayMax,
-            _udpSocketTimeoutInMillis);
+    void requestTime(String ntpHost) throws IOException {
+        NTP_CLIENT_HELPER.requestTime(ntpHost, rootDelayMax, rootDispersionMax,
+                serverResponseDelayMax, udpSocketTimeoutInMillis);
     }
 
     synchronized static void saveTrueTimeInfoToDisk() {
-        if (!SNTP_CLIENT.wasInitialized()) {
-            AppLogUtils.i(TAG, "---- SNTP client not available. not caching TrueTime info in disk");
+        if (!NTP_CLIENT_HELPER.wasInitialized()) {
+            AppLogUtils.i(TAG, "ntp client not available. not caching TrueTime info in disk");
             return;
         }
-        DISK_CACHE_CLIENT.cacheTrueTimeInfo(SNTP_CLIENT);
+        DISK_CACHE_CLIENT.cacheTrueTimeInfo(NTP_CLIENT_HELPER);
     }
 
     void cacheTrueTimeInfo(long[] response) {
-        SNTP_CLIENT.cacheTrueTimeInfo(response);
+        NTP_CLIENT_HELPER.cacheTrueTimeInfo(response);
     }
 
-    private static long _getCachedDeviceUptime() {
-        long cachedDeviceUptime = SNTP_CLIENT.wasInitialized()
-                                  ? SNTP_CLIENT.getCachedDeviceUptime()
-                                  : DISK_CACHE_CLIENT.getCachedDeviceUptime();
-
+    private static long getCachedDeviceUptime() {
+        long cachedDeviceUptime = NTP_CLIENT_HELPER.wasInitialized()
+                ? NTP_CLIENT_HELPER.getCachedDeviceUptime() : DISK_CACHE_CLIENT.getCachedDeviceUptime();
         if (cachedDeviceUptime == 0L) {
             throw new RuntimeException("expected device time from last boot to be cached. couldn't find it.");
         }
@@ -159,16 +159,13 @@ public class NtpGetTime {
         return cachedDeviceUptime;
     }
 
-    private static long _getCachedSntpTime() {
-        long cachedSntpTime = SNTP_CLIENT.wasInitialized()
-                              ? SNTP_CLIENT.getCachedSntpTime()
-                              : DISK_CACHE_CLIENT.getCachedSntpTime();
-
-        if (cachedSntpTime == 0L) {
-            throw new RuntimeException("expected SNTP time from last boot to be cached. couldn't find it.");
+    private static long getCachedNtpTime() {
+        long cachedNtpTime = NTP_CLIENT_HELPER.wasInitialized()
+                ? NTP_CLIENT_HELPER.getCachedNtpTime() : DISK_CACHE_CLIENT.getCachedSntpTime();
+        if (cachedNtpTime == 0L) {
+            throw new RuntimeException("expected ntp time from last boot to be cached. couldn't find it.");
         }
-
-        return cachedSntpTime;
+        return cachedNtpTime;
     }
 
 }

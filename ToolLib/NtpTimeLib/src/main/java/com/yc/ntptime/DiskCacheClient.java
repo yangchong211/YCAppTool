@@ -6,12 +6,20 @@ import com.yc.toolutils.AppLogUtils;
 
 import static com.yc.ntptime.CacheInterface.KEY_CACHED_BOOT_TIME;
 import static com.yc.ntptime.CacheInterface.KEY_CACHED_DEVICE_UPTIME;
-import static com.yc.ntptime.CacheInterface.KEY_CACHED_SNTP_TIME;
+import static com.yc.ntptime.CacheInterface.KEY_CACHED_NTP_TIME;
 
-class DiskCacheClient {
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : 广播
+ *     revise :
+ * </pre>
+ */
+public class DiskCacheClient {
 
     private static final String TAG = DiskCacheClient.class.getSimpleName();
-
     private CacheInterface cacheInterface = null;
 
     void enableCacheInterface(CacheInterface cacheInterface) {
@@ -28,12 +36,12 @@ class DiskCacheClient {
         }
     }
 
-    void cacheTrueTimeInfo(SntpClient sntpClient) {
+    void cacheTrueTimeInfo(NtpClientHelper sntpClient) {
         if (cacheUnavailable()) {
             return;
         }
 
-        long cachedSntpTime = sntpClient.getCachedSntpTime();
+        long cachedSntpTime = sntpClient.getCachedNtpTime();
         long cachedDeviceUptime = sntpClient.getCachedDeviceUptime();
         long bootTime = cachedSntpTime - cachedDeviceUptime;
 
@@ -45,7 +53,7 @@ class DiskCacheClient {
 
         cacheInterface.put(KEY_CACHED_BOOT_TIME, bootTime);
         cacheInterface.put(KEY_CACHED_DEVICE_UPTIME, cachedDeviceUptime);
-        cacheInterface.put(KEY_CACHED_SNTP_TIME, cachedSntpTime);
+        cacheInterface.put(KEY_CACHED_NTP_TIME, cachedSntpTime);
 
     }
 
@@ -77,7 +85,7 @@ class DiskCacheClient {
             return 0L;
         }
 
-        return cacheInterface.get(KEY_CACHED_SNTP_TIME, 0L);
+        return cacheInterface.get(KEY_CACHED_NTP_TIME, 0L);
     }
 
     private boolean cacheUnavailable() {

@@ -4,10 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import static android.content.Context.MODE_PRIVATE;
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : sp缓存接口实现类
+ *     revise :
+ * </pre>
+ */
+public class SpCacheImpl implements CacheInterface {
 
-class SpCacheImpl implements CacheInterface {
-
-    private static final String KEY_CACHED_SHARED_PREFS = "com.instacart.library.truetime.shared_preferences";
+    private static final String KEY_CACHED_SHARED_PREFS = "com.yc.ntptime.shared_preferences";
     private final SharedPreferences sharedPreferences;
 
     public SpCacheImpl(Context context) {
@@ -28,7 +36,7 @@ class SpCacheImpl implements CacheInterface {
     public void clear() {
         remove(CacheInterface.KEY_CACHED_BOOT_TIME);
         remove(CacheInterface.KEY_CACHED_DEVICE_UPTIME);
-        remove(CacheInterface.KEY_CACHED_SNTP_TIME);
+        remove(CacheInterface.KEY_CACHED_NTP_TIME);
     }
 
     private void remove(String keyCachedBootTime) {

@@ -57,7 +57,7 @@ public class AppThreadTask extends AbsParallelTask {
                             .initialize();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    AppLogUtils.e("something went wrong when trying to initialize TrueTime "+ e);
+                    AppLogUtils.e("something went wrong when trying to initialize NtpGetTime "+ e);
                 }
             }
         });
