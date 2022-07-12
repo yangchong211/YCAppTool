@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--选择开关自定义控件-->
+    <declare-styleable name="Switch">
+        <!--阴影半径-->
+        <attr name="sb_shadow_radius" format="reference|dimension"/>
+        <!--阴影偏移-->
+        <attr name="sb_shadow_offset" format="reference|dimension"/>
+        <!--阴影颜色-->
+        <attr name="sb_shadow_color" format="reference|color"/>
+        <!--阴影颜色-->
+        <attr name="sb_uncheck_color" format="reference|color"/>
+        <!--开启颜色-->
+        <attr name="sb_checked_color" format="reference|color"/>
+        <!--边框宽度-->
+        <attr name="sb_border_width" format="reference|dimension"/>
+        <!--开启指示器颜色-->
+        <attr name="sb_checkline_color" format="reference|color"/>
+        <!--开启指示器线宽-->
+        <attr name="sb_checkline_width" format="reference|dimension"/>
+        <!--关闭指示器颜色-->
+        <attr name="sb_uncheckcircle_color" format="reference|color"/>
+        <!--关闭指示器线宽-->
+        <attr name="sb_uncheckcircle_width" format="reference|dimension"/>
+        <!--关闭指示器半径-->
+        <attr name="sb_uncheckcircle_radius" format="reference|dimension"/>
+        <!--是否选中-->
+        <attr name="sb_checked" format="reference|boolean"/>
+        <!--是否启用阴影-->
+        <attr name="sb_shadow_effect" format="reference|boolean"/>
+        <!--动画时间，默认300ms-->
+        <attr name="sb_effect_duration" format="reference|integer"/>
+        <!--按钮颜色-->
+        <attr name="sb_button_color" format="reference|color"/>
+        <!--是否显示指示器，默认true：显示-->
+        <attr name="sb_show_indicator" format="reference|boolean"/>
+        <!--背景色，默认白色-->
+        <attr name="sb_background" format="reference|color"/>
+        <!--是否启用特效，默认true-->
+        <attr name="sb_enable_effect" format="reference|boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SwitchButton">
+        <attr name="hasShadow" format="boolean"/>
+        <attr name="primaryColor" format="color"/>
+        <attr name="primaryColorDark" format="color"/>
+        <attr name="offColor" format="color"/>
+        <attr name="offColorDark" format="color"/>
+        <attr name="barColor" format="color"/>
+        <attr name="bgColor" format="color"/>
+        <attr name="shadowColor" format="color"/>
+        <attr name="ratioAspect" format="float"/>
+        <attr name="isOpened" format="boolean"/>
+    </declare-styleable>
+
+
+</resources>

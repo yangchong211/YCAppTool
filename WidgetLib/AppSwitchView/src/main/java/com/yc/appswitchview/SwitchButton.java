@@ -1,4 +1,4 @@
-package com.yc.widget.switchButton;
+package com.yc.appswitchview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -19,7 +19,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
-import com.yc.widget.R;
 
 public class SwitchButton extends View {
 
@@ -98,11 +97,14 @@ public class SwitchButton extends View {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     TypedValue primaryColorTypedValue = new TypedValue();
                     context.getTheme().resolveAttribute(android.R.attr.colorPrimary, primaryColorTypedValue, true);
-                    if (primaryColorTypedValue.data > 0) colorPrimary = primaryColorTypedValue.data;
+                    if (primaryColorTypedValue.data > 0) {
+                        colorPrimary = primaryColorTypedValue.data;
+                    }
                     TypedValue primaryColorDarkTypedValue = new TypedValue();
                     context.getTheme().resolveAttribute(android.R.attr.colorPrimaryDark, primaryColorDarkTypedValue, true);
-                    if (primaryColorDarkTypedValue.data > 0)
+                    if (primaryColorDarkTypedValue.data > 0) {
                         colorPrimaryDark = primaryColorDarkTypedValue.data;
+                    }
                 }
             } catch (Exception ignore) {
             }
@@ -349,7 +351,9 @@ public class SwitchButton extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (!isCanVisibleDrawing) return;
+        if (!isCanVisibleDrawing) {
+            return;
+        }
 
         paint.setAntiAlias(true);
         final boolean isOn = (state == STATE_SWITCH_ON || state == STATE_SWITCH_ON2);
@@ -396,7 +400,9 @@ public class SwitchButton extends View {
         canvas.restore();
 
         paint.reset();
-        if (sAnim > 0 || bAnim > 0) invalidate();
+        if (sAnim > 0 || bAnim > 0) {
+            invalidate();
+        }
     }
 
     @Override
@@ -451,7 +457,9 @@ public class SwitchButton extends View {
     };
 
     public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
-        if (listener == null) throw new IllegalArgumentException("empty listener");
+        if (listener == null) {
+            throw new IllegalArgumentException("empty listener");
+        }
         this.listener = listener;
     }
 

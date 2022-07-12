@@ -217,7 +217,7 @@ dependencies {
     implementation project(path: ':BannerViewLib')
     implementation project(path: ':BlurViewLib')
     implementation project(path: ':ActivityManager')
-
+    implementation project(path: ':AppSwitchView')
     implementation project(path: ':ApplicationLib')
 
     implementation project(path: ':MonitorFileLib')

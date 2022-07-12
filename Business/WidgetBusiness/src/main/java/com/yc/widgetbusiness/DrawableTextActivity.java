@@ -3,17 +3,24 @@ package com.yc.widgetbusiness;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.yc.apptextview.DrawableClickListener;
 import com.yc.apptextview.DrawableTextView;
+import com.yc.toastutils.ToastUtils;
 
 public class DrawableTextActivity extends AppCompatActivity {
 
     LinearLayout parent;
+    private DrawableTextView tvDrawable1;
+    private DrawableTextView tvDrawable2;
+    private DrawableTextView tvDrawable3;
+    private DrawableTextView tvDrawable4;
 
     /**
      * 开启页面
@@ -36,6 +43,39 @@ public class DrawableTextActivity extends AppCompatActivity {
         setContentView(R.layout.activity_drawable_text);
         parent = findViewById(R.id.ll_drawable_text);
 
+
+
+        tvDrawable1 = findViewById(R.id.tv_drawable_1);
+        tvDrawable2 = findViewById(R.id.tv_drawable_2);
+        tvDrawable3 = findViewById(R.id.tv_drawable_3);
+        tvDrawable4 = findViewById(R.id.tv_drawable_4);
+
+        tvDrawable1.setDrawableClickListener(DrawableTextView.LEFT, new DrawableClickListener() {
+            @Override
+            public void onDrawableClick(View view) {
+                ToastUtils.showRoundRectToast("点击图标");
+            }
+        });
+        tvDrawable1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showRoundRectToast("点击文字");
+            }
+        });
+
+        tvDrawable2.setDrawableClickListener(DrawableTextView.RIGHT, new DrawableClickListener() {
+            @Override
+            public void onDrawableClick(View view) {
+                ToastUtils.showRoundRectToast("点击图标");
+            }
+        });
+        tvDrawable2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showRoundRectToast("点击文字");
+            }
+        });
+
         //显示半遮盖的图片，半遮盖的文字，因为DrawableTextView只是简单的对画布做了位移操作
         DrawableTextView drawableTextView = new DrawableTextView(this);
         drawableTextView.setLayoutParams(new ViewGroup.LayoutParams(
@@ -43,6 +83,12 @@ public class DrawableTextActivity extends AppCompatActivity {
         drawableTextView.setDrawable(DrawableTextView.RIGHT,
                 ContextCompat.getDrawable(this, R.mipmap.camera), 50, 50);
         drawableTextView.setText("帖子");
+        drawableTextView.setDrawableClickListener(DrawableTextView.RIGHT,new DrawableClickListener() {
+            @Override
+            public void onDrawableClick(View view) {
+
+            }
+        });
         parent.addView(drawableTextView);
     }
 }

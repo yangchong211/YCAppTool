@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.MotionEvent;
 
 import androidx.annotation.IntDef;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -30,6 +31,8 @@ public class DrawableTextView extends AppCompatTextView {
     private Drawable[] drawables;
     private int[] widths;
     private int[] heights;
+    private DrawableClickListener drawableClickListener;
+    private int drawGravity = LEFT;
 
     public static final int LEFT = 0;
     public static final int TOP = 1;
@@ -93,14 +96,19 @@ public class DrawableTextView extends AppCompatTextView {
         }
     }
 
+    public void setDrawableClickListener(@DrawGravity int gravity , DrawableClickListener listener) {
+        this.drawGravity = gravity;
+        this.drawableClickListener = listener;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         int drawablePadding = getCompoundDrawablePadding();
         translateText(canvas, drawablePadding);
         super.onDraw(canvas);
 
-        float centerX = (getWidth() + getPaddingLeft() - getPaddingRight()) / 2;
-        float centerY = (getHeight() + getPaddingTop() - getPaddingBottom()) / 2;
+        float centerX = (getWidth() + getPaddingLeft() - getPaddingRight()) / 2.0f;
+        float centerY = (getHeight() + getPaddingTop() - getPaddingBottom()) / 2.0f;
 
         float halfTextWidth = getPaint().measureText(getText().toString().isEmpty() ? getHint().toString() : getText().toString()) / 2;
         Paint.FontMetrics fontMetrics = getPaint().getFontMetrics();
@@ -182,4 +190,57 @@ public class DrawableTextView extends AppCompatTextView {
         canvas.translate(translateWidth, translateHeight);
     }
 
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (drawableClickListener!=null){
+            if (event.getAction() == MotionEvent.ACTION_UP){
+                Drawable[] compoundDrawables = getCompoundDrawables();
+                Drawable drawable;
+                float rawX = event.getRawX();
+                int drawablePadding = getCompoundDrawablePadding();
+                float centerX = (getWidth() + getPaddingLeft() - getPaddingRight()) / 2.0f;
+                float centerY = (getHeight() + getPaddingTop() - getPaddingBottom()) / 2.0f;
+
+                float halfTextWidth = getPaint().measureText(getText().toString().isEmpty() ? getHint().toString() : getText().toString()) / 2;
+                Paint.FontMetrics fontMetrics = getPaint().getFontMetrics();
+                float halfTextHeight = (fontMetrics.descent - fontMetrics.ascent) / 2;
+
+                switch (drawGravity){
+                    case TOP:
+                        drawable = compoundDrawables[1];
+                        break;
+                    case RIGHT:
+                        drawable = compoundDrawables[2];
+                        if (drawable!=null){
+                            int drawableWidth = drawable.getBounds().width();
+                            int drawableLeft = (int) (centerX + halfTextWidth + drawablePadding);
+                            int drawableRight = drawableLeft + drawableWidth;
+                            if (rawX>drawableLeft && rawX<drawableRight){
+                                drawableClickListener.onDrawableClick(this);
+                            }
+                        }
+                        break;
+                    case BOTTOM:
+                        drawable = compoundDrawables[3];
+                        break;
+                    case LEFT:
+                    default:
+                        drawable = compoundDrawables[0];
+                        if (drawable!=null){
+                            int drawableWidth = drawable.getBounds().width();
+                            int drawableLeft = (int) (centerX - drawablePadding - halfTextWidth - drawableWidth);
+                            int drawableRight = drawableLeft + drawableWidth;
+                            if (rawX>drawableLeft && rawX<drawableRight){
+                                drawableClickListener.onDrawableClick(this);
+                            }
+                        }
+                        break;
+                }
+            }
+            return true;
+        }
+        return super.onTouchEvent(event);
+    }
 }

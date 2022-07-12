@@ -1,4 +1,4 @@
-package com.yc.widget.switchButton;
+package com.yc.appswitchview;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -17,7 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Checkable;
 
-import com.yc.widget.R;
+
 
 
 /**
