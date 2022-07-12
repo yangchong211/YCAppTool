@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.yc.architecturelib.navigation.navigate
+import com.yc.fragmentmanager.FragmentManagerHelper
 import com.yc.jetpack.study.workmanager.WorkManagerActivity
 import com.yc.jetpack.R
 import com.yc.jetpack.study.binding.SolutionActivity
@@ -36,6 +37,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(view)
+        FragmentManagerHelper.getInstance()?.addFragmentLifecycle(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        FragmentManagerHelper.getInstance()?.removeFragmentLifecycle(this)
     }
 
     private fun initView(view: View) {

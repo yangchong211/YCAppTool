@@ -62,7 +62,7 @@ project(':NetInterceptor').projectDir = new File('ServerLib/NetInterceptor')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':AppStatusLib',':ToolUtilsLib',
+include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',
         'ComponentLib',':ApplicationLib', ':ParallelTaskLib',':AppBaseStore',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
@@ -84,6 +84,7 @@ project(':AppRestartLib').projectDir = new File('CommonLib/AppRestartLib')
 project(':SafeIntentLib').projectDir = new File('CommonLib/SafeIntentLib')
 project(':ArchitectureLib').projectDir = new File('CommonLib/ArchitectureLib')
 project(':ActivityManager').projectDir = new File('CommonLib/ActivityManager')
+project(':FragmentManager').projectDir = new File('CommonLib/FragmentManager')
 project(':AppFileLib').projectDir = new File('CommonLib/AppFileLib')
 project(':EventUploadLib').projectDir = new File('CommonLib/EventUploadLib')
 project(':AppCommonInter').projectDir = new File('CommonLib/AppCommonInter')
@@ -216,6 +217,5 @@ project(':VideoKernel').projectDir = new File('PlayerLib/VideoKernel')
 project(':VideoPlayer').projectDir = new File('PlayerLib/VideoPlayer')
 project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
-
 
 

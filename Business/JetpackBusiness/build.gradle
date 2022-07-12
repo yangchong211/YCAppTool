@@ -109,6 +109,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     // room 使用kapt，fix RoomDatabase_Impl does not exist
     implementation(rootProject.ext.dependencies["roomRuntime"])
+    implementation project(path: ':FragmentManager')
     //kapt(rootProject.ext.dependencies["roomCompiler"])
     annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
     //WorkManager

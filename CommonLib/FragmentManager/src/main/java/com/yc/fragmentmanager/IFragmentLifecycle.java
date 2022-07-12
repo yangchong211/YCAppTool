@@ -1,4 +1,4 @@
-package com.yc.baseclasslib.fragment;
+package com.yc.fragmentmanager;
 
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
  *     revise :
  * </pre>
  */
-@Deprecated
 public interface IFragmentLifecycle {
 
     void onCreate(@Nullable Bundle savedInstanceState);
