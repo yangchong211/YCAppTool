@@ -74,9 +74,6 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
      * 所有Activity的集合
      */
     private List<Class> activitiesClass;
-
-
-    private Handler handler = new Handler();
     private LinearLayout mActivityCrashList;
     private LinearLayout mLlBack;
     private TextView mTvShare;
@@ -134,9 +131,6 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
                 }
                 //获取内容
                 crashContent = AppFileUtils.readFile2String(filePath);
-                if (handler == null) {
-                    return;
-                }
                 //获取所有Activity
                 activitiesClass = ActivityManager.getInstance().getActivitiesClass(CrashDetailsActivity.this, getPackageName(), null);
 
@@ -161,7 +155,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
 
                 //主线程处理
                 final Spannable finalSpannable = spannable;
-                handler.post(new Runnable() {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                     @Override
                     public void run() {
                         if (mTvContent != null) {
@@ -226,7 +220,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
             if (saveBitmap) {
                 showToast("保存截图成功，请到相册查看\n路径：" + crashPicPath);
                 final Bitmap bitmapCompress = CompressUtils.getBitmap(new File(crashPicPath), 200, 200);
-                handler.post(new Runnable() {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                     @Override
                     public void run() {
                         dismissProgressLoading();
@@ -251,12 +245,12 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
                         animatorSetScale.start();
 
                         //三秒后消失
-                        handler.postDelayed(new Runnable() {
+                        DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                             @Override
                             public void run() {
                                 mIvScreenShot.setVisibility(View.GONE);
                             }
-                        }, 3000);
+                        },3000);
                     }
                 });
             } else {
@@ -270,10 +264,10 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void showToast(final String msg) {
-        handler.post(new Runnable() {
+        DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(CrashDetailsActivity.this, msg, Toast.LENGTH_SHORT).show();
+                ToastUtils.showRoundRectToast(msg);
             }
         });
     }
@@ -288,15 +282,6 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
         ClipData clipData = ClipData.newPlainText("CrashLog", crashContent);
         //添加ClipData对象到剪切板中
         clipboardManager.setPrimaryClip(clipData);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (handler!=null){
-            handler.removeCallbacksAndMessages(null);
-            handler = null;
-        }
     }
 
     @Override
@@ -316,7 +301,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
         } else if (i == R.id.tv_copy) {
             //复制
             putTextIntoClip();
-            Toast.makeText(CrashDetailsActivity.this, "复制内容成功", Toast.LENGTH_SHORT).show();
+            ToastUtils.showRoundRectToast("复制内容成功");
         } else if (i == R.id.tv_screenshot) {
             //直接保存
             saveScreenShot();
@@ -333,7 +318,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
             //分享
             FileShareUtils.shareFile(CrashDetailsActivity.this, destFile);
         } else {
-            Toast.makeText(CrashDetailsActivity.this, "文件保存失败", Toast.LENGTH_SHORT).show();
+            ToastUtils.showRoundRectToast("文件保存失败");
         }
     }
 
@@ -353,7 +338,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void dismissProgressLoading() {
-        handler.post(new Runnable() {
+        DelegateTaskExecutor.getInstance().postToMainThread(this,new Runnable() {
             @Override
             public void run() {
                 LinearLayout progress_view = findViewById(R.id.progress_view);
