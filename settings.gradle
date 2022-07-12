@@ -133,7 +133,7 @@ project(':FloatWindow').projectDir = new File('WidgetLib/FloatWindow')
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
-        ':NetHelperLib', ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,
+        ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,':NtpTimeLib' ,
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib',':EasyExecutor',
         ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib', ':AppProcessLib',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus'
@@ -141,7 +141,6 @@ project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
 project(':SerialTaskLib').projectDir = new File('ToolLib/SerialTaskLib')
-project(':NetHelperLib').projectDir = new File('ToolLib/NetHelperLib')
 project(':LocaleHelperLib').projectDir = new File('ToolLib/LocaleHelperLib')
 project(':CountTimerLib').projectDir = new File('ToolLib/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('ToolLib/AnimatorToolLib')
@@ -156,7 +155,7 @@ project(':LocalShareLib').projectDir = new File('ToolLib/LocalShareLib')
 project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
 project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
 project(':LiveDataBus').projectDir = new File('ToolLib/LiveDataBus')
-
+project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */

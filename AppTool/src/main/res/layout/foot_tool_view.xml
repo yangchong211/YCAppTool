@@ -89,7 +89,7 @@
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_second"
-            android:text="" />
+            android:text="时间校验" />
         <TextView
             android:id="@+id/tv_tool11"
             style="@style/WeightAttr"

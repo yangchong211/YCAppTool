@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="lf_other_name" translatable="false">小杨测试</string>
+    <string name="tt_time_gmt">%1$s [GMT]</string>
+    <string name="tt_time_pst">%1$s [PST]</string>
+    <string name="tt_time_device">%1$s [PST]</string>
 </resources>

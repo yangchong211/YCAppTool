@@ -59,6 +59,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["material"])
+    implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation project(path: ':MonitorNetLib')
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':LocaleHelperLib')
@@ -80,6 +81,7 @@ dependencies {
     implementation project(path: ':RouteAnnotations')
     implementation project(path: ':BaseProgress')
     implementation project(path: ':CircleProgress')
+    implementation project(path: ':NtpTimeLib')
     annotationProcessor project(path: ':RouteCompiler')
 
     implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3'

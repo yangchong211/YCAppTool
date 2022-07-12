@@ -2,24 +2,23 @@ package com.yc.lifehelper.application;
 
 import android.os.Looper;
 
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.parallel.AbsParallelTask;
 import com.yc.autocloserlib.AppAutoCloser;
 import com.yc.toolutils.AppLogUtils;
+import com.yc.ntptime.NtpGetTime;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppThreadTask extends AbsParallelTask {
     @Override
     public void run() {
+        long start = System.currentTimeMillis();
         //app 进入后台一定时间后执行退出或者重启操作，有助于释放内存，减少用户电量消耗
         initAutoCloser();
-        long start = System.currentTimeMillis();
-        try {
-            Thread.sleep(100);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        initNtpTime();
         long end = System.currentTimeMillis();
         boolean isMainThread = (Looper.myLooper() == Looper.getMainLooper());
         AppLogUtils.i("app init 5 task thread total time : " + (end-start)
@@ -44,6 +43,24 @@ public class AppThreadTask extends AbsParallelTask {
         appAutoCloser.init(MainApplication.getInstance());
         appAutoCloser.setTime(60);
         appAutoCloser.start();
+    }
+
+    private void initNtpTime() {
+        DelegateTaskExecutor.getInstance().executeOnCore(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    NtpGetTime.build()
+                            .withNtpHost("time.ustc.edu.cn")
+                            .withSharedPreferencesCache(MainApplication.getInstance())
+                            .withConnectionTimeout(30000)
+                            .initialize();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    AppLogUtils.e("something went wrong when trying to initialize TrueTime "+ e);
+                }
+            }
+        });
     }
 
 }

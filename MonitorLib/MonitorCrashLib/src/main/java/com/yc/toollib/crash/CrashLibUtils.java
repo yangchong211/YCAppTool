@@ -108,7 +108,7 @@ public class CrashLibUtils {
 
 
     public static void reStartApp4(Context context) {
-        RestartAppHelper.restartApp(context, RestartFactory.MAINIFEST);
+        RestartAppHelper.restartApp(context, RestartFactory.MANIFEST);
     }
 
     /**
