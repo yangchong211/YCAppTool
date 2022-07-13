@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public final class TimeMonitorHelper {
 
-    private static final Object object = new Object();
-    private static final HashMap<String, TimeMonitor> mTimeMonitorCache = new HashMap<>();
+    private static final Object OBJECT = new Object();
+    private static final HashMap<String, TimeMonitor> timeMonitorCache = new HashMap<>();
     private static PrintFormatAdapter mPrintAdapter = PrintFormatAdapter.Factory.newDefaultLogAdapter();
     private static boolean isMonitor = true;
 
@@ -20,43 +20,31 @@ public final class TimeMonitorHelper {
         }
     }
 
-    public static void start(String processName) {
-        start(processName, null);
-    }
-
-    public static void end(String processName) {
-        end(processName, null);
-    }
-
-    public static void start(String processName, String actionName) {
+    public static void start(String actionName) {
         if (!isMonitor) {
             return;
         }
-        synchronized (object) {
-            TimeMonitor timeMonitor = mTimeMonitorCache.get(processName);
-            if (mTimeMonitorCache.containsKey(processName)) {
-                if (timeMonitor != null) {
-                    timeMonitor.start(actionName);
-                }
-                return;
+        synchronized (OBJECT) {
+            TimeMonitor timeMonitor = timeMonitorCache.get(actionName);
+            if (timeMonitor == null){
+                timeMonitor = new TimeMonitor(actionName);
             }
-            mTimeMonitorCache.put(processName, new TimeMonitor(processName));
-            if (timeMonitor != null) {
-                timeMonitor.start(actionName);
-            }
+            timeMonitor.start(actionName);
+            timeMonitorCache.put(actionName, timeMonitor);
         }
     }
 
-    public static void end(String processName, String actionName) {
+    public static void end(String actionName) {
         if (!isMonitor) {
             return;
         }
-        TimeMonitor timeMonitor = mTimeMonitorCache.get(processName);
-        if (mTimeMonitorCache.containsKey(processName)) {
-            if (timeMonitor != null) {
-                timeMonitor.end(actionName, rstListener);
+        synchronized (OBJECT) {
+            TimeMonitor timeMonitor = timeMonitorCache.get(actionName);
+            if (timeMonitor == null){
+                timeMonitor = new TimeMonitor(actionName);
             }
-            return;
+            timeMonitor.end(actionName,rstListener);
+            timeMonitorCache.put(actionName, timeMonitor);
         }
     }
 
