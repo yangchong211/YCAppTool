@@ -2,6 +2,7 @@ package com.yc.lifehelper.application;
 
 import android.os.Looper;
 
+import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.parallel.AbsParallelTask;
 import com.yc.toolutils.AppLogUtils;
 
@@ -12,6 +13,7 @@ public class AppLazyTask extends AbsParallelTask {
 
     @Override
     public void run() {
+        TimeMonitorHelper.start("AppLazyTask");
         long start = System.currentTimeMillis();
         try {
             Thread.sleep(20);
@@ -22,6 +24,7 @@ public class AppLazyTask extends AbsParallelTask {
         boolean isMainThread = (Looper.myLooper() == Looper.getMainLooper());
         AppLogUtils.i("app init 4 task lazy total time : " + (end-start)
                 + " ; 线程是否是主线程" + isMainThread);
+        TimeMonitorHelper.end("AppLazyTask");
     }
 
     @Override

@@ -1,18 +1,14 @@
 package com.yc.monitortimelib;
 
 
-public class TimeTraceBean {
+public final class TimeTraceBean {
 
     private String actionName;
-    private long actionTime;
+    private long actionStartTime;
+    private long actionEndTime;
 
-    TimeTraceBean(){
-
-    }
-
-    TimeTraceBean(String actionName, long actionTime){
+    TimeTraceBean(String actionName){
         setActionName(actionName);
-        setActionTime(actionTime);
     }
 
     public String getActionName() {
@@ -23,16 +19,19 @@ public class TimeTraceBean {
         this.actionName = actionName;
     }
 
-    public long getActionTime() {
-        return actionTime;
+    public long getActionStartTime() {
+        return actionStartTime;
     }
 
-    public void setActionTime(long actionTime) {
-        this.actionTime = actionTime;
+    public void setActionStartTime(long actionStartTime) {
+        this.actionStartTime = actionStartTime;
     }
 
-    @Override
-    public String toString() {
-        return "{ "+actionName+": "+actionTime+"ms }";
+    public long getActionEndTime() {
+        return actionEndTime;
+    }
+
+    public void setActionEndTime(long actionEndTime) {
+        this.actionEndTime = actionEndTime;
     }
 }

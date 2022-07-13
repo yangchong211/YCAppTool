@@ -24,6 +24,10 @@ public final class TimeMonitorHelper {
         start(processName, null);
     }
 
+    public static void end(String processName) {
+        end(processName, null);
+    }
+
     public static void start(String processName, String actionName) {
         if (!isMonitor) {
             return;
@@ -43,34 +47,16 @@ public final class TimeMonitorHelper {
         }
     }
 
-    public static void recoding(String processName, String actionName) {
+    public static void end(String processName, String actionName) {
         if (!isMonitor) {
             return;
         }
         TimeMonitor timeMonitor = mTimeMonitorCache.get(processName);
         if (mTimeMonitorCache.containsKey(processName)) {
             if (timeMonitor != null) {
-                timeMonitor.start(actionName);
+                timeMonitor.end(actionName, rstListener);
             }
             return;
-        }
-        mTimeMonitorCache.put(processName, new TimeMonitor(processName));
-        if (timeMonitor != null) {
-            timeMonitor.recoding(actionName);
-        }
-    }
-
-    public static void end(String processName) {
-        end(processName, null);
-    }
-
-    public static void end(String processName, String actionName) {
-        if (!isMonitor) {
-            return;
-        }
-        TimeMonitor timeMonitor = mTimeMonitorCache.get(processName);
-        if (timeMonitor != null) {
-            timeMonitor.end(actionName, rstListener);
         }
     }
 

@@ -9,6 +9,7 @@ import com.yc.appcommoninter.IMonitorToggle;
 import com.yc.appprocesslib.AppStateLifecycle;
 import com.yc.appprocesslib.StateListener;
 import com.yc.library.BuildConfig;
+import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.parallel.AbsParallelTask;
 import com.yc.activitymanager.ActivityManager;
 import com.yc.easyexecutor.DelegateTaskExecutor;
@@ -33,6 +34,8 @@ public class AppCoreTask extends AbsParallelTask {
     public void run() {
         long start = System.currentTimeMillis();
         //日志库
+        TimeMonitorHelper.start("AppCoreTask");
+        TimeMonitorHelper.start("AppCoreTask","AppLogHelper");
         AppLogHelper.config(MainApplication.getInstance());
         //初始化国际化语言
         initLang();
@@ -48,6 +51,7 @@ public class AppCoreTask extends AbsParallelTask {
         boolean isMainThread = (Looper.myLooper() == Looper.getMainLooper());
         AppLogUtils.i("app init 1 task core total time : " + (end-start)
                 + " ; 线程是否是主线程" + isMainThread);
+        TimeMonitorHelper.end("AppCoreTask");
     }
 
     @Override

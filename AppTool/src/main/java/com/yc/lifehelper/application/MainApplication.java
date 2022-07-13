@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.bumptech.glide.request.target.ViewTarget;
 import com.yc.lifehelper.R;
+import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.parallel.ParallelTaskDispatcher;
 import com.yc.library.base.app.LibApplication;
 import com.yc.localelib.service.LocaleService;
@@ -40,6 +41,7 @@ public class MainApplication extends LibApplication {
         //fix java.lang.IllegalArgumentException: You must not call setTag() on a view Glide is targeting
         ViewTarget.setTagId(R.id.glide_tag);
         //执行task任务
+        TimeMonitorHelper.init(true,null);
         ParallelTaskDispatcher.create()
                 .setShowLog(true)
                 .addAppStartTask(new AppCoreTask())
