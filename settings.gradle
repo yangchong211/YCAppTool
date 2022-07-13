@@ -100,7 +100,7 @@ include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':EastAdapterLib', ':PhotoCoverLib', ':RefreshViewLib', ':SelectViewLib',
         ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib',
         ':FloatWindow', ':AppTextView', ':AppImageView', ':AppButtonView', ':AppScrollView',
-        ':AppSwitchView', ':AppEditText'
+        ':AppSwitchView', ':AppEditText', ':AppConstraintLayout'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
 project(':CustomWidget').projectDir = new File('WidgetLib/CustomWidget')
@@ -137,6 +137,8 @@ project(':AppButtonView').projectDir = new File('WidgetLib/AppButtonView')
 project(':AppScrollView').projectDir = new File('WidgetLib/AppScrollView')
 project(':AppSwitchView').projectDir = new File('WidgetLib/AppSwitchView')
 project(':AppEditText').projectDir = new File('WidgetLib/AppEditText')
+project(':AppConstraintLayout').projectDir = new File('WidgetLib/AppConstraintLayout')
+
 
 
 /* +++++++++ 框架基础工具库 +++++++++ */

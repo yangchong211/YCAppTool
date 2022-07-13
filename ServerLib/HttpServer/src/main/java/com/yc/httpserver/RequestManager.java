@@ -69,7 +69,7 @@ public class RequestManager {
     }
 
     /**
-     *  okHttp同步请求统一入口
+     * okHttp同步请求统一入口
      * @param actionUrl  接口地址
      * @param requestType 请求类型
      * @param paramsMap   请求参数
@@ -85,8 +85,37 @@ public class RequestManager {
             case TYPE_POST_FORM:
                 requestPostBySynWithForm(actionUrl, paramsMap);
                 break;
+            default:
+                break;
         }
     }
+
+
+    /**
+     * okHttp异步请求统一入口
+     * @param actionUrl   接口地址
+     * @param requestType 请求类型
+     * @param paramsMap   请求参数
+     * @param callBack 请求返回数据回调
+     * @param <T> 数据泛型
+     **/
+    public <T> Call requestAsyn(String actionUrl, int requestType,
+                                HashMap<String, String> paramsMap, ReqCallBack<T> callBack) {
+        Call call = null;
+        switch (requestType) {
+            case TYPE_GET:
+                call = requestGetByAsyn(actionUrl, paramsMap, callBack);
+                break;
+            case TYPE_POST_JSON:
+                call = requestPostByAsyn(actionUrl, paramsMap, callBack);
+                break;
+            case TYPE_POST_FORM:
+                call = requestPostByAsynWithForm(actionUrl, paramsMap, callBack);
+                break;
+        }
+        return call;
+    }
+
 
     /**
      * okHttp get同步请求
@@ -189,30 +218,6 @@ public class RequestManager {
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
-    }
-
-    /**
-     * okHttp异步请求统一入口
-     * @param actionUrl   接口地址
-     * @param requestType 请求类型
-     * @param paramsMap   请求参数
-     * @param callBack 请求返回数据回调
-     * @param <T> 数据泛型
-     **/
-    public <T> Call requestAsyn(String actionUrl, int requestType, HashMap<String, String> paramsMap, ReqCallBack<T> callBack) {
-        Call call = null;
-        switch (requestType) {
-            case TYPE_GET:
-                call = requestGetByAsyn(actionUrl, paramsMap, callBack);
-                break;
-            case TYPE_POST_JSON:
-                call = requestPostByAsyn(actionUrl, paramsMap, callBack);
-                break;
-            case TYPE_POST_FORM:
-                call = requestPostByAsynWithForm(actionUrl, paramsMap, callBack);
-                break;
-        }
-        return call;
     }
 
 
