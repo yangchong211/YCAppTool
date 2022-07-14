@@ -9,9 +9,9 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 
+import com.yc.blurview.RealTimeBlurView;
 import com.yc.businessinterface.IAnimServiceProvider;
 import com.yc.spi.loader.ServiceLoader;
-import com.yc.widget.blurview.RealTimeBlurView;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 
@@ -98,7 +98,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 
     private void startShowDialog() {
         View popMenuView = this.getLayoutInflater().inflate(R.layout.view_real_blur_view, null);
-        RealTimeBlurView blur_view = (RealTimeBlurView) popMenuView.findViewById(R.id.blur_view);
+        RealTimeBlurView blur_view = popMenuView.findViewById(R.id.blur_view);
         float v = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, this.getResources().getDisplayMetrics());
         blur_view.setBlurRadius(v);
         final PopupWindow popMenu = new PopupWindow(popMenuView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);

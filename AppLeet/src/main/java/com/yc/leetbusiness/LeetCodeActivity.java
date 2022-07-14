@@ -9,6 +9,15 @@ import com.yc.leetbusiness.array.ArrayTestActivity;
 import com.yc.leetbusiness.code.CodeTestActivity;
 import com.yc.library.base.mvp.BaseActivity;
 
+/**
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/01/30
+ *     desc  : 算法
+ *     revise:
+ * </pre>
+ */
 public class LeetCodeActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tv1;

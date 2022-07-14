@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
 
-    <com.yc.widget.blurview.RealTimeBlurView
+    <com.yc.blurview.RealTimeBlurView
         android:id="@+id/blur_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

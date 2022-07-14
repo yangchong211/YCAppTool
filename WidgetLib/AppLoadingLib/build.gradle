@@ -1,9 +1,6 @@
 plugins {
     id 'com.android.library'
 }
-plugins {
-    id 'kotlin-android'
-}
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 

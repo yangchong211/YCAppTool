@@ -82,6 +82,7 @@ dependencies {
     implementation project(path: ':BaseProgress')
     implementation project(path: ':CircleProgress')
     implementation project(path: ':NtpTimeLib')
+    implementation project(path: ':BlurViewLib')
     annotationProcessor project(path: ':RouteCompiler')
 
     implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3'

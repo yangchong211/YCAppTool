@@ -1,4 +1,4 @@
-package com.yc.widget.scrollView;
+package com.yc.appscrollview;
 
 import android.content.Context;
 import android.graphics.Rect;

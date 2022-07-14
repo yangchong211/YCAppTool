@@ -10,7 +10,7 @@
 
     <include layout="@layout/base_tool_bar"/>
 
-    <com.yc.widget.scrollView.BounceScrollView
+    <com.yc.appscrollview.BounceScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -149,6 +149,6 @@
             </com.yc.roundcorner.viewgroup.RoundRelativeLayout>
 
         </LinearLayout>
-    </com.yc.widget.scrollView.BounceScrollView>
+    </com.yc.appscrollview.BounceScrollView>
 
 </LinearLayout>

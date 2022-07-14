@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.baseclasslib.activity.BaseAppActivity;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.library.R;
 
@@ -20,7 +21,7 @@ import com.yc.library.R;
  *     revise:
  * </pre>
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity{
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
 
     /**
      * 将代理类通用行为抽出来

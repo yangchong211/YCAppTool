@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 
+import com.yc.blurview.blur.CustomBlur;
 import com.yc.gallerybannerlib.GalleryLayoutManager;
 import com.yc.gallerybannerlib.GalleryLinearSnapHelper;
 import com.yc.gallerybannerlib.GalleryRecyclerView;
@@ -20,7 +21,6 @@ import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.ui.adapter.MeBannerAdapter;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.widget.blurview.blur.CustomBlur;
 import com.yc.other.R;
 
 import java.util.ArrayList;

@@ -8,6 +8,15 @@ import com.yc.library.base.mvp.BaseActivity;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
 
+/**
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/01/30
+ *     desc  : 算法导论
+ *     revise:
+ * </pre>
+ */
 public class CodeTestActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tv1;
@@ -60,7 +69,7 @@ public class CodeTestActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v == tv1) {
-
+            cla(100);
         } else if (v == tv2) {
 
         } else if (v == tv3) {
@@ -70,6 +79,15 @@ public class CodeTestActivity extends BaseActivity implements View.OnClickListen
         } else if (v == tv5){
 
         }
+    }
+
+
+    private int cla(int n){
+        int sum = 0;
+        for (int i=1 ;i<=n; i++){
+            sum = sum + 1;
+        }
+        return sum;
     }
 
 }

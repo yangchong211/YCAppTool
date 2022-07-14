@@ -1,4 +1,4 @@
-package com.yc.widget.scrollView;
+package com.yc.appscrollview;
 
 
 import androidx.core.widget.NestedScrollView;

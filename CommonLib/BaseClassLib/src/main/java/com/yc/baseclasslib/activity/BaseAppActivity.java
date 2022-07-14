@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
  *     revise:
  * </pre>
  */
-public class BaseAppActivity extends AppCompatActivity {
+public abstract class BaseAppActivity extends AppCompatActivity {
 
     /**
      * 正常生命周期

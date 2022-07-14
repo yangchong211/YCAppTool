@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yc.widget.scrollView.NoNestedScrollview
+<com.yc.appscrollview.NoNestedScrollview
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -121,4 +121,4 @@
             android:padding="10dp"
             android:text="12.线程执行测试"/>
     </LinearLayout>
-</com.yc.widget.scrollView.NoNestedScrollview>
+</com.yc.appscrollview.NoNestedScrollview>

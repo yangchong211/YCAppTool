@@ -35,7 +35,6 @@ public class AppCoreTask extends AbsParallelTask {
         long start = System.currentTimeMillis();
         //日志库
         TimeMonitorHelper.start("AppCoreTask");
-        TimeMonitorHelper.start("AppCoreTask","AppLogHelper");
         AppLogHelper.config(MainApplication.getInstance());
         //初始化国际化语言
         initLang();

@@ -13,11 +13,11 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 
+import com.yc.blurview.blur.CustomBlur;
 import com.yc.gallerybannerlib.GalleryRecyclerView;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.ui.adapter.MeBannerAdapter;
 import com.yc.statusbar.bar.StateAppBar;
-import com.yc.widget.blurview.blur.CustomBlur;
 import com.yc.other.R;
 
 import java.lang.ref.SoftReference;
