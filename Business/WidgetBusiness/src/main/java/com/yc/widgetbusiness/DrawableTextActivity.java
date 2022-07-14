@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.yc.apptextview.DrawableClickListener;
 import com.yc.apptextview.DrawableTextView;
 import com.yc.toastutils.ToastUtils;
 
@@ -50,7 +49,7 @@ public class DrawableTextActivity extends AppCompatActivity {
         tvDrawable3 = findViewById(R.id.tv_drawable_3);
         tvDrawable4 = findViewById(R.id.tv_drawable_4);
 
-        tvDrawable1.setDrawableClickListener(DrawableTextView.LEFT, new DrawableClickListener() {
+        tvDrawable1.setDrawableClickListener(DrawableTextView.LEFT, new DrawableTextView.DrawableClickListener() {
             @Override
             public void onDrawableClick(View view) {
                 ToastUtils.showRoundRectToast("点击图标");
@@ -63,7 +62,7 @@ public class DrawableTextActivity extends AppCompatActivity {
             }
         });
 
-        tvDrawable2.setDrawableClickListener(DrawableTextView.RIGHT, new DrawableClickListener() {
+        tvDrawable2.setDrawableClickListener(DrawableTextView.RIGHT, new DrawableTextView.DrawableClickListener() {
             @Override
             public void onDrawableClick(View view) {
                 ToastUtils.showRoundRectToast("点击图标");
@@ -83,7 +82,7 @@ public class DrawableTextActivity extends AppCompatActivity {
         drawableTextView.setDrawable(DrawableTextView.RIGHT,
                 ContextCompat.getDrawable(this, R.mipmap.camera), 50, 50);
         drawableTextView.setText("帖子");
-        drawableTextView.setDrawableClickListener(DrawableTextView.RIGHT,new DrawableClickListener() {
+        drawableTextView.setDrawableClickListener(DrawableTextView.RIGHT,new DrawableTextView.DrawableClickListener() {
             @Override
             public void onDrawableClick(View view) {
 

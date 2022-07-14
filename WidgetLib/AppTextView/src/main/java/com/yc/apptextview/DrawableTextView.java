@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
 
 import androidx.annotation.IntDef;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -96,7 +97,7 @@ public class DrawableTextView extends AppCompatTextView {
         }
     }
 
-    public void setDrawableClickListener(@DrawGravity int gravity , DrawableClickListener listener) {
+    public void setDrawableClickListener(@DrawGravity int gravity, DrawableClickListener listener) {
         this.drawGravity = gravity;
         this.drawableClickListener = listener;
     }
@@ -191,12 +192,10 @@ public class DrawableTextView extends AppCompatTextView {
     }
 
 
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (drawableClickListener!=null){
-            if (event.getAction() == MotionEvent.ACTION_UP){
-                Drawable[] compoundDrawables = getCompoundDrawables();
+        if (drawableClickListener != null) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
                 Drawable drawable;
                 float rawX = event.getRawX();
                 int drawablePadding = getCompoundDrawablePadding();
@@ -207,32 +206,33 @@ public class DrawableTextView extends AppCompatTextView {
                 Paint.FontMetrics fontMetrics = getPaint().getFontMetrics();
                 float halfTextHeight = (fontMetrics.descent - fontMetrics.ascent) / 2;
 
-                switch (drawGravity){
+                switch (drawGravity) {
                     case TOP:
-                        drawable = compoundDrawables[1];
+                        drawable = drawables[1];
+
                         break;
                     case RIGHT:
-                        drawable = compoundDrawables[2];
-                        if (drawable!=null){
+                        drawable = drawables[2];
+                        if (drawable != null) {
                             int drawableWidth = drawable.getBounds().width();
                             int drawableLeft = (int) (centerX + halfTextWidth + drawablePadding);
                             int drawableRight = drawableLeft + drawableWidth;
-                            if (rawX>drawableLeft && rawX<drawableRight){
+                            if (rawX > drawableLeft && rawX < drawableRight) {
                                 drawableClickListener.onDrawableClick(this);
                             }
                         }
                         break;
                     case BOTTOM:
-                        drawable = compoundDrawables[3];
+                        drawable = drawables[3];
                         break;
                     case LEFT:
                     default:
-                        drawable = compoundDrawables[0];
-                        if (drawable!=null){
+                        drawable = drawables[0];
+                        if (drawable != null) {
                             int drawableWidth = drawable.getBounds().width();
                             int drawableLeft = (int) (centerX - drawablePadding - halfTextWidth - drawableWidth);
                             int drawableRight = drawableLeft + drawableWidth;
-                            if (rawX>drawableLeft && rawX<drawableRight){
+                            if (rawX > drawableLeft && rawX < drawableRight) {
                                 drawableClickListener.onDrawableClick(this);
                             }
                         }
@@ -243,4 +243,19 @@ public class DrawableTextView extends AppCompatTextView {
         }
         return super.onTouchEvent(event);
     }
+
+    /**
+     * <pre>
+     *     @author yangchong
+     *     GitHub : https://github.com/yangchong211/YCWidgetLib
+     *     email  : yangchong211@163.com
+     *     time  : 2016/09/23
+     *     desc  : 带有图片对自定义TextView，图片点击监听
+     *     revise:
+     * </pre>
+     */
+    public interface DrawableClickListener {
+        void onDrawableClick(View view);
+    }
+
 }
