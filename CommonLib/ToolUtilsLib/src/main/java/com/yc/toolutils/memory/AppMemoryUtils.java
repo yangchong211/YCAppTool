@@ -259,6 +259,20 @@ public final class AppMemoryUtils {
         return Formatter.formatFileSize(context, blockSize * availableBlocks);
     }
 
+    /**
+     * 获取机身控件
+     * @param context       上下文
+     * @return
+     */
+    public static String getRomSpace(Context context) {
+        try {
+            String free = getRomAvailableSize(context);
+            String total = getRomTotalSize(context);
+            return free + "/" + total;
+        } catch (Exception e) {
+            return "-/-";
+        }
+    }
 
     /**
      * 获得机身内存总大小
@@ -273,22 +287,22 @@ public final class AppMemoryUtils {
         return Formatter.formatFileSize(context, blockSize * totalBlocks);
     }
 
-
     /**
      * 手机总内存
      * @param context
      * @return 手机总内存(兆)
      */
     public static long getTotalMemory(Context context) {
-        String str1 = "/proc/meminfo";// 系统内存信息文件
+        // 系统内存信息文件
+        String str1 = "/proc/meminfo";
         String str2;
         String[] arrayOfString;
         long initial_memory = 0;
         try {
             FileReader localFileReader = new FileReader(str1);
-            BufferedReader localBufferedReader = new BufferedReader(
-                    localFileReader, 8192);
-            str2 = localBufferedReader.readLine();// 读取meminfo第一行，系统总内存大小
+            BufferedReader localBufferedReader = new BufferedReader(localFileReader, 8192);
+            str2 = localBufferedReader.readLine();
+            // 读取meminfo第一行，系统总内存大小
             if (!TextUtils.isEmpty(str2)) {
                 arrayOfString = str2.split("\\s+");
                 // 获得系统总内存，单位是KB，乘以1024转换为Byte
@@ -298,7 +312,8 @@ public final class AppMemoryUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return initial_memory;// Byte转换为KB或者MB，内存大小规格化
+        // Byte转换为KB或者MB，内存大小规格化
+        return initial_memory;
     }
 
     /**

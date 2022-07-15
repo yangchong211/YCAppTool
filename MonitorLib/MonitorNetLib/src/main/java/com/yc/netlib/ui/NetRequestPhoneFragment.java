@@ -28,6 +28,8 @@ import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.toolutils.AppDeviceUtils;
+import com.yc.toolutils.file.AppSdFileUtils;
+import com.yc.toolutils.memory.AppMemoryUtils;
 import com.yc.toolutils.net.AppNetworkUtils;
 import com.yc.toolutils.AppWindowUtils;
 import java.util.ArrayList;
@@ -136,10 +138,10 @@ public class NetRequestPhoneFragment extends Fragment {
         sb.append("\nCPU的类型:").append(AppDeviceUtils.getCpuType());
         sb.append("\n系统的版本:").append(AppDeviceUtils.getSDKVersionName());
         sb.append("\n系统版本值:").append(AppDeviceUtils.getSDKVersionCode());
-        sb.append("\nSd卡剩余控件:").append(AppDeviceUtils.getSDCardSpace(application));
-        sb.append("\n系统剩余控件:").append(AppDeviceUtils.getRomSpace(application));
-        sb.append("\n手机总内存:").append(AppDeviceUtils.getTotalMemory(application));
-        sb.append("\n手机可用内存:").append(AppDeviceUtils.getAvailMemory(application));
+        sb.append("\nSd卡剩余控件:").append(AppSdFileUtils.getSDCardSpace(application));
+        sb.append("\n系统剩余控件:").append(AppMemoryUtils.getRomSpace(application));
+        sb.append("\n手机总内存:").append(AppMemoryUtils.getTotalMemory(application));
+        sb.append("\n手机可用内存:").append(AppMemoryUtils.getAvailMemory(application));
         sb.append("\n手机分辨率:").append(AppWindowUtils.getRealScreenHeight(getActivity()))
                 .append("x").append(AppWindowUtils.getRealScreenWidth(getActivity()));
         sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch(getActivity()));

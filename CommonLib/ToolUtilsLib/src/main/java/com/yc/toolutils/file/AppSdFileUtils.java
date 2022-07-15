@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
 import android.os.storage.StorageManager;
+import android.text.format.Formatter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -88,6 +89,45 @@ public final class AppSdFileUtils {
         }
         return 0;
     }
+
+
+    public static String getSDCardSpace(Context context) {
+        try {
+            String free = getSDAvailableSize(context);
+            String total = getSDTotalSize(context);
+            return free + "/" + total;
+        } catch (Exception e) {
+            return "-/-";
+        }
+    }
+
+    /**
+     * 获得SD卡总大小
+     *
+     * @return
+     */
+    private static String getSDTotalSize(Context context) {
+        File path = Environment.getExternalStorageDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long totalBlocks = stat.getBlockCount();
+        return Formatter.formatFileSize(context, blockSize * totalBlocks);
+    }
+
+    /**
+     * 获得sd卡剩余容量，即可用大小
+     *
+     * @return
+     */
+    private static String getSDAvailableSize(Context context) {
+        File path = Environment.getExternalStorageDirectory();
+        StatFs stat = new StatFs(path.getPath());
+        long blockSize = stat.getBlockSize();
+        long availableBlocks = stat.getAvailableBlocks();
+        return Formatter.formatFileSize(context, blockSize * availableBlocks);
+    }
+
+
 
     /**
      * 获取 SD 卡路径

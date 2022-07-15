@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.DhcpInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,8 +23,9 @@ import com.yc.toolutils.AppInfoUtils;
 import com.yc.toolutils.AppSignUtils;
 import com.yc.toolutils.AppTimeUtils;
 import com.yc.toolutils.AppWindowUtils;
-import com.yc.toolutils.BuildConfig;
 import com.yc.toolutils.StatusBarUtils;
+import com.yc.toolutils.file.AppSdFileUtils;
+import com.yc.toolutils.memory.AppMemoryUtils;
 import com.yc.toolutils.net.AppNetworkUtils;
 
 import java.util.Arrays;
@@ -48,7 +47,7 @@ public class MonitorPhoneFragment extends Fragment {
     private TextView tvAppInfo;
     private TextView tvContentInfo;
     private TextView tvContentLang;
-    private TextView tvContentProcess;
+    private TextView tvContentStorage;
     private TextView tvContentMemory;
 
     @Override
@@ -76,7 +75,7 @@ public class MonitorPhoneFragment extends Fragment {
         tvAppInfo = view.findViewById(R.id.tv_app_info);
         tvContentInfo = view.findViewById(R.id.tv_content_info);
         tvContentLang = view.findViewById(R.id.tv_content_lang);
-        tvContentProcess = view.findViewById(R.id.tv_content_process);
+        tvContentStorage = view.findViewById(R.id.tv_content_storage);
         tvContentMemory = view.findViewById(R.id.tv_content_memory);
 
     }
@@ -92,6 +91,10 @@ public class MonitorPhoneFragment extends Fragment {
         setLocationInfo();
         //设置时间和语言
         setTimeAndLang();
+        //获取App存储信息
+        setStorageInfo();
+        //获取App和系统内存信息
+        setMemoryInfo();
     }
 
     private void initListData() {
@@ -114,10 +117,8 @@ public class MonitorPhoneFragment extends Fragment {
         }
         sb.append("\n系统的版本:  ").append(AppDeviceUtils.getSDKVersionName());
         sb.append("\n系统版本值:  ").append(AppDeviceUtils.getSDKVersionCode());
-        sb.append("\nSd卡剩余控件:  ").append(AppDeviceUtils.getSDCardSpace(application));
-        sb.append("\n系统剩余控件:  ").append(AppDeviceUtils.getRomSpace(application));
-        sb.append("\n手机总内存:  ").append(AppDeviceUtils.getTotalMemory(application));
-        sb.append("\n手机可用内存:  ").append(AppDeviceUtils.getAvailMemory(application));
+        sb.append("\nSd卡剩余控件:  ").append(AppSdFileUtils.getSDCardSpace(application));
+        sb.append("\n系统剩余控件:  ").append(AppMemoryUtils.getRomSpace(application));
         sb.append("\n手机分辨率:  ").append(AppWindowUtils.getRealScreenHeight(getActivity()))
                 .append("x").append(AppWindowUtils.getRealScreenWidth(getActivity()));
         sb.append("\n屏幕尺寸:  ").append(AppWindowUtils.getScreenInch(getActivity()));
@@ -224,5 +225,24 @@ public class MonitorPhoneFragment extends Fragment {
         }
         tvContentLang.setText(sb.toString());
     }
+
+    private void setStorageInfo() {
+        Application application = activity.getApplication();
+        StringBuilder sb = new StringBuilder();
+        sb.append("当前时区:  ").append(AppTimeUtils.getCurrentTimeZone());
+        sb.append("\n手机总内存:  ").append(AppMemoryUtils.getTotalMemory(application)).append("kb");
+        sb.append("\n手机可用内存:  ").append(AppMemoryUtils.getAvailMemory(application)).append("mb");
+        tvContentStorage.setText(sb.toString());
+    }
+
+    private void setMemoryInfo() {
+        Application application = activity.getApplication();
+        StringBuilder sb = new StringBuilder();
+        sb.append("当前时区:  ").append(AppTimeUtils.getCurrentTimeZone());
+        sb.append("\n手机总内存:  ").append(AppMemoryUtils.getTotalMemory(application)).append("kb");
+        sb.append("\n手机可用内存:  ").append(AppMemoryUtils.getAvailMemory(application)).append("mb");
+        tvContentMemory.setText(sb.toString());
+    }
+
 
 }

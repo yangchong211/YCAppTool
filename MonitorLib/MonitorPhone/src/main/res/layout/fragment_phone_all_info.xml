@@ -82,10 +82,10 @@
 
             <TextView
                 style="@style/DetailTitle"
-                android:text="进程信息"/>
+                android:text="存储信息"/>
 
             <TextView
-                android:id="@+id/tv_content_process"
+                android:id="@+id/tv_content_storage"
                 android:textColor="#8033b7"
                 android:background="#c39dbbf1"
                 style="@style/DetailContent"/>
