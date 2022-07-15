@@ -20,6 +20,8 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import androidx.annotation.RequiresApi;
+
 import com.yc.toolutils.AppLogUtils;
 
 import java.io.BufferedReader;
@@ -142,6 +144,17 @@ public final class AppDeviceUtils {
      */
     public static String getCpuType() {
         return Build.CPU_ABI;
+    }
+
+
+    /**
+     * 获取CPU的类型
+     *
+     * @return CPU的类型
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static String[] getCpuType2() {
+        return Build.SUPPORTED_ABIS;
     }
 
     /**

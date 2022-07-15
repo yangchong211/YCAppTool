@@ -13,6 +13,7 @@ import com.yc.localelib.utils.LocaleToolUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * <pre>
@@ -30,6 +31,7 @@ public class LocaleServiceImpl implements ILocaleService {
      */
     private static Application sApplication;
     private final List<OnLocaleChangedListener> listeners = new ArrayList<>();
+    private AtomicBoolean isInit = new AtomicBoolean(false);
 
     /**
      * 获取应用上下文
@@ -44,7 +46,10 @@ public class LocaleServiceImpl implements ILocaleService {
         if (context == null) {
             throw new NullPointerException("context is null!");
         }
-        init(context, false);
+        if (!isInit.get()){
+            init(context, false);
+            isInit.set(true);
+        }
     }
 
     private void init(Application application, boolean inject) {

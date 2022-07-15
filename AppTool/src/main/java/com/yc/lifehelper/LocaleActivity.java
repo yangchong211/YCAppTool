@@ -23,7 +23,6 @@ public class LocaleActivity extends AppCompatActivity {
     private TextView mTv1;
     private TextView mTv2;
     private TextView mTv3;
-    private final AppServiceProvider audioService = ServiceLoader.load(AppServiceProvider.class).get();
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -85,15 +84,12 @@ public class LocaleActivity extends AppCompatActivity {
 
                 if (checkedId == R.id.rb_main_language_auto) {
                     // 跟随系统
-                    audioService.toast();
                     restart = LocaleService.getInstance().clearAppLanguage(LocaleActivity.this);
                 } else if (checkedId == R.id.rb_main_language_cn) {
                     // 简体中文
-                    audioService.dialog();
                     restart = LocaleService.getInstance().setAppLanguage(LocaleActivity.this, Locale.CHINA);
                 } else if (checkedId == R.id.rb_main_language_tw) {
                     // 繁体中文
-                    audioService.snackBar();
                     restart = LocaleService.getInstance().setAppLanguage(LocaleActivity.this, Locale.TAIWAN);
                 } else if (checkedId == R.id.rb_main_language_en) {
                     // 英语
@@ -120,7 +116,6 @@ public class LocaleActivity extends AppCompatActivity {
         mTv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                audioService.toast();
                 LocaleToolUtils.setLocale(LocaleActivity.this,new Locale("ja"));
             }
         });

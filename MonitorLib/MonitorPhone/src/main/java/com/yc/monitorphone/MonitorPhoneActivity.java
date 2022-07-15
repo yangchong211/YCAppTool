@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.yc.localelib.service.LocaleService;
+import com.yc.toolutils.AppToolUtils;
+
 /**
  * <pre>
  *     @author yangchong
@@ -48,5 +51,6 @@ public class MonitorPhoneActivity extends AppCompatActivity {
                 fragmentTransaction.commitAllowingStateLoss();
             }
         }
+        LocaleService.getInstance().init(AppToolUtils.getApp());
     }
 }

@@ -77,7 +77,7 @@ public final class LocaleToolUtils {
     public static Context attachBaseContext(Context context, Locale newLocale){
         if (newLocale == null){
             //如果配置里locale为空，则获取app本身的locale
-            newLocale = LocaleToolUtils.getAppLocale(context.getApplicationContext());
+            newLocale = getAppLocale(context.getApplicationContext());
         }
         return setLocale(context, newLocale);
     }
