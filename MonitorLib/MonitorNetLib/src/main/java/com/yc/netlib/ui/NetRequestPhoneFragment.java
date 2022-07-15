@@ -141,9 +141,9 @@ public class NetRequestPhoneFragment extends Fragment {
         sb.append("\n系统剩余控件:").append(AppDeviceUtils.getRomSpace(application));
         sb.append("\n手机总内存:").append(AppDeviceUtils.getTotalMemory(application));
         sb.append("\n手机可用内存:").append(AppDeviceUtils.getAvailMemory(application));
-        sb.append("\n手机分辨率:").append(AppDeviceUtils.getWidthPixels(application))
-                .append("x").append(AppDeviceUtils.getRealHeightPixels(application));
-        sb.append("\n屏幕尺寸:").append(AppDeviceUtils.getScreenInch(activity));
+        sb.append("\n手机分辨率:").append(AppWindowUtils.getRealScreenHeight(getActivity()))
+                .append("x").append(AppWindowUtils.getRealScreenWidth(getActivity()));
+        sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch(activity));
         tvPhoneContent.setText(sb.toString());
         tvPhoneContent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,7 +194,7 @@ public class NetRequestPhoneFragment extends Fragment {
     private void setLocationInfo() {
         Application application = NetworkTool.getInstance().getApplication();
         StringBuilder sb = new StringBuilder();
-        sb.append("wifi信号强度:").append(AppDeviceUtils.getWifiState(application));
+        sb.append("wifi信号强度:").append(AppNetworkUtils.getWifiState());
         sb.append("\nAndroidID:").append(AppDeviceUtils.getAndroidID(application));
         boolean wifiProxy = AppNetworkUtils.isWifiProxy(application);
         if (wifiProxy){
@@ -203,8 +203,8 @@ public class NetRequestPhoneFragment extends Fragment {
             sb.append("\nwifi是否代理:").append("未链接代理");
         }
         sb.append("\nMac地址:").append(AppDeviceUtils.getMacAddress(application));
-        sb.append("\nWifi名称:").append(AppDeviceUtils.getWifiName(application));
-        int wifiIp = AppDeviceUtils.getWifiIp(application);
+        sb.append("\nWifi名称:").append(AppNetworkUtils.getWifiName(application));
+        int wifiIp = AppNetworkUtils.getWifiIp(application);
         String ip = AppDeviceUtils.intToIp(wifiIp);
         sb.append("\nWifi的Ip地址:").append(ip);
         DhcpInfo dhcpInfo = AppDeviceUtils.getDhcpInfo(application);
@@ -227,8 +227,8 @@ public class NetRequestPhoneFragment extends Fragment {
                     String curl = mNetworkFeedList.get(0).getCURL();
                     String host = Uri.parse(curl).getHost();
                     StringBuilder sb = new StringBuilder();
-                    sb.append("域名ip地址:").append(AppDeviceUtils.getHostIP(host));
-                    sb.append("\n域名host名称:").append(AppDeviceUtils.getHostName(host));
+                    sb.append("域名ip地址:").append(AppNetworkUtils.getHostIP(host));
+                    sb.append("\n域名host名称:").append(AppNetworkUtils.getHostName(host));
                     sb.append("\n待完善:").append("获取服务端ip，mac，是ipv4还是ipv6等信息");
                     String string = sb.toString();
                     Message message = new Message();

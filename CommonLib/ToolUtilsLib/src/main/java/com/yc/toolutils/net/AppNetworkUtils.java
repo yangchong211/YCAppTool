@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppToolUtils;
 
 import java.lang.reflect.Method;
@@ -372,4 +374,135 @@ public final class AppNetworkUtils {
         }
         return (!TextUtils.isEmpty(proxyAddress)) && (proxyPort != -1);
     }
+
+    /**
+     * 获取wifi的强弱
+     * @return
+     */
+    public static String getWifiState(){
+        if (isWifiConnected()) {
+            WifiManager mWifiManager = (WifiManager) AppToolUtils.getApp().getApplicationContext()
+                    .getSystemService(Context.WIFI_SERVICE);
+            WifiInfo mWifiInfo = null;
+            if (mWifiManager != null) {
+                mWifiInfo = mWifiManager.getConnectionInfo();
+                int wifi = mWifiInfo.getRssi();//获取wifi信号强度
+                if (wifi > -50 && wifi < 0) {//最强
+                    return "最强";
+                } else if (wifi > -70 && wifi < -50) {//较强
+                    return "较强";
+                } else if (wifi > -80 && wifi < -70) {//较弱
+                    return "较弱";
+                } else if (wifi > -100 && wifi < -80) {//微弱
+                    return "微弱";
+                } else {
+                    return "微弱";
+                }
+            }
+        }
+        return "无wifi连接";
+    }
+
+
+    /**
+     * 通过域名获取真实的ip地址 (此方法需要在线程中调用)
+     * @param domain                                host
+     * @return
+     */
+    public static String getHostIP(String domain) {
+        String ipAddress = "";
+        InetAddress iAddress = null;
+        try {
+            iAddress = InetAddress.getByName(domain);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        if (iAddress == null) {
+            AppLogUtils.i("xxx", "iAddress ==null");
+        } else {
+            ipAddress = iAddress.getHostAddress();
+        }
+        return ipAddress;
+    }
+
+
+
+    /**
+     * 通过域名获取真实的ip地址 (此方法需要在线程中调用)
+     * @param domain                                host
+     * @return
+     */
+    public static String getHostName(String domain) {
+        String ipAddress = "";
+        InetAddress iAddress = null;
+        try {
+            iAddress = InetAddress.getByName(domain);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        if (iAddress == null) {
+            AppLogUtils.i("xxx", "iAddress ==null");
+        } else {
+            ipAddress = iAddress.getHostName();
+        }
+        return ipAddress;
+    }
+
+
+    /**
+     * 获取wifi的名称
+     * @param context               上下文
+     * @return
+     */
+    public static String getWifiName(Context context){
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext()
+                .getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = null;
+        if (wifiManager != null) {
+            wifiInfo = wifiManager.getConnectionInfo();
+            AppLogUtils.i("getWifiName--------",wifiInfo.toString());
+            AppLogUtils.i("getWifiName--------",wifiInfo.getBSSID());
+            String ssid = wifiInfo.getSSID();
+            return ssid;
+        }
+        return "无网络";
+    }
+
+
+    /**
+     * 获取wifi的ip
+     * @param context               上下文
+     * @return
+     */
+    public static int getWifiIp(Context context){
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext()
+                .getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = null;
+        if (wifiManager != null) {
+            wifiInfo = wifiManager.getConnectionInfo();
+            AppLogUtils.i("getWifiIp--------",wifiInfo.toString());
+            AppLogUtils.i("getWifiIp--------",wifiInfo.getBSSID());
+            int ipAddress = wifiInfo.getIpAddress();
+            return ipAddress;
+        }
+        return -1;
+    }
+
+
+    /**
+     * 获取wifi的信息
+     * @param context                   上下文
+     * @return
+     */
+    public static WifiInfo getWifiInfo(Context context){
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext()
+                .getSystemService(Context.WIFI_SERVICE);
+        WifiInfo wifiInfo = null;
+        if (wifiManager != null) {
+            wifiInfo = wifiManager.getConnectionInfo();
+            return wifiInfo;
+        }
+        return null;
+    }
+
 }

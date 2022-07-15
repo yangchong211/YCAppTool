@@ -18,6 +18,8 @@ import android.view.WindowManager;
 import com.yc.toolutils.AppToolUtils;
 import com.yc.toolutils.AppActivityUtils;
 
+import java.lang.reflect.Method;
+
 
 /**
  * <pre>
@@ -115,6 +117,43 @@ public final class AppWindowUtils {
      */
     public static int getScreenDensityDpi() {
         return AppToolUtils.getApp().getResources().getDisplayMetrics().densityDpi;
+    }
+
+
+    /**
+     * 获取屏幕尺寸
+     * @param context
+     * @return
+     */
+    public static double getScreenInch(Activity context) {
+        double inch = 0;
+        try {
+            int realWidth = 0, realHeight = 0;
+            Display display = context.getWindowManager().getDefaultDisplay();
+            DisplayMetrics metrics = new DisplayMetrics();
+            display.getMetrics(metrics);
+            if (Build.VERSION.SDK_INT >= 17) {
+                Point size = new Point();
+                display.getRealSize(size);
+                realWidth = size.x;
+                realHeight = size.y;
+            } else if (Build.VERSION.SDK_INT < 17
+                    && Build.VERSION.SDK_INT >= 14) {
+                Method mGetRawH = Display.class.getMethod("getRawHeight");
+                Method mGetRawW = Display.class.getMethod("getRawWidth");
+                realWidth = (Integer) mGetRawW.invoke(display);
+                realHeight = (Integer) mGetRawH.invoke(display);
+            } else {
+                realWidth = metrics.widthPixels;
+                realHeight = metrics.heightPixels;
+            }
+            inch = AppNumberUtils.formatDouble(Math.sqrt((realWidth / metrics.xdpi) * (realWidth / metrics.xdpi)
+                    + (realHeight / metrics.ydpi) * (realHeight / metrics.ydpi)), 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return inch;
     }
 
     public static boolean copyToClipBoard(String content){

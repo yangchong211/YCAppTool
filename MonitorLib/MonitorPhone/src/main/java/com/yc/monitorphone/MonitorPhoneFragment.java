@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.yc.toolutils.AppDeviceUtils;
+import com.yc.toolutils.AppSignUtils;
 import com.yc.toolutils.AppWindowUtils;
 import com.yc.toolutils.BuildConfig;
 import com.yc.toolutils.net.AppNetworkUtils;
@@ -96,9 +97,10 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("\n系统剩余控件:").append(AppDeviceUtils.getRomSpace(application));
         sb.append("\n手机总内存:").append(AppDeviceUtils.getTotalMemory(application));
         sb.append("\n手机可用内存:").append(AppDeviceUtils.getAvailMemory(application));
-        sb.append("\n手机分辨率:").append(AppDeviceUtils.getWidthPixels(application))
-                .append("x").append(AppDeviceUtils.getRealHeightPixels(application));
-        sb.append("\n屏幕尺寸:").append(AppDeviceUtils.getScreenInch(activity));
+        sb.append("\n手机分辨率:").append(AppWindowUtils.getRealScreenHeight(getActivity()))
+                .append("x").append(AppWindowUtils.getRealScreenWidth(getActivity()));
+        sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch(activity));
+        sb.append("\nAndroidID:").append(AppDeviceUtils.getAndroidID(application));
         tvPhoneContent.setText(sb.toString());
         tvPhoneContent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +130,7 @@ public class MonitorPhoneFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         sb.append("软件App包名:").append(application.getPackageName());
         sb.append("\n是否是DEBUG版本:").append(BuildConfig.DEBUG);
+        sb.append("\nApp签名:").append(AppSignUtils.getPackageSign(application));
         if (versionName!=null && versionName.length()>0){
             sb.append("\n版本名称:").append(versionName);
             sb.append("\n版本号:").append(versionCode);
@@ -141,6 +144,13 @@ public class MonitorPhoneFragment extends Fragment {
                 sb.append("\nUUID:").append(applicationInfo.storageUuid);
             }
             sb.append("\nAPK完整路径:").append(applicationInfo.sourceDir);
+            sb.append("\n备份代理:").append(applicationInfo.backupAgentName);
+            sb.append("\nclass名称:").append(applicationInfo.className);
+            boolean profileableByShell;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                profileableByShell = applicationInfo.isProfileableByShell();
+                sb.append("\n是否在分析模式:").append(profileableByShell);
+            }
         }
         mTvAppInfo.setText(sb.toString());
     }
@@ -149,8 +159,7 @@ public class MonitorPhoneFragment extends Fragment {
     private void setLocationInfo() {
         Application application = activity.getApplication();
         StringBuilder sb = new StringBuilder();
-        sb.append("wifi信号强度:").append(AppDeviceUtils.getWifiState(application));
-        sb.append("\nAndroidID:").append(AppDeviceUtils.getAndroidID(application));
+        sb.append("wifi信号强度:").append(AppNetworkUtils.getWifiState());
         boolean wifiProxy = AppNetworkUtils.isWifiProxy(application);
         if (wifiProxy){
             sb.append("\nwifi是否代理:").append("已经链接代理");
@@ -158,8 +167,8 @@ public class MonitorPhoneFragment extends Fragment {
             sb.append("\nwifi是否代理:").append("未链接代理");
         }
         sb.append("\nMac地址:").append(AppDeviceUtils.getMacAddress(application));
-        sb.append("\nWifi名称:").append(AppDeviceUtils.getWifiName(application));
-        int wifiIp = AppDeviceUtils.getWifiIp(application);
+        sb.append("\nWifi名称:").append(AppNetworkUtils.getWifiName(application));
+        int wifiIp = AppNetworkUtils.getWifiIp(application);
         String ip = AppDeviceUtils.intToIp(wifiIp);
         sb.append("\nWifi的Ip地址:").append(ip);
         DhcpInfo dhcpInfo = AppDeviceUtils.getDhcpInfo(application);

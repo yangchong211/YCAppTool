@@ -2,6 +2,8 @@ package com.yc.toolutils;
 
 import android.text.TextUtils;
 
+import java.math.BigDecimal;
+
 /**
  * <pre>
  *     @author yangchong
@@ -111,5 +113,13 @@ public final class AppNumberUtils {
         return null;
     }
 
+    /**
+     * Double类型保留指定位数的小数，返回double类型（四舍五入）
+     * newScale 为指定的位数
+     */
+    public static double formatDouble(double d, int newScale) {
+        BigDecimal bd = new BigDecimal(d);
+        return bd.setScale(newScale, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
 
 }
