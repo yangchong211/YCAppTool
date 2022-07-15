@@ -13,10 +13,20 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppUtils {
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAppTool
+ *     email  : yangchong211@163.com
+ *     time  : 2016/09/23
+ *     desc  : 获取app相关信息
+ *     revise:
+ * </pre>
+ */
+public final class AppInfoUtils {
 
 
-    private AppUtils() {
+    private AppInfoUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

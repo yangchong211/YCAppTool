@@ -1,18 +1,14 @@
 package com.yc.toolutils;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.pm.SigningInfo;
 import android.os.Build;
-import android.text.TextUtils;
 
 import com.yc.toolutils.encrypt.AppMd5Utils;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -30,7 +26,7 @@ public final class AppSignUtils {
 
 
     public static String getAidlCheckAppInfoSign(){
-        String appPackageName = AppUtils.getAppPackageName();
+        String appPackageName = AppInfoUtils.getAppPackageName();
         @SuppressLint("SimpleDateFormat")
         // 设置日期格式
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");

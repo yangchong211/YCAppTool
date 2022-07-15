@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.yc.toolutils.AppDeviceUtils;
+import com.yc.toolutils.AppInfoUtils;
 import com.yc.toolutils.AppSignUtils;
 import com.yc.toolutils.AppTimeUtils;
 import com.yc.toolutils.AppWindowUtils;
@@ -122,28 +123,14 @@ public class MonitorPhoneFragment extends Fragment {
 
     private void setAppInfo() {
         Application application = activity.getApplication();
-        //版本信息
-        String versionName = "";
-        String versionCode = "";
-        try {
-            PackageManager pm = application.getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(application.getPackageName(),
-                    PackageManager.GET_CONFIGURATIONS);
-            if (pi != null) {
-                versionName = pi.versionName;
-                versionCode = String.valueOf(pi.versionCode);
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
         StringBuilder sb = new StringBuilder();
-        sb.append("软件App包名:").append(application.getPackageName());
-        sb.append("\n是否是DEBUG版本:").append(BuildConfig.DEBUG);
+        sb.append("软件App包名:").append(AppInfoUtils.getAppPackageName());
+        sb.append("\n是否是DEBUG版本:").append(AppInfoUtils.isAppDebug());
+        sb.append("\nApp名称:").append(AppInfoUtils.getAppName());
         sb.append("\nApp签名:").append(AppSignUtils.getPackageSign());
-        if (versionName!=null && versionName.length()>0){
-            sb.append("\n版本名称:").append(versionName);
-            sb.append("\n版本号:").append(versionCode);
-        }
+        sb.append("\n版本名称:").append(AppInfoUtils.getAppVersionName());
+        sb.append("\n版本号:").append(AppInfoUtils.getAppVersionCode());
+        sb.append("\n是否是系统App:").append(AppInfoUtils.isSystemApp());
         ApplicationInfo applicationInfo = application.getApplicationInfo();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             sb.append("\n最低系统版本号:").append(applicationInfo.minSdkVersion);
@@ -152,7 +139,7 @@ public class MonitorPhoneFragment extends Fragment {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 sb.append("\nUUID:").append(applicationInfo.storageUuid);
             }
-            sb.append("\nAPK完整路径:").append(applicationInfo.sourceDir);
+            sb.append("\nAPK完整路径:").append(AppInfoUtils.getAppPath());
             sb.append("\n备份代理:").append(applicationInfo.backupAgentName);
             sb.append("\nclass名称:").append(applicationInfo.className);
             boolean profileableByShell;

@@ -23,7 +23,7 @@ import com.yc.intent.log.IntentLogger;
 import com.yc.store.BaseDataCache;
 import com.yc.store.StoreToolHelper;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppUtils;
+import com.yc.toolutils.AppInfoUtils;
 
 public class CommonActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -221,7 +221,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         ActivityManager.getInstance().isActivityTop(this,"MainActivity");
         //返回AndroidManifest.xml中注册的所有Activity的class
         ActivityManager.getInstance().getActivitiesClass(
-                this, AppUtils.getAppPackageName(),null);
+                this, AppInfoUtils.getAppPackageName(),null);
     }
 
     private void sp1() {

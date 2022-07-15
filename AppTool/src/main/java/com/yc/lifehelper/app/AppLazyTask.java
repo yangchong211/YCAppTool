@@ -1,4 +1,4 @@
-package com.yc.lifehelper.application;
+package com.yc.lifehelper.app;
 
 import android.os.Looper;
 
