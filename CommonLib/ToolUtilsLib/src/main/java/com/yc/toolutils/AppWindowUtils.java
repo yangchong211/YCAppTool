@@ -121,11 +121,11 @@ public final class AppWindowUtils {
      * 获取屏幕尺寸
      * @return
      */
-    public static double getScreenInch() {
+    public static double getScreenInch(Activity activity) {
         double inch = 0;
         try {
             int realWidth = 0, realHeight = 0;
-            WindowManager windowManager = (WindowManager) AppToolUtils.getApp().getSystemService(Context.WINDOW_SERVICE);
+            WindowManager windowManager = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
             Display display = windowManager.getDefaultDisplay();
             DisplayMetrics metrics = new DisplayMetrics();
             display.getMetrics(metrics);

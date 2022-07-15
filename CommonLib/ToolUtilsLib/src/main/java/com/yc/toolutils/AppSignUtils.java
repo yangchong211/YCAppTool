@@ -41,39 +41,36 @@ public final class AppSignUtils {
 
     /**
      * 获取包签名MD5
-     * @param context           上下文
      * @return
      */
-    public static String getPackageSign(Context context) {
+    public static String getPackageSign() {
         String signStr = "-1";
-        if (context != null) {
-            //获取包管理器
-            PackageManager packageManager = context.getPackageManager();
-            PackageInfo packageInfo;
-            //获取当前要获取 SHA1 值的包名，也可以用其他的包名，但需要注意，
-            //在用其他包名的前提是，此方法传递的参数 Context 应该是对应包的上下文。
-            String packageName = context.getPackageName();
-            //签名信息
-            Signature[] signatures = null;
-            try {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                    packageInfo = packageManager.getPackageInfo(context.getPackageName(),
-                            PackageManager.GET_SIGNING_CERTIFICATES);
-                    SigningInfo signingInfo = packageInfo.signingInfo;
-                    signatures = signingInfo.getApkContentsSigners();
-                } else {
-                    //获得包的所有内容信息类
-                    packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
-                    signatures = packageInfo.signatures;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        //获取包管理器
+        PackageManager packageManager = AppToolUtils.getApp().getPackageManager();
+        PackageInfo packageInfo;
+        //获取当前要获取 SHA1 值的包名，也可以用其他的包名，但需要注意，
+        //在用其他包名的前提是，此方法传递的参数 Context 应该是对应包的上下文。
+        String packageName = AppToolUtils.getApp().getPackageName();
+        //签名信息
+        Signature[] signatures = null;
+        try {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                packageInfo = packageManager.getPackageInfo(packageName,
+                        PackageManager.GET_SIGNING_CERTIFICATES);
+                SigningInfo signingInfo = packageInfo.signingInfo;
+                signatures = signingInfo.getApkContentsSigners();
+            } else {
+                //获得包的所有内容信息类
+                packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
+                signatures = packageInfo.signatures;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
 
-            }
-            if (null != signatures && signatures.length > 0) {
-                Signature sign = signatures[0];
-                signStr = AppMd5Utils.encryptMD5ToString(sign.toByteArray()).toUpperCase();
-            }
+        }
+        if (null != signatures && signatures.length > 0) {
+            Signature sign = signatures[0];
+            signStr = AppMd5Utils.encryptMD5ToString(sign.toByteArray()).toUpperCase();
         }
         return signStr;
     }

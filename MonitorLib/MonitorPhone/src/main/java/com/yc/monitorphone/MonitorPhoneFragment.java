@@ -54,7 +54,7 @@ public class MonitorPhoneFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_phone_info, container, false);
+        return inflater.inflate(R.layout.fragment_phone_all_info, container, false);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("\n手机可用内存:").append(AppDeviceUtils.getAvailMemory(application));
         sb.append("\n手机分辨率:").append(AppWindowUtils.getRealScreenHeight(getActivity()))
                 .append("x").append(AppWindowUtils.getRealScreenWidth(getActivity()));
-        //sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch());
+        sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch(getActivity()));
         sb.append("\nAndroidID:").append(AppDeviceUtils.getAndroidID(application));
         tvPhoneContent.setText(sb.toString());
         tvPhoneContent.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +139,7 @@ public class MonitorPhoneFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         sb.append("软件App包名:").append(application.getPackageName());
         sb.append("\n是否是DEBUG版本:").append(BuildConfig.DEBUG);
-        sb.append("\nApp签名:").append(AppSignUtils.getPackageSign(application));
+        sb.append("\nApp签名:").append(AppSignUtils.getPackageSign());
         if (versionName!=null && versionName.length()>0){
             sb.append("\n版本名称:").append(versionName);
             sb.append("\n版本号:").append(versionCode);
@@ -207,7 +207,7 @@ public class MonitorPhoneFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         sb.append("当前时区:").append(AppTimeUtils.getCurrentTimeZone());
         sb.append("\nMac地址:").append(AppDeviceUtils.getMacAddress(application));
-//        tvContentLang.setText(sb.toString());
+        tvContentLang.setText(sb.toString());
     }
 
 }

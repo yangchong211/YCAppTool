@@ -142,7 +142,7 @@ public class NetRequestPhoneFragment extends Fragment {
         sb.append("\n手机可用内存:").append(AppDeviceUtils.getAvailMemory(application));
         sb.append("\n手机分辨率:").append(AppWindowUtils.getRealScreenHeight(getActivity()))
                 .append("x").append(AppWindowUtils.getRealScreenWidth(getActivity()));
-        sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch());
+        sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch(getActivity()));
         tvPhoneContent.setText(sb.toString());
         tvPhoneContent.setOnClickListener(new View.OnClickListener() {
             @Override
