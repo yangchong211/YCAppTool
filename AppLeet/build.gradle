@@ -11,6 +11,7 @@ android {
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         applicationId "com.yc.leetbusiness"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -32,4 +33,5 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':XlogServer')
+    implementation project(path: ':MonitorPhone')
 }

@@ -24,6 +24,7 @@ import com.yc.toolutils.AppSignUtils;
 import com.yc.toolutils.AppTimeUtils;
 import com.yc.toolutils.AppWindowUtils;
 import com.yc.toolutils.BuildConfig;
+import com.yc.toolutils.StatusBarUtils;
 import com.yc.toolutils.net.AppNetworkUtils;
 
 /**
@@ -110,6 +111,10 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("\n手机分辨率:").append(AppWindowUtils.getRealScreenHeight(getActivity()))
                 .append("x").append(AppWindowUtils.getRealScreenWidth(getActivity()));
         sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch(getActivity()));
+        sb.append("\n屏幕密度:").append(AppWindowUtils.getScreenDensity());
+        sb.append("\n屏幕密度DPI:").append(AppWindowUtils.getScreenDensityDpi());
+        sb.append("\n状态栏高度:").append(StatusBarUtils.getStatusBarHeight(getActivity()));
+        sb.append("\n导航栏高度:").append(StatusBarUtils.getNavigationBarHeight(getActivity()));
         sb.append("\nAndroidID:").append(AppDeviceUtils.getAndroidID(application));
         tvPhoneContent.setText(sb.toString());
         tvPhoneContent.setOnClickListener(new View.OnClickListener() {

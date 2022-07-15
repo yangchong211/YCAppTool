@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_yc_name">LeetCode</string>
+    <string name="app_name">LeetCode</string>
 </resources>
