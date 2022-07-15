@@ -75,7 +75,7 @@ public final class AppWindowUtils {
      * 获取屏幕高度，包括底部导航栏
      */
     public static int getRealScreenHeight(Activity activity) {
-        WindowManager windowManager = activity.getWindowManager();
+        WindowManager windowManager = (WindowManager) AppToolUtils.getApp().getSystemService(Context.WINDOW_SERVICE);
         Display display = windowManager.getDefaultDisplay();
         DisplayMetrics displayMetrics = new DisplayMetrics();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -90,7 +90,7 @@ public final class AppWindowUtils {
      * 获取屏幕宽度，不包括右侧导航栏
      */
     public static int getRealScreenWidth(Activity activity) {
-        WindowManager windowManager = activity.getWindowManager();
+        WindowManager windowManager = (WindowManager) AppToolUtils.getApp().getSystemService(Context.WINDOW_SERVICE);
         Display display = windowManager.getDefaultDisplay();
         DisplayMetrics displayMetrics = new DisplayMetrics();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -125,11 +125,12 @@ public final class AppWindowUtils {
      * @param context
      * @return
      */
-    public static double getScreenInch(Activity context) {
+    public static double getScreenInch(Context context) {
         double inch = 0;
         try {
             int realWidth = 0, realHeight = 0;
-            Display display = context.getWindowManager().getDefaultDisplay();
+            WindowManager windowManager = (WindowManager) AppToolUtils.getApp().getSystemService(Context.WINDOW_SERVICE);
+            Display display = windowManager.getDefaultDisplay();
             DisplayMetrics metrics = new DisplayMetrics();
             display.getMetrics(metrics);
             if (Build.VERSION.SDK_INT >= 17) {
@@ -137,8 +138,7 @@ public final class AppWindowUtils {
                 display.getRealSize(size);
                 realWidth = size.x;
                 realHeight = size.y;
-            } else if (Build.VERSION.SDK_INT < 17
-                    && Build.VERSION.SDK_INT >= 14) {
+            } else if (Build.VERSION.SDK_INT < 17 && Build.VERSION.SDK_INT >= 14) {
                 Method mGetRawH = Display.class.getMethod("getRawHeight");
                 Method mGetRawW = Display.class.getMethod("getRawWidth");
                 realWidth = (Integer) mGetRawW.invoke(display);

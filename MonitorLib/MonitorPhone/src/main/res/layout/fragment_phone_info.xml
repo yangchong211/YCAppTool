@@ -61,10 +61,21 @@
 
             <TextView
                 style="@style/DetailTitle"
-                android:text="Wi-Fi信息"/>
+                android:text="网络信息"/>
 
             <TextView
                 android:id="@+id/tv_content_info"
+                android:textColor="#8033b7"
+                android:background="#50a0e1a1"
+                style="@style/DetailContent"/>
+
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="时间和语言"/>
+
+            <TextView
+                android:id="@+id/tv_content_lang"
                 android:textColor="#8033b7"
                 android:background="#50a0e1a1"
                 style="@style/DetailContent"/>

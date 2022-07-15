@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppSignUtils;
+import com.yc.toolutils.AppTimeUtils;
 import com.yc.toolutils.AppWindowUtils;
 import com.yc.toolutils.BuildConfig;
 import com.yc.toolutils.net.AppNetworkUtils;
@@ -39,7 +40,7 @@ public class MonitorPhoneFragment extends Fragment {
     private TextView tvPhoneContent;
     private TextView mTvAppInfo;
     private TextView tvContentInfo;
-
+    private TextView tvContentLang;
 
     @Override
     public void onAttach(Context context) {
@@ -65,6 +66,7 @@ public class MonitorPhoneFragment extends Fragment {
         tvPhoneContent = view.findViewById(R.id.tv_phone_content);
         mTvAppInfo = view.findViewById(R.id.tv_app_info);
         tvContentInfo = view.findViewById(R.id.tv_content_info);
+        tvContentLang = view.findViewById(R.id.tv_content_lang);
     }
 
     private void initData() {
@@ -76,6 +78,8 @@ public class MonitorPhoneFragment extends Fragment {
         //本机信息
         //比如mac地址，子网掩码，ip，wifi名称
         setLocationInfo();
+        //设置时间和语言
+        setTimeAndLang();
     }
 
     private void initListData() {
@@ -167,6 +171,13 @@ public class MonitorPhoneFragment extends Fragment {
             sb.append("\nwifi是否代理:").append("未链接代理");
         }
         sb.append("\nMac地址:").append(AppDeviceUtils.getMacAddress(application));
+        sb.append("\n运营商名称:").append(AppNetworkUtils.getNetworkOperatorName());
+        sb.append("\n获取IPv4地址:").append(AppNetworkUtils.getIPAddress(true));
+        sb.append("\n获取IPv6地址:").append(AppNetworkUtils.getIPAddress(false));
+        sb.append("\n移动网络是否打开:").append(AppNetworkUtils.getMobileDataEnabled());
+        sb.append("\n判断网络是否是4G:").append(AppNetworkUtils.is4G());
+        sb.append("\nWifi是否打开:").append(AppNetworkUtils.getWifiEnabled());
+        sb.append("\nWifi是否连接状态:").append(AppNetworkUtils.isWifiConnected());
         sb.append("\nWifi名称:").append(AppNetworkUtils.getWifiName(application));
         int wifiIp = AppNetworkUtils.getWifiIp(application);
         String ip = AppDeviceUtils.intToIp(wifiIp);
@@ -181,6 +192,17 @@ public class MonitorPhoneFragment extends Fragment {
             sb.append("\nDns2：").append(AppDeviceUtils.intToIp(dhcpInfo.dns2));
         }
         tvContentInfo.setText(sb.toString());
+    }
+
+    /**
+     * 设置时间和语言
+     */
+    private void setTimeAndLang() {
+        Application application = activity.getApplication();
+        StringBuilder sb = new StringBuilder();
+        sb.append("当前时区:").append(AppTimeUtils.getCurrentTimeZone());
+        sb.append("\nMac地址:").append(AppDeviceUtils.getMacAddress(application));
+        tvContentLang.setText(sb.toString());
     }
 
 }
