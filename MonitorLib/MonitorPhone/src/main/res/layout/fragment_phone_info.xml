@@ -77,6 +77,26 @@
             <TextView
                 android:id="@+id/tv_content_lang"
                 android:textColor="#8033b7"
+                android:background="#50cfa0f1"
+                style="@style/DetailContent"/>
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="进程信息"/>
+
+            <TextView
+                android:id="@+id/tv_content_process"
+                android:textColor="#8033b7"
+                android:background="#c39dbbf1"
+                style="@style/DetailContent"/>
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="内存信息"/>
+
+            <TextView
+                android:id="@+id/tv_content_memory"
+                android:textColor="#8033b7"
                 android:background="#50a0e1a1"
                 style="@style/DetailContent"/>
 

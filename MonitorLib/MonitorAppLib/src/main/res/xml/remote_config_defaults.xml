@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>email</key>
+        <value>default email</value>
+    </entry>
+    <entry>
+        <key>sort</key>
+        <value>2</value>
+    </entry>
+</defaultsMap>

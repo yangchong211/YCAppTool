@@ -9,7 +9,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.DhcpInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -143,7 +142,7 @@ public class NetRequestPhoneFragment extends Fragment {
         sb.append("\n手机可用内存:").append(AppDeviceUtils.getAvailMemory(application));
         sb.append("\n手机分辨率:").append(AppWindowUtils.getRealScreenHeight(getActivity()))
                 .append("x").append(AppWindowUtils.getRealScreenWidth(getActivity()));
-        sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch(activity));
+        sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch());
         tvPhoneContent.setText(sb.toString());
         tvPhoneContent.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yc.monitorapplib">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
+    <application
+        android:name="com.yc.monitorapplib.app.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.yc.monitorapplib.ui.MainActivity"
+            android:launchMode="singleTask" />
+
+        <service android:name="com.yc.monitorapplib.service.AppService" />
+        <service android:name="com.yc.monitorapplib.service.AlarmService" />
+        <receiver
+            android:name="com.yc.monitorapplib.receiver.AlarmReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="ALARM_RECEIVER" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.yc.monitorapplib.ui.SettingsActivity"
+            android:parentActivityName="com.yc.monitorapplib.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.yc.monitorapplib.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.yc.monitorapplib.ui.DetailActivity"
+            android:parentActivityName="com.yc.monitorapplib.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.yc.monitorapplib.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.yc.monitorapplib.ui.IgnoreActivity"
+            android:parentActivityName="com.yc.monitorapplib.ui.SettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.yc.monitorapplib.ui.SettingsActivity" />
+        </activity>
+        <activity
+            android:name="com.yc.monitorapplib.ui.AboutActivity"
+            android:parentActivityName="com.yc.monitorapplib.ui.SettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.yc.monitorapplib.ui.SettingsActivity" />
+        </activity>
+        <activity
+            android:name="com.yc.monitorapplib.ui.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+
+    </application>
+
+</manifest>

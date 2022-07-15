@@ -38,9 +38,11 @@ public class MonitorPhoneFragment extends Fragment {
 
     private Activity activity;
     private TextView tvPhoneContent;
-    private TextView mTvAppInfo;
+    private TextView tvAppInfo;
     private TextView tvContentInfo;
     private TextView tvContentLang;
+    private TextView tvContentProcess;
+    private TextView tvContentMemory;
 
     @Override
     public void onAttach(Context context) {
@@ -64,9 +66,12 @@ public class MonitorPhoneFragment extends Fragment {
 
     private void initFindViewById(View view) {
         tvPhoneContent = view.findViewById(R.id.tv_phone_content);
-        mTvAppInfo = view.findViewById(R.id.tv_app_info);
+        tvAppInfo = view.findViewById(R.id.tv_app_info);
         tvContentInfo = view.findViewById(R.id.tv_content_info);
         tvContentLang = view.findViewById(R.id.tv_content_lang);
+        tvContentProcess = view.findViewById(R.id.tv_content_process);
+        tvContentMemory = view.findViewById(R.id.tv_content_memory);
+
     }
 
     private void initData() {
@@ -103,7 +108,7 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("\n手机可用内存:").append(AppDeviceUtils.getAvailMemory(application));
         sb.append("\n手机分辨率:").append(AppWindowUtils.getRealScreenHeight(getActivity()))
                 .append("x").append(AppWindowUtils.getRealScreenWidth(getActivity()));
-        sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch(activity));
+        //sb.append("\n屏幕尺寸:").append(AppWindowUtils.getScreenInch());
         sb.append("\nAndroidID:").append(AppDeviceUtils.getAndroidID(application));
         tvPhoneContent.setText(sb.toString());
         tvPhoneContent.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +161,7 @@ public class MonitorPhoneFragment extends Fragment {
                 sb.append("\n是否在分析模式:").append(profileableByShell);
             }
         }
-        mTvAppInfo.setText(sb.toString());
+        tvAppInfo.setText(sb.toString());
     }
 
 
@@ -202,7 +207,7 @@ public class MonitorPhoneFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         sb.append("当前时区:").append(AppTimeUtils.getCurrentTimeZone());
         sb.append("\nMac地址:").append(AppDeviceUtils.getMacAddress(application));
-        tvContentLang.setText(sb.toString());
+//        tvContentLang.setText(sb.toString());
     }
 
 }

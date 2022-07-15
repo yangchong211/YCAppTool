@@ -15,9 +15,6 @@ import android.view.Surface;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.yc.toolutils.AppToolUtils;
-import com.yc.toolutils.AppActivityUtils;
-
 import java.lang.reflect.Method;
 
 
@@ -122,10 +119,9 @@ public final class AppWindowUtils {
 
     /**
      * 获取屏幕尺寸
-     * @param context
      * @return
      */
-    public static double getScreenInch(Context context) {
+    public static double getScreenInch() {
         double inch = 0;
         try {
             int realWidth = 0, realHeight = 0;
@@ -152,7 +148,6 @@ public final class AppWindowUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return inch;
     }
 

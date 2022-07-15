@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sort">
+        <item>Usage Time</item>
+        <item>Last Usage</item>
+        <item>Usage Frequency</item>
+        <item>Mobile traffic usage</item>
+    </string-array>
+    <string-array name="duration">
+        <item>Today</item>
+        <item>Yesterday</item>
+    </string-array>
+    <integer-array name="duration_int">
+        <item>0</item>
+        <item>1</item>
+    </integer-array>
+</resources>
