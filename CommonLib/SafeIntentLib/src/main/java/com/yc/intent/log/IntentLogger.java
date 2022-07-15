@@ -116,7 +116,7 @@ public final class IntentLogger {
     }
 
     public static void printExtras(String tag, Bundle extras) {
-        if (extras == null) {
+        if (hasExtras(extras)) {
             return;
         }
         for (String key : extras.keySet()) {

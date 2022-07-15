@@ -1,4 +1,4 @@
-package com.yc.toolutils;
+package com.yc.toolutils.memory;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -137,40 +137,6 @@ public final class AppMemoryUtils {
     }
 
     /**
-     * Dalvik堆内存，只要App用到的内存都算（包括共享内存）
-     */
-    public static class DalvikHeapMem {
-        public long freeMem;
-        public long maxMem;
-        public long allocated;
-    }
-
-    /**
-     * 应用实际占用内存（共享按比例分配）
-     */
-    public static class PssInfo {
-        public int totalPss;
-        public int dalvikPss;
-        public int nativePss;
-        public int otherPss;
-    }
-
-    /**
-     * 手机RAM内存信息
-     * 物理内存信息
-     */
-    public static class RamMemoryInfo {
-        //可用RAM
-        public long availMem;
-        //手机总RAM
-        public long totalMem;
-        //内存占用满的阀值，超过即认为低内存运行状态，可能会Kill process
-        public long lowMemThreshold;
-        //是否低内存状态运行
-        public boolean isLowMemory;
-    }
-
-    /**
      * 内存相关的所有数据
      */
     public interface OnGetMemoryInfoCallback {
@@ -239,7 +205,8 @@ public final class AppMemoryUtils {
             String memoryLine = br.readLine();
             String subMemoryLine = memoryLine.substring(memoryLine.indexOf("MemTotal:"));
             br.close();
-            long totalMemorySize = Integer.parseInt(subMemoryLine.replaceAll("\\D+", ""));
+            long totalMemorySize = Integer.parseInt(
+                    subMemoryLine.replaceAll("\\D+", ""));
             return totalMemorySize;
         } catch (IOException e) {
             e.printStackTrace();
@@ -339,7 +306,8 @@ public final class AppMemoryUtils {
      * @param context
      * @return 手机当前可用内存(兆)
      */
-    public static long getAvailMemory(Context context) {// 获取android当前可用内存大小
+    public static long getAvailMemory(Context context) {
+        // 获取android当前可用内存大小
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         if (am != null) {

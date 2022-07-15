@@ -191,7 +191,8 @@ include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
         ':MonitorXposed', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher', ':MonitorMemory',
         ':LeakCanarySdk', ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',
-        ':MonitorPrivacy', ':MonitorTimeLib', ':MonitorSpeed', ':MonitorInterceptor'
+        ':MonitorPrivacy', ':MonitorTimeLib', ':MonitorSpeed', ':MonitorInterceptor',
+        ':MonitorPhone'
 project(':MonitorAliveLib').projectDir = new File('MonitorLib/MonitorAliveLib')
 project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
 project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
@@ -213,7 +214,7 @@ project(':MonitorTimeLib').projectDir = new File('MonitorLib/MonitorTimeLib')
 project(':MonitorSpeed').projectDir = new File('MonitorLib/MonitorSpeed')
 project(':MonitorInterceptor').projectDir = new File('MonitorLib/MonitorInterceptor')
 project(':MonitorMemory').projectDir = new File('MonitorLib/MonitorMemory')
-
+project(':MonitorPhone').projectDir = new File('MonitorLib/MonitorPhone')
 
 
 /* +++++++++ 音视频 +++++++++ */
@@ -230,4 +231,5 @@ project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 
 
+include ':MonitorAppLib'
 

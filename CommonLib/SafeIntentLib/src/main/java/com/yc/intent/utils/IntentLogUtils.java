@@ -49,14 +49,11 @@ public final class IntentLogUtils {
                 } else {
                     val = dumpBundle((Bundle) obj);
                 }
-            }//
-            else if (obj instanceof Bundle[]) {
+            } else if (obj instanceof Bundle[]) {
                 val = dumpBundleArray((Bundle[]) obj);
-            }//
-            else if (obj instanceof Object[]) {
+            } else if (obj instanceof Object[]) {
                 val = Arrays.toString((Object[]) obj);
-            }//
-            else {
+            } else {
                 val = String.valueOf(obj);
             }
             content.append(val);

@@ -15,6 +15,7 @@ import com.yc.lifehelper.LocaleActivity;
 import com.yc.lifehelper.R;
 import com.yc.logging.LoggerService;
 import com.yc.logging.logger.Logger;
+import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.other.ui.activity.NtpTimeActivity;
 import com.yc.toolutils.click.FastClickUtils;
 import com.yc.widgetbusiness.DrawableTextActivity;
@@ -97,7 +98,7 @@ public class ToolComponent implements InterItemView {
                     NtpTimeActivity.startActivity(context);
                     break;
                 case R.id.tv_tool11:
-                    DrawableTextActivity.startActivity(context);
+                    MonitorPhoneActivity.startActivity(context);
                     break;
                 default:
                     break;
