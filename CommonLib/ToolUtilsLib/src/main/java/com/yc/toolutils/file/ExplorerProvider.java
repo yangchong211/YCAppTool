@@ -4,7 +4,7 @@ import androidx.core.content.FileProvider;
 
 /**
  * <pre>
- *     author : yangchong
+ *     @author : yangchong
  *     email  : yangchong211@163.com
  *     time   : 2019/8/11
  *     desc   : FileProvider

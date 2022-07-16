@@ -53,7 +53,9 @@ public final class AppMd5Utils {
      * @return 16 进制加盐密文
      */
     public static String encryptMD5ToString(final byte[] data, final byte[] salt) {
-        if (data == null || salt == null) return null;
+        if (data == null || salt == null) {
+            return null;
+        }
         byte[] dataSalt = new byte[data.length + salt.length];
         System.arraycopy(data, 0, dataSalt, 0, data.length);
         System.arraycopy(salt, 0, dataSalt, data.length, salt.length);
@@ -109,7 +111,9 @@ public final class AppMd5Utils {
      * @return 文件的 MD5 校验码
      */
     public static byte[] encryptMD5File(final File file) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         FileInputStream fis = null;
         DigestInputStream digestInputStream;
         try {
@@ -118,7 +122,9 @@ public final class AppMd5Utils {
             digestInputStream = new DigestInputStream(fis, md);
             byte[] buffer = new byte[256 * 1024];
             while (true) {
-                if (!(digestInputStream.read(buffer) > 0)) break;
+                if (!(digestInputStream.read(buffer) > 0)) {
+                    break;
+                }
             }
             md = digestInputStream.getMessageDigest();
             return md.digest();
@@ -139,7 +145,9 @@ public final class AppMd5Utils {
      * @return 密文字节数组
      */
     private static byte[] hashTemplate(final byte[] data, final String algorithm) {
-        if (data == null || data.length <= 0) return null;
+        if (data == null || data.length <= 0) {
+            return null;
+        }
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
             md.update(data);
@@ -152,9 +160,13 @@ public final class AppMd5Utils {
 
 
     private static String bytes2HexString(final byte[] bytes) {
-        if (bytes == null) return null;
+        if (bytes == null) {
+            return null;
+        }
         int len = bytes.length;
-        if (len <= 0) return null;
+        if (len <= 0) {
+            return null;
+        }
         char[] ret = new char[len << 1];
         for (int i = 0, j = 0; i < len; i++) {
             ret[j++] = hexDigits[bytes[i] >>> 4 & 0x0f];
@@ -165,7 +177,9 @@ public final class AppMd5Utils {
 
 
     private static boolean isSpace(final String s) {
-        if (s == null) return true;
+        if (s == null) {
+            return true;
+        }
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;
@@ -181,7 +195,9 @@ public final class AppMd5Utils {
      * @param closeables closeables
      */
     private static void closeIO(final Closeable... closeables) {
-        if (closeables == null) return;
+        if (closeables == null) {
+            return;
+        }
         for (Closeable closeable : closeables) {
             if (closeable != null) {
                 try {
