@@ -11,10 +11,15 @@ import android.os.StatFs;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 
+import com.yc.eventuploadlib.ExceptionReporter;
+
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -331,4 +336,46 @@ public final class AppMemoryUtils {
         return mi.availMem / 1024 / 1024;
     }
 
+    /**
+     * 通过ObjectOutputStream写入对象的方式获取对象类型签名和对象数据占用存储空间大小
+     * 该大小与对象内存布局中占用的大小不同，可以用于预估对象内存布局占用的存储空间
+     * @param object
+     * @return
+     */
+    public static int getObjectSize(Serializable object){
+        int objSize = 16;
+        if(object == null){
+            return objSize;
+        }
+        ByteArrayOutputStream baos = null;
+        ObjectOutputStream oos = null;
+        try {
+            baos = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream(baos);
+            oos.writeObject(object);
+            oos.flush();
+            byte[] byteArray = baos.toByteArray();
+            if(byteArray != null){
+                objSize = byteArray.length;
+            }
+        }catch (IOException ioe){
+            ExceptionReporter.report(ioe);
+        }finally {
+            try {
+                if (baos != null) {
+                    baos.close();
+                }
+            }catch (Throwable t){
+                ExceptionReporter.report(t);
+            }
+            try{
+                if (oos != null) {
+                    oos.close();
+                }
+            }catch (Throwable t){
+                ExceptionReporter.report(t);
+            }
+        }
+        return objSize;
+    }
 }
