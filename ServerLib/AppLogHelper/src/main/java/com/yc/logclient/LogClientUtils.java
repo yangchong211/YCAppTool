@@ -12,7 +12,7 @@ public final class LogClientUtils {
 
     private static final String TAG = LogClientUtils.class.getSimpleName();
     /**
-     * 包名简称:去最后一个.分割的单词，如com.sogou.example,包名简称为example
+     * 包名简称:去最后一个.分割的单词，如com.didi.food,包名简称为food
      */
     private static String mPackageShortName;
     /**

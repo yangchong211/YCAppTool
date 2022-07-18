@@ -67,8 +67,8 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',
         'ComponentLib',':ApplicationLib', ':ParallelTaskLib',':AppBaseStore',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
-        ':ArchitectureLib',':ActivityManager',':AppFileLib',':EventUploadLib',
-        ':AppCommonInter'
+        ':ArchitectureLib',':ActivityManager', ':ToolFileLib',':EventUploadLib',
+        ':AppCommonInter',':ToolMemoryLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -86,9 +86,10 @@ project(':SafeIntentLib').projectDir = new File('CommonLib/SafeIntentLib')
 project(':ArchitectureLib').projectDir = new File('CommonLib/ArchitectureLib')
 project(':ActivityManager').projectDir = new File('CommonLib/ActivityManager')
 project(':FragmentManager').projectDir = new File('CommonLib/FragmentManager')
-project(':AppFileLib').projectDir = new File('CommonLib/AppFileLib')
+project(':ToolFileLib').projectDir = new File('CommonLib/ToolFileLib')
 project(':EventUploadLib').projectDir = new File('CommonLib/EventUploadLib')
 project(':AppCommonInter').projectDir = new File('CommonLib/AppCommonInter')
+project(':ToolMemoryLib').projectDir = new File('CommonLib/ToolMemoryLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -232,4 +233,5 @@ project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 
 
 include ':MonitorAppLib'
+
 

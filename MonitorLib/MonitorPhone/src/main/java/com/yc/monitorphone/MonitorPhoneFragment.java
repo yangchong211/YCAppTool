@@ -12,9 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.yc.localelib.service.LocaleService;
 import com.yc.localelib.utils.LocaleToolUtils;
@@ -68,6 +71,23 @@ public class MonitorPhoneFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initFindViewById(view);
         initData();
+        initBack();
+    }
+
+    /**
+     * 处理fragment的返回键逻辑
+     */
+    private void initBack() {
+        FragmentActivity activity = getActivity();
+        if (activity != null){
+            OnBackPressedDispatcher onBackPressedDispatcher = activity.getOnBackPressedDispatcher();
+            onBackPressedDispatcher.addCallback(this,new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+
+                }
+            });
+        }
     }
 
     private void initFindViewById(View view) {
