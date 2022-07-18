@@ -5,6 +5,9 @@
 
 
     <application>
+        <activity android:name="com.yc.lifehelper.ApmTestActivity"/>
+        <activity android:name="com.yc.lifehelper.BlockListActivity"/>
     </application>
+
 
 </manifest>

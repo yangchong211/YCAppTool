@@ -60,7 +60,7 @@
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_second"
-            android:text="卡顿" />
+            android:text="Debug" />
         <TextView
             android:id="@+id/tv_home_seven"
             style="@style/WeightAttr"

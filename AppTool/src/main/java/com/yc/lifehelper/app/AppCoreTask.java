@@ -3,6 +3,9 @@ package com.yc.lifehelper.app;
 import android.os.Looper;
 import android.util.Log;
 
+import com.yc.anrtoollib.tool.ANRWatchDog;
+import com.yc.anrtoollib.watch.ANRError;
+import com.yc.anrtoollib.watch.ANRListener;
 import com.yc.appcommoninter.IEventTrack;
 import com.yc.appcommoninter.ILogger;
 import com.yc.appcommoninter.IMonitorToggle;
@@ -23,6 +26,8 @@ import com.yc.longalive.LongAliveMonitorConfig;
 import com.yc.store.config.CacheConfig;
 import com.yc.store.config.CacheInitHelper;
 import com.yc.toolutils.AppLogUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +51,8 @@ public class AppCoreTask extends AbsParallelTask {
         initAppProcess();
         //初始化通用缓存方案
         initAppCache();
+        //初始化ANR监听方案
+        initAnrListener();
         long end = System.currentTimeMillis();
         boolean isMainThread = (Looper.myLooper() == Looper.getMainLooper());
         AppLogUtils.i("app init 1 task core total time : " + (end-start)
@@ -177,6 +184,16 @@ public class AppCoreTask extends AbsParallelTask {
         CacheInitHelper.INSTANCE.init(MainApplication.getInstance(),cacheConfig);
         //最简单的初始化
         //CacheInitHelper.INSTANCE.init(CacheConfig.Companion.newBuilder().build());
+    }
+
+    private void initAnrListener() {
+        new ANRWatchDog().setANRListener(new ANRListener() {
+            @Override
+            public void onAppNotResponding(@NotNull ANRError error) {
+                Throwable throwable = error.fillInStackTrace();
+                AppLogUtils.d("ANRWatchDog", throwable);
+            }
+        }).start();
     }
 
 }
