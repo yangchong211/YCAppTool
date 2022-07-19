@@ -77,6 +77,7 @@ public class HeaderComponent implements InterItemView {
                         }
                     } catch (Exception e){
                         e.printStackTrace();
+
                     }
                     break;
                 //线程库

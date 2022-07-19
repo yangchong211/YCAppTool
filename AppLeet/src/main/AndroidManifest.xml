@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.yc.leetbusiness">
+    package="com.yc.appleet">
 
     <application
-        android:name="com.yc.leetbusiness.LeetApplication"
+        android:name="com.yc.appleet.LeetApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,14 +12,14 @@
         tools:replace="android:label"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.yc.leetbusiness.LeetCodeActivity">
+        <activity android:name="com.yc.appleet.LeetCodeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.yc.leetbusiness.code.CodeTestActivity"/>
-        <activity android:name="com.yc.leetbusiness.array.ArrayTestActivity"/>
+        <activity android:name="com.yc.appleet.code.CodeTestActivity"/>
+        <activity android:name="com.yc.appleet.array.ArrayTestActivity"/>
     </application>
 
 </manifest>

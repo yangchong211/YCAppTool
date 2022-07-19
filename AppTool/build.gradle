@@ -1,7 +1,7 @@
 //设置app空壳始终是application模式
 apply plugin: 'com.android.application'
 //apply plugin: 'com.yc.spi.loader'
-apply plugin: 'com.yc.time.loader'
+//apply plugin: 'com.yc.time.loader'
 //关于debug工具依赖gradle，debug下依赖的
 apply from: rootProject.file('debug.gradle')
 
