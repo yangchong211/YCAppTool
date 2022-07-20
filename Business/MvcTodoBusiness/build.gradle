@@ -36,6 +36,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["okhttp"])
     implementation(rootProject.ext.dependencies["gson"])
     implementation project(path: ':LibraryLayer')
-    implementation project(path: ':XlogServer')
     implementation project(path: ':MonitorNetLib')
 }

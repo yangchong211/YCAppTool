@@ -72,7 +72,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/colorAccent"
                 android:padding="10dp"
-                android:text="6."/>
+                android:text="6.空间复杂度"/>
 
 
             <TextView

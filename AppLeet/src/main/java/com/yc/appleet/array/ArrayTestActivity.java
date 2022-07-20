@@ -6,8 +6,7 @@ import android.widget.TextView;
 
 import com.yc.appleet.R;
 import com.yc.library.base.mvp.BaseActivity;
-import com.yc.logging.LoggerService;
-import com.yc.logging.logger.Logger;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.Arrays;
 
@@ -25,7 +24,6 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
     private TextView tv10;
     private TextView tv11;
     private TextView tv12;
-    private final Logger logger = LoggerService.getInstance().getLogger("ArrayTestActivity");
 
     @Override
     public int getContentView() {
@@ -92,7 +90,7 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
         array.display();
         //根据下标为0的元素
         int i = array.get(0);
-        logger.debug("索引0的值" + i);
+        AppLogUtils.d("索引0的值" + i);
         //删除4的元素
         array.delete(4);
         //将元素3修改为33
@@ -123,7 +121,7 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
                 num[count] = currentV;
             }
         }
-        logger.debug("数据数组数量" + count + "  " + Arrays.toString(num));
+        AppLogUtils.d("数据数组数量" + count + "  " + Arrays.toString(num));
         return count + 1;
     }
 
@@ -134,13 +132,13 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
     private void beerAndDrink() {
         int x = (int) (82.3 / 2.3);
         int y = (int) (82.3 / 1.9);
-        logger.debug("打印值 "+x + " " + y);
+        AppLogUtils.d("打印值 "+x + " " + y);
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 // 钱刚好花光了，并且啤酒比饮料少
                 if ((i * 2.3 + j * 1.9) == 82.3 && i<j) {
-                    logger.debug("打印值"+"----啤酒买了" + i);
-                    logger.debug("打印值"+"----饮料买了" + j);
+                    AppLogUtils.d("打印值"+"----啤酒买了" + i);
+                    AppLogUtils.d("打印值"+"----饮料买了" + j);
                 }
             }
         }
@@ -154,7 +152,7 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
         Thread t1 = new Thread(myThread , "张三") ;
         t1.start();
         String name = t1.getName();
-        logger.debug("打印值"+"----"+name);
+        AppLogUtils.d("打印值"+"----"+name);
 
 
 
@@ -191,8 +189,9 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
     public class Solution {
         public void reOrderArray(int [] array) {
             //如果数组长度等于0或者等于1，什么都不做直接返回
-            if(array.length==0||array.length==1)
+            if(array.length==0||array.length==1) {
                 return;
+            }
             //oddCount：保存奇数个数
             //oddBegin：奇数从数组头部开始添加
             int oddCount=0,oddBegin=0;
@@ -200,14 +199,18 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
             int[] newArray = new int[array.length];
             //计算出（数组中的奇数个数）开始添加元素
             for(int i=0;i<array.length;i++){
-                if((array[i]&1)==1) oddCount++;
+                if((array[i]&1)==1) {
+                    oddCount++;
+                }
             }
             for(int i=0;i<array.length;i++){
                 //如果数为基数新数组从头开始添加元素
                 //如果为偶数就从oddCount（数组中的奇数个数）开始添加元素
-                if((array[i]&1)==1)
+                if((array[i]&1)==1) {
                     newArray[oddBegin++]=array[i];
-                else newArray[oddCount++]=array[i];
+                } else {
+                    newArray[oddCount++]=array[i];
+                }
             }
             for(int i=0;i<array.length;i++){
                 array[i]=newArray[i];
@@ -218,7 +221,7 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
     private class MyThread implements Runnable{
         @Override
         public void run() {
-            logger.debug("打印值"+"----"+this.toString());
+            AppLogUtils.d("打印值"+"----"+this.toString());
         }
     }
 

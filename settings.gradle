@@ -39,14 +39,13 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 
 
 /* +++++++++ 框架业务服务层 +++++++++ */
-include ':ImageServer', ':HttpServer', ':ShareServer', ':XlogServer', ':NfcServer',
+include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
-        ':AppLogHelper', ':AppLogProcess', ':XlogUpload', ':NetInterceptor'
+        ':AppLogHelper', ':AppLogProcess', ':NetInterceptor'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
-project(':XlogServer').projectDir = new File('ServerLib/XlogServer')
 project(':NfcServer').projectDir = new File('ServerLib/NfcServer')
 project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
 project(':AppLogHelper').projectDir = new File('ServerLib/AppLogHelper')
@@ -58,7 +57,6 @@ project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')
 project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
 project(':OkHttpServer').projectDir = new File('ServerLib/OkHttpServer')
 project(':PrivateServer').projectDir = new File('ServerLib/PrivateServer')
-project(':XlogUpload').projectDir = new File('ServerLib/XlogUpload')
 project(':NetInterceptor').projectDir = new File('ServerLib/NetInterceptor')
 
 

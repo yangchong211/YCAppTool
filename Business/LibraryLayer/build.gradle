@@ -92,7 +92,6 @@ dependencies {
     //annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     api(rootProject.ext.dependencies["retrofit"])
     api rootProject.ext.dependencies["easypermissions"]
-    implementation project(path: ':XlogServer')
 
     //状态栏
     //https://github.com/yangchong211/YCStatusBar

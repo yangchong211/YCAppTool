@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.yc.businessinterface.BusinessTransfer;
 import com.yc.library.base.config.AppConfig;
-import com.yc.library.utils.AppLogHelper;
 import com.yc.toolutils.AppToolUtils;
 
 /**

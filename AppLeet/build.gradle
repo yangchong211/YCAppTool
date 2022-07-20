@@ -34,6 +34,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':XlogServer')
     implementation project(path: ':MonitorPhone')
 }

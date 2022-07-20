@@ -204,7 +204,6 @@ dependencies {
     implementation project(path: ':AppStatusLib')
 
     implementation project(path: ':LocaleHelperLib')
-    implementation project(path: ':XlogServer')
     implementation project(path: ':MonitorKeepAlive')
     implementation project(path: ':HttpServer')
     implementation project(path: ':LibraryLayer')

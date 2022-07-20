@@ -80,7 +80,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation project(path: ':LibraryLayer')
-    implementation project(path: ':XlogServer')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':ApplicationLib')
     implementation project(path: ':BusinessInterface')

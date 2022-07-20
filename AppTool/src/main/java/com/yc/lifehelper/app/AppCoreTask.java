@@ -16,7 +16,6 @@ import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.parallel.AbsParallelTask;
 import com.yc.activitymanager.ActivityManager;
 import com.yc.easyexecutor.DelegateTaskExecutor;
-import com.yc.library.utils.AppLogHelper;
 import com.yc.lifehelper.MainActivity;
 import com.yc.lifehelper.listener.MainActivityListener;
 import com.yc.localelib.listener.OnLocaleChangedListener;
@@ -40,7 +39,6 @@ public class AppCoreTask extends AbsParallelTask {
         long start = System.currentTimeMillis();
         //日志库
         TimeMonitorHelper.start("AppCoreTask");
-        AppLogHelper.config(MainApplication.getInstance());
         //初始化国际化语言
         initLang();
         //保活

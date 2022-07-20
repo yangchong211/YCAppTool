@@ -57,6 +57,8 @@ public class CodeTestActivity extends BaseActivity implements View.OnClickListen
         tv2.setOnClickListener(this);
         tv3.setOnClickListener(this);
         tv4.setOnClickListener(this);
+        tv5.setOnClickListener(this);
+        tv6.setOnClickListener(this);
     }
 
     @Override
@@ -71,11 +73,13 @@ public class CodeTestActivity extends BaseActivity implements View.OnClickListen
         } else if (v == tv2) {
             cal(100);
         } else if (v == tv3) {
-
+            cal2(100);
         } else if (v == tv4) {
-
+            cal3(100);
         } else if (v == tv5){
-
+            cal4(100);
+        } else if (v == tv6){
+            print(100);
         }
     }
 
@@ -123,6 +127,10 @@ public class CodeTestActivity extends BaseActivity implements View.OnClickListen
         return sum;
     }
 
+    /**
+     * 只关注循环执行次数最多的一段代码
+     * 时间复杂度：O(n)
+     */
     private int cal2(int n) {
         int sum = 0;
         int i = 1;
@@ -130,5 +138,71 @@ public class CodeTestActivity extends BaseActivity implements View.OnClickListen
             sum = sum + i;
         }
         return sum;
+    }
+
+    /**
+     * 加法法则计算时间复杂度
+     * 时间复杂度：O(2n) + O(n^2)
+     */
+    private int cal3(int n) {
+        int sum_1 = 0;
+        int p = 1;
+        //O(n)
+        for (; p < 100; ++p) {
+            sum_1 = sum_1 + p;
+        }
+        int sum_2 = 0;
+        int q = 1;
+        //O(n)
+        for (; q < n; ++q) {
+            sum_2 = sum_2 + q;
+        }
+        int sum_3 = 0;
+        int i = 1;
+        int j = 1;
+        //O(n^2)
+        for (; i <= n; ++i) {
+            j = 1;
+            for (; j <= n; ++j) {
+                sum_3 = sum_3 + i * j;
+            }
+        }
+        return sum_1 + sum_2 + sum_3;
+    }
+
+    /**
+     * 乘法法则计算时间复杂度
+     * 时间复杂度：O(n*n)
+     */
+    private int cal4(int n) {
+        int ret = 0;
+        int i = 1;
+        for (; i < n; ++i) {
+            ret = ret + f(i);
+        }
+        return ret;
+    }
+
+    private int f(int n) {
+        int sum = 0;
+        int i = 1;
+        for (; i < n; ++i) {
+            sum = sum + i;
+        }
+        return sum;
+    }
+
+    /**
+     * 空间复杂度，相比而言，就是对容易中装载对象所占空间分析
+     */
+    private void print(int n) {
+        int i = 0;
+        int[] a = new int[n];
+        for (; i <n; ++i) {
+            a[i] = i * i;
+        }
+        for (i = n-1; i >= 0; --i) {
+            System.out.println(a[i]);
+        }
     }
 }
