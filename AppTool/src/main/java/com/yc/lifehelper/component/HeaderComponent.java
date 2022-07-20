@@ -7,11 +7,9 @@ import android.widget.TextView;
 
 import com.yc.apploglib.AppLogHelper;
 import com.yc.catonhelperlib.PerformanceActivity;
-import com.yc.lifehelper.ApmTestActivity;
-import com.yc.lifehelper.InterDebugTool;
-import com.yc.lifehelper.LocaleActivity;
 import com.yc.lifehelper.R;
 import com.yc.monitorfilelib.FileExplorerActivity;
+import com.yc.monitorpinglib.MonitorPingActivity;
 import com.yc.mvctodo.NetworkActivity;
 import com.yc.toollib.crash.CrashLibUtils;
 import com.yc.toolutils.click.FastClickUtils;
@@ -70,15 +68,15 @@ public class HeaderComponent implements InterItemView {
                     break;
                 //Debug工具
                 case R.id.tv_home_six:
-                    ApmTestActivity.Companion.startActivity(context);
+
                     break;
                 //线程库
                 case R.id.tv_home_seven:
 
                     break;
-                //视频播放器
+                //Ping一下
                 case R.id.tv_home_eight:
-
+                    MonitorPingActivity.startActivity(context,"https://www.wanandroid.com/banner/json");
                     break;
                 default:
                     break;

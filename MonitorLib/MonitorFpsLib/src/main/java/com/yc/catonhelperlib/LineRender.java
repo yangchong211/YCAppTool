@@ -5,14 +5,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PathEffect;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PathEffect;
 import android.graphics.Shader.TileMode;
 import android.text.TextUtils;
-
-import com.yc.catonhelperlib.R;
 
 
 public class LineRender {

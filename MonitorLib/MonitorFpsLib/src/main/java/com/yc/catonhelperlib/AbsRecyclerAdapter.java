@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.recyclerview.widget.RecyclerView.Adapter;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

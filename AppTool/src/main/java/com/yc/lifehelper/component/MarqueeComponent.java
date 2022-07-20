@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.yc.cn.ycbannerlib.marquee.MarqueeView;
 import com.yc.lifehelper.R;
-import com.yc.logging.LoggerService;
-import com.yc.logging.logger.Logger;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 
@@ -21,7 +19,6 @@ import java.util.ArrayList;
 
 public class MarqueeComponent implements InterItemView {
 
-    private final Logger logger = LoggerService.getInstance().getLogger("HeaderComponent");
     private Context context;
 
     @Override

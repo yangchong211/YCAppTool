@@ -1,15 +1,16 @@
 package com.yc.alive.service;
 
 import android.accessibilityservice.AccessibilityService;
-import androidx.annotation.RestrictTo;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ListView;
 
-import com.yc.alive.nova.ka.R;
-import com.yc.alive.manager.AssistantManager;
+import androidx.annotation.RestrictTo;
+
 import com.yc.alive.manager.AliveDeviceManager;
+import com.yc.alive.manager.AssistantManager;
 import com.yc.alive.model.AliveDeviceModel;
 import com.yc.alive.model.AliveOptionModel;
+import com.yc.alive.nova.ka.R;
 import com.yc.alive.util.AccessibilityUtils;
 import com.yc.alive.util.AliveAppUtils;
 import com.yc.alive.util.AliveExecutorUtils;

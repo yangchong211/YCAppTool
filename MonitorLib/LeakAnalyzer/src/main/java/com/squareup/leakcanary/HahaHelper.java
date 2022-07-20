@@ -21,6 +21,7 @@ import com.squareup.haha.perflib.ClassObj;
 import com.squareup.haha.perflib.Field;
 import com.squareup.haha.perflib.Instance;
 import com.squareup.haha.perflib.Type;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.Charset;

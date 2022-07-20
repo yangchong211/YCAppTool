@@ -17,9 +17,8 @@ import com.yc.library.api.ConstantImageApi;
 import com.yc.library.api.ConstantStringApi;
 import com.yc.library.bean.ListNewsData;
 import com.yc.lifehelper.R;
-import com.yc.logging.LoggerService;
-import com.yc.logging.logger.Logger;
 import com.yc.snapbannerlib.ScrollLinearHelper;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppSizeUtils;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
@@ -29,7 +28,6 @@ import java.util.List;
 
 public class SnapBannerComponent implements InterItemView {
 
-    private final Logger logger = LoggerService.getInstance().getLogger("HeaderComponent");
     private RecyclerView recyclerView;
     private Context context;
     private SnapBannerAdapter adapter;
@@ -37,7 +35,7 @@ public class SnapBannerComponent implements InterItemView {
     @Override
     public View onCreateView(ViewGroup parent) {
         View headerView = View.inflate(parent.getContext(), R.layout.base_title_list_view, null);
-        logger.debug("banner on create view");
+        AppLogUtils.d("banner on create view");
         context = headerView.getContext();
         return headerView;
     }
@@ -47,7 +45,7 @@ public class SnapBannerComponent implements InterItemView {
         TextView tvTitle = header.findViewById(R.id.tv_title);
         recyclerView = header.findViewById(R.id.recyclerView);
         tvTitle.setText("热门活动");
-        logger.debug("banner on bind view");
+        AppLogUtils.d("banner on bind view");
         if (adapter == null){
             initRecyclerView();
         } else {

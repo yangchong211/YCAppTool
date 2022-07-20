@@ -7,9 +7,9 @@ import android.os.Handler;
 import android.os.IBinder;
 
 import com.yc.alive.alive.YcKeepAlive;
-import com.yc.alive.utils.NotificationUtils;
 import com.yc.alive.constant.YcConstant;
 import com.yc.alive.receiver.NotificationClickReceiver;
+import com.yc.alive.utils.NotificationUtils;
 
 /**
  * <pre>

@@ -1,9 +1,10 @@
 package com.yc.alive.service;
 
 import android.accessibilityservice.AccessibilityService;
-import androidx.annotation.RestrictTo;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ListView;
+
+import androidx.annotation.RestrictTo;
 
 import com.yc.alive.manager.AssistantManager;
 import com.yc.alive.model.AliveOptionModel;

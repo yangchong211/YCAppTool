@@ -1,8 +1,5 @@
 package com.yc.monitorfilelib;
 
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 
 import java.io.File;

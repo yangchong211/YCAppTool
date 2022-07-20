@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="服务端信息"/>
+
+            <TextView
+                android:id="@+id/tv_web_info"
+                android:textColor="#257ada"
+                android:background="#50cfa0f1"
+                style="@style/DetailContent"/>
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="Ping网络诊断"/>
+
+            <com.yc.monitorpinglib.PingView
+                android:id="@+id/tv_net_info"
+                android:textColor="#4dac41"
+                style="@style/DetailContent"
+                android:background="#50cfa0f1"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

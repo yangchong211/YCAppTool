@@ -17,7 +17,9 @@ package com.squareup.leakcanary;
 
 import android.app.PendingIntent;
 import android.os.SystemClock;
+
 import com.squareup.leakcanary.internal.DisplayLeakActivity;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

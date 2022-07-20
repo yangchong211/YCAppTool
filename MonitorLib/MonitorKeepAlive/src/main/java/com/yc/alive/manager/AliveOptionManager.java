@@ -1,7 +1,8 @@
 package com.yc.alive.manager;
 
-import androidx.annotation.RestrictTo;
 import android.util.SparseArray;
+
+import androidx.annotation.RestrictTo;
 
 import com.yc.alive.constant.AliveSettingType.TYPE;
 import com.yc.alive.model.AliveOptionModel;

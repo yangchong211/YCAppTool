@@ -1,12 +1,13 @@
 package com.yc.alive.util;
 
 import android.os.Build;
-import androidx.annotation.Nullable;
-import androidx.annotation.RestrictTo;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.Switch;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import java.util.ArrayList;
 import java.util.Arrays;

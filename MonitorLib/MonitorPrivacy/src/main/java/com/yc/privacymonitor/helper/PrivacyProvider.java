@@ -1,6 +1,5 @@
 package com.yc.privacymonitor.helper;
 
-import android.app.Application;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;

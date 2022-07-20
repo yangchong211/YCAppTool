@@ -3,19 +3,21 @@ package com.yc.netlib.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.netlib.R;
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;

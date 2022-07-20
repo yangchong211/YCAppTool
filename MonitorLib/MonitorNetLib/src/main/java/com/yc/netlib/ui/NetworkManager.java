@@ -4,7 +4,6 @@ package com.yc.netlib.ui;
 import android.os.Handler;
 import android.os.Looper;
 
-
 import com.yc.netlib.data.NetworkRecord;
 
 import java.util.ArrayList;

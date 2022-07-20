@@ -1,13 +1,9 @@
 package com.yc.netlib.utils;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 
 import com.yc.netlib.R;

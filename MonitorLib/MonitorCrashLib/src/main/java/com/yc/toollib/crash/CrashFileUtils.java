@@ -11,11 +11,11 @@ import android.text.TextUtils;
 import com.yc.activitymanager.ActivityManager;
 import com.yc.toollib.BuildConfig;
 import com.yc.toolutils.AppDeviceUtils;
-import com.yc.toolutils.AppUtils;
-import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppMemoryUtils;
 import com.yc.toolutils.AppProcessUtils;
+import com.yc.toolutils.AppUtils;
+import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;

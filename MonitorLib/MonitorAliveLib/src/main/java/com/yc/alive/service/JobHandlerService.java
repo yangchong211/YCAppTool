@@ -14,11 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.yc.alive.alive.YcKeepAlive;
+import com.yc.alive.constant.YcConstant;
+import com.yc.alive.receiver.NotificationClickReceiver;
 import com.yc.alive.utils.NotificationUtils;
 import com.yc.toolutils.AppProcessUtils;
 import com.yc.toolutils.ServiceUtils;
-import com.yc.alive.constant.YcConstant;
-import com.yc.alive.receiver.NotificationClickReceiver;
 
 
 /**

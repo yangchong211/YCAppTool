@@ -3,11 +3,11 @@ package com.yc.privacymonitor.helper;
 import android.content.Context;
 
 import com.yc.appcommoninter.ILogger;
+import com.yc.privacymonitor.bean.ClassMethodBean;
+import com.yc.privacymonitor.bean.MethodBean;
 import com.yc.privacymonitor.config.PrivacyConfig;
 import com.yc.privacymonitor.handler.MethodHookImpl;
-import com.yc.privacymonitor.bean.ClassMethodBean;
 import com.yc.privacymonitor.method.HookMethodList;
-import com.yc.privacymonitor.bean.MethodBean;
 
 import java.lang.reflect.Method;
 

@@ -2,14 +2,13 @@ package com.yc.anrtoollib.watch;
 
 import android.os.Looper;
 
-import java.io.Serializable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 
 public class ANRError extends Error {

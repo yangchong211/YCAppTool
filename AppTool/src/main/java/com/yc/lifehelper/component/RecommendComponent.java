@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.yc.jetpack.ui.activity.JetpackActivity;
 import com.yc.lifehelper.R;
-import com.yc.logging.LoggerService;
-import com.yc.logging.logger.Logger;
 import com.yc.todoapp.tasks.TasksActivity;
 import com.yc.todoapplive.tasks.TasksLiveActivity;
 import com.yc.todoappmvvm.tasks.TasksMvvmActivity;
@@ -27,7 +25,6 @@ import java.util.List;
 
 public class RecommendComponent implements InterItemView {
 
-    private final Logger logger = LoggerService.getInstance().getLogger("RecommendComponent");
     private Context context;
 
     @Override

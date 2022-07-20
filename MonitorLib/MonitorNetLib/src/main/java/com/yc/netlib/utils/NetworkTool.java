@@ -17,6 +17,7 @@ import com.yc.toolutils.AppLogUtils;
 import com.yc.videoview.FloatWindow;
 import com.yc.videoview.tool.FloatMoveType;
 import com.yc.videoview.tool.FloatScreenType;
+
 import java.net.Proxy;
 
 import okhttp3.OkHttpClient;

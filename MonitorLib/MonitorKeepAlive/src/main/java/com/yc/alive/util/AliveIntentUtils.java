@@ -4,8 +4,9 @@ import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import androidx.annotation.RestrictTo;
 import android.widget.Toast;
+
+import androidx.annotation.RestrictTo;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 

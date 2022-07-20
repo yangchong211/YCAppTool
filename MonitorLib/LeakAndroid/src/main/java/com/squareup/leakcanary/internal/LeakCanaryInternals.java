@@ -27,8 +27,10 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
+
 import com.squareup.leakcanary.CanaryLog;
 import com.squareup.leakcanary.R;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;

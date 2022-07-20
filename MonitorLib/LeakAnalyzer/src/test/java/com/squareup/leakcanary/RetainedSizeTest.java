@@ -1,12 +1,13 @@
 package com.squareup.leakcanary;
 
-import java.lang.ref.WeakReference;
-import java.util.Arrays;
-import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import java.lang.ref.WeakReference;
+import java.util.Arrays;
+import java.util.Collection;
 
 import static com.squareup.leakcanary.TestUtil.HeapDumpFile.ASYNC_TASK_M;
 import static com.squareup.leakcanary.TestUtil.HeapDumpFile.ASYNC_TASK_O;

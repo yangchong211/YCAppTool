@@ -11,17 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.yc.alive.config.ForegroundNotification;
-import com.yc.toolutils.AppProcessUtils;
-import com.yc.toolutils.ServiceUtils;
-import com.yc.alive.whitelist.IWhiteListProvider;
-import com.yc.alive.whitelist.WhiteList;
-import com.yc.alive.whitelist.WhiteListIntentWrapper;
 import com.yc.alive.config.KeepLiveService;
 import com.yc.alive.service.HideForegroundService;
 import com.yc.alive.service.JobHandlerService;
 import com.yc.alive.service.LocalService;
 import com.yc.alive.service.RemoteService;
 import com.yc.alive.whitelist.IWhiteListCallback;
+import com.yc.alive.whitelist.IWhiteListProvider;
+import com.yc.alive.whitelist.WhiteList;
+import com.yc.alive.whitelist.WhiteListIntentWrapper;
+import com.yc.toolutils.AppProcessUtils;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.yc.monitorpinglib;
 
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 

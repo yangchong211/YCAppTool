@@ -2,6 +2,7 @@ package com.squareup.leakcanary;
 
 import android.app.Application;
 import android.content.Context;
+
 import java.util.concurrent.TimeUnit;
 
 import static com.squareup.leakcanary.RefWatcher.DISABLED;

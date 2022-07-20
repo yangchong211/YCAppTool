@@ -9,7 +9,6 @@ import com.yc.netlib.data.NetworkTraceBean;
 import com.yc.netlib.utils.NetWorkUtils;
 import com.yc.toolutils.AppLogUtils;
 
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;

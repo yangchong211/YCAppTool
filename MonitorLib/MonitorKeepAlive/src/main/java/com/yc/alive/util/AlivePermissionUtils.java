@@ -13,12 +13,12 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.RestrictTo;
 import androidx.core.app.NotificationManagerCompat;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 import java.lang.reflect.Method;
 import java.util.List;
 
 import static android.accessibilityservice.AccessibilityServiceInfo.FEEDBACK_GENERIC;
 import static android.content.Context.ACCESSIBILITY_SERVICE;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 
 /**

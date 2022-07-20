@@ -5,7 +5,6 @@ import android.content.ContentResolver;
 import android.location.LocationManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import com.yc.toolutils.StackTraceUtils;
 

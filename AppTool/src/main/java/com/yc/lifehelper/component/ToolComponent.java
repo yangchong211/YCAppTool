@@ -13,8 +13,6 @@ import com.yc.easy.demo.NetMainActivity;
 import com.yc.kotlinbusiness.KotlinHomeActivity;
 import com.yc.lifehelper.LocaleActivity;
 import com.yc.lifehelper.R;
-import com.yc.logging.LoggerService;
-import com.yc.logging.logger.Logger;
 import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.other.ui.activity.NtpTimeActivity;
 import com.yc.toolutils.click.FastClickUtils;
@@ -27,7 +25,6 @@ import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 
 public class ToolComponent implements InterItemView {
 
-    private final Logger logger = LoggerService.getInstance().getLogger("RecommendComponent");
     private Context context;
 
     @Override

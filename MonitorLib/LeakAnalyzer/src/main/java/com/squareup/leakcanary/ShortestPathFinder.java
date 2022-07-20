@@ -25,6 +25,7 @@ import com.squareup.haha.perflib.RootObj;
 import com.squareup.haha.perflib.RootType;
 import com.squareup.haha.perflib.Snapshot;
 import com.squareup.haha.perflib.Type;
+
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;

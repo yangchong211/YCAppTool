@@ -3,11 +3,12 @@ package com.yc.alive.manager;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Build;
-import androidx.annotation.RestrictTo;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+
+import androidx.annotation.RestrictTo;
 
 import com.yc.alive.nova.ka.R;
 

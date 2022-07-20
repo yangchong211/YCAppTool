@@ -3,13 +3,9 @@ package com.yc.monitorfilelib;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.SpannableString;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.yc.eastadapterlib.BaseRecycleAdapter;
 import com.yc.eastadapterlib.BaseViewHolder;
@@ -19,7 +15,6 @@ import com.yc.toolutils.file.AppFileUtils;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 
 /**

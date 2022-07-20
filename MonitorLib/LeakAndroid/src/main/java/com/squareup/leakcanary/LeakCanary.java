@@ -21,6 +21,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
+
 import com.squareup.leakcanary.internal.DisplayLeakActivity;
 import com.squareup.leakcanary.internal.HeapAnalyzerService;
 

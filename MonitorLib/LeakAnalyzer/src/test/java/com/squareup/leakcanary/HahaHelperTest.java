@@ -7,6 +7,7 @@ import com.squareup.haha.perflib.Field;
 import com.squareup.haha.perflib.Snapshot;
 import com.squareup.haha.perflib.Type;
 import com.squareup.haha.perflib.io.HprofBuffer;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

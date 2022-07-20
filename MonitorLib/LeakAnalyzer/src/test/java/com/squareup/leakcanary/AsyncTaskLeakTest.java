@@ -15,14 +15,15 @@
  */
 package com.squareup.leakcanary;
 
-import java.lang.ref.PhantomReference;
-import java.lang.ref.WeakReference;
-import java.util.Collection;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import java.lang.ref.PhantomReference;
+import java.lang.ref.WeakReference;
+import java.util.Collection;
+import java.util.List;
 
 import static com.squareup.leakcanary.LeakTraceElement.Holder.THREAD;
 import static com.squareup.leakcanary.LeakTraceElement.Type.STATIC_FIELD;

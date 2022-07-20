@@ -16,6 +16,7 @@
 package com.squareup.leakcanary;
 
 import android.content.Context;
+
 import com.squareup.leakcanary.internal.HeapAnalyzerService;
 
 import static com.squareup.leakcanary.Preconditions.checkNotNull;

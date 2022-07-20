@@ -16,12 +16,12 @@ import android.os.PowerManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.yc.alive.alive.YcKeepAlive;
-import com.yc.alive.utils.NotificationUtils;
-import com.yc.toolutils.ServiceUtils;
-import com.ycbjie.alivelib.R;
 import com.yc.alive.constant.YcConstant;
 import com.yc.alive.receiver.DeviceStatusReceiver;
 import com.yc.alive.receiver.NotificationClickReceiver;
+import com.yc.alive.utils.NotificationUtils;
+import com.yc.toolutils.ServiceUtils;
+import com.ycbjie.alivelib.R;
 
 /**
  * <pre>

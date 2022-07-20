@@ -14,8 +14,10 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
+
 import com.yc.alive.service.AliveOnePxService;
 import com.yc.alive.util.AliveLogUtils;
+
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 

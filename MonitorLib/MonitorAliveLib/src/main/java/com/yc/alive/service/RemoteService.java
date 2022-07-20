@@ -10,9 +10,8 @@ import android.os.PowerManager;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.yc.toolutils.AppProcessUtils;
-import com.yc.toolutils.ServiceUtils;
 import com.yc.alive.constant.YcConstant;
+import com.yc.toolutils.AppProcessUtils;
 
 
 /**

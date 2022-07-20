@@ -9,11 +9,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
 
+import com.yc.alive.alive.YcKeepAlive;
 import com.yc.alive.whitelist.IWhiteListProvider;
 import com.yc.alive.whitelist.IntentType;
 import com.yc.alive.whitelist.WhiteList;
 import com.yc.alive.whitelist.WhiteListIntentWrapper;
-import com.yc.alive.alive.YcKeepAlive;
 
 import java.util.ArrayList;
 import java.util.List;

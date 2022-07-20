@@ -72,7 +72,7 @@
             style="@style/WeightAttr"
             android:drawablePadding="8dp"
             android:drawableTop="@drawable/ic_home_four"
-            android:text="视频播放器" />
+            android:text="Ping一下" />
     </LinearLayout>
 
 </LinearLayout>

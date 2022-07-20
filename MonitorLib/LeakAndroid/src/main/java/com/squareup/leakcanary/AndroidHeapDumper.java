@@ -23,7 +23,9 @@ import android.os.MessageQueue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.Toast;
+
 import com.squareup.leakcanary.internal.FutureResult;
+
 import java.io.File;
 
 import static java.util.concurrent.TimeUnit.SECONDS;

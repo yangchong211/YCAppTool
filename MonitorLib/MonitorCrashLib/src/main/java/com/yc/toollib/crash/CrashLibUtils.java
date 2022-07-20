@@ -1,18 +1,17 @@
 package com.yc.toollib.crash;
 
 import android.content.Context;
-
-import androidx.annotation.ColorInt;
-
 import android.content.Intent;
 import android.text.Spannable;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 
+import androidx.annotation.ColorInt;
+
 import com.yc.apprestartlib.RestartAppHelper;
 import com.yc.apprestartlib.RestartFactory;
-import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.AppSizeUtils;
+import com.yc.toolutils.file.AppFileUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

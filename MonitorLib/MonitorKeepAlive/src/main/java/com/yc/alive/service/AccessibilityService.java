@@ -1,11 +1,12 @@
 package com.yc.alive.service;
 
-import androidx.annotation.RestrictTo;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-import com.yc.alive.manager.AssistantManager;
+import androidx.annotation.RestrictTo;
+
 import com.yc.alive.manager.AliveOptionManager;
+import com.yc.alive.manager.AssistantManager;
 import com.yc.alive.model.AliveOptionModel;
 import com.yc.alive.util.AliveAppUtils;
 import com.yc.alive.util.AliveExecutorUtils;

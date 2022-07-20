@@ -258,6 +258,7 @@ dependencies {
     implementation project(path: ':NtpTimeLib')
     implementation project(path: ':WidgetBusiness')
     implementation project(path: ':MonitorPhone')
+    implementation project(path: ':MonitorPingLib')
 //    implementation project(path: ':MonitorPrivacy')
     annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 //    implementation 'com.github.yangchong211.YCAppTool:BlurViewLib:1.3.7'

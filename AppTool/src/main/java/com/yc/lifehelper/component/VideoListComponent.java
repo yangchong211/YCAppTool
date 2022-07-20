@@ -16,8 +16,7 @@ import com.yc.library.api.ConstantImageApi;
 import com.yc.library.api.ConstantStringApi;
 import com.yc.library.bean.ListNewsData;
 import com.yc.lifehelper.R;
-import com.yc.logging.LoggerService;
-import com.yc.logging.logger.Logger;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppTimeUtils;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
@@ -29,14 +28,13 @@ import java.util.List;
 
 public class VideoListComponent implements InterItemView {
 
-    private final Logger logger = LoggerService.getInstance().getLogger("HeaderComponent");
     private RecyclerView recyclerView;
     private Context context;
 
     @Override
     public View onCreateView(ViewGroup parent) {
         View headerView = View.inflate(parent.getContext(), R.layout.base_recycler_view, null);
-        logger.debug("banner on create view");
+        AppLogUtils.d("banner on create view");
         context = headerView.getContext();
         return headerView;
     }
@@ -44,7 +42,7 @@ public class VideoListComponent implements InterItemView {
     @Override
     public void onBindView(View header) {
         recyclerView = header.findViewById(R.id.recyclerView);
-        logger.debug("banner on bind view");
+        AppLogUtils.d("banner on bind view");
         initRecyclerView();
     }
 

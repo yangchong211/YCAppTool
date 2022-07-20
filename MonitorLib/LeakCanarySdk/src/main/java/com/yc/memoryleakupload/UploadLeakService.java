@@ -1,6 +1,7 @@
 package com.yc.memoryleakupload;
 
 import android.annotation.SuppressLint;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.leakcanary.AnalysisResult;
@@ -9,6 +10,7 @@ import com.squareup.leakcanary.Exclusion;
 import com.squareup.leakcanary.HeapDump;
 import com.squareup.leakcanary.LeakTrace;
 import com.squareup.leakcanary.LeakTraceElement;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;

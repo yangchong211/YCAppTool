@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.WindowManager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.yc.privacymonitor.bean;
 
-import com.yc.privacymonitor.helper.PrivacyHelper;
 import com.yc.privacymonitor.handler.MethodHookImpl;
+import com.yc.privacymonitor.helper.PrivacyHelper;
 
 /**
  * <pre>

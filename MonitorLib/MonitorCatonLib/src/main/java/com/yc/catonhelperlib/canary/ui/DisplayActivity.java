@@ -27,7 +27,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import com.yc.catonhelperlib.R;
 import com.yc.catonhelperlib.canary.monitor.BlockCanaryContext;
 import com.yc.catonhelperlib.canary.monitor.BlockCanaryInternals;

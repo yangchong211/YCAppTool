@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -19,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.eastadapterlib.OnItemLongClickListener;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.AppWindowUtils;
+import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,7 +29,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
 
 import cn.ycbjie.ycthreadpoollib.PoolThread;
 import cn.ycbjie.ycthreadpoollib.callback.AsyncCallback;

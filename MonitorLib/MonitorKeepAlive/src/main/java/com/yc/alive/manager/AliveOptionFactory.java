@@ -2,13 +2,14 @@ package com.yc.alive.manager;
 
 import android.os.Build;
 import android.provider.Settings;
-import androidx.annotation.RestrictTo;
 import android.util.SparseArray;
 
-import com.yc.alive.nova.ka.R;
+import androidx.annotation.RestrictTo;
+
 import com.yc.alive.constant.AliveIntentType;
 import com.yc.alive.constant.AliveSettingConst;
 import com.yc.alive.model.AliveOptionModel;
+import com.yc.alive.nova.ka.R;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 import static com.yc.alive.constant.AliveIntentType.CLASS_NAME;

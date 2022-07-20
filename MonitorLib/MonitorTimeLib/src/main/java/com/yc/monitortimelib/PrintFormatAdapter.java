@@ -1,8 +1,5 @@
 package com.yc.monitortimelib;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public interface PrintFormatAdapter {
 
     String onFormat(String processName, long startTime);

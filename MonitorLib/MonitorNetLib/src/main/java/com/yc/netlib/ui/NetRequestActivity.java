@@ -3,16 +3,15 @@ package com.yc.netlib.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter;
@@ -63,11 +62,10 @@ public class NetRequestActivity extends AppCompatActivity {
         mTitleList.add("请求内容");
         mTitleList.add("流量统计");
         mTitleList.add("消耗时间");
-        mTitleList.add("设备信息");
+        //mTitleList.add("设备信息");
         mFragments.add(new NetRequestListFragment());
         mFragments.add(new NetRequestInfoFragment());
         mFragments.add(new NetRequestTraceFragment());
-        mFragments.add(new NetRequestPhoneFragment());
         /*
          * 注意使用的是：getChildFragmentManager，
          * 这样setOffscreenPageLimit()就可以添加上，保留相邻2个实例，切换时不会卡

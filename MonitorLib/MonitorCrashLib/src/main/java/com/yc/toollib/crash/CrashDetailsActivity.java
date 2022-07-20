@@ -10,12 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.view.View;
@@ -25,19 +19,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.yc.activitymanager.ActivityManager;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toollib.R;
+import com.yc.toolutils.AppWindowUtils;
+import com.yc.toolutils.CompressUtils;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.file.FileSaveUtils;
 import com.yc.toolutils.file.FileShareUtils;
-import com.yc.toolutils.CompressUtils;
 import com.yc.toolutils.screen.AppShotsUtils;
-import com.yc.toolutils.AppWindowUtils;
 
 import java.io.File;
 import java.util.List;

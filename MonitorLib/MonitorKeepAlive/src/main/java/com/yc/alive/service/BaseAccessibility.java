@@ -1,8 +1,9 @@
 package com.yc.alive.service;
 
 import android.accessibilityservice.AccessibilityService;
-import androidx.annotation.RestrictTo;
 import android.view.accessibility.AccessibilityNodeInfo;
+
+import androidx.annotation.RestrictTo;
 
 import com.yc.alive.constant.AliveSettingConst;
 import com.yc.alive.model.AliveOptionModel;
