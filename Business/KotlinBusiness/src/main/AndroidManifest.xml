@@ -4,8 +4,8 @@
 
     <application>
         <activity android:name="com.yc.kotlinbusiness.KotlinHomeActivity"/>
-        <activity android:name="com.yc.kotlinbusiness.KotlinScopeActivity"/>
-        <activity android:name="com.yc.kotlinbusiness.LifecycleScopeActivity"/>
+        <activity android:name="com.yc.kotlinbusiness.scope.KotlinScopeActivity"/>
+        <activity android:name="com.yc.kotlinbusiness.scope.LifecycleScopeActivity"/>
     </application>
 
 </manifest>

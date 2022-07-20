@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:padding="10dp"
-                android:text="1.算法的执行效率熟悉"/>
+                android:text="1.算法的执行效率熟悉1"/>
 
             <TextView
                 android:id="@+id/tv_2"
@@ -32,7 +32,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/colorAccent"
                 android:padding="10dp"
-                android:text="2.删除数组中的重复数据"/>
+                android:text="2.算法的执行效率熟悉2"/>
 
 
             <TextView
@@ -42,7 +42,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/colorAccent"
                 android:padding="10dp"
-                android:text="3.啤酒和饮料"/>
+                android:text="3.只关注循环执行次数最多的一段代码"/>
 
 
             <TextView
@@ -52,7 +52,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/colorAccent"
                 android:padding="10dp"
-                android:text="4.数组中只出现一次的数字"/>
+                android:text="4.加法法则计算时间复杂度"/>
 
 
 
@@ -63,7 +63,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/colorAccent"
                 android:padding="10dp"
-                android:text="5."/>
+                android:text="5.乘法法则计算时间复杂度"/>
 
             <TextView
                 android:id="@+id/tv_6"

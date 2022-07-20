@@ -5,6 +5,7 @@ include ':AidlClient'
 include ':AppPlayer'
 include ':AppLeet'
 include ':AppDesign'
+include ':AppMonitor'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
@@ -94,7 +95,7 @@ project(':ToolMemoryLib').projectDir = new File('CommonLib/ToolMemoryLib')
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
-        ':FragmentLib',':WidgetViewLib',':ZoomImageLib', ':LargeImageLib',
+        ':FragmentLib',':ZoomImageLib', ':LargeImageLib',
         ':SwipeBackLib', ':StatusBarLib', ':AppStateLib', ':WebViewLib',
         ':ToastUtils', ':FloatPageLib', ':NotifyMessage', ':NotificationLib',
         ':DialogFragment', ':SnackBar', ':PopupWindow', ':BaseDialog', ':RoundCorners',
@@ -107,7 +108,6 @@ project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
 project(':CustomWidget').projectDir = new File('WidgetLib/CustomWidget')
 project(':BlurViewLib').projectDir = new File('WidgetLib/BlurViewLib')
 project(':FragmentLib').projectDir = new File('WidgetLib/FragmentLib')
-project(':WidgetViewLib').projectDir = new File('WidgetLib/WidgetViewLib')
 project(':ZoomImageLib').projectDir = new File('WidgetLib/ZoomImageLib')
 project(':LargeImageLib').projectDir = new File('WidgetLib/LargeImageLib')
 project(':SwipeBackLib').projectDir = new File('WidgetLib/SwipeBackLib')

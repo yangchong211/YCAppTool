@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yc.appleet.array.ArrayTestActivity;
+import com.yc.appleet.code.CodeTestActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;
 
@@ -85,8 +86,9 @@ public class LeetCodeActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v == tv1){
-            MonitorPhoneActivity.startActivity(this);
-            //startActivity(CodeTestActivity.class);
+            //算法导论
+            //MonitorPhoneActivity.startActivity(this);
+            startActivity(CodeTestActivity.class);
         } else if (v == tv2){
             startActivity(ArrayTestActivity.class);
         }

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.yc.apploglib.AppLogHelper;
 import com.yc.catonhelperlib.PerformanceActivity;
+import com.yc.lifehelper.ApmTestActivity;
 import com.yc.lifehelper.InterDebugTool;
 import com.yc.lifehelper.LocaleActivity;
 import com.yc.lifehelper.R;
@@ -69,16 +70,7 @@ public class HeaderComponent implements InterItemView {
                     break;
                 //Debug工具
                 case R.id.tv_home_six:
-                    try {
-                        Class<?> aClass = Class.forName("com.yc.lifehelper.DebugToolImpl");
-                        Object instance = aClass.newInstance();
-                        if (instance instanceof InterDebugTool) {
-                            ((InterDebugTool) instance).toApmPage(context);
-                        }
-                    } catch (Exception e){
-                        e.printStackTrace();
-
-                    }
+                    ApmTestActivity.Companion.startActivity(context);
                     break;
                 //线程库
                 case R.id.tv_home_seven:

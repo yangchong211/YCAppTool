@@ -512,6 +512,8 @@ public class BaseWebView extends WebView {
                 //150
                 zoomDensity = WebSettings.ZoomDensity.FAR;
                 break;
+            default:
+                break;
         }
         settings.setDefaultZoom(zoomDensity);
     }

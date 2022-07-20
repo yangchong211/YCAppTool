@@ -69,7 +69,7 @@ public class CodeTestActivity extends BaseActivity implements View.OnClickListen
         if (v == tv1) {
             cla(100);
         } else if (v == tv2) {
-
+            cal(100);
         } else if (v == tv3) {
 
         } else if (v == tv4) {
@@ -79,7 +79,18 @@ public class CodeTestActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-
+    /**
+     * 算法的执行效率，粗略的讲，就是算法的执行时间
+     * 尽管每行代码对应cpu执行的个数、执行的时间都不一样，但是我们这里只是粗略的估计，所以我们可以假设每行代码执行的时间都一样，都为unit_time。在这个假设的基础上，我们进行分析！
+     * 第一行，第二行执行一次，2 * unit_time
+     * 第三行，第四行执行n次，2 * n * unit_time
+     *
+     * 代码时间复杂度：2*unit_time + 2n*unit_time
+     *
+     * T(n) = (2+2n)*unit_time
+     *
+     * 当 n 很大时，公式中的低阶、常量、系数三部分并不左右增长趋势，所以都可以忽略
+     */
     private int cla(int n){
         int sum = 0;
         for (int i=1 ;i<=n; i++){
@@ -88,4 +99,36 @@ public class CodeTestActivity extends BaseActivity implements View.OnClickListen
         return sum;
     }
 
+    /**
+     * 第二，三，四行执行一次，3 * unit_time
+     * 第五，六行执行n次，2n * unit_time
+     * 第七，八行执行n^2次，2n^2 * unit_time
+     *
+     * 代码时间复杂度：3*unit_time + 2n*unit_time + 2n^2*unit_time
+     *
+     * T(n) = (2n^2+2n+3)*unit_time
+     *
+     * 当 n 很大时，公式中的低阶、常量、系数三部分并不左右增长趋势，所以都可以忽略
+     */
+    private int cal(int n){
+        int sum = 0;
+        int i = 1;
+        int j = 1;
+        for( ; i<= n ;i++){
+            j = 1;
+            for( ; j <= n ; j++){
+                sum = sum + i*j;
+            }
+        }
+        return sum;
+    }
+
+    private int cal2(int n) {
+        int sum = 0;
+        int i = 1;
+        for (; i <= n; ++i) {
+            sum = sum + i;
+        }
+        return sum;
+    }
 }

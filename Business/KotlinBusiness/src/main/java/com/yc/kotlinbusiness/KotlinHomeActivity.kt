@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.yc.kotlinbusiness.scope.KotlinScopeActivity
+import com.yc.kotlinbusiness.scope.LifecycleScopeActivity
 
 class KotlinHomeActivity : AppCompatActivity(){
 
@@ -19,10 +21,10 @@ class KotlinHomeActivity : AppCompatActivity(){
         setContentView(R.layout.kotlin_activity_main)
 
         findViewById<TextView>(R.id.tv_1).setOnClickListener {
-            startActivity(Intent(this,KotlinScopeActivity::class.java))
+            startActivity(Intent(this, KotlinScopeActivity::class.java))
         }
         findViewById<TextView>(R.id.tv_2).setOnClickListener {
-            startActivity(Intent(this,LifecycleScopeActivity::class.java))
+            startActivity(Intent(this, LifecycleScopeActivity::class.java))
         }
     }
 

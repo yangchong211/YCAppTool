@@ -1,11 +1,13 @@
 package com.yc.lifehelper
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import com.yc.catonhelperlib.PerformanceActivity
 import com.yc.toastutils.ToastUtils
 import com.yc.toolutils.AppLogUtils
 import com.yc.toolutils.StackTraceUtils
@@ -23,6 +25,24 @@ import java.util.*
 class ApmTestActivity : FragmentActivity() {
 
     private var mFragment: ListFragment? = null
+
+    companion object{
+        /**
+         * 开启页面
+         *
+         * @param context 上下文
+         */
+        fun startActivity(context: Context) {
+            try {
+                val target = Intent()
+                target.setClass(context, ApmTestActivity::class.java)
+                //target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(target)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

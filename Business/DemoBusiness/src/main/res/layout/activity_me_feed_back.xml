@@ -26,7 +26,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/shape_bg"
         android:padding="10dp"
         android:text="直接给我打电话"/>
 
@@ -37,7 +36,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/shape_bg"
         android:padding="10dp"
         android:text="直接给我发短信"/>
 
@@ -49,7 +47,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/shape_bg"
         android:padding="10dp"
         android:text="直接给我发邮件"/>
 
@@ -60,7 +57,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/shape_bg"
         android:padding="10dp"
         android:text="直接给我发微信"/>
 
@@ -71,7 +67,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/shape_bg"
         android:padding="10dp"
         android:text="提交意见反馈"/>
 

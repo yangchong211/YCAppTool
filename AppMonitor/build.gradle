@@ -3,17 +3,17 @@ plugins {
 }
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
+
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
+        applicationId "com.yc.appmonitor"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        applicationId "com.yc.appleet"
-        multiDexEnabled true
     }
 
     buildTypes {
@@ -34,6 +34,4 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':XlogServer')
-    implementation project(path: ':MonitorPhone')
 }

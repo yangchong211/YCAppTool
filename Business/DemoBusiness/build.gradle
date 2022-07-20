@@ -70,7 +70,6 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':CustomWidget')
     implementation project(path: ':PhotoWidget')
-    implementation project(path: ':WidgetViewLib')
     implementation project(path: ':CountTimerLib')
     implementation(rootProject.ext.dependencies["okhttp"])
     implementation(rootProject.ext.dependencies["gson"])

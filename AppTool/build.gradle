@@ -192,7 +192,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["material"])
     implementation project(path: ':CustomWidget')
     implementation project(path: ':CountTimerLib')
-    implementation project(path: ':WidgetViewLib')
     implementation project(path: ':ToolUtilsLib')
     if (!rootProject.ext.isBookApplication){
         implementation project(path: ':GameBusiness')

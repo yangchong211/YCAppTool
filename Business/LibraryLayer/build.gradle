@@ -124,7 +124,6 @@ dependencies {
     implementation project(path: ':BaseClassLib')
     annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 
-    implementation project(path: ':WidgetViewLib')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':WebViewLib')
 
