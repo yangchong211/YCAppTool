@@ -8,8 +8,6 @@ import com.yc.appleet.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.toolutils.AppLogUtils;
 
-import java.util.Arrays;
-
 public class ArrayTestActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tv1;
@@ -104,26 +102,10 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
     private void delete() {
         int[] nums1 = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
         int[] nums2 = {1, 1, 2};
-        removeData(nums1);
-        removeData(nums2);
+        RemoveDuplicates.removeDuplicates(nums1);
+        RemoveDuplicates.removeDuplicates(nums2);
     }
 
-    private int removeData(int[] num) {
-        if (num == null || num.length == 0) {
-            return 0;
-        }
-        int currentV = num[0];
-        int count = 0;
-        for (int i = 1; i < num.length; i++) {
-            if (num[i] != currentV) {
-                count++;
-                currentV = num[i];
-                num[count] = currentV;
-            }
-        }
-        AppLogUtils.d("数据数组数量" + count + "  " + Arrays.toString(num));
-        return count + 1;
-    }
 
     /**
      * 啤酒每罐2.3元，饮料每罐1.9元。小明买了若干啤酒和饮料，一共花了82.3元。
@@ -148,13 +130,6 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
      * 数组中只出现一次的数字
      */
     private void singleNumber(){
-        MyThread myThread = new MyThread();
-        Thread t1 = new Thread(myThread , "张三") ;
-        t1.start();
-        String name = t1.getName();
-        AppLogUtils.d("打印值"+"----"+name);
-
-
 
     }
 
@@ -215,13 +190,6 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
             for(int i=0;i<array.length;i++){
                 array[i]=newArray[i];
             }
-        }
-    }
-
-    private class MyThread implements Runnable{
-        @Override
-        public void run() {
-            AppLogUtils.d("打印值"+"----"+this.toString());
         }
     }
 
