@@ -1,20 +1,16 @@
-plugins {
-    id 'com.android.application'
-}
+apply plugin: 'com.android.library'
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
-        applicationId "com.yc.appmonitor"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        // dex突破65535的限制
         multiDexEnabled true
     }
 
@@ -31,12 +27,9 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
-    implementation(rootProject.ext.dependencies["constraintlayout"])
-    implementation project(path: ':LibraryLayer')
-    implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':RoundCorners')
-    implementation project(path: ':MonitorPhone')
+    implementation(rootProject.ext.dependencies["recyclerview"])
 }
+

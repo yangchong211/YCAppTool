@@ -24,6 +24,7 @@ import com.yc.localelib.utils.LocaleToolUtils;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppInfoUtils;
 import com.yc.toolutils.AppSignUtils;
+import com.yc.toolutils.AppSoLibUtils;
 import com.yc.toolutils.AppTimeUtils;
 import com.yc.toolutils.AppWindowUtils;
 import com.yc.toolutils.StatusBarUtils;
@@ -33,6 +34,7 @@ import com.yc.toolutils.net.AppNetworkUtils;
 
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * <pre>
@@ -52,6 +54,7 @@ public class MonitorPhoneFragment extends Fragment {
     private TextView tvContentLang;
     private TextView tvContentStorage;
     private TextView tvContentMemory;
+    private TextView tvContentSo;
 
     @Override
     public void onAttach(Context context) {
@@ -84,7 +87,7 @@ public class MonitorPhoneFragment extends Fragment {
             onBackPressedDispatcher.addCallback(this,new OnBackPressedCallback(true) {
                 @Override
                 public void handleOnBackPressed() {
-
+                    activity.finish();
                 }
             });
         }
@@ -97,7 +100,7 @@ public class MonitorPhoneFragment extends Fragment {
         tvContentLang = view.findViewById(R.id.tv_content_lang);
         tvContentStorage = view.findViewById(R.id.tv_content_storage);
         tvContentMemory = view.findViewById(R.id.tv_content_memory);
-
+        tvContentSo = view.findViewById(R.id.tv_content_so);
     }
 
     private void initData() {
@@ -115,6 +118,8 @@ public class MonitorPhoneFragment extends Fragment {
         setStorageInfo();
         //获取App和系统内存信息
         setMemoryInfo();
+        //获取app中加载的so库
+        setAppSoInfo();
     }
 
     private void initListData() {
@@ -264,5 +269,12 @@ public class MonitorPhoneFragment extends Fragment {
         tvContentMemory.setText(sb.toString());
     }
 
+    /**
+     * 获取app中加载的so库
+     */
+    private void setAppSoInfo() {
+        String currSoLoaded = AppSoLibUtils.getCurrSoLoaded();
+        tvContentSo.setText(currSoLoaded);
+    }
 
 }

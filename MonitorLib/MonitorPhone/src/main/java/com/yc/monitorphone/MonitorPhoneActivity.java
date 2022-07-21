@@ -1,9 +1,11 @@
 package com.yc.monitorphone;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -11,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.yc.localelib.service.LocaleService;
 import com.yc.toolutils.AppToolUtils;
+import com.yc.toolutils.permission.PermissionUtils;
 
 /**
  * <pre>
@@ -53,4 +56,15 @@ public class MonitorPhoneActivity extends AppCompatActivity {
         }
         LocaleService.getInstance().init(AppToolUtils.getApp());
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!PermissionUtils.isGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ,Manifest.permission.READ_EXTERNAL_STORAGE)){
+            PermissionUtils.permission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ,Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+    }
+
 }

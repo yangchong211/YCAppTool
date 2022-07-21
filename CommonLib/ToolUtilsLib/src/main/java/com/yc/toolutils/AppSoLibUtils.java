@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public final class AppSoLibUtils {
 
-    private static final List<String> ALL_SO_LISTS = new ArrayList<>();
+    private static final HashSet<String> ALL_SO_LISTS = new HashSet<>();
 
     /**
      * 获取全部已加载的SO库
@@ -35,8 +36,8 @@ public final class AppSoLibUtils {
             AppLogUtils.e("DAVIS", "不存在[" + path + "]文件.");
         }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < ALL_SO_LISTS.size(); i++) {
-            sb.append(ALL_SO_LISTS.get(i)).append("\n");
+        for (String next : ALL_SO_LISTS) {
+            sb.append(next).append("\n");
         }
         AppLogUtils.e("DAVIS", sb.toString());
         return sb.toString() + "\n 搜索完毕";
@@ -54,22 +55,22 @@ public final class AppSoLibUtils {
         if (file.exists() && file.isFile()) {
             readFileByLines(file.getAbsolutePath());
         } else {
-            AppLogUtils.e("DAVIS", "不存在[" + path + "]文件.");
+            AppLogUtils.d("DAVIS: "+"不存在[" + path + "]文件.");
         }
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < ALL_SO_LISTS.size(); i++) {
-            if (ALL_SO_LISTS.get(i).startsWith("/data/app/")) {
-                sb.append(ALL_SO_LISTS.get(i)).append("\n");
+        for (String next : ALL_SO_LISTS) {
+            if (next.startsWith("/data/app/")){
+                sb.append(next).append("\n");
             }
         }
-        AppLogUtils.e("DAVIS", sb.toString());
-        return sb.toString() + "\n 搜索完毕";
+        AppLogUtils.d("DAVIS: "+sb.toString());
+        return sb.toString() + "";
     }
 
     /**
      * 以行为单位读取文件，常用于读面向行的格式化文件
      */
-    public static void readFileByLines(String fileName) {
+    private static void readFileByLines(String fileName) {
         File file = new File(fileName);
         BufferedReader reader = null;
         try {
