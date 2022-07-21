@@ -60,6 +60,20 @@ public class MyArray {
         return true;
     }
 
+    public boolean add(int index , int value){
+        if (elems == index){
+            //数据满了
+            return false;
+        }
+        int currentV = intArray[index-1];
+        for (int i=0 ; i<intArray.length ; i++){
+            if (index>=i){
+
+            }
+        }
+        return true;
+    }
+
     /**
      * 根据下标获取元素
      *
@@ -77,7 +91,7 @@ public class MyArray {
 
     /**
      * 查找元素
-     *
+     * 数组中查找元素，时间复杂度是：O(1)，O(n)
      * @param searchValue
      * @return 查找的元素如果存在则返回下标值，如果不存在，返回 -1
      */
