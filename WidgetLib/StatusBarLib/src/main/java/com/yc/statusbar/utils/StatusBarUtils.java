@@ -16,6 +16,7 @@ import androidx.core.view.ViewCompat;
 
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.statusbar.view.StatusBarView;
+import com.yc.toolutils.AppRomUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -127,7 +128,7 @@ public final class StatusBarUtils {
      * @param dark     是否深色 true为深色 false 为白色
      */
     public static void setMeiZu(Activity activity, boolean dark) {
-        if (RomUtils.isFlyme()) {
+        if (AppRomUtils.isFlyme()) {
             StatusBarColorUtils.setStatusBarDarkIcon(activity, dark);
         }
     }

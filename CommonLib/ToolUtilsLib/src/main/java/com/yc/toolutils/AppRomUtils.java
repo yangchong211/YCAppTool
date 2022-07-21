@@ -1,4 +1,4 @@
-package com.yc.statusbar.utils;
+package com.yc.toolutils;
 
 import android.os.Build;
 import android.text.TextUtils;
@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
  *     revise: 参考：https://www.jianshu.com/p/ba9347a5a05a
  * </pre>
  */
-public class RomUtils {
+public final class AppRomUtils {
 
     private static final String TAG = "Rom";
 
@@ -63,7 +63,7 @@ public class RomUtils {
     public static boolean is360() {
         return check(ROM_QIKU) || check("360");
     }
-
+    //锤子
     public static boolean isSmartisan() {
         return check(ROM_SMARTISAN);
     }
