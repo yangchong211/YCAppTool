@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_round"
+        android:layout_margin="20dp"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="文本"
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.yc.roundcorner.view.CircleImageView
+        android:id="@+id/civ_image_view1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/bg_small_solda_min"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_round"/>
+
+    <com.yc.roundcorner.view.CircleImageView
+        android:id="@+id/civ_image_view2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/bg_small_solda_min"
+        app:rStrokeColor="@color/grayText"
+        app:rStrokeWidth="5dp"
+        app:layout_constraintLeft_toRightOf="@+id/civ_image_view1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_round"/>
+
+    <com.yc.roundcorner.view.RoundImageView
+        android:id="@+id/iv_image_view1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/bg_small_solda_min"
+        app:rRadius="8dp"
+        app:rStrokeWidth="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/civ_image_view2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_round"/>
+
+    <com.yc.roundcorner.view.RoundImageView
+        android:id="@+id/iv_image_view2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/bg_small_solda_min"
+        app:rRadius="8dp"
+        app:rStrokeColor="@color/colorAccent"
+        app:rStrokeWidth="5dp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_image_view1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_round"/>
+
+    <com.yc.roundcorner.view.RoundButton
+        android:id="@+id/btn_view1"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        android:text="Hello!"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:rLeftRadius="20dp"
+        app:rRightRadius="30dp"
+        app:rStrokeColor="@android:color/holo_green_dark"
+        app:rStrokeWidth="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_image_view1"/>
+
+    <com.yc.roundcorner.view.RoundButton
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        android:text="Hello!"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:rRadius="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/btn_view1"
+        app:layout_constraintTop_toBottomOf="@+id/iv_image_view1"/>
+
+
+    <com.yc.roundcorner.view.RoundView
+        android:id="@+id/round_view"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/holo_red_dark"
+        app:rBottomLeftRadius="10dp"
+        app:rBottomRightRadius="20dp"
+        app:rTopLeftRadius="10dp"
+        app:rTopRightRadius="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_view1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_view1"/>
+
+    <com.yc.roundcorner.viewgroup.RoundLinearLayout
+       android:id="@+id/rl_round"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:rLeftRadius="20dp"
+        app:rStrokeColor="@android:color/darker_gray"
+        app:rStrokeWidth="1dp"
+        app:layout_constraintLeft_toLeftOf="@+id/round_view"
+        app:layout_constraintTop_toBottomOf="@+id/round_view">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_red_dark" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_blue_dark" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark" />
+    </com.yc.roundcorner.viewgroup.RoundLinearLayout>
+
+    <com.yc.roundcorner.viewgroup.RoundLinearLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical"
+        app:rRadius="20dp"
+        app:layout_constraintLeft_toRightOf="@+id/rl_round"
+        app:layout_constraintTop_toBottomOf="@+id/round_view">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_red_dark" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_blue_dark" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_dark" />
+    </com.yc.roundcorner.viewgroup.RoundLinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
