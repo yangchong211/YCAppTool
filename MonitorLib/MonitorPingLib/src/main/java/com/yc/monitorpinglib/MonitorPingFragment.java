@@ -74,10 +74,40 @@ public class MonitorPingFragment extends Fragment {
         DelegateTaskExecutor.getInstance().executeOnCore(new Runnable() {
             @Override
             public void run() {
-                String host = Uri.parse(url).getHost();
+                //URL Scheme协议格式：
+                //String urlStr = "http://www.orangecpp.com:80/tucao?id=hello&name=lily";
+                //url =           protocol + authority(host + port) + path + query
+                //协议protocol=    http
+                //域名authority=   www.orangecpp.com:80
+                //页面path=        /tucao
+                //参数query=       id=hello&name=lily
+                //authority =      host + port
+                //主机host=        www.orangecpp.com
+                //端口port=        80
+
+                Uri uri = Uri.parse(url);
+                // 完整的url信息
+                String urlStr = uri.toString();
+                String host = uri.getHost();
+                int port = uri.getPort();
+                String scheme = uri.getScheme();
+                String path = uri.getPath();
+                String query = uri.getQuery();
                 StringBuilder sb = new StringBuilder();
-                sb.append("域名ip地址:").append(AppNetworkUtils.getHostIP(host));
+                //获取此URI的解码权限部分。对于服务器地址，权限的结构如下：Examples: "google.com", "bob@google.com:80"
+                String authority = uri.getAuthority();
+                //从权限获取已解码的用户信息。例如，如果权限为“任何人@google.com”，此方法将返回“任何人”。
+                String userInfo = uri.getUserInfo();
+                sb.append("完整的url信息:").append(urlStr);
+                sb.append("\n域名ip地址:").append(AppNetworkUtils.getHostIP(host));
                 sb.append("\n域名host名称:").append(AppNetworkUtils.getHostName(host));
+                sb.append("\n域名port端口号:").append(port);
+                sb.append("\n域名端口号:").append(port);
+                sb.append("\n域名scheme:").append(scheme);
+                sb.append("\n域名path路径:").append(path);
+                sb.append("\n域名Query部分:").append(query);
+                sb.append("\n域名authority解码:").append(authority);
+                sb.append("\n域名用户信息:").append(userInfo);
                 sb.append("\n待完善:").append("获取服务端ip，mac，是ipv4还是ipv6等信息");
                 DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                     @Override

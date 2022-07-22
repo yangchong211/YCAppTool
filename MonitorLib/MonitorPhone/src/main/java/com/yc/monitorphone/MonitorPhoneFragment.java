@@ -1,5 +1,6 @@
 package com.yc.monitorphone;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -144,13 +145,13 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("\n系统版本值:  ").append(AppDeviceUtils.getSDKVersionCode());
         sb.append("\nSd卡剩余控件:  ").append(AppSdFileUtils.getSDCardSpace(application));
         sb.append("\n系统剩余控件:  ").append(AppMemoryUtils.getRomSpace(application));
-        sb.append("\n手机分辨率:  ").append(AppWindowUtils.getRealScreenHeight(getActivity()))
-                .append("x").append(AppWindowUtils.getRealScreenWidth(getActivity()));
-        sb.append("\n屏幕尺寸:  ").append(AppWindowUtils.getScreenInch(getActivity()));
+        sb.append("\n手机分辨率:  ").append(AppWindowUtils.getRealScreenHeight(activity))
+                .append("x").append(AppWindowUtils.getRealScreenWidth(activity));
+        sb.append("\n屏幕尺寸:  ").append(AppWindowUtils.getScreenInch(activity));
         sb.append("\n屏幕密度:  ").append(AppWindowUtils.getScreenDensity());
         sb.append("\n屏幕密度DPI:  ").append(AppWindowUtils.getScreenDensityDpi());
-        sb.append("\n状态栏高度:  ").append(StatusBarUtils.getStatusBarHeight(getActivity())).append("px");
-        sb.append("\n导航栏高度:  ").append(StatusBarUtils.getNavigationBarHeight(getActivity())).append("px");
+        sb.append("\n状态栏高度:  ").append(StatusBarUtils.getStatusBarHeight(activity)).append("px");
+        sb.append("\n导航栏高度:  ").append(StatusBarUtils.getNavigationBarHeight(activity)).append("px");
         sb.append("\nAndroidID:  ").append(AppDeviceUtils.getAndroidID(application));
         tvPhoneContent.setText(sb.toString());
         tvPhoneContent.setOnClickListener(new View.OnClickListener() {
@@ -272,9 +273,14 @@ public class MonitorPhoneFragment extends Fragment {
     /**
      * 获取app中加载的so库
      */
+    @SuppressLint("SetTextI18n")
     private void setAppSoInfo() {
         String currSoLoaded = AppSoLibUtils.getCurrSoLoaded();
-        tvContentSo.setText(currSoLoaded);
+        if (currSoLoaded.length() == 0){
+            tvContentSo.setText("本App暂无so库");
+        } else {
+            tvContentSo.setText(currSoLoaded);
+        }
     }
 
 }
