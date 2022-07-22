@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
 }
+apply plugin: 'kotlin-android'
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 
@@ -40,5 +41,8 @@ dependencies {
     implementation project(path: ':RoundCorners')
     implementation project(path: ':MonitorPhone')
     implementation project(path: ':MonitorPingLib')
+    implementation project(path: ':AppLogHelper')
+    implementation project(path: ':AppLogProcess')
+    implementation project(path: ':MonitorFileLib')
 }
 

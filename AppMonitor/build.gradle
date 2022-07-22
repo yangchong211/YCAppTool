@@ -40,4 +40,5 @@ dependencies {
     implementation project(path: ':RoundCorners')
     implementation project(path: ':MonitorPhone')
     implementation project(path: ':MonitorPingLib')
+    implementation project(path: ':MonitorFileLib')
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;
 import com.yc.roundcorner.view.RoundTextView;
@@ -15,6 +16,7 @@ public class MonitorMainActivity extends BaseActivity {
 
     private RoundTextView tvPhoneMonitor;
     private RoundTextView tvPingMonitor;
+    private RoundTextView tvFileMonitor;
 
     @Override
     public int getContentView() {
@@ -25,6 +27,7 @@ public class MonitorMainActivity extends BaseActivity {
     public void initView() {
         tvPhoneMonitor = findViewById(R.id.tv_phone_monitor);
         tvPingMonitor = findViewById(R.id.tv_ping_monitor);
+        tvFileMonitor = findViewById(R.id.tv_file_monitor);
     }
 
     @Override
@@ -40,6 +43,12 @@ public class MonitorMainActivity extends BaseActivity {
             protected void onNoDoubleClick(View v) {
                 MonitorPingActivity.startActivity(MonitorMainActivity.this
                         ,"https://www.wanandroid.com/banner/json");
+            }
+        });
+        tvFileMonitor.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                FileExplorerActivity.startActivity(MonitorMainActivity.this);
             }
         });
     }

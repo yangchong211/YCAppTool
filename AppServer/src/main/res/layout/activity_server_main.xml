@@ -13,7 +13,7 @@
         android:padding="20dp">
 
         <com.yc.roundcorner.view.RoundTextView
-            android:id="@+id/tv_log_server"
+            android:id="@+id/tv_log_server1"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="left|center_vertical"
@@ -27,18 +27,18 @@
 
 
         <com.yc.roundcorner.view.RoundTextView
-            android:id="@+id/tv_ping_monitor"
+            android:id="@+id/tv_log_server"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="left|center_vertical"
             android:paddingLeft="@dimen/dp20"
-            android:text="2.使用Ping检测网络接口"
+            android:text="2.log日志调试案例"
             android:textSize="@dimen/textSize18"
             android:background="@color/priority_green"
             android:layout_marginTop="@dimen/dp20"
             app:rRadius="@dimen/dp20"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_phone_monitor"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_log_server1"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
