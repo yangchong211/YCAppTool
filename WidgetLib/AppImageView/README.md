@@ -22,8 +22,6 @@
     - 第二步：相当于使用super.onDraw绘制自己，这一步调用super方法即可
     - 第三步：设置画笔Paint属性，先调用setXfermode设置混合模式，然后在调用canvas.drawPath(path, paint)绘制path，最后再清除Xfermode
     - 第四步：添加边框，只需要绘制一个指定样式的圆角矩形或者圆形即可。比如绘制圆角，调用Path.addRoundRect添加path，然后调用canvas.drawPath绘制path
-- Glide加载圆角的核心原理
-
 
 
 ### 02.常见思路和做法

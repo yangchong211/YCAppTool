@@ -130,9 +130,7 @@ public class YCRedDotView extends AppCompatTextView {
         RoundRectShape roundRect = new RoundRectShape(radiusArray, null, null);
         ShapeDrawable bgDrawable = new ShapeDrawable(roundRect);
         bgDrawable.getPaint().setColor(badgeColor);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            setBackground(bgDrawable);
-        }
+        setBackground(bgDrawable);
     }
 
     public void setHideNull(boolean hideOnNull) {

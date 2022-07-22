@@ -49,12 +49,6 @@ public class DrawableTextActivity extends AppCompatActivity {
         tvDrawable3 = findViewById(R.id.tv_drawable_3);
         tvDrawable4 = findViewById(R.id.tv_drawable_4);
 
-        tvDrawable1.setDrawableClickListener(DrawableTextView.LEFT, new DrawableTextView.DrawableClickListener() {
-            @Override
-            public void onDrawableClick(View view) {
-                ToastUtils.showRoundRectToast("点击图标");
-            }
-        });
         tvDrawable1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,12 +56,6 @@ public class DrawableTextActivity extends AppCompatActivity {
             }
         });
 
-        tvDrawable2.setDrawableClickListener(DrawableTextView.RIGHT, new DrawableTextView.DrawableClickListener() {
-            @Override
-            public void onDrawableClick(View view) {
-                ToastUtils.showRoundRectToast("点击图标");
-            }
-        });
         tvDrawable2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,12 +70,6 @@ public class DrawableTextActivity extends AppCompatActivity {
         drawableTextView.setDrawable(DrawableTextView.RIGHT,
                 ContextCompat.getDrawable(this, R.mipmap.camera), 50, 50);
         drawableTextView.setText("帖子");
-        drawableTextView.setDrawableClickListener(DrawableTextView.RIGHT,new DrawableTextView.DrawableClickListener() {
-            @Override
-            public void onDrawableClick(View view) {
-
-            }
-        });
         parent.addView(drawableTextView);
     }
 }
