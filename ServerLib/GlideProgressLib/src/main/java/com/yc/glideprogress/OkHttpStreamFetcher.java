@@ -1,4 +1,4 @@
-package com.yc.imageserver.progress;
+package com.yc.glideprogress;
 
 import android.os.Build;
 import androidx.annotation.NonNull;

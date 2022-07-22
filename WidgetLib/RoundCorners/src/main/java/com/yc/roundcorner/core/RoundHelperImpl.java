@@ -70,7 +70,11 @@ public class RoundHelperImpl implements RoundHelper {
         mOriginRectF = new RectF();
         mPath = new Path();
         mTempPath = new Path();
-        mXfermode = new PorterDuffXfermode(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PorterDuff.Mode.DST_OUT : PorterDuff.Mode.DST_IN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            mXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
+        } else {
+            mXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
+        }
         mStrokeColor = Color.WHITE;
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RoundCorner);
@@ -127,7 +131,10 @@ public class RoundHelperImpl implements RoundHelper {
 
     @Override
     public void preDraw(Canvas canvas) {
-        canvas.saveLayer(isNewLayer && Build.VERSION.SDK_INT > Build.VERSION_CODES.P ? mOriginRectF : mRectF, null, Canvas.ALL_SAVE_FLAG);
+        // 使用图形混合模式来显示指定区域的图片
+        // 使用离屏缓存，新建一个srcRectF区域大小的图层
+        canvas.saveLayer(isNewLayer && Build.VERSION.SDK_INT > Build.VERSION_CODES.P
+                ? mOriginRectF : mRectF, null, Canvas.ALL_SAVE_FLAG);
     }
 
     @Override
@@ -136,7 +143,9 @@ public class RoundHelperImpl implements RoundHelper {
         mPath.reset();
 
         mPaint.setAntiAlias(true);
+        // 画笔为填充模式
         mPaint.setStyle(Paint.Style.FILL);
+        // 设置混合模式
         mPaint.setXfermode(mXfermode);
 
         mPath.addRoundRect(mRectF, mRadii, Path.Direction.CCW);
@@ -148,7 +157,9 @@ public class RoundHelperImpl implements RoundHelper {
         } else {
             canvas.drawPath(mPath, mPaint);
         }
+        // 清除Xfermode
         mPaint.setXfermode(null);
+        // 恢复画布状态
         canvas.restore();
 
         // draw stroke

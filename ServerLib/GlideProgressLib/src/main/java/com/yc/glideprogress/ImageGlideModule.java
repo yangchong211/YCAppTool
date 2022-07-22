@@ -1,4 +1,4 @@
-package com.yc.imageserver.progress;
+package com.yc.glideprogress;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
@@ -9,12 +9,12 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
-import com.yc.imageserver.utils.GlideSaveUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppToolUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.InputStream;
 
 import okhttp3.OkHttpClient;
@@ -83,8 +83,13 @@ public class ImageGlideModule extends AppGlideModule {
         super.applyOptions(context, builder);
         AppLogUtils.d("加载图片进度值------applyOptions--");
         //路径：
-        builder.setDiskCache(new DiskLruCacheFactory(GlideSaveUtils.getLocalFileSavePathDir(
-                AppToolUtils.getApp(),"GlideDisk",null), GLIDE_CATCH_SIZE ));
+        File cacheDir = context.getCacheDir();
+        StringBuilder sb = new StringBuilder();
+        sb.append(cacheDir.getPath());
+        sb.append(File.separator);
+        sb.append("GlideDisk");
+        AppLogUtils.d("加载图片进度值------file--"+sb.toString());
+        builder.setDiskCache(new DiskLruCacheFactory(sb.toString(), GLIDE_CATCH_SIZE ));
     }
 
     /**

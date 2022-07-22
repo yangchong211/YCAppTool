@@ -1,4 +1,4 @@
-package com.yc.imageserver.progress;
+package com.yc.glideprogress;
 
 import androidx.annotation.Nullable;
 import android.util.Log;

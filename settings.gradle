@@ -43,7 +43,8 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
-        ':AppLogHelper', ':AppLogProcess', ':NetInterceptor', ':SignalHooker'
+        ':AppLogHelper', ':AppLogProcess', ':NetInterceptor', ':SignalHooker',
+        ':GlideProgressLib'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -60,6 +61,9 @@ project(':OkHttpServer').projectDir = new File('ServerLib/OkHttpServer')
 project(':PrivateServer').projectDir = new File('ServerLib/PrivateServer')
 project(':NetInterceptor').projectDir = new File('ServerLib/NetInterceptor')
 project(':SignalHooker').projectDir = new File('ServerLib/SignalHooker')
+project(':GlideProgressLib').projectDir = new File('ServerLib/GlideProgressLib')
+
+
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
@@ -234,5 +238,6 @@ project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 
 
 include ':MonitorAppLib'
+
 
 

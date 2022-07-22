@@ -10,16 +10,25 @@ import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     time  : 2018/11/9
+ *     desc  : canvas.clipPath 实现圆角
+ *     revise:
+ * </pre>
+ */
+@Deprecated
 public class RoundCornerImageView extends AppCompatImageView {
 
     private float width, height;
-    private int defaultRadius = 0;
-    private int radius;
     private int leftTopRadius;
     private int rightTopRadius;
     private int rightBottomRadius;
     private int leftBottomRadius;
-
+    private final Path path = new Path();
 
     public RoundCornerImageView(Context context) {
         this(context, null);
@@ -42,7 +51,8 @@ public class RoundCornerImageView extends AppCompatImageView {
         }
         // 读取配置
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RoundCornerImageView);
-        radius = array.getDimensionPixelOffset(R.styleable.RoundCornerImageView_radius, defaultRadius);
+        int defaultRadius = 0;
+        int radius = array.getDimensionPixelOffset(R.styleable.RoundCornerImageView_radius, defaultRadius);
         leftTopRadius = array.getDimensionPixelOffset(R.styleable.RoundCornerImageView_left_top_radius, defaultRadius);
         rightTopRadius = array.getDimensionPixelOffset(R.styleable.RoundCornerImageView_right_top_radius, defaultRadius);
         rightBottomRadius = array.getDimensionPixelOffset(R.styleable.RoundCornerImageView_right_bottom_radius, defaultRadius);
@@ -64,7 +74,6 @@ public class RoundCornerImageView extends AppCompatImageView {
         array.recycle();
     }
 
-
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
@@ -72,9 +81,16 @@ public class RoundCornerImageView extends AppCompatImageView {
         height = getHeight();
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
+        canvas.save();
+        clipPath(canvas,path);
+        super.onDraw(canvas);
+        // 恢复画布状态
+        canvas.restore();
+    }
+
+    private void clipPath(Canvas canvas, Path path) {
         //这里做下判断，只有图片的宽高大于设置的圆角距离的时候才进行裁剪
         int maxLeft = Math.max(leftTopRadius, leftBottomRadius);
         int maxRight = Math.max(rightTopRadius, rightBottomRadius);
@@ -83,7 +99,6 @@ public class RoundCornerImageView extends AppCompatImageView {
         int maxBottom = Math.max(leftBottomRadius, rightBottomRadius);
         int minHeight = maxTop + maxBottom;
         if (width >= minWidth && height > minHeight) {
-            Path path = new Path();
             //四个角：右上，右下，左下，左上
             path.moveTo(leftTopRadius, 0);
             path.lineTo(width - rightTopRadius, 0);
@@ -101,7 +116,6 @@ public class RoundCornerImageView extends AppCompatImageView {
             //将当前剪辑与指定路径相交
             canvas.clipPath(path);
         }
-        super.onDraw(canvas);
     }
 
 }

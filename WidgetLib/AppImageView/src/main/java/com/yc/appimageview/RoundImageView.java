@@ -71,10 +71,32 @@ public class RoundImageView extends AppCompatImageView {
 
     public RoundImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         this.context = context;
+        initAttr(context,attrs);
 
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.RoundImageView, 0, 0);
+        borderRadii = new float[8];
+        srcRadii = new float[8];
+        borderRectF = new RectF();
+        srcRectF = new RectF();
+        paint = new Paint();
+        path = new Path();
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O_MR1) {
+            xfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
+        } else {
+            xfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
+            srcPath = new Path();
+        }
+
+        //计算RectF的圆角半径
+        calculateRadii();
+        //目前圆角矩形情况下不支持inner_border，需要将其置0
+        clearInnerBorderWidth();
+    }
+
+    private void initAttr(Context context, AttributeSet attrs) {
+        TypedArray ta = context.obtainStyledAttributes(attrs,
+                R.styleable.RoundImageView, 0, 0);
         for (int i = 0; i < ta.getIndexCount(); i++) {
             int attr = ta.getIndex(i);
             if (attr == R.styleable.RoundImageView_is_cover_src) {
@@ -104,25 +126,6 @@ public class RoundImageView extends AppCompatImageView {
             }
         }
         ta.recycle();
-
-        borderRadii = new float[8];
-        srcRadii = new float[8];
-
-        borderRectF = new RectF();
-        srcRectF = new RectF();
-
-        paint = new Paint();
-        path = new Path();
-
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O_MR1) {
-            xfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
-        } else {
-            xfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
-            srcPath = new Path();
-        }
-
-        calculateRadii();
-        clearInnerBorderWidth();
     }
 
     @Override
@@ -138,16 +141,22 @@ public class RoundImageView extends AppCompatImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         // 使用图形混合模式来显示指定区域的图片
+        // 使用离屏缓存，新建一个srcRectF区域大小的图层
         canvas.saveLayer(srcRectF, null, Canvas.ALL_SAVE_FLAG);
         if (!isCoverSrc) {
+            //绘制的边框会覆盖在图片上，如果边框太宽会导致图片的可见区域变小。
+            //如何让边框不覆盖在图片上呢？可以在 Alpha 合成绘制前先将画布缩小一定比例，最后再绘制边框，这样问题就解决。
             float sx = 1.0f * (width - 2 * borderWidth - 2 * innerBorderWidth) / width;
             float sy = 1.0f * (height - 2 * borderWidth - 2 * innerBorderWidth) / height;
             // 缩小画布，使图片内容不被borders覆盖
             canvas.scale(sx, sy, width / 2.0f, height / 2.0f);
         }
+        //绘制自己
         super.onDraw(canvas);
+
         paint.reset();
         path.reset();
+        //绘制，给path添加一个圆角矩形或者圆形
         if (isCircle) {
             path.addCircle(width / 2.0f, height / 2.0f, radius, Path.Direction.CCW);
         } else {
@@ -155,7 +164,9 @@ public class RoundImageView extends AppCompatImageView {
         }
 
         paint.setAntiAlias(true);
+        // 画笔为填充模式
         paint.setStyle(Paint.Style.FILL);
+        // 设置混合模式
         paint.setXfermode(xfermode);
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O_MR1) {
             canvas.drawPath(path, paint);
@@ -165,10 +176,12 @@ public class RoundImageView extends AppCompatImageView {
             srcPath.op(path, Path.Op.DIFFERENCE);
             canvas.drawPath(srcPath, paint);
         }
+        // 清除Xfermode
         paint.setXfermode(null);
 
         // 绘制遮罩
         if (maskColor != 0) {
+            //遮罩可以理解为一层带透明度的颜色，遮罩默认不绘制，当制定了遮罩颜色时才会绘制
             paint.setColor(maskColor);
             canvas.drawPath(path, paint);
         }

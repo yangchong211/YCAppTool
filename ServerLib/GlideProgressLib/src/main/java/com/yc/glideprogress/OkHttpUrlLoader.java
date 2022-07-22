@@ -1,4 +1,4 @@
-package com.yc.imageserver.progress;
+package com.yc.glideprogress;
 
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.model.GlideUrl;

@@ -46,25 +46,6 @@
 
 
 ### 03.Api调用说明
-- 具有特点
-    - LinearLayout、RelativeLayout、FrameLayout、ConstraintLayout支持圆角
-    - ImageView、TextView、View、Button支持圆角
-    - CircleImageView（圆形图片）
-    - 支持边框
-    - 可正常设置ripple（波纹不会突破边框）
-    - 使用 xml 或者 代码 进行配置，使用简单
-- api调用如下所示，直接拿来用即可
-    - 针对ViewGroup类型：RoundLinearLayout；RoundFrameLayout；RoundConstraintLayout；RoundLinearLayout
-    - 针对View类型：RoundView；RoundTextView；RoundImageView；RoundButton；CircleImageView
-    ``` java
-    <com.yc.roundcorner.view.RoundTextView
-        app:rRadius="10dp"/>
-    
-    <com.yc.roundcorner.viewgroup.RoundLinearLayout
-        app:rRadius="20dp">
-    
-    </com.yc.roundcorner.viewgroup.RoundLinearLayout>
-    ```
 
 
 
