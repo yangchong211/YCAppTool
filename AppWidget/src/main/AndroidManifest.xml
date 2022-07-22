@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RoundCornersActivity"/>
+        <activity android:name=".ImageViewActivity"/>
     </application>
 
 

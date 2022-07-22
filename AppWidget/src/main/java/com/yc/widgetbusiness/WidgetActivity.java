@@ -14,6 +14,7 @@ import com.yc.toolutils.click.PerfectClickListener;
 public class WidgetActivity extends BaseActivity {
 
     private RoundTextView tvWidgetRound;
+    private RoundTextView tvWidgetImage;
 
     @Override
     public int getContentView() {
@@ -23,6 +24,7 @@ public class WidgetActivity extends BaseActivity {
     @Override
     public void initView() {
         tvWidgetRound = findViewById(R.id.tv_widget_round);
+        tvWidgetImage = findViewById(R.id.tv_widget_image);
     }
 
     @Override
@@ -31,6 +33,12 @@ public class WidgetActivity extends BaseActivity {
             @Override
             protected void onNoDoubleClick(View v) {
                 RoundCornersActivity.startActivity(WidgetActivity.this);
+            }
+        });
+        tvWidgetImage.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                ImageViewActivity.startActivity(WidgetActivity.this);
             }
         });
     }

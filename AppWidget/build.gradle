@@ -40,5 +40,6 @@ dependencies {
     implementation project(path: ':AppTextView')
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':RoundCorners')
+    implementation project(path: ':AppImageView')
 }
 
