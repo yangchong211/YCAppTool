@@ -256,7 +256,7 @@ dependencies {
     implementation project(path: ':AppLogProcess')
     implementation project(path: ':MonitorTimeLib')
     implementation project(path: ':NtpTimeLib')
-    implementation project(path: ':WidgetBusiness')
+    implementation project(path: ':AppWidget')
     implementation project(path: ':MonitorPhone')
     implementation project(path: ':MonitorPingLib')
 //    implementation project(path: ':MonitorPrivacy')

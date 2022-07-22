@@ -18,7 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.yc.statusbar.dlBar.DlStatusBar;
-import com.yc.statusbar.utils.RomUtils;
+import com.yc.toolutils.AppRomUtils;
 
 import cn.ycbjie.ycstatusbar.R;
 
@@ -70,12 +70,12 @@ public class BarActivity extends AppCompatActivity implements View.OnClickListen
         initBar();
         initNav();
 
-        boolean flyme = RomUtils.isFlyme();
+        boolean flyme = AppRomUtils.isFlyme();
         System.out.println("是否是魅族"+flyme);
-        boolean emui = RomUtils.isEmui();
+        boolean emui = AppRomUtils.isEmui();
         System.out.println("是否是华为"+flyme);
-        String name = RomUtils.getName();
-        String version = RomUtils.getVersion();
+        String name = AppRomUtils.getName();
+        String version = AppRomUtils.getVersion();
         System.out.println("是否是"+name+"----"+version);
     }
 

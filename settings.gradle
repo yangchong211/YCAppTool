@@ -1,11 +1,13 @@
 /* +++++++++ 主项目 +++++++++ */
-include ':AppTool'
+include ':AppHelper'
 include ':AidlService'
 include ':AidlClient'
 include ':AppPlayer'
 include ':AppLeet'
 include ':AppDesign'
 include ':AppMonitor'
+include ':AppWidget'
+include ':AppServer'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
@@ -14,7 +16,7 @@ include ':GameBusiness', ':AnimBusiness',':MvvmDatabinding',
         ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',':CommonBusiness',
         ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
         ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness', ':PlayerBusiness',
-        ':SocketBusiness',':WidgetBusiness',':LibraryLayer'
+        ':SocketBusiness',':LibraryLayer'
 project(':GameBusiness').projectDir = new File('Business/GameBusiness')
 project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -34,7 +36,6 @@ project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')
 project(':KotlinBusiness').projectDir = new File('Business/KotlinBusiness')
 project(':PlayerBusiness').projectDir = new File('Business/PlayerBusiness')
 project(':SocketBusiness').projectDir = new File('Business/SocketBusiness')
-project(':WidgetBusiness').projectDir = new File('Business/WidgetBusiness')
 project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 
 
@@ -233,6 +234,5 @@ project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 
 
 include ':MonitorAppLib'
-
 
 
