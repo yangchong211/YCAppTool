@@ -4,13 +4,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.v7.widget.AppCompatTextView;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
 
-import com.yc.supertextlib.R;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,8 @@ public class AligningTextView extends AppCompatTextView {
 
     // 尾行对齐方式
     public enum Align {
-        ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT  // 居中，居左，居右,针对段落最后一行
+        ALIGN_LEFT, ALIGN_CENTER, ALIGN_RIGHT
+        // 居中，居左，居右,针对段落最后一行
     }
 
     public AligningTextView(Context context) {

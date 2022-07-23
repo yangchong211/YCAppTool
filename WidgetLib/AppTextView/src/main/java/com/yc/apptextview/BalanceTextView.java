@@ -2,8 +2,6 @@ package com.yc.apptextview;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatTextView;
 import android.text.Layout;
 import android.text.Spanned;
 import android.text.StaticLayout;
@@ -12,6 +10,9 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
