@@ -17,4 +17,20 @@
         <attr name="topDrawableHeight" format="reference|dimension"/>
         <attr name="bottomDrawableHeight" format="reference|dimension"/>
     </declare-styleable>
+
+
+
+    <declare-styleable name="AlignTextView">
+        <attr name="alignOnlyOneLine" format="boolean"/>
+    </declare-styleable>
+
+    <!-- 末行对齐方式 -->
+    <declare-styleable name="AligningTextView">
+        <attr name="align" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+    </declare-styleable>
+
 </resources>
