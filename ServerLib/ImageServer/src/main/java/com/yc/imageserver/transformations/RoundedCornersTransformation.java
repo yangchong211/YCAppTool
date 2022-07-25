@@ -65,7 +65,14 @@ public class RoundedCornersTransformation extends BitmapTransformation {
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setShader(new BitmapShader(toTransform, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+        //Bitmap:构造shader使用的bitmap
+        //tileX：X轴方向的TileMode，
+        //tileY:Y轴方向的TileMode。
+        //BitmapShader总是从左上角开始绘制，利用Canvas绘制特定形状，可以获得特定形状的图形，类似圆形，椭圆，矩形等。
+        //Shader.TileMode类型的参数包括CLAMP、MIRROR和REPEAT3个可选值
+        //其中，CLAMP为使用边界颜色来填充剩余的空间；MIRROR为采用镜像方式；REPEAT为采用重复方式
+        BitmapShader bitmapShader = new BitmapShader(toTransform, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        paint.setShader(bitmapShader);
         drawRoundRect(canvas, paint, width, height);
         return bitmap;
     }

@@ -7,6 +7,7 @@
 - 05.图片圆角性能
 
 
+
 ### 01.基础概念介绍
 - 业务背景介绍
     - 在显示图片是有时候需要显示圆角图片，我们应该都知道圆角显示肯定是更加耗费内存和性能，会导致图片的过度绘制等问题。
@@ -61,7 +62,7 @@
 - 方案2：系统提供的CardView设置圆角
     - 把原来全工程各个视频控件和图片控件的外层，都加上一层CardView。改造成本大，布局层级更深一层，layout时间加长。
 - 方案3：使用setXfermode法
-    - 此种方式就是再new一个相同尺寸的bitmap，然后使用paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN))；先画圆角矩形，再画原始bitmap，然后就得到了一个圆角的bitmap。早期用得较多，占用bitmap双倍内存。
+    - 此种方式就是再new一个相同尺寸的bitmap，然后使用paint.setXfermode；先画圆角矩形，再画原始bitmap，然后就得到了一个圆角的bitmap。早期用得较多，占用bitmap双倍内存。
 - 方案4：图片加载库比如Glide，Fresco等
     - 在底层，无非也是使用上面的这两种种方式。早期的使用setXfermode来实现，后来使用BitmapShader实现。使用简单，稳定。
 - 方案5：遮罩
