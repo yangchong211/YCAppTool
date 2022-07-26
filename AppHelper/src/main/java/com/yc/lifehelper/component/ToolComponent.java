@@ -16,7 +16,6 @@ import com.yc.lifehelper.R;
 import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.other.ui.activity.NtpTimeActivity;
 import com.yc.toolutils.click.FastClickUtils;
-import com.yc.widgetbusiness.DrawableTextActivity;
 import com.yc.ycnotification.NotifyHomeActivity;
 import com.yc.ycstatusbar.BarActivity;
 import com.yc.ycthreadpool.ThreadMainActivity;

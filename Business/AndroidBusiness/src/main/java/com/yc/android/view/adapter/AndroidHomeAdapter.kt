@@ -14,7 +14,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import com.yc.customwidget.spannable.RoundBackgroundSpan
+import com.yc.customwidget.RoundBackgroundSpan
 import com.yc.toolutils.AppToolUtils
 import com.yc.android.R
 import com.yc.android.model.bean.HomeData
@@ -78,11 +78,12 @@ class AndroidHomeAdapter : RecyclerArrayAdapter<HomeData>{
 
                 // 杨充
                 val exclusiveSpannable = RoundBackgroundSpan(
-                        Color.parseColor("#f25057"),
-                        Color.parseColor("#f25057"),
-                        Color.parseColor("#ffffff"),
+                    Color.parseColor("#f25057"),
+                    Color.parseColor("#f25057"),
+                    Color.parseColor("#ffffff"),
                     AppToolUtils.getApp().resources.getDimensionPixelOffset(R.dimen.dp1),
-                    AppToolUtils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4))
+                    AppToolUtils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4)
+                )
                 spannable(titleSpannable, exclusiveSpannable, 0, text1.length)
 
                 // text2 不等于空 在绘制text
@@ -90,9 +91,11 @@ class AndroidHomeAdapter : RecyclerArrayAdapter<HomeData>{
                     val bgColor = Color.parseColor("#ffffff")
                     val borderColor = Color.parseColor("#ff3d51")
                     val textColor = Color.parseColor("#f25057")
-                    val spannable = RoundBackgroundSpan(bgColor, borderColor, textColor,
+                    val spannable = RoundBackgroundSpan(
+                        bgColor, borderColor, textColor,
                         AppToolUtils.getApp().resources.getDimensionPixelOffset(R.dimen.dp1),
-                        AppToolUtils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4))
+                        AppToolUtils.getApp().resources.getDimensionPixelOffset(R.dimen.dp4)
+                    )
                     spannable(titleSpannable, spannable, 2, 2 + text2.length)
                 }
                 tvContent.text = titleSpannable

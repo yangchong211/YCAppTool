@@ -68,6 +68,7 @@ dependencies {
     implementation project(path: ':HttpServer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':LibraryLayer')
+    implementation project(path: ':AppEditText')
     implementation project(path: ':CustomWidget')
     implementation project(path: ':PhotoWidget')
     implementation project(path: ':CountTimerLib')

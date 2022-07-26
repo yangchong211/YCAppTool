@@ -1,4 +1,4 @@
-package com.yc.customwidget.spannable;
+package com.yc.customwidget;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

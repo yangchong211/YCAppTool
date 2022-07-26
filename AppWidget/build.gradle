@@ -41,5 +41,7 @@ dependencies {
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':RoundCorners')
     implementation project(path: ':AppImageView')
+    implementation project(path: ':AppScrollView')
+    implementation project(path: ':CustomWidget')
 }
 

@@ -1,4 +1,4 @@
-package com.yc.customwidget;
+package com.yc.appedittext;
 
 
 import android.content.Context;
@@ -17,8 +17,6 @@ public class MultiEditInputView extends LinearLayout {
     private Context mContext;
     private EditText id_et_input;
     private TextView id_tv_input;
-    private static final int DEFAULT_MAX_COUNT = 240;
-    private static final int DEFAULT_CONTENT_HEIGHT = 140;
     private int MAX_COUNT;
     private String hintText;
     private boolean ignoreCnOrEn;

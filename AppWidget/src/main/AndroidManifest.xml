@@ -16,8 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RoundCornersActivity"/>
-        <activity android:name=".ImageViewActivity"/>
+        <activity android:name=".round.RoundCornersActivity"/>
+        <activity android:name=".image.ImageViewActivity"/>
+        <activity android:name=".textview.MixtureTextViewActivity"/>
     </application>
 
 

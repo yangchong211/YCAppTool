@@ -1,9 +1,8 @@
-package com.yc.customwidget.spannable;
+package com.yc.customwidget;
 
 
 import android.content.Context;
 import android.graphics.Color;
-import androidx.core.content.ContextCompat;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 

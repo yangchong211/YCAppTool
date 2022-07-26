@@ -12,7 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import com.yc.customwidget.MultiEditInputView;
 import com.yc.library.base.config.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;

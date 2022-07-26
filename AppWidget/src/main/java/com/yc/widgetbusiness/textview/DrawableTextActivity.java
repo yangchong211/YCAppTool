@@ -1,4 +1,4 @@
-package com.yc.widgetbusiness;
+package com.yc.widgetbusiness.textview;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 
 import com.yc.apptextview.DrawableTextView;
 import com.yc.toastutils.ToastUtils;
+import com.yc.widgetbusiness.R;
 
 public class DrawableTextActivity extends AppCompatActivity {
 

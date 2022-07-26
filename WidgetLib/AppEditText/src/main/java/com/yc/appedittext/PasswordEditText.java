@@ -1,4 +1,4 @@
-package com.yc.customwidget;
+package com.yc.appedittext;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -206,10 +206,12 @@ public class PasswordEditText extends AppCompatEditText {
         }
 
         public static final Creator<PwdSavedState> CREATOR = new Creator<PwdSavedState>() {
+            @Override
             public PwdSavedState createFromParcel(Parcel in) {
                 return new PwdSavedState(in);
             }
 
+            @Override
             public PwdSavedState[] newArray(int size) {
                 return new PwdSavedState[size];
             }

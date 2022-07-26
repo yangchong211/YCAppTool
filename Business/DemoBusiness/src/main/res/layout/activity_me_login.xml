@@ -31,7 +31,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <com.yc.customwidget.PasswordEditText
+            <com.yc.appedittext.PasswordEditText
                 android:id="@+id/tv_person_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

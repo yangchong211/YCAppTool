@@ -13,7 +13,7 @@
         <activity android:name="com.yc.other.ui.activity.ProgressSecondActivity"/>
         <activity android:name="com.yc.other.ui.activity.ProgressThirdActivity"/>
         <activity android:name="com.yc.other.ui.activity.ScrollActivity"/>
-        <activity android:name="com.yc.other.ui.activity.MixtureTextViewActivity"/>
+        <activity android:name="com.yc.other.com.yc.widgetbusiness.textview.MixtureTextViewActivity"/>
         <activity android:name="com.yc.other.ui.activity.CloneAbleActivity"/>
         <activity android:name="com.yc.other.ui.timer.TimerActivity"/>
         <activity android:name="com.yc.other.ui.timer.TimerMainActivity"/>

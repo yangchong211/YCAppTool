@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">AppWidget</string>
     <string name="camera">相机</string>
     <string name="camera_full_screen">相机(宽度满屏)</string>
     <string name="hint_attribute_test">hint属性测试</string>
