@@ -47,7 +47,7 @@ class PreActivity : AppCompatActivity() {
             PieFlagData(
                 "JetPack",
                 0.40.toFloat(),
-                "#F83130"
+                "#9187FE"
             )
         )
         pieDataList.add(

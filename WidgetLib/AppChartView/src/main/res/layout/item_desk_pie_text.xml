@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/tv_desk_pie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="坐姿侧弯"
+        android:textSize="@dimen/text_size_10sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_desk_pie_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="70次"
+        android:textSize="@dimen/text_size_19sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tv_desk_pie_title"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_desk_pie_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:text="/"
+        android:textSize="@dimen/text_size_12sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_desk_pie_percent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_desk_pie_percent"/>
+
+    <TextView
+        android:id="@+id/tv_desk_pie_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:text="50次"
+        android:textSize="@dimen/text_size_19sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/tv_desk_pie_title"
+        app:layout_constraintLeft_toRightOf="@+id/tv_desk_pie_line"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

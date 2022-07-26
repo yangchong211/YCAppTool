@@ -5,15 +5,12 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-
-import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -36,11 +33,6 @@ public class PieChartView extends View {
      * 矩形边长
      */
     private final float mBorderLength;
-
-    /**
-     * 高
-     */
-    private int mHeight;
     private List<PieFlagData> mData;
     /**
      * 最大半径
@@ -95,13 +87,11 @@ public class PieChartView extends View {
         //宽
         int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
         int mWidth = resolveSize(screenWidth, widthMeasureSpec);
-        mHeight = resolveSize(screenWidth / 2, heightMeasureSpec);
+        int mHeight = resolveSize(screenWidth / 2, heightMeasureSpec);
         setMeasuredDimension(mWidth, mHeight);
-
         //最大半径
         int topAndBottom = getPaddingTop() + getPaddingBottom();
         int leftAndRight = getPaddingLeft() + getPaddingRight();
-
         radiusMax = (Math.min((mHeight - topAndBottom) / 2, (mWidth - leftAndRight) / 2)) - mBorderLength / 2;
         Log.d("onMeasure", "..mHeight..." + mHeight + "..mWidth..." + mWidth + "...." + radiusMax);
     }

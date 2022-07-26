@@ -1,9 +1,11 @@
 package com.yc.appchartview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,11 +89,32 @@ public class PieChartLayout extends FrameLayout {
             llListLayout.removeAllViews();
             for (int i=0 ; i<pieDataList.size() ; i++){
                 TextView textView = new TextView(context);
-                textView.setText(pieDataList.get(i).getTitle());
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 layoutParams.setMargins(0,0,0,dip2px(context,20));
                 textView.setLayoutParams(layoutParams);
+                textView.setTextSize(10);
+
+                SpannableStringBuilder spannableString = new SpannableStringBuilder();
+                spannableString.append(pieDataList.get(i).getTitle());
+                ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor(pieDataList.get(i).getGetColor()));
+                spannableString.setSpan(colorSpan, 0, spannableString.toString().length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                spannableString.append("\n");
+
+                ForegroundColorSpan blackSpan = new ForegroundColorSpan(
+                        Color.parseColor("#000000"));
+                int percent = (int) (pieDataList.get(i).getPercentage() * 100);
+                int percentStartLength = spannableString.length();
+                spannableString.append(String.valueOf(percent));
+                int percentEndLength = spannableString.length();
+                spannableString.setSpan(blackSpan, percentStartLength, percentEndLength, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+
+                spannableString.append("%");
+                spannableString.append("/");
+                spannableString.append("50");
+                spannableString.append("次");
+                textView.setText(spannableString);
                 llListLayout.addView(textView);
             }
         }
@@ -123,5 +146,10 @@ public class PieChartLayout extends FrameLayout {
     public static int dip2px(Context ctx, float dp) {
         float density = ctx.getResources().getDisplayMetrics().density;
         return (int) (dp * density + 0.5f);
+    }
+
+    public static int sp2px(Context context, final float spValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
     }
 }
