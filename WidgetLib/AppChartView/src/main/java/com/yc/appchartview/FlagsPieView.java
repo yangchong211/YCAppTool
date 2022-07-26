@@ -30,25 +30,53 @@ import java.util.List;
  * </pre>
  */
 public class FlagsPieView extends View {
-    
-    private final float mRadius;//饼图半径
-    private final float mBorderLength;//矩形边长
-    private final float mTextSize;//文字大小
-    private final int mTextColor;//文字颜色
+
+    /**
+     * 饼图半径
+     */
+    private final float mRadius;
+    /**
+     * 矩形边长
+     */
+    private final float mBorderLength;
+    /**
+     * 文字大小
+     */
+    private final float mTextSize;
+    /**
+     * 文字颜色
+     */
+    private final int mTextColor;
     private final String centerTitle;
     private Context context;
-    private Paint mPiePaint, mInnerPiePaint;//饼图画笔
-    private Paint mBlockAgePaint;//矩形画笔
-    private Paint mTextPaint;//文字画笔
-    private int mHeight;//高
+    /**
+     * 饼图画笔
+     */
+    private Paint mPiePaint, mInnerPiePaint;
+    /**
+     * 矩形画笔
+     */
+    private Paint mBlockAgePaint;
+    /**
+     * 文字画笔
+     */
+    private Paint mTextPaint;
+    /**
+     * 高
+     */
+    private int mHeight;
     private List<PieData> mData;
     private RectF preRectF, preInnerRectF;
     private Rect rectBlockage;
     private String centerHint;
     private float radiusMax;
-    //间隔宽度
+    /**
+     * 间隔宽度
+     */
     private float intervalWidth;
-    //小方块左边距
+    /**
+     * 小方块左边距
+     */
     private float blockAgeMarginLeft;
 
     public FlagsPieView(Context context) {
