@@ -2,14 +2,15 @@ package com.yc.appchartview;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,7 +18,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,23 +32,23 @@ import java.util.Comparator;
  *     revise:
  * </pre>
  */
-public class PieChartLayout extends FrameLayout {
+public class PieEasyLayout extends FrameLayout {
 
     private final Context context;
-    private PieChartView pieChartView;
+    private PieEasyView pieChartView;
     private LinearLayout llListLayout;
     private TextView tvMaxPercent;
     private TextView tvMaxPercentTitle;
 
-    public PieChartLayout(@NonNull Context context) {
+    public PieEasyLayout(@NonNull Context context) {
         this(context, null);
     }
 
-    public PieChartLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public PieEasyLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public PieChartLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public PieEasyLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
         View view = LayoutInflater.from(context).inflate(
@@ -107,10 +107,19 @@ public class PieChartLayout extends FrameLayout {
         AbsoluteSizeSpan absoluteSizeSpan1 = new AbsoluteSizeSpan((int) dimension1);
         int length1 = spannableString.toString().length();
         spannableString.setSpan(absoluteSizeSpan1, 0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        StyleSpan styleSpan = new StyleSpan(Typeface.BOLD);
+        spannableString.setSpan(styleSpan, 0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        ForegroundColorSpan colorSpan1 = new ForegroundColorSpan(
+                Color.parseColor("#000000"));
+        spannableString.setSpan(colorSpan1, 0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
         spannableString.append(text2);
         int length2 = spannableString.toString().length();
         AbsoluteSizeSpan absoluteSizeSpan2 = new AbsoluteSizeSpan((int) dimension2);
         spannableString.setSpan(absoluteSizeSpan2, length1, length2, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        ForegroundColorSpan colorSpan2 = new ForegroundColorSpan(
+                Color.parseColor("#626466"));
+        spannableString.setSpan(colorSpan2, length1, length2, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         return spannableString;
     }
 

@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.yc.appchartview.PieChartLayout
 import com.yc.appchartview.PieChartView
+import com.yc.appchartview.PieEasyLayout
 import com.yc.appchartview.PieFlagData
 import com.yc.appchartview.PieFlagView
 import com.yc.widgetbusiness.R
@@ -17,9 +17,11 @@ class PreActivity : AppCompatActivity() {
         findViewById<PieFlagView>(R.id.pie_chart_now)
     }
     private val mPieChartView by lazy{
-        findViewById<PieChartLayout>(R.id.pie_chart_layout)
+        findViewById<PieEasyLayout>(R.id.pie_chart_layout)
     }
-
+    private val mPieChart by lazy{
+        findViewById<PieChartView>(R.id.pie_chart_two)
+    }
 
     companion object{
         fun startActivity(context: Context) {
@@ -67,5 +69,14 @@ class PreActivity : AppCompatActivity() {
         mFlagsPieView.setData(pieDataList)
 
         mPieChartView.setData(pieDataList)
+
+
+        mPieChart.addItemType(PieChartView.ItemType("苹果", 25, -0xdf4d56))
+        mPieChart.addItemType(PieChartView.ItemType("华为", 17, -0x97dd75))
+        mPieChart.addItemType(PieChartView.ItemType("小米", 13, -0x74a600))
+        mPieChart.addItemType(PieChartView.ItemType("三星", 8, -0x32c900))
+        mPieChart.addItemType(PieChartView.ItemType("OPPO", 6, -0x769733))
+        mPieChart.addItemType(PieChartView.ItemType("VIVO", 5, -0xbc8ebb))
+        mPieChart.addItemType(PieChartView.ItemType("其他品牌", 20, -0x666667))
     }
 }
