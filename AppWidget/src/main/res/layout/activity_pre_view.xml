@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".chart.PreActivity">
 
-    <com.yc.appchartview.PieChartView
+    <com.yc.appchartview.PieFlagView
         android:id="@+id/pie_chart_now"
         android:layout_width="match_parent"
         android:layout_height="180dp"
@@ -23,15 +23,16 @@
         app:radius="60dp"
         app:textSize="13sp" />
 
-    <LinearLayout
+    <com.yc.appchartview.PieChartLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:orientation="horizontal"
+        android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pie_chart_now">
 
 
 
-    </LinearLayout>
+    </com.yc.appchartview.PieChartLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

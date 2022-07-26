@@ -10,14 +10,14 @@ package com.yc.appchartview;
  *     revise:
  * </pre>
  */
-public final class PieChartData {
+public final class PieFlagData {
 
     private String mColor;
     private String title;
     private float percentage;
 
 
-    public PieChartData(String title, float percentage, String color) {
+    public PieFlagData(String title, float percentage, String color) {
         this.mColor = color;
         this.title = title;
         this.percentage = percentage;

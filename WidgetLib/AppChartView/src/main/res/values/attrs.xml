@@ -2,6 +2,12 @@
 <resources>
 
     <declare-styleable name="PieChartView">
+        <attr name="pieRadius" format="dimension"/>
+        <attr name="borderLength" format="dimension"/>
+        <attr name="pieIntervalWidth" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="PieFlagView">
         <attr name="radius" format="dimension"/>
         <attr name="border_length" format="dimension"/>
         <attr name="textSize" format="dimension"/>

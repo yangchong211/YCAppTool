@@ -36,27 +36,12 @@ public class PieChartView extends View {
      * 矩形边长
      */
     private final float mBorderLength;
-    /**
-     * 文字大小
-     */
-    private final float mTextSize;
-    /**
-     * 文字颜色
-     */
-    private final int mTextColor;
-    /**
-     * 中间文案
-     */
-    private final String centerTitle;
-    /**
-     * 中间二级文案
-     */
-    private final String centerHint;
+
     /**
      * 高
      */
     private int mHeight;
-    private List<PieChartData> mData;
+    private List<PieFlagData> mData;
     /**
      * 最大半径
      */
@@ -65,14 +50,9 @@ public class PieChartView extends View {
      * 间隔宽度
      */
     private final float intervalWidth;
-    /**
-     * 小方块左边距
-     */
-    private final float blockAgeMarginLeft;
     private final Context context;
-    private Paint mPiePaint, mInnerPiePaint,mBlockAgePaint,mTextPaint;
-    private RectF preRectF, preInnerRectF;
-    private Rect rectBlockage;
+    private Paint mPiePaint;
+    private RectF preRectF;
 
     public PieChartView(Context context) {
         this(context, null);
@@ -86,14 +66,9 @@ public class PieChartView extends View {
         super(c, attrs, defStyleAttr);
         this.context = c;
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PieChartView);
-        mRadius = typedArray.getDimension(R.styleable.PieChartView_radius, 120);
-        mBorderLength = typedArray.getDimension(R.styleable.PieChartView_border_length, 15);
-        mTextColor = typedArray.getColor(R.styleable.PieChartView_textColor, Color.BLACK);
-        mTextSize = typedArray.getDimension(R.styleable.PieChartView_textSize, 30);
-        centerTitle = typedArray.getString(R.styleable.PieChartView_centerTitle);
-        centerHint = typedArray.getString(R.styleable.PieChartView_centerHint);
-        blockAgeMarginLeft = typedArray.getDimension(R.styleable.PieChartView_blockAgeMarginLeft, 30);
-        intervalWidth = typedArray.getDimension(R.styleable.PieChartView_intervalWidth, 2);
+        mRadius = typedArray.getDimension(R.styleable.PieChartView_pieRadius, 120);
+        mBorderLength = typedArray.getDimension(R.styleable.PieChartView_borderLength, 15);
+        intervalWidth = typedArray.getDimension(R.styleable.PieChartView_pieIntervalWidth, 2);
         typedArray.recycle();
         init();
     }
@@ -106,25 +81,6 @@ public class PieChartView extends View {
         mPiePaint.setStrokeWidth(mBorderLength);
         //绘制大圆的矩形
         preRectF = new RectF();
-
-        //内圆
-        mInnerPiePaint = new Paint();
-        mInnerPiePaint.setAntiAlias(true);
-        mInnerPiePaint.setStyle(Paint.Style.FILL);
-        //绘制内圆的矩形
-        preInnerRectF = new RectF();
-
-        //弧度小方格
-        mBlockAgePaint = new Paint();
-        mBlockAgePaint.setAntiAlias(true);
-        mBlockAgePaint.setStyle(Paint.Style.FILL);
-        mBlockAgePaint.setStrokeWidth(mTextSize);
-        //右侧小方格 说明
-        rectBlockage = new Rect();
-        //文字画笔
-        mTextPaint = new Paint();
-        mTextPaint.setAntiAlias(true);
-        mTextPaint.setColor(mTextColor);
     }
 
 
@@ -132,46 +88,6 @@ public class PieChartView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawPie(canvas, preRectF);
-        drawCenter(canvas, preInnerRectF);
-        drawBlockAge(canvas);
-    }
-
-    /**
-     * 绘制圆中心文字
-     *
-     * @param rectF 基于圆环处理内圆
-     */
-    private void drawCenter(Canvas canvas, RectF rectF) {
-        mInnerPiePaint.setColor(Color.WHITE);
-        canvas.drawArc(rectF, 0, 360, true, mInnerPiePaint);
-        mTextPaint.setColor(Color.parseColor("#333333"));
-        mTextPaint.setFakeBoldText(true);
-        mTextPaint.setTextSize(sp2px(context, 12));
-        //中心title
-        float textWidth = mTextPaint.measureText(centerTitle);
-        float textHeight = measureTextHeight(mTextPaint);
-        int textX = (int) (rectF.left + (rectF.right - rectF.left) / 2);
-        canvas.drawText(centerTitle, textX - textWidth / 2, mHeight / 2, mTextPaint);
-        //hint title
-        mTextPaint.setFakeBoldText(false);
-        mTextPaint.setTextSize(sp2px(context, 9));
-        mTextPaint.setColor(Color.parseColor("#777777"));
-        //hint
-        float textHintWidth = mTextPaint.measureText(centerHint);
-        canvas.drawText(centerHint, textX - textHintWidth / 2, mHeight / 2 + textHeight, mTextPaint);
-    }
-
-    /**
-     * 测量文字的高度
-     */
-    public static float measureTextHeight(Paint paint) {
-        float height = 0f;
-        if (null == paint) {
-            return height;
-        }
-        Paint.FontMetrics fontMetrics = paint.getFontMetrics();
-        height = fontMetrics.descent - fontMetrics.ascent;
-        return height;
     }
 
     @Override
@@ -193,8 +109,9 @@ public class PieChartView extends View {
 
     /**
      * 绘制饼图
-     * @param canvas            canvas
-     * @param preRectF          preRectF
+     *
+     * @param canvas   canvas
+     * @param preRectF preRectF
      */
     private void drawPie(Canvas canvas, RectF preRectF) {
         //兼容 短边的一半 作半径
@@ -206,9 +123,10 @@ public class PieChartView extends View {
         preRectF.top = getRadiusOffset() + offsetTop;
         preRectF.right = preRectF.left + mRadiusValue * 2;
         preRectF.bottom = preRectF.top + mRadiusValue * 2;
-        float currentAngle = 0;//当前角度
+        float currentAngle = 0;
+        //当前角度
         for (int i = 0; i < mData.size(); i++) {
-            PieChartData pieData = mData.get(i);
+            PieFlagData pieData = mData.get(i);
             mPiePaint.setColor(Color.parseColor(mData.get(i).getGetColor()));
             //useCenter: 如果为True时，在绘制圆弧时将圆心包括在内，通常用来绘制扇形。
             canvas.drawArc(preRectF, currentAngle + intervalWidth,
@@ -216,11 +134,6 @@ public class PieChartView extends View {
                     false, mPiePaint);
             currentAngle += (pieData.getPercentage()) * 360;
         }
-        //圆内文本
-        preInnerRectF.left = preRectF.left + mBorderLength / 3;
-        preInnerRectF.top = preRectF.top + mBorderLength / 3;
-        preInnerRectF.right = preRectF.right - mBorderLength / 3;
-        preInnerRectF.bottom = preRectF.bottom - mBorderLength / 3;
     }
 
     private float getRadiusOffset() {
@@ -228,61 +141,9 @@ public class PieChartView extends View {
         return v > 0 ? v : 0f;
     }
 
-    //绘制小矩形和文字
-    private void drawBlockAge(Canvas canvas) {
-        int areaHeight = dip2px(context, 8);
-        int currentX = (int) (preRectF.right + getPaddingRight() + blockAgeMarginLeft);
-        float textHeight = measureTextHeight(mTextPaint);
-        //每一份
-        int count = mData.size();
-        //内容高度
-        float contenHeight = count * (textHeight + areaHeight) - areaHeight;
-        float centerYResult = (mHeight - contenHeight) / 2;
-        float currentY = centerYResult + 2;
-        //测量文本的高度  0,1,2
-        for (int i = 0; i < count; i++) {
-            PieChartData pieData = mData.get(i);
-            float diff = i > 0 ? (textHeight + areaHeight) : 0;
-            currentY += diff;
-            mBlockAgePaint.setColor(Color.parseColor(mData.get(i).getGetColor()));
-            rectBlockage.left = currentX;
-            rectBlockage.top = (int) (currentY + 2);
-            rectBlockage.right = (int) (currentX + textHeight / 1.5);
-            rectBlockage.bottom = (int) (currentY + areaHeight);
-            canvas.drawRect(rectBlockage, mBlockAgePaint);
-
-            DecimalFormat fNum = new DecimalFormat("#0.0");
-            String percentage = fNum.format(pieData.getPercentage() * 100);
-            String title = pieData.getTitle() + " (" + percentage + "%)";
-//            mTextPaint.setColor(Color.parseColor(mData.get(i).getGetColor()));
-            canvas.drawText(title, currentX + mBorderLength * 1.4f,
-                    currentY + rectBlockage.bottom - rectBlockage.top, mTextPaint);
-            //TODO 辅助 line
-//            mTextPaint.setStrokeWidth(0.1f);
-//            canvas.drawLine(currentX, currentY, currentX + mBorderLength * 10, currentY, mTextPaint);
-
-        }
-        //TODO 辅助 中line
-//        mTextPaint.setColor(Color.WHITE);
-//        canvas.drawLine(currentX, centerY, currentX + mBorderLength * 10, centerY, mTextPaint);
-
-    }
-
-
-    public void setData(List<PieChartData> data) {
+    public void setData(List<PieFlagData> data) {
         mData = data;
         postInvalidate();
     }
-
-    public static int sp2px(Context context,final float spValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
-    }
-
-    public static int dip2px(Context ctx, float dp) {
-        float density = ctx.getResources().getDisplayMetrics().density;
-        return (int) (dp * density + 0.5f);
-    }
-
 
 }

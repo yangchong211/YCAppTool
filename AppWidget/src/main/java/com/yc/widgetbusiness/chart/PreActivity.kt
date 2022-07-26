@@ -5,14 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.yc.appchartview.PieChartView
-import com.yc.appchartview.PieChartData
+import com.yc.appchartview.PieFlagData
+import com.yc.appchartview.PieFlagView
 import com.yc.widgetbusiness.R
 
 
 class PreActivity : AppCompatActivity() {
 
     private val mFlagsPieView by lazy{
-        findViewById<PieChartView>(R.id.pie_chart_now)
+        findViewById<PieFlagView>(R.id.pie_chart_now)
     }
 
     companion object{
@@ -36,44 +37,44 @@ class PreActivity : AppCompatActivity() {
 
 
     private fun initData() {
-        val pieDataList: ArrayList<PieChartData> = ArrayList()
+        val pieDataList: ArrayList<PieFlagData> = ArrayList()
         pieDataList.add(
-            PieChartData(
+            PieFlagData(
                 "JetPack",
                 0.25.toFloat(),
                 "#F83130"
             )
         )
         pieDataList.add(
-            PieChartData(
+            PieFlagData(
                 "Apm性能",
                 0.15.toFloat(),
                 "#62D54E"
             )
         )
         pieDataList.add(
-            PieChartData(
+            PieFlagData(
                 "Gradle构建",
                 0.10.toFloat(),
                 "#FEC01D"
             )
         )
         pieDataList.add(
-            PieChartData(
+            PieFlagData(
                 "Kotlin 协程",
                 0.30.toFloat(),
                 "#FC6E1E"
             )
         )
         pieDataList.add(
-            PieChartData(
+            PieFlagData(
                 "HotFix动态化",
                 0.10.toFloat(),
                 "#34DFC4"
             )
         )
         pieDataList.add(
-            PieChartData(
+            PieFlagData(
                 "FrameWork流程",
                 0.10.toFloat(),
                 "#999999"
