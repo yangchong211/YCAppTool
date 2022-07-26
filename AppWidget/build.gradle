@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
 }
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -38,6 +39,7 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':AppTextView')
+    implementation project(path: ':AppChartView')
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':RoundCorners')
     implementation project(path: ':AppImageView')

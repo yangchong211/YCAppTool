@@ -226,25 +226,8 @@ public final class CoverLoader {
             } else {
                 wm.getDefaultDisplay().getSize(point);
             }
-
             return point.x;
         }
     }
 
-    private int getScreenHeight() {
-        Context context = BaseAppHelper.get().getContext();
-        WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-        if (wm == null) {
-            return context.getResources().getDisplayMetrics().heightPixels;
-        } else {
-            Point point = new Point();
-            if (Build.VERSION.SDK_INT >= 17) {
-                wm.getDefaultDisplay().getRealSize(point);
-            } else {
-                wm.getDefaultDisplay().getSize(point);
-            }
-
-            return point.y;
-        }
-    }
 }
