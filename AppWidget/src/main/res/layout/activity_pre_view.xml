@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".chart.PreActivity">
 
-    <com.yc.appchartview.FlagsPieView
+    <com.yc.appchartview.PieChartView
         android:id="@+id/pie_chart_now"
         android:layout_width="match_parent"
         android:layout_height="180dp"
@@ -14,13 +14,24 @@
         android:padding="18dp"
         app:blockAgeMarginLeft="10dp"
         app:border_length="15dp"
-        app:centerHint="Android技术栈"
-        app:centerTitle="2022，虎虎生威"
-        app:intervalWidth="1dp"
+        app:centerHint="坐姿侧弯"
+        app:centerTitle="70%"
+        app:intervalWidth="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:radius="60dp"
         app:textSize="13sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pie_chart_now">
+
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

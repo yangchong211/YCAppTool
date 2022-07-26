@@ -1,14 +1,23 @@
 package com.yc.appchartview;
 
-
-public class PieData {
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     GitHub : https://github.com/yangchong211/YCWidgetLib
+ *     time  : 2018/11/9
+ *     desc  : 圆形图表控件data体
+ *     revise:
+ * </pre>
+ */
+public final class PieChartData {
 
     private String mColor;
     private String title;
     private float percentage;
 
 
-    public PieData(String title, float percentage, String color) {
+    public PieChartData(String title, float percentage, String color) {
         this.mColor = color;
         this.title = title;
         this.percentage = percentage;

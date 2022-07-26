@@ -5,14 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 
@@ -29,7 +26,7 @@ import java.util.List;
  *     revise:
  * </pre>
  */
-public class FlagsPieView extends View {
+public class PieChartView extends View {
 
     /**
      * 饼图半径
@@ -47,60 +44,87 @@ public class FlagsPieView extends View {
      * 文字颜色
      */
     private final int mTextColor;
+    /**
+     * 中间文案
+     */
     private final String centerTitle;
-    private Context context;
     /**
-     * 饼图画笔
+     * 中间二级文案
      */
-    private Paint mPiePaint, mInnerPiePaint;
-    /**
-     * 矩形画笔
-     */
-    private Paint mBlockAgePaint;
-    /**
-     * 文字画笔
-     */
-    private Paint mTextPaint;
+    private final String centerHint;
     /**
      * 高
      */
     private int mHeight;
-    private List<PieData> mData;
-    private RectF preRectF, preInnerRectF;
-    private Rect rectBlockage;
-    private String centerHint;
+    private List<PieChartData> mData;
+    /**
+     * 最大半径
+     */
     private float radiusMax;
     /**
      * 间隔宽度
      */
-    private float intervalWidth;
+    private final float intervalWidth;
     /**
      * 小方块左边距
      */
-    private float blockAgeMarginLeft;
+    private final float blockAgeMarginLeft;
+    private final Context context;
+    private Paint mPiePaint, mInnerPiePaint,mBlockAgePaint,mTextPaint;
+    private RectF preRectF, preInnerRectF;
+    private Rect rectBlockage;
 
-    public FlagsPieView(Context context) {
+    public PieChartView(Context context) {
         this(context, null);
     }
 
-    public FlagsPieView(Context context, @Nullable AttributeSet attrs) {
+    public PieChartView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public FlagsPieView(Context c, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public PieChartView(Context c, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(c, attrs, defStyleAttr);
         this.context = c;
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PieView);
-        mRadius = typedArray.getDimension(R.styleable.PieView_radius, 120);
-        mBorderLength = typedArray.getDimension(R.styleable.PieView_border_length, 15);
-        mTextColor = typedArray.getColor(R.styleable.PieView_textColor, Color.BLACK);
-        mTextSize = typedArray.getDimension(R.styleable.PieView_textSize, 30);
-        centerTitle = typedArray.getString(R.styleable.PieView_centerTitle);
-        centerHint = typedArray.getString(R.styleable.PieView_centerHint);
-        blockAgeMarginLeft = typedArray.getDimension(R.styleable.PieView_blockAgeMarginLeft, 30);
-        intervalWidth = typedArray.getDimension(R.styleable.PieView_intervalWidth, 2);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.PieChartView);
+        mRadius = typedArray.getDimension(R.styleable.PieChartView_radius, 120);
+        mBorderLength = typedArray.getDimension(R.styleable.PieChartView_border_length, 15);
+        mTextColor = typedArray.getColor(R.styleable.PieChartView_textColor, Color.BLACK);
+        mTextSize = typedArray.getDimension(R.styleable.PieChartView_textSize, 30);
+        centerTitle = typedArray.getString(R.styleable.PieChartView_centerTitle);
+        centerHint = typedArray.getString(R.styleable.PieChartView_centerHint);
+        blockAgeMarginLeft = typedArray.getDimension(R.styleable.PieChartView_blockAgeMarginLeft, 30);
+        intervalWidth = typedArray.getDimension(R.styleable.PieChartView_intervalWidth, 2);
         typedArray.recycle();
         init();
+    }
+
+    private void init() {
+        //外圆
+        mPiePaint = new Paint();
+        mPiePaint.setAntiAlias(true);
+        mPiePaint.setStyle(Paint.Style.STROKE);
+        mPiePaint.setStrokeWidth(mBorderLength);
+        //绘制大圆的矩形
+        preRectF = new RectF();
+
+        //内圆
+        mInnerPiePaint = new Paint();
+        mInnerPiePaint.setAntiAlias(true);
+        mInnerPiePaint.setStyle(Paint.Style.FILL);
+        //绘制内圆的矩形
+        preInnerRectF = new RectF();
+
+        //弧度小方格
+        mBlockAgePaint = new Paint();
+        mBlockAgePaint.setAntiAlias(true);
+        mBlockAgePaint.setStyle(Paint.Style.FILL);
+        mBlockAgePaint.setStrokeWidth(mTextSize);
+        //右侧小方格 说明
+        rectBlockage = new Rect();
+        //文字画笔
+        mTextPaint = new Paint();
+        mTextPaint.setAntiAlias(true);
+        mTextPaint.setColor(mTextColor);
     }
 
 
@@ -150,42 +174,12 @@ public class FlagsPieView extends View {
         return height;
     }
 
-    private void init() {
-        //外圆
-        mPiePaint = new Paint();
-        mPiePaint.setAntiAlias(true);
-        mPiePaint.setStyle(Paint.Style.STROKE);
-
-        mPiePaint.setStrokeWidth(mBorderLength);
-
-        //内圆
-        mInnerPiePaint = new Paint();
-        mInnerPiePaint.setAntiAlias(true);
-        mInnerPiePaint.setStyle(Paint.Style.FILL);
-
-        //绘制大圆的矩形
-        preRectF = new RectF();
-        //绘制内圆的矩形
-        preInnerRectF = new RectF();
-
-        //弧度小方格
-        mBlockAgePaint = new Paint();
-        mBlockAgePaint.setAntiAlias(true);
-        mBlockAgePaint.setStyle(Paint.Style.FILL);
-        mBlockAgePaint.setStrokeWidth(mTextSize);
-        //右侧小方格 说明
-        rectBlockage = new Rect();
-        //文字画笔
-        mTextPaint = new Paint();
-        mTextPaint.setAntiAlias(true);
-        mTextPaint.setColor(mTextColor);
-    }
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         //宽
-        int mWidth = resolveSize(getScreenWidth(context), widthMeasureSpec);
-        mHeight = resolveSize(getScreenWidth(context) / 2, heightMeasureSpec);
+        int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
+        int mWidth = resolveSize(screenWidth, widthMeasureSpec);
+        mHeight = resolveSize(screenWidth / 2, heightMeasureSpec);
         setMeasuredDimension(mWidth, mHeight);
 
         //最大半径
@@ -197,7 +191,11 @@ public class FlagsPieView extends View {
     }
 
 
-    //绘制饼图
+    /**
+     * 绘制饼图
+     * @param canvas            canvas
+     * @param preRectF          preRectF
+     */
     private void drawPie(Canvas canvas, RectF preRectF) {
         //兼容 短边的一半 作半径
         //得到实际半径
@@ -206,15 +204,16 @@ public class FlagsPieView extends View {
         preRectF.left = mBorderLength / 2 + getPaddingLeft();
         float offsetTop = mBorderLength / 2 + getPaddingTop();
         preRectF.top = getRadiusOffset() + offsetTop;
-        ;
         preRectF.right = preRectF.left + mRadiusValue * 2;
         preRectF.bottom = preRectF.top + mRadiusValue * 2;
         float currentAngle = 0;//当前角度
         for (int i = 0; i < mData.size(); i++) {
-            PieData pieData = mData.get(i);
+            PieChartData pieData = mData.get(i);
             mPiePaint.setColor(Color.parseColor(mData.get(i).getGetColor()));
             //useCenter: 如果为True时，在绘制圆弧时将圆心包括在内，通常用来绘制扇形。
-            canvas.drawArc(preRectF, currentAngle + intervalWidth, (pieData.getPercentage()) * 360 - intervalWidth, false, mPiePaint);
+            canvas.drawArc(preRectF, currentAngle + intervalWidth,
+                    (pieData.getPercentage()) * 360 - intervalWidth,
+                    false, mPiePaint);
             currentAngle += (pieData.getPercentage()) * 360;
         }
         //圆内文本
@@ -242,7 +241,7 @@ public class FlagsPieView extends View {
         float currentY = centerYResult + 2;
         //测量文本的高度  0,1,2
         for (int i = 0; i < count; i++) {
-            PieData pieData = mData.get(i);
+            PieChartData pieData = mData.get(i);
             float diff = i > 0 ? (textHeight + areaHeight) : 0;
             currentY += diff;
             mBlockAgePaint.setColor(Color.parseColor(mData.get(i).getGetColor()));
@@ -270,7 +269,7 @@ public class FlagsPieView extends View {
     }
 
 
-    public void setData(List<PieData> data) {
+    public void setData(List<PieChartData> data) {
         mData = data;
         postInvalidate();
     }
@@ -285,20 +284,5 @@ public class FlagsPieView extends View {
         return (int) (dp * density + 0.5f);
     }
 
-
-    private int getScreenWidth(Context context) {
-        WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-        if (wm == null) {
-            return context.getResources().getDisplayMetrics().widthPixels;
-        } else {
-            Point point = new Point();
-            if (Build.VERSION.SDK_INT >= 17) {
-                wm.getDefaultDisplay().getRealSize(point);
-            } else {
-                wm.getDefaultDisplay().getSize(point);
-            }
-            return point.x;
-        }
-    }
 
 }
