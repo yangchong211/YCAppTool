@@ -17,35 +17,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:pieRadius="60dp"/>
 
-    <LinearLayout
-        android:id="@+id/ll_pie_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="@+id/pie_chart_view"
-        app:layout_constraintBottom_toBottomOf="@+id/pie_chart_view"
-        app:layout_constraintLeft_toLeftOf="@+id/pie_chart_view"
-        app:layout_constraintRight_toRightOf="@+id/pie_chart_view">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="70"
-            android:textSize="33sp"
-            android:textColor="#000000"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="坐姿侧弯"
-            android:textSize="10sp"
-            android:textColor="#000000"/>
-    </LinearLayout>
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_view"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="82dp"
         android:layout_height="82dp"
         android:background="@android:color/transparent"
@@ -53,10 +27,33 @@
         app:cardElevation="7dp"
         android:outlineAmbientShadowColor="#F8C5B8"
         android:outlineSpotShadowColor="#F8C5B8"
-        app:layout_constraintTop_toTopOf="@+id/ll_pie_text"
-        app:layout_constraintBottom_toBottomOf="@+id/ll_pie_text"
-        app:layout_constraintLeft_toLeftOf="@+id/ll_pie_text"
-        app:layout_constraintRight_toRightOf="@+id/ll_pie_text"/>
+        app:layout_constraintTop_toTopOf="@+id/pie_chart_view"
+        app:layout_constraintBottom_toBottomOf="@+id/pie_chart_view"
+        app:layout_constraintLeft_toLeftOf="@+id/pie_chart_view"
+        app:layout_constraintRight_toRightOf="@+id/pie_chart_view">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_max_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="70"
+                android:textSize="28sp"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/tv_max_percent_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="坐姿侧弯"
+                android:textSize="10sp"
+                android:textColor="#000000"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
     <LinearLayout

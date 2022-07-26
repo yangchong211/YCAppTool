@@ -46,15 +46,8 @@ class PreActivity : AppCompatActivity() {
         pieDataList.add(
             PieFlagData(
                 "JetPack",
-                0.25.toFloat(),
+                0.40.toFloat(),
                 "#F83130"
-            )
-        )
-        pieDataList.add(
-            PieFlagData(
-                "Apm性能",
-                0.15.toFloat(),
-                "#62D54E"
             )
         )
         pieDataList.add(
@@ -67,22 +60,8 @@ class PreActivity : AppCompatActivity() {
         pieDataList.add(
             PieFlagData(
                 "Kotlin 协程",
-                0.30.toFloat(),
+                0.50.toFloat(),
                 "#FC6E1E"
-            )
-        )
-        pieDataList.add(
-            PieFlagData(
-                "HotFix动态化",
-                0.10.toFloat(),
-                "#34DFC4"
-            )
-        )
-        pieDataList.add(
-            PieFlagData(
-                "FrameWork流程",
-                0.10.toFloat(),
-                "#999999"
             )
         )
         mFlagsPieView.setData(pieDataList)

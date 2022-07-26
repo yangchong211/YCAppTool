@@ -1,9 +1,13 @@
 package com.yc.appchartview;
 
 import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.AbsoluteSizeSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -11,7 +15,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * <pre>
@@ -28,6 +35,8 @@ public class PieChartLayout extends FrameLayout {
     private final Context context;
     private PieChartView pieChartView;
     private LinearLayout llListLayout;
+    private TextView tvMaxPercent;
+    private TextView tvMaxPercentTitle;
 
     public PieChartLayout(@NonNull Context context) {
         this(context, null);
@@ -48,9 +57,29 @@ public class PieChartLayout extends FrameLayout {
     private void initFindViewById(View view) {
         pieChartView = view.findViewById(R.id.pie_chart_view);
         llListLayout = view.findViewById(R.id.ll_list_layout);
+        tvMaxPercent = view.findViewById(R.id.tv_max_percent);
+        tvMaxPercentTitle = view.findViewById(R.id.tv_max_percent_title);
     }
 
     public void setData(ArrayList<PieFlagData> pieDataList) {
+        if (tvMaxPercent!=null && tvMaxPercentTitle!=null){
+            PieFlagData max = max(pieDataList);
+            int maxPercent = (int) (max.getPercentage() * 100);
+            String title = max.getTitle();
+            SpannableStringBuilder spannableString = new SpannableStringBuilder();
+            spannableString.append(String.valueOf(maxPercent));
+            float dimension1 = this.getResources().getDimension(R.dimen.textSize28);
+            AbsoluteSizeSpan absoluteSizeSpan1 = new AbsoluteSizeSpan((int) dimension1);
+            int length1 = spannableString.toString().length();
+            spannableString.setSpan(absoluteSizeSpan1, 0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            spannableString.append("%");
+            int length2 = spannableString.toString().length();
+            float dimension2 = this.getResources().getDimension(R.dimen.textSize10);
+            AbsoluteSizeSpan absoluteSizeSpan2 = new AbsoluteSizeSpan((int) dimension2);
+            spannableString.setSpan(absoluteSizeSpan2, length1, length2, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+            tvMaxPercent.setText(spannableString);
+            tvMaxPercentTitle.setText(title);
+        }
         if (pieChartView!=null){
             pieChartView.setData(pieDataList);
         }
@@ -59,8 +88,40 @@ public class PieChartLayout extends FrameLayout {
             for (int i=0 ; i<pieDataList.size() ; i++){
                 TextView textView = new TextView(context);
                 textView.setText(pieDataList.get(i).getTitle());
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0,0,0,dip2px(context,20));
+                textView.setLayoutParams(layoutParams);
                 llListLayout.addView(textView);
             }
         }
+    }
+
+    public static PieFlagData max(ArrayList<PieFlagData> list) {
+        //排序
+        Collections.sort(list, new Comparator<PieFlagData>() {
+            @Override
+            public int compare(PieFlagData data1, PieFlagData data2) {
+                try {
+                    //根据百分比排序
+                    float lastModified01 = data1.getPercentage();
+                    float lastModified02 = data2.getPercentage();
+                    if (lastModified01 > lastModified02) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                } catch (Exception e) {
+                    return 1;
+                }
+            }
+        });
+        return list.get(list.size() - 1);
+    }
+
+
+    public static int dip2px(Context ctx, float dp) {
+        float density = ctx.getResources().getDisplayMetrics().density;
+        return (int) (dp * density + 0.5f);
     }
 }
