@@ -24,6 +24,7 @@
         app:textSize="13sp" />
 
     <com.yc.appchartview.PieChartLayout
+        android:id="@+id/pie_chart_layout"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:orientation="horizontal"

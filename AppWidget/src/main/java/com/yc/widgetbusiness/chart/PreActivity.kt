@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.yc.appchartview.PieChartLayout
 import com.yc.appchartview.PieChartView
 import com.yc.appchartview.PieFlagData
 import com.yc.appchartview.PieFlagView
@@ -15,6 +16,10 @@ class PreActivity : AppCompatActivity() {
     private val mFlagsPieView by lazy{
         findViewById<PieFlagView>(R.id.pie_chart_now)
     }
+    private val mPieChartView by lazy{
+        findViewById<PieChartLayout>(R.id.pie_chart_layout)
+    }
+
 
     companion object{
         fun startActivity(context: Context) {
@@ -81,5 +86,7 @@ class PreActivity : AppCompatActivity() {
             )
         )
         mFlagsPieView.setData(pieDataList)
+
+        mPieChartView.setData(pieDataList)
     }
 }

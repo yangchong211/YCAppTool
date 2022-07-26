@@ -5,9 +5,13 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
 
 /**
  * <pre>
@@ -22,6 +26,8 @@ import androidx.annotation.Nullable;
 public class PieChartLayout extends FrameLayout {
 
     private final Context context;
+    private PieChartView pieChartView;
+    private LinearLayout llListLayout;
 
     public PieChartLayout(@NonNull Context context) {
         this(context, null);
@@ -40,6 +46,21 @@ public class PieChartLayout extends FrameLayout {
     }
 
     private void initFindViewById(View view) {
+        pieChartView = view.findViewById(R.id.pie_chart_view);
+        llListLayout = view.findViewById(R.id.ll_list_layout);
+    }
 
+    public void setData(ArrayList<PieFlagData> pieDataList) {
+        if (pieChartView!=null){
+            pieChartView.setData(pieDataList);
+        }
+        if (llListLayout!=null){
+            llListLayout.removeAllViews();
+            for (int i=0 ; i<pieDataList.size() ; i++){
+                TextView textView = new TextView(context);
+                textView.setText(pieDataList.get(i).getTitle());
+                llListLayout.addView(textView);
+            }
+        }
     }
 }

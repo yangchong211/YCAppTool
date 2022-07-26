@@ -106,7 +106,7 @@ include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib',
         ':FloatWindow', ':AppTextView', ':AppImageView', ':AppButtonView', ':AppScrollView',
         ':AppSwitchView', ':AppEditText', ':AppConstraintLayout', ':AppLoadingLib',
-        ':RedDotView', ':ExpandLib',':AppChartView'
+        ':RedDotView', ':ExpandLib',':AppChartView',':AppShadowLib'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
 project(':CustomWidget').projectDir = new File('WidgetLib/CustomWidget')
@@ -147,7 +147,7 @@ project(':AppLoadingLib').projectDir = new File('WidgetLib/AppLoadingLib')
 project(':RedDotView').projectDir = new File('WidgetLib/RedDotView')
 project(':ExpandLib').projectDir = new File('WidgetLib/ExpandLib')
 project(':AppChartView').projectDir = new File('WidgetLib/AppChartView')
-
+project(':AppShadowLib').projectDir = new File('WidgetLib/AppShadowLib')
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
