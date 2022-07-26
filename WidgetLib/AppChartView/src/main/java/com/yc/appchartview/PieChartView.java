@@ -124,15 +124,17 @@ public class PieChartView extends View {
         preRectF.right = preRectF.left + mRadiusValue * 2;
         preRectF.bottom = preRectF.top + mRadiusValue * 2;
         float currentAngle = 0;
-        //当前角度
-        for (int i = 0; i < mData.size(); i++) {
-            PieFlagData pieData = mData.get(i);
-            mPiePaint.setColor(Color.parseColor(mData.get(i).getGetColor()));
-            //useCenter: 如果为True时，在绘制圆弧时将圆心包括在内，通常用来绘制扇形。
-            canvas.drawArc(preRectF, currentAngle + intervalWidth,
-                    (pieData.getPercentage()) * 360 - intervalWidth,
-                    false, mPiePaint);
-            currentAngle += (pieData.getPercentage()) * 360;
+        if (mData!=null && mData.size()>0){
+            //当前角度
+            for (int i = 0; i < mData.size(); i++) {
+                PieFlagData pieData = mData.get(i);
+                mPiePaint.setColor(Color.parseColor(mData.get(i).getGetColor()));
+                //useCenter: 如果为True时，在绘制圆弧时将圆心包括在内，通常用来绘制扇形。
+                canvas.drawArc(preRectF, currentAngle + intervalWidth,
+                        (pieData.getPercentage()) * 360 - intervalWidth,
+                        false, mPiePaint);
+                currentAngle += (pieData.getPercentage()) * 360;
+            }
         }
     }
 
