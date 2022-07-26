@@ -70,7 +70,8 @@ public class PieEasyLayout extends FrameLayout {
             String title = max.getTitle();
             float dimension1 = this.getResources().getDimension(R.dimen.textSize28);
             float dimension2 = this.getResources().getDimension(R.dimen.textSize10);
-            SpannableStringBuilder spannableString = getSpan("70","%" ,dimension1,dimension2);
+            SpannableStringBuilder spannableString = getSpan(String.valueOf(maxPercent),
+                    "%" ,dimension1,dimension2);
             tvMaxPercent.setText(spannableString);
             tvMaxPercentTitle.setText(title);
         }
@@ -84,7 +85,6 @@ public class PieEasyLayout extends FrameLayout {
                         R.layout.item_desk_pie_text, null,false);
                 TextView tvDeskPieTitle = view.findViewById(R.id.tv_desk_pie_title);
                 TextView tvDeskPiePercent = view.findViewById(R.id.tv_desk_pie_percent);
-                TextView tvDeskPieLine = view.findViewById(R.id.tv_desk_pie_line);
                 TextView tvDeskPieCount = view.findViewById(R.id.tv_desk_pie_count);
                 tvDeskPieTitle.setText(pieDataList.get(i).getTitle());
                 tvDeskPieTitle.setTextColor(Color.parseColor(pieDataList.get(i).getGetColor()));
@@ -145,14 +145,4 @@ public class PieEasyLayout extends FrameLayout {
         return list.get(list.size() - 1);
     }
 
-
-    public static int dip2px(Context ctx, float dp) {
-        float density = ctx.getResources().getDisplayMetrics().density;
-        return (int) (dp * density + 0.5f);
-    }
-
-    public static int sp2px(Context context, final float spValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
-        return (int) (spValue * fontScale + 0.5f);
-    }
 }
