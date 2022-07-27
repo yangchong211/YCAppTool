@@ -36,12 +36,5 @@
 
     </com.yc.appchartview.PieEasyLayout>
 
-    <com.yc.appchartview.PieChartView
-        android:id="@+id/pie_chart_two"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pie_chart_layout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

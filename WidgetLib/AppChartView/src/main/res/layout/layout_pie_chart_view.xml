@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     >
 
-    <com.yc.appchartview.PieEasyView
+    <com.yc.appchartview.PieChartView
         android:id="@+id/pie_chart_view"
         android:layout_width="120dp"
         android:layout_height="120dp"

@@ -35,7 +35,7 @@ import java.util.Comparator;
 public class PieEasyLayout extends FrameLayout {
 
     private final Context context;
-    private PieEasyView pieChartView;
+    private PieChartView pieChartView;
     private LinearLayout llListLayout;
     private TextView tvMaxPercent;
     private TextView tvMaxPercentTitle;
