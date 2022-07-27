@@ -265,14 +265,16 @@ public class ShadowLayout extends FrameLayout {
         shadowPaint.setStyle(Paint.Style.FILL);
 
         if (!isInEditMode()) {
+            //设置阴影效果很关键的api，给画笔设置该属性后
             shadowPaint.setShadowLayer(shadowRadius, dx, dy, shadowColor);
         }
+        //这个相当于绘制阴影区域
         canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint);
         return output;
     }
 
 
-    public class ShadowKey {
+    public static class ShadowKey {
 
         private final String name;
         private final int width;

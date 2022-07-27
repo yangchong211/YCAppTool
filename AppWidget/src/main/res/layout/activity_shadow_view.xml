@@ -225,6 +225,40 @@
                 android:textColor="#000" />
         </com.yc.shadow.layout.ShadowLayout>
 
+
+        <com.yc.shadow.layout.ShadowLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            app:shadow_cornerRadius="50dp"
+            app:shadow_shadowLimit="10dp"
+            app:shadow_shadowColor="#63F8C5B8"
+            app:shadow_leftShow="true"
+            app:shadow_rightShow="true"
+            app:shadow_topShow="true"
+            app:shadow_bottomShow="true">
+
+            <LinearLayout
+                android:layout_width="82dp"
+                android:layout_height="82dp"
+                android:layout_gravity="center"
+                android:background="@drawable/pie_chart_shape_oval"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@color/white"
+                    android:text="圆形阴影"
+                    android:textSize="@dimen/textSize10"
+                    android:textColor="#000" />
+            </LinearLayout>
+
+        </com.yc.shadow.layout.ShadowLayout>
+
     </LinearLayout>
 
 </ScrollView>

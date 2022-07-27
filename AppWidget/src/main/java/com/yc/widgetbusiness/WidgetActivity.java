@@ -63,7 +63,7 @@ public class WidgetActivity extends BaseActivity {
         tvWidgetShadow.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                ShadowDrawableActivity.startActivity(WidgetActivity.this);
+                ShadowActivity.startActivity(WidgetActivity.this);
             }
         });
     }
