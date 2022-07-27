@@ -21,6 +21,17 @@ public final class AppSizeUtils {
     }
 
     /**
+     * sp 转 px
+     *
+     * @param spValue sp 值
+     * @return px 值
+     */
+    public static int sp2px(final float spValue) {
+        final float fontScale = AppToolUtils.getApp().getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    }
+
+    /**
      * dp 转 px
      *
      * @param dp dp 值
@@ -28,6 +39,17 @@ public final class AppSizeUtils {
      */
     public static int dp2px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
+
+    /**
+     * dp 转 px
+     *
+     * @param dp dp 值
+     * @return px 值
+     */
+    public static int dp2px(float dp) {
+        final float scale = AppToolUtils.getApp().getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
 

@@ -54,6 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_image2" />
 
     <com.yc.appimageview.RoundImageView
+        android:id="@+id/iv_image5"
         android:layout_margin="@dimen/dp10"
         android:layout_width="100dp"
         android:layout_height="80dp"
@@ -63,6 +64,17 @@
         app:layout_constraintLeft_toRightOf="@+id/iv_image4"
         app:layout_constraintTop_toBottomOf="@+id/iv_image2" />
 
+
+    <com.yc.appimageview.RoundImageView
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitXY"
+        android:src="@color/grayText"
+        app:rStrokeColor="@color/colorAccent"
+        app:is_circle="true"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_image3"
+        app:layout_constraintTop_toBottomOf="@+id/iv_image5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

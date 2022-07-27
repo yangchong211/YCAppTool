@@ -1,4 +1,4 @@
-package com.yc.shadow;
+package com.yc.shadow.layout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,7 +12,10 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import com.yc.shadow.R;
+
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * <pre>
@@ -21,7 +24,7 @@ import java.util.HashMap;
  *     time  : 2018/7/20
  *     desc  : 自定义阴影
  *     revise:
- *     GitHub: https://github.com/yangchong211/YCWidgetLib
+ *     GitHub: https://github.com/yangchong211/shadowWidgetLib
  * </pre>
  */
 public class ShadowLayout extends FrameLayout {
@@ -86,7 +89,7 @@ public class ShadowLayout extends FrameLayout {
     /**
      * 缓存
      */
-    private final HashMap<Key, Bitmap> cache = new HashMap<>();
+    private final HashMap<ShadowKey, Bitmap> cache = new HashMap<>();
 
 
     public ShadowLayout(Context context) {
@@ -195,22 +198,18 @@ public class ShadowLayout extends FrameLayout {
 
     private void initAttributes(Context context, AttributeSet attrs) {
         TypedArray attr = getTypedArray(context, attrs, R.styleable.ShadowLayout);
-        if (attr == null) {
-            return;
-        }
-
         try {
             //默认是显示
-            leftShow = attr.getBoolean(R.styleable.ShadowLayout_yc_leftShow, true);
-            rightShow = attr.getBoolean(R.styleable.ShadowLayout_yc_rightShow, true);
-            bottomShow = attr.getBoolean(R.styleable.ShadowLayout_yc_bottomShow, true);
-            topShow = attr.getBoolean(R.styleable.ShadowLayout_yc_topShow, true);
+            leftShow = attr.getBoolean(R.styleable.ShadowLayout_shadow_leftShow, true);
+            rightShow = attr.getBoolean(R.styleable.ShadowLayout_shadow_rightShow, true);
+            bottomShow = attr.getBoolean(R.styleable.ShadowLayout_shadow_bottomShow, true);
+            topShow = attr.getBoolean(R.styleable.ShadowLayout_shadow_topShow, true);
 
-            mCornerRadius = attr.getDimension(R.styleable.ShadowLayout_yc_cornerRadius, 0);
-            mShadowLimit = attr.getDimension(R.styleable.ShadowLayout_yc_shadowLimit, 0);
-            mDx = attr.getDimension(R.styleable.ShadowLayout_yc_dx, 0);
-            mDy = attr.getDimension(R.styleable.ShadowLayout_yc_dy, 0);
-            mShadowColor = attr.getColor(R.styleable.ShadowLayout_yc_shadowColor,
+            mCornerRadius = attr.getDimension(R.styleable.ShadowLayout_shadow_cornerRadius, 0);
+            mShadowLimit = attr.getDimension(R.styleable.ShadowLayout_shadow_shadowLimit, 0);
+            mDx = attr.getDimension(R.styleable.ShadowLayout_shadow_dx, 0);
+            mDy = attr.getDimension(R.styleable.ShadowLayout_shadow_dy, 0);
+            mShadowColor = attr.getColor(R.styleable.ShadowLayout_shadow_shadowColor,
                     getResources().getColor(R.color.default_shadow_color));
         } finally {
             attr.recycle();
@@ -225,7 +224,7 @@ public class ShadowLayout extends FrameLayout {
                                       float shadowRadius, float dx, float dy,
                                       int shadowColor, int fillColor) {
 
-        Key key = new Key("bitmap", shadowWidth, shadowHeight);
+        ShadowKey key = new ShadowKey("bitmap", shadowWidth, shadowHeight);
         Bitmap output = cache.get(key);
         if (output == null) {
             //根据宽高创建bitmap背景
@@ -273,13 +272,13 @@ public class ShadowLayout extends FrameLayout {
     }
 
 
-    public class Key {
+    public class ShadowKey {
 
         private final String name;
         private final int width;
         private final int height;
 
-        public Key(String name, int width, int height) {
+        public ShadowKey(String name, int width, int height) {
             this.name = name;
             this.width = width;
             this.height = height;
@@ -305,12 +304,15 @@ public class ShadowLayout extends FrameLayout {
             if (o == null || getClass() != o.getClass()) {
                 return false;
             }
-            Key key = (Key) o;
+            ShadowKey key = (ShadowKey) o;
             if (width != key.width) {
                 return false;
             }
             if (height != key.height) {
                 return false;
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                return Objects.equals(name, key.name);
             }
             return name != null ? name.equals(key.name) : key.name == null;
         }

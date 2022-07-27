@@ -20,6 +20,8 @@
         <activity android:name=".image.ImageViewActivity"/>
         <activity android:name=".textview.MixtureTextViewActivity"/>
         <activity android:name=".chart.PreActivity"/>
+        <activity android:name=".shadow.ShadowActivity"/>
+        <activity android:name=".shadow.ShadowDrawableActivity"/>
     </application>
 
 
