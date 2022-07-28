@@ -107,19 +107,26 @@ public class PieChartView extends View {
         //兼容 短边的一半 作半径
         //得到实际半径
         float mRadiusValue = Math.min(mRadius, radiusMax);
-        //避免创建对象
+        //避免创建对象。mBorderLength 矩形边长
+        //从180度开始绘制
         preRectF.left = mBorderLength / 2 + getPaddingLeft();
         float offsetTop = mBorderLength / 2 + getPaddingTop();
         preRectF.top = getRadiusOffset() + offsetTop;
         preRectF.right = preRectF.left + mRadiusValue * 2;
         preRectF.bottom = preRectF.top + mRadiusValue * 2;
-        float currentAngle = 0;
+        Log.i("drawPie",preRectF.left+" " + preRectF.top +" " + preRectF.right +" " + preRectF.bottom );
+
+        float currentAngle = -90;
         if (mData!=null && mData.size()>0){
             //当前角度
             for (int i = 0; i < mData.size(); i++) {
                 PieFlagData pieData = mData.get(i);
                 mPiePaint.setColor(Color.parseColor(mData.get(i).getGetColor()));
                 //useCenter: 如果为True时，在绘制圆弧时将圆心包括在内，通常用来绘制扇形。
+                //preRectF 定义的圆弧的形状和大小的范围
+                //第二个参数：float startAngle，这个参数的作用是设置圆弧是从哪个角度来顺时针绘画的
+                //第三个参数：float sweepAngle，这个参数的作用是设置圆弧扫过的角度
+                //第四个参数：boolean useCenter，这个参数的作用是设置我们的圆弧在绘画的时候，是否经过圆形
                 canvas.drawArc(preRectF, currentAngle + intervalWidth,
                         (pieData.getPercentage()) * 360 - intervalWidth,
                         false, mPiePaint);
