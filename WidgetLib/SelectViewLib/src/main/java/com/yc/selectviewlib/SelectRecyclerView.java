@@ -64,6 +64,7 @@ public class SelectRecyclerView extends RecyclerView {
     class NamelessClass_1 implements Runnable {
         NamelessClass_1() {
         }
+        @Override
         public void run() {
             if (SelectRecyclerView.this.autoScrollHandler != null) {
                 if (SelectRecyclerView.this.inTopHotspot) {
@@ -108,6 +109,7 @@ public class SelectRecyclerView extends RecyclerView {
         this.fingerListener = listener;
     }
 
+    @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
         super.onMeasure(widthSpec, heightSpec);
         if (this.hotspotHeight > -1) {
@@ -195,6 +197,7 @@ public class SelectRecyclerView extends RecyclerView {
 
     }
 
+    @Override
     public boolean dispatchTouchEvent(MotionEvent e) {
         if (this.adapter.getItemCount() == 0) {
             return super.dispatchTouchEvent(e);

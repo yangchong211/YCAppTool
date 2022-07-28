@@ -5,7 +5,7 @@ import java.util.HashMap;
 public final class TimeMonitorHelper {
 
     private static final Object OBJECT = new Object();
-    private static final HashMap<String, TimeMonitor> timeMonitorCache = new HashMap<>();
+    private static final HashMap<String, TimeMonitor> TIME_MONITOR_CACHE = new HashMap<>();
     private static PrintFormatAdapter mPrintAdapter = PrintFormatAdapter.Factory.newDefaultLogAdapter();
     private static boolean isMonitor = true;
 
@@ -25,12 +25,12 @@ public final class TimeMonitorHelper {
             return;
         }
         synchronized (OBJECT) {
-            TimeMonitor timeMonitor = timeMonitorCache.get(actionName);
+            TimeMonitor timeMonitor = TIME_MONITOR_CACHE.get(actionName);
             if (timeMonitor == null){
                 timeMonitor = new TimeMonitor(actionName);
             }
             timeMonitor.start(actionName);
-            timeMonitorCache.put(actionName, timeMonitor);
+            TIME_MONITOR_CACHE.put(actionName, timeMonitor);
         }
     }
 
@@ -39,12 +39,12 @@ public final class TimeMonitorHelper {
             return;
         }
         synchronized (OBJECT) {
-            TimeMonitor timeMonitor = timeMonitorCache.get(actionName);
+            TimeMonitor timeMonitor = TIME_MONITOR_CACHE.get(actionName);
             if (timeMonitor == null){
                 timeMonitor = new TimeMonitor(actionName);
             }
             timeMonitor.end(actionName,rstListener);
-            timeMonitorCache.put(actionName, timeMonitor);
+            TIME_MONITOR_CACHE.put(actionName, timeMonitor);
         }
     }
 

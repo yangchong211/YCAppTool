@@ -173,7 +173,8 @@ https://github.com/Kyson/AndroidGodEye/blob/master/README_zh.md
 - Android 性能采集之Fps,Memory,Cpu 和 Android IO监控。
     - https://juejin.cn/post/6890754507639095303
     - https://juejin.cn/post/6900810600188739592
-
+- kotlin
+    - https://juejin.cn/post/7103011782591004680#heading-77
 
 
 ### 13.优秀博客
