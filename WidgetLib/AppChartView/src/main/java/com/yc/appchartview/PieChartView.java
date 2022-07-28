@@ -114,7 +114,7 @@ public class PieChartView extends View {
         preRectF.top = getRadiusOffset() + offsetTop;
         preRectF.right = preRectF.left + mRadiusValue * 2;
         preRectF.bottom = preRectF.top + mRadiusValue * 2;
-        Log.i("drawPie",preRectF.left+" " + preRectF.top +" " + preRectF.right +" " + preRectF.bottom );
+        //Log.i("drawPie",preRectF.left+" " + preRectF.top +" " + preRectF.right +" " + preRectF.bottom );
 
         float currentAngle = -90;
         if (mData!=null && mData.size()>0){
