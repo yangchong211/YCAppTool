@@ -39,12 +39,15 @@ public class MultiEditInputView extends LinearLayout {
             private int editStart;
             private int editEnd;
 
+            @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
 
+            @Override
             public void afterTextChanged(Editable editable) {
                 this.editStart = MultiEditInputView.this.id_et_input.getSelectionStart();
                 this.editEnd = MultiEditInputView.this.id_et_input.getSelectionEnd();
@@ -92,6 +95,7 @@ public class MultiEditInputView extends LinearLayout {
         this.configCount();
         this.id_et_input.setSelection(this.id_et_input.length());
         this.id_et_input.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
             public void onFocusChange(View view, boolean b) {
                 MultiEditInputView.this.id_ll_multi.setSelected(b);
             }

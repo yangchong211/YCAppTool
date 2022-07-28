@@ -85,9 +85,22 @@
 
 
 ### 05.Api使用说明文档
-- 十分简单，如下所示
-
-
+- 十分简单，如下所示。ShadowLayout是一个FrameLayout布局的拓展！
+    ``` java
+    <com.yc.shadow.layout.ShadowLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:shadow_cornerRadius="18dp"
+        app:shadow_dx="0dp"
+        app:shadow_dy="0dp"
+        app:shadow_shadowColor="#63F8C5B8"
+        app:shadow_shadowLimit="8dp">
+    
+        <TextView
+            android:background="@color/white"/>
+    
+    </com.yc.shadow.layout.ShadowLayout>
+    ```
 
 
 ### 06.优化点分析
