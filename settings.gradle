@@ -242,4 +242,4 @@ project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 include ':MonitorAppLib'
 
 
-
+include ':CompressServer'

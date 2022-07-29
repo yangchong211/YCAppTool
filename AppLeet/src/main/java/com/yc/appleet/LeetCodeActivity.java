@@ -87,8 +87,7 @@ public class LeetCodeActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         if (v == tv1){
             //算法导论
-            MonitorPhoneActivity.startActivity(this);
-            //startActivity(CodeTestActivity.class);
+            startActivity(CodeTestActivity.class);
         } else if (v == tv2){
             startActivity(ArrayTestActivity.class);
         }
