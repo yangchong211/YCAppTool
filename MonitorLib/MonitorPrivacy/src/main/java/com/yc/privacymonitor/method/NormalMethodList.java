@@ -144,9 +144,9 @@ public class NormalMethodList implements HookMethodList{
         smsManagerHook.addMethod("getDefault");
         list.add(smsManagerHook);
         //runtime
-        ClassMethodBean runtimeHook = new ClassMethodBean("java.lang.Runtime");
-        runtimeHook.addMethod("exec");
-        list.add(runtimeHook);
+        //ClassMethodBean runtimeHook = new ClassMethodBean("java.lang.Runtime");
+        //runtimeHook.addMethod("exec");
+        //list.add(runtimeHook);
         return list;
     }
 }
