@@ -122,11 +122,11 @@ public class NormalMethodList implements HookMethodList{
         list.add(new MethodBean(ClipData.class,"getItemAt",int.class));
 
         //--获取安装列表
-        list.add(new MethodBean(PackageManager.class,"getInstalledPackages"));
-        list.add(new MethodBean(PackageManager.class,"queryIntentActivities"));
-        list.add(new MethodBean(PackageManager.class,"queryIntentActivityOptions"));
-        list.add(new MethodBean(PackageManager.class,"queryIntentActivitiesAsUser"));
-        list.add(new MethodBean(PackageManager.class,"getInstalledPackagesAsUser"));
+        //list.add(new MethodBean(PackageManager.class,"getInstalledPackages"));
+        //list.add(new MethodBean(PackageManager.class,"queryIntentActivities"));
+        //list.add(new MethodBean(PackageManager.class,"queryIntentActivityOptions"));
+        //list.add(new MethodBean(PackageManager.class,"queryIntentActivitiesAsUser"));
+        //list.add(new MethodBean(PackageManager.class,"getInstalledPackagesAsUser"));
         return list;
     }
 
