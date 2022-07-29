@@ -2,6 +2,7 @@ package com.yc.privacymonitor.handler;
 
 import android.util.Log;
 
+import com.yc.appcommoninter.ILogger;
 import com.yc.privacymonitor.helper.PrivacyHelper;
 
 import java.util.Arrays;
@@ -21,10 +22,11 @@ public class SettingsResolverImpl extends MethodHookImpl {
 
     @Override
     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+        ILogger logger = PrivacyHelper.getLogger();
         try {
-            Log.i(PrivacyHelper.TAG, "检测到风险Settings调用: "+param.args[1].toString());
+            logger.log("检测到风险Settings调用: "+param.args[1].toString());
         } catch (Exception e){
-            Log.i(PrivacyHelper.TAG, "检测到风险Settings调用: "+ Arrays.toString(param.args));
+            logger.error("检测到风险Settings调用: "+ Arrays.toString(param.args));
         }
         super.beforeHookedMethod(param);
     }

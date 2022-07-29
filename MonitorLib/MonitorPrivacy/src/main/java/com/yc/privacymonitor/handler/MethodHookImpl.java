@@ -2,6 +2,7 @@ package com.yc.privacymonitor.handler;
 
 import android.util.Log;
 
+import com.yc.appcommoninter.ILogger;
 import com.yc.privacymonitor.helper.PrivacyHelper;
 import com.yc.toolutils.StackTraceUtils;
 
@@ -22,22 +23,24 @@ public class MethodHookImpl extends XC_MethodHook {
     @Override
     protected void beforeHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
         super.beforeHookedMethod(param);
-        Log.d(PrivacyHelper.TAG, "beforeHookedMethod");
+        ILogger logger = PrivacyHelper.getLogger();
+        logger.log("beforeHookedMethod");
         //举个例子
         //android.telephony.TelephonyManager#getTelephonyProperty
         String className = param.method.getDeclaringClass().getName();
         //android.telephony.TelephonyManager
         String methodName = param.method.getName();
         //getTelephonyProperty
-        Log.i(PrivacyHelper.TAG, "检测到风险函数被调用: " +className +"#"+ methodName);
+        logger.log("检测到风险函数被调用: " +className +"#"+ methodName);
         String methodStack = StackTraceUtils.getMethodStack();
-        Log.d(PrivacyHelper.TAG, methodStack);
+        logger.error(methodStack);
     }
 
     @Override
     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
         super.afterHookedMethod(param);
-        Log.d(PrivacyHelper.TAG, "afterHookedMethod");
+        ILogger logger = PrivacyHelper.getLogger();
+        logger.log("afterHookedMethod");
     }
 }
 

@@ -9,6 +9,7 @@ import android.bluetooth.le.ScanSettings;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ContentResolver;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraDevice;
@@ -116,9 +117,16 @@ public class NormalMethodList implements HookMethodList{
         //--剪贴板
         list.add(new MethodBean(ClipboardManager.class,"getPrimaryClip"));
         list.add(new MethodBean(ClipboardManager.class,"getText"));
-//        list.add(MethodWrapper.newPrint(ClipboardManager.class,"setText",CharSequence.class));
-//        list.add(MethodWrapper.newPrint(ClipboardManager.class,"setPrimaryClip", ClipData.class));
+        //list.add(new MethodBean(ClipboardManager.class,"setText",CharSequence.class));
+        //list.add(new MethodBean(ClipboardManager.class,"setPrimaryClip", ClipData.class));
         list.add(new MethodBean(ClipData.class,"getItemAt",int.class));
+
+        //--获取安装列表
+        list.add(new MethodBean(PackageManager.class,"getInstalledPackages"));
+        list.add(new MethodBean(PackageManager.class,"queryIntentActivities"));
+        list.add(new MethodBean(PackageManager.class,"queryIntentActivityOptions"));
+        list.add(new MethodBean(PackageManager.class,"queryIntentActivitiesAsUser"));
+        list.add(new MethodBean(PackageManager.class,"getInstalledPackagesAsUser"));
         return list;
     }
 
@@ -136,9 +144,9 @@ public class NormalMethodList implements HookMethodList{
         smsManagerHook.addMethod("getDefault");
         list.add(smsManagerHook);
         //runtime
-//        ClassMethodGroup runtimeHook = new ClassMethodGroup("java.lang.Runtime");
-//        runtimeHook.addMethod("exec");
-//        list.add(runtimeHook);
+        ClassMethodBean runtimeHook = new ClassMethodBean("java.lang.Runtime");
+        runtimeHook.addMethod("exec");
+        list.add(runtimeHook);
         return list;
     }
 }
