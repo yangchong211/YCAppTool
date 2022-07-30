@@ -5,6 +5,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.toolutils.AppLogUtils;
 
 /**

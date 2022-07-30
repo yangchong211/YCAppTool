@@ -16,12 +16,14 @@ import androidx.annotation.ColorInt;
 import com.yc.activitymanager.ActivityManager;
 import com.yc.toollib.BuildConfig;
 import com.yc.toolutils.AppDeviceUtils;
+import com.yc.toolutils.AppInfoUtils;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppMemoryUtils;
 import com.yc.toolutils.AppProcessUtils;
 import com.yc.toolutils.AppSizeUtils;
-import com.yc.toolutils.AppUtils;
 import com.yc.toolutils.file.AppFileUtils;
+import com.yc.toolutils.memory.AppMemoryUtils;
+import com.yc.toolutils.memory.DalvikHeapMem;
+import com.yc.toolutils.memory.PssInfo;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -78,10 +80,26 @@ public final class CrashHelperUtils {
      * @param ex
      */
     public static void saveCrashInfoInFile(Context context , Throwable ex){
+        long start1 = System.currentTimeMillis();
         initCrashHead(context);
+        long end1 = System.currentTimeMillis();
+        AppLogUtils.d("save crash file head , use time : " + (end1 - start1));
+        //save crash file head , use time : 4
+        long start2 = System.currentTimeMillis();
         initPhoneHead(context);
+        long end2 = System.currentTimeMillis();
+        AppLogUtils.d("save crash file phone , use time : " + (end2 - start2));
+        //save crash file phone , use time : 40
+        long start3 = System.currentTimeMillis();
         initThreadHead(context);
+        long end3 = System.currentTimeMillis();
+        AppLogUtils.d("save crash file thread , use time : " + (end3 - start3));
+        //save crash file thread , use time : 1
+        long start4 = System.currentTimeMillis();
         dumpExceptionToFile(context,ex);
+        long end4 = System.currentTimeMillis();
+        AppLogUtils.d("save crash file throwable , use time : " + (end4 - start4));
+        //save crash file throwable , use time : 2
         //saveCrashInfoToFile(context,ex);
     }
 
@@ -123,13 +141,13 @@ public final class CrashHelperUtils {
         StringBuilder sb = new StringBuilder();
         sb.append("手机内存分析:");
         final int pid = AppMemoryUtils.getCurrentPid();
-        AppMemoryUtils.PssInfo pssInfo = AppMemoryUtils.getAppPssInfo(context, pid);
+        PssInfo pssInfo = AppMemoryUtils.getAppPssInfo(context, pid);
         sb.append("\ndalvik堆大小:").append(AppMemoryUtils.getFormatSize(pssInfo.dalvikPss));
         sb.append("\n手机堆大小:").append(AppMemoryUtils.getFormatSize(pssInfo.nativePss));
         sb.append("\nPSS内存使用量:").append(AppMemoryUtils.getFormatSize(pssInfo.totalPss));
         sb.append("\n其他比例大小:").append(AppMemoryUtils.getFormatSize(pssInfo.otherPss));
 
-        final AppMemoryUtils.DalvikHeapMem dalvikHeapMem = AppMemoryUtils.getAppDalvikHeapMem();
+        final DalvikHeapMem dalvikHeapMem = AppMemoryUtils.getAppDalvikHeapMem();
         sb.append("\n已用内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.allocated));
         sb.append("\n最大内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.maxMem));
         sb.append("\n空闲内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.freeMem));
@@ -259,8 +277,8 @@ public final class CrashHelperUtils {
         sb.append("TIME:").append(now);
         //程序信息
         sb.append("\nAPPLICATION_ID:").append(context.getPackageName());
-        sb.append("\nVERSION_CODE:").append(AppUtils.getAppVersionCode());
-        sb.append("\nVERSION_NAME:").append(AppUtils.getAppVersionName());
+        sb.append("\nVERSION_CODE:").append(AppInfoUtils.getAppVersionCode());
+        sb.append("\nVERSION_NAME:").append(AppInfoUtils.getAppVersionName());
         sb.append("\nBUILD_TYPE:").append(BuildConfig.BUILD_TYPE);
         //设备信息
         sb.append("\nMODEL:").append(Build.MODEL);
