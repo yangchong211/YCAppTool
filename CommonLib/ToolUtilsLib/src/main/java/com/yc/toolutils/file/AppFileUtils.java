@@ -137,11 +137,23 @@ public final class AppFileUtils {
     }
 
     /**
-     * 目录地址
-     * SDCard/Android/data/<application package>/cache
-     * data/data/<application package>/cache
+     * 外部存储根目录，举个例子
+     * files:/storage/emulated/0/Android/data/包名/files
      */
     public static String getExternalFilePath(Context context , String name) {
+        String path = getExternalFilePath(context) + File.separator + name;
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return path;
+    }
+
+    /**
+     * 外部存储根目录，举个例子
+     * cache:/storage/emulated/0/Android/data/包名/cache
+     */
+    public static String getExternalCachePath(Context context , String name) {
         String path = getExternalCachePath(context) + File.separator + name;
         File file = new File(path);
         if (!file.exists()) {

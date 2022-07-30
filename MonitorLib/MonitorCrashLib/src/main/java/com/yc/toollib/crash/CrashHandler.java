@@ -142,7 +142,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         //收集设备信息
         //保存错误报告文件
         if (isWriteLog) {
-            CrashHelper.saveCrashInfoInFile(mContext, ex);
+            CrashHelperUtils.saveCrashInfoInFile(mContext, ex);
         }
         return true;
     }

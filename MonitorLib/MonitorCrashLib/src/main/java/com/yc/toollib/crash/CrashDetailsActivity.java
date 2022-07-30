@@ -131,17 +131,17 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
 
                 //匹配错误信息
                 if (!TextUtils.isEmpty(matchErrorInfo)) {
-                    spannable = CrashHelper.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, matchErrorInfo, Color.parseColor("#FF0006"), 18);
+                    spannable = CrashHelperUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, matchErrorInfo, Color.parseColor("#FF0006"), 18);
                 }
 
                 //匹配包名
                 String packageName = getPackageName();
-                spannable = CrashHelper.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, packageName, Color.parseColor("#0070BB"), 0);
+                spannable = CrashHelperUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, packageName, Color.parseColor("#0070BB"), 0);
 
                 //匹配Activity
                 if (activitiesClass != null && activitiesClass.size() > 0) {
                     for (int i = 0; i < activitiesClass.size(); i++) {
-                        spannable = CrashHelper.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, activitiesClass.get(i).getSimpleName(), Color.parseColor("#55BB63"), 16);
+                        spannable = CrashHelperUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, activitiesClass.get(i).getSimpleName(), Color.parseColor("#55BB63"), 16);
                     }
                 }
 
@@ -207,7 +207,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
 
     private void savePicture(Bitmap bitmap) {
         if (bitmap != null) {
-            String crashPicPath = CrashHelper.getCrashPicPath(CrashDetailsActivity.this) + "/crash_pic_" + System.currentTimeMillis() + ".jpg";
+            String crashPicPath = CrashHelperUtils.getCrashPicPath(CrashDetailsActivity.this) + "/crash_pic_" + System.currentTimeMillis() + ".jpg";
             boolean saveBitmap = FileSaveUtils.saveBitmap(CrashDetailsActivity.this, bitmap, crashPicPath);
             if (saveBitmap) {
                 showToast("保存截图成功，请到相册查看\n路径：" + crashPicPath);

@@ -31,7 +31,7 @@ public class CrashInfoAdapter extends BaseRecycleAdapter<File> {
             String errorMsgType = splitNames[2];
             if (!TextUtils.isEmpty(errorMsgType)) {
                 spannable = Spannable.Factory.getInstance().newSpannable(fileName);
-                spannable = CrashHelper.addNewSpan(context, spannable, fileName, errorMsgType,
+                spannable = CrashHelperUtils.addNewSpan(context, spannable, fileName, errorMsgType,
                         Color.parseColor("#FF0006"), 0);
             }
         }

@@ -195,7 +195,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
     private void getCrashList() {
         //重新获取
         fileList.clear();
-        String filePath = CrashHelper.getCrashLogPath(this);
+        String filePath = CrashHelperUtils.getCrashLogPath(this);
         AppLogUtils.d("CrashListActivity : " , "file path : " + filePath);
         //路径  /storage/emulated/0/Android/data/com.yc.lifehelper/cache/crashLogs
         fileList = AppFileUtils.getFileList(filePath);
@@ -258,7 +258,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
                 DelegateTaskExecutor.getInstance().executeOnCpu(new Runnable() {
                     @Override
                     public void run() {
-                        File fileCrash = new File(CrashHelper.getCrashLogPath(CrashListActivity.this));
+                        File fileCrash = new File(CrashHelperUtils.getCrashLogPath(CrashListActivity.this));
                         AppFileUtils.deleteAllFiles(fileCrash);
                         //重新获取
                         getCrashList();

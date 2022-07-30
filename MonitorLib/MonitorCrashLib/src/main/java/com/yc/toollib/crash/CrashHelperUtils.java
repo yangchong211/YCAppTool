@@ -44,7 +44,7 @@ import java.util.regex.Pattern;
  *     revise:
  * </pre>
  */
-public final class CrashHelper {
+public final class CrashHelperUtils {
 
     /**
      * 错误报告文件的扩展名
@@ -67,7 +67,7 @@ public final class CrashHelper {
     private static String versionCode;
 
     public static void setHeadContent(String headContent) {
-        CrashHelper.headContent = headContent;
+        CrashHelperUtils.headContent = headContent;
     }
 
     /**
@@ -172,7 +172,7 @@ public final class CrashHelper {
             //Log保存路径
             // SDCard/Android/data/<application package>/cache
             // data/data/<application package>/cache
-            File dir = new File(CrashHelper.getCrashLogPath(context));
+            File dir = new File(CrashHelperUtils.getCrashLogPath(context));
             if (!dir.exists()) {
                 boolean ok = dir.mkdirs();
                 if (!ok) {
@@ -268,7 +268,7 @@ public final class CrashHelper {
         sb.append("\nSDK:").append(Build.VERSION.SDK_INT);
         sb.append("\nEXCEPTION:").append(ex.getLocalizedMessage());
         sb.append("\nSTACK_TRACE:").append(result);
-        String crashFilePath = CrashHelper.getCrashLogPath(context);
+        String crashFilePath = CrashHelperUtils.getCrashLogPath(context);
         if (crashFilePath.length()>0){
             try {
                 AppLogUtils.w(CrashHandler.TAG, "handleException---输出路径-----"+crashFilePath);
