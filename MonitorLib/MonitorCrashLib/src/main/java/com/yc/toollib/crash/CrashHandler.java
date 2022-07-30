@@ -39,11 +39,6 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 是否写崩溃日志到file文件夹，默认开启
      */
     private boolean isWriteLog = true;
-    /**
-     * 点击按钮异常后设置处理崩溃而是关闭当前activity
-     */
-    private boolean isFinishActivity = false;
-
 
     /**
      * 保证只有一个CrashHandler实例
@@ -71,11 +66,6 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         return this;
     }
 
-    public CrashHandler setFinishActivity(boolean finishActivity) {
-        isFinishActivity = finishActivity;
-        return this;
-    }
-
     /**
      * 初始化,注册Context对象,
      * 获取系统默认的UncaughtException处理器,
@@ -84,9 +74,6 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      * @param ctx 上下文
      */
     public void init(Application ctx, CrashListener listener) {
-        if (isFinishActivity) {
-            CrashHelper.getInstance().install(ctx);
-        }
         mContext = ctx;
         this.listener = listener;
         //获取系统默认的UncaughtExceptionHandler
@@ -98,7 +85,6 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         //未捕获的异常处理的控制第一个被当前线程处理，如果该线程没有捕获并处理该异常，其将被线程的ThreadGroup对象处理，最后被默认的未捕获异常处理器处理。
         Thread.setDefaultUncaughtExceptionHandler(this);
         AppLogUtils.d(TAG, "init mDefaultHandler : " + Thread.getDefaultUncaughtExceptionHandler());
-        //打印：init mDefaultHandler : com.yc.toollib.crash.CrashHandler@755b1df
     }
 
     /**
@@ -110,23 +96,12 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         boolean isHandle = handleException(ex);
         AppLogUtils.d(TAG, "uncaughtException--- handleException----" + isHandle);
         initCustomBug(ex);
-        if (mDefaultHandler != null && !isHandle) {
+        if (mDefaultHandler != null && isHandle) {
             //收集完信息后，交给系统自己处理崩溃
             //uncaughtException (Thread t, Throwable e) 是一个抽象方法
             //当给定的线程因为发生了未捕获的异常而导致终止时将通过该方法将线程对象和异常对象传递进来。
             AppLogUtils.d(TAG, "uncaughtException--- ex----");
             mDefaultHandler.uncaughtException(thread, ex);
-        } else {
-            //否则自己处理
-            if (mContext instanceof Application) {
-                AppLogUtils.w(TAG, "handleException--- ex----重启activity-");
-                if (listener != null) {
-                    listener.againStartApp();
-                }
-            }
-        }
-        if (isFinishActivity) {
-            CrashHelper.getInstance().setSafe(thread, ex);
         }
     }
 
@@ -167,10 +142,9 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         //收集设备信息
         //保存错误报告文件
         if (isWriteLog) {
-            CrashFileUtils.saveCrashInfoInFile(mContext, ex);
+            CrashHelper.saveCrashInfoInFile(mContext, ex);
         }
         return true;
     }
-
 
 }

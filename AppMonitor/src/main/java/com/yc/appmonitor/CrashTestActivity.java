@@ -1,4 +1,4 @@
-package com.yc.toollib.crash;
+package com.yc.appmonitor;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.toollib.R;
+import com.yc.toollib.crash.CrashListActivity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -77,7 +77,7 @@ public class CrashTestActivity extends AppCompatActivity implements View.OnClick
                 }
             }
         } else if ( id == R.id.tv_7){
-            CrashLibUtils.startCrashListActivity(this);
+            CrashListActivity.startActivity(this);
         }
     }
 

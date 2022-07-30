@@ -1,288 +1,339 @@
 package com.yc.toollib.crash;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
+import android.text.Spannable;
+import android.text.TextUtils;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ForegroundColorSpan;
 
-import com.yc.toollib.crash.compat.ActivityKillerV15_V20;
-import com.yc.toollib.crash.compat.ActivityKillerV21_V23;
-import com.yc.toollib.crash.compat.ActivityKillerV24_V25;
-import com.yc.toollib.crash.compat.ActivityKillerV26;
-import com.yc.toollib.crash.compat.ActivityKillerV28;
-import com.yc.toollib.crash.compat.IActivityKiller;
+import androidx.annotation.ColorInt;
+
+import com.yc.activitymanager.ActivityManager;
+import com.yc.toollib.BuildConfig;
+import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppMemoryUtils;
+import com.yc.toolutils.AppProcessUtils;
+import com.yc.toolutils.AppSizeUtils;
+import com.yc.toolutils.AppUtils;
+import com.yc.toolutils.file.AppFileUtils;
 
-import java.lang.reflect.Field;
-
-import me.weishu.reflection.Reflection;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
- *     time  : 2020/8/30
- *     desc  : 异常避免帮助类
+ *     time  : 2020/7/10
+ *     desc  : 异常处理保存文件类
  *     revise:
  * </pre>
  */
 public final class CrashHelper {
 
-    private static IActivityKiller sActivityKiller;
-    private static ExceptionHandler sExceptionHandler;
     /**
-     * 标记位，避免重复安装卸载
+     * 错误报告文件的扩展名
      */
-    private static boolean sInstalled = false;
-    private static boolean sIsSafeMode;
+    private static final String CRASH_REPORTER_EXTENSION = ".txt";
     /**
-     * Cockroach实例
+     * 额外信息写入
      */
-    private static CrashHelper INSTANCE;
+    private static String headContent;
+    /**
+     * 时间转换
+     */
+    private static final SimpleDateFormat dataFormat = new SimpleDateFormat(
+            "yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+    private static String crashTime;
+    private static String crashHead;
+    private static String crashMem;
+    private static String crashThread;
+    private static String versionName;
+    private static String versionCode;
 
-    private CrashHelper() {
-
+    public static void setHeadContent(String headContent) {
+        CrashHelper.headContent = headContent;
     }
 
     /**
-     * 获取CrashHandler实例 ,单例模式
+     * 保存错误信息到文件中
+     * 一个崩溃保存到一个txt文本文件中
+     * 后期需求：1.过了7天自动清除日志；2.针对文件的大小限制；3.文件写入
+     * @param context
+     * @param ex
      */
-    public static CrashHelper getInstance() {
-        if (INSTANCE == null) {
-            synchronized (CrashHelper.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new CrashHelper();
-                }
+    public static void saveCrashInfoInFile(Context context , Throwable ex){
+        initCrashHead(context);
+        initPhoneHead(context);
+        initThreadHead(context);
+        dumpExceptionToFile(context,ex);
+        //saveCrashInfoToFile(context,ex);
+    }
+
+    private static void initCrashHead(Context context) {
+        //崩溃时间
+        crashTime = dataFormat.format(new Date(System.currentTimeMillis()));
+        //版本信息
+        try {
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(),
+                    PackageManager.GET_CONFIGURATIONS);
+            if (pi != null) {
+                versionName = pi.versionName;
+                versionCode = String.valueOf(pi.versionCode);
             }
-        }
-        return INSTANCE;
-    }
-
-    public void setExceptionHandler(ExceptionHandler sExceptionHandler) {
-        CrashHelper.sExceptionHandler = sExceptionHandler;
-    }
-
-    public void install(Context ctx) {
-        if (sInstalled) {
-            return;
-        }
-        try {
-            //解除 android P 反射限制
-            Reflection.unseal(ctx);
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        sInstalled = true;
-        initActivityKiller();
-    }
-
-    /**
-     * 替换ActivityThread.mH.mCallback，实现拦截Activity生命周期，直接忽略生命周期的异常的话会导致黑屏，目前
-     * 会调用ActivityManager的finishActivity结束掉生命周期抛出异常的Activity
-     */
-    private void initActivityKiller() {
-        //各版本android的ActivityManager获取方式，finishActivity的参数，token(binder对象)的获取不一样
-        if (Build.VERSION.SDK_INT >= 28) {
-            sActivityKiller = new ActivityKillerV28();
-        } else if (Build.VERSION.SDK_INT >= 26) {
-            sActivityKiller = new ActivityKillerV26();
-        } else if (Build.VERSION.SDK_INT == 25 || Build.VERSION.SDK_INT == 24) {
-            sActivityKiller = new ActivityKillerV24_V25();
-        } else if (Build.VERSION.SDK_INT >= 21 && Build.VERSION.SDK_INT <= 23) {
-            sActivityKiller = new ActivityKillerV21_V23();
-        } else if (Build.VERSION.SDK_INT >= 15 && Build.VERSION.SDK_INT <= 20) {
-            sActivityKiller = new ActivityKillerV15_V20();
-        } else if (Build.VERSION.SDK_INT < 15) {
-            sActivityKiller = new ActivityKillerV15_V20();
-        }
-        try {
-            hookmH();
-        } catch (Throwable e) {
+        } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+        //组合Android相关信息
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n软件App的Id:").append(context.getPackageName());
+        sb.append("\n是否是DEBUG版本:").append(BuildConfig.BUILD_TYPE);
+        sb.append("\n崩溃的时间:").append(crashTime);
+        sb.append("\n是否root:").append(AppDeviceUtils.isDeviceRooted());
+        sb.append("\n系统硬件商:").append(AppDeviceUtils.getManufacturer());
+        sb.append("\n设备的品牌:").append(AppDeviceUtils.getBrand());
+        sb.append("\n手机的型号:").append(AppDeviceUtils.getModel());
+        sb.append("\n设备版本号:").append(AppDeviceUtils.getId());
+        sb.append("\nCPU的类型:").append(AppDeviceUtils.getCpuType());
+        sb.append("\n系统的版本:").append(AppDeviceUtils.getSDKVersionName());
+        sb.append("\n系统版本值:").append(AppDeviceUtils.getSDKVersionCode());
+        sb.append("\n当前的版本:").append(versionName).append("—").append(versionCode);
+        sb.append("\n\n");
+        crashHead = sb.toString();
     }
 
-    private void hookmH() throws Exception {
 
-        final int LAUNCH_ACTIVITY = 100;
-        final int PAUSE_ACTIVITY = 101;
-        final int PAUSE_ACTIVITY_FINISHING = 102;
-        final int STOP_ACTIVITY_HIDE = 104;
-        final int RESUME_ACTIVITY = 107;
-        final int DESTROY_ACTIVITY = 109;
-        final int NEW_INTENT = 112;
-        final int RELAUNCH_ACTIVITY = 126;
-        Class activityThreadClass = Class.forName("android.app.ActivityThread");
-        Object activityThread = activityThreadClass.getDeclaredMethod("currentActivityThread").invoke(null);
+    private static void initPhoneHead(Context context) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("手机内存分析:");
+        final int pid = AppMemoryUtils.getCurrentPid();
+        AppMemoryUtils.PssInfo pssInfo = AppMemoryUtils.getAppPssInfo(context, pid);
+        sb.append("\ndalvik堆大小:").append(AppMemoryUtils.getFormatSize(pssInfo.dalvikPss));
+        sb.append("\n手机堆大小:").append(AppMemoryUtils.getFormatSize(pssInfo.nativePss));
+        sb.append("\nPSS内存使用量:").append(AppMemoryUtils.getFormatSize(pssInfo.totalPss));
+        sb.append("\n其他比例大小:").append(AppMemoryUtils.getFormatSize(pssInfo.otherPss));
 
-        Field mhField = activityThreadClass.getDeclaredField("mH");
-        mhField.setAccessible(true);
-        final Handler mhHandler = (Handler) mhField.get(activityThread);
-        Field callbackField = Handler.class.getDeclaredField("mCallback");
-        callbackField.setAccessible(true);
-        callbackField.set(mhHandler, new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                if (Build.VERSION.SDK_INT >= 28) {
-                    //android P 生命周期全部走这
-                    final int EXECUTE_TRANSACTION = 159;
-                    if (msg.what == EXECUTE_TRANSACTION) {
-                        try {
-                            if (mhHandler != null) {
-                                mhHandler.handleMessage(msg);
-                            }
-                        } catch (Throwable throwable) {
-                            sActivityKiller.finishLaunchActivity(msg);
-                            notifyException(throwable);
-                        }
-                        return true;
-                    }
-                    return false;
+        final AppMemoryUtils.DalvikHeapMem dalvikHeapMem = AppMemoryUtils.getAppDalvikHeapMem();
+        sb.append("\n已用内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.allocated));
+        sb.append("\n最大内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.maxMem));
+        sb.append("\n空闲内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.freeMem));
+
+        long appTotalDalvikHeapSize = AppMemoryUtils.getAppTotalDalvikHeapSize(context);
+        sb.append("\n应用占用内存:").append(AppMemoryUtils.getFormatSize(appTotalDalvikHeapSize));
+        sb.append("\n\n");
+        crashMem = sb.toString();
+    }
+
+
+    private static void initThreadHead(Context context) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("该App信息:");
+        String currentProcessName = AppProcessUtils.getCurrentProcessName(context);
+        if (currentProcessName!=null){
+            sb.append("\nApp进程名称:").append(currentProcessName);
+        }
+        sb.append("\n进程号:").append(android.os.Process.myPid());
+        sb.append("\n当前线程号:").append(android.os.Process.myTid());
+        sb.append("\n当前调用该进程的用户号:").append(android.os.Process.myUid());
+        sb.append("\n当前线程ID:").append(Thread.currentThread().getId());
+        sb.append("\n当前线程名称:").append(Thread.currentThread().getName());
+        sb.append("\n主线程ID:").append(context.getMainLooper().getThread().getId());
+        sb.append("\n主线程名称:").append(context.getMainLooper().getThread().getName());
+        sb.append("\n主线程优先级:").append(context.getMainLooper().getThread().getPriority());
+        Activity activity = ActivityManager.getInstance().peek();
+        if (activity!=null){
+            sb.append("\n当前Activity名称:").append(activity.getComponentName().getClassName());
+            sb.append("\n当前Activity所在栈的ID:").append(activity.getTaskId());
+        }
+        sb.append("\n\n");
+        crashThread = sb.toString();
+    }
+
+    private static void dumpExceptionToFile(Context context , Throwable ex) {
+        File file = null;
+        PrintWriter pw = null;
+        try {
+            //Log保存路径
+            // SDCard/Android/data/<application package>/cache
+            // data/data/<application package>/cache
+            File dir = new File(CrashHelper.getCrashLogPath(context));
+            if (!dir.exists()) {
+                boolean ok = dir.mkdirs();
+                if (!ok) {
+                    return;
                 }
-                switch (msg.what) {
-                    // startActivity--> activity.attach  activity.onCreate  r.activity!=null  activity.onStart  activity.onResume
-                    case LAUNCH_ACTIVITY:
-                        try {
-                            if (mhHandler != null) {
-                                mhHandler.handleMessage(msg);
-                            }
-                        } catch (Throwable throwable) {
-                            sActivityKiller.finishLaunchActivity(msg);
-                            notifyException(throwable);
-                        }
-                        return true;
-                    case RESUME_ACTIVITY:
-                        //回到activity onRestart onStart onResume
-                        try {
-                            if (mhHandler != null) {
-                                mhHandler.handleMessage(msg);
-                            }
-                        } catch (Throwable throwable) {
-                            sActivityKiller.finishResumeActivity(msg);
-                            notifyException(throwable);
-                        }
-                        return true;
-                    case PAUSE_ACTIVITY_FINISHING:
-                        //按返回键 onPause
-                        try {
-                            mhHandler.handleMessage(msg);
-                        } catch (Throwable throwable) {
-                            sActivityKiller.finishPauseActivity(msg);
-                            notifyException(throwable);
-                        }
-                        return true;
-                    case PAUSE_ACTIVITY:
-                        //开启新页面时，旧页面执行 activity.onPause
-                        try {
-                            if (mhHandler != null) {
-                                mhHandler.handleMessage(msg);
-                            }
-                        } catch (Throwable throwable) {
-                            sActivityKiller.finishPauseActivity(msg);
-                            notifyException(throwable);
-                        }
-                        return true;
-                    case STOP_ACTIVITY_HIDE:
-                        //开启新页面时，旧页面执行 activity.onStop
-                        try {
-                            if (mhHandler != null) {
-                                mhHandler.handleMessage(msg);
-                            }
-                        } catch (Throwable throwable) {
-                            sActivityKiller.finishStopActivity(msg);
-                            notifyException(throwable);
-                        }
-                        return true;
-                    case DESTROY_ACTIVITY:
-                        // 关闭activity onStop  onDestroy
-                        try {
-                            if (mhHandler != null) {
-                                mhHandler.handleMessage(msg);
-                            }
-                        } catch (Throwable throwable) {
-                            notifyException(throwable);
-                        }
-                        return true;
-                }
-                return false;
             }
-        });
-    }
-
-
-    private void notifyException(Throwable throwable) {
-        if (sExceptionHandler == null) {
-            return;
+            //Log文件的名字
+            String fileName = "V" + versionName + "_" + crashTime + CRASH_REPORTER_EXTENSION;
+            file = new File(dir, fileName);
+            if (!file.exists()) {
+                boolean createNewFileOk = file.createNewFile();
+                if (!createNewFileOk) {
+                    return;
+                }
+            }
+            AppLogUtils.i(CrashHandler.TAG, "保存异常的log文件名称：" + fileName);
+            AppLogUtils.i(CrashHandler.TAG, "保存异常的log文件file：" + file);
+            //开始写日志
+            pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+            //判断有没有额外信息需要写入
+            if (!TextUtils.isEmpty(headContent)) {
+                pw.println(headContent);
+            }
+            //print(ex);
+            //写入设备信息
+            pw.println(crashHead);
+            pw.println(crashMem);
+            pw.println(crashThread);
+            //导出异常的调用栈信息
+            ex.printStackTrace(pw);
+            //异常信息
+            Throwable cause = ex.getCause();
+            while (cause != null) {
+                cause.printStackTrace(pw);
+                cause = cause.getCause();
+            }
+            //重新命名文件
+            String string = ex.toString();
+            String splitEx;
+            if (string.contains(":")){
+                splitEx = ex.toString().split(":")[0];
+            } else {
+                splitEx = "java.lang.Exception";
+            }
+            String newName = "V" + versionName + "_" + crashTime + "_" + splitEx + CRASH_REPORTER_EXTENSION;
+            File newFile = new File(dir, newName);
+            //重命名文件
+            AppFileUtils.renameFile(file.getPath(), newFile.getPath());
+            //路径：/storage/emulated/0/Android/data/包名/cache/crashLogs
+            //file       V1.0_2020-09-02_09:05:01.txt
+            //newFile    V1.0_2020-09-02_09:05:01_java.lang.NullPointerException.txt
+            AppLogUtils.i(CrashHandler.TAG, "保存异常的log文件路径：" + file.getPath() + "----新路径---"+newFile.getPath());
+        } catch (Exception e) {
+            AppLogUtils.e(CrashHandler.TAG, "保存日志失败：" + e.toString());
+        } finally {
+            if (pw != null) {
+                pw.close();
+            }
         }
-        if (isSafeMode()) {
-            sExceptionHandler.bandageExceptionHappened(throwable);
-        } else {
-            sExceptionHandler.uncaughtExceptionHappened(Looper.getMainLooper().getThread(), throwable);
-            safeMode();
-        }
     }
 
-    protected boolean isSafeMode() {
-        return sIsSafeMode;
-    }
 
     /**
-     * 开启保护模式
+     * 保存错误信息到文件中
+     * @param ex
+     * @return
      */
-    protected void safeMode() {
-        sIsSafeMode = true;
-        if (sExceptionHandler != null) {
-            sExceptionHandler.enterSafeMode();
+    @Deprecated
+    public static void saveCrashInfoToFile(Context context ,Throwable ex) {
+        Writer info = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(info);
+        ex.printStackTrace(printWriter);
+        Throwable cause = ex.getCause();
+        while (cause != null) {
+            cause.printStackTrace(printWriter);
+            cause = cause.getCause();
         }
-        //开启一个循环
-        while (true) {
+        String result = info.toString();
+        printWriter.close();
+        StringBuilder sb = new StringBuilder();
+        @SuppressLint("SimpleDateFormat")
+        String now = dataFormat.format(new Date());
+        //崩溃时间
+        sb.append("TIME:").append(now);
+        //程序信息
+        sb.append("\nAPPLICATION_ID:").append(context.getPackageName());
+        sb.append("\nVERSION_CODE:").append(AppUtils.getAppVersionCode());
+        sb.append("\nVERSION_NAME:").append(AppUtils.getAppVersionName());
+        sb.append("\nBUILD_TYPE:").append(BuildConfig.BUILD_TYPE);
+        //设备信息
+        sb.append("\nMODEL:").append(Build.MODEL);
+        sb.append("\nRELEASE:").append(Build.VERSION.RELEASE);
+        sb.append("\nSDK:").append(Build.VERSION.SDK_INT);
+        sb.append("\nEXCEPTION:").append(ex.getLocalizedMessage());
+        sb.append("\nSTACK_TRACE:").append(result);
+        String crashFilePath = CrashHelper.getCrashLogPath(context);
+        if (crashFilePath.length()>0){
             try {
-                Looper.loop();
-            } catch (Throwable e) {
-                isChoreographerException(e);
-                if (sExceptionHandler != null) {
-                    sExceptionHandler.bandageExceptionHappened(e);
-                }
+                AppLogUtils.w(CrashHandler.TAG, "handleException---输出路径-----"+crashFilePath);
+                FileWriter writer = new FileWriter( crashFilePath+ now + CRASH_REPORTER_EXTENSION);
+                writer.write(sb.toString());
+                writer.flush();
+                writer.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
+    }
+
+
+    public static final String CRASH_LOGS = "crashLogs";
+    public static final String CRASH_PICS = "crashPics";
+
+    /**
+     * 目录地址
+     * 崩溃日志记录地址
+     * SDCard/Android/data/<application package>/cache
+     * data/data/<application package>/cache
+     */
+    public static String getCrashLogPath(Context context) {
+        String crashLogs = AppFileUtils.getExternalFilePath(context, CRASH_LOGS);
+        return crashLogs;
     }
 
     /**
-     * view measure layout draw时抛出异常会导致Choreographer挂掉
-     * 建议直接杀死app。以后的版本会只关闭黑屏的Activity
-     * @param e                             e
+     * 目录地址
+     * 崩溃截图记录地址
+     * SDCard/Android/data/<application package>/cache
+     * data/data/<application package>/cache
      */
-    protected void isChoreographerException(Throwable e) {
-        if (e == null || sExceptionHandler == null) {
-            return;
-        }
-        StackTraceElement[] elements = e.getStackTrace();
-        if (elements == null) {
-            return;
-        }
-        for (int i = elements.length - 1; i > -1; i--) {
-            if (elements.length - i > 20) {
-                return;
-            }
-            StackTraceElement element = elements[i];
-            if ("android.view.Choreographer".equals(element.getClassName())
-                    && "Choreographer.java".equals(element.getFileName())
-                    && "doFrame".equals(element.getMethodName())) {
-                sExceptionHandler.mayBeBlackScreen(e);
-                return;
-            }
-        }
+    public static String getCrashPicPath(Context context) {
+        String crashLogs = AppFileUtils.getExternalFilePath(context, CRASH_PICS);
+        return crashLogs;
     }
 
-    protected void setSafe(Thread thread, Throwable ex) {
-        AppLogUtils.w(CrashHandler.TAG, "setSafe--- thread-----"+thread.getName());
-        //判断是否是同一个线程
-        if (thread == Looper.getMainLooper().getThread()) {
-            CrashHelper.getInstance().isChoreographerException(ex);
-            CrashHelper.getInstance().safeMode();
-            AppLogUtils.w(CrashHandler.TAG, "setSafe--- safeMode-----");
+
+    /**
+     * 添加富文本
+     *
+     * @param spannable
+     * @param matchContent    需要匹配的文本
+     * @param foregroundColor 改变颜色
+     * @param textSize        文字大小
+     */
+    public static Spannable addNewSpan(Context context, Spannable spannable, String allContent,
+                                       String matchContent, @ColorInt int foregroundColor, int textSize) {
+        Pattern pattern = Pattern.compile(Pattern.quote(matchContent));
+        Matcher matcher = pattern.matcher(allContent);
+        while (matcher.find()) {
+            int start = matcher.start();
+            if (start >= 0) {
+                int end = start + matchContent.length();
+                if (textSize > 0) {
+                    spannable.setSpan(new AbsoluteSizeSpan(AppSizeUtils.sp2px(context, textSize)),
+                            start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                }
+                spannable.setSpan(new ForegroundColorSpan(foregroundColor),
+                        start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            }
         }
+        return spannable;
     }
 
 }

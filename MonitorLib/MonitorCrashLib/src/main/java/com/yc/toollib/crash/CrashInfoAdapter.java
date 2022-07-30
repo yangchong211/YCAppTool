@@ -22,7 +22,6 @@ public class CrashInfoAdapter extends BaseRecycleAdapter<File> {
     protected void bindData(BaseViewHolder holder, File file) {
         TextView tvTitle = holder.getView(R.id.tv_title);
         TextView tvPath = holder.getView(R.id.tv_path);
-
         tvPath.setText(file.getAbsolutePath());
         //动态修改颜色
         String fileName = file.getName().replace(".txt", "");
@@ -32,7 +31,7 @@ public class CrashInfoAdapter extends BaseRecycleAdapter<File> {
             String errorMsgType = splitNames[2];
             if (!TextUtils.isEmpty(errorMsgType)) {
                 spannable = Spannable.Factory.getInstance().newSpannable(fileName);
-                spannable = CrashLibUtils.addNewSpan(context, spannable, fileName, errorMsgType,
+                spannable = CrashHelper.addNewSpan(context, spannable, fileName, errorMsgType,
                         Color.parseColor("#FF0006"), 0);
             }
         }

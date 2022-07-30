@@ -55,7 +55,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     /**
      * Intent 传递的文件路径
      */
-    public static final String IntentKey_FilePath = "IntentKey_FilePath";
+    public static final String INTENT_KEY_FILE_PATH = "IntentKey_FilePath";
     /**
      * 文件路径
      */
@@ -72,7 +72,6 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
      * 所有Activity的集合
      */
     private List<Class> activitiesClass;
-    private LinearLayout mActivityCrashList;
     private LinearLayout mLlBack;
     private TextView mTvShare;
     private TextView mTvCopy;
@@ -80,8 +79,6 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     private ScrollView mScrollViewCrashDetails;
     private TextView mTvContent;
     private ImageView mIvScreenShot;
-    private LinearLayout mProgressView;
-    private TextView mTvProgressbarMsg;
 
 
     @Override
@@ -99,7 +96,6 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initFindViewById() {
-        mActivityCrashList = findViewById(R.id.activity_crash_list);
         mLlBack = findViewById(R.id.ll_back);
         mTvShare = findViewById(R.id.tv_share);
         mTvCopy = findViewById(R.id.tv_copy);
@@ -107,8 +103,6 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
         mScrollViewCrashDetails = findViewById(R.id.scrollViewCrashDetails);
         mTvContent = findViewById(R.id.tv_content);
         mIvScreenShot = findViewById(R.id.iv_screen_shot);
-        mProgressView = findViewById(R.id.progress_view);
-        mTvProgressbarMsg = findViewById(R.id.tv_progressbar_msg);
 
     }
 
@@ -137,17 +131,17 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
 
                 //匹配错误信息
                 if (!TextUtils.isEmpty(matchErrorInfo)) {
-                    spannable = CrashLibUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, matchErrorInfo, Color.parseColor("#FF0006"), 18);
+                    spannable = CrashHelper.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, matchErrorInfo, Color.parseColor("#FF0006"), 18);
                 }
 
                 //匹配包名
                 String packageName = getPackageName();
-                spannable = CrashLibUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, packageName, Color.parseColor("#0070BB"), 0);
+                spannable = CrashHelper.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, packageName, Color.parseColor("#0070BB"), 0);
 
                 //匹配Activity
                 if (activitiesClass != null && activitiesClass.size() > 0) {
                     for (int i = 0; i < activitiesClass.size(); i++) {
-                        spannable = CrashLibUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, activitiesClass.get(i).getSimpleName(), Color.parseColor("#55BB63"), 16);
+                        spannable = CrashHelper.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, activitiesClass.get(i).getSimpleName(), Color.parseColor("#55BB63"), 16);
                     }
                 }
 
@@ -181,7 +175,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initIntent() {
-        filePath = getIntent().getStringExtra(IntentKey_FilePath);
+        filePath = getIntent().getStringExtra(INTENT_KEY_FILE_PATH);
     }
 
     @Override
@@ -213,7 +207,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
 
     private void savePicture(Bitmap bitmap) {
         if (bitmap != null) {
-            String crashPicPath = CrashLibUtils.getCrashPicPath(CrashDetailsActivity.this) + "/crash_pic_" + System.currentTimeMillis() + ".jpg";
+            String crashPicPath = CrashHelper.getCrashPicPath(CrashDetailsActivity.this) + "/crash_pic_" + System.currentTimeMillis() + ".jpg";
             boolean saveBitmap = FileSaveUtils.saveBitmap(CrashDetailsActivity.this, bitmap, crashPicPath);
             if (saveBitmap) {
                 showToast("保存截图成功，请到相册查看\n路径：" + crashPicPath);
@@ -321,12 +315,12 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void showProgressLoading(String msg) {
-        LinearLayout progress_view = findViewById(R.id.progress_view);
-        TextView tv_progressbar_msg = findViewById(R.id.tv_progressbar_msg);
-        if (progress_view != null) {
-            progress_view.setVisibility(View.VISIBLE);
-            tv_progressbar_msg.setText(msg);
-            progress_view.setOnClickListener(new View.OnClickListener() {
+        LinearLayout progressView = findViewById(R.id.progress_view);
+        TextView tvProgressbarMsg = findViewById(R.id.tv_progressbar_msg);
+        if (progressView != null) {
+            progressView.setVisibility(View.VISIBLE);
+            tvProgressbarMsg.setText(msg);
+            progressView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 

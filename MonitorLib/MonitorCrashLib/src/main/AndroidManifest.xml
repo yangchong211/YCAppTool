@@ -14,9 +14,6 @@
         <activity
             android:name=".crash.CrashDetailsActivity"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".crash.CrashTestActivity"
-            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

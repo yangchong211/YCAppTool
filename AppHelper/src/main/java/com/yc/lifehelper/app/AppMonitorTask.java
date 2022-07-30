@@ -56,17 +56,6 @@ public class AppMonitorTask extends AbsParallelTask {
                 .setWriteLog(false)
                 .init(MainApplication.getInstance(), new CrashListener() {
             /**
-             * 重启app
-             */
-            @Override
-            public void againStartApp() {
-                System.out.println("崩溃重启----------againStartApp------");
-                //CrashToolUtils.reStartApp1(MainApplication.this,2000);
-                //CrashToolUtils.reStartApp2(App.this,2000, MainActivity.class);
-                //CrashToolUtils.reStartApp3(App.this);
-            }
-
-            /**
              * 自定义上传crash，支持开发者上传自己捕获的crash数据
              * @param ex                        ex
              */

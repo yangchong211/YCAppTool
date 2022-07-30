@@ -2,6 +2,7 @@ package com.yc.appmonitor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,6 +11,7 @@ import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;
 import com.yc.roundcorner.view.RoundTextView;
+import com.yc.toollib.crash.CrashListActivity;
 import com.yc.toolutils.click.PerfectClickListener;
 
 public class MonitorMainActivity extends BaseActivity {
@@ -17,6 +19,8 @@ public class MonitorMainActivity extends BaseActivity {
     private RoundTextView tvPhoneMonitor;
     private RoundTextView tvPingMonitor;
     private RoundTextView tvFileMonitor;
+    private RoundTextView tvCrashMonitor;
+    private RoundTextView tvCrashTest;
 
     @Override
     public int getContentView() {
@@ -28,6 +32,9 @@ public class MonitorMainActivity extends BaseActivity {
         tvPhoneMonitor = findViewById(R.id.tv_phone_monitor);
         tvPingMonitor = findViewById(R.id.tv_ping_monitor);
         tvFileMonitor = findViewById(R.id.tv_file_monitor);
+        tvCrashMonitor = findViewById(R.id.tv_crash_monitor);
+        tvCrashTest = findViewById(R.id.tv_crash_test);
+
     }
 
     @Override
@@ -49,6 +56,19 @@ public class MonitorMainActivity extends BaseActivity {
             @Override
             protected void onNoDoubleClick(View v) {
                 FileExplorerActivity.startActivity(MonitorMainActivity.this);
+            }
+        });
+        tvCrashMonitor.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                CrashListActivity.startActivity(MonitorMainActivity.this);
+            }
+        });
+        tvCrashTest.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                Intent intent = new Intent(MonitorMainActivity.this, CrashTestActivity.class);
+                startActivity(intent);
             }
         });
     }

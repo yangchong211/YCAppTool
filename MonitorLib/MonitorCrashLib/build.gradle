@@ -56,7 +56,4 @@ dependencies {
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     //状态栏：https://github.com/yangchong211/YCStatusBar
     implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
-    //参考：https://github.com/tiann/FreeReflection
-    //是一个允许你在Android P(包括Q和R)之上不受任何限制地使用反射的库。
-    implementation 'me.weishu:free_reflection:1.2.0'
 }

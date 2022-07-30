@@ -11,7 +11,7 @@ import com.yc.lifehelper.R;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;
 import com.yc.mvctodo.NetworkActivity;
-import com.yc.toollib.crash.CrashLibUtils;
+import com.yc.toollib.crash.CrashListActivity;
 import com.yc.toolutils.click.FastClickUtils;
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 
@@ -49,7 +49,7 @@ public class HeaderComponent implements InterItemView {
                     break;
                 //崩溃监控
                 case R.id.tv_home_second:
-                    CrashLibUtils.startCrashTestActivity(context);
+                    CrashListActivity.startActivity(context);
                     AppLogHelper.d("crash app log");
                     break;
                 //网络工具

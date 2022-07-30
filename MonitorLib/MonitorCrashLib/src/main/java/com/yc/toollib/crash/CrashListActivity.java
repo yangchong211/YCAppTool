@@ -1,6 +1,7 @@
 package com.yc.toollib.crash;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -53,6 +54,22 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
     private Handler handler = new Handler();
     private CrashInfoAdapter crashInfoAdapter;
     private ProgressDialog progressDialog;
+
+    /**
+     * 开启页面
+     *
+     * @param context 上下文
+     */
+    public static void startActivity(Context context) {
+        try {
+            Intent target = new Intent();
+            target.setClass(context, CrashListActivity.class);
+            target.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(target);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -157,7 +174,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
                 if (fileList.size()>position && position>=0){
                     Intent intent = new Intent(CrashListActivity.this, CrashDetailsActivity.class);
                     File file = fileList.get(position);
-                    intent.putExtra(CrashDetailsActivity.IntentKey_FilePath, file.getAbsolutePath());
+                    intent.putExtra(CrashDetailsActivity.INTENT_KEY_FILE_PATH, file.getAbsolutePath());
                     startActivity(intent);
                 }
             }
@@ -178,7 +195,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
     private void getCrashList() {
         //重新获取
         fileList.clear();
-        String filePath = CrashLibUtils.getCrashLogPath(this);
+        String filePath = CrashHelper.getCrashLogPath(this);
         AppLogUtils.d("CrashListActivity : " , "file path : " + filePath);
         //路径  /storage/emulated/0/Android/data/com.yc.lifehelper/cache/crashLogs
         fileList = AppFileUtils.getFileList(filePath);
@@ -241,7 +258,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
                 DelegateTaskExecutor.getInstance().executeOnCpu(new Runnable() {
                     @Override
                     public void run() {
-                        File fileCrash = new File(CrashLibUtils.getCrashLogPath(CrashListActivity.this));
+                        File fileCrash = new File(CrashHelper.getCrashLogPath(CrashListActivity.this));
                         AppFileUtils.deleteAllFiles(fileCrash);
                         //重新获取
                         getCrashList();
