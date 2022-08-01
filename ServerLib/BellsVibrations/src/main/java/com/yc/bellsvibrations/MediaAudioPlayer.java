@@ -88,7 +88,6 @@ public final class MediaAudioPlayer {
                     case 1:
                         //播放asset文件
                         AssetFileDescriptor afd = mContext.getAssets().openFd((String) data);
-                        //AssetFileDescriptor afd = mContext.getResources().openRawResourceFd((Integer) data);
                         mMediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
                         break;
                     case 2:
