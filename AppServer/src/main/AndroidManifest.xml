@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.yc.appserver.log.LogTestActivity"/>
+        <activity android:name=".vibrator.VibratorTestActivity"/>
     </application>
 
 </manifest>

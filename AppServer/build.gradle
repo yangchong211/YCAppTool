@@ -36,6 +36,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':RoundCorners')
@@ -44,5 +45,6 @@ dependencies {
     implementation project(path: ':AppLogHelper')
     implementation project(path: ':AppLogProcess')
     implementation project(path: ':MonitorFileLib')
+    implementation project(path: ':BellsVibrations')
 }
 

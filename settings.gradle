@@ -44,7 +44,7 @@ include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogHelper', ':AppLogProcess', ':NetInterceptor', ':SignalHooker',
-        ':GlideProgressLib'
+        ':GlideProgressLib', ':CompressServer', ':BellsVibrations'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -62,8 +62,8 @@ project(':PrivateServer').projectDir = new File('ServerLib/PrivateServer')
 project(':NetInterceptor').projectDir = new File('ServerLib/NetInterceptor')
 project(':SignalHooker').projectDir = new File('ServerLib/SignalHooker')
 project(':GlideProgressLib').projectDir = new File('ServerLib/GlideProgressLib')
-
-
+project(':CompressServer').projectDir = new File('ServerLib/CompressServer')
+project(':BellsVibrations').projectDir = new File('ServerLib/BellsVibrations')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
@@ -242,4 +242,3 @@ project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 include ':MonitorAppLib'
 
 
-include ':CompressServer'
