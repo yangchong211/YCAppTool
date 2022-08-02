@@ -15,7 +15,7 @@ import android.os.Vibrator
  *     doc  :
  * </pre>
  */
-class VibratorHelper (private val context: Context){
+class VibratorHelper(private val context: Context) {
 
     /**
      * 在使用震动服务时需要如下权限：android.permission.VIBRATE
@@ -28,7 +28,7 @@ class VibratorHelper (private val context: Context){
     /**
      * 得到震动服务后检测vibrator是否存在
      */
-    private fun isVibrator() : Boolean{
+    private fun isVibrator(): Boolean {
         return vibrator?.hasVibrator() == true
     }
 
@@ -39,10 +39,10 @@ class VibratorHelper (private val context: Context){
      */
     fun vibrate(pattern: LongArray, repeat: Int) {
         vibrator?.run {
-            if (hasVibrator()){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                    this.vibrate(VibrationEffect.createWaveform(pattern,repeat))
-                } else{
+            if (hasVibrator()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    this.vibrate(VibrationEffect.createWaveform(pattern, repeat))
+                } else {
                     this.vibrate(pattern, repeat)
                 }
             }
@@ -52,9 +52,9 @@ class VibratorHelper (private val context: Context){
     /**
      * 开始启动vibrator持续milliseconds毫秒
      */
-    fun vibrate(milliseconds : Long){
+    fun vibrate(milliseconds: Long) {
         vibrator?.run {
-            if (hasVibrator()){
+            if (hasVibrator()) {
                 this.vibrate(milliseconds)
             }
         }
