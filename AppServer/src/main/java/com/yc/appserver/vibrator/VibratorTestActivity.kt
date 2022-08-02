@@ -26,6 +26,7 @@ class VibratorTestActivity : AppCompatActivity() {
     private lateinit var  tvMedia1:RoundTextView
     private lateinit var  tvMedia2:RoundTextView
     private lateinit var  tvMedia3:RoundTextView
+    private lateinit var  tvMedia4:RoundTextView
     private var vibratorHelper: VibratorHelper?= null
     private var mediaAudioPlayer: MediaAudioPlayer?= null
 
@@ -58,6 +59,7 @@ class VibratorTestActivity : AppCompatActivity() {
         tvMedia1 = findViewById(R.id.tv_media_1)
         tvMedia2 = findViewById(R.id.tv_media_2)
         tvMedia3 = findViewById(R.id.tv_media_3)
+        tvMedia4 = findViewById(R.id.tv_media_4)
     }
 
     private fun initListener() {
@@ -84,6 +86,10 @@ class VibratorTestActivity : AppCompatActivity() {
         tvMedia3.setOnClickListener {
             ToastUtils.showRoundRectToast("取消播放")
             mediaAudioPlayer?.stop()
+        }
+        tvMedia4.setOnClickListener {
+            ToastUtils.showRoundRectToast("设置播放媒体声音变大")
+
         }
     }
 
