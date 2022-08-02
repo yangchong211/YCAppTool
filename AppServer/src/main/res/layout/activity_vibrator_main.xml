@@ -102,13 +102,27 @@
             android:layout_height="40dp"
             android:gravity="left|center_vertical"
             android:paddingLeft="@dimen/dp20"
-            android:text="7.设置播放媒体声音变大"
+            android:text="7.设置播放媒体声音变大1"
             android:textSize="@dimen/textSize18"
             android:background="@color/priority_green"
             android:layout_marginTop="@dimen/dp20"
             app:rRadius="@dimen/dp20"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_media_3"/>
+
+        <com.yc.roundcorner.view.RoundTextView
+            android:id="@+id/tv_media_5"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="@dimen/dp20"
+            android:text="8.设置播放媒体声音变大2"
+            android:textSize="@dimen/textSize18"
+            android:background="@color/priority_green"
+            android:layout_marginTop="@dimen/dp20"
+            app:rRadius="@dimen/dp20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_media_4"/>
 
 
 

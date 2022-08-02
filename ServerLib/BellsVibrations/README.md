@@ -9,7 +9,7 @@
 
 
 ### 01.基础概念介绍
-
+- 修改系统音量这种操作还是挺常见的，一般在多媒体开发中都多少会涉及到。
 
 
 ### 02.常见思路和做法
@@ -36,6 +36,12 @@
     STREAM_MUSIC	    媒体音	音频、视频、游戏等的声音
     STREAM_ALARM	    闹钟音	 
     STREAM_NOTIFICATION	通知音
+    ```
+- AudioManager类的音量模式
+    ```
+    RINGER_MODE_NORMAL  正常
+    RINGER_MODE_SILENT  静音
+    RINGER_MODE_VIBRATE 震动
     ```
 - setStreamVolume和adjustStreamVolume的区别
     - setStreamVolume直接将音量调整到目标值，通常与拖动条配合使用；而adjustStreamVolume是以当前音量为基础，然后调大、调小或调静音。

@@ -3,13 +3,12 @@ package com.yc.appserver.vibrator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.yc.appserver.R
+import com.yc.bellsvibrations.AudioVolumeHelper
 import com.yc.bellsvibrations.MediaAudioPlayer
 import com.yc.bellsvibrations.VibratorHelper
 import com.yc.logclient.LogUtils
-import com.yc.monitorfilelib.FileExplorerActivity
 import com.yc.roundcorner.view.RoundTextView
 import com.yc.toastutils.ToastUtils
 
@@ -27,8 +26,10 @@ class VibratorTestActivity : AppCompatActivity() {
     private lateinit var  tvMedia2:RoundTextView
     private lateinit var  tvMedia3:RoundTextView
     private lateinit var  tvMedia4:RoundTextView
+    private lateinit var  tvMedia5:RoundTextView
     private var vibratorHelper: VibratorHelper?= null
     private var mediaAudioPlayer: MediaAudioPlayer?= null
+    private var audioVolumeHelper: AudioVolumeHelper?= null
 
     companion object{
         fun startActivity(context: Context) {
@@ -47,6 +48,7 @@ class VibratorTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_vibrator_main)
         vibratorHelper = VibratorHelper(this)
         mediaAudioPlayer = MediaAudioPlayer(this)
+        audioVolumeHelper = AudioVolumeHelper(this)
         initView()
         initListener()
         LogUtils.i("Log test info : LogTestActivity is create")
@@ -60,6 +62,7 @@ class VibratorTestActivity : AppCompatActivity() {
         tvMedia2 = findViewById(R.id.tv_media_2)
         tvMedia3 = findViewById(R.id.tv_media_3)
         tvMedia4 = findViewById(R.id.tv_media_4)
+        tvMedia5 = findViewById(R.id.tv_media_5)
     }
 
     private fun initListener() {
@@ -88,7 +91,19 @@ class VibratorTestActivity : AppCompatActivity() {
             mediaAudioPlayer?.stop()
         }
         tvMedia4.setOnClickListener {
-            ToastUtils.showRoundRectToast("设置播放媒体声音变大")
+            if (audioVolumeHelper?.enableRingtone() == true){
+                ToastUtils.showRoundRectToast("设置播放媒体声音变大1")
+                audioVolumeHelper?.dynamicChangeVolume(4,0.5f)
+            } else {
+                ToastUtils.showRoundRectToast("不支持铃声")
+            }
+        }
+        tvMedia5.setOnClickListener {
+            ToastUtils.showRoundRectToast("设置播放媒体声音变大2")
+            val maxVolume = audioVolumeHelper?.getMediaMaxVolume(4)
+            maxVolume?.let {
+                audioVolumeHelper?.setMediaVolume(4, (it * 0.5f).toInt())
+            }
 
         }
     }

@@ -13,7 +13,7 @@ import android.media.AudioManager
  *     doc  :
  * </pre>
  */
-class AudioVolumeHelper(private val context: Context) : IAudioVolume{
+class AudioVolumeHelper(private val context: Context) : IAudioVolume {
 
     /**
      * 管理这些铃声音量的工具是AudioManager，对象从系统服务AUDIO_SERVICE中获取
@@ -105,43 +105,55 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume{
      * AudioManager.FLAG_SHOW_SILENT_HINT 静音提示
      * AudioManager.FLAG_PLAY_SOUND 调整音量时播放声音
      */
-    override fun setMediaVolume(type: Int, volume: Int){
+    override fun setMediaVolume(type: Int, volume: Int) {
         when (type) {
             //通话声音
             1 -> {
-                audioManager?.setStreamVolume(AudioManager.STREAM_VOICE_CALL,
+                audioManager?.setStreamVolume(
+                    AudioManager.STREAM_VOICE_CALL,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
             //系统音
             2 -> {
-                audioManager?.setStreamVolume(AudioManager.STREAM_SYSTEM,
+                audioManager?.setStreamVolume(
+                    AudioManager.STREAM_SYSTEM,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
             //铃音，来电与收短信的铃声
             3 -> {
-                audioManager?.setStreamVolume(AudioManager.STREAM_RING,
+                audioManager?.setStreamVolume(
+                    AudioManager.STREAM_RING,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
             //媒体音	，音视频，游戏等
             4 -> {
-                audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC,
+                audioManager?.setStreamVolume(
+                    AudioManager.STREAM_MUSIC,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
             //闹钟音
             5 -> {
-                audioManager?.setStreamVolume(AudioManager.STREAM_ALARM,
+                audioManager?.setStreamVolume(
+                    AudioManager.STREAM_ALARM,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
             //通知声音
             6 -> {
-                audioManager?.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
+                audioManager?.setStreamVolume(
+                    AudioManager.STREAM_NOTIFICATION,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
         }
     }
@@ -149,44 +161,60 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume{
     /**
      * 设置指定类型铃声的当前音量
      * adjustStreamVolume是以当前音量为基础，然后调大、调小或调静音。
+     * 第二个参数 direction ：
+     * AudioManager.ADJUST_RAISE 音量逐渐递增
+     * AudioManager.ADJUST_LOWER 音量逐渐递减
+     * AudioManager.ADJUST_SAME 不变
      */
     override fun setAdjustStreamVolume(type: Int, volume: Int) {
         when (type) {
             //通话声音
             1 -> {
-                audioManager?.adjustStreamVolume(AudioManager.STREAM_VOICE_CALL,
+                audioManager?.adjustStreamVolume(
+                    AudioManager.STREAM_VOICE_CALL,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
             //系统音
             2 -> {
-                audioManager?.adjustStreamVolume(AudioManager.STREAM_SYSTEM,
+                audioManager?.adjustStreamVolume(
+                    AudioManager.STREAM_SYSTEM,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
             //铃音，来电与收短信的铃声
             3 -> {
-                audioManager?.adjustStreamVolume(AudioManager.STREAM_RING,
+                audioManager?.adjustStreamVolume(
+                    AudioManager.STREAM_RING,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
             //媒体音	，音视频，游戏等
             4 -> {
-                audioManager?.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+                audioManager?.adjustStreamVolume(
+                    AudioManager.STREAM_MUSIC,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
             //闹钟音
             5 -> {
-                audioManager?.adjustStreamVolume(AudioManager.STREAM_ALARM,
+                audioManager?.adjustStreamVolume(
+                    AudioManager.STREAM_ALARM,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
             //通知声音
             6 -> {
-                audioManager?.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION,
+                audioManager?.adjustStreamVolume(
+                    AudioManager.STREAM_NOTIFICATION,
                     volume, AudioManager.FLAG_PLAY_SOUND
-                            or AudioManager.FLAG_SHOW_UI)
+                            or AudioManager.FLAG_SHOW_UI
+                )
             }
         }
     }
@@ -194,7 +222,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume{
     /**
      * 设置指定类型铃声的响铃模式
      */
-    override fun setRingerMode(mode : Int) {
+    override fun setRingerMode(mode: Int) {
         audioManager?.ringerMode = mode
     }
 
@@ -227,6 +255,22 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume{
             //正常
             AudioManager.RINGER_MODE_NORMAL -> true
             else -> false
+        }
+    }
+
+    /**
+     * 按照比例调整声音
+     */
+    override fun dynamicChangeVolume(type: Int, rate: Float) {
+        //获取最大音量
+        val mediaMaxVolume = getMediaMaxVolume(type)
+        //获取当前音量
+        val mediaVolume = getMediaVolume(type)
+        //获取比例音量 = 最大音量 * 比例
+        val targetVolume = mediaMaxVolume * rate
+        if (mediaVolume < targetVolume) {
+            //如果当前音量小于获取比例音量，则修改声音
+            setMediaVolume(type, targetVolume.toInt())
         }
     }
 

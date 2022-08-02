@@ -53,4 +53,9 @@ interface IAudioVolume {
      * 是否支持震动
      */
     fun enableVibrate(): Boolean
+
+    /**
+     * 按照比例调整声音
+     */
+    fun dynamicChangeVolume(type: Int, rate: Float)
 }
