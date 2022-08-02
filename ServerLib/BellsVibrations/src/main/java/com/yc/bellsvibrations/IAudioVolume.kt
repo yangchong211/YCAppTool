@@ -1,5 +1,15 @@
 package com.yc.bellsvibrations
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     GitHub : https://github.com/yangchong211/YCServerLib
+ *     time  : 2018/11/9
+ *     desc  : 手机声音设置帮助类接口
+ *     doc  :
+ * </pre>
+ */
 interface IAudioVolume {
 
     /**
@@ -19,8 +29,15 @@ interface IAudioVolume {
 
     /**
      * 设置指定类型铃声的当前音量
+     * setStreamVolume直接将音量调整到目标值，通常与拖动条配合使用；
      */
     fun setMediaVolume(type: Int, volume: Int)
+
+    /**
+     * 设置指定类型铃声的当前音量
+     * adjustStreamVolume是以当前音量为基础，然后调大、调小或调静音。
+     */
+    fun setAdjustStreamVolume(type: Int, volume: Int)
 
     /**
      * 设置指定类型铃声的响铃模式

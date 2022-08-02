@@ -97,6 +97,13 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume{
 
     /**
      * 设置指定类型铃声的当前音量
+     * 调用setStreamVolume方法，第三个参数是flag标签
+     * AudioManager.FLAG_SHOW_UI 调整音量时显示系统音量进度条 , 0 则不显示
+     * AudioManager.FLAG_ALLOW_RINGER_MODES 是否铃声模式
+     * AudioManager.FLAG_VIBRATE 是否震动模式
+     * AudioManager.FLAG_SHOW_VIBRATE_HINT 震动提示
+     * AudioManager.FLAG_SHOW_SILENT_HINT 静音提示
+     * AudioManager.FLAG_PLAY_SOUND 调整音量时播放声音
      */
     override fun setMediaVolume(type: Int, volume: Int){
         when (type) {
@@ -133,6 +140,51 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume{
             //通知声音
             6 -> {
                 audioManager?.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
+                    volume, AudioManager.FLAG_PLAY_SOUND
+                            or AudioManager.FLAG_SHOW_UI)
+            }
+        }
+    }
+
+    /**
+     * 设置指定类型铃声的当前音量
+     * adjustStreamVolume是以当前音量为基础，然后调大、调小或调静音。
+     */
+    override fun setAdjustStreamVolume(type: Int, volume: Int) {
+        when (type) {
+            //通话声音
+            1 -> {
+                audioManager?.adjustStreamVolume(AudioManager.STREAM_VOICE_CALL,
+                    volume, AudioManager.FLAG_PLAY_SOUND
+                            or AudioManager.FLAG_SHOW_UI)
+            }
+            //系统音
+            2 -> {
+                audioManager?.adjustStreamVolume(AudioManager.STREAM_SYSTEM,
+                    volume, AudioManager.FLAG_PLAY_SOUND
+                            or AudioManager.FLAG_SHOW_UI)
+            }
+            //铃音，来电与收短信的铃声
+            3 -> {
+                audioManager?.adjustStreamVolume(AudioManager.STREAM_RING,
+                    volume, AudioManager.FLAG_PLAY_SOUND
+                            or AudioManager.FLAG_SHOW_UI)
+            }
+            //媒体音	，音视频，游戏等
+            4 -> {
+                audioManager?.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+                    volume, AudioManager.FLAG_PLAY_SOUND
+                            or AudioManager.FLAG_SHOW_UI)
+            }
+            //闹钟音
+            5 -> {
+                audioManager?.adjustStreamVolume(AudioManager.STREAM_ALARM,
+                    volume, AudioManager.FLAG_PLAY_SOUND
+                            or AudioManager.FLAG_SHOW_UI)
+            }
+            //通知声音
+            6 -> {
+                audioManager?.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION,
                     volume, AudioManager.FLAG_PLAY_SOUND
                             or AudioManager.FLAG_SHOW_UI)
             }

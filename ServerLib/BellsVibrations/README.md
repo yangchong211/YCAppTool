@@ -20,12 +20,14 @@
 
 
 #### 2.2 手机震动设置
-- 手机震动设置，第一步通过系统服务获得手机震动服务；第二步调用vibrate方法设置震动；第三步设置cancel方法取消震动。
+- 手机震动设置
+    - 第一步通过系统服务获得手机震动服务；第二步调用vibrate方法设置震动；第三步设置cancel方法取消震动。
 
 
 #### 2.3 修改手机音量
 - 调节音量，就要对Android系统中的铃音种类有一个认识。
     - Android系统中国一共有6类铃音，分别是通话音，系统音，铃音，媒体音，闹钟音，通知音。
+    - Android中音量模式有3类，分别是正常，静音，震动。
 - AudioManager类的铃声类型
     ```
     STREAM_VOICE_CALL	通话音	 
@@ -35,8 +37,10 @@
     STREAM_ALARM	    闹钟音	 
     STREAM_NOTIFICATION	通知音
     ```
-
-
+- setStreamVolume和adjustStreamVolume的区别
+    - setStreamVolume直接将音量调整到目标值，通常与拖动条配合使用；而adjustStreamVolume是以当前音量为基础，然后调大、调小或调静音。
+- 修改手机音量大概的流程
+    - 1
 
 
 
