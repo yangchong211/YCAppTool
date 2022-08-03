@@ -275,4 +275,16 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
     }
 
 
+    @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
+    annotation class DataSource {
+        companion object {
+            var STREAM_VOICE_CALL = 1   //通话声音
+            var STREAM_SYSTEM = 2       //系统音
+            var STREAM_RING = 3         //铃音，来电与收短信的铃声
+            var STREAM_MUSIC = 4        //媒体音	，音视频，游戏等
+            var STREAM_ALARM = 5        //闹钟音
+            var STREAM_NOTIFICATION = 6 //通知声音
+        }
+    }
+
 }
