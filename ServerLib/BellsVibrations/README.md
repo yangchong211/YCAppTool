@@ -4,12 +4,17 @@
 - 02.常见思路做法
 - 03.Api调用说明
 - 04.遇到的坑分析
-- 05.图片圆角性能
+- 05.该库性能分析
 
 
 
 ### 01.基础概念介绍
-- 修改系统音量这种操作还是挺常见的，一般在多媒体开发中都多少会涉及到。
+- 震动器
+    - Vibrator(振动器)，是手机自带的振动器，是Android给我们提供的用于机身震动的一个服务。
+    - 比如当手机收到推送消息的时候可以设置震动提醒。扫码环节中扫码成功震动提示一下用户，可以给个提示然后震动一下下。
+- 修改手机音量
+    - 修改系统音量这种操作还是挺常见的，一般在多媒体开发中都多少会涉及到。比如，app上有语音通话，当来电和去电时，需要播放铃声和调节声音。
+
 
 
 ### 02.常见思路和做法
@@ -46,20 +51,64 @@
 - setStreamVolume和adjustStreamVolume的区别
     - setStreamVolume直接将音量调整到目标值，通常与拖动条配合使用；而adjustStreamVolume是以当前音量为基础，然后调大、调小或调静音。
 - 修改手机音量大概的流程
-    - 1
+    - 
 
 
 
 ### 03.Api调用说明
-
-
+- 如何设置震动，Api如下所示
+    ``` kotlin
+    //开始震动
+    vibratorHelper?.vibrate(longArrayOf(300L, 800L), 0)
+    //取消震动
+    vibratorHelper?.cancel()
+    //设置震动3秒
+    vibratorHelper?.vibrate(3000)
+    ```
+- 设置播放音频铃声，API如下所示
+    ``` kotlin
+    //开始播放raw音频铃声资源
+    mediaAudioPlayer?.play(MediaAudioPlayer.DataSource.DATA_SOURCE_URI,R.raw.audio_call_ring)
+    //开始播放assets音频铃声资源
+    mediaAudioPlayer?.play(MediaAudioPlayer.DataSource.DATA_SOURCE_ASSET,"audio_call_ring.mp3")
+    //停止播放
+    mediaAudioPlayer?.stop()
+    //暂停
+    mediaAudioPlayer?.pause()
+    //销毁
+    mediaAudioPlayer?.release()
+    //恢复播放
+    mediaAudioPlayer?.resume()
+    ```
+- 手机声音设置，API如下所示
+    ``` kotlin
+    //获取最大多媒体音量
+    val mediaMaxVolume = audioVolumeHelper?.getMediaMaxVolume(4)
+    //是否支持铃音
+    val enableRingtone = audioVolumeHelper?.enableRingtone()
+    //是否支持震动
+    val enableVibrate = audioVolumeHelper?.enableVibrate()
+    //获取指定类型铃声的当前音量
+    val mediaVolume = audioVolumeHelper?.getMediaVolume(4)
+    //获取指定类型铃声的响铃模式
+    val ringerMode = audioVolumeHelper?.getRingerMode()
+    //设置指定类型铃声的响铃模式
+    audioVolumeHelper?.setRingerMode(AudioManager.RINGER_MODE_SILENT)
+    //设置指定类型铃声的当前音量
+    audioVolumeHelper?.setMediaVolume(4,5)
+    //设置指定类型铃声的当前音量
+    audioVolumeHelper?.setAdjustStreamVolume(4,5)
+    //按照比例调整声音
+    audioVolumeHelper?.dynamicChangeVolume(4,0.5f)
+    ```
 
 
 ### 04.遇到的坑分析
+- 使用震动需要检测服务
+    - 在设置震动时，需要先检测是否有震动器
 
 
-
-### 05.图片圆角性能
+### 05.该库性能分析
 
 
 

@@ -2,6 +2,7 @@ package com.yc.appserver.vibrator
 
 import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.yc.appserver.R
@@ -104,9 +105,27 @@ class VibratorTestActivity : AppCompatActivity() {
             maxVolume?.let {
                 audioVolumeHelper?.setMediaVolume(4, (it * 0.5f).toInt())
             }
-
         }
     }
 
-
+    private fun test(){
+        //获取最大多媒体音量
+        val mediaMaxVolume = audioVolumeHelper?.getMediaMaxVolume(4)
+        //是否支持铃音
+        val enableRingtone = audioVolumeHelper?.enableRingtone()
+        //是否支持震动
+        val enableVibrate = audioVolumeHelper?.enableVibrate()
+        //获取指定类型铃声的当前音量
+        val mediaVolume = audioVolumeHelper?.getMediaVolume(4)
+        //获取指定类型铃声的响铃模式
+        val ringerMode = audioVolumeHelper?.getRingerMode()
+        //设置指定类型铃声的响铃模式
+        audioVolumeHelper?.setRingerMode(AudioManager.RINGER_MODE_SILENT)
+        //设置指定类型铃声的当前音量
+        audioVolumeHelper?.setMediaVolume(4,5)
+        //设置指定类型铃声的当前音量
+        audioVolumeHelper?.setAdjustStreamVolume(4,5)
+        //按照比例调整声音
+        audioVolumeHelper?.dynamicChangeVolume(4,0.5f)
+    }
 }

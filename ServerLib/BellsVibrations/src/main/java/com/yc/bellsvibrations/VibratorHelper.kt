@@ -39,10 +39,13 @@ class VibratorHelper(private val context: Context) {
      */
     fun vibrate(pattern: LongArray, repeat: Int) {
         vibrator?.run {
+            //repeat表示：可以使震动有规律的震动  -1：表示不重复 0：循环的震动
             if (hasVibrator()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    //大于Android26
                     this.vibrate(VibrationEffect.createWaveform(pattern, repeat))
                 } else {
+                    //此方法在 API 级别 26 中已弃用
                     this.vibrate(pattern, repeat)
                 }
             }
@@ -55,7 +58,14 @@ class VibratorHelper(private val context: Context) {
     fun vibrate(milliseconds: Long) {
         vibrator?.run {
             if (hasVibrator()) {
-                this.vibrate(milliseconds)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    //大于Android26
+                    //振动的强度。该值必须在1到255之间
+                    this.vibrate(VibrationEffect.createOneShot(
+                        milliseconds,VibrationEffect.DEFAULT_AMPLITUDE))
+                } else {
+                    this.vibrate(milliseconds)
+                }
             }
         }
     }
