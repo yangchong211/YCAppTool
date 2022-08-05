@@ -72,7 +72,7 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
         ':ArchitectureLib',':ActivityManager', ':ToolFileLib',':EventUploadLib',
-        ':AppCommonInter',':ToolMemoryLib'
+        ':AppCommonInter',':ToolMemoryLib',':AppPermission'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -94,6 +94,7 @@ project(':ToolFileLib').projectDir = new File('CommonLib/ToolFileLib')
 project(':EventUploadLib').projectDir = new File('CommonLib/EventUploadLib')
 project(':AppCommonInter').projectDir = new File('CommonLib/AppCommonInter')
 project(':ToolMemoryLib').projectDir = new File('CommonLib/ToolMemoryLib')
+project(':AppPermission').projectDir = new File('CommonLib/AppPermission')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -240,5 +241,6 @@ project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 
 
 include ':MonitorAppLib'
+
 
 

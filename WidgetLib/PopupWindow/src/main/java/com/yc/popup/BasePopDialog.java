@@ -22,7 +22,7 @@ import android.widget.PopupWindow;
  */
 public abstract class BasePopDialog extends PopupWindow {
 
-    private Context mContext;
+    private final Context mContext;
     private View contentView;
     private Handler mHandler;
 

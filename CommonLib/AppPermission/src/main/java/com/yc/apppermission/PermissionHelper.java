@@ -1,4 +1,4 @@
-package com.yc.toolutils.permission;
+package com.yc.apppermission;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,16 @@ import androidx.core.app.ActivityCompat;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCAppTool
+ *     email  : yangchong211@163.com
+ *     time  : 2016/09/23
+ *     desc  : 权限 相关工具类
+ *     revise:
+ * </pre>
+ */
 public final class PermissionHelper {
 
     private PermissionResultListener permissionResultListener;

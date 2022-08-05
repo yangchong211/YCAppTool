@@ -1,4 +1,4 @@
-package com.yc.toolutils.permission;
+package com.yc.apppermission;
 
 import android.app.Activity;
 import android.content.Context;
