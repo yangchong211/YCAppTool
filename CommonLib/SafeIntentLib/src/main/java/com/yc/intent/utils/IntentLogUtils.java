@@ -17,7 +17,7 @@ import java.util.Iterator;
  */
 public final class IntentLogUtils {
 
-    public static String dumpBundleArray(Bundle[] bundleArray) {
+    private static String dumpBundleArray(Bundle[] bundleArray) {
         if (bundleArray == null) {
             return "null";
         }
@@ -32,6 +32,12 @@ public final class IntentLogUtils {
         return content.toString();
     }
 
+    /**
+     * 打印bundle数据
+     *
+     * @param bundle bundle数据
+     * @return 字符串
+     */
     public static String dumpBundle(Bundle bundle) {
         if (bundle == null) {
             return "null";
