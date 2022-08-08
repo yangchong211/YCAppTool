@@ -253,8 +253,7 @@ public final class PermissionUtils {
 
     private void requestCallback() {
         if (mSimpleCallback != null) {
-            if (mPermissionsRequest.size() == 0
-                    || mPermissions.size() == mPermissionsGranted.size()) {
+            if (mPermissionsRequest.size() == 0 || mPermissions.size() == mPermissionsGranted.size()) {
                 mSimpleCallback.onGranted();
             } else {
                 if (!mPermissionsDenied.isEmpty()) {
@@ -264,8 +263,7 @@ public final class PermissionUtils {
             mSimpleCallback = null;
         }
         if (mFullCallback != null) {
-            if (mPermissionsRequest.size() == 0
-                    || mPermissions.size() == mPermissionsGranted.size()) {
+            if (mPermissionsRequest.size() == 0 || mPermissions.size() == mPermissionsGranted.size()) {
                 mFullCallback.onGranted(mPermissionsGranted);
             } else {
                 if (!mPermissionsDenied.isEmpty()) {

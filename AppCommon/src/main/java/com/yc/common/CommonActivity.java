@@ -15,6 +15,9 @@ import com.yc.activitymanager.ActivityManager;
 import com.yc.apploglib.AppLogHelper;
 import com.yc.apploglib.config.AppLogFactory;
 import com.yc.apploglib.printer.AbsPrinter;
+import com.yc.apppermission.PermissionGroup;
+import com.yc.apppermission.PermissionHelper;
+import com.yc.apppermission.PermissionUtils;
 import com.yc.appprocesslib.AppStateLifecycle;
 import com.yc.appprocesslib.StateListener;
 import com.yc.apprestartlib.RestartAppHelper;
@@ -22,8 +25,13 @@ import com.yc.apprestartlib.RestartFactory;
 import com.yc.intent.log.IntentLogger;
 import com.yc.store.BaseDataCache;
 import com.yc.store.StoreToolHelper;
+import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppInfoUtils;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -110,6 +118,9 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
 
         findViewById(R.id.btn_intent).setOnClickListener(this);
         findViewById(R.id.btn_4).setOnClickListener(this);
+
+        findViewById(R.id.btn_call).setOnClickListener(this);
+        findViewById(R.id.btn_camera).setOnClickListener(this);
     }
 
 
@@ -154,7 +165,55 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
             intentLog();
         } else if (id == R.id.btn_4) {
 
+        } else if (id == R.id.btn_call) {
+            boolean hasPermissions = PermissionHelper.getInstance().hasPermissions(this, PermissionGroup.PHONE);
+            if (hasPermissions){
+                ToastUtils.showRoundRectToast("打电话");
+            } else {
+                PermissionHelper.getInstance().requestPermission(this, PermissionGroup.PHONE, 100, new PermissionHelper.PermissionResultListener() {
+                    @Override
+                    public void onSuccess(int requestCode) {
+                        ToastUtils.showRoundRectToast("权限申请成功");
+                    }
+
+                    @Override
+                    public void onDenied(@NonNull @NotNull List<String> deniedList) {
+                        ToastUtils.showRoundRectToast("权限申请拒绝");
+                    }
+
+                    @Override
+                    public void onCancel(@NonNull @NotNull List<String> cancelList) {
+                        ToastUtils.showRoundRectToast("权限申请取消");
+                    }
+                });
+            }
+        }else if (id == R.id.btn_camera) {
+            boolean granted = PermissionUtils.isGranted(this, PermissionGroup.CAMERA);
+            if (granted){
+                ToastUtils.showRoundRectToast("打开相机");
+            } else {
+                PermissionUtils permission = PermissionUtils.permission(this, PermissionGroup.CAMERA);
+                permission.callback(new PermissionUtils.SimpleCallback() {
+                    @Override
+                    public void onGranted() {
+                        ToastUtils.showRoundRectToast("权限申请成功");
+                    }
+
+                    @Override
+                    public void onDenied() {
+                        ToastUtils.showRoundRectToast("权限申请拒绝");
+                    }
+                });
+                permission.request(this);
+            }
         }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionHelper.getInstance().onPermissionResult(this,requestCode,permissions,grantResults);
     }
 
     private void testLog1() {

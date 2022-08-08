@@ -101,7 +101,18 @@ public final class PermissionGroup {
     /**
      * 手机权限
      */
-    private static final String[] PHONE = {
+    public static final String[] PHONE = {
+            //允许程序访问电话状态
+            Manifest.permission.READ_PHONE_STATE,
+            //允许程序从非系统拨号器里拨打电话
+            Manifest.permission.CALL_PHONE,
+    };
+
+
+    /**
+     * 手机权限
+     */
+    public static final String[] PHONE_ALL = {
             //允许程序访问电话状态
             Manifest.permission.READ_PHONE_STATE,
             //允许程序从非系统拨号器里拨打电话

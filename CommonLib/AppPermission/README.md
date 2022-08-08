@@ -3,7 +3,7 @@
 - 02.常见思路和做法
 - 03.Api调用说明
 - 04.遇到的坑分析
-
+- 05.权限申请原理
 
 
 ### 01.基础概念介绍
@@ -58,11 +58,34 @@
 
 
 #### 1.4 自定义权限
+- 使用自定义权限
+    - 应用可以自定义自己的权限。定义权限使用<permission/>标签。
+- 举个例子：
+    - 友商的应用要跳转我们的Activity，Activity必须要设置exported为true。但是这样又不安全，这意味着其它任意应用都可以启动暴露的Activity。这时可以在AndroidManifest.xml中给Activity加上权限。
+    ``` java
+    <activity
+        android:exported="true"
+        android:permission="com.quibbler.SUBSCRIBE">
+    </activity>
+    ```
+- 将我们自定义的权限给三方，三方应用只需要在自己的AndroidManifest中添加声明即可。
+    ``` java
+    <!--申请自定义权限-->
+    <uses-permission android:name="com.quibbler.SUBSCRIBE" />
+    ```
+- 在尝试使用某权限的应用签名证书，和定义该权限的应用证书一致时才会授予。
+    - 一般自定义权限会采用这种签名的机制，防止其它三方应用也申请自定义的权限。比如腾讯系、阿里系的应用有相同的证书，保证内部自定义的权限不会被“外族”使用。
 
 
 
 
+### 04.遇到的坑分析
 
+
+
+
+### 05.权限申请原理
+- http://quibbler.cn/?thread-559.htm
 
 
 

@@ -70,4 +70,6 @@ dependencies {
     implementation project(path: ':AppStatusLib')
     implementation project(path: ':ArchitectureLib')
     implementation project(path: ':EventUploadLib')
+    implementation project(path: ':AppPermission')
+    implementation project(path: ':ToastUtils')
 }
