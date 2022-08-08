@@ -20,6 +20,7 @@
         </activity>
         <activity android:name="com.yc.appleet.code.CodeTestActivity"/>
         <activity android:name="com.yc.appleet.array.ArrayTestActivity"/>
+        <activity android:name="com.yc.appleet.node.NodeTestActivity"/>
     </application>
 
 </manifest>

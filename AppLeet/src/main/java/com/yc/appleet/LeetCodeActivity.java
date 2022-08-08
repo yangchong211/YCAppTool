@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.yc.appleet.array.ArrayTestActivity;
 import com.yc.appleet.code.CodeTestActivity;
+import com.yc.appleet.node.NodeTestActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;
 
@@ -89,7 +90,11 @@ public class LeetCodeActivity extends BaseActivity implements View.OnClickListen
             //算法导论
             startActivity(CodeTestActivity.class);
         } else if (v == tv2){
+            //数组
             startActivity(ArrayTestActivity.class);
+        } else if (v == tv3){
+            //链表
+            startActivity(NodeTestActivity.class);
         }
     }
 }

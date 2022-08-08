@@ -58,7 +58,8 @@ public class NodeTestActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         if (v == tv1) {
-
+            SingleNode singleNode = new SingleNode();
+            singleNode.test();
         } else if (v == tv2) {
 
         } else if (v == tv3) {

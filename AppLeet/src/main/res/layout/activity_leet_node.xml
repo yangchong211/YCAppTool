@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:padding="10dp"
-                android:text="1.用类实现数组，有增删查等操作"/>
+                android:text="1.简单实现单链表的功能"/>
 
             <TextView
                 android:id="@+id/tv_2"

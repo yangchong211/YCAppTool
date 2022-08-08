@@ -42,7 +42,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/colorAccent"
                 android:padding="10dp"
-                android:text="3."/>
+                android:text="3.链表相关的算法案例"/>
 
 
             <TextView
