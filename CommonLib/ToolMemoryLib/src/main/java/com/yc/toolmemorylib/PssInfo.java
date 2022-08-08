@@ -1,4 +1,4 @@
-package com.yc.toolutils.memory;
+package com.yc.toolmemorylib;
 
 /**
  * <pre>

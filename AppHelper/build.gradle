@@ -246,7 +246,7 @@ dependencies {
     implementation project(path: ':OkHttpBusiness')
     implementation project(path: ':BleBusiness')
     implementation project(path: ':AppBaseStore')
-    implementation project(path: ':CommonBusiness')
+    implementation project(path: ':AppCommon')
     implementation project(path: ':ThreadBusiness')
     implementation project(path: ':NotifyBusiness')
     implementation project(path: ':KotlinBusiness')

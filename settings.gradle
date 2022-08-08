@@ -8,12 +8,13 @@ include ':AppDesign'
 include ':AppMonitor'
 include ':AppWidget'
 include ':AppServer'
+include ':AppCommon'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
 include ':GameBusiness', ':AnimBusiness',':MvvmDatabinding',
         ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
-        ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',':CommonBusiness',
+        ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',
         ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
         ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness', ':PlayerBusiness',
         ':SocketBusiness',':LibraryLayer'
@@ -30,7 +31,6 @@ project(':BusinessInterface').projectDir = new File('Business/BusinessInterface'
 project(':StatusBusiness').projectDir = new File('Business/StatusBusiness')
 project(':OkHttpBusiness').projectDir = new File('Business/OkHttpBusiness')
 project(':BleBusiness').projectDir = new File('Business/BleBusiness')
-project(':CommonBusiness').projectDir = new File('Business/CommonBusiness')
 project(':ThreadBusiness').projectDir = new File('Business/ThreadBusiness')
 project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')
 project(':KotlinBusiness').projectDir = new File('Business/KotlinBusiness')

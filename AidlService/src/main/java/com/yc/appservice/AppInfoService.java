@@ -63,7 +63,6 @@ public class AppInfoService extends Service {
             list.add(new AppInfo("app作者", "杨充"));
             list.add(new AppInfo("app渠道", "channel"));
             list.add(new AppInfo("token", "token"));
-            list.add(new AppInfo("App签名", AppSignUtils.getSingInfo(getApplicationContext(), getPackageName(), AppSignUtils.SHA1)));
             return list;
         }
 
