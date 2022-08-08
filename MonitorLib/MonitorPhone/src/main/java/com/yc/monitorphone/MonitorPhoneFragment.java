@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.yc.localelib.service.LocaleService;
 import com.yc.localelib.utils.LocaleToolUtils;
+import com.yc.toolmemorylib.AppMemoryUtils;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppInfoUtils;
 import com.yc.toolutils.AppSignUtils;
@@ -30,7 +31,6 @@ import com.yc.toolutils.AppTimeUtils;
 import com.yc.toolutils.AppWindowUtils;
 import com.yc.toolutils.StatusBarUtils;
 import com.yc.toolutils.file.AppSdFileUtils;
-import com.yc.toolutils.memory.AppMemoryUtils;
 import com.yc.toolutils.net.AppNetworkUtils;
 
 import java.util.Arrays;

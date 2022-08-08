@@ -55,16 +55,12 @@ public class AppMonitorTask extends AbsParallelTask {
         CrashHandler.getInstance()
                 .setWriteLog(false)
                 .init(MainApplication.getInstance(), new CrashListener() {
-            /**
-             * 自定义上传crash，支持开发者上传自己捕获的crash数据
-             * @param ex                        ex
-             */
-            @Override
-            public void recordException(Throwable ex) {
-                AppLogUtils.e("record exception : " + ex.getMessage());
-                //自定义上传crash，支持开发者上传自己捕获的crash数据
-                //StatService.recordException(getApplication(), ex);
-            }
+                    @Override
+                    public void recordException(Throwable ex, int crashCount) {
+                        AppLogUtils.e("record exception : " + ex.getMessage());
+                        //自定义上传crash，支持开发者上传自己捕获的crash数据
+                        //StatService.recordException(getApplication(), ex);
+                    }
         });
     }
 

@@ -18,12 +18,8 @@ public class MonitorApplication extends Application {
         CrashHandler.getInstance()
                 .setWriteLog(true)
                 .init(this, new CrashListener() {
-                    /**
-                     * 自定义上传crash，支持开发者上传自己捕获的crash数据
-                     * @param ex                        ex
-                     */
                     @Override
-                    public void recordException(Throwable ex) {
+                    public void recordException(Throwable ex, int crashCount) {
                         AppLogUtils.e("record exception : " + ex.getMessage());
                         //自定义上传crash，支持开发者上传自己捕获的crash数据
                         //StatService.recordException(getApplication(), ex);

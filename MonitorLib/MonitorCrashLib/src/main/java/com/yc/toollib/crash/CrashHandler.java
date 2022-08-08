@@ -5,8 +5,12 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.tencent.mmkv.MMKV;
+import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.encrypt.AppMd5Utils;
+
+import java.util.Arrays;
 
 /**
  * <pre>
@@ -19,6 +23,10 @@ import com.yc.toolutils.AppLogUtils;
  */
 public final class CrashHandler implements Thread.UncaughtExceptionHandler {
 
+    /**
+     * 存储崩溃次数的文件
+     */
+    private static final String CRASH_HANDLER = "CrashHandler";
     public static final String TAG = "CrashHandler : ";
     /**
      * 系统默认的UncaughtException处理类
@@ -40,12 +48,20 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 是否写崩溃日志到file文件夹，默认开启
      */
     private boolean isWriteLog = true;
+    /**
+     * 崩溃日志的md5
+     */
+    private String md5Key;
+    /**
+     * mmkv，很牛逼的缓存数据方式
+     * 注意不要使用sp存储，sp存储在崩溃时会出现数据保存异常问题，因此改为mmkv
+     */
+    private MMKV mmkv;
 
     /**
      * 保证只有一个CrashHandler实例
      */
     private CrashHandler() {
-
     }
 
     /**
@@ -77,6 +93,14 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
     public void init(Application ctx, CrashListener listener) {
         mContext = ctx;
         this.listener = listener;
+        try {
+            String initialize = MMKV.initialize(mContext);
+            AppLogUtils.d(TAG, "init mmkv : " + initialize);
+            mmkv = MMKV.mmkvWithID(CRASH_HANDLER);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ExceptionReporter.report(TAG, e);
+        }
         //获取系统默认的UncaughtExceptionHandler
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         AppLogUtils.d(TAG, "init mDefaultHandler : " + mDefaultHandler);
@@ -94,9 +118,13 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     @Override
     public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
+        if (ex.getStackTrace().length != 0) {
+            md5Key = AppMd5Utils.encryptMD5ToString(Arrays.toString(ex.getStackTrace()));
+            AppLogUtils.d(ex.getMessage() + "  md5 key : " + md5Key);
+        }
         boolean isHandle = handleException(ex);
-        AppLogUtils.d(TAG, "uncaughtException--- handleException----" + isHandle);
         initCustomBug(ex);
+        AppLogUtils.d(TAG, "uncaughtException--- handleException----" + isHandle);
         if (mDefaultHandler != null && isHandle) {
             //收集完信息后，交给系统自己处理崩溃
             //uncaughtException (Thread t, Throwable e) 是一个抽象方法
@@ -116,7 +144,13 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (listener != null) {
             //捕获监听中异常，防止外部开发者使用方代码抛出异常时导致的反复调用
             try {
-                listener.recordException(ex);
+                if (md5Key != null && md5Key.length() > 0 && mmkv != null) {
+                    int count = mmkv.getInt(md5Key, 0);
+                    AppLogUtils.d("md5 key : " + md5Key + " 回调崩溃 : " + count + "次");
+                    listener.recordException(ex, count);
+                } else {
+                    listener.recordException(ex, 1);
+                }
             } catch (Throwable e) {
                 e.printStackTrace();
             }
@@ -137,6 +171,12 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         String msg = ex.getLocalizedMessage();
         if (msg == null) {
             return false;
+        }
+        if (md5Key != null && md5Key.length() > 0 && mmkv != null) {
+            int count = mmkv.getInt(md5Key, 0);
+            mmkv.putInt(md5Key, count + 1);
+            AppLogUtils.d("md5 key : " + md5Key + " 记录崩溃 : " + (count + 1) + "次");
+            CrashHelperUtils.setHeadContent("崩溃" + (count + 1) + "次");
         }
         AppLogUtils.w(TAG, "handleException--- ex-----" + msg);
         ex.printStackTrace();

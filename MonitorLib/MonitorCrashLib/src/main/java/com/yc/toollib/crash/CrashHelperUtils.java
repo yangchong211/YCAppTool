@@ -15,15 +15,15 @@ import androidx.annotation.ColorInt;
 
 import com.yc.activitymanager.ActivityManager;
 import com.yc.toollib.BuildConfig;
+import com.yc.toolmemorylib.AppMemoryUtils;
+import com.yc.toolmemorylib.DalvikHeapMem;
+import com.yc.toolmemorylib.PssInfo;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppInfoUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppProcessUtils;
 import com.yc.toolutils.AppSizeUtils;
 import com.yc.toolutils.file.AppFileUtils;
-import com.yc.toolutils.memory.AppMemoryUtils;
-import com.yc.toolutils.memory.DalvikHeapMem;
-import com.yc.toolutils.memory.PssInfo;
 
 import java.io.BufferedWriter;
 import java.io.File;

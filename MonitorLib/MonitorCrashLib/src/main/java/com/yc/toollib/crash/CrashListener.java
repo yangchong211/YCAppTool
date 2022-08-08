@@ -11,11 +11,13 @@ package com.yc.toollib.crash;
  */
 public interface CrashListener {
 
+
     /**
      * 自定义上传crash，支持开发者上传自己捕获的crash数据
      *
-     * @param ex ex
+     * @param ex         当前异常
+     * @param crashCount 当前异常出现的次数
      */
-    void recordException(Throwable ex);
+    void recordException(Throwable ex, int crashCount);
 
 }

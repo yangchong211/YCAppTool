@@ -8,6 +8,15 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time  : 2018/7/10
+ *     desc  : md5工具类
+ *     revise:
+ * </pre>
+ */
 public final class AppMd5Utils {
 
     private static final char[] hexDigits =

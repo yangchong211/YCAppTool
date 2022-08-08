@@ -2,6 +2,9 @@ package com.yc.toolutils;
 
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 /**
  * <pre>
  *     @author: yangchong
@@ -12,6 +15,11 @@ import android.util.Log;
  */
 public final class StackTraceUtils {
 
+    public final static byte[] getThrowableStackTraceBytes(Throwable throwable) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        throwable.printStackTrace(new PrintStream(baos));
+        return baos.toByteArray();
+    }
 
     /**
      * 打印throwable堆栈日志
