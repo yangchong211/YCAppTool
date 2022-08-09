@@ -4,6 +4,7 @@ package com.yc.store.disk.disklru;
 import android.util.Log;
 
 import com.yc.eventuploadlib.ExceptionReporter;
+import com.yc.eventuploadlib.LoggerReporter;
 import com.yc.store.config.CacheInitHelper;
 
 import java.io.File;
@@ -31,6 +32,7 @@ public class DiskLruCacheHelper {
             int maxLruSize = CacheInitHelper.INSTANCE.getMaxLruSize();
             File directory = new File(baseCachePath + File.separator + "disk");
             Log.d("CacheHelper : " , "lru disk file path : " + directory.getPath());
+            LoggerReporter.report("DiskLruCacheHelper" , "lru disk file path : " + directory.getPath());
             //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache/disk
             diskLruCache = DiskLruCache.open(directory, APP_VERSION, VALUE_COUNT, maxLruSize);
         }
@@ -121,6 +123,7 @@ public class DiskLruCacheHelper {
                     "Unable to clear disk cache or disk cache cleared externally-", e);
         } finally {
             resetDiskCache();
+            LoggerReporter.report("DiskLruCacheHelper clear cache");
         }
     }
 }
