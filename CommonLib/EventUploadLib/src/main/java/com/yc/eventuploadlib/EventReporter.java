@@ -15,12 +15,12 @@ public abstract class EventReporter {
 
     protected abstract void reportEvent(String eventName);
 
-    protected abstract void reportEvent(String eventName, HashMap<String,String> eventMap);
+    protected abstract void reportEvent(String eventName, HashMap<String, String> eventMap);
 
     private static EventReporter sEventReporter;
 
-    public static void setEventReporter(@NonNull EventReporter exceptionReporter) {
-        sEventReporter = exceptionReporter;
+    public static void setEventReporter(@NonNull EventReporter eventReporter) {
+        sEventReporter = eventReporter;
     }
 
     public static void report(String eventName) {
@@ -29,7 +29,7 @@ public abstract class EventReporter {
         }
     }
 
-    public static void report(String eventName, HashMap<String,String> eventMap) {
+    public static void report(String eventName, HashMap<String, String> eventMap) {
         if (sEventReporter != null) {
             sEventReporter.reportEvent(eventName, eventMap);
         }

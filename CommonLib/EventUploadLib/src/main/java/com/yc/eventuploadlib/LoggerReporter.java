@@ -13,25 +13,25 @@ import java.util.HashMap;
  */
 public abstract class LoggerReporter {
 
-    protected abstract void reportLog(String eventName);
+    protected abstract void reportLog(String log);
 
-    protected abstract void reportLog(String eventName, String message);
+    protected abstract void reportLog(String log, String message);
 
-    private static LoggerReporter sEventReporter;
+    private static LoggerReporter sLoggerReporter;
 
-    public static void setEventReporter(@NonNull LoggerReporter exceptionReporter) {
-        sEventReporter = exceptionReporter;
+    public static void setLogReporter(@NonNull LoggerReporter logReporter) {
+        sLoggerReporter = logReporter;
     }
 
-    public static void report(String eventName) {
-        if (sEventReporter != null) {
-            sEventReporter.reportLog(eventName);
+    public static void report(String log) {
+        if (sLoggerReporter != null) {
+            sLoggerReporter.reportLog(log);
         }
     }
 
-    public static void report(String eventName, String message) {
-        if (sEventReporter != null) {
-            sEventReporter.reportLog(eventName, message);
+    public static void report(String log, String message) {
+        if (sLoggerReporter != null) {
+            sLoggerReporter.reportLog(log, message);
         }
     }
 

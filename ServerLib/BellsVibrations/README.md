@@ -51,7 +51,7 @@
 - setStreamVolume和adjustStreamVolume的区别
     - setStreamVolume直接将音量调整到目标值，通常与拖动条配合使用；而adjustStreamVolume是以当前音量为基础，然后调大、调小或调静音。
 - 修改手机音量大概的流程
-    - 
+    - 先获取手机音量，然后判断是否大于设定值。如果小于设置值，则设置音量到指定大小。
 
 
 

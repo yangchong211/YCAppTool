@@ -67,7 +67,12 @@
         }
     }
     ```
-
+- 最后在壳工程中初始化一下。
+    ``` java
+    ExceptionReporter.setExceptionReporter(ExceptionHelperImpl())
+    LoggerReporter.setEventReporter(LoggerReporterImpl())
+    EventReporter.setEventReporter(EventReporterImpl())
+    ```
 
 
 
