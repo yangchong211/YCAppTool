@@ -8,6 +8,9 @@ import com.yc.toolutils.AppLogUtils;
  */
 public class SingleNode {
 
+    /**
+     * 单链表node
+     */
     public static class Node {
         //每个节点数据
         private final Object data;

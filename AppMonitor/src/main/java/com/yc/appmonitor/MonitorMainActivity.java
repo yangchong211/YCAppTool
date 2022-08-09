@@ -1,15 +1,14 @@
 package com.yc.appmonitor;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;
+import com.yc.monitorspeed.ConnectionActivity;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toollib.crash.CrashListActivity;
 import com.yc.toolutils.click.PerfectClickListener;
@@ -21,6 +20,7 @@ public class MonitorMainActivity extends BaseActivity {
     private RoundTextView tvFileMonitor;
     private RoundTextView tvCrashMonitor;
     private RoundTextView tvCrashTest;
+    private RoundTextView tvNetSpeed;
 
     @Override
     public int getContentView() {
@@ -34,7 +34,7 @@ public class MonitorMainActivity extends BaseActivity {
         tvFileMonitor = findViewById(R.id.tv_file_monitor);
         tvCrashMonitor = findViewById(R.id.tv_crash_monitor);
         tvCrashTest = findViewById(R.id.tv_crash_test);
-
+        tvNetSpeed = findViewById(R.id.tv_net_speed);
     }
 
     @Override
@@ -69,6 +69,12 @@ public class MonitorMainActivity extends BaseActivity {
             protected void onNoDoubleClick(View v) {
                 Intent intent = new Intent(MonitorMainActivity.this, CrashTestActivity.class);
                 startActivity(intent);
+            }
+        });
+        tvNetSpeed.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                ConnectionActivity.startActivity(MonitorMainActivity.this);
             }
         });
     }

@@ -42,4 +42,5 @@ dependencies {
     implementation project(path: ':MonitorPingLib')
     implementation project(path: ':MonitorFileLib')
     implementation project(path: ':MonitorCrashLib')
+    implementation project(path: ':MonitorSpeed')
 }

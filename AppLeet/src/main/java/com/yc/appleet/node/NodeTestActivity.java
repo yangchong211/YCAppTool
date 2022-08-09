@@ -6,6 +6,11 @@ import android.widget.TextView;
 import com.yc.appleet.R;
 import com.yc.library.base.mvp.BaseActivity;
 
+/**
+ * @author yangchong
+ * 链表案例
+ *
+ */
 public class NodeTestActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tv1;

@@ -1,6 +1,8 @@
 package com.yc.monitorspeed;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,18 +21,34 @@ import java.net.URLConnection;
  */
 public class ConnectionActivity extends AppCompatActivity {
 
-    private static final String TAG = "ConnectionClass-Sample";
+    private static final String TAG = "ConnectionActivity";
     private ConnectionManager mConnectionClassManager;
     private DeviceBandwidthSampler mDeviceBandwidthSampler;
     private ConnectionChangedListener mListener;
     private TextView mTextView;
     private View mRunningBar;
-    private String mURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601463169772&di=80c295c40c3c236a6434a5c66cb84c41&imgtype=0&src=http%3A%2F%2Fimg1.kchuhai.com%2Felite%2F20200324%2Fhead20200324162648.jpg";
+    private final String mURL = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601463169772&di=80c295c40c3c236a6434a5c66cb84c41&imgtype=0&src=http%3A%2F%2Fimg1.kchuhai.com%2Felite%2F20200324%2Fhead20200324162648.jpg";
     /**
      * 尝试的次数
      */
     private int mTries = 0;
     private ConnectionQuality mConnectionClass = ConnectionQuality.UNKNOWN;
+
+    /**
+     * 开启页面
+     *
+     * @param context 上下文
+     */
+    public static void startActivity(Context context) {
+        try {
+            Intent target = new Intent();
+            target.setClass(context, ConnectionActivity.class);
+            target.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(target);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +130,7 @@ public class ConnectionActivity extends AppCompatActivity {
                     byte[] buffer = new byte[1024];
                     // Do some busy waiting while the stream is open.
                     while (input.read(buffer) != -1) {
+
                     }
                 } finally {
                     input.close();
