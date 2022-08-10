@@ -1,8 +1,10 @@
-package com.yc.toolutils;
+package com.yc.appcompress;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 
 import java.io.ByteArrayInputStream;
@@ -42,7 +44,7 @@ public final class CompressUtils {
      * @return
      */
     public static Bitmap compressDrawableByBmp(Drawable drawable , Context context){
-        Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);
+        Bitmap bitmap = drawableToBitmap(drawable);
         return compressBitmapByBmp(bitmap,context);
     }
 
@@ -54,8 +56,8 @@ public final class CompressUtils {
      * @return
      */
     public static Bitmap compressBitmapByBmp(Bitmap image, Context context){
-        int screenHeight = AppWindowUtils.getScreenHeight();
-        int screenWidth = AppWindowUtils.getScreenWidth();
+        int screenHeight = context.getResources().getDisplayMetrics().widthPixels;
+        int screenWidth = context.getResources().getDisplayMetrics().heightPixels;
         return compressBitmapByBmp(image,screenWidth,screenHeight);
     }
 
@@ -79,9 +81,27 @@ public final class CompressUtils {
      * @return
      */
     public static Bitmap compressBitmapByBmp(Drawable drawable, int pixelW, int pixelH){
-        Bitmap bitmap = BitmapUtils.drawableToBitmap(drawable);
+        Bitmap bitmap = drawableToBitmap(drawable);
         return compressBitmapByBmp(bitmap,pixelW,pixelH);
     }
+
+    /**
+     * 将drawable转化成bitmap
+     * @param drawable                              图片
+     * @return
+     */
+    private static Bitmap drawableToBitmap(Drawable drawable) {
+        int intrinsicWidth = drawable.getIntrinsicWidth();
+        int intrinsicHeight = drawable.getIntrinsicHeight();
+        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ?
+                Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+        Bitmap bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight,config);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, intrinsicWidth, intrinsicHeight);
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
 
     /**
      * 通过大小压缩，将修改图片宽高

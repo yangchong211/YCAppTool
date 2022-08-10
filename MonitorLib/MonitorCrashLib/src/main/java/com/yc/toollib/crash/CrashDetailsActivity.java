@@ -26,12 +26,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.yc.activitymanager.ActivityManager;
+import com.yc.appcompress.CompressUtils;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toollib.R;
 import com.yc.toolutils.AppWindowUtils;
-import com.yc.toolutils.CompressUtils;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.file.FileSaveUtils;
 import com.yc.toolutils.file.FileShareUtils;

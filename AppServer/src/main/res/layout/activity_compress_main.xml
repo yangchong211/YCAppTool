@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <com.yc.roundcorner.view.RoundTextView
+            android:id="@+id/tv_compress_1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="@dimen/dp20"
+            android:text="1.异步压缩图片案例"
+            android:textSize="@dimen/textSize18"
+            android:background="@color/priority_green"
+            app:rRadius="@dimen/dp20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.yc.roundcorner.view.RoundTextView
+            android:id="@+id/tv_compress_2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="@dimen/dp20"
+            android:text="2.同步压缩图片案例"
+            android:textSize="@dimen/textSize18"
+            android:background="@color/priority_green"
+            android:layout_marginTop="@dimen/dp20"
+            app:rRadius="@dimen/dp20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_compress_1"/>
+
+
+        <com.yc.roundcorner.view.RoundTextView
+            android:id="@+id/tv_compress_3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="@dimen/dp20"
+            android:text="3.连续压缩多张图片"
+            android:textSize="@dimen/textSize18"
+            android:background="@color/priority_green"
+            android:layout_marginTop="@dimen/dp20"
+            app:rRadius="@dimen/dp20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_compress_2"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

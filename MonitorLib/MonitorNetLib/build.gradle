@@ -41,6 +41,7 @@ dependencies {
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':MonitorPingLib')
     implementation project(path: ':VideoView')
+    implementation project(path: ':AppCompress')
     //状态栏：https://github.com/yangchong211/YCStatusBar
     implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
     //adapter:https://github.com/yangchong211/YCRefreshView

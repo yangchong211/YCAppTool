@@ -67,7 +67,7 @@ project(':BellsVibrations').projectDir = new File('ServerLib/BellsVibrations')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',
+include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         'ComponentLib',':ApplicationLib', ':ParallelTaskLib',':AppBaseStore',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
@@ -95,6 +95,8 @@ project(':EventUploadLib').projectDir = new File('CommonLib/EventUploadLib')
 project(':AppCommonInter').projectDir = new File('CommonLib/AppCommonInter')
 project(':ToolMemoryLib').projectDir = new File('CommonLib/ToolMemoryLib')
 project(':AppPermission').projectDir = new File('CommonLib/AppPermission')
+project(':AppCompress').projectDir = new File('CommonLib/AppCompress')
+
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */

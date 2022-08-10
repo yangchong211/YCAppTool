@@ -58,6 +58,7 @@ dependencies {
     //状态栏：https://github.com/yangchong211/YCStatusBar
     implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
     implementation project(path: ':ToolMemoryLib')
+    implementation project(path: ':AppCompress')
     //腾讯mmkv库
     implementation "com.tencent:mmkv-static:1.2.7"
 }

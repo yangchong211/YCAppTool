@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.yc.toolutils.CompressUtils;
+import com.yc.appcompress.CompressUtils;
 
 /**
  * <pre>

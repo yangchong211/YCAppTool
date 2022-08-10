@@ -19,6 +19,7 @@
         </activity>
         <activity android:name="com.yc.appserver.log.LogTestActivity"/>
         <activity android:name=".vibrator.VibratorTestActivity"/>
+        <activity android:name=".compress.CompressTestActivity"/>
     </application>
 
 </manifest>
