@@ -32,8 +32,8 @@
 
 ### 05.该库性能分析
 
-
-
+- 图片压缩算法-luban
+    - https://blog.csdn.net/u010218288/article/details/79392432
 
 
 
