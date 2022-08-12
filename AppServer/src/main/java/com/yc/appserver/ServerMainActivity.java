@@ -3,6 +3,7 @@ package com.yc.appserver;
 import android.view.View;
 
 import com.yc.appserver.log.LogTestActivity;
+import com.yc.appserver.priva.PrivateTestActivity;
 import com.yc.appserver.vibrator.VibratorTestActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.roundcorner.view.RoundTextView;
@@ -12,6 +13,7 @@ public class ServerMainActivity extends BaseActivity {
 
     private RoundTextView tvLogServer;
     private RoundTextView tvVibratorTest;
+    private RoundTextView tvPrivateTest;
 
     @Override
     public int getContentView() {
@@ -22,6 +24,7 @@ public class ServerMainActivity extends BaseActivity {
     public void initView() {
         tvLogServer = findViewById(R.id.tv_log_server);
         tvVibratorTest = findViewById(R.id.tv_vibrator_test);
+        tvPrivateTest = findViewById(R.id.tv_private_test);
     }
 
     @Override
@@ -36,6 +39,12 @@ public class ServerMainActivity extends BaseActivity {
             @Override
             protected void onNoDoubleClick(View v) {
                 VibratorTestActivity.Companion.startActivity(ServerMainActivity.this);
+            }
+        });
+        tvPrivateTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PrivateTestActivity.Companion.startActivity(ServerMainActivity.this);
             }
         });
     }

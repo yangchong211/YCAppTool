@@ -46,5 +46,6 @@ dependencies {
     implementation project(path: ':AppLogProcess')
     implementation project(path: ':MonitorFileLib')
     implementation project(path: ':BellsVibrations')
+    implementation project(path: ':PrivateServer')
 }
 

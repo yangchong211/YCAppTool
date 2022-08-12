@@ -25,7 +25,7 @@ import de.robv.android.xposed.DexposedBridge;
  */
 public final class PrivacyHelper {
 
-    public static final String TAG = "PrivacyHelper";
+    public static final String TAG = "PrivacyHelper: ";
     public static final MethodHookImpl DEFAULT_METHOD_HANDLER = new MethodHookImpl();
     private static Context sContext;
     private static ILogger sLogger;
@@ -48,8 +48,6 @@ public final class PrivacyHelper {
         printWarning();
     }
 
-
-
     private static void hookMethod(HookMethodList methodList) {
         for (MethodBean methodWrapper : methodList.getMethodList()) {
             registerMethod(methodWrapper);
@@ -70,7 +68,6 @@ public final class PrivacyHelper {
             sLogger.log( "NoSuchMethodError->"+error.getMessage());
         }
     }
-
 
     private static void registerClass(ClassMethodBean classMethodGroup) {
         try {

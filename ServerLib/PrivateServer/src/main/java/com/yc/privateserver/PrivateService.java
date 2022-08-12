@@ -9,75 +9,35 @@ import androidx.annotation.RequiresApi;
 
 public final class PrivateService {
 
-
-    private final static String INVALID_IMEI_1 = "000000000000000";
-    private final static String INVALID_IMEI_2 = "111111111111111";
-    private final static String INVALID_IMEI_3 = "123456789123456";
-
-    public static final class Cache {
-        /**
-         * imei
-         * IMEI由15-17位数字组成，每位数字仅使用0~9的数字，IMEI不一定是15位
-         * 01为美国CTIA，35为英国BABT，86为中国TAF
-         * 由15位数字组成，前6位(TAC)是型号核准号码，代表手机类型。接着2位(FAC)是最后装配号，代表产地。后6位(SNR)是串号，代表生产顺序号。最后1位(SP)是检验码
-         */
-        public static volatile String IMEI = null;
-        /**
-         * 16位16进制
-         */
-        public static volatile String ANDROID_ID = null;
-        public static volatile String PROVIDER_NAME = null;
-        public static volatile String OPERATOR_ID = null;
-        /**
-         * 由15位16进制数字组成(一般使用前14位)，前8位是生产商编号，后6位是串号，最后1位是检验码
-         */
-        public static volatile String MEID = null;
-        public static volatile String Imei1 = null;
-        public static volatile String Imei2 = null;
-        public static volatile String SN = null;
-        public static volatile String OPERATOR_NAME = null;
-        /**
-         * 总长度16位，有MCC+MNC+MSIN三部分组成。
-         * MCC：移动国家码，三位数字，如中国460
-         * MNC：移动网号，两个数字，如中国移动：00，联通：01
-         * MSIN：移动客户识别号
-         */
-        public static volatile String IMSI = null;
-        public static volatile String SIM_Operator = null;
-    }
-
     /**
      * 获取MEID
-     * 来源：com.baidu.device.utils.AppUtil
      *
      * @param context application context
      * @return return empty String if fetch failed.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
-    public static String getMEID(@NonNull Context context) {
+    public static String getMEID(Context context) {
         return getMEID(context, "");
     }
 
     /**
      * 获取MEID
-     * 来源：com.baidu.device.utils.AppUtil
      *
      * @param context application context
      * @return return defaultValue if fetch failed.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static String getMEID(@NonNull Context context, String defaultValue) {
-        if (null != Cache.MEID) {
-            return Cache.MEID;
+    public static String getMEID(Context context, String defaultValue) {
+        if (null != PrivateCache.MEID) {
+            return PrivateCache.MEID;
         } else if (context != null) {
             UserPrivacyHolder.installAppContext(context);
             String str = SafePrivateHelper.getMeid();
-
             if (TextUtils.isEmpty(str)) {
                 str = defaultValue;
             } else {
-                Cache.MEID = str;
+                PrivateCache.MEID = str;
             }
             return str;
         } else {
@@ -87,37 +47,33 @@ public final class PrivateService {
 
     /**
      * 获取IMEI1
-     * 来源：com.baidu.device.utils.AppUtil
      *
      * @param context application context
      * @return return empty String if fetch failed.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
-    public static String getIMEI1(@NonNull Context context) {
-        return getIMEI1(context, "");
+    public static String getImei1(Context context) {
+        return getImei1(context, "");
     }
 
     /**
      * 获取IMEI1
-     * 来源：com.baidu.device.utils.AppUtil
      *
      * @param context application context
      * @return return defaultValue String if fetch failed.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static String getIMEI1(@NonNull Context context, String defaultValue) {
-        if (null != Cache.Imei1) {
-            return Cache.Imei1;
+    public static String getImei1(Context context, String defaultValue) {
+        if (null != PrivateCache.Imei1) {
+            return PrivateCache.Imei1;
         } else if (context != null) {
-
             UserPrivacyHolder.installAppContext(context);
             String str = SafePrivateHelper.getImei(0);
-
             if (TextUtils.isEmpty(str)) {
                 str = defaultValue;
             } else {
-                Cache.Imei1 = str;
+                PrivateCache.Imei1 = str;
             }
             return str;
         } else {
@@ -127,35 +83,32 @@ public final class PrivateService {
 
     /**
      * 获取IMEI2
-     * 来源：com.baidu.device.utils.AppUtil
      *
      * @return return empty String if fetch failed.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
-    public static String getIMEI2(@NonNull Context context) {
-        return getIMEI2(context, "");
+    public static String getImei2(Context context) {
+        return getImei2(context, "");
     }
 
     /**
      * 获取IMEI2
-     * 来源：com.baidu.device.utils.AppUtil
      *
      * @param context application context
      * @return return defaultValue String if fetch failed.
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static String getIMEI2(@NonNull Context context, String defaultValue) {
-        if (null != Cache.Imei2) {
-            return Cache.Imei2;
+    public static String getImei2(Context context, String defaultValue) {
+        if (null != PrivateCache.Imei2) {
+            return PrivateCache.Imei2;
         } else if (context != null) {
             UserPrivacyHolder.installAppContext(context);
             String str = SafePrivateHelper.getImei(1);
-
             if (TextUtils.isEmpty(str)) {
                 str = defaultValue;
             } else {
-                Cache.Imei2 = str;
+                PrivateCache.Imei2 = str;
             }
             return str;
         } else {
@@ -165,28 +118,25 @@ public final class PrivateService {
 
     /**
      * 获取IMEI
-     * 来源：com.baidu.homework.common.utils.DeviceUtils
      *
      * @param context application context
      * @return return empty String if fetch failed.
      */
     @NonNull
-    public static String getImei(@NonNull Context context) {
+    public static String getImei(Context context) {
         return getImei(context, "");
     }
 
     /**
      * 获取IMEI
-     * 来源：com.baidu.homework.common.utils.DeviceUtils
      *
      * @param context application context
      * @return return defaultValue String if fetch failed.
      */
-    public static String getImei(@NonNull Context context, String defaultValue) {
-        if (null != Cache.IMEI) {
-            return Cache.IMEI;
+    public static String getImei(Context context, String defaultValue) {
+        if (null != PrivateCache.IMEI) {
+            return PrivateCache.IMEI;
         }
-
         UserPrivacyHolder.installAppContext(context);
         String imei;
         if (Build.VERSION.SDK_INT >= 26) {
@@ -196,7 +146,7 @@ public final class PrivateService {
         }
 
         if (!TextUtils.isEmpty(imei)) {
-            Cache.IMEI = imei;
+            PrivateCache.IMEI = imei;
         } else {
             imei = defaultValue;
         }
@@ -205,33 +155,29 @@ public final class PrivateService {
 
     /**
      * 获取Android唯一标识符
-     * 来源：com.baidu.homework.common.utils.DeviceUtils
      *
      * @param context application context
      * @return return empty String if fetch failed.
      */
     @NonNull
-    public static String getAndroidId(@NonNull Context context) {
+    public static String getAndroidId(Context context) {
         return getAndroidId(context, "");
     }
 
     /**
      * 获取Android唯一标识符
-     * 来源：com.baidu.homework.common.utils.DeviceUtils
      *
      * @param context application context
      * @return return defaultValue String if fetch failed.
      */
-    public static String getAndroidId(@NonNull Context context, String defaultValue) {
-        if (null != Cache.ANDROID_ID) {
-            return Cache.ANDROID_ID;
+    public static String getAndroidId(Context context, String defaultValue) {
+        if (null != PrivateCache.ANDROID_ID) {
+            return PrivateCache.ANDROID_ID;
         }
-
         UserPrivacyHolder.installAppContext(context);
         String androidId = SafePrivateHelper.getAndroidId();
-
         if (!TextUtils.isEmpty(androidId)) {
-            Cache.ANDROID_ID = androidId;
+            PrivateCache.ANDROID_ID = androidId;
         } else {
             androidId = defaultValue;
         }
@@ -240,30 +186,28 @@ public final class PrivateService {
 
     /**
      * 获取手机的SN
-     * 来源：com.baidu.device.utils.AppUtil
      *
      * @return return empty String if fetch failed.
      */
     @NonNull
-    public static String getSN(@NonNull Context context) {
+    public static String getSN(Context context) {
         return getSN(context, "");
     }
 
     /**
      * 获取手机的SN
-     * 来源：com.baidu.device.utils.AppUtil
      *
      * @return return defaultValue String if fetch failed.
      */
-    public static String getSN(@NonNull Context context, String defaultValue) {
-        if (null != Cache.SN) {
-            return Cache.SN;
+    public static String getSN(Context context, String defaultValue) {
+        if (null != PrivateCache.SN) {
+            return PrivateCache.SN;
         } else if (null != context) {
             String sn = getDeviceSN(context);
             if(TextUtils.isEmpty(sn)){
                 return defaultValue;
             }else {
-                Cache.SN = sn;
+                PrivateCache.SN = sn;
                 return sn;
             }
         } else {
@@ -273,7 +217,6 @@ public final class PrivateService {
 
     /**
      * 获取手机的SN
-     * 来源：com.baidu.device.utils.AppUtil
      *
      * @param context application context
      * @return return empty String if fetch failed.
@@ -308,24 +251,22 @@ public final class PrivateService {
 
     /**
      * 获取手机运营商
-     * 来源：com.baidu.homework.common.utils.DeviceUtils
      *
      * @return return empty String if fetch failed.
      */
     @NonNull
-    public static String getProviderName(@NonNull Context context) {
+    public static String getProviderName(Context context) {
         return getProviderName(context, "");
     }
 
     /**
      * 获取手机运营商
-     * 来源：com.baidu.homework.common.utils.DeviceUtils
      *
      * @return return defaultValue String if fetch failed.
      */
-    public static String getProviderName(@NonNull Context context, String defaultValue) {
-        if (null != Cache.PROVIDER_NAME) {
-            return Cache.PROVIDER_NAME;
+    public static String getProviderName(Context context, String defaultValue) {
+        if (null != PrivateCache.PROVIDER_NAME) {
+            return PrivateCache.PROVIDER_NAME;
         }
         String providerName = "";
         try {
@@ -343,39 +284,36 @@ public final class PrivateService {
             e.printStackTrace();
         }
         if (!TextUtils.isEmpty(providerName)) {
-            Cache.PROVIDER_NAME = providerName;
+            PrivateCache.PROVIDER_NAME = providerName;
         } else {
             providerName = defaultValue;
         }
         return providerName;
     }
 
-    private static String getSimOperator(@NonNull Context context, String defaultValue) {
-        if (null != Cache.SIM_Operator) {
-            return Cache.SIM_Operator;
+    private static String getSimOperator(Context context, String defaultValue) {
+        if (null != PrivateCache.SIM_OPERATOR) {
+            return PrivateCache.SIM_OPERATOR;
         }
-
         UserPrivacyHolder.installAppContext(context);
         String operator = SafePrivateHelper.getSimOperator();
-
         if (!TextUtils.isEmpty(operator)) {
-            Cache.SIM_Operator = operator;
+            PrivateCache.SIM_OPERATOR = operator;
         } else {
             operator = defaultValue;
         }
         return operator;
     }
 
-    private static String getImsi(@NonNull Context context, String defaultValue) {
-        if (null != Cache.IMSI) {
-            return Cache.IMSI;
+    private static String getImsi(Context context, String defaultValue) {
+        if (null != PrivateCache.IMSI) {
+            return PrivateCache.IMSI;
         }
-
         UserPrivacyHolder.installAppContext(context);
         String IMSI = SafePrivateHelper.getSubscriberId();
 
         if (!TextUtils.isEmpty(IMSI)) {
-            Cache.IMSI = IMSI;
+            PrivateCache.IMSI = IMSI;
         } else {
             IMSI = defaultValue;
         }
@@ -387,12 +325,10 @@ public final class PrivateService {
      * 46000,46002 中国移动
      * 46001 中国联通
      * 46003 中国电信
-     * 来源：com.baidu.homework.common.utils.DeviceUtils
-     *
      * @return return empty String if fetch failed.
      */
     @NonNull
-    public static String getOperatorId(@NonNull Context context) {
+    public static String getOperatorId(Context context) {
         return getOperatorId(context, "");
     }
 
@@ -401,13 +337,11 @@ public final class PrivateService {
      * 46000,46002 中国移动
      * 46001 中国联通
      * 46003 中国电信
-     * 来源：com.baidu.homework.common.utils.DeviceUtils
-     *
      * @return return empty String if fetch failed.
      */
-    public static String getOperatorId(@NonNull Context context, String defaultValue) {
-        if (null != Cache.OPERATOR_ID) {
-            return Cache.OPERATOR_ID;
+    public static String getOperatorId(Context context, String defaultValue) {
+        if (null != PrivateCache.OPERATOR_ID) {
+            return PrivateCache.OPERATOR_ID;
         }
         String operatorId = null;
         try {
@@ -426,7 +360,7 @@ public final class PrivateService {
             t.printStackTrace();
         }
         if (!TextUtils.isEmpty(operatorId)) {
-            Cache.OPERATOR_ID = operatorId;
+            PrivateCache.OPERATOR_ID = operatorId;
         } else {
             operatorId = defaultValue;
         }
@@ -435,29 +369,25 @@ public final class PrivateService {
 
     /**
      * 返回sim 卡的运营商名称
-     * 来源：com.homework.lib_datareport.utils
      * @return return empty String if fetch failed.
      */
     @NonNull
-    public static String getOperatorName(@NonNull Context context) {
+    public static String getOperatorName(Context context) {
         return getOperatorName(context, "");
     }
 
     /**
      * 返回sim 卡的运营商名称
-     * 来源：com.homework.lib_datareport.utils
      * @return return empty String if fetch failed.
      */
-    public static String getOperatorName(@NonNull Context context, String defaultValue) {
-        if (null != Cache.OPERATOR_NAME) {
-            return Cache.OPERATOR_NAME;
+    public static String getOperatorName(Context context, String defaultValue) {
+        if (null != PrivateCache.OPERATOR_NAME) {
+            return PrivateCache.OPERATOR_NAME;
         }
-
         UserPrivacyHolder.installAppContext(context);
         String operatorName = SafePrivateHelper.getSimOperatorName();
-
         if (!TextUtils.isEmpty(operatorName)) {
-            Cache.OPERATOR_NAME = operatorName;
+            PrivateCache.OPERATOR_NAME = operatorName;
         } else {
             operatorName = defaultValue;
         }

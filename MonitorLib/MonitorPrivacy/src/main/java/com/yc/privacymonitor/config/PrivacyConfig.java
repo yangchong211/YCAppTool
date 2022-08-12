@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.yc.appcommoninter.ILogger;
+import com.yc.privacymonitor.helper.PrivacyHelper;
 
 /**
  * <pre>
@@ -28,12 +29,12 @@ public final class PrivacyConfig {
             this.mLogger = new ILogger() {
                 @Override
                 public void log(String log) {
-                    Log.i("PrivacyHelper: ",log);
+                    Log.i(PrivacyHelper.TAG,log);
                 }
 
                 @Override
                 public void error(String error) {
-                    Log.e("PrivacyHelper: ",error);
+                    Log.e(PrivacyHelper.TAG,error);
                 }
             };
         }

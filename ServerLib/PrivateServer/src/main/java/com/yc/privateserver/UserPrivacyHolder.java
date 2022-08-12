@@ -34,8 +34,8 @@ public final class UserPrivacyHolder {
     }
 
     static boolean hasReadPhoneStatePermission() {
-        return ContextCompat
-                .checkSelfPermission(appContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_DENIED;
+        return ContextCompat.checkSelfPermission(appContext,
+                Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_DENIED;
     }
 
     public static boolean isInitUserPrivacy(){

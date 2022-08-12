@@ -34,8 +34,8 @@ public final class AppShotsUtils {
             return null;
         }
         Bitmap bitmap = activityShot(activity);
-        Bitmap bmp = CompressUtils.compressBitmapByBmp(bitmap, activity);
-        return bmp;
+        //Bitmap bmp = CompressUtils.compressBitmapByBmp(bitmap, activity);
+        return bitmap;
     }
 
     /**
