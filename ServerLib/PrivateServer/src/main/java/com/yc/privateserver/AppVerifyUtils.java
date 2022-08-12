@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import java.util.regex.Pattern;
 
-public class AppVerifyUtils {
+public final class AppVerifyUtils {
 
 
     private final static String INVALID_ANDROID_ID = "123456789123456";

@@ -15,15 +15,33 @@ public final class PrivateService {
     private final static String INVALID_IMEI_3 = "123456789123456";
 
     public static final class Cache {
+        /**
+         * imei
+         * IMEI由15-17位数字组成，每位数字仅使用0~9的数字，IMEI不一定是15位
+         * 01为美国CTIA，35为英国BABT，86为中国TAF
+         * 由15位数字组成，前6位(TAC)是型号核准号码，代表手机类型。接着2位(FAC)是最后装配号，代表产地。后6位(SNR)是串号，代表生产顺序号。最后1位(SP)是检验码
+         */
         public static volatile String IMEI = null;
+        /**
+         * 16位16进制
+         */
         public static volatile String ANDROID_ID = null;
         public static volatile String PROVIDER_NAME = null;
         public static volatile String OPERATOR_ID = null;
+        /**
+         * 由15位16进制数字组成(一般使用前14位)，前8位是生产商编号，后6位是串号，最后1位是检验码
+         */
         public static volatile String MEID = null;
         public static volatile String Imei1 = null;
         public static volatile String Imei2 = null;
         public static volatile String SN = null;
         public static volatile String OPERATOR_NAME = null;
+        /**
+         * 总长度16位，有MCC+MNC+MSIN三部分组成。
+         * MCC：移动国家码，三位数字，如中国460
+         * MNC：移动网号，两个数字，如中国移动：00，联通：01
+         * MSIN：移动客户识别号
+         */
         public static volatile String IMSI = null;
         public static volatile String SIM_Operator = null;
     }
