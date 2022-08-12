@@ -10,6 +10,32 @@ import androidx.annotation.RequiresApi;
 public final class PrivateService {
 
     /**
+     * 获取设备id
+     * @param context           上下文
+     * @return                  设备id
+     */
+    public static String getDeviceId(Context context){
+        return getDeviceId(context,"");
+    }
+
+    public static String getDeviceId(Context context , String defaultValue){
+        if (null != PrivateCache.DEVICE_ID) {
+            return PrivateCache.DEVICE_ID;
+        } else if (context != null) {
+            UserPrivacyHolder.installAppContext(context);
+            String str = SafePrivateHelper.getDeviceId();
+            if (TextUtils.isEmpty(str)) {
+                str = defaultValue;
+            } else {
+                PrivateCache.MEID = str;
+            }
+            return str;
+        } else {
+            return defaultValue;
+        }
+    }
+
+    /**
      * 获取MEID
      *
      * @param context application context

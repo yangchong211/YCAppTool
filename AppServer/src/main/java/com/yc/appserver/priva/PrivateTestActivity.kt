@@ -71,6 +71,7 @@ class PrivateTestActivity : AppCompatActivity() {
             sb.append("\n手机运营商:  ").append(PrivateService.getProviderName(this))
             sb.append("\nSim卡的运营商Id:  ").append(PrivateService.getOperatorId(this))
             sb.append("\n卡的运营商名称:  ").append(PrivateService.getOperatorName(this))
+            sb.append("\n设备DeviceId:  ").append(PrivateService.getDeviceId(this))
             tvTest2.setText(sb.toString())
         }
     }
