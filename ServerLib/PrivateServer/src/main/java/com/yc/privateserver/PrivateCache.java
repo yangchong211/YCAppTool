@@ -14,6 +14,12 @@ public final class PrivateCache {
      * android_id，Android设备id
      * ANDROID_ID是Android系统第一次启动时产生的一个64bit（16BYTES）数，如果设备被wipe还原后，该ID将被重置（变化）。
      * 16位16进制
+     * ANDROID_ID缺点：
+     * ①.设备刷机wipe数据或恢复出厂设置时ANDROID_ID值会被重置。
+     * ②.现在网上已有修改设备ANDROID_ID值的APP应用。
+     * ③.某些厂商定制的系统可能会导致不同的设备产生相同的ANDROID_ID。
+     * ④.某些厂商定制的系统可能导致设备返回ANDROID_ID值为空。
+     * ⑤.CDMA设备，ANDROID_ID和DeviceId返回的值相同
      */
     public static volatile String ANDROID_ID = null;
     /**
@@ -50,8 +56,6 @@ public final class PrivateCache {
      * sim卡，卡的运营商名称
      */
     public static volatile String SIM_OPERATOR = null;
-
-    //todo
     /**
      * mac 地址
      * 6组16进制数，比如
