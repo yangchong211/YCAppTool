@@ -113,14 +113,14 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     @Override
     public void executeOnCore(@NonNull Runnable runnable) {
         if (runnable != null && mDiskIO != null) {
-            mDiskIO.execute(runnable);
+            mCoreExecutor.execute(runnable);
         }
     }
 
     @Override
     public void executeOnDiskIO(@NonNull Runnable runnable) {
         if (runnable != null && mCoreExecutor != null) {
-            mCoreExecutor.execute(runnable);
+            mDiskIO.execute(runnable);
         }
     }
 
