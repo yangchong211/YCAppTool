@@ -26,6 +26,9 @@ public final class UserPrivacyHolder {
     }
 
     static Context getContext() {
+        if (appContext == null){
+            throw new NullPointerException("please set installAppContext at first");
+        }
         return appContext;
     }
 

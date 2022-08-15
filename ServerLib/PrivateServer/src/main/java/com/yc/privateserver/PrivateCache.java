@@ -39,9 +39,12 @@ public final class PrivateCache {
     public static volatile String Imei1 = null;
     public static volatile String Imei2 = null;
     /**
-     *
+     * 设备sn号码
      */
     public static volatile String SN = null;
+    /**
+     * sim 卡的运营商名称
+     */
     public static volatile String OPERATOR_NAME = null;
     /**
      * IMSI     国际移动用户识别码的简称
@@ -53,7 +56,7 @@ public final class PrivateCache {
      */
     public static volatile String IMSI = null;
     /**
-     * sim卡，卡的运营商名称
+     * sim卡，卡的运营商Id
      */
     public static volatile String SIM_OPERATOR = null;
     /**

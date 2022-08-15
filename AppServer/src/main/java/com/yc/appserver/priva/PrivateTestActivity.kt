@@ -57,21 +57,21 @@ class PrivateTestActivity : AppCompatActivity() {
     private fun initListener() {
         tvTest1.setOnClickListener {
             val sb = StringBuilder()
-            sb.append("AndroidId:  ").append(PrivateService.getAndroidId(this))
+            sb.append("AndroidId:  ").append(PrivateService.getAndroidId())
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                sb.append("\nMEID:  ").append(PrivateService.getMEID(this))
+                sb.append("\nMEID:  ").append(PrivateService.getMEID())
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                sb.append("\nIMEI1:  ").append(PrivateService.getImei1(this))
-                sb.append("\nIMEI2:  ").append(PrivateService.getImei2(this))
-                sb.append("\nIMEI:  ").append(PrivateService.getImei(this))
+                sb.append("\nIMEI1:  ").append(PrivateService.getImei1())
+                sb.append("\nIMEI2:  ").append(PrivateService.getImei2())
+                sb.append("\nIMEI:  ").append(PrivateService.getImei())
             }
-            sb.append("\nSN:  ").append(PrivateService.getSN(this))
-            sb.append("\nDeviceSN:  ").append(PrivateService.getSN(this))
-            sb.append("\n手机运营商:  ").append(PrivateService.getProviderName(this))
-            sb.append("\nSim卡的运营商Id:  ").append(PrivateService.getOperatorId(this))
-            sb.append("\n卡的运营商名称:  ").append(PrivateService.getOperatorName(this))
-            sb.append("\n设备DeviceId:  ").append(PrivateService.getDeviceId(this))
+            sb.append("\nSN:  ").append(PrivateService.getSN())
+            sb.append("\nDeviceSN:  ").append(PrivateService.getSN())
+            sb.append("\n手机运营商:  ").append(PrivateService.getProviderName())
+            sb.append("\nSim卡的运营商Id:  ").append(PrivateService.getOperatorId())
+            sb.append("\n卡的运营商名称:  ").append(PrivateService.getOperatorName())
+            sb.append("\n设备DeviceId:  ").append(PrivateService.getDeviceId())
             tvTest2.setText(sb.toString())
         }
     }

@@ -16,6 +16,7 @@ import java.util.*
  *     revise:
  * </pre>
  */
+@Deprecated("")
 abstract class ParamsInterceptor : Interceptor {
 
     @Throws(IOException::class)

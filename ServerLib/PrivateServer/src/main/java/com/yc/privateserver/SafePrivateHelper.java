@@ -20,12 +20,6 @@ public class SafePrivateHelper {
      * getDeviceId
      */
     @Nullable
-    protected static String getDeviceId(@NonNull Context context) {
-        UserPrivacyHolder.installAppContext(context);
-        return getDeviceId();
-    }
-
-    @Nullable
     protected static String getDeviceId() {
         if(!UserPrivacyHolder.isInitUserPrivacy()){
             return null;
@@ -60,13 +54,6 @@ public class SafePrivateHelper {
      * -------------------------------------------------------------------------------
      * getDeviceId(index)
      */
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Nullable
-    protected static String getDeviceId(@NonNull Context context, int slotIndex) {
-        UserPrivacyHolder.installAppContext(context);
-        return getDeviceId(slotIndex);
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     protected static String getDeviceId(int index) {
@@ -133,13 +120,6 @@ public class SafePrivateHelper {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
-    protected static String getImei(@NonNull Context context) {
-        UserPrivacyHolder.installAppContext(context);
-        return getImei();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Nullable
     protected static String getImei() {
         if(!UserPrivacyHolder.isInitUserPrivacy()){
             return null;
@@ -176,13 +156,6 @@ public class SafePrivateHelper {
      * -------------------------------------------------------------------------------
      * getImei(int)
      */
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Nullable
-    protected static String getImei(@NonNull Context context, int slotIndex) {
-        UserPrivacyHolder.installAppContext(context);
-        return getImei(slotIndex);
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     protected static String getImei(int slotIndex) {
@@ -250,13 +223,6 @@ public class SafePrivateHelper {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
-    protected static String getMeid(@NonNull Context context) {
-        UserPrivacyHolder.installAppContext(context);
-        return getMeid();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Nullable
     protected static String getMeid() {
         if(!UserPrivacyHolder.isInitUserPrivacy()){
             return null;
@@ -276,8 +242,8 @@ public class SafePrivateHelper {
         @Nullable
         private static final String val = SafeGet();
 
+        @SuppressLint("MissingPermission")
         @RequiresApi(api = Build.VERSION_CODES.O)
-        @SuppressLint({"MissingPermission"})
         @Nullable
         private static String SafeGet() {
             try {
@@ -295,13 +261,6 @@ public class SafePrivateHelper {
      * -------------------------------------------------------------------------------
      * getMeid(int)
      */
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    @Nullable
-    protected static String getMeid(@NonNull Context context, int index) {
-        UserPrivacyHolder.installAppContext(context);
-        return getMeid(index);
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     protected static String getMeid(int index) {
@@ -368,12 +327,6 @@ public class SafePrivateHelper {
      * getSubscriberId()
      */
     @Nullable
-    protected static String getSubscriberId(@NonNull Context context) {
-        UserPrivacyHolder.installAppContext(context);
-        return getSubscriberId();
-    }
-
-    @Nullable
     protected static String getSubscriberId() {
         if(!UserPrivacyHolder.isInitUserPrivacy()){
             return null;
@@ -408,12 +361,6 @@ public class SafePrivateHelper {
      * @return empty string for fail.
      */
     @NonNull
-    protected static String getSimOperatorName(@NonNull Context context) {
-        UserPrivacyHolder.installAppContext(context);
-        return getSimOperatorName();
-    }
-
-    @NonNull
     protected static String getSimOperatorName() {
         if(!UserPrivacyHolder.isInitUserPrivacy()){
             return "";
@@ -443,12 +390,6 @@ public class SafePrivateHelper {
      * @return empty string for fail.
      */
     @NonNull
-    protected static String getSimOperator(@NonNull Context context) {
-        UserPrivacyHolder.installAppContext(context);
-        return getSimOperator();
-    }
-
-    @NonNull
     protected static String getSimOperator() {
         if(!UserPrivacyHolder.isInitUserPrivacy()){
             return "";
@@ -476,11 +417,6 @@ public class SafePrivateHelper {
      * getSimSerialNumber()
      * @return null for fail.
      */
-    @Nullable
-    protected static String getSimSerialNumber(@NonNull Context context) {
-        UserPrivacyHolder.installAppContext(context);
-        return getSimSerialNumber();
-    }
 
     @Nullable
     protected static String getSimSerialNumber() {
@@ -606,26 +542,16 @@ public class SafePrivateHelper {
      * -------------------------------------------------------------------------------
      * getAndroidId()
      */
-    @NonNull
-    protected static String getAndroidId(@NonNull Context context) {
-        UserPrivacyHolder.installAppContext(context);
-        return getAndroidId();
-    }
-
-    @NonNull
     protected static String getAndroidId() {
         if(!UserPrivacyHolder.isInitUserPrivacy()){
             return "";
         }
-        return AndroidIdOnceGetter.val;
+        return AndroidIdOnceGetter.ANDROID_ID;
     }
 
     private static class AndroidIdOnceGetter {
-        @NonNull
-        private static final String val = SafeGet();
-
+        private static final String ANDROID_ID = SafeGet();
         @SuppressLint("HardwareIds")
-        @NonNull
         private static String SafeGet() {
             try {
                 Context context = UserPrivacyHolder.getContext();
