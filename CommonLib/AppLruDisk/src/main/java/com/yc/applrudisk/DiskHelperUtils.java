@@ -1,7 +1,9 @@
-package com.yc.store.disk.disklru;
+package com.yc.applrudisk;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.yc.toolutils.AppToolUtils;
 
 import java.io.Closeable;
 import java.io.File;
@@ -20,12 +22,33 @@ import java.nio.charset.Charset;
  *     revise:
  * </pre>
  */
-public final class DiskUtils {
+public final class DiskHelperUtils {
 
     static final Charset US_ASCII = Charset.forName("US-ASCII");
     static final Charset UTF_8 = Charset.forName("UTF-8");
+    private static String baseCachePath = "";
+    private static int maxLruSize;
 
-    private DiskUtils() {
+    private DiskHelperUtils() {
+    }
+
+    public static String getBaseCachePath() {
+        if (baseCachePath == null || baseCachePath.length()==0){
+            baseCachePath = AppToolUtils.getApp().getExternalCacheDir().getAbsolutePath();
+        }
+        return baseCachePath;
+    }
+
+    public static void setBaseCachePath(String baseCachePath) {
+        DiskHelperUtils.baseCachePath = baseCachePath;
+    }
+
+    public static int getMaxLruSize() {
+        return maxLruSize;
+    }
+
+    public static void setMaxLruSize(int maxLruSize) {
+        DiskHelperUtils.maxLruSize = maxLruSize;
     }
 
     static String readFully(Reader reader) throws IOException {

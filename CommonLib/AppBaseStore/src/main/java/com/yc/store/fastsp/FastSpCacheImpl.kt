@@ -1,8 +1,7 @@
 package com.yc.store.fastsp
 
 import com.yc.store.ICacheable
-import com.yc.store.fastsp.sp.FastSharedPreferences
-import com.yc.store.sp.SpCacheImpl
+import com.yc.appfastsp.FastSharedPreferences
 
 class FastSpCacheImpl (builder: Builder) : ICacheable {
 

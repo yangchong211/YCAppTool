@@ -1,4 +1,4 @@
-package com.yc.store.disk.disklru;
+package com.yc.applrudisk;
 
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -216,7 +216,7 @@ public final class DiskLruCache implements Closeable {
      * @throws IOException                      异常
      */
     private void readJournal() throws IOException {
-        StrictLineReader reader = new StrictLineReader(new FileInputStream(journalFile), DiskUtils.US_ASCII);
+        StrictLineReader reader = new StrictLineReader(new FileInputStream(journalFile), DiskHelperUtils.US_ASCII);
         try {
             //读取journal文件的前五行
             String magic = reader.readLine();
@@ -251,10 +251,10 @@ public final class DiskLruCache implements Closeable {
                 rebuildJournal();
             } else {
                 journalWriter = new BufferedWriter(new OutputStreamWriter(
-                        new FileOutputStream(journalFile, true), DiskUtils.US_ASCII));
+                        new FileOutputStream(journalFile, true), DiskHelperUtils.US_ASCII));
             }
         } finally {
-            DiskUtils.closeQuietly(reader);
+            DiskHelperUtils.closeQuietly(reader);
         }
     }
 
@@ -353,7 +353,7 @@ public final class DiskLruCache implements Closeable {
         }
 
         FileOutputStream fileOutputStream = new FileOutputStream(journalFileTmp);
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, DiskUtils.US_ASCII);
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, DiskHelperUtils.US_ASCII);
         //高效字符流
         Writer writer = new BufferedWriter(outputStreamWriter);
         try {
@@ -394,7 +394,7 @@ public final class DiskLruCache implements Closeable {
         journalFileBackup.delete();
 
         journalWriter = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(journalFile, true), DiskUtils.US_ASCII));
+                new OutputStreamWriter(new FileOutputStream(journalFile, true), DiskHelperUtils.US_ASCII));
     }
 
     private static void deleteIfExists(File file) throws IOException {
@@ -709,12 +709,12 @@ public final class DiskLruCache implements Closeable {
      */
     public void delete() throws IOException {
         close();
-        DiskUtils.deleteContents(directory);
+        DiskHelperUtils.deleteContents(directory);
     }
 
     private static String inputStreamToString(InputStream in) throws IOException {
         //写数据，一次读取一个字节
-        return DiskUtils.readFully(new InputStreamReader(in, DiskUtils.UTF_8));
+        return DiskHelperUtils.readFully(new InputStreamReader(in, DiskHelperUtils.UTF_8));
     }
 
     /**
@@ -829,12 +829,12 @@ public final class DiskLruCache implements Closeable {
                 File file = getFile(index);
                 //创建输出流对象
                 OutputStream os = new FileOutputStream(file);
-                writer = new OutputStreamWriter(os, DiskUtils.UTF_8);
+                writer = new OutputStreamWriter(os, DiskHelperUtils.UTF_8);
                 //写数据
                 writer.write(value);
             } finally {
                 //关闭流对象
-                DiskUtils.closeQuietly(writer);
+                DiskHelperUtils.closeQuietly(writer);
             }
         }
 

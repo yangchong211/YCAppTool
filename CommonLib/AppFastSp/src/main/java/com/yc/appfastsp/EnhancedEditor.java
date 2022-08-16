@@ -1,4 +1,4 @@
-package com.yc.store.fastsp.sp;
+package com.yc.appfastsp;
 
 import android.content.SharedPreferences;
 

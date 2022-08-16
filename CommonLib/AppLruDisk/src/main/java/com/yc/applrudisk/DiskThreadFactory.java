@@ -1,4 +1,4 @@
-package com.yc.store.disk.disklru;
+package com.yc.applrudisk;
 
 import java.util.concurrent.ThreadFactory;
 

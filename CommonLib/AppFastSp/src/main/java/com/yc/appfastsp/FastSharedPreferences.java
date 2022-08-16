@@ -1,9 +1,8 @@
-package com.yc.store.fastsp.sp;
+package com.yc.appfastsp;
 
 import android.os.FileObserver;
 import android.util.Log;
 import androidx.annotation.Nullable;
-import com.yc.store.config.CacheInitHelper;
 import java.io.File;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -51,7 +50,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
         this.name = name;
         this.keyValueMap = new ConcurrentHashMap<>();
         reload();
-        String logDir = CacheInitHelper.INSTANCE.getBaseCachePath() + File.separator + "fast";
+        String logDir = ReadWriteManager.getBaseCachePath() + File.separator + "fast";
         String filePath = ReadWriteManager.getFilePath(logDir, name);
         //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache/fast/fast_sp
         Log.d("CacheHelper : " , "fast sp file path : " + filePath);
@@ -152,7 +151,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
     }
 
     int sizeOf() {
-        String logDir = CacheInitHelper.INSTANCE.getBaseCachePath();
+        String logDir = ReadWriteManager.getBaseCachePath();
         String filePath = ReadWriteManager.getFilePath(logDir, name);
         File file = new File(filePath);
         if (!file.exists()) {

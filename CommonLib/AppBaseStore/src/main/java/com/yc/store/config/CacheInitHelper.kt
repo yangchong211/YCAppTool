@@ -1,10 +1,11 @@
 package com.yc.store.config
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import com.tencent.mmkv.MMKV
+import com.yc.appfastsp.ReadWriteManager
 import com.yc.store.StoreToolHelper
+import com.yc.applrudisk.DiskHelperUtils
 import com.yc.toolutils.AppToolUtils
 import com.yc.toolutils.file.AppFileUtils
 import java.io.File
@@ -55,6 +56,11 @@ object CacheInitHelper {
         //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache/mmkv
         Log.d("CacheHelper : " , "mmkv path : $mmkvPath")
         MMKV.initialize(mmkvPath)
+        //设置disk缓存
+        DiskHelperUtils.setBaseCachePath(filePath)
+        DiskHelperUtils.setMaxLruSize(maxLruSize ?: 1024)
+        //fastsp
+        ReadWriteManager.setBaseCachePath(filePath)
     }
 
     /**

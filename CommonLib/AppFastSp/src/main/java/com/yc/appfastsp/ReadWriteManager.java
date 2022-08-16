@@ -1,8 +1,8 @@
-package com.yc.store.fastsp.sp;
+package com.yc.appfastsp;
 
 import android.util.Log;
 
-import com.yc.store.config.CacheInitHelper;
+import com.yc.toolutils.AppToolUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -23,16 +23,28 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ReadWriteManager {
 
     private static final String TAG = "ReadWriteManager";
+    private static String baseCachePath = "";
 
-    public static String getFilePath(String path, String name) {
+    protected static String getFilePath(String path, String name) {
         return path + File.separator + name;
+    }
+
+    public static String getBaseCachePath() {
+        if (baseCachePath == null || baseCachePath.length()==0){
+            baseCachePath = AppToolUtils.getApp().getExternalCacheDir().getAbsolutePath();
+        }
+        return baseCachePath;
+    }
+
+    public static void setBaseCachePath(String cachePath) {
+        baseCachePath = cachePath;
     }
 
     private final String filePath;
     private final String lockFilePath;
 
     public ReadWriteManager(String name) {
-        String logDir = CacheInitHelper.INSTANCE.getBaseCachePath() + File.separator + "fast";
+        String logDir = getBaseCachePath() + File.separator + "fast";
         this.filePath = getFilePath(logDir, name);
         //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache/fast/fast_sp
         this.lockFilePath = getFilePath(logDir, name + ".lock");

@@ -1,5 +1,5 @@
 
-package com.yc.store.disk.disklru;
+package com.yc.applrudisk;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -67,7 +67,7 @@ public class StrictLineReader implements Closeable {
         if (capacity < 0) {
             throw new IllegalArgumentException("capacity <= 0");
         }
-        if (!(charset.equals(DiskUtils.US_ASCII))) {
+        if (!(charset.equals(DiskHelperUtils.US_ASCII))) {
             throw new IllegalArgumentException("Unsupported encoding");
         }
 

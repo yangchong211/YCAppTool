@@ -1,4 +1,4 @@
-package com.yc.store.disk.disklru;
+package com.yc.applrudisk;
 
 
 
@@ -39,7 +39,7 @@ public final class DiskCacheWriteLocker {
     void release(String safeKey) {
         WriteLock writeLock;
         synchronized (this) {
-            writeLock = DiskUtils.checkNotNull(locks.get(safeKey));
+            writeLock = DiskHelperUtils.checkNotNull(locks.get(safeKey));
             if (writeLock.interestedThreads < 1) {
                 throw new IllegalStateException("Cannot release a lock that is not held"
                         + ", safeKey: " + safeKey

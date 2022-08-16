@@ -1,11 +1,10 @@
-package com.yc.store.disk.disklru;
+package com.yc.applrudisk;
 
 
 import android.util.Log;
 
 import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.eventuploadlib.LoggerReporter;
-import com.yc.store.config.CacheInitHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +27,8 @@ public class DiskLruCacheHelper {
 
     private synchronized DiskLruCache getDiskCache() throws IOException {
         if (diskLruCache == null) {
-            String baseCachePath = CacheInitHelper.INSTANCE.getBaseCachePath();
-            int maxLruSize = CacheInitHelper.INSTANCE.getMaxLruSize();
+            String baseCachePath = DiskHelperUtils.getBaseCachePath();
+            int maxLruSize = DiskHelperUtils.getMaxLruSize();
             File directory = new File(baseCachePath + File.separator + "disk");
             Log.d("CacheHelper : " , "lru disk file path : " + directory.getPath());
             LoggerReporter.report("DiskLruCacheHelper" , "lru disk file path : " + directory.getPath());

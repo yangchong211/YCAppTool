@@ -1,7 +1,7 @@
 package com.yc.store.disk
 
 import com.yc.store.ICacheable
-import com.yc.store.disk.disklru.DiskLruCacheHelper
+import com.yc.applrudisk.DiskLruCacheHelper
 import com.yc.toolutils.AppNumberUtils
 
 class LruDiskCacheImpl : ICacheable {
