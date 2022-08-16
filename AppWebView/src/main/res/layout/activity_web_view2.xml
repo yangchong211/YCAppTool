@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_window"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.ycbjie.webviewlib.view.X5WebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <!--仿微信横向进度条-->
+            <com.ycbjie.webviewlib.widget.WebProgress
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_1"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="截取整个屏幕，可见区域"/>
+
+        <Button
+            android:id="@+id/btn_2"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:text="截取整个屏幕，长图"/>
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

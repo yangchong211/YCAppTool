@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.ycbjie.ycwebview.MainActivity"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorAccent"
+            android:background="@color/colorPrimary"
+            android:text="使用X5WebView或者BridgeWebView，借鉴JsBridge库"/>
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="1.1 自带webView浏览普通的网页(使用普通webView)"/>
+
+        <TextView
+            android:id="@+id/tv_1_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="1.2 自带webView浏览普通的网页（使用普通webView）"/>
+
+        <TextView
+            android:id="@+id/tv_1_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="1.3 自带webView浏览普通的网页（使用BaseWebView记录点击）"/>
+
+        <TextView
+            android:id="@+id/tv_2_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="2.1 带加载进度条的网页"/>
+
+        <TextView
+            android:id="@+id/tv_2_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="2.2 带加载进度条的网页"/>
+
+        <TextView
+            android:id="@+id/tv_2_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="2.3 A添加缓存拦截的功能，请求一个网站"/>
+
+        <TextView
+            android:id="@+id/tv_2_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="2.4 B不添加缓存的功能，请求一个网站"/>
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="3.电话，短信，邮件注入js"/>
+
+
+        <TextView
+            android:id="@+id/tv_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="5.播放网页中的视频，包括全屏播放"/>
+
+        <TextView
+            android:id="@+id/tv_5_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="5.2 播放网页中的视频，包括全屏播放，优酷"/>
+
+        <TextView
+            android:id="@+id/tv_6_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="6.1 在h5中打开相册上传图片"/>
+
+        <TextView
+            android:id="@+id/tv_6_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="6.2 在h5中上传身份证图片"/>
+
+
+
+        <TextView
+            android:id="@+id/tv_7_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="7.1 原生native和h5交互，该案例是参考JsBridge"/>
+
+        <TextView
+            android:id="@+id/tv_7_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="7.2 原生native和h5交互案例2，学习案例"/>
+
+        <TextView
+            android:id="@+id/tv_7_3"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="7.3 原生native和h5交互案例3"/>
+
+
+
+        <TextView
+            android:id="@+id/tv_8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="8.长按web页面处理，可以复制web页面文字，以及图片"/>
+
+        <TextView
+            android:id="@+id/tv_9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="9.1 加载word，ppt，pdf等文档文件"/>
+
+        <TextView
+            android:id="@+id/tv_9_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="9.2 使用scheme协议打开其他app"/>
+
+        <TextView
+            android:id="@+id/tv_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="10.和scrollView结合使用，比如商城商品详情页使用场景"/>
+
+        <TextView
+            android:id="@+id/tv_11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="11.使用手机浏览器打开网络链接"/>
+
+        <TextView
+            android:id="@+id/tv_12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="12.监听web网页中下载的进度操作，待完善"/>
+
+        <TextView
+            android:id="@+id/tv_13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="13.类似购物网站下拉webView后回弹效果"/>
+
+        <TextView
+            android:id="@+id/tv_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="14.类似购物网站webView回顶部效果"/>
+
+        <TextView
+            android:id="@+id/tv_14_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="14.2 截取WebView屏幕的整个可视区域和截取长图"/>
+
+        <TextView
+            android:id="@+id/tv_14_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="14.3 使用webView富文本控件"/>
+
+        <TextView
+            android:id="@+id/tv_14_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="14.4 使用webView长按自定义弹框"/>
+
+        <TextView
+            android:id="@+id/tv_14_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="14.5 使用webView设置白名单操作"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorAccent"
+            android:background="@color/colorPrimary"
+            android:text="使用X5WvWebView，支持子线程处理消息，如果要使用，请先仔细阅读一下代码，实现思路和JsBridge不一样"/>
+
+
+        <TextView
+            android:id="@+id/tv_15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="15 原生native和h5交互案例1"/>
+
+
+        <TextView
+            android:id="@+id/tv_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:textSize="12sp"
+            android:background="@color/colorAccent"
+            android:text="16 原生native和h5交互案例2"/>
+
+    </LinearLayout>
+
+</ScrollView>

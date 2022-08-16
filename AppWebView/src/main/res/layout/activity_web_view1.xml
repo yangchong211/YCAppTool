@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:id="@+id/tv_title"
+            android:text="标题"
+            android:textSize="18sp"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:maxLength="12"
+            android:ellipsize="end"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/iv_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/icon_more"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.ycbjie.ycwebview.BaseWebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <!--仿微信横向进度条-->
+        <com.ycbjie.webviewlib.widget.WebProgress
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"/>
+    </FrameLayout>
+
+
+
+</LinearLayout>

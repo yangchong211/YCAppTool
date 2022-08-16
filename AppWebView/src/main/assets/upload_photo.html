@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)http://taoyanran.duapp.com/kaws/salvation/salvation.html -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>上传图片测试</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <link rel="stylesheet" href="./upload_photo_files/salvation_style.css">
+    <script src="./upload_photo_files/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<div class="page">
+
+
+    <div class="container">
+        <div class="page1">
+            <p class="brief"><span>不走错路，少走弯路</span></p>
+
+        </div>
+
+        <div class="page2">
+
+            <div class="upload_pic" id="upload_pic">
+                <!--添加图片按钮-->
+                <div class="add_pic pic_model" >
+                    <div class="add_pic_div">
+                        <!--<input type="file" name="image" accept="image/*" capture/>-->
+                        <!-- <input type="file" accept="image/*" capture="camera"> -->
+                        <input type="file">
+                    </div>
+                </div>
+                <!--<div class="pic_model"><img src="images/kaxws_qrcode.png" alt=""><span class="delete"></span></div>
+                <div class="pic_model"><img src="images/kaxws_qrcode.png" alt=""><span class="delete"></span></div>
+                <div class="pic_model"><img src="images/kaxws_qrcode.png" alt=""><span class="delete"></span></div>
+                <div class="pic_model"><img src="images/kaxws_qrcode.png" alt=""><span class="delete"></span></div>
+                <div class="pic_model"><img src="images/kaxws_qrcode.png" alt=""><span class="delete"></span></div>
+                <div class="pic_model"><img src="images/kaxws_qrcode.png" alt=""><span class="delete"></span></div>
+                <div class="pic_model"><img src="images/kaxws_qrcode.png" alt=""><span class="delete"></span></div>-->
+            </div>
+
+
+            <div class="submit_btn">
+                <button class="submit_picture">提交</button>
+            </div>
+
+            <p class="upload_pic_reamrk">注：审核通过后，照片会打上专用水印，请放心上传</p>
+        </div>
+
+        <div class="page3" id="page3">
+            <h2 class="page3_title">基本信息登记表</h2>
+
+            <dl class="page3_form basicinfo">
+                <dt>
+                <h3>受助人基本信息</h3></dt>
+                <dd>
+                    <input class="text notnull name" type="text" placeholder="姓名：">
+                </dd>
+                <dd>
+                    <input class="text notnull age" type="text" placeholder="年龄：">
+                </dd>
+                <dd>
+                    <input class="text notnull gender" type="text" placeholder="性别：">
+                </dd>
+                <dd>
+                    <input class="text notnull place" type="text" placeholder="籍贯：">
+                </dd>
+
+                <dd>
+                    <input class="text notnull stage" type="text" placeholder="型号与分期：">
+                </dd>
+                <dd>
+                    <input class="text notnull hospital" type="text" placeholder="收治医院与科室：">
+                </dd>
+                <dd>
+                    <input class="text hos_phone" type="text" placeholder="收治科室联系电话（选填）：">
+                </dd>
+                <dd>
+                    <input class="text notnull apply_phone" type="text" placeholder="申请者联系电话：">
+                </dd>
+                <dd>
+                    <input class="text notnull username" type="text" placeholder="用户名：">
+                </dd>
+            </dl>
+
+            <dl class="page3_form">
+                <dt>
+                <h3>家人与受助人基本状况</h3></dt>
+            </dl>
+
+            <dl class="page3_form family family0">
+                <dd>
+                    <span class="delete_folk" onclick="deletes(0)"></span>
+                    <input class="text notnull member_name" type="text" placeholder="家庭成员：">
+                </dd>
+                <dd>
+                    <input class="text notnull member_relation" type="text" placeholder="与受助人关系：">
+                </dd>
+                <dd>
+                    <input class="text notnull member_work" type="text" placeholder="工作单位：">
+                </dd>
+                <dd>
+                    <input class="text notnull member_income" type="text" placeholder="年收入：">
+                </dd>
+            </dl>
+
+            <dl class="page3_form family_addBtn">
+                <dd>
+                    <div class="add_folk">点击添加家庭成员</div>
+                </dd>
+            </dl>
+
+
+            <dl class="page3_form situation_brief">
+                <dt>
+                <h3>受助人现状简介</h3></dt>
+                <dd>
+                    <textarea class="textarea notnull patient_brief"
+                              placeholder="受助人基本情况简介："></textarea>
+                </dd>
+                <dd>
+                    <textarea class="textarea notnull purpose_brief"
+                              placeholder="申请捐助用途："></textarea>
+                </dd>
+            </dl>
+
+            <div class="submit_btn">
+                <button class="apply_end">提交</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="loading_bg">
+    <div class="loading"></div>
+</div>
+
+
+<!--提示-->
+<div class="fixed">
+    <div class="mask"></div>
+
+    <div class="under_five remind"></div> <!--少于五张-->
+    <div class="more_ten remind"></div> <!--多于10张-->
+    <div class="infoincomplete remind"></div> <!--资料不全-->
+    <div class="salvation_submit_success remind"></div> <!--提交成功-->
+</div>
+
+
+<script src="./upload_photo_files/jweixin-1.0.0.js"></script>
+<script src="./upload_photo_files/salvation_wx_share.js"></script>
+
+
+<script>
+
+    var picWidth = ($(window).width() - 82) * 0.33
+    $('.pic_model').css({
+        height : picWidth + 'px'
+    });
+
+    $('.apply a').click(function(){
+        $('.page1').hide();
+        $('.page2').show()
+    });
+
+
+    $('.remind').click(function(){
+        $('.fixed').fadeOut(150)
+        $(document.body).css('overflow','auto')
+    });
+    /*添加照片*/
+    $('.add_pic_div input').change(function(){
+        var file = this.files[0]; //选择上传的文件
+        var r = new FileReader();
+        r.readAsDataURL(file); //Base64
+        $(r).load(function(){
+
+            var addImg = '<div class="pic_model"><img style="height: '+picWidth+'px" src="'+ this.result +'" alt="" /><span class="delete"></span></div>'
+            $('.upload_pic').append(addImg);
+
+            console.log($('.pic_model').length)
+
+        });
+    });
+
+    $('.add_pic_div input').click(function(){
+//        alert('00000')
+    })
+    /*删除照片*/
+    $('div').delegate('.delete','click',function(event){
+        event.stopPropagation();
+        var parentDiv=$(this).parent('div').parent('#upload_pic').children('div');
+        var removeDivIndex = parentDiv.index($(this).parent('div'));
+        parentDiv.eq(removeDivIndex).remove();
+    });
+    /*提交照片*/
+    $('.submit_picture').click(function(){
+        if($('.pic_model').length < 6){   // 6
+            <!--$('.under_five').show();-->
+            <!--$('.fixed').show();-->
+            <!--return false-->
+
+            alert('上传成功，js处理相关逻辑')
+        }else if($('.pic_model').length > 11){
+            <!--$('.more_ten').show();-->
+            <!--$('.fixed').show();-->
+
+            alert('上传成功，js处理相关逻辑')
+        }else{
+            alert('上传成功，js处理相关逻辑')
+
+            <!--$('.page2').hide();-->
+            <!--$('.page3_form_remind').show();-->
+            <!--$('.page3').show();-->
+        }
+    });
+    /*添加家庭成员*/
+    var folk = 0;
+    $('.add_folk').click(function(){
+
+        folk++;
+
+        var add_folk = '<dl class="page3_form family family'+folk+'"><dd><input class="text member_name notnull" type="text" placeholder="家庭成员："><span class="delete_folk" onclick="deletes('+folk+')"></span></dd><dd><input class="text member_relation notnull" type="text" placeholder="与受助人关系："></dd><dd><input class="text member_work notnull" type="text" placeholder="工作单位："></dd><dd><input class="text member_income notnull" type="text" placeholder="年收入："></dd></dl>'
+
+        $(this).parent().parent().before(add_folk);
+    });
+
+    /*移除家庭成员*/
+    function deletes(ind){
+        $('.page3 .family'+ind).remove()
+    }
+
+
+
+    /*验证手机号*/
+    $('.apply_phone').blur(function(){
+        var mobile = $(this).val();
+        var re = /^(13[0-9]{9})|(15[0-9]{9})|(17[78][0-9]{8})|(18[0-9]{9})$/
+        if(!(re.test(mobile))){
+            alert('请填写正确的手机号')
+            return false
+        }
+    })
+
+
+
+    $('.sure').click(function(){
+        var mobile = $('.mobile').val();
+        var re = /^(13[0-9]{9})|(15[0-9]{9})|(17[78][0-9]{8})|(18[0-9]{9})$/
+        if(!(re.test(mobile))){
+            alert('请填写正确的手机号')
+        }else {
+            window.mobile = mobile;
+            $('.user_mobile').slideUp(300)
+            $('.questionnaire_naire').slideDown(300)
+        }
+    });
+
+
+
+
+
+    /*最后提交完成申请*/
+    $('.apply_end').click(function () {
+
+        $('.notnull').each(function(){
+
+            $(this).change(function(){
+                $(this).removeClass('warn');
+            });
+
+            if($(this).hasClass('apply_phone')){
+                /*验证手机号*/
+                var mobile = $(this).val();
+                var re = /^(13[0-9]{9})|(15[0-9]{9})|(17[78][0-9]{8})|(18[0-9]{9})$/;
+                if(!(re.test(mobile))){
+                    alert('请填写正确的手机号');
+                    $(this).addClass('warn');
+                    return false
+                }
+            }else if($(this).val() == ''){
+                $(this).addClass('warn');
+                $('.infoincomplete').show();
+                $('.fixed').fadeIn(150);
+                return false
+            }
+        });
+
+        var basicinfo = {
+            name : $('.name').val(),                //姓名
+            age : $('.age').val(),                  //年龄
+            gender : $('.gender').val(),            //性别
+            place : $('.place').val(),              //籍贯
+    
+            stage : $('.stage').val(),              //型号与分期
+            hospital : $('.hospital').val(),        //收治医院与科室
+            hos_phone : $('.hos_phone').val(),      //收治科室联系电话
+            apply_phone : $('.apply_phone').val(),  //申请者联系电话（选填）
+            username : $('.username').val()         //用户名
+        };
+
+        var family_info = [];
+        $('.family').each(function(){
+            var member_name = $(this).find('.member_name').val();
+            var member_relation = $(this).find('.member_relation').val();
+            var member_work = $(this).find('.member_work').val();
+            var member_income = $(this).find('.member_income').val();
+
+            var member = {
+                member_name : member_name,
+                member_relation : member_relation,
+                member_work : member_work,
+                member_income : member_income
+            };
+
+            family_info.push(member)
+        });
+
+        var situation_brief = {
+            patient_brief: $('.patient_brief').val(),       //受助人基本情况简介：
+            purpose_brief : $('.purpose_brief').val()       //申请捐助用途：
+        };
+
+
+
+
+        var data = {
+            basicinfo : basicinfo,
+            family_info : family_info,
+            situation_brief : situation_brief
+        };
+
+        console.log(data)
+
+        $.ajax({
+            url: '',
+            type:'post',
+            data:data,
+            success : function(res){
+                if(res.status == 'success'){
+                    /*提交成功*/
+                    $('.salvation_submit_success').show();
+                    $('.fixed').fadeIn(150);
+                }else {
+                    /*已参与过*/
+                    $('.questionnaire_naire').hide()
+                    $('.submit_result img').hide();
+                    $('.thinks').show();
+                    $('.submit_result').show()
+                }
+            }
+        });
+
+    })
+
+</script>
+
+</body>
+</html>

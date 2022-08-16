@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.ycbjie.slide.SlideLayout
+        android:id="@+id/slideDetailsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:default_panel="front"
+        app:duration="200"
+        app:percent="0.1">
+
+        <FrameLayout
+            android:id="@+id/fl_shop_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <include layout="@layout/include_shop_detail"/>
+
+
+    </com.ycbjie.slide.SlideLayout>
+
+
+
+</LinearLayout>

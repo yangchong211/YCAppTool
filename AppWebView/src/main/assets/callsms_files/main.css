@@ -1,0 +1,107 @@
+
+/* http://v4-stage-api.kangaiweishi.com/v3/main.css */
+*{
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: white;
+  color: #666666;
+  word-break: break-all;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #e9eaeb;
+  height: 44px;
+}
+
+.howto_upgrade_table {
+  font-size: 12px;
+}
+
+.header {
+  height: 25px;
+  background-color: #e9eaeb;
+  font-size: 14px;
+  width: 320px;
+}
+
+p {
+  margin: 2px 5px 2px 5px;
+}
+
+#level_table {
+  font-size: 12px;
+  text-align: center;
+}
+
+.lv {
+  text-align: center;
+  display: inline;
+  color: white;
+  padding: 5px 5px 4px 5px;
+  border-radius:3px;
+}
+.lv1-5 {
+  background: #35e181;
+
+}
+
+.lv6-10 {
+  background: #2bb8ed;
+}
+
+.lv11-15 {
+  background: #ff7578;
+}
+
+.lv16-20 {
+  background: #f7822c;
+}
+
+.number {
+  color: orange;
+  text-align: center;
+  padding: 3px 3px 3px 3px;
+}
+
+.article_body {
+  line-height: 1.8em;
+}
+.article_title {
+  margin: 20px 15px 5px 15px;
+  color: #333;
+  font-weight: bold;
+  font-size: 22px;
+  border-style: hidden;
+  /*border-left-style: solid;*/
+  /*padding-left: 5px;*/
+}
+
+.article_title_pic {
+  margin: 5px 5px 5px 5px;
+}
+
+.article_created_at {
+  margin: 0 15px 0 15px;
+  color: #999999;
+  font-size: 15px;
+}
+
+.article_content {
+  margin: 5px 15px 30px 15px;
+  font-size: 17px;
+  color: #4c4c4c;
+  text-align: justify;
+}
+.article_content img{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.article_content p img {
+  margin: 0;
+}

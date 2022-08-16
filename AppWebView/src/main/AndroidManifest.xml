@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ycbjie.ycwebview">
+
+    <!-- 网络 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 选择照片所需权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SEND_TO"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
+
+    <!--tencent x5添加-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:networkSecurityConfig="@xml/network_security_config_debug"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="com.ycbjie.ycwebview.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".FirstActivity1"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".FirstActivity2"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".FirstActivity3"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".SecondActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".ThreeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".FiveActivity"
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".FiveActivity2"
+            android:hardwareAccelerated="true"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".SixActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".SixActivity2"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".WebViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name=".NativeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name=".EightActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".DeepLinkActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".CacheWebViewActivity1"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".CacheWebViewActivity2"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".WvNativeActivity"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity android:name=".FileDisplayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".TenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".DownActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".NativeActivity2"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".NativeActivity3"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".ScrollViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".VertcalWebActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".WvNativeActivity2"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".WvNativeActivity3"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".WebViewActivity2"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".ImageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".ThreeActivity2"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+        <activity android:name=".WebViewWhiteActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            />
+    </application>
+
+</manifest>
