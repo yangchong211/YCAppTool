@@ -1,7 +1,7 @@
 package com.yc.store.lru
 
 import com.yc.store.ICacheable
-import com.yc.store.lru.cache.SystemLruCache
+import com.yc.applrucache.SystemLruCache
 
 class LruMemoryCacheImpl : ICacheable {
 

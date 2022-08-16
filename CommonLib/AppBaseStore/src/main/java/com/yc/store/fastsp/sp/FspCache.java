@@ -2,7 +2,7 @@ package com.yc.store.fastsp.sp;
 
 import android.util.Log;
 
-import com.yc.store.lru.cache.SystemLruCache;
+import com.yc.applrucache.SystemLruCache;
 
 public class FspCache extends SystemLruCache<String, FastSharedPreferences> {
 

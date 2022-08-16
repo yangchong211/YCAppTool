@@ -74,7 +74,8 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
         ':ArchitectureLib',':ActivityManager', ':ToolFileLib',':EventUploadLib',
-        ':AppCommonInter',':ToolMemoryLib',':AppPermission',':PhoneSensor'
+        ':AppCommonInter',':ToolMemoryLib',':AppPermission',':PhoneSensor',
+        ':AppLruDisk',':AppLruCache',':AppFastSp'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -99,7 +100,9 @@ project(':ToolMemoryLib').projectDir = new File('CommonLib/ToolMemoryLib')
 project(':AppPermission').projectDir = new File('CommonLib/AppPermission')
 project(':AppCompress').projectDir = new File('CommonLib/AppCompress')
 project(':PhoneSensor').projectDir = new File('CommonLib/PhoneSensor')
-
+project(':AppLruDisk').projectDir = new File('CommonLib/AppLruDisk')
+project(':AppLruCache').projectDir = new File('CommonLib/AppLruCache')
+project(':AppFastSp').projectDir = new File('CommonLib/AppFastSp')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */

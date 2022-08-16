@@ -4,7 +4,6 @@ import android.os.FileObserver;
 import android.util.Log;
 import androidx.annotation.Nullable;
 import com.yc.store.config.CacheInitHelper;
-import com.yc.store.lru.cache.SystemLruCache;
 import java.io.File;
 import java.io.Serializable;
 import java.util.HashMap;
