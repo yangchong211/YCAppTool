@@ -22,6 +22,7 @@ import com.yc.appprocesslib.AppStateLifecycle;
 import com.yc.appprocesslib.StateListener;
 import com.yc.apprestartlib.RestartAppHelper;
 import com.yc.apprestartlib.RestartFactory;
+import com.yc.common.reflect.ReflectionActivity;
 import com.yc.intent.log.IntentLogger;
 import com.yc.store.BaseDataCache;
 import com.yc.store.StoreToolHelper;
@@ -121,6 +122,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
 
         findViewById(R.id.btn_call).setOnClickListener(this);
         findViewById(R.id.btn_camera).setOnClickListener(this);
+        findViewById(R.id.btn_reflection).setOnClickListener(this);
     }
 
 
@@ -206,6 +208,8 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
                 });
                 permission.request(this);
             }
+        } else if (id == R.id.btn_reflection){
+            startActivity(new Intent(this, ReflectionActivity.class));
         }
     }
 

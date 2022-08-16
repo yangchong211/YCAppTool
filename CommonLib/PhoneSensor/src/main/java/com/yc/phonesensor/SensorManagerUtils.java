@@ -1,4 +1,4 @@
-package com.yc.toolutils.sensor;
+package com.yc.phonesensor;
 
 import android.app.Application;
 import android.content.Context;

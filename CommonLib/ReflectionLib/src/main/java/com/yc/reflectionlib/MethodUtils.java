@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 
 public final class MethodUtils {
     public MethodUtils() {
+
     }
 
     public static Object invokeMethod(Object object, String methodName, Object[] args, Class<?>[] parameterTypes) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {

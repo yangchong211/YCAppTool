@@ -1,4 +1,4 @@
-package com.yc.toolutils.sensor;
+package com.yc.phonesensor;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -15,9 +15,6 @@ public class OrientEventListener implements SensorEventListener {
     private final OrientCallBack orientCallBack;
     private double direction = 0;
     private float mLastAngle;
-    private int axis_x;
-    private int axis_y;
-    float[] rotationMatrix = new float[9];
     private Context context;
 
     public void init(Context context) {
@@ -27,26 +24,6 @@ public class OrientEventListener implements SensorEventListener {
         // 需要将相对设备自然方向的方位角转换为相对水平方向的方位角。
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display dis = wm.getDefaultDisplay();
-        int rotation = dis.getRotation();
-        switch (rotation) {
-            case Surface.ROTATION_90:
-                axis_x = SensorManager.AXIS_Y;
-                axis_y = SensorManager.AXIS_MINUS_X;
-                break;
-            case Surface.ROTATION_180:
-                axis_x = SensorManager.AXIS_X;
-                axis_y = SensorManager.AXIS_MINUS_Y;
-                break;
-            case Surface.ROTATION_270:
-                axis_x = SensorManager.AXIS_MINUS_Y;
-                axis_y = SensorManager.AXIS_X;
-                break;
-            case Surface.ROTATION_0:
-            default:
-                axis_x = SensorManager.AXIS_X;
-                axis_y = SensorManager.AXIS_Y;
-                break;
-        }
     }
 
 

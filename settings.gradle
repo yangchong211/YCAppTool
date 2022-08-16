@@ -39,6 +39,7 @@ project(':SocketBusiness').projectDir = new File('Business/SocketBusiness')
 project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 
 
+
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
         ':ServerInterface', ':GsonServer', ':IpcServer', ':ObjectEqualLib',
@@ -66,13 +67,14 @@ project(':CompressServer').projectDir = new File('ServerLib/CompressServer')
 project(':BellsVibrations').projectDir = new File('ServerLib/BellsVibrations')
 
 
+
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         'ComponentLib',':ApplicationLib', ':ParallelTaskLib',':AppBaseStore',
         ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
         ':ArchitectureLib',':ActivityManager', ':ToolFileLib',':EventUploadLib',
-        ':AppCommonInter',':ToolMemoryLib',':AppPermission'
+        ':AppCommonInter',':ToolMemoryLib',':AppPermission',':PhoneSensor'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -96,6 +98,7 @@ project(':AppCommonInter').projectDir = new File('CommonLib/AppCommonInter')
 project(':ToolMemoryLib').projectDir = new File('CommonLib/ToolMemoryLib')
 project(':AppPermission').projectDir = new File('CommonLib/AppPermission')
 project(':AppCompress').projectDir = new File('CommonLib/AppCompress')
+project(':PhoneSensor').projectDir = new File('CommonLib/PhoneSensor')
 
 
 
@@ -152,6 +155,8 @@ project(':ExpandLib').projectDir = new File('WidgetLib/ExpandLib')
 project(':AppChartView').projectDir = new File('WidgetLib/AppChartView')
 project(':AppShadowLib').projectDir = new File('WidgetLib/AppShadowLib')
 
+
+
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,':NtpTimeLib' ,
@@ -177,6 +182,7 @@ project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
 project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
 project(':LiveDataBus').projectDir = new File('ToolLib/LiveDataBus')
 project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
+
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -226,6 +232,7 @@ project(':MonitorSpeed').projectDir = new File('MonitorLib/MonitorSpeed')
 project(':MonitorInterceptor').projectDir = new File('MonitorLib/MonitorInterceptor')
 project(':MonitorMemory').projectDir = new File('MonitorLib/MonitorMemory')
 project(':MonitorPhone').projectDir = new File('MonitorLib/MonitorPhone')
+
 
 
 /* +++++++++ 音视频 +++++++++ */

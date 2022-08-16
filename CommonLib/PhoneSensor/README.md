@@ -1,4 +1,4 @@
-# 反射封装库
+# 手机传感器
 #### 目录介绍
 - 01.基础概念介绍
 - 02.常见思路和做法
@@ -23,8 +23,6 @@
 
 
 ### 05.其他问题说明
-- classLoader
-    - https://github.com/Catherine22/ClassLoader
 
 
 

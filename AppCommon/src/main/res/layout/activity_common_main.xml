@@ -198,6 +198,13 @@
             android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="拍照"/>
+        <Button
+            android:id="@+id/btn_reflection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="反射案例"/>
     </LinearLayout>
 
 </LinearLayout>
