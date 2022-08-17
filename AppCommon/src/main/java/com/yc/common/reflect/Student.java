@@ -25,6 +25,23 @@ public class Student implements InterStudent{
         this.age = age;
     }
 
+    public static void setMethod(){
+
+    }
+
+    public static String getMethod(){
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", height=" + height +
+                '}';
+    }
+
     @Override
     public void play() {
         AppLogUtils.d("student play");

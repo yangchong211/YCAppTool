@@ -4,17 +4,16 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Member;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public final class MemberUtils {
 
-    private static final int ACCESS_TEST = 7;
     private static final Class<?>[] ORDERED_PRIMITIVE_TYPES;
-    private static final Map<Class<?>, Class<?>> primitiveWrapperMap;
-    private static final Map<Class<?>, Class<?>> wrapperPrimitiveMap;
+    private static final Map<Class<?>, Class<?>> PRIMITIVE_WRAPPER_MAP;
+    private static final Map<Class<?>, Class<?>> WRAPPER_PRIMITIVE_MAP;
 
     MemberUtils() {
+
     }
 
     private static boolean isPackageAccess(int modifiers) {
@@ -35,7 +34,6 @@ public final class MemberUtils {
                 } catch (SecurityException var3) {
                 }
             }
-
             return false;
         } else {
             return false;
@@ -123,14 +121,14 @@ public final class MemberUtils {
     static Class<?> primitiveToWrapper(Class<?> cls) {
         Class<?> convertedClass = cls;
         if (cls != null && cls.isPrimitive()) {
-            convertedClass = (Class)primitiveWrapperMap.get(cls);
+            convertedClass = (Class) PRIMITIVE_WRAPPER_MAP.get(cls);
         }
 
         return convertedClass;
     }
 
     static Class<?> wrapperToPrimitive(Class<?> cls) {
-        return (Class)wrapperPrimitiveMap.get(cls);
+        return (Class) WRAPPER_PRIMITIVE_MAP.get(cls);
     }
 
     static int compareParameterTypes(Class<?>[] left, Class<?>[] right, Class<?>[] actual) {
@@ -194,25 +192,23 @@ public final class MemberUtils {
     }
 
     static {
-        ORDERED_PRIMITIVE_TYPES = new Class[]{Byte.TYPE, Short.TYPE, Character.TYPE, Integer.TYPE, Long.TYPE, Float.TYPE, Double.TYPE};
-        primitiveWrapperMap = new HashMap();
-        primitiveWrapperMap.put(Boolean.TYPE, Boolean.class);
-        primitiveWrapperMap.put(Byte.TYPE, Byte.class);
-        primitiveWrapperMap.put(Character.TYPE, Character.class);
-        primitiveWrapperMap.put(Short.TYPE, Short.class);
-        primitiveWrapperMap.put(Integer.TYPE, Integer.class);
-        primitiveWrapperMap.put(Long.TYPE, Long.class);
-        primitiveWrapperMap.put(Double.TYPE, Double.class);
-        primitiveWrapperMap.put(Float.TYPE, Float.class);
-        primitiveWrapperMap.put(Void.TYPE, Void.TYPE);
-        wrapperPrimitiveMap = new HashMap();
-        Iterator var0 = primitiveWrapperMap.keySet().iterator();
-
-        while(var0.hasNext()) {
-            Class<?> primitiveClass = (Class)var0.next();
-            Class<?> wrapperClass = (Class)primitiveWrapperMap.get(primitiveClass);
+        ORDERED_PRIMITIVE_TYPES = new Class[]{Byte.TYPE, Short.TYPE,
+                Character.TYPE, Integer.TYPE, Long.TYPE, Float.TYPE, Double.TYPE};
+        PRIMITIVE_WRAPPER_MAP = new HashMap<>();
+        PRIMITIVE_WRAPPER_MAP.put(Boolean.TYPE, Boolean.class);
+        PRIMITIVE_WRAPPER_MAP.put(Byte.TYPE, Byte.class);
+        PRIMITIVE_WRAPPER_MAP.put(Character.TYPE, Character.class);
+        PRIMITIVE_WRAPPER_MAP.put(Short.TYPE, Short.class);
+        PRIMITIVE_WRAPPER_MAP.put(Integer.TYPE, Integer.class);
+        PRIMITIVE_WRAPPER_MAP.put(Long.TYPE, Long.class);
+        PRIMITIVE_WRAPPER_MAP.put(Double.TYPE, Double.class);
+        PRIMITIVE_WRAPPER_MAP.put(Float.TYPE, Float.class);
+        PRIMITIVE_WRAPPER_MAP.put(Void.TYPE, Void.TYPE);
+        WRAPPER_PRIMITIVE_MAP = new HashMap<>();
+        for (Class<?> primitiveClass : PRIMITIVE_WRAPPER_MAP.keySet()) {
+            Class<?> wrapperClass = PRIMITIVE_WRAPPER_MAP.get(primitiveClass);
             if (!primitiveClass.equals(wrapperClass)) {
-                wrapperPrimitiveMap.put(wrapperClass, primitiveClass);
+                WRAPPER_PRIMITIVE_MAP.put(wrapperClass, primitiveClass);
             }
         }
 

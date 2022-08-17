@@ -14,6 +14,7 @@
 - 反射机制是在运行状态中。对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性，这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
 
 
+
 #### 1.2 反射基础元素
 - 由于反射最终也必须有类参与，因此反射的组成一般有下面几个方面组成:
     - 1.java.lang.Class.java：类对象；
@@ -29,11 +30,27 @@
 - Class 类没有公开的构造函数，实例是由 JVM 自动产生，每个 .class 文档加载时， JVM 会自动生成对应的 Class 对象。
 
 
+
 ### 02.常见思路和做法
 
 
+
+
 ### 03.Api调用说明
+#### 3.2 获取class对象属性
 - api调用如下所示，直接拿来用即可
+    ``` java
+    //获取class对象的public属性
+    Field[] fields = FieldUtils.getFields(cl);
+    //获取class对象的所有属性
+    Field[] declaredFields = FieldUtils.getDeclaredFields(cl);
+    //获取class指定的public属性
+    Field height = FieldUtils.getField(cl, "height");
+    //获取class指定属性
+    Field age = FieldUtils.getDeclaredField(cl, "age");
+    ```
+
+
 
 
 ### 04.遇到的坑分析

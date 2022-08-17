@@ -5,76 +5,136 @@ import android.text.TextUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 获取对象的变量
+ *     revise: 之前搜车封装库
+ *             getField() 方法获取的是非私有属性，并且 getField() 在当前 Class 获取不到时会向祖先类获取
+ *             getDeclaredField() 获取的是 Class 中被 private 修饰的属性。
+ * </pre>
+ */
 public final class FieldUtils {
 
     private static final Map<String, Field> sFieldCache = new HashMap<>();
 
-    public FieldUtils() {
+    private FieldUtils() {
+
     }
 
-    private static String getKey(Class<?> cls, String fieldName) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(cls.toString())
-                .append("@")
-                .append(cls.getClassLoader())
-                .append("#")
-                .append(fieldName);
-        return sb.toString();
+    /**
+     * 获取自身的所有的 public 属性，包括从父类继承下来的
+     * @param cls           cls
+     * @return
+     */
+    public static Field[] getFields(Class<?> cls){
+        return cls.getFields();
     }
 
+    /**
+     * 获取所有的属性，但不包括从父类继承下来的属性
+     * @param cls           cls
+     * @return
+     */
+    public static Field[] getDeclaredFields(Class<?> cls){
+        return cls.getDeclaredFields();
+    }
+
+    /**
+     * 获取class指定属性
+     * getDeclaredField() 获取的是 Class 中被 private 修饰的属性
+     * @param cls           cls
+     * @param fieldName     属性名称
+     * @return
+     */
+    public static Field getDeclaredField(Class<?> cls, String fieldName){
+        return getDeclaredField(cls,fieldName,true);
+    }
+
+    /**
+     * 获取class指定属性
+     * @param cls           cls
+     * @param fieldName     属性名称
+     * @return
+     */
+    public static Field getDeclaredField(Class<?> cls, String fieldName, boolean forceAccess) {
+        assertTrue(cls != null, "The class must not be null");
+        assertTrue(!TextUtils.isEmpty(fieldName), "The field name must not be blank/empty");
+        try {
+            Field field = cls.getDeclaredField(fieldName);
+            if (!MemberUtils.isAccessible(field)) {
+                if (!forceAccess) {
+                    return null;
+                }
+                field.setAccessible(true);
+            }
+            return field;
+        } catch (NoSuchFieldException exception) {
+            return null;
+        }
+    }
+
+    /**
+     * 获取class指定的public属性
+     * getField() 方法获取的是非私有属性，并且 getField() 在当前 Class 获取不到时会向祖先类获取
+     * @param cls           cls
+     * @param fieldName     属性名称
+     * @return
+     */
+    public static Field getField(Class<?> cls, String fieldName) {
+        return getField(cls, fieldName, true);
+    }
+
+    /**
+     * 获取class指定的public属性
+     * @param cls           cls
+     * @param fieldName     属性名称
+     * @return
+     */
     private static Field getField(Class<?> cls, String fieldName, boolean forceAccess) {
         assertTrue(cls != null, "The class must not be null");
         assertTrue(!TextUtils.isEmpty(fieldName), "The field name must not be blank/empty");
         String key = getKey(cls, fieldName);
         Field cachedField;
         synchronized(sFieldCache) {
-            cachedField = (Field)sFieldCache.get(key);
+            cachedField = sFieldCache.get(key);
         }
-
         if (cachedField != null) {
             if (forceAccess && !cachedField.isAccessible()) {
                 cachedField.setAccessible(true);
             }
-
             return cachedField;
         } else {
-            for(Class acls = cls; acls != null; acls = acls.getSuperclass()) {
+            for(Class<?> acls = cls; acls != null; acls = acls.getSuperclass()) {
                 try {
                     Field field = acls.getDeclaredField(fieldName);
                     if (!Modifier.isPublic(field.getModifiers())) {
                         if (!forceAccess) {
                             continue;
                         }
-
                         field.setAccessible(true);
                     }
-
                     synchronized(sFieldCache) {
                         sFieldCache.put(key, field);
                     }
-
                     return field;
-                } catch (NoSuchFieldException var14) {
+                } catch (NoSuchFieldException e) {
                 }
             }
-
             Field match = null;
-            Iterator var16 = ReflectUtils.getAllInterfaces(cls).iterator();
-
-            while(var16.hasNext()) {
-                Class class1 = (Class)var16.next();
-
+            for (Class<?> aClass : ReflectUtils.getAllInterfaces(cls)) {
                 try {
-                    Field test = class1.getField(fieldName);
+                    Field test = aClass.getField(fieldName);
                     assertTrue(match == null, "Reference to field %s is ambiguous relative to %s; a matching field exists on two or more implemented interfaces.", fieldName, cls);
                     match = test;
-                } catch (NoSuchFieldException var11) {
+                } catch (NoSuchFieldException exception) {
                 }
             }
-
             synchronized(sFieldCache) {
                 sFieldCache.put(key, match);
                 return match;
@@ -89,7 +149,6 @@ public final class FieldUtils {
         } else {
             MemberUtils.setAccessibleWorkaround(field);
         }
-
         return field.get(target);
     }
 
@@ -100,16 +159,11 @@ public final class FieldUtils {
         } else {
             MemberUtils.setAccessibleWorkaround(field);
         }
-
         field.set(target, value);
     }
 
     public static Object readField(Field field, Object target) throws IllegalAccessException {
         return readField(field, target, true);
-    }
-
-    public static Field getField(Class<?> cls, String fieldName) {
-        return getField(cls, fieldName, true);
     }
 
     public static Object readField(Object target, String fieldName) throws IllegalAccessException {
@@ -168,25 +222,6 @@ public final class FieldUtils {
         writeStaticField(field, value, true);
     }
 
-    public static Field getDeclaredField(Class<?> cls, String fieldName, boolean forceAccess) {
-        assertTrue(cls != null, "The class must not be null");
-        assertTrue(!TextUtils.isEmpty(fieldName), "The field name must not be blank/empty");
-
-        try {
-            Field field = cls.getDeclaredField(fieldName);
-            if (!MemberUtils.isAccessible(field)) {
-                if (!forceAccess) {
-                    return null;
-                }
-
-                field.setAccessible(true);
-            }
-
-            return field;
-        } catch (NoSuchFieldException var4) {
-            return null;
-        }
-    }
 
     public static void writeDeclaredField(Object target, String fieldName, Object value) throws IllegalAccessException {
         Class<?> cls = target.getClass();
@@ -195,10 +230,33 @@ public final class FieldUtils {
         writeField(field, target, value, false);
     }
 
-    static void assertTrue(boolean expression, String message, Object... values) {
+    /**
+     * 校验
+     * @param expression        判断对象是否为空
+     * @param message           message
+     * @param values            values
+     */
+    private static void assertTrue(boolean expression, String message, Object... values) {
         if (!expression) {
             throw new IllegalArgumentException(String.format(message, values));
         }
     }
+
+    /**
+     * 生成key值
+     * @param cls           cls
+     * @param fieldName     属性名称
+     * @return
+     */
+    private static String getKey(Class<?> cls, String fieldName) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(cls.toString())
+                .append("@")
+                .append(cls.getClassLoader())
+                .append("#")
+                .append(fieldName);
+        return sb.toString();
+    }
+
 }
 

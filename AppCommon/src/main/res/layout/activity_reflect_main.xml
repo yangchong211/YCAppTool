@@ -38,7 +38,7 @@
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="@dimen/dp20"
-        android:text="3."
+        android:text="3.获取对象的方法"
         android:textSize="@dimen/textSize18"
         android:background="@color/priority_green"
         app:rRadius="@dimen/dp20" />

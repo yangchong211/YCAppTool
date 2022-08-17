@@ -1,11 +1,42 @@
 package com.yc.reflectionlib;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 获取class对象的方法
+ *     revise: 之前搜车封装库
+ *
+ * </pre>
+ */
 public final class MethodUtils {
-    public MethodUtils() {
 
+    private MethodUtils() {
+
+    }
+
+    /**
+     * 获取class对象的所有public方法 包括父类的方法
+     * @param cls           cls
+     * @return
+     */
+    public static Method[] getMethods(Class<?> cls){
+        return cls.getMethods();
+    }
+
+    /**
+     * 获取class对象的所有声明方法
+     * @param cls           cls
+     * @return
+     */
+    public static Method[] getDeclaredMethods(Class<?> cls){
+        return cls.getDeclaredMethods();
     }
 
     public static Object invokeMethod(Object object, String methodName, Object[] args, Class<?>[] parameterTypes) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -20,7 +51,7 @@ public final class MethodUtils {
         }
     }
 
-    public static Object invokeStaticMethod(Class clazz, String methodName, Object[] args, Class<?>[] parameterTypes) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    public static Object invokeStaticMethod(Class<?> clazz, String methodName, Object[] args, Class<?>[] parameterTypes) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         parameterTypes = ReflectUtils.nullToEmpty(parameterTypes);
         args = ReflectUtils.nullToEmpty(args);
         Method method = getMatchedMethod(clazz, methodName, parameterTypes);
@@ -53,11 +84,8 @@ public final class MethodUtils {
         } catch (NoSuchMethodException var10) {
             for(bestMatch = null; cls != null; cls = cls.getSuperclass()) {
                 Method[] methods = cls.getDeclaredMethods();
-                Method[] var5 = methods;
-                int var6 = methods.length;
-
-                for(int var7 = 0; var7 < var6; ++var7) {
-                    Method method = var5[var7];
+                for(int i = 0; i < methods.length; ++i) {
+                    Method method = methods[i];
                     if (method.getName().equals(methodName) && MemberUtils.isAssignable(parameterTypes, method.getParameterTypes(), true)) {
                         bestMatch = method;
                         Method accessibleMethod = getMethodFromElse(method);
@@ -67,16 +95,13 @@ public final class MethodUtils {
                         }
                     }
                 }
-
                 if (bestMatch != null) {
                     break;
                 }
             }
-
             if (bestMatch != null) {
                 MemberUtils.setAccessibleWorkaround(bestMatch);
             }
-
             return bestMatch;
         }
     }
@@ -89,13 +114,11 @@ public final class MethodUtils {
         if (method == null) {
             method = getAccessibleMethodFromSuperclass(cls, methodName, parameterTypes);
         }
-
         return method;
     }
 
     private static Method getAccessibleMethodFromSuperclass(Class<?> cls, String methodName, Class<?>... parameterTypes) {
-        Class parentClass = cls.getSuperclass();
-
+        Class<?> parentClass = cls.getSuperclass();
         while(parentClass != null) {
             try {
                 return parentClass.getDeclaredMethod(methodName, parameterTypes);
@@ -103,7 +126,6 @@ public final class MethodUtils {
                 parentClass = parentClass.getSuperclass();
             }
         }
-
         return null;
     }
 
