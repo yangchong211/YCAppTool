@@ -56,7 +56,7 @@ class FragmentManager {
          */
         @Volatile
         private var sInstance: FragmentManager? = null
-        val instance: FragmentManager?
+        val instance: FragmentManager
             get() {
                 if (sInstance == null) {
                     synchronized(FragmentManager::class.java) {
@@ -65,7 +65,7 @@ class FragmentManager {
                         }
                     }
                 }
-                return sInstance
+                return sInstance!!
             }
     }
 }

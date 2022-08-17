@@ -72,4 +72,5 @@ dependencies {
     implementation project(path: ':EventUploadLib')
     implementation project(path: ':AppPermission')
     implementation project(path: ':ToastUtils')
+    implementation project(path: ':FragmentManager')
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.yc.activitymanager.ActivityLifecycleListener;
 import com.yc.activitymanager.ActivityManager;
@@ -23,6 +24,8 @@ import com.yc.appprocesslib.StateListener;
 import com.yc.apprestartlib.RestartAppHelper;
 import com.yc.apprestartlib.RestartFactory;
 import com.yc.common.reflect.ReflectionActivity;
+import com.yc.fragmentmanager.FragmentLifecycleListener;
+import com.yc.fragmentmanager.FragmentManager;
 import com.yc.intent.log.IntentLogger;
 import com.yc.store.BaseDataCache;
 import com.yc.store.StoreToolHelper;
@@ -66,12 +69,14 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         init();
         initCache();
         AppStateLifecycle.getInstance().registerStateListener(stateListener);
+        FragmentManager.Companion.getInstance().registerActivityLifecycleListener(this,lifecycleListener);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         AppStateLifecycle.getInstance().unregisterStateListener(stateListener);
+        FragmentManager.Companion.getInstance().unregisterActivityLifecycleListener(this,lifecycleListener);
     }
 
     private final StateListener stateListener = new StateListener() {
@@ -83,6 +88,18 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         public void onInBackground() {
             AppLogUtils.i("app common state in 后台");
+        }
+    };
+
+    private final FragmentLifecycleListener lifecycleListener = new FragmentLifecycleListener() {
+        @Override
+        public void onFragmentCreated(@NotNull androidx.fragment.app.FragmentManager fm, @NotNull Fragment f, @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+            super.onFragmentCreated(fm, f, savedInstanceState);
+        }
+
+        @Override
+        public void onFragmentDestroyed(@NotNull androidx.fragment.app.FragmentManager fm, @NotNull Fragment f) {
+            super.onFragmentDestroyed(fm, f);
         }
     };
 
