@@ -66,9 +66,7 @@ class FragmentManagerHelper {
         }
 
     private fun info(s: String) {
-        if (BuildConfig.DEBUG) {
-            Log.i(TAG, s)
-        }
+        Log.i(TAG, s)
     }
 
 

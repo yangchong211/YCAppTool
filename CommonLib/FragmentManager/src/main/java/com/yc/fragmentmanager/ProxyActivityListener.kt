@@ -1,170 +1,155 @@
-package com.yc.fragmentmanager;
+package com.yc.fragmentmanager
 
-import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import android.app.Activity
+import android.content.Context
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import java.util.ArrayList
+import java.util.HashMap
 
 /**
  * <pre>
- *     @author yangchong
- *     blog  : https://github.com/yangchong211
- *     GitHub : https://github.com/yangchong211/YCCommonLib
- *     time  : 2018/11/9
- *     desc  : 代理类
- *     revise:
- * </pre>
+ * @author yangchong
+ * blog  : https://github.com/yangchong211
+ * GitHub : https://github.com/yangchong211/YCCommonLib
+ * time  : 2018/11/9
+ * desc  : 代理类
+ * revise:
+</pre> *
  */
-public class ProxyActivityListener extends FragmentLifecycleListener {
+class ProxyActivityListener : FragmentLifecycleListener() {
+    private val mActivityLifecycleListeners: MutableMap<Class<Activity>, MutableList<FragmentLifecycleListener>> =
+        HashMap()
 
-    private final Map<Class<Activity>, List<FragmentLifecycleListener>>
-            mActivityLifecycleListeners = new HashMap<>();
-
-
-    public void registerFragmentLifecycleListener(Class<Activity> clazz,
-                                                  FragmentLifecycleListener lifecycleListener) {
+    fun registerFragmentLifecycleListener(
+        clazz: Class<Activity>?,
+        lifecycleListener: FragmentLifecycleListener?
+    ) {
         if (clazz == null || lifecycleListener == null) {
-            return;
+            return
         }
-        List<FragmentLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(clazz);
+        var lifecycleListeners = mActivityLifecycleListeners[clazz]
         if (lifecycleListeners == null) {
-            lifecycleListeners = new ArrayList<>();
+            lifecycleListeners = ArrayList()
         }
-        lifecycleListeners.add(lifecycleListener);
-        mActivityLifecycleListeners.put(clazz, lifecycleListeners);
+        lifecycleListeners.add(lifecycleListener)
+        mActivityLifecycleListeners[clazz] = lifecycleListeners
     }
 
-    public boolean unregisterFragmentLifecycleListener(Class<Activity> clazz,
-                                                       FragmentLifecycleListener lifecycleListener) {
+    fun unregisterFragmentLifecycleListener(
+        clazz: Class<Activity>?,
+        lifecycleListener: FragmentLifecycleListener?
+    ): Boolean {
         if (clazz == null || lifecycleListener == null) {
-            return false;
+            return false
         }
-        synchronized (mActivityLifecycleListeners) {
-            List<FragmentLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(clazz);
-            if (lifecycleListeners == null) {
-                return false;
+        synchronized(mActivityLifecycleListeners) {
+            val lifecycleListeners = mActivityLifecycleListeners[clazz] ?: return false
+            val result = lifecycleListeners.remove(lifecycleListener)
+            if (lifecycleListeners.size == 0) {
+                mActivityLifecycleListeners.remove(clazz)
             }
-            boolean result = lifecycleListeners.remove(lifecycleListener);
-            if (lifecycleListeners.size() == 0) {
-                mActivityLifecycleListeners.remove(clazz);
-            }
-            return result;
+            return result
         }
     }
 
-    @Override
-    public void onFragmentAttached(@NonNull @NotNull FragmentManager fm,
-                                   @NonNull @NotNull Fragment f, @NonNull @NotNull Context context) {
-        List<FragmentLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(f.getClass());
-        if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
-            return;
+    override fun onFragmentAttached(
+        fm: FragmentManager,
+        f: Fragment, context: Context
+    ) {
+        val lifecycleListeners: List<FragmentLifecycleListener>? =
+            mActivityLifecycleListeners.get(f.javaClass)
+        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            return
         }
-
-        List<FragmentLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
-        for (int i = 0; i < callbacks.size(); i++) {
-            callbacks.get(i).onFragmentAttached(fm, f, context);
-        }
-    }
-
-    @Override
-    public void onFragmentCreated(@NonNull @NotNull FragmentManager fm, @NonNull @NotNull Fragment f, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        List<FragmentLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(f.getClass());
-        if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
-            return;
-        }
-
-        List<FragmentLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
-        for (int i = 0; i < callbacks.size(); i++) {
-            callbacks.get(i).onFragmentCreated(fm, f, savedInstanceState);
+        val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
+        for (i in callbacks.indices) {
+            callbacks[i].onFragmentAttached(fm, f, context)
         }
     }
 
-    @Override
-    public void onFragmentStarted(@NonNull @NotNull FragmentManager fm, @NonNull @NotNull Fragment f) {
-        List<FragmentLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(f.getClass());
-        if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
-            return;
+    override fun onFragmentCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
+        val lifecycleListeners: List<FragmentLifecycleListener>? =
+            mActivityLifecycleListeners.get(f.javaClass)
+        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            return
         }
-
-        List<FragmentLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
-        for (int i = 0; i < callbacks.size(); i++) {
-            callbacks.get(i).onFragmentStarted(fm, f);
-        }
-    }
-
-    @Override
-    public void onFragmentResumed(@NonNull @NotNull FragmentManager fm, @NonNull @NotNull Fragment f) {
-        List<FragmentLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(f.getClass());
-        if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
-            return;
-        }
-
-        List<FragmentLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
-        for (int i = 0; i < callbacks.size(); i++) {
-            callbacks.get(i).onFragmentResumed(fm, f);
+        val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
+        for (i in callbacks.indices) {
+            callbacks[i].onFragmentCreated(fm, f, savedInstanceState)
         }
     }
 
-    @Override
-    public void onFragmentPaused(@NonNull @NotNull FragmentManager fm, @NonNull @NotNull Fragment f) {
-        List<FragmentLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(f.getClass());
-        if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
-            return;
+    override fun onFragmentStarted(fm: FragmentManager, f: Fragment) {
+        val lifecycleListeners: List<FragmentLifecycleListener>? =
+            mActivityLifecycleListeners.get(f.javaClass)
+        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            return
         }
-
-        List<FragmentLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
-        for (int i = 0; i < callbacks.size(); i++) {
-            callbacks.get(i).onFragmentPaused(fm, f);
-        }
-    }
-
-    @Override
-    public void onFragmentStopped(@NonNull @NotNull FragmentManager fm, @NonNull @NotNull Fragment f) {
-        List<FragmentLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(f.getClass());
-        if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
-            return;
-        }
-
-        List<FragmentLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
-        for (int i = 0; i < callbacks.size(); i++) {
-            callbacks.get(i).onFragmentStopped(fm, f);
+        val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
+        for (i in callbacks.indices) {
+            callbacks[i].onFragmentStarted(fm, f)
         }
     }
 
-    @Override
-    public void onFragmentDestroyed(@NonNull @NotNull FragmentManager fm, @NonNull @NotNull Fragment f) {
-        List<FragmentLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(f.getClass());
-        if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
-            return;
+    override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
+        val lifecycleListeners: List<FragmentLifecycleListener>? =
+            mActivityLifecycleListeners.get(f.javaClass)
+        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            return
         }
-
-        List<FragmentLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
-        for (int i = 0; i < callbacks.size(); i++) {
-            callbacks.get(i).onFragmentDestroyed(fm, f);
+        val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
+        for (i in callbacks.indices) {
+            callbacks[i].onFragmentResumed(fm, f)
         }
     }
 
-    @Override
-    public void onFragmentDetached(@NonNull @NotNull FragmentManager fm, @NonNull @NotNull Fragment f) {
-        List<FragmentLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(f.getClass());
-        if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
-            return;
+    override fun onFragmentPaused(fm: FragmentManager, f: Fragment) {
+        val lifecycleListeners: List<FragmentLifecycleListener>? =
+            mActivityLifecycleListeners.get(f.javaClass)
+        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            return
         }
+        val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
+        for (i in callbacks.indices) {
+            callbacks[i].onFragmentPaused(fm, f)
+        }
+    }
 
-        List<FragmentLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
-        for (int i = 0; i < callbacks.size(); i++) {
-            callbacks.get(i).onFragmentDetached(fm, f);
+    override fun onFragmentStopped(fm: FragmentManager, f: Fragment) {
+        val lifecycleListeners: List<FragmentLifecycleListener>? =
+            mActivityLifecycleListeners.get(f.javaClass)
+        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            return
+        }
+        val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
+        for (i in callbacks.indices) {
+            callbacks[i].onFragmentStopped(fm, f)
+        }
+    }
+
+    override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
+        val lifecycleListeners: List<FragmentLifecycleListener>? =
+            mActivityLifecycleListeners.get(f.javaClass)
+        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            return
+        }
+        val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
+        for (i in callbacks.indices) {
+            callbacks[i].onFragmentDestroyed(fm, f)
+        }
+    }
+
+    override fun onFragmentDetached(fm: FragmentManager, f: Fragment) {
+        val lifecycleListeners: List<FragmentLifecycleListener>? =
+            mActivityLifecycleListeners.get(f.javaClass)
+        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            return
+        }
+        val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
+        for (i in callbacks.indices) {
+            callbacks[i].onFragmentDetached(fm, f)
         }
     }
 }

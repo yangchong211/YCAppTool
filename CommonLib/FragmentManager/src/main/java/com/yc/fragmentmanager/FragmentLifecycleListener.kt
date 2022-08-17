@@ -92,9 +92,7 @@ abstract class FragmentLifecycleListener : FragmentManager.FragmentLifecycleCall
 
 
     private fun info(s: String) {
-        if (BuildConfig.DEBUG) {
-            Log.i(FragmentManagerHelper.TAG, s)
-        }
+        Log.i(FragmentManagerHelper.TAG, s)
     }
 
 }
