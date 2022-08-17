@@ -1,6 +1,5 @@
 package com.yc.reflectionlib;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -17,6 +16,12 @@ import java.lang.reflect.Method;
  */
 public final class MethodUtils {
 
+    /**
+     * Method[] methods = class1.getDeclaredMethods();//获取class对象的所有声明方法
+     * Method[] allMethods = class1.getMethods();//获取class对象的所有public方法 包括父类的方法
+     * Method method = class1.getMethod("info", String.class);//返回次Class对象对应类的、带指定形参列表的public方法
+     * Method declaredMethod = class1.getDeclaredMethod("info", String.class);//返回次Class对象对应类的、带指定形参列表的方法
+     */
     private MethodUtils() {
 
     }
@@ -37,6 +42,59 @@ public final class MethodUtils {
      */
     public static Method[] getDeclaredMethods(Class<?> cls){
         return cls.getDeclaredMethods();
+    }
+
+    /**
+     * 返回次Class对象对应类的、带指定形参列表的public方法
+     * @param cls           cls
+     * @param methodName    方法名
+     * @return
+     * @throws NoSuchMethodException
+     */
+    public static Method getMethod(Class<?> cls, String methodName) throws NoSuchMethodException {
+        return getMatchedMethod(cls,methodName);
+    }
+
+    /**
+     * 返回次Class对象对应类的、带指定形参列表的方法
+     * @param cls           cls
+     * @param methodName    方法名
+     * @return
+     * @throws NoSuchMethodException
+     */
+    public static Method getDeclaredMethod(Class<?> cls, String methodName,Class<?>... parameterTypes) throws NoSuchMethodException {
+        return getMatchedMethod(cls,methodName,parameterTypes);
+    }
+
+
+    public static Method getMatchedMethod(Class<?> cls, String methodName, Class<?>... parameterTypes) throws NoSuchMethodException {
+        Method bestMatch;
+        try {
+            bestMatch = cls.getDeclaredMethod(methodName, parameterTypes);
+            MemberUtils.setAccessibleWorkaround(bestMatch);
+            return bestMatch;
+        } catch (NoSuchMethodException var10) {
+            for(bestMatch = null; cls != null; cls = cls.getSuperclass()) {
+                Method[] methods = cls.getDeclaredMethods();
+                for (Method method : methods) {
+                    if (method.getName().equals(methodName) && MemberUtils.isAssignable(parameterTypes, method.getParameterTypes(), true)) {
+                        bestMatch = method;
+                        Method accessibleMethod = getMethodFromElse(method);
+                        if (accessibleMethod != null && MemberUtils.compareParameterTypes(accessibleMethod.getParameterTypes(), method.getParameterTypes(), parameterTypes) < 0) {
+                            bestMatch = accessibleMethod;
+                            break;
+                        }
+                    }
+                }
+                if (bestMatch != null) {
+                    break;
+                }
+            }
+            if (bestMatch != null) {
+                MemberUtils.setAccessibleWorkaround(bestMatch);
+            }
+            return bestMatch;
+        }
     }
 
     public static Object invokeMethod(Object object, String methodName, Object[] args, Class<?>[] parameterTypes) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -75,37 +133,6 @@ public final class MethodUtils {
         return invokeMethod(object, methodName, args, parameterTypes);
     }
 
-    public static Method getMatchedMethod(Class<?> cls, String methodName, Class<?>... parameterTypes) throws NoSuchMethodException {
-        Method bestMatch;
-        try {
-            bestMatch = cls.getDeclaredMethod(methodName, parameterTypes);
-            MemberUtils.setAccessibleWorkaround(bestMatch);
-            return bestMatch;
-        } catch (NoSuchMethodException var10) {
-            for(bestMatch = null; cls != null; cls = cls.getSuperclass()) {
-                Method[] methods = cls.getDeclaredMethods();
-                for(int i = 0; i < methods.length; ++i) {
-                    Method method = methods[i];
-                    if (method.getName().equals(methodName) && MemberUtils.isAssignable(parameterTypes, method.getParameterTypes(), true)) {
-                        bestMatch = method;
-                        Method accessibleMethod = getMethodFromElse(method);
-                        if (accessibleMethod != null && MemberUtils.compareParameterTypes(accessibleMethod.getParameterTypes(), method.getParameterTypes(), parameterTypes) < 0) {
-                            bestMatch = accessibleMethod;
-                            break;
-                        }
-                    }
-                }
-                if (bestMatch != null) {
-                    break;
-                }
-            }
-            if (bestMatch != null) {
-                MemberUtils.setAccessibleWorkaround(bestMatch);
-            }
-            return bestMatch;
-        }
-    }
-
     private static Method getMethodFromElse(Method method) {
         Class<?> cls = method.getDeclaringClass();
         String methodName = method.getName();
@@ -133,7 +160,6 @@ public final class MethodUtils {
         while(cls != null) {
             Class<?>[] interfaces = cls.getInterfaces();
             int i = 0;
-
             while(i < interfaces.length) {
                 try {
                     return interfaces[i].getDeclaredMethod(methodName, parameterTypes);
@@ -142,14 +168,11 @@ public final class MethodUtils {
                     if (method != null) {
                         return method;
                     }
-
                     ++i;
                 }
             }
-
             cls = cls.getSuperclass();
         }
-
         return null;
     }
 }

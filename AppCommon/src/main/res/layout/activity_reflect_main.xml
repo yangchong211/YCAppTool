@@ -50,7 +50,7 @@
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="@dimen/dp20"
-        android:text="4."
+        android:text="4.获取对象的构造函数"
         android:textSize="@dimen/textSize18"
         android:background="@color/priority_green"
         app:rRadius="@dimen/dp20" />

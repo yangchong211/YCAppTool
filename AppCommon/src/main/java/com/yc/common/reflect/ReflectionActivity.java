@@ -59,7 +59,7 @@ public class ReflectionActivity extends BaseActivity {
         tvReflect4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                test4();
             }
         });
         tvReflect5.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +171,22 @@ public class ReflectionActivity extends BaseActivity {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+
+        try {
+            Method getName = MethodUtils.getMethod(cl, "getName");
+            Method setName = MethodUtils.getDeclaredMethod(cl, "setName", String.class);
+            AppLogUtils.d("class method utils getName : " + getName);
+            AppLogUtils.d("class method utils setName : " + setName);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 获取class对象的构造函数
+     */
+    private void test4() {
+
     }
 
 }

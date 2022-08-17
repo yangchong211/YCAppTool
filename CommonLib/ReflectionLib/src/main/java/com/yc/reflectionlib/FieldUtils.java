@@ -23,6 +23,12 @@ public final class FieldUtils {
 
     private static final Map<String, Field> sFieldCache = new HashMap<>();
 
+    /**
+     * Field[] allFields = class1.getDeclaredFields();//获取class对象的所有属性
+     * Field[] publicFields = class1.getFields();//获取class对象的public属性
+     * Field ageField = class1.getDeclaredField("age");//获取class指定属性
+     * Field desField = class1.getField("des");//获取class指定的public属性
+     */
     private FieldUtils() {
 
     }
