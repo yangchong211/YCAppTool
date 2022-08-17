@@ -1,15 +1,128 @@
 package com.yc.common.reflect;
 
-import android.os.Bundle;
+import android.view.View;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import com.yc.common.R;
+import com.yc.library.base.mvp.BaseActivity;
+import com.yc.roundcorner.view.RoundTextView;
+import com.yc.toolutils.AppLogUtils;
 
-public class ReflectionActivity extends AppCompatActivity {
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+
+public class ReflectionActivity extends BaseActivity {
+
+    private RoundTextView tvReflect1;
+    private RoundTextView tvReflect2;
+    private RoundTextView tvReflect3;
+    private RoundTextView tvReflect4;
+    private RoundTextView tvReflect5;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getContentView() {
+        return R.layout.activity_reflect_main;
+    }
+
+    @Override
+    public void initView() {
+        tvReflect1 = findViewById(R.id.tv_reflect_1);
+        tvReflect2 = findViewById(R.id.tv_reflect_2);
+        tvReflect3 = findViewById(R.id.tv_reflect_3);
+        tvReflect4 = findViewById(R.id.tv_reflect_4);
+        tvReflect5 = findViewById(R.id.tv_reflect_5);
+    }
+
+    @Override
+    public void initListener() {
+        tvReflect1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                test1();
+            }
+        });
+        tvReflect2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                test2();
+            }
+        });
+        tvReflect3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        tvReflect4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        tvReflect5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    @Override
+    public void initData() {
 
     }
+
+    private void test1(){
+        Class cl = Student.class;
+        System.out.println("类名称:"+cl.getName());
+        System.out.println("简单类名称:"+cl.getSimpleName());
+        System.out.println("包名:"+cl.getPackage());
+        System.out.println("是否为接口:"+cl.isInterface());
+        System.out.println("是否为基本类型:"+cl.isPrimitive());
+        System.out.println("是否为数组对象:"+cl.isArray());
+        System.out.println("父类名称:"+cl.getSuperclass().getName());
+        //System.out: 类名称:com.yc.common.reflect.Student
+        //System.out: 简单类名称:Student
+        //System.out: 包名:package com.yc.common.reflect, Unknown, version 0.0
+        //System.out: 是否为接口:false
+        //System.out: 是否为基本类型:false
+        //System.out: 是否为数组对象:false
+        //System.out: 父类名称:java.lang.Object
+    }
+
+    /**
+     * 获取class对象属性，目前只有这四个方法
+     */
+    private void test2() {
+        Student student = new Student();
+        Class<? extends Student> cl = student.getClass();
+        //获取class对象的public属性
+        Field[] fields = cl.getFields();
+        for (int i=0 ; i<fields.length ; i++){
+            Field met = fields[i];
+            String name = met.getName();
+            Annotation[] declaredAnnotations = met.getDeclaredAnnotations();
+            AppLogUtils.i("获取class对象的public属性:"+name+"----"+declaredAnnotations.length);
+        }
+        //获取class对象的所有属性
+        Field[] declaredFields = cl.getDeclaredFields();
+        for (int i=0 ; i<declaredFields.length ; i++){
+            Field met = declaredFields[i];
+            String name = met.getName();
+            Annotation[] declaredAnnotations = met.getDeclaredAnnotations();
+            AppLogUtils.i("获取class对象的所有属性:"+name+"----"+declaredAnnotations.length);
+        }
+
+        try {
+            //获取class指定属性
+            Field ageField = cl.getDeclaredField("age");
+            //获取class指定的public属性
+            Field heightField = cl.getField("height");
+            AppLogUtils.d("class file ageField : " + ageField);
+            AppLogUtils.d("class file heightField : " + heightField);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
