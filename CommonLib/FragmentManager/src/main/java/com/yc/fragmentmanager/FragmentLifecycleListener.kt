@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager
  */
 abstract class FragmentLifecycleListener : FragmentManager.FragmentLifecycleCallbacks() {
 
+
     override fun onFragmentPreAttached(
         fm: FragmentManager,
         f: Fragment,
@@ -90,9 +91,8 @@ abstract class FragmentLifecycleListener : FragmentManager.FragmentLifecycleCall
         super.onFragmentDetached(fm, f)
     }
 
-
     private fun info(s: String) {
-        Log.i(FragmentManagerHelper.TAG, s)
+        Log.i(com.yc.fragmentmanager.FragmentManager.TAG, s)
     }
 
 }

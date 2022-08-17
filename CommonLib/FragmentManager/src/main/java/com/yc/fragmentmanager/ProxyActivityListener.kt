@@ -1,66 +1,75 @@
 package com.yc.fragmentmanager
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import java.util.ArrayList
 import java.util.HashMap
 
 /**
- * <pre>
  * @author yangchong
  * blog  : https://github.com/yangchong211
  * GitHub : https://github.com/yangchong211/YCCommonLib
  * time  : 2018/11/9
  * desc  : 代理类
  * revise:
-</pre> *
  */
 class ProxyActivityListener : FragmentLifecycleListener() {
-    private val mActivityLifecycleListeners: MutableMap<Class<Activity>, MutableList<FragmentLifecycleListener>> =
+
+    private val mActivityLifecycleListeners: MutableMap<FragmentActivity, MutableList<FragmentLifecycleListener>> =
         HashMap()
 
     fun registerFragmentLifecycleListener(
-        clazz: Class<Activity>?,
+        activity: FragmentActivity?,
         lifecycleListener: FragmentLifecycleListener?
     ) {
-        if (clazz == null || lifecycleListener == null) {
+        if (activity == null || lifecycleListener == null) {
             return
         }
-        var lifecycleListeners = mActivityLifecycleListeners[clazz]
+        var lifecycleListeners = mActivityLifecycleListeners[activity]
         if (lifecycleListeners == null) {
             lifecycleListeners = ArrayList()
         }
         lifecycleListeners.add(lifecycleListener)
-        mActivityLifecycleListeners[clazz] = lifecycleListeners
+        mActivityLifecycleListeners[activity] = lifecycleListeners
+        //recursive字段设置true，将自动为所有子fragmentManager注册这个回调
+        activity.supportFragmentManager.registerFragmentLifecycleCallbacks(this, true)
+        info("add fragment lifecycle : " + activity.javaClass.simpleName)
     }
 
     fun unregisterFragmentLifecycleListener(
-        clazz: Class<Activity>?,
+        activity: FragmentActivity?,
         lifecycleListener: FragmentLifecycleListener?
     ): Boolean {
-        if (clazz == null || lifecycleListener == null) {
+        if (activity == null || lifecycleListener == null) {
             return false
         }
         synchronized(mActivityLifecycleListeners) {
-            val lifecycleListeners = mActivityLifecycleListeners[clazz] ?: return false
+            val lifecycleListeners = mActivityLifecycleListeners[activity] ?: return false
             val result = lifecycleListeners.remove(lifecycleListener)
             if (lifecycleListeners.size == 0) {
-                mActivityLifecycleListeners.remove(clazz)
+                mActivityLifecycleListeners.remove(activity)
             }
+            activity.supportFragmentManager.unregisterFragmentLifecycleCallbacks(this)
+            info("remove fragment lifecycle : " + activity.javaClass.simpleName)
             return result
         }
     }
+
 
     override fun onFragmentAttached(
         fm: FragmentManager,
         f: Fragment, context: Context
     ) {
+        if (f.activity == null){
+            return
+        }
         val lifecycleListeners: List<FragmentLifecycleListener>? =
-            mActivityLifecycleListeners.get(f.javaClass)
-        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            mActivityLifecycleListeners[f.activity]
+        if (lifecycleListeners == null || lifecycleListeners.isEmpty()) {
             return
         }
         val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
@@ -70,9 +79,12 @@ class ProxyActivityListener : FragmentLifecycleListener() {
     }
 
     override fun onFragmentCreated(fm: FragmentManager, f: Fragment, savedInstanceState: Bundle?) {
+        if (f.activity == null){
+            return
+        }
         val lifecycleListeners: List<FragmentLifecycleListener>? =
-            mActivityLifecycleListeners.get(f.javaClass)
-        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            mActivityLifecycleListeners[f.activity]
+        if (lifecycleListeners == null || lifecycleListeners.isEmpty()) {
             return
         }
         val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
@@ -82,9 +94,12 @@ class ProxyActivityListener : FragmentLifecycleListener() {
     }
 
     override fun onFragmentStarted(fm: FragmentManager, f: Fragment) {
+        if (f.activity == null){
+            return
+        }
         val lifecycleListeners: List<FragmentLifecycleListener>? =
-            mActivityLifecycleListeners.get(f.javaClass)
-        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            mActivityLifecycleListeners[f.activity]
+        if (lifecycleListeners == null || lifecycleListeners.isEmpty()) {
             return
         }
         val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
@@ -94,9 +109,12 @@ class ProxyActivityListener : FragmentLifecycleListener() {
     }
 
     override fun onFragmentResumed(fm: FragmentManager, f: Fragment) {
+        if (f.activity == null){
+            return
+        }
         val lifecycleListeners: List<FragmentLifecycleListener>? =
-            mActivityLifecycleListeners.get(f.javaClass)
-        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            mActivityLifecycleListeners[f.activity]
+        if (lifecycleListeners == null || lifecycleListeners.isEmpty()) {
             return
         }
         val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
@@ -106,9 +124,12 @@ class ProxyActivityListener : FragmentLifecycleListener() {
     }
 
     override fun onFragmentPaused(fm: FragmentManager, f: Fragment) {
+        if (f.activity == null){
+            return
+        }
         val lifecycleListeners: List<FragmentLifecycleListener>? =
-            mActivityLifecycleListeners.get(f.javaClass)
-        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            mActivityLifecycleListeners[f.activity]
+        if (lifecycleListeners == null || lifecycleListeners.isEmpty()) {
             return
         }
         val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
@@ -118,9 +139,12 @@ class ProxyActivityListener : FragmentLifecycleListener() {
     }
 
     override fun onFragmentStopped(fm: FragmentManager, f: Fragment) {
+        if (f.activity == null){
+            return
+        }
         val lifecycleListeners: List<FragmentLifecycleListener>? =
-            mActivityLifecycleListeners.get(f.javaClass)
-        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            mActivityLifecycleListeners[f.activity]
+        if (lifecycleListeners == null || lifecycleListeners.isEmpty()) {
             return
         }
         val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
@@ -130,9 +154,12 @@ class ProxyActivityListener : FragmentLifecycleListener() {
     }
 
     override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
+        if (f.activity == null){
+            return
+        }
         val lifecycleListeners: List<FragmentLifecycleListener>? =
-            mActivityLifecycleListeners.get(f.javaClass)
-        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            mActivityLifecycleListeners[f.activity]
+        if (lifecycleListeners == null || lifecycleListeners.isEmpty()) {
             return
         }
         val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
@@ -142,14 +169,21 @@ class ProxyActivityListener : FragmentLifecycleListener() {
     }
 
     override fun onFragmentDetached(fm: FragmentManager, f: Fragment) {
+        if (f.activity == null){
+            return
+        }
         val lifecycleListeners: List<FragmentLifecycleListener>? =
-            mActivityLifecycleListeners.get(f.javaClass)
-        if (lifecycleListeners == null || lifecycleListeners.size == 0) {
+            mActivityLifecycleListeners[f.activity]
+        if (lifecycleListeners == null || lifecycleListeners.isEmpty()) {
             return
         }
         val callbacks: List<FragmentLifecycleListener> = ArrayList(lifecycleListeners)
         for (i in callbacks.indices) {
             callbacks[i].onFragmentDetached(fm, f)
         }
+    }
+
+    private fun info(s: String) {
+        Log.i(com.yc.fragmentmanager.FragmentManager.TAG, s)
     }
 }
