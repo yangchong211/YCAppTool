@@ -9,6 +9,23 @@ public class Student implements InterStudent{
     private static String tag = "Student";
     public int height = 172;
 
+    public Student(){
+
+    }
+
+    public Student(String name){
+        this.name = name;
+    }
+
+    private Student(int age) {
+        this.age = age;
+    }
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
     public String getName() {
         return name;
     }

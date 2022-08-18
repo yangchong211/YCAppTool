@@ -11,8 +11,10 @@ import com.yc.toolutils.AppLogUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.TypeVariable;
 
 public class ReflectionActivity extends BaseActivity {
 
@@ -186,7 +188,25 @@ public class ReflectionActivity extends BaseActivity {
      * 获取class对象的构造函数
      */
     private void test4() {
-
+        try {
+            Class<?> cl = Class.forName("com.yc.common.reflect.Student");
+            //获取class对象public构造函数
+            Constructor<?>[] constructors = cl.getConstructors();
+            for (int i=0 ; i<constructors.length ; i++){
+                Constructor con = constructors[i];
+                String name = con.getName();
+                TypeVariable[] typeParameters = con.getTypeParameters();
+                Annotation[] declaredAnnotations = con.getDeclaredAnnotations();
+                AppLogUtils.i("获取class对象public构造函数:"+name+"----"+typeParameters.length);
+            }
+            //获取class对象的所有声明构造函数
+            Constructor<?>[] declaredConstructors = cl.getDeclaredConstructors();
+            for (int i=0 ; i<declaredConstructors.length ; i++){
+                AppLogUtils.i("获取class对象的所有声明构造函数:"+declaredConstructors[i].getName());
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

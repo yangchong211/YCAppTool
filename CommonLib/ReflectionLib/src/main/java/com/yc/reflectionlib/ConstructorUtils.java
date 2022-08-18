@@ -1,5 +1,7 @@
 package com.yc.reflectionlib;
 
+import java.lang.reflect.Constructor;
+
 /**
  * <pre>
  *     @author yangchong
@@ -21,6 +23,24 @@ public final class ConstructorUtils {
      */
     private ConstructorUtils(){
 
+    }
+
+    /**
+     * 获取class对象public构造函数
+     * @param cls           cls
+     * @return
+     */
+    public static Constructor<?>[] getConstructors(Class<?> cls){
+        return cls.getConstructors();
+    }
+
+    /**
+     * 获取class对象的所有声明构造函数
+     * @param cls           cls
+     * @return
+     */
+    public static Constructor<?>[] getDeclaredConstructors(Class<?> cls){
+        return cls.getDeclaredConstructors();
     }
 
 
