@@ -75,7 +75,7 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
         ':ArchitectureLib',':ActivityManager', ':ToolFileLib',':EventUploadLib',
         ':AppCommonInter',':ToolMemoryLib',':AppPermission',':PhoneSensor',
-        ':AppLruDisk',':AppLruCache',':AppFastSp'
+        ':AppLruDisk',':AppLruCache',':AppFastSp',':DownloadHelper'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -103,7 +103,7 @@ project(':PhoneSensor').projectDir = new File('CommonLib/PhoneSensor')
 project(':AppLruDisk').projectDir = new File('CommonLib/AppLruDisk')
 project(':AppLruCache').projectDir = new File('CommonLib/AppLruCache')
 project(':AppFastSp').projectDir = new File('CommonLib/AppFastSp')
-
+project(':DownloadHelper').projectDir = new File('CommonLib/DownloadHelper')
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
@@ -165,7 +165,7 @@ include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,':NtpTimeLib' ,
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib',':EasyExecutor',
         ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib', ':AppProcessLib',
-        ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus'
+        ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
@@ -185,7 +185,7 @@ project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
 project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
 project(':LiveDataBus').projectDir = new File('ToolLib/LiveDataBus')
 project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
-
+project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -256,4 +256,4 @@ include ':MonitorAppLib'
 
 
 include ':AppWebView'
-include ':YCUpdateLib'
+
