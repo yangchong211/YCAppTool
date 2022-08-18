@@ -89,6 +89,8 @@ public final class PermissionConstants {
                 return GROUP_SMS;
             case STORAGE:
                 return GROUP_STORAGE;
+            default:
+                break;
         }
         return new String[]{permission};
     }
