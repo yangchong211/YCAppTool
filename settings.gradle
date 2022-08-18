@@ -256,3 +256,4 @@ include ':MonitorAppLib'
 
 
 include ':AppWebView'
+include ':YCUpdateLib'

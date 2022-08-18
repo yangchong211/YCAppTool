@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">YCUpdateLib</string>
+
+    <string name="update_title_info">我们升级呢！</string>
+    <string name="update_content_info">1.更新内容；\n2.更新内容啦；\n3.更新内容，赶紧查看；\n1.更新内容；\n2.更新内容啦；\n3.更新内容，赶紧查看；1.更新内容；\n2.更新内容啦；\n3.更新内容，赶紧查看；1.更新内容；\n2.更新内容啦；\n3.更新内容，赶紧查看；</string>
+    <string name="update_info">立即更新</string>
+    <string name="update_next">下次再说</string>
+
+</resources>
