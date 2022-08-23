@@ -43,7 +43,7 @@ public class ConnectionManager {
     static final long BANDWIDTH_LOWER_BOUND = 10;
 
     private static class ConnectionClassManagerHolder {
-        public static final ConnectionManager instance = new ConnectionManager();
+        public static final ConnectionManager INSTANCE = new ConnectionManager();
     }
 
     /**
@@ -51,7 +51,7 @@ public class ConnectionManager {
      * @return                              单利对象
      */
     public static ConnectionManager getInstance() {
-        return ConnectionClassManagerHolder.instance;
+        return ConnectionClassManagerHolder.INSTANCE;
     }
 
     private ConnectionManager() {
@@ -97,10 +97,6 @@ public class ConnectionManager {
     }
 
     private boolean significantlyOutsideCurrentBand() {
-        if (mDownloadBandwidth == null) {
-            // Make Infer happy. It wouldn't make any sense to call this while mDownloadBandwidth is null.
-            return false;
-        }
         ConnectionQuality currentQuality = mCurrentBandwidthConnectionQuality.get();
         double bottomOfBand;
         double topOfBand;
@@ -140,9 +136,7 @@ public class ConnectionManager {
      * 重制
      */
     public void reset() {
-        if (mDownloadBandwidth != null) {
-            mDownloadBandwidth.reset();
-        }
+        mDownloadBandwidth.reset();
         mCurrentBandwidthConnectionQuality.set(ConnectionQuality.UNKNOWN);
     }
 
@@ -150,9 +144,6 @@ public class ConnectionManager {
      * 获得移动带宽平均当前所代表的连接质量
      */
     public synchronized ConnectionQuality getCurrentBandwidthQuality() {
-        if (mDownloadBandwidth == null) {
-            return ConnectionQuality.UNKNOWN;
-        }
         return mapBandwidthQuality(mDownloadBandwidth.getAverage());
     }
 
@@ -178,7 +169,7 @@ public class ConnectionManager {
      * @return 当前带宽平均，或-1，如果没有平均记录。
      */
     public synchronized double getDownloadKBitsPerSecond() {
-        return mDownloadBandwidth == null ? -1.0 : mDownloadBandwidth.getAverage();
+        return mDownloadBandwidth.getAverage();
     }
 
     /**

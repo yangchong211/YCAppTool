@@ -27,14 +27,13 @@ public class DeviceBandwidthSampler {
     private long mLastTimeReading;
     private static long sPreviousBytes = -1;
 
-    // Singleton.
     private static class DeviceBandwidthSamplerHolder {
-        public static final DeviceBandwidthSampler instance =
+        public static final DeviceBandwidthSampler INSTANCE =
                 new DeviceBandwidthSampler(ConnectionManager.getInstance());
     }
 
     public static DeviceBandwidthSampler getInstance() {
-        return DeviceBandwidthSamplerHolder.instance;
+        return DeviceBandwidthSamplerHolder.INSTANCE;
     }
 
     private DeviceBandwidthSampler(ConnectionManager connectionManager) {
