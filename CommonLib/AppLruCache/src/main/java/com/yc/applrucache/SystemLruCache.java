@@ -71,13 +71,6 @@ public class SystemLruCache<K, V> implements ILruCache<K, V> {
             missCount++;
         }
 
-        /*
-         * Attempt to create a value. This may take a long time, and the map
-         * may be different when create() returns. If a conflicting value was
-         * added to the map while create() was working, we leave that value in
-         * the map and release the created value.
-         */
-
         V createdValue = create(key);
         if (createdValue == null) {
             return null;
