@@ -21,6 +21,8 @@ public final class MethodUtils {
      * Method[] allMethods = class1.getMethods();//获取class对象的所有public方法 包括父类的方法
      * Method method = class1.getMethod("info", String.class);//返回次Class对象对应类的、带指定形参列表的public方法
      * Method declaredMethod = class1.getDeclaredMethod("info", String.class);//返回次Class对象对应类的、带指定形参列表的方法
+     *
+     *
      */
     private MethodUtils() {
 

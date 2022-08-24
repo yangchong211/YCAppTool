@@ -229,4 +229,33 @@ public class ReflectionActivity extends BaseActivity {
         }
     }
 
+
+    private void test(){
+        //第一种方式 通过Class类的静态方法——forName()来实现
+        try {
+            Class<?> class1 = Class.forName("com.yc.common.reflect.Student");
+            Student p= (Student) class1.newInstance();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+        //第二种方式 通过类的class属性
+        Class<?> class2 = Student.class;
+        Class<?> superclass = class2.getSuperclass();
+        try {
+            Student p= (Student) class2.newInstance();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+        //第三种方式 通过对象getClass方法
+        Student student = new Student();
+        Class<?> class3 = student.getClass();
+
+
+    }
 }

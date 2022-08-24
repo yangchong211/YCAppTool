@@ -6,6 +6,17 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  :
+ *     revise: 之前搜车封装库
+ *
+ * </pre>
+ */
 public final class MemberUtils {
 
     private static final Class<?>[] ORDERED_PRIMITIVE_TYPES;
@@ -14,6 +25,28 @@ public final class MemberUtils {
 
     MemberUtils() {
 
+    }
+
+    static {
+        ORDERED_PRIMITIVE_TYPES = new Class[]{Byte.TYPE, Short.TYPE,
+                Character.TYPE, Integer.TYPE, Long.TYPE, Float.TYPE, Double.TYPE};
+        PRIMITIVE_WRAPPER_MAP = new HashMap<>();
+        PRIMITIVE_WRAPPER_MAP.put(Boolean.TYPE, Boolean.class);
+        PRIMITIVE_WRAPPER_MAP.put(Byte.TYPE, Byte.class);
+        PRIMITIVE_WRAPPER_MAP.put(Character.TYPE, Character.class);
+        PRIMITIVE_WRAPPER_MAP.put(Short.TYPE, Short.class);
+        PRIMITIVE_WRAPPER_MAP.put(Integer.TYPE, Integer.class);
+        PRIMITIVE_WRAPPER_MAP.put(Long.TYPE, Long.class);
+        PRIMITIVE_WRAPPER_MAP.put(Double.TYPE, Double.class);
+        PRIMITIVE_WRAPPER_MAP.put(Float.TYPE, Float.class);
+        PRIMITIVE_WRAPPER_MAP.put(Void.TYPE, Void.TYPE);
+        WRAPPER_PRIMITIVE_MAP = new HashMap<>();
+        for (Class<?> primitiveClass : PRIMITIVE_WRAPPER_MAP.keySet()) {
+            Class<?> wrapperClass = PRIMITIVE_WRAPPER_MAP.get(primitiveClass);
+            if (!primitiveClass.equals(wrapperClass)) {
+                WRAPPER_PRIMITIVE_MAP.put(wrapperClass, primitiveClass);
+            }
+        }
     }
 
     private static boolean isPackageAccess(int modifiers) {
@@ -191,27 +224,5 @@ public final class MemberUtils {
         return cost;
     }
 
-    static {
-        ORDERED_PRIMITIVE_TYPES = new Class[]{Byte.TYPE, Short.TYPE,
-                Character.TYPE, Integer.TYPE, Long.TYPE, Float.TYPE, Double.TYPE};
-        PRIMITIVE_WRAPPER_MAP = new HashMap<>();
-        PRIMITIVE_WRAPPER_MAP.put(Boolean.TYPE, Boolean.class);
-        PRIMITIVE_WRAPPER_MAP.put(Byte.TYPE, Byte.class);
-        PRIMITIVE_WRAPPER_MAP.put(Character.TYPE, Character.class);
-        PRIMITIVE_WRAPPER_MAP.put(Short.TYPE, Short.class);
-        PRIMITIVE_WRAPPER_MAP.put(Integer.TYPE, Integer.class);
-        PRIMITIVE_WRAPPER_MAP.put(Long.TYPE, Long.class);
-        PRIMITIVE_WRAPPER_MAP.put(Double.TYPE, Double.class);
-        PRIMITIVE_WRAPPER_MAP.put(Float.TYPE, Float.class);
-        PRIMITIVE_WRAPPER_MAP.put(Void.TYPE, Void.TYPE);
-        WRAPPER_PRIMITIVE_MAP = new HashMap<>();
-        for (Class<?> primitiveClass : PRIMITIVE_WRAPPER_MAP.keySet()) {
-            Class<?> wrapperClass = PRIMITIVE_WRAPPER_MAP.get(primitiveClass);
-            if (!primitiveClass.equals(wrapperClass)) {
-                WRAPPER_PRIMITIVE_MAP.put(wrapperClass, primitiveClass);
-            }
-        }
-
-    }
 }
 
