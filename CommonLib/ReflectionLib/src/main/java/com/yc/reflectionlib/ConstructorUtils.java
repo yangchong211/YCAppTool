@@ -16,10 +16,10 @@ import java.lang.reflect.Constructor;
 public final class ConstructorUtils {
 
     /**
-     * Constructor<?>[] allConstructors = class1.getDeclaredConstructors();//获取class对象的所有声明构造函数
-     * Constructor<?>[] publicConstructors = class1.getConstructors();//获取class对象public构造函数
-     * Constructor<?> constructor = class1.getDeclaredConstructor(String.class);//获取指定声明构造函数
-     * Constructor publicConstructor = class1.getConstructor(String.class);//获取指定声明的public构造函数
+     * Constructor<?>[] allConstructors = class.getDeclaredConstructors();//获取class对象的所有声明构造函数
+     * Constructor<?>[] publicConstructors = class.getConstructors();//获取class对象public构造函数
+     * Constructor<?> constructor = class.getDeclaredConstructor(String.class);//获取指定声明构造函数
+     * Constructor publicConstructor = class.getConstructor(String.class);//获取指定声明的public构造函数
      */
     private ConstructorUtils(){
 
@@ -35,13 +35,34 @@ public final class ConstructorUtils {
     }
 
     /**
-     * 获取class对象的所有声明构造函数
+     * 获取class对象public指定声明构造函数
+     * @param cls           cls
+     * @return
+     */
+    public static Constructor<?> getConstructor(Class<?> cls , Class<?>... parameterTypes)
+            throws NoSuchMethodException {
+        return cls.getConstructor(parameterTypes);
+    }
+
+    /**
+     * 获取class对象的所有声明构造函数【包含私有构造】
      * @param cls           cls
      * @return
      */
     public static Constructor<?>[] getDeclaredConstructors(Class<?> cls){
         return cls.getDeclaredConstructors();
     }
+
+    /**
+     * 获取class对象的指定声明构造函数【包含私有构造】
+     * @param cls           cls
+     * @return
+     */
+    public static Constructor<?> getDeclaredConstructor(Class<?> cls, Class<?>... parameterTypes)
+            throws NoSuchMethodException {
+        return cls.getDeclaredConstructor(parameterTypes);
+    }
+
 
 
 }

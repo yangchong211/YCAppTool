@@ -51,6 +51,20 @@
     ```
 
 
+#### 3.3 获取class对象的方法
+- api调用如下所示，直接拿来用即可
+    ``` java
+    //获取class对象的所有public方法 包括父类的方法
+    Method[] methods = MethodUtils.getMethods(cl);
+    //获取class对象的所有声明方法
+    Method[] declaredMethods = MethodUtils.getDeclaredMethods(cl);
+    //返回次Class对象对应类的、带指定形参列表的public方法
+    Method getName = MethodUtils.getMethod(cl, "getName");
+    //返回次Class对象对应类的、带指定形参列表的方法
+    Method setName = MethodUtils.getDeclaredMethod(cl, "setName", String.class);
+    ```
+
+
 
 
 ### 04.遇到的坑分析

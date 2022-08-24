@@ -17,11 +17,11 @@ public class Student implements InterStudent{
         this.name = name;
     }
 
-    private Student(int age) {
+    private Student(Integer age) {
         this.age = age;
     }
 
-    public Student(String name, int age) {
+    public Student(String name, Integer age) {
         this.name = name;
         this.age = age;
     }

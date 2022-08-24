@@ -1,9 +1,13 @@
 package com.yc.common.reflect;
 
+import android.os.Build;
 import android.view.View;
+
+import androidx.annotation.RequiresApi;
 
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.reflectionlib.ConstructorUtils;
 import com.yc.reflectionlib.FieldUtils;
 import com.yc.reflectionlib.MethodUtils;
 import com.yc.roundcorner.view.RoundTextView;
@@ -61,7 +65,9 @@ public class ReflectionActivity extends BaseActivity {
         tvReflect4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                test4();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    test4();
+                }
             }
         });
         tvReflect5.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +149,7 @@ public class ReflectionActivity extends BaseActivity {
     private void test3() {
         Student student = new Student();
         Class<? extends Student> cl = student.getClass();
+        //Method[] methods = cl.getMethods();
         //获取class对象的所有public方法 包括父类的方法
         Method[] methods = MethodUtils.getMethods(cl);
         for (int i=0 ; i<methods.length ; i++){
@@ -152,7 +159,7 @@ public class ReflectionActivity extends BaseActivity {
             int modifiers = met.getModifiers();
             AppLogUtils.i("获取class对象的所有public方法，包括父类:"+name+"----"+declaredAnnotations.length);
         }
-
+        //Method[] declaredMethods = cl.getDeclaredMethods();
         //获取class对象的所有声明方法
         Method[] declaredMethods = MethodUtils.getDeclaredMethods(cl);
         for (int i=0 ; i<declaredMethods.length ; i++){
@@ -175,7 +182,9 @@ public class ReflectionActivity extends BaseActivity {
         }
 
         try {
+            //返回次Class对象对应类的、带指定形参列表的public方法
             Method getName = MethodUtils.getMethod(cl, "getName");
+            //返回次Class对象对应类的、带指定形参列表的方法
             Method setName = MethodUtils.getDeclaredMethod(cl, "setName", String.class);
             AppLogUtils.d("class method utils getName : " + getName);
             AppLogUtils.d("class method utils setName : " + setName);
@@ -187,24 +196,35 @@ public class ReflectionActivity extends BaseActivity {
     /**
      * 获取class对象的构造函数
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void test4() {
         try {
             Class<?> cl = Class.forName("com.yc.common.reflect.Student");
             //获取class对象public构造函数
-            Constructor<?>[] constructors = cl.getConstructors();
+            //Constructor<?>[] constructors = cl.getConstructors();
+            Constructor<?>[] constructors = ConstructorUtils.getConstructors(cl);
+            Constructor<?> constructors1 = ConstructorUtils.getConstructor(cl, String.class);
+            Constructor<?> constructors2 = ConstructorUtils.getConstructor(cl, String.class, Integer.class);
+            //Constructor<?> constructors3 = ConstructorUtils.getConstructor(cl, Integer.class);
             for (int i=0 ; i<constructors.length ; i++){
                 Constructor con = constructors[i];
                 String name = con.getName();
                 TypeVariable[] typeParameters = con.getTypeParameters();
                 Annotation[] declaredAnnotations = con.getDeclaredAnnotations();
-                AppLogUtils.i("获取class对象public构造函数:"+name+"----"+typeParameters.length);
+                AppLogUtils.i("获取class对象public构造函数:"+name+"----"+con.toString());
             }
+            AppLogUtils.i("获取class对象public构造函数1:"+constructors1.toString());
+            AppLogUtils.i("获取class对象public构造函数2:"+constructors2.toString());
+            //AppLogUtils.i("获取class对象public构造函数3:"+constructors3.toString());
+
             //获取class对象的所有声明构造函数
-            Constructor<?>[] declaredConstructors = cl.getDeclaredConstructors();
+            Constructor<?>[] declaredConstructors = ConstructorUtils.getDeclaredConstructors(cl);
+            Constructor<?> declaredConstructor = ConstructorUtils.getDeclaredConstructor(cl, Integer.class);
             for (int i=0 ; i<declaredConstructors.length ; i++){
-                AppLogUtils.i("获取class对象的所有声明构造函数:"+declaredConstructors[i].getName());
+                AppLogUtils.i("获取class对象的所有声明构造函数:"+declaredConstructors[i].getName() + "  " + declaredConstructors[i].toString());
             }
-        } catch (ClassNotFoundException e) {
+            AppLogUtils.i("获取class对象的所有声明构造函数1:"+declaredConstructor.toString());
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
             e.printStackTrace();
         }
     }
