@@ -17,6 +17,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.TypeVariable;
 
@@ -27,6 +28,7 @@ public class ReflectionActivity extends BaseActivity {
     private RoundTextView tvReflect3;
     private RoundTextView tvReflect4;
     private RoundTextView tvReflect5;
+    private RoundTextView tvReflect6;
 
     @Override
     public int getContentView() {
@@ -40,6 +42,7 @@ public class ReflectionActivity extends BaseActivity {
         tvReflect3 = findViewById(R.id.tv_reflect_3);
         tvReflect4 = findViewById(R.id.tv_reflect_4);
         tvReflect5 = findViewById(R.id.tv_reflect_5);
+        tvReflect6 = findViewById(R.id.tv_reflect_6);
     }
 
     @Override
@@ -73,7 +76,13 @@ public class ReflectionActivity extends BaseActivity {
         tvReflect5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                test5();
+            }
+        });
+        tvReflect6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                test6();
             }
         });
     }
@@ -230,6 +239,107 @@ public class ReflectionActivity extends BaseActivity {
     }
 
 
+    private void test5() {
+        //第一种方式 通过Class类的静态方法——forName()来实现
+        try {
+            Class<?> class1 = Class.forName("com.yc.common.reflect.Student");
+            Student s = (Student) class1.newInstance();
+            //首先需要获得与该方法对应的Method对象
+            Method setAge = class1.getDeclaredMethod("setAge", Integer.class);
+            //调用指定的函数并传递参数
+            setAge.invoke(s, 28);
+            String student1 = s.toString();
+            AppLogUtils.i("反射调用类的方法1:"+student1);
+
+            Method setAgeAndName = class1.getDeclaredMethod("setAgeAndName", Integer.class , String.class);
+            setAgeAndName.setAccessible(true);
+            setAgeAndName.invoke(s,30,"doubi");
+            String student2 = s.toString();
+            AppLogUtils.i("反射调用类的方法2:"+student2);
+
+            Object[] args1 = {32};
+            Class<?>[] parameterTypes1 = {Integer.class};
+            MethodUtils.invokeMethod(s, "setAge",args1,parameterTypes1);
+            AppLogUtils.i("反射调用类的方法3:"+s);
+            Object[] args2 = {33,"小样"};
+            Class<?>[] parameterTypes2 = {Integer.class, String.class};
+            MethodUtils.invokeMethod(s, "setAgeAndName", args2, parameterTypes2);
+            AppLogUtils.i("反射调用类的方法4:"+s);
+
+            MethodUtils.invokeMethod(s, "setAge",35);
+            AppLogUtils.i("反射调用类的方法5:"+s);
+            MethodUtils.invokeMethod(s, "setAgeAndName",40,"哈哈");
+            AppLogUtils.i("反射调用类的方法6:"+s);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void test6() {
+        //第一种方式 通过Class类的静态方法——forName()来实现
+        try {
+            Class<?> class1 = Class.forName("com.yc.common.reflect.Student");
+            Student obj = (Student) class1.newInstance();
+
+            int age = obj.getAge();
+            AppLogUtils.i("反射访问成员变量值1:"+age);
+            //获取age成员变量
+            //Field field = cl.getField("age");
+            Field field = class1.getDeclaredField("age");
+            //设置权限
+            field.setAccessible(true);
+            //将obj对象的age的值设置为10
+            field.setInt(obj, 10);
+            //获取obj对象的age的值
+            int anInt = field.getInt(obj);
+            AppLogUtils.i("反射访问成员变量值2:"+anInt);
+
+            //反射修改私有变量
+            // 获取声明的 code 字段，这里要注意 getField 和 getDeclaredField 的区别
+            Field gradeField = class1.getDeclaredField("name");
+            // 如果是 private 或者 package 权限的，一定要赋予其访问权限
+            gradeField.setAccessible(true);
+            // 修改 student 对象中的 Grade 字段值
+            gradeField.set(obj, "逗比");
+            Object o = gradeField.get(obj);
+            AppLogUtils.i("反射访问成员变量值3:"+o.toString());
+
+
+            Object name4 = FieldUtils.readField(obj, "name", true);
+            AppLogUtils.i("反射访问成员变量值4:"+name4.toString());
+            Object name5 = FieldUtils.readField(obj, "name");
+            AppLogUtils.i("反射访问成员变量值5:"+name5.toString());
+
+            FieldUtils.writeField(obj,"name","逗比2");
+            Object name6 = FieldUtils.readField(obj, "name", true);
+            AppLogUtils.i("反射访问成员变量值6:"+name6.toString());
+
+            FieldUtils.writeField(obj,"name","傻逼",true);
+            Object name7 = FieldUtils.readField(obj, "name", true);
+            AppLogUtils.i("反射访问成员变量值7:"+name7.toString());
+
+            FieldUtils.writeDeclaredField(obj,"name","傻逼2");
+            Object name8 = FieldUtils.readField(obj, "name", true);
+            AppLogUtils.i("反射访问成员变量值7:"+name8.toString());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void test(){
         //第一种方式 通过Class类的静态方法——forName()来实现
         try {
@@ -255,7 +365,5 @@ public class ReflectionActivity extends BaseActivity {
         //第三种方式 通过对象getClass方法
         Student student = new Student();
         Class<?> class3 = student.getClass();
-
-
     }
 }

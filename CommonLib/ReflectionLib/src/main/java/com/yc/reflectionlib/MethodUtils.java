@@ -21,8 +21,6 @@ public final class MethodUtils {
      * Method[] allMethods = class1.getMethods();//获取class对象的所有public方法 包括父类的方法
      * Method method = class1.getMethod("info", String.class);//返回次Class对象对应类的、带指定形参列表的public方法
      * Method declaredMethod = class1.getDeclaredMethod("info", String.class);//返回次Class对象对应类的、带指定形参列表的方法
-     *
-     *
      */
     private MethodUtils() {
 
@@ -30,53 +28,138 @@ public final class MethodUtils {
 
     /**
      * 获取class对象的所有public方法 包括父类的方法
-     * @param cls           cls
+     *
+     * @param cls cls
      * @return
      */
-    public static Method[] getMethods(Class<?> cls){
+    public static Method[] getMethods(Class<?> cls) {
         return cls.getMethods();
     }
 
     /**
      * 获取class对象的所有声明方法
-     * @param cls           cls
+     *
+     * @param cls cls
      * @return
      */
-    public static Method[] getDeclaredMethods(Class<?> cls){
+    public static Method[] getDeclaredMethods(Class<?> cls) {
         return cls.getDeclaredMethods();
     }
 
     /**
      * 返回次Class对象对应类的、带指定形参列表的public方法
-     * @param cls           cls
-     * @param methodName    方法名
+     *
+     * @param cls        cls
+     * @param methodName 方法名
      * @return
      * @throws NoSuchMethodException
      */
     public static Method getMethod(Class<?> cls, String methodName) throws NoSuchMethodException {
-        return getMatchedMethod(cls,methodName);
+        return getMatchedMethod(cls, methodName);
     }
 
     /**
      * 返回次Class对象对应类的、带指定形参列表的方法
-     * @param cls           cls
-     * @param methodName    方法名
+     *
+     * @param cls        cls
+     * @param methodName 方法名
      * @return
      * @throws NoSuchMethodException
      */
-    public static Method getDeclaredMethod(Class<?> cls, String methodName,Class<?>... parameterTypes) throws NoSuchMethodException {
-        return getMatchedMethod(cls,methodName,parameterTypes);
+    public static Method getDeclaredMethod(Class<?> cls, String methodName, Class<?>... parameterTypes) throws NoSuchMethodException {
+        return getMatchedMethod(cls, methodName, parameterTypes);
     }
 
+    /**
+     * 反射调用类的方法
+     *
+     * @param object     对象
+     * @param methodName 方法名
+     * @param args       参数(可以是多个)
+     * @return
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
+    public static Object invokeMethod(Object object, String methodName, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        args = ReflectUtils.nullToEmpty(args);
+        Class<?>[] parameterTypes = ReflectUtils.toClass(args);
+        return invokeMethod(object, methodName, args, parameterTypes);
+    }
 
-    public static Method getMatchedMethod(Class<?> cls, String methodName, Class<?>... parameterTypes) throws NoSuchMethodException {
+    /**
+     * 反射调用类的方法
+     *
+     * @param object         对象
+     * @param methodName     方法名
+     * @param args           参数集合
+     * @param parameterTypes 参数对应的类型集合
+     * @return
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
+    public static Object invokeMethod(Object object, String methodName, Object[] args, Class<?>[] parameterTypes) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        parameterTypes = ReflectUtils.nullToEmpty(parameterTypes);
+        args = ReflectUtils.nullToEmpty(args);
+        Method method = getMatchedMethod(object.getClass(), methodName, parameterTypes);
+        if (method == null) {
+            throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + object.getClass().getName());
+        } else {
+            method.setAccessible(true);
+            return method.invoke(object, args);
+        }
+    }
+
+    /**
+     * 反射调用类的静态方法
+     *
+     * @param clazz      clazz
+     * @param methodName 方法名
+     * @param args       参数(可以是多个)
+     * @return
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
+    public static Object invokeStaticMethod(Class<?> clazz, String methodName, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        args = ReflectUtils.nullToEmpty(args);
+        Class<?>[] parameterTypes = ReflectUtils.toClass(args);
+        return invokeStaticMethod(clazz, methodName, args, parameterTypes);
+    }
+
+    /**
+     * 反射调用类的静态方法
+     *
+     * @param clazz          clazz
+     * @param methodName     方法名
+     * @param args           参数集合
+     * @param parameterTypes 参数对应的类型集合
+     * @return
+     * @throws NoSuchMethodException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     */
+    public static Object invokeStaticMethod(Class<?> clazz, String methodName, Object[] args, Class<?>[] parameterTypes) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        parameterTypes = ReflectUtils.nullToEmpty(parameterTypes);
+        args = ReflectUtils.nullToEmpty(args);
+        Method method = getMatchedMethod(clazz, methodName, parameterTypes);
+        if (method == null) {
+            throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + clazz.getName());
+        } else {
+            method.setAccessible(true);
+            return method.invoke((Object) null, args);
+        }
+    }
+
+    private static Method getMatchedMethod(Class<?> cls, String methodName, Class<?>... parameterTypes) throws NoSuchMethodException {
         Method bestMatch;
         try {
             bestMatch = cls.getDeclaredMethod(methodName, parameterTypes);
             MemberUtils.setAccessibleWorkaround(bestMatch);
             return bestMatch;
         } catch (NoSuchMethodException var10) {
-            for(bestMatch = null; cls != null; cls = cls.getSuperclass()) {
+            for (bestMatch = null; cls != null; cls = cls.getSuperclass()) {
                 Method[] methods = cls.getDeclaredMethods();
                 for (Method method : methods) {
                     if (method.getName().equals(methodName) && MemberUtils.isAssignable(parameterTypes, method.getParameterTypes(), true)) {
@@ -99,42 +182,6 @@ public final class MethodUtils {
         }
     }
 
-    public static Object invokeMethod(Object object, String methodName, Object[] args, Class<?>[] parameterTypes) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        parameterTypes = ReflectUtils.nullToEmpty(parameterTypes);
-        args = ReflectUtils.nullToEmpty(args);
-        Method method = getMatchedMethod(object.getClass(), methodName, parameterTypes);
-        if (method == null) {
-            throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + object.getClass().getName());
-        } else {
-            method.setAccessible(true);
-            return method.invoke(object, args);
-        }
-    }
-
-    public static Object invokeStaticMethod(Class<?> clazz, String methodName, Object[] args, Class<?>[] parameterTypes) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        parameterTypes = ReflectUtils.nullToEmpty(parameterTypes);
-        args = ReflectUtils.nullToEmpty(args);
-        Method method = getMatchedMethod(clazz, methodName, parameterTypes);
-        if (method == null) {
-            throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + clazz.getName());
-        } else {
-            method.setAccessible(true);
-            return method.invoke((Object)null, args);
-        }
-    }
-
-    public static Object invokeStaticMethod(Class clazz, String methodName, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        args = ReflectUtils.nullToEmpty(args);
-        Class<?>[] parameterTypes = ReflectUtils.toClass(args);
-        return invokeStaticMethod(clazz, methodName, args, parameterTypes);
-    }
-
-    public static Object invokeMethod(Object object, String methodName, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        args = ReflectUtils.nullToEmpty(args);
-        Class<?>[] parameterTypes = ReflectUtils.toClass(args);
-        return invokeMethod(object, methodName, args, parameterTypes);
-    }
-
     private static Method getMethodFromElse(Method method) {
         Class<?> cls = method.getDeclaringClass();
         String methodName = method.getName();
@@ -148,7 +195,7 @@ public final class MethodUtils {
 
     private static Method getAccessibleMethodFromSuperclass(Class<?> cls, String methodName, Class<?>... parameterTypes) {
         Class<?> parentClass = cls.getSuperclass();
-        while(parentClass != null) {
+        while (parentClass != null) {
             try {
                 return parentClass.getDeclaredMethod(methodName, parameterTypes);
             } catch (NoSuchMethodException var5) {
@@ -159,10 +206,10 @@ public final class MethodUtils {
     }
 
     private static Method getAccessibleMethodFromInterfaceNest(Class<?> cls, String methodName, Class<?>... parameterTypes) {
-        while(cls != null) {
+        while (cls != null) {
             Class<?>[] interfaces = cls.getInterfaces();
             int i = 0;
-            while(i < interfaces.length) {
+            while (i < interfaces.length) {
                 try {
                     return interfaces[i].getDeclaredMethod(methodName, parameterTypes);
                 } catch (NoSuchMethodException var6) {

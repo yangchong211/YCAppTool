@@ -12,14 +12,12 @@ include ':AppCommon'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
-include ':GameBusiness', ':AnimBusiness',':MvvmDatabinding',
+include ':AnimBusiness',':MvvmDatabinding',
         ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
-        ':MvcTodoBusiness',':JetpackBusiness',':AndroidBusiness',
+        ':MvcTodoBusiness',':JetpackBusiness',
         ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
         ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness', ':PlayerBusiness',
         ':SocketBusiness',':LibraryLayer'
-project(':GameBusiness').projectDir = new File('Business/GameBusiness')
-project(':AndroidBusiness').projectDir = new File('Business/AndroidBusiness')
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
 project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
 project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')

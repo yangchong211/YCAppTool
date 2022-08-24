@@ -21,6 +21,7 @@
 
 
 
+
 #### 1.2 获得Class对象方式
 - 每个类被加载之后，系统就会为该类生成一个对应的Class对象。通过该Class对象就可以访问到JVM中的这个类。
     ``` java
@@ -38,17 +39,16 @@
     Class<?> superclass = class1.getSuperclass();
     ```
 - 没有无参构造如何实现反射？
-    - 这个时候，只能选择第一个方式。然后通过class.getConstructor获取有参数构造函数，然后
+    - 这个时候，只能选择第一个方式。然后通过class.getConstructor获取有参数构造函数，然后在构造
+    ``` java
+    Constructor<?> constructor = stuClass.getConstructor(String.class,int.class);
+    Object student = constructor.newInstance("张三",10);
+    Method show = stuClass.getDeclaredMethod("show");
+    show.invoke(student);
+    ```
 
 
-
-#### 1.3 Class与.class文档
-- Java 在真正需要某个类时才会加载对应的.class文档。而非在程序启动时就加载所有类，因为大部分时候只需要用到应用程序部分资源，有选择地加载可以节省系统资源。
-- Class 类没有公开的构造函数，实例是由 JVM 自动产生，每个 .class 文档加载时， JVM 会自动生成对应的 Class 对象。
-
-
-
-#### 1.4 Java反射的应用
+#### 1.3 Java反射的应用
 - 1.逆向代码，例如反编译；2.与注解相结合的框架 例如Retrofit；3.单纯的反射机制应用框架 例如EventBus；4.动态生成类框架 例如Gson
 - 需要访问隐藏属性或者调用方法改变程序原来的逻辑，这个在开发中很常见的，由于一些原因，系统并没有开放一些接口出来，这个时候利用反射是一个有效的解决方法
 - 自定义注解，注解就是在运行时利用反射机制来获取的。
@@ -88,7 +88,22 @@
     //返回次Class对象对应类的、带指定形参列表的方法
     Method setName = MethodUtils.getDeclaredMethod(cl, "setName", String.class);
     ```
-
+- 反射调用对象的方法
+    ``` java
+    //方法1，反射修改 void setName(String name)
+    MethodUtils.invokeMethod(s, "setAge",35);
+    //方法2，反射修改 void setName(String name)
+    Object[] args1 = {32};
+    Class<?>[] parameterTypes1 = {Integer.class};
+    MethodUtils.invokeMethod(s, "setAge",args1,parameterTypes1);
+    
+    //方法1，反射修改 void setAgeAndName(Integer age , String name)
+    MethodUtils.invokeMethod(s, "setAgeAndName",40,"哈哈");
+    //方法2，反射修改 void setAgeAndName(Integer age , String name)
+    Object[] args2 = {33,"小样"};
+    Class<?>[] parameterTypes2 = {Integer.class, String.class};
+    MethodUtils.invokeMethod(s, "setAgeAndName", args2, parameterTypes2);
+    ```
 
 
 
@@ -112,12 +127,23 @@
     ```
 
 
+#### 4.3 反射调用私有
+- 反射调用私有方法
+    ```
+    // 指定方法名称来获取对应的私有的Method实例
+    Method setName = cl.getDeclaredMethod("setName", String.class);
+    setName.setAccessible(true);
+    setName.invoke(object, "潇湘剑雨");
+    ```
+
+
+
+
+
 ### 05.其他问题说明
 - Class.forName() 和ClassLoader.loadClass()区别？问到的是反射，但是在底层涉及到了虚拟机的类加载知识。
     - Class.forName() 默认执行类加载过程中的连接与初始化动作，一旦执行初始化动作，静态变量就会被初始化为程序员设置的值，如果有静态代码块，静态代码块也会被执行
     - ClassLoader.loadClass() 默认只执行类加载过程中的加载动作，后面的动作都不会执行。
-
-
 - classLoader
     - https://github.com/Catherine22/ClassLoader
 

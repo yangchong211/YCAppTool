@@ -38,7 +38,12 @@ public class Student implements InterStudent{
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    private void setAgeAndName(Integer age , String name){
+        this.name = name;
         this.age = age;
     }
 

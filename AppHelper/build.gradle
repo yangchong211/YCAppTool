@@ -193,9 +193,6 @@ dependencies {
     implementation project(path: ':CustomWidget')
     implementation project(path: ':CountTimerLib')
     implementation project(path: ':ToolUtilsLib')
-    if (!rootProject.ext.isBookApplication){
-        implementation project(path: ':GameBusiness')
-    }
     if (!rootProject.ext.isOtherApplication){
         implementation project(path: ':DemoBusiness')
     }
@@ -237,7 +234,6 @@ dependencies {
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':ThreadPoolLib')
     implementation project(path: ':JetpackBusiness')
-    implementation project(path: ':AndroidBusiness')
     implementation project(path: ':AppProcessLib')
     implementation project(path: ':NotifyMessage')
     implementation project(path: ':BaseClassLib')

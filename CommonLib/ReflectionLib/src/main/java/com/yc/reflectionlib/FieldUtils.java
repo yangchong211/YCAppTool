@@ -148,30 +148,6 @@ public final class FieldUtils {
         }
     }
 
-    public static Object readField(Field field, Object target, boolean forceAccess) throws IllegalAccessException {
-        assertTrue(field != null, "The field must not be null");
-        if (forceAccess && !field.isAccessible()) {
-            field.setAccessible(true);
-        } else {
-            MemberUtils.setAccessibleWorkaround(field);
-        }
-        return field.get(target);
-    }
-
-    public static void writeField(Field field, Object target, Object value, boolean forceAccess) throws IllegalAccessException {
-        assertTrue(field != null, "The field must not be null");
-        if (forceAccess && !field.isAccessible()) {
-            field.setAccessible(true);
-        } else {
-            MemberUtils.setAccessibleWorkaround(field);
-        }
-        field.set(target, value);
-    }
-
-    public static Object readField(Field field, Object target) throws IllegalAccessException {
-        return readField(field, target, true);
-    }
-
     public static Object readField(Object target, String fieldName) throws IllegalAccessException {
         assertTrue(target != null, "target object must not be null");
         Class<?> cls = target.getClass();
@@ -188,6 +164,16 @@ public final class FieldUtils {
         return readField(field, target, forceAccess);
     }
 
+    private static Object readField(Field field, Object target, boolean forceAccess) throws IllegalAccessException {
+        assertTrue(field != null, "The field must not be null");
+        if (forceAccess && !field.isAccessible()) {
+            field.setAccessible(true);
+        } else {
+            MemberUtils.setAccessibleWorkaround(field);
+        }
+        return field.get(target);
+    }
+
     public static void writeField(Object target, String fieldName, Object value) throws IllegalAccessException {
         writeField(target, fieldName, value, true);
     }
@@ -200,15 +186,16 @@ public final class FieldUtils {
         writeField(field, target, value, forceAccess);
     }
 
-    public static void writeField(Field field, Object target, Object value) throws IllegalAccessException {
-        writeField(field, target, value, true);
+    private static void writeField(Field field, Object target, Object value, boolean forceAccess) throws IllegalAccessException {
+        assertTrue(field != null, "The field must not be null");
+        if (forceAccess && !field.isAccessible()) {
+            field.setAccessible(true);
+        } else {
+            MemberUtils.setAccessibleWorkaround(field);
+        }
+        field.set(target, value);
     }
 
-    public static Object readStaticField(Field field, boolean forceAccess) throws IllegalAccessException {
-        assertTrue(field != null, "The field must not be null");
-        assertTrue(Modifier.isStatic(field.getModifiers()), "The field '%s' is not static", field.getName());
-        return readField((Field)field, (Object)null, forceAccess);
-    }
 
     public static Object readStaticField(Class<?> cls, String fieldName) throws IllegalAccessException {
         Field field = getField(cls, fieldName, true);
@@ -216,10 +203,10 @@ public final class FieldUtils {
         return readStaticField(field, true);
     }
 
-    public static void writeStaticField(Field field, Object value, boolean forceAccess) throws IllegalAccessException {
+    private static Object readStaticField(Field field, boolean forceAccess) throws IllegalAccessException {
         assertTrue(field != null, "The field must not be null");
-        assertTrue(Modifier.isStatic(field.getModifiers()), "The field %s.%s is not static", field.getDeclaringClass().getName(), field.getName());
-        writeField((Field)field, (Object)null, value, forceAccess);
+        assertTrue(Modifier.isStatic(field.getModifiers()), "The field '%s' is not static", field.getName());
+        return readField((Field)field, (Object)null, forceAccess);
     }
 
     public static void writeStaticField(Class<?> cls, String fieldName, Object value) throws IllegalAccessException {
@@ -228,6 +215,11 @@ public final class FieldUtils {
         writeStaticField(field, value, true);
     }
 
+    private static void writeStaticField(Field field, Object value, boolean forceAccess) throws IllegalAccessException {
+        assertTrue(field != null, "The field must not be null");
+        assertTrue(Modifier.isStatic(field.getModifiers()), "The field %s.%s is not static", field.getDeclaringClass().getName(), field.getName());
+        writeField((Field)field, (Object)null, value, forceAccess);
+    }
 
     public static void writeDeclaredField(Object target, String fieldName, Object value) throws IllegalAccessException {
         Class<?> cls = target.getClass();

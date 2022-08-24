@@ -112,7 +112,6 @@ public final class MemberUtils {
                         return false;
                     }
                 }
-
                 if (toClass.isPrimitive() && !cls.isPrimitive()) {
                     cls = wrapperToPrimitive(cls);
                     if (cls == null) {
@@ -120,7 +119,6 @@ public final class MemberUtils {
                     }
                 }
             }
-
             if (cls.equals(toClass)) {
                 return true;
             } else if (cls.isPrimitive()) {
@@ -161,7 +159,7 @@ public final class MemberUtils {
     }
 
     static Class<?> wrapperToPrimitive(Class<?> cls) {
-        return (Class) WRAPPER_PRIMITIVE_MAP.get(cls);
+        return WRAPPER_PRIMITIVE_MAP.get(cls);
     }
 
     static int compareParameterTypes(Class<?>[] left, Class<?>[] right, Class<?>[] actual) {
@@ -172,13 +170,11 @@ public final class MemberUtils {
 
     private static float getTotalTransformationCost(Class<?>[] srcArgs, Class<?>[] destArgs) {
         float totalCost = 0.0F;
-
         for(int i = 0; i < srcArgs.length; ++i) {
             Class<?> srcClass = srcArgs[i];
             Class<?> destClass = destArgs[i];
             totalCost += getObjectTransformationCost(srcClass, destClass);
         }
-
         return totalCost;
     }
 
@@ -192,10 +188,8 @@ public final class MemberUtils {
                     cost += 0.25F;
                     break;
                 }
-
                 ++cost;
             }
-
             if (srcClass == null) {
                 ++cost;
             }
@@ -211,7 +205,6 @@ public final class MemberUtils {
             cost += 0.1F;
             cls = wrapperToPrimitive(srcClass);
         }
-
         for(int i = 0; cls != destClass && i < ORDERED_PRIMITIVE_TYPES.length; ++i) {
             if (cls == ORDERED_PRIMITIVE_TYPES[i]) {
                 cost += 0.1F;
@@ -220,7 +213,6 @@ public final class MemberUtils {
                 }
             }
         }
-
         return cost;
     }
 
