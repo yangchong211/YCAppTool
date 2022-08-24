@@ -57,7 +57,23 @@
 
 
 ### 02.常见思路和做法
+#### 2.1 反射获取成员变量
 
+
+#### 2.2 反射获取方法
+
+
+#### 2.3 反射获取构造
+
+
+#### 2.4 反射获取参数类型
+
+
+
+#### 2.5 setAccessible暴力访问
+- 一般情况下并不能对类的私有字段进行操作，利用反射也不例外，如果非要修改，则就需要调用AccessibleObject上的setAccessible()方法来允许这种访问。
+- 而由于反射类中的Field，Method和Constructor继承自AccessibleObject，因此，通过在这些类上调用setAccessible(true)方法，可以实现对这些字段的操作。
+ 
 
 
 
@@ -141,6 +157,7 @@
 
 
 ### 05.其他问题说明
+#### 5.1 常见问题记录
 - Class.forName() 和ClassLoader.loadClass()区别？问到的是反射，但是在底层涉及到了虚拟机的类加载知识。
     - Class.forName() 默认执行类加载过程中的连接与初始化动作，一旦执行初始化动作，静态变量就会被初始化为程序员设置的值，如果有静态代码块，静态代码块也会被执行
     - ClassLoader.loadClass() 默认只执行类加载过程中的加载动作，后面的动作都不会执行。
@@ -148,6 +165,7 @@
     - https://github.com/Catherine22/ClassLoader
 
 
+#### 5.2 反射调用开销
 
 
 

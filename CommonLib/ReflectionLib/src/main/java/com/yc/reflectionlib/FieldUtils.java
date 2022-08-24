@@ -4,6 +4,8 @@ package com.yc.reflectionlib;
 import android.text.TextUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,6 +97,40 @@ public final class FieldUtils {
     public static Field getField(Class<?> cls, String fieldName) {
         return getField(cls, fieldName, true);
     }
+
+    /**
+     * 获取filed属性的类型
+     * @param field     field
+     * @return
+     */
+    public static Class<?> getFiledType(Field field){
+        // 直接使用getType()取出Field类型只对普通类型的Field有效
+        Class<?> aClassType = field.getType();
+        return aClassType;
+    }
+
+    /**
+     * 获取filed属性的泛型类型
+     * @param field     field
+     * @return
+     */
+    public static Type[] getGenericType(Field field){
+        Type gType = field.getGenericType();
+        // 如果gType类型是ParameterizedType对象
+        if(gType instanceof ParameterizedType){
+            // 强制类型转换
+            ParameterizedType pType = (ParameterizedType)gType;
+            // 获取原始类型
+            //Type rType = pType.getRawType();
+            // 取得泛型类型的泛型参数
+            Type[] tArgs = pType.getActualTypeArguments();
+            return tArgs;
+        } else{
+            //获取泛型类型出错
+            return null;
+        }
+    }
+
 
     /**
      * 获取class指定的public属性

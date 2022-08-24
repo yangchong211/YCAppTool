@@ -64,13 +64,11 @@ public final class MemberUtils {
                 try {
                     o.setAccessible(true);
                     return true;
-                } catch (SecurityException var3) {
+                } catch (SecurityException ignored) {
                 }
             }
-            return false;
-        } else {
-            return false;
         }
+        return false;
     }
 
     static boolean isAssignable(Class<?> cls, Class<?> toClass) {
@@ -152,7 +150,7 @@ public final class MemberUtils {
     static Class<?> primitiveToWrapper(Class<?> cls) {
         Class<?> convertedClass = cls;
         if (cls != null && cls.isPrimitive()) {
-            convertedClass = (Class) PRIMITIVE_WRAPPER_MAP.get(cls);
+            convertedClass = PRIMITIVE_WRAPPER_MAP.get(cls);
         }
 
         return convertedClass;
@@ -193,7 +191,6 @@ public final class MemberUtils {
             if (srcClass == null) {
                 ++cost;
             }
-
             return cost;
         }
     }

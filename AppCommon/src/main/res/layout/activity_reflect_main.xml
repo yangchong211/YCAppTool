@@ -79,4 +79,28 @@
         android:background="@color/priority_green"
         app:rRadius="@dimen/dp20" />
 
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_reflect_7"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/dp20"
+        android:text="7.反射获取成员变量的类型"
+        android:textSize="@dimen/textSize18"
+        android:background="@color/priority_green"
+        app:rRadius="@dimen/dp20" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_reflect_8"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/dp20"
+        android:text="8.反射获取方法参数的类型"
+        android:textSize="@dimen/textSize18"
+        android:background="@color/priority_green"
+        app:rRadius="@dimen/dp20" />
+
 </LinearLayout>

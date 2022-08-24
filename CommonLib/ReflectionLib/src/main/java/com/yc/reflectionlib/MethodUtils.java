@@ -106,7 +106,10 @@ public final class MethodUtils {
         if (method == null) {
             throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + object.getClass().getName());
         } else {
+            //如果是 private 或者 package 权限的，一定要赋予其访问权限
             method.setAccessible(true);
+            // invoke() 方法中第一个参数 Object 实质上是 Method 所依附的 Class 对应的类的实例
+            // 如果这个方法是一个静态方法，那么 ojb 为 null，后面的可变参数 Object 对应的自然就是参数。
             return method.invoke(object, args);
         }
     }
@@ -148,7 +151,9 @@ public final class MethodUtils {
             throw new NoSuchMethodException("No such accessible method: " + methodName + "() on object: " + clazz.getName());
         } else {
             method.setAccessible(true);
-            return method.invoke((Object) null, args);
+            // invoke() 方法中第一个参数 Object 实质上是 Method 所依附的 Class 对应的类的实例
+            // 如果这个方法是一个静态方法，那么 ojb 为 null，后面的可变参数 Object 对应的自然就是参数。
+            return method.invoke(null, args);
         }
     }
 
