@@ -148,6 +148,13 @@ public final class FieldUtils {
         }
     }
 
+    /**
+     * 读取对象中成员变量
+     * @param target            目标对象
+     * @param fieldName         变量名称
+     * @return                  对象
+     * @throws IllegalAccessException       异常
+     */
     public static Object readField(Object target, String fieldName) throws IllegalAccessException {
         assertTrue(target != null, "target object must not be null");
         Class<?> cls = target.getClass();
@@ -156,6 +163,14 @@ public final class FieldUtils {
         return readField(field, target, false);
     }
 
+    /**
+     * 读取对象中成员变量
+     * @param target            目标对象
+     * @param fieldName         变量名称
+     * @param forceAccess       是否是暴力访问
+     * @return                  对象
+     * @throws IllegalAccessException       异常
+     */
     public static Object readField(Object target, String fieldName, boolean forceAccess) throws IllegalAccessException {
         assertTrue(target != null, "target object must not be null");
         Class<?> cls = target.getClass();
@@ -174,10 +189,25 @@ public final class FieldUtils {
         return field.get(target);
     }
 
+    /**
+     * 修改对象中成员变量
+     * @param target            目标对象
+     * @param fieldName         变量名称
+     * @param value             变量值
+     * @throws IllegalAccessException       异常
+     */
     public static void writeField(Object target, String fieldName, Object value) throws IllegalAccessException {
         writeField(target, fieldName, value, true);
     }
 
+    /**
+     * 修改对象中成员变量
+     * @param target            目标对象
+     * @param fieldName         变量名称
+     * @param value             变量值
+     * @param forceAccess           是否是暴力访问
+     * @throws IllegalAccessException       异常
+     */
     public static void writeField(Object target, String fieldName, Object value, boolean forceAccess) throws IllegalAccessException {
         assertTrue(target != null, "target object must not be null");
         Class<?> cls = target.getClass();
@@ -185,6 +215,21 @@ public final class FieldUtils {
         assertTrue(field != null, "Cannot locate declared field %s.%s", cls.getName(), fieldName);
         writeField(field, target, value, forceAccess);
     }
+
+    /**
+     * 修改对象中成员变量【私有】
+     * @param target            目标对象
+     * @param fieldName         变量名称
+     * @param value             变量值
+     * @throws IllegalAccessException       异常
+     */
+    public static void writeDeclaredField(Object target, String fieldName, Object value) throws IllegalAccessException {
+        Class<?> cls = target.getClass();
+        Field field = getDeclaredField(cls, fieldName, true);
+        assertTrue(field != null, "Cannot locate declared field %s.%s", cls.getName(), fieldName);
+        writeField(field, target, value, false);
+    }
+
 
     private static void writeField(Field field, Object target, Object value, boolean forceAccess) throws IllegalAccessException {
         assertTrue(field != null, "The field must not be null");
@@ -219,13 +264,6 @@ public final class FieldUtils {
         assertTrue(field != null, "The field must not be null");
         assertTrue(Modifier.isStatic(field.getModifiers()), "The field %s.%s is not static", field.getDeclaringClass().getName(), field.getName());
         writeField((Field)field, (Object)null, value, forceAccess);
-    }
-
-    public static void writeDeclaredField(Object target, String fieldName, Object value) throws IllegalAccessException {
-        Class<?> cls = target.getClass();
-        Field field = getDeclaredField(cls, fieldName, true);
-        assertTrue(field != null, "Cannot locate declared field %s.%s", cls.getName(), fieldName);
-        writeField(field, target, value, false);
     }
 
     /**
