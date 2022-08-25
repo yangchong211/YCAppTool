@@ -33,7 +33,6 @@ dependencies {
     implementation project(path: ':EventUploadLib')
     implementation project(path: ':AppLruDisk')
     implementation project(path: ':AppLruCache')
-    implementation project(path: ':AppFastSp')
     //腾讯mmkv库
     implementation "com.tencent:mmkv-static:1.2.7"
 }
