@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.music.service.PlayAudioService;
 import com.yc.music.tool.BaseAppHelper;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 import com.yc.videotool.VideoLogUtils;
 import com.yc.videoview.FloatWindow;
@@ -32,7 +33,6 @@ import com.yc.ycvideoplayer.m3u8.M3u8Activity;
 import com.yc.ycvideoplayer.music.MusicPlayerActivity;
 import com.yc.ycvideoplayer.video.activity.TypeActivity;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 /**
  * ================================================

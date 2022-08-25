@@ -76,7 +76,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="play_tts"/>
-
+        <Button
+            android:id="@+id/btn_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="播放网络tts1"/>
+        <Button
+            android:id="@+id/btn_url2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="播放网络tts2"/>
         <Button
             android:id="@+id/btn_tts_demo"
             android:layout_width="match_parent"

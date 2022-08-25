@@ -6,6 +6,17 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     email : yangchong211@163.com
+ *     time  : 2018/11/9
+ *     desc  : 反射工具类
+ *     revise: 之前搜车封装库
+ *
+ * </pre>
+ */
 public final class ReflectUtils {
 
     static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];

@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 
 import java.util.List;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;

@@ -5,6 +5,16 @@ import android.content.Context;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.manager.AudioManager;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     time  : 2018/8/6
+ *     desc  : provider接口
+ *     revise:
+ * </pre>
+ */
 public interface AudioServiceProvider {
 
     /**
@@ -60,6 +70,14 @@ public interface AudioServiceProvider {
      * @param tts tts文本
      */
     void playTts(String tts);
+
+
+    /**
+     * 播放音频资源
+     *
+     * @param url 网络资源
+     */
+    void playUrl(String url);
 
     /**
      * 播放音频资源

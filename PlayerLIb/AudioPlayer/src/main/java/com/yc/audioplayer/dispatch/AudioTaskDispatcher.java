@@ -9,10 +9,12 @@ import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.InterPlayListener;
 import com.yc.videotool.VideoLogUtils;
 
+
 /**
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCVideoPlayer
  *     time  : 2018/8/6
  *     desc  : task任务分发处理器
  *     revise:

@@ -5,6 +5,16 @@ import android.content.Context;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.manager.AudioManager;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     time  : 2018/8/6
+ *     desc  : provider接口具体代理类
+ *     revise:
+ * </pre>
+ */
 public final class AudioService implements AudioServiceProvider {
 
     private AudioServiceProvider mDelegate;
@@ -20,9 +30,9 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void init(final Context arg0) {
+    public final void init(final Context context) {
         if (null != this.mDelegate) {
-            this.mDelegate.init(arg0);
+            this.mDelegate.init(context);
         }
     }
 
@@ -65,23 +75,30 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void play(final AudioPlayData arg0) {
+    public final void play(final AudioPlayData audioPlayData) {
         if (null != this.mDelegate) {
-            this.mDelegate.play(arg0);
+            this.mDelegate.play(audioPlayData);
         }
     }
 
     @Override
-    public final void playTts(final String arg0) {
+    public final void playTts(final String tts) {
         if (null != this.mDelegate) {
-            this.mDelegate.playTts(arg0);
+            this.mDelegate.playTts(tts);
         }
     }
 
     @Override
-    public final void playAudioResource(final int arg0) {
+    public void playUrl(String url) {
         if (null != this.mDelegate) {
-            this.mDelegate.playAudioResource(arg0);
+            this.mDelegate.playUrl(url);
+        }
+    }
+
+    @Override
+    public final void playAudioResource(final int rawId) {
+        if (null != this.mDelegate) {
+            this.mDelegate.playAudioResource(rawId);
         }
     }
 

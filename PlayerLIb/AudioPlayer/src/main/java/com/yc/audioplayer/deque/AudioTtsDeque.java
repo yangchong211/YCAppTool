@@ -8,10 +8,12 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+
 /**
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCVideoPlayer
  *     time  : 2018/8/6
  *     desc  : tts消息队列
  *     revise:
@@ -50,6 +52,8 @@ public class AudioTtsDeque {
                 case NORMAL_PRIORITY:
                     mNormalDeque.add(tts);
                     VideoLogUtils.d("TTS queue add  normal: " + tts.getTts());
+                    break;
+                default:
                     break;
             }
             mNotEmpty.signal();

@@ -17,9 +17,10 @@ import java.util.Locale;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCVideoPlayer
  *     time  : 2018/8/6
  *     desc  : tts播放player
- *     revise:
+ *     revise: 使用TextToSpeech
  * </pre>
  */
 public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpeech.OnInitListener {
@@ -68,14 +69,14 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
     @Override
     public void onInit(final int status) {
         try {
-            if (!mReady  && (TextToSpeech.SUCCESS == status) && this.mTts != null) {
+            if (!mReady && (TextToSpeech.SUCCESS == status) && this.mTts != null) {
                 VideoLogUtils.i("Initialize TTS success");
                 //获取locale
                 final Locale locale = mContext.getApplicationContext()
                         .getResources().getConfiguration().locale;
                 if (locale != null) {
                     VideoLogUtils.i("tts isLanguageAvailable " + mTts.isLanguageAvailable(locale) +
-                        "; variant is " + locale.getVariant() +
+                            "; variant is " + locale.getVariant() +
                             "; locale is " + locale + " ; country  is " + locale.getCountry());
                 }
                 //设置朗读语言
@@ -155,7 +156,7 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
         //停止播报
         mTts.stop();
     }
-    
+
     private final class OnCompleteListener extends UtteranceProgressListener {
 
         OnCompleteListener() {
@@ -164,7 +165,8 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
 
         /**
          * 播放完成。这个是播报完毕的时候 每一次播报完毕都会走
-         * @param utteranceId                       话语id
+         *
+         * @param utteranceId 话语id
          */
         @Override
         public void onDone(final String utteranceId) {
@@ -174,7 +176,8 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
 
         /**
          * 播放异常
-         * @param utteranceId                       话语id
+         *
+         * @param utteranceId 话语id
          */
         @Override
         public void onError(final String utteranceId) {
@@ -187,7 +190,8 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
         /**
          * 播放开始。这个是开始的时候。是先发声之后才会走这里
          * 调用isSpeaking()方法在这为true
-         * @param utteranceId                       话语id
+         *
+         * @param utteranceId 话语id
          */
         @Override
         public void onStart(final String utteranceId) {

@@ -1,5 +1,15 @@
 package com.yc.audioplayer.bean;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     time  : 2018/8/6
+ *     desc  : tts优先级
+ *     revise:
+ * </pre>
+ */
 public enum AudioTtsPriority {
 
     //p2正常普通级

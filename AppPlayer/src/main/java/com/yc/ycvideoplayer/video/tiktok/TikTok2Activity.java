@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.videotool.VideoLogUtils;
 
 import com.yc.ycvideoplayer.ConstantVideo;
@@ -26,7 +27,6 @@ import com.yc.video.ui.view.BasisVideoController;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 
 /**

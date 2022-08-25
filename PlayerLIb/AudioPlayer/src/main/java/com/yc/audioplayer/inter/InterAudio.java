@@ -4,9 +4,15 @@ import android.content.Context;
 
 import com.yc.audioplayer.bean.AudioPlayData;
 
-
 /**
- * 音频播放接口定义
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     time  : 2018/8/6
+ *     desc  : 音频播放接口定义
+ *     revise:
+ * </pre>
  */
 public interface InterAudio {
 

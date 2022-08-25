@@ -7,6 +7,16 @@ import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.manager.AudioManager;
 import com.yc.videotool.VideoLogUtils;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     time  : 2018/8/6
+ *     desc  : provider接口具体实现类
+ *     revise:
+ * </pre>
+ */
 public class AudioServiceImpl implements AudioServiceProvider {
 
     private AudioManager mAudioManager;
@@ -78,6 +88,15 @@ public class AudioServiceImpl implements AudioServiceProvider {
             .Builder()
             .tts(tts)
             .build();
+        play(data);
+    }
+
+    @Override
+    public void playUrl(String url) {
+        AudioPlayData data = new AudioPlayData
+                .Builder()
+                .url(url)
+                .build();
         play(data);
     }
 

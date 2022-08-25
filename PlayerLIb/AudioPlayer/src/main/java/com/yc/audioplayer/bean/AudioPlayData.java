@@ -1,20 +1,26 @@
 package com.yc.audioplayer.bean;
 
+
 /**
- * 链表结果的播放数据
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     time  : 2018/8/6
+ *     desc  : 链表结果的播放数据
+ *     revise:
+ * </pre>
  */
-public class AudioPlayData {
+public final class AudioPlayData {
 
     /**
      * 默认是普通级别
      */
     public AudioTtsPriority mPriority = AudioTtsPriority.NORMAL_PRIORITY;
     /**
-     * 是否播放tts，如果是文案则表示true，如果是资源文件则表示false
-     * true，使用TtsPlayer播放
-     * false，使用MediaPlayer播放
+     * 播放类型
      */
-    public boolean mPlayTts = true;
+    public AudioTtsMode audioTtsMode;
     /**
      * tts文本内容
      */
@@ -40,13 +46,13 @@ public class AudioPlayData {
     private AudioPlayData(int mRawId) {
         this();
         this.mRawId = mRawId;
-        this.mPlayTts = false;
+        audioTtsMode = AudioTtsMode.RAW_ID;
     }
 
-    private AudioPlayData(String mTts) {
+    private AudioPlayData(String mTts , AudioTtsMode mode) {
         this();
         this.mTts = mTts;
-        this.mPlayTts = true;
+        audioTtsMode = mode;
     }
 
     public String getTts() {
@@ -75,14 +81,27 @@ public class AudioPlayData {
         }
 
         public Builder tts(String string) {
-            AudioPlayData data = new AudioPlayData(string);
+            AudioPlayData data = new AudioPlayData(string,AudioTtsMode.TTS);
             if (mHeaderPlayData == null) {
                 mHeaderPlayData = data;
-                mCurrentPlayData = data;
             } else {
                 mCurrentPlayData.mNext = data;
-                mCurrentPlayData = data;
             }
+            mCurrentPlayData = data;
+            if (mPriority != null) {
+                data.mPriority = mPriority;
+            }
+            return this;
+        }
+
+        public Builder url(String string) {
+            AudioPlayData data = new AudioPlayData(string,AudioTtsMode.URL);
+            if (mHeaderPlayData == null) {
+                mHeaderPlayData = data;
+            } else {
+                mCurrentPlayData.mNext = data;
+            }
+            mCurrentPlayData = data;
             if (mPriority != null) {
                 data.mPriority = mPriority;
             }
@@ -96,11 +115,10 @@ public class AudioPlayData {
                     data.mPriority = mPriority;
                 }
                 mHeaderPlayData = data;
-                mCurrentPlayData = data;
             } else {
                 mCurrentPlayData.mNext = data;
-                mCurrentPlayData = data;
             }
+            mCurrentPlayData = data;
             return this;
         }
 

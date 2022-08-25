@@ -29,5 +29,6 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["media"])
+    implementation("com.google.android.exoplayer:exoplayer:2.11.3")
     implementation project(':VideoTool')
 }

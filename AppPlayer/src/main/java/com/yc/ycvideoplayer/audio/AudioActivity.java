@@ -28,6 +28,8 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
     private Button btnRelease;
     private Button btnBrazil;
     private Button btnTts;
+    private Button btnUrl;
+    private Button btnUrl2;
     private Button btnTtsDemo;
 
 
@@ -47,6 +49,8 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         btnRelease = findViewById(R.id.btn_release);
         btnBrazil = findViewById(R.id.btn_brazil);
         btnTts = findViewById(R.id.btn_tts);
+        btnUrl = findViewById(R.id.btn_url);
+        btnUrl2 = findViewById(R.id.btn_url2);
         btnTtsDemo = findViewById(R.id.btn_tts_demo);
 
         btnInit.setOnClickListener(this);
@@ -60,6 +64,8 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         btnRelease.setOnClickListener(this);
         btnBrazil.setOnClickListener(this);
         btnTts.setOnClickListener(this);
+        btnUrl.setOnClickListener(this);
+        btnUrl2.setOnClickListener(this);
         btnTtsDemo.setOnClickListener(this);
 
         AudioService.getInstance().init(this);
@@ -117,6 +123,10 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
             AudioService.getInstance().play(playData);
         } else if (v == btnTts){
             AudioService.getInstance().playTts("逗比，这个是tts");
+        } else if (v == btnUrl){
+            AudioService.getInstance().playUrl("https://asraudio.cdnjtzy.com/eb93cfd82d0044a1a9ce047c3aeafb8c.mp3");
+        }  else if (v == btnUrl2){
+            AudioService.getInstance().playUrl("https://asraudio.cdnjtzy.com/52bdab34457e4d9ca14a5a7feee94a23.mp3");
         } else if (v == btnTtsDemo){
             startActivity(new Intent(this,TTSAudioActivity.class));
         }

@@ -11,12 +11,14 @@ import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.InterPlayListener;
 import com.yc.videotool.VideoLogUtils;
 
+
 /**
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCVideoPlayer
  *     time  : 2018/8/6
- *     desc  : 音频播放player
+ *     desc  : 音频播放player，使用原生media。本地资源可以使用这个
  *     revise:
  * </pre>
  */
@@ -26,26 +28,6 @@ public class MediaAudioPlayer extends AbstractAudioWrapper {
     private Context mContext;
     private MediaPlayer mMediaPlayer;
     private boolean mPause = false;
-
-    /**
-     * 完成/出错时的监听接口
-     */
-    private final OnCompletionListener mOnCompletionListener = new OnCompletionListener() {
-        @Override
-        public void onCompletion(MediaPlayer player) {
-            if (mMediaPlayer != null && player != null && mMediaPlayer == player) {
-                try {
-                    mMediaPlayer.stop();
-                    mMediaPlayer.release();
-                } catch (IllegalStateException e) {
-                    e.printStackTrace();
-                } finally {
-                    mMediaPlayer = null;
-                }
-            }
-            onCompleted();
-        }
-    };
 
     public MediaAudioPlayer() {
 
@@ -70,11 +52,8 @@ public class MediaAudioPlayer extends AbstractAudioWrapper {
             try {
                 mMediaPlayer = new MediaPlayer();
                 AssetFileDescriptor afd = mContext.getResources().openRawResourceFd(data.getRawId());
-
-//                Uri sound = Uri.parse("android.resource://" + mContext.getPackageName() + "/" + data.getRawId());//  res/raw文件中的url地址。
-                mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC); //set streaming according to ur needs
+                mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mMediaPlayer.setOnCompletionListener(mOnCompletionListener);
-//                mMediaPlayer.reset();
                 mMediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
                 mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
@@ -88,7 +67,6 @@ public class MediaAudioPlayer extends AbstractAudioWrapper {
                 });
                 mMediaPlayer.prepare();
             } catch (Throwable e) {
-                //e.printStackTrace();
                 VideoLogUtils.d("MediaPlay: play fail");
                 onError("MediaPlayer has play fail : " + e.getMessage());
                 onCompleted();
@@ -153,7 +131,36 @@ public class MediaAudioPlayer extends AbstractAudioWrapper {
 
     @Override
     public void onError(String error) {
-
+        if (mPlayListener != null) {
+            mPlayListener.onError(error);
+        }
     }
 
+    /**
+     * 完成/出错时的监听接口
+     */
+    private final OnCompletionListener mOnCompletionListener = new OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer player) {
+            if (mMediaPlayer != null && player != null && mMediaPlayer == player) {
+                try {
+                    mMediaPlayer.stop();
+                    mMediaPlayer.release();
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                } finally {
+                    mMediaPlayer = null;
+                }
+            }
+            onCompleted();
+        }
+    };
+
+    private final MediaPlayer.OnErrorListener onErrorListener = new MediaPlayer.OnErrorListener() {
+        @Override
+        public boolean onError(MediaPlayer mp, int what, int extra) {
+            MediaAudioPlayer.this.onError("监听异常"+ what + ", extra: " + extra);
+            return true;
+        }
+    };
 }

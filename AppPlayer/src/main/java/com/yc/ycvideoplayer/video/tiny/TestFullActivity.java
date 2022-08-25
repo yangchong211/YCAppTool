@@ -6,6 +6,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.bumptech.glide.Glide;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.ycvideoplayer.BaseActivity;
 import com.yc.ycvideoplayer.ConstantVideo;
 
@@ -14,7 +15,6 @@ import com.yc.video.config.ConstantKeys;
 import com.yc.video.player.VideoPlayer;
 import com.yc.video.ui.view.BasisVideoController;
 
-import cn.ycbjie.ycstatusbarlib.bar.StateAppBar;
 
 
 /**
