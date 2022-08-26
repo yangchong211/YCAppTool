@@ -2,7 +2,6 @@ package com.yc.store
 
 import android.app.Application
 import com.yc.store.disk.LruDiskCacheImpl
-import com.yc.store.fastsp.FastSpCacheImpl
 import com.yc.store.lru.LruMemoryCacheImpl
 import com.yc.store.memory.MemoryCacheImpl
 import com.yc.store.mmkv.MmkvCacheImpl
@@ -16,7 +15,6 @@ class StoreToolHelper {
     private var memoryCache: BaseDataCache? = null
     private var lruMemoryCache: BaseDataCache? = null
     private var lruDiskCache: BaseDataCache? = null
-    private var fastSpCache: BaseDataCache? = null
 
 
     companion object {
@@ -99,17 +97,6 @@ class StoreToolHelper {
             lruDiskCache?.setCacheImpl(LruDiskCacheImpl())
         }
         return lruDiskCache as BaseDataCache
-    }
-
-    fun getFastSpCache(): BaseDataCache {
-        if (fastSpCache == null) {
-            fastSpCache = BaseDataCache()
-            val builder = FastSpCacheImpl.Builder()
-            builder.fileName = "fastSp"
-            val fastSpCacheImpl = builder.build()
-            fastSpCache?.setCacheImpl(fastSpCacheImpl)
-        }
-        return fastSpCache as BaseDataCache
     }
 
 }

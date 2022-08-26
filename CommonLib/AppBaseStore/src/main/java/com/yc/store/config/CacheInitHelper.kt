@@ -3,7 +3,6 @@ package com.yc.store.config
 import android.app.Application
 import android.util.Log
 import com.tencent.mmkv.MMKV
-import com.yc.appfastsp.ReadWriteManager
 import com.yc.store.StoreToolHelper
 import com.yc.applrudisk.DiskHelperUtils
 import com.yc.toolutils.AppToolUtils
@@ -59,8 +58,6 @@ object CacheInitHelper {
         //设置disk缓存
         DiskHelperUtils.setBaseCachePath(filePath)
         DiskHelperUtils.setMaxLruSize(maxLruSize ?: 1024)
-        //fastsp
-        ReadWriteManager.setBaseCachePath(filePath)
     }
 
     /**
