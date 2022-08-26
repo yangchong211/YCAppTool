@@ -48,10 +48,11 @@ public final class CompressUtils {
     /**
      * 质量压缩
      * @param image                             bitmap
-     * @param maxSize                           最大值，这个是指字节大小
+     * @param maxSize                           最大值，这个是指字节大小。单位M
      * @return
      */
     public static Bitmap compressImage(Bitmap image, int maxSize){
+        // 创建字节流对象
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         // 缩放
         int options = 80;
@@ -59,6 +60,7 @@ public final class CompressUtils {
         image.compress(Bitmap.CompressFormat.JPEG, options, os);
         // 循环压缩
         while ( os.toByteArray().length / 1024 > maxSize) {
+            // 判断如果图片大于maxSize,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
             // 清除
             os.reset();
             // 每次减去10
