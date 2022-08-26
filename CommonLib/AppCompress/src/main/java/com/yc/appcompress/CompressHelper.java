@@ -166,8 +166,8 @@ public final class CompressHelper {
         //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
         is = new ByteArrayInputStream(os.toByteArray());
         bitmap = BitmapFactory.decodeStream(is, null, newOpts);
-        int desWidth = (int) (w / be);
-        int desHeight = (int) (h / be);
+        int desWidth = w / be;
+        int desHeight = h / be;
         bitmap = Bitmap.createScaledBitmap(bitmap, desWidth, desHeight, true);
         //压缩好比例大小后再进行质量压缩
         //return compress(bitmap, maxSize); // 这里再进行质量压缩的意义不大，反而耗资源，删除

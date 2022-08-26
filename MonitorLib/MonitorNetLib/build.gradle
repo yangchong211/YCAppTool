@@ -37,15 +37,15 @@ dependencies {
     }
     implementation(rootProject.ext.dependencies["swiperefreshlayout"])
     implementation(rootProject.ext.dependencies["coordinatorlayout"])
-    implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':BaseClassLib')
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.3.5'
+    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.3.5'
     implementation project(path: ':MonitorPingLib')
-    implementation project(path: ':VideoView')
+    //implementation project(path: ':VideoView')
     implementation project(path: ':AppCompress')
     //状态栏：https://github.com/yangchong211/YCStatusBar
     implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
     //adapter:https://github.com/yangchong211/YCRefreshView
     implementation 'com.github.yangchong211.YCRefreshView:EastAdapterLib:3.0.2'
     implementation(rootProject.ext.dependencies["okhttp"])
-    //implementation 'com.github.yangchong211.YCVideoPlayer:VideoView:1.1.0'
+    implementation 'com.github.yangchong211.YCVideoPlayer:VideoView:1.1.0'
 }

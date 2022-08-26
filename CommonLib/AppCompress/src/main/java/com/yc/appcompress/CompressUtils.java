@@ -37,6 +37,10 @@ public final class CompressUtils {
             // 一定都会大于等于目标的宽和高。
             inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
         }
+        if (inSampleSize <= 0) {
+            //1表示不缩放
+            inSampleSize = 1;
+        }
         return inSampleSize;
     }
 
