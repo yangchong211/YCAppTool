@@ -54,6 +54,7 @@ public class MediaAudioPlayer extends AbstractAudioWrapper {
                 AssetFileDescriptor afd = mContext.getResources().openRawResourceFd(data.getRawId());
                 mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mMediaPlayer.setOnCompletionListener(mOnCompletionListener);
+                mMediaPlayer.setOnErrorListener(onErrorListener);
                 mMediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
                 mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override
