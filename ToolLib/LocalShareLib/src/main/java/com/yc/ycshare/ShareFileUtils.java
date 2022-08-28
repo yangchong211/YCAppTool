@@ -18,6 +18,8 @@ import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
+import com.yc.toolutils.file.DocumentUtils;
+
 import java.io.File;
 import java.lang.reflect.Method;
 
@@ -103,7 +105,7 @@ public class ShareFileUtils {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             if (DocumentsContract.isDocumentUri(context, uri)) {
-                if (isExternalStorageDocument(uri)) {
+                if (DocumentUtils.isExternalStorageDocument(uri)) {
                     final String docId = DocumentsContract.getDocumentId(uri);
                     final String[] split = docId.split(":");
                     final String type = split[0];
@@ -111,13 +113,13 @@ public class ShareFileUtils {
                     if ("primary".equalsIgnoreCase(type)) {
                         return Environment.getExternalStorageDirectory() + "/" + split[1];
                     }
-                } else if (isDownloadsDocument(uri)) {
+                } else if (DocumentUtils.isDownloadsDocument(uri)) {
                     final String id = DocumentsContract.getDocumentId(uri);
                     final Uri contentUri = ContentUris.withAppendedId(
                             Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
                     return getDataColumn(context, contentUri, null, null);
-                } else if (isMediaDocument(uri)) {
+                } else if (DocumentUtils.isMediaDocument(uri)) {
                     final String docId = DocumentsContract.getDocumentId(uri);
                     final String[] split = docId.split(":");
                     final String type = split[0];
@@ -303,30 +305,6 @@ public class ShareFileUtils {
         } 
         
         return uri;
-    }
-
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is ExternalStorageProvider.
-     */
-    private static boolean isExternalStorageDocument(Uri uri) {
-        return "com.android.externalstorage.documents".equals(uri.getAuthority());
-    }
-
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is DownloadsProvider.
-     */
-    private static boolean isDownloadsDocument(Uri uri) {
-        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
-    }
-
-    /**
-     * @param uri The Uri to check.
-     * @return Whether the Uri authority is MediaProvider.
-     */
-    private static boolean isMediaDocument(Uri uri) {
-        return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
 
     /**

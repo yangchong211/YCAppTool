@@ -1,4 +1,4 @@
-package com.yc.toolutils;
+package com.yc.toolutils.file;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -23,9 +23,9 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 
-public final class AndroidUriUtils {
+public final class FileUriUtils {
 
-    private AndroidUriUtils() {
+    private FileUriUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -113,7 +113,7 @@ public final class AndroidUriUtils {
             return null;
         }// end 0
         else if (DocumentsContract.isDocumentUri(context, uri)) {
-            if ("com.android.externalstorage.documents".equals(authority)) {
+            if (DocumentUtils.isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
@@ -165,7 +165,7 @@ public final class AndroidUriUtils {
                 }
                 Log.d("UriUtils", uri.toString() + " parse failed. -> 1_0");
                 return null;
-            } else if ("com.android.providers.downloads.documents".equals(authority)) {
+            } else if (DocumentUtils.isDownloadsDocument(uri)) {
                 String id = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                     id = DocumentsContract.getDocumentId(uri);
@@ -208,7 +208,7 @@ public final class AndroidUriUtils {
 
                 Log.d("UriUtils", uri.toString() + " parse failed. -> 1_1");
                 return null;
-            } else if ("com.android.providers.media.documents".equals(authority)) {
+            } else if (DocumentUtils.isMediaDocument(uri)) {
                 String docId = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                     docId = DocumentsContract.getDocumentId(uri);
@@ -258,7 +258,7 @@ public final class AndroidUriUtils {
                                        final String selection,
                                        final String[] selectionArgs,
                                        final String code) {
-        if ("com.google.android.apps.photos.content".equals(uri.getAuthority())) {
+        if (DocumentUtils.isGoogleMedia(uri)) {
             if (!TextUtils.isEmpty(uri.getLastPathSegment())) {
                 return new File(uri.getLastPathSegment());
             }

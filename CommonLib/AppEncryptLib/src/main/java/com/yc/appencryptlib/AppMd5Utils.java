@@ -1,4 +1,4 @@
-package com.yc.toolutils.encrypt;
+package com.yc.appencryptlib;
 
 import java.io.Closeable;
 import java.io.File;

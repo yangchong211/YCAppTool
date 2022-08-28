@@ -9,6 +9,8 @@ include ':AppMonitor'
 include ':AppWidget'
 include ':AppServer'
 include ':AppCommon'
+include ':AppWebView'
+
 
 
 /* +++++++++ 业务组件层 +++++++++ */
@@ -72,7 +74,7 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
         ':ArchitectureLib',':ActivityManager', ':ToolFileLib',':EventUploadLib',
         ':AppCommonInter',':ToolMemoryLib',':AppPermission',':PhoneSensor',
-        ':AppLruDisk',':AppLruCache',':DownloadHelper'
+        ':AppLruDisk',':AppLruCache',':DownloadHelper',':AppEncryptLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -100,6 +102,10 @@ project(':PhoneSensor').projectDir = new File('CommonLib/PhoneSensor')
 project(':AppLruDisk').projectDir = new File('CommonLib/AppLruDisk')
 project(':AppLruCache').projectDir = new File('CommonLib/AppLruCache')
 project(':DownloadHelper').projectDir = new File('CommonLib/DownloadHelper')
+project(':AppEncryptLib').projectDir = new File('CommonLib/AppEncryptLib')
+
+
+
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
@@ -248,8 +254,6 @@ project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 
 
-include ':MonitorAppLib'
 
 
-include ':AppWebView'
 

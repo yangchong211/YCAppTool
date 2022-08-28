@@ -1,4 +1,4 @@
-package com.yc.toolutils.encrypt;
+package com.yc.appencryptlib;
 
 import android.util.Base64;
 
@@ -218,7 +218,9 @@ public final class AppEncryptUtils {
      * @return 密文字节数组
      */
     private static byte[] hashTemplate(final byte[] data, final String algorithm) {
-        if (data == null || data.length <= 0) return null;
+        if (data == null || data.length <= 0) {
+            return null;
+        }
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
             md.update(data);
