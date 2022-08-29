@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left|center"
-            android:text="fastsp存"/>
+            android:text="磁盘缓存工具"/>
         <Button
             android:id="@+id/btn_sp4"
             android:layout_width="wrap_content"
@@ -213,25 +213,11 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btn_read_txt"
+            android:id="@+id/btn_file"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="读取文件"/>
-        <Button
-            android:id="@+id/btn_write_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:text="写入txt文件"/>
-        <Button
-            android:id="@+id/btn_copy_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:text="复制txt文件"/>
+            android:text="file文件"/>
     </LinearLayout>
 
 

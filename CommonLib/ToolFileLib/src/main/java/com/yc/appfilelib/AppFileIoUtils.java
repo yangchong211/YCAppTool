@@ -1,19 +1,22 @@
 package com.yc.appfilelib;
 
 import android.os.Build;
+import android.util.Log;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
-
 /**
  * <pre>
  *     @author yangchong
@@ -25,9 +28,33 @@ import java.nio.charset.StandardCharsets;
  */
 public final class AppFileIoUtils {
 
-
-
-
+    /**
+     * 写入内容到文件中
+     * @param content   内容
+     * @param fileName 文件名称
+     * @return
+     */
+    public static boolean writeString2File(String content,String fileName){
+        BufferedWriter bw = null;
+        try {
+            FileWriter fileWriter = new FileWriter(fileName);
+            bw = new BufferedWriter(fileWriter) ;
+            // 写数据
+            bw.write(content) ;
+        } catch (Exception e){
+            Log.d("AppFileIoUtils", "异常: " + e.getMessage());
+        } finally {
+            // 释放资源
+            try {
+                if (bw != null) {
+                    bw.close() ;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
 
     /**
      * 读取file文件，转化成字符串
@@ -46,21 +73,57 @@ public final class AppFileIoUtils {
                 inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
             }
             BufferedReader reader = new BufferedReader(inputStreamReader);
-            StringBuilder sb = new StringBuilder("");
+            StringBuilder sb = new StringBuilder();
             String line;
-            try {
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                    sb.append("\n");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+                sb.append("\n");
             }
             res = sb.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return res;
+    }
+
+    /**
+     * 读取io流到新的file文件中
+     * @param newFile
+     * @param is
+     * @return
+     */
+    public static boolean writeFileFromIS(final File newFile, final InputStream is) {
+        if (is == null || newFile==null) {
+            Log.e("FileIOUtils", "create file <" + newFile + "> failed.");
+            return false;
+        }
+        OutputStream os = null;
+        int sBufferSize = 1024 * 100;
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(newFile);
+            os = new BufferedOutputStream(fileOutputStream, sBufferSize);
+            byte[] data = new byte[sBufferSize];
+            for (int len; (len = is.read(data)) != -1; ) {
+                os.write(data, 0, len);
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (os != null) {
+                    os.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
@@ -172,5 +235,6 @@ public final class AppFileIoUtils {
         }
         return result;
     }
+
 
 }

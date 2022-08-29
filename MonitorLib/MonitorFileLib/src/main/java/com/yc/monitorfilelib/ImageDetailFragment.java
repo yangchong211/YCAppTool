@@ -21,8 +21,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.yc.appcompress.CompressHelper;
+import com.yc.appcompress.CompressUtils;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.CompressUtils;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.file.FileShareUtils;
 
@@ -59,8 +60,7 @@ public class ImageDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_file_image,
-                container, false);
+        View view = inflater.inflate(R.layout.activity_file_image, container, false);
         return view;
     }
 
@@ -176,7 +176,7 @@ public class ImageDetailFragment extends Fragment {
 
         @Override
         protected Bitmap doInBackground(File... files) {
-            return CompressUtils.getSmallBitmap(files[0].getPath(),
+            return CompressHelper.getSmallBitmap(files[0].getPath(),
                     1080, 1920);
         }
 

@@ -93,4 +93,7 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':AppProcessLib')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
+    implementation project(path: ':ToolFileLib')
+    implementation project(path: ':ToolFileLib')
+    implementation project(path: ':MonitorFileLib')
 }

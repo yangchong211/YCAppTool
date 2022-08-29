@@ -1,8 +1,9 @@
-package com.yc.toolutils;
+package com.yc.appfilelib;
 
 import android.content.Context;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
@@ -21,10 +22,9 @@ public final class AssetsDataUtils {
      * @return
      */
     public static String getFromAssets(String fileName, Context context) {
-
         try {
-            InputStreamReader inputReader = new InputStreamReader(
-                    context.getAssets().open(fileName));
+            InputStream inputStream = context.getAssets().open(fileName);
+            InputStreamReader inputReader = new InputStreamReader(inputStream);
             BufferedReader bufReader = new BufferedReader(inputReader);
             String line = "";
             StringBuilder result = new StringBuilder();

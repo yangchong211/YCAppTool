@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".reflect.ReflectionActivity"/>
+        <activity android:name=".file.FileActivity"/>
     </application>
 
 

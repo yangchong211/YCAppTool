@@ -23,10 +23,12 @@ import com.yc.appprocesslib.AppStateLifecycle;
 import com.yc.appprocesslib.StateListener;
 import com.yc.apprestartlib.RestartAppHelper;
 import com.yc.apprestartlib.RestartFactory;
+import com.yc.common.file.FileActivity;
 import com.yc.common.reflect.ReflectionActivity;
 import com.yc.fragmentmanager.FragmentLifecycleListener;
 import com.yc.fragmentmanager.FragmentManager;
 import com.yc.intent.log.IntentLogger;
+import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.store.BaseDataCache;
 import com.yc.store.StoreToolHelper;
 import com.yc.toastutils.ToastUtils;
@@ -138,6 +140,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_call).setOnClickListener(this);
         findViewById(R.id.btn_camera).setOnClickListener(this);
         findViewById(R.id.btn_reflection).setOnClickListener(this);
+        findViewById(R.id.btn_file).setOnClickListener(this);
     }
 
 
@@ -155,6 +158,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         }  else if (id == R.id.btn_sp2) {
             sp2();
         }  else if (id == R.id.btn_sp3) {
+            FileExplorerActivity.startActivity(this);
         }  else if (id == R.id.btn_sp4) {
         }  else if (id == R.id.btn_mkkv1) {
             mmvk1();
@@ -223,6 +227,8 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
             }
         } else if (id == R.id.btn_reflection){
             startActivity(new Intent(this, ReflectionActivity.class));
+        } else if (id == R.id.btn_file){
+            startActivity(new Intent(this, FileActivity.class));
         }
     }
 
