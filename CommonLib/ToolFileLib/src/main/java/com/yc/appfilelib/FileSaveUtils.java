@@ -1,4 +1,4 @@
-package com.yc.toolutils.file;
+package com.yc.appfilelib;
 
 
 import android.content.ContentResolver;
@@ -7,26 +7,16 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Environment;
-import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.yc.toolutils.AppToolUtils;
-
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -91,8 +81,8 @@ public final class FileSaveUtils {
      * @param name                  自己命名
      * @return                      路径
      */
-    public static String getLocalVideoPathDir(String name){
-        String video = getLocalFileSavePathDir(AppToolUtils.getApp(), "video", name);
+    public static String getLocalVideoPathDir(Context context, String name){
+        String video = getLocalFileSavePathDir(context, "video", name);
         return video;
     }
 
@@ -127,7 +117,7 @@ public final class FileSaveUtils {
      * 保存bitmap到本地
      */
     public static String saveBitmap(Context context, Bitmap mBitmap, boolean isScanner) {
-        String savePath = getLocalImgSavePath();
+        String savePath = getLocalImgSavePath(context);
         try {
             File filePic = new File(savePath);
             if (!filePic.exists()) {
@@ -165,8 +155,8 @@ public final class FileSaveUtils {
      * 获取本地图片保存路径
      * @return
      */
-    public static String getLocalImgSavePath() {
-        return getLocalFileSavePathDir(AppToolUtils.getApp(),"images",
+    public static String getLocalImgSavePath(Context context) {
+        return getLocalFileSavePathDir(context,"images",
                 generateRandomName() + ".png");
     }
 

@@ -17,8 +17,6 @@ package com.yc.webviewlib.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Environment;
-import android.os.storage.StorageManager;
 import android.text.TextUtils;
 
 import com.yc.toolutils.file.AppSdFileUtils;
@@ -26,11 +24,7 @@ import com.yc.toolutils.file.AppSdFileUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 

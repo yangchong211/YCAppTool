@@ -1,4 +1,4 @@
-package com.yc.toolutils.file;
+package com.yc.appfilelib;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -6,11 +6,9 @@ import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.core.content.FileProvider;
-
-import com.yc.toolutils.AppLogUtils;
-
 import java.io.File;
 
 public final class FileShareUtils {
@@ -46,12 +44,12 @@ public final class FileShareUtils {
                 //content://com.yc.lifehelper.fileExplorerProvider/external_path/fileShare.txt
                 //content 作为scheme；
                 //com.yc.lifehelper.fileExplorerProvider 即为我们定义的 authorities，作为host；
-                AppLogUtils.d("share file uri : " + uri);
+                Log.d("","share file uri : " + uri);
                 String encodedPath = uri.getEncodedPath();
                 //external_path/fileShare.txt
                 //如此构造后，第三方应用收到此Uri后，并不能从路径看出我们传递的真实路径，这就解决了第一个问题：
                 //发送方传递的文件路径接收方完全知晓，一目了然，没有安全保障。
-                AppLogUtils.d("share file uri encode path : " + encodedPath);
+                Log.d("","share file uri encode path : " + encodedPath);
                 share.putExtra(Intent.EXTRA_STREAM, uri);
                 share.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 //赋予读写权限

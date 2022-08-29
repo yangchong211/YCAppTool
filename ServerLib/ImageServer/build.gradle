@@ -41,6 +41,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation rootProject.ext.dependencies["glide"]
+    implementation project(path: ':ToolFileLib')
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     implementation rootProject.ext.dependencies["okhttp"]
     implementation project(path: ':ToolUtilsLib')

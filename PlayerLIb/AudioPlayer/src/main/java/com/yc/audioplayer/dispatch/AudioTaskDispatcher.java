@@ -86,7 +86,8 @@ public class AudioTaskDispatcher implements InterPlayListener {
                 }
             }
         };
-        this.mTtsThread.start();
+        mTtsThread.setName("tts-audio-thread");
+        mTtsThread.start();
     }
 
     /**

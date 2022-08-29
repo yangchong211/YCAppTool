@@ -26,6 +26,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.yc.activitymanager.ActivityManager;
+import com.yc.appcompress.CompressHelper;
 import com.yc.appcompress.CompressUtils;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.statusbar.bar.StateAppBar;
@@ -211,7 +212,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
             boolean saveBitmap = FileSaveUtils.saveBitmap(CrashDetailsActivity.this, bitmap, crashPicPath);
             if (saveBitmap) {
                 showToast("保存截图成功，请到相册查看\n路径：" + crashPicPath);
-                final Bitmap bitmapCompress = CompressUtils.getBitmap(new File(crashPicPath), 200, 200);
+                final Bitmap bitmapCompress = CompressHelper.getSmallBitmap(crashPicPath, 200, 200);
                 DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                     @Override
                     public void run() {

@@ -2,4 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yc.appfilelib">
 
+    <application>
+
+        <!--既然是ContentProvider，那么需要像Activity一样在AndroidManifest.xml里声明：-->
+        <!--android:authorities 标识ContentProvider的唯一性，可以自己任意定义，最好是全局唯一的。-->
+        <!--android:name 是指之前定义的FileProvider 子类。-->
+        <!--android:exported="false" 限制其他应用获取Provider。-->
+        <!--android:grantUriPermissions="true" 授予其它应用访问Uri权限。-->
+        <!--meta-data 囊括了别名应用表。-->
+        <!--android:name 这个值是固定的，表示要解析file_path-->
+        <!--android:resource 自己定义实现的映射表-->
+        <provider
+            android:name="com.yc.appfilelib.ExplorerProvider"
+            android:authorities="${applicationId}.fileExplorerProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_explorer_provider" />
+        </provider>
+    </application>
+
 </manifest>

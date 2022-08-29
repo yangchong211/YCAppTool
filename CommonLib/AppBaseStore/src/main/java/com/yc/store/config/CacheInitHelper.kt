@@ -6,7 +6,7 @@ import com.tencent.mmkv.MMKV
 import com.yc.store.StoreToolHelper
 import com.yc.applrudisk.DiskHelperUtils
 import com.yc.toolutils.AppToolUtils
-import com.yc.toolutils.file.AppFileUtils
+import com.yc.appfilelib.AppFileUtils
 import java.io.File
 
 
@@ -35,14 +35,14 @@ object CacheInitHelper {
         val logFile = config?.logDir
         val extraFile = config?.extraLogDir
         if (logFile == null) {
-            val cacheFiles = AppFileUtils.getCachePath(AppToolUtils.getApp())
+            val cacheFiles = com.yc.appfilelib.AppFileUtils.getCachePath(AppToolUtils.getApp())
             filePath = cacheFiles +  File.separator + "ycCache"
             //路径：/data/user/0/你的包名/cache/ycCache
         } else {
             filePath = logFile
         }
         if (extraFile == null) {
-            val externalCacheFiles = AppFileUtils.getExternalCachePath(AppToolUtils.getApp())
+            val externalCacheFiles = com.yc.appfilelib.AppFileUtils.getExternalCachePath(AppToolUtils.getApp())
             externalFilePath = externalCacheFiles +  File.separator + "ycCache"
             //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache
         } else {
