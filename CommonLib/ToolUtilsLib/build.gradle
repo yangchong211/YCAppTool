@@ -33,4 +33,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation project(path: ':EventUploadLib')
     implementation project(path: ':AppCompress')
+    implementation project(path: ':AppEncryptLib')
 }

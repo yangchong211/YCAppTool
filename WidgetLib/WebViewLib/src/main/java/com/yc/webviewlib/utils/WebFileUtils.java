@@ -19,7 +19,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
-import com.yc.toolutils.file.AppSdFileUtils;
+import com.yc.appfilelib.AppSdFileUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

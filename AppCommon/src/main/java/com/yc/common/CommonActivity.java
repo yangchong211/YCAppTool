@@ -44,7 +44,6 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
     private BaseDataCache memoryCache;
     private BaseDataCache lruMemoryCache;
     private BaseDataCache lruDiskCache;
-    private BaseDataCache fastSpCache;
 
     /**
      * 开启页面
@@ -109,7 +108,6 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         memoryCache = StoreToolHelper.getInstance().getMemoryCache();
         lruMemoryCache = StoreToolHelper.getInstance().getLruMemoryCache();
         lruDiskCache = StoreToolHelper.getInstance().getLruDiskCache();
-        fastSpCache = StoreToolHelper.getInstance().getFastSpCache();
     }
 
     private void init() {
@@ -157,9 +155,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         }  else if (id == R.id.btn_sp2) {
             sp2();
         }  else if (id == R.id.btn_sp3) {
-            sp3();
         }  else if (id == R.id.btn_sp4) {
-            sp4();
         }  else if (id == R.id.btn_mkkv1) {
             mmvk1();
         } else if (id == R.id.btn_mkkv2) {
@@ -326,30 +322,6 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         AppLogHelper.d("取数据 cacheKey4: ",data4);
         AppLogHelper.d("取数据 cacheKey5: ",data5);
         AppLogHelper.d("取数据 cacheKey6: ",data6);
-    }
-
-    private void sp3() {
-        fastSpCache.saveBoolean("spkey1",true);
-        fastSpCache.saveFloat("spkey2",2.0f);
-        fastSpCache.saveInt("spkey3",3);
-        fastSpCache.saveLong("spkey4",4);
-        fastSpCache.saveString("spkey5","doubi5");
-        fastSpCache.saveDouble("spkey6",5.20);
-    }
-
-    private void sp4() {
-        boolean spkey1 = fastSpCache.readBoolean("spkey1", false);
-        float spkey2 = fastSpCache.readFloat("spkey2", 0);
-        int spkey3 = fastSpCache.readInt("spkey3", 0);
-        long spkey4 = fastSpCache.readLong("spkey4", 0);
-        String spkey5 = fastSpCache.readString("spkey5", "");
-        double spkey6 = fastSpCache.readDouble("spkey6", 0.0);
-        AppLogHelper.d("fastSp取数据 spkey1: ",spkey1);
-        AppLogHelper.d("fastSp取数据 spkey2: ",spkey2);
-        AppLogHelper.d("fastSp取数据 spkey3: ",spkey3);
-        AppLogHelper.d("fastSp取数据 spkey4: ",spkey4);
-        AppLogHelper.d("fastSp取数据 spkey5: ",spkey5);
-        AppLogHelper.d("fastSp取数据 spkey6: ",spkey6);
     }
 
     private void mmvk1() {

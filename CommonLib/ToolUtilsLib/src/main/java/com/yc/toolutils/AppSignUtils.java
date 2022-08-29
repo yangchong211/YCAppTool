@@ -7,7 +7,8 @@ import android.content.pm.Signature;
 import android.content.pm.SigningInfo;
 import android.os.Build;
 
-import com.yc.toolutils.encrypt.AppMd5Utils;
+
+import com.yc.appencryptlib.AppMd5Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

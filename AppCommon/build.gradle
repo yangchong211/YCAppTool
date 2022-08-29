@@ -85,12 +85,12 @@ dependencies {
 //    implementation project(path: ':ArchitectureLib')
 //    implementation project(path: ':EventUploadLib')
 //    implementation project(path: ':AppPermission')
-//    implementation project(path: ':ToastUtils')
 //    implementation project(path: ':FragmentManager')
+//    implementation project(path: ':ReflectionLib')
 
     //其他
     implementation project(path: ':RoundCorners')
     implementation project(path: ':LibraryLayer')
-    implementation project(path: ':ReflectionLib')
     implementation project(path: ':AppProcessLib')
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
 }
