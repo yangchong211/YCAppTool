@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.yc.widgetbusiness.R;
 import com.yc.zoomimagelib.ZoomImageInfo;
+import com.yc.zoomimagelib.ZoomImageUtils;
 import com.yc.zoomimagelib.ZoomImageView;
 
 
@@ -28,7 +29,7 @@ public class ImageViewActivity extends Activity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mInfo = ZoomImageView.getImageViewInfo(img);
+                mInfo = ZoomImageUtils.getImageViewInfo(img);
                 img.setVisibility(View.GONE);
                 photoView.setVisibility(View.VISIBLE);
                 photoView.animaFrom(mInfo);

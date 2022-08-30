@@ -251,7 +251,7 @@ public class ZoomImageView extends AppCompatImageView {
             return;
         }
 
-        if (!hasSize(drawable)) {
+        if (!ZoomImageUtils.hasSize(drawable)) {
             return;
         }
 
@@ -262,36 +262,6 @@ public class ZoomImageView extends AppCompatImageView {
         initBase();
     }
 
-    private boolean hasSize(Drawable d) {
-        if ((d.getIntrinsicHeight() <= 0 || d.getIntrinsicWidth() <= 0)
-                && (d.getMinimumWidth() <= 0 || d.getMinimumHeight() <= 0)
-                && (d.getBounds().width() <= 0 || d.getBounds().height() <= 0)) {
-            return false;
-        }
-        return true;
-    }
-
-    private static int getDrawableWidth(Drawable d) {
-        int width = d.getIntrinsicWidth();
-        if (width <= 0) {
-            width = d.getMinimumWidth();
-        }
-        if (width <= 0) {
-            width = d.getBounds().width();
-        }
-        return width;
-    }
-
-    private static int getDrawableHeight(Drawable d) {
-        int height = d.getIntrinsicHeight();
-        if (height <= 0) {
-            height = d.getMinimumHeight();
-        }
-        if (height <= 0) {
-            height = d.getBounds().height();
-        }
-        return height;
-    }
 
     private void initBase() {
         if (!hasDrawable) {
@@ -310,8 +280,8 @@ public class ZoomImageView extends AppCompatImageView {
 
         int w = getWidth();
         int h = getHeight();
-        int imgw = getDrawableWidth(img);
-        int imgh = getDrawableHeight(img);
+        int imgw = ZoomImageUtils.getDrawableWidth(img);
+        int imgh = ZoomImageUtils.getDrawableHeight(img);
 
         mBaseRect.set(0, 0, imgw, imgh);
 
@@ -389,8 +359,8 @@ public class ZoomImageView extends AppCompatImageView {
 
         Drawable img = getDrawable();
 
-        int imgw = getDrawableWidth(img);
-        int imgh = getDrawableHeight(img);
+        int imgw = ZoomImageUtils.getDrawableWidth(img);
+        int imgh = ZoomImageUtils.getDrawableHeight(img);
 
         if (imgw > mWidgetRect.width() || imgh > mWidgetRect.height()) {
             float scaleX = imgw / mImgRect.width();
@@ -477,8 +447,8 @@ public class ZoomImageView extends AppCompatImageView {
 
     private void resetBase() {
         Drawable img = getDrawable();
-        int imgw = getDrawableWidth(img);
-        int imgh = getDrawableHeight(img);
+        int imgw = ZoomImageUtils.getDrawableWidth(img);
+        int imgh = ZoomImageUtils.getDrawableHeight(img);
         mBaseRect.set(0, 0, imgw, imgh);
         mBaseMatrix.set(mSynthesisMatrix);
         mBaseMatrix.mapRect(mBaseRect);
@@ -509,8 +479,8 @@ public class ZoomImageView extends AppCompatImageView {
         }
 
         Drawable d = getDrawable();
-        int drawableW = getDrawableWidth(d);
-        int drawableH = getDrawableHeight(d);
+        int drawableW = ZoomImageUtils.getDrawableWidth(d);
+        int drawableH = ZoomImageUtils.getDrawableHeight(d);
 
         int pWidth = MeasureSpec.getSize(widthMeasureSpec);
         int pHeight = MeasureSpec.getSize(heightMeasureSpec);
@@ -1013,7 +983,6 @@ public class ZoomImageView extends AppCompatImageView {
         if (direction > 0 && Math.round(mImgRect.bottom) - direction <= mWidgetRect.bottom){
             return false;
         }
-
         return true;
     }
 
@@ -1253,57 +1222,9 @@ public class ZoomImageView extends AppCompatImageView {
     public ZoomImageInfo getInfo() {
         RectF rect = new RectF();
         int[] p = new int[2];
-        getLocation(this, p);
+        ZoomImageUtils.getLocation(this, p);
         rect.set(p[0] + mImgRect.left, p[1] + mImgRect.top, p[0] + mImgRect.right, p[1] + mImgRect.bottom);
         return new ZoomImageInfo(rect, mImgRect, mWidgetRect, mBaseRect, mScreenCenter, mScale, mDegrees, mScaleType);
-    }
-
-    public static ZoomImageInfo getImageViewInfo(ImageView imgView) {
-        int[] p = new int[2];
-        getLocation(imgView, p);
-
-        Drawable drawable = imgView.getDrawable();
-
-        Matrix matrix = imgView.getImageMatrix();
-
-        int width = getDrawableWidth(drawable);
-        int height = getDrawableHeight(drawable);
-
-        RectF imgRect = new RectF(0, 0, width, height);
-        matrix.mapRect(imgRect);
-
-        RectF rect = new RectF(p[0] + imgRect.left, p[1] + imgRect.top, p[0] + imgRect.right, p[1] + imgRect.bottom);
-        RectF widgetRect = new RectF(0, 0, imgView.getWidth(), imgView.getHeight());
-        RectF baseRect = new RectF(widgetRect);
-        PointF screenCenter = new PointF(widgetRect.width() / 2, widgetRect.height() / 2);
-
-        return new ZoomImageInfo(rect, imgRect, widgetRect, baseRect, screenCenter, 1, 0, imgView.getScaleType());
-    }
-
-    private static void getLocation(View target, int[] position) {
-
-        position[0] += target.getLeft();
-        position[1] += target.getTop();
-
-        ViewParent viewParent = target.getParent();
-        while (viewParent instanceof View) {
-            final View view = (View) viewParent;
-
-            if (view.getId() == android.R.id.content) {
-                return;
-            }
-
-            position[0] -= view.getScrollX();
-            position[1] -= view.getScrollY();
-
-            position[0] += view.getLeft();
-            position[1] += view.getTop();
-
-            viewParent = view.getParent();
-        }
-
-        position[0] = (int) (position[0] + 0.5f);
-        position[1] = (int) (position[1] + 0.5f);
     }
 
     private void reset() {
