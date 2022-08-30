@@ -46,5 +46,6 @@ dependencies {
     implementation project(path: ':AppScrollView')
     implementation project(path: ':CustomWidget')
     implementation project(path: ':AppShadowLib')
+    implementation project(path: ':ZoomImageLib')
 }
 

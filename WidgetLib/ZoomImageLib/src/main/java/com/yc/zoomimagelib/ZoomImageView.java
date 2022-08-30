@@ -12,7 +12,6 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.OverScroller;
@@ -29,7 +28,7 @@ import androidx.appcompat.widget.AppCompatImageView;
  *     revise:
  * </pre>
  */
-public class PhotoView extends AppCompatImageView {
+public class ZoomImageView extends AppCompatImageView {
 
     private final static int MIN_ROTATE = 35;
     private final static int ANIMA_DURING = 340;
@@ -92,23 +91,23 @@ public class PhotoView extends AppCompatImageView {
     private final Transform mTranslate = new Transform();
 
     private RectF mClip;
-    private Info mFromInfo;
+    private ZoomImageInfo mFromInfo;
     private long mInfoTime;
     private Runnable mCompleteCallBack;
 
     private OnLongClickListener mLongClick;
 
-    public PhotoView(Context context) {
+    public ZoomImageView(Context context) {
         super(context);
         init();
     }
 
-    public PhotoView(Context context, AttributeSet attrs) {
+    public ZoomImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public PhotoView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ZoomImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -809,7 +808,7 @@ public class PhotoView extends AppCompatImageView {
         @Override
         public void run() {
             if (mClickListener != null) {
-                mClickListener.onClick(PhotoView.this);
+                mClickListener.onClick(ZoomImageView.this);
             }
         }
     };
@@ -819,7 +818,7 @@ public class PhotoView extends AppCompatImageView {
         @Override
         public void onLongPress(MotionEvent e) {
             if (mLongClick != null) {
-                mLongClick.onLongClick(PhotoView.this);
+                mLongClick.onLongClick(ZoomImageView.this);
             }
         }
 
@@ -1032,27 +1031,6 @@ public class PhotoView extends AppCompatImageView {
             return true;
         }
         return canScrollVerticallySelf(direction);
-    }
-
-    private class InterpolatorProxy implements Interpolator {
-
-        private Interpolator mTarget;
-
-        private InterpolatorProxy() {
-            mTarget = new DecelerateInterpolator();
-        }
-
-        public void setTargetInterpolator(Interpolator interpolator) {
-            mTarget = interpolator;
-        }
-
-        @Override
-        public float getInterpolation(float input) {
-            if (mTarget != null) {
-                return mTarget.getInterpolation(input);
-            }
-            return input;
-        }
     }
 
     private class Transform implements Runnable {
@@ -1272,15 +1250,15 @@ public class PhotoView extends AppCompatImageView {
         }
     }
 
-    public Info getInfo() {
+    public ZoomImageInfo getInfo() {
         RectF rect = new RectF();
         int[] p = new int[2];
         getLocation(this, p);
         rect.set(p[0] + mImgRect.left, p[1] + mImgRect.top, p[0] + mImgRect.right, p[1] + mImgRect.bottom);
-        return new Info(rect, mImgRect, mWidgetRect, mBaseRect, mScreenCenter, mScale, mDegrees, mScaleType);
+        return new ZoomImageInfo(rect, mImgRect, mWidgetRect, mBaseRect, mScreenCenter, mScale, mDegrees, mScaleType);
     }
 
-    public static Info getImageViewInfo(ImageView imgView) {
+    public static ZoomImageInfo getImageViewInfo(ImageView imgView) {
         int[] p = new int[2];
         getLocation(imgView, p);
 
@@ -1299,7 +1277,7 @@ public class PhotoView extends AppCompatImageView {
         RectF baseRect = new RectF(widgetRect);
         PointF screenCenter = new PointF(widgetRect.width() / 2, widgetRect.height() / 2);
 
-        return new Info(rect, imgRect, widgetRect, baseRect, screenCenter, 1, 0, imgView.getScaleType());
+        return new ZoomImageInfo(rect, imgRect, widgetRect, baseRect, screenCenter, 1, 0, imgView.getScaleType());
     }
 
     private static void getLocation(View target, int[] position) {
@@ -1369,11 +1347,11 @@ public class PhotoView extends AppCompatImageView {
      * 若等待时间过长也没有给控件设置图片，则会忽略该动画，若要再次播放动画则需要重新调用该方法
      * (等待的时间默认500毫秒，可以通过setMaxAnimFromWaiteTime(int)设置最大等待时间)
      */
-    public void animaFrom(Info info) {
+    public void animaFrom(ZoomImageInfo info) {
         if (isInit) {
             reset();
 
-            Info mine = getInfo();
+            ZoomImageInfo mine = getInfo();
 
             float scaleX = info.mImgRect.width() / mine.mImgRect.width();
             float scaleY = info.mImgRect.height() / mine.mImgRect.height();
@@ -1421,7 +1399,7 @@ public class PhotoView extends AppCompatImageView {
         }
     }
 
-    public void animaTo(Info info, Runnable completeCallBack) {
+    public void animaTo(ZoomImageInfo info, Runnable completeCallBack) {
         if (isInit) {
             mTranslate.stop();
 

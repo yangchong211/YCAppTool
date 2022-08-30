@@ -22,6 +22,12 @@
         <activity android:name=".chart.PreActivity"/>
         <activity android:name=".shadow.ShadowActivity"/>
         <activity android:name=".shadow.ShadowDrawableActivity"/>
+        <activity android:name=".zoom.ZoomMainActivity"/>
+        <activity android:name=".zoom.ViewPagerActivity"/>
+        <activity android:name=".zoom.PhotoBrowse"/>
+        <activity android:name=".zoom.ImgClick"/>
+        <activity android:name=".zoom.ImgActivity"/>
+        <activity android:name=".zoom.ImageViewActivity"/>
     </application>
 
 

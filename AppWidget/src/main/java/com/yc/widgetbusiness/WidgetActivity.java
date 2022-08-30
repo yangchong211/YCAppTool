@@ -11,6 +11,7 @@ import com.yc.widgetbusiness.round.RoundCornersActivity;
 import com.yc.widgetbusiness.shadow.ShadowActivity;
 import com.yc.widgetbusiness.shadow.ShadowDrawableActivity;
 import com.yc.widgetbusiness.textview.MixtureTextViewActivity;
+import com.yc.widgetbusiness.zoom.ZoomMainActivity;
 
 public class WidgetActivity extends BaseActivity {
 
@@ -19,6 +20,7 @@ public class WidgetActivity extends BaseActivity {
     private RoundTextView tvWidgetSpan;
     private RoundTextView tvWidgetChart;
     private RoundTextView tvWidgetShadow;
+    private RoundTextView tvWidgetZoom;
 
     @Override
     public int getContentView() {
@@ -32,6 +34,7 @@ public class WidgetActivity extends BaseActivity {
         tvWidgetSpan = findViewById(R.id.tv_widget_span);
         tvWidgetChart = findViewById(R.id.tv_widget_chart);
         tvWidgetShadow = findViewById(R.id.tv_widget_shadow);
+        tvWidgetZoom = findViewById(R.id.tv_widget_zoom);
     }
 
     @Override
@@ -64,6 +67,12 @@ public class WidgetActivity extends BaseActivity {
             @Override
             protected void onNoDoubleClick(View v) {
                 ShadowActivity.startActivity(WidgetActivity.this);
+            }
+        });
+        tvWidgetZoom.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                startActivity(ZoomMainActivity.class);
             }
         });
     }

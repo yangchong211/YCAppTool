@@ -13,7 +13,7 @@ import android.widget.ImageView;
  *     revise:
  * </pre>
  */
-public final class Info {
+public final class ZoomImageInfo {
 
     /**
      * 内部图片在整个手机界面的位置
@@ -36,8 +36,8 @@ public final class Info {
 
     ImageView.ScaleType mScaleType;
 
-    public Info(RectF rect, RectF img, RectF widget, RectF base, PointF screenCenter,
-                float scale, float degrees, ImageView.ScaleType scaleType) {
+    public ZoomImageInfo(RectF rect, RectF img, RectF widget, RectF base, PointF screenCenter,
+                         float scale, float degrees, ImageView.ScaleType scaleType) {
         mRect.set(rect);
         mImgRect.set(img);
         mWidgetRect.set(widget);
