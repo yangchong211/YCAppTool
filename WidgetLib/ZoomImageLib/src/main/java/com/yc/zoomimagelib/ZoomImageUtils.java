@@ -74,18 +74,14 @@ public final class ZoomImageUtils {
     }
 
     public static void getLocation(View target, int[] position) {
-
         position[0] += target.getLeft();
         position[1] += target.getTop();
-
         ViewParent viewParent = target.getParent();
         while (viewParent instanceof View) {
             final View view = (View) viewParent;
-
             if (view.getId() == android.R.id.content) {
                 return;
             }
-
             position[0] -= view.getScrollX();
             position[1] -= view.getScrollY();
 
@@ -94,7 +90,6 @@ public final class ZoomImageUtils {
 
             viewParent = view.getParent();
         }
-
         position[0] = (int) (position[0] + 0.5f);
         position[1] = (int) (position[1] + 0.5f);
     }
