@@ -93,9 +93,9 @@ public final class FileSaveUtils {
     public static String getLocalApkDownSavePath(String apkName){
         String appUpdateDownApkPath = "hwmc" + File.separator + "downApk";
         String saveApkPath= appUpdateDownApkPath + File.separator;
-        String sdPath = AppSdFileUtils.getSDCardPath();
-        if (!AppSdFileUtils.isExistSDCard() || TextUtils.isEmpty(sdPath)) {
-            ArrayList<String> sdPathList = AppSdFileUtils.getExtSDCardPath();
+        String sdPath = SDCardUtils.getSDCardPath();
+        if (!SDCardUtils.isExistSDCard() || TextUtils.isEmpty(sdPath)) {
+            ArrayList<String> sdPathList = SDCardUtils.getExtSDCardPath();
             if (sdPathList != null && sdPathList.size() > 0 && !TextUtils.isEmpty(sdPathList.get(0))) {
                 sdPath = sdPathList.get(0);
             }
@@ -168,12 +168,12 @@ public final class FileSaveUtils {
      */
     public static String getLocalFileSavePathDir(Context context , String fileName , String name){
         //获得SDCard 的路径,storage/sdcard
-        String sdPath = AppSdFileUtils.getSDCardPath();
+        String sdPath = SDCardUtils.getSDCardPath();
 
         //判断 SD 卡是否可用
-        if (!AppSdFileUtils.isSDCardEnable(context) || TextUtils.isEmpty(sdPath)) {
+        if (!SDCardUtils.isSDCardEnable(context) || TextUtils.isEmpty(sdPath)) {
             //获取 SD 卡路径
-            List<String> sdPathList = AppSdFileUtils.getSDCardPaths(context);
+            List<String> sdPathList = SDCardUtils.getSDCardPaths(context);
             if (sdPathList != null && sdPathList.size() > 0 && !TextUtils.isEmpty(sdPathList.get(0))) {
                 sdPath = sdPathList.get(0);
             }

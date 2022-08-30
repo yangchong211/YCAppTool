@@ -10,6 +10,6 @@
         android:layout_height="match_parent"
         android:background="@color/blackText"
         android:scaleType="centerInside"
-        android:src="@mipmap/bbb" />
+        android:src="@drawable/bg_tulip_min" />
 
 </RelativeLayout>

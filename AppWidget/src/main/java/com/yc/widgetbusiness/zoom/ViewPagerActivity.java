@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -13,11 +14,14 @@ import com.yc.widgetbusiness.R;
 import com.yc.zoomimagelib.ZoomImageView;
 
 
-public class ViewPagerActivity extends Activity {
+public class ViewPagerActivity extends AppCompatActivity {
 
     private ViewPager mPager;
 
-    private int[] imgsId = new int[]{R.mipmap.aaa, R.mipmap.bbb, R.mipmap.ccc, R.mipmap.ddd, R.mipmap.ic_launcher, R.mipmap.image003};
+    private int[] imgsId = new int[]{R.drawable.bg_autumn_tree_min, R.drawable.bg_cloud_night,
+            R.drawable.bg_lake_min, R.drawable.bg_leaves_min,
+            R.mipmap.ic_launcher, R.drawable.bg_small_kites_min};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

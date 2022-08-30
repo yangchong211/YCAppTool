@@ -62,7 +62,7 @@ public final class FileUriUtils {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             //android 10
-            if (AppSdFileUtils.isMounted()){
+            if (SDCardUtils.isMounted()){
                 return context.getContentResolver().insert(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,new ContentValues());
             } else {

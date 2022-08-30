@@ -5,13 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.yc.widgetbusiness.R;
 import com.yc.zoomimagelib.ZoomImageInfo;
 import com.yc.zoomimagelib.ZoomImageUtils;
 import com.yc.zoomimagelib.ZoomImageView;
 
 
-public class ImageViewActivity extends Activity {
+public class ImageViewActivity extends AppCompatActivity {
 
     ImageView img;
     ZoomImageView photoView;

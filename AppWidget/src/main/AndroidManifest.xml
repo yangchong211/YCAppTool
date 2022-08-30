@@ -24,8 +24,8 @@
         <activity android:name=".shadow.ShadowDrawableActivity"/>
         <activity android:name=".zoom.ZoomMainActivity"/>
         <activity android:name=".zoom.ViewPagerActivity"/>
-        <activity android:name=".zoom.PhotoBrowse"/>
-        <activity android:name=".zoom.ImgClick"/>
+        <activity android:name=".zoom.PhotoBrowseActivity"/>
+        <activity android:name=".zoom.ImgClickActivity"/>
         <activity android:name=".zoom.ImgActivity"/>
         <activity android:name=".zoom.ImageViewActivity"/>
     </application>

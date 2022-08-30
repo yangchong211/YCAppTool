@@ -73,13 +73,13 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="65dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ddd" />
+        android:src="@drawable/bg_tulip_min" />
 
     <com.yc.zoomimagelib.ZoomImageView
         android:id="@+id/img2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/ddd"
+        android:src="@drawable/bg_tulip_min"
         android:scaleType="centerInside"
         android:visibility="gone" />
 

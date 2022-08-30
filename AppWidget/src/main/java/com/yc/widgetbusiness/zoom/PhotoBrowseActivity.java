@@ -13,13 +13,17 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.yc.widgetbusiness.R;
 import com.yc.zoomimagelib.ZoomImageInfo;
 import com.yc.zoomimagelib.ZoomImageView;
 
-public class PhotoBrowse extends Activity {
+public class PhotoBrowseActivity extends AppCompatActivity {
 
-    int[] imgs = new int[]{R.mipmap.aaa, R.mipmap.bbb, R.mipmap.ccc, R.mipmap.ddd, R.mipmap.ic_launcher, R.mipmap.image003};
+    int[] imgs = new int[]{R.drawable.bg_autumn_tree_min, R.drawable.bg_cloud_night,
+            R.drawable.bg_lake_min, R.drawable.bg_leaves_min,
+            R.mipmap.ic_launcher, R.drawable.bg_small_kites_min};
 
     GridView gv;
 
@@ -80,7 +84,7 @@ public class PhotoBrowse extends Activity {
 
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                ZoomImageView p = new ZoomImageView(PhotoBrowse.this);
+                ZoomImageView p = new ZoomImageView(PhotoBrowseActivity.this);
                 p.setLayoutParams(new AbsListView.LayoutParams((int) (getResources().getDisplayMetrics().density * 100), (int) (getResources().getDisplayMetrics().density * 100)));
                 p.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 p.setImageResource(imgs[position]);

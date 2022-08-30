@@ -25,11 +25,11 @@ public class ZoomMainActivity extends Activity {
     }
 
     public void imgclick(View view) {
-        startActivity(new Intent(this, ImgClick.class));
+        startActivity(new Intent(this, ImgClickActivity.class));
     }
 
     public void photobrowse(View view) {
-        startActivity(new Intent(this, PhotoBrowse.class));
+        startActivity(new Intent(this, PhotoBrowseActivity.class));
     }
 
     public void imageview(View view) {

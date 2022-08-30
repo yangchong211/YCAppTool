@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.yc.widgetbusiness.R;
 import com.yc.zoomimagelib.ZoomImageInfo;
 import com.yc.zoomimagelib.ZoomImageView;
 
 
-public class ImgClick extends Activity implements RadioGroup.OnCheckedChangeListener {
+public class ImgClickActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
     ZoomImageInfo mRectF;
 
