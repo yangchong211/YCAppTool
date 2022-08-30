@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
  * </pre>
  */
 public final class AssetsDataUtils {
+
     /**
      * 获取asset文件下的资源文件信息
      * @param fileName

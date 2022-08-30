@@ -90,7 +90,11 @@ public final class AppSdFileUtils {
         return 0;
     }
 
-
+    /**
+     * 获取sd卡存储空间大小
+     * @param context       上下文
+     * @return
+     */
     public static String getSDCardSpace(Context context) {
         try {
             String free = getSDAvailableSize(context);
@@ -131,7 +135,6 @@ public final class AppSdFileUtils {
 
     /**
      * 获取 SD 卡路径
-     *
      * @return SD 卡路径
      */
     @SuppressWarnings("TryWithIdenticalCatches")

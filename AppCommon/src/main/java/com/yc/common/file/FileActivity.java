@@ -106,8 +106,8 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         } else if (v == tvFile3) {
             String txt = AppFileUtils.getExternalCachePath(this, "txt");
             String fileName = txt + File.separator + "yc1.txt";
-            String newFileName = txt + File.separator + "ycdoubi.txt";
-            AppFileIoUtils.copyFile(fileName,newFileName);
+            String newFileName = txt + File.separator + "ycdoubi哈哈哈.txt";
+            AppFileIoUtils.copyFileString(fileName,newFileName);
             ToastUtils.showRoundRectToast("复制完成");
         } else if (v == tvFile4) {
             //打开txt文档

@@ -2,6 +2,7 @@ package com.yc.appfilelib;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
@@ -24,6 +25,15 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time  : 2020/7/10
+ *     desc  : uri和file相互转化工具类
+ *     revise:
+ * </pre>
+ */
 public final class FileUriUtils {
 
     private FileUriUtils() {
@@ -50,7 +60,18 @@ public final class FileUriUtils {
         if (!isFileExists(context, file)) {
             return null;
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            //android 10
+            if (AppSdFileUtils.isMounted()){
+                return context.getContentResolver().insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,new ContentValues());
+            } else {
+                return context.getContentResolver().insert(
+                        MediaStore.Images.Media.INTERNAL_CONTENT_URI,new ContentValues());
+            }
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //Android7.0
             String authority = context.getPackageName() + ".fileExplorerProvider";
             return FileProvider.getUriForFile(context, authority, file);
         } else {
@@ -118,50 +139,9 @@ public final class FileUriUtils {
             if ("primary".equalsIgnoreCase(type)) {
                 return new File(Environment.getExternalStorageDirectory() + "/" + split[1]);
             } else {
-                // Below logic is how External Storage provider build URI for documents
-                // http://stackoverflow.com/questions/28605278/android-5-sd-card-label
-                StorageManager mStorageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
-                try {
-                    Class<?> storageVolumeClazz = Class.forName("android.os.storage.StorageVolume");
-                    Method getVolumeList = mStorageManager.getClass().getMethod("getVolumeList");
-                    Method getUuid = storageVolumeClazz.getMethod("getUuid");
-                    Method getState = storageVolumeClazz.getMethod("getState");
-                    Method getPath = storageVolumeClazz.getMethod("getPath");
-                    Method isPrimary = storageVolumeClazz.getMethod("isPrimary");
-                    Method isEmulated = storageVolumeClazz.getMethod("isEmulated");
-
-                    Object result = getVolumeList.invoke(mStorageManager);
-
-                    final int length = Array.getLength(result);
-                    for (int i = 0; i < length; i++) {
-                        Object storageVolumeElement = Array.get(result, i);
-                        //String uuid = (String) getUuid.invoke(storageVolumeElement);
-
-                        final boolean mounted = Environment.MEDIA_MOUNTED.equals(getState.invoke(storageVolumeElement))
-                                || Environment.MEDIA_MOUNTED_READ_ONLY.equals(getState.invoke(storageVolumeElement));
-
-                        //if the media is not mounted, we need not get the volume details
-                        if (!mounted) {
-                            continue;
-                        }
-                        //Primary storage is already handled.
-                        if ((Boolean) isPrimary.invoke(storageVolumeElement)
-                                && (Boolean) isEmulated.invoke(storageVolumeElement)) {
-                            continue;
-                        }
-
-                        String uuid = (String) getUuid.invoke(storageVolumeElement);
-
-                        if (uuid != null && uuid.equals(type)) {
-                            return new File(getPath.invoke(storageVolumeElement) + "/" + split[1]);
-                        }
-                    }
-                } catch (Exception ex) {
-                    Log.d("UriUtils", uri.toString() + " parse failed. " + ex.toString() + " -> 1_0");
-                }
+                Log.d("UriUtils", uri.toString() + " parse failed. -> 1_0");
+                return getStorage(context,uri,split);
             }
-            Log.d("UriUtils", uri.toString() + " parse failed. -> 1_0");
-            return null;
         } else if (DocumentUtils.isDownloadsDocument(uri)) {
             String id = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
@@ -233,6 +213,49 @@ public final class FileUriUtils {
         }
     }
 
+    private static File getStorage(Context context, Uri uri,String[] split) {
+        final String type = split[0];
+        // Below logic is how External Storage provider build URI for documents
+        // http://stackoverflow.com/questions/28605278/android-5-sd-card-label
+        StorageManager mStorageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
+        try {
+            Class<?> storageVolumeClazz = Class.forName("android.os.storage.StorageVolume");
+            Method getVolumeList = mStorageManager.getClass().getMethod("getVolumeList");
+            Method getUuid = storageVolumeClazz.getMethod("getUuid");
+            Method getState = storageVolumeClazz.getMethod("getState");
+            Method getPath = storageVolumeClazz.getMethod("getPath");
+            Method isPrimary = storageVolumeClazz.getMethod("isPrimary");
+            Method isEmulated = storageVolumeClazz.getMethod("isEmulated");
+            Object result = getVolumeList.invoke(mStorageManager);
+            final int length = Array.getLength(result);
+            for (int i = 0; i < length; i++) {
+                Object storageVolumeElement = Array.get(result, i);
+                //String uuid = (String) getUuid.invoke(storageVolumeElement);
+
+                final boolean mounted = Environment.MEDIA_MOUNTED.equals(getState.invoke(storageVolumeElement))
+                        || Environment.MEDIA_MOUNTED_READ_ONLY.equals(getState.invoke(storageVolumeElement));
+
+                //if the media is not mounted, we need not get the volume details
+                if (!mounted) {
+                    continue;
+                }
+                //Primary storage is already handled.
+                if ((Boolean) isPrimary.invoke(storageVolumeElement)
+                        && (Boolean) isEmulated.invoke(storageVolumeElement)) {
+                    continue;
+                }
+                String uuid = (String) getUuid.invoke(storageVolumeElement);
+
+                if (uuid != null && uuid.equals(type)) {
+                    return new File(getPath.invoke(storageVolumeElement) + "/" + split[1]);
+                }
+            }
+        } catch (Exception ex) {
+            Log.d("UriUtils", uri.toString() + " parse failed. " + ex.toString() + " -> 1_0");
+        }
+        return null;
+    }
+
     private static File getExternals(Context context, Uri uri) {
         String path = uri.getPath();
         String[] externals = new String[]{"/external/", "/external_path/"};
@@ -272,10 +295,8 @@ public final class FileUriUtils {
         return getFileFromUri(context, uri, null, null, code);
     }
 
-    private static File getFileFromUri(Context context, final Uri uri,
-                                       final String selection,
-                                       final String[] selectionArgs,
-                                       final String code) {
+    private static File getFileFromUri(Context context, final Uri uri, final String selection,
+                                       final String[] selectionArgs, final String code) {
         final String column = "_data";
         final String[] projection = new String[]{column};
         ContentResolver contentResolver = context.getContentResolver();
