@@ -87,10 +87,90 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
                     "\n" +
                     "由于业务组件之间没有相互依赖，组件Module B的Activity Class在自己的Module中，那Module A必然引用不到，这样无法调用类的功能方法；由此：必然需要一种支持组件化需求的交互方式，提供平行级别的组件间调用函数通信交互的功能。\n" +
                     "\n" +
+                    "\n" +
+                    "业务复用：在Module A需要引用Module B提供的某个功能，比如需要版本更新业务逻辑，而我们一般都是使用强引用的Class显式的调用；\n" +
+                    "业务复用：在Module A需要调用Module B提供的某个方法，例如别的Module调用用户模块退出登录的方法；\n" +
+                    "业务获取参数：登陆环境下，在Module A，C，D，E多个业务组件需要拿到Module B登陆注册组件中用户信息id，name，info等参数访问接口数据；\n" +
+                    "\n" +
+                    "\n" +
+                    "这几种调用形式大家很容易明白，正常开发中大家也是毫不犹豫的调用。但是在组件化开发的时候却有很大的问题：\n" +
+                    "\n" +
+                    "由于业务组件之间没有相互依赖，组件Module B的Activity Class在自己的Module中，那Module A必然引用不到，这样无法调用类的功能方法；由此：必然需要一种支持组件化需求的交互方式，提供平行级别的组件间调用函数通信交互的功能。\n" +
+                    "\n" +
+                    "\n" +
+                    "业务复用：在Module A需要引用Module B提供的某个功能，比如需要版本更新业务逻辑，而我们一般都是使用强引用的Class显式的调用；\n" +
+                    "业务复用：在Module A需要调用Module B提供的某个方法，例如别的Module调用用户模块退出登录的方法；\n" +
+                    "业务获取参数：登陆环境下，在Module A，C，D，E多个业务组件需要拿到Module B登陆注册组件中用户信息id，name，info等参数访问接口数据；\n" +
+                    "\n" +
+                    "\n" +
+                    "这几种调用形式大家很容易明白，正常开发中大家也是毫不犹豫的调用。但是在组件化开发的时候却有很大的问题：\n" +
+                    "\n" +
+                    "由于业务组件之间没有相互依赖，组件Module B的Activity Class在自己的Module中，那Module A必然引用不到，这样无法调用类的功能方法；由此：必然需要一种支持组件化需求的交互方式，提供平行级别的组件间调用函数通信交互的功能。\n" +
+                    "\n" +
+                    "\n" +
+                    "业务复用：在Module A需要引用Module B提供的某个功能，比如需要版本更新业务逻辑，而我们一般都是使用强引用的Class显式的调用；\n" +
+                    "业务复用：在Module A需要调用Module B提供的某个方法，例如别的Module调用用户模块退出登录的方法；\n" +
+                    "业务获取参数：登陆环境下，在Module A，C，D，E多个业务组件需要拿到Module B登陆注册组件中用户信息id，name，info等参数访问接口数据；\n" +
+                    "\n" +
+                    "\n" +
+                    "这几种调用形式大家很容易明白，正常开发中大家也是毫不犹豫的调用。但是在组件化开发的时候却有很大的问题：\n" +
+                    "\n" +
+                    "由于业务组件之间没有相互依赖，组件Module B的Activity Class在自己的Module中，那Module A必然引用不到，这样无法调用类的功能方法；由此：必然需要一种支持组件化需求的交互方式，提供平行级别的组件间调用函数通信交互的功能。\n" +
+                    "\n" +
+                    "\n" +
+                    "业务复用：在Module A需要引用Module B提供的某个功能，比如需要版本更新业务逻辑，而我们一般都是使用强引用的Class显式的调用；\n" +
+                    "业务复用：在Module A需要调用Module B提供的某个方法，例如别的Module调用用户模块退出登录的方法；\n" +
+                    "业务获取参数：登陆环境下，在Module A，C，D，E多个业务组件需要拿到Module B登陆注册组件中用户信息id，name，info等参数访问接口数据；\n" +
+                    "\n" +
+                    "\n" +
+                    "这几种调用形式大家很容易明白，正常开发中大家也是毫不犹豫的调用。但是在组件化开发的时候却有很大的问题：\n" +
+                    "\n" +
+                    "由于业务组件之间没有相互依赖，组件Module B的Activity Class在自己的Module中，那Module A必然引用不到，这样无法调用类的功能方法；由此：必然需要一种支持组件化需求的交互方式，提供平行级别的组件间调用函数通信交互的功能。\n" +
+                    "\n" +
+                    "\n" +
+                    "业务复用：在Module A需要引用Module B提供的某个功能，比如需要版本更新业务逻辑，而我们一般都是使用强引用的Class显式的调用；\n" +
+                    "业务复用：在Module A需要调用Module B提供的某个方法，例如别的Module调用用户模块退出登录的方法；\n" +
+                    "业务获取参数：登陆环境下，在Module A，C，D，E多个业务组件需要拿到Module B登陆注册组件中用户信息id，name，info等参数访问接口数据；\n" +
+                    "\n" +
+                    "\n" +
+                    "这几种调用形式大家很容易明白，正常开发中大家也是毫不犹豫的调用。但是在组件化开发的时候却有很大的问题：\n" +
+                    "\n" +
+                    "由于业务组件之间没有相互依赖，组件Module B的Activity Class在自己的Module中，那Module A必然引用不到，这样无法调用类的功能方法；由此：必然需要一种支持组件化需求的交互方式，提供平行级别的组件间调用函数通信交互的功能。\n" +
+                    "\n" +
+                    "\n" +
+                    "业务复用：在Module A需要引用Module B提供的某个功能，比如需要版本更新业务逻辑，而我们一般都是使用强引用的Class显式的调用；\n" +
+                    "业务复用：在Module A需要调用Module B提供的某个方法，例如别的Module调用用户模块退出登录的方法；\n" +
+                    "业务获取参数：登陆环境下，在Module A，C，D，E多个业务组件需要拿到Module B登陆注册组件中用户信息id，name，info等参数访问接口数据；\n" +
+                    "\n" +
+                    "\n" +
+                    "这几种调用形式大家很容易明白，正常开发中大家也是毫不犹豫的调用。但是在组件化开发的时候却有很大的问题：\n" +
+                    "\n" +
+                    "由于业务组件之间没有相互依赖，组件Module B的Activity Class在自己的Module中，那Module A必然引用不到，这样无法调用类的功能方法；由此：必然需要一种支持组件化需求的交互方式，提供平行级别的组件间调用函数通信交互的功能。\n" +
+                    "\n" +
+                    "\n" +
+                    "业务复用：在Module A需要引用Module B提供的某个功能，比如需要版本更新业务逻辑，而我们一般都是使用强引用的Class显式的调用；\n" +
+                    "业务复用：在Module A需要调用Module B提供的某个方法，例如别的Module调用用户模块退出登录的方法；\n" +
+                    "业务获取参数：登陆环境下，在Module A，C，D，E多个业务组件需要拿到Module B登陆注册组件中用户信息id，name，info等参数访问接口数据；\n" +
+                    "\n" +
+                    "\n" +
+                    "这几种调用形式大家很容易明白，正常开发中大家也是毫不犹豫的调用。但是在组件化开发的时候却有很大的问题：\n" +
+                    "\n" +
+                    "由于业务组件之间没有相互依赖，组件Module B的Activity Class在自己的Module中，那Module A必然引用不到，这样无法调用类的功能方法；由此：必然需要一种支持组件化需求的交互方式，提供平行级别的组件间调用函数通信交互的功能。\n" +
+                    "\n" +
+                    "\n" +
+                    "业务复用：在Module A需要引用Module B提供的某个功能，比如需要版本更新业务逻辑，而我们一般都是使用强引用的Class显式的调用；\n" +
+                    "业务复用：在Module A需要调用Module B提供的某个方法，例如别的Module调用用户模块退出登录的方法；\n" +
+                    "业务获取参数：登陆环境下，在Module A，C，D，E多个业务组件需要拿到Module B登陆注册组件中用户信息id，name，info等参数访问接口数据；\n" +
+                    "\n" +
+                    "\n" +
+                    "这几种调用形式大家很容易明白，正常开发中大家也是毫不犹豫的调用。但是在组件化开发的时候却有很大的问题：\n" +
+                    "\n" +
+                    "由于业务组件之间没有相互依赖，组件Module B的Activity Class在自己的Module中，那Module A必然引用不到，这样无法调用类的功能方法；由此：必然需要一种支持组件化需求的交互方式，提供平行级别的组件间调用函数通信交互的功能。\n" +
+                    "\n" +
                     "作者：杨充\n" +
                     "链接：https://juejin.cn/post/6938008708295163934\n" +
                     "来源：稀土掘金\n" +
-                    "逗比著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。";
+                    "逗比2 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。";
             String fileName = txt + File.separator + "yc1.txt";
             AppLogUtils.d("FileActivity : 写文件 路径" , fileName);
             FileIoUtils.writeString2File1(content,fileName);
@@ -99,14 +179,14 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             String txt = AppFileUtils.getExternalCachePath(this, "txt");
             String fileName = txt + File.separator + "yc1.txt";
             AppLogUtils.d("FileActivity : 读文件 路径" , fileName);
-            String file2String = BufferIoUtils.readFile2String2(fileName);
+            String file2String = FileIoUtils.readFile2String1(fileName);
             tvContent.setText(file2String);
             AppLogUtils.d("FileActivity : 读文件" , file2String);
         } else if (v == tvFile3) {
             String txt = AppFileUtils.getExternalCachePath(this, "txt");
             String fileName = txt + File.separator + "yc1.txt";
             String newFileName = txt + File.separator + "ycdoubi哈哈哈.txt";
-            BufferIoUtils.copyFile(fileName,newFileName);
+            BufferIoUtils.copyFile1(fileName,newFileName);
             ToastUtils.showRoundRectToast("复制完成");
         } else if (v == tvFile4) {
             //打开txt文档
@@ -114,6 +194,14 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             intent.setType("text/plain");
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             startActivityForResult(intent, 1024);
+        } else if (v == tvFile5) {
+            //打开txt文档
+            String txt = AppFileUtils.getExternalCachePath(this, "txt");
+            String fileName = txt + File.separator + "ycdoubi哈哈哈.txt";
+            AppLogUtils.d("FileActivity : 读文件 路径" , fileName);
+            String file2String = BufferIoUtils.readFile2String1(fileName);
+            tvContent.setText(file2String);
+            AppLogUtils.d("FileActivity : 读文件" , file2String);
         } else if (v == tvFile10){
             FileExplorerActivity.startActivity(FileActivity.this);
         }
@@ -126,7 +214,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             Uri uri = data.getData();
             File file = AppFileUriUtils.uri2File(this, uri);
             AppLogUtils.d("FileActivity : 回调" , file.getPath() + "  " +file.getName());
-            String file2String = FileIoUtils.readFile2String(file.getPath());
+            String file2String = FileIoUtils.readFile2String1(file.getPath());
             tvContent.setText(file2String);
             ToastUtils.showRoundRectToast("写入完成");
         }

@@ -13,12 +13,8 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
-import java.nio.charset.StandardCharsets;
 
 /**
  * <pre>
@@ -30,11 +26,6 @@ import java.nio.charset.StandardCharsets;
  * </pre>
  */
 public final class FileIoUtils {
-
-    /**
-     * 直接使用代码`File.separator`，表示跨平台分隔符。
-     */
-    public static final String FILE_SPLIT = File.separator;
 
     /**
      * 写入字符串内容到文件中
@@ -73,12 +64,19 @@ public final class FileIoUtils {
      * @param fileName 文件名称
      * @return 文件内容
      */
-    public static String readFile2String(String fileName) {
+    public static String readFile2String1(String fileName) {
         String res = "";
-        FileOutputStream fos;
+        FileInputStream fis;
         try {
-            fos = new FileOutputStream(fileName) ;
-
+            fis = new FileInputStream(fileName);
+            byte[] chs = new byte[1024];
+            int len = 0;
+            StringBuilder sb = new StringBuilder();
+            while ((len = fis.read(chs)) != -1) {
+                res = new String(chs, 0, len);
+                sb.append(res);
+            }
+            res = sb.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -133,7 +131,7 @@ public final class FileIoUtils {
      * @param dest 目标文件
      * @return boolean 成功true、失败false
      */
-    public static boolean copyFile(File src, File dest) {
+    public static boolean copyFile1(File src, File dest) {
         if ((src == null) || (dest == null)) {
             return false;
         }
@@ -215,12 +213,14 @@ public final class FileIoUtils {
                 while((len = inStream.read(buffer)) != -1){
                     fs.write(buffer, 0, len) ;
                 }
+
                 //int bytesum = 0;
                 //while ((byteread = inStream.read(buffer)) != -1) {
                     // 字节数 文件大小
                 //    bytesum += byteread;
                 //    fs.write(buffer, 0, byteread);
                 //}
+
                 result = true;
             } else {
                 result = false;
@@ -240,70 +240,6 @@ public final class FileIoUtils {
             if (fs != null) {
                 try {
                     fs.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return result;
-    }
-
-
-    /**
-     * 根据文件路径拷贝文件。使用字符流复制文件【】
-     *
-     * @param oldPath 源文件路径
-     * @param newPath 目标文件路径
-     * @return boolean 成功true、失败false
-     */
-    public static boolean copyFileString(String oldPath, String newPath) {
-        InputStreamReader isr = null;
-        OutputStreamWriter osw = null;
-        boolean result;
-        try {
-            File oldFile = new File(oldPath);
-            // 判断目录是否存在
-            File newFile = new File(newPath);
-            // 创建新文件
-            File newFileDir = new File(newFile.getPath().replace(newFile.getName(), ""));
-            if (!newFileDir.exists()) {
-                //创建一个File对象所对应的目录，成功返回true，否则false。
-                //且File对象必须为路径而不是文件。只会创建最后一级目录，如果上级目录不存在就抛异常。
-                newFileDir.mkdirs();
-            }
-            // 文件存在时
-            if (oldFile.exists()) {
-                // 创建转换输入流对象
-                FileInputStream fileInputStream = new FileInputStream(oldPath);
-                isr = new InputStreamReader(fileInputStream) ;
-                // 创建转换输出流对象
-                FileOutputStream fileOutputStream = new FileOutputStream(newPath);
-                osw = new OutputStreamWriter(fileOutputStream) ;
-                // 一次读取一个字符数组复制文件
-                char[] chs = new char[1024] ;
-                int len;
-                while((len = isr.read(chs)) != -1){
-                    osw.write(chs, 0, len) ;
-                }
-                result = true;
-            } else {
-                result = false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            result = false;
-        } finally {
-            // 关闭流对象
-            if (isr != null) {
-                try {
-                    isr.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (osw != null) {
-                try {
-                    osw.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

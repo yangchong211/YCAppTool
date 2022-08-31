@@ -36,12 +36,9 @@ public final class BufferIoUtils {
      * @return
      */
     public static boolean writeString2File1(String content, String fileName) {
-        FileOutputStream fos = null;
         BufferedOutputStream bof = null;
         try {
-            // 创建FileOutputStream对象
-            fos = new FileOutputStream(fileName) ;
-            bof = new BufferedOutputStream(fos) ;
+            bof = new BufferedOutputStream(new FileOutputStream(fileName)) ;
             // 写数据
             bof.write(content.getBytes());
             bof.flush();
@@ -54,9 +51,6 @@ public final class BufferIoUtils {
             try {
                 if (bof != null) {
                     bof.close();
-                }
-                if (fos != null) {
-                    fos.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -188,8 +182,7 @@ public final class BufferIoUtils {
         String res = "";
         BufferedInputStream bis = null;
         try {
-            FileInputStream fileInputStream = new FileInputStream(fileName);
-            bis = new BufferedInputStream(fileInputStream) ;
+            bis = new BufferedInputStream(new FileInputStream(fileName)) ;
             // 一次读取一个字节数组
             byte[] bytes = new byte[1024] ;
             int len = 0 ;
@@ -225,7 +218,7 @@ public final class BufferIoUtils {
      * @param newPath 目标文件路径
      * @return boolean 成功true、失败false
      */
-    public static boolean copyFile(String oldPath, String newPath) {
+    public static boolean copyFile1(String oldPath, String newPath) {
         BufferedReader br = null;
         BufferedWriter bw = null;
         boolean result;
@@ -282,6 +275,130 @@ public final class BufferIoUtils {
             if (br != null) {
                 try {
                     br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
+
+    /**
+     * 根据文件路径拷贝文件。
+     *
+     * @param oldPath 源文件路径
+     * @param newPath 目标文件路径
+     * @return boolean 成功true、失败false
+     */
+    public static boolean copyFile2(String oldPath, String newPath) {
+        InputStreamReader isr = null;
+        OutputStreamWriter osw = null;
+        boolean result;
+        try {
+            File oldFile = new File(oldPath);
+            // 判断目录是否存在
+            File newFile = new File(newPath);
+            // 创建新文件
+            File newFileDir = new File(newFile.getPath().replace(newFile.getName(), ""));
+            if (!newFileDir.exists()) {
+                //创建一个File对象所对应的目录，成功返回true，否则false。
+                //且File对象必须为路径而不是文件。只会创建最后一级目录，如果上级目录不存在就抛异常。
+                newFileDir.mkdirs();
+            }
+            // 文件存在时
+            if (oldFile.exists()) {
+                // 创建转换输入流对象
+                isr = new InputStreamReader(new FileInputStream(oldPath)) ;
+                // 创建转换输出流对象
+                osw = new OutputStreamWriter(new FileOutputStream(newPath)) ;
+                // 一次读取一个字符数组复制文件
+                char[] chs = new char[1024] ;
+                int len;
+                while((len = isr.read(chs)) != -1){
+                    osw.write(chs, 0, len) ;
+                }
+                result = true;
+            } else {
+                result = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            // 关闭流对象
+            if (isr != null) {
+                try {
+                    isr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (osw != null) {
+                try {
+                    osw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
+    }
+
+
+    /**
+     * 根据文件路径拷贝文件。
+     *
+     * @param oldPath 源文件路径
+     * @param newPath 目标文件路径
+     * @return boolean 成功true、失败false
+     */
+    public static boolean copyFile3(String oldPath, String newPath) {
+        BufferedInputStream isr = null;
+        BufferedOutputStream osw = null;
+        boolean result;
+        try {
+            File oldFile = new File(oldPath);
+            // 判断目录是否存在
+            File newFile = new File(newPath);
+            // 创建新文件
+            File newFileDir = new File(newFile.getPath().replace(newFile.getName(), ""));
+            if (!newFileDir.exists()) {
+                //创建一个File对象所对应的目录，成功返回true，否则false。
+                //且File对象必须为路径而不是文件。只会创建最后一级目录，如果上级目录不存在就抛异常。
+                newFileDir.mkdirs();
+            }
+            // 文件存在时
+            if (oldFile.exists()) {
+                // 创建转换输入流对象
+                isr = new BufferedInputStream(new FileInputStream(oldPath)) ;
+                // 创建转换输出流对象
+                osw = new BufferedOutputStream(new FileOutputStream(newPath)) ;
+                // 一次读取一个字节数组
+                byte[] bytes = new byte[1024] ;
+                int len;
+                while((len = isr.read(bytes)) != -1){
+                    osw.write(bytes, 0, len) ;
+                }
+                result = true;
+            } else {
+                result = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = false;
+        } finally {
+            // 关闭流对象
+            if (isr != null) {
+                try {
+                    isr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (osw != null) {
+                try {
+                    osw.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

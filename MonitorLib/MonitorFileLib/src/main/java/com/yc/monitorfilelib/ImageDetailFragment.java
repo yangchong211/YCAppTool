@@ -124,7 +124,7 @@ public class ImageDetailFragment extends Fragment {
                 String newFilePath = AppFileUtils.getExternalCachePath(mActivity) + "/imageShare.png";
                 File destFile = new File(newFilePath);
                 //拷贝文件，将data/data源文件拷贝到新的目标文件路径下
-                boolean copy = FileIoUtils.copyFile(srcFile, destFile);
+                boolean copy = FileIoUtils.copyFile1(srcFile, destFile);
                 if (copy) {
                     //分享
                     boolean shareFile = FileShareUtils.shareFile(mActivity, destFile);
