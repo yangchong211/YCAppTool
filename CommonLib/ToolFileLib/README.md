@@ -131,42 +131,49 @@
 
 
 #### 2.3 高效流读写操作
-- 高效字节流和字符流
-    ```
-    BufferedWriter:	public void newLine():根据系统来决定换行符
-    BufferedReader:	public String readLine()：一次读取一行数据
-    包含该行内容的字符串，不包含任何行终止符，如果已到达流末尾，则返回 null
-    ```
+
 
 
 ### 03.Api调用说明
 #### 3.1 从文件中读数据
 - 从文件中读数据，使用普通字节流或者字符流方式，如下所示
-```
-
-```
+    ``` java
+    //字节流读取file文件，转化成字符串
+    String file2String = FileIoUtils.readFile2String1(fileName);
+    //字符流读取file文件，转化成字符串
+    String file2String = FileIoUtils.readFile2String2(fileName);
+    ```
 - 从文件中读数据，使用高效流方式，如下所示
-```
-
-```
+    ``` java
+    //高效字节流读取file文件，转化成字符串
+    String file2String = BufferIoUtils.readFile2String1(fileName);
+    //高效字符流读取file文件，转化成字符串
+    String file2String = BufferIoUtils.readFile2String2(fileName);
+    ```
 
 
 #### 3.2 将内容写入文件
 - 从文件中读数据，使用普通字节流或者字符流方式，如下所示
-```
-//使用字节流，写入字符串内容到文件中
-FileIoUtils.writeString2File1(content,fileName);
-//使用字符流，写入字符串内容到文件中
-
-```
+    ``` java
+    //使用字节流，写入字符串内容到文件中
+    FileIoUtils.writeString2File1(content,fileName);
+    //使用字符流，写入字符串内容到文件中
+    FileIoUtils.writeString2File2(content,fileName);
+    ```
 - 从文件中读数据，使用高效流方式，如下所示
-```
-
-```
+    ``` java
+    //高效字节流写入字符串内容到文件中
+    BufferIoUtils.writeString2File1(content,fileName);
+    //高效字符流写入字符串内容到文件中
+    BufferIoUtils.writeString2File2(content,fileName);
+    ```
 
 
 #### 3.3 文件复制操作
 
+
+
+#### 3.4 读写效率优化
 
 
 

@@ -28,7 +28,7 @@ public final class BufferIoUtils {
 
 
     /**
-     * 写入字符串内容到文件中
+     * 高效字节流写入字符串内容到文件中
      *
      * @param content  内容
      * @param fileName 文件名称
@@ -59,7 +59,7 @@ public final class BufferIoUtils {
     }
 
     /**
-     * 写入字符串内容到文件中
+     * 高效字符流写入字符串内容到文件中
      *
      * @param content  内容
      * @param fileName 文件名称
@@ -90,12 +90,49 @@ public final class BufferIoUtils {
     /*--------------------------------------------------------------------------------------------*/
 
     /**
-     * 读取file文件，转化成字符串
+     * 高效字节流读取file文件，转化成字符串
      *
      * @param fileName 文件名称
      * @return 文件内容
      */
     public static String readFile2String1(String fileName) {
+        String res = "";
+        BufferedInputStream bis = null;
+        try {
+            bis = new BufferedInputStream(new FileInputStream(fileName)) ;
+            // 一次读取一个字节数组
+            byte[] bytes = new byte[1024] ;
+            int len = 0 ;
+            StringBuilder sb = new StringBuilder();
+            while((len = bis.read(bytes)) != -1){
+                String string = new String(bytes, 0, len);
+                sb.append(string);
+            }
+            res = sb.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // 释放资源
+            try {
+                if (bis != null) {
+                    bis.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 高效字符流读取file文件，转化成字符串
+     *
+     * @param fileName 文件名称
+     * @return 文件内容
+     */
+    public static String readFile2String2(String fileName) {
         String res = "";
         BufferedReader br = null;
         try {
@@ -129,43 +166,6 @@ public final class BufferIoUtils {
             try {
                 if (br != null) {
                     br.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 读取file文件，转化成字符串
-     *
-     * @param fileName 文件名称
-     * @return 文件内容
-     */
-    public static String readFile2String2(String fileName) {
-        String res = "";
-        BufferedInputStream bis = null;
-        try {
-            bis = new BufferedInputStream(new FileInputStream(fileName)) ;
-            // 一次读取一个字节数组
-            byte[] bytes = new byte[1024] ;
-            int len = 0 ;
-            StringBuilder sb = new StringBuilder();
-            while((len = bis.read(bytes)) != -1){
-                String string = new String(bytes, 0, len);
-                sb.append(string);
-            }
-            res = sb.toString();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            // 释放资源
-            try {
-                if (bis != null) {
-                    bis.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();

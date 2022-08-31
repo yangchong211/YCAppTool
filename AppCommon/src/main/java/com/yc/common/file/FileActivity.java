@@ -67,13 +67,13 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             String content = getString().toString();
             String fileName = txt + File.separator + "yc1.txt";
             AppLogUtils.d("FileActivity : 写文件 路径" , fileName);
-            FileIoUtils.writeString2File1(content,fileName);
+            BufferIoUtils.writeString2File2(content,fileName);
             ToastUtils.showRoundRectToast("写入完成");
         } else if (v == tvFile2) {
             String txt = AppFileUtils.getExternalCachePath(this, "txt");
             String fileName = txt + File.separator + "yc1.txt";
             AppLogUtils.d("FileActivity : 读文件 路径" , fileName);
-            String file2String = FileIoUtils.readFile2String1(fileName);
+            String file2String = BufferIoUtils.readFile2String2(fileName);
             tvContent.setText(file2String);
             AppLogUtils.d("FileActivity : 读文件" , file2String);
         } else if (v == tvFile3) {

@@ -89,8 +89,7 @@ public final class FileIoUtils {
     /*--------------------------------------------------------------------------------------------*/
 
     /**
-     * 读取file文件，转化成字符串
-     * 字节流读数据
+     * 字节流读取file文件，转化成字符串
      *
      * @param fileName 文件名称
      * @return 文件内容
@@ -113,6 +112,32 @@ public final class FileIoUtils {
         }
         return res;
     }
+
+    /**
+     * 字符流读取file文件，转化成字符串
+     *
+     * @param fileName 文件名称
+     * @return 文件内容
+     */
+    public static String readFile2String2(String fileName) {
+        String res = "";
+        InputStreamReader isr;
+        try {
+            isr = new InputStreamReader(new FileInputStream(fileName)) ;
+            char[] chs = new char[1024];
+            int len = 0;
+            StringBuilder sb = new StringBuilder();
+            while ((len = isr.read(chs)) != -1) {
+                res = new String(chs, 0, len);
+                sb.append(res);
+            }
+            res = sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
 
     /**
      * 读取io流到新的file文件中
@@ -154,6 +179,8 @@ public final class FileIoUtils {
             }
         }
     }
+
+    /*--------------------------------------------------------------------------------------------*/
 
     /**
      * 根据文件File拷贝文件
