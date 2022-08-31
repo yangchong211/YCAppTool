@@ -186,9 +186,24 @@ public class MixtureTextViewActivity extends BaseActivity {
         SpannableStringBuilder spannableString = new SpannableStringBuilder();
         spannableString.append("暗影IV");
         spannableString.append("已经开始暴走了");
+
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                ToastUtils.showRoundRectToast("请不要点我");
+            }
+        };
+        spannableString.setSpan(clickableSpan, 0, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(
-                Color.parseColor("#009ad6"));
+                ContextCompat.getColor(this,R.color.colorAccent));
         spannableString.setSpan(colorSpan, 0, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+
+        //tv3.setTextColor(this.getResources().getColor(R.color.bar_color));
+        //tv3.setHighlightColor(Color.TRANSPARENT);
+        tv3.setMovementMethod(LinkMovementMethod.getInstance());
         tv3.setText(spannableString);
     }
 
@@ -253,9 +268,9 @@ public class MixtureTextViewActivity extends BaseActivity {
                 ToastUtils.showRoundRectToast("请不要点我");
             }
         };
+        tv7.setMovementMethod(LinkMovementMethod.getInstance());
         spannableString.setSpan(clickableSpan, 5, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         tv7.setText(spannableString);
-        tv7.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     /**

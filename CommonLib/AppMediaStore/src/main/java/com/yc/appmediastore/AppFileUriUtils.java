@@ -317,6 +317,7 @@ public final class AppFileUriUtils {
         final String column = MediaStore.Files.FileColumns.DATA;
         final String[] projection = new String[]{column};
         ContentResolver contentResolver = context.getContentResolver();
+        //利用 ContentResolver 寻找
         final Cursor cursor = contentResolver.query(uri, projection, selection, selectionArgs, null);
         if (cursor == null) {
             Log.d("UriUtils", uri.toString() + " parse failed(cursor is null). -> " + code);
@@ -373,25 +374,14 @@ public final class AppFileUriUtils {
         if (file.exists()) {
             return true;
         }
-        return isFileExists(context, file.getAbsolutePath());
-    }
-
-    public static boolean isFileExists(Context context, final String filePath) {
-        File file = getFileByPath(filePath);
-        if (file == null) {
+        String filePath = file.getAbsolutePath();
+        File newFile = TextUtils.isEmpty(filePath) ? null : new File(filePath);
+        if (newFile == null) {
             return false;
         }
-        if (file.exists()) {
+        if (newFile.exists()) {
             return true;
         }
-        return isFileExistsApi29(context, filePath);
-    }
-
-    private static File getFileByPath(final String filePath) {
-        return TextUtils.isEmpty(filePath) ? null : new File(filePath);
-    }
-
-    private static boolean isFileExistsApi29(Context context, String filePath) {
         if (Build.VERSION.SDK_INT >= 29) {
             try {
                 Uri uri = Uri.parse(filePath);
