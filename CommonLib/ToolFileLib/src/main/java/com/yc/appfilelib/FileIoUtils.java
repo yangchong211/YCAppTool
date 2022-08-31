@@ -29,7 +29,7 @@ import java.nio.charset.StandardCharsets;
  *     revise: 读数据 & 写数据
  * </pre>
  */
-public final class AppFileIoUtils {
+public final class FileIoUtils {
 
     /**
      * 直接使用代码`File.separator`，表示跨平台分隔符。
@@ -43,20 +43,19 @@ public final class AppFileIoUtils {
      * @param fileName 文件名称
      * @return
      */
-    public static boolean writeString2File(String content, String fileName) {
-        BufferedWriter bw = null;
+    public static boolean writeString2File1(String content, String fileName) {
+        FileOutputStream fos = null;
         try {
-            FileWriter fileWriter = new FileWriter(fileName);
-            bw = new BufferedWriter(fileWriter);
-            // 写数据
-            bw.write(content);
+            fos = new FileOutputStream(fileName);
+            byte[] bytes = content.getBytes();
+            fos.write(bytes);
         } catch (Exception e) {
             Log.d("AppFileIoUtils", "异常: " + e.getMessage());
         } finally {
             // 释放资源
             try {
-                if (bw != null) {
-                    bw.close();
+                if (fos != null) {
+                    fos.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -69,28 +68,17 @@ public final class AppFileIoUtils {
 
     /**
      * 读取file文件，转化成字符串
+     * 字节流读数据
      *
      * @param fileName 文件名称
      * @return 文件内容
      */
     public static String readFile2String(String fileName) {
         String res = "";
+        FileOutputStream fos;
         try {
-            FileInputStream inputStream = new FileInputStream(fileName);
-            InputStreamReader inputStreamReader;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-            } else {
-                inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-            }
-            BufferedReader reader = new BufferedReader(inputStreamReader);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-                sb.append("\n");
-            }
-            res = sb.toString();
+            fos = new FileOutputStream(fileName) ;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -137,61 +125,6 @@ public final class AppFileIoUtils {
             }
         }
     }
-
-    public static void writeFileR(String content, String path, String fileName, boolean isRewrite) {
-        File file = new File(path + fileName);
-        if (!file.exists()) {
-            //先创建文件夹 保证文件创建成功
-            File pathFile = new File(path);
-            if (!pathFile.exists()) {
-                pathFile.mkdirs();
-            }
-            File newFile = new File(path + File.separator + fileName);
-            if (!newFile.exists()) {
-                try {
-                    newFile.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        RandomAccessFile randomAccessFile;
-        try {
-            randomAccessFile = new RandomAccessFile(file, "rw");
-            if (isRewrite) {
-                randomAccessFile.setLength(content.length());
-                randomAccessFile.seek(0);
-            } else {
-                randomAccessFile.seek(randomAccessFile.length());
-            }
-            randomAccessFile.write(content.getBytes());
-            randomAccessFile.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String readFileR(String path, String fileName) {
-        File file = new File(path + fileName);
-        if (!file.exists()) {
-            return null;
-        }
-        StringBuilder buffer = new StringBuilder();
-        try {
-            RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
-            randomAccessFile.seek(0);
-            byte[] buf = new byte[(int) randomAccessFile.length()];
-            if (randomAccessFile.read(buf) != -1) {
-                buffer.append(new String(buf));
-            }
-            randomAccessFile.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return buffer.toString();
-    }
-
 
     /**
      * 根据文件File拷贝文件

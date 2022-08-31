@@ -17,11 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yc.appfilelib.AppFileUtils;
 import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.eastadapterlib.OnItemLongClickListener;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppWindowUtils;
-import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.File;
 import java.util.ArrayList;

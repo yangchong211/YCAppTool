@@ -22,9 +22,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.yc.appcompress.AppCompress;
-import com.yc.appfilelib.AppFileIoUtils;
+import com.yc.appfilelib.FileIoUtils;
 import com.yc.appfilelib.AppFileUtils;
-import com.yc.appfilelib.FileShareUtils;
+import com.yc.appmediastore.FileShareUtils;
 import com.yc.toastutils.ToastUtils;
 
 import java.io.File;
@@ -124,7 +124,7 @@ public class ImageDetailFragment extends Fragment {
                 String newFilePath = AppFileUtils.getExternalCachePath(mActivity) + "/imageShare.png";
                 File destFile = new File(newFilePath);
                 //拷贝文件，将data/data源文件拷贝到新的目标文件路径下
-                boolean copy = AppFileIoUtils.copyFile(srcFile, destFile);
+                boolean copy = FileIoUtils.copyFile(srcFile, destFile);
                 if (copy) {
                     //分享
                     boolean shareFile = FileShareUtils.shareFile(mActivity, destFile);

@@ -6,7 +6,8 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yc.appfilelib.AppFileIoUtils;
+import com.yc.appfilelib.BufferIoUtils;
+import com.yc.appfilelib.FileIoUtils;
 import com.yc.appmediastore.AppFileUriUtils;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
@@ -75,7 +76,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         if (v == tvFile1) {
             String txt = AppFileUtils.getExternalCachePath(this, "txt");
-            String content = "你好这个是写入的文件。明确一个前提：各个业务组件之间不会是相互隔离而是必然存在一些交互的；\n" +
+            String content = "2你好这个是写入的文件。明确一个前提：各个业务组件之间不会是相互隔离而是必然存在一些交互的；\n" +
                     "\n" +
                     "业务复用：在Module A需要引用Module B提供的某个功能，比如需要版本更新业务逻辑，而我们一般都是使用强引用的Class显式的调用；\n" +
                     "业务复用：在Module A需要调用Module B提供的某个方法，例如别的Module调用用户模块退出登录的方法；\n" +
@@ -89,23 +90,23 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
                     "作者：杨充\n" +
                     "链接：https://juejin.cn/post/6938008708295163934\n" +
                     "来源：稀土掘金\n" +
-                    "著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。";
+                    "逗比著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。";
             String fileName = txt + File.separator + "yc1.txt";
             AppLogUtils.d("FileActivity : 写文件 路径" , fileName);
-            AppFileIoUtils.writeString2File(content,fileName);
+            FileIoUtils.writeString2File1(content,fileName);
             ToastUtils.showRoundRectToast("写入完成");
         } else if (v == tvFile2) {
             String txt = AppFileUtils.getExternalCachePath(this, "txt");
             String fileName = txt + File.separator + "yc1.txt";
             AppLogUtils.d("FileActivity : 读文件 路径" , fileName);
-            String file2String = AppFileIoUtils.readFile2String(fileName);
+            String file2String = BufferIoUtils.readFile2String2(fileName);
             tvContent.setText(file2String);
             AppLogUtils.d("FileActivity : 读文件" , file2String);
         } else if (v == tvFile3) {
             String txt = AppFileUtils.getExternalCachePath(this, "txt");
             String fileName = txt + File.separator + "yc1.txt";
             String newFileName = txt + File.separator + "ycdoubi哈哈哈.txt";
-            AppFileIoUtils.copyFileString(fileName,newFileName);
+            BufferIoUtils.copyFile(fileName,newFileName);
             ToastUtils.showRoundRectToast("复制完成");
         } else if (v == tvFile4) {
             //打开txt文档
@@ -125,7 +126,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             Uri uri = data.getData();
             File file = AppFileUriUtils.uri2File(this, uri);
             AppLogUtils.d("FileActivity : 回调" , file.getPath() + "  " +file.getName());
-            String file2String = AppFileIoUtils.readFile2String(file.getPath());
+            String file2String = FileIoUtils.readFile2String(file.getPath());
             tvContent.setText(file2String);
             ToastUtils.showRoundRectToast("写入完成");
         }
