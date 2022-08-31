@@ -21,8 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yc.toolutils.file.AppFileUtils;
-import com.yc.toolutils.file.FileShareUtils;
+import com.yc.appfilelib.AppFileIoUtils;
+import com.yc.appfilelib.AppFileUtils;
+import com.yc.appfilelib.FileShareUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -120,7 +121,7 @@ public class TextDetailFragment extends Fragment {
                 String newFilePath = AppFileUtils.getExternalCachePath(mActivity) + "/fileShare.txt";
                 File destFile = new File(newFilePath);
                 //拷贝文件，将data/data源文件拷贝到新的目标文件路径下
-                boolean copy = AppFileUtils.copyFile(srcFile, destFile);
+                boolean copy = AppFileIoUtils.copyFile(srcFile, destFile);
                 if (copy) {
                     //分享
                     boolean shareFile = FileShareUtils.shareFile(mActivity, destFile);
@@ -174,6 +175,7 @@ public class TextDetailFragment extends Fragment {
             mReference = new WeakReference<>(fragment);
         }
 
+        @Override
         protected Void doInBackground(File... files) {
             FileReader fileReader = null;
             BufferedReader br = null;
@@ -207,6 +209,7 @@ public class TextDetailFragment extends Fragment {
             return null;
         }
 
+        @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             if (mReference.get() != null) {
