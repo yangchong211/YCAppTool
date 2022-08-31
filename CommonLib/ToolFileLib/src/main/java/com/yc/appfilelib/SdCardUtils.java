@@ -30,13 +30,23 @@ public final class SdCardUtils {
 
 
     /**
-     * 判断SDCard是否挂载
+     * 判断SDCard是否挂载（判断是否有sd卡）
      * Environment.MEDIA_MOUNTED,表示SDCard已经挂载
      * Environment.getExternalStorageState()，获得当前SDCard的挂载状态
      */
     public static boolean isMounted() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
+
+    /**
+     * 判断是否有sd卡
+     *
+     * @return 是否有sd
+     */
+    public static boolean isExistSDCard() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
+
 
     /**
      * 获得SDCard 的路径,storage/sdcard
@@ -61,14 +71,6 @@ public final class SdCardUtils {
         return !getSDCardPaths(context).isEmpty();
     }
 
-    /**
-     * 判断是否有sd卡
-     *
-     * @return 是否有sd
-     */
-    public static boolean isExistSDCard() {
-        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-    }
 
 
     /**
@@ -140,7 +142,7 @@ public final class SdCardUtils {
      */
     @SuppressWarnings("deprecation")
     public static long getSDAvailableSize() {
-        if (isExistSDCard()) {
+        if (isMounted()) {
             try {
                 File sdcardDir = Environment.getExternalStorageDirectory();
                 StatFs sf = new StatFs(sdcardDir.getPath());

@@ -62,7 +62,7 @@ public final class GlideSaveUtils {
         String appUpdateDownApkPath = "hwmc" + File.separator + "downApk";
         String saveApkPath= appUpdateDownApkPath + File.separator;
         String sdPath = SdCardUtils.getSDCardPath();
-        if (!SdCardUtils.isExistSDCard() || TextUtils.isEmpty(sdPath)) {
+        if (!SdCardUtils.isMounted() || TextUtils.isEmpty(sdPath)) {
             ArrayList<String> sdPathList = SdCardUtils.getExtSDCardPath();
             if (sdPathList != null && sdPathList.size() > 0 && !TextUtils.isEmpty(sdPathList.get(0))) {
                 sdPath = sdPathList.get(0);

@@ -44,7 +44,6 @@ public final class AppFileUtils {
      * shared_prefs-->存放SharedPreferences 文件
      *
      * 内部存储，举个例子：
-     * file:data/user/0/包名/files
      * cache:/data/user/0/包名/cache
      */
     public static String getCachePath(Context context){
@@ -73,6 +72,8 @@ public final class AppFileUtils {
 
     /**
      * files-->存放一般文件
+     * 内部存储，举个例子：
+     * file:data/user/0/包名/files
      * @param context       上下文
      * @return              路径
      */
@@ -124,11 +125,40 @@ public final class AppFileUtils {
 
     /**
      * 目录地址
-     * SDCard/Android/data/<application package>/cache
-     * data/data/<application package>/cache
+     * data/data/<application package>/cache/
      */
     public static String getCacheFilePath(Context context , String name) {
-        String path = getAppCachePath(context) + File.separator + name;
+        String path = getCachePath(context) + File.separator + name;
+        File file = new File(path);
+        if (!file.exists()) {
+            //创建一个File对象所对应的目录，成功返回true，否则false。且File对象必须为路径而不是文件。
+            //创建多级目录，创建路径中所有不存在的目录
+            file.mkdirs();
+        }
+        return path;
+    }
+
+    /**
+     * 目录地址
+     * data/data/<application package>/files/
+     */
+    public static String getFilesFilePath(Context context , String name) {
+        String path = getFilesPath(context) + File.separator + name;
+        File file = new File(path);
+        if (!file.exists()) {
+            //创建一个File对象所对应的目录，成功返回true，否则false。且File对象必须为路径而不是文件。
+            //创建多级目录，创建路径中所有不存在的目录
+            file.mkdirs();
+        }
+        return path;
+    }
+
+    /**
+     * 外部存储根目录，举个例子
+     * cache:/storage/emulated/0/Android/data/包名/cache
+     */
+    public static String getExternalCachePath(Context context , String name) {
+        String path = getExternalCachePath(context) + File.separator + name;
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -144,19 +174,8 @@ public final class AppFileUtils {
         String path = getExternalFilePath(context) + File.separator + name;
         File file = new File(path);
         if (!file.exists()) {
-            file.mkdirs();
-        }
-        return path;
-    }
-
-    /**
-     * 外部存储根目录，举个例子
-     * cache:/storage/emulated/0/Android/data/包名/cache
-     */
-    public static String getExternalCachePath(Context context , String name) {
-        String path = getExternalCachePath(context) + File.separator + name;
-        File file = new File(path);
-        if (!file.exists()) {
+            //创建一个File对象所对应的目录，成功返回true，否则false。且File对象必须为路径而不是文件。
+            //创建多级目录，创建路径中所有不存在的目录
             file.mkdirs();
         }
         return path;
@@ -185,8 +204,7 @@ public final class AppFileUtils {
      */
     public static String getAppCachePath(Context context) {
         String cachePath;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                || !Environment.isExternalStorageRemovable()) {
+        if (SdCardUtils.isMounted() || !Environment.isExternalStorageRemovable()) {
             //外部存储可用
             String externalCachePath = getExternalCachePath(context);
             if (externalCachePath!=null){
@@ -212,8 +230,7 @@ public final class AppFileUtils {
      */
     public static String getAppFilePath(Context context) {
         String cachePath;
-        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                || !Environment.isExternalStorageRemovable()) {
+        if (SdCardUtils.isMounted() || !Environment.isExternalStorageRemovable()) {
             //外部存储可用
             String externalCachePath = getExternalCachePath(context);
             if (externalCachePath!=null){

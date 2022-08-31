@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
+import com.yc.appfilelib.AppFileUtils;
 import com.yc.appfilelib.BufferIoUtils;
 import com.yc.appfilelib.FileIoUtils;
 import com.yc.appmediastore.AppFileUriUtils;
@@ -15,7 +16,6 @@ import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.File;
 
@@ -57,7 +57,30 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void initData() {
-
+        StringBuilder sb = new StringBuilder();
+        String cachePath = AppFileUtils.getCachePath(this);
+        sb.append("内部存储cache：").append(cachePath).append("\n");
+        String codeCachePath = AppFileUtils.getCodeCachePath(this);
+        sb.append("内部存储代码缓存：").append(codeCachePath).append("\n");
+        String filesPath = AppFileUtils.getFilesPath(this);
+        sb.append("内部存储files：").append(filesPath).append("\n");
+        sb.append("\n");
+        String externalCachePath = AppFileUtils.getExternalCachePath(this);
+        sb.append("机身外部存储cache：").append(externalCachePath).append("\n");
+        String externalFilePath = AppFileUtils.getExternalFilePath(this);
+        sb.append("机身外部存储files：").append(externalFilePath).append("\n");
+        sb.append("\n");
+        String logYc1 = AppFileUtils.getCacheFilePath(this, "logYc");
+        sb.append("内部存储cache下文件：").append(logYc1).append("\n");
+        String logYc2 = AppFileUtils.getFilesFilePath(this, "logYc");
+        sb.append("内部存储files下文件：").append(logYc2).append("\n");
+        sb.append("\n");
+        String logYc3 = AppFileUtils.getExternalCachePath(this, "logYc");
+        sb.append("机身外部存储cache下文件：").append(logYc3).append("\n");
+        String logYc4 = AppFileUtils.getExternalFilePath(this, "logYc");
+        sb.append("机身外部存储files下文件：").append(logYc4).append("\n");
+        sb.append("\n");
+        tvContent.setText(sb.toString());
     }
 
     @Override
