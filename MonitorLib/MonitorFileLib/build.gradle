@@ -43,4 +43,5 @@ dependencies {
     //吐司工具库：https://github.com/yangchong211/YCDialog
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     implementation project(path: ':AppCompress')
+    implementation project(path: ':ToolFileLib')
 }

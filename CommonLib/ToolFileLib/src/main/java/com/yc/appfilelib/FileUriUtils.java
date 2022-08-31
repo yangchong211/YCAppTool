@@ -60,16 +60,6 @@ public final class FileUriUtils {
         if (!isFileExists(context, file)) {
             return null;
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            //android 10
-            if (SdCardUtils.isMounted()){
-                return context.getContentResolver().insert(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,new ContentValues());
-            } else {
-                return context.getContentResolver().insert(
-                        MediaStore.Images.Media.INTERNAL_CONTENT_URI,new ContentValues());
-            }
-        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //Android7.0
             //第二个参数表示要用哪个ContentProvider，这个唯一值在AndroidManifest.xml里定义了
