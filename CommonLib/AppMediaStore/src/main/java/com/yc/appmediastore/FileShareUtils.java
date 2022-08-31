@@ -1,11 +1,10 @@
-package com.yc.appfilelib;
+package com.yc.appmediastore;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.core.content.FileProvider;
@@ -29,7 +28,7 @@ public final class FileShareUtils {
                 //通过扩展名找到mimeType
                 String mimeType = getMimeType(file.getAbsolutePath());
                 shareIntent.setType(mimeType);
-                Uri uri = FileUriUtils.file2Uri(context, file);
+                Uri uri = AppFileUriUtils.file2Uri(context, file);
                 if (uri == null){
                     return false;
                 }

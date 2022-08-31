@@ -1,9 +1,16 @@
-package com.yc.appfilelib;
+package com.yc.appmediastore;
 
 import android.net.Uri;
 
+
 /**
- * @author yangchong
+ * <pre>
+ *     @author : yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2019/8/11
+ *     desc   : Document工具类
+ *     revise :
+ * </pre>
  */
 public final class DocumentUtils {
 

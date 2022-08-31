@@ -1,4 +1,4 @@
-package com.yc.appfilelib;
+package com.yc.appmediastore;
 
 import androidx.core.content.FileProvider;
 

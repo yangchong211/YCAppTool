@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.yc.appfilelib.AppFileUtils;
+import com.yc.appfilelib.FileSizeUtils;
 import com.yc.eastadapterlib.BaseRecycleAdapter;
 import com.yc.eastadapterlib.BaseViewHolder;
 import com.yc.toolutils.AppTimeUtils;
-import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -63,9 +64,9 @@ public class FileListAdapter extends BaseRecycleAdapter<File> {
             }
             ivMore.setVisibility(View.GONE);
             tvSize.setVisibility(View.VISIBLE);
-            long directorySize = AppFileUtils.getDirectorySize(file);
+            long directorySize = FileSizeUtils.getDirectorySize(file);
             SpannableString printSizeForSpannable =
-                    AppFileUtils.getPrintSizeForSpannable(directorySize);
+                    FileSizeUtils.getPrintSizeForSpannable(directorySize);
             tvSize.setText(printSizeForSpannable);
         }
     }

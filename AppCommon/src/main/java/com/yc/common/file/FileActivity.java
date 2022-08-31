@@ -6,10 +6,8 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-
 import com.yc.appfilelib.AppFileIoUtils;
-import com.yc.appfilelib.FileUriUtils;
+import com.yc.appmediastore.AppFileUriUtils;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -125,7 +123,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == 1024) {
             Uri uri = data.getData();
-            File file = FileUriUtils.uri2File(this, uri);
+            File file = AppFileUriUtils.uri2File(this, uri);
             AppLogUtils.d("FileActivity : 回调" , file.getPath() + "  " +file.getName());
             String file2String = AppFileIoUtils.readFile2String(file.getPath());
             tvContent.setText(file2String);
