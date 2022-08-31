@@ -19,7 +19,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
-import com.yc.appfilelib.SDCardUtils;
+import com.yc.appfilelib.SdCardUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -94,7 +94,7 @@ public final class WebFileUtils {
     public static File getImageDir(Context context) {
         String path = null;
         try {
-            if (SDCardUtils.isMounted()) {
+            if (SdCardUtils.isMounted()) {
                 File extPath = context.getExternalFilesDir(null);
                 if (extPath != null) {
                     path = extPath.getAbsolutePath() + PROPERTY + APP_ROOT_SAVE_PATH + PROPERTY + IMAGE_FILE_PATH;
@@ -125,11 +125,11 @@ public final class WebFileUtils {
      */
     public static String getLocalFileSavePathDir(Context context , String fileName , String name){
         //获得SDCard 的路径,storage/sdcard
-        String sdPath = SDCardUtils.getSDCardPath();
+        String sdPath = SdCardUtils.getSDCardPath();
         //判断 SD 卡是否可用
-        if (!SDCardUtils.isSDCardEnable(context) || TextUtils.isEmpty(sdPath)) {
+        if (!SdCardUtils.isSDCardEnable(context) || TextUtils.isEmpty(sdPath)) {
             //获取 SD 卡路径
-            List<String> sdPathList = SDCardUtils.getSDCardPaths(context);
+            List<String> sdPathList = SdCardUtils.getSDCardPaths(context);
             if (sdPathList != null && sdPathList.size() > 0 && !TextUtils.isEmpty(sdPathList.get(0))) {
                 sdPath = sdPathList.get(0);
             }

@@ -25,36 +25,25 @@ public final class FileShareUtils {
         boolean isShareSuccess;
         try {
             if (null != file && file.exists()) {
-                Intent share = new Intent(Intent.ACTION_SEND);
-                //此处可发送多种文件
-                String absolutePath = file.getAbsolutePath();
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 //通过扩展名找到mimeType
-                String mimeType = getMimeType(absolutePath);
-                share.setType(mimeType);
-                Uri uri;
-                //判断7.0以上
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    //第二个参数表示要用哪个ContentProvider，这个唯一值在AndroidManifest.xml里定义了
-                    //若是没有定义MyFileProvider，可直接使用FileProvider替代
-                    String authority = context.getPackageName() + ".fileExplorerProvider";
-                    uri = FileProvider.getUriForFile(context,authority, file);
-                } else {
-                    uri = Uri.fromFile(file);
+                String mimeType = getMimeType(file.getAbsolutePath());
+                shareIntent.setType(mimeType);
+                Uri uri = FileUriUtils.file2Uri(context, file);
+                if (uri == null){
+                    return false;
                 }
-                //content://com.yc.lifehelper.fileExplorerProvider/external_path/fileShare.txt
-                //content 作为scheme；
-                //com.yc.lifehelper.fileExplorerProvider 即为我们定义的 authorities，作为host；
                 Log.d("","share file uri : " + uri);
                 String encodedPath = uri.getEncodedPath();
                 //external_path/fileShare.txt
                 //如此构造后，第三方应用收到此Uri后，并不能从路径看出我们传递的真实路径，这就解决了第一个问题：
                 //发送方传递的文件路径接收方完全知晓，一目了然，没有安全保障。
                 Log.d("","share file uri encode path : " + encodedPath);
-                share.putExtra(Intent.EXTRA_STREAM, uri);
-                share.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 //赋予读写权限
-                share.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                Intent intent = Intent.createChooser(share, "分享文件");
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                Intent intent = Intent.createChooser(shareIntent, "分享文件");
                 //交由系统处理
                 context.startActivity(intent);
                 isShareSuccess = true;
@@ -68,7 +57,11 @@ public final class FileShareUtils {
         return isShareSuccess;
     }
 
-    // 根据文件后缀名获得对应的MIME类型。
+    /**
+     * 根据文件后缀名获得对应的MIME类型
+     * @param filePath
+     * @return
+     */
     private static String getMimeType(String filePath) {
         MediaMetadataRetriever mmr = new MediaMetadataRetriever();
         String mime = "*/*";

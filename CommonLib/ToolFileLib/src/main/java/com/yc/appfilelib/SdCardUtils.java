@@ -26,7 +26,7 @@ import java.util.List;
  *     desc  : sd卡
  * </pre>
  */
-public final class SDCardUtils {
+public final class SdCardUtils {
 
 
     /**

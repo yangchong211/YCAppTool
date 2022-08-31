@@ -62,7 +62,7 @@ public final class FileUriUtils {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             //android 10
-            if (SDCardUtils.isMounted()){
+            if (SdCardUtils.isMounted()){
                 return context.getContentResolver().insert(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,new ContentValues());
             } else {
@@ -72,8 +72,10 @@ public final class FileUriUtils {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //Android7.0
+            //第二个参数表示要用哪个ContentProvider，这个唯一值在AndroidManifest.xml里定义了
+            //若是没有定义MyFileProvider，可直接使用FileProvider替代
             String authority = context.getPackageName() + ".fileExplorerProvider";
-            return FileProvider.getUriForFile(context, authority, file);
+            return ExplorerProvider.getUriForFile(context, authority, file);
         } else {
             return Uri.fromFile(file);
         }

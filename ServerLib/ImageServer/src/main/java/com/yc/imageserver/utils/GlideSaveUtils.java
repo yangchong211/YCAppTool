@@ -9,7 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 
-import com.yc.appfilelib.SDCardUtils;
+import com.yc.appfilelib.SdCardUtils;
 import com.yc.toolutils.AppToolUtils;
 
 import java.io.File;
@@ -61,9 +61,9 @@ public final class GlideSaveUtils {
     public static String getLocalApkDownSavePath(String apkName){
         String appUpdateDownApkPath = "hwmc" + File.separator + "downApk";
         String saveApkPath= appUpdateDownApkPath + File.separator;
-        String sdPath = SDCardUtils.getSDCardPath();
-        if (!SDCardUtils.isExistSDCard() || TextUtils.isEmpty(sdPath)) {
-            ArrayList<String> sdPathList = SDCardUtils.getExtSDCardPath();
+        String sdPath = SdCardUtils.getSDCardPath();
+        if (!SdCardUtils.isExistSDCard() || TextUtils.isEmpty(sdPath)) {
+            ArrayList<String> sdPathList = SdCardUtils.getExtSDCardPath();
             if (sdPathList != null && sdPathList.size() > 0 && !TextUtils.isEmpty(sdPathList.get(0))) {
                 sdPath = sdPathList.get(0);
             }
@@ -136,12 +136,12 @@ public final class GlideSaveUtils {
      */
     public static String getLocalFileSavePathDir(Context context , String fileName , String name){
         //获得SDCard 的路径,storage/sdcard
-        String sdPath = SDCardUtils.getSDCardPath();
+        String sdPath = SdCardUtils.getSDCardPath();
 
         //判断 SD 卡是否可用
-        if (!SDCardUtils.isSDCardEnable(context) || TextUtils.isEmpty(sdPath)) {
+        if (!SdCardUtils.isSDCardEnable(context) || TextUtils.isEmpty(sdPath)) {
             //获取 SD 卡路径
-            List<String> sdPathList = SDCardUtils.getSDCardPaths(context);
+            List<String> sdPathList = SdCardUtils.getSDCardPaths(context);
             if (sdPathList != null && sdPathList.size() > 0 && !TextUtils.isEmpty(sdPathList.get(0))) {
                 sdPath = sdPathList.get(0);
             }
