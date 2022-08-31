@@ -74,53 +74,7 @@
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="@dimen/dp20"
-        android:text="6."
-        android:textSize="@dimen/textSize18"
-        android:background="@color/priority_green"
-        app:rRadius="@dimen/dp20" />
-
-    <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_file_7"
-        android:layout_marginTop="@dimen/dp10"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="@dimen/dp20"
-        android:text="7."
-        android:textSize="@dimen/textSize18"
-        android:background="@color/priority_green"
-        app:rRadius="@dimen/dp20" />
-
-    <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_file_8"
-        android:layout_marginTop="@dimen/dp10"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="@dimen/dp20"
-        android:text="8."
-        android:textSize="@dimen/textSize18"
-        android:background="@color/priority_green"
-        app:rRadius="@dimen/dp20" />
-    <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_file_9"
-        android:layout_marginTop="@dimen/dp10"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="@dimen/dp20"
-        android:text="9."
-        android:textSize="@dimen/textSize18"
-        android:background="@color/priority_green"
-        app:rRadius="@dimen/dp20" />
-    <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_file_10"
-        android:layout_marginTop="@dimen/dp10"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="@dimen/dp20"
-        android:text="10.磁盘查看工具"
+        android:text="6.磁盘查看工具"
         android:textSize="@dimen/textSize18"
         android:background="@color/priority_green"
         app:rRadius="@dimen/dp20" />

@@ -27,10 +27,6 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
     private RoundTextView tvFile4;
     private RoundTextView tvFile5;
     private RoundTextView tvFile6;
-    private RoundTextView tvFile7;
-    private RoundTextView tvFile8;
-    private RoundTextView tvFile9;
-    private RoundTextView tvFile10;
     private TextView tvContent;
 
     @Override
@@ -46,10 +42,6 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         tvFile4 = findViewById(R.id.tv_file_4);
         tvFile5 = findViewById(R.id.tv_file_5);
         tvFile6 = findViewById(R.id.tv_file_6);
-        tvFile7 = findViewById(R.id.tv_file_7);
-        tvFile8 = findViewById(R.id.tv_file_8);
-        tvFile9 = findViewById(R.id.tv_file_9);
-        tvFile10 = findViewById(R.id.tv_file_10);
         tvContent = findViewById(R.id.tv_content);
     }
 
@@ -61,10 +53,6 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         tvFile4.setOnClickListener(this);
         tvFile5.setOnClickListener(this);
         tvFile6.setOnClickListener(this);
-        tvFile7.setOnClickListener(this);
-        tvFile8.setOnClickListener(this);
-        tvFile9.setOnClickListener(this);
-        tvFile10.setOnClickListener(this);
     }
 
     @Override
@@ -108,7 +96,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             String file2String = BufferIoUtils.readFile2String1(fileName);
             tvContent.setText(file2String);
             AppLogUtils.d("FileActivity : 读文件" , file2String);
-        } else if (v == tvFile10){
+        } else if (v == tvFile6){
             FileExplorerActivity.startActivity(FileActivity.this);
         }
     }
