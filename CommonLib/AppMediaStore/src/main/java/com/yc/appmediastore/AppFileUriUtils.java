@@ -99,6 +99,7 @@ public final class AppFileUriUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && uri.getPath() != null) {
             return getExternals(context,uri);
         }
+        //以 file:// 开头的使用第三方应用打开
         if (ContentResolver.SCHEME_FILE.equals(uri.getScheme())) {
             //如果uri的scheme是file
             if (uri.getPath() != null) {
@@ -107,19 +108,22 @@ public final class AppFileUriUtils {
             Log.d("UriUtils", uri.toString() + " parse failed. -> 0");
             return null;
         }
+        boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        //Before 4.4 , API 19 content:// 开头, 比如 content://media/external/images/media/123
+        if (!isKitKat && ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+            //如果uri的scheme是content
+            return getFileFromUri(context, uri, "2");
+        }
+        // After 4.4 , API 19
+        // DocumentProvider
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //4.4以后，专为Android4.4设计的从Uri获取文件绝对路径
             if (DocumentsContract.isDocumentUri(context, uri)) {
                 return getDocumentUri(context,uri);
             }
         }
-        if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
-            //如果uri的scheme是content
-            return getFileFromUri(context, uri, "2");
-        } else {
-            Log.d("UriUtils", uri.toString() + " parse failed. -> 3");
-            return null;
-        }
+        Log.d("UriUtils", uri.toString() + " parse failed. -> 3");
+        return null;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -289,7 +293,7 @@ public final class AppFileUriUtils {
 
     private static File getFileFromUri(Context context, final Uri uri, final String selection,
                                        final String[] selectionArgs, final String code) {
-        final String column = "_data";
+        final String column = MediaStore.Files.FileColumns.DATA;
         final String[] projection = new String[]{column};
         ContentResolver contentResolver = context.getContentResolver();
         final Cursor cursor = contentResolver.query(uri, projection, selection, selectionArgs, null);
