@@ -26,7 +26,7 @@ public final class FileShareUtils {
             if (null != file && file.exists()) {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 //通过扩展名找到mimeType
-                String mimeType = getMimeType(file.getAbsolutePath());
+                String mimeType = FileMimeType.getMimeType(file.getAbsolutePath());
                 shareIntent.setType(mimeType);
                 Uri uri = AppFileUriUtils.file2Uri(context, file);
                 if (uri == null){
@@ -54,29 +54,6 @@ public final class FileShareUtils {
             isShareSuccess = false;
         }
         return isShareSuccess;
-    }
-
-    /**
-     * 根据文件后缀名获得对应的MIME类型
-     * @param filePath
-     * @return
-     */
-    private static String getMimeType(String filePath) {
-        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-        String mime = "*/*";
-        if (filePath != null) {
-            try {
-                mmr.setDataSource(filePath);
-                mime = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_MIMETYPE);
-            } catch (IllegalStateException e) {
-                return mime;
-            } catch (IllegalArgumentException e) {
-                return mime;
-            } catch (RuntimeException e) {
-                return mime;
-            }
-        }
-        return mime;
     }
 
 

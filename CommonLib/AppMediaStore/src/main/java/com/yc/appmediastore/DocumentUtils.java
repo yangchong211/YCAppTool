@@ -42,4 +42,7 @@ public final class DocumentUtils {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 
+    public static boolean isHuaWeiUri(Uri uri) {
+        return "com.huawei.hidisk.fileprovider".equals(uri.getAuthority());
+    }
 }

@@ -72,6 +72,20 @@ public final class AppFileUriUtils {
     }
 
     /**
+     * 将uri转化为file的路径
+     * @param context           上下文
+     * @param uri               uri
+     * @return
+     */
+    public static String uri2String(Context context, final Uri uri){
+        File file = uri2File(context, uri);
+        if (file == null){
+            return "";
+        }
+        return file.getAbsolutePath();
+    }
+
+    /**
      * 将uri转化为file
      * @param context           上下文
      * @param uri               uri
@@ -111,6 +125,9 @@ public final class AppFileUriUtils {
         boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
         //Before 4.4 , API 19 content:// 开头, 比如 content://media/external/images/media/123
         if (!isKitKat && ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+            if (DocumentUtils.isGoogleMedia(uri)){
+                return new File(uri.getLastPathSegment());
+            }
             //如果uri的scheme是content
             return getFileFromUri(context, uri, "2");
         }
@@ -123,7 +140,7 @@ public final class AppFileUriUtils {
             }
         }
         Log.d("UriUtils", uri.toString() + " parse failed. -> 3");
-        return null;
+        return getFileFromUri(context,uri,"5");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -202,10 +219,14 @@ public final class AppFileUriUtils {
             final String[] selectionArgs = new String[]{split[1]};
             return getFileFromUri(context, contentUri, selection, selectionArgs, "1_2");
         } else if (ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
+            //MediaStore (and general)
+            if (DocumentUtils.isGoogleMedia(uri)){
+                return new File(uri.getLastPathSegment());
+            }
             return getFileFromUri(context, uri, "1_3");
         } else {
             Log.d("UriUtils", uri.toString() + " parse failed. -> 1_4");
-            return null;
+            return getFileFromUri(context,uri,"1_4");
         }
     }
 
