@@ -1,16 +1,11 @@
 package com.yc.appfilelib;
 
-import android.os.Build;
 import android.util.Log;
-
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -21,7 +16,7 @@ import java.nio.channels.FileChannel;
  *     @author yangchong
  *     email  : yangchong211@163.com
  *     time  : 2020/7/10
- *     desc  : io流读写库
+ *     desc  : 使用字节流io流读写库
  *     revise: 读数据 & 写数据
  * </pre>
  */
