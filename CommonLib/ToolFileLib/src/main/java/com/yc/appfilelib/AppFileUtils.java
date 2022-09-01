@@ -219,32 +219,6 @@ public final class AppFileUtils {
         return cachePath;
     }
 
-
-    /**
-     * 获取app缓存路径。优先使用外部存储空间
-     * SDCard/Android/data/<application package>/file
-     * data/data/<application package>/file
-     *
-     * @param context                       上下文
-     * @return
-     */
-    public static String getAppFilePath(Context context) {
-        String cachePath;
-        if (SdCardUtils.isMounted() || !Environment.isExternalStorageRemovable()) {
-            //外部存储可用
-            String externalCachePath = getExternalCachePath(context);
-            if (externalCachePath!=null){
-                cachePath = externalCachePath;
-            } else {
-                cachePath =  getCachePath(context);
-            }
-        } else {
-            //外部存储不可用
-            cachePath = getCachePath(context);
-        }
-        return cachePath;
-    }
-
     /**
      * 获取file的list集合
      * @return                                      集合
@@ -290,10 +264,8 @@ public final class AppFileUtils {
         if (!file.isDirectory()) {
             return list;
         }
-
         LinkedList<File> dirStack = new LinkedList<>();
         dirStack.push(file);
-
         while (!dirStack.isEmpty()) {
             File dir = dirStack.pop();
             File[] files = dir.listFiles();
@@ -319,8 +291,7 @@ public final class AppFileUtils {
      */
     public static long getFileTime(File file) {
         if (file != null && file.exists()) {
-            long lastModified = file.lastModified();
-            return lastModified;
+            return file.lastModified();
         }
         return 0L;
     }
@@ -335,14 +306,19 @@ public final class AppFileUtils {
         File file = new File(fileName);
         // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除
         if (file.exists() && file.isFile()) {
-            if (file.delete()) {
-                return true;
-            } else {
-                return false;
-            }
+            return file.delete();
         } else {
             return false;
         }
+    }
+
+    /**
+     * 删除文件
+     * @param file                                  file文件
+     * @return
+     */
+    public static boolean deleteFile(final File file) {
+        return file != null && (!file.exists() || file.isFile() && file.delete());
     }
 
     /**
@@ -354,10 +330,10 @@ public final class AppFileUtils {
         if (file != null) {
             if (file.isDirectory()) {
                 File[] listFiles = file.listFiles();
-                int length = listFiles.length;
-                for (int i = 0; i < length; ++i) {
-                    File f = listFiles[i];
-                    deleteDirectory(f);
+                if (listFiles != null) {
+                    for (File f : listFiles) {
+                        deleteDirectory(f);
+                    }
                 }
             }
             file.delete();
@@ -378,24 +354,25 @@ public final class AppFileUtils {
      * @param root                                  root目录
      */
     public static void deleteAllFiles(File root) {
-        File files[] = root.listFiles();
-        if (files != null) {
-            for (File f : files) {
-                if (f.isDirectory()) {
-                    // 判断是否为文件夹
+        File[] files = root.listFiles();
+        if (files == null) {
+            return;
+        }
+        for (File f : files) {
+            if (f.isDirectory()) {
+                // 判断是否为文件夹
+                deleteAllFiles(f);
+                try {
+                    f.delete();
+                } catch (Exception e) {
+                }
+            } else {
+                if (f.exists()) {
+                    // 判断是否存在
                     deleteAllFiles(f);
                     try {
                         f.delete();
                     } catch (Exception e) {
-                    }
-                } else {
-                    if (f.exists()) {
-                        // 判断是否存在
-                        deleteAllFiles(f);
-                        try {
-                            f.delete();
-                        } catch (Exception e) {
-                        }
                     }
                 }
             }
@@ -413,15 +390,6 @@ public final class AppFileUtils {
         File newFile = new File(newPath);
         //执行重命名
         oleFile.renameTo(newFile);
-    }
-
-    /**
-     * 删除文件
-     * @param file                                  file文件
-     * @return
-     */
-    public static boolean deleteFile(final File file) {
-        return file != null && (!file.exists() || file.isFile() && file.delete());
     }
 
     /**

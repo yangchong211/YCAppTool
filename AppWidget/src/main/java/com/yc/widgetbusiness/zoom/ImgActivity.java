@@ -1,12 +1,14 @@
 package com.yc.widgetbusiness.zoom;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.widgetbusiness.R;
 import com.yc.zoomimagelib.ZoomImageView;
 

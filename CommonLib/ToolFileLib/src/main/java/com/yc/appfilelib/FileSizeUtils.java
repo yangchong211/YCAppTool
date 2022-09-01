@@ -86,21 +86,24 @@ public final class FileSizeUtils {
 
         double megaByte = kiloByte / 1024;
         if (megaByte < 1) {
-            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
+            String string = Double.toString(kiloByte);
+            BigDecimal result1 = new BigDecimal(string);
             return result1.setScale(2, BigDecimal.ROUND_HALF_UP)
                     .toPlainString() + "KB";
         }
 
         double gigaByte = megaByte / 1024;
         if (gigaByte < 1) {
-            BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
+            String string = Double.toString(megaByte);
+            BigDecimal result2 = new BigDecimal(string);
             return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
                     .toPlainString() + "MB";
         }
 
         double teraBytes = gigaByte / 1024;
         if (teraBytes < 1) {
-            BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));
+            String string = Double.toString(gigaByte);
+            BigDecimal result3 = new BigDecimal(string);
             return result3.setScale(2, BigDecimal.ROUND_HALF_UP)
                     .toPlainString() + "GB";
         }

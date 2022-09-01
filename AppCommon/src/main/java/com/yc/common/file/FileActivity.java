@@ -27,6 +27,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
     private RoundTextView tvFile4;
     private RoundTextView tvFile5;
     private RoundTextView tvFile6;
+    private RoundTextView tvFile7;
     private TextView tvContent;
 
     @Override
@@ -42,6 +43,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         tvFile4 = findViewById(R.id.tv_file_4);
         tvFile5 = findViewById(R.id.tv_file_5);
         tvFile6 = findViewById(R.id.tv_file_6);
+        tvFile7 = findViewById(R.id.tv_file_7);
         tvContent = findViewById(R.id.tv_content);
     }
 
@@ -53,6 +55,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         tvFile4.setOnClickListener(this);
         tvFile5.setOnClickListener(this);
         tvFile6.setOnClickListener(this);
+        tvFile7.setOnClickListener(this);
     }
 
     @Override
@@ -100,10 +103,11 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             tvContent.setText(file2String);
             AppLogUtils.d("FileActivity : 读文件" , file2String);
         } else if (v == tvFile3) {
+            //复制
             String txt = AppFileUtils.getExternalCachePath(this, "txt");
             String fileName = txt + File.separator + "yc1.txt";
             String newFileName = txt + File.separator + "ycdoubi哈哈哈.txt";
-            BufferIoUtils.copyFile1(fileName,newFileName);
+            FileIoUtils.copyFile2(fileName,newFileName);
             ToastUtils.showRoundRectToast("复制完成");
         } else if (v == tvFile4) {
             //打开txt文档
@@ -121,6 +125,14 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             AppLogUtils.d("FileActivity : 读文件" , file2String);
         } else if (v == tvFile6){
             FileExplorerActivity.startActivity(FileActivity.this);
+        } else if (v == tvFile7){
+            String txt = AppFileUtils.getExternalCachePath(this, "txt");
+            boolean b = AppFileUtils.deleteDirectory(new File(txt));
+            if (b){
+                ToastUtils.showRoundRectToast("删除成功");
+            } else {
+                ToastUtils.showRoundRectToast("删除失败");
+            }
         }
     }
 

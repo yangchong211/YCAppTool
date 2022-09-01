@@ -170,6 +170,19 @@
 
 
 #### 3.3 文件复制操作
+- 使用字节流&字符流复制
+    ``` java
+    //使用字节流复制文件，根据文件路径拷贝文件。
+    FileIoUtils.copyFile1(fileName,newFileName);
+    //使用字符流复制文件，根据文件路径拷贝文件。
+    FileIoUtils.copyFile2(fileName,newFileName);
+    ```
+- 使用高效流复制
+    ``` java
+    //使用高效流复制，根据文件路径拷贝文件。
+    BufferIoUtils.copyFile1(fileName,newFileName);
+    BufferIoUtils.copyFile2(fileName,newFileName);
+    ```
 
 
 
@@ -197,7 +210,11 @@
 
 
 
-#### 5.2 高效流原理
+#### 5.2 高效流原理分析
+
+
+
+
 
 
 

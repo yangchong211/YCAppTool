@@ -236,7 +236,7 @@ public final class FileIoUtils {
     }
 
     /**
-     * 根据文件路径拷贝文件。使用字节流复制文件
+     * 使用字节流复制文件，根据文件路径拷贝文件。
      *
      * @param oldPath 源文件路径
      * @param newPath 目标文件路径
@@ -309,7 +309,7 @@ public final class FileIoUtils {
 
 
     /**
-     * 根据文件路径拷贝文件。
+     * 使用字符流复制文件，根据文件路径拷贝文件。
      *
      * @param oldPath 源文件路径
      * @param newPath 目标文件路径

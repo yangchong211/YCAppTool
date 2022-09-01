@@ -1,4 +1,4 @@
-package com.yc.appfilelib;
+package com.yc.appmediastore;
 
 
 import android.content.ContentResolver;
@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.yc.appfilelib.SdCardUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

@@ -14,7 +14,7 @@
         <!--android:resource 自己定义实现的映射表-->
         <provider
             android:name="com.yc.appmediastore.ExplorerProvider"
-            android:authorities="${applicationId}.fileExplorerProvider"
+            android:authorities="${applicationId}.fileUriProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

@@ -64,7 +64,7 @@ public final class AppFileUriUtils {
             //Android7.0
             //第二个参数表示要用哪个ContentProvider，这个唯一值在AndroidManifest.xml里定义了
             //若是没有定义MyFileProvider，可直接使用FileProvider替代
-            String authority = context.getPackageName() + ".fileExplorerProvider";
+            String authority = context.getPackageName() + ".fileUriProvider";
             return ExplorerProvider.getUriForFile(context, authority, file);
         } else {
             return Uri.fromFile(file);
