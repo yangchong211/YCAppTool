@@ -36,15 +36,19 @@ public final class BufferIoUtils {
      */
     public static boolean writeString2File1(String content, String fileName) {
         BufferedOutputStream bof = null;
+        boolean isSuccess;
         try {
             bof = new BufferedOutputStream(new FileOutputStream(fileName)) ;
             // 写数据
             bof.write(content.getBytes());
             bof.flush();
+            isSuccess = true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            isSuccess = false;
         } catch (IOException e) {
             e.printStackTrace();
+            isSuccess = false;
         } finally {
             // 释放资源
             try {
@@ -55,7 +59,7 @@ public final class BufferIoUtils {
                 e.printStackTrace();
             }
         }
-        return false;
+        return isSuccess;
     }
 
     /**
@@ -67,13 +71,16 @@ public final class BufferIoUtils {
      */
     public static boolean writeString2File2(String content, String fileName) {
         BufferedWriter bw = null;
+        boolean isSuccess;
         try {
             FileWriter fileWriter = new FileWriter(fileName);
             bw = new BufferedWriter(fileWriter);
             // 写数据
             bw.write(content);
+            isSuccess = true;
         } catch (Exception e) {
             Log.d("AppFileIoUtils", "异常: " + e.getMessage());
+            isSuccess = false;
         } finally {
             // 释放资源
             try {
@@ -84,7 +91,7 @@ public final class BufferIoUtils {
                 e.printStackTrace();
             }
         }
-        return false;
+        return isSuccess;
     }
 
     /*--------------------------------------------------------------------------------------------*/
@@ -186,7 +193,7 @@ public final class BufferIoUtils {
     public static boolean copyFile1(String oldPath, String newPath) {
         BufferedReader br = null;
         BufferedWriter bw = null;
-        boolean result;
+        boolean isSuccess;
         try {
             File oldFile = new File(oldPath);
             // 判断目录是否存在
@@ -221,13 +228,13 @@ public final class BufferIoUtils {
                     bw.flush() ;
                 }
 
-                result = true;
+                isSuccess = true;
             } else {
-                result = false;
+                isSuccess = false;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            result = false;
+            isSuccess = false;
         } finally {
             // 关闭流对象
             if (bw != null) {
@@ -245,7 +252,7 @@ public final class BufferIoUtils {
                 }
             }
         }
-        return result;
+        return isSuccess;
     }
 
     /**
@@ -258,7 +265,7 @@ public final class BufferIoUtils {
     public static boolean copyFile2(String oldPath, String newPath) {
         BufferedInputStream isr = null;
         BufferedOutputStream osw = null;
-        boolean result;
+        boolean isSuccess;
         try {
             File oldFile = new File(oldPath);
             // 判断目录是否存在
@@ -282,13 +289,13 @@ public final class BufferIoUtils {
                 while((len = isr.read(bytes)) != -1){
                     osw.write(bytes, 0, len) ;
                 }
-                result = true;
+                isSuccess = true;
             } else {
-                result = false;
+                isSuccess = false;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            result = false;
+            isSuccess = false;
         } finally {
             // 关闭流对象
             if (isr != null) {
@@ -306,7 +313,7 @@ public final class BufferIoUtils {
                 }
             }
         }
-        return result;
+        return isSuccess;
     }
 
 

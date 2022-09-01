@@ -19,7 +19,8 @@
 - 字节流和字符流的区别：  
     - 读写单位不同：字节流以字节（8bit）为单位，字符流以字符为单位，根据码表映射字符，一次可能读多个字节。  
     - 处理对象不同：字节流能处理所有类型的数据（如图片、avi等），而字符流只能处理字符类型的数据，比如文本内容。
-
+- 字节流和字符流的使用场景：  
+    - 使用字节流可以处理任何场景，使用字符流一般是处理中文或者符号等字符的场景。举一个例子，读写mp3，video，图片则必须使用字节流；读取txt则可以使用字符流。
 
 
 #### 1.3 节点流和处理流
@@ -32,9 +33,7 @@
     ```
 
 #### 1.4 输出流和输入流
-- 输出流：从内存读出到文件。只能进行写操作。
-- 输入流：从文件读入到内存。只能进行读操作。
-- 注意：这里的出和入，都是相对于系统内存而言的。
+- 输出流：从内存读出到文件。只能进行写操作。输入流：从文件读入到内存。只能进行读操作。注意：这里的出和入，都是相对于系统内存而言的。
 
 
 #### 1.5 File概念说明
@@ -179,14 +178,24 @@
     ```
 - 使用高效流复制
     ``` java
-    //使用高效流复制，根据文件路径拷贝文件。
+    //使用高效字符缓冲流，根据文件路径拷贝文件。
     BufferIoUtils.copyFile1(fileName,newFileName);
+    //使用高效字节缓冲流，根据文件路径拷贝文件
     BufferIoUtils.copyFile2(fileName,newFileName);
     ```
 
 
+#### 3.4 将流对象写入文件
+- 将InputStream流对象写入到本地文件中
+    ``` java
+    //使用字符流读取流数据到新的file文件中
+    FileIoUtils.writeFileFromIS1(is,srcFile);
+    //使用字节流将流数据写到文件中
+    FileIoUtils.writeFileFromIS1(is,fileName);
+    ```
 
-#### 3.4 读写效率优化
+
+#### 3.5 读写效率优化
 
 
 
@@ -204,10 +213,58 @@
     - 有时候读取的数据是乱码，就是因为编码方式不一致，需要进行转换，然后再按照unicode进行编码。
 
 
+#### 4.2 注意return和finally
+- 首先看一段代码，然后看看有什么问题，return和finally的关系究竟怎样？
+    - 下面这种情况，在try里面return返回，仍然是走执行finally里面代码。因此最终不管写数据是否成功，返回值永远是false。
+    ``` java
+    public static boolean writeString2File1(String content, String fileName) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(fileName);
+            byte[] bytes = content.getBytes();
+            fos.write(bytes);
+            return true;
+        } catch (Exception e) {
+            return false;
+        } finally {
+            // 释放资源
+        }
+        return false;
+    }
+    ```
+- 应该定义一个变量，判断代码执行的状态。具体操作如下所示：
+    ``` java
+    public static boolean writeString2File1(String content, String fileName) {
+        boolean isSuccess;
+        try {
+            isSuccess = true;
+        } catch (Exception e) {
+            isSuccess = false;
+        } finally {
+            // 释放资源
+        }
+        return isSuccess;
+    }
+    ```
+
+
+
+
 ### 05.其他问题说明
 #### 5.1 为何要有处理流
 - 使用处理流的一个明显好处是，只要使用相同的处理流，程序就可以采用完全相同的输入/输出代码来访问不同的数据源，随着处理流所包装节点流的变化，程序实际所访问的数据源也相应地发生变化。
 
+
+#### 5.2 读取网络请求资源
+- 场景说明：App中有上传文本类文档到服务端。然后客户端在查看数据的时候，服务端直接返回文件链接，因此客户端需要请求到文件流，然后将流转化为文本内容。
+    ``` kotlin
+    val request: Request = Request.Builder().url(url).build()
+    response = okHttpClient.newCall(request).execute()
+    val byteStream = response.body?.byteStream()
+    //写到本地文件
+    FileIoUtils.writeFileFromIS2(byteStream , fileName)
+    //针对文本，然后读文件操作……最后将内容填充到页面中……
+    ```
 
 
 #### 5.2 高效流原理分析

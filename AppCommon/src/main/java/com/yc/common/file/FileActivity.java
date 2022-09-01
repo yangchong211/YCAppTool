@@ -89,14 +89,14 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == tvFile1) {
-            String txt = AppFileUtils.getExternalCachePath(this, "txt");
+            String txt = AppFileUtils.getExternalFilePath(this, "txt");
             String content = getString().toString();
             String fileName = txt + File.separator + "yc1.txt";
             AppLogUtils.d("FileActivity : 写文件 路径" , fileName);
             BufferIoUtils.writeString2File2(content,fileName);
             ToastUtils.showRoundRectToast("写入完成");
         } else if (v == tvFile2) {
-            String txt = AppFileUtils.getExternalCachePath(this, "txt");
+            String txt = AppFileUtils.getExternalFilePath(this, "txt");
             String fileName = txt + File.separator + "yc1.txt";
             AppLogUtils.d("FileActivity : 读文件 路径" , fileName);
             String file2String = BufferIoUtils.readFile2String2(fileName);
@@ -104,7 +104,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             AppLogUtils.d("FileActivity : 读文件" , file2String);
         } else if (v == tvFile3) {
             //复制
-            String txt = AppFileUtils.getExternalCachePath(this, "txt");
+            String txt = AppFileUtils.getExternalFilePath(this, "txt");
             String fileName = txt + File.separator + "yc1.txt";
             String newFileName = txt + File.separator + "ycdoubi哈哈哈.txt";
             FileIoUtils.copyFile2(fileName,newFileName);
@@ -117,7 +117,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
             startActivityForResult(intent, 1024);
         } else if (v == tvFile5) {
             //打开txt文档
-            String txt = AppFileUtils.getExternalCachePath(this, "txt");
+            String txt = AppFileUtils.getExternalFilePath(this, "txt");
             String fileName = txt + File.separator + "ycdoubi哈哈哈.txt";
             AppLogUtils.d("FileActivity : 读文件 路径" , fileName);
             String file2String = BufferIoUtils.readFile2String1(fileName);
@@ -126,7 +126,7 @@ public class FileActivity extends BaseActivity implements View.OnClickListener {
         } else if (v == tvFile6){
             FileExplorerActivity.startActivity(FileActivity.this);
         } else if (v == tvFile7){
-            String txt = AppFileUtils.getExternalCachePath(this, "txt");
+            String txt = AppFileUtils.getExternalFilePath(this, "txt");
             boolean b = AppFileUtils.deleteDirectory(new File(txt));
             if (b){
                 ToastUtils.showRoundRectToast("删除成功");

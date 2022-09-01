@@ -1,6 +1,7 @@
 package com.yc.appfilelib;
 
 import android.util.Log;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,17 +28,21 @@ public final class FileIoUtils {
 
     /**
      * 使用字节流，写入字符串内容到文件中
+     *
      * @param content  内容
      * @param fileName 文件名称
      * @return
      */
     public static boolean writeString2File1(String content, String fileName) {
+        boolean isSuccess;
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(fileName);
             byte[] bytes = content.getBytes();
             fos.write(bytes);
+            isSuccess = true;
         } catch (Exception e) {
+            isSuccess = false;
             Log.d("AppFileIoUtils", "异常: " + e.getMessage());
         } finally {
             // 释放资源
@@ -49,7 +54,7 @@ public final class FileIoUtils {
                 e.printStackTrace();
             }
         }
-        return false;
+        return isSuccess;
     }
 
 
@@ -61,6 +66,7 @@ public final class FileIoUtils {
      * @return
      */
     public static boolean writeString2File2(String content, String fileName) {
+        boolean isSuccess;
         BufferedWriter bw = null;
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(fileName);
@@ -69,10 +75,13 @@ public final class FileIoUtils {
             // 写数据
             bw.write(content);
             bw.flush();
+            isSuccess = true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            isSuccess = false;
         } catch (IOException e) {
             e.printStackTrace();
+            isSuccess = false;
         } finally {
             // 释放资源
             try {
@@ -83,7 +92,7 @@ public final class FileIoUtils {
                 e.printStackTrace();
             }
         }
-        return false;
+        return isSuccess;
     }
 
     /*--------------------------------------------------------------------------------------------*/
@@ -123,7 +132,7 @@ public final class FileIoUtils {
         String res = "";
         InputStreamReader isr;
         try {
-            isr = new InputStreamReader(new FileInputStream(fileName)) ;
+            isr = new InputStreamReader(new FileInputStream(fileName));
             char[] chs = new char[1024];
             int len = 0;
             StringBuilder sb = new StringBuilder();
@@ -138,15 +147,17 @@ public final class FileIoUtils {
         return res;
     }
 
+    /*--------------------------------------------------------------------------------------------*/
 
     /**
-     * 读取io流到新的file文件中
+     * 使用字符流读取流数据到新的file文件中
      *
-     * @param newFile
-     * @param is
+     * @param is      io流
+     * @param newFile 文件
      * @return
      */
-    public static boolean writeFileFromIS(final File newFile, final InputStream is) {
+    public static boolean writeFileFromIS1(final InputStream is, final File newFile) {
+        boolean isSuccess;
         if (is == null || newFile == null) {
             Log.e("FileIOUtils", "create file <" + newFile + "> failed.");
             return false;
@@ -160,10 +171,10 @@ public final class FileIoUtils {
             for (int len; (len = is.read(data)) != -1; ) {
                 os.write(data, 0, len);
             }
-            return true;
+            isSuccess = true;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            isSuccess = false;
         } finally {
             try {
                 is.close();
@@ -178,6 +189,62 @@ public final class FileIoUtils {
                 e.printStackTrace();
             }
         }
+        return isSuccess;
+    }
+
+
+    /**
+     * 使用字节流将流数据写到文件中
+     *
+     * @param inStream io流
+     * @param newPath  目标文件路径
+     * @return boolean 成功true、失败false
+     */
+    public static boolean writeFileFromIS2(InputStream inStream, String newPath) {
+        boolean isSuccess;
+        FileOutputStream fs = null;
+        try {
+            // 判断目录是否存在
+            File newFile = new File(newPath);
+            // 创建新文件
+            File newFileDir = new File(newFile.getPath().replace(newFile.getName(), ""));
+            if (!newFileDir.exists()) {
+                //创建一个File对象所对应的目录，成功返回true，否则false。
+                //且File对象必须为路径而不是文件。只会创建最后一级目录，如果上级目录不存在就抛异常。
+                newFileDir.mkdirs();
+            }
+            // 输出文件
+            fs = new FileOutputStream(newPath);
+            // 一次读取一个字节数组复制文件
+            byte[] buffer = new byte[4 * 1024];
+            // 作用: 记录读取到的有效的字节个数
+            int len = 0;
+            // 循环遍历读取数据
+            while ((len = inStream.read(buffer)) != -1) {
+                fs.write(buffer, 0, len);
+            }
+            isSuccess = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            isSuccess = false;
+        } finally {
+            // 关闭流对象
+            if (fs != null) {
+                try {
+                    fs.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (inStream != null) {
+                try {
+                    inStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return isSuccess;
     }
 
     /*--------------------------------------------------------------------------------------------*/
@@ -190,6 +257,7 @@ public final class FileIoUtils {
      * @return boolean 成功true、失败false
      */
     public static boolean copyFileChannel(File src, File dest) {
+        boolean isSuccess;
         if ((src == null) || (dest == null)) {
             return false;
         }
@@ -214,12 +282,13 @@ public final class FileIoUtils {
             srcChannel = new FileInputStream(src).getChannel();
             dstChannel = new FileOutputStream(dest).getChannel();
             srcChannel.transferTo(0, srcChannel.size(), dstChannel);
+            isSuccess = true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return false;
+            isSuccess = false;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            isSuccess = false;
         } finally {
             try {
                 if (srcChannel != null) {
@@ -232,7 +301,7 @@ public final class FileIoUtils {
                 e.printStackTrace();
             }
         }
-        return true;
+        return isSuccess;
     }
 
     /**
@@ -245,7 +314,7 @@ public final class FileIoUtils {
     public static boolean copyFile1(String oldPath, String newPath) {
         InputStream inStream = null;
         FileOutputStream fs = null;
-        boolean result;
+        boolean isSuccess;
         try {
             File oldFile = new File(oldPath);
             // 判断目录是否存在
@@ -266,26 +335,26 @@ public final class FileIoUtils {
                 // 一次读取一个字节数组复制文件
                 byte[] buffer = new byte[1024];
                 // 作用: 记录读取到的有效的字节个数
-                int len = 0 ;
+                int len = 0;
                 // 循环遍历读取数据
-                while((len = inStream.read(buffer)) != -1){
-                    fs.write(buffer, 0, len) ;
+                while ((len = inStream.read(buffer)) != -1) {
+                    fs.write(buffer, 0, len);
                 }
 
                 //int bytesum = 0;
                 //while ((byteread = inStream.read(buffer)) != -1) {
-                    // 字节数 文件大小
+                // 字节数 文件大小
                 //    bytesum += byteread;
                 //    fs.write(buffer, 0, byteread);
                 //}
 
-                result = true;
+                isSuccess = true;
             } else {
-                result = false;
+                isSuccess = false;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            result = false;
+            isSuccess = false;
         } finally {
             // 关闭流对象
             if (inStream != null) {
@@ -303,9 +372,8 @@ public final class FileIoUtils {
                 }
             }
         }
-        return result;
+        return isSuccess;
     }
-
 
 
     /**
@@ -318,7 +386,7 @@ public final class FileIoUtils {
     public static boolean copyFile2(String oldPath, String newPath) {
         InputStreamReader isr = null;
         OutputStreamWriter osw = null;
-        boolean result;
+        boolean isSuccess;
         try {
             File oldFile = new File(oldPath);
             // 判断目录是否存在
@@ -333,22 +401,22 @@ public final class FileIoUtils {
             // 文件存在时
             if (oldFile.exists()) {
                 // 创建转换输入流对象
-                isr = new InputStreamReader(new FileInputStream(oldPath)) ;
+                isr = new InputStreamReader(new FileInputStream(oldPath));
                 // 创建转换输出流对象
-                osw = new OutputStreamWriter(new FileOutputStream(newPath)) ;
+                osw = new OutputStreamWriter(new FileOutputStream(newPath));
                 // 一次读取一个字符数组复制文件
-                char[] chs = new char[1024] ;
+                char[] chs = new char[1024];
                 int len;
-                while((len = isr.read(chs)) != -1){
-                    osw.write(chs, 0, len) ;
+                while ((len = isr.read(chs)) != -1) {
+                    osw.write(chs, 0, len);
                 }
-                result = true;
+                isSuccess = true;
             } else {
-                result = false;
+                isSuccess = false;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            result = false;
+            isSuccess = false;
         } finally {
             // 关闭流对象
             if (isr != null) {
@@ -366,7 +434,7 @@ public final class FileIoUtils {
                 }
             }
         }
-        return result;
+        return isSuccess;
     }
 
 

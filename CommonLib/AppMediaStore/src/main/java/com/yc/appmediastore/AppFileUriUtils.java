@@ -351,7 +351,7 @@ public final class AppFileUriUtils {
             is = context.getContentResolver().openInputStream(uri);
             File file = new File(context.getCacheDir(), "" + System.currentTimeMillis());
             File srcFile = new File(file.getAbsolutePath());
-            FileIoUtils.writeFileFromIS(srcFile, is);
+            FileIoUtils.writeFileFromIS1(is,srcFile);
             return file;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
