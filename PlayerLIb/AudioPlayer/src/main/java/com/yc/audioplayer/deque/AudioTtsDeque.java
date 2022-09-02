@@ -45,26 +45,27 @@ public class AudioTtsDeque {
                 case HIGH_PRIORITY:
                     mHighDeque.add(tts);
                     if (config!=null && config.getLogger()!=null){
-                        config.getLogger().log("TTS queue add high: " + tts.getTts());
+                        config.getLogger().log("AudioTtsDeque queue add high: " + tts.getTts());
                     }
                     break;
                 //中优先级
                 case MIDDLE_PRIORITY:
                     mMiddleDeque.add(tts);
                     if (config!=null && config.getLogger()!=null){
-                        config.getLogger().log("TTS queue add  middle: " + tts.getTts());
+                        config.getLogger().log("AudioTtsDeque queue add  middle: " + tts.getTts());
                     }
                     break;
                 //普通级别
                 case NORMAL_PRIORITY:
                     mNormalDeque.add(tts);
                     if (config!=null && config.getLogger()!=null){
-                        config.getLogger().log("TTS queue add  normal: " + tts.getTts());
+                        config.getLogger().log("AudioTtsDeque queue add  normal: " + tts.getTts());
                     }
                     break;
                 default:
                     break;
             }
+            //唤醒一个等待线程
             mNotEmpty.signal();
         } finally {
             mLock.unlock();
@@ -78,12 +79,17 @@ public class AudioTtsDeque {
             TtsPlayerConfig config = AudioService.getInstance().getConfig();
             while ((data = getTts()) == null) {
                 if (config!=null && config.getLogger()!=null){
-                    config.getLogger().log("TTS queue no data to play ");
+                    config.getLogger().log("AudioTtsDeque queue no data to play ");
                 }
+                //如果数据不为空
+                //当前线程等待，直到发出信号
                 mNotEmpty.await();
+                if (config!=null && config.getLogger()!=null){
+                    config.getLogger().log("AudioTtsDeque queue no data to play await");
+                }
             }
             if (config!=null && config.getLogger()!=null){
-                config.getLogger().log("TTS queue  will play is" + data.getTts() + " rawId " + data.getRawId());
+                config.getLogger().log("AudioTtsDeque queue  will play is" + data.getTts() + " rawId " + data.getRawId());
             }
         } finally {
             mLock.unlock();
@@ -108,7 +114,7 @@ public class AudioTtsDeque {
         }
         TtsPlayerConfig config = AudioService.getInstance().getConfig();
         if (config!=null && config.getLogger()!=null){
-            config.getLogger().log("TTS queue get data is " + tts);
+            config.getLogger().log("AudioTtsDeque queue get data is " + tts);
         }
         return tts;
     }

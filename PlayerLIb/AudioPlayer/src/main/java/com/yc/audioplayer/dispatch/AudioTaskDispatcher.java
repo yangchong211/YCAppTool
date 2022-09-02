@@ -24,7 +24,7 @@ import com.yc.videotool.VideoLogUtils;
  */
 public class AudioTaskDispatcher implements InterPlayListener {
 
-    private AudioTtsDeque mTaskDeque ;
+    private AudioTtsDeque mTaskDeque;
     private AudioPlayData mCurrentPlayData;
     private AbstractAudioWrapper mAudioManager;
     private boolean mRunning = true;
@@ -56,7 +56,8 @@ public class AudioTaskDispatcher implements InterPlayListener {
 
     /**
      * 初始化
-     * @param manager                     AudioManager
+     *
+     * @param manager AudioManager
      */
     public void initialize(final AudioManager manager) {
         this.mAudioManager = manager;
@@ -80,7 +81,7 @@ public class AudioTaskDispatcher implements InterPlayListener {
         Process.setThreadPriority(Process.THREAD_PRIORITY_AUDIO);
         while (mRunning) {
             try {
-                if (config!=null && config.getLogger()!=null){
+                if (config != null && config.getLogger() != null) {
                     config.getLogger().log("AudioTaskDispatcher is running");
                 }
                 //从tts消息队列获取当前数据
@@ -88,7 +89,7 @@ public class AudioTaskDispatcher implements InterPlayListener {
                 //播放当前数据
                 mAudioManager.play(mCurrentPlayData);
                 synchronized (manager.mMutex) {
-                    if (config!=null && config.getLogger()!=null){
+                    if (config != null && config.getLogger() != null) {
                         config.getLogger().log("AudioTaskDispatcher is wait  " + mCurrentPlayData.getTts());
                     }
                     //等待
@@ -96,11 +97,11 @@ public class AudioTaskDispatcher implements InterPlayListener {
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                if (config!=null && config.getLogger()!=null){
+                if (config != null && config.getLogger() != null) {
                     config.getLogger().error("AudioTaskDispatcher is error  " + e.getMessage());
                 }
-                if (config!=null && config.getExceptionTrack()!=null){
-                    config.getExceptionTrack().onException("AudioTaskDispatcher" , e);
+                if (config != null && config.getExceptionTrack() != null) {
+                    config.getExceptionTrack().onException("AudioTaskDispatcher", e);
                 }
                 return;
             }
@@ -109,7 +110,8 @@ public class AudioTaskDispatcher implements InterPlayListener {
 
     /**
      * 将播放内容data任务添加到分发器中
-     * @param data                              data
+     *
+     * @param data data
      */
     public void addTask(AudioPlayData data) {
         if (data == null) {
@@ -120,7 +122,7 @@ public class AudioTaskDispatcher implements InterPlayListener {
             mAudioManager.stop();
         }
         TtsPlayerConfig config = AudioService.getInstance().getConfig();
-        if (config!=null && config.getLogger()!=null){
+        if (config != null && config.getLogger() != null) {
             config.getLogger().log("AudioTaskDispatcher data: " + data.getTts() + data.mPriority);
         }
         //添加对
