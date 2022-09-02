@@ -1,7 +1,7 @@
 package com.yc.videosqllite;
 
-import com.yc.videosqllite.cache.InterCache;
-import com.yc.videosqllite.cache.VideoLruCache;
+
+import com.yc.applrucache.SystemLruCache;
 
 /**
  * <pre>
@@ -17,12 +17,12 @@ public class VideoMapCache {
     /**
      * 缓存
      */
-    private final InterCache<String, VideoLocation> mCache;
+    private final SystemLruCache<String, VideoLocation> mCache;
     private final SafeKeyGenerator safeKeyGenerator;
 
     public VideoMapCache(){
         //默认设置存储最大值为1000条
-        mCache =  new VideoLruCache<>(1000);
+        mCache =  new SystemLruCache<>(1000);
         this.safeKeyGenerator = new SafeKeyGenerator();
     }
 

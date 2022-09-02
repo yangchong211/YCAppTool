@@ -7,6 +7,7 @@ import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.util.Util;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.InterPlayListener;
 import com.yc.audioplayer.wrapper.AbstractAudioWrapper;
@@ -57,7 +58,7 @@ public class ExoAudioPlayer extends AbstractAudioWrapper {
             return;
         }
         if (mMediaPlayer == null) {
-            mMediaPlayer = new SimpleExoPlayer.Builder(mContext).build();
+            mMediaPlayer = new SimpleExoPlayer.Builder(mContext).setLooper(Util.getLooper()).build();
         }
         mMediaSource = ExoMediaSourceHelper.getInstance(mContext).getMediaSource(tts);
         mMediaPlayer.prepare(mMediaSource);

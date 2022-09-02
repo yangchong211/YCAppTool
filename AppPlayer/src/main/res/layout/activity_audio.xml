@@ -14,16 +14,28 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_init"
+            android:id="@+id/btn_tts_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="初始化" />
+            android:text="1.监听tts播放状态" />
 
         <Button
-            android:id="@+id/btn_speak_tts"
+            android:id="@+id/btn_speak_tts1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="播放语音" />
+            android:text="2.1播放文本内容语音" />
+
+        <Button
+            android:id="@+id/btn_speak_tts2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.2播放本地资源语音" />
+
+        <Button
+            android:id="@+id/btn_speak_tts3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2.3播放网络资源语音" />
 
         <Button
             android:id="@+id/btn_speak_media"

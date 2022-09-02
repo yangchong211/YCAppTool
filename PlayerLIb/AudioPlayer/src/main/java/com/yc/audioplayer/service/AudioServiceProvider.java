@@ -3,6 +3,7 @@ package com.yc.audioplayer.service;
 import android.content.Context;
 
 import com.yc.audioplayer.bean.AudioPlayData;
+import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.manager.AudioManager;
 
 /**
@@ -22,13 +23,21 @@ public interface AudioServiceProvider {
      *
      * @param context {@link Context}
      */
-    void init(Context context);
+    void init(Context context, TtsPlayerConfig config);
 
     /**
      * 是否已经初始化
-     * true 是
+     *
+     * @return true 是
      */
     boolean isInit();
+
+    /**
+     * 获取配置类
+     *
+     * @return config
+     */
+    TtsPlayerConfig getConfig();
 
     /**
      * 停止播放
@@ -88,6 +97,7 @@ public interface AudioServiceProvider {
 
     /**
      * 监听单条PlayData播放状态
+     *
      * @param playStateListener 监听器
      */
     void setPlayStateListener(AudioManager.PlayStateListener playStateListener);

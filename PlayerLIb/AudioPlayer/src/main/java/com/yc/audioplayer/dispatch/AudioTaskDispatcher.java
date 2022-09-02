@@ -2,8 +2,10 @@ package com.yc.audioplayer.dispatch;
 
 import android.os.Process;
 
+import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.deque.AudioTtsDeque;
 import com.yc.audioplayer.manager.AudioManager;
+import com.yc.audioplayer.service.AudioService;
 import com.yc.audioplayer.wrapper.AbstractAudioWrapper;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.InterPlayListener;
@@ -65,29 +67,44 @@ public class AudioTaskDispatcher implements InterPlayListener {
         this.mTtsThread = new Thread() {
             @Override
             public void run() {
-                //设置进程优先级
-                Process.setThreadPriority(Process.THREAD_PRIORITY_AUDIO);
-                while (mRunning) {
-                    try {
-                        VideoLogUtils.d("AudioTaskDispatcher is running ");
-                        //从tts消息队列获取当前数据
-                        mCurrentPlayData = mTaskDeque.get();
-                        //播放当前数据
-                        mAudioManager.play(mCurrentPlayData);
-                        synchronized (manager.mMutex) {
-                            VideoLogUtils.d("AudioTaskDispatcher is wait  " + mCurrentPlayData.getTts());
-                            //等待
-                            manager.mMutex.wait();
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                }
+                doWhileThing(manager);
             }
         };
         mTtsThread.setName("tts-audio-thread");
         mTtsThread.start();
+    }
+
+    private void doWhileThing(final AudioManager manager) {
+        TtsPlayerConfig config = AudioService.getInstance().getConfig();
+        //设置进程优先级
+        Process.setThreadPriority(Process.THREAD_PRIORITY_AUDIO);
+        while (mRunning) {
+            try {
+                if (config!=null && config.getLogger()!=null){
+                    config.getLogger().log("AudioTaskDispatcher is running");
+                }
+                //从tts消息队列获取当前数据
+                mCurrentPlayData = mTaskDeque.get();
+                //播放当前数据
+                mAudioManager.play(mCurrentPlayData);
+                synchronized (manager.mMutex) {
+                    if (config!=null && config.getLogger()!=null){
+                        config.getLogger().log("AudioTaskDispatcher is wait  " + mCurrentPlayData.getTts());
+                    }
+                    //等待
+                    manager.mMutex.wait();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                if (config!=null && config.getLogger()!=null){
+                    config.getLogger().error("AudioTaskDispatcher is error  " + e.getMessage());
+                }
+                if (config!=null && config.getExceptionTrack()!=null){
+                    config.getExceptionTrack().onException("AudioTaskDispatcher" , e);
+                }
+                return;
+            }
+        }
     }
 
     /**
@@ -102,7 +119,10 @@ public class AudioTaskDispatcher implements InterPlayListener {
                 data.mPriority.ordinal() > mCurrentPlayData.mPriority.ordinal()) {
             mAudioManager.stop();
         }
-        VideoLogUtils.d("AudioTaskDispatcher data: " + data.getTts() + data.mPriority);
+        TtsPlayerConfig config = AudioService.getInstance().getConfig();
+        if (config!=null && config.getLogger()!=null){
+            config.getLogger().log("AudioTaskDispatcher data: " + data.getTts() + data.mPriority);
+        }
         //添加对
         mTaskDeque.add(data);
     }

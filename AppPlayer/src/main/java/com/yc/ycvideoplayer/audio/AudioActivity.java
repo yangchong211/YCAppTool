@@ -8,17 +8,21 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.manager.AudioManager;
 import com.yc.audioplayer.service.AudioService;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.bean.AudioTtsPriority;
 
+import com.yc.toolutils.AppLogUtils;
 import com.yc.ycvideoplayer.R;
 
 public class AudioActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnInit;
-    private Button btnSpeakTts;
+    private Button btnTtsState;
+    private Button btnSpeakTts1;
+    private Button btnSpeakTts2;
+    private Button btnSpeakTts3;
     private Button btnSpeakMedia;
     private Button btnMixPlay;
     private Button btnPause;
@@ -38,8 +42,10 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio);
 
-        btnInit = findViewById(R.id.btn_init);
-        btnSpeakTts = findViewById(R.id.btn_speak_tts);
+        btnTtsState = findViewById(R.id.btn_tts_state);
+        btnSpeakTts1 = findViewById(R.id.btn_speak_tts1);
+        btnSpeakTts2 = findViewById(R.id.btn_speak_tts2);
+        btnSpeakTts3 = findViewById(R.id.btn_speak_tts3);
         btnSpeakMedia = findViewById(R.id.btn_speak_media);
         btnMixPlay = findViewById(R.id.btn_mix_play);
         btnPause = findViewById(R.id.btn_pause);
@@ -53,8 +59,10 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         btnUrl2 = findViewById(R.id.btn_url2);
         btnTtsDemo = findViewById(R.id.btn_tts_demo);
 
-        btnInit.setOnClickListener(this);
-        btnSpeakTts.setOnClickListener(this);
+        btnTtsState.setOnClickListener(this);
+        btnSpeakTts1.setOnClickListener(this);
+        btnSpeakTts2.setOnClickListener(this);
+        btnSpeakTts3.setOnClickListener(this);
         btnSpeakMedia.setOnClickListener(this);
         btnMixPlay.setOnClickListener(this);
         btnPause.setOnClickListener(this);
@@ -68,29 +76,31 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         btnUrl2.setOnClickListener(this);
         btnTtsDemo.setOnClickListener(this);
 
-        AudioService.getInstance().init(this);
+        TtsPlayerConfig config = new TtsPlayerConfig.Builder(this).build();
+        AudioService.getInstance().init(this,config);
     }
 
 
     @Override
     public void onClick(View v) {
-        if (v == btnInit){
+        if (v == btnTtsState){
             AudioService.getInstance().setPlayStateListener(new AudioManager.PlayStateListener() {
                 @Override
                 public void onStartPlay() {
-
+                    AppLogUtils.d("tts player state start");
                 }
 
                 @Override
                 public void onCompletePlay() {
-
+                    AppLogUtils.d("tts player state complete");
                 }
             });
-        } else if (v == btnSpeakTts){
-            AudioPlayData playData = new AudioPlayData.Builder()
-                    .tts("开始播放语音，这个是一段文字，逗比。Your goals are hindered by financial strictures.")
-                    .build();
-            AudioService.getInstance().play(playData);
+        } else if (v == btnSpeakTts1){
+            AudioService.getInstance().playTts("开始播放语音，这个是一段文字，逗比。Your goals are hindered by financial strictures.");
+        } else if (v == btnSpeakTts2){
+            AudioService.getInstance().playAudioResource(R.raw.ns_no_answer_call_later);
+        } else if (v == btnSpeakTts3){
+            AudioService.getInstance().playUrl("https://asraudio.cdnjtzy.com/eb93cfd82d0044a1a9ce047c3aeafb8c.mp3");
         } else if (v == btnSpeakMedia){
             AudioPlayData playData = new AudioPlayData.Builder()
                     .rawId(R.raw.timeout)
@@ -98,7 +108,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
             AudioService.getInstance().play(playData);
         } else if (v == btnMixPlay){
             AudioPlayData data = new AudioPlayData.Builder(AudioTtsPriority.HIGH_PRIORITY)
-                    .tts("我是一个混合的协议")
+                    .tts("我是一个混合的协议的语音播报")
                     .rawId(R.raw.timeout)
                     .tts("Hello TTS Service").build();
             AudioService.getInstance().play(data);

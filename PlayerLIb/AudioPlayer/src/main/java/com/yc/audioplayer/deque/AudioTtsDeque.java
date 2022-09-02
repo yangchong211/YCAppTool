@@ -1,6 +1,8 @@
 package com.yc.audioplayer.deque;
 
 import com.yc.audioplayer.bean.AudioPlayData;
+import com.yc.audioplayer.bean.TtsPlayerConfig;
+import com.yc.audioplayer.service.AudioService;
 import com.yc.videotool.VideoLogUtils;
 
 import java.util.concurrent.LinkedBlockingDeque;
@@ -37,21 +39,28 @@ public class AudioTtsDeque {
     public void add(AudioPlayData tts) {
         mLock.lock();
         try {
+            TtsPlayerConfig config = AudioService.getInstance().getConfig();
             switch (tts.mPriority) {
                 //最高优先级
                 case HIGH_PRIORITY:
                     mHighDeque.add(tts);
-                    VideoLogUtils.d("TTS queue add high: " + tts.getTts());
+                    if (config!=null && config.getLogger()!=null){
+                        config.getLogger().log("TTS queue add high: " + tts.getTts());
+                    }
                     break;
                 //中优先级
                 case MIDDLE_PRIORITY:
                     mMiddleDeque.add(tts);
-                    VideoLogUtils.d("TTS queue add  middle: " + tts.getTts());
+                    if (config!=null && config.getLogger()!=null){
+                        config.getLogger().log("TTS queue add  middle: " + tts.getTts());
+                    }
                     break;
                 //普通级别
                 case NORMAL_PRIORITY:
                     mNormalDeque.add(tts);
-                    VideoLogUtils.d("TTS queue add  normal: " + tts.getTts());
+                    if (config!=null && config.getLogger()!=null){
+                        config.getLogger().log("TTS queue add  normal: " + tts.getTts());
+                    }
                     break;
                 default:
                     break;
@@ -66,11 +75,16 @@ public class AudioTtsDeque {
         AudioPlayData data;
         mLock.lock();
         try {
+            TtsPlayerConfig config = AudioService.getInstance().getConfig();
             while ((data = getTts()) == null) {
-                VideoLogUtils.d("TTS queue no data to play ");
+                if (config!=null && config.getLogger()!=null){
+                    config.getLogger().log("TTS queue no data to play ");
+                }
                 mNotEmpty.await();
             }
-            VideoLogUtils.d("TTS queue  will play is" + data.getTts() + " rawId " + data.getRawId());
+            if (config!=null && config.getLogger()!=null){
+                config.getLogger().log("TTS queue  will play is" + data.getTts() + " rawId " + data.getRawId());
+            }
         } finally {
             mLock.unlock();
         }
@@ -92,7 +106,10 @@ public class AudioTtsDeque {
             //否则则获取优先级最低的normal队列
             tts = mNormalDeque.poll();
         }
-        VideoLogUtils.d("TTS queue get data is " + tts);
+        TtsPlayerConfig config = AudioService.getInstance().getConfig();
+        if (config!=null && config.getLogger()!=null){
+            config.getLogger().log("TTS queue get data is " + tts);
+        }
         return tts;
     }
 

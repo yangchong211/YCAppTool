@@ -2,6 +2,7 @@ package com.yc.audioplayer.service;
 
 import android.content.Context;
 
+import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.dispatch.AudioTaskDispatcher;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.manager.AudioManager;
@@ -22,9 +23,11 @@ public class AudioServiceImpl implements AudioServiceProvider {
     private AudioManager mAudioManager;
     private final AudioTaskDispatcher mAudioTaskDispatcher = AudioTaskDispatcher.getInstance();
     private boolean mReady = false;
+    private TtsPlayerConfig mConfig;
 
     @Override
-    public void init(Context context) {
+    public void init(Context context, TtsPlayerConfig config) {
+        mConfig = config;
         mAudioManager = new AudioManager(context);
         mAudioManager.init(mAudioTaskDispatcher, context);
         mAudioTaskDispatcher.initialize(mAudioManager);
@@ -34,6 +37,11 @@ public class AudioServiceImpl implements AudioServiceProvider {
     @Override
     public boolean isInit() {
         return mReady;
+    }
+
+    @Override
+    public TtsPlayerConfig getConfig() {
+        return mConfig;
     }
 
     @Override
@@ -85,9 +93,9 @@ public class AudioServiceImpl implements AudioServiceProvider {
     @Override
     public void playTts(String tts) {
         AudioPlayData data = new AudioPlayData
-            .Builder()
-            .tts(tts)
-            .build();
+                .Builder()
+                .tts(tts)
+                .build();
         play(data);
     }
 
@@ -103,9 +111,9 @@ public class AudioServiceImpl implements AudioServiceProvider {
     @Override
     public void playAudioResource(int rawId) {
         AudioPlayData data = new AudioPlayData
-            .Builder()
-            .rawId(rawId)
-            .build();
+                .Builder()
+                .rawId(rawId)
+                .build();
         play(data);
     }
 

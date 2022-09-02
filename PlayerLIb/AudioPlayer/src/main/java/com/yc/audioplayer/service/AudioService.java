@@ -3,6 +3,7 @@ package com.yc.audioplayer.service;
 import android.content.Context;
 
 import com.yc.audioplayer.bean.AudioPlayData;
+import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.manager.AudioManager;
 
 /**
@@ -30,15 +31,23 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void init(final Context context) {
+    public final void init(final Context context, TtsPlayerConfig config) {
         if (null != this.mDelegate) {
-            this.mDelegate.init(context);
+            this.mDelegate.init(context,config);
         }
     }
 
     @Override
     public final boolean isInit() {
         return null != this.mDelegate && this.mDelegate.isInit();
+    }
+
+    @Override
+    public TtsPlayerConfig getConfig() {
+        if (null != this.mDelegate) {
+            return this.mDelegate.getConfig();
+        }
+        return null;
     }
 
     @Override
