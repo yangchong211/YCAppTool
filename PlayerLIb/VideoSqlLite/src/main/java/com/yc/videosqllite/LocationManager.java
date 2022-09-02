@@ -1,15 +1,6 @@
-package com.yc.videosqllite.manager;
+package com.yc.videosqllite;
 
-import android.content.Context;
-import android.os.Debug;
-
-import com.yc.videosqllite.cache.VideoMapCache;
-import com.yc.videosqllite.disk.DiskFileUtils;
-import com.yc.videosqllite.disk.SqlLiteCache;
-import com.yc.videosqllite.model.VideoLocation;
 import com.yc.videotool.VideoLogUtils;
-
-import java.io.IOException;
 
 /**
  * <pre>
@@ -244,49 +235,6 @@ public class LocationManager {
             videoMapCache.clearAll();
         } else {
             videoMapCache.clearAll();
-        }
-    }
-
-    /**
-     * 获取当前应用使用的内存
-     * @return
-     */
-    public long getUseMemory(){
-        long totalMemory = Runtime.getRuntime().totalMemory();
-        long freeMemory = Runtime.getRuntime().freeMemory();
-        VideoLogUtils.d("LocationManager-----内存-"+totalMemory+"-----"+freeMemory);
-        //long maxMemory = Runtime.getRuntime().maxMemory();
-        long useMemory = totalMemory - freeMemory;
-        VideoLogUtils.d("LocationManager-----获取当前应用使用的内存-"+useMemory);
-        return useMemory;
-    }
-
-    /**
-     * 设定内存的阈值
-     * @param proportion                    比例
-     * @return
-     */
-    public long setMemoryThreshold(int proportion){
-        if (proportion<0 || proportion>10){
-            proportion = 2;
-        }
-        long totalMemory = Runtime.getRuntime().totalMemory();
-        long threshold = totalMemory / proportion;
-        VideoLogUtils.d("LocationManager-----设定内存的阈值-"+threshold);
-        return threshold;
-    }
-
-    /**
-     * 获取Java内存快照文件
-     * @param context
-     */
-    public void dumpHprofData(Context context){
-        String dump = DiskFileUtils.getPath(context, "dump");
-        VideoLogUtils.d("LocationManager-----获取Java内存快照文件-"+dump);
-        try {
-            Debug.dumpHprofData(dump);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

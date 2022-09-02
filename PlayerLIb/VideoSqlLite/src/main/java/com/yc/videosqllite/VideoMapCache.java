@@ -1,7 +1,7 @@
-package com.yc.videosqllite.cache;
+package com.yc.videosqllite;
 
-import com.yc.videosqllite.model.SafeKeyGenerator;
-import com.yc.videosqllite.model.VideoLocation;
+import com.yc.videosqllite.cache.InterCache;
+import com.yc.videosqllite.cache.VideoLruCache;
 
 /**
  * <pre>

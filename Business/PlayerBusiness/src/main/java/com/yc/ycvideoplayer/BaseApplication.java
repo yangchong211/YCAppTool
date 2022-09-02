@@ -15,8 +15,8 @@ import com.yc.kernel.utils.PlayerFactoryUtils;
 import com.yc.music.tool.BaseAppHelper;
 import com.yc.video.config.VideoPlayerConfig;
 import com.yc.video.player.VideoViewManager;
-import com.yc.videosqllite.manager.CacheConfig;
-import com.yc.videosqllite.manager.LocationManager;
+import com.yc.videosqllite.CacheConfig;
+import com.yc.videosqllite.LocationManager;
 import com.yc.videotool.VideoSpUtils;
 
 /**

@@ -1,9 +1,6 @@
-package com.yc.videosqllite.disk;
+package com.yc.videosqllite;
 
-import com.yc.videosqllite.manager.CacheConfig;
-import com.yc.videosqllite.manager.LocationManager;
-import com.yc.videosqllite.model.SafeKeyGenerator;
-import com.yc.videosqllite.model.VideoLocation;
+import com.yc.applrudisk.DiskHelperUtils;
 import com.yc.videotool.VideoLogUtils;
 
 import java.io.File;
@@ -24,7 +21,7 @@ public class SqlLiteCache {
 
     public SqlLiteCache() {
         CacheConfig cacheConfig = LocationManager.getInstance().getCacheConfig();
-        File path = DiskFileUtils.getFilePath(cacheConfig.getContext());
+        File path = new File(DiskHelperUtils.getBaseCachePath());
         String pathString = path.getPath();
         VideoLogUtils.d("SqlLiteCache-----pathString路径输出地址-"+pathString);
         this.safeKeyGenerator = new SafeKeyGenerator();

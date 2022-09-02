@@ -23,7 +23,7 @@ public final class DiskCacheWriteLocker {
     private final Map<String, WriteLock> locks = new HashMap<>();
     private final WriteLockPool writeLockPool = new WriteLockPool();
 
-    void acquire(String safeKey) {
+    public void acquire(String safeKey) {
         WriteLock writeLock;
         synchronized (this) {
             writeLock = locks.get(safeKey);
@@ -36,7 +36,7 @@ public final class DiskCacheWriteLocker {
         writeLock.lock.lock();
     }
 
-    void release(String safeKey) {
+    public void release(String safeKey) {
         WriteLock writeLock;
         synchronized (this) {
             writeLock = DiskHelperUtils.checkNotNull(locks.get(safeKey));
@@ -65,6 +65,7 @@ public final class DiskCacheWriteLocker {
         final Lock lock = new ReentrantLock();
         int interestedThreads;
 
+        @Synthetic
         WriteLock() {
         }
     }
@@ -73,6 +74,7 @@ public final class DiskCacheWriteLocker {
         private static final int MAX_POOL_SIZE = 10;
         private final Queue<WriteLock> pool = new ArrayDeque<>();
 
+        @Synthetic
         WriteLockPool() {
         }
 

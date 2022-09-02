@@ -1,4 +1,4 @@
-package com.yc.videosqllite.manager;
+package com.yc.videosqllite;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package com.yc.videosqllite.model;
+package com.yc.videosqllite;
 
 
 import android.os.Build;
@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -103,8 +102,8 @@ public class VideoLocation implements Serializable , Cloneable{
         return null;
     }
 
-    public static com.yc.videosqllite.model.VideoLocation toObject(String jsonStr) {
-        com.yc.videosqllite.model.VideoLocation m =  new com.yc.videosqllite.model.VideoLocation();
+    public static VideoLocation toObject(String jsonStr) {
+        VideoLocation m =  new VideoLocation();
         try {
             JSONObject jsonObject = new JSONObject(jsonStr);
             m.setUrl(jsonObject.has("url") ? jsonObject.getString("url"):null);
@@ -136,7 +135,7 @@ public class VideoLocation implements Serializable , Cloneable{
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        com.yc.videosqllite.model.VideoLocation location = (com.yc.videosqllite.model.VideoLocation) o;
+        VideoLocation location = (VideoLocation) o;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             return position == location.position &&
                     totalTime == location.totalTime &&

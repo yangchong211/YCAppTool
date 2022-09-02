@@ -1,11 +1,10 @@
-package com.yc.videosqllite.disk;
+package com.yc.videosqllite;
 
 
 import androidx.annotation.Nullable;
 
-import com.yc.videosqllite.manager.CacheConfig;
-import com.yc.videosqllite.manager.LocationManager;
-import com.yc.videosqllite.model.SafeKeyGenerator;
+import com.yc.applrudisk.DiskCacheWriteLocker;
+import com.yc.applrudisk.DiskLruCache;
 import com.yc.videotool.VideoLogUtils;
 
 import java.io.File;

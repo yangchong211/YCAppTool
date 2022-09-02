@@ -3,8 +3,8 @@ package com.yc.ycvideoplayer;
 import com.yc.videotool.VideoLogUtils;
 
 import com.yc.video.config.BuriedPointEvent;
-import com.yc.videosqllite.manager.LocationManager;
-import com.yc.videosqllite.model.VideoLocation;
+import com.yc.videosqllite.LocationManager;
+import com.yc.videosqllite.VideoLocation;
 
 public class BuriedPointEventImpl implements BuriedPointEvent {
 

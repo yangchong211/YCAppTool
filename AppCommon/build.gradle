@@ -96,4 +96,6 @@ dependencies {
     implementation project(path: ':AppProcessLib')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     implementation project(path: ':MonitorFileLib')
+    implementation project(path: ':AppLruCache')
+    implementation project(path: ':AppLruDisk')
 }

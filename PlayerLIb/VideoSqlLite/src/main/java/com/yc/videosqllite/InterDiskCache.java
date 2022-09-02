@@ -1,4 +1,4 @@
-package com.yc.videosqllite.disk;
+package com.yc.videosqllite;
 
 /**
  * <pre>

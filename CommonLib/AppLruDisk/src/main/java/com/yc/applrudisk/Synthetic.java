@@ -1,12 +1,19 @@
-package com.yc.videosqllite.disk;
+package com.yc.applrudisk;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 /**
- * Indicates that target's visibility can be relaxed to avoid synthetic methods.
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time  : 2020/8/6
+ *     desc  : 注解
+ *     revise:
+ * </pre>
  */
 @Retention(RetentionPolicy.SOURCE)
 @Target({ElementType.FIELD, ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.TYPE})

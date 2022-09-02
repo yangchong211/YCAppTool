@@ -1,8 +1,6 @@
-package com.yc.videosqllite.model;
+package com.yc.videosqllite;
 
-import com.yc.videosqllite.cache.VideoLruCache;
-import com.yc.videosqllite.manager.CacheConfig;
-import com.yc.videosqllite.manager.LocationManager;
+import com.yc.applrucache.SystemLruCache;
 import com.yc.videotool.VideoLogUtils;
 import com.yc.videotool.VideoMd5Utils;
 
@@ -17,7 +15,7 @@ import com.yc.videotool.VideoMd5Utils;
  */
 public class SafeKeyGenerator {
 
-    private final VideoLruCache<Integer, String> loadIdToSafeHash = new VideoLruCache<>(1000);
+    private final SystemLruCache<Integer, String> loadIdToSafeHash = new SystemLruCache<>(1000);
 
     public SafeKeyGenerator() {
 

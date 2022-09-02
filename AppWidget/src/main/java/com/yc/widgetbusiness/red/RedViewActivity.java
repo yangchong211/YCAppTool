@@ -33,7 +33,7 @@ public class RedViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_red);
+        setContentView(R.layout.activity_red_view);
         initView();
     }
 
