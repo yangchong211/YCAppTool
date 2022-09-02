@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.statusbar.bar.StateAppBar;
+import com.yc.statusbar.utils.StatusBarUtils;
 import com.yc.widgetbusiness.R;
 import com.yc.zoomimagelib.ZoomImageView;
 
@@ -21,6 +22,7 @@ public class ImgActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_img);
+        StateAppBar.setStatusBarColor(this, Color.parseColor("#252525"));
 
         mPhotoView = (ZoomImageView) findViewById(R.id.img1);
         mPhotoView.enable();

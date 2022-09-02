@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="25dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:gravity="center"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:background="@drawable/select_material_tag"
+    android:textSize="11sp"
+    android:textStyle="normal"
+    android:text="标签">
+
+</TextView>

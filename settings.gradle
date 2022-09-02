@@ -70,8 +70,7 @@ project(':BellsVibrations').projectDir = new File('ServerLib/BellsVibrations')
 /* +++++++++ 框架公共组件层 +++++++++ */
 include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         'ComponentLib',':ApplicationLib', ':ParallelTaskLib',':AppBaseStore',
-        ':BaseClassLib',':ReflectionLib',':AppInitApi',':AppInitCommon',
-        ':AppInitCompiler',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
+        ':BaseClassLib',':ReflectionLib',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
         ':ArchitectureLib',':ActivityManager', ':ToolFileLib',':EventUploadLib',
         ':AppCommonInter',':ToolMemoryLib',':AppPermission',':PhoneSensor',
         ':AppLruDisk',':AppLruCache',':DownloadHelper',':AppEncryptLib',
@@ -84,9 +83,6 @@ project(':ParallelTaskLib').projectDir = new File('CommonLib/ParallelTaskLib')
 project(':AppBaseStore').projectDir = new File('CommonLib/AppBaseStore')
 project(':BaseClassLib').projectDir = new File('CommonLib/BaseClassLib')
 project(':ReflectionLib').projectDir = new File('CommonLib/ReflectionLib')
-//project(':AppInitApi').projectDir = new File('CommonLib/AppInitApi')
-//project(':AppInitCommon').projectDir = new File('CommonLib/AppInitCommon')
-//project(':AppInitCompiler').projectDir = new File('CommonLib/AppInitCompiler')
 project(':AppLogLib').projectDir = new File('CommonLib/AppLogLib')
 project(':AppRestartLib').projectDir = new File('CommonLib/AppRestartLib')
 project(':SafeIntentLib').projectDir = new File('CommonLib/SafeIntentLib')
@@ -195,7 +191,7 @@ project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
 include ':RouteCompiler', ':RouteManager', ':RouteAnnotations',':BuildTimeCostPlugin',
         ':ServiceLoaderApi', ':ServiceLoaderAnnotations', ':ServiceLoaderRegistry',
         ':ServiceLoaderPlugin', ':ServiceLoaderProcessor', ':MethodTimePlugin',
-        ':ServiceLoaderPlugin'
+        ':ServiceLoaderPlugin',':AppInitApi',':AppInitCommon', ':AppInitCompiler'
 project(':RouteCompiler').projectDir = new File('AptHelper/RouteCompiler')
 project(':RouteManager').projectDir = new File('AptHelper/RouteManager')
 project(':RouteAnnotations').projectDir = new File('AptHelper/RouteAnnotations')
@@ -206,7 +202,9 @@ project(':ServiceLoaderRegistry').projectDir = new File('AptHelper/ServiceLoader
 project(':ServiceLoaderPlugin').projectDir = new File('AptHelper/ServiceLoaderPlugin')
 project(':ServiceLoaderProcessor').projectDir = new File('AptHelper/ServiceLoaderProcessor')
 project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
-
+project(':AppInitApi').projectDir = new File('AptHelper/AppInitApi')
+project(':AppInitCommon').projectDir = new File('AptHelper/AppInitCommon')
+project(':AppInitCompiler').projectDir = new File('AptHelper/AppInitCompiler')
 
 
 /* +++++++++ App监控库 +++++++++ */

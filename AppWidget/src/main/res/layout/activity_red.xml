@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="1.这个是个textView文本控件"/>
+
+    <TextView
+        android:id="@+id/tv_2"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="2.这个是个textView文本控件"/>
+
+
+    <TextView
+        android:id="@+id/tv_3"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="3.这个是个textView文本控件"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_view_4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.这个设置在LinearLayout"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+
+</LinearLayout>

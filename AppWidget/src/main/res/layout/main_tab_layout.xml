@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="5dp">
+
+
+    <ImageView
+        android:id="@+id/iv_tab_img"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_tab_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="选货"
+        android:textColor="@color/colorAccent"
+        android:textSize="10sp" />
+
+</LinearLayout>

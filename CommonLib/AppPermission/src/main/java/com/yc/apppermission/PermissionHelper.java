@@ -28,6 +28,11 @@ public final class PermissionHelper {
     private PermissionHelper() {
     }
 
+    /**
+     * 获取单例对象
+     *
+     * @return 对象
+     */
     public static PermissionHelper getInstance() {
         return PermissionHolder.INSTANCE_PERMISSION;
     }
@@ -60,9 +65,9 @@ public final class PermissionHelper {
     /**
      * 动态申请指定权限，配合hasPermission使用,注意在使用的activity中调用onRequestPermissionsResult权限申请结果的回调
      *
-     * @param activity
-     * @param permissions
-     * @param requestCode
+     * @param activity    上下文
+     * @param permissions 权限组
+     * @param requestCode 请求code
      */
     public void requestPermission(final Activity activity, final String[] permissions, final int requestCode, final PermissionResultListener permissionResultListener) {
         this.permissionResultListener = permissionResultListener;
@@ -72,7 +77,7 @@ public final class PermissionHelper {
     /**
      * 申请权限的结果回调，需要在Activity的onRequestPermissionsResult中调用
      *
-     * @param grantResults
+     * @param grantResults 回调
      */
     public void onPermissionResult(Activity activity, final int requestCode, String[] permissions, int[] grantResults) {
         boolean hasPermission = true;
@@ -101,30 +106,6 @@ public final class PermissionHelper {
                 }
             }
         }
-
-    }
-
-    /**
-     * 权限申请结果的回调接口
-     */
-    public interface PermissionResultListener {
-        /**
-         * 申请成功
-         * @param requestCode       code
-         */
-        void onSuccess(final int requestCode);
-
-        /**
-         * 拒绝的权限集合(不在弹框提醒)
-         * @param deniedList        拒绝权限集合
-         */
-        void onDenied(@NonNull List<String> deniedList);
-
-        /**
-         * 取消的权限集合
-         * @param cancelList        取消权限集合
-         */
-        void onCancel(@NonNull List<String> cancelList);
     }
 
 }

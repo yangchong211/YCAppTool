@@ -8,58 +8,58 @@
 
     <com.yc.appimageview.RoundCornerImageView
         android:id="@+id/iv_image1"
-        android:layout_margin="@dimen/dp10"
+        android:layout_margin="10dp"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_tulip_min"
-        app:radius="@dimen/dp10"
+        android:src="@mipmap/bg_small_solda_min"
+        app:radius="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.yc.appimageview.RoundCornerImageView
         android:id="@+id/iv_image2"
-        android:layout_margin="@dimen/dp10"
+        android:layout_margin="10dp"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_tulip_min"
-        app:right_top_radius="@dimen/dp10"
-        app:right_bottom_radius="@dimen/dp10"
+        android:src="@mipmap/bg_small_solda_min"
+        app:right_top_radius="10dp"
+        app:right_bottom_radius="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_image1" />
 
     <com.yc.appimageview.RoundImageView
         android:id="@+id/iv_image3"
-        android:layout_margin="@dimen/dp10"
+        android:layout_margin="10dp"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_tulip_min"
+        android:src="@mipmap/bg_small_solda_min"
         app:is_cover_src="true"
-        app:corner_radius="@dimen/dp10"
+        app:corner_radius="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_image2" />
 
     <com.yc.appimageview.RoundImageView
         android:id="@+id/iv_image4"
-        android:layout_margin="@dimen/dp10"
+        android:layout_margin="10dp"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_tulip_min"
+        android:src="@mipmap/bg_small_solda_min"
         app:is_cover_src="true"
-        app:corner_radius="@dimen/dp10"
+        app:corner_radius="10dp"
         app:layout_constraintLeft_toRightOf="@+id/iv_image2"
         app:layout_constraintTop_toBottomOf="@+id/iv_image2" />
 
     <com.yc.appimageview.RoundImageView
         android:id="@+id/iv_image5"
-        android:layout_margin="@dimen/dp10"
+        android:layout_margin="10dp"
         android:layout_width="100dp"
         android:layout_height="80dp"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_tulip_min"
+        android:src="@mipmap/bg_small_solda_min"
         app:is_circle="true"
         app:layout_constraintLeft_toRightOf="@+id/iv_image4"
         app:layout_constraintTop_toBottomOf="@+id/iv_image2" />

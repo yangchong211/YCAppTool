@@ -264,14 +264,19 @@ public class SwipeBackShadowView extends FrameLayout {
     }
 
     void onPanelClosed() {
-        if (mIsWeChatStyle) { // 微信滑动返回样式的情况
-            if (mIsCurrentActivityTranslucent) { // 透明主题
+        if (mIsWeChatStyle) {
+            // 微信滑动返回样式的情况
+            if (mIsCurrentActivityTranslucent) {
+                // 透明主题
                 onPanelClosed(mActivity);
-            } else if (mPreContentView != null) { // 非透明主题
+            } else if (mPreContentView != null) {
+                // 非透明主题
                 ViewCompat.setTranslationX(mPreContentView, 0);
             }
-        } else { // 非微信滑动返回样式的情况
-            if (!mIsCurrentActivityTranslucent && mPreContentView != null) { // 只有非透明主题时才移动
+        } else {
+            // 非微信滑动返回样式的情况
+            if (!mIsCurrentActivityTranslucent && mPreContentView != null) {
+                // 只有非透明主题时才移动
                 ViewCompat.setTranslationX(mPreContentView, 0);
             }
         }

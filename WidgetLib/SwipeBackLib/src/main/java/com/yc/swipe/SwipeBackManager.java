@@ -15,12 +15,13 @@ import java.util.Stack;
 
 
 public class SwipeBackManager implements Application.ActivityLifecycleCallbacks {
-    private static final SwipeBackManager sInstance = new SwipeBackManager();
-    private Stack<Activity> mActivityStack = new Stack<>();
-    private Set<Class<? extends View>> mProblemViewClassSet = new HashSet<>();
+
+    private static final SwipeBackManager S_INSTANCE = new SwipeBackManager();
+    private final Stack<Activity> mActivityStack = new Stack<>();
+    private final Set<Class<? extends View>> mProblemViewClassSet = new HashSet<>();
 
     public static SwipeBackManager getInstance() {
-        return sInstance;
+        return S_INSTANCE;
     }
 
     private SwipeBackManager() {

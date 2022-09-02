@@ -11,8 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/base_tool_bar"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +28,7 @@
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSize18"
+            android:textSize="18sp"
             android:text="你好"/>
 
         <TextView

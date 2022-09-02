@@ -5,7 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -27,7 +32,7 @@ import com.yc.customwidget.RoundBackgroundColorSpan;
 import com.yc.customwidget.RoundedBackgroundSpan;
 import com.yc.customwidget.SpannableUtils;
 import com.yc.customwidget.VerticalImageSpan;
-import com.yc.library.base.mvp.BaseActivity;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 import com.yc.widgetbusiness.R;
 
@@ -40,7 +45,7 @@ import com.yc.widgetbusiness.R;
  *     revise:
  * </pre>
  */
-public class MixtureTextViewActivity extends BaseActivity {
+public class MixtureTextViewActivity extends AppCompatActivity {
 
     private TextView tv1;
     private TextView tv2;
@@ -72,12 +77,17 @@ public class MixtureTextViewActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public int getContentView() {
-        return R.layout.activity_mixture_text;
-    }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mixture_text);
+        StateAppBar.setStatusBarLightMode(this, Color.WHITE);
+        initView();
+        initListener();
+        initData();
+    }
+
     public void initView() {
         tv1 = findViewById(R.id.tv_1);
         tv2 = findViewById(R.id.tv_2);
@@ -95,12 +105,10 @@ public class MixtureTextViewActivity extends BaseActivity {
         tv14 = findViewById(R.id.tv_14);
     }
 
-    @Override
     public void initListener() {
 
     }
 
-    @Override
     public void initData() {
         initSetView();
     }
@@ -126,13 +134,13 @@ public class MixtureTextViewActivity extends BaseActivity {
         SpannableStringBuilder spannableString = new SpannableStringBuilder();
         spannableString.append("暗影IV已经开始暴走了暗影IV已经开始暴走了");
         //Drawable drawable = getResources().getDrawable(R.drawable.study_shape_oval);
-        ImageSpan imageSpan1 = new ImageSpan(this,R.drawable.study_shape_oval);
+        ImageSpan imageSpan1 = new ImageSpan(this,R.drawable.pie_chart_shape_oval);
         spannableString.setSpan(imageSpan1, 0, 0, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ImageSpan imageSpan2 = new ImageSpan(this,R.drawable.study_shape_oval);
+        ImageSpan imageSpan2 = new ImageSpan(this,R.drawable.pie_chart_shape_oval);
         spannableString.setSpan(imageSpan2, 3, 4, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ImageSpan imageSpan3 = new ImageSpan(this,R.drawable.study_shape_oval);
+        ImageSpan imageSpan3 = new ImageSpan(this,R.drawable.pie_chart_shape_oval);
         spannableString.setSpan(imageSpan3, 7, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ImageSpan imageSpan4 = new ImageSpan(this,R.drawable.study_shape_oval);
+        ImageSpan imageSpan4 = new ImageSpan(this,R.drawable.pie_chart_shape_oval);
         spannableString.setSpan(imageSpan4, 11, 12, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         tv14.setText(spannableString);
     }
@@ -144,7 +152,7 @@ public class MixtureTextViewActivity extends BaseActivity {
         SpannableString spannableString = new
                 SpannableString("      暗影IV已经开始暴走了暗影IV已经开始暴走了暗影IV已经开始暴走了");
 
-        Drawable drawable = this.getResources().getDrawable(R.drawable.ic_data_music);
+        Drawable drawable = this.getResources().getDrawable(R.mipmap.camera);
         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         ImageSpan imageSpan1 = new AlignImageSpan(drawable);
         //也可以这样
@@ -160,7 +168,7 @@ public class MixtureTextViewActivity extends BaseActivity {
 
 
 
-        Drawable drawable2 = this.getResources().getDrawable(R.drawable.ic_data_music);
+        Drawable drawable2 = this.getResources().getDrawable(R.mipmap.camera);
         drawable2.setBounds(0, 0, drawable2.getIntrinsicWidth(), drawable2.getIntrinsicHeight());
         ImageSpan imageSpan2 = new AlignImageSpan(drawable2);
         spannableString.setSpan(imageSpan2, 2, 3, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
@@ -224,16 +232,14 @@ public class MixtureTextViewActivity extends BaseActivity {
     private void mode5() {
         SpannableStringBuilder spannableString = new SpannableStringBuilder();
         spannableString.append("暗影IV");
-        float dimension1 = this.getResources().getDimension(R.dimen.textSize24);
-        AbsoluteSizeSpan absoluteSizeSpan1 = new AbsoluteSizeSpan((int) dimension1);
+        AbsoluteSizeSpan absoluteSizeSpan1 = new AbsoluteSizeSpan((int) 24);
         int length1 = spannableString.toString().length();
         spannableString.setSpan(absoluteSizeSpan1,
                 0, length1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         //spannableString.append("\n");
         spannableString.append("已经开始暴走了");
         int length2 = spannableString.toString().length();
-        float dimension2 = this.getResources().getDimension(R.dimen.textSize14);
-        AbsoluteSizeSpan absoluteSizeSpan2 = new AbsoluteSizeSpan((int) dimension2);
+        AbsoluteSizeSpan absoluteSizeSpan2 = new AbsoluteSizeSpan((int) 14);
         spannableString.setSpan(absoluteSizeSpan2,
                 length1, length2, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         tv5.setText(spannableString);

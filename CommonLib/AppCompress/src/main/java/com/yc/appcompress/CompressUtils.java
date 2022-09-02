@@ -37,7 +37,8 @@ public final class CompressUtils {
     public static InputStream Bitmap2InputStream(Bitmap bm){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        InputStream isBm = new ByteArrayInputStream(baos.toByteArray());
+        byte[] bytes = baos.toByteArray();
+        InputStream isBm = new ByteArrayInputStream(bytes);
         return isBm;
     }
 

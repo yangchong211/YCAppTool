@@ -18,9 +18,9 @@ public class ViewPagerActivity extends AppCompatActivity {
 
     private ViewPager mPager;
 
-    private int[] imgsId = new int[]{R.drawable.bg_autumn_tree_min, R.drawable.bg_cloud_night,
-            R.drawable.bg_lake_min, R.drawable.bg_leaves_min,
-            R.mipmap.ic_launcher, R.drawable.bg_small_kites_min};
+    private int[] imgsId = new int[]{R.drawable.bg_kites_min, R.drawable.bg_kites_min,
+            R.drawable.bg_kites_min, R.drawable.bg_kites_min,
+            R.mipmap.ic_launcher, R.drawable.bg_kites_min};
 
 
     @Override

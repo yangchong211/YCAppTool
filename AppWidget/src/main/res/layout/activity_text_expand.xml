@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+
+    <com.yc.expandlib.ExpandLayout
+        android:id="@+id/expand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。"/>
+    </com.yc.expandlib.ExpandLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_tag_btn"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/iv_expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/icon_btn_expand"/>
+    </LinearLayout>
+
+
+
+    <com.yc.expandlib.FolderTextView
+        android:id="@+id/tv_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。我是小杨逗比，网名潇湘剑雨。"/>
+
+
+</LinearLayout>

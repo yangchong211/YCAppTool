@@ -7,6 +7,7 @@ import android.widget.ImageView;
 /**
  * <pre>
  *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCWidgetLib
  *     email  : yangchong211@163.com
  *     time  : 2017/7/10
  *     desc  : 图片info

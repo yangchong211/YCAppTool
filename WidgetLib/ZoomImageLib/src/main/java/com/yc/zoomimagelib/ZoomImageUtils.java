@@ -11,6 +11,7 @@ import android.widget.ImageView;
 /**
  * <pre>
  *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCWidgetLib
  *     email  : yangchong211@163.com
  *     time  : 2018/7/10
  *     desc  : 缩放图片工具类

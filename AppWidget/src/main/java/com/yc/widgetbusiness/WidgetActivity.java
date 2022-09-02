@@ -1,19 +1,25 @@
 package com.yc.widgetbusiness;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.view.View;
 
-import com.yc.library.base.mvp.BaseActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.yc.roundcorner.view.RoundTextView;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.widgetbusiness.chart.PreActivity;
 import com.yc.widgetbusiness.image.ImageViewActivity;
+import com.yc.widgetbusiness.red.RedViewActivity;
 import com.yc.widgetbusiness.round.RoundCornersActivity;
 import com.yc.widgetbusiness.shadow.ShadowActivity;
-import com.yc.widgetbusiness.shadow.ShadowDrawableActivity;
 import com.yc.widgetbusiness.textview.MixtureTextViewActivity;
 import com.yc.widgetbusiness.zoom.ZoomMainActivity;
 
-public class WidgetActivity extends BaseActivity {
+public class WidgetActivity extends AppCompatActivity {
 
     private RoundTextView tvWidgetRound;
     private RoundTextView tvWidgetImage;
@@ -21,23 +27,27 @@ public class WidgetActivity extends BaseActivity {
     private RoundTextView tvWidgetChart;
     private RoundTextView tvWidgetShadow;
     private RoundTextView tvWidgetZoom;
+    private RoundTextView tvWidgetRed;
 
     @Override
-    public int getContentView() {
-        return R.layout.activity_widget_main;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_widget_main);
+        StateAppBar.setStatusBarLightMode(this, Color.WHITE);
+        initView();
+        initListener();
     }
 
-    @Override
-    public void initView() {
+    private void initView() {
         tvWidgetRound = findViewById(R.id.tv_widget_round);
         tvWidgetImage = findViewById(R.id.tv_widget_image);
         tvWidgetSpan = findViewById(R.id.tv_widget_span);
         tvWidgetChart = findViewById(R.id.tv_widget_chart);
         tvWidgetShadow = findViewById(R.id.tv_widget_shadow);
         tvWidgetZoom = findViewById(R.id.tv_widget_zoom);
+        tvWidgetRed = findViewById(R.id.tv_widget_red);
     }
 
-    @Override
     public void initListener() {
         tvWidgetRound.setOnClickListener(new PerfectClickListener() {
             @Override
@@ -72,15 +82,15 @@ public class WidgetActivity extends BaseActivity {
         tvWidgetZoom.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                startActivity(ZoomMainActivity.class);
+                startActivity(new Intent(WidgetActivity.this,ZoomMainActivity.class));
+            }
+        });
+        tvWidgetRed.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                startActivity(new Intent(WidgetActivity.this, RedViewActivity.class));
             }
         });
     }
-
-    @Override
-    public void initData() {
-
-    }
-
 
 }

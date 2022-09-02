@@ -33,19 +33,23 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
+    implementation(rootProject.ext.dependencies["material"])
     //通用日志输出库
-    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.3.0'
+    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.3.5'
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
-    implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':LibraryLayer')
+    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.3.5'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.3.5'
+    implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation project(path: ':AppTextView')
     implementation project(path: ':AppChartView')
-    implementation project(path: ':BaseClassLib')
     implementation project(path: ':RoundCorners')
     implementation project(path: ':AppImageView')
     implementation project(path: ':AppScrollView')
     implementation project(path: ':CustomWidget')
     implementation project(path: ':AppShadowLib')
     implementation project(path: ':ZoomImageLib')
+    implementation project(path: ':RedDotView')
+    implementation project(path: ':ExpandLib')
 }
 

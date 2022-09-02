@@ -9,14 +9,14 @@
         android:layout_width="200dp"
         android:layout_height="120dp"
         android:scaleType="center"
-        android:src="@drawable/bg_solda_min" />
+        android:src="@drawable/bg_kites_min" />
 
     <com.yc.zoomimagelib.ZoomImageView
         android:id="@+id/photoview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerInside"
-        android:src="@drawable/bg_solda_min"
+        android:src="@drawable/bg_kites_min"
         android:visibility="gone" />
 
 </RelativeLayout>

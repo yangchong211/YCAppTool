@@ -28,6 +28,7 @@
         <activity android:name=".zoom.ImgClickActivity"/>
         <activity android:name=".zoom.ImgActivity"/>
         <activity android:name=".zoom.ImageViewActivity"/>
+        <activity android:name=".red.RedViewActivity"/>
     </application>
 
 

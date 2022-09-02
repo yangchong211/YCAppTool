@@ -21,9 +21,9 @@ import com.yc.zoomimagelib.ZoomImageView;
 
 public class PhotoBrowseActivity extends AppCompatActivity {
 
-    int[] imgs = new int[]{R.drawable.bg_autumn_tree_min, R.drawable.bg_cloud_night,
-            R.drawable.bg_lake_min, R.drawable.bg_leaves_min,
-            R.mipmap.ic_launcher, R.drawable.bg_small_kites_min};
+    int[] imgs = new int[]{R.drawable.bg_kites_min, R.drawable.bg_kites_min,
+            R.drawable.bg_kites_min, R.drawable.bg_kites_min,
+            R.mipmap.ic_launcher, R.drawable.bg_kites_min};
 
     GridView gv;
 

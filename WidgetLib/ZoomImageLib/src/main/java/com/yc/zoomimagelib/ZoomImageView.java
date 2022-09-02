@@ -22,6 +22,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 /**
  * <pre>
  *     @author yangchong
+ *     GitHub : https://github.com/yangchong211/YCWidgetLib
  *     email  : yangchong211@163.com
  *     time  : 2018/7/10
  *     desc  : 缩放图片

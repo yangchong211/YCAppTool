@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.yc.shadow.drawable.ShadowTool;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toolutils.AppSizeUtils;
 import com.yc.widgetbusiness.R;
 
@@ -38,7 +39,7 @@ public class ShadowDrawableActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shadow_drawable);
-        
+        StateAppBar.setStatusBarLightMode(this, Color.WHITE);
         text1 = findViewById(R.id.text1);
         text2 = findViewById(R.id.text2);
         text3 = findViewById(R.id.text3);

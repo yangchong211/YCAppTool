@@ -2,6 +2,7 @@ package com.yc.widgetbusiness.textview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.yc.apptextview.DrawableTextView;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 import com.yc.widgetbusiness.R;
 
@@ -41,6 +43,7 @@ public class DrawableTextActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawable_text);
+        StateAppBar.setStatusBarLightMode(this, Color.WHITE);
         parent = findViewById(R.id.ll_drawable_text);
 
 

@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blackText">
+    android:background="@color/gray_black">
 
     <com.yc.zoomimagelib.ZoomImageView
         android:id="@+id/img1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blackText"
+        android:background="@color/gray_black"
         android:scaleType="centerInside"
-        android:src="@drawable/bg_tulip_min" />
+        android:src="@drawable/bg_kites_min" />
 
 </RelativeLayout>
