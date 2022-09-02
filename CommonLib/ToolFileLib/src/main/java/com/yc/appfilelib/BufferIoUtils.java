@@ -107,6 +107,7 @@ public final class BufferIoUtils {
         BufferedInputStream bis = null;
         try {
             bis = new BufferedInputStream(new FileInputStream(fileName)) ;
+            // byte 表示一个字节。占4位
             // 一次读取一个字节数组
             byte[] bytes = new byte[1024] ;
             int len = 0 ;

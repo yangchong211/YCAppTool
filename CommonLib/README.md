@@ -13,6 +13,7 @@
 - 11.Intent封装库
 - 12.基础接口库
 - 13.异常上报接口库
+- 14.File流读写库
 
 
 ### 01.框架公共组件层
@@ -303,6 +304,73 @@
         }
     }
     ```
+
+
+### 14.File流读写库
+#### 14.1 从文件中读数据
+- 从文件中读数据，使用普通字节流或者字符流方式，如下所示
+    ``` java
+    //字节流读取file文件，转化成字符串
+    String file2String = FileIoUtils.readFile2String1(fileName);
+    //字符流读取file文件，转化成字符串
+    String file2String = FileIoUtils.readFile2String2(fileName);
+    ```
+- 从文件中读数据，使用高效流方式，如下所示
+    ``` java
+    //高效字节流读取file文件，转化成字符串
+    String file2String = BufferIoUtils.readFile2String1(fileName);
+    //高效字符流读取file文件，转化成字符串
+    String file2String = BufferIoUtils.readFile2String2(fileName);
+    ```
+
+
+#### 14.2 将内容写入文件
+- 从文件中读数据，使用普通字节流或者字符流方式，如下所示
+    ``` java
+    //使用字节流，写入字符串内容到文件中
+    FileIoUtils.writeString2File1(content,fileName);
+    //使用字符流，写入字符串内容到文件中
+    FileIoUtils.writeString2File2(content,fileName);
+    ```
+- 从文件中读数据，使用高效流方式，如下所示
+    ``` java
+    //高效字节流写入字符串内容到文件中
+    BufferIoUtils.writeString2File1(content,fileName);
+    //高效字符流写入字符串内容到文件中
+    BufferIoUtils.writeString2File2(content,fileName);
+    ```
+
+
+#### 14.3 文件复制操作
+- 使用字节流&字符流复制
+    ``` java
+    //使用字节流复制文件，根据文件路径拷贝文件。
+    FileIoUtils.copyFile1(fileName,newFileName);
+    //使用字符流复制文件，根据文件路径拷贝文件。
+    FileIoUtils.copyFile2(fileName,newFileName);
+    ```
+- 使用高效流复制
+    ``` java
+    //使用高效字符缓冲流，根据文件路径拷贝文件。
+    BufferIoUtils.copyFile1(fileName,newFileName);
+    //使用高效字节缓冲流，根据文件路径拷贝文件
+    BufferIoUtils.copyFile2(fileName,newFileName);
+    ```
+
+
+#### 14.4 将流对象写入文件
+- 将InputStream流对象写入到本地文件中
+    ``` java
+    //使用字符流读取流数据到新的file文件中
+    FileIoUtils.writeFileFromIS1(is,srcFile);
+    //使用字节流将流数据写到文件中
+    FileIoUtils.writeFileFromIS1(is,fileName);
+    ```
+
+
+
+
+
 
 
 
