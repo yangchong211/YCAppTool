@@ -35,7 +35,7 @@ import com.yc.videotool.VideoLogUtils;
  *     blog  : https://github.com/yangchong211
  *     time  : 2018/11/9
  *     desc  : 播放器全局配置
- *     revise:
+ *     revise: 构建者设计模式
  * </pre>
  */
 public final class VideoPlayerConfig {

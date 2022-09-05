@@ -32,5 +32,23 @@ public final class BaseIoUtils {
         return byteBuffer.toByteArray();
     }
 
+    /**
+     * 将流对象转化为byte字节
+     * @param inputStream           is流
+     * @return                      byte字节
+     * @throws IOException
+     */
+    public static byte[] readBytes(InputStream inputStream , int bufferSize) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        if (bufferSize < 0 || bufferSize> 1024 * 1024){
+            bufferSize = 1024;
+        }
+        byte[] buffer = new byte[bufferSize];
+        int len;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
+    }
 
 }

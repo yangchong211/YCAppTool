@@ -4,23 +4,19 @@ package com.yc.appmediastore;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.text.TextUtils;
-import android.util.Log;
-
-import com.yc.appfilelib.SdCardUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * <pre>
@@ -64,145 +60,46 @@ public final class FileSaveUtils {
     }
 
 
-
     /**
-     * app保存路径
-     * 视频保存位置：hwmc/video
-     * 图片保存位置：hwmc/image   (包含画廊保存图片，list条目点击item按钮保存图片)
-     * apk下载路径：hwmc/downApk
-     * 日志路径位置：hwmc/logger
-     * 崩溃记录位置：hwmc/crash
-     * glide缓存位置：hwmc/GlideDisk
-     */
-    private final static String APP_ROOT_SAVE_PATH = "lifeHelper";
-    private final static String PROPERTY = File.separator;
-
-
-    /**
-     * 视频系统保存文件目录
-     * @param name                  自己命名
-     * @return                      路径
-     */
-    public static String getLocalVideoPathDir(Context context, String name){
-        String video = getLocalFileSavePathDir(context, "video", name);
-        return video;
-    }
-
-    /**
-     * apk保存文件目录
-     * @return                      路径
-     */
-    public static String getLocalApkDownSavePath(String apkName){
-        String appUpdateDownApkPath = "hwmc" + File.separator + "downApk";
-        String saveApkPath= appUpdateDownApkPath + File.separator;
-        String sdPath = SdCardUtils.getSDCardPath();
-        if (!SdCardUtils.isMounted() || TextUtils.isEmpty(sdPath)) {
-            ArrayList<String> sdPathList = SdCardUtils.getExtSDCardPath();
-            if (sdPathList != null && sdPathList.size() > 0 && !TextUtils.isEmpty(sdPathList.get(0))) {
-                sdPath = sdPathList.get(0);
-            }
-        }
-        String saveApkDirs = sdPath+ File.separator+saveApkPath;
-        File file = new File(saveApkDirs);
-        //判断文件夹是否存在，如果不存在就创建，否则不创建
-        if (!file.exists()) {
-            //通过file的mkdirs()方法创建目录中包含却不存在的文件夹
-            //noinspection ResultOfMethodCallIgnored
-            file.mkdirs();
-        }
-        saveApkPath = saveApkDirs + apkName+".apk";
-        return saveApkPath;
-    }
-
-
-    /**
-     * 保存bitmap到本地
-     */
-    public static String saveBitmap(Context context, Bitmap mBitmap, boolean isScanner) {
-        String savePath = getLocalImgSavePath(context);
-        try {
-            File filePic = new File(savePath);
-            if (!filePic.exists()) {
-                //noinspection ResultOfMethodCallIgnored
-                filePic.getParentFile().mkdirs();
-                //noinspection ResultOfMethodCallIgnored
-                filePic.createNewFile();
-            }
-            FileOutputStream fos = new FileOutputStream(filePic);
-            mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-            if(isScanner){
-                scanner(context,savePath);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return savePath;
-    }
-
-    private static void scanner(Context context, String filePath) {
-        MediaScannerConnection.scanFile(context,
-                new String[]{filePath}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                    @Override
-                    public void onScanCompleted(String path, Uri uri) {
-                        Log.i("ExternalStorage", "Scanned " + path + ":");
-                        Log.i("ExternalStorage", "-> uri=" + uri);
-                    }
-                });
-    }
-
-    /**
-     * 获取本地图片保存路径
+     * 读取共享目录下图片文件
+     * @param context  上下文
+     * @param filename 文件名称（带后缀a.jpg），是MediaStore查找文件的条件之一
      * @return
      */
-    public static String getLocalImgSavePath(Context context) {
-        return getLocalFileSavePathDir(context,"images",
-                generateRandomName() + ".png");
-    }
-
-    /**
-     * 保存图片/崩溃日志保存文件目录
-     * @param fileName              文件名称：比如crash，image，这个是文件夹
-     * @param name                  自己命名，文件名称比如图片  aa.jpg
-     * @return                      路径
-     */
-    public static String getLocalFileSavePathDir(Context context , String fileName , String name){
-        //获得SDCard 的路径,storage/sdcard
-        String sdPath = SdCardUtils.getSDCardPath();
-
-        //判断 SD 卡是否可用
-        if (!SdCardUtils.isSDCardEnable(context) || TextUtils.isEmpty(sdPath)) {
-            //获取 SD 卡路径
-            List<String> sdPathList = SdCardUtils.getSDCardPaths(context);
-            if (sdPathList != null && sdPathList.size() > 0 && !TextUtils.isEmpty(sdPathList.get(0))) {
-                sdPath = sdPathList.get(0);
-            }
+    public static List<InputStream> getImageFile(Context context, String filename)  {
+        String[] projection = {MediaStore.Images.Media._ID,
+                MediaStore.Images.Media.DATA,
+                MediaStore.Images.Media.DATE_ADDED,
+                MediaStore.Images.Thumbnails.DATA
+        };
+        List<InputStream> insList = new ArrayList<>();
+        ContentResolver resolver = context.getContentResolver();
+        //根据日期降序查询
+        String sortOrder = MediaStore.Images.Media.DATE_MODIFIED + " DESC";
+        //查询条件 “显示名称为？”
+        String selection = MediaStore.Images.Media.DISPLAY_NAME + "='" + filename + "'";
+        Cursor cursor =  resolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                projection, selection, null, sortOrder);
+        if (cursor != null && cursor.moveToFirst()) {
+            //媒体数据库中查询到的文件id
+            int columnId = cursor.getColumnIndex(MediaStore.Images.Media._ID);
+            do {
+                //通过mediaId获取它的uri
+                int mediaId = cursor.getInt(columnId);
+                //获取图片路径
+                //String tPath = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+                Uri itemUri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + mediaId );
+                try {
+                    //通过uri获取到inputStream
+                    ContentResolver cr = context.getContentResolver();
+                    InputStream ins=cr.openInputStream(itemUri);
+                    insList.add(ins);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            } while (cursor.moveToNext());
         }
-        if (TextUtils.isEmpty(sdPath)) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append(sdPath);
-        sb.append(PROPERTY);
-        sb.append(APP_ROOT_SAVE_PATH);
-        sb.append(PROPERTY);
-        sb.append(fileName);
-
-        //如果name不为空，那么通过该方法是获取到文件的路径
-        //否则则是获取文件夹的路径
-        if(name!=null && name.length()>0){
-            sb.append(PROPERTY);
-            sb.append(name);
-        }
-        return sb.toString();
+        return insList;
     }
-
-
-    public static String generateRandomName() {
-        return UUID.randomUUID().toString();
-    }
-
 
 }
