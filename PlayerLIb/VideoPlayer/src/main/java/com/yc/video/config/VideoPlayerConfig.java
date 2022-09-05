@@ -21,7 +21,7 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 
 import com.yc.kernel.factory.PlayerFactory;
-import com.yc.kernel.impl.media.MediaPlayerFactory;
+import com.yc.kernel.factory.MediaPlayerFactory;
 
 import com.yc.video.player.ProgressManager;
 import com.yc.video.surface.SurfaceFactory;

@@ -3,7 +3,6 @@ package com.yc.ycvideoplayer.video.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,11 +25,11 @@ import com.yc.ycvideoplayer.video.tiny.TinyScreenActivity;
 import com.yc.video.config.ConstantKeys;
 
 import com.yc.kernel.impl.exo.ExoMediaPlayer;
-import com.yc.kernel.impl.exo.ExoPlayerFactory;
-import com.yc.kernel.impl.ijk.IjkPlayerFactory;
+import com.yc.kernel.factory.ExoPlayerFactory;
+import com.yc.kernel.factory.IjkPlayerFactory;
 import com.yc.kernel.impl.ijk.IjkVideoPlayer;
 import com.yc.kernel.impl.media.AndroidMediaPlayer;
-import com.yc.kernel.impl.media.MediaPlayerFactory;
+import com.yc.kernel.factory.MediaPlayerFactory;
 import com.yc.kernel.factory.PlayerFactory;
 
 import com.yc.video.config.VideoPlayerConfig;
@@ -38,8 +37,6 @@ import com.yc.video.player.VideoViewManager;
 import com.yc.video.tool.PlayerUtils;
 
 import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class TypeActivity extends AppCompatActivity implements View.OnClickListener {
 

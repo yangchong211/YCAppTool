@@ -34,6 +34,7 @@ public interface VideoPlayerListener {
      * 2          表示解析异常
      * 3          表示其他的异常
      * @param type                          错误类型
+     * @param error                         error
      */
     void onError(@PlayerConstant.ErrorType int type , String error);
 

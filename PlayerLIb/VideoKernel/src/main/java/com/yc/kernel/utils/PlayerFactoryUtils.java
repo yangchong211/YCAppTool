@@ -3,9 +3,9 @@ package com.yc.kernel.utils;
 import android.content.Context;
 
 import com.yc.kernel.factory.PlayerFactory;
-import com.yc.kernel.impl.exo.ExoPlayerFactory;
-import com.yc.kernel.impl.ijk.IjkPlayerFactory;
-import com.yc.kernel.impl.media.MediaPlayerFactory;
+import com.yc.kernel.factory.ExoPlayerFactory;
+import com.yc.kernel.factory.IjkPlayerFactory;
+import com.yc.kernel.factory.MediaPlayerFactory;
 import com.yc.kernel.inter.AbstractVideoPlayer;
 
 /**

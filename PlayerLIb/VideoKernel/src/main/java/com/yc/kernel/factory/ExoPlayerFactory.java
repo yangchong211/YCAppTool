@@ -1,8 +1,8 @@
-package com.yc.kernel.impl.exo;
+package com.yc.kernel.factory;
 
 import android.content.Context;
 
-import com.yc.kernel.factory.PlayerFactory;
+import com.yc.kernel.impl.exo.ExoMediaPlayer;
 
 /**
  * <pre>

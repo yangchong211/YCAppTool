@@ -13,12 +13,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package com.yc.kernel.impl.tx;
+package com.yc.kernel.factory;
 
 import android.content.Context;
 
-import com.yc.kernel.factory.PlayerFactory;
-import com.yc.kernel.impl.media.AndroidMediaPlayer;
+import com.yc.kernel.impl.tx.TxMediaPlayer;
 
 
 /**
