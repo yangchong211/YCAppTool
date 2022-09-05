@@ -19,7 +19,8 @@ import com.yc.ycvideoplayer.R;
 
 public class AudioActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnTtsState;
+    private Button btnTtsState1;
+    private Button btnTtsState2;
     private Button btnSpeakTts1;
     private Button btnSpeakTts2;
     private Button btnSpeakTts3;
@@ -42,7 +43,8 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio);
 
-        btnTtsState = findViewById(R.id.btn_tts_state);
+        btnTtsState1 = findViewById(R.id.btn_tts_state1);
+        btnTtsState2 = findViewById(R.id.btn_tts_state2);
         btnSpeakTts1 = findViewById(R.id.btn_speak_tts1);
         btnSpeakTts2 = findViewById(R.id.btn_speak_tts2);
         btnSpeakTts3 = findViewById(R.id.btn_speak_tts3);
@@ -59,7 +61,8 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         btnUrl2 = findViewById(R.id.btn_url2);
         btnTtsDemo = findViewById(R.id.btn_tts_demo);
 
-        btnTtsState.setOnClickListener(this);
+        btnTtsState1.setOnClickListener(this);
+        btnTtsState2.setOnClickListener(this);
         btnSpeakTts1.setOnClickListener(this);
         btnSpeakTts2.setOnClickListener(this);
         btnSpeakTts3.setOnClickListener(this);
@@ -84,7 +87,10 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if (v == btnTtsState){
+        if (v == btnTtsState1){
+            TtsPlayerConfig config = new TtsPlayerConfig.Builder().setTtsDeque(true).build();
+            AudioService.setConfig(config);
+            AudioService.getInstance().init(this);
             AudioService.getInstance().setPlayStateListener(new AudioManager.PlayStateListener() {
                 @Override
                 public void onStartPlay() {
@@ -96,7 +102,11 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                     AppLogUtils.d("tts player state complete");
                 }
             });
-        } else if (v == btnSpeakTts1){
+        } else if (v == btnTtsState2){
+            TtsPlayerConfig config = new TtsPlayerConfig.Builder().setTtsDeque(false).build();
+            AudioService.setConfig(config);
+            AudioService.getInstance().init(this);
+        }else if (v == btnSpeakTts1){
             AudioService.getInstance().playTts("开始播放语音，这个是一段文字，逗比。Your goals are hindered by financial strictures.");
         } else if (v == btnSpeakTts2){
             AudioService.getInstance().playAudioResource(R.raw.ns_no_answer_call_later);

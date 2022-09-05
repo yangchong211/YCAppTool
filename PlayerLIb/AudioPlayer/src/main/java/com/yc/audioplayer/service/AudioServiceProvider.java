@@ -48,7 +48,7 @@ public interface AudioServiceProvider {
     void resume();
 
     /**
-     * 恢复播放
+     * 销毁播放
      */
     void release();
 

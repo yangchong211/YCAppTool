@@ -14,10 +14,16 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_tts_state"
+            android:id="@+id/btn_tts_state1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1.监听tts播放状态" />
+            android:text="1.1 初始化按照顺序和优先级播放" />
+        <Button
+            android:id="@+id/btn_tts_state2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.2 初始化支持每次播放最新的tts" />
+
 
         <Button
             android:id="@+id/btn_speak_tts1"
