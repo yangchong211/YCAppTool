@@ -51,7 +51,7 @@ public class AudioTaskDispatcher implements InterPlayListener {
 
     @Override
     public void onError(String error) {
-
+        mAudioManager.onError(error);
     }
 
     /**
