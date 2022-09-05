@@ -22,6 +22,7 @@ public interface AudioServiceProvider {
      * 初始化语音服务
      *
      * @param context {@link Context}
+     * @param config {@link TtsPlayerConfig}
      */
     void init(Context context , TtsPlayerConfig config);
 
