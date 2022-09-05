@@ -22,14 +22,6 @@ public final class AudioService implements AudioServiceProvider {
     private static TtsPlayerConfig mConfig;
 
     private AudioService() {
-        if (mDelegate == null){
-            mConfig = getConfig();
-            if (mConfig.getIsTtsDeque()){
-                mDelegate = new AudioServiceImpl1();
-            } else {
-                mDelegate = new AudioServiceImpl2();
-            }
-        }
     }
 
     public static void setConfig(TtsPlayerConfig config){
@@ -49,9 +41,13 @@ public final class AudioService implements AudioServiceProvider {
 
     @Override
     public final void init(final Context context) {
-        if (null != this.mDelegate) {
-            this.mDelegate.init(context);
+        mConfig = getConfig();
+        if (mConfig.getIsTtsDeque()){
+            mDelegate = new AudioServiceImpl1();
+        } else {
+            mDelegate = new AudioServiceImpl2();
         }
+        this.mDelegate.init(context);
     }
 
     @Override

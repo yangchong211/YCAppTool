@@ -78,10 +78,6 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         btnUrl.setOnClickListener(this);
         btnUrl2.setOnClickListener(this);
         btnTtsDemo.setOnClickListener(this);
-
-        TtsPlayerConfig config = new TtsPlayerConfig.Builder().setTtsDeque(false).build();
-        AudioService.setConfig(config);
-        AudioService.getInstance().init(this);
     }
 
 
