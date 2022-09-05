@@ -22,7 +22,6 @@ public final class AudioService implements AudioServiceProvider {
     private TtsPlayerConfig mConfig;
 
     private AudioService() {
-
     }
 
     public static AudioService getInstance() {
