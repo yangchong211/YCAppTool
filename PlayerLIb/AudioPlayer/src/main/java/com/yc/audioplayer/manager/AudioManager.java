@@ -109,6 +109,7 @@ public class AudioManager extends AbstractAudioWrapper {
     public void onCompleted() {
         if (mCurrentData != null && mCurrentData.getNext() != null) {
             mCurrentData = mCurrentData.getNext();
+            //播放完成，开始播放下一个
             play(mCurrentData);
         } else {
             synchronized (mMutex) {

@@ -23,7 +23,7 @@ public interface AudioServiceProvider {
      *
      * @param context {@link Context}
      */
-    void init(Context context, TtsPlayerConfig config);
+    void init(Context context);
 
     /**
      * 是否已经初始化
@@ -31,13 +31,6 @@ public interface AudioServiceProvider {
      * @return true 是
      */
     boolean isInit();
-
-    /**
-     * 获取配置类
-     *
-     * @return config
-     */
-    TtsPlayerConfig getConfig();
 
     /**
      * 停止播放

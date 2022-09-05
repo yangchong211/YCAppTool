@@ -19,14 +19,13 @@ import com.yc.appcommoninter.ILogger;
  */
 public final class TtsPlayerConfig {
 
-    private final Context mApplication;
     private final ILogger mLogger;
     private final IExceptionTrack mExceptionTrack;
     private final IEventTrack mEventTrack;
+    private boolean mIsTtsDeque = true;
     private final static String TAG = "TtsPlayer: ";
 
     private TtsPlayerConfig(Builder builder) {
-        this.mApplication = builder.mApplication;
         if (builder.mLogger != null) {
             this.mLogger = builder.mLogger;
         } else {
@@ -44,11 +43,9 @@ public final class TtsPlayerConfig {
         }
         this.mExceptionTrack = builder.mExceptionTrack;
         this.mEventTrack = builder.mEventTrack;
+        this.mIsTtsDeque = builder.mIsTtsDeque;
     }
 
-    public Context getApplication() {
-        return this.mApplication;
-    }
 
     public ILogger getLogger() {
         return this.mLogger;
@@ -62,14 +59,18 @@ public final class TtsPlayerConfig {
         return mEventTrack;
     }
 
+    public boolean getIsTtsDeque(){
+        return mIsTtsDeque;
+    }
+
     public static class Builder {
-        private final Context mApplication;
         private ILogger mLogger;
         private IExceptionTrack mExceptionTrack;
         private IEventTrack mEventTrack;
+        private boolean mIsTtsDeque = true;
 
-        public Builder(Context context) {
-            this.mApplication = context;
+        public Builder() {
+
         }
 
         public Builder setLogger(ILogger logger) {
@@ -84,6 +85,11 @@ public final class TtsPlayerConfig {
 
         public Builder setEventTrack(IEventTrack eventTrack) {
             this.mEventTrack = eventTrack;
+            return this;
+        }
+
+        public Builder setTtsDeque(boolean isTtsDeque) {
+            this.mIsTtsDeque = isTtsDeque;
             return this;
         }
 

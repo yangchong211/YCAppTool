@@ -14,20 +14,19 @@ import com.yc.videotool.VideoLogUtils;
  *     email  : yangchong211@163.com
  *     GitHub : https://github.com/yangchong211/YCVideoPlayer
  *     time  : 2018/8/6
- *     desc  : provider接口具体实现类
+ *     desc  : provider接口具体实现类1
+ *             支持tts按照顺序和优先级播放
  *     revise:
  * </pre>
  */
-public class AudioServiceImpl implements AudioServiceProvider {
+public class AudioServiceImpl1 implements AudioServiceProvider {
 
     private AudioManager mAudioManager;
     private final AudioTaskDispatcher mAudioTaskDispatcher = AudioTaskDispatcher.getInstance();
     private boolean mReady = false;
-    private TtsPlayerConfig mConfig;
 
     @Override
-    public void init(Context context, TtsPlayerConfig config) {
-        mConfig = config;
+    public void init(Context context) {
         mAudioManager = new AudioManager(context);
         mAudioManager.init(mAudioTaskDispatcher, context);
         mAudioTaskDispatcher.initialize(mAudioManager);
@@ -37,11 +36,6 @@ public class AudioServiceImpl implements AudioServiceProvider {
     @Override
     public boolean isInit() {
         return mReady;
-    }
-
-    @Override
-    public TtsPlayerConfig getConfig() {
-        return mConfig;
     }
 
     @Override
