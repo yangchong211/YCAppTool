@@ -19,40 +19,38 @@ import com.yc.audioplayer.manager.AudioManager;
 public final class AudioService implements AudioServiceProvider {
 
     private AudioServiceProvider mDelegate;
-    private static TtsPlayerConfig mConfig;
+    private TtsPlayerConfig mConfig;
 
     private AudioService() {
-    }
 
-    public static void setConfig(TtsPlayerConfig config){
-        mConfig = config;
     }
 
     public static AudioService getInstance() {
         return Singleton.INSTANCE;
     }
 
-    public TtsPlayerConfig getConfig() {
-        if (mConfig == null){
-            mConfig = new TtsPlayerConfig.Builder().build();
-        }
-        return mConfig;
-    }
-
     @Override
-    public final void init(final Context context) {
-        mConfig = getConfig();
+    public final void init(final Context context , TtsPlayerConfig config) {
+        mConfig = config;
         if (mConfig.getIsTtsDeque()){
             mDelegate = new AudioServiceImpl1();
         } else {
             mDelegate = new AudioServiceImpl2();
         }
-        this.mDelegate.init(context);
+        this.mDelegate.init(context,config);
     }
 
     @Override
     public final boolean isInit() {
         return null != this.mDelegate && this.mDelegate.isInit();
+    }
+
+    @Override
+    public TtsPlayerConfig getConfig() {
+        if (mConfig == null){
+            mConfig = new TtsPlayerConfig.Builder().build();
+        }
+        return mConfig;
     }
 
     @Override

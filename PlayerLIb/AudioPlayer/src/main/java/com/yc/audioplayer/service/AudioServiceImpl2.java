@@ -24,9 +24,11 @@ public class AudioServiceImpl2 implements AudioServiceProvider , InterPlayListen
 
     private AudioManager mAudioManager;
     private boolean mReady = false;
+    private static TtsPlayerConfig mConfig;
 
     @Override
-    public void init(Context context) {
+    public void init(Context context, TtsPlayerConfig config) {
+        mConfig = config;
         mAudioManager = new AudioManager(context);
         mAudioManager.init(this, context);
         mReady = true;
@@ -35,6 +37,11 @@ public class AudioServiceImpl2 implements AudioServiceProvider , InterPlayListen
     @Override
     public boolean isInit() {
         return mReady;
+    }
+
+    @Override
+    public TtsPlayerConfig getConfig() {
+        return mConfig;
     }
 
     @Override

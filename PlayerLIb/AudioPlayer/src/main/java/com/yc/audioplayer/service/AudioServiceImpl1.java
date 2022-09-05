@@ -24,9 +24,11 @@ public class AudioServiceImpl1 implements AudioServiceProvider {
     private AudioManager mAudioManager;
     private final AudioTaskDispatcher mAudioTaskDispatcher = AudioTaskDispatcher.getInstance();
     private boolean mReady = false;
+    private static TtsPlayerConfig mConfig;
 
     @Override
-    public void init(Context context) {
+    public void init(Context context, TtsPlayerConfig config) {
+        mConfig = config;
         mAudioManager = new AudioManager(context);
         mAudioManager.init(mAudioTaskDispatcher, context);
         mAudioTaskDispatcher.initialize(mAudioManager);
@@ -36,6 +38,11 @@ public class AudioServiceImpl1 implements AudioServiceProvider {
     @Override
     public boolean isInit() {
         return mReady;
+    }
+
+    @Override
+    public TtsPlayerConfig getConfig() {
+        return mConfig;
     }
 
     @Override

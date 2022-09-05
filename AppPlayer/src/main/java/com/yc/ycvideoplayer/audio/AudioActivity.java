@@ -85,8 +85,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if (v == btnTtsState1){
             TtsPlayerConfig config = new TtsPlayerConfig.Builder().setTtsDeque(true).build();
-            AudioService.setConfig(config);
-            AudioService.getInstance().init(this);
+            AudioService.getInstance().init(this,config);
             AudioService.getInstance().setPlayStateListener(new AudioManager.PlayStateListener() {
                 @Override
                 public void onStartPlay() {
@@ -100,8 +99,7 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
             });
         } else if (v == btnTtsState2){
             TtsPlayerConfig config = new TtsPlayerConfig.Builder().setTtsDeque(false).build();
-            AudioService.setConfig(config);
-            AudioService.getInstance().init(this);
+            AudioService.getInstance().init(this,config);
         }else if (v == btnSpeakTts1){
             AudioService.getInstance().playTts("开始播放语音，这个是一段文字，逗比。Your goals are hindered by financial strictures.");
         } else if (v == btnSpeakTts2){
