@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.appcommoninter.ILogger;
 import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.manager.AudioManager;
 import com.yc.audioplayer.service.AudioService;
@@ -98,7 +99,21 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
         } else if (v == btnTtsState2){
-            TtsPlayerConfig config = new TtsPlayerConfig.Builder().setTtsDeque(false).build();
+            TtsPlayerConfig config = new TtsPlayerConfig.Builder()
+                    .setTtsDeque(false)
+                    .setLogger(new ILogger() {
+
+                        @Override
+                        public void log(String log) {
+
+                        }
+
+                        @Override
+                        public void error(String error) {
+
+                        }
+                    })
+                    .build();
             AudioService.getInstance().init(this,config);
         }else if (v == btnSpeakTts1){
             AudioService.getInstance().playTts("开始播放语音，这个是一段文字，逗比。Your goals are hindered by financial strictures.");

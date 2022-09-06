@@ -57,24 +57,16 @@
 
 
 ### 02.常见思路和做法
-#### 2.1 反射获取成员变量
-- 
+#### 2.1 提高反射的效率
 
 
-
-#### 2.2 反射获取方法
-
-
-#### 2.3 反射获取构造
+#### 2.2 反射获取内部类
 
 
-#### 2.4 反射获取参数类型
-
-
-
-#### 2.5 setAccessible暴力访问
-- 一般情况下并不能对类的私有字段进行操作，利用反射也不例外，如果非要修改，则就需要调用AccessibleObject上的setAccessible()方法来允许这种访问。
-- 而由于反射类中的Field，Method和Constructor继承自AccessibleObject，因此，通过在这些类上调用setAccessible(true)方法，可以实现对这些字段的操作。
+#### 2.3 setAccessible暴力访问
+- 一般情况下并不能对类的私有字段进行操作，利用反射也不例外
+    - 如果非要修改，则就需要调用AccessibleObject上的setAccessible()方法来允许这种访问。
+    - 由于反射类中的Field，Method和Constructor继承自AccessibleObject，因此，通过在这些类上调用setAccessible(true)方法，可以实现对这些字段的操作。
  
 
 
@@ -213,7 +205,7 @@
 
 
 
-#### 5.5 其他参考说明
+#### 5.9 其他参考说明
 - classLoader
     - https://github.com/Catherine22/ClassLoader
 
