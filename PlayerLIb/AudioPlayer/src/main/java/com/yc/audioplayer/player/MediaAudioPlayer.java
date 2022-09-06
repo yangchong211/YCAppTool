@@ -1,5 +1,6 @@
 package com.yc.audioplayer.player;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
@@ -36,7 +37,11 @@ public class MediaAudioPlayer extends AbstractAudioWrapper {
     @Override
     public void init(InterPlayListener next, Context context) {
         this.mPlayListener = next;
-        this.mContext = context;
+        if (context instanceof Application) {
+            mContext = context;
+        } else {
+            mContext = context.getApplicationContext();
+        }
     }
 
     /**

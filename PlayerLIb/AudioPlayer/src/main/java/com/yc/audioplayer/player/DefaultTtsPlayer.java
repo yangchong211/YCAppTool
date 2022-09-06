@@ -1,5 +1,6 @@
 package com.yc.audioplayer.player;
 
+import android.app.Application;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
@@ -39,7 +40,11 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
     private final OnCompleteListener mOnCompleteListener = new OnCompleteListener();
 
     public DefaultTtsPlayer(Context context) {
-        this.mContext = context;
+        if (context instanceof Application) {
+            mContext = context;
+        } else {
+            mContext = context.getApplicationContext();
+        }
     }
 
     @Override
