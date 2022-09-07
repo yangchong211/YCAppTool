@@ -1,8 +1,9 @@
 package com.yc.videosqllite;
 
 import com.yc.applrucache.SystemLruCache;
-import com.yc.videotool.VideoLogUtils;
-import com.yc.videotool.VideoMd5Utils;
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.encrypt.AppMd5Utils;
+
 
 /**
  * <pre>
@@ -30,16 +31,16 @@ public class SafeKeyGenerator {
         int hashCode = url.hashCode();
         synchronized (loadIdToSafeHash) {
             safeKey = loadIdToSafeHash.get(hashCode);
-            VideoLogUtils.d("SafeKeyGenerator-----获取缓存key-"+safeKey);
+            AppLogUtils.d("SafeKeyGenerator-----获取缓存key-"+safeKey);
         }
         if (safeKey == null || safeKey.length()==0) {
             CacheConfig cacheConfig = LocationManager.getInstance().getCacheConfig();
-            safeKey = VideoMd5Utils.encryptMD5ToString(url, cacheConfig.getSalt());
-            VideoLogUtils.d("SafeKeyGenerator-----md5转化key-"+safeKey);
+            safeKey = AppMd5Utils.encryptMD5ToString(url, cacheConfig.getSalt());
+            AppLogUtils.d("SafeKeyGenerator-----md5转化key-"+safeKey);
         }
         synchronized (loadIdToSafeHash) {
             loadIdToSafeHash.put(hashCode, safeKey);
-            VideoLogUtils.d("SafeKeyGenerator-----存储key-"+safeKey);
+            AppLogUtils.d("SafeKeyGenerator-----存储key-"+safeKey);
         }
         return safeKey;
     }

@@ -28,6 +28,8 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import com.yc.toolutils.AppLogUtils;
 import com.yc.video.R;
 import com.yc.video.config.ConstantKeys;
 import com.yc.video.config.VideoPlayerConfig;
@@ -42,7 +44,6 @@ import com.yc.video.tool.PlayerUtils;
 import com.yc.video.tool.VideoException;
 import com.yc.kernel.inter.VideoPlayerListener;
 import com.yc.kernel.utils.PlayerConstant;
-import com.yc.videotool.VideoLogUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -195,7 +196,7 @@ public class VideoPlayer<P extends AbstractVideoPlayer> extends FrameLayout
         mCurrentScreenScaleType = config.mScreenScaleType;
         mRenderViewFactory = config.mRenderViewFactory;
         //设置是否打印日志
-        VideoLogUtils.setIsLog(config.mIsEnableLog);
+        AppLogUtils.setShowLog(config.mIsEnableLog);
     }
 
     /**
@@ -213,7 +214,7 @@ public class VideoPlayer<P extends AbstractVideoPlayer> extends FrameLayout
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        VideoLogUtils.d("onAttachedToWindow");
+        AppLogUtils.d("onAttachedToWindow");
         //init();
         //在构造函数初始化时addView
     }
@@ -233,7 +234,7 @@ public class VideoPlayer<P extends AbstractVideoPlayer> extends FrameLayout
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        VideoLogUtils.d("onDetachedFromWindow");
+        AppLogUtils.d("onDetachedFromWindow");
         if (mVideoController!=null){
             mVideoController.destroy();
         }
@@ -271,7 +272,7 @@ public class VideoPlayer<P extends AbstractVideoPlayer> extends FrameLayout
      */
     @Override
     protected Parcelable onSaveInstanceState() {
-        VideoLogUtils.d("onSaveInstanceState: " + mCurrentPosition);
+        AppLogUtils.d("onSaveInstanceState: " + mCurrentPosition);
         //activity切到后台后可能被系统回收，故在此处进行进度保存
         saveProgress();
         return super.onSaveInstanceState();
@@ -555,7 +556,7 @@ public class VideoPlayer<P extends AbstractVideoPlayer> extends FrameLayout
      */
     protected void saveProgress() {
         if (mProgressManager != null && mCurrentPosition > 0) {
-            VideoLogUtils.d("saveProgress: " + mCurrentPosition);
+            AppLogUtils.d("saveProgress: " + mCurrentPosition);
             mProgressManager.saveProgress(mUrl, mCurrentPosition);
         }
     }
@@ -631,7 +632,7 @@ public class VideoPlayer<P extends AbstractVideoPlayer> extends FrameLayout
     public void seekTo(long pos) {
         long seek;
         if (pos<0){
-            VideoLogUtils.d("设置参数-------设置开始跳转播放位置不能小于0");
+            AppLogUtils.d("设置参数-------设置开始跳转播放位置不能小于0");
             seek = 0;
         } else {
             seek = pos;

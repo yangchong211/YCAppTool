@@ -19,8 +19,9 @@ import com.yc.music.service.PlayAudioService;
 import com.yc.music.tool.BaseAppHelper;
 import com.yc.music.tool.QuitTimerHelper;
 import com.yc.music.utils.NotificationHelper;
-import com.yc.videotool.VideoLogUtils;
-import com.yc.videotool.VideoSpUtils;
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppSpUtils;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -96,10 +97,10 @@ public class PlayAudioImpl implements InterPlayAudio {
         mPlayingPosition = position;
         AudioBean music = getPlayingMusic();
         String id = music.getId();
-        VideoLogUtils.e("PlayService"+"----id----"+ id);
+        AppLogUtils.e("PlayService"+"----id----"+ id);
         //保存当前播放的musicId，下次进来可以记录状态
         long musicId = Long.parseLong(id);
-        VideoSpUtils.getInstance(MusicConstants.SP_NAME).put(MusicConstants.MUSIC_ID,musicId);
+        AppSpUtils.getInstance(MusicConstants.SP_NAME).put(MusicConstants.MUSIC_ID,musicId);
         play(music);
     }
 
@@ -252,7 +253,7 @@ public class PlayAudioImpl implements InterPlayAudio {
         if (getAudioMusics().isEmpty()) {
             return;
         }
-        int playMode = VideoSpUtils.getInstance(MusicConstants.SP_NAME).getInt(MusicConstants.PLAY_MODE, 0);
+        int playMode = AppSpUtils.getInstance(MusicConstants.SP_NAME).getInt(MusicConstants.PLAY_MODE, 0);
         int size = getAudioMusics().size();
         PlayModeEnum mode = PlayModeEnum.valueOf(playMode);
         switch (mode) {
@@ -275,7 +276,7 @@ public class PlayAudioImpl implements InterPlayAudio {
                     // 如果是最后一首，则切换回第一首
                     mPlayingPosition = 0;
                 }
-                VideoLogUtils.e("PlayService"+"----mPlayingPosition----"+ mPlayingPosition);
+                AppLogUtils.e("PlayService"+"----mPlayingPosition----"+ mPlayingPosition);
                 play(mPlayingPosition);
                 break;
         }
@@ -287,7 +288,7 @@ public class PlayAudioImpl implements InterPlayAudio {
         if (getAudioMusics().isEmpty()) {
             return;
         }
-        int playMode = VideoSpUtils.getInstance(MusicConstants.SP_NAME).getInt(MusicConstants.PLAY_MODE, 0);
+        int playMode = AppSpUtils.getInstance(MusicConstants.SP_NAME).getInt(MusicConstants.PLAY_MODE, 0);
         int size = getAudioMusics().size();
         PlayModeEnum mode = PlayModeEnum.valueOf(playMode);
         switch (mode) {
@@ -442,7 +443,7 @@ public class PlayAudioImpl implements InterPlayAudio {
                 onPlayerEventListeners.get(i).onUpdateProgress(currentPosition);
             }
         }
-        VideoLogUtils.e("updatePlayProgressShow");
+        AppLogUtils.e("updatePlayProgressShow");
         // 每30毫秒更新一下显示的内容，注意这里时间不要太短，因为这个是一个循环
         // 经过测试，60毫秒更新一次有点卡，30毫秒最为顺畅
         QuitTimerHelper.getInstance().getHandler().sendEmptyMessageDelayed(UPDATE_PLAY_PROGRESS_SHOW, 300);
@@ -564,13 +565,13 @@ public class PlayAudioImpl implements InterPlayAudio {
      */
     public void updatePlayingPosition() {
         int position = 0;
-        long id = VideoSpUtils.getInstance(MusicConstants.SP_NAME).getLong(MusicConstants.MUSIC_ID,-1);
+        long id = AppSpUtils.getInstance(MusicConstants.SP_NAME).getLong(MusicConstants.MUSIC_ID,-1);
         if(getAudioMusics().isEmpty()){
             return;
         }
         for (int i = 0; i < getAudioMusics().size(); i++) {
             String musicId = getAudioMusics().get(i).getId();
-            VideoLogUtils.e("PlayService"+"----musicId----"+ musicId);
+            AppLogUtils.e("PlayService"+"----musicId----"+ musicId);
             if (Long.parseLong(musicId) == id) {
                 position = i;
                 break;
@@ -578,7 +579,7 @@ public class PlayAudioImpl implements InterPlayAudio {
         }
         mPlayingPosition = position;
         long musicId = Long.parseLong(getAudioMusics().get(mPlayingPosition).getId());
-        VideoSpUtils.getInstance(MusicConstants.SP_NAME).put(MusicConstants.MUSIC_ID,musicId);
+        AppSpUtils.getInstance(MusicConstants.SP_NAME).put(MusicConstants.MUSIC_ID,musicId);
     }
 
 

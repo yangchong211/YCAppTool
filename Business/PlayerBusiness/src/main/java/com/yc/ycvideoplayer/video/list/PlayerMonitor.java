@@ -5,7 +5,7 @@ import android.view.animation.Animation;
 
 import androidx.annotation.NonNull;
 
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import com.yc.video.bridge.ControlWrapper;
 import com.yc.video.inter.IControlView;
@@ -29,27 +29,27 @@ public class PlayerMonitor implements IControlView {
 
     @Override
     public void onVisibilityChanged(boolean isVisible, Animation anim) {
-        VideoLogUtils.d(TAG+ "---" +"onVisibilityChanged: " + isVisible);
+        AppLogUtils.d(TAG+ "---" +"onVisibilityChanged: " + isVisible);
     }
 
     @Override
     public void onPlayStateChanged(int playState) {
-        VideoLogUtils.d(TAG+ "---" +"onPlayStateChanged: " + PlayerUtils.playState2str(playState));
+        AppLogUtils.d(TAG+ "---" +"onPlayStateChanged: " + PlayerUtils.playState2str(playState));
     }
 
     @Override
     public void onPlayerStateChanged(int playerState) {
-        VideoLogUtils.d(TAG+ "---" +"onPlayerStateChanged: " + PlayerUtils.playerState2str(playerState));
+        AppLogUtils.d(TAG+ "---" +"onPlayerStateChanged: " + PlayerUtils.playerState2str(playerState));
     }
 
     @Override
     public void setProgress(int duration, int position) {
-        VideoLogUtils.d(TAG+ "---" +"setProgress: duration: " + duration + " position: " + position + " buffered percent: " + mControlWrapper.getBufferedPercentage());
-        VideoLogUtils.d(TAG+ "---" +"network speed: " + mControlWrapper.getTcpSpeed());
+        AppLogUtils.d(TAG+ "---" +"setProgress: duration: " + duration + " position: " + position + " buffered percent: " + mControlWrapper.getBufferedPercentage());
+        AppLogUtils.d(TAG+ "---" +"network speed: " + mControlWrapper.getTcpSpeed());
     }
 
     @Override
     public void onLockStateChanged(boolean isLocked) {
-        VideoLogUtils.d(TAG+ "---" +"onLockStateChanged: " + isLocked);
+        AppLogUtils.d(TAG+ "---" +"onLockStateChanged: " + isLocked);
     }
 }

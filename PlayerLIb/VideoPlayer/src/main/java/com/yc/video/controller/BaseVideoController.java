@@ -31,6 +31,7 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.yc.toolutils.AppLogUtils;
 import com.yc.video.bridge.ControlWrapper;
 import com.yc.video.config.ConstantKeys;
 import com.yc.video.inter.IVideoController;
@@ -42,9 +43,6 @@ import com.yc.video.tool.StatesCutoutUtils;
 import com.yc.video.tool.NetworkUtils;
 import com.yc.video.tool.PlayerUtils;
 import com.yc.video.inter.IControlView;
-
-import com.yc.videotool.VideoLogUtils;
-
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -440,7 +438,7 @@ public abstract class BaseVideoController extends FrameLayout implements IVideoC
                 mCutoutHeight = (int) PlayerUtils.getStatusBarHeightPortrait(mActivity);
             }
         }
-        VideoLogUtils.d("hasCutout: " + mHasCutout + " cutout height: " + mCutoutHeight);
+        AppLogUtils.d("hasCutout: " + mHasCutout + " cutout height: " + mCutoutHeight);
     }
 
     /**

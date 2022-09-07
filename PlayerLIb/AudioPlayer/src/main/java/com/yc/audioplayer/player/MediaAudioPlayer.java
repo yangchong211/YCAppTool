@@ -7,10 +7,11 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 
+import com.yc.audioplayer.bean.TtsPlayerConfig;
+import com.yc.audioplayer.service.AudioService;
 import com.yc.audioplayer.wrapper.AbstractAudioWrapper;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.InterPlayListener;
-import com.yc.videotool.VideoLogUtils;
 
 
 /**
@@ -49,7 +50,8 @@ public class MediaAudioPlayer extends AbstractAudioWrapper {
      */
     @Override
     public void play(AudioPlayData data) {
-        VideoLogUtils.d("MediaPlay: play resourceId is" + data.getRawId());
+        TtsPlayerConfig config = AudioService.getInstance().getConfig();
+        config.getLogger().log("MediaPlay: play resourceId is" + data.getRawId());
         if (data.getRawId() <= 0) {
             return;
         }
@@ -73,7 +75,7 @@ public class MediaAudioPlayer extends AbstractAudioWrapper {
                 });
                 mMediaPlayer.prepare();
             } catch (Throwable e) {
-                VideoLogUtils.d("MediaPlay: play fail");
+                config.getLogger().error("MediaPlay: play fail " + e.getMessage());
                 onError("MediaPlayer has play fail : " + e.getMessage());
                 onCompleted();
             }

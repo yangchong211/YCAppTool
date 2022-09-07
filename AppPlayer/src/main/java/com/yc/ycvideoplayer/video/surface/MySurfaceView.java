@@ -12,7 +12,7 @@ import android.view.SurfaceView;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import com.yc.ycvideoplayer.R;
 
@@ -134,7 +134,7 @@ public class MySurfaceView extends SurfaceView implements Runnable, SurfaceHolde
                             m_circle_r, paint);
                 }
             }
-            VideoLogUtils.e("MySurfaceView-----Draw");
+            AppLogUtils.e("MySurfaceView-----Draw");
             System.out.println("MySurfaceView-----Draw");
             // 完成画画，把画布显示在屏幕上
             mHolder.unlockCanvasAndPost(mCanvas);
@@ -145,14 +145,14 @@ public class MySurfaceView extends SurfaceView implements Runnable, SurfaceHolde
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        VideoLogUtils.e("MySurfaceView-----onDraw");
+        AppLogUtils.e("MySurfaceView-----onDraw");
         System.out.println("MySurfaceView-----onDraw");
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        VideoLogUtils.e("MySurfaceView-----draw");
+        AppLogUtils.e("MySurfaceView-----draw");
         System.out.println("MySurfaceView-----draw");
     }
 }

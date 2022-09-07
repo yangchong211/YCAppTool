@@ -6,10 +6,11 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 
 
+import com.yc.audioplayer.bean.TtsPlayerConfig;
+import com.yc.audioplayer.service.AudioService;
 import com.yc.audioplayer.wrapper.AbstractAudioWrapper;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.InterPlayListener;
-import com.yc.videotool.VideoLogUtils;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -73,14 +74,15 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
 
     @Override
     public void onInit(final int status) {
+        TtsPlayerConfig config = AudioService.getInstance().getConfig();
         try {
             if (!mReady && (TextToSpeech.SUCCESS == status) && this.mTts != null) {
-                VideoLogUtils.i("Initialize TTS success");
+                config.getLogger().log("Initialize TTS success");
                 //获取locale
                 final Locale locale = mContext.getApplicationContext()
                         .getResources().getConfiguration().locale;
                 if (locale != null) {
-                    VideoLogUtils.i("tts isLanguageAvailable " + mTts.isLanguageAvailable(locale) +
+                    config.getLogger().log("tts isLanguageAvailable " + mTts.isLanguageAvailable(locale) +
                             "; variant is " + locale.getVariant() +
                             "; locale is " + locale + " ; country  is " + locale.getCountry());
                 }
@@ -88,32 +90,32 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
                 int setLanguage = this.mTts.setLanguage(null != locale ? locale : Locale.getDefault());
                 switch (setLanguage) {
                     case TextToSpeech.LANG_MISSING_DATA:
-                        VideoLogUtils.i("TTS set language: Language missing data");
+                        config.getLogger().log("TTS set language: Language missing data");
                         break;
                     case TextToSpeech.LANG_NOT_SUPPORTED:
-                        VideoLogUtils.i("TTS set language: Language not supported");
+                        config.getLogger().log("TTS set language: Language not supported");
                         break;
                     case TextToSpeech.LANG_AVAILABLE:
-                        VideoLogUtils.i("TTS set language: Language available");
+                        config.getLogger().log("TTS set language: Language available");
                         break;
                     case TextToSpeech.LANG_COUNTRY_AVAILABLE:
-                        VideoLogUtils.i("TTS set language: Language country available");
+                        config.getLogger().log("TTS set language: Language country available");
                         break;
                     case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
-                        VideoLogUtils.i("TTS set language: Language country var available");
+                        config.getLogger().log("TTS set language: Language country var available");
                         break;
                     default:
-                        VideoLogUtils.i("TTS set language: Unknown error");
+                        config.getLogger().log("TTS set language: Unknown error");
                         break;
                 }
             } else if (TextToSpeech.ERROR == status) {
-                VideoLogUtils.i("Initialize TTS error");
+                config.getLogger().log("Initialize TTS error");
             } else {
-                VideoLogUtils.i("Initialize TTS error");
+                config.getLogger().log("Initialize TTS error");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            VideoLogUtils.i(e.getMessage());
+            config.getLogger().log(e.getMessage());
         }
     }
 
@@ -175,7 +177,8 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
          */
         @Override
         public void onDone(final String utteranceId) {
-            VideoLogUtils.i("TTSPlayer OnCompleteListener onDone");
+            TtsPlayerConfig config = AudioService.getInstance().getConfig();
+            config.getLogger().log("TTSPlayer OnCompleteListener onDone");
             onCompleted();
         }
 
@@ -186,7 +189,8 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
          */
         @Override
         public void onError(final String utteranceId) {
-            VideoLogUtils.i("TTSPlayer OnCompleteListener onError");
+            TtsPlayerConfig config = AudioService.getInstance().getConfig();
+            config.getLogger().log("TTSPlayer OnCompleteListener onError");
             stop();
             onError("TTSPlayer has play fail : " + utteranceId);
             onCompleted();

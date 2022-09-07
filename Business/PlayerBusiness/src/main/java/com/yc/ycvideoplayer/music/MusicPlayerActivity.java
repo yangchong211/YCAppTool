@@ -21,7 +21,7 @@ import com.yc.music.model.AudioBean;
 import com.yc.music.service.PlayAudioService;
 import com.yc.music.tool.BaseAppHelper;
 import com.yc.music.tool.CoverLoader;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.ycvideoplayer.R;
 import com.yc.ycvideoplayer.video.list.OnItemClickListener;
 
@@ -114,7 +114,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
                 @Override
                 protected void onPostExecute(List<AudioBean> musicList) {
                     //然后添加所有扫描到的音乐
-                    VideoLogUtils.d("onPostExecute" + musicList.size());
+                    AppLogUtils.d("onPostExecute" + musicList.size());
                     BaseAppHelper.get().setMusicList(musicList);
                     List<AudioBean> netMusic = new ArrayList<>();
                     AudioBean audioBean1 = new AudioBean();
@@ -196,7 +196,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
              */
             @Override
             public void onChange(AudioBean music) {
-                VideoLogUtils.d("OnPlayerEventListener   onChange ");
+                AppLogUtils.d("OnPlayerEventListener   onChange ");
                 onChangeImpl(music);
                 if (mPlayFragment!=null){
                     mPlayFragment.onChange(music);
@@ -209,7 +209,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
              */
             @Override
             public void onPlayerStart() {
-                VideoLogUtils.d("OnPlayerEventListener   onPlayerStart ");
+                AppLogUtils.d("OnPlayerEventListener   onPlayerStart ");
                 mIvPlayBarPlay.setSelected(true);
                 if (mPlayFragment!=null){
                     mPlayFragment.onPlayerStart();
@@ -222,7 +222,7 @@ public class MusicPlayerActivity extends AppCompatActivity implements View.OnCli
              */
             @Override
             public void onPlayerPause() {
-                VideoLogUtils.d("OnPlayerEventListener   onPlayerPause ");
+                AppLogUtils.d("OnPlayerEventListener   onPlayerPause ");
                 mIvPlayBarPlay.setSelected(false);
                 if (mPlayFragment!=null){
                     mPlayFragment.onPlayerPause();

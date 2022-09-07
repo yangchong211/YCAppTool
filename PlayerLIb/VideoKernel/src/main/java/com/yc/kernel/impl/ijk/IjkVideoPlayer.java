@@ -30,7 +30,7 @@ import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.kernel.inter.AbstractVideoPlayer;
 import com.yc.kernel.inter.VideoPlayerListener;
 import com.yc.kernel.utils.PlayerConstant;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.Map;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
@@ -64,7 +64,7 @@ public class IjkVideoPlayer extends AbstractVideoPlayer {
     public void initPlayer() {
         mMediaPlayer = new IjkMediaPlayer();
         //native日志
-        IjkMediaPlayer.native_setLogLevel(VideoLogUtils.isIsLog()
+        IjkMediaPlayer.native_setLogLevel(AppLogUtils.isShowLog()
                 ? IjkMediaPlayer.IJK_LOG_INFO : IjkMediaPlayer.IJK_LOG_SILENT);
         setOptions();
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -404,7 +404,7 @@ public class IjkVideoPlayer extends AbstractVideoPlayer {
         @Override
         public boolean onError(IMediaPlayer iMediaPlayer, int framework_err, int impl_err) {
             mPlayerEventListener.onError(PlayerConstant.ErrorType.TYPE_UNEXPECTED,"监听异常"+ framework_err + ", extra: " + impl_err);
-            VideoLogUtils.d("IjkVideoPlayer----listener---------onError ——> STATE_ERROR ———— what：" + framework_err + ", extra: " + impl_err);
+            AppLogUtils.d("IjkVideoPlayer----listener---------onError ——> STATE_ERROR ———— what：" + framework_err + ", extra: " + impl_err);
             return true;
         }
     };
@@ -416,7 +416,7 @@ public class IjkVideoPlayer extends AbstractVideoPlayer {
         @Override
         public void onCompletion(IMediaPlayer iMediaPlayer) {
             mPlayerEventListener.onCompletion();
-            VideoLogUtils.d("IjkVideoPlayer----listener---------onCompletion ——> STATE_COMPLETED");
+            AppLogUtils.d("IjkVideoPlayer----listener---------onCompletion ——> STATE_COMPLETED");
         }
     };
 
@@ -428,7 +428,7 @@ public class IjkVideoPlayer extends AbstractVideoPlayer {
         @Override
         public boolean onInfo(IMediaPlayer iMediaPlayer, int what, int extra) {
             mPlayerEventListener.onInfo(what, extra);
-            VideoLogUtils.d("IjkVideoPlayer----listener---------onInfo ——> ———— what：" + what + ", extra: " + extra);
+            AppLogUtils.d("IjkVideoPlayer----listener---------onInfo ——> ———— what：" + what + ", extra: " + extra);
             return true;
         }
     };
@@ -451,7 +451,7 @@ public class IjkVideoPlayer extends AbstractVideoPlayer {
         @Override
         public void onPrepared(IMediaPlayer iMediaPlayer) {
             mPlayerEventListener.onPrepared();
-            VideoLogUtils.d("IjkVideoPlayer----listener---------onPrepared ——> STATE_PREPARED");
+            AppLogUtils.d("IjkVideoPlayer----listener---------onPrepared ——> STATE_PREPARED");
         }
     };
 
@@ -467,7 +467,7 @@ public class IjkVideoPlayer extends AbstractVideoPlayer {
             if (videoWidth != 0 && videoHeight != 0) {
                 mPlayerEventListener.onVideoSizeChanged(videoWidth, videoHeight);
             }
-            VideoLogUtils.d("IjkVideoPlayer----listener---------onVideoSizeChanged ——> WIDTH：" + width + "， HEIGHT：" + height);
+            AppLogUtils.d("IjkVideoPlayer----listener---------onVideoSizeChanged ——> WIDTH：" + width + "， HEIGHT：" + height);
         }
     };
 

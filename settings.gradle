@@ -240,10 +240,9 @@ project(':MonitorPhone').projectDir = new File('MonitorLib/MonitorPhone')
 
 
 /* +++++++++ 音视频 +++++++++ */
-include ':VideoSqlLite',':VideoTool',':VideoCache',':AudioPlayer',
+include ':VideoSqlLite',':VideoCache',':AudioPlayer',
         ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView'
 project(':VideoSqlLite').projectDir = new File('PlayerLib/VideoSqlLite')
-project(':VideoTool').projectDir = new File('PlayerLib/VideoTool')
 project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
 project(':AudioPlayer').projectDir = new File('PlayerLib/AudioPlayer')
 project(':MusicPlayer').projectDir = new File('PlayerLib/MusicPlayer')

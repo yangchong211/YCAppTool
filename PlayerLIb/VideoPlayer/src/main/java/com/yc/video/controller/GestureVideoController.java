@@ -28,7 +28,7 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.video.config.ConstantKeys;
 import com.yc.video.tool.PlayerUtils;
 import com.yc.video.inter.IControlView;
@@ -370,7 +370,7 @@ public abstract class GestureVideoController extends BaseVideoController impleme
      */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        VideoLogUtils.e("事件----------事件拦截----------");
+        AppLogUtils.e("事件----------事件拦截----------");
         return super.onInterceptTouchEvent(ev);
     }
 
@@ -384,7 +384,7 @@ public abstract class GestureVideoController extends BaseVideoController impleme
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        VideoLogUtils.e("事件----------事件分发----------");
+        AppLogUtils.e("事件----------事件分发----------");
         return super.dispatchTouchEvent(ev);
     }
 
@@ -395,7 +395,7 @@ public abstract class GestureVideoController extends BaseVideoController impleme
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        VideoLogUtils.e("事件----------事件触摸----------");
+        AppLogUtils.e("事件----------事件触摸----------");
         //滑动结束时事件处理
         if (!mGestureDetector.onTouchEvent(event)) {
             int action = event.getAction();

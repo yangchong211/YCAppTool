@@ -17,7 +17,7 @@ import com.yc.video.config.VideoPlayerConfig;
 import com.yc.video.player.VideoViewManager;
 import com.yc.videosqllite.CacheConfig;
 import com.yc.videosqllite.LocationManager;
-import com.yc.videotool.VideoSpUtils;
+import com.yc.videotool.AppSpUtils;
 
 /**
  * ================================================
@@ -72,7 +72,7 @@ public class BaseApplication extends Application {
                 //创建SurfaceView
                 //.setRenderViewFactory(SurfaceViewFactory.create())
                 .build());
-        VideoSpUtils.init(this);
+        AppSpUtils.init(this);
 
         initVideoCache();
         BaseAppHelper.get().setContext(this);

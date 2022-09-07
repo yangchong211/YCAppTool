@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import com.yc.music.config.MusicPlayAction;
 import com.yc.music.service.PlayAudioService;
 import com.yc.music.tool.BaseAppHelper;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 
 public class NotificationStatusBarReceiver extends BroadcastReceiver {
@@ -25,21 +25,21 @@ public class NotificationStatusBarReceiver extends BroadcastReceiver {
         String extra = intent.getStringExtra(EXTRA);
         if (TextUtils.equals(extra, MusicPlayAction.TYPE_NEXT)) {
             PlayAudioService.startCommand(context, MusicPlayAction.TYPE_NEXT);
-            VideoLogUtils.e("NotifiyStatusBarReceiver"+"下一首");
+            AppLogUtils.e("NotifiyStatusBarReceiver"+"下一首");
         } else if (TextUtils.equals(extra, MusicPlayAction.TYPE_START_PAUSE)) {
             if(BaseAppHelper.get().getMusicService()!=null){
                 boolean playing = BaseAppHelper.get().getMusicService().isPlaying();
                 if(playing){
-                    VideoLogUtils.e("NotifiyStatusBarReceiver"+"暂停");
+                    AppLogUtils.e("NotifiyStatusBarReceiver"+"暂停");
                 }else {
-                    VideoLogUtils.e("NotifiyStatusBarReceiver"+"播放");
+                    AppLogUtils.e("NotifiyStatusBarReceiver"+"播放");
                 }
                 PlayAudioService.startCommand(context, MusicPlayAction.TYPE_START_PAUSE);
             }
 
         }else if(TextUtils.equals(extra, MusicPlayAction.TYPE_PRE)){
             PlayAudioService.startCommand(context, MusicPlayAction.TYPE_PRE);
-            VideoLogUtils.e("NotifiyStatusBarReceiver"+"上一首");
+            AppLogUtils.e("NotifiyStatusBarReceiver"+"上一首");
         }
     }
 }

@@ -16,24 +16,20 @@ import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.RenderersFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.analytics.AnalyticsCollector;
-import com.google.android.exoplayer2.analytics.PlaybackStatsListener;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.MediaSourceEventListener;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultLoadErrorHandlingPolicy;
-import com.google.android.exoplayer2.upstream.LoadErrorHandlingPolicy;
 import com.google.android.exoplayer2.util.Clock;
 import com.google.android.exoplayer2.util.Util;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.kernel.inter.AbstractVideoPlayer;
 import com.yc.kernel.inter.VideoPlayerListener;
 import com.yc.kernel.utils.PlayerConstant;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
-import java.io.IOException;
 import java.util.Map;
 
 import static com.google.android.exoplayer2.ExoPlaybackException.TYPE_SOURCE;
@@ -120,7 +116,7 @@ public class ExoMediaPlayer extends AbstractVideoPlayer {
      * exo视频播放器监听listener
      */
     private void initListener() {
-        if (VideoLogUtils.isIsLog() && mTrackSelector instanceof MappingTrackSelector) {
+        if (AppLogUtils.isShowLog() && mTrackSelector instanceof MappingTrackSelector) {
             //设置使用分析监听器
             mAnalyticsListener = new DefaultAnalyticsListener(
                     (MappingTrackSelector) mTrackSelector);

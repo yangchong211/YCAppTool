@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.yc.statusbar.bar.StateAppBar;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import com.yc.ycvideoplayer.ConstantVideo;
 import com.yc.ycvideoplayer.R;
@@ -223,7 +223,7 @@ public class TikTok2Activity extends AppCompatActivity {
 
                 VideoInfoBean tiktokBean = mVideoList.get(position);
                 String playUrl = mPreloadManager.getPlayUrl(tiktokBean.getVideoUrl());
-                VideoLogUtils.i("startPlay: " + "position: " + position + "  url: " + playUrl);
+                AppLogUtils.i("startPlay: " + "position: " + position + "  url: " + playUrl);
                 mVideoPlayer.setUrl(playUrl);
                 mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_16_9);
                 mController.addControlComponent(viewHolder.mTikTokView, true);

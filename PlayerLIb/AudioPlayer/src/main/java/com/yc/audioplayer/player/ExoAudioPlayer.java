@@ -9,9 +9,10 @@ import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.util.Util;
 import com.yc.audioplayer.bean.AudioPlayData;
+import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.inter.InterPlayListener;
+import com.yc.audioplayer.service.AudioService;
 import com.yc.audioplayer.wrapper.AbstractAudioWrapper;
-import com.yc.videotool.VideoLogUtils;
 
 
 /**
@@ -52,7 +53,8 @@ public class ExoAudioPlayer extends AbstractAudioWrapper {
      */
     @Override
     public void play(AudioPlayData data) {
-        VideoLogUtils.d("MediaPlay: play resourceId is" + data.getTts());
+        TtsPlayerConfig config = AudioService.getInstance().getConfig();
+        config.getLogger().log("MediaPlay: play resourceId is" + data.getTts());
         String tts = data.getTts();
         if (tts==null || tts.length()==0 || !tts.startsWith("http")) {
             return;

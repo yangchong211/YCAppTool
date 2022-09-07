@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import com.yc.ycvideoplayer.R;
 
@@ -98,24 +98,24 @@ public class TikTokView extends FrameLayout implements IControlView {
     public void onPlayStateChanged(int playState) {
         switch (playState) {
             case ConstantKeys.CurrentState.STATE_IDLE:
-                VideoLogUtils.e("STATE_IDLE " + hashCode());
+                AppLogUtils.e("STATE_IDLE " + hashCode());
                 thumb.setVisibility(VISIBLE);
                 break;
             case ConstantKeys.CurrentState.STATE_PLAYING:
-                VideoLogUtils.e("STATE_PLAYING " + hashCode());
+                AppLogUtils.e("STATE_PLAYING " + hashCode());
                 thumb.setVisibility(GONE);
                 mPlayBtn.setVisibility(GONE);
                 break;
             case ConstantKeys.CurrentState.STATE_PAUSED:
-                VideoLogUtils.e("STATE_PAUSED " + hashCode());
+                AppLogUtils.e("STATE_PAUSED " + hashCode());
                 thumb.setVisibility(GONE);
                 mPlayBtn.setVisibility(VISIBLE);
                 break;
             case ConstantKeys.CurrentState.STATE_PREPARED:
-                VideoLogUtils.e("STATE_PREPARED " + hashCode());
+                AppLogUtils.e("STATE_PREPARED " + hashCode());
                 break;
             case ConstantKeys.CurrentState.STATE_ERROR:
-                VideoLogUtils.e("STATE_ERROR " + hashCode());
+                AppLogUtils.e("STATE_ERROR " + hashCode());
                 Toast.makeText(getContext(), R.string.error_message, Toast.LENGTH_SHORT).show();
                 break;
         }

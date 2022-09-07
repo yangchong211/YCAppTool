@@ -23,10 +23,10 @@ import androidx.annotation.Nullable;
 import com.yc.kernel.factory.PlayerFactory;
 import com.yc.kernel.factory.MediaPlayerFactory;
 
+import com.yc.toolutils.AppLogUtils;
 import com.yc.video.player.ProgressManager;
 import com.yc.video.surface.SurfaceFactory;
 import com.yc.video.surface.TextureViewFactory;
-import com.yc.videotool.VideoLogUtils;
 
 
 /**
@@ -244,7 +244,7 @@ public final class VideoPlayerConfig {
         mContext = builder.mContext;
         mIsShowToast = builder.mIsShowToast;
         mShowToastTime = builder.mShowToastTime;
-        VideoLogUtils.setIsLog(mIsEnableLog);
+        AppLogUtils.setShowLog(mIsEnableLog);
     }
 
 

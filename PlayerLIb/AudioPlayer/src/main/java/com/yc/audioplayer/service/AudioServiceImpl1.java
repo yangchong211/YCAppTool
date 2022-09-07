@@ -6,7 +6,6 @@ import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.dispatch.AudioTaskDispatcher;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.manager.AudioManager;
-import com.yc.videotool.VideoLogUtils;
 
 /**
  * <pre>
@@ -84,7 +83,8 @@ public class AudioServiceImpl1 implements AudioServiceProvider {
             return;
         }
         if (!mReady) {
-            VideoLogUtils.d("audio not init!");
+            TtsPlayerConfig config = AudioService.getInstance().getConfig();
+            config.getLogger().log("audio not init!");
             return;
         }
         //将播放内容任务添加到分发器中

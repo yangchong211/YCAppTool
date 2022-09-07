@@ -9,7 +9,6 @@ import com.yc.audioplayer.service.AudioService;
 import com.yc.audioplayer.wrapper.AbstractAudioWrapper;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.InterPlayListener;
-import com.yc.videotool.VideoLogUtils;
 
 
 /**
@@ -64,7 +63,8 @@ public class AudioTaskDispatcher implements InterPlayListener {
         //创建tts消息队列
         this.mTaskDeque = new AudioTtsDeque();
         this.mRunning = true;
-        VideoLogUtils.d("AudioTaskDispatcher initialize: ");
+        TtsPlayerConfig config = AudioService.getInstance().getConfig();
+        config.getLogger().log("AudioTaskDispatcher initialize: ");
         this.mTtsThread = new Thread() {
             @Override
             public void run() {

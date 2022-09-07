@@ -1,6 +1,6 @@
 package com.yc.ycvideoplayer;
 
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import com.yc.video.config.BuriedPointEvent;
 import com.yc.videosqllite.LocationManager;
@@ -14,7 +14,7 @@ public class BuriedPointEventImpl implements BuriedPointEvent {
      */
     @Override
     public void playerIn(String url) {
-        VideoLogUtils.i("BuriedPointEvent---进入视频播放--"+url);
+        AppLogUtils.i("BuriedPointEvent---进入视频播放--"+url);
     }
 
     /**
@@ -23,7 +23,7 @@ public class BuriedPointEventImpl implements BuriedPointEvent {
      */
     @Override
     public void playerDestroy(String url) {
-        VideoLogUtils.i("BuriedPointEvent---退出视频播放--"+url);
+        AppLogUtils.i("BuriedPointEvent---退出视频播放--"+url);
     }
 
     /**
@@ -32,7 +32,7 @@ public class BuriedPointEventImpl implements BuriedPointEvent {
      */
     @Override
     public void playerCompletion(String url) {
-        VideoLogUtils.i("BuriedPointEvent---视频播放完成--"+url);
+        AppLogUtils.i("BuriedPointEvent---视频播放完成--"+url);
     }
 
     /**
@@ -42,7 +42,7 @@ public class BuriedPointEventImpl implements BuriedPointEvent {
      */
     @Override
     public void onError(String url, boolean isNetError) {
-        VideoLogUtils.i("BuriedPointEvent---视频播放异常--"+url);
+        AppLogUtils.i("BuriedPointEvent---视频播放异常--"+url);
     }
 
     /**
@@ -51,7 +51,7 @@ public class BuriedPointEventImpl implements BuriedPointEvent {
      */
     @Override
     public void clickAd(String url) {
-        VideoLogUtils.i("BuriedPointEvent---点击了视频广告--"+url);
+        AppLogUtils.i("BuriedPointEvent---点击了视频广告--"+url);
     }
 
     /**
@@ -60,7 +60,7 @@ public class BuriedPointEventImpl implements BuriedPointEvent {
      */
     @Override
     public void playerAndProved(String url) {
-        VideoLogUtils.i("BuriedPointEvent---视频试看点击--"+url);
+        AppLogUtils.i("BuriedPointEvent---视频试看点击--"+url);
     }
 
     /**
@@ -70,7 +70,7 @@ public class BuriedPointEventImpl implements BuriedPointEvent {
      */
     @Override
     public void playerOutProgress(String url, float progress) {
-        VideoLogUtils.i("BuriedPointEvent---退出视频播放时候的播放进度百度比--"+url+"-----"+progress);
+        AppLogUtils.i("BuriedPointEvent---退出视频播放时候的播放进度百度比--"+url+"-----"+progress);
     }
 
     /**
@@ -81,7 +81,7 @@ public class BuriedPointEventImpl implements BuriedPointEvent {
      */
     @Override
     public void playerOutProgress(String url, long duration, long currentPosition) {
-        VideoLogUtils.i("BuriedPointEvent---退出视频播放时候的播放进度百度比--"+url+"-----"+duration+"----"+currentPosition);
+        AppLogUtils.i("BuriedPointEvent---退出视频播放时候的播放进度百度比--"+url+"-----"+duration+"----"+currentPosition);
         VideoLocation location = new VideoLocation(url,currentPosition,duration);
         LocationManager.getInstance().put(url,location);
     }
@@ -92,6 +92,6 @@ public class BuriedPointEventImpl implements BuriedPointEvent {
      */
     @Override
     public void videoToMedia(String url) {
-        VideoLogUtils.i("BuriedPointEvent---视频切换音频--"+url);
+        AppLogUtils.i("BuriedPointEvent---视频切换音频--"+url);
     }
 }

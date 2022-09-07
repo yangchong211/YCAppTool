@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 
 import com.yc.applrudisk.DiskCacheWriteLocker;
 import com.yc.applrudisk.DiskLruCache;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,7 +70,7 @@ public class DiskLruCacheWrapper implements InterDiskCache {
                 result = value.getString(0);
             }
         } catch (IOException e) {
-            VideoLogUtils.d("DiskLruCacheWrapper-----Unable to get from disk cache-"+e);
+            AppLogUtils.d("DiskLruCacheWrapper-----Unable to get from disk cache-"+e);
         } finally {
             try {
                 getDiskCache().flush();
@@ -86,7 +86,7 @@ public class DiskLruCacheWrapper implements InterDiskCache {
         String safeKey = safeKeyGenerator.getSafeKey(key);
         writeLocker.acquire(safeKey);
         try {
-            VideoLogUtils.d("DiskLruCacheWrapper-----Put: Obtained:"+ safeKey + " for for Key: " + key);
+            AppLogUtils.d("DiskLruCacheWrapper-----Put: Obtained:"+ safeKey + " for for Key: " + key);
             try {
                 DiskLruCache diskCache = getDiskCache();
                 DiskLruCache.Value current = diskCache.get(safeKey);
@@ -104,7 +104,7 @@ public class DiskLruCacheWrapper implements InterDiskCache {
                     editor.abortUnlessCommitted();
                 }
             } catch (IOException e) {
-                VideoLogUtils.d("DiskLruCacheWrapper-----Unable to put from disk cache-"+e);
+                AppLogUtils.d("DiskLruCacheWrapper-----Unable to put from disk cache-"+e);
             } finally {
                 try {
                     getDiskCache().flush();
@@ -124,7 +124,7 @@ public class DiskLruCacheWrapper implements InterDiskCache {
         try {
             isRemove = getDiskCache().remove(safeKey);
         } catch (IOException e) {
-            VideoLogUtils.d("DiskLruCacheWrapper-----Unable to delete from disk cache-"+e);
+            AppLogUtils.d("DiskLruCacheWrapper-----Unable to delete from disk cache-"+e);
             isRemove = false;
         } finally {
             try {
@@ -149,7 +149,7 @@ public class DiskLruCacheWrapper implements InterDiskCache {
                 }
             }
         } catch (IOException e) {
-            VideoLogUtils.d("DiskLruCacheWrapper-----Unable to get from disk cache-"+e);
+            AppLogUtils.d("DiskLruCacheWrapper-----Unable to get from disk cache-"+e);
         } finally {
             try {
                 getDiskCache().flush();
@@ -165,7 +165,7 @@ public class DiskLruCacheWrapper implements InterDiskCache {
         try {
             getDiskCache().delete();
         } catch (IOException e) {
-            VideoLogUtils.d("DiskLruCacheWrapper-----Unable to clear disk cache or disk cache cleared externally-"+e);
+            AppLogUtils.d("DiskLruCacheWrapper-----Unable to clear disk cache or disk cache cleared externally-"+e);
         } finally {
             try {
                 getDiskCache().flush();

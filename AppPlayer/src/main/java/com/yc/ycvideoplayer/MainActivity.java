@@ -23,7 +23,7 @@ import com.yc.music.service.PlayAudioService;
 import com.yc.music.tool.BaseAppHelper;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.videoview.FloatWindow;
 import com.yc.videoview.tool.FloatMoveType;
 import com.yc.videoview.tool.FloatScreenType;
@@ -255,14 +255,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static class PlayServiceConnection implements ServiceConnection {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            VideoLogUtils.e("onServiceConnected"+name);
+            AppLogUtils.e("onServiceConnected"+name);
             final PlayAudioService playService = (PlayAudioService) ((PlayAudioService.PlayBinder) service).getService();
             BaseAppHelper.get().setPlayService(playService);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            VideoLogUtils.e("onServiceDisconnected"+name);
+            AppLogUtils.e("onServiceDisconnected"+name);
         }
     }
 

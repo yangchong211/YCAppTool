@@ -1,6 +1,7 @@
 package com.yc.videosqllite;
 
-import com.yc.videotool.VideoLogUtils;
+
+import com.yc.toolutils.AppLogUtils;
 
 /**
  * <pre>
@@ -50,10 +51,10 @@ public class LocationManager {
 
     public void init(CacheConfig cacheConfig){
         this.cacheConfig = cacheConfig;
-        VideoLogUtils.setIsLog(cacheConfig.isLog());
+        AppLogUtils.setShowLog(cacheConfig.isLog());
         videoMapCache = new VideoMapCache();
         sqlLiteCache = new SqlLiteCache();
-        VideoLogUtils.d("LocationManager-----init初始化-");
+        AppLogUtils.d("LocationManager-----init初始化-");
     }
 
     public CacheConfig getCacheConfig() {
@@ -100,7 +101,7 @@ public class LocationManager {
             videoMapCache.put(url,location);
         }
         long currentTimeMillis2 = System.currentTimeMillis();
-        VideoLogUtils.d("LocationManager-----put--存数据耗时-"+(currentTimeMillis2-currentTimeMillis1));
+        AppLogUtils.d("LocationManager-----put--存数据耗时-"+(currentTimeMillis2-currentTimeMillis1));
     }
 
     /**
@@ -141,7 +142,7 @@ public class LocationManager {
             position = videoMapCache.get(url);
         }
         long currentTimeMillis2 = System.currentTimeMillis();
-        VideoLogUtils.d("LocationManager-----get--取数据耗时-"+(currentTimeMillis2-currentTimeMillis1)
+        AppLogUtils.d("LocationManager-----get--取数据耗时-"+(currentTimeMillis2-currentTimeMillis1)
                 + "---进度-"+position);
         return position;
     }

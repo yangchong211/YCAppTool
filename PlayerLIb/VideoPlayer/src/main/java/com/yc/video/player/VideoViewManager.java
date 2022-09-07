@@ -17,7 +17,7 @@ package com.yc.video.player;
 
 import android.app.Application;
 
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.video.config.VideoPlayerConfig;
 
 import java.util.LinkedHashMap;
@@ -106,7 +106,7 @@ public class VideoViewManager {
      */
     public void add(VideoPlayer videoView, String tag) {
         if (!(videoView.getContext() instanceof Application)) {
-            VideoLogUtils.i("The Context of this VideoView is not an Application Context," +
+            AppLogUtils.i("The Context of this VideoView is not an Application Context," +
                     "you must remove it after release,or it will lead to memory leek.");
         }
         VideoPlayer old = get(tag);

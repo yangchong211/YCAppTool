@@ -1,7 +1,7 @@
 package com.yc.videosqllite;
 
 import com.yc.applrudisk.DiskHelperUtils;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.File;
 
@@ -23,7 +23,7 @@ public class SqlLiteCache {
         CacheConfig cacheConfig = LocationManager.getInstance().getCacheConfig();
         File path = new File(DiskHelperUtils.getBaseCachePath());
         String pathString = path.getPath();
-        VideoLogUtils.d("SqlLiteCache-----pathString路径输出地址-"+pathString);
+        AppLogUtils.d("SqlLiteCache-----pathString路径输出地址-"+pathString);
         this.safeKeyGenerator = new SafeKeyGenerator();
         interDiskCache = DiskLruCacheWrapper.get(path,safeKeyGenerator);
     }
@@ -40,7 +40,7 @@ public class SqlLiteCache {
         String safeKey = safeKeyGenerator.getSafeKey(url);
         location.setUrlMd5(safeKey);
         String json = location.toJson();
-        VideoLogUtils.d("SqlLiteCache-----put--json--"+json);
+        AppLogUtils.d("SqlLiteCache-----put--json--"+json);
         interDiskCache.put(url,json);
     }
 
@@ -54,7 +54,7 @@ public class SqlLiteCache {
         if (data==null || data.length()==0){
             return -1;
         }
-        VideoLogUtils.d("SqlLiteCache-----get---"+data);
+        AppLogUtils.d("SqlLiteCache-----get---"+data);
         VideoLocation location = VideoLocation.toObject(data);
         return location.getPosition();
     }

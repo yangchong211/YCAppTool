@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.ycvideoplayer.ConstantVideo;
 
 import com.yc.ycvideoplayer.R;
@@ -86,7 +86,7 @@ public class RecyclerViewFragment extends Fragment {
         mRecyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override
             public void onChildViewAttachedToWindow(@NonNull View view) {
-                VideoLogUtils.i("addOnChildAttachStateChangeListener-----AttachedToWindow---"+view);
+                AppLogUtils.i("addOnChildAttachStateChangeListener-----AttachedToWindow---"+view);
             }
 
             /**
@@ -96,7 +96,7 @@ public class RecyclerViewFragment extends Fragment {
              */
             @Override
             public void onChildViewDetachedFromWindow(@NonNull View view) {
-                VideoLogUtils.i("addOnChildAttachStateChangeListener-----DetachedFromWindow---"+view);
+                AppLogUtils.i("addOnChildAttachStateChangeListener-----DetachedFromWindow---"+view);
                 FrameLayout playerContainer = view.findViewById(R.id.player_container);
                 View v = playerContainer.getChildAt(0);
                 if (v != null && v == mVideoView && !mVideoView.isFullScreen()) {

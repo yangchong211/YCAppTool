@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.yc.music.config.MusicConstants;
 import com.yc.music.service.PlayAudioService;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 
 /**
@@ -23,17 +23,17 @@ public class AudioBroadcastReceiver extends BroadcastReceiver {
                 //锁屏时处理的逻辑
                 case MusicConstants.LOCK_SCREEN_ACTION:
                     PlayAudioService.startCommand(context, MusicConstants.LOCK_SCREEN_ACTION);
-                    VideoLogUtils.e("AudioBroadcastReceiver"+"---LOCK_SCREEN");
+                    AppLogUtils.e("AudioBroadcastReceiver"+"---LOCK_SCREEN");
                     break;
                 //当屏幕灭了
                 case Intent.ACTION_SCREEN_OFF:
                     PlayAudioService.startCommand(context,Intent.ACTION_SCREEN_OFF);
-                    VideoLogUtils.e("AudioBroadcastReceiver"+"---当屏幕灭了");
+                    AppLogUtils.e("AudioBroadcastReceiver"+"---当屏幕灭了");
                     break;
                 //当屏幕亮了
                 case Intent.ACTION_SCREEN_ON:
                     PlayAudioService.startCommand(context,Intent.ACTION_SCREEN_ON);
-                    VideoLogUtils.e("AudioBroadcastReceiver"+"---当屏幕亮了");
+                    AppLogUtils.e("AudioBroadcastReceiver"+"---当屏幕亮了");
                     break;
                 default:
                     break;

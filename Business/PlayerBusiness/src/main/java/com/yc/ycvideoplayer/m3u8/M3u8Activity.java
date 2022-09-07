@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.m3u8.bean.M3u8;
 import com.yc.m3u8.inter.OnDownloadListener;
 import com.yc.m3u8.inter.OnM3u8InfoListener;
@@ -54,19 +54,19 @@ public class M3u8Activity extends AppCompatActivity {
             @Override
             public void onSuccess(M3u8 m3U8) {
                 tvConsole.append("\n\n获取成功了" + m3U8);
-                VideoLogUtils.e("获取成功了" + m3U8);
+                AppLogUtils.e("获取成功了" + m3U8);
             }
 
             @Override
             public void onStart() {
                 tvConsole.append("\n\n开始获取信息");
-                VideoLogUtils.e("开始获取信息");
+                AppLogUtils.e("开始获取信息");
             }
 
             @Override
             public void onError(Throwable errorMsg) {
                 tvConsole.append("\n\n出错了" + errorMsg);
-                VideoLogUtils.e("出错了" + errorMsg);
+                AppLogUtils.e("出错了" + errorMsg);
             }
         });
     }
@@ -83,7 +83,7 @@ public class M3u8Activity extends AppCompatActivity {
         task1.download(url, new OnDownloadListener() {
             @Override
             public void onDownloading(final long itemFileSize, final int totalTs, final int curTs) {
-                VideoLogUtils.e(task1.getTaskId() + "下载中.....itemFileSize=" + itemFileSize + "\ttotalTs=" + totalTs + "\tcurTs=" + curTs);
+                AppLogUtils.e(task1.getTaskId() + "下载中.....itemFileSize=" + itemFileSize + "\ttotalTs=" + totalTs + "\tcurTs=" + curTs);
                 tvConsole.append("\n\n下载中....." + itemFileSize + "\t" + totalTs + "\t" + curTs);
             }
 
@@ -92,7 +92,7 @@ public class M3u8Activity extends AppCompatActivity {
              */
             @Override
             public void onSuccess() {
-                VideoLogUtils.e(task1.getTaskId() + "下载完成了");
+                AppLogUtils.e(task1.getTaskId() + "下载完成了");
                 tvConsole.append("\n\n下载完成");
             }
 
@@ -105,13 +105,13 @@ public class M3u8Activity extends AppCompatActivity {
             public void onProgress(final long curLenght) {
                 if (curLenght - lastLength > 0) {
                     final String speed = NetSpeedUtils.getInstance().displayFileSize(curLenght - lastLength) + "/s";
-                    VideoLogUtils.e(task1.getTaskId() + "speed = " + speed);
+                    AppLogUtils.e(task1.getTaskId() + "speed = " + speed);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            VideoLogUtils.e("更新了");
+                            AppLogUtils.e("更新了");
                             tvSpeed1.setText(speed);
-                            VideoLogUtils.e(tvSpeed1.getText().toString());
+                            AppLogUtils.e(tvSpeed1.getText().toString());
                         }
                     });
                     lastLength = curLenght;
@@ -121,14 +121,14 @@ public class M3u8Activity extends AppCompatActivity {
 
             @Override
             public void onStart() {
-                VideoLogUtils.e(task1.getTaskId() + "开始下载了");
+                AppLogUtils.e(task1.getTaskId() + "开始下载了");
                 tvConsole.append("\n\n开始下载");
             }
 
             @Override
             public void onError(Throwable errorMsg) {
                 tvConsole.append("\n\n出错了" + errorMsg);
-                VideoLogUtils.e(task1.getTaskId() + "出错了" + errorMsg);
+                AppLogUtils.e(task1.getTaskId() + "出错了" + errorMsg);
             }
         });
     }
@@ -168,13 +168,13 @@ public class M3u8Activity extends AppCompatActivity {
                     public void onProgress(long curLength) {
                         if (curLength - lastLength > 0) {
                             final String speed = NetSpeedUtils.getInstance().displayFileSize(curLength - lastLength) + "/s";
-                            VideoLogUtils.e(task1.getTaskId() + "speed = " + speed);
+                            AppLogUtils.e(task1.getTaskId() + "speed = " + speed);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    VideoLogUtils.e("更新了");
+                                    AppLogUtils.e("更新了");
                                     tvSpeed1.setText(speed + "( 第" + (curTsIndex + 1) + "个视频 )");
-                                    VideoLogUtils.e(tvSpeed1.getText().toString());
+                                    AppLogUtils.e(tvSpeed1.getText().toString());
                                 }
                             });
                             lastLength = curLength;

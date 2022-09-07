@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import com.yc.ycvideoplayer.R;
 
@@ -85,12 +85,12 @@ public class TTSAudioActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onInit(int status) {
                 if ((TextToSpeech.SUCCESS == status) && textToSpeech != null) {
-                    VideoLogUtils.i("Initialize TTS success");
+                    AppLogUtils.i("Initialize TTS success");
                     //获取locale
                     final Locale locale = TTSAudioActivity.this.getApplicationContext()
                             .getResources().getConfiguration().locale;
                     if (locale != null) {
-                        VideoLogUtils.i("tts isLanguageAvailable " + textToSpeech.isLanguageAvailable(locale) +
+                        AppLogUtils.i("tts isLanguageAvailable " + textToSpeech.isLanguageAvailable(locale) +
                                 "; variant is " + locale.getVariant() +
                                 "; locale is " + locale + " ; country  is " + locale.getCountry());
                     }
@@ -98,28 +98,28 @@ public class TTSAudioActivity extends AppCompatActivity implements View.OnClickL
                     int setLanguage = textToSpeech.setLanguage(null != locale ? locale : Locale.getDefault());
                     switch (setLanguage) {
                         case TextToSpeech.LANG_MISSING_DATA:
-                            VideoLogUtils.i("TTS set language: Language missing data");
+                            AppLogUtils.i("TTS set language: Language missing data");
                             break;
                         case TextToSpeech.LANG_NOT_SUPPORTED:
-                            VideoLogUtils.i("TTS set language: Language not supported");
+                            AppLogUtils.i("TTS set language: Language not supported");
                             break;
                         case TextToSpeech.LANG_AVAILABLE:
-                            VideoLogUtils.i("TTS set language: Language available");
+                            AppLogUtils.i("TTS set language: Language available");
                             break;
                         case TextToSpeech.LANG_COUNTRY_AVAILABLE:
-                            VideoLogUtils.i("TTS set language: Language country available");
+                            AppLogUtils.i("TTS set language: Language country available");
                             break;
                         case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
-                            VideoLogUtils.i("TTS set language: Language country var available");
+                            AppLogUtils.i("TTS set language: Language country var available");
                             break;
                         default:
-                            VideoLogUtils.i("TTS set language: Unknown error");
+                            AppLogUtils.i("TTS set language: Unknown error");
                             break;
                     }
                 } else if (TextToSpeech.ERROR == status) {
-                    VideoLogUtils.i("Initialize TTS error");
+                    AppLogUtils.i("Initialize TTS error");
                 } else {
-                    VideoLogUtils.i("Initialize TTS error");
+                    AppLogUtils.i("Initialize TTS error");
                 }
             }
         });

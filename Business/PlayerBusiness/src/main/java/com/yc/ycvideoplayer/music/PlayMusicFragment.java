@@ -28,8 +28,8 @@ import com.yc.music.model.AudioBean;
 import com.yc.music.tool.BaseAppHelper;
 import com.yc.music.tool.CoverLoader;
 import com.yc.video.tool.PlayerUtils;
-import com.yc.videotool.VideoSpUtils;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.videotool.AppSpUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import com.yc.ycvideoplayer.R;
 
@@ -79,7 +79,7 @@ public class PlayMusicFragment extends Fragment implements View.OnClickListener,
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        VideoLogUtils.e(TAG+"setUserVisibleHint"+isVisibleToUser);
+        AppLogUtils.e(TAG+"setUserVisibleHint"+isVisibleToUser);
     }
 
     /**
@@ -91,7 +91,7 @@ public class PlayMusicFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        VideoLogUtils.e(TAG+"onHiddenChanged"+hidden);
+        AppLogUtils.e(TAG+"onHiddenChanged"+hidden);
         if (!hidden){
             initData();
         }
@@ -328,7 +328,7 @@ public class PlayMusicFragment extends Fragment implements View.OnClickListener,
     }
 
     private void switchPlayMode() {
-        int playMode = VideoSpUtils.getInstance(MusicConstants.SP_NAME).getInt(MusicConstants.PLAY_MODE, 0);
+        int playMode = AppSpUtils.getInstance(MusicConstants.SP_NAME).getInt(MusicConstants.PLAY_MODE, 0);
         PlayModeEnum mode = PlayModeEnum.valueOf(playMode);
         switch (mode) {
             case LOOP:
@@ -343,13 +343,13 @@ public class PlayMusicFragment extends Fragment implements View.OnClickListener,
             default:
                 break;
         }
-        VideoSpUtils.getInstance(MusicConstants.SP_NAME).put(MusicConstants.PLAY_MODE, mode.value());
+        AppSpUtils.getInstance(MusicConstants.SP_NAME).put(MusicConstants.PLAY_MODE, mode.value());
         initPlayMode();
     }
 
 
     private void initPlayMode() {
-        int playMode = VideoSpUtils.getInstance(MusicConstants.SP_NAME).getInt(MusicConstants.PLAY_MODE, 0);
+        int playMode = AppSpUtils.getInstance(MusicConstants.SP_NAME).getInt(MusicConstants.PLAY_MODE, 0);
         ivMode.setImageLevel(playMode);
     }
 
@@ -393,7 +393,7 @@ public class PlayMusicFragment extends Fragment implements View.OnClickListener,
         sbProgress.setProgress((int) BaseAppHelper.get().getMusicService().getCurrentPosition());
         sbProgress.setSecondaryProgress(0);
         sbProgress.setMax((int) playingMusic.getDuration());
-        VideoLogUtils.e("-----------------------"+(int) playingMusic.getDuration());
+        AppLogUtils.e("-----------------------"+(int) playingMusic.getDuration());
         mLastProgress = 0;
         tvCurrentTime.setText("00:00");
         tvTotalTime.setText(PlayerUtils.formatTime(playingMusic.getDuration()));
@@ -442,7 +442,7 @@ public class PlayMusicFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onBufferingUpdate(int percent) {
         if(sbProgress.getMax()>0 && percent>0){
-            VideoLogUtils.e("setOnPlayEventListener---percent---"+ sbProgress.getMax() + "-----" +percent);
+            AppLogUtils.e("setOnPlayEventListener---percent---"+ sbProgress.getMax() + "-----" +percent);
             sbProgress.setSecondaryProgress(sbProgress.getMax() * 100 / percent);
         }
     }

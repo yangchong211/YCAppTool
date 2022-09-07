@@ -23,7 +23,7 @@ import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.util.Util;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -359,11 +359,11 @@ public class DefaultAnalyticsListener implements AnalyticsListener {
     }
 
     protected void logd(String msg) {
-        VideoLogUtils.d(this.tag + msg);
+        AppLogUtils.d(this.tag + msg);
     }
 
     protected void loge(String msg, @Nullable Throwable tr) {
-        VideoLogUtils.e(this.tag + msg, tr);
+        AppLogUtils.e(this.tag + msg, tr);
     }
 
     private void logd(EventTime eventTime, String eventName) {

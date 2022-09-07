@@ -18,7 +18,7 @@ import com.yc.music.inter.OnScreenChangeListener;
 import com.yc.music.model.AudioBean;
 import com.yc.music.tool.BaseAppHelper;
 import com.yc.music.tool.QuitTimerHelper;
-import com.yc.videotool.VideoLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.List;
 
@@ -130,18 +130,18 @@ public class PlayAudioService extends AbsAudioService {
                     break;
                 //添加锁屏界面
                 case MusicConstants.LOCK_SCREEN_ACTION:
-                    VideoLogUtils.e("PlayService"+"---LOCK_SCREEN");
+                    AppLogUtils.e("PlayService"+"---LOCK_SCREEN");
                     break;
                 //当屏幕灭了，添加锁屏页面
                 case Intent.ACTION_SCREEN_OFF:
-                    VideoLogUtils.e("PlayService"+"---当屏幕灭了");
+                    AppLogUtils.e("PlayService"+"---当屏幕灭了");
                     if (mOnScreenChangeListener!=null){
                         mOnScreenChangeListener.screenChange(true);
                     }
                     break;
                 //当屏幕亮了
                 case Intent.ACTION_SCREEN_ON:
-                    VideoLogUtils.e("PlayService"+"---当屏幕亮了");
+                    AppLogUtils.e("PlayService"+"---当屏幕亮了");
                     if (mOnScreenChangeListener!=null){
                         mOnScreenChangeListener.screenChange(false);
                     }
