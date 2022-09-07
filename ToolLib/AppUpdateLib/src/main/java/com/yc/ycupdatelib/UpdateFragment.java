@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
+import com.yc.apppermission.PermissionUtils;
 
 import java.io.File;
 
@@ -324,8 +325,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
         if(mActivity==null){
             return;
         }
-        PermissionUtils.init(mActivity);
-        boolean granted = PermissionUtils.isGranted(mPermission);
+        boolean granted = PermissionUtils.isGranted(mActivity,mPermission);
         if(granted){
             setNotification(0);
             downloadTask = downApk(apkUrl, saveApkPath, getListener());

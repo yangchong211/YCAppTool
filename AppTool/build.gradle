@@ -1,15 +1,22 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.application'
+}
+apply plugin: 'kotlin-android'
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
-    //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
     defaultConfig {
+        applicationId "com.yc.appserver"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
+        // dex突破65535的限制
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -28,8 +35,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
-    api 'com.liulishuo.filedownloader:library:1.7.5'
+    implementation(rootProject.ext.dependencies["constraintlayout"])
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     //权限库
     implementation 'com.github.yangchong211.YCCommonLib:AppPermission:1.3.5'
+    implementation project(path: ':AppUpdateLib')
+    //其他
+    implementation project(path: ':RoundCorners')
 }
 

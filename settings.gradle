@@ -10,7 +10,7 @@ include ':AppWidget'
 include ':AppServer'
 include ':AppCommon'
 include ':AppWebView'
-
+include ':AppTool'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
