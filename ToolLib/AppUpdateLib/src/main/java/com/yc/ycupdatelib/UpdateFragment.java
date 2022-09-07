@@ -61,7 +61,6 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
 
     private FragmentActivity mActivity;
     private BaseDownloadTask downloadTask;
-
     private ProgressBar mProgress;
     private TextView mTvCancel;
     private TextView mTvOk;
@@ -330,20 +329,6 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             setNotification(0);
             downloadTask = downApk(apkUrl, saveApkPath, getListener());
         }else {
-            /*PermissionUtils permission = PermissionUtils.permission(mPermission);
-            permission.callback(new PermissionUtils.SimpleCallback() {
-                @Override
-                public void onGranted() {
-                    setNotification(0);
-                    downloadTask = downApk(mActivity, apkUrl, saveApkPath, getListener());
-                }
-                @Override
-                public void onDenied() {
-                    PermissionUtils.openAppSettings();
-                    Toast.makeText(mActivity,"请允许权限",Toast.LENGTH_SHORT).show();
-                }
-            });
-            permission.request();*/
             Toast.makeText(mActivity,"请先申请读写权限",Toast.LENGTH_SHORT).show();
         }
     }

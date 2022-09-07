@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_round"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="1.圆角控件各种案例，别再用shape"
+        android:textSize="18sp"
+        android:background="@color/color_ffe935"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_image"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="2.各种图片控件"
+        android:textSize="18sp"
+        android:background="@color/color_ffe935"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_span"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="3.各种span文本控件"
+        android:textSize="18sp"
+        android:background="@color/color_ffe935"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_chart"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="4.各种图表控件展示"
+        android:textSize="18sp"
+        android:background="@color/color_ffe935"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_shadow"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="5.阴影效果自定义控件"
+        android:textSize="18sp"
+        android:background="@color/color_ffe935"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_zoom"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="6.图片查看器"
+        android:textSize="18sp"
+        android:background="@color/color_ffe935"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_red"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="7.自定义完全解耦合小红点"
+        android:textSize="18sp"
+        android:background="@color/color_ffe935"
+        app:rRadius="20dp" />
+
+</LinearLayout>

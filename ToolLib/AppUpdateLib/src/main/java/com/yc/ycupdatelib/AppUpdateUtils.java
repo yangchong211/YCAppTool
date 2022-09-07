@@ -193,7 +193,6 @@ public final class AppUpdateUtils {
      * @return MD5摘要码
      * @funcion 对文件全文生成MD5摘要
      */
-
     public static String getMD5(File file) {
         FileInputStream fis = null;
         try {
