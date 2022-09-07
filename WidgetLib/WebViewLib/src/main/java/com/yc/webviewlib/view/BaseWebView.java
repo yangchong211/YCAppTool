@@ -22,8 +22,8 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebStorage;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewDatabase;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.ThreadPoolUtils;
 import com.yc.toolutils.click.FastClickUtils;
 import com.yc.webviewlib.base.RequestInfo;
 import com.yc.webviewlib.utils.X5LogUtils;
@@ -327,7 +327,7 @@ public class BaseWebView extends WebView {
         if (FastClickUtils.isFastDoubleClick()){
             return;
         }
-        if (ThreadPoolUtils.isMainThread()){
+        if (DelegateTaskExecutor.getInstance().isMainThread()){
             super.reload();
         } else {
             Handler handler = getHandler();
@@ -401,11 +401,12 @@ public class BaseWebView extends WebView {
      * it will be automatically distributed to the main thread.
      * @param script
      */
+    @Override
     public void evaluateJavascript(final String script, final ValueCallback<String> callback) {
         if (script==null || script.length()==0){
             return;
         }
-        if (ThreadPoolUtils.isMainThread()){
+        if (DelegateTaskExecutor.getInstance().isMainThread()){
             BaseWebView.super.evaluateJavascript(script,callback);
         } else {
             Handler handler = getHandler();
@@ -451,7 +452,7 @@ public class BaseWebView extends WebView {
         if (url==null || url.length()==0){
             return;
         }
-        if (ThreadPoolUtils.isMainThread()){
+        if (DelegateTaskExecutor.getInstance().isMainThread()){
             loadUrl(url);
         } else {
             Message message = mainThreadHandler.obtainMessage();

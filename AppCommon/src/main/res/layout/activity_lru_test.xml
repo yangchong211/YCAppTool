@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="@dimen/dp10"
+    android:orientation="vertical">
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_file_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/dp20"
+        android:text="1.写入txt文件"
+        android:textSize="@dimen/textSize18"
+        android:background="@color/priority_green"
+        app:rRadius="@dimen/dp20" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_file_2"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/dp20"
+        android:text="2.读取txt文件"
+        android:textSize="@dimen/textSize18"
+        android:background="@color/priority_green"
+        app:rRadius="@dimen/dp20" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_file_3"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/dp20"
+        android:text="3.复制txt文件"
+        android:textSize="@dimen/textSize18"
+        android:background="@color/priority_green"
+        app:rRadius="@dimen/dp20" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_file_4"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/dp20"
+        android:text="4.打开本地txt文件"
+        android:textSize="@dimen/textSize18"
+        android:background="@color/priority_green"
+        app:rRadius="@dimen/dp20" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_file_5"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/dp20"
+        android:text="5.打开复制后的txt文件"
+        android:textSize="@dimen/textSize18"
+        android:background="@color/priority_green"
+        app:rRadius="@dimen/dp20" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_file_6"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/dp20"
+        android:text="6.磁盘查看工具"
+        android:textSize="@dimen/textSize18"
+        android:background="@color/priority_green"
+        app:rRadius="@dimen/dp20" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_file_7"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/dp20"
+        android:text="7.删除本地写入txt文件"
+        android:textSize="@dimen/textSize18"
+        android:background="@color/priority_green"
+        app:rRadius="@dimen/dp20" />
+
+</LinearLayout>

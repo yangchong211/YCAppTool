@@ -224,7 +224,8 @@ public class SystemLruCache<K, V> implements ILruCache<K, V> {
     }
 
     public final void evictAll() {
-        trimToSize(-1); // -1 will evict 0-sized elements
+        // -1 will evict 0-sized elements
+        trimToSize(-1);
     }
 
     @Override
@@ -267,7 +268,8 @@ public class SystemLruCache<K, V> implements ILruCache<K, V> {
     }
 
     @SuppressLint("DefaultLocale")
-    @Override public synchronized final String toString() {
+    @Override
+    public synchronized final String toString() {
         int accesses = hitCount + missCount;
         int hitPercent = accesses != 0 ? (100 * hitCount / accesses) : 0;
         return String.format("LruCache[maxSize=%d,hits=%d,misses=%d,hitRate=%d%%]",
