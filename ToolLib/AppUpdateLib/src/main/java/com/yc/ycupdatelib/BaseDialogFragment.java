@@ -1,4 +1,4 @@
-package com.ycbjie.ycupdatelib;
+package com.yc.ycupdatelib;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 
+
 /**
  * <pre>
  *     @author yangchong
@@ -31,6 +32,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     private static final float DEFAULT_DIM = 0.2f;
     private Dialog dialog;
     private Local local = Local.BOTTOM;
+
     public enum Local {
         TOP, CENTER, BOTTOM
     }
@@ -38,9 +40,9 @@ public abstract class BaseDialogFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(local == Local.BOTTOM){
+        if (local == Local.BOTTOM) {
             setStyle(DialogFragment.STYLE_NO_TITLE, R.style.BottomDialog);
-        }else if(local == Local.CENTER || local == Local.TOP){
+        } else if (local == Local.CENTER || local == Local.TOP) {
             setStyle(DialogFragment.STYLE_NO_TITLE, R.style.CenterDialog);
         }
     }
@@ -48,8 +50,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         dialog = getDialog();
-        if(dialog!=null){
-            if(dialog.getWindow()!=null){
+        if (dialog != null) {
+            if (dialog.getWindow() != null) {
                 dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
             }
             dialog.setCanceledOnTouchOutside(isCancel());
@@ -62,20 +64,23 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
     /**
      * 设置是否可以cancel
+     *
      * @return
      */
     protected abstract boolean isCancel();
 
     /**
      * 获取布局资源文件
-     * @return              布局资源文件id值
+     *
+     * @return 布局资源文件id值
      */
     @LayoutRes
     public abstract int getLayoutRes();
 
     /**
      * 绑定
-     * @param v             view
+     *
+     * @param v view
      */
     public abstract void bindView(View v);
 
@@ -85,11 +90,14 @@ public abstract class BaseDialogFragment extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
-        if(dialog==null){
+        if (dialog == null) {
             dialog = getDialog();
         }
-        Window window = dialog.getWindow();
-        if(window!=null){
+        Window window = null;
+        if (dialog != null) {
+            window = dialog.getWindow();
+        }
+        if (window != null) {
             WindowManager.LayoutParams params = window.getAttributes();
             params.dimAmount = getDimAmount();
             params.width = WindowManager.LayoutParams.MATCH_PARENT;
@@ -127,10 +135,10 @@ public abstract class BaseDialogFragment extends DialogFragment {
     }
 
     public void show(FragmentManager fragmentManager) {
-        if(fragmentManager!=null){
+        if (fragmentManager != null) {
             show(fragmentManager, getFragmentTag());
-        }else {
-            Log.e("show","需要设置setFragmentManager");
+        } else {
+            Log.e("show", "需要设置setFragmentManager");
         }
     }
 
@@ -139,8 +147,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
      * GitHub地址：https://github.com/yangchong211
      * 如果可以，欢迎star
      */
-    public void dismissDialog(){
-        if(dialog!=null && dialog.isShowing()){
+    public void dismissDialog() {
+        if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
             dialog = null;
         }

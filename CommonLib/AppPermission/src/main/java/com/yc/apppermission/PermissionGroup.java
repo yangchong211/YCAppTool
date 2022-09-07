@@ -10,9 +10,10 @@ import android.Manifest;
  *     email  : yangchong211@163.com
  *     time  : 2016/09/23
  *     desc  : 危险权限列表
- *     revise:
+ *     revise: 可以直接使用{@link PermissionConstants}
  * </pre>
  */
+@Deprecated()
 public final class PermissionGroup {
 
     /**

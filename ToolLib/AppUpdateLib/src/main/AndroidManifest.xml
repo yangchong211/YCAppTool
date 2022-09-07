@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ycbjie.ycupdatelib" >
+    package="com.yc.ycupdatelib" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -12,10 +12,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
 
-        <activity android:name=".PermissionUtils$PermissionActivity"/>
+        <activity android:name="com.yc.ycupdatelib.PermissionUtils$PermissionActivity"/>
 
         <provider
-            android:name=".VersionFileProvider"
+            android:name="com.yc.ycupdatelib.VersionFileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">

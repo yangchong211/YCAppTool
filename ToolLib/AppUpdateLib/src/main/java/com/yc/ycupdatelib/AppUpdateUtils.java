@@ -1,4 +1,4 @@
-package com.ycbjie.ycupdatelib;
+package com.yc.ycupdatelib;
 
 import android.content.Context;
 import android.content.Intent;

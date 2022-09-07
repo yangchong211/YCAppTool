@@ -1,4 +1,4 @@
-package com.ycbjie.ycupdatelib;
+package com.yc.ycupdatelib;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
