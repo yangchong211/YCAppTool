@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author: 杨充
  * @email  : yangchong211@163.com
+ * @GitHub : https://github.com/yangchong211/YCEfficient
  * @time   : 2018/04/15
  * @desc   : app 进入后台一定时间后执行退出或者重启操作，有助于释放内存，减少用户电量消耗
  * @revise :
