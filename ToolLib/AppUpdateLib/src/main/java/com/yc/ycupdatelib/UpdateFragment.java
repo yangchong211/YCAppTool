@@ -67,6 +67,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
     private ProgressBar mProgress;
     private TextView mTvCancel;
     private TextView mTvOk;
+    private NotificationManager manager;
 
 
     /**
@@ -297,6 +298,9 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
                 downloadTask.pause();
             }
         }
+        if (manager!=null){
+            manager.cancel(1314);
+        }
         dismissDialog();
     }
 
@@ -338,7 +342,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
         boolean granted = PermissionUtils.isGranted(mActivity, M_PERMISSION);
         if (granted) {
             setNotification(0);
-            downloadTask = downApk(apkUrl, saveApkPath, getListener());
+            downloadTask = downApk(apkUrl, saveApkPath, listener);
         } else {
             Toast.makeText(mActivity, "请先申请读写权限", Toast.LENGTH_SHORT).show();
         }
@@ -346,76 +350,67 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
 
 
     private BaseDownloadTask downApk(String apkUrl, String saveApkPath, FileDownloadListener listener) {
-        if (downloadTask == null){
-            downloadTask = FileDownloader
-                    .getImpl()
-                    .create(apkUrl)
-                    .setPath(saveApkPath)
-                    .setListener(listener);
-        }
-        downloadTask.start();
-        return downloadTask;
+        BaseDownloadTask baseDownloadTask = FileDownloader
+                .getImpl()
+                .create(apkUrl)
+                .setPath(saveApkPath)
+                .setListener(listener);
+        baseDownloadTask.start();
+        return baseDownloadTask;
     }
 
-    private FileDownloadListener listener;
-
-    public FileDownloadListener getListener() {
-        if (listener == null) {
-            listener = new FileDownloadListener() {
-                @Override
-                protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                    changeUploadStatus(AppUpdateUtils.DownloadStatus.UPLOADING);
-                }
-
-                @Override
-                protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                    float total = task.getSmallFileTotalBytes();
-                    float downsize = task.getSmallFileSoFarBytes();
-                    int progress = (int) ((downsize / total) * 100);
-                    mProgress.setProgress(progress);
-                    setNotification(progress);
-                }
-
-                @Override
-                protected void completed(BaseDownloadTask task) {
-                    setNotification(100);
-                    if (isForceUpdate) {
-                        mProgress.setProgress(100);
-                    }
-                    changeUploadStatus(AppUpdateUtils.DownloadStatus.FINISH);
-                    if (appMd5 != null && !appMd5.equals(AppUpdateUtils.getMD5(file))) {
-                        Toast.makeText(mActivity, "安装包Md5数据非法", Toast.LENGTH_SHORT).show();
-                        mTvOk.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                changeUploadStatus(AppUpdateUtils.DownloadStatus.START);
-                            }
-                        }, 500);
-                        return;
-                    }
-                    AppUpdateUtils.installNormal(mActivity, saveApkPath, packageName);
-                }
-
-                @Override
-                protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-                    changeUploadStatus(AppUpdateUtils.DownloadStatus.PAUSED);
-                }
-
-                @Override
-                protected void error(BaseDownloadTask task, Throwable e) {
-                    setNotification(-1);
-                    changeUploadStatus(AppUpdateUtils.DownloadStatus.ERROR);
-                    Log.e("UpdateFragment", e.getLocalizedMessage());
-                }
-
-                @Override
-                protected void warn(BaseDownloadTask task) {
-                    changeUploadStatus(AppUpdateUtils.DownloadStatus.ERROR);
-                }
-            };
+    private final FileDownloadListener listener = new FileDownloadListener() {
+        @Override
+        protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+            changeUploadStatus(AppUpdateUtils.DownloadStatus.UPLOADING);
         }
-        return listener;
-    }
+
+        @Override
+        protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+            float total = task.getSmallFileTotalBytes();
+            float downsize = task.getSmallFileSoFarBytes();
+            int progress = (int) ((downsize / total) * 100);
+            mProgress.setProgress(progress);
+            setNotification(progress);
+        }
+
+        @Override
+        protected void completed(BaseDownloadTask task) {
+            setNotification(100);
+            if (isForceUpdate) {
+                mProgress.setProgress(100);
+            }
+            changeUploadStatus(AppUpdateUtils.DownloadStatus.FINISH);
+            if (appMd5 != null && !appMd5.equals(AppUpdateUtils.getMD5(file))) {
+                Toast.makeText(mActivity, "安装包Md5数据非法", Toast.LENGTH_SHORT).show();
+                mTvOk.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        changeUploadStatus(AppUpdateUtils.DownloadStatus.START);
+                    }
+                }, 500);
+                return;
+            }
+            AppUpdateUtils.installNormal(mActivity, saveApkPath, packageName);
+        }
+
+        @Override
+        protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+            changeUploadStatus(AppUpdateUtils.DownloadStatus.PAUSED);
+        }
+
+        @Override
+        protected void error(BaseDownloadTask task, Throwable e) {
+            setNotification(-1);
+            changeUploadStatus(AppUpdateUtils.DownloadStatus.ERROR);
+            Log.e("UpdateFragment", e.getLocalizedMessage());
+        }
+
+        @Override
+        protected void warn(BaseDownloadTask task) {
+            changeUploadStatus(AppUpdateUtils.DownloadStatus.ERROR);
+        }
+    };
 
 
     protected void setNotification(int progress) {
@@ -428,7 +423,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
         remoteViews.setTextViewText(R.id.tvTitle, "下载apk");
         remoteViews.setProgressBar(R.id.pb, 100, progress, false);
         NotificationUtils notificationUtils = new NotificationUtils(mActivity);
-        NotificationManager manager = notificationUtils.getManager();
+        manager = notificationUtils.getManager();
         Notification notification = notificationUtils.setContentIntent(pendingIntent)
                 .setContent(remoteViews)
                 .setFlags(Notification.FLAG_AUTO_CANCEL)
@@ -438,7 +433,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
         if (progress == 100 || progress == -1) {
             notificationUtils.clearNotification();
         } else {
-            manager.notify(1, notification);
+            manager.notify(1314, notification);
         }
     }
 
