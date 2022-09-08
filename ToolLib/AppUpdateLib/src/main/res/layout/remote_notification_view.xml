@@ -3,19 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:gravity="center_vertical">
 
     <ImageView
         android:src="@mipmap/ic_launcher"
-        android:layout_width="40dp"
-        android:layout_height="40dp" />
+        android:layout_width="45dp"
+        android:layout_height="45dp" />
 
     <LinearLayout
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="12dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content" />
         <ProgressBar
             android:id="@+id/pb"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="3dp" />
