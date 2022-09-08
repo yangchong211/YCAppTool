@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+
 import androidx.core.content.FileProvider;
 
 import com.yc.appfilelib.AppFileUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.lang.annotation.Retention;
@@ -26,21 +28,36 @@ public final class AppUpdateUtils {
 
     /**
      * 清除文件
-     * @param context       上下文
-     * @param apkName       apk名称
-     * @return
+     *
+     * @param context 上下文
+     * @param apkName apk名称
+     * @return true表示清除文件成功
      */
-    public static boolean clearDownload(Context context , String apkName){
+    public static boolean clearDownload(Context context, String apkName) {
         File localApkDownSaveFile = getLocalApkDownSaveFile(context, apkName);
         return AppFileUtils.deleteDirectory(localApkDownSaveFile);
     }
 
-    public static String getLocalApkDownSavePath(Context context, String apkName){
+    /**
+     * 根据apk名称生成一个文件路径
+     *
+     * @param context 上下文
+     * @param apkName apk文件名称
+     * @return file文件路径
+     */
+    public static String getLocalApkDownSavePath(Context context, String apkName) {
         File localApkDownSaveFile = getLocalApkDownSaveFile(context, apkName);
         return localApkDownSaveFile.getAbsolutePath();
     }
 
-    public static File getLocalApkDownSaveFile(Context context, String apkName){
+    /**
+     * 根据apk名称生成一个文件
+     *
+     * @param context 上下文
+     * @param apkName apk文件名称
+     * @return file文件
+     */
+    public static File getLocalApkDownSaveFile(Context context, String apkName) {
         String saveApkDirs = AppFileUtils.getExternalFilePath(context, "downloadApk");
         File file = new File(saveApkDirs);
         //判断文件夹是否存在，如果不存在就创建，否则不创建
@@ -117,27 +134,17 @@ public final class AppUpdateUtils {
     }
 
 
-    /*
-     注意配置清单文件
-     <provider
-     android:name="android.support.v4.content.FileProvider"
-     android:authorities="你的包名.fileprovider"
-     android:exported="false"
-     android:grantUriPermissions="true">
-     <meta-data
-     android:name="android.support.FILE_PROVIDER_PATHS"
-     android:resource="@xml/file_paths" />
-     </provider>
-     */
+
     /**
      * 关于在代码中安装 APK 文件，在 Android N 以后，为了安卓系统为了安全考虑，不能直接访问软件
      * 需要使用 fileProvider 机制来访问、打开 APK 文件。
      * 普通安装
-     * @param context                   上下文
-     * @param apkPath                    path，文件路径
+     *
+     * @param context 上下文
+     * @param apkPath path，文件路径
      */
-    protected static boolean installNormal(Context context, String apkPath , String applicationId) {
-        if(apkPath==null){
+    protected static boolean installNormal(Context context, String apkPath, String applicationId) {
+        if (apkPath == null) {
             return false;
         }
         try {
@@ -148,7 +155,7 @@ public final class AppUpdateUtils {
             //版本在7.0以上是不能直接通过uri访问的
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
-                Uri apkUri = FileProvider.getUriForFile(context, applicationId+".provider", apkFile);
+                Uri apkUri = FileProvider.getUriForFile(context, applicationId + ".provider", apkFile);
                 //添加这一句表示对目标应用临时授权该Uri所代表的文件
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
@@ -158,7 +165,7 @@ public final class AppUpdateUtils {
             }
             context.startActivity(intent);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -180,7 +187,6 @@ public final class AppUpdateUtils {
         int ERROR = 9;
         int PAUSED = 10;
     }
-
 
 
 }

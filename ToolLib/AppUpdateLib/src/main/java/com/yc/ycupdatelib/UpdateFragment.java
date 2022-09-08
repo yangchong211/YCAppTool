@@ -331,8 +331,6 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
     }
 
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    @SuppressLint("WrongConstant")
     private void checkPermissionAndDownApk() {
         if (mActivity == null) {
             return;
@@ -348,13 +346,15 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
 
 
     private BaseDownloadTask downApk(String apkUrl, String saveApkPath, FileDownloadListener listener) {
-        BaseDownloadTask baseDownloadTask = FileDownloader
-                .getImpl()
-                .create(apkUrl)
-                .setPath(saveApkPath)
-                .setListener(listener);
-        baseDownloadTask.start();
-        return baseDownloadTask;
+        if (downloadTask == null){
+            downloadTask = FileDownloader
+                    .getImpl()
+                    .create(apkUrl)
+                    .setPath(saveApkPath)
+                    .setListener(listener);
+        }
+        downloadTask.start();
+        return downloadTask;
     }
 
     private FileDownloadListener listener;

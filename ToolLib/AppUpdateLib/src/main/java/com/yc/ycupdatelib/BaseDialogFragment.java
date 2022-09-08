@@ -28,13 +28,24 @@ import androidx.fragment.app.FragmentManager;
  */
 public abstract class BaseDialogFragment extends DialogFragment {
 
-    private static final String TAG = "base_dialog";
+    private static final String TAG = "BaseDialogFragment";
     private static final float DEFAULT_DIM = 0.2f;
     private Dialog dialog;
     private Local local = Local.BOTTOM;
 
     public enum Local {
-        TOP, CENTER, BOTTOM
+        /**
+         * top顶部
+         */
+        TOP,
+        /**
+         * center居中
+         */
+        CENTER,
+        /**
+         * bottom底部
+         */
+        BOTTOM
     }
 
     @Override
