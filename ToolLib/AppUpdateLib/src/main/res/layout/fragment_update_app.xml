@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -19,11 +21,13 @@
             android:scaleType="fitXY"
             android:src="@mipmap/lib_update_app_top_bg"/>
 
-        <LinearLayout
+        <com.yc.roundcorner.viewgroup.RoundLinearLayout
             android:layout_width="match_parent"
             android:layout_height="210dp"
-            android:background="@drawable/shape_white_update_bottom_10bg"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            app:rBottomLeftRadius="6dp"
+            app:rBottomRightRadius="6dp">
 
 
             <!--这个地方需要设置可以滚动-->
@@ -66,10 +70,9 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
-                <TextView
+                <com.yc.roundcorner.view.RoundTextView
                     android:id="@+id/tv_cancel"
                     android:gravity="center"
-                    android:background="@drawable/shape_666666_bg_transparent_20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -79,11 +82,14 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:textColor="@android:color/black"
-                    android:text="@string/update_next" />
-                <TextView
+                    android:text="@string/update_next"
+                    app:rRadius="20dp"
+                    app:rStrokeWidth="1px"
+                    app:rStrokeColor="@color/color_ff666666"/>
+
+                <com.yc.roundcorner.view.RoundTextView
                     android:id="@+id/tv_ok"
                     android:gravity="center"
-                    android:background="@drawable/shape_ff666666_bg_ffe935_20dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -91,10 +97,12 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:textColor="@android:color/black"
-                    android:text="@string/update_info" />
+                    android:text="@string/update_info"
+                    android:background="@color/color_ffe935"
+                    app:rRadius="20dp"/>
             </LinearLayout>
 
-        </LinearLayout>
+        </com.yc.roundcorner.viewgroup.RoundLinearLayout>
 
     </LinearLayout>
 

@@ -24,6 +24,7 @@ import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.yc.apppermission.PermissionUtils;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.eventuploadlib.LoggerReporter;
 
 import java.io.File;
@@ -260,15 +261,17 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
                 if (file.exists()) {
                     LoggerReporter.report(TAG,"download click finish , install apk");
                     packageName = mActivity.getPackageName();
-                    if (appMd5 != null && !appMd5.equals(AppUpdateUtils.getMD5(file))) {
+                    String md5 = AppUpdateUtils.getMD5(file);
+                    LoggerReporter.report(TAG,"download click finish , apk md5 : " + md5);
+                    if (appMd5 != null && !appMd5.equals(md5)) {
                         Toast.makeText(mActivity, "安装包Md5数据非法", Toast.LENGTH_SHORT).show();
                         AppUpdateUtils.clearDownload(mActivity,apkName);
-                        mTvOk.postDelayed(new Runnable() {
+                        DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                             @Override
                             public void run() {
                                 changeUploadStatus(AppUpdateUtils.DownloadStatus.START);
                             }
-                        }, 1000);
+                        },1000);
                         return;
                     }
                     //检测是否有apk文件，如果有直接普通安装
