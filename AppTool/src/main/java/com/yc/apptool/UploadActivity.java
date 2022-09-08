@@ -13,6 +13,8 @@ import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.toastutils.BuildConfig;
 import com.yc.toastutils.ToastUtils;
 import com.yc.ycupdatelib.AppUpdateUtils;
+import com.yc.ycupdatelib.PermissionDialog;
+import com.yc.ycupdatelib.PermissionListener;
 import com.yc.ycupdatelib.UpdateFragment;
 
 
@@ -29,23 +31,25 @@ public class UploadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_app);
+        PermissionDialog.setPermissionDialog(new PermissionDialog() {
+            @Override
+            protected void showStorageDialog(PermissionListener listener) {
+                PermissionUtils permission = PermissionUtils.permission(UploadActivity.this,mPermission);
+                permission.callback(new PermissionUtils.SimpleCallback() {
+                    @Override
+                    public void onGranted() {
+                        listener.dialogClickSure();
+                    }
 
-        boolean granted = PermissionUtils.isGranted(this,mPermission);
-        if(!granted){
-            PermissionUtils permission = PermissionUtils.permission(this,mPermission);
-            permission.callback(new PermissionUtils.SimpleCallback() {
-                @Override
-                public void onGranted() {
+                    @Override
+                    public void onDenied() {
+                        listener.dialogClickCancel();
+                    }
+                });
+                permission.request(UploadActivity.this);
+            }
+        });
 
-                }
-
-                @Override
-                public void onDenied() {
-                    ToastUtils.showRoundRectToast("请允许权限");
-                }
-            });
-            permission.request(this);
-        }
 
         findViewById(R.id.tv_1).setOnClickListener(new View.OnClickListener() {
             @Override

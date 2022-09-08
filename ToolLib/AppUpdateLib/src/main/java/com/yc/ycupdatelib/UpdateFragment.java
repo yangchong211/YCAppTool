@@ -347,11 +347,23 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             return;
         }
         boolean granted = PermissionUtils.isGranted(mActivity, M_PERMISSION);
+        LoggerReporter.report(TAG,"permission granted : " + granted);
         if (granted) {
             setNotification(0);
             downloadTask = downApk(apkUrl, saveApkPath, listener);
         } else {
-            Toast.makeText(mActivity, "请先申请读写权限", Toast.LENGTH_SHORT).show();
+            PermissionDialog.storageDialog(new PermissionListener() {
+                @Override
+                public void dialogClickSure() {
+                    setNotification(0);
+                    downloadTask = downApk(apkUrl, saveApkPath, listener);
+                }
+
+                @Override
+                public void dialogClickCancel() {
+                    Toast.makeText(mActivity, "请先申请读写权限", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
