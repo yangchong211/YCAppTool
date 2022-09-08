@@ -129,7 +129,7 @@ public class UploadActivity extends AppCompatActivity {
                  * @param packName                  包名
                  */
                 UpdateFragment.showFragment(UploadActivity.this,
-                        false,firstUrl,apkName,desc,BuildConfig.APPLICATION_ID,"b291e935d3f5282355192f98306ab489");
+                        false,firstUrl,apkName,desc,BuildConfig.APPLICATION_ID,"c8b38aeada5eae0aca63831fde204cad");
             }
         });
 

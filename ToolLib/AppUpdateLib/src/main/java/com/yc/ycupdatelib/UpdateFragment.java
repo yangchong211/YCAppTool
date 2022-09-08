@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -56,6 +58,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
 
     private static final String[] M_PERMISSION = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE};
+    private static final int REQUEST_CODE = 1314;
     private int downloadStatus = AppUpdateUtils.DownloadStatus.START;
     public static final String TAG = "UpdateFragment: ";
     private FragmentActivity mActivity;
@@ -358,18 +361,32 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             PermissionDialog.storageDialog(new PermissionListener() {
                 @Override
                 public void dialogClickSure() {
-                    setNotification(0);
-                    downloadTask = downApk(apkUrl, saveApkPath, listener);
+                    //去申请权限
+                    ActivityCompat.requestPermissions(mActivity, M_PERMISSION, REQUEST_CODE);
                 }
 
                 @Override
                 public void dialogClickCancel() {
-                    Toast.makeText(mActivity, "请先申请读写权限", Toast.LENGTH_SHORT).show();
+
                 }
             });
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.length >= 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                setNotification(0);
+                downloadTask = downApk(apkUrl, saveApkPath, listener);
+            } else {
+                Toast.makeText(mActivity, "请先申请读写权限", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     private BaseDownloadTask downApk(String apkUrl, String saveApkPath, FileDownloadListener listener) {
         BaseDownloadTask baseDownloadTask = FileDownloader

@@ -13,9 +13,9 @@
         android:id="@+id/tv_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         android:padding="10dp"
-        android:text="版本更新，一般更新"/>
+        android:text="1.版本更新，一般更新"/>
 
 
     <TextView
@@ -23,37 +23,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         android:padding="10dp"
-        android:text="版本更新，强制更新"/>
+        android:text="2.版本更新，强制更新"/>
 
     <TextView
         android:id="@+id/tv_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         android:padding="10dp"
-        android:text="版本更新，静默更新"/>
+        android:text="3.版本更新，静默更新"/>
 
 
     <TextView
         android:id="@+id/tv_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:text="版本更新，一般更新，校验md5，错误"/>
+        android:text="5.版本更新，一般更新，校验md5，错误"/>
 
     <TextView
         android:id="@+id/tv_6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:text="版本更新，一般更新，校验md5，正确"/>
+        android:text="6.版本更新，一般更新，校验md5，正确"/>
 
 
     <TextView
@@ -61,16 +61,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         android:padding="10dp"
-        android:text="版本更新，清除所有下载文件"/>
+        android:text="7.版本更新，清除所有下载文件"/>
 
     <TextView
         android:id="@+id/tv_8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         android:padding="10dp"
         android:text="8.查看下载文件"/>
 
