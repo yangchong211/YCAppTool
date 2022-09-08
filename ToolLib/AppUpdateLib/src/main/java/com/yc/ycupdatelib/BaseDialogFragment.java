@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.yc.eventuploadlib.LoggerReporter;
 
 
 /**
@@ -149,7 +150,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         if (fragmentManager != null) {
             show(fragmentManager, getFragmentTag());
         } else {
-            Log.e("show", "需要设置setFragmentManager");
+            LoggerReporter.report(TAG,"must be set fragmentManager");
         }
     }
 
@@ -162,6 +163,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
             dialog = null;
+            LoggerReporter.report(TAG,"dismiss dialog");
         }
     }
 

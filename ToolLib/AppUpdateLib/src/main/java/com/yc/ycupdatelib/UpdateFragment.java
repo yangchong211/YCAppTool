@@ -1,24 +1,19 @@
 package com.yc.ycupdatelib;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +24,7 @@ import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.yc.apppermission.PermissionUtils;
+import com.yc.eventuploadlib.LoggerReporter;
 
 import java.io.File;
 
@@ -60,7 +56,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
     private static final String[] M_PERMISSION = {Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE};
     private int downloadStatus = AppUpdateUtils.DownloadStatus.START;
-
+    public static final String TAG = "UpdateFragment: ";
     private FragmentActivity mActivity;
     private BaseDownloadTask downloadTask;
     private TextView mTvDesc;
@@ -110,6 +106,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             isForceUpdate = arguments.getBoolean("isUpdate");
             packageName = arguments.getString("packageName");
             appMd5 = arguments.getString("appMd5");
+            LoggerReporter.report(TAG,"onCreate");
         }
     }
 
@@ -124,6 +121,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             outState.putBoolean("isUpdate", isForceUpdate);
             outState.putString("packageName", packageName);
             outState.putString("appMd5", appMd5);
+            LoggerReporter.report(TAG,"onSaveInstanceState");
         }
     }
 
@@ -137,6 +135,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             isForceUpdate = savedInstanceState.getBoolean("isUpdate");
             packageName = savedInstanceState.getString("packageName");
             appMd5 = savedInstanceState.getString("appMd5");
+            LoggerReporter.report(TAG,"onViewStateRestored");
         }
     }
 
@@ -249,14 +248,17 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             case AppUpdateUtils.DownloadStatus.START:
             case AppUpdateUtils.DownloadStatus.UPLOADING:
                 if (downloadTask != null) {
+                    LoggerReporter.report(TAG,"download click pause");
                     downloadTask.pause();
                 } else {
+                    LoggerReporter.report(TAG,"download click , task is null , start download");
                     checkPermissionAndDownApk();
                 }
                 break;
             case AppUpdateUtils.DownloadStatus.FINISH:
                 File file = new File(saveApkPath);
                 if (file.exists()) {
+                    LoggerReporter.report(TAG,"download click finish , install apk");
                     packageName = mActivity.getPackageName();
                     if (appMd5 != null && !appMd5.equals(AppUpdateUtils.getMD5(file))) {
                         Toast.makeText(mActivity, "安装包Md5数据非法", Toast.LENGTH_SHORT).show();
@@ -272,18 +274,20 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
                     //检测是否有apk文件，如果有直接普通安装
                     AppUpdateUtils.installNormal(mActivity, saveApkPath, packageName);
                 } else {
+                    LoggerReporter.report(TAG,"download click finish , no file");
                     checkPermissionAndDownApk();
                 }
                 break;
             case AppUpdateUtils.DownloadStatus.PAUSED:
-                    /*if (downloadTask != null) {
-                        downloadTask.start();
-                    }
-                    break;*/
+                LoggerReporter.report(TAG,"download click paused");
+                checkPermissionAndDownApk();
+                break;
             case AppUpdateUtils.DownloadStatus.ERROR:
+                LoggerReporter.report(TAG,"download click error");
                 checkPermissionAndDownApk();
                 break;
             default:
+                LoggerReporter.report(TAG,"download click default");
                 break;
         }
     }
@@ -295,10 +299,13 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
         //如果正在下载，那么就先暂停，然后finish
         if (downloadStatus == AppUpdateUtils.DownloadStatus.UPLOADING) {
             if (downloadTask != null && downloadTask.isRunning()) {
+                LoggerReporter.report(TAG,"download click cancel , pause");
                 downloadTask.pause();
             }
+            LoggerReporter.report(TAG,"download click cancel , pause ok");
         }
         if (manager!=null){
+            LoggerReporter.report(TAG,"download click cancel , cancel notification");
             manager.cancel(1314);
         }
         dismissDialog();
@@ -392,18 +399,20 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
                 return;
             }
             AppUpdateUtils.installNormal(mActivity, saveApkPath, packageName);
+            LoggerReporter.report(TAG,"download completed");
         }
 
         @Override
         protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
             changeUploadStatus(AppUpdateUtils.DownloadStatus.PAUSED);
+            LoggerReporter.report(TAG,"download pause");
         }
 
         @Override
         protected void error(BaseDownloadTask task, Throwable e) {
             setNotification(-1);
             changeUploadStatus(AppUpdateUtils.DownloadStatus.ERROR);
-            Log.e("UpdateFragment", e.getLocalizedMessage());
+            LoggerReporter.report(TAG,"download error " + e.getMessage());
         }
 
         @Override
@@ -418,7 +427,8 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             return;
         }
         Intent intent = new Intent();
-        PendingIntent pendingIntent = PendingIntent.getActivity(mActivity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(mActivity,
+                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         RemoteViews remoteViews = new RemoteViews(mActivity.getPackageName(), R.layout.remote_notification_view);
         remoteViews.setTextViewText(R.id.tvTitle, "下载apk");
         remoteViews.setProgressBar(R.id.pb, 100, progress, false);
