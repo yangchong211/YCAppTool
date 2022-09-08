@@ -2,23 +2,16 @@ package com.yc.ycupdatelib;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.text.TextUtils;
-
 import androidx.core.content.FileProvider;
 
-import java.io.BufferedReader;
+import com.yc.appfilelib.AppFileUtils;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.security.MessageDigest;
-import java.util.ArrayList;
 
 /**
  * <pre>
@@ -31,162 +24,42 @@ import java.util.ArrayList;
  */
 public final class AppUpdateUtils {
 
-    private static final String EXTERNAL_STORAGE_PERMISSION = "android.permission.WRITE_EXTERNAL_STORAGE";
-    public static String APP_UPDATE_DOWN_APK_PATH = "apk" + File.separator + "downApk";
-    private static String mApkName;
-
-    public static String getLocalApkDownSavePath(String apkName){
-        mApkName = apkName;
-        String saveApkPath= APP_UPDATE_DOWN_APK_PATH+ File.separator;
-        String sdPath = getInnerSDCardPath();
-        if (!isExistSDCard() || TextUtils.isEmpty(sdPath)) {
-            ArrayList<String> sdPathList = getExtSDCardPath();
-            if (sdPathList != null && sdPathList.size() > 0 && !TextUtils.isEmpty(sdPathList.get(0))) {
-                sdPath = sdPathList.get(0);
-            }
-        }
-        String saveApkDirs = sdPath+File.separator+saveApkPath;
-        File file = new File(saveApkDirs);
-        //判断文件夹是否存在，如果不存在就创建，否则不创建
-        if (!file.exists()) {
-            //通过file的mkdirs()方法创建目录中包含却不存在的文件夹
-            //noinspection ResultOfMethodCallIgnored
-            file.mkdirs();
-        }
-        saveApkPath = saveApkDirs + apkName+".apk";
-        return saveApkPath;
-    }
-
-    public static String getUserApkDownSavePath(Context context,String apkName){
-        mApkName = apkName;
-        String saveApkPath= APP_UPDATE_DOWN_APK_PATH+ File.separator;
-        String sdPath = getRootDirPath(context);
-        String saveApkDirs = sdPath+File.separator+saveApkPath;
-        File file = new File(saveApkDirs);
-        //判断文件夹是否存在，如果不存在就创建，否则不创建
-        if (!file.exists()) {
-            //通过file的mkdirs()方法创建目录中包含却不存在的文件夹
-            //noinspection ResultOfMethodCallIgnored
-            file.mkdirs();
-        }
-        saveApkPath = saveApkDirs + apkName+".apk";
-        return saveApkPath;
-    }
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static boolean clearDownload(Context context){
-        if (mApkName!=null && mApkName.length()>0){
-            String localApkDownSavePath = getUserApkDownSavePath(context,mApkName);
-            return deleteFile(localApkDownSavePath);
-        }
-        return false;
-    }
-
     /**
-     * 删除单个文件
-     * @param fileName          要删除的文件的文件名
-     * @return                  单个文件删除成功返回true，否则返回false
-     */
-    private static boolean deleteFile(String fileName) {
-        File file = new File(fileName);
-        // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除
-        if (file.exists() && file.isFile()) {
-            if (file.delete()) {
-                System.out.println("删除单个文件" + fileName + "成功！");
-                return true;
-            } else {
-                System.out.println("删除单个文件" + fileName + "失败！");
-                return false;
-            }
-        } else {
-            System.out.println("删除单个文件失败：" + fileName + "不存在！");
-            return false;
-        }
-    }
-
-    /**
-     * 判断是否有sd卡
-     * @return                      是否有sd
-     */
-    private static boolean isExistSDCard() {
-        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-    }
-
-
-    /**
-     * 获取内置SD卡路径
-     * @return                      路径
-     */
-    private static String getInnerSDCardPath() {
-        return Environment.getExternalStorageDirectory().getPath();
-    }
-
-    /**
-     * 获取外置SD卡路径
-     * @return 应该就一条记录或空
-     */
-    private static ArrayList<String> getExtSDCardPath() {
-        ArrayList<String> lResult = new ArrayList<>();
-        try {
-            Runtime rt = Runtime.getRuntime();
-            Process process = rt.exec("mount");
-            InputStream is = process.getInputStream();
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.contains("extSdCard")) {
-                    String[] arr = line.split(" ");
-                    String path = arr[1];
-                    File file = new File(path);
-                    if (file.isDirectory()) {
-                        lResult.add(path);
-                    }
-                }
-            }
-            isr.close();
-        } catch (Exception ignored) {
-        }
-        return lResult;
-    }
-
-
-    /**
-     * 获取存储根目录路径
-     *
-     * @param context
+     * 清除文件
+     * @param context       上下文
+     * @param apkName       apk名称
      * @return
      */
-    public static String getRootDirPath(Context context) {
-        String rootPath = "";
-        if (hasExternalStoragePermission(context)
-                && Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            File file = context.getExternalFilesDir("");
-            if (file != null && file.exists()) {
-                rootPath = file.getAbsolutePath();
-            } else {
-                File dataDir = new File(new File(Environment.getExternalStorageDirectory(), "Android"), "data");
-                File filesDir = new File(new File(dataDir, context.getPackageName()), "files");
-                if (!filesDir.exists()) {
-                    if (filesDir.mkdirs()) {
-                        rootPath = filesDir.getAbsolutePath();
-                    }
-                } else {
-                    rootPath = filesDir.getAbsolutePath();
-                }
-            }
-        }
-        if (TextUtils.isEmpty(rootPath)) {
-            rootPath = context.getFilesDir().getAbsolutePath();
-        }
-        return rootPath;
+    public static boolean clearDownload(Context context , String apkName){
+        File localApkDownSaveFile = getLocalApkDownSaveFile(context, apkName);
+        return AppFileUtils.deleteDirectory(localApkDownSaveFile);
     }
 
-    public static boolean hasExternalStoragePermission(Context context) {
-        int perm = context.checkCallingOrSelfPermission(EXTERNAL_STORAGE_PERMISSION);
-        return perm == PackageManager.PERMISSION_GRANTED;
+    public static String getLocalApkDownSavePath(Context context, String apkName){
+        File localApkDownSaveFile = getLocalApkDownSaveFile(context, apkName);
+        return localApkDownSaveFile.getAbsolutePath();
     }
 
+    public static File getLocalApkDownSaveFile(Context context, String apkName){
+        String saveApkDirs = AppFileUtils.getExternalFilePath(context, "downloadApk");
+        File file = new File(saveApkDirs);
+        //判断文件夹是否存在，如果不存在就创建，否则不创建
+        if (!file.exists()) {
+            //通过file的mkdirs()方法创建目录中包含却不存在的文件夹
+            //noinspection ResultOfMethodCallIgnored
+            file.mkdirs();
+        }
+
+        String apkPath = file.getAbsolutePath() + File.separator + apkName;
+        File apkFile = new File(apkPath);
+        //判断文件夹是否存在，如果不存在就创建，否则不创建
+        if (!file.exists()) {
+            //通过file的mkdirs()方法创建目录中包含却不存在的文件夹
+            //noinspection ResultOfMethodCallIgnored
+            file.mkdirs();
+        }
+        return apkFile;
+    }
 
     /**
      * @param file:要加密的文件
@@ -263,7 +136,7 @@ public final class AppUpdateUtils {
      * @param context                   上下文
      * @param apkPath                    path，文件路径
      */
-    protected static boolean installNormal(Context context, String apkPath , String application_id) {
+    protected static boolean installNormal(Context context, String apkPath , String applicationId) {
         if(apkPath==null){
             return false;
         }
@@ -275,7 +148,7 @@ public final class AppUpdateUtils {
             //版本在7.0以上是不能直接通过uri访问的
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
-                Uri apkUri = FileProvider.getUriForFile(context, application_id+".provider", apkFile);
+                Uri apkUri = FileProvider.getUriForFile(context, applicationId+".provider", apkFile);
                 //添加这一句表示对目标应用临时授权该Uri所代表的文件
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.setDataAndType(apkUri, "application/vnd.android.package-archive");

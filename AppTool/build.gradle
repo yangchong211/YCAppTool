@@ -44,5 +44,6 @@ dependencies {
     implementation project(path: ':AppUpdateLib')
     //其他
     implementation project(path: ':RoundCorners')
+    implementation project(path: ':MonitorFileLib')
 }
 

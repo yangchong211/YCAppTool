@@ -1,4 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yc.ycupdatelib" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,9 +11,8 @@
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true">
-
-        <activity android:name="com.yc.ycupdatelib.PermissionUtils$PermissionActivity"/>
 
         <provider
             android:name="com.yc.ycupdatelib.VersionFileProvider"
