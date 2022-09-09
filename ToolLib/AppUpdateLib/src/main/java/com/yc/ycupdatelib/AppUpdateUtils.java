@@ -8,6 +8,7 @@ import android.os.Build;
 import androidx.core.content.FileProvider;
 
 import com.yc.appfilelib.AppFileUtils;
+import com.yc.eventuploadlib.LoggerReporter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -147,6 +148,11 @@ public final class AppUpdateUtils {
         if (apkPath == null) {
             return false;
         }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            boolean canRequestPackageInstalls = context.getPackageManager().canRequestPackageInstalls();
+            LoggerReporter.report(UpdateFragment.TAG,
+                    "install apk canRequestPackageInstalls "+canRequestPackageInstalls);
+        }
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             File apkFile = new File(apkPath);
@@ -164,9 +170,10 @@ public final class AppUpdateUtils {
                 intent.setDataAndType(uri, "application/vnd.android.package-archive");
             }
             context.startActivity(intent);
+            LoggerReporter.report(UpdateFragment.TAG, "install apk success ");
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerReporter.report(UpdateFragment.TAG, "install apk exception " + e.getMessage());
             return false;
         }
     }

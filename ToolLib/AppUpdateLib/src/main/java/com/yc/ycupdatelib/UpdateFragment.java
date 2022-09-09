@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -97,6 +98,37 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
         FileDownloader.setup(activity);
     }
 
+    /**
+     * 版本更新
+     *
+     * @param isForceUpdate 是否强制更新
+     * @param apkUrl        下载链接
+     * @param apkName       下载apk名称
+     * @param desc          更新文案
+     * @param packageName   包名
+     * @param appMd5        安装包md5值，传null表示不校验
+     */
+    public static void showFragment(Fragment fragment, boolean isForceUpdate,
+                                    String apkUrl, String apkName, String desc,
+                                    String packageName, String appMd5) {
+        UpdateFragment updateFragment = new UpdateFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("apk_url", apkUrl);
+        bundle.putString("desc", desc);
+        bundle.putString("apkName", apkName);
+        bundle.putBoolean("isUpdate", isForceUpdate);
+        bundle.putString("packageName", packageName);
+        bundle.putString("appMd5", appMd5);
+        updateFragment.setArguments(bundle);
+        Context context = fragment.getActivity();
+        if (context != null) {
+            FragmentManager supportFragmentManager = fragment.getChildFragmentManager();
+            updateFragment.show(supportFragmentManager);
+            FileDownloader.setup(context);
+        } else {
+            LoggerReporter.report(TAG, "showFragment fragment content null");
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,7 +142,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             isForceUpdate = arguments.getBoolean("isUpdate");
             packageName = arguments.getString("packageName");
             appMd5 = arguments.getString("appMd5");
-            LoggerReporter.report(TAG,"onCreate");
+            LoggerReporter.report(TAG, "onCreate");
         }
     }
 
@@ -125,7 +157,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             outState.putBoolean("isUpdate", isForceUpdate);
             outState.putString("packageName", packageName);
             outState.putString("appMd5", appMd5);
-            LoggerReporter.report(TAG,"onSaveInstanceState");
+            LoggerReporter.report(TAG, "onSaveInstanceState");
         }
     }
 
@@ -139,7 +171,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             isForceUpdate = savedInstanceState.getBoolean("isUpdate");
             packageName = savedInstanceState.getString("packageName");
             appMd5 = savedInstanceState.getString("appMd5");
-            LoggerReporter.report(TAG,"onViewStateRestored");
+            LoggerReporter.report(TAG, "onViewStateRestored");
         }
     }
 
@@ -214,14 +246,21 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
                         return isForceUpdate;
                     }
+                    cancelTaskAndNotify();
                     return false;
+                }
+            });
+            getDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    LoggerReporter.report(TAG, "dialog on dismiss");
                 }
             });
         }
     }
 
     private void createFilePath() {
-        saveApkPath = AppUpdateUtils.getLocalApkDownSavePath(mActivity,apkName);
+        saveApkPath = AppUpdateUtils.getLocalApkDownSavePath(mActivity, apkName);
         file = new File(saveApkPath);
         if (file.exists()) {
             changeUploadStatus(AppUpdateUtils.DownloadStatus.FINISH);
@@ -252,48 +291,48 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             case AppUpdateUtils.DownloadStatus.START:
             case AppUpdateUtils.DownloadStatus.UPLOADING:
                 if (downloadTask != null) {
-                    LoggerReporter.report(TAG,"download click pause");
+                    LoggerReporter.report(TAG, "download click pause");
                     downloadTask.pause();
                 } else {
-                    LoggerReporter.report(TAG,"download click , task is null , start download");
+                    LoggerReporter.report(TAG, "download click , task is null , start download");
                     checkPermissionAndDownApk();
                 }
                 break;
             case AppUpdateUtils.DownloadStatus.FINISH:
                 File file = new File(saveApkPath);
                 if (file.exists()) {
-                    LoggerReporter.report(TAG,"download click finish , install apk");
+                    LoggerReporter.report(TAG, "download click finish , install apk");
                     packageName = mActivity.getPackageName();
                     String md5 = AppUpdateUtils.getMD5(file);
-                    LoggerReporter.report(TAG,"download click finish , apk md5 : " + md5);
+                    LoggerReporter.report(TAG, "download click finish , apk md5 : " + md5);
                     if (appMd5 != null && !appMd5.equals(md5)) {
                         Toast.makeText(mActivity, "安装包Md5数据非法", Toast.LENGTH_SHORT).show();
-                        AppUpdateUtils.clearDownload(mActivity,apkName);
+                        AppUpdateUtils.clearDownload(mActivity, apkName);
                         DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                             @Override
                             public void run() {
                                 changeUploadStatus(AppUpdateUtils.DownloadStatus.START);
                             }
-                        },1000);
+                        }, 1000);
                         return;
                     }
                     //检测是否有apk文件，如果有直接普通安装
                     AppUpdateUtils.installNormal(mActivity, saveApkPath, packageName);
                 } else {
-                    LoggerReporter.report(TAG,"download click finish , no file");
+                    LoggerReporter.report(TAG, "download click finish , no file");
                     checkPermissionAndDownApk();
                 }
                 break;
             case AppUpdateUtils.DownloadStatus.PAUSED:
-                LoggerReporter.report(TAG,"download click paused");
+                LoggerReporter.report(TAG, "download click paused");
                 checkPermissionAndDownApk();
                 break;
             case AppUpdateUtils.DownloadStatus.ERROR:
-                LoggerReporter.report(TAG,"download click error");
+                LoggerReporter.report(TAG, "download click error");
                 checkPermissionAndDownApk();
                 break;
             default:
-                LoggerReporter.report(TAG,"download click default");
+                LoggerReporter.report(TAG, "download click default");
                 break;
         }
     }
@@ -302,21 +341,24 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
      * 点击取消
      */
     private void clickCancel() {
-        //如果正在下载，那么就先暂停，然后finish
-        if (downloadStatus == AppUpdateUtils.DownloadStatus.UPLOADING) {
-            if (downloadTask != null && downloadTask.isRunning()) {
-                LoggerReporter.report(TAG,"download click cancel , pause");
-                downloadTask.pause();
-            }
-            LoggerReporter.report(TAG,"download click cancel , pause ok");
-        }
-        if (manager!=null){
-            LoggerReporter.report(TAG,"download click cancel , cancel notification");
-            manager.cancel(1314);
-        }
+        cancelTaskAndNotify();
         dismissDialog();
     }
 
+    private void cancelTaskAndNotify() {
+        //如果正在下载，那么就先暂停，然后finish
+        if (downloadStatus == AppUpdateUtils.DownloadStatus.UPLOADING) {
+            if (downloadTask != null && downloadTask.isRunning()) {
+                LoggerReporter.report(TAG, "download click cancel , pause");
+                downloadTask.pause();
+            }
+            LoggerReporter.report(TAG, "download click cancel , pause ok");
+        }
+        if (manager != null) {
+            LoggerReporter.report(TAG, "download click cancel , cancel notification");
+            manager.cancel(1314);
+        }
+    }
 
     private void changeUploadStatus(int upload_status) {
         this.downloadStatus = upload_status;
@@ -340,7 +382,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             case AppUpdateUtils.DownloadStatus.ERROR:
                 mProgress.setVisibility(View.VISIBLE);
                 mTvOk.setText("错误，点击继续");
-                AppUpdateUtils.clearDownload(mActivity,apkName);
+                AppUpdateUtils.clearDownload(mActivity, apkName);
                 break;
             default:
                 break;
@@ -350,10 +392,15 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
 
     private void checkPermissionAndDownApk() {
         if (mActivity == null) {
+            LoggerReporter.report(TAG, "dialog sure , activity is null");
+            return;
+        }
+        if (apkUrl.isEmpty()) {
+            LoggerReporter.report(TAG, "dialog sure , apk url is empty");
             return;
         }
         boolean granted = PermissionUtils.isGranted(mActivity, M_PERMISSION);
-        LoggerReporter.report(TAG,"permission granted : " + granted);
+        LoggerReporter.report(TAG, "permission granted : " + granted);
         if (granted) {
             setNotification(0);
             downloadTask = downApk(apkUrl, saveApkPath, listener);
@@ -367,7 +414,7 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
 
                 @Override
                 public void dialogClickCancel() {
-
+                    LoggerReporter.report(TAG, "permission cancel ok");
                 }
             });
         }
@@ -431,20 +478,20 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
                 return;
             }
             AppUpdateUtils.installNormal(mActivity, saveApkPath, packageName);
-            LoggerReporter.report(TAG,"download completed");
+            LoggerReporter.report(TAG, "download completed");
         }
 
         @Override
         protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
             changeUploadStatus(AppUpdateUtils.DownloadStatus.PAUSED);
-            LoggerReporter.report(TAG,"download pause");
+            LoggerReporter.report(TAG, "download pause");
         }
 
         @Override
         protected void error(BaseDownloadTask task, Throwable e) {
             setNotification(-1);
             changeUploadStatus(AppUpdateUtils.DownloadStatus.ERROR);
-            LoggerReporter.report(TAG,"download error " + e.getMessage());
+            LoggerReporter.report(TAG, "download error " + e.getMessage());
         }
 
         @Override

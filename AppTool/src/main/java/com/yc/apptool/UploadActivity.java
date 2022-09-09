@@ -34,19 +34,7 @@ public class UploadActivity extends AppCompatActivity {
         PermissionDialog.setPermissionDialog(new PermissionDialog() {
             @Override
             protected void showStorageDialog(PermissionListener listener) {
-                PermissionUtils permission = PermissionUtils.permission(UploadActivity.this,mPermission);
-                permission.callback(new PermissionUtils.SimpleCallback() {
-                    @Override
-                    public void onGranted() {
-                        listener.dialogClickSure();
-                    }
-
-                    @Override
-                    public void onDenied() {
-                        listener.dialogClickCancel();
-                    }
-                });
-                permission.request(UploadActivity.this);
+                listener.dialogClickSure();
             }
         });
 

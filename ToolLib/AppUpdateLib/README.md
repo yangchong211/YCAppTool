@@ -92,7 +92,7 @@
 
 
 - 参考：http://t.zoukankan.com/iplus-p-4467386.html
-
+- 安装流程：https://www.jianshu.com/p/3a898e17b685
 
 
 
