@@ -220,10 +220,27 @@ public class MixtureTextViewActivity extends AppCompatActivity {
      */
     private void mode4() {
         SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
+        spannableString.append(" ");
+        Drawable drawable = this.getResources().getDrawable(R.drawable.ic_red_point_shadow);
+        drawable.setBounds(0, spannableString.length(), drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        ImageSpan imageSpan1 = new AlignImageSpan(drawable);
+        spannableString.setSpan(imageSpan1,0,spannableString.length(),Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+
+
+        spannableString.append("暗影IV已经开始暴走了暗影IV已经开始暴走了暗影IV已经开始暴走了暗影IV已经开始暴走了暗影IV已经开始暴走了 \n");
         BackgroundColorSpan bgColorSpan = new BackgroundColorSpan(Color.parseColor("#009ad6"));
         spannableString.setSpan(bgColorSpan, 0, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        ImageSpan imageSpan2 = new AlignImageSpan(drawable);
+        int start = spannableString.length();
+        spannableString.append(" ");
+        int end = spannableString.length();
+        spannableString.setSpan(imageSpan2,start,end,Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.append("你就是个逗比 \n");
+
         tv4.setText(spannableString);
+
+        //20.5    15
     }
 
     /**

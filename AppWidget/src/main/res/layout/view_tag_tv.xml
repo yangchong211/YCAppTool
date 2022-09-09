@@ -8,7 +8,6 @@
     android:gravity="center"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:background="@drawable/select_material_tag"
     android:textSize="11sp"
     android:textStyle="normal"
     android:text="标签">

@@ -57,9 +57,10 @@
                 android:id="@+id/progress"
                 android:visibility="invisible"
                 android:layout_marginTop="15dp"
+                android:progressDrawable="@drawable/progress_bar_color"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="2dp" />
+                android:layout_height="10dp" />
 
 
             <LinearLayout

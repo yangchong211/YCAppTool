@@ -25,7 +25,7 @@ public final class CompressUtils {
     /**
      * 把Bitmap转Byte
      */
-    public static byte[] Bitmap2Bytes(Bitmap bm){
+    protected static byte[] bitmap2Bytes(Bitmap bm){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
@@ -34,7 +34,7 @@ public final class CompressUtils {
     /**
      * 把Bitmap转Byte
      */
-    public static InputStream Bitmap2InputStream(Bitmap bm){
+    protected static InputStream bitmap2InputStream(Bitmap bm){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] bytes = baos.toByteArray();
@@ -69,7 +69,7 @@ public final class CompressUtils {
      * @param recycle           是否回收
      * @return
      */
-    public static Bitmap compressByScale(final Bitmap src, final int newWidth, final int newHeight,
+    protected static Bitmap compressByScale(final Bitmap src, final int newWidth, final int newHeight,
                                          final boolean recycle) {
         if (isEmptyBitmap(src)) {
             return null;
@@ -87,7 +87,7 @@ public final class CompressUtils {
      * @param quality           质量比
      * @return
      */
-    public static Bitmap compressByQuality(final Bitmap src, @IntRange(from = 0, to = 100) final int quality) {
+    protected static Bitmap compressByQuality(final Bitmap src, @IntRange(from = 0, to = 100) final int quality) {
         return compressByQuality(src, quality ,null);
     }
 
@@ -97,7 +97,7 @@ public final class CompressUtils {
      * @param quality           质量比
      * @return
      */
-    public static Bitmap compressByQuality(final Bitmap src, @IntRange(from = 0, to = 100) final int quality , BitmapFactory.Options options) {
+    protected static Bitmap compressByQuality(final Bitmap src, @IntRange(from = 0, to = 100) final int quality , BitmapFactory.Options options) {
         byte[] bytes = compressByQuality(src, quality, false);
         if (options == null){
             options = new BitmapFactory.Options();
@@ -146,7 +146,7 @@ public final class CompressUtils {
      * @param sampleSize            采样率
      * @return
      */
-    public static Bitmap compressBySampleSize(final Bitmap src, final int sampleSize) {
+    protected static Bitmap compressBySampleSize(final Bitmap src, final int sampleSize) {
         return compressBySampleSize(src, sampleSize, false);
     }
 
@@ -203,11 +203,10 @@ public final class CompressUtils {
         return inSampleSize;
     }
 
-
     /**
      * 计算出所需要压缩的大小
      */
-    public static int calculateSampleSize(BitmapFactory.Options options) {
+    protected static int calculateSampleSize(BitmapFactory.Options options) {
         CompressConfig compressConfig = AppCompress.getInstance().getCompressConfig();
         int sampleSize = 1;
         int picWidth = options.outWidth;
@@ -230,7 +229,7 @@ public final class CompressUtils {
      * @param image                             bitmap
      * @return
      */
-    public static Bitmap compressImage(Bitmap image){
+    protected static Bitmap compressImage(Bitmap image){
         CompressConfig compressConfig = AppCompress.getInstance().getCompressConfig();
         if (isEmptyBitmap(image)) {
             return null;
