@@ -50,5 +50,7 @@ public class BasePagerStateAdapter extends FragmentStatePagerAdapter {
         } else {
             return "";
         }
+
+
     }
 }

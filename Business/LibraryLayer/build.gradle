@@ -134,6 +134,5 @@ dependencies {
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':HttpServer')
     implementation project(path: ':ImageServer')
-    implementation project(path: ':FragmentLib')
     implementation project(path: ':CountTimerLib')
 }
