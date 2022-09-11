@@ -45,7 +45,7 @@ dependencies {
     //app重启库
     implementation 'com.github.yangchong211.YCCommonLib:AppRestartLib:1.3.5'
     //intent内容输出到控制台
-//    implementation 'com.github.yangchong211.YCCommonLib:SafeIntentLib:1.3.5'
+    implementation 'com.github.yangchong211.YCCommonLib:SafeIntentLib:1.3.5'
     //通用组件接口库
     implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.3.5'
     //各种广播监听哭
