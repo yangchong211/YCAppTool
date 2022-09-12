@@ -1,4 +1,4 @@
-package com.yc.toolutils.screen;
+package com.yc.appscreenlib;
 
 import android.app.Activity;
 import android.app.Application;
@@ -14,13 +14,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
-
-import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppProcessUtils;
-
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -98,9 +95,9 @@ public final class ScreenShotUtils {
         if (mScreenRealSize == null) {
             mScreenRealSize = getRealScreenSize();
             if (mScreenRealSize != null) {
-                AppLogUtils.d("Screen Real Size: " + mScreenRealSize.x + " * " + mScreenRealSize.y);
+                d("Screen Real Size: " + mScreenRealSize.x + " * " + mScreenRealSize.y);
             } else {
-                AppLogUtils.d("Get screen real size failed.");
+                d("Get screen real size failed.");
             }
         }
     }
@@ -253,11 +250,11 @@ public final class ScreenShotUtils {
             }
 
             if (cursor == null) {
-                AppLogUtils.d("Deviant logic.");
+                d("Deviant logic.");
                 return;
             }
             if (!cursor.moveToFirst()) {
-                AppLogUtils.d("Cursor no data.");
+                d("Cursor no data.");
                 return;
             }
 
@@ -311,14 +308,14 @@ public final class ScreenShotUtils {
      */
     private void handleMediaRowData(String data, long dateTaken, int width, int height) {
         if (checkScreenShot(data, dateTaken, width, height)) {
-            AppLogUtils.d("ScreenShot: path = " + data + "; size = " + width + " * " + height
+            d("ScreenShot: path = " + data + "; size = " + width + " * " + height
                 + "; date = " + dateTaken);
             if (mListener != null && !checkCallback(data)) {
                 mListener.onShot(data, mContext);
             }
         } else {
             // 如果在观察区间媒体数据库有数据改变，又不符合截屏规则，则输出到 log 待分析
-            AppLogUtils.d("Media content changed, but not screenshot: path = " + data
+            d("Media content changed, but not screenshot: path = " + data
                 + "; size = " + width + " * " + height + "; date = " + dateTaken);
         }
     }
@@ -456,13 +453,47 @@ public final class ScreenShotUtils {
              * 判断依据：应用在前台
              */
             if (null != mContext && null != mContext.get()) {
-                boolean runningInForeground = AppProcessUtils
-                        .isRunningInForeground(mContext.get().getApplicationContext());
+                boolean runningInForeground = isRunningInForeground(mContext.get().getApplicationContext());
                 if (runningInForeground) {
                     handleMediaContentChange(mContentUri);
                 }
             }
         }
+    }
+    
+    private void d(String log){
+        Log.d("ScreenShotUtils",log);
+    }
+
+    public static boolean isRunningInForeground(Context context) {
+        try {
+            Class clazz = ActivityManager.RunningAppProcessInfo.class;
+            Field processStateField = clazz.getDeclaredField("processState");
+            ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+            //其中RunningAppProcessInfo类则封装了正在运行着的进程信息，当然也包含了正在运行的app的包名
+            //可以activitymanager.getRunningAppProcesses()获取当前运行的app列表
+            List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
+            if (null == processInfos || processInfos.isEmpty()) {
+                return false;
+            }
+            String packageName = context.getPackageName();
+            //对比自身的包名，来判断本身app是否处于前台运行。
+            Iterator<ActivityManager.RunningAppProcessInfo> var5 = processInfos.iterator();
+            while(var5.hasNext()) {
+                ActivityManager.RunningAppProcessInfo rapi = var5.next();
+                if (rapi.importance == 100 && rapi.importanceReasonCode == 0) {
+                    try {
+                        int processState = processStateField.getInt(rapi);
+                        if (processState == 2 && rapi.pkgList != null && rapi.pkgList.length > 0) {
+                            return rapi.pkgList[0].equals(packageName);
+                        }
+                    } catch (Exception var8) {
+                    }
+                }
+            }
+        } catch (Exception var9) {
+        }
+        return false;
     }
 }
 

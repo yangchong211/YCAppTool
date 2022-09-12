@@ -74,7 +74,7 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         ':ArchitectureLib',':ActivityManager', ':ToolFileLib',':EventUploadLib',
         ':AppCommonInter',':ToolMemoryLib',':AppPermission',':PhoneSensor',
         ':AppLruDisk',':AppLruCache',':DownloadHelper',':AppEncryptLib',
-        ':AppMediaStore',':DataCloneLib'
+        ':AppMediaStore',':DataCloneLib',':AppScreenLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -102,6 +102,8 @@ project(':DownloadHelper').projectDir = new File('CommonLib/DownloadHelper')
 project(':AppEncryptLib').projectDir = new File('CommonLib/AppEncryptLib')
 project(':AppMediaStore').projectDir = new File('CommonLib/AppMediaStore')
 project(':DataCloneLib').projectDir = new File('CommonLib/DataCloneLib')
+project(':AppScreenLib').projectDir = new File('CommonLib/AppScreenLib')
+
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -186,6 +188,7 @@ project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
 project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
 
 
+
 /* +++++++++ Apt框架基础工具库 +++++++++ */
 include ':RouteCompiler', ':RouteManager', ':RouteAnnotations',':BuildTimeCostPlugin',
         ':ServiceLoaderApi', ':ServiceLoaderAnnotations', ':ServiceLoaderRegistry',
@@ -204,6 +207,7 @@ project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 project(':AppInitApi').projectDir = new File('AptHelper/AppInitApi')
 project(':AppInitCommon').projectDir = new File('AptHelper/AppInitCommon')
 project(':AppInitCompiler').projectDir = new File('AptHelper/AppInitCompiler')
+
 
 
 /* +++++++++ App监控库 +++++++++ */

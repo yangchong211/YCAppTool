@@ -1,4 +1,4 @@
-package com.yc.toolutils.screen;
+package com.yc.appscreenlib;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
-import com.yc.appcompress.CompressUtils;
 
 /**
  * <pre>
