@@ -1,4 +1,4 @@
-package com.yc.apprestartlib;
+package com.yc.apprestartlib.impl;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.yc.activitymanager.ActivityManager;
+import com.yc.apprestartlib.IRestartProduct;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
  *     revise:
  * </pre>
  */
-public class LauncherRestartImpl implements IRestartApp {
+public class LauncherRestartImpl implements IRestartProduct {
 
     @Override
     public void restartApp(Context context) {

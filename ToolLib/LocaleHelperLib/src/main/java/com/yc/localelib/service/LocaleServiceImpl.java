@@ -31,7 +31,7 @@ public class LocaleServiceImpl implements ILocaleService {
      */
     private static Application sApplication;
     private final List<OnLocaleChangedListener> listeners = new ArrayList<>();
-    private AtomicBoolean isInit = new AtomicBoolean(false);
+    private final AtomicBoolean isInit = new AtomicBoolean(false);
 
     /**
      * 获取应用上下文

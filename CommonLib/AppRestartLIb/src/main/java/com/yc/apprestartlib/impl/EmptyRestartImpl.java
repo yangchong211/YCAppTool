@@ -1,7 +1,8 @@
-package com.yc.apprestartlib;
+package com.yc.apprestartlib.impl;
 
 import android.content.Context;
 
+import com.yc.apprestartlib.IRestartProduct;
 import com.yc.toolutils.AppLogUtils;
 
 /**
@@ -14,7 +15,7 @@ import com.yc.toolutils.AppLogUtils;
  *     revise:
  * </pre>
  */
-public class EmptyRestartImpl implements IRestartApp {
+public class EmptyRestartImpl implements IRestartProduct {
     @Override
     public void restartApp(Context context) {
         AppLogUtils.w("IRestartApp:", "restart app empty");

@@ -15,7 +15,7 @@ import android.content.Context;
 public class RestartAppHelper {
 
     public static void restartApp(Context context,@RestartFactory.RestartType String type) {
-        IRestartApp iRestartApp = RestartFactory.create(type);
+        IRestartProduct iRestartApp = RestartFactory.create(type);
         iRestartApp.restartApp(context);
     }
 

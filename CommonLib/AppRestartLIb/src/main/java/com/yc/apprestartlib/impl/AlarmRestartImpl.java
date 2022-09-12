@@ -1,4 +1,4 @@
-package com.yc.apprestartlib;
+package com.yc.apprestartlib.impl;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.yc.activitymanager.ActivityManager;
+import com.yc.apprestartlib.IRestartProduct;
 import com.yc.toolutils.AppLogUtils;
 
 /**
@@ -18,7 +19,7 @@ import com.yc.toolutils.AppLogUtils;
  *     revise:
  * </pre>
  */
-public class AlarmRestartImpl implements IRestartApp {
+public class AlarmRestartImpl implements IRestartProduct {
 
     @Override
     public void restartApp(Context context) {

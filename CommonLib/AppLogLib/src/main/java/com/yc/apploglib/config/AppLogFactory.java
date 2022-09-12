@@ -5,13 +5,13 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.yc.appfilelib.AppFileUtils;
 import com.yc.apploglib.log.DefaultLoggerImpl;
 import com.yc.apploglib.log.InterLogger;
 import com.yc.apploglib.printer.AbsPrinter;
 import com.yc.apploglib.printer.FilePrinterImpl;
 import com.yc.apploglib.printer.LogcatPrinterImpl;
 import com.yc.toolutils.AppToolUtils;
-import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.File;
 
@@ -38,7 +38,7 @@ public final class AppLogFactory {
         if (config.isWriteFile()){
             File file;
             if (TextUtils.isEmpty(config.getFilePath())){
-                String log = AppFileUtils.getCacheFilePath(AppToolUtils.getApp(), "ycLog");
+                String log = AppFileUtils.getExternalFilePath(AppToolUtils.getApp(), "ycLog");
                 file = new File(log);
             } else {
                 file = new File(config.getFilePath());

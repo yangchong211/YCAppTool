@@ -12,7 +12,7 @@ import android.content.Context;
  *     revise:
  * </pre>
  */
-public interface IRestartApp {
+public interface IRestartProduct {
 
     /**
      * 重启App抽象方法
