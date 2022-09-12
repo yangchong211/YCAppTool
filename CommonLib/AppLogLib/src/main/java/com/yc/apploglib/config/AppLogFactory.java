@@ -27,13 +27,13 @@ import java.io.File;
  */
 public final class AppLogFactory {
 
-    public final static LogDispatcher sLogDispatcher = new LogDispatcher();
+    public final static LogDispatcher S_LOG_DISPATCHER = new LogDispatcher();
     private static AppLogConfig appLogConfig;
 
     public static void init(@NonNull AppLogConfig config) {
         appLogConfig = config;
         if (config.isEnableDbgLog()) {
-            sLogDispatcher.addPrinter(new LogcatPrinterImpl());
+            S_LOG_DISPATCHER.addPrinter(new LogcatPrinterImpl());
         }
         if (config.isWriteFile()){
             File file;
@@ -43,25 +43,25 @@ public final class AppLogFactory {
             } else {
                 file = new File(config.getFilePath());
             }
-            sLogDispatcher.addPrinter(new FilePrinterImpl(file));
+            S_LOG_DISPATCHER.addPrinter(new FilePrinterImpl(file));
         }
-        sLogDispatcher.setMinLogLevel(config.getMinLogLevel());
+        S_LOG_DISPATCHER.setMinLogLevel(config.getMinLogLevel());
     }
 
     public static InterLogger getLogger(String tag) {
-        return new DefaultLoggerImpl(tag, sLogDispatcher);
+        return new DefaultLoggerImpl(tag, S_LOG_DISPATCHER);
     }
 
     public static boolean addPrinter(@NonNull AbsPrinter printer) {
-        return sLogDispatcher.addPrinter(printer);
+        return S_LOG_DISPATCHER.addPrinter(printer);
     }
 
     public static void removePrinter(@NonNull AbsPrinter printer) {
-        sLogDispatcher.removePrinter(printer);
+        S_LOG_DISPATCHER.removePrinter(printer);
     }
 
     public static boolean hasPrinter(@NonNull String printerName) {
-        return sLogDispatcher.hasPrinter(printerName);
+        return S_LOG_DISPATCHER.hasPrinter(printerName);
     }
 
     public static void enableLogcatPrinter() {
@@ -76,9 +76,9 @@ public final class AppLogFactory {
     }
 
     public static void enableLogcatPrinter(int logLevel) {
-        if (!sLogDispatcher.hasPrinter(LogcatPrinterImpl.PRINTER_NAME)) {
-            sLogDispatcher.addPrinter(new LogcatPrinterImpl());
-            sLogDispatcher.setMinLogLevel(logLevel);
+        if (!S_LOG_DISPATCHER.hasPrinter(LogcatPrinterImpl.PRINTER_NAME)) {
+            S_LOG_DISPATCHER.addPrinter(new LogcatPrinterImpl());
+            S_LOG_DISPATCHER.setMinLogLevel(logLevel);
         }
     }
 }
