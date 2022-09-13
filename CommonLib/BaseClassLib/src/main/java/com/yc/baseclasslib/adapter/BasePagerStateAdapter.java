@@ -20,13 +20,13 @@ import java.util.List;
  */
 public class BasePagerStateAdapter extends FragmentStatePagerAdapter {
 
+
     /**
      * FragmentPageStateAdapter在每次切换页面的时候，是将Fragment进行回收。
      * 适合页面较多的Fragment使用，这样就不会消耗更多的内存
      */
 
     private final List<?> mFragment;
-    private List<String> mTitleList;
 
     /**
      * 接收首页传递的标题
@@ -34,15 +34,6 @@ public class BasePagerStateAdapter extends FragmentStatePagerAdapter {
     public BasePagerStateAdapter(FragmentManager fm, List<?> mFragment) {
         super(fm);
         this.mFragment = mFragment;
-    }
-
-    /**
-     * 接收首页传递的标题
-     */
-    public BasePagerStateAdapter(FragmentManager fm, List<?> mFragment, List<String> mTitleList) {
-        super(fm);
-        this.mFragment = mFragment;
-        this.mTitleList = mTitleList;
     }
 
     /**
@@ -64,20 +55,5 @@ public class BasePagerStateAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return mFragment == null ? 0 : mFragment.size();
     }
-
-    /**
-     * 首页显示title，每日推荐等..
-     * 若有问题，移到对应单独页面
-     */
-    @Override
-    public CharSequence getPageTitle(int position) {
-        if (mTitleList != null) {
-            String title = mTitleList.get(position);
-            return TextUtils.isEmpty(title) ? "" : title;
-        } else {
-            return "";
-        }
-    }
-
 
 }

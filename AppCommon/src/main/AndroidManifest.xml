@@ -23,6 +23,7 @@
         <activity android:name=".reflect.ReflectionActivity"/>
         <activity android:name=".file.FileActivity"/>
         <activity android:name=".vp2.ViewPager2Activity"/>
+        <activity android:name=".vp.ViewPagerActivity"/>
     </application>
 
 

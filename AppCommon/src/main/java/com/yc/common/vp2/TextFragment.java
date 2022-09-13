@@ -34,7 +34,7 @@ public class TextFragment extends BaseFragment {
     @Override
     public void initView(View view) {
         tvVpTitle = view.findViewById(R.id.tv_vp_title);
-
+        tvVpTitle.setText("文本");
     }
 
     @Override

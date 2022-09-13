@@ -1,10 +1,11 @@
 package com.yc.common.vp;
 
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
-import com.yc.baseclasslib.viewpager2.BaseFragmentStateAdapter;
-import com.yc.baseclasslib.viewpager2.OnPageChangeCallback;
+import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter;
+import com.yc.baseclasslib.adapter.BasePagerStateAdapter;
 import com.yc.common.R;
 import com.yc.common.vp2.TextFragment;
 import com.yc.library.base.mvp.BaseActivity;
@@ -14,22 +15,30 @@ import java.util.List;
 
 public class ViewPagerActivity extends BaseActivity {
 
-    private ViewPager2 vpPager;
+    private ViewPager vpPager;
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        vpPager.unregisterOnPageChangeCallback(changeCallback);
     }
 
     @Override
     public int getContentView() {
-        return R.layout.base_view_pager2;
+        return R.layout.base_view_pager;
     }
 
     @Override
     public void initView() {
         vpPager = findViewById(R.id.vp_pager);
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
 
         List<Fragment> fragments = new ArrayList<>();
         // fragments
@@ -42,28 +51,11 @@ public class ViewPagerActivity extends BaseActivity {
         fragments.add(TextFragment.newInstance("发现"));
         fragments.add(TextFragment.newInstance("我"));
 
-        BaseFragmentStateAdapter adapter = new BaseFragmentStateAdapter(this, fragments);
-        vpPager.registerOnPageChangeCallback(changeCallback);
-        //vpPager.setCurrentItem(0);
-        adapter.update(fragments);
+//        FragmentManager supportFragmentManager = getSupportFragmentManager();
+//        BaseFragmentPagerAdapter adapter = new BaseFragmentPagerAdapter(supportFragmentManager);
+//        adapter.addFragmentList(fragments);
+        BasePagerStateAdapter adapter = new BasePagerStateAdapter(this.getSupportFragmentManager(), fragments);
         vpPager.setAdapter(adapter);
+        vpPager.setCurrentItem(0);
     }
-
-    @Override
-    public void initListener() {
-
-    }
-
-    @Override
-    public void initData() {
-
-    }
-
-    private final ViewPager2.OnPageChangeCallback changeCallback = new OnPageChangeCallback(){
-        @Override
-        public void onPageSelected(int position) {
-            super.onPageSelected(position);
-        }
-    };
-
 }

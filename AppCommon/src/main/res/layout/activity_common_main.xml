@@ -219,6 +219,12 @@
             android:gravity="center"
             android:text="file文件"/>
         <Button
+            android:id="@+id/btn_vp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="vp封装案例"/>
+        <Button
             android:id="@+id/btn_vp2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
