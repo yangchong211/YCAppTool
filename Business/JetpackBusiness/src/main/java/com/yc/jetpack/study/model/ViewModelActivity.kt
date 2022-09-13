@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +15,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter
+import com.yc.basevpadapter.adapter.BaseFragmentPagerAdapter
 import com.yc.jetpack.R
 
 class ViewModelActivity : AppCompatActivity() {
@@ -62,7 +61,9 @@ class ViewModelActivity : AppCompatActivity() {
         fragments.add(ViewModelFragmentA())
         fragments.add(ViewModelFragmentB())
         val mutableList = mutableListOf("无参数", "有参数")
-        val adapter = BaseFragmentPagerAdapter(supportFragmentManager)
+        val adapter = com.yc.basevpadapter.adapter.BaseFragmentPagerAdapter(
+            supportFragmentManager
+        )
         adapter.addFragmentList(fragments,mutableList)
         tabLayout?.setupWithViewPager(viewPager)
         viewPager?.offscreenPageLimit = mutableList.size

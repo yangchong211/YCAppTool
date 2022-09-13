@@ -1,4 +1,4 @@
-package com.yc.baseclasslib.viewpager;
+package com.yc.basevpadapter.viewpager;
 
 import android.content.Context;
 import android.util.AttributeSet;

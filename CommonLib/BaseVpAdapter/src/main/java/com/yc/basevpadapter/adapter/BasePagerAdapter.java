@@ -1,4 +1,4 @@
-package com.yc.baseclasslib.adapter;
+package com.yc.basevpadapter.adapter;
 
 import android.database.DataSetObserver;
 import android.view.View;

@@ -8,11 +8,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewPagerFragment extends BaseFragment {
 
@@ -27,7 +32,7 @@ public class ViewPagerFragment extends BaseFragment {
     private ViewPager vpContent;
 
     public static Fragment newInstance(String title){
-        Fragment fragment = new Fragment();
+        ViewPagerFragment fragment = new ViewPagerFragment();
         Bundle bundle = new Bundle();
         bundle.putString("title" , title);
         fragment.setArguments(bundle);
@@ -60,7 +65,37 @@ public class ViewPagerFragment extends BaseFragment {
     @Override
     public void initData() {
         if (getArguments() != null) {
-            toolbarTitle.setText(getArguments().getString("title"));
+            String title = getArguments().getString("title");
+            toolbarTitle.setText(title);
+
+            List<Fragment> fragments = new ArrayList<>();
+            ArrayList<String> mTitleList = new ArrayList<>();
+            if ("发现".equals(title)){
+                // fragments
+                fragments.add(TextFragment.newInstance("聊天"));
+                fragments.add(TextFragment.newInstance("通讯录"));
+
+                mTitleList.add("请求");
+                mTitleList.add("流量");
+
+                FragmentManager supportFragmentManager = this.getChildFragmentManager();
+                BaseFragmentPagerAdapter adapter = new BaseFragmentPagerAdapter(supportFragmentManager);
+                adapter.addFragmentList(fragments,mTitleList);
+                vpContent.setAdapter(adapter);
+
+                vpContent.setAdapter(adapter);
+                vpContent.setCurrentItem(0);
+                tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+                tabLayout.setupWithViewPager(vpContent);
+            } else {
+                fragments.add(TextFragment.newInstance("聊天"));
+                mTitleList.add("");
+                FragmentManager supportFragmentManager = this.getChildFragmentManager();
+                BaseFragmentPagerAdapter adapter = new BaseFragmentPagerAdapter(supportFragmentManager);
+                adapter.addFragmentList(fragments,mTitleList);
+                vpContent.setAdapter(adapter);
+                tabLayout.setVisibility(View.GONE);
+            }
         }
     }
 

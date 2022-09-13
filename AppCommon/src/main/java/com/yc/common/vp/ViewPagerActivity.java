@@ -1,7 +1,6 @@
 package com.yc.common.vp;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter;

@@ -1,4 +1,4 @@
-package com.yc.baseclasslib.viewpager2;
+package com.yc.basevpadapter.viewpager2;
 
 import androidx.viewpager2.widget.ViewPager2;
 

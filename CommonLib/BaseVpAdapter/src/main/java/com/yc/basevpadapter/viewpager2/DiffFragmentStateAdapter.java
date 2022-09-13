@@ -1,4 +1,4 @@
-package com.yc.baseclasslib.viewpager2;
+package com.yc.basevpadapter.viewpager2;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,7 +15,7 @@ import java.util.List;
  *     GitHub : https://github.com/yangchong211/YCCommonLib
  *     time  : 2019/01/30
  *     desc  : ViewPager2的适配器
- *     revise:
+ *     revise: 注意使用这个会闪一下
  * </pre>
  */
 public class DiffFragmentStateAdapter extends BaseFragmentStateAdapter {
