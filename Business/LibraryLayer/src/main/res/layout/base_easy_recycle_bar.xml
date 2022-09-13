@@ -8,7 +8,7 @@
 
     <include layout="@layout/base_tool_bar"/>
 
-    <org.yczbj.ycrefreshviewlib.YCRefreshView
+    <org.yczbj.ycrefreshviewlib.view.YCRefreshView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

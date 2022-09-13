@@ -52,10 +52,6 @@ android {
         }
     }
 
-    lintOptions {
-        abortOnError false
-    }
-
     //fix：Failed resolution of: Landroidx/databinding/DataBinderMapperImpl;
     //问题：使用dataBinding 时报错
     //原因：使用模块化项目时，子模块使用dataBinding ,主app 也要添加dataBinding支持

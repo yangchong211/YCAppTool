@@ -77,7 +77,7 @@ static def releaseTime() {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation rootProject.ext.dependencies["constraintlayout"]
     //api rootProject.ext.dependencies["appcompat-v7"]
     api(rootProject.ext.dependencies["appcompat"])
     api rootProject.ext.dependencies["media"]

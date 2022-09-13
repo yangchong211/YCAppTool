@@ -41,25 +41,29 @@ class ViewModelFragmentA : Fragment() {
     /**
      * ViewModel类，没有参数
      */
-    private var mNoParamsViewModel: NoParamsViewModel? = null
+    private var viewModel: NoParamsViewModel? = null
 
     private fun initViewModel() {
         // 不带参数的ViewModel获取方法使用非常简单
-        mNoParamsViewModel = ViewModelProvider(this).get(
+        viewModel = ViewModelProvider(this).get(
             NoParamsViewModel::class.java
         )
 
         //监听
-        mNoParamsViewModel?.getName()?.observe(viewLifecycleOwner, Observer { savedString ->
+        viewModel?.getName()?.observe(viewLifecycleOwner, Observer { savedString ->
             val str = savedString ?: this.resources.getString(R.string.app_name)
             tvName?.text = "FragmentA，无参数model案例：$str"
         })
-
+        //监听
+        viewModel?.getName()?.observe(this){
+            val str = it ?: this.resources.getString(R.string.app_name)
+            tvName?.text = "FragmentA，无参数model案例：$str"
+        }
 
         //触发
         var index = 1
         btnSave?.setOnClickListener(){
-            mNoParamsViewModel?.saveNewName("FragmentA:你是个逗比" + index++)
+            viewModel?.saveNewName("FragmentA:你是个逗比" + index++)
         }
     }
 

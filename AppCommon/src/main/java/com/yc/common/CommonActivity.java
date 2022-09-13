@@ -25,6 +25,7 @@ import com.yc.apprestartlib.RestartAppHelper;
 import com.yc.apprestartlib.RestartFactory;
 import com.yc.common.file.FileActivity;
 import com.yc.common.reflect.ReflectionActivity;
+import com.yc.common.vp2.ViewPager2Activity;
 import com.yc.fragmentmanager.FragmentLifecycleListener;
 import com.yc.fragmentmanager.FragmentManager;
 import com.yc.intent.log.IntentLogger;
@@ -141,6 +142,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_camera).setOnClickListener(this);
         findViewById(R.id.btn_reflection).setOnClickListener(this);
         findViewById(R.id.btn_file).setOnClickListener(this);
+        findViewById(R.id.btn_vp2).setOnClickListener(this);
     }
 
 
@@ -229,6 +231,8 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this, ReflectionActivity.class));
         } else if (id == R.id.btn_file){
             startActivity(new Intent(this, FileActivity.class));
+        } else if (id == R.id.btn_vp2){
+            startActivity(new Intent(this, ViewPager2Activity.class));
         }
     }
 

@@ -10,7 +10,7 @@ class NoParamsViewModel : ViewModel() {
     private val name = MutableLiveData<String>()
 
     //数据观察类
-    fun getName(): LiveData<String> {
+    fun getName(): MutableLiveData<String> {
         return name
     }
 

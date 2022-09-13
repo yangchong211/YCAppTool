@@ -84,4 +84,15 @@ public abstract class BasePagerAdapter extends PagerAdapter {
     public void registerDataSetObserver(@NonNull DataSetObserver observer) {
         super.registerDataSetObserver(observer);
     }
+
+    /**
+     * 解绑注册数据观察者监听
+     * @param observer                      observer
+     */
+    @Override
+    public void unregisterDataSetObserver(@NonNull DataSetObserver observer) {
+        super.unregisterDataSetObserver(observer);
+    }
+
+
 }

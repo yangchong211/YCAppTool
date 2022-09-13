@@ -51,7 +51,7 @@ public class ViewPagerDiffCallback<T extends Fragment> extends DiffUtil.Callback
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
         if (oldList.size() > oldItemPosition && newList.size() > newItemPosition) {
-            return oldList.get(newItemPosition).getClass().getSimpleName().hashCode() ==
+            return oldList.get(oldItemPosition).getClass().getSimpleName().hashCode() ==
                     newList.get(newItemPosition).getClass().getSimpleName().hashCode();
         }
         return false;
@@ -68,7 +68,7 @@ public class ViewPagerDiffCallback<T extends Fragment> extends DiffUtil.Callback
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         if (oldList.size() > oldItemPosition && newList.size() > newItemPosition) {
-            return oldList.get(newItemPosition) == newList.get(newItemPosition);
+            return oldList.get(oldItemPosition) == newList.get(newItemPosition);
         }
         return false;
     }

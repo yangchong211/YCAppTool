@@ -122,6 +122,7 @@ fun Fragment.navigate(directions: NavDirections, navOptions: NavOptions) {
 }
 
 fun Fragment.navigateUp(): Boolean {
+    //返回到上一页面
     return findNavController2().navigateUp()
 }
 
