@@ -230,6 +230,12 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="vp2封装案例"/>
+        <Button
+            android:id="@+id/btn_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="tab案例"/>
     </LinearLayout>
 
 

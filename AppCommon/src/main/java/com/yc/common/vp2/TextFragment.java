@@ -14,12 +14,15 @@ import com.google.android.material.tabs.TabLayout;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseFragment;
 
+/**
+ * @author yangchong
+ */
 public class TextFragment extends BaseFragment {
 
     private TextView tvVpTitle;
 
     public static Fragment newInstance(String title){
-        Fragment fragment = new Fragment();
+        TextFragment fragment = new TextFragment();
         Bundle bundle = new Bundle();
         bundle.putString("title" , title);
         fragment.setArguments(bundle);

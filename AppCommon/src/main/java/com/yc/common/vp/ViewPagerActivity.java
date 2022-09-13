@@ -50,12 +50,14 @@ public class ViewPagerActivity extends BaseActivity {
         fragments.add(TextFragment.newInstance("通讯录"));
         fragments.add(TextFragment.newInstance("发现"));
         fragments.add(TextFragment.newInstance("我"));
+        fragments.add(TextFragment.newInstance("聊天"));
+        fragments.add(TextFragment.newInstance("通讯录"));
+        fragments.add(TextFragment.newInstance("发现"));
+        fragments.add(TextFragment.newInstance("我"));
 
-//        FragmentManager supportFragmentManager = getSupportFragmentManager();
-//        BaseFragmentPagerAdapter adapter = new BaseFragmentPagerAdapter(supportFragmentManager);
-//        adapter.addFragmentList(fragments);
         BasePagerStateAdapter adapter = new BasePagerStateAdapter(this.getSupportFragmentManager(), fragments);
         vpPager.setAdapter(adapter);
         vpPager.setCurrentItem(0);
+        adapter.notifyDataSetChanged();
     }
 }

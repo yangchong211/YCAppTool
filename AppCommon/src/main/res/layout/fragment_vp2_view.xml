@@ -12,6 +12,10 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textSize="30sp"
-        android:text="这个是文本控件"/>
+        android:text="这个是文本控件"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

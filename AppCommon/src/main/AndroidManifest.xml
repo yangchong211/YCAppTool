@@ -24,6 +24,7 @@
         <activity android:name=".file.FileActivity"/>
         <activity android:name=".vp2.ViewPager2Activity"/>
         <activity android:name=".vp.ViewPagerActivity"/>
+        <activity android:name=".tab.VpTabActivity"/>
     </application>
 
 
