@@ -7,6 +7,7 @@
 - 05.该库性能分析
 
 
+
 ### 01.基础概念介绍
 #### 1.1 该库简单的介绍
 - 通用PagerAdapter封装
@@ -19,12 +20,12 @@
     - DiffFragmentStateAdapter，可以用作diff操作的适配器；ViewPagerDiffCallback用来做diff计算的工具类
 
 
-#### 1.4 ViewPager2封装
+#### 1.4 ViewPager2介绍
 - ViewPager2是用来替换ViewPager的
     - ViewPager2是final修饰的，直接继承ViewGroup，其内部是使用RecyclerView，ViewPager2默认是使用懒加载。
 - ViewPager2与ViewPager的改进：
     - （1）支持Right to Left布局，即从右向左布局；（2）支持竖向滚动；（3）支持notifyDataSetChanged；（4）支持懒加载
-- api上的变动如下：
+- ViewPager2相关api上的变动如下：
     - （1）FragmentStateAdapter替换了原来的 FragmentStatePagerAdapter；（2）RecyclerView.Adapter替换了原来的 PagerAdapter；（3）registerOnPageChangeCallback替换了原来的 addPageChangeListener
 
 

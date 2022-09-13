@@ -3,8 +3,7 @@ package com.yc.common.vp;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter;
-import com.yc.baseclasslib.adapter.BasePagerStateAdapter;
+import com.yc.basevpadapter.adapter.BasePagerStateAdapter;
 import com.yc.common.R;
 import com.yc.common.vp2.TextFragment;
 import com.yc.library.base.mvp.BaseActivity;

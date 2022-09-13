@@ -14,7 +14,8 @@ import java.util.List;
 public class ViewPager2Activity extends BaseActivity {
 
     private ViewPager2 vpPager;
-
+    private BaseFragmentStateAdapter adapter;
+    private List<Fragment> fragments = new ArrayList<>();
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -30,7 +31,7 @@ public class ViewPager2Activity extends BaseActivity {
     public void initView() {
         vpPager = findViewById(R.id.vp_pager);
 
-        List<Fragment> fragments = new ArrayList<>();
+        fragments = new ArrayList<>();
         // fragments
         fragments.add(ViewPagerFragment.newInstance("聊天"));
         fragments.add(ViewPagerFragment.newInstance("通讯录"));
@@ -41,7 +42,7 @@ public class ViewPager2Activity extends BaseActivity {
         fragments.add(ViewPagerFragment.newInstance("发现"));
         fragments.add(ViewPagerFragment.newInstance("我"));
 
-        BaseFragmentStateAdapter adapter = new BaseFragmentStateAdapter(this, fragments);
+        adapter = new BaseFragmentStateAdapter(this, fragments);
         vpPager.registerOnPageChangeCallback(changeCallback);
         vpPager.setCurrentItem(0);
         adapter.update(fragments);
@@ -58,7 +59,7 @@ public class ViewPager2Activity extends BaseActivity {
 
     }
 
-    private final ViewPager2.OnPageChangeCallback changeCallback = new OnPageChangeCallback(){
+    private final OnPageChangeCallback changeCallback = new OnPageChangeCallback(){
         @Override
         public void onPageSelected(int position) {
             super.onPageSelected(position);
