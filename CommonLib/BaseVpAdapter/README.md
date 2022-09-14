@@ -20,6 +20,17 @@
     - DiffFragmentStateAdapter，可以用作diff操作的适配器；ViewPagerDiffCallback用来做diff计算的工具类
 
 
+#### 1.3 ViewPager介绍
+- 三种Adapter的缓存策略
+    - PagerAdapter：缓存三个，通过重写instantiateItem和destroyItem达到创建和销毁view的目的。
+    - FragmentPagerAdapter：内部通过FragmentManager来持久化每一个Fragment，在destroyItem方法调用时只是detach对应的Fragment，并没有真正移除！
+    - FragmentPagerStateAdapter：内部通过FragmentManager来管理每一个Fragment，在destroyItem方法，调用时移除对应的Fragment。
+- 三个Adapter使用场景分析
+    - PagerAdapter：当所要展示的视图比较简单时适用
+    - FragmentPagerAdapter：当所要展示的视图是Fragment，并且数量比较少时适用
+    - FragmentStatePagerAdapter：当所要展示的视图是Fragment，并且数量比较多时适用
+
+
 #### 1.4 ViewPager2介绍
 - ViewPager2是用来替换ViewPager的
     - ViewPager2是final修饰的，直接继承ViewGroup，其内部是使用RecyclerView，ViewPager2默认是使用懒加载。
@@ -53,7 +64,9 @@
 
 
 
-
+CameraOperation类，setTorch增加catch操作，是否会影响业务逻辑
+SplashFragment页面，从init——splash——mainpager页面，中间过渡有个短暂白色
+去掉fetchDeviceBySeries方法，该方法使用风险比较大
 
 
 
