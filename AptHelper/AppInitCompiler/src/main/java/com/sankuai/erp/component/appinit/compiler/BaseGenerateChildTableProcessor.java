@@ -34,6 +34,7 @@ import javax.tools.Diagnostic;
  * </pre>
  */
 public abstract class BaseGenerateChildTableProcessor extends AbstractProcessor {
+
     protected String mClassJavaDoc;
     protected String mModuleCoordinate;
     protected String mModuleDependencies;

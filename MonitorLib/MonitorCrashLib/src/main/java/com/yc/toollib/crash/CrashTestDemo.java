@@ -18,7 +18,7 @@ import com.yc.eventuploadlib.ExceptionReporter;
  * </pre>
  */
 @Deprecated
-public class CrashTestDemo {
+public final class CrashTestDemo {
 
     private static long startWorkTimeMillis = 0L;
     public static void test(){

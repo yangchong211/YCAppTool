@@ -1,7 +1,5 @@
 /* +++++++++ 主项目 +++++++++ */
 include ':AppHelper'
-include ':AidlService'
-include ':AidlClient'
 include ':AppPlayer'
 include ':AppLeet'
 include ':AppDesign'

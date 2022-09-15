@@ -5,16 +5,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * 作者:王浩
- * 创建时间:2018/11/12
- * 描述:
- */
+
 public class ChildInitTable extends ArrayList<AppInitItem> implements Comparable<ChildInitTable> {
     public int priority;
     public String coordinate;
     public Set<String> dependencies;
-    public boolean calculated = false; // 是否已经计算过优先级
+    // 是否已经计算过优先级
+    public boolean calculated = false;
     public long time;
 
     public void setCoordinate(String coordinate) {

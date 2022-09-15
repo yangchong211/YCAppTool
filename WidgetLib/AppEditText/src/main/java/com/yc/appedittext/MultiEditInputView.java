@@ -1,6 +1,7 @@
 package com.yc.appedittext;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.Editable;
@@ -14,16 +15,16 @@ import android.widget.TextView;
 
 public class MultiEditInputView extends LinearLayout {
 
-    private Context mContext;
-    private EditText id_et_input;
-    private TextView id_tv_input;
-    private int MAX_COUNT;
+    private final Context mContext;
+    private EditText idEtInput;
+    private TextView idTvInput;
+    private final int MAX_COUNT;
     private String hintText;
-    private boolean ignoreCnOrEn;
+    private final boolean ignoreCnOrEn;
     private String contentText;
-    private float contentHeight;
-    LinearLayout id_ll_multi;
-    private TextWatcher mTextWatcher;
+    private final float contentHeight;
+    LinearLayout idLlMulti;
+    private final TextWatcher mTextWatcher;
 
     public MultiEditInputView(Context context) {
         this(context, (AttributeSet)null);
@@ -36,8 +37,6 @@ public class MultiEditInputView extends LinearLayout {
     public MultiEditInputView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mTextWatcher = new TextWatcher() {
-            private int editStart;
-            private int editEnd;
 
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -49,25 +48,25 @@ public class MultiEditInputView extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                this.editStart = MultiEditInputView.this.id_et_input.getSelectionStart();
-                this.editEnd = MultiEditInputView.this.id_et_input.getSelectionEnd();
-                MultiEditInputView.this.id_et_input.removeTextChangedListener(MultiEditInputView.this.mTextWatcher);
+                int editStart = MultiEditInputView.this.idEtInput.getSelectionStart();
+                int editEnd = MultiEditInputView.this.idEtInput.getSelectionEnd();
+                MultiEditInputView.this.idEtInput.removeTextChangedListener(MultiEditInputView.this.mTextWatcher);
                 if (MultiEditInputView.this.ignoreCnOrEn) {
                     while(MultiEditInputView.this.calculateLengthIgnoreCnOrEn(editable.toString()) > MultiEditInputView.this.MAX_COUNT) {
-                        editable.delete(this.editStart - 1, this.editEnd);
-                        --this.editStart;
-                        --this.editEnd;
+                        editable.delete(editStart - 1, editEnd);
+                        --editStart;
+                        --editEnd;
                     }
                 } else {
                     while(MultiEditInputView.this.calculateLength(editable.toString()) > (long)MultiEditInputView.this.MAX_COUNT) {
-                        editable.delete(this.editStart - 1, this.editEnd);
-                        --this.editStart;
-                        --this.editEnd;
+                        editable.delete(editStart - 1, editEnd);
+                        --editStart;
+                        --editEnd;
                     }
                 }
 
-                MultiEditInputView.this.id_et_input.setSelection(this.editStart);
-                MultiEditInputView.this.id_et_input.addTextChangedListener(MultiEditInputView.this.mTextWatcher);
+                MultiEditInputView.this.idEtInput.setSelection(editStart);
+                MultiEditInputView.this.idEtInput.addTextChangedListener(MultiEditInputView.this.mTextWatcher);
                 MultiEditInputView.this.configCount();
             }
         };
@@ -78,33 +77,33 @@ public class MultiEditInputView extends LinearLayout {
         this.hintText = typedArray.getString(R.styleable.MultiEditInputView_hintText);
         this.contentText = typedArray.getString(R.styleable.MultiEditInputView_contentText);
         this.contentHeight = typedArray.getDimension(R.styleable.MultiEditInputView_contentHeight, 140.0F);
+        typedArray.recycle();
         this.init();
     }
 
     private void init() {
         View view = LayoutInflater.from(this.mContext).inflate(R.layout.view_multi_edit_input, this);
-        this.id_ll_multi = (LinearLayout)view.findViewById(R.id.id_ll_multi);
-        this.id_ll_multi.setBackgroundResource(R.drawable.view_selector_edit_text_multi);
-        this.id_et_input = (EditText)view.findViewById(R.id.id_et_input);
-        this.id_tv_input = (TextView)view.findViewById(R.id.id_tv_input);
-        this.id_et_input.addTextChangedListener(this.mTextWatcher);
-        this.id_et_input.setHint(this.hintText);
-        this.id_et_input.setText(this.contentText);
-        this.id_et_input.setHeight((int)this.contentHeight);
-        this.id_tv_input.requestFocus();
+        this.idLlMulti = (LinearLayout)view.findViewById(R.id.id_ll_multi);
+        this.idLlMulti.setBackgroundResource(R.drawable.view_selector_edit_text_multi);
+        this.idEtInput = (EditText)view.findViewById(R.id.id_et_input);
+        this.idTvInput = (TextView)view.findViewById(R.id.id_tv_input);
+        this.idEtInput.addTextChangedListener(this.mTextWatcher);
+        this.idEtInput.setHint(this.hintText);
+        this.idEtInput.setText(this.contentText);
+        this.idEtInput.setHeight((int)this.contentHeight);
+        this.idTvInput.requestFocus();
         this.configCount();
-        this.id_et_input.setSelection(this.id_et_input.length());
-        this.id_et_input.setOnFocusChangeListener(new OnFocusChangeListener() {
+        this.idEtInput.setSelection(this.idEtInput.length());
+        this.idEtInput.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                MultiEditInputView.this.id_ll_multi.setSelected(b);
+                MultiEditInputView.this.idLlMulti.setSelected(b);
             }
         });
     }
 
     private long calculateLength(CharSequence c) {
         double len = 0.0D;
-
         for(int i = 0; i < c.length(); ++i) {
             int tmp = c.charAt(i);
             if (tmp > 0 && tmp < 127) {
@@ -113,7 +112,6 @@ public class MultiEditInputView extends LinearLayout {
                 ++len;
             }
         }
-
         return Math.round(len);
     }
 
@@ -127,13 +125,14 @@ public class MultiEditInputView extends LinearLayout {
         return len;
     }
 
+    @SuppressLint("SetTextI18n")
     private void configCount() {
         if (this.ignoreCnOrEn) {
-            int nowCount = this.calculateLengthIgnoreCnOrEn(this.id_et_input.getText().toString());
-            this.id_tv_input.setText(this.MAX_COUNT - nowCount + "/" + this.MAX_COUNT);
+            int nowCount = this.calculateLengthIgnoreCnOrEn(this.idEtInput.getText().toString());
+            this.idTvInput.setText(this.MAX_COUNT - nowCount + "/" + this.MAX_COUNT);
         } else {
-            long nowCount = this.calculateLength(this.id_et_input.getText().toString());
-            this.id_tv_input.setText((long)this.MAX_COUNT - nowCount + "/" + this.MAX_COUNT);
+            long nowCount = this.calculateLength(this.idEtInput.getText().toString());
+            this.idTvInput.setText((long)this.MAX_COUNT - nowCount + "/" + this.MAX_COUNT);
         }
 
     }
@@ -145,14 +144,14 @@ public class MultiEditInputView extends LinearLayout {
 
     public void setContentText(String content) {
         this.contentText = content;
-        if (this.id_et_input != null) {
-            this.id_et_input.setText(this.contentText);
+        if (this.idEtInput != null) {
+            this.idEtInput.setText(this.contentText);
         }
     }
 
     public String getContentText() {
-        if (this.id_et_input != null) {
-            this.contentText = this.id_et_input.getText() == null ? "" : this.id_et_input.getText().toString();
+        if (this.idEtInput != null) {
+            this.contentText = this.idEtInput.getText() == null ? "" : this.idEtInput.getText().toString();
         }
 
         return this.contentText;
@@ -160,12 +159,12 @@ public class MultiEditInputView extends LinearLayout {
 
     public void setHintText(String hintText) {
         this.hintText = hintText;
-        this.id_et_input.setHint(hintText);
+        this.idEtInput.setHint(hintText);
     }
 
     public String getHintText() {
-        if (this.id_et_input != null) {
-            this.hintText = this.id_et_input.getHint() == null ? "" : this.id_et_input.getHint().toString();
+        if (this.idEtInput != null) {
+            this.hintText = this.idEtInput.getHint() == null ? "" : this.idEtInput.getHint().toString();
         }
 
         return this.hintText;
