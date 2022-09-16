@@ -15,8 +15,7 @@ import com.yc.spi.annotation.ServiceProviderInterface;
  *     revise:
  * </pre>
  */
-@ServiceProviderInterface
-public interface ApplicationListener {
+public interface IApplicationHelper {
 
     void attachBaseContext(Context base);
 

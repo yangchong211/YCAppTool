@@ -17,30 +17,29 @@ import com.yc.spi.loader.ServiceLoader;
  *     revise:
  * </pre>
  */
-@ServiceProvider(value = ApplicationListener.class, priority = -1)
-public class LaunchApplicationListener extends AbstractLifecycleListener {
+public class LaunchApplicationListener extends BaseApplicationHelper {
 
-    private final Iterable<ApplicationListener> mApplicationListener = ServiceLoader.load(ApplicationListener.class);
+    private final Iterable<IApplicationHelper> mApplicationListener = ServiceLoader.load(IApplicationHelper.class);
     private final Iterable<AppLifecycleListener> mAppListener = ServiceLoader.load(AppLifecycleListener.class);
 
 
     @Override
     public void attachBaseContext(Context base) {
-        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+        for (IApplicationHelper applicationLifecycleListener : mApplicationListener) {
             applicationLifecycleListener.attachBaseContext(base);
         }
     }
 
     @Override
     public void onConfigurationChanged(Application app, Configuration config) {
-        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+        for (IApplicationHelper applicationLifecycleListener : mApplicationListener) {
             applicationLifecycleListener.onConfigurationChanged(app, config);
         }
     }
 
     @Override
     public void onCreate(Application app) {
-        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+        for (IApplicationHelper applicationLifecycleListener : mApplicationListener) {
             applicationLifecycleListener.onCreate(app);
         }
         for (AppLifecycleListener appLifecycleListener : mAppListener) {
@@ -51,27 +50,27 @@ public class LaunchApplicationListener extends AbstractLifecycleListener {
 
     @Override
     public void onLowMemory(Application app) {
-        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+        for (IApplicationHelper applicationLifecycleListener : mApplicationListener) {
             applicationLifecycleListener.onLowMemory(app);
         }
     }
 
     @Override
     public void onTerminate(Application app) {
-        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+        for (IApplicationHelper applicationLifecycleListener : mApplicationListener) {
             applicationLifecycleListener.onTerminate(app);
         }
     }
 
     @Override
     public void onTrimMemory(Application app, int level) {
-        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+        for (IApplicationHelper applicationLifecycleListener : mApplicationListener) {
             applicationLifecycleListener.onTrimMemory(app, level);
         }
     }
 
     private void dispatcherOnCreate(Application app) {
-        for (ApplicationListener applicationLifecycleListener : mApplicationListener) {
+        for (IApplicationHelper applicationLifecycleListener : mApplicationListener) {
             applicationLifecycleListener.onCreate(app);
         }
     }

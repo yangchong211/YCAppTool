@@ -109,4 +109,5 @@ dependencies {
     annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
     //WorkManager
     implementation(rootProject.ext.dependencies["workKtx"])
+    implementation project(path: ':ApplicationLib')
 }

@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.util.Log;
 
+import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.BuildConfig;
+
 /**
  * <pre>
  *     @author yangchong
@@ -14,28 +17,34 @@ import android.util.Log;
  *     revise:
  * </pre>
  */
-public abstract class AbstractLifecycleListener implements ApplicationListener {
+public abstract class BaseApplicationHelper implements IApplicationHelper {
 
-    private final static String TAG = "ApplicationListener";
+    private final static String TAG = "BaseApplicationHelper";
+
+    protected Application mApplication;
+
+    public BaseApplicationHelper(Application application) {
+        this.mApplication = application;
+    }
 
     @Override
     public void attachBaseContext(Context base) {
         if (BuildConfig.DEBUG){
-            Log.d(TAG,"attachBaseContext");
+            AppLogUtils.d(TAG,"attachBaseContext");
         }
     }
 
     @Override
     public void onCreate(Application app) {
         if (BuildConfig.DEBUG){
-            Log.d(TAG,"onCreate");
+            AppLogUtils.d(TAG,"onCreate");
         }
     }
 
     @Override
     public void onTerminate(Application app) {
         if (BuildConfig.DEBUG){
-            Log.d(TAG,"onTerminate");
+            AppLogUtils.d(TAG,"onTerminate");
         }
     }
 
@@ -49,14 +58,14 @@ public abstract class AbstractLifecycleListener implements ApplicationListener {
     @Override
     public void onLowMemory(Application app) {
         if (BuildConfig.DEBUG){
-            Log.d(TAG,"onLowMemory");
+            AppLogUtils.d(TAG,"onLowMemory");
         }
     }
 
     @Override
     public void onTrimMemory(Application app, int level) {
         if (BuildConfig.DEBUG){
-            Log.d(TAG,"onTrimMemory level : " + level);
+            AppLogUtils.d(TAG,"onTrimMemory level : " + level);
         }
     }
 }

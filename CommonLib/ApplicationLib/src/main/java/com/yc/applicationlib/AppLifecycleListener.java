@@ -13,7 +13,6 @@ import com.yc.spi.annotation.ServiceProviderInterface;
  *     revise:
  * </pre>
  */
-@ServiceProviderInterface
 public interface AppLifecycleListener {
 
     void onCreate(Application app);

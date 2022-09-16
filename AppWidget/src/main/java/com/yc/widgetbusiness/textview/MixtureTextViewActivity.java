@@ -180,10 +180,16 @@ public class MixtureTextViewActivity extends AppCompatActivity {
      * 使用SpannableString设置样式——字体颜色
      */
     private void mode2() {
-        SpannableString spannableString = new SpannableString("暗影IV已经开始暴走了");
+        SpannableString spannableString = new SpannableString("暗影IV已经开始暴走了暗影IV已经开始暴走了");
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(
-                Color.parseColor("#009ad6"));
+                ContextCompat.getColor(this,R.color.colorPrimary));
         spannableString.setSpan(colorSpan, 0, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        ForegroundColorSpan colorSpan2 = new ForegroundColorSpan(
+                ContextCompat.getColor(this,R.color.colorAccent));
+        spannableString.setSpan(colorSpan2, 9, 10, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        ForegroundColorSpan colorSpan3 = new ForegroundColorSpan(
+                ContextCompat.getColor(this,R.color.colorPrimary));
+        spannableString.setSpan(colorSpan3, 11, spannableString.length()-1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         tv2.setText(spannableString);
     }
 

@@ -91,6 +91,6 @@ dependencies {
     implementation 'com.github.yangchong211.YCDialog:DialogFragment:3.6.8'
     implementation project(path: ':ToolUtilsLib')
     api project(path: ':BusinessInterface')
-
+    implementation project(path: ':ApplicationLib')
 
 }
