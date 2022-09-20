@@ -154,7 +154,15 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         } else if (v == btnTts){
             AudioService.getInstance().playTts("逗比，这个是tts");
         } else if (v == btnUrl){
-            AudioService.getInstance().playUrl("https://asraudio.cdnjtzy.com/eb93cfd82d0044a1a9ce047c3aeafb8c.mp3");
+            AudioPlayData playData =new AudioPlayData.Builder(AudioTtsPriority.HIGH_PRIORITY)
+                    .url("https://asraudio.cdnjtzy.com/eb93cfd82d0044a1a9ce047c3aeafb8c.mp3")
+                    .url("https://asraudio.cdnjtzy.com/52bdab34457e4d9ca14a5a7feee94a23.mp3")
+                    .url("https://asraudio.cdnjtzy.com/eb93cfd82d0044a1a9ce047c3aeafb8c.mp3")
+                    .url("https://asraudio.cdnjtzy.com/eb93cfd82d0044a1a9ce047c3aeafb8c.mp3")
+                    .url("https://asraudio.cdnjtzy.com/52bdab34457e4d9ca14a5a7feee94a23.mp3")
+                    .url("https://asraudio.cdnjtzy.com/eb93cfd82d0044a1a9ce047c3aeafb8c.mp3")
+                    .build();
+            AudioService.getInstance().play(playData);
         }  else if (v == btnUrl2){
             AudioService.getInstance().playUrl("https://asraudio.cdnjtzy.com/52bdab34457e4d9ca14a5a7feee94a23.mp3");
         } else if (v == btnTtsDemo){

@@ -98,7 +98,7 @@
             android:id="@+id/btn_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="播放网络tts1"/>
+            android:text="连续播放多条播放网络tts1"/>
         <Button
             android:id="@+id/btn_url2"
             android:layout_width="match_parent"
