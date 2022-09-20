@@ -260,11 +260,12 @@
 
 
 ### 12.其他介绍
-#### 12.1 关于其他内容介绍
+#### 12.1 其他内容介绍
 ![image](https://upload-images.jianshu.io/upload_images/4432347-7100c8e5a455c3ee.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-#### 12.2 关于我的博客
+#### 12.2 一些技术流程
+
 
 
 #### 12.3 其封装库推荐

@@ -2,7 +2,6 @@ package com.yc.applicationlib;
 
 import android.app.Application;
 
-import com.yc.spi.annotation.ServiceProviderInterface;
 
 /**
  * <pre>

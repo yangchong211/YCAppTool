@@ -35,35 +35,35 @@ public abstract class BaseApplicationHelper implements IApplicationHelper {
     }
 
     @Override
-    public void onCreate(Application app) {
+    public void onCreate() {
         if (BuildConfig.DEBUG){
             AppLogUtils.d(TAG,"onCreate");
         }
     }
 
     @Override
-    public void onTerminate(Application app) {
+    public void onTerminate() {
         if (BuildConfig.DEBUG){
             AppLogUtils.d(TAG,"onTerminate");
         }
     }
 
     @Override
-    public void onConfigurationChanged(Application app, Configuration config) {
+    public void onConfigurationChanged(Configuration config) {
         if (BuildConfig.DEBUG){
             Log.d(TAG,"onConfigurationChanged");
         }
     }
 
     @Override
-    public void onLowMemory(Application app) {
+    public void onLowMemory() {
         if (BuildConfig.DEBUG){
             AppLogUtils.d(TAG,"onLowMemory");
         }
     }
 
     @Override
-    public void onTrimMemory(Application app, int level) {
+    public void onTrimMemory(int level) {
         if (BuildConfig.DEBUG){
             AppLogUtils.d(TAG,"onTrimMemory level : " + level);
         }

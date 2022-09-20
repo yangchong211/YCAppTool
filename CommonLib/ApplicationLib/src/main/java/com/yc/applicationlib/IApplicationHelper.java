@@ -1,10 +1,7 @@
 package com.yc.applicationlib;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
-
-import com.yc.spi.annotation.ServiceProviderInterface;
 
 /**
  * <pre>
@@ -19,13 +16,13 @@ public interface IApplicationHelper {
 
     void attachBaseContext(Context base);
 
-    void onCreate(final Application app);
+    void onCreate();
 
-    void onTerminate(final Application app);
+    void onTerminate();
 
-    void onConfigurationChanged(final Application app, final Configuration config);
+    void onConfigurationChanged(final Configuration config);
 
-    void onLowMemory(final Application app);
+    void onLowMemory();
 
-    void onTrimMemory(final Application app, final int level);
+    void onTrimMemory(final int level);
 }
