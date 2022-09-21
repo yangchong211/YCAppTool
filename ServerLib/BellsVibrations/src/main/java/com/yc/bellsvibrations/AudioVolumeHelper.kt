@@ -65,7 +65,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
     /**
      * 获取指定类型铃声的当前音量
      */
-    override fun getMediaVolume(type: Int): Int {
+    override fun getMediaVolume(@DataSource type: Int): Int {
         when (type) {
             //通话声音
             1 -> {

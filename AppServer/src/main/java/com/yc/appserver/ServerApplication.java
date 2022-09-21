@@ -2,9 +2,9 @@ package com.yc.appserver;
 
 import android.app.Application;
 
+import com.yc.appfilelib.AppFileUtils;
 import com.yc.logclient.LogUtils;
 import com.yc.logclient.client.LogClient;
-import com.yc.toolutils.file.AppFileUtils;
 
 public class ServerApplication extends Application {
 

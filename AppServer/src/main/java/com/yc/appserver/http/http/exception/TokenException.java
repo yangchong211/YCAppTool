@@ -1,4 +1,4 @@
-package com.yc.easy.demo.http.exception;
+package com.yc.appserver.http.http.exception;
 
 
 import com.yc.http.exception.NetHttpException;

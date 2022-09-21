@@ -239,7 +239,6 @@ dependencies {
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':AppTraceTool')
     implementation project(path: ':AppLogLib')
-    implementation project(path: ':OkHttpBusiness')
     implementation project(path: ':BleBusiness')
     implementation project(path: ':AppBaseStore')
     implementation project(path: ':AppCommon')

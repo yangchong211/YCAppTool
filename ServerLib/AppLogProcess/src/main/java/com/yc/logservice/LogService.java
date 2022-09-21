@@ -11,10 +11,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 
+import com.yc.appfilelib.SdCardUtils;
 import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.logclient.bean.AppLogBean;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.file.AppSdFileUtils;
 import com.yc.logservice.utils.LogToolUtils;
 import com.yc.logclient.ILogService;
 import com.yc.logclient.LogConstant;
@@ -266,7 +266,7 @@ public class LogService extends Service {
      */
     private void doWriteLogs(List<AppLogBean> beans) {
 
-        if (!AppSdFileUtils.isExistSDCard()) {
+        if (!SdCardUtils.isExistSDCard()) {
             AppLogUtils.e(TAG, "sdcard unmounted");
             return;
         }
@@ -309,7 +309,7 @@ public class LogService extends Service {
      * @param bean
      */
     private void doWriteLog(AppLogBean bean) {
-        if (!AppSdFileUtils.isExistSDCard()) {
+        if (!SdCardUtils.isExistSDCard()) {
             Log.e(TAG, "sdcard unmounted");
             return;
         }

@@ -1,4 +1,4 @@
-package com.yc.easy.demo;
+package com.yc.appserver.http;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,12 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
-import com.yc.easy.demo.http.api.SearchAuthorApi;
-import com.yc.easy.demo.http.api.SearchBlogsApi;
-import com.yc.easy.demo.http.api.UpdateImageApi;
-import com.yc.easy.demo.http.model.HttpData;
-import com.yc.easy.demo.http.model.RequestHandler;
-import com.yc.easy.demo.http.server.ReleaseServer;
+import com.yc.appserver.R;
+import com.yc.appserver.http.http.api.SearchAuthorApi;
+import com.yc.appserver.http.http.api.SearchBlogsApi;
+import com.yc.appserver.http.http.api.UpdateImageApi;
+import com.yc.appserver.http.http.model.HttpData;
+import com.yc.appserver.http.http.model.RequestHandler;
+import com.yc.appserver.http.http.server.ReleaseServer;
 import com.yc.http.EasyConfig;
 import com.yc.http.EasyHttp;
 import com.yc.http.EasyUtils;
@@ -213,7 +214,7 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
             if (!file.exists()) {
                 // 生成图片到本地
                 try {
-                    Drawable drawable = ContextCompat.getDrawable(this, R.drawable.bg_material);
+                    Drawable drawable = ContextCompat.getDrawable(this, R.drawable.bg_kites_min);
                     OutputStream outputStream = EasyUtils.openFileOutputStream(file);
                     if (((BitmapDrawable) drawable).getBitmap().compress(Bitmap.CompressFormat.PNG, 100, outputStream)) {
                         outputStream.flush();

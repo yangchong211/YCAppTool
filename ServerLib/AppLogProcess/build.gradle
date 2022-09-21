@@ -30,5 +30,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':AppLogHelper')
     implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':ToolFileLib')
     implementation project(path: ':EventUploadLib')
 }

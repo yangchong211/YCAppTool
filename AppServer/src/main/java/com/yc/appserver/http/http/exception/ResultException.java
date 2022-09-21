@@ -1,8 +1,8 @@
-package com.yc.easy.demo.http.exception;
+package com.yc.appserver.http.http.exception;
 
 import androidx.annotation.NonNull;
 
-import com.yc.easy.demo.http.model.HttpData;
+import com.yc.appserver.http.http.model.HttpData;
 import com.yc.http.exception.NetHttpException;
 
 public final class ResultException extends NetHttpException {

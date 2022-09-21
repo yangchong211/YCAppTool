@@ -1,9 +1,10 @@
 package com.yc.logservice.log;
 
 
+import com.yc.appfilelib.AppFileUtils;
+import com.yc.appfilelib.FileSizeUtils;
+import com.yc.appfilelib.SdCardUtils;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.file.AppFileUtils;
-import com.yc.toolutils.file.AppSdFileUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -93,8 +94,8 @@ public class LogCleaner {
 
         for (int i = 0; i < MaxFileCanDeleteOnce; i++) {
             //检测log dir 占用空间是否超过设定限制，如果超过需要删除最老的文件
-            long curSize = AppFileUtils.getFolderSize(logdir) / 1024 / 1024;
-            long availableSize = AppSdFileUtils.getSDAvailableSize() / 1024 / 1024;
+            long curSize = FileSizeUtils.getFolderSize(logdir) / 1024 / 1024;
+            long availableSize = SdCardUtils.getSDAvailableSize() / 1024 / 1024;
             AppLogUtils.i(TAG, "clearFileByDiskSize logDir:" + logdir + ",curSize:" + curSize + "M, maxsize:" + mMaxfoldersize + "M,availableSize:" + availableSize + "M,mKeepfreestore:" + mKeepfreestore + "M");
 
             if (curSize > mMaxfoldersize || availableSize < mKeepfreestore) {

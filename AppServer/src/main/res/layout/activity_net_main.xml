@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NetMainActivity">
+    tools:context="com.yc.appserver.http.NetMainActivity">
 
     <ProgressBar
         android:id="@+id/pb_main_progress"

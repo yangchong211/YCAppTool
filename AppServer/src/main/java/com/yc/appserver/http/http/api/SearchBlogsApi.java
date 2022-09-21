@@ -1,4 +1,4 @@
-package com.yc.easy.demo.http.api;
+package com.yc.appserver.http.http.api;
 
 import androidx.annotation.NonNull;
 

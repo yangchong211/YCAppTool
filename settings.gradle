@@ -15,7 +15,7 @@ include ':AppTool'
 include ':AnimBusiness',':MvvmDatabinding',
         ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
         ':MvcTodoBusiness',':JetpackBusiness',
-        ':BusinessInterface', ':StatusBusiness', ':OkHttpBusiness',':BleBusiness',
+        ':BusinessInterface', ':StatusBusiness', ':BleBusiness',
         ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness', ':PlayerBusiness',
         ':SocketBusiness',':LibraryLayer'
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -27,7 +27,6 @@ project(':MvvmTodoLive').projectDir = new File('Business/MvvmTodoLive')
 project(':MvcTodoBusiness').projectDir = new File('Business/MvcTodoBusiness')
 project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 project(':StatusBusiness').projectDir = new File('Business/StatusBusiness')
-project(':OkHttpBusiness').projectDir = new File('Business/OkHttpBusiness')
 project(':BleBusiness').projectDir = new File('Business/BleBusiness')
 project(':ThreadBusiness').projectDir = new File('Business/ThreadBusiness')
 project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')

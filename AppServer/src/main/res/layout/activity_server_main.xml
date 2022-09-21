@@ -70,6 +70,20 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_vibrator_test"/>
 
+        <com.yc.roundcorner.view.RoundTextView
+            android:id="@+id/tv_net_test"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="@dimen/dp20"
+            android:text="5.网络请求案例大合集"
+            android:textSize="@dimen/textSize18"
+            android:background="@color/priority_green"
+            android:layout_marginTop="@dimen/dp20"
+            app:rRadius="@dimen/dp20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_private_test"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

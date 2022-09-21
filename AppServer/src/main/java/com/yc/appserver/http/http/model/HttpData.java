@@ -1,4 +1,4 @@
-package com.yc.easy.demo.http.model;
+package com.yc.appserver.http.http.model;
 
 /**
  *    author : Android 轮子哥

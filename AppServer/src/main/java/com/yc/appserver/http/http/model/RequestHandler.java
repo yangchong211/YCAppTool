@@ -1,4 +1,4 @@
-package com.yc.easy.demo.http.model;
+package com.yc.appserver.http.http.model;
 
 import android.app.Application;
 import android.content.Context;
@@ -11,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.JsonSyntaxException;
-import com.yc.easy.demo.R;
-import com.yc.easy.demo.http.exception.ResultException;
-import com.yc.easy.demo.http.exception.TokenException;
+import com.yc.appserver.R;
+import com.yc.appserver.http.http.exception.ResultException;
+import com.yc.appserver.http.http.exception.TokenException;
 import com.yc.gson.factory.GsonFactory;
 import com.yc.http.EasyLog;
 import com.yc.http.config.IRequestHandler;
