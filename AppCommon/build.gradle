@@ -102,4 +102,7 @@ dependencies {
     implementation project(path: ':MonitorFileLib')
     implementation project(path: ':AppLruCache')
     implementation project(path: ':AppLruDisk')
+
+    api "io.agora.rtc:voice-sdk:4.0.1"
+    api "io.agora.rtc:full-sdk:4.0.1"
 }

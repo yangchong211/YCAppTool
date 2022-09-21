@@ -6,6 +6,7 @@ import android.content.Context;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.InterAudio;
 import com.yc.audioplayer.inter.InterPlayListener;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 
 /**
  * <pre>
@@ -19,6 +20,7 @@ import com.yc.audioplayer.inter.InterPlayListener;
  */
 public final class AudioServiceDelegate implements InterAudio {
 
+
     private final InterAudio mDelegate ;
 
     public AudioServiceDelegate(InterAudio iAudio) {
@@ -26,44 +28,89 @@ public final class AudioServiceDelegate implements InterAudio {
     }
 
     @Override
-    public final void init(final InterPlayListener arg0, final Context arg1) {
+    public final void init(final InterPlayListener listener, final Context context) {
         if (null != this.mDelegate) {
-            this.mDelegate.init(arg0, arg1);
+            this.mDelegate.init(listener, context);
         }
     }
 
     @Override
-    public final void play(final AudioPlayData arg0) {
+    public final void play(final AudioPlayData data) {
         if (null != this.mDelegate) {
-            this.mDelegate.play(arg0);
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                this.mDelegate.play(data);
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.play(data);
+                    }
+                });
+            }
         }
     }
 
     @Override
     public final void stop() {
         if (null != this.mDelegate) {
-            this.mDelegate.stop();
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                mDelegate.stop();
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.stop();
+                    }
+                });
+            }
         }
     }
 
     @Override
     public final void release() {
         if (null != this.mDelegate) {
-            this.mDelegate.release();
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                this.mDelegate.release();
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.release();
+                    }
+                });
+            }
         }
     }
 
     @Override
     public final void pause() {
         if (null != this.mDelegate) {
-            this.mDelegate.pause();
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                this.mDelegate.pause();
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.pause();
+                    }
+                });
+            }
         }
     }
 
     @Override
     public final void resumeSpeaking() {
         if (null != this.mDelegate) {
-            this.mDelegate.resumeSpeaking();
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                this.mDelegate.resumeSpeaking();
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.resumeSpeaking();
+                    }
+                });
+            }
         }
     }
 

@@ -164,7 +164,12 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                     .build();
             AudioService.getInstance().play(playData);
         }  else if (v == btnUrl2){
-            AudioService.getInstance().playUrl("https://asraudio.cdnjtzy.com/52bdab34457e4d9ca14a5a7feee94a23.mp3");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    AudioService.getInstance().playUrl("https://asraudio.cdnjtzy.com/52bdab34457e4d9ca14a5a7feee94a23.mp3");
+                }
+            }).start();
         } else if (v == btnTtsDemo){
             startActivity(new Intent(this,TTSAudioActivity.class));
         }

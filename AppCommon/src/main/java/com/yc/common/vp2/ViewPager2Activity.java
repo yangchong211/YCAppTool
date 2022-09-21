@@ -41,6 +41,7 @@ public class ViewPager2Activity extends BaseActivity {
         fragments.add(ViewPagerFragment.newInstance("通讯录"));
         fragments.add(ViewPagerFragment.newInstance("发现"));
         fragments.add(ViewPagerFragment.newInstance("我"));
+        fragments.add(ViewPagerFragment.newInstance("哈哈哈哈，要下一页啦"));
 
         adapter = new BaseFragmentStateAdapter(this, fragments);
         vpPager.registerOnPageChangeCallback(changeCallback);
@@ -64,6 +65,39 @@ public class ViewPager2Activity extends BaseActivity {
         public void onPageSelected(int position) {
             super.onPageSelected(position);
         }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            super.onPageScrollStateChanged(state);
+            if (state == ViewPager2.SCROLL_STATE_IDLE){
+                loadMore();
+            }
+        }
     };
+
+    private void loadMore() {
+        fragments.clear();
+        // fragments
+        fragments.add(ViewPagerFragment.newInstance("聊天"));
+        fragments.add(ViewPagerFragment.newInstance("通讯录"));
+        fragments.add(ViewPagerFragment.newInstance("发现"));
+        fragments.add(ViewPagerFragment.newInstance("我"));
+        fragments.add(ViewPagerFragment.newInstance("聊天"));
+        fragments.add(ViewPagerFragment.newInstance("通讯录"));
+        fragments.add(ViewPagerFragment.newInstance("发现"));
+        fragments.add(ViewPagerFragment.newInstance("我"));
+        // fragments
+        fragments.add(ViewPagerFragment.newInstance("聊天"));
+        fragments.add(ViewPagerFragment.newInstance("通讯录"));
+        fragments.add(ViewPagerFragment.newInstance("发现"));
+        fragments.add(ViewPagerFragment.newInstance("我"));
+        fragments.add(ViewPagerFragment.newInstance("聊天"));
+        fragments.add(ViewPagerFragment.newInstance("通讯录"));
+        fragments.add(ViewPagerFragment.newInstance("发现"));
+        fragments.add(ViewPagerFragment.newInstance("我"));
+        fragments.add(ViewPagerFragment.newInstance("逗比"));
+        fragments.add(ViewPagerFragment.newInstance("有下一页数据呢"));
+        adapter.update(fragments);
+    }
 
 }
