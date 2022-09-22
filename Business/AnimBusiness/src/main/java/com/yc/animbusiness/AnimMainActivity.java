@@ -31,7 +31,7 @@ public class AnimMainActivity extends BaseActivity implements View.OnClickListen
     private TextView topView2;
     private TextView topView1;
     private TextView vector;
-    private MyTextView customView;
+    private TextView customView;
     private Switch switch2;
     private int type = 0;
 

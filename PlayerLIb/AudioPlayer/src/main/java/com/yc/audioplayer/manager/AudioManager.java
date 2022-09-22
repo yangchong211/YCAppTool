@@ -3,6 +3,7 @@ package com.yc.audioplayer.manager;
 import android.content.Context;
 
 import com.yc.audioplayer.delegate.AudioServiceDelegate;
+import com.yc.audioplayer.inter.PlayStateListener;
 import com.yc.audioplayer.player.DefaultTtsPlayer;
 import com.yc.audioplayer.player.ExoAudioPlayer;
 import com.yc.audioplayer.player.MediaAudioPlayer;
@@ -130,10 +131,4 @@ public class AudioManager extends AbstractAudioWrapper {
         this.mPlayStateListener = playStateListener;
     }
 
-    public interface PlayStateListener {
-
-        void onStartPlay();
-
-        void onCompletePlay();
-    }
 }

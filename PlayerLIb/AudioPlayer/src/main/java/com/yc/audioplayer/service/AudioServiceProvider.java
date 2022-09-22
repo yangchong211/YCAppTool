@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.bean.TtsPlayerConfig;
+import com.yc.audioplayer.inter.PlayStateListener;
 import com.yc.audioplayer.manager.AudioManager;
 
 /**
@@ -100,6 +101,6 @@ public interface AudioServiceProvider {
      *
      * @param playStateListener 监听器
      */
-    void setPlayStateListener(AudioManager.PlayStateListener playStateListener);
+    void setPlayStateListener(PlayStateListener playStateListener);
 
 }

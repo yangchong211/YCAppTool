@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.animbusiness.AnimationActiviy;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toolutils.click.PerfectClickListener;
@@ -88,7 +89,8 @@ public class WidgetActivity extends AppCompatActivity {
         tvWidgetRed.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                startActivity(new Intent(WidgetActivity.this, RedViewActivity.class));
+                AnimationActiviy.startActivity(WidgetActivity.this);
+                //startActivity(new Intent(WidgetActivity.this, RedViewActivity.class));
             }
         });
     }

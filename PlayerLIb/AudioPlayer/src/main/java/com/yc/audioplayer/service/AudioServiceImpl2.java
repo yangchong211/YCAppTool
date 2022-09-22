@@ -5,6 +5,7 @@ import android.content.Context;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.inter.InterPlayListener;
+import com.yc.audioplayer.inter.PlayStateListener;
 import com.yc.audioplayer.manager.AudioManager;
 
 /**
@@ -23,6 +24,7 @@ public class AudioServiceImpl2 implements AudioServiceProvider , InterPlayListen
     private AudioManager mAudioManager;
     private boolean mReady = false;
     private static TtsPlayerConfig mConfig;
+    private PlayStateListener mPlayStateListener;
 
     @Override
     public void init(Context context, TtsPlayerConfig config) {
@@ -116,7 +118,8 @@ public class AudioServiceImpl2 implements AudioServiceProvider , InterPlayListen
     }
 
     @Override
-    public void setPlayStateListener(AudioManager.PlayStateListener playStateListener) {
+    public void setPlayStateListener(PlayStateListener playStateListener) {
+        this.mPlayStateListener = playStateListener;
         if (null != mAudioManager) {
             mAudioManager.setPlayStateListener(playStateListener);
         }
@@ -124,7 +127,9 @@ public class AudioServiceImpl2 implements AudioServiceProvider , InterPlayListen
 
     @Override
     public void onCompleted() {
-
+        if (mPlayStateListener != null){
+            mPlayStateListener.onCompletePlay();
+        }
     }
 
     @Override

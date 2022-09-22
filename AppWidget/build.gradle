@@ -51,5 +51,7 @@ dependencies {
     implementation project(path: ':ZoomImageLib')
     implementation project(path: ':RedDotView')
     implementation project(path: ':ExpandLib')
+
+    implementation project(path: ':AnimBusiness')
 }
 

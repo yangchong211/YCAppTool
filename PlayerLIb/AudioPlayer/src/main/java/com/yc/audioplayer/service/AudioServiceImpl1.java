@@ -5,6 +5,7 @@ import android.content.Context;
 import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.dispatch.AudioTaskDispatcher;
 import com.yc.audioplayer.bean.AudioPlayData;
+import com.yc.audioplayer.inter.PlayStateListener;
 import com.yc.audioplayer.manager.AudioManager;
 
 /**
@@ -119,7 +120,7 @@ public class AudioServiceImpl1 implements AudioServiceProvider {
     }
 
     @Override
-    public void setPlayStateListener(AudioManager.PlayStateListener playStateListener) {
+    public void setPlayStateListener(PlayStateListener playStateListener) {
         if (null != mAudioManager) {
             mAudioManager.setPlayStateListener(playStateListener);
         }

@@ -3,6 +3,11 @@
     package="com.yc.animbusiness">
 
     <application>
+        <activity android:name=".AnimationActiviy"/>
+        <activity android:name=".ValueAnimatorAct"/>
+        <activity android:name=".FrameAnimation"/>
+        <activity android:name=".OtherAnimation"/>
+        <activity android:name=".TweenAnimation"/>
         <activity android:name="com.yc.animbusiness.AnimMainActivity"/>
     </application>
 

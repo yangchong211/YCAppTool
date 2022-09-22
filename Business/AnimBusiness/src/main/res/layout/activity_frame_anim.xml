@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dp10">
+
+    <TextView
+        android:id="@+id/tv_anim_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:text="1.帧动画，使用xml"
+        android:padding="@dimen/dp10"
+        android:background="@color/priority_blue"/>
+
+    <TextView
+        android:id="@+id/tv_anim_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:text="2.帧动画，使用代码"
+        android:padding="@dimen/dp10"
+        android:background="@color/priority_blue"/>
+
+
+    <ImageView
+        android:id="@+id/iv_frame_anim1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/animation_list_load"/>
+
+    <ImageView
+        android:id="@+id/iv_frame_anim2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/icon_audio_1"/>
+
+
+</LinearLayout>

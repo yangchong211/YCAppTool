@@ -62,17 +62,5 @@ dependencies {
 //    implementation project(path: ':AnimatorToolLib')
     implementation 'com.github.yangchong211.YCAppTool:AnimatorToolLib:1.3.7'
     implementation project(path: ':LibraryLayer')
-
-    implementation project(path: ':RouteManager')
-    annotationProcessor project(path: ':RouteCompiler')
-
-    implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3'
-    implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderAnnotations:1.4.3'
-    annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
-    //implementation project(path: ':ServiceLoaderAnnotations')
-    //annotationProcessor project(path: ':api-compiler')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
-    api project(path: ':BusinessInterface')
-    implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':ApplicationLib')
 }

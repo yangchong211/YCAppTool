@@ -16,7 +16,7 @@ include ':AnimBusiness',':MvvmDatabinding',
         ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
         ':MvcTodoBusiness',':JetpackBusiness',
         ':BusinessInterface', ':StatusBusiness', ':BleBusiness',
-        ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness', ':PlayerBusiness',
+        ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness',
         ':SocketBusiness',':LibraryLayer'
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
 project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
@@ -31,7 +31,6 @@ project(':BleBusiness').projectDir = new File('Business/BleBusiness')
 project(':ThreadBusiness').projectDir = new File('Business/ThreadBusiness')
 project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')
 project(':KotlinBusiness').projectDir = new File('Business/KotlinBusiness')
-project(':PlayerBusiness').projectDir = new File('Business/PlayerBusiness')
 project(':SocketBusiness').projectDir = new File('Business/SocketBusiness')
 project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 

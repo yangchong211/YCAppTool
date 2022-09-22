@@ -51,7 +51,7 @@ public class AnimationActiviy extends AppCompatActivity {
         tvAnim1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(AnimationActiviy.this,FrameAnimation.class));
+                startActivity(new Intent(AnimationActiviy.this,FrameAnimation.class));
             }
         });
         tvAnim2.setOnClickListener(new View.OnClickListener() {
