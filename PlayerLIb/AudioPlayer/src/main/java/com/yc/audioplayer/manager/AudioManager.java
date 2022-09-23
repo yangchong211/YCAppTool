@@ -83,12 +83,16 @@ public class AudioManager extends AbstractAudioWrapper {
                 mMutex.notifyAll();
             }
         }
+        if (null != mPlayStateListener) {
+            mPlayStateListener.onStopPlay();
+        }
     }
 
     @Override
     public void release() {
         mTtsEngine.release();
         mMediaPlayer.release();
+        mExoPlayer.release();
     }
 
     @Override

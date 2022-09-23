@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.appcommoninter.ILogger;
 import com.yc.audioplayer.bean.TtsPlayerConfig;
+import com.yc.audioplayer.inter.DefaultStateListener;
 import com.yc.audioplayer.inter.PlayStateListener;
 import com.yc.audioplayer.manager.AudioManager;
 import com.yc.audioplayer.service.AudioService;
@@ -89,10 +90,16 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
         if (v == btnTtsState1){
             TtsPlayerConfig config = new TtsPlayerConfig.Builder().setTtsDeque(true).build();
             AudioService.getInstance().init(this,config);
-            AudioService.getInstance().setPlayStateListener(new PlayStateListener() {
+            AudioService.getInstance().setPlayStateListener(new DefaultStateListener() {
                 @Override
                 public void onStartPlay() {
                     AppLogUtils.d("tts player state start");
+                }
+
+                @Override
+                public void onStopPlay() {
+                    super.onStopPlay();
+                    AppLogUtils.d("tts player state stop");
                 }
 
                 @Override
@@ -117,12 +124,16 @@ public class AudioActivity extends AppCompatActivity implements View.OnClickList
                     })
                     .build();
             AudioService.getInstance().init(this,config);
-            AudioService.getInstance().setPlayStateListener(new PlayStateListener() {
+            AudioService.getInstance().setPlayStateListener(new DefaultStateListener() {
                 @Override
                 public void onStartPlay() {
                     AppLogUtils.d("tts player state start");
                 }
-
+                @Override
+                public void onStopPlay() {
+                    super.onStopPlay();
+                    AppLogUtils.d("tts player state stop");
+                }
                 @Override
                 public void onCompletePlay() {
                     AppLogUtils.d("tts player state complete");
