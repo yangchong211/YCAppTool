@@ -6,6 +6,7 @@ import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.inter.PlayStateListener;
 import com.yc.audioplayer.manager.AudioManager;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 
 /**
  * <pre>
@@ -21,6 +22,7 @@ public final class AudioService implements AudioServiceProvider {
 
     private AudioServiceProvider mDelegate;
     private TtsPlayerConfig mConfig;
+    public static final String TAG = "AudioService: ";
 
     private AudioService() {
     }
@@ -56,28 +58,64 @@ public final class AudioService implements AudioServiceProvider {
     @Override
     public final void stop() {
         if (null != this.mDelegate) {
-            this.mDelegate.stop();
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                mDelegate.stop();
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.stop();
+                    }
+                });
+            }
         }
     }
 
     @Override
     public final void pause() {
         if (null != this.mDelegate) {
-            this.mDelegate.pause();
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                mDelegate.pause();
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.pause();
+                    }
+                });
+            }
         }
     }
 
     @Override
     public final void resume() {
         if (null != this.mDelegate) {
-            this.mDelegate.resume();
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                mDelegate.resume();
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.resume();
+                    }
+                });
+            }
         }
     }
 
     @Override
     public final void release() {
         if (null != this.mDelegate) {
-            this.mDelegate.release();
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                mDelegate.release();
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.release();
+                    }
+                });
+            }
         }
     }
 
@@ -89,28 +127,64 @@ public final class AudioService implements AudioServiceProvider {
     @Override
     public final void play(final AudioPlayData audioPlayData) {
         if (null != this.mDelegate) {
-            this.mDelegate.play(audioPlayData);
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                this.mDelegate.play(audioPlayData);
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.play(audioPlayData);
+                    }
+                });
+            }
         }
     }
 
     @Override
     public final void playTts(final String tts) {
         if (null != this.mDelegate) {
-            this.mDelegate.playTts(tts);
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                this.mDelegate.playTts(tts);
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.playTts(tts);
+                    }
+                });
+            }
         }
     }
 
     @Override
     public void playUrl(String url) {
         if (null != this.mDelegate) {
-            this.mDelegate.playUrl(url);
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                this.mDelegate.playUrl(url);
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.playUrl(url);
+                    }
+                });
+            }
         }
     }
 
     @Override
     public final void playAudioResource(final int rawId) {
         if (null != this.mDelegate) {
-            this.mDelegate.playAudioResource(rawId);
+            if (DelegateTaskExecutor.getInstance().isMainThread()){
+                this.mDelegate.playAudioResource(rawId);
+            } else {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDelegate.playAudioResource(rawId);
+                    }
+                });
+            }
         }
     }
 
