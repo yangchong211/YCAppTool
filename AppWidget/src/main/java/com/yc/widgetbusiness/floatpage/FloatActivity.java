@@ -1,13 +1,11 @@
 package com.yc.widgetbusiness.floatpage;
 
 import android.graphics.Color;
-import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +14,10 @@ import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 import com.yc.window.FloatWindow;
-import com.yc.window.draggable.MovingDraggable;
+import com.yc.window.draggable.MovingTouchListener;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.widgetbusiness.R;
-import com.yc.window.draggable.SpringDraggable;
+import com.yc.window.draggable.SpringTouchListener;
 import com.yc.window.permission.FloatWindowUtils;
 import com.yc.window.permission.PermissionActivity;
 
@@ -89,7 +87,7 @@ public class FloatActivity extends AppCompatActivity {
                 .setGravity(Gravity.END | Gravity.BOTTOM)
                 .setYOffset(200)
                 // 设置指定的拖拽规则
-                .setDraggable(new SpringDraggable())
+                .setDraggable(new SpringTouchListener())
                 .setOnClickListener(R.id.icon, new FloatWindow.OnClickListener<ImageView>() {
                     @Override
                     public void onClick(FloatWindow<?> toast, ImageView view) {
@@ -110,7 +108,7 @@ public class FloatActivity extends AppCompatActivity {
         new FloatWindow<>(this)
                 .setContentView(R.layout.float_window_view)
                 // 设置成可拖拽的
-                .setDraggable(new MovingDraggable())
+                .setDraggable(new MovingTouchListener())
                 .setOnClickListener(R.id.icon, new FloatWindow.OnClickListener<View>() {
                     @Override
                     public void onClick(FloatWindow<?> toast, View view) {

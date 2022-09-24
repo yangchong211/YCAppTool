@@ -2,6 +2,7 @@ package com.yc.window.draggable;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -9,9 +10,18 @@ import android.view.WindowManager;
 
 import com.yc.window.FloatWindow;
 
-public abstract class AbsBaseTouch implements View.OnTouchListener {
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/10/21
+ *     desc  : 抽象触摸事件监听
+ *     revise:
+ * </pre>
+ */
+public abstract class AbsTouchListener implements View.OnTouchListener {
 
-    private FloatWindow<?> mToast;
+    private FloatWindow<?> mFloatWindow;
     private View mDecorView;
     private WindowManager mWindowManager;
     private WindowManager.LayoutParams mWindowParams;
@@ -20,7 +30,7 @@ public abstract class AbsBaseTouch implements View.OnTouchListener {
      * Toast 显示后回调这个类
      */
     public void start(FloatWindow<?> toast) {
-        mToast = toast;
+        mFloatWindow = toast;
         mDecorView = toast.getDecorView();
         mWindowManager = toast.getWindowManager();
         mWindowParams = toast.getWindowParams();
@@ -28,8 +38,8 @@ public abstract class AbsBaseTouch implements View.OnTouchListener {
         mDecorView.setOnTouchListener(this);
     }
 
-    protected FloatWindow<?> getXToast() {
-        return mToast;
+    protected FloatWindow<?> getFloatWindow() {
+        return mFloatWindow;
     }
 
     protected WindowManager getWindowManager() {
@@ -133,6 +143,7 @@ public abstract class AbsBaseTouch implements View.OnTouchListener {
      * 获取最小触摸距离
      */
     protected float getScaledTouchSlop() {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, Resources.getSystem().getDisplayMetrics());
+        DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, displayMetrics);
     }
 }

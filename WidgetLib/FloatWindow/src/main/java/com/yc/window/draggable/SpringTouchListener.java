@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 /**
  * 拖拽后回弹处理实现类
  */
-public class SpringDraggable extends AbsBaseTouch {
+public class SpringTouchListener extends AbsTouchListener {
 
     /** 手指按下的坐标 */
     private float mViewDownX;
@@ -21,11 +21,11 @@ public class SpringDraggable extends AbsBaseTouch {
     /** 触摸移动标记 */
     private boolean mMoveTouch;
 
-    public SpringDraggable() {
+    public SpringTouchListener() {
         this(LinearLayout.HORIZONTAL);
     }
 
-    public SpringDraggable(int orientation) {
+    public SpringTouchListener(int orientation) {
         mOrientation = orientation;
         switch (mOrientation) {
             case LinearLayout.HORIZONTAL:

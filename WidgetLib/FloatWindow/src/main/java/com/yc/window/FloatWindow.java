@@ -24,8 +24,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.yc.window.draggable.AbsBaseTouch;
-import com.yc.window.draggable.MovingDraggable;
+import com.yc.window.draggable.AbsTouchListener;
+import com.yc.window.draggable.MovingTouchListener;
 import com.yc.window.wrapper.ViewClickWrapper;
 import com.yc.window.wrapper.ViewLongClickWrapper;
 import com.yc.window.wrapper.ViewTouchWrapper;
@@ -53,7 +53,7 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
     /** Toast 生命周期管理 */
     private ActivityLifecycle mLifecycle;
     /** 自定义拖动处理 */
-    private AbsBaseTouch mDraggable;
+    private AbsTouchListener mDraggable;
     /** 吐司显示和取消监听 */
     private ILifecycleListener mListener;
 
@@ -428,13 +428,13 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
      * 设置随意拖动
      */
     public X setDraggable() {
-        return setDraggable(new MovingDraggable());
+        return setDraggable(new MovingTouchListener());
     }
 
     /**
      * 设置拖动规则
      */
-    public X setDraggable(AbsBaseTouch draggable) {
+    public X setDraggable(AbsTouchListener draggable) {
         // 如果当前是否设置了不可触摸，如果是就擦除掉这个标记
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         // 如果当前是否设置了可移动窗口到屏幕之外，如果是就擦除这个标记
