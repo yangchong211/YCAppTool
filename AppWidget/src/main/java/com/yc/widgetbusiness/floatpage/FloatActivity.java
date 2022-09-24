@@ -92,9 +92,9 @@ public class FloatActivity extends AppCompatActivity {
                 .setGravity(Gravity.END | Gravity.BOTTOM,0,200)
                 // 设置指定的拖拽规则
                 .setDraggable(new SpringTouchListener())
-                .setOnClickListener(R.id.icon, new IClickListener<ImageView>() {
+                .setOnClickListener(R.id.icon, new IClickListener() {
                     @Override
-                    public void onClick(FloatWindow toast, ImageView view) {
+                    public void onClick(FloatWindow toast, View view) {
                         ToastUtils.showRoundRectToast("我被点击了");
                         floatWindow = toast;
                         //toast.cancel();
@@ -114,10 +114,10 @@ public class FloatActivity extends AppCompatActivity {
                 .setContentView(R.layout.float_window_view)
                 // 设置成可拖拽的
                 .setDraggable(new MovingTouchListener())
-                .setOnClickListener(R.id.icon, new IClickListener<View>() {
+                .setOnClickListener(R.id.icon, new IClickListener() {
                     @Override
-                    public void onClick(FloatWindow toast, View view) {
-                        toast.cancel();
+                    public void onClick(FloatWindow floatWindow, View view) {
+                        floatWindow.cancel();
                     }
                 })
                 .show();

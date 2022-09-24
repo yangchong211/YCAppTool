@@ -29,11 +29,11 @@ public abstract class AbsTouchListener implements View.OnTouchListener {
     /**
      * Toast 显示后回调这个类
      */
-    public void start(FloatWindow toast) {
-        mFloatWindow = toast;
-        mDecorView = toast.getDecorView();
-        mWindowManager = toast.getWindowManager();
-        mWindowParams = toast.getWindowParams();
+    public void start(FloatWindow floatWindow) {
+        mFloatWindow = floatWindow;
+        mDecorView = floatWindow.getDecorView();
+        mWindowManager = floatWindow.getWindowManager();
+        mWindowParams = floatWindow.getWindowParams();
 
         mDecorView.setOnTouchListener(this);
     }

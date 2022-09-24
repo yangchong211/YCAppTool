@@ -13,10 +13,12 @@ import com.yc.window.FloatWindow;
  *     revise:
  * </pre>
  */
-public interface IClickListener<V extends View> {
+public interface IClickListener{
 
     /**
      * 点击回调
+     * @param floatWindow       悬浮窗view
+     * @param view              点击view
      */
-    void onClick(FloatWindow toast, V view);
+    void onClick(FloatWindow floatWindow, View view);
 }

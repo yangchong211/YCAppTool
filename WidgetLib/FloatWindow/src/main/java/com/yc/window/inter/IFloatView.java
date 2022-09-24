@@ -1,9 +1,7 @@
 package com.yc.window.inter;
 
-
-import android.view.View;
-
 import com.yc.window.FloatWindow;
+import com.yc.window.config.ParamsConfig;
 
 /**
  * <pre>
@@ -30,6 +28,12 @@ public interface IFloatView {
      * @param yOffset               y偏移
      */
     FloatWindow setGravity(int gravity, int xOffset, int yOffset);
+
+    /**
+     * 设置window参数配置
+     * @param paramsConfig          参数配置
+     */
+    FloatWindow setParamsConfig(ParamsConfig paramsConfig);
 
     /**
      * 销毁
