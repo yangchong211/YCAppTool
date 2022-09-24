@@ -76,8 +76,20 @@ public class FloatWindow<X extends FloatWindow<?>> {
         this((Context) application);
         // 设置成全局的悬浮窗，注意需要先申请悬浮窗权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //Android 8.0以后不允许使用一下窗口类型来在其他应用和窗口上方显示提醒窗口
+            //TYPE_PHONE
+            //TYPE_PRIORITY_PHONE
+            //TYPE_SYSTEM_ALERT
+            //TYPE_SYSTEM_OVERLAY
+            //TYPE_SYSTEM_ERROR
+            //如果需要实现在其他应用和窗口上方显示提醒窗口，那么必须该为TYPE_APPLICATION_OVERLAY的类型。
             setWindowType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
         } else {
+            //在Android 8.0之前，悬浮窗口设置可以为TYPE_PHONE，这种类型是用于提供用户交互操作的非应用窗口。
+            //Android 8.0以上版本你继续使用TYPE_PHONE类型的悬浮窗口，则会出现如下异常信息：
+            //android.view.WindowManager$BadTokenException:
+            //Unable to add window android.view.ViewRootImpl$W@f8ec928 -- permission denied for window type 2002
+            //setWindowType(WindowManager.LayoutParams.TYPE_PHONE);
             setWindowType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         }
     }
@@ -85,9 +97,15 @@ public class FloatWindow<X extends FloatWindow<?>> {
     private FloatWindow(Context context) {
         mContext = context;
         mDecorView = new WindowLayout(context);
+        //创建WindowManager
+        //WindowManager负责窗口的动态操作，比如窗口的增、删、改。
         mWindowManager = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
+        //负责窗口的静态属性，比如窗口的标题、背景、输入法模式、屏幕方向等等。
         // 配置一些默认的参数
         mWindowParams = new WindowManager.LayoutParams();
+
+        //设置一些属性
+        //宽高自适应
         mWindowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         mWindowParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         mWindowParams.format = PixelFormat.TRANSLUCENT;
