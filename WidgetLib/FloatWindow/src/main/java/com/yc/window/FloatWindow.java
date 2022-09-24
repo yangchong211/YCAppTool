@@ -26,9 +26,9 @@ import android.widget.TextView;
 
 import com.yc.window.draggable.AbsBaseTouch;
 import com.yc.window.draggable.MovingDraggable;
-import com.yc.window.event.ViewClickWrapper;
-import com.yc.window.event.ViewLongClickWrapper;
-import com.yc.window.event.ViewTouchWrapper;
+import com.yc.window.wrapper.ViewClickWrapper;
+import com.yc.window.wrapper.ViewLongClickWrapper;
+import com.yc.window.wrapper.ViewTouchWrapper;
 import com.yc.window.inter.ILifecycleListener;
 import com.yc.window.view.WindowLayout;
 
@@ -62,7 +62,6 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
      */
     public FloatWindow(Activity activity) {
         this((Context) activity);
-
         if ((activity.getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) != 0 ||
                 (activity.getWindow().getDecorView().getSystemUiVisibility() & View.SYSTEM_UI_FLAG_FULLSCREEN) != 0) {
             // 如果当前 Activity 是全屏模式，那么需要添加这个标记，否则会导致 WindowManager 在某些机型上移动不到状态栏的位置上
@@ -79,8 +78,7 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
      */
     public FloatWindow(Application application) {
         this((Context) application);
-
-        // 设置成全局的悬浮窗，注意需要先申请悬浮窗权限，推荐使用：https://github.com/getActivity/XXPermissions
+        // 设置成全局的悬浮窗，注意需要先申请悬浮窗权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setWindowType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
         } else {

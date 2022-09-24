@@ -9,11 +9,11 @@ import android.os.Bundle;
 final class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
 
     private Activity mActivity;
-    private FloatWindow<?> mToast;
+    private FloatWindow<?> mFloatWindow;
 
-    ActivityLifecycle(FloatWindow<?> toast, Activity activity) {
+    ActivityLifecycle(FloatWindow<?> floatWindow, Activity activity) {
         mActivity = activity;
-        mToast = toast;
+        mFloatWindow = floatWindow;
     }
 
     /**
@@ -58,10 +58,10 @@ final class ActivityLifecycle implements Application.ActivityLifecycleCallbacks 
     @Override
     public void onActivityPaused(Activity activity) {
         // 一定要在 onPaused 方法中销毁掉，如果放在 onDestroyed 方法中还是有一定几率会导致内存泄露
-        if (mActivity != activity || !mActivity.isFinishing() || mToast == null || !mToast.isShowing()) {
+        if (mActivity != activity || !mActivity.isFinishing() || mFloatWindow == null || !mFloatWindow.isShowing()) {
             return;
         }
-        mToast.cancel();
+        mFloatWindow.cancel();
     }
 
     @Override
@@ -78,10 +78,10 @@ final class ActivityLifecycle implements Application.ActivityLifecycleCallbacks 
         // 释放 Activity 的引用
         mActivity = null;
 
-        if (mToast == null) {
+        if (mFloatWindow == null) {
             return;
         }
-        mToast.recycle();
-        mToast = null;
+        mFloatWindow.recycle();
+        mFloatWindow = null;
     }
 }
