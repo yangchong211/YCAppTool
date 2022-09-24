@@ -19,9 +19,9 @@ import com.yc.window.FloatWindow;
 public final class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
 
     private Activity mActivity;
-    private FloatWindow<?> mFloatWindow;
+    private FloatWindow mFloatWindow;
 
-    public ActivityLifecycle(FloatWindow<?> floatWindow, Activity activity) {
+    public ActivityLifecycle(FloatWindow floatWindow, Activity activity) {
         mActivity = activity;
         mFloatWindow = floatWindow;
     }

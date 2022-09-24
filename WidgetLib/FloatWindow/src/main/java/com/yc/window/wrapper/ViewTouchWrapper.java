@@ -10,10 +10,10 @@ import com.yc.window.inter.ITouchListener;
 
 public final class ViewTouchWrapper implements View.OnTouchListener {
 
-    private final FloatWindow<?> mToast;
+    private final FloatWindow mToast;
     private final ITouchListener mListener;
 
-    public ViewTouchWrapper(FloatWindow<?> toast, ITouchListener listener) {
+    public ViewTouchWrapper(FloatWindow toast, ITouchListener listener) {
         mToast = toast;
         mListener = listener;
     }

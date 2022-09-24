@@ -21,7 +21,7 @@ import com.yc.window.FloatWindow;
  */
 public abstract class AbsTouchListener implements View.OnTouchListener {
 
-    private FloatWindow<?> mFloatWindow;
+    private FloatWindow mFloatWindow;
     private View mDecorView;
     private WindowManager mWindowManager;
     private WindowManager.LayoutParams mWindowParams;
@@ -29,7 +29,7 @@ public abstract class AbsTouchListener implements View.OnTouchListener {
     /**
      * Toast 显示后回调这个类
      */
-    public void start(FloatWindow<?> toast) {
+    public void start(FloatWindow toast) {
         mFloatWindow = toast;
         mDecorView = toast.getDecorView();
         mWindowManager = toast.getWindowManager();
@@ -38,7 +38,7 @@ public abstract class AbsTouchListener implements View.OnTouchListener {
         mDecorView.setOnTouchListener(this);
     }
 
-    protected FloatWindow<?> getFloatWindow() {
+    protected FloatWindow getFloatWindow() {
         return mFloatWindow;
     }
 

@@ -16,15 +16,15 @@ public interface ILifecycleListener {
     /**
      * 显示回调
      */
-    void onShow(FloatWindow<?> floatWindow);
+    void onShow(FloatWindow floatWindow);
 
     /**
      * 消失回调
      */
-    void onDismiss(FloatWindow<?> floatWindow);
+    void onDismiss(FloatWindow floatWindow);
 
     /**
      * 回收回调
      */
-    void onRecycler(FloatWindow<?> floatWindow);
+    void onRecycler(FloatWindow floatWindow);
 }

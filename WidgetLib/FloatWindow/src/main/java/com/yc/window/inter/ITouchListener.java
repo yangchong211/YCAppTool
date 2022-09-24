@@ -19,5 +19,5 @@ public interface ITouchListener<V extends View> {
     /**
      * 触摸回调
      */
-    boolean onTouch(FloatWindow<?> floatWindow, V view, MotionEvent event);
+    boolean onTouch(FloatWindow floatWindow, V view, MotionEvent event);
 }

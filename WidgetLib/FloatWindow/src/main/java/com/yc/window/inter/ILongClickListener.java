@@ -18,5 +18,5 @@ public interface ILongClickListener<V extends View> {
     /**
      * 长按回调
      */
-    boolean onLongClick(FloatWindow<?> floatWindow, V view);
+    boolean onLongClick(FloatWindow floatWindow, V view);
 }

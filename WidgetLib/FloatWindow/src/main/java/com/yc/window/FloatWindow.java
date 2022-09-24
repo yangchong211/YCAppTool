@@ -24,6 +24,7 @@ import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.window.draggable.AbsTouchListener;
 import com.yc.window.draggable.MovingTouchListener;
 import com.yc.window.inter.IClickListener;
+import com.yc.window.inter.IFloatView;
 import com.yc.window.inter.ILifecycleListener;
 import com.yc.window.inter.ILongClickListener;
 import com.yc.window.inter.ITouchListener;
@@ -33,7 +34,7 @@ import com.yc.window.wrapper.ViewClickWrapper;
 import com.yc.window.wrapper.ViewLongClickWrapper;
 import com.yc.window.wrapper.ViewTouchWrapper;
 
-public class FloatWindow<X extends FloatWindow<?>> {
+public class FloatWindow implements IFloatView {
 
     /** 上下文 */
     private Context mContext;
@@ -118,46 +119,34 @@ public class FloatWindow<X extends FloatWindow<?>> {
     }
 
     /**
-     * 设置宽度
+     * 设置宽度和高度
      */
-    public X setWidth(int width) {
+    @Override
+    public FloatWindow setSize(int width , int height) {
         mWindowParams.width = width;
+        mWindowParams.height = height;
         if (mDecorView.getChildCount() > 0) {
             View contentView = mDecorView.getChildAt(0);
             ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
             if (layoutParams != null && layoutParams.width != width) {
                 layoutParams.width = width;
-                contentView.setLayoutParams(layoutParams);
             }
-        }
-        update();
-        return (X) this;
-    }
-
-    /**
-     * 设置高度
-     */
-    public X setHeight(int height) {
-        mWindowParams.height = height;
-        if (mDecorView.getChildCount() > 0) {
-            View contentView = mDecorView.getChildAt(0);
-            ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
             if (layoutParams != null && layoutParams.height != height) {
                 layoutParams.height = height;
-                contentView.setLayoutParams(layoutParams);
             }
+            contentView.setLayoutParams(layoutParams);
         }
         update();
-        return (X) this;
+        return this;
     }
 
     /**
      * 设置窗口重心
      */
-    public X setGravity(int gravity) {
+    public FloatWindow setGravity(int gravity) {
         mWindowParams.gravity = gravity;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
@@ -167,34 +156,34 @@ public class FloatWindow<X extends FloatWindow<?>> {
      * 横屏：{@link ActivityInfo#SCREEN_ORIENTATION_LANDSCAPE}
      * 竖屏：{@link ActivityInfo#SCREEN_ORIENTATION_PORTRAIT}
      */
-    public X setScreenOrientation(int orientation) {
+    public FloatWindow setScreenOrientation(int orientation) {
         mWindowParams.screenOrientation = orientation;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置水平偏移量
      */
-    public X setXOffset(int x) {
+    public FloatWindow setXOffset(int x) {
         mWindowParams.x = x;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置垂直偏移量
      */
-    public X setYOffset(int y) {
+    public FloatWindow setYOffset(int y) {
         mWindowParams.y = y;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 是否外层可触摸
      */
-    public X setOutsideTouchable(boolean touchable) {
+    public FloatWindow setOutsideTouchable(boolean touchable) {
         int flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         if (touchable) {
@@ -203,13 +192,13 @@ public class FloatWindow<X extends FloatWindow<?>> {
             clearWindowFlags(flags);
         }
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置窗口背景阴影强度
      */
-    public X setBackgroundDimAmount(float amount) {
+    public FloatWindow setBackgroundDimAmount(float amount) {
         if (amount < 0 || amount > 1) {
             throw new IllegalArgumentException("are you ok?");
         }
@@ -221,7 +210,7 @@ public class FloatWindow<X extends FloatWindow<?>> {
             clearWindowFlags(flags);
         }
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
@@ -234,46 +223,46 @@ public class FloatWindow<X extends FloatWindow<?>> {
     /**
      * 添加一个标记位
      */
-    public X addWindowFlags(int flags) {
+    public FloatWindow addWindowFlags(int flags) {
         mWindowParams.flags |= flags;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 移除一个标记位
      */
-    public X clearWindowFlags(int flags) {
+    public FloatWindow clearWindowFlags(int flags) {
         mWindowParams.flags &= ~flags;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置标记位
      */
-    public X setWindowFlags(int flags) {
+    public FloatWindow setWindowFlags(int flags) {
         mWindowParams.flags = flags;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置窗口类型
      */
-    public X setWindowType(int type) {
+    public FloatWindow setWindowType(int type) {
         mWindowParams.type = type;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置动画样式
      */
-    public X setAnimStyle(int id) {
+    public FloatWindow setAnimStyle(int id) {
         mWindowParams.windowAnimations = id;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
@@ -286,169 +275,169 @@ public class FloatWindow<X extends FloatWindow<?>> {
      * {@link WindowManager.LayoutParams#SOFT_INPUT_ADJUST_RESIZE}：当软键盘弹出时，窗口会调整大小
      * {@link WindowManager.LayoutParams#SOFT_INPUT_ADJUST_PAN}：当软键盘弹出时，窗口不需要调整大小，要确保输入焦点是可见的
      */
-    public X setSoftInputMode(int mode) {
+    public FloatWindow setSoftInputMode(int mode) {
         mWindowParams.softInputMode = mode;
         // 如果设置了不能触摸，则擦除这个标记，否则会导致无法弹出输入法
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置窗口 Token
      */
-    public X setWindowToken(IBinder token) {
+    public FloatWindow setWindowToken(IBinder token) {
         mWindowParams.token = token;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置窗口透明度
      */
-    public X setWindowAlpha(float alpha) {
+    public FloatWindow setWindowAlpha(float alpha) {
         mWindowParams.alpha = alpha;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置垂直间距
      */
-    public X setVerticalMargin(float verticalMargin) {
+    public FloatWindow setVerticalMargin(float verticalMargin) {
         mWindowParams.verticalMargin = verticalMargin;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置水平间距
      */
-    public X setHorizontalMargin(float horizontalMargin) {
+    public FloatWindow setHorizontalMargin(float horizontalMargin) {
         mWindowParams.horizontalMargin = horizontalMargin;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置位图格式
      */
-    public X setBitmapFormat(int format) {
+    public FloatWindow setBitmapFormat(int format) {
         mWindowParams.format = format;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置状态栏的可见性
      */
-    public X setSystemUiVisibility(int systemUiVisibility) {
+    public FloatWindow setSystemUiVisibility(int systemUiVisibility) {
         mWindowParams.systemUiVisibility = systemUiVisibility;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置垂直权重
      */
-    public X setVerticalWeight(float verticalWeight) {
+    public FloatWindow setVerticalWeight(float verticalWeight) {
         mWindowParams.verticalWeight = verticalWeight;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置挖孔屏下的显示模式
      */
-    public X setLayoutInDisplayCutoutMode(int mode) {
+    public FloatWindow setLayoutInDisplayCutoutMode(int mode) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             mWindowParams.layoutInDisplayCutoutMode = mode;
             update();
         }
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置窗口在哪个显示屏上显示
      */
-    public X setPreferredDisplayModeId(int id) {
+    public FloatWindow setPreferredDisplayModeId(int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mWindowParams.preferredDisplayModeId = id;
             update();
         }
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置窗口标题
      */
-    public X setWindowTitle(CharSequence title) {
+    public FloatWindow setWindowTitle(CharSequence title) {
         mWindowParams.setTitle(title);
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置屏幕的亮度
      */
-    public X setScreenBrightness(float screenBrightness) {
+    public FloatWindow setScreenBrightness(float screenBrightness) {
         mWindowParams.screenBrightness = screenBrightness;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置按键的亮度
      */
-    public X setButtonBrightness(float buttonBrightness) {
+    public FloatWindow setButtonBrightness(float buttonBrightness) {
         mWindowParams.buttonBrightness = buttonBrightness;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置窗口的刷新率
      */
-    public X setPreferredRefreshRate(float preferredRefreshRate) {
+    public FloatWindow setPreferredRefreshRate(float preferredRefreshRate) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mWindowParams.preferredRefreshRate = preferredRefreshRate;
             update();
         }
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置窗口的颜色模式
      */
-    public X setColorMode(int colorMode) {
+    public FloatWindow setColorMode(int colorMode) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mWindowParams.setColorMode(colorMode);
             update();
         }
-        return (X) this;
+        return (FloatWindow) this;
     }
 
 
     /**
      * 重新设置 WindowManager 参数集
      */
-    public X setWindowParams(WindowManager.LayoutParams params) {
+    public FloatWindow setWindowParams(WindowManager.LayoutParams params) {
         mWindowParams = params;
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置随意拖动
      */
-    public X setDraggable() {
+    public FloatWindow setDraggable() {
         return setDraggable(new MovingTouchListener());
     }
 
     /**
      * 设置拖动规则
      */
-    public X setDraggable(AbsTouchListener draggable) {
+    public FloatWindow setDraggable(AbsTouchListener draggable) {
         // 如果当前是否设置了不可触摸，如果是就擦除掉这个标记
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         // 如果当前是否设置了可移动窗口到屏幕之外，如果是就擦除这个标记
@@ -459,13 +448,13 @@ public class FloatWindow<X extends FloatWindow<?>> {
             update();
             mDraggable.start(this);
         }
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 限定显示时长
      */
-    public X setDuration(int duration) {
+    public FloatWindow setDuration(int duration) {
         if (isShowing() && duration != 0) {
             DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                 @Override
@@ -474,33 +463,33 @@ public class FloatWindow<X extends FloatWindow<?>> {
                 }
             },duration);
         }
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置生命周期监听
      */
-    public X setOnToastLifecycle(ILifecycleListener listener) {
+    public FloatWindow setOnToastLifecycle(ILifecycleListener listener) {
         mListener = listener;
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置根布局（一般情况下推荐使用 {@link #setContentView} 方法来填充布局）
      */
-    public X setDecorView(ViewGroup viewGroup) {
+    public FloatWindow setDecorView(ViewGroup viewGroup) {
         mDecorView = viewGroup;
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置内容布局
      */
-    public X setContentView(int id) {
+    public FloatWindow setContentView(int id) {
         return setContentView(LayoutInflater.from(mContext).inflate(id, mDecorView, false));
     }
 
-    public X setContentView(View view) {
+    public FloatWindow setContentView(View view) {
         if (mDecorView.getChildCount() > 0) {
             mDecorView.removeAllViews();
         }
@@ -550,7 +539,7 @@ public class FloatWindow<X extends FloatWindow<?>> {
         }
 
         update();
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     public void showAsDropDown(View anchorView) {
@@ -684,9 +673,7 @@ public class FloatWindow<X extends FloatWindow<?>> {
         if (!mShowing) {
             return;
         }
-
         try {
-
             // 反注册 Activity 生命周期
             if (mLifecycle != null) {
                 mLifecycle.unregister();
@@ -694,13 +681,12 @@ public class FloatWindow<X extends FloatWindow<?>> {
 
             // 如果当前 WindowManager 没有附加这个 View 则会抛出异常
             // java.lang.IllegalArgumentException: View not attached to window manager
-            mWindowManager.removeViewImmediate(mDecorView);
-
+            //mWindowManager.removeViewImmediate(mDecorView);
+            mWindowManager.removeView(mDecorView);
             // 回调监听
             if (mListener != null) {
                 mListener.onDismiss(this);
             }
-
         } catch (NullPointerException | IllegalArgumentException | IllegalStateException e) {
             e.printStackTrace();
         } finally {
@@ -809,62 +795,62 @@ public class FloatWindow<X extends FloatWindow<?>> {
     /**
      * 设置可见状态
      */
-    public X setVisibility(int id, int visibility) {
+    public FloatWindow setVisibility(int id, int visibility) {
         findViewById(id).setVisibility(visibility);
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置文本
      */
-    public X setText(int id) {
+    public FloatWindow setText(int id) {
         return setText(android.R.id.message, id);
     }
 
-    public X setText(int viewId, int stringId) {
+    public FloatWindow setText(int viewId, int stringId) {
         return setText(viewId, mContext.getResources().getString(stringId));
     }
 
-    public X setText(CharSequence text) {
+    public FloatWindow setText(CharSequence text) {
         return setText(android.R.id.message, text);
     }
 
-    public X setText(int id, CharSequence text) {
+    public FloatWindow setText(int id, CharSequence text) {
         ((TextView) findViewById(id)).setText(text);
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置文本颜色
      */
-    public X setTextColor(int id, int color) {
+    public FloatWindow setTextColor(int id, int color) {
         ((TextView) findViewById(id)).setTextColor(color);
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置提示
      */
-    public X setHint(int viewId, int stringId) {
+    public FloatWindow setHint(int viewId, int stringId) {
         return setHint(viewId, mContext.getResources().getString(stringId));
     }
-    public X setHint(int id, CharSequence text) {
+    public FloatWindow setHint(int id, CharSequence text) {
         ((TextView) findViewById(id)).setHint(text);
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置提示文本颜色
      */
-    public X setHintColor(int id, int color) {
+    public FloatWindow setHintColor(int id, int color) {
         ((TextView) findViewById(id)).setHintTextColor(color);
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置背景
      */
-    public X setBackground(int viewId, int drawableId) {
+    public FloatWindow setBackground(int viewId, int drawableId) {
         Drawable drawable;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawable = mContext.getDrawable(drawableId);
@@ -874,19 +860,19 @@ public class FloatWindow<X extends FloatWindow<?>> {
         return setBackground(viewId, drawable);
     }
 
-    public X setBackground(int id, Drawable drawable) {
+    public FloatWindow setBackground(int id, Drawable drawable) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             findViewById(id).setBackground(drawable);
         } else {
             findViewById(id).setBackgroundDrawable(drawable);
         }
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置图片
      */
-    public X setImageDrawable(int viewId, int drawableId) {
+    public FloatWindow setImageDrawable(int viewId, int drawableId) {
         Drawable drawable;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             drawable = mContext.getDrawable(drawableId);
@@ -896,68 +882,68 @@ public class FloatWindow<X extends FloatWindow<?>> {
         return setImageDrawable(viewId, drawable);
     }
 
-    public X setImageDrawable(int viewId, Drawable drawable) {
+    public FloatWindow setImageDrawable(int viewId, Drawable drawable) {
         ((ImageView) findViewById(viewId)).setImageDrawable(drawable);
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置点击事件
      */
-    public X setOnClickListener(IClickListener<? extends View> listener) {
+    public FloatWindow setOnClickListener(IClickListener<? extends View> listener) {
         return setOnClickListener(mDecorView, listener);
     }
 
-    public X setOnClickListener(int id, IClickListener<? extends View> listener) {
+    public FloatWindow setOnClickListener(int id, IClickListener<? extends View> listener) {
         return setOnClickListener(findViewById(id), listener);
     }
 
-    private X setOnClickListener(View view, IClickListener<? extends View> listener) {
+    private FloatWindow setOnClickListener(View view, IClickListener<? extends View> listener) {
         // 如果当前是否设置了不可触摸，如果是就擦除掉
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
         view.setClickable(true);
         view.setOnClickListener(new ViewClickWrapper(this, listener));
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置长按事件
      */
-    public X setOnLongClickListener(ILongClickListener<? extends View> listener) {
+    public FloatWindow setOnLongClickListener(ILongClickListener<? extends View> listener) {
         return setOnLongClickListener(mDecorView, listener);
     }
 
-    public X setOnLongClickListener(int id, ILongClickListener<? extends View> listener) {
+    public FloatWindow setOnLongClickListener(int id, ILongClickListener<? extends View> listener) {
         return setOnLongClickListener(findViewById(id), listener);
     }
 
-    private X setOnLongClickListener(View view, ILongClickListener<? extends View> listener) {
+    private FloatWindow setOnLongClickListener(View view, ILongClickListener<? extends View> listener) {
         // 如果当前是否设置了不可触摸，如果是就擦除掉
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
         view.setClickable(true);
         view.setOnLongClickListener(new ViewLongClickWrapper(this, listener));
-        return (X) this;
+        return (FloatWindow) this;
     }
 
     /**
      * 设置触摸事件
      */
-    public X setOnTouchListener(ITouchListener<? extends View> listener) {
+    public FloatWindow setOnTouchListener(ITouchListener<? extends View> listener) {
         return setOnTouchListener(mDecorView, listener);
     }
 
-    public X setOnTouchListener(int id, ITouchListener<? extends View> listener) {
+    public FloatWindow setOnTouchListener(int id, ITouchListener<? extends View> listener) {
         return setOnTouchListener(findViewById(id), listener);
     }
 
-    private X setOnTouchListener(View view, ITouchListener<? extends View> listener) {
+    private FloatWindow setOnTouchListener(View view, ITouchListener<? extends View> listener) {
         // 当前是否设置了不可触摸，如果是就擦除掉
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         view.setEnabled(true);
         view.setOnTouchListener(new ViewTouchWrapper(this, listener));
-        return (X) this;
+        return (FloatWindow) this;
     }
 
 }

@@ -8,10 +8,10 @@ import com.yc.window.inter.IClickListener;
 
 public final class ViewClickWrapper implements View.OnClickListener {
 
-    private final FloatWindow<?> mToast;
+    private final FloatWindow mToast;
     private final IClickListener mListener;
 
-    public ViewClickWrapper(FloatWindow<?> toast, IClickListener listener) {
+    public ViewClickWrapper(FloatWindow toast, IClickListener listener) {
         mToast = toast;
         mListener = listener;
     }

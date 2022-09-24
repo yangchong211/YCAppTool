@@ -27,6 +27,7 @@ public class FloatActivity extends AppCompatActivity {
     private RoundTextView tvWidgetFloat1;
     private RoundTextView tvWidgetFloat2;
     private RoundTextView tvWidgetFloat3;
+    private FloatWindow floatWindow;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,23 +77,27 @@ public class FloatActivity extends AppCompatActivity {
         tvWidgetFloat3.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-
+                if (floatWindow!=null){
+                    floatWindow.cancel();
+                }
             }
         });
     }
 
     private void showFloat2() {
         // 传入 Application 表示这个是一个全局的 Toast
-        new FloatWindow<>(this.getApplication())
+        new FloatWindow(this.getApplication())
                 .setContentView(R.layout.float_window_view)
+                .setSize(200,400)
                 .setGravity(Gravity.END | Gravity.BOTTOM)
                 .setYOffset(200)
                 // 设置指定的拖拽规则
                 .setDraggable(new SpringTouchListener())
                 .setOnClickListener(R.id.icon, new IClickListener<ImageView>() {
                     @Override
-                    public void onClick(FloatWindow<?> toast, ImageView view) {
+                    public void onClick(FloatWindow toast, ImageView view) {
                         ToastUtils.showRoundRectToast("我被点击了");
+                        floatWindow = toast;
                         //toast.cancel();
                         // 点击后跳转到拨打电话界面
                         // Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -106,13 +111,13 @@ public class FloatActivity extends AppCompatActivity {
     }
 
     private void showFloat1() {
-        new FloatWindow<>(this)
+        new FloatWindow(this)
                 .setContentView(R.layout.float_window_view)
                 // 设置成可拖拽的
                 .setDraggable(new MovingTouchListener())
                 .setOnClickListener(R.id.icon, new IClickListener<View>() {
                     @Override
-                    public void onClick(FloatWindow<?> toast, View view) {
+                    public void onClick(FloatWindow toast, View view) {
                         toast.cancel();
                     }
                 })

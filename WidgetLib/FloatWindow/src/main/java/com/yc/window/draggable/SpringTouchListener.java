@@ -123,7 +123,7 @@ public class SpringTouchListener extends AbsTouchListener {
      */
     private void startHorizontalAnimation(float startX, float endX, final float y) {
         ValueAnimator animator = ValueAnimator.ofFloat(startX, endX);
-        animator.setDuration(500);
+        animator.setDuration(200);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -142,7 +142,7 @@ public class SpringTouchListener extends AbsTouchListener {
      */
     private void startVerticalAnimation(final float x, float startY, final float endY) {
         ValueAnimator animator = ValueAnimator.ofFloat(startY, endY);
-        animator.setDuration(500);
+        animator.setDuration(200);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

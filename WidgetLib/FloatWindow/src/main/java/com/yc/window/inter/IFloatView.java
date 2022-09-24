@@ -1,6 +1,5 @@
 package com.yc.window.inter;
 
-import android.view.View;
 
 import com.yc.window.FloatWindow;
 
@@ -9,14 +8,18 @@ import com.yc.window.FloatWindow;
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2018/08/18
- *     desc  : 定义自定义点击事件
+ *     desc  : 自定义悬浮窗接口
  *     revise:
  * </pre>
  */
-public interface IClickListener<V extends View> {
+public interface IFloatView {
 
     /**
-     * 点击回调
+     * 设置大小
+     * @param width                 宽
+     * @param height                高
      */
-    void onClick(FloatWindow toast, V view);
+    FloatWindow setSize(int width, int height);
+
+
 }
