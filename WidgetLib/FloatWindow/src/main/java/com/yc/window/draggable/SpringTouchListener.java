@@ -7,7 +7,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 /**
- * 拖拽后回弹处理实现类
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/08/18
+ *     desc  : 拖拽后回弹处理实现类
+ *     revise:
+ * </pre>
  */
 public class SpringTouchListener extends AbsTouchListener {
 
@@ -119,7 +125,6 @@ public class SpringTouchListener extends AbsTouchListener {
         ValueAnimator animator = ValueAnimator.ofFloat(startX, endX);
         animator.setDuration(500);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 updateLocation((float) animation.getAnimatedValue(), y);
@@ -139,7 +144,6 @@ public class SpringTouchListener extends AbsTouchListener {
         ValueAnimator animator = ValueAnimator.ofFloat(startY, endY);
         animator.setDuration(500);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 updateLocation(x, (float) animation.getAnimatedValue());

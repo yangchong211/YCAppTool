@@ -4,7 +4,15 @@ import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.view.View;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/08/18
+ *     desc  : 拖拽移动处理实现类
+ *     revise:
+ * </pre>
+ */
 public class MovingTouchListener extends AbsTouchListener {
 
     /** 手指按下的坐标 */
