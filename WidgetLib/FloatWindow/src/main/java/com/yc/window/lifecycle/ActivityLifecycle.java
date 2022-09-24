@@ -1,17 +1,27 @@
-package com.yc.window;
+package com.yc.window.lifecycle;
 
 import android.app.Activity;
 import android.app.Application;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.yc.window.FloatWindow;
 
-final class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/08/18
+ *     desc  : activity生命周期监听
+ *     revise:
+ * </pre>
+ */
+public final class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
 
     private Activity mActivity;
     private FloatWindow<?> mFloatWindow;
 
-    ActivityLifecycle(FloatWindow<?> floatWindow, Activity activity) {
+    public ActivityLifecycle(FloatWindow<?> floatWindow, Activity activity) {
         mActivity = activity;
         mFloatWindow = floatWindow;
     }
@@ -19,7 +29,7 @@ final class ActivityLifecycle implements Application.ActivityLifecycleCallbacks 
     /**
      * 注册监听
      */
-    void register() {
+    public void register() {
         if (mActivity == null) {
             return;
         }
@@ -34,7 +44,7 @@ final class ActivityLifecycle implements Application.ActivityLifecycleCallbacks 
     /**
      * 取消监听
      */
-    void unregister() {
+    public void unregister() {
         if (mActivity == null) {
             return;
         }

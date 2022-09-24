@@ -9,10 +9,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
-import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,20 +20,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.window.draggable.AbsTouchListener;
 import com.yc.window.draggable.MovingTouchListener;
-import com.yc.window.inter.ITouchListener;
-import com.yc.window.inter.ILongClickListener;
 import com.yc.window.inter.IClickListener;
+import com.yc.window.inter.ILifecycleListener;
+import com.yc.window.inter.ILongClickListener;
+import com.yc.window.inter.ITouchListener;
+import com.yc.window.lifecycle.ActivityLifecycle;
+import com.yc.window.view.WindowLayout;
 import com.yc.window.wrapper.ViewClickWrapper;
 import com.yc.window.wrapper.ViewLongClickWrapper;
 import com.yc.window.wrapper.ViewTouchWrapper;
-import com.yc.window.inter.ILifecycleListener;
-import com.yc.window.view.WindowLayout;
 
-public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
-
-    private static final Handler HANDLER = new Handler(Looper.getMainLooper());
+public class FloatWindow<X extends FloatWindow<?>> {
 
     /** 上下文 */
     private Context mContext;
@@ -49,8 +46,6 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
 
     /** 当前是否已经显示 */
     private boolean mShowing;
-    /** 窗口显示时长 */
-    private int mDuration;
     /** Toast 生命周期管理 */
     private ActivityLifecycle mLifecycle;
     /** 自定义拖动处理 */
@@ -453,10 +448,13 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
      * 限定显示时长
      */
     public X setDuration(int duration) {
-        mDuration = duration;
-        if (isShowing() && mDuration != 0) {
-            removeCallbacks(this);
-            postDelayed(this, mDuration);
+        if (isShowing() && duration != 0) {
+            DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                @Override
+                public void run() {
+                    cancel();
+                }
+            },duration);
         }
         return (X) this;
     }
@@ -637,11 +635,7 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
             mWindowManager.addView(mDecorView, mWindowParams);
             // 当前已经显示
             mShowing = true;
-            // 如果当前限定了显示时长
-            if (mDuration != 0) {
-                removeCallbacks(this);
-                postDelayed(this, mDuration);
-            }
+
             // 如果设置了拖拽规则
             if (mDraggable != null) {
                 mDraggable.start(this);
@@ -683,9 +677,6 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
             // 如果当前 WindowManager 没有附加这个 View 则会抛出异常
             // java.lang.IllegalArgumentException: View not attached to window manager
             mWindowManager.removeViewImmediate(mDecorView);
-
-            // 移除销毁任务
-            removeCallbacks(this);
 
             // 回调监听
             if (mListener != null) {
@@ -893,49 +884,6 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
     }
 
     /**
-     * 获取 Handler
-     */
-    public Handler getHandler() {
-        return HANDLER;
-    }
-
-    /**
-     * 延迟执行
-     */
-    public boolean post(Runnable runnable) {
-        return postDelayed(runnable, 0);
-    }
-
-    /**
-     * 延迟一段时间执行
-     */
-    public boolean postDelayed(Runnable runnable, long delayMillis) {
-        if (delayMillis < 0) {
-            delayMillis = 0;
-        }
-        return postAtTime(runnable, SystemClock.uptimeMillis() + delayMillis);
-    }
-
-    /**
-     * 在指定的时间执行
-     */
-    public boolean postAtTime(Runnable runnable, long uptimeMillis) {
-        // 发送和这个 WindowManager 相关的消息回调
-        return HANDLER.postAtTime(runnable, this, uptimeMillis);
-    }
-
-    /**
-     * 移除消息回调
-     */
-    public void removeCallbacks(Runnable runnable) {
-        HANDLER.removeCallbacks(runnable);
-    }
-
-    public void removeCallbacksAndMessages() {
-        HANDLER.removeCallbacksAndMessages(this);
-    }
-
-    /**
      * 设置点击事件
      */
     public X setOnClickListener(IClickListener<? extends View> listener) {
@@ -989,18 +937,9 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
     private X setOnTouchListener(View view, ITouchListener<? extends View> listener) {
         // 当前是否设置了不可触摸，如果是就擦除掉
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
         view.setEnabled(true);
         view.setOnTouchListener(new ViewTouchWrapper(this, listener));
         return (X) this;
-    }
-
-    /**
-     * {@link Runnable}
-     */
-    @Override
-    public void run() {
-        cancel();
     }
 
 }
