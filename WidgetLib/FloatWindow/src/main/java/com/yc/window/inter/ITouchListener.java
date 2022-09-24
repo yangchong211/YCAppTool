@@ -14,10 +14,14 @@ import com.yc.window.FloatWindow;
  *     revise:
  * </pre>
  */
-public interface ITouchListener<V extends View> {
+public interface ITouchListener {
 
     /**
      * 触摸回调
+     * @param floatWindow           悬浮窗view
+     * @param view                  孩子view
+     * @param event                 event事件
+     * @return
      */
-    boolean onTouch(FloatWindow floatWindow, V view, MotionEvent event);
+    boolean onTouch(FloatWindow floatWindow, View view, MotionEvent event);
 }

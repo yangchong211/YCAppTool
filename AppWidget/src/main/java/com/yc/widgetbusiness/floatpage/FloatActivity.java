@@ -24,10 +24,11 @@ import com.yc.window.permission.PermissionActivity;
 
 public class FloatActivity extends AppCompatActivity {
 
-    private RoundTextView tvWidgetFloat1;
+    private RoundTextView tvWidgetFloat11;
+    private RoundTextView tvWidgetFloat12;
     private RoundTextView tvWidgetFloat2;
     private RoundTextView tvWidgetFloat3;
-    private FloatWindow floatWindow;
+    private FloatWindow floatWindow2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,16 +40,28 @@ public class FloatActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        tvWidgetFloat1 = findViewById(R.id.tv_widget_float1);
+
+
+        tvWidgetFloat11 = findViewById(R.id.tv_widget_float1_1);
+        tvWidgetFloat12 = findViewById(R.id.tv_widget_float1_2);
         tvWidgetFloat2 = findViewById(R.id.tv_widget_float2);
         tvWidgetFloat3 = findViewById(R.id.tv_widget_float3);
+
     }
 
     public void initListener() {
-        tvWidgetFloat1.setOnClickListener(new PerfectClickListener() {
+        tvWidgetFloat11.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
                 showFloat1();
+            }
+        });
+        tvWidgetFloat12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (floatWindow1 !=null){
+                    floatWindow1.dismiss();
+                }
             }
         });
         tvWidgetFloat2.setOnClickListener(new PerfectClickListener() {
@@ -77,8 +90,8 @@ public class FloatActivity extends AppCompatActivity {
         tvWidgetFloat3.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                if (floatWindow!=null){
-                    floatWindow.cancel();
+                if (floatWindow2!=null){
+                    floatWindow2.dismiss();
                 }
             }
         });
@@ -86,41 +99,45 @@ public class FloatActivity extends AppCompatActivity {
 
     private void showFloat2() {
         // 传入 Application 表示这个是一个全局的 Toast
-        new FloatWindow(this.getApplication())
-                .setContentView(R.layout.float_window_view)
-                .setSize(200,400)
-                .setGravity(Gravity.END | Gravity.BOTTOM,0,200)
-                // 设置指定的拖拽规则
-                .setDraggable(new SpringTouchListener())
-                .setOnClickListener(R.id.icon, new IClickListener() {
-                    @Override
-                    public void onClick(FloatWindow toast, View view) {
-                        ToastUtils.showRoundRectToast("我被点击了");
-                        floatWindow = toast;
-                        //toast.cancel();
-                        // 点击后跳转到拨打电话界面
-                        // Intent intent = new Intent(Intent.ACTION_DIAL);
-                        // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        // toast.startActivity(intent);
-                        // 安卓 10 在后台跳转 Activity 需要额外适配
-                        // https://developer.android.google.cn/about/versions/10/privacy/changes#background-activity-starts
-                    }
-                })
-                .show();
+        if (floatWindow2==null){
+            floatWindow2 = new FloatWindow(this.getApplication())
+                    .setContentView(R.layout.float_window_view)
+                    .setSize(200, 400)
+                    .setGravity(Gravity.END | Gravity.BOTTOM, 0, 200)
+                    // 设置指定的拖拽规则
+                    .setDraggable(new SpringTouchListener())
+                    .setOnClickListener(R.id.icon, new IClickListener() {
+                        @Override
+                        public void onClick(FloatWindow toast, View view) {
+                            ToastUtils.showRoundRectToast("我被点击了");
+                            //toast.cancel();
+                            // 点击后跳转到拨打电话界面
+                            // Intent intent = new Intent(Intent.ACTION_DIAL);
+                            // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            // toast.startActivity(intent);
+                            // 安卓 10 在后台跳转 Activity 需要额外适配
+                            // https://developer.android.google.cn/about/versions/10/privacy/changes#background-activity-starts
+                        }
+                    });
+        }
+        floatWindow2.show();
     }
 
+    FloatWindow floatWindow1;
     private void showFloat1() {
-        new FloatWindow(this)
-                .setContentView(R.layout.float_window_view)
-                // 设置成可拖拽的
-                .setDraggable(new MovingTouchListener())
-                .setOnClickListener(R.id.icon, new IClickListener() {
-                    @Override
-                    public void onClick(FloatWindow floatWindow, View view) {
-                        floatWindow.cancel();
-                    }
-                })
-                .show();
+        if (floatWindow1 == null){
+            floatWindow1 = new FloatWindow(this)
+                    .setContentView(R.layout.float_window_view)
+                    // 设置成可拖拽的
+                    .setDraggable(new MovingTouchListener())
+                    .setOnClickListener(R.id.icon, new IClickListener() {
+                        @Override
+                        public void onClick(FloatWindow floatWindow, View view) {
+                            floatWindow.dismiss();
+                        }
+                    });
+        }
+        floatWindow1.show();
     }
 
 }

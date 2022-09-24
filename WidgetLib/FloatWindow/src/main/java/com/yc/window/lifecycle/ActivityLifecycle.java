@@ -71,7 +71,7 @@ public final class ActivityLifecycle implements Application.ActivityLifecycleCal
         if (mActivity != activity || !mActivity.isFinishing() || mFloatWindow == null || !mFloatWindow.isShowing()) {
             return;
         }
-        mFloatWindow.cancel();
+        mFloatWindow.dismiss();
     }
 
     @Override

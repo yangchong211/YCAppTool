@@ -11,7 +11,15 @@ import android.view.WindowManager;
 
 import androidx.annotation.RequiresApi;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/08/18
+ *     desc  : 悬浮工具类
+ *     revise:
+ * </pre>
+ */
 public final class FloatWindowUtils {
 
     /**

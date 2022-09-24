@@ -13,10 +13,13 @@ import com.yc.window.FloatWindow;
  *     revise:
  * </pre>
  */
-public interface ILongClickListener<V extends View> {
+public interface ILongClickListener {
 
     /**
      * 长按回调
+     * @param floatWindow           悬浮窗view
+     * @param view                  view
+     * @return
      */
-    boolean onLongClick(FloatWindow floatWindow, V view);
+    boolean onLongClick(FloatWindow floatWindow, View view);
 }

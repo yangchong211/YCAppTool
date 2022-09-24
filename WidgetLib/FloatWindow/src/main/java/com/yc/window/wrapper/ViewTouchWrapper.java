@@ -7,7 +7,15 @@ import android.view.View;
 import com.yc.window.FloatWindow;
 import com.yc.window.inter.ITouchListener;
 
-
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/08/18
+ *     desc  : 触摸事件包装对象
+ *     revise:
+ * </pre>
+ */
 public final class ViewTouchWrapper implements View.OnTouchListener {
 
     private final FloatWindow mToast;

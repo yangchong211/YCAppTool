@@ -32,6 +32,15 @@ import com.yc.window.wrapper.ViewClickWrapper;
 import com.yc.window.wrapper.ViewLongClickWrapper;
 import com.yc.window.wrapper.ViewTouchWrapper;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/08/18
+ *     desc  : 悬浮控件
+ *     revise:
+ * </pre>
+ */
 public class FloatWindow implements IFloatView {
 
     /**
@@ -597,7 +606,7 @@ public class FloatWindow implements IFloatView {
     /**
      * 销毁悬浮窗
      */
-    public void cancel() {
+    private void cancel() {
         if (!mShowing) {
             return;
         }
@@ -824,15 +833,15 @@ public class FloatWindow implements IFloatView {
     /**
      * 设置长按事件
      */
-    public FloatWindow setOnLongClickListener(ILongClickListener<? extends View> listener) {
+    public FloatWindow setOnLongClickListener(ILongClickListener listener) {
         return setOnLongClickListener(mDecorView, listener);
     }
 
-    public FloatWindow setOnLongClickListener(int id, ILongClickListener<? extends View> listener) {
+    public FloatWindow setOnLongClickListener(int id, ILongClickListener listener) {
         return setOnLongClickListener(findViewById(id), listener);
     }
 
-    private FloatWindow setOnLongClickListener(View view, ILongClickListener<? extends View> listener) {
+    private FloatWindow setOnLongClickListener(View view, ILongClickListener listener) {
         // 如果当前是否设置了不可触摸，如果是就擦除掉
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
@@ -844,15 +853,15 @@ public class FloatWindow implements IFloatView {
     /**
      * 设置触摸事件
      */
-    public FloatWindow setOnTouchListener(ITouchListener<? extends View> listener) {
+    public FloatWindow setOnTouchListener(ITouchListener listener) {
         return setOnTouchListener(mDecorView, listener);
     }
 
-    public FloatWindow setOnTouchListener(int id, ITouchListener<? extends View> listener) {
+    public FloatWindow setOnTouchListener(int id, ITouchListener listener) {
         return setOnTouchListener(findViewById(id), listener);
     }
 
-    private FloatWindow setOnTouchListener(View view, ITouchListener<? extends View> listener) {
+    private FloatWindow setOnTouchListener(View view, ITouchListener listener) {
         // 当前是否设置了不可触摸，如果是就擦除掉
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         view.setEnabled(true);
