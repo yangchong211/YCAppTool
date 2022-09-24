@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 /**
  * 拖拽后回弹处理实现类
  */
-public class SpringDraggable extends BaseDraggable {
+public class SpringDraggable extends AbsBaseTouch {
 
     /** 手指按下的坐标 */
     private float mViewDownX;

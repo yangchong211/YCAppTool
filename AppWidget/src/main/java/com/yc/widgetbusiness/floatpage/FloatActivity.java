@@ -94,7 +94,7 @@ public class FloatActivity extends AppCompatActivity {
                     @Override
                     public void onClick(FloatWindow<?> toast, ImageView view) {
                         ToastUtils.showRoundRectToast("我被点击了");
-                        toast.cancel();
+                        //toast.cancel();
                         // 点击后跳转到拨打电话界面
                         // Intent intent = new Intent(Intent.ACTION_DIAL);
                         // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

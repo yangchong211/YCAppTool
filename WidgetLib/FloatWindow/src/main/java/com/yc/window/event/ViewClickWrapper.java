@@ -1,14 +1,16 @@
-package com.yc.window;
+package com.yc.window.event;
 
 import android.view.View;
 
+import com.yc.window.FloatWindow;
 
-final class ViewClickWrapper implements View.OnClickListener {
+
+public final class ViewClickWrapper implements View.OnClickListener {
 
     private final FloatWindow<?> mToast;
     private final FloatWindow.OnClickListener mListener;
 
-    ViewClickWrapper(FloatWindow<?> toast, FloatWindow.OnClickListener listener) {
+    public ViewClickWrapper(FloatWindow<?> toast, FloatWindow.OnClickListener listener) {
         mToast = toast;
         mListener = listener;
     }

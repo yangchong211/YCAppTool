@@ -5,7 +5,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 
-public class MovingDraggable extends BaseDraggable {
+public class MovingDraggable extends AbsBaseTouch {
 
     /** 手指按下的坐标 */
     private float mViewDownX;

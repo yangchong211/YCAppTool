@@ -24,8 +24,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.yc.window.draggable.BaseDraggable;
+import com.yc.window.draggable.AbsBaseTouch;
 import com.yc.window.draggable.MovingDraggable;
+import com.yc.window.event.ViewClickWrapper;
+import com.yc.window.event.ViewLongClickWrapper;
+import com.yc.window.event.ViewTouchWrapper;
+import com.yc.window.inter.ILifecycleListener;
+import com.yc.window.view.WindowLayout;
 
 @SuppressWarnings({"unchecked", "unused", "deprecation", "UnusedReturnValue"})
 public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
@@ -48,9 +53,9 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
     /** Toast 生命周期管理 */
     private ActivityLifecycle mLifecycle;
     /** 自定义拖动处理 */
-    private BaseDraggable mDraggable;
+    private AbsBaseTouch mDraggable;
     /** 吐司显示和取消监听 */
-    private OnLifecycle mListener;
+    private ILifecycleListener mListener;
 
     /**
      * 创建一个局部悬浮窗
@@ -431,7 +436,7 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
     /**
      * 设置拖动规则
      */
-    public X setDraggable(BaseDraggable draggable) {
+    public X setDraggable(AbsBaseTouch draggable) {
         // 如果当前是否设置了不可触摸，如果是就擦除掉这个标记
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         // 如果当前是否设置了可移动窗口到屏幕之外，如果是就擦除这个标记
@@ -460,7 +465,7 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
     /**
      * 设置生命周期监听
      */
-    public X setOnToastLifecycle(OnLifecycle listener) {
+    public X setOnToastLifecycle(ILifecycleListener listener) {
         mListener = listener;
         return (X) this;
     }
@@ -1032,24 +1037,4 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
         boolean onTouch(FloatWindow<?> toast, V view, MotionEvent event);
     }
 
-    /**
-     * Toast 生命周期监听
-     */
-    public interface OnLifecycle {
-
-        /**
-         * 显示回调
-         */
-        default void onShow(FloatWindow<?> toast) {}
-
-        /**
-         * 消失回调
-         */
-        default void onDismiss(FloatWindow<?> toast) {}
-
-        /**
-         * 回收回调
-         */
-        default void onRecycler(FloatWindow<?> toast) {}
-    }
 }

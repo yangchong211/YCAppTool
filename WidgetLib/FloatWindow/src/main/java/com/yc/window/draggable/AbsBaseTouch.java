@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import com.yc.window.FloatWindow;
 
-public abstract class BaseDraggable implements View.OnTouchListener {
+public abstract class AbsBaseTouch implements View.OnTouchListener {
 
     private FloatWindow<?> mToast;
     private View mDecorView;
