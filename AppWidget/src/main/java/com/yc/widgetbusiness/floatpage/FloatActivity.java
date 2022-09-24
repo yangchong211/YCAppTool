@@ -18,6 +18,7 @@ import com.yc.window.draggable.MovingTouchListener;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.widgetbusiness.R;
 import com.yc.window.draggable.SpringTouchListener;
+import com.yc.window.inter.IClickListener;
 import com.yc.window.permission.FloatWindowUtils;
 import com.yc.window.permission.PermissionActivity;
 
@@ -88,7 +89,7 @@ public class FloatActivity extends AppCompatActivity {
                 .setYOffset(200)
                 // 设置指定的拖拽规则
                 .setDraggable(new SpringTouchListener())
-                .setOnClickListener(R.id.icon, new FloatWindow.OnClickListener<ImageView>() {
+                .setOnClickListener(R.id.icon, new IClickListener<ImageView>() {
                     @Override
                     public void onClick(FloatWindow<?> toast, ImageView view) {
                         ToastUtils.showRoundRectToast("我被点击了");
@@ -109,7 +110,7 @@ public class FloatActivity extends AppCompatActivity {
                 .setContentView(R.layout.float_window_view)
                 // 设置成可拖拽的
                 .setDraggable(new MovingTouchListener())
-                .setOnClickListener(R.id.icon, new FloatWindow.OnClickListener<View>() {
+                .setOnClickListener(R.id.icon, new IClickListener<View>() {
                     @Override
                     public void onClick(FloatWindow<?> toast, View view) {
                         toast.cancel();

@@ -3,14 +3,15 @@ package com.yc.window.wrapper;
 import android.view.View;
 
 import com.yc.window.FloatWindow;
+import com.yc.window.inter.IClickListener;
 
 
 public final class ViewClickWrapper implements View.OnClickListener {
 
     private final FloatWindow<?> mToast;
-    private final FloatWindow.OnClickListener mListener;
+    private final IClickListener mListener;
 
-    public ViewClickWrapper(FloatWindow<?> toast, FloatWindow.OnClickListener listener) {
+    public ViewClickWrapper(FloatWindow<?> toast, IClickListener listener) {
         mToast = toast;
         mListener = listener;
     }

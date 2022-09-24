@@ -3,15 +3,16 @@ package com.yc.window.wrapper;
 import android.view.View;
 
 import com.yc.window.FloatWindow;
+import com.yc.window.inter.ILongClickListener;
 
 
 public final class ViewLongClickWrapper implements View.OnLongClickListener {
 
     private final FloatWindow<?> mToast;
-    private final FloatWindow.OnLongClickListener mListener;
+    private final ILongClickListener mListener;
 
-    public ViewLongClickWrapper(FloatWindow<?> toast, FloatWindow.OnLongClickListener listener) {
-        mToast = toast;
+    public ViewLongClickWrapper(FloatWindow<?> floatWindow, ILongClickListener listener) {
+        mToast = floatWindow;
         mListener = listener;
     }
 

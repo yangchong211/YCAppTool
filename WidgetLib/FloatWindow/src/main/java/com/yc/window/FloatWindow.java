@@ -15,7 +15,6 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -26,13 +25,15 @@ import android.widget.TextView;
 
 import com.yc.window.draggable.AbsTouchListener;
 import com.yc.window.draggable.MovingTouchListener;
+import com.yc.window.inter.ITouchListener;
+import com.yc.window.inter.ILongClickListener;
+import com.yc.window.inter.IClickListener;
 import com.yc.window.wrapper.ViewClickWrapper;
 import com.yc.window.wrapper.ViewLongClickWrapper;
 import com.yc.window.wrapper.ViewTouchWrapper;
 import com.yc.window.inter.ILifecycleListener;
 import com.yc.window.view.WindowLayout;
 
-@SuppressWarnings({"unchecked", "unused", "deprecation", "UnusedReturnValue"})
 public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
 
     private static final Handler HANDLER = new Handler(Looper.getMainLooper());
@@ -937,15 +938,15 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
     /**
      * 设置点击事件
      */
-    public X setOnClickListener(OnClickListener<? extends View> listener) {
+    public X setOnClickListener(IClickListener<? extends View> listener) {
         return setOnClickListener(mDecorView, listener);
     }
 
-    public X setOnClickListener(int id, OnClickListener<? extends View> listener) {
+    public X setOnClickListener(int id, IClickListener<? extends View> listener) {
         return setOnClickListener(findViewById(id), listener);
     }
 
-    private X setOnClickListener(View view, FloatWindow.OnClickListener<? extends View> listener) {
+    private X setOnClickListener(View view, IClickListener<? extends View> listener) {
         // 如果当前是否设置了不可触摸，如果是就擦除掉
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
@@ -957,15 +958,15 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
     /**
      * 设置长按事件
      */
-    public X setOnLongClickListener(OnLongClickListener<? extends View> listener) {
+    public X setOnLongClickListener(ILongClickListener<? extends View> listener) {
         return setOnLongClickListener(mDecorView, listener);
     }
 
-    public X setOnLongClickListener(int id, OnLongClickListener<? extends View> listener) {
+    public X setOnLongClickListener(int id, ILongClickListener<? extends View> listener) {
         return setOnLongClickListener(findViewById(id), listener);
     }
 
-    private X setOnLongClickListener(View view, FloatWindow.OnLongClickListener<? extends View> listener) {
+    private X setOnLongClickListener(View view, ILongClickListener<? extends View> listener) {
         // 如果当前是否设置了不可触摸，如果是就擦除掉
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
@@ -977,15 +978,15 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
     /**
      * 设置触摸事件
      */
-    public X setOnTouchListener(OnTouchListener<? extends View> listener) {
+    public X setOnTouchListener(ITouchListener<? extends View> listener) {
         return setOnTouchListener(mDecorView, listener);
     }
 
-    public X setOnTouchListener(int id, OnTouchListener<? extends View> listener) {
+    public X setOnTouchListener(int id, ITouchListener<? extends View> listener) {
         return setOnTouchListener(findViewById(id), listener);
     }
 
-    private X setOnTouchListener(View view, FloatWindow.OnTouchListener<? extends View> listener) {
+    private X setOnTouchListener(View view, ITouchListener<? extends View> listener) {
         // 当前是否设置了不可触摸，如果是就擦除掉
         clearWindowFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
@@ -1000,39 +1001,6 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
     @Override
     public void run() {
         cancel();
-    }
-
-    /**
-     * View 的点击事件监听
-     */
-    public interface OnClickListener<V extends View> {
-
-        /**
-         * 点击回调
-         */
-        void onClick(FloatWindow<?> toast, V view);
-    }
-
-    /**
-     * View 的长按事件监听
-     */
-    public interface OnLongClickListener<V extends View> {
-
-        /**
-         * 长按回调
-         */
-        boolean onLongClick(FloatWindow<?> toast, V view);
-    }
-
-    /**
-     * View 的触摸事件监听
-     */
-    public interface OnTouchListener<V extends View> {
-
-        /**
-         * 触摸回调
-         */
-        boolean onTouch(FloatWindow<?> toast, V view, MotionEvent event);
     }
 
 }
