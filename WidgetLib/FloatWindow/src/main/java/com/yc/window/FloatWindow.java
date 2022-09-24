@@ -17,8 +17,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.window.config.ParamsConfig;
 import com.yc.window.draggable.AbsTouchListener;
 import com.yc.window.inter.IClickListener;
@@ -393,21 +391,6 @@ public class FloatWindow implements IFloatView {
         if (isShowing()) {
             update();
             mDraggable.start(this);
-        }
-        return (FloatWindow) this;
-    }
-
-    /**
-     * 限定显示时长
-     */
-    public FloatWindow setDuration(int duration) {
-        if (isShowing() && duration != 0) {
-            DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
-                @Override
-                public void run() {
-                    cancel();
-                }
-            }, duration);
         }
         return (FloatWindow) this;
     }
