@@ -21,5 +21,12 @@ public interface IFloatView {
      */
     FloatWindow setSize(int width, int height);
 
+    /**
+     * 设置显示的位置
+     * @param gravity               显示
+     * @param xOffset               x偏移
+     * @param yOffset               y偏移
+     */
+    FloatWindow setGravity(int gravity, int xOffset, int yOffset);
 
 }

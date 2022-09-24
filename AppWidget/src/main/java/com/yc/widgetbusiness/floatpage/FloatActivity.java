@@ -89,8 +89,7 @@ public class FloatActivity extends AppCompatActivity {
         new FloatWindow(this.getApplication())
                 .setContentView(R.layout.float_window_view)
                 .setSize(200,400)
-                .setGravity(Gravity.END | Gravity.BOTTOM)
-                .setYOffset(200)
+                .setGravity(Gravity.END | Gravity.BOTTOM,0,200)
                 // 设置指定的拖拽规则
                 .setDraggable(new SpringTouchListener())
                 .setOnClickListener(R.id.icon, new IClickListener<ImageView>() {

@@ -1,7 +1,10 @@
 package com.yc.window.permission;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.view.WindowManager;
@@ -23,6 +26,16 @@ public final class FloatWindowUtils {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public static boolean hasPermission(Context context) {
         return Settings.canDrawOverlays(context);
+    }
+
+
+    public static void goToSetting(Activity context){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
+            String packageName = context.getPackageName();
+            Uri uri = Uri.parse(packageName);
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri);
+            context.startActivityForResult(intent, 0);
+        }
     }
 
 }

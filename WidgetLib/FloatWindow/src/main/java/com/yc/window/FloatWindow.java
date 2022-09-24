@@ -140,8 +140,20 @@ public class FloatWindow implements IFloatView {
         return this;
     }
 
+    @Override
+    public FloatWindow setGravity(int gravity, int xOffset, int yOffset) {
+        //设置窗口重心
+        mWindowParams.gravity = gravity;
+        //设置水平偏移量
+        mWindowParams.x = xOffset;
+        //设置垂直偏移量
+        mWindowParams.y = yOffset;
+        update();
+        return this;
+    }
+
     /**
-     * 设置窗口重心
+     *
      */
     public FloatWindow setGravity(int gravity) {
         mWindowParams.gravity = gravity;
@@ -158,15 +170,6 @@ public class FloatWindow implements IFloatView {
      */
     public FloatWindow setScreenOrientation(int orientation) {
         mWindowParams.screenOrientation = orientation;
-        update();
-        return (FloatWindow) this;
-    }
-
-    /**
-     * 设置水平偏移量
-     */
-    public FloatWindow setXOffset(int x) {
-        mWindowParams.x = x;
         update();
         return (FloatWindow) this;
     }
