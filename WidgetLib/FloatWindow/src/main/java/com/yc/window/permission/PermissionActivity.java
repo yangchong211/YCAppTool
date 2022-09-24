@@ -30,24 +30,13 @@ public class PermissionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= 23){
-            requestAlertWindowPermission();
-        }
+        FloatWindowUtils.goToSetting(this);
     }
 
-    @RequiresApi(api = 23)
-    private void requestAlertWindowPermission() {
-        Intent intent = new Intent("android.settings.action.MANAGE_OVERLAY_PERMISSION");
-        intent.setData(Uri.parse("package:" + getPackageName()));
-        startActivityForResult(intent, 1);
-    }
-
-
-    @RequiresApi(api = 23)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (Build.VERSION.SDK_INT >= 23){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             //用23以上编译即可出现canDrawOverlays
             if (FloatWindowUtils.hasPermission(this)) {
                 mPermissionListener.onSuccess();
@@ -55,32 +44,33 @@ public class PermissionActivity extends AppCompatActivity {
                 mPermissionListener.onFail();
             }
         }
+        mPermissionListenerList = null;
         finish();
     }
 
     public static synchronized void request(Context context, PermissionListener permissionListener) {
         if (mPermissionListenerList == null) {
             mPermissionListenerList = new ArrayList<>();
-            mPermissionListener = new PermissionListener() {
-                @Override
-                public void onSuccess() {
-                    for (PermissionListener listener : mPermissionListenerList) {
-                        listener.onSuccess();
-                    }
-                }
-
-                @Override
-                public void onFail() {
-                    for (PermissionListener listener : mPermissionListenerList) {
-                        listener.onFail();
-                    }
-                }
-            };
-            Intent intent = new Intent(context, PermissionActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
         }
         mPermissionListenerList.add(permissionListener);
+        mPermissionListener = new PermissionListener() {
+            @Override
+            public void onSuccess() {
+                for (PermissionListener listener : mPermissionListenerList) {
+                    listener.onSuccess();
+                }
+            }
+
+            @Override
+            public void onFail() {
+                for (PermissionListener listener : mPermissionListenerList) {
+                    listener.onFail();
+                }
+            }
+        };
+        Intent intent = new Intent(context, PermissionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
 

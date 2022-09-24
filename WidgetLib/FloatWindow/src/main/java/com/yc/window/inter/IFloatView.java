@@ -1,6 +1,8 @@
 package com.yc.window.inter;
 
 
+import android.view.View;
+
 import com.yc.window.FloatWindow;
 
 /**
@@ -28,5 +30,10 @@ public interface IFloatView {
      * @param yOffset               y偏移
      */
     FloatWindow setGravity(int gravity, int xOffset, int yOffset);
+
+    /**
+     * 销毁
+     */
+    void dismiss();
 
 }

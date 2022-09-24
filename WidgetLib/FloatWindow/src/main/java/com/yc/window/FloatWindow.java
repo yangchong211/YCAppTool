@@ -152,14 +152,11 @@ public class FloatWindow implements IFloatView {
         return this;
     }
 
-    /**
-     *
-     */
-    public FloatWindow setGravity(int gravity) {
-        mWindowParams.gravity = gravity;
-        update();
-        return (FloatWindow) this;
+    @Override
+    public void dismiss() {
+        cancel();
     }
+
 
     /**
      * 设置窗口方向
@@ -170,15 +167,6 @@ public class FloatWindow implements IFloatView {
      */
     public FloatWindow setScreenOrientation(int orientation) {
         mWindowParams.screenOrientation = orientation;
-        update();
-        return (FloatWindow) this;
-    }
-
-    /**
-     * 设置垂直偏移量
-     */
-    public FloatWindow setYOffset(int y) {
-        mWindowParams.y = y;
         update();
         return (FloatWindow) this;
     }
@@ -431,13 +419,6 @@ public class FloatWindow implements IFloatView {
     }
 
     /**
-     * 设置随意拖动
-     */
-    public FloatWindow setDraggable() {
-        return setDraggable(new MovingTouchListener());
-    }
-
-    /**
      * 设置拖动规则
      */
     public FloatWindow setDraggable(AbsTouchListener draggable) {
@@ -478,18 +459,11 @@ public class FloatWindow implements IFloatView {
     }
 
     /**
-     * 设置根布局（一般情况下推荐使用 {@link #setContentView} 方法来填充布局）
-     */
-    public FloatWindow setDecorView(ViewGroup viewGroup) {
-        mDecorView = viewGroup;
-        return (FloatWindow) this;
-    }
-
-    /**
      * 设置内容布局
      */
     public FloatWindow setContentView(int id) {
-        return setContentView(LayoutInflater.from(mContext).inflate(id, mDecorView, false));
+        View view = LayoutInflater.from(mContext).inflate(id, mDecorView, false);
+        return setContentView(view);
     }
 
     public FloatWindow setContentView(View view) {
@@ -521,7 +495,6 @@ public class FloatWindow implements IFloatView {
                     mWindowParams.gravity = gravity;
                 }
             }
-
             if (mWindowParams.gravity == Gravity.NO_GRAVITY) {
                 // 默认重心是居中
                 mWindowParams.gravity = Gravity.CENTER;
@@ -540,7 +513,6 @@ public class FloatWindow implements IFloatView {
                 layoutParams.height = mWindowParams.height;
             }
         }
-
         update();
         return (FloatWindow) this;
     }

@@ -29,12 +29,12 @@ public final class FloatWindowUtils {
     }
 
 
-    public static void goToSetting(Activity context){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
-            String packageName = context.getPackageName();
-            Uri uri = Uri.parse(packageName);
+    public static void goToSetting(Activity activity){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String packageName = activity.getPackageName();
+            Uri uri = Uri.parse("package:" + packageName);
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri);
-            context.startActivityForResult(intent, 0);
+            activity.startActivityForResult(intent, 1);
         }
     }
 
