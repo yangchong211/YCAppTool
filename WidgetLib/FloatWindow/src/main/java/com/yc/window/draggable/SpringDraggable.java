@@ -1,4 +1,4 @@
-package com.yc.suspend.draggable;
+package com.yc.window.draggable;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;

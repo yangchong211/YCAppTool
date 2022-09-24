@@ -1,1 +1,9 @@
-<manifest package="com.yc.suspend" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.window" >
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application>
+        <activity android:name="com.yc.window.permission.PermissionActivity"/>
+    </application>
+</manifest>

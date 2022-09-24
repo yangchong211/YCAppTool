@@ -8,11 +8,11 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.animbusiness.AnimationActiviy;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.widgetbusiness.chart.PreActivity;
+import com.yc.widgetbusiness.floatpage.FloatActivity;
 import com.yc.widgetbusiness.image.ImageViewActivity;
 import com.yc.widgetbusiness.red.RedViewActivity;
 import com.yc.widgetbusiness.round.RoundCornersActivity;
@@ -29,6 +29,7 @@ public class WidgetActivity extends AppCompatActivity {
     private RoundTextView tvWidgetShadow;
     private RoundTextView tvWidgetZoom;
     private RoundTextView tvWidgetRed;
+    private RoundTextView tvWidgetFloat;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class WidgetActivity extends AppCompatActivity {
         tvWidgetShadow = findViewById(R.id.tv_widget_shadow);
         tvWidgetZoom = findViewById(R.id.tv_widget_zoom);
         tvWidgetRed = findViewById(R.id.tv_widget_red);
+        tvWidgetFloat = findViewById(R.id.tv_widget_float);
     }
 
     public void initListener() {
@@ -89,8 +91,13 @@ public class WidgetActivity extends AppCompatActivity {
         tvWidgetRed.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                AnimationActiviy.startActivity(WidgetActivity.this);
-                //startActivity(new Intent(WidgetActivity.this, RedViewActivity.class));
+                startActivity(new Intent(WidgetActivity.this, RedViewActivity.class));
+            }
+        });
+        tvWidgetFloat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WidgetActivity.this, FloatActivity.class));
             }
         });
     }

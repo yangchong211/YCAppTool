@@ -1,4 +1,4 @@
-package com.yc.suspend;
+package com.yc.window;
 
 import android.app.Activity;
 import android.app.Application;
@@ -24,8 +24,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.yc.suspend.draggable.BaseDraggable;
-import com.yc.suspend.draggable.MovingDraggable;
+import com.yc.window.draggable.BaseDraggable;
+import com.yc.window.draggable.MovingDraggable;
 
 @SuppressWarnings({"unchecked", "unused", "deprecation", "UnusedReturnValue"})
 public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
@@ -411,17 +411,6 @@ public class FloatWindow<X extends FloatWindow<?>> implements Runnable {
         return (X) this;
     }
 
-    /**
-     * 设置窗口高斯模糊半径大小（Android 12 才有的）
-     */
-    public X setBlurBehindRadius(int blurBehindRadius) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            mWindowParams.setBlurBehindRadius(blurBehindRadius);
-            addWindowFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
-            update();
-        }
-        return (X) this;
-    }
 
     /**
      * 重新设置 WindowManager 参数集

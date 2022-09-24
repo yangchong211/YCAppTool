@@ -1,4 +1,4 @@
-package com.yc.suspend.draggable;
+package com.yc.window.draggable;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -7,7 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.yc.suspend.FloatWindow;
+import com.yc.window.FloatWindow;
 
 public abstract class BaseDraggable implements View.OnTouchListener {
 

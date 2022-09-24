@@ -1,4 +1,4 @@
-package com.yc.suspend;
+package com.yc.window;
 
 import android.app.Activity;
 import android.app.Application;

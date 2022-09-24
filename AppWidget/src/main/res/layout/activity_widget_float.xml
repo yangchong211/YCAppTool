@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_float1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="1.可自由拖拽的悬浮窗"
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_float2"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="2.全局可拖拽的悬浮窗"
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_float3"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="3."
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+
+</LinearLayout>

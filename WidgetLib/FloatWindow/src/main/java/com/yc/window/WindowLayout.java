@@ -1,4 +1,4 @@
-package com.yc.suspend;
+package com.yc.window;
 
 import android.content.Context;
 import android.util.AttributeSet;

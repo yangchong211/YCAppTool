@@ -29,6 +29,7 @@
         <activity android:name=".zoom.ImgActivity"/>
         <activity android:name=".zoom.ImageViewActivity"/>
         <activity android:name=".red.RedViewActivity"/>
+        <activity android:name=".floatpage.FloatActivity"/>
     </application>
 
 
