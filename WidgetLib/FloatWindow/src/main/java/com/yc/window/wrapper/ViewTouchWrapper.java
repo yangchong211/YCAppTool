@@ -18,11 +18,11 @@ import com.yc.window.inter.ITouchListener;
  */
 public final class ViewTouchWrapper implements View.OnTouchListener {
 
-    private final FloatWindow mToast;
+    private final FloatWindow mFloatWindow;
     private final ITouchListener mListener;
 
-    public ViewTouchWrapper(FloatWindow toast, ITouchListener listener) {
-        mToast = toast;
+    public ViewTouchWrapper(FloatWindow floatWindow, ITouchListener listener) {
+        mFloatWindow = floatWindow;
         mListener = listener;
     }
 
@@ -33,6 +33,6 @@ public final class ViewTouchWrapper implements View.OnTouchListener {
         if (mListener == null) {
             return false;
         }
-        return mListener.onTouch(mToast, view, event);
+        return mListener.onTouch(mFloatWindow, view, event);
     }
 }

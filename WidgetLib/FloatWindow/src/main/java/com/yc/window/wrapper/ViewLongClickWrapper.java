@@ -16,11 +16,11 @@ import com.yc.window.inter.ILongClickListener;
  */
 public final class ViewLongClickWrapper implements View.OnLongClickListener {
 
-    private final FloatWindow mToast;
+    private final FloatWindow mFloatWindow;
     private final ILongClickListener mListener;
 
     public ViewLongClickWrapper(FloatWindow floatWindow, ILongClickListener listener) {
-        mToast = floatWindow;
+        mFloatWindow = floatWindow;
         mListener = listener;
     }
 
@@ -30,6 +30,6 @@ public final class ViewLongClickWrapper implements View.OnLongClickListener {
         if (mListener == null) {
             return false;
         }
-        return mListener.onLongClick(mToast, view);
+        return mListener.onLongClick(mFloatWindow, view);
     }
 }

@@ -84,7 +84,6 @@ public class FloatActivity extends AppCompatActivity {
                         });
                     }
                 }
-
             }
         });
         tvWidgetFloat3.setOnClickListener(new PerfectClickListener() {
@@ -110,13 +109,6 @@ public class FloatActivity extends AppCompatActivity {
                         @Override
                         public void onClick(FloatWindow toast, View view) {
                             ToastUtils.showRoundRectToast("我被点击了");
-                            //toast.cancel();
-                            // 点击后跳转到拨打电话界面
-                            // Intent intent = new Intent(Intent.ACTION_DIAL);
-                            // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            // toast.startActivity(intent);
-                            // 安卓 10 在后台跳转 Activity 需要额外适配
-                            // https://developer.android.google.cn/about/versions/10/privacy/changes#background-activity-starts
                         }
                     });
         }

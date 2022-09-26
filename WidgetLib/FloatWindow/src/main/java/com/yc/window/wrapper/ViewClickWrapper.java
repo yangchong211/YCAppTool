@@ -16,11 +16,11 @@ import com.yc.window.inter.IClickListener;
  */
 public final class ViewClickWrapper implements View.OnClickListener {
 
-    private final FloatWindow mToast;
+    private final FloatWindow mFloatWindow;
     private final IClickListener mListener;
 
-    public ViewClickWrapper(FloatWindow toast, IClickListener listener) {
-        mToast = toast;
+    public ViewClickWrapper(FloatWindow floatWindow, IClickListener listener) {
+        mFloatWindow = floatWindow;
         mListener = listener;
     }
 
@@ -30,6 +30,6 @@ public final class ViewClickWrapper implements View.OnClickListener {
         if (mListener == null) {
             return;
         }
-        mListener.onClick(mToast, view);
+        mListener.onClick(mFloatWindow, view);
     }
 }
