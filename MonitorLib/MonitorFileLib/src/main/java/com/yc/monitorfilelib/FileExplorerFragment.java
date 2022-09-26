@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -68,7 +69,17 @@ public class FileExplorerFragment extends Fragment {
         initViewById(view);
         initTitleView();
         initRecyclerView();
+        //定义fragment的返回键逻辑
+        requireActivity().getOnBackPressedDispatcher().addCallback(this,onBackPressedCallback);
     }
+
+    private final OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            //返回上一层
+            onBackPressed();
+        }
+    };
 
     private void initViewById(View view) {
         mLlBackLayout = view.findViewById(R.id.ll_back_layout);
