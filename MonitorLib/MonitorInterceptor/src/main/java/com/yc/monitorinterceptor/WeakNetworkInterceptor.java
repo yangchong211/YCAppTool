@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 import okhttp3.Interceptor;
+import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -23,7 +24,8 @@ public class WeakNetworkInterceptor implements Interceptor {
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
         if (!WeakNetworkManager.get().isActive()) {
-            return chain.proceed(chain.request());
+            Request request = chain.request();
+            return chain.proceed(request);
         }
         final int type = WeakNetworkManager.get().getType();
         switch (type) {

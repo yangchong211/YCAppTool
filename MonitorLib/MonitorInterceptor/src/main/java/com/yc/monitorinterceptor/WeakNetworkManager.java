@@ -21,7 +21,7 @@ import okhttp3.ResponseBody;
  *     revise:
  * </pre>
  */
-public class WeakNetworkManager {
+public final class WeakNetworkManager {
 
     /**
      * 没有网络
@@ -47,20 +47,49 @@ public class WeakNetworkManager {
      * 网络超时，响应超时
      */
     public static final int TYPE_TIMEOUT_RESPOND = 5;
+    /**
+     * 默认超时的时间为5000毫秒
+     */
     public static final int DEFAULT_TIMEOUT_MILLIS = 5000;
+    /**
+     * request请求默认限制的速度值
+     */
     public static final int DEFAULT_REQUEST_SPEED = 1;
+    /**
+     * respond请求默认限制的速度值
+     */
     public static final int DEFAULT_RESPONSE_SPEED = 1;
 
     private int mType = TYPE_OFF_NETWORK;
+    /**
+     * 超时时间
+     */
     private long mTimeOutMillis = DEFAULT_TIMEOUT_MILLIS;
+    /**
+     * 请求限速
+     */
     private long mRequestSpeed = DEFAULT_REQUEST_SPEED;
+    /**
+     * 响应限速
+     */
     private long mResponseSpeed = DEFAULT_RESPONSE_SPEED;
+    /**
+     * 判断是否可以使用
+     */
     private final AtomicBoolean mIsActive = new AtomicBoolean(false);
+
+    private WeakNetworkManager(){
+
+    }
 
     private static class Holder {
         private static final WeakNetworkManager INSTANCE = new WeakNetworkManager();
     }
 
+    /**
+     * 使用静态内部类方式，懒加载
+     * @return          单例对象
+     */
     public static WeakNetworkManager get() {
         //单利模式
         return WeakNetworkManager.Holder.INSTANCE;
@@ -113,7 +142,7 @@ public class WeakNetworkManager {
      *
      * @return
      */
-    public int getType() {
+    protected int getType() {
         return mType;
     }
 
@@ -122,17 +151,18 @@ public class WeakNetworkManager {
      * 400（错误请求），401（未授权），403（已禁止），404（未找到）……
      * 此类状态代码表示，相应请求可能出错，已阻止了服务器对请求的处理。
      */
-    public Response simulateOffNetwork(Interceptor.Chain chain) throws IOException {
+    protected Response simulateOffNetwork(Interceptor.Chain chain) throws IOException {
         final Response response = chain.proceed(chain.request());
         ResponseBody body = response.body();
         ResponseBody responseBody = null;
         if (body != null) {
             responseBody = ResponseBody.create(body.contentType(), "");
         }
+        String host = chain.request().url().host();
         return response.newBuilder()
                 .code(400)
-                .message(String.format("Unable to resolve host %s: No address associated with hostname",
-                        chain.request().url().host()))
+                .message(String.format(
+                        "Unable to resolve host %s: No address associated with hostname", host))
                 .body(responseBody)
                 .build();
     }
@@ -142,17 +172,17 @@ public class WeakNetworkManager {
      * 500（服务器内部错误），501（尚未实施），502（错误网关），503（服务不可用），504（网关超时）
      * 此类状态代码表示，服务器在尝试处理相应请求时发生内部错误。此类错误往往与服务器本身有关（与请求无关）。
      */
-    public Response simulateServerErrorNetwork(Interceptor.Chain chain) throws IOException {
+    protected Response simulateServerErrorNetwork(Interceptor.Chain chain) throws IOException {
         final Response response = chain.proceed(chain.request());
         ResponseBody body = response.body();
         ResponseBody responseBody = null;
         if (body != null) {
             responseBody = ResponseBody.create(body.contentType(), "");
         }
+        String host = chain.request().url().host();
         return response.newBuilder()
                 .code(500)
-                .message(String.format("Unable to resolve host %s: internal server error",
-                        chain.request().url().host()))
+                .message(String.format("Unable to resolve host %s: internal server error", host))
                 .body(responseBody)
                 .build();
     }
@@ -161,17 +191,18 @@ public class WeakNetworkManager {
     /**
      * 模拟重定向
      */
-    public Response simulateRedirectNetwork(Interceptor.Chain chain) throws IOException {
+    protected Response simulateRedirectNetwork(Interceptor.Chain chain) throws IOException {
         final Response response = chain.proceed(chain.request());
         ResponseBody body = response.body();
         ResponseBody responseBody = null;
         if (body != null) {
             responseBody = ResponseBody.create(body.contentType(), "");
         }
+        String host = chain.request().url().host();
         return response.newBuilder()
                 .code(300)
-                .message(String.format("Unable to resolve host %s: The target address has been redirected",
-                        chain.request().url().host()))
+                .message(String.format(
+                        "Unable to resolve host %s: The target address has been redirected", host))
                 .body(responseBody)
                 .build();
     }
@@ -179,7 +210,7 @@ public class WeakNetworkManager {
     /**
      * 模拟超时，请求超时
      */
-    public Response simulateTimeOut(Interceptor.Chain chain) throws IOException {
+    protected Response simulateTimeOut(Interceptor.Chain chain) throws IOException {
         SystemClock.sleep(mTimeOutMillis);
         final Response response = chain.proceed(chain.request());
         ResponseBody body = response.body();
@@ -201,7 +232,7 @@ public class WeakNetworkManager {
     /**
      * 模拟超时，响应超时
      */
-    public Response simulateRespondTimeOut(Interceptor.Chain chain) throws IOException {
+    protected Response simulateRespondTimeOut(Interceptor.Chain chain) throws IOException {
         final Response response = chain.proceed(chain.request());
         SystemClock.sleep(mTimeOutMillis);
         ResponseBody body = response.body();
@@ -222,7 +253,8 @@ public class WeakNetworkManager {
     /**
      * 限速
      */
-    public Response simulateSpeedLimit(Interceptor.Chain chain) throws IOException {
+    protected Response simulateSpeedLimit(Interceptor.Chain chain) throws IOException {
+        //拿到request请求
         Request request = chain.request();
         final RequestBody body = request.body();
         if (body != null) {
@@ -231,6 +263,8 @@ public class WeakNetworkManager {
                     new SpeedLimitRequestBody(mRequestSpeed, body) : body;
             request = request.newBuilder().method(request.method(), requestBody).build();
         }
+
+        //发送request请求后拿到响应respond
         final Response response = chain.proceed(request);
         //大于0使用限速的body 否则使用原始body
         final ResponseBody responseBody = response.body();
