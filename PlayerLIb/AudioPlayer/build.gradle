@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
-apply plugin: 'com.github.dcendents.android-maven'
-
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
