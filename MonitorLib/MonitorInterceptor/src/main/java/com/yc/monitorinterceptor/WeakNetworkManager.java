@@ -156,6 +156,7 @@ public final class WeakNetworkManager {
         ResponseBody body = response.body();
         ResponseBody responseBody = null;
         if (body != null) {
+            //构造一个ResponseBody
             responseBody = ResponseBody.create(body.contentType(), "");
         }
         String host = chain.request().url().host();

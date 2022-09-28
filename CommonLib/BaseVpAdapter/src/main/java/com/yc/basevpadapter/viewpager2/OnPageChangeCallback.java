@@ -28,6 +28,9 @@ public class OnPageChangeCallback extends ViewPager2.OnPageChangeCallback {
 
     /**
      * 当前页面滑动状态变动时
+     * 缓慢拖拽-> SCROLL_STATE_DRAGGING     1，开始滑动
+     * 快速滚动-> SCROLL_STATE_SETTLING     2，滑动结束，滚动监听
+     * 空闲状态-> SCROLL_STATE_IDLE         0，什么都没做
      *
      * @param state 状态
      */

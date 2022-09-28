@@ -41,24 +41,24 @@ public class SpeedLimitResponseBody extends ResponseBody {
 
     @Override
     public MediaType contentType() {
+        //ResponseBody的类型
         return mResponseBody.contentType();
     }
 
     @Override
     public long contentLength() {
+        //ResponseBody的内容长度
         return mResponseBody.contentLength();
     }
 
     @Override
     public BufferedSource source() {
         if (mBufferedSource == null) {
-            mBufferedSource = Okio.buffer(source(mResponseBody.source()));
+            BufferedSource source = mResponseBody.source();
+            MyForwardingSource myForwardingSource = new MyForwardingSource(source);
+            mBufferedSource = Okio.buffer(myForwardingSource);
         }
         return mBufferedSource;
-    }
-
-    private Source source(Source source) {
-        return new MyForwardingSource(source);
     }
 
     private class MyForwardingSource extends ForwardingSource {
