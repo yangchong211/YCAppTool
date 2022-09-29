@@ -119,7 +119,7 @@ public final class AppAesUtils {
     }
 
     /**
-     * DES 加密模板
+     * 加密模板
      *
      * @param data           数据
      * @param key            秘钥

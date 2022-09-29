@@ -20,7 +20,7 @@ public class LruActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public int getContentView() {
-        return R.layout.activity_lru_test;
+        return R.layout.activity_base_test_view;
     }
 
     @Override

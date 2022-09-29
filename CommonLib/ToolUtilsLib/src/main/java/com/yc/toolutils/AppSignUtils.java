@@ -8,7 +8,7 @@ import android.content.pm.SigningInfo;
 import android.os.Build;
 
 
-import com.yc.appencryptlib.AppMd5Utils;
+import com.yc.appencryptlib.Md5EncryptUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,7 +33,7 @@ public final class AppSignUtils {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm");
         // new Date()为获取当前系统时间，也可使用当前时间戳
         String date = df.format(new Date());
-        return AppMd5Utils.encryptMD5File2String(date+"_"+appPackageName);
+        return Md5EncryptUtils.encryptMD5File1(date+"_"+appPackageName);
     }
 
     /**
@@ -67,7 +67,7 @@ public final class AppSignUtils {
         }
         if (null != signatures && signatures.length > 0) {
             Signature sign = signatures[0];
-            signStr = AppMd5Utils.encryptMD5ToString(sign.toByteArray()).toUpperCase();
+            signStr = Md5EncryptUtils.encryptMD5ToString(sign.toByteArray()).toUpperCase();
         }
         return signStr;
     }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 
 /**
  * <pre>
@@ -17,10 +18,49 @@ import java.security.NoSuchAlgorithmException;
  *     revise:
  * </pre>
  */
-public final class AppMd5Utils {
+public final class Md5EncryptUtils {
 
+    /**
+     * e
+     * 用来将字节转换成16进制表示的字符
+     */
     private static final char[] HEX_DIGITS =
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    private static final char[] HEX_DIGITS_2 =
+            {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
+    public static String getMD5(String str) {
+        byte[] source = str.getBytes();
+        String s = null;
+        try {
+            MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            md.update(source);
+            // MD5 的计算结果是一个 128 位的长整数，
+            byte[] tmp = md.digest();
+            // 用字节表示就是 16 个字节
+            // 每个字节用 16 进制表示的话，使用两个字符， 所以表示成 16
+            char[] str0 = new char[16 * 2];
+            // 进制需要 32 个字符
+            // 表示转换结果中对应的字符位置
+            int k = 0;
+            for (int i = 0; i < 16; i++) {
+                // 从第一个字节开始，对 MD5 的每一个字节// 转换成 16
+                // 进制字符的转换
+                // 取第 i 个字节
+                byte byte0 = tmp[i];
+                // 取字节中高 4 位的数字转换,// >>>
+                str0[k++] = HEX_DIGITS_2[byte0 >>> 4 & 0xf];
+                // 为逻辑右移，将符号位一起右移
+                // 取字节中低 4 位的数字转换
+                str0[k++] = HEX_DIGITS_2[byte0 & 0xf];
+            }
+            // 换后的结果转换为字符串
+            s = new String(str0);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
 
 
     /**
@@ -72,44 +112,13 @@ public final class AppMd5Utils {
     }
 
     /**
-     * MD5 加密
-     *
-     * @param data 明文字节数组
-     * @return 密文字节数组
-     */
-    public static byte[] encryptMD5(final byte[] data) {
-        return hashTemplate(data, "MD5");
-    }
-
-    /**
-     * MD5 加密文件
-     *
-     * @param filePath 文件路径
-     * @return 文件的 16 进制密文
-     */
-    public static String encryptMD5File2String(final String filePath) {
-        File file = isSpace(filePath) ? null : new File(filePath);
-        return encryptMD5File2String(file);
-    }
-
-    /**
      * MD5 加密文件
      *
      * @param filePath 文件路径
      * @return 文件的 MD5 校验码
      */
-    public static byte[] encryptMD5File(final String filePath) {
+    public static String encryptMD5File1(final String filePath) {
         File file = isSpace(filePath) ? null : new File(filePath);
-        return encryptMD5File(file);
-    }
-
-    /**
-     * MD5 加密文件
-     *
-     * @param file 文件
-     * @return 文件的 16 进制密文
-     */
-    public static String encryptMD5File2String(final File file) {
         return bytes2HexString(encryptMD5File(file));
     }
 
@@ -117,9 +126,29 @@ public final class AppMd5Utils {
      * MD5 加密文件
      *
      * @param file 文件
+     * @return 文件的 16 进制密文
+     */
+    public static String encryptMD5File2(final File file) {
+        return bytes2HexString(encryptMD5File(file));
+    }
+
+    /**
+     * MD5 加密
+     *
+     * @param data 明文字节数组
+     * @return 密文字节数组
+     */
+    private static byte[] encryptMD5(final byte[] data) {
+        return hashTemplate(data, "MD5");
+    }
+
+    /**
+     * MD5 加密文件
+     *
+     * @param file 文件
      * @return 文件的 MD5 校验码
      */
-    public static byte[] encryptMD5File(final File file) {
+    private static byte[] encryptMD5File(final File file) {
         if (file == null) {
             return null;
         }
@@ -167,7 +196,6 @@ public final class AppMd5Utils {
         }
     }
 
-
     private static String bytes2HexString(final byte[] bytes) {
         if (bytes == null) {
             return null;
@@ -184,7 +212,6 @@ public final class AppMd5Utils {
         return new String(ret);
     }
 
-
     private static boolean isSpace(final String s) {
         if (s == null) {
             return true;
@@ -196,7 +223,6 @@ public final class AppMd5Utils {
         }
         return true;
     }
-
 
     /**
      * 关闭 IO

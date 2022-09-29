@@ -23,6 +23,7 @@ import com.yc.appprocesslib.AppStateLifecycle;
 import com.yc.appprocesslib.StateListener;
 import com.yc.apprestartlib.RestartAppHelper;
 import com.yc.apprestartlib.RestartFactory;
+import com.yc.common.encypt.EncyptActivity;
 import com.yc.common.file.FileActivity;
 import com.yc.common.reflect.ReflectionActivity;
 import com.yc.common.tab.VpTabActivity;
@@ -147,6 +148,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_vp2).setOnClickListener(this);
         findViewById(R.id.btn_vp).setOnClickListener(this);
         findViewById(R.id.btn_tab).setOnClickListener(this);
+        findViewById(R.id.btn_encrypt).setOnClickListener(this);
     }
 
 
@@ -241,6 +243,8 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this, ViewPagerActivity.class));
         } else if (id == R.id.btn_tab){
             startActivity(new Intent(this, VpTabActivity.class));
+        } else if (id == R.id.btn_encrypt){
+            startActivity(new Intent(this, EncyptActivity.class));
         }
     }
 

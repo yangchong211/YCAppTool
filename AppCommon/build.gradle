@@ -93,6 +93,7 @@ dependencies {
 //    implementation project(path: ':ReflectionLib')
     implementation project(path: ':ToolFileLib')
     implementation project(path: ':AppMediaStore')
+    implementation project(path: ':AppEncryptLib')
 
     //其他
     implementation project(path: ':RoundCorners')

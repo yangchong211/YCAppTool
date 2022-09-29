@@ -1,17 +1,5 @@
 package com.yc.appencryptlib;
 
-import android.util.Base64;
-
-import java.security.InvalidKeyException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.AlgorithmParameterSpec;
-
-import javax.crypto.Cipher;
-import javax.crypto.Mac;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-
 /**
  * <pre>
  *     author: yangchong

@@ -34,6 +34,7 @@ import java.util.List;
  */
 public final class AppFileUtils {
 
+
     /**
      * 机身内存缓存文件
      * cache-->存放缓存文件

@@ -31,8 +31,4 @@ dependencies {
     implementation rootProject.ext.dependencies["annotation"]
     implementation project(path: ':RouteManager')
     annotationProcessor project(path: ':RouteCompiler')
-    //ServiceLoader
-    implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3'
-    implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderAnnotations:1.4.3'
-    annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 }
