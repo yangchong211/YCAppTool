@@ -1,7 +1,9 @@
 package com.yc.common.encypt;
 
+import android.util.Base64;
 import android.view.View;
 
+import com.yc.appencryptlib.Base64Utils;
 import com.yc.appfilelib.AppFileUtils;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
@@ -63,6 +65,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initData() {
         tvView1.setText("1.MD5相关加密案例");
+        tvView2.setText("2.base64相关加解密案例");
     }
 
     @Override
@@ -70,6 +73,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         if (v == tvView1) {
             md5();
         } else if (v == tvView2) {
+            base64();
         } else if (v == tvView3) {
         } else if (v == tvView4) {
         } else if (v == tvView5) {
@@ -103,6 +107,25 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         AppLogUtils.d("md5计算文件txt路径8: " + md8);
         String md9 = Md5EncryptUtils.encryptMD5File2(new File(fileName));
         AppLogUtils.d("md5计算文件txt路径9: " + md9);
+    }
+
+    private void base64() {
+        // 加密传入的数据是byte类型的。并不是使用decode方法将原始数据转二进制。String类型的数据 使用 str.getBytes()就可以
+        String str = "yangchong";
+        // 在这里使用的是encode方式。返回的是byte类型加密数据，可使用new String转为String类型
+        byte[] encode = Base64.encode(str.getBytes(), Base64.DEFAULT);
+        String strBase64 = new String(encode);
+        AppLogUtils.i("base64", "encode >>>" + strBase64);
+        // 这里 encodeToString 则直接将返回String类型的加密数据
+        String enToStr = Base64.encodeToString(str.getBytes(), Base64.DEFAULT);
+        AppLogUtils.i("base64", "encodeToString >>> " + enToStr);
+        // 对base64加密后的数据进行解密
+        AppLogUtils.i("base64", "decode >>>" + new String(Base64.decode(strBase64.getBytes(), Base64.DEFAULT)));
+
+        String strBase64_2 = Base64Utils.encodeToString(str);
+        AppLogUtils.i("base64", "encode 2 >>>" + strBase64_2);
+        String strBase64_3 = Base64Utils.decodeToString(strBase64_2);
+        AppLogUtils.i("base64", "decode 3 >>>" + strBase64_3);
     }
 
 
