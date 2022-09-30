@@ -36,6 +36,14 @@
 #### 1.3 base64加解密
 
 
+#### 1.4 对称加密和解密
+
+
+#### 1.5 非对称加密解密
+
+
+
+
 
 ### 02.常见思路和做法
 
@@ -47,6 +55,16 @@
 
 
 ### 04.遇到的坑分析
+#### 4.1 MD5破解
+
+
+#### 4.4 RSA加解密问题
+- 加密填充方式导致解密异常
+    - 遇到Android这边加密过的数据，服务器端死活解密不了，原来android系统的RSA实现是"RSA/None/NoPadding"，而标准JDK实现是"RSA/None/PKCS1Padding"，这造成了在android机上加密后无法在服务器上解密的原因，所以在实现的时候这个一定要注意这个问题。
+- RSA加密内容长度限制问题
+    - 内容长度有限制，1024位key的最多只能加密127位数据，否则就会报错(javax.crypto.IllegalBlockSizeException: Data must not be longer than 117 bytes) 
+    - RSA 算法规定：待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：KeySize / 8）。
+
 
 
 

@@ -5,6 +5,7 @@ import android.util.Base64;
 import android.view.View;
 
 import com.yc.appencryptlib.AesEncryptUtils;
+import com.yc.appencryptlib.RsaEncryptUtils;
 import com.yc.appencryptlib.Base64Utils;
 import com.yc.appencryptlib.DesEncryptUtils;
 import com.yc.appfilelib.AppFileUtils;
@@ -16,6 +17,9 @@ import com.yc.appencryptlib.Md5EncryptUtils;
 import com.yc.toolutils.AppLogUtils;
 
 import java.io.File;
+import java.security.KeyPair;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 
 
 public class EncyptActivity extends BaseActivity implements View.OnClickListener {
@@ -74,6 +78,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         tvView2.setText("2.base64相关加解密案例");
         tvView3.setText("3.DES加解密案例");
         tvView4.setText("4.AES加解密案例");
+        tvView5.setText("5.RSA加解密案例");
     }
 
     private void writeFile() {
@@ -107,6 +112,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         } else if (v == tvView4) {
             aes();
         } else if (v == tvView5) {
+            rsa();
         } else if (v == tvView6){
         } else if (v == tvView7){
 
@@ -209,6 +215,49 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
 //        AppLogUtils.d("aes计算加密字符串4: " + encrypt4);
 //        String decrypt4 = AesEncryptUtils.decryptAES(encrypt4.getBytes() , password.getBytes());
 //        AppLogUtils.d("aes计算解密字符串4: " + decrypt4);
+    }
+
+    private void rsa() {
+        String string = "yangchong";
+        //公钥加密，私钥解密
+        //秘钥默认长度
+        final int DEFAULT_KEY_SIZE = 2048;
+        KeyPair keyPair = RsaEncryptUtils.generateRSAKeyPair(DEFAULT_KEY_SIZE);
+        RSAPublicKey publicKey;
+        RSAPrivateKey privateKey;
+        if (keyPair != null) {
+            // 公钥
+            publicKey = (RSAPublicKey) keyPair.getPublic();
+            // 私钥
+            privateKey = (RSAPrivateKey) keyPair.getPrivate();
+
+            //用公钥对字符串进行加密
+            String encrypt1;
+            try {
+                byte[] bytes = RsaEncryptUtils.encryptByPublicKey(string.getBytes(), publicKey.getEncoded());
+                encrypt1 = new String(bytes);
+                AppLogUtils.d("RSA计算加密字符串1: " + encrypt1);
+            } catch (Exception e) {
+                e.printStackTrace();
+                encrypt1 = string;
+                AppLogUtils.d("RSA计算加密字符串1: " + e.getMessage());
+            }
+
+            //使用私钥进行解密
+            try {
+                byte[] bytes = RsaEncryptUtils.decryptByPrivateKey(encrypt1.getBytes(), privateKey.getEncoded());
+                String s = new String(bytes);
+                AppLogUtils.d("RSA计算解密字符串1: " + s);
+                //解密后得到的数据：yangchong
+            } catch (Exception e) {
+                e.printStackTrace();
+                AppLogUtils.d("RSA计算解密字符串1: " + e.getMessage());
+            }
+
+
+        }
+
+
     }
 
 }
