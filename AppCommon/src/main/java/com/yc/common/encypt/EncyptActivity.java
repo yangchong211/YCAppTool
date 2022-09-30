@@ -217,11 +217,38 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
 //        AppLogUtils.d("aes计算解密字符串4: " + decrypt4);
     }
 
+    private class YC{
+        private int age;
+        private String name;
+        private String info;
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setInfo(String info) {
+            this.info = info;
+        }
+    }
+
     private void rsa() {
-        String string = "yangchong";
+        YC yc = new YC();
+        yc.setAge(25);
+        yc.setName("杨充");
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int a=0 ; a<500 ; a++){
+            stringBuilder.append("都比小杨"+a);
+        }
+        yc.setInfo(stringBuilder.toString());
+        String string = yc.toString();
+        //String string = "yangyangyangyangyangyangyangyangyangyangyangyangyangyangyangyangyangyangyangyangyangyang";
         //公钥加密，私钥解密
         //秘钥默认长度
-        final int DEFAULT_KEY_SIZE = 2048;
+        final int DEFAULT_KEY_SIZE = 1024;
         KeyPair keyPair = RsaEncryptUtils.generateRSAKeyPair(DEFAULT_KEY_SIZE);
         RSAPublicKey publicKey;
         RSAPrivateKey privateKey;
