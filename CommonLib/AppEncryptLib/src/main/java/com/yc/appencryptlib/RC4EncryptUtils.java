@@ -43,7 +43,6 @@ public final class RC4EncryptUtils {
                 e.printStackTrace();
             }
         }
-
         return Result;
     }
 

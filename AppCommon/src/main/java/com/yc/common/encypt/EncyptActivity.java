@@ -1,8 +1,10 @@
 package com.yc.common.encypt;
 
+import android.annotation.SuppressLint;
 import android.util.Base64;
 import android.view.View;
 
+import com.yc.appencryptlib.AesEncryptUtils;
 import com.yc.appencryptlib.Base64Utils;
 import com.yc.appencryptlib.DesEncryptUtils;
 import com.yc.appfilelib.AppFileUtils;
@@ -64,12 +66,14 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         tvView7.setOnClickListener(this);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void initData() {
         writeFile();
         tvView1.setText("1.MD5相关加密案例");
         tvView2.setText("2.base64相关加解密案例");
         tvView3.setText("3.DES加解密案例");
+        tvView4.setText("4.AES加解密案例");
     }
 
     private void writeFile() {
@@ -101,6 +105,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         } else if (v == tvView3) {
             des();
         } else if (v == tvView4) {
+            aes();
         } else if (v == tvView5) {
         } else if (v == tvView6){
         } else if (v == tvView7){
@@ -177,7 +182,33 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         AppLogUtils.d("des计算加密字符串2: " + encrypt2);
         String decrypt2 = DesEncryptUtils.decrypt(encrypt2.getBytes(), password.getBytes());
         AppLogUtils.d("des计算解密字符串2: " + decrypt2);
+    }
 
+    private void aes() {
+        String string = "yangchongyangchongyangchongyangchong";
+        String password = "yc123456yc123456";
+        String encrypt1 = AesEncryptUtils.encrypt(string,password);
+        AppLogUtils.d("aes计算加密字符串1: " + encrypt1);
+        String decrypt1 = AesEncryptUtils.decrypt(encrypt1 , password);
+        AppLogUtils.d("aes计算解密字符串1: " + decrypt1);
+
+
+        String encrypt2 = AesEncryptUtils.encryptToBase64(string,password);
+        AppLogUtils.d("aes计算加密字符串2: " + encrypt2);
+        String decrypt2 = AesEncryptUtils.decryptFromBase64(encrypt2 , password);
+        AppLogUtils.d("aes计算解密字符串2: " + decrypt2);
+
+
+//        String encrypt3 = AesEncryptUtils.encryptWithKeyBase64(string,password);
+//        AppLogUtils.d("aes计算加密字符串3: " + encrypt3);
+//        String decrypt3 = AesEncryptUtils.decryptWithKeyBase64(encrypt3 , password);
+//        AppLogUtils.d("aes计算解密字符串3: " + decrypt3);
+
+
+//        String encrypt4 = AesEncryptUtils.encryptAES(string.getBytes(),password.getBytes());
+//        AppLogUtils.d("aes计算加密字符串4: " + encrypt4);
+//        String decrypt4 = AesEncryptUtils.decryptAES(encrypt4.getBytes() , password.getBytes());
+//        AppLogUtils.d("aes计算解密字符串4: " + decrypt4);
     }
 
 }
