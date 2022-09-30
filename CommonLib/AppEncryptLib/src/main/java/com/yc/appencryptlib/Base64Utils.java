@@ -17,7 +17,7 @@ public final class Base64Utils {
 
     /**
      * 字符Base64加密
-     * @param str
+     * @param str           字符串
      * @return
      */
     public static String encodeToString(String str){
@@ -31,7 +31,7 @@ public final class Base64Utils {
     }
     /**
      * 字符Base64解密
-     * @param str
+     * @param str           字符串
      * @return
      */
     public static String decodeToString(String str){

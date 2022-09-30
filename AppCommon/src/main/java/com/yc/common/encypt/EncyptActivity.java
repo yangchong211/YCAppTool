@@ -66,6 +66,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
     public void initData() {
         tvView1.setText("1.MD5相关加密案例");
         tvView2.setText("2.base64相关加解密案例");
+        tvView3.setText("3.DES加解密案例");
     }
 
     @Override
@@ -75,6 +76,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         } else if (v == tvView2) {
             base64();
         } else if (v == tvView3) {
+            des();
         } else if (v == tvView4) {
         } else if (v == tvView5) {
         } else if (v == tvView6){
@@ -128,5 +130,10 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         AppLogUtils.i("base64", "decode 3 >>>" + strBase64_3);
     }
 
+
+    private void des() {
+        String string = "yangchong";
+
+    }
 
 }

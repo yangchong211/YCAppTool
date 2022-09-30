@@ -21,8 +21,10 @@ import java.util.HashMap;
 public final class Md5EncryptUtils {
 
     /**
-     * e
      * 用来将字节转换成16进制表示的字符
+     * 如何加强md5安全性
+     * 1.对明文多次MD5加密，对明文加密之后的MD5串再次进行MD5加密
+     * 2.MD5加盐（salt），基本过程是这样的：当需要对明文进行MD5加密的时候，程序会添加一个salt值跟明文一起进行MD5加密，这样可以极大增强MD5被破解的难度。
      */
     private static final char[] HEX_DIGITS =
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
@@ -160,7 +162,8 @@ public final class Md5EncryptUtils {
             digestInputStream = new DigestInputStream(fis, md);
             byte[] buffer = new byte[256 * 1024];
             while (true) {
-                if (!(digestInputStream.read(buffer) > 0)) {
+                int read = digestInputStream.read(buffer);
+                if (!( read > 0)) {
                     break;
                 }
             }

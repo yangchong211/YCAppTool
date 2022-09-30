@@ -6,7 +6,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public final class AppDesUtils {
+public final class DesEncryptUtils {
 
 
     ///////////////////////////////////////////////////////////////////////////
