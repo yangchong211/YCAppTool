@@ -45,4 +45,13 @@ public final class Base64Utils {
         return "";
     }
 
+    public static byte[] base64Encode(final byte[] input) {
+        return Base64.encode(input, Base64.NO_WRAP);
+    }
+
+    public static byte[] base64Decode(final byte[] input) {
+        return Base64.decode(input, Base64.NO_WRAP);
+    }
+
+
 }

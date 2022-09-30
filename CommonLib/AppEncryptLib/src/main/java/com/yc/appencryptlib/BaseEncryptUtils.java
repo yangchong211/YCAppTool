@@ -1,6 +1,5 @@
 package com.yc.appencryptlib;
 
-import android.util.Base64;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -77,16 +76,6 @@ public final class BaseEncryptUtils {
             throw new IllegalArgumentException();
         }
     }
-
-    public static byte[] base64Encode(final byte[] input) {
-        return Base64.encode(input, Base64.NO_WRAP);
-    }
-
-    public static byte[] base64Decode(final byte[] input) {
-        return Base64.decode(input, Base64.NO_WRAP);
-    }
-
-
 
     public static boolean isSpace(final String s) {
         if (s == null) {

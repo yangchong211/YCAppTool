@@ -35,7 +35,7 @@ public final class AppAesUtils {
                                            final byte[] key,
                                            final String transformation,
                                            final byte[] iv) {
-        return BaseEncryptUtils.base64Encode(encryptAES(data, key, transformation, iv));
+        return Base64Utils.base64Encode(encryptAES(data, key, transformation, iv));
     }
 
     /**
@@ -83,7 +83,7 @@ public final class AppAesUtils {
                                           final byte[] key,
                                           final String transformation,
                                           final byte[] iv) {
-        return decryptAES(BaseEncryptUtils.base64Decode(data), key, transformation, iv);
+        return decryptAES(Base64Utils.base64Decode(data), key, transformation, iv);
     }
 
     /**

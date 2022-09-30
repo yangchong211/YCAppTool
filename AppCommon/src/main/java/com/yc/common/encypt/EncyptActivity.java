@@ -4,7 +4,9 @@ import android.util.Base64;
 import android.view.View;
 
 import com.yc.appencryptlib.Base64Utils;
+import com.yc.appencryptlib.DesEncryptUtils;
 import com.yc.appfilelib.AppFileUtils;
+import com.yc.appfilelib.BufferIoUtils;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.roundcorner.view.RoundTextView;
@@ -64,9 +66,30 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void initData() {
+        writeFile();
         tvView1.setText("1.MD5相关加密案例");
         tvView2.setText("2.base64相关加解密案例");
         tvView3.setText("3.DES加解密案例");
+    }
+
+    private void writeFile() {
+        String txt = AppFileUtils.getExternalFilePath(this, "txt");
+        String content = getString().toString();
+        String fileName = txt + File.separator + "yc1.txt";
+        AppLogUtils.d("FileActivity : 写文件 路径" , fileName);
+        BufferIoUtils.writeString2File2(content,fileName);
+    }
+
+    private StringBuilder getString(){
+        return new StringBuilder("2你好这个是写入的文件。明确一个前提：各个业务组件之间不会是相互隔离而是必然存在一些交互的；\n" +
+                "\n" +
+                "业务复用：在Module A需要引用Module B提供的某个功能，比如需要版本更新业务逻辑，而我们一般都是使用强引用的Class显式的调用；\n" +
+                "业务复用：在Module A需要调用Module B提供的某个方法，例如别的Module调用用户模块退出登录的方法；\n" +
+                "业务获取参数：登陆环境下，在Module A，C，D，E多个业务组件需要拿到Module B登陆注册组件中用户信息id，name，info等参数访问接口数据；\n" +
+                "作者：杨充\n" +
+                "链接：https://juejin.cn/post/6938008708295163934\n" +
+                "来源：稀土掘金\n" +
+                "逗比2 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。");
     }
 
     @Override
@@ -132,7 +155,28 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
 
 
     private void des() {
-        String string = "yangchong";
+        String string = "yangchongyangchongyangchongyangchong";
+        String password = "yc123456";
+        String encrypt1 = DesEncryptUtils.encrypt(string,password);
+        AppLogUtils.d("des计算加密字符串1: " + encrypt1);
+        String decrypt1 = DesEncryptUtils.decrypt(encrypt1 , password);
+        AppLogUtils.d("des计算解密字符串1: " + decrypt1);
+
+
+        String txt = AppFileUtils.getExternalFilePath(this, "txt");
+        String fileName = txt + File.separator + "yc1.txt";
+        String destFile = txt + File.separator + "yc2.txt";
+        String encryptFile1 = DesEncryptUtils.encryptFile(password, fileName, destFile);
+        AppLogUtils.d("des计算加密文件1: " + encryptFile1);
+        String destFile3 = txt + File.separator + "yc3.txt";
+        String decryptFile1 = DesEncryptUtils.decryptFile(password, destFile, destFile3);
+        AppLogUtils.d("des计算解密文件1: " + decryptFile1);
+
+
+        String encrypt2 = DesEncryptUtils.encrypt(string.getBytes(), password.getBytes());
+        AppLogUtils.d("des计算加密字符串2: " + encrypt2);
+        String decrypt2 = DesEncryptUtils.decrypt(encrypt2.getBytes(), password.getBytes());
+        AppLogUtils.d("des计算解密字符串2: " + decrypt2);
 
     }
 
