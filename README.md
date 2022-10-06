@@ -225,14 +225,14 @@
 |--  |--  |--  |
 |[ZxingServerLib]() | 二维码扫描库 | 用于二维码扫描识别的基础功能 |
 |[ZXingCodeLib]() | 二维码生成库  | 用于生成二维码的基础库 |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
+|[SerialTaskLib]() | 串行线程任务管理库  | 用于串行线程任务执行策略的task管理库 |
+|[LocaleHelperLib]() | 国际化locale库 | 国际化业务locale管理库 |
+|[CountTimerLib]() | 倒计时器库 | 用于倒计时时间工具库 |
+|[AppTraceTool]() | Trace工具库 |  |
+|[LongAliveLib]() | 保活库 |  |
+|[ThreadPoolLib]() | 线程池封装库  | 各种线程池案例封装库 |
+|[ThreadTaskLib]() |   |  |
+|[AutoCloserLib]() |  |  |
 |[]() |  |  |
 |[]() |  |  |
 |[]() |  |  |
