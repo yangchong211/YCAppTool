@@ -231,35 +231,32 @@
 |[AppTraceTool]() | Trace工具库 |  |
 |[LongAliveLib]() | 保活库 |  |
 |[ThreadPoolLib]() | 线程池封装库  | 各种线程池案例封装库 |
-|[ThreadTaskLib]() |   |  |
-|[AutoCloserLib]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
-|[]() |  |  |
+|[AutoCloserLib]() | 推到后台杀死app库 | 推到后台n时间后自动杀死app应用进程 |
+|[AppProcessLib]() | 前后台监听库 | 用于判断前后台状态，监听前后台切换的库 |
+|[EasyExecutor]() | 轻量级线程池库 | 轻量级线程池封装库，简易好用 |
+|[ThreadDebugLib]() | 线程debug工具 | 线程debug工具库 |
+|[NtpTimeLib]() | Ntp国际时间校验库  | 主要是用于智能设备时间校验库  |
+|[AppUpdateLib]() | App版本更新库  | App版本更新，可以设置强制更新，普通更新 |
+
 
 
 ### 08.服务组件库的介绍
 |服务组件库地址|库说明|功能介绍|
 |--  |--  |--  |
-|隐私合规API库 | | |
-|图片压缩库 | | |
-|铃声和震动库 | | |
-|简单蓝牙库 | | |
-|网络请求库 | | |
-|对象对比库 | | |
-|NFC封装库 | | |
-|网络日志拦截器 | | |
-|日志上报库 | | |
-|IPC进程通信库 | | |
-|图片加载库 | | |
-|解析容错框架 | | |
-|Glide加载进度库 | | |
-|Log日志库 | | |
+|[ImageServer]() | 图片压缩库  | 图片经典压缩库，高度压缩图片质量库 |
+|[HttpServer]() | 网络请求库  |  |
+|[ShareServer]() | 本地分享工具库  |  |
+|[NfcServer]() | NFC封装库  |  |
+|[GsonServer]() | 解析容错框架  |  |
+|[IpcServer]() | IPC进程通信库  |  |
+|[EasyBleServer]() | 简单蓝牙库  |  |
+|[LogUpload]() | 日志上报库  |  |
+|[PrivateServer]() | 隐私合规API库  |  |
+|[NetInterceptor]() | 网络日志拦截器  |  |
+|[GlideProgressLib]() | Glide加载进度库   |  |
+|[CompressServer]() | 图片加载库  | 简易版本图片压缩库 |
+|[BellsVibrations]() | 铃声和震动库  |  |
+
 
 
 ### 09.项目稳定性的实践
