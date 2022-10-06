@@ -213,9 +213,9 @@
 |[EventUploadLib]() | 异常&事件&日志上报库 | 辅助基础和功能组件的日志，异常和埋点上报接口库 |
 |[AppCommonInter]() | 基础接口库 | 用于基础组件中异常降级，日志，异常等接口调用  |
 |[AppPermission]() | 简单的权限库 | 用于权限判断，申请以及回调相关处理库 |
-|[AppLruDisk]() |  |  |
-|[AppLruCache]() |  |  |
-|[BaseVpAdapter]() |  |  |
+|[AppLruDisk]() | Lru磁盘缓存  | Lru淘汰算法磁盘缓存库，写入file文件。基础工具库 |
+|[AppLruCache]() | Lru内存缓存 | Lru淘汰算法内存缓存库，写入到map集合中 |
+|[BaseVpAdapter]() | Vp，Vp2适配器库  | 主要是针对vp控件adapter的简单封装 |
 
 
 
@@ -291,7 +291,6 @@
 
 
 ### 11.遇到的问题点记录
-
 
 
 
