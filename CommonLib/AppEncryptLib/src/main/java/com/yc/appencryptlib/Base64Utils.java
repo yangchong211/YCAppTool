@@ -16,11 +16,12 @@ import java.io.UnsupportedEncodingException;
 public final class Base64Utils {
 
     /**
-     * flags参数
+     * 无论是编码还是解码都会有一个参数Flags，Android提供了以下几种
      * DEFAULT 这个参数是默认，使用默认的方法来加密
      * NO_PADDING 这个参数是略去加密字符串最后的”=”
      * NO_WRAP 这个参数意思是略去所有的换行符（设置后CRLF就没用了）
-     * URL_SAFE 这个参数意思是加密时不使用对URL和文件名有特殊意义的字符来作为加密字符
+     * CRLF 这个参数看起来比较眼熟，它就是Win风格的换行符，意思就是使用CR LF这一对作为一行的结尾而不是Unix风格的LF
+     * URL_SAFE 这个参数意思是加密时不使用对URL和文件名有特殊意义的字符来作为加密字符，具体就是以-和_取代+和/
      */
 
 
@@ -53,6 +54,8 @@ public final class Base64Utils {
         }
         return "";
     }
+
+
 
     public static byte[] base64Encode(final byte[] input) {
         return Base64.encode(input, Base64.DEFAULT);

@@ -74,8 +74,7 @@ class LruDiskCacheImpl : ICacheable {
     }
 
     override fun totalSize(): Long {
-        //todo 这个想想怎么实现
-        return 0L
+        return diskLruCacheHelper.size
     }
 
     override fun clearData() {

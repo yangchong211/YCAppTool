@@ -705,6 +705,14 @@ public final class DiskLruCache implements Closeable {
     }
 
     /**
+     * 获取大小
+     * @return
+     */
+    public long getSize(){
+        return lruEntries.keySet().size();
+    }
+
+    /**
      * 关闭缓存并删除其存储的所有值。这将删除缓存目录中的所有文件，包括不是由缓存创建的文件。
      */
     public void delete() throws IOException {

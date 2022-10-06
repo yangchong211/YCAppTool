@@ -37,7 +37,7 @@ public final class Md5EncryptUtils {
         try {
             MessageDigest md = java.security.MessageDigest.getInstance("MD5");
             md.update(source);
-            // MD5 的计算结果是一个 128 位的长整数，
+            // MD5 的计算结果是一个 128 位的长整数
             byte[] tmp = md.digest();
             // 用字节表示就是 16 个字节
             // 每个字节用 16 进制表示的话，使用两个字符， 所以表示成 16
@@ -46,8 +46,8 @@ public final class Md5EncryptUtils {
             // 表示转换结果中对应的字符位置
             int k = 0;
             for (int i = 0; i < 16; i++) {
-                // 从第一个字节开始，对 MD5 的每一个字节// 转换成 16
-                // 进制字符的转换
+                // 从第一个字节开始，对 MD5 的每一个字节
+                // 转换成 16 进制字符的转换
                 // 取第 i 个字节
                 byte byte0 = tmp[i];
                 // 取字节中高 4 位的数字转换,// >>>

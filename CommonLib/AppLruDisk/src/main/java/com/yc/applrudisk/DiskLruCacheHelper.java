@@ -110,6 +110,11 @@ public class DiskLruCacheHelper {
         return isRemove;
     }
 
+    public long getSize(){
+        return diskLruCache.getSize();
+        //return diskLruCache.size();
+    }
+
     private synchronized void resetDiskCache() {
         diskLruCache = null;
     }
