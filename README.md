@@ -73,7 +73,7 @@
 ### 02.组件化演变架构图
 #### 2.1 以前App说明
 - 传统APP架构图
-    - ![image](http://upload-images.jianshu.io/upload_images/4432347-1047b1cdf15fd59a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+    - ![image](https://github.com/yangchong211/YCAppTool/blob/master/Image/01.%E4%BC%A0%E7%BB%9FApp%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 - 存在的问题
     - 单一工程模型下的业务关系，总的来说就是：你中有我，我中有你，相互依赖，无法分离，多个开发代码越维护越臃肿，耦合严重。如下图：
     - ![image](https://upload-images.jianshu.io/upload_images/4432347-ab213414e69fef5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -81,7 +81,7 @@
 
 #### 2.2 现在App架构图
 - 按照不同层级架构图
-    - ![image]()
+    - ![image](https://github.com/yangchong211/YCAppTool/blob/master/Image/02.App%E7%BB%84%E4%BB%B6%E5%8C%96%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 
 
 ### 03.组件化实践的步骤
@@ -181,7 +181,7 @@
 - 存在问题如下所示
     - 流程混乱，把关不严：缺乏设计、闷头开发、收益质量得不到保障。需要有标准化流程托底。
 - 技术库标准化实践流程图
-    - ![image]()
+    - ![image](https://github.com/yangchong211/YCAppTool/blob/master/Image/05.%E6%8A%80%E6%9C%AF%E6%A0%87%E5%87%86%E5%8C%96%E5%AE%9E%E8%B7%B5.jpg)
 - 技术库收益总结分析
     - 有什么收益：主要是解决了什么问题，给项目带了什么收益。让代码更简洁，让功能更加高效，还是其他？
     - 具有衡量数据：优化了什么，效率对比数据分析，内存优化前后数据对比等等，必须要有具体的衡量数据……
