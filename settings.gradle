@@ -161,8 +161,10 @@ include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,':NtpTimeLib' ,
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib',':EasyExecutor',
         ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib', ':AppProcessLib',
-        ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib'
+        ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib',
+        ':ZXingCodeLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
+project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
 project(':SerialTaskLib').projectDir = new File('ToolLib/SerialTaskLib')

@@ -2,7 +2,7 @@ package com.yc.zxingserver.camera.open;
 
 import android.hardware.Camera;
 
-import com.yc.zxingserver.utils.ZxingLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 public final class OpenCameraInterface {
 
@@ -26,11 +26,11 @@ public final class OpenCameraInterface {
 
         int numCameras = Camera.getNumberOfCameras();
         if (numCameras == 0) {
-            ZxingLogUtils.w( "No cameras!");
+            AppLogUtils.w( "No cameras!");
             return null;
         }
         if (cameraId >= numCameras) {
-            ZxingLogUtils.w( "Requested camera does not exist: " + cameraId);
+            AppLogUtils.w( "Requested camera does not exist: " + cameraId);
             return null;
         }
 
@@ -45,11 +45,11 @@ public final class OpenCameraInterface {
                 cameraId++;
             }
             if (cameraId == numCameras) {
-                ZxingLogUtils.i("No camera facing " + CameraFacing.BACK + "; returning camera #0");
+                AppLogUtils.i("No camera facing " + CameraFacing.BACK + "; returning camera #0");
                 cameraId = 0;
             }
         }
-        ZxingLogUtils.i("Opening camera #" + cameraId);
+        AppLogUtils.i("Opening camera #" + cameraId);
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
         Camera.getCameraInfo(cameraId, cameraInfo);
         Camera camera = Camera.open(cameraId);

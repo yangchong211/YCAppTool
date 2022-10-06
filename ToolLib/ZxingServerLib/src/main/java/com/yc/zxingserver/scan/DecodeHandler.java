@@ -22,7 +22,7 @@ import com.google.zxing.common.GlobalHistogramBinarizer;
 import com.google.zxing.common.HybridBinarizer;
 import com.yc.zxingserver.R;
 import com.yc.zxingserver.camera.CameraManager;
-import com.yc.zxingserver.utils.ZxingLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Map;
@@ -131,7 +131,7 @@ final class DecodeHandler extends Handler {
         if (rawResult != null) {
             // Don't log the barcode contents for security.
             long end = System.currentTimeMillis();
-            ZxingLogUtils.d( "Found barcode in " + (end - start) + " ms");
+            AppLogUtils.d( "Found barcode in " + (end - start) + " ms");
 
             BarcodeFormat barcodeFormat = rawResult.getBarcodeFormat();
             if(handler!=null && handler.isSupportAutoZoom() && barcodeFormat == BarcodeFormat.QR_CODE){
@@ -222,7 +222,7 @@ final class DecodeHandler extends Handler {
                     lastZoomTime = System.currentTimeMillis();
                     return true;
                 } else {
-                    ZxingLogUtils.i( "Zoom not supported");
+                    AppLogUtils.i( "Zoom not supported");
                 }
             }
 

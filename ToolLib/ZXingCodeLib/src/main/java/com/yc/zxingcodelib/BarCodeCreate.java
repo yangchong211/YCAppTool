@@ -1,4 +1,4 @@
-package com.yc.zxingserver.utils;
+package com.yc.zxingcodelib;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -13,6 +13,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.Map;
 
@@ -156,7 +157,7 @@ public final class BarCodeCreate {
             }
             return bitmap;
         } catch (WriterException e) {
-            ZxingLogUtils.w(e.getMessage());
+            AppLogUtils.w(e.getMessage());
         }
         return null;
     }
@@ -199,7 +200,7 @@ public final class BarCodeCreate {
             canvas.restore();
         } catch (Exception e) {
             bitmap = null;
-            ZxingLogUtils.w(e.getMessage());
+            AppLogUtils.w(e.getMessage());
         }
         return bitmap;
     }

@@ -21,7 +21,7 @@ import com.google.zxing.DecodeHintType;
 import com.google.zxing.Result;
 import com.yc.zxingserver.camera.CameraManager;
 import com.yc.zxingserver.camera.FrontLightMode;
-import com.yc.zxingserver.utils.ZxingLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -316,7 +316,7 @@ public class CaptureHelper implements CaptureLifecycle,CaptureTouchEvent,Capture
             throw new IllegalStateException("No SurfaceHolder provided");
         }
         if (cameraManager.isOpen()) {
-            ZxingLogUtils.w("initCamera() while already open -- late SurfaceView callback?");
+            AppLogUtils.w("initCamera() while already open -- late SurfaceView callback?");
             return;
         }
         try {
@@ -330,18 +330,18 @@ public class CaptureHelper implements CaptureLifecycle,CaptureTouchEvent,Capture
                 captureHandler.setSupportLuminanceInvert(isSupportLuminanceInvert);
             }
         } catch (IOException ioe) {
-            ZxingLogUtils.w( ioe);
+            AppLogUtils.w( ioe);
         } catch (RuntimeException e) {
             // Barcode Scanner has seen crashes in the wild of this variety:
             // java.?lang.?RuntimeException: Fail to connect to camera service
-            ZxingLogUtils.w( "Unexpected error initializing camera", e);
+            AppLogUtils.w( "Unexpected error initializing camera", e);
         }
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         if (holder == null) {
-            ZxingLogUtils.w( "*** WARNING *** surfaceCreated() gave us a null surface!");
+            AppLogUtils.w( "*** WARNING *** surfaceCreated() gave us a null surface!");
         }
         if (!hasSurface) {
             hasSurface = true;
@@ -377,7 +377,7 @@ public class CaptureHelper implements CaptureLifecycle,CaptureTouchEvent,Capture
             params.setZoom(zoom);
             camera.setParameters(params);
         } else {
-            ZxingLogUtils.i( "zoom not supported");
+            AppLogUtils.i( "zoom not supported");
         }
     }
 

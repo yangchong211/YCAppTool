@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
 import com.yc.zxingserver.scan.Preferences;
-import com.yc.zxingserver.utils.ZxingLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ final class AutoFocusManager implements Camera.AutoFocusCallback {
         useAutoFocus =
                 sharedPrefs.getBoolean(Preferences.KEY_AUTO_FOCUS, true) &&
                         FOCUS_MODES_CALLING_AF.contains(currentFocusMode);
-          ZxingLogUtils.i( "Current focus mode '" + currentFocusMode + "'; use auto focus? " + useAutoFocus);
+          AppLogUtils.i( "Current focus mode '" + currentFocusMode + "'; use auto focus? " + useAutoFocus);
         start();
     }
 
@@ -55,7 +55,7 @@ final class AutoFocusManager implements Camera.AutoFocusCallback {
                 newTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 outstandingTask = newTask;
             } catch (RejectedExecutionException ree) {
-                 ZxingLogUtils.w( "Could not request auto focus", ree);
+                 AppLogUtils.w( "Could not request auto focus", ree);
             }
         }
     }
@@ -69,7 +69,7 @@ final class AutoFocusManager implements Camera.AutoFocusCallback {
                     focusing = true;
                 } catch (RuntimeException re) {
                     // Have heard RuntimeException reported in Android 4.0.x+; continue?
-                    ZxingLogUtils.w( "Unexpected exception while focusing", re);
+                    AppLogUtils.w( "Unexpected exception while focusing", re);
                     // Try again later to keep cycle going
                     autoFocusAgainLater();
                 }
@@ -95,7 +95,7 @@ final class AutoFocusManager implements Camera.AutoFocusCallback {
                 camera.cancelAutoFocus();
             } catch (RuntimeException re) {
                 // Have heard RuntimeException reported in Android 4.0.x+; continue?
-                ZxingLogUtils.w( "Unexpected exception while cancelling focusing", re);
+                AppLogUtils.w( "Unexpected exception while cancelling focusing", re);
             }
         }
     }

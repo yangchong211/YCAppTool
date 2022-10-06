@@ -8,7 +8,7 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
 
-import com.yc.zxingserver.utils.ZxingLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.RejectedExecutionException;
@@ -38,7 +38,7 @@ final class InactivityTimer {
         try {
             inactivityTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } catch (RejectedExecutionException ree) {
-            ZxingLogUtils.w( "Couldn't schedule inactivity task; ignoring");
+            AppLogUtils.w( "Couldn't schedule inactivity task; ignoring");
         }
     }
 
@@ -48,13 +48,13 @@ final class InactivityTimer {
             activity.unregisterReceiver(powerStatusReceiver);
             registered = false;
         } else {
-            ZxingLogUtils.w( "PowerStatusReceiver was never registered?");
+            AppLogUtils.w( "PowerStatusReceiver was never registered?");
         }
     }
 
      void onResume() {
         if (registered) {
-            ZxingLogUtils.w( "PowerStatusReceiver was already registered?");
+            AppLogUtils.w( "PowerStatusReceiver was already registered?");
         } else {
             activity.registerReceiver(powerStatusReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
             registered = true;
@@ -112,7 +112,7 @@ final class InactivityTimer {
         protected Object doInBackground(Object... objects) {
             try {
                 Thread.sleep(INACTIVITY_DELAY_MS);
-                ZxingLogUtils.i( "Finishing activity due to inactivity");
+                AppLogUtils.i( "Finishing activity due to inactivity");
                 Activity activity = weakReference.get();
                 if(activity!=null){
                     activity.finish();

@@ -1,4 +1,4 @@
-package com.yc.zxingserver.utils;
+package com.yc.zxingcodelib;
 
 import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
@@ -13,10 +13,11 @@ import com.google.zxing.common.GlobalHistogramBinarizer;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.zxingserver.scan.DecodeFormatManager;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -33,6 +34,7 @@ public final class ZxingCodeParse {
     public static final int DEFAULT_REQ_WIDTH = 450;
     public static final int DEFAULT_REQ_HEIGHT = 800;
 
+    
     /**
      * 解析一维码/二维码图片
      * @param bitmapPath
@@ -42,11 +44,11 @@ public final class ZxingCodeParse {
         Map<DecodeHintType,Object> hints = new HashMap<>();
         //添加可以解析的编码类型
         Vector<BarcodeFormat> decodeFormats = new Vector<>();
-        decodeFormats.addAll(DecodeFormatManager.ONE_D_FORMATS);
-        decodeFormats.addAll(DecodeFormatManager.QR_CODE_FORMATS);
-        decodeFormats.addAll(DecodeFormatManager.DATA_MATRIX_FORMATS);
-        decodeFormats.addAll(DecodeFormatManager.AZTEC_FORMATS);
-        decodeFormats.addAll(DecodeFormatManager.PDF417_FORMATS);
+        decodeFormats.addAll(DecodeManager.ONE_D_FORMATS);
+        decodeFormats.addAll(DecodeManager.QR_CODE_FORMATS);
+        decodeFormats.addAll(DecodeManager.DATA_MATRIX_FORMATS);
+        decodeFormats.addAll(DecodeManager.AZTEC_FORMATS);
+        decodeFormats.addAll(DecodeManager.PDF417_FORMATS);
 
         hints.put(DecodeHintType.CHARACTER_SET, "utf-8");
         hints.put(DecodeHintType.TRY_HARDER,Boolean.TRUE);

@@ -4,7 +4,7 @@ import android.hardware.Camera;
 import android.os.Handler;
 import android.os.Message;
 
-import com.yc.zxingserver.utils.ZxingLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 
 @SuppressWarnings("deprecation") // camera APIs
@@ -33,7 +33,7 @@ final class PreviewCallback implements Camera.PreviewCallback {
             message.sendToTarget();
             previewHandler = null;
         } else {
-            ZxingLogUtils.d( "Got preview callback, but no handler or resolution available");
+            AppLogUtils.d( "Got preview callback, but no handler or resolution available");
         }
     }
 

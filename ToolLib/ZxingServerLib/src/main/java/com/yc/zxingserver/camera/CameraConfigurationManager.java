@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import com.yc.zxingserver.camera.open.CameraFacing;
 import com.yc.zxingserver.camera.open.OpenCamera;
 import com.yc.zxingserver.scan.Preferences;
-import com.yc.zxingserver.utils.ZxingLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 
 /**
@@ -64,15 +64,15 @@ final class CameraConfigurationManager {
                     throw new IllegalArgumentException("Bad rotation: " + displayRotation);
                 }
         }
-        ZxingLogUtils.i( "Display at: " + cwRotationFromNaturalToDisplay);
+        AppLogUtils.i( "Display at: " + cwRotationFromNaturalToDisplay);
 
         int cwRotationFromNaturalToCamera = camera.getOrientation();
-        ZxingLogUtils.i( "Camera at: " + cwRotationFromNaturalToCamera);
+        AppLogUtils.i( "Camera at: " + cwRotationFromNaturalToCamera);
 
         // Still not 100% sure about this. But acts like we need to flip this:
         if (camera.getFacing() == CameraFacing.FRONT) {
             cwRotationFromNaturalToCamera = (360 - cwRotationFromNaturalToCamera) % 360;
-            ZxingLogUtils.i( "Front camera overriden to: " + cwRotationFromNaturalToCamera);
+            AppLogUtils.i( "Front camera overriden to: " + cwRotationFromNaturalToCamera);
         }
 
     /*
@@ -90,24 +90,24 @@ final class CameraConfigurationManager {
      */
 
         cwRotationFromDisplayToCamera = (360 + cwRotationFromNaturalToCamera - cwRotationFromNaturalToDisplay) % 360;
-        ZxingLogUtils.i( "Final display orientation: " + cwRotationFromDisplayToCamera);
+        AppLogUtils.i( "Final display orientation: " + cwRotationFromDisplayToCamera);
         if (camera.getFacing() == CameraFacing.FRONT) {
-            ZxingLogUtils.i( "Compensating rotation for front camera");
+            AppLogUtils.i( "Compensating rotation for front camera");
             cwNeededRotation = (360 - cwRotationFromDisplayToCamera) % 360;
         } else {
             cwNeededRotation = cwRotationFromDisplayToCamera;
         }
-        ZxingLogUtils.i( "Clockwise rotation from display to camera: " + cwNeededRotation);
+        AppLogUtils.i( "Clockwise rotation from display to camera: " + cwNeededRotation);
 
         Point theScreenResolution = new Point();
         display.getSize(theScreenResolution);
         screenResolution = theScreenResolution;
-        ZxingLogUtils.i( "Screen resolution in current orientation: " + screenResolution);
+        AppLogUtils.i( "Screen resolution in current orientation: " + screenResolution);
 
         cameraResolution = CameraConfigurationUtils.findBestPreviewSizeValue(parameters, screenResolution);
-        ZxingLogUtils.i( "Camera resolution: " + cameraResolution);
+        AppLogUtils.i( "Camera resolution: " + cameraResolution);
         bestPreviewSize = CameraConfigurationUtils.findBestPreviewSizeValue(parameters, screenResolution);
-        ZxingLogUtils.i( "Best available preview size: " + bestPreviewSize);
+        AppLogUtils.i( "Best available preview size: " + bestPreviewSize);
 
         boolean isScreenPortrait = screenResolution.x < screenResolution.y;
         boolean isPreviewSizePortrait = bestPreviewSize.x < bestPreviewSize.y;
@@ -117,7 +117,7 @@ final class CameraConfigurationManager {
         } else {
             previewSizeOnScreen = new Point(bestPreviewSize.y, bestPreviewSize.x);
         }
-        ZxingLogUtils.i( "Preview size on screen: " + previewSizeOnScreen);
+        AppLogUtils.i( "Preview size on screen: " + previewSizeOnScreen);
     }
 
     void setDesiredCameraParameters(OpenCamera camera, boolean safeMode) {
@@ -126,14 +126,14 @@ final class CameraConfigurationManager {
         Camera.Parameters parameters = theCamera.getParameters();
 
         if (parameters == null) {
-            ZxingLogUtils.w( "Device error: no camera parameters are available. Proceeding without configuration.");
+            AppLogUtils.w( "Device error: no camera parameters are available. Proceeding without configuration.");
             return;
         }
 
-        ZxingLogUtils.i( "Initial camera parameters: " + parameters.flatten());
+        AppLogUtils.i( "Initial camera parameters: " + parameters.flatten());
 
         if (safeMode) {
-            ZxingLogUtils.w( "In camera config safe mode -- most settings will not be honored");
+            AppLogUtils.w( "In camera config safe mode -- most settings will not be honored");
         }
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -180,7 +180,7 @@ final class CameraConfigurationManager {
         Camera.Parameters afterParameters = theCamera.getParameters();
         Camera.Size afterSize = afterParameters.getPreviewSize();
         if (afterSize != null && (bestPreviewSize.x != afterSize.width || bestPreviewSize.y != afterSize.height)) {
-            ZxingLogUtils.w( "Camera said it supported preview size " + bestPreviewSize.x + 'x' + bestPreviewSize.y +
+            AppLogUtils.w( "Camera said it supported preview size " + bestPreviewSize.x + 'x' + bestPreviewSize.y +
                     ", but after setting it, preview size is " + afterSize.width + 'x' + afterSize.height);
             bestPreviewSize.x = afterSize.width;
             bestPreviewSize.y = afterSize.height;

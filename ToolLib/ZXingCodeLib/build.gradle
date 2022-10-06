@@ -36,6 +36,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation rootProject.ext.dependencies["zxing"]
     implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':ZXingCodeLib')
     implementation project(path: ':AppEncryptLib')
 }

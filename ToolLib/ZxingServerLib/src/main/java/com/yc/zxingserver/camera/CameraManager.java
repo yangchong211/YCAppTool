@@ -11,7 +11,7 @@ import android.view.SurfaceHolder;
 import com.google.zxing.PlanarYUVLuminanceSource;
 import com.yc.zxingserver.camera.open.OpenCamera;
 import com.yc.zxingserver.camera.open.OpenCameraInterface;
-import com.yc.zxingserver.utils.ZxingLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.IOException;
 
@@ -97,8 +97,8 @@ public final class CameraManager {
             configManager.setDesiredCameraParameters(theCamera, false);
         } catch (RuntimeException re) {
             // Driver failed
-            ZxingLogUtils.w( "Camera rejected parameters. Setting only minimal safe-mode parameters");
-            ZxingLogUtils.i( "Resetting to saved camera params: " + parametersFlattened);
+            AppLogUtils.w( "Camera rejected parameters. Setting only minimal safe-mode parameters");
+            AppLogUtils.i( "Resetting to saved camera params: " + parametersFlattened);
             // Reset:
             if (parametersFlattened != null) {
                 parameters = cameraObject.getParameters();
@@ -108,7 +108,7 @@ public final class CameraManager {
                     configManager.setDesiredCameraParameters(theCamera, true);
                 } catch (RuntimeException re2) {
                     // Well, darn. Give up
-                    ZxingLogUtils.w( "Camera rejected even safe-mode parameters! No configuration");
+                    AppLogUtils.w( "Camera rejected even safe-mode parameters! No configuration");
                 }
             }
         }
@@ -336,7 +336,7 @@ public final class CameraManager {
             int leftOffset = (screenResolution.x - width) / 2;
             int topOffset = (screenResolution.y - height) / 2;
             framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
-            ZxingLogUtils.d( "Calculated manual framing rect: " + framingRect);
+            AppLogUtils.d( "Calculated manual framing rect: " + framingRect);
             framingRectInPreview = null;
         } else {
             requestedFramingRectWidth = width;

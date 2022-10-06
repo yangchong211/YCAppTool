@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.yc.zxingserver.R;
-import com.yc.zxingserver.utils.BarCodeCreate;
-import com.yc.zxingserver.utils.ZxingCodeCreate;
+import com.yc.zxingcodelib.BarCodeCreate;
+import com.yc.zxingcodelib.ZxingCodeCreate;
 
 
 public class CodeActivity extends AppCompatActivity {

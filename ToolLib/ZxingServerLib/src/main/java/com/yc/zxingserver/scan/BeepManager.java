@@ -12,7 +12,7 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
 import com.yc.zxingserver.R;
-import com.yc.zxingserver.utils.ZxingLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -90,7 +90,7 @@ public final class BeepManager implements MediaPlayer.OnErrorListener, Closeable
             mediaPlayer.prepare();
             return mediaPlayer;
         } catch (IOException ioe) {
-            ZxingLogUtils.w( ioe);
+            AppLogUtils.w( ioe);
             mediaPlayer.release();
             return null;
         }

@@ -5,7 +5,7 @@ import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Build;
 
-import com.yc.zxingserver.utils.ZxingLogUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -63,7 +63,7 @@ public final class CameraConfigurationUtils {
         }
         if (focusMode != null) {
             if (focusMode.equals(parameters.getFocusMode())) {
-                  ZxingLogUtils.d( "Focus mode already set to " + focusMode);
+                  AppLogUtils.d( "Focus mode already set to " + focusMode);
             } else {
                 parameters.setFocusMode(focusMode);
             }
@@ -85,9 +85,9 @@ public final class CameraConfigurationUtils {
         }
         if (flashMode != null) {
             if (flashMode.equals(parameters.getFlashMode())) {
-                  ZxingLogUtils.d( "Flash mode already set to " + flashMode);
+                  AppLogUtils.d( "Flash mode already set to " + flashMode);
             } else {
-                  ZxingLogUtils.d( "Setting flash mode to " + flashMode);
+                  AppLogUtils.d( "Setting flash mode to " + flashMode);
                 parameters.setFlashMode(flashMode);
             }
         }
@@ -105,13 +105,13 @@ public final class CameraConfigurationUtils {
             // Clamp value:
             compensationSteps = Math.max(Math.min(compensationSteps, maxExposure), minExposure);
             if (parameters.getExposureCompensation() == compensationSteps) {
-                  ZxingLogUtils.d( "Exposure compensation already set to " + compensationSteps + " / " + actualCompensation);
+                  AppLogUtils.d( "Exposure compensation already set to " + compensationSteps + " / " + actualCompensation);
             } else {
-                  ZxingLogUtils.d( "Setting exposure compensation to " + compensationSteps + " / " + actualCompensation);
+                  AppLogUtils.d( "Setting exposure compensation to " + compensationSteps + " / " + actualCompensation);
                 parameters.setExposureCompensation(compensationSteps);
             }
         } else {
-              ZxingLogUtils.d( "Camera does not support exposure compensation");
+              AppLogUtils.d( "Camera does not support exposure compensation");
         }
     }
 
@@ -121,7 +121,7 @@ public final class CameraConfigurationUtils {
 
     public static void setBestPreviewFPS(Camera.Parameters parameters, int minFPS, int maxFPS) {
         List<int[]> supportedPreviewFpsRanges = parameters.getSupportedPreviewFpsRange();
-          ZxingLogUtils.d( "Supported FPS ranges: " + toString(supportedPreviewFpsRanges));
+          AppLogUtils.d( "Supported FPS ranges: " + toString(supportedPreviewFpsRanges));
         if (supportedPreviewFpsRanges != null && !supportedPreviewFpsRanges.isEmpty()) {
             int[] suitableFPSRange = null;
             for (int[] fpsRange : supportedPreviewFpsRanges) {
@@ -133,14 +133,14 @@ public final class CameraConfigurationUtils {
                 }
             }
             if (suitableFPSRange == null) {
-                  ZxingLogUtils.d( "No suitable FPS range?");
+                  AppLogUtils.d( "No suitable FPS range?");
             } else {
                 int[] currentFpsRange = new int[2];
                 parameters.getPreviewFpsRange(currentFpsRange);
                 if (Arrays.equals(currentFpsRange, suitableFPSRange)) {
-                      ZxingLogUtils.d( "FPS range already set to " + Arrays.toString(suitableFPSRange));
+                      AppLogUtils.d( "FPS range already set to " + Arrays.toString(suitableFPSRange));
                 } else {
-                      ZxingLogUtils.d( "Setting FPS range to " + Arrays.toString(suitableFPSRange));
+                      AppLogUtils.d( "Setting FPS range to " + Arrays.toString(suitableFPSRange));
                     parameters.setPreviewFpsRange(suitableFPSRange[Camera.Parameters.PREVIEW_FPS_MIN_INDEX],
                             suitableFPSRange[Camera.Parameters.PREVIEW_FPS_MAX_INDEX]);
                 }
@@ -150,23 +150,23 @@ public final class CameraConfigurationUtils {
 
     public static void setFocusArea(Camera.Parameters parameters) {
         if (parameters.getMaxNumFocusAreas() > 0) {
-              ZxingLogUtils.d( "Old focus areas: " + toString(parameters.getFocusAreas()));
+              AppLogUtils.d( "Old focus areas: " + toString(parameters.getFocusAreas()));
             List<Camera.Area> middleArea = buildMiddleArea(AREA_PER_1000);
-              ZxingLogUtils.d( "Setting focus area to : " + toString(middleArea));
+              AppLogUtils.d( "Setting focus area to : " + toString(middleArea));
             parameters.setFocusAreas(middleArea);
         } else {
-              ZxingLogUtils.d( "Device does not support focus areas");
+              AppLogUtils.d( "Device does not support focus areas");
         }
     }
 
     public static void setMetering(Camera.Parameters parameters) {
         if (parameters.getMaxNumMeteringAreas() > 0) {
-              ZxingLogUtils.d( "Old metering areas: " + parameters.getMeteringAreas());
+              AppLogUtils.d( "Old metering areas: " + parameters.getMeteringAreas());
             List<Camera.Area> middleArea = buildMiddleArea(AREA_PER_1000);
-              ZxingLogUtils.d( "Setting metering area to : " + toString(middleArea));
+              AppLogUtils.d( "Setting metering area to : " + toString(middleArea));
             parameters.setMeteringAreas(middleArea);
         } else {
-              ZxingLogUtils.d( "Device does not support metering areas");
+              AppLogUtils.d( "Device does not support metering areas");
         }
     }
 
@@ -178,19 +178,19 @@ public final class CameraConfigurationUtils {
     public static void setVideoStabilization(Camera.Parameters parameters) {
         if (parameters.isVideoStabilizationSupported()) {
             if (parameters.getVideoStabilization()) {
-                  ZxingLogUtils.d( "Video stabilization already enabled");
+                  AppLogUtils.d( "Video stabilization already enabled");
             } else {
-                  ZxingLogUtils.d( "Enabling video stabilization...");
+                  AppLogUtils.d( "Enabling video stabilization...");
                 parameters.setVideoStabilization(true);
             }
         } else {
-              ZxingLogUtils.d( "This device does not support video stabilization");
+              AppLogUtils.d( "This device does not support video stabilization");
         }
     }
 
     public static void setBarcodeSceneMode(Camera.Parameters parameters) {
         if (Camera.Parameters.SCENE_MODE_BARCODE.equals(parameters.getSceneMode())) {
-              ZxingLogUtils.d( "Barcode scene mode already set");
+              AppLogUtils.d( "Barcode scene mode already set");
             return;
         }
         String sceneMode = findSettableValue("scene mode",
@@ -208,22 +208,22 @@ public final class CameraConfigurationUtils {
                 return;
             }
             if (parameters.getZoom() == zoom) {
-                  ZxingLogUtils.d( "Zoom is already set to " + zoom);
+                  AppLogUtils.d( "Zoom is already set to " + zoom);
             } else {
-                  ZxingLogUtils.d( "Setting zoom to " + zoom);
+                  AppLogUtils.d( "Setting zoom to " + zoom);
                 parameters.setZoom(zoom);
             }
         } else {
-              ZxingLogUtils.d( "Zoom is not supported");
+              AppLogUtils.d( "Zoom is not supported");
         }
     }
 
     private static Integer indexOfClosestZoom(Camera.Parameters parameters, double targetZoomRatio) {
         List<Integer> ratios = parameters.getZoomRatios();
-          ZxingLogUtils.d( "Zoom ratios: " + ratios);
+          AppLogUtils.d( "Zoom ratios: " + ratios);
         int maxZoom = parameters.getMaxZoom();
         if (ratios == null || ratios.isEmpty() || ratios.size() != maxZoom + 1) {
-             ZxingLogUtils.w( "Invalid zoom ratios!");
+             AppLogUtils.w( "Invalid zoom ratios!");
             return null;
         }
         double target100 = 100.0 * targetZoomRatio;
@@ -236,13 +236,13 @@ public final class CameraConfigurationUtils {
                 closestIndex = i;
             }
         }
-          ZxingLogUtils.d( "Chose zoom ratio of " + (ratios.get(closestIndex) / 100.0));
+          AppLogUtils.d( "Chose zoom ratio of " + (ratios.get(closestIndex) / 100.0));
         return closestIndex;
     }
 
     public static void setInvertColor(Camera.Parameters parameters) {
         if (Camera.Parameters.EFFECT_NEGATIVE.equals(parameters.getColorEffect())) {
-              ZxingLogUtils.d( "Negative effect already set");
+              AppLogUtils.d( "Negative effect already set");
             return;
         }
         String colorMode = findSettableValue("color effect",
@@ -257,7 +257,7 @@ public final class CameraConfigurationUtils {
 
         List<Camera.Size> rawSupportedSizes = parameters.getSupportedPreviewSizes();
         if (rawSupportedSizes == null) {
-             ZxingLogUtils.w( "Device returned no supported preview sizes; using default");
+             AppLogUtils.w( "Device returned no supported preview sizes; using default");
             Camera.Size defaultSize = parameters.getPreviewSize();
             if (defaultSize == null) {
                 throw new IllegalStateException("Parameters contained no preview size!");
@@ -266,12 +266,12 @@ public final class CameraConfigurationUtils {
         }
 
 
-        if (ZxingLogUtils.isShowLog()) {
+        if (AppLogUtils.isShowLog()) {
             StringBuilder previewSizesString = new StringBuilder();
             for (Camera.Size size : rawSupportedSizes) {
                 previewSizesString.append(size.width).append('x').append(size.height).append(' ');
             }
-              ZxingLogUtils.d( "Supported preview sizes: " + previewSizesString);
+              AppLogUtils.d( "Supported preview sizes: " + previewSizesString);
         }
 
         double screenAspectRatio;
@@ -280,7 +280,7 @@ public final class CameraConfigurationUtils {
         }else{
             screenAspectRatio = screenResolution.y / (double) screenResolution.x;
         }
-          ZxingLogUtils.d( "screenAspectRatio: " + screenAspectRatio);
+          AppLogUtils.d( "screenAspectRatio: " + screenAspectRatio);
         // Find a suitable size, with max resolution
         int maxResolution = 0;
 
@@ -296,19 +296,19 @@ public final class CameraConfigurationUtils {
             boolean isCandidatePortrait = realWidth < realHeight;
             int maybeFlippedWidth = isCandidatePortrait ? realWidth: realHeight ;
             int maybeFlippedHeight = isCandidatePortrait ? realHeight : realWidth;
-              ZxingLogUtils.d( String.format("maybeFlipped:%d * %d",maybeFlippedWidth,maybeFlippedHeight));
+              AppLogUtils.d( String.format("maybeFlipped:%d * %d",maybeFlippedWidth,maybeFlippedHeight));
 
             double aspectRatio = maybeFlippedWidth / (double) maybeFlippedHeight;
-              ZxingLogUtils.d( "aspectRatio: " + aspectRatio);
+              AppLogUtils.d( "aspectRatio: " + aspectRatio);
             double distortion = Math.abs(aspectRatio - screenAspectRatio);
-              ZxingLogUtils.d( "distortion: " + distortion);
+              AppLogUtils.d( "distortion: " + distortion);
             if (distortion > MAX_ASPECT_DISTORTION) {
                 continue;
             }
 
             if (maybeFlippedWidth == screenResolution.x && maybeFlippedHeight == screenResolution.y) {
                 Point exactPoint = new Point(realWidth, realHeight);
-                  ZxingLogUtils.d( "Found preview size exactly matching screen size: " + exactPoint);
+                  AppLogUtils.d( "Found preview size exactly matching screen size: " + exactPoint);
                 return exactPoint;
             }
 
@@ -324,7 +324,7 @@ public final class CameraConfigurationUtils {
         // the CPU is much more powerful.
         if (maxResPreviewSize != null) {
             Point largestSize = new Point(maxResPreviewSize.width, maxResPreviewSize.height);
-              ZxingLogUtils.d( "Using largest suitable preview size: " + largestSize);
+              AppLogUtils.d( "Using largest suitable preview size: " + largestSize);
             return largestSize;
         }
 
@@ -334,24 +334,24 @@ public final class CameraConfigurationUtils {
             throw new IllegalStateException("Parameters contained no preview size!");
         }
         Point defaultSize = new Point(defaultPreview.width, defaultPreview.height);
-          ZxingLogUtils.d( "No suitable preview sizes, using default: " + defaultSize);
+          AppLogUtils.d( "No suitable preview sizes, using default: " + defaultSize);
         return defaultSize;
     }
 
     private static String findSettableValue(String name,
                                             Collection<String> supportedValues,
                                             String... desiredValues) {
-          ZxingLogUtils.d( "Requesting " + name + " value from among: " + Arrays.toString(desiredValues));
-          ZxingLogUtils.d( "Supported " + name + " values: " + supportedValues);
+          AppLogUtils.d( "Requesting " + name + " value from among: " + Arrays.toString(desiredValues));
+          AppLogUtils.d( "Supported " + name + " values: " + supportedValues);
         if (supportedValues != null) {
             for (String desiredValue : desiredValues) {
                 if (supportedValues.contains(desiredValue)) {
-                      ZxingLogUtils.d( "Can set " + name + " to: " + desiredValue);
+                      AppLogUtils.d( "Can set " + name + " to: " + desiredValue);
                     return desiredValue;
                 }
             }
         }
-          ZxingLogUtils.d( "No supported values match");
+          AppLogUtils.d( "No supported values match");
         return null;
     }
 

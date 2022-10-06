@@ -1,4 +1,4 @@
-package com.yc.zxingserver.utils;
+package com.yc.zxingcodelib;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
