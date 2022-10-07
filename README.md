@@ -256,7 +256,7 @@
 |[IpcServer]() | IPC进程通信库  |  |
 |[EasyBleServer]() | 简单蓝牙库  | 蓝牙链接和配对，数据传递的简易版本封装库 |
 |[LogUpload]() | 日志上报库  | 支持上传本地路径日志文件到服务端，支持前后台上传和配置重试 |
-|[PrivateServer]() | 隐私合规API库  | 使用hook技术检测隐私合规api的调用堆栈 |
+|[PrivateServer]() | 隐私合规API库  |  |
 |[NetInterceptor]() | 网络日志拦截器  | 网络日志拦截器，可以打印完整json内容输出到控制台 |
 |[GlideProgressLib]() | Glide加载进度库   | 替换请求拦截即监听glide加载图片百分比进度 |
 |[CompressServer]() | 图片加载库  | 简易版本图片压缩库 |
@@ -303,7 +303,7 @@
 #### 10.2 诊断工具分类说明
 |工具库地址|库说明|功能介绍|
 |--  |--  |--  |
-|[MonitorPrivacy]()| 隐私合规检查 | |
+|[MonitorPrivacy]()| 隐私合规检查 | 使用hook技术检测隐私合规api的调用堆栈 |
 |[MonitorFileLib]()| 磁盘查看工具 | |
 |[MonitorNetLib]()| 网络抓包工具 | |
 |[MonitorCrashLib]()| 崩溃拦截工具 | |
