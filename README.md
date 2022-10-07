@@ -292,7 +292,7 @@
     - 事故总结，如何优化：系统改进、流程改进、开发红线
     - 总结的意义：看到问题，采取措施，以便在将来再次遇到问题时处理地更快更好
 - 稳定性建设架构图
-    - ![image]()
+    - ![image](https://github.com/yangchong211/YCAppTool/blob/master/Image/04.%E7%A8%B3%E5%AE%9A%E6%80%A7%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 
 
 
