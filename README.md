@@ -249,18 +249,18 @@
 |服务组件库地址|库说明|功能介绍|
 |--  |--  |--  |
 |[ImageServer]() | 图片压缩库  | 图片经典压缩库，高度压缩图片质量库 |
-|[HttpServer]() | 网络请求库  |  |
-|[ShareServer]() | 本地分享工具库  |  |
-|[NfcServer]() | NFC封装库  |  |
-|[GsonServer]() | 解析容错框架  |  |
+|[OkHttpServer]() | 网络请求库  | 简单对okhttp网络请求封装版本的网络库 |
+|[ShareServer]() | 本地分享工具库  | 调用本地分享，可以分享图片，文件等等 |
+|[NfcServer]() | NFC封装库  | 智能设备之间关于nfc通信交互的简单封装库 |
+|[GsonServer]() | 解析容错框架  | 解析gson数据容错框架，主要是对后台返回json数据实体偶发类型匹配错误校验 |
 |[IpcServer]() | IPC进程通信库  |  |
-|[EasyBleServer]() | 简单蓝牙库  |  |
-|[LogUpload]() | 日志上报库  |  |
-|[PrivateServer]() | 隐私合规API库  |  |
-|[NetInterceptor]() | 网络日志拦截器  |  |
-|[GlideProgressLib]() | Glide加载进度库   |  |
+|[EasyBleServer]() | 简单蓝牙库  | 蓝牙链接和配对，数据传递的简易版本封装库 |
+|[LogUpload]() | 日志上报库  | 支持上传本地路径日志文件到服务端，支持前后台上传和配置重试 |
+|[PrivateServer]() | 隐私合规API库  | 使用hook技术检测隐私合规api的调用堆栈 |
+|[NetInterceptor]() | 网络日志拦截器  | 网络日志拦截器，可以打印完整json内容输出到控制台 |
+|[GlideProgressLib]() | Glide加载进度库   | 替换请求拦截即监听glide加载图片百分比进度 |
 |[CompressServer]() | 图片加载库  | 简易版本图片压缩库 |
-|[BellsVibrations]() | 铃声和震动库  |  |
+|[BellsVibrations]() | 铃声和震动库  | 一键可以设置铃声，设置手机震动和调整声音的库 |
 
 
 

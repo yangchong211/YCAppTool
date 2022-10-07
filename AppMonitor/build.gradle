@@ -43,4 +43,5 @@ dependencies {
     implementation project(path: ':MonitorFileLib')
     implementation project(path: ':MonitorCrashLib')
     implementation project(path: ':MonitorSpeed')
+    implementation project(path: ':LeakCanarySdk')
 }
