@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.yc.appencryptlib.AesEncryptUtils;
-import com.yc.appencryptlib.RC4EncryptUtils;
+import com.yc.appencryptlib.Rc4EncryptUtils;
 import com.yc.appencryptlib.RsaEncryptUtils;
 import com.yc.appencryptlib.Base64Utils;
 import com.yc.appencryptlib.DesEncryptUtils;
@@ -302,15 +302,15 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         }
         yc.setInfo(stringBuilder.toString());
 
-        String encrypt1 = RC4EncryptUtils.encryptString(string, secretKey);
+        String encrypt1 = Rc4EncryptUtils.encryptString(string, secretKey);
         AppLogUtils.d("rc4计算加密字符串1: " + encrypt1);
-        String decrypt1 = RC4EncryptUtils.decryptString(encrypt1, secretKey);
+        String decrypt1 = Rc4EncryptUtils.decryptString(encrypt1, secretKey);
         AppLogUtils.d("rc4计算解密字符串1: " + decrypt1);
 
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bg_cloud_night);
-        String encrypt2 = RC4EncryptUtils.encryptToBase64(bitmap.getNinePatchChunk(), secretKey);
+        String encrypt2 = Rc4EncryptUtils.encryptToBase64(bitmap.getNinePatchChunk(), secretKey);
         AppLogUtils.d("rc4计算加密字符串2: " + encrypt2);
-        byte[] bytes = RC4EncryptUtils.decryptFromBase64(encrypt2, secretKey);
+        byte[] bytes = Rc4EncryptUtils.decryptFromBase64(encrypt2, secretKey);
         if (bytes!=null){
             Bitmap image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             ivImageView.setImageBitmap(image);
