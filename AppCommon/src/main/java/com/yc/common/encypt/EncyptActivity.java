@@ -1,10 +1,14 @@
 package com.yc.common.encypt;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.yc.appencryptlib.AesEncryptUtils;
+import com.yc.appencryptlib.RC4EncryptUtils;
 import com.yc.appencryptlib.RsaEncryptUtils;
 import com.yc.appencryptlib.Base64Utils;
 import com.yc.appencryptlib.DesEncryptUtils;
@@ -36,6 +40,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
     private RoundTextView tvView10;
     private RoundTextView tvView11;
     private RoundTextView tvView12;
+    private ImageView ivImageView;
 
     @Override
     public int getContentView() {
@@ -56,7 +61,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         tvView10 = findViewById(R.id.tv_view_10);
         tvView11 = findViewById(R.id.tv_view_11);
         tvView12 = findViewById(R.id.tv_view_12);
-
+        ivImageView = findViewById(R.id.iv_image_view);
     }
 
     @Override
@@ -79,6 +84,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         tvView3.setText("3.DES加解密案例");
         tvView4.setText("4.AES加解密案例");
         tvView5.setText("5.RSA加解密案例");
+        tvView6.setText("6.RC4加解密案例");
     }
 
     private void writeFile() {
@@ -114,6 +120,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         } else if (v == tvView5) {
             rsa();
         } else if (v == tvView6){
+            rc4();
         } else if (v == tvView7){
 
         }
@@ -280,11 +287,34 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
                 e.printStackTrace();
                 AppLogUtils.d("RSA计算解密字符串1: " + e.getMessage());
             }
-
-
         }
+    }
 
+    private void rc4() {
+        String string = "yangchongyangchongyangchongyangchong";
+        String secretKey = "yc123456";
+        YC yc = new YC();
+        yc.setAge(25);
+        yc.setName("杨充");
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int a=0 ; a<500 ; a++){
+            stringBuilder.append("都比小杨"+a);
+        }
+        yc.setInfo(stringBuilder.toString());
 
+        String encrypt1 = RC4EncryptUtils.encryptString(string, secretKey);
+        AppLogUtils.d("rc4计算加密字符串1: " + encrypt1);
+        String decrypt1 = RC4EncryptUtils.decryptString(encrypt1, secretKey);
+        AppLogUtils.d("rc4计算解密字符串1: " + decrypt1);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bg_cloud_night);
+        String encrypt2 = RC4EncryptUtils.encryptToBase64(bitmap.getNinePatchChunk(), secretKey);
+        AppLogUtils.d("rc4计算加密字符串2: " + encrypt2);
+        byte[] bytes = RC4EncryptUtils.decryptFromBase64(encrypt2, secretKey);
+        if (bytes!=null){
+            Bitmap image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            ivImageView.setImageBitmap(image);
+        }
     }
 
 }
