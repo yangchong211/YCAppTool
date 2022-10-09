@@ -1,5 +1,6 @@
 package com.yc.toolutils;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +9,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -45,6 +49,7 @@ import java.net.URL;
  */
 public final class BitmapUtils {
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public static Drawable getDrawable(@DrawableRes int id){
         Application context = AppToolUtils.getApp();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -63,13 +68,34 @@ public final class BitmapUtils {
         return drawableToBitmap(compatDrawable);
     }
 
+    /**
+     * ColorMatrix类有一个内置的方法可用于改变饱和度。把图变成灰色
+     * 传入一个大于1的数字将增加饱和度，而传入一个0～1之间的数字会减少饱和度。0值将产生一幅灰度图像。
+     * @param bitmap        bitmap图片对象
+     * @return              灰色图像
+     */
+    public static Bitmap greyBitmap(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        Bitmap faceIconGreyBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(faceIconGreyBitmap);
+        Paint paint = new Paint();
+        ColorMatrix colorMatrix = new ColorMatrix();
+        //起关键作用的是colorMatrix.setSaturation(0);  0会把图像变成灰度图。只有黑白。
+        colorMatrix.setSaturation(0);
+        ColorMatrixColorFilter colorMatrixFilter = new ColorMatrixColorFilter(colorMatrix);
+        paint.setColorFilter(colorMatrixFilter);
+        canvas.drawBitmap(bitmap, 0, 0, paint);
+        return faceIconGreyBitmap;
+    }
 
     public static Bitmap base64ToBitmap(String base64Data) {
         BitmapFactory.Options bitmapOption = new BitmapFactory.Options();
         bitmapOption.inPreferredConfig = Bitmap.Config.ARGB_4444;
         String[] split = base64Data.split(",");
         byte[] decodedString = Base64.decode(split[1], Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length, bitmapOption);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString,
+                0, decodedString.length, bitmapOption);
         return decodedByte;
     }
 
