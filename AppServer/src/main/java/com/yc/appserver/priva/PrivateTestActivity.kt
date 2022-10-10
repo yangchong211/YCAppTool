@@ -37,7 +37,7 @@ class PrivateTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_private_main)
         initView()
         initListener()
-        UserPrivacyHolder.installAppContext(this)
+        UserPrivacyHolder.installApp(this)
         UserPrivacyHolder.setIsInitUserPrivacy(true,true)
         LogUtils.i("Log test info : LogTestActivity is create")
         if (ContextCompat.checkSelfPermission(this,

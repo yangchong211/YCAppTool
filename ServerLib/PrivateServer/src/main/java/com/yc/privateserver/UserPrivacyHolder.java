@@ -15,7 +15,7 @@ public final class UserPrivacyHolder {
     private static volatile boolean isInitUserPrivacy;
     private static volatile boolean isQaOrDebug;
 
-    public static void installAppContext(@NonNull Context context) {
+    public static void installApp(@NonNull Context context) {
         if (appContext == null) {
             if (context instanceof Application) {
                 appContext = context;
@@ -26,8 +26,8 @@ public final class UserPrivacyHolder {
     }
 
     static Context getContext() {
-        if (appContext == null){
-            throw new NullPointerException("please set installAppContext at first");
+        if (appContext == null) {
+            throw new NullPointerException("please set installApp at first");
         }
         return appContext;
     }
@@ -41,14 +41,14 @@ public final class UserPrivacyHolder {
                 Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_DENIED;
     }
 
-    public static boolean isInitUserPrivacy(){
-        if(!isInitUserPrivacy && isQaOrDebug){
+    public static boolean isInitUserPrivacy() {
+        if (!isInitUserPrivacy && isQaOrDebug) {
             throw new RuntimeException("not ask permission before agreeing to the privacy");
         }
         return isInitUserPrivacy;
     }
 
-    public static void setIsInitUserPrivacy(boolean isInit,boolean isDebug){
+    public static void setIsInitUserPrivacy(boolean isInit, boolean isDebug) {
         isInitUserPrivacy = isInit;
         isQaOrDebug = isDebug;
     }

@@ -13,7 +13,7 @@ import androidx.annotation.RequiresPermission;
 
 import java.lang.reflect.Method;
 
-public class SafePrivateHelper {
+public final class SafePrivateHelper {
 
     /**
      * -------------------------------------------------------------------------------

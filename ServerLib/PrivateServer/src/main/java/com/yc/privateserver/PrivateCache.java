@@ -63,7 +63,7 @@ public final class PrivateCache {
      * mac 地址
      * 6组16进制数，比如
      */
-    public static volatile String mac = null;
+    public static volatile String MAC = null;
     /**
      * DEVICE_ID是设备ID标识，用于唯一标识设备，这个ID似乎并非是独立的一串数字，而会由于终端的硬件配置不同，所取到的结果不同。
      * 比如GSM手机DEVICE_ID可能是IMEI号，CDMA手机可能是MEID，不带MODEM的手机可能会返回NULL，也可能返回其它唯一值
