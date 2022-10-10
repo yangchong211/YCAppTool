@@ -99,17 +99,6 @@ public final class BitmapUtils {
         return decodedByte;
     }
 
-    public static boolean isBase64Img(String imgurl) {
-        if (!TextUtils.isEmpty(imgurl) && (
-                imgurl.startsWith("data:image/png;base64,")
-                        || imgurl.startsWith("data:image/*;base64,")
-                        || imgurl.startsWith("data:image/jpg;base64,")
-                        || imgurl.startsWith("data:image/jpeg;base64,"))) {
-            return true;
-        }
-        return false;
-    }
-
     /**
      * 请求网络图片转化成bitmap
      * @param url                       url

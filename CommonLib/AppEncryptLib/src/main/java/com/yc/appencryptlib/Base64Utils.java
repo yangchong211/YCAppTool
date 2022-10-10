@@ -1,5 +1,6 @@
 package com.yc.appencryptlib;
 
+import android.text.TextUtils;
 import android.util.Base64;
 
 import java.io.UnsupportedEncodingException;
@@ -37,6 +38,22 @@ public final class Base64Utils {
         }
         String base64Pattern = "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$";
         return Pattern.matches(base64Pattern, str);
+    }
+
+    /**
+     * 是否是base64图片
+     * @param imgUrl            image图片字符串
+     * @return
+     */
+    public static boolean isBase64Img(String imgUrl) {
+        if (!TextUtils.isEmpty(imgUrl) && (
+                imgUrl.startsWith("data:image/png;base64,")
+                        || imgUrl.startsWith("data:image/*;base64,")
+                        || imgUrl.startsWith("data:image/jpg;base64,")
+                        || imgUrl.startsWith("data:image/jpeg;base64,"))) {
+            return true;
+        }
+        return false;
     }
 
     /**
