@@ -89,6 +89,23 @@ public final class BitmapUtils {
         return faceIconGreyBitmap;
     }
 
+
+    /**
+     * 旋转Bitmap
+     *
+     * @param bitmap            bitmap
+     * @param angle             旋转角度
+     * @return
+     */
+    public static Bitmap rotatingImage(Bitmap bitmap, int angle) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+    }
+
+
     public static Bitmap base64ToBitmap(String base64Data) {
         BitmapFactory.Options bitmapOption = new BitmapFactory.Options();
         bitmapOption.inPreferredConfig = Bitmap.Config.ARGB_4444;
