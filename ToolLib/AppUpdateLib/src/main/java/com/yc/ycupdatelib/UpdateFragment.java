@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -506,8 +507,15 @@ public class UpdateFragment extends BaseDialogFragment implements View.OnClickLi
             return;
         }
         Intent intent = new Intent();
-        PendingIntent pendingIntent = PendingIntent.getActivity(mActivity,
-                0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent;
+        if (Build.VERSION.SDK_INT >= 31){
+            //处理Android 12。对应的level 是 31
+            pendingIntent = PendingIntent.getActivity(mActivity,
+                    0, intent, PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            pendingIntent = PendingIntent.getActivity(mActivity,
+                    0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
         RemoteViews remoteViews = new RemoteViews(mActivity.getPackageName(), R.layout.remote_notification_view);
         remoteViews.setTextViewText(R.id.tvTitle, "下载apk");
         remoteViews.setProgressBar(R.id.pb, 100, progress, false);
