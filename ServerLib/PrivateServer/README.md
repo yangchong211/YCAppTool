@@ -78,7 +78,38 @@
 
 
 ### 03.Api调用说明
-
+- 在App初始化的时候调用代码如下所示：
+    ``` java
+    UserPrivacyHolder.installApp(this)
+    ```
+- 当用户点击启动页面的隐私同意按钮之后，调用代码如下所示
+    - 备注：只要调用下面代码之后，获取一些设备参数才会是真正正确的数据。
+    ``` java
+    UserPrivacyHolder.setIsInitUserPrivacy(true,true)
+    ```
+- 获取一些设备参数的Api如下所示
+    ``` kotlin
+    //获取Android唯一标识符
+    val androidId = PrivateService.getAndroidId()
+    //获取MEID
+    val meid = PrivateService.getMEID()
+    //获取IMEI1
+    val imei1 = PrivateService.getImei1()
+    //获取IMEI1
+    val imei2 = PrivateService.getImei2()
+    //获取IMEI
+    val imei = PrivateService.getImei()
+    //获取手机的SN
+    val sn = PrivateService.getSN()
+    //获取手机运营商
+    val providerName = PrivateService.getProviderName()
+    //获取Sim卡的运营商Id
+    val operatorId = PrivateService.getOperatorId()
+    //获取卡的运营商名称
+    val operatorName = PrivateService.getOperatorName()
+    //获取设备id
+    val deviceId = PrivateService.getDeviceId()
+    ```
 
 
 ### 04.测试case罗列

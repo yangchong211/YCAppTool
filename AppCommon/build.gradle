@@ -87,7 +87,7 @@ dependencies {
 //    implementation project(path: ':AppCommonInter')
 //    implementation project(path: ':AppStatusLib')
 //    implementation project(path: ':ArchitectureLib')
-//    implementation project(path: ':EventUploadLib')
+    implementation project(path: ':EventUploadLib')
 //    implementation project(path: ':AppPermission')
 //    implementation project(path: ':FragmentManager')
 //    implementation project(path: ':ReflectionLib')

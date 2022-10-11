@@ -55,11 +55,32 @@ class PrivateTestActivity : AppCompatActivity() {
     }
 
     private fun initListener() {
+
         tvTest1.setOnClickListener {
+            //获取Android唯一标识符
+            val androidId = PrivateService.getAndroidId()
+//            //获取IMEI1
+//            val imei1 = PrivateService.getImei1()
+//            //获取IMEI1
+//            val imei2 = PrivateService.getImei2()
+//            //获取IMEI
+//            val imei = PrivateService.getImei()
+//            //获取手机的SN
+//            val sn = PrivateService.getSN()
+//            //获取手机运营商
+//            val providerName = PrivateService.getProviderName()
+//            //获取Sim卡的运营商Id
+//            val operatorId = PrivateService.getOperatorId()
+//            //获取卡的运营商名称
+//            val operatorName = PrivateService.getOperatorName()
+//            //获取设备id
+//            val deviceId = PrivateService.getDeviceId()
             val sb = StringBuilder()
-            sb.append("AndroidId:  ").append(PrivateService.getAndroidId())
+            sb.append("AndroidId:  ").append(androidId)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                sb.append("\nMEID:  ").append(PrivateService.getMEID())
+                //获取MEID
+                val meid = PrivateService.getMEID()
+                sb.append("\nMEID:  ").append(meid)
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 sb.append("\nIMEI1:  ").append(PrivateService.getImei1())

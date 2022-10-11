@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.yc.apploglib.config.AppLogConfig;
 import com.yc.apploglib.config.AppLogFactory;
+import com.yc.common.impl.PermissionDialogImpl;
+import com.yc.eventuploadlib.PermissionDialog;
 import com.yc.store.config.CacheConfig;
 import com.yc.store.config.CacheInitHelper;
 import com.yc.toolutils.file.AppFileUtils;
@@ -16,6 +18,7 @@ public class CommonApplication extends Application {
         super.onCreate();
         initAppCache();
         initAppLog();
+        PermissionDialog.setPermissionDialog(new PermissionDialogImpl());
     }
 
     private void initAppLog() {

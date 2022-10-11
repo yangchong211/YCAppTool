@@ -22,6 +22,7 @@ public final class SafePrivateHelper {
     @Nullable
     protected static String getDeviceId() {
         if(!UserPrivacyHolder.isInitUserPrivacy()){
+            //如果没有设置同意隐私政策，那么获取的设备参数传递空。这样避免调用在隐私协议政策前调用导致不合规！
             return null;
         }
         if (UserPrivacyHolder.hasReadPhoneStatePermission()) {
