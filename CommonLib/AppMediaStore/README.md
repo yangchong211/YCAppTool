@@ -17,6 +17,7 @@
 - 每个内部类中都又包含了Media，Thumbnails和相应的MediaColumns，分别提供了媒体信息，缩略信息和操作字段。
 
 
+#### 1.4 获取文件mimeType
 
 
 

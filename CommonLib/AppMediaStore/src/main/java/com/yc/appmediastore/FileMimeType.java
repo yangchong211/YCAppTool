@@ -3,8 +3,10 @@ package com.yc.appmediastore;
 import android.content.Context;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
+import android.webkit.MimeTypeMap;
 
 import java.io.File;
+import java.util.Locale;
 
 public final class FileMimeType {
 
@@ -37,4 +39,33 @@ public final class FileMimeType {
         }
         return mime;
     }
+
+    private static String getSuffix(File file) {
+        if (file == null || !file.exists() || file.isDirectory()) {
+            return null;
+        }
+        String fileName = file.getName();
+        if ("".equals(fileName) || fileName.endsWith(".")) {
+            return null;
+        }
+        int index = fileName.lastIndexOf(".");
+        if (index != -1) {
+            return fileName.substring(index + 1).toLowerCase(Locale.getDefault());
+        } else {
+            return null;
+        }
+    }
+
+    public static String getMimeType(File file){
+        String suffix = getSuffix(file);
+        if (suffix == null) {
+            return "file/*";
+        }
+        String type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(suffix);
+        if (type != null && !type.isEmpty()) {
+            return type;
+        }
+        return "file/*";
+    }
+
 }
