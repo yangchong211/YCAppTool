@@ -1,4 +1,4 @@
-package com.yc.toolutils;
+package com.yc.imagetoollib;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
@@ -47,11 +47,10 @@ import java.net.URL;
  *     revise :
  * </pre>
  */
-public final class BitmapUtils {
+public final class AppBitmapUtils {
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public static Drawable getDrawable(@DrawableRes int id){
-        Application context = AppToolUtils.getApp();
+    public static Drawable getDrawable(Context context,@DrawableRes int id){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return context.getResources().getDrawable(id,context.getTheme());
         } else {
@@ -59,12 +58,12 @@ public final class BitmapUtils {
         }
     }
 
-    public static Drawable getCompatDrawable(@DrawableRes int id){
-        return ContextCompat.getDrawable(AppToolUtils.getApp(), id);
+    public static Drawable getCompatDrawable(Context context,@DrawableRes int id){
+        return ContextCompat.getDrawable(context, id);
     }
 
-    public static Bitmap getBitmap(@DrawableRes int id){
-        Drawable compatDrawable = getDrawable(id);
+    public static Bitmap getBitmap(Context context,@DrawableRes int id){
+        Drawable compatDrawable = getDrawable(context,id);
         return drawableToBitmap(compatDrawable);
     }
 
@@ -115,52 +114,6 @@ public final class BitmapUtils {
                 0, decodedString.length, bitmapOption);
         return decodedByte;
     }
-
-    /**
-     * 请求网络图片转化成bitmap
-     * @param url                       url
-     * @return                          将url图片转化成bitmap对象
-     */
-    public static Bitmap returnBitMap(String url) {
-        long l1 = System.currentTimeMillis();
-        URL myFileUrl = null;
-        Bitmap bitmap = null;
-        HttpURLConnection conn = null;
-        InputStream is = null;
-        try {
-            myFileUrl = new URL(url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        if (myFileUrl==null){
-            return null;
-        }
-        try {
-            conn = (HttpURLConnection) myFileUrl.openConnection();
-            conn.setConnectTimeout(10000);
-            conn.setReadTimeout(5000);
-            conn.setDoInput(true);
-            conn.connect();
-            is = conn.getInputStream();
-            bitmap = BitmapFactory.decodeStream(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (is != null) {
-                    is.close();
-                    conn.disconnect();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            long l2 = System.currentTimeMillis();
-            long time = (l2-l1) ;
-            Log.e("毫秒值",time+"");
-        }
-        return bitmap;
-    }
-
 
     /**
      * 将drawable转化成bitmap
@@ -216,40 +169,6 @@ public final class BitmapUtils {
         Bitmap resizeBmp = Bitmap.createBitmap(bitmap, 0, 0,
                 bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         return resizeBmp;
-    }
-
-    public static Bitmap convertViewToBitMap(View view){
-        // 打开图像缓存
-        view.setDrawingCacheEnabled(true);
-        // 必须调用measure和layout方法才能成功保存可视组件的截图到png图像文件
-        // 测量View大小
-        int i = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        int n = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        view.measure(i, n);
-        // 发送位置和尺寸到View及其所有的子View
-        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
-        // 获得可视组件的截图
-        Bitmap bitmap = view.getDrawingCache();
-        return bitmap;
-    }
-
-
-    public static Bitmap loadBitmapFromView(View v) {
-        v.measure(0, 0);
-        int w = v.getMeasuredWidth();
-        int h = v.getMeasuredHeight();
-        if (w <= 0 || h <= 0) {
-            DisplayMetrics metric = new DisplayMetrics();
-            w = metric.widthPixels;// 屏幕宽度（像素）
-            h = metric.heightPixels;// 屏幕高度（像素）
-        }
-        Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        Canvas c = new Canvas(bmp);
-        c.drawColor(Color.WHITE);
-        //如果不设置canvas画布为白色，则生成透明
-        v.layout(0, 0, w, h);
-        v.draw(c);
-        return bmp;
     }
 
 
