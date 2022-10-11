@@ -3,13 +3,15 @@ package com.yc.compress;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import java.io.ByteArrayOutputStream;
+import com.yc.appfilelib.BaseIoUtils;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 
 enum Checker {
+    /**
+     * 单例对象
+     */
     SINGLE;
 
     private static final String TAG = "Luban";
@@ -24,14 +26,14 @@ enum Checker {
      * @param is image file input stream
      */
     boolean isJPG(InputStream is) {
-        return isJPG(toByteArray(is));
+        return isJPG(BaseIoUtils.toByteArray(is));
     }
 
     /**
      * Returns the degrees in clockwise. Values are 0, 90, 180, or 270.
      */
     int getOrientation(InputStream is) {
-        return getOrientation(toByteArray(is));
+        return getOrientation(BaseIoUtils.toByteArray(is));
     }
 
     private boolean isJPG(byte[] data) {
@@ -174,29 +176,4 @@ enum Checker {
         return value;
     }
 
-    private byte[] toByteArray(InputStream is) {
-        if (is == null) {
-            return new byte[0];
-        }
-
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-
-        int read;
-        byte[] data = new byte[4096];
-
-        try {
-            while ((read = is.read(data, 0, data.length)) != -1) {
-                buffer.write(data, 0, read);
-            }
-        } catch (Exception ignored) {
-            return new byte[0];
-        } finally {
-            try {
-                buffer.close();
-            } catch (IOException ignored) {
-            }
-        }
-
-        return buffer.toByteArray();
-    }
 }

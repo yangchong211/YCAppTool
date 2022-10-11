@@ -19,6 +19,34 @@ public final class BaseIoUtils {
      * 将流对象转化为byte字节
      * @param inputStream           is流
      * @return                      byte字节
+     */
+    public static byte[] toByteArray(InputStream inputStream) {
+        if (inputStream == null) {
+            return new byte[0];
+        }
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int read;
+        byte[] data = new byte[4096];
+        try {
+            while ((read = inputStream.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, read);
+            }
+        } catch (Exception ignored) {
+            return new byte[0];
+        } finally {
+            try {
+                buffer.close();
+            } catch (IOException ignored) {
+            }
+        }
+
+        return buffer.toByteArray();
+    }
+
+    /**
+     * 将流对象转化为byte字节
+     * @param inputStream           is流
+     * @return                      byte字节
      * @throws IOException
      */
     public static byte[] readBytes(InputStream inputStream) throws IOException {

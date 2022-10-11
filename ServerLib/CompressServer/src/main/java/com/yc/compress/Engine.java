@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 
+import com.yc.imagetoollib.AppBitmapUtils;
 import com.yc.imagetoollib.PicCalculateUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -35,14 +36,6 @@ class Engine {
         this.srcHeight = options.outHeight;
     }
 
-    private Bitmap rotatingImage(Bitmap bitmap, int angle) {
-        Matrix matrix = new Matrix();
-
-        matrix.postRotate(angle);
-
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-    }
-
     File compress() throws IOException {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = PicCalculateUtils.computeSize(srcWidth,srcHeight);
@@ -51,7 +44,7 @@ class Engine {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         if (Checker.SINGLE.isJPG(srcImg.open())) {
-            tagBitmap = rotatingImage(tagBitmap, Checker.SINGLE.getOrientation(srcImg.open()));
+            tagBitmap = AppBitmapUtils.rotatingImage(tagBitmap, Checker.SINGLE.getOrientation(srcImg.open()));
         }
         tagBitmap.compress(focusAlpha ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG, 60, stream);
         tagBitmap.recycle();
