@@ -2,12 +2,13 @@ package com.yc.compress;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.yc.easyexecutor.DelegateTaskExecutor;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -125,8 +126,7 @@ public class Luban implements Handler.Callback {
 
         while (iterator.hasNext()) {
             final InputStreamProvider path = iterator.next();
-
-            AsyncTask.SERIAL_EXECUTOR.execute(new Runnable() {
+            DelegateTaskExecutor.getInstance().executeOnDiskIO(new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -140,7 +140,6 @@ public class Luban implements Handler.Callback {
                     }
                 }
             });
-
             iterator.remove();
         }
     }
