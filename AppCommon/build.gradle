@@ -38,7 +38,7 @@ dependencies {
 //    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.3.5'
     implementation 'com.github.yangchong211.YCCommonLib:ComponentLib:1.3.5'
     //工具类utils
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.3.5'
+//    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.3.5'
     //activity栈管理
     implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.3.5'
     //通用缓存存储库，支持sp，fastsp，mmkv，lruCache，DiskLruCache等
@@ -78,7 +78,7 @@ dependencies {
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':BaseVpAdapter')
 //    implementation project(path: ':ComponentLib')
-//    implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':ToolUtilsLib')
 //    implementation project(path: ':ActivityManager')
 //    implementation project(path: ':AppBaseStore')
 //    implementation project(path: ':AppLogLib')

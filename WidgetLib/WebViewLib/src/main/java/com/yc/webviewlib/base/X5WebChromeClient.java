@@ -33,6 +33,7 @@ import com.tencent.smtt.export.external.interfaces.PermissionRequest;
 import com.tencent.smtt.sdk.ValueCallback;
 import com.tencent.smtt.sdk.WebStorage;
 import com.tencent.smtt.sdk.WebView;
+import com.yc.toolutils.AppIntentUtils;
 import com.yc.webviewlib.inter.InterWebListener;
 import com.yc.webviewlib.inter.VideoWebListener;
 import com.yc.webviewlib.utils.X5LogUtils;
@@ -457,10 +458,8 @@ public class X5WebChromeClient extends VideoWebChromeClient {
         if (context!=null && context instanceof Activity){
             Activity activity = (Activity) context;
             mUploadMessage = uploadMsg;
-            Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-            i.addCategory(Intent.CATEGORY_OPENABLE);
-            i.setType("image/*");
-            activity.startActivityForResult(Intent.createChooser(i, "文件选择"), FILE_CHOOSER_RESULT_CODE);
+            Intent photoIntent = AppIntentUtils.getPhotoIntent2();
+            activity.startActivityForResult(photoIntent, FILE_CHOOSER_RESULT_CODE);
         }
     }
 

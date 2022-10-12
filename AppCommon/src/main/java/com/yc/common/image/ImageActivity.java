@@ -25,6 +25,7 @@ import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppIntentUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppWindowUtils;
 
@@ -95,14 +96,9 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if (v == tvView1) {
-//            Intent intent = new Intent();
-//            intent.setType("image/*");
-//            intent.addCategory(Intent.ACTION_GET_CONTENT);
-//            startActivityForResult(Intent.createChooser(intent,"Browser Image..."),1024);
-
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-            startActivityForResult(intent, 1024);
+            //Intent photoIntent = AppIntentUtils.getPhotoIntent();
+            Intent photoIntent = AppIntentUtils.getPhotoIntent2();
+            startActivityForResult(photoIntent, 1024);
         } else if (v == tvView2) {
 
         }

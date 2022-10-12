@@ -350,6 +350,30 @@ public final class AppIntentUtils {
     }
 
     /**
+     * 获取相册的意图
+     *
+     * @return 相册的意图
+     */
+    public static Intent getPhotoIntent() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        return intent;
+    }
+
+    /**
+     * 获取相册的意图
+     *
+     * @return 文件图片的意图
+     */
+    public static Intent getPhotoIntent2() {
+        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+        i.addCategory(Intent.CATEGORY_OPENABLE);
+        i.setType("image/*");
+        Intent intent = Intent.createChooser(i, "文件选择");
+        return intent;
+    }
+
+    /**
      * 获取拍照的意图
      *
      * @param outUri 输出的 uri
@@ -372,6 +396,8 @@ public final class AppIntentUtils {
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         return getIntent(intent, isNewTask);
     }
+
+
 
     private static Intent getIntent(final Intent intent, final boolean isNewTask) {
         return isNewTask ? intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) : intent;
