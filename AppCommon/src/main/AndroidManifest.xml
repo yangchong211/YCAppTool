@@ -26,6 +26,7 @@
         <activity android:name=".vp.ViewPagerActivity"/>
         <activity android:name=".tab.VpTabActivity"/>
         <activity android:name=".encypt.EncyptActivity"/>
+        <activity android:name=".image.ImageActivity"/>
     </application>
 
 

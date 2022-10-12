@@ -155,7 +155,14 @@
     <ImageView
         android:id="@+id/iv_image_view"
         android:layout_marginTop="@dimen/dp10"
-        android:layout_width="200dp"
-        android:layout_height="100dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/iv_image_view2"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

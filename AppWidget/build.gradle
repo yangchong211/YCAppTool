@@ -53,5 +53,6 @@ dependencies {
     implementation project(path: ':RedDotView')
     implementation project(path: ':ExpandLib')
     implementation project(path: ':FloatWindow')
+    implementation project(path: ':ImageToolLib')
 }
 

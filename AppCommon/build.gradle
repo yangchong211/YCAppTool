@@ -103,4 +103,7 @@ dependencies {
     implementation project(path: ':MonitorFileLib')
     implementation project(path: ':AppLruCache')
     implementation project(path: ':AppLruDisk')
+    implementation project(path: ':CompressServer')
+    implementation project(path: ':AppCompress')
+    implementation project(path: ':ImageToolLib')
 }

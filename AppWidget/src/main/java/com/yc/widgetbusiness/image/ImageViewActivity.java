@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.imagetoollib.AppBitmapUtils;
 import com.yc.statusbar.bar.StateAppBar;
-import com.yc.toolutils.BitmapUtils;
 import com.yc.widgetbusiness.R;
 
 
@@ -39,16 +39,16 @@ public class ImageViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_view);
         StateAppBar.setStatusBarLightMode(this, Color.WHITE);
-        ImageView iv_image1 = findViewById(R.id.iv_image1);
-        ImageView iv_image7 = findViewById(R.id.iv_image7);
+        ImageView ivImage1 = findViewById(R.id.iv_image1);
+        ImageView ivImage7 = findViewById(R.id.iv_image7);
         //给图片设置灰色显示
         ColorMatrix matrix = new ColorMatrix();
         matrix.setSaturation(0);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
-        iv_image1.setColorFilter(filter);
+        ivImage1.setColorFilter(filter);
 
-        Bitmap bitmap = BitmapUtils.getBitmap(R.drawable.bg_kites_min);
-        Bitmap greyBitmap = BitmapUtils.greyBitmap(bitmap);
-        iv_image7.setImageBitmap(greyBitmap);
+        Bitmap bitmap = AppBitmapUtils.getBitmap(this,R.drawable.bg_kites_min);
+        Bitmap greyBitmap = AppBitmapUtils.greyBitmap(bitmap);
+        ivImage7.setImageBitmap(greyBitmap);
     }
 }
