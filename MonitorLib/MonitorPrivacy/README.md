@@ -107,8 +107,18 @@
     - https://weishu.me/2017/11/23/dexposed-on-art/
 
 
-
-
+#### 5.5 参考博客
+- 利用Xposed工具检测隐私api调用
+    - https://github.com/ChenJunsen/Hegui3.0
+- 用户隐私安全规划
+    - https://wiki.zuoyebang.cc/pages/viewpage.action?pageId=319020634
+- epic是weishu大神开源的一个Hook框架，支持ART上的Java方法HOOK。
+    - epic相当于ART上的Dexposed，所以也是Xposed-Style Method Hook。
+- http://www.45fan.com/article.php?aid=1yyCmAXXM31pnFuG
+- Android 隐私合规静态检查
+    - https://mp.weixin.qq.com/s/U06HZb1P5Z2bK_ibtJk9KA
+    - https://juejin.cn/post/7046269884207988744
+- 隐私权限整理笔记：https://blog.csdn.net/zjy764219923/article/details/123559789
 
 
 
