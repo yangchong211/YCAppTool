@@ -6,7 +6,7 @@ import android.text.TextUtils;
  * @author yangchong
  * time  : 2018/11/9
  * GitHub : https://github.com/yangchong211/YCCommonLib
- * desc  : 图片计算工具类
+ * desc  : 图片类型工具类
  * revise:
  */
 public final class PicMimeTypeUtils {

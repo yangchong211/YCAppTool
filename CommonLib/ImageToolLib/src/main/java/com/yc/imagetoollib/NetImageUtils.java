@@ -10,6 +10,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2020/07/22
+ *     desc   : 网络图片请求工具
+ *     revise :
+ * </pre>
+ */
 public final class NetImageUtils {
 
 

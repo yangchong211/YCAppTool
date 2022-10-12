@@ -1,6 +1,7 @@
 package com.yc.imagetoollib;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +30,8 @@ import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -68,6 +71,26 @@ public final class AppBitmapUtils {
     }
 
     /**
+     * 把Bitmap转Byte
+     */
+    public static byte[] bitmap2Bytes(Bitmap bm){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+
+    /**
+     * 把Bitmap转Byte
+     */
+    public static InputStream bitmap2InputStream(Bitmap bm){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] bytes = baos.toByteArray();
+        InputStream isBm = new ByteArrayInputStream(bytes);
+        return isBm;
+    }
+
+    /**
      * ColorMatrix类有一个内置的方法可用于改变饱和度。把图变成灰色
      * 传入一个大于1的数字将增加饱和度，而传入一个0～1之间的数字会减少饱和度。0值将产生一幅灰度图像。
      * @param bitmap        bitmap图片对象
@@ -76,11 +99,14 @@ public final class AppBitmapUtils {
     public static Bitmap greyBitmap(Bitmap bitmap) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
+        //创建一个指定宽度和高度的可变位图
         Bitmap faceIconGreyBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        //用要绘制的指定位图构造一个画布。位图必须是可变的。
         Canvas canvas = new Canvas(faceIconGreyBitmap);
+        //然后创建画笔，在画板canvas上画出来
         Paint paint = new Paint();
         ColorMatrix colorMatrix = new ColorMatrix();
-        //起关键作用的是colorMatrix.setSaturation(0);  0会把图像变成灰度图。只有黑白。
+        //设置饱和度，起关键作用的是colorMatrix.setSaturation(0);  0会把图像变成灰度图。只有黑白。
         colorMatrix.setSaturation(0);
         ColorMatrixColorFilter colorMatrixFilter = new ColorMatrixColorFilter(colorMatrix);
         paint.setColorFilter(colorMatrixFilter);
@@ -171,31 +197,4 @@ public final class AppBitmapUtils {
         return resizeBmp;
     }
 
-
-    public static boolean saveBitmap(Context context, Bitmap bitmap, String filePath) {
-        File file = new File(filePath);
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-            //把文件插入到系统图库
-            try {
-                MediaStore.Images.Media.insertImage(context.getContentResolver(),
-                        file.getAbsolutePath(), file.getName(), null);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            // 最后通知图库更新
-            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                    Uri.parse("file://" + file)));
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 }
