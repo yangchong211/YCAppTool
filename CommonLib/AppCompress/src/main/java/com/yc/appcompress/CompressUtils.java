@@ -22,26 +22,6 @@ import java.io.InputStream;
  */
 public final class CompressUtils {
 
-    /**
-     * 把Bitmap转Byte
-     */
-    protected static byte[] bitmap2Bytes(Bitmap bm){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        return baos.toByteArray();
-    }
-
-    /**
-     * 把Bitmap转Byte
-     */
-    protected static InputStream bitmap2InputStream(Bitmap bm){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] bytes = baos.toByteArray();
-        InputStream isBm = new ByteArrayInputStream(bytes);
-        return isBm;
-    }
-
 
     /**
      * 图片缩放
