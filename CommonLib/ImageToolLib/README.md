@@ -8,7 +8,7 @@
 
 
 ### 01.基础概念介绍
-
+#### 1.1 图片的常见格式
 
 
 
@@ -41,15 +41,69 @@
     - 获取了图片的旋转方向后，然后再设置图像旋转。最后Bitmap提供的静态createBitmap方法，可以对图片设置旋转角度。
 
 
+#### 2.5 保存图片且刷相册
+
 
 
 ### 03.Api调用说明
+#### 3.1 如何依赖该库
+- 依赖maven仓库如下所示
+    ``` java
+    
+    ```
+
+
+#### 3.2 如何使用Api
+- 获取bitmap相关api
+    ``` java
+    //通过资源id获取bitmap位图
+    Bitmap bitmap = AppBitmapUtils.getBitmap(this,R.drawable.bg_kites_min);
+    //将图片设置成灰色
+    Bitmap greyBitmap = AppBitmapUtils.greyBitmap(bitmap);
+    //旋转Bitmap的角度，获取一张新的图片
+    Bitmap rotatingImage = AppBitmapUtils.rotatingImage(bitmap, degree);
+    ```
+- 图片保存到本地文件api
+    ``` kotlin
+    val image = AppFileUtils.getExternalFilePath(this, "image")
+    val fileName = image + File.separator + "yc12345678.png"
+    val saveBitmapAsPng = BitmapUtils.saveBitmapAsPng(greyBitmap, fileName)
+    
+    //把图片加入到系统图库中
+    ImageSaveUtils.insertImage(ImageActivity.this,file);
+    ```
+- 计算图片一些属性api
+    ``` java
+    //读取图片属性：旋转的角度
+    int degree = PicCalculateUtils.readPictureDegree(this, path);
+    ```
+- 将view转化为bitmap相关api
+    ``` java
+    
+    ```
+
+
 
 
 ### 04.遇到的坑分析
+#### 4.1 刷新图片库弊端
+- 调用系统提供的插入图库的方法：
+    ``` java
+    sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+    ```
+    - 上面那条广播是扫描整个sd卡的广播，如果你sd卡里面东西很多会扫描很久，所以这样子用户体现很不好。
+- 解决办法如下所示
+    ``` java
+    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File("/sdcard/YC/image.jpg"))););
+    ```
+
+
+
 
 
 ### 05.其他问题说明
+#### 5.1 保存图片到相册思考
+- 在本地保存了文件，然后插入图库。删除本地文件，图库中图片会消失吗？
 
 
 

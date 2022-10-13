@@ -44,6 +44,7 @@ dependencies {
     //查询地址：https://mvnrepository.com/artifact/com.tencent.tbs.tbssdk/sdk?repo=jcenter
     //api 'com.tencent.tbs.tbssdk:sdk:43967'
     api files('libs/tbs_sdk_thirdapp_v4.3.0.67_43967_sharewithdownloadwithfile_withoutGame_obfs_20200923_120452.jar')
+    implementation project(path: ':ImageToolLib')
     //x5库
     //仅仅在编译时使用，但最终不会被编译到apk或aar里
     //provided files('libs/tbs_sdk_thirdapp_v4.3.0.3_43903_sharewithdownloadwithfile_withoutGame_obfs_20200402_121309.jar')

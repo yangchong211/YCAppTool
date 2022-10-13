@@ -45,6 +45,14 @@
 
 
 ### 03.Api调用说明
+#### 3.1 如何依赖
+- 依赖如下所示
+    ``` java
+    implementation 'com.github.yangchong211.YCWidgetLib:RoundCorners:1.0.5'
+    ```
+
+
+#### 3.2 如何使用
 - 具有特点
     - LinearLayout、RelativeLayout、FrameLayout、ConstraintLayout支持圆角
     - ImageView、TextView、View、Button支持圆角

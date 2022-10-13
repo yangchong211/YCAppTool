@@ -10,6 +10,7 @@ import android.util.Log;
 
 
 import com.yc.appfilelib.SdCardUtils;
+import com.yc.imagetoollib.ImageSaveUtils;
 import com.yc.toolutils.AppToolUtils;
 
 import java.io.File;
@@ -99,7 +100,7 @@ public final class GlideSaveUtils {
             fos.flush();
             fos.close();
             if(isScanner){
-                scanner(context,savePath);
+                ImageSaveUtils.scannerImage(context,savePath);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,16 +109,6 @@ public final class GlideSaveUtils {
         return savePath;
     }
 
-    private static void scanner(Context context, String filePath) {
-        MediaScannerConnection.scanFile(context,
-                new String[]{filePath}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                    @Override
-                    public void onScanCompleted(String path, Uri uri) {
-                        Log.i("ExternalStorage", "Scanned " + path + ":");
-                        Log.i("ExternalStorage", "-> uri=" + uri);
-                    }
-                });
-    }
 
     /**
      * 获取本地图片保存路径

@@ -27,6 +27,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 
 import com.tencent.smtt.sdk.WebView;
+import com.yc.imagetoollib.ImageSaveUtils;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.EncodeUtils;
 import com.yc.webviewlib.utils.OkHttpUtils;
@@ -150,20 +151,7 @@ public final class SaveImageProcessor {
         if (imagePath==null || imagePath.length()==0 || context==null){
             return;
         }
-        try {
-            // notify the system media
-            MediaStore.Images.Media.insertImage(context.getContentResolver(), imagePath, "", "");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                final Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                final Uri contentUri = Uri.parse(imagePath);
-                scanIntent.setData(contentUri);
-                context.sendBroadcast(scanIntent);
-            } else {
-                context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse(imagePath)));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ImageSaveUtils.insertImage(context, imagePath);
     }
 
 }

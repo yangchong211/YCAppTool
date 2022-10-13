@@ -65,6 +65,12 @@ public final class AppBitmapUtils {
         return ContextCompat.getDrawable(context, id);
     }
 
+    /**
+     * 通过资源id获取bitmap位图
+     * @param context       上下文
+     * @param id            资源id
+     * @return
+     */
     public static Bitmap getBitmap(Context context,@DrawableRes int id){
         Drawable compatDrawable = getDrawable(context,id);
         return drawableToBitmap(compatDrawable);
@@ -116,7 +122,7 @@ public final class AppBitmapUtils {
 
 
     /**
-     * 旋转Bitmap
+     * 旋转Bitmap的角度，获取一张新的图片
      *
      * @param bitmap            bitmap
      * @param angle             旋转角度
@@ -130,7 +136,11 @@ public final class AppBitmapUtils {
         return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
     }
 
-
+    /**
+     * 将base64字符串转化为bitmap
+     * @param base64Data                        图片base64
+     * @return
+     */
     public static Bitmap base64ToBitmap(String base64Data) {
         BitmapFactory.Options bitmapOption = new BitmapFactory.Options();
         bitmapOption.inPreferredConfig = Bitmap.Config.ARGB_4444;
