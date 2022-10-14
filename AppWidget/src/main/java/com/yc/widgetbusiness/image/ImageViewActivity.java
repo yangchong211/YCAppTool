@@ -47,7 +47,9 @@ public class ImageViewActivity extends AppCompatActivity {
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
         ivImage1.setColorFilter(filter);
 
+        //通过资源id获取bitmap位图
         Bitmap bitmap = AppBitmapUtils.getBitmap(this,R.drawable.bg_kites_min);
+        //将图片设置成灰色
         Bitmap greyBitmap = AppBitmapUtils.greyBitmap(bitmap);
         ivImage7.setImageBitmap(greyBitmap);
     }

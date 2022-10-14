@@ -333,6 +333,19 @@
 
 
 #### 12.3 其封装库推荐
+|工具库地址|库说明|功能介绍|
+|--  |--  |--  |
+|[YCWebView](https://github.com/yangchong211/YCWebView)| WebView封装库 | 基于腾讯x5开源库，提高webView开发效率，大概要节约你百分之六十的时间成本。 |
+|[YCCommonLib](https://github.com/yangchong211/YCCommonLib)| App组件基础库  | 组件化开发中基础公共库，为App开发提高组件通用性 |
+|[YCAndroidTool](https://github.com/yangchong211/YCAndroidTool)| 测试工具库 | 用于项目测试，崩溃重启操作，崩溃记录日志，网络拦截查看，统计耗时，ping相关工具 |
+|[YCBlogs](https://github.com/yangchong211/YCBlogs)| 博客大汇总 | 技术博客大汇总，所有博客会同步到该库中 |
+|[YCThreadPool](https://github.com/yangchong211/YCThreadPool)| 轻量级异步线程池 | 轻量级简易线程池库，轻量级线程池异步库，支持线程执行过程中状态回调监测 |
+|[YCDialog](https://github.com/yangchong211/YCDialog)| 弹窗封装库 | 自定义Toast；自定义dialog控件；自定义DialogFragment弹窗；自定义PopupWindow弹窗；还有自定义Snackbar等等 |
+|[YCVideoPlayer](https://github.com/yangchong211/YCVideoPlayer)| 通用音视频播放器 | 播放器内核(自由切换) + 视频播放器 + 边播边缓存 + 高度定制播放器UI视图层 |
+|[YCScrollPager](https://github.com/yangchong211/YCScrollPager)| 滑动视频库 | 仿抖音，快手，短视频，竖直方向，一次滚动一个页面的封装库。 |
+|[YCStateLayout](https://github.com/yangchong211/YCStateLayout)| 状态管理器库 | 状态切换，让View状态的切换和Activity彻底分离开。用builder模式来自由的添加需要的状态View |
+|[YCNotification](https://github.com/yangchong211/YCNotification)| 通知栏封装库 | 通知栏封装库，强大的通知栏工具类，链式编程调用 |
+
 
 
 

@@ -29,37 +29,6 @@ import java.util.List;
  */
 public final class FileSaveUtils {
 
-
-    public static boolean saveBitmap(Context context, Bitmap bitmap, String filePath) {
-        File file = new File(filePath);
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-            //把文件插入到系统图库
-            try {
-                ContentResolver contentResolver = context.getContentResolver();
-                String absolutePath = file.getAbsolutePath();
-                String name = file.getName();
-                MediaStore.Images.Media.insertImage(contentResolver, absolutePath, name, null);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            // 最后通知图库更新
-            Uri uri = Uri.parse("file://" + file);
-            context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-
     /**
      * 读取共享目录下图片文件
      * @param context  上下文

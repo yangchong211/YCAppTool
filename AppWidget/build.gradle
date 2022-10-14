@@ -40,11 +40,13 @@ dependencies {
     implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.3.5'
     //implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.3.5'
     implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:RoundCorners:1.0.5'
+
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':AppTextView')
     implementation project(path: ':AppChartView')
-    implementation project(path: ':RoundCorners')
+//    implementation project(path: ':RoundCorners')
     implementation project(path: ':AppImageView')
     implementation project(path: ':AppScrollView')
     implementation project(path: ':CustomWidget')

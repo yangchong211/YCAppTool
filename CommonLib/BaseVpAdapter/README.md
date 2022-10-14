@@ -50,6 +50,12 @@
 
 
 ### 04.遇到的坑分析
+#### 4.1 ViewPager事件崩溃
+- 抛出的异常：onInterceptTouchEvent(DetailViewPager.java:36)，基本上是一堆的源代码异常堆栈信息。
+- 异常分析：类似此种系统性异常，尽可能得去捕获了。
+- 解决办法：重写onTouchEvent和onInterceptTouchEvent方法，然后捕获异常。具体可以看：[SecureViewPager]()
+  
+
 
 
 

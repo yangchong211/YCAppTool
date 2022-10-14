@@ -20,6 +20,7 @@ import com.yc.common.R;
 import com.yc.compress.Luban;
 import com.yc.compress.OnCompressListener;
 import com.yc.imagetoollib.AppBitmapUtils;
+import com.yc.imagetoollib.ImageSaveUtils;
 import com.yc.imagetoollib.PicCalculateUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -118,10 +119,18 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener 
             CompressConfig compressConfig = builder.build();
             AppCompress.getInstance().setCompressConfig(compressConfig);
             Bitmap bitmap = AppCompress.getInstance().compressSizePath(path);
+            int byteCount = bitmap.getByteCount();
+            AppLogUtils.d("FileActivity : 回调 , 字节大小 , " , (byteCount/1024)+"kb");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                int allocationByteCount = bitmap.getAllocationByteCount();
+                AppLogUtils.d("FileActivity : 回调 , 字节大小 , " , (allocationByteCount/1024)+"kb");
+            }
             //int orientation = PicCalculateUtils.getOrientation(AppBitmapUtils.bitmap2Bytes(bitmap));
             //Bitmap rotatingImage = AppBitmapUtils.rotatingImage(bitmap, orientation);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                //读取图片属性：旋转的角度
                 int degree = PicCalculateUtils.readPictureDegree(this, path);
+                //旋转Bitmap的角度，获取一张新的图片
                 Bitmap rotatingImage = AppBitmapUtils.rotatingImage(bitmap, degree);
                 ivImageView.setImageBitmap(rotatingImage);
             }
@@ -136,6 +145,9 @@ public class ImageActivity extends BaseActivity implements View.OnClickListener 
                 @Override
                 public void onSuccess(File file) {
                     Glide.with(ImageActivity.this).load(file).into(ivImageView2);
+
+                    //把图片加入到系统图库中
+                    ImageSaveUtils.insertImage(ImageActivity.this,file);
                 }
 
                 @Override
