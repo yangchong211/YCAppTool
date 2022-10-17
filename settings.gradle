@@ -216,7 +216,7 @@ include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib
         ':MonitorXposed', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher', ':MonitorMemory',
         ':LeakCanarySdk', ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',
         ':MonitorPrivacy', ':MonitorTimeLib', ':MonitorSpeed', ':MonitorInterceptor',
-        ':MonitorPhone'
+        ':MonitorPhone', ':MonitorPicture'
 project(':MonitorAliveLib').projectDir = new File('MonitorLib/MonitorAliveLib')
 project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
 project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
@@ -239,7 +239,7 @@ project(':MonitorSpeed').projectDir = new File('MonitorLib/MonitorSpeed')
 project(':MonitorInterceptor').projectDir = new File('MonitorLib/MonitorInterceptor')
 project(':MonitorMemory').projectDir = new File('MonitorLib/MonitorMemory')
 project(':MonitorPhone').projectDir = new File('MonitorLib/MonitorPhone')
-
+project(':MonitorPicture').projectDir = new File('MonitorLib/MonitorPicture')
 
 
 /* +++++++++ 音视频 +++++++++ */

@@ -23,6 +23,16 @@
     - 需要注意的是在xml中直接使用unicode是可以的，但是在Java中直接使用是不行的。
       
 
+#### 1.4 Bitmap像素是否可以更改
+- 两种创建Bitmap的方式，一种是使用BitmapFactory，一种是使用Bitmap静态方法。
+    - 假如我有一张图片，绿色的颜色非常丰富，但绿色很暗，这个时候我想要修改该图片每个像素中的绿色值，用这两种方式创建的Bitmap都能直接修改吗？不能……
+    - 所有使用 BitmapFactory创建的Bitmap都是不可更改其像素值的，只有通过Bitmap以下几种函数创建的Bitmap才能完成如上需求。
+- 只有这三个方法生成的Bitmap可以进行像素更改操作
+    ``` java
+    copy(Bitmap.Config config,boolean isMutable)
+    createBitmap(int width,int height,Bitmap.Config config)
+    createScaledBitmap(Bitmap src,int dstWidth,int dstHeight,boolean filter)
+    ```
 
 
 
@@ -130,7 +140,9 @@
 
 
 
-
+### 参考和学习
+- 抖音 Android 性能优化：
+    - https://juejin.cn/post/7096059314233671694
 - Android图片格式转换为JPG
     - https://blog.csdn.net/iblade/article/details/79153769
 
