@@ -36,7 +36,7 @@ public class ShadowDrawable extends Drawable {
     private final int mOffsetX;
     private final int mOffsetY;
     private RectF mRectF;
-    private Paint mPaint;
+    private Paint mShadowPaint;
 
 
     protected ShadowDrawable(@ColorInt int color, @Nullable int[] colorArray,
@@ -61,25 +61,27 @@ public class ShadowDrawable extends Drawable {
     public void draw(@NonNull Canvas canvas) {
         if (mRectF == null) {
             Rect bounds = getBounds();
-            mRectF = new RectF(bounds.left + mShadowRadius - mOffsetX, bounds.top + mShadowRadius - mOffsetY, bounds.right - mShadowRadius - mOffsetX,
+            mRectF = new RectF(bounds.left + mShadowRadius - mOffsetX,
+                    bounds.top + mShadowRadius - mOffsetY,
+                    bounds.right - mShadowRadius - mOffsetX,
                     bounds.bottom - mShadowRadius - mOffsetY);
         }
 
-        if (mPaint == null) {
+        if (mShadowPaint == null) {
             initPaint();
         }
-
-        canvas.drawRoundRect(mRectF, mRadius, mRadius, mPaint);
+        //这个相当于绘制阴影区域
+        canvas.drawRoundRect(mRectF, mRadius, mRadius, mShadowPaint);
     }
 
     @Override
     public void setAlpha(int alpha) {
-        mPaint.setAlpha(alpha);
+        mShadowPaint.setAlpha(alpha);
     }
 
     @Override
     public void setColorFilter(@Nullable ColorFilter colorFilter) {
-        mPaint.setColorFilter(colorFilter);
+        mShadowPaint.setColorFilter(colorFilter);
     }
 
     @Override
@@ -88,18 +90,20 @@ public class ShadowDrawable extends Drawable {
     }
 
     private void initPaint() {
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setShadowLayer(mShadowRadius, mOffsetX, mOffsetY, mShadowColor);
+        mShadowPaint = new Paint();
+        mShadowPaint.setAntiAlias(true);
+        //设置阴影效果很关键的api，给画笔设置该属性后
+        mShadowPaint.setShadowLayer(mShadowRadius, mOffsetX, mOffsetY, mShadowColor);
         if (mGradientColorArray != null && mGradientColorArray.length > 1) {
             boolean isGradientPositions = mGradientPositions != null
                     && mGradientPositions.length > 0
                     && mGradientPositions.length == mGradientColorArray.length;
-            mPaint.setShader(mLinearGradient == null ?
-                    new LinearGradient(mRectF.left, 0, mRectF.right, 0, mGradientColorArray,
-                            isGradientPositions ? mGradientPositions : null, Shader.TileMode.CLAMP) : mLinearGradient);
+            LinearGradient gradient = new LinearGradient(mRectF.left,
+                    0, mRectF.right, 0, mGradientColorArray,
+                    isGradientPositions ? mGradientPositions : null, Shader.TileMode.CLAMP);
+            mShadowPaint.setShader(mLinearGradient == null ? gradient : mLinearGradient);
         } else {
-            mPaint.setColor(mColor);
+            mShadowPaint.setColor(mColor);
         }
     }
 

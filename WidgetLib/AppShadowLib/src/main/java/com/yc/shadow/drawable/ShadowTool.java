@@ -86,7 +86,6 @@ public final class ShadowTool {
     public static void setShadowDrawable(View view, int shape, int bgColor, int shapeRadius, int shadowColor, int shadowRadius, int offsetX, int offsetY) {
         ShadowConfig shadowConfig = new ShadowConfig();
         shadowConfig.setColor(bgColor)
-
                 .setRadius(shapeRadius)
                 .setShadowColor(shadowColor)
                 .setShadowRadius(shadowRadius)
