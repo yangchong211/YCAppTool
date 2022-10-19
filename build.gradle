@@ -9,7 +9,12 @@ buildscript {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        //添加阿里云镜像
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
         maven { url 'https://jitpack.io' }
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.0'
@@ -36,6 +41,11 @@ allprojects {
             name 'Google'
         }
         maven { url 'https://jitpack.io' }
+        //添加阿里云镜像
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/jcenter" }
+        mavenCentral()
     }
 }
 

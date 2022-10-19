@@ -1,12 +1,8 @@
 ext {
 
     isApplication = false  //false:作为Lib组件存在， true:作为application存在，这个不建议改
-    isJetpackApplication = false
-    isVideoApplication = false  //视频模块开关，false:作为Lib组件存在， true:作为application存在
-    isBookApplication = false  //book模块开关，false:作为Lib组件存在， true:作为application存在
+    isJetpackApplication = true
     isOtherApplication = false  //其他模块开关，false:作为Lib组件存在， true:作为application存在
-    isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
-    isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
     isAnimApplication = false
 
     android = [
