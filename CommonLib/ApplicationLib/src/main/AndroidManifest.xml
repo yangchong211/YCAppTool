@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yc.applicationlib">
 
-    <application
-        android:name="com.yc.applicationlib.application.LaunchApplication">
+    <application>
     </application>
 
 </manifest>

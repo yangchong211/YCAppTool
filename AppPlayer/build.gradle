@@ -69,6 +69,8 @@ dependencies {
     implementation 'com.github.ctiao:DanmakuFlameMaster:0.9.25'
     implementation 'com.github.ctiao:ndkbitmap-armv7a:0.9.21'
 
+    implementation 'io.agora.rtc:full-sdk:4.0.1'
+    implementation "io.agora.rtc:voice-sdk:4.0.1"
 
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
 

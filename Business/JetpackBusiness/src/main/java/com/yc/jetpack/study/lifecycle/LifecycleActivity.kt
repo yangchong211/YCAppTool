@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
+import com.yc.architecturelib.lifecycle.ActivityLifecycleObserver
 import com.yc.jetpack.R
 import com.yc.jetpack.study.livedata.LiveDataActivity
 import com.yc.jetpack.study.livedata.TextViewModel
@@ -46,7 +47,7 @@ class LifecycleActivity : AppCompatActivity() {
     }
 
     private fun initLive(){
-        this.lifecycle.addObserver(MyLifecycleObserver())
+        this.lifecycle.addObserver(ActivityLifecycleObserver())
     }
 
 }

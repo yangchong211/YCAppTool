@@ -8,10 +8,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.yc.architecturelib.navigation.navigate
-import com.yc.fragmentmanager.FragmentManagerHelper
+import com.yc.baseclasslib.fragment.FragmentLifecycleHelper
 import com.yc.jetpack.study.workmanager.WorkManagerActivity
 import com.yc.jetpack.R
 import com.yc.jetpack.study.binding.SolutionActivity
+import com.yc.jetpack.study.lifecycle.LifecycleActivity
 import com.yc.jetpack.study.model.ViewModelActivity
 import com.yc.jetpack.study.room.RoomActivity
 
@@ -37,12 +38,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(view)
-        FragmentManagerHelper.getInstance()?.addFragmentLifecycle(this)
+        FragmentLifecycleHelper.getInstance()?.addFragmentLifecycle(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        FragmentManagerHelper.getInstance()?.removeFragmentLifecycle(this)
+        FragmentLifecycleHelper.getInstance()?.removeFragmentLifecycle(this)
     }
 
     private fun initView(view: View) {
@@ -75,6 +76,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
             }
             R.id.tv_view_model ->{
                 navigate(R.id.viewModelActivity)
+            }
+            R.id.tv_lifecycle ->{
+                activity?.let {
+                    LifecycleActivity.startActivity(it)
+                }
             }
             R.id.tv_data_binding ->{
                 activity?.let {

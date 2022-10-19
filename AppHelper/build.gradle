@@ -193,9 +193,7 @@ dependencies {
     implementation project(path: ':CustomWidget')
     implementation project(path: ':CountTimerLib')
     implementation project(path: ':ToolUtilsLib')
-    if (!rootProject.ext.isOtherApplication){
-        implementation project(path: ':DemoBusiness')
-    }
+    implementation project(path: ':DemoBusiness')
     implementation project(path: ':AnimBusiness')
     implementation project(path: ':StatusBusiness')
     implementation project(path: ':AppStatusLib')
@@ -230,7 +228,6 @@ dependencies {
     implementation project(path: ':MvvmDatabinding')
     implementation project(path: ':MvvmTodoLive')
     implementation project(path: ':MvcTodoBusiness')
-    implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3'
     implementation project(path: ':BusinessInterface')
     implementation project(path: ':ThreadPoolLib')
     implementation project(path: ':JetpackBusiness')
@@ -256,7 +253,6 @@ dependencies {
     implementation project(path: ':MonitorPingLib')
     implementation project(path: ':EventUploadLib')
 //    implementation project(path: ':MonitorPrivacy')
-    annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 //    implementation 'com.github.yangchong211.YCAppTool:BlurViewLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:BannerViewLib:1.3.7'
 //    implementation 'com.github.yangchong211.YCAppTool:NfcServer:1.3.7'

@@ -43,7 +43,7 @@ android {
 
     sourceSets {
         main {
-            if (rootProject.ext.isAnimApplication) {
+            if (rootProject.ext.isJetpackApplication) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
@@ -105,6 +105,7 @@ dependencies {
     // room 使用kapt，fix RoomDatabase_Impl does not exist
     implementation(rootProject.ext.dependencies["roomRuntime"])
     implementation project(path: ':FragmentManager')
+    implementation project(path: ':BaseVpAdapter')
     //kapt(rootProject.ext.dependencies["roomCompiler"])
     annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
     //WorkManager

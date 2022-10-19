@@ -61,7 +61,7 @@ class ViewModelActivity : AppCompatActivity() {
         fragments.add(ViewModelFragmentA())
         fragments.add(ViewModelFragmentB())
         val mutableList = mutableListOf("无参数", "有参数")
-        val adapter = com.yc.basevpadapter.adapter.BaseFragmentPagerAdapter(
+        val adapter = BaseFragmentPagerAdapter(
             supportFragmentManager
         )
         adapter.addFragmentList(fragments,mutableList)
