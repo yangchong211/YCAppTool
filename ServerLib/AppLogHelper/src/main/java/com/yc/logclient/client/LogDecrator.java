@@ -1,7 +1,7 @@
 package com.yc.logclient.client;
 
 import android.util.Log;
-import com.yc.logclient.LogConstant;
+import com.yc.logclient.constant.LogConstant;
 
 
 public class LogDecrator {

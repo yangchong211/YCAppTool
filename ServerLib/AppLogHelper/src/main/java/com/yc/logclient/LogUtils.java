@@ -6,15 +6,16 @@ import android.util.Log;
 
 import com.yc.logclient.client.LogClient;
 import com.yc.logclient.client.LogDecrator;
+import com.yc.logclient.constant.LogConstant;
 
-import static com.yc.logclient.LogConstant.Log_Level_debug;
-import static com.yc.logclient.LogConstant.Log_Level_error;
-import static com.yc.logclient.LogConstant.Log_Level_info;
-import static com.yc.logclient.LogConstant.Log_Level_verbose;
-import static com.yc.logclient.LogConstant.Log_Level_warn;
+import static com.yc.logclient.constant.LogConstant.Log_Level_debug;
+import static com.yc.logclient.constant.LogConstant.Log_Level_error;
+import static com.yc.logclient.constant.LogConstant.Log_Level_info;
+import static com.yc.logclient.constant.LogConstant.Log_Level_verbose;
+import static com.yc.logclient.constant.LogConstant.Log_Level_warn;
 
 
-public class LogUtils {
+public final class LogUtils {
 
     /**
      * Log信息级别>=logLevel的日志信息打印出来

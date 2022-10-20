@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import com.yc.logclient.LogConstant;
+import com.yc.logclient.constant.LogConstant;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

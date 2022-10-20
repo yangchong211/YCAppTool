@@ -17,7 +17,7 @@ import com.yc.logclient.bean.AppLogBean;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.logservice.utils.LogToolUtils;
 import com.yc.logclient.ILogService;
-import com.yc.logclient.LogConstant;
+import com.yc.logclient.constant.LogConstant;
 import com.yc.logclient.bean.ThrowableBean;
 import com.yc.logclient.LogManager;
 import com.yc.logservice.log.DailyAppenderImpl;

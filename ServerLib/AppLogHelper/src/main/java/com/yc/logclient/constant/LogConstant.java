@@ -1,6 +1,6 @@
-package com.yc.logclient;
+package com.yc.logclient.constant;
 
-public class LogConstant {
+public final class LogConstant {
     public static final int Log_Type_App = LogType.app.value();
     public static final int Log_Type_Crash = LogType.crash.value();//crash日志
     public static final int Log_Type_Statistics = LogType.statistics.value();//统计日志
