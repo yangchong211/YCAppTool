@@ -5,6 +5,7 @@ import android.view.View;
 import com.yc.appserver.http.NetMainActivity;
 import com.yc.appserver.log.LogTestActivity;
 import com.yc.appserver.priva.PrivateTestActivity;
+import com.yc.appserver.thread.HighCpuActivity;
 import com.yc.appserver.vibrator.VibratorTestActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.roundcorner.view.RoundTextView;
@@ -16,6 +17,7 @@ public class ServerMainActivity extends BaseActivity {
     private RoundTextView tvVibratorTest;
     private RoundTextView tvPrivateTest;
     private RoundTextView tvNetTest;
+    private RoundTextView tvThreadTest;
 
     @Override
     public int getContentView() {
@@ -28,6 +30,7 @@ public class ServerMainActivity extends BaseActivity {
         tvVibratorTest = findViewById(R.id.tv_vibrator_test);
         tvPrivateTest = findViewById(R.id.tv_private_test);
         tvNetTest = findViewById(R.id.tv_net_test);
+        tvThreadTest = findViewById(R.id.tv_thread_test);
     }
 
     @Override
@@ -54,6 +57,12 @@ public class ServerMainActivity extends BaseActivity {
             @Override
             protected void onNoDoubleClick(View v) {
                 NetMainActivity.startActivity(ServerMainActivity.this);
+            }
+        });
+        tvThreadTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HighCpuActivity.testHighCpu();
             }
         });
     }
