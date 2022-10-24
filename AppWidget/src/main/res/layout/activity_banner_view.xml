@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.yc.cn.ycbannerlib.gallery.GalleryRecyclerView
+    <com.yc.gallerybannerlib.GalleryRecyclerView
         android:layout_marginTop="35dp"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

@@ -2,14 +2,9 @@ package com.yc.other.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 
 
-import com.yc.blurview.RealTimeBlurView;
 import com.yc.businessinterface.IAnimServiceProvider;
 import com.yc.spi.loader.ServiceLoader;
 import com.yc.library.base.mvp.BaseActivity;
@@ -89,22 +84,9 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         }else if (i == R.id.tv_9){
             startActivity(new Intent(this, CloneAbleActivity.class));
         }else if (i == R.id.tv_10){
-            startShowDialog();
         } else if (i == R.id.tv_12){
             startActivity(new Intent(this, SerialTaskActivity.class));
         }
-    }
-
-
-    private void startShowDialog() {
-        View popMenuView = this.getLayoutInflater().inflate(R.layout.view_real_blur_view, null);
-        RealTimeBlurView blur_view = popMenuView.findViewById(R.id.blur_view);
-        float v = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, this.getResources().getDisplayMetrics());
-        blur_view.setBlurRadius(v);
-        final PopupWindow popMenu = new PopupWindow(popMenuView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
-        popMenu.setClippingEnabled(false);
-        popMenu.setFocusable(true);         //点击其他地方关闭
-        popMenu.showAtLocation(popMenuView, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
     private void test(){

@@ -13,6 +13,9 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
+
+        // 支持模糊视图
+        renderscriptSupportModeEnabled true
     }
 
     buildTypes {

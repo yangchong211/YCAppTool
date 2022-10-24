@@ -1,4 +1,4 @@
-package com.yc.blurview;
+package com.yc.blurview.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,6 +22,7 @@ import android.view.ViewTreeObserver;
 
 
 import com.com.yc.blurview.R;
+
 
 
 /**
@@ -354,7 +355,7 @@ public class RealTimeBlurView extends View {
 
 	private static class StopException extends RuntimeException {}
 
-	private static StopException STOP_EXCEPTION = new StopException();
+	private static final StopException STOP_EXCEPTION = new StopException();
 
 	static {
 		try {
@@ -371,6 +372,6 @@ public class RealTimeBlurView extends View {
 		if (DEBUG == null && ctx != null) {
 			DEBUG = (ctx.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
 		}
-		return DEBUG == Boolean.TRUE;
+		return DEBUG != null && DEBUG.equals(Boolean.TRUE);
 	}
 }

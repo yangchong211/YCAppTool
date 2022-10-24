@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toolutils.click.PerfectClickListener;
+import com.yc.widgetbusiness.blur.BlurActivity;
 import com.yc.widgetbusiness.chart.PreActivity;
 import com.yc.widgetbusiness.floatpage.FloatActivity;
 import com.yc.widgetbusiness.image.ImageViewActivity;
@@ -30,6 +31,7 @@ public class WidgetActivity extends AppCompatActivity {
     private RoundTextView tvWidgetZoom;
     private RoundTextView tvWidgetRed;
     private RoundTextView tvWidgetFloat;
+    private RoundTextView tvWidgetBlur;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class WidgetActivity extends AppCompatActivity {
         tvWidgetZoom = findViewById(R.id.tv_widget_zoom);
         tvWidgetRed = findViewById(R.id.tv_widget_red);
         tvWidgetFloat = findViewById(R.id.tv_widget_float);
+        tvWidgetBlur = findViewById(R.id.tv_widget_blur);
     }
 
     public void initListener() {
@@ -98,6 +101,12 @@ public class WidgetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(WidgetActivity.this, FloatActivity.class));
+            }
+        });
+        tvWidgetBlur.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                startActivity(new Intent(WidgetActivity.this, BlurActivity.class));
             }
         });
     }

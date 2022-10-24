@@ -1,4 +1,4 @@
-package com.yc.other.ui.activity;
+package com.yc.widgetbusiness.banner;
 
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -16,9 +16,8 @@ import com.bumptech.glide.Glide;
 import com.yc.blurview.blur.CustomBlur;
 import com.yc.gallerybannerlib.GalleryRecyclerView;
 import com.yc.library.base.mvp.BaseActivity;
-import com.yc.other.ui.adapter.MeBannerAdapter;
 import com.yc.statusbar.bar.StateAppBar;
-import com.yc.other.R;
+import com.yc.widgetbusiness.R;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;

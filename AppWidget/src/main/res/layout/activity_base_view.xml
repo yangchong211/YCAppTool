@@ -9,120 +9,160 @@
     android:orientation="vertical">
 
     <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_widget_round"
+        android:id="@+id/tv_view_1"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:text="1.圆角控件各种案例，别再用shape"
+        android:text="1."
         android:textSize="18sp"
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_widget_image"
+        android:id="@+id/tv_view_2"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:text="2.各种图片控件"
+        android:text="2."
         android:textSize="18sp"
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_widget_span"
+        android:id="@+id/tv_view_3"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:text="3.各种span文本控件"
+        android:text="3."
         android:textSize="18sp"
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_widget_chart"
+        android:id="@+id/tv_view_4"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:text="4.各种图表控件展示"
+        android:text="4."
         android:textSize="18sp"
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_widget_shadow"
+        android:id="@+id/tv_view_5"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:text="5.阴影效果自定义控件"
+        android:text="5."
         android:textSize="18sp"
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_widget_zoom"
+        android:id="@+id/tv_view_6"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:text="6.图片查看器"
+        android:text="6."
         android:textSize="18sp"
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_widget_red"
+        android:id="@+id/tv_view_7"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:text="7.自定义完全解耦合小红点"
+        android:text="7."
         android:textSize="18sp"
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_widget_float"
+        android:id="@+id/tv_view_8"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:text="8.自定义悬浮控件案例"
+        android:text="8."
         android:textSize="18sp"
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_widget_blur"
+        android:id="@+id/tv_view_9"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:text="9.自定义高斯模糊背景视图"
+        android:text="9."
         android:textSize="18sp"
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
-    <ScrollView
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_10"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </ScrollView>
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="10."
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_11"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="11."
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_12"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="12."
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
+    <ImageView
+        android:id="@+id/iv_image_view"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/iv_image_view2"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

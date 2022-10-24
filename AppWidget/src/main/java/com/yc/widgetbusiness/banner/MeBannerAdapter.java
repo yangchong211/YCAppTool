@@ -1,4 +1,4 @@
-package com.yc.other.ui.adapter;
+package com.yc.widgetbusiness.banner;
 
 
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.yc.imageserver.utils.GlideImageUtils;
-import com.yc.other.R;
+import com.yc.widgetbusiness.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,6 +15,10 @@ android {
         versionName rootProject.ext.android["versionName"]
         // dex突破65535的限制
         multiDexEnabled true
+        //开启Render脚本支持minSdkVersion < 19或使用renderscript支持模式时
+        renderscriptTargetApi 19
+        //同时支持AndroidX和Android Support Library
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -42,6 +46,14 @@ dependencies {
     implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
     implementation 'com.github.yangchong211.YCWidgetLib:RoundCorners:1.0.5'
 
+    //SnapHelper相关封装，https://github.com/yangchong211/YCBannerView
+    //轮播图，https://github.com/yangchong211/YCBannerView
+    implementation 'com.github.yangchong211.YCBannerView:YCBannerLib:2.3.6'
+    //SnapHelper相关封装，https://github.com/yangchong211/YCBannerView
+    implementation 'com.github.yangchong211.YCBannerView:SnapBannerLib:2.3.6'
+    //轮播图，使用recyclerView实现，https://github.com/yangchong211/YCBannerView
+    implementation 'com.github.yangchong211.YCBannerView:GalleryBannerLib:2.3.6'
+
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':AppTextView')
@@ -56,5 +68,8 @@ dependencies {
     implementation project(path: ':ExpandLib')
     implementation project(path: ':FloatWindow')
     implementation project(path: ':ImageToolLib')
+    implementation project(path: ':BlurViewLib')
+    implementation project(path: ':LibraryLayer')
+    implementation project(path: ':ImageServer')
 }
 

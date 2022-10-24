@@ -6,7 +6,7 @@
         <activity android:name="com.yc.other.ui.activity.AboutMeActivity"/>
         <activity android:name="com.yc.other.ui.activity.MeFeedBackActivity"/>
         <activity android:name="com.yc.other.ui.activity.MeLoginActivity"/>
-        <activity android:name="com.yc.other.ui.activity.MeBannerActivity"/>
+        <activity android:name="com.yc.other.com.yc.widgetbusiness.banner.MeBannerActivity"/>
         <activity android:name="com.yc.other.ui.activity.BannerViewActivity"/>
         <activity android:name="com.yc.other.ui.activity.SnapHelperActivity"/>
         <activity android:name="com.yc.other.ui.activity.ProgressFirstActivity"/>
