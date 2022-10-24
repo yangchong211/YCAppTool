@@ -26,5 +26,7 @@
 
 
 
-
+### 参考博客
+- https://github.com/centerzx/ShapeBlurView
+- https://github.com/Dimezis/BlurView
 

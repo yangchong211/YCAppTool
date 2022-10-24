@@ -8,15 +8,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 
 import com.yc.blurview.view.RealTimeBlurView;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.widgetbusiness.R;
-import com.yc.widgetbusiness.WidgetActivity;
 import com.yc.widgetbusiness.banner.MeBannerActivity;
 
 
@@ -87,9 +83,8 @@ public class BlurActivity extends AppCompatActivity implements View.OnClickListe
 
     private void startShowDialog() {
         View popMenuView = this.getLayoutInflater().inflate(R.layout.view_real_blur_view, null);
-//        RealTimeBlurView blurView = popMenuView.findViewById(R.id.blur_view);
-//        float v = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, this.getResources().getDisplayMetrics());
-//        blurView.setBlurRadius(v);
+        RealTimeBlurView blurView = popMenuView.findViewById(R.id.blur_view);
+        blurView.setBlurRadius(15);
         final PopupWindow popMenu = new PopupWindow(popMenuView, RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT, true);
         popMenu.setClippingEnabled(false);
