@@ -5,17 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <com.yc.blurview.view.RealTimeBlurView
-        android:id="@+id/blur_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <RelativeLayout
         android:id="@+id/ll_popMenuView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#70000000"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
@@ -24,4 +17,8 @@
             android:background="@drawable/bg_kites_min"/>
     </RelativeLayout>
 
+    <com.yc.blurview.view.RealTimeBlurView
+        android:id="@+id/blur_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </FrameLayout>
