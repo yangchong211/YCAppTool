@@ -9,9 +9,28 @@
 
 
 ### 01.基础概念说明
+#### 1.1 核心思路
+- 每次Message处理(也就是dispatchMessage(msg))都会在处理前，和处理后通过Looper.mLogging打印日志。
+- 只需知道打印日志的时间差即可知道Message的处理耗时。当耗时超过我们的阈值时我们即可收集调用堆栈，然后根据堆栈进行针对性优化即可。
 
 
 ### 02.常见思路和做法
+#### 2.1 如何监控卡顿
+- 卡顿监控不优雅的处理
+    - 直接创建一个基类放在我们的项目代码中，所有需要Handler的地方都对此进行继承，然后我们在基类中添加日志监控，这样就可以实现我们的目的了吧？
+    - 不好，这样对项目改造的成本太高了，而且我们也监控不到系统中的消息，也监控不到第三方sdk中的消息执行时间！
+- 卡顿监控优雅的处理
+    - 分析Looper中的loop方法可知，处理消息前后有日志打印，看到有个Printer日志输出管理的类，并且暴露setMessageLogging方法。这个可以自己定义实现。
+
+
+#### 2.2 使用LooperPrinter监控
+- 替换主线程Looper的Printer，从而监控dispatchMessage的执行时间。甚至，在Android源码中，主线程Looper也会根据执行dispatchMessage的时间来判断是否有卡顿，有则会打印一些日志。
+- 在Printer中判断start和end，来获取主线程dispatch该message的开始和结束时间，并判定该时间超过阈值(如2000毫秒)为主线程卡慢发生，并dump出各种信息，提供开发者分析性能瓶颈。
+- 卡顿之后收集相关dump信息，主要包含一些基本信息，耗时信息，CPU信息还有堆栈信息等等。可以直接参考LeakCanary即可。
+
+
+#### 2.3 Printer监控优缺点
+- 优点：不会随机漏报，无需轮询，一劳永逸；缺点：某些类型的卡顿无法被监控到
 
 
 ### 03.Api调用说明
@@ -22,6 +41,10 @@
 
 
 ### 05.其他问题说明
+#### 5.1 该库存在弊端
+- 1.View的TouchEvent事件是在queue.next()中处理的，只统计dispatchMessage(msg)前后耗时，不会覆盖到View的TouchEvent耗时。
+- 2.IdleHandler.queueIdle()也在queue.next()中，当主线程空闲会调用IdleHandler，此时IdleHandler也是在主线程执行，当过于耗时时也可能出现卡顿，甚至到只ANR，这种场景也无法监控。
+- 3.SyncBarrier（同步屏障）的泄漏同样无法被监控到，这种情况比较少见，参考了微信的监控方案。
 
 
 

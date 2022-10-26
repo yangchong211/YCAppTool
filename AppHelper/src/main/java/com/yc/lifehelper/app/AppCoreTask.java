@@ -185,7 +185,7 @@ public class AppCoreTask extends AbsParallelTask {
     }
 
     private void initAnrListener() {
-        new ANRWatchDog().setANRListener(new ANRListener() {
+        new ANRWatchDog(5000).setANRListener(new ANRListener() {
             @Override
             public void onAppNotResponding(@NotNull ANRError error) {
                 Throwable throwable = error.fillInStackTrace();
