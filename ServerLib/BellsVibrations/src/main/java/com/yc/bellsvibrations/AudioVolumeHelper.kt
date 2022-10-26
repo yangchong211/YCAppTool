@@ -274,6 +274,24 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
         }
     }
 
+    /**
+     * 关闭/打开扬声器播放
+     */
+    fun setSpeakerStatus(on: Boolean) {
+        if (on) { //扬声器
+            audioManager?.isSpeakerphoneOn = true
+            audioManager?.mode = AudioManager.MODE_NORMAL
+        } else {
+            // 设置最大音量
+            val max = audioManager?.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL) ?: 0
+            audioManager?.setStreamVolume(AudioManager.STREAM_VOICE_CALL, max, AudioManager.STREAM_VOICE_CALL)
+            // 设置成听筒模式
+            audioManager?.mode = AudioManager.MODE_IN_COMMUNICATION
+            // 关闭扬声器
+            audioManager?.isSpeakerphoneOn = false
+            audioManager?.setRouting(AudioManager.MODE_NORMAL, AudioManager.ROUTE_EARPIECE, AudioManager.ROUTE_ALL)
+        }
+    }
 
     @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
     annotation class DataSource {

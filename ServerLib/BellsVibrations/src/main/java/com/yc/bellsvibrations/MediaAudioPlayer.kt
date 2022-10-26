@@ -65,13 +65,15 @@ class MediaAudioPlayer(private val context: Context) {
                 }
                 2 -> {
                     //res/raw文件中的url地址。
-                    val sound =
-                        Uri.parse("android.resource://" + context.packageName + "/" + data)
+                    val sound = Uri.parse("android.resource://" + context.packageName + "/" + data)
                     mMediaPlayer?.setDataSource(context, sound)
                 }
-                3 ->                         //播放网络文件
+                3 -> {
+                    //播放网络文件
                     mMediaPlayer?.setDataSource(data as String?)
+                }
                 else -> {
+
                 }
             }
             mMediaPlayer?.prepare()
