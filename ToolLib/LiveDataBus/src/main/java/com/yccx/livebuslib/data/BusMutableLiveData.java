@@ -26,8 +26,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.yc.apphandlerlib.WeakHandler;
 import com.yccx.livebuslib.event.LiveDataBus;
-import com.yccx.livebuslib.helper.BusWeakHandler;
 import com.yccx.livebuslib.inter.BusObservable;
 import com.yccx.livebuslib.utils.BusLibUtils;
 import com.yccx.livebuslib.utils.BusLogUtils;
@@ -51,7 +51,7 @@ import java.util.Map;
 public class BusMutableLiveData<T> extends MutableLiveData<T> implements BusObservable<T> {
 
     private Map<Observer, Observer> observerMap = new HashMap<>();
-    private BusWeakHandler mainHandler = new BusWeakHandler(Looper.getMainLooper());
+    private WeakHandler mainHandler = new WeakHandler(Looper.getMainLooper());
     private Map<String,IntervalValueTask> intervalTasks = new HashMap<>();
     private String mKey ;
 

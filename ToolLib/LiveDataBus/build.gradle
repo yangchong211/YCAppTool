@@ -30,4 +30,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["livedataCore"])
+    implementation project(path: ':AppHandlerLib')
 }
