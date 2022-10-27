@@ -32,7 +32,7 @@ import android.widget.TextView;
 import com.yc.banner.listener.OnBannerListener;
 import com.yc.banner.loader.ImageLoaderInterface;
 import com.yc.banner.util.BannerConstant;
-import com.yc.banner.util.WeakHandler;
+import com.yc.apphandlerlib.WeakHandler;
 import com.yc.bannerwidget.R;
 
 import java.lang.reflect.Field;

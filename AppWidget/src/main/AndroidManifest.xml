@@ -32,6 +32,7 @@
         <activity android:name=".floatpage.FloatActivity"/>
         <activity android:name=".blur.BlurActivity"/>
         <activity android:name=".banner.MeBannerActivity"/>
+        <activity android:name=".banner.BannerActivity"/>
     </application>
 
 

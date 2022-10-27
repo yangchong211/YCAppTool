@@ -115,6 +115,18 @@
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_banner"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="10.自定义轮播图banner"
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -71,5 +71,6 @@ dependencies {
     implementation project(path: ':BlurViewLib')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ImageServer')
+    implementation project(path: ':BannerViewLib')
 }
 
