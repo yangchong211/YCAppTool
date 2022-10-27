@@ -1,4 +1,4 @@
-package com.yc.banner.util;
+package com.yc.apphandlerlib;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -21,7 +21,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * </pre>
  */
 @SuppressWarnings("unused")
-public class WeakHandler {
+public final class WeakHandler {
 
     private final Handler.Callback mCallback;
     private final ExecHandler mExec;
@@ -68,6 +68,11 @@ public class WeakHandler {
         return mExec.postDelayed(wrapRunnable(r), delayMillis);
     }
 
+    /**
+     * 可以提高Message的优先级
+     * @param r
+     * @return
+     */
     public final boolean postAtFrontOfQueue(Runnable r) {
         return mExec.postAtFrontOfQueue(wrapRunnable(r));
     }
@@ -110,6 +115,11 @@ public class WeakHandler {
         return mExec.sendMessageAtTime(msg, uptimeMillis);
     }
 
+    /**
+     * 可以提高Message的优先级
+     * @param msg
+     * @return
+     */
     public final boolean sendMessageAtFrontOfQueue(Message msg) {
         return mExec.sendMessageAtFrontOfQueue(msg);
     }
