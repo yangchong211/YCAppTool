@@ -1,4 +1,4 @@
-package com.yc.appfilelib;
+package com.yc.fileiohelper;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

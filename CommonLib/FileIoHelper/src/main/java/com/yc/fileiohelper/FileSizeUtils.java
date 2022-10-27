@@ -1,4 +1,4 @@
-package com.yc.appfilelib;
+package com.yc.fileiohelper;
 
 import android.text.SpannableString;
 import android.text.Spanned;
