@@ -71,7 +71,7 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         ':AppCommonInter',':ToolMemoryLib',':AppPermission',':PhoneSensor',
         ':AppLruDisk',':AppLruCache',':DownloadHelper',':AppEncryptLib',
         ':AppMediaStore',':DataCloneLib',':AppScreenLib',':BaseVpAdapter',':ImageToolLib',
-        ':AppHandlerLib'
+        ':AppHandlerLib',':FileIoHelper'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -103,6 +103,8 @@ project(':AppScreenLib').projectDir = new File('CommonLib/AppScreenLib')
 project(':BaseVpAdapter').projectDir = new File('CommonLib/BaseVpAdapter')
 project(':ImageToolLib').projectDir = new File('CommonLib/ImageToolLib')
 project(':AppHandlerLib').projectDir = new File('CommonLib/AppHandlerLib')
+project(':FileIoHelper').projectDir = new File('CommonLib/FileIoHelper')
+
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */

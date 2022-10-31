@@ -2,6 +2,7 @@ package com.yc.common.reflect;
 
 import android.os.Build;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 
@@ -23,49 +24,63 @@ import java.lang.reflect.TypeVariable;
 
 public class ReflectionActivity extends BaseActivity {
 
-    private RoundTextView tvReflect1;
-    private RoundTextView tvReflect2;
-    private RoundTextView tvReflect3;
-    private RoundTextView tvReflect4;
-    private RoundTextView tvReflect5;
-    private RoundTextView tvReflect6;
+    private RoundTextView tvView1;
+    private RoundTextView tvView2;
+    private RoundTextView tvView3;
+    private RoundTextView tvView4;
+    private RoundTextView tvView5;
+    private RoundTextView tvView6;
+    private RoundTextView tvView7;
+    private RoundTextView tvView8;
+    private RoundTextView tvView9;
+    private RoundTextView tvView10;
+    private RoundTextView tvView11;
+    private RoundTextView tvView12;
+    private ImageView ivImageView;
 
     @Override
     public int getContentView() {
-        return R.layout.activity_reflect_main;
+        return R.layout.activity_base_view;
     }
 
     @Override
     public void initView() {
-        tvReflect1 = findViewById(R.id.tv_reflect_1);
-        tvReflect2 = findViewById(R.id.tv_reflect_2);
-        tvReflect3 = findViewById(R.id.tv_reflect_3);
-        tvReflect4 = findViewById(R.id.tv_reflect_4);
-        tvReflect5 = findViewById(R.id.tv_reflect_5);
-        tvReflect6 = findViewById(R.id.tv_reflect_6);
+        tvView1 = findViewById(R.id.tv_view_1);
+        tvView2 = findViewById(R.id.tv_view_2);
+        tvView3 = findViewById(R.id.tv_view_3);
+        tvView4 = findViewById(R.id.tv_view_4);
+        tvView5 = findViewById(R.id.tv_view_5);
+        tvView6 = findViewById(R.id.tv_view_6);
+        tvView7 = findViewById(R.id.tv_view_7);
+        tvView8 = findViewById(R.id.tv_view_8);
+        tvView9 = findViewById(R.id.tv_view_9);
+        tvView10 = findViewById(R.id.tv_view_10);
+        tvView11 = findViewById(R.id.tv_view_11);
+        tvView12 = findViewById(R.id.tv_view_12);
+        ivImageView = findViewById(R.id.iv_image_view);
     }
 
     @Override
     public void initListener() {
-        tvReflect1.setOnClickListener(new View.OnClickListener() {
+        tvView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 test1();
             }
         });
-        tvReflect2.setOnClickListener(new View.OnClickListener() {
+        tvView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 test2();
             }
         });
-        tvReflect3.setOnClickListener(new View.OnClickListener() {
+        tvView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 test3();
             }
         });
-        tvReflect4.setOnClickListener(new View.OnClickListener() {
+        tvView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -73,23 +88,37 @@ public class ReflectionActivity extends BaseActivity {
                 }
             }
         });
-        tvReflect5.setOnClickListener(new View.OnClickListener() {
+        tvView5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 test5();
             }
         });
-        tvReflect6.setOnClickListener(new View.OnClickListener() {
+        tvView6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 test6();
+            }
+        });
+        tvView9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                test9();
             }
         });
     }
 
     @Override
     public void initData() {
-
+        tvView1.setText("1.通过Class获取信息");
+        tvView2.setText("2.获取对象的变量");
+        tvView3.setText("3.获取对象的方法");
+        tvView4.setText("4.获取对象的构造函数");
+        tvView5.setText("5.反射调用类的方法");
+        tvView6.setText("6.反射访问成员变量值");
+        tvView7.setText("7.反射获取成员变量的类型");
+        tvView8.setText("8.反射获取方法参数的类型");
+        tvView9.setText("9.反射可以修改final属性");
     }
 
     private void test1(){
@@ -365,5 +394,57 @@ public class ReflectionActivity extends BaseActivity {
         //第三种方式 通过对象getClass方法
         Student student = new Student();
         Class<?> class3 = student.getClass();
+    }
+
+    public class User {
+        private final String name = "Bob";
+        private String name2 = "Bob";
+        private final Student student = new Student();
+
+        public String getName() {
+            return name;
+        }
+
+        public String getName2() {
+            return name2;
+        }
+
+        public Student getStudent() {
+            return student;
+        }
+    }
+
+    /**
+     * 反射可以修改final类型成员变量吗？
+     */
+    private void test9(){
+        User user1 = new User();
+        User user2 = new User();
+        User user3 = new User();
+        Class clz = User.class;
+        Field field1 = null;
+        Field field2 = null;
+        Field field3 = null;
+        try{
+            field1=clz.getDeclaredField("name");
+            field1.setAccessible(true);
+            field1.set(user1,"yangchong");
+            AppLogUtils.i("修改final类型",user1.getName());
+
+            field2=clz.getDeclaredField("name2");
+            field2.setAccessible(true);
+            field2.set(user2,"yangchong2");
+            AppLogUtils.i("修改final类型",user2.getName2());
+
+
+            field3 = clz.getDeclaredField("student");
+            field3.setAccessible(true);
+            field3.set(user3, new Student());
+            AppLogUtils.i("修改final类型",user3.getName());
+        }catch(NoSuchFieldException e){
+            e.printStackTrace();
+        }catch(IllegalAccessException e){
+            e.printStackTrace();
+        }
     }
 }

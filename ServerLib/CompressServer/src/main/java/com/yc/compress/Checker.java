@@ -1,9 +1,8 @@
 package com.yc.compress;
 
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
-import com.yc.appfilelib.BaseIoUtils;
+import com.yc.fileiohelper.BaseIoUtils;
 import com.yc.imagetoollib.PicCalculateUtils;
 
 import java.io.File;

@@ -31,5 +31,6 @@ dependencies {
     api project(':AppLogHelper')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':ToolFileLib')
+    implementation project(path: ':FileIoHelper')
     implementation project(path: ':EventUploadLib')
 }

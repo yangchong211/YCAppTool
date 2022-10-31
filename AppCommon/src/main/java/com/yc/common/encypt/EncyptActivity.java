@@ -13,7 +13,7 @@ import com.yc.appencryptlib.RsaEncryptUtils;
 import com.yc.appencryptlib.Base64Utils;
 import com.yc.appencryptlib.DesEncryptUtils;
 import com.yc.appfilelib.AppFileUtils;
-import com.yc.appfilelib.BufferIoUtils;
+import com.yc.fileiohelper.BufferIoUtils;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.roundcorner.view.RoundTextView;

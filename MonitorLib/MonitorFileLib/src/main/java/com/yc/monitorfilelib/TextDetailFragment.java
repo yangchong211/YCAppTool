@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yc.appfilelib.FileIoUtils;
+import com.yc.fileiohelper.FileIoUtils;
 import com.yc.appfilelib.AppFileUtils;
 import com.yc.appmediastore.FileShareUtils;
 

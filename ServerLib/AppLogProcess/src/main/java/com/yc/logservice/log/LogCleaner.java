@@ -2,8 +2,8 @@ package com.yc.logservice.log;
 
 
 import com.yc.appfilelib.AppFileUtils;
-import com.yc.appfilelib.FileSizeUtils;
 import com.yc.appfilelib.SdCardUtils;
+import com.yc.fileiohelper.FileSizeUtils;
 import com.yc.toolutils.AppLogUtils;
 
 import java.io.File;

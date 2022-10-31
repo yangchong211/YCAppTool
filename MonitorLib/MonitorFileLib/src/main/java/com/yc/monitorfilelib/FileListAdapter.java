@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yc.appfilelib.AppFileUtils;
-import com.yc.appfilelib.FileSizeUtils;
+import com.yc.fileiohelper.FileSizeUtils;
 import com.yc.eastadapterlib.BaseRecycleAdapter;
 import com.yc.eastadapterlib.BaseViewHolder;
 import com.yc.toolutils.AppTimeUtils;

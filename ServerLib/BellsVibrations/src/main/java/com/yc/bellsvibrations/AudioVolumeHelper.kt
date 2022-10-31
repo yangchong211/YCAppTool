@@ -278,7 +278,8 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
      * 关闭/打开扬声器播放
      */
     fun setSpeakerStatus(on: Boolean) {
-        if (on) { //扬声器
+        if (on) {
+            //扬声器
             audioManager?.isSpeakerphoneOn = true
             audioManager?.mode = AudioManager.MODE_NORMAL
         } else {

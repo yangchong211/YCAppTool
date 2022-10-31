@@ -92,6 +92,7 @@ dependencies {
 //    implementation project(path: ':FragmentManager')
 //    implementation project(path: ':ReflectionLib')
     implementation project(path: ':ToolFileLib')
+    implementation project(path: ':FileIoHelper')
     implementation project(path: ':AppMediaStore')
     implementation project(path: ':AppEncryptLib')
 
