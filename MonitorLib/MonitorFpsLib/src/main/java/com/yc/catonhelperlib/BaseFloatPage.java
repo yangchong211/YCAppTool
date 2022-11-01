@@ -37,6 +37,7 @@ public abstract class BaseFloatPage {
         this.mHandler = new Handler(Looper.myLooper());
         this.onCreate(context);
         this.mRootView = new FrameLayout(context) {
+            @Override
             public boolean dispatchKeyEvent(KeyEvent event) {
                 return event.getAction() != 1 || event.getKeyCode() != 4 && event.getKeyCode() != 3 ? super.dispatchKeyEvent(event) : BaseFloatPage.this.onBackPressed();
             }
@@ -117,6 +118,7 @@ public abstract class BaseFloatPage {
 
     public void runAfterRenderFinish(final Runnable runnable) {
         Looper.myQueue().addIdleHandler(new IdleHandler() {
+            @Override
             public boolean queueIdle() {
                 if (runnable != null) {
                     runnable.run();
@@ -176,6 +178,7 @@ public abstract class BaseFloatPage {
             this.SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
         }
 
+        @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if ("android.intent.action.CLOSE_SYSTEM_DIALOGS".equals(action)) {

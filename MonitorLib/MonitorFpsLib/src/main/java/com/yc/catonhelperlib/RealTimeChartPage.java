@@ -15,11 +15,13 @@ public class RealTimeChartPage extends BaseFloatPage {
     public RealTimeChartPage() {
     }
 
+    @Override
     protected View onCreateView(Context context, ViewGroup view) {
         this.mLineChart = new LineChart(context);
         return this.mLineChart;
     }
 
+    @Override
     protected void onViewCreated(View view) {
         super.onViewCreated(view);
         this.init();
@@ -35,12 +37,14 @@ public class RealTimeChartPage extends BaseFloatPage {
         this.mLineChart.startMove();
     }
 
+    @Override
     protected void onLayoutParamsCreated(LayoutParams params) {
         params.flags = 24;
         params.width = -1;
         params.height = dp2px(this.getContext(), 240.0F);
     }
 
+    @Override
     protected boolean onBackPressed() {
         return false;
     }
@@ -92,12 +96,14 @@ public class RealTimeChartPage extends BaseFloatPage {
 
     }
 
+    @Override
     public void onEnterForeground() {
         super.onEnterForeground();
         this.mLineChart.startMove();
         this.getRootView().setVisibility(View.VISIBLE);
     }
 
+    @Override
     public void onEnterBackground() {
         super.onEnterBackground();
         this.mLineChart.stopMove();

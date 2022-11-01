@@ -16,6 +16,7 @@ public class RealTimeChartIconPage extends BaseFloatPage implements View.OnClick
     public RealTimeChartIconPage() {
     }
 
+    @Override
     protected View onCreateView(Context context, ViewGroup view) {
         ImageView imageView = new ImageView(this.getContext());
         imageView.setScaleType(ImageView.ScaleType.CENTER);
@@ -24,15 +25,18 @@ public class RealTimeChartIconPage extends BaseFloatPage implements View.OnClick
         return imageView;
     }
 
+    @Override
     protected void onCreate(Context context) {
         super.onCreate(context);
         PerformanceManager.getInstance().init(context);
     }
 
+    @Override
     protected void onViewCreated(View view) {
         super.onViewCreated(view);
     }
 
+    @Override
     protected void onLayoutParamsCreated(WindowManager.LayoutParams params) {
         params.flags = 8;
         params.gravity = 53;
@@ -76,11 +80,13 @@ public class RealTimeChartIconPage extends BaseFloatPage implements View.OnClick
         PerformanceManager.getInstance().stopMonitorFrameInfo();
     }
 
+    @Override
     public void onEnterForeground() {
         super.onEnterForeground();
         this.getRootView().setVisibility(View.VISIBLE);
     }
 
+    @Override
     public void onEnterBackground() {
         super.onEnterBackground();
         this.getRootView().setVisibility(View.GONE);
