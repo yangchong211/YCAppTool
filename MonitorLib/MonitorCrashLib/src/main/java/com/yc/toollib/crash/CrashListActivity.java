@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.yc.appfilelib.AppFileUtils;
 import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.eastadapterlib.OnItemLongClickListener;
 import com.yc.easyexecutor.DelegateTaskExecutor;
@@ -26,8 +27,6 @@ import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toollib.R;
 import com.yc.toolutils.AppIntentUtils;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.file.AppFileUtils;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,7 +50,6 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecycleView;
     private List<File> fileList = new ArrayList<>();
-    private Handler handler = new Handler();
     private CrashInfoAdapter crashInfoAdapter;
     private ProgressDialog progressDialog;
 
@@ -68,15 +66,6 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
             context.startActivity(target);
         } catch (Exception e){
             e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (handler!=null){
-            handler.removeCallbacksAndMessages(null);
-            handler = null;
         }
     }
 
@@ -219,7 +208,7 @@ public class CrashListActivity extends AppCompatActivity implements View.OnClick
         });
 
         //通知页面刷新
-        handler.post(new Runnable() {
+        DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
             @Override
             public void run() {
                 if (progressDialog != null && progressDialog.isShowing()) {

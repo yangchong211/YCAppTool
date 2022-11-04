@@ -12,6 +12,15 @@ import com.yc.toollib.R;
 
 import java.io.File;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time  : 2020/7/10
+ *     desc  : adapter适配器
+ *     revise:
+ * </pre>
+ */
 public class CrashInfoAdapter extends BaseRecycleAdapter<File> {
 
     public CrashInfoAdapter(Context context) {
@@ -31,7 +40,7 @@ public class CrashInfoAdapter extends BaseRecycleAdapter<File> {
             String errorMsgType = splitNames[2];
             if (!TextUtils.isEmpty(errorMsgType)) {
                 spannable = Spannable.Factory.getInstance().newSpannable(fileName);
-                spannable = CrashHelperUtils.addNewSpan(context, spannable, fileName, errorMsgType,
+                CrashHelperUtils.addNewSpan(context, spannable, fileName, errorMsgType,
                         Color.parseColor("#FF0006"), 0);
             }
         }

@@ -27,15 +27,17 @@ import androidx.core.content.ContextCompat;
 
 import com.yc.activitymanager.ActivityManager;
 import com.yc.appcompress.AppCompress;
+import com.yc.appfilelib.AppFileUtils;
+import com.yc.appmediastore.FileShareUtils;
+import com.yc.appscreenlib.AppShotsUtils;
 import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.yc.fileiohelper.BufferIoUtils;
+import com.yc.fileiohelper.FileIoUtils;
+import com.yc.imagetoollib.ImageSaveUtils;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toollib.R;
 import com.yc.toolutils.AppWindowUtils;
-import com.yc.toolutils.file.AppFileUtils;
-import com.yc.toolutils.file.FileSaveUtils;
-import com.yc.toolutils.file.FileShareUtils;
-import com.yc.toolutils.screen.AppShotsUtils;
 
 import java.io.File;
 import java.util.List;
@@ -122,7 +124,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
                     }
                 }
                 //获取内容
-                crashContent = AppFileUtils.readFile2String(filePath);
+                crashContent = BufferIoUtils.readFile2String1(filePath);
                 //获取所有Activity
                 activitiesClass = ActivityManager.getInstance().getActivitiesClass(CrashDetailsActivity.this, getPackageName(), null);
 
@@ -131,28 +133,27 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
 
                 //匹配错误信息
                 if (!TextUtils.isEmpty(matchErrorInfo)) {
-                    spannable = CrashHelperUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, matchErrorInfo, Color.parseColor("#FF0006"), 18);
+                    CrashHelperUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, matchErrorInfo, Color.parseColor("#FF0006"), 18);
                 }
 
                 //匹配包名
                 String packageName = getPackageName();
-                spannable = CrashHelperUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, packageName, Color.parseColor("#0070BB"), 0);
+                CrashHelperUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, packageName, Color.parseColor("#0070BB"), 0);
 
                 //匹配Activity
                 if (activitiesClass != null && activitiesClass.size() > 0) {
                     for (int i = 0; i < activitiesClass.size(); i++) {
-                        spannable = CrashHelperUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, activitiesClass.get(i).getSimpleName(), Color.parseColor("#55BB63"), 16);
+                        CrashHelperUtils.addNewSpan(CrashDetailsActivity.this, spannable, crashContent, activitiesClass.get(i).getSimpleName(), Color.parseColor("#55BB63"), 16);
                     }
                 }
 
                 //主线程处理
-                final Spannable finalSpannable = spannable;
                 DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                     @Override
                     public void run() {
                         if (mTvContent != null) {
                             try {
-                                mTvContent.setText(finalSpannable);
+                                mTvContent.setText(spannable);
                             } catch (Exception e) {
                                 mTvContent.setText(crashContent);
                             }
@@ -208,7 +209,7 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
     private void savePicture(Bitmap bitmap) {
         if (bitmap != null) {
             String crashPicPath = CrashHelperUtils.getCrashPicPath(CrashDetailsActivity.this) + "/crash_pic_" + System.currentTimeMillis() + ".jpg";
-            boolean saveBitmap = FileSaveUtils.saveBitmap(CrashDetailsActivity.this, bitmap, crashPicPath);
+            boolean saveBitmap = ImageSaveUtils.saveBitmap(CrashDetailsActivity.this, bitmap, crashPicPath);
             if (saveBitmap) {
                 showToast("保存截图成功，请到相册查看\n路径：" + crashPicPath);
                 final Bitmap bitmapCompress = AppCompress.getInstance().compressSizePath(crashPicPath);
@@ -302,10 +303,9 @@ public class CrashDetailsActivity extends AppCompatActivity implements View.OnCl
 
     private void shareLogs() {
         //先把文件转移到外部存储文件
-        File srcFile = new File(filePath);
         String destFilePath = AppFileUtils.getExternalFilePath(this,"CrashShare.txt");
         File destFile = new File(destFilePath);
-        boolean copy = AppFileUtils.copyFile(srcFile, destFile);
+        boolean copy = FileIoUtils.copyFile2(filePath, destFilePath);
         if (copy) {
             //分享
             FileShareUtils.shareFile(CrashDetailsActivity.this, destFile);

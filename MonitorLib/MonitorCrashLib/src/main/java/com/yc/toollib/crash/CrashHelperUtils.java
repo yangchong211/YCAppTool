@@ -14,6 +14,7 @@ import android.text.style.ForegroundColorSpan;
 import androidx.annotation.ColorInt;
 
 import com.yc.activitymanager.ActivityManager;
+import com.yc.appfilelib.AppFileUtils;
 import com.yc.toollib.BuildConfig;
 import com.yc.toolmemorylib.AppMemoryUtils;
 import com.yc.toolmemorylib.DalvikHeapMem;
@@ -23,7 +24,6 @@ import com.yc.toolutils.AppInfoUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppProcessUtils;
 import com.yc.toolutils.AppSizeUtils;
-import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -6,9 +6,9 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.tencent.mmkv.MMKV;
+import com.yc.appencryptlib.Md5EncryptUtils;
 import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.encrypt.AppMd5Utils;
 
 import java.util.Arrays;
 
@@ -119,7 +119,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
         if (ex.getStackTrace().length != 0) {
-            md5Key = AppMd5Utils.encryptMD5ToString(Arrays.toString(ex.getStackTrace()));
+            md5Key = Md5EncryptUtils.encryptMD5ToString(Arrays.toString(ex.getStackTrace()));
             AppLogUtils.d(ex.getMessage() + "  md5 key : " + md5Key);
         }
         boolean isHandle = handleException(ex);
