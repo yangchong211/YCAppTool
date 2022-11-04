@@ -1,6 +1,7 @@
 package com.yc.appscreenlib;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -19,6 +20,7 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
