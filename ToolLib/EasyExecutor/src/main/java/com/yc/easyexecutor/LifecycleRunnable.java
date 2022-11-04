@@ -25,8 +25,7 @@ public class LifecycleRunnable implements Runnable {
 
 
     LifecycleRunnable(LifecycleOwner lifecycleOwner, final Handler handler,
-                      final Lifecycle.Event targetEvent,
-                      final Runnable originRunnable) {
+                      final Lifecycle.Event targetEvent, final Runnable originRunnable) {
         if (originRunnable == null || lifecycleOwner == null) {
             return;
         }

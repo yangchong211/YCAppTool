@@ -206,8 +206,7 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
      * 执行有生命周期的任务,指定Lifecycle.Event
      */
     public Runnable postToMainThread(LifecycleOwner lifecycleOwner,
-                                     Lifecycle.Event targetEvent,
-                                     Runnable runnable) {
+                                     Lifecycle.Event targetEvent, Runnable runnable) {
         LifecycleRunnable lifecycleRunnableDelegate = new LifecycleRunnable(lifecycleOwner,
                 getMainHandler(), targetEvent, runnable);
         mDelegate.postToMainThread(lifecycleRunnableDelegate);
@@ -215,7 +214,9 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     public void postToMainThread(Runnable runnable, long delayed) {
-        getMainHandler().postDelayed(runnable, delayed);
+        if (runnable != null){
+            getMainHandler().postDelayed(runnable, delayed);
+        }
     }
 
     public Runnable postToMainThread(LifecycleOwner lifecycleOwner, Runnable runnable, long delayed) {
@@ -226,7 +227,9 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     public void removeUICallback(Runnable runnable) {
-        getMainHandler().removeCallbacks(runnable);
+        if (runnable != null){
+            getMainHandler().removeCallbacks(runnable);
+        }
     }
 
 }
