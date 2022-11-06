@@ -18,6 +18,7 @@ public interface IFloatView {
      * 设置大小
      * @param width                 宽
      * @param height                高
+     * @return                      返回FloatWindow
      */
     FloatWindow setSize(int width, int height);
 
@@ -26,12 +27,14 @@ public interface IFloatView {
      * @param gravity               显示
      * @param xOffset               x偏移
      * @param yOffset               y偏移
+     * @return                      返回FloatWindow
      */
     FloatWindow setGravity(int gravity, int xOffset, int yOffset);
 
     /**
      * 设置window参数配置
      * @param paramsConfig          参数配置
+     * @return                      返回FloatWindow
      */
     FloatWindow setParamsConfig(ParamsConfig paramsConfig);
 
