@@ -27,14 +27,14 @@ public abstract class AbsTouchListener implements View.OnTouchListener {
     private WindowManager.LayoutParams mWindowParams;
 
     /**
-     * Toast 显示后回调这个类
+     * 显示后回调这个类
      */
     public void start(FloatWindow floatWindow) {
         mFloatWindow = floatWindow;
         mDecorView = floatWindow.getDecorView();
         mWindowManager = floatWindow.getWindowManager();
         mWindowParams = floatWindow.getWindowParams();
-
+        //给根布局设置触摸事件
         mDecorView.setOnTouchListener(this);
     }
 
@@ -93,8 +93,8 @@ public abstract class AbsTouchListener implements View.OnTouchListener {
     /**
      * 更新悬浮窗的位置
      *
-     * @param x             x 坐标
-     * @param y             y 坐标
+     * @param x x 坐标
+     * @param y y 坐标
      */
     protected void updateLocation(float x, float y) {
         updateLocation((int) x, (int) y);
@@ -129,14 +129,16 @@ public abstract class AbsTouchListener implements View.OnTouchListener {
      * 根据手指按下和抬起时的坐标进行判断，不能根据有没有 move 事件来判断
      * 因为在有些机型上面，就算用户没有手指没有移动也会产生 move 事件
      *
-     * @param downX         手指按下时的 x 坐标
-     * @param upX           手指抬起时的 x 坐标
-     * @param downY         手指按下时的 y 坐标
-     * @param upY           手指抬起时的 y 坐标
+     * @param downX 手指按下时的 x 坐标
+     * @param upX   手指抬起时的 x 坐标
+     * @param downY 手指按下时的 y 坐标
+     * @param upY   手指抬起时的 y 坐标
      */
     protected boolean isTouchMove(float downX, float upX, float downY, float upY) {
         float minTouchSlop = getScaledTouchSlop();
-        return Math.abs(downX - upX) >= minTouchSlop || Math.abs(downY - upY) >= minTouchSlop;
+        boolean isMove = Math.abs(downX - upX) >= minTouchSlop || Math.abs(downY - upY) >= minTouchSlop;
+        // fix 如何解决滑出指定距离又滑入当作是点击事件bug？
+        return isMove;
     }
 
     /**
