@@ -462,10 +462,12 @@ public class FloatWindow implements IFloatView {
         return (FloatWindow) this;
     }
 
+    @Override
     public void showAsDropDown(View anchorView) {
         showAsDropDown(anchorView, Gravity.BOTTOM);
     }
 
+    @Override
     public void showAsDropDown(View anchorView, int showGravity) {
         showAsDropDown(anchorView, showGravity, 0, 0);
     }
@@ -478,6 +480,7 @@ public class FloatWindow implements IFloatView {
      * @param xOff        水平偏移
      * @param yOff        垂直偏移
      */
+    @Override
     public void showAsDropDown(View anchorView, int showGravity, int xOff, int yOff) {
         if (mDecorView.getChildCount() == 0 || mWindowParams == null) {
             throw new IllegalArgumentException("WindowParams and view cannot be empty");
@@ -535,6 +538,7 @@ public class FloatWindow implements IFloatView {
     /**
      * 显示悬浮窗
      */
+    @Override
     public void show() {
         if (mDecorView.getChildCount() == 0 || mWindowParams == null) {
             throw new IllegalArgumentException("WindowParams and view cannot be empty");
