@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
@@ -28,7 +29,11 @@ public class FloatActivity extends AppCompatActivity {
     private RoundTextView tvWidgetFloat12;
     private RoundTextView tvWidgetFloat2;
     private RoundTextView tvWidgetFloat3;
+    private RoundTextView tvWidgetFloat4;
     private FloatWindow floatWindow2;
+    private FloatWindow floatWindowWxBig;
+    private FloatWindow floatWindowWxSmall;
+    private  ConstraintLayout clFloatView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,13 +45,11 @@ public class FloatActivity extends AppCompatActivity {
     }
 
     private void initView() {
-
-
         tvWidgetFloat11 = findViewById(R.id.tv_widget_float1_1);
         tvWidgetFloat12 = findViewById(R.id.tv_widget_float1_2);
         tvWidgetFloat2 = findViewById(R.id.tv_widget_float2);
         tvWidgetFloat3 = findViewById(R.id.tv_widget_float3);
-
+        tvWidgetFloat4 = findViewById(R.id.tv_widget_float4);
     }
 
     public void initListener() {
@@ -94,6 +97,12 @@ public class FloatActivity extends AppCompatActivity {
                 }
             }
         });
+        tvWidgetFloat4.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                showFloat4();
+            }
+        });
     }
 
     private void showFloat2() {
@@ -130,6 +139,40 @@ public class FloatActivity extends AppCompatActivity {
                     });
         }
         floatWindow1.show();
+    }
+
+
+    private void showFloat4() {
+        //整个大悬浮
+        if (floatWindowWxBig == null){
+            floatWindowWxBig = new FloatWindow(this)
+                    .setContentView(R.layout.float_wx_view)
+                    .setOnClickListener(R.id.iv_video_back, new IClickListener() {
+                        @Override
+                        public void onClick(FloatWindow floatWindow, View view) {
+                            //开启缩小动画
+                            ToastUtils.showRoundRectToast("大浮窗开启缩小动画");
+                        }
+                    });
+            clFloatView = floatWindowWxBig.getDecorView().findViewById(R.id.cl_float_view);
+        }
+        floatWindowWxBig.show();
+
+        //添加小悬浮
+        if (clFloatView != null){
+            if (floatWindowWxSmall == null){
+                floatWindowWxSmall = new FloatWindow(this)
+                        .setContentView(R.layout.float_window_view)
+                        .setDraggable(new SpringTouchListener())
+                        .setOnClickListener(R.id.icon, new IClickListener() {
+                            @Override
+                            public void onClick(FloatWindow floatWindow, View view) {
+                                ToastUtils.showRoundRectToast("小悬浮窗被点击了");
+                            }
+                        });
+            }
+            floatWindowWxSmall.showAsDropDown(clFloatView,Gravity.BOTTOM,100,200);
+        }
     }
 
 }

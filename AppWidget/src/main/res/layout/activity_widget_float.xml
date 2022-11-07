@@ -55,6 +55,18 @@
         android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_widget_float4"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="3.1 仿微信视频通话悬浮窗"
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
 
     <ScrollView
         android:layout_width="match_parent"
