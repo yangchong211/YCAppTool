@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
+import com.yc.apptool.transition.TransitionActivity;
 import com.yc.apptool.transition.VideoPlayActivity;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
@@ -71,7 +72,7 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
         if (v == tvView1){
             startActivity(new Intent(this,UploadActivity.class));
         } else if (v == tvView2){
-            startActivity(new Intent(this, VideoPlayActivity.class));
+            startActivity(new Intent(this, TransitionActivity.class));
         }
     }
 }

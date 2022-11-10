@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".UploadActivity"/>
-        <activity android:name=".transition.VideoPlayActivity"/>
+        <activity android:name=".transition.VideoPlayActivity"
+            android:theme="@style/TransparentActivityDialog"/>
         <activity android:name=".transition.TransitionActivity"/>
     </application>
 

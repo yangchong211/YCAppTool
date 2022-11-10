@@ -27,7 +27,7 @@ public class TransitionActivity extends AppCompatActivity {
 
     private void setupView() {
         mRecycleView = (RecyclerView) findViewById(R.id.recyclerView);
-        mRecycleView.setLayoutManager(new GridLayoutManager(this, 3));
+        mRecycleView.setLayoutManager(new GridLayoutManager(this, 4));
         mRecycleView.setAdapter(new VideoPlayAdapter());
     }
 
@@ -52,7 +52,7 @@ public class TransitionActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 10;
+            return 17;
         }
     }
 
