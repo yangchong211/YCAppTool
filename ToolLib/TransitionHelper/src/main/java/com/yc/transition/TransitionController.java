@@ -23,27 +23,25 @@ public final class TransitionController {
      * 动画控件
      */
     private final View animView;
-
     /**
      * 动画时长
      */
     private final long duration;
-
     /**
      * 插值器
      */
     private final TimeInterpolator timeInterpolator;
-
     /**
      * 转场动画参数
      */
     private TransitionParam transitionParam;
-
     /**
      * 目标的宽和高
      */
     private int targetWidth, targetHeight;
-
+    /**
+     * 动画
+     */
     private ViewPropertyAnimator viewAnimator;
 
     private TransitionController(View animView, long duration, int targetWidth, 
@@ -108,8 +106,8 @@ public final class TransitionController {
 
     /**
      * 进入的转场动画
-     *
-     * @param param
+     * @param param                         参数
+     * @param transitionCallback            回调
      */
     public void transitionEnter(TransitionParam param, final TransitionCallback transitionCallback) {
         this.transitionParam = param;
@@ -121,6 +119,7 @@ public final class TransitionController {
                 } else {
                     animView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 }
+                //获取
                 targetWidth = animView.getMeasuredWidth();
                 targetHeight = animView.getMeasuredHeight();
                 //开始执行动画
@@ -131,8 +130,7 @@ public final class TransitionController {
 
     /**
      * 退出的转场动画
-     *
-     * @param transitionCallback
+     * @param transitionCallback            回调
      */
     public void transitionExit(TransitionCallback transitionCallback) {
         transitionStart(false, new TransitionAnimation(transitionCallback));
@@ -150,12 +148,10 @@ public final class TransitionController {
     }
 
     public static class Builder {
-
         /**
          * 动画控件
          */
         private View animView;
-
         /**
          * 动画时长
          */

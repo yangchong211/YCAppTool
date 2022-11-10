@@ -26,15 +26,25 @@ public final class TransitionUtils {
         if (sourceView == null) {
             throw new NullPointerException("source view is null");
         } else {
+            //获取目标view的宽和高
             int width = sourceView.getMeasuredWidth();
             int height = sourceView.getMeasuredHeight();
             if (width > 0 && height > 0) {
-                //宽高都有效
+                //宽高都有效，然后设置转场动画的属性
                 TransitionParam animBean = new TransitionParam();
                 animBean.width = width;
                 animBean.height = height;
+
+                //这个作用是：
+                //以屏幕左上角为参考系，判断view是否有一部分仍然在屏幕中（没有被父View遮挡），则会返回true。
+                //反之，如果它全部被父View遮挡住或者本身就是不可见的，则会返回false。
+                //简单来说就是目标view在父view的映射，然后从屏幕左上角开始计算，保存到 rect 中，注意是父view，而不是屏幕
                 Rect visibleRect = new Rect();
                 sourceView.getGlobalVisibleRect(visibleRect);
+                //getLocalVisibleRect(rect) 也是很好理解的，只不过这个方法是以 view 的左上角为参考系。
+                //只要这个View的左上角在屏幕中，它的LocalVisibleRect的左上角坐标就一定是(0,0)，
+                //如果View的右下角在屏幕中，它的LocalVisibleRect右下角坐标就一定是(view.getWidth(), view.getHeight())。
+                //sourceView.getLocalVisibleRect(visibleRect);
 
                 animBean.left = visibleRect.left;
                 animBean.right = visibleRect.right;
