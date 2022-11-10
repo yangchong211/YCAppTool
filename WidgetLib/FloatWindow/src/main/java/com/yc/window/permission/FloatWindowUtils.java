@@ -30,13 +30,20 @@ public final class FloatWindowUtils {
      */
     public static final String SYSTEM_ALERT_WINDOW = "android.permission.SYSTEM_ALERT_WINDOW";
 
-
+    /**
+     * 当API Level>=23的时候就要动态的申请权限了，判断是否能够绘制悬浮窗
+     * @param context           上下文
+     * @return                  返回为true就表明已同意权限，否则就表示没有全局绘制的权限。
+     */
     @RequiresApi(api = Build.VERSION_CODES.M)
     public static boolean hasPermission(Context context) {
         return Settings.canDrawOverlays(context);
     }
 
-
+    /**
+     * 跳转设置中心
+     * @param activity          上下文
+     */
     public static void goToSetting(Activity activity){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String packageName = activity.getPackageName();
