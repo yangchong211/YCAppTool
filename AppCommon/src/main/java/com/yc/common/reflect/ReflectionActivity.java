@@ -15,7 +15,6 @@ import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toolutils.AppLogUtils;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -40,7 +39,7 @@ public class ReflectionActivity extends BaseActivity {
 
     @Override
     public int getContentView() {
-        return R.layout.activity_base_view;
+        return R.layout.activity_base_text_view;
     }
 
     @Override

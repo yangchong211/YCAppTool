@@ -168,7 +168,7 @@ include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib',':EasyExecutor',
         ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib', ':AppProcessLib',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib',
-        ':ZXingCodeLib'
+        ':ZXingCodeLib', ':TransitionHelper'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
@@ -190,6 +190,7 @@ project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
 project(':LiveDataBus').projectDir = new File('ToolLib/LiveDataBus')
 project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
 project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
+project(':TransitionHelper').projectDir = new File('ToolLib/TransitionHelper')
 
 
 

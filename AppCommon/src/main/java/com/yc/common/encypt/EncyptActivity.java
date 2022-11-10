@@ -44,7 +44,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public int getContentView() {
-        return R.layout.activity_base_view;
+        return R.layout.activity_base_text_view;
     }
 
     @Override
