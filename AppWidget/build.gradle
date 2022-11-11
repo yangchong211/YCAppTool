@@ -54,6 +54,14 @@ dependencies {
     //轮播图，使用recyclerView实现，https://github.com/yangchong211/YCBannerView
     implementation 'com.github.yangchong211.YCBannerView:GalleryBannerLib:2.3.6'
 
+
+    implementation 'com.github.yangchong211.YCDialog:DialogLib:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:PopupWindow:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
+    implementation 'com.github.yangchong211.YCDialog:SnackBar:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:DialogFragment:3.6.8'
+    implementation 'com.github.yangchong211.YCDialog:BaseDialog:3.6.8'
+
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':AppTextView')

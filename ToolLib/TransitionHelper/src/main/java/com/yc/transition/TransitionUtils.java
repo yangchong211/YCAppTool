@@ -3,6 +3,7 @@ package com.yc.transition;
 import android.app.Activity;
 import android.graphics.Rect;
 import android.view.View;
+import android.view.WindowManager;
 
 
 /**
@@ -15,6 +16,41 @@ import android.view.View;
  * </pre>
  */
 public final class TransitionUtils {
+
+    /**
+     * 获取悬浮窗源View的数据
+     *
+     * @param sourceView        目标view
+     * @return                  TransitionParam对象
+     */
+    public static TransitionParam getSourceViewParam(View sourceView , WindowManager.LayoutParams layoutParams) {
+        if (sourceView == null || layoutParams == null) {
+            throw new NullPointerException("source view or layoutParams is null");
+        } else {
+            //获取目标view的宽和高
+            int width = sourceView.getMeasuredWidth();
+            int height = sourceView.getMeasuredHeight();
+            if (width > 0 && height > 0) {
+                //宽高都有效，然后设置转场动画的属性
+                TransitionParam animBean = new TransitionParam();
+                animBean.width = width;
+                animBean.height = height;
+
+                int width1 = layoutParams.width;
+                int height1 = layoutParams.height;
+                int x = layoutParams.x;
+                int y = layoutParams.y;
+
+                animBean.left = x;
+                animBean.right = x + width1;
+                animBean.top = y;
+                animBean.bottom = y + height1;
+                return animBean;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * 获取源View的数据
