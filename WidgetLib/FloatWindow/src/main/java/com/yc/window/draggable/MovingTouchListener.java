@@ -22,6 +22,12 @@ public class MovingTouchListener extends AbsTouchListener {
     /** 触摸移动标记 */
     private boolean mMoveTouch;
 
+    /**
+     * 触摸事件。返回false表示不会拦截事件，返回true表示自己处理事件相当于事件拦截了(避免点击事件)
+     * @param v                 view
+     * @param event             event
+     * @return
+     */
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent event) {

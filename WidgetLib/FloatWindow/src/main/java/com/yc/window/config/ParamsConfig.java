@@ -4,6 +4,8 @@ import android.content.pm.ActivityInfo;
 import android.os.IBinder;
 import android.view.View;
 
+import com.yc.window.FloatWindow;
+
 /**
  * <pre>
  *     @author yangchong
@@ -55,6 +57,14 @@ public final class ParamsConfig {
      * 设置垂直权重
      */
     private float verticalWeight = -1;
+    /**
+     * 设置窗口在哪个显示屏上显示
+     */
+    private int preferredDisplayModeId = -1;
+    /**
+     * 设置按键的亮度
+     */
+    private float buttonBrightness = -1f;
 
     public int getScreenOrientation() {
         return screenOrientation;
@@ -94,6 +104,14 @@ public final class ParamsConfig {
 
     public float getVerticalWeight() {
         return verticalWeight;
+    }
+
+    public int getPreferredDisplayModeId() {
+        return preferredDisplayModeId;
+    }
+
+    public float getButtonBrightness() {
+        return buttonBrightness;
     }
 
     public static class Builder {
@@ -188,6 +206,22 @@ public final class ParamsConfig {
          */
         public Builder setVerticalWeight(float verticalWeight) {
             config.verticalWeight = verticalWeight;
+            return this;
+        }
+
+        /**
+         * 设置窗口在哪个显示屏上显示
+         */
+        public Builder setPreferredDisplayModeId(int preferredDisplayModeId) {
+            config.preferredDisplayModeId = preferredDisplayModeId;
+            return this;
+        }
+
+        /**
+         * 设置按键的亮度
+         */
+        public Builder setButtonBrightness(float buttonBrightness) {
+            config.buttonBrightness = buttonBrightness;
             return this;
         }
 

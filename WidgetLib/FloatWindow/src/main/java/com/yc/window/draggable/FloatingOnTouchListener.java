@@ -1,5 +1,6 @@
 package com.yc.window.draggable;
 
+import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -33,6 +34,7 @@ public class FloatingOnTouchListener implements View.OnTouchListener {
         floatWindow.getDecorView().setOnTouchListener(this);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View view, MotionEvent event) {
         switch (event.getAction()) {

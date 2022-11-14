@@ -218,6 +218,16 @@ public class FloatWindow implements IFloatView {
         if (paramsConfig.getVerticalWeight()>=0){
             mWindowParams.verticalWeight = paramsConfig.getVerticalWeight();
         }
+        //设置窗口在哪个显示屏上显示
+        if (paramsConfig.getPreferredDisplayModeId()>=0){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                mWindowParams.preferredDisplayModeId = paramsConfig.getPreferredDisplayModeId();
+            }
+        }
+        //设置按键的亮度
+        if (paramsConfig.getButtonBrightness()>=0){
+            mWindowParams.buttonBrightness = paramsConfig.getButtonBrightness();
+        }
         update();
         return this;
     }
@@ -326,25 +336,7 @@ public class FloatWindow implements IFloatView {
         return (FloatWindow) this;
     }
 
-    /**
-     * 设置窗口在哪个显示屏上显示
-     */
-    public FloatWindow setPreferredDisplayModeId(int id) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mWindowParams.preferredDisplayModeId = id;
-            update();
-        }
-        return (FloatWindow) this;
-    }
 
-    /**
-     * 设置按键的亮度
-     */
-    public FloatWindow setButtonBrightness(float buttonBrightness) {
-        mWindowParams.buttonBrightness = buttonBrightness;
-        update();
-        return (FloatWindow) this;
-    }
 
     /**
      * 设置窗口的刷新率
