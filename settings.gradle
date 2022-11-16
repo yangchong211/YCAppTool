@@ -118,7 +118,7 @@ include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib',
         ':FloatWindow', ':AppTextView', ':AppImageView', ':AppButtonView', ':AppScrollView',
         ':AppSwitchView', ':AppEditText', ':AppConstraintLayout', ':AppLoadingLib',
-        ':RedDotView', ':ExpandLib',':AppChartView',':AppShadowLib'
+        ':RedDotView', ':ExpandLib',':AppChartView',':AppShadowLib',':AppCoordinatorLayout'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
 project(':CustomWidget').projectDir = new File('WidgetLib/CustomWidget')
@@ -159,7 +159,7 @@ project(':RedDotView').projectDir = new File('WidgetLib/RedDotView')
 project(':ExpandLib').projectDir = new File('WidgetLib/ExpandLib')
 project(':AppChartView').projectDir = new File('WidgetLib/AppChartView')
 project(':AppShadowLib').projectDir = new File('WidgetLib/AppShadowLib')
-
+project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinatorLayout')
 
 
 /* +++++++++ 框架基础工具库 +++++++++ */

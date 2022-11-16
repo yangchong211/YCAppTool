@@ -1,4 +1,4 @@
-package com.yc.library.weight;
+package com.yc.coordinatorlayout;
 
 import android.content.Context;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;

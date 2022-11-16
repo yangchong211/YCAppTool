@@ -92,5 +92,5 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
     api project(path: ':BusinessInterface')
     implementation project(path: ':ApplicationLib')
-
+    implementation project(path: ':AppCoordinatorLayout')
 }
