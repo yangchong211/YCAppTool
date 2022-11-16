@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
+import com.yc.animbusiness.AnimationActiviy;
 import com.yc.apptool.transition.TransitionActivity;
 import com.yc.apptool.transition.VideoPlayActivity;
 import com.yc.roundcorner.view.RoundTextView;
@@ -65,6 +66,7 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
     private void initData() {
         tvView1.setText("1.版本更新案例库");
         tvView2.setText("2.Activity之间转场动画");
+        tvView3.setText("3.各种动画合集案例");
     }
 
     @Override
@@ -73,6 +75,8 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
             startActivity(new Intent(this,UploadActivity.class));
         } else if (v == tvView2){
             startActivity(new Intent(this, TransitionActivity.class));
+        } else if (v == tvView3){
+            AnimationActiviy.startActivity(this);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.yc.animbusiness;
 
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.yc.toastutils.ToastUtils;
 
 /**
  * <pre>
@@ -25,6 +28,7 @@ public class FrameAnimation extends AppCompatActivity {
     private ImageView ivFrameAnim1;
     private ImageView ivFrameAnim2;
     private boolean isStart = false;
+    private boolean isStart2 = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,10 +46,35 @@ public class FrameAnimation extends AppCompatActivity {
             public void onClick(View v) {
                 if (!isStart){
                     rocketAnimation.start();
+                    ToastUtils.showRoundRectToast("开始帧动画");
                 } else {
                     rocketAnimation.stop();
+                    ToastUtils.showRoundRectToast("停止帧动画");
                 }
                 isStart = !isStart;
+            }
+        });
+
+        tvAnim2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimationDrawable animationDrawable = new AnimationDrawable();
+                for (int i = 1; i < 3; i++) {
+                    int id = getResources().getIdentifier("icon_audio_" + i, "drawable", getPackageName());
+                    Drawable drawable = FrameAnimation.this.getResources().getDrawable(id);
+                    if (null != drawable) {
+                        animationDrawable.addFrame(drawable, 300);
+                    }
+                }
+                ivFrameAnim2.setImageDrawable(animationDrawable);
+                if (!isStart2){
+                    animationDrawable.start();
+                    ToastUtils.showRoundRectToast("开始帧动画");
+                } else {
+                    animationDrawable.stop();
+                    ToastUtils.showRoundRectToast("停止帧动画");
+                }
+                isStart2 = !isStart2;
             }
         });
 

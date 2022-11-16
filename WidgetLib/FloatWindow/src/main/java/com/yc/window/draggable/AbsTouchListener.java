@@ -116,6 +116,7 @@ public abstract class AbsTouchListener implements View.OnTouchListener {
         // 一定要先设置重心位置为左上角
         mWindowParams.gravity = screenGravity;
         try {
+            //更改位置
             mWindowManager.updateViewLayout(mDecorView, mWindowParams);
         } catch (IllegalArgumentException e) {
             // 当 WindowManager 已经消失时调用会发生崩溃

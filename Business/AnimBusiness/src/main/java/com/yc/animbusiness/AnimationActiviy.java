@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.animbusiness.reveal.RevealAnimationActivity;
+
 public class AnimationActiviy extends AppCompatActivity {
 
     private TextView tvAnim1;
@@ -18,6 +20,7 @@ public class AnimationActiviy extends AppCompatActivity {
     private TextView tvAnim5;
     private TextView tvAnim6;
     private TextView tvAnim7;
+    private TextView tvAnim8;
 
     /**
      * 开启页面
@@ -47,6 +50,7 @@ public class AnimationActiviy extends AppCompatActivity {
         tvAnim5 = findViewById(R.id.tv_anim_5);
         tvAnim6 = findViewById(R.id.tv_anim_6);
         tvAnim7 = findViewById(R.id.tv_anim_7);
+        tvAnim8 = findViewById(R.id.tv_anim_8);
 
         tvAnim1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +92,12 @@ public class AnimationActiviy extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AnimationActiviy.this,PropertyAnimatorAct.class));
+            }
+        });
+        tvAnim8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AnimationActiviy.this, RevealAnimationActivity.class));
             }
         });
     }

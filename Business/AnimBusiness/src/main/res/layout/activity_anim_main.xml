@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"
-        android:text="1.帧动画"
+        android:text="1.帧动画案例(Animation)"
         android:padding="@dimen/dp10"
         android:background="@color/colorAccent"/>
 
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"
-        android:text="2.补间动画"
+        android:text="2.补间动画案例(XxxAnimation)"
         android:padding="@dimen/dp10"
         android:background="@color/colorAccent"/>
 
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"
-        android:text="3.属性动画"
+        android:text="3.属性动画案例(Animator)"
         android:padding="@dimen/dp10"
         android:background="@color/colorAccent"/>
 
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"
-        android:text="5.购物车抛物线动画"
+        android:text="5.购物车抛物线动画案例(大搜车)"
         android:padding="@dimen/dp10"
         android:background="@color/colorAccent"/>
 
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"
-        android:text="6.动画封装库"
+        android:text="6.动画封装库(大搜车)"
         android:padding="@dimen/dp10"
         android:background="@color/colorAccent"/>
 
@@ -66,9 +66,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"
-        android:text="7.Property动画"
+        android:text="7.Property动画(ViewPropertyAnimator)"
         android:padding="@dimen/dp10"
         android:background="@color/colorAccent"/>
 
+    <TextView
+        android:id="@+id/tv_anim_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:text="8.揭露动画(也属于属性动画)"
+        android:padding="@dimen/dp10"
+        android:background="@color/colorAccent"/>
 
 </LinearLayout>

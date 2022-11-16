@@ -9,6 +9,10 @@
         <activity android:name=".OtherAnimation"/>
         <activity android:name=".TweenAnimation"/>
         <activity android:name="com.yc.animbusiness.AnimMainActivity"/>
+        <activity android:name=".PropertyAnimatorAct"/>
+
+        <activity android:name=".reveal.RevealEffectActivity"/>
+        <activity android:name=".reveal.RevealAnimationActivity"/>
     </application>
 
 </manifest>
