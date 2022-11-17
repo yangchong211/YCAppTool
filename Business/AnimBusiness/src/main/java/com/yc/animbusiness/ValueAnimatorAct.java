@@ -63,12 +63,16 @@ public class ValueAnimatorAct extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v == btn1){
+            ToastUtils.showRoundRectToast("ObjectAnimator动画java");
             testObjectAnimatorJava();
         } else if (v == btn2){
+            ToastUtils.showRoundRectToast("ObjectAnimator动画xml");
             testObjectAnimatorXml();
         }else if (v == btn3){
+            ToastUtils.showRoundRectToast("ValueAnimator动画java");
             testValueAnimatorJava();
         }else if (v == btn4){
+            ToastUtils.showRoundRectToast("ValueAnimator动画xml");
             testValueAnimatorXml();
         } else if (v == btn5){
             test1();
@@ -148,7 +152,7 @@ public class ValueAnimatorAct extends AppCompatActivity implements View.OnClickL
     }
 
     private void testObjectAnimatorXml(){
-        Animator mAnim = AnimatorInflater.loadAnimator(this, R.animator.animator_1_0);
+        Animator mAnim = AnimatorInflater.loadAnimator(this, R.animator.object_animator);
         mAnim.setTarget(imageView);
         mAnim.start();
     }
@@ -211,9 +215,13 @@ public class ValueAnimatorAct extends AppCompatActivity implements View.OnClickL
         AnimatorSet animSet = new AnimatorSet();
         // 步骤3：根据需求组合动画
         animSet.play(translation).with(rotate).before(alpha);
+        //动画同时执行
+        //animSet.playTogether(translation, rotate, alpha);
+
         animSet.setDuration(5000);
         // 步骤4：启动动画
         animSet.start();
+
 
 
         //AnimatorSet.play(Animator anim)   ：播放当前动画

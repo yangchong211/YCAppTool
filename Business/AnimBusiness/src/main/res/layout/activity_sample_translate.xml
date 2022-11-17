@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    >
+
+    <View
+        android:id="@+id/view1_red"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/view_text"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@color/colorAccent"
+        android:text="测试字体~~"
+        android:textColor="@color/cardview_dark_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_blue"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="184dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_yellow"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="184dp"
+        android:background="@color/color_f25057"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        >
+        <Button
+            android:id="@+id/btn_change_bounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击红框ChangeBounds"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/btn_change_clip_bounds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点击红框ChangeClipBounds"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_change_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="白框中字体移动ChangeScroll"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="自定义背景颜色更改" />
+
+    </LinearLayout>
+
+</LinearLayout>

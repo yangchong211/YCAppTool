@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/object_animal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="属性动画示例" />
+
+    <Button
+        android:id="@+id/translate_animal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="转场translate动画示例"
+        android:textAllCaps="false"
+        />
+
+    <Button
+        android:id="@+id/scene_animal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="场景scene动画示例"
+        android:textAllCaps="false"
+        />
+        <Button
+            android:id="@+id/share_element"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="共享share转场动画示例"
+            android:textAllCaps="false"
+            />
+    <Button
+        android:id="@+id/multiple_share_element"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="多个共享share转场动画示例"
+        android:textAllCaps="false" />
+
+    <ImageView
+        android:id="@+id/image_blue"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/bg_kites_min"
+        android:transitionName="blue_name"
+        />
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionName="textName"
+        android:text="这个是我等下转场假装变大的数据~~~~"
+        />
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.yc.animation.animation;
+package com.yc.animhelper;
 
 
 import android.animation.Animator;
@@ -76,12 +76,13 @@ public class AnimationViewUtil {
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
 
-                if (requestCode == null)
+                if (requestCode == null) {
                     thisActivity.startActivity(intent);
-                else if (bundle == null)
+                } else if (bundle == null) {
                     thisActivity.startActivityForResult(intent, requestCode);
-                else
+                } else {
                     thisActivity.startActivityForResult(intent, requestCode, bundle);
+                }
 
                 // 默认渐隐过渡动画.
                 thisActivity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

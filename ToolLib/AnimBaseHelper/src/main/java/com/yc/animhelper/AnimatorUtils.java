@@ -1,4 +1,4 @@
-package com.yc.animation.animation;
+package com.yc.animhelper;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;

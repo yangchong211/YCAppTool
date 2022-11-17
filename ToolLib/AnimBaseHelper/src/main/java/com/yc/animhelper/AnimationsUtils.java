@@ -1,4 +1,4 @@
-package com.yc.animation.animation;
+package com.yc.animhelper;
 
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -21,7 +21,7 @@ import android.widget.RelativeLayout;
  * 修订历史：
  * ================================================
  */
-public class AnimationsUtils {
+public final class AnimationsUtils {
 
     /**
      * 旋转 Rotate
@@ -120,7 +120,8 @@ public class AnimationsUtils {
             AnimationSet set = new AnimationSet(true);
             set.addAnimation(getRotateAnimation(-360, 0, durationMillis));
             set.addAnimation(getAlphaAnimation(0.5f, 1.0f, durationMillis));
-            set.addAnimation(getTranslateAnimation(menu.getLeft() - left, 0, menu.getTop() - top + 30, 0, durationMillis));// 加30是由于图片上部有一些透明高度
+            // 加30是由于图片上部有一些透明高度
+            set.addAnimation(getTranslateAnimation(menu.getLeft() - left, 0, menu.getTop() - top + 30, 0, durationMillis));
             set.setFillAfter(true);
             set.setDuration(durationMillis);
             set.setStartOffset((i * 100) / (-1 + relativeLayout.getChildCount()));

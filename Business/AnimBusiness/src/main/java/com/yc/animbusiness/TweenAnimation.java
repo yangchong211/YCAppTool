@@ -90,7 +90,6 @@ public class TweenAnimation extends AppCompatActivity implements View.OnClickLis
         imageView.setAnimation(scale);
     }
 
-
     /**
      * 画面转换位置移动动画效果
      */
@@ -110,6 +109,14 @@ public class TweenAnimation extends AppCompatActivity implements View.OnClickLis
         rotate.setDuration(300);
         rotate.setFillAfter(true);
         imageView.setAnimation(rotate);
+        //rotate.start();
+//        imageView.startAnimation(rotate);
+        imageView.clearAnimation();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     /**

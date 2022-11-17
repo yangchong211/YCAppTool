@@ -99,6 +99,7 @@ public final class TransitionController {
                 .setListener(animatorListener)
                 .scaleX(enterAnimation ? 1.0F : scaleXStart)
                 .scaleY(enterAnimation ? 1.0F : scaleYStart)
+                //translationX，translationY：控制View的位置，值是相对于View容器左上角坐标的偏移。
                 .translationX(enterAnimation ? 0.0F : startTransX)
                 .translationY(enterAnimation ? 0.0F : startTransY)
                 .start();

@@ -6,13 +6,20 @@
         <activity android:name=".AnimationActiviy"/>
         <activity android:name=".ValueAnimatorAct"/>
         <activity android:name=".FrameAnimation"/>
-        <activity android:name=".OtherAnimation"/>
+        <activity android:name=".ActivityAnimation"/>
         <activity android:name=".TweenAnimation"/>
         <activity android:name="com.yc.animbusiness.AnimMainActivity"/>
         <activity android:name=".PropertyAnimatorAct"/>
 
         <activity android:name=".reveal.RevealEffectActivity"/>
         <activity android:name=".reveal.RevealAnimationActivity"/>
+
+        <activity android:name=".transition.TransitionActivity"/>
+        <activity android:name=".transition.ObjectAnimatorActivity"/>
+        <activity android:name=".transition.SampleTranslateActivity"/>
+        <activity android:name=".transition.SceneActivity"/>
+        <activity android:name=".transition.ShareElementActivity1"/>
+        <activity android:name=".transition.ShareElementActivity2"/>
     </application>
 
 </manifest>

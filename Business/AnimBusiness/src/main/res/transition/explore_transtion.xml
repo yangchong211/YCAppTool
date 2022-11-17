@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="500"
+    android:transitionOrdering="sequential">
+    <explode android:interpolator="@android:interpolator/anticipate_overshoot"/>
+    <changeBounds  android:interpolator="@android:interpolator/accelerate_decelerate"/>
+
+<!--    <explode-->
+<!--        android:duration="1000"-->
+<!--        android:interpolator="@android:interpolator/accelerate_decelerate" />-->
+<!--    <fade-->
+<!--        android:duration="1000"-->
+<!--        android:fadingMode="fade_out"-->
+<!--        android:interpolator="@android:interpolator/accelerate_decelerate" />-->
+</transitionSet>
