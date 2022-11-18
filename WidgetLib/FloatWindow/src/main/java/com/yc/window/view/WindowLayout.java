@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 
+import com.yc.eventuploadlib.ExceptionReporter;
+
 
 /**
  * <pre>
@@ -46,7 +48,13 @@ public final class WindowLayout extends FrameLayout {
         if (mOnTouchListener != null && mOnTouchListener.onTouch(this, ev)) {
             return true;
         }
-        return super.dispatchTouchEvent(ev);
+        try {
+            return super.dispatchTouchEvent(ev);
+        } catch (Exception e){
+            e.printStackTrace();
+            ExceptionReporter.report("Float WindowLayout DispatchTouchEvent", e);
+        }
+        return true;
     }
 
     @Override

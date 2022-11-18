@@ -26,6 +26,7 @@
     ```
     - 然后，在app壳工程中具体操作如下所示
     ``` java
+    ExceptionReporter.setExceptionReporter(ExceptionHelperImpl())
     public class ExceptionReporterImpl extends ExceptionReporter {
         @Override
         protected void reportCrash(Throwable throwable) {

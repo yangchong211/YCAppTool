@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.window.FloatWindow;
 
 /**
@@ -122,6 +123,7 @@ public abstract class AbsTouchListener implements View.OnTouchListener {
             // 当 WindowManager 已经消失时调用会发生崩溃
             // IllegalArgumentException: View not attached to window manager
             e.printStackTrace();
+            ExceptionReporter.report("Float AbsTouchListener updateViewLayout", e);
         }
     }
 

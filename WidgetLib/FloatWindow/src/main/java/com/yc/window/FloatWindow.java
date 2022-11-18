@@ -17,6 +17,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.window.config.ParamsConfig;
 import com.yc.window.draggable.AbsTouchListener;
 import com.yc.window.inter.IClickListener;
@@ -584,6 +586,7 @@ public class FloatWindow implements IFloatView {
             // 如果这个 View 对象被重复添加到 WindowManager 则会抛出异常
             // java.lang.IllegalStateException: View has already been added to the window manager.
             e.printStackTrace();
+            ExceptionReporter.report("Float FloatWindow addView", e);
         }
     }
 
@@ -610,6 +613,7 @@ public class FloatWindow implements IFloatView {
             }
         } catch (NullPointerException | IllegalArgumentException | IllegalStateException e) {
             e.printStackTrace();
+            ExceptionReporter.report("Float FloatWindow removeView", e);
         } finally {
             // 当前没有显示
             mShowing = false;

@@ -239,9 +239,12 @@ https://github.com/Kyson/AndroidGodEye/blob/master/README_zh.md
 - https://github.com/hegaojian/JetpackMvvm
 
 
-
+### 超级好文
 - 优秀个人博主
     - https://juejin.cn/user/4318537403878167/posts
+- Android系统服务-WMS
+    - https://www.jianshu.com/p/4d34edb6b054
+
 
 
 ### java深度好文
