@@ -484,14 +484,19 @@ public class FloatWindow implements IFloatView {
                     anchorView.getResources().getConfiguration().getLayoutDirection());
         }
 
+        //首先获取目标anchorView在屏幕中的位置
         int[] anchorViewLocation = new int[2];
         anchorView.getLocationOnScreen(anchorViewLocation);
 
+        //获取目标anchorView的屏幕参照
         Rect windowVisibleRect = new Rect();
         anchorView.getWindowVisibleDisplayFrame(windowVisibleRect);
 
+        //然后计算悬浮窗的x和y的点
         mWindowParams.gravity = Gravity.TOP | Gravity.START;
+        //x 计算 = 目标view的x绝对位置 - 屏幕参照rect的left间距 + x偏移量
         mWindowParams.x = anchorViewLocation[0] - windowVisibleRect.left + xOff;
+        //y 计算 = 目标view的y绝对位置 - 屏幕参照rect的top间距 + y偏移量
         mWindowParams.y = anchorViewLocation[1] - windowVisibleRect.top + yOff;
 
         if ((showGravity & Gravity.LEFT) == Gravity.LEFT) {
