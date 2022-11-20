@@ -29,7 +29,7 @@ import android.text.TextUtils;
 import com.tencent.smtt.sdk.WebView;
 import com.yc.imagetoollib.ImageSaveUtils;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.EncodeUtils;
+import com.yc.toolutils.AppEncodeUtils;
 import com.yc.webviewlib.utils.OkHttpUtils;
 import com.yc.webviewlib.utils.WebFileUtils;
 
@@ -89,7 +89,7 @@ public final class SaveImageProcessor {
             return;
         } else if (imageUrl.startsWith("data:")) {
             String imageData = imageUrl.replaceFirst("data:image\\/\\w+;base64,", "");
-            byte[] imageDataBytes = EncodeUtils.base64Decode(imageData);
+            byte[] imageDataBytes = AppEncodeUtils.base64Decode(imageData);
             String fileName = WebFileUtils.getImageName("");
             File imageFile = new File(rootImagePath, fileName);
             try {

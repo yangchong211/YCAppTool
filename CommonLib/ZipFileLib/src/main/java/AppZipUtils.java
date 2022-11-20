@@ -1,5 +1,3 @@
-package com.yc.toolutils;
-
 import android.text.TextUtils;
 
 import java.io.BufferedInputStream;

@@ -1,4 +1,4 @@
-package com.yc.toolutils.handler;
+package com.yc.apphandlerlib;
 
 import android.os.Handler;
 import android.os.Message;

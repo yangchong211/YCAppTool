@@ -13,23 +13,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.AppHttpUtils;
+import com.yc.toolutils.net.AppHttpUtils;
 import com.yc.toolutils.net.AppNetworkUtils;
 import com.yc.webviewlib.base.X5WebChromeClient;
-import com.yc.webviewlib.base.X5WebViewClient;
-import com.yc.webviewlib.bridge.DefaultHandler;
 import com.yc.webviewlib.client.JsX5WebViewClient;
-import com.yc.webviewlib.inter.BridgeHandler;
-import com.yc.webviewlib.inter.CallBackFunction;
-import com.yc.webviewlib.inter.DefaultVideoListener;
 import com.yc.webviewlib.inter.DefaultWebListener;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 import com.yc.webviewlib.view.X5WebView;
 import com.yc.webviewlib.widget.WebProgress;
-import com.yc.webviewlib.wv.ResponseCallback;
-import com.yc.webviewlib.wv.WvJsHandler;
-import com.yc.webviewlib.wv.X5WvWebView;
 
 
 import java.util.ArrayList;

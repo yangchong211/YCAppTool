@@ -38,7 +38,7 @@ import com.yc.toolutils.AppActivityUtils;
 import com.yc.toolutils.net.AppNetworkUtils;
 import com.yc.webviewlib.helper.WebSchemeIntent;
 import com.yc.webviewlib.inter.InterWebListener;
-import com.yc.toolutils.EncodeUtils;
+import com.yc.toolutils.AppEncodeUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 
@@ -125,7 +125,7 @@ public class X5WebViewClient extends WebViewClient {
         if (!activityAlive) {
             return false;
         }
-        url = EncodeUtils.urlDecode(url);
+        url = AppEncodeUtils.urlDecode(url);
         if (TextUtils.isEmpty(url)) {
             return false;
         }
@@ -178,7 +178,7 @@ public class X5WebViewClient extends WebViewClient {
             return false;
         }
         String url = request.getUrl().toString();
-        url = EncodeUtils.urlDecode(url);
+        url = AppEncodeUtils.urlDecode(url);
         if (TextUtils.isEmpty(url)) {
             return false;
         }

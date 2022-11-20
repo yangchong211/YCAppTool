@@ -24,7 +24,7 @@ import com.tencent.smtt.sdk.WebView;
 import com.yc.toolutils.AppActivityUtils;
 import com.yc.webviewlib.bridge.BridgeUtil;
 import com.yc.webviewlib.bridge.WebJsMessage;
-import com.yc.toolutils.EncodeUtils;
+import com.yc.toolutils.AppEncodeUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 import com.yc.webviewlib.base.X5WebViewClient;
@@ -75,7 +75,7 @@ public class JsX5WebViewClient extends X5WebViewClient {
         if (!activityAlive) {
             return false;
         }
-        url = EncodeUtils.urlDecode(url);
+        url = AppEncodeUtils.urlDecode(url);
         if (TextUtils.isEmpty(url)) {
             return false;
         }
@@ -126,7 +126,7 @@ public class JsX5WebViewClient extends X5WebViewClient {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             String url = request.getUrl().toString();
-            url = EncodeUtils.urlDecode(url);
+            url = AppEncodeUtils.urlDecode(url);
             if (TextUtils.isEmpty(url)) {
                 return false;
             }
