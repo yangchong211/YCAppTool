@@ -1,8 +1,6 @@
-package com.yc.video.surface;
+package com.yc.videosurface;
 
 import android.content.Context;
-
-import com.yc.video.inter.ISurfaceView;
 
 /**
  * <pre>

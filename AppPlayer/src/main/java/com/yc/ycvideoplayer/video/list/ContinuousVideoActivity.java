@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.yc.videosurface.MeasureHelper;
 import com.yc.ycvideoplayer.ConstantVideo;
 
 import com.yc.ycvideoplayer.R;
@@ -126,11 +127,11 @@ public class ContinuousVideoActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         if (v == mBtnScale169){
-            mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_16_9);
+            mVideoPlayer.setScreenScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_16_9);
         } else if (v == mBtnScaleNormal){
-            mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_DEFAULT);
+            mVideoPlayer.setScreenScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_DEFAULT);
         }else if (v == mBtnScale43){
-            mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_4_3);
+            mVideoPlayer.setScreenScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_4_3);
         } else if (v == mBtnCrop){
 
         } else if (v == mBtnGif){

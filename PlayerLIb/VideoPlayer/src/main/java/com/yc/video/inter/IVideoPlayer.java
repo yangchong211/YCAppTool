@@ -33,6 +33,7 @@ package com.yc.video.inter;
 import android.graphics.Bitmap;
 
 import com.yc.video.config.ConstantKeys;
+import com.yc.videosurface.MeasureHelper;
 
 /**
  * <pre>
@@ -109,7 +110,7 @@ public interface IVideoPlayer extends IVideoPlayerScreen{
      */
     boolean isMute();
 
-    void setScreenScaleType(@ConstantKeys.ScreenScaleType int screenScaleType);
+    void setScreenScaleType(@MeasureHelper.ScreenScaleType int screenScaleType);
 
     void setSpeed(float speed);
 

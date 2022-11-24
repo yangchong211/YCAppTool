@@ -13,69 +13,51 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+package com.yc.videosurface;
 
-package com.yc.video.surface;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.SurfaceTexture;
 import android.view.Surface;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
+import android.view.TextureView;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.yc.kernel.inter.AbstractVideoPlayer;
-import com.yc.video.inter.ISurfaceView;
+import com.yc.videosurface.ISurfaceView;
+
 
 /**
  * <pre>
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2018/9/21
- *     desc  : 重写SurfaceView，适配视频的宽高和旋转
- *     revise:
+ *     desc  : 重写TextureView，适配视频的宽高和旋转
+ *     revise: 1.继承View，具有view的特性，比如移动，旋转，缩放，动画等变化。支持截图
+ *             8.必须在硬件加速的窗口中使用，占用内存比SurfaceView高，在5.0以前在主线程渲染，5.0以后有单独的渲染线程。
  * </pre>
  */
-public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
-
-    /**
-     * 优点：可以在一个独立的线程中进行绘制，不会影响主线程；使用双缓冲机制，播放视频时画面更流畅
-     * 缺点：Surface不在View hierachy中，它的显示也不受View的属性控制，所以不能进行平移，缩放等变换，
-     *      也不能放在其它ViewGroup中。SurfaceView 不能嵌套使用。
-     *
-     * SurfaceView双缓冲
-     *      1.SurfaceView在更新视图时用到了两张Canvas，一张frontCanvas和一张backCanvas。
-     *      2.每次实际显示的是frontCanvas，backCanvas存储的是上一次更改前的视图，当使用lockCanvas（）获取画布时，
-     *        得到的实际上是backCanvas而不是正在显示的frontCanvas，之后你在获取到的backCanvas上绘制新视图，
-     *        再unlockCanvasAndPost（canvas）此视图，那么上传的这张canvas将替换原来的frontCanvas作为新的frontCanvas，
-     *        原来的frontCanvas将切换到后台作为backCanvas。
-     */
+@SuppressLint("ViewConstructor")
+public class RenderTextureView extends TextureView implements ISurfaceView {
 
     private MeasureHelper mMeasureHelper;
+    private SurfaceTexture mSurfaceTexture;
+
     @Nullable
     private AbstractVideoPlayer mMediaPlayer;
+    private Surface mSurface;
 
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        if (callback!=null){
-            getHolder().removeCallback(callback);
-        }
-    }
-
-    public RenderSurfaceView(Context context) {
+    public RenderTextureView(Context context) {
         super(context);
         init(context);
     }
 
     private void init(Context context){
         mMeasureHelper = new MeasureHelper();
-        SurfaceHolder holder = this.getHolder();
-        //holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-        holder.addCallback(callback);
+        setSurfaceTextureListener(listener);
     }
 
     /**
@@ -135,7 +117,7 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
      */
     @Override
     public Bitmap doScreenShot() {
-        return getDrawingCache();
+        return getBitmap();
     }
 
     /**
@@ -143,9 +125,13 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
      */
     @Override
     public void release() {
-        if (callback!=null){
-            getHolder().removeCallback(callback);
+        if (mSurface != null){
+            mSurface.release();
         }
+        if (mSurfaceTexture != null){
+            mSurfaceTexture.release();
+        }
+
     }
 
     @Override
@@ -167,38 +153,52 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
         }
     }
 
-
-    private SurfaceHolder.Callback callback = new SurfaceHolder.Callback(){
+    private final SurfaceTextureListener listener = new SurfaceTextureListener() {
         /**
-         * 创建的时候调用该方法
-         * @param holder                        holder
+         * SurfaceTexture准备就绪
+         * @param surfaceTexture            surface
+         * @param width                     WIDTH
+         * @param height                    HEIGHT
          */
         @Override
-        public void surfaceCreated(SurfaceHolder holder) {
-            if (mMediaPlayer != null) {
-                Surface surface = holder.getSurface();
-                mMediaPlayer.setSurface(surface);
+        public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
+            if (mSurfaceTexture != null) {
+                setSurfaceTexture(mSurfaceTexture);
+            } else {
+                mSurfaceTexture = surfaceTexture;
+                mSurface = new Surface(surfaceTexture);
+                if (mMediaPlayer != null) {
+                    mMediaPlayer.setSurface(mSurface);
+                }
             }
         }
 
         /**
-         * 视图改变的时候调用方法
-         * @param holder
-         * @param format
-         * @param width
-         * @param height
+         * SurfaceTexture缓冲大小变化
+         * @param surface                   surface
+         * @param width                     WIDTH
+         * @param height                    HEIGHT
          */
         @Override
-        public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
 
         }
 
         /**
-         * 销毁的时候调用该方法
-         * @param holder
+         * SurfaceTexture即将被销毁
+         * @param surface                   surface
          */
         @Override
-        public void surfaceDestroyed(SurfaceHolder holder) {
+        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+            return false;
+        }
+
+        /**
+         * SurfaceTexture通过updateImage更新
+         * @param surface                   surface
+         */
+        @Override
+        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
 
         }
     };

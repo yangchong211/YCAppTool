@@ -13,11 +13,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package com.yc.video.surface;
+package com.yc.videosurface;
 
 import android.view.View;
 
-import com.yc.video.config.ConstantKeys;
+import androidx.annotation.IntDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 
 /**
  * <pre>
@@ -29,6 +33,44 @@ import com.yc.video.config.ConstantKeys;
  * </pre>
  */
 public final class MeasureHelper {
+
+    @IntDef({PlayerScreenScaleType.SCREEN_SCALE_DEFAULT,PlayerScreenScaleType.SCREEN_SCALE_16_9,
+            PlayerScreenScaleType.SCREEN_SCALE_4_3,PlayerScreenScaleType.SCREEN_SCALE_MATCH_PARENT,
+            PlayerScreenScaleType.SCREEN_SCALE_ORIGINAL,PlayerScreenScaleType.SCREEN_SCALE_CENTER_CROP})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ScreenScaleType{}
+
+    /**
+     * 播放视频缩放类型
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface PlayerScreenScaleType {
+        /**
+         * 默认类型
+         */
+        int SCREEN_SCALE_DEFAULT = 0;
+        /**
+         * 16：9比例类型，最为常见
+         */
+        int SCREEN_SCALE_16_9 = 1;
+        /**
+         * 4：3比例类型，也比较常见
+         */
+        int SCREEN_SCALE_4_3 = 2;
+        /**
+         * 充满整个控件视图
+         */
+        int SCREEN_SCALE_MATCH_PARENT = 3;
+        /**
+         * 原始类型，指视频的原始类型
+         */
+        int SCREEN_SCALE_ORIGINAL = 4;
+        /**
+         * 剧中裁剪类型
+         */
+        int SCREEN_SCALE_CENTER_CROP = 5;
+    }
+
 
     private int mVideoWidth;
     private int mVideoHeight;
@@ -53,7 +95,7 @@ public final class MeasureHelper {
         mVideoHeight = height;
     }
 
-    public void setScreenScale(@ConstantKeys.ScreenScaleType int screenScale) {
+    public void setScreenScale(@ScreenScaleType int screenScale) {
         mCurrentScreenScale = screenScale;
     }
 
@@ -79,7 +121,7 @@ public final class MeasureHelper {
         //如果设置了比例
         switch (mCurrentScreenScale) {
             //默认正常类型
-            case ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_DEFAULT:
+            case PlayerScreenScaleType.SCREEN_SCALE_DEFAULT:
             default:
                 if (mVideoWidth * height < width * mVideoHeight) {
                     width = height * mVideoWidth / mVideoHeight;
@@ -88,12 +130,12 @@ public final class MeasureHelper {
                 }
                 break;
             //原始类型，指视频的原始类型
-            case ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_ORIGINAL:
+            case PlayerScreenScaleType.SCREEN_SCALE_ORIGINAL:
                 width = mVideoWidth;
                 height = mVideoHeight;
                 break;
             //16：9比例类型，最为常见
-            case ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_16_9:
+            case PlayerScreenScaleType.SCREEN_SCALE_16_9:
                 if (height > width / 16 * 9) {
                     height = width / 16 * 9;
                 } else {
@@ -101,7 +143,7 @@ public final class MeasureHelper {
                 }
                 break;
             //4：3比例类型，也比较常见
-            case ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_4_3:
+            case PlayerScreenScaleType.SCREEN_SCALE_4_3:
                 if (height > width / 4 * 3) {
                     height = width / 4 * 3;
                 } else {
@@ -109,12 +151,12 @@ public final class MeasureHelper {
                 }
                 break;
             //充满整个控件视图
-            case ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_MATCH_PARENT:
+            case PlayerScreenScaleType.SCREEN_SCALE_MATCH_PARENT:
                 width = widthMeasureSpec;
                 height = heightMeasureSpec;
                 break;
             //剧中裁剪类型
-            case ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_CENTER_CROP:
+            case PlayerScreenScaleType.SCREEN_SCALE_CENTER_CROP:
                 if (mVideoWidth * height > width * mVideoHeight) {
                     width = height * mVideoWidth / mVideoHeight;
                 } else {

@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.bumptech.glide.Glide;
 import com.yc.statusbar.bar.StateAppBar;
+import com.yc.videosurface.MeasureHelper;
 import com.yc.ycvideoplayer.BaseActivity;
 import com.yc.ycvideoplayer.ConstantVideo;
 
@@ -77,7 +78,7 @@ public class TestFullActivity extends BaseActivity implements View.OnClickListen
         //设置控制器
         mVideoPlayer.setController(controller);
         mVideoPlayer.setUrl(ConstantVideo.VideoPlayerList[0]);
-        mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_16_9);
+        mVideoPlayer.setScreenScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_16_9);
         mVideoPlayer.start();
     }
 

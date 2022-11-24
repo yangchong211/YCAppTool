@@ -17,8 +17,19 @@
 
 
 ### 02.常见思路和做法
+#### 2.1 选择合适存储栈容器
 - 由于任务栈特性是先进后出(FILO)
     - 因此可以选择使用Stack作为集合存储Activity对象
+
+
+#### 2.2 常见的实现方式
+- 目前市面上较为通用的方式
+    - 第一种：写一个activity栈工具类，然后在BaseActivity类中使用工具类，在onCreate添加栈，在onDestroy中移除栈。
+    - 第二种：在XxxApplication中添加registerActivityLifecycleListener注册监听，监听所有activity，然后在onCreate添加栈，在onDestroy中移除栈。
+    - 第三种：做成单独库组件，是第二种方式的优化版本。定义Activity栈的接口，比如添加，移除，查找，关闭等，基于接口开发。完全解耦合！
+- 各种方式的优缺点分析
+    - 第一种方式：
+
 
 
 ### 03.Api调用说明

@@ -2,9 +2,9 @@ package com.yc.ycvideoplayer.video.tiktok;
 
 import android.content.Context;
 
-import com.yc.video.inter.ISurfaceView;
-import com.yc.video.surface.SurfaceFactory;
-import com.yc.video.surface.RenderTextureView;
+import com.yc.videosurface.ISurfaceView;
+import com.yc.videosurface.RenderTextureView;
+import com.yc.videosurface.SurfaceFactory;
 
 
 public class TikTokRenderViewFactory extends SurfaceFactory {

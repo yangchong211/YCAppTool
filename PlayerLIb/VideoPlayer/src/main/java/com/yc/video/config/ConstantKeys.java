@@ -187,28 +187,4 @@ public final class ConstantKeys {
     @Retention(RetentionPolicy.SOURCE)
     public @interface PlayModeType{}
 
-    /**
-     * 播放视频缩放类型
-     */
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface PlayerScreenScaleType {
-        //默认类型
-        int SCREEN_SCALE_DEFAULT = 0;
-        //16：9比例类型，最为常见
-        int SCREEN_SCALE_16_9 = 1;
-        //4：3比例类型，也比较常见
-        int SCREEN_SCALE_4_3 = 2;
-        //充满整个控件视图
-        int SCREEN_SCALE_MATCH_PARENT = 3;
-        //原始类型，指视频的原始类型
-        int SCREEN_SCALE_ORIGINAL = 4;
-        //剧中裁剪类型
-        int SCREEN_SCALE_CENTER_CROP = 5;
-    }
-
-    @IntDef({PlayerScreenScaleType.SCREEN_SCALE_DEFAULT,PlayerScreenScaleType.SCREEN_SCALE_16_9,
-            PlayerScreenScaleType.SCREEN_SCALE_4_3,PlayerScreenScaleType.SCREEN_SCALE_MATCH_PARENT,
-            PlayerScreenScaleType.SCREEN_SCALE_ORIGINAL,PlayerScreenScaleType.SCREEN_SCALE_CENTER_CROP})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface ScreenScaleType{}
 }

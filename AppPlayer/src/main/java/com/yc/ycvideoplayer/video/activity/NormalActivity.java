@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.yc.kernel.factory.PlayerFactory;
 import com.yc.kernel.utils.PlayerConstant;
 import com.yc.kernel.utils.PlayerFactoryUtils;
+import com.yc.videosurface.MeasureHelper;
 import com.yc.ycvideoplayer.BuriedPointEventImpl;
 import com.yc.ycvideoplayer.ConstantVideo;
 
@@ -135,17 +136,17 @@ public class NormalActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if (v == mBtnScale169){
-            mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_16_9);
+            mVideoPlayer.setScreenScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_16_9);
         } else if (v == mBtnScaleNormal){
-            mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_DEFAULT);
+            mVideoPlayer.setScreenScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_DEFAULT);
         }else if (v == mBtnScale43){
-            mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_4_3);
+            mVideoPlayer.setScreenScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_4_3);
         } else if (v == mBtnScaleFull){
-            mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_MATCH_PARENT);
+            mVideoPlayer.setScreenScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_MATCH_PARENT);
         }else if (v == mBtnScaleOriginal){
-            mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_ORIGINAL);
+            mVideoPlayer.setScreenScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_ORIGINAL);
         }else if (v == mBtnScaleCrop){
-            mVideoPlayer.setScreenScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_CENTER_CROP);
+            mVideoPlayer.setScreenScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_CENTER_CROP);
         }else if (v == mBtnCrop){
 
         } else if (v == mBtnGif){

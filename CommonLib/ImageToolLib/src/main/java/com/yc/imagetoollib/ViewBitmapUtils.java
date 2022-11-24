@@ -36,6 +36,7 @@ public final class ViewBitmapUtils {
         v.measure(0, 0);
         int w = v.getMeasuredWidth();
         int h = v.getMeasuredHeight();
+        //如果view的宽高是小于或等于0，则是获取整个屏幕宽和高
         if (w <= 0 || h <= 0) {
             DisplayMetrics metric = new DisplayMetrics();
             // 屏幕宽度（像素）
@@ -43,6 +44,7 @@ public final class ViewBitmapUtils {
             // 屏幕高度（像素）
             h = metric.heightPixels;
         }
+        //创建bitmap
         Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(bmp);
         c.drawColor(Color.WHITE);

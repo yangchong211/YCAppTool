@@ -36,10 +36,11 @@ import com.yc.video.config.VideoPlayerConfig;
 import com.yc.video.controller.BaseVideoController;
 import com.yc.kernel.inter.AbstractVideoPlayer;
 import com.yc.kernel.factory.PlayerFactory;
-import com.yc.video.inter.ISurfaceView;
+import com.yc.videosurface.ISurfaceView;
 import com.yc.video.inter.IVideoPlayer;
 import com.yc.video.inter.OnVideoStateListener;
-import com.yc.video.surface.SurfaceFactory;
+import com.yc.videosurface.MeasureHelper;
+import com.yc.videosurface.SurfaceFactory;
 import com.yc.video.tool.PlayerUtils;
 import com.yc.video.tool.VideoException;
 import com.yc.kernel.inter.VideoPlayerListener;
@@ -1024,7 +1025,7 @@ public class VideoPlayer<P extends AbstractVideoPlayer> extends FrameLayout
      * 设置视频比例
      */
     @Override
-    public void setScreenScaleType(@ConstantKeys.ScreenScaleType int screenScaleType) {
+    public void setScreenScaleType(@MeasureHelper.ScreenScaleType int screenScaleType) {
         mCurrentScreenScaleType = screenScaleType;
         if (mRenderView != null) {
             mRenderView.setScaleType(screenScaleType);

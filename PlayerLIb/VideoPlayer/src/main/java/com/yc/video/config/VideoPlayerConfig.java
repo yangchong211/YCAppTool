@@ -25,8 +25,8 @@ import com.yc.kernel.factory.MediaPlayerFactory;
 
 import com.yc.toolutils.AppLogUtils;
 import com.yc.video.player.ProgressManager;
-import com.yc.video.surface.SurfaceFactory;
-import com.yc.video.surface.TextureViewFactory;
+import com.yc.videosurface.SurfaceFactory;
+import com.yc.videosurface.TextureViewFactory;
 
 
 /**

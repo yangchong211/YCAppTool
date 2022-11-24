@@ -28,7 +28,7 @@ public interface IActivityManager<T> {
     T peek();
 
     /**
-     * pop元素
+     * pop元素。移除栈顶的元素
      */
     void pop();
 

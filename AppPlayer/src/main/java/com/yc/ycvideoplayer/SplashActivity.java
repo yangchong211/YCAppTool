@@ -14,7 +14,6 @@ import com.yc.toastutils.ToastUtils;
 
 import java.util.List;
 
-import io.agora.rtc2.RtcEngine;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -27,7 +26,6 @@ public class SplashActivity extends AppCompatActivity implements EasyPermissions
         setContentView(R.layout.activity_splash);
         StateAppBar.translucentStatusBar(this, true);
         initPermissions();
-        String sdkVersion = RtcEngine.getSdkVersion();
     }
 
 

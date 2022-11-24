@@ -8,7 +8,8 @@ import androidx.annotation.NonNull;
 import com.yc.kernel.inter.AbstractVideoPlayer;
 
 import com.yc.video.config.ConstantKeys;
-import com.yc.video.inter.ISurfaceView;
+import com.yc.videosurface.ISurfaceView;
+import com.yc.videosurface.MeasureHelper;
 
 
 /**
@@ -34,10 +35,10 @@ public class TikTokRenderView implements ISurfaceView {
             mProxyRenderView.setVideoSize(videoWidth, videoHeight);
             if (videoHeight > videoWidth) {
                 //竖屏视频，使用居中裁剪
-                mProxyRenderView.setScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_CENTER_CROP);
+                mProxyRenderView.setScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_CENTER_CROP);
             } else {
                 //横屏视频，使用默认模式
-                mProxyRenderView.setScaleType(ConstantKeys.PlayerScreenScaleType.SCREEN_SCALE_DEFAULT);
+                mProxyRenderView.setScaleType(MeasureHelper.PlayerScreenScaleType.SCREEN_SCALE_DEFAULT);
             }
         }
     }
