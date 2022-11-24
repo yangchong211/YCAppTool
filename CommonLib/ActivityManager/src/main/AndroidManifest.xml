@@ -4,7 +4,7 @@
 
     <application>
         <provider
-            android:name="com.yc.activitymanager.BaseProvider"
+            android:name="com.yc.activitymanager.ManagerProvider"
             android:authorities="${applicationId}.baseProvider"
             android:exported="false" />
     </application>

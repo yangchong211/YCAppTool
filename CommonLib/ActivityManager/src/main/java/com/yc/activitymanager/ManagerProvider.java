@@ -21,7 +21,7 @@ import androidx.annotation.NonNull;
  *     GitHub: https://github.com/yangchong211/YCDialog
  * </pre>
  */
-public final class BaseProvider extends ContentProvider {
+public final class ManagerProvider extends ContentProvider {
 
     private static final String TAG = "BaseProvider";
 
