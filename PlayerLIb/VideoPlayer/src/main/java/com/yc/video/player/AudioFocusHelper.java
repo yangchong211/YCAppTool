@@ -81,9 +81,10 @@ public final class AudioFocusHelper implements AudioManager.OnAudioFocusChangeLi
                     mStartRequested = false;
                     mPausedForLoss = false;
                 }
-                if (!videoView.isMute())
+                if (!videoView.isMute()) {
                     //恢复音量
                     videoView.setVolume(1.0f, 1.0f);
+                }
                 break;
             case AudioManager.AUDIOFOCUS_LOSS:
                 //焦点丢失，这个是永久丢失焦点，如被其他播放器抢占
@@ -99,6 +100,8 @@ public final class AudioFocusHelper implements AudioManager.OnAudioFocusChangeLi
                 if (videoView.isPlaying() && !videoView.isMute()) {
                     videoView.setVolume(0.1f, 0.1f);
                 }
+                break;
+            default:
                 break;
         }
     }

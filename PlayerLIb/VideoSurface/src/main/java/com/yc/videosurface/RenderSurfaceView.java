@@ -57,6 +57,10 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
     @Nullable
     private AbstractVideoPlayer mMediaPlayer;
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+    }
 
     @Override
     protected void onDetachedFromWindow() {
@@ -68,10 +72,10 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
 
     public RenderSurfaceView(Context context) {
         super(context);
-        init(context);
+        init();
     }
 
-    private void init(Context context){
+    private void init(){
         mMeasureHelper = new MeasureHelper();
         SurfaceHolder holder = this.getHolder();
         //holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
