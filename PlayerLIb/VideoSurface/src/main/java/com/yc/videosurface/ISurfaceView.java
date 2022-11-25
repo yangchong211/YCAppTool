@@ -17,10 +17,7 @@ package com.yc.videosurface;
 
 import android.graphics.Bitmap;
 import android.view.View;
-
 import androidx.annotation.NonNull;
-
-import com.yc.kernel.inter.AbstractVideoPlayer;
 
 /**
  * <pre>
@@ -37,7 +34,7 @@ public interface ISurfaceView {
      * 关联AbstractPlayer
      * @param player                        player
      */
-    void attachToPlayer(@NonNull AbstractVideoPlayer player);
+    void attachToPlayer(@NonNull IPlayerSurface player);
 
     /**
      * 设置视频宽高

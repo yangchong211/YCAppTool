@@ -5,10 +5,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.yc.kernel.inter.AbstractVideoPlayer;
-
-import com.yc.video.config.ConstantKeys;
 import com.yc.videosurface.ISurfaceView;
+import com.yc.videosurface.IPlayerSurface;
 import com.yc.videosurface.MeasureHelper;
 
 
@@ -25,7 +23,7 @@ public class TikTokRenderView implements ISurfaceView {
     }
 
     @Override
-    public void attachToPlayer(@NonNull AbstractVideoPlayer player) {
+    public void attachToPlayer(@NonNull IPlayerSurface player) {
         mProxyRenderView.attachToPlayer(player);
     }
 

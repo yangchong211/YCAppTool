@@ -15,24 +15,24 @@ limitations under the License.
 */
 package com.yc.videosurface;
 
-import android.content.Context;
+import android.view.Surface;
 
 /**
  * <pre>
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2018/11/9
- *     desc  : 扩展自己的渲染View
- *     revise: 可以使用TextureView，可参考{@link RenderTextureView}和{@link TextureViewFactory}的实现。
+ *     desc  : 给视频播放器设置surface接口
+ *     revise:
  * </pre>
  */
-public abstract class SurfaceFactory {
+public interface IPlayerSurface {
 
     /**
-     * 创建渲染view
-     * @param context               上下文
-     * @return                      返回对应的ISurfaceView接口对象View
+     * 给视频播放器设置surface
+     *
+     * @param surface surface
      */
-    public abstract ISurfaceView createRenderView(Context context);
+    void setSurface(Surface surface);
 
 }

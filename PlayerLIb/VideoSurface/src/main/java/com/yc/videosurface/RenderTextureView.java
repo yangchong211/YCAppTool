@@ -26,10 +26,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.yc.kernel.inter.AbstractVideoPlayer;
-import com.yc.videosurface.ISurfaceView;
-
-
 /**
  * <pre>
  *     @author yangchong
@@ -45,9 +41,8 @@ public class RenderTextureView extends TextureView implements ISurfaceView {
 
     private MeasureHelper mMeasureHelper;
     private SurfaceTexture mSurfaceTexture;
-
     @Nullable
-    private AbstractVideoPlayer mMediaPlayer;
+    private IPlayerSurface mVideoPlayer;
     private Surface mSurface;
 
     public RenderTextureView(Context context) {
@@ -65,8 +60,8 @@ public class RenderTextureView extends TextureView implements ISurfaceView {
      * @param player                        player
      */
     @Override
-    public void attachToPlayer(@NonNull AbstractVideoPlayer player) {
-        this.mMediaPlayer = player;
+    public void attachToPlayer(@NonNull IPlayerSurface player) {
+        this.mVideoPlayer = player;
     }
 
     /**
@@ -167,8 +162,8 @@ public class RenderTextureView extends TextureView implements ISurfaceView {
             } else {
                 mSurfaceTexture = surfaceTexture;
                 mSurface = new Surface(surfaceTexture);
-                if (mMediaPlayer != null) {
-                    mMediaPlayer.setSurface(mSurface);
+                if (mVideoPlayer != null) {
+                    mVideoPlayer.setSurface(mSurface);
                 }
             }
         }

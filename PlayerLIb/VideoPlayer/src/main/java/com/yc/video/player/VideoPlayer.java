@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.Surface;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
@@ -39,6 +40,7 @@ import com.yc.kernel.factory.PlayerFactory;
 import com.yc.videosurface.ISurfaceView;
 import com.yc.video.inter.IVideoPlayer;
 import com.yc.video.inter.OnVideoStateListener;
+import com.yc.videosurface.IPlayerSurface;
 import com.yc.videosurface.MeasureHelper;
 import com.yc.videosurface.SurfaceFactory;
 import com.yc.video.tool.PlayerUtils;
@@ -419,7 +421,12 @@ public class VideoPlayer<P extends AbstractVideoPlayer> extends FrameLayout
         //创建TextureView对象
         mRenderView = mRenderViewFactory.createRenderView(mContext);
         //绑定mMediaPlayer对象
-        mRenderView.attachToPlayer(mMediaPlayer);
+        mRenderView.attachToPlayer(new IPlayerSurface() {
+            @Override
+            public void setSurface(Surface surface) {
+                mMediaPlayer.setSurface(surface);
+            }
+        });
         //添加渲染view到Container布局中
         LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER);

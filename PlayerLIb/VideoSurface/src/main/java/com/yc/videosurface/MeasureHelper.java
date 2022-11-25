@@ -16,9 +16,7 @@ limitations under the License.
 package com.yc.videosurface;
 
 import android.view.View;
-
 import androidx.annotation.IntDef;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

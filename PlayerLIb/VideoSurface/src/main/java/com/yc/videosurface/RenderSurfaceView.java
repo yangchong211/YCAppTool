@@ -26,9 +26,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.yc.kernel.inter.AbstractVideoPlayer;
-import com.yc.videosurface.ISurfaceView;
-
 /**
  * <pre>
  *     @author yangchong
@@ -55,12 +52,7 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
 
     private MeasureHelper mMeasureHelper;
     @Nullable
-    private AbstractVideoPlayer mMediaPlayer;
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-    }
+    private IPlayerSurface mVideoPlayer;
 
     @Override
     protected void onDetachedFromWindow() {
@@ -87,8 +79,8 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
      * @param player                        player
      */
     @Override
-    public void attachToPlayer(@NonNull AbstractVideoPlayer player) {
-        this.mMediaPlayer = player;
+    public void attachToPlayer(@NonNull IPlayerSurface player) {
+        this.mVideoPlayer = player;
     }
 
     /**
@@ -178,9 +170,9 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
          */
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
-            if (mMediaPlayer != null) {
+            if (mVideoPlayer != null){
                 Surface surface = holder.getSurface();
-                mMediaPlayer.setSurface(surface);
+                mVideoPlayer.setSurface(surface);
             }
         }
 
