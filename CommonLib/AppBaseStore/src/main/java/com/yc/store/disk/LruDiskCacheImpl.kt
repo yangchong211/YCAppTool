@@ -4,6 +4,17 @@ import com.yc.store.ICacheable
 import com.yc.applrudisk.DiskLruCacheHelper
 import com.yc.toolutils.AppNumberUtils
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     time   : 2018/3/12
+ *     desc   : DiskLruCache内存存储实现类
+ *     revise :
+ *     GitHub: https://github.com/yangchong211
+ * </pre>
+ */
 class LruDiskCacheImpl : ICacheable {
 
     var diskLruCacheHelper = DiskLruCacheHelper()

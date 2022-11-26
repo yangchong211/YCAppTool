@@ -103,7 +103,7 @@ object CacheInitHelper {
      */
     fun getMaxLruSize() : Int{
         if (maxLruSize == null){
-            maxLruSize = 100
+            maxLruSize = 10000
         }
         return maxLruSize as Int
     }

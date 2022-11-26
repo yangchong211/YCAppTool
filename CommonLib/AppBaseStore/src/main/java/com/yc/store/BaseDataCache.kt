@@ -1,5 +1,17 @@
 package com.yc.store
 
+
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     time   : 2018/3/12
+ *     desc   : 策略类
+ *     revise :
+ *     GitHub: https://github.com/yangchong211
+ * </pre>
+ */
 open class BaseDataCache : ICacheable {
 
     private lateinit var cacheImpl: ICacheable

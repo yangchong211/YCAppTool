@@ -6,6 +6,17 @@ import com.yc.store.ICacheable
 import com.yc.store.config.CacheInitHelper
 import java.io.File
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     time   : 2018/3/12
+ *     desc   : Mmkv存储实现类
+ *     revise :
+ *     GitHub: https://github.com/yangchong211
+ * </pre>
+ */
 class MmkvCacheImpl(builder: Builder) : ICacheable {
 
     private var mmkv: MMKV = MMKV.mmkvWithID(builder.fileName) ?: MMKV.defaultMMKV()!!

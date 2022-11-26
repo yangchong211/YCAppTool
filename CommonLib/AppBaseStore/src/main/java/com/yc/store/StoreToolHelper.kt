@@ -7,6 +7,17 @@ import com.yc.store.memory.MemoryCacheImpl
 import com.yc.store.mmkv.MmkvCacheImpl
 import com.yc.store.sp.SpCacheImpl
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     time   : 2018/3/12
+ *     desc   : 存储帮助工具类
+ *     revise :
+ *     GitHub: https://github.com/yangchong211
+ * </pre>
+ */
 class StoreToolHelper {
 
     private var sApplication: Application? = null
