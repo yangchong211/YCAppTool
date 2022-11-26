@@ -1,4 +1,4 @@
-package com.yc.toolutils.init;
+package com.yc.appcontextlib;
 
 import android.app.Application;
 import android.content.ContentProvider;
@@ -10,8 +10,15 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.yc.toolutils.AppToolUtils;
-
+/**
+ * <pre>
+ *     @author 杨充
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2017/05/23
+ *     desc  : 初始化工具类，获取上下文，会自动初始化
+ *     revise:
+ * </pre>
+ */
 public class ToolInitProvider extends ContentProvider {
 
     @Override

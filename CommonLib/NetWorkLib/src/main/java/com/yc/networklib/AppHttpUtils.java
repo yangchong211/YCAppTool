@@ -1,4 +1,4 @@
-package com.yc.toolutils.net;
+package com.yc.networklib;
 
 import android.net.Uri;
 

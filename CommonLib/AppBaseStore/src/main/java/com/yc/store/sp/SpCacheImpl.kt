@@ -3,14 +3,14 @@ package com.yc.store.sp
 import android.content.Context
 import android.content.SharedPreferences
 import com.yc.store.ICacheable
-import com.yc.toolutils.AppToolUtils
+import com.yc.appcontextlib.AppToolUtils
 
 class SpCacheImpl(builder: Builder) : ICacheable {
 
     private var sp: SharedPreferences? = null
 
     init {
-        sp = AppToolUtils.getApp()?.getSharedPreferences(builder.fileName, Context.MODE_PRIVATE)
+        sp = com.yc.appcontextlib.AppToolUtils.getApp()?.getSharedPreferences(builder.fileName, Context.MODE_PRIVATE)
     }
 
     class Builder {

@@ -1,4 +1,4 @@
-package com.yc.toolutils.net;
+package com.yc.networklib;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,8 +11,7 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppToolUtils;
+import com.yc.appcontextlib.AppToolUtils;
 
 import java.lang.reflect.Method;
 import java.net.InetAddress;
@@ -386,14 +385,19 @@ public final class AppNetworkUtils {
             WifiInfo mWifiInfo = null;
             if (mWifiManager != null) {
                 mWifiInfo = mWifiManager.getConnectionInfo();
-                int wifi = mWifiInfo.getRssi();//获取wifi信号强度
-                if (wifi > -50 && wifi < 0) {//最强
+                int wifi = mWifiInfo.getRssi();
+                //获取wifi信号强度
+                if (wifi > -50 && wifi < 0) {
+                    //最强
                     return "最强";
-                } else if (wifi > -70 && wifi < -50) {//较强
+                } else if (wifi > -70 && wifi < -50) {
+                    //较强
                     return "较强";
-                } else if (wifi > -80 && wifi < -70) {//较弱
+                } else if (wifi > -80 && wifi < -70) {
+                    //较弱
                     return "较弱";
-                } else if (wifi > -100 && wifi < -80) {//微弱
+                } else if (wifi > -100 && wifi < -80) {
+                    //微弱
                     return "微弱";
                 } else {
                     return "微弱";
@@ -418,7 +422,7 @@ public final class AppNetworkUtils {
             e.printStackTrace();
         }
         if (iAddress == null) {
-            AppLogUtils.i("xxx", "iAddress ==null");
+            ipAddress = "";
         } else {
             ipAddress = iAddress.getHostAddress();
         }
@@ -441,7 +445,7 @@ public final class AppNetworkUtils {
             e.printStackTrace();
         }
         if (iAddress == null) {
-            AppLogUtils.i("xxx", "iAddress ==null");
+            ipAddress = "";
         } else {
             ipAddress = iAddress.getHostName();
         }
@@ -460,8 +464,6 @@ public final class AppNetworkUtils {
         WifiInfo wifiInfo = null;
         if (wifiManager != null) {
             wifiInfo = wifiManager.getConnectionInfo();
-            AppLogUtils.i("getWifiName--------",wifiInfo.toString());
-            AppLogUtils.i("getWifiName--------",wifiInfo.getBSSID());
             String ssid = wifiInfo.getSSID();
             return ssid;
         }
@@ -480,8 +482,6 @@ public final class AppNetworkUtils {
         WifiInfo wifiInfo = null;
         if (wifiManager != null) {
             wifiInfo = wifiManager.getConnectionInfo();
-            AppLogUtils.i("getWifiIp--------",wifiInfo.toString());
-            AppLogUtils.i("getWifiIp--------",wifiInfo.getBSSID());
             int ipAddress = wifiInfo.getIpAddress();
             return ipAddress;
         }

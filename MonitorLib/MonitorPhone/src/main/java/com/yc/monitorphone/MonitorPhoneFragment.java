@@ -20,8 +20,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.yc.appfilelib.SdCardUtils;
 import com.yc.localelib.service.LocaleService;
 import com.yc.localelib.utils.LocaleToolUtils;
+import com.yc.networklib.AppNetworkUtils;
 import com.yc.toolmemorylib.AppMemoryUtils;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppInfoUtils;
@@ -30,9 +32,6 @@ import com.yc.toolutils.AppSoLibUtils;
 import com.yc.toolutils.AppTimeUtils;
 import com.yc.toolutils.AppWindowUtils;
 import com.yc.toolutils.StatusBarUtils;
-import com.yc.toolutils.file.AppSdFileUtils;
-import com.yc.toolutils.net.AppNetworkUtils;
-
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -142,7 +141,7 @@ public class MonitorPhoneFragment extends Fragment {
         }
         sb.append("\n系统的版本:  ").append(AppDeviceUtils.getSDKVersionName());
         sb.append("\n系统版本值:  ").append(AppDeviceUtils.getSDKVersionCode());
-        sb.append("\nSd卡剩余控件:  ").append(AppSdFileUtils.getSDCardSpace(application));
+        sb.append("\nSd卡剩余控件:  ").append(SdCardUtils.getSDCardSpace(application));
         sb.append("\n系统剩余控件:  ").append(AppMemoryUtils.getRomSpace(application));
         sb.append("\n手机分辨率:  ").append(AppWindowUtils.getRealScreenHeight(activity))
                 .append("x").append(AppWindowUtils.getRealScreenWidth(activity));

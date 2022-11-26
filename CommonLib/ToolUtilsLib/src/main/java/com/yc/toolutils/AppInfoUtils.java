@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 
+import com.yc.appcontextlib.AppToolUtils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

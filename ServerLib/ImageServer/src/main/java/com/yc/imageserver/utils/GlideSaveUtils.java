@@ -3,10 +3,7 @@ package com.yc.imageserver.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 
 
 import com.yc.appfilelib.SdCardUtils;

@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
  *     time   : 2018/4/17
  *     desc   : 初始化操作
  *     revise :
- *     GitHub: https://github.com/yangchong211/YCDialog
+ *     GitHub: https://github.com/yangchong211
  * </pre>
  */
 public final class ManagerProvider extends ContentProvider {

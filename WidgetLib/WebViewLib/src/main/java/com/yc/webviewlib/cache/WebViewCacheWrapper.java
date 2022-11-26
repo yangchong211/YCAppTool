@@ -11,7 +11,6 @@ import com.tencent.smtt.sdk.URLUtil;
 import com.tencent.smtt.sdk.WebView;
 import com.yc.toolutils.net.AppNetworkUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
-import com.yc.webviewlib.utils.X5WebUtils;
 
 import java.io.File;
 import java.io.IOException;

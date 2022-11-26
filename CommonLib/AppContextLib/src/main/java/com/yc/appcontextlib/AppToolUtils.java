@@ -1,4 +1,4 @@
-package com.yc.toolutils;
+package com.yc.appcontextlib;
 
 import android.app.Application;
 

@@ -42,6 +42,11 @@ public class ActivityManager implements IActivityManager<Activity> {
      */
     private boolean mInit = false;
 
+    /**
+     * 单例模式
+     *
+     * @return ActivityManager对象
+     */
     public static ActivityManager getInstance() {
         if (sInstance == null) {
             synchronized (ActivityManager.class) {
@@ -111,7 +116,8 @@ public class ActivityManager implements IActivityManager<Activity> {
 
     /**
      * 判断activity任务栈是否为空
-     * @return  是否为空
+     *
+     * @return 是否为空
      */
     @Override
     public boolean isEmpty() {

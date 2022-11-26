@@ -1,27 +1,20 @@
 package com.yc.toolutils;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
 
-import androidx.annotation.AnimRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
 
-import com.yc.toolutils.AppToolUtils;
+import com.yc.appcontextlib.AppToolUtils;
 
 import java.util.List;
 

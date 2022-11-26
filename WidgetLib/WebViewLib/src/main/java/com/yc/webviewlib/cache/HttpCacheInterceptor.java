@@ -1,9 +1,6 @@
 package com.yc.webviewlib.cache;
 
-import android.text.TextUtils;
-
 import com.yc.toolutils.net.AppNetworkUtils;
-import com.yc.webviewlib.utils.X5WebUtils;
 
 import java.io.IOException;
 
