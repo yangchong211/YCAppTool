@@ -17,7 +17,7 @@ import java.lang.ref.WeakReference;
  */
 public class HandlerHolder extends Handler {
 
-    private WeakReference<OnReceiveMessageListener> mListenerWeakReference;
+    private final WeakReference<OnReceiveMessageListener> mListenerWeakReference;
 
     /**
      * @param listener 收到消息回调接口
@@ -28,7 +28,7 @@ public class HandlerHolder extends Handler {
 
     @Override
     public void handleMessage(Message msg) {
-        if (mListenerWeakReference!=null && mListenerWeakReference.get()!=null){
+        if (mListenerWeakReference != null && mListenerWeakReference.get() != null) {
             mListenerWeakReference.get().handlerMessage(msg);
         }
     }
@@ -39,7 +39,8 @@ public class HandlerHolder extends Handler {
     public interface OnReceiveMessageListener {
         /**
          * 消息处理
-         * @param msg           msg
+         *
+         * @param msg msg
          */
         void handlerMessage(Message msg);
     }

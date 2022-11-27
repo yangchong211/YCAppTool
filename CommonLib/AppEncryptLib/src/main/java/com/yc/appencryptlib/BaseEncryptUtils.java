@@ -1,6 +1,8 @@
 package com.yc.appencryptlib;
 
 
+import com.yc.appcontextlib.AppToolUtils;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -50,7 +52,7 @@ public final class BaseEncryptUtils {
 
 
     public static byte[] hexString2Bytes(String hexString) {
-        if (isSpace(hexString)) {
+        if (AppToolUtils.isSpace(hexString)) {
             return null;
         }
         int len = hexString.length();
@@ -75,18 +77,6 @@ public final class BaseEncryptUtils {
         } else {
             throw new IllegalArgumentException();
         }
-    }
-
-    public static boolean isSpace(final String s) {
-        if (s == null) {
-            return true;
-        }
-        for (int i = 0, len = s.length(); i < len; ++i) {
-            if (!Character.isWhitespace(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.yc.appencryptlib;
 
+import com.yc.appcontextlib.AppToolUtils;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
@@ -120,7 +122,7 @@ public final class Md5EncryptUtils {
      * @return 文件的 MD5 校验码
      */
     public static String encryptMD5File1(final String filePath) {
-        File file = isSpace(filePath) ? null : new File(filePath);
+        File file = AppToolUtils.isSpace(filePath) ? null : new File(filePath);
         return bytes2HexString(encryptMD5File(file));
     }
 
@@ -173,7 +175,7 @@ public final class Md5EncryptUtils {
             e.printStackTrace();
             return null;
         } finally {
-            closeIO(fis);
+            AppToolUtils.closeIO(fis);
         }
     }
 
@@ -213,38 +215,6 @@ public final class Md5EncryptUtils {
             ret[j++] = HEX_DIGITS[bytes[i] & 0x0f];
         }
         return new String(ret);
-    }
-
-    private static boolean isSpace(final String s) {
-        if (s == null) {
-            return true;
-        }
-        for (int i = 0, len = s.length(); i < len; ++i) {
-            if (!Character.isWhitespace(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * 关闭 IO
-     *
-     * @param closeables closeables
-     */
-    private static void closeIO(final Closeable... closeables) {
-        if (closeables == null) {
-            return;
-        }
-        for (Closeable closeable : closeables) {
-            if (closeable != null) {
-                try {
-                    closeable.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
 }

@@ -68,6 +68,7 @@ ext {
 
             //jetpack系列
             core                      : "androidx.core:core:${coreVersion}",
+            coreKtx                   : "androidx.core:core-ktx:${coreVersion}",
             roomRuntime               : "androidx.room:room-runtime:${roomVersion}",
             roomCompiler              : "androidx.room:room-compiler:${roomVersion}",
             databinding               : "androidx.databinding:databinding-common:${databindingVersion}",
@@ -81,6 +82,7 @@ ext {
             navigationFragmentKtx     : "androidx.navigation:navigation-fragment-ktx:${archLifecycleVersion}",
             navigationUiKtx           : "androidx.navigation:navigation-ui-ktx:${archLifecycleVersion}",
             activityKtx               : "androidx.activity:activity-ktx:${activityKtx}",
+            datastore                 : "androidx.datastore:datastore-preferences:${coreVersion}",
 
             //将 Kotlin 协程与生命周期感知型组件一起使用
             //https://developer.android.com/topic/libraries/architecture/coroutines

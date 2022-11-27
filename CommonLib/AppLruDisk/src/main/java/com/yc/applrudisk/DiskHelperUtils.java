@@ -1,9 +1,7 @@
 package com.yc.applrudisk;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.yc.toolutils.AppToolUtils;
+import com.yc.appcontextlib.AppToolUtils;
 
 import java.io.Closeable;
 import java.io.File;
@@ -95,16 +93,4 @@ public final class DiskHelperUtils {
         }
     }
 
-    @NonNull
-    public static <T> T checkNotNull(@Nullable T arg) {
-        return checkNotNull(arg, "Argument must not be null");
-    }
-
-    @NonNull
-    public static <T> T checkNotNull(@Nullable T arg, @NonNull String message) {
-        if (arg == null) {
-            throw new NullPointerException(message);
-        }
-        return arg;
-    }
 }

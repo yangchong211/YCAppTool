@@ -23,7 +23,7 @@ public class HandlerUtils {
     public static class HandlerReference extends Handler {
 
         private final WeakReference<Object> mObject;
-        private OnReceiveMessageListener mListener;
+        private final OnReceiveMessageListener mListener;
 
 
         public HandlerReference(Object object, OnReceiveMessageListener listener) {

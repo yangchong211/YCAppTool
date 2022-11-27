@@ -1,5 +1,7 @@
 import android.text.TextUtils;
 
+import com.yc.appcontextlib.AppToolUtils;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.Closeable;
@@ -75,7 +77,7 @@ public final class AppZipUtils {
         } finally {
             if (zos != null) {
                 zos.finish();
-                closeIO(zos);
+                AppToolUtils.closeIO(zos);
             }
         }
     }
@@ -121,7 +123,7 @@ public final class AppZipUtils {
         } finally {
             if (zos != null) {
                 zos.finish();
-                closeIO(zos);
+                AppToolUtils.closeIO(zos);
             }
         }
     }
@@ -192,7 +194,7 @@ public final class AppZipUtils {
             return zipFile(resFile, "", zos, comment);
         } finally {
             if (zos != null) {
-                closeIO(zos);
+                AppToolUtils.closeIO(zos);
             }
         }
     }
@@ -212,7 +214,7 @@ public final class AppZipUtils {
                                    final ZipOutputStream zos,
                                    final String comment)
             throws IOException {
-        rootPath = rootPath + (isSpace(rootPath) ? "" : File.separator) + resFile.getName();
+        rootPath = rootPath + (AppToolUtils.isSpace(rootPath) ? "" : File.separator) + resFile.getName();
         if (resFile.isDirectory()) {
             File[] fileList = resFile.listFiles();
             // 如果是空文件夹那么创建它，我把'/'换为File.separator测试就不成功，eggPain
@@ -243,7 +245,7 @@ public final class AppZipUtils {
                 }
                 zos.closeEntry();
             } finally {
-                closeIO(is);
+                AppToolUtils.closeIO(is);
             }
         }
         return true;
@@ -312,7 +314,7 @@ public final class AppZipUtils {
         List<File> files = new ArrayList<>();
         ZipFile zf = new ZipFile(zipFile);
         Enumeration<?> entries = zf.entries();
-        if (isSpace(keyword)) {
+        if (AppToolUtils.isSpace(keyword)) {
             while (entries.hasMoreElements()) {
                 ZipEntry entry = ((ZipEntry) entries.nextElement());
                 String entryName = entry.getName();
@@ -361,7 +363,7 @@ public final class AppZipUtils {
                     out.write(buffer, 0, len);
                 }
             } finally {
-                closeIO(in, out);
+                AppToolUtils.closeIO(in, out);
             }
         }
         return true;
@@ -455,41 +457,8 @@ public final class AppZipUtils {
     }
 
     private static File getFileByPath(final String filePath) {
-        return isSpace(filePath) ? null : new File(filePath);
+        return AppToolUtils.isSpace(filePath) ? null : new File(filePath);
     }
-
-    private static boolean isSpace(final String s) {
-        if (s == null) {
-            return true;
-        }
-        for (int i = 0, len = s.length(); i < len; ++i) {
-            if (!Character.isWhitespace(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * 关闭 IO
-     *
-     * @param closeables closeables
-     */
-    private static void closeIO(final Closeable... closeables) {
-        if (closeables == null) {
-            return;
-        }
-        for (Closeable closeable : closeables) {
-            if (closeable != null) {
-                try {
-                    closeable.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 
     public static class EntrySet {
         String prefixPath;

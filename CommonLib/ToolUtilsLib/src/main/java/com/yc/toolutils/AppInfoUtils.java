@@ -33,7 +33,6 @@ public final class AppInfoUtils {
     }
 
 
-
     /**
      * 获取 App 包名
      *
@@ -59,7 +58,7 @@ public final class AppInfoUtils {
      * @return App 名称
      */
     public static String getAppName(final String packageName) {
-        if (isSpace(packageName)) {
+        if (AppToolUtils.isSpace(packageName)) {
             return null;
         }
         try {
@@ -88,7 +87,7 @@ public final class AppInfoUtils {
      * @return App 图标
      */
     public static Drawable getAppIcon(final String packageName) {
-        if (isSpace(packageName)) {
+        if (AppToolUtils.isSpace(packageName)) {
             return null;
         }
         try {
@@ -117,7 +116,7 @@ public final class AppInfoUtils {
      * @return App 路径
      */
     public static String getAppPath(final String packageName) {
-        if (isSpace(packageName)) {
+        if (AppToolUtils.isSpace(packageName)) {
             return null;
         }
         try {
@@ -146,7 +145,7 @@ public final class AppInfoUtils {
      * @return App 版本号
      */
     public static String getAppVersionName(final String packageName) {
-        if (isSpace(packageName)) {
+        if (AppToolUtils.isSpace(packageName)) {
             return null;
         }
         try {
@@ -175,7 +174,7 @@ public final class AppInfoUtils {
      * @return App 版本码
      */
     public static int getAppVersionCode(final String packageName) {
-        if (isSpace(packageName)) {
+        if (AppToolUtils.isSpace(packageName)) {
             return -1;
         }
         try {
@@ -204,7 +203,7 @@ public final class AppInfoUtils {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isSystemApp(final String packageName) {
-        if (isSpace(packageName)) {
+        if (AppToolUtils.isSpace(packageName)) {
             return false;
         }
         try {
@@ -233,7 +232,7 @@ public final class AppInfoUtils {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isAppDebug(final String packageName) {
-        if (isSpace(packageName)) {
+        if (AppToolUtils.isSpace(packageName)) {
             return false;
         }
         try {
@@ -262,7 +261,7 @@ public final class AppInfoUtils {
      * @return App 签名
      */
     public static Signature[] getAppSignature(final String packageName) {
-        if (isSpace(packageName)) {
+        if (AppToolUtils.isSpace(packageName)) {
             return null;
         }
         try {
@@ -306,7 +305,7 @@ public final class AppInfoUtils {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public static boolean isAppForeground(final String packageName) {
-        return !isSpace(packageName) && packageName.equals(AppProcessUtils.getForegroundProcessName());
+        return !AppToolUtils.isSpace(packageName) && packageName.equals(AppProcessUtils.getForegroundProcessName());
     }
 
     /**
@@ -515,16 +514,5 @@ public final class AppInfoUtils {
         return isSuccess;
     }
 
-    private static boolean isSpace(final String s) {
-        if (s == null) {
-            return true;
-        }
-        for (int i = 0, len = s.length(); i < len; ++i) {
-            if (!Character.isWhitespace(s.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
 
 }

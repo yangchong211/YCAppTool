@@ -2,6 +2,8 @@ package com.yc.applrudisk;
 
 
 
+import com.yc.appcontextlib.AppToolUtils;
+
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +41,7 @@ public final class DiskCacheWriteLocker {
     public void release(String safeKey) {
         WriteLock writeLock;
         synchronized (this) {
-            writeLock = DiskHelperUtils.checkNotNull(locks.get(safeKey));
+            writeLock = AppToolUtils.checkNotNull(locks.get(safeKey));
             if (writeLock.interestedThreads < 1) {
                 throw new IllegalStateException("Cannot release a lock that is not held"
                         + ", safeKey: " + safeKey

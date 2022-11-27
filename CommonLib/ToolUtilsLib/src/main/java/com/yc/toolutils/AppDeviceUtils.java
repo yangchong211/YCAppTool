@@ -22,6 +22,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.RequiresApi;
 
+import com.yc.appcontextlib.AppToolUtils;
 import com.yc.toolutils.AppLogUtils;
 
 import java.io.BufferedReader;
@@ -348,7 +349,7 @@ public final class AppDeviceUtils {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            closeIO(os, successResult, errorResult);
+            AppToolUtils.closeIO(os, successResult, errorResult);
             if (process != null) {
                 process.destroy();
             }
@@ -358,26 +359,6 @@ public final class AppDeviceUtils {
                 successMsg == null ? null : successMsg.toString(),
                 errorMsg == null ? null : errorMsg.toString()
         );
-    }
-
-    /**
-     * 关闭 IO
-     *
-     * @param closeables closeables
-     */
-    private static void closeIO(final Closeable... closeables) {
-        if (closeables == null) {
-            return;
-        }
-        for (Closeable closeable : closeables) {
-            if (closeable != null) {
-                try {
-                    closeable.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     /**

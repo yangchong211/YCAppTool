@@ -72,7 +72,8 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         ':AppCommonInter',':ToolMemoryLib',':AppPermission',':PhoneSensor',
         ':AppLruDisk',':AppLruCache',':DownloadHelper',':AppEncryptLib',
         ':AppMediaStore',':DataCloneLib',':AppScreenLib',':BaseVpAdapter',':ImageToolLib',
-        ':AppHandlerLib',':FileIoHelper',':ZipFileLib',':NetWorkLib',':AppContextLib'
+        ':AppHandlerLib',':FileIoHelper',':ZipFileLib',':NetWorkLib',':AppContextLib',
+        ':AppWiFiLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -108,7 +109,7 @@ project(':FileIoHelper').projectDir = new File('CommonLib/FileIoHelper')
 project(':ZipFileLib').projectDir = new File('CommonLib/ZipFileLib')
 project(':NetWorkLib').projectDir = new File('CommonLib/NetWorkLib')
 project(':AppContextLib').projectDir = new File('CommonLib/AppContextLib')
-
+project(':AppWiFiLib').projectDir = new File('CommonLib/AppWiFiLib')
 
 
 
