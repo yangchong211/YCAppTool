@@ -38,7 +38,7 @@ public final class Rc4EncryptUtils {
     }
 
     /**
-     * RC4加密，加密失败将返回空串。
+     * RC4加密base64编码数据，加密失败将返回空串。
      */
     public static String encryptToBase64(byte[] data, String secretKey) {
         try {

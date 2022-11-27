@@ -185,7 +185,8 @@ public final class AesEncryptUtils {
     public static String encryptToBase64(String data, String key) {
         try {
             byte[] valueByte = encryptAes(data.getBytes(CHAR_ENCODING), key.getBytes(CHAR_ENCODING));
-            return new String(Base64Utils.base64Encode(valueByte));
+            byte[] base64Encode = Base64Utils.base64Encode(valueByte);
+            return new String(base64Encode);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("encrypt fail!", e);
         }

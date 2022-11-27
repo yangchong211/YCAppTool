@@ -128,20 +128,28 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
 
     private void md5() {
         String string = "yangchong";
+        //对字符串md5加密
         String md1 = Md5EncryptUtils.getMD5(string);
         AppLogUtils.d("md5计算字符串1: " + md1);
+        //对字符串md5加密
         String md2 = Md5EncryptUtils.encryptMD5ToString(string);
         AppLogUtils.d("md5计算字符串2: " + md2);
+        //对字符串md5加密，加盐处理
         String md3 = Md5EncryptUtils.encryptMD5ToString(string,"doubi");
         AppLogUtils.d("md5计算字符串，加盐处理3: " + md3);
-        String md4 = Md5EncryptUtils.encryptMD5ToString(string.getBytes());
+        byte[] bytes = string.getBytes();
+        //对字节数据md5加密
+        String md4 = Md5EncryptUtils.encryptMD5ToString(bytes);
         AppLogUtils.d("md5计算字节数组4: " + md4);
-        String md5 = Md5EncryptUtils.encryptMD5ToString(string.getBytes(),"doubi".getBytes());
+        //对字节数据md5加密，加盐处理
+        String md5 = Md5EncryptUtils.encryptMD5ToString(bytes,"doubi".getBytes());
         AppLogUtils.d("md5计算字节数组，加盐处理5: " + md5);
 
         String txt = AppFileUtils.getExternalFilePath(this, "txt");
+        //对文件进行md5加密
         String md6 = Md5EncryptUtils.encryptMD5File1(txt);
         AppLogUtils.d("md5计算文件路径6: " + md6);
+        //对文件进行md5加密
         String md7 = Md5EncryptUtils.encryptMD5File2(new File(txt));
         AppLogUtils.d("md5计算文件File7: " + md7);
 
@@ -165,8 +173,10 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         // 对base64加密后的数据进行解密
         AppLogUtils.i("base64", "decode >>>" + new String(Base64.decode(strBase64.getBytes(), Base64.DEFAULT)));
 
+        //字符Base64加密
         String strBase64_2 = Base64Utils.encodeToString(str);
         AppLogUtils.i("base64", "encode 2 >>>" + strBase64_2);
+        //字符Base64解密
         String strBase64_3 = Base64Utils.decodeToString(strBase64_2);
         AppLogUtils.i("base64", "decode 3 >>>" + strBase64_3);
     }
@@ -175,8 +185,10 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
     private void des() {
         String string = "yangchongyangchongyangchongyangchong";
         String password = "yc123456";
+        //DES加密字符串
         String encrypt1 = DesEncryptUtils.encrypt(string,password);
         AppLogUtils.d("des计算加密字符串1: " + encrypt1);
+        //DES解密字符串
         String decrypt1 = DesEncryptUtils.decrypt(encrypt1 , password);
         AppLogUtils.d("des计算解密字符串1: " + decrypt1);
 
@@ -184,15 +196,19 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         String txt = AppFileUtils.getExternalFilePath(this, "txt");
         String fileName = txt + File.separator + "yc1.txt";
         String destFile = txt + File.separator + "yc2.txt";
+        //DES加密文件
         String encryptFile1 = DesEncryptUtils.encryptFile(password, fileName, destFile);
         AppLogUtils.d("des计算加密文件1: " + encryptFile1);
         String destFile3 = txt + File.separator + "yc3.txt";
+        //DES解密文件
         String decryptFile1 = DesEncryptUtils.decryptFile(password, destFile, destFile3);
         AppLogUtils.d("des计算解密文件1: " + decryptFile1);
 
 
+        //DES 加密后转为 Base64 编码
         String encrypt2 = DesEncryptUtils.encrypt(string.getBytes(), password.getBytes());
         AppLogUtils.d("des计算加密字符串2: " + encrypt2);
+        //DES解密字符串 Base64 解码
         String decrypt2 = DesEncryptUtils.decrypt(encrypt2.getBytes(), password.getBytes());
         AppLogUtils.d("des计算解密字符串2: " + decrypt2);
     }
@@ -200,8 +216,10 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
     private void aes() {
         String string = "yangchongyangchongyangchongyangchong";
         String password = "yc123456yc123456";
+        //AES加密字符串
         String encrypt1 = AesEncryptUtils.encrypt(string,password);
         AppLogUtils.d("aes计算加密字符串1: " + encrypt1);
+        //AES解密字符串
         String decrypt1 = AesEncryptUtils.decrypt(encrypt1 , password);
         AppLogUtils.d("aes计算解密字符串1: " + decrypt1);
 
@@ -302,14 +320,19 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
         }
         yc.setInfo(stringBuilder.toString());
 
+        //RC4加密
         String encrypt1 = Rc4EncryptUtils.encryptString(string, secretKey);
         AppLogUtils.d("rc4计算加密字符串1: " + encrypt1);
+        //RC4解密
         String decrypt1 = Rc4EncryptUtils.decryptString(encrypt1, secretKey);
         AppLogUtils.d("rc4计算解密字符串1: " + decrypt1);
 
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.bg_cloud_night);
-        String encrypt2 = Rc4EncryptUtils.encryptToBase64(bitmap.getNinePatchChunk(), secretKey);
+        byte[] bytes1 = bitmap.getNinePatchChunk();
+        //RC4加密base64编码数据
+        String encrypt2 = Rc4EncryptUtils.encryptToBase64(bytes1, secretKey);
         AppLogUtils.d("rc4计算加密字符串2: " + encrypt2);
+        //RC4解密base64解码数据
         byte[] bytes = Rc4EncryptUtils.decryptFromBase64(encrypt2, secretKey);
         if (bytes!=null){
             Bitmap image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
