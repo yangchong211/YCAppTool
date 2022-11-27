@@ -15,6 +15,10 @@
 - 13.异常上报接口库
 - 14.File流读写库
 - 15.加密和解密库
+- 16.Lru内存缓存库
+- 17.Lru磁盘缓存库
+- 18.磁盘分区库
+
 
 
 ### 01.框架公共组件层
@@ -427,6 +431,13 @@
     //RC4解密base64解码数据
     byte[] bytes = Rc4EncryptUtils.decryptFromBase64(encrypt2, secretKey);
     ```
+
+
+### 16.Lru内存缓存库
+
+
+
+### 17.Lru磁盘缓存库
 
 
 
