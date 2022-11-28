@@ -70,9 +70,7 @@
 
 
 
-CameraOperation类，setTorch增加catch操作，是否会影响业务逻辑
-SplashFragment页面，从init——splash——mainpager页面，中间过渡有个短暂白色
-去掉fetchDeviceBySeries方法，该方法使用风险比较大
+
 
 
 

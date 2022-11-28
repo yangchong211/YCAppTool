@@ -29,9 +29,9 @@ public abstract class BaseAppActivity extends AppCompatActivity {
      *
      *
      * 异常生命周期
-     *
+     * onSaveInstanceState：保存数据
+     * onRestoreInstanceState：恢复数据
      */
-
 
     /**
      * 表示Activity 正在创建，常做初始化工作，如setContentView界面资源、初始化数据。
@@ -122,11 +122,17 @@ public abstract class BaseAppActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
     }
 
+    /**
+     * 当与活动关联的主窗口已附加到窗口管理器时调用
+     */
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
     }
 
+    /**
+     * 当与活动关联的主窗口已从窗口管理器分离时调用。
+     */
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
