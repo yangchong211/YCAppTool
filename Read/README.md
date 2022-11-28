@@ -209,7 +209,8 @@ https://github.com/Kyson/AndroidGodEye/blob/master/README_zh.md
 
 ### 稳定性
 - https://blog.51cto.com/u_15233911/2826427
-
+- 腾讯Matrix源码
+    - https://www.yuque.com/ibaozi/ygq8yc
 
 
 - 一线大厂中的大型App全套性能优化实战方案
@@ -237,7 +238,8 @@ https://github.com/Kyson/AndroidGodEye/blob/master/README_zh.md
 - 【协程】ViewModelScope源码解析
     - https://blog.csdn.net/yechaoa/article/details/118165611
 - https://github.com/hegaojian/JetpackMvvm
-
+- Android实现程序前后台切换效果
+    - https://blog.51cto.com/u_15329896/3412393
 
 ### 超级好文
 - 优秀个人博主
