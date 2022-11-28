@@ -22,6 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @revise :
  * GitHub ：https://github.com/yangchong211/YCEfficient
  */
+@Deprecated()
 public class AppStateMonitor extends BaseLifecycleCallbacks implements ComponentCallbacks2 {
 
     public static final String TAG = "AppStateMonitor";
@@ -35,8 +36,9 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
     /**
      * 判断是否初始化
      */
-    private static final AtomicBoolean mInitialized = new AtomicBoolean(false);
+    private static final AtomicBoolean M_INITIALIZED = new AtomicBoolean(false);
     private Runnable mInitialReportTask;
+    protected boolean mIsDebug;
 
     public static AppStateMonitor getInstance() {
         //静态单例
@@ -44,13 +46,17 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
     }
 
     public void init(Context context) {
-        if (mInitialized.get()) {
+        if (M_INITIALIZED.get()) {
             return;
         }
         Application application = (Application) context.getApplicationContext();
         application.registerActivityLifecycleCallbacks(this);
         sendDelayedMessage();
-        mInitialized.set(true);
+        M_INITIALIZED.set(true);
+    }
+
+    public void setDebug(boolean debug){
+        mIsDebug = debug;
     }
 
     private void sendDelayedMessage() {
@@ -194,7 +200,7 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
     }
 
     private void loggingAppState(String msg) {
-        if (msg != null) {
+        if (mIsDebug && msg != null) {
             Log.d("app state monitor : ", msg);
         }
     }

@@ -74,7 +74,7 @@ public class BaseLifecycleCallbacks implements Application.ActivityLifecycleCall
 
 
     private void loggingAppState(String msg) {
-        if (msg != null && BuildConfig.DEBUG) {
+        if (AppStateLifecycle.getInstance().mIsDebug && msg != null) {
             Log.d("app callback : ", msg);
         }
     }

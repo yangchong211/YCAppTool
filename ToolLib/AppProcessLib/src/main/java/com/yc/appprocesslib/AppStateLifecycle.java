@@ -42,7 +42,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
     /**
      * 判断是否初始化
      */
-    private static final AtomicBoolean mInitialized = new AtomicBoolean(false);
+    private static final AtomicBoolean M_INITIALIZED = new AtomicBoolean(false);
     /**
      * 记录start次数
      */
@@ -51,12 +51,19 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
      * 记录resume次数
      */
     private int mResumedCounter = 0;
+    /**
+     * 是否发送pause事件
+     */
     private boolean mPauseSent = true;
+    /**
+     * 是否执行stop方法
+     */
     private boolean mStopSent = true;
     /**
      * 延迟500ms
      */
     private static final long TIMEOUT_MS = 500;
+    protected boolean mIsDebug;
 
     private final Runnable mDelayedPauseRunnable = new Runnable() {
         @Override
@@ -72,12 +79,16 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
     }
 
     public void init(Context context) {
-        if (mInitialized.get()) {
+        if (M_INITIALIZED.get()) {
             return;
         }
         Application application = (Application) context.getApplicationContext();
         application.registerActivityLifecycleCallbacks(this);
-        mInitialized.set(true);
+        M_INITIALIZED.set(true);
+    }
+
+    public void setDebug(boolean debug){
+        mIsDebug = debug;
     }
 
     /**
@@ -241,7 +252,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
     }
 
     private void loggingAppState(String msg) {
-        if (msg != null && BuildConfig.DEBUG) {
+        if (mIsDebug && msg != null) {
             Log.d("app state lifecycle : ", msg);
         }
     }
