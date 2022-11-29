@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.yc.appcontextlib.AppToolUtils;
 import com.yc.apppermission.PermissionUtils;
 import com.yc.localelib.service.LocaleService;
-import com.yc.toolutils.AppToolUtils;
 
 /**
  * <pre>

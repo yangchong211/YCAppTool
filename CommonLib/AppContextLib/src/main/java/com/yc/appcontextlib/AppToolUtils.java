@@ -51,7 +51,6 @@ public final class AppToolUtils {
         return arg;
     }
 
-
     /**
      * 关闭 IO
      *

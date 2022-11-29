@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.toollib.crash.CrashListActivity;
 
 import java.util.ArrayList;
@@ -38,15 +39,41 @@ public class CrashTestActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.tv_7).setOnClickListener(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TimeMonitorHelper.end("startActivity");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        TimeMonitorHelper.start("onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        TimeMonitorHelper.start("finish");
+        super.onDestroy();
+        TimeMonitorHelper.end("onStop");
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        TimeMonitorHelper.end("finish");
+    }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.tv_1) {
+            TimeMonitorHelper.start("Click");
             Integer.parseInt("12.3");
         } else if (id == R.id.tv_2) {
             ArrayList<String> list = new ArrayList<>();
             list.get(5);
+            TimeMonitorHelper.end("Click");
         } else if (id == R.id.tv_3) {
             Activity activity = null;
             activity.isDestroyed();

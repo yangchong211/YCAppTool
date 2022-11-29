@@ -33,6 +33,9 @@ public class SystemLruCache<K, V> implements ILruCache<K, V> {
         }
         this.maxSize = maxSize;
         //创建map集合
+        //第一个参数：
+        //第二个参数：
+        //第三个参数：
         this.map = new LinkedHashMap<K, V>(0, 0.75f, true);
     }
 

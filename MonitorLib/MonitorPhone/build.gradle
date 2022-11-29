@@ -40,4 +40,5 @@ dependencies {
     //内存工具类
     implementation 'com.github.yangchong211.YCCommonLib:ToolMemoryLib:1.3.5'
     implementation project(path: ':ToolFileLib')
+    implementation project(path: ':AppContextLib')
 }

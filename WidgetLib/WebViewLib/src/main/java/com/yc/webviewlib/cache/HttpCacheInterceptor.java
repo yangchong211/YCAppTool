@@ -1,6 +1,7 @@
 package com.yc.webviewlib.cache;
 
-import com.yc.toolutils.net.AppNetworkUtils;
+
+import com.yc.networklib.AppNetworkUtils;
 
 import java.io.IOException;
 

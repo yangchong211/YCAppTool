@@ -10,7 +10,6 @@ import com.yc.businessinterface.BusinessTransfer;
 import com.yc.eventuploadlib.LoggerReporter;
 import com.yc.library.LoggerReporterImpl;
 import com.yc.library.base.config.AppConfig;
-import com.yc.toolutils.AppToolUtils;
 
 /**
  * <pre>
@@ -33,8 +32,6 @@ public class LibApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        //工具库
-        AppToolUtils.init(this);
         AppConfig.INSTANCE.initConfig(this);
         //在子线程中初始化
         InitializeService.start(this);

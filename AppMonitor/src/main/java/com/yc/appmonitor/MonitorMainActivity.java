@@ -9,6 +9,7 @@ import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;
 import com.yc.monitorspeed.ConnectionActivity;
+import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toollib.crash.CrashListActivity;
 import com.yc.toolutils.click.PerfectClickListener;
@@ -67,6 +68,7 @@ public class MonitorMainActivity extends BaseActivity {
         tvCrashTest.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
+                TimeMonitorHelper.start("startActivity统计耗时");
                 Intent intent = new Intent(MonitorMainActivity.this, CrashTestActivity.class);
                 startActivity(intent);
             }
@@ -74,6 +76,7 @@ public class MonitorMainActivity extends BaseActivity {
         tvNetSpeed.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
+                TimeMonitorHelper.start("Main Click");
                 ConnectionActivity.startActivity(MonitorMainActivity.this);
             }
         });
@@ -84,4 +87,10 @@ public class MonitorMainActivity extends BaseActivity {
 
     }
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        TimeMonitorHelper.end("Main Click");
+    }
 }

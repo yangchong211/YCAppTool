@@ -2,6 +2,15 @@ package com.yc.monitortimelib;
 
 import java.util.HashMap;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time  : 2020/7/10
+ *     desc  : time监控器帮助类
+ *     revise:
+ * </pre>
+ */
 public final class TimeMonitorHelper {
 
     private static final Object OBJECT = new Object();

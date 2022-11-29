@@ -1,6 +1,7 @@
 package com.yc.tracesdk;
 
 public class TimeTraceFactory {
+
     static class LogcatPrinterHolder {
         static final InterPrinter sPrinter = new LogcatPrinter();
     }

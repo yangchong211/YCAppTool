@@ -20,10 +20,10 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
+import com.yc.appcontextlib.AppToolUtils;
 import com.yc.imageserver.R;
 import com.yc.imageserver.transformations.CornerGlideTransform;
 import com.yc.imageserver.transformations.RoundedCornersTransformation;
-import com.yc.toolutils.AppToolUtils;
 
 /**
  * <pre>

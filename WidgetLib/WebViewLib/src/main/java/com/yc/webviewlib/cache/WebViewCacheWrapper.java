@@ -9,7 +9,7 @@ import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.URLUtil;
 import com.tencent.smtt.sdk.WebView;
-import com.yc.toolutils.net.AppNetworkUtils;
+import com.yc.networklib.AppNetworkUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 
 import java.io.File;

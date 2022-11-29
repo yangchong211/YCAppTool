@@ -2,9 +2,17 @@ package com.yc.monitortimelib;
 
 import com.yc.toolutils.AppLogUtils;
 
-public class TimeMonitor {
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time  : 2020/7/10
+ *     desc  : time监控器
+ *     revise:
+ * </pre>
+ */
+public final class TimeMonitor {
 
-    private final String TAG = "TimeMonitor: ";
     private final TimeTraceBean timeTraceBean;
     private final Object object = new Object();
 
@@ -17,6 +25,7 @@ public class TimeMonitor {
             return;
         }
         long startTime = System.currentTimeMillis();
+        //设置开始时间
         synchronized (object) {
             timeTraceBean.setActionStartTime(startTime);
         }
@@ -27,6 +36,7 @@ public class TimeMonitor {
             return;
         }
         long endTime = System.currentTimeMillis();
+        //设置结束时间
         synchronized (object) {
             timeTraceBean.setActionEndTime(endTime);
         }
@@ -34,6 +44,7 @@ public class TimeMonitor {
     }
 
     void debug(OnMonitorListener listener) {
+        //计算开始时间和结束时间的差值
         long monitorTime = timeTraceBean.getActionEndTime() - timeTraceBean.getActionStartTime();
         if (listener != null) {
             PrintFormatAdapter formatAdapter = TimeMonitorHelper.getFormatAdapter();
@@ -41,7 +52,8 @@ public class TimeMonitor {
             listener.onMonitorResult(timeTraceBean.getActionName(), format);
             return;
         }
-        AppLogUtils.d(TAG, timeTraceBean.getActionName() + " " + monitorTime);
+        String tag = "TimeMonitor: ";
+        AppLogUtils.d(tag, timeTraceBean.getActionName() + " " + monitorTime);
     }
 
 }

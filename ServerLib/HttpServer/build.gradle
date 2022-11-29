@@ -33,4 +33,5 @@ dependencies {
     implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':NetInterceptor')
+    implementation project(path: ':NetWorkLib')
 }
