@@ -47,6 +47,24 @@
     - SharedPreferences，MMKV，DiskLruCache，SqlLite，DataStore，ACache，Room
 
 
+#### 2.3 基于接口开发
+- 基于接口而非实现编程
+    - 理解其中的“接口”两个字。从本质上来看，“接口”就是一组“协议”或者“约定”，是功能提供者提供给使用者的一个“功能列表”。
+    - 将接口和实现相分离，封装不稳定的实现，暴露稳定的接口。上游系统面向接口而非实现编程，不依赖不稳定的实现细节，这样当实现发生变化的时候，上游系统的代码基本上不需要做改动，以此来降低耦合性，提高扩展性。
+- 定义缓存的通用API接口，这里省略部分代码
+    ``` kotlin
+    interface ICacheable {
+        fun saveXxx(key: String, value: Int)
+        fun readXxx(key: String, default: Int = 0): Int
+        fun removeKey(key: String)
+        fun totalSize(): Long
+        fun clearData()
+    }
+    ```
+
+
+
+
 
 ### 03.Api调用说明
 
