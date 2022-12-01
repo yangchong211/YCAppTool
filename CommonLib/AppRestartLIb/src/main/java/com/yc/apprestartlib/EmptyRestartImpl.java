@@ -1,4 +1,4 @@
-package com.yc.apprestartlib.impl;
+package com.yc.apprestartlib;
 
 import android.content.Context;
 

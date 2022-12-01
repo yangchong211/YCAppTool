@@ -107,17 +107,21 @@ class MmkvCacheImpl(builder: Builder) : ICacheable {
     }
 
     override fun clearData() {
-        File(CacheInitHelper.getMmkvPath(), fileName).apply {
-            if (exists()) {
-                Log.d("DiskCacheImpl","before fileSize:" +
-                        "${this.length() / 1024}K,path:${this.absolutePath}")
+        fileName?.let {
+            File(CacheInitHelper.getMmkvPath(), it).apply {
+                if (exists()) {
+                    Log.d("DiskCacheImpl","before fileSize:" +
+                            "${this.length() / 1024}K,path:${this.absolutePath}")
+                }
             }
         }
         mmkv.clearAll()
-        File(CacheInitHelper.getMmkvPath(), fileName).apply {
-            if (exists()) {
-                Log.d("DiskCacheImpl","after fileSize:" +
-                        "${this.length() / 1024}K,path:${this.absolutePath}")
+        fileName?.let {
+            File(CacheInitHelper.getMmkvPath(), it).apply {
+                if (exists()) {
+                    Log.d("DiskCacheImpl","after fileSize:" +
+                            "${this.length() / 1024}K,path:${this.absolutePath}")
+                }
             }
         }
     }

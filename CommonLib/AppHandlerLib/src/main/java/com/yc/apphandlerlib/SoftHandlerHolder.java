@@ -3,6 +3,7 @@ package com.yc.apphandlerlib;
 import android.os.Handler;
 import android.os.Message;
 
+import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 
@@ -12,22 +13,23 @@ import java.lang.ref.WeakReference;
  *     blog  : https://github.com/yangchong211
  *     time  : 2016/03/22
  *     desc  : Handler
- *     revise: 弱引用–>随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。
+ *     revise: 软引用–>随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。
  * </pre>
  */
-public class HandlerHolder extends Handler {
+public class SoftHandlerHolder extends Handler {
 
-    private final WeakReference<OnReceiveMessageListener> mListenerWeakReference;
+    private final SoftReference<OnReceiveMessageListener> mListenerWeakReference;
 
     /**
      * @param listener 收到消息回调接口
      */
-    public HandlerHolder(OnReceiveMessageListener listener) {
-        mListenerWeakReference = new WeakReference<>(listener);
+    public SoftHandlerHolder(OnReceiveMessageListener listener) {
+        mListenerWeakReference = new SoftReference<>(listener);
     }
 
     @Override
     public void handleMessage(Message msg) {
+        super.handleMessage(msg);
         if (mListenerWeakReference != null && mListenerWeakReference.get() != null) {
             mListenerWeakReference.get().handlerMessage(msg);
         }

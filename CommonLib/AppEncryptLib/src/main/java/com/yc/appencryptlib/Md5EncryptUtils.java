@@ -22,6 +22,7 @@ import java.util.HashMap;
  */
 public final class Md5EncryptUtils {
 
+
     /**
      * 用来将字节转换成16进制表示的字符
      * 如何加强md5安全性
@@ -32,6 +33,10 @@ public final class Md5EncryptUtils {
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
     private static final char[] HEX_DIGITS_2 =
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
+    private Md5EncryptUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
 
     public static String getMD5(String str) {
         byte[] source = str.getBytes();

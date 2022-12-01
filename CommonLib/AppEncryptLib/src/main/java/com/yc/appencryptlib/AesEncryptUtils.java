@@ -31,6 +31,9 @@ public final class AesEncryptUtils {
     public static final String AES_ALGORITHM = "AES/CBC/PKCS5Padding";
     public static final String CHAR_ENCODING = "UTF-8";
 
+    private AesEncryptUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
 
     /**
      * AES加密字符串

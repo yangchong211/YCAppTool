@@ -16,13 +16,13 @@ public class ServerApplication extends Application {
 
     private void initLogUtils() {
         //通过跨进程写日志
-        String aLogPath = AppFileUtils.getCacheFilePath(this, "ALog");
+        String aLogPath = AppFileUtils.getExternalFilePath(this, "YcLog");
         LogUtils.initLogEngine(this);
         LogUtils.setLogSaveFolder(aLogPath);
         LogUtils.setShowLog(true);
         LogUtils.enableTooLargeAutoDevide(true);
         LogUtils.setAutoDivideRatio(0.5f);
         LogUtils.setBaseStackIndex(LogClient.mBaseIndex);
-        LogUtils.setLogPre("ALog");
+        LogUtils.setLogPre("YcLog");
     }
 }

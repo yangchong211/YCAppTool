@@ -55,6 +55,7 @@ class LogTestActivity : AppCompatActivity() {
 
     private fun initListener() {
         tvTest0.setOnClickListener {
+            LogUtils.i("tvTest0")
             FileExplorerActivity.startActivity(this@LogTestActivity)
         }
         tvTest1.setOnClickListener {

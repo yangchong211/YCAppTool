@@ -88,7 +88,6 @@ dependencies {
     api rootProject.ext.dependencies["coordinatorlayout"]
     api rootProject.ext.dependencies["multidex"]
     api rootProject.ext.dependencies["glide"]
-    api(rootProject.ext.dependencies["rxandroid2"])
     //annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     api(rootProject.ext.dependencies["retrofit"])
     api rootProject.ext.dependencies["easypermissions"]

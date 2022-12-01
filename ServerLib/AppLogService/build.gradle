@@ -28,7 +28,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api project(':AppLogHelper')
+    api project(':AppLogClient')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':ToolFileLib')
     implementation project(path: ':FileIoHelper')

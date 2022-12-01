@@ -5,6 +5,6 @@
     <application>
         <!--<service android:name="com.yc.apprestartlib.KillSelfService"
             android:process=":restart"/>-->
-        <service android:name="com.yc.apprestartlib.impl.ServiceRestartImpl$KillSelfService" />
+        <service android:name="com.yc.apprestartlib.ServiceRestartImpl$KillSelfService" />
     </application>
 </manifest>

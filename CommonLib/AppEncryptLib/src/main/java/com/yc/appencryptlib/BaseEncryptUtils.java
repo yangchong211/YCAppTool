@@ -8,8 +8,12 @@ import java.security.NoSuchAlgorithmException;
 
 public final class BaseEncryptUtils {
 
-    private static final char[] hexDigits =
+    private static final char[] HEX_DIGITS =
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
+    private BaseEncryptUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
 
     /**
      * hash 加密模板
@@ -43,8 +47,8 @@ public final class BaseEncryptUtils {
         }
         char[] ret = new char[len << 1];
         for (int i = 0, j = 0; i < len; i++) {
-            ret[j++] = hexDigits[bytes[i] >>> 4 & 0x0f];
-            ret[j++] = hexDigits[bytes[i] & 0x0f];
+            ret[j++] = HEX_DIGITS[bytes[i] >>> 4 & 0x0f];
+            ret[j++] = HEX_DIGITS[bytes[i] & 0x0f];
         }
         return new String(ret);
     }

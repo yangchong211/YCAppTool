@@ -5,13 +5,13 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.yc.appcontextlib.AppToolUtils;
 import com.yc.appfilelib.AppFileUtils;
 import com.yc.apploglib.log.DefaultLoggerImpl;
 import com.yc.apploglib.log.InterLogger;
 import com.yc.apploglib.printer.AbsPrinter;
 import com.yc.apploglib.printer.FilePrinterImpl;
 import com.yc.apploglib.printer.LogcatPrinterImpl;
-import com.yc.toolutils.AppToolUtils;
 
 import java.io.File;
 

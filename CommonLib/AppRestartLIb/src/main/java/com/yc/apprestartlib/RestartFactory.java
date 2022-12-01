@@ -2,12 +2,6 @@ package com.yc.apprestartlib;
 
 import androidx.annotation.StringDef;
 
-import com.yc.apprestartlib.impl.AlarmRestartImpl;
-import com.yc.apprestartlib.impl.EmptyRestartImpl;
-import com.yc.apprestartlib.impl.LauncherRestartImpl;
-import com.yc.apprestartlib.impl.ManifestRestartImpl;
-import com.yc.apprestartlib.impl.ServiceRestartImpl;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

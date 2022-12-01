@@ -26,6 +26,10 @@ public final class Base64Utils {
      * URL_SAFE 这个参数意思是加密时不使用对URL和文件名有特殊意义的字符来作为加密字符，具体就是以-和_取代+和/
      */
 
+    private Base64Utils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
+
     /**
      * 判断字符串是否BASE64编码：
      * 1.字符串只可能包含A-Z，a-z，0-9，+，/，=字符

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
+import com.yc.appcontextlib.AppToolUtils;
 import com.yc.appserver.R;
 import com.yc.appserver.http.http.api.SearchAuthorApi;
 import com.yc.appserver.http.http.api.SearchBlogsApi;
@@ -37,12 +38,12 @@ import com.yc.http.model.HttpMethod;
 import com.yc.http.model.HttpParams;
 import com.yc.http.model.ResponseClass;
 import com.yc.http.request.HttpRequest;
+import com.yc.logclient.LogUtils;
 import com.yc.monitorinterceptor.WeakNetworkInterceptor;
 import com.yc.monitorinterceptor.WeakNetworkManager;
 import com.yc.netinterceptor.HttpLoggerLevel;
 import com.yc.netinterceptor.HttpLoggingInterceptor;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.AppToolUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,13 +59,14 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
     private TextView mResponseTextView;
 
     static {
+        LogUtils.d("static NetMainActivity");
         // 网络请求框架初始化
         IRequestServer server = new ReleaseServer();
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BODY))
                 .addInterceptor(new WeakNetworkInterceptor())
                 .build();
-
+        LogUtils.w("static NetMainActivity server");
         EasyConfig.with(okHttpClient)
                 // 是否打印日志
                 //.setLogEnabled(BuildConfig.DEBUG)
@@ -103,6 +105,7 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
             target.setClass(context, NetMainActivity.class);
             //target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(target);
+            LogUtils.d("startActivity NetMainActivity");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -113,7 +116,7 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_main);
-
+        LogUtils.d("onCreate");
         mProgressBar = findViewById(R.id.pb_main_progress);
         mResponseTextView = findViewById(R.id.response_textView);
 
@@ -142,11 +145,13 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
                             Gson gson = new Gson();
                             String s = gson.toJson(result);
                             mResponseTextView.setText(s);
+                            LogUtils.d("onSucceed: " + s);
                         }
 
                         @Override
                         public void onFail(Exception e) {
                             mResponseTextView.setText(e.getMessage());
+                            LogUtils.e("onFail: " + e);
                         }
                     });
 
@@ -162,11 +167,13 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
                             Gson gson = new Gson();
                             String s = gson.toJson(result);
                             mResponseTextView.setText(s);
+                            LogUtils.d("onSucceed: " + s);
                         }
 
                         @Override
                         public void onFail(Exception e) {
                             mResponseTextView.setText(e.getMessage());
+                            LogUtils.e("onFail: " + e);
                         }
                     });
 
@@ -179,9 +186,21 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
                             .api(new SearchBlogsApi()
                                     .setKeyword("搬砖不再有"))
                             .execute(new ResponseClass<HttpData<SearchBlogsApi.Bean>>() {});
-                    ToastUtils.showRoundRectToast("同步请求成功，请看日志");
+                    mProgressBar.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showRoundRectToast("同步请求成功，请看日志");
+                        }
+                    });
+
+                    LogUtils.d("onSucceed: " + data);
                 } catch (Exception e) {
-                    ToastUtils.showRoundRectToast(e.getMessage());
+                    mProgressBar.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.showRoundRectToast(e.getMessage());
+                        }
+                    });
                 }
             }).start();
 
@@ -234,26 +253,31 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
                         public void onStart(Call call) {
                             mProgressBar.setProgress(0);
                             mProgressBar.setVisibility(View.VISIBLE);
+                            LogUtils.i("onStart: ");
                         }
 
                         @Override
                         public void onProgress(int progress) {
                             mProgressBar.setProgress(progress);
+                            LogUtils.i("onProgress: " + progress);
                         }
 
                         @Override
                         public void onSucceed(Void result) {
                             ToastUtils.showRoundRectToast("上传成功");
+                            LogUtils.i("onSucceed");
                         }
 
                         @Override
                         public void onFail(Exception e) {
                             ToastUtils.showRoundRectToast("上传失败");
+                            LogUtils.i("onFail");
                         }
 
                         @Override
                         public void onEnd(Call call) {
                             mProgressBar.setVisibility(View.GONE);
+                            LogUtils.i("onEnd");
                         }
                     });
 
@@ -296,26 +320,31 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
                         public void onStart(File file) {
                             mProgressBar.setProgress(0);
                             mProgressBar.setVisibility(View.VISIBLE);
+                            LogUtils.i("onStart: ");
                         }
 
                         @Override
                         public void onProgress(File file, int progress) {
                             mProgressBar.setProgress(progress);
+                            LogUtils.i("onProgress: " + progress);
                         }
 
                         @Override
                         public void onComplete(File file) {
                             ToastUtils.showRoundRectToast("下载完成：" + file.getPath());
+                            LogUtils.i("onComplete: " + file.getPath());
                         }
 
                         @Override
                         public void onError(File file, Exception e) {
                             ToastUtils.showRoundRectToast("下载出错：" + e.getMessage());
+                            LogUtils.e("onError: " + e);
                         }
 
                         @Override
                         public void onEnd(File file) {
                             mProgressBar.setVisibility(View.GONE);
+                            LogUtils.e("onEnd: " + file.getPath());
                         }
                     })
                     .start();

@@ -41,15 +41,15 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
         ':GsonServer', ':IpcServer', ':ObjectEqualLib',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
-        ':AppLogHelper', ':AppLogProcess', ':NetInterceptor', ':SignalHooker',
+        ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
         ':GlideProgressLib', ':CompressServer', ':BellsVibrations'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
 project(':NfcServer').projectDir = new File('ServerLib/NfcServer')
 project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
-project(':AppLogHelper').projectDir = new File('ServerLib/AppLogHelper')
-project(':AppLogProcess').projectDir = new File('ServerLib/AppLogProcess')
+project(':AppLogClient').projectDir = new File('ServerLib/AppLogClient')
+project(':AppLogService').projectDir = new File('ServerLib/AppLogService')
 project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
 project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')
 project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')

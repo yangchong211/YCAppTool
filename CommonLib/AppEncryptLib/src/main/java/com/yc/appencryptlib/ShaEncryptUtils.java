@@ -8,9 +8,9 @@ package com.yc.appencryptlib;
  *     desc  : 加密解密相关的工具类
  * </pre>
  */
-public final class AppEncryptUtils {
+public final class ShaEncryptUtils {
 
-    private AppEncryptUtils() {
+    private ShaEncryptUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

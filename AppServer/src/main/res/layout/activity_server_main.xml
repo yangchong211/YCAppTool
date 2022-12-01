@@ -13,7 +13,7 @@
         android:padding="20dp">
 
         <com.yc.roundcorner.view.RoundTextView
-            android:id="@+id/tv_log_server1"
+            android:id="@+id/tv_log_server"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="left|center_vertical"
@@ -21,24 +21,10 @@
             android:text="1.log日志调试案例"
             android:textSize="@dimen/textSize18"
             android:background="@color/priority_green"
-            app:rRadius="@dimen/dp20"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <com.yc.roundcorner.view.RoundTextView
-            android:id="@+id/tv_log_server"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="@dimen/dp20"
-            android:text="2.log日志调试案例"
-            android:textSize="@dimen/textSize18"
-            android:background="@color/priority_green"
             android:layout_marginTop="@dimen/dp20"
             app:rRadius="@dimen/dp20"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_log_server1"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
 
         <com.yc.roundcorner.view.RoundTextView
@@ -91,6 +77,20 @@
             android:gravity="left|center_vertical"
             android:paddingLeft="@dimen/dp20"
             android:text="6.线程相关的案例"
+            android:textSize="@dimen/textSize18"
+            android:background="@color/priority_green"
+            android:layout_marginTop="@dimen/dp20"
+            app:rRadius="@dimen/dp20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_net_test"/>
+
+        <com.yc.roundcorner.view.RoundTextView
+            android:id="@+id/tv_file_test"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="@dimen/dp20"
+            android:text="7.磁盘缓存文件查看"
             android:textSize="@dimen/textSize18"
             android:background="@color/priority_green"
             android:layout_marginTop="@dimen/dp20"

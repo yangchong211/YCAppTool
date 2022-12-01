@@ -45,8 +45,8 @@ dependencies {
     implementation project(path: ':RoundCorners')
     implementation project(path: ':MonitorPhone')
     implementation project(path: ':MonitorPingLib')
-    implementation project(path: ':AppLogHelper')
-    implementation project(path: ':AppLogProcess')
+    implementation project(path: ':AppLogClient')
+    implementation project(path: ':AppLogService')
     implementation project(path: ':MonitorFileLib')
     implementation project(path: ':BellsVibrations')
     implementation project(path: ':PrivateServer')
@@ -56,5 +56,6 @@ dependencies {
     implementation project(path: ':NetInterceptor')
     implementation project(path: ':MonitorInterceptor')
     implementation project(path: ':ToolFileLib')
+    implementation project(path: ':AppContextLib')
 }
 

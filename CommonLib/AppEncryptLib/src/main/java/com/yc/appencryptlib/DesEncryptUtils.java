@@ -30,6 +30,11 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public final class DesEncryptUtils {
 
+
+    private DesEncryptUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
+
     /**
      * 偏移变量，固定占8位字节
      */
