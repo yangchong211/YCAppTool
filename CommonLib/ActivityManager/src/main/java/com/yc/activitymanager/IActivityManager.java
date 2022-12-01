@@ -107,7 +107,7 @@ public interface IActivityManager<T> {
      * @param lifecycleListener 监听
      */
     void registerActivityLifecycleListener(Class<T> clazz,
-                                           ActivityLifecycleListener lifecycleListener);
+                                           AbsLifecycleListener lifecycleListener);
 
     /**
      * 移除activity生命周期监听
@@ -116,6 +116,6 @@ public interface IActivityManager<T> {
      * @param lifecycleListener 监听
      */
     void unregisterActivityLifecycleListener(Class<T> clazz,
-                                             ActivityLifecycleListener lifecycleListener);
+                                             AbsLifecycleListener lifecycleListener);
 
 }

@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.IBinder;
 
 import com.yc.activitymanager.ActivityManager;
-import com.yc.apprestartlib.IRestartProduct;
 import com.yc.toolutils.AppLogUtils;
 
 /**
@@ -21,6 +20,10 @@ import com.yc.toolutils.AppLogUtils;
  * </pre>
  */
 public class ServiceRestartImpl implements IRestartProduct {
+
+    public ServiceRestartImpl(){
+
+    }
 
     @Override
     public void restartApp(Context context) {

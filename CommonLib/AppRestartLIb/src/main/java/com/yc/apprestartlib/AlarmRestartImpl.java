@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.yc.activitymanager.ActivityManager;
-import com.yc.apprestartlib.IRestartProduct;
 import com.yc.toolutils.AppLogUtils;
 
 /**
@@ -20,6 +19,10 @@ import com.yc.toolutils.AppLogUtils;
  * </pre>
  */
 public class AlarmRestartImpl implements IRestartProduct {
+
+    public AlarmRestartImpl(){
+
+    }
 
     @Override
     public void restartApp(Context context) {

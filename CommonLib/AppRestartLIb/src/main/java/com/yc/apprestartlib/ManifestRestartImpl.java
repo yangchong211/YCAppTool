@@ -10,7 +10,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.yc.activitymanager.ActivityManager;
-import com.yc.apprestartlib.IRestartProduct;
 
 import java.util.List;
 
@@ -25,6 +24,10 @@ import java.util.List;
  * </pre>
  */
 public class ManifestRestartImpl implements IRestartProduct {
+
+    public ManifestRestartImpl(){
+
+    }
 
     @Override
     public void restartApp(Context context) {

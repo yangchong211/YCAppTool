@@ -3,10 +3,10 @@ package com.yc.lifehelper.listener;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.yc.activitymanager.ActivityLifecycleListener;
+import com.yc.activitymanager.AbsLifecycleListener;
 
 
-public class MainActivityListener extends ActivityLifecycleListener {
+public class MainActivityListener extends AbsLifecycleListener {
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {

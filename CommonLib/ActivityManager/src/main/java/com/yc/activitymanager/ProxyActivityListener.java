@@ -33,9 +33,9 @@ import java.util.Map;
  *     revise:
  * </pre>
  */
-public class ProxyActivityListener extends ActivityLifecycleListener {
+public class ProxyActivityListener extends AbsLifecycleListener {
 
-    private final Map<Class<Activity>, List<ActivityLifecycleListener>>
+    private final Map<Class<Activity>, List<AbsLifecycleListener>>
             mActivityLifecycleListeners = new HashMap<>();
     private final ActivityManager mActivityManager;
 
@@ -44,11 +44,11 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
     }
 
     public void registerActivityLifecycleListener(Class<Activity> clazz,
-                                                  ActivityLifecycleListener lifecycleListener) {
+                                                  AbsLifecycleListener lifecycleListener) {
         if (clazz == null || lifecycleListener == null) {
             return;
         }
-        List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(clazz);
+        List<AbsLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(clazz);
         if (lifecycleListeners == null) {
             lifecycleListeners = new ArrayList<>();
         }
@@ -56,12 +56,12 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
         mActivityLifecycleListeners.put(clazz, lifecycleListeners);
     }
 
-    public boolean unregisterActivityLifecycleListener(Class<Activity> clazz, ActivityLifecycleListener lifecycleListener) {
+    public boolean unregisterActivityLifecycleListener(Class<Activity> clazz, AbsLifecycleListener lifecycleListener) {
         if (clazz == null || lifecycleListener == null) {
             return false;
         }
         synchronized (mActivityLifecycleListeners) {
-            List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(clazz);
+            List<AbsLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(clazz);
             if (lifecycleListeners == null) {
                 return false;
             }
@@ -75,12 +75,12 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
 
     @Override
     public void onActivityResumed(Activity activity) {
-        List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
+        List<AbsLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
             return;
         }
 
-        List<ActivityLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
+        List<AbsLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
         for (int i = 0; i < callbacks.size(); i++) {
             callbacks.get(i).onActivityResumed(activity);
         }
@@ -88,12 +88,12 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
 
     @Override
     public void onActivityStopped(Activity activity) {
-        List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
+        List<AbsLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
             return;
         }
 
-        List<ActivityLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
+        List<AbsLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
         for (int i = 0; i < callbacks.size(); i++) {
             callbacks.get(i).onActivityStopped(activity);
         }
@@ -101,12 +101,12 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
 
     @Override
     public void onActivityPaused(Activity activity) {
-        List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
+        List<AbsLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
             return;
         }
 
-        List<ActivityLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
+        List<AbsLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
         for (int i = 0; i < callbacks.size(); i++) {
             callbacks.get(i).onActivityPaused(activity);
         }
@@ -114,12 +114,12 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-        List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
+        List<AbsLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
             return;
         }
 
-        List<ActivityLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
+        List<AbsLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
         for (int i = 0; i < callbacks.size(); i++) {
             callbacks.get(i).onActivitySaveInstanceState(activity, outState);
         }
@@ -128,12 +128,12 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
     @Override
     public void onActivityDestroyed(Activity activity) {
         mActivityManager.remove(activity);
-        List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
+        List<AbsLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
             return;
         }
 
-        List<ActivityLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
+        List<AbsLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
         for (int i = 0; i < callbacks.size(); i++) {
             callbacks.get(i).onActivityDestroyed(activity);
         }
@@ -141,12 +141,12 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
 
     @Override
     public void onActivityStarted(Activity activity) {
-        List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
+        List<AbsLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
             return;
         }
 
-        List<ActivityLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
+        List<AbsLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
         for (int i = 0; i < callbacks.size(); i++) {
             callbacks.get(i).onActivityStarted(activity);
         }
@@ -155,12 +155,12 @@ public class ProxyActivityListener extends ActivityLifecycleListener {
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         mActivityManager.add(activity);
-        List<ActivityLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
+        List<AbsLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
             return;
         }
 
-        List<ActivityLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
+        List<AbsLifecycleListener> callbacks = new ArrayList<>(lifecycleListeners);
         for (int i = 0; i < callbacks.size(); i++) {
             callbacks.get(i).onActivityCreated(activity, savedInstanceState);
         }

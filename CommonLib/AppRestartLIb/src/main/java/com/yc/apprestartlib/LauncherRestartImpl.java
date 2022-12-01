@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.yc.activitymanager.ActivityManager;
-import com.yc.apprestartlib.IRestartProduct;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.List;
@@ -26,6 +25,10 @@ import java.util.List;
  * </pre>
  */
 public class LauncherRestartImpl implements IRestartProduct {
+
+    public LauncherRestartImpl(){
+
+    }
 
     @Override
     public void restartApp(Context context) {

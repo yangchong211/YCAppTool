@@ -31,7 +31,7 @@ import androidx.annotation.Nullable;
  *     revise:
  * </pre>
  */
-public abstract class ActivityLifecycleListener implements Application.ActivityLifecycleCallbacks {
+public abstract class AbsLifecycleListener implements Application.ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityCreated(@Nullable Activity activity, Bundle savedInstanceState) {

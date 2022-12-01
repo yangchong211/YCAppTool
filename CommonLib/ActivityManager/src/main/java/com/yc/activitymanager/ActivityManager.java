@@ -175,7 +175,7 @@ public class ActivityManager implements IActivityManager<Activity> {
      */
     @Override
     public void registerActivityLifecycleListener(Class clazz,
-                                                  ActivityLifecycleListener lifecycleListener) {
+                                                  AbsLifecycleListener lifecycleListener) {
         if (clazz == null || lifecycleListener == null) {
             return;
         }
@@ -190,7 +190,7 @@ public class ActivityManager implements IActivityManager<Activity> {
      */
     @Override
     public void unregisterActivityLifecycleListener(Class clazz,
-                                                    ActivityLifecycleListener lifecycleListener) {
+                                                    AbsLifecycleListener lifecycleListener) {
         if (clazz == null || lifecycleListener == null) {
             return;
         }
