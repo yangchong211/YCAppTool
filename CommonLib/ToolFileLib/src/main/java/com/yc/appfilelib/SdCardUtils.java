@@ -276,9 +276,9 @@ public final class SdCardUtils {
 
     public static class SDCardInfo {
 
-        private String  path;
-        private String  state;
-        private boolean isRemovable;
+        private final String  path;
+        private final String  state;
+        private final boolean isRemovable;
 
         SDCardInfo(String path, String state, boolean isRemovable) {
             this.path = path;
