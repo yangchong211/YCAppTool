@@ -1,5 +1,7 @@
 package com.yc.apprestartlib;
 
+import android.content.Context;
+
 import androidx.annotation.StringDef;
 
 import java.lang.annotation.Retention;
@@ -15,12 +17,37 @@ import java.lang.annotation.RetentionPolicy;
  *     revise: 使用简单工厂模式
  * </pre>
  */
-public final class RestartFactory {
+public final class RestartManager {
 
     public static final String ALARM = "alarm";
     public static final String SERVICE = "service";
     public static final String LAUNCHER = "launcher";
     public static final String MANIFEST = "manifest";
+    /**
+     * 单例对象
+     */
+    private volatile static RestartManager sInstance;
+
+    /**
+     * 单例模式
+     *
+     * @return ActivityManager对象
+     */
+    public static RestartManager getInstance() {
+        if (sInstance == null) {
+            synchronized (RestartManager.class) {
+                if (sInstance == null) {
+                    sInstance = new RestartManager();
+                }
+            }
+        }
+        return sInstance;
+    }
+
+    public void restartApp(Context context, @RestartType String type) {
+        IRestartProduct iRestartApp = create(type);
+        iRestartApp.restartApp(context);
+    }
 
     /**
      * 使用简单工厂模式
@@ -28,7 +55,7 @@ public final class RestartFactory {
      * @param type 参数类型
      * @return 具体产品
      */
-    static IRestartProduct create(@RestartType String type) {
+    private IRestartProduct create(@RestartType String type) {
         switch (type) {
             case ALARM:
                 return new AlarmRestartImpl();

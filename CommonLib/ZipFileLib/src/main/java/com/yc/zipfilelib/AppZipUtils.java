@@ -1,10 +1,11 @@
+package com.yc.zipfilelib;
+
 import android.text.TextUtils;
 
 import com.yc.appcontextlib.AppToolUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
