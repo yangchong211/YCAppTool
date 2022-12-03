@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import com.yc.networklib.AppNetworkUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppInfoUtils;
-import com.yc.toolutils.net.AppNetworkUtils;
 
 
 /**

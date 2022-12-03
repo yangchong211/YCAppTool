@@ -34,7 +34,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
-    implementation rootProject.ext.dependencies["zxing"]
+    implementation 'com.google.zxing:core:3.3.3'
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':ZXingCodeLib')
     implementation project(path: ':AppEncryptLib')

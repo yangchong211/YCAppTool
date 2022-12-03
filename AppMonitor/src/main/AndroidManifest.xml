@@ -20,6 +20,12 @@
         <activity
             android:name="com.yc.appmonitor.CrashTestActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.yc.appmonitor.ApmTestActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.yc.appmonitor.BlockListActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

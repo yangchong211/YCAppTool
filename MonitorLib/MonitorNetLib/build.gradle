@@ -37,11 +37,10 @@ dependencies {
     }
     implementation(rootProject.ext.dependencies["swiperefreshlayout"])
     implementation(rootProject.ext.dependencies["coordinatorlayout"])
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.3.5'
-    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.3.5'
-    implementation project(path: ':MonitorPingLib')
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.3'
+    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.3'
+    implementation 'com.github.yangchong211.YCCommonLib:AppCompress:1.4.3'
     implementation project(path: ':VideoView')
-    implementation project(path: ':AppCompress')
     //状态栏：https://github.com/yangchong211/YCStatusBar
     implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
     //adapter:https://github.com/yangchong211/YCRefreshView

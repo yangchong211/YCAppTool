@@ -48,7 +48,6 @@ ext {
     glideSdkVersion = "4.9.0"
     okhttpVersion = "4.7.2"
     gsonVersion = "2.8.5"
-    zxingVersion = "3.3.3"
     permissionsVersion = "1.0.1"
 
 
@@ -101,8 +100,6 @@ ext {
             "retrofit-converter-gson" : "com.squareup.retrofit2:converter-gson:$retrofitSdkVersion",
             "retrofit-adapter-rxjava2": "com.squareup.retrofit2:adapter-rxjava2:$retrofitSdkVersion",
             okhttp                    : "com.squareup.okhttp3:okhttp:$okhttpVersion",
-//            rxandroid2                : "io.reactivex.rxjava2:rxandroid:2.1.0",
-//            rxjava2                   : "io.reactivex.rxjava2:rxjava:2.1.11",
             gson                      : "com.google.code.gson:gson:$gsonVersion",
             glide                     : "com.github.bumptech.glide:glide:$glideSdkVersion",
             "glide-compiler"          : "com.github.bumptech.glide:compiler:$glideSdkVersion",
@@ -130,7 +127,6 @@ ext {
 
             //tools
             "easypermissions"         : "pub.devrel:easypermissions:$permissionsVersion",
-            zxing                     : "com.google.zxing:core:$zxingVersion",
     ]
 
 }

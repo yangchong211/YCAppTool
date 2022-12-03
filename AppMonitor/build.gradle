@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
 }
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
-
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -35,6 +35,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':RoundCorners')

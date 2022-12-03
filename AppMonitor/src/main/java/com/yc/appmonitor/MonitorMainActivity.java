@@ -22,6 +22,7 @@ public class MonitorMainActivity extends BaseActivity {
     private RoundTextView tvCrashMonitor;
     private RoundTextView tvCrashTest;
     private RoundTextView tvNetSpeed;
+    private RoundTextView tvApmTest;
 
     @Override
     public int getContentView() {
@@ -36,6 +37,7 @@ public class MonitorMainActivity extends BaseActivity {
         tvCrashMonitor = findViewById(R.id.tv_crash_monitor);
         tvCrashTest = findViewById(R.id.tv_crash_test);
         tvNetSpeed = findViewById(R.id.tv_net_speed);
+        tvApmTest = findViewById(R.id.tv_apm_test);
     }
 
     @Override
@@ -78,6 +80,13 @@ public class MonitorMainActivity extends BaseActivity {
             protected void onNoDoubleClick(View v) {
                 TimeMonitorHelper.start("Main Click");
                 ConnectionActivity.startActivity(MonitorMainActivity.this);
+            }
+        });
+        tvApmTest.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                Intent intent = new Intent(MonitorMainActivity.this, ApmTestActivity.class);
+                startActivity(intent);
             }
         });
     }

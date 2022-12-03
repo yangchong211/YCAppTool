@@ -71,5 +71,14 @@
         android:text="7.跳转到崩溃日志记录页面"/>
 
 
+    <TextView
+        android:id="@+id/tv_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/red"
+        android:padding="10dp"
+        android:text="8.跳转到APM测试小工具"/>
+
 
 </LinearLayout>
