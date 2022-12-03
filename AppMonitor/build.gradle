@@ -46,4 +46,5 @@ dependencies {
     implementation project(path: ':MonitorSpeed')
     implementation project(path: ':LeakCanarySdk')
     implementation project(path: ':MonitorTimeLib')
+    implementation project(path: ':MonitorNetLib')
 }

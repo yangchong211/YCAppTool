@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.yc.monitortimelib.OnMonitorListener;
 import com.yc.monitortimelib.TimeMonitorHelper;
+import com.yc.netlib.utils.NetworkTool;
 import com.yc.toollib.crash.CrashHandler;
 import com.yc.toollib.crash.CrashListener;
 import com.yc.toolutils.AppLogUtils;
@@ -25,6 +26,7 @@ public class MonitorApplication extends Application {
                 AppLogUtils.d("TimeMonitor processName: " + processName + " , result: " + result);
             }
         });
+        initNetWork();
     }
 
     private void initCrash() {
@@ -39,4 +41,9 @@ public class MonitorApplication extends Application {
                     }
                 });
     }
+
+    private void initNetWork() {
+        NetworkTool.getInstance().init(this);
+    }
+
 }

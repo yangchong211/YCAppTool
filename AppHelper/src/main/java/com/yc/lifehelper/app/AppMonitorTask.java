@@ -67,7 +67,6 @@ public class AppMonitorTask extends AbsParallelTask {
 
     private void initNetWork() {
         NetworkTool.getInstance().init(MainApplication.getInstance());
-        NetworkTool.getInstance().setFloat(MainApplication.getInstance());
     }
 
 }

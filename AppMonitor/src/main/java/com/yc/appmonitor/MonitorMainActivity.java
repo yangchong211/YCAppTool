@@ -10,6 +10,8 @@ import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;
 import com.yc.monitorspeed.ConnectionActivity;
 import com.yc.monitortimelib.TimeMonitorHelper;
+import com.yc.netlib.ui.NetRequestActivity;
+import com.yc.netlib.utils.NetworkTool;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toollib.crash.CrashListActivity;
 import com.yc.toolutils.click.PerfectClickListener;
@@ -23,6 +25,7 @@ public class MonitorMainActivity extends BaseActivity {
     private RoundTextView tvCrashTest;
     private RoundTextView tvNetSpeed;
     private RoundTextView tvApmTest;
+    private RoundTextView tvNetHttp;
 
     @Override
     public int getContentView() {
@@ -38,6 +41,7 @@ public class MonitorMainActivity extends BaseActivity {
         tvCrashTest = findViewById(R.id.tv_crash_test);
         tvNetSpeed = findViewById(R.id.tv_net_speed);
         tvApmTest = findViewById(R.id.tv_apm_test);
+        tvNetHttp = findViewById(R.id.tv_net_http);
     }
 
     @Override
@@ -87,6 +91,13 @@ public class MonitorMainActivity extends BaseActivity {
             protected void onNoDoubleClick(View v) {
                 Intent intent = new Intent(MonitorMainActivity.this, ApmTestActivity.class);
                 startActivity(intent);
+            }
+        });
+        tvNetHttp.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                NetRequestActivity.start(MonitorMainActivity.this.getApplicationContext());
+                //NetworkTool.getInstance().setFloat(MonitorMainActivity.this.getApplicationContext());
             }
         });
     }

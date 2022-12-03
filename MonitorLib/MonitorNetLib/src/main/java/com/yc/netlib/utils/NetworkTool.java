@@ -1,22 +1,10 @@
 package com.yc.netlib.utils;
 
 import android.app.Application;
-import android.content.Context;
-import android.view.View;
-import android.view.animation.BounceInterpolator;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-
-import com.yc.netlib.R;
 import com.yc.netlib.stetho.NetworkInterceptor;
 import com.yc.netlib.stetho.NetworkListener;
-import com.yc.netlib.ui.NetRequestActivity;
-import com.yc.netlib.ui.NetworkDetailActivity;
 import com.yc.netlib.ui.NetworkManager;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.videoview.FloatWindow;
-import com.yc.videoview.tool.FloatMoveType;
-import com.yc.videoview.tool.FloatScreenType;
 
 
 import java.net.Proxy;
@@ -93,35 +81,4 @@ public class NetworkTool {
         return localBuild;
     }
 
-    /**
-     * 设置全局悬浮按钮，点击可以去网络列表页面
-     * @param context                           上下文
-     */
-    public void setFloat(final Context context){
-        FrameLayout frameLayout = new FrameLayout(context);
-        ImageView imageView = new ImageView(context.getApplicationContext());
-        imageView.setImageResource(R.drawable.ic_show_error);
-        frameLayout.addView(imageView);
-        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
-        layoutParams.width = 100;
-        layoutParams.height = 100;
-        imageView.setLayoutParams(layoutParams);
-        FloatWindow
-                .with(context)
-                .setView(frameLayout)
-                //设置控件初始位置
-                .setX(FloatScreenType.WIDTH, 0.8f)
-                .setY(FloatScreenType.HEIGHT, 0.3f)
-                .setMoveType(FloatMoveType.SLIDE)
-                .setMoveStyle(500, new BounceInterpolator())
-                //设置这两个页面隐藏
-                .setFilter(false, NetRequestActivity.class , NetworkDetailActivity.class)
-                .build();
-        frameLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NetRequestActivity.start(context.getApplicationContext());
-            }
-        });
-    }
 }

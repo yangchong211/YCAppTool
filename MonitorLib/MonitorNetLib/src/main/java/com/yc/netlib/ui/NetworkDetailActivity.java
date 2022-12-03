@@ -20,14 +20,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 
+import com.yc.appcompress.AppCompress;
+import com.yc.appcompress.CompressConfig;
 import com.yc.appcompress.CompressUtils;
+import com.yc.appfilelib.AppFileUtils;
+import com.yc.appmediastore.FileSaveUtils;
+import com.yc.appscreenlib.AppShotsUtils;
+import com.yc.imagetoollib.ImageSaveUtils;
 import com.yc.netlib.R;
 import com.yc.netlib.data.IDataPoolHandleImpl;
 import com.yc.netlib.data.NetworkFeedBean;
 import com.yc.toolutils.AppWindowUtils;
-import com.yc.toolutils.file.AppFileUtils;
-import com.yc.toolutils.file.FileSaveUtils;
-import com.yc.toolutils.screen.AppShotsUtils;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -282,10 +286,10 @@ public class NetworkDetailActivity extends AppCompatActivity {
     private void savePicture(Bitmap bitmap) {
         if (bitmap != null) {
             String crashPicPath = AppFileUtils.getExternalFilePath(this, System.currentTimeMillis() + ".jpg");
-            boolean saveBitmap = FileSaveUtils.saveBitmap(NetworkDetailActivity.this, bitmap, crashPicPath);
+            boolean saveBitmap = ImageSaveUtils.saveBitmap(NetworkDetailActivity.this, bitmap, crashPicPath);
             if (saveBitmap) {
                 showToast("保存截图成功，请到相册查看\n路径：" + crashPicPath);
-                final Bitmap bitmapCompress = CompressUtils.getBitmap(new File(crashPicPath), 200, 200);
+                final Bitmap bitmapCompress = AppCompress.getInstance().compressSizePath(crashPicPath);
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -367,6 +371,5 @@ public class NetworkDetailActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }

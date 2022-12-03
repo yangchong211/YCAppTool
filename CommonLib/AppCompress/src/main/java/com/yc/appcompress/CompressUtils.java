@@ -8,6 +8,7 @@ import androidx.annotation.IntRange;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 
 
@@ -40,6 +41,26 @@ public final class CompressUtils {
         Bitmap newBmp = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
         return newBmp;
     }
+
+    /**
+     * 通过大小压缩，将修改图片宽高
+     * @param file                                  图片file
+     * @param pixelW                                宽
+     * @param pixelH                                高
+     * @return
+     */
+    public static Bitmap getBitmap(final File file, final int pixelW, int pixelH) {
+        if (file == null) {
+            return null;
+        }
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+        options.inSampleSize = calculateInSampleSize(options, pixelW, pixelH);
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+    }
+
 
     /**
      * 按缩放压缩。双线性采样
@@ -163,7 +184,7 @@ public final class CompressUtils {
      * @param reqHeight                         高
      * @return
      */
-    protected static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // 源图片的高度和宽度
         final int height = options.outHeight;
         final int width = options.outWidth;
