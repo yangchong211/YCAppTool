@@ -7,6 +7,9 @@ import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.roundcorner.view.RoundTextView;
 
+import java.util.Map;
+import java.util.Set;
+
 public class LruActivity extends BaseActivity implements View.OnClickListener {
 
     private RoundTextView tvFile1;
@@ -47,7 +50,20 @@ public class LruActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void initData() {
-
+        //获取数据
+        lruCache.get("lru");
+        //判断是否包含数据
+        lruCache.containsKey("lru");
+        //移除数据
+        lruCache.remove("lru");
+        //最大的长度
+        int i = lruCache.maxSize();
+        //拷贝一份数据
+        Map<String, String> snapshot = lruCache.snapshot();
+        //清除数据
+        lruCache.clear();
+        //获取健值对
+        Set<String> keySet = lruCache.keySet();
     }
 
     @Override

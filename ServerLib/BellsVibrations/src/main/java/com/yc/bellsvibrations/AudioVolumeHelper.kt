@@ -108,7 +108,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
     override fun setMediaVolume(type: Int, volume: Int) {
         when (type) {
             //通话声音
-            1 -> {
+            DataSource.STREAM_VOICE_CALL -> {
                 audioManager?.setStreamVolume(
                     AudioManager.STREAM_VOICE_CALL,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -116,7 +116,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
                 )
             }
             //系统音
-            2 -> {
+            DataSource.STREAM_SYSTEM -> {
                 audioManager?.setStreamVolume(
                     AudioManager.STREAM_SYSTEM,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -124,7 +124,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
                 )
             }
             //铃音，来电与收短信的铃声
-            3 -> {
+            DataSource.STREAM_RING -> {
                 audioManager?.setStreamVolume(
                     AudioManager.STREAM_RING,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -132,7 +132,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
                 )
             }
             //媒体音	，音视频，游戏等
-            4 -> {
+            DataSource.STREAM_MUSIC -> {
                 audioManager?.setStreamVolume(
                     AudioManager.STREAM_MUSIC,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -140,7 +140,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
                 )
             }
             //闹钟音
-            5 -> {
+            DataSource.STREAM_ALARM -> {
                 audioManager?.setStreamVolume(
                     AudioManager.STREAM_ALARM,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -148,7 +148,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
                 )
             }
             //通知声音
-            6 -> {
+            DataSource.STREAM_NOTIFICATION -> {
                 audioManager?.setStreamVolume(
                     AudioManager.STREAM_NOTIFICATION,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -169,7 +169,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
     override fun setAdjustStreamVolume(type: Int, volume: Int) {
         when (type) {
             //通话声音
-            1 -> {
+            DataSource.STREAM_VOICE_CALL -> {
                 audioManager?.adjustStreamVolume(
                     AudioManager.STREAM_VOICE_CALL,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -177,7 +177,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
                 )
             }
             //系统音
-            2 -> {
+            DataSource.STREAM_SYSTEM -> {
                 audioManager?.adjustStreamVolume(
                     AudioManager.STREAM_SYSTEM,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -185,7 +185,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
                 )
             }
             //铃音，来电与收短信的铃声
-            3 -> {
+            DataSource.STREAM_RING -> {
                 audioManager?.adjustStreamVolume(
                     AudioManager.STREAM_RING,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -193,7 +193,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
                 )
             }
             //媒体音	，音视频，游戏等
-            4 -> {
+            DataSource.STREAM_MUSIC -> {
                 audioManager?.adjustStreamVolume(
                     AudioManager.STREAM_MUSIC,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -201,7 +201,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
                 )
             }
             //闹钟音
-            5 -> {
+            DataSource.STREAM_ALARM -> {
                 audioManager?.adjustStreamVolume(
                     AudioManager.STREAM_ALARM,
                     volume, AudioManager.FLAG_PLAY_SOUND
@@ -209,7 +209,7 @@ class AudioVolumeHelper(private val context: Context) : IAudioVolume {
                 )
             }
             //通知声音
-            6 -> {
+            DataSource.STREAM_NOTIFICATION -> {
                 audioManager?.adjustStreamVolume(
                     AudioManager.STREAM_NOTIFICATION,
                     volume, AudioManager.FLAG_PLAY_SOUND
