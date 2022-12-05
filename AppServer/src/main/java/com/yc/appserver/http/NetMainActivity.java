@@ -62,10 +62,14 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
         LogUtils.d("static NetMainActivity");
         // 网络请求框架初始化
         IRequestServer server = new ReleaseServer();
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+
+        OkHttpClient okHttpClient = builder
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BODY))
                 .addInterceptor(new WeakNetworkInterceptor())
                 .build();
+
         LogUtils.w("static NetMainActivity server");
         EasyConfig.with(okHttpClient)
                 // 是否打印日志

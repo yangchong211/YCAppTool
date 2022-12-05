@@ -1,4 +1,4 @@
-package com.yc.http.ssl;
+package com.yc.notcapturelib.ssl;
 
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;

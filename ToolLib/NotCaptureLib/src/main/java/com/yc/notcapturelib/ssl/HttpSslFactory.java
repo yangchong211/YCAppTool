@@ -1,4 +1,4 @@
-package com.yc.http.ssl;
+package com.yc.notcapturelib.ssl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,15 +15,16 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 /**
- *    @author yangchong
- *    GitHub : https://github.com/yangchong211/YCAppTool
- *    time   : 2020/11/30
- *    desc   : Https 证书校验工厂
+ * @author yangchong
+ * GitHub : https://github.com/yangchong211/YCAppTool
+ * time   : 2020/11/30
+ * desc   : Https 证书校验工厂
  */
 public final class HttpSslFactory {
 
@@ -51,26 +52,31 @@ public final class HttpSslFactory {
     /**
      * https 双向认证
      */
-    public static HttpSslConfig generateSslConfig(InputStream bksFile, String password, InputStream... certificates) {
+    public static HttpSslConfig generateSslConfig(InputStream bksFile, String password,
+                                                  InputStream... certificates) {
         return generateSslConfigBase(null, bksFile, password, certificates);
     }
 
     /**
      * https 双向认证
      */
-    public static HttpSslConfig generateSslConfig(InputStream bksFile, String password, X509TrustManager trustManager) {
+    public static HttpSslConfig generateSslConfig(InputStream bksFile, String password,
+                                                  X509TrustManager trustManager) {
         return generateSslConfigBase(trustManager, bksFile, password);
     }
 
     /**
      * 生成认证配置
      *
-     * @param trustManager          可以额外配置信任服务端的证书策略，否则默认是按CA证书去验证的，若不是CA可信任的证书，则无法通过验证
-     * @param bksFile               客户端使用 bks 证书校验服务端证书
-     * @param password              客户端的 bks 证书密码
-     * @param certificates          用含有服务端公钥的证书校验服务端证书
+     * @param trustManager 可以额外配置信任服务端的证书策略，否则默认是按CA证书去验证的，若不是CA可信任的证书，则无法通过验证
+     * @param bksFile      客户端使用 bks 证书校验服务端证书
+     * @param password     客户端的 bks 证书密码
+     * @param certificates 用含有服务端公钥的证书校验服务端证书
      */
-    private static HttpSslConfig generateSslConfigBase(X509TrustManager trustManager, InputStream bksFile, String password, InputStream... certificates) {
+    private static HttpSslConfig generateSslConfigBase(X509TrustManager trustManager,
+                                                       InputStream bksFile,
+                                                       String password,
+                                                       InputStream... certificates) {
         try {
             KeyManager[] keyManagers = prepareKeyManager(bksFile, password);
             TrustManager[] trustManagers = prepareTrustManager(certificates);
@@ -91,7 +97,8 @@ public final class HttpSslFactory {
             // 第一个参数是授权的密钥管理器，用来授权验证，比如授权自签名的证书验证。第二个是被授权的证书管理器，用来验证服务器端的证书
             sslContext.init(keyManagers, new TrustManager[]{manager}, null);
             // 通过 SslContext 获取 SSLSocketFactory 对象
-            return new HttpSslConfig(sslContext.getSocketFactory(), manager);
+            SSLSocketFactory socketFactory = sslContext.getSocketFactory();
+            return new HttpSslConfig(socketFactory, manager);
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
             throw new AssertionError(e);
         }
@@ -104,10 +111,12 @@ public final class HttpSslFactory {
             }
             KeyStore keyStore = KeyStore.getInstance("BKS");
             keyStore.load(bksFile, password.toCharArray());
-            KeyManagerFactory factory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+            String defaultAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
+            KeyManagerFactory factory = KeyManagerFactory.getInstance(defaultAlgorithm);
             factory.init(keyStore, password.toCharArray());
             return factory.getKeyManagers();
-        } catch (IOException | CertificateException | UnrecoverableKeyException | NoSuchAlgorithmException | KeyStoreException e) {
+        } catch (IOException | CertificateException | UnrecoverableKeyException
+                | NoSuchAlgorithmException | KeyStoreException e) {
             e.printStackTrace();
             return null;
         }
@@ -118,6 +127,7 @@ public final class HttpSslFactory {
             return null;
         }
         try {
+            //获取X.509格式的内置证书
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
             // 创建一个默认类型的 KeyStore，存储我们信任的证书
             KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -138,7 +148,8 @@ public final class HttpSslFactory {
                 }
             }
             // 我们创建一个默认类型的 TrustManagerFactory
-            TrustManagerFactory factory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            String defaultAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+            TrustManagerFactory factory = TrustManagerFactory.getInstance(defaultAlgorithm);
             // 用我们之前的 KeyStore 实例初始化 TrustManagerFactory，这样 tmf 就会信任 KeyStore 中的证书
             factory.init(keyStore);
             // 通过 tmf 获取 TrustManager 数组，TrustManager 也会信任 KeyStore 中的证书

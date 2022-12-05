@@ -1,4 +1,4 @@
-package com.yc.http.ssl;
+package com.yc.notcapturelib.ssl;
 
 import android.annotation.SuppressLint;
 

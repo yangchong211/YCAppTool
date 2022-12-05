@@ -81,7 +81,9 @@ public final class VirtualApkUtils {
         String path = context.getFilesDir().getPath();
         for (String virtualPkg : virtualPkgs) {
             if (path.contains(virtualPkg)) {
-                if (callback != null) callback.findSuspect();
+                if (callback != null) {
+                    callback.findSuspect();
+                }
                 return true;
             }
         }
@@ -397,7 +399,9 @@ public final class VirtualApkUtils {
             localServerSocket = new LocalServerSocket(uniqueMsg);
             return false;
         } catch (IOException e) {
-            if (callback != null) callback.findSuspect();
+            if (callback != null) {
+                callback.findSuspect();
+            }
             return true;
         }
     }

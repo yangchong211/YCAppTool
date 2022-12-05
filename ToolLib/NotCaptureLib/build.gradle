@@ -29,5 +29,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["annotation"]
-
+    implementation(rootProject.ext.dependencies["okhttp"])
+    implementation(rootProject.ext.dependencies["gson"])
+    //加解密库
+    implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.3'
 }

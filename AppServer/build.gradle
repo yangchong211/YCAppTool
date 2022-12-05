@@ -57,5 +57,6 @@ dependencies {
     implementation project(path: ':MonitorInterceptor')
     implementation project(path: ':ToolFileLib')
     implementation project(path: ':AppContextLib')
+    implementation project(path: ':NotCaptureLib')
 }
 
