@@ -1,5 +1,6 @@
 package com.yc.socket.manager;
 
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -17,11 +18,12 @@ import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import okhttp3.OkHttpClient;
+
+import com.yc.notcapturelib.ssl.TrustAllCertsManager;
 import com.yc.socket.listener.MessageAck;
 import com.yc.socket.listener.OnmessageListener;
 import com.yc.socket.socketio.Message.MessageEntity;
 import com.yc.socket.utils.TaskExecutor;
-import com.yc.socket.utils.TrustAllCertsUtil;
 
 public class SocketIoManager {
 
@@ -48,8 +50,8 @@ public class SocketIoManager {
             IO.Options options = new IO.Options();
             URL url1 = new URL(url);
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .hostnameVerifier(new TrustAllCertsUtil.TrustAllHostnameVerifier(url1.getHost()))
-                    .sslSocketFactory(TrustAllCertsUtil.createSSLSocketFactory(), TrustAllCertsUtil.createX509TrustManager())
+                    .hostnameVerifier(new TrustAllCertsManager.TrustAllHostnameVerifier(url1.getHost()))
+                    .sslSocketFactory(TrustAllCertsManager.createSSLSocketFactory(), TrustAllCertsManager.createX509TrustManager())
                     .build();
 
 // default settings for all sockets
@@ -255,8 +257,10 @@ public class SocketIoManager {
     private List<String> getKeyByLoop(Map<String, List<OnmessageListener>> map, List<OnmessageListener> value) {
         List<String> keys = new ArrayList<>();
         for (Map.Entry<String, List<OnmessageListener>> entry : map.entrySet()) {
-            if (Objects.equals(entry.getValue(), value)) {
-                keys.add(entry.getKey());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                if (Objects.equals(entry.getValue(), value)) {
+                    keys.add(entry.getKey());
+                }
             }
         }
         return keys;

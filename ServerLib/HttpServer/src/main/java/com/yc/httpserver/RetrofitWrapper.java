@@ -7,21 +7,13 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.yc.netinterceptor.HttpLoggerLevel;
 import com.yc.netinterceptor.HttpLoggingInterceptor;
+import com.yc.notcapturelib.ssl.HttpSslConfig;
+import com.yc.notcapturelib.ssl.HttpSslFactory;
 
 import java.lang.reflect.Type;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -137,53 +129,12 @@ public class RetrofitWrapper {
     @SuppressWarnings("deprecation")
     private void initSSL() {
         try {
-            final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-                @Override
-                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-
-                }
-
-                @Override
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[]{};
-                }
-            }};
-
-            SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, trustAllCerts, new SecureRandom());
-            SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-            HostnameVerifier hostnameVerifier = new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            };
-            X509TrustManager x509TrustManager = new X509TrustManager() {
-                @Override
-                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-
-                }
-
-                @Override
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[0];
-                }
-            };
+            HttpSslConfig httpSslConfig = HttpSslFactory.generateSslConfig();
             //不建议使用这个，方法过时，使用反射机制寻找X509信任管理类，消耗了不必要的性能。
-            okHttpBuilder.sslSocketFactory(sslSocketFactory);
+            //okHttpBuilder.sslSocketFactory(sslSocketFactory);
             //会传入信任管理类数组中的第一条
-            okHttpBuilder.sslSocketFactory(sslSocketFactory,x509TrustManager);
-            okHttpBuilder.hostnameVerifier(hostnameVerifier);
+            okHttpBuilder.sslSocketFactory(httpSslConfig.getSslSocketFactory(),httpSslConfig.getTrustManager());
+            okHttpBuilder.hostnameVerifier(HttpSslFactory.generateUnSafeHostnameVerifier());
         } catch (Exception e) {
             e.printStackTrace();
         }

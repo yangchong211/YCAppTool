@@ -20,8 +20,20 @@ public final class NotCaptureHelper {
 
     private static volatile NotCaptureHelper notCaptureHelper;
     private CaptureConfig config;
+    private EncryptDecryptListener encryptDecryptListener;
     private NotCaptureHelper(){
         config = CaptureConfig.builder().build();
+        encryptDecryptListener = new EncryptDecryptListener() {
+            @Override
+            public String encryptData(String key, String data) {
+                return data;
+            }
+
+            @Override
+            public String decryptData(String key, String data) {
+                return data;
+            }
+        };
     }
 
     public static NotCaptureHelper getInstance(){
@@ -37,6 +49,18 @@ public final class NotCaptureHelper {
 
     public void setConfig(CaptureConfig config) {
         this.config = config;
+    }
+
+    public CaptureConfig getConfig() {
+        return config;
+    }
+
+    public EncryptDecryptListener getEncryptDecryptListener() {
+        return encryptDecryptListener;
+    }
+
+    public void setEncryptDecryptListener(EncryptDecryptListener encryptDecryptListener) {
+        this.encryptDecryptListener = encryptDecryptListener;
     }
 
     /**

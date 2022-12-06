@@ -51,7 +51,10 @@
     - https://mp.weixin.qq.com/s/lnv4-vvz4W8u5Qp_epEkkw
 - 还不懂 HTTP 代理吗？
     - https://mp.weixin.qq.com/s/H5H0LixgRY6CoRunBaLBAw
+- App 安全的HTTPS 通信
+    - https://developer.aliyun.com/article/64810?spm=a2c6h.13813017.content3.4.6f0b2fe20aa1S0
 - Android 系统各个版本上https的抓包
     - https://mp.weixin.qq.com/s?__biz=MzIxNzU1Nzk3OQ==&mid=2247486834&idx=1&sn=91850a5d1ac13953fcb869bf1f232aab&chksm=97f6b3c6a0813ad0bd3df0b09ff0cdbcbd8c85021592febed13f5f265b97cd3a8bbb32e5ca55&scene=38#wechat_redirect
-
+- 解决APP抓包问题「网络安全」
+    - https://baijiahao.baidu.com/s?id=1749021972862503189&wfr=spider&for=pc
 

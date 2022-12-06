@@ -1,17 +1,15 @@
 package com.yc.notcapturelib.helper;
-
-
-import android.graphics.Bitmap;
+import java.util.ArrayList;
 
 /**
- *    @author yangchong
- *    GitHub : https://github.com/yangchong211/YCAppTool
- *    time   : 2020/11/30
- *    desc   : 配置类
+ * @author yangchong
+ * GitHub : https://github.com/yangchong211/YCAppTool
+ * time   : 2020/11/30
+ * desc   : 配置类
  */
 public final class CaptureConfig {
 
-    private CaptureConfig(){
+    private CaptureConfig() {
 
     }
 
@@ -27,6 +25,18 @@ public final class CaptureConfig {
      * 是否进行数据加密和解密
      */
     private boolean isEncrypt;
+    /**
+     * 加解密版本
+     */
+    private String encryptVersion = "2";
+    /**
+     * 参数
+     */
+    private ArrayList<String> reservedQueryParam;
+    /**
+     * 加解密的key
+     */
+    private String encryptKey;
 
     public boolean isProxy() {
         return proxy;
@@ -38,6 +48,18 @@ public final class CaptureConfig {
 
     public boolean isEncrypt() {
         return isEncrypt;
+    }
+
+    public String getEncryptVersion() {
+        return encryptVersion;
+    }
+
+    public ArrayList<String> getReservedQueryParam() {
+        return reservedQueryParam;
+    }
+
+    public String getEncryptKey() {
+        return encryptKey;
     }
 
     public static Builder builder() {
@@ -65,6 +87,21 @@ public final class CaptureConfig {
 
         public Builder setEncrypt(boolean isEncrypt) {
             config.isEncrypt = isEncrypt;
+            return this;
+        }
+
+        public Builder setEncryptVersion(String encryptVersion) {
+            config.encryptVersion = encryptVersion;
+            return this;
+        }
+
+        public Builder setReservedQueryParam(ArrayList<String> reservedQueryParam) {
+            config.reservedQueryParam = reservedQueryParam;
+            return this;
+        }
+
+        public Builder setEncryptKey(String encryptKey) {
+            config.encryptKey = encryptKey;
             return this;
         }
 

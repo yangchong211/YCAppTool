@@ -39,4 +39,5 @@ ext{
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project.ext.SocketIoServiceDependencies['socketio']
+    implementation project(path: ':NotCaptureLib')
 }

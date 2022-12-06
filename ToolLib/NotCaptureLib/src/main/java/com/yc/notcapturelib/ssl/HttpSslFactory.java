@@ -28,6 +28,10 @@ import javax.net.ssl.X509TrustManager;
  */
 public final class HttpSslFactory {
 
+    private final static String KEYSTORE_TYPE = "BKS";
+    private final static String PROTOCOL_TYPE = "TLS";
+    private final static String CERTIFICATE_FORMAT = "X509";
+
     /**
      * 生成信任任何证书的配置
      */
@@ -92,7 +96,7 @@ public final class HttpSslFactory {
                 manager = new UnSafeTrustManager();
             }
             // 创建 TLS 类型的 SsLContext 对象，使用我们的 TrustManager
-            SSLContext sslContext = SSLContext.getInstance("TLS");
+            SSLContext sslContext = SSLContext.getInstance(PROTOCOL_TYPE);
             // 用上面得到的 TrustManagers 初始化 SsLContext，这样 SslContext 就会信任keyStore中的证书
             // 第一个参数是授权的密钥管理器，用来授权验证，比如授权自签名的证书验证。第二个是被授权的证书管理器，用来验证服务器端的证书
             sslContext.init(keyManagers, new TrustManager[]{manager}, null);
@@ -109,7 +113,7 @@ public final class HttpSslFactory {
             if (bksFile == null || password == null) {
                 return null;
             }
-            KeyStore keyStore = KeyStore.getInstance("BKS");
+            KeyStore keyStore = KeyStore.getInstance(KEYSTORE_TYPE);
             keyStore.load(bksFile, password.toCharArray());
             String defaultAlgorithm = KeyManagerFactory.getDefaultAlgorithm();
             KeyManagerFactory factory = KeyManagerFactory.getInstance(defaultAlgorithm);

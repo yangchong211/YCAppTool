@@ -34,4 +34,5 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':NetInterceptor')
     implementation project(path: ':NetWorkLib')
+    implementation project(path: ':NotCaptureLib')
 }
