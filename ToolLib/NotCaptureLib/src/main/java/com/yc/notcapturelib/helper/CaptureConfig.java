@@ -22,6 +22,10 @@ public final class CaptureConfig {
      */
     private String cerPath;
     /**
+     * 是否进行CA证书校验
+     */
+    private boolean isCaVerify;
+    /**
      * 是否进行数据加密和解密
      */
     private boolean isEncrypt;
@@ -44,6 +48,10 @@ public final class CaptureConfig {
 
     public String getCerPath() {
         return cerPath;
+    }
+
+    public boolean isCaVerify() {
+        return isCaVerify;
     }
 
     public boolean isEncrypt() {
@@ -82,6 +90,11 @@ public final class CaptureConfig {
 
         public Builder setCerPath(String cerPath) {
             config.cerPath = cerPath;
+            return this;
+        }
+
+        public Builder setCaVerify(boolean isCaVerify) {
+            config.isCaVerify = isCaVerify;
             return this;
         }
 

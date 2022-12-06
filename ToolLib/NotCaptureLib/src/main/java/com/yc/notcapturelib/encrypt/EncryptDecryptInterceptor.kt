@@ -266,7 +266,7 @@ class EncryptDecryptInterceptor : Interceptor {
         val encryptDecryptListener = NotCaptureHelper.getInstance().encryptDecryptListener
         return when (encryptVersion) {
             ENCRYPT_VERSION_2 -> encryptDecryptListener.decryptData(encryptKey, data)
-            else -> null
+            else -> data
         }
     }
 

@@ -85,7 +85,7 @@ public final class NotCaptureHelper {
             builder.proxy(Proxy.NO_PROXY);
         }
         //证书路径检验
-        if (config.getCerPath() != null && config.getCerPath().length()>0){
+        if (config.isCaVerify() && config.getCerPath() != null && config.getCerPath().length()>0){
             HttpSslConfig httpSslConfig = HttpSslFactory.generateSslConfig(NotCaptureUtils.generateSsl(config.getCerPath(),context));
             //设置ssl证书校验
             builder.sslSocketFactory(httpSslConfig.getSslSocketFactory(),httpSslConfig.getTrustManager());
