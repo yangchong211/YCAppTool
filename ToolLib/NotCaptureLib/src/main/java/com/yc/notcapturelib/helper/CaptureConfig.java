@@ -14,6 +14,10 @@ public final class CaptureConfig {
     }
 
     /**
+     * 是否是debug环境
+     */
+    private boolean isDebug;
+    /**
      * 是否禁用代理
      */
     private boolean proxy;
@@ -41,6 +45,10 @@ public final class CaptureConfig {
      * 加解密的key
      */
     private String encryptKey;
+
+    public boolean isDebug() {
+        return isDebug;
+    }
 
     public boolean isProxy() {
         return proxy;
@@ -81,6 +89,11 @@ public final class CaptureConfig {
 
         private Builder() {
             config = new CaptureConfig();
+        }
+
+        public Builder setDebug(boolean isDebug) {
+            config.isDebug = isDebug;
+            return this;
         }
 
         public Builder setProxy(boolean isProxy) {

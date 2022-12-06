@@ -105,6 +105,19 @@ public final class Base64Utils {
         }
     }
 
+    /**
+     * 将BASE64编码的字符串解码.
+     * 解码失败不会抛出异常，解码失败会返回NULL.
+     */
+    public static byte[] decodeFromStringWrap(String data) {
+        try {
+            byte[] bytes = data.trim().getBytes();
+            return Base64.decode(bytes,Base64.NO_WRAP);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
     /**
@@ -123,7 +136,21 @@ public final class Base64Utils {
         return "";
     }
 
-
+    /**
+     * 字符Base64解密
+     * @param str           字符串
+     * @return
+     */
+    public static String decodeToStringWrap(String str){
+        try {
+            byte[] bytes = str.getBytes("UTF-8");
+            byte[] decode = Base64.decode(bytes, Base64.NO_WRAP);
+            return new String(decode);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
     public static byte[] base64Encode(final byte[] input) {
         return Base64.encode(input, Base64.DEFAULT);

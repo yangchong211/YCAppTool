@@ -38,6 +38,18 @@ public final class Rc4EncryptUtils {
     }
 
     /**
+     * RC4加密字节数据。
+     */
+    public static byte[] encryptToByte(byte[] data, String secretKey) {
+        try {
+            return convert(data, secretKey);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * RC4加密base64编码数据，加密失败将返回空串。
      */
     public static String encryptToBase64(byte[] data, String secretKey) {
@@ -57,6 +69,15 @@ public final class Rc4EncryptUtils {
         try {
             byte[] decryptFromBase64 = decryptFromBase64(base64, secretKey);
             return new String(decryptFromBase64);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static byte[] decryptByte(byte[] data, String secretKey) {
+        try {
+            return convert(data, secretKey);
         } catch (Throwable e) {
             e.printStackTrace();
         }

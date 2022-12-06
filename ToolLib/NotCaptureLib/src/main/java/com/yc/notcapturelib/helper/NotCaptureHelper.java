@@ -3,6 +3,7 @@ package com.yc.notcapturelib.helper;
 import android.content.Context;
 
 import com.yc.appencryptlib.Rc4EncryptUtils;
+import com.yc.eventuploadlib.LoggerReporter;
 import com.yc.notcapturelib.encrypt.EncryptDecryptInterceptor;
 import com.yc.notcapturelib.proxy.ProxyWifiUtils;
 import com.yc.notcapturelib.ssl.HttpSslConfig;
@@ -23,12 +24,15 @@ public final class NotCaptureHelper {
     private CaptureConfig config;
     private EncryptDecryptListener encryptDecryptListener;
     private NotCaptureHelper(){
+        LoggerReporter.report("NotCaptureHelper" , "init once");
         config = CaptureConfig.builder().build();
         encryptDecryptListener = new EncryptDecryptListener() {
             @Override
             public String encryptData(String key, String data) {
+                LoggerReporter.report("NotCaptureHelper" , "decryptData data : " + data);
                 String encryptString = Rc4EncryptUtils.encryptString(data, key);
                 if (encryptString != null && encryptString.length()>0){
+                    LoggerReporter.report("NotCaptureHelper" , "encryptData : " + encryptString);
                     return encryptString;
                 }
                 return data;
@@ -36,8 +40,10 @@ public final class NotCaptureHelper {
 
             @Override
             public String decryptData(String key, String data) {
+                LoggerReporter.report("NotCaptureHelper" , "decryptData data : " + data);
                 String decryptString = Rc4EncryptUtils.decryptString(data, key);
                 if (decryptString != null && decryptString.length()>0){
+                    LoggerReporter.report("NotCaptureHelper" , "decryptData : " + decryptString);
                     return decryptString;
                 }
                 return data;
@@ -58,6 +64,7 @@ public final class NotCaptureHelper {
 
     public void setConfig(CaptureConfig config) {
         this.config = config;
+        LoggerReporter.report("NotCaptureHelper" , "setConfig : " + config);
     }
 
     public CaptureConfig getConfig() {
@@ -83,6 +90,7 @@ public final class NotCaptureHelper {
         if (config.isProxy() && ProxyWifiUtils.isWifiProxy(context)){
             //基于抓包原理的基础上，直接使用okHttp禁止代理，经过测试，可以避免第三方工具(比如charles)抓包
             builder.proxy(Proxy.NO_PROXY);
+            LoggerReporter.report("NotCaptureHelper" , "setOkHttp 设置避免代理");
         }
         //证书路径检验
         if (config.isCaVerify() && config.getCerPath() != null && config.getCerPath().length()>0){
@@ -91,10 +99,12 @@ public final class NotCaptureHelper {
             builder.sslSocketFactory(httpSslConfig.getSslSocketFactory(),httpSslConfig.getTrustManager());
             //自定义了HostnameVerifier。在握手期间，如果 URL 的主机名和服务器的标识主机名不匹配，则验证机制可以回调此接口的实现程序来确定是否应该允许此连接。
             builder.hostnameVerifier(HttpSslFactory.generateUnSafeHostnameVerifier());
+            LoggerReporter.report("NotCaptureHelper" , "setOkHttp 设置证书校验和域名校验");
         }
         //设置数据加解密
         if (config.isEncrypt()){
             builder.addInterceptor(new EncryptDecryptInterceptor());
+            LoggerReporter.report("NotCaptureHelper" , "setOkHttp 设置数据加解密");
         }
         return builder;
     }
