@@ -2,6 +2,7 @@ package com.yc.notcapturelib.helper;
 
 import android.content.Context;
 
+import com.yc.appencryptlib.Rc4EncryptUtils;
 import com.yc.notcapturelib.encrypt.EncryptDecryptInterceptor;
 import com.yc.notcapturelib.proxy.ProxyWifiUtils;
 import com.yc.notcapturelib.ssl.HttpSslConfig;
@@ -26,11 +27,19 @@ public final class NotCaptureHelper {
         encryptDecryptListener = new EncryptDecryptListener() {
             @Override
             public String encryptData(String key, String data) {
+                String encryptString = Rc4EncryptUtils.encryptString(data, key);
+                if (encryptString != null && encryptString.length()>0){
+                    return encryptString;
+                }
                 return data;
             }
 
             @Override
             public String decryptData(String key, String data) {
+                String decryptString = Rc4EncryptUtils.decryptString(data, key);
+                if (decryptString != null && decryptString.length()>0){
+                    return decryptString;
+                }
                 return data;
             }
         };
