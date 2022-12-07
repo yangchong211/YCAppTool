@@ -30,8 +30,20 @@
 
 
 
+#### 2.4 如何Cookie的持久化
+- Android中如何使用Cookie的持久化
+    - 第一步：通过响应拦截器从response取出cookie并保存到本地，通过请求拦截器从本地取出cookie并添加到请求中
+    - 第二步：自定义CookieJar，在saveFromResponse()中保存cookie到本地，在loadForRequest()从本地取出cookie
+    - 第三步：注意在Android中，建议使用sp存储cookie，轻量级存储到本地
+
 
 ### 03.Api调用说明
+- OkHttp持久化Cookie操作
+    - Okhttp3默认是不持久化Cookie的，想要持久化Cookie就要实现CookieJar接口。
+    ``` java
+    OkHttpClient.Builder builder = new OkHttpClient.Builder();
+    builder.cookieJar(new CustomCookieJar());
+    ```
 
 
 
