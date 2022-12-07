@@ -1,9 +1,9 @@
 package com.yc.notcapturelib.encrypt
 
-import android.annotation.SuppressLint
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.annotations.SerializedName
+import com.yc.eventuploadlib.LoggerReporter
 import com.yc.notcapturelib.helper.NotCaptureHelper
 import okhttp3.*
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -37,6 +37,7 @@ class EncryptDecryptInterceptor : Interceptor {
         val configEncrypt = config.isEncrypt
         val headerEncrypt = !ignoreEncrypt || !forceEncrypt
         val newRequest : Request
+        LoggerReporter.report("NotCaptureHelper", "handleRequest $configEncrypt , $headerEncrypt")
         if (configEncrypt && headerEncrypt) {
             when (request.method) {
                 "GET" -> {
@@ -72,7 +73,9 @@ class EncryptDecryptInterceptor : Interceptor {
     private fun handleRequestPostMultipartBody(request: Request) : Request {
         val url = request.url
         val requestBody = request.body as MultipartBody
-        val newParameterList = buildNewParameterList(request)
+        LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody url: $url")
+        LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody requestBody: $requestBody")
+        val newParameterList = InterceptorHelper.buildNewParameterList(request)
         val newUrl = url.newBuilder()
             .encodedQuery(null)
             .encodedFragment(null)
@@ -100,6 +103,8 @@ class EncryptDecryptInterceptor : Interceptor {
                 }
             }
             .build()
+        LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody newUrl: $newUrl")
+        LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody newRequestBody: $newRequestBody")
         return request.newBuilder()
             .url(newUrl)
             .post(newRequestBody)
@@ -108,7 +113,10 @@ class EncryptDecryptInterceptor : Interceptor {
 
     private fun handleRequestPostFormBody(request: Request) : Request {
         val url = request.url
-        val newParameterList = buildNewParameterList(request)
+        val requestBody = request.body
+        val newParameterList = InterceptorHelper.buildNewParameterList(request)
+        LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody url: $url")
+        LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody requestBody: $requestBody")
         val newUrl = url.newBuilder()
             .encodedQuery(null)
             .encodedFragment(null)
@@ -129,6 +137,8 @@ class EncryptDecryptInterceptor : Interceptor {
                 }
             }
             .build()
+        LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody newUrl: $newUrl")
+        LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody newRequestBody: $newRequestBody")
         return request.newBuilder()
             .url(newUrl)
             .post(newRequestBody)
@@ -137,16 +147,19 @@ class EncryptDecryptInterceptor : Interceptor {
 
     private fun handleRequestGet(request: Request): Request {
         val url = request.url
-        val newParameterList = buildNewParameterList(request)
+        LoggerReporter.report("NotCaptureHelper", "handleRequestGet url: $url")
+        val newParameterList = InterceptorHelper.buildNewParameterList(request)
         val newUrl = url.newBuilder()
             .encodedQuery(null)
             .encodedFragment(null)
             .apply {
                 newParameterList.forEach { paramTriple ->
+                    //使用UTF-8编码查询参数并将其添加到此URL的查询字符串中
                     addQueryParameter(paramTriple.second, paramTriple.third)
                 }
             }
             .build()
+        LoggerReporter.report("NotCaptureHelper", "handleRequestGet newUrl: $newUrl")
         return request.newBuilder()
             .url(newUrl)
             .get()
@@ -155,6 +168,7 @@ class EncryptDecryptInterceptor : Interceptor {
 
     private fun handleResponse(response: Response): Response? {
         val responseBody = response.body
+
         return if (responseBody?.contentType()?.subtype == SUBTYPE_JSON) {
             val responseBodyStr = responseBody.string()
             val encryptResponseBody = try {
@@ -165,109 +179,23 @@ class EncryptDecryptInterceptor : Interceptor {
             val encryptVersion = encryptResponseBody?.encryptVersion
             if (!encryptVersion.isNullOrEmpty()) {
                 val result = encryptResponseBody.result ?: ""
-                val decryptResponseBodyStr = decrypt(encryptVersion,result) ?: ""
+                LoggerReporter.report("NotCaptureHelper", "handleResponse result: $result")
+                val decryptResponseBodyStr = InterceptorHelper.decrypt(encryptVersion,result) ?: ""
+                val toResponseBody =
+                    decryptResponseBodyStr.toResponseBody(responseBody.contentType())
+                LoggerReporter.report("NotCaptureHelper",
+                    "handleResponse toResponseBody: ${toResponseBody.string()}")
                 response.newBuilder()
-                    .body(decryptResponseBodyStr.toResponseBody(responseBody.contentType()))
+                    .body(toResponseBody)
                     .build()
             } else {
+                val toResponseBody = responseBodyStr.toResponseBody(responseBody.contentType())
                 response.newBuilder()
-                    .body(responseBodyStr.toResponseBody(responseBody.contentType()))
+                    .body(toResponseBody)
                     .build()
             }
         } else {
             response
-        }
-    }
-
-    @SuppressLint("LongLogTag")
-    private fun buildNewParameterList(request: Request, needEncode: Boolean = true): MutableList<Triple<Boolean, String, String?>> {
-        val parameterList = mutableListOf<Pair<String, String?>>()
-        val httpUrl = request.url
-        val requestBody = request.body
-        //组装httpUrl数据
-        httpUrl.run {
-            for (index in 0 until querySize) {
-                parameterList.add(Pair(queryParameterName(index), queryParameterValue(index)))
-            }
-        }
-        //组装requestBody数据
-        requestBody.run {
-            if (this is FormBody) {
-                for (index in 0 until size) {
-                    parameterList.add(Pair(name(index), value(index)))
-                }
-            }
-        }
-        val tempFormBody = FormBody.Builder().apply {
-                parameterList.forEach { paramPair ->
-                    add(paramPair.first, paramPair.second ?: "")
-                }
-            }
-            .build()
-
-        val dataStrBuilder = StringBuilder()
-
-        tempFormBody.run {
-            if (needEncode) {
-                for (index in 0 until size) {
-                    dataStrBuilder.append(encodedName(index))
-                    dataStrBuilder.append("=")
-                    dataStrBuilder.append(encodedValue(index))
-                    if (index < size - 1) {
-                        dataStrBuilder.append("&")
-                    }
-                }
-            } else {
-                for (index in 0 until size) {
-                    dataStrBuilder.append(name(index))
-                    dataStrBuilder.append("=")
-                    dataStrBuilder.append(value(index))
-                    if (index < size - 1) {
-                        dataStrBuilder.append("&")
-                    }
-                }
-            }
-        }
-
-        val data = dataStrBuilder.toString()
-        val reservedQueryParamNamesAndValues: MutableList<Triple<Boolean, String, String?>> = mutableListOf()
-
-        val reservedQueryParam = NotCaptureHelper.getInstance().config.reservedQueryParam
-        reservedQueryParam?.let {
-            tempFormBody.run {
-                for (index in 0 until size) {
-                    if (name(index) in reservedQueryParam) {
-                        reservedQueryParamNamesAndValues.add(
-                            Triple(true, name(index), value(index))
-                        )
-                    }
-                }
-            }
-        }
-
-        val encryptVersion = NotCaptureHelper.getInstance().config.encryptVersion
-        return mutableListOf<Triple<Boolean, String, String?>>().apply {
-            add(Triple(false, KEY_ENCRYPT_VERSION, encryptVersion))
-            add(Triple(false, KEY_DATA, encrypt(encryptVersion,data)))
-            addAll(reservedQueryParamNamesAndValues)
-        }
-    }
-
-    private fun encrypt(encryptVersion: String , data : String): String? {
-        val encryptKey = NotCaptureHelper.getInstance().config.encryptKey
-        val encryptDecryptListener = NotCaptureHelper.getInstance().encryptDecryptListener
-        return when (encryptVersion) {
-            ENCRYPT_VERSION_2 -> encryptDecryptListener.encryptData(encryptKey,data)
-            else -> data
-        }
-    }
-
-    private fun decrypt(encryptVersion: String , data : String): String? {
-        val encryptKey = NotCaptureHelper.getInstance().config.encryptKey
-        val encryptDecryptListener = NotCaptureHelper.getInstance().encryptDecryptListener
-        return when (encryptVersion) {
-            ENCRYPT_VERSION_2 -> encryptDecryptListener.decryptData(encryptKey, data)
-            else -> data
         }
     }
 
@@ -279,9 +207,9 @@ class EncryptDecryptInterceptor : Interceptor {
     )
 
     companion object {
-        private const val KEY_ENCRYPT_VERSION = "ev"
-        private const val KEY_DATA = "data"
-        private const val ENCRYPT_VERSION_2 = "2"
+        const val KEY_ENCRYPT_VERSION = "ev"
+        const val KEY_DATA = "data"
+        const val ENCRYPT_VERSION_2 = "2"
         private const val SUBTYPE_JSON = "json"
         private const val HEADER_IGNORE_ENCRYPT = "Ignore-Encrypt"
         private const val HEADER_FORCE_ENCRYPT = "Force-Encrypt"
