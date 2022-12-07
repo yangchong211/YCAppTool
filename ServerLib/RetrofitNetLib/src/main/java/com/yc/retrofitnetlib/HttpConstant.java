@@ -1,4 +1,4 @@
-package com.yc.httpserver;
+package com.yc.retrofitnetlib;
 
 public final class HttpConstant {
 

@@ -42,7 +42,7 @@ include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
         ':GsonServer', ':IpcServer', ':ObjectEqualLib',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
-        ':GlideProgressLib', ':CompressServer', ':BellsVibrations'
+        ':GlideProgressLib', ':CompressServer', ':BellsVibrations', ':RetrofitNetLib'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -61,7 +61,7 @@ project(':SignalHooker').projectDir = new File('ServerLib/SignalHooker')
 project(':GlideProgressLib').projectDir = new File('ServerLib/GlideProgressLib')
 project(':CompressServer').projectDir = new File('ServerLib/CompressServer')
 project(':BellsVibrations').projectDir = new File('ServerLib/BellsVibrations')
-
+project(':RetrofitNetLib').projectDir = new File('ServerLib/RetrofitNetLib')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
@@ -73,7 +73,7 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         ':AppLruDisk',':AppLruCache',':DownloadHelper',':AppEncryptLib',
         ':AppMediaStore',':DataCloneLib',':AppScreenLib',':BaseVpAdapter',':ImageToolLib',
         ':AppHandlerLib',':FileIoHelper',':ZipFileLib',':NetWorkLib',':AppContextLib',
-        ':AppWiFiLib'
+        ':AppWiFiLib',':UriAndUrlLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -110,6 +110,7 @@ project(':ZipFileLib').projectDir = new File('CommonLib/ZipFileLib')
 project(':NetWorkLib').projectDir = new File('CommonLib/NetWorkLib')
 project(':AppContextLib').projectDir = new File('CommonLib/AppContextLib')
 project(':AppWiFiLib').projectDir = new File('CommonLib/AppWiFiLib')
+project(':UriAndUrlLib').projectDir = new File('CommonLib/UriAndUrlLib')
 
 
 

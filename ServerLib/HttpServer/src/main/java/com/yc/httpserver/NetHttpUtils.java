@@ -18,7 +18,7 @@ import java.net.URL;
  * 修订历史：
  * ================================================
  */
-public class NetHttpUtils {
+public final class NetHttpUtils {
 
 
     public static String post(String url, String content) {

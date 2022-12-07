@@ -29,7 +29,7 @@ import okhttp3.ResponseBody;
  * 修订历史：
  * ================================================
  */
-public class OkHttpUtils {
+public final class OkHttpUtils {
 
     private static OkHttpClient okHttpClient = null;
 

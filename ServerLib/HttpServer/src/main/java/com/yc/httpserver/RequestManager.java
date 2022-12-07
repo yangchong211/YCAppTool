@@ -112,6 +112,8 @@ public class RequestManager {
             case TYPE_POST_FORM:
                 call = requestPostByAsynWithForm(actionUrl, paramsMap, callBack);
                 break;
+            default:
+                break;
         }
         return call;
     }
@@ -381,10 +383,8 @@ public class RequestManager {
     private Request.Builder addHeaders() {
         Request.Builder builder = new Request.Builder()
                 .addHeader("Connection", "keep-alive")
-                .addHeader("platform", "2")
                 .addHeader("phoneModel", Build.MODEL)
-                .addHeader("systemVersion", Build.VERSION.RELEASE)
-                .addHeader("appVersion", "3.2.0");
+                .addHeader("systemVersion", Build.VERSION.RELEASE);
         return builder;
     }
 

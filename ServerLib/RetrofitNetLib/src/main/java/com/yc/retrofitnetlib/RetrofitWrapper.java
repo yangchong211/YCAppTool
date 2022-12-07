@@ -1,12 +1,14 @@
-package com.yc.httpserver;
+package com.yc.retrofitnetlib;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.yc.netinterceptor.CacheInterceptor;
 import com.yc.netinterceptor.HttpLoggerLevel;
 import com.yc.netinterceptor.HttpLoggingInterceptor;
+import com.yc.networklib.BuildConfig;
 import com.yc.notcapturelib.ssl.HttpSslConfig;
 import com.yc.notcapturelib.ssl.HttpSslFactory;
 
@@ -78,7 +80,7 @@ public class RetrofitWrapper {
         //拦截日志，依赖
         okHttpBuilder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BODY));
         OkHttpClient build = okHttpBuilder.build();
-        okHttpBuilder.addInterceptor(InterceptorUtils.getCacheInterceptor());
+        okHttpBuilder.addInterceptor(new CacheInterceptor());
         if (interceptors!=null && interceptors.size()>0){
             for (Interceptor interceptor : interceptors){
                 okHttpBuilder.addInterceptor(interceptor);

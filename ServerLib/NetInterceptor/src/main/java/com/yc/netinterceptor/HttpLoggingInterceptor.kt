@@ -6,7 +6,6 @@ import okhttp3.internal.http.promisesBody
 import okio.Buffer
 import okio.GzipSource
 import java.io.IOException
-import java.lang.StringBuilder
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 import java.util.*
@@ -160,11 +159,9 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
         }
 
         stringBuffer.append(response.request.url)
-        stringBuffer.append(" (${tookMs}ms")
+        stringBuffer.append(" (${tookMs}ms)")
         if (!logHeaders){
-            stringBuffer.append(", $bodySize body)")
-        } else{
-            stringBuffer.append(")")
+            stringBuffer.append(" ($bodySize body)")
         }
         stringBuffer.append(" ")
         val mediaType = responseBody.contentType()

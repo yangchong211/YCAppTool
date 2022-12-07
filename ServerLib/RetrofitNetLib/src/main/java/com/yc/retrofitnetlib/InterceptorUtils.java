@@ -1,4 +1,4 @@
-package com.yc.httpserver;
+package com.yc.retrofitnetlib;
 
 
 import com.yc.networklib.AppNetworkUtils;
@@ -49,49 +49,6 @@ public class InterceptorUtils {
         };
         return commonParams;
     }
-
-    /**
-     * 在无网络的情况下读取缓存，有网络的情况下根据缓存的过期时间重新请求
-     * @return
-     */
-    public static Interceptor getCacheInterceptor() {
-        Interceptor commonParams = new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                if (!AppNetworkUtils.isConnected()) {
-                    //无网络下强制使用缓存，无论缓存是否过期,此时该请求实际上不会被发送出去。
-                    request = request.newBuilder()
-                            .cacheControl(CacheControl.FORCE_CACHE)
-                            .build();
-                }
-                Response response = chain.proceed(request);
-                if (AppNetworkUtils.isConnected()) {
-                    //有网络情况下，根据请求接口的设置，配置缓存。
-                    // 这样在下次请求时，根据缓存决定是否真正发出请求。
-                    String cacheControl = request.cacheControl().toString();
-                    //当然如果你想在有网络的情况下都直接走网络，那么只需要
-                    //将其超时时间这是为0即可:String cacheControl="Cache-Control:public,max-age=0"
-                    int maxAge = 60 * 60;
-                    // read from cache for 1 minute
-                    return response.newBuilder()
-                            .header("Cache-Control", cacheControl)
-                            .header("Cache-Control", "public, max-age=" + maxAge)
-                            .removeHeader("Pragma") .build();
-                } else {
-                    //无网络
-                    // tolerate 4-weeks stale
-                    int maxStale = 60 * 60 * 24 * 28;
-                    return response.newBuilder()
-                            .header("Cache-Control", "public,only-if-cached,max-stale=360000")
-                            .header("Cache-Control", "public,only-if-cached,max-stale=" + maxStale)
-                            .removeHeader("Pragma") .build();
-                }
-            }
-        };
-        return commonParams;
-    }
-
 
     /**
      * 自定义CookieJar

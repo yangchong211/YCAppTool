@@ -1,4 +1,4 @@
-package com.yc.httpserver;
+package com.yc.retrofitnetlib;
 
 
 import com.google.gson.FieldNamingPolicy;
