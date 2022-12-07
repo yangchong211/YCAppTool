@@ -1,6 +1,7 @@
 package com.yc.retrofitnetlib;
 
 
+import com.yc.httpserver.CustomCookieJar;
 import com.yc.networklib.AppNetworkUtils;
 import com.yc.toolutils.AppLogUtils;
 
@@ -55,21 +56,7 @@ public class InterceptorUtils {
      * @param builder
      */
     public static void addCookie(OkHttpClient.Builder builder){
-        builder.cookieJar(new CookieJar() {
-            private final HashMap<HttpUrl, List<Cookie>> cookieStore = new HashMap<>();
-            @Override
-            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-                cookieStore.put(url, cookies);
-                //保存cookie //也可以使用SP保存
-            }
-
-            @Override
-            public List<Cookie> loadForRequest(HttpUrl url) {
-                List<Cookie> cookies = cookieStore.get(url);
-                //取出cookie
-                return cookies != null ? cookies : new ArrayList<Cookie>();
-            }
-        });
+        builder.cookieJar(new CustomCookieJar());
     }
 
 

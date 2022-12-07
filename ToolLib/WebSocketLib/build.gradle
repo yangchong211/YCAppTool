@@ -28,14 +28,6 @@ android {
 }
 
 
-ext{
-    okhttpVersion = '3.10.0'
-    WebSocketServiceDependencies = [
-            okhttp       : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
-    ]
-}
-
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["okhttp"])

@@ -15,7 +15,7 @@ include ':AppMvx'
 /* +++++++++ 业务组件层 +++++++++ */
 include ':AnimBusiness',':MvvmDatabinding',
         ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
-        ':MvcTodoBusiness',':JetpackBusiness',
+        ':JetpackBusiness',
         ':BusinessInterface', ':StatusBusiness', ':BleBusiness',
         ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness',
         ':SocketBusiness',':LibraryLayer'
@@ -25,7 +25,6 @@ project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
 project(':MvpTodoBusiness').projectDir = new File('Business/MvpTodoBusiness')
 project(':MvvmDatabinding').projectDir = new File('Business/MvvmDatabinding')
 project(':MvvmTodoLive').projectDir = new File('Business/MvvmTodoLive')
-project(':MvcTodoBusiness').projectDir = new File('Business/MvcTodoBusiness')
 project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 project(':StatusBusiness').projectDir = new File('Business/StatusBusiness')
 project(':BleBusiness').projectDir = new File('Business/BleBusiness')

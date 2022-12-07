@@ -4,6 +4,7 @@ package com.yc.appmonitor;
 import android.content.Intent;
 import android.view.View;
 
+import com.yc.appmonitor.net.NetworkActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;
@@ -96,8 +97,7 @@ public class MonitorMainActivity extends BaseActivity {
         tvNetHttp.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                NetRequestActivity.start(MonitorMainActivity.this.getApplicationContext());
-                //NetworkTool.getInstance().setFloat(MonitorMainActivity.this.getApplicationContext());
+                NetworkActivity.start(MonitorMainActivity.this);
             }
         });
     }

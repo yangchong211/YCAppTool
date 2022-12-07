@@ -10,7 +10,6 @@ import com.yc.catonhelperlib.PerformanceActivity;
 import com.yc.lifehelper.R;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;
-import com.yc.mvctodo.NetworkActivity;
 import com.yc.toollib.crash.CrashListActivity;
 import com.yc.toolutils.click.FastClickUtils;
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
@@ -54,7 +53,6 @@ public class HeaderComponent implements InterItemView {
                     break;
                 //网络工具
                 case R.id.tv_home_third:
-                    NetworkActivity.start(context);
                     AppLogHelper.w("net work tool");
                     break;
                 //ANR监控
