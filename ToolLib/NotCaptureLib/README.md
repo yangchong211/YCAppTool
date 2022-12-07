@@ -9,6 +9,7 @@
 
 
 ### 01.基础概念说明
+#### 1.1 为何不能抓Https
 - Android 7.0及以上为何不能轻易抓取到Https请求的明文数据？
     - 其实Charles上显示确实抓到了包，但是当看抓包的详细数据时会发现报错 You may need to configure your browser or application to trust the Charles Root Certificate. See SSL Proxying in the Help menu。
     - Charles说手机端没有信任Charles的根证书，但是我们手机上已经安装了Charles根证书了，为什么会这样？
@@ -21,7 +22,62 @@
 
 
 
+#### 1.2 业务背景说明
+- https确保数据安全
+    - 现在几乎所有的api接口都使用https进行数据传输，客户端本身会对https证书的合法性进行校验，以确保数据传输的安全性。
+- 存在抓包数据问题
+    - 第三方还是可以通过信任代理证书（charles）、安装插件绕过证书检测流程等方式，破解https证书安全校验，解密获取到传输数据。
+
+
+
+#### 1.3 防止中间人拦截
+- 怎么保证服务端在传输公钥给客户端时不被中间人代理拦截呢？
+    - 这里就要引入第三方认证服务：数字证书认证机构（Certificate Authority，简称CA）。
+    - CA机构会根据申请方提供的公司信息生成一个数字证书，同时生成一对公钥和私钥。私钥由服务端保存，不可泄露。公钥则附带到数字证书的信息里，可以通过解密获取。
+
+
+
+#### 1.4 信任的凭证
+- 信任的凭证分为两种类型：系统和用户。
+    - 其中系统一列是随设备出厂内置的，并随系统版本更新同步更新，用户一列则是由用户自己安装并信任的证书。
+- 证书的类型
+    - JKS：数字证书库。JKS里有KeyEntry和CertEntry，在库里的每个Entry都是靠别名（alias）来识别的。
+    - P12：是PKCS12的缩写。同样是一个存储私钥的证书库，由.jks文件导出的，用户在PC平台安装，用于标示用户的身份。
+    - CER：俗称数字证书，目的就是用于存储公钥证书，任何人都可以获取这个文件 。
+    - BKS：由于Android平台不识别.keystore和.jks格式的证书库文件，因此Android平台引入一种的证书库格式，BKS。
+
+
+
+#### 1.7 证书校验API
+- SSLSocketFactory 或 SSLSocket
+    - Android 使用的是 Java 的 API。那么 HTTPS 使用的 Socket 必然都是通过SSLSocketFactory 创建的 SSLSocket，当然自己实现了 TLS 协议除外。
+- 此时使用的是默认的SSLSocketFactory（没有加载自己的证书），与下段代码使用的SSLContext是一致的：
+    ```
+    private synchronized SSLSocketFactory getDefaultSSLSocketFactory() {
+      try {
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        sslContext.init(null, null, null);
+        return defaultSslSocketFactory = sslContext.getSocketFactory();
+      } catch (GeneralSecurityException e) {
+        throw new AssertionError(); // The system has no TLS. Just give up.
+      }
+    }
+    ```
+
+
+
+
 ### 02.常见思路和做法
+#### 2.1 App安全配置
+- 添加配置文件
+    - android:networkSecurityConfig="@xml/network_security_config"
+- 在官方文档找到了答案：
+    - 网络安全性配置特性让应用可以在一个安全的声明性配置文件中自定义其网络安全设置，而无需修改应用代码。可以针对特定域和特定应用配置这些设置。此特性的主要功能如下所示：
+    - 自定义信任锚：针对应用的安全连接自定义哪些证书颁发机构 (CA) 值得信任。例如，信任特定的自签署证书或限制应用信任的公共 CA 集。
+    - 仅调试重写：在应用中以安全方式调试安全连接，而不会增加已安装用户的风险。
+    - 明文通信选择退出：防止应用意外使用明文通信。
+    - 证书固定：将应用的安全连接限制为特定的证书。
+
 
 
 #### 2.5 网络数据加解密
@@ -29,6 +85,8 @@
     - 为了项目数据安全性，对请求体和响应体加密，那肯定要知道请求体或响应体在哪里，然后才能加密，其实都一样不论是加密url里面的query内容还是加密body体里面的都一样。
 - 对数据哪里进行加密和解密
     - 目前对数据返回的data进行加解密。
+
+
 
 
 
@@ -57,4 +115,9 @@
     - https://mp.weixin.qq.com/s?__biz=MzIxNzU1Nzk3OQ==&mid=2247486834&idx=1&sn=91850a5d1ac13953fcb869bf1f232aab&chksm=97f6b3c6a0813ad0bd3df0b09ff0cdbcbd8c85021592febed13f5f265b97cd3a8bbb32e5ca55&scene=38#wechat_redirect
 - 解决APP抓包问题「网络安全」
     - https://baijiahao.baidu.com/s?id=1749021972862503189&wfr=spider&for=pc
-
+- Okhttp如何添加HTTPS自签名证书信任
+    - https://www.cnblogs.com/jiechao-zhang/p/15207246.html
+- 深度抓包好文
+    - https://zhuanlan.zhihu.com/p/465441201
+- 关于HTTPS、TLS/SSL认证以及客户端证书导入方法
+    - http://t.zoukankan.com/blogs-of-lxl-p-10136582.html

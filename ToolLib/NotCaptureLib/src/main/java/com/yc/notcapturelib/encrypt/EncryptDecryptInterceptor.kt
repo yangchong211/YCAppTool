@@ -24,7 +24,8 @@ class EncryptDecryptInterceptor : Interceptor {
         val request: Request = chain.request()
         val handleRequest = handleRequest(request)
         val response: Response = chain.proceed(handleRequest)
-        return handleResponse(response)!!
+        val handleResponse = handleResponse(response)
+        return handleResponse!!
     }
 
     private fun handleRequest(request: Request): Request {
@@ -107,7 +108,6 @@ class EncryptDecryptInterceptor : Interceptor {
 
     private fun handleRequestPostFormBody(request: Request) : Request {
         val url = request.url
-        val requestBody = request.body
         val newParameterList = buildNewParameterList(request)
         val newUrl = url.newBuilder()
             .encodedQuery(null)
@@ -155,7 +155,6 @@ class EncryptDecryptInterceptor : Interceptor {
 
     private fun handleResponse(response: Response): Response? {
         val responseBody = response.body
-
         return if (responseBody?.contentType()?.subtype == SUBTYPE_JSON) {
             val responseBodyStr = responseBody.string()
             val encryptResponseBody = try {
@@ -183,13 +182,15 @@ class EncryptDecryptInterceptor : Interceptor {
     @SuppressLint("LongLogTag")
     private fun buildNewParameterList(request: Request, needEncode: Boolean = true): MutableList<Triple<Boolean, String, String?>> {
         val parameterList = mutableListOf<Pair<String, String?>>()
-        val url = request.url
+        val httpUrl = request.url
         val requestBody = request.body
-        url.run {
+        //组装httpUrl数据
+        httpUrl.run {
             for (index in 0 until querySize) {
                 parameterList.add(Pair(queryParameterName(index), queryParameterValue(index)))
             }
         }
+        //组装requestBody数据
         requestBody.run {
             if (this is FormBody) {
                 for (index in 0 until size) {

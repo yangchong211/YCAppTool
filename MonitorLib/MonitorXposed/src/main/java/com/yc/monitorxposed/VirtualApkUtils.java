@@ -39,6 +39,7 @@ import java.util.Random;
  */
 public final class VirtualApkUtils {
 
+
     private static volatile VirtualApkUtils singleInstance;
     private static final String TAG = "VirtualApkUtils";
 
@@ -136,7 +137,9 @@ public final class VirtualApkUtils {
             while ((line = bufr.readLine()) != null) {
                 for (String pkg : virtualPkgs) {
                     if (line.contains(pkg)) {
-                        if (callback != null) callback.findSuspect();
+                        if (callback != null) {
+                            callback.findSuspect();
+                        }
                         return true;
                     }
                 }
@@ -305,8 +308,9 @@ public final class VirtualApkUtils {
                 int temp = 0;
                 while ((temp = inputStream.read(buffer)) != -1) {
                     String result = new String(buffer, 0, temp);
-                    if (result.contains(secret) && callback != null)
+                    if (result.contains(secret) && callback != null) {
                         callback.findSuspect();
+                    }
                 }
                 inputStream.close();
                 socket.close();
@@ -324,12 +328,16 @@ public final class VirtualApkUtils {
         ArrayList<Integer> portList = new ArrayList<>();
         for (int i = 0, len = lines.length; i < len; i++) {
             int localHost = lines[i].indexOf("0100007F:");//127.0.0.1:
-            if (localHost < 0) continue;
+            if (localHost < 0) {
+                continue;
+            }
             String singlePort = lines[i].substring(localHost + 9, localHost + 13);
             Integer port = Integer.parseInt(singlePort, 16);
             portList.add(port);
         }
-        if (portList.isEmpty()) return;
+        if (portList.isEmpty()) {
+            return;
+        }
         for (int port : portList) {
             new ClientThread(secret, port).start();
         }
@@ -405,6 +413,5 @@ public final class VirtualApkUtils {
             return true;
         }
     }
-
 
 }

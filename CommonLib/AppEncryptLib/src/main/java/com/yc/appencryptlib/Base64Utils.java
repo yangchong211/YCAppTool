@@ -77,6 +77,22 @@ public final class Base64Utils {
     }
 
     /**
+     * 将数据进行Base64编码，并转为可展示的ASCII字符串.
+     * 编码失败不会抛出异常，编码失败会返回NULL.
+     */
+    public static String encodeToStringWrap(byte[] data) {
+        try {
+            byte[] encode = Base64.encode(data, Base64.NO_WRAP);
+            // 使用GBK及UTF-8字符集都是兼容ASCII字符集的
+            //noinspection CharsetObjectCanBeUsed
+            return new String(encode, "UTF-8").trim();
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
      * 字符Base64加密
      * @param str           字符串
      * @return

@@ -55,7 +55,7 @@ public final class Rc4EncryptUtils {
     public static String encryptToBase64(byte[] data, String secretKey) {
         try {
             byte[] convert = convert(data, secretKey);
-            return Base64Utils.encodeToString(convert);
+            return Base64Utils.encodeToStringWrap(convert);
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -90,7 +90,7 @@ public final class Rc4EncryptUtils {
     public static byte[] decryptFromBase64(String base64, String secretKey) {
         try {
             //将BASE64编码的字符串解码
-            byte[] decodeFromString = Base64Utils.decodeFromString(base64);
+            byte[] decodeFromString = Base64Utils.decodeFromStringWrap(base64);
             return convert(decodeFromString, secretKey);
         } catch (Throwable e) {
             e.printStackTrace();

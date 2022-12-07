@@ -1,6 +1,6 @@
 package com.yc.monitorxposed;
 
-public class XposedTool {
+public class XposedHelper {
 
     //https://github.com/lamster2018/EasyProtector
 

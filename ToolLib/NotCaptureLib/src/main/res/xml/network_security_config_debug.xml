@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+
+    <!--默认为false，即不允许未加密的网络流量通信-->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates
+                overridePins="true"
+                src="system" />
+            <certificates
+                overridePins="true"
+                src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <debug-overrides>
+        <trust-anchors>
+            <!-- Trust user added CAs while debuggable only -->
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+
+</network-security-config>

@@ -11,7 +11,6 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -30,4 +29,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
+    //Context上下文库
+    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.3'
 }
