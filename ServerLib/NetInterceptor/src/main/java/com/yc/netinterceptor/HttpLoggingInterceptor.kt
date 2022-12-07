@@ -6,6 +6,7 @@ import okhttp3.internal.http.promisesBody
 import okio.Buffer
 import okio.GzipSource
 import java.io.IOException
+import java.lang.StringBuilder
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 import java.util.*
@@ -78,19 +79,16 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
     private fun logForRequest(chain: Interceptor.Chain,request: Request) {
         val logBody = level == HttpLoggerLevel.BODY
         val logHeaders = logBody || level == HttpLoggerLevel.HEADERS
-
         //请求体
         val requestBody = request.body
-
         val connection = chain.connection()
-        var requestStartMessage =
-            ("--> ${request.method} ${request.url}${if (connection != null) " " + connection.protocol() else ""}")
+        val sb = StringBuffer()
+        sb.append("--> START ${request.method} ${request.url}${if (connection != null) " " + connection.protocol() else ""}")
         if (!logHeaders && requestBody != null) {
-            requestStartMessage += " (${requestBody.contentLength()}-byte body)"
+            sb.append(" (${requestBody.contentLength()}-byte body)")
         }
-        logger.log("--> REQUEST START\n")
         //--> GET https://www.wanandroid.com/wxarticle/chapters/json?token=6666666&id=190000
-        logger.log(requestStartMessage)
+        logger.log(sb.toString())
 
         if (logHeaders) {
             val headers = request.headers
@@ -105,7 +103,8 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
                 }
                 if (requestBody.contentLength() != -1L) {
                     if (headers["Content-Length"] == null) {
-                        logger.log("Content-Length: ${requestBody.contentLength()}")
+                        val contentLength = requestBody.contentLength()
+                        logger.log("Content-Length: $contentLength")
                     }
                 }
             }
@@ -125,7 +124,6 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
             } else {
                 val buffer = Buffer()
                 requestBody.writeTo(buffer)
-
                 logger.log("")
                 if (buffer.isProbablyUtf8()) {
                     val contentType = requestBody.contentType()
@@ -136,9 +134,7 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
                     }
                     logger.log("--> END ${request.method} (${requestBody.contentLength()}-byte body)")
                 } else {
-                    logger.log(
-                        "--> END ${request.method} (binary ${requestBody.contentLength()}-byte body omitted)"
-                    )
+                    logger.log("--> END ${request.method} (binary ${requestBody.contentLength()}-byte body omitted)")
                 }
             }
         }
@@ -156,7 +152,7 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
         val bodySize = if (contentLength != -1L) "$contentLength-byte" else "unknown-length"
         //<-- 200 OK https://www.wanandroid.com/article/list/0/json (254ms)
         val stringBuffer = StringBuffer()
-        stringBuffer.append("<-- ${response.code} ")
+        stringBuffer.append("<-- END ${response.code} ")
         if (response.message.isEmpty()){
             stringBuffer.append("")
         } else {
@@ -235,7 +231,7 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
     }
 
     private fun logHeader(headers: Headers, i: Int) {
-        val value = if (headers.name(i) in headersToRedact) "██" else headers.value(i)
+        val value = if (headers.name(i) in headersToRedact) " " else headers.value(i)
         logger.log(headers.name(i) + ": " + value)
     }
 
