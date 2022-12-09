@@ -42,6 +42,10 @@ public final class CaptureConfig {
      */
     private ArrayList<String> reservedQueryParam;
     /**
+     * 域名
+     */
+    private ArrayList<String> url;
+    /**
      * 加解密的key
      */
     private String encryptKey;
@@ -76,6 +80,10 @@ public final class CaptureConfig {
 
     public String getEncryptKey() {
         return encryptKey;
+    }
+
+    public ArrayList<String> getUrl() {
+        return url;
     }
 
     public static Builder builder() {
@@ -128,6 +136,12 @@ public final class CaptureConfig {
 
         public Builder setEncryptKey(String encryptKey) {
             config.encryptKey = encryptKey;
+            return this;
+        }
+
+
+        public Builder setHostUrl(ArrayList<String> url) {
+            config.url = url;
             return this;
         }
 

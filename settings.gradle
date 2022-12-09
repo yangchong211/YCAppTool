@@ -72,7 +72,7 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         ':AppLruDisk',':AppLruCache',':DownloadHelper',':AppEncryptLib',
         ':AppMediaStore',':DataCloneLib',':AppScreenLib',':BaseVpAdapter',':ImageToolLib',
         ':AppHandlerLib',':FileIoHelper',':ZipFileLib',':NetWorkLib',':AppContextLib',
-        ':AppWiFiLib',':UriAndUrlLib'
+        ':AppWiFiLib',':UriAndUrlLib',':AppGrayLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -110,7 +110,7 @@ project(':NetWorkLib').projectDir = new File('CommonLib/NetWorkLib')
 project(':AppContextLib').projectDir = new File('CommonLib/AppContextLib')
 project(':AppWiFiLib').projectDir = new File('CommonLib/AppWiFiLib')
 project(':UriAndUrlLib').projectDir = new File('CommonLib/UriAndUrlLib')
-
+project(':AppGrayLib').projectDir = new File('CommonLib/AppGrayLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
