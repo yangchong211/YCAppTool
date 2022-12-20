@@ -9,7 +9,16 @@ import android.view.View;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class GolbalGrayHelper {
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : 全局灰色帮助类
+ *     revise :
+ * </pre>
+ */
+public class GlobalGrayHelper {
 
     /**
      * @param enable 是否开启全局灰色调
@@ -18,13 +27,12 @@ public class GolbalGrayHelper {
         if (!enable) {
             return;
         }
+        //灰色调Paint
+        final Paint mPaint = new Paint();
+        ColorMatrix mColorMatrix = new ColorMatrix();
+        mColorMatrix.setSaturation(0);
+        mPaint.setColorFilter(new ColorMatrixColorFilter(mColorMatrix));
         try {
-            //灰色调Paint
-            final Paint mPaint = new Paint();
-            ColorMatrix mColorMatrix = new ColorMatrix();
-            mColorMatrix.setSaturation(0);
-            mPaint.setColorFilter(new ColorMatrixColorFilter(mColorMatrix));
-
             //反射获取windowManagerGlobal
             @SuppressLint("PrivateApi")
             Class<?> windowManagerGlobal = Class.forName("android.view.WindowManagerGlobal");

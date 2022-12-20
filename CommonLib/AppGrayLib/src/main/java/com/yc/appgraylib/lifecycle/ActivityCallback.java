@@ -1,8 +1,10 @@
-package com.yc.appgraylib;
+package com.yc.appgraylib.lifecycle;
 
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+
+import com.yc.appgraylib.AppGrayHelper;
 
 /**
  * <pre>
@@ -21,7 +23,8 @@ public final class ActivityCallback implements Application.ActivityLifecycleCall
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        if (activity != null && activity.getWindow() != null){
+        boolean globalGray = AppGrayHelper.getInstance().isGlobalGray();
+        if (activity != null && activity.getWindow() != null && globalGray){
             if (AppGrayHelper.getInstance().getType() == 1){
                 AppGrayHelper.getInstance().setGray1(activity.getWindow());
             } else {

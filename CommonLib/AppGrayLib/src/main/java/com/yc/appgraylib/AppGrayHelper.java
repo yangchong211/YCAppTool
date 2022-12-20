@@ -7,6 +7,11 @@ import android.graphics.Paint;
 import android.view.View;
 import android.view.Window;
 
+import com.yc.appgraylib.hook.GlobalGrayHelper;
+import com.yc.appgraylib.lifecycle.ActivityCallback;
+import com.yc.appgraylib.manager.GrayManager;
+
+
 /**
  * <pre>
  *     @author yangchong
@@ -21,6 +26,7 @@ public class AppGrayHelper {
     private static volatile AppGrayHelper appGrayHelper;
     private boolean isGray = false;
     private int type = 1;
+    private boolean isGlobalGray = false;
 
     public static AppGrayHelper getInstance() {
         if (appGrayHelper == null) {
@@ -33,6 +39,15 @@ public class AppGrayHelper {
         return appGrayHelper;
     }
 
+    /**
+     * 初始化
+     * @param app           app
+     */
+    public void initGrayApp(Application app , boolean globalGray) {
+        GrayManager.getInstance().init();
+        ActivityCallback.inject(app);
+        this.isGlobalGray = globalGray;
+    }
 
     public AppGrayHelper setGray(boolean gray) {
         isGray = gray;
@@ -52,9 +67,8 @@ public class AppGrayHelper {
         return this;
     }
 
-    public void setGrayApp(Application app) {
-        GrayManager.getInstance().init();
-        ActivityCallback.inject(app);
+    public boolean isGlobalGray() {
+        return isGlobalGray;
     }
 
     /**
@@ -81,7 +95,18 @@ public class AppGrayHelper {
         window.getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
     }
 
+    /**
+     * 方案二：设置任意View灰色方案
+     * @param view                  view
+     */
     public void setGray2(View view) {
         GrayManager.getInstance().setLayerGrayType(view);
+    }
+
+    /**
+     * 方案三：使用hook设置全局灰色方案
+     */
+    public void setGray3(){
+        GlobalGrayHelper.enable(isGray);
     }
 }

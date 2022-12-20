@@ -1,9 +1,11 @@
-package com.yc.appgraylib;
+package com.yc.appgraylib.manager;
 
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.view.View;
+
+import com.yc.appgraylib.AppGrayHelper;
 
 /**
  * <pre>
@@ -19,6 +21,7 @@ public final class GrayManager {
     private static GrayManager mInstance;
     private Paint mGrayPaint;
     private ColorMatrix mGrayMatrix;
+    private boolean isGray;
 
     public static GrayManager getInstance() {
         if (mInstance == null) {
@@ -34,7 +37,8 @@ public final class GrayManager {
     public void init() {
         mGrayMatrix = new ColorMatrix();
         mGrayPaint = new Paint();
-        if (AppGrayHelper.getInstance().isGray()){
+        isGray = AppGrayHelper.getInstance().isGray();
+        if (isGray) {
             mGrayMatrix.setSaturation(0);
         } else {
             mGrayMatrix.setSaturation(1);
@@ -48,7 +52,8 @@ public final class GrayManager {
      * @param view          view
      */
     public void setLayerGrayType(View view) {
-        if (mGrayMatrix == null || mGrayPaint == null) {
+        boolean gray = AppGrayHelper.getInstance().isGray();
+        if (mGrayMatrix == null || mGrayPaint == null || gray != isGray) {
             init();
         }
         view.setLayerType(View.LAYER_TYPE_HARDWARE, mGrayPaint);

@@ -6,6 +6,15 @@ import java.util.List;
 
 
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time   : 2018/5/11
+ *     desc   : 具有感知的ArrayList
+ *     revise :
+ * </pre>
+ */
 public class ObservableArrayList<T> extends ArrayList<T> {
 
     private final List<OnListChangeListener> mListeners = new ArrayList<>();
