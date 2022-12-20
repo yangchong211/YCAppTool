@@ -32,7 +32,7 @@ public final class IpToolUtils {
                     InetAddress inetAddress = enumIpAddr.nextElement();
                     if (inetAddress instanceof Inet4Address && !inetAddress.isLoopbackAddress()) {
                         String ip = inetAddress.getHostAddress();
-                        return inetAddress.getHostAddress();
+                        return ip;
                     }
                 }
             }

@@ -9,22 +9,37 @@
 
 
 ### 01.基础概念说明
-#### 1.1 背景说明
+#### 1.1 项目背景说明
 - 当在特殊的某一个日子
     - 我们会表达我们的悼念，缅怀、纪念之情，APP会在某一日设置成黑灰色。比如清明节这天很多App都设置了符合主题的灰色模式。
-  
 
 
 #### 1.2 设计目标
+- App置灰目标
+    - 可以设置全局置灰，也可以设置单独的页面置灰，最好是简单化调用封装的API更好。
 
+
+#### 1.3 实现灰色核心代码
+- 实现灰色核心代码如下所示：
+    ```
+    Paint paint = new Paint();
+    ColorMatrix cm = new ColorMatrix();
+    cm.setSaturation(0);
+    mPaint.setColorFilter(new ColorMatrixColorFilter(cm));
+    view.setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+    ```
 
 
 ### 02.常见思路和做法
 #### 2.1 设置灰色核心
+- Canvas和Paint
+    - App 页面上的 View 都是通过 Canvas + Paint 画出来的。Canvas 对应画布，Paint 对应画笔，两者结合，就能画出 View。
 - 实现思路分析说明
     - 实现灰度化的思路应该从 Android 系统界面绘制原理出发寻找实现方案。系统是通过 Paint 将内容绘制到界面上的，Paint 中可以设置 ColorMatrix ，界面置灰可以通过通过使用颜色矩阵（ColorMatrix）来实现。
 - 创建灰色模式的核心代码
     - setSaturation方法用于设置矩阵以影响颜色的饱和度，即0为灰色，1为彩色。
+- Activity页面置灰思路
+    - Activity页面肯定包含很多不同的View。然后改变View核心是操作Paint，那么如何要设置Activity都是灰色，则可以设置根布局DecorView。
 
 
 #### 2.2 实现方案探讨
@@ -40,8 +55,13 @@
     - 第四种：实现起来工作繁琐、工作量大。且会导致 App 包增大很多，用户体验差。
 
 
+#### 2.3 页面灰色设置思路
+- 如何实现全局App设置灰色
+    - 第一种：注册 registerActivityLifecycleCallbacks 回调，回调中通过 activity 实例同样可以拿到 DecorView 然后设置灰色。
+    - 第二种：在 BaseActivity 里面处理，这样所有继承 BaseActivity 的都会生效。
 
-#### 2.3 如何控制设置开关
+
+#### 2.4 如何控制设置开关
 - 设置灰色的开关该怎么做呢？
     - 第一种方式：把网络请求的接口放在了欢迎页中进行
     - 第二种方式：配置AB测试开关
@@ -55,6 +75,19 @@
     ``` java
     AppGrayHelper.getInstance().setType(1).setGray(true).setGrayApp(this);
     ```
+- 如何实现App全局灰色
+    ```
+    
+    ```
+- 如何实现单独页面灰色
+    ```
+    
+    ```
+- 如何实现Dialog和PopupWindow灰色
+    ```
+    
+    ```
+
 
 
 ### 04.原理深度分析
@@ -70,13 +103,25 @@
 
 
 
+
+
 ### 05.其他问题说明
+#### 5.1 顶层View黑化思考
+- 找到当前View树一个合适的父View
+    - 对父类View进行黑白化设置或者替换为自定义黑白化View，因为父 View 的 Canvas 和 Paint 是往下分发的，所以它所包含的子 View 都会黑白化处理。
+- 那么如何理解View向下分发呢
+    - 待完善
+
+
+#### 5.2 Dialog置灰思考
+- 设置Activity灰色后弹窗没有灰
+    - Dialog 创建了新的 PhoneWindow，使用了 PhoneWindow 的 DecorView 模板。Dialog的DecorView和Activity的不是同一个！
+
+
+#### 5.3 PopupWindow置灰思考
+- 设置Activity灰色后Pop没有灰
+    - 
 
 
 
-
-- 如何用10行代码让app全局置灰
-    - https://juejin.cn/post/6844904117110833165
-- Android实现设置灰白模式效果
-    - https://cloud.tencent.com/developer/article/1921134
 

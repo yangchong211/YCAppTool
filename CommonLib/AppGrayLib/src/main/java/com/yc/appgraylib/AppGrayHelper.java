@@ -74,6 +74,10 @@ public class AppGrayHelper {
             cm.setSaturation(1);
         }
         paint.setColorFilter(new ColorMatrixColorFilter(cm));
+        //1、LAYER_TYPE_NONE：视图正常渲染，不受屏幕外缓冲区支持。这是默认行为。
+        //2、LAYER_TYPE_HARDWARE：如果应用经过硬件加速，视图在硬件中渲染为硬件纹理。
+        //   如果应用未经过硬件加速，此层类型的行为方式与 LAYER_TYPE_SOFTWARE 相同。
+        //3、LAYER_TYPE_SOFTWARE：使用软件来渲染视图，绘制到 Bitmap，并顺便关闭硬件加速 。
         window.getDecorView().setLayerType(View.LAYER_TYPE_HARDWARE, paint);
     }
 

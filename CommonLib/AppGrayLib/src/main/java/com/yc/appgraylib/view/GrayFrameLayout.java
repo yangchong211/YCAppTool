@@ -1,4 +1,4 @@
-package com.yc.appgraylib;
+package com.yc.appgraylib.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.yc.appgraylib.AppGrayHelper;
 
 /**
  * <pre>

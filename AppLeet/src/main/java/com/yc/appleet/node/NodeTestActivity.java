@@ -76,4 +76,16 @@ public class NodeTestActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    /**
+     * 链表，结构稍微复杂
+     */
+
+    private class NodeList{
+
+        private class Node{
+
+        }
+
+    }
+
 }

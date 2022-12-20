@@ -1,4 +1,6 @@
 package com.yc.notcapturelib.helper;
+import com.yc.appcommoninter.IMonitorToggle;
+
 import java.util.ArrayList;
 
 /**
@@ -49,6 +51,10 @@ public final class CaptureConfig {
      * 加解密的key
      */
     private String encryptKey;
+    /**
+     * 降级接口
+     */
+    private IMonitorToggle monitorToggle;
 
     public boolean isDebug() {
         return isDebug;
@@ -84,6 +90,10 @@ public final class CaptureConfig {
 
     public ArrayList<String> getUrl() {
         return url;
+    }
+
+    public IMonitorToggle getMonitorToggle() {
+        return monitorToggle;
     }
 
     public static Builder builder() {
@@ -142,6 +152,11 @@ public final class CaptureConfig {
 
         public Builder setHostUrl(ArrayList<String> url) {
             config.url = url;
+            return this;
+        }
+
+        public Builder setMonitorToggle(IMonitorToggle monitorToggle) {
+            config.monitorToggle = monitorToggle;
             return this;
         }
 
