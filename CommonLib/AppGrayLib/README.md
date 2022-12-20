@@ -73,19 +73,23 @@
 ### 03.Api调用说明
 - Api调用如下所示
     ``` java
-    AppGrayHelper.getInstance().setType(1).setGray(true).setGrayApp(this);
+    AppGrayHelper.getInstance().setType(1).setGray(true).initGrayApp(this,true);
     ```
 - 如何实现App全局灰色
     ```
-    
+    //使用注册ActivityLifecycleCallbacks监听，设置所有activity布局灰色
+    AppGrayHelper.getInstance().setGray(true).initGrayApp(this,true)
+    //使用hook设置全局灰色
+    AppGrayHelper.getInstance().setGray(true).setGray3()
     ```
 - 如何实现单独页面灰色
     ```
-    
+    AppGrayHelper.getInstance().setGray1(window)
+    AppGrayHelper.getInstance().setGray2(window.decorView)
     ```
 - 如何实现Dialog和PopupWindow灰色
     ```
-    
+    AppGrayHelper.getInstance().setGray(true).setGray2(view)
     ```
 
 
