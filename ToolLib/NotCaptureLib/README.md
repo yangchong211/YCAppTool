@@ -121,6 +121,8 @@
     - https://zhuanlan.zhihu.com/p/465441201
 - 关于HTTPS、TLS/SSL认证以及客户端证书导入方法
     - http://t.zoukankan.com/blogs-of-lxl-p-10136582.html
+- HTTPS单向认证、双向认证、抓包原理
+    - https://juejin.cn/post/6844903809068564493
 - 参考博客
     - https://zhuanlan.zhihu.com/p/465441201
 

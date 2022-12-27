@@ -50,7 +50,7 @@
     - 第四种：设置两套不同的资源文件，根据全局置灰开关，选择加载不同的图片和色值。
 - 这些方式优缺点分析
     - 第一种：DecorView 是 Activity 窗口的根视图，根视图通过 ColorMatrix 设置置灰应该可以在全部子元素有效。需要用到BaseActivity中。
-    - 第二种：其本质还是属于自定义View，实现灰色本质都是使用 Paint 进行的绘制，使用起来稍微麻烦一些。
+    - 第二种：其本质还是属于自定义View，实现灰色本质都是使用 Paint 进行的绘制，使用起来稍微麻烦一些。这种入侵性比较大！
     - 第三种：不仅支持Activity，还可以支持其他各种View设置灰色，相当于第一种方案的加强版本。
     - 第四种：实现起来工作繁琐、工作量大。且会导致 App 包增大很多，用户体验差。
 
@@ -59,6 +59,12 @@
 - 如何实现全局App设置灰色
     - 第一种：注册 registerActivityLifecycleCallbacks 回调，回调中通过 activity 实例同样可以拿到 DecorView 然后设置灰色。
     - 第二种：在 BaseActivity 里面处理，这样所有继承 BaseActivity 的都会生效。
+    - 第三种：利用hook监听到每个DecorView的创建，并且拿到View本身。然后再对布局进行了重绘。
+- 思路对比分析
+    - 第一种：监听所有activity，比较方便，入侵性小。
+    - 第二种：放到base类中不太友好，因为目前项目中base父类有好几个。
+    - 第三种：完全解耦合，一行代码即可设置全局灰色，但使用了反射有点性能损耗。
+
 
 
 #### 2.4 如何控制设置开关
@@ -106,6 +112,31 @@
     - 设置颜色矩阵的饱和度，0 是灰色的，1 是原图。通过调用 setSaturation (0) 方法即可将图像置为灰色 。
 
 
+#### 4.2 Window全局灰色原理
+- App 中 Window 的添加最终都会走到 WindowManagerGlobal 的 addView 方法：
+    - WindowManagerGlobal 是一个全局单例，其中 mViews 是一个集合，App 中所有的 Window 在添加的时候都会被它给存起来。
+    ``` java
+    //WindowManagerGlobal#addView
+    public void addView(View view, ViewGroup.LayoutParams params,
+            Display display, Window parentWindow) {
+        synchronized (mLock) {
+            // 将 view 添加到 mViews，mViews 是一个 ArrayList 集合
+            mViews.add(view);
+            // 最后通过 viewRootImpl 来添加 window
+            try {
+                root.setView(view, wparams, panelParentView);
+            } 
+        }  
+    }
+    ```
+- 如何设置Dialog置灰
+    - 可以通过 Hook 拿到 mViews 中所有的 View 然后进行黑白化设置，这样不管是 Activity，Dialog，PopupWindow 还是其他一些 Window 组件，都会变成黑白化。
+- Hook具体该怎么实践
+    - 1、确认 Hook 点（被劫持的原始对象我们称之为 Hook 点）；2、定义代理类；3、使用代理对象替换 Hook 点
+- WindowManagerGlobal 中 mViews 实现 App 黑白化
+    - 1、Hook WindowManagerGlobal 中的 mViews ，将其改成可感知数据的 ArrayList 集合
+    - 2、监听 mViews 的 add 操作，然后对 View 进行黑白化设置
+
 
 
 
@@ -120,12 +151,14 @@
 #### 5.2 Dialog置灰思考
 - 设置Activity灰色后弹窗没有灰
     - Dialog 创建了新的 PhoneWindow，使用了 PhoneWindow 的 DecorView 模板。Dialog的DecorView和Activity的不是同一个！
-
-
-#### 5.3 PopupWindow置灰思考
 - 设置Activity灰色后Pop没有灰
     - 
 
 
+#### 5.3 SurfaceView无法置灰
+- SurfaceView为何无法置灰
+    - 使用了setLayerType进行重绘，而SurfaceView是有独立的Window，脱离布局内的Window，运行在其他线程，不影响主线程的绘制，所以当前方案无法使SurfaceView变色。
+- 解决方案：
+    - 1、使用TextureView。2、看下这个SurfaceView是否可以设置滤镜，正常都是一些三方或者自制的播放器。
 
 
