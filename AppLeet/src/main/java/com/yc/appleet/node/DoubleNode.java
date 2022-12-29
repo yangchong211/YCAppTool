@@ -6,25 +6,17 @@ package com.yc.appleet.node;
  */
 public class DoubleNode {
 
-    private static class Node{
-        //每个节点数据
-        private final Object data;
-        //下一个节点
-        private Node next;
-        public Node(Object data) {
-            this.data = data;
-        }
-    }
-
     public class DoublePointLinkedList {
+
         private Node head;//头节点
         private Node tail;//尾节点
         private int size;//节点的个数
 
         private class Node{
+            //每个节点数据
             private Object data;
+            //下一个节点
             private Node next;
-
             public Node(Object data){
                 this.data = data;
             }
@@ -113,4 +105,11 @@ public class DoubleNode {
             }
         }
     }
+
+    private void test(){
+        DoublePointLinkedList doublePointLinkedList = new DoublePointLinkedList();
+        doublePointLinkedList.addHead(2);
+        doublePointLinkedList.addTail(3);
+    }
+
 }

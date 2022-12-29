@@ -11,6 +11,7 @@ import java.util.*
  * desc   : sign 工具类
  */
 object SignGenerator {
+
     fun generate(params: HashMap<String, String>?, secret: String?): String {
         val sb = StringBuilder()
         if (params == null || params.size == 0) {
@@ -29,4 +30,5 @@ object SignGenerator {
             Md5EncryptUtils.encryptMD5ToString(encodeParams)
         } else Md5EncryptUtils.encryptMD5ToString(paramsString)
     }
+
 }

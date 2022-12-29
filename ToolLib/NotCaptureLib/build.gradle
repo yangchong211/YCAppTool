@@ -34,8 +34,8 @@ dependencies {
     //同上上报库
     implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.3'
     //加解密库
-    //implementation project(path: ':AppEncryptLib')
-    implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.3'
+    implementation project(path: ':AppEncryptLib')
+    //implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.3'
     //通用组件接口库
     implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.3'
 }

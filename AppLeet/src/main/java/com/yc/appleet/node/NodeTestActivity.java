@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.yc.appleet.R;
 import com.yc.library.base.mvp.BaseActivity;
+import com.yc.toolutils.AppLogUtils;
 
 /**
  * @author yangchong
@@ -65,27 +66,17 @@ public class NodeTestActivity extends BaseActivity implements View.OnClickListen
         if (v == tv1) {
             SingleNode singleNode = new SingleNode();
             singleNode.test();
+            singleNode.testFind();
         } else if (v == tv2) {
 
         } else if (v == tv3) {
-
+            LoopNode loopNode = new LoopNode();
+            loopNode.test();
         } else if (v == tv4) {
 
         } else if (v == tv5){
 
         }
-    }
-
-    /**
-     * 链表，结构稍微复杂
-     */
-
-    private class NodeList{
-
-        private class Node{
-
-        }
-
     }
 
 }

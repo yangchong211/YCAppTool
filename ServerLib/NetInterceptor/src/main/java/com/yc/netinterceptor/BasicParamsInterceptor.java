@@ -19,6 +19,9 @@ import okio.Buffer;
 
 public class BasicParamsInterceptor implements Interceptor {
 
+    /**
+     * https://github.com/jkyeo/okhttp-basicparamsinterceptor
+     */
     Map<String, String> queryParamsMap = new HashMap<>();
     Map<String, String> paramsMap = new HashMap<>();
     Map<String, String> headerParamsMap = new HashMap<>();

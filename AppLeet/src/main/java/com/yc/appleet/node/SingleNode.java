@@ -20,6 +20,14 @@ public class SingleNode {
         public Node(Object data) {
             this.data = data;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "data=" + data +
+                    ", next=" + next +
+                    '}';
+        }
     }
 
     private static class NodeList {
@@ -50,6 +58,32 @@ public class SingleNode {
             head = head.next;
             size--;
             return obj;
+        }
+
+        public Node insert(Object obj){
+            Node node = new Node(obj);
+            if (size == 0){
+                head = node;
+            } else {
+                node.next = head;
+                head = node;
+            }
+            size++;
+            return node;
+        }
+
+        public Node find(Object obj){
+            Node current = head;
+            int tempSize = size;
+            while (tempSize > 0){
+                if (current.data == obj){
+                    return current;
+                } else {
+                    current = current.next;
+                }
+                tempSize--;
+            }
+            return null;
         }
 
         public void printAll(){
@@ -90,4 +124,15 @@ public class SingleNode {
         nodeList.printAll();
     }
 
+    public void testFind() {
+        NodeList nodeList = new NodeList();
+        nodeList.add(5);
+        nodeList.add(4);
+        nodeList.add(3);
+        nodeList.add(2);
+        nodeList.add(1);
+        nodeList.add(9);
+        Node node = nodeList.find(3);
+        AppLogUtils.d("testFind : " + node.toString());
+    }
 }
