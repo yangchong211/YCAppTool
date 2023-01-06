@@ -4,7 +4,7 @@ package com.squareup.leakcanary;
  * description:
  * <p></p>
  *
- * @author wangjie
+ * @author yangchong
  * @since 2019-08-13
  */
 public class DebugInfo {
