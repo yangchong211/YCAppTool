@@ -7,6 +7,8 @@ import com.yc.appleet.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.toolutils.AppLogUtils;
 
+import java.util.LinkedList;
+
 /**
  * @author yangchong
  * 链表案例
@@ -58,7 +60,7 @@ public class NodeTestActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initData() {
-
+        LinkedList<String> strings = new LinkedList<>();
     }
 
     @Override

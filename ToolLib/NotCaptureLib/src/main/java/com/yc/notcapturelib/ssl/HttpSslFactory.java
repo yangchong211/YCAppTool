@@ -30,7 +30,7 @@ public final class HttpSslFactory {
 
     private final static String KEYSTORE_TYPE = "BKS";
     private final static String PROTOCOL_TYPE = "TLS";
-    private final static String CERTIFICATE_FORMAT = "X509";
+    private final static String CERTIFICATE_FORMAT = "X.509";
 
     /**
      * 生成信任任何证书的配置
@@ -126,14 +126,20 @@ public final class HttpSslFactory {
         }
     }
 
+    /**
+     * 通过io流读取证书的数据
+     * @param certificates          ca证书流对象
+     * @return
+     */
     private static TrustManager[] prepareTrustManager(InputStream... certificates) {
         if (certificates == null || certificates.length <= 0) {
             return null;
         }
         try {
             //获取X.509格式的内置证书
-            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+            CertificateFactory certificateFactory = CertificateFactory.getInstance(CERTIFICATE_FORMAT);
             // 创建一个默认类型的 KeyStore，存储我们信任的证书
+            KeyStore.getDefaultType();
             KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
             keyStore.load(null);
             int index = 0;
@@ -153,6 +159,7 @@ public final class HttpSslFactory {
             }
             // 我们创建一个默认类型的 TrustManagerFactory
             String defaultAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+            // 通过TrustManager工厂类
             TrustManagerFactory factory = TrustManagerFactory.getInstance(defaultAlgorithm);
             // 用我们之前的 KeyStore 实例初始化 TrustManagerFactory，这样 tmf 就会信任 KeyStore 中的证书
             factory.init(keyStore);

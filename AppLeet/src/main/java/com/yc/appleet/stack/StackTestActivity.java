@@ -52,7 +52,7 @@ public class StackTestActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initData() {
-
+        //栈：类似叠盘子，先进后出，后进先出
     }
 
     @Override

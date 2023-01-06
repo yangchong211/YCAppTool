@@ -1,12 +1,11 @@
 package com.yc.notcapturelib.encrypt
 
 import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
 import com.google.gson.annotations.SerializedName
 import com.yc.eventuploadlib.LoggerReporter
 import com.yc.notcapturelib.helper.NotCaptureHelper
 import okhttp3.*
-import okhttp3.ResponseBody.Companion.toResponseBody
+import okio.Buffer
 import java.io.IOException
 
 /**
@@ -19,12 +18,21 @@ class EncryptDecryptInterceptor : Interceptor {
 
     private val gson = Gson()
 
+    /**
+     * Request抽象成请求数据
+     * Request包括Headers和RequestBody，而RequestBody是abstract的
+     * 他的子类是有FormBody(表单提交的)和MultipartBody(文件上传)
+     *
+     * Response抽象成响应数据
+     * Response包括Headers和RequestBody，而ResponseBody是abstract的
+     * 所以他的子类也是有两个:RealResponseBody和CacheResponseBody，分别代表真实响应和缓存响应
+     */
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val request: Request = chain.request()
         val handleRequest = handleRequest(request)
         val response: Response = chain.proceed(handleRequest)
-        val handleResponse = handleResponse(response)
+        val handleResponse = InterceptorHelper.handleResponse1(response, gson)
         return handleResponse!!
     }
 
@@ -36,8 +44,11 @@ class EncryptDecryptInterceptor : Interceptor {
         val config = NotCaptureHelper.getInstance().config
         val configEncrypt = config.isEncrypt
         val headerEncrypt = !ignoreEncrypt || !forceEncrypt
-        val newRequest : Request
-        LoggerReporter.report("NotCaptureHelper", "handleRequest $configEncrypt , $headerEncrypt")
+        val newRequest: Request
+        LoggerReporter.report(
+            "NotCaptureHelper",
+            "handleRequest 加密 $configEncrypt , $headerEncrypt"
+        )
         if (configEncrypt && headerEncrypt) {
             when (request.method) {
                 "GET" -> {
@@ -46,9 +57,11 @@ class EncryptDecryptInterceptor : Interceptor {
                 "POST" -> {
                     val requestBody = request.body
                     newRequest = when {
+                        //如果request请求体是null，或者如果request请求体长度是0
                         requestBody == null || requestBody.contentLength() == 0L || requestBody is FormBody -> {
                             handleRequestPostFormBody(request)
                         }
+                        //MultipartBody可用于文件请求(图像，文档..)
                         requestBody is MultipartBody -> {
                             handleRequestPostMultipartBody(request)
                         }
@@ -70,11 +83,14 @@ class EncryptDecryptInterceptor : Interceptor {
             .build()
     }
 
-    private fun handleRequestPostMultipartBody(request: Request) : Request {
+    private fun handleRequestPostMultipartBody(request: Request): Request {
         val url = request.url
         val requestBody = request.body as MultipartBody
         LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody url: $url")
-        LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody requestBody: $requestBody")
+        LoggerReporter.report(
+            "NotCaptureHelper",
+            "handleRequestPostMultipartBody requestBody: $requestBody"
+        )
         val newParameterList = InterceptorHelper.buildNewParameterList(request)
         val newUrl = url.newBuilder()
             .encodedQuery(null)
@@ -104,19 +120,38 @@ class EncryptDecryptInterceptor : Interceptor {
             }
             .build()
         LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody newUrl: $newUrl")
-        LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody newRequestBody: $newRequestBody")
+        LoggerReporter.report(
+            "NotCaptureHelper",
+            "handleRequestPostMultipartBody newRequestBody: $newRequestBody"
+        )
         return request.newBuilder()
             .url(newUrl)
             .post(newRequestBody)
             .build()
     }
 
-    private fun handleRequestPostFormBody(request: Request) : Request {
+    /**
+     * 从okhttp3.RequestBody的对象实例获取主体字符串。writeTo(okio.BufferedSink sink)
+     * Okio还具有Buffer类型，它既是BufferedSink(意味着您可以写入)，又是BufferedSource(意味着您可以从中读取)。
+     * 因此，我们可以将主体写入Buffer，然后将其作为字符串读回。
+     */
+    private fun handleRequestPostFormBody(request: Request): Request {
         val url = request.url
         val requestBody = request.body
         val newParameterList = InterceptorHelper.buildNewParameterList(request)
-        LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody url: $url")
-        LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody requestBody: $requestBody")
+        LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody url 请求链接: $url")
+        try {
+            //请求参数body，转换为字符串
+            val buffer = Buffer()
+            requestBody?.writeTo(buffer)
+            val readUtf8 = buffer.readUtf8()
+            LoggerReporter.report(
+                "NotCaptureHelper",
+                "handleRequestPostFormBody requestBody 请求body: $readUtf8"
+            )
+        } catch (e: Exception) {
+        }
+        //创建新的请求链接
         val newUrl = url.newBuilder()
             .encodedQuery(null)
             .encodedFragment(null)
@@ -128,6 +163,7 @@ class EncryptDecryptInterceptor : Interceptor {
                 }
             }
             .build()
+        //创建新的请求body
         val newRequestBody = FormBody.Builder()
             .apply {
                 newParameterList.forEach { paramTriple ->
@@ -137,8 +173,18 @@ class EncryptDecryptInterceptor : Interceptor {
                 }
             }
             .build()
-        LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody newUrl: $newUrl")
-        LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody newRequestBody: $newRequestBody")
+        LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody newUrl 新请求链接: $newUrl")
+        try {
+            //请求参数body，转换为字符串
+            val buffer = Buffer()
+            newRequestBody.writeTo(buffer)
+            val readUtf8 = buffer.readUtf8()
+            LoggerReporter.report(
+                "NotCaptureHelper",
+                "handleRequestPostFormBody newRequestBody 新请求body: $readUtf8"
+            )
+        } catch (e: Exception) {
+        }
         return request.newBuilder()
             .url(newUrl)
             .post(newRequestBody)
@@ -166,40 +212,7 @@ class EncryptDecryptInterceptor : Interceptor {
             .build()
     }
 
-    private fun handleResponse(response: Response): Response? {
-        val responseBody = response.body
-
-        return if (responseBody?.contentType()?.subtype == SUBTYPE_JSON) {
-            val responseBodyStr = responseBody.string()
-            val encryptResponseBody = try {
-                gson.fromJson(responseBodyStr, EncryptResponseBody::class.java)
-            } catch (e: JsonSyntaxException) {
-                null
-            }
-            val encryptVersion = encryptResponseBody?.encryptVersion
-            if (!encryptVersion.isNullOrEmpty()) {
-                val result = encryptResponseBody.result ?: ""
-                LoggerReporter.report("NotCaptureHelper", "handleResponse result: $result")
-                val decryptResponseBodyStr = InterceptorHelper.decrypt(encryptVersion,result) ?: ""
-                val toResponseBody =
-                    decryptResponseBodyStr.toResponseBody(responseBody.contentType())
-                LoggerReporter.report("NotCaptureHelper",
-                    "handleResponse toResponseBody: ${toResponseBody.string()}")
-                response.newBuilder()
-                    .body(toResponseBody)
-                    .build()
-            } else {
-                val toResponseBody = responseBodyStr.toResponseBody(responseBody.contentType())
-                response.newBuilder()
-                    .body(toResponseBody)
-                    .build()
-            }
-        } else {
-            response
-        }
-    }
-
-    private class EncryptResponseBody(
+    class EncryptResponseBody(
         @SerializedName("ev")
         val encryptVersion: String? = null,
         @SerializedName("result")
@@ -210,7 +223,7 @@ class EncryptDecryptInterceptor : Interceptor {
         const val KEY_ENCRYPT_VERSION = "ev"
         const val KEY_DATA = "data"
         const val ENCRYPT_VERSION_2 = "2"
-        private const val SUBTYPE_JSON = "json"
+        const val SUBTYPE_JSON = "json"
         private const val HEADER_IGNORE_ENCRYPT = "Ignore-Encrypt"
         private const val HEADER_FORCE_ENCRYPT = "Force-Encrypt"
     }
