@@ -26,27 +26,45 @@ import java.util.*
 </pre> *
  */
 class AppStatusManager private constructor(builder: Builder) {
-    
+
     private val mAppStatusListener: MutableList<AppStatusListener>?
-    private val mBatteryReceiver: BatteryBroadcastReceiver
-    private val mGpsReceiver: GpsBroadcastReceiver
-    private val mNetWorkReceiver: NetWorkBroadcastReceiver
-    private val mScreenReceiver: ScreenBroadcastReceiver
-    private val mWifiBroadcastReceiver: WifiBroadcastReceiver
-    private val mBluetoothReceiver: BluetoothBroadcastReceiver
+    private var mBatteryReceiver: BatteryBroadcastReceiver ?=null
+    private var mGpsReceiver: GpsBroadcastReceiver ?=null
+    private var mNetWorkReceiver: NetWorkBroadcastReceiver ?=null
+    private var mScreenReceiver: ScreenBroadcastReceiver ?=null
+    private var mWifiBroadcastReceiver: WifiBroadcastReceiver ?=null
+    private var mBluetoothReceiver: BluetoothBroadcastReceiver ?=null
     private val mContext: Context?
     private val threadSwitchOn: Boolean
+    private val batterySwitchOn : Boolean
+    private val gpsSwitchOn : Boolean
+    private val networkSwitchOn : Boolean
+    private val screenSwitchOn : Boolean
+    private val wifiSwitchOn : Boolean
+    private val bluetoothSwitchOn : Boolean
 
     /**
      * 注册广播
      */
     private fun init() {
-        initBatteryReceiver(mContext)
-        initGpsReceiver(mContext)
-        initNetworkReceiver(mContext)
-        initScreenReceiver(mContext)
-        initWifiReceiver(mContext)
-        initBluetoothReceiver(mContext)
+        if (batterySwitchOn){
+            initBatteryReceiver(mContext)
+        }
+        if (gpsSwitchOn){
+            initGpsReceiver(mContext)
+        }
+        if (networkSwitchOn){
+            initNetworkReceiver(mContext)
+        }
+        if (screenSwitchOn){
+            initScreenReceiver(mContext)
+        }
+        if (wifiSwitchOn){
+            initWifiReceiver(mContext)
+        }
+        if (bluetoothSwitchOn){
+            initBluetoothReceiver(mContext)
+        }
     }
 
     /**
@@ -115,32 +133,45 @@ class AppStatusManager private constructor(builder: Builder) {
     }
 
     /**
-     * 解绑操作
+     * 解绑操作【App推出的时候可以调用】
      */
     fun destroy() {
-        mContext?.unregisterReceiver(mBatteryReceiver)
-        mContext?.unregisterReceiver(mGpsReceiver)
-        mContext?.unregisterReceiver(mNetWorkReceiver)
-        mContext?.unregisterReceiver(mScreenReceiver)
-        mContext?.unregisterReceiver(mBluetoothReceiver)
+        if (mBatteryReceiver!=null){
+            mContext?.unregisterReceiver(mBatteryReceiver)
+        }
+        if (mGpsReceiver!=null){
+            mContext?.unregisterReceiver(mGpsReceiver)
+        }
+        if (mNetWorkReceiver!=null){
+            mContext?.unregisterReceiver(mNetWorkReceiver)
+        }
+        if (mScreenReceiver!=null){
+            mContext?.unregisterReceiver(mScreenReceiver)
+        }
+        if (mBluetoothReceiver!=null){
+            mContext?.unregisterReceiver(mBluetoothReceiver)
+        }
         mAppStatusListener?.clear()
     }
 
     val batteryInfo: AppBatteryInfo?
-        get() = mBatteryReceiver.batteryInfo
+        get() = mBatteryReceiver?.batteryInfo
 
+    /**
+     * 注册广播监听回调
+     */
     fun registerAppStatusListener(listener: AppStatusListener) {
         mAppStatusListener?.add(listener)
     }
 
+    /**
+     * 解绑注册广播监听回调
+     */
     fun unregisterAppStatusListener(listener: AppStatusListener): Boolean {
         return mAppStatusListener != null && mAppStatusListener.remove(listener)
     }
 
-    val appStatus: Int
-        get() = AppStateMonitor.getInstance().state
-
-    fun dispatcherWifiState(state: Boolean) {
+    internal fun dispatcherWifiState(state: Boolean) {
         val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
         if (listeners != null) {
             for (listener in listeners) {
@@ -149,7 +180,7 @@ class AppStatusManager private constructor(builder: Builder) {
         }
     }
 
-    fun dispatcherBluetoothState(state: Boolean) {
+    internal fun dispatcherBluetoothState(state: Boolean) {
         val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
         if (listeners != null) {
             for (listener in listeners) {
@@ -158,7 +189,7 @@ class AppStatusManager private constructor(builder: Builder) {
         }
     }
 
-    fun dispatcherScreenState(state: Boolean) {
+    internal fun dispatcherScreenState(state: Boolean) {
         val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
         if (listeners != null) {
             for (listener in listeners) {
@@ -167,7 +198,7 @@ class AppStatusManager private constructor(builder: Builder) {
         }
     }
 
-    fun dispatcherGpsState(state: Boolean) {
+    internal fun dispatcherGpsState(state: Boolean) {
         val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
         if (listeners != null) {
             for (listener in listeners) {
@@ -176,7 +207,7 @@ class AppStatusManager private constructor(builder: Builder) {
         }
     }
 
-    fun dispatcherNetworkState(state: Boolean) {
+    internal fun dispatcherNetworkState(state: Boolean) {
         val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
         if (listeners != null) {
             for (listener in listeners) {
@@ -185,7 +216,7 @@ class AppStatusManager private constructor(builder: Builder) {
         }
     }
 
-    fun dispatcherBatteryState(batteryInfo: AppBatteryInfo?) {
+    internal fun dispatcherBatteryState(batteryInfo: AppBatteryInfo?) {
         val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
         if (listeners != null) {
             for (listener in listeners) {
@@ -194,7 +225,7 @@ class AppStatusManager private constructor(builder: Builder) {
         }
     }
 
-    fun dispatcherUserPresent() {
+    internal fun dispatcherUserPresent() {
         val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
         if (listeners != null) {
             for (listener in listeners) {
@@ -203,7 +234,7 @@ class AppStatusManager private constructor(builder: Builder) {
         }
     }
 
-    fun dispatcherThreadInfo() {
+    internal fun dispatcherThreadInfo() {
         val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
         if (threadSwitchOn && listeners != null) {
             val threadManager = instance
@@ -226,7 +257,7 @@ class AppStatusManager private constructor(builder: Builder) {
         /**
          * 上下文
          */
-        var context: Context? = null
+        internal var context: Context? = null
 
         /**
          * file文件
@@ -251,7 +282,13 @@ class AppStatusManager private constructor(builder: Builder) {
         /**
          * 是否开启线程监控，默认false
          */
-        var threadSwitchOn = false
+        internal var threadSwitchOn = false
+        internal var batterySwitchOn = false
+        internal var gpsSwitchOn = false
+        internal var networkSwitchOn = false
+        internal var screenSwitchOn = false
+        internal var wifiSwitchOn = false
+        internal var bluetoothSwitchOn = false
 
         fun file(file: File?): Builder {
             this.file = file
@@ -283,13 +320,40 @@ class AppStatusManager private constructor(builder: Builder) {
             return this
         }
 
+        fun batterySwitchOn(batterySwitchOn: Boolean): Builder {
+            this.batterySwitchOn = batterySwitchOn
+            return this
+        }
+
+        fun gpsSwitchOn(gpsSwitchOn: Boolean): Builder {
+            this.gpsSwitchOn = gpsSwitchOn
+            return this
+        }
+
+        fun networkSwitchOn(networkSwitchOn: Boolean): Builder {
+            this.networkSwitchOn = networkSwitchOn
+            return this
+        }
+
+        fun screenSwitchOn(screenSwitchOn: Boolean): Builder {
+            this.screenSwitchOn = screenSwitchOn
+            return this
+        }
+
+        fun wifiSwitchOn(wifiSwitchOn: Boolean): Builder {
+            this.wifiSwitchOn = wifiSwitchOn
+            return this
+        }
+
+        fun bluetoothSwitchOn(bluetoothSwitchOn: Boolean): Builder {
+            this.bluetoothSwitchOn = bluetoothSwitchOn
+            return this
+        }
+
         fun builder(): AppStatusManager {
             return when {
                 context == null -> {
                     throw NullPointerException("context is null")
-                }
-                file == null -> {
-                    throw NullPointerException("file is null")
                 }
                 else -> {
                     AppStatusManager(this)
@@ -308,6 +372,13 @@ class AppStatusManager private constructor(builder: Builder) {
         mBluetoothReceiver = BluetoothBroadcastReceiver(this)
         mContext = builder.context
         threadSwitchOn = builder.threadSwitchOn
+        batterySwitchOn = builder.batterySwitchOn
+        gpsSwitchOn = builder.gpsSwitchOn
+        networkSwitchOn = builder.networkSwitchOn
+        screenSwitchOn = builder.screenSwitchOn
+        wifiSwitchOn = builder.wifiSwitchOn
+        bluetoothSwitchOn = builder.bluetoothSwitchOn
         init()
     }
+
 }

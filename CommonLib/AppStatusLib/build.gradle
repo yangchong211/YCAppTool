@@ -29,6 +29,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["annotation"]
-    implementation project(path: ':AppCommonInter')
+    //通用组件接口库
+    implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.3'
     implementation 'com.github.yangchong211.YCEfficient:AppProcessLib:1.3.1'
 }

@@ -17,7 +17,8 @@ class WifiBroadcastReceiver(private val mManager: AppStatusManager?) : Broadcast
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == WifiManager.WIFI_STATE_CHANGED_ACTION) {
-            when (intent.getIntExtra("wifi_state", 4)) {
+            val intExtra = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, 4)
+            when (intExtra) {
                 0, 2, 4 -> {
 
                 }
