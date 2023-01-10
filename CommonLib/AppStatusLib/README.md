@@ -23,7 +23,12 @@
     AppStatusManager manager = new AppStatusManager.Builder()
             .context(MainApplication.getInstance())
             .file(file)
+            .networkSwitchOn(true)
+            .wifiSwitchOn(false)
+            .bluetoothSwitchOn(false)
+            .screenSwitchOn(false)
             .threadSwitchOn(false)
+            .batterySwitchOn(false)
             .builder();
     manager.registerAppStatusListener(new BaseStatusListener() {
         @Override

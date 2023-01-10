@@ -32,9 +32,9 @@ public interface ISurfaceView {
 
     /**
      * 关联AbstractPlayer
-     * @param player                        player
+     * @param iPlayerSurface                        iPlayerSurface
      */
-    void attachToPlayer(@NonNull IPlayerSurface player);
+    void attachToPlayer(@NonNull IPlayerSurface iPlayerSurface);
 
     /**
      * 设置视频宽高

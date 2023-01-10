@@ -52,7 +52,7 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
 
     private MeasureHelper mMeasureHelper;
     @Nullable
-    private IPlayerSurface mVideoPlayer;
+    private IPlayerSurface mPlayerSurface;
 
     @Override
     protected void onDetachedFromWindow() {
@@ -80,7 +80,7 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
      */
     @Override
     public void attachToPlayer(@NonNull IPlayerSurface player) {
-        this.mVideoPlayer = player;
+        this.mPlayerSurface = player;
     }
 
     /**
@@ -170,9 +170,9 @@ public class RenderSurfaceView extends SurfaceView implements ISurfaceView {
          */
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
-            if (mVideoPlayer != null){
+            if (mPlayerSurface != null){
                 Surface surface = holder.getSurface();
-                mVideoPlayer.setSurface(surface);
+                mPlayerSurface.setSurface(surface);
             }
         }
 

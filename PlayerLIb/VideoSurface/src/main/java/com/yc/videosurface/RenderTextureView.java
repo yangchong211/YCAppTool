@@ -42,7 +42,7 @@ public class RenderTextureView extends TextureView implements ISurfaceView {
     private MeasureHelper mMeasureHelper;
     private SurfaceTexture mSurfaceTexture;
     @Nullable
-    private IPlayerSurface mVideoPlayer;
+    private IPlayerSurface mPlayerSurface;
     private Surface mSurface;
 
     public RenderTextureView(Context context) {
@@ -61,7 +61,7 @@ public class RenderTextureView extends TextureView implements ISurfaceView {
      */
     @Override
     public void attachToPlayer(@NonNull IPlayerSurface player) {
-        this.mVideoPlayer = player;
+        this.mPlayerSurface = player;
     }
 
     /**
@@ -162,8 +162,8 @@ public class RenderTextureView extends TextureView implements ISurfaceView {
             } else {
                 mSurfaceTexture = surfaceTexture;
                 mSurface = new Surface(surfaceTexture);
-                if (mVideoPlayer != null) {
-                    mVideoPlayer.setSurface(mSurface);
+                if (mPlayerSurface != null) {
+                    mPlayerSurface.setSurface(mSurface);
                 }
             }
         }

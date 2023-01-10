@@ -171,6 +171,9 @@ class AppStatusManager private constructor(builder: Builder) {
         return mAppStatusListener != null && mAppStatusListener.remove(listener)
     }
 
+    /**
+     * internal 直译为 内部的； 在kt中 internal 限制了 被修饰(类、方法...) 只能在当前model 中使用。
+     */
     internal fun dispatcherWifiState(state: Boolean) {
         val listeners: Array<Any>? = mAppStatusListener?.toTypedArray()
         if (listeners != null) {

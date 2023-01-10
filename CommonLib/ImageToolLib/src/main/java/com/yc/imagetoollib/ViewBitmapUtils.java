@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
+import android.view.SurfaceView;
 import android.view.View;
 
 /**
@@ -54,5 +55,30 @@ public final class ViewBitmapUtils {
         return bmp;
     }
 
+    public static Bitmap loadBitmapFromView3(View view){
+        if (view == null) {
+            return null;
+        }
+        view.setDrawingCacheEnabled(true);
+        //普通View生成图片
+        Bitmap drawingCache = view.getDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(drawingCache);
+        view.setDrawingCacheEnabled(false);
+        view.destroyDrawingCache();
+        return bitmap;
+    }
+
+    public static Bitmap loadBitmapFromView4(SurfaceView view){
+        if (view == null) {
+            return null;
+        }
+        view.setDrawingCacheEnabled(true);
+        //普通View生成图片
+        Bitmap drawingCache = view.getDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(drawingCache);
+        view.setDrawingCacheEnabled(false);
+        view.destroyDrawingCache();
+        return bitmap;
+    }
 
 }

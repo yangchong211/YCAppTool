@@ -3,6 +3,7 @@
     package="com.yc.appstatuslib">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!--为了要获取网络的状态，需要在manifest文件中设置相关权限-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application>
