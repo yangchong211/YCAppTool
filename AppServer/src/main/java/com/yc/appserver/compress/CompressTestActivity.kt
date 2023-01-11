@@ -2,16 +2,11 @@ package com.yc.appserver.compress
 
 import android.content.Context
 import android.content.Intent
-import android.media.AudioManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.yc.appserver.R
-import com.yc.bellsvibrations.AudioVolumeHelper
-import com.yc.bellsvibrations.MediaAudioPlayer
-import com.yc.bellsvibrations.VibratorHelper
 import com.yc.logclient.LogUtils
 import com.yc.roundcorner.view.RoundTextView
-import com.yc.toastutils.ToastUtils
 
 
 class CompressTestActivity : AppCompatActivity() {

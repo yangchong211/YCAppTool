@@ -31,7 +31,7 @@ dependencies {
     implementation project(':VideoKernel')
     implementation project(':VideoSurface')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.3.5'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.3'
     /*//这两个是必须要加的，其它的可供选择
     //ijk播放器
     implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'

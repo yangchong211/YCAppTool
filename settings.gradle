@@ -41,7 +41,7 @@ include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
         ':GsonServer', ':IpcServer', ':ObjectEqualLib',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
-        ':GlideProgressLib', ':CompressServer', ':BellsVibrations', ':RetrofitNetLib'
+        ':GlideProgressLib', ':CompressServer',  ':RetrofitNetLib'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -59,7 +59,6 @@ project(':NetInterceptor').projectDir = new File('ServerLib/NetInterceptor')
 project(':SignalHooker').projectDir = new File('ServerLib/SignalHooker')
 project(':GlideProgressLib').projectDir = new File('ServerLib/GlideProgressLib')
 project(':CompressServer').projectDir = new File('ServerLib/CompressServer')
-project(':BellsVibrations').projectDir = new File('ServerLib/BellsVibrations')
 project(':RetrofitNetLib').projectDir = new File('ServerLib/RetrofitNetLib')
 
 
@@ -255,7 +254,7 @@ project(':MonitorPicture').projectDir = new File('MonitorLib/MonitorPicture')
 
 /* +++++++++ 音视频 +++++++++ */
 include ':VideoSqlLite',':VideoCache',':AudioPlayer',':VideoSurface',
-        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView'
+        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView', ':BellsVibrations'
 project(':VideoSqlLite').projectDir = new File('PlayerLib/VideoSqlLite')
 project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
 project(':AudioPlayer').projectDir = new File('PlayerLib/AudioPlayer')
@@ -265,6 +264,5 @@ project(':VideoSurface').projectDir = new File('PlayerLib/VideoSurface')
 project(':VideoPlayer').projectDir = new File('PlayerLib/VideoPlayer')
 project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
-
-
+project(':BellsVibrations').projectDir = new File('PlayerLib/BellsVibrations')
 
