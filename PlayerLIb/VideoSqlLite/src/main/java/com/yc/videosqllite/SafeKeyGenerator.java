@@ -1,8 +1,8 @@
 package com.yc.videosqllite;
 
+import com.yc.appencryptlib.Md5EncryptUtils;
 import com.yc.applrucache.SystemLruCache;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.encrypt.AppMd5Utils;
 
 
 /**
@@ -35,7 +35,7 @@ public class SafeKeyGenerator {
         }
         if (safeKey == null || safeKey.length()==0) {
             CacheConfig cacheConfig = LocationManager.getInstance().getCacheConfig();
-            safeKey = AppMd5Utils.encryptMD5ToString(url, cacheConfig.getSalt());
+            safeKey = Md5EncryptUtils.encryptMD5ToString(url, cacheConfig.getSalt());
             AppLogUtils.d("SafeKeyGenerator-----md5转化key-"+safeKey);
         }
         synchronized (loadIdToSafeHash) {
