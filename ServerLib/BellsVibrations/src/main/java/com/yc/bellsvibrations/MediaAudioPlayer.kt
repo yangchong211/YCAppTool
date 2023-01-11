@@ -21,6 +21,13 @@ class MediaAudioPlayer(private val context: Context) {
      * 播放raw资源
      */
     fun play(@DataSource type: Int, data: Any?) {
+        playLoop(type, data , false)
+    }
+
+    /**
+     * 播放raw资源
+     */
+    fun playLoop(@DataSource type: Int, data: Any? , isLoop : Boolean = true) {
         if (data == null) {
             return
         }
@@ -50,6 +57,7 @@ class MediaAudioPlayer(private val context: Context) {
             }
             mMediaPlayer?.setOnPreparedListener {
                 try {
+                    mMediaPlayer?.isLooping = isLoop
                     mMediaPlayer?.start()
                 } catch (e: Throwable) {
                     e.printStackTrace()

@@ -81,7 +81,7 @@ class VibratorTestActivity : AppCompatActivity() {
         }
         tvMedia1.setOnClickListener {
             ToastUtils.showRoundRectToast("开始播放raw")
-            mediaAudioPlayer?.play(MediaAudioPlayer.DataSource.DATA_SOURCE_URI,R.raw.audio_call_ring)
+            mediaAudioPlayer?.playLoop(MediaAudioPlayer.DataSource.DATA_SOURCE_URI,R.raw.audio_call_ring,true)
         }
         tvMedia2.setOnClickListener {
             ToastUtils.showRoundRectToast("开始播放asset")
