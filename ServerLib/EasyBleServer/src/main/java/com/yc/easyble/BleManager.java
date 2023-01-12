@@ -12,7 +12,6 @@ import android.bluetooth.BluetoothProfile;
 import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanResult;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Looper;
 
@@ -34,7 +33,7 @@ import com.yc.easyble.data.BleScanState;
 import com.yc.easyble.exception.OtherException;
 import com.yc.easyble.scan.BleScanner;
 import com.yc.easyble.utils.BleLog;
-import com.yc.easyble.utils.BleToolUtils;
+import com.yc.toolutils.BleToolUtils;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package com.yc.easyble.utils;
+package com.yc.toolutils;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
