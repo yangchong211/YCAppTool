@@ -1,26 +1,31 @@
-package com.yc.music.manager;
+package com.yc.audiofocus;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.media.AudioManager;
 import android.os.Build;
-
 import androidx.annotation.NonNull;
-
-import com.yc.music.service.PlayAudioService;
 
 import static android.content.Context.AUDIO_SERVICE;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : audio操作类
+ *     revise:
+ * </pre>
+ */
 public class AudioSoundManager  {
 
-
-    private AudioManager mAudioManager;
-
+    private final AudioManager mAudioManager;
 
     /**
      * 初始化操作
      * @param content           playService对象
      */
-    public AudioSoundManager(@NonNull PlayAudioService content) {
+    public AudioSoundManager(@NonNull Context content) {
         mAudioManager = (AudioManager) content.getSystemService(AUDIO_SERVICE);
     }
 

@@ -254,7 +254,8 @@ project(':MonitorPicture').projectDir = new File('MonitorLib/MonitorPicture')
 
 /* +++++++++ 音视频 +++++++++ */
 include ':VideoSqlLite',':VideoCache',':AudioPlayer',':VideoSurface',
-        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView', ':BellsVibrations'
+        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView',
+        ':BellsVibrations', ':AudioFocus'
 project(':VideoSqlLite').projectDir = new File('PlayerLib/VideoSqlLite')
 project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
 project(':AudioPlayer').projectDir = new File('PlayerLib/AudioPlayer')
@@ -265,4 +266,4 @@ project(':VideoPlayer').projectDir = new File('PlayerLib/VideoPlayer')
 project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 project(':BellsVibrations').projectDir = new File('PlayerLib/BellsVibrations')
-
+project(':AudioFocus').projectDir = new File('PlayerLib/AudioFocus')
