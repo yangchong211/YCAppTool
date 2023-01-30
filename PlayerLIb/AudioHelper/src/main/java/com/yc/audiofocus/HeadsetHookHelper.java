@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HeadsetHookHelper {
+public final class HeadsetHookHelper {
 
     /**
      * 单位: 毫秒 ms
