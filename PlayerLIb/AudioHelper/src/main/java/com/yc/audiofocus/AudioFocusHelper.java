@@ -12,10 +12,19 @@ import androidx.annotation.RequiresApi;
 
 import com.yc.appcontextlib.AppToolUtils;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : 音视频专门处理焦点抢占工具
+ *     revise: 处理音视频通话焦点抢占，处理音视频播放焦点抢占。单独抽离出来做成库
+ * </pre>
+ */
 public final class AudioFocusHelper {
 
     @Nullable
-    private AudioManager mAudioManager;
+    private final AudioManager mAudioManager;
 
     private OnAudioFocusChangeListener mListener;
 
@@ -74,6 +83,8 @@ public final class AudioFocusHelper {
                         mListener.onGain(mLossTransient, mLossTransientCanDuck);
                         mLossTransient = false;
                         mLossTransientCanDuck = false;
+                        break;
+                    default:
                         break;
                 }
             }

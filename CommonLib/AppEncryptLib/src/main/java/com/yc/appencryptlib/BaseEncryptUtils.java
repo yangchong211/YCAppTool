@@ -6,6 +6,15 @@ import com.yc.appcontextlib.AppToolUtils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     email  : yangchong211@163.com
+ *     time  : 2018/7/10
+ *     desc  : 公共工具类
+ *     revise:
+ * </pre>
+ */
 public final class BaseEncryptUtils {
 
     private static final char[] HEX_DIGITS =

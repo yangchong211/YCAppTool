@@ -10,11 +10,20 @@ import androidx.annotation.NonNull;
 
 import com.yc.appcontextlib.AppToolUtils;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : 监听来电
+ *     revise:
+ * </pre>
+ */
 public class BecomeNoiseHelper {
-    private Context mContext;
-    private OnBecomeNoiseListener mListener;
 
-    private BroadcastReceiver mBecomeNoiseReceiver;
+    private final Context mContext;
+    private final OnBecomeNoiseListener mListener;
+    private final BroadcastReceiver mBecomeNoiseReceiver;
     private boolean mRegistered;
 
     /**

@@ -29,7 +29,7 @@ object SignGenerator {
             sb.append("secret=").append(secret)
         }
         val paramsString = sb.toString()
-        return Md5EncryptUtils.getMD5(paramsString)
+        return Md5EncryptUtils.getMd5(paramsString)
     }
 
     /**
@@ -50,8 +50,8 @@ object SignGenerator {
         val paramsString = sb.toString()
         val encodeParams = Base64Utils.encodeToStringWrap(paramsString.toByteArray())
         return if (encodeParams != null && encodeParams.isNotEmpty()) {
-            Md5EncryptUtils.getMD5(encodeParams)
-        } else Md5EncryptUtils.getMD5(paramsString)
+            Md5EncryptUtils.getMd5(encodeParams)
+        } else Md5EncryptUtils.getMd5(paramsString)
     }
 
 

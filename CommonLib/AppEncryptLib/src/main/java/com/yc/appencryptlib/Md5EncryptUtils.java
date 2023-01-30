@@ -38,7 +38,7 @@ public final class Md5EncryptUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    public static String getMD5(String str) {
+    public static String getMd5(String str) {
         byte[] source = str.getBytes();
         String s = null;
         try {

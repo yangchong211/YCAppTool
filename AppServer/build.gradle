@@ -58,5 +58,6 @@ dependencies {
     implementation project(path: ':ToolFileLib')
     implementation project(path: ':AppContextLib')
     implementation project(path: ':NotCaptureLib')
+    implementation project(path: ':AudioHelper')
 }
 

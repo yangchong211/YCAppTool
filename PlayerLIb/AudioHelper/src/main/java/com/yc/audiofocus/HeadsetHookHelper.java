@@ -10,13 +10,22 @@ import androidx.annotation.NonNull;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * <pre>
+ *     @author yangchong
+ *     blog  : https://github.com/yangchong211
+ *     time  : 2018/11/9
+ *     desc  : 监听耳机按键逻辑
+ *     revise:
+ * </pre>
+ */
 public final class HeadsetHookHelper {
 
     /**
      * 单位: 毫秒 ms
      */
     public static final int DEFAULT_CLICK_INTERVAL = 300;
-    private ClickCounter mClickCounter;
+    private final ClickCounter mClickCounter;
 
     /**
      * 使用默认的点击事件时间间隔 {@link #DEFAULT_CLICK_INTERVAL} 构造一个 HeadsetHookHelper 对象。
@@ -80,11 +89,11 @@ public final class HeadsetHookHelper {
     }
 
     private static class ClickCounter {
-        private int mClickInterval;
+        private final int mClickInterval;
         private int mCount;
         private Timer mTimer;
-        private OnHeadsetHookClickListener mHeadsetHookClickListener;
-        private Handler mMainHandler;
+        private final OnHeadsetHookClickListener mHeadsetHookClickListener;
+        private final Handler mMainHandler;
 
         ClickCounter(int clickInterval, OnHeadsetHookClickListener listener) {
             mClickInterval = clickInterval;
