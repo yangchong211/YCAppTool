@@ -6,7 +6,7 @@ import android.media.AudioManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.yc.appserver.R
-import com.yc.audiofocus.AudioSoundManager
+import com.yc.bellsvibrations.AudioSoundManager
 import com.yc.bellsvibrations.AudioVolumeHelper
 import com.yc.bellsvibrations.MediaAudioPlayer
 import com.yc.bellsvibrations.VibratorHelper
@@ -52,7 +52,8 @@ class VibratorTestActivity : AppCompatActivity() {
         vibratorHelper = VibratorHelper(this)
         mediaAudioPlayer = MediaAudioPlayer(this)
         audioVolumeHelper = AudioVolumeHelper(this)
-        audioSoundManager = AudioSoundManager(this.application)
+        audioSoundManager =
+            AudioSoundManager(this.application)
         initView()
         initListener()
         LogUtils.i("Log test info : LogTestActivity is create")
@@ -84,12 +85,12 @@ class VibratorTestActivity : AppCompatActivity() {
         }
         tvMedia1.setOnClickListener {
             ToastUtils.showRoundRectToast("开始播放raw")
-            audioSoundManager?.changeToSpeaker()
+            audioSoundManager?.changeToReceiver()
             mediaAudioPlayer?.playLoop(MediaAudioPlayer.DataSource.DATA_SOURCE_URI,R.raw.audio_call_ring,true)
         }
         tvMedia2.setOnClickListener {
-            audioSoundManager?.changeToReceiver()
             ToastUtils.showRoundRectToast("开始播放asset")
+            audioSoundManager?.changeToSpeaker()
             mediaAudioPlayer?.play(MediaAudioPlayer.DataSource.DATA_SOURCE_ASSET,"audio_call_ring.mp3")
         }
         tvMedia3.setOnClickListener {
