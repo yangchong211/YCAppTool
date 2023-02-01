@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yc.bellsvibrations">
 
+    <!--震动-->
     <uses-permission android:name="android.permission.VIBRATE" />
-
+    <!--话筒-->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
 </manifest>
