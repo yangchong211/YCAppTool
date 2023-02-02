@@ -19,7 +19,7 @@ import com.yc.appcontextlib.AppToolUtils;
  *     revise:
  * </pre>
  */
-public class BecomeNoiseHelper {
+public final class BecomeNoiseHelper {
 
     private final Context mContext;
     private final OnBecomeNoiseListener mListener;

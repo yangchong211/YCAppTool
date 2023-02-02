@@ -6,6 +6,9 @@ import android.media.AudioManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.yc.appserver.R
+import com.yc.audiofocus.AudioFocusHelper
+import com.yc.audiofocus.BecomeNoiseHelper
+import com.yc.audiofocus.OnAudioFocusChangeListener
 import com.yc.bellsvibrations.AudioSoundManager
 import com.yc.bellsvibrations.AudioVolumeHelper
 import com.yc.bellsvibrations.MediaAudioPlayer
@@ -33,6 +36,8 @@ class VibratorTestActivity : AppCompatActivity() {
     private var mediaAudioPlayer: MediaAudioPlayer?= null
     private var audioVolumeHelper: AudioVolumeHelper?= null
     private var audioSoundManager: AudioSoundManager?= null
+    private var audioFocus: AudioFocusHelper?=null
+    private var becomeNoiseHelper: BecomeNoiseHelper?=null
 
     companion object{
         fun startActivity(context: Context) {
@@ -56,7 +61,32 @@ class VibratorTestActivity : AppCompatActivity() {
             AudioSoundManager(this.application)
         initView()
         initListener()
+        audioFocus = AudioFocusHelper(this.applicationContext, object : OnAudioFocusChangeListener {
+            override fun onLoss() {
+                LogUtils.i("Log test AudioFocusHelper : 音频焦点永久性丢失（此时应暂停播放）")
+            }
+            override fun onLossTransient() {
+                LogUtils.i("Log test AudioFocusHelper : 音频焦点暂时性丢失（此时应暂停播放）")
+            }
+            override fun onLossTransientCanDuck() {
+                LogUtils.i("Log test AudioFocusHelper : 音频焦点暂时性丢失（此时只需降低音量，不需要暂停播放）")
+            }
+            override fun onGain(lossTransient: Boolean, lossTransientCanDuck: Boolean) {
+                LogUtils.i("Log test AudioFocusHelper : 重新获取到音频焦点 , $lossTransient , $lossTransientCanDuck")
+            }
+        })
+        becomeNoiseHelper = BecomeNoiseHelper(this,object : BecomeNoiseHelper.OnBecomeNoiseListener{
+            override fun onBecomeNoise() {
+                LogUtils.i("Log test AudioFocusHelper : 监听 become noise 事件")
+            }
+        })
+        becomeNoiseHelper?.registerBecomeNoiseReceiver()
         LogUtils.i("Log test info : LogTestActivity is create")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        becomeNoiseHelper?.unregisterBecomeNoiseReceiver()
     }
 
     private fun initView() {
@@ -85,17 +115,20 @@ class VibratorTestActivity : AppCompatActivity() {
         }
         tvMedia1.setOnClickListener {
             ToastUtils.showRoundRectToast("开始播放raw")
-            audioSoundManager?.changeToReceiver()
+            //audioSoundManager?.changeToReceiver()
+            audioFocus?.requestAudioFocus()
             mediaAudioPlayer?.playLoop(MediaAudioPlayer.DataSource.DATA_SOURCE_URI,R.raw.audio_call_ring,true)
         }
         tvMedia2.setOnClickListener {
             ToastUtils.showRoundRectToast("开始播放asset")
-            audioSoundManager?.changeToSpeaker()
-            mediaAudioPlayer?.play(MediaAudioPlayer.DataSource.DATA_SOURCE_ASSET,"audio_call_ring.mp3")
+            //audioSoundManager?.changeToSpeaker()
+            audioFocus?.requestAudioFocus()
+            mediaAudioPlayer?.playLoop(MediaAudioPlayer.DataSource.DATA_SOURCE_ASSET,"audio_call_ring.mp3")
         }
         tvMedia3.setOnClickListener {
             ToastUtils.showRoundRectToast("取消播放")
             mediaAudioPlayer?.stop()
+            audioFocus?.abandonAudioFocus()
         }
         tvMedia4.setOnClickListener {
             if (audioVolumeHelper?.enableRingtone() == true){

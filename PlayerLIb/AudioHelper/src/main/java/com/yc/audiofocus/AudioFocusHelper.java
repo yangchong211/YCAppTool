@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.yc.appcontextlib.AppToolUtils;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 
 /**
  * <pre>
@@ -21,7 +22,7 @@ import com.yc.appcontextlib.AppToolUtils;
  *     revise: 处理音视频通话焦点抢占，处理音视频播放焦点抢占。单独抽离出来做成库
  * </pre>
  */
-public final class AudioFocusHelper {
+public final class AudioFocusHelper implements IAudioFocus {
 
     @Nullable
     private final AudioManager mAudioManager;
@@ -30,11 +31,10 @@ public final class AudioFocusHelper {
 
     private AudioFocusRequest mAudioFocusRequest;
     private AudioManager.OnAudioFocusChangeListener mAudioFocusChangeListener;
-
     private boolean mLossTransient;
     private boolean mLossTransientCanDuck;
-
     private boolean mRequested;
+    private int mCurrentFocus = 0;
 
     /**
      * 创建一个 {@link AudioFocusHelper} 对象。
@@ -65,30 +65,80 @@ public final class AudioFocusHelper {
         mAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
             @Override
             public void onAudioFocusChange(int focusChange) {
-                switch (focusChange) {
-                    case AudioManager.AUDIOFOCUS_LOSS:
-                        mListener.onLoss();
-                        mLossTransient = false;
-                        mLossTransientCanDuck = false;
-                        break;
-                    case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                        mLossTransient = true;
-                        mListener.onLossTransient();
-                        break;
-                    case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
-                        mLossTransientCanDuck = true;
-                        mListener.onLossTransientCanDuck();
-                        break;
-                    case AudioManager.AUDIOFOCUS_GAIN:
-                        mListener.onGain(mLossTransient, mLossTransientCanDuck);
-                        mLossTransient = false;
-                        mLossTransientCanDuck = false;
-                        break;
-                    default:
-                        break;
+                if (mCurrentFocus == focusChange) {
+                    return;
                 }
+                //由于onAudioFocusChange有可能在子线程调用，
+                //故通过此方式切换到主线程去执行
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //处理音频焦点抢占
+                        handleAudioFocusChange(focusChange);
+                    }
+                });
+                mCurrentFocus = focusChange;
             }
         };
+    }
+
+    private void handleAudioFocusChange(int focusChange) {
+        switch (focusChange) {
+            case AudioManager.AUDIOFOCUS_LOSS:
+                //焦点丢失，这个是永久丢失焦点，如被其他播放器抢占
+                mListener.onLoss();
+                mLossTransient = false;
+                mLossTransientCanDuck = false;
+                break;
+            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                //焦点暂时丢失，，如来电
+                mLossTransient = true;
+                mListener.onLossTransient();
+                break;
+            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                //此时需降低音量，瞬间丢失焦点，如通知
+                mLossTransientCanDuck = true;
+                mListener.onLossTransientCanDuck();
+                break;
+            case AudioManager.AUDIOFOCUS_GAIN:
+                //重新获得焦点
+            case AudioManager.AUDIOFOCUS_GAIN_TRANSIENT:
+                //暂时获得焦点
+                mListener.onGain(mLossTransient, mLossTransientCanDuck);
+                mLossTransient = false;
+                mLossTransientCanDuck = false;
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 请求获取音频焦点
+     */
+    @Override
+    public void requestAudioFocus() {
+        if (mCurrentFocus == AudioManager.AUDIOFOCUS_GAIN) {
+            //如果已经是获得焦点，则直接返回
+            return;
+        }
+        requestAudioFocus(AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+    }
+
+    /**
+     * （主动）放弃音频焦点。
+     */
+    @Override
+    public void abandonAudioFocus() {
+        if (mAudioManager == null || !mRequested) {
+            return;
+        }
+        mRequested = false;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            abandonAudioFocusAPI26();
+            return;
+        }
+        mAudioManager.abandonAudioFocus(mAudioFocusChangeListener);
     }
 
     /**
@@ -129,33 +179,13 @@ public final class AudioFocusHelper {
         if (mAudioManager == null) {
             return AudioManager.AUDIOFOCUS_REQUEST_FAILED;
         }
-
         mAudioFocusRequest = new AudioFocusRequest.Builder(durationHint)
                 .setAudioAttributes(new AudioAttributes.Builder()
                         .setLegacyStreamType(streamType)
                         .build())
                 .setOnAudioFocusChangeListener(mAudioFocusChangeListener)
                 .build();
-
         return mAudioManager.requestAudioFocus(mAudioFocusRequest);
-    }
-
-    /**
-     * （主动）放弃音频焦点。
-     */
-    public void abandonAudioFocus() {
-        if (mAudioManager == null || !mRequested) {
-            return;
-        }
-
-        mRequested = false;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            abandonAudioFocusAPI26();
-            return;
-        }
-
-        mAudioManager.abandonAudioFocus(mAudioFocusChangeListener);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -164,34 +194,4 @@ public final class AudioFocusHelper {
         mAudioManager.abandonAudioFocusRequest(mAudioFocusRequest);
     }
 
-    /**
-     * 可用于监听当前应用程序的音频焦点的获取与丢失。
-     */
-    public interface OnAudioFocusChangeListener {
-        /**
-         * 音频焦点永久性丢失（此时应暂停播放）
-         */
-        void onLoss();
-
-        /**
-         * 音频焦点暂时性丢失（此时应暂停播放）
-         */
-        void onLossTransient();
-
-        /**
-         * 音频焦点暂时性丢失（此时只需降低音量，不需要暂停播放）
-         */
-        void onLossTransientCanDuck();
-
-        /**
-         * 重新获取到音频焦点。
-         * <p>
-         * 如果应用因 {@link #onLossTransientCanDuck()} 事件而降低了音量（lossTransientCanDuck 参数为 true），
-         * 那么此时应恢复正常的音量。
-         *
-         * @param lossTransient        指示音频焦点是否是暂时性丢失，如果是，则此时可以恢复播放。
-         * @param lossTransientCanDuck 指示音频焦点是否是可降低音量的暂时性丢失，如果是，则此时只需恢复音量即可。
-         */
-        void onGain(boolean lossTransient, boolean lossTransientCanDuck);
-    }
 }
