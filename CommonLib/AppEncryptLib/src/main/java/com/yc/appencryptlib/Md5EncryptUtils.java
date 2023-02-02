@@ -42,7 +42,7 @@ public final class Md5EncryptUtils {
         byte[] source = str.getBytes();
         String s = null;
         try {
-            MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(source);
             // MD5 的计算结果是一个 128 位的长整数
             byte[] tmp = md.digest();
