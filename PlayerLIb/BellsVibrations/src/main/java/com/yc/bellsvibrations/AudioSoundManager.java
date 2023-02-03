@@ -66,6 +66,32 @@ public class AudioSoundManager  {
     }
 
     /**
+     * 检查A2DPAudio是否通过蓝牙耳机
+     * @return
+     */
+    public boolean isBluetoothA2dpOn(){
+        return mAudioManager.isBluetoothA2dpOn();
+    }
+
+    /**
+     * 检查扬声器是否打开
+     * @return
+     */
+    public boolean isSpeakerphoneOn(){
+        return mAudioManager.isSpeakerphoneOn();
+    }
+
+    /**
+     * 检查线控耳机是否连着；注意这个方法只是用来判断耳机是否是插入状态
+     * 并不能用它的结果来判定当前的Audio是通过耳机输出的，这还依赖于其他条件。
+     * @return
+     */
+    public boolean isWiredHeadsetOn(){
+        return mAudioManager.isWiredHeadsetOn();
+    }
+
+
+    /**
      * 打开扬声器
      */
     public void openSpeaker() {
