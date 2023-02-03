@@ -15,7 +15,7 @@ import com.yc.appcontextlib.AppToolUtils;
  *     @author yangchong
  *     blog  : https://github.com/yangchong211
  *     time  : 2018/11/9
- *     desc  : 监听来电
+ *     desc  : Audio输出通道切换
  *     revise:
  * </pre>
  */
@@ -38,11 +38,12 @@ public final class BecomeNoiseHelper {
 
         mContext = context.getApplicationContext();
         mListener = listener;
-
         mBecomeNoiseReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                mListener.onBecomeNoise();
+                if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(intent.getAction())) {
+                    mListener.onBecomeNoise();
+                }
             }
         };
     }
@@ -75,6 +76,7 @@ public final class BecomeNoiseHelper {
     public interface OnBecomeNoiseListener {
         /**
          * 当监听到 become noise 事件时会调用该方法，此时应暂停播放。
+         * Audio输出通道切换：Audio输出通道切换的典型场景—— 用耳机听音乐时，拔出耳机
          */
         void onBecomeNoise();
     }

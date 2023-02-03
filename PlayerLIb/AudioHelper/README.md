@@ -53,11 +53,21 @@
     - 音视频失去焦点abandonAudioFocus()方法，这会通知系统您的App不再需要音频焦点，并移除相关OnAudioFocusChangeListener的注册。如果释放的是短暂音调焦点，那么被打断的音频会被继续播放。
 
 
+#### 2.4 输出通道切换监听
+- Audio 输出通道有很多
+    - Speaker、headset、bluetooth A2DP等。通话或播放音乐等使用Audio输出过程中，可能发生Audio输出通道的切换。
+- 输出通道切换的场景
+    - 比如，插入有线耳机播放音乐时，声音是从耳机发出的；而此时拔出耳机，Audio输出通道会发生切换。
+    - 如果音乐播放器不做处理，Audio输出是被切换到扬声器的，声音直接从Speaker发出。
+
+
+
 ### 03.Api调用说明
 #### 3.1 依赖说明
 - 如何依赖该库
     ```
-    
+    //音视频焦点抢占库
+    implementation 'com.zuoyebang.iot.union:audio_helper:0.0.1'
     ```
 
 #### 3.2 该库API说明
@@ -97,6 +107,8 @@
 
 
 ### 04.遇到的坑分析
+
+
 
 
 ### 05.该库性能分析
