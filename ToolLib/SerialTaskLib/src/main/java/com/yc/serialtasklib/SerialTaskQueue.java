@@ -8,6 +8,12 @@ import android.util.Log;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
+/**
+ *    @author yangchong
+ *    GitHub : https://github.com/yangchong211/YCAppTool
+ *    time   : 2017/11/30
+ *    desc   : 顺序task任务管理器
+ */
 public final class SerialTaskQueue {
     
     private final ArrayDeque<AbsWork> mWorks = new ArrayDeque<>();

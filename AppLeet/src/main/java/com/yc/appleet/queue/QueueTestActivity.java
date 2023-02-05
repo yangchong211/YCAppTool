@@ -58,7 +58,15 @@ public class QueueTestActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == tv1) {
-
+            ArrayQueue arrayQueue = new ArrayQueue(20);
+            arrayQueue.enqueue("1");
+            arrayQueue.enqueue("2");
+            arrayQueue.enqueue("3");
+            arrayQueue.enqueue("4");
+            arrayQueue.enqueue("5");
+            arrayQueue.print();
+            arrayQueue.dequeue();
+            arrayQueue.print();
         } else if (v == tv2) {
 
         } else if (v == tv3) {

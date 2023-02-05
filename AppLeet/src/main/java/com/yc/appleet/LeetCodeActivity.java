@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.yc.appleet.array.ArrayTestActivity;
 import com.yc.appleet.code.CodeTestActivity;
 import com.yc.appleet.node.NodeTestActivity;
+import com.yc.appleet.queue.QueueTestActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;
 
@@ -77,6 +78,8 @@ public class LeetCodeActivity extends BaseActivity implements View.OnClickListen
         tv1.setOnClickListener(this);
         tv2.setOnClickListener(this);
         tv3.setOnClickListener(this);
+        tv4.setOnClickListener(this);
+        tv5.setOnClickListener(this);
     }
 
     @Override
@@ -95,6 +98,12 @@ public class LeetCodeActivity extends BaseActivity implements View.OnClickListen
         } else if (v == tv3){
             //链表
             startActivity(NodeTestActivity.class);
+        } else if (v == tv4){
+            //栈
+
+        } else if (v == tv5){
+            //队列
+            startActivity(QueueTestActivity.class);
         }
     }
 }
