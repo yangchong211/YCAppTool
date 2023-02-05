@@ -112,6 +112,7 @@ public class RenderTextureView extends TextureView implements ISurfaceView {
      */
     @Override
     public Bitmap doScreenShot() {
+        //此方法返回返回关联表面纹理内容的位图表示形式
         return getBitmap();
     }
 
@@ -198,6 +199,12 @@ public class RenderTextureView extends TextureView implements ISurfaceView {
         }
     };
 
-
-
+    /**
+     * 此方法返回此视图使用的 SurfaceTexture
+     * @return
+     */
+    @Override
+    public SurfaceTexture getSurfaceTexture() {
+        return super.getSurfaceTexture();
+    }
 }
