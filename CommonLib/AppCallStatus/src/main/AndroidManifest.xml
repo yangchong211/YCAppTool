@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.appcallstatus">
+
+    <!--监听呼出电话-->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <!--监听来电-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--拨打电话-->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+
+    <application>
+        <!--<receiver android:name=".MyPhoneReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE"/>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>-->
+    </application>
+
+</manifest>
