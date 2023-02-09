@@ -193,7 +193,10 @@ https://github.com/Kyson/AndroidGodEye/blob/master/README_zh.md
     - https://www.jianshu.com/p/4d34edb6b054
 
 
-
+### Java笔记
+- Java编程思想
+    - https://github.com/quanke/think-in-java
+    - https://github.com/apachecn/thinking-in-java-zh
 
 
 
