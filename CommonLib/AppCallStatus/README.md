@@ -35,7 +35,7 @@
 
 
 #### 2.3 如何去电监听
-- 如何去电监听
+- 如何去电监听【静态注册】
     - 这个时候通过广播来实现。需要在清单文件中注册。
     ``` xml
     <receiver android:name=".PhoneReceiver">
@@ -45,7 +45,6 @@
         </intent-filter>
     </receiver>
     ```
-
 
 
 
@@ -60,7 +59,23 @@
 #### 3.2 如何使用Api
 - api调用如下所示，直接拿来用即可
     ``` java
+    PhoneManager.getInstance().setOnPhoneListener(new OnPhoneListener() {
+        @Override
+        public void callIdle() {
+            ToastUtils.showRoundRectToast("挂断");
+        }
 
+        @Override
+        public void callOffHook() {
+            ToastUtils.showRoundRectToast("接听");
+        }
+
+        @Override
+        public void callRunning() {
+            ToastUtils.showRoundRectToast("响铃");
+        }
+    });
+    PhoneManager.getInstance().registerPhoneStateListener(this);
     ```
 
 
@@ -77,4 +92,5 @@
 #### 5.1 问题思考一下
 - 安卓监听打电话（去电）
     - https://www.jianshu.com/p/b1f5b9d85d6d
+    - https://m.xp.cn/b.php/105580.html
 

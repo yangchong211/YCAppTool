@@ -135,4 +135,5 @@ dependencies {
     implementation project(path: ':CompressServer')
     implementation project(path: ':AppCompress')
     implementation project(path: ':ImageToolLib')
+    implementation project(path: ':AppCallStatus')
 }

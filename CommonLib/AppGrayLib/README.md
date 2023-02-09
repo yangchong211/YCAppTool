@@ -162,3 +162,4 @@
     - 1、使用TextureView。2、看下这个SurfaceView是否可以设置滤镜，正常都是一些三方或者自制的播放器。
 
 
+- https://juejin.cn/post/7167300200921301028
