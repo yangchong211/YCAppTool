@@ -79,4 +79,5 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
             AnimationActiviy.startActivity(this);
         }
     }
+
 }
