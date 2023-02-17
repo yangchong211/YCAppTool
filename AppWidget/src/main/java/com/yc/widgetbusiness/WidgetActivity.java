@@ -14,6 +14,7 @@ import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.widgetbusiness.banner.BannerActivity;
 import com.yc.widgetbusiness.blur.BlurActivity;
 import com.yc.widgetbusiness.chart.PreActivity;
+import com.yc.widgetbusiness.event.EventActivity;
 import com.yc.widgetbusiness.floatpage.FloatActivity;
 import com.yc.widgetbusiness.image.ImageViewActivity;
 import com.yc.widgetbusiness.red.RedViewActivity;
@@ -115,7 +116,7 @@ public class WidgetActivity extends AppCompatActivity {
         tvWidgetBanner.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                startActivity(new Intent(WidgetActivity.this, BannerActivity.class));
+                startActivity(new Intent(WidgetActivity.this, EventActivity.class));
             }
         });
     }

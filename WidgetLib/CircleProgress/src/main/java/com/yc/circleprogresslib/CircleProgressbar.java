@@ -191,7 +191,7 @@ public class CircleProgressbar extends AppCompatTextView {
     /**
      * 进度更新task。
      */
-    private Runnable progressChangeTask = new Runnable() {
+    private final Runnable progressChangeTask = new Runnable() {
         @Override
         public void run() {
             removeCallbacks(this);

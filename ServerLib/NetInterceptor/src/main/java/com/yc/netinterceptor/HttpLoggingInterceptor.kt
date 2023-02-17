@@ -229,7 +229,7 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
 
     private fun logHeader(headers: Headers, i: Int) {
         val value = if (headers.name(i) in headersToRedact) " " else headers.value(i)
-        logger.log(headers.name(i) + ": " + value)
+        logger.log("Header" + headers.name(i) + ": " + value)
     }
 
     private fun isText(mediaType: MediaType): Boolean {

@@ -33,6 +33,7 @@
         <activity android:name=".blur.BlurActivity"/>
         <activity android:name=".banner.MeBannerActivity"/>
         <activity android:name=".banner.BannerActivity"/>
+        <activity android:name=".event.EventActivity"/>
     </application>
 
 
