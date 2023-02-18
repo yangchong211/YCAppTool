@@ -37,6 +37,13 @@ class MmkvCacheImpl(builder: Builder) : ICacheable {
     private var mmkv: MMKV = MMKV.mmkvWithID(builder.fileName) ?: MMKV.defaultMMKV()!!
     private var fileName: String? = builder.fileName
 
+    companion object {
+        private var rootPath: String? = null
+        fun initRootPath(path: String) {
+            rootPath = MMKV.initialize(path)
+        }
+    }
+
     class Builder {
         var fileName: String? = null
         fun setFileId(name: String): Builder {
@@ -108,7 +115,7 @@ class MmkvCacheImpl(builder: Builder) : ICacheable {
 
     override fun clearData() {
         fileName?.let {
-            File(CacheInitHelper.getMmkvPath(), it).apply {
+            File(rootPath, it).apply {
                 if (exists()) {
                     Log.d("DiskCacheImpl","before fileSize:" +
                             "${this.length() / 1024}K,path:${this.absolutePath}")
@@ -117,7 +124,7 @@ class MmkvCacheImpl(builder: Builder) : ICacheable {
         }
         mmkv.clearAll()
         fileName?.let {
-            File(CacheInitHelper.getMmkvPath(), it).apply {
+            File(rootPath, it).apply {
                 if (exists()) {
                     Log.d("DiskCacheImpl","after fileSize:" +
                             "${this.length() / 1024}K,path:${this.absolutePath}")

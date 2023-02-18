@@ -31,6 +31,8 @@ dependencies {
     implementation rootProject.ext.dependencies["annotation"]
     implementation rootProject.ext.dependencies["datastore"]
     implementation rootProject.ext.dependencies["coreKtx"]
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    implementation(rootProject.ext.dependencies["gson"])
 
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':EventUploadLib')

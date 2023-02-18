@@ -1,6 +1,7 @@
 package com.yc.store
 
 import android.app.Application
+import com.yc.store.config.CacheInitHelper
 import com.yc.store.disk.LruDiskCacheImpl
 import com.yc.store.lru.LruMemoryCacheImpl
 import com.yc.store.memory.MemoryCacheImpl
@@ -59,6 +60,8 @@ class StoreToolHelper {
         }
     }
 
+
+
     val app: Application?
         get() = if (sApplication != null) {
             sApplication
@@ -89,6 +92,8 @@ class StoreToolHelper {
         if (mmkvCache == null) {
             mmkvCache = BaseDataCache()
             val builder = MmkvCacheImpl.Builder()
+            val mmkvPath = CacheInitHelper.getMmkvPath()
+            MmkvCacheImpl.initRootPath(mmkvPath)
             builder.fileName = "ycMmkv"
             val diskCacheImpl = builder.build()
             mmkvCache?.setCacheImpl(diskCacheImpl)

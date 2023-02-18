@@ -1,5 +1,10 @@
 package com.yc.store
 
+import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonParser
+import com.google.gson.JsonSyntaxException
+
 
 /**
  * <pre>
@@ -80,5 +85,60 @@ open class BaseDataCache : ICacheable {
         cacheImpl.clearData()
     }
 
+
+    /**
+     * 下面这些是存储对象数据
+     */
+
+    fun <T : Any?> saveKey(key: String, value: T?) {
+        if (value == null) {
+            cacheImpl.removeKey(key)
+        } else {
+            val jsonStr = Gson().toJson(value)
+            saveString(key, jsonStr)
+        }
+    }
+
+
+    inline fun <reified T : Any?> readKey(key: String): T? {
+        val str = readString(key, "")
+        return try {
+            val gson = Gson()
+            gson.fromJson(str, T::class.java)
+        } catch (jse: JsonSyntaxException) {
+            null
+        }
+    }
+
+    inline fun <reified T : Any> readKeyList(key: String): List<T> {
+        val str = readString(key, "")
+        val list: MutableList<T> = ArrayList()
+        try {
+            if (str.isNotEmpty()) {
+                val gson = Gson()
+                val arrayResult: JsonArray = JsonParser().parse(str).asJsonArray
+                for (jsonElement in arrayResult) {
+                    list.add(gson.fromJson(jsonElement, T::class.java))
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return list.toList()
+    }
+
+    inline fun <reified T : Any?> readKeyWithType(key: String, type: Class<T>): T? {
+        val str = readString(key, "")
+        return try {
+            Gson().fromJson(str, T::class.java)
+        } catch (jse: JsonSyntaxException) {
+            null
+        }
+    }
+
+    inline fun <reified T : Any> readKeyWithDefault(key: String, default: T?): T? {
+        val str = readString(key, "")
+        return Gson().fromJson(str, T::class.java)
+    }
 
 }
