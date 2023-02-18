@@ -83,8 +83,8 @@ public class ActivityManager implements IActivityManager<Activity> {
         }
 
         for (int i = 0; i < mActivityStacks.size(); i++) {
-            if (mActivityStacks.get(i).getClass().getSimpleName()
-                    .equals(clazz.getSimpleName())) {
+            String simpleName = clazz.getSimpleName();
+            if (mActivityStacks.get(i).getClass().getSimpleName().equals(simpleName)) {
                 return true;
             }
         }

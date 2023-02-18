@@ -8,6 +8,14 @@
 
 
 ### 01.基础概念
+#### 1.0 业务场景说明
+- 业务场景说明
+    - 对所有的Activity进行栈管理，方便我们对某一个Activity操作或者是对所有的Activity进行操作。还要做到对制定Activity生命周期监听！
+    - 比如：在非四大组件的逻辑中，可以通过全局栈管理获取到栈顶Activity引用上下文
+    - 比如：双击推出App操作，使用栈管理可以finish掉所有Activity，然后在exit推出。
+
+
+
 #### 1.1 掌握基础概念
 - activity任务栈概念
     - Android是通过将之前的activity组件和新被激活的activity组件放入同一个任务栈来实现这个功能的。
@@ -88,7 +96,7 @@
 - 如果想监听某个单独activity的生命周期，该怎么做呢？
     ``` java
     //监听某个activity的生命周期，完全解耦合
-    ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.class, new ActivityLifecycleListener() {
+    ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.class, new AbsLifecycleListener() {
         @Override
         public void onActivityCreated(@Nullable Activity activity, Bundle savedInstanceState) {
             super.onActivityCreated(activity, savedInstanceState);
@@ -112,5 +120,17 @@
 ### 05.其他问题说明
 #### 5.1 问题思考一下
 - 针对一个App有多个任务栈，如何处理栈的查找逻辑？比如A，B栈，A栈有6个元素，B栈有1个元素
+
+
+#### 5.2 Activity栈设计
+
+
+
+
+
+
+
+
+
 
 
