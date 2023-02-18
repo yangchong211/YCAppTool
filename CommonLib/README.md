@@ -18,7 +18,7 @@
 - 16.Lru内存缓存库
 - 17.Lru磁盘缓存库
 - 18.磁盘分区库
-
+- 19.来电和去电监听
 
 
 ### 01.框架公共组件层
@@ -146,64 +146,19 @@
 
 
 ### 05.通用存储库
-- 通用存储库，支持二级缓存，LRU缓存，磁盘缓存(可以使用sp，mmkv，或者DiskLruCache)。不管你使用那种方式的存储，都是一套通用的api，使用几乎是零成本。
-- 第一步：通用存储库初始化
-    ``` java
-    CacheConfig.Builder builder = CacheConfig.Companion.newBuilder();
-    //设置是否是debug模式
-    CacheConfig cacheConfig = builder.debuggable(BuildConfig.DEBUG)
-            //设置外部存储根目录
-            .extraLogDir(null)
-            //设置lru缓存最大值
-            .maxCacheSize(100)
-            //内部存储根目录
-            .logDir(null)
-            //创建
-            .build();
-    CacheInitHelper.INSTANCE.init(MainApplication.getInstance(),cacheConfig);
-    //最简单的初始化
-    //CacheInitHelper.INSTANCE.init(CacheConfig.Companion.newBuilder().build());
-    ```
-- 第二步：存储数据和获取数据
-    ```
-    //存储数据
-    dataCache.saveBoolean("cacheKey1",true);
-    dataCache.saveFloat("cacheKey2",2.0f);
-    dataCache.saveInt("cacheKey3",3);
-    dataCache.saveLong("cacheKey4",4);
-    dataCache.saveString("cacheKey5","doubi5");
-    dataCache.saveDouble("cacheKey6",5.20);
-    
-    //获取数据
-    boolean data1 = dataCache.readBoolean("cacheKey1", false);
-    float data2 = dataCache.readFloat("cacheKey2", 0);
-    int data3 = dataCache.readInt("cacheKey3", 0);
-    long data4 = dataCache.readLong("cacheKey4", 0);
-    String data5 = dataCache.readString("cacheKey5", "");
-    double data6 = dataCache.readDouble("cacheKey5", 0.0);
-    ```
-- 第三步：一些存储说明
-    - 关于设置磁盘缓存的路径，需要注意一些问题。建议使用该库默认的路径
-    ``` java
-    /**
-     * log路径，通常这个缓存比较私有的内容
-     * 比如sp，mmkv，存储的用户数据
-     * 内部存储根目录，举个例子：
-     * file:data/user/0/包名/files
-     * cache:/data/user/0/包名/cache
-     */
-    val logDir: String?
-    
-    /**
-     * 额外的log路径，通常缓存一些不私密的内存
-     * 比如缓存图片，缓存视频，缓存下载文件，缓存日志等
-     *
-     * 外部存储根目录，举个例子
-     * files:/storage/emulated/0/Android/data/包名/files
-     * cache:/storage/emulated/0/Android/data/包名/cache
-     */
-    val extraLogDir: File?
-    ```
+- 业务背景：
+    - 项目中有用到sp，mmkv，file，内存缓存，缓存的使用场景有很多，那么能否可以打造一套通用api的缓存方案。
+- 通用缓存方案：
+    - 不管是sp，mmkv，lru，disk，file，内存缓存，都使用同一套api。大大简化了磁盘缓存应用流程……
+- 无缝切换：
+    - 常见一套api+不同接口实现+代理类+工厂模型
+- 方案替代稳定性：
+    - 该库异常上报，容错性，已经暴露外部config配置，打造通用的轮子
+- 内部开源该库：
+    - 作为技术沉淀，当作专项来推动进展。高复用低耦合，便于拓展，可快速移植，解决各个项目使用内存缓存，sp，mmkv，sql，lru，DataStore的凌乱。抽象一套统一的API接口。
+
+
+
 
 
 ### 06.Log日志打印库
@@ -494,6 +449,14 @@
 
 
 
-
+### 19.来电和去电监听
+- 业务场景说明
+    - 在App进行音视频聊天的时，这个时候来电了，电话接通后，需要关闭音视频聊天。这个时候就需要监听电话来电和去电状态。
+- 如何依赖该库
+    ``` java
+    
+    ```
+- 相关文档连接
+    - [ReadMe]()
 
 
