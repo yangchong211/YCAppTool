@@ -210,6 +210,16 @@ https://github.com/Kyson/AndroidGodEye/blob/master/README_zh.md
 
 
 
+- 如何查看ANR信息？如何查看App发生ANR日志文件？
+- 捕获异常，是如何执行到Thread中dispatchUncaughtException这个方法
+- 什么是fd文件？
+- 线程为何跟异常联系在一起。主线程能捕获子线程异常嘛。
+
+
+
+
+
+
 备注：预约武汉看牙，具体未定。预约成功后插入计划之中
 
 2月27日，周一
