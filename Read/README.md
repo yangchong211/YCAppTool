@@ -198,7 +198,8 @@ https://github.com/Kyson/AndroidGodEye/blob/master/README_zh.md
 - 货拉拉Android稳定性治理
     - https://juejin.cn/post/7100743641953468452
 
-
+- 动画库
+    - https://github.com/bytedance/AlphaPlayer/tree/master/android
 
 
 
@@ -234,7 +235,7 @@ https://github.com/Kyson/AndroidGodEye/blob/master/README_zh.md
 
 3月1日，周三
 1.上午去薇拉了解拍婚纱照，试妆
-2.下午武汉植物园看郁金香
+2.下午去橙子婚纱摄影
 3.预约傍晚去求婚，江边夜景，第三方布置
 
 3月2日【农历2月11】，周四

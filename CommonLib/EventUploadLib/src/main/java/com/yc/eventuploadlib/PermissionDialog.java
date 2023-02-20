@@ -20,6 +20,11 @@ public abstract class PermissionDialog {
         permissionDialog = dialog;
     }
 
+    /**
+     * 弹出说明文案弹窗
+     * @param type                  这个type主要是区分是什么隐私权限的弹窗
+     * @param listener              这个是弹窗回调
+     */
     public static void permissionDialog(int type , PermissionListener listener) {
         if (permissionDialog != null) {
             permissionDialog.showPermissionDialog(type,listener);
