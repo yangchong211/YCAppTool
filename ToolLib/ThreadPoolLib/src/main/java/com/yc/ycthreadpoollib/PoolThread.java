@@ -33,20 +33,6 @@ import com.yc.ycthreadpoollib.utils.DelayTaskExecutor;
 import com.yc.ycthreadpoollib.utils.ThreadToolUtils;
 import com.yc.ycthreadpoollib.wrapper.CallableWrapper;
 import com.yc.ycthreadpoollib.wrapper.RunnableWrapper;
-import com.yc.ycthreadpoollib.builder.CachedBuilderImpl;
-import com.yc.ycthreadpoollib.builder.FixedBuilderImpl;
-import com.yc.ycthreadpoollib.builder.ScheduledBuilderImpl;
-import com.yc.ycthreadpoollib.builder.SingleBuilderImpl;
-import com.yc.ycthreadpoollib.callback.AsyncCallback;
-import com.yc.ycthreadpoollib.callback.ThreadCallback;
-import com.yc.ycthreadpoollib.config.ThreadConfigs;
-import com.yc.ycthreadpoollib.deliver.AndroidDeliver;
-import com.yc.ycthreadpoollib.deliver.JavaDeliver;
-import com.yc.ycthreadpoollib.factory.MyThreadFactory;
-import com.yc.ycthreadpoollib.utils.DelayTaskExecutor;
-import com.yc.ycthreadpoollib.utils.ThreadToolUtils;
-import com.yc.ycthreadpoollib.wrapper.CallableWrapper;
-import com.yc.ycthreadpoollib.wrapper.RunnableWrapper;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
@@ -85,7 +71,7 @@ public final class PoolThread implements Executor {
      * 确保多线程配置没有冲突
      * ThreadLocal是线程内部的数据存储类，通过它可以在指定线程中存储数据，其他线程则无法获取到
      */
-    private ThreadLocal<ThreadConfigs> local;
+    private ThreadLocal<ThreadConfigs> threadLocal;
 
     /**
      * 构造对象
@@ -107,7 +93,7 @@ public final class PoolThread implements Executor {
         this.defName = name;
         this.defCallback = callback;
         this.defDeliver = deliver;
-        this.local = new ThreadLocal<>();
+        this.threadLocal = new ThreadLocal<>();
     }
 
 
@@ -273,9 +259,9 @@ public final class PoolThread implements Executor {
      * 销毁的时候可以调用这个方法
      */
     public void close() {
-        if (local != null) {
-            local.remove();
-            local = null;
+        if (threadLocal != null) {
+            threadLocal.remove();
+            threadLocal = null;
         }
     }
 
@@ -312,7 +298,7 @@ public final class PoolThread implements Executor {
      * 重置本地配置，置null
      */
     private synchronized void resetLocalConfigs() {
-        local.set(null);
+        threadLocal.set(null);
     }
 
 
@@ -323,13 +309,13 @@ public final class PoolThread implements Executor {
      * @return
      */
     private synchronized ThreadConfigs getLocalConfigs() {
-        ThreadConfigs configs = local.get();
+        ThreadConfigs configs = threadLocal.get();
         if (configs == null) {
             configs = new ThreadConfigs();
             configs.name = defName;
             configs.callback = defCallback;
             configs.deliver = defDeliver;
-            local.set(configs);
+            threadLocal.set(configs);
         }
         return configs;
     }
