@@ -4,6 +4,8 @@ package com.yc.appmonitor;
 import android.content.Intent;
 import android.view.View;
 
+import com.yc.appmonitor.apm.ApmTestActivity;
+import com.yc.appmonitor.crash.CrashTestActivity;
 import com.yc.appmonitor.net.NetworkActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -11,8 +13,6 @@ import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;
 import com.yc.monitorspeed.ConnectionActivity;
 import com.yc.monitortimelib.TimeMonitorHelper;
-import com.yc.netlib.ui.NetRequestActivity;
-import com.yc.netlib.utils.NetworkTool;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toollib.crash.CrashListActivity;
 import com.yc.toolutils.click.PerfectClickListener;

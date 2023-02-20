@@ -1,4 +1,4 @@
-package com.yc.appmonitor;
+package com.yc.appmonitor.crash;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.appmonitor.R;
 import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.toollib.crash.CrashListActivity;
 

@@ -108,7 +108,7 @@
             android:layout_marginTop="@dimen/dp20"
             app:rRadius="@dimen/dp20"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_crash_test"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_net_speed"/>
 
         <com.yc.roundcorner.view.RoundTextView
             android:id="@+id/tv_net_http"
@@ -122,8 +122,7 @@
             android:layout_marginTop="@dimen/dp20"
             app:rRadius="@dimen/dp20"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_crash_test"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/tv_apm_test"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

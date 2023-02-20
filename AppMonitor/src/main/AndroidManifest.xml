@@ -18,13 +18,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yc.appmonitor.CrashTestActivity"
+            android:name="com.yc.appmonitor.crash.CrashTestActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.yc.appmonitor.ApmTestActivity"
+            android:name="com.yc.appmonitor.apm.ApmTestActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.yc.appmonitor.BlockListActivity"
+            android:name="com.yc.appmonitor.apm.BlockListActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.yc.appmonitor.net.NetworkActivity"

@@ -1,14 +1,13 @@
-package com.yc.appmonitor
+package com.yc.appmonitor.apm
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import com.yc.appmonitor.R
 import com.yc.toastutils.ToastUtils
-import com.yc.toollib.crash.CrashListActivity
 import com.yc.toolutils.AppLogUtils
 import com.yc.toolutils.StackTraceUtils
 import okhttp3.*
