@@ -51,6 +51,10 @@ class SpCacheImpl(builder: Builder) : ICacheable {
         }
     }
 
+    /**
+     * apply
+     * commit
+     */
     override fun saveInt(key: String, value: Int) {
         sp?.edit()?.putInt(key, value)?.apply()
     }

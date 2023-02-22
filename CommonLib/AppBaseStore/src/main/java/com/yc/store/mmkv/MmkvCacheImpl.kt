@@ -34,6 +34,9 @@ import java.io.File
  */
 class MmkvCacheImpl(builder: Builder) : ICacheable {
 
+    /**
+     * 通过mmkvWithID创建指定路径的文件
+     */
     private var mmkv: MMKV = MMKV.mmkvWithID(builder.fileName) ?: MMKV.defaultMMKV()!!
     private var fileName: String? = builder.fileName
 
@@ -107,6 +110,31 @@ class MmkvCacheImpl(builder: Builder) : ICacheable {
 
     override fun removeKey(key: String) {
         mmkv.removeValueForKey(key)
+    }
+
+    /**
+     * MMKV的主要缺点就在于它不支持getAll
+     * MMKV都是按字节进行存储的，实际写入文件把类型擦除了，这也是MMKV不支持getAll的原因
+     *
+     * 如何让MMKV支持getAll?
+     * 既然MMKV不支持getAll的原因是因为类型被擦除了，那最简单的思路就是加上类型
+     */
+    private fun getAll(): Map<String, Any> {
+        val keys = mmkv.allKeys()
+        val map = mutableMapOf<String, Any>()
+        keys?.forEach {
+            if (it.contains("@")) {
+                val typeList = it.split("@")
+                when (typeList[typeList.size - 1]) {
+                    String::class.simpleName -> map[it] = mmkv.getString(it, "") ?: ""
+                    Int::class.simpleName -> map[it] = mmkv.getInt(it, 0)
+                    Long::class.simpleName -> map[it] = mmkv.getLong(it, 0L)
+                    Float::class.simpleName -> map[it] = mmkv.getFloat(it, 0f)
+                    Boolean::class.simpleName -> map[it] = mmkv.getBoolean(it, false)
+                }
+            }
+        }
+        return map
     }
 
     override fun totalSize(): Long {

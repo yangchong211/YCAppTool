@@ -45,7 +45,7 @@ class AppBatteryInfo {
         fun buildBattery(
             status: Int, health: Int, level: Int, scale: Int,
             plugged: Int, voltage: Int, temperature: Int,
-            technology: String
+            technology: String?
         ): AppBatteryInfo {
             val batteryInfo = AppBatteryInfo()
             batteryInfo.status = getStatus(status)
@@ -53,7 +53,7 @@ class AppBatteryInfo {
             batteryInfo.level = level
             batteryInfo.scale = scale
             batteryInfo.temperature = temperature
-            batteryInfo.technology = technology
+            batteryInfo.technology = technology?:""
             batteryInfo.voltage = voltage
             batteryInfo.plugged = getPlugged(plugged)
             val dateFormat = SimpleDateFormat(
