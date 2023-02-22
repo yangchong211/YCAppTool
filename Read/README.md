@@ -66,6 +66,9 @@
 ### 00.大厂分享
 - 抖音：https://juejin.cn/team/6930545192860647431/posts
 - https://juejin.cn/post/7124180647958020104
+- 自定义 library loader
+    - https://github.com/KeepSafe/ReLinker
+
 
 
 ### 01.事件总线

@@ -6,12 +6,12 @@ ext {
     isAnimApplication = false
 
     android = [
-            compileSdkVersion: 29,
+            compileSdkVersion: 30,
             buildToolsVersion: "29.0.0",
             minSdkVersion    : 17,
             targetSdkVersion : 29,
-            versionCode      : 22,
-            versionName      : "1.8.2"    //必须是int或者float，否则影响线上升级
+            versionCode      : 23,
+            versionName      : "1.8.3"    //必须是int或者float，否则影响线上升级
     ]
 
     //AndroidX系列
