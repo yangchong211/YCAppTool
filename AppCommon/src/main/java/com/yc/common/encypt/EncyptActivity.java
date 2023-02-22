@@ -129,7 +129,7 @@ public class EncyptActivity extends BaseActivity implements View.OnClickListener
     private void md5() {
         String string = "yangchong";
         //对字符串md5加密
-        String md1 = Md5EncryptUtils.getMd5(string);
+        String md1 = Md5EncryptUtils.getMD5(string);
         AppLogUtils.d("md5计算字符串1: " + md1);
         //对字符串md5加密
         String md2 = Md5EncryptUtils.encryptMD5ToString(string);

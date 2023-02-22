@@ -27,6 +27,7 @@
         <activity android:name=".tab.VpTabActivity"/>
         <activity android:name=".encypt.EncyptActivity"/>
         <activity android:name=".image.ImageActivity"/>
+        <activity android:name=".cache.CacheActivity"/>
     </application>
 
 

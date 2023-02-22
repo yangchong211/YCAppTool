@@ -11,18 +11,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.yc.activitymanager.ActivityLifecycleListener;
+import com.yc.activitymanager.AbsLifecycleListener;
 import com.yc.activitymanager.ActivityManager;
 import com.yc.apploglib.AppLogHelper;
 import com.yc.apploglib.config.AppLogFactory;
 import com.yc.apploglib.printer.AbsPrinter;
 import com.yc.apppermission.PermissionGroup;
 import com.yc.apppermission.PermissionHelper;
+import com.yc.apppermission.PermissionResultListener;
 import com.yc.apppermission.PermissionUtils;
 import com.yc.appprocesslib.AppStateLifecycle;
 import com.yc.appprocesslib.StateListener;
-import com.yc.apprestartlib.RestartAppHelper;
-import com.yc.apprestartlib.RestartFactory;
+import com.yc.apprestartlib.RestartManager;
+import com.yc.common.cache.CacheActivity;
 import com.yc.common.encypt.EncyptActivity;
 import com.yc.common.file.FileActivity;
 import com.yc.common.image.ImageActivity;
@@ -37,6 +38,7 @@ import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.store.BaseDataCache;
 import com.yc.store.StoreToolHelper;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppActivityUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppInfoUtils;
 import org.jetbrains.annotations.NotNull;
@@ -46,11 +48,6 @@ import java.util.List;
 
 public class CommonActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private BaseDataCache dataCache;
-    private BaseDataCache mmkvCache;
-    private BaseDataCache memoryCache;
-    private BaseDataCache lruMemoryCache;
-    private BaseDataCache lruDiskCache;
 
     /**
      * 开启页面
@@ -73,7 +70,6 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_main);
         init();
-        initCache();
         AppStateLifecycle.getInstance().registerStateListener(stateListener);
         FragmentManager.Companion.getInstance().registerActivityLifecycleListener(this,lifecycleListener);
     }
@@ -108,14 +104,6 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
             super.onFragmentDestroyed(fm, f);
         }
     };
-
-    private void initCache() {
-        dataCache = StoreToolHelper.getInstance().getSpCache();
-        mmkvCache = StoreToolHelper.getInstance().getMmkvDiskCache();
-        memoryCache = StoreToolHelper.getInstance().getMemoryCache();
-        lruMemoryCache = StoreToolHelper.getInstance().getLruMemoryCache();
-        lruDiskCache = StoreToolHelper.getInstance().getLruDiskCache();
-    }
 
     private void init() {
         findViewById(R.id.btn_log1).setOnClickListener(this);
@@ -164,32 +152,25 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         } else if (id == R.id.btn_activity) {
             testActivity();
         }  else if (id == R.id.btn_sp1) {
-            sp1();
+            startActivity(new Intent(this, CacheActivity.class));
         }  else if (id == R.id.btn_sp2) {
-            sp2();
         }  else if (id == R.id.btn_sp3) {
             FileExplorerActivity.startActivity(this);
         }  else if (id == R.id.btn_sp4) {
         }  else if (id == R.id.btn_mkkv1) {
-            mmvk1();
         } else if (id == R.id.btn_mkkv2) {
-            mmvk2();
         } else if (id == R.id.btn_mkkv3) {
-            mmvk3();
         }  else if (id == R.id.btn_disk1) {
-            disk1();
         } else if (id == R.id.btn_disk2) {
-            disk2();
         } else if (id == R.id.btn_disk3) {
-            disk3();
         } else if (id == R.id.btn_restart1) {
-            RestartAppHelper.restartApp(this,RestartFactory.SERVICE);
+            RestartManager.getInstance().restartApp(this, RestartManager.ALARM);
         }else if (id == R.id.btn_restart2) {
-            RestartAppHelper.restartApp(this,RestartFactory.ALARM);
+            RestartManager.getInstance().restartApp(this, RestartManager.SERVICE);
         }else if (id == R.id.btn_restart3) {
-            RestartAppHelper.restartApp(this,RestartFactory.LAUNCHER);
+            RestartManager.getInstance().restartApp(this, RestartManager.LAUNCHER);
         }else if (id == R.id.btn_restart4) {
-            RestartAppHelper.restartApp(this,RestartFactory.MANIFEST);
+            RestartManager.getInstance().restartApp(this, RestartManager.MANIFEST);
         }else if (id == R.id.btn_intent) {
             intentLog();
         } else if (id == R.id.btn_4) {
@@ -199,7 +180,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
             if (hasPermissions){
                 ToastUtils.showRoundRectToast("打电话");
             } else {
-                PermissionHelper.getInstance().requestPermission(this, PermissionGroup.PHONE, 100, new PermissionHelper.PermissionResultListener() {
+                PermissionHelper.getInstance().requestPermission(this, PermissionGroup.PHONE, 100, new PermissionResultListener() {
                     @Override
                     public void onSuccess(int requestCode) {
                         ToastUtils.showRoundRectToast("权限申请成功");
@@ -309,7 +290,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         ActivityManager.getInstance().appExist();
         //这个是监听目标Activity的生命周期变化
         ActivityManager.getInstance().registerActivityLifecycleListener(
-                CommonActivity.class,new ActivityLifecycleListener(){
+                CommonActivity.class,new AbsLifecycleListener(){
                     @Override
                     public void onActivityCreated(@Nullable Activity activity, Bundle savedInstanceState) {
                         super.onActivityCreated(activity, savedInstanceState);
@@ -325,87 +306,6 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         ActivityManager.getInstance().getActivitiesClass(
                 this, AppInfoUtils.getAppPackageName(),null);
     }
-
-    private void sp1() {
-        dataCache.saveBoolean("cacheKey1",true);
-        dataCache.saveFloat("cacheKey2",2.0f);
-        dataCache.saveInt("cacheKey3",3);
-        dataCache.saveLong("cacheKey4",4);
-        dataCache.saveString("cacheKey5","doubi5");
-        dataCache.saveDouble("cacheKey6",5.20);
-    }
-
-    private void sp2() {
-        boolean data1 = dataCache.readBoolean("cacheKey1", false);
-        float data2 = dataCache.readFloat("cacheKey2", 0);
-        int data3 = dataCache.readInt("cacheKey3", 0);
-        long data4 = dataCache.readLong("cacheKey4", 0);
-        String data5 = dataCache.readString("cacheKey5", "");
-        double data6 = dataCache.readDouble("cacheKey6", 0.0);
-        AppLogHelper.d("取数据 cacheKey1: ",data1);
-        AppLogHelper.d("取数据 cacheKey2: ",data2);
-        AppLogHelper.d("取数据 cacheKey3: ",data3);
-        AppLogHelper.d("取数据 cacheKey4: ",data4);
-        AppLogHelper.d("取数据 cacheKey5: ",data5);
-        AppLogHelper.d("取数据 cacheKey6: ",data6);
-    }
-
-    private void mmvk1() {
-        mmkvCache.saveBoolean("spkey1",true);
-        mmkvCache.saveFloat("spkey2",2.0f);
-        mmkvCache.saveInt("spkey3",3);
-        mmkvCache.saveLong("spkey4",4);
-        mmkvCache.saveString("spkey5","doubi5");
-        mmkvCache.saveDouble("spkey6",5.20);
-    }
-
-    private void mmvk2() {
-        boolean spkey1 = mmkvCache.readBoolean("spkey1", false);
-        float spkey2 = mmkvCache.readFloat("spkey2", 0);
-        int spkey3 = mmkvCache.readInt("spkey3", 0);
-        long spkey4 = mmkvCache.readLong("spkey4", 0);
-        String spkey5 = mmkvCache.readString("spkey5", "");
-        double spkey6 = mmkvCache.readDouble("spkey6", 0.0);
-        AppLogHelper.d("mmkvCache取数据 spkey1: ",spkey1);
-        AppLogHelper.d("mmkvCache取数据 spkey2: ",spkey2);
-        AppLogHelper.d("mmkvCache取数据 spkey3: ",spkey3);
-        AppLogHelper.d("mmkvCache取数据 spkey4: ",spkey4);
-        AppLogHelper.d("mmkvCache取数据 spkey5: ",spkey5);
-        AppLogHelper.d("mmkvCache取数据 spkey6: ",spkey6);
-    }
-
-    private void mmvk3() {
-        mmkvCache.clearData();
-    }
-
-    private void disk1() {
-        lruDiskCache.saveBoolean("spkey1",true);
-        lruDiskCache.saveFloat("spkey2",2.0f);
-        lruDiskCache.saveInt("spkey3",3);
-        lruDiskCache.saveLong("spkey4",4);
-        lruDiskCache.saveString("spkey5","doubi5");
-        lruDiskCache.saveDouble("spkey6",5.20);
-    }
-
-    private void disk2() {
-        boolean spkey1 = lruDiskCache.readBoolean("spkey1", false);
-        float spkey2 = lruDiskCache.readFloat("spkey2", 0);
-        int spkey3 = lruDiskCache.readInt("spkey3", 0);
-        long spkey4 = lruDiskCache.readLong("spkey4", 0);
-        String spkey5 = lruDiskCache.readString("spkey5", "");
-        double spkey6 = lruDiskCache.readDouble("spkey6", 0.0);
-        AppLogHelper.d("disk取数据 spkey1: ",spkey1);
-        AppLogHelper.d("disk取数据 spkey2: ",spkey2);
-        AppLogHelper.d("disk取数据 spkey3: ",spkey3);
-        AppLogHelper.d("disk取数据 spkey4: ",spkey4);
-        AppLogHelper.d("disk取数据 spkey5: ",spkey5);
-        AppLogHelper.d("disk取数据 spkey6: ",spkey6);
-    }
-
-    private void disk3() {
-        lruDiskCache.clearData();
-    }
-
 
     private void intentLog() {
         Intent intent = getIntent();
@@ -443,7 +343,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         //移除 activity 出栈
         ActivityManager.getInstance().remove(CommonActivity.this);
         //监听某个activity的生命周期，完全解耦合
-        ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.class, new ActivityLifecycleListener() {
+        ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.class, new AbsLifecycleListener() {
             @Override
             public void onActivityCreated(@Nullable Activity activity, Bundle savedInstanceState) {
                 super.onActivityCreated(activity, savedInstanceState);

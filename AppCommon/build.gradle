@@ -42,7 +42,7 @@ dependencies {
     //activity栈管理
     implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.3'
     //通用缓存存储库，支持sp，fastsp，mmkv，lruCache，DiskLruCache等
-    implementation 'com.github.yangchong211.YCCommonLib:AppBaseStore:1.4.3'
+//    implementation 'com.github.yangchong211.YCCommonLib:AppBaseStore:1.4.3'
     //通用日志输出库
     implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.3'
     //app重启库
@@ -105,20 +105,20 @@ dependencies {
     //公共类
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':BaseVpAdapter')
-//    implementation project(path: ':ComponentLib')
+    implementation project(path: ':ComponentLib')
     implementation project(path: ':ToolUtilsLib')
-//    implementation project(path: ':ActivityManager')
-//    implementation project(path: ':AppBaseStore')
-//    implementation project(path: ':AppLogLib')
-//    implementation project(path: ':AppRestartLib')
+    implementation project(path: ':ActivityManager')
+    implementation project(path: ':AppBaseStore')
+    implementation project(path: ':AppLogLib')
+    implementation project(path: ':AppRestartLib')
     implementation project(path: ':SafeIntentLib')
-//    implementation project(path: ':AppCommonInter')
-//    implementation project(path: ':AppStatusLib')
-//    implementation project(path: ':ArchitectureLib')
+    implementation project(path: ':AppCommonInter')
+    implementation project(path: ':AppStatusLib')
+    implementation project(path: ':ArchitectureLib')
     implementation project(path: ':EventUploadLib')
-//    implementation project(path: ':AppPermission')
-//    implementation project(path: ':FragmentManager')
-//    implementation project(path: ':ReflectionLib')
+    implementation project(path: ':AppPermission')
+    implementation project(path: ':FragmentManager')
+    implementation project(path: ':ReflectionLib')
     implementation project(path: ':ToolFileLib')
     implementation project(path: ':FileIoHelper')
     implementation project(path: ':AppMediaStore')
@@ -136,4 +136,5 @@ dependencies {
     implementation project(path: ':AppCompress')
     implementation project(path: ':ImageToolLib')
     implementation project(path: ':AppCallStatus')
+    implementation project(path: ':AppRestartLib')
 }

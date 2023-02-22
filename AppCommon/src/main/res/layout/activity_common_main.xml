@@ -48,27 +48,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="sp存"/>
+            android:text="存储库"/>
         <Button
             android:id="@+id/btn_sp2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="sp取"/>
+            android:text=""/>
         <Button
             android:id="@+id/btn_sp3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left|center"
-            android:text="磁盘缓存工具"/>
+            android:text="磁盘工具"/>
         <Button
             android:id="@+id/btn_sp4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:gravity="left|center"
-            android:text="fastsp取"/>
+            android:text=""/>
     </LinearLayout>
 
     <LinearLayout
@@ -81,20 +81,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="MMKV存"/>
+            android:text=""/>
         <Button
             android:id="@+id/btn_mkkv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="MMKV取"/>
+            android:text=""/>
         <Button
             android:id="@+id/btn_mkkv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left|center"
-            android:text="MMKV清除"/>
+            android:text=""/>
     </LinearLayout>
 
 
@@ -108,20 +108,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="disk存"/>
+            android:text=""/>
         <Button
             android:id="@+id/btn_disk2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="disk取"/>
+            android:text=""/>
         <Button
             android:id="@+id/btn_disk3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left|center"
-            android:text="disk清除"/>
+            android:text=""/>
     </LinearLayout>
 
     <LinearLayout
