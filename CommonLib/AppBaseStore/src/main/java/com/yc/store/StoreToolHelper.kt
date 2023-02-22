@@ -1,6 +1,7 @@
 package com.yc.store
 
 import android.app.Application
+import com.yc.appcontextlib.AppToolUtils
 import com.yc.store.config.CacheInitHelper
 import com.yc.store.disk.LruDiskCacheImpl
 import com.yc.store.lru.LruMemoryCacheImpl
@@ -69,6 +70,9 @@ class StoreToolHelper {
             throw NullPointerException("u should init first")
         }
 
+    /**
+     * 获取sp对象
+     */
     fun getSpCache(): BaseDataCache {
         if (spCache == null) {
             spCache = BaseDataCache()
@@ -80,10 +84,14 @@ class StoreToolHelper {
         return spCache as BaseDataCache
     }
 
+    /**
+     * 获取DataStore单例模式对象
+     */
     fun getStoreCache(): BaseDataCache {
         if (storeCache == null) {
             storeCache = BaseDataCache()
-            storeCache?.setCacheImpl(DataStoreCacheImpl())
+            val context = AppToolUtils.getApp()
+            storeCache?.setCacheImpl(DataStoreCacheImpl(context))
         }
         return storeCache as BaseDataCache
     }

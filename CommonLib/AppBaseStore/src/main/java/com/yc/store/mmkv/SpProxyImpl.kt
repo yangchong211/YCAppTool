@@ -129,7 +129,7 @@ class SpProxyImpl(private val mmkv: MMKV?) : SharedPreferences, SharedPreference
         mmkv?.apply()
     }
 
-    inline fun <reified T> getTypeKey(key: String?): String {
+    private inline fun <reified T> getTypeKey(key: String?): String {
         val type = "@" + T::class.simpleName
         return if (key?.contains(type) == true) {
             type

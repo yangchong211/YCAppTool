@@ -17,6 +17,7 @@ package com.yc.store.store
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.yc.appcontextlib.AppToolUtils
@@ -24,6 +25,7 @@ import com.yc.store.ICacheable
 import androidx.datastore.preferences.core.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
+
 /**
  * <pre>
  *     @author yangchong
@@ -35,22 +37,39 @@ import kotlinx.coroutines.runBlocking
  *     GitHub: https://github.com/yangchong211
  * </pre>
  */
-class DataStoreCacheImpl : ICacheable {
+class DataStoreCacheImpl(val context: Context?= null, name: String? = "dataStoreCache") : ICacheable {
 
+    /**
+     * 文件名称是：dataStoreCache
+     * 文件路径：/data/data/包名/files/datastore/dataStoreCache.preferences_pb
+     */
     private val Context.dataStoreCache: DataStore<Preferences> by preferencesDataStore(
-        name = "dataStoreCache")
+        name = name ?: "dataStoreCache",
+        //将SP迁移到Preference DataStore中
+        /*produceMigrations = { context ->
+            listOf(SharedPreferencesMigration(context, ""))
+        }*/
+    )
 
     private val cache by lazy {
-        AppToolUtils.getApp().dataStoreCache
+        context?.dataStoreCache ?: AppToolUtils.getApp().dataStoreCache
     }
 
     init {
         AppToolUtils.getApp().dataStoreCache
     }
 
+    /**
+     * DataStore 的主要优势之一是异步API，所以本身并未提供同步API调用，但实际上可能不一定始终能将周围的代码更改为异步代码。
+     * 如果您使用的现有代码库采用同步磁盘 I/O，或者您的依赖项不提供异步API，就可能出现这种情况。
+     * 可以采用协程本身提供 runBlocking()以帮助消除同步与异步代码之间的差异。可以使用 runBlocking() 从 DataStore 同步读取数据。
+     *
+     * runBlocking()会运行一个新的协程并阻塞当前线程直到内部逻辑完成，所以尽量避免在UI线程调用。
+     * 而且还需要注意的一点是，不用在初始读取时调用runBlocking，会阻塞当前执行的线程，因为初始读取会有较多的IO操作，耗时较长。
+     */
     override fun saveInt(key: String, value: Int) {
         runBlocking {
-            cache.edit { it[intPreferencesKey(key)] = value }
+            saveIntData(key,value)
         }
     }
 
@@ -58,11 +77,14 @@ class DataStoreCacheImpl : ICacheable {
         var value = defValue
         runBlocking {
             cache.data.first {
-                try{
-                    it[intPreferencesKey(key)]?.run {
+                try {
+                    //获取key
+                    val intPreferencesKey = intPreferencesKey(key)
+                    //通过key获取value
+                    it[intPreferencesKey]?.run {
                         value = this
                     }
-                }catch (e: Exception){
+                } catch (e: Exception) {
 
                 }
                 true
@@ -73,7 +95,7 @@ class DataStoreCacheImpl : ICacheable {
 
     override fun saveFloat(key: String, value: Float) {
         runBlocking {
-            cache.edit { it[floatPreferencesKey(key)] = value }
+            saveFloatData(key, value)
         }
     }
 
@@ -81,11 +103,12 @@ class DataStoreCacheImpl : ICacheable {
         var value = defValue
         runBlocking {
             cache.data.first {
-                try{
-                    it[floatPreferencesKey(key)]?.run {
+                try {
+                    val floatPreferencesKey = floatPreferencesKey(key)
+                    it[floatPreferencesKey]?.run {
                         value = this
                     }
-                }catch (e: Exception){
+                } catch (e: Exception) {
 
                 }
                 true
@@ -96,7 +119,7 @@ class DataStoreCacheImpl : ICacheable {
 
     override fun saveDouble(key: String, value: Double) {
         runBlocking {
-            cache.edit { it[doublePreferencesKey(key)] = value }
+            saveDoubleData(key, value)
         }
     }
 
@@ -104,11 +127,12 @@ class DataStoreCacheImpl : ICacheable {
         var value = default
         runBlocking {
             cache.data.first {
-                try{
-                    it[doublePreferencesKey(key)]?.run {
+                try {
+                    val doublePreferencesKey = doublePreferencesKey(key)
+                    it[doublePreferencesKey]?.run {
                         value = this
                     }
-                }catch (e: Exception){
+                } catch (e: Exception) {
 
                 }
                 true
@@ -119,7 +143,7 @@ class DataStoreCacheImpl : ICacheable {
 
     override fun saveLong(key: String, value: Long) {
         runBlocking {
-            cache.edit { it[longPreferencesKey(key)] = value }
+            saveLongData(key, value)
         }
     }
 
@@ -127,11 +151,12 @@ class DataStoreCacheImpl : ICacheable {
         var value = defValue
         runBlocking {
             cache.data.first {
-                try{
-                    it[longPreferencesKey(key)]?.run {
+                try {
+                    val longPreferencesKey = longPreferencesKey(key)
+                    it[longPreferencesKey]?.run {
                         value = this
                     }
-                }catch (e: Exception){
+                } catch (e: Exception) {
 
                 }
                 true
@@ -142,7 +167,7 @@ class DataStoreCacheImpl : ICacheable {
 
     override fun saveString(key: String, value: String) {
         runBlocking {
-            cache.edit { it[stringPreferencesKey(key)] = value }
+            saveStringData(key, value)
         }
     }
 
@@ -150,11 +175,12 @@ class DataStoreCacheImpl : ICacheable {
         var value = defValue
         runBlocking {
             cache.data.first {
-                try{
-                    it[stringPreferencesKey(key)]?.run {
+                try {
+                    val stringPreferencesKey = stringPreferencesKey(key)
+                    it[stringPreferencesKey]?.run {
                         value = this
                     }
-                }catch (e: Exception){
+                } catch (e: Exception) {
 
                 }
                 true
@@ -165,7 +191,7 @@ class DataStoreCacheImpl : ICacheable {
 
     override fun saveBoolean(key: String, value: Boolean) {
         runBlocking {
-            cache.edit { it[booleanPreferencesKey(key)] = value }
+            saveBooleanData(key, value)
         }
     }
 
@@ -173,17 +199,66 @@ class DataStoreCacheImpl : ICacheable {
         var value = defValue
         runBlocking {
             cache.data.first {
-                try{
-                    it[booleanPreferencesKey(key)]?.run {
+                try {
+                    val booleanPreferencesKey = booleanPreferencesKey(key)
+                    it[booleanPreferencesKey]?.run {
                         value = this
                     }
-                }catch (e: Exception){
+                } catch (e: Exception) {
 
                 }
                 true
             }
         }
         return value
+    }
+
+    suspend fun <U> putData(key: String, value: U) {
+        when (value) {
+            is Long -> saveLongData(key, value)
+            is String -> saveStringData(key, value)
+            is Int -> saveIntData(key, value)
+            is Boolean -> saveBooleanData(key, value)
+            is Float -> saveFloatData(key, value)
+            is Double -> saveDoubleData(key, value)
+            else -> throw IllegalArgumentException("This type can be saved into DataStore")
+        }
+    }
+
+    private suspend fun saveBooleanData(key: String, value: Boolean) {
+        cache.edit { mutablePreferences ->
+            mutablePreferences[booleanPreferencesKey(key)] = value
+        }
+    }
+
+    private suspend fun saveIntData(key: String, value: Int) {
+        cache.edit { mutablePreferences ->
+            mutablePreferences[intPreferencesKey(key)] = value
+        }
+    }
+
+    private suspend fun saveStringData(key: String, value: String) {
+        cache.edit { mutablePreferences ->
+            mutablePreferences[stringPreferencesKey(key)] = value
+        }
+    }
+
+    private suspend fun saveFloatData(key: String, value: Float) {
+        cache.edit { mutablePreferences ->
+            mutablePreferences[floatPreferencesKey(key)] = value
+        }
+    }
+
+    private suspend fun saveLongData(key: String, value: Long) {
+        cache.edit { mutablePreferences ->
+            mutablePreferences[longPreferencesKey(key)] = value
+        }
+    }
+
+    suspend fun saveDoubleData(key: String, value: Double) {
+        cache.edit { mutablePreferences ->
+            mutablePreferences[doublePreferencesKey(key)] = value
+        }
     }
 
     override fun removeKey(key: String) {
@@ -205,11 +280,11 @@ class DataStoreCacheImpl : ICacheable {
         var value = 0L
         runBlocking {
             cache.data.count {
-                try{
+                try {
                     it.asMap().size.run {
                         value = this.toLong()
                     }
-                }catch (e: Exception){
+                } catch (e: Exception) {
                 }
                 true
             }
