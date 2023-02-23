@@ -38,6 +38,9 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation(rootProject.ext.dependencies["material"])
+
+    implementation project(':StatusBusiness')
+
     //通用日志输出库
     implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.3'
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'

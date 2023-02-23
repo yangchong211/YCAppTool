@@ -41,33 +41,30 @@ public class DiskLruCacheHelper {
     public boolean put(String key ,Object value){
         writeLocker.acquire(key);
         try {
-            try {
-                DiskLruCache diskCache = getDiskCache();
-                DiskLruCache.Value current = diskCache.get(key);
-                if (current != null) {
-                    return false;
-                }
-                DiskLruCache.Editor editor = diskCache.edit(key);
-                if (editor == null) {
-                    throw new IllegalStateException("Had two simultaneous puts for: " + key);
-                }
-                try {
-                    editor.set(0, value.toString());
-                    editor.commit();
-                } finally {
-                    editor.abortUnlessCommitted();
-                }
-            } catch (IOException e) {
-                ExceptionReporter.report(
-                        "Unable to put from disk cache-", e);
-            } finally {
-                try {
-                    getDiskCache().flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            DiskLruCache diskCache = getDiskCache();
+            DiskLruCache.Value current = diskCache.get(key);
+            if (current != null) {
+                return false;
             }
+            DiskLruCache.Editor editor = diskCache.edit(key);
+            if (editor == null) {
+                throw new IllegalStateException("Had two simultaneous puts for: " + key);
+            }
+            try {
+                editor.set(0, value.toString());
+                editor.commit();
+            } finally {
+                editor.abortUnlessCommitted();
+            }
+        } catch (IOException e) {
+            ExceptionReporter.report(
+                    "Unable to put from disk cache-", e);
         } finally {
+            try {
+                getDiskCache().flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             writeLocker.release(key);
         }
         return false;

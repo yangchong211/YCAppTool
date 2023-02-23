@@ -22,6 +22,7 @@ import com.yc.widgetbusiness.round.RoundCornersActivity;
 import com.yc.widgetbusiness.shadow.ShadowActivity;
 import com.yc.widgetbusiness.textview.MixtureTextViewActivity;
 import com.yc.widgetbusiness.zoom.ZoomMainActivity;
+import com.yc.ycstatusbar.BarActivity;
 
 public class WidgetActivity extends AppCompatActivity {
 
@@ -35,6 +36,7 @@ public class WidgetActivity extends AppCompatActivity {
     private RoundTextView tvWidgetFloat;
     private RoundTextView tvWidgetBlur;
     private RoundTextView tvWidgetBanner;
+    private RoundTextView tvWidgetBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class WidgetActivity extends AppCompatActivity {
         tvWidgetFloat = findViewById(R.id.tv_widget_float);
         tvWidgetBlur = findViewById(R.id.tv_widget_blur);
         tvWidgetBanner = findViewById(R.id.tv_widget_banner);
+        tvWidgetBar = findViewById(R.id.tv_widget_bar);
     }
 
     public void initListener() {
@@ -117,6 +120,12 @@ public class WidgetActivity extends AppCompatActivity {
             @Override
             protected void onNoDoubleClick(View v) {
                 startActivity(new Intent(WidgetActivity.this, EventActivity.class));
+            }
+        });
+        tvWidgetBar.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                BarActivity.startActivity(WidgetActivity.this);
             }
         });
     }
