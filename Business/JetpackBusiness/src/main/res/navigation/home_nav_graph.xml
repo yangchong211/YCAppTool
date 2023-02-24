@@ -60,5 +60,7 @@
         android:id="@+id/actionViewModelActivity"
         app:destination="@id/viewModelActivity" />
 
+    <!--在nav中嵌套分支nav，避免nav文件过大-->
+    <include app:graph = "@navigation/sample_nav_graph"/>
 
 </navigation>
