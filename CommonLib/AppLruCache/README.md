@@ -113,7 +113,7 @@
 - put插入数据操作
     - ![image]((https://img-blog.csdnimg.cn/7f0cd1d79b8a41b0bd600a658149fd8a.png)
 - get获取数据操作
-    - ![image]()
+    - ![image](https://img-blog.csdnimg.cn/f4282a8c4da04945b5b10b76ab08c7ae.png)
 
 
 
