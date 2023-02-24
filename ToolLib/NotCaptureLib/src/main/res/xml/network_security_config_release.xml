@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+
+    <!--正式环境的包，可以配置这个，这个可以避免被Charles抓包，核心点是只信任system根证书-->
+    <!--中间人代理之所有能够获取到加密密钥就是因为我们手机上安装并信任了其代理证书，这类证书安装后都会被归结到用户证书一类，而不是系统证书。-->
+    <!--那我们可以选择只信任系统内置的系统证书，而屏蔽掉用户证书（Android7.0以后就默认是只信任系统证书了），就可以防止数据被解密了。-->
+    <!--去掉 <certificates src="user" /> 这组标签-->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <debug-overrides>
+        <trust-anchors>
+            <!-- Trust user added CAs while debuggable only -->
+            <certificates src="system" />
+        </trust-anchors>
+    </debug-overrides>
+
+</network-security-config>
