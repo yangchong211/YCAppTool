@@ -88,14 +88,35 @@
 
 
 
-
-
 ### 03.Api调用说明
 
 
 
 ### 04.遇到的坑分析
-
+#### 4.1 配置正式和测试
+- 背景说明：
+    - 日常开发中，如果需要正式服和测试服过滤明文传输的话，可以这样设置。
+- 具体操作步骤
+    - 步骤一：在res资源文件夹下创建xml文件夹，在xml文件中创建 network_security_config_debug.xml 和 network_security_config_release.xml。
+    - 步骤二：在build.gradle 中配置如下代码：
+    ``` groovy
+    buildTypes {
+        release {
+             manifestPlaceholders = [
+                 NETWORK_SECURITY_CONFIG: "@xml/network_security_config_release"
+             ]
+        }
+        debug {
+            manifestPlaceholders = [
+                    NETWORK_SECURITY_CONFIG: "@xml/network_security_config_debug"
+            ]
+        }
+    }
+    ```
+    - 步骤三：在AndroidManifest 中的 application 中设置我们的网络安全配置。
+    ```
+    android:networkSecurityConfig="${NETWORK_SECURITY_CONFIG}"
+    ```
 
 
 ### 05.其他问题说明

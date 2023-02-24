@@ -14,9 +14,15 @@ android {
     }
 
     buildTypes {
+        debug {
+            manifestPlaceholders = [
+                    NETWORK_SECURITY_CONFIG: "@xml/network_security_config_debug"
+            ]
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [
+                    NETWORK_SECURITY_CONFIG: "@xml/network_security_config_release"
+            ]
         }
     }
     compileOptions {
