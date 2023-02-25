@@ -17,7 +17,7 @@ public class MmkvFactory implements CacheFactory<MmkvCacheImpl>{
         String mmkvPath = CacheInitHelper.INSTANCE.getMmkvPath();
         MmkvCacheImpl.Companion.initRootPath(mmkvPath);
         MmkvCacheImpl.Builder builder = new MmkvCacheImpl.Builder();
-        builder.setFileName("ycMmkv");
+        builder.setFileName(CacheInitHelper.INSTANCE.getMmkvName());
         MmkvCacheImpl mmkvCache = builder.build();
         return mmkvCache;
     }

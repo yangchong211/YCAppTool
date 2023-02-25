@@ -56,6 +56,10 @@ class CacheConfig private constructor(builder: Builder) {
      */
     val extraLogDir: File?
 
+    /**
+     * mmkv文件名称
+     */
+    val mmkvName: String?
 
     class Builder {
 
@@ -63,6 +67,7 @@ class CacheConfig private constructor(builder: Builder) {
         var debuggable = false
         var logDir: String? = null
         var extraLogDir: File? = null
+        var mmkvName: String? = null
 
         fun maxCacheSize(maxCacheSize: Int): Builder {
             this.maxCacheSize = maxCacheSize
@@ -84,6 +89,11 @@ class CacheConfig private constructor(builder: Builder) {
             return this
         }
 
+        fun mmkvName(mmkvName: String?): Builder {
+            this.mmkvName = mmkvName
+            return this
+        }
+
         fun build(): CacheConfig {
             return CacheConfig(this)
         }
@@ -101,5 +111,6 @@ class CacheConfig private constructor(builder: Builder) {
         isDebuggable = builder.debuggable
         extraLogDir = builder.extraLogDir
         logDir = builder.logDir
+        mmkvName = builder.mmkvName
     }
 }
