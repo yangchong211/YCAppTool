@@ -34,6 +34,10 @@ class LruDiskCacheImpl : ICacheable {
 
     var diskLruCacheHelper = DiskLruCacheHelper()
 
+    init {
+
+    }
+
     override fun saveInt(key: String, value: Int) {
         diskLruCacheHelper.put(key, value)
     }
