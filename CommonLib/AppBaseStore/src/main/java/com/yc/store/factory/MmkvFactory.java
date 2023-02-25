@@ -13,7 +13,7 @@ public class MmkvFactory implements CacheFactory<MmkvCacheImpl>{
     }
 
     @Override
-    public MmkvCacheImpl createCache(Context context) {
+    public MmkvCacheImpl createCache() {
         String mmkvPath = CacheInitHelper.INSTANCE.getMmkvPath();
         MmkvCacheImpl.Companion.initRootPath(mmkvPath);
         MmkvCacheImpl.Builder builder = new MmkvCacheImpl.Builder();

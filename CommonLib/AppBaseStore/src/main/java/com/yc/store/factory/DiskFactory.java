@@ -11,7 +11,7 @@ public class DiskFactory implements CacheFactory<LruDiskCacheImpl>{
     }
 
     @Override
-    public LruDiskCacheImpl createCache(Context context) {
+    public LruDiskCacheImpl createCache() {
         LruDiskCacheImpl lruDiskCache = new LruDiskCacheImpl();
         return lruDiskCache;
     }

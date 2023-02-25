@@ -12,7 +12,7 @@ public class MemoryFactory implements CacheFactory<MemoryCacheImpl>{
     }
 
     @Override
-    public MemoryCacheImpl createCache(Context context) {
+    public MemoryCacheImpl createCache() {
         MemoryCacheImpl memoryCache = new MemoryCacheImpl();
         return memoryCache;
     }

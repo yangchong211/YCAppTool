@@ -13,7 +13,7 @@ public class StoreFactory implements CacheFactory<DataStoreCacheImpl>{
     }
 
     @Override
-    public DataStoreCacheImpl createCache(Context context) {
+    public DataStoreCacheImpl createCache() {
         DataStoreCacheImpl dataStoreCache = new DataStoreCacheImpl();
         return dataStoreCache;
     }

@@ -13,7 +13,7 @@ public class LruCacheFactory implements CacheFactory<LruMemoryCacheImpl>{
     }
 
     @Override
-    public LruMemoryCacheImpl createCache(Context context) {
+    public LruMemoryCacheImpl createCache() {
         LruMemoryCacheImpl lruMemoryCache = new LruMemoryCacheImpl();
         return lruMemoryCache;
     }

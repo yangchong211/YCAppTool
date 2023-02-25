@@ -13,7 +13,7 @@ public class SpFactory implements CacheFactory<SpCacheImpl>{
 
 
     @Override
-    public SpCacheImpl createCache(Context context) {
+    public SpCacheImpl createCache() {
         SpCacheImpl.Builder builder = new SpCacheImpl.Builder();
         builder.setFileName("ycSp");
         SpCacheImpl spCache = builder.build();

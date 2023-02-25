@@ -26,9 +26,8 @@ public interface CacheFactory<T extends ICacheable> {
      * 优点2：加入新的产品时，比如后期新加一个阿里播放器内核，这个时候就只需要添加一个具体工厂和具体产品就可以。
      *       系统的可扩展性也就变得非常好，完全符合“开闭原则”
      *
-     * @param context                       上下文
      * @return                              具体的实现者
      */
-    T createCache(Context context);
+    T createCache();
 
 }

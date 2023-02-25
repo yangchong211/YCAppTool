@@ -32,21 +32,21 @@ public final class CacheFactoryUtils {
         }
     }
 
-    public static ICacheable getCacheImpl(Context context, @CacheConstants.CacheType int type) {
+    public static ICacheable getCacheImpl(@CacheConstants.CacheType int type) {
         if (type == CacheConstants.CacheType.TYPE_DISK) {
-            return DiskFactory.create().createCache(context);
+            return DiskFactory.create().createCache();
         } else if (type == CacheConstants.CacheType.TYPE_LRU) {
-            return LruCacheFactory.create().createCache(context);
+            return LruCacheFactory.create().createCache();
         } else if (type == CacheConstants.CacheType.TYPE_MEMORY) {
-            return MemoryFactory.create().createCache(context);
+            return MemoryFactory.create().createCache();
         } else if (type == CacheConstants.CacheType.TYPE_MMKV) {
-            return MmkvFactory.create().createCache(context);
+            return MmkvFactory.create().createCache();
         } else if (type == CacheConstants.CacheType.TYPE_SP) {
-            return SpFactory.create().createCache(context);
+            return SpFactory.create().createCache();
         } else if (type == CacheConstants.CacheType.TYPE_STORE) {
-            return StoreFactory.create().createCache(context);
+            return StoreFactory.create().createCache();
         } else {
-            return MmkvFactory.create().createCache(context);
+            return MmkvFactory.create().createCache();
         }
     }
     
