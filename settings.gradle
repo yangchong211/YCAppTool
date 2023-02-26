@@ -73,7 +73,7 @@ include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
         ':AppLruDisk',':AppLruCache',':DownloadHelper',':AppEncryptLib',
         ':AppMediaStore',':DataCloneLib',':AppScreenLib',':BaseVpAdapter',':ImageToolLib',
         ':AppHandlerLib',':FileIoHelper',':ZipFileLib',':NetWorkLib',':AppContextLib',
-        ':AppWiFiLib',':UriAndUrlLib',':AppGrayLib',':AppCallStatus'
+        ':AppWiFiLib',':UriAndUrlLib',':AppGrayLib',':AppCallStatus',':AppFastSp'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
@@ -113,6 +113,8 @@ project(':AppWiFiLib').projectDir = new File('CommonLib/AppWiFiLib')
 project(':UriAndUrlLib').projectDir = new File('CommonLib/UriAndUrlLib')
 project(':AppGrayLib').projectDir = new File('CommonLib/AppGrayLib')
 project(':AppCallStatus').projectDir = new File('CommonLib/AppCallStatus')
+project(':AppFastSp').projectDir = new File('CommonLib/AppFastSp')
+
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -271,4 +273,5 @@ project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 project(':BellsVibrations').projectDir = new File('PlayerLib/BellsVibrations')
 project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')
 project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
+
 
