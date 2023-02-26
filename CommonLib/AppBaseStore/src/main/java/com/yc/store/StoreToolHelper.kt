@@ -31,7 +31,7 @@ class StoreToolHelper {
     private var memoryCache: BaseDataCache? = null
     private var lruMemoryCache: BaseDataCache? = null
     private var lruDiskCache: BaseDataCache? = null
-
+    private var fastSpCache: BaseDataCache? = null
 
     companion object {
 
@@ -129,6 +129,15 @@ class StoreToolHelper {
             lruDiskCache?.setCacheImpl(cacheImpl)
         }
         return lruDiskCache as BaseDataCache
+    }
+
+    fun getFastSpCache(): BaseDataCache {
+        if (fastSpCache == null) {
+            fastSpCache = BaseDataCache()
+            val cacheImpl = CacheFactoryUtils.getCacheImpl(CacheConstants.CacheType.TYPE_FAST)
+            fastSpCache?.setCacheImpl(cacheImpl)
+        }
+        return fastSpCache as BaseDataCache
     }
 
 

@@ -6,8 +6,10 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.zuoyebang.iot.union.store.config.CacheInitHelper;
-import com.zuoyebang.iot.union.store.lru.cache.SystemLruCache;
+import com.yc.appcontextlib.AppToolUtils;
+import com.yc.appfilelib.AppFileUtils;
+import com.yc.applrucache.SystemLruCache;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 
 import java.io.File;
 import java.io.Serializable;
@@ -15,8 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -27,8 +27,6 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
     private static final String TAG = "FastSharedPreferences";
     //    private static final Map<String, FastSharedPreferences> FSP_CACHE = new HashMap<>();
     private static final FspCache FSP_CACHE = new FspCache();
-    //    private static final ExecutorService SYNC_EXECUTOR = Executors.newSingleThreadExecutor();
-    private static final ExecutorService SYNC_EXECUTOR = Executors.newFixedThreadPool(4);
 
     public static void setMaxSize(int maxSize) {
         FSP_CACHE.resize(maxSize);
@@ -51,12 +49,14 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
     //这个锁主要是为了锁住拷贝数据的过程，当进行数据拷贝的时候，不允许任何写入操作
     private final ReadWriteLock copyLock = new ReentrantReadWriteLock();
     private final DataChangeObserver observer;
+    private final String logDir;
 
     private FastSharedPreferences(String name) {
         this.name = name;
         this.keyValueMap = new ConcurrentHashMap<>();
         reload();
-        String logDir = CacheInitHelper.INSTANCE.getBaseCachePath() + File.separator + "fast";
+        String cachePath = AppFileUtils.getCachePath(AppToolUtils.getApp());
+        logDir = cachePath + File.separator + "fast";
         String filePath = ReadWriteManager.getFilePath(logDir, name);
         //路径：/storage/emulated/0/Android/data/你的包名/cache/ycCache/fast/fast_sp
         Log.d("CacheHelper : " , "fast sp file path : " + filePath);
@@ -133,7 +133,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
     }
 
     @Override
-    public com.zuoyebang.iot.union.store.fastsp.sp.EnhancedEditor edit() {
+    public EnhancedEditor edit() {
         return editor;
     }
 
@@ -157,7 +157,6 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
     }
 
     private int sizeOf() {
-        String logDir = CacheInitHelper.INSTANCE.getBaseCachePath();
         String filePath = ReadWriteManager.getFilePath(logDir, name);
         File file = new File(filePath);
         if (!file.exists()) {
@@ -166,45 +165,45 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
         return (int) (file.length() / 1024);
     }
 
-    private class FspEditor implements com.zuoyebang.iot.union.store.fastsp.sp.EnhancedEditor {
+    private class FspEditor implements EnhancedEditor {
         @Override
-        public com.zuoyebang.iot.union.store.fastsp.sp.EnhancedEditor putSerializable(String key, @Nullable Serializable value) {
+        public EnhancedEditor putSerializable(String key, @Nullable Serializable value) {
             put(key, value);
             return this;
         }
 
         @Override
-        public com.zuoyebang.iot.union.store.fastsp.sp.EnhancedEditor putString(String s, @Nullable String s1) {
+        public EnhancedEditor putString(String s, @Nullable String s1) {
             put(s, s1);
             return this;
         }
 
         @Override
-        public com.zuoyebang.iot.union.store.fastsp.sp.EnhancedEditor putStringSet(String s, @Nullable Set<String> set) {
+        public EnhancedEditor putStringSet(String s, @Nullable Set<String> set) {
             put(s, set);
             return this;
         }
 
         @Override
-        public com.zuoyebang.iot.union.store.fastsp.sp.EnhancedEditor putInt(String s, int i) {
+        public EnhancedEditor putInt(String s, int i) {
             put(s, i);
             return this;
         }
 
         @Override
-        public com.zuoyebang.iot.union.store.fastsp.sp.EnhancedEditor putLong(String s, long l) {
+        public EnhancedEditor putLong(String s, long l) {
             put(s, l);
             return this;
         }
 
         @Override
-        public com.zuoyebang.iot.union.store.fastsp.sp.EnhancedEditor putFloat(String s, float v) {
+        public EnhancedEditor putFloat(String s, float v) {
             put(s, v);
             return this;
         }
 
         @Override
-        public com.zuoyebang.iot.union.store.fastsp.sp.EnhancedEditor putBoolean(String s, boolean b) {
+        public EnhancedEditor putBoolean(String s, boolean b) {
             put(s, b);
             return this;
         }
@@ -224,7 +223,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
         }
 
         @Override
-        public com.zuoyebang.iot.union.store.fastsp.sp.EnhancedEditor clear() {
+        public EnhancedEditor clear() {
             copyLock.readLock().lock();
             keyValueMap.clear();
             copyLock.readLock().unlock();
@@ -251,7 +250,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
             if (syncing.get()) {
                 return;
             }
-            SYNC_EXECUTOR.execute(new SyncTask());
+            DelegateTaskExecutor.getInstance().executeOnDiskIO(new SyncTask());
         }
 
         private class SyncTask implements Runnable {
@@ -323,7 +322,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
                 //如果正在同步，则取消reload
                 return;
             }
-            SYNC_EXECUTOR.execute(new ReloadTask());
+            DelegateTaskExecutor.getInstance().executeOnDiskIO(new ReloadTask());
         }
 
         public void onDelete(String path) {

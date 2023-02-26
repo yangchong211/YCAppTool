@@ -5,6 +5,7 @@ import android.content.Context;
 import com.yc.store.config.CacheConstants;
 import com.yc.store.factory.CacheFactory;
 import com.yc.store.factory.DiskFactory;
+import com.yc.store.factory.FastSpFactory;
 import com.yc.store.factory.LruCacheFactory;
 import com.yc.store.factory.MemoryFactory;
 import com.yc.store.factory.MmkvFactory;
@@ -45,6 +46,8 @@ public final class CacheFactoryUtils {
             return SpFactory.create().createCache();
         } else if (type == CacheConstants.CacheType.TYPE_STORE) {
             return StoreFactory.create().createCache();
+        }  else if (type == CacheConstants.CacheType.TYPE_FAST) {
+            return FastSpFactory.create().createCache();
         } else {
             return MmkvFactory.create().createCache();
         }

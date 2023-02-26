@@ -42,4 +42,5 @@ dependencies {
     //腾讯mmkv库
     implementation "com.tencent:mmkv-static:1.2.7"
     implementation project(path: ':AppContextLib')
+    implementation project(path: ':AppFastSp')
 }

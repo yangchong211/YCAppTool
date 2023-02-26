@@ -14,6 +14,7 @@ public final class CacheConstants {
         int TYPE_MMKV = 4;
         int TYPE_SP = 5;
         int TYPE_STORE = 6;
+        int TYPE_FAST = 7;
     }
 
 }
