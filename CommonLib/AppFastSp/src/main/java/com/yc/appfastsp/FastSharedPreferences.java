@@ -25,7 +25,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class FastSharedPreferences implements EnhancedSharedPreferences {
 
     private static final String TAG = "FastSharedPreferences";
-    //    private static final Map<String, FastSharedPreferences> FSP_CACHE = new HashMap<>();
     private static final FspCache FSP_CACHE = new FspCache();
 
     public static void setMaxSize(int maxSize) {
@@ -42,16 +41,28 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
     }
 
     private final String name;
+    /**
+     * 使用线程安全的map存储
+     */
     private final Map<String, Object> keyValueMap;
     private final FspEditor editor = new FspEditor();
+    /**
+     * 是否需要同步
+     */
     private final AtomicBoolean needSync = new AtomicBoolean(false);
+    /**
+     * 是否正在同步进行中
+     */
     private final AtomicBoolean syncing = new AtomicBoolean(false);
-    //这个锁主要是为了锁住拷贝数据的过程，当进行数据拷贝的时候，不允许任何写入操作
+    /**
+     * 读写锁
+     * 这个锁主要是为了锁住拷贝数据的过程，当进行数据拷贝的时候，不允许任何写入操作
+     */
     private final ReadWriteLock copyLock = new ReentrantReadWriteLock();
     private final DataChangeObserver observer;
     private final String logDir;
 
-    private FastSharedPreferences(String name) {
+    protected FastSharedPreferences(String name) {
         this.name = name;
         this.keyValueMap = new ConcurrentHashMap<>();
         reload();
@@ -156,7 +167,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
         }
     }
 
-    private int sizeOf() {
+    protected int sizeOf() {
         String filePath = ReadWriteManager.getFilePath(logDir, name);
         File file = new File(filePath);
         if (!file.exists()) {
@@ -258,18 +269,21 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
             @Override
             public void run() {
                 if (!needSync.get()) {
+                    //判断是否需要异步
                     return;
                 }
                 //先把syncing标记置为true
                 syncing.compareAndSet(false, true);
                 //copy map，copy的过程中不允许写入
                 copyLock.writeLock().lock();
+                //把map数据拷贝到一个新的集合中
                 Map<String, Object> storeMap = new HashMap<>(keyValueMap);
                 copyLock.writeLock().unlock();
                 //Log.d("FastSharedPreferences", "start sync with item size: " + storeMap.size());
                 //把needSync置为false，如果在此之后有数据写入，则需要重新同步
                 needSync.compareAndSet(true, false);
                 observer.stopWatching();
+                //写数据
                 ReadWriteManager manager = new ReadWriteManager(name);
                 manager.write(storeMap);
                 //解除同步过程
@@ -330,39 +344,4 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
         }
     }
 
-    private static class FspCache extends SystemLruCache<String, FastSharedPreferences> {
-
-        private static final int DEFAULT_MAX_SIZE =
-                (int) (Runtime.getRuntime().maxMemory() / 1024 / 16);
-
-        public FspCache() {
-            this(DEFAULT_MAX_SIZE);
-        }
-
-        public FspCache(int maxSize) {
-            super(maxSize);
-        }
-
-        @Override
-        protected int sizeOf(String key, FastSharedPreferences value) {
-            int size = 0;
-            if (value != null) {
-                size = value.sizeOf();
-            }
-            Log.d(TAG, "FspCache sizeOf " + key + " is: " + size);
-            return size;
-        }
-
-        @Override
-        protected FastSharedPreferences create(String key) {
-            return new FastSharedPreferences(key);
-        }
-
-        @Override
-        protected void entryRemoved(boolean evicted, String key,
-                                    FastSharedPreferences oldValue,
-                                    FastSharedPreferences newValue) {
-            Log.d(TAG, "FspCache entryRemoved: " + key);
-        }
-    }
 }

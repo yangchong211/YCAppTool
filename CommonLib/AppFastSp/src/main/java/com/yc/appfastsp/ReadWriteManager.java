@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 
-public class ReadWriteManager {
+public final class ReadWriteManager {
 
     private static final String TAG = "ReadWriteManager";
 
