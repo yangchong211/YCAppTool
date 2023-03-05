@@ -3,6 +3,7 @@ package com.yc.common;
 import android.app.Application;
 import android.util.Log;
 
+import com.yc.appcommoninter.IMonitorToggle;
 import com.yc.appfilelib.AppFileUtils;
 import com.yc.apploglib.config.AppLogConfig;
 import com.yc.apploglib.config.AppLogFactory;
@@ -49,6 +50,13 @@ public class CommonApplication extends Application {
                 .maxCacheSize(100)
                 //内部存储根目录
                 .logDir(null)
+                .monitorToggle(new IMonitorToggle() {
+                    @Override
+                    public boolean isOpen() {
+                        //todo 是否降级，如果降级，则不使用该功能。
+                        return false;
+                    }
+                })
                 //创建
                 .build();
         CacheInitHelper.INSTANCE.init(this,cacheConfig);

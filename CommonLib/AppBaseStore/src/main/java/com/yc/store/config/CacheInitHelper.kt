@@ -39,6 +39,7 @@ object CacheInitHelper {
     private var externalFilePath: String? = null
     private var maxLruSize: Int? = null
     private var mmkvName: String? = null
+    private var isToggle = false
 
     @Synchronized
     fun init(context: Application,config: CacheConfig?) {
@@ -74,6 +75,12 @@ object CacheInitHelper {
         //设置disk缓存
         DiskHelperUtils.setBaseCachePath(filePath)
         DiskHelperUtils.setMaxLruSize(maxLruSize ?: 1024)
+
+        //处理是否降级
+        if (config?.monitorToggle!=null){
+            val open = config.monitorToggle?.isOpen ?: false
+            isToggle = open
+        }
     }
 
     /**
@@ -134,4 +141,12 @@ object CacheInitHelper {
         }
         return mmkvName as String
     }
+
+    /**
+     * 是否降级
+      */
+    fun isToggleOpen() : Boolean{
+        return isToggle
+    }
+
 }
