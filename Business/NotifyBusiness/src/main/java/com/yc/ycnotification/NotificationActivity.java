@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.yc.notificationlib.AppNotifyHelper;
 import com.yc.notificationlib.NotificationParams;
 import com.yc.notificationlib.NotificationUtils;
 import com.yc.notifymessage.CustomNotification;
+import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 import com.yc.ycnotification.notifyview.MyNotifyView;
 import com.yc.ycnotification.notifyview.MyNotifyView2;
@@ -53,6 +55,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notify_main);
+        StateAppBar.setStatusBarLightMode(this, Color.WHITE);
         AppStateMonitor.getInstance().init(this);
         init();
     }
@@ -74,7 +77,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void run() {
                         Log.i("AppStateMonitor:" ,"发送通知");
-                        sendNotification1();
+                        //sendNotification1();
                     }
                 },5000);
             }
@@ -452,7 +455,6 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                 .setNotificationView(new MyNotifyView(this))
                 .show();
     }
-
 
     private void sendNotification17(){
         new CustomNotification<Void>()

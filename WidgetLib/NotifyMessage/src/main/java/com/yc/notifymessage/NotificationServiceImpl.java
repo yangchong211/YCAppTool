@@ -166,6 +166,7 @@ public class NotificationServiceImpl implements INotificationService<CustomNotif
         mNotificationContainerView.setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss() {
+                //隐藏通知栏
                 mNotificationManager.hideNotification();
             }
         });

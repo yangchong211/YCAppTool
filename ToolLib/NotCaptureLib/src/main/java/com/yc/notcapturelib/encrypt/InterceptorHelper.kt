@@ -90,7 +90,9 @@ object InterceptorHelper {
         //组装数据
         val encryptVersion = NotCaptureHelper.getInstance().config.encryptVersion
         val encryptData = encrypt(encryptVersion, data)
-        LoggerReporter.report("NotCaptureHelper", "buildNewParameterList encryptData 加密数据: $data")
+        if (NotCaptureHelper.getInstance().config.isDebug){
+            LoggerReporter.report("NotCaptureHelper", "buildNewParameterList encryptData 加密数据: $data")
+        }
         return mutableListOf<Triple<Boolean, String, String?>>().apply {
             //添加ev数据，这个是加解密版本号
             add(Triple(false, EncryptDecryptInterceptor.KEY_ENCRYPT_VERSION, encryptVersion))
@@ -117,9 +119,11 @@ object InterceptorHelper {
             val encryptVersion = encryptResponseBody?.encryptVersion
             if (!encryptVersion.isNullOrEmpty()) {
                 val decryptResponseBodyStr = decrypt(encryptVersion, encryptResponseBody.result ?: "") ?: ""
-                LoggerReporter.report("NotCaptureHelper",
-                    "handleResponse toResponseBody 解密后响应数据: $decryptResponseBodyStr"
-                )
+                if (NotCaptureHelper.getInstance().config.isDebug){
+                    LoggerReporter.report("NotCaptureHelper",
+                        "handleResponse toResponseBody 解密后响应数据: $decryptResponseBodyStr"
+                    )
+                }
                 response.newBuilder()
                     .body(decryptResponseBodyStr.toResponseBody(responseBody.contentType()))
                     .build()
@@ -150,17 +154,21 @@ object InterceptorHelper {
             val encryptVersion = encryptResponseBody?.encryptVersion
             if (!encryptVersion.isNullOrEmpty()) {
                 val result = encryptResponseBody.result ?: ""
-                LoggerReporter.report(
-                    "NotCaptureHelper",
-                    "handleResponse result 加密过的响应数据: $result"
-                )
+                if (NotCaptureHelper.getInstance().config.isDebug){
+                    LoggerReporter.report(
+                        "NotCaptureHelper",
+                        "handleResponse result 加密过的响应数据: $result"
+                    )
+                }
                 val decryptResponseBodyStr = decrypt(encryptVersion, result) ?: ""
                 val toResponseBody =
                     decryptResponseBodyStr.toResponseBody(responseBody.contentType())
-                LoggerReporter.report(
-                    "NotCaptureHelper",
-                    "handleResponse toResponseBody 解密后响应数据: ${toResponseBody.string()}"
-                )
+                if (NotCaptureHelper.getInstance().config.isDebug){
+                    LoggerReporter.report(
+                        "NotCaptureHelper",
+                        "handleResponse toResponseBody 解密后响应数据: ${toResponseBody.string()}"
+                    )
+                }
                 response.newBuilder()
                     .body(toResponseBody)
                     .build()

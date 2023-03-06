@@ -65,6 +65,8 @@ dependencies {
     implementation 'com.github.yangchong211.YCDialog:DialogFragment:3.6.8'
     implementation 'com.github.yangchong211.YCDialog:BaseDialog:3.6.8'
 
+    implementation project(path: ':NotifyBusiness')
+    implementation project(path: ':StatusBarLib')
     implementation project(path: ':AppLogClient')
     implementation project(path: ':AppLogService')
 

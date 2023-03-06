@@ -35,4 +35,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
+
+    implementation project(path: ':KotlinBusiness')
 }

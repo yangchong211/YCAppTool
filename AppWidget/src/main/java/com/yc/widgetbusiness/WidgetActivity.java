@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toolutils.click.PerfectClickListener;
-import com.yc.widgetbusiness.banner.BannerActivity;
 import com.yc.widgetbusiness.blur.BlurActivity;
 import com.yc.widgetbusiness.chart.PreActivity;
 import com.yc.widgetbusiness.event.EventActivity;
@@ -22,6 +21,7 @@ import com.yc.widgetbusiness.round.RoundCornersActivity;
 import com.yc.widgetbusiness.shadow.ShadowActivity;
 import com.yc.widgetbusiness.textview.MixtureTextViewActivity;
 import com.yc.widgetbusiness.zoom.ZoomMainActivity;
+import com.yc.ycnotification.NotificationActivity;
 import com.yc.ycstatusbar.BarActivity;
 
 public class WidgetActivity extends AppCompatActivity {
@@ -37,6 +37,7 @@ public class WidgetActivity extends AppCompatActivity {
     private RoundTextView tvWidgetBlur;
     private RoundTextView tvWidgetBanner;
     private RoundTextView tvWidgetBar;
+    private RoundTextView tvWidgetNotify;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class WidgetActivity extends AppCompatActivity {
         tvWidgetBlur = findViewById(R.id.tv_widget_blur);
         tvWidgetBanner = findViewById(R.id.tv_widget_banner);
         tvWidgetBar = findViewById(R.id.tv_widget_bar);
+        tvWidgetNotify = findViewById(R.id.tv_widget_notify);
     }
 
     public void initListener() {
@@ -126,6 +128,12 @@ public class WidgetActivity extends AppCompatActivity {
             @Override
             protected void onNoDoubleClick(View v) {
                 BarActivity.startActivity(WidgetActivity.this);
+            }
+        });
+        tvWidgetNotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WidgetActivity.this, NotificationActivity.class));
             }
         });
     }

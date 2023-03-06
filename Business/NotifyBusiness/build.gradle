@@ -36,7 +36,7 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
 //    implementation 'com.github.yangchong211.YCNotification:NotificationLib:1.0.4'
 //    implementation 'com.github.yangchong211.YCNotification:NotifyMessage:1.0.4'
-
+    implementation project(path: ':StatusBarLib')
     implementation project(path: ':NotificationLib')
     implementation project(path: ':NotifyMessage')
 }

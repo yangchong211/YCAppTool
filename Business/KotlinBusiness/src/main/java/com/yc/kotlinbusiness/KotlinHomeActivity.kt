@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.yc.kotlinbusiness.scope.KotlinScopeActivity
 import com.yc.kotlinbusiness.scope.LifecycleScopeActivity
+import com.yc.kotlinbusiness.scope.LiveDataScopeActivity
+import com.yc.kotlinbusiness.scope.ViewModelScopeActivity
 
 class KotlinHomeActivity : AppCompatActivity(){
 
@@ -25,6 +27,12 @@ class KotlinHomeActivity : AppCompatActivity(){
         }
         findViewById<TextView>(R.id.tv_2).setOnClickListener {
             startActivity(Intent(this, LifecycleScopeActivity::class.java))
+        }
+        findViewById<TextView>(R.id.tv_3).setOnClickListener {
+            startActivity(Intent(this, LiveDataScopeActivity::class.java))
+        }
+        findViewById<TextView>(R.id.tv_4).setOnClickListener {
+            startActivity(Intent(this, ViewModelScopeActivity::class.java))
         }
     }
 

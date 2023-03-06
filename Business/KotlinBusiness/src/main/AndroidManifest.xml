@@ -6,6 +6,8 @@
         <activity android:name="com.yc.kotlinbusiness.KotlinHomeActivity"/>
         <activity android:name="com.yc.kotlinbusiness.scope.KotlinScopeActivity"/>
         <activity android:name="com.yc.kotlinbusiness.scope.LifecycleScopeActivity"/>
+        <activity android:name="com.yc.kotlinbusiness.scope.LiveDataScopeActivity"/>
+        <activity android:name="com.yc.kotlinbusiness.scope.ViewModelScopeActivity"/>
     </application>
 
 </manifest>

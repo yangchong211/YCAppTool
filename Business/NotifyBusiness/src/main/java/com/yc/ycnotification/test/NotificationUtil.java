@@ -13,7 +13,6 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.yc.toolutils.BitmapUtils;
 import com.yc.ycnotification.NotificationActivity;
 import com.yc.ycnotification.NotifyHomeActivity;
 import com.yc.ycnotification.R;
@@ -218,7 +217,6 @@ public class NotificationUtil {
                 setContentTitle("杨充正在邀请你语音电话").
                 setContentText("点击进入").
                 setSmallIcon(R.drawable.ic_notification_music_logo).
-                setLargeIcon(BitmapUtils.getBitmap(R.drawable.ic_notification_music_logo)).
                 setPriority(NotificationCompat.PRIORITY_HIGH).
                 setCategory(NotificationCompat.CATEGORY_CALL).
                 setContentIntent(pendingIntent);

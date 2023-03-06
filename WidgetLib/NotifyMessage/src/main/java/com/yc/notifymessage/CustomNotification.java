@@ -31,21 +31,37 @@ public class CustomNotification<T> implements Parcelable {
 
     private static final int TYPE_UNKNOWN = -1;
 
-    // 显示的通知 View
+    /**
+     * 显示的通知 View
+     */
     NotificationView<T> mView;
-    // 自动隐藏时间
+    /**
+     * 自动隐藏时间
+     */
     int mTimeout = 0;
-    // 显示优先级
+    /**
+     * 显示优先级
+     */
     int mPriority = 0;
-    // 是否常驻
+    /**
+     * 是否常驻
+     */
     boolean mIsPin;
-    // 是否可被上划收起
+    /**
+     * 是否可被上划收起
+     */
     boolean mIsCollapsible;
-    // 是否可被覆盖（暂时无用）
+    /**
+     * 是否可被覆盖（暂时无用）
+     */
     boolean mIsOverride = true;
-    //通知类型（必须设置）
+    /**
+     * 通知类型（必须设置）
+     */
     int mType = TYPE_UNKNOWN;
-    // 与 view 绑定的 data 类
+    /**
+     * 与 view 绑定的 data 类
+     */
     T mData;
     OnDismissListener mListener;
 

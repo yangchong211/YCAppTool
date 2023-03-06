@@ -32,10 +32,10 @@ class LifecycleScopeActivity : AppCompatActivity(){
             job?.cancel()
         }
         findViewById<TextView>(R.id.tv_3).setOnClickListener {
-            dispatcherScope3()
+            dispatcherScope2()
         }
         findViewById<TextView>(R.id.tv_4).setOnClickListener {
-
+            dispatcherScope3()
         }
         findViewById<TextView>(R.id.tv_5).setOnClickListener {
 
@@ -58,6 +58,14 @@ class LifecycleScopeActivity : AppCompatActivity(){
             delay(5000)
             AppLogUtils.d(TAG+"job end")
             //思考这种是否会阻塞线程
+        }
+    }
+
+    private fun dispatcherScope2() {
+        lifecycleScope.launch(Dispatchers.Default) {
+            AppLogUtils.d(TAG+"job start")
+            delay(5000)
+            AppLogUtils.d(TAG+"job end")
         }
     }
 
