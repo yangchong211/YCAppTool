@@ -75,6 +75,7 @@ class DataStoreCacheImpl(val context: Context?= null, name: String? = "dataStore
 
     override fun readInt(key: String, defValue: Int): Int {
         var value = defValue
+        //Kotlin 协程提供 runBlocking() 协程构建器，以帮助消除同步与异步代码之间的差异。
         runBlocking {
             cache.data.first {
                 try {
