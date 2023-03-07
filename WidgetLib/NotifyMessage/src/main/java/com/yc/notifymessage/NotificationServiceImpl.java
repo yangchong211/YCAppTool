@@ -18,7 +18,9 @@ public class NotificationServiceImpl implements INotificationService<CustomNotif
     @Nullable
     private WindowManager.LayoutParams mLayoutParams;
     private final NotificationManager mNotificationManager;
-    // 用于标志改 Notification 是否展示
+    /**
+     * 用于标志改 Notification 是否展示
+     */
     public boolean mIsShowing;
 
     public NotificationServiceImpl(NotificationManager notificationManager){
@@ -161,7 +163,8 @@ public class NotificationServiceImpl implements INotificationService<CustomNotif
         mLayoutParams.y = NotificationUtils.getNotificationLocationY(context);
 
         mNotificationContainerView = new NotifyContainerView(context);
-        ViewGroup.LayoutParams vl = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        ViewGroup.LayoutParams vl = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
         mNotificationContainerView.setLayoutParams(vl);
         mNotificationContainerView.setOnDismissListener(new OnDismissListener() {
             @Override
@@ -170,7 +173,8 @@ public class NotificationServiceImpl implements INotificationService<CustomNotif
                 mNotificationManager.hideNotification();
             }
         });
-        mNotificationContainerView.addView(notification.getNotificationView().getView());
+        View view = notification.getNotificationView().getView();
+        mNotificationContainerView.addView(view);
         mNotificationContainerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {

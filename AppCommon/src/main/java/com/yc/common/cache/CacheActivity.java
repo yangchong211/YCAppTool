@@ -35,7 +35,7 @@ public class CacheActivity extends BaseActivity {
     private BaseDataCache lruMemoryCache;
     private BaseDataCache lruDiskCache;
     private BaseDataCache storeCache;
-
+    private BaseDataCache fastSpCache;
 
     @Override
     public int getContentView() {
@@ -124,6 +124,20 @@ public class CacheActivity extends BaseActivity {
                 store2();
             }
         });
+        tvView10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showRoundRectToast("fastSp存数据");
+                fastSp1();
+            }
+        });
+        tvView11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showRoundRectToast("fastSp取数据");
+                fastSp2();
+            }
+        });
     }
 
     @SuppressLint("SetTextI18n")
@@ -139,6 +153,8 @@ public class CacheActivity extends BaseActivity {
         tvView7.setText("3.2 使用lruDisk获取数据");
         tvView8.setText("4.1 使用store存储数据");
         tvView9.setText("4.2 使用store获取数据");
+        tvView10.setText("5.1 使用fastSp存储数据");
+        tvView11.setText("5.2 使用fastSp获取数据");
     }
 
     private void initCache() {
@@ -148,6 +164,7 @@ public class CacheActivity extends BaseActivity {
         lruMemoryCache = StoreToolHelper.getInstance().getLruMemoryCache();
         lruDiskCache = StoreToolHelper.getInstance().getLruDiskCache();
         storeCache = StoreToolHelper.getInstance().getStoreCache();
+        fastSpCache = StoreToolHelper.getInstance().getFastSpCache();
     }
 
     private void sp1() {
@@ -253,6 +270,31 @@ public class CacheActivity extends BaseActivity {
         AppLogHelper.d("disk取数据 spkey4: ",spkey4);
         AppLogHelper.d("disk取数据 spkey5: ",spkey5);
         AppLogHelper.d("disk取数据 spkey6: ",spkey6);
+    }
+
+
+    private void fastSp1() {
+        fastSpCache.saveBoolean("spkey1",true);
+        fastSpCache.saveFloat("spkey2",2.0f);
+        fastSpCache.saveInt("spkey3",3);
+        fastSpCache.saveLong("spkey4",4);
+        fastSpCache.saveString("spkey5","doubi5");
+        fastSpCache.saveDouble("spkey6",5.20);
+    }
+
+    private void fastSp2() {
+        boolean spkey1 = fastSpCache.readBoolean("spkey1", false);
+        float spkey2 = fastSpCache.readFloat("spkey2", 0);
+        int spkey3 = fastSpCache.readInt("spkey3", 0);
+        long spkey4 = fastSpCache.readLong("spkey4", 0);
+        String spkey5 = fastSpCache.readString("spkey5", "");
+        double spkey6 = fastSpCache.readDouble("spkey6", 0.0);
+        AppLogHelper.d("fastSp取数据 spkey1: ",spkey1);
+        AppLogHelper.d("fastSp取数据 spkey2: ",spkey2);
+        AppLogHelper.d("fastSp取数据 spkey3: ",spkey3);
+        AppLogHelper.d("fastSp取数据 spkey4: ",spkey4);
+        AppLogHelper.d("fastSp取数据 spkey5: ",spkey5);
+        AppLogHelper.d("fastSp取数据 spkey6: ",spkey6);
     }
 
 }

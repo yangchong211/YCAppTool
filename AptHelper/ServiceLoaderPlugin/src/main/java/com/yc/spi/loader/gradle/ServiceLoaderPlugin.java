@@ -23,7 +23,7 @@ public class ServiceLoaderPlugin implements Plugin<Project> {
     @Override
     @SuppressWarnings("deprecation")
     public void apply(final Project project) {
-        String spiLoaderName = "com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3";
+        String spiLoaderName = "com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.4";
         project.getDependencies().add("implementation", spiLoaderName);
         project.afterEvaluate(p -> {
             //判断是否有 'com.android.application' 依赖的插件

@@ -25,8 +25,8 @@ buildscript {
         //jetpack
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.0.0"
         //自定义插件
-        //classpath 'com.github.yangchong211.YCAppTool:ServiceLoaderPlugin:1.4.3'
-        //classpath 'com.github.yangchong211.YCAppTool:BuildTimeCostPlugin:1.4.3'
+        //classpath 'com.github.yangchong211.YCAppTool:ServiceLoaderPlugin:1.4.4'
+        //classpath 'com.github.yangchong211.YCAppTool:BuildTimeCostPlugin:1.4.4'
 
 
     }

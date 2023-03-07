@@ -39,20 +39,20 @@ dependencies {
     implementation(rootProject.ext.dependencies["swiperefreshlayout"])
     implementation(rootProject.ext.dependencies["coordinatorlayout"])
     //工具类utils：https://github.com/yangchong211/YCCommonLib
-    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:AppRestartLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:AppScreenLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:ImageToolLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolMemoryLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:AppCompress:1.4.3'
+    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppRestartLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppScreenLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ImageToolLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolMemoryLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppCompress:1.4.8'
     //implementation project(path: ':BaseClassLib')
     //implementation project(path: ':AppRestartLib')
     //implementation project(path: ':ActivityManager')

@@ -465,4 +465,5 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                 .setNotificationView(new MyNotifyView2(this))
                 .show();
     }
+
 }

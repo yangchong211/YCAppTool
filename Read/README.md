@@ -221,4 +221,3 @@ https://github.com/Kyson/AndroidGodEye/blob/master/README_zh.md
 - 线程为何跟异常联系在一起。主线程能捕获子线程异常嘛。
 
 
-

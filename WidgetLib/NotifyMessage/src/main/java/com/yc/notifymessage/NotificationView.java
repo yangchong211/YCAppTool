@@ -21,9 +21,15 @@ import androidx.annotation.NonNull;
  */
 public abstract class NotificationView<T> {
 
-    private View mView; // 实际显示的通知的 View
+    /**
+     * 实际显示的通知的 View
+     */
+    private View mView;
     private final Activity mActivity;
-    private CustomNotification<T> mNotification; // 通知的配置类
+    /**
+     * 通知的配置类
+     */
+    private CustomNotification<T> mNotification;
 
     public NotificationView(@NonNull Activity activity) {
         mActivity = activity;

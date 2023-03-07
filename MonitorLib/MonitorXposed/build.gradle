@@ -30,5 +30,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     //Context上下文库
-    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.3'
+    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.8'
 }

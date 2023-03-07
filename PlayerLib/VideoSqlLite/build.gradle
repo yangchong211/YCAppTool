@@ -26,11 +26,11 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["annotation"])
-    implementation 'com.github.yangchong211.YCCommonLib:AppLruCache:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:AppLruDisk:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.3'
+    implementation 'com.github.yangchong211.YCCommonLib:AppLruCache:1.4.4'
+    implementation 'com.github.yangchong211.YCCommonLib:AppLruDisk:1.4.4'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.4'
     //加解密库
-    implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.3'
+    implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.4'
     //implementation project(path: ':AppLruCache')
     //implementation project(path: ':AppLruDisk')
 }

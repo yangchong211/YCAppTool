@@ -43,6 +43,6 @@ dependencies {
     implementation "com.tencent:mmkv-static:1.2.7"
     implementation project(path: ':AppContextLib')
     //通用组件接口库
-    implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.3'
+    implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.4'
     implementation project(path: ':AppFastSp')
 }

@@ -32,11 +32,11 @@ dependencies {
     implementation(rootProject.ext.dependencies["recyclerview"])
     implementation(rootProject.ext.dependencies["media"])
     //工具类utils：https://github.com/yangchong211/YCCommonLib
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:AppCompress:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.3'
-    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.3'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.4'
+    implementation 'com.github.yangchong211.YCCommonLib:AppCompress:1.4.4'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.4'
+    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.4'
+    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.4'
     //implementation project(path: ':ToolUtilsLib')
     //implementation project(path: ':AppCompress')
     //implementation project(path: ':ToolFileLib')

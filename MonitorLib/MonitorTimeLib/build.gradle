@@ -33,5 +33,5 @@ dependencies {
     //轻量级异步线程封装库：https://github.com/yangchong211/YCThreadPool
     implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
     //工具类utils
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.3'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
 }
