@@ -27,7 +27,13 @@ public class NotifyContainerView extends FrameLayout {
      * 是否上滑隐藏布局
      */
     private boolean mIsCollapsible;
+    /**
+     * 是否消费触摸事件
+     */
     private boolean mIsConsumeTouchEvent;
+    /**
+     * 消失监听listener
+     */
     private OnDismissListener mOnDismissListener;
 
     public NotifyContainerView(@NonNull Context context) {
@@ -51,6 +57,14 @@ public class NotifyContainerView extends FrameLayout {
         mOnDismissListener = onDismissListener;
     }
 
+    /**
+     * 分发事件：使用对象	Activity、ViewGroup、View
+     * @param event                         event
+     * @return                              返回值
+     * true： 消费事件；事件不会往下传递；后续事件（Move、Up）会继续分发到该View
+     * false：不消费事件；事件不会往下传递；将事件回传给父控件的onTouchEvent()处理；Activity例外：返回false=消费事件
+     *        后续事件（Move、Up）会继续分发到该View(与onTouchEvent()区别）
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (!mIsCollapsible) {

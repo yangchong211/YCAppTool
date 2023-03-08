@@ -1,19 +1,21 @@
 package com.yc.ycnotification.notifyview;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.yc.notifymessage.OnDismissListener;
-import com.yc.ycnotification.R;
 import com.yc.notifymessage.CustomNotification;
 import com.yc.notifymessage.NotificationView;
 import com.yc.toastutils.ToastUtils;
+import com.yc.ycnotification.NotificationActivity;
+import com.yc.ycnotification.R;
 
-public class MyNotifyView extends NotificationView<Void> {
+public class MyNotifyView3 extends NotificationView<NotificationActivity.Teacher> {
 
-    public MyNotifyView(@NonNull Activity activity) {
+    public MyNotifyView3(@NonNull Activity activity) {
         super(activity);
     }
 
@@ -36,14 +38,14 @@ public class MyNotifyView extends NotificationView<Void> {
         return false;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void bindNotification(CustomNotification<Void> notification) {
+    public void bindNotification(CustomNotification<NotificationActivity.Teacher> notification) {
         super.bindNotification(notification);
-        notification.setDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                ToastUtils.showRoundRectToast("悬浮通知栏消失了");
-            }
-        });
+        NotificationActivity.Teacher data = notification.getData();
+        TextView title = findViewById(R.id.tv_custom_title);
+        if (data!=null){
+            title.setText(data.name + data.age);
+        }
     }
 }

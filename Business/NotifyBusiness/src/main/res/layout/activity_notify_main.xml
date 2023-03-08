@@ -161,6 +161,15 @@
             android:layout_marginTop="10dp"
             android:background="@color/bg"
             android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="18.发送悬浮通知栏，并填充数据"
+            android:layout_marginTop="10dp"
+            android:background="@color/bg"
+            android:padding="10dp"/>
     </LinearLayout>
 
 </ScrollView>

@@ -19,7 +19,7 @@ public class MyNotifyView2 extends NotificationView<Void> {
 
     @Override
     public int provideLayoutResourceId() {
-        return R.layout.notify_custom_view2;
+        return R.layout.notify_custom_view;
     }
 
     @Override

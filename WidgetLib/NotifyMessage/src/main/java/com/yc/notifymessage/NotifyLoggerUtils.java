@@ -11,7 +11,7 @@ import android.util.Log;
  *     revise:
  * </pre>
  */
-public final class LoggerUtils {
+public final class NotifyLoggerUtils {
 
     private static Logger sLogger = null;
 

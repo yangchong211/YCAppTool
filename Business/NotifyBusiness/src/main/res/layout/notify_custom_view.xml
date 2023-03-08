@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:rRadius="10dp"
         android:background="@color/color_f25057">
@@ -51,6 +52,7 @@
 
         <Button
             android:id="@+id/btn_click"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

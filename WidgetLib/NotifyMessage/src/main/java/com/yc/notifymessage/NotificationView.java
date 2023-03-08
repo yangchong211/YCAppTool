@@ -80,7 +80,7 @@ public abstract class NotificationView<T> {
         return mActivity;
     }
 
-    protected <T extends View> T findViewById(@IdRes int id) {
+    protected <V extends View> V findViewById(@IdRes int id) {
         if (mView == null) {
             throw new NullPointerException("View is not created!");
         }

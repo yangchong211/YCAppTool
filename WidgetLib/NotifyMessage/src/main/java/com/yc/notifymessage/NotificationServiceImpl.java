@@ -31,7 +31,7 @@ public class NotificationServiceImpl implements INotificationService<CustomNotif
     public void show(CustomNotification notification) {
         try {
             if (notification == null || notification.getActivity() == null) {
-                LoggerUtils.log("handleShow returned: mNotification == null || mNotification.getActivity() == null");
+                NotifyLoggerUtils.log("handleShow returned: mNotification == null || mNotification.getActivity() == null");
                 return;
             }
             initNotificationView(notification);
@@ -49,31 +49,32 @@ public class NotificationServiceImpl implements INotificationService<CustomNotif
                 } else if (mLayoutParams == null) {
                     reason = "mLayoutParams == null";
                 }
-                LoggerUtils.log("handleShow returned: " + reason);
+                NotifyLoggerUtils.log("handleShow returned: " + reason);
                 return;
             }
+            //判断activity是否是非存活状态
             if (NotificationUtils.isActivityNotAlive(mNotificationContainerView.getActivity())) {
-                LoggerUtils.log("handleShow returned: activity is finishing or destroyed!");
+                NotifyLoggerUtils.log("handleShow returned: activity is finishing or destroyed!");
                 return;
             }
-            LoggerUtils.log("handleShow before addView: mLayoutParams.token" + mNotificationContainerView.getWindowToken());
+            NotifyLoggerUtils.log("handleShow before addView: mLayoutParams.token" + mNotificationContainerView.getWindowToken());
             mLayoutParams.token = mNotificationContainerView.getWindowToken();
             mWindowManager.addView(mNotificationContainerView, mLayoutParams);
-            LoggerUtils.log("handleShow after addView");
+            NotifyLoggerUtils.log("handleShow after addView");
             changeIsShowing(true);
             mNotificationContainerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
                 @Override
                 public void onLayoutChange(View v, int left, int top, int right, int bottom,
                                            int oldLeft, int oldTop, int oldRight, int oldBottom) {
                     if (mNotificationContainerView == null) {
-                        LoggerUtils.log("handleShow animation: mNotificationContainerView == null");
+                        NotifyLoggerUtils.log("handleShow animation: mNotificationContainerView == null");
                         return;
                     } else if (NotificationUtils.isActivityNotAlive(mNotificationContainerView.getActivity())) {
-                        LoggerUtils.log("handleShow animation: mNotificationContainerView.getActivity() is not alive : "
+                        NotifyLoggerUtils.log("handleShow animation: mNotificationContainerView.getActivity() is not alive : "
                                 + mNotificationContainerView.getActivity());
                         return;
                     } else if (notification == null) {
-                        LoggerUtils.log("handleShow animation: mNotification == null");
+                        NotifyLoggerUtils.log("handleShow animation: mNotification == null");
                         return;
                     }
                     resetAnimation(mNotificationContainerView);

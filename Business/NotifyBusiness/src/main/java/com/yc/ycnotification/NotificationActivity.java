@@ -25,10 +25,12 @@ import com.yc.notificationlib.AppNotifyHelper;
 import com.yc.notificationlib.NotificationParams;
 import com.yc.notificationlib.NotificationUtils;
 import com.yc.notifymessage.CustomNotification;
+import com.yc.notifymessage.OnDismissListener;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 import com.yc.ycnotification.notifyview.MyNotifyView;
 import com.yc.ycnotification.notifyview.MyNotifyView2;
+import com.yc.ycnotification.notifyview.MyNotifyView3;
 import com.yc.ycnotification.test.NotificationUtil;
 
 public class NotificationActivity extends AppCompatActivity implements View.OnClickListener {
@@ -50,6 +52,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     private TextView tv_15;
     private TextView tv_16;
     private TextView tv_17;
+    private TextView tv_18;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         tv_15 = (TextView) findViewById(R.id.tv_15);
         tv_16= (TextView) findViewById(R.id.tv_16);
         tv_17= (TextView) findViewById(R.id.tv_17);
+        tv_18= (TextView) findViewById(R.id.tv_18);
     }
 
     private void initListener() {
@@ -122,6 +126,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         tv_15.setOnClickListener(this);
         tv_16.setOnClickListener(this);
         tv_17.setOnClickListener(this);
+        tv_18.setOnClickListener(this);
     }
 
 
@@ -162,6 +167,8 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
             sendNotification16();
         } else if (id == R.id.tv_17) {
             sendNotification17();
+        } else if (id == R.id.tv_18) {
+            sendNotification18();
         }
     }
 
@@ -448,7 +455,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
 
     private void sendNotification16(){
         new CustomNotification<Void>()
-                .setType(1)
+                .setType(52)
                 .setCollapsible(false)
                 .setTimeOut(3000)
                 .setPriority(100)
@@ -458,12 +465,31 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
 
     private void sendNotification17(){
         new CustomNotification<Void>()
-                .setType(1)
+                .setType(100)
                 .setCollapsible(false)
                 .setTimeOut(5000)
                 .setPriority(60)
                 .setNotificationView(new MyNotifyView2(this))
                 .show();
+        CustomNotification.cancel(52);
+    }
+
+
+    private void sendNotification18(){
+        new CustomNotification<Teacher>()
+                .setType(102)
+                .setCollapsible(false)
+                .setTimeOut(5000)
+                .setData(new Teacher())
+                .setPriority(60)
+                .setNotificationView(new MyNotifyView3(this))
+                .show();
+        CustomNotification.cancel(52);
+    }
+
+    public static class Teacher{
+        public String name = "yangchong";
+        public int age = 29;
     }
 
 }

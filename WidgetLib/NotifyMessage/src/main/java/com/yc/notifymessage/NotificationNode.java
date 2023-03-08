@@ -23,11 +23,11 @@ public class NotificationNode {
     public static final int ANIM_DURATION = 200;
 
     protected CustomNotification mNotification;
-    private final INotificationService<CustomNotification> notificationService;
+    private final INotificationService<CustomNotification> notificationServiceImpl;
 
     public NotificationNode(CustomNotification notification,
                             NotificationManager notificationManager) {
-        notificationService = new NotificationServiceImpl(notificationManager);
+        notificationServiceImpl = new NotificationServiceImpl(notificationManager);
         mNotification = notification;
     }
 
@@ -36,11 +36,11 @@ public class NotificationNode {
     }
 
     boolean isShowing() {
-        return notificationService.isShowing();
+        return notificationServiceImpl.isShowing();
     }
 
     void changeIsShowing(boolean isShowing){
-        notificationService.changeIsShowing(isShowing);
+        notificationServiceImpl.changeIsShowing(isShowing);
     }
 
     CustomNotification getNotification() {
@@ -71,11 +71,11 @@ public class NotificationNode {
     }
 
     protected void handleShow() {
-        notificationService.show(mNotification);
+        notificationServiceImpl.show(mNotification);
     }
 
     protected void handleHide(final Animator.AnimatorListener listener) {
-        notificationService.cancel(mNotification,listener);
+        notificationServiceImpl.cancel(mNotification,listener);
     }
 
 }

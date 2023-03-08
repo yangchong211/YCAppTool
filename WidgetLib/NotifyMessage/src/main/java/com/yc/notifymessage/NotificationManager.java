@@ -46,7 +46,7 @@ public class NotificationManager {
     /**
      * 采用弱引用管理handler
      */
-    private final MyHandler mHandler = new MyHandler(this);
+    private final WeakMyHandler mHandler = new WeakMyHandler(this);
 
 
     private NotificationManager() {

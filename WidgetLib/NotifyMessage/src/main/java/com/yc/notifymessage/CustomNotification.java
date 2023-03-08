@@ -63,9 +63,13 @@ public class CustomNotification<T> implements Parcelable {
      * 与 view 绑定的 data 类
      */
     T mData;
+    /**
+     * 消失监听listener
+     */
     OnDismissListener mListener;
 
     public CustomNotification() {
+
     }
 
     protected CustomNotification(Parcel in) {
@@ -140,7 +144,7 @@ public class CustomNotification<T> implements Parcelable {
         return this;
     }
 
-    public CustomNotification<T> setDismissListener(OnDismissListener listener) {
+    CustomNotification<T> setDismissListener(OnDismissListener listener) {
         mListener = listener;
         return this;
     }

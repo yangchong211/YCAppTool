@@ -17,7 +17,7 @@ import java.lang.ref.WeakReference;
  *     revise: 弱引用–>随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。
  * </pre>
  */
-public class MyHandler extends Handler {
+public class WeakMyHandler extends Handler {
 
     /**
      * 采用弱引用管理NotificationManager
@@ -25,7 +25,7 @@ public class MyHandler extends Handler {
      */
     private final WeakReference<NotificationManager> mWeakReference;
 
-    public MyHandler(NotificationManager notificationManager) {
+    public WeakMyHandler(NotificationManager notificationManager) {
         mWeakReference = new WeakReference<>(notificationManager);
     }
 
@@ -37,6 +37,7 @@ public class MyHandler extends Handler {
         }
         int action = msg.what;
         if (action == NotificationManager.MSG_SHOW) {
+            //处理展示悬浮窗的消息
             Bundle bundle = msg.getData();
             CustomNotification notification = bundle.getParcelable(NotificationManager.BUNDLE_NOTIFICATION);
             if (notification != null) {
