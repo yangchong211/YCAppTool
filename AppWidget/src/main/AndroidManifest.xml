@@ -34,6 +34,7 @@
         <activity android:name=".banner.MeBannerActivity"/>
         <activity android:name=".banner.BannerActivity"/>
         <activity android:name=".event.EventActivity"/>
+        <activity android:name=".dialog.DialogActivity"/>
     </application>
 
 

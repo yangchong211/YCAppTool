@@ -386,10 +386,32 @@ public class CustomPopupWindow implements PopupWindow.OnDismissListener {
             mPopupWindow.setOutsideTouchable(mIsOutside);
         }
 
+        /*View contentView = mPopupWindow.getContentView();
+        contentView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                resetAnimation(contentView);
+                //contentView.setTranslationY(-contentView.getHeight());
+                contentView.animate().translationY(0).setDuration(200).start();
+                contentView.removeOnLayoutChangeListener(this);
+            }
+        });*/
+
         //实现关闭监听
         this.mPopupWindow.setOnDismissListener(this);
         this.mPopupWindow.update();
         return this.mPopupWindow;
+    }
+
+    /**
+     * 取消当前的动画
+     */
+    private void resetAnimation(View view) {
+        if (view == null) {
+            return;
+        }
+        view.animate().cancel();
+        view.animate().setListener(null);
     }
 
     private void apply(PopupWindow mPopupWindow) {

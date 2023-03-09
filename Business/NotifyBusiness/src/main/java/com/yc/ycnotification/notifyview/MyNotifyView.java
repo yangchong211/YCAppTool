@@ -39,11 +39,6 @@ public class MyNotifyView extends NotificationView<Void> {
     @Override
     public void bindNotification(CustomNotification<Void> notification) {
         super.bindNotification(notification);
-        notification.setDismissListener(new OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                ToastUtils.showRoundRectToast("悬浮通知栏消失了");
-            }
-        });
     }
+
 }

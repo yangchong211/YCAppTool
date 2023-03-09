@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
+import com.yc.toolutils.AppWindowUtils;
+
 
 /**
  * <pre>
@@ -65,7 +67,7 @@ public abstract class BasePopDialog extends PopupWindow {
      * @param bgAlpha 透明度
      */
     public void setBgAlpha(float bgAlpha) {
-        PopupUtils.setBackgroundAlpha((Activity) mContext, bgAlpha);
+        AppWindowUtils.setBackgroundAlpha((Activity) mContext, bgAlpha);
     }
 
     /**
@@ -80,7 +82,7 @@ public abstract class BasePopDialog extends PopupWindow {
     @Override
     public void dismiss() {
         super.dismiss();
-        PopupUtils.setBackgroundAlpha((Activity) mContext, 1f);
+        AppWindowUtils.setBackgroundAlpha((Activity) mContext, 1f);
         if (mHandler != null) {
             if (delayedRun != null) {
                 mHandler.removeCallbacks(delayedRun);

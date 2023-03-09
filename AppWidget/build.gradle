@@ -58,12 +58,19 @@ dependencies {
     implementation 'com.github.yangchong211.YCBannerView:GalleryBannerLib:2.3.6'
 
 
-    implementation 'com.github.yangchong211.YCDialog:DialogLib:3.6.8'
-    implementation 'com.github.yangchong211.YCDialog:PopupWindow:3.6.8'
-    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
-    implementation 'com.github.yangchong211.YCDialog:SnackBar:3.6.8'
-    implementation 'com.github.yangchong211.YCDialog:DialogFragment:3.6.8'
-    implementation 'com.github.yangchong211.YCDialog:BaseDialog:3.6.8'
+//    implementation 'com.github.yangchong211.YCDialog:DialogLib:3.6.8'
+//    implementation 'com.github.yangchong211.YCDialog:PopupWindow:3.6.8'
+//    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
+//    implementation 'com.github.yangchong211.YCDialog:SnackBar:3.6.8'
+//    implementation 'com.github.yangchong211.YCDialog:DialogFragment:3.6.8'
+//    implementation 'com.github.yangchong211.YCDialog:BaseDialog:3.6.8'
+
+    implementation project(path: ':PopupWindow')
+    implementation project(path: ':ToastUtils')
+    implementation project(path: ':SnackBar')
+    implementation project(path: ':DialogFragment')
+    implementation project(path: ':BaseDialog')
+
 
     implementation project(path: ':NotifyBusiness')
     implementation project(path: ':StatusBarLib')

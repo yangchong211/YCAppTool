@@ -15,6 +15,7 @@
     - 用于通知消息提醒，运营活动。其实可以参考微信来了消息的悬浮弹窗！主要是引导用户关注，提供核心信息。
 
 
+
 #### 1.2 业务目标说明
 - 业务目标
     - 1.通知弹窗可以高度定制各种View(或者layout布局)
@@ -27,9 +28,22 @@
     - 3.悬浮的交互(主要是点击)，以及动画效果(主要是展现和隐藏的过渡动画)
 
 
+#### 1.3 设计目标
+- 复用性强
+    - 可以快速在多个App中使用该通知弹窗，使用简单。且完全跟业务解耦合，该库只是专注于通知弹窗功能
+- 可以完全自定义视图
+    - 通知弹窗UI样式，可能在不同的业务场景展示效果不一样。这个时候可以支持自定义视图就很关键了
+- 暴露强大的API给开发者
+    - 可以支持弹出，设置自定义n秒后，自动消失逻辑。
+    - 可以灵活设置是否需要上滑动隐藏通知弹窗。
+    - 可以设置自定义View视图中按钮或者整个视图的点击事件，暴露给开发者实现业务逻辑。
+
+
 
 ### 02.常见思路和做法
 #### 2.1 总体设计思路
+- 设计思路的灵感
+    - 其核心设计思路的灵感来自于手机系统的弹窗Notification的设计思路。
 - 第一步设计接口：主要是悬浮窗
     - 1.需要设计悬浮通知弹窗常见操作，比如弹出展现，隐藏，判断是否已经弹出等。这样基于接口设计让弹窗功能一目了然！
     - 2.悬浮通知消失后，可能有一些业务逻辑需要处理，隐藏需要监听该事件，因此需要设计监听回调接口！
@@ -80,6 +94,9 @@
     //取消
     cancel(int type)
     ```
+- 针对外部开发者设置自定义View，抽取抽象类，主要作用是约束和复用部分逻辑
+    - 具体逻辑可以看NotificationView，传入外部View记得继承该类。
+
 
 
 #### 2.3 整体架构设计
@@ -98,6 +115,7 @@
     
     ```
 
+
 #### 3.2 如何使用Api
 - 创建通知栏并且展现
     ``` java
@@ -113,11 +131,56 @@
     ``` java
     CustomNotification.cancel(52);
     ```
-
+- 如何自定义View
+    ``` java
+    public class MyNotifyView extends NotificationView<Teacher> {
+    
+        public MyNotifyView(@NonNull Activity activity) {
+            super(activity);
+        }
+    
+        @Override
+        public int provideLayoutResourceId() {
+            return R.layout.notify_custom_view;
+        }
+    
+        @Override
+        public int[] provideClickableViewArray() {
+            return new int[]{R.id.btn_click};
+        }
+    
+        @Override
+        protected boolean onClick(View view, int id) {
+            if (id == R.id.btn_click) {
+                ToastUtils.showRoundRectToast("点击吐司");
+                return true;
+            }
+            return false;
+        }
+    
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void bindNotification(CustomNotification<NotificationActivity.Teacher> notification) {
+            super.bindNotification(notification);
+            Teacher data = notification.getData();
+            TextView title = findViewById(R.id.tv_custom_title);
+            if (data!=null){
+                title.setText(data.name + data.age);
+            }
+        }
+    }
+    ```
+- 案例UI的效果
+    - ![image](https://img-blog.csdnimg.cn/f61d70e0a98c4010b13b9b0d6adb2faf.png)
 
 
 
 ### 04.一些其他设计
+#### 4.1 性能上设计
+- 展示和隐藏涉及到handler消息
+    - 由于通知需要上下文Context，可能会引发handler持有上下文导致内存泄漏。固这里采用弱引用–>随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。
+- 关于动画的销毁设计
+    - 由于展现和隐藏，都会涉及到动画。因此在使用动画的时候，注意动画资源的效果，并且需要移动动画监听。
 
 
 

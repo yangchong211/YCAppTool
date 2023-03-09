@@ -13,6 +13,7 @@ import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.widgetbusiness.blur.BlurActivity;
 import com.yc.widgetbusiness.chart.PreActivity;
+import com.yc.widgetbusiness.dialog.DialogActivity;
 import com.yc.widgetbusiness.event.EventActivity;
 import com.yc.widgetbusiness.floatpage.FloatActivity;
 import com.yc.widgetbusiness.image.ImageViewActivity;
@@ -38,6 +39,7 @@ public class WidgetActivity extends AppCompatActivity {
     private RoundTextView tvWidgetBanner;
     private RoundTextView tvWidgetBar;
     private RoundTextView tvWidgetNotify;
+    private RoundTextView tvWidgetDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class WidgetActivity extends AppCompatActivity {
         tvWidgetBanner = findViewById(R.id.tv_widget_banner);
         tvWidgetBar = findViewById(R.id.tv_widget_bar);
         tvWidgetNotify = findViewById(R.id.tv_widget_notify);
+        tvWidgetDialog = findViewById(R.id.tv_widget_dialog);
     }
 
     public void initListener() {
@@ -134,6 +137,12 @@ public class WidgetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(WidgetActivity.this, NotificationActivity.class));
+            }
+        });
+        tvWidgetDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WidgetActivity.this, DialogActivity.class));
             }
         });
     }

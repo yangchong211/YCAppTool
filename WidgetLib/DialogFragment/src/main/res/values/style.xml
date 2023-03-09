@@ -12,6 +12,16 @@
         <item name="android:windowExitAnimation">@anim/slide_out_to_bottom</item>
     </style>
 
+    <style name="TopAnimationStyle1">
+        <item name="android:windowEnterAnimation">@anim/anim_top_show</item>
+        <item name="android:windowExitAnimation">@anim/anim_top_hide</item>
+    </style>
+
+    <style name="TopAnimationStyle2">
+        <item name="android:windowEnterAnimation">@anim/slide_top_show</item>
+        <item name="android:windowExitAnimation">@anim/slide_top_hide</item>
+    </style>
+
     <style name="Loading" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
