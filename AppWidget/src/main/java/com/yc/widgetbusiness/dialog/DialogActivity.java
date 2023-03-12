@@ -23,6 +23,7 @@ import com.yc.library.base.mvp.BaseActivity;
 import com.yc.popup.CustomPopupWindow;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
+import com.yc.toolutils.AppWindowUtils;
 import com.yc.widgetbusiness.R;
 
 public class DialogActivity extends BaseActivity {
@@ -180,6 +181,7 @@ public class DialogActivity extends BaseActivity {
                 .PopupWindowBuilder(this)
                 .setView(R.layout.view_pop_custom)
                 .setOutsideTouchable(false)
+                .size(AppWindowUtils.getScreenWidth(),500)
                 .setAnimationStyle(R.style.TopAnimationStyle2)
                 .setBgDarkAlpha(0.5f)
                 .create();
