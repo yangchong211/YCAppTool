@@ -3,14 +3,13 @@ package com.yc.jetpack.study.lifecycle
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import com.yc.architecturelib.lifecycle.ActivityLifecycleObserver
 import com.yc.jetpack.R
-import com.yc.jetpack.study.livedata.LiveDataActivity
 import com.yc.jetpack.study.livedata.TextViewModel
 import com.yc.toolutils.AppLogUtils
+
 
 class LifecycleActivity : AppCompatActivity() {
 
@@ -28,6 +27,7 @@ class LifecycleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_saved_state)
         initLive()
+        testLifecycle()
         AppLogUtils.d("LifecycleActivity" , "onCreate")
     }
 
@@ -48,6 +48,25 @@ class LifecycleActivity : AppCompatActivity() {
 
     private fun initLive(){
         this.lifecycle.addObserver(ActivityLifecycleObserver())
+    }
+
+    private fun testLifecycle() {
+        lifecycle.addObserver(object : LifecycleObserver {
+            @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+            fun onCreate() {
+                AppLogUtils.d("LifecycleObserver onCreate() called")
+            }
+
+            @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+            fun onResume() {
+                AppLogUtils.d("LifecycleObserver onResume() called")
+            }
+
+            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+            fun onDestroy() {
+                AppLogUtils.d("LifecycleObserver onDestroy() called")
+            }
+        })
     }
 
 }
