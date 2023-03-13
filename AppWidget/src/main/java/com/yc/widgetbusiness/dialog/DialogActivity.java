@@ -181,6 +181,7 @@ public class DialogActivity extends BaseActivity {
                 .PopupWindowBuilder(this)
                 .setView(R.layout.view_pop_custom)
                 .setOutsideTouchable(false)
+                .setClippingEnable(false)
                 .size(AppWindowUtils.getScreenWidth(),500)
                 .setAnimationStyle(R.style.TopAnimationStyle2)
                 .setBgDarkAlpha(0.5f)
