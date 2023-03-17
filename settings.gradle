@@ -38,7 +38,7 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
-        ':GsonServer', ':IpcServer', ':ObjectEqualLib',
+        ':GsonServer', ':IpcServer', ':ObjectEqualLib',':TcpServerLib',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
         ':GlideProgressLib', ':CompressServer',  ':RetrofitNetLib',  ':Transformation'
@@ -61,6 +61,7 @@ project(':GlideProgressLib').projectDir = new File('ServerLib/GlideProgressLib')
 project(':CompressServer').projectDir = new File('ServerLib/CompressServer')
 project(':RetrofitNetLib').projectDir = new File('ServerLib/RetrofitNetLib')
 project(':Transformation').projectDir = new File('ServerLib/Transformation')
+project(':TcpServerLib').projectDir = new File('ServerLib/TcpServerLib')
 
 
 
@@ -273,5 +274,6 @@ project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 project(':BellsVibrations').projectDir = new File('PlayerLib/BellsVibrations')
 project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')
 project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
+
 
 
