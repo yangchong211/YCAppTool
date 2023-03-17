@@ -167,7 +167,6 @@ public class MixtureTextViewActivity extends AppCompatActivity {
         spannableString.setSpan(imageSpan1, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 
 
-
         Drawable drawable2 = this.getResources().getDrawable(R.mipmap.camera);
         drawable2.setBounds(0, 0, drawable2.getIntrinsicWidth(), drawable2.getIntrinsicHeight());
         ImageSpan imageSpan2 = new AlignImageSpan(drawable2);
