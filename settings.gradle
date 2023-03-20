@@ -176,7 +176,7 @@ project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinator
 include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
         ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,':NtpTimeLib' ,
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib',':EasyExecutor',
-        ':ThreadPoolLib', ':ThreadTaskLib', ':AutoCloserLib', ':AppProcessLib',
+        ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
@@ -190,7 +190,6 @@ project(':AnimatorToolLib').projectDir = new File('ToolLib/AnimatorToolLib')
 project(':AppTraceTool').projectDir = new File('ToolLib/AppTraceTool')
 project(':LongAliveLib').projectDir = new File('ToolLib/LongAliveLib')
 project(':ThreadPoolLib').projectDir = new File('ToolLib/ThreadPoolLib')
-project(':ThreadTaskLib').projectDir = new File('ToolLib/ThreadTaskLib')
 project(':AutoCloserLib').projectDir = new File('ToolLib/AutoCloserLib')
 project(':AppProcessLib').projectDir = new File('ToolLib/AppProcessLib')
 project(':EasyExecutor').projectDir = new File('ToolLib/EasyExecutor')
