@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -85,6 +86,7 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
                                                    @NonNull HttpParams params,
                                                    @NonNull HttpHeaders headers) {
                         headers.put("timestamp", String.valueOf(System.currentTimeMillis()));
+                        headers.put("uid" , Binder.getCallingUid()+"");
                     }
                 })
                 // 设置请求重试次数

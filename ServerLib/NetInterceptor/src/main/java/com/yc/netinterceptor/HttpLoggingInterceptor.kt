@@ -164,12 +164,15 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
             stringBuffer.append(" ($bodySize body)")
         }
         stringBuffer.append(" ")
+        logger.log(stringBuffer.toString())
         val mediaType = responseBody.contentType()
         if (mediaType != null) {
             if (isText(mediaType)) {
+                val responseString = StringBuffer()
                 val resp = responseBody.string()
-                stringBuffer.append(resp)
-                logger.log(stringBuffer.toString())
+                responseString.append("<-- END ResponseBody : ")
+                responseString.append(resp)
+                logger.log(responseString.toString())
                 return response.newBuilder().body(ResponseBody.create(mediaType, resp)).build()
             }
         }
@@ -229,7 +232,7 @@ class HttpLoggingInterceptor @JvmOverloads constructor(
 
     private fun logHeader(headers: Headers, i: Int) {
         val value = if (headers.name(i) in headersToRedact) " " else headers.value(i)
-        logger.log("Header" + headers.name(i) + ": " + value)
+        logger.log("Header-> " + headers.name(i) + ": " + value)
     }
 
     private fun isText(mediaType: MediaType): Boolean {

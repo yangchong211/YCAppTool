@@ -22,9 +22,10 @@ fun interface IHttpLogger {
         val DEFAULT: IHttpLogger = DefaultLogger()
 
         private class DefaultLogger : IHttpLogger {
-            val TAG = "okhttp: "
+            val TAG = "OkHttp: "
             override fun log(message: String) {
                 //Log.d(TAG, message)
+                //System.out.println(TAG + message)
                 Platform.get().log(TAG + message)
             }
         }
