@@ -1,5 +1,6 @@
 package com.zuoyebang.iot.mod.tcp.receive
 
+import com.yc.logclient.LogUtils
 import com.zuoyebang.iot.mod.tcp.data.TcpDataBean
 import com.zuoyebang.iot.mod.tcp.inter.IReceive
 import java.util.concurrent.LinkedBlockingQueue
@@ -9,7 +10,7 @@ internal class ReceiveImpl(private val mBlockingQueue: LinkedBlockingQueue<TcpDa
 
     override fun receive(data: TcpDataBean) {
         mBlockingQueue.add(data)
-        //TcpLog.d(TAG, "receive:${data},queue.size:${mBlockingQueue.size}")
+        LogUtils.d(TAG, "receive:${data},queue.size:${mBlockingQueue.size}")
     }
 
     companion object {

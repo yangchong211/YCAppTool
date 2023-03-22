@@ -1,5 +1,6 @@
 package com.zuoyebang.iot.mod.tcp
 
+import com.yc.logclient.LogUtils
 import com.zuoyebang.iot.mod.tcp.data.TcpDataBean
 import com.zuoyebang.iot.mod.tcp.inter.*
 import com.zuoyebang.iot.mod.tcp.receive.ReceiveProxy
@@ -46,7 +47,7 @@ class TcpCore(private val socket: ITcpSocket) {
         }
 
         override fun connectFail(exception: Exception) {
-            TcpLog.d(TAG, "connectFail:${exception.localizedMessage}")
+            LogUtils.d(TAG, "connectFail:${exception.localizedMessage}")
             mTcpListener?.onConnectState(false)
         }
 
@@ -74,9 +75,11 @@ class TcpCore(private val socket: ITcpSocket) {
     }
 
     init {
-        send = SendProxy(TcpContext.sendQueue) //send()方法 ,将一条帧数据 放到优先队列中.
-        receive = ReceiveProxy(TcpContext.readQueue) //收到一条消息,就保存到readQueue队列中.
-        TcpLog.d("TcpCore was init:" + Thread.currentThread().name)
+        //send()方法 ,将一条帧数据 放到优先队列中.
+        send = SendProxy(TcpContext.sendQueue)
+        //收到一条消息,就保存到readQueue队列中.
+        receive = ReceiveProxy(TcpContext.readQueue)
+        LogUtils.d("TcpCore was init: ${Thread.currentThread().name}")
     }
 
 
@@ -113,16 +116,15 @@ class TcpCore(private val socket: ITcpSocket) {
      * 开启Tcp 线程
      */
     fun start() {
-        TcpLog.d(TAG, "TcpCore start:" + Thread.currentThread().name)
+        LogUtils.d(TAG, "TcpCore start:" + Thread.currentThread().name)
         checkThread()
         mTcpConnectThread?.start()
         mTcpWriteThread?.start()
         mDispatcherThread?.start()
-
     }
 
     fun release() {
-        TcpLog.d(TAG, "release():" + Thread.currentThread().name)
+        LogUtils.d(TAG, "release():" + Thread.currentThread().name)
         mTcpConnectThread?.quit()
         mTcpWriteThread?.quit()
         mDispatcherThread?.quit()
@@ -147,7 +149,7 @@ class TcpCore(private val socket: ITcpSocket) {
         val time = measureTimeMillis {
             mTcpConnectThread?.setEnable(isEnable)
         }
-        TcpLog.d(TAG, "setEnable:$isEnable,spent:${time} ms")
+        LogUtils.d(TAG, "setEnable:$isEnable,spent:${time} ms")
     }
 
 
@@ -178,7 +180,7 @@ class TcpCore(private val socket: ITcpSocket) {
         return TcpContext.sendQueue.find {
             it.tag.contains(typeTag)
         }.apply {
-            TcpLog.d("findTcpDataInQueByTypeTag:${typeTag},sendQueue:${TcpContext.sendQueue.size},${this}")
+            LogUtils.d("findTcpDataInQueByTypeTag:${typeTag},sendQueue:${TcpContext.sendQueue.size},${this}")
         }
     }
 

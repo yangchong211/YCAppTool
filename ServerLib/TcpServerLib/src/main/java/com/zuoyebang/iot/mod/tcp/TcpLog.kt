@@ -1,11 +1,14 @@
 package com.zuoyebang.iot.mod.tcp
 
-import android.util.Log
+import com.yc.logclient.LogUtils
+import com.zuoyebang.iot.mod.tcp.inter.TcpLogDDelegate
+import com.zuoyebang.iot.mod.tcp.inter.TcpLogDelegate
+import com.zuoyebang.iot.mod.tcp.inter.TcpLogIndelicate
 
 
 object TcpLog {
 
-    const val TAG = " tcp_log "
+    const val TAG = " tcp_yc_log "
 
     private var logDelegate: TcpLogDDelegate? = null
     private var logEDelegate: TcpLogDelegate? = null
@@ -38,7 +41,7 @@ object TcpLog {
         if (logIDelegate != null) {
             logIDelegate?.invoke(TAG, msg, getAppendStackIndex())
         } else {
-            Log.i(TAG, msg)
+            LogUtils.i(TAG, msg)
         }
     }
 
@@ -47,7 +50,7 @@ object TcpLog {
         if (logIDelegate != null) {
             logIDelegate?.invoke(TAG + tag, msg, getAppendStackIndex())
         } else {
-            Log.i(TAG + tag, msg)
+            LogUtils.i(TAG + tag, msg)
         }
     }
 
@@ -56,7 +59,7 @@ object TcpLog {
         if (logDelegate != null) {
             logDelegate?.invoke(TAG, msg, getAppendStackIndex())
         } else {
-            Log.d(TAG, msg)
+            LogUtils.d(TAG, msg)
         }
     }
 
@@ -65,7 +68,7 @@ object TcpLog {
         if (logDelegate != null) {
             logDelegate?.invoke(TAG + tag, msg, getAppendStackIndex())
         } else {
-            Log.d(TAG + tag, msg)
+            LogUtils.d(TAG + tag, msg)
         }
     }
 
@@ -74,7 +77,7 @@ object TcpLog {
         if (logEDelegate != null) {
             logEDelegate?.invoke(TAG, msg, null, getAppendStackIndex())
         } else {
-            Log.d(TAG, msg)
+            LogUtils.d(TAG, msg)
         }
     }
 
@@ -83,7 +86,7 @@ object TcpLog {
         if (logEDelegate != null) {
             logEDelegate?.invoke(TAG + tag, msg, null, getAppendStackIndex())
         } else {
-            Log.d(TAG + tag, msg)
+            LogUtils.d(TAG + tag, msg)
         }
     }
 
@@ -92,7 +95,7 @@ object TcpLog {
         if (logEDelegate != null) {
             logEDelegate?.invoke(TAG, msg, null, getAppendStackIndex())
         } else {
-            Log.d(TAG, msg, e)
+            LogUtils.d(TAG, msg, e)
         }
     }
 
@@ -101,7 +104,7 @@ object TcpLog {
         if (logEDelegate != null) {
             logEDelegate?.invoke(TAG + tag, msg, e, getAppendStackIndex())
         } else {
-            Log.e(TAG + tag, msg, e)
+            LogUtils.e(TAG + tag, msg, e)
         }
 
     }
@@ -110,7 +113,3 @@ object TcpLog {
         return 3
     }
 }
-
-typealias TcpLogDDelegate = (tag: String, msg: String, appendStackIndex: Int) -> Unit
-typealias TcpLogDelegate = (tag: String, msg: String, e: Throwable?, appendStackIndex: Int) -> Unit
-typealias TcpLogIndelicate = (tag: String, msg: String, appendStackIndex: Int) -> Unit

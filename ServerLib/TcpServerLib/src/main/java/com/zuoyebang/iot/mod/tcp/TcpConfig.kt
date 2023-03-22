@@ -1,6 +1,7 @@
 package com.zuoyebang.iot.mod.tcp
 
 import androidx.annotation.IntDef
+import com.yc.logclient.LogUtils
 import com.zuoyebang.iot.mod.tcp.ServerHostConfig.Companion.SERVER_HOST_TEST
 
 object TcpConfig {
@@ -31,7 +32,7 @@ object TcpConfig {
     private var currHost: Int = ServerHostConfig.SERVER_HOST_TEST
     fun setHostConfig(@ServerHostConfig currHost: Int) {
         this.currHost = currHost
-        TcpLog.d("host..${currHost}")
+        LogUtils.d("host..${currHost}")
     }
 
     fun getServerHost(): String {
@@ -64,8 +65,8 @@ object TcpConfig {
             }
         }
     }
-    const val THREAD_RUN = "------- Run -------"
-    const val THREAD_OVER = "------- Over -------"
+    const val THREAD_RUN = " Run "
+    const val THREAD_OVER = " Over "
 }
 
 @IntDef(flag = true,

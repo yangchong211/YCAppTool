@@ -1,5 +1,6 @@
 package com.zuoyebang.iot.mod.tcp.trustmanager
 
+import com.yc.logclient.LogUtils
 import com.zuoyebang.iot.mod.tcp.TcpContext
 import com.zuoyebang.iot.mod.tcp.TcpLog
 import java.security.KeyStore
@@ -42,7 +43,7 @@ class TrustManagerComplex(private val assetFileName: String, val password: Strin
             }
         }
         if (privateX509TrustManager == null) {
-            TcpLog.e("generatePrivateX509Manager failed")
+            LogUtils.e("generatePrivateX509Manager failed")
         }
 
     }
@@ -66,7 +67,7 @@ class TrustManagerComplex(private val assetFileName: String, val password: Strin
         }
 
         if (defaultX509TrustManager == null) {
-            TcpLog.e("defaultX509TrustManager failed")
+            LogUtils.e("defaultX509TrustManager failed")
         }
         return defaultX509TrustManager
     }
@@ -104,7 +105,7 @@ class TrustManagerComplex(private val assetFileName: String, val password: Strin
         }
 
         if (!success) {
-            TcpLog.i("@@@@@@@@@@@@@@@@@ checkServerTrusted fails")
+            LogUtils.i("@@@@@@@@@@@@@@@@@ checkServerTrusted fails")
             throw CertificateException("https cert verify fails")
         }
 

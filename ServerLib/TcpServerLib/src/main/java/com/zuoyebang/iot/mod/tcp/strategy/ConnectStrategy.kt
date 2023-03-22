@@ -1,5 +1,6 @@
 package com.zuoyebang.iot.mod.tcp.strategy
 
+import com.yc.logclient.LogUtils
 import com.zuoyebang.iot.mod.tcp.TcpLog
 import com.zuoyebang.iot.mod.tcp.inter.DisconnectTcp
 
@@ -15,7 +16,7 @@ class ConnectStrategy {
      */
     fun setEnable(isEnable: Boolean, disconnectTcp: DisconnectTcp) {
         synchronized(mLock) {
-            TcpLog.d(TAG, "setEnable:${isEnable} ")
+            LogUtils.d(TAG, "setEnable:${isEnable} ")
             if (isEnable) {
                 mLock.notifyAll()
             } else {
@@ -31,11 +32,11 @@ class ConnectStrategy {
      */
     private fun tryBlockThreadByMultiFailed() {
         connectFailTimes++
-        TcpLog.d("tryBlockThreadByMultiFailed:${connectFailTimes}")
+        LogUtils.d("tryBlockThreadByMultiFailed:${connectFailTimes}")
         if (connectFailTimes > FailedThreshold) {
             try {
                 synchronized(mLock) {
-                    TcpLog.d(
+                    LogUtils.d(
                         TAG,
                         "tryBlockThreadByMultiFailed block here by $FAIL_WAIT_INTERVAL ms"
                     )
@@ -60,7 +61,7 @@ class ConnectStrategy {
         if (!enable) {
             try {
                 synchronized(mLock) { //isEnable为false,则wait 挂起线程。
-                    TcpLog.d(
+                    LogUtils.d(
                         TAG,
                         "checkEnable:${enable},block here"
                     )
@@ -68,10 +69,11 @@ class ConnectStrategy {
                 }
             } catch (e: InterruptedException) {
                 e.printStackTrace()
-                TcpLog.e("checkEnable:", e)
+                LogUtils.e("checkEnable:", e)
             }
-        } else { //enable Tcp 连接时,检查失败次数是否达到上限，若达上限,需要阻塞一段时间
-            TcpLog.d(
+        } else {
+            //enable Tcp 连接时,检查失败次数是否达到上限，若达上限,需要阻塞一段时间
+            LogUtils.d(
                 TAG,
                 "checkEnable enable:${enable},try connect"
             )

@@ -9,6 +9,10 @@ typealias TcpMessageCallBack = (TcpMessage) -> Unit
 typealias TcpStateCallBack = (TcpState) -> Unit
 typealias DisconnectTcp = () -> Unit
 typealias MessageDispatchCallBack = (tcpData: TcpDataBean) -> Unit
+typealias TcpLogDDelegate = (tag: String, msg: String, appendStackIndex: Int) -> Unit
+typealias TcpLogDelegate = (tag: String, msg: String, e: Throwable?, appendStackIndex: Int) -> Unit
+typealias TcpLogIndelicate = (tag: String, msg: String, appendStackIndex: Int) -> Unit
+
 
 interface ITcpSocket {
 

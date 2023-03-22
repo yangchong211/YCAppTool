@@ -1,5 +1,6 @@
 package com.zuoyebang.iot.mod.tcp.thread
 
+import com.yc.logclient.LogUtils
 import com.zuoyebang.iot.mod.tcp.TcpConfig
 import com.zuoyebang.iot.mod.tcp.TcpLog
 import com.zuoyebang.iot.mod.tcp.inter.WriteCallBack
@@ -19,7 +20,7 @@ class TcpWriteThread(
 
     override fun run() {
 
-        TcpLog.e(
+        LogUtils.e(
             TAG,
             "${TcpConfig.THREAD_RUN},mQuit：${mQuit},${this}-${System.identityHashCode(this)}"
         )
@@ -49,7 +50,7 @@ class TcpWriteThread(
             if (data != null) {
                 try {
                     if (data!!.state == DataState.Canceled) {
-                        TcpLog.d(
+                        LogUtils.d(
                             TAG,
                             "----- data was canceled,just continue} ------${this}-${
                                 System.identityHashCode(this)
@@ -60,15 +61,15 @@ class TcpWriteThread(
                     data!!.state = DataState.Sending
                     mSocket.write(data!!.bytes)
                     data!!.state = DataState.Sent
-                    //TcpLog.d(TAG, "Tcp Write成功:${data}")
+                    //LogUtils.d(TAG, "Tcp Write成功:${data}")
                     mWriteCallback.writeSuccess(data!!)
                 } catch (e: Exception) {
-                    TcpLog.e(TAG, "Tcp Write异常:${data},${this}-${System.identityHashCode(this)}", e)
+                    LogUtils.e(TAG, "Tcp Write异常:${data},${this}-${System.identityHashCode(this)}", e)
                     //写失败的数据放到队列尾部
                     data?.apply {
                         increaseRetry()
                         if (!shouldBeDrop()) {
-                            TcpLog.e(
+                            LogUtils.e(
                                 TAG,
                                 "重新放入发送队列:${data},:${this@TcpWriteThread}-${
                                     System.identityHashCode(this@TcpWriteThread)
@@ -77,7 +78,7 @@ class TcpWriteThread(
                             insert2QueueHead(this)
 
                         } else {
-                            TcpLog.e(
+                            LogUtils.e(
                                 TAG,
                                 "数据写失败,达到最大重试次数,丢弃:${data},${this@TcpWriteThread}-${
                                     System.identityHashCode(this@TcpWriteThread)
@@ -97,7 +98,7 @@ class TcpWriteThread(
             }
         }
 
-        TcpLog.e(TAG, TcpConfig.THREAD_OVER)
+        LogUtils.e(TAG, TcpConfig.THREAD_OVER)
     }
 
 

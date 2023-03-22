@@ -1,6 +1,7 @@
 package com.zuoyebang.iot.mod.tcp
 
 import android.app.Application
+import com.yc.logclient.LogUtils
 import com.zuoyebang.iot.mod.tcp.data.TcpDataBean
 import com.zuoyebang.iot.mod.tcp.inter.*
 import com.zuoyebang.iot.mod.tcp.trustmanager.TrustManagerProvider
@@ -75,7 +76,7 @@ object TcpContext {
      * 分发Tcp 消息
      */
     fun onMessage(tcpMessage: TcpMessage) {
-        //TcpLog.d("onMessage:${tcpMessage}")
+        //LogUtils.d("onMessage:${tcpMessage}")
         mTcpMessageCallBacks.forEach {
             it.value.invoke(tcpMessage)
         }
@@ -102,11 +103,11 @@ object TcpContext {
         if (tcpState != state) {
             tcpState = state
             onTcpState(tcpState)
-            TcpLog.d("updateTcpState:${state}")
+            LogUtils.d("updateTcpState:${state}")
         }
     }
 
-    fun onTcpState(tcpState: TcpState) {
+    private fun onTcpState(tcpState: TcpState) {
         mTcpStateCallBacks.forEach {
             it.value.invoke(tcpState)
         }

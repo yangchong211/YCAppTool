@@ -1,5 +1,6 @@
 package com.zuoyebang.iot.mod.tcp.thread
 
+import com.yc.logclient.LogUtils
 import com.zuoyebang.iot.mod.tcp.TcpConfig
 import com.zuoyebang.iot.mod.tcp.TcpContext
 import com.zuoyebang.iot.mod.tcp.TcpLog
@@ -22,15 +23,12 @@ class TcpConnectThread(
     private var mQuit = false
     private var mConnStrategy: ConnectStrategy = ConnectStrategy()
     private var mException: Exception? = null
-
     //是否启动Tcp连接
     private var isEnable: Boolean = true
 
     override fun run() {
-
         while (!mQuit) {
-
-            TcpLog.e(
+            LogUtils.e(
                 TAG,
                 "${TcpConfig.THREAD_RUN},isEnable:${isEnable}:${this}-${System.identityHashCode(this)}"
             )
@@ -39,12 +37,8 @@ class TcpConnectThread(
                 mConnStrategy.checkEnable(isEnable)
                 //设置最长Tcp连接超时时长为3分钟
                 setTcpState(TcpState.CONNECTING)
-                TcpLog.d(TAG, "重新连接tcp...:${this}-${System.identityHashCode(this)}")
-                mSocket.connectTls(
-                    TcpConfig.getServerHost(),
-                    TcpConfig.getServerPort(),
-                    60 * 1000
-                ) // 连接服务器
+                LogUtils.d(TAG, "重新连接tcp...:${this}-${System.identityHashCode(this)}")
+                mSocket.connectTls(TcpConfig.getServerHost(), TcpConfig.getServerPort(), 60 * 1000) // 连接服务器
                 mConnStrategy.reset()
             } catch (e: Exception) {
                 mException = e
@@ -53,7 +47,7 @@ class TcpConnectThread(
 
             }
 
-            TcpLog.d(
+            LogUtils.d(
                 TAG,
                 "isException:${mException != null},${this}-${System.identityHashCode(this)}"
             )
@@ -65,15 +59,15 @@ class TcpConnectThread(
             } else { //连接成功
                 setTcpState(TcpState.CONNECTED)
                 mConnectCallback.connectSuccess()
-                TcpLog.d(TAG, "enter mSocket.read ,${this}-${System.identityHashCode(this)}")
+                LogUtils.d(TAG, "enter mSocket.read ,${this}-${System.identityHashCode(this)}")
                 mSocket.read(mReceive, mReadCallback) { type, msg ->
                     resetConnect(type, msg)
                 }
-                TcpLog.d(TAG, "exit mSocket.read ,${this}-${System.identityHashCode(this)}")
+                LogUtils.d(TAG, "exit mSocket.read ,${this}-${System.identityHashCode(this)}")
             }
         }
 
-        TcpLog.e(
+        LogUtils.e(
             TAG,
             "${TcpConfig.THREAD_OVER},isEnable:${isEnable},mQuit:${mQuit} ,${this}-${
                 System.identityHashCode(this)
@@ -83,7 +77,7 @@ class TcpConnectThread(
 
 
     fun resetConnect(type: TcpError, errorMsg: String?) {
-        TcpLog.d(
+        LogUtils.d(
             TAG,
             "resetConnect errorType:$type,errorMsg:$errorMsg ${this}-${System.identityHashCode(this)}"
         )
@@ -91,6 +85,9 @@ class TcpConnectThread(
         mSocket.disconnect()
     }
 
+    /**
+     * 退出线程
+     */
     fun quit() {
         mQuit = true
         setTcpState(TcpState.NOT_CONNECT)
@@ -98,7 +95,7 @@ class TcpConnectThread(
     }
 
     fun setEnable(enable: Boolean) {
-        TcpLog.d("setEnable:${enable},curEnable:${isEnable}")
+        LogUtils.d("setEnable:${enable},curEnable:${isEnable}")
         if (isEnable != enable) {
             isEnable = enable
             mConnStrategy.setEnable(enable) {
