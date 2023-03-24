@@ -106,6 +106,7 @@ public class BleDeviceAdapter extends BaseAdapter {
             holder.btn_connect = (Button) convertView.findViewById(R.id.btn_connect);
             holder.btn_detail = (Button) convertView.findViewById(R.id.btn_detail);
             holder.btn_read = convertView.findViewById(R.id.btn_read);
+            holder.iv_rssi = convertView.findViewById(R.id.iv_rssi);
         }
 
         final BleDevice bleDevice = getItem(position);
@@ -117,6 +118,19 @@ public class BleDeviceAdapter extends BaseAdapter {
             holder.txt_name.setText(name);
             holder.txt_mac.setText(mac);
             holder.txt_rssi.setText(String.valueOf(rssi));
+            if(rssi > -50) {
+                // 4格
+                holder.iv_rssi.setImageResource(R.mipmap.icon_signal_4);
+            } else if(rssi > -70) {
+                // 3格
+                holder.iv_rssi.setImageResource(R.mipmap.icon_signal_3);
+            } else if(rssi > -90) {
+                // 2格
+                holder.iv_rssi.setImageResource(R.mipmap.icon_signal_2);
+            } else {
+                // 1格
+                holder.iv_rssi.setImageResource(R.mipmap.icon_signal_1);
+            }
             if (isConnected) {
                 holder.img_blue.setImageResource(R.mipmap.ic_blue_connected);
                 holder.txt_name.setTextColor(0xFF1DE9B6);
@@ -180,7 +194,7 @@ public class BleDeviceAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        ImageView img_blue;
+        ImageView img_blue , iv_rssi;
         TextView txt_name;
         TextView txt_mac;
         TextView txt_rssi;

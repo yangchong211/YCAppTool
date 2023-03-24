@@ -52,6 +52,7 @@ import com.yc.easyble.exception.BleException;
 import com.yc.easyble.config.BleScanRuleConfig;
 import com.yc.toolutils.AppLogUtils;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -86,7 +87,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             Intent target = new Intent();
             target.setClass(context, BleMainActivity.class);
             context.startActivity(target);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -120,7 +121,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         BleManager.getInstance().destroy();
     }
 
-    private void test(){
+    private void test() {
         boolean blueEnable = BleManager.getInstance().isBlueEnable();
         AppLogUtils.d("BleManager: 是否支持蓝牙 " + blueEnable);
         boolean b = BleManager.getInstance().enableBluetooth();
@@ -150,7 +151,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 layout_setting.setVisibility(View.VISIBLE);
                 txt_setting.setText(getString(R.string.retrieve_search_settings));
             }
-        } else if (id == R.id.btn_find){
+        } else if (id == R.id.btn_find) {
             Set<BluetoothDevice> bondedDevices =
                     BleManager.getInstance().getBluetoothAdapter().getBondedDevices();
             List<BleDevice> deviceList = new ArrayList<>();
@@ -333,6 +334,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
 
     /**
      * 连接
+     *
      * @param bleDevice
      */
     private void connect(final BleDevice bleDevice) {
@@ -340,7 +342,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onStartConnect() {
                 progressDialog.show();
-                tvContent.setText("连接状态："+"开始连接");
+                tvContent.setText("连接状态：" + "开始连接");
             }
 
             @Override
@@ -349,7 +351,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 img_loading.setVisibility(View.INVISIBLE);
                 btn_scan.setText(getString(R.string.start_scan));
                 progressDialog.dismiss();
-                tvContent.setText("连接状态："+"连接失败"+exception.getDescription());
+                tvContent.setText("连接状态：" + "连接失败" + exception.getDescription());
                 Toast.makeText(BleMainActivity.this, getString(R.string.connect_fail), Toast.LENGTH_LONG).show();
             }
 
@@ -358,7 +360,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 progressDialog.dismiss();
                 mDeviceAdapter.addDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
-                tvContent.setText("连接状态："+"连接成功");
+                tvContent.setText("连接状态：" + "连接成功");
             }
 
             @Override
@@ -369,9 +371,9 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 mDeviceAdapter.notifyDataSetChanged();
 
                 if (isActiveDisConnected) {
-                    tvContent.setText("连接状态："+"断开了");
+                    tvContent.setText("连接状态：" + "断开了");
                 } else {
-                    tvContent.setText("连接状态："+"连接断开");
+                    tvContent.setText("连接状态：" + "连接断开");
                     ObserverManager.getInstance().notifyObserver(bleDevice);
                 }
             }
@@ -383,13 +385,13 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onRssiFailure(BleException exception) {
                 Log.i(TAG, "onRssiFailure" + exception.toString());
-                tvContent.setText("连接状态："+"onRssiFailure" + exception.toString());
+                tvContent.setText("连接状态：" + "onRssiFailure" + exception.toString());
             }
 
             @Override
             public void onRssiSuccess(int rssi) {
                 Log.i(TAG, "onRssiSuccess: " + rssi);
-                tvContent.setText("连接状态："+"onRssiSuccess" + rssi);
+                tvContent.setText("连接状态：" + "onRssiSuccess" + rssi);
             }
         });
     }
@@ -502,5 +504,4 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
     }
-
 }

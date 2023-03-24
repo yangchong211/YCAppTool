@@ -55,6 +55,7 @@
                 android:textSize="10sp" />
 
             <ImageView
+                android:id="@+id/iv_rssi"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginLeft="5dp"
