@@ -40,6 +40,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["okhttp"])
     implementation(rootProject.ext.dependencies["lifecycleRuntime"])
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
+    implementation project(path: ':BleBusiness')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':RoundCorners')
@@ -60,5 +61,6 @@ dependencies {
     implementation project(path: ':NotCaptureLib')
     implementation project(path: ':AudioHelper')
     implementation project(path: ':TcpManager')
+
 }
 

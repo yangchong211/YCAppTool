@@ -30,6 +30,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.yc.blesample.R;
+import com.yc.blesample.chat.chat.ChatActivity;
 import com.yc.blesample.chat.client.DeviceActivity;
 import com.yc.blesample.chat.server.AcceptService;
 
@@ -52,6 +53,20 @@ public class BleChatActivity extends AppCompatActivity {
 
     public static final int REQUEST_ACCESS_COARSE_LOCATION_PERMISSION = 100;
 
+    /**
+     * 开启页面
+     *
+     * @param context 上下文
+     */
+    public static void startActivity(Context context) {
+        try {
+            Intent target = new Intent();
+            target.setClass(context, BleChatActivity.class);
+            context.startActivity(target);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override

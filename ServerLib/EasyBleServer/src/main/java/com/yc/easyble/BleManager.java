@@ -767,28 +767,29 @@ public final class BleManager {
 
 
     /**
-     * 判断是否打开蓝牙
+     * 打开蓝牙
      */
-    public void enableBluetooth() {
+    public boolean enableBluetooth() {
         if (bluetoothAdapter != null) {
-            bluetoothAdapter.enable();
+            return bluetoothAdapter.enable();
         }
+        return false;
     }
 
     /**
-     * Disable bluetooth
+     * 关闭本地蓝牙
      */
-    public void disableBluetooth() {
+    public boolean disableBluetooth() {
         if (bluetoothAdapter != null) {
             if (bluetoothAdapter.isEnabled()) {
-                bluetoothAdapter.disable();
+                return bluetoothAdapter.disable();
             }
         }
+        return false;
     }
 
     /**
-     * judge Bluetooth is enable
-     *
+     * 调用 isEnabled()，以检查当前是否已启用蓝牙。如果此方法返回 false，则表示蓝牙处于停用状态。
      * @return
      */
     public boolean isBlueEnable() {
@@ -922,6 +923,7 @@ public final class BleManager {
         if (bleDevice != null) {
             return bluetoothManager.getConnectionState(bleDevice.getDevice(), BluetoothProfile.GATT);
         } else {
+            //设备未连接
             return BluetoothProfile.STATE_DISCONNECTED;
         }
     }

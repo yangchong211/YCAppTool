@@ -38,9 +38,9 @@ dependencies {
     implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation(rootProject.ext.dependencies["recyclerview"])
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
-    implementation 'com.github.yangchong211.YCCommonLib:AppPermission:1.3.5'
-    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.3.5'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.3.5'
+    implementation 'com.github.yangchong211.YCCommonLib:AppPermission:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
     implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
     implementation project(path: ':AppUpdateLib')
     //其他

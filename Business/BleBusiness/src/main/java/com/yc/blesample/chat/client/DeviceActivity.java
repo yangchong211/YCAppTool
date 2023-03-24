@@ -185,6 +185,8 @@ public class DeviceActivity extends Activity {
                 case ClientService.CONNECTED_FAIL:
                     Log.i(TAG, "connected fail");
                     break;
+                default:
+                    break;
             }
         }
     };

@@ -6,13 +6,6 @@
     android:animateLayoutChanges="true"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:title="@string/app_name"
-        app:titleTextColor="@android:color/white" />
 
     <LinearLayout
         android:id="@+id/layout_setting"
@@ -20,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="#eeeeee"
         android:orientation="vertical"
+        android:layout_margin="10dp"
         android:padding="20dp">
 
         <TextView
@@ -78,14 +72,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
-        android:layout_gravity="center_horizontal"
-        android:background="#eeeeee"
-        android:padding="10dp" />
-
-    <TextView
-        android:id="@+id/txt_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="连接状态："
         android:layout_gravity="center_horizontal"
         android:background="#eeeeee"
         android:padding="10dp" />
@@ -96,11 +83,16 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <Button
-            android:id="@+id/btn_easy"
+
+        <TextView
+            android:id="@+id/txt_setting"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="简单案例" />
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="#eeeeee"
+            android:padding="10dp" />
 
         <Button
             android:id="@+id/btn_scan"
@@ -108,6 +100,14 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/start_scan" />
+
+        <Button
+            android:id="@+id/btn_find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="查询已经配对" />
 
         <ImageView
             android:id="@+id/img_loading"

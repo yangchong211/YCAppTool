@@ -3,6 +3,8 @@ package com.yc.blesample.ble;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothClass;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,13 +36,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.yc.blesample.BleEasyActivity;
 import com.yc.blesample.R;
 import com.yc.blesample.ble.adapter.BleDeviceAdapter;
 import com.yc.blesample.ble.comm.ObserverManager;
 import com.yc.blesample.ble.operation.OperationActivity;
 import com.yc.blesample.chat.base.BleChatActivity;
-import com.yc.blesample.chat.client.DeviceActivity;
+import com.yc.blesample.demo.BleEasyActivity;
 import com.yc.easyble.BleManager;
 import com.yc.easyble.callback.BleGattCallback;
 import com.yc.easyble.callback.BleMtuChangedCallback;
@@ -48,9 +50,11 @@ import com.yc.easyble.callback.BleScanCallback;
 import com.yc.easyble.data.BleDevice;
 import com.yc.easyble.exception.BleException;
 import com.yc.easyble.config.BleScanRuleConfig;
+import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -63,8 +67,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout layout_setting;
     private TextView txt_setting;
     private TextView tvContent;
-    private Button btn_scan;
-    private Button btnEasy;
+    private Button btn_scan, btn_find;
     private EditText et_name, et_mac, et_uuid;
     private Switch sw_auto;
     private ImageView img_loading;
@@ -82,7 +85,6 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         try {
             Intent target = new Intent();
             target.setClass(context, BleMainActivity.class);
-            //target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(target);
         } catch (Exception e){
             e.printStackTrace();
@@ -118,6 +120,17 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         BleManager.getInstance().destroy();
     }
 
+    private void test(){
+        boolean blueEnable = BleManager.getInstance().isBlueEnable();
+        AppLogUtils.d("BleManager: 是否支持蓝牙 " + blueEnable);
+        boolean b = BleManager.getInstance().enableBluetooth();
+        AppLogUtils.d("BleManager: 判断是否打开蓝牙 " + b);
+        boolean b2 = BleManager.getInstance().disableBluetooth();
+        AppLogUtils.d("BleManager: 关闭本地蓝牙 " + b);
+        boolean b3 = BleManager.getInstance().enableBluetooth();
+        AppLogUtils.d("BleManager: 打开蓝牙 " + b3);
+    }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -137,21 +150,38 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 layout_setting.setVisibility(View.VISIBLE);
                 txt_setting.setText(getString(R.string.retrieve_search_settings));
             }
-        } else if (id == R.id.btn_easy) {
-            startActivity(new Intent(this, BleChatActivity.class));
+        } else if (id == R.id.btn_find){
+            Set<BluetoothDevice> bondedDevices =
+                    BleManager.getInstance().getBluetoothAdapter().getBondedDevices();
+            List<BleDevice> deviceList = new ArrayList<>();
+            if (bondedDevices.size() > 0) {
+                // There are paired devices. Get the name and address of each paired device.
+                for (BluetoothDevice device : bondedDevices) {
+                    //获取名称
+                    String deviceName = device.getName();
+                    // MAC address
+                    String deviceHardwareAddress = device.getAddress();
+                    BluetoothClass bluetoothClass = device.getBluetoothClass();
+                    int bondState = device.getBondState();
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                        int type = device.getType();
+                    }
+                    ParcelUuid[] uuids = device.getUuids();
+                    deviceList.add(new BleDevice(device));
+                }
+            }
+            mDeviceAdapter.clearConnectedDevice();
+            mDeviceAdapter.addAllDevice(deviceList);
         }
     }
 
     private void initView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         tvContent = findViewById(R.id.tv_content);
         btn_scan = (Button) findViewById(R.id.btn_scan);
+        btn_find = findViewById(R.id.btn_find);
         btn_scan.setText(getString(R.string.start_scan));
         btn_scan.setOnClickListener(this);
-        btnEasy = findViewById(R.id.btn_easy);
-        btnEasy.setOnClickListener(this);
+        btn_find.setOnClickListener(this);
         et_name = (EditText) findViewById(R.id.et_name);
         et_mac = (EditText) findViewById(R.id.et_mac);
         et_uuid = (EditText) findViewById(R.id.et_uuid);
@@ -160,7 +190,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         layout_setting = (LinearLayout) findViewById(R.id.layout_setting);
         txt_setting = (TextView) findViewById(R.id.txt_setting);
         txt_setting.setOnClickListener(this);
-        layout_setting.setVisibility(View.GONE);
+        layout_setting.setVisibility(View.VISIBLE);
         txt_setting.setText(getString(R.string.expand_search_settings));
 
         img_loading = (ImageView) findViewById(R.id.img_loading);
@@ -215,13 +245,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
 
     private void showConnectedDevice() {
         List<BleDevice> deviceList = BleManager.getInstance().getAllConnectedDevice();
-        mDeviceAdapter.clearConnectedDevice();
-        if (deviceList != null) {
-            for (BleDevice bleDevice : deviceList) {
-                mDeviceAdapter.addDevice(bleDevice);
-            }
-        }
-        mDeviceAdapter.notifyDataSetChanged();
+        mDeviceAdapter.addAllDevice(deviceList);
     }
 
     /**
@@ -282,6 +306,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 mDeviceAdapter.notifyDataSetChanged();
                 img_loading.startAnimation(operatingAnim);
                 img_loading.setVisibility(View.VISIBLE);
+                btn_find.setVisibility(View.GONE);
                 btn_scan.setText(getString(R.string.stop_scan));
             }
 
@@ -292,15 +317,16 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void onScanning(BleDevice bleDevice) {
-                mDeviceAdapter.addDevice(bleDevice);
-                mDeviceAdapter.notifyDataSetChanged();
+
             }
 
             @Override
             public void onScanFinished(List<BleDevice> scanResultList) {
+                mDeviceAdapter.addAllDevice(scanResultList);
                 img_loading.clearAnimation();
                 img_loading.setVisibility(View.INVISIBLE);
-                btn_scan.setText(getString(R.string.start_scan));
+                btn_scan.setText(getString(R.string.stop_scan));
+                btn_find.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -314,7 +340,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onStartConnect() {
                 progressDialog.show();
-                tvContent.setText("开始连接");
+                tvContent.setText("连接状态："+"开始连接");
             }
 
             @Override
@@ -323,7 +349,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 img_loading.setVisibility(View.INVISIBLE);
                 btn_scan.setText(getString(R.string.start_scan));
                 progressDialog.dismiss();
-                tvContent.setText("连接失败"+exception.getDescription());
+                tvContent.setText("连接状态："+"连接失败"+exception.getDescription());
                 Toast.makeText(BleMainActivity.this, getString(R.string.connect_fail), Toast.LENGTH_LONG).show();
             }
 
@@ -332,7 +358,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 progressDialog.dismiss();
                 mDeviceAdapter.addDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
-                tvContent.setText("连接成功");
+                tvContent.setText("连接状态："+"连接成功");
             }
 
             @Override
@@ -343,9 +369,9 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
                 mDeviceAdapter.notifyDataSetChanged();
 
                 if (isActiveDisConnected) {
-                    tvContent.setText("断开了");
+                    tvContent.setText("连接状态："+"断开了");
                 } else {
-                    tvContent.setText("连接断开");
+                    tvContent.setText("连接状态："+"连接断开");
                     ObserverManager.getInstance().notifyObserver(bleDevice);
                 }
             }
@@ -357,13 +383,13 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onRssiFailure(BleException exception) {
                 Log.i(TAG, "onRssiFailure" + exception.toString());
-                tvContent.setText("onRssiFailure" + exception.toString());
+                tvContent.setText("连接状态："+"onRssiFailure" + exception.toString());
             }
 
             @Override
             public void onRssiSuccess(int rssi) {
                 Log.i(TAG, "onRssiSuccess: " + rssi);
-                tvContent.setText("onRssiSuccess" + rssi);
+                tvContent.setText("连接状态："+"onRssiSuccess" + rssi);
             }
         });
     }
@@ -407,7 +433,6 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this, getString(R.string.please_open_blue), Toast.LENGTH_LONG).show();
             return;
         }
-
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
         List<String> permissionDeniedList = new ArrayList<>();
         for (String permission : permissions) {

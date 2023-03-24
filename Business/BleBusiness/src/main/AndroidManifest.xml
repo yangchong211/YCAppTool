@@ -10,7 +10,7 @@
     <application>
         <activity android:name="com.yc.blesample.ble.BleMainActivity"/>
         <activity android:name="com.yc.blesample.ble.operation.OperationActivity" />
-        <activity android:name="com.yc.blesample.BleEasyActivity"/>
+        <activity android:name="com.yc.blesample.demo.BleEasyActivity"/>
         <activity android:name="com.yc.blesample.chat.base.BleChatActivity"/>
         <activity android:name="com.yc.blesample.chat.client.DeviceActivity"/>
         <activity android:name="com.yc.blesample.chat.chat.ChatActivity"/>

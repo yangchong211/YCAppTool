@@ -46,13 +46,13 @@
             android:layout_alignParentRight="true"
             android:gravity="center"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/txt_rssi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp" />
+                android:textSize="10sp" />
 
             <ImageView
                 android:layout_width="18dp"
@@ -62,19 +62,19 @@
 
             <Button
                 android:id="@+id/btn_connect"
-                android:layout_width="50dp"
+                android:layout_width="65dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="@string/connect"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
             <Button
                 android:id="@+id/btn_read"
-                android:layout_width="50dp"
+                android:layout_width="65dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="Rssi"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -83,6 +83,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:gravity="center"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
@@ -90,23 +91,23 @@
                 android:layout_height="wrap_content"
                 android:text="@string/connected"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
+                android:textSize="10sp" />
 
             <Button
                 android:id="@+id/btn_disconnect"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="@string/disconnect"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
             <Button
                 android:id="@+id/btn_detail"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="@string/enter"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
 
         </LinearLayout>

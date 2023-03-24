@@ -7,6 +7,9 @@ import com.yc.appserver.log.LogTestActivity;
 import com.yc.appserver.priva.PrivateTestActivity;
 import com.yc.appserver.thread.HighCpuActivity;
 import com.yc.appserver.vibrator.VibratorTestActivity;
+import com.yc.blesample.ble.BleMainActivity;
+import com.yc.blesample.chat.base.BleChatActivity;
+import com.yc.blesample.demo.BleEasyActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.logclient.LogUtils;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -21,6 +24,9 @@ public class ServerMainActivity extends BaseActivity {
     private RoundTextView tvNetTest;
     private RoundTextView tvThreadTest;
     private RoundTextView tvFileTest;
+    private RoundTextView tvBle1;
+    private RoundTextView tvBle2;
+    private RoundTextView tvBle3;
 
     @Override
     public int getContentView() {
@@ -36,6 +42,9 @@ public class ServerMainActivity extends BaseActivity {
         tvNetTest = findViewById(R.id.tv_net_test);
         tvThreadTest = findViewById(R.id.tv_thread_test);
         tvFileTest = findViewById(R.id.tv_file_test);
+        tvBle1 = findViewById(R.id.tv_ble_1);
+        tvBle2 = findViewById(R.id.tv_ble_2);
+        tvBle3 = findViewById(R.id.tv_ble_3);
         LogUtils.i("init view");
     }
 
@@ -80,6 +89,24 @@ public class ServerMainActivity extends BaseActivity {
             @Override
             protected void onNoDoubleClick(View v) {
                 FileExplorerActivity.startActivity(ServerMainActivity.this);
+            }
+        });
+        tvBle1.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                BleEasyActivity.startActivity(ServerMainActivity.this);
+            }
+        });
+        tvBle2.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                BleChatActivity.startActivity(ServerMainActivity.this);
+            }
+        });
+        tvBle3.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                BleMainActivity.startActivity(ServerMainActivity.this);
             }
         });
     }
