@@ -38,7 +38,8 @@ class TcpConnectThread(
                 //设置最长Tcp连接超时时长为3分钟
                 setTcpState(TcpState.CONNECTING)
                 LogUtils.d(TAG, "重新连接tcp...:${this}-${System.identityHashCode(this)}")
-                mSocket.connectTls(TcpConfig.getServerHost(), TcpConfig.getServerPort(), 60 * 1000) // 连接服务器
+                // 连接服务器
+                mSocket.connectTls(TcpConfig.getServerHost(), TcpConfig.getServerPort(), 60 * 1000)
                 mConnStrategy.reset()
             } catch (e: Exception) {
                 mException = e
