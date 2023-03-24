@@ -56,12 +56,8 @@ public class BleDeviceAdapter extends BaseAdapter {
     }
 
     public void clearScanDevice() {
-        for (int i = 0; i < bleDeviceList.size(); i++) {
-            BleDevice device = bleDeviceList.get(i);
-            if (!BleManager.getInstance().isConnected(device)) {
-                bleDeviceList.remove(i);
-            }
-        }
+        bleDeviceList.clear();
+        notifyDataSetChanged();
     }
 
     public void clear() {

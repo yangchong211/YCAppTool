@@ -305,7 +305,6 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onScanStarted(boolean success) {
                 mDeviceAdapter.clearScanDevice();
-                mDeviceAdapter.notifyDataSetChanged();
                 img_loading.startAnimation(operatingAnim);
                 img_loading.setVisibility(View.VISIBLE);
                 btn_find.setVisibility(View.GONE);
@@ -359,6 +358,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
                 progressDialog.dismiss();
+                mDeviceAdapter.clearScanDevice();
                 mDeviceAdapter.addDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
                 tvContent.setText("连接状态：" + "连接成功");
@@ -367,8 +367,8 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDisConnected(boolean isActiveDisConnected, BleDevice bleDevice, BluetoothGatt gatt, int status) {
                 progressDialog.dismiss();
-
-                mDeviceAdapter.removeDevice(bleDevice);
+                mDeviceAdapter.clearScanDevice();
+                mDeviceAdapter.addDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
 
                 if (isActiveDisConnected) {
