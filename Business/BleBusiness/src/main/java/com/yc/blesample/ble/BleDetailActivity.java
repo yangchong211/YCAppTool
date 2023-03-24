@@ -15,6 +15,7 @@ import android.os.ParcelUuid;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import com.yc.blesample.chat.chat.ChatActivity;
 import com.yc.blesample.chat.client.ClientService;
 import com.yc.blesample.chat.client.UuidAdapter;
 import com.yc.easyble.data.BleDevice;
+import com.yc.easyble.utils.BleHelperUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,7 +45,7 @@ public class BleDetailActivity extends Activity {
 
     private TextView tvName, tvAddress, tvUUID, tvType, tvState;
 
-    private TextView btn;
+    private Button btn, btn_bonded;
 
     private ListView lvUUID;
 
@@ -131,6 +133,16 @@ public class BleDetailActivity extends Activity {
 
             }
         });
+        btn_bonded.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bondState == BluetoothDevice.BOND_BONDED) {
+                    BleHelperUtils.removeBond(mDevice);
+                } else {
+                    BleHelperUtils.boundDevice(mDevice);
+                }
+            }
+        });
 
         for (ParcelUuid uuid : list) {
             if (uuid.getUuid().toString().equals(ClientService.clientUuid)) {
@@ -153,9 +165,8 @@ public class BleDetailActivity extends Activity {
         } else {
             tvState.setText("未配对");
         }
-
+        btn_bonded.setText("配对状态："+tvState.getText());
         initBondButton();
-
         if (mDevice.getUuids() != null && mDevice.getUuids().length > 0) {
             list.addAll(Arrays.asList(mDevice.getUuids()));
             uuidAdapter.notifyDataSetChanged();
@@ -198,17 +209,12 @@ public class BleDetailActivity extends Activity {
 
     private void bindView() {
         tvName = findViewById(R.id.tvDeviceName);
-
         tvAddress = findViewById(R.id.tvDeviceAddress);
-
         tvUUID = findViewById(R.id.tvDeviceUUID);
-
         tvType = findViewById(R.id.tvDeviceType);
-
         tvState = findViewById(R.id.tvDeviceState);
-
         btn = findViewById(R.id.btn);
-
+        btn_bonded = findViewById(R.id.btn_bonded);
         lvUUID = findViewById(R.id.lvUUID);
     }
 

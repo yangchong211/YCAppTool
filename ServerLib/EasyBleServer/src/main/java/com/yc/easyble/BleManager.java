@@ -385,7 +385,6 @@ public final class BleManager {
             boolean autoConnect = bleScanRuleConfig.isAutoConnect();
             return bleBluetooth.connect(bleDevice, autoConnect, bleGattCallback);
         }
-
         return null;
     }
 

@@ -212,6 +212,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
             public void onConnect(BleDevice bleDevice) {
                 //开始连接
                 if (!BleManager.getInstance().isConnected(bleDevice)) {
+                    //停止搜索
                     BleManager.getInstance().cancelScan();
                     connect(bleDevice);
                 }

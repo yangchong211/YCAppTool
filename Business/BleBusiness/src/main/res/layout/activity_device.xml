@@ -126,13 +126,24 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/tvDeviceUUIDHint"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
         android:text="连 接" />
 
+    <Button
+        android:id="@+id/btn_bonded"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/btn"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:text="配对状态：" />
 
     <ListView
         android:id="@+id/lvUUID"
-        android:layout_below="@id/btn"
+        android:layout_below="@id/btn_bonded"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

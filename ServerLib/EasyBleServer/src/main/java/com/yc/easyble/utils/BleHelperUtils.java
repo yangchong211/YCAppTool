@@ -18,7 +18,7 @@ public final class BleHelperUtils {
      * @param bluetoothDevice           bluetoothDevice
      * @return      true 执行绑定 false 未执行绑定
      */
-    public boolean boundDevice(BluetoothDevice bluetoothDevice) {
+    public static boolean boundDevice(BluetoothDevice bluetoothDevice) {
         if (bluetoothDevice == null) {
             Log.e(TAG, "boundDevice-->bluetoothDevice == null");
             return false;
@@ -41,7 +41,7 @@ public final class BleHelperUtils {
      * @param bluetoothDevice       bluetoothDevice
      * @return      true 执行绑定 false 未执行绑定
      */
-    public boolean boundDeviceAPI(BluetoothDevice bluetoothDevice) {
+    public static boolean boundDeviceAPI(BluetoothDevice bluetoothDevice) {
         if (bluetoothDevice == null) {
             return false;
         }
@@ -58,7 +58,7 @@ public final class BleHelperUtils {
      * @param bluetoothDevice           bluetoothDevice
      * @return      true 执行解除绑定 false 未执行解除绑定
      */
-    public boolean removeBond(BluetoothDevice bluetoothDevice) {
+    public static boolean removeBond(BluetoothDevice bluetoothDevice) {
         if (bluetoothDevice == null) {
             Log.e(TAG, "boundDevice-->bluetoothDevice == null");
             return false;
@@ -81,8 +81,8 @@ public final class BleHelperUtils {
      * @param bluetoothDevice           bluetoothDevice
      * @return
      */
-    public boolean findDeviceBonded(BluetoothDevice bluetoothDevice){
-        //
+    public static boolean findDeviceBonded(BluetoothDevice bluetoothDevice){
+        //获取所有已经配对的设备
         Set<BluetoothDevice> bondedDevices =
                 BleManager.getInstance().getBluetoothAdapter().getBondedDevices();
         if (bondedDevices != null && bondedDevices.size() > 0){
