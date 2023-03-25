@@ -21,7 +21,8 @@ public class MultipleBluetoothController {
     private final HashMap<String, BleBluetooth> bleTempHashMap;
 
     public MultipleBluetoothController() {
-        bleLruHashMap = new BleLruHashMap<>(BleManager.getInstance().getMaxConnectCount());
+        int maxConnectCount = BleManager.getInstance().getMaxConnectCount();
+        bleLruHashMap = new BleLruHashMap<>(maxConnectCount);
         bleTempHashMap = new HashMap<>();
     }
 
