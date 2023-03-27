@@ -56,7 +56,7 @@ public class AcceptService extends Service {
         };
         serverService = ServerService.getInstance(serverHandler);
 
-        BluetoothAdapter adapter=BluetoothAdapter.getDefaultAdapter();
+        BluetoothAdapter adapter= BluetoothAdapter.getDefaultAdapter();
 
 
         serverService.startAccept(adapter);
