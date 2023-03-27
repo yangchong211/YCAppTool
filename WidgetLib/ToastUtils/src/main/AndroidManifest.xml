@@ -5,7 +5,7 @@
     <application>
         <provider
             android:name="com.yc.toastutils.ToastProvider"
-            android:authorities="${applicationId}.UploadInitProvider"
+            android:authorities="${applicationId}.ToastProvider"
             android:exported="false" />
     </application>
 
