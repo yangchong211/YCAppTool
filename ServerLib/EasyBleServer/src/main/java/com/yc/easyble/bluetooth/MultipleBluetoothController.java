@@ -80,7 +80,8 @@ public class MultipleBluetoothController {
 
     public synchronized void disconnect(BleDevice bleDevice) {
         if (isContainDevice(bleDevice)) {
-            getBleBluetooth(bleDevice).disconnect();
+            BleBluetooth bleBluetooth = getBleBluetooth(bleDevice);
+            bleBluetooth.disconnect();
         }
     }
 

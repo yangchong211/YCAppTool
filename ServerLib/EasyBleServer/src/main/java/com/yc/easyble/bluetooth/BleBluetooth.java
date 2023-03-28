@@ -188,8 +188,8 @@ public class BleBluetooth {
             }
             Message message = mainHandler.obtainMessage();
             message.what = BleMsg.MSG_CONNECT_OVER_TIME;
-            mainHandler.sendMessageDelayed(message, BleManager.getInstance().getConnectOverTime());
-
+            long connectOverTime = BleManager.getInstance().getConnectOverTime();
+            mainHandler.sendMessageDelayed(message, connectOverTime);
         } else {
             disconnectGatt();
             refreshDeviceCache();

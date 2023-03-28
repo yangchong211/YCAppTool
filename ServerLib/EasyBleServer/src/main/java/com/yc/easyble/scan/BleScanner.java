@@ -176,6 +176,16 @@ public class BleScanner {
 //                public void onScanResult(int callbackType, ScanResult result) {
 //                    super.onScanResult(callbackType, result);
 //                }
+//
+//                @Override
+//                public void onBatchScanResults(List<ScanResult> results) {
+//                    super.onBatchScanResults(results);
+//                }
+//
+//                @Override
+//                public void onScanFailed(int errorCode) {
+//                    super.onScanFailed(errorCode);
+//                }
 //            });
         }
         mBleScanState = BleScanState.STATE_IDLE;

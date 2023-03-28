@@ -911,6 +911,7 @@ public final class BleManager {
     }
 
     /**
+     * 获取蓝牙连接状态
      * @param bleDevice
      * @return State of the profile connection. One of
      * {@link BluetoothProfile#STATE_CONNECTED},
@@ -920,7 +921,8 @@ public final class BleManager {
      */
     public int getConnectState(BleDevice bleDevice) {
         if (bleDevice != null) {
-            return bluetoothManager.getConnectionState(bleDevice.getDevice(), BluetoothProfile.GATT);
+            BluetoothDevice device = bleDevice.getDevice();
+            return bluetoothManager.getConnectionState(device, BluetoothProfile.GATT);
         } else {
             //设备未连接
             return BluetoothProfile.STATE_DISCONNECTED;
