@@ -151,21 +151,21 @@ public class BleDetailActivity extends Activity {
                 return;
             }
         }
-
-
     }
 
+    @SuppressLint("SetTextI18n")
     private void initDeviceBondState() {
         bondState = mDevice.getBondState();
-
         if (bondState == BluetoothDevice.BOND_BONDED) {
             tvState.setText("已配对");
+            btn_bonded.setText("配对状态："+tvState.getText() + " 点击取消配对");
         } else if (bondState == BluetoothDevice.BOND_BONDING) {
             tvState.setText("配对中");
+            btn_bonded.setText("配对状态："+tvState.getText() + " 配对进行中");
         } else {
             tvState.setText("未配对");
+            btn_bonded.setText("配对状态："+tvState.getText() + " 点击继续配对");
         }
-        btn_bonded.setText("配对状态："+tvState.getText());
         initBondButton();
         if (mDevice.getUuids() != null && mDevice.getUuids().length > 0) {
             list.addAll(Arrays.asList(mDevice.getUuids()));
