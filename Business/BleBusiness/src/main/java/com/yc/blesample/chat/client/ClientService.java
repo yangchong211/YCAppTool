@@ -25,7 +25,7 @@ public class ClientService implements ChatService {
 
     private static Handler mainHandler;
 
-    private BluetoothDevice device;
+    private BluetoothDevice bluetoothDevice;
 
     private BluetoothSocket mSocket;
 
@@ -55,16 +55,16 @@ public class ClientService implements ChatService {
 
     public void connect(final BluetoothDevice connectDevice, final String uuid) {
 
-        if (device != null && mSocket != null && device.getAddress().equals(device.getAddress()) && mSocket.isConnected()) {
+        if (bluetoothDevice != null && mSocket != null && bluetoothDevice.getAddress().equals(bluetoothDevice.getAddress()) && mSocket.isConnected()) {
 
             Log.i(TAG, "the same device to connect,return");
 
             return;
         }
 
-        this.device = connectDevice;
+        this.bluetoothDevice = connectDevice;
 
-        Log.i(TAG, "device:" + device.getName());
+        Log.i(TAG, "device:" + bluetoothDevice.getName());
 
         Log.i(TAG, "uuid:" + uuid);
 
@@ -72,8 +72,8 @@ public class ClientService implements ChatService {
             @Override
             public void run() {
                 try {
-                    mSocket = device.createRfcommSocketToServiceRecord(UUID.fromString(uuid));
-
+                    UUID uuid1 = UUID.fromString(uuid);
+                    mSocket = bluetoothDevice.createRfcommSocketToServiceRecord(uuid1);
                     mSocket.connect();
 
                     mOutputStream = mSocket.getOutputStream();

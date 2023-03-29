@@ -9,6 +9,12 @@
 
 
 ### 01.基础概念介绍
+#### 1.1 业务背景介绍
+- 业务背景说明
+    - 作业帮智能App
+
+
+#### 1.2 基础概念介绍
 - FragmentLifecycleCallbacks
     -  如果使用的是 fragment，那么这里提供另一种获取生命周期的方法，通过FragmentLifecycleCallbacks可以获取到 fragment 的生命周期回调。
 
