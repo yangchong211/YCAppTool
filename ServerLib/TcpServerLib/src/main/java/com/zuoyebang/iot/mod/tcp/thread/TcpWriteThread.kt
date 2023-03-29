@@ -19,8 +19,7 @@ class TcpWriteThread(
     private var mWriteStrategy: WriteStrategy? = null
 
     override fun run() {
-
-        LogUtils.e(
+        LogUtils.i(
             TAG,
             "${TcpConfig.THREAD_RUN},mQuit：${mQuit},${this}-${System.identityHashCode(this)}"
         )

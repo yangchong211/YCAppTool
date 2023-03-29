@@ -6,7 +6,6 @@ import com.yc.logclient.LogUtils
 import com.zuoyebang.iot.mod.tcp.TcpLog
 
 /**
- * Created by baixuefei on 17/6/10.
  *
  * Tcp 心跳机制规则:
  *
@@ -95,7 +94,6 @@ class HeartClient(private val mHandler: Handler) {
 
     companion object {
         const val SEND_PING_TIME: Long = (60) * 1000 //每隔1分钟上传一次心跳
-
         //2分钟(两次上行心跳ping间隔)未收到Server端心跳Pong,则认为socket实际上已断开,主动断开Tcp 进行重连
         const val RECEIVE_PONG_TIME_OUT_DELAY = SEND_PING_TIME * 2
         const val TAG: String = "HeartClient"

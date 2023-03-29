@@ -11,9 +11,6 @@ import com.zuoyebang.iot.mod.tcp.trustmanager.TrustManagerProvider
 import com.zuoyebang.iot.mod.tcp.trustmanager.TrustManagerProviderNormal
 
 /**
- * 创建者:baixuefei
- * 创建日期:2021/3/30 2:16 PM
- *
  * TcpFascade 外观类:
  * - 负责全局初始化操作 init()
  * - 负责获取UnionTcpManager

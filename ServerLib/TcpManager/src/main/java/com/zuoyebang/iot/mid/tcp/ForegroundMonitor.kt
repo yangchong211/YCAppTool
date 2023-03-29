@@ -6,8 +6,6 @@ import android.content.Context
 import android.os.Bundle
 
 /**
- * 创建者:baixuefei
- * 创建日期:2021/3/30 8:36 PM
  * 监听app 前/后台状态切换
  */
 class ForegroundMonitor(val callBack: ChangeForegroundCallBack) :

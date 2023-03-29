@@ -28,10 +28,7 @@ class TcpConnectThread(
 
     override fun run() {
         while (!mQuit) {
-            LogUtils.e(
-                TAG,
-                "${TcpConfig.THREAD_RUN},isEnable:${isEnable}:${this}-${System.identityHashCode(this)}"
-            )
+            LogUtils.i(TAG, "${TcpConfig.THREAD_RUN},isEnable:${isEnable}:${this}-${System.identityHashCode(this)}")
             try {
                 setTcpState(TcpState.NOT_CONNECT)
                 mConnStrategy.checkEnable(isEnable)

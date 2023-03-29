@@ -2,13 +2,11 @@ package com.zuoyebang.iot.mid.tcp.bean.send
 
 import com.zuoyebang.iot.mid.tcp.TcpPacket
 import com.zuoyebang.iot.mid.tcp.TcpType
-import com.zuoyebang.iot.mid.tcp.bean.base.TcpSBean
+import com.zuoyebang.iot.mid.tcp.bean.base.TcpSendBean
 
-/**
- * 创建者:baixuefei
- * 创建日期:2021/3/30 1:53 PM
- */
-class TcpPing : TcpSBean {
+
+class TcpPing : TcpSendBean {
+
     override fun getPrivateTag(): String {
         return "${getTypeTag()}_${System.currentTimeMillis()}"
     }

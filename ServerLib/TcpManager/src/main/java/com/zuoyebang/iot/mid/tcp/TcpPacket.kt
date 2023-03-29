@@ -6,8 +6,6 @@ import com.zuoyebang.iot.mod.tcp.data.TcpDataBean
 import com.zuoyebang.iot.mod.tcp.inter.DataState
 
 /**
- * 创建者:baixuefei
- * 创建日期:2021/3/30 10:58 AM
  *
  *    0 bytes   1        2         3         4                           length+3
  *      +---------+---------+---------+---------+---------+ +---------+---------+
@@ -115,7 +113,7 @@ data class TcpPacket(
 
             val data = ByteArray(bytes.size - 5)
             System.arraycopy(bytes, 5, data, 0, data.size)
-            var tag = "${type}_${System.currentTimeMillis()}"
+            val tag = "${type}_${System.currentTimeMillis()}"
             return TcpPacket(
                 privateTag = tag,
                 length = length,

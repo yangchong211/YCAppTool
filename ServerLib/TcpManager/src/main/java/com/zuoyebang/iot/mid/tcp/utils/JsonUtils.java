@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * JSON转换工具
  *
- * @author li.li
  */
 public class JsonUtils {
 

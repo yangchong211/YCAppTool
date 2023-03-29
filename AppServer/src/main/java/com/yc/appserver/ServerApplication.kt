@@ -36,9 +36,9 @@ class ServerApplication : Application() {
         TcpFacade.putExtra(TcpFacade.UDID, "E1274F3EF737603D08FE758455F67AF9|0")
             .setDynamicInfoDelegate { key ->
                 when (key) {
-                    TcpFacade.TOKEN -> "eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjI4MDIwMywianRpIjoiYzg4NGE2YmQwOWM2NDNlNDg3NzU2MDlhN2E3NTBkYjEiLCJpYXQiOjE2NzkyOTgxNTEsInN1YiI6IjI4MDIwMyJ9.eOhv7aTTBueIXihGBsjrmI5HeUx68Fq6HUA0-y1DlrI"
+                    TcpFacade.TOKEN -> "eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjI4MDIwMywianRpIjoiMDZkODBiNjNmYzQzNDkyM2JkMTAzY2M5OTYyMzFkNGIiLCJpYXQiOjE2Nzk5OTg3MjYsInN1YiI6IjI4MDIwMyJ9.V2jAt3ULDUr2xUVloXBL4TS16tVtz5nfpe87-bMVtSc"
                     TcpFacade.VERSION -> "4.0.1"
-                    TcpFacade.SECRET -> "58f7bc234ef1496690b3e9f12b3b5d8b"
+                    TcpFacade.SECRET -> "3d7e77d3fe0644bb89a4be31f640c97e"
                     else -> null
                 }
             }

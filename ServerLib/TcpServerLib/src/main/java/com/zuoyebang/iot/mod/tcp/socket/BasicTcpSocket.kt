@@ -32,7 +32,7 @@ class BasicTcpSocket(private val mAdapter: SocketAdapter) : ITcpSocket {
         mSocket?.tcpNoDelay = true
         // 连接指定IP和端口
         mSocket?.connect(address, timeOut)
-        LogUtils.i(TAG, "TCP连接成功: ip=$ip port=$port,socket:${this}-${System.identityHashCode(this)}")
+        LogUtils.e(TAG, "TCP连接成功: ip=$ip port=$port,socket:${this}-${System.identityHashCode(this)}")
         if (isTcpConnected()) {
             // 获取网络输出流
             mOutput = DataOutputStream(mSocket!!.getOutputStream())

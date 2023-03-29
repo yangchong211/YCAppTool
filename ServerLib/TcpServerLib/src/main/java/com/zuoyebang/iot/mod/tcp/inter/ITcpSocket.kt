@@ -13,21 +13,18 @@ typealias TcpLogDDelegate = (tag: String, msg: String, appendStackIndex: Int) ->
 typealias TcpLogDelegate = (tag: String, msg: String, e: Throwable?, appendStackIndex: Int) -> Unit
 typealias TcpLogIndelicate = (tag: String, msg: String, appendStackIndex: Int) -> Unit
 
+interface ITcpConfig{
+    fun getServerHost(): String
+    fun getServerPort(): Int
+}
 
 interface ITcpSocket {
-
     fun isTcpConnected(): Boolean
-
     fun connect(ip: String?, port: Int, timeOut: Int)
-
     fun connectTls(ip: String?, port: Int, timeOut: Int)
-
     fun disconnect()
-
     fun write(buffer: ByteArray?): Boolean
-
     fun read(receive: IReceive, readCallback: ReadCallBack, readError: (TcpError, String?) -> Unit)
-
     fun getInputStream(): DataInputStream?
 }
 

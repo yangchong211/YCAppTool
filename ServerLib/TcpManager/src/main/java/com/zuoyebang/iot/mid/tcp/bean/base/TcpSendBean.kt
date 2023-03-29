@@ -5,8 +5,6 @@ import com.zuoyebang.iot.mid.tcp.utils.JsonUtils
 import com.zuoyebang.iot.mod.tcp.inter.TcpMessage
 
 /**
- * 创建者:baixuefei
- * 创建日期:2021/3/30 1:15 PM
  * 向服务端发送的Tcp消息的基类
  * TcpSBean 对应TcpPacket中的 PayLoad 部分
  *
@@ -16,7 +14,7 @@ import com.zuoyebang.iot.mod.tcp.inter.TcpMessage
  * +---------+---------+---------+---------+---------+ +---------+---------+
  *
  */
-interface TcpSBean : TcpMessage {
+interface TcpSendBean : TcpMessage {
     /**
      * TcpSBean的唯一标识
      */

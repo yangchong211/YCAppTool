@@ -71,7 +71,7 @@ abstract class TcpManager : TcpListener {
     }
 
     //是否已经登录成功
-    protected var mHasLogin: Boolean = false
+    private var mHasLogin: Boolean = false
         set(value) {
             field = value
             LogUtils.d("set mHasLogin = $field")
@@ -226,7 +226,6 @@ abstract class TcpManager : TcpListener {
         LogUtils.d("onConnectState:${success}")
         //连接成功,需要发送登录和ping
         if (success) {
-            sendLogin()
             sendHeartPing()
         } else {
             //连接断开,Login状态复位
@@ -293,8 +292,6 @@ abstract class TcpManager : TcpListener {
      */
     abstract fun sendHeartPing()
 
-    abstract fun sendLogin()
-
     abstract fun getAdapter(): SocketAdapter
 
     abstract fun disPatchTcpPacket(tcpPacket: TcpPacket)
@@ -307,7 +304,7 @@ abstract class TcpManager : TcpListener {
         val TAG: String = TcpManager::class.java.simpleName
     }
 
-    fun isTcpConnected(): Boolean {
+    private fun isTcpConnected(): Boolean {
         return mTcpCore?.isTcpConnected() ?: false
     }
 
