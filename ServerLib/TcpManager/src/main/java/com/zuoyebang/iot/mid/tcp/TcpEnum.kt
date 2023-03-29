@@ -28,6 +28,7 @@ annotation class TcpType {
          * 服务端心跳pong包
          */
         const val HEART_BEAT_PONG = 2
+        const val LOGIN = 80
     }
 }
 

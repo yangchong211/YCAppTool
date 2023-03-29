@@ -2,6 +2,7 @@ package com.zuoyebang.iot.mid.tcp
 
 
 import com.yc.logclient.LogUtils
+import com.zuoyebang.iot.mid.tcp.bean.send.TcpLogin
 import com.zuoyebang.iot.mod.tcp.socket.TcpSocketAdapter
 import com.zuoyebang.iot.mid.tcp.bean.send.TcpPing
 import com.zuoyebang.iot.mid.tcp.convert.ReceiveTcpConvertor
@@ -31,6 +32,21 @@ class UnionTcpManager : TcpManager() {
      */
     override fun sendHeartPing() {
         sendTcpPacket(TcpPing().toTcpPacket())
+    }
+
+    /**
+     * 发送Login指令
+     */
+    override fun sendLogin() {
+        sendTcpPacket(
+            TcpLogin(
+                udid = TcpFacade.getExtra(TcpFacade.UDID) as String,
+                token = TcpFacade.getDynamicInfo(TcpFacade.TOKEN) as String,
+                device_type = 1,
+                stamp = System.currentTimeMillis(),
+                app_version = TcpFacade.getDynamicInfo(TcpFacade.VERSION) as String,
+            ).toTcpPacket()
+        )
     }
 
     /**

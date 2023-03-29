@@ -226,6 +226,7 @@ abstract class TcpManager : TcpListener {
         LogUtils.d("onConnectState:${success}")
         //连接成功,需要发送登录和ping
         if (success) {
+            sendLogin()
             sendHeartPing()
         } else {
             //连接断开,Login状态复位
@@ -291,6 +292,8 @@ abstract class TcpManager : TcpListener {
      * 发送心跳包
      */
     abstract fun sendHeartPing()
+
+    abstract fun sendLogin()
 
     abstract fun getAdapter(): SocketAdapter
 
