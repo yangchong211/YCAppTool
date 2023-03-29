@@ -40,8 +40,6 @@ import com.yc.blesample.R;
 import com.yc.blesample.ble.adapter.BleDeviceAdapter;
 import com.yc.blesample.ble.comm.ObserverManager;
 import com.yc.blesample.ble.operation.OperationActivity;
-import com.yc.blesample.chat.base.BleChatActivity;
-import com.yc.blesample.demo.BleEasyActivity;
 import com.yc.easyble.BleManager;
 import com.yc.easyble.callback.BleGattCallback;
 import com.yc.easyble.callback.BleMtuChangedCallback;
@@ -52,8 +50,6 @@ import com.yc.easyble.exception.BleException;
 import com.yc.easyble.config.BleScanRuleConfig;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppLogUtils;
-
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;

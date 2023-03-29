@@ -13,6 +13,7 @@ import android.util.Log;
 import com.yc.blesample.chat.chat.ChatActivity;
 import com.yc.blesample.chat.client.ClientService;
 
+
 public class AcceptService extends Service {
 
     private static final String TAG = "AcceptService";
@@ -51,14 +52,12 @@ public class AcceptService extends Service {
                     case ClientService.CONNECTED_FAIL:
                         Log.i(TAG, "connected fail");
                         break;
-                    default:
-                        break;
                 }
             }
         };
         serverService = ServerService.getInstance(serverHandler);
 
-        BluetoothAdapter adapter= BluetoothAdapter.getDefaultAdapter();
+        BluetoothAdapter adapter=BluetoothAdapter.getDefaultAdapter();
 
 
         serverService.startAccept(adapter);

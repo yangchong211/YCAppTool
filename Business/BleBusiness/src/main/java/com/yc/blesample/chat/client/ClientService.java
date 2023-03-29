@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+
 import com.yc.blesample.chat.chat.ChatService;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class ClientService implements ChatService {
 
     private static Handler mainHandler;
 
-    private BluetoothDevice bluetoothDevice;
+    private BluetoothDevice device;
 
     private BluetoothSocket mSocket;
 
@@ -55,16 +56,16 @@ public class ClientService implements ChatService {
 
     public void connect(final BluetoothDevice connectDevice, final String uuid) {
 
-        if (bluetoothDevice != null && mSocket != null && bluetoothDevice.getAddress().equals(bluetoothDevice.getAddress()) && mSocket.isConnected()) {
+        if (device != null && mSocket != null && device.getAddress().equals(device.getAddress()) && mSocket.isConnected()) {
 
             Log.i(TAG, "the same device to connect,return");
 
             return;
         }
 
-        this.bluetoothDevice = connectDevice;
+        this.device = connectDevice;
 
-        Log.i(TAG, "device:" + bluetoothDevice.getName());
+        Log.i(TAG, "device:" + device.getName());
 
         Log.i(TAG, "uuid:" + uuid);
 
@@ -72,8 +73,8 @@ public class ClientService implements ChatService {
             @Override
             public void run() {
                 try {
-                    UUID uuid1 = UUID.fromString(uuid);
-                    mSocket = bluetoothDevice.createRfcommSocketToServiceRecord(uuid1);
+                    mSocket = device.createRfcommSocketToServiceRecord(UUID.fromString(uuid));
+
                     mSocket.connect();
 
                     mOutputStream = mSocket.getOutputStream();

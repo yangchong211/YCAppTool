@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.RequiresApi;
 
 import com.yc.blesample.R;
@@ -184,8 +185,6 @@ public class DeviceActivity extends Activity {
                     break;
                 case ClientService.CONNECTED_FAIL:
                     Log.i(TAG, "connected fail");
-                    break;
-                default:
                     break;
             }
         }

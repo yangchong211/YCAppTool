@@ -8,7 +8,7 @@ import com.yc.appserver.priva.PrivateTestActivity;
 import com.yc.appserver.thread.HighCpuActivity;
 import com.yc.appserver.vibrator.VibratorTestActivity;
 import com.yc.blesample.ble.BleMainActivity;
-import com.yc.blesample.chat.base.BleChatActivity;
+import com.yc.blesample.chat.base.ChatMainActivity;
 import com.yc.blesample.demo.BleEasyActivity;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.logclient.LogUtils;
@@ -100,7 +100,7 @@ public class ServerMainActivity extends BaseActivity {
         tvBle2.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                BleChatActivity.startActivity(ServerMainActivity.this);
+                ChatMainActivity.startActivity(ServerMainActivity.this);
             }
         });
         tvBle3.setOnClickListener(new PerfectClickListener() {

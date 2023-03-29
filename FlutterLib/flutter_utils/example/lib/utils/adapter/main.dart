@@ -1,0 +1,158 @@
+import 'package:flutter/material.dart';
+import 'package:yc_flutter_utils/adapter/screen_util.dart';
+import 'package:yc_flutter_utils/adapter/screenutil_init.dart';
+
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //Set the fit size (fill in the screen size of the device in the design) If the design is based on the size of the iPhone6 ​​(iPhone6 ​​750*1334)
+    return ScreenUtilInit(
+      designSize: Size(360, 690),
+      builder: () => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter_ScreenUtil',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          textTheme: TextTheme(button: TextStyle(fontSize: 45)),
+        ),
+        builder: (context, widget) {
+          return MediaQuery(
+            //Setting font does not change with system font size
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: widget,
+          );
+        },
+        home: HomePage(title: 'FlutterScreenUtil Demo'),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    printScreenInformation();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                // Using Extensions
+                Container(
+                  padding: EdgeInsets.all(10),
+                  width: 0.5,
+                  height: 200,
+                  color: Colors.amber,
+                  child: Text(
+                    'My actual width: ${0.5}dp \n\n'
+                    'My actual height: ${200}dp',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+                // Without using Extensions
+                Container(
+                  padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+                  width: ScreenUtil().setWidth(180),
+                  height: ScreenUtil().setHeight(200),
+                  color: Colors.blue,
+                  child: Text(
+                    'My design draft width: 180dp\n\n'
+                    'My design draft height: 200dp',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: ScreenUtil().setSp(12),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+              width: 100,
+              height: 100,
+              color: Colors.green,
+              child: Text(
+                'I am a square with a side length of 100',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: ScreenUtil().setSp(12),
+                ),
+              ),
+            ),
+            Text('Device width:${ScreenUtil().screenWidth}dp'),
+            Text('Device height:${ScreenUtil().screenHeight}dp'),
+            Text('Device pixel density:${ScreenUtil().pixelRatio}'),
+            Text('Bottom safe zone distance:${ScreenUtil().bottomBarHeight}dp'),
+            Text('Status bar height:${ScreenUtil().statusBarHeight}dp'),
+            Text(
+              'The ratio of actual width to UI design:${ScreenUtil().scaleWidth}',
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              'The ratio of actual height to UI design:${ScreenUtil().scaleHeight}',
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text('System font scaling factor:${ScreenUtil().textScaleFactor}'),
+            SizedBox(height: 5),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  '16sp, will not change with the system.',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
+                  textScaleFactor: 1.0,
+                ),
+                Text(
+                  '16sp,if data is not set in MediaQuery,my font size will change with the system.',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  void printScreenInformation() {
+    print('Device width dp:${1}dp');
+    print('Device height dp:${1}dp');
+    print('Device pixel density:${ScreenUtil().pixelRatio}');
+    print('Bottom safe zone distance dp:${ScreenUtil().bottomBarHeight}dp');
+    print('Status bar height dp:${ScreenUtil().statusBarHeight}dp');
+    print('The ratio of actual width to UI design:${ScreenUtil().scaleWidth}');
+    print(
+        'The ratio of actual height to UI design:${ScreenUtil().scaleHeight}');
+    print('System font scaling:${ScreenUtil().textScaleFactor}');
+    print('0.5 times the screen width:${0.5}dp');
+    print('0.5 times the screen height:${0.5}dp');
+    print('Screen orientation:${ScreenUtil().orientation}');
+  }
+}

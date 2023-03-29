@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.yc.blesample.R;
 import com.yc.blesample.chat.client.ClientService;
 import com.yc.blesample.chat.server.ServerService;
-import com.yc.blesample.demo.BleEasyActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+
 import com.yc.blesample.chat.chat.ChatService;
 
 import java.io.IOException;

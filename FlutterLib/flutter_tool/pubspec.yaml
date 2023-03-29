@@ -1,0 +1,55 @@
+name: yc_flutter_tool
+description: A new Flutter application.
+version: 0.0.1
+author:
+homepage:
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.20.0 <2.0.0"
+
+dependencies:
+  flutter_localizations:
+    sdk: flutter
+  flutter:
+    sdk: flutter
+  # provider
+  provider: 4.0.0
+  # 添加sharedPreference依赖
+  shared_preferences: ^0.5.1
+  # 添加文件依赖
+  path_provider: ^1.6.9
+  #添加Sqflite依赖
+  sqflite: ^1.0.0
+#  cupertino_icons: ^1.0.2
+  # todo 注意此处需要下载该库到同父级目录下，采用本地引入
+  yc_flutter_utils:
+    path: ../flutter_utils
+  flutter_widget:
+    path: ../flutter_widget
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^3.2.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/string/zh_CN.json
+    - assets/string/en_US.json
+    - assets/string/pt_BR.json
+    - assets/string/ja_JP.json
+    - assets/image/ic_person.jpg
+    - assets/image/image1.jpg
+    - assets/image/image2.jpg
+    - assets/image/image3.jpg
+    - assets/image/image4.jpg
+    - assets/image/image5.png
+    - assets/lottie/income_all_in_one.svga
+  fonts:
+    - family: iconfont
+      fonts:
+        - asset: assets/fonts/iconfont.ttf
+

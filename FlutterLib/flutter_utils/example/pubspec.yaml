@@ -1,0 +1,40 @@
+name: yc_flutter_utils_example
+description: Demonstrates how to use the yc_flutter_utils plugin.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter_localizations:
+    sdk: flutter
+  flutter:
+    sdk: flutter
+  yc_flutter_utils:
+    path: ../
+  cupertino_icons: ^0.1.3
+  # json解析
+  json_serializable: ^3.0.0
+  provider: 4.0.0
+  build_runner: ^1.6.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/string/zh_CN.json
+    - assets/string/en_US.json
+    - assets/string/pt_BR.json
+    - assets/string/ja_JP.json
+    - assets/image/ic_person.jpg
+    - assets/image/image1.jpg
+    - assets/image/image2.jpg
+    - assets/image/image3.jpg
+    - assets/image/image4.jpg
+    - assets/image/image5.png
