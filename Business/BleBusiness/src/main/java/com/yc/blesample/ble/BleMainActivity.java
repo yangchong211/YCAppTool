@@ -50,6 +50,7 @@ import com.yc.easyble.callback.BleScanCallback;
 import com.yc.easyble.data.BleDevice;
 import com.yc.easyble.exception.BleException;
 import com.yc.easyble.config.BleScanRuleConfig;
+import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppLogUtils;
 
 import java.lang.reflect.Method;
@@ -67,7 +68,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
 
     private LinearLayout layout_setting;
     private TextView txt_setting;
-    private TextView tvContent;
+    private TextView tvContent,tv_mac;
     private Button btn_scan, btn_find;
     private EditText et_name, et_mac, et_uuid;
     private Switch sw_auto;
@@ -187,7 +188,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         et_mac = (EditText) findViewById(R.id.et_mac);
         et_uuid = (EditText) findViewById(R.id.et_uuid);
         sw_auto = (Switch) findViewById(R.id.sw_auto);
-
+        tv_mac = findViewById(R.id.tv_mac);
         layout_setting = (LinearLayout) findViewById(R.id.layout_setting);
         txt_setting = (TextView) findViewById(R.id.txt_setting);
         txt_setting.setOnClickListener(this);
@@ -243,6 +244,7 @@ public class BleMainActivity extends AppCompatActivity implements View.OnClickLi
         });
         ListView listView_device = (ListView) findViewById(R.id.list_device);
         listView_device.setAdapter(mDeviceAdapter);
+        tv_mac.setText(AppDeviceUtils.getMacAddress(this));
     }
 
     private void showConnectedDevice() {

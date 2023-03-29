@@ -28,6 +28,7 @@ import com.yc.blesample.chat.client.ClientService;
 import com.yc.blesample.chat.client.UuidAdapter;
 import com.yc.easyble.data.BleDevice;
 import com.yc.easyble.utils.BleHelperUtils;
+import com.yc.toastutils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,19 +41,12 @@ import static android.bluetooth.BluetoothDevice.BOND_BONDED;
 public class BleDetailActivity extends Activity {
 
     private static final String TAG = "DeviceActivity";
-
     BluetoothDevice mDevice;
-
     private TextView tvName, tvAddress, tvUUID, tvType, tvState;
-
     private Button btn, btn_bonded;
-
     private ListView lvUUID;
-
     private UuidAdapter uuidAdapter;
-
-    private List<ParcelUuid> list = new ArrayList<>();
-
+    private final List<ParcelUuid> list = new ArrayList<>();
     private String selectedUuidStr = ClientService.clientUuid;
     //当前设配配对状态
     private int bondState;
@@ -74,26 +68,19 @@ public class BleDetailActivity extends Activity {
             Toast.makeText(this, "当前选择设备有误,重选！", Toast.LENGTH_LONG).show();
             finish();
         }
-
         bindView();
-
         initView();
-
         registerReceiver();
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void initView() {
         uuidAdapter = new UuidAdapter(this, list);
         tvName.setText(mDevice.getName() + "");
-
         tvAddress.setText(mDevice.getAddress() + "");
-
         tvUUID.setText(selectedUuidStr);
-
-
         initDeviceBondState();
-
         if (mDevice.getType() == BluetoothDevice.DEVICE_TYPE_LE) {
             tvType.setText("低功耗蓝牙");
         } else if (mDevice.getType() == BluetoothDevice.DEVICE_TYPE_CLASSIC) {
@@ -103,10 +90,7 @@ public class BleDetailActivity extends Activity {
         } else {
             tvType.setText("未知");
         }
-
-
         lvUUID.setAdapter(uuidAdapter);
-
         lvUUID.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -114,23 +98,16 @@ public class BleDetailActivity extends Activity {
                 tvUUID.setText(selectedUuidStr);
             }
         });
-
-
         btn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-
                 if (bond) {
                     mDevice.createBond();
                     return;
                 }
-
-
                 service = ClientService.getInstance(handler);
-
                 service.connect(mDevice, selectedUuidStr);
-
             }
         });
         btn_bonded.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +120,6 @@ public class BleDetailActivity extends Activity {
                 }
             }
         });
-
         for (ParcelUuid uuid : list) {
             if (uuid.getUuid().toString().equals(ClientService.clientUuid)) {
                 selectedUuidStr = ClientService.clientUuid;
@@ -181,7 +157,6 @@ public class BleDetailActivity extends Activity {
             btn.setText("配对");
             bond = true;
         }
-
     }
 
     ClientService service;
@@ -193,6 +168,7 @@ public class BleDetailActivity extends Activity {
             switch (msg.what) {
                 case ClientService.CONNECTED_SUCCESS:
                     Log.i(TAG, "connected success");
+                    ToastUtils.showRoundRectToast("连接成功");
                     Intent intent = new Intent(BleDetailActivity.this, ChatActivity.class);
                     intent.putExtra("device", mDevice);
                     intent.putExtra("uuid", selectedUuidStr);
@@ -200,6 +176,7 @@ public class BleDetailActivity extends Activity {
                     break;
                 case ClientService.CONNECTED_FAIL:
                     Log.i(TAG, "connected fail");
+                    ToastUtils.showRoundRectToast("连接失败");
                     break;
                 default:
                     break;

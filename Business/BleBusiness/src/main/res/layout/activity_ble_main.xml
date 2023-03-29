@@ -62,6 +62,11 @@
             android:paddingRight="5dp"
             android:text="AutoConnect ?"
             android:textSize="13sp" />
+        <TextView
+            android:id="@+id/tv_mac"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MAC地址："/>
 
     </LinearLayout>
 
