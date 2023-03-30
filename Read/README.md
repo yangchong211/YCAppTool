@@ -88,11 +88,8 @@
 
 
 
-
 ### JVM
 - https://github.com/doocs/jvm
-### 稳定性
-- https://blog.51cto.com/u_15233911/2826427
 - 腾讯Matrix源码
     - https://www.yuque.com/ibaozi/ygq8yc
 
