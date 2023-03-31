@@ -1,18 +1,12 @@
 package com.zuoyebang.iot.mid.tcp.convert
 
 import android.text.TextUtils
-import android.util.Log
 import com.yc.logclient.LogUtils
 import com.zuoyebang.iot.mid.tcp.TcpPacket
-import com.zuoyebang.iot.mid.tcp.TcpSubType
 import com.zuoyebang.iot.mid.tcp.TcpType
-import com.zuoyebang.iot.mid.tcp.bean.*
 import com.zuoyebang.iot.mid.tcp.bean.receive.*
 import com.zuoyebang.iot.mid.tcp.utils.JsonUtils
-import com.zuoyebang.iot.mod.tcp.TcpLog
 import com.zuoyebang.iot.mod.tcp.inter.TcpMessage
-import org.json.JSONException
-import org.json.JSONObject
 
 class ReceiveTcpConvertor : TcpConverter {
 

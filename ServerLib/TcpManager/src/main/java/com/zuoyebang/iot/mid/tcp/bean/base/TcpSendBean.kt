@@ -6,7 +6,7 @@ import com.zuoyebang.iot.mod.tcp.inter.TcpMessage
 
 /**
  * 向服务端发送的Tcp消息的基类
- * TcpSBean 对应TcpPacket中的 PayLoad 部分
+ * TcpSendBean 对应TcpPacket中的 PayLoad 部分
  *
  * 0 bytes   1        2         3         4                           length+3
  * +---------+---------+---------+---------+---------+ +---------+---------+

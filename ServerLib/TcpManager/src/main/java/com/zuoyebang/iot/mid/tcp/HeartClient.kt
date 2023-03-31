@@ -1,9 +1,7 @@
 package com.zuoyebang.iot.mid.tcp
 
 import android.os.Handler
-import android.os.SystemClock
 import com.yc.logclient.LogUtils
-import com.zuoyebang.iot.mod.tcp.TcpLog
 
 /**
  *
@@ -62,10 +60,9 @@ class HeartClient(private val mHandler: Handler) {
     }
 
     /**
-     *
+     * 切到前台时,判断一次超时
      */
     fun foregroundCheckPong(foreGround: Boolean) {
-        //切到前台时,判断一次超时
         if (foreGround) {
             LogUtils.d("foregroundCheckPong:${foreGround}")
             if (isLastPongValid() && isLastPongTimeOut()) {

@@ -13,17 +13,14 @@ import java.lang.annotation.RetentionPolicy
 annotation class TcpType {
 
     companion object {
-
         /**
          * Tcp 通用错误 Type
          */
         const val TCP_ERROR = 0
-
         /**
          * 设备心跳ping包
          */
         const val HEART_BEAT_PING = 1
-
         /**
          * 服务端心跳pong包
          */
