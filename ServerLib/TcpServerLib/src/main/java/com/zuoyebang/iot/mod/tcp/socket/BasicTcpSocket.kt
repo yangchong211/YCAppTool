@@ -71,6 +71,9 @@ class BasicTcpSocket(private val mAdapter: SocketAdapter) : ITcpSocket {
         return if (mSocket == null || mSocket!!.isClosed) false else mSocket!!.isConnected
     }
 
+    /**
+     * 断开链接
+     */
     @Synchronized
     override fun disconnect() {
         LogUtils.i(TAG, "disconnect 断开Tcp连接 ,socket:${this}-${System.identityHashCode(this)}")

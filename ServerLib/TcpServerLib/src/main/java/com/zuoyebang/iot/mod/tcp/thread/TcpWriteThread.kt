@@ -15,6 +15,9 @@ class TcpWriteThread(
     private val mDataQueue: LinkedBlockingQueue<TcpDataBean>,
     private val mWriteCallback: WriteCallBack
 ) : Thread("WriteThread") {
+    /**
+     * 是否退出
+     */
     private var mQuit = false
     private var mWriteStrategy: WriteStrategy? = null
 
@@ -25,10 +28,7 @@ class TcpWriteThread(
         )
 
         while (!mQuit) {
-
             var data: TcpDataBean? = null
-
-
             //tcp 未连接,则阻塞线程
             if (isInterrupted { mWriteStrategy?.checkTcpNoConnect(mSocket.isTcpConnected()) }) {
                 if (mQuit) {
@@ -36,7 +36,6 @@ class TcpWriteThread(
                 }
                 continue
             }
-
             //取出一枚Tcp数据
             if (isInterrupted { data = mDataQueue.take() }) {
                 if (mQuit) {
@@ -44,8 +43,6 @@ class TcpWriteThread(
                 }
                 continue
             }
-
-
             if (data != null) {
                 try {
                     if (data!!.state == DataState.Canceled) {
