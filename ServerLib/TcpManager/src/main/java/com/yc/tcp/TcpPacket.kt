@@ -48,6 +48,9 @@ data class TcpPacket(
         return result
     }
 
+    /**
+     * 将TcpPacket转化成bean
+     */
     fun toTcpData(): TcpDataBean {
         return TcpDataBean(privateTag, DataState.Created, toBytes())
     }
@@ -73,6 +76,9 @@ data class TcpPacket(
     }
 
 
+    /**
+     * 将bean转化成TcpPacket
+     */
     companion object {
         fun convertFromTcpData(tcpData: TcpDataBean): TcpPacket {
             val bytes = tcpData.bytes
@@ -121,7 +127,6 @@ data class TcpPacket(
                 payload = data
             )
         }
-
     }
 
 }

@@ -14,6 +14,7 @@ class TcpWriteThread(
     private val mDataQueue: LinkedBlockingQueue<TcpDataBean>,
     private val mWriteCallback: WriteCallBack
 ) : Thread("WriteThread") {
+
     /**
      * 是否退出
      */

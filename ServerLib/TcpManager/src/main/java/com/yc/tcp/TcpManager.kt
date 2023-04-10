@@ -172,7 +172,8 @@ abstract class TcpManager : TcpListener {
      */
     fun sendTcpPacket(tcpPacket: TcpPacket) {
         LogUtils.d("Tcp_send:${tcpPacket}")
-        mTcpCore?.send(tcpPacket.toTcpData())
+        val tcpDataBean = tcpPacket.toTcpData()
+        mTcpCore?.send(tcpDataBean)
     }
 
 
@@ -227,6 +228,9 @@ abstract class TcpManager : TcpListener {
         }
     }
 
+    /**
+     * 读消息异常
+     */
     override fun readFailure(e: Exception?) {
         //读取数据包出错,移除心跳包
         mHeartClient?.apply {
@@ -243,6 +247,9 @@ abstract class TcpManager : TcpListener {
         }
     }
 
+    /**
+     * 写消息(发送tcp)异常
+     */
     override fun writeFailure(data: TcpDataBean, e: Exception?) {
         val convertFromTcpData = TcpPacket.convertFromTcpData(data)
         onTcpPacketSendFailed(convertFromTcpData, e)
