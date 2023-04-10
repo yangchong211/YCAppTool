@@ -164,7 +164,7 @@ class TcpCore(private val socket: ITcpSocket) {
         resetConnect(tcpError = TcpError.ERROR_PONG_TIMEOUT, errorMessage = "服务端Pong心跳超时")
     }
 
-    fun resetConnect(tcpError: TcpError, errorMessage: String?) {
+    private fun resetConnect(tcpError: TcpError, errorMessage: String?) {
         mTcpConnectThread?.resetConnect(tcpError, errorMessage)
     }
 

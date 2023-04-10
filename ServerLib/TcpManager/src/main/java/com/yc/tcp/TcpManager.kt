@@ -54,9 +54,7 @@ abstract class TcpManager : TcpListener {
                 sendDisableTcpMessage(3 * 1000)
             }
         }
-
         mHeartClient?.foregroundCheckPong(becomeForeground)
-
     }
 
     private var mConnectChangeReceiver = ConnectionChangeReceiver { hasNetWork ->
@@ -88,43 +86,33 @@ abstract class TcpManager : TcpListener {
         mHandlerThread = HandlerThread("TcpManager")
         mHandlerThread?.start()
         mHandler = object : Handler(mHandlerThread!!.looper) {
-
             override fun handleMessage(msg: Message) {
-
                 LogUtils.d(" --- handleMessage ${msg.what.toTcpMessage()}")
                 when (msg.what) {
-                    TcpHandlerMessage.SEND_PING -> {
+                    TcpHandlerMessage.SEND_PING -> {            //触发延时发送心跳
                         sendHeartPing()
-                        //触发延时发送心跳
                         mHeartClient?.updateSendPing()
                     }
-
-                    TcpHandlerMessage.SERVER_PONG_TIMEOUT -> {//服务端心跳超时,Tcp断开重连
+                    TcpHandlerMessage.SERVER_PONG_TIMEOUT -> {  //服务端心跳超时,Tcp断开重连
                         mTcpCore?.resetConnectPongTimeOut()
                     }
-
-                    TcpHandlerMessage.DISABLE_SOCKET -> {
+                    TcpHandlerMessage.DISABLE_SOCKET -> {       //阻塞Tcp连接线程,并停用重连机制
                         mTcpCore?.setEnable(false)
                     }
-
-                    TcpHandlerMessage.ENABlE_SOCKET -> {
+                    TcpHandlerMessage.ENABlE_SOCKET -> {        //开启连接线程,tcp重连机制启动
                         mTcpCore?.setEnable(true)
                     }
                     else -> {
 
                     }
-
                 }
             }
         }
-
         mHeartClient = HeartClient(mHandler = mHandler!!)
         //开启tcpCore
         mTcpCore!!.start()
-
         registerConnectReceiver()
         registerForegroundMonitor()
-
         mHandler?.removeCallbacksAndMessages(null)
     }
 
@@ -133,7 +121,6 @@ abstract class TcpManager : TcpListener {
         unRegisterForegroundMonitor()
         unRegisterConnectReceiver()
     }
-
 
     fun setDisableTcpOnBackGround(should: Boolean) {
         LogUtils.d("setDisableTcpOnBackGround:${should},isForeground:${isForeground()}")
@@ -144,7 +131,7 @@ abstract class TcpManager : TcpListener {
         }
     }
 
-    fun isForeground(): Boolean {
+    private fun isForeground(): Boolean {
         return mForegroundMonitor.isForeground
     }
 
@@ -249,14 +236,16 @@ abstract class TcpManager : TcpListener {
     }
 
     override fun writeSuccess(data: TcpDataBean) {
-        onTcpPacketSendSuccess(TcpPacket.convertFromTcpData(data))
+        val convertFromTcpData = TcpPacket.convertFromTcpData(data)
+        onTcpPacketSendSuccess(convertFromTcpData)
         mHeartClient?.apply {
             updateSendPing()
         }
     }
 
     override fun writeFailure(data: TcpDataBean, e: Exception?) {
-        onTcpPacketSendFailed(TcpPacket.convertFromTcpData(data), e)
+        val convertFromTcpData = TcpPacket.convertFromTcpData(data)
+        onTcpPacketSendFailed(convertFromTcpData, e)
         mHeartClient?.apply {
             removeSendPing()
             removeServerPong()
@@ -271,7 +260,6 @@ abstract class TcpManager : TcpListener {
         disPatchTcpPacket(tcpPacket)
     }
 
-
     /**
      * 在待发送对队列查询某个类型的TcpData
      */
@@ -282,7 +270,6 @@ abstract class TcpManager : TcpListener {
     /**
      * 查询某个类型的TcpData处于待发送队列中
      */
-
     fun isTcpDataInQueByTypeTag(clazz: Class<out TcpMessage>): Boolean {
         return mTcpCore?.isTcpDataInQueByTypeTag(clazz.simpleName) ?: false
     }

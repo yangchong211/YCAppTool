@@ -27,20 +27,26 @@ class HeartClient(private val mHandler: Handler) {
             LogUtils.d(TAG, "set lastPongTime :${lastPongTime}")
         }
 
+    /**
+     * 发送ping
+     */
     fun updateSendPing() {
         mHandler.removeMessages(TcpHandlerMessage.SEND_PING)
-        mHandler.sendEmptyMessageDelayed(
-            TcpHandlerMessage.SEND_PING,
-            SEND_PING_TIME
-        )
+        mHandler.sendEmptyMessageDelayed(TcpHandlerMessage.SEND_PING, SEND_PING_TIME)
     }
 
+    /**
+     * 移除ping
+     */
     fun removeSendPing() {
         LogUtils.d("removeSendPing")
         mHandler.removeMessages(TcpHandlerMessage.SEND_PING)
         inValidLastPong()
     }
 
+    /**
+     * 移除pong
+     */
     fun removeServerPong() {
         LogUtils.d("removeServerPong")
         mHandler.removeMessages(TcpHandlerMessage.SERVER_PONG_TIMEOUT)
@@ -53,14 +59,11 @@ class HeartClient(private val mHandler: Handler) {
     fun updateReceivedPong() {
         lastPongTime = System.currentTimeMillis()
         mHandler.removeMessages(TcpHandlerMessage.SERVER_PONG_TIMEOUT)
-        mHandler.sendEmptyMessageDelayed(
-            TcpHandlerMessage.SERVER_PONG_TIMEOUT,
-            RECEIVE_PONG_TIME_OUT_DELAY
-        )
+        mHandler.sendEmptyMessageDelayed(TcpHandlerMessage.SERVER_PONG_TIMEOUT, RECEIVE_PONG_TIME_OUT_DELAY)
     }
 
     /**
-     * 切到前台时,判断一次超时
+     * 切到前台时，判断一次超时
      */
     fun foregroundCheckPong(foreGround: Boolean) {
         if (foreGround) {
@@ -81,6 +84,9 @@ class HeartClient(private val mHandler: Handler) {
         lastPongTime = -1
     }
 
+    /**
+     * 判断当前时间减去上一次收到pong消息时间，是否大于连接超时时间。如果是则表示超时需要断开socket。
+     */
     private fun isLastPongTimeOut(): Boolean {
         val now = System.currentTimeMillis()
         val diffTime = now - lastPongTime
