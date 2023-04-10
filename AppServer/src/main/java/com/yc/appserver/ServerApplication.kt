@@ -5,8 +5,8 @@ import com.yc.appfilelib.AppFileUtils
 import com.yc.logclient.LogUtils
 import com.yc.logclient.client.LogClient
 import com.yc.toolutils.AppLogUtils
-import com.zuoyebang.iot.mid.tcp.TcpFacade
-import com.zuoyebang.iot.mod.tcp.trustmanager.TrustManagerProviderUnSafe
+import com.yc.tcp.TcpFacade
+import com.yc.tcp.trustmanager.TrustManagerProviderUnSafe
 
 class ServerApplication : Application() {
 
