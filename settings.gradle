@@ -220,7 +220,7 @@ project(':ServiceLoaderRegistry').projectDir = new File('AptHelper/ServiceLoader
 project(':ServiceLoaderPlugin').projectDir = new File('AptHelper/ServiceLoaderPlugin')
 project(':ServiceLoaderProcessor').projectDir = new File('AptHelper/ServiceLoaderProcessor')
 project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
-project(':AppInitApi').projectDir = new File('AptHelper/AppInitApi')
+//project(':AppInitApi').projectDir = new File('AptHelper/AppInitApi')
 //project(':AppInitCommon').projectDir = new File('AptHelper/AppInitCommon')
 //project(':AppInitCompiler').projectDir = new File('AptHelper/AppInitCompiler')
 

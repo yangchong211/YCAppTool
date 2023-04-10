@@ -20,6 +20,7 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class Luban implements Handler.Callback {
+
     private static final String TAG = "Luban";
     private static final String DEFAULT_DISK_CACHE_DIR = "luban_disk_cache";
 

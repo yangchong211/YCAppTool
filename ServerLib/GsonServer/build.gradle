@@ -32,5 +32,5 @@ android {
 dependencies {
     // Json 解析框架：https://github.com/google/gson
     // noinspection GradleDependency
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation rootProject.ext.dependencies["gson"]
 }

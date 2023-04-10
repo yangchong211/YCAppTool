@@ -43,5 +43,7 @@ dependencies {
     implementation rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     implementation rootProject.ext.dependencies["okhttp"]
-    implementation project(path: ':ToolUtilsLib')
+    //implementation project(path: ':ToolUtilsLib')
+    //工具类utils
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
 }

@@ -48,7 +48,7 @@
 - 专题2：Wi-Fi
 
 
-# jetpack系列
+# JetPack系列
 - 专题1：NAV导航是如何设计和实践的
 - 专题2：LiveData的设计思路和事件通知实现原理
 - 专题3：Model数据层是如何设计的？为何使用ViewModel

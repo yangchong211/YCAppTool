@@ -31,8 +31,12 @@ dependencies {
     implementation rootProject.ext.dependencies["retrofit"]
     implementation rootProject.ext.dependencies["retrofit-converter-gson"]
     implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
-    implementation project(path: ':ToolUtilsLib')
+    //工具类utils
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    //网络判断库
+    implementation 'com.github.yangchong211.YCCommonLib:NetWorkLib:1.4.8'
+    //implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':NetInterceptor')
-    implementation project(path: ':NetWorkLib')
+    //implementation project(path: ':NetWorkLib')
     implementation project(path: ':NotCaptureLib')
 }

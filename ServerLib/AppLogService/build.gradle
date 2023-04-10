@@ -29,8 +29,16 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':AppLogClient')
-    implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':ToolFileLib')
-    implementation project(path: ':FileIoHelper')
-    implementation project(path: ':EventUploadLib')
+    //工具类utils
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    //File文件库
+    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.8'
+    //io流读写库
+    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.8'
+    //同上上报库
+    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.8'
+    //implementation project(path: ':ToolUtilsLib')
+    //implementation project(path: ':ToolFileLib')
+    //implementation project(path: ':FileIoHelper')
+    //implementation project(path: ':EventUploadLib')
 }

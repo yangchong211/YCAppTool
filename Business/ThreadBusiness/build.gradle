@@ -27,7 +27,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     //通用日志输出库
-    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.3.0'
+    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.8'
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     implementation project(':ThreadPoolLib')
     implementation project(':EasyExecutor')
