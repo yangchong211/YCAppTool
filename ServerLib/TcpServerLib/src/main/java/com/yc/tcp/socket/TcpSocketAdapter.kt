@@ -36,7 +36,8 @@ class TcpSocketAdapter : SocketAdapter {
             var frameLength = 0
             //取出前三个byte,计算数据帧长度
             if (byteCount < 3) {
-                System.arraycopy(oneByteBuffer, 0, lengthBuffer, byteCount, len) // 将数据拷贝到临时缓冲区
+                // 将数据拷贝到临时缓冲区
+                System.arraycopy(oneByteBuffer, 0, lengthBuffer, byteCount, len)
                 byteCount++
                 if (byteCount == 3) {
                     frameLength =
@@ -45,14 +46,16 @@ class TcpSocketAdapter : SocketAdapter {
             }
 
             if (frameLength > 0) {
-                val leftbytes = ByteArray(frameLength)
-                mInput.readFully(leftbytes, 0, leftbytes.size)
-                val frameBytes = ByteArray(lengthBuffer.size + leftbytes.size)
+                val leftBytes = ByteArray(frameLength)
+                mInput.readFully(leftBytes, 0, leftBytes.size)
+                val frameBytes = ByteArray(lengthBuffer.size + leftBytes.size)
                 System.arraycopy(lengthBuffer, 0, frameBytes, 0, lengthBuffer.size)
-                System.arraycopy(leftbytes, 0, frameBytes, lengthBuffer.size, leftbytes.size)
+                System.arraycopy(leftBytes, 0, frameBytes, lengthBuffer.size, leftBytes.size)
+                //组装tcp数据
                 val tcpData = TcpDataBean(bytes = frameBytes)
-
+                //接收数据
                 receive.receive(tcpData)
+                //读取数据成功
                 readCallback.readSuccess(tcpData)
                 byteCount = 0
                 lengthBuffer = ByteArray(3)

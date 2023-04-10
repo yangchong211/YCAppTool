@@ -33,7 +33,6 @@ class TcpCore(private val socket: ITcpSocket) {
 
     private var send: ISend? = null
     private var receive: IReceive? = null
-
     private var mTcpConnectThread: TcpConnectThread? = null
     private var mTcpWriteThread: TcpWriteThread? = null
     private var mDispatcherThread: TcpDispatcherThread? = null

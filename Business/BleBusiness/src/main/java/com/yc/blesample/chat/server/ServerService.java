@@ -61,8 +61,7 @@ public class ServerService implements ChatService {
             @Override
             public void run() {
                 try {
-                    BluetoothServerSocket serverSocket
-                            = bluetoothAdapter.listenUsingRfcommWithServiceRecord("chat-server", UUID.fromString(serverUuid));
+                    BluetoothServerSocket serverSocket = bluetoothAdapter.listenUsingRfcommWithServiceRecord("chat-server", UUID.fromString(serverUuid));
 
                     mSocket = serverSocket.accept();
 

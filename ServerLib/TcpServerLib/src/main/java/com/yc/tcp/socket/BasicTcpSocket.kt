@@ -28,15 +28,17 @@ class BasicTcpSocket(private val mAdapter: SocketAdapter) : ITcpSocket {
     override fun connect(ip: String?, port: Int, timeOut: Int) {
         mSocket = Socket()
         val address: SocketAddress = InetSocketAddress(ip, port)
+        //设置tcp无延迟
         mSocket?.tcpNoDelay = true
         // 连接指定IP和端口
         mSocket?.connect(address, timeOut)
         LogUtils.e(TAG, "TCP连接成功: ip=$ip port=$port,socket:${this}-${System.identityHashCode(this)}")
+        //判断socket是否是连接状态
         if (isTcpConnected()) {
             // 获取网络输出流
-            mOutput = DataOutputStream(mSocket!!.getOutputStream())
+            mOutput = DataOutputStream(mSocket?.getOutputStream())
             // 获取网络输入流
-            mInput = DataInputStream(mSocket!!.getInputStream())
+            mInput = DataInputStream(mSocket?.getInputStream())
         }
     }
 
@@ -55,10 +57,7 @@ class BasicTcpSocket(private val mAdapter: SocketAdapter) : ITcpSocket {
                 mOutput = DataOutputStream(getOutputStream())
                 // 获取网络输入流
                 mInput = DataInputStream(getInputStream())
-                LogUtils.i(
-                    TAG,
-                    "TCP连接成功 tls: ip=$ip port=$port ,socket:${this}-${System.identityHashCode(this)}"
-                )
+                LogUtils.i(TAG, "TCP连接成功 tls: ip=$ip port=$port ,socket:${this}-${System.identityHashCode(this)}")
             }
         }
     }
@@ -77,9 +76,12 @@ class BasicTcpSocket(private val mAdapter: SocketAdapter) : ITcpSocket {
     override fun disconnect() {
         LogUtils.i(TAG, "disconnect 断开Tcp连接 ,socket:${this}-${System.identityHashCode(this)}")
         try {
+            //断开 客户端发送到服务器 的连接，即关闭输出流对象OutputStream
             mOutput?.close()
+            //断开 服务器发送到客户端 的连接，即关闭输入流读取器对象InputStream
             mInput?.close()
             mSocket?.apply {
+                //最终关闭整个Socket连接
                 if (!isClosed) close()
                 LogUtils.i(TAG, "socket.close()")
             }
@@ -96,11 +98,17 @@ class BasicTcpSocket(private val mAdapter: SocketAdapter) : ITcpSocket {
         }
     }
 
-    //向tcp写数据
+    /**
+     * 向tcp写数据
+     */
     @Synchronized
     override fun write(buffer: ByteArray?): Boolean {
+        //从Socket 获得输出流对象 OutputStream
+        //mOutput 该对象作用：发送数据
         return if (mOutput != null) {
+            //写入需要发送的数据到输出流对象中
             mOutput?.write(buffer)
+            //发送数据到服务端
             mOutput?.flush()
             true
         } else {
@@ -108,18 +116,22 @@ class BasicTcpSocket(private val mAdapter: SocketAdapter) : ITcpSocket {
         }
     }
 
-    //从tcp 读数据,没有socket没有数据时,会阻塞在read()
+    /**
+     * 从tcp 读数据,没有socket没有数据时,会阻塞在read()
+     */
     override fun read(receive: IReceive, readCallback: ReadCallBack,
                       readError: (TcpError, String?) -> Unit) {
+        //步骤1：创建输入流对象InputStream。这个是mInput
         try {
+            // 步骤2：创建输入流读取器对象 并传入输入流对象
+            // 该对象作用：获取服务器返回的数据
             mAdapter.read(mInput!!, receive, readCallback)
         } catch (e: Exception) {
             LogUtils.e(TAG, e)
             readCallback.readError(e)
             readError.invoke(TcpError.ERROR_READ, e.localizedMessage)
         }
-        readError.invoke(
-            TcpError.ERROR_READ_END,
+        readError.invoke(TcpError.ERROR_READ_END,
             "socket stream read over ,socket:${this}-${System.identityHashCode(this)}"
         )
     }
