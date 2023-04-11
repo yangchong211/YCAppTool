@@ -140,6 +140,14 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
+    public void postToMainThreadDelay(@NonNull Runnable runnable, long delayMills) {
+        mMainHandler = getMainHandler();
+        if (mMainHandler != null && runnable != null) {
+            mMainHandler.postDelayed(runnable,delayMills);
+        }
+    }
+
+    @Override
     public Handler getMainHandler() {
         if (mMainHandler == null) {
             synchronized (mLock) {

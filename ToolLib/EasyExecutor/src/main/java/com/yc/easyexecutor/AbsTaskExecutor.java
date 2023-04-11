@@ -47,6 +47,13 @@ public abstract class AbsTaskExecutor {
     public abstract void postToMainThread(@NonNull Runnable runnable);
 
     /**
+     * 使用UI主线程共有handler对象，执行post任务【将给定的任务提交给主线程】
+     *
+     * @param runnable runnable
+     */
+    public abstract void postToMainThreadDelay(@NonNull Runnable runnable , long delayMills);
+
+    /**
      * 获取UI主线程共有handler对象
      *
      * @return handler
@@ -60,6 +67,11 @@ public abstract class AbsTaskExecutor {
      */
     public abstract void postIoHandler(@NonNull Runnable runnable);
 
+    /**
+     * 使用UI主线程共有handler对象，执行任务
+     *
+     * @param runnable runnable
+     */
     public void executeOnMainThread(@NonNull Runnable runnable) {
         if (isMainThread()) {
             runnable.run();

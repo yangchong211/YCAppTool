@@ -1,6 +1,4 @@
-package com.yc.socket.socketio.Message;
-
-import com.yc.socket.listener.MessageAck;
+package com.yc.socket;
 
 /**
  * 需要发送的消息

@@ -30,5 +30,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
-    implementation project(path: ':ToolUtilsLib')
+    //implementation project(path: ':ToolUtilsLib')
+    //store磁盘分区库
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    //store磁盘分区库
+    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.8'
 }

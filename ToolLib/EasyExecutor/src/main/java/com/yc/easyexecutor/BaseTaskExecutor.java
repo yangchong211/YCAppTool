@@ -1,4 +1,4 @@
-package com.yc.socket.utils;
+package com.yc.easyexecutor;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -15,7 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 任务执行器
  */
 @SuppressWarnings("unused")
-public class TaskExecutor {
+public class BaseTaskExecutor {
+
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
     private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
     private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
@@ -47,7 +48,7 @@ public class TaskExecutor {
      */
     private static volatile Handler uiHandler;
 
-    private TaskExecutor() {
+    private BaseTaskExecutor() {
         throw new UnsupportedOperationException();
     }
 
@@ -77,7 +78,7 @@ public class TaskExecutor {
 
     private static Handler getHandler() {
         if (uiHandler == null) {
-            synchronized (TaskExecutor.class) {
+            synchronized (BaseTaskExecutor.class) {
                 if (uiHandler == null) {
                     uiHandler = new Handler(Looper.getMainLooper());
                 }
@@ -88,7 +89,7 @@ public class TaskExecutor {
 
     private static ExecutorService getIOPool() {
         if (sIOPool == null) {
-            synchronized (TaskExecutor.class) {
+            synchronized (BaseTaskExecutor.class) {
                 if (sIOPool == null) {
                     sIOPool = new ThreadPoolExecutor(
                             CORE_POOL_SIZE,
@@ -104,7 +105,7 @@ public class TaskExecutor {
 
     private static ExecutorService getCpuPool() {
         if (sCpuPool == null) {
-            synchronized (TaskExecutor.class) {
+            synchronized (BaseTaskExecutor.class) {
                 if (sCpuPool == null) {
                     sCpuPool = new ThreadPoolExecutor(
                             1,
@@ -120,7 +121,7 @@ public class TaskExecutor {
 
     private static ExecutorService getSerialPool() {
         if (sSerialPool == null) {
-            synchronized (TaskExecutor.class) {
+            synchronized (BaseTaskExecutor.class) {
                 if (sSerialPool == null) {
                     sSerialPool = new ThreadPoolExecutor(
                             1,
@@ -136,7 +137,7 @@ public class TaskExecutor {
 
     private static ExecutorService getCachePool() {
         if (sCachePool == null) {
-            synchronized (TaskExecutor.class) {
+            synchronized (BaseTaskExecutor.class) {
                 if (sCachePool == null) {
                     sCachePool = new ThreadPoolExecutor(
                             0,

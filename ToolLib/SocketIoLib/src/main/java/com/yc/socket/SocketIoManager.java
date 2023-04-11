@@ -1,4 +1,4 @@
-package com.yc.socket.manager;
+package com.yc.socket;
 
 import android.os.Build;
 import android.text.TextUtils;
@@ -19,11 +19,8 @@ import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
 import okhttp3.OkHttpClient;
 
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.notcapturelib.ssl.TrustAllCertsManager;
-import com.yc.socket.listener.MessageAck;
-import com.yc.socket.listener.OnmessageListener;
-import com.yc.socket.socketio.Message.MessageEntity;
-import com.yc.socket.utils.TaskExecutor;
 
 public class SocketIoManager {
 
@@ -130,7 +127,7 @@ public class SocketIoManager {
                         List<OnmessageListener> copyListeners = new ArrayList<>(onmessageListeners);
                         for (final OnmessageListener onmessageListener : copyListeners) {
                             if (onmessageListener.needCallBackOnUiThread()) {
-                                TaskExecutor.ui(new Runnable() {
+                                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         onmessageListener.onMessage(args);
@@ -229,13 +226,12 @@ public class SocketIoManager {
                         }
                         MessageAck ack = messageEntity.getAck();
                         if (ack.needCallBackOnUiThread()) {
-                            TaskExecutor.ui(new Runnable() {
+                            DelegateTaskExecutor.getInstance().executeOnMainThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     messageEntity.getAck().call(args);
                                 }
                             });
-
                         }
                     }
                 });

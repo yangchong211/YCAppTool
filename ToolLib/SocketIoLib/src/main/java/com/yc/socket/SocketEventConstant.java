@@ -4,7 +4,7 @@ package com.yc.socket;
 /**
  * 默认的一些事件名称常量
  */
-public class SocketIoEventNameConstant {
+public class SocketEventConstant {
     public static final String EVENT_ERROR = "error";
 
     public static final String EVENT_MESSAGE = "message";

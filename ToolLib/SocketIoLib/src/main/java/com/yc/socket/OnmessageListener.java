@@ -1,4 +1,4 @@
-package com.yc.socket.listener;
+package com.yc.socket;
 
 /**
  * 收到消息

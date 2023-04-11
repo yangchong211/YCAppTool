@@ -1,4 +1,4 @@
-package com.yc.socket.manager;
+package com.yc.socket;
 
 
 public class SocketIoConfig {

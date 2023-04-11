@@ -129,6 +129,13 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
+    public void postToMainThreadDelay(@Nullable Runnable runnable , long delayMills) {
+        if (runnable != null) {
+            mDelegate.postToMainThreadDelay(runnable,delayMills);
+        }
+    }
+
+    @Override
     public Handler getMainHandler() {
         return mDelegate.getMainHandler();
     }
