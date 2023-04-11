@@ -1,6 +1,7 @@
 package com.yc.websocket.mock;
 
-import android.util.Log;
+
+import com.yc.toolutils.AppLogUtils;
 
 import okhttp3.Response;
 import okhttp3.WebSocket;
@@ -22,38 +23,38 @@ public class MockWebSocketServer {
             @Override
             public void onOpen(WebSocket webSocket, Response response) {
                 super.onOpen(webSocket, response);
-                Log.i("MockWebSocketServer", "onOpen:  " + response.toString());
+                AppLogUtils.i("MockWebSocketServer", "onOpen:  " + response.toString());
             }
 
             @Override
             public void onMessage(WebSocket webSocket, String text) {
                 super.onMessage(webSocket, text);
-                Log.i("MockWebSocketServer", "onMessage:  " + text);
+                AppLogUtils.i("MockWebSocketServer", "onMessage:  " + text);
                 webSocket.send("你好客户端： " + text);
             }
 
             @Override
             public void onMessage(WebSocket webSocket, ByteString bytes) {
                 super.onMessage(webSocket, bytes);
-                Log.i("MockWebSocketServer", "onMessage:  " + bytes.size());
+                AppLogUtils.i("MockWebSocketServer", "onMessage:  " + bytes.size());
             }
 
             @Override
             public void onClosing(WebSocket webSocket, int code, String reason) {
                 super.onClosing(webSocket, code, reason);
-                Log.i("MockWebSocketServer", "onClosing:  " + reason);
+                AppLogUtils.i("MockWebSocketServer", "onClosing:  " + reason);
             }
 
             @Override
             public void onClosed(WebSocket webSocket, int code, String reason) {
                 super.onClosed(webSocket, code, reason);
-                Log.i("MockWebSocketServer", "onClosed:  " + reason);
+                AppLogUtils.i("MockWebSocketServer", "onClosed:  " + reason);
             }
 
             @Override
             public void onFailure(WebSocket webSocket, Throwable t, Response response) {
                 super.onFailure(webSocket, t, response);
-                Log.i("MockWebSocketServer", "onFailure:  " + response + "Throwable: " + webSocket);
+                AppLogUtils.i("MockWebSocketServer", "onFailure:  " + response + "Throwable: " + webSocket);
             }
         }));
 
@@ -61,7 +62,7 @@ public class MockWebSocketServer {
 
     public static String getWsUrl() {
         String url = "ws:" + mockWebServer.getHostName() + ":" + mockWebServer.getPort();
-        Log.i("MockWebSocketServer", url);
+        AppLogUtils.i("MockWebSocketServer", url);
         return url;
     }
 
