@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 任务执行器
  */
 @SuppressWarnings("unused")
-public class BaseTaskExecutor {
+public final class BaseTaskExecutor {
 
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
     private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));

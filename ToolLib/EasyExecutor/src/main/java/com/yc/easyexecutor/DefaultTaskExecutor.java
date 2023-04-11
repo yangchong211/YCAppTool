@@ -55,6 +55,7 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     private final ExecutorService mDiskIO;
     /**
      * CPU 密集型任务的线程池
+     * 线程池中线程个数应尽量少，如配置N+1个线程的线程池
      */
     private final ThreadPoolExecutor mCPUThreadPoolExecutor;
     /**
