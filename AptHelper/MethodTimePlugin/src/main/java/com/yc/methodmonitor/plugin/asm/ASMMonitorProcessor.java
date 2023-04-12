@@ -31,9 +31,9 @@ public class ASMMonitorProcessor implements IMonitorProcessor {
 
     public static final int ASM_VERSION = Opcodes.ASM7;
 
-    private String[] mPackagePrefixsWhiteList;
-    private String[] mPackagePrefixsBlackList;
-    private List<URL> mUrlPaths = new ArrayList<>();
+    private final String[] mPackagePrefixsWhiteList;
+    private final String[] mPackagePrefixsBlackList;
+    private final List<URL> mUrlPaths = new ArrayList<>();
 
     public ASMMonitorProcessor(String[] mPackagePrefixsWhiteList, String[] mPackagePrefixsBlackList) {
         this.mPackagePrefixsWhiteList = mPackagePrefixsWhiteList;
