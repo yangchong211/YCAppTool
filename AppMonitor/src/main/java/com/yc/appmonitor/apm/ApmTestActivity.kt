@@ -1,11 +1,16 @@
 package com.yc.appmonitor.apm
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Handler
 import android.os.SystemClock
 import android.view.View
 import androidx.fragment.app.FragmentActivity
+import com.squareup.leakcanary.RefWatcher
+import com.yc.appmonitor.MonitorApplication
 import com.yc.appmonitor.R
 import com.yc.toastutils.ToastUtils
 import com.yc.toolutils.AppLogUtils
@@ -13,6 +18,7 @@ import com.yc.toolutils.StackTraceUtils
 import okhttp3.*
 import java.io.IOException
 import java.util.*
+
 
 /**
  * @author: 杨充
@@ -32,6 +38,11 @@ class ApmTestActivity : FragmentActivity() {
         initData()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        val refWatcher: RefWatcher = MonitorApplication.getRefWatcher(this)
+        refWatcher.watch(this)
+    }
 
     private fun initFragment() {
         mFragment = ListFragment()
@@ -155,8 +166,66 @@ class ApmTestActivity : FragmentActivity() {
                 ToastUtils.showRoundRectToast("事件上报模拟")
             }
         }))
+        lvItemList.add(ListFragment.LvItem("模拟内存泄漏", object : ListFragment.OnClick {
+            override fun click(view: View?) {
+                testLeak()
+            }
+        }))
         mFragment?.addAllList(lvItemList)
     }
+
+    private fun testLeak() {
+        Handler().postDelayed(Runnable() {
+            ToastUtils.showRoundRectToast("模拟内存泄漏")
+        }, 100000)
+
+        //省略
+        if (mResource == null) {
+            mResource = TestResource()
+        }
+        mResource?.getColor(this)
+
+        startAsyncTask()
+
+        AppManager.getInstance(this)
+    }
+
+    private var mResource: TestResource? = null
+    class TestResource {
+        //里面代码引用上下文，Activity.this会导致内存泄漏
+        fun getColor(activity: ApmTestActivity){
+            activity.resources.getColor(R.color.alpha_05_black)
+        }
+    }
+
+    //匿名内部类也会持有外部类实例的引用
+    fun startAsyncTask() {
+        object : AsyncTask<Void?, Void?, Void?>() {
+            //1
+            override fun doInBackground(vararg params: Void?): Void? {
+                while (true);
+            }
+        }.execute()
+    }
+
+    class AppManager private constructor(context: Context) {
+        private val context: Context
+
+        companion object {
+            private var instance: AppManager? = null
+            fun getInstance(context: Context): AppManager? {
+                if (instance == null) {
+                    instance = AppManager(context)
+                }
+                return instance
+            }
+        }
+
+        init {
+            this.context = context
+        }
+    }
+
 
     private fun testSeriousBlock() {
         try {
@@ -165,7 +234,6 @@ class ApmTestActivity : FragmentActivity() {
         }
     }
 
-    @Throws(IOException::class)
     private fun executeGetAsnWithLog(url: String): String {
         val builder = OkHttpClient.Builder()
         val thisClient: OkHttpClient = builder.build()
@@ -176,7 +244,6 @@ class ApmTestActivity : FragmentActivity() {
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {}
 
-            @Throws(IOException::class)
             override fun onResponse(call: Call, response: Response) {
                 response.close()
             }

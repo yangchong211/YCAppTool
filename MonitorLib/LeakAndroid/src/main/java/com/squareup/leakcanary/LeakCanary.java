@@ -37,8 +37,10 @@ public final class LeakCanary {
    * references (on ICS+).
    */
   public static RefWatcher install(Application application) {
-    return refWatcher(application).listenerServiceClass(DisplayLeakService.class)
-        .excludedRefs(AndroidExcludedRefs.createAppDefaults().build())
+    AndroidRefWatcherBuilder androidRefWatcherBuilder = refWatcher(application);
+    ExcludedRefs excludedRefs = AndroidExcludedRefs.createAppDefaults().build();
+    return androidRefWatcherBuilder.listenerServiceClass(DisplayLeakService.class)
+        .excludedRefs(excludedRefs)
         .buildAndInstall();
   }
 

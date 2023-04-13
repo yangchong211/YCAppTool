@@ -1,7 +1,10 @@
 package com.yc.appmonitor;
 
 import android.app.Application;
+import android.content.Context;
 
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import com.yc.monitortimelib.OnMonitorListener;
 import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.netlib.utils.NetworkTool;
@@ -27,6 +30,7 @@ public class MonitorApplication extends Application {
             }
         });
         initNetWork();
+        initLeakCanary();
     }
 
     private void initCrash() {
@@ -44,6 +48,16 @@ public class MonitorApplication extends Application {
 
     private void initNetWork() {
         NetworkTool.getInstance().init(this);
+    }
+
+    private RefWatcher mRefWatcher;
+    private void initLeakCanary() {
+        mRefWatcher = LeakCanary.install(this);
+    }
+
+    public static RefWatcher getRefWatcher(Context context) {
+        MonitorApplication application = (MonitorApplication) context.getApplicationContext();
+        return application.mRefWatcher;
     }
 
 }

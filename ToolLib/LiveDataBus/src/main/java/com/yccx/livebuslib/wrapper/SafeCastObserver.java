@@ -32,9 +32,9 @@ import androidx.lifecycle.Observer;
 public class SafeCastObserver<T> implements Observer<T> {
 
     @NonNull
-    private final Observer<T> observer;
+    private final Observer<? super T> observer;
 
-    public SafeCastObserver(@NonNull Observer<T> observer) {
+    public SafeCastObserver(@NonNull Observer<? super T> observer) {
         this.observer = observer;
     }
 

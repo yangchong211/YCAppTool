@@ -276,5 +276,21 @@ project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')
 project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
 
 
+/* +++++++++ 经典第三方库 +++++++++ */
+include ':leakcanary-watcher',':leakcanary-android-instrumentation',':leakcanary-analyzer',
+        ':leakcanary-sample',
+        "leakcanary-android-no-op","leakcanary-android"
+project(':leakcanary-watcher').projectDir = new File('ThirdLib/leakcanary-watcher')
+project(':leakcanary-android-instrumentation').projectDir = new File('ThirdLib/leakcanary-android-instrumentation')
+project(':leakcanary-analyzer').projectDir = new File('ThirdLib/leakcanary-analyzer')
+project(':leakcanary-sample').projectDir = new File('ThirdLib/leakcanary-sample')
+project(':leakcanary-android-no-op').projectDir = new File('ThirdLib/leakcanary-android-no-op')
+project(':leakcanary-android').projectDir = new File('ThirdLib/leakcanary-android')
+
+
+
+
+
+
 
 

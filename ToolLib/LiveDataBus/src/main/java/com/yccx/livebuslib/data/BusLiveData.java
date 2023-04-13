@@ -155,7 +155,7 @@ public class BusLiveData<T> extends ExternalLiveData<T> implements BusObservable
      * @param observer                              observer
      */
     @Override
-    public void observeForever(@NonNull Observer<T> observer) {
+    public void observeForever(@NonNull Observer<? super T> observer) {
         if (!observerMap.containsKey(observer)) {
             observerMap.put(observer, new WrapperObserver(observer));
         }
@@ -167,7 +167,7 @@ public class BusLiveData<T> extends ExternalLiveData<T> implements BusObservable
      * @param observer                              observer
      */
     @Override
-    public void removeObserver(@NonNull Observer<T> observer) {
+    public void removeObserver(@NonNull Observer<? super T> observer) {
         Observer realObserver = null;
         if (observerMap.containsKey(observer)) {
             realObserver = observerMap.remove(observer);
@@ -187,8 +187,8 @@ public class BusLiveData<T> extends ExternalLiveData<T> implements BusObservable
      * @param observer                              observer
      */
     @Override
-    public void observeSticky(@NonNull LifecycleOwner owner, @NonNull Observer<T> observer) {
-        super.observeSticky(owner, new SafeCastObserver<>(observer));
+    public void observeSticky(@NonNull LifecycleOwner owner, @NonNull Observer<? super T> observer) {
+//        super.observeSticky(owner, new SafeCastObserver<>(observer));
     }
 
     /**
@@ -207,7 +207,7 @@ public class BusLiveData<T> extends ExternalLiveData<T> implements BusObservable
      * @return
      */
     @Override
-    protected Lifecycle.State observerActiveLevel() {
+    public Lifecycle.State observerActiveLevel() {
         return LiveDataBus.get().isLifecycleObserverAlwaysActive() ? Lifecycle.State.CREATED : Lifecycle.State.STARTED;
     }
 

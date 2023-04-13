@@ -30,7 +30,8 @@ public final class ActivityRefWatcher {
   }
 
   public static void install(Application application, RefWatcher refWatcher) {
-    new ActivityRefWatcher(application, refWatcher).watchActivities();
+      ActivityRefWatcher activityRefWatcher = new ActivityRefWatcher(application, refWatcher);
+      activityRefWatcher.watchActivities();
   }
 
   private final Application.ActivityLifecycleCallbacks lifecycleCallbacks =

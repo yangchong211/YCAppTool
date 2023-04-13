@@ -2,6 +2,7 @@ package com.yc.appmonitor.apm
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,10 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.leakcanary.RefWatcher
+import com.yc.appmonitor.MonitorApplication
 import com.yc.appmonitor.R
+import com.yc.toastutils.ToastUtils
 import java.util.*
 
 /**
@@ -48,6 +52,8 @@ class BlockListActivity : FragmentActivity() {
                 }
             }
         })
+
+        testLeak()
     }
 
     internal inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -76,4 +82,16 @@ class BlockListActivity : FragmentActivity() {
             return mListData.size
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val refWatcher: RefWatcher = MonitorApplication.getRefWatcher(this)
+        refWatcher.watch(this)
+    }
+    private fun testLeak() {
+        Handler().postDelayed(Runnable() {
+            ToastUtils.showRoundRectToast("模拟内存泄漏")
+        }, 100000)
+    }
+
 }

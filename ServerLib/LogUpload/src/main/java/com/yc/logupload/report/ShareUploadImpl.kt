@@ -5,7 +5,7 @@ import android.widget.Toast
 import com.yc.logupload.inter.BaseUploadLog
 import com.yc.logupload.inter.OnUploadListener
 import com.yc.activitymanager.ActivityManager
-import com.yc.appfilelib.FileShareUtils
+import com.yc.appmediastore.FileShareUtils
 import java.io.File
 
 /**
@@ -22,7 +22,7 @@ class ShareUploadImpl : BaseUploadLog() {
         val activity = ActivityManager.getInstance().peek()
         activity?.let {
             activity.runOnUiThread {
-                val shareFile = com.yc.appfilelib.FileShareUtils.shareFile(it, file)
+                val shareFile = FileShareUtils.shareFile(it, file)
                 if (shareFile){
                     onUploadListener?.onSuccess()
                     Toast.makeText(activity,"分享文件成功", Toast.LENGTH_SHORT).show()

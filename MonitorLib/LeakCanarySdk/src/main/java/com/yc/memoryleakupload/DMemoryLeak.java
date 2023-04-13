@@ -26,7 +26,10 @@ public class DMemoryLeak {
      */
     public static RefWatcher installLeakCanary(Application application, boolean isDebug) {
         //LeakCanary.install(application);
-        //替换成自己的
+
+
+
+        //替换成自己的，其作用等同于：LeakCanary.install(application)
         ExcludedRefs excludedRefs = AndroidExcludedRefs.createAppDefaults().build();
         RefWatcher refWatcher = LeakCanary.refWatcher(application)
                 .listenerServiceClass(UploadLeakService.class)

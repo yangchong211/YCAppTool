@@ -168,7 +168,7 @@ public class BusMutableLiveData<T> extends MutableLiveData<T> implements BusObse
      * @param observer                              observer
      */
     @Override
-    public void observeForever(@NonNull Observer<T> observer) {
+    public void observeForever(@NonNull Observer<? super T> observer) {
         if (!observerMap.containsKey(observer)) {
             observerMap.put(observer, createForeverObserver(observer));
         }
@@ -181,7 +181,7 @@ public class BusMutableLiveData<T> extends MutableLiveData<T> implements BusObse
      * @param observer                              observer
      */
     @Override
-    public void removeObserver(@NonNull Observer<T> observer) {
+    public void removeObserver(@NonNull Observer<? super T> observer) {
         Observer realObserver = null;
         if (observerMap.containsKey(observer)) {
             realObserver = observerMap.remove(observer);
@@ -205,7 +205,7 @@ public class BusMutableLiveData<T> extends MutableLiveData<T> implements BusObse
      * @param observer                              observer
      */
     @Override
-    public void observeSticky(@NonNull LifecycleOwner owner, @NonNull Observer<T> observer) {
+    public void observeSticky(@NonNull LifecycleOwner owner, @NonNull Observer<? super T> observer) {
         super.observe(owner, new SafeCastObserver<>(observer));
     }
 
@@ -241,7 +241,7 @@ public class BusMutableLiveData<T> extends MutableLiveData<T> implements BusObse
         return new WrapperObserver(observer, "android.arch.lifecycle.LiveData$LifecycleBoundObserver", "onStateChanged");
     }
 
-    private void setHook(LifecycleOwner owner, Observer<T> observer) {
+    private void setHook(LifecycleOwner owner, Observer<? super T> observer) {
         SafeCastObserver<T> safeCastObserver = new SafeCastObserver<>(observer);
         Lifecycle lifecycle = owner.getLifecycle();
         Lifecycle.State currentState = lifecycle.getCurrentState();

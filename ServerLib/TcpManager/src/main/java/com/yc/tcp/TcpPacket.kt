@@ -16,7 +16,7 @@ import com.yc.tcp.inter.DataState
  *  版本: 第4个字节放置当前协议的版本，版本从1开始记；
  *  类型:  用于标记该数据包的类型，方便前后端拆包处理，详情参考附录；1个字节可支持255种操作类型；
  *  数据(Payload): 实际的业务数据，为JSON格式
- *
+ *  包头+包体
  */
 data class TcpPacket(
     //TcpPackage的唯一标识

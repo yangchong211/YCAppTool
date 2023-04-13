@@ -36,15 +36,15 @@ public interface BusObservable<T> {
 
     void postValue(T value);
 
-    void observe(@NonNull LifecycleOwner owner, @NonNull Observer<T> observer);
+    void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super T> observer);
 
-    void observeSticky(@NonNull LifecycleOwner owner, @NonNull Observer<T> observer);
+    void observeSticky(@NonNull LifecycleOwner owner, @NonNull Observer<? super T> observer);
 
-    void observeForever(@NonNull Observer<T> observer);
+    void observeForever(@NonNull Observer<? super T> observer);
 
     void observeStickyForever(@NonNull Observer<T> observer);
 
-    void removeObserver(@NonNull Observer<T> observer);
+    void removeObserver(@NonNull Observer<? super T> observer);
 
     /*下面的这些为自定义的方法*/
 
