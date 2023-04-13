@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
+
+
+def gitSha() {
+  return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+android {
+  compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+  //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+  defaultConfig {
+    minSdkVersion rootProject.ext.android["minSdkVersion"]
+    targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+    versionCode rootProject.ext.android["versionCode"]
+    versionName rootProject.ext.android["versionName"]
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      buildConfigField "String", "GIT_SHA", "\"${gitSha()}\""
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+
+    debug{
+      //混淆
+      minifyEnabled false
+      buildConfigField "String", "GIT_SHA", "\"${gitSha()}\""
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation(rootProject.ext.dependencies["appcompat"])
+  implementation(rootProject.ext.dependencies["annotation"])
+  api project(':LeakAndroid')
+  implementation 'com.android.support.test:runner:1.0.2'
+}
+

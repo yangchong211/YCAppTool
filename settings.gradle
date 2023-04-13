@@ -229,8 +229,8 @@ project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 /* +++++++++ App监控库 +++++++++ */
 include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
-        ':MonitorXposed', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher', ':MonitorMemory',
-        ':LeakCanarySdk', ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',
+        ':MonitorXposed', ':MonitorMemory',
+        ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',
         ':MonitorPrivacy', ':MonitorTimeLib', ':MonitorSpeed', ':MonitorInterceptor',
         ':MonitorPhone', ':MonitorPicture'
 project(':MonitorAliveLib').projectDir = new File('MonitorLib/MonitorAliveLib')
@@ -242,10 +242,6 @@ project(':MonitorFileLib').projectDir = new File('MonitorLib/MonitorFileLib')
 project(':MonitorOomLib').projectDir = new File('MonitorLib/MonitorOomLib')
 project(':MonitorKeepAlive').projectDir = new File('MonitorLib/MonitorKeepAlive')
 project(':MonitorXposed').projectDir = new File('MonitorLib/MonitorXposed')
-project(':LeakAndroid').projectDir = new File('MonitorLib/LeakAndroid')
-project(':LeakAnalyzer').projectDir = new File('MonitorLib/LeakAnalyzer')
-project(':LeakWatcher').projectDir = new File('MonitorLib/LeakWatcher')
-project(':LeakCanarySdk').projectDir = new File('MonitorLib/LeakCanarySdk')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
 project(':MonitorPingLib').projectDir = new File('MonitorLib/MonitorPingLib')
 project(':MonitorFpsLib').projectDir = new File('MonitorLib/MonitorFpsLib')
@@ -277,9 +273,8 @@ project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
 
 
 /* +++++++++ 经典第三方库 +++++++++ */
-include ':leakcanary-watcher',':leakcanary-android-instrumentation',':leakcanary-analyzer',
-        ':leakcanary-sample',
-        "leakcanary-android-no-op","leakcanary-android"
+include ':LeakAnalyzer',':LeakCanarySdk',':LeakInstrumentation',
+        ':LeakSample', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher', ':LeakAndroidNoOp'
 //leakcanary 是1.6.3版本
 //leakcanary-analyzer ：负责泄漏信息的分析
 //leakcanary-android ：负责核心模块与Android的对接，还包含着UI展示部分
@@ -288,13 +283,13 @@ include ':leakcanary-watcher',':leakcanary-android-instrumentation',':leakcanary
 //leakcanary-sample ：库使用的demo
 //leakcanary-support-fragment ：v4包额外适配支持
 //leakcanary-watcher ：监听泄漏核心部分
-project(':leakcanary-watcher').projectDir = new File('ThirdLib/leakcanary-watcher')
-project(':leakcanary-android-instrumentation').projectDir = new File('ThirdLib/leakcanary-android-instrumentation')
-project(':leakcanary-analyzer').projectDir = new File('ThirdLib/leakcanary-analyzer')
-project(':leakcanary-sample').projectDir = new File('ThirdLib/leakcanary-sample')
-project(':leakcanary-android-no-op').projectDir = new File('ThirdLib/leakcanary-android-no-op')
-project(':leakcanary-android').projectDir = new File('ThirdLib/leakcanary-android')
-
+project(':LeakInstrumentation').projectDir = new File('ThirdLib/LeakInstrumentation')
+project(':LeakSample').projectDir = new File('ThirdLib/LeakSample')
+project(':LeakAndroid').projectDir = new File('ThirdLib/LeakAndroid')
+project(':LeakAnalyzer').projectDir = new File('ThirdLib/LeakAnalyzer')
+project(':LeakAndroidNoOp').projectDir = new File('ThirdLib/LeakAndroidNoOp')
+project(':LeakWatcher').projectDir = new File('ThirdLib/LeakWatcher')
+project(':LeakCanarySdk').projectDir = new File('ThirdLib/LeakCanarySdk')
 
 
 

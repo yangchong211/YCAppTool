@@ -32,7 +32,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["okhttp"])
     //api 'com.tencent.tbs.tbssdk:sdk:43967'
-    implementation 'cn.yc:YCSlideLib:1.1.2'
     implementation project(':WebViewLib')
     implementation project(':ToolUtilsLib')
     implementation project(path: ':ToastUtils')

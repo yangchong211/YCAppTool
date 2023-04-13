@@ -1,8 +1,13 @@
+//apply plugin: 'com.android.library'
 plugins {
     id 'com.android.library'
 }
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
+
+def gitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -12,13 +17,20 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            buildConfigField "String", "GIT_SHA", "\"${gitSha()}\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            //混淆
+            minifyEnabled false
+            buildConfigField "String", "GIT_SHA", "\"${gitSha()}\""
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
@@ -31,4 +43,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
+    implementation "com.android.tools.build:gradle:$buildVersion"
+    api project(':LeakAnalyzer')
 }
+
+

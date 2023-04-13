@@ -139,4 +139,7 @@ dependencies {
     implementation project(path: ':ImageToolLib')
     implementation project(path: ':AppCallStatus')
     implementation project(path: ':AppRestartLib')
+    implementation project(path: ':UriAndUrlLib')
+    implementation project(path: ':ZipFileLib')
+
 }
