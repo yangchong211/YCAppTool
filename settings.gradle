@@ -280,6 +280,14 @@ project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
 include ':leakcanary-watcher',':leakcanary-android-instrumentation',':leakcanary-analyzer',
         ':leakcanary-sample',
         "leakcanary-android-no-op","leakcanary-android"
+//leakcanary 是1.6.3版本
+//leakcanary-analyzer ：负责泄漏信息的分析
+//leakcanary-android ：负责核心模块与Android的对接，还包含着UI展示部分
+//leakcanary-android-instrumentation ：单元测试用的
+//leakcanary-android-no-op ：release环境下引用的空包
+//leakcanary-sample ：库使用的demo
+//leakcanary-support-fragment ：v4包额外适配支持
+//leakcanary-watcher ：监听泄漏核心部分
 project(':leakcanary-watcher').projectDir = new File('ThirdLib/leakcanary-watcher')
 project(':leakcanary-android-instrumentation').projectDir = new File('ThirdLib/leakcanary-android-instrumentation')
 project(':leakcanary-analyzer').projectDir = new File('ThirdLib/leakcanary-analyzer')

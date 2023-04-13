@@ -92,6 +92,7 @@ public final class AndroidHeapDumper implements HeapDumper {
 
     Toast toast = waitingForToast.get();
     try {
+      //生成Dump文件
       Debug.dumpHprofData(heapDumpFile.getAbsolutePath());
       cancelToast(toast);
       notificationManager.cancel(notificationId);

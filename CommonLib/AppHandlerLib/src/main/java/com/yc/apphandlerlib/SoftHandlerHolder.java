@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
  *     blog  : https://github.com/yangchong211
  *     time  : 2016/03/22
  *     desc  : Handler
- *     revise: 软引用–>随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。
+ *     revise: 弱引用–>随时可能会被垃圾回收器回收，不一定要等到虚拟机内存不足时才强制回收。
  * </pre>
  */
 public class SoftHandlerHolder extends Handler {

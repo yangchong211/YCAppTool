@@ -3,8 +3,17 @@ apply plugin: 'java-library'
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'leakcanary-watcher',
+            'Implementation-Version': '1.0.0'
+  }
+}
+
+
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation "com.android.tools.build:gradle:$buildVersion"
   testImplementation 'junit:junit:4.12'
 }
 

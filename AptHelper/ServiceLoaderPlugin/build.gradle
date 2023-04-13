@@ -17,7 +17,7 @@ dependencies {
     implementation localGroovy()
     implementation 'org.javassist:javassist:3.18.2-GA'
     implementation 'com.squareup:javapoet:1.7.0'
-    implementation 'com.android.tools.build:gradle:3.0.0'
+    implementation "com.android.tools.build:gradle:$buildVersion"
     implementation project(path: ':ServiceLoaderApi')
     implementation project(':ServiceLoaderAnnotations')
 }

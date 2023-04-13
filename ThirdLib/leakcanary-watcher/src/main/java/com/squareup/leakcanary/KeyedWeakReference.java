@@ -25,6 +25,13 @@ final class KeyedWeakReference extends WeakReference<Object> {
   public final String key;
   public final String name;
 
+  /**
+   *
+   * @param referent    被监控对象
+   * @param key         唯一 Key，根据此字段匹配映射表中的记录
+   * @param name        描述信息
+   * @param referenceQueue  关联的引用队列
+   */
   KeyedWeakReference(Object referent, String key, String name,
       ReferenceQueue<Object> referenceQueue) {
     super(checkNotNull(referent, "referent"), checkNotNull(referenceQueue, "referenceQueue"));

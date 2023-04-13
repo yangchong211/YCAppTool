@@ -30,8 +30,5 @@ dependencies {
   implementation(rootProject.ext.dependencies["annotation"])
   api project(':leakcanary-watcher')
   implementation 'com.squareup.haha:haha:2.0.3'
-
-  testImplementation 'junit:junit:4.12'
-  testImplementation 'org.assertj:assertj-core:3.8.0'
 }
 

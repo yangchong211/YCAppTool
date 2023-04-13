@@ -14,6 +14,9 @@ ext {
             versionName      : "1.8.3"    //必须是int或者float，否则影响线上升级
     ]
 
+    //Android统一build环境
+    buildVersion = '4.1.0'
+
     //AndroidX系列
     appcompatVersion = '1.2.0'
     annotationVersion = '1.2.0'

@@ -18,7 +18,7 @@ tasks.withType(JavaCompile) {
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
-    implementation 'com.android.tools.build:gradle:3.0.0'
+    implementation "com.android.tools.build:gradle:$buildVersion"
     implementation 'org.ow2.asm:asm:7.0'
     implementation 'org.ow2.asm:asm-commons:7.0'
     implementation 'org.ow2.asm:asm-util:7.0'

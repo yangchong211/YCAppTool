@@ -166,13 +166,16 @@ public final class HeapAnalyzer {
 
     try {
       listener.onProgressUpdate(READING_HEAP_DUMP_FILE);
+      //读取dump文件，解析文件内容并生成一个Snapshot对象
       HprofBuffer buffer = new MemoryMappedFileBuffer(heapDumpFile);
       HprofParser parser = new HprofParser(buffer);
       listener.onProgressUpdate(PARSING_HEAP_DUMP);
       Snapshot snapshot = parser.parse();
       listener.onProgressUpdate(DEDUPLICATING_GC_ROOTS);
+      //消除重复的GcRoots对象
       deduplicateGcRoots(snapshot);
       listener.onProgressUpdate(FINDING_LEAKING_REF);
+      //通过referenceKey 在Snapshot对象中找到泄漏对象
       Instance leakingRef = findLeakingReference(referenceKey, snapshot);
 
       // False alarm, weak reference was cleared in between key check and heap dump.
@@ -180,6 +183,7 @@ public final class HeapAnalyzer {
         String className = leakingRef.getClassObj().getClassName();
         return noLeak(className, since(analysisStartNanoTime));
       }
+      //找到泄漏路径
       return findLeakTrace(analysisStartNanoTime, snapshot, leakingRef, computeRetainedSize);
     } catch (Throwable e) {
       return failure(e, since(analysisStartNanoTime));

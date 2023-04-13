@@ -19,7 +19,8 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
+
 import com.squareup.leakcanary.internal.ForegroundService;
 import java.io.File;
 

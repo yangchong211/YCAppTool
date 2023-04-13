@@ -18,7 +18,7 @@ package com.squareup.leakcanary.internal;
 import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import com.squareup.leakcanary.AbstractAnalysisResultService;
 import com.squareup.leakcanary.AnalysisResult;
 import com.squareup.leakcanary.AnalyzerProgressListener;
@@ -61,11 +61,13 @@ public final class HeapAnalyzerService extends ForegroundService
     String listenerClassName = intent.getStringExtra(LISTENER_CLASS_EXTRA);
     HeapDump heapDump = (HeapDump) intent.getSerializableExtra(HEAPDUMP_EXTRA);
 
+    //创建一个分析器
     HeapAnalyzer heapAnalyzer =
         new HeapAnalyzer(heapDump.excludedRefs, this, heapDump.reachabilityInspectorClasses);
-
+    //使用分析器分析dump文件，得到分析结果
     AnalysisResult result = heapAnalyzer.checkForLeak(heapDump.heapDumpFile, heapDump.referenceKey,
         heapDump.computeRetainedHeapSize);
+    //将分析结果交由listener组件处理
     AbstractAnalysisResultService.sendResultToListener(this, listenerClassName, heapDump, result);
   }
 
