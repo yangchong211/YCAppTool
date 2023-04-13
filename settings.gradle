@@ -274,7 +274,8 @@ project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
 
 /* +++++++++ 经典第三方库 +++++++++ */
 include ':LeakAnalyzer',':LeakCanarySdk',':LeakInstrumentation',
-        ':LeakSample', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher', ':LeakAndroidNoOp'
+        ':LeakSample', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher', ':LeakAndroidNoOp',
+        ':GlideAnnotation', ':GlideGifLib', ':GlideLibrary'
 //leakcanary 是1.6.3版本
 //leakcanary-analyzer ：负责泄漏信息的分析
 //leakcanary-android ：负责核心模块与Android的对接，还包含着UI展示部分
@@ -290,7 +291,9 @@ project(':LeakAnalyzer').projectDir = new File('ThirdLib/LeakAnalyzer')
 project(':LeakAndroidNoOp').projectDir = new File('ThirdLib/LeakAndroidNoOp')
 project(':LeakWatcher').projectDir = new File('ThirdLib/LeakWatcher')
 project(':LeakCanarySdk').projectDir = new File('ThirdLib/LeakCanarySdk')
-
+project(':GlideAnnotation').projectDir = new File('ThirdLib/GlideAnnotation')
+project(':GlideGifLib').projectDir = new File('ThirdLib/GlideGifLib')
+project(':GlideLibrary').projectDir = new File('ThirdLib/GlideLibrary')
 
 
 
