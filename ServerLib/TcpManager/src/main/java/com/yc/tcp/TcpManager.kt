@@ -57,6 +57,9 @@ abstract class TcpManager : TcpListener {
         mHeartClient?.foregroundCheckPong(becomeForeground)
     }
 
+    /**
+     * 注册网络监听
+     */
     private var mConnectChangeReceiver = ConnectionChangeReceiver { hasNetWork ->
         LogUtils.d("ConnectionChangeReceiver, hasNetWork:${hasNetWork},isForeground:${mForegroundMonitor.isForeground},mDisableTcpOnBackground:${mDisableTcpOnBackground}")
         if (hasNetWork) {

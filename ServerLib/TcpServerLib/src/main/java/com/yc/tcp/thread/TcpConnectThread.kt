@@ -34,8 +34,10 @@ class TcpConnectThread(
                 //设置最长Tcp连接超时时长为3分钟
                 setTcpState(TcpState.CONNECTING)
                 LogUtils.d(TAG, "重新连接tcp...:${this}-${System.identityHashCode(this)}")
+                val serverHost = TcpConfig.getServerHost()
+                val serverPort = TcpConfig.getServerPort()
                 // 连接服务器
-                mSocket.connectTls(TcpConfig.getServerHost(), TcpConfig.getServerPort(), 60 * 1000)
+                mSocket.connectTls(serverHost, serverPort, 60 * 1000)
                 mConnStrategy.reset()
             } catch (e: Exception) {
                 mException = e
