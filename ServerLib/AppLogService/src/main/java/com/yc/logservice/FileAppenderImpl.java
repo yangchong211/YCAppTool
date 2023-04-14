@@ -1,4 +1,4 @@
-package com.yc.logservice.log;
+package com.yc.logservice;
 
 
 import com.yc.eventuploadlib.ExceptionReporter;
@@ -142,13 +142,6 @@ public class FileAppenderImpl extends AbsWriterAppender {
 
         AppLogUtils.d(TAG, "setFile ended");
     }
-
-
-    @Override
-    protected void reset() {
-        super.reset();
-    }
-
 
     // ------- getter and setter ------- //
 

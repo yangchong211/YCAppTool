@@ -110,6 +110,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
     private void startLogQueue() {
         mLogQueue = new LogQueueThread(this, new LogCache(MAX_LOG_BEANS));
         if (enableTooLargeTransactDevide) {
+            //是否启动 大日志 自动分隔策略
             IPCLargeProcessor tooLargeProcessor = new IPCLargeProcessor(MAX_LOG_BEANS, ratio);
             mLogQueue.setLargeProcessor(tooLargeProcessor);
         }
@@ -253,6 +254,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         }
         try {
             Log.i(TAG, "service send bean size" + beans.size() + " is bind : " + isLogBound());
+            //LogService是否已经绑定
             if (isLogBound()) {
                 log2Binder(beans);
             } else {

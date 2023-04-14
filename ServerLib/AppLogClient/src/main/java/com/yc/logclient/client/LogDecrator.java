@@ -41,12 +41,6 @@ public class LogDecrator {
         String msg;
         try {
             StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-
-            //Log.d("feifei","reseal statckIndex:"+index+",stackTrace.length:"+stackTrace.length);
-            //for(int i = stackTrace.length-1;i>=0;i--){
-            //   System.out.println("index:"+i+"feifei ----,className:"+stackTrace[i].getClassName()+",method:"+stackTrace[i].getMethodName()+",fileName:"+stackTrace[i].getFileName()+",lineNumber:"+stackTrace[i].getLineNumber());
-            //}
-
             index = Math.min(index, stackTrace.length - 1);
             String className = stackTrace[index].getFileName();
             String methodName = stackTrace[index].getMethodName();
@@ -64,7 +58,7 @@ public class LogDecrator {
         if (msg != null) {
             stringBuilder.append(msg);
         }
-
+        //如果有异常，则把异常拼接在后面
         if (ex != null) {
             stringBuilder.append("\n").append(Log.getStackTraceString(ex));
         }

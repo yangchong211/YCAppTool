@@ -107,7 +107,8 @@ class LogTestActivity : AppCompatActivity() {
             }
         }
         tvTest3.setOnClickListener {
-
+            LogUtils.i("Log test info : click text view test3")
+            Toast.makeText(this,"测试",Toast.LENGTH_SHORT).show()
         }
         tvTest4.setOnClickListener {
 

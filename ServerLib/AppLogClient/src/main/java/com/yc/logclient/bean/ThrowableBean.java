@@ -6,7 +6,6 @@ import android.os.Parcelable;
 /**
  * Throwable封装类,可序列化，用于跨进程传递
  */
-
 public class ThrowableBean implements Parcelable {
 
     //包名

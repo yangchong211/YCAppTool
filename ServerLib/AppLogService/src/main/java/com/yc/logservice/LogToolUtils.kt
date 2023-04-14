@@ -1,4 +1,4 @@
-package com.yc.logservice.utils
+package com.yc.logservice
 
 import java.io.*
 

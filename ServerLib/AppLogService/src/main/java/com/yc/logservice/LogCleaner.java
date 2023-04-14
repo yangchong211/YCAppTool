@@ -1,4 +1,4 @@
-package com.yc.logservice.log;
+package com.yc.logservice;
 
 
 import com.yc.appfilelib.AppFileUtils;

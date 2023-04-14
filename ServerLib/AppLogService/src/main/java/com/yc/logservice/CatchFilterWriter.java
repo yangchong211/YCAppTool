@@ -1,4 +1,4 @@
-package com.yc.logservice.log;
+package com.yc.logservice;
 
 import java.io.FilterWriter;
 import java.io.Writer;

@@ -1,7 +1,8 @@
 package com.yc.logclient.constant;
 
 public final class LogConstant {
-    public static final int Log_Type_App = LogType.app.value();
+
+    public static final int Log_Type_App = LogType.app.value();//普通日志
     public static final int Log_Type_Crash = LogType.crash.value();//crash日志
     public static final int Log_Type_Statistics = LogType.statistics.value();//统计日志
     public static final int Log_Type_Anr = LogType.anr.value();//ANR 日志
@@ -30,7 +31,7 @@ public final class LogConstant {
         crash(20),//crash日志
         statistics(30),//统计日志
         anr(40);//ANR 日志
-        private int type;
+        private final int type;
 
         public int getMaxFolderSize() {
             int maxFolderSize = MAX_FOLDER_SIZE_BIG;

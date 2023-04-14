@@ -15,14 +15,11 @@ import com.yc.appfilelib.SdCardUtils;
 import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.logclient.bean.AppLogBean;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.logservice.utils.LogToolUtils;
 import com.yc.logclient.ILogService;
 import com.yc.logclient.constant.LogConstant;
 import com.yc.logclient.bean.ThrowableBean;
 import com.yc.logclient.LogManager;
-import com.yc.logservice.log.DailyAppenderImpl;
-import com.yc.logservice.log.IWriteLogger;
-import com.yc.logservice.log.LogCleaner;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -137,10 +134,12 @@ public class LogService extends Service {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 switch (msg.what) {
+                    //单个日志消息
                     case EVENT_WRITE_LOG:
                         AppLogBean bean = (AppLogBean) msg.obj;
                         doWriteLog(bean);
                         break;
+                    //批量日志消息
                     case EVENT_WRITE_LOGS:
                         List<AppLogBean> beans = (List<AppLogBean>) msg.obj;
                         doWriteLogs(beans);
@@ -297,7 +296,6 @@ public class LogService extends Service {
                 }
                 logger.append(msgList);
             }
-
             deleteByOverdue();
         }
     }
@@ -430,18 +428,15 @@ public class LogService extends Service {
     /**
      * 小于指定空间或大于指定天数删除最旧的文件
      *
-     * @return
      */
-    private synchronized boolean deleteByOverdue() {
+    private synchronized void deleteByOverdue() {
         LogConstant.LogType[] types = LogConstant.LogType.values();
-        for (int i = 0; i < types.length; i++) {
-            LogConstant.LogType theType = types[i];
+        for (LogConstant.LogType theType : types) {
             LogCleaner logCleaner = getLogCleaner(theType);
             if (logCleaner != null) {
                 logCleaner.tryClearLog();
             }
         }
-        return true;
     }
 
 

@@ -1,8 +1,7 @@
-package com.yc.logservice.log;
+package com.yc.logservice;
 
 
 import com.yc.eventuploadlib.ExceptionReporter;
-import com.yc.logservice.LogService;
 import com.yc.toolutils.AppLogUtils;
 
 import java.io.File;

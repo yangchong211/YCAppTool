@@ -27,6 +27,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(rootProject.ext.dependencies["annotation"])
     implementation rootProject.ext.dependencies["gson"]
     //工具类utils
     implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'

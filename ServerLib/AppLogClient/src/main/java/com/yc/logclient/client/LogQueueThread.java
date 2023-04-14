@@ -1,5 +1,7 @@
 package com.yc.logclient.client;
 
+import android.os.Build;
+
 import com.yc.logclient.bean.AppLogBean;
 import com.yc.logclient.inter.OnFlushListener;
 import com.yc.logclient.inter.OnEnqueueListener;
@@ -24,12 +26,14 @@ public class LogQueueThread extends Thread implements ILogQueue {
     public LogQueueThread(ILogSend sender, LogCache cache) {
         mSender = sender;
         mCache = cache;
-        mCache.setFlushListener(new OnFlushListener() {
-            @Override
-            public void doFlush(ArrayList<AppLogBean> logBeans) {
-                mSender.sendLogToService(logBeans);
-            }
-        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mCache.setFlushListener(new OnFlushListener() {
+                @Override
+                public void doFlush(ArrayList<AppLogBean> logBeans) {
+                    mSender.sendLogToService(logBeans);
+                }
+            });
+        }
     }
 
     /**
@@ -57,7 +61,6 @@ public class LogQueueThread extends Thread implements ILogQueue {
                         e.printStackTrace();
                         mLogRunning = false;
                     }
-                    continue;
                 }
             }
         }

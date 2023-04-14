@@ -28,14 +28,12 @@ public final class LogUtils {
      * 是否在logcat 显示调试日志
      */
     private static boolean isShowLog = true;
-
-
     /**
      * 打印日志时的堆栈层级
      *
      * @return
      */
-    public static int getStackIndex() {
+    private static int getStackIndex() {
         return LogClient.mBaseIndex + 1;
     }
 
@@ -55,7 +53,6 @@ public final class LogUtils {
     public static void flush() {
         logClient.flushLog();
     }
-
 
     /**
      * 详细信息
@@ -243,7 +240,6 @@ public final class LogUtils {
      * @param info
      */
     public static void statistics(String info) {
-
         doLog(LogConstant.Log_Type_App, Log_Level_info, isShowLog, "", "statistics_" + info, null, getStackIndex());
         doLog(LogConstant.Log_Type_Statistics, LogConstant.Log_Level_statistics, isShowLog, "", info, null, getStackIndex());
     }
@@ -340,12 +336,13 @@ public final class LogUtils {
         if (level < logLevel) {
             return;
         }
-
+        //获取tag
         String tag = LogDecrator.decorateTag(tagStr);
+        //组装日志信息
         String logStr = LogDecrator.decorate4JumpSource(type, tagStr, obj, ex, index);
-
+        //打印出日志
         tryLogcat(showLog, type, level, tag, logStr);
-
+        //往文件中写日志
         if (type == LogConstant.Log_Type_Crash) {
             logClient.logu(LogConstant.Log_Type_App, level, tag + logStr);
             logClient.crash(type, level, logStr, ex);

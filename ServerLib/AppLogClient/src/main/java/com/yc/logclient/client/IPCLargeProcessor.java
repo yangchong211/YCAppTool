@@ -34,14 +34,6 @@ public class IPCLargeProcessor {
         this.ratio = ratio;
     }
 
-    public void setMaxCacheSize(int mCacheSize) {
-        maxCacheSize = mCacheSize;
-    }
-
-    public void setRatio(float ratio) {
-        this.ratio = ratio;
-    }
-
     public void enqueue(AppLogBean bean, OnEnqueueListener listener) {
         double maxMsgBeanSize = TransanctionTooLargeSize * 1.0 / maxCacheSize;
         double maxPerByteString = maxMsgBeanSize / ratio;
