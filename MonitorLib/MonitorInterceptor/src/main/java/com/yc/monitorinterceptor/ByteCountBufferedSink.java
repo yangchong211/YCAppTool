@@ -62,6 +62,7 @@ public class ByteCountBufferedSink implements BufferedSink {
             //让每次写入的字节数精确到mByteCount 分多次写入
             long newOffset = i * mByteCount;
             long writeByteCount = Math.min(mByteCount, source.length - newOffset);
+            //写数据
             buffer().write(source, (int) newOffset, (int) writeByteCount);
             emitCompleteSegments();
         }

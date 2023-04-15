@@ -260,8 +260,8 @@ public final class WeakNetworkManager {
         final RequestBody body = request.body();
         if (body != null) {
             //大于0使用限速的body 否则使用原始body
-            final RequestBody requestBody = mRequestSpeed > 0 ?
-                    new SpeedLimitRequestBody(mRequestSpeed, body) : body;
+            SpeedLimitRequestBody limitRequestBody = new SpeedLimitRequestBody(mRequestSpeed, body);
+            final RequestBody requestBody = mRequestSpeed > 0 ? limitRequestBody : body;
             request = request.newBuilder().method(request.method(), requestBody).build();
         }
 
