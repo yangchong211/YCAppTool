@@ -207,6 +207,9 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void binderDied() {
         if (mLogServiceStub != null) {
