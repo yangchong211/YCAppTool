@@ -19,7 +19,6 @@ import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +45,6 @@ import okhttp3.internal.tls.OkHostnameVerifier;
 import okhttp3.internal.ws.RealWebSocket;
 import okio.Sink;
 import okio.Source;
-import org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement;
 
 import static okhttp3.internal.Util.checkDuration;
 

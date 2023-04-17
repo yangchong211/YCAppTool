@@ -38,12 +38,14 @@ class Engine {
 
     File compress() throws IOException {
         BitmapFactory.Options options = new BitmapFactory.Options();
+        //计算采样率
         options.inSampleSize = PicCalculateUtils.computeSize(srcWidth,srcHeight);
 
         Bitmap tagBitmap = BitmapFactory.decodeStream(srcImg.open(), null, options);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         if (Checker.SINGLE.isJPG(srcImg.open())) {
+            //旋转Bitmap的角度，获取一张新的图片
             tagBitmap = AppBitmapUtils.rotatingImage(tagBitmap, Checker.SINGLE.getOrientation(srcImg.open()));
         }
         tagBitmap.compress(focusAlpha ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG, 60, stream);
