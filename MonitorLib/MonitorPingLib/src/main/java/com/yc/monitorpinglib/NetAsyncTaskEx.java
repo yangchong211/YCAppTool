@@ -3,6 +3,7 @@ package com.yc.monitorpinglib;
 import android.os.Handler;
 import android.os.Message;
 
+import java.util.Hashtable;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -34,8 +35,7 @@ public abstract class NetAsyncTaskEx<Params, Progress, Result> {
     private final LDNetWorkerRunnable<Params, Result> mWorker;
     private final FutureTask<Result> mFuture;
 
-    // protected Hashtable<Params, LDNetAsyncTaskEx> mTaskCache = new
-    // Hashtable<Params, LDNetAsyncTaskEx>();
+     protected Hashtable<Params, NetAsyncTaskEx> mTaskCache = new Hashtable<Params, NetAsyncTaskEx>();
 
     public NetAsyncTaskEx() {
         mWorker = new LDNetWorkerRunnable<Params, Result>() {

@@ -117,7 +117,7 @@ public final class ReadWriteManager {
         private FileOutputStream fos;
         private FileChannel channel;
         private FileLock fileLock;
-        private ReentrantLock threadLock;
+        private final ReentrantLock threadLock;
 
         public Lock(String lockFilePath) {
             this.lockFilePath = lockFilePath;

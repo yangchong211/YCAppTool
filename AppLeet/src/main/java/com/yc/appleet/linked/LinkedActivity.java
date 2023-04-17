@@ -39,5 +39,6 @@ public class LinkedActivity extends BaseActivity {
         for(LinkedHashMap.Entry<String, Integer> entry : lmap.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
+        Integer integer1 = lmap.get("生物");
     }
 }
