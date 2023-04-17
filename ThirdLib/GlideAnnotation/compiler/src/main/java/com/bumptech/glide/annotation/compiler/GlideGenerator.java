@@ -63,7 +63,7 @@ import javax.lang.model.util.Elements;
  *     return (GeneratedRequestManager) Glide.with(fragment);
  *   }
  *
- *   public static GeneratedRequestManager with(android.support.v4.app.Fragment fragment) {
+ *   public static GeneratedRequestManager with(androidx.fragment.app.Fragment fragment) {
  *     return (GeneratedRequestManager) Glide.with(fragment);
  *   }
  * </code>
@@ -77,7 +77,7 @@ final class GlideGenerator {
       "com.bumptech.glide.RequestManager";
 
   private static final String VISIBLE_FOR_TESTING_QUALIFIED_NAME =
-      "android.support.annotation.VisibleForTesting";
+      "androidx.annotation.VisibleForTesting";
 
   private static final String VISIBLE_FOR_TESTING_QUALIFIED_NAME_ANDROIDX =
       "androidx.annotation.VisibleForTesting";

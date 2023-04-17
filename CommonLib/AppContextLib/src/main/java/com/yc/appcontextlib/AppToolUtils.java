@@ -23,7 +23,7 @@ public final class AppToolUtils {
 
     public static void init(Application app) {
         if (app == null) {
-            throw new NullPointerException("Argument 'app' of type Application (#0 out of 1, zero-based) is marked by @android.support.annotation.NonNull but got null for it");
+            throw new NullPointerException("Argument 'app' of type Application (#0 out of 1, zero-based) is marked by @androidx.annotation.NonNull but got null for it");
         } else {
             sApplication = app;
         }

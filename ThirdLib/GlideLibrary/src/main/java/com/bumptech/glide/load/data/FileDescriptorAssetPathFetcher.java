@@ -2,7 +2,7 @@ package com.bumptech.glide.load.data;
 
 import android.content.res.AssetManager;
 import android.os.ParcelFileDescriptor;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import java.io.IOException;
 
 /**

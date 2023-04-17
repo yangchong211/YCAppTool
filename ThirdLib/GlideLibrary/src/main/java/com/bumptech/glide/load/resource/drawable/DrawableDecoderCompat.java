@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.content.res.AppCompatResources;

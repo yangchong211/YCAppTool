@@ -2,8 +2,8 @@ package com.bumptech.glide.request.target;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import com.bumptech.glide.request.Request;
@@ -27,7 +27,7 @@ import com.bumptech.glide.util.Util;
  * corruption, crashes caused by recycled {@link Bitmap}s, and other undefined behavior. It is never
  * safe to leave {@link #onLoadCleared(Drawable)} unimplemented or empty. Even if you do not
  * manually clear this {@link Target}, Glide may do so automatically after certain lifecycle events
- * in {@link android.support.v4.app.Fragment}s and {@link android.app.Activity}s.
+ * in {@link androidx.fragment.app.Fragment}s and {@link android.app.Activity}s.
  *
  * <p>This class can only be used with {@link Target#SIZE_ORIGINAL} or when the desired resource
  * dimensions are known when the {@link Target} is created. If you'd like to run some asynchronous

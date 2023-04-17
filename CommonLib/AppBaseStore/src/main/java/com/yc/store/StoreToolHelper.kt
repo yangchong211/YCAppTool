@@ -56,7 +56,7 @@ class StoreToolHelper {
 
     fun setApp(app: Application?) {
         if (app == null) {
-            throw NullPointerException("Argument 'app' of type Application (#0 out of 1, zero-based) is marked by @android.support.annotation.NonNull but got null for it")
+            throw NullPointerException("Argument 'app' of type Application (#0 out of 1, zero-based) is marked by @androidx.annotation.NonNull but got null for it")
         } else {
             sApplication = app
         }
