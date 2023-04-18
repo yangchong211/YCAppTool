@@ -51,7 +51,6 @@ import okhttp3.Response;
 import okhttp3.Route;
 import okhttp3.internal.Internal;
 import okhttp3.internal.Util;
-import okhttp3.internal.Version;
 import okhttp3.internal.http.ExchangeCodec;
 import okhttp3.internal.http1.Http1ExchangeCodec;
 import okhttp3.internal.http2.ConnectionShutdownException;
@@ -444,7 +443,6 @@ public final class RealConnection extends Http2Connection.Listener implements Co
         .method("CONNECT", null)
         .header("Host", Util.hostHeader(route.address().url(), true))
         .header("Proxy-Connection", "Keep-Alive") // For HTTP/1.0 proxies like Squid.
-        .header("User-Agent", Version.userAgent())
         .build();
 
     Response fakeAuthChallengeResponse = new Response.Builder()

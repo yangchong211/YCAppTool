@@ -26,7 +26,6 @@ import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.internal.Version;
 import okio.GzipSource;
 import okio.Okio;
 
@@ -84,10 +83,6 @@ public final class BridgeInterceptor implements Interceptor {
     List<Cookie> cookies = cookieJar.loadForRequest(userRequest.url());
     if (!cookies.isEmpty()) {
       requestBuilder.header("Cookie", cookieHeader(cookies));
-    }
-
-    if (userRequest.header("User-Agent") == null) {
-      requestBuilder.header("User-Agent", Version.userAgent());
     }
 
     Response networkResponse = chain.proceed(requestBuilder.build());

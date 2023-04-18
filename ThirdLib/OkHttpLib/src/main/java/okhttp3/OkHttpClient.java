@@ -15,10 +15,15 @@
  */
 package okhttp3;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
+
+import java.io.IOException;
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +31,8 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
 import javax.net.SocketFactory;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -139,6 +146,7 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
         return connectionPool.delegate;
       }
 
+      @SuppressLint("NewApi")
       @Override public boolean equalsNonHost(Address a, Address b) {
         return a.equalsNonHost(b);
       }
@@ -256,6 +264,7 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
     }
   }
 
+  @SuppressLint("NewApi")
   private static SSLSocketFactory newSslSocketFactory(X509TrustManager trustManager) {
     try {
       SSLContext sslContext = Platform.get().getSSLContext();
@@ -525,9 +534,10 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
      *
      * <p>The default value is 0 which imposes no timeout.
      */
-    @IgnoreJRERequirement
     public Builder callTimeout(Duration duration) {
-      callTimeout = checkDuration("timeout", duration.toMillis(), TimeUnit.MILLISECONDS);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        callTimeout = checkDuration("timeout", duration.toMillis(), TimeUnit.MILLISECONDS);
+      }
       return this;
     }
 
@@ -552,9 +562,10 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
      * <p>The connect timeout is applied when connecting a TCP socket to the target host.
      * The default value is 10 seconds.
      */
-    @IgnoreJRERequirement
     public Builder connectTimeout(Duration duration) {
-      connectTimeout = checkDuration("timeout", duration.toMillis(), TimeUnit.MILLISECONDS);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        connectTimeout = checkDuration("timeout", duration.toMillis(), TimeUnit.MILLISECONDS);
+      }
       return this;
     }
 
@@ -583,9 +594,10 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
      * @see Socket#setSoTimeout(int)
      * @see Source#timeout()
      */
-    @IgnoreJRERequirement
     public Builder readTimeout(Duration duration) {
-      readTimeout = checkDuration("timeout", duration.toMillis(), TimeUnit.MILLISECONDS);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        readTimeout = checkDuration("timeout", duration.toMillis(), TimeUnit.MILLISECONDS);
+      }
       return this;
     }
 
@@ -612,9 +624,10 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
      *
      * @see Sink#timeout()
      */
-    @IgnoreJRERequirement
     public Builder writeTimeout(Duration duration) {
-      writeTimeout = checkDuration("timeout", duration.toMillis(), TimeUnit.MILLISECONDS);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        writeTimeout = checkDuration("timeout", duration.toMillis(), TimeUnit.MILLISECONDS);
+      }
       return this;
     }
 
@@ -645,13 +658,14 @@ public class OkHttpClient implements Cloneable, Call.Factory, WebSocket.Factory 
      * client will assume that connectivity has been lost. When this happens on a web socket the
      * connection is canceled and its listener is {@linkplain WebSocketListener#onFailure notified
      * of the failure}. When it happens on an HTTP/2 connection the connection is closed and any
-     * calls it is carrying {@linkplain java.io.IOException will fail with an IOException}.
+     * calls it is carrying {@linkplain IOException will fail with an IOException}.
      *
      * <p>The default value of 0 disables client-initiated pings.
      */
-    @IgnoreJRERequirement
     public Builder pingInterval(Duration duration) {
-      pingInterval = checkDuration("timeout", duration.toMillis(), TimeUnit.MILLISECONDS);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        pingInterval = checkDuration("timeout", duration.toMillis(), TimeUnit.MILLISECONDS);
+      }
       return this;
     }
 

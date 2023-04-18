@@ -205,14 +205,6 @@ public class Platform {
       return android;
     }
 
-    if (isConscryptPreferred()) {
-      Platform conscrypt = ConscryptPlatform.buildIfSupported();
-
-      if (conscrypt != null) {
-        return conscrypt;
-      }
-    }
-
     Platform jdk9 = Jdk9Platform.buildIfSupported();
 
     if (jdk9 != null) {

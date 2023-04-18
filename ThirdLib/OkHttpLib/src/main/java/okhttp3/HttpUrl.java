@@ -15,6 +15,9 @@
  */
 package okhttp3;
 
+import android.os.Build;
+
+import java.io.EOFException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -1724,14 +1727,21 @@ public final class HttpUrl {
           encodedCharBuffer = new Buffer();
         }
 
-        if (charset == null || charset.equals(UTF_8)) {
-          encodedCharBuffer.writeUtf8CodePoint(codePoint);
-        } else {
-          encodedCharBuffer.writeString(input, i, i + Character.charCount(codePoint), charset);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+          if (charset == null || charset.equals(UTF_8)) {
+            encodedCharBuffer.writeUtf8CodePoint(codePoint);
+          } else {
+            encodedCharBuffer.writeString(input, i, i + Character.charCount(codePoint), charset);
+          }
         }
 
         while (!encodedCharBuffer.exhausted()) {
-          int b = encodedCharBuffer.readByte() & 0xff;
+          int b = 0;
+          try {
+            b = encodedCharBuffer.readByte() & 0xff;
+          } catch (EOFException e) {
+            e.printStackTrace();
+          }
           out.writeByte('%');
           out.writeByte(HEX_DIGITS[(b >> 4) & 0xf]);
           out.writeByte(HEX_DIGITS[b & 0xf]);

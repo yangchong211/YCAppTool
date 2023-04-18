@@ -15,6 +15,8 @@
  */
 package okhttp3.internal.http;
 
+import android.os.Build;
+
 import java.io.EOFException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,7 +74,9 @@ public final class HttpHeaders {
   public static boolean varyMatches(
       Response cachedResponse, Headers cachedRequest, Request newRequest) {
     for (String field : varyFields(cachedResponse)) {
-      if (!Objects.equals(cachedRequest.values(field), newRequest.headers(field))) return false;
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (!Objects.equals(cachedRequest.values(field), newRequest.headers(field))) return false;
+      }
     }
     return true;
   }
@@ -223,9 +227,14 @@ public final class HttpHeaders {
         if (eqCount > 1) return; // Unexpected '=' characters.
         if (skipWhitespaceAndCommas(header)) return; // Unexpected ','.
 
-        String parameterValue = !header.exhausted() && header.getByte(0) == '"'
-            ? readQuotedString(header)
-            : readToken(header);
+        String parameterValue = null;
+        try {
+          parameterValue = !header.exhausted() && header.getByte(0) == '"'
+              ? readQuotedString(header)
+              : readToken(header);
+        } catch (EOFException e) {
+          e.printStackTrace();
+        }
         if (parameterValue == null) return; // Expected a value.
         String replaced = parameters.put(peek, parameterValue);
         peek = null;
@@ -242,10 +251,18 @@ public final class HttpHeaders {
     while (!buffer.exhausted()) {
       byte b = buffer.getByte(0);
       if (b == ',') {
-        buffer.readByte(); // Consume ','.
+        try {
+          buffer.readByte(); // Consume ','.
+        } catch (EOFException e) {
+          e.printStackTrace();
+        }
         commaFound = true;
       } else if (b == ' ' || b == '\t') {
-        buffer.readByte(); // Consume space or tab.
+        try {
+          buffer.readByte(); // Consume space or tab.
+        } catch (EOFException e) {
+          e.printStackTrace();
+        }
       } else {
         break;
       }
@@ -257,7 +274,11 @@ public final class HttpHeaders {
     int count = 0;
     while (!buffer.exhausted() && buffer.getByte(0) == b) {
       count++;
-      buffer.readByte();
+      try {
+        buffer.readByte();
+      } catch (EOFException e) {
+        e.printStackTrace();
+      }
     }
     return count;
   }
@@ -267,7 +288,7 @@ public final class HttpHeaders {
    * each sequence. Returns the unescaped string, or null if the buffer isn't prefixed with a
    * double-quoted string.
    */
-  private static String readQuotedString(Buffer buffer) {
+  private static String readQuotedString(Buffer buffer) throws EOFException {
     if (buffer.readByte() != '\"') throw new IllegalArgumentException();
     Buffer result = new Buffer();
     while (true) {
