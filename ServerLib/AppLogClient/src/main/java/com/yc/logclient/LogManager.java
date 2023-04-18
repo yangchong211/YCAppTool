@@ -152,6 +152,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
             //设置连接状态
             mConnectState = ConnectingState.Connected;
             Log.i(TAG, "bind service , start connect");
+            //使用Stub.asInterface接口获取服务器的Binder，根据需要调用服务提供的接口方法
             try {
                 //通过aidl将路径传递给服务端
                 //客户端调用远程服务的方法，被调用的方法运行在服务端的 Binder 线程池中，同时客户端的线程会被挂起
@@ -199,6 +200,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         try {
             Log.i(TAG, "bind service");
             Intent intent = LogClientUtils.getLogServiceIntent(mContext);
+            //绑定服务,传入intent和ServiceConnection对象
             mContext.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
             Log.i(TAG, "bind service end");
         } catch (Exception e) {
@@ -208,7 +210,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
     }
 
     /**
-     *
+     * 死亡代理监听回调
      */
     @Override
     public void binderDied() {
@@ -217,6 +219,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
             mLogServiceStub.asBinder().unlinkToDeath(this, 0);
             mLogServiceStub = null;
         }
+        //未连接
         mConnectState = ConnectingState.NotConnected;
     }
 

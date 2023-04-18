@@ -22,6 +22,8 @@ public final class LogClientUtils {
 
     public static Intent getLogServiceIntent(Context context) {
         String packageName = getPackageName(context);
+        //通过Intent指定服务端的服务名称和所在包，与远程Service进行绑定
+        //参数与服务器端的action要一致,即"服务器包名.aidl接口文件名"
         Intent intent = new Intent("com.yc.logservice.action.log");
         intent.setComponent(new ComponentName(packageName, "com.yc.logservice.LogService"));
         return intent;

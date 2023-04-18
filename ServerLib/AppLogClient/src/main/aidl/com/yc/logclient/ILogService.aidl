@@ -2,7 +2,9 @@
 package com.yc.logclient;
 
 // Declare any non-default types here with import statements
+// 可以看到里面有一个AppLogBean，注意这个类需要自己创建，并且手动导包进来。否则编译时找不到……
 import com.yc.logclient.bean.AppLogBean;
+
 interface ILogService {
 
     /**

@@ -4,7 +4,7 @@
 - 02.常见思路和做法
 - 03.Api调用说明
 - 04.遇到的坑分析
-
+- 05.其他问题说明
 
 
 ### 01.基础概念说明
@@ -12,7 +12,7 @@
 
 #### 1.3 开启多进程
 - 在一个应用内开启多进程
-    - 在AndroidManifest.xml文件中的四大组件< activity > < service > 、< receiver > 和 < provider > 均支持 android:process属性来开启多进程。
+    - 在AndroidManifest.xml文件中的四大组件<activity> <service> 、<receiver> 和 <provider> 均支持 android:process属性来开启多进程。
     - 通过设置此属性，可以使每个组件均在各自的进程中运行，或者使一些组件共享一个进程，而其他组件则不共享。
 - android:process的设置有两种：
     - android:process=“xxx.xxx.xxxx.xxx” 完整的命名方式，属于全局进程，其它应用通过ShareUID方式可以和它跑在同一个进程中。
@@ -27,18 +27,25 @@
 
 
 #### 1.5 多进程问题
-- 静态成员和单例模式完全失效
-- 线程同步机制完全失效
-- SharedPreference的可靠性下降
-- Application会多次创建
+- 多进程可能存在的问题
+    - 静态成员和单例模式完全失效
+    - 线程同步机制完全失效
+    - SharedPreference的可靠性下降
+    - Application会多次创建
 
 
 
 ### 02.常见思路和做法
 #### 2.1 跨进程方案
 - IPC是Inter-Process Communication
-    - 含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。进程间通信的几种方式：Intent传递数据，文件共享，Messenger，AIDL，ContentProvider，Socket等。
+    - 含义为进程间通信或者跨进程通信，是指两个进程之间进行数据交换的过程。
+    - 进程间通信的几种方式：Intent传递数据，文件共享，Messenger，AIDL，ContentProvider，Socket等。
 
+
+#### 2.2 定义AIDL文件
+
+
+#### 2.3 拷贝文件到客户端
 
 
 
@@ -51,7 +58,7 @@
 
 
 
-
+### 05.其他问题说明
 
 
 
