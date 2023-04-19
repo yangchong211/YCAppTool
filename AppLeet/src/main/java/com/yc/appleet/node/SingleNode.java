@@ -30,6 +30,15 @@ public class SingleNode {
         }
     }
 
+    class Node1{
+        private int data;
+        private Node1 node1;
+
+        public Node1(int data){
+            this.data = data;
+        }
+    }
+
     private static class NodeList {
 
         private int size;//链表节点的个数
