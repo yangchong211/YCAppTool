@@ -358,4 +358,6 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         //ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.this,listener);
     }
 
+
+
 }
