@@ -13,7 +13,7 @@ import com.yc.websocket.util.WebsocketLogUtil;
 /**
  * WebSocket 管理类
  * <p>
- * Created by ZhangKe on 2019/3/21.
+ * Created by yangchong on 2019/3/21.
  */
 public class WebSocketClientManager implements IWebSocketClient {
     private IWebSocketClient mWebSocketClient;

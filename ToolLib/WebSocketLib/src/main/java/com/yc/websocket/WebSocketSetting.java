@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * WebSocket 使用配置
- * Created by ZhangKe on 2018/6/26.
+ * Created by yangchong on 2018/6/26.
  */
 public class WebSocketSetting {
 

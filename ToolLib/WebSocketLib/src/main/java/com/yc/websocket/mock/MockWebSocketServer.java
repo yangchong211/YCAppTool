@@ -11,6 +11,7 @@ import okhttp3.mockwebserver.MockWebServer;
 import okio.ByteString;
 
 public class MockWebSocketServer {
+
     private static MockWebServer mockWebServer;
 
     public static void mockWebSocket() {
@@ -18,7 +19,6 @@ public class MockWebSocketServer {
             return;
         }
         mockWebServer = new MockWebServer();
-
         mockWebServer.enqueue(new MockResponse().withWebSocketUpgrade(new WebSocketListener() {
             @Override
             public void onOpen(WebSocket webSocket, Response response) {

@@ -8,6 +8,10 @@ import com.yc.appleet.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.toolutils.AppLogUtils;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
 public class ArrayTestActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tv1;
@@ -193,4 +197,62 @@ public class ArrayTestActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-}
+    //给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+    public void test1(int[] arr){
+        if (arr!=null && arr.length>0){
+            HashMap<Integer, Integer> hashMap = new HashMap<>();
+            for (int i=0 ; i<arr.length ; i++){
+                int num = arr[i];
+                if (hashMap.containsKey(arr[i])){
+                    hashMap.put(num, 1);
+                } else {
+                    hashMap.put(num , hashMap.get(num) + 1);
+                }
+
+
+                Set<Integer> set = new HashSet<>();
+                if (!set.remove(num)){
+                    set.add(num);
+                }
+            }
+            //遍历
+
+            //排序
+            int temp;
+            for (int i=0 ; i<arr.length ; i++){
+                for (int j=0 ; j<arr.length ; j++){
+                    //相邻的两个数进行对比，小的往前靠，大的往后放
+                    if (arr[j] > arr[j+1]){
+                        //数据对调
+                        temp = arr[j];
+                        arr[j] = arr[j+1];
+                        arr[j+1] = temp;
+                    }
+                }
+            }
+            //数据排好之后，还会进行对比，其实这步
+
+        }
+    }
+
+    private void test(int[] arr){
+        int temp;
+        boolean flag;//是否交换的标志
+        for (int i=0 ; i<arr.length ; i++){
+            flag = false;
+            for (int j=0 ; j<arr.length ; j++){
+                //相邻的两个数进行对比，小的往前靠，大的往后放
+                if (arr[j] > arr[j+1]){
+                    //数据对调
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                    flag = true;
+                }
+            }
+            if (!flag){
+                break;
+            }
+        }
+
+    }}

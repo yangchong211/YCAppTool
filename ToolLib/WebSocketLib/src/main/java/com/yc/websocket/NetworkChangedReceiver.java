@@ -19,13 +19,13 @@ public class NetworkChangedReceiver extends BroadcastReceiver {
     private static final String TAG = "NetworkChangedReceiver";
 
     public NetworkChangedReceiver() {
+
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())) {
-            ConnectivityManager manager = (ConnectivityManager) context
-                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             if (manager == null) return;
             try {
                 if (checkPermission(context, Manifest.permission.ACCESS_NETWORK_STATE)) {
@@ -57,8 +57,7 @@ public class NetworkChangedReceiver extends BroadcastReceiver {
     /**
      * 判断是否有权限
      */
-    private static boolean checkPermission(Context context,
-                                           String permission) {
+    private static boolean checkPermission(Context context, String permission) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return PackageManager.PERMISSION_GRANTED == context.getPackageManager()
                     .checkPermission(permission, context.getPackageName());

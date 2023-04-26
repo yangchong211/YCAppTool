@@ -17,13 +17,13 @@ public class IPCLargeProcessor {
 
     /**
      * 跨进程通信最大传输字节数
+     * 跨进程通信允许的传递数据的最大值 900K
      */
-    private final long TransanctionTooLargeSize = 900 * 1024; //跨进程通信允许的传递数据的最大值 900K
+    private final long TransanctionTooLargeSize = 900 * 1024;
     /**
      * MsgBean/String 占用内存设定的比例,用于调整打印字符串的单条字符串的大小。
      */
     public float ratio = 1.2F;
-
     /**
      * 缓存队列的最大长度
      */

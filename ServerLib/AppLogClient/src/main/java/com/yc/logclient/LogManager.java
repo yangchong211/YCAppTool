@@ -59,7 +59,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
     private final Context mContext;
     /**
      * LogCache缓存队列的长度
-     * 当Logservice 是内部进程，启动晚于主进程，为了保证不丢日志
+     * 当LogService 是内部进程，启动晚于主进程，为了保证不丢日志
      * 解决方法：1。调大buffer，等待主进程起来  2。等待binder连接上再传输日志
      */
     private final int MAX_LOG_BEANS = 200;
@@ -71,6 +71,7 @@ public class LogManager implements ILogSend, IBinder.DeathRecipient {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (Intent.ACTION_SHUTDOWN.equals(intent.getAction())) {
+                //监听关机广播
                 LogUtils.d("" + Intent.ACTION_SHUTDOWN);
                 flush();
             }
