@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.8'
     //同上上报库
     implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.8'
+    implementation project(path: ':ToolFileLib')
     //implementation project(path: ':ToolUtilsLib')
     //implementation project(path: ':ToolFileLib')
     //implementation project(path: ':FileIoHelper')

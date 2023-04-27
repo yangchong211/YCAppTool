@@ -96,7 +96,7 @@ public final class BaseTaskExecutor {
                             15,
                             5L, TimeUnit.SECONDS,
                             new LinkedBlockingQueue<Runnable>(),
-                            new NamedThreadFactory("io-pool"));
+                            new MyThreadFactory("io-pool"));
                 }
             }
         }
@@ -112,7 +112,7 @@ public final class BaseTaskExecutor {
                             1,
                             5L, TimeUnit.SECONDS,
                             new LinkedBlockingQueue<Runnable>(128),
-                            new NamedThreadFactory("cpu-pool"));
+                            new MyThreadFactory("cpu-pool"));
                 }
             }
         }
@@ -128,7 +128,7 @@ public final class BaseTaskExecutor {
                             1,
                             0L, TimeUnit.MILLISECONDS,
                             new LinkedBlockingQueue<Runnable>(),
-                            new NamedThreadFactory("serial-pool"));
+                            new MyThreadFactory("serial-pool"));
                 }
             }
         }
@@ -144,26 +144,10 @@ public final class BaseTaskExecutor {
                             MAXIMUM_POOL_SIZE,
                             60L, TimeUnit.SECONDS,
                             new SynchronousQueue<Runnable>(),
-                            new NamedThreadFactory("cache-pool"));
+                            new MyThreadFactory("cache-pool"));
                 }
             }
         }
         return sCachePool;
-    }
-
-    private static class NamedThreadFactory implements ThreadFactory {
-
-        private final String mThreadName;
-        private final AtomicInteger mCount;
-
-        NamedThreadFactory(String threadName) {
-            mThreadName = threadName;
-            mCount = new AtomicInteger(1);
-        }
-
-        @Override
-        public Thread newThread(Runnable r) {
-            return new Thread(r, mThreadName + "#" + mCount.getAndIncrement());
-        }
     }
 }

@@ -39,8 +39,8 @@ public final class BaseIoUtils {
             } catch (IOException ignored) {
             }
         }
-
-        return buffer.toByteArray();
+        byte[] bytes = buffer.toByteArray();
+        return bytes;
     }
 
     /**

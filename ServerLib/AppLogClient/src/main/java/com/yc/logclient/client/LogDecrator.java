@@ -21,7 +21,7 @@ public class LogDecrator {
     public static String decorate4JumpSource(int type, String tagStr, Object obj, Throwable ex, int index) {
         String logStr = obj + "";
         if (type != LogConstant.Log_Type_Statistics) {
-            logStr = decorate4JumpSource(tagStr, obj, ex, index);
+            logStr = decorate4JumpSource(obj, ex, index);
         }
 
         return logStr;
@@ -30,13 +30,12 @@ public class LogDecrator {
     /**
      * 重新组装 日志字符串,携带方法和的类的源文件行号,支持点击跳转到源文件
      *
-     * @param tagStr
      * @param obj
      * @param ex
      * @param index
      * @return
      */
-    public static String decorate4JumpSource(String tagStr, Object obj, Throwable ex, int index) {
+    public static String decorate4JumpSource(Object obj, Throwable ex, int index) {
         StringBuilder stringBuilder = new StringBuilder();
         String msg;
         try {
