@@ -1,4 +1,4 @@
-package com.yc.netinterceptor
+package com.yc.netinterceptor.log
 
 import okio.Buffer
 import java.io.EOFException

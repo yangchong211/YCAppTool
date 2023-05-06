@@ -42,8 +42,8 @@ import com.yc.http.request.HttpRequest;
 import com.yc.logclient.LogUtils;
 import com.yc.monitorinterceptor.WeakNetworkInterceptor;
 import com.yc.monitorinterceptor.WeakNetworkManager;
-import com.yc.netinterceptor.HttpLoggerLevel;
-import com.yc.netinterceptor.HttpLoggingInterceptor;
+import com.yc.netinterceptor.log.HttpLoggerLevel;
+import com.yc.netinterceptor.log.HttpLoggingInterceptor;
 import com.yc.toastutils.ToastUtils;
 
 import java.io.File;

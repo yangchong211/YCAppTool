@@ -9,9 +9,9 @@ import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.URLUtil;
 import com.tencent.smtt.sdk.WebView;
-import com.yc.netinterceptor.CacheInterceptor;
-import com.yc.netinterceptor.HttpLoggerLevel;
-import com.yc.netinterceptor.HttpLoggingInterceptor;
+import com.yc.netinterceptor.cache.CacheInterceptor;
+import com.yc.netinterceptor.log.HttpLoggerLevel;
+import com.yc.netinterceptor.log.HttpLoggingInterceptor;
 import com.yc.networklib.AppNetworkUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 

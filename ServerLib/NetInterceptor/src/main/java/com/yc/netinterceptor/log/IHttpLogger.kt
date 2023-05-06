@@ -1,6 +1,5 @@
-package com.yc.netinterceptor
+package com.yc.netinterceptor.log
 
-import android.util.Log
 import okhttp3.internal.platform.Platform
 
 /**
