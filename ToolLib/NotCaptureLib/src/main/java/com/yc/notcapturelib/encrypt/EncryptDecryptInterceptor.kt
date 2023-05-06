@@ -14,7 +14,7 @@ import java.io.IOException
  * time   : 2020/11/30
  * desc   : 加解密数据
  */
-class EncryptDecryptInterceptor : Interceptor {
+class  EncryptDecryptInterceptor : Interceptor {
 
     private val gson = Gson()
 
