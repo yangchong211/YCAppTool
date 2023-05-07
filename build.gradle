@@ -18,8 +18,9 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$buildVersion"
-        //classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        //使用gRPC网络请求需要的插件
+        classpath "com.google.protobuf:protobuf-gradle-plugin:0.9.1"
         //jitpack
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         //jetpack

@@ -1,4 +1,5 @@
 /* +++++++++ 主项目 +++++++++ */
+include ':AppGrpc'
 include ':AppHelper'
 include ':AppPlayer'
 include ':AppLeet'

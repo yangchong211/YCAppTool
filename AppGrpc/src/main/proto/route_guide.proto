@@ -1,0 +1,60 @@
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.yc.appgrpc";
+option java_outer_classname = "RouteGuideProto";
+option objc_class_prefix = "RTG";
+
+package routeguide;
+
+//会生成 RouteGuideGrpc.java 其中包含（连同其他一些有用的代码）
+service RouteGuide {
+    //一个简单的 RPC，其中客户端使用存根向服务器发送请求并等待响应返回，就像普通的函数调用一样。
+    rpc GetFeature(Point) returns (Feature) {}
+    //服务器端流式 RPC，客户端向服务器发送请求并获取流以读取一系列消息。
+    //客户端从返回的流中读取，直到没有更多消息为止。正如您在我们的示例中看到的，您通过将关键字放在响应stream类型 之前来指定服务器端流式传输方法。
+    rpc ListFeatures(Rectangle) returns (stream Feature) {}
+    //客户端流式 RPC，客户端写入一系列消息并将它们发送到服务器，再次使用提供的流。
+    //客户端写完消息后，它会等待服务器读取所有消息并返回响应。您可以通过将关键字放在请求stream类型之前来指定客户端流式传输方法。
+    rpc RecordRoute(stream Point) returns (RouteSummary) {}
+    //双向流式 RPC，双方使用读写流发送一系列消息。
+    //这两个流独立运行，因此客户端和服务器可以按照他们喜欢的任何顺序读取和写入：
+    //例如，服务器可以在写入响应之前等待接收所有客户端消息，或者它可以交替读取一条消息然后写入一条消息，或其他一些读写组合。
+    //保留每个流中消息的顺序。stream 您可以通过将关键字放在请求和响应之前来指定这种类型的方法。
+    rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
+}
+
+
+//Feature.java、Point.java、Rectangle.java和其他包含所有协议缓冲区代码的代码，用于填充、序列化和检索我们的请求和响应消息类型。
+
+message Point {
+    int32 latitude = 1;
+    int32 longitude = 2;
+}
+
+message Rectangle {
+    Point lo = 1;
+    Point hi = 2;
+}
+
+message Feature {
+    string name = 1;
+    Point location = 2;
+}
+
+message FeatureDatabase {
+    repeated Feature feature = 1;
+}
+
+message RouteNote {
+    Point location = 1;
+    string message = 2;
+}
+
+message RouteSummary {
+    int32 point_count = 1;
+    int32 feature_count = 2;
+    int32 distance = 3;
+    int32 elapsed_time = 4;
+}
