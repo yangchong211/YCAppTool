@@ -14,24 +14,21 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
+//这指定了我们要用于生成的 Java 类的包。如果java_package.proto 文件中没有给出明确的选项，那么默认情况下将使用 proto 包（使用“package”关键字指定）。
+//但是，proto 包通常不会成为好的 Java 包，因为 proto 包不应该以反向域名开头。如果我们从这个 .proto 生成另一种语言的代码，则该java_package选项无效。
 option java_package = "com.yc.appgrpc";
 option java_outer_classname = "HelloWorldProto";
 option objc_class_prefix = "HLW";
 
 package helloworld;
 
-// The greeting service definition.
 service Greeter {
-  // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
 }
 
-// The request message containing the user's name.
 message HelloRequest {
   string name = 1;
 }
-
-// The response message containing the greetings
 message HelloReply {
   string message = 1;
 }

@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".HelloWorldActivity"/>
         <activity android:name=".WanAndroidActivity"/>
+        <activity android:name=".RouteGuideActivity"/>
     </application>
 
 </manifest>

@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.common.util.concurrent.ListenableFuture;
 import com.yc.toastutils.ToastUtils;
 
 import java.io.PrintWriter;
@@ -26,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
 
 public class HelloWorldActivity extends AppCompatActivity {
 
@@ -132,6 +135,7 @@ public class HelloWorldActivity extends AppCompatActivity {
                 PrintWriter pw = new PrintWriter(sw);
                 e.printStackTrace(pw);
                 pw.flush();
+                Log.i("Exception",e.getMessage());
                 return String.format("Failed... : %n%s", sw);
             }
         }
@@ -153,4 +157,98 @@ public class HelloWorldActivity extends AppCompatActivity {
             sendButton.setEnabled(true);
         }
     }
+
+    private static class GrpcTask2 extends AsyncTask<String, Void, String> {
+
+        private final WeakReference<Activity> activityReference;
+        private ManagedChannel channel;
+
+        private GrpcTask2(Activity activity) {
+            this.activityReference = new WeakReference<Activity>(activity);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String host = params[0];
+            String message = params[1];
+            String portStr = params[2];
+            int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
+            try {
+                //构建Channel
+                channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+                //构建服务请求API代理
+                GreeterGrpc.GreeterFutureStub stub = GreeterGrpc.newFutureStub(channel);
+                //构建请求实体，HelloRequest是自动生成的实体类
+                HelloRequest request = HelloRequest.newBuilder().setName(message).build();
+                //进行请求并且得到响应数据
+                ListenableFuture<HelloReply> listenableFuture = stub.sayHello(request);
+                HelloReply reply = listenableFuture.get();
+                //得到请求响应的数据
+                String replyMessage = reply.getMessage();
+                return replyMessage;
+            } catch (Exception e) {
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                e.printStackTrace(pw);
+                pw.flush();
+                Log.i("Exception",e.getMessage());
+                return String.format("Failed... : %n%s", sw);
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            Activity activity = activityReference.get();
+            if (activity == null) {
+                return;
+            }
+            TextView resultText = (TextView) activity.findViewById(R.id.grpc_response_text);
+            Button sendButton = (Button) activity.findViewById(R.id.send_button);
+            resultText.setText(result);
+            sendButton.setEnabled(true);
+        }
+    }
+
+    private void GrpcTask2(String host , String portStr, String message){
+        ManagedChannel channel;
+        int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
+        try {
+            //构建Channel
+            channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+            //构建服务请求API代理
+            GreeterGrpc.GreeterStub stub = GreeterGrpc.newStub(channel);
+            //构建请求实体，HelloRequest是自动生成的实体类
+            HelloRequest request = HelloRequest.newBuilder().setName(message).build();
+            //进行请求并且得到响应数据
+            stub.sayHello(request, new StreamObserver<HelloReply>() {
+                @Override
+                public void onNext(HelloReply value) {
+                    resultText.setText(value.getMessage());
+                    sendButton.setEnabled(true);
+                }
+
+                @Override
+                public void onError(Throwable t) {
+
+                }
+
+                @Override
+                public void onCompleted() {
+                    try {
+                        channel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            });
+        } catch (Exception e){
+            Log.i("Exception",e.getMessage());
+        }
+    }
+
 }

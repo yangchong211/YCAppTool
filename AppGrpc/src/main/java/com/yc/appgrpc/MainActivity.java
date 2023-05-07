@@ -38,5 +38,11 @@ public class MainActivity extends AppCompatActivity {
                 WanAndroidActivity.startActivity(MainActivity.this);
             }
         });
+        tvRpc3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RouteGuideActivity.startActivity(MainActivity.this);
+            }
+        });
     }
 }

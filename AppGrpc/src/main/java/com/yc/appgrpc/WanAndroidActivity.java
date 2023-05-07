@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -19,10 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.ref.WeakReference;
-import java.util.concurrent.TimeUnit;
-
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 
 public class WanAndroidActivity extends AppCompatActivity {
 
@@ -114,6 +112,7 @@ public class WanAndroidActivity extends AppCompatActivity {
                 PrintWriter pw = new PrintWriter(sw);
                 e.printStackTrace(pw);
                 pw.flush();
+                Log.i("Exception",e.getMessage());
                 return String.format("Failed... : %n%s", sw);
             }
         }

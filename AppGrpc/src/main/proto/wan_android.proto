@@ -20,8 +20,6 @@ option objc_class_prefix = "HLW";
 
 package wanandroid;
 
-import "google/protobuf/struct.proto";
-
 service ApiService {
     //获取Banner
     //https://www.wanandroid.com/banner/json
