@@ -2,6 +2,8 @@ package com.yc.appgrpc;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,6 +32,22 @@ public class WanAndroidActivity extends AppCompatActivity {
     private EditText messageEdit;
     private TextView resultText;
 
+    /**
+     * 开启页面
+     *
+     * @param context 上下文
+     */
+    public static void startActivity(Context context) {
+        try {
+            Intent target = new Intent();
+            target.setClass(context, WanAndroidActivity.class);
+            target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(target);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +58,13 @@ public class WanAndroidActivity extends AppCompatActivity {
         messageEdit = findViewById(R.id.message_edit_text);
         resultText = findViewById(R.id.grpc_response_text);
         resultText.setMovementMethod(new ScrollingMovementMethod());
+
+        Uri uri = Uri.parse("https://www.wanandroid.com/banner/json");
+        String host = uri.getHost();
+        int port = uri.getPort();
+        hostEdit.setText(host);
+        messageEdit.setText("yangchong");
+        portEdit.setText(port+"");
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,13 +104,11 @@ public class WanAndroidActivity extends AppCompatActivity {
                 //构建Channel
                 channel = ChannelHelper.newChannel(host,port);
                 //构建服务请求API代理
-                GreeterGrpc.GreeterBlockingStub stub = GreeterGrpc.newBlockingStub(channel);
+                ApiServiceGrpc.ApiServiceBlockingStub stub = ApiServiceGrpc.newBlockingStub(channel);
                 //构建请求实体
-                //HelloRequest是自动生成的实体类
-                HelloRequest request = HelloRequest.newBuilder().setName(message).build();
                 //进行请求
-                HelloReply reply = stub.sayHello(request);
-                return reply.getMessage();
+                Data banner = stub.getBanner(null);
+                return banner.getData();
             } catch (Exception e) {
                 StringWriter sw = new StringWriter();
                 PrintWriter pw = new PrintWriter(sw);

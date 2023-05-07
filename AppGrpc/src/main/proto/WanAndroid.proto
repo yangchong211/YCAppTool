@@ -20,12 +20,14 @@ option objc_class_prefix = "HLW";
 
 package wanandroid;
 
-service APIService {
-  //获取Banner
-  //https://www.wanandroid.com/banner/json
-  rpc getBanner(Empty) returns (Banner) {}
-  //登陆请求
-  rpc login (LoginRequest) returns (LoginReply) {}
+import "google/protobuf/struct.proto";
+
+service ApiService {
+    //获取Banner
+    //https://www.wanandroid.com/banner/json
+    rpc getBanner(Empty) returns (Data) {}
+    //登陆请求
+    rpc login (LoginRequest) returns (LoginReply) {}
 }
 
 // 空请求，无参数
@@ -33,25 +35,31 @@ message Empty {
 
 }
 
+message Data {
+    string data = 1;
+    int32 errorCode = 2;
+    string errorMsg = 3;
+}
+
 message Banner {
-  string desc = 1;
-  int32 id = 2;
-  string  imagePath = 3;
-  bool isVisible = 4;
-  int32 order = 5;
-  string title = 6;
-  int32 type = 7 ;
-  string url = 8;
+    string desc = 1;
+    int32 id = 2;
+    string  imagePath = 3;
+    bool isVisible = 4;
+    int32 order = 5;
+    string title = 6;
+    int32 type = 7 ;
+    string url = 8;
 }
 
 // 登陆请求
 message LoginRequest {
-  string loginName = 1;
-  string password = 2;
+    string loginName = 1;
+    string password = 2;
 }
 
 // 登陆返回
 message LoginReply {
-  string name = 1;
-  string token = 2;
+    string name = 1;
+    string token = 2;
 }

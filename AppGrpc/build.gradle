@@ -33,9 +33,17 @@ android {
 }
 
 protobuf {
-    protoc { artifact = 'com.google.protobuf:protoc:3.22.3' }
+    protoc {
+        // 相当于proto编译器
+        artifact = 'com.google.protobuf:protoc:3.22.3'
+    }
     plugins {
-        grpc { artifact = 'io.grpc:protoc-gen-grpc-java:1.19.0' }
+        // grpc单独的编译器
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.19.0'
+        }
+        // 官方推荐的方法，Android 适用javalite，相较于java插件，生成的代码更轻量化
+        //javalite {artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'}
     }
     generateProtoTasks {
         all().each { task ->
@@ -56,10 +64,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["annotation"]
+    implementation(rootProject.ext.dependencies["constraintlayout"])
+    implementation project(path: ':RoundCorners')
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
 
     //protobuf
-    implementation 'io.grpc:grpc-okhttp:1.19.0'
-    implementation 'io.grpc:grpc-protobuf-lite:1.19.0'
-    implementation 'io.grpc:grpc-stub:1.19.0'
+    implementation 'io.grpc:grpc-okhttp:1.33.0'
+    implementation 'io.grpc:grpc-protobuf-lite:1.33.0'
+    implementation 'io.grpc:grpc-stub:1.33.0'
     implementation 'org.apache.tomcat:annotations-api:6.0.53'
 }
