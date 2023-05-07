@@ -103,6 +103,9 @@ public class HelloWorldActivity extends AppCompatActivity {
                         portEdit.getText().toString());
     }
 
+    /**
+     * 同步
+     */
     private static class GrpcTask extends AsyncTask<String, Void, String> {
 
         private final WeakReference<Activity> activityReference;
@@ -158,6 +161,9 @@ public class HelloWorldActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 同步阻塞
+     */
     private static class GrpcTask2 extends AsyncTask<String, Void, String> {
 
         private final WeakReference<Activity> activityReference;
@@ -214,6 +220,12 @@ public class HelloWorldActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 异步
+     * @param host
+     * @param portStr
+     * @param message
+     */
     private void GrpcTask2(String host , String portStr, String message){
         ManagedChannel channel;
         int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
