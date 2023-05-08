@@ -1,0 +1,45 @@
+//版本：默认为proto2，也可以为proto3
+syntax = "proto3";
+
+//相当于命名空间
+package tutorial;
+
+option java_package = "com.yc.appgrpc";
+//java_package 就是生成我们.java文件的包名
+option java_outer_classname = "AddressBookProto";
+//java_outer_classname也就是我们把.proto编译成.java后的名字(即AddressBookProto.java)
+
+//Person 类，消息结构
+message Person {
+
+    string name = 1;
+
+    //这里的required 的修饰符表示候name必须赋值(没有默认值)
+    int32 id = 2;
+
+    string email = 3;
+    //optional 也就是可不赋值, proto3中已移除该关键字
+    //当然optional string email = 3;[default = 0]默认值是0
+    //required和optional可以有默认值
+
+    //枚举定义
+    enum PhoneType {
+        MOBILE = 0;
+        HOME = 1;
+        WORK = 2;
+    }
+
+    //结构体、类，统一定义为 message实际上是嵌套类
+    message PhoneNumber {
+        string number = 1;
+        PhoneType type = 2;
+    }
+
+    //repeated  表示词字段可以出现多次
+    repeated PhoneNumber phones = 4;
+}
+
+//AddressBook  类
+message AddressBook {
+    repeated Person people = 1;
+}

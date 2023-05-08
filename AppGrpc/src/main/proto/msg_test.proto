@@ -1,0 +1,8 @@
+syntax = "proto3";
+package msg;
+option java_package = "com.yc.appgrpc";
+option java_outer_classname = "MsgProto";
+
+message Msg {
+  string text = 1;
+}

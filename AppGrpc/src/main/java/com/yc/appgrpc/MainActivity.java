@@ -3,12 +3,17 @@ package com.yc.appgrpc;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.yc.appgrpc.proto.JsonTest;
 import com.yc.roundcorner.view.RoundTextView;
+import com.yc.toastutils.ToastUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity 效率测试：";
     private RoundTextView tvRpc1;
     private RoundTextView tvRpc2;
     private RoundTextView tvRpc3;
@@ -44,5 +49,46 @@ public class MainActivity extends AppCompatActivity {
                 RouteGuideActivity.startActivity(MainActivity.this);
             }
         });
+        tvRpc4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showRoundRectToast("效率测试");
+                new JsonTest().gson();
+                protoTest();
+            }
+        });
+    }
+
+    private void protoTest() {
+        AddressBookProto.Person.PhoneNumber.Builder builder
+                = AddressBookProto.Person.PhoneNumber.newBuilder().setNumber("110")
+                .setType(AddressBookProto.Person.PhoneType.HOME);
+        AddressBookProto.Person.Builder zs = AddressBookProto.Person.newBuilder()
+                .setName("张三")
+                .setId(1)
+                .addPhones(builder);
+        AddressBookProto.Person.PhoneNumber.Builder builder1
+                = AddressBookProto.Person.PhoneNumber.newBuilder().setNumber("120")
+                .setType(AddressBookProto.Person.PhoneType.MOBILE);
+        AddressBookProto.Person.Builder ls = AddressBookProto.Person.newBuilder()
+                .setName("李四")
+                .setId(2)
+                .addPhones(builder1);
+        AddressBookProto.AddressBook addressBook = AddressBookProto.AddressBook.newBuilder()
+                .addPeople(zs)
+                .addPeople(ls).build();
+
+        long l = System.currentTimeMillis();
+        byte[] bytes = addressBook.toByteArray();
+        Log.e(TAG, "protobuf 序列化耗时：" + (System.currentTimeMillis() - l));
+        Log.e(TAG, "protobuf 序列化数据大小：" + bytes.length);
+        try {
+            l = System.currentTimeMillis();
+            AddressBookProto.AddressBook.parseFrom(bytes);
+            Log.e(TAG, "protobuf 反序列化耗时：" + (System.currentTimeMillis() - l));
+        } catch (InvalidProtocolBufferException e) {
+            e.printStackTrace();
+            Log.e(TAG, "protobuf 反序列化异常");
+        }
     }
 }
