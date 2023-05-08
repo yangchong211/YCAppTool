@@ -39,7 +39,7 @@ public final class OkHttpUtils {
      * 恶汉式单例
      * @return                  返回OkHttpClient实例对象
      */
-    public static OkHttpClient getInstance() {
+    private static OkHttpClient getInstance() {
         if (okHttpClient == null) {
             synchronized (OkHttpUtils.class) {
                 if (okHttpClient == null){

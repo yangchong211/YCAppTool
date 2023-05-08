@@ -27,11 +27,11 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation(rootProject.ext.dependencies["appcompat"])
-    implementation rootProject.ext.dependencies["okhttp"]
+//    implementation rootProject.ext.dependencies["okhttp"]
     implementation rootProject.ext.dependencies["retrofit"]
     implementation rootProject.ext.dependencies["retrofit-converter-gson"]
     implementation rootProject.ext.dependencies["retrofit-adapter-rxjava2"]
-    //implementation project(path: ':OkHttpLib')
+    implementation project(path: ':OkHttpLib')
     //工具类utils
     implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
     //网络判断库

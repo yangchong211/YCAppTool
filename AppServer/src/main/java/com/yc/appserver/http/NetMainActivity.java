@@ -39,6 +39,7 @@ import com.yc.http.model.HttpMethod;
 import com.yc.http.model.HttpParams;
 import com.yc.http.model.ResponseClass;
 import com.yc.http.request.HttpRequest;
+import com.yc.httpserver.OkHttpUtils;
 import com.yc.logclient.LogUtils;
 import com.yc.monitorinterceptor.WeakNetworkInterceptor;
 import com.yc.monitorinterceptor.WeakNetworkManager;
@@ -46,13 +47,17 @@ import com.yc.netinterceptor.log.HttpLoggerLevel;
 import com.yc.netinterceptor.log.HttpLoggingInterceptor;
 import com.yc.toastutils.ToastUtils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 
 import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 
 public class NetMainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -132,6 +137,17 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.btn_main_update).setOnClickListener(this);
         findViewById(R.id.btn_main_download).setOnClickListener(this);
 
+        OkHttpUtils.getWebRequest("https://www.wanandroid.com/banner/json", new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                mResponseTextView.setText(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                mResponseTextView.setText(response.toString());
+            }
+        });
     }
 
 

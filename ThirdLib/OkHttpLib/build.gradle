@@ -29,5 +29,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
-    implementation "com.squareup.okio:okio:2.6.0"
+    api "com.squareup.okio:okio:2.6.0"
 }

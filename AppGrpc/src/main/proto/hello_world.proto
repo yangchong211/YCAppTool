@@ -11,6 +11,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+
+
+//protobuf 有2个版本，语法不同，默认版本是 proto2
+//如果需要 proto3，则需要在非空非注释第一行使用 syntax = "proto3" 标明版本。现在推荐使用proto3版本。
 syntax = "proto3";
 
 option java_multiple_files = true;
