@@ -119,8 +119,9 @@ public final class RealInterceptorChain implements Interceptor.Chain {
 
   public Response proceed(Request request, Transmitter transmitter, @Nullable Exchange exchange)
       throws IOException {
+    // 1、迭代拦截器集合
     if (index >= interceptors.size()) throw new AssertionError();
-
+    //2、创建一次实例，call+1
     calls++;
 
     // If we already have a stream, confirm that the incoming request will use it.
@@ -136,9 +137,12 @@ public final class RealInterceptorChain implements Interceptor.Chain {
     }
 
     // Call the next interceptor in the chain.
+    // 3、创建一个RealInterceptorChain实例
     RealInterceptorChain next = new RealInterceptorChain(interceptors, transmitter, exchange,
         index + 1, request, call, connectTimeout, readTimeout, writeTimeout);
+    //4、取出下一个 interceptor
     Interceptor interceptor = interceptors.get(index);
+    //5、执行intercept方法，拦截器又会调用proceed()方法
     Response response = interceptor.intercept(next);
 
     // Confirm that the next interceptor made its required call to chain.proceed().
