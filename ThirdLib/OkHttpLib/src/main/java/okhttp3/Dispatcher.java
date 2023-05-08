@@ -44,12 +44,15 @@ public final class Dispatcher {
   /** Executes calls. Created lazily. */
   private @Nullable ExecutorService executorService;
 
+  // 异步的缓存，正在准备被消费的（用数组实现，可自动扩容，无大小限制）
   /** Ready async calls in the order they'll be run. */
   private final Deque<AsyncCall> readyAsyncCalls = new ArrayDeque<>();
 
+  //正在运行的 异步的任务集合，仅仅是用来引用正在运行的任务以判断并发量，注意它并不是消费者缓存
   /** Running asynchronous calls. Includes canceled calls that haven't finished yet. */
   private final Deque<AsyncCall> runningAsyncCalls = new ArrayDeque<>();
 
+  //正在运行的，同步的任务集合。仅仅是用来引用正在运行的同步任务以判断并发量
   /** Running synchronous calls. Includes canceled calls that haven't finished yet. */
   private final Deque<RealCall> runningSyncCalls = new ArrayDeque<>();
 
@@ -60,8 +63,19 @@ public final class Dispatcher {
   public Dispatcher() {
   }
 
+  /**
+   * 在OKHttp中，创建了一个阀值是Integer.MAX_VALUE的线程池，它不保留任何最小线程，随时创建更多的线程数，而且如果线程空闲后，只能多活60秒。
+   * 所以也就说如果收到20个并发请求，线程池会创建20个线程，当完成后的60秒后会自动关闭所有20个线程。
+   * 他这样设计成不设上限的线程，以保证I/O任务中高阻塞低占用的过程，不会长时间卡在阻塞上。
+   * @return
+   */
   public synchronized ExecutorService executorService() {
     if (executorService == null) {
+      //1、0：核心线程数量，保持在线程池中的线程数量(即使已经空闲)，为0代表线程空闲后不会保留，等待一段时间后停止。
+      //2、Integer.MAX_VALUE:表示线程池可以容纳最大线程数量
+      //3、TimeUnit.SECOND:当线程池中的线程数量大于核心线程时，空闲的线程就会等待60s才会被终止，如果小于，则会立刻停止。
+      //4、new SynchronousQueue()：线程等待队列。同步队列，按序排队，先来先服务
+      //5、Util.threadFactory("OkHttp Dispatcher", false):线程工厂，直接创建一个名为OkHttp Dispatcher的非守护线程。
       executorService = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS,
           new SynchronousQueue<>(), Util.threadFactory("OkHttp Dispatcher", false));
     }

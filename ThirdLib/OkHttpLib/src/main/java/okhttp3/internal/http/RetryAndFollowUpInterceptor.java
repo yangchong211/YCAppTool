@@ -85,10 +85,13 @@ public final class RetryAndFollowUpInterceptor implements Interceptor {
       Response response;
       boolean success = false;
       try {
+        // 执行下一个拦截器，即BridgeInterceptor
+        // 这里有个很重的信息，即会将初始化好的连接对象传递给下一个拦截器，也是贯穿整个请求的连击对象，上面我们说过，在拦截器执行过程中，RealInterceptorChain的几个属性字段会一步一步赋值
         response = realChain.proceed(request, transmitter, null);
         success = true;
       } catch (RouteException e) {
         // The attempt to connect via a route failed. The request will not have been sent.
+        //  如果有异常，判断是否要恢复
         if (!recover(e.getLastConnectException(), transmitter, false, request)) {
           throw e.getFirstConnectException();
         }
@@ -116,12 +119,14 @@ public final class RetryAndFollowUpInterceptor implements Interceptor {
 
       Exchange exchange = Internal.instance.exchange(response);
       Route route = exchange != null ? exchange.connection().route() : null;
+      // 检查是否符合要求
       Request followUp = followUpRequest(response, route);
 
       if (followUp == null) {
         if (exchange != null && exchange.isDuplex()) {
           transmitter.timeoutEarlyExit();
         }
+        // 返回结果
         return response;
       }
 
