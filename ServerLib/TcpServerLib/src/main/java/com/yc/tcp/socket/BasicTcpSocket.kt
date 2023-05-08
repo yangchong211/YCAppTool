@@ -27,6 +27,10 @@ class BasicTcpSocket(private val mAdapter: SocketAdapter) : ITcpSocket {
     @Synchronized
     override fun connect(ip: String?, port: Int, timeOut: Int) {
         mSocket = Socket()
+        //InetSocketAddress是在InetAddress基础上封装了端口号。所以说InetSocketAddress是(IP地址+端口号)类型，也就是端口地址类型。
+        //表面看InetSocketAddress多了一个端口号，端口的作用：一台拥有IP地址的主机可以提供许多服务，比如Web服务、FTP服务、SMTP服务等，这些服务完全可以通过1个IP地址来实现。
+        //那么主机怎么区分不同的网络服务？显然不能只靠IP地址，因此IP地址与网络服务的关系是一对多的关系。
+        //实际上是通过"IP地址+端口号"来区分不同的服务的。
         val address: SocketAddress = InetSocketAddress(ip, port)
         //设置tcp无延迟
         mSocket?.tcpNoDelay = true

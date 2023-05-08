@@ -173,9 +173,13 @@ public final class Dispatcher {
   }
 
   /**
+   *
    * Promotes eligible calls from {@link #readyAsyncCalls} to {@link #runningAsyncCalls} and runs
    * them on the executor service. Must not be called with synchronization because executing calls
    * can call into user code.
+   *
+   * 将符合条件的调用从{@link# readyAsyncCalls}提升到{@link# runningAsyncCalls}，并在executor服务上运行它们。
+   * 不能使用同步调用，因为执行调用可能调用到用户代码中。
    *
    * @return true if the dispatcher is currently running calls.
    */

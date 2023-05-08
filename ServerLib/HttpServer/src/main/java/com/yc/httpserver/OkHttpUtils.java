@@ -63,10 +63,11 @@ public final class OkHttpUtils {
      */
     public static String getWebRequest(String url){
         Request request = new Request.Builder()
+                .get()
                 .url(url)
                 .build();
         try {
-            Response response = okHttpClient.newCall(request).execute();
+            Response response = getInstance().newCall(request).execute();
             ResponseBody body = response.body();
             String content = null;
             if (body != null) {
@@ -89,8 +90,9 @@ public final class OkHttpUtils {
     public static void getWebRequest(String url , Callback callback){
         Request request = new Request.Builder()
                 .url(url)
+                .get()
                 .build();
-        okHttpClient.newCall(request).enqueue(callback);
+        getInstance().newCall(request).enqueue(callback);
     }
 
 
@@ -117,7 +119,7 @@ public final class OkHttpUtils {
                 .url(url)
                 .post(requestBody)
                 .build();
-        okHttpClient.newCall(request).enqueue(callback);
+        getInstance().newCall(request).enqueue(callback);
     }
 
 

@@ -58,6 +58,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class NetMainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -140,12 +141,29 @@ public class NetMainActivity extends AppCompatActivity implements View.OnClickLi
         OkHttpUtils.getWebRequest("https://www.wanandroid.com/banner/json", new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                mResponseTextView.setText(e.getMessage());
+                mResponseTextView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mResponseTextView.setText(e.getMessage());
+                    }
+                });
             }
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                mResponseTextView.setText(response.toString());
+                mResponseTextView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ResponseBody body = response.body();
+                        String string = "";
+                        try {
+                            string = body.string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        mResponseTextView.setText(string);
+                    }
+                });
             }
         });
     }

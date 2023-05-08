@@ -25,11 +25,23 @@ import androidx.annotation.Nullable;
  * or response.
  */
 public interface Interceptor {
+  /**
+   * 负责拦截
+   * @param chain
+   * @return
+   * @throws IOException
+   */
   Response intercept(Chain chain) throws IOException;
 
   interface Chain {
     Request request();
 
+    /**
+     * 负责分发、前行
+     * @param request
+     * @return
+     * @throws IOException
+     */
     Response proceed(Request request) throws IOException;
 
     /**
