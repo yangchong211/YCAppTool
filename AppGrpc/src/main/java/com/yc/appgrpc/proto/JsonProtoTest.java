@@ -22,6 +22,7 @@ public class JsonProtoTest {
         l = System.currentTimeMillis();
         AddressBook addressBook1 = gson.fromJson(new String(bytes), AddressBook.class);
         Log.e(TAG, "Gson 反序列化耗时：" + (System.currentTimeMillis() - l));
+        Log.e(TAG, "Gson 数据：" + data);
     }
     
     private AddressBook getObject(){
@@ -43,6 +44,7 @@ public class JsonProtoTest {
         ls.setId(2);
         ls.setName("李四");
         ls.addPhones(p_120);
+        addressBook.addPersons(ls);
 
         AddressBook.PhoneNumber p_130 = new AddressBook.PhoneNumber();
         p_120.setNumber("130");
@@ -66,6 +68,7 @@ public class JsonProtoTest {
                 .setName("张三")
                 .setId(1)
                 .addPhones(builder);
+
         AddressBookProto.Person.PhoneNumber.Builder builder1
                 = AddressBookProto.Person.PhoneNumber.newBuilder().setNumber("120")
                 .setType(AddressBookProto.Person.PhoneType.MOBILE);
@@ -73,27 +76,36 @@ public class JsonProtoTest {
                 .setName("李四")
                 .setId(2)
                 .addPhones(builder1);
+
         AddressBookProto.Person.PhoneNumber.Builder builder2 = AddressBookProto.Person.PhoneNumber.newBuilder()
                 .setNumber("130").setType(AddressBookProto.Person.PhoneType.MOBILE);
-        AddressBookProto.Person.Builder ys = AddressBookProto.Person.newBuilder().setName("王五").setId(3).addPhones(builder2);
+        AddressBookProto.Person.Builder ys = AddressBookProto.Person.newBuilder().
+                setName("王五")
+                .setId(3)
+                .addPhones(builder2);
 
         AddressBookProto.AddressBook addressBook = AddressBookProto.AddressBook.newBuilder()
                 .addPeople(zs)
                 .addPeople(ls)
+                .addPeople(ys)
                 .build();
 
         long l = System.currentTimeMillis();
+        //序列化
         byte[] bytes = addressBook.toByteArray();
         Log.e(TAG, "protobuf 序列化耗时：" + (System.currentTimeMillis() - l));
         Log.e(TAG, "protobuf 序列化数据大小：" + bytes.length);
         try {
             l = System.currentTimeMillis();
-            AddressBookProto.AddressBook.parseFrom(bytes);
+            //反序列化
+            AddressBookProto.AddressBook book = AddressBookProto.AddressBook.parseFrom(bytes);
             Log.e(TAG, "protobuf 反序列化耗时：" + (System.currentTimeMillis() - l));
         } catch (InvalidProtocolBufferException e) {
             e.printStackTrace();
             Log.e(TAG, "protobuf 反序列化异常");
         }
+        String string = addressBook.toString();
+        Log.e(TAG, "protobuf 数据：" + string);
     }
 
 }
