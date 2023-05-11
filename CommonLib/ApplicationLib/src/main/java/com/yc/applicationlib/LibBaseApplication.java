@@ -1,6 +1,7 @@
 package com.yc.applicationlib;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 
@@ -39,6 +40,8 @@ public abstract class LibBaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
+        AppInitHelper.getInstance().init(mApplication);
+        AppInitHelper.getInstance().getAppInit().onCreate();
         // 在基类中初始化一次各module通用的功能，
         initComponentCommonService();
         AppLogUtils.d("onCreate#mApplication=" + mApplication.getClass().getName());
@@ -141,6 +144,7 @@ public abstract class LibBaseApplication extends Application {
             IApplicationHelper iApplicationHelper = mApplicationHelperList.get(i);
             iApplicationHelper.onTerminate();
         }
+        AppInitHelper.getInstance().getAppInit().onTerminate();
     }
 
     @Override
@@ -150,6 +154,7 @@ public abstract class LibBaseApplication extends Application {
             IApplicationHelper iApplicationHelper = mApplicationHelperList.get(i);
             iApplicationHelper.onLowMemory();
         }
+        AppInitHelper.getInstance().getAppInit().onLowMemory();
     }
 
     @Override
@@ -159,6 +164,16 @@ public abstract class LibBaseApplication extends Application {
             IApplicationHelper iApplicationHelper = mApplicationHelperList.get(i);
             iApplicationHelper.onConfigurationChanged(newConfig);
         }
+        AppInitHelper.getInstance().getAppInit().onConfigurationChanged(newConfig);
     }
 
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        for (int i= 0 ; i< mApplicationHelperList.size() ; i++){
+            IApplicationHelper iApplicationHelper = mApplicationHelperList.get(i);
+            iApplicationHelper.onTrimMemory(level);
+        }
+        AppInitHelper.getInstance().getAppInit().onTrimMemory(level);
+    }
 }

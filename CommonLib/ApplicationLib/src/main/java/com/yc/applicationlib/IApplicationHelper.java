@@ -13,9 +13,6 @@ import android.content.res.Configuration;
  * </pre>
  */
 public interface IApplicationHelper {
-
-    void attachBaseContext(Context base);
-
     void onCreate();
 
     void onTerminate();

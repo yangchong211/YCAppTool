@@ -1,4 +1,4 @@
-package com.yc.common;
+package com.yc.common.init;
 
 import android.app.Application;
 import android.content.Context;
@@ -7,28 +7,22 @@ import android.content.res.Configuration;
 import com.yc.applicationlib.BaseApplicationHelper;
 import com.yc.toolutils.AppLogUtils;
 
-public class AppLifecycle extends BaseApplicationHelper {
+public class AppLifecycle2 extends BaseApplicationHelper {
 
-    public AppLifecycle(Application application) {
+    public AppLifecycle2(Application application) {
         super(application);
     }
 
     @Override
     public void onConfigurationChanged(Configuration config) {
         super.onConfigurationChanged(config);
-        AppLogUtils.d("AppLifecycle: " , "onConfigurationChanged");
+        AppLogUtils.d("AppLifecycle: " , "onConfigurationChanged2");
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        AppLogUtils.d("AppLifecycle: " , "onCreate");
-    }
-
-    @Override
-    public void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        AppLogUtils.d("AppLifecycle: " , "attachBaseContext");
+        AppLogUtils.d("AppLifecycle: " , "onCreate2");
     }
 
 }
