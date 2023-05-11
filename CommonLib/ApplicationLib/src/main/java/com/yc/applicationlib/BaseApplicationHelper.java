@@ -17,7 +17,7 @@ import com.yc.toolutils.BuildConfig;
  *     revise:
  * </pre>
  */
-public abstract class BaseApplicationHelper implements IApplicationHelper {
+public class BaseApplicationHelper implements IApplicationHelper {
 
     private final static String TAG = "BaseApplicationHelper";
 

@@ -1,18 +1,22 @@
 package com.yc.common;
 
 import android.app.Application;
+import android.os.Build;
 import android.util.Log;
 
 import com.yc.appcommoninter.IMonitorToggle;
 import com.yc.appfilelib.AppFileUtils;
+
+import com.yc.applicationlib.LibBaseApplication;
 import com.yc.apploglib.config.AppLogConfig;
 import com.yc.apploglib.config.AppLogFactory;
 import com.yc.common.impl.PermissionDialogImpl;
 import com.yc.eventuploadlib.PermissionDialog;
+import com.yc.library.base.app.LibApplication;
 import com.yc.store.config.CacheConfig;
 import com.yc.store.config.CacheInitHelper;
 
-public class CommonApplication extends Application {
+public class CommonApplication extends LibBaseApplication {
 
     @Override
     public void onCreate() {
@@ -20,6 +24,14 @@ public class CommonApplication extends Application {
         initAppCache();
         initAppLog();
         PermissionDialog.setPermissionDialog(new PermissionDialogImpl());
+    }
+
+    @Override
+    protected void registerApplicationHelper() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            registerTargetApplicationHelper("com.yc.common.AppLifecycle");
+            registerTargetApplicationHelper("com.yc.common.AppLifecycle2");
+        }
     }
 
     private void initAppLog() {

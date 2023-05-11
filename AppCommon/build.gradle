@@ -76,7 +76,7 @@ dependencies {
     //handler包装库
     implementation 'com.github.yangchong211.YCCommonLib:AppHandlerLib:1.4.8'
     //Application库
-    implementation 'com.github.yangchong211.YCCommonLib:ApplicationLib:1.4.8'
+    //implementation 'com.github.yangchong211.YCCommonLib:ApplicationLib:1.4.8'
     //store磁盘分区库
     implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.8'
     //内存
@@ -108,6 +108,7 @@ dependencies {
 
     //公共类
     implementation project(path: ':BaseClassLib')
+    implementation project(path: ':ApplicationLib')
     implementation project(path: ':BaseVpAdapter')
     implementation project(path: ':ComponentLib')
     implementation project(path: ':ToolUtilsLib')

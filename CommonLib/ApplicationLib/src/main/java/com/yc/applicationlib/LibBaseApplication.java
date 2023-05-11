@@ -22,7 +22,7 @@ import java.util.List;
  *     revise:
  * </pre>
  */
-public abstract class BaseApplication extends Application {
+public abstract class LibBaseApplication extends Application {
 
     private static Application mApplication;
     private static final String TAG = "BaseApplication";
@@ -96,7 +96,7 @@ public abstract class BaseApplication extends Application {
             //获取构造函数
             Constructor<? extends BaseApplicationHelper> constructor = clazz.getConstructor(Application.class);
             //创建对象
-            applicationHelper = constructor.newInstance(BaseApplication.this);
+            applicationHelper = constructor.newInstance(LibBaseApplication.this);
         } catch (IllegalAccessException | InstantiationException 
                 | ClassNotFoundException | NoSuchMethodException 
                 | InvocationTargetException e) {
@@ -121,11 +121,11 @@ public abstract class BaseApplication extends Application {
             try {
                 Class<? extends BaseApplicationHelper> clazz = (Class<? extends BaseApplicationHelper>) Class.forName(className);
                 Constructor<? extends BaseApplicationHelper> constructor = clazz.getConstructor(Application.class);
-                applicationHelper = constructor.newInstance(BaseApplication.this);
+                applicationHelper = constructor.newInstance(LibBaseApplication.this);
             } catch (IllegalAccessException | InstantiationException | ClassNotFoundException 
                     | NoSuchMethodException | InvocationTargetException e) {
                 e.printStackTrace();
-                AppLogUtils.e("registerapplicationHelperArray#e=" + e.getMessage());
+                AppLogUtils.e("registerApplicationHelperArray#e=" + e.getMessage());
             } finally {
                 if (applicationHelper != null) {
                     mApplicationHelperList.add(applicationHelper);
