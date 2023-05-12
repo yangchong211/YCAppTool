@@ -14,6 +14,7 @@ import com.yc.websocket.SocketCallBackManager;
 import com.yc.websocket.WebSocketSetting;
 
 public class OkhttpWebSocketClient implements IWebSocketClient {
+
     private WebSocket webSocket;
     private WebSocketSetting mWebSocketSetting;
     // 连接状态

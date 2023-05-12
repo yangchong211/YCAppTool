@@ -9,8 +9,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 
-import com.yc.websocket.util.WebsocketLogUtil;
-
 /**
  * 监听网络变化广播，网络变化时自动重连
  */
@@ -33,23 +31,23 @@ public class NetworkChangedReceiver extends BroadcastReceiver {
                     if (activeNetwork != null) {
                         if (activeNetwork.isConnected()) {
                             if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
-                                WebsocketLogUtil.i(TAG, "网络连接发生变化，当前WiFi连接可用");
+                                WebSocketLog.i(TAG, "网络连接发生变化，当前WiFi连接可用");
                             } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
-                                WebsocketLogUtil.i(TAG, "网络连接发生变化，当前移动连接可用");
+                                WebSocketLog.i(TAG, "网络连接发生变化，当前移动连接可用");
                             }
                             if (WebSocketClientManager.getInstance().needAutoRetryConnect()) {
-                                WebsocketLogUtil.i(TAG, "需要重连");
+                                WebSocketLog.i(TAG, "需要重连");
                                 WebSocketClientManager.getInstance().reconnect();
                             } else {
-                                WebsocketLogUtil.i(TAG, "不需要重连");
+                                WebSocketLog.i(TAG, "不需要重连");
                             }
                         } else {
-                            WebsocketLogUtil.i(TAG, "当前没有可用网络");
+                            WebSocketLog.i(TAG, "当前没有可用网络");
                         }
                     }
                 }
             } catch (Exception e) {
-                WebsocketLogUtil.e(TAG, "网络状态获取错误", e);
+                WebSocketLog.e(TAG, "网络状态获取错误", e);
             }
         }
     }

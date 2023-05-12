@@ -1,4 +1,4 @@
-package com.yc.websocket.mock;
+package com.yc.websocket;
 
 
 import com.yc.toolutils.AppLogUtils;

@@ -8,11 +8,8 @@ import android.os.Handler;
 
 import java.nio.ByteBuffer;
 
-import com.yc.websocket.util.WebsocketLogUtil;
-
 /**
  * 负责 WebSocket 重连
- * <p>
  */
 public class ReconnectManager {
 
@@ -85,11 +82,11 @@ public class ReconnectManager {
 
     public void startReconnect() {
         if (!netWorkIsConnect()) {
-            WebsocketLogUtil.i("ReconnectManager", "网络未连接停止重试");
+            WebSocketLog.i("ReconnectManager", "网络未连接停止重试");
             return;
         }
         if (isReconnecting) {
-            WebsocketLogUtil.i("ReconnectManager", "正在进行重连 return");
+            WebSocketLog.i("ReconnectManager", "正在进行重连 return");
             return;
         }
 
@@ -98,9 +95,9 @@ public class ReconnectManager {
         if (webSocketSetting != null && retryCount <= webSocketSetting.getReconnectFrequency()) {
             isReconnecting = true;
             WebSocketClientManager.getInstance().reconnect();
-            WebsocketLogUtil.i("ReconnectManager", "重试第" + retryCount + "次");
+            WebSocketLog.i("ReconnectManager", "重试第" + retryCount + "次");
         } else {
-            WebsocketLogUtil.i("ReconnectManager", "重试第" + retryCount + "次 超过重试次数了");
+            WebSocketLog.i("ReconnectManager", "重试第" + retryCount + "次 超过重试次数了");
         }
     }
 

@@ -7,9 +7,6 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
 
-
-import com.yc.websocket.util.WebsocketLogUtil;
-
 /**
  * WebSocket 管理类
  * <p>
@@ -61,13 +58,13 @@ public class WebSocketClientManager implements IWebSocketClient {
         if (mWebSocketClient != null
                 && mWebSocketClient.getConnectState() != CONNECTED
                 && mWebSocketClient.getConnectState() != CONNECTING) {
-            WebsocketLogUtil.i("WebSocketClientManager", "重连 currentstate: " + mWebSocketClient.getConnectState());
+            WebSocketLog.i("WebSocketClientManager", "重连 currentstate: " + mWebSocketClient.getConnectState());
             mWebSocketClient.reconnect();
         } else {
             if (mWebSocketClient != null) {
-                WebsocketLogUtil.i("WebSocketClientManager", "不需要重连 currentstate: " + mWebSocketClient.getConnectState());
+                WebSocketLog.i("WebSocketClientManager", "不需要重连 currentstate: " + mWebSocketClient.getConnectState());
             } else {
-                WebsocketLogUtil.i("WebSocketClientManager", "socket客户端未初始化");
+                WebSocketLog.i("WebSocketClientManager", "socket客户端未初始化");
             }
         }
     }
@@ -76,10 +73,10 @@ public class WebSocketClientManager implements IWebSocketClient {
     public boolean send(String text) {
         if (mWebSocketClient != null) {
             boolean send = mWebSocketClient.send(text);
-            WebsocketLogUtil.i("WebSocketClientManager", "发送消息:  " + text + "  失败");
+            WebSocketLog.i("WebSocketClientManager", "发送消息:  " + text + "  失败");
             return send;
         } else {
-            WebsocketLogUtil.i("WebSocketClientManager", "socket未连接");
+            WebSocketLog.i("WebSocketClientManager", "socket未连接");
         }
         return false;
     }
@@ -88,7 +85,7 @@ public class WebSocketClientManager implements IWebSocketClient {
     public boolean send(byte[] bytes) {
         if (mWebSocketClient != null) {
             boolean send = mWebSocketClient.send(bytes);
-            WebsocketLogUtil.i("WebSocketClientManager", "发送消息:  bytes.length: " + bytes.length + "  失败");
+            WebSocketLog.i("WebSocketClientManager", "发送消息:  bytes.length: " + bytes.length + "  失败");
             return send;
         }
         return false;
@@ -114,10 +111,10 @@ public class WebSocketClientManager implements IWebSocketClient {
     public boolean needAutoRetryConnect() {
         if (mWebSocketClient != null) {
             boolean needRetry = mWebSocketClient.needAutoRetryConnect();
-            WebsocketLogUtil.i("WebSocketClientManager", "是否需要自动重连: " + needRetry);
+            WebSocketLog.i("WebSocketClientManager", "是否需要自动重连: " + needRetry);
             return needRetry;
         } else {
-            WebsocketLogUtil.i("mWebSocketClient = null ", "不需要重连");
+            WebSocketLog.i("mWebSocketClient = null ", "不需要重连");
         }
         return false;
     }
