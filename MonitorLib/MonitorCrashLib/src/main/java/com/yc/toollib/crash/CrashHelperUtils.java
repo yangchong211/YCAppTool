@@ -15,7 +15,6 @@ import androidx.annotation.ColorInt;
 
 import com.yc.activitymanager.ActivityManager;
 import com.yc.appfilelib.AppFileUtils;
-import com.yc.toollib.BuildConfig;
 import com.yc.toolmemorylib.AppMemoryUtils;
 import com.yc.toolmemorylib.DalvikHeapMem;
 import com.yc.toolmemorylib.PssInfo;
@@ -121,7 +120,6 @@ public final class CrashHelperUtils {
         //组合Android相关信息
         StringBuilder sb = new StringBuilder();
         sb.append("\n软件App的Id:").append(context.getPackageName());
-        sb.append("\n是否是DEBUG版本:").append(BuildConfig.BUILD_TYPE);
         sb.append("\n崩溃的时间:").append(crashTime);
         sb.append("\n是否root:").append(AppDeviceUtils.isDeviceRooted());
         sb.append("\n系统硬件商:").append(AppDeviceUtils.getManufacturer());
@@ -279,7 +277,6 @@ public final class CrashHelperUtils {
         sb.append("\nAPPLICATION_ID:").append(context.getPackageName());
         sb.append("\nVERSION_CODE:").append(AppInfoUtils.getAppVersionCode());
         sb.append("\nVERSION_NAME:").append(AppInfoUtils.getAppVersionName());
-        sb.append("\nBUILD_TYPE:").append(BuildConfig.BUILD_TYPE);
         //设备信息
         sb.append("\nMODEL:").append(Build.MODEL);
         sb.append("\nRELEASE:").append(Build.VERSION.RELEASE);

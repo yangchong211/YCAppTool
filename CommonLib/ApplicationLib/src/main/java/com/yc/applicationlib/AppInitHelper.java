@@ -1,6 +1,7 @@
 package com.yc.applicationlib;
 
 import android.app.Application;
+import android.util.Log;
 
 
 public class AppInitHelper {
@@ -40,6 +41,7 @@ public class AppInitHelper {
             throw new RuntimeException("对象已存在不可重复创建");
         }
         mAppInit = new BaseApplicationHelper(application);
+        Log.i(TAG , "AppInitHelper");
     }
 
 
