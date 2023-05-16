@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.grpcserver.ChannelHelper;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.ref.WeakReference;
@@ -100,7 +102,7 @@ public class WanAndroidActivity extends AppCompatActivity {
             int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
             try {
                 //构建Channel
-                channel = ChannelHelper.newChannel(host,port);
+                channel = ChannelHelper.newChannel1(host,port);
                 //构建服务请求API代理
                 ApiServiceGrpc.ApiServiceBlockingStub stub = ApiServiceGrpc.newBlockingStub(channel);
                 //构建请求实体
@@ -130,4 +132,6 @@ public class WanAndroidActivity extends AppCompatActivity {
             sendButton.setEnabled(true);
         }
     }
+
+
 }

@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.grpcserver.ChannelHelper;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.ref.WeakReference;
@@ -27,7 +29,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 
@@ -84,7 +85,7 @@ public class RouteGuideActivity extends AppCompatActivity {
         int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
         ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                 .hideSoftInputFromWindow(hostEdit.getWindowToken(), 0);
-        channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+        channel = ChannelHelper.newChannel2(host,port);
         hostEdit.setEnabled(false);
         portEdit.setEnabled(false);
         startRouteGuideButton.setEnabled(false);

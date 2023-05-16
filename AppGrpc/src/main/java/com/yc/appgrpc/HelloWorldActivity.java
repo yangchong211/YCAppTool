@@ -19,6 +19,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.yc.grpcserver.BaseResponse;
+import com.yc.grpcserver.ChannelHelper;
+import com.yc.grpcserver.GrpcHelper;
 import com.yc.toastutils.ToastUtils;
 
 import java.io.PrintWriter;
@@ -263,4 +266,31 @@ public class HelloWorldActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 封装
+     * @param host
+     * @param portStr
+     * @param message
+     */
+    private void GrpcTask3(String host , String portStr, String message){
+        ManagedChannel channel;
+        int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
+        try {
+            //构建Channel
+            channel = ChannelHelper.newChannel1(host,port);
+
+
+            //构建服务请求API代理
+            GreeterGrpc.GreeterBlockingStub stub = GreeterGrpc.newBlockingStub(channel);
+            //构建请求实体，HelloRequest是自动生成的实体类
+            HelloRequest request = HelloRequest.newBuilder().setName(message).build();
+            //进行请求并且得到响应数据
+            HelloReply reply = stub.sayHello(request);
+
+            //
+            BaseResponse response = GrpcHelper.translateResponse(reply, BaseResponse.class);
+        } catch (Exception e){
+            Log.i("Exception",e.getMessage());
+        }
+    }
 }
