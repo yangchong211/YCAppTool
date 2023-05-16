@@ -91,6 +91,7 @@ public class AppDelayTask extends AbsParallelTask {
         AppStatusManager manager = new AppStatusManager.Builder()
                 .context(MainApplication.getInstance())
                 .file(file)
+                .context(MainApplication.getInstance())
                 .threadSwitchOn(false)
                 .builder();
         manager.registerAppStatusListener(new BaseStatusListener() {

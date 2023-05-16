@@ -9,8 +9,6 @@ import android.os.Handler
 import android.os.SystemClock
 import android.view.View
 import androidx.fragment.app.FragmentActivity
-import com.squareup.leakcanary.RefWatcher
-import com.yc.appmonitor.MonitorApplication
 import com.yc.appmonitor.R
 import com.yc.toastutils.ToastUtils
 import com.yc.toolutils.AppLogUtils
@@ -40,8 +38,8 @@ class ApmTestActivity : FragmentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        val refWatcher: RefWatcher = MonitorApplication.getRefWatcher(this)
-        refWatcher.watch(this)
+//        val refWatcher: RefWatcher = MonitorApplication.getRefWatcher(this)
+//        refWatcher.watch(this)
     }
 
     private fun initFragment() {

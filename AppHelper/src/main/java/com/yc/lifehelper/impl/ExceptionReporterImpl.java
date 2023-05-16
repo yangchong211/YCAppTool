@@ -12,4 +12,9 @@ public class ExceptionReporterImpl extends ExceptionReporter {
     protected void reportCrash(String tag, Throwable throwable) {
 
     }
+
+    @Override
+    protected void reportException(String content) {
+
+    }
 }

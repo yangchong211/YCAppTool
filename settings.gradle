@@ -14,12 +14,10 @@ include ':AppMvx'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
-include ':AnimBusiness',':MvvmDatabinding',
-        ':DemoBusiness', ':MvpTodoBusiness',':MvvmTodoLive',
-        ':JetpackBusiness',
-        ':BusinessInterface', ':StatusBusiness', ':BleBusiness',
-        ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness',
-        ':SocketBusiness',':LibraryLayer'
+include ':AnimBusiness', ':MvvmDatabinding', ':DemoBusiness', ':MvpTodoBusiness',
+        ':MvvmTodoLive', ':JetpackBusiness', ':BusinessInterface', ':StatusBusiness',
+        ':BleBusiness', ':ThreadBusiness', ':NotifyBusiness', ':KotlinBusiness',
+        ':SocketBusiness', ':LibraryLayer'
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
 project(':DemoBusiness').projectDir = new File('Business/DemoBusiness')
 project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
@@ -36,13 +34,12 @@ project(':SocketBusiness').projectDir = new File('Business/SocketBusiness')
 project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 
 
-
 /* +++++++++ 框架业务服务层 +++++++++ */
 include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
-        ':GsonServer', ':IpcServer', ':ObjectEqualLib',':TcpServerLib', ':TcpManager',
+        ':GsonServer', ':IpcServer', ':ObjectEqualLib', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
-        ':GlideProgressLib', ':CompressServer',  ':RetrofitNetLib',  ':Transformation'
+        ':GlideProgressLib', ':CompressServer', ':RetrofitNetLib', ':Transformation', ':GrpcServer'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -64,22 +61,21 @@ project(':RetrofitNetLib').projectDir = new File('ServerLib/RetrofitNetLib')
 project(':Transformation').projectDir = new File('ServerLib/Transformation')
 project(':TcpServerLib').projectDir = new File('ServerLib/TcpServerLib')
 project(':TcpManager').projectDir = new File('ServerLib/TcpManager')
-
+project(':GrpcServer').projectDir = new File('ServerLib/GrpcServer')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':AppStatusLib',':ToolUtilsLib',':FragmentManager',':AppCompress',
-        'ComponentLib',':ApplicationLib', ':ParallelTaskLib',':AppBaseStore',
-        ':BaseClassLib',':ReflectionLib',':AppLogLib',':AppRestartLib', ':SafeIntentLib',
-        ':ArchitectureLib',':ActivityManager', ':ToolFileLib',':EventUploadLib',
-        ':AppCommonInter',':ToolMemoryLib',':AppPermission',':PhoneSensor',
-        ':AppLruDisk',':AppLruCache',':DownloadHelper',':AppEncryptLib',
-        ':AppMediaStore',':DataCloneLib',':AppScreenLib',':BaseVpAdapter',':ImageToolLib',
-        ':AppHandlerLib',':FileIoHelper',':ZipFileLib',':NetWorkLib',':AppContextLib',
-        ':AppWiFiLib',':UriAndUrlLib',':AppGrayLib',':AppCallStatus',':AppFastSp',':ZipFileLib'
+include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager', ':AppCompress',
+        ':ApplicationLib', ':ParallelTaskLib', ':AppBaseStore',
+        ':BaseClassLib', ':ReflectionLib', ':AppLogLib', ':AppRestartLib', ':SafeIntentLib',
+        ':ArchitectureLib', ':ActivityManager', ':ToolFileLib', ':EventUploadLib',
+        ':AppCommonInter', ':ToolMemoryLib', ':AppPermission', ':PhoneSensor',
+        ':AppLruDisk', ':AppLruCache', ':DownloadHelper', ':AppEncryptLib',
+        ':AppMediaStore', ':DataCloneLib', ':AppScreenLib', ':BaseVpAdapter', ':ImageToolLib',
+        ':AppHandlerLib', ':FileIoHelper', ':ZipFileLib', ':NetWorkLib', ':AppContextLib',
+        ':AppWiFiLib', ':UriAndUrlLib', ':AppGrayLib', ':AppCallStatus', ':AppFastSp', ':ZipFileLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
-project(':ComponentLib').projectDir = new File('CommonLib/ComponentLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
 project(':ParallelTaskLib').projectDir = new File('CommonLib/ParallelTaskLib')
 project(':AppBaseStore').projectDir = new File('CommonLib/AppBaseStore')
@@ -130,7 +126,7 @@ include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib',
         ':FloatWindow', ':AppTextView', ':AppImageView', ':AppButtonView', ':AppScrollView',
         ':AppSwitchView', ':AppEditText', ':AppConstraintLayout', ':AppLoadingLib',
-        ':RedDotView', ':ExpandLib',':AppChartView',':AppShadowLib',':AppCoordinatorLayout'
+        ':RedDotView', ':ExpandLib', ':AppChartView', ':AppShadowLib', ':AppCoordinatorLayout'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
 project(':CustomWidget').projectDir = new File('WidgetLib/CustomWidget')
@@ -175,9 +171,9 @@ project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinator
 
 
 /* +++++++++ 框架基础工具库 +++++++++ */
-include ':ZxingServerLib', ':WebSocketLib',  ':SocketIoLib', ':SerialTaskLib' ,
-        ':LocaleHelperLib' ,':CountTimerLib' ,':LocalShareLib' ,':NtpTimeLib' ,
-        ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib',':EasyExecutor',
+include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib',
+        ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',
+        ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib'
@@ -207,10 +203,10 @@ project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
-include ':RouteCompiler', ':RouteManager', ':RouteAnnotations',':BuildTimeCostPlugin',
+include ':RouteCompiler', ':RouteManager', ':RouteAnnotations', ':BuildTimeCostPlugin',
         ':ServiceLoaderApi', ':ServiceLoaderAnnotations', ':ServiceLoaderRegistry',
         ':ServiceLoaderPlugin', ':ServiceLoaderProcessor', ':MethodTimePlugin',
-        ':ServiceLoaderPlugin',':AppInitApi',':AppInitCommon', ':AppInitCompiler'
+        ':ServiceLoaderPlugin', ':AppInitApi', ':AppInitCommon', ':AppInitCompiler'
 project(':RouteCompiler').projectDir = new File('AptHelper/RouteCompiler')
 project(':RouteManager').projectDir = new File('AptHelper/RouteManager')
 project(':RouteAnnotations').projectDir = new File('AptHelper/RouteAnnotations')
@@ -226,9 +222,8 @@ project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 //project(':AppInitCompiler').projectDir = new File('AptHelper/AppInitCompiler')
 
 
-
 /* +++++++++ App监控库 +++++++++ */
-include ':MonitorAliveLib',':MonitorCatonLib',':MonitorAnrLib',':MonitorCrashLib',
+include ':MonitorAliveLib', ':MonitorCatonLib', ':MonitorAnrLib', ':MonitorCrashLib',
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
         ':MonitorXposed', ':MonitorMemory',
         ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',
@@ -256,7 +251,7 @@ project(':MonitorPicture').projectDir = new File('MonitorLib/MonitorPicture')
 
 
 /* +++++++++ 音视频 +++++++++ */
-include ':VideoSqlLite',':VideoCache',':AudioPlayer',':VideoSurface',
+include ':VideoSqlLite', ':VideoCache', ':AudioPlayer', ':VideoSurface',
         ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView',
         ':BellsVibrations', ':AudioHelper', ':MediaHelper'
 project(':VideoSqlLite').projectDir = new File('PlayerLib/VideoSqlLite')
@@ -274,7 +269,7 @@ project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
 
 
 /* +++++++++ 经典第三方库 +++++++++ */
-include ':LeakAnalyzer',':LeakCanarySdk',':LeakInstrumentation',
+include ':LeakAnalyzer', ':LeakCanarySdk', ':LeakInstrumentation',
         ':LeakSample', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher', ':LeakAndroidNoOp',
         ':GlideAnnotation', ':GlideGifLib', ':GlideLibrary', ':EventbusAndroid', ':EventBus',
         ':OkHttpLib'
@@ -302,7 +297,4 @@ project(':EventbusAndroid').projectDir = new File('ThirdLib/EventbusAndroid')
 project(':EventBus').projectDir = new File('ThirdLib/EventBus')
 //OkHttp
 project(':OkHttpLib').projectDir = new File('ThirdLib/OkHttpLib')
-
-
-
 

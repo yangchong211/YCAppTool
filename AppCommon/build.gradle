@@ -110,7 +110,6 @@ dependencies {
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':ApplicationLib')
     implementation project(path: ':BaseVpAdapter')
-    implementation project(path: ':ComponentLib')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':ActivityManager')
     implementation project(path: ':AppBaseStore')

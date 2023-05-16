@@ -11,7 +11,6 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.leakcanary.RefWatcher
 import com.yc.appmonitor.MonitorApplication
 import com.yc.appmonitor.R
 import com.yc.toastutils.ToastUtils
@@ -85,8 +84,8 @@ class BlockListActivity : FragmentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        val refWatcher: RefWatcher = MonitorApplication.getRefWatcher(this)
-        refWatcher.watch(this)
+//        val refWatcher: RefWatcher = MonitorApplication.getRefWatcher(this)
+//        refWatcher.watch(this)
     }
     private fun testLeak() {
         Handler().postDelayed(Runnable() {

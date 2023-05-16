@@ -15,6 +15,8 @@ public abstract class ExceptionReporter {
 
     protected abstract void reportCrash(String tag, Throwable throwable);
 
+    protected abstract void reportException(String content);
+
     private static ExceptionReporter sExceptionReporter;
 
     public static void setExceptionReporter(@NonNull ExceptionReporter exceptionReporter) {
@@ -30,6 +32,12 @@ public abstract class ExceptionReporter {
     public static void report(String tag, Throwable throwable) {
         if (sExceptionReporter != null) {
             sExceptionReporter.reportCrash(tag, throwable);
+        }
+    }
+
+    public static void report(String content){
+        if (sExceptionReporter != null) {
+            sExceptionReporter.reportException(content);
         }
     }
 

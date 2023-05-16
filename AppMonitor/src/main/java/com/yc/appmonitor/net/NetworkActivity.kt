@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.squareup.leakcanary.RefWatcher
 import com.yc.appmonitor.MonitorApplication
 import com.yc.appmonitor.R
 import com.yc.appmonitor.net.NetworkActivity
@@ -118,8 +117,8 @@ class NetworkActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        val refWatcher: RefWatcher = MonitorApplication.getRefWatcher(this)
-        refWatcher.watch(this)
+//        val refWatcher: RefWatcher = MonitorApplication.getRefWatcher(this)
+//        refWatcher.watch(this)
     }
 
     private fun testLeak() {

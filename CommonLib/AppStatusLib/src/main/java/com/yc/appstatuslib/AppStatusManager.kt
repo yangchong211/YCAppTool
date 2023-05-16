@@ -161,7 +161,9 @@ class AppStatusManager private constructor(builder: Builder) {
      * 注册广播监听回调
      */
     fun registerAppStatusListener(listener: AppStatusListener) {
-        mAppStatusListener?.add(listener)
+        if (mAppStatusListener?.contains(listener) != true){
+            mAppStatusListener?.add(listener)
+        }
     }
 
     /**
@@ -381,6 +383,9 @@ class AppStatusManager private constructor(builder: Builder) {
         screenSwitchOn = builder.screenSwitchOn
         wifiSwitchOn = builder.wifiSwitchOn
         bluetoothSwitchOn = builder.bluetoothSwitchOn
+        if (mContext == null) {
+            throw NullPointerException("app status lib init , context must be not null")
+        }
         init()
     }
 

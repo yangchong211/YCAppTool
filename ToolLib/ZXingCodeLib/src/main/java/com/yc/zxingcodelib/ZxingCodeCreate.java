@@ -80,6 +80,7 @@ public final class ZxingCodeCreate {
                                       @FloatRange(from = 0.0f,to = 1.0f) float ratio, int codeColor) {
         //配置参数
         Map<EncodeHintType, Object> hints = new HashMap<>();
+        // 设置编码方式
         hints.put( EncodeHintType.CHARACTER_SET, "utf-8");
         //容错级别
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
@@ -103,6 +104,7 @@ public final class ZxingCodeCreate {
                                       Map<EncodeHintType,?> hints,int codeColor) {
         try {
             // 图像数据转换，使用了矩阵转换
+            // 参数顺序分别为：编码内容，编码类型，生成图片宽度，生成图片高度，设置参数
             BitMatrix bitMatrix = new QRCodeWriter().encode(content,
                     BarcodeFormat.QR_CODE, heightPix, heightPix, hints);
             int[] pixels = new int[heightPix * heightPix];
@@ -121,6 +123,7 @@ public final class ZxingCodeCreate {
             Bitmap bitmap = Bitmap.createBitmap(heightPix, heightPix, Bitmap.Config.ARGB_8888);
             bitmap.setPixels(pixels, 0, heightPix, 0, 0, heightPix, heightPix);
             if (logo != null) {
+                //添加最中间的logo
                 bitmap = addLogo(bitmap, logo,ratio);
             }
             return bitmap;

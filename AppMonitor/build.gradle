@@ -46,7 +46,8 @@ dependencies {
     implementation project(path: ':MonitorSpeed')
     implementation project(path: ':MonitorTimeLib')
     implementation project(path: ':MonitorNetLib')
+    implementation project(path: ':MonitorApmLib')
 
-    implementation project(path: ':LeakCanarySdk')
-    implementation project(':LeakAndroid')
+//    implementation project(path: ':LeakCanarySdk')
+//    implementation project(':LeakAndroid')
 }
