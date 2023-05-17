@@ -14,7 +14,7 @@ import java.util.concurrent.Executor;
  *     @author yangchong
  *     email  : yangchong211@163.com
  *     time   : 2019/5/11
- *     desc   : task代理类，简单xia。具体用这个
+ *     desc   : task代理类。具体用这个
  *     revise :
  *     GitHub : https://github.com/yangchong211/YCThreadPool
  * </pre>
