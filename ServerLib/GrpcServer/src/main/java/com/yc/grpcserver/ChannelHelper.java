@@ -1,4 +1,4 @@
-package com.yc.appgrpc;
+package com.yc.grpcserver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,10 +14,14 @@ public final class ChannelHelper {
      * @param port 端口
      * @return
      */
-    public static ManagedChannel newChannel(String host, int port) {
+    public static ManagedChannel newChannel1(String host, int port) {
         return ManagedChannelBuilder.forAddress(host, port)
                 .usePlaintext()
                 .build();
+    }
+
+    public static ManagedChannel newChannel2(String host, int port) {
+        return GrpcChannelBuilder.build(host,port,null,false,null);
     }
 
     /**
