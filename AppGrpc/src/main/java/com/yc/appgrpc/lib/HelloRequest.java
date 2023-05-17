@@ -5,5 +5,4 @@ import com.yc.grpcserver.BaseRequest;
 public class HelloRequest extends BaseRequest {
 
 
-
 }

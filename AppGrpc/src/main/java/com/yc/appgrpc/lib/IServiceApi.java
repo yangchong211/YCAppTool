@@ -6,6 +6,6 @@ public interface IServiceApi {
 
     HelloResponse sayHello(HelloRequest request);
 
-    void sayHello(HelloRequest request , GrpcCallback<HelloResponse> callback);
+    void sayHello(HelloRequest request, GrpcCallback<HelloResponse> callback);
 
 }

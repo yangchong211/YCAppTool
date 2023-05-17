@@ -55,7 +55,7 @@ public class HelloWorldActivity extends AppCompatActivity {
             target.setClass(context, HelloWorldActivity.class);
             target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(target);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -77,19 +77,19 @@ public class HelloWorldActivity extends AppCompatActivity {
         int port = uri.getPort();
         hostEdit.setText(host);
         messageEdit.setText("yangchong");
-        portEdit.setText(port+"");
+        portEdit.setText(port + "");
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (hostEdit.getText().toString().length() == 0){
+                if (hostEdit.getText().toString().length() == 0) {
                     ToastUtils.showRoundRectToast("host不能为空");
                     return;
                 }
-                if (messageEdit.getText().toString().length() == 0){
+                if (messageEdit.getText().toString().length() == 0) {
                     ToastUtils.showRoundRectToast("message不能为空");
                     return;
                 }
-                if (portEdit.getText().toString().length() == 0){
+                if (portEdit.getText().toString().length() == 0) {
                     ToastUtils.showRoundRectToast("port不能为空");
                     return;
                 }
@@ -104,9 +104,9 @@ public class HelloWorldActivity extends AppCompatActivity {
         sendButton.setEnabled(false);
         resultText.setText("");
         new GrpcTask(this).execute(
-                        hostEdit.getText().toString(),
-                        messageEdit.getText().toString(),
-                        portEdit.getText().toString());
+                hostEdit.getText().toString(),
+                messageEdit.getText().toString(),
+                portEdit.getText().toString());
     }
 
     /**
@@ -144,7 +144,7 @@ public class HelloWorldActivity extends AppCompatActivity {
                 PrintWriter pw = new PrintWriter(sw);
                 e.printStackTrace(pw);
                 pw.flush();
-                Log.i("Exception",e.getMessage());
+                Log.i("Exception", e.getMessage());
                 return String.format("Failed... : %n%s", sw);
             }
         }
@@ -203,7 +203,7 @@ public class HelloWorldActivity extends AppCompatActivity {
                 PrintWriter pw = new PrintWriter(sw);
                 e.printStackTrace(pw);
                 pw.flush();
-                Log.i("Exception",e.getMessage());
+                Log.i("Exception", e.getMessage());
                 return String.format("Failed... : %n%s", sw);
             }
         }
@@ -228,11 +228,12 @@ public class HelloWorldActivity extends AppCompatActivity {
 
     /**
      * 异步
+     *
      * @param host
      * @param portStr
      * @param message
      */
-    private void GrpcTask2(String host , String portStr, String message){
+    private void GrpcTask2(String host, String portStr, String message) {
         ManagedChannel channel;
         int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
         try {
@@ -264,23 +265,24 @@ public class HelloWorldActivity extends AppCompatActivity {
                     }
                 }
             });
-        } catch (Exception e){
-            Log.i("Exception",e.getMessage());
+        } catch (Exception e) {
+            Log.i("Exception", e.getMessage());
         }
     }
 
     /**
      * 封装
+     *
      * @param host
      * @param portStr
      * @param message
      */
-    private void GrpcTask3(String host , String portStr, String message){
+    private void GrpcTask3(String host, String portStr, String message) {
         ManagedChannel channel;
         int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
         try {
             //构建Channel
-            channel = ChannelHelper.newChannel1(host,port);
+            channel = ChannelHelper.newChannel1(host, port);
             //构建服务请求API代理
             GreeterGrpc.GreeterBlockingStub stub = GreeterGrpc.newBlockingStub(channel);
             //构建请求实体，HelloRequest是自动生成的实体类
@@ -290,13 +292,13 @@ public class HelloWorldActivity extends AppCompatActivity {
 
             //
             BaseResponse response = GrpcHelper.translateResponse(reply, BaseResponse.class);
-        } catch (Exception e){
-            Log.i("Exception",e.getMessage());
+        } catch (Exception e) {
+            Log.i("Exception", e.getMessage());
         }
     }
 
 
-    private void GrpcTask4(String host , String portStr, String message){
+    private void GrpcTask4(String host, String portStr, String message) {
         com.yc.appgrpc.lib.HelloRequest helloRequest = new com.yc.appgrpc.lib.HelloRequest();
         GrpcTools.getInstance().getServiceApi().sayHello(helloRequest, new GrpcCallback<HelloResponse>() {
             @Override

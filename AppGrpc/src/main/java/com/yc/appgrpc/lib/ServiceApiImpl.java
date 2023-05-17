@@ -2,7 +2,7 @@ package com.yc.appgrpc.lib;
 
 import com.yc.grpcserver.GrpcCallback;
 
-public class ServiceApiImpl implements IServiceApi{
+public class ServiceApiImpl implements IServiceApi {
 
 
     @Override
