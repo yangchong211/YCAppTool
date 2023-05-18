@@ -58,6 +58,7 @@ ext {
             //AndroidX系列
             appcompat                 : "androidx.appcompat:appcompat:${appcompatVersion}",
             annotation                : "androidx.annotation:annotation:${annotationVersion}",
+            percentlayout                 : "androidx.percentlayout:percentlayout:${viewpagerVersion}",
             constraintlayout          : "androidx.constraintlayout:constraintlayout:${constraintlayoutVersion}",
             coordinatorlayout         : "androidx.coordinatorlayout:coordinatorlayout:${coordinatorlayoutVersion}",
             cardview                  : "androidx.cardview:cardview:${cardviewVersion}",

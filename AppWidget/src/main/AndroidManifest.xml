@@ -35,6 +35,7 @@
         <activity android:name=".banner.BannerActivity"/>
         <activity android:name=".event.EventActivity"/>
         <activity android:name=".dialog.DialogActivity"/>
+        <activity android:name=".percent.PercentActivity"/>
     </application>
 
 

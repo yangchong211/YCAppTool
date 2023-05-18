@@ -124,7 +124,7 @@ include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':DialogFragment', ':SnackBar', ':PopupWindow', ':BaseDialog', ':RoundCorners',
         ':EastAdapterLib', ':PhotoCoverLib', ':RefreshViewLib', ':SelectViewLib',
         ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib',
-        ':FloatWindow', ':AppTextView', ':AppImageView', ':AppButtonView', ':AppScrollView',
+        ':FloatWindow', ':AppTextView', ':AppImageView', ':PercentLayout', ':AppScrollView',
         ':AppSwitchView', ':AppEditText', ':AppConstraintLayout', ':AppLoadingLib',
         ':RedDotView', ':ExpandLib', ':AppChartView', ':AppShadowLib', ':AppCoordinatorLayout'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
@@ -157,7 +157,7 @@ project(':SlideViewLib').projectDir = new File('WidgetLib/SlideViewLib')
 project(':FloatWindow').projectDir = new File('WidgetLib/FloatWindow')
 project(':AppTextView').projectDir = new File('WidgetLib/AppTextView')
 project(':AppImageView').projectDir = new File('WidgetLib/AppImageView')
-project(':AppButtonView').projectDir = new File('WidgetLib/AppButtonView')
+project(':PercentLayout').projectDir = new File('WidgetLib/PercentLayout')
 project(':AppScrollView').projectDir = new File('WidgetLib/AppScrollView')
 project(':AppSwitchView').projectDir = new File('WidgetLib/AppSwitchView')
 project(':AppEditText').projectDir = new File('WidgetLib/AppEditText')

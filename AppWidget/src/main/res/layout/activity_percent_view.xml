@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <androidx.percentlayout.widget.PercentFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+        <Button
+            android:id="@+id/btn1"
+            android:layout_gravity="left|top"
+            android:text="btn1"
+            android:textAllCaps="false"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="50%"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/btn2"
+            android:layout_gravity="right|top"
+            android:text="btn2"
+            android:textAllCaps="false"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="50%"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <Button
+            android:id="@+id/btn3"
+            android:layout_gravity="left|bottom"
+            android:text="btn3"
+            android:textAllCaps="false"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="50%"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/btn4"
+            android:text="btn4"
+            android:layout_gravity="right|bottom"
+            app:layout_widthPercent="50%"
+            app:layout_heightPercent="50%"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.percentlayout.widget.PercentFrameLayout>
+
+
+    <?xml version="1.0" encoding="utf-8"?>
+
+
+    <com.yc.percent.zhy.PercentFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+
+
+        <com.yc.percent.zhy.PercentFrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:background="#ffcc5ec7"
+            app:layout_heightPercent="40%w"
+            app:layout_widthPercent="40%w">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#ff7ecc16"
+                android:gravity="center"
+                android:text="margin 15% of w"
+                app:layout_marginPercent="15%w" />
+
+        </com.yc.percent.zhy.PercentFrameLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom|right"
+            android:background="#44ff0000"
+            android:gravity="center"
+            android:text="15%w,15%w"
+            app:layout_heightPercent="15%w"
+            app:layout_marginPercent="5%w"
+            app:layout_widthPercent="15%w"/>
+    </com.yc.percent.zhy.PercentFrameLayout>
+
+    <com.yc.percent.zhy.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/color_555555"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#44ff0000"
+            android:gravity="center"
+            app:layout_heightPercent="50%h"
+            app:layout_widthPercent="70%w"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#ff0300"
+            android:gravity="center"
+            app:layout_heightPercent="50%h"
+            app:layout_widthPercent="10%w"/>
+    </com.yc.percent.zhy.PercentLinearLayout>
+
+
+</LinearLayout>

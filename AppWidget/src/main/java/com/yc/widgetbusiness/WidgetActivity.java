@@ -17,6 +17,7 @@ import com.yc.widgetbusiness.dialog.DialogActivity;
 import com.yc.widgetbusiness.event.EventActivity;
 import com.yc.widgetbusiness.floatpage.FloatActivity;
 import com.yc.widgetbusiness.image.ImageViewActivity;
+import com.yc.widgetbusiness.percent.PercentActivity;
 import com.yc.widgetbusiness.red.RedViewActivity;
 import com.yc.widgetbusiness.round.RoundCornersActivity;
 import com.yc.widgetbusiness.shadow.ShadowActivity;
@@ -40,6 +41,7 @@ public class WidgetActivity extends AppCompatActivity {
     private RoundTextView tvWidgetBar;
     private RoundTextView tvWidgetNotify;
     private RoundTextView tvWidgetDialog;
+    private RoundTextView tvWidgetPercent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class WidgetActivity extends AppCompatActivity {
         tvWidgetBar = findViewById(R.id.tv_widget_bar);
         tvWidgetNotify = findViewById(R.id.tv_widget_notify);
         tvWidgetDialog = findViewById(R.id.tv_widget_dialog);
+        tvWidgetPercent = findViewById(R.id.tv_widget_percent);
     }
 
     public void initListener() {
@@ -143,6 +146,12 @@ public class WidgetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(WidgetActivity.this, DialogActivity.class));
+            }
+        });
+        tvWidgetPercent.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                PercentActivity.startActivity(WidgetActivity.this);
             }
         });
     }

@@ -38,7 +38,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation(rootProject.ext.dependencies["material"])
-
+    implementation(rootProject.ext.dependencies["percentlayout"])
     implementation project(':StatusBusiness')
 
     //通用日志输出库
@@ -76,7 +76,7 @@ dependencies {
     implementation project(path: ':StatusBarLib')
     implementation project(path: ':AppLogClient')
     implementation project(path: ':AppLogService')
-
+    implementation project(path: ':PercentLayout')
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':AppTextView')
