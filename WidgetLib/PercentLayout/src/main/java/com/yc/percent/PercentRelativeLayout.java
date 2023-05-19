@@ -87,7 +87,7 @@ public class PercentRelativeLayout extends RelativeLayout {
 
         public LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
-            mPercentLayoutInfo = PercentLayoutHelper.getPercentLayoutInfo(c, attrs);
+            mPercentLayoutInfo = PercentHelper.getPercentLayoutInfo(c, attrs);
         }
 
         public LayoutParams(int width, int height) {

@@ -16,13 +16,18 @@ import android.widget.ScrollView;
 public class PercentLinearLayout extends LinearLayout {
 
     private static final String TAG = "PercentLinearLayout";
-    private final PercentLayoutHelper mPercentLayoutHelper;
+    private final PercentLayoutHelper mPercentLayoutHelper = new PercentLayoutHelper(this);
+
+    public PercentLinearLayout(Context context) {
+        super(context);
+    }
 
     public PercentLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mPercentLayoutHelper = new PercentLayoutHelper(this);
     }
-
+    public PercentLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -42,8 +47,7 @@ public class PercentLinearLayout extends LinearLayout {
             Context context = getContext();
             if (context instanceof Activity) {
                 Activity act = (Activity) context;
-                int measuredHeight = act.findViewById(android.R.id.content).getMeasuredHeight();
-                baseHeight = measuredHeight;
+                baseHeight = act.findViewById(android.R.id.content).getMeasuredHeight();
             } else {
                 baseHeight = getScreenHeight();
             }
@@ -53,6 +57,7 @@ public class PercentLinearLayout extends LinearLayout {
         //将子类的param的属性更改为百分比属性，必须在super.onMeasure之前调用，保证super.onMeasure能正常修改参数
         mPercentLayoutHelper.adjustChildren(tmpWidthMeasureSpec, tmpHeightMeasureSpec);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        //
         if (mPercentLayoutHelper.handleMeasuredStateTooSmall()) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
@@ -84,7 +89,7 @@ public class PercentLinearLayout extends LinearLayout {
         public LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
             //解析自定义属性
-            mPercentLayoutInfo = PercentLayoutHelper.getPercentLayoutInfo(c, attrs);
+            mPercentLayoutInfo = PercentHelper.getPercentLayoutInfo(c, attrs);
         }
 
         @Override
