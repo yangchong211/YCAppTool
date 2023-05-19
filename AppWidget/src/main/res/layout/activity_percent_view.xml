@@ -51,16 +51,13 @@
     </androidx.percentlayout.widget.PercentFrameLayout>
 
 
-    <?xml version="1.0" encoding="utf-8"?>
-
-
-    <com.yc.percent.zhy.PercentFrameLayout
-        android:layout_width="match_parent"
+    <com.yc.percent.PercentFrameLayout
+        android:layout_width="200dp"
         android:layout_height="200dp"
         android:orientation="vertical">
 
 
-        <com.yc.percent.zhy.PercentFrameLayout
+        <com.yc.percent.PercentFrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_gravity="center"
@@ -77,7 +74,7 @@
                 android:text="margin 15% of w"
                 app:layout_marginPercent="15%w" />
 
-        </com.yc.percent.zhy.PercentFrameLayout>
+        </com.yc.percent.PercentFrameLayout>
 
         <TextView
             android:layout_width="0dp"
@@ -85,13 +82,12 @@
             android:layout_gravity="bottom|right"
             android:background="#44ff0000"
             android:gravity="center"
-            android:text="15%w,15%w"
             app:layout_heightPercent="15%w"
             app:layout_marginPercent="5%w"
             app:layout_widthPercent="15%w"/>
-    </com.yc.percent.zhy.PercentFrameLayout>
+    </com.yc.percent.PercentFrameLayout>
 
-    <com.yc.percent.zhy.PercentLinearLayout
+    <com.yc.percent.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/color_555555"
@@ -110,7 +106,29 @@
             android:gravity="center"
             app:layout_heightPercent="50%h"
             app:layout_widthPercent="10%w"/>
-    </com.yc.percent.zhy.PercentLinearLayout>
+    </com.yc.percent.PercentLinearLayout>
 
+    <com.yc.percent.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#44ff0000"
+            android:gravity="center"
+            app:layout_heightPercent="50%h"
+            app:layout_widthPercent="70%w"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#ff0300"
+            android:gravity="center"
+            app:layout_heightPercent="50%h"
+            app:layout_widthPercent="10%w"/>
+    </com.yc.percent.PercentLinearLayout>
 
 </LinearLayout>

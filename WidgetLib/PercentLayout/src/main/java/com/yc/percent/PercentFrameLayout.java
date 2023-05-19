@@ -1,4 +1,4 @@
-package com.yc.percent.zhy;
+package com.yc.percent;
 
 import android.content.Context;
 import android.content.res.TypedArray;

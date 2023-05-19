@@ -1,4 +1,4 @@
-package com.yc.percent.zhy;
+package com.yc.percent;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,22 +16,22 @@ import android.widget.ScrollView;
 public class PercentLinearLayout extends LinearLayout {
 
     private static final String TAG = "PercentLinearLayout";
-    private PercentLayoutHelper mPercentLayoutHelper;
+    private final PercentLayoutHelper mPercentLayoutHelper;
 
     public PercentLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         mPercentLayoutHelper = new PercentLayoutHelper(this);
     }
 
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
+        //高的大小和模式
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int tmpHeightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, heightMode);
 
+        //宽的大小和模式
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int tmpWidthMeasureSpec = MeasureSpec.makeMeasureSpec(widthSize, widthMode);
@@ -50,7 +50,7 @@ public class PercentLinearLayout extends LinearLayout {
             tmpHeightMeasureSpec = MeasureSpec.makeMeasureSpec(baseHeight, heightMode);
         }
 
-
+        //将子类的param的属性更改为百分比属性，必须在super.onMeasure之前调用，保证super.onMeasure能正常修改参数
         mPercentLayoutHelper.adjustChildren(tmpWidthMeasureSpec, tmpHeightMeasureSpec);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if (mPercentLayoutHelper.handleMeasuredStateTooSmall()) {
@@ -73,9 +73,9 @@ public class PercentLinearLayout extends LinearLayout {
 
     @Override
     public LayoutParams generateLayoutParams(AttributeSet attrs) {
+        //子View会调用这个方法构建自身的LayoutParams属性,这里创建的就是内部类的LayoutParams对象
         return new LayoutParams(getContext(), attrs);
     }
-
 
     public static class LayoutParams extends LinearLayout.LayoutParams
             implements PercentLayoutHelper.PercentLayoutParams {
@@ -83,6 +83,7 @@ public class PercentLinearLayout extends LinearLayout {
 
         public LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
+            //解析自定义属性
             mPercentLayoutInfo = PercentLayoutHelper.getPercentLayoutInfo(c, attrs);
         }
 

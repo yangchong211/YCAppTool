@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="PercentLayout_Layout">
+        <!-- 宽度 -->
         <attr name="layout_widthPercent" format="string"/>
+        <!-- 高度 -->
         <attr name="layout_heightPercent" format="string"/>
 
+        <!-- 外间距 -->
         <attr name="layout_marginPercent" format="string"/>
         <attr name="layout_marginLeftPercent" format="string"/>
         <attr name="layout_marginTopPercent" format="string"/>
@@ -12,13 +15,16 @@
         <attr name="layout_marginStartPercent" format="string"/>
         <attr name="layout_marginEndPercent" format="string"/>
 
+        <!-- 文字高度 -->
         <attr name="layout_textSizePercent" format="string"/>
 
+        <!-- 最大，最小宽度/高度 -->
         <attr name="layout_maxWidthPercent" format="string"/>
         <attr name="layout_maxHeightPercent" format="string"/>
         <attr name="layout_minWidthPercent" format="string"/>
         <attr name="layout_minHeightPercent" format="string"/>
 
+        <!-- 内间距 -->
         <attr name="layout_paddingPercent" format="string"/>
         <attr name="layout_paddingTopPercent" format="string"/>
         <attr name="layout_paddingBottomPercent" format="string"/>

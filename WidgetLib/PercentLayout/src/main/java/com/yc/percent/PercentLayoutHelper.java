@@ -1,4 +1,4 @@
-package com.yc.percent.zhy;
+package com.yc.percent;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -67,46 +67,49 @@ public class PercentLayoutHelper {
                     + View.MeasureSpec.toString(widthMeasureSpec) + " heightMeasureSpec: "
                     + View.MeasureSpec.toString(heightMeasureSpec));
         }
+        //获取父容器的尺寸
         int widthHint = View.MeasureSpec.getSize(widthMeasureSpec);
         int heightHint = View.MeasureSpec.getSize(heightMeasureSpec);
 
         if (Log.isLoggable(TAG, Log.DEBUG))
             Log.d(TAG, "widthHint = " + widthHint + " , heightHint = " + heightHint);
 
+        //获取孩子控件，然后遍历
         for (int i = 0, N = mHost.getChildCount(); i < N; i++) {
             View view = mHost.getChildAt(i);
             ViewGroup.LayoutParams params = view.getLayoutParams();
-
             if (Log.isLoggable(TAG, Log.DEBUG)) {
                 Log.d(TAG, "should adjust " + view + " " + params);
             }
-
+            //判断是否是自定义百分比布局属性
             if (params instanceof PercentLayoutParams) {
-                PercentLayoutInfo info =
-                        ((PercentLayoutParams) params).getPercentLayoutInfo();
+                //获取自定义属性
+                PercentLayoutInfo info = ((PercentLayoutParams) params).getPercentLayoutInfo();
                 if (Log.isLoggable(TAG, Log.DEBUG)) {
                     Log.d(TAG, "using " + info);
                 }
                 if (info != null) {
+                    //计算百分比属性
+                    //设置文本的属性
                     supportTextSize(widthHint, heightHint, view, info);
+                    //设置内间距
                     supportPadding(widthHint, heightHint, view, info);
+                    //设置最大最小宽高的属性
                     supportMinOrMaxDimesion(widthHint, heightHint, view, info);
-
+                    //设置宽和高属性
                     if (params instanceof ViewGroup.MarginLayoutParams) {
-                        info.fillMarginLayoutParams((ViewGroup.MarginLayoutParams) params,
-                                widthHint, heightHint);
+                        info.fillMarginLayoutParams((ViewGroup.MarginLayoutParams) params, widthHint, heightHint);
                     } else {
                         info.fillLayoutParams(params, widthHint, heightHint);
                     }
                 }
             }
         }
-
-
     }
 
     private void supportPadding(int widthHint, int heightHint, View view, PercentLayoutInfo info) {
-        int left = view.getPaddingLeft(), right = view.getPaddingRight(), top = view.getPaddingTop(), bottom = view.getPaddingBottom();
+        int left = view.getPaddingLeft(), right = view.getPaddingRight(),
+                top = view.getPaddingTop(), bottom = view.getPaddingBottom();
         PercentLayoutInfo.PercentVal percentVal = info.paddingLeftPercent;
         if (percentVal != null) {
             int base = getBaseByModeAndVal(widthHint, heightHint, percentVal.basemode);
@@ -130,8 +133,6 @@ public class PercentLayoutHelper {
             bottom = (int) (base * percentVal.percent);
         }
         view.setPadding(left, top, right, bottom);
-
-
     }
 
     private void supportMinOrMaxDimesion(int widthHint, int heightHint, View view, PercentLayoutInfo info) {
@@ -152,7 +153,9 @@ public class PercentLayoutHelper {
 
     }
 
-    private void invokeMethod(String methodName, int widthHint, int heightHint, View view, Class clazz, PercentLayoutInfo.PercentVal percentVal) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    private void invokeMethod(String methodName, int widthHint, int heightHint, View view,
+                              Class clazz, PercentLayoutInfo.PercentVal percentVal)
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         if (Log.isLoggable(TAG, Log.DEBUG))
             Log.d(TAG, methodName + " ==> " + percentVal);
         if (percentVal != null) {
@@ -194,6 +197,7 @@ public class PercentLayoutHelper {
 
 
     /**
+     * 这一步是解析资源自定义属性
      * Constructs a PercentLayoutInfo from attributes associated with a View. Call this method from
      * {@code LayoutParams(Context c, AttributeSet attrs)} constructor.
      */
@@ -490,8 +494,7 @@ public class PercentLayoutHelper {
                 Log.d(TAG, "should restore " + view + " " + params);
             }
             if (params instanceof PercentLayoutParams) {
-                PercentLayoutInfo info =
-                        ((PercentLayoutParams) params).getPercentLayoutInfo();
+                PercentLayoutInfo info = ((PercentLayoutParams) params).getPercentLayoutInfo();
                 if (Log.isLoggable(TAG, Log.DEBUG)) {
                     Log.d(TAG, "using " + info);
                 }
@@ -507,6 +510,7 @@ public class PercentLayoutHelper {
     }
 
     /**
+     * 遍历子节点，并检查它们中是否有任何一个希望获得比通过百分比维度接收到的更多的空间。
      * Iterates over children and checks if any of them would like to get more space than it
      * received through the percentage dimension.
      * <p/>
@@ -529,8 +533,7 @@ public class PercentLayoutHelper {
                 Log.d(TAG, "should handle measured state too small " + view + " " + params);
             }
             if (params instanceof PercentLayoutParams) {
-                PercentLayoutInfo info =
-                        ((PercentLayoutParams) params).getPercentLayoutInfo();
+                PercentLayoutInfo info = ((PercentLayoutParams) params).getPercentLayoutInfo();
                 if (info != null) {
                     if (shouldHandleMeasuredWidthTooSmall(view, info)) {
                         needsSecondMeasure = true;
