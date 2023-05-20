@@ -15,6 +15,7 @@ import com.yc.monitorspeed.ConnectionActivity;
 import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toollib.crash.CrashListActivity;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.click.PerfectClickListener;
 
 public class MonitorMainActivity extends BaseActivity {
@@ -27,7 +28,7 @@ public class MonitorMainActivity extends BaseActivity {
     private RoundTextView tvNetSpeed;
     private RoundTextView tvApmTest;
     private RoundTextView tvNetHttp;
-
+    private int count = 0 ;
     @Override
     public int getContentView() {
         return R.layout.activity_monitor_main;
@@ -104,7 +105,15 @@ public class MonitorMainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        for (int i=0 ; i<1000 ; i++){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    count++;
+                    AppLogUtils.d("count data is " + count);
+                }
+            }).start();
+        }
     }
 
 

@@ -4,11 +4,11 @@ import android.app.Application;
 
 import com.apm.yc.ApmMonitorHelper;
 import com.apm.yc.MonitorListener;
-import com.apm.yc.bean.CPURate;
 import com.apm.yc.bean.FlowBean;
 import com.apm.yc.bean.Memory;
 import com.apm.yc.bean.SDCard;
 import com.apm.yc.bean.Version;
+import com.yc.cpu.CpuRateBean;
 import com.yc.monitortimelib.OnMonitorListener;
 import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.netlib.utils.NetworkTool;
@@ -71,7 +71,7 @@ public class MonitorApplication extends Application {
     private void initApm() {
         ApmMonitorHelper.getInstance().init(this, new MonitorListener() {
             @Override
-            public void onSystem(long cosTime, CPURate cpuRate, Memory memory, SDCard sdCard,
+            public void onSystem(long cosTime, CpuRateBean cpuRate, Memory memory, SDCard sdCard,
                                  Version version,
                                  FlowBean flow, FlowBean flowApp) {
                 AppLogUtils.v("ApmMonitorHelper", "系统上报-耗费时间：" + cosTime);
@@ -83,7 +83,7 @@ public class MonitorApplication extends Application {
             }
 
             @Override
-            public void onFluent(long cos, String stackMsg) {
+            public void onBlock(long cos, String stackMsg) {
                 AppLogUtils.v("ApmMonitorHelper", "检测卡顿-耗时：" + cos + " 卡顿位置:" + stackMsg);
             }
 
@@ -95,7 +95,7 @@ public class MonitorApplication extends Application {
         });
         ApmMonitorHelper.getInstance().getSystem().setDuration(60 * 1000);
         ApmMonitorHelper.getInstance().getLeaks().setOpen(true);
-        ApmMonitorHelper.getInstance().getFluent().setMonitorTime(2000);
+        ApmMonitorHelper.getInstance().getBlock().setMonitorTime(2000);
         ApmMonitorHelper.getInstance().begin();
     }
 

@@ -105,7 +105,7 @@
             android:background="#ff0300"
             android:gravity="center"
             app:layout_heightPercent="50%h"
-            app:layout_widthPercent="10%w"/>
+            app:layout_widthPercent="20%w"/>
     </com.yc.percent.PercentLinearLayout>
 
     <com.yc.percent.PercentLinearLayout
@@ -128,7 +128,7 @@
             android:background="#ff0300"
             android:gravity="center"
             app:layout_heightPercent="50%h"
-            app:layout_widthPercent="10%w"/>
+            app:layout_widthPercent="20%w"/>
     </com.yc.percent.PercentLinearLayout>
 
 </LinearLayout>

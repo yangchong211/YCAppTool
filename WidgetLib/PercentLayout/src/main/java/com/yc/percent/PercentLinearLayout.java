@@ -57,7 +57,6 @@ public class PercentLinearLayout extends LinearLayout {
         //将子类的param的属性更改为百分比属性，必须在super.onMeasure之前调用，保证super.onMeasure能正常修改参数
         mPercentLayoutHelper.adjustChildren(tmpWidthMeasureSpec, tmpHeightMeasureSpec);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        //
         if (mPercentLayoutHelper.handleMeasuredStateTooSmall()) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }

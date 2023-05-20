@@ -48,6 +48,7 @@ public class PercentLayoutHelper {
     }
 
     /**
+     * 迭代子元素并将其宽度和高度更改为根据百分比值计算的值。
      * Iterates over children and changes their width and height to one calculated from percentage
      * values.
      *
@@ -68,8 +69,19 @@ public class PercentLayoutHelper {
             Log.d(TAG, "widthHint = " + widthHint + " , heightHint = " + heightHint);
         }
 
+        for (int j=0 ; j<mHost.getChildCount() ;  j++){
+            View view = mHost.getChildAt(j);
+            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+            if (layoutParams instanceof PercentLayoutParams){
+                PercentLayoutInfo percentLayoutInfo = ((PercentLayoutParams) layoutParams).getPercentLayoutInfo();
+                if (percentLayoutInfo != null){
+                    //解析xml数据，
+                }
+            }
+        }
+
         //获取孩子控件，然后遍历
-        for (int i = 0, N = mHost.getChildCount(); i < N; i++) {
+        for (int i = 0 ; i < mHost.getChildCount(); i++) {
             View view = mHost.getChildAt(i);
             ViewGroup.LayoutParams params = view.getLayoutParams();
             if (Log.isLoggable(TAG, Log.DEBUG)) {
@@ -104,7 +116,7 @@ public class PercentLayoutHelper {
     private void supportPadding(int widthHint, int heightHint, View view, PercentLayoutInfo info) {
         int left = view.getPaddingLeft(), right = view.getPaddingRight(),
                 top = view.getPaddingTop(), bottom = view.getPaddingBottom();
-        PercentLayoutInfo.PercentVal percentVal = info.paddingLeftPercent;
+        PercentVal percentVal = info.paddingLeftPercent;
         if (percentVal != null) {
             int base = getBaseByModeAndVal(widthHint, heightHint, percentVal.basemode);
             left = (int) (base * percentVal.percent);
@@ -148,7 +160,7 @@ public class PercentLayoutHelper {
     }
 
     private void invokeMethod(String methodName, int widthHint, int heightHint, View view,
-                              Class clazz, PercentLayoutInfo.PercentVal percentVal)
+                              Class clazz, PercentVal percentVal)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         if (Log.isLoggable(TAG, Log.DEBUG))
             Log.d(TAG, methodName + " ==> " + percentVal);
@@ -162,27 +174,30 @@ public class PercentLayoutHelper {
 
     private void supportTextSize(int widthHint, int heightHint, View view, PercentLayoutInfo info) {
         //textsize percent support
-
-        PercentLayoutInfo.PercentVal textSizePercent = info.textSizePercent;
-        if (textSizePercent == null) return;
-
+        PercentVal textSizePercent = info.textSizePercent;
+        if (textSizePercent == null) {
+            return;
+        }
         int base = getBaseByModeAndVal(widthHint, heightHint, textSizePercent.basemode);
         float textSize = (int) (base * textSizePercent.percent);
-
         //Button 和 EditText 是TextView的子类
         if (view instanceof TextView) {
             ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         }
     }
 
-    private static int getBaseByModeAndVal(int widthHint, int heightHint, PercentLayoutInfo.BASEMODE basemode) {
+    private static int getBaseByModeAndVal(int widthHint, int heightHint, PercentBaseMode basemode) {
         switch (basemode) {
+                //容器高度
             case BASE_HEIGHT:
                 return heightHint;
+                //容器宽度
             case BASE_WIDTH:
                 return widthHint;
+                //屏幕宽度
             case BASE_SCREEN_WIDTH:
                 return mWidthScreen;
+                //屏幕高度
             case BASE_SCREEN_HEIGHT:
                 return mHeightScreen;
         }
@@ -191,6 +206,7 @@ public class PercentLayoutHelper {
 
 
     /**
+     * 遍历子节点并恢复为百分比值更改的原始维度。调用此方法只有在之前调用过的情况下才有意义
      * Iterates over children and restores their original dimensions that were changed for
      * percentage values. Calling this method only makes sense if you previously called
      * {@link PercentLayoutHelper#adjustChildren(int, int)}.
@@ -268,55 +284,7 @@ public class PercentLayoutHelper {
      * for {@code LayoutParams}.
      */
     public static class PercentLayoutInfo {
-
-        enum BASEMODE {
-
-            BASE_WIDTH, BASE_HEIGHT, BASE_SCREEN_WIDTH, BASE_SCREEN_HEIGHT;
-
-            /**
-             * width_parent
-             */
-            public static final String PERCENT = "%";
-            /**
-             * width_parent
-             */
-            public static final String W = "w";
-            /**
-             * height_parent
-             */
-            public static final String H = "h";
-            /**
-             * width_screen
-             */
-            public static final String SW = "sw";
-            /**
-             * height_screen
-             */
-            public static final String SH = "sh";
-        }
-
-        public static class PercentVal {
-
-            public float percent = -1;
-            public BASEMODE basemode;
-
-            public PercentVal() {
-            }
-
-            public PercentVal(float percent, BASEMODE baseMode) {
-                this.percent = percent;
-                this.basemode = baseMode;
-            }
-
-            @Override
-            public String toString() {
-                return "PercentVal{" +
-                        "percent=" + percent +
-                        ", basemode=" + basemode.name() +
-                        '}';
-            }
-        }
-
+        
         public PercentVal widthPercent;
         public PercentVal heightPercent;
 
@@ -340,10 +308,7 @@ public class PercentLayoutHelper {
         public PercentVal paddingRightPercent;
         public PercentVal paddingTopPercent;
         public PercentVal paddingBottomPercent;
-
-
-        /* package */ final ViewGroup.MarginLayoutParams mPreservedParams;
-
+        final ViewGroup.MarginLayoutParams mPreservedParams;
 
         public PercentLayoutInfo() {
             mPreservedParams = new ViewGroup.MarginLayoutParams(0, 0);
@@ -355,6 +320,7 @@ public class PercentLayoutHelper {
         public void fillLayoutParams(ViewGroup.LayoutParams params, int widthHint,
                                      int heightHint) {
             // Preserve the original layout params, so we can restore them after the measure step.
+            // 保留原始的布局参数，以便我们可以在测量步骤后恢复它们。
             mPreservedParams.width = params.width;
             mPreservedParams.height = params.height;
 
@@ -406,6 +372,7 @@ public class PercentLayoutHelper {
                 int base = getBaseByModeAndVal(widthHint, heightHint, bottomMarginPercent.basemode);
                 params.bottomMargin = (int) (base * bottomMarginPercent.percent);
             }
+
             if (startMarginPercent != null) {
                 int base = getBaseByModeAndVal(widthHint, heightHint, startMarginPercent.basemode);
                 MarginLayoutParamsCompat.setMarginStart(params,

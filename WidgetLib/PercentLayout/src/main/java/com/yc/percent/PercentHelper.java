@@ -40,7 +40,7 @@ public class PercentHelper {
     }
 
     private static PercentLayoutHelper.PercentLayoutInfo setWidthAndHeightVal(TypedArray array, PercentLayoutHelper.PercentLayoutInfo info) {
-        PercentLayoutHelper.PercentLayoutInfo.PercentVal percentVal = getPercentVal(array, R.styleable.PercentLayout_Layout_layout_widthPercent, true);
+        PercentVal percentVal = getPercentVal(array, R.styleable.PercentLayout_Layout_layout_widthPercent, true);
         if (percentVal != null) {
             if (Log.isLoggable(TAG, Log.VERBOSE)) {
                 Log.v(TAG, "percent width: " + percentVal.percent);
@@ -64,7 +64,7 @@ public class PercentHelper {
 
     private static PercentLayoutHelper.PercentLayoutInfo setMarginRelatedVal(TypedArray array, PercentLayoutHelper.PercentLayoutInfo info) {
         //默认margin参考宽度
-        PercentLayoutHelper.PercentLayoutInfo.PercentVal percentVal =
+        PercentVal percentVal =
                 getPercentVal(array,
                         R.styleable.PercentLayout_Layout_layout_marginPercent,
                         true);
@@ -139,7 +139,7 @@ public class PercentHelper {
 
     private static PercentLayoutHelper.PercentLayoutInfo setTextSizeSupportVal(TypedArray array, PercentLayoutHelper.PercentLayoutInfo info) {
         //textSizePercent 默认以高度作为基准
-        PercentLayoutHelper.PercentLayoutInfo.PercentVal percentVal = getPercentVal(array, R.styleable.PercentLayout_Layout_layout_textSizePercent, false);
+        PercentVal percentVal = getPercentVal(array, R.styleable.PercentLayout_Layout_layout_textSizePercent, false);
         if (percentVal != null) {
             if (Log.isLoggable(TAG, Log.VERBOSE)) {
                 Log.v(TAG, "percent text size: " + percentVal.percent);
@@ -154,7 +154,7 @@ public class PercentHelper {
 
     private static PercentLayoutHelper.PercentLayoutInfo setMinMaxWidthHeightRelatedVal(TypedArray array, PercentLayoutHelper.PercentLayoutInfo info) {
         //maxWidth
-        PercentLayoutHelper.PercentLayoutInfo.PercentVal percentVal = getPercentVal(array,
+        PercentVal percentVal = getPercentVal(array,
                 R.styleable.PercentLayout_Layout_layout_maxWidthPercent, true);
         if (percentVal != null) {
             info = checkForInfoExists(info);
@@ -186,7 +186,6 @@ public class PercentHelper {
     }
 
 
-
     /**
      * 设置paddingPercent相关属性
      *
@@ -195,7 +194,7 @@ public class PercentHelper {
      */
     private static PercentLayoutHelper.PercentLayoutInfo setPaddingRelatedVal(TypedArray array, PercentLayoutHelper.PercentLayoutInfo info) {
         //默认padding以宽度为标准
-        PercentLayoutHelper.PercentLayoutInfo.PercentVal percentVal = getPercentVal(array,
+        PercentVal percentVal = getPercentVal(array,
                 R.styleable.PercentLayout_Layout_layout_paddingPercent,
                 true);
         if (percentVal != null) {
@@ -242,9 +241,9 @@ public class PercentHelper {
         return info;
     }
 
-    private static PercentLayoutHelper.PercentLayoutInfo.PercentVal getPercentVal(TypedArray array, int index, boolean baseWidth) {
+    private static PercentVal getPercentVal(TypedArray array, int index, boolean baseWidth) {
         String sizeStr = array.getString(index);
-        PercentLayoutHelper.PercentLayoutInfo.PercentVal percentVal = PercentHelper.getPercentVal(sizeStr, baseWidth);
+        PercentVal percentVal = PercentHelper.getPercentVal(sizeStr, baseWidth);
         return percentVal;
     }
 
@@ -263,7 +262,7 @@ public class PercentHelper {
      * @param isOnWidth
      * @return
      */
-    static PercentLayoutHelper.PercentLayoutInfo.PercentVal getPercentVal(String percentStr, boolean isOnWidth) {
+    private static PercentVal getPercentVal(String percentStr, boolean isOnWidth) {
         //valid param
         if (percentStr == null) {
             return null;
@@ -280,22 +279,22 @@ public class PercentHelper {
 
         float percent = Float.parseFloat(floatVal) / 100f;
 
-        PercentLayoutHelper.PercentLayoutInfo.PercentVal percentVal = new PercentLayoutHelper.PercentLayoutInfo.PercentVal();
+        PercentVal percentVal = new PercentVal();
         percentVal.percent = percent;
-        if (percentStr.endsWith(PercentLayoutHelper.PercentLayoutInfo.BASEMODE.SW)) {
-            percentVal.basemode = PercentLayoutHelper.PercentLayoutInfo.BASEMODE.BASE_SCREEN_WIDTH;
-        } else if (percentStr.endsWith(PercentLayoutHelper.PercentLayoutInfo.BASEMODE.SH)) {
-            percentVal.basemode = PercentLayoutHelper.PercentLayoutInfo.BASEMODE.BASE_SCREEN_HEIGHT;
-        } else if (percentStr.endsWith(PercentLayoutHelper.PercentLayoutInfo.BASEMODE.PERCENT)) {
+        if (percentStr.endsWith(PercentBaseMode.SW)) {
+            percentVal.basemode = PercentBaseMode.BASE_SCREEN_WIDTH;
+        } else if (percentStr.endsWith(PercentBaseMode.SH)) {
+            percentVal.basemode = PercentBaseMode.BASE_SCREEN_HEIGHT;
+        } else if (percentStr.endsWith(PercentBaseMode.PERCENT)) {
             if (isOnWidth) {
-                percentVal.basemode = PercentLayoutHelper.PercentLayoutInfo.BASEMODE.BASE_WIDTH;
+                percentVal.basemode = PercentBaseMode.BASE_WIDTH;
             } else {
-                percentVal.basemode = PercentLayoutHelper.PercentLayoutInfo.BASEMODE.BASE_HEIGHT;
+                percentVal.basemode = PercentBaseMode.BASE_HEIGHT;
             }
-        } else if (percentStr.endsWith(PercentLayoutHelper.PercentLayoutInfo.BASEMODE.W)) {
-            percentVal.basemode = PercentLayoutHelper.PercentLayoutInfo.BASEMODE.BASE_WIDTH;
-        } else if (percentStr.endsWith(PercentLayoutHelper.PercentLayoutInfo.BASEMODE.H)) {
-            percentVal.basemode = PercentLayoutHelper.PercentLayoutInfo.BASEMODE.BASE_HEIGHT;
+        } else if (percentStr.endsWith(PercentBaseMode.W)) {
+            percentVal.basemode = PercentBaseMode.BASE_WIDTH;
+        } else if (percentStr.endsWith(PercentBaseMode.H)) {
+            percentVal.basemode = PercentBaseMode.BASE_HEIGHT;
         } else {
             throw new IllegalArgumentException("the " + percentStr + " must be endWith [%|w|h|sw|sh]");
         }
@@ -320,7 +319,6 @@ public class PercentHelper {
         return state == ViewCompat.MEASURED_STATE_TOO_SMALL && info.heightPercent.percent >= 0 &&
                 info.mPreservedParams.height == ViewGroup.LayoutParams.WRAP_CONTENT;
     }
-
 
 
 }

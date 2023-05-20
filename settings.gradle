@@ -71,7 +71,7 @@ include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager', ':AppCompress',
         ':ArchitectureLib', ':ActivityManager', ':ToolFileLib', ':EventUploadLib',
         ':AppCommonInter', ':ToolMemoryLib', ':AppPermission', ':PhoneSensor',
         ':AppLruDisk', ':AppLruCache', ':DownloadHelper', ':AppEncryptLib',
-        ':AppMediaStore', ':DataCloneLib', ':AppScreenLib', ':BaseVpAdapter', ':ImageToolLib',
+        ':AppMediaStore',  ':AppScreenLib', ':BaseVpAdapter', ':ImageToolLib',
         ':AppHandlerLib', ':FileIoHelper', ':ZipFileLib', ':NetWorkLib', ':AppContextLib',
         ':AppWiFiLib', ':UriAndUrlLib', ':AppGrayLib', ':AppCallStatus', ':AppFastSp', ':ZipFileLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
@@ -99,7 +99,6 @@ project(':AppLruCache').projectDir = new File('CommonLib/AppLruCache')
 project(':DownloadHelper').projectDir = new File('CommonLib/DownloadHelper')
 project(':AppEncryptLib').projectDir = new File('CommonLib/AppEncryptLib')
 project(':AppMediaStore').projectDir = new File('CommonLib/AppMediaStore')
-project(':DataCloneLib').projectDir = new File('CommonLib/DataCloneLib')
 project(':AppScreenLib').projectDir = new File('CommonLib/AppScreenLib')
 project(':BaseVpAdapter').projectDir = new File('CommonLib/BaseVpAdapter')
 project(':ImageToolLib').projectDir = new File('CommonLib/ImageToolLib')
@@ -221,15 +220,14 @@ project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 //project(':AppInitCommon').projectDir = new File('AptHelper/AppInitCommon')
 //project(':AppInitCompiler').projectDir = new File('AptHelper/AppInitCompiler')
 
-
 /* +++++++++ App监控库 +++++++++ */
-include ':MonitorAliveLib', ':MonitorCatonLib', ':MonitorAnrLib', ':MonitorCrashLib',
+include ':MonitorCpuLib', ':MonitorCatonLib', ':MonitorAnrLib', ':MonitorCrashLib',
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
-        ':MonitorXposed', ':MonitorMemory',
+        ':MonitorXposed', ':MonitorMemory',':MonitorLeakLib',
         ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',
         ':MonitorPrivacy', ':MonitorTimeLib', ':MonitorSpeed', ':MonitorInterceptor',
         ':MonitorPhone', ':MonitorPicture'
-project(':MonitorAliveLib').projectDir = new File('MonitorLib/MonitorAliveLib')
+project(':MonitorCpuLib').projectDir = new File('MonitorLib/MonitorCpuLib')
 project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
 project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
 project(':MonitorCrashLib').projectDir = new File('MonitorLib/MonitorCrashLib')
@@ -248,6 +246,8 @@ project(':MonitorInterceptor').projectDir = new File('MonitorLib/MonitorIntercep
 project(':MonitorMemory').projectDir = new File('MonitorLib/MonitorMemory')
 project(':MonitorPhone').projectDir = new File('MonitorLib/MonitorPhone')
 project(':MonitorPicture').projectDir = new File('MonitorLib/MonitorPicture')
+project(':MonitorLeakLib').projectDir = new File('MonitorLib/MonitorLeakLib')
+
 
 
 /* +++++++++ 音视频 +++++++++ */
