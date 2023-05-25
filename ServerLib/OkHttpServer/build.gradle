@@ -28,8 +28,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(path: ':OkHttpLib')
-    //implementation(rootProject.ext.dependencies["okhttp"])
+    //implementation project(path: ':OkHttpLib')
+    implementation(rootProject.ext.dependencies["okhttp"])
     implementation(rootProject.ext.dependencies["lifecycleRuntime"])
 }
 

@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".ToolMainActivity">
+        <activity android:name="com.yc.keyeventlib.KeyCodeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

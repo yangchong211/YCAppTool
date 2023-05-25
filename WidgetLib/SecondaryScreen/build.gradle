@@ -14,6 +14,7 @@ android {
         versionName rootProject.ext.android["versionName"]
     }
 
+
     buildTypes {
         release {
             minifyEnabled false
@@ -30,4 +31,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
+
 }

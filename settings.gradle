@@ -124,7 +124,7 @@ include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':EastAdapterLib', ':PhotoCoverLib', ':RefreshViewLib', ':SelectViewLib',
         ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib',
         ':FloatWindow', ':AppTextView', ':AppImageView', ':PercentLayout', ':AppScrollView',
-        ':AppSwitchView', ':AppEditText', ':AppConstraintLayout', ':AppLoadingLib',
+        ':AppSwitchView', ':AppEditText', ':SecondaryScreen',
         ':RedDotView', ':ExpandLib', ':AppChartView', ':AppShadowLib', ':AppCoordinatorLayout'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
@@ -160,8 +160,7 @@ project(':PercentLayout').projectDir = new File('WidgetLib/PercentLayout')
 project(':AppScrollView').projectDir = new File('WidgetLib/AppScrollView')
 project(':AppSwitchView').projectDir = new File('WidgetLib/AppSwitchView')
 project(':AppEditText').projectDir = new File('WidgetLib/AppEditText')
-project(':AppConstraintLayout').projectDir = new File('WidgetLib/AppConstraintLayout')
-project(':AppLoadingLib').projectDir = new File('WidgetLib/AppLoadingLib')
+project(':SecondaryScreen').projectDir = new File('WidgetLib/SecondaryScreen')
 project(':RedDotView').projectDir = new File('WidgetLib/RedDotView')
 project(':ExpandLib').projectDir = new File('WidgetLib/ExpandLib')
 project(':AppChartView').projectDir = new File('WidgetLib/AppChartView')
@@ -173,7 +172,7 @@ project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinator
 include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib',
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
-        ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',
+        ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
@@ -181,6 +180,7 @@ project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
 project(':SerialTaskLib').projectDir = new File('ToolLib/SerialTaskLib')
+project(':KeyEventLib').projectDir = new File('ToolLib/KeyEventLib')
 project(':LocaleHelperLib').projectDir = new File('ToolLib/LocaleHelperLib')
 project(':CountTimerLib').projectDir = new File('ToolLib/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('ToolLib/AnimatorToolLib')
@@ -297,4 +297,3 @@ project(':EventbusAndroid').projectDir = new File('ThirdLib/EventbusAndroid')
 project(':EventBus').projectDir = new File('ThirdLib/EventBus')
 //OkHttp
 project(':OkHttpLib').projectDir = new File('ThirdLib/OkHttpLib')
-
