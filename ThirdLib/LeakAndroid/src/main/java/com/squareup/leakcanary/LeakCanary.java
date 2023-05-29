@@ -25,7 +25,6 @@ import android.util.Log;
 import com.squareup.leakcanary.internal.DisplayLeakActivity;
 import com.squareup.leakcanary.internal.HeapAnalyzerService;
 import com.squareup.leakcanary.internal.LeakCanaryInternals;
-import static com.squareup.leakcanary.BuildConfig.GIT_SHA;
 import static android.text.format.Formatter.formatShortFileSize;
 import static com.squareup.leakcanary.internal.LeakCanaryInternals.isInServiceProcess;
 
@@ -124,7 +123,7 @@ public final class LeakCanary {
     } else if (result.failure != null) {
       // We duplicate the library version & Sha information because bug reports often only contain
       // the stacktrace.
-      info += "* FAILURE in " + " " + GIT_SHA + ":" + Log.getStackTraceString(
+      info += "* FAILURE in " + " " + Log.getStackTraceString(
           result.failure) + "\n";
     } else {
       info += "* NO LEAK FOUND.\n\n";
@@ -150,8 +149,6 @@ public final class LeakCanary {
         + " API: "
         + Build.VERSION.SDK_INT
         + " LeakCanary: "
-        + " "
-        + GIT_SHA
         + "\n"
         + "* Durations: watch="
         + heapDump.watchDurationMs

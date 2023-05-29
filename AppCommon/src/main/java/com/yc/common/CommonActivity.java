@@ -27,6 +27,7 @@ import com.yc.common.cache.CacheActivity;
 import com.yc.common.encypt.EncyptActivity;
 import com.yc.common.file.FileActivity;
 import com.yc.common.image.ImageActivity;
+import com.yc.common.net.NetWorkActivity;
 import com.yc.common.reflect.ReflectionActivity;
 import com.yc.common.tab.VpTabActivity;
 import com.yc.common.vp.ViewPagerActivity;
@@ -35,15 +36,11 @@ import com.yc.fragmentmanager.FragmentLifecycleListener;
 import com.yc.fragmentmanager.FragmentManager;
 import com.yc.intent.log.IntentLogger;
 import com.yc.monitorfilelib.FileExplorerActivity;
-import com.yc.store.BaseDataCache;
-import com.yc.store.StoreToolHelper;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.AppActivityUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppInfoUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CommonActivity extends AppCompatActivity implements View.OnClickListener {
@@ -154,6 +151,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         }  else if (id == R.id.btn_sp1) {
             startActivity(new Intent(this, CacheActivity.class));
         }  else if (id == R.id.btn_sp2) {
+            startActivity(new Intent(this, NetWorkActivity.class));
         }  else if (id == R.id.btn_sp3) {
             FileExplorerActivity.startActivity(this);
         }  else if (id == R.id.btn_sp4) {

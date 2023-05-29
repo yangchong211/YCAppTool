@@ -64,6 +64,7 @@ public final class AppNetworkUtils {
 
     /**
      * 判断网络是否连接
+     * 如果该连接的网络无法上网，也会返回true
      * <p>需添加权限
      * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
      *
@@ -74,6 +75,15 @@ public final class AppNetworkUtils {
         return info != null && info.isConnected();
     }
 
+
+    /**
+     * 返回网络状态
+     * @return
+     */
+    public static boolean isAvailable() {
+        NetworkInfo info = getActiveNetworkInfo();
+        return info != null && info.isAvailable();
+    }
 
     /**
      * 判断移动数据是否打开
@@ -152,44 +162,6 @@ public final class AppNetworkUtils {
     }
 
     /**
-     * 判断 wifi 是否打开
-     * <p>需添加权限
-     * {@code <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />}</p>
-     *
-     * @return {@code true}: 是<br>{@code false}: 否
-     */
-    public static boolean getWifiEnabled() {
-        @SuppressLint("WifiManagerLeak")
-        WifiManager manager = (WifiManager) AppToolUtils.getApp().getSystemService(Context.WIFI_SERVICE);
-        return manager != null && manager.isWifiEnabled();
-    }
-
-    /**
-     * 打开或关闭 wifi
-     * <p>需添加权限
-     * {@code <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />}</p>
-     *
-     * @param enabled {@code true}: 打开<br>{@code false}: 关闭
-     */
-    @SuppressLint("MissingPermission")
-    public static void setWifiEnabled(final boolean enabled) {
-        @SuppressLint("WifiManagerLeak")
-        WifiManager manager = (WifiManager) AppToolUtils.getApp().getSystemService(Context.WIFI_SERVICE);
-        if (manager == null) {
-            return;
-        }
-        if (enabled) {
-            if (!manager.isWifiEnabled()) {
-                manager.setWifiEnabled(true);
-            }
-        } else {
-            if (manager.isWifiEnabled()) {
-                manager.setWifiEnabled(false);
-            }
-        }
-    }
-
-    /**
      * 判断 wifi 是否连接状态
      * <p>需添加权限
      * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
@@ -198,11 +170,9 @@ public final class AppNetworkUtils {
      */
     @SuppressLint("MissingPermission")
     public static boolean isWifiConnected() {
-        ConnectivityManager cm =
-                (ConnectivityManager) AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm != null
-                && cm.getActiveNetworkInfo() != null
-                && cm.getActiveNetworkInfo().getType() == ConnectivityManager.TYPE_WIFI;
+        NetworkInfo networkInfo = getActiveNetworkInfo();
+        return networkInfo != null
+                && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
     /**
@@ -240,12 +210,15 @@ public final class AppNetworkUtils {
         NetworkType netType = NetworkType.NETWORK_NO;
         NetworkInfo info = getActiveNetworkInfo();
         if (info != null && info.isAvailable()) {
-
             if (info.getType() == ConnectivityManager.TYPE_WIFI) {
+                //wifi
                 netType = NetworkType.NETWORK_WIFI;
+            } else if (info.getType() == ConnectivityManager.TYPE_ETHERNET){
+                // 以太网网络
+                netType = NetworkType.NETWORK_ETHERNET;
             } else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
                 switch (info.getSubtype()) {
-
+                    //如果是2g类型
                     case NETWORK_TYPE_GSM:
                     case TelephonyManager.NETWORK_TYPE_GPRS:
                     case TelephonyManager.NETWORK_TYPE_CDMA:
@@ -255,6 +228,7 @@ public final class AppNetworkUtils {
                         netType = NetworkType.NETWORK_2G;
                         break;
 
+                    //如果是3g类型
                     case NETWORK_TYPE_TD_SCDMA:
                     case TelephonyManager.NETWORK_TYPE_EVDO_A:
                     case TelephonyManager.NETWORK_TYPE_UMTS:
@@ -268,6 +242,7 @@ public final class AppNetworkUtils {
                         netType = NetworkType.NETWORK_3G;
                         break;
 
+                    //如果是4g类型
                     case NETWORK_TYPE_IWLAN:
                     case TelephonyManager.NETWORK_TYPE_LTE:
                         netType = NetworkType.NETWORK_4G;
@@ -289,220 +264,6 @@ public final class AppNetworkUtils {
             }
         }
         return netType;
-    }
-
-    /**
-     * 获取 IP 地址
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.INTERNET" />}</p>
-     *
-     * @param useIPv4 是否用 IPv4
-     * @return IP 地址
-     */
-    public static String getIPAddress(final boolean useIPv4) {
-        try {
-            for (Enumeration<NetworkInterface> nis =
-                 NetworkInterface.getNetworkInterfaces(); nis.hasMoreElements(); ) {
-                NetworkInterface ni = nis.nextElement();
-                // 防止小米手机返回 10.0.2.15
-                if (!ni.isUp()) {
-                    continue;
-                }
-                Enumeration<InetAddress> addresses = ni.getInetAddresses();
-                while (addresses.hasMoreElements()) {
-                    InetAddress inetAddress = addresses.nextElement();
-                    if (!inetAddress.isLoopbackAddress()) {
-                        String hostAddress = inetAddress.getHostAddress();
-                        boolean isIPv4 = hostAddress.indexOf(':') < 0;
-                        if (useIPv4) {
-                            if (isIPv4) {
-                                return hostAddress;
-                            }
-                        } else {
-                            if (!isIPv4) {
-                                int index = hostAddress.indexOf('%');
-                                return index < 0
-                                        ? hostAddress.toUpperCase()
-                                        : hostAddress.substring(0, index).toUpperCase();
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
-     * 获取域名 ip 地址
-     * <p>需添加权限 {@code <uses-permission android:name="android.permission.INTERNET" />}</p>
-     *
-     * @param domain 域名
-     * @return ip 地址
-     */
-    public static String getDomainAddress(final String domain) {
-        InetAddress inetAddress;
-        try {
-            inetAddress = InetAddress.getByName(domain);
-            return inetAddress.getHostAddress();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-
-    /**
-     * 判断设备 是否使用代理上网
-     * @param context                               上下文
-     * @return                                      设备是否链接代理
-     */
-    public static boolean isWifiProxy(Context context) {
-        // 是否大于等于4.0
-        final boolean IS_ICS_OR_LATER = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
-        String proxyAddress;
-        int proxyPort;
-        if (IS_ICS_OR_LATER) {
-            proxyAddress = System.getProperty("http.proxyHost");
-            String portStr = System.getProperty("http.proxyPort");
-            proxyPort = Integer.parseInt((portStr != null ? portStr : "-1"));
-        } else {
-            proxyAddress = android.net.Proxy.getHost(context);
-            proxyPort = android.net.Proxy.getPort(context);
-        }
-        return (!TextUtils.isEmpty(proxyAddress)) && (proxyPort != -1);
-    }
-
-    /**
-     * 获取wifi的强弱
-     * @return
-     */
-    public static String getWifiState(){
-        if (isWifiConnected()) {
-            WifiManager mWifiManager = (WifiManager) AppToolUtils.getApp().getApplicationContext()
-                    .getSystemService(Context.WIFI_SERVICE);
-            WifiInfo mWifiInfo = null;
-            if (mWifiManager != null) {
-                mWifiInfo = mWifiManager.getConnectionInfo();
-                int wifi = mWifiInfo.getRssi();
-                //获取wifi信号强度
-                if (wifi > -50 && wifi < 0) {
-                    //最强
-                    return "最强";
-                } else if (wifi > -70 && wifi < -50) {
-                    //较强
-                    return "较强";
-                } else if (wifi > -80 && wifi < -70) {
-                    //较弱
-                    return "较弱";
-                } else if (wifi > -100 && wifi < -80) {
-                    //微弱
-                    return "微弱";
-                } else {
-                    return "微弱";
-                }
-            }
-        }
-        return "无wifi连接";
-    }
-
-
-    /**
-     * 通过域名获取真实的ip地址 (此方法需要在线程中调用)
-     * @param domain                                host
-     * @return
-     */
-    public static String getHostIP(String domain) {
-        String ipAddress = "";
-        InetAddress iAddress = null;
-        try {
-            iAddress = InetAddress.getByName(domain);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        if (iAddress == null) {
-            ipAddress = "";
-        } else {
-            ipAddress = iAddress.getHostAddress();
-        }
-        return ipAddress;
-    }
-
-
-
-    /**
-     * 通过域名获取真实的ip地址 (此方法需要在线程中调用)
-     * @param domain                                host
-     * @return
-     */
-    public static String getHostName(String domain) {
-        String ipAddress = "";
-        InetAddress iAddress = null;
-        try {
-            iAddress = InetAddress.getByName(domain);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        if (iAddress == null) {
-            ipAddress = "";
-        } else {
-            ipAddress = iAddress.getHostName();
-        }
-        return ipAddress;
-    }
-
-
-    /**
-     * 获取wifi的名称
-     * @param context               上下文
-     * @return
-     */
-    public static String getWifiName(Context context){
-        WifiManager wifiManager = (WifiManager) context.getApplicationContext()
-                .getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wifiInfo = null;
-        if (wifiManager != null) {
-            wifiInfo = wifiManager.getConnectionInfo();
-            String ssid = wifiInfo.getSSID();
-            return ssid;
-        }
-        return "无网络";
-    }
-
-
-    /**
-     * 获取wifi的ip
-     * @param context               上下文
-     * @return
-     */
-    public static int getWifiIp(Context context){
-        WifiManager wifiManager = (WifiManager) context.getApplicationContext()
-                .getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wifiInfo = null;
-        if (wifiManager != null) {
-            wifiInfo = wifiManager.getConnectionInfo();
-            int ipAddress = wifiInfo.getIpAddress();
-            return ipAddress;
-        }
-        return -1;
-    }
-
-
-    /**
-     * 获取wifi的信息
-     * @param context                   上下文
-     * @return
-     */
-    public static WifiInfo getWifiInfo(Context context){
-        WifiManager wifiManager = (WifiManager) context.getApplicationContext()
-                .getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wifiInfo = null;
-        if (wifiManager != null) {
-            wifiInfo = wifiManager.getConnectionInfo();
-            return wifiInfo;
-        }
-        return null;
     }
 
 }

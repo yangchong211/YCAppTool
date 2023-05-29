@@ -11,6 +11,7 @@ import android.net.DhcpInfo;
 import android.net.Uri;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
@@ -36,10 +37,10 @@ import static android.os.Build.VERSION_CODES.P;
 
 public class WifiHelper {
 
-    private static final String TAG = "WifiUtils";
+    private static final String TAG = "NetWork-Wi-Fi";
 
     private WifiHelper() {
-
+        mContext = AppToolUtils.getApp();
     }
 
     public static WifiHelper getInstance() {
@@ -67,44 +68,49 @@ public class WifiHelper {
     private Context mContext;
 
     private WifiManager getWifiManager() {
-        mContext = AppToolUtils.getApp();
         if (mContext == null) {
             throw new RuntimeException("please init first");
         }
         if (wifiManager == null) {
-            wifiManager = (WifiManager) mContext.getApplicationContext().getSystemService(WIFI_SERVICE);
+            wifiManager = (WifiManager) mContext.getSystemService(WIFI_SERVICE);
         }
         return wifiManager;
     }
 
     private ConnectivityManager getConnectivityManager() {
-        mContext = AppToolUtils.getApp();
         if (mContext == null) {
             throw new RuntimeException("please init first");
         }
         if (connectivityManager == null) {
-            connectivityManager = (ConnectivityManager) mContext
-                    .getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         }
         return connectivityManager;
     }
 
     /**
-     * WiFi是否打开
+     * 判断 wifi 是否打开
+     * <p>需添加权限
+     * {@code <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />}</p>
+     *
+     * @return {@code true}: 是<br>{@code false}: 否
      */
     public boolean isWifiEnable() {
         return getWifiManager().isWifiEnabled();
     }
 
     /**
-     * 打开WiFi
+     * 打开 wifi
+     * <p>需添加权限
+     * {@code <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />}</p>
      */
     public void openWifi() {
         getWifiManager().setWifiEnabled(true);
     }
 
     /**
-     * 关闭WiFi
+     * 关闭 wifi
+     * <p>需添加权限
+     * {@code <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />}</p>
      */
     public void closeWifi() {
         getWifiManager().setWifiEnabled(false);
@@ -180,7 +186,8 @@ public class WifiHelper {
             stopTethering();
         } else {
             try {
-                Method method = getWifiManager().getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, boolean.class);
+                Method method = getWifiManager().getClass().getMethod("setWifiApEnabled",
+                        WifiConfiguration.class, boolean.class);
                 method.setAccessible(true);
                 method.invoke(getWifiManager(), null, false);
             } catch (Exception e) {
@@ -231,7 +238,8 @@ public class WifiHelper {
                 config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
                 config.status = WifiConfiguration.Status.ENABLED;
                 // 调用反射打开热点
-                Method method = getWifiManager().getClass().getMethod("setWifiApEnabled", WifiConfiguration.class, Boolean.TYPE);
+                Method method = getWifiManager().getClass().getMethod("setWifiApEnabled",
+                        WifiConfiguration.class, Boolean.TYPE);
                 // 返回热点打开状态
                 method.invoke(getWifiManager(), config, true);
             } catch (Exception e) {
@@ -280,11 +288,11 @@ public class WifiHelper {
      * @return 返回不含双引号的SSID
      */
     public String getSsid() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+        /*if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
             if (!isGrantedLocationPermission()) {
                 return "Version Android O+ get ssid need Location permission!";
             }
-        }
+        }*/
         String ssid = getWifiManager().getConnectionInfo().getSSID();
         if (TextUtils.isEmpty(ssid)) {
             return "";
@@ -296,11 +304,58 @@ public class WifiHelper {
     }
 
     /**
-     * @return 是否有位置权限
+     * 获取被连接网络的mac地址
+     * @return
      */
-    private boolean isGrantedLocationPermission() {
-        return ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION)
-                + ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == 0;
+    public String getBssid() {
+        String bSsid = getWifiManager().getConnectionInfo().getBSSID();
+        if (TextUtils.isEmpty(bSsid)) {
+            return "";
+        }
+        return bSsid;
+    }
+
+
+    /**
+     * 获取wifi的ip
+     * @return
+     */
+    public int getWifiIp(){
+        if (getWifiManager() != null) {
+            WifiInfo wifiInfo = getWifiManager().getConnectionInfo();
+            int ipAddress = wifiInfo.getIpAddress();
+            return ipAddress;
+        }
+        return -1;
+    }
+
+
+    /**
+     * 获取wifi的强弱
+     * @return
+     */
+    public String getWifiState(){
+        if (isWifiEnable()) {
+            WifiInfo mWifiInfo = getWifiManager().getConnectionInfo();
+            int wifi = mWifiInfo.getRssi();
+            //获取wifi信号强度
+            if (wifi > -50 && wifi < 0) {
+                //最强
+                return "最强";
+            } else if (wifi > -70 && wifi < -50) {
+                //较强
+                return "较强";
+            } else if (wifi > -80 && wifi < -70) {
+                //较弱
+                return "较弱";
+            } else if (wifi > -100 && wifi < -80) {
+                //微弱
+                return "微弱";
+            } else {
+                return "微弱";
+            }
+        }
+        return "无wifi连接";
     }
 
     /**
@@ -458,7 +513,7 @@ public class WifiHelper {
         }
     }
 
-    public boolean isRegisterWifiBroadcast() {
+    private boolean isRegisterWifiBroadcast() {
         return wifiReceiver != null;
     }
 

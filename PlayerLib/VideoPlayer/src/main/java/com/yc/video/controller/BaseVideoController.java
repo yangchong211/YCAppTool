@@ -31,6 +31,7 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.yc.networklib.AppNetworkUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.video.bridge.ControlWrapper;
 import com.yc.video.config.ConstantKeys;
@@ -40,7 +41,6 @@ import com.yc.video.inter.IVideoPlayer;
 import com.yc.video.player.VideoViewManager;
 import com.yc.video.player.VideoPlayer;
 import com.yc.video.tool.StatesCutoutUtils;
-import com.yc.video.tool.NetworkUtils;
 import com.yc.video.tool.PlayerUtils;
 import com.yc.video.inter.IControlView;
 import java.util.Iterator;
@@ -464,7 +464,7 @@ public abstract class BaseVideoController extends FrameLayout implements IVideoC
      * 此处默认根据手机网络类型来决定是否显示，开发者可以重写相关逻辑
      */
     public boolean showNetWarning() {
-        return NetworkUtils.getNetworkType(getContext()) == NetworkUtils.NETWORK_MOBILE
+        return AppNetworkUtils.isMobileData()
                 && !VideoViewManager.instance().playOnMobileNetwork();
     }
 

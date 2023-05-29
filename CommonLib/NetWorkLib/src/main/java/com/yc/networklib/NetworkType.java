@@ -12,6 +12,10 @@ package com.yc.networklib;
  */
 public enum NetworkType {
     /**
+     * 以太网
+     */
+    NETWORK_ETHERNET,
+    /**
      * wifi
      */
     NETWORK_WIFI,

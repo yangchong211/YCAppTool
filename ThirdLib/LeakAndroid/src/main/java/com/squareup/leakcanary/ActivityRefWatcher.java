@@ -18,7 +18,9 @@ package com.squareup.leakcanary;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+
 import androidx.annotation.NonNull;
+
 import com.squareup.leakcanary.internal.ActivityLifecycleCallbacksAdapter;
 
 /**
@@ -30,40 +32,41 @@ import com.squareup.leakcanary.internal.ActivityLifecycleCallbacksAdapter;
 @Deprecated
 public final class ActivityRefWatcher {
 
-  public static void installOnIcsPlus(@NonNull Application application,
-      @NonNull RefWatcher refWatcher) {
-    install(application, refWatcher);
-  }
+    public static void installOnIcsPlus(@NonNull Application application,
+                                        @NonNull RefWatcher refWatcher) {
+        install(application, refWatcher);
+    }
 
-  public static void install(@NonNull Context context, @NonNull RefWatcher refWatcher) {
-    Application application = (Application) context.getApplicationContext();
-    ActivityRefWatcher activityRefWatcher = new ActivityRefWatcher(application, refWatcher);
+    public static void install(@NonNull Context context, @NonNull RefWatcher refWatcher) {
+        Application application = (Application) context.getApplicationContext();
+        ActivityRefWatcher activityRefWatcher = new ActivityRefWatcher(application, refWatcher);
 
-    application.registerActivityLifecycleCallbacks(activityRefWatcher.lifecycleCallbacks);
-  }
+        application.registerActivityLifecycleCallbacks(activityRefWatcher.lifecycleCallbacks);
+    }
 
-  private final Application.ActivityLifecycleCallbacks lifecycleCallbacks =
-      new ActivityLifecycleCallbacksAdapter() {
-        @Override public void onActivityDestroyed(Activity activity) {
-          refWatcher.watch(activity);
-        }
-      };
+    private final Application.ActivityLifecycleCallbacks lifecycleCallbacks =
+            new ActivityLifecycleCallbacksAdapter() {
+                @Override
+                public void onActivityDestroyed(Activity activity) {
+                    refWatcher.watch(activity);
+                }
+            };
 
-  private final Application application;
-  private final RefWatcher refWatcher;
+    private final Application application;
+    private final RefWatcher refWatcher;
 
-  private ActivityRefWatcher(Application application, RefWatcher refWatcher) {
-    this.application = application;
-    this.refWatcher = refWatcher;
-  }
+    private ActivityRefWatcher(Application application, RefWatcher refWatcher) {
+        this.application = application;
+        this.refWatcher = refWatcher;
+    }
 
-  public void watchActivities() {
-    // Make sure you don't get installed twice.
-    stopWatchingActivities();
-    application.registerActivityLifecycleCallbacks(lifecycleCallbacks);
-  }
+    public void watchActivities() {
+        // Make sure you don't get installed twice.
+        stopWatchingActivities();
+        application.registerActivityLifecycleCallbacks(lifecycleCallbacks);
+    }
 
-  public void stopWatchingActivities() {
-    application.unregisterActivityLifecycleCallbacks(lifecycleCallbacks);
-  }
+    public void stopWatchingActivities() {
+        application.unregisterActivityLifecycleCallbacks(lifecycleCallbacks);
+    }
 }

@@ -78,7 +78,8 @@ public final class AppLeakHelper {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 if (activity instanceof FragmentActivity){
-                    FragmentManager.Companion.getInstance().registerActivityLifecycleListener(
+                    FragmentManager fragmentManager = FragmentManager.Companion.getInstance();
+                    fragmentManager.registerActivityLifecycleListener(
                             (FragmentActivity) activity,lifecycleListener);
                 }
             }

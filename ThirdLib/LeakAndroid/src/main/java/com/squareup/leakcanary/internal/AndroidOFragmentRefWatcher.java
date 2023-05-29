@@ -19,38 +19,39 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.view.View;
-
+import androidx.annotation.RequiresApi;
 import com.squareup.leakcanary.RefWatcher;
 
 @RequiresApi(Build.VERSION_CODES.O) //
 class AndroidOFragmentRefWatcher implements FragmentRefWatcher {
 
-  private final RefWatcher refWatcher;
+    private final RefWatcher refWatcher;
 
-  AndroidOFragmentRefWatcher(RefWatcher refWatcher) {
-    this.refWatcher = refWatcher;
-  }
+    AndroidOFragmentRefWatcher(RefWatcher refWatcher) {
+        this.refWatcher = refWatcher;
+    }
 
-  private final FragmentManager.FragmentLifecycleCallbacks fragmentLifecycleCallbacks =
-      new FragmentManager.FragmentLifecycleCallbacks() {
+    private final FragmentManager.FragmentLifecycleCallbacks fragmentLifecycleCallbacks =
+            new FragmentManager.FragmentLifecycleCallbacks() {
 
-        @Override public void onFragmentViewDestroyed(FragmentManager fm, Fragment fragment) {
-          View view = fragment.getView();
-          if (view != null) {
-            refWatcher.watch(view);
-          }
-        }
+                @Override
+                public void onFragmentViewDestroyed(FragmentManager fm, Fragment fragment) {
+                    View view = fragment.getView();
+                    if (view != null) {
+                        refWatcher.watch(view);
+                    }
+                }
 
-        @Override
-        public void onFragmentDestroyed(FragmentManager fm, Fragment fragment) {
-          refWatcher.watch(fragment);
-        }
-      };
+                @Override
+                public void onFragmentDestroyed(FragmentManager fm, Fragment fragment) {
+                    refWatcher.watch(fragment);
+                }
+            };
 
-  @Override public void watchFragments(Activity activity) {
-    FragmentManager fragmentManager = activity.getFragmentManager();
-    fragmentManager.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, true);
-  }
+    @Override
+    public void watchFragments(Activity activity) {
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        fragmentManager.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, true);
+    }
 }

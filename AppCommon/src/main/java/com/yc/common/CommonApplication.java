@@ -4,6 +4,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.yc.appcommoninter.IMonitorToggle;
+import com.yc.appcontextlib.AppToolUtils;
 import com.yc.appfilelib.AppFileUtils;
 
 import com.yc.applicationlib.AppInitHelper;
@@ -24,6 +25,7 @@ public class CommonApplication extends LibBaseApplication {
         super.onCreate();
         initAppCache();
         initAppLog();
+        AppToolUtils.init(this);
         PermissionDialog.setPermissionDialog(new PermissionDialogImpl());
     }
 

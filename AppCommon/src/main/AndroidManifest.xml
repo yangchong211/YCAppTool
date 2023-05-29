@@ -28,6 +28,7 @@
         <activity android:name=".encypt.EncyptActivity"/>
         <activity android:name=".image.ImageActivity"/>
         <activity android:name=".cache.CacheActivity"/>
+        <activity android:name="com.yc.appmvx.NetWorkActivity"/>
     </application>
 
 

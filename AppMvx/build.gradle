@@ -35,6 +35,10 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
-
-    implementation project(path: ':KotlinBusiness')
+    //其他
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
+    implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':RoundCorners')
+    implementation project(path: ':NetWorkLib')
+    implementation project(path: ':AppWiFiLib')
 }
