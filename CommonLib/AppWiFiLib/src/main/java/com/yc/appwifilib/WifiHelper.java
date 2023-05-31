@@ -1,6 +1,5 @@
 package com.yc.appwifilib;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -18,8 +17,8 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
 
 import com.yc.appcontextlib.AppToolUtils;
 
@@ -35,12 +34,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static android.content.Context.WIFI_SERVICE;
 import static android.os.Build.VERSION_CODES.P;
 
-public class WifiHelper {
+public class WifiHelper extends BaseWifiManager{
 
     private static final String TAG = "NetWork-Wi-Fi";
 
     private WifiHelper() {
-        mContext = AppToolUtils.getApp();
+        super(AppToolUtils.getApp());
     }
 
     public static WifiHelper getInstance() {
@@ -61,32 +60,6 @@ public class WifiHelper {
 
     private WifiReceiver wifiReceiver;
 
-    private WifiManager wifiManager;
-
-    private ConnectivityManager connectivityManager;
-
-    private Context mContext;
-
-    private WifiManager getWifiManager() {
-        if (mContext == null) {
-            throw new RuntimeException("please init first");
-        }
-        if (wifiManager == null) {
-            wifiManager = (WifiManager) mContext.getSystemService(WIFI_SERVICE);
-        }
-        return wifiManager;
-    }
-
-    private ConnectivityManager getConnectivityManager() {
-        if (mContext == null) {
-            throw new RuntimeException("please init first");
-        }
-        if (connectivityManager == null) {
-            connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        }
-        return connectivityManager;
-    }
-
     /**
      * 判断 wifi 是否打开
      * <p>需添加权限
@@ -104,6 +77,10 @@ public class WifiHelper {
      * {@code <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />}</p>
      */
     public void openWifi() {
+        //对启用和停用 WLAN 实施了限制
+        //Android 10 或更高版本为目标平台的应用无法启用或停用 WLAN。WifiManager.setWifiEnabled() 方法始终返回 false。
+        //如果您需要提示用户启用或停用 WLAN，请使用设置面板。
+        //对直接访问已配置的 WLAN 网络实施了限制
         getWifiManager().setWifiEnabled(true);
     }
 
@@ -113,7 +90,81 @@ public class WifiHelper {
      * {@code <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />}</p>
      */
     public void closeWifi() {
+        //对启用和停用 WLAN 实施了限制
+        //Android 10 或更高版本为目标平台的应用无法启用或停用 WLAN。WifiManager.setWifiEnabled() 方法始终返回 false。
+        //如果您需要提示用户启用或停用 WLAN，请使用设置面板。
+        //对直接访问已配置的 WLAN 网络实施了限制
         getWifiManager().setWifiEnabled(false);
+    }
+
+    /**
+     * 判断是否有某个Wi-Fi
+     * @param ssid  热点名
+     * @return 是否有该热点
+     */
+    public boolean isHaveWifi(@NonNull String ssid){
+        return getConfigFromConfiguredNetworksBySsid(ssid) != null;
+    }
+
+    /**
+     * 连接到开放网络
+     *
+     * @param ssid 热点名
+     * @return 配置是否成功
+     */
+    public boolean connectOpenNetwork(@NonNull String ssid) {
+        // 获取networkId
+        int networkId = setOpenNetwork(ssid);
+        if (-1 != networkId) {
+            // 保存配置
+            boolean isSave = saveConfiguration();
+            // 连接网络
+            boolean isEnable = enableNetwork(networkId);
+            return isSave && isEnable;
+        }
+        return false;
+    }
+
+    /**
+     * 连接到WEP网络
+     *
+     * @param ssid 热点名
+     * @param password 密码
+     * @return 配置是否成功
+     */
+    public boolean connectWEPNetwork(@NonNull String ssid, @NonNull String password) {
+        // 获取networkId
+        int networkId = setWEPNetwork(ssid, password);
+        if (-1 != networkId) {
+            // 保存配置
+            boolean isSave = saveConfiguration();
+            // 连接网络
+            boolean isEnable = enableNetwork(networkId);
+
+            return isSave && isEnable;
+        }
+        return false;
+    }
+
+    /**
+     * 连接到WPA2网络
+     *
+     * @param ssid 热点名
+     * @param password 密码
+     * @return 配置是否成功
+     */
+    public boolean connectWPA2Network(@NonNull String ssid, @NonNull String password) {
+        // 获取networkId
+        int networkId = setWPA2Network(ssid, password);
+        if (-1 != networkId) {
+            // 保存配置
+            boolean isSave = saveConfiguration();
+            // 连接网络
+            boolean isEnable = enableNetwork(networkId);
+
+            return isSave && isEnable;
+        }
+        return false;
     }
 
     /**
@@ -164,7 +215,7 @@ public class WifiHelper {
         try {
             Method method = getWifiManager().getClass().getDeclaredMethod("isWifiApEnabled");
             method.setAccessible(true);
-            return (boolean) method.invoke(wifiManager);
+            return (boolean) method.invoke(getWifiManager());
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -284,6 +335,10 @@ public class WifiHelper {
 
     /**
      * 获取当前WiFi名称
+     * android.permission.ACCESS_FINE_LOCATION这个权限主要getConnectionInfo()这个方法需要
+     * 这个方法是用于获取处于活跃状态的WiFi信息，包括已经连接和连接中两种状态。
+     * 此外获取wifi列表的的方法中也需要，这里只介绍getConnectionInfo()
+     *
      *
      * @return 返回不含双引号的SSID
      */
@@ -468,7 +523,7 @@ public class WifiHelper {
      */
     @SuppressLint("MissingPermission")
     private WifiConfiguration isExist(String ssid) {
-        List<WifiConfiguration> configs = getWifiManager().getConfiguredNetworks();
+        List<WifiConfiguration> configs = getConfiguredNetworks();
         if (configs == null) {
             Log.e(TAG, "isExist: null");
             return null;
@@ -479,38 +534,6 @@ public class WifiHelper {
             }
         }
         return null;
-    }
-
-    private static final class ConnectWiFiThread extends AtomicInteger
-            implements ThreadFactory {
-
-        private final AtomicInteger POOL_NUMBER = new AtomicInteger(1);
-
-        @Override
-        public Thread newThread(Runnable r) {
-            Thread t = new Thread(r) {
-                @Override
-                public void run() {
-                    try {
-                        super.run();
-                    } catch (Throwable e) {
-                        Log.e(TAG, "Thread run threw throwable", e);
-                    }
-                }
-            };
-            t.setName(TAG + new AtomicInteger(1)
-                    + "-pool-" + POOL_NUMBER.getAndIncrement() +
-                    "-thread-");
-            t.setDaemon(false);
-            t.setPriority(Thread.NORM_PRIORITY);
-            t.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-                @Override
-                public void uncaughtException(Thread t, Throwable e) {
-                    Log.e(TAG, "Thread run threw uncaughtException throwable", e);
-                }
-            });
-            return t;
-        }
     }
 
     private boolean isRegisterWifiBroadcast() {
@@ -526,7 +549,7 @@ public class WifiHelper {
         filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         filter.addAction("android.net.wifi.WIFI_AP_STATE_CHANGED");
         wifiReceiver = new WifiReceiver();
-        mContext.registerReceiver(wifiReceiver, filter);
+        AppToolUtils.getApp().registerReceiver(wifiReceiver, filter);
         wifiReceiver.setWifiStateListener(wifiStateListener);
     }
 
@@ -535,7 +558,7 @@ public class WifiHelper {
      */
     public void unregisterWifiBroadcast() {
         if (isRegisterWifiBroadcast()) {
-            mContext.unregisterReceiver(wifiReceiver);
+            AppToolUtils.getApp().unregisterReceiver(wifiReceiver);
             wifiReceiver.setWifiStateListener(null);
             wifiReceiver = null;
         }
@@ -545,9 +568,7 @@ public class WifiHelper {
      * 资源释放
      */
     public void release() {
-        mContext = null;
-        wifiManager = null;
-        connectivityManager = null;
+        super.release();
         wifiReceiver = null;
         System.gc();
     }
