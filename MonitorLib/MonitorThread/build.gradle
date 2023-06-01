@@ -3,7 +3,6 @@ plugins {
 }
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
-
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
@@ -12,6 +11,7 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -30,5 +30,4 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
-    implementation(rootProject.ext.dependencies["constraintlayout"])
 }
