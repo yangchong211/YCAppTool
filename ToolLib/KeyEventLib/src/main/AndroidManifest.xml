@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.keyeventlib">
+
+    <application>
+        <activity android:name=".KeyCodeActivity"/>
+        <activity android:name=".KeyCodeActivity2"/>
+    </application>
+
+</manifest>

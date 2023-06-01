@@ -79,6 +79,7 @@ public class BaseWifiManager {
             // 添加配置并返回NetworkID
             return addNetwork(wifiConfig);
         } else {
+            //这里的wifiManager已经存在了要连接的wifi的networkId，所以不用重新调用wifiManager的addNetwork方法
             // 返回NetworkID
             return wifiConfiguration.networkId;
         }
@@ -164,6 +165,7 @@ public class BaseWifiManager {
      */
     WifiConfiguration getConfigFromConfiguredNetworksBySsid(@NonNull String ssid) {
         ssid = addDoubleQuotation(ssid);
+        //检查是否已经配置过该wifi，通过WifiManager获取已经配置的wifi列表
         List<WifiConfiguration> existingConfigs = getConfiguredNetworks();
         if (null != existingConfigs) {
             for (WifiConfiguration existingConfig : existingConfigs) {
@@ -305,6 +307,8 @@ public class BaseWifiManager {
 
     /**
      * 添加双引号
+     * 这里需要注意的是：
+     * WifiConfiguration里封装的wifi的SSID是包含双引号的，而ScanResult的SSID是不包含双引号的，这里比较时需要注意！
      *
      * @param text 待处理字符串
      * @return 处理后字符串

@@ -10,6 +10,9 @@ import android.os.SystemClock
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.yc.appmonitor.R
+import com.yc.monitorthread.ThreadBlockMessage
+import com.yc.monitorthread.ThreadBlockWatchDog
+import com.yc.monitorthread.ThreadBlockedListener
 import com.yc.toastutils.ToastUtils
 import com.yc.toolutils.AppLogUtils
 import com.yc.toolutils.StackTraceUtils
@@ -169,7 +172,26 @@ class ApmTestActivity : FragmentActivity() {
                 testLeak()
             }
         }))
+        lvItemList.add(ListFragment.LvItem("模拟线程执行耗时操作", object : ListFragment.OnClick {
+            override fun click(view: View?) {
+                ToastUtils.showRoundRectToast("模拟线程执行耗时操作")
+                testThread()
+            }
+        }))
         mFragment?.addAllList(lvItemList)
+    }
+
+    private fun testThread() {
+        val blockedThread = Thread(Runnable {
+            Thread.sleep(2000)
+        })
+        ThreadBlockWatchDog.getInstance(blockedThread)
+            .setTimeoutInterval(500).setThreadBlockedListener(object : ThreadBlockedListener {
+                override fun onThreadBlocked(message: ThreadBlockMessage) {
+                    AppLogUtils.e("ApmMonitorHelper ", "on thread blocked" + message.fillInStackTrace().message)
+                    message.printStackTrace()
+                }
+            }).start()
     }
 
     private fun testLeak() {

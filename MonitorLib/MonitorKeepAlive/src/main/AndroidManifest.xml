@@ -17,7 +17,7 @@
 
         <!-- 辅助功能 服务 -->
         <service
-            android:name="com.yc.alive.service.AccessibilityService"
+            android:name="com.yc.appwifilib.AccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />

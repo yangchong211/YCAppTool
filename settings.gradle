@@ -224,7 +224,7 @@ project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 include ':MonitorCpuLib', ':MonitorCatonLib', ':MonitorAnrLib', ':MonitorCrashLib',
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
         ':MonitorXposed', ':MonitorMemory',':MonitorLeakLib',
-        ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',
+        ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',':MonitorThread',
         ':MonitorPrivacy', ':MonitorTimeLib', ':MonitorSpeed', ':MonitorInterceptor',
         ':MonitorPhone', ':MonitorPicture'
 project(':MonitorCpuLib').projectDir = new File('MonitorLib/MonitorCpuLib')
@@ -247,6 +247,7 @@ project(':MonitorMemory').projectDir = new File('MonitorLib/MonitorMemory')
 project(':MonitorPhone').projectDir = new File('MonitorLib/MonitorPhone')
 project(':MonitorPicture').projectDir = new File('MonitorLib/MonitorPicture')
 project(':MonitorLeakLib').projectDir = new File('MonitorLib/MonitorLeakLib')
+project(':MonitorThread').projectDir = new File('MonitorLib/MonitorThread')
 
 
 
