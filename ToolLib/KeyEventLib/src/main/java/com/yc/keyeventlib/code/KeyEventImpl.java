@@ -210,7 +210,7 @@ public class KeyEventImpl implements IKeyEvent {
             return "enter";
         }
         if (isDelete()) {
-            return "del";
+            return "delete";
         }
         if (isCancel()) {
             return "cancel";
