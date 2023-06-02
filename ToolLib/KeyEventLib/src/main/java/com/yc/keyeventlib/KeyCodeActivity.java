@@ -44,6 +44,13 @@ public class KeyCodeActivity extends AppCompatActivity {
         return super.onKeyUp(keyCode,event);
     }
 
+    /**
+     * 所有的View全部实现了该接口并重写了该方法，该方法用来捕捉手机键盘被按下的事件。
+     * @param keyCode The value in event.getKeyCode().
+     * @param event Description of the key event.
+     *
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         AppLogUtils.d("KeyCodeActivity : yc onKeyDown" );
@@ -74,6 +81,5 @@ public class KeyCodeActivity extends AppCompatActivity {
             tvContent.setText("逗比"+msg);
             return false;
         }
-
     };
 }

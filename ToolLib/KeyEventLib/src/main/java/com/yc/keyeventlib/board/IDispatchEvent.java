@@ -9,7 +9,7 @@ import com.yc.keyeventlib.code.IKeyEvent;
 import java.util.HashMap;
 
 /**
- * 按键分发相关接口
+ * 键盘分发相关接口
  */
 public interface IDispatchEvent {
 

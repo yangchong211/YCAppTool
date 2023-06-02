@@ -24,11 +24,11 @@ public abstract class DispatchEventImpl implements IDispatchEvent {
     //实现的按键类
     private IKeyEvent keyEvent;
     //按键发现和接触回调
-    private List<ResultCallback<HashMap<Integer, InputDevice>>> attachCallbacks = new ArrayList<>();
+    private final List<ResultCallback<HashMap<Integer, InputDevice>>> attachCallbacks = new ArrayList<>();
     //按键事件回调
-    private List<ResultCallback<IKeyEvent>> keyEventCallbacks = new ArrayList<>();
+    private final List<ResultCallback<IKeyEvent>> keyEventCallbacks = new ArrayList<>();
     //所有外接键盘的容器
-    private HashMap<Integer, InputDevice> keyBoardMap = new HashMap<>();
+    private final HashMap<Integer, InputDevice> keyBoardMap = new HashMap<>();
     //输入设备相关
     private InputManager mIm;
     //上次按回车的时间，防抖动策略
@@ -171,16 +171,8 @@ public abstract class DispatchEventImpl implements IDispatchEvent {
         }
     }
 
-    public long getAntiTime() {
-        return antiTime;
-    }
-
     public void setAntiTime(long antiTime) {
         this.antiTime = antiTime;
-    }
-
-    public HashMap<Integer, InputDevice> getKeyBoardMap() {
-        return keyBoardMap;
     }
 
     /**
