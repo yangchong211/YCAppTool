@@ -543,7 +543,7 @@ public class WifiHelper extends BaseWifiManager{
     /**
      * 注册Wifi广播
      */
-    public void registerWifiBroadcast(WifiReceiver.WifiStateListener wifiStateListener) {
+    public void registerWifiBroadcast(WifiStateListener wifiStateListener) {
         // 刚注册广播时会立即收到一条当前状态的广播
         IntentFilter filter = new IntentFilter();
         filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);

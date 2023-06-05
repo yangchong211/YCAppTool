@@ -3,8 +3,8 @@
     package="com.yc.keyeventlib">
 
     <application>
-        <activity android:name=".KeyCodeActivity"/>
-        <activity android:name=".KeyCodeActivity2"/>
+        <activity android:name=".demo.KeyCodeActivity"/>
+        <activity android:name=".demo.KeyCodeActivity2"/>
     </application>
 
 </manifest>

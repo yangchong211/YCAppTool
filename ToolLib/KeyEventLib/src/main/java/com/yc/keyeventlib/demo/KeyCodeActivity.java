@@ -1,4 +1,4 @@
-package com.yc.keyeventlib;
+package com.yc.keyeventlib.demo;
 
 
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.keyeventlib.R;
 import com.yc.keyeventlib.board.AndroidKeyBoard;
 import com.yc.keyeventlib.board.KeyEventManager;
 import com.yc.keyeventlib.board.ResultCallback;
