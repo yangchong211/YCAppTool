@@ -65,7 +65,7 @@ public class KeyCodeActivity extends AppCompatActivity {
             KeyEventManager.getInstance().setKeyboard(new AndroidKeyBoard());
             isInit = true;
         }
-        AppLogUtils.d("KeyCodeActivity : yc dispatchKeyEvent" );
+        AppLogUtils.d("KeyCodeActivity : yc dispatchKeyEvent " + event.getKeyCode());
         KeyEventManager.getInstance().getKeyboard().dispatchKeyEvent(event.getKeyCode(),event);
         return super.dispatchKeyEvent(event);
     }
@@ -77,8 +77,10 @@ public class KeyCodeActivity extends AppCompatActivity {
             //键盘设备回调
             int keycode = keyEvent.getKeyEvent().getKeyCode();
             String msg = KeyEventManager.getInstance().getKeyMsg();
+            String keyMsg = KeyEventManager.getInstance().getKeyMsg(keycode);
             AppLogUtils.d("KeyCodeActivity : yc result keycode " + keycode);
-            AppLogUtils.d("KeyCodeActivity : yc onKeyUp msg " + msg);
+            AppLogUtils.d("KeyCodeActivity : yc result msg " + msg);
+            AppLogUtils.d("KeyCodeActivity : yc result keyMsg " + msg);
             tvContent.setText("逗比"+msg);
             return false;
         }

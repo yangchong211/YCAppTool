@@ -173,8 +173,8 @@ include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib',
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',
-        ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib',
-        ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib'
+        ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib', ':UsbInterface',
+        ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib', ':AppClickHelper'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
@@ -195,10 +195,12 @@ project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
 project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
 project(':LiveDataBus').projectDir = new File('ToolLib/LiveDataBus')
 project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
+project(':UsbInterface').projectDir = new File('ToolLib/UsbInterface')
 project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
 project(':TransitionHelper').projectDir = new File('ToolLib/TransitionHelper')
 project(':AnimBaseHelper').projectDir = new File('ToolLib/AnimBaseHelper')
 project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
+project(':AppClickHelper').projectDir = new File('ToolLib/AppClickHelper')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */

@@ -87,7 +87,7 @@ public abstract class DispatchEventImpl implements IDispatchEvent {
         for (int i = 0; i < size; i++) {
             ResultCallback<IKeyEvent> keyEventCallback = keyEventCallbacks.get(i);
             //先做内部转换
-            if (keyEvent == null){
+            if (keyEvent == null) {
                 keyEvent = getKeyEvent();
             }
             keyEvent.setKeyCode(keyCode);
@@ -184,5 +184,19 @@ public abstract class DispatchEventImpl implements IDispatchEvent {
         for (ResultCallback<HashMap<Integer, InputDevice>> commonCallback : attachCallbacks) {
             commonCallback.result(deviceHashMap);
         }
+    }
+
+    /**
+     * 转化为按键的处理能力
+     *
+     * @param keyCode keycode码
+     * @param event   event事件
+     * @return 按键能力
+     */
+    public IKeyEvent toKeyEvent(int keyCode, KeyEvent event) {
+        IKeyEvent ikeyEvent = this.getKeyEvent();
+        ikeyEvent.setKeyCode(keyCode);
+        ikeyEvent.setKeyEvent(event);
+        return ikeyEvent;
     }
 }
