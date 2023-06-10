@@ -17,9 +17,13 @@ public final class AppLogUtils {
     public static final String TAG = "AppLogUtils";
     public static final String COLON = ":";
     public static final String VERTICAL = "|";
-    /** 是否显示Log日志 */
+    /**
+     * 是否显示Log日志
+     */
     private static boolean isShowLog = true;
-    /** Log日志优先权 */
+    /**
+     * Log日志优先权
+     */
     private static int priority = 1;
     public static final int PRINTLN = 1;
     public static final int VERBOSE = 2;
@@ -31,7 +35,7 @@ public final class AppLogUtils {
 
     public static final String TAG_FORMAT = "%s.%s(L:%d)";
 
-    private AppLogUtils(){
+    private AppLogUtils() {
         throw new AssertionError();
     }
 
@@ -53,24 +57,25 @@ public final class AppLogUtils {
 
     /**
      * 根据堆栈生成TAG
+     *
      * @return TAG|className.methodName(L:lineNumber)
      */
     private static String generateTag(StackTraceElement caller) {
         String tag = TAG_FORMAT;
         String callerClazzName = caller.getClassName();
         callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1);
-        tag = String.format(tag,new Object[] { callerClazzName, caller.getMethodName(),Integer.valueOf(caller.getLineNumber()) });
+        tag = String.format(tag, new Object[]{callerClazzName, caller.getMethodName(), Integer.valueOf(caller.getLineNumber())});
         return new StringBuilder().append(TAG).append(VERTICAL).append(tag).toString();
     }
 
     /**
      * 获取堆栈
-     * @param n
-     * 		n=0		VMStack
-     * 		n=1		Thread
-     * 		n=3		CurrentStack
-     * 		n=4		CallerStack
-     * 		...
+     *
+     * @param n n=0		VMStack
+     *          n=1		Thread
+     *          n=3		CurrentStack
+     *          n=4		CallerStack
+     *          ...
      * @return
      */
     public static StackTraceElement getStackTraceElement(int n) {
@@ -79,18 +84,18 @@ public final class AppLogUtils {
 
     /**
      * 获取调用方的堆栈TAG
+     *
      * @return
      */
-    private static String getCallerStackLogTag(){
+    private static String getCallerStackLogTag() {
         return generateTag(getStackTraceElement(5));
     }
 
     /**
-     *
      * @param t
      * @return
      */
-    private static String getStackTraceString(Throwable t){
+    private static String getStackTraceString(Throwable t) {
         return Log.getStackTraceString(t);
     }
 
@@ -98,6 +103,7 @@ public final class AppLogUtils {
 
     /**
      * Log.v
+     *
      * @param msg
      */
     public static void v(String msg) {
@@ -113,13 +119,13 @@ public final class AppLogUtils {
         }
     }
 
-    public static void v(String tag,String msg) {
+    public static void v(String tag, String msg) {
         if (isShowLog && priority <= VERBOSE) {
             Log.d(tag, String.valueOf(msg));
         }
     }
 
-    public static void v(String msg,Throwable t) {
+    public static void v(String msg, Throwable t) {
         if (isShowLog && priority <= VERBOSE) {
             Log.v(getCallerStackLogTag(), String.valueOf(msg), t);
         }
@@ -129,6 +135,7 @@ public final class AppLogUtils {
 
     /**
      * Log.d
+     *
      * @param msg
      */
     public static void d(String msg) {
@@ -143,13 +150,13 @@ public final class AppLogUtils {
         }
     }
 
-    public static void d(String tag,String msg) {
+    public static void d(String tag, String msg) {
         if (isShowLog && priority <= DEBUG) {
             Log.d(tag, String.valueOf(msg));
         }
     }
 
-    public static void d(String msg,Throwable t) {
+    public static void d(String msg, Throwable t) {
         if (isShowLog && priority <= DEBUG) {
             Log.d(getCallerStackLogTag(), String.valueOf(msg), t);
         }
@@ -159,6 +166,7 @@ public final class AppLogUtils {
 
     /**
      * Log.i
+     *
      * @param msg
      */
     public static void i(String msg) {
@@ -173,13 +181,13 @@ public final class AppLogUtils {
         }
     }
 
-    public static void i(String tag,String msg) {
+    public static void i(String tag, String msg) {
         if (isShowLog && priority <= INFO) {
             Log.d(tag, String.valueOf(msg));
         }
     }
 
-    public static void i(String msg,Throwable t) {
+    public static void i(String msg, Throwable t) {
         if (isShowLog && priority <= INFO) {
             Log.i(getCallerStackLogTag(), String.valueOf(msg), t);
         }
@@ -189,6 +197,7 @@ public final class AppLogUtils {
 
     /**
      * Log.w
+     *
      * @param msg
      */
     public static void w(String msg) {
@@ -203,13 +212,13 @@ public final class AppLogUtils {
         }
     }
 
-    public static void w(String tag,String msg) {
+    public static void w(String tag, String msg) {
         if (isShowLog && priority <= WARN) {
             Log.d(tag, String.valueOf(msg));
         }
     }
 
-    public static void w(String msg,Throwable t) {
+    public static void w(String msg, Throwable t) {
         if (isShowLog && priority <= WARN) {
             Log.w(getCallerStackLogTag(), String.valueOf(msg), t);
         }
@@ -219,6 +228,7 @@ public final class AppLogUtils {
 
     /**
      * Log.e
+     *
      * @param msg
      */
     public static void e(String msg) {
@@ -233,13 +243,13 @@ public final class AppLogUtils {
         }
     }
 
-    public static void e(String tag,String msg) {
+    public static void e(String tag, String msg) {
         if (isShowLog && priority <= ERROR) {
             Log.d(tag, String.valueOf(msg));
         }
     }
 
-    public static void e(String msg,Throwable t) {
+    public static void e(String msg, Throwable t) {
         if (isShowLog && priority <= ERROR) {
             Log.e(getCallerStackLogTag(), String.valueOf(msg), t);
         }
@@ -249,6 +259,7 @@ public final class AppLogUtils {
 
     /**
      * Log.wtf
+     *
      * @param msg
      */
     public static void wtf(String msg) {
@@ -263,7 +274,7 @@ public final class AppLogUtils {
         }
     }
 
-    public static void wtf(String msg,Throwable t) {
+    public static void wtf(String msg, Throwable t) {
         if (isShowLog && priority <= ASSERT) {
             Log.wtf(getCallerStackLogTag(), String.valueOf(msg), t);
         }
