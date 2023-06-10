@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.clickhelper.ClickHelper;
 import com.yc.keyeventlib.R;
 import com.yc.keyeventlib.board.AndroidKeyBoard;
 import com.yc.keyeventlib.board.KeyEventManager;
@@ -30,6 +31,17 @@ public class KeyCodeActivity extends AppCompatActivity {
             isInit = true;
         }
         KeyEventManager.getInstance().getKeyboard().addDispatchCallback(keyBoardCallback);
+        ClickHelper.getInstance().setOnClickListener(new ClickHelper.OnClickListener() {
+            @Override
+            public void onSingleClick(String key) {
+                AppLogUtils.d("KeyCodeActivity : yc onSingleClick " + key);
+            }
+
+            @Override
+            public void onMultipleClick(String key) {
+                AppLogUtils.d("KeyCodeActivity : yc onMultipleClick " + key);
+            }
+        });
     }
 
     @Override
@@ -82,6 +94,7 @@ public class KeyCodeActivity extends AppCompatActivity {
             AppLogUtils.d("KeyCodeActivity : yc result msg " + msg);
             AppLogUtils.d("KeyCodeActivity : yc result keyMsg " + msg);
             tvContent.setText("逗比"+msg);
+            ClickHelper.getInstance().onClickKey(keycode+"");
             return false;
         }
     };
