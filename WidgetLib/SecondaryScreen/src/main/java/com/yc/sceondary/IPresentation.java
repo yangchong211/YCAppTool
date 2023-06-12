@@ -12,7 +12,7 @@ public interface IPresentation {
     void showView(View view);
 
     boolean hasSecondScreen();
-
+    void closeDisplay();
     void destroyView(Context context);
 
     SurfaceView getSurfaceView();

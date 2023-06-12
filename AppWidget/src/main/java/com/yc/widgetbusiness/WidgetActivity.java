@@ -20,6 +20,7 @@ import com.yc.widgetbusiness.image.ImageViewActivity;
 import com.yc.widgetbusiness.percent.PercentActivity;
 import com.yc.widgetbusiness.red.RedViewActivity;
 import com.yc.widgetbusiness.round.RoundCornersActivity;
+import com.yc.widgetbusiness.screen.PresentationActivity;
 import com.yc.widgetbusiness.shadow.ShadowActivity;
 import com.yc.widgetbusiness.textview.MixtureTextViewActivity;
 import com.yc.widgetbusiness.zoom.ZoomMainActivity;
@@ -50,6 +51,7 @@ public class WidgetActivity extends AppCompatActivity {
         StateAppBar.setStatusBarLightMode(this, Color.WHITE);
         initView();
         initListener();
+        PresentationActivity.startActivity(this);
     }
 
     private void initView() {

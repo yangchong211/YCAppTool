@@ -30,6 +30,11 @@ public class DifferentDisplay extends Presentation {
         super.onDisplayChanged();
     }
 
+    @Override
+    public void onDisplayRemoved() {
+        super.onDisplayRemoved();
+    }
+
     private void init(Context outerContext) {
         context = outerContext;
         setContentView(R.layout.display_screen_view);
@@ -43,4 +48,10 @@ public class DifferentDisplay extends Presentation {
     public Context getRootContext(){
         return context;
     }
+
+    public void close() {
+        onDisplayRemoved();
+        dismiss();
+    }
+
 }

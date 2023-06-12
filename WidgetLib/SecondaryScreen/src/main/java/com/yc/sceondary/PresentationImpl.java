@@ -67,6 +67,14 @@ public class PresentationImpl implements IPresentation {
     }
 
     @Override
+    public void closeDisplay() {
+        if (presentation != null){
+            presentation.close();
+            presentation = null;
+        }
+    }
+
+    @Override
     public void destroyView(Context context) {
         if (presentation != null) {
             presentation.dismiss();

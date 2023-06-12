@@ -45,11 +45,29 @@ public class PresentationActivity extends AppCompatActivity {
         tvView1 = findViewById(R.id.tv_view_1);
         tvView2 = findViewById(R.id.tv_view_2);
         tvView3 = findViewById(R.id.tv_view_3);
+        initListener();
+    }
 
+    private void initListener() {
         tvView1.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
                 PresentationImpl presentation = new PresentationImpl();
+                presentation.showView(R.layout.activity_presentation);
+            }
+        });
+        tvView2.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                PresentationImpl presentation = new PresentationImpl();
+                presentation.showView(R.layout.activity_red_view);
+            }
+        });
+        tvView3.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                PresentationImpl presentation = new PresentationImpl();
+                presentation.showView(R.layout.activity_event_view);
             }
         });
     }
