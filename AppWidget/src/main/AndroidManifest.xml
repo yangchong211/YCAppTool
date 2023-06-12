@@ -38,6 +38,7 @@
         <activity android:name=".event.EventActivity"/>
         <activity android:name=".dialog.DialogActivity"/>
         <activity android:name=".percent.PercentActivity"/>
+        <activity android:name=".screen.PresentationActivity"/>
     </application>
 
 

@@ -95,5 +95,6 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':BannerViewLib')
+    implementation project(path: ':SecondaryScreen')
 }
 

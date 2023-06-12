@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="1.展示一个普通页面副屏幕"
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="2.展示一个复杂页面副屏幕"
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_3"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="3.展示一个视频页面副屏幕"
+        android:textSize="18sp"
+        android:background="@color/colorAccent"
+        app:rRadius="20dp" />
+
+</LinearLayout>
