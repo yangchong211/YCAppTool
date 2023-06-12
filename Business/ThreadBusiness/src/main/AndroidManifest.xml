@@ -4,11 +4,7 @@
     package="com.yc.ycthreadpool">
 
     <application>
-        <activity android:name="com.yc.ycthreadpool.ThreadMainActivity"/>
-        <activity android:name="com.yc.ycthreadpool.ExecutorsTestActivity"/>
-        <activity android:name="com.yc.ycthreadpool.ThreadActivity"/>
-        <activity android:name="com.yc.ycthreadpool.EasyExecutorActivity"/>
-        <activity android:name="com.yc.ycthreadpool.ThreadPollActivity"/>
+
     </application>
 
 </manifest>
