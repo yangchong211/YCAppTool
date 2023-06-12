@@ -73,7 +73,8 @@ include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager', ':AppCompress',
         ':AppLruDisk', ':AppLruCache', ':DownloadHelper', ':AppEncryptLib',
         ':AppMediaStore',  ':AppScreenLib', ':BaseVpAdapter', ':ImageToolLib',
         ':AppHandlerLib', ':FileIoHelper', ':ZipFileLib', ':NetWorkLib', ':AppContextLib',
-        ':AppWiFiLib', ':UriAndUrlLib', ':AppGrayLib', ':AppCallStatus', ':AppFastSp', ':ZipFileLib'
+        ':AppWiFiLib', ':UriAndUrlLib', ':AppGrayLib', ':AppCallStatus', ':AppFastSp',
+        ':ZipFileLib', ':SmEncryptLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
@@ -113,6 +114,8 @@ project(':AppGrayLib').projectDir = new File('CommonLib/AppGrayLib')
 project(':AppCallStatus').projectDir = new File('CommonLib/AppCallStatus')
 project(':AppFastSp').projectDir = new File('CommonLib/AppFastSp')
 project(':ZipFileLib').projectDir = new File('CommonLib/ZipFileLib')
+project(':SmEncryptLib').projectDir = new File('CommonLib/SmEncryptLib')
+
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -300,3 +303,4 @@ project(':EventbusAndroid').projectDir = new File('ThirdLib/EventbusAndroid')
 project(':EventBus').projectDir = new File('ThirdLib/EventBus')
 //OkHttp
 project(':OkHttpLib').projectDir = new File('ThirdLib/OkHttpLib')
+

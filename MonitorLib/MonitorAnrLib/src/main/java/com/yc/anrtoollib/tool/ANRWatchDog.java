@@ -16,7 +16,7 @@ import com.yc.anrtoollib.watch.InterruptionListener;
 public class ANRWatchDog extends Thread {
 
     /**
-     * 默认ANR超时时间
+     * 默认ANR超时时间，这里默认时间是以activity为主的。
      */
     private static final int DEFAULT_ANR_TIMEOUT = 5000;
 
@@ -214,6 +214,12 @@ public class ANRWatchDog extends Thread {
     public ANRWatchDog setIgnoreDebugger(boolean ignoreDebugger) {
         this.ignoreDebugger = ignoreDebugger;
         return this;
+    }
+
+    @Override
+    public synchronized void start() {
+        super.start();
+        Log.i("ANRWatchDog" , " start() ");
     }
 
     @Override
