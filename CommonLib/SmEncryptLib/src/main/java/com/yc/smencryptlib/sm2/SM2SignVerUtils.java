@@ -1,6 +1,6 @@
 package com.yc.smencryptlib.sm2;
 
-import com.yc.smencryptlib.Util;
+import com.yc.smencryptlib.SMBaseUtils;
 
 import org.bouncycastle.asn1.*;
 import org.bouncycastle.crypto.digests.SM3Digest;
@@ -42,15 +42,15 @@ public class SM2SignVerUtils {
 		byte [] z = factory.sm2GetZ(USER_ID.getBytes(), userKey);
 		//System.out.println("SM3摘要Z: " + Util.getHexString(z));
 		//System.out.println("被加密数据的16进制: " + Util.getHexString(sourceData));
-		sm2SignVO.setSm3_z(Util.getHexString(z));
-		sm2SignVO.setSign_express(Util.getHexString(sourceData));
+		sm2SignVO.setSm3_z(SMBaseUtils.getHexString(z));
+		sm2SignVO.setSign_express(SMBaseUtils.getHexString(sourceData));
 
 		sm3Digest.update(z, 0, z.length);
 		sm3Digest.update(sourceData,0,sourceData.length);
 		byte [] md = new byte[32];
 		sm3Digest.doFinal(md, 0);
 		//System.out.println("SM3摘要值: " + Util.getHexString(md));
-		sm2SignVO.setSm3_digest(Util.getHexString(md));
+		sm2SignVO.setSm3_digest(SMBaseUtils.getHexString(md));
 
 		SM2Result sm2Result = new SM2Result();
 		factory.sm2Sign(md, userD, userKey, sm2Result);
@@ -65,7 +65,7 @@ public class SM2SignVerUtils {
 		v2.add(d_r);
 		v2.add(d_s);
 		DERSequence sign = new DERSequence(v2);
-		String result = Util.byteToHex(sign.getEncoded());
+		String result = SMBaseUtils.byteToHex(sign.getEncoded());
 		sm2SignVO.setSm2_sign(result);
 		return sm2SignVO;
 	}
@@ -96,13 +96,13 @@ public class SM2SignVerUtils {
 			SM3Digest sm3Digest = new SM3Digest();
 			byte [] z = factory.sm2GetZ(USER_ID.getBytes(), userKey);
 			//System.out.println("SM3摘要Z: " + Util.getHexString(z));
-			verifyVo.setSm3_z(Util.getHexString(z));
+			verifyVo.setSm3_z(SMBaseUtils.getHexString(z));
 			sm3Digest.update(z,0,z.length);
 			sm3Digest.update(sourceData,0,sourceData.length);
 			byte [] md = new byte[32];
 			sm3Digest.doFinal(md, 0);
 			//System.out.println("SM3摘要值: " + Util.getHexString(md));
-			verifyVo.setSm3_digest(Util.getHexString(md));
+			verifyVo.setSm3_digest(SMBaseUtils.getHexString(md));
 			ByteArrayInputStream bis = new ByteArrayInputStream(signData);
 			ASN1InputStream dis = new ASN1InputStream(bis);
 			SM2Result sm2Result = null;
@@ -135,8 +135,8 @@ public class SM2SignVerUtils {
 		//String privatekey = "5EB4DF17021CC719B678D970C620690A11B29C8357D71FA4FF9BF7FB6D89767A";
 		String publicKey ="04BB34D657EE7E8490E66EF577E6B3CEA28B739511E787FB4F71B7F38F241D87F18A5A93DF74E90FF94F4EB907F271A36B295B851F971DA5418F4915E2C1A23D6E";
 		String privatekey = "0B1CE43098BC21B8E82B5C065EDB534CB86532B1900A49D49F3C53762D2997FA";
-		SM2SignVO sign = SM2SignVerUtils.Sign2SM2(Util.hexStringToBytes(privatekey), sourceData);
-		SM2SignVO verify = SM2SignVerUtils.VerifySignSM2(Util.hexStringToBytes(publicKey), sourceData, Util.hexStringToBytes(sign.getSm2_signForSoft()));
+		SM2SignVO sign = SM2SignVerUtils.Sign2SM2(SMBaseUtils.hexStringToBytes(privatekey), sourceData);
+		SM2SignVO verify = SM2SignVerUtils.VerifySignSM2(SMBaseUtils.hexStringToBytes(publicKey), sourceData, SMBaseUtils.hexStringToBytes(sign.getSm2_signForSoft()));
 		System.out.println("签名得到的r值:"+sign.getSign_r()+"\n签名值 "+sign.getSm2_signForSoft());
 		System.out.println("验签得到的R值:"+verify.getVerify_r());
 		System.err.println("\n验签结果" +verify.isVerify());

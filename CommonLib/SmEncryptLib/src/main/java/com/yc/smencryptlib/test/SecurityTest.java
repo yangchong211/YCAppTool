@@ -2,10 +2,13 @@ package com.yc.smencryptlib.test;
 
 
 
-import com.yc.smencryptlib.Util;
+import com.yc.smencryptlib.SMBaseUtils;
 import com.yc.smencryptlib.sm2.SM2EncDecUtils;
 import com.yc.smencryptlib.sm2.SM2SignVO;
 import com.yc.smencryptlib.sm2.SM2SignVerUtils;
+
+import org.bouncycastle.crypto.digests.SM3Digest;
+import org.bouncycastle.util.encoders.Hex;
 
 import java.io.IOException;
 
@@ -20,16 +23,15 @@ public class SecurityTest {
         String publicKey = "042780f0963a428a7b030ac1c14a90b967bf365f5394ebf1f0ca1598d4d9bece4fdfa05ba043817fef68bef497088e3992362ce55b1858444fa5a3e00c5042b207";
         String privatekey = "73e83d33d95274eeeb23f01834d02fe920b4afece377410435698dfdf1d84203";
 
-        SM2SignVO sign = SM2SignVerUtils.Sign2SM2(Util.hexStringToBytes(privatekey), Util.hexToByte(src));
+        SM2SignVO sign = SM2SignVerUtils.Sign2SM2(SMBaseUtils.hexStringToBytes(privatekey), SMBaseUtils.hexToByte(src));
         System.out.println("R:"+sign.sign_r);
         System.out.println("S:"+sign.sign_s);
         //验签硬加密的串
         String signYJ = "54720652E5EE53D14F338A03EDAC10E7F93D877EC2168F9287810807D02D2409F3EEE542638AD0B204BC3C8F93EDBCFBE87DEEFB07C0B36F34508AB49B6F90EF";
-        SM2SignVO verify = SM2SignVerUtils.VerifySignSM2(Util.hexStringToBytes(publicKey), Util.hexToByte(src), Util.hexToByte(SecurityTestAll.SM2SignHardToSoft(signYJ)));
+        SM2SignVO verify = SM2SignVerUtils.VerifySignSM2(SMBaseUtils.hexStringToBytes(publicKey), SMBaseUtils.hexToByte(src), SMBaseUtils.hexToByte(SecurityTestAll.SM2SignHardToSoft(signYJ)));
         System.err.println("验签结果" + verify.isVerify());
     }
 
-    @Test
     public void sm2sign2() throws Exception {
         String src = "32472f598b61ea4ff28f54b00f12ca0a8c1596e2867c5cce4afcb19ee93c2cde";
         String text = "这是一段明文";
@@ -39,16 +41,15 @@ public class SecurityTest {
         String publicKey = "0485B52403AEB742F952EFF7200BDBA0A399F0971FEB0EAA0CBE00A1A5EE922A34A24BD9CD2EA740B84290838A862E432BD9BBC0CD0659FD6D172CD1871CD76068";
         String privatekey = "62329467E71E70960C7A479C03CA7FC0A2BE92E000240C4F4080F0B2437C536D";
 
-        SM2SignVO sign = SM2SignVerUtils.Sign2SM2(Util.hexStringToBytes(privatekey), Util.hexToByte(src));
+        SM2SignVO sign = SM2SignVerUtils.Sign2SM2(SMBaseUtils.hexStringToBytes(privatekey), SMBaseUtils.hexToByte(src));
         System.out.println("R:"+sign.sign_r);
         System.out.println("S:"+sign.sign_s);
         //验签硬加密的串
         String signYJ = "233fabe6f81002fbee8c69d9561114d99e0640ecf27d63561d850d77ac76ee5f5d0530bd6eca60e960784f9ad883b77dcfa3c8b274918034faf509faeee2e5ea";
-        SM2SignVO verify = SM2SignVerUtils.VerifySignSM2(Util.hexStringToBytes(publicKey), Util.hexToByte(src), Util.hexToByte(SecurityTestAll.SM2SignHardToSoft(signYJ)));
+        SM2SignVO verify = SM2SignVerUtils.VerifySignSM2(SMBaseUtils.hexStringToBytes(publicKey), SMBaseUtils.hexToByte(src), SMBaseUtils.hexToByte(SecurityTestAll.SM2SignHardToSoft(signYJ)));
         System.err.println("验签结果" + verify.isVerify());
     }
 
-    @Test
     public void sm2enc() throws IOException {
         String plainText = "ILoveYou11";
         //SM3测试
@@ -69,11 +70,11 @@ public class SecurityTest {
         prik = privatekey;
         pubk = publicKey;
         System.out.println("加密: ");
-        String cipherText = SM2EncDecUtils.encrypt(Util.hexToByte(pubk), sourceData);
+        String cipherText = SM2EncDecUtils.encrypt(SMBaseUtils.hexToByte(pubk), sourceData);
         //cipherText = "0452ba81cf5119c9f29c81c2be9c4a49ad8c0a33ed899b60548d21a62971a8e994cafc0e9fbc710a0a220b055804bb890833b50ac04ec4e130a5db75338c0c1d49a52a6d373076a5db370564a5cebb5300f79877003c52adf49dac16370e51e14e0754110547bb3b";
         System.out.println(cipherText);
         System.out.println("解密: ");
-        plainText = new String(SM2EncDecUtils.decrypt(Util.hexToByte(prik), Util.hexToByte(cipherText)));
+        plainText = new String(SM2EncDecUtils.decrypt(SMBaseUtils.hexToByte(prik), SMBaseUtils.hexToByte(cipherText)));
         System.out.println(plainText);
 
     }
@@ -81,7 +82,7 @@ public class SecurityTest {
     public void sm3() {
         byte[] md = new byte[32];
         byte[] msg1 = "ererfeiisgod".getBytes();
-        System.out.println(Util.byteToHex(msg1));
+        System.out.println(SMBaseUtils.byteToHex(msg1));
         SM3Digest sm3 = new SM3Digest();
         sm3.update(msg1, 0, msg1.length);
         sm3.doFinal(md, 0);
@@ -115,12 +116,10 @@ public class SecurityTest {
 
         plainText = sm4.decryptData_CBC(cipherText);
         System.out.println("解密明文: " + plainText);*/
-
     }
-
 
     public static void main(String[] args) throws IOException {
 
-
     }
+
 }

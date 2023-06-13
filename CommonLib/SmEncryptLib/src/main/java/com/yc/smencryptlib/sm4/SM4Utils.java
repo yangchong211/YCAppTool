@@ -5,7 +5,7 @@ package com.yc.smencryptlib.sm4;
  */
 
 
-import com.yc.smencryptlib.Util;
+import com.yc.smencryptlib.SMBaseUtils;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -33,16 +33,16 @@ public class SM4Utils {
 
             byte[] keyBytes;
             if (hexString) {
-                keyBytes = Util.hexStringToBytes(secretKey);
+                keyBytes = SMBaseUtils.hexStringToBytes(secretKey);
             } else {
                 //keyBytes = secretKey.getBytes();
-                keyBytes = Util.hexStringToBytes(secretKey);
+                keyBytes = SMBaseUtils.hexStringToBytes(secretKey);
             }
 
             SM4 sm4 = new SM4();
             sm4.sm4_setkey_enc(ctx, keyBytes);
             byte[] encrypted = sm4.sm4_crypt_ecb(ctx, plainText.getBytes("UTF-8"));
-            return Util.byteToHex(encrypted);
+            return SMBaseUtils.byteToHex(encrypted);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -51,8 +51,8 @@ public class SM4Utils {
 
     public String decryptData_ECB(String cipherText) {
         try {
-            byte[] encrypted = Util.hexToByte(cipherText);
-            cipherText= Base64.encodeBase64String(encrypted);;
+            byte[] encrypted = SMBaseUtils.hexToByte(cipherText);
+            cipherText= Base64.encodeBase64String(encrypted);
             //cipherText = new BASE64Encoder().encode(encrypted);
             if (cipherText != null && cipherText.trim().length() > 0) {
                 Pattern p = Pattern.compile("\\s*|\t|\r|\n");
@@ -66,7 +66,7 @@ public class SM4Utils {
 
             byte[] keyBytes;
             if (hexString) {
-                keyBytes = Util.hexStringToBytes(secretKey);
+                keyBytes = SMBaseUtils.hexStringToBytes(secretKey);
             } else {
                 keyBytes = secretKey.getBytes();
             }
@@ -91,8 +91,8 @@ public class SM4Utils {
             byte[] keyBytes;
             byte[] ivBytes;
             if (hexString) {
-                keyBytes = Util.hexStringToBytes(secretKey);
-                ivBytes = Util.hexStringToBytes(iv);
+                keyBytes = SMBaseUtils.hexStringToBytes(secretKey);
+                ivBytes = SMBaseUtils.hexStringToBytes(iv);
             } else {
                 keyBytes = secretKey.getBytes();
                 ivBytes = iv.getBytes();
@@ -101,7 +101,7 @@ public class SM4Utils {
             SM4 sm4 = new SM4();
             sm4.sm4_setkey_enc(ctx, keyBytes);
             byte[] encrypted = sm4.sm4_crypt_cbc(ctx, ivBytes, plainText.getBytes("UTF-8"));
-            return Util.byteToHex(encrypted);
+            return SMBaseUtils.byteToHex(encrypted);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -110,7 +110,7 @@ public class SM4Utils {
 
     public String decryptData_CBC(String cipherText) {
         try {
-            byte[] encrypted = Util.hexToByte(cipherText);
+            byte[] encrypted = SMBaseUtils.hexToByte(cipherText);
             cipherText=Base64.encodeBase64String(encrypted);;
             //cipherText = new BASE64Encoder().encode(encrypted);
             if (cipherText != null && cipherText.trim().length() > 0) {
@@ -125,8 +125,8 @@ public class SM4Utils {
             byte[] keyBytes;
             byte[] ivBytes;
             if (hexString) {
-                keyBytes = Util.hexStringToBytes(secretKey);
-                ivBytes = Util.hexStringToBytes(iv);
+                keyBytes = SMBaseUtils.hexStringToBytes(secretKey);
+                ivBytes = SMBaseUtils.hexStringToBytes(iv);
             } else {
                 keyBytes = secretKey.getBytes();
                 ivBytes = iv.getBytes();
@@ -147,7 +147,7 @@ public class SM4Utils {
 
     public static void main(String[] args) throws IOException {
         String plainText = "I Love You Every Day";
-        String s = Util.byteToHex(plainText.getBytes());
+        String s = SMBaseUtils.byteToHex(plainText.getBytes());
         System.out.println("原文" + s);
         SM4Utils sm4 = new SM4Utils();
         //sm4.secretKey = "JeF8U9wHFOMfs2Y8";
@@ -171,6 +171,6 @@ public class SM4Utils {
 
         String plainText3 = sm4.decryptData_CBC(cipherText2);
         System.out.println("解密明文: " + plainText3);
-
     }
+
 }

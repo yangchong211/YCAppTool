@@ -5,7 +5,7 @@ package com.yc.smencryptlib.sm4;
  */
 
 
-import com.yc.smencryptlib.Util;
+import com.yc.smencryptlib.SMBaseUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -176,12 +176,12 @@ public class SM4 {
         if (mode == SM4_ENCRYPT) {
             //填充:hex必须是32的整数倍填充 ,填充的是80  00 00 00
             int p = 16 - input.length % 16;
-            String inputHex = Util.byteToHex(input)+ "80";
+            String inputHex = SMBaseUtils.byteToHex(input)+ "80";
             StringBuffer stringBuffer =new StringBuffer(inputHex);
             for (int i = 0; i <p-1 ; i++) {
                 stringBuffer.append("00");
             }
-            ret= Util.hexToByte(stringBuffer.toString());
+            ret= SMBaseUtils.hexToByte(stringBuffer.toString());
             //ret = new byte[input.length + p];
             /*System.arraycopy(input, 0, ret, 0, input.length);
             for (int i = 0; i < p; i++) {
@@ -191,10 +191,10 @@ public class SM4 {
             /*int p = input[input.length - 1];
             ret = new byte[input.length - p];
             System.arraycopy(input, 0, ret, 0, input.length - p);*/
-            String inputHex =Util.byteToHex(input);
+            String inputHex = SMBaseUtils.byteToHex(input);
             int i = inputHex.lastIndexOf("80");
             String substring = inputHex.substring(0, i);
-            ret= Util.hexToByte(substring);
+            ret= SMBaseUtils.hexToByte(substring);
         }
         return ret;
     }

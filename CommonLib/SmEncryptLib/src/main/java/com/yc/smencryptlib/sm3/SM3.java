@@ -1,6 +1,7 @@
 package com.yc.smencryptlib.sm3;
 
-import cn.xjfme.encrypt.utils.Util;
+import com.yc.smencryptlib.SMBaseUtils;
+
 import org.bouncycastle.crypto.digests.SM3Digest;
 import org.bouncycastle.util.encoders.Hex;
 
@@ -147,12 +148,12 @@ public class SM3 {
 
     private static byte[] bigEndianIntToByte(int num)
     {
-        return back(Util.intToBytes(num));
+        return back(SMBaseUtils.intToBytes(num));
     }
 
     private static int bigEndianByteToInt(byte[] bytes)
     {
-        return Util.byteToInt(back(bytes));
+        return SMBaseUtils.byteToInt(back(bytes));
     }
 
     private static int FFj(int X, int Y, int Z, int j)
@@ -245,7 +246,7 @@ public class SM3 {
         pos += in.length;
         System.arraycopy(padd, 0, out, pos, padd.length);
         pos += padd.length;
-        byte[] tmp = back(Util.longToBytes(n));
+        byte[] tmp = back(SMBaseUtils.longToBytes(n));
         System.arraycopy(tmp, 0, out, pos, tmp.length);
         return out;
     }
@@ -317,7 +318,7 @@ public class SM3 {
     public static void main(String[] args) {
         byte[] md = new byte[32];
         byte[] msg1 = "ererfeiisgod".getBytes();
-        System.out.println(Util.byteToHex(msg1));
+        System.out.println(SMBaseUtils.byteToHex(msg1));
         SM3Digest sm3 = new SM3Digest();
         sm3.update(msg1, 0, msg1.length);
         sm3.doFinal(md, 0);

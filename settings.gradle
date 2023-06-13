@@ -172,7 +172,7 @@ project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinator
 
 
 /* +++++++++ 框架基础工具库 +++++++++ */
-include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib',
+include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib',':UsbSocket',
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',
@@ -203,6 +203,7 @@ project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
 project(':TransitionHelper').projectDir = new File('ToolLib/TransitionHelper')
 project(':AnimBaseHelper').projectDir = new File('ToolLib/AnimBaseHelper')
 project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
+project(':UsbSocket').projectDir = new File('ToolLib/UsbSocket')
 project(':AppClickHelper').projectDir = new File('ToolLib/AppClickHelper')
 
 
@@ -303,4 +304,5 @@ project(':EventbusAndroid').projectDir = new File('ThirdLib/EventbusAndroid')
 project(':EventBus').projectDir = new File('ThirdLib/EventBus')
 //OkHttp
 project(':OkHttpLib').projectDir = new File('ThirdLib/OkHttpLib')
+
 
