@@ -2,6 +2,7 @@ package com.yc.sceondary.display;
 
 import android.app.Presentation;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.Display;
 import android.widget.FrameLayout;
 
@@ -10,19 +11,18 @@ import com.yc.sceondary.R;
 /**
  * 双屏异显（同显）实现方式
  */
-public class SecondDisplay extends Presentation {
+public class SecondDisplay extends Presentation implements IDisplay{
 
-    private Context context;
+    private final Context context;
     private FrameLayout flDisplayView;
 
     public SecondDisplay(Context outerContext, Display display) {
-        super(outerContext, display);
-        init(outerContext);
+        this(outerContext, display,0);
     }
 
     public SecondDisplay(Context outerContext, Display display, int theme) {
         super(outerContext, display, theme);
-        init(outerContext);
+        this.context = outerContext;
     }
 
     @Override
@@ -35,8 +35,13 @@ public class SecondDisplay extends Presentation {
         super.onDisplayRemoved();
     }
 
-    private void init(Context outerContext) {
-        context = outerContext;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initView();
+    }
+
+    private void initView() {
         setContentView(R.layout.display_screen_view);
         flDisplayView = findViewById(R.id.fl_display_view);
     }
@@ -54,4 +59,17 @@ public class SecondDisplay extends Presentation {
         dismiss();
     }
 
+    @Override
+    public void showDisplay(Context context) {
+        if (!this.isShowing()){
+            show();
+        }
+    }
+
+    @Override
+    public void dismissDisplay(Context context) {
+        if (this.isShowing()){
+            close();
+        }
+    }
 }

@@ -10,7 +10,7 @@ import com.yc.sceondary.R;
 /**
  * 双屏异显第一种实现方式（官方提供的Presentation）
  */
-public class DifferentDisplay extends Presentation {
+public class DifferentDisplay extends Presentation implements IDisplay{
 
     private Context context;
     private FrameLayout flDisplayView;
@@ -54,4 +54,17 @@ public class DifferentDisplay extends Presentation {
         dismiss();
     }
 
+    @Override
+    public void showDisplay(Context context) {
+        if (!this.isShowing()){
+            show();
+        }
+    }
+
+    @Override
+    public void dismissDisplay(Context context) {
+        if (this.isShowing()){
+            close();
+        }
+    }
 }
