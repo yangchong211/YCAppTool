@@ -19,7 +19,7 @@ public final class ClickHelper {
     private final static int TIME_SEP = 300;
     private final Handler handler;
 
-    private ClickHelper(){
+    private ClickHelper() {
         handler = new Handler(Looper.getMainLooper());
     }
 
@@ -62,8 +62,11 @@ public final class ClickHelper {
         }, TIME_SEP);
     }
 
+    public void onThreeClick(String key) {
+        onClickKey(key, 3);
+    }
 
-    public void onClickKey(String key , int clickNum) {
+    public void onClickKey(String key, int clickNum) {
         if (TextUtils.isEmpty(key)) {
             return;
         }
@@ -87,7 +90,7 @@ public final class ClickHelper {
                         break;
                     }
                 }
-                if (isMultipleClick){
+                if (isMultipleClick) {
                     onMultipleClick(key);
                 }
             } else {
@@ -105,13 +108,13 @@ public final class ClickHelper {
 
 
     private void onSingleClick(String key) {
-        if (onClickListener != null){
+        if (onClickListener != null) {
             onClickListener.onSingleClick(key);
         }
     }
 
     private void onMultipleClick(String key) {
-        if (onClickListener != null){
+        if (onClickListener != null) {
             onClickListener.onMultipleClick(key);
         }
     }
@@ -132,6 +135,7 @@ public final class ClickHelper {
 
     public interface OnClickListener {
         void onSingleClick(String key);
+
         void onMultipleClick(String key);
     }
 }
