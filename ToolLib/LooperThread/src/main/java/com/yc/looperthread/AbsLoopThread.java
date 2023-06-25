@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class AbsLoopThread extends Thread {
 
-    private static final String TAG = AbsLoopThread.class.getSimpleName();
+    static final String TAG = AbsLoopThread.class.getSimpleName();
     private volatile boolean beginRead = false;
     private final AtomicBoolean isStart = new AtomicBoolean(false);
 
@@ -36,6 +36,7 @@ public abstract class AbsLoopThread extends Thread {
     public void startThread() {
         //防止多次启动
         if (!isStart.get()) {
+            Log.v(TAG, "startThread");
             start();
             isStart.set(true);
         }
@@ -43,10 +44,11 @@ public abstract class AbsLoopThread extends Thread {
 
 
     /**
-     * 开始读卡
+     * 开始循环
      */
-    public void beginRead() {
-        Log.v(TAG, "startRead");
+    public void beginLoop() {
+        startThread();
+        Log.v(TAG, "beginLoop");
         //每次开启读卡的时候都要检测一下线程是否需要跑起来
         startThread();
         //一直寻卡
@@ -54,17 +56,18 @@ public abstract class AbsLoopThread extends Thread {
     }
 
     /**
-     * 结束读卡
+     * 暂停循环
      */
-    public void endRead() {
+    public void endLoop() {
         Log.v(TAG, "endRead");
         beginRead = false;
     }
 
     /**
-     * 释放线程
+     * 释放线程。如果线程释放了，则没有办法再次start，除非是创建新的线程
      */
     public void release() {
+        Log.v(TAG, "release");
         beginRead = false;
         //中断可以理解为线程的一个标志位，它表示了一个运行中的线程是否被其他线程进行了中断操作。
         interrupt();
