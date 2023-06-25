@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.sceondary.PresentationImpl;
+import com.yc.sceondary.present.PresentationImpl;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.widgetbusiness.R;
