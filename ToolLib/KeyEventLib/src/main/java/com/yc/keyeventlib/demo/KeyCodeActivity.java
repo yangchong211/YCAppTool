@@ -93,7 +93,7 @@ public class KeyCodeActivity extends AppCompatActivity {
             AppLogUtils.d("KeyCodeActivity : yc result keycode " + keycode);
             AppLogUtils.d("KeyCodeActivity : yc result msg " + msg);
             AppLogUtils.d("KeyCodeActivity : yc result keyMsg " + msg);
-            tvContent.setText("逗比"+msg);
+            tvContent.setText("逗比"+keyMsg);
             ClickHelper.getInstance().onClickKey(keycode+"");
             return false;
         }

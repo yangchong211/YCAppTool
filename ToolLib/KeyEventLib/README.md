@@ -48,7 +48,7 @@
     - 比如：KeyEvent.KEYCODE_ENTER，KeyEvent.KEYCODE_DEL等按键。就分别代表的意思是：Enter确认键，Del删除键。
 - 硬件（驱动）层到应用层的转化，这层可以理解为SCANCODE->KEYCODE的转化。
     - 当在硬件键盘上按上按键，比如按下5的时候。按键会唤醒设备，但是该key消息不会发送给应用，而WAKE 一样会唤醒设备且key消息会发送给应用。
-    - 转化时，会通过scanCode 找到keyCodeName，再通过keyCodeName 去转化成keyCode。后面一层的定义在：frameworks/native/include/input/InputEventLabels.h
+    - 转化时，会通过scanCode 找到keyCodeName，再通过 keyCodeName 去转化成keyCode。后面一层的定义在：frameworks/native/include/input/InputEventLabels.h
     - Android开发目前仅仅是关注于处理KeyCode的逻辑，至于硬件层是如何传递，暂且放着不动。
 
 
@@ -149,7 +149,22 @@
 
 
 ### 05.其他问题说明
-
+#### 5.1 按键快速测试
+- 设置按键的映射实现操作
+    ```
+    KeyCodeHelper.getInstance().setKeycodeImpl(new KeyEventImpl());
+    ```
+- 获取按键信息然后获取code
+    ```
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        AppLogUtils.d("KeyCodeActivity : yc onKeyUp " + keyCode);
+        String msg = KeyCodeHelper.getInstance().getKeyMsg(keyCode);
+        AppLogUtils.d("KeyCodeActivity : yc onKeyUp msg " + msg);
+        tvContent.setText(msg);
+        return super.onKeyUp(keyCode,event);
+    }
+    ```
 
 
 ### 06.参考博客说明
