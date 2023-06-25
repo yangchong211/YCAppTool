@@ -1,14 +1,15 @@
-package com.yc.ycthreadpool;
+package com.yc.apptool.thread;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.apploglib.AppLogHelper;
+import com.yc.apptool.R;
+import com.yc.apptool.App;
 import com.yc.toastutils.ToastUtils;
 import com.yc.ycthreadpoollib.PoolThread;
 import com.yc.ycthreadpoollib.callback.AsyncCallback;

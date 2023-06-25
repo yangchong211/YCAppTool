@@ -1,4 +1,4 @@
-package com.yc.ycthreadpool;
+package com.yc.apptool.thread;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
+
+import com.yc.apptool.R;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

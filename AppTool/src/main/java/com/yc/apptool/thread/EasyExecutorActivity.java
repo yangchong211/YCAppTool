@@ -1,4 +1,4 @@
-package com.yc.ycthreadpool;
+package com.yc.apptool.thread;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.apploglib.AppLogHelper;
+import com.yc.apptool.R;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.toastutils.ToastUtils;
 

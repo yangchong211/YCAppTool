@@ -1,10 +1,12 @@
-package com.yc.ycthreadpool;
+package com.yc.apptool.thread;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+
+import com.yc.apptool.R;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

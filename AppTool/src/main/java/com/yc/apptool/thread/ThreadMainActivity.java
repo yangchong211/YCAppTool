@@ -1,4 +1,4 @@
-package com.yc.ycthreadpool;
+package com.yc.apptool.thread;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+
+import com.yc.apptool.App;
+import com.yc.apptool.R;
 
 public class ThreadMainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,7 +27,6 @@ public class ThreadMainActivity extends AppCompatActivity implements View.OnClic
         } catch (Exception e){
             e.printStackTrace();
         }
-        App.getInstance().init();
     }
 
     @Override

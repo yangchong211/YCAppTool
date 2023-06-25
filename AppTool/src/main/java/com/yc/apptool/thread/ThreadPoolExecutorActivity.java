@@ -1,10 +1,12 @@
-package com.yc.ycthreadpool;
+package com.yc.apptool.thread;
 
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.yc.apptool.R;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +28,6 @@ public class ThreadPoolExecutorActivity extends AppCompatActivity implements Vie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_thread_count);
-
         findViewById(R.id.tv_0).setOnClickListener(this);
         findViewById(R.id.tv_1).setOnClickListener(this);
         findViewById(R.id.tv_2).setOnClickListener(this);

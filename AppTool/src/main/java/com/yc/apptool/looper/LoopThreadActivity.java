@@ -1,20 +1,22 @@
-package com.yc.apptool;
+package com.yc.apptool.looper;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.yc.animbusiness.AnimationActiviy;
-import com.yc.apptool.looper.LoopThreadActivity;
+import com.yc.apptool.R;
+import com.yc.apptool.UploadActivity;
 import com.yc.apptool.transition.TransitionActivity;
-import com.yc.apptool.transition.VideoPlayActivity;
+import com.yc.looperthread.DefaultLoopThread;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
 
-public class ToolMainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoopThreadActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RoundTextView tvView1;
     private RoundTextView tvView2;
@@ -28,6 +30,16 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
     private RoundTextView tvView10;
     private RoundTextView tvView11;
     private RoundTextView tvView12;
+
+    public static void startActivity(Context context) {
+        try {
+            Intent target = new Intent();
+            target.setClass(context, LoopThreadActivity.class);
+            context.startActivity(target);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,22 +77,21 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initData() {
-        tvView1.setText("1.版本更新案例库");
-        tvView2.setText("2.Activity之间转场动画");
-        tvView3.setText("3.各种动画合集案例");
-        tvView4.setText("4.测试线程循环执行案例");
+        tvView1.setText("1.开始轮训");
+        tvView2.setText("2.停止轮训");
+        tvView3.setText("3.结束轮训");
     }
+
+    private final DefaultLoopThread defaultLoopThread = new DefaultLoopThread();
 
     @Override
     public void onClick(View v) {
         if (v == tvView1){
-            startActivity(new Intent(this,UploadActivity.class));
+            defaultLoopThread.beginLoop();
         } else if (v == tvView2){
-            startActivity(new Intent(this, TransitionActivity.class));
+            defaultLoopThread.endLoop();
         } else if (v == tvView3){
-            AnimationActiviy.startActivity(this);
-        } else if (v == tvView4){
-            LoopThreadActivity.startActivity(this);
+            defaultLoopThread.release();
         }
     }
 
