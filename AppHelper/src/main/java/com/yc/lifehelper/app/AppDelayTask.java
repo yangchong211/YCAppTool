@@ -94,6 +94,8 @@ public class AppDelayTask extends AbsParallelTask {
                 .context(MainApplication.getInstance())
                 .threadSwitchOn(false)
                 .builder();
+//        manager.dispatcherUserPresent$AppStatusLib_debug();
+//        manager.dispatcherNetworkState$AppStatusLib_debug(false);
         manager.registerAppStatusListener(new BaseStatusListener() {
             @Override
             public void wifiStatusChange(boolean isWifiOn) {

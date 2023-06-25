@@ -3,9 +3,13 @@ package com.yc.lifehelper.app;
 import android.os.Looper;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.yc.anrtoollib.tool.ANRWatchDog;
 import com.yc.anrtoollib.watch.ANRError;
+import com.yc.anrtoollib.watch.ANRInterceptor;
 import com.yc.anrtoollib.watch.ANRListener;
+import com.yc.anrtoollib.watch.InterruptionListener;
 import com.yc.appcommoninter.IEventTrack;
 import com.yc.appcommoninter.ILogger;
 import com.yc.appcommoninter.IMonitorToggle;
@@ -53,7 +57,7 @@ public class AppCoreTask extends AbsParallelTask {
         initAnrListener();
         long end = System.currentTimeMillis();
         boolean isMainThread = (Looper.myLooper() == Looper.getMainLooper());
-        AppLogUtils.i("app init 1 task core total time : " + (end-start)
+        AppLogUtils.i("app init 1 task core total time : " + (end - start)
                 + " ; 线程是否是主线程" + isMainThread);
         TimeMonitorHelper.end("AppCoreTask");
     }
@@ -73,7 +77,7 @@ public class AppCoreTask extends AbsParallelTask {
         return DelegateTaskExecutor.getInstance().getCpuThreadExecutor();
     }
 
-    private void initLang(){
+    private void initLang() {
         // 初始化多语种框架
         LocaleService.getInstance().init(MainApplication.getInstance());
         // 设置语种变化监听器
@@ -117,12 +121,12 @@ public class AppCoreTask extends AbsParallelTask {
                 .setLogger(new ILogger() {
                     @Override
                     public void log(String log) {
-                        AppLogUtils.i("Longevity--"+log);
+                        AppLogUtils.i("Longevity--" + log);
                     }
 
                     @Override
                     public void error(String error) {
-                        AppLogUtils.e("Longevity--"+error);
+                        AppLogUtils.e("Longevity--" + error);
                     }
                 })
                 .build());
@@ -179,7 +183,7 @@ public class AppCoreTask extends AbsParallelTask {
                 .logDir(null)
                 //创建
                 .build();
-        CacheInitHelper.INSTANCE.init(MainApplication.getInstance(),cacheConfig);
+        CacheInitHelper.INSTANCE.init(MainApplication.getInstance(), cacheConfig);
         //最简单的初始化
         //CacheInitHelper.INSTANCE.init(CacheConfig.Companion.newBuilder().build());
     }
@@ -187,11 +191,33 @@ public class AppCoreTask extends AbsParallelTask {
     private void initAnrListener() {
         new ANRWatchDog(5000).setANRListener(new ANRListener() {
             @Override
-            public void onAppNotResponding(@NotNull ANRError error) {
+            public void onAppNotResponding(@NonNull ANRError error) {
                 Throwable throwable = error.fillInStackTrace();
                 AppLogUtils.d("ANRWatchDog", throwable);
             }
         }).start();
+
+        new ANRWatchDog(5000).setANRInterceptor(new ANRInterceptor() {
+                    @Override
+                    public long intercept(long duration) {
+                        return 20;
+                    }
+                })
+                .setInterruptionListener(new InterruptionListener() {
+                    @Override
+                    public void onInterrupted(@NonNull InterruptedException exception) {
+                        AppLogUtils.d("ANRWatchDog onInterrupted : ", exception);
+                    }
+                })
+                .setLogThreadsWithoutStackTrace(true)
+                .setIgnoreDebugger(false)
+                .setANRListener(new ANRListener() {
+                    @Override
+                    public void onAppNotResponding(@NotNull ANRError error) {
+                        Throwable throwable = error.fillInStackTrace();
+                        AppLogUtils.d("ANRWatchDog", throwable);
+                    }
+                }).start();
     }
 
 }
