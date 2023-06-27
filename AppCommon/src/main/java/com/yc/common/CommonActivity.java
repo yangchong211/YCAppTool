@@ -27,7 +27,6 @@ import com.yc.common.cache.CacheActivity;
 import com.yc.common.encypt.EncyptActivity;
 import com.yc.common.file.FileActivity;
 import com.yc.common.image.ImageActivity;
-import com.yc.common.net.NetWorkActivity;
 import com.yc.common.reflect.ReflectionActivity;
 import com.yc.common.tab.VpTabActivity;
 import com.yc.common.vp.ViewPagerActivity;
@@ -39,6 +38,8 @@ import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppInfoUtils;
+import com.yc.toolutils.ByteTranslateUtils;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -136,6 +137,8 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.btn_tab).setOnClickListener(this);
         findViewById(R.id.btn_encrypt).setOnClickListener(this);
         findViewById(R.id.btn_image).setOnClickListener(this);
+
+        testUtils();
     }
 
 
@@ -151,7 +154,6 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         }  else if (id == R.id.btn_sp1) {
             startActivity(new Intent(this, CacheActivity.class));
         }  else if (id == R.id.btn_sp2) {
-            startActivity(new Intent(this, NetWorkActivity.class));
         }  else if (id == R.id.btn_sp3) {
             FileExplorerActivity.startActivity(this);
         }  else if (id == R.id.btn_sp4) {
@@ -356,6 +358,18 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         //ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.this,listener);
     }
 
-
+    private void testUtils(){
+        byte[] bytes = {0x12, 0x34, (byte) 0xAB, (byte) 0xCD};
+        String toHex1 = ByteTranslateUtils.bytesToHex1(bytes);
+        String toHex2 = ByteTranslateUtils.bytesToHex2(bytes);
+        String toHex3 = ByteTranslateUtils.bytesToHex3(bytes);
+        //bytesToHex : 1234abcd  ----  1234abcd  ----  1234abcd
+        AppLogHelper.d("bytesToHex : " + toHex1 + "  ----  " + toHex2 + "  ----  " + toHex3);
+        byte[] bytes1 = ByteTranslateUtils.toBytes(toHex1);
+        String str = "687474703A2F2F77656978696E2E71712E636F6D2F722F39307852536366454170703972594D7139786E6C";
+        byte[] bytes2 = ByteTranslateUtils.toBytes(str);
+        String toHex4 = ByteTranslateUtils.bytesToHex1(bytes2);
+        AppLogHelper.d("bytesToHex : " + toHex4);
+    }
 
 }
