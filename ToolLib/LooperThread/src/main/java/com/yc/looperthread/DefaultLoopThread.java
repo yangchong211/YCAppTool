@@ -4,9 +4,10 @@ import android.util.Log;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-public class DefaultLoopThread extends AbsLoopThread{
+public class DefaultLoopThread extends AbsLoopThread {
 
     private final AtomicLong count = new AtomicLong(0);
+
     @Override
     public long getSleepTime() {
         return 1000;
