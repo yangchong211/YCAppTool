@@ -1,15 +1,14 @@
 package com.bumptech.glide.util.pool;
 
 import androidx.annotation.NonNull;
-import android.support.v4.util.Pools.Pool;
-import android.support.v4.util.Pools.SimplePool;
-import android.support.v4.util.Pools.SynchronizedPool;
+import androidx.core.util.Pools;
+
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Provides implementations of {@link Pool} never return {@code null}, log when new instances are
+ * Provides implementations of {@link Pools.Pool} never return {@code null}, log when new instances are
  * created, and that can use the {@link com.bumptech.glide.util.pool.FactoryPools.Poolable}
  * interface to ensure objects aren't used while inside the pool.
  */
@@ -26,54 +25,54 @@ public final class FactoryPools {
   private FactoryPools() { }
 
   /**
-   * Returns a non-thread safe {@link Pool} that never returns {@code null} from
-   * {@link Pool#acquire()} and that contains objects of the type created by the given
+   * Returns a non-thread safe {@link Pools.Pool} that never returns {@code null} from
+   * {@link Pools.Pool#acquire()} and that contains objects of the type created by the given
    * {@link Factory} with the given maximum size.
    *
-   * <p>If the pool is empty when {@link Pool#acquire()} is called, the given {@link Factory} will
+   * <p>If the pool is empty when {@link Pools.Pool#acquire()} is called, the given {@link Factory} will
    * be used to create a new instance.
    *
    * @param <T> The type of object the pool will contains.
    */
   @NonNull
-  public static <T extends Poolable> Pool<T> simple(int size, @NonNull Factory<T> factory) {
-    return build(new SimplePool<T>(size), factory);
+  public static <T extends Poolable> Pools.Pool<T> simple(int size, @NonNull Factory<T> factory) {
+    return build(new Pools.SimplePool<T>(size), factory);
   }
 
   /**
-   * Returns a new thread safe {@link Pool} that never returns {@code null} from
-   * {@link Pool#acquire()} and that contains objects of the type created by the given
+   * Returns a new thread safe {@link Pools.Pool} that never returns {@code null} from
+   * {@link Pools.Pool#acquire()} and that contains objects of the type created by the given
    * {@link Factory} with the given maximum size.
    *
-   * <p>If the pool is empty when {@link Pool#acquire()} is called, the given {@link Factory} will
+   * <p>If the pool is empty when {@link Pools.Pool#acquire()} is called, the given {@link Factory} will
    * be used to create a new instance.
    *
    * @param <T> The type of object the pool will contains.
    */
   @NonNull
-  public static <T extends Poolable> Pool<T> threadSafe(int size, @NonNull Factory<T> factory) {
-    return build(new SynchronizedPool<T>(size), factory);
+  public static <T extends Poolable> Pools.Pool<T> threadSafe(int size, @NonNull Factory<T> factory) {
+    return build(new Pools.SynchronizedPool<T>(size), factory);
   }
 
   /**
-   * Returns a new {@link Pool} that never returns {@code null} and that contains {@link List Lists}
+   * Returns a new {@link Pools.Pool} that never returns {@code null} and that contains {@link List Lists}
    * of a specific generic type with a standard maximum size of 20.
    *
-   * <p>If the pool is empty when {@link Pool#acquire()} is called, a new {@link List} will be
+   * <p>If the pool is empty when {@link Pools.Pool#acquire()} is called, a new {@link List} will be
    * created.
    *
    * @param <T> The type of object that the {@link List Lists} will contain.
    */
   @NonNull
-  public static <T> Pool<List<T>> threadSafeList() {
+  public static <T> Pools.Pool<List<T>> threadSafeList() {
     return threadSafeList(DEFAULT_POOL_SIZE);
   }
 
   /**
-   * Returns a new thread safe {@link Pool} that never returns {@code null} and that contains
+   * Returns a new thread safe {@link Pools.Pool} that never returns {@code null} and that contains
    * {@link List Lists} of a specific generic type with the given maximum size.
    *
-   * <p>If the pool is empty when {@link Pool#acquire()} is called, a new {@link List} will be
+   * <p>If the pool is empty when {@link Pools.Pool#acquire()} is called, a new {@link List} will be
    * created.
    *
    * @param <T> The type of object that the {@link List Lists} will contain.
@@ -81,8 +80,8 @@ public final class FactoryPools {
   // Public API.
   @SuppressWarnings("WeakerAccess")
   @NonNull
-  public static <T> Pool<List<T>> threadSafeList(int size) {
-    return build(new SynchronizedPool<List<T>>(size), new Factory<List<T>>() {
+  public static <T> Pools.Pool<List<T>> threadSafeList(int size) {
+    return build(new Pools.SynchronizedPool<List<T>>(size), new Factory<List<T>>() {
       @NonNull
       @Override
       public List<T> create() {
@@ -97,14 +96,14 @@ public final class FactoryPools {
   }
 
   @NonNull
-  private static <T extends Poolable> Pool<T> build(@NonNull Pool<T> pool,
-      @NonNull Factory<T> factory) {
+  private static <T extends Poolable> Pools.Pool<T> build(@NonNull Pools.Pool<T> pool,
+                                                          @NonNull Factory<T> factory) {
     return build(pool, factory, FactoryPools.<T>emptyResetter());
   }
 
   @NonNull
-  private static <T> Pool<T> build(@NonNull Pool<T> pool, @NonNull Factory<T> factory,
-      @NonNull Resetter<T> resetter) {
+  private static <T> Pools.Pool<T> build(@NonNull Pools.Pool<T> pool, @NonNull Factory<T> factory,
+                                         @NonNull Resetter<T> resetter) {
     return new FactoryPool<>(pool, factory, resetter);
   }
 
@@ -141,12 +140,12 @@ public final class FactoryPools {
     StateVerifier getVerifier();
   }
 
-  private static final class FactoryPool<T> implements Pool<T> {
+  private static final class FactoryPool<T> implements Pools.Pool<T> {
     private final Factory<T> factory;
     private final Resetter<T> resetter;
-    private final Pool<T> pool;
+    private final Pools.Pool<T> pool;
 
-    FactoryPool(@NonNull Pool<T> pool, @NonNull Factory<T> factory, @NonNull Resetter<T> resetter) {
+    FactoryPool(@NonNull Pools.Pool<T> pool, @NonNull Factory<T> factory, @NonNull Resetter<T> resetter) {
       this.pool = pool;
       this.factory = factory;
       this.resetter = resetter;
