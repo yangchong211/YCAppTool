@@ -171,11 +171,12 @@ project(':AppShadowLib').projectDir = new File('WidgetLib/AppShadowLib')
 project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinatorLayout')
 
 
+
 /* +++++++++ 框架基础工具库 +++++++++ */
-include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib',':UsbSocket',
+include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':EasySocket',
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',
-        ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
-        ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',
+        ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',':AdbHelper',
+        ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',':LooperThread',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib', ':UsbInterface',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib', ':AppClickHelper'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
@@ -203,8 +204,11 @@ project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
 project(':TransitionHelper').projectDir = new File('ToolLib/TransitionHelper')
 project(':AnimBaseHelper').projectDir = new File('ToolLib/AnimBaseHelper')
 project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
-project(':UsbSocket').projectDir = new File('ToolLib/UsbSocket')
+project(':EasySocket').projectDir = new File('ToolLib/EasySocket')
 project(':AppClickHelper').projectDir = new File('ToolLib/AppClickHelper')
+project(':LooperThread').projectDir = new File('ToolLib/LooperThread')
+project(':AdbHelper').projectDir = new File('ToolLib/AdbHelper')
+
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -226,13 +230,15 @@ project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 //project(':AppInitCommon').projectDir = new File('AptHelper/AppInitCommon')
 //project(':AppInitCompiler').projectDir = new File('AptHelper/AppInitCompiler')
 
+
+
 /* +++++++++ App监控库 +++++++++ */
 include ':MonitorCpuLib', ':MonitorCatonLib', ':MonitorAnrLib', ':MonitorCrashLib',
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
         ':MonitorXposed', ':MonitorMemory',':MonitorLeakLib',
         ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',':MonitorThread',
         ':MonitorPrivacy', ':MonitorTimeLib', ':MonitorSpeed', ':MonitorInterceptor',
-        ':MonitorPhone', ':MonitorPicture'
+        ':MonitorPhone', ':MonitorPicture', ':MonitorMethod'
 project(':MonitorCpuLib').projectDir = new File('MonitorLib/MonitorCpuLib')
 project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
 project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
@@ -254,7 +260,7 @@ project(':MonitorPhone').projectDir = new File('MonitorLib/MonitorPhone')
 project(':MonitorPicture').projectDir = new File('MonitorLib/MonitorPicture')
 project(':MonitorLeakLib').projectDir = new File('MonitorLib/MonitorLeakLib')
 project(':MonitorThread').projectDir = new File('MonitorLib/MonitorThread')
-
+project(':MonitorMethod').projectDir = new File('MonitorLib/MonitorMethod')
 
 
 /* +++++++++ 音视频 +++++++++ */
@@ -304,5 +310,6 @@ project(':EventbusAndroid').projectDir = new File('ThirdLib/EventbusAndroid')
 project(':EventBus').projectDir = new File('ThirdLib/EventBus')
 //OkHttp
 project(':OkHttpLib').projectDir = new File('ThirdLib/OkHttpLib')
+
 
 
