@@ -3,22 +3,37 @@
 - 01.框架公共组件层
 - 02.组件化建设
 - 03.公共组件库依赖
-- 04.Activity栈管理库
-- 05.通用存储库
-- 06.Log日志打印库
-- 07.App重新启动库
-- 08.通用工具类库
-- 09.通用基类封装库
-- 10.反射工具类库
-- 11.Intent封装库
-- 12.基础接口库
-- 13.异常上报接口库
-- 14.File流读写库
-- 15.加密和解密库
-- 16.Lru内存缓存库
-- 17.Lru磁盘缓存库
-- 18.磁盘分区库
-- 19.来电和去电监听
+- 04.Activity栈管理库[ActivityManager]()
+- 05.通用存储库[AppBaseStore]()
+- 06.Log日志打印库[AppLogLib]()
+- 07.App重新启动库[AppRestartLib]()
+- 08.通用工具类库[ToolUtilsLib]()
+- 09.通用基类封装库[BaseClassLib]()
+- 10.反射工具类库[ReflectionLib]()
+- 11.Intent封装库[SafeIntentLib]()
+- 12.基础接口库[AppCommonInter]()
+- 13.异常上报接口库[EventUploadLib]()
+- 14.File流读写库[FileIoHelper]()
+- 15.加密和解密库[AppEncryptLib]()
+- 16.Lru内存缓存库[AppLruCache]()
+- 17.Lru磁盘缓存库[AppLruDisk]()
+- 18.磁盘分区库[AppMediaStore]()
+- 19.来电和去电监听[ActivityManager]()
+- 20.广播监听库[AppStatusLib]()
+- 21.权限申请封装库[AppPermission]()
+- 22.Fragment周期监听[FragmentManager]()
+- 23.App启动优化库[ParallelTaskLib]()
+- 25.屏幕截屏库[AppScreenLib]()
+- 26.内存获取库[ToolMemoryLib]()
+- 27.Wi-Fi工具库[AppWiFiLib]()
+- 28.Vp相关适配器库[BaseVpAdapter]()
+- 30.网络判断库[NetWorkLib]()
+- 31.手机方向监听库[PhoneSensor]()
+- 32.File文件库[ToolFileLib]()
+- 33.Zip压缩库[ZipFileLib]()
+
+
+
 
 
 ### 01.框架公共组件层
@@ -32,7 +47,7 @@
 
 ### 03.公共组件库依赖
 - 关于依赖库如下所示，可以根据需求选择性使用：
-    ``` java
+    ```
     //base基类
     implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.8'
     implementation 'com.github.yangchong211.YCCommonLib:ComponentLib:1.4.8'
@@ -106,7 +121,7 @@
 ### 04.Activity栈管理库
 - 非常好用的activity任务栈管理库，自动化注册。
     - 完全解耦合的activity栈管理，拿来即可用，或者栈顶Activity，移除添加，推出某个页面，获取应用注册Activity列表等，可以注册监听某个页面的生命周期，小巧好用。
-    ``` java
+    ```
     //退出应用程序
     ActivityManager.getInstance().appExist();
     //查找指定的Activity
@@ -145,7 +160,7 @@
     //ActivityManager.getInstance().registerActivityLifecycleListener(CommonActivity.this,listener);
     ```
 - 如何依赖该库
-    ``` java
+    ```
     
     ```
 - 相关文档连接
@@ -172,7 +187,7 @@
 ### 06.Log日志打印库
 - 通用日志库框架，专用LogCat工具，主要功能全局配置log输出, 个性化设置Tag，可以设置日志打印级别，支持打印复杂对象，可以实现自定义日志接口，支持简化版本将日志写入到文件中。小巧好用！
 - 第一步：初始化操作
-    ``` java
+    ```
     String ycLogPath = AppFileUtils.getCacheFilePath(this, "ycLog");
     AppLogConfig config = new AppLogConfig.Builder()
             //设置日志tag总的标签
@@ -190,7 +205,7 @@
     AppLogFactory.init(config);
     ```
 - 第二步：使用Log日志，十分简单，如下所示
-    ``` java
+    ```
     //自己带有tag标签
     AppLogHelper.d("MainActivity: ","debug log");
     //使用全局tag标签
@@ -217,15 +232,15 @@
     - 使用到了简单工厂模式，通过工厂类，只要提供一个参数传给工厂，就可以直接得到一个想要的产品对象，并且可以按照接口规范来调用产品对象的所有功能（方法）。
     - 比如App切换了debug或者release环境，需要进行app重新启动，可以使用该库，小巧好用。一行代码搞定，傻瓜式使用！
 - 第一种方式，开启一个新的服务KillSelfService，用来重启本APP。
-    ``` java
+    ```
     RestartAppHelper.restartApp(this,RestartFactory.SERVICE);
     ```
 - 第二种方式，使用闹钟延时，使用PendingIntent延迟意图，然后重启app
-    ``` java
+    ```
     RestartAppHelper.restartApp(this,RestartFactory.ALARM);
     ```
 - 第三种方式，检索获取项目中LauncherActivity，然后设置该activity的flag和component启动app
-    ``` java
+    ```
     RestartAppHelper.restartApp(this,RestartFactory.MAINIFEST);
     ```
 
@@ -233,7 +248,7 @@
 ### 08.通用工具类库
 - ToolUtils 是一个 Android 工具库。便于开发人员，快捷高效开发需求。
 - 常用的基本上都有，还包括图片压缩，日历事件，异常上报工具，网络，手机方向监听，防爆力点击等工具类。
-    ``` java
+    ```
     FastClickUtils              防爆力点击，可以自定义设置间距时间
     PerfectClickListener        避免在1秒内出发多次点击
     AppFileUtils                file文件工具类
@@ -268,7 +283,7 @@
 
 ### 11.Intent封装库
 - 通用打印Intent对象内容到log日志栏中，支持普通intent和延迟PendingIntent。超级方便检查，可以打印action，category，data，flags，extras等等
-    ``` java
+    ```
     //打印intent所有的数据
     IntentLogger.print("intent test : ", intent)
     //打印intent中component
@@ -300,7 +315,7 @@
 ### 13.异常上报接口库
 - 基础库作为一个功能比较独立的lib，总不可能依赖APM组件吧。因此，就采用抽象类隔离！App壳工程继承抽象类，lib库直接调用抽象类。
 - api调用如下所示，直接拿来用即可。下面这些调用可以用在lib库中，特轻量级上报
-    ``` java
+    ```
     //上报日志
     LoggerReporter.report("DiskLruCacheHelper" , "lru disk file path : " + directory.getPath());
     LoggerReporter.report("DiskLruCacheHelper clear cache");
@@ -312,7 +327,7 @@
     EventReporter.report("initCacheSuccess",map)
     ```
 - 需要在壳工程代码中，添加具体实现类。代码如下所示：
-    ``` java
+    ```
     //LoggerReporter，ExceptionReporter，EventReporter都是类似的
     public class LoggerReporterImpl extends LoggerReporter {
         @Override
@@ -331,14 +346,14 @@
 ### 14.File流读写库
 #### 14.1 从文件中读数据
 - 从文件中读数据，使用普通字节流或者字符流方式，如下所示
-    ``` java
+    ```
     //字节流读取file文件，转化成字符串
     String file2String = FileIoUtils.readFile2String1(fileName);
     //字符流读取file文件，转化成字符串
     String file2String = FileIoUtils.readFile2String2(fileName);
     ```
 - 从文件中读数据，使用高效流方式，如下所示
-    ``` java
+    ```
     //高效字节流读取file文件，转化成字符串
     String file2String = BufferIoUtils.readFile2String1(fileName);
     //高效字符流读取file文件，转化成字符串
@@ -348,14 +363,14 @@
 
 #### 14.2 将内容写入文件
 - 从文件中读数据，使用普通字节流或者字符流方式，如下所示
-    ``` java
+    ```
     //使用字节流，写入字符串内容到文件中
     FileIoUtils.writeString2File1(content,fileName);
     //使用字符流，写入字符串内容到文件中
     FileIoUtils.writeString2File2(content,fileName);
     ```
 - 从文件中读数据，使用高效流方式，如下所示
-    ``` java
+    ```
     //高效字节流写入字符串内容到文件中
     BufferIoUtils.writeString2File1(content,fileName);
     //高效字符流写入字符串内容到文件中
@@ -365,14 +380,14 @@
 
 #### 14.3 文件复制操作
 - 使用字节流&字符流复制
-    ``` java
+    ```
     //使用字节流复制文件，根据文件路径拷贝文件。
     FileIoUtils.copyFile1(fileName,newFileName);
     //使用字符流复制文件，根据文件路径拷贝文件。
     FileIoUtils.copyFile2(fileName,newFileName);
     ```
 - 使用高效流复制
-    ``` java
+    ```
     //使用高效字符缓冲流，根据文件路径拷贝文件。
     BufferIoUtils.copyFile1(fileName,newFileName);
     //使用高效字节缓冲流，根据文件路径拷贝文件
@@ -382,7 +397,7 @@
 
 #### 14.4 将流对象写入文件
 - 将InputStream流对象写入到本地文件中
-    ``` java
+    ```
     //使用字符流读取流数据到新的file文件中
     FileIoUtils.writeFileFromIS1(is,srcFile);
     //使用字节流将流数据写到文件中
@@ -393,7 +408,7 @@
 
 ### 15.加密和解密库
 - 关于MD5加密Api如下所示
-    ``` java
+    ```
     //对字符串md5加密
     String md2 = Md5EncryptUtils.encryptMD5ToString(string);
     //对字符串md5加密，加盐处理
@@ -408,14 +423,14 @@
     String md7 = Md5EncryptUtils.encryptMD5File2(new File(txt));
     ```
 - 关于base64加密和解密的Api如下所示
-    ``` java
+    ```
     //字符Base64加密
     String strBase64_2 = Base64Utils.encodeToString(str);
     //字符Base64解密
     String strBase64_3 = Base64Utils.decodeToString(strBase64_2);
     ```
 - 关于DES加密和解密的Api如下所示
-    ``` java
+    ```
     //DES加密字符串
     String encrypt1 = DesEncryptUtils.encrypt(string,password);
     //DES解密字符串
@@ -430,14 +445,14 @@
     String decrypt2 = DesEncryptUtils.decrypt(encrypt2.getBytes(), password.getBytes());
     ```
 - 关于AES加密和解密的Api如下所示
-    ``` java
+    ```
     //AES加密字符串
     String encrypt1 = AesEncryptUtils.encrypt(string,password);
     //AES解密字符串
     String decrypt1 = AesEncryptUtils.decrypt(encrypt1 , password);
     ```
 - 关于RC4加密和解密的Api如下所示
-    ``` java
+    ```
     //RC4加密
     String encrypt1 = Rc4EncryptUtils.encryptString(string, secretKey);
     //RC4解密
@@ -461,7 +476,7 @@
 - 业务场景说明
     - 在App进行音视频聊天的时，这个时候来电了，电话接通后，需要关闭音视频聊天。这个时候就需要监听电话来电和去电状态。
 - 如何依赖该库
-    ``` java
+    ```
     
     ```
 - 相关文档连接
