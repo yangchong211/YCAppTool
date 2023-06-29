@@ -4,7 +4,7 @@ import android.util.Log;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public abstract class AbsLoopThread extends Thread {
+public abstract class AbsLoopThread extends Thread implements IDoAction {
 
     static final String TAG = AbsLoopThread.class.getSimpleName();
     private volatile boolean beginRead = false;
@@ -31,8 +31,9 @@ public abstract class AbsLoopThread extends Thread {
     }
 
     /**
-     * 启动读卡线程
+     * 启动线程
      */
+    @Override
     public void startThread() {
         //防止多次启动
         if (!isStart.get()) {
@@ -46,18 +47,18 @@ public abstract class AbsLoopThread extends Thread {
     /**
      * 开始循环
      */
+    @Override
     public void beginLoop() {
-        startThread();
         Log.v(TAG, "beginLoop");
-        //每次开启读卡的时候都要检测一下线程是否需要跑起来
+        //每次开启循环的时候都要检测一下线程是否需要跑起来
         startThread();
-        //一直寻卡
         beginRead = true;
     }
 
     /**
      * 暂停循环
      */
+    @Override
     public void endLoop() {
         Log.v(TAG, "endRead");
         beginRead = false;
@@ -66,6 +67,7 @@ public abstract class AbsLoopThread extends Thread {
     /**
      * 释放线程。如果线程释放了，则没有办法再次start，除非是创建新的线程
      */
+    @Override
     public void release() {
         Log.v(TAG, "release");
         beginRead = false;
@@ -93,8 +95,4 @@ public abstract class AbsLoopThread extends Thread {
         return 100;
     }
 
-    /**
-     * 循环体做的事情，子类必须实现
-     */
-    public abstract void doAction();
 }
