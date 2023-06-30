@@ -2,24 +2,25 @@ package com.yc.looperthread;
 
 import android.util.Log;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.locks.ReentrantLock;
 
-public abstract class AbsScheduledLoopThread implements IDoAction {
+public abstract class AbsPollingThread implements IDoAction {
 
-    static final String TAG = AbsScheduledLoopThread.class.getSimpleName();
+    protected static final String TAG = AbsPollingThread.class.getSimpleName();
+    protected final AtomicLong count = new AtomicLong(0);
     private final AtomicBoolean isStart = new AtomicBoolean(false);
-    private ScheduledExecutorService scheduledExecutorService;
-    private volatile boolean beginRead = false;
+    protected volatile boolean beginRead = false;
 
     @Override
     public void startThread() {
         //防止多次启动
         if (!isStart.get()) {
             Log.v(TAG, "startThread");
-            scheduledPolling();
+            startPolling();
             isStart.set(true);
         }
     }
@@ -42,23 +43,10 @@ public abstract class AbsScheduledLoopThread implements IDoAction {
     public void release() {
         Log.v(TAG, "release");
         beginRead = false;
-        scheduledExecutorService.shutdownNow();
-        scheduledExecutorService = null;
         isStart.set(false);
     }
 
-    private void scheduledPolling() {
-        scheduledExecutorService = Executors.newScheduledThreadPool(1);
-        scheduledExecutorService.scheduleAtFixedRate(() -> {
-            //如果此执行器已关闭，则返回true。
-            if (!scheduledExecutorService.isShutdown()) {
-                // 轮询的代码
-                if (beginRead && isLoop()) {
-                    doAction();
-                }
-            }
-        }, 0, getSleepTime(), TimeUnit.MILLISECONDS);
-    }
+    public abstract void startPolling();
 
     /**
      * 默认条件是true
@@ -77,4 +65,5 @@ public abstract class AbsScheduledLoopThread implements IDoAction {
     public long getSleepTime() {
         return 100;
     }
+
 }

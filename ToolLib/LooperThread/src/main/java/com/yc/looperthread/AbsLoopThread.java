@@ -4,6 +4,9 @@ import android.util.Log;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * 使用Thread.sleep实现轮询。一直做while循环
+ */
 public abstract class AbsLoopThread extends Thread implements IDoAction {
 
     static final String TAG = AbsLoopThread.class.getSimpleName();
@@ -21,6 +24,7 @@ public abstract class AbsLoopThread extends Thread implements IDoAction {
                     e.printStackTrace();
                 } finally {
                     try {
+                        //线程轮训的方式中延时操作阻塞了线程
                         Thread.sleep(getSleepTime());
                     } catch (InterruptedException e) {
                         e.printStackTrace();

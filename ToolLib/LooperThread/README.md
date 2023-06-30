@@ -13,14 +13,28 @@
 - 实时推送
     - 使用轮询的方式可以实现实时推送功能。当客户端连接到服务器之后，服务器就可以通过轮询不断的向客户端推送实时消息。
 - 监控系统
-    - 轮询可以实现监控系统的功能。当需要监控某个系统的状态时，可以使用轮询不断的查询该系统的状态信息，并及时的进行预防措施。
+    - 轮询可以实现监控系统的功能。当需要监控某个系统的状态时，可以使用轮询不断的查询该系统的状态信息，并及时的进行预防措施，或者做数据上报操作。
 - 二维码扫码
     - 比如超市的支付硬件设备，会一直轮训扫码。当你靠近二维码支付的时候，就立马读取到二维码数据进行支付。
 
 
-#### 1.2 什么是轮训
+
+#### 1.2 什么是轮询
 - 轮询（Poll）
     - 是一种计算机程序查询状态的方式，是指定期访问一个或多个设备或其他资源以获取它们的状态。
+- 简单理解轮询
+    - 简单理解就是 App 端每隔一定的时间重复请求的操作就叫做轮询操作，比如：App 端每隔一段时间上报一次定位信息，App 端每隔一段时间拉去一次用户状态等，这些应该都是轮询请求。
+
+
+#### 1.3 需求技术分析
+- 业务需求的实现目标
+    - 1.项目中多处要使用到轮询，刚开始在业务代码中实现，随着业务增多，轮询功能和业务耦合严重。为了让该功能完全解耦合，因此简单封装！
+    - 2.不管是哪一种技术方式实现轮询操作，功能上都可以满足业务需求，都需要有开始轮询，停止轮询，销毁等API方法。抽象一套统一的API接口
+- 注意事项说明
+    - 轮训操作一般都有一定的生命周期，比如在某个页面打开时启动轮训操作，在某个页面关闭时取消轮训操作；
+    - 轮训操作的请求间隔需要根据具体的需求确定，还要注意轮询；
+
+
 
 
 ### 02.常见思路和做法
@@ -29,6 +43,7 @@
     - 第一种方案：使用Thread.sleep实现轮询。一直做while循环
     - 第二种方案：使用ScheduledExecutorService实现轮询
     - 第三种方案：使用Timer实现定时性周期性任务轮训
+    - 第四种方案：使用Handler不断发送消息来实现轮训
 
 
 #### 2.2 使用Thread.sleep实现轮询
@@ -62,27 +77,61 @@
     ```
 
 
-#### 2.4 两种方式有什么区别
-- 相同点对比分析
-    - 两种方式都可以实现轮训的操作。功能上都可以满足业务需求。开始循环，暂停循环，销毁循环等。
-- 不同点对比分析
-    - 第一种方式使用Thread.sleep实现轮询，当销毁之后，没有办法再次开始循环，因为线程interrupt，线程死亡。再次使用需要新创建线程对象！
-    - 第二种方式使用ScheduledExecutorService线程池实现轮训，销毁之后还是可以再次开始循环操作。
+#### 2.4 使用Timer实现定时性周期性任务轮训
+- 使用timer定时执行TimerTask，然后开始延迟轮询操作
+    ```
+    timer = new Timer();
+    timer.schedule(new CommitTimer(), 0, getSleepTime());
+    private class CommitTimer extends TimerTask {
+        @Override
+        public void run() {
+            // 轮询的代码
+            doAction();
+        }
+    }
+    ```
 
+
+
+#### 2.5 使用Handler不断发送消息来实现轮训
+- 在HandleMessage方法中执行任务，任务结束后向MessageQueue中添加延时消息。
+    ```
+    HandlerThread handlerThread = new HandlerThread("LooperThread");
+    handlerThread.start();
+    handler = new Handler(handlerThread.getLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == MSG_GET_COMPARE_RESULT) {
+                // 轮询的代码
+                doAction();
+                //向MessageQueue中添加延时消息，后重复执行以上任务
+                handler.sendEmptyMessageDelayed(MSG_GET_COMPARE_RESULT, getSleepTime());
+            }
+        }
+    };
+    ```
+
+
+#### 2.6 两种方式有什么区别
+- 使用Thread.sleep实现轮询
+    - 使用Thread.sleep实现轮询，当销毁之后，没有办法再次开始循环，因为线程interrupt，线程死亡。再次使用需要新创建线程对象！
+- 使用ScheduledExecutorService实现轮询
+    - 使用ScheduledExecutorService线程池实现轮训，销毁之后还是可以再次开始循环操作。
+- 使用Timer实现定时性周期性任务轮训
+    - 使用timer定时执行TimerTask，如果有异步任务，下次任务开始执行时需要判断上次任务是否完成，从而导致任务间隔时间不可控。
+- 使用Handler不断发送消息来实现轮训
+    - 如果有异步任务，只需在异步任务执行完毕后再向MessageQueue中添加延时消息，任务间隔时间可控。
 
 
 ### 03.Api调用说明
-#### 3.1 最简单的API调用
-- 第一步：创建对象，两种选其一即可。
+#### 3.1 切换方式API不变
+
+
+#### 3.2 最简单的API调用
+- 第一步：创建对象，关于多种方式，不管使用哪一种，Api都是一样的。
     ```
     private final DefaultLoopThread defaultLoopThread = new DefaultLoopThread(){
-        @Override
-        public void doAction() {
-            super.doAction();
-            //todo 做你的轮训业务操作
-        }
-    };
-    private final DefaultScheduledThread defaultLoopThread = new DefaultScheduledThread(){
         @Override
         public void doAction() {
             super.doAction();
@@ -103,13 +152,14 @@
     ```
 
 
-#### 3.2 一些自定义功能
+#### 3.3 一些自定义功能
 - 比如想要设置轮训的间隔时间，还有轮训的控制条件，该怎么处理？
     ```
     private final DefaultLoopThread defaultLoopThread = new DefaultLoopThread(){
         @Override
         public void doAction() {
             super.doAction();
+            //轮询做的操作
         }
 
         @Override
@@ -132,10 +182,21 @@
 #### 4.1 scheduleAtFixedRate原理
 
 
-#### 4.2
+
+#### 4.2 销毁做的操作
+
+
+
+#### 4.3 遇到的坑说明
 
 
 ### 05.其他问题说明
+#### 5.1 轮询性能探讨分析
+
+
+#### 5.2 如何优化轮询策略
+
+
 
 
 
