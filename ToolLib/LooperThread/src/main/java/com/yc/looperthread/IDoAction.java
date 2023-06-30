@@ -1,5 +1,12 @@
 package com.yc.looperthread;
 
+/**
+ * 轮询方案统一接口
+ * 第一种方案：使用Thread.sleep实现轮询。一直做while循环
+ * 第二种方案：使用ScheduledExecutorService实现轮询
+ * 第三种方案：使用Timer实现定时性周期性任务轮训
+ * 第四种方案：使用Handler不断发送消息来实现轮训
+ */
 public interface IDoAction {
 
     /**
