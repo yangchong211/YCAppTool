@@ -28,6 +28,7 @@ public class ScheduledLoopThread extends AbsPollingThread {
     @Override
     public void startPolling() {
         scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        //固定速率计时器（ scheduleAtFixedRate() ）基于开始时间（因此每个迭代将在startTime + iterationNumber * delayTime处执行）。
         scheduledExecutorService.scheduleAtFixedRate(() -> {
             //如果此执行器已关闭，则返回true。
             if (!scheduledExecutorService.isShutdown()) {
@@ -37,6 +38,18 @@ public class ScheduledLoopThread extends AbsPollingThread {
                 }
             }
         }, 0, getSleepTime(), TimeUnit.MILLISECONDS);
+
+
+        //固定延迟计时器（ schedule() ）基于前一次执行（因此每次迭代将在lastExecutionTime + delayTime处执行）。
+//        scheduledExecutorService.schedule(() -> {
+//            //如果此执行器已关闭，则返回true。
+//            if (!scheduledExecutorService.isShutdown()) {
+//                // 轮询的代码
+//                if (beginRead && isLoop()) {
+//                    doAction();
+//                }
+//            }
+//        },  getSleepTime(), TimeUnit.MILLISECONDS);
     }
 
 }

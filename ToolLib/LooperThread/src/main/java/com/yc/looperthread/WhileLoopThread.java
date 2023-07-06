@@ -18,8 +18,13 @@ public class WhileLoopThread extends AbsPollingThread {
     public void release() {
         super.release();
         //中断可以理解为线程的一个标志位，它表示了一个运行中的线程是否被其他线程进行了中断操作。
-        thread.interrupt();
-        thread = null;
+        try {
+            thread.interrupt();
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            thread = null;
+        }
     }
 
     private final Runnable runnable = new Runnable() {
