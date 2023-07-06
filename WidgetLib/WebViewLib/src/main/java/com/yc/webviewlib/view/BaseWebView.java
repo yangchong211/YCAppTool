@@ -10,7 +10,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.view.View;
 
 import com.tencent.smtt.sdk.CookieManager;
 import com.tencent.smtt.sdk.DownloadListener;
@@ -22,12 +21,11 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebStorage;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewDatabase;
+import com.yc.clickhelper.FastClickUtils;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.click.FastClickUtils;
 import com.yc.webviewlib.base.RequestInfo;
 import com.yc.webviewlib.utils.X5LogUtils;
-import com.yc.webviewlib.utils.X5WebUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
