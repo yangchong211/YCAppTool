@@ -19,7 +19,7 @@
 
 #### 1.2 图片基础概念
 - ARGB介绍
-    - ARGB颜色模型：最常见的颜色模型，设备相关，四种通道，取值均为[0，255]，即转化成二进制位0000 0000 ~ 1111 1111。
+    - ARGB颜色模型：最常见的颜色模型，设备相关，四种通道，取值均为0，255，即转化成二进制位0000 0000 ~ 1111 1111。
     - A：Alpha (透明度) R：Red (红) G：Green (绿) B：Blue (蓝)
 - Bitmap色彩模式
     - Bitmap.Config是Bitmap的一个枚举内部类，它表示的就是每个像素点对ARGB通道值的存储方案。取值有以下四种：
@@ -49,7 +49,7 @@
 
 #### 2.2 质量压缩
 - 在Android中，对图片进行质量压缩，通常我们的实现方式如下所示：
-    ``` java
+    ```
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     //quality 为0～100，0表示最小体积，100表示最高质量，对应体积也是最大
     bitmap.compress(Bitmap.CompressFormat.JPEG, quality , outputStream);
@@ -63,7 +63,7 @@
 
 #### 2.3 尺寸压缩
 - 采样率压缩
-    ``` java
+    ```
     BitmapFactory.Options options = new BitmapFactory.Options();
     //或者 inDensity 搭配 inTargetDensity 使用，算法和 inSampleSize 一样
     options.inSampleSize = 2; //设置图片的缩放比例(宽和高) , google推荐用2的倍数：
@@ -77,7 +77,7 @@
 
 #### 2.4 双线性采样
 - 双线性采样（Bilinear Resampling）在 Android 中的使用方式一般有两种：
-    ``` java
+    ```
     Bitmap bitmap = BitmapFactory.decodeFile("xxx.png");
     Bitmap compress = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth()/2, bitmap.getHeight()/2, true);
     

@@ -31,6 +31,7 @@
 - 31.手机方向监听库[PhoneSensor]()
 - 32.File文件库[ToolFileLib]()
 - 33.Zip压缩库[ZipFileLib]()
+- 34.多次点击判断库[AppClickHelper]()
 
 
 
