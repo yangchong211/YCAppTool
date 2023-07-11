@@ -16,7 +16,7 @@ public final class ClickHelper {
     /**
      * 检测多次按下的时间间隔
      */
-    private final static int TIME_SEP = 300;
+    private int TIME_SEP = 300;
     private final Handler handler;
 
     private ClickHelper() {
@@ -25,6 +25,13 @@ public final class ClickHelper {
 
     public static ClickHelper getInstance() {
         return ClickHelper.INSTANCE;
+    }
+
+    public void setTimeSep(int timeSep){
+        if (timeSep < 0){
+            return;
+        }
+        TIME_SEP = timeSep;
     }
 
     public void onClickKey(String key) {
