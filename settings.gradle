@@ -74,7 +74,7 @@ include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager', ':AppCompress',
         ':AppMediaStore',  ':AppScreenLib', ':BaseVpAdapter', ':ImageToolLib',
         ':AppHandlerLib', ':FileIoHelper', ':ZipFileLib', ':NetWorkLib', ':AppContextLib',
         ':AppWiFiLib', ':UriAndUrlLib', ':AppGrayLib', ':AppCallStatus', ':AppFastSp',
-        ':ZipFileLib', ':SmEncryptLib'
+        ':ZipFileLib', ':SmEncryptLib', ':AppClickHelper'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
@@ -115,7 +115,7 @@ project(':AppCallStatus').projectDir = new File('CommonLib/AppCallStatus')
 project(':AppFastSp').projectDir = new File('CommonLib/AppFastSp')
 project(':ZipFileLib').projectDir = new File('CommonLib/ZipFileLib')
 project(':SmEncryptLib').projectDir = new File('CommonLib/SmEncryptLib')
-
+project(':AppClickHelper').projectDir = new File('CommonLib/AppClickHelper')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -178,7 +178,7 @@ include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',':AdbHelper',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',':LooperThread',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib', ':UsbInterface',
-        ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib', ':AppClickHelper'
+        ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
@@ -205,7 +205,6 @@ project(':TransitionHelper').projectDir = new File('ToolLib/TransitionHelper')
 project(':AnimBaseHelper').projectDir = new File('ToolLib/AnimBaseHelper')
 project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
 project(':EasySocket').projectDir = new File('ToolLib/EasySocket')
-project(':AppClickHelper').projectDir = new File('ToolLib/AppClickHelper')
 project(':LooperThread').projectDir = new File('ToolLib/LooperThread')
 project(':AdbHelper').projectDir = new File('ToolLib/AdbHelper')
 
