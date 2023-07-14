@@ -223,8 +223,4 @@ public final class AppLeakHelper {
         }
     }
 
-    public interface OnLeaksListener {
-        void onLeaks(long cosTime, HashMap<String, Integer> hashMap);
-    }
-
 }
