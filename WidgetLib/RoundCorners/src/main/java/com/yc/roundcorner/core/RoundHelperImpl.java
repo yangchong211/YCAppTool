@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yc.roundcorner.R;
-import com.yc.roundcorner.util.RoundUtils;
+import com.yc.toolutils.AppSizeUtils;
 
 
 public class RoundHelperImpl implements RoundHelper {
@@ -188,7 +188,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        float radiusPx = RoundUtils.dip2px(mContext, radiusDp);
+        float radiusPx = AppSizeUtils.dp2px(mContext, radiusDp);
         mRadiusTopLeft = radiusPx;
         mRadiusTopRight = radiusPx;
         mRadiusBottomLeft = radiusPx;
@@ -204,10 +204,10 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        mRadiusTopLeft = RoundUtils.dip2px(mContext, radiusTopLeftDp);
-        mRadiusTopRight = RoundUtils.dip2px(mContext, radiusTopRightDp);
-        mRadiusBottomLeft = RoundUtils.dip2px(mContext, radiusBottomLeftDp);
-        mRadiusBottomRight = RoundUtils.dip2px(mContext, radiusBottomRightDp);
+        mRadiusTopLeft = AppSizeUtils.dp2px(mContext, radiusTopLeftDp);
+        mRadiusTopRight = AppSizeUtils.dp2px(mContext, radiusTopRightDp);
+        mRadiusBottomLeft = AppSizeUtils.dp2px(mContext, radiusBottomLeftDp);
+        mRadiusBottomRight = AppSizeUtils.dp2px(mContext, radiusBottomRightDp);
         if (mView != null) {
             onSizeChanged(mWidth, mHeight);
             mView.invalidate();
@@ -219,7 +219,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        float radiusPx = RoundUtils.dip2px(mContext, radiusDp);
+        float radiusPx = AppSizeUtils.dp2px(mContext, radiusDp);
         mRadiusTopLeft = radiusPx;
         mRadiusBottomLeft = radiusPx;
         if (mView != null) {
@@ -233,7 +233,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        float radiusPx = RoundUtils.dip2px(mContext, radiusDp);
+        float radiusPx = AppSizeUtils.dp2px(mContext, radiusDp);
         mRadiusTopRight = radiusPx;
         mRadiusBottomRight = radiusPx;
         if (mView != null) {
@@ -247,7 +247,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        float radiusPx = RoundUtils.dip2px(mContext, radiusDp);
+        float radiusPx = AppSizeUtils.dp2px(mContext, radiusDp);
         mRadiusTopLeft = radiusPx;
         mRadiusTopRight = radiusPx;
         if (mView != null) {
@@ -261,7 +261,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        float radiusPx = RoundUtils.dip2px(mContext, radiusDp);
+        float radiusPx = AppSizeUtils.dp2px(mContext, radiusDp);
         mRadiusBottomLeft = radiusPx;
         mRadiusBottomRight = radiusPx;
         if (mView != null) {
@@ -275,7 +275,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        mRadiusTopLeft = RoundUtils.dip2px(mContext, radiusDp);
+        mRadiusTopLeft = AppSizeUtils.dp2px(mContext, radiusDp);
         if (mView != null) {
             onSizeChanged(mWidth, mHeight);
             mView.invalidate();
@@ -287,7 +287,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        mRadiusTopRight = RoundUtils.dip2px(mContext, radiusDp);
+        mRadiusTopRight = AppSizeUtils.dp2px(mContext, radiusDp);
         if (mView != null) {
             onSizeChanged(mWidth, mHeight);
             mView.invalidate();
@@ -299,7 +299,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        mRadiusBottomLeft = RoundUtils.dip2px(mContext, radiusDp);
+        mRadiusBottomLeft = AppSizeUtils.dp2px(mContext, radiusDp);
         if (mView != null) {
             onSizeChanged(mWidth, mHeight);
             mView.invalidate();
@@ -311,7 +311,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        mRadiusBottomRight = RoundUtils.dip2px(mContext, radiusDp);
+        mRadiusBottomRight = AppSizeUtils.dp2px(mContext, radiusDp);
         if (mView != null) {
             onSizeChanged(mWidth, mHeight);
             mView.invalidate();
@@ -323,7 +323,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        mStrokeWidth = RoundUtils.dip2px(mContext, widthDp);
+        mStrokeWidth = AppSizeUtils.dp2px(mContext, widthDp);
         if (mView != null) {
             onSizeChanged(mWidth, mHeight);
             mView.invalidate();
@@ -344,7 +344,7 @@ public class RoundHelperImpl implements RoundHelper {
         if (mContext == null) {
             return;
         }
-        mStrokeWidth = RoundUtils.dip2px(mContext, widthDp);
+        mStrokeWidth = AppSizeUtils.dp2px(mContext, widthDp);
         mStrokeColor = color;
         if (mView != null) {
             onSizeChanged(mWidth, mHeight);

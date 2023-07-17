@@ -10,11 +10,11 @@ import com.yc.appcontextlib.AppToolUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NetWorkManager {
+public final class NetWorkManager {
 
     private static final String TAG = "NetWork-Manager";
     private final NetWorkReceiver mNetWorkReceiver;
-    private Context mContext;
+    private final Context mContext;
     private final List<NetStatusListener> mNetStatusListener;
 
     private NetWorkManager() {
@@ -29,8 +29,8 @@ public class NetWorkManager {
     }
 
     protected void changeNetStatus(int netType, boolean available) {
-        for (NetStatusListener listener : mNetStatusListener){
-            listener.onChange(available,netType);
+        for (NetStatusListener listener : mNetStatusListener) {
+            listener.onChange(available, netType);
         }
     }
 
@@ -51,8 +51,8 @@ public class NetWorkManager {
         }
     }
 
-    public void destroy(){
-        if (mNetStatusListener!=null){
+    public void destroy() {
+        if (mNetStatusListener != null) {
             mNetStatusListener.clear();
         }
         unregisterReceiver();
@@ -63,12 +63,12 @@ public class NetWorkManager {
     }
 
     private void unregisterReceiver() {
-        if (mNetWorkReceiver!=null){
+        if (mNetWorkReceiver != null) {
             mContext.unregisterReceiver(mNetWorkReceiver);
         }
     }
 
     public interface NetStatusListener {
-        void onChange(boolean connect , int netType);
+        void onChange(boolean connect, int netType);
     }
 }

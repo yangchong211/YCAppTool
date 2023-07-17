@@ -7,6 +7,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.FloatRange;
 import android.view.View;
 
+import com.yc.toolutils.KeyboardUtils;
+
 import java.util.List;
 
 
@@ -52,7 +54,7 @@ public class SwipeBackHelper {
                 public void onPanelSlide(View panel, float slideOffset) {
                     // 开始滑动返回时关闭软键盘
                     if (slideOffset < 0.03) {
-                        SwipeKeyboardUtil.closeKeyboard(mActivity);
+                        KeyboardUtils.hideSoftInput(mActivity);
                     }
 
                     mDelegate.onSwipeBackLayoutSlide(slideOffset);
@@ -243,7 +245,7 @@ public class SwipeBackHelper {
      * @param cls 下一个 Activity 的 Class
      */
     public void forward(Class<?> cls) {
-        SwipeKeyboardUtil.closeKeyboard(mActivity);
+        KeyboardUtils.hideSoftInput(mActivity);
         mActivity.startActivity(new Intent(mActivity, cls));
         executeForwardAnim();
     }
@@ -274,7 +276,7 @@ public class SwipeBackHelper {
      * @param intent 下一个 Activity 的意图对象
      */
     public void forward(Intent intent) {
-        SwipeKeyboardUtil.closeKeyboard(mActivity);
+        KeyboardUtils.hideSoftInput(mActivity);
         mActivity.startActivity(intent);
         executeForwardAnim();
     }
@@ -286,7 +288,7 @@ public class SwipeBackHelper {
      * @param requestCode 请求码
      */
     public void forward(Intent intent, int requestCode) {
-        SwipeKeyboardUtil.closeKeyboard(mActivity);
+        KeyboardUtils.hideSoftInput(mActivity);
         mActivity.startActivityForResult(intent, requestCode);
         executeForwardAnim();
     }
@@ -295,7 +297,7 @@ public class SwipeBackHelper {
      * 回到上一个 Activity，并销毁当前 Activity
      */
     public void backward() {
-        SwipeKeyboardUtil.closeKeyboard(mActivity);
+        KeyboardUtils.hideSoftInput(mActivity);
         mActivity.finish();
         executeBackwardAnim();
     }
@@ -304,7 +306,7 @@ public class SwipeBackHelper {
      * 滑动返回上一个 Activity，并销毁当前 Activity
      */
     public void swipeBackward() {
-        SwipeKeyboardUtil.closeKeyboard(mActivity);
+        KeyboardUtils.hideSoftInput(mActivity);
         mActivity.finish();
         executeSwipeBackAnim();
     }
@@ -315,7 +317,7 @@ public class SwipeBackHelper {
      * @param cls 上一个 Activity 的 Class
      */
     public void backwardAndFinish(Class<?> cls) {
-        SwipeKeyboardUtil.closeKeyboard(mActivity);
+        KeyboardUtils.hideSoftInput(mActivity);
         mActivity.startActivity(new Intent(mActivity, cls));
         mActivity.finish();
         executeBackwardAnim();
