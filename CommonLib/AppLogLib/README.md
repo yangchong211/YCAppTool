@@ -10,7 +10,7 @@
 - 通用日志库框架
     - 专用LogCat工具，主要功能全局配置log输出, 个性化设置Tag，可以设置日志打印级别，支持打印复杂对象，可以实现自定义日志接口，支持简化版本将日志写入到文件中。小巧好用！
 - 第一步：初始化操作
-    ``` java
+    ```
     String ycLogPath = AppFileUtils.getCacheFilePath(this, "ycLog");
     AppLogConfig config = new AppLogConfig.Builder()
             //设置日志tag总的标签
@@ -28,7 +28,7 @@
     AppLogFactory.init(config);
     ```
 - 第二步：使用Log日志，十分简单，如下所示
-    ``` java
+    ```
     //自己带有tag标签
     AppLogHelper.d("MainActivity: ","debug log");
     //使用全局tag标签

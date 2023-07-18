@@ -2,14 +2,12 @@ package com.yc.apploglib.config;
 
 
 /**
- * <pre>
- *     @author yangchong
- *     GitHub : https://github.com/yangchong211/YCCommonLib
- *     email : yangchong211@163.com
- *     time  : 2018/11/9
- *     desc  : log日志配置类
- *     revise:
- * </pre>
+ * @author yangchong
+ * @GitHub : <a href="https://github.com/yangchong211/YCCommonLib">...</a>
+ * @email : yangchong211@163.com
+ * @time  : 2018/11/9
+ * @desc  : log日志配置类
+ * @revise:
  */
 public final class AppLogConfig {
 
@@ -60,7 +58,7 @@ public final class AppLogConfig {
     }
 
     public String getTag() {
-        if (tag == null || tag.length() ==0){
+        if (tag == null || tag.length() == 0) {
             return "AppLogHelper: ";
         }
         return tag;
