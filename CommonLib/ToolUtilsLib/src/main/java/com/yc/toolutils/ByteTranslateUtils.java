@@ -85,7 +85,7 @@ public final class ByteTranslateUtils {
      * @param str 字符串
      * @return byte
      */
-    public static byte[] toBytes(String str) {
+    public static byte[] toBytes1(String str) {
         if (str == null || str.trim().equals("") || !isHexString(str)) {
             return new byte[0];
         }
@@ -101,5 +101,29 @@ public final class ByteTranslateUtils {
         return bytes;
     }
 
+    public static byte[] toBytes2(String inHex) {
+        int hexlen = inHex.length();
+        byte[] result;
+        if (isOdd(hexlen) == 1) {
+            ++hexlen;
+            result = new byte[hexlen / 2];
+            inHex = "0" + inHex;
+        } else {
+            result = new byte[hexlen / 2];
+        }
+        int j = 0;
+        for(int i = 0; i < hexlen; i += 2) {
+            result[j] = hexToByte(inHex.substring(i, i + 2));
+            ++j;
+        }
+        return result;
+    }
 
+    private static int isOdd(int num) {
+        return num & 1;
+    }
+
+    private static byte hexToByte(String inHex) {
+        return (byte)Integer.parseInt(inHex, 16);
+    }
 }
