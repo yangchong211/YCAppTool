@@ -8,13 +8,20 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.animbusiness.AnimationActiviy;
 import com.yc.apptool.R;
-import com.yc.apptool.UploadActivity;
-import com.yc.apptool.transition.TransitionActivity;
 import com.yc.looperthread.DefaultLoopThread;
+import com.yc.looperthread.HandlerLoopThread;
+import com.yc.looperthread.IDoAction;
+import com.yc.looperthread.ScheduledLoopThread;
+import com.yc.looperthread.TimerLoopThread;
+import com.yc.looperthread.WhileLoopThread;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
+import com.yc.toastutils.ToastUtils;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class LoopThreadActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -82,17 +89,62 @@ public class LoopThreadActivity extends AppCompatActivity implements View.OnClic
         tvView3.setText("3.结束轮训");
     }
 
-    private final DefaultLoopThread defaultLoopThread = new DefaultLoopThread();
+    private final IDoAction defaultLoopThread = new WhileLoopThread(){
+        @Override
+        public void doAction() {
+            super.doAction();
+        }
+
+        @Override
+        public boolean isLoop() {
+            //是否轮训的判断条件
+            return true;
+        }
+
+        @Override
+        public long getSleepTime() {
+            //轮训的时间间隔
+            return 1000;
+        }
+    };
 
     @Override
     public void onClick(View v) {
         if (v == tvView1){
             defaultLoopThread.beginLoop();
+//            defaultScheduledThread.beginLoop();
+            ToastUtils.showRoundRectToast("开始轮训");
         } else if (v == tvView2){
             defaultLoopThread.endLoop();
+//            defaultScheduledThread.endLoop();
+            ToastUtils.showRoundRectToast("暂停轮训");
         } else if (v == tvView3){
             defaultLoopThread.release();
+//            defaultScheduledThread.release();
+            ToastUtils.showRoundRectToast("销毁轮训");
         }
     }
 
+    public void simplePolling() {
+        while (true) {
+            try {
+                // 线程睡眠1秒钟
+                Thread.sleep(1000);
+                // 轮询的代码
+                System.out.println("polling..."+ count++);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private int count ;
+    public void scheduledPolling() {
+        count = 0;
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            // 轮询的代码
+            System.out.println("polling..." + count++);
+        }, 0, 1000, TimeUnit.MILLISECONDS);
+    }
 }
