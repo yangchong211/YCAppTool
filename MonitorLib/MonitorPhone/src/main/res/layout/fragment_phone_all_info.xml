@@ -107,7 +107,17 @@
             <TextView
                 android:id="@+id/tv_content_so"
                 android:textColor="#8033b7"
-                android:background="#50a0e1a1"
+                android:background="#50cfa0f1"
+                style="@style/DetailContent"/>
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="CPU相关"/>
+
+            <TextView
+                android:id="@+id/tv_content_cpu"
+                android:textColor="#8033b7"
+                android:background="#c39dbbf1"
                 style="@style/DetailContent"/>
         </LinearLayout>
 

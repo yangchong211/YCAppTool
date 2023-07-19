@@ -22,8 +22,8 @@ class WifiBroadcastReceiver(private val mManager: AppStatusManager?) : Broadcast
                 0, 2, 4 -> {
 
                 }
-                1 -> notifyGpsSwitchState(false)
-                3 -> notifyGpsSwitchState(true)
+                1 -> notifyWifiSwitchState(false)
+                3 -> notifyWifiSwitchState(true)
                 else -> {
 
                 }
@@ -31,7 +31,7 @@ class WifiBroadcastReceiver(private val mManager: AppStatusManager?) : Broadcast
         }
     }
 
-    private fun notifyGpsSwitchState(state: Boolean) {
+    private fun notifyWifiSwitchState(state: Boolean) {
         mManager?.dispatcherWifiState(state)
     }
 }

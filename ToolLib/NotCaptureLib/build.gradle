@@ -44,4 +44,5 @@ dependencies {
     //implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.4'
     //通用组件接口库
     implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.8'
+    implementation project(path: ':NetWorkLib')
 }

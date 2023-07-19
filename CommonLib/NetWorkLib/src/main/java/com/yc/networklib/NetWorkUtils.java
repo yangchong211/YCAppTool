@@ -63,7 +63,10 @@ public class NetWorkUtils {
         return -1;
     }
 
-    //以太网连上但不能上外网时，程序已经绑定了蜂窝网通道上网，此方法判断是否实际使用蜂窝网上网
+    /**
+     * 以太网连上但不能上外网时，程序已经绑定了蜂窝网通道上网，此方法判断是否实际使用蜂窝网上网
+     * @return
+     */
     public static boolean isRealCellular() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             boolean activityCellular = isActivityCellular();

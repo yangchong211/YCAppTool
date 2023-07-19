@@ -8,6 +8,7 @@ import android.content.pm.ApplicationInfo;
 import android.net.DhcpInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,20 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.arch.core.executor.DefaultTaskExecutor;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.yc.appfilelib.SdCardUtils;
+import com.yc.appwifilib.WifiHelper;
+import com.yc.cpu.ApmCpuHelper;
+import com.yc.cpu.CpuRateBean;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.localelib.service.LocaleService;
 import com.yc.localelib.utils.LocaleToolUtils;
+import com.yc.networklib.AddressToolUtils;
 import com.yc.networklib.AppNetworkUtils;
+import com.yc.networklib.NetWorkManager;
 import com.yc.toolmemorylib.AppMemoryUtils;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppInfoUtils;
@@ -54,9 +62,10 @@ public class MonitorPhoneFragment extends Fragment {
     private TextView tvContentStorage;
     private TextView tvContentMemory;
     private TextView tvContentSo;
+    private TextView tvContentCpu;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         activity = (Activity) context;
     }
@@ -74,6 +83,18 @@ public class MonitorPhoneFragment extends Fragment {
         initFindViewById(view);
         initData();
         initBack();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        NetWorkManager.getInstance().unregisterNetStatusListener(listener);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        NetWorkManager.getInstance().destroy();
     }
 
     /**
@@ -100,6 +121,7 @@ public class MonitorPhoneFragment extends Fragment {
         tvContentStorage = view.findViewById(R.id.tv_content_storage);
         tvContentMemory = view.findViewById(R.id.tv_content_memory);
         tvContentSo = view.findViewById(R.id.tv_content_so);
+        tvContentCpu = view.findViewById(R.id.tv_content_cpu);
     }
 
     private void initData() {
@@ -119,7 +141,42 @@ public class MonitorPhoneFragment extends Fragment {
         setMemoryInfo();
         //获取app中加载的so库
         setAppSoInfo();
+        //获取cpu相关信息
+        setCpuInfo();
+        //注册广播监听
+        initNetStatus();
     }
+
+    private void initNetStatus() {
+        NetWorkManager.getInstance().registerReceiver();
+        NetWorkManager.getInstance().registerNetStatusListener(listener);
+    }
+
+    private final NetWorkManager.NetStatusListener listener = new NetWorkManager.NetStatusListener() {
+        @Override
+        public void onChange(boolean connect, int netType) {
+            CharSequence text = tvContentInfo.getText();
+            StringBuilder sb = new StringBuilder();
+            sb.append(text);
+            switch (netType) {
+                case 1:
+                    sb.append("\n网络状态:  ").append("以太网 ，网络是否可用 ").append(connect);
+                    break;
+                case 2:
+                    //Log.d(TAG, " network Wi-Fi");
+                    sb.append("\n网络状态:  ").append("Wi-Fi ，网络是否可用 ").append(connect);
+                    break;
+                case 3:
+                    //Log.d(TAG, " network 移动数据");
+                    sb.append("\n网络状态:  ").append("移动数据 ，网络是否可用 ").append(connect);
+                    break;
+                default:
+                    sb.append("\n网络状态:  ").append("无网络 ，网络是否可用 ").append(connect);
+                    break;
+            }
+            tvContentInfo.setText(sb.toString());
+        }
+    };
 
     private void initListData() {
 
@@ -195,8 +252,8 @@ public class MonitorPhoneFragment extends Fragment {
     private void setLocationInfo() {
         Application application = activity.getApplication();
         StringBuilder sb = new StringBuilder();
-        sb.append("wifi信号强度:  ").append(AppNetworkUtils.getWifiState());
-        boolean wifiProxy = AppNetworkUtils.isWifiProxy(application);
+        sb.append("wifi信号强度:  ").append(WifiHelper.getInstance().getWifiState());
+        boolean wifiProxy = AddressToolUtils.isWifiProxy(application);
         if (wifiProxy){
             sb.append("\nwifi是否代理:  ").append("已经链接代理");
         } else {
@@ -204,14 +261,15 @@ public class MonitorPhoneFragment extends Fragment {
         }
         sb.append("\nMac地址:  ").append(AppDeviceUtils.getMacAddress(application));
         sb.append("\n运营商名称:  ").append(AppNetworkUtils.getNetworkOperatorName());
-        sb.append("\n获取IPv4地址:  ").append(AppNetworkUtils.getIPAddress(true));
-        sb.append("\n获取IPv6地址:  ").append(AppNetworkUtils.getIPAddress(false));
+        sb.append("\n获取内网IP:  ").append(AddressToolUtils.getIpAddress());
+        sb.append("\n获取IPv4地址:  ").append(AddressToolUtils.getIPAddress(true));
+        sb.append("\n获取IPv6地址:  ").append(AddressToolUtils.getIPAddress(false));
         sb.append("\n移动网络是否打开:  ").append(AppNetworkUtils.getMobileDataEnabled());
         sb.append("\n判断网络是否是4G:  ").append(AppNetworkUtils.is4G());
-        sb.append("\nWifi是否打开:  ").append(AppNetworkUtils.getWifiEnabled());
+        sb.append("\nWifi是否打开:  ").append(WifiHelper.getInstance().isWifiEnable());
         sb.append("\nWifi是否连接状态:  ").append(AppNetworkUtils.isWifiConnected());
-        sb.append("\nWifi名称:  ").append(AppNetworkUtils.getWifiName(application));
-        int wifiIp = AppNetworkUtils.getWifiIp(application);
+        sb.append("\nWifi名称:  ").append(WifiHelper.getInstance().getSsid());
+        int wifiIp = WifiHelper.getInstance().getWifiIp();
         String ip = AppDeviceUtils.intToIp(wifiIp);
         sb.append("\nWifi的Ip地址:  ").append(ip);
         DhcpInfo dhcpInfo = AppDeviceUtils.getDhcpInfo(application);
@@ -224,6 +282,19 @@ public class MonitorPhoneFragment extends Fragment {
             sb.append("\nDns2：").append(AppDeviceUtils.intToIp(dhcpInfo.dns2));
         }
         tvContentInfo.setText(sb.toString());
+        DelegateTaskExecutor.getInstance().executeOnCpu(new Runnable() {
+            @Override
+            public void run() {
+                sb.append("\n获取域名 ip 地址:  ").append(AddressToolUtils.getDomainAddress("https://baidu.com"));
+                sb.append("\n通过域名获取真实ip地址:  ").append(AddressToolUtils.getHostIP("https://baidu.com"));
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvContentInfo.setText(sb.toString());
+                    }
+                });
+            }
+        });
     }
 
     /**
@@ -279,6 +350,22 @@ public class MonitorPhoneFragment extends Fragment {
         } else {
             tvContentSo.setText(currSoLoaded);
         }
+    }
+
+    /**
+     * 获取cpu相关信息
+     */
+    private void setCpuInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("CPU使用率:  ").append(ApmCpuHelper.getInstance().getCpuRateTop());
+        sb.append("\n获取应用占用的CPU时间:  ").append(ApmCpuHelper.getInstance().getAppCpuTime());
+        sb.append("\n获取系统总CPU使用时间:  ").append(ApmCpuHelper.getInstance().getTotalCpuTime());
+        sb.append("\nCPU使用率:  ").append(ApmCpuHelper.getInstance().getCpuRateTop());
+        sb.append("\n获取总的CPU使用率:  ").append(ApmCpuHelper.getInstance().getCpuProcRate());
+        CpuRateBean cpuRateBean = ApmCpuHelper.getInstance().get();
+        sb.append("\nCPU占用率:  ").append(cpuRateBean.getProcess());
+        sb.append("\nCPU总使用率:  ").append(cpuRateBean.getTotal());
+        tvContentCpu.setText(sb.toString());
     }
 
 }

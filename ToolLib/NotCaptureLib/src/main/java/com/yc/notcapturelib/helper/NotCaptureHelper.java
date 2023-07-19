@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.yc.appencryptlib.Rc4EncryptUtils;
 import com.yc.eventuploadlib.LoggerReporter;
+import com.yc.networklib.AddressToolUtils;
 import com.yc.notcapturelib.encrypt.EncryptDecryptInterceptor;
-import com.yc.notcapturelib.proxy.ProxyWifiUtils;
 import com.yc.notcapturelib.ssl.HttpSslConfig;
 import com.yc.notcapturelib.ssl.HttpSslFactory;
 import com.yc.notcapturelib.utils.NotCaptureUtils;
@@ -87,7 +87,7 @@ public final class NotCaptureHelper {
      */
     public OkHttpClient.Builder setOkHttp(Context context, OkHttpClient.Builder builder){
         //判断是否代理
-        if (config.isProxy() && ProxyWifiUtils.isWifiProxy(context)){
+        if (config.isProxy() && AddressToolUtils.isWifiProxy(context)){
             //基于抓包原理的基础上，直接使用okHttp禁止代理，经过测试，可以避免第三方工具(比如charles)抓包
             builder.proxy(Proxy.NO_PROXY);
             LoggerReporter.report("NotCaptureHelper" , "setOkHttp 设置避免代理");

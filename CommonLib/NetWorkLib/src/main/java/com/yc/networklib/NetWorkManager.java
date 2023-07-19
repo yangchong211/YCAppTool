@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.util.Log;
 
 import com.yc.appcontextlib.AppToolUtils;
 
@@ -13,22 +14,20 @@ import java.util.List;
 public final class NetWorkManager {
 
     private static final String TAG = "NetWork-Manager";
-    private final NetWorkReceiver mNetWorkReceiver;
+    private NetWorkReceiver mNetWorkReceiver;
     private final Context mContext;
     private final List<NetStatusListener> mNetStatusListener;
 
     private NetWorkManager() {
         mContext = AppToolUtils.getApp();
-        mNetWorkReceiver = new NetWorkReceiver(this);
         mNetStatusListener = new ArrayList<>();
-        registerReceiver();
     }
 
     public static NetWorkManager getInstance() {
         return SingletonHelper.INSTANCE;
     }
 
-    protected void changeNetStatus(int netType, boolean available) {
+    void changeNetStatus(int netType, boolean available) {
         for (NetStatusListener listener : mNetStatusListener) {
             listener.onChange(available, netType);
         }
@@ -39,10 +38,14 @@ public final class NetWorkManager {
         private final static NetWorkManager INSTANCE = new NetWorkManager();
     }
 
-    private void registerReceiver() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
-        mContext.registerReceiver(mNetWorkReceiver, filter);
+    public void registerReceiver() {
+        if (mNetWorkReceiver == null){
+            mNetWorkReceiver = new NetWorkReceiver(this);
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+            mContext.registerReceiver(mNetWorkReceiver, filter);
+            Log.d(TAG, "registerReceiver");
+        }
     }
 
     public void registerNetStatusListener(NetStatusListener listener) {
@@ -65,6 +68,8 @@ public final class NetWorkManager {
     private void unregisterReceiver() {
         if (mNetWorkReceiver != null) {
             mContext.unregisterReceiver(mNetWorkReceiver);
+            Log.d(TAG, "unregisterReceiver");
+            mNetWorkReceiver = null;
         }
     }
 

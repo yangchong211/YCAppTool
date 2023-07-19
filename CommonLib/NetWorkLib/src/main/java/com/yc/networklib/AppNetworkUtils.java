@@ -77,7 +77,7 @@ public final class AppNetworkUtils {
 
 
     /**
-     * 返回网络状态
+     * 返回网络状态，判断网络是否可用
      * @return
      */
     public static boolean isAvailable() {

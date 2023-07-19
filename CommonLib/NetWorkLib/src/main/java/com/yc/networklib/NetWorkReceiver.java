@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 public class NetWorkReceiver extends BroadcastReceiver {
 
@@ -23,21 +24,24 @@ public class NetWorkReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        if (action!=null && action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-            switch (isNetworkAvailable(context)) {
+        if (action != null && action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+            int networkAvailable = isNetworkAvailable(context);
+            Log.i(TAG, "网络类型：" + networkAvailable);
+            switch (networkAvailable) {
                 case 1:
-                    //Log.d(TAG, " network 有网线");
-                    mManager.changeNetStatus(NET_ETHERNET,AppNetworkUtils.isAvailable());
+                    Log.d(TAG, " network 有网线");
+                    mManager.changeNetStatus(NET_ETHERNET, AppNetworkUtils.isAvailable());
                     break;
                 case 2:
-                    //Log.d(TAG, " network Wi-Fi");
-                    mManager.changeNetStatus(NET_WIFI,AppNetworkUtils.isAvailable());
+                    Log.d(TAG, " network Wi-Fi");
+                    mManager.changeNetStatus(NET_WIFI, AppNetworkUtils.isAvailable());
                     break;
                 case 3:
-                    //Log.d(TAG, " network 移动数据");
-                    mManager.changeNetStatus(NET_MOBILE,AppNetworkUtils.isAvailable());
+                    Log.d(TAG, " network 移动数据");
+                    mManager.changeNetStatus(NET_MOBILE, AppNetworkUtils.isAvailable());
                     break;
                 default:
+                    mManager.changeNetStatus(NET_NONE, AppNetworkUtils.isAvailable());
                     break;
             }
         }
@@ -54,7 +58,7 @@ public class NetWorkReceiver extends BroadcastReceiver {
             return NET_WIFI;
         } else if (mobileNetInfo != null && mobileNetInfo.isConnected()) {
             return NET_MOBILE;
-        }  else {
+        } else {
             return NET_NONE;
         }
     }

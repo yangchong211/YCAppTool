@@ -37,6 +37,9 @@ public final class AddressToolUtils {
                     InetAddress inetAddress = enumIpAddr.nextElement();
                     if (inetAddress instanceof Inet4Address && !inetAddress.isLoopbackAddress()) {
                         String ip = inetAddress.getHostAddress();
+                        if (ip == null){
+                            ip = "";
+                        }
                         return ip;
                     }
                 }

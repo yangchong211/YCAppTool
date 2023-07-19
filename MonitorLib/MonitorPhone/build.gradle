@@ -30,18 +30,22 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
-    //工具类utils
-    //implementation project(path: ':ToolUtilsLib')
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.4'
-    //implementation project(path: ':NetWorkLib')
-    implementation 'com.github.yangchong211.YCCommonLib:NetWorkLib:1.4.4'
-    //权限库
-    implementation 'com.github.yangchong211.YCCommonLib:AppPermission:1.4.4'
+    implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':LocaleHelperLib')
-    //内存工具类
-    implementation 'com.github.yangchong211.YCCommonLib:ToolMemoryLib:1.4.4'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.4'
-    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.4'
-    //implementation project(path: ':ToolFileLib')
-    //implementation project(path: ':AppContextLib')
+    implementation project(path: ':MonitorCpuLib')
+    implementation project(path: ':ToolFileLib')
+    implementation project(path: ':AppContextLib')
+    implementation project(path: ':AppPermission')
+    implementation project(path: ':ToolMemoryLib')
+    implementation project(path: ':NetWorkLib')
+    implementation project(path: ':AppWiFiLib')
+    //轻量级异步线程封装库：https://github.com/yangchong211/YCThreadPool
+    implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
+    //    implementation 'com.github.yangchong211.YCCommonLib:ToolMemoryLib:1.4.4'
+//    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.4'
+//    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.4'
+//    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.4'
+//    implementation 'com.github.yangchong211.YCCommonLib:NetWorkLib:1.4.4'
+    //权限库
+//    implementation 'com.github.yangchong211.YCCommonLib:AppPermission:1.4.4'
 }
