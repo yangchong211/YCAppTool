@@ -8,7 +8,6 @@ import android.content.pm.ApplicationInfo;
 import android.net.DhcpInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.arch.core.executor.DefaultTaskExecutor;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -327,6 +325,9 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("当前时区:  ").append(AppTimeUtils.getCurrentTimeZone());
         sb.append("\n手机总内存:  ").append(AppMemoryUtils.getTotalMemory(application)).append("kb");
         sb.append("\n手机可用内存:  ").append(AppMemoryUtils.getAvailMemory(application)).append("mb");
+        sb.append("\n获得机身内存总大小:  ").append(AppMemoryUtils.getRomTotalSize(application)).append("kb");
+        sb.append("\n获得机身可用内存:  ").append(AppMemoryUtils.getRomAvailableSize(application)).append("kb");
+        sb.append("\n系统剩余控件:  ").append(AppMemoryUtils.getRomSpace(application));
         tvContentStorage.setText(sb.toString());
     }
 
@@ -336,6 +337,7 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("当前时区:  ").append(AppTimeUtils.getCurrentTimeZone());
         sb.append("\n手机总内存:  ").append(AppMemoryUtils.getTotalMemory(application)).append("kb");
         sb.append("\n手机可用内存:  ").append(AppMemoryUtils.getAvailMemory(application)).append("mb");
+        sb.append("\n当前应用进程的pid:  ").append(AppMemoryUtils.getCurrentPid());
         tvContentMemory.setText(sb.toString());
     }
 

@@ -185,7 +185,8 @@ public final class AppMemoryUtils {
             ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
             am.getMemoryInfo(mi);
             return mi.totalMem;
-        } else if (sTotalMem.get() > 0L) {//如果已经从文件获取过值，则不需要再次获取
+        } else if (sTotalMem.get() > 0L) {
+            //如果已经从文件获取过值，则不需要再次获取
             return sTotalMem.get();
         } else {
             final long tm = getRamTotalMemByFile();
@@ -256,7 +257,7 @@ public final class AppMemoryUtils {
      *
      * @return
      */
-    private static String getRomAvailableSize(Context context) {
+    public static String getRomAvailableSize(Context context) {
         File path = Environment.getDataDirectory();
         StatFs stat = new StatFs(path.getPath());
         long blockSize = stat.getBlockSize();
@@ -284,7 +285,7 @@ public final class AppMemoryUtils {
      *
      * @return
      */
-    private static String getRomTotalSize(Context context) {
+    public static String getRomTotalSize(Context context) {
         File path = Environment.getDataDirectory();
         StatFs stat = new StatFs(path.getPath());
         long blockSize = stat.getBlockSize();

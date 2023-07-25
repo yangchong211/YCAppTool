@@ -23,6 +23,8 @@ option java_multiple_files = true;
 option java_package = "com.yc.appgrpc";
 option java_outer_classname = "HelloWorldProto";
 option objc_class_prefix = "HLW";
+
+//proto文件上方定义了package，调用方不可以更改此路径！！！
 package helloworld;
 
 //这个是定义的服务接口

@@ -422,4 +422,30 @@ public final class AppFileUtils {
         }
     }
 
+    /**
+     * 获取文件个数或者大小
+     *
+     * @param file     路径
+     * @param isNumber 是否是获取个数个数
+     * @return 结果
+     */
+    private long getFileLength(File file, boolean isNumber) {
+        if (file == null) {
+            return -1;
+        }
+        long size = 0;
+        if (!file.isDirectory()) {
+            if (isNumber) {
+                size = 1;
+            } else {
+                size = file.length();
+            }
+        } else {
+            for (File f : file.listFiles()) {
+                size += getFileLength(f, isNumber);
+            }
+        }
+        return size;
+    }
+
 }
