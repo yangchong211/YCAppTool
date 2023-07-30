@@ -174,7 +174,7 @@ project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinator
 
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':EasySocket',
-        ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',
+        ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',':InterceptorTime',
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',':AdbHelper',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',':LooperThread',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib', ':UsbInterface',
@@ -206,6 +206,7 @@ project(':AnimBaseHelper').projectDir = new File('ToolLib/AnimBaseHelper')
 project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
 project(':EasySocket').projectDir = new File('ToolLib/EasySocket')
 project(':LooperThread').projectDir = new File('ToolLib/LooperThread')
+project(':InterceptorTime').projectDir = new File('ToolLib/InterceptorTime')
 project(':AdbHelper').projectDir = new File('ToolLib/AdbHelper')
 
 
