@@ -3,6 +3,11 @@ package com.yc.apptool;
 import android.app.Application;
 
 import com.yc.apptool.thread.LogCallback;
+import com.yc.interceptortime.CommonCallback;
+import com.yc.interceptortime.InterceptorBean;
+import com.yc.interceptortime.InterceptorManager;
+import com.yc.interceptortime.MonitorBean;
+import com.yc.toolutils.AppLogUtils;
 import com.yc.ycthreadpoollib.PoolThread;
 import com.yc.ycthreadpoollib.ScheduleTask;
 
@@ -18,6 +23,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        AppLogUtils.setShowLog(true);
         //初始化线程池管理器
         initThreadPool();
         ScheduleTask.getInstance().schedule(new Runnable() {
@@ -25,6 +31,18 @@ public class App extends Application {
             public void run() {
                 //做一些耗时任务
 
+            }
+        });
+        InterceptorManager.getInstance().addInterceptor(new CommonCallback<InterceptorBean>() {
+            @Override
+            public void result(InterceptorBean interceptorBean) {
+                AppLogUtils.d("addInterceptor: " + interceptorBean.toString());
+            }
+        });
+        InterceptorManager.getInstance().setMonitorCallback(new CommonCallback<MonitorBean>() {
+            @Override
+            public void result(MonitorBean monitorBean) {
+                AppLogUtils.d("addInterceptor monitorBean : " + monitorBean.toString());
             }
         });
     }

@@ -10,7 +10,9 @@ import android.view.View;
 import com.yc.animbusiness.AnimationActiviy;
 import com.yc.apptool.looper.LoopThreadActivity;
 import com.yc.apptool.transition.TransitionActivity;
-import com.yc.apptool.transition.VideoPlayActivity;
+import com.yc.interceptortime.BaseParam;
+import com.yc.interceptortime.InterceptorManager;
+import com.yc.interceptortime.TimeTestDemo;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
 
@@ -69,6 +71,7 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
         tvView2.setText("2.Activity之间转场动画");
         tvView3.setText("3.各种动画合集案例");
         tvView4.setText("4.测试线程循环执行案例");
+        tvView5.setText("5.测试方法耗时操作");
     }
 
     @Override
@@ -81,6 +84,12 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
             AnimationActiviy.startActivity(this);
         } else if (v == tvView4){
             LoopThreadActivity.startActivity(this);
+        } else if (v == tvView5){
+            //测试一下
+            TimeTestDemo testDemo = new TimeTestDemo();
+            testDemo.testMethodSync();
+            TimeTestDemo.Test1 test1 = new TimeTestDemo.Test1();
+            test1.testMethodSync2();
         }
     }
 
