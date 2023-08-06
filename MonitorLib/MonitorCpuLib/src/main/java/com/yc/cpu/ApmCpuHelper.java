@@ -72,7 +72,7 @@ public final class ApmCpuHelper {
      *
      * @return 使用率
      */
-    public CpuRateBean getCpuRateData() {
+    private CpuRateBean getCpuRateData() {
         try {
             //获取时间1总的CPU时间
             long totalCpu1 = getTotalCpuTime();
@@ -84,7 +84,9 @@ public final class ApmCpuHelper {
             long totalCpu2 = getTotalCpuTime();
             //获取时间2总的进程时间
             long totalProcess2 = getAppCpuTime();
+            //CPU总使用率
             float totalRate = (totalCpu2 - totalCpu1) / (float) (totalCpu2 - totalCpu1);
+            //CPU占用率
             float processRate = ((totalProcess1 - totalProcess2)) / (float) (totalCpu2 - totalCpu1);
             return new CpuRateBean(totalRate, processRate);
         } catch (InterruptedException ex) {
@@ -97,7 +99,7 @@ public final class ApmCpuHelper {
      * 获取系统总CPU使用时间
      * @return
      */
-    public static long getTotalCpuTime() {
+    public long getTotalCpuTime() {
         String[] cpuInfos = null;
         BufferedReader reader = null;
         try {
@@ -132,7 +134,7 @@ public final class ApmCpuHelper {
      * 获取应用占用的CPU时间
      * @return
      */
-    public static long getAppCpuTime() {
+    public long getAppCpuTime() {
         String[] cpuInfos = null;
         BufferedReader reader = null;
         try {
@@ -209,7 +211,7 @@ public final class ApmCpuHelper {
      *
      * @return 使用率
      */
-    private static float getCpuProcRate() {
+    public float getCpuProcRate() {
         try {
             long totalCpu1 = getTotalCpuTime();
             Thread.sleep(50);
@@ -228,7 +230,7 @@ public final class ApmCpuHelper {
      *
      * @return 百分比
      */
-    private static float getTempProcCPURate() {
+    private float getTempProcCPURate() {
         String path = "/proc/stat";// 系统CPU信息文件
         long[] totalJiffies = new long[2];//CPU总时间
         long[] totalIdle = new long[2];//CPU总空闲时间
