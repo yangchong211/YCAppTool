@@ -98,7 +98,7 @@ public final class AppMemoryUtils {
      *
      * @return 应用pss信息KB
      */
-    public static PssInfo getAppPssInfo(Context context, int pid) {
+    private static PssInfo getAppPssInfo(Context context, int pid) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         Debug.MemoryInfo memoryInfo = am.getProcessMemoryInfo(new int[]{pid})[0];
         PssInfo pssInfo = new PssInfo();
@@ -118,34 +118,25 @@ public final class AppMemoryUtils {
      *
      * @return dalvik堆内存KB
      */
-    public static DalvikHeapMem getAppDalvikHeapMem() {
+    private static DalvikHeapMem getAppDalvikHeapMem() {
         Runtime runtime = Runtime.getRuntime();
         DalvikHeapMem dalvikHeapMem = new DalvikHeapMem();
         //空闲内存
         dalvikHeapMem.freeMem = runtime.freeMemory();
         //最大内存
         dalvikHeapMem.maxMem = Runtime.getRuntime().maxMemory();
+        //activityManager.getMemoryClass() 获取应用能够获取的max dalvik堆内存大小
         //已用内存
         dalvikHeapMem.allocated = (Runtime.getRuntime().totalMemory() - runtime.freeMemory());
         return dalvikHeapMem;
     }
 
     /**
-     * 获取应用能够获取的max dalvik堆内存大小
-     * 和Runtime.getRuntime().maxMemory()一样
-     *
-     * @return 单位M
-     */
-    public static long getAppTotalDalvikHeapSize(Context context) {
-        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        return manager.getMemoryClass();
-    }
-
-    /**
      * 内存相关的所有数据
      */
     public interface OnGetMemoryInfoCallback {
-        void onGetMemoryInfo(String pkgName, int pid, RamMemoryInfo ramMemoryInfo, PssInfo pssInfo, DalvikHeapMem dalvikHeapMem);
+        void onGetMemoryInfo(String pkgName, int pid, RamMemoryInfo ramMemoryInfo,
+                             PssInfo pssInfo, DalvikHeapMem dalvikHeapMem);
     }
 
     public interface OnGetRamMemoryInfoCallback {

@@ -31,6 +31,9 @@ import com.yc.networklib.AddressToolUtils;
 import com.yc.networklib.AppNetworkUtils;
 import com.yc.networklib.NetWorkManager;
 import com.yc.toolmemorylib.AppMemoryUtils;
+import com.yc.toolmemorylib.DalvikHeapMem;
+import com.yc.toolmemorylib.PssInfo;
+import com.yc.toolmemorylib.RamMemoryInfo;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppInfoUtils;
 import com.yc.toolutils.AppSignUtils;
@@ -38,6 +41,7 @@ import com.yc.toolutils.AppSoLibUtils;
 import com.yc.toolutils.AppTimeUtils;
 import com.yc.toolutils.AppWindowUtils;
 import com.yc.toolutils.StatusBarUtils;
+
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -47,7 +51,7 @@ import java.util.Locale;
  *     email  :   yangchong211@163.com
  *     time  :   2018/5/6
  *     desc  :   查看手机信息
- *     revise:  
+ *     revise:
  * </pre>
  */
 public class MonitorPhoneFragment extends Fragment {
@@ -100,9 +104,9 @@ public class MonitorPhoneFragment extends Fragment {
      */
     private void initBack() {
         FragmentActivity activity = getActivity();
-        if (activity != null){
+        if (activity != null) {
             OnBackPressedDispatcher onBackPressedDispatcher = activity.getOnBackPressedDispatcher();
-            onBackPressedDispatcher.addCallback(this,new OnBackPressedCallback(true) {
+            onBackPressedDispatcher.addCallback(this, new OnBackPressedCallback(true) {
                 @Override
                 public void handleOnBackPressed() {
                     activity.finish();
@@ -210,7 +214,7 @@ public class MonitorPhoneFragment extends Fragment {
         tvPhoneContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppWindowUtils.copyToClipBoard(activity,sb.toString());
+                AppWindowUtils.copyToClipBoard(activity, sb.toString());
             }
         });
     }
@@ -252,7 +256,7 @@ public class MonitorPhoneFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         sb.append("wifi信号强度:  ").append(WifiHelper.getInstance().getWifiState());
         boolean wifiProxy = AddressToolUtils.isWifiProxy(application);
-        if (wifiProxy){
+        if (wifiProxy) {
             sb.append("\nwifi是否代理:  ").append("已经链接代理");
         } else {
             sb.append("\nwifi是否代理:  ").append("未链接代理");
@@ -271,7 +275,7 @@ public class MonitorPhoneFragment extends Fragment {
         String ip = AppDeviceUtils.intToIp(wifiIp);
         sb.append("\nWifi的Ip地址:  ").append(ip);
         DhcpInfo dhcpInfo = AppDeviceUtils.getDhcpInfo(application);
-        if (dhcpInfo!=null){
+        if (dhcpInfo != null) {
             //sb.append("\nipAddress：").append(AppDeviceUtils.intToIp(dhcpInfo.ipAddress));
             sb.append("\n子网掩码地址：").append(AppDeviceUtils.intToIp(dhcpInfo.netmask));
             sb.append("\n网关地址：").append(AppDeviceUtils.intToIp(dhcpInfo.gateway));
@@ -328,6 +332,29 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("\n获得机身内存总大小:  ").append(AppMemoryUtils.getRomTotalSize(application)).append("kb");
         sb.append("\n获得机身可用内存:  ").append(AppMemoryUtils.getRomAvailableSize(application)).append("kb");
         sb.append("\n系统剩余控件:  ").append(AppMemoryUtils.getRomSpace(application));
+        AppMemoryUtils.getMemoryInfo(application, new AppMemoryUtils.OnGetMemoryInfoCallback() {
+            @Override
+            public void onGetMemoryInfo(String pkgName, int pid, RamMemoryInfo ramMemoryInfo,
+                                        PssInfo pssInfo, DalvikHeapMem dalvikHeapMem) {
+                sb.append("\n是否低内存状态运行:  ").append(ramMemoryInfo.isLowMemory);
+                sb.append("\n可用RAM:  ").append(ramMemoryInfo.availMem);
+                sb.append("\n手机总RAM:  ").append(ramMemoryInfo.totalMem);
+                sb.append("\n内存占用满的阀值:  ").append(ramMemoryInfo.lowMemThreshold);
+                sb.append("\n总的PSS内存使用量:  ").append(pssInfo.totalPss).append("kb");
+                sb.append("\ndalvik堆的比例设置大小:  ").append(pssInfo.dalvikPss);
+                sb.append("\n本机堆的比例设置大小:  ").append(pssInfo.nativePss);
+                sb.append("\n比例设置大小为其他所有:  ").append(pssInfo.otherPss);
+                sb.append("\n空闲内存:  ").append(dalvikHeapMem.freeMem);
+                sb.append("\n最大内存:  ").append(dalvikHeapMem.maxMem);
+                sb.append("\n已用内存:  ").append(dalvikHeapMem.allocated);
+            }
+        });
+        AppMemoryUtils.getSystemRam(application, new AppMemoryUtils.OnGetRamMemoryInfoCallback() {
+            @Override
+            public void onGetRamMemoryInfo(RamMemoryInfo ramMemoryInfo) {
+
+            }
+        });
         tvContentStorage.setText(sb.toString());
     }
 
@@ -347,7 +374,7 @@ public class MonitorPhoneFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     private void setAppSoInfo() {
         String currSoLoaded = AppSoLibUtils.getCurrSoLoaded();
-        if (currSoLoaded.length() == 0){
+        if (currSoLoaded.length() == 0) {
             tvContentSo.setText("本App暂无so库");
         } else {
             tvContentSo.setText(currSoLoaded);
