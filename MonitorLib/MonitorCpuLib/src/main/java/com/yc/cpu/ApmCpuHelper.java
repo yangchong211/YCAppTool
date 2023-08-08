@@ -1,12 +1,16 @@
 package com.yc.cpu;
 
 
+import android.os.Build;
 import android.text.TextUtils;
+
+import com.yc.toolutils.AppLogUtils;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,6 +45,7 @@ public final class ApmCpuHelper {
     }
 
     public CpuRateBean get(){
+        long startTime = System.currentTimeMillis();
         //CPU的使用率读取耗时在70ms左右
         CpuRateBean cpuRate = getCpuRateData();
         //有一定概率存在小于等于0的情况，重试两次
@@ -56,6 +61,8 @@ public final class ApmCpuHelper {
             cpuRate = getCpuRateData();
             cpuRate.setRetryTimes(3);
         }
+        long endTime = System.currentTimeMillis();
+        AppLogUtils.d("ApmCpuHelper get , total time : " + (endTime - startTime));
         return cpuRate;
     }
 
@@ -84,6 +91,10 @@ public final class ApmCpuHelper {
             long totalCpu2 = getTotalCpuTime();
             //获取时间2总的进程时间
             long totalProcess2 = getAppCpuTime();
+            AppLogUtils.d("ApmCpuHelper get , totalCpu1：" + totalCpu1
+                    + " , totalProcess1：" + totalProcess1
+                    + " , totalCpu2：" + totalCpu2
+                    + " , totalProcess2：" + totalProcess2);
             //CPU总使用率
             float totalRate = (totalCpu2 - totalCpu1) / (float) (totalCpu2 - totalCpu1);
             //CPU占用率
@@ -96,7 +107,12 @@ public final class ApmCpuHelper {
     }
 
     /**
-     * 获取系统总CPU使用时间
+     * 获取系统总CPU使用时间【注意在Android8.0后就读取不了/proc/stat内容】
+     * /proc/stat 内容首行有8个数值
+     * 分别提供了所有CPU在 用户态(user)、用户态-低优先级(nice)、内核态(sys)、空闲态(idle)、io等待(iowait)、
+     * 硬中断(irq)、软中断(softirq) 状态 下的时间总和，将这些值累加作为系统总的CPU时间(cpuTime)。
+     *
+     * 读取 proc/stat
      * @return
      */
     public long getTotalCpuTime() {
@@ -106,10 +122,10 @@ public final class ApmCpuHelper {
             FileInputStream inputStream = new FileInputStream("/proc/stat");
             reader = new BufferedReader(new InputStreamReader(inputStream), 1000);
             String load = reader.readLine();
-            reader.close();
             cpuInfos = load.split(" ");
         } catch (IOException ex) {
             ex.printStackTrace();
+            AppLogUtils.d("ApmCpuHelper getTotalCpuTime , cpuInfos : " + cpuInfos);
         }  finally {
             if (reader != null) {
                 try {
@@ -119,6 +135,7 @@ public final class ApmCpuHelper {
                 }
             }
         }
+        AppLogUtils.d("ApmCpuHelper getTotalCpuTime , cpuInfos : " + cpuInfos);
         if (cpuInfos != null){
             long totalCpu = Long.parseLong(cpuInfos[2])
                     + Long.parseLong(cpuInfos[3]) + Long.parseLong(cpuInfos[4])
@@ -132,6 +149,7 @@ public final class ApmCpuHelper {
 
     /**
      * 获取应用占用的CPU时间
+     * 读取 /proc/pid/stat
      * @return
      */
     public long getAppCpuTime() {
@@ -142,7 +160,6 @@ public final class ApmCpuHelper {
             FileInputStream inputStream = new FileInputStream("/proc/" + pid + "/stat");
             reader = new BufferedReader(new InputStreamReader(inputStream), 1000);
             String load = reader.readLine();
-            reader.close();
             cpuInfos = load.split(" ");
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -178,7 +195,8 @@ public final class ApmCpuHelper {
             String result;
             Process p;
             p = Runtime.getRuntime().exec("top -n 1");
-            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            InputStream inputStream = p.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             while ((result = br.readLine()) != null) {
                 if (TextUtils.isEmpty(result) || !(result.contains("%") && result.contains("User") && result
                         .contains("System"))) {
@@ -194,10 +212,10 @@ public final class ApmCpuHelper {
                     break;
                 }
             }
+            AppLogUtils.d("ApmCpuHelper getCpuRateTop : " + tv + " , " + rate);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(rate + "");
         return rate / 100f;
     }
 
@@ -230,7 +248,7 @@ public final class ApmCpuHelper {
      *
      * @return 百分比
      */
-    private float getTempProcCPURate() {
+    public float getTempProcCPURate() {
         String path = "/proc/stat";// 系统CPU信息文件
         long[] totalJiffies = new long[2];//CPU总时间
         long[] totalIdle = new long[2];//CPU总空闲时间

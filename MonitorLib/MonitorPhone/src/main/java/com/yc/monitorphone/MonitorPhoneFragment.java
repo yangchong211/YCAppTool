@@ -347,15 +347,10 @@ public class MonitorPhoneFragment extends Fragment {
                 sb.append("\n空闲内存:  ").append(dalvikHeapMem.freeMem);
                 sb.append("\n最大内存:  ").append(dalvikHeapMem.maxMem);
                 sb.append("\n已用内存:  ").append(dalvikHeapMem.allocated);
+                tvContentStorage.setText(sb.toString());
             }
         });
-        AppMemoryUtils.getSystemRam(application, new AppMemoryUtils.OnGetRamMemoryInfoCallback() {
-            @Override
-            public void onGetRamMemoryInfo(RamMemoryInfo ramMemoryInfo) {
 
-            }
-        });
-        tvContentStorage.setText(sb.toString());
     }
 
     private void setMemoryInfo() {
@@ -386,15 +381,26 @@ public class MonitorPhoneFragment extends Fragment {
      */
     private void setCpuInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append("CPU使用率:  ").append(ApmCpuHelper.getInstance().getCpuRateTop());
-        sb.append("\n获取应用占用的CPU时间:  ").append(ApmCpuHelper.getInstance().getAppCpuTime());
-        sb.append("\n获取系统总CPU使用时间:  ").append(ApmCpuHelper.getInstance().getTotalCpuTime());
-        sb.append("\nCPU使用率:  ").append(ApmCpuHelper.getInstance().getCpuRateTop());
-        sb.append("\n获取总的CPU使用率:  ").append(ApmCpuHelper.getInstance().getCpuProcRate());
-        CpuRateBean cpuRateBean = ApmCpuHelper.getInstance().get();
-        sb.append("\nCPU占用率:  ").append(cpuRateBean.getProcess());
-        sb.append("\nCPU总使用率:  ").append(cpuRateBean.getTotal());
-        tvContentCpu.setText(sb.toString());
+        DelegateTaskExecutor.getInstance().executeOnCpu(new Runnable() {
+            @Override
+            public void run() {
+                sb.append("CPU使用率:  ").append(ApmCpuHelper.getInstance().getCpuRateTop());
+                sb.append("\nApp的CPU时间:  ").append(ApmCpuHelper.getInstance().getAppCpuTime());
+                sb.append("\n总的CPU时间:  ").append(ApmCpuHelper.getInstance().getTotalCpuTime());
+                sb.append("\nTOP计算CPU使用率:  ").append(ApmCpuHelper.getInstance().getCpuRateTop());
+                sb.append("\n获取总的CPU使用率:  ").append(ApmCpuHelper.getInstance().getCpuProcRate());
+                sb.append("\n当前CPU占比:  ").append(ApmCpuHelper.getInstance().getTempProcCPURate());
+                CpuRateBean cpuRateBean = ApmCpuHelper.getInstance().get();
+                sb.append("\nCPU占用率:  ").append(cpuRateBean.getProcess());
+                sb.append("\nCPU总使用率:  ").append(cpuRateBean.getTotal());
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tvContentCpu.setText(sb.toString());
+                    }
+                });
+            }
+        });
     }
 
 }
