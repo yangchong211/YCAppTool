@@ -119,6 +119,16 @@
                 android:textColor="#8033b7"
                 android:background="#c39dbbf1"
                 style="@style/DetailContent"/>
+
+            <TextView
+                style="@style/DetailTitle"
+                android:text="流量统计"/>
+
+            <TextView
+                android:id="@+id/tv_content_flow"
+                android:textColor="#8033b7"
+                android:background="#50cfa0f1"
+                style="@style/DetailContent"/>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -27,6 +27,8 @@ import com.yc.cpu.CpuRateBean;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.localelib.service.LocaleService;
 import com.yc.localelib.utils.LocaleToolUtils;
+import com.yc.monitorflow.TrafficBean;
+import com.yc.monitorflow.FlowHelper;
 import com.yc.networklib.AddressToolUtils;
 import com.yc.networklib.AppNetworkUtils;
 import com.yc.networklib.NetWorkManager;
@@ -65,6 +67,7 @@ public class MonitorPhoneFragment extends Fragment {
     private TextView tvContentMemory;
     private TextView tvContentSo;
     private TextView tvContentCpu;
+    private TextView tvContentFlow;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -124,6 +127,7 @@ public class MonitorPhoneFragment extends Fragment {
         tvContentMemory = view.findViewById(R.id.tv_content_memory);
         tvContentSo = view.findViewById(R.id.tv_content_so);
         tvContentCpu = view.findViewById(R.id.tv_content_cpu);
+        tvContentFlow = view.findViewById(R.id.tv_content_flow);
     }
 
     private void initData() {
@@ -145,8 +149,10 @@ public class MonitorPhoneFragment extends Fragment {
         setAppSoInfo();
         //获取cpu相关信息
         setCpuInfo();
+        //设置流量
+        setFlowInfo();
         //注册广播监听
-        initNetStatus();
+//        initNetStatus();
     }
 
     private void initNetStatus() {
@@ -329,8 +335,8 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("当前时区:  ").append(AppTimeUtils.getCurrentTimeZone());
         sb.append("\n手机总内存:  ").append(AppMemoryUtils.getTotalMemory(application)).append("kb");
         sb.append("\n手机可用内存:  ").append(AppMemoryUtils.getAvailMemory(application)).append("mb");
-        sb.append("\n获得机身内存总大小:  ").append(AppMemoryUtils.getRomTotalSize(application)).append("kb");
-        sb.append("\n获得机身可用内存:  ").append(AppMemoryUtils.getRomAvailableSize(application)).append("kb");
+//        sb.append("\n获得机身内存总大小:  ").append(AppMemoryUtils.getRomTotalSize(application)).append("kb");
+//        sb.append("\n获得机身可用内存:  ").append(AppMemoryUtils.getRomAvailableSize(application)).append("kb");
         sb.append("\n系统剩余控件:  ").append(AppMemoryUtils.getRomSpace(application));
         AppMemoryUtils.getMemoryInfo(application, new AppMemoryUtils.OnGetMemoryInfoCallback() {
             @Override
@@ -401,6 +407,29 @@ public class MonitorPhoneFragment extends Fragment {
                 });
             }
         });
+    }
+
+    private void setFlowInfo() {
+        FlowHelper.getInstance().setContext(activity);
+        StringBuilder sb = new StringBuilder();
+        TrafficBean flow = FlowHelper.getInstance().getFlow();
+        sb.append("总的下行流量:  ").append(flow.getTotalRxKB());
+        sb.append("\n总的上行流量:  ").append(flow.getTotalTxKB());
+        sb.append("\n开机时间:  ").append(flow.getBootTime());
+        TrafficBean appFlow = FlowHelper.getInstance().getAppFlow();
+        sb.append("\nApp的下行流量:  ").append(appFlow.getTotalRxKB());
+        sb.append("\nApp的上行流量:  ").append(appFlow.getTotalTxKB());
+        TrafficBean allDayMonthMobileInfo = FlowHelper.getInstance().getAllDayMonthMobileInfo();
+        if (allDayMonthMobileInfo !=null){
+            sb.append("\n所有移动使用流量信息下行流量:  ").append(allDayMonthMobileInfo.getTotalRxKB());
+            sb.append("\n所有移动使用流量信息上行流量:  ").append(allDayMonthMobileInfo.getTotalTxKB());
+        }
+        TrafficBean oneDayMobileInfo = FlowHelper.getInstance().getOneDayMobileInfo();
+        if (oneDayMobileInfo !=null){
+            sb.append("\n获取所有应用一天使用下行流量:  ").append(oneDayMobileInfo.getTotalRxKB());
+            sb.append("\n获取所有应用一天使用上行流量:  ").append(oneDayMobileInfo.getTotalTxKB());
+        }
+        tvContentFlow.setText(sb.toString());
     }
 
 }
