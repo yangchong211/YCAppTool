@@ -238,7 +238,7 @@ include ':MonitorCpuLib', ':MonitorCatonLib', ':MonitorAnrLib', ':MonitorCrashLi
         ':MonitorXposed', ':MonitorMemory',':MonitorLeakLib',
         ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',':MonitorThread',
         ':MonitorPrivacy', ':MonitorTimeLib', ':MonitorSpeed', ':MonitorInterceptor',
-        ':MonitorPhone', ':MonitorPicture', ':MonitorMethod'
+        ':MonitorPhone', ':MonitorPicture', ':MonitorMethod', ':MonitorFlow'
 project(':MonitorCpuLib').projectDir = new File('MonitorLib/MonitorCpuLib')
 project(':MonitorCatonLib').projectDir = new File('MonitorLib/MonitorCatonLib')
 project(':MonitorAnrLib').projectDir = new File('MonitorLib/MonitorAnrLib')
@@ -261,6 +261,7 @@ project(':MonitorPicture').projectDir = new File('MonitorLib/MonitorPicture')
 project(':MonitorLeakLib').projectDir = new File('MonitorLib/MonitorLeakLib')
 project(':MonitorThread').projectDir = new File('MonitorLib/MonitorThread')
 project(':MonitorMethod').projectDir = new File('MonitorLib/MonitorMethod')
+project(':MonitorFlow').projectDir = new File('MonitorLib/MonitorFlow')
 
 
 /* +++++++++ 音视频 +++++++++ */
