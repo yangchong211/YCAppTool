@@ -356,7 +356,6 @@ public class MonitorPhoneFragment extends Fragment {
                 tvContentStorage.setText(sb.toString());
             }
         });
-
     }
 
     private void setMemoryInfo() {
