@@ -2,8 +2,24 @@ package com.yc.privateserver;
 
 import android.os.Build;
 import android.text.TextUtils;
+
 import androidx.annotation.RequiresApi;
 
+/**
+ * 建议APP需遵循合理、正当、必要的原则收集用户个人信息，具体为：
+ * 1.收集的个人信息的类型应与实现产品或服务的业务功能有直接关联，直接关联是指没有该信息的参与，产品或服务的功能无法实现；
+ * 2.自动采集个人信息的频率应是实现产品或服务的业务功能所必需的最低频率；
+ * 3.间接获取个人信息的数量应是实现产品或服务的业务功能所必需的最少数量。
+ * A.收集的个人信息，设备相关的主要有：
+ * getDeviceId：获取设备id
+ * getImei：获取imei号
+ * getAndroidId：获取android_id
+ * getSN：获取SERIAL号码
+ * getSimOperator：获取sim卡id
+ * B.收集的个人信息，网络相关的主要有：
+ * getIpAddress：获取ip的mac地址
+ * getSsid：获取网络Wi-Fi的名称
+ */
 public final class PrivateService {
 
     /**
@@ -15,11 +31,11 @@ public final class PrivateService {
         if (null != PrivateCache.DEVICE_ID) {
             return PrivateCache.DEVICE_ID;
         } else {
-            String str = SafePrivateHelper.getDeviceId();
+            String str = SafePrivateHelper.getInstance().getDeviceId();
             if (TextUtils.isEmpty(str)) {
                 str = "";
             } else {
-                PrivateCache.MEID = str;
+                PrivateCache.DEVICE_ID = str;
             }
             return str;
         }
@@ -28,14 +44,14 @@ public final class PrivateService {
     /**
      * 获取MEID
      *
-     * @return return defaultValue if fetch failed.
+     * @return MEID号
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static String getMEID() {
         if (null != PrivateCache.MEID) {
             return PrivateCache.MEID;
         } else {
-            String str = SafePrivateHelper.getMeid();
+            String str = SafePrivateHelper.getInstance().getMeid();
             if (TextUtils.isEmpty(str)) {
                 str = "";
             } else {
@@ -55,7 +71,7 @@ public final class PrivateService {
         if (null != PrivateCache.Imei1) {
             return PrivateCache.Imei1;
         } else {
-            String str = SafePrivateHelper.getImei(0);
+            String str = SafePrivateHelper.getInstance().getImei(0);
             if (TextUtils.isEmpty(str)) {
                 str = "";
             } else {
@@ -75,7 +91,7 @@ public final class PrivateService {
         if (null != PrivateCache.Imei2) {
             return PrivateCache.Imei2;
         } else {
-            String str = SafePrivateHelper.getImei(1);
+            String str = SafePrivateHelper.getInstance().getImei(1);
             if (TextUtils.isEmpty(str)) {
                 str = "";
             } else {
@@ -96,9 +112,9 @@ public final class PrivateService {
         }
         String imei;
         if (Build.VERSION.SDK_INT >= 26) {
-            imei = SafePrivateHelper.getImei();
+            imei = SafePrivateHelper.getInstance().getImei();
         } else {
-            imei = SafePrivateHelper.getDeviceId();
+            imei = SafePrivateHelper.getInstance().getDeviceId();
         }
 
         if (!TextUtils.isEmpty(imei)) {
@@ -118,7 +134,7 @@ public final class PrivateService {
         if (null != PrivateCache.ANDROID_ID) {
             return PrivateCache.ANDROID_ID;
         }
-        String androidId = SafePrivateHelper.getAndroidId();
+        String androidId = SafePrivateHelper.getInstance().getAndroidId();
         if (!TextUtils.isEmpty(androidId)) {
             PrivateCache.ANDROID_ID = androidId;
         } else {
@@ -153,13 +169,13 @@ public final class PrivateService {
      */
     private static String getDeviceSN() {
         //通过android.os获取sn号
-        String serial = SafePrivateHelper.getSN1();
+        String serial = SafePrivateHelper.getInstance().getSN1();
         if (!TextUtils.isEmpty(serial) && !serial.equals("unknown")) {
             return serial;
         }
 
         //通过反射获取sn号
-        serial = SafePrivateHelper.getSN2();
+        serial = SafePrivateHelper.getInstance().getSN2();
         if (!TextUtils.isEmpty(serial) && !serial.equals("unknown")) {
             return serial;
         }
@@ -167,7 +183,7 @@ public final class PrivateService {
         try {
             //9.0及以上无法获取到sn，此方法S为补充，能够获取到多数高版本手机 sn
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                serial = SafePrivateHelper.getSN3();
+                serial = SafePrivateHelper.getInstance().getSN3();
             }
         } catch (Exception e) {
             serial = "";
@@ -214,7 +230,7 @@ public final class PrivateService {
         if (null != PrivateCache.SIM_OPERATOR) {
             return PrivateCache.SIM_OPERATOR;
         }
-        String operator = SafePrivateHelper.getSimOperator();
+        String operator = SafePrivateHelper.getInstance().getSimOperator();
         if (!TextUtils.isEmpty(operator)) {
             PrivateCache.SIM_OPERATOR = operator;
         } else {
@@ -227,7 +243,7 @@ public final class PrivateService {
         if (null != PrivateCache.IMSI) {
             return PrivateCache.IMSI;
         }
-        String IMSI = SafePrivateHelper.getSubscriberId();
+        String IMSI = SafePrivateHelper.getInstance().getSubscriberId();
         if (!TextUtils.isEmpty(IMSI)) {
             PrivateCache.IMSI = IMSI;
         } else {
@@ -281,7 +297,7 @@ public final class PrivateService {
         if (null != PrivateCache.OPERATOR_NAME) {
             return PrivateCache.OPERATOR_NAME;
         }
-        String operatorName = SafePrivateHelper.getSimOperatorName();
+        String operatorName = SafePrivateHelper.getInstance().getSimOperatorName();
         if (!TextUtils.isEmpty(operatorName)) {
             PrivateCache.OPERATOR_NAME = operatorName;
         } else {

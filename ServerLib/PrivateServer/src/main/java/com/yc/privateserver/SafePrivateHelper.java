@@ -13,20 +13,44 @@ import androidx.annotation.RequiresPermission;
 
 import java.lang.reflect.Method;
 
-public final class SafePrivateHelper {
+/**
+ * 建议APP需遵循合理、正当、必要的原则收集用户个人信息，具体为：
+ * 1.收集的个人信息的类型应与实现产品或服务的业务功能有直接关联，直接关联是指没有该信息的参与，产品或服务的功能无法实现；
+ * 2.自动采集个人信息的频率应是实现产品或服务的业务功能所必需的最低频率；
+ * 3.间接获取个人信息的数量应是实现产品或服务的业务功能所必需的最少数量。
+ */
+public final class SafePrivateHelper implements IPrivateDevice, IPrivateNet {
+
+    private static volatile SafePrivateHelper singleton = null;
+
+    static SafePrivateHelper getInstance() {
+        if (singleton == null) {
+            synchronized (SafePrivateHelper.class) {
+                if (singleton == null) {
+                    singleton = new SafePrivateHelper();
+                }
+            }
+        }
+        return singleton;
+    }
+
+    private SafePrivateHelper() {
+
+    }
 
     /**
      * -------------------------------------------------------------------------------
      * getDeviceId
      */
     @Nullable
-    protected static String getDeviceId() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getDeviceId() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             //如果没有设置同意隐私政策，那么获取的设备参数传递空。这样避免调用在隐私协议政策前调用导致不合规！
             return null;
         }
-        if (UserPrivacyHolder.hasReadPhoneStatePermission()) {
-            return DeviceIdOnceGetter.val;
+        if (UserPrivacyInit.hasReadPhoneStatePermission()) {
+            return DeviceIdOnceGetter.DEVICE_ID;
         }
         return null;
     }
@@ -37,13 +61,13 @@ public final class SafePrivateHelper {
     private static class DeviceIdOnceGetter {
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @Nullable
-        private static final String val = SafeGet();
+        private static final String DEVICE_ID = SafeGet();
 
         @SuppressLint({"MissingPermission", "HardwareIds"})
         @Nullable
         private static String SafeGet() {
             try {
-                TelephonyManager telManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telManager = UserPrivacyInit.getTelephonyManager();
                 return telManager.getDeviceId();
             } catch (Throwable ignored) {
             }
@@ -57,15 +81,16 @@ public final class SafePrivateHelper {
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
-    protected static String getDeviceId(int index) {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getDeviceId(int index) {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return null;
         }
-        if (UserPrivacyHolder.hasReadPhoneStatePermission()) {
+        if (UserPrivacyInit.hasReadPhoneStatePermission()) {
             if (index == 0) {
-                return DeviceId1OnceGetter.val;
+                return DeviceId1OnceGetter.DEVICE_ID_0;
             } else if (index == 1) {
-                return DeviceId2OnceGetter.val;
+                return DeviceId2OnceGetter.DEVICE_ID_1;
             }
         }
         return null;
@@ -78,14 +103,14 @@ public final class SafePrivateHelper {
         @RequiresApi(api = Build.VERSION_CODES.M)
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @Nullable
-        private static final String val = SafeGet();
+        private static final String DEVICE_ID_0 = SafeGet();
 
         @RequiresApi(api = Build.VERSION_CODES.M)
         @SuppressLint({"MissingPermission", "HardwareIds"})
         @Nullable
         private static String SafeGet() {
             try {
-                TelephonyManager telManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telManager = UserPrivacyInit.getTelephonyManager();
                 return telManager.getDeviceId(0);
             } catch (Throwable ignored) {
             }
@@ -100,14 +125,14 @@ public final class SafePrivateHelper {
         @RequiresApi(api = Build.VERSION_CODES.M)
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @Nullable
-        private static final String val = SafeGet();
+        private static final String DEVICE_ID_1 = SafeGet();
 
         @RequiresApi(api = Build.VERSION_CODES.M)
         @SuppressLint({"MissingPermission", "HardwareIds"})
         @Nullable
         private static String SafeGet() {
             try {
-                TelephonyManager telManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telManager = UserPrivacyInit.getTelephonyManager();
                 return telManager.getDeviceId(1);
             } catch (Throwable ignored) {
             }
@@ -121,12 +146,13 @@ public final class SafePrivateHelper {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
-    protected static String getImei() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getImei() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return null;
         }
-        if (UserPrivacyHolder.hasReadPhoneStatePermission()) {
-            return ImeiOnceGetter.val;
+        if (UserPrivacyInit.hasReadPhoneStatePermission()) {
+            return ImeiOnceGetter.IMEI;
         }
         return null;
     }
@@ -138,14 +164,14 @@ public final class SafePrivateHelper {
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Nullable
-        private static final String val = SafeGet();
+        private static final String IMEI = SafeGet();
 
         @SuppressLint({"MissingPermission", "HardwareIds"})
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Nullable
         private static String SafeGet() {
             try {
-                TelephonyManager telManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telManager = UserPrivacyInit.getTelephonyManager();
                 return telManager.getImei();
             } catch (Throwable ignored) {
             }
@@ -159,15 +185,16 @@ public final class SafePrivateHelper {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
-    protected static String getImei(int slotIndex) {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getImei(int slotIndex) {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return null;
         }
-        if (UserPrivacyHolder.hasReadPhoneStatePermission()) {
+        if (UserPrivacyInit.hasReadPhoneStatePermission()) {
             if (slotIndex == 0) {
-                return Imei1OnceGetter.val;
+                return Imei1OnceGetter.IMEI_0;
             } else {
-                return Imei2OnceGetter.val;
+                return Imei2OnceGetter.IMEI_1;
             }
         }
         return null;
@@ -180,14 +207,14 @@ public final class SafePrivateHelper {
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Nullable
-        private static final String val = SafeGet();
+        private static final String IMEI_0 = SafeGet();
 
         @SuppressLint({"MissingPermission", "HardwareIds"})
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Nullable
         private static String SafeGet() {
             try {
-                TelephonyManager telManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telManager = UserPrivacyInit.getTelephonyManager();
                 return telManager.getImei(0);
             } catch (Throwable ignored) {
             }
@@ -202,14 +229,14 @@ public final class SafePrivateHelper {
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Nullable
-        private static final String val = SafeGet();
+        private static final String IMEI_1 = SafeGet();
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         @SuppressLint({"MissingPermission", "HardwareIds"})
         @Nullable
         private static String SafeGet() {
             try {
-                TelephonyManager telManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telManager = UserPrivacyInit.getTelephonyManager();
                 return telManager.getImei(1);
             } catch (Throwable ignored) {
             }
@@ -224,12 +251,13 @@ public final class SafePrivateHelper {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
-    protected static String getMeid() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getMeid() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return null;
         }
-        if (UserPrivacyHolder.hasReadPhoneStatePermission()) {
-            return MeidOnceGetter.val;
+        if (UserPrivacyInit.hasReadPhoneStatePermission()) {
+            return MeidOnceGetter.MEID;
         }
         return null;
     }
@@ -241,14 +269,14 @@ public final class SafePrivateHelper {
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Nullable
-        private static final String val = SafeGet();
+        private static final String MEID = SafeGet();
 
         @SuppressLint("MissingPermission")
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Nullable
         private static String SafeGet() {
             try {
-                TelephonyManager telephonyManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telephonyManager = UserPrivacyInit.getTelephonyManager();
                 return telephonyManager.getMeid();
             } catch (Throwable ignored) {
             }
@@ -257,22 +285,22 @@ public final class SafePrivateHelper {
     }
 
 
-
     /**
      * -------------------------------------------------------------------------------
      * getMeid(int)
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
-    protected static String getMeid(int index) {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getMeid(int index) {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return null;
         }
-        if (UserPrivacyHolder.hasReadPhoneStatePermission()) {
+        if (UserPrivacyInit.hasReadPhoneStatePermission()) {
             if (index == 0) {
-                return Meid1OnceGetter.val;
+                return Meid1OnceGetter.MEID_0;
             } else if (index == 1) {
-                return Meid2OnceGetter.val;
+                return Meid2OnceGetter.MEID_1;
             }
         }
         return null;
@@ -285,14 +313,14 @@ public final class SafePrivateHelper {
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Nullable
-        private static final String val = SafeGet();
+        private static final String MEID_0 = SafeGet();
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         @SuppressLint({"MissingPermission"})
         @Nullable
         private static String SafeGet() {
             try {
-                TelephonyManager telephonyManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telephonyManager = UserPrivacyInit.getTelephonyManager();
                 return telephonyManager.getMeid(0);
             } catch (Throwable ignored) {
             }
@@ -307,14 +335,14 @@ public final class SafePrivateHelper {
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Nullable
-        private static final String val = SafeGet();
+        private static final String MEID_1 = SafeGet();
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         @SuppressLint({"MissingPermission"})
         @Nullable
         private static String SafeGet() {
             try {
-                TelephonyManager telephonyManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telephonyManager = UserPrivacyInit.getTelephonyManager();
                 return telephonyManager.getMeid(1);
             } catch (Throwable ignored) {
             }
@@ -328,12 +356,13 @@ public final class SafePrivateHelper {
      * getSubscriberId()
      */
     @Nullable
-    protected static String getSubscriberId() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getSubscriberId() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return null;
         }
-        if (UserPrivacyHolder.hasReadPhoneStatePermission()) {
-            return SubscriberIdOnceGetter.val;
+        if (UserPrivacyInit.hasReadPhoneStatePermission()) {
+            return SubscriberIdOnceGetter.SUBSCRIBER_ID;
         }
         return null;
     }
@@ -343,12 +372,12 @@ public final class SafePrivateHelper {
      */
     private static class SubscriberIdOnceGetter {
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
-        private static final String val = SafeGet();
+        private static final String SUBSCRIBER_ID = SafeGet();
 
         @SuppressLint({"MissingPermission", "HardwareIds"})
         private static String SafeGet() {
             try {
-                TelephonyManager telManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telManager = UserPrivacyInit.getTelephonyManager();
                 return telManager.getSubscriberId();
             } catch (Throwable ignored) {
             }
@@ -359,25 +388,27 @@ public final class SafePrivateHelper {
     /**
      * -------------------------------------------------------------------------------
      * getSimOperatorName()
+     *
      * @return empty string for fail.
      */
     @NonNull
-    protected static String getSimOperatorName() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getSimOperatorName() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return "";
         }
-        return OperatorNameOnceGetter.val;
+        return OperatorNameOnceGetter.SIM_OPERATOR;
     }
 
     private static class OperatorNameOnceGetter {
         @NonNull
-        private static final String val = SafeGet();
+        private static final String SIM_OPERATOR = SafeGet();
 
         @SuppressLint({"HardwareIds"})
         @NonNull
         private static String SafeGet() {
             try {
-                TelephonyManager telManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telManager = UserPrivacyInit.getTelephonyManager();
                 return telManager.getSimOperatorName();
             } catch (Throwable ignored) {
             }
@@ -388,24 +419,26 @@ public final class SafePrivateHelper {
     /**
      * -------------------------------------------------------------------------------
      * getSimOperator()
+     *
      * @return empty string for fail.
      */
     @NonNull
-    protected static String getSimOperator() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getSimOperator() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return "";
         }
-        return SimOperatorOnceGetter.val;
+        return SimOperatorOnceGetter.SIM_OPERATOR;
     }
 
     private static class SimOperatorOnceGetter {
         @NonNull
-        private static final String val = SafeGet();
+        private static final String SIM_OPERATOR = SafeGet();
 
         @NonNull
         private static String SafeGet() {
             try {
-                TelephonyManager telManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telManager = UserPrivacyInit.getTelephonyManager();
                 return telManager.getSimOperator();
             } catch (Throwable ignored) {
             }
@@ -416,16 +449,18 @@ public final class SafePrivateHelper {
     /**
      * -------------------------------------------------------------------------------
      * getSimSerialNumber()
+     *
      * @return null for fail.
      */
 
     @Nullable
-    protected static String getSimSerialNumber() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getSimSerialNumber() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return null;
         }
-        if (UserPrivacyHolder.hasReadPhoneStatePermission()) {
-            return SimSerialNumberOnceGetter.val;
+        if (UserPrivacyInit.hasReadPhoneStatePermission()) {
+            return SimSerialNumberOnceGetter.SIM_SERIAL_NUMBER;
         }
         return null;
     }
@@ -433,13 +468,13 @@ public final class SafePrivateHelper {
     private static class SimSerialNumberOnceGetter {
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @Nullable
-        private static final String val = SafeGet();
+        private static final String SIM_SERIAL_NUMBER = SafeGet();
 
         @SuppressLint({"MissingPermission", "HardwareIds"})
         @Nullable
         private static String SafeGet() {
             try {
-                TelephonyManager telManager = UserPrivacyHolder.getTelephonyManager();
+                TelephonyManager telManager = UserPrivacyInit.getTelephonyManager();
                 return telManager.getSimSerialNumber();
             } catch (Throwable ignored) {
             }
@@ -454,16 +489,17 @@ public final class SafePrivateHelper {
     protected static final String DEFAULT_SN = "unknown";
 
     @NonNull
-    protected static String getSN1() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getSN1() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return DEFAULT_SN;
         }
-        return SNOnce1Getter.val;
+        return SNOnce1Getter.SERIAL;
     }
 
     private static class SNOnce1Getter {
         @NonNull
-        private static final String val = SafeGet();
+        private static final String SERIAL = SafeGet();
 
         @SuppressLint("HardwareIds")
         @NonNull
@@ -481,16 +517,17 @@ public final class SafePrivateHelper {
      * SystemProperties.get()
      */
     @NonNull
-    protected static String getSN2() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getSN2() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return DEFAULT_SN;
         }
-        return SNOnce2Getter.val;
+        return SNOnce2Getter.SERIAL_2;
     }
 
     private static class SNOnce2Getter {
         @NonNull
-        private static final String val = SafeGet();
+        private static final String SERIAL_2 = SafeGet();
 
         @SuppressLint({"HardwareIds", "PrivateApi"})
         @NonNull
@@ -511,12 +548,13 @@ public final class SafePrivateHelper {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
-    protected static String getSN3() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getSN3() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return DEFAULT_SN;
         }
-        if (UserPrivacyHolder.hasReadPhoneStatePermission()) {
-            return SNOnce3Getter.val;
+        if (UserPrivacyInit.hasReadPhoneStatePermission()) {
+            return SNOnce3Getter.SERIAL;
         }
         return DEFAULT_SN;
     }
@@ -525,7 +563,7 @@ public final class SafePrivateHelper {
         @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
         @RequiresApi(api = Build.VERSION_CODES.O)
         @NonNull
-        private static final String val = SafeGet();
+        private static final String SERIAL = SafeGet();
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         @SuppressLint({"HardwareIds", "MissingPermission"})
@@ -543,8 +581,9 @@ public final class SafePrivateHelper {
      * -------------------------------------------------------------------------------
      * getAndroidId()
      */
-    protected static String getAndroidId() {
-        if(!UserPrivacyHolder.isInitUserPrivacy()){
+    @Override
+    public String getAndroidId() {
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
             return "";
         }
         return AndroidIdOnceGetter.ANDROID_ID;
@@ -552,10 +591,11 @@ public final class SafePrivateHelper {
 
     private static class AndroidIdOnceGetter {
         private static final String ANDROID_ID = SafeGet();
+
         @SuppressLint("HardwareIds")
         private static String SafeGet() {
             try {
-                Context context = UserPrivacyHolder.getContext();
+                Context context = UserPrivacyInit.getContext();
                 return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
             } catch (Throwable ignored) {
             }
@@ -563,5 +603,20 @@ public final class SafePrivateHelper {
         }
     }
 
+
+    @Override
+    public String getMacAddress() {
+        return null;
+    }
+
+    @Override
+    public String getIpAddress() {
+        return null;
+    }
+
+    @Override
+    public String getSsid() {
+        return null;
+    }
 
 }

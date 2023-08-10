@@ -11,13 +11,12 @@
 ### 01.基础概念介绍
 #### 1.1 什么叫敏感信息
 - 敏感设备信息获取是指只要调用系统API就会认为获取敏感信息，并不关心有没有获取到敏感信息以及调用系统API的目的。
-  
+
 
 #### 1.2 主要原则
 - 没有权限不能调用系统API，如无READ_PHONE_STATE权限调用掉用getImei()、getDeviceId()等API
 - 控制调用频次，即使有权限不能频繁调用系统API
 - 控制传输频次，不能频繁传输敏感信息
-
 
 
 
@@ -27,8 +26,15 @@
 - 传输控频，主要有2种方案：敏感信息统一传送一次，各业务单独对接，业务见相互依赖强；数据统一整包加密
 
 
+
 #### 2.2 敏感信息有那些
-- imei(IMEI)，android_id(Android唯一标识符)，provider_name(手机运营商)，operator_id(卡运营商id)，sn(sn设备号)等等
+- imei(IMEI国际移动设备标识)，
+- android_id(Android唯一标识符)，
+- sim(sim卡相关id)，
+- provider_name(手机运营商)，
+- operator_id(卡运营商id)，
+- device_id(设备唯一id标识)，
+- sn(设备sn号码)等等
 
 
 
