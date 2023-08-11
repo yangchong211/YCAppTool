@@ -82,16 +82,24 @@
 
 
 
+#### 2.4 替换API操作
+- 老的调用方式【以获取android_id为案例】
+    - String androidId = Settings.Secure.getString(context.getContentResolver(), "android_id");
+- 新的调用方式【设备一些属性，App启动后不会变化的参数，不要频繁去获取，下面这种做了缓存，降低系统api调用】
+    - String androidId = PrivateService.getAndroidId();
+
+
+
 
 ### 03.Api调用说明
 - 在App初始化的时候调用代码如下所示：
     ``` java
-    UserPrivacyHolder.installApp(this)
+    UserPrivacyInit.installApp(this)
     ```
 - 当用户点击启动页面的隐私同意按钮之后，调用代码如下所示
     - 备注：只要调用下面代码之后，获取一些设备参数才会是真正正确的数据。
     ``` java
-    UserPrivacyHolder.setIsInitUserPrivacy(true,true)
+    UserPrivacyInit.setIsInitUserPrivacy(true,true)
     ```
 - 获取一些设备参数的Api如下所示
     ``` kotlin
