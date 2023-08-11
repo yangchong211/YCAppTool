@@ -2,12 +2,15 @@ package com.yc.appmonitor;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
+
 import com.apm.yc.ApmMonitorHelper;
 import com.apm.yc.MonitorListener;
 import com.apm.yc.bean.FlowBean;
 import com.apm.yc.bean.Memory;
 import com.apm.yc.bean.SDCard;
 import com.apm.yc.bean.Version;
+import com.yc.anrtoollib.watch.ANRError;
 import com.yc.cpu.CpuRateBean;
 import com.yc.monitortimelib.OnMonitorListener;
 import com.yc.monitortimelib.TimeMonitorHelper;
@@ -70,6 +73,12 @@ public class MonitorApplication extends Application {
 
     private void initApm() {
         ApmMonitorHelper.getInstance().init(this, new MonitorListener() {
+            @Override
+            public void onAppNotResponding(@NonNull ANRError error) {
+                Throwable throwable = error.fillInStackTrace();
+                AppLogUtils.v("ApmMonitorHelper", throwable);
+            }
+
             @Override
             public void onSystem(long cosTime, CpuRateBean cpuRate, Memory memory, SDCard sdCard,
                                  Version version,

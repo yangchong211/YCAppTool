@@ -4,9 +4,12 @@ package com.yc.appmonitor;
 import android.content.Intent;
 import android.view.View;
 
+import androidx.arch.core.executor.DefaultTaskExecutor;
+
 import com.yc.appmonitor.apm.ApmTestActivity;
 import com.yc.appmonitor.crash.CrashTestActivity;
 import com.yc.appmonitor.net.NetworkActivity;
+import com.yc.clickhelper.PerfectClickListener;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;
@@ -15,8 +18,8 @@ import com.yc.monitorspeed.ConnectionActivity;
 import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toollib.crash.CrashListActivity;
+import com.yc.toolutils.AppActivityUtils;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.click.PerfectClickListener;
 
 public class MonitorMainActivity extends BaseActivity {
 
@@ -105,15 +108,20 @@ public class MonitorMainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        for (int i=0 ; i<1000 ; i++){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    count++;
-                    AppLogUtils.d("count data is " + count);
-                }
-            }).start();
-        }
+//        for (int i=0 ; i<1000 ; i++){
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    count++;
+//                    try {
+//                        Thread.sleep(100);
+//                    } catch (InterruptedException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    AppLogUtils.d("count data is " + count);
+//                }
+//            }).start();
+//        }
     }
 
 
