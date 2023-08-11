@@ -31,7 +31,7 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<BaseVie
     private OnItemLongClickListener onItemLongClickListener;
     private final Object mLock = new Object();
     //默认可以回收
-    private boolean isRecycle;
+    private final boolean isRecycle;
     private int position;
     private int line;
 
@@ -72,6 +72,7 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<BaseVie
     /**
      * 创建一个ViewHolder
      */
+    @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (multiTypeSupport != null) {
