@@ -1,11 +1,8 @@
 package com.yc.lifehelper.component;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -17,11 +14,6 @@ import com.yc.todoappmvvm.tasks.TasksMvvmActivity;
 import com.yc.toolutils.click.FastClickUtils;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
-import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class RecommendComponent implements InterItemView {
 

@@ -365,11 +365,14 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         String toHex3 = ByteTranslateUtils.bytesToHex3(bytes);
         //bytesToHex : 1234abcd  ----  1234abcd  ----  1234abcd
         AppLogHelper.d("bytesToHex : " + toHex1 + "  ----  " + toHex2 + "  ----  " + toHex3);
-        byte[] bytes1 = ByteTranslateUtils.toBytes(toHex1);
+        byte[] bytes1 = ByteTranslateUtils.toBytes1(toHex1);
         String str = "687474703A2F2F77656978696E2E71712E636F6D2F722F39307852536366454170703972594D7139786E6C";
-        byte[] bytes2 = ByteTranslateUtils.toBytes(str);
+        byte[] bytes2 = ByteTranslateUtils.toBytes1(str);
         String toHex4 = ByteTranslateUtils.bytesToHex1(bytes2);
-        AppLogHelper.d("bytesToHex : " + toHex4);
+        AppLogHelper.d("bytesToHex toHex4: " + toHex4);
+        byte[] bytes3 = ByteTranslateUtils.toBytes2(str);
+        String toHex5 = ByteTranslateUtils.bytesToHex1(bytes3);
+        AppLogHelper.d("bytesToHex toHex5: " + toHex5);
     }
 
 }
