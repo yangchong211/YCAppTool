@@ -1,6 +1,7 @@
 package com.yc.privateserver;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
@@ -10,6 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
+
+import com.yc.appcontextlib.AppToolUtils;
+import com.yc.networklib.AddressToolUtils;
+import com.yc.toolutils.AppDeviceUtils;
 
 import java.lang.reflect.Method;
 
@@ -606,12 +611,19 @@ public final class SafePrivateHelper implements IPrivateDevice, IPrivateNet {
 
     @Override
     public String getMacAddress() {
-        return null;
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
+            return "";
+        }
+        Application app = AppToolUtils.getApp();
+        return AppDeviceUtils.getMacAddress(app);
     }
 
     @Override
     public String getIpAddress() {
-        return null;
+        if (!UserPrivacyInit.isInitUserPrivacy()) {
+            return "";
+        }
+        return AddressToolUtils.getIpAddress();
     }
 
     @Override
