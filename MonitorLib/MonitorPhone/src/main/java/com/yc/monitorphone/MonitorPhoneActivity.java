@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.yc.appcontextlib.AppToolUtils;
 import com.yc.apppermission.PermissionUtils;
 import com.yc.localelib.service.LocaleService;
+import com.yc.privateserver.UserPrivacyInit;
 
 /**
  * <pre>
@@ -54,6 +55,8 @@ public class MonitorPhoneActivity extends AppCompatActivity {
             }
         }
         LocaleService.getInstance().init(AppToolUtils.getApp());
+        UserPrivacyInit.installApp(AppToolUtils.getApp());
+        UserPrivacyInit.setIsInitUserPrivacy(true,BuildConfig.DEBUG);
     }
 
     @Override

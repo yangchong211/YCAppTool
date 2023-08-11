@@ -32,6 +32,7 @@ import com.yc.monitorflow.FlowHelper;
 import com.yc.networklib.AddressToolUtils;
 import com.yc.networklib.AppNetworkUtils;
 import com.yc.networklib.NetWorkManager;
+import com.yc.privateserver.PrivateService;
 import com.yc.toolmemorylib.AppMemoryUtils;
 import com.yc.toolmemorylib.DalvikHeapMem;
 import com.yc.toolmemorylib.PssInfo;
@@ -68,6 +69,7 @@ public class MonitorPhoneFragment extends Fragment {
     private TextView tvContentSo;
     private TextView tvContentCpu;
     private TextView tvContentFlow;
+    private TextView tvContentMg;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -128,6 +130,7 @@ public class MonitorPhoneFragment extends Fragment {
         tvContentSo = view.findViewById(R.id.tv_content_so);
         tvContentCpu = view.findViewById(R.id.tv_content_cpu);
         tvContentFlow = view.findViewById(R.id.tv_content_flow);
+        tvContentMg = view.findViewById(R.id.tv_content_mg);
     }
 
     private void initData() {
@@ -151,6 +154,8 @@ public class MonitorPhoneFragment extends Fragment {
         setCpuInfo();
         //设置流量
         setFlowInfo();
+        //获取敏感设备数据
+        setMgInfo();
         //注册广播监听
 //        initNetStatus();
     }
@@ -431,4 +436,26 @@ public class MonitorPhoneFragment extends Fragment {
         tvContentFlow.setText(sb.toString());
     }
 
+    private void setMgInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("AndroidId:  ").append(PrivateService.getAndroidId());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //获取MEID
+            String meid = PrivateService.getMEID();
+            sb.append("\nMEID:  ").append(meid);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            sb.append("\nIMEI1:  ").append(PrivateService.getImei1());
+            sb.append("\nIMEI2:  ").append(PrivateService.getImei2());
+            sb.append("\nIMEI:  ").append(PrivateService.getImei());
+        }
+        sb.append("\nSN:  ").append(PrivateService.getSN());
+        sb.append("\nDeviceSN:  ").append(PrivateService.getSN());
+        sb.append("\n手机运营商:  ").append(PrivateService.getProviderName());
+        sb.append("\nSim卡的运营商Id:  ").append(PrivateService.getOperatorId());
+        sb.append("\n卡的运营商名称:  ").append(PrivateService.getOperatorName());
+        sb.append("\n设备DeviceId:  ").append(PrivateService.getDeviceId());
+        System.out.print(sb.toString());
+        tvContentMg.setText(sb.toString());
+    }
 }
