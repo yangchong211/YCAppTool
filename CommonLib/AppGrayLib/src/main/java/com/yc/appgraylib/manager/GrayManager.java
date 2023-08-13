@@ -18,7 +18,7 @@ import com.yc.appgraylib.AppGrayHelper;
  */
 public final class GrayManager {
 
-    private static GrayManager mInstance;
+    private static volatile GrayManager mInstance;
     private Paint mGrayPaint;
     private ColorMatrix mGrayMatrix;
     private boolean isGray;
