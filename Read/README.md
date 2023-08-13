@@ -69,7 +69,8 @@
 
 # 大话设计模式
 
-
+- 汽车之家 App 应用性能优化总结与后续展望
+- https://xie.infoq.cn/article/7ddd953996d77d4eac184fb38
 
 
 
