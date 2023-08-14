@@ -4,14 +4,17 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.arch.core.executor.DefaultTaskExecutor;
 
 import com.yc.appwifilib.WifiHelper;
 import com.yc.appwifilib.WifiReceiver;
+import com.yc.appwifilib.WifiStateListener;
 import com.yc.networklib.AppNetworkUtils;
 import com.yc.networklib.NetWorkManager;
 import com.yc.networklib.NetWorkUtils;
@@ -35,7 +38,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         initView();
         setWifiText();
         setMobileText();
-        WifiHelper.getInstance().registerWifiBroadcast(new WifiReceiver.WifiStateListener() {
+        WifiHelper.getInstance().registerWifiBroadcast(new WifiStateListener() {
             @Override
             public void onWifiOpen() {
                 AppLogUtils.d("NetWork-WifiHelper: " + "onWifiOpen");
@@ -90,6 +93,12 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         tvNet2.setOnClickListener(this);
         tvNet3.setOnClickListener(this);
         tvNet4.setOnClickListener(this);
+        tvNet4.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                clickConnectWifi();
+            }
+        },3000);
     }
 
     private void setWifiText(){
@@ -119,6 +128,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v == tvNet1){
             showNetInfo();
+            ToastUtils.showRoundRectToast("查看网络信息");
         } else if (v == tvNet2){
             if (tvNet2.getText().toString().equals("2.关闭Wi-Fi")){
                 WifiHelper.getInstance().openWifi();
@@ -137,7 +147,69 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
                 ToastUtils.showRoundRectToast("关闭移动数据");
             }
             setMobileText();
+        } else if (v == tvNet4){
+            clickConnectWifi();
         }
+    }
+
+    private void clickConnectWifi() {
+        if (WifiHelper.getInstance().isConnectedTargetSsid("iPhone")){
+            ToastUtils.showRoundRectToast("取消热点连接");
+        } else {
+            ToastUtils.showRoundRectToast("开始热点连接");
+            String ssid = "iPhone";
+            String pwd = "yc123456";
+//            if (!WifiHelper.getInstance().isHaveWifi(ssid)){
+//                ToastUtils.showRoundRectToast("没有该热点");
+//                return;
+//            }
+            if (WifiHelper.getInstance().isWifiEnable()){
+//                    WifiHelper.getInstance().connectWifi(this,ssid,pwd);
+                ToastUtils.showRoundRectToast("开始连接Wi-Fi");
+                connect(ssid,pwd);
+            } else {
+                ToastUtils.showRoundRectToast("开始打开Wi-Fi");
+                WifiHelper.getInstance().openWifi();
+                tvNet4.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (WifiHelper.getInstance().isWifiEnable()){
+//                                WifiHelper.getInstance().connectWifi(NetWorkActivity.this,ssid,pwd);
+                            connect(ssid,pwd);
+                        } else {
+                            ToastUtils.showRoundRectToast("wifi打开失败");
+                        }
+                    }
+                },3000);
+            }
+        }
+    }
+
+
+    private void connect(String ssid , String pwd){
+        boolean isSuccess;
+        if (TextUtils.isEmpty(pwd)){
+            isSuccess = WifiHelper.getInstance().connectOpenNetwork(ssid);
+        } else {
+            isSuccess = WifiHelper.getInstance().connectWPA2Network(ssid, pwd);
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean ping = NetWorkUtils.ping();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtils.showRoundRectToast("连接状态"+isSuccess + " -- " );
+                    }
+                });
+            }
+        }).start();
     }
 
     private void showNetInfo() {
@@ -145,16 +217,16 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         sb.append("判断网络是否连接："+AppNetworkUtils.isConnected());
         sb.append("\n判断网络连接后是否可用："+AppNetworkUtils.isAvailable());
         sb.append("\n判断移动数据是否打开："+AppNetworkUtils.getMobileDataEnabled());
-        //sb.append("\n判断网络是否是移动数据："+AppNetworkUtils.isMobileData());
-        //sb.append("\n判断网络是否是 4G："+AppNetworkUtils.is4G());
+        sb.append("\n判断网络是否是移动数据："+AppNetworkUtils.isMobileData());
+        sb.append("\n判断网络是否是 4G："+AppNetworkUtils.is4G());
         sb.append("\n判断 wifi 是否连接状态："+AppNetworkUtils.isWifiConnected());
-        //sb.append("\n获取网络运营商名称："+AppNetworkUtils.getNetworkOperatorName());
+        sb.append("\n获取网络运营商名称："+AppNetworkUtils.getNetworkOperatorName());
         sb.append("\n判断是否是以太网网络："+(AppNetworkUtils.getNetworkType() == NetworkType.NETWORK_ETHERNET));
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            sb.append("\n判断是否是移动流量："+ NetWorkUtils.isActivityCellular());
-            sb.append("\n判断是否是Wi-Fi："+ NetWorkUtils.isActivityWifi());
-            sb.append("\n判断是否是以太网："+ NetWorkUtils.isActivityEthernet());
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            sb.append("\n判断是否是移动流量："+ NetWorkUtils.isActivityCellular());
+//            sb.append("\n判断是否是Wi-Fi："+ NetWorkUtils.isActivityWifi());
+//            sb.append("\n判断是否是以太网："+ NetWorkUtils.isActivityEthernet());
+//        }
 
         WifiHelper wifiHelper = WifiHelper.getInstance();
         sb.append("\n\n下面是Wi-Fi相关工具：");
@@ -164,7 +236,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         sb.append("\n获取wifi的ip："+ wifiHelper.getWifiIp());
         sb.append("\n获取wifi的强弱："+ wifiHelper.getWifiState());
         sb.append("\n便携热点是否开启："+ wifiHelper.isApEnable());
-        sb.append("\n是否连接着指定WiFi："+ wifiHelper.isConnectedTargetSsid("Tencent-WiFi"));
+        sb.append("\n是否连接着指定WiFi："+ wifiHelper.isConnectedTargetSsid("iPhone"));
         sb.append("\n获取开启便携热点后自身热点IP地址："+ wifiHelper.getLocalIp());
         tvContent.setText(sb.toString());
     }
