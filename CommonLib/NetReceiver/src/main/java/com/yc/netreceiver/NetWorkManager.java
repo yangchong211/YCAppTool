@@ -1,4 +1,4 @@
-package com.yc.networklib;
+package com.yc.netreceiver;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -73,7 +73,4 @@ public final class NetWorkManager {
         }
     }
 
-    public interface NetStatusListener {
-        void onChange(boolean connect, int netType);
-    }
 }

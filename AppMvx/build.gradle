@@ -45,4 +45,5 @@ dependencies {
     implementation project(path: ':SecondaryScreen')
     implementation project(path: ':AppClickHelper')
     implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':NetReceiver')
 }

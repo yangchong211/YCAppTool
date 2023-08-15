@@ -1,8 +1,5 @@
 package com.yc.appmvx;
 
-import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,13 +7,12 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.executor.DefaultTaskExecutor;
 
 import com.yc.appwifilib.WifiHelper;
-import com.yc.appwifilib.WifiReceiver;
 import com.yc.appwifilib.WifiStateListener;
+import com.yc.netreceiver.NetStatusListener;
+import com.yc.netreceiver.NetWorkManager;
 import com.yc.networklib.AppNetworkUtils;
-import com.yc.networklib.NetWorkManager;
 import com.yc.networklib.NetWorkUtils;
 import com.yc.networklib.NetworkType;
 import com.yc.toastutils.ToastUtils;
@@ -64,7 +60,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
                 AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotClose");
             }
         });
-        NetWorkManager.getInstance().registerNetStatusListener(new NetWorkManager.NetStatusListener() {
+        NetWorkManager.getInstance().registerNetStatusListener(new NetStatusListener() {
             @Override
             public void onChange(boolean connect, int netType) {
                 if (netType == 1){
@@ -73,6 +69,8 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
                     AppLogUtils.d("NetWork-NetReceiver: " + "Wi-Fi " + connect);
                 } else if (netType == 3){
                     AppLogUtils.d("NetWork-NetReceiver: " + "手机流量 " + connect);
+                } else {
+                    AppLogUtils.d("NetWork-NetReceiver: " + "无网络 " + connect);
                 }
             }
         });
@@ -93,12 +91,6 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         tvNet2.setOnClickListener(this);
         tvNet3.setOnClickListener(this);
         tvNet4.setOnClickListener(this);
-        tvNet4.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                clickConnectWifi();
-            }
-        },3000);
     }
 
     private void setWifiText(){

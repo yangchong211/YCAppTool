@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        PresentationActivity.startActivity(this);
-        startActivity(new Intent(this, KeyCodeActivity.class));
+//        startActivity(new Intent(this, KeyCodeActivity.class));
 //        startActivity(new Intent(this, KeyCodeActivity2.class));
+        startActivity(new Intent(this, NetWorkActivity.class));
     }
 }

@@ -1,5 +1,11 @@
-package com.yc.networklib;
+package com.yc.netreceiver;
 
+import static com.yc.netreceiver.NetStatusListener.NET_ETHERNET;
+import static com.yc.netreceiver.NetStatusListener.NET_MOBILE;
+import static com.yc.netreceiver.NetStatusListener.NET_NONE;
+import static com.yc.netreceiver.NetStatusListener.NET_WIFI;
+
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -7,13 +13,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import com.yc.appcontextlib.AppToolUtils;
+
 public class NetWorkReceiver extends BroadcastReceiver {
 
     private static final String TAG = "NetWork-Receiver";
-    public int NET_ETHERNET = 1;
-    public int NET_WIFI = 2;
-    public int NET_MOBILE = 3;
-    public int NET_NONE = 0;
 
     private final NetWorkManager mManager;
 
@@ -30,18 +34,18 @@ public class NetWorkReceiver extends BroadcastReceiver {
             switch (networkAvailable) {
                 case 1:
                     Log.d(TAG, " network 有网线");
-                    mManager.changeNetStatus(NET_ETHERNET, AppNetworkUtils.isAvailable());
+                    mManager.changeNetStatus(NET_ETHERNET, isAvailable());
                     break;
                 case 2:
                     Log.d(TAG, " network Wi-Fi");
-                    mManager.changeNetStatus(NET_WIFI, AppNetworkUtils.isAvailable());
+                    mManager.changeNetStatus(NET_WIFI, isAvailable());
                     break;
                 case 3:
                     Log.d(TAG, " network 移动数据");
-                    mManager.changeNetStatus(NET_MOBILE, AppNetworkUtils.isAvailable());
+                    mManager.changeNetStatus(NET_MOBILE, isAvailable());
                     break;
                 default:
-                    mManager.changeNetStatus(NET_NONE, AppNetworkUtils.isAvailable());
+                    mManager.changeNetStatus(NET_NONE, isAvailable());
                     break;
             }
         }
@@ -61,5 +65,31 @@ public class NetWorkReceiver extends BroadcastReceiver {
         } else {
             return NET_NONE;
         }
+    }
+
+    /**
+     * 返回网络状态，判断网络是否可用
+     * @return
+     */
+    public boolean isAvailable() {
+        NetworkInfo info = getActiveNetworkInfo();
+        return info != null && info.isAvailable();
+    }
+
+    /**
+     * 获取活动网络信息
+     * <p>需添加权限
+     * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
+     *
+     * @return NetworkInfo
+     */
+    @SuppressLint("MissingPermission")
+    private NetworkInfo getActiveNetworkInfo() {
+        ConnectivityManager manager =
+                (ConnectivityManager) AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (manager == null) {
+            return null;
+        }
+        return manager.getActiveNetworkInfo();
     }
 }

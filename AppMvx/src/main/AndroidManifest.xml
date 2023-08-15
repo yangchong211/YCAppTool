@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".PresentationActivity"/>
+        <activity android:name=".NetWorkActivity"/>
     </application>
 
 </manifest>
