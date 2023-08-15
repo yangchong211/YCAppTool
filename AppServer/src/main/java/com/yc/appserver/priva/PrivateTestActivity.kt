@@ -11,7 +11,8 @@ import androidx.core.content.ContextCompat
 import com.yc.appserver.R
 import com.yc.logclient.LogUtils
 import com.yc.privateserver.PrivateService
-import com.yc.privateserver.UserPrivacyHolder
+import com.yc.privateserver.SafePrivateHelper
+import com.yc.privateserver.UserPrivacyInit
 import com.yc.roundcorner.view.RoundTextView
 
 
@@ -37,8 +38,8 @@ class PrivateTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_private_main)
         initView()
         initListener()
-        UserPrivacyHolder.installApp(this)
-        UserPrivacyHolder.setIsInitUserPrivacy(true,true)
+        UserPrivacyInit.installApp(this)
+        UserPrivacyInit.setIsInitUserPrivacy(true,true)
         LogUtils.i("Log test info : LogTestActivity is create")
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_PHONE_STATE
@@ -93,6 +94,7 @@ class PrivateTestActivity : AppCompatActivity() {
             sb.append("\nSim卡的运营商Id:  ").append(PrivateService.getOperatorId())
             sb.append("\n卡的运营商名称:  ").append(PrivateService.getOperatorName())
             sb.append("\n设备DeviceId:  ").append(PrivateService.getDeviceId())
+            System.out.print(sb.toString())
             tvTest2.setText(sb.toString())
         }
     }

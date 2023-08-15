@@ -11,7 +11,7 @@ import com.yc.appcontextlib.AppToolUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class NetWorkManager implements IStatusListener{
+public final class NetWorkManager implements IStatusListener {
 
     private static final String TAG = "NetWork-Manager";
     private NetWorkReceiver mNetWorkReceiver;
@@ -39,8 +39,12 @@ public final class NetWorkManager implements IStatusListener{
         private final static NetWorkManager INSTANCE = new NetWorkManager();
     }
 
+    /**
+     * 注册网络监听广播
+     * 当网络环境切换的时候，就会触发广播的回调
+     */
     private void registerReceiver() {
-        if (mNetWorkReceiver == null){
+        if (mNetWorkReceiver == null) {
             mNetWorkReceiver = new NetWorkReceiver(this);
             IntentFilter filter = new IntentFilter();
             //android.net.conn.CONNECTIVITY_CHANGE
@@ -50,6 +54,9 @@ public final class NetWorkManager implements IStatusListener{
         }
     }
 
+    /**
+     * 解绑网络监听广播
+     */
     private void unregisterReceiver() {
         if (mNetWorkReceiver != null) {
             mContext.unregisterReceiver(mNetWorkReceiver);

@@ -29,19 +29,16 @@ public class NetWorkReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action != null && action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-            int networkAvailable = isNetworkAvailable(context);
+            int networkAvailable = isNetworkAvailable();
             Log.i(TAG, "网络类型：" + networkAvailable);
             switch (networkAvailable) {
                 case 1:
-                    Log.d(TAG, " network 有网线");
                     mManager.changeNetStatus(NET_ETHERNET, isAvailable());
                     break;
                 case 2:
-                    Log.d(TAG, " network Wi-Fi");
                     mManager.changeNetStatus(NET_WIFI, isAvailable());
                     break;
                 case 3:
-                    Log.d(TAG, " network 移动数据");
                     mManager.changeNetStatus(NET_MOBILE, isAvailable());
                     break;
                 default:
@@ -51,10 +48,10 @@ public class NetWorkReceiver extends BroadcastReceiver {
         }
     }
 
-    private int isNetworkAvailable(Context context) {
-        if (connectivityManager == null){
+    private int isNetworkAvailable() {
+        if (connectivityManager == null) {
             connectivityManager = (ConnectivityManager)
-                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         }
         NetworkInfo ethNetInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET);
         NetworkInfo wifiNetInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -72,9 +69,10 @@ public class NetWorkReceiver extends BroadcastReceiver {
 
     /**
      * 返回网络状态，判断网络是否可用
-     * @return
+     *
+     * @return 是否可用
      */
-    public boolean isAvailable() {
+    private boolean isAvailable() {
         NetworkInfo info = getActiveNetworkInfo();
         return info != null && info.isAvailable();
     }
@@ -88,7 +86,7 @@ public class NetWorkReceiver extends BroadcastReceiver {
      */
     @SuppressLint("MissingPermission")
     private NetworkInfo getActiveNetworkInfo() {
-        if (connectivityManager == null){
+        if (connectivityManager == null) {
             connectivityManager = (ConnectivityManager)
                     AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         }
