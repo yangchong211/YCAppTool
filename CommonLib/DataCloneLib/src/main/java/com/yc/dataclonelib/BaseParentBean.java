@@ -11,6 +11,7 @@ public class BaseParentBean implements Serializable {
 
     /**
      * 对象深复制，需要实现序列化
+     *
      * @return 复制对象
      */
     public <T> T deepCopy() {
@@ -23,11 +24,13 @@ public class BaseParentBean implements Serializable {
             out.flush();
             out.close();
             // 从流中读出 byte array，调用readObject函数反序列化出对象
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(bos.toByteArray());
+            byte[] bytes = bos.toByteArray();
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
             ObjectInputStream in = new ObjectInputStream(inputStream);
             obj = in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+            return null;
         }
         return (T) obj;
     }

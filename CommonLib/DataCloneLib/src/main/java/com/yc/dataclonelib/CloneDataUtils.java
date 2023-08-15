@@ -12,7 +12,7 @@ public final class CloneDataUtils {
      * 对象深复制，需要实现序列化
      *
      * @param from 源
-     * @param <T> 类
+     * @param <T>  类
      * @return 复制对象
      */
     public static <T> T deepCopy(T from) {
@@ -34,6 +34,7 @@ public final class CloneDataUtils {
             obj = in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+            return null;
         }
         return (T) obj;
     }
