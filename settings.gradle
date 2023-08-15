@@ -74,7 +74,7 @@ include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager', ':AppCompress',
         ':AppMediaStore',  ':AppScreenLib', ':BaseVpAdapter', ':ImageToolLib',
         ':AppHandlerLib', ':FileIoHelper', ':ZipFileLib', ':NetWorkLib', ':AppContextLib',
         ':AppWiFiLib', ':UriAndUrlLib', ':AppGrayLib', ':AppCallStatus', ':AppFastSp',
-        ':ZipFileLib', ':SmEncryptLib', ':AppClickHelper'
+        ':ZipFileLib', ':SmEncryptLib', ':AppClickHelper', ':DataCloneLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
@@ -116,6 +116,7 @@ project(':AppFastSp').projectDir = new File('CommonLib/AppFastSp')
 project(':ZipFileLib').projectDir = new File('CommonLib/ZipFileLib')
 project(':SmEncryptLib').projectDir = new File('CommonLib/SmEncryptLib')
 project(':AppClickHelper').projectDir = new File('CommonLib/AppClickHelper')
+project(':DataCloneLib').projectDir = new File('CommonLib/DataCloneLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
