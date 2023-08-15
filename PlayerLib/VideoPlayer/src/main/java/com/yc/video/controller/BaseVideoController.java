@@ -464,7 +464,7 @@ public abstract class BaseVideoController extends FrameLayout implements IVideoC
      * 此处默认根据手机网络类型来决定是否显示，开发者可以重写相关逻辑
      */
     public boolean showNetWarning() {
-        return AppNetworkUtils.isMobileData()
+        return AppNetworkUtils.isMobileAvailable()
                 && !VideoViewManager.instance().playOnMobileNetwork();
     }
 

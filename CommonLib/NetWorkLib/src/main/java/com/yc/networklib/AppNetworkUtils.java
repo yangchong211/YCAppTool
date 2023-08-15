@@ -5,20 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 
 import com.yc.appcontextlib.AppToolUtils;
 
 import java.lang.reflect.Method;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.Enumeration;
 
 
 /**
@@ -78,7 +69,8 @@ public final class AppNetworkUtils {
 
     /**
      * 返回网络状态，判断网络是否可用
-     * @return
+     *
+     * @return  是否可用
      */
     public static boolean isAvailable() {
         NetworkInfo info = getActiveNetworkInfo();
@@ -90,7 +82,7 @@ public final class AppNetworkUtils {
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
-    public static boolean getMobileDataEnabled() {
+    public static boolean isMobileDataEnabled() {
         try {
             TelephonyManager tm =
                     (TelephonyManager) AppToolUtils.getApp().getSystemService(Context.TELEPHONY_SERVICE);
@@ -133,14 +125,14 @@ public final class AppNetworkUtils {
     }
 
     /**
-     * 判断网络是否是移动数据
+     * 判断移动数据是否是可用
      * <p>需添加权限
      * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
     @SuppressLint("MissingPermission")
-    public static boolean isMobileData() {
+    public static boolean isMobileAvailable() {
         NetworkInfo info = getActiveNetworkInfo();
         return null != info
                 && info.isAvailable()
@@ -163,6 +155,7 @@ public final class AppNetworkUtils {
 
     /**
      * 判断 wifi 是否连接状态
+     * 如果该连接的网络无法上网，也会返回true
      * <p>需添加权限
      * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
      *
@@ -171,7 +164,18 @@ public final class AppNetworkUtils {
     @SuppressLint("MissingPermission")
     public static boolean isWifiConnected() {
         NetworkInfo networkInfo = getActiveNetworkInfo();
-        return networkInfo != null
+        return networkInfo != null && networkInfo.isConnected()
+                && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
+    }
+
+    /**
+     * 返回Wi-Fi状态，判断Wi-Fi是否可用
+     *
+     * @return  是否可用
+     */
+    public static boolean isWifiAvailable() {
+        NetworkInfo networkInfo = getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isAvailable()
                 && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
@@ -187,9 +191,9 @@ public final class AppNetworkUtils {
         return tm != null ? tm.getNetworkOperatorName() : null;
     }
 
-    private static final int NETWORK_TYPE_GSM      = 16;
+    private static final int NETWORK_TYPE_GSM = 16;
     private static final int NETWORK_TYPE_TD_SCDMA = 17;
-    private static final int NETWORK_TYPE_IWLAN    = 18;
+    private static final int NETWORK_TYPE_IWLAN = 18;
 
     /**
      * 获取当前网络类型
@@ -213,7 +217,7 @@ public final class AppNetworkUtils {
             if (info.getType() == ConnectivityManager.TYPE_WIFI) {
                 //wifi
                 netType = NetworkType.NETWORK_WIFI;
-            } else if (info.getType() == ConnectivityManager.TYPE_ETHERNET){
+            } else if (info.getType() == ConnectivityManager.TYPE_ETHERNET) {
                 // 以太网网络
                 netType = NetworkType.NETWORK_ETHERNET;
             } else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {

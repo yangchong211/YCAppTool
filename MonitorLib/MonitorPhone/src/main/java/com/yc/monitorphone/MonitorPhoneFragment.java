@@ -277,7 +277,7 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("\n获取内网IP:  ").append(AddressToolUtils.getIpAddress());
         sb.append("\n获取IPv4地址:  ").append(AddressToolUtils.getIPAddress(true));
         sb.append("\n获取IPv6地址:  ").append(AddressToolUtils.getIPAddress(false));
-        sb.append("\n移动网络是否打开:  ").append(AppNetworkUtils.getMobileDataEnabled());
+        sb.append("\n移动网络是否打开:  ").append(AppNetworkUtils.isMobileDataEnabled());
         sb.append("\n判断网络是否是4G:  ").append(AppNetworkUtils.is4G());
         sb.append("\nWifi是否打开:  ").append(WifiHelper.getInstance().isWifiEnable());
         sb.append("\nWifi是否连接状态:  ").append(AppNetworkUtils.isWifiConnected());

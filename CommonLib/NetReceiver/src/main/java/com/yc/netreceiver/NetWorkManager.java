@@ -36,7 +36,7 @@ public final class NetWorkManager implements IStatusListener {
 
     private static class SingletonHelper {
         @SuppressLint("StaticFieldLeak")
-        private final static NetWorkManager INSTANCE = new NetWorkManager();
+        private static final  NetWorkManager INSTANCE = new NetWorkManager();
     }
 
     /**

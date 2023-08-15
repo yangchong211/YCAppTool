@@ -1,5 +1,6 @@
 package com.yc.appmvx;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -72,6 +73,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
                 } else {
                     AppLogUtils.d("NetWork-NetReceiver: " + "无网络 " + connect);
                 }
+                showNetInfo();
             }
         });
         showNetInfo();
@@ -102,7 +104,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void setMobileText(){
-        if (AppNetworkUtils.getMobileDataEnabled()){
+        if (AppNetworkUtils.isMobileDataEnabled()){
             tvNet3.setText("3.打开移动数据");
         } else {
             tvNet3.setText("3.关闭移动数据");
@@ -207,30 +209,33 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
 
     private void showNetInfo() {
         StringBuffer sb = new StringBuffer();
-        sb.append("判断网络是否连接："+AppNetworkUtils.isConnected());
-        sb.append("\n判断网络连接后是否可用："+AppNetworkUtils.isAvailable());
-        sb.append("\n判断移动数据是否打开："+AppNetworkUtils.getMobileDataEnabled());
-        sb.append("\n判断网络是否是移动数据："+AppNetworkUtils.isMobileData());
-        sb.append("\n判断网络是否是 4G："+AppNetworkUtils.is4G());
-        sb.append("\n判断 wifi 是否连接状态："+AppNetworkUtils.isWifiConnected());
-        sb.append("\n获取网络运营商名称："+AppNetworkUtils.getNetworkOperatorName());
-        sb.append("\n判断是否是以太网网络："+(AppNetworkUtils.getNetworkType() == NetworkType.NETWORK_ETHERNET));
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            sb.append("\n判断是否是移动流量："+ NetWorkUtils.isActivityCellular());
-//            sb.append("\n判断是否是Wi-Fi："+ NetWorkUtils.isActivityWifi());
-//            sb.append("\n判断是否是以太网："+ NetWorkUtils.isActivityEthernet());
-//        }
+        sb.append("判断网络是否连接：").append(AppNetworkUtils.isConnected());
+        sb.append("\n判断网络连接后是否可用：").append(AppNetworkUtils.isAvailable());
+        sb.append("\n判断移动数据是否打开：").append(AppNetworkUtils.isMobileDataEnabled());
+        sb.append("\n判断移动数据是否是可用：").append(AppNetworkUtils.isMobileAvailable());
+        sb.append("\n判断网络是否是 4G：").append(AppNetworkUtils.is4G());
+        sb.append("\n判断 wifi 是否连接状态：").append(AppNetworkUtils.isWifiConnected());
+        sb.append("\n判断 wifi 是否可用状态：").append(AppNetworkUtils.isWifiAvailable());
+        sb.append("\n获取网络运营商名称：").append(AppNetworkUtils.getNetworkOperatorName());
+        sb.append("\n判断是否是以太网网络：").append(AppNetworkUtils.getNetworkType() == NetworkType.NETWORK_ETHERNET);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            sb.append("\n判断是否是以太网：").append(NetWorkUtils.isActivityEthernet());
+            sb.append("\n判断是否是Wi-Fi：").append(NetWorkUtils.isActivityWifi());
+            sb.append("\n判断是否是移动流量：").append(NetWorkUtils.isActivityCellular());
+        }
 
         WifiHelper wifiHelper = WifiHelper.getInstance();
         sb.append("\n\n下面是Wi-Fi相关工具：");
-        sb.append("\n判断 wifi 是否打开："+wifiHelper.isWifiEnable());
-        sb.append("\n获取wifi的名称："+ wifiHelper.getSsid());
-        sb.append("\n获取被连接网络的mac地址："+ wifiHelper.getBssid());
-        sb.append("\n获取wifi的ip："+ wifiHelper.getWifiIp());
-        sb.append("\n获取wifi的强弱："+ wifiHelper.getWifiState());
-        sb.append("\n便携热点是否开启："+ wifiHelper.isApEnable());
-        sb.append("\n是否连接着指定WiFi："+ wifiHelper.isConnectedTargetSsid("iPhone"));
-        sb.append("\n获取开启便携热点后自身热点IP地址："+ wifiHelper.getLocalIp());
+        sb.append("\n判断 wifi 是否打开：").append(wifiHelper.isWifiEnable());
+        sb.append("\n获取wifi的名称：").append(wifiHelper.getSsid());
+        sb.append("\n获取被连接网络的mac地址：").append(wifiHelper.getBssid());
+        sb.append("\n获取wifi的ip：").append(wifiHelper.getWifiIp());
+        sb.append("\n获取wifi的强弱：").append(wifiHelper.getWifiState());
+        sb.append("\n便携热点是否开启：").append(wifiHelper.isApEnable());
+        sb.append("\n是否连接着指定WiFi：").append(wifiHelper.isConnectedTargetSsid("iPhone"));
+        sb.append("\n获取开启便携热点后自身热点IP地址：").append(wifiHelper.getLocalIp());
+
+        sb.append("\n\n下面是以太网工具：");
         tvContent.setText(sb.toString());
     }
 

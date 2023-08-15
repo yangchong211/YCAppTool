@@ -6,27 +6,43 @@ import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
+import androidx.annotation.StringDef;
 
 import com.yc.appcontextlib.AppToolUtils;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class NetWorkUtils {
+public final class NetWorkUtils {
 
     public static final String TAG = NetWorkUtils.class.getSimpleName();
     public static volatile boolean isActivityConnected = true;
     public static volatile boolean isConnected = true;
-    private static ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+    private static final ScheduledExecutorService executorService =
+            Executors.newSingleThreadScheduledExecutor();
+
+    public static final String UNKNOWN = "UNKNOWN";
+    public static final String MOBILE = "MOBILE";
+    public static final String ETHERNET = "ETHERNET";
+    public static final String WIFI = "WIFI";
+
+    @StringDef({UNKNOWN, MOBILE, ETHERNET, WIFI})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface NetworkType {
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static List<NetworkCapabilities> getAllNetworkCapabilities() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         Network[] networks = connectivityManager.getAllNetworks();
         List<NetworkCapabilities> list = new ArrayList<>();
         for (Network network : networks) {
@@ -40,16 +56,16 @@ public class NetWorkUtils {
         if (transportType == NetworkCapabilities.TRANSPORT_WIFI) {
             return "WIFI";
         } else if (transportType == NetworkCapabilities.TRANSPORT_CELLULAR) {
-            return "移动网络";
+            return "MOBILE";
         } else if (transportType == NetworkCapabilities.TRANSPORT_ETHERNET) {
-            return "以太网";
+            return "ETHERNET";
         } else {
-            return "其他网络";
+            return "UNKNOWN";
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private static int getTransportType(NetworkCapabilities networkCapabilities) {
+    private static int getTransportTypeInt(NetworkCapabilities networkCapabilities) {
         if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
             return NetworkCapabilities.TRANSPORT_WIFI;
             //post(NetType.WIFI);
@@ -65,7 +81,8 @@ public class NetWorkUtils {
 
     /**
      * 以太网连上但不能上外网时，程序已经绑定了蜂窝网通道上网，此方法判断是否实际使用蜂窝网上网
-     * @return
+     *
+     * @return true表示是
      */
     public static boolean isRealCellular() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -80,7 +97,8 @@ public class NetWorkUtils {
 
     /**
      * 判断是否是移动流量
-     * @return
+     *
+     * @return true表示是
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     public static boolean isActivityCellular() {
@@ -89,7 +107,8 @@ public class NetWorkUtils {
 
     /**
      * 判断是否是Wi-Fi
-     * @return
+     *
+     * @return true表示是
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     public static boolean isActivityWifi() {
@@ -98,7 +117,8 @@ public class NetWorkUtils {
 
     /**
      * 判断是否是以太网
-     * @return
+     *
+     * @return true表示是
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     public static boolean isActivityEthernet() {
@@ -108,7 +128,8 @@ public class NetWorkUtils {
     @RequiresApi(api = Build.VERSION_CODES.M)
     private static int getTransportType() {
         int transportType = -2;
-        ConnectivityManager connectivityManager = (ConnectivityManager) AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         Network activeNetwork = connectivityManager.getActiveNetwork();
         if (activeNetwork == null) {
             isConnected = false;
@@ -116,7 +137,7 @@ public class NetWorkUtils {
             NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
             if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
                 isConnected = true;
-                transportType = getTransportType(networkCapabilities);
+                transportType = getTransportTypeInt(networkCapabilities);
             } else {
                 isConnected = false;
             }
@@ -124,16 +145,42 @@ public class NetWorkUtils {
         return transportType;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private static String getTransportTypeName() {
+        int transportType = getTransportType();
+        return getNetworkName(transportType);
+    }
+
+    /**
+     * 指定某个请求采用指定的网络进行发送
+     *
+     * @param type 类型
+     */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static void requestNetwork() {
-        final ConnectivityManager connectivityManager = (ConnectivityManager) AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static void requestNetwork(@NetworkType String type) {
+        final ConnectivityManager connectivityManager = (ConnectivityManager)
+                AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkRequest.Builder builder = new NetworkRequest.Builder();
         builder.addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
-        builder.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
+        if (MOBILE.equals(type)) {
+            // 设置指定的网络传输类型(蜂窝传输) 等于手机网络
+            builder.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
+        } else if (WIFI.equals(type)) {
+            // 设置指定的网络传输类型是Wi-Fi
+            builder.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+        } else if (ETHERNET.equals(type)) {
+            // 设置指定的网络传输类型是以太网
+            builder.addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET);
+        }
+        // 设置感兴趣的网络功能
+        //builder.addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
+        // 设置感兴趣的网络：计费网络
+        //builder.addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
         NetworkRequest networkRequest = builder.build();
         ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
             @Override
             public void onAvailable(Network network) {
+                Log.i(TAG, "已根据功能和传输类型找到合适的网络");
                 if (Build.VERSION.SDK_INT >= 23) {
                     connectivityManager.bindProcessToNetwork(network);
                 } else {
