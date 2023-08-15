@@ -1,4 +1,4 @@
-package com.yc.toolutils;
+package com.yc.dataclonelib;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -28,7 +28,8 @@ public final class CloneDataUtils {
             out.flush();
             out.close();
             // 从流中读出 byte array，调用readObject函数反序列化出对象
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(bos.toByteArray());
+            byte[] bytes = bos.toByteArray();
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
             ObjectInputStream in = new ObjectInputStream(inputStream);
             obj = in.readObject();
         } catch (IOException | ClassNotFoundException e) {
