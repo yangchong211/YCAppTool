@@ -1,6 +1,6 @@
 package com.yc.netreceiver;
 
-public interface NetStatusListener {
+public interface OnNetStatusListener {
 
     int NET_ETHERNET = 1;
     int NET_WIFI = 2;

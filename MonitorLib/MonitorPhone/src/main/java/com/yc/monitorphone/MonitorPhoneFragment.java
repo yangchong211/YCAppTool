@@ -29,9 +29,10 @@ import com.yc.localelib.service.LocaleService;
 import com.yc.localelib.utils.LocaleToolUtils;
 import com.yc.monitorflow.TrafficBean;
 import com.yc.monitorflow.FlowHelper;
+import com.yc.netreceiver.NetWorkManager;
+import com.yc.netreceiver.OnNetStatusListener;
 import com.yc.networklib.AddressToolUtils;
 import com.yc.networklib.AppNetworkUtils;
-import com.yc.networklib.NetWorkManager;
 import com.yc.privateserver.PrivateService;
 import com.yc.toolmemorylib.AppMemoryUtils;
 import com.yc.toolmemorylib.DalvikHeapMem;
@@ -95,13 +96,13 @@ public class MonitorPhoneFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        NetWorkManager.getInstance().unregisterNetStatusListener(listener);
+        boolean unregisterNetStatusListener = NetWorkManager.getInstance()
+                .unregisterNetStatusListener(listener);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        NetWorkManager.getInstance().destroy();
     }
 
     /**
@@ -161,11 +162,10 @@ public class MonitorPhoneFragment extends Fragment {
     }
 
     private void initNetStatus() {
-        NetWorkManager.getInstance().registerReceiver();
         NetWorkManager.getInstance().registerNetStatusListener(listener);
     }
 
-    private final NetWorkManager.NetStatusListener listener = new NetWorkManager.NetStatusListener() {
+    private final OnNetStatusListener listener = new OnNetStatusListener() {
         @Override
         public void onChange(boolean connect, int netType) {
             CharSequence text = tvContentInfo.getText();

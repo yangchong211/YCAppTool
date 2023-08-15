@@ -1,9 +1,9 @@
 package com.yc.netreceiver;
 
-import static com.yc.netreceiver.NetStatusListener.NET_ETHERNET;
-import static com.yc.netreceiver.NetStatusListener.NET_MOBILE;
-import static com.yc.netreceiver.NetStatusListener.NET_NONE;
-import static com.yc.netreceiver.NetStatusListener.NET_WIFI;
+import static com.yc.netreceiver.OnNetStatusListener.NET_ETHERNET;
+import static com.yc.netreceiver.OnNetStatusListener.NET_MOBILE;
+import static com.yc.netreceiver.OnNetStatusListener.NET_NONE;
+import static com.yc.netreceiver.OnNetStatusListener.NET_WIFI;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -18,7 +18,7 @@ import com.yc.appcontextlib.AppToolUtils;
 public class NetWorkReceiver extends BroadcastReceiver {
 
     private static final String TAG = "NetWork-Receiver";
-
+    private ConnectivityManager connectivityManager;
     private final NetWorkManager mManager;
 
     public NetWorkReceiver(NetWorkManager resourceManager) {
@@ -52,10 +52,13 @@ public class NetWorkReceiver extends BroadcastReceiver {
     }
 
     private int isNetworkAvailable(Context context) {
-        ConnectivityManager connectMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo ethNetInfo = connectMgr.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET);
-        NetworkInfo wifiNetInfo = connectMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        NetworkInfo mobileNetInfo = connectMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (connectivityManager == null){
+            connectivityManager = (ConnectivityManager)
+                    context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+        NetworkInfo ethNetInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET);
+        NetworkInfo wifiNetInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobileNetInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         if (ethNetInfo != null && ethNetInfo.isConnected()) {
             return NET_ETHERNET;
         } else if (wifiNetInfo != null && wifiNetInfo.isConnected()) {
@@ -85,11 +88,13 @@ public class NetWorkReceiver extends BroadcastReceiver {
      */
     @SuppressLint("MissingPermission")
     private NetworkInfo getActiveNetworkInfo() {
-        ConnectivityManager manager =
-                (ConnectivityManager) AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (manager == null) {
+        if (connectivityManager == null){
+            connectivityManager = (ConnectivityManager)
+                    AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+        if (connectivityManager == null) {
             return null;
         }
-        return manager.getActiveNetworkInfo();
+        return connectivityManager.getActiveNetworkInfo();
     }
 }

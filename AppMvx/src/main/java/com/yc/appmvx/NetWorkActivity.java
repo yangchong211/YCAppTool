@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.appwifilib.WifiHelper;
 import com.yc.appwifilib.WifiStateListener;
-import com.yc.netreceiver.NetStatusListener;
+import com.yc.netreceiver.OnNetStatusListener;
 import com.yc.netreceiver.NetWorkManager;
 import com.yc.networklib.AppNetworkUtils;
 import com.yc.networklib.NetWorkUtils;
@@ -60,11 +60,11 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
                 AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotClose");
             }
         });
-        NetWorkManager.getInstance().registerNetStatusListener(new NetStatusListener() {
+        NetWorkManager.getInstance().registerNetStatusListener(new OnNetStatusListener() {
             @Override
             public void onChange(boolean connect, int netType) {
                 if (netType == 1){
-                    AppLogUtils.d("NetWork-NetReceiver: " + "有网线 " + connect);
+                    AppLogUtils.d("NetWork-NetReceiver: " + "有网线" + connect);
                 } else if (netType == 2){
                     AppLogUtils.d("NetWork-NetReceiver: " + "Wi-Fi " + connect);
                 } else if (netType == 3){
@@ -114,6 +114,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         super.onDestroy();
         WifiHelper.getInstance().unregisterWifiBroadcast();
         WifiHelper.getInstance().release();
+        NetWorkManager.getInstance().destroy();
     }
 
     @Override
