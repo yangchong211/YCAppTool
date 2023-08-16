@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public final class NetWorkUtils {
 
@@ -165,65 +166,61 @@ public final class NetWorkUtils {
         if (MOBILE.equals(type)) {
             // 设置指定的网络传输类型(蜂窝传输) 等于手机网络
             builder.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
+            Log.i(TAG, "addTransportType , 移动网络");
         } else if (WIFI.equals(type)) {
             // 设置指定的网络传输类型是Wi-Fi
             builder.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+            Log.i(TAG, "addTransportType , Wi-Fi");
         } else if (ETHERNET.equals(type)) {
             // 设置指定的网络传输类型是以太网
             builder.addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET);
+            Log.i(TAG, "addTransportType , 以太网");
         }
         // 设置感兴趣的网络功能
         //builder.addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
         // 设置感兴趣的网络：计费网络
         //builder.addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
         NetworkRequest networkRequest = builder.build();
+        final boolean[] chanelFlag = {true};
         ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
             @Override
             public void onAvailable(Network network) {
                 Log.i(TAG, "已根据功能和传输类型找到合适的网络");
+                //使用所选网络
                 if (Build.VERSION.SDK_INT >= 23) {
-                    connectivityManager.bindProcessToNetwork(network);
+                    boolean processToNetwork = connectivityManager.bindProcessToNetwork(network);
+                    chanelFlag[0] = processToNetwork;
+                    Log.i(TAG, "bindProcessToNetwork , " + processToNetwork);
                 } else {
                     // 23后这个方法舍弃了
-                    ConnectivityManager.setProcessDefaultNetwork(network);
+                    boolean defaultNetwork = ConnectivityManager.setProcessDefaultNetwork(network);
+                    chanelFlag[0] = defaultNetwork;
+                    Log.i(TAG, "setProcessDefaultNetwork , " + defaultNetwork);
                 }
             }
         };
-        final boolean[] chanelFlag = {true};
+        AtomicInteger count = new AtomicInteger();
         executorService.scheduleWithFixedDelay(() -> {
             try {
-                //网络都没连接直接返回
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (isActivityCellular()) {
-                        return;
-                    }
-                }
-                if (!isConnected) {
+                if (!AppNetworkUtils.isConnected()) {
+                    Log.i(TAG, "scheduleWithFixedDelay , 网络未连接");
                     return;
                 }
-                isActivityConnected = ping();
-                if (isActivityConnected) {
-                    if (chanelFlag[0]) {
-                        return;
-                    }
-                    chanelFlag[0] = true;
-                    //1.以太网络可上外网时改为默认优先级上网
-                    if (Build.VERSION.SDK_INT >= 23) {
-                        connectivityManager.bindProcessToNetwork(null);
-                    } else {
-                        ConnectivityManager.setProcessDefaultNetwork(null);
-                    }
-                    connectivityManager.unregisterNetworkCallback(networkCallback);
-                } else if (chanelFlag[0]) {
-                    //2.以太网络不可上外网时自动切换蜂窝网
-                    connectivityManager.requestNetwork(networkRequest, networkCallback);
-                    chanelFlag[0] = false;
+                if (!isConnected) {
+                    Log.i(TAG, "scheduleWithFixedDelay , 网络没连接");
+                    return;
                 }
+                if (chanelFlag[0]) {
+                    Log.i(TAG, "scheduleWithFixedDelay , 没有绑定成功 " + count.getAndIncrement());
+                    return;
+                }
+                connectivityManager.requestNetwork(networkRequest, networkCallback);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }, 1, 5, TimeUnit.SECONDS);
     }
+
 
     // PING命令 使用新进程使用默认网络 不会使用 networkCallback 绑定的通道  用来判断以太网或者WiFi是否可上外网非常不错
     public static boolean ping() {
@@ -237,4 +234,5 @@ public final class NetWorkUtils {
         }
         return false;
     }
+
 }

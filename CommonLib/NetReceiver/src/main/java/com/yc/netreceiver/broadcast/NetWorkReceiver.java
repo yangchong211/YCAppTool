@@ -1,4 +1,4 @@
-package com.yc.netreceiver;
+package com.yc.netreceiver.broadcast;
 
 import static com.yc.netreceiver.OnNetStatusListener.NET_ETHERNET;
 import static com.yc.netreceiver.OnNetStatusListener.NET_MOBILE;

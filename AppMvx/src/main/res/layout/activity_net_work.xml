@@ -14,7 +14,7 @@
         android:layout_height="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
-        android:text="1.查看网络信息"
+        android:text="1.模拟切换网络操作"
         android:background="@color/color_f25057"
         android:textSize="18sp"
         app:rRadius="20dp" />

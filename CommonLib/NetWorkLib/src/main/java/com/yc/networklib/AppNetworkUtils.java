@@ -45,6 +45,7 @@ public final class AppNetworkUtils {
      */
     @SuppressLint("MissingPermission")
     private static NetworkInfo getActiveNetworkInfo() {
+        //ConnectivityManager 告知您的应用系统中的连接状态。
         ConnectivityManager manager =
                 (ConnectivityManager) AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (manager == null) {

@@ -29,7 +29,7 @@ import com.yc.localelib.service.LocaleService;
 import com.yc.localelib.utils.LocaleToolUtils;
 import com.yc.monitorflow.TrafficBean;
 import com.yc.monitorflow.FlowHelper;
-import com.yc.netreceiver.NetWorkManager;
+import com.yc.netreceiver.broadcast.NetWorkManager;
 import com.yc.netreceiver.OnNetStatusListener;
 import com.yc.networklib.AddressToolUtils;
 import com.yc.networklib.AppNetworkUtils;

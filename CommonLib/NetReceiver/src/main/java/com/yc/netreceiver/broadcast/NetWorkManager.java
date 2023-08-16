@@ -1,4 +1,4 @@
-package com.yc.netreceiver;
+package com.yc.netreceiver.broadcast;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.net.ConnectivityManager;
 import android.util.Log;
 
 import com.yc.appcontextlib.AppToolUtils;
+import com.yc.netreceiver.IStatusListener;
+import com.yc.netreceiver.OnNetStatusListener;
 
 import java.util.ArrayList;
 import java.util.List;

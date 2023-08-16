@@ -378,10 +378,32 @@ public class WifiHelper extends BaseWifiManager{
     public int getWifiIp(){
         if (getWifiManager() != null) {
             WifiInfo wifiInfo = getWifiManager().getConnectionInfo();
-            int ipAddress = wifiInfo.getIpAddress();
-            return ipAddress;
+            return wifiInfo.getIpAddress();
         }
         return -1;
+    }
+
+    /**
+     * 获取wifi的ip
+     * @return
+     */
+    public String getWifiIpStr(){
+        if (getWifiManager() != null) {
+            int wifiIp = getWifiIp();
+            return intToIp(wifiIp);
+        }
+        return null;
+    }
+
+    /**
+     * 将ip数值，转为字符串
+     *
+     * @param paramInt ip整数
+     * @return 字符串ip地址
+     */
+    private static String intToIp(int paramInt) {
+        return (paramInt & 0xFF) + "." + (0xFF & paramInt >> 8) + "."
+                + (0xFF & paramInt >> 16) + "." + (0xFF & paramInt >> 24);
     }
 
 

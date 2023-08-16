@@ -12,7 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.yc.appwifilib.WifiHelper;
 import com.yc.appwifilib.WifiStateListener;
 import com.yc.netreceiver.OnNetStatusListener;
-import com.yc.netreceiver.NetWorkManager;
+import com.yc.netreceiver.broadcast.NetWorkManager;
+import com.yc.netreceiver.callback.NetworkHelper;
 import com.yc.networklib.AppNetworkUtils;
 import com.yc.networklib.NetWorkUtils;
 import com.yc.networklib.NetworkType;
@@ -76,6 +77,22 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
                 showNetInfo();
             }
         });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            NetworkHelper.getInstance().registerNetStatusListener(new OnNetStatusListener() {
+//                @Override
+//                public void onChange(boolean connect, int netType) {
+//                    if (netType == 1){
+//                        AppLogUtils.d("NetWork-Callback: " + "有网线" + connect);
+//                    } else if (netType == 2){
+//                        AppLogUtils.d("NetWork-Callback: " + "Wi-Fi " + connect);
+//                    } else if (netType == 3){
+//                        AppLogUtils.d("NetWork-Callback: " + "手机流量 " + connect);
+//                    } else {
+//                        AppLogUtils.d("NetWork-Callback: " + "无网络 " + connect);
+//                    }
+//                }
+//            });
+        }
         showNetInfo();
     }
 
@@ -84,10 +101,10 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         tvNet2 = findViewById(R.id.tv_net_2);
         tvNet3 = findViewById(R.id.tv_net_3);
         tvNet4 = findViewById(R.id.tv_net_4);
-        tvNet1.setVisibility(View.GONE);
-        tvNet2.setVisibility(View.GONE);
-        tvNet3.setVisibility(View.GONE);
-        tvNet4.setVisibility(View.GONE);
+        tvNet1.setVisibility(View.VISIBLE);
+        tvNet2.setVisibility(View.VISIBLE);
+        tvNet3.setVisibility(View.VISIBLE);
+        tvNet4.setVisibility(View.VISIBLE);
         tvContent = findViewById(R.id.tv_content);
         tvNet1.setOnClickListener(this);
         tvNet2.setOnClickListener(this);
@@ -117,12 +134,17 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         WifiHelper.getInstance().unregisterWifiBroadcast();
         WifiHelper.getInstance().release();
         NetWorkManager.getInstance().destroy();
+        NetworkHelper.getInstance().destroy();
     }
 
     @Override
     public void onClick(View v) {
         if (v == tvNet1){
-            showNetInfo();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                NetWorkUtils.requestNetwork(NetWorkUtils.ETHERNET);
+                NetWorkUtils.requestNetwork(NetWorkUtils.MOBILE);
+//                NetWorkUtils.requestNetwork(NetWorkUtils.WIFI);
+            }
             ToastUtils.showRoundRectToast("查看网络信息");
         } else if (v == tvNet2){
             if (tvNet2.getText().toString().equals("2.关闭Wi-Fi")){
@@ -229,7 +251,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         sb.append("\n判断 wifi 是否打开：").append(wifiHelper.isWifiEnable());
         sb.append("\n获取wifi的名称：").append(wifiHelper.getSsid());
         sb.append("\n获取被连接网络的mac地址：").append(wifiHelper.getBssid());
-        sb.append("\n获取wifi的ip：").append(wifiHelper.getWifiIp());
+        sb.append("\n获取wifi的ip：").append(wifiHelper.getWifiIpStr());
         sb.append("\n获取wifi的强弱：").append(wifiHelper.getWifiState());
         sb.append("\n便携热点是否开启：").append(wifiHelper.isApEnable());
         sb.append("\n是否连接着指定WiFi：").append(wifiHelper.isConnectedTargetSsid("iPhone"));
