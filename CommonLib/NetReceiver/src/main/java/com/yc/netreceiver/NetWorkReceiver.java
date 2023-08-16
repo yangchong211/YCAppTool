@@ -1,4 +1,4 @@
-package com.yc.netreceiver.broadcast;
+package com.yc.netreceiver;
 
 import static com.yc.netreceiver.OnNetStatusListener.NET_ETHERNET;
 import static com.yc.netreceiver.OnNetStatusListener.NET_MOBILE;
@@ -29,7 +29,7 @@ public class NetWorkReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action != null && action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-            int networkAvailable = isNetworkAvailable();
+            int networkAvailable = isNetworkConnected();
             Log.i(TAG, "网络类型：" + networkAvailable);
             switch (networkAvailable) {
                 case 1:
@@ -48,7 +48,13 @@ public class NetWorkReceiver extends BroadcastReceiver {
         }
     }
 
-    private int isNetworkAvailable() {
+    /**
+     * 网络是否连接上
+     * 注意：连接上了，不一定可用。
+     *
+     * @return true表示网络连接上了，否则返回false。
+     */
+    private int isNetworkConnected() {
         if (connectivityManager == null) {
             connectivityManager = (ConnectivityManager)
                     AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);

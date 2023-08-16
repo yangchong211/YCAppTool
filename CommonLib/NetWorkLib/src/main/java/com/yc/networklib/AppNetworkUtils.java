@@ -46,12 +46,15 @@ public final class AppNetworkUtils {
     @SuppressLint("MissingPermission")
     private static NetworkInfo getActiveNetworkInfo() {
         //ConnectivityManager 告知您的应用系统中的连接状态。
+        //ConnectivityManager：回应关于网络连接状态的查询。当网络连接发生变化时，它还会通知应用。
         ConnectivityManager manager =
                 (ConnectivityManager) AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (manager == null) {
             return null;
         }
-        return manager.getActiveNetworkInfo();
+        //NetworkInfo：描述指定类型的网络接口的状态（目前为移动网络或 Wi-Fi）。
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        return networkInfo;
     }
 
     /**
@@ -64,6 +67,7 @@ public final class AppNetworkUtils {
      */
     public static boolean isConnected() {
         NetworkInfo info = getActiveNetworkInfo();
+        //确定这些网络接口是否可用（即，是否可以建立网络连接）
         return info != null && info.isConnected();
     }
 
@@ -75,7 +79,10 @@ public final class AppNetworkUtils {
      */
     public static boolean isAvailable() {
         NetworkInfo info = getActiveNetworkInfo();
-        return info != null && info.isAvailable();
+        //不应根据网络是否“可用”做决定。
+        //在执行网络操作之前，您应始终检查 isConnected()
+        //因为 isConnected() 会处理不稳定的移动网络、飞行模式和后台数据受限等情况。
+        return info != null && info.isConnected() && info.isAvailable();
     }
 
     /**
@@ -136,6 +143,7 @@ public final class AppNetworkUtils {
     public static boolean isMobileAvailable() {
         NetworkInfo info = getActiveNetworkInfo();
         return null != info
+                && info.isConnected()
                 && info.isAvailable()
                 && info.getType() == ConnectivityManager.TYPE_MOBILE;
     }
@@ -150,6 +158,7 @@ public final class AppNetworkUtils {
     public static boolean is4G() {
         NetworkInfo info = getActiveNetworkInfo();
         return info != null
+                && info.isConnected()
                 && info.isAvailable()
                 && info.getSubtype() == TelephonyManager.NETWORK_TYPE_LTE;
     }
@@ -165,7 +174,8 @@ public final class AppNetworkUtils {
     @SuppressLint("MissingPermission")
     public static boolean isWifiConnected() {
         NetworkInfo networkInfo = getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isConnected()
+        return networkInfo != null
+                && networkInfo.isConnected()
                 && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
@@ -176,7 +186,9 @@ public final class AppNetworkUtils {
      */
     public static boolean isWifiAvailable() {
         NetworkInfo networkInfo = getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isAvailable()
+        return networkInfo != null
+                && networkInfo.isConnected()
+                && networkInfo.isAvailable()
                 && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
 

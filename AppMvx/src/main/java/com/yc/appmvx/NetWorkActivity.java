@@ -10,12 +10,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.appwifilib.WifiHelper;
-import com.yc.appwifilib.WifiStateListener;
 import com.yc.netreceiver.OnNetStatusListener;
-import com.yc.netreceiver.broadcast.NetWorkManager;
-import com.yc.netreceiver.callback.NetworkHelper;
+import com.yc.netreceiver.NetWorkManager;
+import com.yc.netsettinglib.NetRequestHelper;
+import com.yc.netsettinglib.CapabilitiesUtils;
 import com.yc.networklib.AppNetworkUtils;
-import com.yc.networklib.NetWorkUtils;
 import com.yc.networklib.NetworkType;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppLogUtils;
@@ -36,32 +35,32 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         initView();
         setWifiText();
         setMobileText();
-        WifiHelper.getInstance().registerWifiBroadcast(new WifiStateListener() {
-            @Override
-            public void onWifiOpen() {
-                AppLogUtils.d("NetWork-WifiHelper: " + "onWifiOpen");
-            }
-
-            @Override
-            public void onWifiClose() {
-                AppLogUtils.d("NetWork-WifiHelper: " + "onWifiClose");
-            }
-
-            @Override
-            public void onHotpotOpen() {
-                AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotOpen");
-            }
-
-            @Override
-            public void onHotpotOpenError() {
-                AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotOpenError");
-            }
-
-            @Override
-            public void onHotpotClose() {
-                AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotClose");
-            }
-        });
+//        WifiHelper.getInstance().registerWifiBroadcast(new WifiStateListener() {
+//            @Override
+//            public void onWifiOpen() {
+//                AppLogUtils.d("NetWork-WifiHelper: " + "onWifiOpen");
+//            }
+//
+//            @Override
+//            public void onWifiClose() {
+//                AppLogUtils.d("NetWork-WifiHelper: " + "onWifiClose");
+//            }
+//
+//            @Override
+//            public void onHotpotOpen() {
+//                AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotOpen");
+//            }
+//
+//            @Override
+//            public void onHotpotOpenError() {
+//                AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotOpenError");
+//            }
+//
+//            @Override
+//            public void onHotpotClose() {
+//                AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotClose");
+//            }
+//        });
         NetWorkManager.getInstance().registerNetStatusListener(new OnNetStatusListener() {
             @Override
             public void onChange(boolean connect, int netType) {
@@ -134,7 +133,9 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         WifiHelper.getInstance().unregisterWifiBroadcast();
         WifiHelper.getInstance().release();
         NetWorkManager.getInstance().destroy();
-        NetworkHelper.getInstance().destroy();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            NetRequestHelper.getInstance().destroy();
+        }
     }
 
     @Override
@@ -142,10 +143,10 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         if (v == tvNet1){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                NetWorkUtils.requestNetwork(NetWorkUtils.ETHERNET);
-                NetWorkUtils.requestNetwork(NetWorkUtils.MOBILE);
+                NetRequestHelper.getInstance().requestNetwork(NetRequestHelper.MOBILE);
 //                NetWorkUtils.requestNetwork(NetWorkUtils.WIFI);
             }
-            ToastUtils.showRoundRectToast("查看网络信息");
+            ToastUtils.showRoundRectToast("切换默认网络");
         } else if (v == tvNet2){
             if (tvNet2.getText().toString().equals("2.关闭Wi-Fi")){
                 WifiHelper.getInstance().openWifi();
@@ -213,7 +214,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         new Thread(new Runnable() {
             @Override
             public void run() {
-                boolean ping = NetWorkUtils.ping();
+                boolean ping = CapabilitiesUtils.ping();
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -241,9 +242,9 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         sb.append("\n获取网络运营商名称：").append(AppNetworkUtils.getNetworkOperatorName());
         sb.append("\n判断是否是以太网网络：").append(AppNetworkUtils.getNetworkType() == NetworkType.NETWORK_ETHERNET);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            sb.append("\n判断是否是以太网：").append(NetWorkUtils.isActivityEthernet());
-            sb.append("\n判断是否是Wi-Fi：").append(NetWorkUtils.isActivityWifi());
-            sb.append("\n判断是否是移动流量：").append(NetWorkUtils.isActivityCellular());
+            sb.append("\n判断是否是以太网：").append(CapabilitiesUtils.isActivityEthernet());
+            sb.append("\n判断是否是Wi-Fi：").append(CapabilitiesUtils.isActivityWifi());
+            sb.append("\n判断是否是移动流量：").append(CapabilitiesUtils.isActivityCellular());
         }
 
         WifiHelper wifiHelper = WifiHelper.getInstance();

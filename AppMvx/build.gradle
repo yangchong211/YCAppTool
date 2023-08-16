@@ -46,4 +46,5 @@ dependencies {
     implementation project(path: ':AppClickHelper')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':NetReceiver')
+    implementation project(path: ':NetSettingLib')
 }

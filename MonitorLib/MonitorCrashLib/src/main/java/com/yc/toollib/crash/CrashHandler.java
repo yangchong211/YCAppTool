@@ -2,6 +2,7 @@ package com.yc.toollib.crash;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 
@@ -122,15 +123,20 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
             md5Key = Md5EncryptUtils.encryptMD5ToString(Arrays.toString(ex.getStackTrace()));
             AppLogUtils.d(ex.getMessage() + "  md5 key : " + md5Key);
         }
-        boolean isHandle = handleException(ex);
+        boolean isHandleException = handleException(ex);
         initCustomBug(ex);
-        AppLogUtils.d(TAG, "uncaughtException--- handleException----" + isHandle);
-        if (mDefaultHandler != null && isHandle) {
+        if (mDefaultHandler != null && !isHandleException) {
             //收集完信息后，交给系统自己处理崩溃
             //uncaughtException (Thread t, Throwable e) 是一个抽象方法
             //当给定的线程因为发生了未捕获的异常而导致终止时将通过该方法将线程对象和异常对象传递进来。
-            AppLogUtils.d(TAG, "uncaughtException--- ex----");
+            AppLogUtils.d(TAG, "uncaughtException do something");
             mDefaultHandler.uncaughtException(thread, ex);
+        } else {
+            AppLogUtils.d(TAG, "uncaughtException kill app");
+            SystemClock.sleep(3000);
+            // 退出程序
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
         }
     }
 
@@ -161,6 +167,8 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 自定义错误处理,收集错误信息
      * 发送错误报告等操作均在此完成.
      * 开发者可以根据自己的情况来自定义异常处理逻辑
+     * @param ex        异常
+     * @return      true:如果处理了该异常信息；否则返回false
      */
     private boolean handleException(Throwable ex) {
         if (ex == null) {
@@ -172,20 +180,28 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (msg == null) {
             return false;
         }
-        if (md5Key != null && md5Key.length() > 0 && mmkv != null) {
-            int count = mmkv.getInt(md5Key, 0);
-            mmkv.putInt(md5Key, count + 1);
-            AppLogUtils.d("md5 key : " + md5Key + " 记录崩溃 : " + (count + 1) + "次");
-            CrashHelperUtils.setHeadContent("崩溃" + (count + 1) + "次");
+        boolean success;
+        try {
+            //记录崩溃的次数
+            if (md5Key != null && md5Key.length() > 0 && mmkv != null) {
+                int count = mmkv.getInt(md5Key, 0);
+                mmkv.putInt(md5Key, count + 1);
+                AppLogUtils.d("md5 key : " + md5Key + " 记录崩溃 : " + (count + 1) + "次");
+                CrashHelperUtils.setHeadContent("崩溃" + (count + 1) + "次");
+            }
+            AppLogUtils.w(TAG, "handleException--- ex-----" + msg);
+            ex.printStackTrace();
+            //收集设备信息
+            //保存错误报告文件
+            if (isWriteLog) {
+                CrashHelperUtils.saveCrashInfoInFile(mContext, ex);
+            }
+            success = true;
+        } catch (Exception e){
+            e.printStackTrace();
+            success = false;
         }
-        AppLogUtils.w(TAG, "handleException--- ex-----" + msg);
-        ex.printStackTrace();
-        //收集设备信息
-        //保存错误报告文件
-        if (isWriteLog) {
-            CrashHelperUtils.saveCrashInfoInFile(mContext, ex);
-        }
-        return true;
+        return success;
     }
 
 }
