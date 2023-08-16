@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.StringDef;
 
 import com.yc.appcontextlib.AppToolUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public final class NetRequestHelper implements INetRequest {
     private final NetworkCallbackImpl networkCallback = new NetworkCallbackImpl(this);
     private final ScheduledExecutorService executorService =
             Executors.newSingleThreadScheduledExecutor();
+
     public static NetRequestHelper getInstance() {
         return NetRequestHelper.SingletonHelper.INSTANCE;
     }
@@ -51,7 +53,7 @@ public final class NetRequestHelper implements INetRequest {
         private static final NetRequestHelper INSTANCE = new NetRequestHelper();
     }
 
-    private NetRequestHelper(){
+    private NetRequestHelper() {
         mContext = AppToolUtils.getApp();
         mNetStatusListener = new ArrayList<>();
     }
@@ -69,7 +71,8 @@ public final class NetRequestHelper implements INetRequest {
     public void registerNetworkCallback() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             //获取ConnectivityManager
-            ConnectivityManager connMgr = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            final ConnectivityManager connMgr = (ConnectivityManager)
+                    mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             //创建NetworkRequest对象，定制化监听
             NetworkRequest.Builder builder = new NetworkRequest.Builder();
             // NetworkCapabilities.NET_CAPABILITY_INTERNET 表示此网络应该能够连接到Internet
@@ -85,7 +88,7 @@ public final class NetRequestHelper implements INetRequest {
                 //创建网路变化监听器
                 connMgr.registerNetworkCallback(request, networkCallback);
                 isRegisterNetworkCallback = true;
-                Log.d(TAG , "registerNetworkCallback");
+                Log.d(TAG, "registerNetworkCallback");
             }
         }
     }
@@ -103,7 +106,7 @@ public final class NetRequestHelper implements INetRequest {
                 //一段时间后，上一个默认网络上的所有剩余连接都将被强制终止。
                 //如果知道默认网络发生变化的时间对应用很重要，它会按如下方式注册默认网络回调
                 connMgr.registerDefaultNetworkCallback(networkCallback);
-                Log.d(TAG , "registerDefaultNetworkCallback");
+                Log.d(TAG, "registerDefaultNetworkCallback");
                 //对于通过 registerDefaultNetworkCallback() 注册的回调
                 //新网络成为默认网络后，应用会收到对新网络的 onAvailable(Network) 的调用。
                 //onLost() 表示网络失去成为默认网络的资格。它可能会断开连接。
@@ -122,7 +125,7 @@ public final class NetRequestHelper implements INetRequest {
             connMgr.unregisterNetworkCallback(networkCallback);
             isRegisterNetworkCallback = false;
             //您的主 activity 的 onPause() 非常适合执行这项操作，尤其是在 onResume() 中注册回调时。
-            Log.d(TAG , "unregisterNetworkCallback");
+            Log.d(TAG, "unregisterNetworkCallback");
         }
     }
 
@@ -196,7 +199,7 @@ public final class NetRequestHelper implements INetRequest {
         AtomicInteger count = new AtomicInteger();
         executorService.scheduleWithFixedDelay(() -> {
             try {
-                if (! CapabilitiesUtils.isConnected()) {
+                if (!CapabilitiesUtils.isConnected()) {
                     Log.i(TAG, "scheduleWithFixedDelay , 网络未连接");
                     return;
                 }
@@ -216,7 +219,7 @@ public final class NetRequestHelper implements INetRequest {
 
     @Override
     public void destroy() {
-        Log.d(TAG , "destroy");
+        Log.d(TAG, "destroy");
         if (mNetStatusListener != null) {
             mNetStatusListener.clear();
         }
