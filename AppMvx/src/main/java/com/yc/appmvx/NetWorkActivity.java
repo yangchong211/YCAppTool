@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.yc.appwifilib.WifiHelper;
 import com.yc.netreceiver.OnNetStatusListener;
 import com.yc.netreceiver.NetWorkManager;
+import com.yc.netsettinglib.DefaultNetCallback;
 import com.yc.netsettinglib.NetRequestHelper;
 import com.yc.netsettinglib.CapabilitiesUtils;
+import com.yc.netsettinglib.OnNetCallback;
 import com.yc.networklib.AppNetworkUtils;
 import com.yc.networklib.NetworkType;
 import com.yc.toastutils.ToastUtils;
@@ -77,20 +79,18 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            NetworkHelper.getInstance().registerNetStatusListener(new OnNetStatusListener() {
-//                @Override
-//                public void onChange(boolean connect, int netType) {
-//                    if (netType == 1){
-//                        AppLogUtils.d("NetWork-Callback: " + "有网线" + connect);
-//                    } else if (netType == 2){
-//                        AppLogUtils.d("NetWork-Callback: " + "Wi-Fi " + connect);
-//                    } else if (netType == 3){
-//                        AppLogUtils.d("NetWork-Callback: " + "手机流量 " + connect);
-//                    } else {
-//                        AppLogUtils.d("NetWork-Callback: " + "无网络 " + connect);
-//                    }
-//                }
-//            });
+            NetRequestHelper.getInstance().registerNetStatusListener(new DefaultNetCallback() {
+                @Override
+                public void onChange(boolean connect, String netType) {
+                    AppLogUtils.d("NetWork-Callback: " + netType + " , " + connect);
+                }
+
+                @Override
+                public void onDefaultChange(boolean available, String netType) {
+                    AppLogUtils.d("NetWork-Default: " + netType + " , " + available);
+                }
+            });
+            NetRequestHelper.getInstance().registerDefaultNetworkCallback();
         }
         showNetInfo();
     }

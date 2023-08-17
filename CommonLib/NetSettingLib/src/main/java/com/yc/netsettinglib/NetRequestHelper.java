@@ -3,7 +3,6 @@ package com.yc.netsettinglib;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.os.Build;
@@ -27,9 +26,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class NetRequestHelper implements INetRequest {
 
     private static final String TAG = "NetWork-Helper";
-    private final Context mContext;
-    private final List<OnNetCallback> mNetStatusListener;
+    private List<OnNetCallback> mNetStatusListener;
     private boolean isRegisterNetworkCallback = false;
+    private boolean isRegisterDefaultNetworkCallback = false;
     public static final String UNKNOWN = "UNKNOWN";
     public static final String MOBILE = "MOBILE";
     public static final String ETHERNET = "ETHERNET";
@@ -40,7 +39,25 @@ public final class NetRequestHelper implements INetRequest {
     public @interface NetworkType {
     }
 
-    private final NetworkCallbackImpl networkCallback = new NetworkCallbackImpl(this);
+    /**
+     * 监听网路变化监听器
+     */
+    private final ChangeNetworkCallback networkCallback = new ChangeNetworkCallback(this);
+    /**
+     * 监听默认网络回调
+     * 举个例子：
+     * 1.当Wi-Fi和移动流量共存的时候，默认流量是Wi-Fi；会执行 onAvailable 网络类型：WIFI , WIFI
+     * 2.当Wi-Fi关闭的时候，默认流量就会切换到移动流量；会执行 onAvailable 网络类型：MOBILE , MOBILE
+     * 3.当Wi-Fi再次打开的时候，默认流量就会切换到Wi-Fi；会执行 onAvailable 网络类型：WIFI , WIFI
+     */
+    private final DefaultNetworkCallback defaultNetworkCallback = new DefaultNetworkCallback(this);
+    /**
+     * 监听设置默认网络回调
+     */
+    private final RequestNetworkCallback requestNetworkCallback = new RequestNetworkCallback(this);
+    /**
+     * 线程池，主要是需要开启子线程去设置绑定默认网络
+     */
     private final ScheduledExecutorService executorService =
             Executors.newSingleThreadScheduledExecutor();
 
@@ -54,13 +71,18 @@ public final class NetRequestHelper implements INetRequest {
     }
 
     private NetRequestHelper() {
-        mContext = AppToolUtils.getApp();
         mNetStatusListener = new ArrayList<>();
     }
 
     void changeNetStatus(String netType, boolean available) {
         for (OnNetCallback listener : mNetStatusListener) {
             listener.onChange(available, netType);
+        }
+    }
+
+    void changeDefaultNetworkStatus(String netType, boolean available) {
+        for (OnNetCallback listener : mNetStatusListener) {
+            listener.onDefaultChange(available, netType);
         }
     }
 
@@ -72,7 +94,7 @@ public final class NetRequestHelper implements INetRequest {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             //获取ConnectivityManager
             final ConnectivityManager connMgr = (ConnectivityManager)
-                    mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
             //创建NetworkRequest对象，定制化监听
             NetworkRequest.Builder builder = new NetworkRequest.Builder();
             // NetworkCapabilities.NET_CAPABILITY_INTERNET 表示此网络应该能够连接到Internet
@@ -98,14 +120,15 @@ public final class NetRequestHelper implements INetRequest {
      */
     @Override
     public void registerDefaultNetworkCallback() {
-        ConnectivityManager connMgr = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager)
+                AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connMgr != null) {
             //创建网路变化监听器
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 //当新网络成为默认网络时，应用打开的任何新连接都会使用此网络。
                 //一段时间后，上一个默认网络上的所有剩余连接都将被强制终止。
                 //如果知道默认网络发生变化的时间对应用很重要，它会按如下方式注册默认网络回调
-                connMgr.registerDefaultNetworkCallback(networkCallback);
+                connMgr.registerDefaultNetworkCallback(defaultNetworkCallback);
                 Log.d(TAG, "registerDefaultNetworkCallback");
                 //对于通过 registerDefaultNetworkCallback() 注册的回调
                 //新网络成为默认网络后，应用会收到对新网络的 onAvailable(Network) 的调用。
@@ -119,13 +142,20 @@ public final class NetRequestHelper implements INetRequest {
      */
     @Override
     public void unregisterNetworkCallback() {
-        ConnectivityManager connMgr = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager)
+                AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connMgr != null && isRegisterNetworkCallback) {
             //什么时候终止监听？只有程序进程退出(注意是进程退出)或解除注册时终止监听。
             connMgr.unregisterNetworkCallback(networkCallback);
             isRegisterNetworkCallback = false;
             //您的主 activity 的 onPause() 非常适合执行这项操作，尤其是在 onResume() 中注册回调时。
-            Log.d(TAG, "unregisterNetworkCallback");
+            Log.d(TAG, "unregisterNetworkCallback networkCallback");
+        }
+        if (connMgr != null && isRegisterDefaultNetworkCallback) {
+            connMgr.unregisterNetworkCallback(defaultNetworkCallback);
+            isRegisterDefaultNetworkCallback = false;
+            //您的主 activity 的 onPause() 非常适合执行这项操作，尤其是在 onResume() 中注册回调时。
+            Log.d(TAG, "unregisterNetworkCallback defaultNetworkCallback");
         }
     }
 
@@ -171,31 +201,8 @@ public final class NetRequestHelper implements INetRequest {
         // 设置感兴趣的网络：计费网络
         //builder.addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED);
         NetworkRequest networkRequest = builder.build();
-        final boolean[] chanelFlag = {true};
         //使用 NetworkCallback 以及其他了解设备连接状态的方式不需要任何特定权限。
         //但是，使用某些网络可能需要特定权限。例如，可能存在应用无法使用的受限网络。
-        ConnectivityManager.NetworkCallback networkCallback = new NetworkCallbackImpl(this) {
-            /**
-             * 新网络成为默认网络后，应用会收到对新网络的 onAvailable(Network) 的调用。
-             * @param network The {@link Network} of the satisfying network.
-             */
-            @Override
-            public void onAvailable(Network network) {
-                String transportTypeName = CapabilitiesUtils.getTransportTypeName(network);
-                Log.i(TAG, "onAvailable 找到合适的网络 " + transportTypeName);
-                //使用所选网络
-                if (Build.VERSION.SDK_INT >= 23) {
-                    boolean processToNetwork = connectivityManager.bindProcessToNetwork(network);
-                    chanelFlag[0] = processToNetwork;
-                    Log.i(TAG, "bindProcessToNetwork , " + processToNetwork);
-                } else {
-                    // 23后这个方法舍弃了
-                    boolean defaultNetwork = ConnectivityManager.setProcessDefaultNetwork(network);
-                    chanelFlag[0] = defaultNetwork;
-                    Log.i(TAG, "setProcessDefaultNetwork , " + defaultNetwork);
-                }
-            }
-        };
         AtomicInteger count = new AtomicInteger();
         executorService.scheduleWithFixedDelay(() -> {
             try {
@@ -203,12 +210,12 @@ public final class NetRequestHelper implements INetRequest {
                     Log.i(TAG, "scheduleWithFixedDelay , 网络未连接");
                     return;
                 }
-                if (chanelFlag[0]) {
+                if (requestNetworkCallback.isBindNetwork()) {
                     Log.i(TAG, "scheduleWithFixedDelay , 没有绑定成功 " + count.getAndIncrement());
                     return;
                 }
                 //如果您想在检测到合适的网络时主动切换到该网络，请使用 requestNetwork() 方法；
-                connectivityManager.requestNetwork(networkRequest, networkCallback);
+                connectivityManager.requestNetwork(networkRequest, requestNetworkCallback);
                 //如果只是接收已扫描网络的通知而不需要主动切换，请改用 registerNetworkCallback() 方法。
                 //connectivityManager.registerNetworkCallback(networkRequest, networkCallback);
             } catch (Exception e) {
@@ -222,6 +229,7 @@ public final class NetRequestHelper implements INetRequest {
         Log.d(TAG, "destroy");
         if (mNetStatusListener != null) {
             mNetStatusListener.clear();
+            mNetStatusListener = null;
         }
         unregisterNetworkCallback();
     }

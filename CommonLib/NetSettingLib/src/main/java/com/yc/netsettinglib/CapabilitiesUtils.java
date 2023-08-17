@@ -46,6 +46,9 @@ public final class CapabilitiesUtils {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static int getTransportTypeInt(NetworkCapabilities networkCapabilities) {
+        if (networkCapabilities == null) {
+            return -1;
+        }
         //NetworkCapabilities 传输是网络运行的物理媒介的抽象形式。
         //常见的传输示例包括以太网、Wi-Fi 和移动网络。VPN 和点对点 Wi-Fi 也可以传输。
         //若要查找某个网络是否具有特定的传输
@@ -64,7 +67,13 @@ public final class CapabilitiesUtils {
     public static String getTransportTypeName(Network network) {
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager == null || network == null) {
+            return NetRequestHelper.UNKNOWN;
+        }
         NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(network);
+        if (networkCapabilities == null) {
+            return NetRequestHelper.UNKNOWN;
+        }
         int transportType = getTransportTypeInt(networkCapabilities);
         return getNetworkName(transportType);
     }
@@ -104,23 +113,25 @@ public final class CapabilitiesUtils {
         int transportType = -2;
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 AppToolUtils.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager == null) {
+            return transportType;
+        }
         //Network 类表示设备连接到的一个网络。
         //如果网络连接中断，Network 对象将不再可用。即使设备之后重新连接到同一设备，新的 Network 对象也将表示新网络。
         //getActiveNetwork 使用此实例获取对应用当前默认网络的引用
         Network activeNetwork = connectivityManager.getActiveNetwork();
+        if (activeNetwork == null) {
+            return transportType;
+        }
         //通过对网络的引用，您的应用可以请求有关网络的信息
         //NetworkCapabilities 对象包含有关网络属性的信息，例如传输方式（Wi-Fi、移动网络、蓝牙）以及网络能力。
         NetworkCapabilities networkCapabilities = connectivityManager.getNetworkCapabilities(activeNetwork);
-        if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
-            transportType = getTransportTypeInt(networkCapabilities);
+        if (networkCapabilities != null) {
+            if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
+                transportType = getTransportTypeInt(networkCapabilities);
+            }
         }
         return transportType;
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private static String getTransportTypeName() {
-        int transportType = getTransportType();
-        return getNetworkName(transportType);
     }
 
     public static boolean isConnected() {

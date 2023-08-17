@@ -1,5 +1,6 @@
 package com.yc.toollib.crash;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.SystemClock;
@@ -7,6 +8,7 @@ import android.os.SystemClock;
 import androidx.annotation.NonNull;
 
 import com.tencent.mmkv.MMKV;
+import com.yc.activitymanager.ActivityManager;
 import com.yc.appencryptlib.Md5EncryptUtils;
 import com.yc.eventuploadlib.ExceptionReporter;
 import com.yc.toolutils.AppLogUtils;
@@ -119,6 +121,36 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     @Override
     public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
+        uncaughtException1(thread,ex);
+        //uncaughtException2(thread,ex);
+    }
+
+    private void uncaughtException2(Thread thread, Throwable ex) {
+        //`setDefaultUncaughtExceptionHandler`被调用多次如何理解
+        //如果被多次调用的话，会以最后一次传递的 handler 为准。
+        //所以如果用了第三方的统计模块，可能会出现失灵的情况。目前解决方案如下：
+        //对于这种情况，在设置默认 `handler` 之前
+        //可以先通过 `getDefaultUncaughtExceptionHandler()` 方法获取并保留旧的`handler`，
+        //然后在默认`handler`的`uncaughtException`方法中调用其他`handler`的`uncaughtException`方法，保证都会收到异常信息。
+        if (mDefaultHandler != null){
+            mDefaultHandler.uncaughtException(thread,ex);
+        }
+
+        Thread.UncaughtExceptionHandler exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+        if (exceptionHandler instanceof CrashHandler) {
+            if (ex.getStackTrace().length != 0) {
+                md5Key = Md5EncryptUtils.encryptMD5ToString(Arrays.toString(ex.getStackTrace()));
+                AppLogUtils.d(ex.getMessage() + "  md5 key : " + md5Key);
+            }
+            handleException(ex);
+            initCustomBug(ex);
+            AppLogUtils.d(TAG, "uncaughtException kill app");
+            // 退出程序
+            ActivityManager.getInstance().appExist();
+        }
+    }
+
+    private void uncaughtException1(Thread thread, Throwable ex) {
         if (ex.getStackTrace().length != 0) {
             md5Key = Md5EncryptUtils.encryptMD5ToString(Arrays.toString(ex.getStackTrace()));
             AppLogUtils.d(ex.getMessage() + "  md5 key : " + md5Key);
@@ -133,10 +165,8 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
             mDefaultHandler.uncaughtException(thread, ex);
         } else {
             AppLogUtils.d(TAG, "uncaughtException kill app");
-            SystemClock.sleep(3000);
             // 退出程序
-            android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(1);
+            ActivityManager.getInstance().appExist();
         }
     }
 
