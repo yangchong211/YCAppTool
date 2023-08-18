@@ -81,11 +81,6 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             NetRequestHelper.getInstance().registerNetStatusListener(new DefaultNetCallback() {
                 @Override
-                public void onChange(boolean connect, String netType) {
-                    AppLogUtils.d("NetWork-Callback: " + netType + " , " + connect);
-                }
-
-                @Override
                 public void onDefaultChange(boolean available, String netType) {
                     AppLogUtils.d("NetWork-Default: " + netType + " , " + available);
                 }

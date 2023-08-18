@@ -96,8 +96,27 @@
 ### 03.Api调用说明
 #### 3.1 监听默认网络
 - 监听默认网络api如下所示：
-
-
+    ```
+    NetRequestHelper.getInstance().registerNetStatusListener(new DefaultNetCallback() {
+        @Override
+        public void onDefaultChange(boolean available, String netType) {
+            AppLogUtils.d("NetWork-Default: " + netType + " , " + available);
+        }
+    });
+    NetRequestHelper.getInstance().registerDefaultNetworkCallback();
+    ```
+- 监听默认网络注意事项
+    - 新网络成为默认网络后，应用会收到对新网络的 onAvailable(Network) 的调用。
+    - 测试1: Wi-Fi和移动流量共存，关闭Wi-Fi，只剩下移动流量。此时 onAvailable 会回调默认网络为移动网络；
+    - 测试2: 接着步骤1，看到日志，立马开始打开Wi-Fi，此时Wi-Fi和移动流量并存，onAvailable 会回调默认网络为Wi-Fi；
+    - 测试3: 接着步骤2，看到日志，立马关闭Wi-Fi，如此往复操作，可以看到如下日志；
+    - 通过日志时间可知，关闭或者打开Wi-Fi，默认网络的回调会有3-5秒的时间间隔。
+    ```
+    2023-08-17 11:31:08.071 26447-29864 D  NetWork-Default: MOBILE , true
+    2023-08-17 11:31:11.936 26447-29864 D  NetWork-Default: WIFI , true
+    2023-08-17 11:31:15.778 26447-29864 D  NetWork-Default: MOBILE , true
+    2023-08-17 11:31:20.367 26447-29864 D  NetWork-Default: WIFI , true
+    ```
 
 
 
