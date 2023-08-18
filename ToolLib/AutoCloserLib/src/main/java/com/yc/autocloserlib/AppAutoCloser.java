@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.yc.appprocesslib.AppStateMonitor;
 import com.yc.appprocesslib.BackgroundThread;
-import com.yc.appprocesslib.StateListener;
+import com.yc.appprocesslib.OnStateListener;
 
 import java.util.concurrent.TimeUnit;
 
@@ -70,7 +70,7 @@ public class AppAutoCloser implements Runnable {
         if (mTime<0){
             mTime = CONFIG_ARG_RESTART_DELAY;
         }
-        AppStateMonitor.getInstance().registerStateListener(new StateListener() {
+        AppStateMonitor.getInstance().registerStateListener(new OnStateListener() {
             @Override
             public void onInForeground() {
                 removeSchedule();

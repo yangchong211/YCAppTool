@@ -21,7 +21,7 @@ import com.yc.apppermission.PermissionHelper;
 import com.yc.apppermission.PermissionResultListener;
 import com.yc.apppermission.PermissionUtils;
 import com.yc.appprocesslib.AppStateLifecycle;
-import com.yc.appprocesslib.StateListener;
+import com.yc.appprocesslib.OnStateListener;
 import com.yc.apprestartlib.RestartManager;
 import com.yc.common.cache.CacheActivity;
 import com.yc.common.encypt.EncyptActivity;
@@ -79,7 +79,7 @@ public class CommonActivity extends AppCompatActivity implements View.OnClickLis
         FragmentManager.Companion.getInstance().unregisterActivityLifecycleListener(this,lifecycleListener);
     }
 
-    private final StateListener stateListener = new StateListener() {
+    private final OnStateListener stateListener = new OnStateListener() {
         @Override
         public void onInForeground() {
             AppLogUtils.i("app common state in 前台");

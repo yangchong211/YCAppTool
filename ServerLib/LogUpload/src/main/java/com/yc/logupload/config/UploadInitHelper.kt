@@ -5,7 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import com.yc.appprocesslib.AppStateMonitor
-import com.yc.appprocesslib.StateListener
+import com.yc.appprocesslib.OnStateListener
 
 /**
  * @author yangchong
@@ -38,7 +38,8 @@ object UploadInitHelper {
         //全局上下文，避免内存泄漏
         val appContext = context as? Application ?: context.applicationContext
         mContext = appContext
-        AppStateMonitor.getInstance().registerStateListener(object : StateListener {
+        AppStateMonitor.getInstance().registerStateListener(object :
+            com.yc.appprocesslib.OnStateListener {
             override fun onInForeground() {
                 Log.d("AppStateMonitor : " , "在前台")
             }

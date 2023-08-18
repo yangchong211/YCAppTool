@@ -1,7 +1,6 @@
 package com.yc.ycnotification;
 
 import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -25,7 +24,6 @@ import com.yc.notificationlib.AppNotifyHelper;
 import com.yc.notificationlib.NotificationParams;
 import com.yc.notificationlib.NotificationUtils;
 import com.yc.notifymessage.CustomNotification;
-import com.yc.notifymessage.OnDismissListener;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
 import com.yc.ycnotification.notifyview.MyNotifyView;

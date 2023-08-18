@@ -14,7 +14,7 @@ import com.yc.appcommoninter.IEventTrack;
 import com.yc.appcommoninter.ILogger;
 import com.yc.appcommoninter.IMonitorToggle;
 import com.yc.appprocesslib.AppStateLifecycle;
-import com.yc.appprocesslib.StateListener;
+import com.yc.appprocesslib.OnStateListener;
 import com.yc.library.BuildConfig;
 import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.parallel.AbsParallelTask;
@@ -154,7 +154,7 @@ public class AppCoreTask extends AbsParallelTask {
             }
         });*/
         AppStateLifecycle.getInstance().init(MainApplication.getInstance());
-        AppStateLifecycle.getInstance().registerStateListener(new StateListener() {
+        AppStateLifecycle.getInstance().registerStateListener(new OnStateListener() {
             @Override
             public void onInForeground() {
                 AppLogUtils.i("app lifecycle state in foreground");

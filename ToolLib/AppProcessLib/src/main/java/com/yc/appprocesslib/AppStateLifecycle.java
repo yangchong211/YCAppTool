@@ -25,7 +25,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
 
     public static final String TAG = "AppStateMonitor";
     private static final AppStateLifecycle S_INSTANCE = new AppStateLifecycle();
-    private final ArrayList<StateListener> mStateListeners = new ArrayList<>();
+    private final ArrayList<OnStateListener> mStateListeners = new ArrayList<>();
     /**
      * 表示前台
      */
@@ -191,7 +191,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
         Object[] callbacks = collectStateListeners();
         if (callbacks != null) {
             for (Object callback : callbacks) {
-                ((StateListener) callback).onInBackground();
+                ((OnStateListener) callback).onInBackground();
             }
         }
     }
@@ -200,7 +200,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
         Object[] callbacks = collectStateListeners();
         if (callbacks != null) {
             for (Object callback : callbacks) {
-                ((StateListener) callback).onInForeground();
+                ((OnStateListener) callback).onInForeground();
             }
         }
     }
@@ -215,7 +215,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
         return callbacks;
     }
 
-    public void registerStateListener(StateListener listener) {
+    public void registerStateListener(OnStateListener listener) {
         if (listener == null) {
             return;
         }
@@ -224,7 +224,7 @@ public class AppStateLifecycle extends BaseLifecycleCallbacks implements Compone
         }
     }
 
-    public void unregisterStateListener(StateListener listener) {
+    public void unregisterStateListener(OnStateListener listener) {
         if (listener == null) {
             return;
         }

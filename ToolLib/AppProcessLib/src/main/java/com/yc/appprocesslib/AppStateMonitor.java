@@ -27,7 +27,7 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
 
     public static final String TAG = "AppStateMonitor";
     private static final AppStateMonitor S_INSTANCE = new AppStateMonitor();
-    private final ArrayList<StateListener> mStateListeners = new ArrayList<>();
+    private final ArrayList<OnStateListener> mStateListeners = new ArrayList<>();
     private final AtomicInteger mActiveActivitiesCount = new AtomicInteger(0);
     public static final int STATE_FOREGROUND = 1;
     public static final int STATE_BACKGROUND = 0;
@@ -157,7 +157,7 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
         Object[] callbacks = collectStateListeners();
         if (callbacks != null) {
             for (Object callback : callbacks) {
-                ((StateListener) callback).onInBackground();
+                ((OnStateListener) callback).onInBackground();
             }
         }
     }
@@ -166,7 +166,7 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
         Object[] callbacks = collectStateListeners();
         if (callbacks != null) {
             for (Object callback : callbacks) {
-                ((StateListener) callback).onInForeground();
+                ((OnStateListener) callback).onInForeground();
             }
         }
     }
@@ -181,7 +181,7 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
         return callbacks;
     }
 
-    public void registerStateListener(StateListener listener) {
+    public void registerStateListener(OnStateListener listener) {
         if (listener == null) {
             return;
         }
@@ -190,7 +190,7 @@ public class AppStateMonitor extends BaseLifecycleCallbacks implements Component
         }
     }
 
-    public void unregisterStateListener(StateListener listener) {
+    public void unregisterStateListener(OnStateListener listener) {
         if (listener == null) {
             return;
         }

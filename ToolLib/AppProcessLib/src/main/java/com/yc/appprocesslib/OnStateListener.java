@@ -8,7 +8,7 @@ package com.yc.appprocesslib;
  * @revise :
  * GitHub ：https://github.com/yangchong211/YCEfficient
  */
-public interface StateListener {
+public interface OnStateListener {
 
     /**
      * 在前台
