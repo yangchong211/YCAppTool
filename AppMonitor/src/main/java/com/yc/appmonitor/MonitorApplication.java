@@ -4,12 +4,11 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-import com.apm.yc.ApmMonitorHelper;
-import com.apm.yc.MonitorListener;
-import com.apm.yc.bean.FlowBean;
-import com.apm.yc.bean.Memory;
-import com.apm.yc.bean.SDCard;
-import com.apm.yc.bean.Version;
+import com.apm.apm.ApmMonitorHelper;
+import com.apm.apm.MonitorListener;
+import com.apm.apm.bean.Memory;
+import com.apm.apm.bean.SDCard;
+import com.apm.apm.bean.Version;
 import com.yc.anrtoollib.watch.ANRError;
 import com.yc.cpu.CpuRateBean;
 import com.yc.monitortimelib.OnMonitorListener;

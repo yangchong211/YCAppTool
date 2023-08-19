@@ -117,7 +117,7 @@ public final class StackTraceUtils {
         stringBuilder.append("线程thread的priority：").append(thread.getPriority()).append("\n");
         // 记录线程状态
         // new新建，runnable正在执行，blocked等待(锁)，waiting挂起(wait)，timed_waiting超时，terminated终止
-        stringBuilder.append("线程thread的state：").append(thread.getState().toString()).append("\n");
+        stringBuilder.append("线程thread的state：").append(thread.getState()).append("\n");
         // 记录classLoader
         stringBuilder.append("线程thread的classLoader：").append(thread.getContextClassLoader()).append("\n");
         return stringBuilder.toString();
