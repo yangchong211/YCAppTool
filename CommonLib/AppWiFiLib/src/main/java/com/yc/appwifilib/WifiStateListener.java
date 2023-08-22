@@ -1,29 +1,29 @@
 package com.yc.appwifilib;
 
+import android.net.wifi.ScanResult;
+
+import java.util.List;
+
 public interface WifiStateListener {
-    /**
-     * WiFi打开
-     */
-    void onWifiOpen();
 
     /**
-     * WiFi关闭
+     * WIFI开关的回调
+     *
+     * @param enabled true 可用 false 不可用
      */
-    void onWifiClose();
+    void onWifiEnabled(boolean enabled);
 
     /**
-     * 热点打开
+     * 热点打开的回调
+     *
+     * @param enabled true 打开 false 关闭
      */
-    void onHotpotOpen();
-
+    void onHotpotEnabled(boolean enabled);
     /**
-     * 热点打开异常
+     * WIFI连接状态的回调
+     *
+     * @param SSID 热点名
+     * @param enabled true表示WIFI连接成功的回调 false表示WIFI连接失败的回调
      */
-    void onHotpotOpenError();
-
-    /**
-     * 热点关闭
-     */
-    void onHotpotClose();
-
+    void onWiFiConnectState(String SSID  , boolean enabled);
 }

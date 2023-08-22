@@ -15,9 +15,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.yc.appwifilib.wifilibrary.listener.OnWifiConnectListener;
-import com.yc.appwifilib.wifilibrary.listener.OnWifiEnabledListener;
-import com.yc.appwifilib.wifilibrary.listener.OnWifiScanResultsListener;
+import com.yc.appwifilib.WifiStateListener;
 
 import java.util.List;
 
@@ -312,29 +310,18 @@ public class WiFiManager extends BaseWiFiManager {
                         mOnWifiEnabledListener.onWifiEnabled(false);
                     }
                     break;
-                case SCAN_RESULTS_UPDATED: // WIFI扫描完成
-                    if (null != mOnWifiScanResultsListener) {
-                        @SuppressWarnings("unchecked")
-                        List<ScanResult> scanResults = (List<ScanResult>) msg.obj;
-                        mOnWifiScanResultsListener.onScanResults(scanResults);
-                    }
-                    break;
                 case WIFI_CONNECT_LOG: // WIFI连接完成
-                    if (null != mOnWifiConnectListener) {
-                        String log = (String) msg.obj;
-                        mOnWifiConnectListener.onWiFiConnectLog(log);
-                    }
                     break;
                 case WIFI_CONNECT_SUCCESS: // WIFI连接完成
                     if (null != mOnWifiConnectListener) {
                         String ssid = (String) msg.obj;
-                        mOnWifiConnectListener.onWiFiConnectSuccess(ssid);
+                        mOnWifiConnectListener.onWiFiConnectState(ssid,true);
                     }
                     break;
                 case WIFI_CONNECT_FAILURE: // WIFI连接完成
                     if (null != mOnWifiConnectListener) {
                         String ssid = (String) msg.obj;
-                        mOnWifiConnectListener.onWiFiConnectFailure(ssid);
+                        mOnWifiConnectListener.onWiFiConnectState(ssid,false);
                     }
                     break;
                 default:
@@ -343,13 +330,13 @@ public class WiFiManager extends BaseWiFiManager {
         }
     }
 
-    private static OnWifiEnabledListener mOnWifiEnabledListener;
+    private static WifiStateListener mOnWifiEnabledListener;
 
-    private static OnWifiScanResultsListener mOnWifiScanResultsListener;
+    private static WifiStateListener mOnWifiScanResultsListener;
 
-    private static OnWifiConnectListener mOnWifiConnectListener;
+    private static WifiStateListener mOnWifiConnectListener;
 
-    public void setOnWifiEnabledListener(OnWifiEnabledListener listener) {
+    public void setOnWifiEnabledListener(WifiStateListener listener) {
         mOnWifiEnabledListener = listener;
     }
 
@@ -357,7 +344,7 @@ public class WiFiManager extends BaseWiFiManager {
         mOnWifiEnabledListener = null;
     }
 
-    public void setOnWifiScanResultsListener(OnWifiScanResultsListener listener) {
+    public void setOnWifiScanResultsListener(WifiStateListener listener) {
         mOnWifiScanResultsListener = listener;
     }
 
@@ -365,7 +352,7 @@ public class WiFiManager extends BaseWiFiManager {
         mOnWifiScanResultsListener = null;
     }
 
-    public void setOnWifiConnectListener(OnWifiConnectListener listener) {
+    public void setOnWifiConnectListener(WifiStateListener listener) {
         mOnWifiConnectListener = listener;
     }
 

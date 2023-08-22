@@ -208,11 +208,6 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         recyclerView.setAdapter(wifiAdapter);
     }
 
-    private void showConnectWifiDialog(ScanResult scanResult) {
-
-    }
-
-
     public static class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.ViewHolder> {
 
         private final List<ScanResult> lists;
