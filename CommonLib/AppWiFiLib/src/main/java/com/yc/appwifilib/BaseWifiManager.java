@@ -19,7 +19,7 @@ import java.util.List;
 
 public class BaseWifiManager {
 
-    Context context;
+    private Context context;
     private WifiManager wifiManager;
     private ConnectivityManager connectivityManager;
 
@@ -65,7 +65,7 @@ public class BaseWifiManager {
         if (null == wifiConfiguration) {
             // 生成配置
             WifiConfiguration wifiConfig = new WifiConfiguration();
-            wifiConfig.SSID = addDoubleQuotation(ssid);
+            wifiConfig.SSID = WifiToolUtils.addDoubleQuotation(ssid);
             wifiConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
             wifiConfig.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
             wifiConfig.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
@@ -101,7 +101,7 @@ public class BaseWifiManager {
         if (null == wifiConfiguration) {
             // 添加配置
             WifiConfiguration wifiConfig = new WifiConfiguration();
-            wifiConfig.SSID = addDoubleQuotation(ssid);
+            wifiConfig.SSID = WifiToolUtils.addDoubleQuotation(ssid);
             wifiConfig.wepKeys[0] = "\"" + password + "\"";
             wifiConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
             wifiConfig.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
@@ -135,7 +135,7 @@ public class BaseWifiManager {
         WifiConfiguration wifiConfiguration = getConfigFromConfiguredNetworksBySsid(ssid);
         if (null == wifiConfiguration) {
             WifiConfiguration wifiConfig = new WifiConfiguration();
-            wifiConfig.SSID = addDoubleQuotation(ssid);
+            wifiConfig.SSID = WifiToolUtils.addDoubleQuotation(ssid);
             wifiConfig.preSharedKey = "\"" + password + "\"";
             wifiConfig.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
             wifiConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
@@ -164,7 +164,7 @@ public class BaseWifiManager {
      * @return 配置信息
      */
     WifiConfiguration getConfigFromConfiguredNetworksBySsid(@NonNull String ssid) {
-        ssid = addDoubleQuotation(ssid);
+        ssid = WifiToolUtils.addDoubleQuotation(ssid);
         //检查是否已经配置过该wifi，通过WifiManager获取已经配置的wifi列表
         List<WifiConfiguration> existingConfigs = getConfiguredNetworks();
         if (null != existingConfigs) {
@@ -303,22 +303,6 @@ public class BaseWifiManager {
             return wifiManager.getConnectionInfo();
         }
         return null;
-    }
-
-    /**
-     * 添加双引号
-     * 这里需要注意的是：
-     * WifiConfiguration里封装的wifi的SSID是包含双引号的，而ScanResult的SSID是不包含双引号的，这里比较时需要注意！
-     *
-     * @param text 待处理字符串
-     * @return 处理后字符串
-     */
-    public String addDoubleQuotation(String text) {
-        //直接判断equals(ssid)肯定是不存在的，因为“XXX_WIFI”才是配置中的SSID，它外面包了双引号
-        if (TextUtils.isEmpty(text)) {
-            return "";
-        }
-        return "\"" + text + "\"";
     }
 
     public void release() {

@@ -23,12 +23,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yc.appwifilib.WifiHelper;
+import com.yc.appwifilib.WifiToolUtils;
 import com.yc.netreceiver.OnNetStatusListener;
 import com.yc.netreceiver.NetWorkManager;
 import com.yc.netsettinglib.DefaultNetCallback;
 import com.yc.netsettinglib.NetRequestHelper;
 import com.yc.netsettinglib.CapabilitiesUtils;
-import com.yc.netsettinglib.OnNetCallback;
+import com.yc.nettestlib.NetTestHelper;
+import com.yc.nettestlib.OnNetTestListener;
 import com.yc.networklib.AppNetworkUtils;
 import com.yc.networklib.NetworkType;
 import com.yc.toastutils.ToastUtils;
@@ -87,6 +89,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onClick(View v) {
         if (v == tvNet1) {
@@ -104,7 +107,10 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
             boolean startScan = WifiHelper.getInstance().startScan();
             Log.i("Network-Receiver" , "startScan " + startScan);
         } else if (v == tvWifiOther) {
-
+            WifiHelper.getInstance().closeWifi();
+            wifiList.clear();
+            wifiAdapter.notifyDataSetChanged();
+            showNetInfo();
         }
     }
 
@@ -135,54 +141,6 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void clickConnectWifi() {
-        if (WifiHelper.getInstance().isConnectedTargetSsid("iPhone")) {
-            ToastUtils.showRoundRectToast("取消热点连接");
-        } else {
-            ToastUtils.showRoundRectToast("开始热点连接");
-            String ssid = "iPhone";
-            String pwd = "yc123456";
-//            if (!WifiHelper.getInstance().isHaveWifi(ssid)){
-//                ToastUtils.showRoundRectToast("没有该热点");
-//                return;
-//            }
-            if (WifiHelper.getInstance().isWifiEnable()) {
-                ToastUtils.showRoundRectToast("开始连接Wi-Fi");
-                connect(ssid, pwd);
-            } else {
-                ToastUtils.showRoundRectToast("开始打开Wi-Fi");
-                WifiHelper.getInstance().openWifi();
-            }
-        }
-    }
-
-
-    private void connect(String ssid, String pwd) {
-        boolean isSuccess;
-        if (TextUtils.isEmpty(pwd)) {
-            isSuccess = WifiHelper.getInstance().connectOpenNetwork(ssid);
-        } else {
-            isSuccess = WifiHelper.getInstance().connectWPA2Network(ssid, pwd);
-        }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                boolean ping = CapabilitiesUtils.ping();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtils.showRoundRectToast("连接状态" + isSuccess + " -- ");
-                    }
-                });
-            }
-        }).start();
-    }
-
     private void showNetInfo() {
         StringBuffer sb = new StringBuffer();
         sb.append("判断网络是否连接：").append(AppNetworkUtils.isConnected());
@@ -206,12 +164,12 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         sb.append("\n获取wifi的名称：").append(wifiHelper.getSsid());
         sb.append("\n获取被连接网络的mac地址：").append(wifiHelper.getBssid());
         sb.append("\n获取wifi的ip：").append(wifiHelper.getWifiIpStr());
-        sb.append("\n获取wifi的强弱：").append(wifiHelper.getWifiState());
+        sb.append("\n获取wifi的强弱：").append(wifiHelper.getWifiLevel());
         sb.append("\n便携热点是否开启：").append(wifiHelper.isApEnable());
         sb.append("\n是否连接着指定WiFi：").append(wifiHelper.isConnectedTargetSsid("iPhone"));
         sb.append("\n获取开启便携热点后自身热点IP地址：").append(wifiHelper.getLocalIp());
 
-        sb.append("\n\n下面是以太网工具：");
+        sb.append("\n\n下面是网络Wi-Fi工具：");
         tvContent.setText(sb.toString());
     }
 
@@ -230,11 +188,28 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         wifiAdapter.setOnItemClickListener(new WifiAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                if (wifiList.size() > 0 && wifiList.size() > position){
+                    ScanResult scanResult = wifiList.get(position);
+                    //获取Wifi扫描结果
+                    String capabilities = scanResult.capabilities;
+                    //Wifi状态标识 true：加密，false：开放
+                    boolean wifiStateFlag = capabilities.contains("WEP") || capabilities.contains("PSK") || capabilities.contains("EAP");
+                    if (wifiStateFlag) {
+                        Log.i("Network-Connect" , "connectWifi: 加密连接");
+                        clickConnectWifi(scanResult.SSID , "yc123456");
+                    } else {
+                        Log.i("Network-Connect" , "connectWifi: 非加密连接");
+                        clickConnectWifi(scanResult.SSID , "");
+                    }
+                }
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(wifiAdapter);
+    }
+
+    private void showConnectWifiDialog(ScanResult scanResult) {
+
     }
 
 
@@ -329,10 +304,12 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public void onReceive(Context c, Intent intent) {
             boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
-            Log.i("Network-Receiver" , "wifi" + success);
             //处理扫描结果
             wifiList.clear();
             List<ScanResult> wifiListData = WifiHelper.getInstance().getWifiList();
+            List<ScanResult> scanResults = WifiToolUtils.removeDuplicate(wifiListData);
+            Log.i("Network-Receiver" , "wifi" + success + " , "
+                    + wifiListData.size() + " , " + scanResults.size());
             wifiList.addAll(wifiListData);
             //根据Level排序
             Collections.sort(wifiList, (lhs, rhs) -> rhs.level - lhs.level);
@@ -341,6 +318,55 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
     };
+
+
+    private void clickConnectWifi(String ssid, String pwd) {
+        if (WifiHelper.getInstance().isWifiEnable()) {
+            ToastUtils.showRoundRectToast("开始连接Wi-Fi");
+            connect(ssid, pwd);
+        } else {
+            ToastUtils.showRoundRectToast("开始打开Wi-Fi");
+            WifiHelper.getInstance().openWifi();
+        }
+    }
+
+
+    private void connect(String ssid, String pwd) {
+        boolean isSuccess;
+        if (TextUtils.isEmpty(pwd)) {
+            isSuccess = WifiHelper.getInstance().connectOpenNetwork(ssid);
+        } else {
+            isSuccess = WifiHelper.getInstance().connectWPA2Network(ssid, pwd);
+        }
+        Log.i("Network-Connect" , "wifi : " + ssid + " , " + isSuccess);
+        // 如果连接失败，再试一次
+        if (!isSuccess) {
+            if (TextUtils.isEmpty(pwd)) {
+                isSuccess = WifiHelper.getInstance().connectOpenNetwork(ssid);
+            } else {
+                isSuccess = WifiHelper.getInstance().connectWPA2Network(ssid, pwd);
+            }
+        }
+        Log.i("Network-Connect" , "again wifi : " + ssid + " , " + isSuccess);
+        // 无论是否成功，都发请求确认一下
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                NetTestHelper.getInstance().testNetwork(new OnNetTestListener() {
+                    @Override
+                    public void onTest(boolean success, String msg) {
+                        Log.i("Network-Connect" , "testNetwork : " + success + " , " + msg);
+                    }
+                });
+            }
+        }).start();
+    }
+
 
     private void test() {
         //打开或关闭移动数据

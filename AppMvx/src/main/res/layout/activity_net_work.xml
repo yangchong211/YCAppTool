@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:layout_height="40dp"
             android:gravity="center"
-            android:text="2.3Wi-Fi监听"
+            android:text="2.3Wi-Fi关闭"
             android:background="@color/color_f25057"
             android:textSize="18sp"
             app:rRadius="20dp" />

@@ -265,7 +265,7 @@ public class MonitorPhoneFragment extends Fragment {
     private void setLocationInfo() {
         Application application = activity.getApplication();
         StringBuilder sb = new StringBuilder();
-        sb.append("wifi信号强度:  ").append(WifiHelper.getInstance().getWifiState());
+        sb.append("wifi信号强度:  ").append(WifiHelper.getInstance().getWifiLevel());
         boolean wifiProxy = AddressToolUtils.isWifiProxy(application);
         if (wifiProxy) {
             sb.append("\nwifi是否代理:  ").append("已经链接代理");

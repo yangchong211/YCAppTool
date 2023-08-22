@@ -48,4 +48,5 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':NetReceiver')
     implementation project(path: ':NetSettingLib')
+    implementation project(path: ':NetTestLib')
 }

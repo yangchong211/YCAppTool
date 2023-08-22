@@ -3,11 +3,8 @@ package com.yc.appwifilib;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.net.DhcpInfo;
-import android.net.Uri;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
@@ -26,15 +23,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
-import static android.content.Context.WIFI_SERVICE;
 import static android.os.Build.VERSION_CODES.P;
 
-public class WifiHelper extends BaseWifiManager{
+public class WifiHelper extends BaseWifiManager implements IWifiFeature{
 
     public static final String TAG = "NetWork-Wi-Fi";
 
@@ -50,12 +44,6 @@ public class WifiHelper extends BaseWifiManager{
         @SuppressLint("StaticFieldLeak")
         private final static WifiHelper INSTANCE = new WifiHelper();
     }
-
-    /**
-     * 请求修改系统设置Code
-     */
-    public static final int REQUEST_WRITE_SETTING_CODE = 1;
-
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
 
     private WifiReceiver wifiReceiver;
@@ -76,8 +64,9 @@ public class WifiHelper extends BaseWifiManager{
      * <p>需添加权限
      * {@code <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />}</p>
      */
+    @Override
     public boolean openWifi() {
-        if (!isWifiEnable()){
+        if (!isWifiEnable()) {
             //对启用和停用 WLAN 实施了限制
             //Android 10 或更高版本为目标平台的应用无法启用或停用 WLAN。WifiManager.setWifiEnabled() 方法始终返回 false。
             //如果您需要提示用户启用或停用 WLAN，请使用设置面板。
@@ -92,27 +81,30 @@ public class WifiHelper extends BaseWifiManager{
      * <p>需添加权限
      * {@code <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />}</p>
      */
-    public void closeWifi() {
+    @Override
+    public boolean closeWifi() {
         //对启用和停用 WLAN 实施了限制
         //Android 10 或更高版本为目标平台的应用无法启用或停用 WLAN。WifiManager.setWifiEnabled() 方法始终返回 false。
         //如果您需要提示用户启用或停用 WLAN，请使用设置面板。
         //对直接访问已配置的 WLAN 网络实施了限制
-        getWifiManager().setWifiEnabled(false);
+        return getWifiManager().setWifiEnabled(false);
     }
 
     /**
      * 判断是否有某个Wi-Fi
-     * @param ssid  热点名
+     *
+     * @param ssid 热点名
      * @return 是否有该热点
      */
-    public boolean isHaveWifi(@NonNull String ssid){
+    @Override
+    public boolean isHaveWifi(@NonNull String ssid) {
         return getConfigFromConfiguredNetworksBySsid(ssid) != null;
     }
 
     /**
      * 扫描附近的WIFI
      */
-    public boolean startScan(){
+    public boolean startScan() {
         return getWifiManager().startScan();
     }
 
@@ -138,7 +130,7 @@ public class WifiHelper extends BaseWifiManager{
     /**
      * 连接到WEP网络
      *
-     * @param ssid 热点名
+     * @param ssid     热点名
      * @param password 密码
      * @return 配置是否成功
      */
@@ -159,7 +151,7 @@ public class WifiHelper extends BaseWifiManager{
     /**
      * 连接到WPA2网络
      *
-     * @param ssid 热点名
+     * @param ssid     热点名
      * @param password 密码
      * @return 配置是否成功
      */
@@ -310,17 +302,6 @@ public class WifiHelper extends BaseWifiManager{
     }
 
     /**
-     * 返回应用程序是否可以修改系统设置
-     *
-     * @return {@code true}: yes
-     * {@code false}: no
-     */
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public boolean isGrantedWriteSettings(Context context) {
-        return Settings.System.canWrite(context);
-    }
-
-    /**
      * 是否连接着指定WiFi,通过已连接的SSID判断
      *
      * @param ssid 是否连接着wifi
@@ -334,7 +315,6 @@ public class WifiHelper extends BaseWifiManager{
      * android.permission.ACCESS_FINE_LOCATION这个权限主要getConnectionInfo()这个方法需要
      * 这个方法是用于获取处于活跃状态的WiFi信息，包括已经连接和连接中两种状态。
      * 此外获取wifi列表的的方法中也需要，这里只介绍getConnectionInfo()
-     *
      *
      * @return 返回不含双引号的SSID
      */
@@ -356,6 +336,7 @@ public class WifiHelper extends BaseWifiManager{
 
     /**
      * 获取被连接网络的mac地址
+     *
      * @return
      */
     public String getBssid() {
@@ -369,9 +350,10 @@ public class WifiHelper extends BaseWifiManager{
 
     /**
      * 获取wifi的ip
+     *
      * @return
      */
-    public int getWifiIp(){
+    public int getWifiIp() {
         if (getWifiManager() != null) {
             WifiInfo wifiInfo = getWifiManager().getConnectionInfo();
             return wifiInfo.getIpAddress();
@@ -381,70 +363,53 @@ public class WifiHelper extends BaseWifiManager{
 
     /**
      * 获取wifi的ip
+     *
      * @return
      */
-    public String getWifiIpStr(){
+    public String getWifiIpStr() {
         if (getWifiManager() != null) {
             int wifiIp = getWifiIp();
-            return intToIp(wifiIp);
+            return WifiToolUtils.intToIp(wifiIp);
         }
         return null;
     }
 
     /**
-     * 将ip数值，转为字符串
-     *
-     * @param paramInt ip整数
-     * @return 字符串ip地址
-     */
-    private static String intToIp(int paramInt) {
-        return (paramInt & 0xFF) + "." + (0xFF & paramInt >> 8) + "."
-                + (0xFF & paramInt >> 16) + "." + (0xFF & paramInt >> 24);
-    }
-
-
-    /**
      * 获取wifi的强弱
+     *
      * @return
      */
-    public String getWifiState(){
+    public String getWifiLevel() {
         if (isWifiEnable()) {
             WifiInfo mWifiInfo = getWifiManager().getConnectionInfo();
             int wifi = mWifiInfo.getRssi();
-            //获取wifi信号强度
-            if (wifi > -50 && wifi < 0) {
-                //最强
-                return "最强";
-            } else if (wifi > -70 && wifi < -50) {
-                //较强
-                return "较强";
-            } else if (wifi > -80 && wifi < -70) {
-                //较弱
-                return "较弱";
-            } else if (wifi > -100 && wifi < -80) {
-                //微弱
-                return "微弱";
-            } else {
-                return "微弱";
-            }
+            return WifiToolUtils.getWifiLevel(wifi);
         }
         return "无wifi连接";
     }
+
+
 
     /**
      * @return 获取WiFi列表
      */
     public List<ScanResult> getWifiList() {
         List<ScanResult> resultList = new ArrayList<>();
-        if (getWifiManager() != null && isWifiEnable()) {
+        if (getWifiManager() != null && isWifiEnable() && getWifiManager().getScanResults()!= null) {
             //resultList.addAll(getWifiManager().getScanResults());
             //去掉空数据
             for (ScanResult scanResult : getWifiManager().getScanResults()) {
-                if (!scanResult.SSID.isEmpty()) {
+                if (scanResult == null){
+                    continue;
+                }
+                //使用List集合contains方法循环遍历
+                boolean contains = resultList.contains(scanResult);
+                if (!contains && !scanResult.SSID.isEmpty()) {
                     resultList.add(scanResult);
                 }
             }
         }
+
         return resultList;
     }
 
@@ -560,28 +525,26 @@ public class WifiHelper extends BaseWifiManager{
         return null;
     }
 
-    private boolean isRegisterWifiBroadcast() {
-        return wifiReceiver != null;
-    }
-
     /**
      * 注册Wifi广播
      */
     public void registerWifiBroadcast(WifiStateListener wifiStateListener) {
         // 刚注册广播时会立即收到一条当前状态的广播
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        filter.addAction("android.net.wifi.WIFI_AP_STATE_CHANGED");
-        wifiReceiver = new WifiReceiver();
-        AppToolUtils.getApp().registerReceiver(wifiReceiver, filter);
-        wifiReceiver.setWifiStateListener(wifiStateListener);
+        if (wifiReceiver == null) {
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+            filter.addAction("android.net.wifi.WIFI_AP_STATE_CHANGED");
+            wifiReceiver = new WifiReceiver();
+            AppToolUtils.getApp().registerReceiver(wifiReceiver, filter);
+            wifiReceiver.setWifiStateListener(wifiStateListener);
+        }
     }
 
     /**
      * 解除Wifi广播
      */
     public void unregisterWifiBroadcast() {
-        if (isRegisterWifiBroadcast()) {
+        if (wifiReceiver != null) {
             AppToolUtils.getApp().unregisterReceiver(wifiReceiver);
             wifiReceiver.setWifiStateListener(null);
             wifiReceiver = null;

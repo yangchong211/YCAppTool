@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.yc.appwifilib">
     <!--允许一个程序访问精良位置(如GPS)-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -12,4 +13,15 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <!--改变网络状态-->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+
+
+    <!--Android 6 ~ 12 使用定位权限-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+        tools:ignore="CoarseFineLocation" />
+
+    <!--Android 13及以上使用权限-->
+    <uses-permission
+        android:name="android.permission.NEARBY_WIFI_DEVICES"
+        tools:targetApi="Tiramisu" />
+
 </manifest>

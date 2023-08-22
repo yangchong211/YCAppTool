@@ -75,7 +75,7 @@ include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager', ':AppCompress',
         ':AppHandlerLib', ':FileIoHelper', ':ZipFileLib', ':NetWorkLib', ':AppContextLib',
         ':AppWiFiLib', ':UriAndUrlLib', ':AppGrayLib', ':AppCallStatus', ':AppFastSp',
         ':ZipFileLib', ':SmEncryptLib', ':AppClickHelper', ':DataCloneLib', ':NetReceiver',
-        ':NetSettingLib'
+        ':NetSettingLib', ':NetTestLib'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
@@ -120,7 +120,7 @@ project(':AppClickHelper').projectDir = new File('CommonLib/AppClickHelper')
 project(':DataCloneLib').projectDir = new File('CommonLib/DataCloneLib')
 project(':NetReceiver').projectDir = new File('CommonLib/NetReceiver')
 project(':NetSettingLib').projectDir = new File('CommonLib/NetSettingLib')
-
+project(':NetTestLib').projectDir = new File('CommonLib/NetTestLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
