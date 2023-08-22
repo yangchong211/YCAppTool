@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
@@ -181,10 +180,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
 
 
     private void initWifi() {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
-        registerReceiver(wifiScanReceiver, intentFilter);
-
+        WifiHelper.getInstance().init();
         WifiHelper.getInstance().registerWifiListener(new WifiStateListener() {
             @Override
             public void onWifiEnabled(boolean enabled) {
@@ -199,6 +195,21 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onWiFiConnectState(String ssid, boolean enabled) {
                 AppLogUtils.d("Network-WiFi-Receiver: " + "Wi-Fi网络连接: " + ssid + " , " + enabled);
+            }
+
+            @Override
+            public void onScanResults(boolean success , List<ScanResult> wifiListData) {
+                //处理扫描结果
+                wifiList.clear();
+                List<ScanResult> scanResults = WifiToolUtils.removeDuplicate(wifiListData);
+                Log.i("Network-Receiver", "wifi" + success + " , "
+                        + wifiListData.size() + " , " + scanResults.size());
+                wifiList.addAll(wifiListData);
+                //根据Level排序
+                Collections.sort(wifiList, (lhs, rhs) -> rhs.level - lhs.level);
+                if (wifiAdapter != null) {
+                    wifiAdapter.notifyDataSetChanged();
+                }
             }
         });
     }
@@ -341,8 +352,8 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
     private void clickConnectWifi(String ssid, String pwd) {
         if (WifiHelper.getInstance().isWifiEnable()) {
             ToastUtils.showRoundRectToast("开始连接Wi-Fi");
-//            connect(ssid, pwd);
-            connectTest(ssid, pwd);
+            connect(ssid, pwd);
+            //connectTest(ssid, pwd);
         } else {
             ToastUtils.showRoundRectToast("开始打开Wi-Fi");
             WifiHelper.getInstance().openWifi();
@@ -364,17 +375,17 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
 
         boolean isSuccess;
         if (TextUtils.isEmpty(pwd)) {
-            isSuccess = WifiHelper.getInstance().connectOpenNetwork(ssid);
+            isSuccess = WifiHelper.getInstance().connect(ssid);
         } else {
-            isSuccess = WifiHelper.getInstance().connectWPA2Network(ssid, pwd);
+            isSuccess = WifiHelper.getInstance().connect(ssid, pwd);
         }
         Log.i("Network-Connect" , "wifi : " + ssid + " , " + isSuccess);
         // 如果连接失败，再试一次
         if (!isSuccess) {
             if (TextUtils.isEmpty(pwd)) {
-                isSuccess = WifiHelper.getInstance().connectOpenNetwork(ssid);
+                isSuccess = WifiHelper.getInstance().connect(ssid);
             } else {
-                isSuccess = WifiHelper.getInstance().connectWPA2Network(ssid, pwd);
+                isSuccess = WifiHelper.getInstance().connectWpa(ssid, pwd);
             }
         }
         Log.i("Network-Connect" , "again wifi : " + ssid + " , " + isSuccess);
@@ -451,7 +462,6 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         WifiHelper wifiHelper = WifiHelper.getInstance();
         wifiHelper.closeWifi();
         wifiHelper.openWifi();
-        wifiHelper.closeAp(this);
         wifiHelper.openAp(this, "", "");
     }
 

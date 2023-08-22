@@ -282,9 +282,7 @@ public class MonitorPhoneFragment extends Fragment {
         sb.append("\nWifi是否打开:  ").append(WifiHelper.getInstance().isWifiEnable());
         sb.append("\nWifi是否连接状态:  ").append(AppNetworkUtils.isWifiConnected());
         sb.append("\nWifi名称:  ").append(WifiHelper.getInstance().getSsid());
-        int wifiIp = WifiHelper.getInstance().getWifiIp();
-        String ip = AppDeviceUtils.intToIp(wifiIp);
-        sb.append("\nWifi的Ip地址:  ").append(ip);
+        sb.append("\nWifi的Ip地址:  ").append(WifiHelper.getInstance().getWifiList());
         DhcpInfo dhcpInfo = AppDeviceUtils.getDhcpInfo(application);
         if (dhcpInfo != null) {
             //sb.append("\nipAddress：").append(AppDeviceUtils.intToIp(dhcpInfo.ipAddress));

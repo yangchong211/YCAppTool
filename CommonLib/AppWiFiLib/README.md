@@ -40,6 +40,21 @@
 
 
 
+#### 1.4 Wi-Fi种类说明
+- Wi-Fi种类共有哪些类型
+    - 按照是否开放分为：开放网络和加密网络。按照类型分为：Wi-Fi无线网；热点；
+    - 开放式网络：开放式网络是最简单的WiFi网络类型，不需要密码。
+    - WEP：WEP是一种较老的加密协议，容易被攻击。有线等效加密。
+    - WPA：WPA是较新的加密协议，更加安全。有分成家用的WPA-PSK (Pre-Shared Key)与企业用的WPA-Enterprise版本。
+    - WPA2：WPA2顾名思义就是WPA的加强版，WPA2与WPA的差别在于，它使用更安全的加密技术AES (Advanced Encryption Standard)，因此比WPA更难被破解、更安全。
+    - Web Redirection：连接Wi-Fi后，开启浏览器尝试上网，并强制重导到认证网页要求输入账号密码，然后ACG向RADIUS认证服务器来确认使用者的身分，认证通过才可以自由到其它的网站。
+- 什么叫做Wi-Fi直连(也叫点对点连接)
+    - 多个设备连接同一个Wi-Fi，然后通过Wi-Fi进行直接通信。从而获得比蓝牙连接更远距离的高速连接通信效果。
+- 如何获取Wi-Fi的类型
+    - 用ScanResult.capabilities来获取认证方式。capabilities的格式是（认证标准+秘钥管理+加密方案）。
+
+
+
 ### 02.常见思路和做法
 #### 2.1 连接Wi-Fi方式
 - 连接Wi-Fi目前可能的方式
@@ -51,7 +66,12 @@
 
 
 
-#### 2.2 连接Wi-Fi步骤
+#### 2.2 开启Wi-Fi操作
+- 开启WiFi一般需要一定的时间，因此不能立马去连接，需要等WiFi稳定可用，经测试一般2.5秒即可完成
+
+
+
+#### 2.3 连接Wi-Fi步骤
 - 第一步：判断并开启Wi-Fi
     - 判断当前手机wifi网络是否开启可用。如果不可用，则需要首先打开Wi-Fi开关。
     - 打开关闭wifi使用wifiManager.setWifiEnabled()的方法，打开关闭前，先要判断wifi的状态，使用isWifiEnabled()方法。
@@ -65,8 +85,17 @@
 
 
 
-#### 2.3 开启Wi-Fi操作
-- 开启WiFi一般需要一定的时间，因此不能立马去连接，需要等WiFi稳定可用，经测试一般2.5秒即可完成
+#### 2.4 扫描Wi-Fi
+- 如何开启扫描Wi-Fi操作
+    - 使用 WifiManager.startScan() 请求扫描。
+- 如何去拿扫描之后的结果
+    - 为 SCAN_RESULTS_AVAILABLE_ACTION 注册一个广播监听器，系统会在完成扫描请求时调用此监听器，提供其成功/失败状态。
+    - 使用 WifiManager.getScanResults() 获取扫描结果。系统返回的扫描结果为最近更新的结果。
+- 遇到的问题说明
+    - 扫描后，拿到的Wi-Fi数据，有很多是ssid重复的。那么这样该如何处理过滤呢？
+- 关于Wi-Fi扫描一些说明
+    - 具体可以看：https://developer.android.google.cn/guide/topics/connectivity/wifi-scan?hl=zh-cn
+
 
 
 

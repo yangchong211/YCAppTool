@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.DhcpInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
@@ -31,14 +32,11 @@ import static android.os.Build.VERSION_CODES.P;
 public class WifiHelper extends BaseWifiManager implements IWifiFeature {
 
     public static final String TAG = "NetWork-Wi-Fi";
-    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
-    private final List<WifiStateListener> mListener;
+    private List<WifiStateListener> mListener;
     private WifiReceiver wifiReceiver;
 
     private WifiHelper() {
         super(AppToolUtils.getApp());
-        mListener = new ArrayList<>();
-        registerWifiBroadcast();
     }
 
     public static WifiHelper getInstance() {
@@ -50,6 +48,10 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
         private final static WifiHelper INSTANCE = new WifiHelper();
     }
 
+    public void init() {
+        mListener = new ArrayList<>();
+        registerWifiBroadcast();
+    }
 
     /**
      * 判断 wifi 是否打开
@@ -58,6 +60,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
      *
      * @return {@code true}: 是<br>{@code false}: 否
      */
+    @Override
     public boolean isWifiEnable() {
         return getWifiManager().isWifiEnabled();
     }
@@ -94,6 +97,34 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
     }
 
     /**
+     * 连接加密网络：使用ssid + pwd连接
+     *
+     * @param ssid Wi-Fi名称
+     * @param pwd  Wi-Fi密码
+     * @return true表示连接上
+     */
+    @Override
+    public boolean connect(String ssid, String pwd) {
+        return connectWEPNetwork(ssid, pwd);
+    }
+
+    @Override
+    public boolean connectWpa(String ssid, String pwd) {
+        return connectWPA2Network(ssid, pwd);
+    }
+
+    /**
+     * 连接开放网络：使用ssid
+     *
+     * @param ssid Wi-Fi名称
+     * @return true表示连接上Wi-Fi
+     */
+    @Override
+    public boolean connect(String ssid) {
+        return connectOpenNetwork(ssid);
+    }
+
+    /**
      * 判断是否有某个Wi-Fi
      *
      * @param ssid 热点名
@@ -105,9 +136,25 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
     }
 
     /**
+     * 是否连接着指定WiFi,通过已连接的SSID判断
+     *
+     * @param ssid Wi-Fi名称ssid
+     * @return true表示有该Wi-Fi已经连接
+     */
+    @Override
+    public boolean isConnectedTargetSsid(String ssid) {
+        return ssid.equals(getSsid());
+    }
+
+    /**
      * 扫描附近的WIFI
      */
+    @Override
     public boolean startScan() {
+        //使用 WifiManager.startScan() 请求扫描。请务必检查方法的返回状态，因为调用可能因以下任一原因失败：
+        //由于短时间扫描过多，扫描请求可能遭到节流。
+        //设备处于空闲状态，扫描已停用。
+        //WLAN 硬件报告扫描失败。
         return getWifiManager().startScan();
     }
 
@@ -117,7 +164,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
      * @param ssid 热点名
      * @return 配置是否成功
      */
-    public boolean connectOpenNetwork(@NonNull String ssid) {
+    private boolean connectOpenNetwork(@NonNull String ssid) {
         // 获取networkId
         int networkId = setOpenNetwork(ssid);
         if (-1 != networkId) {
@@ -137,7 +184,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
      * @param password 密码
      * @return 配置是否成功
      */
-    public boolean connectWEPNetwork(@NonNull String ssid, @NonNull String password) {
+    private boolean connectWEPNetwork(@NonNull String ssid, @NonNull String password) {
         // 获取networkId
         int networkId = setWEPNetwork(ssid, password);
         if (-1 != networkId) {
@@ -145,11 +192,11 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
             boolean isSave = saveConfiguration();
             // 连接网络
             boolean isEnable = enableNetwork(networkId);
-
             return isSave && isEnable;
         }
         return false;
     }
+
 
     /**
      * 连接到WPA2网络
@@ -158,7 +205,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
      * @param password 密码
      * @return 配置是否成功
      */
-    public boolean connectWPA2Network(@NonNull String ssid, @NonNull String password) {
+    private boolean connectWPA2Network(@NonNull String ssid, @NonNull String password) {
         // 获取networkId
         int networkId = setWPA2Network(ssid, password);
         if (-1 != networkId) {
@@ -166,90 +213,9 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
             boolean isSave = saveConfiguration();
             // 连接网络
             boolean isEnable = enableNetwork(networkId);
-
             return isSave && isEnable;
         }
         return false;
-    }
-
-    /**
-     * 连接WIFI,密码为空则不使用密码连接
-     * 9.0以下设备需要关闭热点
-     *
-     * @param ssid     wifi名称
-     * @param password wifi密码
-     */
-    public void connectWifi(Activity activity, String ssid, String password) {
-        // 9.0以下系统不支持关闭热点和WiFi共存
-        if (Build.VERSION.SDK_INT <= P) {
-            if (isApEnable()) {
-                closeAp(activity);
-            }
-        }
-        // 打开WiFi
-        if (!isWifiEnable()) {
-            openWifi();
-        }
-        // 需要等待WiFi开启再去连接
-        new ThreadPoolExecutor(CPU_COUNT
-                , 2 * CPU_COUNT + 1
-                , 60
-                , TimeUnit.SECONDS
-                , new LinkedBlockingQueue<>()
-                , new ConnectWiFiThread()).execute(new Runnable() {
-            @Override
-            public void run() {
-                while (!getWifiManager().isWifiEnabled()) {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                getWifiManager().disableNetwork(getWifiManager().getConnectionInfo().getNetworkId());
-                int netId = getWifiManager().addNetwork(getWifiConfig(ssid, password, !TextUtils.isEmpty(password)));
-                getWifiManager().enableNetwork(netId, true);
-            }
-        });
-    }
-
-    /**
-     * 便携热点是否开启
-     */
-    public boolean isApEnable() {
-        try {
-            Method method = getWifiManager().getClass().getDeclaredMethod("isWifiApEnabled");
-            method.setAccessible(true);
-            return (boolean) method.invoke(getWifiManager());
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    /**
-     * 关闭便携热点
-     */
-    public void closeAp(Activity activity) {
-        // 6.0+申请修改系统设置权限
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!WifiToolUtils.isGrantedWriteSettings(activity)) {
-                WifiToolUtils.requestWriteSettings(activity);
-            }
-        }
-        // 8.0以上的关闭方式不一样
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            stopTethering();
-        } else {
-            try {
-                Method method = getWifiManager().getClass().getMethod("setWifiApEnabled",
-                        WifiConfiguration.class, boolean.class);
-                method.setAccessible(true);
-                method.invoke(getWifiManager(), null, false);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     /**
@@ -260,58 +226,9 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
      * @param password 便携热点密码
      */
     public void openAp(Activity activity, String ssid, String password) {
-        // 6.0+申请修改系统设置权限
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!WifiToolUtils.isGrantedWriteSettings(activity)) {
-                WifiToolUtils.requestWriteSettings(activity);
-            }
-        }
-        // 9.0以下版本不支持热点和WiFi共存
-        if (Build.VERSION.SDK_INT <= P) {
-            // 关闭WiFi
-            if (isWifiEnable()) {
-                getWifiManager().setWifiEnabled(false);
-            }
-        }
-        // 8.0以下的开启方式不一样
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startTethering();
-        } else {
-            try {
-                // 热点的配置类
-                WifiConfiguration config = new WifiConfiguration();
-                // 配置热点的名称(可以在名字后面加点随机数什么的)
-                config.SSID = ssid;
-                config.preSharedKey = password;
-                //是否隐藏网络
-                config.hiddenSSID = false;
-                //开放系统认证
-                config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
-                config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
-                config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
-                config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP);
-                config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
-                config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP);
-                config.status = WifiConfiguration.Status.ENABLED;
-                // 调用反射打开热点
-                Method method = getWifiManager().getClass().getMethod("setWifiApEnabled",
-                        WifiConfiguration.class, Boolean.TYPE);
-                // 返回热点打开状态
-                method.invoke(getWifiManager(), config, true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        WifiToolUtils.openAp(activity, ssid, password);
     }
 
-    /**
-     * 是否连接着指定WiFi,通过已连接的SSID判断
-     *
-     * @param ssid 是否连接着wifi
-     */
-    public boolean isConnectedTargetSsid(String ssid) {
-        return ssid.equals(getSsid());
-    }
 
     /**
      * 获取当前WiFi名称
@@ -321,6 +238,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
      *
      * @return 返回不含双引号的SSID
      */
+    @Override
     public String getSsid() {
         /*if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
             if (!isGrantedLocationPermission()) {
@@ -350,20 +268,6 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
         return bSsid;
     }
 
-
-    /**
-     * 获取wifi的ip
-     *
-     * @return
-     */
-    public int getWifiIp() {
-        if (getWifiManager() != null) {
-            WifiInfo wifiInfo = getWifiManager().getConnectionInfo();
-            return wifiInfo.getIpAddress();
-        }
-        return -1;
-    }
-
     /**
      * 获取wifi的ip
      *
@@ -371,7 +275,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
      */
     public String getWifiIpStr() {
         if (getWifiManager() != null) {
-            int wifiIp = getWifiIp();
+            int wifiIp = WifiToolUtils.getWifiIp();
             return WifiToolUtils.intToIp(wifiIp);
         }
         return null;
@@ -380,7 +284,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
     /**
      * 获取wifi的强弱
      *
-     * @return
+     * @return 信号level
      */
     public String getWifiLevel() {
         if (isWifiEnable()) {
@@ -393,26 +297,12 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
 
 
     /**
+     * 使用 WifiManager.getScanResults() 获取扫描结果。
+     *
      * @return 获取WiFi列表
      */
     public List<ScanResult> getWifiList() {
-        List<ScanResult> resultList = new ArrayList<>();
-        if (getWifiManager() != null && isWifiEnable() && getWifiManager().getScanResults() != null) {
-            //resultList.addAll(getWifiManager().getScanResults());
-            //去掉空数据
-            for (ScanResult scanResult : getWifiManager().getScanResults()) {
-                if (scanResult == null) {
-                    continue;
-                }
-                //使用List集合contains方法循环遍历
-                boolean contains = resultList.contains(scanResult);
-                if (!contains && !scanResult.SSID.isEmpty()) {
-                    resultList.add(scanResult);
-                }
-            }
-        }
-
-        return resultList;
+        return WifiToolUtils.getWifiList();
     }
 
     /**
@@ -433,51 +323,13 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
     }
 
     /**
-     * android8.0以上开启手机热点
-     */
-    private void startTethering() {
-        try {
-            Class classOnStartTetheringCallback = Class.forName("android.net.ConnectivityManager$OnStartTetheringCallback");
-            Method startTethering = getConnectivityManager().getClass()
-                    .getDeclaredMethod("startTethering", int.class, boolean.class, classOnStartTetheringCallback);
-            /*Object proxy = ProxyBuilder.forClass(classOnStartTetheringCallback)
-                    .handler(new InvocationHandler() {
-                        @Override
-                        public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
-                            return null;
-                        }
-                    }).build();*/
-            //todo
-            Object proxy = null;
-            startTethering.invoke(getConnectivityManager(), 0, false, proxy);
-        } catch (Exception e) {
-            Log.e(TAG, "打开热点失败");
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * android8.0以上关闭手机热点
-     */
-    private void stopTethering() {
-        try {
-            Method stopTethering = getConnectivityManager()
-                    .getClass().getDeclaredMethod("stopTethering", int.class);
-            stopTethering.invoke(getConnectivityManager(), 0);
-        } catch (Exception e) {
-            Log.e(TAG, "关闭热点失败");
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * wifi设置
      *
      * @param ssid     WIFI名称
      * @param pws      WIFI密码
      * @param isHasPws 是否有密码
      */
-    private WifiConfiguration getWifiConfig(String ssid, String pws, boolean isHasPws) {
+    WifiConfiguration getWifiConfig(String ssid, String pws, boolean isHasPws) {
         WifiConfiguration config = new WifiConfiguration();
         config.allowedAuthAlgorithms.clear();
         config.allowedGroupCiphers.clear();
@@ -527,6 +379,10 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
         return null;
     }
 
+    public boolean isApEnable() {
+        return WifiToolUtils.isApEnable();
+    }
+
     /**
      * 注册Wifi广播
      */
@@ -542,6 +398,10 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
             filter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
             // 处理Wi-Fi连接状态
             filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+            // 注册一个广播监听器
+            // 系统会在完成扫描请求时调用此监听器，提供其成功/失败状态
+            // 对于搭载 Android 10及更高版本的设备，系统将针对平台或其他应用在设备上执行的所有完整 WLAN 扫描发送此广播。
+            filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
             wifiReceiver = new WifiReceiver(this);
             AppToolUtils.getApp().registerReceiver(wifiReceiver, filter);
             Log.i(TAG, "registerWifiBroadcast");
@@ -559,12 +419,14 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
         }
     }
 
+    @Override
     public void registerWifiListener(WifiStateListener listener) {
         if (this.mListener != null && !mListener.contains(listener)) {
             this.mListener.add(listener);
         }
     }
 
+    @Override
     public boolean unregisterWifiListener(WifiStateListener listener) {
         return mListener != null && this.mListener.remove(listener);
     }
@@ -587,9 +449,16 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
         }
     }
 
+    void setWifiScanList(boolean success, List<ScanResult> wifiListData) {
+        for (WifiStateListener listener : mListener) {
+            listener.onScanResults(success, wifiListData);
+        }
+    }
+
     /**
      * 资源释放
      */
+    @Override
     public void release() {
         super.release();
         if (mListener != null) {

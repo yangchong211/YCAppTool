@@ -1,13 +1,18 @@
 package com.yc.appwifilib;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Message;
 import android.util.Log;
+
+import java.util.List;
 
 public class WifiReceiver extends BroadcastReceiver {
 
@@ -18,7 +23,7 @@ public class WifiReceiver extends BroadcastReceiver {
     private static final int WIFI_AP_STATE_ENABLED = 13;
     private static final int WIFI_AP_STATE_FAILED = 14;
 
-    private WifiHelper wifiHelper;
+    private final WifiHelper wifiHelper;
 
     public WifiReceiver(WifiHelper wifiHelper) {
         this.wifiHelper = wifiHelper;
@@ -26,7 +31,11 @@ public class WifiReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(TAG,"WifiReceiver: " + intent.getAction());
+        Log.i(TAG, "WifiReceiver: " + intent.getAction());
+
+        // WIFI_STATE_CHANGED_ACTION：当WiFi被打开、关闭、正在打开、正在关闭或者位置状态即wifi状态发生改变时系统会自动发送该广播
+        // 该广播会附带有两个值，一个是int型表示改变后的state，可通过字段EXTRA_WIFI_STATE获取
+        // 测试OK
         if (intent.getAction() != null &&
                 intent.getAction().equals(WifiManager.WIFI_STATE_CHANGED_ACTION)) {
             // WIFI状态发生变化
@@ -54,7 +63,10 @@ public class WifiReceiver extends BroadcastReceiver {
             }
         }
 
-        //处理Wi-Fi连接状态
+        // 处理Wi-Fi连接状态发生改变监听
+        // WiFi连接发生改变时系统会发送该广播，通过字段EXTRA_NETWORK_INFO可以获取到WiFi连接的状态，
+        // 如果是已连接的状态，则会有额外的两个字段，字段EXTRA_BSSID可以获取到所连接的WiFi的bssid，
+        // 字段EXTRA_WIFI_INFO可以获取到所连接的WiFi的信息获取到wifiInfo实例
         if (intent.getAction() != null &&
                 intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
             // WIFI连接状态发生改变
@@ -72,6 +84,7 @@ public class WifiReceiver extends BroadcastReceiver {
         }
 
         //处理WIFI连接请求状态发生改变
+        //正在建立的连接状态已经改变，该广播会携带两个值
         WifiManager wifiManager = (WifiManager) context.getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
         if (intent.getAction() != null &&
@@ -90,7 +103,7 @@ public class WifiReceiver extends BroadcastReceiver {
                     Log.i(TAG, "onReceive: INACTIVE 不活跃的  connectFailureInfo = " + connectFailureInfo);
                     if (null != connectFailureInfo) {
                         String ssid = connectFailureInfo.getSSID();
-                        setWifiConnectState(ssid,false);
+                        setWifiConnectState(ssid, false);
                         // 断开连接
                         int networkId = connectFailureInfo.getNetworkId();
                         boolean isDisable = wifiManager.disableNetwork(networkId);
@@ -121,7 +134,7 @@ public class WifiReceiver extends BroadcastReceiver {
                     WifiInfo connectSuccessInfo = wifiManager.getConnectionInfo();
                     if (null != connectSuccessInfo) {
                         String ssid = connectSuccessInfo.getSSID();
-                        setWifiConnectState(ssid,true);
+                        setWifiConnectState(ssid, true);
                     }
                     break;
                 case DORMANT:
@@ -166,6 +179,34 @@ public class WifiReceiver extends BroadcastReceiver {
                     break;
             }
         }
+
+
+        // 注册一个广播监听器，系统会在完成扫描请求时调用此监听器，提供其成功/失败状态。
+        // 用户可以监听该广播通过调用WifiManager的getScanResults方法来获取到扫描结果
+        // 测试OK
+        if (intent.getAction() != null &&
+                intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
+            boolean success;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
+                Log.i(TAG, "onReceive: WIFI扫描请求 " + success);
+            } else {
+                Log.i(TAG, "onReceive: WIFI扫描完成");
+                success = true;
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED
+                        || context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    List<ScanResult> wifiListData = WifiHelper.getInstance().getWifiList();
+                    setWifiScanList(success, wifiListData);
+                }
+            } else {
+                List<ScanResult> wifiListData = WifiHelper.getInstance().getWifiList();
+                setWifiScanList(success, wifiListData);
+            }
+        }
     }
 
     private void setWifiState(boolean state) {
@@ -180,9 +221,15 @@ public class WifiReceiver extends BroadcastReceiver {
         }
     }
 
-    private void setWifiConnectState(String ssid,boolean state) {
+    private void setWifiConnectState(String ssid, boolean state) {
         if (wifiHelper != null) {
-            wifiHelper.setWifiConnectState(ssid,state);
+            wifiHelper.setWifiConnectState(ssid, state);
+        }
+    }
+
+    private void setWifiScanList(boolean success, List<ScanResult> wifiListData) {
+        if (wifiHelper != null) {
+            wifiHelper.setWifiScanList(success, wifiListData);
         }
     }
 }
