@@ -373,22 +373,22 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         }
         wifiManager.saveConfiguration();
 
-        boolean isSuccess;
+        boolean isConnectSuccess;
         if (TextUtils.isEmpty(pwd)) {
-            isSuccess = WifiHelper.getInstance().connect(ssid);
+            isConnectSuccess = WifiHelper.getInstance().connect(ssid);
         } else {
-            isSuccess = WifiHelper.getInstance().connect(ssid, pwd);
+            isConnectSuccess = WifiHelper.getInstance().connect(ssid, pwd);
         }
-        Log.i("Network-Connect" , "wifi : " + ssid + " , " + isSuccess);
+        Log.i("Network-Connect" , "wifi : " + ssid + " , " + isConnectSuccess);
         // 如果连接失败，再试一次
-        if (!isSuccess) {
+        if (!isConnectSuccess) {
             if (TextUtils.isEmpty(pwd)) {
-                isSuccess = WifiHelper.getInstance().connect(ssid);
+                isConnectSuccess = WifiHelper.getInstance().connect(ssid);
             } else {
-                isSuccess = WifiHelper.getInstance().connectWpa(ssid, pwd);
+                isConnectSuccess = WifiHelper.getInstance().connectWpa(ssid, pwd);
             }
         }
-        Log.i("Network-Connect" , "again wifi : " + ssid + " , " + isSuccess);
+        Log.i("Network-Connect" , "again wifi : " + ssid + " , " + isConnectSuccess);
         // 无论是否成功，都发请求确认一下
         new Thread(new Runnable() {
             @Override
