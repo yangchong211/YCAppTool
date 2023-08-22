@@ -59,8 +59,8 @@ public class BaseNetworkCallback extends ConnectivityManager.NetworkCallback {
         String transportTypeName = CapabilitiesUtils.getTransportTypeName(network);
         int transportTypeInt = CapabilitiesUtils.getTransportTypeInt(networkCapabilities);
         String networkName = CapabilitiesUtils.getNetworkName(transportTypeInt);
-        Log.i(TAG, "onCapabilitiesChanged 网络类型 " + transportTypeName + " , "
-                + networkName + " , " + network);
+        //Log.i(TAG, "onCapabilitiesChanged 网络类型 " + transportTypeName + " , "
+        //        + networkName + " , " + network);
     }
 
     @Override

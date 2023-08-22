@@ -49,4 +49,5 @@ dependencies {
     implementation project(path: ':NetReceiver')
     implementation project(path: ':NetSettingLib')
     implementation project(path: ':NetTestLib')
+    implementation project(path: ':NotCaptureLib')
 }

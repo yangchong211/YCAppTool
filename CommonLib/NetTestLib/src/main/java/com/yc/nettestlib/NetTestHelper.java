@@ -12,7 +12,7 @@ import okhttp3.Response;
 
 public class NetTestHelper {
 
-    private static final String PING_ADDRESS = "https://www.qq.com/";
+    private static final String PING_ADDRESS = "http://www.qq.com/";
 
     /**
      * 单例对象
@@ -92,7 +92,8 @@ public class NetTestHelper {
      */
     private void get(String url, Callback callback) {
         //String url = "http://www.qq.com/";
-        OkHttpClient okHttpClient = new OkHttpClient();
+        OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
+        OkHttpClient okHttpClient = builder.build();
         //默认就是GET请求，可以不写
         final Request request = new Request.Builder()
                 .url(url)

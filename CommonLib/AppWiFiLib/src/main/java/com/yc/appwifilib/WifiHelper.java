@@ -28,12 +28,17 @@ import java.util.concurrent.TimeUnit;
 
 import static android.os.Build.VERSION_CODES.P;
 
-public class WifiHelper extends BaseWifiManager implements IWifiFeature{
+public class WifiHelper extends BaseWifiManager implements IWifiFeature {
 
     public static final String TAG = "NetWork-Wi-Fi";
+    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    private final List<WifiStateListener> mListener;
+    private WifiReceiver wifiReceiver;
 
     private WifiHelper() {
         super(AppToolUtils.getApp());
+        mListener = new ArrayList<>();
+        registerWifiBroadcast();
     }
 
     public static WifiHelper getInstance() {
@@ -44,9 +49,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature{
         @SuppressLint("StaticFieldLeak")
         private final static WifiHelper INSTANCE = new WifiHelper();
     }
-    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
 
-    private WifiReceiver wifiReceiver;
 
     /**
      * 判断 wifi 是否打开
@@ -389,17 +392,16 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature{
     }
 
 
-
     /**
      * @return 获取WiFi列表
      */
     public List<ScanResult> getWifiList() {
         List<ScanResult> resultList = new ArrayList<>();
-        if (getWifiManager() != null && isWifiEnable() && getWifiManager().getScanResults()!= null) {
+        if (getWifiManager() != null && isWifiEnable() && getWifiManager().getScanResults() != null) {
             //resultList.addAll(getWifiManager().getScanResults());
             //去掉空数据
             for (ScanResult scanResult : getWifiManager().getScanResults()) {
-                if (scanResult == null){
+                if (scanResult == null) {
                     continue;
                 }
                 //使用List集合contains方法循环遍历
@@ -528,26 +530,60 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature{
     /**
      * 注册Wifi广播
      */
-    public void registerWifiBroadcast(WifiStateListener wifiStateListener) {
+    private void registerWifiBroadcast() {
         // 刚注册广播时会立即收到一条当前状态的广播
         if (wifiReceiver == null) {
             IntentFilter filter = new IntentFilter();
+            // WIFI状态发生变化
             filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+            // 热点的状态发生变化
             filter.addAction("android.net.wifi.WIFI_AP_STATE_CHANGED");
-            wifiReceiver = new WifiReceiver();
+            // 处理WIFI连接请求状态发生改变
+            filter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
+            // 处理Wi-Fi连接状态
+            filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+            wifiReceiver = new WifiReceiver(this);
             AppToolUtils.getApp().registerReceiver(wifiReceiver, filter);
-            wifiReceiver.setWifiStateListener(wifiStateListener);
+            Log.i(TAG, "registerWifiBroadcast");
         }
     }
 
     /**
      * 解除Wifi广播
      */
-    public void unregisterWifiBroadcast() {
+    private void unregisterWifiBroadcast() {
         if (wifiReceiver != null) {
             AppToolUtils.getApp().unregisterReceiver(wifiReceiver);
-            wifiReceiver.setWifiStateListener(null);
             wifiReceiver = null;
+            Log.i(TAG, "unregisterWifiBroadcast");
+        }
+    }
+
+    public void registerWifiListener(WifiStateListener listener) {
+        if (this.mListener != null && !mListener.contains(listener)) {
+            this.mListener.add(listener);
+        }
+    }
+
+    public boolean unregisterWifiListener(WifiStateListener listener) {
+        return mListener != null && this.mListener.remove(listener);
+    }
+
+    void setWifiState(boolean state) {
+        for (WifiStateListener listener : mListener) {
+            listener.onWifiEnabled(state);
+        }
+    }
+
+    void setHotpotState(boolean state) {
+        for (WifiStateListener listener : mListener) {
+            listener.onHotpotEnabled(state);
+        }
+    }
+
+    void setWifiConnectState(String ssid, boolean state) {
+        for (WifiStateListener listener : mListener) {
+            listener.onWiFiConnectState(ssid, state);
         }
     }
 
@@ -556,7 +592,10 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature{
      */
     public void release() {
         super.release();
-        wifiReceiver = null;
+        if (mListener != null) {
+            mListener.clear();
+        }
+        unregisterWifiBroadcast();
         System.gc();
     }
 
