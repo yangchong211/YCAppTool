@@ -31,9 +31,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["annotation"])
     //工具类utils
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
     //通用组件接口库
-    implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.9'
     //implementation 'de.robv.android.xposed:api:82'
     //https://github.com/tiann/epic
     //implementation 'com.github.tiann:epic:0.11.2'

@@ -26,5 +26,5 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //工具类utils：https://github.com/yangchong211/YCCommonLib
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.3.3'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
 }

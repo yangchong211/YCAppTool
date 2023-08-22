@@ -31,7 +31,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["kotlinxJdk"])
     implementation rootProject.ext.dependencies["coreKtx"]
     //io流读写库
-    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.9'
     implementation project(path: ':AppLogClient')
     implementation project(path: ':AppLogService')
 }

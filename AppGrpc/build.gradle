@@ -70,7 +70,7 @@ dependencies {
     implementation project(path: ':GrpcServer')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     //工具类utils
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
 
     //protobuf
     implementation 'io.grpc:grpc-okhttp:1.33.0'

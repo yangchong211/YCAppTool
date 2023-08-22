@@ -97,8 +97,8 @@ dependencies {
     implementation 'com.github.yangchong211:YCScrollPager:1.0.5'
     implementation 'com.github.yangchong211:YCStateLayout:1.2.5'
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.9'
 
 
 }

@@ -19,50 +19,63 @@
         android:textSize="18sp"
         app:rRadius="20dp" />
 
-    <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_net_2"
-        android:layout_marginTop="10dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="20dp"
-        android:text="2.关闭/关闭Wi-Fi"
-        android:textSize="18sp"
-        android:background="@color/color_f25057"
-        app:rRadius="20dp" />
-
-    <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_net_3"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="20dp"
-        android:text="3.关闭/打开移动数据"
-        android:textSize="18sp"
-        android:background="@color/color_f25057"
-        app:rRadius="20dp" />
-
-    <com.yc.roundcorner.view.RoundTextView
-        android:id="@+id/tv_net_4"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="20dp"
-        android:text="4.链接某个Wi-Fi"
-        android:textSize="18sp"
-        android:background="@color/color_f25057"
-        app:rRadius="20dp" />
-
+        android:orientation="horizontal">
+        <com.yc.roundcorner.view.RoundTextView
+            android:id="@+id/tv_open_wifi"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="2.1打开Wi-Fi"
+            android:background="@color/color_f25057"
+            android:textSize="18sp"
+            app:rRadius="20dp" />
+        <com.yc.roundcorner.view.RoundTextView
+            android:id="@+id/tv_scan_wifi"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:text="2.2扫描Wi-Fi"
+            android:background="@color/color_f25057"
+            android:textSize="18sp"
+            app:rRadius="20dp" />
+        <com.yc.roundcorner.view.RoundTextView
+            android:id="@+id/tv_wifi_other"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="2.3Wi-Fi监听"
+            android:background="@color/color_f25057"
+            android:textSize="18sp"
+            app:rRadius="20dp" />
+    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/tv_content"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+
 
 </LinearLayout>

@@ -43,7 +43,7 @@
 - 直接在maven中依赖如下所示：
     ``` java
     //activity栈管理
-    implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.9'
     ```
 
 

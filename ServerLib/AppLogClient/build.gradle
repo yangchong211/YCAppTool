@@ -30,9 +30,9 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation rootProject.ext.dependencies["gson"]
     //工具类utils
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
     //同上上报库
-    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.9'
     //implementation project(path: ':ToolUtilsLib')
     //implementation project(path: ':EventUploadLib')
 }

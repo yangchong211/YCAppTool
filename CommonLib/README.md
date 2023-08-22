@@ -44,78 +44,80 @@
 
 
 ### 02.组件化建设
+- 按照不同层级架构图如下所示
+    - ![image](https://github.com/yangchong211/YCAppTool/blob/master/Image/02.App%E7%BB%84%E4%BB%B6%E5%8C%96%E6%9E%B6%E6%9E%84%E5%9B%BE.jpg)
 
 
 ### 03.公共组件库依赖
 - 关于依赖库如下所示，可以根据需求选择性使用：
     ```
     //base基类
-    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:ComponentLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:ComponentLib:1.4.9'
     //工具类utils
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
     //activity栈管理
-    implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.9'
     //通用缓存存储库，支持sp，fastsp，mmkv，lruCache，DiskLruCache等
-    implementation 'com.github.yangchong211.YCCommonLib:AppBaseStore:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppBaseStore:1.4.9'
     //通用日志输出库
-    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.9'
     //app重启库
-    implementation 'com.github.yangchong211.YCCommonLib:AppRestartLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppRestartLib:1.4.9'
     //intent内容输出到控制台
-    implementation 'com.github.yangchong211.YCCommonLib:SafeIntentLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:SafeIntentLib:1.4.9'
     //通用组件接口库
-    implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.9'
     //各种广播监听哭
-    implementation 'com.github.yangchong211.YCCommonLib:AppStatusLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppStatusLib:1.4.9'
     //基建库
-    implementation 'com.github.yangchong211.YCCommonLib:ArchitectureLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ArchitectureLib:1.4.9'
     //同上上报库
-    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.9'
     //权限库
-    implementation 'com.github.yangchong211.YCCommonLib:AppPermission:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppPermission:1.4.9'
     //Lru磁盘缓存库
-    implementation 'com.github.yangchong211.YCCommonLib:AppLruDisk:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppLruDisk:1.4.9'
     //Lru内存缓存库
-    implementation 'com.github.yangchong211.YCCommonLib:AppLruCache:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppLruCache:1.4.9'
     //fragment生命周期监听库
-    implementation 'com.github.yangchong211.YCCommonLib:FragmentManager:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:FragmentManager:1.4.9'
     //反射工具库
-    implementation 'com.github.yangchong211.YCCommonLib:ReflectionLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ReflectionLib:1.4.9'
     //App启动优化库
-    implementation 'com.github.yangchong211.YCCommonLib:ParallelTaskLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ParallelTaskLib:1.4.9'
     //Context上下文库
-    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.9'
     //加解密库
-    implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.9'
     //handler包装库
-    implementation 'com.github.yangchong211.YCCommonLib:AppHandlerLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppHandlerLib:1.4.9'
     //Application库
-    implementation 'com.github.yangchong211.YCCommonLib:ApplicationLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ApplicationLib:1.4.9'
     //store磁盘分区库
-    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.9'
     //内存
-    implementation 'com.github.yangchong211.YCCommonLib:ToolMemoryLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolMemoryLib:1.4.9'
     //屏幕截屏库
-    implementation 'com.github.yangchong211.YCCommonLib:AppScreenLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppScreenLib:1.4.9'
     //Wi-Fi库
-    implementation 'com.github.yangchong211.YCCommonLib:AppWiFiLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppWiFiLib:1.4.9'
     //Vp相关适配器库
-    implementation 'com.github.yangchong211.YCCommonLib:BaseVpAdapter:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:BaseVpAdapter:1.4.9'
     //io流读写库
-    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.9'
     //图片工具库
-    implementation 'com.github.yangchong211.YCCommonLib:ImageToolLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ImageToolLib:1.4.9'
     //网络判断库
-    implementation 'com.github.yangchong211.YCCommonLib:NetWorkLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:NetWorkLib:1.4.9'
     //手机
-    implementation 'com.github.yangchong211.YCCommonLib:PhoneSensor:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:PhoneSensor:1.4.9'
     //File文件库
-    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.9'
     //Zip压缩库
-    implementation 'com.github.yangchong211.YCCommonLib:ZipFileLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ZipFileLib:1.4.9'
     //图片压缩
-    implementation 'com.github.yangchong211.YCCommonLib:AppCompress:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppCompress:1.4.9'
     ```
 
 

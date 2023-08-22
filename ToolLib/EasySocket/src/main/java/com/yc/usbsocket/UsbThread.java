@@ -5,7 +5,7 @@ import com.yc.toolutils.AppLogUtils;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class USBThread extends Thread {
+public class UsbThread extends Thread {
 
     private final UsbSocket usbSocket;
     //端口号
@@ -16,9 +16,9 @@ public class USBThread extends Thread {
     //是否让线程保持运行状态
     protected volatile boolean isRun = true;
     //当前连接的socket线程
-    private PCThread pcThread;
+    private PhoneThread pcThread;
 
-    public USBThread(UsbSocket socket){
+    public UsbThread(UsbSocket socket){
         usbSocket = socket;
         AppLogUtils.d(TAG, "USBThread Create"+ " --Thread Name:"+getName());
     }
@@ -42,7 +42,7 @@ public class USBThread extends Thread {
                         //多个连接线断开以前的连接
                         usbSocket.onConnectNext(false);
                     }
-                    pcThread = new PCThread(socket);
+                    pcThread = new PhoneThread(socket);
                     pcThread.start();
                     //重新连接新的
                     usbSocket.onConnectNext(true);

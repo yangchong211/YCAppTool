@@ -32,12 +32,12 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation rootProject.ext.dependencies["gson"]
     //工具类utils
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
-
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:DataCloneLib:1.4.9'
     //protobuf
     implementation 'io.grpc:grpc-okhttp:1.33.0'
     implementation 'io.grpc:grpc-protobuf-lite:1.33.0'
     implementation 'io.grpc:grpc-stub:1.33.0'
     implementation 'org.apache.tomcat:annotations-api:6.0.53'
-    implementation project(path: ':DataCloneLib')
+    //implementation project(path: ':DataCloneLib')
 }

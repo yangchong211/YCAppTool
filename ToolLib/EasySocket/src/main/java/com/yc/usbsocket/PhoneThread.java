@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
-public class PCThread extends Thread{
+public class PhoneThread extends Thread{
 
     private UsbSocket usbSocket;
     private static final String TAG = UsbSocket.class.getSimpleName();
@@ -17,7 +17,7 @@ public class PCThread extends Thread{
     //是否让线程保持运行状态
     volatile boolean isRun;
 
-    public PCThread(Socket socket){
+    public PhoneThread(Socket socket){
         this.socket = socket;
         this.isRun = true;
         AppLogUtils.d(TAG, "PCThread Create"+ " --Thread Name:"+getName());

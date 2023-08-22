@@ -36,7 +36,7 @@ import static android.os.Build.VERSION_CODES.P;
 
 public class WifiHelper extends BaseWifiManager{
 
-    private static final String TAG = "NetWork-Wi-Fi";
+    public static final String TAG = "NetWork-Wi-Fi";
 
     private WifiHelper() {
         super(AppToolUtils.getApp());
@@ -76,12 +76,15 @@ public class WifiHelper extends BaseWifiManager{
      * <p>需添加权限
      * {@code <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />}</p>
      */
-    public void openWifi() {
-        //对启用和停用 WLAN 实施了限制
-        //Android 10 或更高版本为目标平台的应用无法启用或停用 WLAN。WifiManager.setWifiEnabled() 方法始终返回 false。
-        //如果您需要提示用户启用或停用 WLAN，请使用设置面板。
-        //对直接访问已配置的 WLAN 网络实施了限制
-        getWifiManager().setWifiEnabled(true);
+    public boolean openWifi() {
+        if (!isWifiEnable()){
+            //对启用和停用 WLAN 实施了限制
+            //Android 10 或更高版本为目标平台的应用无法启用或停用 WLAN。WifiManager.setWifiEnabled() 方法始终返回 false。
+            //如果您需要提示用户启用或停用 WLAN，请使用设置面板。
+            //对直接访问已配置的 WLAN 网络实施了限制
+            return getWifiManager().setWifiEnabled(true);
+        }
+        return false;
     }
 
     /**
@@ -104,6 +107,13 @@ public class WifiHelper extends BaseWifiManager{
      */
     public boolean isHaveWifi(@NonNull String ssid){
         return getConfigFromConfiguredNetworksBySsid(ssid) != null;
+    }
+
+    /**
+     * 扫描附近的WIFI
+     */
+    public boolean startScan(){
+        return getWifiManager().startScan();
     }
 
     /**
@@ -228,8 +238,8 @@ public class WifiHelper extends BaseWifiManager{
     public void closeAp(Activity activity) {
         // 6.0+申请修改系统设置权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!isGrantedWriteSettings(activity)) {
-                requestWriteSettings(activity);
+            if (!WifiToolUtils.isGrantedWriteSettings(activity)) {
+                WifiToolUtils.requestWriteSettings(activity);
             }
         }
         // 8.0以上的关闭方式不一样
@@ -257,8 +267,8 @@ public class WifiHelper extends BaseWifiManager{
     public void openAp(Activity activity, String ssid, String password) {
         // 6.0+申请修改系统设置权限
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!isGrantedWriteSettings(activity)) {
-                requestWriteSettings(activity);
+            if (!WifiToolUtils.isGrantedWriteSettings(activity)) {
+                WifiToolUtils.requestWriteSettings(activity);
             }
         }
         // 9.0以下版本不支持热点和WiFi共存
@@ -297,20 +307,6 @@ public class WifiHelper extends BaseWifiManager{
                 e.printStackTrace();
             }
         }
-    }
-
-    /**
-     * 查看授权情况, 开启热点需要申请系统设置修改权限，如有必要，可提前申请
-     */
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void requestWriteSettings(Activity activity) {
-        if (isGrantedWriteSettings(activity)) {
-            Log.d(TAG, "已授权修改系统设置权限");
-            return;
-        }
-        Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
-        intent.setData(Uri.parse("package:" + activity.getPackageName()));
-        activity.startActivityForResult(intent, REQUEST_WRITE_SETTING_CODE);
     }
 
     /**
@@ -441,7 +437,13 @@ public class WifiHelper extends BaseWifiManager{
     public List<ScanResult> getWifiList() {
         List<ScanResult> resultList = new ArrayList<>();
         if (getWifiManager() != null && isWifiEnable()) {
-            resultList.addAll(getWifiManager().getScanResults());
+            //resultList.addAll(getWifiManager().getScanResults());
+            //去掉空数据
+            for (ScanResult scanResult : getWifiManager().getScanResults()) {
+                if (!scanResult.SSID.isEmpty()) {
+                    resultList.add(scanResult);
+                }
+            }
         }
         return resultList;
     }

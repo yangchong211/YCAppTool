@@ -42,12 +42,12 @@ dependencies {
     implementation project(':StatusBusiness')
 
     //通用日志输出库
-    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.4'
+    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.9'
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
-    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.4'
-    //implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.9'
+    //implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
     implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
-    implementation 'com.github.yangchong211.YCWidgetLib:RoundCorners:1.0.5'
+    implementation 'com.github.yangchong211.YCWidgetLib:RoundCorners:1.0.6'
 
     //SnapHelper相关封装，https://github.com/yangchong211/YCBannerView
     //轮播图，https://github.com/yangchong211/YCBannerView
@@ -56,7 +56,24 @@ dependencies {
     implementation 'com.github.yangchong211.YCBannerView:SnapBannerLib:2.3.6'
     //轮播图，使用recyclerView实现，https://github.com/yangchong211/YCBannerView
     implementation 'com.github.yangchong211.YCBannerView:GalleryBannerLib:2.3.6'
-
+    implementation 'com.github.yangchong211.YCWidgetLib:ShadowConfig:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:RedDotView:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:ExpandPager:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:ExpandLib:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:CardViewLib:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:RoundCorners:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:AppShadowLib:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:AppSwitchView:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:AppTextView:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:BaseProgress:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:CircleProgress:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:CustomWidget:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:EastAdapterLib:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:ExpandLib:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:FloatWindow:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:PhotoCoverLib:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:PhotoWidget:1.0.6'
+    implementation 'com.github.yangchong211.YCWidgetLib:ZoomImageLib:1.0.6'
 
 //    implementation 'com.github.yangchong211.YCDialog:DialogLib:3.6.8'
 //    implementation 'com.github.yangchong211.YCDialog:PopupWindow:3.6.8'

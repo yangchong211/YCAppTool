@@ -1,13 +1,26 @@
 package com.yc.appmvx;
 
+import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.yc.appwifilib.WifiHelper;
 import com.yc.netreceiver.OnNetStatusListener;
@@ -21,56 +34,89 @@ import com.yc.networklib.NetworkType;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppLogUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class NetWorkActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tvNet1;
-    private TextView tvNet2;
-    private TextView tvNet3;
-    private TextView tvNet4;
+    private TextView tvWifiOpen;
+    private TextView tvWifiScan;
+    private TextView tvWifiOther;
+    private RecyclerView recyclerView;
     private TextView tvContent;
-    private boolean isOpenWifi;
+    /**
+     * Wifi结果列表
+     */
+    private final List<ScanResult> wifiList = new ArrayList<>();
+    private WifiAdapter wifiAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_net_work);
         initView();
-        setWifiText();
-        setMobileText();
-//        WifiHelper.getInstance().registerWifiBroadcast(new WifiStateListener() {
-//            @Override
-//            public void onWifiOpen() {
-//                AppLogUtils.d("NetWork-WifiHelper: " + "onWifiOpen");
-//            }
-//
-//            @Override
-//            public void onWifiClose() {
-//                AppLogUtils.d("NetWork-WifiHelper: " + "onWifiClose");
-//            }
-//
-//            @Override
-//            public void onHotpotOpen() {
-//                AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotOpen");
-//            }
-//
-//            @Override
-//            public void onHotpotOpenError() {
-//                AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotOpenError");
-//            }
-//
-//            @Override
-//            public void onHotpotClose() {
-//                AppLogUtils.d("NetWork-WifiHelper: " + "onHotpotClose");
-//            }
-//        });
+        initNetStatus();
+        showNetInfo();
+        initRecyclerView();
+        initWifi();
+    }
+
+    private void initView() {
+        tvNet1 = findViewById(R.id.tv_net_1);
+        recyclerView = findViewById(R.id.recycle_view);
+        tvContent = findViewById(R.id.tv_content);
+        tvWifiOpen = findViewById(R.id.tv_open_wifi);
+        tvWifiScan = findViewById(R.id.tv_scan_wifi);
+        tvWifiOther = findViewById(R.id.tv_wifi_other);
+        tvNet1.setOnClickListener(this);
+        tvWifiOpen.setOnClickListener(this);
+        tvWifiScan.setOnClickListener(this);
+        tvWifiOther.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        WifiHelper.getInstance().unregisterWifiBroadcast();
+        WifiHelper.getInstance().release();
+        NetWorkManager.getInstance().destroy();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            NetRequestHelper.getInstance().destroy();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == tvNet1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                NetRequestHelper.getInstance().requestNetwork(NetRequestHelper.MOBILE);
+            }
+            ToastUtils.showRoundRectToast("切换默认网络");
+        } else if (v == tvWifiOpen) {
+            WifiHelper.getInstance().openWifi();
+            Log.i("Network-Receiver" , "openWifi ");
+        } else if (v == tvWifiScan) {
+            if (!WifiHelper.getInstance().isWifiEnable()) {
+                return;
+            }
+            boolean startScan = WifiHelper.getInstance().startScan();
+            Log.i("Network-Receiver" , "startScan " + startScan);
+        } else if (v == tvWifiOther) {
+
+        }
+    }
+
+    private void initNetStatus() {
         NetWorkManager.getInstance().registerNetStatusListener(new OnNetStatusListener() {
             @Override
             public void onChange(boolean connect, int netType) {
-                if (netType == 1){
+                if (netType == 1) {
                     AppLogUtils.d("NetWork-NetReceiver: " + "有网线" + connect);
-                } else if (netType == 2){
+                } else if (netType == 2) {
                     AppLogUtils.d("NetWork-NetReceiver: " + "Wi-Fi " + connect);
-                } else if (netType == 3){
+                } else if (netType == 3) {
                     AppLogUtils.d("NetWork-NetReceiver: " + "手机流量 " + connect);
                 } else {
                     AppLogUtils.d("NetWork-NetReceiver: " + "无网络 " + connect);
@@ -87,86 +133,10 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
             });
             NetRequestHelper.getInstance().registerDefaultNetworkCallback();
         }
-        showNetInfo();
-    }
-
-    private void initView() {
-        tvNet1 = findViewById(R.id.tv_net_1);
-        tvNet2 = findViewById(R.id.tv_net_2);
-        tvNet3 = findViewById(R.id.tv_net_3);
-        tvNet4 = findViewById(R.id.tv_net_4);
-        tvNet1.setVisibility(View.VISIBLE);
-        tvNet2.setVisibility(View.VISIBLE);
-        tvNet3.setVisibility(View.VISIBLE);
-        tvNet4.setVisibility(View.VISIBLE);
-        tvContent = findViewById(R.id.tv_content);
-        tvNet1.setOnClickListener(this);
-        tvNet2.setOnClickListener(this);
-        tvNet3.setOnClickListener(this);
-        tvNet4.setOnClickListener(this);
-    }
-
-    private void setWifiText(){
-        if (WifiHelper.getInstance().isWifiEnable()){
-            tvNet2.setText("2.打开Wi-Fi");
-        } else {
-            tvNet2.setText("2.关闭Wi-Fi");
-        }
-    }
-
-    private void setMobileText(){
-        if (AppNetworkUtils.isMobileDataEnabled()){
-            tvNet3.setText("3.打开移动数据");
-        } else {
-            tvNet3.setText("3.关闭移动数据");
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        WifiHelper.getInstance().unregisterWifiBroadcast();
-        WifiHelper.getInstance().release();
-        NetWorkManager.getInstance().destroy();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            NetRequestHelper.getInstance().destroy();
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == tvNet1){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                NetWorkUtils.requestNetwork(NetWorkUtils.ETHERNET);
-                NetRequestHelper.getInstance().requestNetwork(NetRequestHelper.MOBILE);
-//                NetWorkUtils.requestNetwork(NetWorkUtils.WIFI);
-            }
-            ToastUtils.showRoundRectToast("切换默认网络");
-        } else if (v == tvNet2){
-            if (tvNet2.getText().toString().equals("2.关闭Wi-Fi")){
-                WifiHelper.getInstance().openWifi();
-                ToastUtils.showRoundRectToast("打开Wi-Fi");
-            } else {
-                WifiHelper.getInstance().closeWifi();
-                ToastUtils.showRoundRectToast("关闭Wi-Fi");
-            }
-            setWifiText();
-        } else if (v == tvNet3){
-            if (tvNet3.getText().toString().equals("3.关闭移动数据")){
-                AppNetworkUtils.setMobileDataEnabled(true);
-                ToastUtils.showRoundRectToast("打开移动数据");
-            } else {
-                AppNetworkUtils.setMobileDataEnabled(false);
-                ToastUtils.showRoundRectToast("关闭移动数据");
-            }
-            setMobileText();
-        } else if (v == tvNet4){
-            clickConnectWifi();
-        }
     }
 
     private void clickConnectWifi() {
-        if (WifiHelper.getInstance().isConnectedTargetSsid("iPhone")){
+        if (WifiHelper.getInstance().isConnectedTargetSsid("iPhone")) {
             ToastUtils.showRoundRectToast("取消热点连接");
         } else {
             ToastUtils.showRoundRectToast("开始热点连接");
@@ -176,32 +146,20 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
 //                ToastUtils.showRoundRectToast("没有该热点");
 //                return;
 //            }
-            if (WifiHelper.getInstance().isWifiEnable()){
-//                    WifiHelper.getInstance().connectWifi(this,ssid,pwd);
+            if (WifiHelper.getInstance().isWifiEnable()) {
                 ToastUtils.showRoundRectToast("开始连接Wi-Fi");
-                connect(ssid,pwd);
+                connect(ssid, pwd);
             } else {
                 ToastUtils.showRoundRectToast("开始打开Wi-Fi");
                 WifiHelper.getInstance().openWifi();
-                tvNet4.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (WifiHelper.getInstance().isWifiEnable()){
-//                                WifiHelper.getInstance().connectWifi(NetWorkActivity.this,ssid,pwd);
-                            connect(ssid,pwd);
-                        } else {
-                            ToastUtils.showRoundRectToast("wifi打开失败");
-                        }
-                    }
-                },3000);
             }
         }
     }
 
 
-    private void connect(String ssid , String pwd){
+    private void connect(String ssid, String pwd) {
         boolean isSuccess;
-        if (TextUtils.isEmpty(pwd)){
+        if (TextUtils.isEmpty(pwd)) {
             isSuccess = WifiHelper.getInstance().connectOpenNetwork(ssid);
         } else {
             isSuccess = WifiHelper.getInstance().connectWPA2Network(ssid, pwd);
@@ -218,7 +176,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtils.showRoundRectToast("连接状态"+isSuccess + " -- " );
+                        ToastUtils.showRoundRectToast("连接状态" + isSuccess + " -- ");
                     }
                 });
             }
@@ -257,14 +215,141 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         tvContent.setText(sb.toString());
     }
 
-    private void test(){
+
+    private void initWifi() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+        registerReceiver(wifiScanReceiver, intentFilter);
+    }
+
+
+    private void initRecyclerView() {
+        //配置适配器
+        wifiAdapter = new WifiAdapter(wifiList);
+        //Item点击事件
+        wifiAdapter.setOnItemClickListener(new WifiAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(wifiAdapter);
+    }
+
+
+    public static class WifiAdapter extends RecyclerView.Adapter<WifiAdapter.ViewHolder> {
+
+        private final List<ScanResult> lists;
+        private OnItemClickListener listener;
+
+        public WifiAdapter(List<ScanResult> lists) {
+            this.lists = lists;
+        }
+
+        public void setOnItemClickListener(OnItemClickListener listener) {
+            this.listener = listener;
+        }
+
+        @NonNull
+        @Override
+        public WifiAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(
+                    R.layout.item_wifi_rv, parent, false);
+            ViewHolder viewHolder = new ViewHolder(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onItemClick(viewHolder.getAdapterPosition());
+                    }
+                }
+            });
+            return viewHolder;
+        }
+
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onBindViewHolder(@NonNull WifiAdapter.ViewHolder holder, int position) {
+            //Wifi名称
+            String ssid = lists.get(position).SSID;
+            holder.tvWifiName.setText(ssid);
+            //Wifi功能
+            String capabilities = lists.get(position).capabilities;
+            //Wifi状态标识 true：加密，false：开放
+            boolean wifiStateFlag = capabilities.contains("WEP") || capabilities.contains("PSK") || capabilities.contains("EAP");
+            //Wifi状态描述
+            String wifiState = wifiStateFlag ? "加密" : "开放";
+            holder.tvWifiStatus.setText(wifiState);
+            //信号强度
+            int imgLevel;
+            int level = lists.get(position).level;
+            if (level <= 0 && level >= -50) {
+                imgLevel = 5;
+            } else if (level < -50 && level >= -70) {
+                imgLevel = 4;
+            } else if (level < -70 && level >= -80) {
+                imgLevel = 3;
+            } else if (level < -80 && level >= -100) {
+                imgLevel = 2;
+            } else {
+                imgLevel = 1;
+            }
+            holder.tvWifiLevel.setText(imgLevel + "等级");
+        }
+
+        @Override
+        public int getItemCount() {
+            return lists == null ? 0 : lists.size();
+        }
+
+        public static class ViewHolder extends RecyclerView.ViewHolder {
+
+            TextView tvWifiName;
+            TextView tvWifiStatus;
+            TextView tvWifiLevel;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                tvWifiName = itemView.findViewById(R.id.tv_wifi_name);
+                tvWifiStatus = itemView.findViewById(R.id.tv_wifi_state);
+                tvWifiLevel = itemView.findViewById(R.id.tv_signal);
+            }
+        }
+
+        public interface OnItemClickListener {
+            void onItemClick(int position);
+        }
+    }
+
+    /**
+     * Wifi扫描广播接收器
+     */
+    private final BroadcastReceiver wifiScanReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context c, Intent intent) {
+            boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
+            Log.i("Network-Receiver" , "wifi" + success);
+            //处理扫描结果
+            wifiList.clear();
+            List<ScanResult> wifiListData = WifiHelper.getInstance().getWifiList();
+            wifiList.addAll(wifiListData);
+            //根据Level排序
+            Collections.sort(wifiList, (lhs, rhs) -> rhs.level - lhs.level);
+            if (wifiAdapter != null) {
+                wifiAdapter.notifyDataSetChanged();
+            }
+        }
+    };
+
+    private void test() {
         //打开或关闭移动数据
         AppNetworkUtils.setMobileDataEnabled(true);
         WifiHelper wifiHelper = WifiHelper.getInstance();
         wifiHelper.closeWifi();
         wifiHelper.openWifi();
         wifiHelper.closeAp(this);
-        wifiHelper.openAp(this,"","");
+        wifiHelper.openAp(this, "", "");
     }
 
 }

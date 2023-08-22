@@ -42,11 +42,11 @@ dependencies {
     //implementation project(path: ':ActivityManager')
     //implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':ZipFileLib')
-//    implementation 'com.github.yangchong211.YCCommonLib:ZipFileLib:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+//    implementation 'com.github.yangchong211.YCCommonLib:ZipFileLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
     implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
     implementation 'com.github.yangchong211.YCEfficient:AppProcessLib:1.3.1'
     //store磁盘分区库
-    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.9'
 }

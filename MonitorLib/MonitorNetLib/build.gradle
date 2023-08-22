@@ -37,15 +37,15 @@ dependencies {
     }
     implementation(rootProject.ext.dependencies["swiperefreshlayout"])
     implementation(rootProject.ext.dependencies["coordinatorlayout"])
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:AppCompress:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:AppScreenLib:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:ImageToolLib:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.8'
-    implementation 'com.github.yangchong211.YCCommonLib:BaseVpAdapter:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:BaseClassLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:AppCompress:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:AppScreenLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:AppMediaStore:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:ImageToolLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:BaseVpAdapter:1.4.9'
     //状态栏：https://github.com/yangchong211/YCStatusBar
     implementation 'com.github.yangchong211.YCStatusBar:StatusBarLib:1.4.6'
     //adapter:https://github.com/yangchong211/YCRefreshView

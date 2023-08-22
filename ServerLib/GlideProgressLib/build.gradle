@@ -45,5 +45,5 @@ dependencies {
     implementation rootProject.ext.dependencies["okhttp"]
     //implementation project(path: ':ToolUtilsLib')
     //工具类utils
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
 }

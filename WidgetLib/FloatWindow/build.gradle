@@ -31,5 +31,5 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     //同上上报库
-    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.9'
 }

@@ -35,7 +35,9 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     implementation 'com.google.zxing:core:3.3.3'
-    implementation project(path: ':ToolUtilsLib')
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.9'
+//    implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':ZXingCodeLib')
-    implementation project(path: ':AppEncryptLib')
+//    implementation project(path: ':AppEncryptLib')
 }

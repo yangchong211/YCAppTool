@@ -87,8 +87,9 @@ public class FilePrinterImpl extends AbsPrinter {
                     }
                 }
                 try {
-                    mWriter = new PrintWriter(
-                            new OutputStreamWriter(new FileOutputStream(logFile, true), "UTF-8"));
+                    FileOutputStream fileOutputStream = new FileOutputStream(logFile, true);
+                    OutputStreamWriter writer = new OutputStreamWriter(fileOutputStream, "UTF-8");
+                    mWriter = new PrintWriter(writer);
                 } catch (Throwable ignored) {
                 }
             } while (false);

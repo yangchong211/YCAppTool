@@ -32,14 +32,14 @@ dependencies {
     implementation(rootProject.ext.dependencies["recyclerview"])
     implementation project(path: ':EasyBleServer')
     //Context上下文库
-    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.9'
     //工具类utils
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
     //通用日志输出库
-    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.9'
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     //Application库
-    implementation 'com.github.yangchong211.YCCommonLib:ApplicationLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ApplicationLib:1.4.9'
 }
 
 

@@ -30,11 +30,11 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     api 'com.liulishuo.filedownloader:library:1.7.5'
     //权限库
-    implementation 'com.github.yangchong211.YCCommonLib:AppPermission:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppPermission:1.4.9'
     implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
     implementation project(path: ':ToolFileLib')
     implementation project(path: ':RoundCorners')
     //同上上报库
-    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.9'
 }
 

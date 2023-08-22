@@ -36,5 +36,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["annotation"])
-    implementation project(path: ':AppLogLib')
+    //implementation project(path: ':AppLogLib')
+    implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.9'
 }

@@ -30,14 +30,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':AppLogClient')
     //工具类utils
-    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
     //File文件库
-    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.9'
     //io流读写库
-    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.9'
     //同上上报库
-    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.8'
-    implementation project(path: ':ToolFileLib')
+    implementation 'com.github.yangchong211.YCCommonLib:EventUploadLib:1.4.9'
+    //implementation project(path: ':ToolFileLib')
     //implementation project(path: ':ToolUtilsLib')
     //implementation project(path: ':ToolFileLib')
     //implementation project(path: ':FileIoHelper')

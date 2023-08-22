@@ -32,9 +32,9 @@ dependencies {
     implementation rootProject.ext.dependencies["coreKtx"]
     implementation rootProject.ext.dependencies["gson"]
     //网络判断库
-    implementation 'com.github.yangchong211.YCCommonLib:NetWorkLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:NetWorkLib:1.4.9'
     //Context上下文库
-    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.9'
     api project(':TcpServerLib')
     implementation project(path: ':AppLogClient')
 }

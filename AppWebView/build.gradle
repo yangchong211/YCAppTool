@@ -34,5 +34,6 @@ dependencies {
     //api 'com.tencent.tbs.tbssdk:sdk:43967'
     implementation project(':WebViewLib')
     implementation project(':ToolUtilsLib')
-    implementation project(path: ':ToastUtils')
+//    implementation project(':ToastUtils')
+    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
 }

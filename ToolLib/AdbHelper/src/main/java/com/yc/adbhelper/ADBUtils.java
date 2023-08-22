@@ -4,18 +4,23 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 
 import androidx.annotation.IntRange;
 import androidx.annotation.RequiresPermission;
 
+import com.yc.appcontextlib.AppToolUtils;
+import com.yc.toolutils.AppActivityUtils;
 import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.AppTimeUtils;
+import com.yc.toolutils.CollectionUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ADBUtils {
+public final class ADBUtils {
 
     private ADBUtils() {
 
@@ -518,7 +523,7 @@ public class ADBUtils {
                         }
                     }
                 } catch (Exception e) {
-                    LogPrintUtils.eTag(TAG, e, "getActivityToLauncher %s", packageName);
+                    e.printStackTrace();
                 }
             }
         }
@@ -560,7 +565,7 @@ public class ADBUtils {
                     }
                 }
             } catch (Exception e) {
-                LogPrintUtils.eTag(TAG, e, "getWindowCurrent");
+                e.printStackTrace();
             }
         }
         return null;
@@ -605,7 +610,7 @@ public class ADBUtils {
                     }
                 }
             } catch (Exception e) {
-                LogPrintUtils.eTag(TAG, e, "getWindowCurrent2");
+                e.printStackTrace();
             }
         }
         return null;
@@ -655,7 +660,7 @@ public class ADBUtils {
                     }
                 }
             } catch (Exception e) {
-                LogPrintUtils.eTag(TAG, e, "getWindowCurrentToPackage");
+                e.printStackTrace();
             }
         }
         return null;
@@ -706,7 +711,7 @@ public class ADBUtils {
                     }
                 }
             } catch (Exception e) {
-                LogPrintUtils.eTag(TAG, e, "getActivityCurrent");
+                e.printStackTrace();
             }
         }
         return null;
@@ -811,7 +816,7 @@ public class ADBUtils {
                 }
                 return lists;
             } catch (Exception e) {
-                LogPrintUtils.eTag(TAG, e, "getActivitysToPackageLists");
+                e.printStackTrace();
             }
         }
         return null;
@@ -837,7 +842,7 @@ public class ADBUtils {
         // 获取
         List<String> lists = getActivitysToPackageLists(packageName);
         // 数据长度
-        int length = CollectionUtils.length(lists);
+        int length = lists == null ? 0 : lists.size();
         // 防止数据为 null
         if (length >= 2) { // 两个页面以上, 才能够判断是否重复
             try {
@@ -853,7 +858,7 @@ public class ADBUtils {
                     }
                 }
             } catch (Exception e) {
-                LogPrintUtils.eTag(TAG, e, "isActivityTopRepeat");
+                e.printStackTrace();
             }
         }
         return false;
@@ -877,7 +882,7 @@ public class ADBUtils {
         // 获取
         List<String> lists = getActivitysToPackageLists(packageName);
         // 数据长度
-        int length = CollectionUtils.length(lists);
+        int length = lists == null ? 0 : lists.size();
         // 防止数据为 null
         if (length >= 2) { // 两个页面以上, 才能够判断是否重复
             // 循环判断
@@ -895,7 +900,7 @@ public class ADBUtils {
                         }
                     }
                 } catch (Exception e) {
-                    LogPrintUtils.eTag(TAG, e, "isActivityTopRepeat");
+                    e.printStackTrace();
                 }
             }
         }
@@ -924,7 +929,7 @@ public class ADBUtils {
         // 获取
         List<String> lists = getActivitysToPackageLists(packageName);
         // 数据长度
-        int length = CollectionUtils.length(lists);
+        int length = lists == null ? 0 : lists.size();
         // 防止数据为 null
         if (length >= 2) { // 两个页面以上, 才能够判断是否重复
             try {
@@ -942,7 +947,7 @@ public class ADBUtils {
                     }
                 }
             } catch (Exception e) {
-                LogPrintUtils.eTag(TAG, e, "getActivityTopRepeatCount");
+                e.printStackTrace();
             }
         }
         return number;
@@ -966,7 +971,7 @@ public class ADBUtils {
         // 获取
         List<String> lists = getActivitysToPackageLists(packageName);
         // 数据长度
-        int length = CollectionUtils.length(lists);
+        int length = lists == null ? 0 : lists.size();
         // 防止数据为 null
         if (length >= 2) { // 两个页面以上, 才能够判断是否重复
             // 循环判断
@@ -991,7 +996,7 @@ public class ADBUtils {
                         return number;
                     }
                 } catch (Exception e) {
-                    LogPrintUtils.eTag(TAG, e, "getActivityTopRepeatCount");
+                    e.printStackTrace();
                 }
             }
         }
@@ -1047,13 +1052,13 @@ public class ADBUtils {
     public static boolean startSelfApp(final boolean closeActivity) {
         try {
             // 获取包名
-            String packageName = AppUtils.getPackageName();
+            String packageName = AppToolUtils.getApp().getPackageName();
             // 获取 Launcher Activity
-            String activity = ActivityUtils.getLauncherActivity();
+            String activity = AppActivityUtils.getLauncherActivity();
             // 跳转应用启动页 ( 启动应用 )
             return startActivity(packageName + "/" + activity, closeActivity);
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "startSelfApp");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1100,7 +1105,7 @@ public class ADBUtils {
             ShellUtils.CommandResult result = ShellUtils.execCmd(cmd, true);
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "startActivity");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1138,7 +1143,7 @@ public class ADBUtils {
             ShellUtils.CommandResult result = ShellUtils.execCmd(cmd, true);
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "startService");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1176,7 +1181,7 @@ public class ADBUtils {
             ShellUtils.CommandResult result = ShellUtils.execCmd(cmd, true);
             return result.isSuccess3();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "stopService");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1201,7 +1206,7 @@ public class ADBUtils {
             );
             return result.isSuccess3();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "sendBroadcastAll");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1232,7 +1237,7 @@ public class ADBUtils {
             );
             return result.isSuccess3();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "sendBroadcast");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1254,7 +1259,7 @@ public class ADBUtils {
             );
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "kill");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1278,7 +1283,7 @@ public class ADBUtils {
             );
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "sendTrimMemory");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1360,7 +1365,7 @@ public class ADBUtils {
             );
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "tap");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1425,7 +1430,7 @@ public class ADBUtils {
             );
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "swipe");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1450,7 +1455,7 @@ public class ADBUtils {
             ); // false 可以执行
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "text");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1474,7 +1479,7 @@ public class ADBUtils {
             ); // false 可以执行
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "keyevent");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1513,7 +1518,7 @@ public class ADBUtils {
             );
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "screencap");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1589,7 +1594,7 @@ public class ADBUtils {
             );
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "screenrecord");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1607,7 +1612,7 @@ public class ADBUtils {
                 return result.successMsg;
             }
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "wifiConf");
+            e.printStackTrace();
         }
         return null;
     }
@@ -1642,7 +1647,7 @@ public class ADBUtils {
             );
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "setSystemTime");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1663,7 +1668,7 @@ public class ADBUtils {
             );
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "setSystemTime2");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1679,13 +1684,11 @@ public class ADBUtils {
             String cmd = "date %s";
             // 执行 shell
             ShellUtils.CommandResult result = ShellUtils.execCmd(
-                    String.format(cmd, DateUtils.formatTime(
-                            millis, DevFinal.TIME.SPECIAL_mmddHHmmyyyyss
-                    )), true
+                    String.format(cmd, AppTimeUtils.millis2String(millis)), true
             );
             return result.isSuccess2();
         } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "setSystemTime2");
+            e.printStackTrace();
         }
         return false;
     }
@@ -1693,58 +1696,6 @@ public class ADBUtils {
     // =============
     // = 刷机相关命令 =
     // =============
-
-    /**
-     * 关机 ( 需要 root 权限 )
-     * @return {@code true} success, {@code false} fail
-     */
-    public static boolean shutdown() {
-        try {
-            ShellUtils.execCmd("reboot -p", true);
-            Intent intent = new Intent("android.intent.action.ACTION_REQUEST_SHUTDOWN");
-            intent.putExtra("android.intent.extra.KEY_CONFIRM", false);
-            return AppUtils.startActivity(intent);
-        } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "shutdown");
-        }
-        return false;
-    }
-
-    /**
-     * 重启设备 ( 需要 root 权限 )
-     * @return {@code true} success, {@code false} fail
-     */
-    public static boolean reboot() {
-        try {
-            ShellUtils.execCmd("reboot", true);
-            Intent intent = new Intent(Intent.ACTION_REBOOT);
-            intent.putExtra("nowait", 1);
-            intent.putExtra("interval", 1);
-            intent.putExtra("window", 0);
-            return AppUtils.sendBroadcast(intent);
-        } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "reboot");
-        }
-        return false;
-    }
-
-    /**
-     * 重启设备 ( 需要 root 权限 )
-     * @param reason 传递给内核来请求特殊的引导模式, 如 "recovery"
-     *               重启到 Fastboot 模式 bootloader
-     * @return {@code true} success, {@code false} fail
-     */
-    @RequiresPermission(Manifest.permission.REBOOT)
-    public static boolean reboot(final String reason) {
-        if (TextUtils.isEmpty(reason)) return false;
-        try {
-            AppUtils.getPowerManager().reboot(reason);
-            return true;
-        } catch (Exception e) {
-            LogPrintUtils.eTag(TAG, e, "reboot");
-        }
-        return false;
-    }
 
     /**
      * 重启引导到 recovery ( 需要 root 权限 )
@@ -2062,7 +2013,7 @@ public class ADBUtils {
                     // 返回对应的数据
                     return builder.toString();
                 } catch (Exception e) {
-                    LogPrintUtils.eTag(TAG, e, "getIMEI");
+                    e.printStackTrace();
                 }
             }
         } else {
@@ -2083,7 +2034,7 @@ public class ADBUtils {
                         }
                     }
                 } catch (Exception e) {
-                    LogPrintUtils.eTag(TAG, e, "getIMEI");
+                    e.printStackTrace();
                 }
             }
         }

@@ -34,11 +34,16 @@ dependencies {
     api project(path: ':MonitorCpuLib')
     //卡顿采集工具
     api project(path: ':MonitorCatonLib')
-    //anr 采集工具
+    //anr采集工具
     api project(path: ':MonitorAnrLib')
-    //leak 采集工具
+    //leak采集工具
     api project(path: ':MonitorLeakLib')
+    //内存采集工具
+    api project(path: ':MonitorMemory')
+    //线程卡顿工具
+    api project(path: ':MonitorThread')
+    //流量采集工具
     //工具类utils
-    //implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.8'
+    //implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
 
 }

@@ -27,11 +27,11 @@ dependencies {
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
     //图片工具库
-    implementation 'com.github.yangchong211.YCCommonLib:ImageToolLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ImageToolLib:1.4.9'
     //File文件库
-    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.9'
     //io流读写库
-    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.8'
+    implementation 'com.github.yangchong211.YCCommonLib:FileIoHelper:1.4.9'
     //implementation project(path: ':ImageToolLib')
     //implementation project(path: ':ToolFileLib')
     //implementation project(path: ':FileIoHelper')

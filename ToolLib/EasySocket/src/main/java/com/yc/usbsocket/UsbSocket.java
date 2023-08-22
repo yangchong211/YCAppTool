@@ -1,16 +1,14 @@
 package com.yc.usbsocket;
 import java.io.Serializable;
 
-/**
- * Usb通信机制的Socket类封装,最原始的协议，这里不做业务相关的操作
- */
+
 public class UsbSocket implements Serializable {
 
     private static final String TAG = UsbSocket.class.getSimpleName();
     //volatile防止指令重排序，内存可见(缓存中的变化及时刷到主存，并且其他的线程副本内存失效，必须从主存获取)，但不保证原子性
     private static volatile UsbSocket singleton = null;
     //USB交互的服务
-    private USBThread usbThread;
+    private UsbThread usbThread;
 
     /**
      * 获取单例
@@ -48,7 +46,7 @@ public class UsbSocket implements Serializable {
         if (singleton != null) {
             throw new RuntimeException("对象已存在不可重复创建");
         }
-        usbThread = new USBThread(this);
+        usbThread = new UsbThread(this);
     }
 
     //解决被序列化破坏单例的问题
@@ -74,7 +72,7 @@ public class UsbSocket implements Serializable {
         if(usbThread != null){
             usbThread.release();
         }
-        usbThread = new USBThread(this);
+        usbThread = new UsbThread(this);
         usbThread.start();
     }
 
