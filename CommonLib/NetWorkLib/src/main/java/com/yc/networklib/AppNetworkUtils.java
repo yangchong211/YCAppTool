@@ -214,7 +214,9 @@ public final class AppNetworkUtils {
      */
     public static boolean isEthernetAvailable() {
         NetworkInfo networkInfo = getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isAvailable()
+        return networkInfo != null
+                && networkInfo.isConnected()
+                && networkInfo.isAvailable()
                 && networkInfo.getType() == ConnectivityManager.TYPE_ETHERNET;
     }
 
