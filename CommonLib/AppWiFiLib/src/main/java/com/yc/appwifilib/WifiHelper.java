@@ -358,27 +358,6 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
         return config;
     }
 
-    /**
-     * 得到配置好的网络连接
-     *
-     * @param ssid
-     * @return
-     */
-    @SuppressLint("MissingPermission")
-    private WifiConfiguration isExist(String ssid) {
-        List<WifiConfiguration> configs = getConfiguredNetworks();
-        if (configs == null) {
-            Log.e(TAG, "isExist: null");
-            return null;
-        }
-        for (WifiConfiguration config : configs) {
-            if (config.SSID.equals("\"" + ssid + "\"")) {
-                return config;
-            }
-        }
-        return null;
-    }
-
     public boolean isApEnable() {
         return WifiToolUtils.isApEnable();
     }

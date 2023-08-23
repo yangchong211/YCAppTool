@@ -4,6 +4,7 @@ package com.yc.appwifilib;
 import static android.content.Context.WIFI_SERVICE;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -196,6 +197,25 @@ public class BaseWifiManager {
         return -1;
     }
 
+    /**
+     * 得到配置好的网络连接
+     *
+     * @param ssid
+     * @return
+     */
+    @SuppressLint("MissingPermission")
+    WifiConfiguration isExist(String ssid) {
+        List<WifiConfiguration> configs = getConfiguredNetworks();
+        if (configs == null) {
+            return null;
+        }
+        for (WifiConfiguration config : configs) {
+            if (config.SSID.equals("\"" + ssid + "\"")) {
+                return config;
+            }
+        }
+        return null;
+    }
 
     /**
      * 获取配置过的WIFI信息
