@@ -193,6 +193,32 @@ public final class AppNetworkUtils {
     }
 
     /**
+     * 判断 以太网 是否连接状态
+     * 如果该连接的网络无法上网，也会返回true
+     * <p>需添加权限
+     * {@code <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />}</p>
+     *
+     * @return {@code true}: 连接<br>{@code false}: 未连接
+     */
+    @SuppressLint("MissingPermission")
+    public static boolean isEthernetConnected() {
+        NetworkInfo networkInfo = getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected()
+                && networkInfo.getType() == ConnectivityManager.TYPE_ETHERNET;
+    }
+
+    /**
+     * 返回以太网状态，判断Wi-Fi是否可用
+     *
+     * @return  是否可用
+     */
+    public static boolean isEthernetAvailable() {
+        NetworkInfo networkInfo = getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isAvailable()
+                && networkInfo.getType() == ConnectivityManager.TYPE_ETHERNET;
+    }
+
+    /**
      * 获取网络运营商名称
      * <p>中国移动、如中国联通、中国电信</p>
      *
