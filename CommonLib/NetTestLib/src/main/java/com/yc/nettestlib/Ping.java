@@ -1,4 +1,4 @@
-package com.yc.monitorpinglib;
+package com.yc.nettestlib;
 
 import android.content.Context;
 import android.os.Environment;
@@ -44,8 +44,7 @@ public class Ping {
         // 超时应该在3钞以上
         int timeOut = 3000;
         // 当返回值是true时，说明host是可用的，false则不可。
-        boolean status = InetAddress.getByName(ipAddress).isReachable(timeOut);
-        return status;
+        return InetAddress.getByName(ipAddress).isReachable(timeOut);
     }
 
     /**
@@ -73,7 +72,6 @@ public class Ping {
             runtime = Runtime.getRuntime();
             process = runtime.exec("ping " + hostName);
             BufferedReader buf = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            int k = 0;
             while ((line = buf.readLine()) != null) {
                 if (line.length() > 0 && line.indexOf("time=") > 0) {
                     String string = line.substring(line.indexOf("time="));

@@ -40,6 +40,11 @@
 - 如何获取默认网络
     - 调用api如下所示：manager.getActiveNetworkInfo()，获取默认网络NetworkInfo
     - 调用api如下所示：manager.getActiveNetwork()，获取默认网络Network
+- 如何获取默认网络类型
+    - 通过AppNetworkUtils.getNetworkType()即可获取当前的网络类型【多网络存在下也可以】
+    - 经过：registerDefaultNetworkCallback 注册默认网络回调可以发现，获取默认网络是正确的。
+
+
 
 
 #### 1.5 如何检查以太网
