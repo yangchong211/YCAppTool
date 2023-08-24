@@ -27,11 +27,25 @@
 
 
 
+
 #### 1.3 判断是否可用
 - 如何判断是否连接
     - 调用api如下所示：networkInfo.isAvailable()。
 - 举一个简单例子
     - 你连接了A网络Wi-Fi，但是无法使用网络，然后你使用验证码验证后，网络可以访问百度了。此时才是网络可用状态。
+
+
+
+#### 1.4 获取默认网络
+- 如何获取默认网络
+    - 调用api如下所示：manager.getActiveNetworkInfo()，获取默认网络NetworkInfo
+    - 调用api如下所示：manager.getActiveNetwork()，获取默认网络Network
+
+
+#### 1.5 如何检查以太网
+- 在Android提供的"设置"菜单中有"以太网连接选项"，从中可以配置设备的以太网连接。
+    - 为了检查以太网连接状态，我们读取系统文件" / sys / class / net / eth0"，该文件可以返回正确的以太网状态
+
 
 
 

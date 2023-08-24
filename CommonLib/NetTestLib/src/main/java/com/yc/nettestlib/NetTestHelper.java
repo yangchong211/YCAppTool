@@ -43,6 +43,22 @@ public class NetTestHelper {
         pingOutside(listener);
     }
 
+    public boolean pingAddress() {
+        String ipAddress = "www.baidu.com";
+        try {
+            //-c 1是指ping的次数为1次，-w 3是指超时时间为3s
+            Process process = Runtime.getRuntime()
+                    .exec("ping -c 1 -w 3 " + ipAddress);
+            //status为0表示ping成功
+            int status = process.waitFor();
+            if (status == 0) {
+                return true;
+            }
+        }catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     /**
      * ping功能，有响应代表成功

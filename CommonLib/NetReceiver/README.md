@@ -16,12 +16,13 @@
     - Android 5.0 提供了新的多网络 API，允许您的应用动态扫描具有特定能力的可用网络，它也可以监听到网络状态变化。
 
 
+
 #### 1.2 全局网络监听
 - AndroidAndroid针对网络状态变化的监听，在应用内我们通用需要监听设备网络状态的变化，作出相应的业务处理，需要一个方便的、全局的监听实现。
 - 针对不同设备的系统版本，使用不同的API方法实现；注意使用广播监听网络状态在高版本的适配问题；
     - 1、Build.VERSION.SDK_INT >= Build.VERSION_CODES.N，使用connectivityManager.registerDefaultNetworkCallback()方法；
     - 2、Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP，使用connectivityManager.registerNetworkCallback(networkRequest, networkCallback);方法；
-    - 3、其它系统版本使用广播监听；
+    - 3、其它系统版本使用广播监听；这个目前是使用比较多的！
     - 4、可以添加多个页面的监听，当某个页面需要监听网络时，就可以添加到监听者集合中，页面关闭时移除这个监听者；
 
 

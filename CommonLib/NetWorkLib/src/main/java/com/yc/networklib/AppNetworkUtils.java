@@ -6,9 +6,13 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import com.yc.appcontextlib.AppToolUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 
 
@@ -75,7 +79,7 @@ public final class AppNetworkUtils {
     /**
      * 返回网络状态，判断网络是否可用
      *
-     * @return  是否可用
+     * @return 是否可用
      */
     public static boolean isAvailable() {
         NetworkInfo info = getActiveNetworkInfo();
@@ -182,7 +186,7 @@ public final class AppNetworkUtils {
     /**
      * 返回Wi-Fi状态，判断Wi-Fi是否可用
      *
-     * @return  是否可用
+     * @return 是否可用
      */
     public static boolean isWifiAvailable() {
         NetworkInfo networkInfo = getActiveNetworkInfo();
@@ -210,7 +214,7 @@ public final class AppNetworkUtils {
     /**
      * 返回以太网状态，判断Wi-Fi是否可用
      *
-     * @return  是否可用
+     * @return 是否可用
      */
     public static boolean isEthernetAvailable() {
         NetworkInfo networkInfo = getActiveNetworkInfo();
@@ -309,6 +313,42 @@ public final class AppNetworkUtils {
             }
         }
         return netType;
+    }
+
+    /**
+     * 检查以太网状态
+     *
+     * @return true表示以太网
+     */
+    public static boolean checkEthernet() {
+        Process p = null;
+        BufferedReader in = null;
+        try {
+            p = Runtime.getRuntime().exec("cat /sys/class/net/eth0/carrier");
+            in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line = null;
+            String value = "";
+            while ((line = in.readLine()) != null) {
+                Log.i("tag", "carrier is " + line);
+                if ("0".equals(line)) {
+                    return false;
+                }
+                if ("1".equals(line)) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            Log.e("tag", e.getMessage());
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
     }
 
 }
