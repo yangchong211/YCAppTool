@@ -50,7 +50,9 @@
 #### 1.5 如何检查以太网
 - 在Android提供的"设置"菜单中有"以太网连接选项"，从中可以配置设备的以太网连接。
     - 为了检查以太网连接状态，我们读取系统文件" / sys / class / net / eth0"，该文件可以返回正确的以太网状态
-
+- 错误的方式，网络上有一些用getNetworkInfo检测以太网
+    - connectMgr.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET)。这种方式是不可行的。
+    - NetworkInfo：描述指定类型的网络接口的状态（目前为移动网络或 Wi-Fi）。
 
 
 

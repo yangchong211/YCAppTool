@@ -9,11 +9,23 @@
 
 
 ### 01.基础概念说明
+#### 1.0 业务场景说明
+- Wi-Fi连接业务场景
+    - 扫描二维码自动连接WiFi的功能。识别二维码解析数据，拿到Wi-Fi的ssid和pwd，然后连接网络。
+
+
+
 #### 1.1 Wi-Fi相关文档
 - Wi-Fi相关文档
     - https://source.android.com/docs/core/connect/wifi-overview?hl=zh-cn
 - API相关文档
     - https://developer.android.com/reference/android/net/wifi/WifiManager.html
+- 其他的一些文档
+    * WifiManager : https://developer.android.com/reference/android/net/wifi/WifiManager.html
+    * WifiConfiguration : https://developer.android.com/reference/android/net/wifi/WifiConfiguration.html
+    * ScanResult : https://developer.android.com/reference/android/net/wifi/ScanResult.html
+    * WifiInfo : https://developer.android.com/reference/android/net/wifi/WifiInfo.html
+
 
 
 #### 1.2 WLAN基础功能
@@ -67,7 +79,7 @@
 
 
 #### 2.2 开启Wi-Fi操作
-- 开启WiFi一般需要一定的时间，因此不能立马去连接，需要等WiFi稳定可用，经测试一般2.5秒即可完成
+- 开启WiFi一般需要一定的时间，因此不能立马去连接，需要等WiFi稳定可用，经测试一般2.5秒即可完成。
 
 
 
@@ -116,6 +128,19 @@
 #### 4.2 Wi-Fi连接失败
 - 举一个实际场景
     - 使用ssid和pwd连接某个Wi-Fi网络，连接成功。这个时候关掉，然后重新连接，则会频繁出现连接不上的问题。目前该问题已经存在，也是一个历史问题！
+
+
+
+#### 4.3 Wi-Fi判断无效
+- 先看一个实际场景
+    - 连接上Wi-Fi为Tencent-GuessWifi后，来看一下一些api获取的结果
+    - isWifiConnected，判断结果为true，表示Wi-Fi已经连接上；
+    - isWifiAvailable，判断结果为true，表示Wi-Fi是可用的状态；
+    - isConnected，获取当前活跃网络，判断结果为true，表示当前活跃网络是可用状态；
+    - isWifiEnable()，判断Wi-Fi是否是打开状态，判断结果是true
+- 然后结果是怎么样的
+    - 结果是，Tencent-GuessWifi是连接上了，但是这个Wi-Fi无法请求网络，可以ping通，但是连接不了外网，比如无法访问百度新闻。
+    - 这个是为什么呢，原因是因为该网络需要使用手机号+验证码，验证之后才可以上网
 
 
 
