@@ -15,7 +15,7 @@ import com.yc.appstatuslib.info.AppBatteryInfo
  * revise :
  */
 class BatteryBroadcastReceiver(private val mManager: AppStatusManager?) : BroadcastReceiver() {
-    
+
     var batteryInfo: AppBatteryInfo? = AppBatteryInfo()
         private set
 

@@ -28,41 +28,41 @@ import java.util.*
 class AppStatusManager private constructor(builder: Builder) {
 
     private val mAppStatusListener: MutableList<AppStatusListener>?
-    private var mBatteryReceiver: BatteryBroadcastReceiver ?=null
-    private var mGpsReceiver: GpsBroadcastReceiver ?=null
-    private var mNetWorkReceiver: NetWorkBroadcastReceiver ?=null
-    private var mScreenReceiver: ScreenBroadcastReceiver ?=null
-    private var mWifiBroadcastReceiver: WifiBroadcastReceiver ?=null
-    private var mBluetoothReceiver: BluetoothBroadcastReceiver ?=null
+    private var mBatteryReceiver: BatteryBroadcastReceiver? = null
+    private var mGpsReceiver: GpsBroadcastReceiver? = null
+    private var mNetWorkReceiver: NetWorkBroadcastReceiver? = null
+    private var mScreenReceiver: ScreenBroadcastReceiver? = null
+    private var mWifiBroadcastReceiver: WifiBroadcastReceiver? = null
+    private var mBluetoothReceiver: BluetoothBroadcastReceiver? = null
     private val mContext: Context?
     private val threadSwitchOn: Boolean
-    private val batterySwitchOn : Boolean
-    private val gpsSwitchOn : Boolean
-    private val networkSwitchOn : Boolean
-    private val screenSwitchOn : Boolean
-    private val wifiSwitchOn : Boolean
-    private val bluetoothSwitchOn : Boolean
+    private val batterySwitchOn: Boolean
+    private val gpsSwitchOn: Boolean
+    private val networkSwitchOn: Boolean
+    private val screenSwitchOn: Boolean
+    private val wifiSwitchOn: Boolean
+    private val bluetoothSwitchOn: Boolean
 
     /**
      * 注册广播
      */
     private fun init() {
-        if (batterySwitchOn){
+        if (batterySwitchOn) {
             initBatteryReceiver(mContext)
         }
-        if (gpsSwitchOn){
+        if (gpsSwitchOn) {
             initGpsReceiver(mContext)
         }
-        if (networkSwitchOn){
+        if (networkSwitchOn) {
             initNetworkReceiver(mContext)
         }
-        if (screenSwitchOn){
+        if (screenSwitchOn) {
             initScreenReceiver(mContext)
         }
-        if (wifiSwitchOn){
+        if (wifiSwitchOn) {
             initWifiReceiver(mContext)
         }
-        if (bluetoothSwitchOn){
+        if (bluetoothSwitchOn) {
             initBluetoothReceiver(mContext)
         }
     }
@@ -136,19 +136,19 @@ class AppStatusManager private constructor(builder: Builder) {
      * 解绑操作【App推出的时候可以调用】
      */
     fun destroy() {
-        if (mBatteryReceiver!=null){
+        if (mBatteryReceiver != null) {
             mContext?.unregisterReceiver(mBatteryReceiver)
         }
-        if (mGpsReceiver!=null){
+        if (mGpsReceiver != null) {
             mContext?.unregisterReceiver(mGpsReceiver)
         }
-        if (mNetWorkReceiver!=null){
+        if (mNetWorkReceiver != null) {
             mContext?.unregisterReceiver(mNetWorkReceiver)
         }
-        if (mScreenReceiver!=null){
+        if (mScreenReceiver != null) {
             mContext?.unregisterReceiver(mScreenReceiver)
         }
-        if (mBluetoothReceiver!=null){
+        if (mBluetoothReceiver != null) {
             mContext?.unregisterReceiver(mBluetoothReceiver)
         }
         mAppStatusListener?.clear()
@@ -161,7 +161,7 @@ class AppStatusManager private constructor(builder: Builder) {
      * 注册广播监听回调
      */
     fun registerAppStatusListener(listener: AppStatusListener) {
-        if (mAppStatusListener?.contains(listener) != true){
+        if (mAppStatusListener?.contains(listener) != true) {
             mAppStatusListener?.add(listener)
         }
     }
@@ -360,6 +360,7 @@ class AppStatusManager private constructor(builder: Builder) {
                 context == null -> {
                     throw NullPointerException("context is null")
                 }
+
                 else -> {
                     AppStatusManager(this)
                 }
