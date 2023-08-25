@@ -38,7 +38,8 @@ include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
         ':GsonServer', ':IpcServer', ':ObjectEqualLib', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker', ':NetChange',
-        ':GlideProgressLib', ':CompressServer', ':RetrofitNetLib', ':Transformation', ':GrpcServer'
+        ':GlideProgressLib', ':CompressServer', ':RetrofitNetLib', ':Transformation', ':GrpcServer',
+        ':HeartBeatServer'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
@@ -62,6 +63,7 @@ project(':TcpServerLib').projectDir = new File('ServerLib/TcpServerLib')
 project(':TcpManager').projectDir = new File('ServerLib/TcpManager')
 project(':GrpcServer').projectDir = new File('ServerLib/GrpcServer')
 project(':NetChange').projectDir = new File('ServerLib/NetChange')
+project(':HeartBeatServer').projectDir = new File('ServerLib/HeartBeatServer')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
