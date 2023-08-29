@@ -89,7 +89,7 @@ public final class WifiToolUtils {
 
     public static WifiModeEnum getSecurityMode(String ssid) {
         List<ScanResult> wifiList = getWifiList();
-        if (wifiList.size() >0){
+        if (wifiList.size() > 0) {
             for (ScanResult scanResult : wifiList) {
                 if (scanResult == null) {
                     continue;
@@ -113,7 +113,7 @@ public final class WifiToolUtils {
             return WifiModeEnum.OPEN;
         }
         String capabilities = scanResult.capabilities;
-        AppLogUtils.d("Network-Wifi:" , "getSecurityMode " + capabilities);
+        AppLogUtils.d("Network-Wifi:", "getSecurityMode " + capabilities);
         if (capabilities == null || capabilities.isEmpty()) {
             return WifiModeEnum.OPEN;
         }

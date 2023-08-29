@@ -161,6 +161,10 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
 
     /**
      * 连接到开放网络
+     * WIFI 连接
+     * 需要用到的 API
+     * addNetwork(WifiConfiguration config)
+     * enableNetwork(int netId, boolean attemptConnect)
      *
      * @param ssid 热点名
      * @return 配置是否成功

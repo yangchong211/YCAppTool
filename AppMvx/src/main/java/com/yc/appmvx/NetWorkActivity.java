@@ -114,7 +114,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
                             connectTest("iPhone","yc123456");
                         }
                     }
-                },3000);
+                },5000);
             }
         } else if (v == tvWifiScan) {
             if (!WifiHelper.getInstance().isWifiEnable()) {
@@ -187,6 +187,7 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         sb.append("\n获取开启便携热点后自身热点IP地址：").append(wifiHelper.getLocalIp());
         WifiModeEnum securityMode = WifiToolUtils.getSecurityMode(wifiHelper.getSsid());
         sb.append("\n获取WIFI的加密方式：").append(securityMode);
+        sb.append("\n获取iPhone的WIFI的加密方式：").append(WifiToolUtils.getSecurityMode("iPhone"));
 
         sb.append("\n\n下面是网络Wi-Fi工具：");
         tvContent.setText(sb.toString());

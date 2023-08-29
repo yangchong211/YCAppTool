@@ -66,6 +66,18 @@
     - 用ScanResult.capabilities来获取认证方式。capabilities的格式是（认证标准+秘钥管理+加密方案）。
 
 
+#### 1.5 连接Wi-Fi的流程
+- 注意事项
+    - 请注意！此代码在Android10 API29的版本上已经无法使用 在新的API 29的SDK中 enableNetwork() 方法始终会返回false， 如果你非要使用可以考虑将API降到28。
+- 流程比较长，大致是这样的:
+    - 1.搜索WiFi,找到指定WiFi 获取名称/地址/加密方式,以及你自己知道的WiFi密码
+    - 2.创建WiFi配置信息WifiConfiguration, 添加WiFi名称,地址
+    - 3.在根据加密方式以对应的方式添加密码到WifiConfiguration
+    - 4.将WiFi配置WifiConfiguration,添加到以配置的网络列表里addNetwork(wifiConfiguration);
+    - 5.获取已经配置好的网络列表mWifiManager.getConfiguredNetworks();,找到指定WiFi,获取id
+    - 6.断开现在正在连接的WiFi,输入id启用设置好的WiFi,重新连接
+
+
 
 ### 02.常见思路和做法
 #### 2.1 连接Wi-Fi方式
@@ -84,6 +96,9 @@
 
 
 #### 2.3 连接Wi-Fi步骤
+- 连接Wi-Fi需要用到的核心API
+    - addNetwork(WifiConfiguration config)，添加 WifiConfiguration
+    - enableNetwork(int netId, boolean attemptConnect)，启用并尝试连接到 wifi
 - 第一步：判断并开启Wi-Fi
     - 判断当前手机wifi网络是否开启可用。如果不可用，则需要首先打开Wi-Fi开关。
     - 打开关闭wifi使用wifiManager.setWifiEnabled()的方法，打开关闭前，先要判断wifi的状态，使用isWifiEnabled()方法。
@@ -108,6 +123,27 @@
 - 关于Wi-Fi扫描一些说明
     - 具体可以看：https://developer.android.google.cn/guide/topics/connectivity/wifi-scan?hl=zh-cn
 
+
+
+#### 2.5 获取连接Wi-Fi信息
+- 如何获取连接Wi-Fi的信息
+    - 通过 ConnectivityManager 的 getActiveNetworkInfo() 方法获取到当前连接的网络信息；
+    - 通过 WifiManager 的 getConnectionInfo() 方法获取当前连接的 WIFI 信息；根据当前 WIFI 的 networkId 获取到当前 WIFI 的配置和状态。
+
+
+
+
+#### 2.7 监听Wi-Fi广播
+- ConnectivityManager.CONNECTIVITY_ACTION
+    - "android.net.conn.CONNECTIVITY_CHANGE"，网络连接发生变化时的广播，如：建立连接或断开连接等
+- WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION
+    - "android.net.wifi.CONFIGURED_NETWORKS_CHANGE"，已配置的 WIFI 网络发生变化时的广播，如：添加，更新或删除等
+- WifiManager.LINK_CONFIGURATION_CHANGED_ACTION
+    - "android.net.wifi.LINK_CONFIGURATION_CHANGED"，WIFI 链接配置发生变化时的广播
+- WifiManager.NETWORK_STATE_CHANGED_ACTION
+    - "android.net.wifi.STATE_CHANGE"，WIFI 的连接状态发生变化时的广播
+- WifiManager.SUPPLICANT_STATE_CHANGED_ACTION
+    - "android.net.wifi.supplicant.STATE_CHANGE"，与 WIFI 建立连接的状态发生变化时的广播，如：密码错误等
 
 
 
