@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.yc.appcontextlib.AppToolUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -86,14 +87,36 @@ public final class WifiToolUtils {
         }
     }
 
+    public static WifiModeEnum getSecurityMode(String ssid) {
+        List<ScanResult> wifiList = getWifiList();
+        if (wifiList.size() >0){
+            for (ScanResult scanResult : wifiList) {
+                if (scanResult == null) {
+                    continue;
+                }
+                if (ssid.equals(scanResult.SSID)) {
+                    return getSecurityMode(scanResult);
+                }
+            }
+        }
+        return WifiModeEnum.OPEN;
+    }
+
     /**
      * 获取WIFI的加密方式
      *
      * @param scanResult WIFI信息
      * @return 加密方式
      */
-    public static WifiModeEnum getSecurityMode(@NonNull ScanResult scanResult) {
+    public static WifiModeEnum getSecurityMode(ScanResult scanResult) {
+        if (scanResult == null) {
+            return WifiModeEnum.OPEN;
+        }
         String capabilities = scanResult.capabilities;
+        AppLogUtils.d("Network-Wifi:" , "getSecurityMode " + capabilities);
+        if (capabilities == null || capabilities.isEmpty()) {
+            return WifiModeEnum.OPEN;
+        }
         //通过判断capabilities字段是否包含对应的string来判断属于何种保护方式
         if (capabilities.contains("WPA2")) {
             return WifiModeEnum.WPA2;

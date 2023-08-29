@@ -16,6 +16,8 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
+import com.yc.toolutils.AppLogUtils;
+
 import java.util.List;
 
 public class BaseWifiManager {
@@ -64,6 +66,7 @@ public class BaseWifiManager {
         }
         //通过热点名获取热点配置
         WifiConfiguration wifiConfiguration = getConfigFromConfiguredNetworksBySsid(ssid);
+        AppLogUtils.d("Network-Wifi:" , "setOpenNetwork " + wifiConfiguration);
         if (null == wifiConfiguration) {
             // 生成配置
             WifiConfiguration wifiConfig = new WifiConfiguration();
@@ -101,6 +104,7 @@ public class BaseWifiManager {
             return -1;
         }
         WifiConfiguration wifiConfiguration = getConfigFromConfiguredNetworksBySsid(ssid);
+        AppLogUtils.d("Network-Wifi:" , "setWEPNetwork " + wifiConfiguration);
         if (null == wifiConfiguration) {
             // 添加配置
             WifiConfiguration wifiConfig = new WifiConfiguration();
@@ -136,6 +140,7 @@ public class BaseWifiManager {
             return -1;
         }
         WifiConfiguration wifiConfiguration = getConfigFromConfiguredNetworksBySsid(ssid);
+        AppLogUtils.d("Network-Wifi:" , "setWPA2Network " + wifiConfiguration);
         if (null == wifiConfiguration) {
             WifiConfiguration wifiConfig = new WifiConfiguration();
             wifiConfig.SSID = WifiToolUtils.addDoubleQuotation(ssid);
@@ -279,6 +284,8 @@ public class BaseWifiManager {
             boolean isEnableNetwork = wifiManager.enableNetwork(networkId, true);
             boolean isSave = wifiManager.saveConfiguration();
             boolean isReconnect = wifiManager.reconnect();
+            AppLogUtils.d("Network-Wifi:" , "enableNetwork " + isDisconnect + " , "
+                    + isEnableNetwork + " , " + isSave + " , " + isReconnect);
             return isDisconnect && isEnableNetwork && isSave && isReconnect;
         }
         return false;
@@ -293,8 +300,11 @@ public class BaseWifiManager {
         WifiInfo wifiInfo = getConnectionInfo();
         if (null != wifiInfo) {
             int networkId = wifiInfo.getNetworkId();
-            return disconnectWifi(networkId);
+            boolean disconnectWifi = disconnectWifi(networkId);
+            AppLogUtils.d("Network-Wifi:" , "disconnectCurrentWifi " + disconnectWifi);
+            return disconnectWifi;
         } else {
+            AppLogUtils.d("Network-Wifi:" , "disconnectCurrentWifi 已经断开");
             // 断开状态
             return true;
         }

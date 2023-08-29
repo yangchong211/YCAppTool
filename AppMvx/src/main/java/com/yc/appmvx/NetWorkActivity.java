@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yc.appwifilib.WifiHelper;
+import com.yc.appwifilib.WifiModeEnum;
 import com.yc.appwifilib.WifiStateListener;
 import com.yc.appwifilib.WifiToolUtils;
 import com.yc.easyexecutor.DelegateTaskExecutor;
@@ -184,6 +185,8 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         sb.append("\n便携热点是否开启：").append(wifiHelper.isApEnable());
         sb.append("\n是否连接着指定WiFi：").append(wifiHelper.isConnectedTargetSsid("iPhone"));
         sb.append("\n获取开启便携热点后自身热点IP地址：").append(wifiHelper.getLocalIp());
+        WifiModeEnum securityMode = WifiToolUtils.getSecurityMode(wifiHelper.getSsid());
+        sb.append("\n获取WIFI的加密方式：").append(securityMode);
 
         sb.append("\n\n下面是网络Wi-Fi工具：");
         tvContent.setText(sb.toString());
