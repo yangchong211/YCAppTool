@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.yc.appwifilib.WifiHelper;
 import com.yc.appwifilib.WifiStateListener;
 import com.yc.appwifilib.WifiToolUtils;
-import com.yc.appwifilib.wifilibrary.WiFiManager;
+import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.netreceiver.NetWorkManager;
 import com.yc.netreceiver.OnNetStatusListener;
 import com.yc.netsettinglib.DefaultNetCallback;
@@ -102,8 +102,19 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
             }
             ToastUtils.showRoundRectToast("切换默认网络");
         } else if (v == tvWifiOpen) {
-            WifiHelper.getInstance().openWifi();
-            Log.i("Network-Receiver", "openWifi ");
+            boolean openWifi = WifiHelper.getInstance().openWifi();
+            Log.i("Network-Receiver", "openWifi " + openWifi);
+            if (openWifi) {
+                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (WifiHelper.getInstance().isWifiEnable()) {
+                            ToastUtils.showRoundRectToast("开始连接Wi-Fi");
+                            connectTest("iPhone","yc123456");
+                        }
+                    }
+                },3000);
+            }
         } else if (v == tvWifiScan) {
             if (!WifiHelper.getInstance().isWifiEnable()) {
                 return;
@@ -409,7 +420,6 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void connectTest(String ssid, String password) {
-        WiFiManager wiFiManager = WiFiManager.getInstance(getApplicationContext());
         Log.i("Network-Connect" ,  "ssid:" + ssid);
         Log.i("Network-Connect" ,  "password:" + password);
         //每次连接之前，先全部清除以前的连接信息，不然会连接失败
@@ -422,17 +432,17 @@ public class NetWorkActivity extends AppCompatActivity implements View.OnClickLi
         Log.i("Network-Connect" ,  "Connect start");
         boolean isConnectSuccess;
         if (TextUtils.isEmpty(password)) {
-            isConnectSuccess = wiFiManager.connectOpenNetwork(ssid);
+            isConnectSuccess = WifiHelper.getInstance().connect(ssid);
         } else {
-            isConnectSuccess = wiFiManager.connectWPA2Network(ssid, password);
+            isConnectSuccess = WifiHelper.getInstance().connect(ssid,password);
         }
         Log.i("Network-Connect" ,  "Connect resule_1:" + isConnectSuccess);
         // 如果连接失败，再试一次
         if (!isConnectSuccess) {
             if (TextUtils.isEmpty(password)) {
-                isConnectSuccess = wiFiManager.connectOpenNetwork(ssid);
+                isConnectSuccess = WifiHelper.getInstance().connect(ssid);
             } else {
-                isConnectSuccess = wiFiManager.connectWPA2Network(ssid, password);
+                isConnectSuccess = WifiHelper.getInstance().connectWpa(ssid, password);
             }
         }
         Log.i("Network-Connect" ,  "Connect end:" + isConnectSuccess);

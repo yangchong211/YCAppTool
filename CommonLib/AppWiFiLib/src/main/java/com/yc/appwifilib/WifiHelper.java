@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.yc.appcontextlib.AppToolUtils;
+import com.yc.toolutils.AppLogUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
             //对直接访问已配置的 WLAN 网络实施了限制
             return getWifiManager().setWifiEnabled(true);
         }
-        return false;
+        return true;
     }
 
     /**
@@ -167,6 +168,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
     private boolean connectOpenNetwork(@NonNull String ssid) {
         // 获取networkId
         int networkId = setOpenNetwork(ssid);
+        //将配置好的特定WIFI密码信息添加,添加完成后默认是不激活状态，成功返回ID，否则为-1
         if (-1 != networkId) {
             // 保存配置
             boolean isSave = saveConfiguration();
@@ -187,6 +189,7 @@ public class WifiHelper extends BaseWifiManager implements IWifiFeature {
     private boolean connectWEPNetwork(@NonNull String ssid, @NonNull String password) {
         // 获取networkId
         int networkId = setWEPNetwork(ssid, password);
+        AppLogUtils.d("Network-Wifi:" , "connectWEPNetwork " + networkId);
         if (-1 != networkId) {
             // 保存配置
             boolean isSave = saveConfiguration();

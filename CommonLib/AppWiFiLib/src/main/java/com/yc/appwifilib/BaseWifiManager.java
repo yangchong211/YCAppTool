@@ -62,10 +62,12 @@ public class BaseWifiManager {
         if (TextUtils.isEmpty(ssid)) {
             return -1;
         }
+        //通过热点名获取热点配置
         WifiConfiguration wifiConfiguration = getConfigFromConfiguredNetworksBySsid(ssid);
         if (null == wifiConfiguration) {
             // 生成配置
             WifiConfiguration wifiConfig = new WifiConfiguration();
+            // 注意ssid需要转义字符处理一下
             wifiConfig.SSID = WifiToolUtils.addDoubleQuotation(ssid);
             wifiConfig.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
             wifiConfig.allowedProtocols.set(WifiConfiguration.Protocol.RSN);
