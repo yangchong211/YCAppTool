@@ -11,6 +11,7 @@ public enum WifiModeEnum {
     OPEN,
     /**
      * WEP是一种较老的加密协议，容易被攻击。有线等效加密。
+     * 需密码
      */
     WEP,
     /**

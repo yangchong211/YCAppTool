@@ -4,13 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-import com.apm.apm.ApmMonitorHelper;
-import com.apm.apm.MonitorListener;
-import com.apm.apm.bean.Memory;
-import com.apm.apm.bean.SDCard;
-import com.apm.apm.bean.Version;
-import com.yc.anrtoollib.watch.ANRError;
-import com.yc.cpu.CpuRateBean;
+
 import com.yc.monitortimelib.OnMonitorListener;
 import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.netlib.utils.NetworkTool;
@@ -18,7 +12,6 @@ import com.yc.toollib.crash.CrashHandler;
 import com.yc.toollib.crash.CrashListener;
 import com.yc.toolutils.AppLogUtils;
 
-import java.util.HashMap;
 
 public class MonitorApplication extends Application {
 
@@ -34,7 +27,7 @@ public class MonitorApplication extends Application {
         TimeMonitorHelper.setOnMonitorListener(new OnMonitorListener() {
             @Override
             public void onMonitorResult(String processName, String result) {
-                com.yc.toolutils.AppLogUtils.d("TimeMonitor processName: " + processName + " , result: " + result);
+                AppLogUtils.d("TimeMonitor processName: " + processName + " , result: " + result);
             }
         });
         initNetWork();
@@ -48,11 +41,17 @@ public class MonitorApplication extends Application {
                 .init(this, new CrashListener() {
                     @Override
                     public void recordException(Throwable ex, int crashCount) {
-                        com.yc.toolutils.AppLogUtils.e("record exception : " + ex.getMessage());
+                        AppLogUtils.e("record exception : " + ex.getMessage());
                         //自定义上传crash，支持开发者上传自己捕获的crash数据
                         //StatService.recordException(getApplication(), ex);
                     }
                 });
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(@NonNull Thread t, @NonNull Throwable e) {
+                AppLogUtils.e("the last uncaught: " + e.getMessage());
+            }
+        });
     }
 
     private void initNetWork() {
@@ -71,40 +70,7 @@ public class MonitorApplication extends Application {
 
 
     private void initApm() {
-        ApmMonitorHelper.getInstance().init(this, new MonitorListener() {
-            @Override
-            public void onAppNotResponding(@NonNull ANRError error) {
-                Throwable throwable = error.fillInStackTrace();
-                AppLogUtils.v("ApmMonitorHelper", throwable);
-            }
 
-            @Override
-            public void onSystem(long cosTime, CpuRateBean cpuRate, Memory memory, SDCard sdCard,
-                                 Version version,
-                                 FlowBean flow, FlowBean flowApp) {
-                AppLogUtils.v("ApmMonitorHelper", "系统上报-耗费时间：" + cosTime);
-                AppLogUtils.v("ApmMonitorHelper", "系统上报-CPU：" + cpuRate.toString());
-                AppLogUtils.v("ApmMonitorHelper", "系统上报-内存：" + memory.toString());
-                AppLogUtils.v("ApmMonitorHelper", "系统上报-存储：" + sdCard.toString());
-                AppLogUtils.v("ApmMonitorHelper", "系统上报-版本：" + version.toString());
-                AppLogUtils.v("ApmMonitorHelper", "系统上报-流量：" + flowApp.toString());
-            }
-
-            @Override
-            public void onBlock(long cos, String stackMsg) {
-                AppLogUtils.v("ApmMonitorHelper", "检测卡顿-耗时：" + cos + " 卡顿位置:" + stackMsg);
-            }
-
-            @Override
-            public void onLeaks(long cosTime, HashMap<String, Integer> hashMap) {
-                AppLogUtils.v("ApmMonitorHelper", "检测内存泄漏,耗费时间：" + cosTime);
-                AppLogUtils.v("ApmMonitorHelper", "检测内存泄漏：" + hashMap.toString());
-            }
-        });
-        ApmMonitorHelper.getInstance().getSystem().setDuration(60 * 1000);
-        ApmMonitorHelper.getInstance().getLeaks().setOpen(true);
-        ApmMonitorHelper.getInstance().getBlock().setMonitorTime(2000);
-        ApmMonitorHelper.getInstance().begin();
     }
 
 }
