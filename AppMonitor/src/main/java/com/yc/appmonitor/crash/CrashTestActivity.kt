@@ -10,6 +10,7 @@ import com.yc.appmonitor.R
 import com.yc.monitortimelib.TimeMonitorHelper
 import com.yc.toastutils.ToastUtils
 import com.yc.crash.CrashListActivity
+import com.yc.crash.NativeCrashDumper
 import java.util.*
 
 /**
@@ -87,7 +88,8 @@ class CrashTestActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         } else if (id == R.id.tv_7) {
-            CrashListActivity.startActivity(this)
+            NativeCrashDumper.getInstance().nativeCrash()
+//            CrashListActivity.startActivity(this)
         }
     }
 
