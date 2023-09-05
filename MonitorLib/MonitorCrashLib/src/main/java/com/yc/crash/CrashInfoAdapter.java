@@ -1,4 +1,4 @@
-package com.yc.toollib.crash;
+package com.yc.crash;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.yc.eastadapterlib.BaseRecycleAdapter;
 import com.yc.eastadapterlib.BaseViewHolder;
-import com.yc.toollib.R;
 
 import java.io.File;
 

@@ -6,11 +6,10 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.yc.appmonitor.MonitorApplication
 import com.yc.appmonitor.R
 import com.yc.monitortimelib.TimeMonitorHelper
 import com.yc.toastutils.ToastUtils
-import com.yc.toollib.crash.CrashListActivity
+import com.yc.crash.CrashListActivity
 import java.util.*
 
 /**

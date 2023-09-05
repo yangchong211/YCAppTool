@@ -1,10 +1,7 @@
-package com.yc.toollib.crash;
+package com.yc.crash;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.os.SystemClock;
 
 import androidx.annotation.NonNull;
 

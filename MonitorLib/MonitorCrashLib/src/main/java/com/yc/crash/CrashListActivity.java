@@ -1,4 +1,4 @@
-package com.yc.toollib.crash;
+package com.yc.crash;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,7 +23,6 @@ import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.eastadapterlib.OnItemLongClickListener;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.statusbar.bar.StateAppBar;
-import com.yc.toollib.R;
 import com.yc.toolutils.AppIntentUtils;
 import com.yc.toolutils.AppLogUtils;
 import java.io.File;

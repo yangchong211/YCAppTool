@@ -10,7 +10,7 @@ import com.yc.catonhelperlib.PerformanceActivity;
 import com.yc.lifehelper.R;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;
-import com.yc.toollib.crash.CrashListActivity;
+import com.yc.crash.CrashListActivity;
 import com.yc.toolutils.click.FastClickUtils;
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 

@@ -1,4 +1,4 @@
-package com.yc.toollib.crash;
+package com.yc.crash;
 
 import android.os.Handler;
 import android.os.Looper;

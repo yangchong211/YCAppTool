@@ -1,4 +1,4 @@
-package com.yc.toollib.crash;
+package com.yc.crash;
 
 /**
  * <pre>

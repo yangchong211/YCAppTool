@@ -1,4 +1,4 @@
-package com.yc.toollib.crash;
+package com.yc.crash;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,9 +16,6 @@ import androidx.annotation.ColorInt;
 import com.yc.activitymanager.ActivityManager;
 import com.yc.appfilelib.AppFileUtils;
 import com.yc.toolmemorylib.AppMemoryUtils;
-import com.yc.toolmemorylib.DalvikHeapMem;
-import com.yc.toolmemorylib.PssInfo;
-import com.yc.toolmemorylib.RamMemoryInfo;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppInfoUtils;
 import com.yc.toolutils.AppLogUtils;

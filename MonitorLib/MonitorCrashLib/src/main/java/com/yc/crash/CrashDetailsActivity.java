@@ -1,4 +1,4 @@
-package com.yc.toollib.crash;
+package com.yc.crash;
 
 import android.Manifest;
 import android.animation.AnimatorSet;
@@ -36,7 +36,6 @@ import com.yc.fileiohelper.FileIoUtils;
 import com.yc.imagetoollib.ImageSaveUtils;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toollib.R;
 import com.yc.toolutils.AppWindowUtils;
 
 import java.io.File;

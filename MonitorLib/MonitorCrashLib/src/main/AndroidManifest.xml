@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yc.toollib">
+    package="com.yc.crash">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -9,10 +9,10 @@
         android:label="@string/app_name">
 
         <activity
-            android:name=".crash.CrashListActivity"
+            android:name="com.yc.crash.CrashListActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".crash.CrashDetailsActivity"
+            android:name="com.yc.crash.CrashDetailsActivity"
             android:screenOrientation="portrait"/>
     </application>
 
