@@ -185,7 +185,8 @@ include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',':AdbHelper',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',':LooperThread',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib', ':UsbInterface',
-        ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib'
+        ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib', ':SerialPort',
+        ':HandlerThread', ':CameraOpen'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
@@ -215,7 +216,9 @@ project(':EasySocket').projectDir = new File('ToolLib/EasySocket')
 project(':LooperThread').projectDir = new File('ToolLib/LooperThread')
 project(':InterceptorTime').projectDir = new File('ToolLib/InterceptorTime')
 project(':AdbHelper').projectDir = new File('ToolLib/AdbHelper')
-
+project(':SerialPort').projectDir = new File('ToolLib/SerialPort')
+project(':HandlerThread').projectDir = new File('ToolLib/HandlerThread')
+project(':CameraOpen').projectDir = new File('ToolLib/CameraOpen')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
