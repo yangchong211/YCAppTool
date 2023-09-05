@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.yc.networklib.AddressToolUtils;
 import com.yc.networklib.AppNetworkUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -98,8 +100,8 @@ public class MonitorPingFragment extends Fragment {
                 //从权限获取已解码的用户信息。例如，如果权限为“任何人@google.com”，此方法将返回“任何人”。
                 String userInfo = uri.getUserInfo();
                 sb.append("完整的url信息:").append(urlStr);
-                sb.append("\n域名ip地址:").append(AppNetworkUtils.getHostIP(host));
-                sb.append("\n域名host名称:").append(AppNetworkUtils.getHostName(host));
+                sb.append("\n域名ip地址:").append(AddressToolUtils.getHostIP(host));
+                sb.append("\n域名host名称:").append(AddressToolUtils.getDomainAddress(host));
                 sb.append("\n域名port端口号:").append(port);
                 sb.append("\n域名端口号:").append(port);
                 sb.append("\n域名scheme:").append(scheme);

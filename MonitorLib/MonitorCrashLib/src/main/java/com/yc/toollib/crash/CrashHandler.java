@@ -1,5 +1,6 @@
 package com.yc.toollib.crash;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -65,6 +66,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 保证只有一个CrashHandler实例
      */
     private CrashHandler() {
+
     }
 
     /**
@@ -106,13 +108,19 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         }
         //获取系统默认的UncaughtExceptionHandler
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-        AppLogUtils.d(TAG, "init mDefaultHandler : " + mDefaultHandler);
+        if (mDefaultHandler != null) {
+            AppLogUtils.d(TAG, "init getDefaultUncaughtExceptionHandler : "
+                    + mDefaultHandler.getClass().getSimpleName());
+        } else {
+            AppLogUtils.d(TAG, "init getDefaultUncaughtExceptionHandler : null");
+        }
         //打印：init mDefaultHandler : com.android.internal.os.RuntimeInit$KillApplicationHandler@7b5887e
         //将当前实例设为系统默认的异常处理器
         //设置一个处理者当一个线程突然因为一个未捕获的异常而终止时将自动被调用。
         //未捕获的异常处理的控制第一个被当前线程处理，如果该线程没有捕获并处理该异常，其将被线程的ThreadGroup对象处理，最后被默认的未捕获异常处理器处理。
         Thread.setDefaultUncaughtExceptionHandler(this);
-        AppLogUtils.d(TAG, "init mDefaultHandler : " + Thread.getDefaultUncaughtExceptionHandler());
+        AppLogUtils.d(TAG, "init setDefaultUncaughtExceptionHandler this : "
+                + Thread.getDefaultUncaughtExceptionHandler().getClass().getSimpleName());
     }
 
     /**
@@ -121,30 +129,30 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     @Override
     public void uncaughtException(@NonNull Thread thread, @NonNull Throwable ex) {
-        uncaughtException1(thread,ex);
+        uncaughtException1(thread, ex);
         //uncaughtException2(thread,ex);
     }
 
     private void uncaughtException2(Thread thread, Throwable ex) {
-        //`setDefaultUncaughtExceptionHandler`被调用多次如何理解
-        //如果被多次调用的话，会以最后一次传递的 handler 为准。
-        //所以如果用了第三方的统计模块，可能会出现失灵的情况。目前解决方案如下：
-        //对于这种情况，在设置默认 `handler` 之前
-        //可以先通过 `getDefaultUncaughtExceptionHandler()` 方法获取并保留旧的`handler`，
-        //然后在默认`handler`的`uncaughtException`方法中调用其他`handler`的`uncaughtException`方法，保证都会收到异常信息。
-        if (mDefaultHandler != null){
-            mDefaultHandler.uncaughtException(thread,ex);
-        }
-
         Thread.UncaughtExceptionHandler exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         if (exceptionHandler instanceof CrashHandler) {
             if (ex.getStackTrace().length != 0) {
                 md5Key = Md5EncryptUtils.encryptMD5ToString(Arrays.toString(ex.getStackTrace()));
-                AppLogUtils.d(ex.getMessage() + "  md5 key : " + md5Key);
+                AppLogUtils.d(TAG, ex.getMessage() + "  md5 key : " + md5Key);
             }
             handleException(ex);
             initCustomBug(ex);
             AppLogUtils.d(TAG, "uncaughtException kill app");
+
+            //`setDefaultUncaughtExceptionHandler`被调用多次如何理解
+            //如果被多次调用的话，会以最后一次传递的 handler 为准。
+            //所以如果用了第三方的统计模块，可能会出现失灵的情况。目前解决方案如下：
+            //对于这种情况，在设置默认 `handler` 之前
+            //可以先通过 `getDefaultUncaughtExceptionHandler()` 方法获取并保留旧的`handler`，
+            //然后在默认`handler`的`uncaughtException`方法中调用其他`handler`的`uncaughtException`方法，保证都会收到异常信息。
+            if (mDefaultHandler != null) {
+                mDefaultHandler.uncaughtException(thread, ex);
+            }
             // 退出程序
             ActivityManager.getInstance().appExist();
         }
@@ -157,17 +165,21 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
         }
         boolean isHandleException = handleException(ex);
         initCustomBug(ex);
-        if (mDefaultHandler != null && !isHandleException) {
-            //收集完信息后，交给系统自己处理崩溃
-            //uncaughtException (Thread t, Throwable e) 是一个抽象方法
-            //当给定的线程因为发生了未捕获的异常而导致终止时将通过该方法将线程对象和异常对象传递进来。
+        if (mDefaultHandler != null && isHandleException) {
+            //`setDefaultUncaughtExceptionHandler`被调用多次如何理解
+            //如果被多次调用的话，会以最后一次传递的 handler 为准。
+            //所以如果用了第三方的统计模块，可能会出现失灵的情况。目前解决方案如下：
+            //对于这种情况，在设置默认 `handler` 之前
+            //可以先通过 `getDefaultUncaughtExceptionHandler()` 方法获取并保留旧的`handler`，
+            //然后在默认`handler`的`uncaughtException`方法中调用其他`handler`的`uncaughtException`方法，保证都会收到异常信息。
+
+            //收集完信息后，交给系统自己处理崩溃，或者交给外部其他地方调用setDefaultUncaughtExceptionHandler处理
             AppLogUtils.d(TAG, "uncaughtException do something");
             mDefaultHandler.uncaughtException(thread, ex);
-        } else {
-            AppLogUtils.d(TAG, "uncaughtException kill app");
-            // 退出程序
-            ActivityManager.getInstance().appExist();
         }
+        AppLogUtils.d(TAG, "uncaughtException kill app");
+        // 退出程序
+        ActivityManager.getInstance().appExist();
     }
 
     /**
@@ -197,8 +209,9 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 自定义错误处理,收集错误信息
      * 发送错误报告等操作均在此完成.
      * 开发者可以根据自己的情况来自定义异常处理逻辑
-     * @param ex        异常
-     * @return      true:如果处理了该异常信息；否则返回false
+     *
+     * @param ex 异常
+     * @return true:如果处理了该异常信息；否则返回false
      */
     private boolean handleException(Throwable ex) {
         if (ex == null) {
@@ -227,7 +240,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
                 CrashHelperUtils.saveCrashInfoInFile(mContext, ex);
             }
             success = true;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             success = false;
         }

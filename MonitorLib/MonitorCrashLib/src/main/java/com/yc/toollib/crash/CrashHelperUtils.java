@@ -18,6 +18,7 @@ import com.yc.appfilelib.AppFileUtils;
 import com.yc.toolmemorylib.AppMemoryUtils;
 import com.yc.toolmemorylib.DalvikHeapMem;
 import com.yc.toolmemorylib.PssInfo;
+import com.yc.toolmemorylib.RamMemoryInfo;
 import com.yc.toolutils.AppDeviceUtils;
 import com.yc.toolutils.AppInfoUtils;
 import com.yc.toolutils.AppLogUtils;
@@ -138,24 +139,22 @@ public final class CrashHelperUtils {
     private static void initPhoneHead(Context context) {
         StringBuilder sb = new StringBuilder();
         sb.append("手机内存分析:");
-        final int pid = AppMemoryUtils.getCurrentPid();
-        PssInfo pssInfo = AppMemoryUtils.getAppPssInfo(context, pid);
-        sb.append("\ndalvik堆大小:").append(AppMemoryUtils.getFormatSize(pssInfo.dalvikPss));
-        sb.append("\n手机堆大小:").append(AppMemoryUtils.getFormatSize(pssInfo.nativePss));
-        sb.append("\nPSS内存使用量:").append(AppMemoryUtils.getFormatSize(pssInfo.totalPss));
-        sb.append("\n其他比例大小:").append(AppMemoryUtils.getFormatSize(pssInfo.otherPss));
-
-        final DalvikHeapMem dalvikHeapMem = AppMemoryUtils.getAppDalvikHeapMem();
-        sb.append("\n已用内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.allocated));
-        sb.append("\n最大内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.maxMem));
-        sb.append("\n空闲内存:").append(AppMemoryUtils.getFormatSize(dalvikHeapMem.freeMem));
-
-        long appTotalDalvikHeapSize = AppMemoryUtils.getAppTotalDalvikHeapSize(context);
-        sb.append("\n应用占用内存:").append(AppMemoryUtils.getFormatSize(appTotalDalvikHeapSize));
-        sb.append("\n\n");
-        crashMem = sb.toString();
+        AppMemoryUtils.getMemoryInfo(context, (pkgName, pid, ramMemoryInfo, pssInfo, dalvikHeapMem) -> {
+            sb.append("\n是否低内存状态运行:  ").append(ramMemoryInfo.isLowMemory);
+            sb.append("\n可用RAM:  ").append(ramMemoryInfo.availMem);
+            sb.append("\n手机总RAM:  ").append(ramMemoryInfo.totalMem);
+            sb.append("\n内存占用满的阀值:  ").append(ramMemoryInfo.lowMemThreshold);
+            sb.append("\n总的PSS内存使用量:  ").append(pssInfo.totalPss).append("kb");
+            sb.append("\ndalvik堆的比例设置大小:  ").append(pssInfo.dalvikPss);
+            sb.append("\n本机堆的比例设置大小:  ").append(pssInfo.nativePss);
+            sb.append("\n比例设置大小为其他所有:  ").append(pssInfo.otherPss);
+            sb.append("\n空闲内存:  ").append(dalvikHeapMem.freeMem);
+            sb.append("\n最大内存:  ").append(dalvikHeapMem.maxMem);
+            sb.append("\n已用内存:  ").append(dalvikHeapMem.allocated);
+            sb.append("\n\n");
+            crashMem = sb.toString();
+        });
     }
-
 
     private static void initThreadHead(Context context) {
         StringBuilder sb = new StringBuilder();

@@ -36,22 +36,22 @@ public class MonitorApplication extends Application {
     }
 
     private void initCrash() {
+//        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+//            @Override
+//            public void uncaughtException(@NonNull Thread t, @NonNull Throwable e) {
+//                AppLogUtils.e("CrashHandler : the last uncaught " + e);
+//            }
+//        });
         CrashHandler.getInstance()
                 .setWriteLog(true)
                 .init(this, new CrashListener() {
                     @Override
                     public void recordException(Throwable ex, int crashCount) {
-                        AppLogUtils.e("record exception : " + ex.getMessage());
+                        AppLogUtils.e("CrashHandler : record exception  " + ex);
                         //自定义上传crash，支持开发者上传自己捕获的crash数据
                         //StatService.recordException(getApplication(), ex);
                     }
                 });
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(@NonNull Thread t, @NonNull Throwable e) {
-                AppLogUtils.e("the last uncaught: " + e.getMessage());
-            }
-        });
     }
 
     private void initNetWork() {
