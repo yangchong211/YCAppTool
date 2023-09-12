@@ -77,7 +77,7 @@ include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager', ':AppCompress',
         ':AppHandlerLib', ':FileIoHelper', ':ZipFileLib', ':NetWorkLib', ':AppContextLib',
         ':AppWiFiLib', ':UriAndUrlLib', ':AppGrayLib', ':AppCallStatus', ':AppFastSp',
         ':ZipFileLib', ':SmEncryptLib', ':AppClickHelper', ':DataCloneLib', ':NetReceiver',
-        ':NetSettingLib', ':NetTestLib'
+        ':NetSettingLib', ':NetTestLib', ':ByteToolUtils'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
@@ -123,6 +123,8 @@ project(':DataCloneLib').projectDir = new File('CommonLib/DataCloneLib')
 project(':NetReceiver').projectDir = new File('CommonLib/NetReceiver')
 project(':NetSettingLib').projectDir = new File('CommonLib/NetSettingLib')
 project(':NetTestLib').projectDir = new File('CommonLib/NetTestLib')
+project(':ByteToolUtils').projectDir = new File('CommonLib/ByteToolUtils')
+
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -186,7 +188,7 @@ include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',':LooperThread',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib', ':UsbInterface',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib', ':SerialPort',
-        ':HandlerThread', ':CameraOpen'
+        ':HandlerThread', ':CameraOpen', ':SqlLiteLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
@@ -219,6 +221,7 @@ project(':AdbHelper').projectDir = new File('ToolLib/AdbHelper')
 project(':SerialPort').projectDir = new File('ToolLib/SerialPort')
 project(':HandlerThread').projectDir = new File('ToolLib/HandlerThread')
 project(':CameraOpen').projectDir = new File('ToolLib/CameraOpen')
+project(':SqlLiteLib').projectDir = new File('ToolLib/SqlLiteLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */

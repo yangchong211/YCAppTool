@@ -1,13 +1,18 @@
 package com.yc.httpserver;
 
-import android.content.Context;
 import android.os.Build;
-import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.yc.easyexecutor.DelegateTaskExecutor;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -18,49 +23,58 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
-public class RequestManager {
+/**
+ * 网络请求工具
+ */
+public final class RequestManager {
 
-
-    private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");//mdiatype 这个需要和服务端保持一致
-    private static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("text/x-markdown; charset=utf-8");//mdiatype 这个需要和服务端保持一致
-    private static final String TAG = RequestManager.class.getSimpleName();
-    private static final String BASE_URL = "http://xxx.com/openapi";//请求接口根地址
-    private static volatile RequestManager mInstance;//单利引用
-    public static final int TYPE_GET = 0;//get请求
-    public static final int TYPE_POST_JSON = 1;//post请求参数为json
-    public static final int TYPE_POST_FORM = 2;//post请求参数为表单
-    private final OkHttpClient mOkHttpClient;//okHttpClient 实例
-    private final Handler okHttpHandler;//全局处理子线程和M主线程通信
-
+    private static final MediaType MEDIA_TYPE_FORM =
+            MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
+    private static final MediaType MEDIA_TYPE_MARKDOWN =
+            MediaType.parse("text/x-markdown; charset=utf-8");
+    private static final MediaType MEDIA_TYPE_JSON =
+            MediaType.parse("application/json; charset=utf-8");
+    /**
+     * 单利引用
+     */
+    private static volatile RequestManager mInstance;
+    /**
+     * okHttpClient 实例
+     */
+    private final OkHttpClient mOkHttpClient;
+    /**
+     * 配置属性
+     */
+    private RequestConfig requestConfig;
 
     /**
      * 初始化RequestManager
      */
-    public RequestManager(Context context) {
+    public RequestManager() {
         //初始化OkHttpClient
         mOkHttpClient = new OkHttpClient().newBuilder()
                 .connectTimeout(10, TimeUnit.SECONDS)//设置超时时间
                 .readTimeout(10, TimeUnit.SECONDS)//设置读取超时时间
                 .writeTimeout(10, TimeUnit.SECONDS)//设置写入超时时间
+                .addInterceptor(new LoggerInterceptor())//添加日志拦截器
                 .build();
-        //初始化Handler
-        okHttpHandler = new Handler(context.getMainLooper());
     }
 
 
     /**
      * 获取单例引用
      *
-     * @return
+     * @return 引用
      */
-    public static RequestManager getInstance(Context context) {
+    public static RequestManager getInstance() {
         RequestManager inst = mInstance;
         if (inst == null) {
             synchronized (RequestManager.class) {
                 inst = mInstance;
                 if (inst == null) {
-                    inst = new RequestManager(context.getApplicationContext());
+                    inst = new RequestManager();
                     mInstance = inst;
                 }
             }
@@ -68,22 +82,38 @@ public class RequestManager {
         return inst;
     }
 
+    public void setRequestConfig(RequestConfig requestConfig) {
+        this.requestConfig = requestConfig;
+    }
+
+    private String getBaseUrl() {
+        if (requestConfig == null || TextUtils.isEmpty(requestConfig.getBaseUrl())) {
+            throw new NullPointerException("请先初始化设置接口根地址");
+        }
+        return requestConfig.getBaseUrl();
+    }
+
     /**
      * okHttp同步请求统一入口
-     * @param actionUrl  接口地址
+     *
+     * @param actionUrl   接口地址
      * @param requestType 请求类型
      * @param paramsMap   请求参数
      */
-    public void requestSyn(String actionUrl, int requestType, HashMap<String, String> paramsMap) {
+    public void requestExecute(String actionUrl, HttpMethod requestType, HashMap<String,
+            String> paramsMap, ReqCallBack<String> callBack) {
         switch (requestType) {
-            case TYPE_GET:
-                requestGetBySyn(actionUrl, paramsMap);
+            case GET:
+                DelegateTaskExecutor.getInstance().executeOnCpu(() ->
+                        requestGet(actionUrl, paramsMap, callBack));
                 break;
-            case TYPE_POST_JSON:
-                requestPostBySyn(actionUrl, paramsMap);
+            case POST_JSON:
+                DelegateTaskExecutor.getInstance().executeOnCpu(() ->
+                        requestPost(actionUrl, paramsMap, callBack));
                 break;
-            case TYPE_POST_FORM:
-                requestPostBySynWithForm(actionUrl, paramsMap);
+            case POST_FORM:
+                DelegateTaskExecutor.getInstance().executeOnCpu(() ->
+                        requestPostWithForm(actionUrl, paramsMap, callBack));
                 break;
             default:
                 break;
@@ -93,333 +123,403 @@ public class RequestManager {
 
     /**
      * okHttp异步请求统一入口
+     *
      * @param actionUrl   接口地址
      * @param requestType 请求类型
      * @param paramsMap   请求参数
-     * @param callBack 请求返回数据回调
-     * @param <T> 数据泛型
+     * @param callBack    请求返回数据回调
      **/
-    public <T> Call requestAsyn(String actionUrl, int requestType,
-                                HashMap<String, String> paramsMap, ReqCallBack<T> callBack) {
-        Call call = null;
+    public void requestEnqueue(String actionUrl, HttpMethod requestType,
+                               HashMap<String, String> paramsMap, ReqCallBack<String> callBack) {
         switch (requestType) {
-            case TYPE_GET:
-                call = requestGetByAsyn(actionUrl, paramsMap, callBack);
+            case GET:
+                requestGetEnqueue(actionUrl, paramsMap, callBack);
                 break;
-            case TYPE_POST_JSON:
-                call = requestPostByAsyn(actionUrl, paramsMap, callBack);
+            case POST_JSON:
+                requestPostEnqueue(actionUrl, paramsMap, callBack);
                 break;
-            case TYPE_POST_FORM:
-                call = requestPostByAsynWithForm(actionUrl, paramsMap, callBack);
+            case POST_FORM:
+                requestPostEnqueueWithForm(actionUrl, paramsMap, callBack);
                 break;
             default:
                 break;
         }
-        return call;
     }
 
 
     /**
      * okHttp get同步请求
-     * @param actionUrl  接口地址
-     * @param paramsMap   请求参数
+     *
+     * @param actionUrl 接口地址
+     * @param paramsMap 请求参数
+     * @param callBack  callback
      */
-    private void requestGetBySyn(String actionUrl, HashMap<String, String> paramsMap) {
+    private void requestGet(String actionUrl,
+                            HashMap<String, String> paramsMap, ReqCallBack<String> callBack) {
         StringBuilder tempParams = new StringBuilder();
         try {
             //处理参数
-            int pos = 0;
-            for (String key : paramsMap.keySet()) {
-                if (pos > 0) {
-                    tempParams.append("&");
+            if (paramsMap != null) {
+                int pos = 0;
+                for (String key : paramsMap.keySet()) {
+                    if (pos > 0) {
+                        tempParams.append("&");
+                    }
+                    //对参数进行URLEncoder
+                    tempParams.append(String.format("%s=%s", key,
+                            URLEncoder.encode(paramsMap.get(key), "utf-8")));
+                    pos++;
                 }
-                //对参数进行URLEncoder
-                tempParams.append(String.format("%s=%s", key, URLEncoder.encode(paramsMap.get(key), "utf-8")));
-                pos++;
             }
             //补全请求地址
-            String requestUrl = String.format("%s/%s?%s", BASE_URL, actionUrl, tempParams.toString());
+            String requestUrl = String.format("%s/%s?%s", getBaseUrl(), actionUrl, tempParams);
+            d("requestGet requestUrl " + requestUrl);
             //创建一个请求
             Request request = addHeaders().url(requestUrl).build();
             //创建一个Call
             final Call call = mOkHttpClient.newCall(request);
             //执行请求
             final Response response = call.execute();
-            response.body().string();
+            if (response.code() == 200) {
+                ResponseBody body = response.body();
+                if (body != null) {
+                    String string = body.string();
+                    successCallBack(string, callBack);
+                } else {
+                    failedCallBack(response.code(), response.message(), callBack);
+                }
+            } else {
+                failedCallBack(response.code(), "服务器错误: " + response.message(), callBack);
+            }
         } catch (Exception e) {
-            Log.e(TAG, e.toString());
+            e("requestGet Exception " + e);
         }
     }
 
 
     /**
      * okHttp post同步请求
-     * @param actionUrl  接口地址
-     * @param paramsMap   请求参数
+     *
+     * @param actionUrl 接口地址
+     * @param paramsMap 请求参数
+     * @param callBack  callback
      */
-    private void requestPostBySyn(String actionUrl, HashMap<String, String> paramsMap) {
+    private void requestPost(String actionUrl,
+                             HashMap<String, String> paramsMap, ReqCallBack<String> callBack) {
         try {
             //处理参数
             StringBuilder tempParams = new StringBuilder();
-            int pos = 0;
-            for (String key : paramsMap.keySet()) {
-                if (pos > 0) {
-                    tempParams.append("&");
+            if (paramsMap != null) {
+                int pos = 0;
+                for (String key : paramsMap.keySet()) {
+                    if (pos > 0) {
+                        tempParams.append("&");
+                    }
+                    tempParams.append(String.format("%s=%s", key,
+                            URLEncoder.encode(paramsMap.get(key), "utf-8")));
+                    pos++;
                 }
-                tempParams.append(String.format("%s=%s", key, URLEncoder.encode(paramsMap.get(key), "utf-8")));
-                pos++;
             }
+
             //补全请求地址
-            String requestUrl = String.format("%s/%s", BASE_URL, actionUrl);
+            String requestUrl = String.format("%s/%s", getBaseUrl(), actionUrl);
+            d("requestPost requestUrl " + requestUrl);
             //生成参数
             String params = tempParams.toString();
             //创建一个请求实体对象 RequestBody
-            RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, params);
+            RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON, params);
             //创建一个请求
-            final Request request = addHeaders().url(requestUrl).post(body).build();
+            final Request request = addHeaders().url(requestUrl).post(requestBody).build();
             //创建一个Call
             final Call call = mOkHttpClient.newCall(request);
             //执行请求
             Response response = call.execute();
             //请求执行成功
-            if (response.isSuccessful()) {
-                //获取返回数据 可以是String，bytes ,byteStream
-                Log.e(TAG, "response ----->" + response.body().string());
+            if (response.code() == 200) {
+                ResponseBody body = response.body();
+                if (body != null) {
+                    String string = body.string();
+                    successCallBack(string, callBack);
+                } else {
+                    failedCallBack(response.code(), response.message(), callBack);
+                }
+            } else {
+                failedCallBack(response.code(), "服务器错误: " + response.message(), callBack);
             }
         } catch (Exception e) {
-            Log.e(TAG, e.toString());
+            e("requestPost Exception " + e);
         }
     }
 
     /**
      * okHttp post同步请求表单提交
+     *
      * @param actionUrl 接口地址
      * @param paramsMap 请求参数
+     * @param callBack  callback
      */
-    private void requestPostBySynWithForm(String actionUrl, HashMap<String, String> paramsMap) {
+    private void requestPostWithForm(String actionUrl, HashMap<String, String> paramsMap,
+                                     ReqCallBack<String> callBack) {
         try {
             //创建一个FormBody.Builder
             FormBody.Builder builder = new FormBody.Builder();
-            for (String key : paramsMap.keySet()) {
-                //追加表单信息
-                builder.add(key, paramsMap.get(key));
+            if (paramsMap != null) {
+                for (String key : paramsMap.keySet()) {
+                    String s = paramsMap.get(key);
+                    //追加表单信息
+                    builder.add(key, s + "");
+                }
             }
             //生成表单实体对象
             RequestBody formBody = builder.build();
             //补全请求地址
-            String requestUrl = String.format("%s/%s", BASE_URL, actionUrl);
+            String requestUrl = String.format("%s/%s", getBaseUrl(), actionUrl);
+            d("requestPostWithForm requestUrl " + requestUrl);
             //创建一个请求
             final Request request = addHeaders().url(requestUrl).post(formBody).build();
             //创建一个Call
             final Call call = mOkHttpClient.newCall(request);
             //执行请求
             Response response = call.execute();
-            if (response.isSuccessful()) {
-                Log.e(TAG, "response ----->" + response.body().string());
+            if (response.code() == 200) {
+                ResponseBody body = response.body();
+                if (body != null) {
+                    String string = body.string();
+                    successCallBack(string, callBack);
+                } else {
+                    failedCallBack(response.code(), response.message(), callBack);
+                }
+            } else {
+                failedCallBack(response.code(), response.message(), callBack);
             }
         } catch (Exception e) {
-            Log.e(TAG, e.toString());
+            e("requestPostWithForm Exception " + e);
         }
     }
 
 
     /**
      * okHttp get异步请求
+     *
      * @param actionUrl 接口地址
      * @param paramsMap 请求参数
-     * @param callBack 请求返回数据回调
-     * @param <T> 数据泛型
-     * @return
+     * @param callBack  请求返回数据回调
+     * @param <T>       数据泛型
      */
-    private <T> Call requestGetByAsyn(String actionUrl, HashMap<String, String> paramsMap, final ReqCallBack<T> callBack) {
+    private <T> void requestGetEnqueue(String actionUrl, HashMap<String, String> paramsMap,
+                                       final ReqCallBack<T> callBack) {
         StringBuilder tempParams = new StringBuilder();
         try {
-            int pos = 0;
-            for (String key : paramsMap.keySet()) {
-                if (pos > 0) {
-                    tempParams.append("&");
+            if (paramsMap != null) {
+                int pos = 0;
+                for (String key : paramsMap.keySet()) {
+                    if (pos > 0) {
+                        tempParams.append("&");
+                    }
+                    tempParams.append(String.format("%s=%s", key,
+                            URLEncoder.encode(paramsMap.get(key), "utf-8")));
+                    pos++;
                 }
-                tempParams.append(String.format("%s=%s", key, URLEncoder.encode(paramsMap.get(key), "utf-8")));
-                pos++;
             }
-            String requestUrl = String.format("%s/%s?%s", BASE_URL, actionUrl, tempParams.toString());
+            String requestUrl = String.format("%s/%s?%s", getBaseUrl(), actionUrl, tempParams);
+            d("requestGetEnqueue requestUrl " + requestUrl);
             final Request request = addHeaders().url(requestUrl).build();
             final Call call = mOkHttpClient.newCall(request);
             call.enqueue(new Callback() {
                 @Override
-                public void onFailure(Call call, IOException e) {
-                    failedCallBack("访问失败", callBack);
-                    Log.e(TAG, e.toString());
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    failedCallBack(-1, "访问失败:" + e.getMessage(), callBack);
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        String string = response.body().string();
-                        Log.e(TAG, "response ----->" + string);
-                        successCallBack((T) string, callBack);
+                public void onResponse(@NonNull Call call,
+                                       @NonNull Response response) throws IOException {
+                    if (response.code() == 200) {
+                        ResponseBody body = response.body();
+                        if (body != null) {
+                            String string = body.string();
+                            successCallBack((T) string, callBack);
+                        } else {
+                            failedCallBack(response.code(), response.message(), callBack);
+                        }
                     } else {
-                        failedCallBack("服务器错误", callBack);
+                        failedCallBack(response.code(), "服务器错误: " + response.message(), callBack);
                     }
                 }
             });
-            return call;
         } catch (Exception e) {
-            Log.e(TAG, e.toString());
+            e("requestGetEnqueue Exception " + e);
         }
-        return null;
     }
 
     /**
      * okHttp post异步请求
+     *
      * @param actionUrl 接口地址
      * @param paramsMap 请求参数
-     * @param callBack 请求返回数据回调
-     * @param <T> 数据泛型
-     * @return
+     * @param callBack  请求返回数据回调
+     * @param <T>       数据泛型
      */
-    private <T> Call requestPostByAsyn(String actionUrl, HashMap<String, String> paramsMap, final ReqCallBack<T> callBack) {
+    private <T> void requestPostEnqueue(String actionUrl, HashMap<String,
+            String> paramsMap, final ReqCallBack<T> callBack) {
         try {
             StringBuilder tempParams = new StringBuilder();
-            int pos = 0;
-            for (String key : paramsMap.keySet()) {
-                if (pos > 0) {
-                    tempParams.append("&");
+            if (paramsMap != null) {
+                int pos = 0;
+                for (String key : paramsMap.keySet()) {
+                    if (pos > 0) {
+                        tempParams.append("&");
+                    }
+                    tempParams.append(String.format("%s=%s", key,
+                            URLEncoder.encode(paramsMap.get(key), "utf-8")));
+                    pos++;
                 }
-                tempParams.append(String.format("%s=%s", key, URLEncoder.encode(paramsMap.get(key), "utf-8")));
-                pos++;
             }
             String params = tempParams.toString();
             RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, params);
-            String requestUrl = String.format("%s/%s", BASE_URL, actionUrl);
+            String requestUrl = String.format("%s/%s", getBaseUrl(), actionUrl);
+            d("requestPostEnqueue requestUrl " + requestUrl);
             final Request request = addHeaders().url(requestUrl).post(body).build();
             final Call call = mOkHttpClient.newCall(request);
             call.enqueue(new Callback() {
                 @Override
-                public void onFailure(Call call, IOException e) {
-                    failedCallBack("访问失败", callBack);
-                    Log.e(TAG, e.toString());
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    failedCallBack(-1, "访问失败:" + e.getMessage(), callBack);
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        String string = response.body().string();
-                        Log.e(TAG, "response ----->" + string);
-                        successCallBack((T) string, callBack);
+                public void onResponse(@NonNull Call call,
+                                       @NonNull Response response) throws IOException {
+                    if (response.code() == 200) {
+                        ResponseBody body = response.body();
+                        if (body != null) {
+                            String string = body.string();
+                            successCallBack((T) string, callBack);
+                        } else {
+                            failedCallBack(response.code(), response.message(), callBack);
+                        }
                     } else {
-                        failedCallBack("服务器错误", callBack);
+                        failedCallBack(response.code(), "服务器错误: " + response.message(), callBack);
                     }
                 }
             });
-            return call;
         } catch (Exception e) {
-            Log.e(TAG, e.toString());
+            e("requestPostEnqueue Exception " + e);
         }
-        return null;
     }
 
 
     /**
      * okHttp post异步请求表单提交
+     *
      * @param actionUrl 接口地址
      * @param paramsMap 请求参数
-     * @param callBack 请求返回数据回调
-     * @param <T> 数据泛型
-     * @return
+     * @param callBack  请求返回数据回调
+     * @param <T>       数据泛型
      */
-    private <T> Call requestPostByAsynWithForm(String actionUrl, HashMap<String, String> paramsMap, final ReqCallBack<T> callBack) {
+    private <T> void requestPostEnqueueWithForm(String actionUrl, HashMap<String,
+            String> paramsMap, final ReqCallBack<T> callBack) {
         try {
             FormBody.Builder builder = new FormBody.Builder();
-            for (String key : paramsMap.keySet()) {
-                builder.add(key, paramsMap.get(key));
+            if (paramsMap != null) {
+                for (String key : paramsMap.keySet()) {
+                    String s = paramsMap.get(key);
+                    builder.add(key, s + "");
+                }
             }
             RequestBody formBody = builder.build();
-            String requestUrl = String.format("%s/%s", BASE_URL, actionUrl);
+            String requestUrl = String.format("%s/%s", getBaseUrl(), actionUrl);
+            d("requestPostEnqueueWithForm requestUrl " + requestUrl);
             final Request request = addHeaders().url(requestUrl).post(formBody).build();
             final Call call = mOkHttpClient.newCall(request);
             call.enqueue(new Callback() {
                 @Override
-                public void onFailure(Call call, IOException e) {
-                    failedCallBack("访问失败", callBack);
-                    Log.e(TAG, e.toString());
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    failedCallBack(-1, "访问失败:" + e.getMessage(), callBack);
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        String string = response.body().string();
-                        Log.e(TAG, "response ----->" + string);
-                        successCallBack((T) string, callBack);
+                public void onResponse(@NonNull Call call,
+                                       @NonNull Response response) throws IOException {
+                    if (response.code() == 200) {
+                        ResponseBody body = response.body();
+                        if (body != null) {
+                            String string = body.string();
+                            successCallBack((T) string, callBack);
+                        } else {
+                            failedCallBack(response.code(), response.message(), callBack);
+                        }
                     } else {
-                        failedCallBack("服务器错误", callBack);
+                        failedCallBack(response.code(), "服务器错误: " + response.message(), callBack);
                     }
                 }
             });
-            return call;
         } catch (Exception e) {
-            Log.e(TAG, e.toString());
+            e("requestPostEnqueueWithForm Exception " + e);
         }
-        return null;
     }
-
-    public interface ReqCallBack<T> {
-        /**
-         * 响应成功
-         */
-        void onReqSuccess(T result);
-
-        /**
-         * 响应失败
-         */
-        void onReqFailed(String errorMsg);
-    }
-
 
     /**
      * 统一为请求添加头信息
-     * @return
+     *
+     * @return 添加请求公共参数
      */
     private Request.Builder addHeaders() {
         Request.Builder builder = new Request.Builder()
                 .addHeader("Connection", "keep-alive")
                 .addHeader("phoneModel", Build.MODEL)
                 .addHeader("systemVersion", Build.VERSION.RELEASE);
+
+        //添加外部设置的请求头
+        if (requestConfig != null && requestConfig.getHeaders() != null
+                && requestConfig.getHeaders().size() > 0) {
+            HashMap<String, String> headers = requestConfig.getHeaders();
+            Set<Map.Entry<String, String>> entries = headers.entrySet();
+            for (Map.Entry<String, String> entry : entries) {
+                builder.addHeader(entry.getKey(), entry.getValue());
+            }
+        }
         return builder;
     }
 
     /**
      * 统一同意处理成功信息
-     * @param result
-     * @param callBack
-     * @param <T>
+     *
+     * @param result   响应数据
+     * @param callBack 回调
+     * @param <T>      泛型
      */
     private <T> void successCallBack(final T result, final ReqCallBack<T> callBack) {
-        okHttpHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (callBack != null) {
-                    callBack.onReqSuccess(result);
-                }
+        DelegateTaskExecutor.getInstance().postToMainThread(() -> {
+            d("successCallBack response ----->" + result);
+            if (callBack != null) {
+                callBack.onReqSuccess(result);
             }
         });
     }
 
     /**
      * 统一处理失败信息
-     * @param errorMsg
-     * @param callBack
-     * @param <T>
+     *
+     * @param errorMsg 异常消息
+     * @param callBack 回调
+     * @param <T>      泛型
      */
-    private <T> void failedCallBack(final String errorMsg, final ReqCallBack<T> callBack) {
-        okHttpHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (callBack != null) {
-                    callBack.onReqFailed(errorMsg);
-                }
+    private <T> void failedCallBack(int code, final String errorMsg, final ReqCallBack<T> callBack) {
+        DelegateTaskExecutor.getInstance().postToMainThread(() -> {
+            d("failedCallBack response ----->" + code + " , " + errorMsg);
+            if (callBack != null) {
+                callBack.onReqFailed(code, errorMsg);
             }
         });
+    }
+
+    public static void d(String msg) {
+        Log.d("PalmSdk |: Net ", msg);
+    }
+
+    public static void e(String msg) {
+        Log.e("PalmSdk |: Net ", msg);
     }
 
 }

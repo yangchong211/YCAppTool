@@ -31,7 +31,7 @@ import okhttp3.ResponseBody;
  */
 public final class OkHttpUtils {
 
-    private static OkHttpClient okHttpClient = null;
+    private static volatile OkHttpClient okHttpClient = null;
 
     private OkHttpUtils() {}
 
@@ -67,7 +67,8 @@ public final class OkHttpUtils {
                 .url(url)
                 .build();
         try {
-            Response response = getInstance().newCall(request).execute();
+            Call call = getInstance().newCall(request);
+            Response response = call.execute();
             ResponseBody body = response.body();
             String content = null;
             if (body != null) {

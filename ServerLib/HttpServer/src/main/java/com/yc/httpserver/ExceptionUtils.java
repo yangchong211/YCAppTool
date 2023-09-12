@@ -11,18 +11,6 @@ import java.net.SocketTimeoutException;
 
 public class ExceptionUtils {
 
-    /*
-     * 在使用Retrofit+RxJava时，我们访问接口，获取数据的流程一般是这样的：订阅->访问接口->解析数据->展示。
-     * 如上所说，异常和错误本质是一样的，因此我们要尽量避免在View层对错误进行判断，处理。
-     *
-     * 在获取数据的流程中，访问接口和解析数据时都有可能会出错，我们可以通过拦截器在这两层拦截错误。
-     * 1.在访问接口时，我们不用设置拦截器，因为一旦出现错误，Retrofit会自动抛出异常。
-     * 2.在解析数据时，我们设置一个拦截器，判断Result里面的code是否为成功，如果不成功，则要根据与服务器约定好的错误码来抛出对应的异常。
-     * 3.除此以外，为了我们要尽量避免在View层对错误进行判断，处理，我们必须还要设置一个拦截器，拦截onError事件，然后使用ExceptionHandler，让其根据错误类型来分别处理。
-     */
-
-
-
     /**
      * 对应HTTP的状态码
      */
@@ -39,47 +27,12 @@ public class ExceptionUtils {
     private static final int SERVICE_UNAVAILABLE = 503;
     private static final int GATEWAY_TIMEOUT = 504;
 
-    /**
-     * 服务器定义的状态吗
-     * 比如：登录过期，提醒用户重新登录；
-     *      添加商品，但是服务端发现库存不足，这个时候接口请求成功，服务端定义业务层失败，服务端给出提示语，客户端进行吐司
-     *      请求接口，参数异常或者类型错误，请求code为200成功状态，不过给出提示，这个时候客户端用log打印服务端给出的提示语，方便快递查找问题
-     *      其他情况，接口请求成功，但是服务端定义业务层需要吐司服务端返回的对应提示语
-     */
-    /**
-     * 完全成功
-     */
-    private static final int CODE_SUCCESS = 0;
-    /**
-     * Token 失效
-     */
-    public static final int CODE_TOKEN_INVALID = 401;
-    /**
-     * 缺少参数
-     */
-    public static final int CODE_NO_MISSING_PARAMETER = 400400;
-    /**
-     * 其他情况
-     */
-    public static final int CODE_NO_OTHER = 403;
-    /**
-     * 统一提示
-     */
-    public static final int CODE_SHOW_TOAST = 400000;
 
-
-
-    /**
-     * 这个可以处理服务器请求成功，但是业务逻辑失败，比如token失效需要重新登陆
-     * @param code                  自定义的code码
-     */
     public static void serviceException(int code , String content){
-        if (code != CODE_SUCCESS){
-            ServerException serverException = new ServerException();
-            serverException.setCode(code);
-            serverException.setMessage(content);
-            handleException(serverException);
-        }
+        ServerException serverException = new ServerException();
+        serverException.setCode(code);
+        serverException.setMessage(content);
+        handleException(serverException);
     }
 
     /**
@@ -113,26 +66,9 @@ public class ExceptionUtils {
         } else if (e instanceof ServerException){
             //服务器返回的错误
             ServerException resultException = (ServerException) e;
-            int code = resultException.getCode();
             String message = resultException.getMessage();
             ex = new HttpException(resultException, ErrorCode.SERVER_ERROR);
-            switch (code){
-                case CODE_TOKEN_INVALID:
-                    ex.setDisplayMessage("重新登陆");
-                    break;
-                case CODE_NO_OTHER:
-                    ex.setDisplayMessage("其他情况");
-                    break;
-                case CODE_SHOW_TOAST:
-                    ex.setDisplayMessage("吐司");
-                    break;
-                case CODE_NO_MISSING_PARAMETER:
-                    ex.setDisplayMessage("缺少参数");
-                    break;
-                default:
-                    ex.setDisplayMessage(message);
-                    break;
-            }
+            ex.setDisplayMessage(message);
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException){

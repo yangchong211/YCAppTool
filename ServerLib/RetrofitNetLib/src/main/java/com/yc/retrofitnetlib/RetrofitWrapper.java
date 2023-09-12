@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.yc.httpserver.CustomCookieJar;
 import com.yc.netinterceptor.cache.CacheInterceptor;
 import com.yc.netinterceptor.log.HttpLoggerLevel;
 import com.yc.netinterceptor.log.HttpLoggingInterceptor;
@@ -87,7 +88,7 @@ public class RetrofitWrapper {
             }
         }
         //添加自定义CookieJar
-        InterceptorUtils.addCookie(okHttpBuilder);
+        okHttpBuilder.cookieJar(new CustomCookieJar());
         initBuilder(url,build);
     }
 

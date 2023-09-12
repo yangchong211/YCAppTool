@@ -5,7 +5,7 @@ package com.yc.httpserver;
  */
 public class HttpException extends Exception {
 
-    private int code;
+    private final int code;
     private String displayMessage;
 
     public HttpException(Throwable throwable, int code) {
