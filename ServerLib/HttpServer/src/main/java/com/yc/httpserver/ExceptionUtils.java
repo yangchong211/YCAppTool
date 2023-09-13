@@ -44,7 +44,7 @@ public class ExceptionUtils {
         //HTTP错误   网络请求异常 比如常见404 500之类的等
         if (e instanceof retrofit2.HttpException){
             retrofit2.HttpException httpException = (retrofit2.HttpException) e;
-            ex = new HttpException(e, ErrorCode.HTTP_ERROR);
+            ex = new HttpException(e);
             switch(httpException.code()){
                 case BAD_REQUEST:
                 case UNAUTHORIZED:
@@ -67,28 +67,28 @@ public class ExceptionUtils {
             //服务器返回的错误
             ServerException resultException = (ServerException) e;
             String message = resultException.getMessage();
-            ex = new HttpException(resultException, ErrorCode.SERVER_ERROR);
+            ex = new HttpException(resultException);
             ex.setDisplayMessage(message);
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException){
-            ex = new HttpException(e, ErrorCode.PARSE_ERROR);
+            ex = new HttpException(e);
             //均视为解析错误
             ex.setDisplayMessage("解析错误");
         }else if(e instanceof ConnectException){
-            ex = new HttpException(e, ErrorCode.NETWORK_ERROR);
+            ex = new HttpException(e);
             //均视为网络错误
             ex.setDisplayMessage("连接失败");
         } else if(e instanceof java.net.UnknownHostException){
-            ex = new HttpException(e, ErrorCode.NETWORK_ERROR);
+            ex = new HttpException(e);
             //网络未连接
             ex.setDisplayMessage("未知网络未连接");
         } else if (e instanceof SocketTimeoutException) {
-            ex = new HttpException(e, ErrorCode.NETWORK_ERROR);
+            ex = new HttpException(e);
             //网络未连接
             ex.setDisplayMessage("服务器响应超时");
         }  else {
-            ex = new HttpException(e, ErrorCode.UNKNOWN);
+            ex = new HttpException(e);
             //未知错误
             ex.setDisplayMessage("未知错误");
         }

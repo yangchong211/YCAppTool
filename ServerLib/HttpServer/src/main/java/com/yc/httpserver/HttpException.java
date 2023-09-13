@@ -5,12 +5,10 @@ package com.yc.httpserver;
  */
 public class HttpException extends Exception {
 
-    private final int code;
     private String displayMessage;
 
-    public HttpException(Throwable throwable, int code) {
+    public HttpException(Throwable throwable) {
         super(throwable);
-        this.code = code;
     }
 
     public void setDisplayMessage(String displayMessage) {
@@ -21,8 +19,5 @@ public class HttpException extends Exception {
         return displayMessage;
     }
 
-    public int getCode() {
-        return code;
-    }
 }
 

@@ -12,6 +12,46 @@
 
 
 
+#### 1.3 Post提交数据四种方式
+- Post提交数据四种方式如下
+    - 第一种：Map 通过 GSON 转为 JSON
+    - 第二种：使用MultipartBody提交表单 form-data
+    - 第三种：JSONObject
+    - 第四种：使用FormBody提交表单数据，x-www-form-urlencoded
+- 第一种方式核心代码【Map 通过 GSON 转为 JSON】
+    ```
+    RequestBody requestBody = FormBody.create(mediaType, gson.toJson(map));
+    Request.Builder builder = new Request.Builder().url(url);
+    Request request = builder.post(requestBody).build();
+    Call call = client.newCall(request);
+    Response resp = call.execute();
+    ```
+- 第二种方式核心代码【表单 form-data】
+    ```
+    MultipartBody.Builder bodyBuilder = new MultipartBody
+        .Builder()
+        .setType(MultipartBody.FORM);
+    bodyBuilder.addFormDataPart("word", "西红柿炒鸡蛋");
+    Request.Builder builder = new Request.Builder().url(url);
+    builder.post(bodyBuilder.build());
+    Call call = client.newCall(builder.build());
+    Response resp = call.execute();
+    ```
+- 第三种方式核心代码【JSONObject方式】
+    ```
+    JSONObject json = new JSONObject();
+    json.put("word", "西红柿炒鸡蛋");
+    json.put("page", "1");
+    RequestBody bodyBuilder = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json.toString());
+    Request.Builder builder = new Request.Builder().url(url);
+    builder.post(bodyBuilder).build();
+    Call call = client.newCall(builder.build());
+    Response resp = call.execute();
+    ```
+
+
+
+
 ### 02.常见思路和做法
 #### 2.3 Cookie应用场景
 - 遇到的问题：登陆成功后，发送请求获取消息，老是提示我没有登陆。

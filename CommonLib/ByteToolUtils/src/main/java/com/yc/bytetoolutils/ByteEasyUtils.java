@@ -1,4 +1,4 @@
-package com.yc.toolutils;
+package com.yc.bytetoolutils;
 
 
 /**
@@ -10,7 +10,7 @@ package com.yc.toolutils;
  *     revise:
  * </pre>
  */
-public final class ByteUtils {
+public final class ByteEasyUtils {
 
     /**
      * bit = 0/1       就是一个二进制数，这是计算机运算的最小单位，也是最基本的单位，什么都会转为01来计算
@@ -63,7 +63,6 @@ public final class ByteUtils {
                 + (byte) ((b >> 3) & 0x1) + (byte) ((b >> 2) & 0x1)
                 + (byte) ((b >> 1) & 0x1) + (byte) ((b >> 0) & 0x1);
     }
-
 
     /**
      * 二进制字符串转byte
