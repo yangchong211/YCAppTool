@@ -5,6 +5,8 @@ public class ServerException extends RuntimeException {
     public int code;
     public String message;
 
+
+
     public int getCode() {
         return code;
     }

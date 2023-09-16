@@ -50,10 +50,7 @@
     ```
 
 
-
-
-### 02.常见思路和做法
-#### 2.3 Cookie应用场景
+##### 1.8 Cookie应用场景
 - 遇到的问题：登陆成功后，发送请求获取消息，老是提示我没有登陆。
     - Request经常都要携带Cookie，上面说过request创建时可以通过header设置参数，Cookie也是参数之一。
     ```
@@ -70,6 +67,10 @@
 
 
 
+### 02.常见思路和做法
+
+
+
 #### 2.4 如何Cookie的持久化
 - Android中如何使用Cookie的持久化
     - 第一步：通过响应拦截器从response取出cookie并保存到本地，通过请求拦截器从本地取出cookie并添加到请求中
@@ -80,7 +81,7 @@
 ### 03.Api调用说明
 - OkHttp持久化Cookie操作
     - Okhttp3默认是不持久化Cookie的，想要持久化Cookie就要实现CookieJar接口。
-    ``` java
+    ```
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
     builder.cookieJar(new CustomCookieJar());
     ```
