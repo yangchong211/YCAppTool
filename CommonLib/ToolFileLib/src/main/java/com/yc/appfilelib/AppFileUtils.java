@@ -409,6 +409,24 @@ public final class AppFileUtils {
         return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
     }
 
+    public static boolean createOrExistsFile(final File file) {
+        if (file == null) {
+            return false;
+        }
+        if (file.exists()) {
+            return file.isFile();
+        }
+        if (!AppFileUtils.createOrExistsDir(file.getParentFile())) {
+            return false;
+        }
+        try {
+            return file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public static void searchFile(File file, List<File> fileList) {
         if (file.exists() && file.isDirectory()) {
             File[] fs = file.listFiles();

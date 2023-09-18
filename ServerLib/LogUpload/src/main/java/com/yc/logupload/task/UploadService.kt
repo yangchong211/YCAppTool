@@ -6,6 +6,7 @@ import android.util.Log
 import com.yc.logupload.config.UploadInitHelper
 import com.yc.logupload.inter.OnUploadListener
 import com.yc.zipfilelib.AppZipUtils
+import com.yc.zipfilelib.ZipEntrySet
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -81,9 +82,13 @@ class UploadService : IntentService(TAG) {
 
         val startTime = System.currentTimeMillis()
         Log.d(TAG, "zip folder path : " + zipFile.path)
-        val entrySets: ArrayList<AppZipUtils.EntrySet> = ArrayList<AppZipUtils.EntrySet>()
+        val entrySets: ArrayList<ZipEntrySet> = ArrayList<ZipEntrySet>()
         //将符合条件的日志文件打包
-        val entrySet = AppZipUtils.EntrySet(null, logFile, dateFileList)
+        val entrySet = ZipEntrySet(
+            null,
+            logFile,
+            dateFileList
+        )
         entrySets.add(entrySet)
         //将符合条件的日志文件(是个list列表)写到zip文件中
         val writeToZip = AppZipUtils.writeToZip2(entrySets, zipFile)
