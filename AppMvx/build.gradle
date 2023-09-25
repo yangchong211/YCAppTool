@@ -52,4 +52,6 @@ dependencies {
     implementation project(path: ':NetSettingLib')
     implementation project(path: ':NetTestLib')
     implementation project(path: ':NotCaptureLib')
+
+    implementation 'com.tencent.weixiao:WxPalmSdk:0.0.2'
 }
