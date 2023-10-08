@@ -1,0 +1,43 @@
+{
+  "stringTable": {
+    "0": "/Users/yc/github/YCAppTool/AppJni/.cxx/cmake/debug/armeabi-v7a",
+    "1": "--target=armv7-none-linux-androideabi17 --gcc-toolchain=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dtest_crash_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/yc/github/YCAppTool/AppJni/.cxx/cmake/debug/armeabi-v7a\" clean"
+  ],
+  "buildTargetsCommand": "/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/yc/github/YCAppTool/AppJni/.cxx/cmake/debug/armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "test_crash-Debug-armeabi-v7a": {
+      "buildCommand": "/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/yc/github/YCAppTool/AppJni/.cxx/cmake/debug/armeabi-v7a\" test_crash",
+      "buildType": "debug",
+      "toolchain": "3604095003",
+      "abi": "armeabi-v7a",
+      "artifactName": "test_crash",
+      "files": [
+        {
+          "src": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/test_crash.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/yc/github/YCAppTool/AppJni/build/intermediates/cmake/debug/obj/armeabi-v7a/libtest_crash.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "3604095003": {
+      "cppCompilerExecutable": "/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

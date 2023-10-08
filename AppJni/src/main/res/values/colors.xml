@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#fff</color>
+    <color name="mine_color">#855a20</color>
+
+
+    <color name="indexColor">#ffffffff</color>
+    <color name="indexShadowColor_1">#00dedede</color>
+    <color name="indexShadowColor_2">#02dedede</color>
+    <color name="indexShadowColor_3">#04dedede</color>
+    <color name="indexShadowColor_4">#06dedede</color>
+    <color name="indexShadowColor_5">#08dedede</color>
+    <color name="indexShadowColor_6">#10dedede</color>
+    <color name="indexShadowColor_7">#12dedede</color>
+    <color name="indexShadowColor_8">#14dedede</color>
+</resources>

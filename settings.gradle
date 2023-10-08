@@ -326,4 +326,12 @@ project(':EventBus').projectDir = new File('ThirdLib/EventBus')
 project(':OkHttpLib').projectDir = new File('ThirdLib/OkHttpLib')
 
 
+/* +++++++++ JNI开发demo +++++++++ */
+include ':AppJni'
+include ':CallJniLib', ':TestJniLib', ':CrashDumper',':SafetyJniLib',':ReLinker'
+project(':CallJniLib').projectDir = new File('JniNdkLib/CallJniLib')
+project(':TestJniLib').projectDir = new File('JniNdkLib/TestJniLib')
+project(':CrashDumper').projectDir = new File('JniNdkLib/CrashDumper')
+project(':SafetyJniLib').projectDir = new File('JniNdkLib/SafetyJniLib')
+project(':ReLinker').projectDir = new File('JniNdkLib/ReLinker')
 

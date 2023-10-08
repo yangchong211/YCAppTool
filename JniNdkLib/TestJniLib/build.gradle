@@ -1,0 +1,63 @@
+//plugins {id 'com.android.library'}
+apply plugin: 'com.android.library'
+
+
+android {
+    compileSdkVersion 29
+//    buildToolsVersion '29.0.0'
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            // Specifies the ABI configurations of your native
+            // libraries Gradle should build and package with your APK.
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
+        externalNativeBuild {
+            cmake {
+                //提供给C++编译器的一个标志 可选
+                cppFlags ""
+                //声明当前Cmake项目使用的Android abi
+                //abiFilters "armeabi-v7a"
+                //提供给Cmake的参数信息 可选
+                //arguments "-DANDROID_ARM_NEON=TRUE", "-DANDROID_TOOLCHAIN=clang"
+                //提供给C编译器的一个标志 可选
+                //cFlags "-D__STDC_FORMAT_MACROS"
+                //指定哪个so库会被打包到apk中去 可选
+                //targets "libexample-one", "my-executible-demo"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //CMake的NDK项目它有自己一套运行流程
+    //Gradle 调用外部构建脚本CMakeLists.txt
+    //CMake 按照构建脚本的命令将 C++ 源文件 testjnilib.cpp 编译到共享的对象库中，并命名为 libtestjnilib.so ，Gradle 随后会将其打包到APK中
+    externalNativeBuild {
+        cmake {
+            //声明cmake配置文件路径
+            path "src/main/cpp/CMakeLists.txt"
+            //声明cmake版本
+            version "3.10.2"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+}

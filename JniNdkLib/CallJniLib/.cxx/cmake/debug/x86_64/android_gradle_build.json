@@ -1,0 +1,48 @@
+{
+  "stringTable": {
+    "0": "/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/.cxx/cmake/debug/x86_64",
+    "1": "--target=x86_64-none-linux-android21 --gcc-toolchain=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dcalljnilib_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/src/main/cpp/CMakeLists.txt",
+    "/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/.cxx/cmake/debug/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/.cxx/cmake/debug/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "calljnilib-Debug-x86_64": {
+      "buildCommand": "/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/.cxx/cmake/debug/x86_64\" calljnilib",
+      "buildType": "debug",
+      "toolchain": "3604095003",
+      "abi": "x86_64",
+      "artifactName": "calljnilib",
+      "files": [
+        {
+          "src": "/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/src/main/cpp/calljnilib.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [
+        {
+          "header": "/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/src/main/cpp/calljnilib.h",
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "output": "/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/build/intermediates/cmake/debug/obj/x86_64/libcalljnilib.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "3604095003": {
+      "cppCompilerExecutable": "/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/yc/github/YCAppTool/AppJni/.cxx/cmake/debug/x86\" clean"
+  ],
+  "buildTargetsCommand": "/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/yc/github/YCAppTool/AppJni/.cxx/cmake/debug/x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "test_crash-Debug-x86": {
+      "artifactName": "test_crash",
+      "buildCommand": "/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/yc/github/YCAppTool/AppJni/.cxx/cmake/debug/x86\" test_crash",
+      "abi": "x86",
+      "output": "/Users/yc/github/YCAppTool/AppJni/build/intermediates/cmake/debug/obj/x86/libtest_crash.so",
+      "runtimeFiles": []
+    }
+  }
+}
