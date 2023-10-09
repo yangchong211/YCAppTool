@@ -28,7 +28,13 @@ public class ExceptionUtils {
     private static final int GATEWAY_TIMEOUT = 504;
 
 
-    public static void serviceException(int code , String content){
+    /**
+     * 服务端自定义异常
+     *
+     * @param code    code
+     * @param content 信息
+     */
+    public static void serviceException(int code, String content) {
         ServerException serverException = new ServerException();
         serverException.setCode(code);
         serverException.setMessage(content);
@@ -37,33 +43,12 @@ public class ExceptionUtils {
 
     /**
      * 这个是处理网络异常，也可以处理业务中的异常
-     * @param e                     e异常
+     *
+     * @param e e异常
      */
-    public static void handleException(Throwable e){
+    public static void handleException(Throwable e) {
         HttpException ex;
-        //HTTP错误   网络请求异常 比如常见404 500之类的等
-        if (e instanceof retrofit2.HttpException){
-            retrofit2.HttpException httpException = (retrofit2.HttpException) e;
-            ex = new HttpException(e);
-            switch(httpException.code()){
-                case BAD_REQUEST:
-                case UNAUTHORIZED:
-                case FORBIDDEN:
-                case NOT_FOUND:
-                case METHOD_NOT_ALLOWED:
-                case REQUEST_TIMEOUT:
-                case CONFLICT:
-                case PRECONDITION_FAILED:
-                case GATEWAY_TIMEOUT:
-                case INTERNAL_SERVER_ERROR:
-                case BAD_GATEWAY:
-                case SERVICE_UNAVAILABLE:
-                    //均视为网络错误
-                default:
-                    ex.setDisplayMessage("网络错误"+httpException.code());
-                    break;
-            }
-        } else if (e instanceof ServerException){
+        if (e instanceof ServerException) {
             //服务器返回的错误
             ServerException resultException = (ServerException) e;
             String message = resultException.getMessage();
@@ -71,15 +56,15 @@ public class ExceptionUtils {
             ex.setDisplayMessage(message);
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
-                || e instanceof ParseException){
+                || e instanceof ParseException) {
             ex = new HttpException(e);
             //均视为解析错误
             ex.setDisplayMessage("解析错误");
-        }else if(e instanceof ConnectException){
+        } else if (e instanceof ConnectException) {
             ex = new HttpException(e);
             //均视为网络错误
             ex.setDisplayMessage("连接失败");
-        } else if(e instanceof java.net.UnknownHostException){
+        } else if (e instanceof java.net.UnknownHostException) {
             ex = new HttpException(e);
             //网络未连接
             ex.setDisplayMessage("未知网络未连接");
@@ -87,7 +72,7 @@ public class ExceptionUtils {
             ex = new HttpException(e);
             //网络未连接
             ex.setDisplayMessage("服务器响应超时");
-        }  else {
+        } else {
             ex = new HttpException(e);
             //未知错误
             ex.setDisplayMessage("未知错误");

@@ -16,7 +16,11 @@ public enum HttpMethod {
     /**
      * post请求参数为表单
      */
-    POST_FORM(3);
+    POST_FORM(3),
+    /**
+     * post请求参数为表单
+     */
+    POST_FORM2(4);
 
     /**
      * 请求方式

@@ -39,7 +39,6 @@ import com.yc.http.model.HttpMethod;
 import com.yc.http.model.HttpParams;
 import com.yc.http.model.ResponseClass;
 import com.yc.http.request.HttpRequest;
-import com.yc.httpserver.OkHttpUtils;
 import com.yc.logclient.LogUtils;
 import com.yc.monitorinterceptor.WeakNetworkInterceptor;
 import com.yc.monitorinterceptor.WeakNetworkManager;

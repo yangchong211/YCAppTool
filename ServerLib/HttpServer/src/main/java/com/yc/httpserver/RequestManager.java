@@ -19,6 +19,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -140,6 +141,9 @@ public final class RequestManager {
                 break;
             case POST_FORM:
                 requestPostEnqueueWithForm(actionUrl, paramsMap, callBack);
+                break;
+            case POST_FORM2:
+                requestPostEnqueueWithFormData(actionUrl, paramsMap, callBack);
                 break;
             default:
                 break;
@@ -458,6 +462,65 @@ public final class RequestManager {
             e("requestPostEnqueueWithForm Exception " + e);
         }
     }
+
+    /**
+     * okHttp post异步请求表单提交
+     *
+     * @param actionUrl 接口地址
+     * @param paramsMap 请求参数
+     * @param callBack  请求返回数据回调
+     */
+    private void requestPostEnqueueWithFormData(String actionUrl, HashMap<String,
+            String> paramsMap, final ReqCallBack<String> callBack) {
+        try {
+            MultipartBody.Builder builder = new MultipartBody.Builder();
+            // 设置传参为form-data格式
+            builder.setType(MultipartBody.FORM);
+            if (paramsMap != null) {
+                for (String key : paramsMap.keySet()) {
+                    String s = paramsMap.get(key);
+                    builder.addFormDataPart(key, s + "");
+                }
+            }
+
+            RequestBody formBody = builder.build();
+            String requestUrl = String.format("%s/%s", getBaseUrl(), actionUrl);
+            d("requestPostEnqueueWithForm requestUrl " + requestUrl);
+            //开始请求
+            final Request request = addHeaders()
+                    .url(requestUrl)
+                    .post(formBody)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            final Call call = mOkHttpClient.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    failedCallBack(-1, "访问失败:" + e.getMessage(), callBack);
+                }
+
+                @Override
+                public void onResponse(@NonNull Call call,
+                                       @NonNull Response response) throws IOException {
+                    if (response.code() == 200) {
+                        ResponseBody body = response.body();
+                        if (body != null) {
+                            String string = body.string();
+                            successCallBack(string, callBack);
+                        } else {
+                            failedCallBack(response.code(), response.message(), callBack);
+                        }
+                    } else {
+                        failedCallBack(response.code(), "服务器错误: " + response.message(), callBack);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            ExceptionUtils.handleException(e);
+        }
+    }
+
+
 
     /**
      * 统一为请求添加头信息
