@@ -9,10 +9,25 @@
 
 
 ### 01.基础概念说明
+#### 1.1 项目背景
+- 需求分析背景
+    - 实现一个网络请求的封装库：主要包括get,post，form表单请求，文件上传和下载等一些基础网络功能的实现。
+- 进行技术选型
+    - 在HttpUrlConnection，Volley和OkHttp中选择我们我们的封装基础库。
+    - OkHttp也是在HttpUrlConnection上做的封装，其继承了Volley的优势，且在Volley上构建了自己的有优点，包括：连接池复用，重试重定向机制，拦截器模式等
 
 
+#### 1.2 常见网络请求
+- 同步请求和异步请求。
+    ```
+    //同步
+    Response response = okHttpClient.newCall(request).execute();
+    //异步
+    okHttpClient.newCall(request).enqueue(callback);
+    ```
 
-#### 1.3 Post提交数据四种方式
+
+#### 1.4 Post提交数据四种方式
 - Post提交数据四种方式如下
     - 第一种：Map 通过 GSON 转为 JSON
     - 第二种：使用MultipartBody提交表单 form-data
@@ -68,6 +83,11 @@
 
 
 ### 02.常见思路和做法
+#### 2.4 网络日志打印
+- 如何打印日志
+    - OkHttp提供了一个拦截器接口，使得在打印日志时极为方便，并且对接口代码无入侵性。
+- 适当地添加日志拦截器
+    - 打印日志一般都是在debug的时候才需要，对于release即发布出去的版本，是不需要打印请求的日志的。
 
 
 
@@ -90,6 +110,20 @@
 
 
 ### 04.遇到的坑分析
+#### 4.6 HTTPS证书校验
+- 背景说明
+    - 如何在 Android 端下和服务端实现自制证书的连接？
+- App如何证书校验。目前okHttp已经提供了Api来处理证书校验的功能
+    ```
+    //不建议使用这个，方法过时，使用反射机制寻找X509信任管理类，消耗了不必要的性能。
+    okHttpBuilder.sslSocketFactory(sslSocketFactory);
+    //会传入信任管理类数组中的第一条
+    okHttpBuilder.sslSocketFactory(sslSocketFactory,x509TrustManager);
+    okHttpBuilder.hostnameVerifier(hostnameVerifier);
+    ```
+- 校验过程：
+    - 实际上，在 HTTPS 握手开始后，服务器会把整个证书链发送到客户端，给客户端做校验。校验的过程是要找到这样一条证书链，链中每个相邻节点，上级的公钥可以校验通过下级的证书，链的根节点是设备信任的锚点或者根节点可以被锚点校验。
+    - 那么锚点对于浏览器而言就是内置的根证书啦（注：根节点并不一定是根证书）。校验通过后，视情况校验客户端，以及确定加密套件和用非对称密钥来交换对称密钥。从而建立了一条安全的信道。
 
 
 ### 05.其他问题说明

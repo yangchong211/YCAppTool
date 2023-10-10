@@ -1,4 +1,4 @@
-package com.yc.other.ui.timer;
+package com.yc.looperthread;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -9,10 +9,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.IBinder;
-import androidx.annotation.RequiresApi;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -63,7 +63,7 @@ public class LoopRequestService extends Service {
         }
         quitLoopService(context);
         Log.i("LoopRequestService", "LoopService开启轮询服务，轮询间隔：" + LOOP_INTERVAL_SECS + "s");
-        //定时操作需要使用
+        //定时操作需要使用，获取AlarmManager系统服务
         AlarmManager manager = (AlarmManager) context.getApplicationContext()
                 .getSystemService(Context.ALARM_SERVICE);
         //开启服务service
@@ -86,6 +86,7 @@ public class LoopRequestService extends Service {
         if (manager != null) {
             //重复闹钟设置
             //setRepeating()方法将会设置一个重复性的闹钟。
+            //使用AlarmManger的setRepeating方法设置定期执行的时间间隔（seconds秒）和需要执行的Service
             manager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
                     LOOP_INTERVAL_SECS * 1000, pendingIntent);
         }

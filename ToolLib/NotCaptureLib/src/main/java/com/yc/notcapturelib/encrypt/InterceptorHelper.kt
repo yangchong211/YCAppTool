@@ -187,7 +187,7 @@ object InterceptorHelper {
     /**
      * 加密数据
      */
-    fun encrypt(encryptVersion: String , data : String): String? {
+    private fun encrypt(encryptVersion: String , data : String): String? {
         val encryptKey = NotCaptureHelper.getInstance().config.encryptKey
         val encryptDecryptListener = NotCaptureHelper.getInstance().encryptDecryptListener
         return when (encryptVersion) {
@@ -201,7 +201,7 @@ object InterceptorHelper {
     /**
      * 解密数据
      */
-    fun decrypt(encryptVersion: String , data : String): String? {
+    private fun decrypt(encryptVersion: String , data : String): String? {
         // 获取加密和解密的key
         val encryptKey = NotCaptureHelper.getInstance().config.encryptKey
         val encryptDecryptListener = NotCaptureHelper.getInstance().encryptDecryptListener
