@@ -78,11 +78,18 @@ public class HeartService extends Service {
         }
         String action = intent.getAction();
         if (ACTION_HEART_BEAT.equals(action)) {
-
+            doAction();
         } else if (ACTION_STOP.equals(action)) {
             releaseService();
         }
         return START_STICKY;
+    }
+
+    /**
+     * 做具体的操作
+     */
+    private void doAction() {
+
     }
 
     /**

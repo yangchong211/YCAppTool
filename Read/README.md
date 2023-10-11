@@ -91,7 +91,7 @@
 - https://github.com/doocs/jvm
 - 腾讯Matrix源码
     - https://www.yuque.com/ibaozi/ygq8yc
-
+- 安卓OKHTTP库添加HTTPS证书验证：http://events.jianshu.io/p/bf6d5432fa55
 
 
 

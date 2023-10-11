@@ -43,6 +43,7 @@ public final class AppLogFactory {
             } else {
                 file = new File(config.getFilePath());
             }
+            Log.d("AppLog" , "file path" + file.getPath());
             S_LOG_DISPATCHER.addPrinter(new FilePrinterImpl(file));
         }
         S_LOG_DISPATCHER.setMinLogLevel(config.getMinLogLevel());

@@ -42,6 +42,17 @@
 
 
 ### 02.常见思路和做法
+#### 2.3 ViewPager封装设计
+- 首先看下ViewPager的特点？
+    - ViewPager有预加载机制，即默认情况下当前页面左右两侧的1个页面会被加载，以方便用户滑动切换到相邻的界面时，可以更加顺畅的显示出来。通过ViewPager的setOffscreenPageLimit(int limit)可以设置预加载页面数量，当前页面相邻的limit个页面会被预加载进内存。
+- 为何要有ViewPager2这个控件？
+    - ViewPager2内部是通过RV实现的。但是对于Fragment的处理有单独的Adapter实现。
+- ViewPager2如何实现局部刷新操作？
+    - RecyclerView基于DiffUtil可以实现局部更新，FragmentStateAdapter也可以对Fragment实现局部更新。
+- ViewPager2预加载说明
+    - 建议：如果页面具有复杂的布局，应该将这个限制保持在较低的水平。当前页面的前后（limit数）页面会被添加到视图层次结构中，即使它是不可见的，超出limit数将会从视图删除，但会像RecyclerView一样被回收。
+- ViewPager2遇到的坑
+    - 在FragmentStateAdapter中有一个带有多个片段的viewpager2，每当我尝试打开一个新片段，然后使用viewpager2返回到当前片段时，都会出现异常。Expected the adapter to be 'fresh' while restoring state.
 
 
 

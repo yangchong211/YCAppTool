@@ -3,6 +3,7 @@ package com.yc.apploglib.printer;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Process;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -80,7 +81,7 @@ public class FilePrinterImpl extends AbsPrinter {
                 if (logFile == null) {
                     break;
                 }
-
+                Log.d("AppLog" , "logFile path" + logFile.getPath());
                 if (logFile.length() > MAX_LOG_FILE) {
                     if (!logFile.delete()) {
                         break;
@@ -89,6 +90,7 @@ public class FilePrinterImpl extends AbsPrinter {
                 try {
                     FileOutputStream fileOutputStream = new FileOutputStream(logFile, true);
                     OutputStreamWriter writer = new OutputStreamWriter(fileOutputStream, "UTF-8");
+                    //Writer writer = new StringWriter();
                     mWriter = new PrintWriter(writer);
                 } catch (Throwable ignored) {
                 }
@@ -130,9 +132,10 @@ public class FilePrinterImpl extends AbsPrinter {
                 tr.printStackTrace(writer);
                 writer.println();
             }
+            writer.flush();
         } catch (Throwable ignored) {
             // 6.0 在没有申请权限之前是无法访问外部存储的。
-//            e.printStackTrace();
+            //ignored.printStackTrace();
         }
     }
 
