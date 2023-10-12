@@ -18,11 +18,12 @@ public class ThreadBlockMessage extends Error {
 
     public static ThreadBlockMessage New(String prefix, boolean logThreadsWithoutStackTrace) {
 
-        final Map<Thread, StackTraceElement[]> stackTraces = new TreeMap<Thread, StackTraceElement[]>(new Comparator<Thread>() {
+        final Map<Thread, StackTraceElement[]> stackTraces = new TreeMap<>(new Comparator<Thread>() {
             @Override
             public int compare(Thread lhs, Thread rhs) {
-                if (lhs == rhs)
+                if (lhs == rhs) {
                     return 0;
+                }
                 return rhs.getName().compareTo(lhs.getName());
             }
         });

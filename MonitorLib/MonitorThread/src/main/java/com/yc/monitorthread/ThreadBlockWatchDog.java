@@ -48,7 +48,7 @@ public class ThreadBlockWatchDog {
                 return;
             }
             if (mayBlockedThread.getState() != Thread.State.RUNNABLE) {
-                Log.d(TAG, "watched thread state: " + mayBlockedThread.getState().toString());
+                Log.d(TAG, "watched thread state: " + mayBlockedThread.getState());
                 if (mayBlockedThread.getState() == Thread.State.NEW) {
                     handler.postAtTime(watchRunnable, SystemClock.uptimeMillis() + timeoutInterval);
                     return;

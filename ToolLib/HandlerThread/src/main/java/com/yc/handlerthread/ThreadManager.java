@@ -6,7 +6,10 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ThreadManager {
+/**
+ * 快速创建HandlerThread对象
+ */
+public final class ThreadManager {
 
     private final Map<String, BaseHandlerThread> mHandlerThreadMap;
     private final Object mLock;
