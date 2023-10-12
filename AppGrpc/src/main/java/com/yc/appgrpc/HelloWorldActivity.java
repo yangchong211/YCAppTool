@@ -19,8 +19,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import com.yc.appgrpc.lib.GrpcTools;
-import com.yc.appgrpc.lib.HelloResponse;
 import com.yc.grpcserver.BaseResponse;
 import com.yc.grpcserver.ChannelHelper;
 import com.yc.grpcserver.GrpcHelper;
@@ -197,6 +195,25 @@ public class HelloWorldActivity extends AppCompatActivity {
                 HelloReply reply = listenableFuture.get();
                 //得到请求响应的数据
                 String replyMessage = reply.getMessage();
+
+                //* FutureStub: 一对一（一元）的非阻塞式响应。
+                //* 可以通过addCallback()方法得到未来的执行结果。
+                //* callback源码实现简述：
+                //1. 在while循环里执行 future.get();
+                //2. 得到返回值时回调回调 onSuccess();
+                //3. 执行过程中抛出异常时回调 onFailure()。
+//                Futures.addCallback(listenableFuture, new FutureCallback<HelloReply>() {
+//                    @Override
+//                    public void onSuccess(@Nullable HelloReply result) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Throwable t) {
+//
+//                    }
+//                },null);
+
                 return replyMessage;
             } catch (Exception e) {
                 StringWriter sw = new StringWriter();
@@ -244,6 +261,12 @@ public class HelloWorldActivity extends AppCompatActivity {
             //构建请求实体，HelloRequest是自动生成的实体类
             HelloRequest request = HelloRequest.newBuilder().setName(message).build();
             //进行请求并且得到响应数据
+            //* Stub: 一对多（流式）的非阻塞式响应。
+            //* 通过显式传入StreamObserver实现未来消息的接收。
+            //* StreamObserver源码实现简述：
+            //1. 收到消息(onMessage())时，调用observer.onNext();
+            //2. 消息流关闭(onClose())时，判断连接状态(status.isOk());
+            //3. 状态正常调用observer.onCompleted()，否则调用observer.onError()。
             stub.sayHello(request, new StreamObserver<HelloReply>() {
                 @Override
                 public void onNext(HelloReply value) {
@@ -284,38 +307,21 @@ public class HelloWorldActivity extends AppCompatActivity {
             //构建Channel
             channel = ChannelHelper.newChannel1(host, port);
             //构建服务请求API代理
+            //* BlockingStub: 一对一（一元）的阻塞式响应。
+            //* 内部也是基于FutureStub实现，只是在调用时就开启了while循环。
+            //1. 创建feature;
+            //2. while(future.isDone)监听;
+            //3. 执行结束时，返回feture.get()。
+            //所以BlockingStub的调用执行需要运行在子线程。
             GreeterGrpc.GreeterBlockingStub stub = GreeterGrpc.newBlockingStub(channel);
             //构建请求实体，HelloRequest是自动生成的实体类
             HelloRequest request = HelloRequest.newBuilder().setName(message).build();
             //进行请求并且得到响应数据
             HelloReply reply = stub.sayHello(request);
-
-            //
             BaseResponse response = GrpcHelper.translateResponse(reply, BaseResponse.class);
         } catch (Exception e) {
             Log.i("Exception", e.getMessage());
         }
-    }
-
-
-    private void GrpcTask4(String host, String portStr, String message) {
-        com.yc.appgrpc.lib.HelloRequest helloRequest = new com.yc.appgrpc.lib.HelloRequest();
-        GrpcTools.getInstance().getServiceApi().sayHello(helloRequest, new GrpcCallback<HelloResponse>() {
-            @Override
-            public void onSuccess(HelloResponse result) {
-
-            }
-
-            @Override
-            public void onFailed(int code, String msg, Throwable ex) {
-
-            }
-
-            @Override
-            public void onFinish() {
-
-            }
-        });
     }
 
 }

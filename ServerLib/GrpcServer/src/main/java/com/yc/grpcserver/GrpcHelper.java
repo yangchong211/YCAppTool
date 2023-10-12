@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.grpc.stub.AbstractStub;
 
-public class GrpcHelper {
+public final class GrpcHelper {
 
     /**
      * 存根修饰
