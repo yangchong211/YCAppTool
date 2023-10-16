@@ -3,6 +3,7 @@ package com.yc.appmonitor;
 
 import android.content.Intent;
 import android.view.View;
+import android.view.ViewManager;
 
 import com.yc.appmonitor.apm.ApmTestActivity;
 import com.yc.appmonitor.crash.CrashTestActivity;
@@ -126,4 +127,6 @@ public class MonitorMainActivity extends BaseActivity {
         super.onStop();
         TimeMonitorHelper.end("Main Click");
     }
+
+
 }

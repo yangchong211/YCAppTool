@@ -80,18 +80,57 @@
 ----------------------------------------------------------------------------------------------------------------
 
 
+# c语言学习目标
+### 案例1：学生信息管理系统
+- 视频教学案例
+  - https://www.bilibili.com/video/BV1X4411T7A8/?spm_id_from=333.337.search-card.all.click&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
+  - https://www.bilibili.com/video/BV1Dv4y1X7qV?p=2&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
 
-今天，Java知识体系过一遍
+
+### 案例2：俄罗斯方块
+- 视频教学案例
+  - https://www.bilibili.com/video/BV1or4y1A7fm?p=8&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
+
+
+### 案例4: 万年历
+- 视频教学案例
+  - https://www.bilibili.com/video/BV1Vv4y1G7RZ/?spm_id_from=333.337.search-card.all.click&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
 
 
 
-安全，JNI
+----------------------------------------------------------------------------------------------------------------
+# c++语言学习目标
+### 案例1: 俄罗斯方块
+- 视频教学案例
+  - https://www.bilibili.com/video/BV19f4y1d7rq/?spm_id_from=333.337.search-card.all.click&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
+
+
+### 案例2:通讯录管理
+- 文章教学
+  - https://blog.csdn.net/yang2330648064/article/details/123609993
+- 视频课程
+  - https://www.bilibili.com/video/BV1fE411A7fK?p=7&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
+
+
+### 案例3：课程管理系统
+- 视频教学案例
+  - https://www.bilibili.com/video/BV13z4y117qC/?spm_id_from=333.337.search-card.all.click&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
+
+
+
+----------------------------------------------------------------------------------------------------------------
+
 
 ### JVM
-- https://github.com/doocs/jvm
+- JVM好文
+    - https://github.com/doocs/jvm
 - 腾讯Matrix源码
     - https://www.yuque.com/ibaozi/ygq8yc
 - 安卓OKHTTP库添加HTTPS证书验证：http://events.jianshu.io/p/bf6d5432fa55
+- 分析Java对象的内存布局
+  - https://zhuanlan.zhihu.com/p/151856103?from_voters_page=true
+
+
 
 
 
@@ -106,12 +145,8 @@
 - 你有什么赚钱的副业
     - https://www.zhihu.com/question/299003377/answer/2662165777
 
-
-### 经典好文
-- 学者视角和上帝视角
-    - https://xuyuan.blog.caixin.com/archives/247238  
-
-
+Android 多种支付方式的优雅实现
+https://blog.csdn.net/qq_39312146/article/details/129222208
 
 ### wiki
 - 刷掌问题处理流程
