@@ -7,7 +7,6 @@ import android.util.Log;
 import com.yc.grpcserver.GrpcChannelBuilder;
 
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
 public class GRPCClient {

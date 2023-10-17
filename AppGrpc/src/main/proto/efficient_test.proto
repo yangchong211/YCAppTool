@@ -11,12 +11,9 @@ option java_outer_classname = "AddressBookProto";
 
 //Person 类，消息结构
 message Person {
-
     string name = 1;
-
     //这里的required 的修饰符表示候name必须赋值(没有默认值)
     int32 id = 2;
-
     string email = 3;
     //optional 也就是可不赋值, proto3中已移除该关键字
     //当然optional string email = 3;[default = 0]默认值是0
@@ -42,4 +39,10 @@ message Person {
 //AddressBook  类
 message AddressBook {
     repeated Person people = 1;
+}
+
+message SearchRequest {
+    string query = 1;
+    int32 page_number = 2;
+    int32 result_per_page = 3;
 }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.yc.appgrpc.proto.JsonProtoTest;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toastutils.ToastUtils;
 
@@ -50,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ToastUtils.showRoundRectToast("效率测试");
-                new JsonProtoTest().gson();
-                new JsonProtoTest().protoTest();
+                new ProtoJsonTest.JsonProtoTest().gson();
+                new ProtoJsonTest.JsonProtoTest().protoTest();
+                new ProtoJsonTest.JsonProtoTest().testSearchRequest();
             }
         });
     }
