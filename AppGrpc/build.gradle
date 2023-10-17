@@ -3,14 +3,16 @@ apply plugin: 'com.google.protobuf'
 //apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 29
-        versionCode 23
-        versionName '1.8.3'
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
         applicationId "com.yc.appgrpc"
+        // dex突破65535的限制
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -29,6 +31,11 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/*******'
+        exclude 'META-INF/INDEX.LIST'
     }
 }
 
@@ -73,6 +80,7 @@ dependencies {
     implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
 
     //protobuf
+    implementation 'io.grpc:grpc-netty:1.33.0'
     implementation 'io.grpc:grpc-okhttp:1.33.0'
     implementation 'io.grpc:grpc-protobuf-lite:1.33.0'
     implementation 'io.grpc:grpc-stub:1.33.0'

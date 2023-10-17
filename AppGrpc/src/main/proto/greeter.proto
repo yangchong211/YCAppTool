@@ -1,0 +1,59 @@
+// Copyright 2015 The gRPC Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+
+
+//protobuf 有2个版本，语法不同，默认版本是 proto2
+//如果需要 proto3，则需要在非空非注释第一行使用 syntax = "proto3" 标明版本。现在推荐使用proto3版本。
+syntax = "proto3";
+option java_multiple_files = true;
+//这指定了我们要用于生成的 Java 类的包。如果java_package.proto 文件中没有给出明确的选项，那么默认情况下将使用 proto 包（使用“package”关键字指定）。
+//但是，proto 包通常不会成为好的 Java 包，因为 proto 包不应该以反向域名开头。如果我们从这个 .proto 生成另一种语言的代码，则该java_package选项无效。
+option java_package = "com.yc.appgrpc";
+option java_outer_classname = "GreeterProto";
+option objc_class_prefix = "HLW";
+
+//proto文件上方定义了package，调用方不可以更改此路径！！！
+package greeter;
+
+//这个是定义的服务接口
+//当您构建示例时，构建过程会重新生成GreeterGrpc.java，其中包含生成的 gRPC 客户端和服务器类。
+//这也会重新生成用于填充、序列化和检索我们的请求和响应类型的类。
+service Greeter {
+  // 简单一元模式
+  // 一个简单的 RPC，其中客户端使用存根向服务器发送请求并等待响应返回，就像普通的函数调用一样。
+  rpc simpleHello (Request) returns (Reply) {}
+  // 客户端流模式
+  // 客户端流式 RPC，客户端写入一系列消息并将它们发送到服务器，再次使用提供的流。
+  // 客户端写完消息后，它会等待服务器读取所有消息并返回响应。您可以通过将关键字放在请求stream类型之前来指定客户端流式传输方法。
+  rpc clientStream (stream Request) returns (Reply) {}
+  // 服务端流模式
+  // 服务器端流式 RPC，客户端向服务器发送请求并获取流以读取一系列消息。
+  // 客户端从返回的流中读取，直到没有更多消息为止。正如您在我们的示例中看到的，您通过将关键字放在响应stream类型 之前来指定服务器端流式传输方法。
+  rpc serverStream (Request) returns (stream Reply) {}
+  // 双向流模式
+  // 双向流式 RPC，双方使用读写流发送一系列消息。
+  // 这两个流独立运行，因此客户端和服务器可以按照他们喜欢的任何顺序读取和写入：
+  // 例如，服务器可以在写入响应之前等待接收所有客户端消息，或者它可以交替读取一条消息然后写入一条消息，或其他一些读写组合。
+  // 保留每个流中消息的顺序。stream 您可以通过将关键字放在请求和响应之前来指定这种类型的方法。
+  rpc bothFlowStream (stream Request) returns (stream Reply) {}
+}
+
+message Request {
+  string reqInfo = 1;
+}
+
+message Reply {
+  string repInfo = 1;
+}

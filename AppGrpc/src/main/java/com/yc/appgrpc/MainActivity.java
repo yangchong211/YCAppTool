@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
         tvRpc2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WanAndroidActivity.startActivity(MainActivity.this);
+
             }
         });
         tvRpc3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RouteGuideActivity.startActivity(MainActivity.this);
+                GreeterActivity.startActivity(MainActivity.this);
             }
         });
         tvRpc4.setOnClickListener(new View.OnClickListener() {

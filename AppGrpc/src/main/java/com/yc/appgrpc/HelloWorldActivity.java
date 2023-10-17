@@ -129,7 +129,7 @@ public class HelloWorldActivity extends AppCompatActivity {
                 //构建Channel
                 channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
                 //构建服务请求API代理
-                GreeterGrpc.GreeterBlockingStub stub = GreeterGrpc.newBlockingStub(channel);
+                HelloWorldGrpc.HelloWorldBlockingStub stub = HelloWorldGrpc.newBlockingStub(channel);
                 //构建请求实体，HelloRequest是自动生成的实体类
                 HelloRequest request = HelloRequest.newBuilder().setName(message).build();
                 //进行请求并且得到响应数据
@@ -187,7 +187,7 @@ public class HelloWorldActivity extends AppCompatActivity {
                 //构建Channel
                 channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
                 //构建服务请求API代理
-                GreeterGrpc.GreeterFutureStub stub = GreeterGrpc.newFutureStub(channel);
+                HelloWorldGrpc.HelloWorldFutureStub stub = HelloWorldGrpc.newFutureStub(channel);
                 //构建请求实体，HelloRequest是自动生成的实体类
                 HelloRequest request = HelloRequest.newBuilder().setName(message).build();
                 //进行请求并且得到响应数据
@@ -257,7 +257,7 @@ public class HelloWorldActivity extends AppCompatActivity {
             //构建Channel
             channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
             //构建服务请求API代理
-            GreeterGrpc.GreeterStub stub = GreeterGrpc.newStub(channel);
+            HelloWorldGrpc.HelloWorldStub stub = HelloWorldGrpc.newStub(channel);
             //构建请求实体，HelloRequest是自动生成的实体类
             HelloRequest request = HelloRequest.newBuilder().setName(message).build();
             //进行请求并且得到响应数据
@@ -313,7 +313,7 @@ public class HelloWorldActivity extends AppCompatActivity {
             //2. while(future.isDone)监听;
             //3. 执行结束时，返回feture.get()。
             //所以BlockingStub的调用执行需要运行在子线程。
-            GreeterGrpc.GreeterBlockingStub stub = GreeterGrpc.newBlockingStub(channel);
+            HelloWorldGrpc.HelloWorldBlockingStub stub = HelloWorldGrpc.newBlockingStub(channel);
             //构建请求实体，HelloRequest是自动生成的实体类
             HelloRequest request = HelloRequest.newBuilder().setName(message).build();
             //进行请求并且得到响应数据

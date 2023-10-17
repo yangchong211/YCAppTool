@@ -30,7 +30,7 @@ package helloworld;
 //这个是定义的服务接口
 //当您构建示例时，构建过程会重新生成GreeterGrpc.java，其中包含生成的 gRPC 客户端和服务器类。
 //这也会重新生成用于填充、序列化和检索我们的请求和响应类型的类。
-service Greeter {
+service HelloWorld {
   rpc SayHello (HelloRequest) returns (HelloReply) {}
 }
 

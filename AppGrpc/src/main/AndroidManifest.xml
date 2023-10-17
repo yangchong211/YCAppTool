@@ -20,8 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".HelloWorldActivity"/>
-        <activity android:name=".WanAndroidActivity"/>
-        <activity android:name=".RouteGuideActivity"/>
+        <activity android:name=".GreeterActivity"/>
     </application>
 
 </manifest>
