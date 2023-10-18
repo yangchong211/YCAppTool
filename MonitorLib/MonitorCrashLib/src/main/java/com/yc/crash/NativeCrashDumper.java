@@ -20,6 +20,12 @@ public class NativeCrashDumper {
         return InstanceHolder.instance;
     }
 
+    /**
+     * 初始化
+     * @param crashDumpDir
+     * @param nativeCrashListener
+     * @param handleMode
+     */
     private native void nativeInit(String crashDumpDir,
                                    NativeCrashListener nativeCrashListener, int handleMode);
 
