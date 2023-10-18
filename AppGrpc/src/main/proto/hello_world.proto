@@ -34,8 +34,18 @@ service HelloWorld {
   rpc SayHello (HelloRequest) returns (HelloReply) {}
 }
 
+
+//关键字message: 代表了实体结构，由多个消息字段(field)组成。
 //这个是发送的request
 message HelloRequest {
+  //消息字段(field): 包括数据类型、字段名、字段规则、字段唯一标识、默认值
+  //数据类型：常见的原子类型都支持(在FieldDescriptor::kTypeToName中有定义)
+  //字段规则：(在FieldDescriptor::kLabelToName中定义)
+    //required：必须初始化字段，如果没有赋值，在数据序列化时会抛出异常
+    //optional：可选字段，可以不必初始化。
+    //repeated：数据可以重复(相当于java 中的Array或List)
+    //字段唯一标识：序列化和反序列化将会使用到。
+  //默认值：在定义消息字段时可以给出默认值。
   string name = 1;
 }
 
@@ -43,3 +53,7 @@ message HelloRequest {
 message HelloReply {
   string message = 1;
 }
+
+
+
+
