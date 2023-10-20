@@ -177,7 +177,9 @@
 
 
 
-
+#### 5.2 Sql优化实践
+- https://blog.csdn.net/temp7695/article/details/126227064
+- https://blog.csdn.net/qq_44950283/article/details/131191587
 
 
 # 博客

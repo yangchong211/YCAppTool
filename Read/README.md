@@ -83,7 +83,6 @@
 # c语言学习目标
 ### 案例1：学生信息管理系统
 - 视频教学案例
-  - https://www.bilibili.com/video/BV1X4411T7A8/?spm_id_from=333.337.search-card.all.click&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
   - https://www.bilibili.com/video/BV1Dv4y1X7qV?p=2&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
 
 
