@@ -31,23 +31,13 @@ public class HeartService extends Service {
     }
 
     /**
-     * 发送心跳指令
+     * 发送心跳指令，启动服务
      *
      * @param context 上下文
      */
     public static void start(Context context) {
-        start(context, HeartService.ACTION_HEART_BEAT);
-    }
-
-    /**
-     * 启动服务
-     *
-     * @param context 上下文
-     * @param action 命令
-     */
-    private static void start(Context context, String action) {
         Intent service = new Intent(context, HeartService.class);
-        service.setAction(action);
+        service.setAction(HeartService.ACTION_HEART_BEAT);
         context.startService(service);
     }
 
@@ -57,7 +47,9 @@ public class HeartService extends Service {
      * @param context 上下文
      */
     public static void stop(Context context) {
-        start(context, HeartService.ACTION_STOP);
+        Intent service = new Intent(context, HeartService.class);
+        service.setAction(HeartService.ACTION_STOP);
+        context.startService(service);
     }
 
     @Override
@@ -96,14 +88,17 @@ public class HeartService extends Service {
      * 启动下一次心跳定时任务
      */
     public void startAlarmHeartBeat() {
-        manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + getDelayTime(), pendingIntent);
+        long triggerAtMillis = System.currentTimeMillis() + getDelayTime();
+        manager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
     }
 
     /**
      * 关闭时钟心跳定时任务
      */
     public void stopAlarmHeartBeat() {
-        manager.cancel(pendingIntent);
+        if (manager != null) {
+            manager.cancel(pendingIntent);
+        }
     }
 
     /**

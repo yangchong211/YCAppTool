@@ -146,6 +146,9 @@
 
 Android 多种支付方式的优雅实现
 https://blog.csdn.net/qq_39312146/article/details/129222208
+Android 应用流量监控实践
+https://juejin.cn/post/7292217232187883574#heading-15
+
 
 ### wiki
 - 刷掌问题处理流程
