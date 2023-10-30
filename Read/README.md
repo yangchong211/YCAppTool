@@ -89,11 +89,7 @@
 ### 案例2：俄罗斯方块
 - 视频教学案例
   - https://www.bilibili.com/video/BV1or4y1A7fm?p=8&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
-
-
-### 案例4: 万年历
-- 视频教学案例
-  - https://www.bilibili.com/video/BV1Vv4y1G7RZ/?spm_id_from=333.337.search-card.all.click&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
+  - https://www.bilibili.com/video/BV1ac411G7pk?p=6&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
 
 
 
