@@ -88,8 +88,12 @@
 
 ### 案例2：俄罗斯方块
 - 视频教学案例
-  - https://www.bilibili.com/video/BV1or4y1A7fm?p=8&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
   - https://www.bilibili.com/video/BV1ac411G7pk?p=6&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
+
+
+### 案例3：贪吃蛇
+- 视频教学案例
+  - https://www.bilibili.com/video/BV12k4y1W7rp?p=5&vd_source=5d8a5adc7d991c2fcea52e4d0bd44097
 
 
 
@@ -117,8 +121,6 @@
 
 
 ### JVM
-- JVM好文
-    - https://github.com/doocs/jvm
 - 腾讯Matrix源码
     - https://www.yuque.com/ibaozi/ygq8yc
 - 安卓OKHTTP库添加HTTPS证书验证：http://events.jianshu.io/p/bf6d5432fa55
