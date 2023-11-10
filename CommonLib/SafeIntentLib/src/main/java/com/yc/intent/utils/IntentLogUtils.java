@@ -6,14 +6,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 /**
- * <pre>
- *     @author yangchong
- *     GitHub : https://github.com/yangchong211/YCCommonLib
- *     email : yangchong211@163.com
- *     time  : 2018/11/9
- *     desc  : intent工具类
- *     revise: 之前搜车封装库
- * </pre>
+ * @author yangchong
+ * GitHub : https://github.com/yangchong211/YCCommonLib
+ * email : yangchong211@163.com
+ * time  : 2018/11/9
+ * desc  : intent工具类
+ * revise: 之前搜车封装库
  */
 public final class IntentLogUtils {
 

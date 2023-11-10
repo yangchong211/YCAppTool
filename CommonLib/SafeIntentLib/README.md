@@ -14,7 +14,7 @@
 
 ### 03.Api调用说明
 - 通用打印Intent对象内容到log日志栏中，支持普通intent和延迟PendingIntent。超级方便检查，可以打印action，category，data，flags，extras等等
-    ``` java
+    ```
     //打印intent所有的数据
     IntentLogger.print("intent test : ", intent)
     //打印intent中component
