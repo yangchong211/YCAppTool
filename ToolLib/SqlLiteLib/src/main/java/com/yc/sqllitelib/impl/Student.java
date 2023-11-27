@@ -1,4 +1,4 @@
-package com.yc.sqllitelib;
+package com.yc.sqllitelib.impl;
 
 import java.io.Serializable;
 
@@ -54,5 +54,13 @@ public class Student implements Serializable {
         this.sex = sex;
     }
 
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", grade='" + grade + '\'' +
+                ", sex='" + sex + '\'' +
+                '}';
+    }
 }

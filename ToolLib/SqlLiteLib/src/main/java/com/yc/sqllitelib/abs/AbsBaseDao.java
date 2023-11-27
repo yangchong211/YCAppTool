@@ -1,8 +1,12 @@
-package com.yc.sqllitelib;
+package com.yc.sqllitelib.abs;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.yc.sqllitelib.DbSqliteHelper;
+import com.yc.sqllitelib.SqlLiteManager;
+import com.yc.sqllitelib.inter.IBaseDao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,12 +18,12 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
     /**
      * 插入或更新单条数据
      *
-     * @param item
+     * @param item      item
      */
     public synchronized void insertOrUpdate(T item) {
         ArrayList<T> tmpList = getListInfo();
+        DbSqliteHelper dbHelper = SqlLiteManager.getInstance().getSqliteHelper();
         try {
-            DbSqliteHelper dbHelper = DbPalmManger.getInstance().getHelper();
             SQLiteDatabase db = dbHelper.getWriteDb();
             if (!db.isOpen()) {
                 return;
@@ -38,35 +42,35 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
                 db.insert(getTableName(), null, getContentValues(item));
             }
         } finally {
-            DbPalmManger.getInstance().close(false);
+            dbHelper.closeDb(false);
         }
     }
 
     /**
      * 插入单条数据
      *
-     * @param item
+     * @param item      item
      */
     public synchronized void insert(T item) {
+        DbSqliteHelper dbHelper = SqlLiteManager.getInstance().getSqliteHelper();
         try {
-            DbSqliteHelper dbHelper = DbPalmManger.getInstance().getHelper();
             SQLiteDatabase db = dbHelper.getWriteDb();
             if (db.isOpen()) {
                 db.insert(getTableName(), null, getContentValues(item));
             }
         } finally {
-            DbPalmManger.getInstance().close(false);
+            dbHelper.closeDb(false);
         }
     }
 
     /**
      * 批量插入（旧数据删除）
      *
-     * @param dataList
+     * @param dataList          数据
      */
     public synchronized void insert(ArrayList<T> dataList) {
+        DbSqliteHelper dbHelper = SqlLiteManager.getInstance().getSqliteHelper();
         try {
-            DbSqliteHelper dbHelper = DbPalmManger.getInstance().getHelper();
             SQLiteDatabase db = dbHelper.getWriteDb();
             if (db.isOpen()) {
                 // 手动设置开始事务
@@ -82,18 +86,19 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
                 db.endTransaction();
             }
         } finally {
-            DbPalmManger.getInstance().close(true);
+            dbHelper.closeDb(true);
         }
     }
 
 
     /**
      * 批量插入或更新
+     * @param dataList          list数据
      */
     public synchronized void insertOrUpdate(List<T> dataList) {
         ArrayList<T> tmpList = getListInfo();
+        DbSqliteHelper dbHelper = SqlLiteManager.getInstance().getSqliteHelper();
         try {
-            DbSqliteHelper dbHelper = DbPalmManger.getInstance().getHelper();
             SQLiteDatabase db = dbHelper.getWriteDb();
             if (!db.isOpen()) {
                 return;
@@ -120,7 +125,7 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
             // 处理完成
             db.endTransaction();
         } finally {
-            DbPalmManger.getInstance().close(true);
+            dbHelper.closeDb(true);
         }
     }
 
@@ -132,8 +137,8 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
     public Map<Object, T> getMapInfo(String key) {
         Map<Object, T> map = new HashMap<>();
         Cursor cursor = null;
+        DbSqliteHelper dbHelper = SqlLiteManager.getInstance().getSqliteHelper();
         try {
-            DbSqliteHelper dbHelper = DbPalmManger.getInstance().getHelper();
             SQLiteDatabase db = dbHelper.getReadDb();
             cursor = db.query(getTableName(), null,
                     null, null, null, null, null);
@@ -146,9 +151,10 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
                 }
             }
         } finally {
-            if (cursor != null)
+            if (cursor != null){
                 cursor.close();
-            DbPalmManger.getInstance().close(true);
+            }
+            dbHelper.closeDb(true);
         }
         return map;
 
@@ -162,8 +168,8 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
     public ArrayList<T> getListInfo() {
         ArrayList<T> msgList = new ArrayList<>();
         Cursor cursor = null;
+        DbSqliteHelper dbHelper = SqlLiteManager.getInstance().getSqliteHelper();
         try {
-            DbSqliteHelper dbHelper = DbPalmManger.getInstance().getHelper();
             SQLiteDatabase db = dbHelper.getReadDb();
             cursor = db.query(getTableName(), null,
                     null, null, null, null, null);
@@ -173,9 +179,10 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
                 }
             }
         } finally {
-            if (cursor != null)
+            if (cursor != null) {
                 cursor.close();
-            DbPalmManger.getInstance().close(true);
+            }
+            dbHelper.closeDb(true);
         }
         return msgList;
     }
@@ -198,7 +205,7 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
             if (cursor != null) {
                 cursor.close();
             }
-            DbPalmManger.getInstance().close(true);
+            db.close();
         }
         return msgList;
     }
@@ -206,14 +213,14 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
     /**
      * 获取表名
      *
-     * @return
+     * @return      表名
      */
     public abstract String getTableName();
 
     /**
      * item转ContentValues
      *
-     * @param item
+     * @param item          item
      * @return
      */
     public abstract ContentValues getContentValues(T item);
@@ -221,7 +228,7 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
     /**
      * 获取item
      *
-     * @param cursor
+     * @param cursor        cursor指针
      * @return
      */
     public abstract T getItemInfo(Cursor cursor);
@@ -238,15 +245,15 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
     /**
      * 更新item
      *
-     * @param db
-     * @param item
+     * @param db        db
+     * @param item      item
      */
     public abstract void updateItem(SQLiteDatabase db, T item);
 
     /**
      * 删除所有信息
      *
-     * @param db
+     * @param db        db
      */
     public void deleteAll(SQLiteDatabase db) {
         try {
@@ -260,8 +267,8 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
      * 删除所有信息
      */
     public void deleteAll() {
+        DbSqliteHelper dbHelper = SqlLiteManager.getInstance().getSqliteHelper();
         try {
-            DbSqliteHelper dbHelper = DbPalmManger.getInstance().getHelper();
             SQLiteDatabase db = dbHelper.getWriteDb();
             if (db.isOpen()) {
                 db.delete(getTableName(), null, null);
@@ -269,7 +276,7 @@ public abstract class AbsBaseDao<T> implements IBaseDao<T> {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            //DatabaseManager.getInstance().closeDatabase();
+            dbHelper.closeDb(false);
         }
     }
 

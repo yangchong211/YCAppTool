@@ -1,32 +1,30 @@
-package com.yc.sqllitelib;
+package com.yc.sqllitelib.test;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
-
 import androidx.annotation.Nullable;
 
-import com.yc.sqllitelib.inter.ISqlite;
-import com.yc.sqllitelib.test.DBTestDao;
-
-public class DbSqliteHelper extends SQLiteOpenHelper implements ISqlite {
+/**
+ * SQLiteOpenHelper实现类
+ */
+public final class MySqliteHelper extends SQLiteOpenHelper{
 
     /**
      * 数据库名称
      */
-    private static final String DB_NAME = "sql_lite.db";
+    private static final String DB_NAME = "yc1.db";
     /**
      * 数据库版本
      */
     private static final int VERSION = 1;
 
-    public DbSqliteHelper() {
-        this(SqlLiteManager.getInstance().getContext(),
-                DB_NAME, null, VERSION);
+    public MySqliteHelper(Context context) {
+        this(context, DB_NAME, null, VERSION);
     }
 
-    public DbSqliteHelper(@Nullable Context context, @Nullable String name,
+    public MySqliteHelper(@Nullable Context context, @Nullable String name,
                           @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -39,7 +37,7 @@ public class DbSqliteHelper extends SQLiteOpenHelper implements ISqlite {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //初始化数据库
-        //db.execSQL("");
+        db.execSQL(DBTestDao.SQL_CREATE_TABLE);
     }
 
     /**
@@ -70,17 +68,14 @@ public class DbSqliteHelper extends SQLiteOpenHelper implements ISqlite {
         }
     }
 
-    @Override
     public synchronized SQLiteDatabase getWriteDb() {
         return getWritableDatabase();
     }
 
-    @Override
     public synchronized SQLiteDatabase getReadDb() {
         return getReadableDatabase();
     }
 
-    @Override
     public synchronized void closeDb(boolean isRead) {
         if (isRead) {
             getReadDb().close();

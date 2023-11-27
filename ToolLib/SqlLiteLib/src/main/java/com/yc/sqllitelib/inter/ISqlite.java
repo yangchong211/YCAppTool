@@ -1,4 +1,4 @@
-package com.yc.sqllitelib;
+package com.yc.sqllitelib.inter;
 
 import android.database.sqlite.SQLiteDatabase;
 
