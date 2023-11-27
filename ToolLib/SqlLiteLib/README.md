@@ -4,7 +4,8 @@
 - 02.常见思路和做法
 - 03.Api调用说明
 - 04.原理和遇到的坑
-- 05.其他问题说明
+- 05.数据库大比拼
+- 06.其他问题说明
 
 
 
@@ -27,7 +28,10 @@
 
 #### 1.3 数据库核心类
 - SQLiteDatabase数据库管理类
-  - SQLiteDatabase是SQLite的数据库管理类，开发者可以在活动页面代码或任何能取到Context的地方获取数据库实例。
+    - SQLiteDatabase是SQLite的数据库管理类，开发者可以在活动页面代码或任何能取到Context的地方获取数据库实例。
+- SQLiteOpenHelper邦助器
+    - 直接通过SQLiteDatabase进行操作数据库非常不方便，必须小心不能重复地打开数据库，处理数据库的升级也很不方便。
+    - 因此Android提供了一个辅助工具—— SQLiteOpenHelper，我们可以通过SQLiteOpenHelper这个数据库帮助器来安全方便地打开、升级数据库。
 
 
 #### 1.4 SQLiteDatabase使用
@@ -134,6 +138,27 @@
     - db.execSQL(sql)，这个sql是数据表字符串
 - 创建数据表的语法是什么
     - create table tab_name (id integer primary key autoincrement, name text , age integer)
+- 那么代码是怎么创建数据表
+    ```
+    /**
+     * 创建表结构
+     */
+    public static final String SQL_CREATE_TABLE = "create table " + TABLE_NAME + "(" +
+            ID + " integer primary key autoincrement," +
+            NAME + " text," +
+            AGE + " integer," +
+            SEX + " varchar(5)," +
+            GRADE + " text" +
+            ")";
+    
+    //继承SQLiteOpenHelper的onCreate中实现
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        //初始化数据库
+        db.execSQL(SQL_CREATE_TABLE);
+    }
+    ```
+
 
 
 
@@ -143,12 +168,58 @@
     ```
     db.insert("user", null, values);
     ```
+- 具体到代码的案例如下所示
+    ```
+    public void insert(Student student) {
+        SQLiteDatabase db = dbHelper.getWriteDb();
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put(NAME, student.getName());
+            cv.put(AGE, student.getAge());
+            cv.put(SEX, student.getSex());
+            cv.put(GRADE, student.getGrade());
+            db.insert(TABLE_NAME, null, cv);
+            AppLogUtils.d("insert插入数据到数据库 : " + cv);
+        } finally {
+            db.close();
+        }
+    }
+    ```
 
 
 #### 2.4 如何查找数据
+- 使用SQLite的命令query进行操作
+    ```
+    cursor = db.query(TABLE_NAME, null, KEY + "=?",
+                    new String[]{key}, null, null, null);
+    ```
+- 具体到代码的案例如下所示
 
 
-#### 2.7 如何修改表结构
+
+#### 2.5 如何更新数据
+- 使用SQLite的命令update进行操作
+    ```
+    db.update(TABLE_NAME, cv, NAME + "=?", new String[]{name});
+    ```
+
+
+#### 2.6 如何删除数据
+- 使用SQLite的命令delete进行操作
+    ```
+    db.delete(TABLE_NAME, name + "=?", new String[]{name});
+    ```
+
+
+#### 2.7 获取所有数据
+- 使用SQLite的命令rawQuery进行操作
+    ```
+    String querySql = "select * from " + TABLE_NAME;
+    cursor = db.rawQuery(querySql, null);
+    ```
+
+
+#### 2.8 如何修改表结构
 
 
 ### 03.Api调用说明
@@ -160,6 +231,26 @@
 #### 4.1 多次打开数据库
 - 解决办法
     - 获取单例对象：确保App运行时数据库只被打开一次，避免重复打开引起错误。
+
+
+#### 4.2 理解SQLite索引
+- 什么是SQLite索引
+    - 简单地说，索引是一个指向表中数据的指针。一个数据库中的索引与一本书的索引目录是非常相识的。
+    - 优点：大大加快了数据库检索的速度，包括对单表查询、连表查询、分组查询、排序查询。经常是一到两个数量级的性能提升，且随着数据数量级增长。
+    - 缺点：索引的创建和维护存在消耗，索引会占用物理空间，且随着数据量的增加而增加。在对数据库进行增删改时需要维护索引，所以会对增删改的性能存在影响。
+- 索引分类
+    - 直接创建索引：使用 sql 语句创建，Android 中可以在 SQLiteOpenHelper 的 onCreate 或是 onUpgrade 中直接 execSQL 创建语句。
+    ```
+    create index id_index on user(id)
+    ```
+    - 唯一性索引：保证在索引列中的全部数据是唯一的，对聚簇索引和非聚簇索引都可以使用
+    ```
+    create unique index id_index on user(id);
+    ```
+- 单个或者多个索引
+    - 单个索引：索引建立语句中仅包含单个字段，如上面的普通索引和唯一性索引创建示例
+    - 复合索引：又叫组合索引，在索引建立语句中同时包含多个字段
+
 
 
 
@@ -174,12 +265,12 @@
     - 很多时候我们需要批量的向Sqlite中插入大量数据时，单独的使用添加方法导致应用响应缓慢。
     - 因为sqlite插入数据的时候默认一条语句就是一个事务，有多少条数据就有多少次磁盘操作。
     - 如初始1000条记录也就是要1000次读写磁盘操作。同时也是为了保证数据的一致性，避免出现数据缺失等情况。
-
+- 使用事务注意点
+    - 千万不要忘记提交事务db.endTransaction();否则线程会有阻塞危险。事务只能用在一个线程中，不可跨线程。
 
 
 #### 5.2 Sql优化实践
-- https://blog.csdn.net/temp7695/article/details/126227064
-- https://blog.csdn.net/qq_44950283/article/details/131191587
+
 
 
 # 博客
