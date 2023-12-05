@@ -1,4 +1,4 @@
-package com.yc.sqllitelib.impl;
+package com.yc.sqllitelib.test;
 
 import java.io.Serializable;
 

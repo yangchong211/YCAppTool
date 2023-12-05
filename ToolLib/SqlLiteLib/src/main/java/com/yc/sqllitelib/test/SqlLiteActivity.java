@@ -7,8 +7,6 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.sqllitelib.impl.Student;
-
 import java.util.ArrayList;
 
 public class SqlLiteActivity extends AppCompatActivity {

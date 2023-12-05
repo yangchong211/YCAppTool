@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.yc.sqllitelib.impl.Student;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
