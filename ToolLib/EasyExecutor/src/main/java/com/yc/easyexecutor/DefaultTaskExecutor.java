@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -58,6 +59,11 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
      * 线程池中线程个数应尽量少，如配置N+1个线程的线程池
      */
     private final ThreadPoolExecutor mCPUThreadPoolExecutor;
+    /**
+     * 用来执行定时以及周期性任务
+     * 优先级较高，核心线程数量固定、非核心线程数量无限制，不会阻塞（闲置时马上回收）
+     */
+    private final ScheduledThreadPoolExecutor mDelayExecutor;
     /**
      * CPU 核数
      */
@@ -108,6 +114,8 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
                 CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_SECONDS, TimeUnit.SECONDS,
                 mPoolWorkQueue, Executors.defaultThreadFactory(), mHandler);
         mCPUThreadPoolExecutor.allowCoreThreadTimeOut(true);
+        //处理其他
+        mDelayExecutor = new ScheduledThreadPoolExecutor(CORE_POOL_SIZE);
     }
 
 
@@ -133,6 +141,13 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
+    public void executeOnScheduled(@NonNull Runnable runnable, long delayMills) {
+        if (runnable != null && mDelayExecutor != null) {
+            mDelayExecutor.schedule(runnable, delayMills, TimeUnit.MILLISECONDS);
+        }
+    }
+
+    @Override
     public void postToMainThread(@NonNull Runnable runnable) {
         mMainHandler = getMainHandler();
         if (mMainHandler != null && runnable != null) {
@@ -144,7 +159,7 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     public void postToMainThreadDelay(@NonNull Runnable runnable, long delayMills) {
         mMainHandler = getMainHandler();
         if (mMainHandler != null && runnable != null) {
-            mMainHandler.postDelayed(runnable,delayMills);
+            mMainHandler.postDelayed(runnable, delayMills);
         }
     }
 
@@ -162,7 +177,7 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
 
     @Override
     public void postIoHandler(@NonNull Runnable runnable) {
-        if (mIoHandler == null){
+        if (mIoHandler == null) {
             synchronized (mLock) {
                 if (mIoHandler == null) {
                     mIoHandler = TaskHandlerThread.get("postIoHandler")

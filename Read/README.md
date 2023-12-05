@@ -1,17 +1,6 @@
 #### 目录介绍
 # 优化专题
-- 专题1：崩溃治理，崩溃监听，崩溃原理，以及捕获
-- 专题2：ANR原理，信息收集，分析，监控，治理
-- 专题3：卡顿原因，卡顿监控，卡顿治理
-- 专题4：网络优化，弱网，监控
-- 专题5：内存监控，内存治理，OOM，内存如何分配
-- 专题6：进程包活，进程是如何低进程杀死
-- 专题7：启动优化，页面打开优化，统计耗时
-- 专题8：UI优化，UI工具建设
-- 专题9：稳定性优化，hook疑难问题解决
 - 专题10：安全防御，挂载，xposed，虚拟
-- 专题11：工具化建设，内存收集工具，ping工具
-- 专题12：图片优化，大图检测，大图加载
 
 
 # 实践专题
@@ -156,4 +145,39 @@ https://juejin.cn/post/7292217232187883574#heading-15
 - 刷掌问题总结
     - https://iwiki.woa.com/pages/viewpage.action?pageId=4007634604
     - https://iwiki.woa.com/pages/viewpage.action?pageId=4007590501
+
+### adb 调试
+- adb无线连接设备进行调试操作
+  - https://blog.csdn.net/Vermouth_00/article/details/131088485
+
+
+### 推荐
+- https://github.com/bytedance/BoostMultiDex
+
+
+### 优化文章
+- QQ NT客户端：AndroidNT手Q启动性能优化
+  - https://km.woa.com/articles/show/584702?from=iSearch
+- 腾讯新闻 Android 编译速度优化之路
+  - https://km.woa.com/articles/show/515185?from=iSearch#4-%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5%E7%9A%84%E8%80%97%E6%97%B6%E4%BC%98%E5%8C%96
+- 微视 Android 0vv 优化之路
+  - https://km.woa.com/articles/show/574823?from=iSearch
+- 启动优化
+  - https://km.woa.com/articles/show/540864?from=iSearch
+- Android终端性能测试指标测算原理及优化 - 终端性能测试平台
+  - https://km.woa.com/articles/show/519428?from=iSearch
+- 【内存优化】Android性能优化
+  - https://km.woa.com/articles/show/475746?from=iSearch
+- 线程：“你可能把握不住”—— Android 平台下线程导致的内存问题
+  - https://km.woa.com/articles/show/508948?from=iSearch
+
+
+
+
+
+
+
+
+
+
 

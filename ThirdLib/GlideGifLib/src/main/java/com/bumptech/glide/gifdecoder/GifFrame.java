@@ -1,7 +1,9 @@
 package com.bumptech.glide.gifdecoder;
 
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntDef;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntDef;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -49,7 +51,7 @@ class GifFrame {
    */
   @Retention(RetentionPolicy.SOURCE)
   @IntDef(value = {DISPOSAL_UNSPECIFIED, DISPOSAL_NONE, DISPOSAL_BACKGROUND, DISPOSAL_PREVIOUS})
-  private @interface GifDisposalMethod {
+  @interface GifDisposalMethod {
   }
 
   int ix, iy, iw, ih;

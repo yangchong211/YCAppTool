@@ -1,6 +1,7 @@
 package com.bumptech.glide.gifdecoder;
 
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
+
 import java.util.ArrayList;
 import java.util.List;
 

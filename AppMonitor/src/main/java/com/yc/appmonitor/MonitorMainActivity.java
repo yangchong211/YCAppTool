@@ -3,11 +3,11 @@ package com.yc.appmonitor;
 
 import android.content.Intent;
 import android.view.View;
-import android.view.ViewManager;
 
 import com.yc.appmonitor.apm.ApmTestActivity;
 import com.yc.appmonitor.crash.CrashTestActivity;
 import com.yc.appmonitor.net.NetworkActivity;
+import com.yc.fpslib.PerformanceManager;
 import com.yc.clickhelper.PerfectClickListener;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -28,6 +28,7 @@ public class MonitorMainActivity extends BaseActivity {
     private RoundTextView tvNetSpeed;
     private RoundTextView tvApmTest;
     private RoundTextView tvNetHttp;
+    private RoundTextView tvFps;
     private int count = 0 ;
     @Override
     public int getContentView() {
@@ -44,6 +45,7 @@ public class MonitorMainActivity extends BaseActivity {
         tvNetSpeed = findViewById(R.id.tv_net_speed);
         tvApmTest = findViewById(R.id.tv_apm_test);
         tvNetHttp = findViewById(R.id.tv_net_http);
+        tvFps = findViewById(R.id.tv_fps);
     }
 
     @Override
@@ -101,24 +103,17 @@ public class MonitorMainActivity extends BaseActivity {
                 NetworkActivity.start(MonitorMainActivity.this);
             }
         });
+        tvFps.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+
+            }
+        });
     }
 
     @Override
     public void initData() {
-//        for (int i=0 ; i<1000 ; i++){
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    count++;
-//                    try {
-//                        Thread.sleep(100);
-//                    } catch (InterruptedException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    AppLogUtils.d("count data is " + count);
-//                }
-//            }).start();
-//        }
+
     }
 
 

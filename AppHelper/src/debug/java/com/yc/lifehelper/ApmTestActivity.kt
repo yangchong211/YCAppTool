@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
 import androidx.fragment.app.FragmentActivity
-import com.yc.catonhelperlib.PerformanceActivity
 import com.yc.toastutils.ToastUtils
 import com.yc.toolutils.AppLogUtils
 import com.yc.toolutils.StackTraceUtils

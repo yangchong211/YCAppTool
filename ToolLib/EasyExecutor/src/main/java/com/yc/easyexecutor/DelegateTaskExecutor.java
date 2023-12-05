@@ -122,6 +122,13 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
+    public void executeOnScheduled(@NonNull Runnable runnable, long delayMills) {
+        if (runnable != null) {
+            mDelegate.executeOnScheduled(runnable, delayMills);
+        }
+    }
+
+    @Override
     public void postToMainThread(@Nullable Runnable runnable) {
         if (runnable != null) {
             mDelegate.postToMainThread(runnable);
@@ -129,9 +136,9 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
-    public void postToMainThreadDelay(@Nullable Runnable runnable , long delayMills) {
+    public void postToMainThreadDelay(@Nullable Runnable runnable, long delayMills) {
         if (runnable != null) {
-            mDelegate.postToMainThreadDelay(runnable,delayMills);
+            mDelegate.postToMainThreadDelay(runnable, delayMills);
         }
     }
 
@@ -187,6 +194,7 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
         return sCpuThreadExecutor;
     }
 
+
     /**
      * 判断是否是主线程
      *
@@ -221,7 +229,7 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     public void postToMainThread(Runnable runnable, long delayed) {
-        if (runnable != null){
+        if (runnable != null) {
             getMainHandler().postDelayed(runnable, delayed);
         }
     }
@@ -234,7 +242,7 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     public void removeUICallback(Runnable runnable) {
-        if (runnable != null){
+        if (runnable != null) {
             getMainHandler().removeCallbacks(runnable);
         }
     }

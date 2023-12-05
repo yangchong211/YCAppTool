@@ -7,6 +7,7 @@ import com.yc.interceptortime.CommonCallback;
 import com.yc.interceptortime.InterceptorBean;
 import com.yc.interceptortime.InterceptorManager;
 import com.yc.interceptortime.MonitorBean;
+import com.yc.reboothelper.RebootManager;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.ycthreadpoollib.PoolThread;
 import com.yc.ycthreadpoollib.ScheduleTask;
@@ -23,6 +24,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        if (RebootManager.getInstance().isRebootProcess(this)) {
+            return;
+        }
         AppLogUtils.setShowLog(true);
         //初始化线程池管理器
         initThreadPool();

@@ -22,9 +22,25 @@ import java.util.HashMap;
 
 public class UsbHelpManager {
 
-    private static final String ACTION_DEVICE_PERMISSION = "com.yc.serialport.USB_PERMISSION";
     private static UsbDeviceConnection deviceConnection;
     private final UsbRequest usbRequest = new UsbRequest();
+    private static volatile UsbHelpManager instance;
+    public static UsbHelpManager getInstance() {
+        if (instance == null) {
+            synchronized (UsbHelpManager.class) {
+                if (instance == null) {
+                    instance = new UsbHelpManager();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public UsbHelpManager() {
+
+    }
+
+
 
     /**
      * 第一步：发现设备
@@ -51,11 +67,11 @@ public class UsbHelpManager {
         // 一般来说，在没有定制的android设备上首次访问usb设备的时候
         // 默认我们是没有访问权限的，因此我们首先要判断对当前要打开的usbDevice是否有访问权限
         if (!usbManager.hasPermission(usbDevice)) {
-            UsbPermissionReceiver usbPermissionReceiver = new UsbPermissionReceiver(usbDevice);
+            UsbReceiver usbPermissionReceiver = new UsbReceiver(usbDevice);
             //申请权限
-            Intent intent = new Intent(ACTION_DEVICE_PERMISSION);
+            Intent intent = new Intent(UsbReceiver.ACTION_DEVICE_PERMISSION);
             PendingIntent mPermissionIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-            IntentFilter permissionFilter = new IntentFilter(ACTION_DEVICE_PERMISSION);
+            IntentFilter permissionFilter = new IntentFilter(UsbReceiver.ACTION_DEVICE_PERMISSION);
             AppToolUtils.getApp().registerReceiver(usbPermissionReceiver, permissionFilter);
             usbManager.requestPermission(usbDevice, mPermissionIntent);
         } else {
@@ -161,33 +177,6 @@ public class UsbHelpManager {
         return beforeData;
     }
 
-    private static class UsbPermissionReceiver extends BroadcastReceiver {
-
-        private final UsbDevice usbDevice;
-
-        public UsbPermissionReceiver(UsbDevice usbDevice) {
-            this.usbDevice = usbDevice;
-        }
-
-        public void onReceive(Context context, Intent intent) {
-            UsbManager usbManager = (UsbManager) AppToolUtils.getApp().getSystemService(Context.USB_SERVICE);
-            String action = intent.getAction();
-            if (ACTION_DEVICE_PERMISSION.equals(action)) {
-                synchronized (this) {
-                    UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-                    if (device.getDeviceName().equals(usbDevice.getDeviceName())) {
-                        if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
-                            //授权成功,在这里进行打开设备操作
-                            deviceConnection = usbManager.openDevice(usbDevice);
-                        } else {
-                            //授权失败
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     /**
      * USB连接状态判断
      *
@@ -247,4 +236,7 @@ public class UsbHelpManager {
         }
     }
 
+    public void setDeviceConnection(UsbDeviceConnection deviceConnection) {
+        UsbHelpManager.deviceConnection = deviceConnection;
+    }
 }

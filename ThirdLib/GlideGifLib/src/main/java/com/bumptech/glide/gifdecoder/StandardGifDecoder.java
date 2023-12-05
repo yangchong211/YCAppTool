@@ -30,7 +30,8 @@ import static com.bumptech.glide.gifdecoder.GifFrame.DISPOSAL_UNSPECIFIED;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
-import android.support.annotation.ColorInt;
+
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.util.Log;

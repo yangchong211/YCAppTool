@@ -1,3 +1,5 @@
 # ninja log v5
 0	279	1696759429	CMakeFiles/calljnilib.dir/calljnilib.cpp.o	20482f92ca3c6a65
 279	371	1696759430	/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/build/intermediates/cmake/debug/obj/arm64-v8a/libcalljnilib.so	ff69e3992affdeb7
+0	13	0	clean	71e0810b04a4f7a9
+0	14	0	clean	71e0810b04a4f7a9

@@ -71,7 +71,7 @@ public final class ServiceLoader<S> implements Iterable<S> {
             return all;
         }
 
-        final Set<Class<? extends  S>> classes = new LinkedHashSet<Class<? extends S>>();
+        final Set<Class<? extends  S>> classes = new LinkedHashSet<>();
         for (final Class<? extends S> clazz : all) {
             final ServiceProvider sp = clazz.getAnnotation(ServiceProvider.class);
             if (null != sp && this.mAlias.equals(sp.alias())) {

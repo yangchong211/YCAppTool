@@ -1,7 +1,8 @@
 package com.bumptech.glide.gifdecoder;
 
 import android.graphics.Bitmap;
-import android.support.annotation.IntDef;
+
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.io.InputStream;

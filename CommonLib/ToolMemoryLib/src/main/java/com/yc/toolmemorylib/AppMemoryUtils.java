@@ -49,18 +49,27 @@ public final class AppMemoryUtils {
             @Override
             public void run() {
                 final String pkgName = context.getPackageName();
-                final int pid = android.os.Process.myPid();
+                final int pid = getCurrentPid();
                 ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
                 final ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
                 am.getMemoryInfo(mi);
                 //1. ram
                 final RamMemoryInfo ramMemoryInfo = new RamMemoryInfo();
+                // 获取内存剩余大小（以字节为单位）
                 ramMemoryInfo.availMem = mi.availMem;
+                //是否低内存状态运行
                 ramMemoryInfo.isLowMemory = mi.lowMemory;
+                // 获取内存阈值（以字节为单位）
                 ramMemoryInfo.lowMemThreshold = mi.threshold ;
+                //获取内存总大小（以字节为单位）
                 ramMemoryInfo.totalMem = AppMemoryUtils.getRamTotalMemSync(context);
+
+
+
                 //2. pss
                 final PssInfo pssInfo = AppMemoryUtils.getAppPssInfo(context, pid);
+
+
                 //3. dalvik heap
                 final DalvikHeapMem dalvikHeapMem = AppMemoryUtils.getAppDalvikHeapMem();
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -74,27 +83,8 @@ public final class AppMemoryUtils {
     }
 
     /**
-     * 获取手机RAM的存储情况
-     */
-    public static void getSystemRam(final Context context, final OnGetRamMemoryInfoCallback onGetRamMemoryInfoCallback) {
-        getRamTotalMem(context, new OnGetRamTotalMemCallback() {
-            @Override
-            public void onGetRamTotalMem(long totalMem) {
-                ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-                final ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-                am.getMemoryInfo(mi);
-                RamMemoryInfo ramMemoryInfo = new RamMemoryInfo();
-                ramMemoryInfo.availMem = mi.availMem;
-                ramMemoryInfo.isLowMemory = mi.lowMemory;
-                ramMemoryInfo.lowMemThreshold = mi.threshold;
-                ramMemoryInfo.totalMem = totalMem;
-                onGetRamMemoryInfoCallback.onGetRamMemoryInfo(ramMemoryInfo);
-            }
-        });
-    }
-
-    /**
-     * 获取应用实际占用内存
+     * 获取应用实际进程占用内存
+     * 一般而言total是大于nativ+dalvik的，因为它包含了共享内存，理论上我们只关心native跟dalvik就行
      *
      * @return 应用pss信息KB
      */
@@ -102,6 +92,7 @@ public final class AppMemoryUtils {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         Debug.MemoryInfo memoryInfo = am.getProcessMemoryInfo(new int[]{pid})[0];
         PssInfo pssInfo = new PssInfo();
+        //通过memoryInfo对象的getTotalPss()方法获取到进程的总内存大小。需要注意的是，内存大小以KB为单位。
         //返回总的PSS内存使用量(以kB为单位)
         pssInfo.totalPss = memoryInfo.getTotalPss();
         //dalvik堆的比例设置大小
@@ -139,32 +130,9 @@ public final class AppMemoryUtils {
                              PssInfo pssInfo, DalvikHeapMem dalvikHeapMem);
     }
 
-    public interface OnGetRamMemoryInfoCallback {
-        void onGetRamMemoryInfo(RamMemoryInfo ramMemoryInfo);
-    }
-
     private interface OnGetRamTotalMemCallback {
         //手机总RAM容量/KB
         void onGetRamTotalMem(long totalMem);
-    }
-
-    /**
-     * 获取手机RAM容量/手机实际内存
-     * 单位
-     */
-    private static void getRamTotalMem(final Context context, final OnGetRamTotalMemCallback onGetRamTotalMemCallback) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final long totalRam = getRamTotalMemSync(context);
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        onGetRamTotalMemCallback.onGetRamTotalMem(totalRam);
-                    }
-                });
-            }
-        }).start();
     }
 
     /**
@@ -186,7 +154,7 @@ public final class AppMemoryUtils {
         }
     }
 
-    private static AtomicLong sTotalMem = new AtomicLong(0L);
+    private static final AtomicLong sTotalMem = new AtomicLong(0L);
 
     /**
      * 获取手机的RAM容量，其实和activityManager.getMemoryInfo(mi).totalMem效果一样，
@@ -313,20 +281,6 @@ public final class AppMemoryUtils {
         return initial_memory;
     }
 
-    /**
-     * 手机当前可用内存
-     * @param context
-     * @return 手机当前可用内存(兆)
-     */
-    public static long getAvailMemory(Context context) {
-        // 获取android当前可用内存大小
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-        if (am != null) {
-            am.getMemoryInfo(mi);
-        }
-        return mi.availMem / 1024 / 1024;
-    }
 
     /**
      * 通过ObjectOutputStream写入对象的方式获取对象类型签名和对象数据占用存储空间大小

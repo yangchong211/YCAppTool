@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.reboothelper">
+
+    <application>
+        <activity
+            android:name=".ProcessReboot"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:process=":reboot"
+            android:exported="false"/>
+    </application>
+
+</manifest>

@@ -12,15 +12,18 @@ package com.yc.toolmemorylib;
 public class RamMemoryInfo {
 
     /**
-     * 可用RAM
+     * 可用RAM【系统可用内存】
+     * 获取内存剩余大小（以字节为单位）
      */
     public long availMem;
     /**
-     * 手机总RAM
+     * 手机总RAM【总内存】
+     * 获取内存总大小（以字节为单位）
      */
     public long totalMem;
     /**
-     * 内存占用满的阀值，超过即认为低内存运行状态，可能会Kill process
+     * 内存占用满的阀值，超过即认为低内存运行状态，可能会Kill process。【低内存阈值，即低内存的临界线】
+     * 获取内存阈值（以字节为单位）
      */
     public long lowMemThreshold;
     /**

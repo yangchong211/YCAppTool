@@ -14,8 +14,8 @@
 #### 1.1 理解USB接口
 - 如何理解USB
     - USB是英文Universal Serial Bus（通用串行总线）的缩写，是一个外部总线标准，用于规范电脑与外部设备的连接和通讯。
-- AOA协议是Google公司推出的用于实现Android设备与外围设备之间USB通信的协议。
-- 该协议拓展了Android设备USB接口的功能，为基于Android系统的智能设备应用于数据采集和设备控制领域提供了条件。
+    - AOA协议是Google公司推出的用于实现Android设备与外围设备之间USB通信的协议。
+    - 该协议拓展了Android设备USB接口的功能，为基于Android系统的智能设备应用于数据采集和设备控制领域提供了条件。
 
 
 
@@ -63,15 +63,27 @@
 ### 02.常见思路和做法
 #### 2.1 开发场景说明
 - 开发使用的是usb主机模式，即：安卓平板作为主机，usb外设作为从机进行数据通信。
+    - 开发使用的是usb主机模式，即：安卓机器作为主机，usb外设作为从机进行数据通信。然后主机和联动设备需要交互。
 
 
 #### 2.2 开发思路步骤
 - 第一步：发现设备。通过UsbManager调用getDeviceList可以获取当前连接的所有usb设备。
+    - 通过UsbManager这个系统提供的类，我们可以枚举出当前连接的所有usb设备，我们主要需要的是UsbDevice对象。
+    - UsbDevice，这个类就代表了Android所连接的usb设备。
+    ```
+    UsbManager usbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
+    Map<String, UsbDevice> usbList = usbManager.getDeviceList();
+    ```
 - 第二步：打开设备。可以将机具与usb外设之间的连接想象成一个通道，只有把通道的门打开后，两边才能进行通信。
+    - 需要打开刚刚搜索到的usb设备，我们可以将平板与usb外设之间的连接想象成一个通道，只有把通道的门打开后，两边才能进行通信。
+    - 注意：在没有定制的android设备上首次访问usb设备的时候，默认是没有访问权限的，因此首先要判断对当前要打开的usbDevice是否有访问权限。
+    - 需要和usb外设建立一个UsbDeviceConnection，大部分情况下还需要对usb串口进行一些配置，比如波特率,停止位,数据控制等，不然两边配置不同，收到的数据会乱码。
     - 2.1 申请权限
     - 2.2 获得连接口UsbInterface
     - 2.3 获得连接端口UsbEndpoint
 - 第三步：数据传输。已经可以与usb外设进行数据传输
+    - 向usb外设发送数据。使用usbDeviceConnection.bulkTransfer这个函数用于在给定的端口进行数据传输。返回值代表发送成功的字节数，如果返回-1，那就是发送失败了。
+    - 接受usb外设发送来的数据。找到了数据输入端口usbEndpointIn，因为数据的输入是不定时的，因此我们可以另开一个线程，来专门接受数据。
     - 3.1 发送数据。调用bulkTransfer方法发送数据
     - 3.2 接收数据。找到了数据输入端口usbEndpointIn，因为数据的输入是不定时的，因此我们可以另开一个线程，来专门接受数据
 
@@ -90,10 +102,21 @@
 - https://github.com/felHR85/UsbSerial
 - https://github.com/licheedev/Android-SerialPort-Tool
 - https://github.com/xmaihh/Android-Serialport
+- https://github.com/cl-6666/serialPort/tree/master
 
 
 #### 5.5 博客
 - USB识别开发
   - https://blog.csdn.net/c19344881x/article/details/124838289
+- Android USB转串口通信开发实例详解【好案例】
+  - https://blog.csdn.net/u011555996/article/details/86220900
+- Android Usb（OTG）串口通信
+  - https://blog.csdn.net/MSONG93/article/details/130730467
+- 安卓与串口通信-实践篇
+  - https://blog.csdn.net/sinat_17133389/article/details/130788942
+- Android的USB通信（AOA连接）
+  - https://blog.csdn.net/CJohn1994/article/details/124669291
+- Android-USB通信
+  - https://blog.csdn.net/dream_xang/article/details/124274920
 
 

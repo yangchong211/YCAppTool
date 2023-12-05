@@ -337,9 +337,6 @@ public class MonitorPhoneFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         sb.append("当前时区:  ").append(AppTimeUtils.getCurrentTimeZone());
         sb.append("\n手机总内存:  ").append(AppMemoryUtils.getTotalMemory(application)).append("kb");
-        sb.append("\n手机可用内存:  ").append(AppMemoryUtils.getAvailMemory(application)).append("mb");
-//        sb.append("\n获得机身内存总大小:  ").append(AppMemoryUtils.getRomTotalSize(application)).append("kb");
-//        sb.append("\n获得机身可用内存:  ").append(AppMemoryUtils.getRomAvailableSize(application)).append("kb");
         sb.append("\n系统剩余控件:  ").append(AppMemoryUtils.getRomSpace(application));
         AppMemoryUtils.getMemoryInfo(application, new AppMemoryUtils.OnGetMemoryInfoCallback() {
             @Override
@@ -366,7 +363,6 @@ public class MonitorPhoneFragment extends Fragment {
         StringBuilder sb = new StringBuilder();
         sb.append("当前时区:  ").append(AppTimeUtils.getCurrentTimeZone());
         sb.append("\n手机总内存:  ").append(AppMemoryUtils.getTotalMemory(application)).append("kb");
-        sb.append("\n手机可用内存:  ").append(AppMemoryUtils.getAvailMemory(application)).append("mb");
         sb.append("\n当前应用进程的pid:  ").append(AppMemoryUtils.getCurrentPid());
         tvContentMemory.setText(sb.toString());
     }

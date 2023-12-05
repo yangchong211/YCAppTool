@@ -40,6 +40,14 @@ public abstract class AbsTaskExecutor {
     public abstract void executeOnCpu(@NonNull Runnable runnable);
 
     /**
+     * 执行定时以及周期性任务，执行异步操作
+     *
+     * @param runnable   runnable
+     * @param delayMills 延迟毫秒数
+     */
+    public abstract void executeOnScheduled(@NonNull Runnable runnable, long delayMills);
+
+    /**
      * 使用UI主线程共有handler对象，执行post任务【将给定的任务提交给主线程】
      *
      * @param runnable runnable
@@ -51,7 +59,7 @@ public abstract class AbsTaskExecutor {
      *
      * @param runnable runnable
      */
-    public abstract void postToMainThreadDelay(@NonNull Runnable runnable , long delayMills);
+    public abstract void postToMainThreadDelay(@NonNull Runnable runnable, long delayMills);
 
     /**
      * 获取UI主线程共有handler对象

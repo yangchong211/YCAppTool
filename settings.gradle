@@ -186,9 +186,9 @@ include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',':InterceptorTime',
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',':AdbHelper',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',':LooperThread',
-        ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib', ':UsbInterface',
+        ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib', ':UsbManager',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib', ':SerialPort',
-        ':HandlerThread', ':CameraOpen', ':SqlLiteLib'
+        ':HandlerThread', ':CameraOpen', ':SqlLiteLib', ':RebootHelper'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
@@ -209,7 +209,7 @@ project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
 project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
 project(':LiveDataBus').projectDir = new File('ToolLib/LiveDataBus')
 project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
-project(':UsbInterface').projectDir = new File('ToolLib/UsbInterface')
+project(':UsbManager').projectDir = new File('ToolLib/UsbManager')
 project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
 project(':TransitionHelper').projectDir = new File('ToolLib/TransitionHelper')
 project(':AnimBaseHelper').projectDir = new File('ToolLib/AnimBaseHelper')
@@ -222,6 +222,7 @@ project(':SerialPort').projectDir = new File('ToolLib/SerialPort')
 project(':HandlerThread').projectDir = new File('ToolLib/HandlerThread')
 project(':CameraOpen').projectDir = new File('ToolLib/CameraOpen')
 project(':SqlLiteLib').projectDir = new File('ToolLib/SqlLiteLib')
+project(':RebootHelper').projectDir = new File('ToolLib/RebootHelper')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -296,34 +297,35 @@ project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
 
 
 /* +++++++++ 经典第三方库 +++++++++ */
-include ':LeakAnalyzer', ':LeakCanarySdk', ':LeakInstrumentation',
+include ':LeakAnalyzer', ':LeakCanarySdk', ':LeakInstrumentation',':GsonLib',
         ':LeakSample', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher', ':LeakAndroidNoOp',
         ':GlideAnnotation', ':GlideGifLib', ':GlideLibrary', ':EventbusAndroid', ':EventBus',
         ':OkHttpLib'
 //leakcanary 是1.6.3版本
-//leakcanary-analyzer ：负责泄漏信息的分析
-//leakcanary-android ：负责核心模块与Android的对接，还包含着UI展示部分
 //leakcanary-android-instrumentation ：单元测试用的
-//leakcanary-android-no-op ：release环境下引用的空包
-//leakcanary-sample ：库使用的demo
-//leakcanary-support-fragment ：v4包额外适配支持
-//leakcanary-watcher ：监听泄漏核心部分
 project(':LeakInstrumentation').projectDir = new File('ThirdLib/LeakInstrumentation')
+//leakcanary-sample ：库使用的demo
 project(':LeakSample').projectDir = new File('ThirdLib/LeakSample')
+//leakcanary-android ：负责核心模块与Android的对接，还包含着UI展示部分
 project(':LeakAndroid').projectDir = new File('ThirdLib/LeakAndroid')
+//leakcanary-analyzer ：负责泄漏信息的分析
 project(':LeakAnalyzer').projectDir = new File('ThirdLib/LeakAnalyzer')
+//leakcanary-android-no-op ：release环境下引用的空包
 project(':LeakAndroidNoOp').projectDir = new File('ThirdLib/LeakAndroidNoOp')
+//leakcanary-watcher ：监听泄漏核心部分
 project(':LeakWatcher').projectDir = new File('ThirdLib/LeakWatcher')
 project(':LeakCanarySdk').projectDir = new File('ThirdLib/LeakCanarySdk')
 //glide 4.9.0版本
 project(':GlideAnnotation').projectDir = new File('ThirdLib/GlideAnnotation')
 project(':GlideGifLib').projectDir = new File('ThirdLib/GlideGifLib')
 project(':GlideLibrary').projectDir = new File('ThirdLib/GlideLibrary')
-//eventBus
+//eventBus，
 project(':EventbusAndroid').projectDir = new File('ThirdLib/EventbusAndroid')
 project(':EventBus').projectDir = new File('ThirdLib/EventBus')
-//OkHttp
+//OkHttp，
 project(':OkHttpLib').projectDir = new File('ThirdLib/OkHttpLib')
+//gson库，2.8.6版本
+project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
 
 
 /* +++++++++ JNI开发demo +++++++++ */
@@ -334,4 +336,5 @@ project(':TestJniLib').projectDir = new File('JniNdkLib/TestJniLib')
 project(':CrashDumper').projectDir = new File('JniNdkLib/CrashDumper')
 project(':SafetyJniLib').projectDir = new File('JniNdkLib/SafetyJniLib')
 project(':ReLinker').projectDir = new File('JniNdkLib/ReLinker')
+
 

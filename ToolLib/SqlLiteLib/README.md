@@ -165,6 +165,9 @@
 #### 2.3 如何插入数据
 - 向表中插入数据，我们需要一行插入进表，这样数据写入更有效率。
 - 使用SQLite的命令insert进行操作
+    - table：代表想插入的数据的表明
+    - nullColumnHack: 强行指定插入null值得数据列的列名。一般用不到，传入null即可。
+    - contentValues对象：类似于Map，提供了一系列的put方法重载，其中key为数据列的列名。
     ```
     db.insert("user", null, values);
     ```
@@ -189,6 +192,13 @@
 
 #### 2.4 如何查找数据
 - 使用SQLite的命令query进行操作
+    - table:执行查询数据的表名。
+    - columns：要查询出来的列名。相当于select 语句 select关键字后面的部分。
+    - whereClause:查询条件子句，相当于 select 语句where 关键字后面的部分，在条件子句中允许使用占位符“?”。
+    - selectionArgs:用于为 whereClause子句中的占位符传入参数值，值在数组中的位置与占位符在语句中的位置必须一致；否则就会有异常
+    - groupBy:用于控制分组。相当于select 语句group by 关键字后面的部分
+    - having: 用于对分组进行过滤。相当于 select 语句 having关键字后面的部分
+    - orderBy:用于对记录进行排序。
     ```
     cursor = db.query(TABLE_NAME, null, KEY + "=?",
                     new String[]{key}, null, null, null);
@@ -199,6 +209,10 @@
 
 #### 2.5 如何更新数据
 - 使用SQLite的命令update进行操作
+    - table:代表想更新数据的表名
+    - values:代表想更新数据的表名
+    - whereClause:满足该whereClause子句的记录将会被更新
+    - whereArgs:用于为whereClause子句传入参数
     ```
     db.update(TABLE_NAME, cv, NAME + "=?", new String[]{name});
     ```
@@ -206,6 +220,9 @@
 
 #### 2.6 如何删除数据
 - 使用SQLite的命令delete进行操作
+    - table:代表想删除数据的表名。
+    - whereClause:满足该whereClause子句的记录将会被删除。
+    - whereArgs:用于为 whereClause 子句传入参数。
     ```
     db.delete(TABLE_NAME, name + "=?", new String[]{name});
     ```

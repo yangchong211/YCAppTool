@@ -1,14 +1,28 @@
 package com.yc.usbsocket;
+
+
+import com.yc.toolutils.AppLogUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
-
+/**
+ * Usb通信机制的Socket类封装,最原始的协议，这里不做业务相关的操作
+ */
 public class UsbSocket implements Serializable {
 
     private static final String TAG = UsbSocket.class.getSimpleName();
     //volatile防止指令重排序，内存可见(缓存中的变化及时刷到主存，并且其他的线程副本内存失效，必须从主存获取)，但不保证原子性
     private static volatile UsbSocket singleton = null;
+    //端口号
+    private static final int PORT = 8004;
     //USB交互的服务
-    private UsbThread usbThread;
+    private USBThread usbThread;
 
     /**
      * 获取单例
@@ -46,7 +60,7 @@ public class UsbSocket implements Serializable {
         if (singleton != null) {
             throw new RuntimeException("对象已存在不可重复创建");
         }
-        usbThread = new UsbThread(this);
+        usbThread = new USBThread();
     }
 
     //解决被序列化破坏单例的问题
@@ -72,7 +86,7 @@ public class UsbSocket implements Serializable {
         if(usbThread != null){
             usbThread.release();
         }
-        usbThread = new UsbThread(this);
+        usbThread = new USBThread();
         usbThread.start();
     }
 
@@ -86,6 +100,181 @@ public class UsbSocket implements Serializable {
         usbThread = null;
     }
 
+    /**
+     * 用来启动USB通信的总线程
+     */
+    private class USBThread extends Thread {
+
+        //USB通信服务
+        private ServerSocket serverSocket = null;
+        //是否让线程保持运行状态
+        private volatile boolean isRun = true;
+        //当前连接的socket线程
+        private PCThread pcThread;
+
+        public USBThread(){
+            AppLogUtils.d(TAG, "USBThread Create"+ " --Thread Name:"+getName());
+        }
+
+        @Override
+        public void run() {
+            //如果出现端口占用  请参考解决方案：https://www.cnblogs.com/mantti/p/5262902.html
+            try {
+                //pc和手机的端口转发命令，可参考：https://blog.csdn.net/u013553529/article/details/80036227
+                //不执行转发的话会出现：Connection refused 异常，需要root权限，pc或者手机端任意一端执行都可以
+                //exec("adb forward tcp:8004 tcp:8004");
+                //建立socket服务器，监听手机8004端口，这的端口与pc端的端口不属于同个端口，需要adb forward指令去关联转换才能通信
+                serverSocket = new ServerSocket(PORT);
+                while (isRun) {
+                    //接受客户端连接
+                    Socket socket = serverSocket.accept();
+                    //每次PC连接都要开辟一条线程处理数据
+                    if(socket != null){
+                        if(pcThread != null && pcThread.isRun){
+                            pcThread.release();
+                            //多个连接线断开以前的连接
+                            onConnectNext(false);
+                        }
+                        pcThread = new PCThread(socket);
+                        pcThread.start();
+                        //重新连接新的
+                        onConnectNext(true);
+                    }
+                }
+            } catch (Exception e) {
+                //e.printStackTrace();
+                //当serverSocket断开的时候这里会抛出异常
+                AppLogUtils.d(TAG, "USBThread Exception:"+e.toString()+ " --Thread Name:"+getName());
+                //异常退出，表示断开连接
+                onConnectNext(false);
+            }
+        }
+
+        /**
+         * 发送数据
+         */
+        public boolean send(byte[] data){
+            if(pcThread != null && pcThread.isRun){
+                return pcThread.send(data);
+            }
+            return false;
+        }
+
+        /**
+         * 释放USB通信的线程
+         */
+        public void release(){
+            try {
+                //关闭pc线程
+                if(pcThread != null && pcThread.isRun){
+                    pcThread.release();
+                }
+                pcThread = null;
+                //关闭单次连接的socket
+                if(serverSocket != null){
+                    serverSocket.close();
+                    AppLogUtils.d(TAG, "serverSocket close"+ " --Thread Name:"+getName());
+                }
+                serverSocket = null;
+            } catch (Exception e) {
+                e.printStackTrace();
+                AppLogUtils.d(TAG, "USBThread.release() Exception:"+ e.toString() +" --Thread Name:"+getName());
+            } finally {
+                isRun = false;
+                AppLogUtils.d(TAG, "USBThread stop"+" --Thread Name:"+getName());
+            }
+        }
+    }
+
+    /**
+     * 用来与PC交互的线程
+     */
+    private class PCThread extends Thread{
+
+        //与pc交互的socket通道
+        private Socket socket;
+        //是否让线程保持运行状态
+        private volatile boolean isRun;
+
+        private PCThread(Socket socket){
+            this.socket = socket;
+            this.isRun = true;
+            AppLogUtils.d(TAG, "PCThread Create"+ " --Thread Name:"+getName());
+        }
+
+        @Override
+        public void run() {
+            InputStream in;
+            try {
+                //读取连接的输入流，也就是pc端发来的数据
+                in = socket.getInputStream();
+                while (isRun) {
+                    //一次读取1K数据，最大限度是2K，但是越大的话每次读取花费的时间越大
+                    final int MLEN = 1024;
+                    byte[] buff = new byte[MLEN];
+                    //读取buffer
+                    int size = in.read(buff);
+                    //存在数据
+                    if (size >= 0) {
+                        //有效的原始数据
+                        byte[] rawBuffer = new byte[size];
+                        //得到有效的原始数据
+                        System.arraycopy(buff, 0, rawBuffer, 0, size);
+                        //转成UTF-8的数据
+                        final String data = new String(rawBuffer, StandardCharsets.UTF_8);
+                        AppLogUtils.d(TAG, "收到数据，大小: " + data.length() + " 原始数据:" + data +" --Thread Name:"+getName());
+                        //对外抛出
+                        onRawDataNext(rawBuffer);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                AppLogUtils.d(TAG, "PCThread Exception:"+e.toString()+" --Thread Name:"+getName());
+                //遇到异常直接断开连接，让客户端重新发起连接
+                release();
+            }
+        }
+
+        /**
+         * 发送数据
+         */
+        public boolean send(byte[] data){
+            if(this.socket != null){
+                try {
+                    OutputStream outputStream = this.socket.getOutputStream();
+                    if(outputStream != null){
+                        outputStream.write(data);
+                        outputStream.flush();
+                        return true;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    AppLogUtils.d(TAG, "PCThread Exception:"+e.toString()+"send failed --Thread Name:"+getName());
+                }
+            }
+            return false;
+        }
+
+        /**
+         * 释放线程和socket
+         */
+        public void release(){
+            try {
+                //关闭单次连接的socket
+                if(socket != null){
+                    socket.close();
+                    AppLogUtils.d(TAG, "PCThread socket.close"+" --Thread Name:"+getName());
+                }
+                socket = null;
+            } catch (Exception e) {
+                e.printStackTrace();
+                AppLogUtils.d(TAG, "PCThread release Exception:"+e.toString()+" --Thread Name:"+getName());
+            } finally {
+                //停止线程
+                isRun = false;
+            }
+        }
+    }
 
     /********************** 点餐机连接结果回调回调 *****************/
 
@@ -95,7 +284,7 @@ public class UsbSocket implements Serializable {
         this.onConnectListener = onConnectListener;
     }
 
-    void onConnectNext(final boolean result){
+    private void onConnectNext(final boolean result){
         if(this.onConnectListener != null){
             onConnectListener.onConnect(result);
         }
@@ -113,7 +302,7 @@ public class UsbSocket implements Serializable {
         this.onRawDataListener = onRawDataListener;
     }
 
-    void onRawDataNext(final byte[] buffer){
+    private void onRawDataNext(final byte[] buffer){
         if(this.onRawDataListener != null){
             onRawDataListener.onData(buffer);
         }

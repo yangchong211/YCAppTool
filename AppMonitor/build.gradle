@@ -48,6 +48,7 @@ dependencies {
     implementation project(path: ':MonitorNetLib')
     implementation project(path: ':MonitorApmLib')
     implementation project(path: ':AppClickHelper')
+    implementation project(path: ':MonitorFpsLib')
 
 //    implementation project(path: ':LeakCanarySdk')
 //    implementation project(':LeakAndroid')

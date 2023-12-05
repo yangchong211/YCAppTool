@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yc.apploglib.AppLogHelper;
-import com.yc.catonhelperlib.PerformanceActivity;
 import com.yc.lifehelper.R;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;

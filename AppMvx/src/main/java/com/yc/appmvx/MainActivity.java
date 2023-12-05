@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.yc.keyeventlib.demo.KeyCodeActivity;
 import com.yc.keyeventlib.demo.KeyCodeActivity2;
+import com.yc.sqllitelib.test.DBTestDao;
+import com.yc.sqllitelib.test.SqlLiteActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 //        PresentationActivity.startActivity(this);
 //        startActivity(new Intent(this, KeyCodeActivity.class));
 //        startActivity(new Intent(this, KeyCodeActivity2.class));
-        startActivity(new Intent(this, NetWorkActivity.class));
+        DBTestDao.getInstance(this).clear();
+        startActivity(new Intent(this, SqlLiteActivity.class));
     }
 }

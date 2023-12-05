@@ -10,8 +10,22 @@ package com.yc.toolmemorylib;
  * </pre>
  */
 public final class PssInfo {
-    public int totalPss;
-    public int dalvikPss;
-    public int nativePss;
-    public int otherPss;
+    /**
+     * 进程的总内存大小
+     * 整体内存，native+dalvik+共享
+     */
+    public long totalPss;
+    /**
+     * java内存 OOM原因
+     * 重点关注对象
+     */
+    public long dalvikPss;
+    /**
+     * native内存
+     */
+    public long nativePss;
+    /**
+     * 其他内存
+     */
+    public long otherPss;
 }

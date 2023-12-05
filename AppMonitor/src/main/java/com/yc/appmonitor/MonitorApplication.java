@@ -57,13 +57,13 @@ public class MonitorApplication extends Application {
                         //StatService.recordException(getApplication(), ex);
                     }
                 });
-        boolean init = NativeCrashDumper.getInstance().init(getFilesDir().getAbsolutePath(), new NativeCrashListener() {
-            @Override
-            public void onSignalReceived(int signal, final String logPath) {
-                final String content = readContentFromFile(logPath);
-                AppLogUtils.e("onSignalReceived  " + content);
-            }
-        }, NativeHandleMode.RAISE_ERROR);
+//        boolean init = NativeCrashDumper.getInstance().init(getFilesDir().getAbsolutePath(), new NativeCrashListener() {
+//            @Override
+//            public void onSignalReceived(int signal, final String logPath) {
+//                final String content = readContentFromFile(logPath);
+//                AppLogUtils.e("onSignalReceived  " + content);
+//            }
+//        }, NativeHandleMode.RAISE_ERROR);
     }
 
     private String readContentFromFile(String path) {
