@@ -104,7 +104,9 @@ public class SoundPoolPlayer extends SoundPool {
                 super.resume(streamId);
             }
             startTime = System.currentTimeMillis();
-            handler = new Handler();
+            if (handler == null) {
+                handler = new Handler();
+            }
             handler.postDelayed(runnable, duration - timeSinceStart);
             isPlaying = true;
         }
@@ -112,7 +114,6 @@ public class SoundPoolPlayer extends SoundPool {
 
     private long getSoundDuration(int rawId) {
         MediaPlayer player = MediaPlayer.create(context, rawId);
-        int duration = player.getDuration();
-        return duration;
+        return player.getDuration();
     }
 }
