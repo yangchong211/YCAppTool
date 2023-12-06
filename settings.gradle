@@ -184,7 +184,7 @@ project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinator
 /* +++++++++ 框架基础工具库 +++++++++ */
 include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':EasySocket',
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',':InterceptorTime',
-        ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',':AdbHelper',
+        ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',':LooperThread',
         ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib', ':UsbManager',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib', ':SerialPort',
@@ -217,7 +217,6 @@ project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
 project(':EasySocket').projectDir = new File('ToolLib/EasySocket')
 project(':LooperThread').projectDir = new File('ToolLib/LooperThread')
 project(':InterceptorTime').projectDir = new File('ToolLib/InterceptorTime')
-project(':AdbHelper').projectDir = new File('ToolLib/AdbHelper')
 project(':SerialPort').projectDir = new File('ToolLib/SerialPort')
 project(':HandlerThread').projectDir = new File('ToolLib/HandlerThread')
 project(':CameraOpen').projectDir = new File('ToolLib/CameraOpen')
@@ -279,7 +278,7 @@ project(':MonitorFlow').projectDir = new File('MonitorLib/MonitorFlow')
 
 
 /* +++++++++ 音视频 +++++++++ */
-include ':VideoSqlLite', ':VideoCache', ':AudioPlayer', ':VideoSurface',
+include ':VideoSqlLite', ':VideoCache', ':AudioPlayer', ':VideoSurface', ':SoundPool',
         ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView',
         ':BellsVibrations', ':AudioHelper', ':MediaHelper'
 project(':VideoSqlLite').projectDir = new File('PlayerLib/VideoSqlLite')
@@ -294,6 +293,7 @@ project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 project(':BellsVibrations').projectDir = new File('PlayerLib/BellsVibrations')
 project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')
 project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
+project(':SoundPool').projectDir = new File('PlayerLib/SoundPool')
 
 
 /* +++++++++ 经典第三方库 +++++++++ */
