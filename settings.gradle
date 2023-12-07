@@ -186,7 +186,7 @@ include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',':InterceptorTime',
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',':LooperThread',
-        ':AnimatorHelper', ':ThreadDebugLib', ':LiveDataBus', ':AppUpdateLib', ':UsbManager',
+        ':AnimatorHelper', ':ThreadDebugLib', ':AppUpdateLib', ':UsbManager',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib', ':SerialPort',
         ':HandlerThread', ':CameraOpen', ':SqlLiteLib', ':RebootHelper'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
@@ -207,7 +207,6 @@ project(':EasyExecutor').projectDir = new File('ToolLib/EasyExecutor')
 project(':LocalShareLib').projectDir = new File('ToolLib/LocalShareLib')
 project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
 project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
-project(':LiveDataBus').projectDir = new File('ToolLib/LiveDataBus')
 project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
 project(':UsbManager').projectDir = new File('ToolLib/UsbManager')
 project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
@@ -279,7 +278,7 @@ project(':MonitorFlow').projectDir = new File('MonitorLib/MonitorFlow')
 
 /* +++++++++ 音视频 +++++++++ */
 include ':VideoSqlLite', ':VideoCache', ':AudioPlayer', ':VideoSurface', ':SoundPool',
-        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView',
+        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView',':EasyTtsPlayer',
         ':BellsVibrations', ':AudioHelper', ':MediaHelper'
 project(':VideoSqlLite').projectDir = new File('PlayerLib/VideoSqlLite')
 project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
@@ -294,6 +293,7 @@ project(':BellsVibrations').projectDir = new File('PlayerLib/BellsVibrations')
 project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')
 project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
 project(':SoundPool').projectDir = new File('PlayerLib/SoundPool')
+project(':EasyTtsPlayer').projectDir = new File('PlayerLib/EasyTtsPlayer')
 
 
 /* +++++++++ 经典第三方库 +++++++++ */
