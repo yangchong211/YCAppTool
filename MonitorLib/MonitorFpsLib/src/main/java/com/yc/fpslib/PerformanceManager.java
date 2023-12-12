@@ -96,18 +96,20 @@ public final class PerformanceManager {
     private void startWindowFrameInfo(Activity activity) {
         Window window = activity.getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && window!=null) {
-            window.addOnFrameMetricsAvailableListener(new Window.OnFrameMetricsAvailableListener() {
-                @Override
-                public void onFrameMetricsAvailable(Window window, FrameMetrics frameMetrics, int dropCountSinceLastInvocation) {
-
-                }
-            },new Handler(Looper.getMainLooper()));
+            window.addOnFrameMetricsAvailableListener(listener,new Handler(Looper.getMainLooper()));
         } else {
             startMonitorFrameInfo();
         }
     }
 
-
+    private void stopMonitorFrameInfo(Activity activity) {
+        Window window = activity.getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && window!=null) {
+            window.removeOnFrameMetricsAvailableListener(listener);
+        } else {
+            stopMonitorFrameInfo();
+        }
+    }
 
     public void startMonitor() {
         PerformanceManager.getInstance().startMonitorFrameInfo();
@@ -122,9 +124,19 @@ public final class PerformanceManager {
         stopMonitorFrameInfo();
     }
 
+    @SuppressLint("NewApi")
+    private final Window.OnFrameMetricsAvailableListener listener =  new Window.OnFrameMetricsAvailableListener() {
+        @Override
+        public void onFrameMetricsAvailable(Window window, FrameMetrics frameMetrics, int dropCountSinceLastInvocation) {
+            //详细查看下 FrameMetrics 数据中定义了哪些渲染阶段
+
+        }
+    };
+
     private static class Holder {
         private static final PerformanceManager INSTANCE = new PerformanceManager();
         private Holder() {
+
         }
     }
 

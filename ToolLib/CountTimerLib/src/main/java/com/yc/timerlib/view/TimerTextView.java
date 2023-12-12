@@ -30,7 +30,7 @@ public class TimerTextView extends AppCompatTextView {
     /**
      * 是否展示文本
      */
-    private boolean isAutoShowText;
+    private boolean isAutoShowText = false;
     private CountDownCallback countDownCallback;
     private CountDownTimer mCountDownTimer;
 
