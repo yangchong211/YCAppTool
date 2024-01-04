@@ -330,11 +330,23 @@ project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
 
 /* +++++++++ JNI开发demo +++++++++ */
 include ':AppJni'
-include ':CallJniLib', ':TestJniLib', ':CrashDumper',':SafetyJniLib',':ReLinker'
+include ':CallJniLib', ':TestJniLib', ':CrashDumper',':SafetyJniLib',':ReLinker',
+        ':UVCCameraLib', ':UsbCameraLib',':usbCameraTest',':usbCameraTest0',':usbCameraTest2',':usbCameraTest3',
+        ':usbCameraTest4',':usbCameraTest5',':usbCameraTest6',':usbCameraTest7',':usbCameraTest8'
 project(':CallJniLib').projectDir = new File('JniNdkLib/CallJniLib')
 project(':TestJniLib').projectDir = new File('JniNdkLib/TestJniLib')
 project(':CrashDumper').projectDir = new File('JniNdkLib/CrashDumper')
 project(':SafetyJniLib').projectDir = new File('JniNdkLib/SafetyJniLib')
 project(':ReLinker').projectDir = new File('JniNdkLib/ReLinker')
-
+project(':UVCCameraLib').projectDir = new File('JniNdkLib/UVCCameraLib')
+project(':UsbCameraLib').projectDir = new File('JniNdkLib/UsbCameraLib')
+project(':usbCameraTest').projectDir = new File('JniNdkLib/usbCameraTest')
+project(':usbCameraTest0').projectDir = new File('JniNdkLib/usbCameraTest0')
+project(':usbCameraTest2').projectDir = new File('JniNdkLib/usbCameraTest2')
+project(':usbCameraTest3').projectDir = new File('JniNdkLib/usbCameraTest3')
+project(':usbCameraTest4').projectDir = new File('JniNdkLib/usbCameraTest4')
+project(':usbCameraTest5').projectDir = new File('JniNdkLib/usbCameraTest5')
+project(':usbCameraTest6').projectDir = new File('JniNdkLib/usbCameraTest6')
+project(':usbCameraTest7').projectDir = new File('JniNdkLib/usbCameraTest7')
+project(':usbCameraTest8').projectDir = new File('JniNdkLib/usbCameraTest8')
 

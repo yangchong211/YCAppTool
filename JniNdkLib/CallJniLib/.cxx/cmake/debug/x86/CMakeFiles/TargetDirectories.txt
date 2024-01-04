@@ -1,3 +1,0 @@
-/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/.cxx/cmake/debug/x86/CMakeFiles/rebuild_cache.dir
-/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/.cxx/cmake/debug/x86/CMakeFiles/edit_cache.dir
-/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/.cxx/cmake/debug/x86/CMakeFiles/calljnilib.dir

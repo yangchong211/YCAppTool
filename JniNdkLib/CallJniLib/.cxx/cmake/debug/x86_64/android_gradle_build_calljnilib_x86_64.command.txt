@@ -1,7 +1,0 @@
-Executable : /Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja
-arguments : 
--C
-/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/.cxx/cmake/debug/x86_64
-calljnilib
-jvmArgs : 
-

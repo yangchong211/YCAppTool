@@ -1,2 +1,0 @@
-ninja: Entering directory `/Users/yc/github/YCAppTool/JniNdkLib/CallJniLib/.cxx/cmake/debug/armeabi-v7a'
-ninja: no work to do.
