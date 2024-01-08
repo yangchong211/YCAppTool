@@ -18,6 +18,8 @@ package com.yc.activitymanager;
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +28,7 @@ import java.util.Map;
 /**
  * <pre>
  *     @author yangchong
- *     blog  : https://github.com/yangchong211
+ *     blog  : <a href="https://github.com/yangchong211">...</a>
  *     GitHub : https://github.com/yangchong211/YCCommonLib
  *     time  : 2018/11/9
  *     desc  : 代理类
@@ -74,7 +76,7 @@ public class ProxyActivityListener extends AbsLifecycleListener {
     }
 
     @Override
-    public void onActivityResumed(Activity activity) {
+    public void onActivityResumed(@Nullable Activity activity) {
         List<AbsLifecycleListener> lifecycleListeners = mActivityLifecycleListeners.get(activity.getClass());
         if (lifecycleListeners == null || lifecycleListeners.size() == 0) {
             return;

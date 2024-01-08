@@ -16,7 +16,7 @@ import java.util.List;
  * 您可以使用 WifiNetworkSuggestion 就连接到哪个网络提供建议。平台最终会根据您的应用和其他应用的建议，选择要接受的接入点。
  */
 @RequiresApi(api = Build.VERSION_CODES.Q)
-public final class WifiNetworkHelper {
+final class WifiNetworkHelper {
 
 
     @RequiresApi(api = Build.VERSION_CODES.Q)

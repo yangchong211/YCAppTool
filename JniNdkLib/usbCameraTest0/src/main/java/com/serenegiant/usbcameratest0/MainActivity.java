@@ -59,10 +59,10 @@ public class MainActivity extends BaseActivity implements CameraDialog.CameraDia
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		mCameraButton = (ImageButton)findViewById(R.id.camera_button);
+		mCameraButton = findViewById(R.id.camera_button);
 		mCameraButton.setOnClickListener(mOnClickListener);
 
-		mUVCCameraView = (SurfaceView)findViewById(R.id.camera_surface_view);
+		mUVCCameraView = findViewById(R.id.camera_surface_view);
 		mUVCCameraView.getHolder().addCallback(mSurfaceViewCallback);
 
 		mUSBMonitor = new USBMonitor(this, mOnDeviceConnectListener);

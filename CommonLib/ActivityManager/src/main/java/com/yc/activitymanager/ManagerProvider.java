@@ -29,11 +29,10 @@ import androidx.annotation.NonNull;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
- *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     GitHub : <a href="https://github.com/yangchong211/YCCommonLib">...</a>
  *     time   : 2018/4/17
  *     desc   : 初始化操作
  *     revise :
- *     GitHub: https://github.com/yangchong211
  * </pre>
  */
 public final class ManagerProvider extends ContentProvider {

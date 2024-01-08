@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ConnectWiFiThread extends AtomicInteger implements ThreadFactory {
+class ConnectWiFiThread extends AtomicInteger implements ThreadFactory {
 
     private static final String TAG = "NetWork-Thread";
     private final AtomicInteger POOL_NUMBER = new AtomicInteger(1);

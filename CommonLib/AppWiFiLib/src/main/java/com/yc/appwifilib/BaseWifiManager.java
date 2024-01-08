@@ -20,7 +20,7 @@ import com.yc.toolutils.AppLogUtils;
 
 import java.util.List;
 
-public class BaseWifiManager {
+class BaseWifiManager {
 
     private Context context;
     private WifiManager wifiManager;

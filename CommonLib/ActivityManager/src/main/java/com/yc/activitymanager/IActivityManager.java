@@ -18,7 +18,7 @@ package com.yc.activitymanager;
 /**
  * <pre>
  *     @author yangchong
- *     blog  : https://github.com/yangchong211
+ *     blog  : <a href="https://github.com/yangchong211">...</a>
  *     GitHub : https://github.com/yangchong211/YCCommonLib
  *     time  : 2018/11/9
  *     desc  : 接口

@@ -77,7 +77,7 @@ include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager', ':AppCompress',
         ':AppHandlerLib', ':FileIoHelper', ':ZipFileLib', ':NetWorkLib', ':AppContextLib',
         ':AppWiFiLib', ':UriAndUrlLib', ':AppGrayLib', ':AppCallStatus', ':AppFastSp',
         ':ZipFileLib', ':SmEncryptLib', ':AppClickHelper', ':DataCloneLib', ':NetReceiver',
-        ':NetSettingLib', ':NetTestLib', ':ByteToolUtils'
+        ':NetSettingLib', ':NetTestLib', ':ByteToolUtils', ':MifareCard'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
@@ -124,7 +124,7 @@ project(':NetReceiver').projectDir = new File('CommonLib/NetReceiver')
 project(':NetSettingLib').projectDir = new File('CommonLib/NetSettingLib')
 project(':NetTestLib').projectDir = new File('CommonLib/NetTestLib')
 project(':ByteToolUtils').projectDir = new File('CommonLib/ByteToolUtils')
-
+project(':MifareCard').projectDir = new File('CommonLib/MifareCard')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -331,7 +331,7 @@ project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
 /* +++++++++ JNI开发demo +++++++++ */
 include ':AppJni'
 include ':CallJniLib', ':TestJniLib', ':CrashDumper',':SafetyJniLib',':ReLinker',
-        ':UVCCameraLib', ':UsbCameraLib',':usbCameraTest',':usbCameraTest0',':usbCameraTest2',':usbCameraTest3',
+        ':UVCCameraLib', ':UsbCameraLib', ':usbCameraTest1',':usbCameraTest0',':usbCameraTest2',':usbCameraTest3',
         ':usbCameraTest4',':usbCameraTest5',':usbCameraTest6',':usbCameraTest7',':usbCameraTest8'
 project(':CallJniLib').projectDir = new File('JniNdkLib/CallJniLib')
 project(':TestJniLib').projectDir = new File('JniNdkLib/TestJniLib')
@@ -340,7 +340,7 @@ project(':SafetyJniLib').projectDir = new File('JniNdkLib/SafetyJniLib')
 project(':ReLinker').projectDir = new File('JniNdkLib/ReLinker')
 project(':UVCCameraLib').projectDir = new File('JniNdkLib/UVCCameraLib')
 project(':UsbCameraLib').projectDir = new File('JniNdkLib/UsbCameraLib')
-project(':usbCameraTest').projectDir = new File('JniNdkLib/usbCameraTest')
+project(':usbCameraTest1').projectDir = new File('JniNdkLib/usbCameraTest1')
 project(':usbCameraTest0').projectDir = new File('JniNdkLib/usbCameraTest0')
 project(':usbCameraTest2').projectDir = new File('JniNdkLib/usbCameraTest2')
 project(':usbCameraTest3').projectDir = new File('JniNdkLib/usbCameraTest3')
@@ -349,4 +349,5 @@ project(':usbCameraTest5').projectDir = new File('JniNdkLib/usbCameraTest5')
 project(':usbCameraTest6').projectDir = new File('JniNdkLib/usbCameraTest6')
 project(':usbCameraTest7').projectDir = new File('JniNdkLib/usbCameraTest7')
 project(':usbCameraTest8').projectDir = new File('JniNdkLib/usbCameraTest8')
+
 

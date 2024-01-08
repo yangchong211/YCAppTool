@@ -14,7 +14,7 @@ import android.util.Log;
 
 import java.util.List;
 
-public class WifiReceiver extends BroadcastReceiver {
+class WifiReceiver extends BroadcastReceiver {
 
     private static final String TAG = "Network-WifiReceiver:";
     private static final int WIFI_AP_STATE_DISABLING = 10;

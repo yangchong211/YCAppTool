@@ -2,7 +2,7 @@ package com.yc.appwifilib;
 
 import androidx.annotation.NonNull;
 
-public interface IWifiFeature {
+interface IWifiFeature {
 
     /**
      * 判断Wi-Fi是否打开

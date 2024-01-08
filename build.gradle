@@ -42,6 +42,7 @@ allprojects {
             name 'Google'
         }
         maven { url 'https://jitpack.io' }
+        maven { url 'https://gitee.com/liuchaoya/libcommon/raw/master/repository/' }
         //添加阿里云镜像
         maven { url "https://maven.aliyun.com/repository/public" }
         maven { url "https://maven.aliyun.com/repository/google" }

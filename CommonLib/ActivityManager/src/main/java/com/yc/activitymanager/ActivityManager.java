@@ -31,7 +31,7 @@ import java.util.Stack;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
- *     GitHub : https://github.com/yangchong211/YCCommonLib
+ *     GitHub : <a href="https://github.com/yangchong211/YCCommonLib">...</a>
  *     time  : 2016/8/10
  *     desc  : 堆栈管理
  *     revise:
@@ -78,7 +78,7 @@ public class ActivityManager implements IActivityManager<Activity> {
      */
     @Override
     public boolean isExist(Class<?> clazz) {
-        if (mActivityStacks == null || mActivityStacks.empty()) {
+        if (mActivityStacks.empty()) {
             return false;
         }
 
@@ -99,7 +99,7 @@ public class ActivityManager implements IActivityManager<Activity> {
      */
     @Override
     public Activity get(Class<?> clazz) {
-        if (mActivityStacks == null || mActivityStacks.empty()) {
+        if (mActivityStacks.empty()) {
             return null;
         }
 
@@ -136,7 +136,7 @@ public class ActivityManager implements IActivityManager<Activity> {
      */
     @Override
     public boolean isEmpty() {
-        return mActivityStacks == null || mActivityStacks.empty();
+        return mActivityStacks.empty();
     }
 
     /**
@@ -146,7 +146,7 @@ public class ActivityManager implements IActivityManager<Activity> {
      */
     @Override
     public Activity peek() {
-        if (mActivityStacks == null || mActivityStacks.size() == 0) {
+        if (mActivityStacks.size() == 0) {
             return null;
         }
         return mActivityStacks.peek();
@@ -157,7 +157,7 @@ public class ActivityManager implements IActivityManager<Activity> {
      */
     @Override
     public void pop() {
-        if (mActivityStacks == null || mActivityStacks.size() == 0) {
+        if (mActivityStacks.size() == 0) {
             return;
         }
 
@@ -253,6 +253,9 @@ public class ActivityManager implements IActivityManager<Activity> {
      */
     @Override
     public void finishAll() {
+        if (mActivityStacks.size() == 0) {
+            return;
+        }
         for (int i = 0, size = mActivityStacks.size(); i < size; i++) {
             if (null != mActivityStacks.get(i)) {
                 mActivityStacks.get(i).finish();
