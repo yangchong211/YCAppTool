@@ -11,13 +11,13 @@ import com.yc.sceondary.R;
 /**
  * 双屏异显（同显）实现方式
  */
-public class SecondDisplay extends Presentation implements IDisplay{
+public class SecondDisplay extends Presentation implements IDisplay {
 
     private final Context context;
     private FrameLayout flDisplayView;
 
     public SecondDisplay(Context outerContext, Display display) {
-        this(outerContext, display,0);
+        this(outerContext, display, 0);
     }
 
     public SecondDisplay(Context outerContext, Display display, int theme) {
@@ -46,11 +46,11 @@ public class SecondDisplay extends Presentation implements IDisplay{
         flDisplayView = findViewById(R.id.fl_display_view);
     }
 
-    public FrameLayout getRootView(){
+    public FrameLayout getRootView() {
         return flDisplayView;
     }
 
-    public Context getRootContext(){
+    public Context getRootContext() {
         return context;
     }
 
@@ -61,14 +61,14 @@ public class SecondDisplay extends Presentation implements IDisplay{
 
     @Override
     public void showDisplay(Context context) {
-        if (!this.isShowing()){
+        if (!this.isShowing()) {
             show();
         }
     }
 
     @Override
     public void dismissDisplay(Context context) {
-        if (this.isShowing()){
+        if (this.isShowing()) {
             close();
         }
     }

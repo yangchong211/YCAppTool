@@ -134,7 +134,7 @@ include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':EastAdapterLib', ':PhotoCoverLib', ':RefreshViewLib', ':SelectViewLib',
         ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib',
         ':FloatWindow', ':AppTextView', ':AppImageView', ':PercentLayout', ':AppScrollView',
-        ':AppSwitchView', ':AppEditText', ':SecondaryScreen',
+        ':AppSwitchView', ':AppEditText',
         ':RedDotView', ':ExpandLib', ':AppChartView', ':AppShadowLib', ':AppCoordinatorLayout'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
@@ -170,7 +170,6 @@ project(':PercentLayout').projectDir = new File('WidgetLib/PercentLayout')
 project(':AppScrollView').projectDir = new File('WidgetLib/AppScrollView')
 project(':AppSwitchView').projectDir = new File('WidgetLib/AppSwitchView')
 project(':AppEditText').projectDir = new File('WidgetLib/AppEditText')
-project(':SecondaryScreen').projectDir = new File('WidgetLib/SecondaryScreen')
 project(':RedDotView').projectDir = new File('WidgetLib/RedDotView')
 project(':ExpandLib').projectDir = new File('WidgetLib/ExpandLib')
 project(':AppChartView').projectDir = new File('WidgetLib/AppChartView')
@@ -330,10 +329,10 @@ project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
 
 
 /* +++++++++ 硬件相关 +++++++++ */
-include ':MifareCard', ':CpuCard'
+include ':MifareCard', ':CpuCard','SecondaryScreen'
 project(':MifareCard').projectDir = new File('Hardware/MifareCard')
 project(':CpuCard').projectDir = new File('Hardware/CpuCard')
-
+project(':SecondaryScreen').projectDir = new File('Hardware/SecondaryScreen')
 
 
 /* +++++++++ JNI开发demo +++++++++ */
