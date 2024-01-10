@@ -38,7 +38,7 @@ include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
         ':GsonServer', ':IpcServer', ':ObjectEqualLib', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker', ':NetChange',
-        ':GlideProgressLib', ':CompressServer', ':RetrofitNetLib', ':Transformation', ':GrpcServer',
+        ':GlideProgressLib', ':CompressServer',  ':Transformation', ':GrpcServer',
         ':HeartBeatServer'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
@@ -57,7 +57,6 @@ project(':NetInterceptor').projectDir = new File('ServerLib/NetInterceptor')
 project(':SignalHooker').projectDir = new File('ServerLib/SignalHooker')
 project(':GlideProgressLib').projectDir = new File('ServerLib/GlideProgressLib')
 project(':CompressServer').projectDir = new File('ServerLib/CompressServer')
-project(':RetrofitNetLib').projectDir = new File('ServerLib/RetrofitNetLib')
 project(':Transformation').projectDir = new File('ServerLib/Transformation')
 project(':TcpServerLib').projectDir = new File('ServerLib/TcpServerLib')
 project(':TcpManager').projectDir = new File('ServerLib/TcpManager')
@@ -77,7 +76,7 @@ include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager', ':AppCompress',
         ':AppHandlerLib', ':FileIoHelper', ':ZipFileLib', ':NetWorkLib', ':AppContextLib',
         ':AppWiFiLib', ':UriAndUrlLib', ':AppGrayLib', ':AppCallStatus', ':AppFastSp',
         ':ZipFileLib', ':SmEncryptLib', ':AppClickHelper', ':DataCloneLib', ':NetReceiver',
-        ':NetSettingLib', ':NetTestLib', ':ByteToolUtils', ':MifareCard'
+        ':NetSettingLib', ':NetTestLib', ':ByteToolUtils'
 project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':ApplicationLib').projectDir = new File('CommonLib/ApplicationLib')
@@ -124,7 +123,6 @@ project(':NetReceiver').projectDir = new File('CommonLib/NetReceiver')
 project(':NetSettingLib').projectDir = new File('CommonLib/NetSettingLib')
 project(':NetTestLib').projectDir = new File('CommonLib/NetTestLib')
 project(':ByteToolUtils').projectDir = new File('CommonLib/ByteToolUtils')
-project(':MifareCard').projectDir = new File('CommonLib/MifareCard')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -292,7 +290,9 @@ project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 project(':BellsVibrations').projectDir = new File('PlayerLib/BellsVibrations')
 project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')
 project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
+//SoundPool音效播放
 project(':SoundPool').projectDir = new File('PlayerLib/SoundPool')
+//简单型tts播放器
 project(':EasyTtsPlayer').projectDir = new File('PlayerLib/EasyTtsPlayer')
 
 
@@ -326,6 +326,14 @@ project(':EventBus').projectDir = new File('ThirdLib/EventBus')
 project(':OkHttpLib').projectDir = new File('ThirdLib/OkHttpLib')
 //gson库，2.8.6版本
 project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
+
+
+
+/* +++++++++ 硬件相关 +++++++++ */
+include ':MifareCard', ':CpuCard'
+project(':MifareCard').projectDir = new File('Hardware/MifareCard')
+project(':CpuCard').projectDir = new File('Hardware/CpuCard')
+
 
 
 /* +++++++++ JNI开发demo +++++++++ */
