@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.github.yangchong211.YCWidgetLib:RoundCorners:1.0.6'
     implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
     implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.9'
+    implementation project(path: ':ByteToolUtils')
     implementation project(path: ':KeyEventLib')
     implementation project(path: ':SecondaryScreen')
     implementation project(path: ':CpuCard')

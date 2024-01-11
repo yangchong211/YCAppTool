@@ -8,11 +8,9 @@ import com.android.scanCard.utils.MyConverterTool;
 import com.tencent.wx.pos.jni.WxPosLib;
 import com.tencent.wx.pos.jni.bean.ByteArrayResult;
 import com.yc.mifarecard.AbstractM1Card;
-import com.yc.mifarecard.IM1Function;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class M1CardImpl extends AbstractM1Card {
 
@@ -52,7 +50,8 @@ public class M1CardImpl extends AbstractM1Card {
 
     @Override
     public byte[] reset() {
-        return new byte[0];
+        String carNumber = CardReadManager.getInstance().CardSearch();
+        return !TextUtils.isEmpty(carNumber) ? new byte[1] : null;
     }
 
     @Override

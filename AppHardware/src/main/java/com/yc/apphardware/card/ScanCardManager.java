@@ -10,8 +10,8 @@ import com.android.scanCard.utils.ResultMasage;
 import com.tencent.wx.pos.jni.WxPosLib;
 import com.tencent.wx.pos.jni.bean.ByteArrayResult;
 import com.tencent.wx.pos.jni.bean.NfcResult;
+import com.yc.bytetoolutils.BytesHexStrUtils;
 import com.yc.cardmanager.CardHelper;
-import com.yc.mifarecard.InterM1Card;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
@@ -86,7 +86,8 @@ public class ScanCardManager {
     private String joinM1Data(String cardNum, String flipCardNum, ArrayList<String> arrayList) {
         StringBuilder sb = new StringBuilder();
         String key_6 = arrayList.get(0);
-        byte[] password6 = MyConverterTool.HexToByteArr(key_6);
+//        byte[] password6 = MyConverterTool.HexToByteArr(key_6);
+        byte[] password6 = BytesHexStrUtils.hexToBytes2(key_6);
         if (!TextUtils.isEmpty(key_6) && key_6.length() == 12) {
             int block61 = 24;
             byte[] data61 = CardHelper.getInstance().getM1Card().readBlock(cardNum, CardReadManager.KEY_MODE_A, block61, password6);
@@ -354,8 +355,10 @@ public class ScanCardManager {
         //微卡密钥换算
         byte[] cardKeyArray = CardHelper.getInstance().getM1Card().getCardSecret(flipCardNum);
         if (cardKeyArray != null) {
-            String taKeys = MyConverterTool.bytesToHex(cardKeyArray);
-            AppLogUtils.d("Card M1 cardKeyArray = " + MyConverterTool.ByteArrToHex(cardKeyArray) + " , taKeys " + taKeys);
+            //f23e9889d032736be51a5d866bceef43
+            String taKeys = BytesHexStrUtils.bytesToHex(cardKeyArray);
+            //String taKeys = MyConverterTool.bytesToHex(cardKeyArray);
+            AppLogUtils.d("Card M1 cardKeyArray = " + BytesHexStrUtils.bytesToHex2(cardKeyArray) + " , taKeys " + taKeys);
             ArrayList<String> keyArray = CardHelper.getInstance().getM1Card().getCardSecretList(taKeys);
             if (keyArray != null) {
                 String cardData = joinM1Data(cardNum, flipCardNum, keyArray);
@@ -363,6 +366,7 @@ public class ScanCardManager {
                 if (TextUtils.isEmpty(cardData)) {
                     return;
                 }
+                //将卡数据转化为数据bean，相当于解析数据
                 NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(cardData, flipCardNum, "", "", "", "", "");
                 if (nfcResult == null) {
                     if (mOnScanCardListen != null) {
