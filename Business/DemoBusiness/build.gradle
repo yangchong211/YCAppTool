@@ -75,18 +75,10 @@ dependencies {
     implementation(rootProject.ext.dependencies["okhttp"])
     implementation(rootProject.ext.dependencies["gson"])
     implementation project(path: ':RoundCorners')
-
-
-    implementation project(path: ':RouteManager')
-    implementation project(path: ':RouteAnnotations')
     implementation project(path: ':BaseProgress')
     implementation project(path: ':CircleProgress')
     implementation project(path: ':NtpTimeLib')
     implementation project(path: ':BlurViewLib')
-    annotationProcessor project(path: ':RouteCompiler')
-
-    implementation 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.4'
-    annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.4'
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     implementation 'com.github.yangchong211.YCDialog:DialogFragment:3.6.8'
     implementation project(path: ':ToolUtilsLib')

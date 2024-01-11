@@ -9,13 +9,17 @@ android {
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
     defaultConfig {
-        applicationId "com.yc.appmonitor"
-        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        applicationId "com.yc.apphardware"
+        minSdkVersion 21
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
         // dex突破65535的限制
         multiDexEnabled true
+
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
     }
 
     buildTypes {
@@ -28,6 +32,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -38,19 +47,17 @@ dependencies {
     implementation rootProject.ext.dependencies["recyclerview"]
     //轻量级异步线程封装库：https://github.com/yangchong211/YCThreadPool
     implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
-    //其他
-//    implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
-    implementation project(path: ':ToastUtils')
-    implementation project(path: ':RoundCorners')
-    implementation project(path: ':NetWorkLib')
-    implementation project(path: ':AppWiFiLib')
+    implementation 'com.github.yangchong211.YCWidgetLib:RoundCorners:1.0.6'
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
+    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.9'
     implementation project(path: ':KeyEventLib')
     implementation project(path: ':SecondaryScreen')
+    implementation project(path: ':CpuCard')
+    implementation project(path: ':MifareCard')
+    implementation project(path: ':CardManager')
+
+    implementation files('libs/scanCard.jar')
+    implementation 'com.aill:AndroidSerialPort:1.0.8'
+    implementation files('libs/wx_pos_jni_1.0.66_release.aar')
     implementation project(path: ':AppClickHelper')
-    implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':NetReceiver')
-    implementation project(path: ':NetSettingLib')
-    implementation project(path: ':NetTestLib')
-    implementation project(path: ':NotCaptureLib')
-    implementation project(path: ':SqlLiteLib')
 }

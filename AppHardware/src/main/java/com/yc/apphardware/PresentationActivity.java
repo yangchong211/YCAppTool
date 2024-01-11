@@ -1,4 +1,4 @@
-package com.yc.appmvx;
+package com.yc.apphardware;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.clickhelper.PerfectClickListener;
 import com.yc.sceondary.DisplayManager;
-import com.yc.toastutils.ToastUtils;
 
 
 
@@ -71,28 +70,24 @@ public class PresentationActivity extends AppCompatActivity {
         tvView1.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                ToastUtils.showRoundRectToast("副屏幕1");
                 DisplayManager.getInstance().showDisplay(PresentationActivity.this,R.layout.activity_presentation);
             }
         });
         tvView2.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                ToastUtils.showRoundRectToast("副屏幕2");
-                DisplayManager.getInstance().showDisplay(PresentationActivity.this,R.layout.activity_net_work);
+                DisplayManager.getInstance().showDisplay(PresentationActivity.this,R.layout.activity_presentation);
             }
         });
         tvView3.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                ToastUtils.showRoundRectToast("副屏幕3");
-                DisplayManager.getInstance().showDisplay(PresentationActivity.this,R.layout.activity_key_event);
+                DisplayManager.getInstance().showDisplay(PresentationActivity.this,R.layout.activity_presentation);
             }
         });
         tvView4.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                ToastUtils.showRoundRectToast("副屏幕4");
             }
         });
     }

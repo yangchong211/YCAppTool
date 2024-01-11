@@ -105,6 +105,8 @@ dependencies {
 
     //其他
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
+    //轻量级异步线程封装库：https://github.com/yangchong211/YCThreadPool
+    implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
 
     //公共类
     implementation project(path: ':BaseClassLib')
@@ -138,11 +140,12 @@ dependencies {
     implementation project(path: ':AppLruCache')
     implementation project(path: ':AppLruDisk')
     implementation project(path: ':CompressServer')
-    implementation project(path: ':AppCompress')
     implementation project(path: ':ImageToolLib')
     implementation project(path: ':AppCallStatus')
     implementation project(path: ':AppRestartLib')
     implementation project(path: ':UriAndUrlLib')
     implementation project(path: ':ZipFileLib')
-
+    implementation project(path: ':NetReceiver')
+    implementation project(path: ':NetSettingLib')
+    implementation project(path: ':NetTestLib')
 }

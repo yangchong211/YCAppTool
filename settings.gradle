@@ -10,7 +10,7 @@ include ':AppServer'
 include ':AppCommon'
 include ':AppWebView'
 include ':AppTool'
-include ':AppMvx'
+include ':AppHardware'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
@@ -181,7 +181,7 @@ project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinator
 include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':EasySocket',
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',':InterceptorTime',
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
-        ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',':LooperThread',
+        ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':LooperThread',
         ':AnimatorHelper', ':ThreadDebugLib', ':AppUpdateLib',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib',
         ':HandlerThread', ':CameraOpen', ':SqlLiteLib', ':RebootHelper'
@@ -190,7 +190,6 @@ project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
 project(':SerialTaskLib').projectDir = new File('ToolLib/SerialTaskLib')
-project(':KeyEventLib').projectDir = new File('ToolLib/KeyEventLib')
 project(':LocaleHelperLib').projectDir = new File('ToolLib/LocaleHelperLib')
 project(':CountTimerLib').projectDir = new File('ToolLib/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('ToolLib/AnimatorToolLib')
@@ -218,23 +217,19 @@ project(':RebootHelper').projectDir = new File('ToolLib/RebootHelper')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
-include ':RouteCompiler', ':RouteManager', ':RouteAnnotations', ':BuildTimeCostPlugin',
-        ':ServiceLoaderApi', ':ServiceLoaderAnnotations', ':ServiceLoaderRegistry',
-        ':ServiceLoaderPlugin', ':ServiceLoaderProcessor', ':MethodTimePlugin',
-        ':ServiceLoaderPlugin', ':AppInitApi', ':AppInitCommon', ':AppInitCompiler'
-project(':RouteCompiler').projectDir = new File('AptHelper/RouteCompiler')
-project(':RouteManager').projectDir = new File('AptHelper/RouteManager')
-project(':RouteAnnotations').projectDir = new File('AptHelper/RouteAnnotations')
-project(':BuildTimeCostPlugin').projectDir = new File('AptHelper/BuildTimeCostPlugin')
-project(':ServiceLoaderApi').projectDir = new File('AptHelper/ServiceLoaderApi')
-project(':ServiceLoaderAnnotations').projectDir = new File('AptHelper/ServiceLoaderAnnotations')
-project(':ServiceLoaderRegistry').projectDir = new File('AptHelper/ServiceLoaderRegistry')
-project(':ServiceLoaderPlugin').projectDir = new File('AptHelper/ServiceLoaderPlugin')
-project(':ServiceLoaderProcessor').projectDir = new File('AptHelper/ServiceLoaderProcessor')
-project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
-//project(':AppInitApi').projectDir = new File('AptHelper/AppInitApi')
-//project(':AppInitCommon').projectDir = new File('AptHelper/AppInitCommon')
-//project(':AppInitCompiler').projectDir = new File('AptHelper/AppInitCompiler')
+//include ':RouteCompiler', ':RouteManager', ':RouteAnnotations', ':BuildTimeCostPlugin',':MethodTimePlugin'
+//        ':ServiceLoaderApi', ':ServiceLoaderAnnotations', ':ServiceLoaderRegistry',
+//        ':ServiceLoaderPlugin', ':ServiceLoaderProcessor'
+//project(':RouteCompiler').projectDir = new File('AptHelper/RouteCompiler')
+//project(':RouteManager').projectDir = new File('AptHelper/RouteManager')
+//project(':RouteAnnotations').projectDir = new File('AptHelper/RouteAnnotations')
+//project(':BuildTimeCostPlugin').projectDir = new File('AptHelper/BuildTimeCostPlugin')
+//project(':ServiceLoaderApi').projectDir = new File('AptHelper/ServiceLoaderApi')
+//project(':ServiceLoaderAnnotations').projectDir = new File('AptHelper/ServiceLoaderAnnotations')
+//project(':ServiceLoaderRegistry').projectDir = new File('AptHelper/ServiceLoaderRegistry')
+//project(':ServiceLoaderPlugin').projectDir = new File('AptHelper/ServiceLoaderPlugin')
+//project(':ServiceLoaderProcessor').projectDir = new File('AptHelper/ServiceLoaderProcessor')
+//project(':MethodTimePlugin').projectDir = new File('AptHelper/MethodTimePlugin')
 
 
 
@@ -326,13 +321,15 @@ project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
 
 
 /* +++++++++ 硬件相关 +++++++++ */
-include ':MifareCard', ':CpuCard','SecondaryScreen',':UsbManager',':SerialPort',':AppCompress'
+include ':MifareCard', ':CpuCard','SecondaryScreen',':UsbManager',':SerialPort', ':CardManager',
+        ':KeyEventLib'
 project(':MifareCard').projectDir = new File('Hardware/MifareCard')
 project(':CpuCard').projectDir = new File('Hardware/CpuCard')
 project(':SecondaryScreen').projectDir = new File('Hardware/SecondaryScreen')
-project(':AppCompress').projectDir = new File('Hardware/AppCompress')
+project(':CardManager').projectDir = new File('Hardware/CardManager')
 project(':UsbManager').projectDir = new File('Hardware/UsbManager')
 project(':SerialPort').projectDir = new File('Hardware/SerialPort')
+project(':KeyEventLib').projectDir = new File('Hardware/KeyEventLib')
 
 
 

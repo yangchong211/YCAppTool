@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yc.appmvx">
+    package="com.yc.apphardware">
 
     <!--申请自定义权限-->
     <uses-permission android:name="com.tencent.wx.permission.BOOT_RECEIVER" />
@@ -10,18 +10,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:networkSecurityConfig="@xml/network_security_config_debug"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.yc.apphardware.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PresentationActivity"/>
-        <activity android:name=".NetWorkActivity"/>
+        <activity android:name="com.yc.apphardware.PresentationActivity"/>
+        <activity android:name="com.yc.apphardware.card.M1CardActivity"/>
     </application>
 
 </manifest>

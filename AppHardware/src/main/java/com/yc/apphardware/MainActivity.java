@@ -1,15 +1,12 @@
-package com.yc.appmvx;
+package com.yc.apphardware;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-import com.yc.keyeventlib.demo.KeyCodeActivity;
-import com.yc.keyeventlib.demo.KeyCodeActivity2;
-import com.yc.sqllitelib.test.DBTestDao;
-import com.yc.sqllitelib.test.SqlLiteActivity;
+import com.yc.apphardware.card.M1CardActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 //        PresentationActivity.startActivity(this);
 //        startActivity(new Intent(this, KeyCodeActivity.class));
 //        startActivity(new Intent(this, KeyCodeActivity2.class));
-        DBTestDao.getInstance(this).clear();
-        startActivity(new Intent(this, SqlLiteActivity.class));
+        startActivity(new Intent(this, M1CardActivity.class));
     }
 }

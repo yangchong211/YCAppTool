@@ -1,4 +1,4 @@
-package com.yc.appmvx;
+package com.yc.common.net;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -29,6 +29,7 @@ import com.yc.appwifilib.WifiHelper;
 import com.yc.appwifilib.WifiModeEnum;
 import com.yc.appwifilib.WifiStateListener;
 import com.yc.appwifilib.WifiToolUtils;
+import com.yc.common.R;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.netreceiver.NetWorkManager;
 import com.yc.netreceiver.OnNetStatusListener;
