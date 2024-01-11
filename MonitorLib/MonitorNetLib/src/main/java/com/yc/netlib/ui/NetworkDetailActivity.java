@@ -21,10 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 
 import com.yc.appcompress.AppCompress;
-import com.yc.appcompress.CompressConfig;
-import com.yc.appcompress.CompressUtils;
 import com.yc.appfilelib.AppFileUtils;
-import com.yc.appmediastore.FileSaveUtils;
 import com.yc.appscreenlib.AppShotsUtils;
 import com.yc.imagetoollib.ImageSaveUtils;
 import com.yc.netlib.R;
@@ -37,7 +34,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.LinkedHashMap;

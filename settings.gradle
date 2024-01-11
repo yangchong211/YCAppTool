@@ -66,7 +66,7 @@ project(':HeartBeatServer').projectDir = new File('ServerLib/HeartBeatServer')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
-include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager', ':AppCompress',
+include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager',
         ':ApplicationLib', ':ParallelTaskLib', ':AppBaseStore',
         ':BaseClassLib', ':ReflectionLib', ':AppLogLib', ':AppRestartLib', ':SafeIntentLib',
         ':ArchitectureLib', ':ActivityManager', ':ToolFileLib', ':EventUploadLib',
@@ -95,7 +95,6 @@ project(':EventUploadLib').projectDir = new File('CommonLib/EventUploadLib')
 project(':AppCommonInter').projectDir = new File('CommonLib/AppCommonInter')
 project(':ToolMemoryLib').projectDir = new File('CommonLib/ToolMemoryLib')
 project(':AppPermission').projectDir = new File('CommonLib/AppPermission')
-project(':AppCompress').projectDir = new File('CommonLib/AppCompress')
 project(':PhoneSensor').projectDir = new File('CommonLib/PhoneSensor')
 project(':AppLruDisk').projectDir = new File('CommonLib/AppLruDisk')
 project(':AppLruCache').projectDir = new File('CommonLib/AppLruCache')
@@ -183,8 +182,8 @@ include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',':InterceptorTime',
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':KeyEventLib',':LooperThread',
-        ':AnimatorHelper', ':ThreadDebugLib', ':AppUpdateLib', ':UsbManager',
-        ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib', ':SerialPort',
+        ':AnimatorHelper', ':ThreadDebugLib', ':AppUpdateLib',
+        ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib',
         ':HandlerThread', ':CameraOpen', ':SqlLiteLib', ':RebootHelper'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
@@ -205,7 +204,6 @@ project(':LocalShareLib').projectDir = new File('ToolLib/LocalShareLib')
 project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
 project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
 project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
-project(':UsbManager').projectDir = new File('ToolLib/UsbManager')
 project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
 project(':TransitionHelper').projectDir = new File('ToolLib/TransitionHelper')
 project(':AnimBaseHelper').projectDir = new File('ToolLib/AnimBaseHelper')
@@ -213,7 +211,6 @@ project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
 project(':EasySocket').projectDir = new File('ToolLib/EasySocket')
 project(':LooperThread').projectDir = new File('ToolLib/LooperThread')
 project(':InterceptorTime').projectDir = new File('ToolLib/InterceptorTime')
-project(':SerialPort').projectDir = new File('ToolLib/SerialPort')
 project(':HandlerThread').projectDir = new File('ToolLib/HandlerThread')
 project(':CameraOpen').projectDir = new File('ToolLib/CameraOpen')
 project(':SqlLiteLib').projectDir = new File('ToolLib/SqlLiteLib')
@@ -329,10 +326,14 @@ project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
 
 
 /* +++++++++ 硬件相关 +++++++++ */
-include ':MifareCard', ':CpuCard','SecondaryScreen'
+include ':MifareCard', ':CpuCard','SecondaryScreen',':UsbManager',':SerialPort',':AppCompress'
 project(':MifareCard').projectDir = new File('Hardware/MifareCard')
 project(':CpuCard').projectDir = new File('Hardware/CpuCard')
 project(':SecondaryScreen').projectDir = new File('Hardware/SecondaryScreen')
+project(':AppCompress').projectDir = new File('Hardware/AppCompress')
+project(':UsbManager').projectDir = new File('Hardware/UsbManager')
+project(':SerialPort').projectDir = new File('Hardware/SerialPort')
+
 
 
 /* +++++++++ JNI开发demo +++++++++ */

@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.yc.appcompress.AppCompress;
-import com.yc.appcompress.CompressConfig;
+import com.yc.compress.utils.AppCompress;
+import com.yc.compress.utils.CompressConfig;
 import com.yc.appmediastore.AppFileUriUtils;
 import com.yc.common.R;
-import com.yc.compress.Luban;
-import com.yc.compress.OnCompressListener;
+import com.yc.compress.luban.Luban;
+import com.yc.compress.luban.OnCompressListener;
 import com.yc.imagetoollib.AppBitmapUtils;
 import com.yc.imagetoollib.ImageSaveUtils;
 import com.yc.imagetoollib.PicCalculateUtils;

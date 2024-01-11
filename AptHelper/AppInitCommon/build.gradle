@@ -1,7 +1,0 @@
-apply plugin: 'java'
-apply plugin: 'com.github.dcendents.android-maven'
-
-dependencies {
-    implementation "com.android.tools.build:gradle:$buildVersion"
-    compileOnly 'com.google.android:android:4.1.1.4'
-}
