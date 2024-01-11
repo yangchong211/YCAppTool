@@ -10,6 +10,7 @@ import com.tencent.wx.pos.jni.bean.NfcResult;
 import com.yc.apphardware.card.lib.CardReadManager;
 import com.yc.apphardware.card.lib.MyConverterTool;
 import com.yc.apphardware.card.lib.ResultMasage;
+import com.yc.bytetoolutils.ByteUtils;
 import com.yc.bytetoolutils.BytesHexStrUtils;
 import com.yc.cardmanager.CardHelper;
 import com.yc.toolutils.AppLogUtils;
@@ -100,8 +101,8 @@ public class ScanCardManager {
                 byte[] data63 = CardHelper.getInstance().getM1Card().readBlock(cardNum, CardReadManager.KEY_MODE_A, block61 + 2, password6);
                 //byte[] data63 = CardReadManager.getInstance().CardM1BlockRead((byte) 26);
                 if (data62 != null && data63 != null) {
-                    String s2 = ToolUtils.bytesToHex(data62);
-                    String s3 = ToolUtils.bytesToHex(data63);
+                    String s2 = ByteUtils.bytesToHex(data62);
+                    String s3 = ByteUtils.bytesToHex(data63);
                     sb.append(data61String).append(s2).append(s3);
                     AppLogUtils.d("Card M1 扇区6密钥认证成功：" + sb);
                 } else {
@@ -132,8 +133,8 @@ public class ScanCardManager {
                 byte[] data72 = readBlock(cardNum, block71 + 1, key_7);
                 byte[] data73 = readBlock(cardNum, block71 + 2, key_7);
                 if (data72 != null && data73 != null) {
-                    String s2 = ToolUtils.bytesToHex(data72);
-                    String s3 = ToolUtils.bytesToHex(data73);
+                    String s2 = ByteUtils.bytesToHex(data72);
+                    String s3 = ByteUtils.bytesToHex(data73);
                     sb.append(data71String).append(s2).append(s3);
                     AppLogUtils.d("Card M1 扇区7密钥认证成功：" + data71String + s2 + s3);
                 } else {
@@ -158,12 +159,12 @@ public class ScanCardManager {
             byte[] data81 = readBlock(cardNum, block81, key_8);
             String data81String = "";
             if (data81 != null) {
-                data81String = ToolUtils.bytesToHex(data81);
+                data81String = ByteUtils.bytesToHex(data81);
             }
             if (data81 != null && !TextUtils.isEmpty(data81String)) {
                 byte[] data82 = readBlock(cardNum, block81 + 1, key_8);
                 if (data82 != null) {
-                    String s2 = ToolUtils.bytesToHex(data82);
+                    String s2 = ByteUtils.bytesToHex(data82);
                     sb.append(data81String).append(s2);
                     AppLogUtils.d("Card M1 扇区8密钥认证成功：" + data81String + s2);
                 } else {
