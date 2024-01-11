@@ -57,7 +57,6 @@ dependencies {
     implementation project(path: ':MifareCard')
     implementation project(path: ':CardManager')
 
-    implementation files('libs/scanCard.jar')
     implementation 'com.aill:AndroidSerialPort:1.0.8'
     implementation files('libs/wx_pos_jni_1.0.66_release.aar')
     implementation project(path: ':AppClickHelper')

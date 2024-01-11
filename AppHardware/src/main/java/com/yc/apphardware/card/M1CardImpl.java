@@ -3,10 +3,10 @@ package com.yc.apphardware.card;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.scanCard.utils.CardReadManager;
-import com.android.scanCard.utils.MyConverterTool;
 import com.tencent.wx.pos.jni.WxPosLib;
 import com.tencent.wx.pos.jni.bean.ByteArrayResult;
+import com.yc.apphardware.card.lib.CardReadManager;
+import com.yc.apphardware.card.lib.MyConverterTool;
 import com.yc.mifarecard.AbstractM1Card;
 import com.yc.toolutils.AppLogUtils;
 

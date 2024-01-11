@@ -4,12 +4,12 @@ package com.yc.apphardware.card;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.scanCard.utils.CardReadManager;
-import com.android.scanCard.utils.MyConverterTool;
-import com.android.scanCard.utils.ResultMasage;
 import com.tencent.wx.pos.jni.WxPosLib;
 import com.tencent.wx.pos.jni.bean.ByteArrayResult;
 import com.tencent.wx.pos.jni.bean.NfcResult;
+import com.yc.apphardware.card.lib.CardReadManager;
+import com.yc.apphardware.card.lib.MyConverterTool;
+import com.yc.apphardware.card.lib.ResultMasage;
 import com.yc.bytetoolutils.BytesHexStrUtils;
 import com.yc.cardmanager.CardHelper;
 import com.yc.toolutils.AppLogUtils;
