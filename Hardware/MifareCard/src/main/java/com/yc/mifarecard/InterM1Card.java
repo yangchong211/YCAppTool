@@ -20,7 +20,7 @@ public interface InterM1Card {
      * @param password 密钥
      * @return 卡数据
      */
-    byte[] readBlock(int mode, int block, byte[] password);
+    byte[] readBlock(String cardNo , int mode, int block, byte[] password);
 
     /**
      * 写入卡数据
@@ -31,7 +31,7 @@ public interface InterM1Card {
      * @param blockData 数据
      * @return 写入状态
      */
-    int writeBlock(int mode, int block, byte[] password, byte[] blockData);
+    int writeBlock(String cardNo , int mode, int block, byte[] password, byte[] blockData);
 
     /**
      * 归位重置

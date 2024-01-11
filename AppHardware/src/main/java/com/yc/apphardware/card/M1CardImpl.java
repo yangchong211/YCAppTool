@@ -1,13 +1,18 @@
 package com.yc.apphardware.card;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.scanCard.utils.CardReadManager;
+import com.android.scanCard.utils.MyConverterTool;
 import com.tencent.wx.pos.jni.WxPosLib;
 import com.tencent.wx.pos.jni.bean.ByteArrayResult;
 import com.yc.mifarecard.AbstractM1Card;
 import com.yc.mifarecard.IM1Function;
 import com.yc.toolutils.AppLogUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class M1CardImpl extends AbstractM1Card {
 
@@ -27,12 +32,21 @@ public class M1CardImpl extends AbstractM1Card {
     }
 
     @Override
-    public byte[] readBlock(int mode, int block, byte[] password) {
-        return new byte[0];
+    public byte[] readBlock(String cardNum , int mode, int block, byte[] password) {
+        //fix 一定要转化为小写，否则会出现验证密钥不成功
+        String cardNumNo = cardNum.toLowerCase();
+        byte[] cardNo = MyConverterTool.HexToByteArr(cardNumNo);
+        //先验证秘钥
+        boolean result = CardReadManager.getInstance().CardM1Authority(CardReadManager.KEY_MODE_A, password, cardNo, (byte) block);
+        Log.d("Card M1", "扇区 " + block + " , 密钥 " + MyConverterTool.ByteArrToHex(password) + " , 卡号 " + cardNumNo + " , 验证结果" + result);
+        if (result) {
+            return CardReadManager.getInstance().CardM1BlockRead((byte) block);
+        }
+        return null;
     }
 
     @Override
-    public int writeBlock(int mode, int block, byte[] password, byte[] blockData) {
+    public int writeBlock(String cardNo , int mode, int block, byte[] password, byte[] blockData) {
         return 0;
     }
 
@@ -48,6 +62,24 @@ public class M1CardImpl extends AbstractM1Card {
         byteArrayResult = WxPosLib.getInstance().getCardKey(cardNo, M1Secret, "", "", "", "","");
         if (byteArrayResult.getCode() == 1) {
             return byteArrayResult.getByteArray();
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<String> getCardSecretList(String taKeys) {
+        if (!TextUtils.isEmpty(taKeys) && taKeys.length() == 32) {
+            String key_6 = taKeys.substring(0, 12);
+            String key_7 = taKeys.substring(12, 24);
+            String key_8 = taKeys.substring(0, 2) + taKeys.substring(12, 14) + taKeys.substring(24, 32);
+            String key_9 = taKeys.substring(2, 4) + taKeys.substring(6, 8) + taKeys.substring(8, 10)
+                    + taKeys.substring(12, 14) + taKeys.substring(16, 18) + taKeys.substring(20, 22);
+            ArrayList<String> keysTass = new ArrayList<>();
+            keysTass.add(key_6);
+            keysTass.add(key_7);
+            keysTass.add(key_8);
+            keysTass.add(key_9);
+            return keysTass;
         }
         return null;
     }

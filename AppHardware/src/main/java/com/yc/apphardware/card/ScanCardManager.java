@@ -83,40 +83,20 @@ public class ScanCardManager {
         return rspData.substring(0, rspData.length() - 4);
     }
 
-    private ArrayList<String> getM1CardKey(String taKeys) {
-        if (!TextUtils.isEmpty(taKeys) && taKeys.length() == 32) {
-            String key_6 = taKeys.substring(0, 12);
-            String key_7 = taKeys.substring(12, 24);
-            String key_8 = taKeys.substring(0, 2) + taKeys.substring(12, 14) + taKeys.substring(24, 32);
-            String key_9 = taKeys.substring(2, 4) + taKeys.substring(6, 8) + taKeys.substring(8, 10)
-                    + taKeys.substring(12, 14) + taKeys.substring(16, 18) + taKeys.substring(20, 22);
-            ArrayList<String> keysTass = new ArrayList<>();
-            keysTass.add(key_6);
-            keysTass.add(key_7);
-            keysTass.add(key_8);
-            keysTass.add(key_9);
-            return keysTass;
-        } else {
-            if (mOnScanCardListen != null) {
-                mOnScanCardListen.onScanCard("卡密截取失败", null);
-            }
-            return null;
-        }
-    }
-
     private String joinM1Data(String cardNum, String flipCardNum, ArrayList<String> arrayList) {
         StringBuilder sb = new StringBuilder();
         String key_6 = arrayList.get(0);
+        byte[] password6 = MyConverterTool.HexToByteArr(key_6);
         if (!TextUtils.isEmpty(key_6) && key_6.length() == 12) {
             int block61 = 24;
-            byte[] data61 = readBlock(cardNum, block61, key_6);
+            byte[] data61 = CardHelper.getInstance().getM1Card().readBlock(cardNum, CardReadManager.KEY_MODE_A, block61, password6);
             String data61String = "";
             if (data61 != null) {
                 data61String = MyConverterTool.bytesToHex(data61).replace("0", "");
             }
             if (data61 != null && !TextUtils.isEmpty(data61String)) {
-                byte[] data62 = readBlock(cardNum, block61 + 1, key_6);
-                byte[] data63 = readBlock(cardNum, block61 + 2, key_6);
+                byte[] data62 = CardHelper.getInstance().getM1Card().readBlock(cardNum, CardReadManager.KEY_MODE_A, block61 + 1, password6);
+                byte[] data63 = CardHelper.getInstance().getM1Card().readBlock(cardNum, CardReadManager.KEY_MODE_A, block61 + 2, password6);
                 //byte[] data63 = CardReadManager.getInstance().CardM1BlockRead((byte) 26);
                 if (data62 != null && data63 != null) {
                     String s2 = ToolUtils.bytesToHex(data62);
@@ -225,24 +205,24 @@ public class ScanCardManager {
         //先将旋转卡号
         String flipCardNum = WeCardCardHelper.flipCardNum(cardNum);
         String cardNumber = flipCardNum.toLowerCase();
-        AppLogUtils.d("Card M1 flipCardNum : " + flipCardNum + " , " + cardNumber + " , 天安 M1卡秘钥 " +M1Secret );
+        AppLogUtils.d("Card M1 flipCardNum : " + flipCardNum + " , " + cardNumber + " , 天安 M1卡秘钥 " + M1Secret);
         //微卡密钥换算
         ByteArrayResult byteArrayResult;
         byteArrayResult = WxPosLib.getInstance().getCardKey(flipCardNum, M1Secret,
-                "", "", "", "","");
+                "", "", "", "", "");
         AppLogUtils.d("Card M1 code = " + byteArrayResult.getCode() + " , ");
         if (byteArrayResult.getCode() == 1) {
             byte[] cardKeyArray = byteArrayResult.getByteArray();
             String taKeys = MyConverterTool.bytesToHex(cardKeyArray);
             AppLogUtils.d("Card M1 cardKeyArray = " + MyConverterTool.ByteArrToHex(cardKeyArray) + " , taKeys " + taKeys);
-            ArrayList<String> keyArray = getM1CardKey(taKeys);
+            ArrayList<String> keyArray = CardHelper.getInstance().getM1Card().getCardSecretList(taKeys);
             if (keyArray != null) {
                 String cardData = joinM1Data(cardNum, flipCardNum, keyArray);
                 AppLogUtils.d("Card M1 cardData = " + cardData);
                 if (TextUtils.isEmpty(cardData)) {
                     return;
                 }
-                NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(cardData, flipCardNum, "", "", "", "","");
+                NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(cardData, flipCardNum, "", "", "", "", "");
                 if (nfcResult == null) {
                     if (mOnScanCardListen != null) {
                         mOnScanCardListen.onScanCard("读卡失败", null);
@@ -252,6 +232,10 @@ public class ScanCardManager {
                 AppLogUtils.d("nfcResult = " + nfcResult);
                 if (mOnScanCardListen != null) {
                     mOnScanCardListen.onScanCard(nfcResult.getUserName(), nfcResult.getStudentId());
+                }
+            } else {
+                if (mOnScanCardListen != null) {
+                    mOnScanCardListen.onScanCard("卡密截取失败", null);
                 }
             }
         } else {
@@ -287,7 +271,7 @@ public class ScanCardManager {
         //微卡密钥换算
         ByteArrayResult byteArrayResult;
         byteArrayResult = WxPosLib.getInstance().getCardKey(flipCardNum, M1Secret,
-                "", "", "", "","");
+                "", "", "", "", "");
         if (byteArrayResult.getCode() == 1) {
             byte[] cardKeyArray = byteArrayResult.getByteArray();
             //获取读取CPU卡16文件的指令
@@ -298,7 +282,7 @@ public class ScanCardManager {
                 if (rspCardOrder == null) {
                     return;
                 }
-                NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(rspCardOrder, flipCardNum, "", "", "", "","");
+                NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(rspCardOrder, flipCardNum, "", "", "", "", "");
                 if (nfcResult == null) {
                     if (mOnScanCardListen != null) {
                         mOnScanCardListen.onScanCard("读卡失败", null);
@@ -366,20 +350,20 @@ public class ScanCardManager {
         //先将旋转卡号
         String flipCardNum = WeCardCardHelper.flipCardNum(cardNum);
         String cardNumber = flipCardNum.toLowerCase();
-        AppLogUtils.d("Card M1 flipCardNum : " + flipCardNum + " , " + cardNumber + " , 天安 M1卡秘钥 " +M1Secret );
+        AppLogUtils.d("Card M1 flipCardNum : " + flipCardNum + " , " + cardNumber + " , 天安 M1卡秘钥 " + M1Secret);
         //微卡密钥换算
         byte[] cardKeyArray = CardHelper.getInstance().getM1Card().getCardSecret(flipCardNum);
         if (cardKeyArray != null) {
             String taKeys = MyConverterTool.bytesToHex(cardKeyArray);
             AppLogUtils.d("Card M1 cardKeyArray = " + MyConverterTool.ByteArrToHex(cardKeyArray) + " , taKeys " + taKeys);
-            ArrayList<String> keyArray = getM1CardKey(taKeys);
+            ArrayList<String> keyArray = CardHelper.getInstance().getM1Card().getCardSecretList(taKeys);
             if (keyArray != null) {
                 String cardData = joinM1Data(cardNum, flipCardNum, keyArray);
                 AppLogUtils.d("Card M1 cardData = " + cardData);
                 if (TextUtils.isEmpty(cardData)) {
                     return;
                 }
-                NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(cardData, flipCardNum, "", "", "", "","");
+                NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(cardData, flipCardNum, "", "", "", "", "");
                 if (nfcResult == null) {
                     if (mOnScanCardListen != null) {
                         mOnScanCardListen.onScanCard("读卡失败", null);
@@ -389,6 +373,10 @@ public class ScanCardManager {
                 AppLogUtils.d("nfcResult = " + nfcResult);
                 if (mOnScanCardListen != null) {
                     mOnScanCardListen.onScanCard(nfcResult.getUserName(), nfcResult.getStudentId());
+                }
+            } else {
+                if (mOnScanCardListen != null) {
+                    mOnScanCardListen.onScanCard("卡密截取失败", null);
                 }
             }
         } else {
