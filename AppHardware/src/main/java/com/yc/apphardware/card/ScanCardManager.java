@@ -250,15 +250,21 @@ public class ScanCardManager {
     private void decodeCpuCard(String cardNum) {
         //先将旋转卡号
         String flipCardNum = WeCardCardHelper.flipCardNum(cardNum);
+        AppLogUtils.d("Card CPU flipCardNum : " + flipCardNum + " , " + cardNum + " , 天安 M1卡秘钥 " + M1Secret);
         //复位
         byte[] resetDataArray = CardReadManager.getInstance().CardCpuReset();
         String resetData = processRspByteArray(resetDataArray);
+        AppLogUtils.d("Card CPU 复位 : " + resetData);
         if (resetData == null) {
             return;
         }
         //选择文件
-        byte[] selectApplyDataArray = CardReadManager.getInstance().CardCpuSendCosCmd(MyConverterTool.HexToByteArr(WeCardCardHelper.getSelectFileOrder()));
+        String selectFileOrder = WeCardCardHelper.getSelectFileOrder();
+        AppLogUtils.d("Card CPU 选择文件 : " + selectFileOrder);
+        byte[] bytes = MyConverterTool.HexToByteArr(selectFileOrder);
+        byte[] selectApplyDataArray = CardReadManager.getInstance().CardCpuSendCosCmd(bytes);
         String selectApplyData = processRspByteArray(selectApplyDataArray);
+        AppLogUtils.d("Card CPU selectApplyData : " + selectApplyData);
         if (selectApplyData == null) {
             return;
         }
