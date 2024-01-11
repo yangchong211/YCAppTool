@@ -10,6 +10,8 @@ import com.android.scanCard.utils.ResultMasage;
 import com.tencent.wx.pos.jni.WxPosLib;
 import com.tencent.wx.pos.jni.bean.ByteArrayResult;
 import com.tencent.wx.pos.jni.bean.NfcResult;
+import com.yc.cardmanager.CardHelper;
+import com.yc.mifarecard.InterM1Card;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
@@ -339,7 +341,12 @@ public class ScanCardManager {
                     if (cardType.getCardType() == CardReadManager.CardType.M1_CARD.getCardType()) {
                         ToolUtils.playBeep();
                         String cardNum = cardType.getCardNo();
-                        decodeM1Card(cardNum);
+//                        decodeM1Card(cardNum);
+
+//                        InterM1Card m1Card = CardHelper.getInstance().getM1Card();
+//                        String cardNum = m1Card.searchNo();
+                        decodeM1Card2(cardNum);
+
                     } else if (cardType.getCardType() == CardReadManager.CardType.CPU_CARD.getCardType()) {
                         ToolUtils.playBeep();
                         String cardNum = cardType.getCardNo();
@@ -351,6 +358,42 @@ public class ScanCardManager {
                         e.printStackTrace();
                     }
                 }
+            }
+        }
+    }
+
+    private void decodeM1Card2(String cardNum) {
+        //先将旋转卡号
+        String flipCardNum = WeCardCardHelper.flipCardNum(cardNum);
+        String cardNumber = flipCardNum.toLowerCase();
+        AppLogUtils.d("Card M1 flipCardNum : " + flipCardNum + " , " + cardNumber + " , 天安 M1卡秘钥 " +M1Secret );
+        //微卡密钥换算
+        byte[] cardKeyArray = CardHelper.getInstance().getM1Card().getCardSecret(flipCardNum);
+        if (cardKeyArray != null) {
+            String taKeys = MyConverterTool.bytesToHex(cardKeyArray);
+            AppLogUtils.d("Card M1 cardKeyArray = " + MyConverterTool.ByteArrToHex(cardKeyArray) + " , taKeys " + taKeys);
+            ArrayList<String> keyArray = getM1CardKey(taKeys);
+            if (keyArray != null) {
+                String cardData = joinM1Data(cardNum, flipCardNum, keyArray);
+                AppLogUtils.d("Card M1 cardData = " + cardData);
+                if (TextUtils.isEmpty(cardData)) {
+                    return;
+                }
+                NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(cardData, flipCardNum, "", "", "", "","");
+                if (nfcResult == null) {
+                    if (mOnScanCardListen != null) {
+                        mOnScanCardListen.onScanCard("读卡失败", null);
+                    }
+                    return;
+                }
+                AppLogUtils.d("nfcResult = " + nfcResult);
+                if (mOnScanCardListen != null) {
+                    mOnScanCardListen.onScanCard(nfcResult.getUserName(), nfcResult.getStudentId());
+                }
+            }
+        } else {
+            if (mOnScanCardListen != null) {
+                mOnScanCardListen.onScanCard("异常", null);
             }
         }
     }
