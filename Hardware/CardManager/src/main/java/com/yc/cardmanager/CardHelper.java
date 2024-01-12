@@ -1,11 +1,13 @@
 package com.yc.cardmanager;
 
+import com.yc.cpucard.AbstractCpuCard;
 import com.yc.mifarecard.AbstractM1Card;
 
 public final class CardHelper {
 
     private static volatile CardHelper singleton = null;
     private AbstractM1Card m1Card;
+    private AbstractCpuCard cpuCard;
 
     /**
      * 获取单例
@@ -23,11 +25,23 @@ public final class CardHelper {
         return singleton;
     }
 
+    private CardHelper() {
+
+    }
+
     public AbstractM1Card getM1Card() {
         return m1Card;
     }
 
     public void setM1Card(AbstractM1Card m1Card) {
         this.m1Card = m1Card;
+    }
+
+    public AbstractCpuCard getCpuCard() {
+        return cpuCard;
+    }
+
+    public void setCpuCard(AbstractCpuCard cpuCard) {
+        this.cpuCard = cpuCard;
     }
 }

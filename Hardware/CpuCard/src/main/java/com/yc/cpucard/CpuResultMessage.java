@@ -1,7 +1,7 @@
 package com.yc.cpucard;
 
 
-public class CpuResultMessage {
+public final class CpuResultMessage {
 
 
 
