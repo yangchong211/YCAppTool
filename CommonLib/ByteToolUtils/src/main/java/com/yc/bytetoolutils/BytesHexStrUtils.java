@@ -45,7 +45,8 @@ public final class BytesHexStrUtils {
         char[] buf = new char[bytes.length * 2];
         int a = 0;
         int index = 0;
-        for (byte b : bytes) { // 使用除与取余进行转换
+        for (byte b : bytes) {
+            // 使用除与取余进行转换
             if (b < 0) {
                 a = 256 + b;
             } else {

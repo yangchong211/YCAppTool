@@ -73,16 +73,18 @@ public class ScanCardManager {
             mOnScanCardListen.onScanCard("APDU通讯失败", null);
             return null;
         }
-        String rspData = MyConverterTool.bytesToHex(rspByteArray);
+        String rspData = BytesHexStrUtils.bytesToHex(rspByteArray);
         if (rspData.length() <= 4) {
-            AppLogUtils.d("APDU错误：" + rspData);
             String errorData = rspData + "|" + ResultMasage.CommandProcessSW1SW2(rspData);
+            AppLogUtils.d("APDU错误：" + rspData + "，errorData " + errorData);
             if (mOnScanCardListen != null) {
                 mOnScanCardListen.onScanCard(errorData, null);
             }
             return null;
         }
-        return rspData.substring(0, rspData.length() - 4);
+        String substring = rspData.substring(0, rspData.length() - 4);
+        AppLogUtils.d("APDU解析OK，processRspByteArray ：" + rspData + "，data " + substring);
+        return substring;
     }
 
     private String joinM1Data(String cardNum, String flipCardNum, ArrayList<String> arrayList) {
@@ -95,7 +97,7 @@ public class ScanCardManager {
             byte[] data61 = CardHelper.getInstance().getM1Card().readBlock(cardNum, CardReadManager.KEY_MODE_A, block61, password6);
             String data61String = "";
             if (data61 != null) {
-                data61String = MyConverterTool.bytesToHex(data61).replace("0", "");
+                data61String = BytesHexStrUtils.bytesToHex(data61).replace("0", "");
             }
             if (data61 != null && !TextUtils.isEmpty(data61String)) {
                 byte[] data62 = CardHelper.getInstance().getM1Card().readBlock(cardNum, CardReadManager.KEY_MODE_A, block61 + 1, password6);
@@ -128,7 +130,7 @@ public class ScanCardManager {
             byte[] data71 = readBlock(cardNum, block71, key_7);
             String data71String = "";
             if (data71 != null) {
-                data71String = MyConverterTool.bytesToHex(data71).replace("0", "");
+                data71String = BytesHexStrUtils.bytesToHex(data71).replace("0", "");
             }
             if (data71 != null && !TextUtils.isEmpty(data71String)) {
                 byte[] data72 = readBlock(cardNum, block71 + 1, key_7);
@@ -216,7 +218,7 @@ public class ScanCardManager {
         AppLogUtils.d("Card M1 code = " + byteArrayResult.getCode() + " , ");
         if (byteArrayResult.getCode() == 1) {
             byte[] cardKeyArray = byteArrayResult.getByteArray();
-            String taKeys = MyConverterTool.bytesToHex(cardKeyArray);
+            String taKeys = BytesHexStrUtils.bytesToHex(cardKeyArray);
             AppLogUtils.d("Card M1 cardKeyArray = " + MyConverterTool.ByteArrToHex(cardKeyArray) + " , taKeys " + taKeys);
             ArrayList<String> keyArray = CardHelper.getInstance().getM1Card().getCardSecretList(taKeys);
             if (keyArray != null) {
@@ -284,7 +286,7 @@ public class ScanCardManager {
                 "", "", "", "", "");
         if (byteArrayResult.getCode() == 1) {
             byte[] cardKeyArray = byteArrayResult.getByteArray();
-            String s = MyConverterTool.bytesToHex(cardKeyArray);
+            String s = BytesHexStrUtils.bytesToHex(cardKeyArray);
             //获取读取CPU卡16文件的指令
             String cardOrder = WeCardCardHelper.generateReadCardOrder(s, MyConverterTool.HexToByteArr(randomData));
             AppLogUtils.d("Card CPU 密钥 " + s + " , 获取读取CPU卡16文件的指令 :" + cardOrder);
@@ -338,6 +340,7 @@ public class ScanCardManager {
                     //AppLogUtils.d("Card 开始寻卡 " + cardType.getCardType() + " , " + cardType.getCardNo());
                     if (cardType.getCardType() == CardReadManager.CardType.M1_CARD.getCardType()) {
                         ToolUtils.playBeep();
+
                         String cardNum = cardType.getCardNo();
 //                        decodeM1Card(cardNum);
 
@@ -348,7 +351,8 @@ public class ScanCardManager {
                     } else if (cardType.getCardType() == CardReadManager.CardType.CPU_CARD.getCardType()) {
                         ToolUtils.playBeep();
                         String cardNum = cardType.getCardNo();
-                        decodeCpuCard(cardNum);
+//                        decodeCpuCard(cardNum);
+                        decodeCpuCard2(cardNum);
                     }
                     try {
                         Thread.sleep(100);
@@ -403,4 +407,76 @@ public class ScanCardManager {
             }
         }
     }
+
+
+    private void decodeCpuCard2(String cardNum) {
+        //先将旋转卡号
+        String flipCardNum = WeCardCardHelper.flipCardNum(cardNum);
+        AppLogUtils.d("Card CPU flipCardNum : " + flipCardNum + " , " + cardNum + " , 天安 CPU卡秘钥 " + CPUSecret);
+        //复位
+        byte[] resetDataArray = CardHelper.getInstance().getCpuCard().reset();
+        String resetData = processRspByteArray(resetDataArray);
+        AppLogUtils.d("Card CPU 复位 : " + resetData);
+        if (resetData == null) {
+            return;
+        }
+        //选择文件
+        String selectFileOrder = WeCardCardHelper.getSelectFileOrder();
+        AppLogUtils.d("Card CPU 选择文件 : " + selectFileOrder);
+        byte[] bytes = MyConverterTool.HexToByteArr(selectFileOrder);
+        byte[] selectApplyDataArray = CardReadManager.getInstance().CardCpuSendCosCmd(bytes);
+        String selectApplyData = processRspByteArray(selectApplyDataArray);
+        AppLogUtils.d("Card CPU selectApplyData : " + selectApplyData);
+        if (selectApplyData == null) {
+            return;
+        }
+
+        //获取随机数
+        byte[] randomDataArray = CardReadManager.getInstance().CardCpuSendCosCmd(MyConverterTool.HexToByteArr(WeCardCardHelper.getRandomOrder()));
+        String randomData = processRspByteArray(randomDataArray);
+        AppLogUtils.d("Card CPU 获取随机数 : " + randomData);
+        if (randomData == null) {
+            return;
+        }
+
+        //微卡密钥换算
+        ByteArrayResult byteArrayResult;
+        byteArrayResult = WxPosLib.getInstance().getCardKey(flipCardNum, CPUSecret,
+                "", "", "", "", "");
+        if (byteArrayResult.getCode() == 1) {
+            byte[] cardKeyArray = byteArrayResult.getByteArray();
+            String s = BytesHexStrUtils.bytesToHex(cardKeyArray);
+            //获取读取CPU卡16文件的指令
+            String cardOrder = WeCardCardHelper.generateReadCardOrder(s, MyConverterTool.HexToByteArr(randomData));
+            AppLogUtils.d("Card CPU 密钥 " + s + " , 获取读取CPU卡16文件的指令 :" + cardOrder);
+            if (!TextUtils.isEmpty(cardOrder)) {
+                byte[] rspCardOrderArray = CardReadManager.getInstance().CardCpuSendCosCmd(MyConverterTool.HexToByteArr(cardOrder));
+                String rspCardOrder = processRspByteArray(rspCardOrderArray);
+                AppLogUtils.d("Card CPU 解析指令 " + rspCardOrder);
+                if (rspCardOrder == null) {
+                    return;
+                }
+                NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(rspCardOrder, flipCardNum, "", "", "", "", "");
+                AppLogUtils.d("Card CPU nfcResult = " + nfcResult);
+                if (nfcResult == null) {
+                    if (mOnScanCardListen != null) {
+                        mOnScanCardListen.onScanCard("读卡失败", null);
+                    }
+                    return;
+                }
+                if (mOnScanCardListen != null) {
+                    mOnScanCardListen.onScanCard(nfcResult.getUserName(), nfcResult.getStudentId());
+                }
+            } else {
+                if (mOnScanCardListen != null) {
+                    mOnScanCardListen.onScanCard("读取CPU卡16文件指令失败", null);
+                }
+            }
+        } else {
+            if (mOnScanCardListen != null) {
+                mOnScanCardListen.onScanCard(byteArrayResult.getMsg(), null);
+            }
+        }
+    }
+
 }

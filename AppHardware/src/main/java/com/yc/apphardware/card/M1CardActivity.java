@@ -17,6 +17,7 @@ public class M1CardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         CardHelper.getInstance().setM1Card(new M1CardImpl());
+        CardHelper.getInstance().setCpuCard(new CpuCardImpl());
         startScanCard();
         AppLogUtils.d("Card M1CardActivity");
     }
