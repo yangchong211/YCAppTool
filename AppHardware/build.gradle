@@ -60,4 +60,5 @@ dependencies {
     implementation 'com.aill:AndroidSerialPort:1.0.8'
     implementation files('libs/wx_pos_jni_1.0.66_release.aar')
     implementation project(path: ':AppClickHelper')
+    implementation project(path: ':SoundPool')
 }

@@ -7,12 +7,15 @@ import android.util.Log;
 import com.tencent.wx.pos.jni.WxPosLib;
 import com.tencent.wx.pos.jni.bean.ByteArrayResult;
 import com.tencent.wx.pos.jni.bean.NfcResult;
+import com.yc.appcontextlib.AppToolUtils;
+import com.yc.apphardware.R;
 import com.yc.apphardware.card.lib.CardReadManager;
 import com.yc.apphardware.card.lib.MyConverterTool;
 import com.yc.apphardware.card.lib.ResultMasage;
 import com.yc.bytetoolutils.ByteUtils;
 import com.yc.bytetoolutils.BytesHexStrUtils;
 import com.yc.cardmanager.CardHelper;
+import com.yc.soundpool.SoundPoolPlayer;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
@@ -339,8 +342,7 @@ public class ScanCardManager {
                     CardReadManager.CardType cardType = CardReadManager.getInstance().SearchCardType();
                     //AppLogUtils.d("Card 开始寻卡 " + cardType.getCardType() + " , " + cardType.getCardNo());
                     if (cardType.getCardType() == CardReadManager.CardType.M1_CARD.getCardType()) {
-                        ToolUtils.playBeep();
-
+                        SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep);
                         String cardNum = cardType.getCardNo();
 //                        decodeM1Card(cardNum);
 
@@ -349,7 +351,7 @@ public class ScanCardManager {
                         decodeM1Card2(cardNum);
 
                     } else if (cardType.getCardType() == CardReadManager.CardType.CPU_CARD.getCardType()) {
-                        ToolUtils.playBeep();
+                        SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep);
                         String cardNum = cardType.getCardNo();
 //                        decodeCpuCard(cardNum);
                         decodeCpuCard2(cardNum);
