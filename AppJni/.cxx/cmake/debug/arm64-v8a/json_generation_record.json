@@ -13,6 +13,528 @@
   },
   {
     "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/25.0.0/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "Mapping new ns http://schemas.android.com/repository/android/common/02 to old ns http://schemas.android.com/repository/android/common/01",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "Mapping new ns http://schemas.android.com/repository/android/generic/02 to old ns http://schemas.android.com/repository/android/generic/01",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "Mapping new ns http://schemas.android.com/sdk/android/repo/addon2/02 to old ns http://schemas.android.com/sdk/android/repo/addon2/01",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "Mapping new ns http://schemas.android.com/sdk/android/repo/addon2/03 to old ns http://schemas.android.com/sdk/android/repo/addon2/01",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "Mapping new ns http://schemas.android.com/sdk/android/repo/repository2/02 to old ns http://schemas.android.com/sdk/android/repo/repository2/01",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "Mapping new ns http://schemas.android.com/sdk/android/repo/repository2/03 to old ns http://schemas.android.com/sdk/android/repo/repository2/01",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "Mapping new ns http://schemas.android.com/sdk/android/repo/sys-img2/03 to old ns http://schemas.android.com/sdk/android/repo/sys-img2/01",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "Mapping new ns http://schemas.android.com/sdk/android/repo/sys-img2/02 to old ns http://schemas.android.com/sdk/android/repo/sys-img2/01",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/25.0.1/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/25.0.2/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/25.0.3/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/26.0.0/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/26.0.1/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/26.0.2/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/26.0.3/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/27.0.0/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/27.0.1/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/27.0.2/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/27.0.3/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/28.0.0/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/28.0.1/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/28.0.2/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/28.0.3/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/29.0.0/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/29.0.1/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/29.0.2/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/29.0.3/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/30.0.0/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/30.0.2/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/30.0.3/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/31.0.0/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/33.0.1/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/build-tools/34.0.0/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/cmake/3.18.1/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/cmake/3.22.1/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/cmake/3.6.4111459/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/cmdline-tools/latest/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/emulator/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/16.1.4479499/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/17.2.4988734/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/18.1.5063045/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/19.2.5345600/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/20.1.5948944/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/21.2.6472646/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/21.3.6528147/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/21.4.7075529/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/22.0.7026061/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/22.1.7171670/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/23.0.7599858/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/23.1.7779620/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/23.2.8568313/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/24.0.8215888/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/25.0.8775105/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/25.1.8937393/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/ndk/25.2.9519653/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/patcher/v4/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platform-tools/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platforms/android-24/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "意外的元素 (uri:\"\", local:\"base-extension\")。所需元素为\u003c{}codename\u003e,\u003c{}layoutlib\u003e,\u003c{}api-level\u003e",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platforms/android-25/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platforms/android-26/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platforms/android-27/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platforms/android-28/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platforms/android-29/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platforms/android-30/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platforms/android-31/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platforms/android-32/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/platforms/android-33/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "意外的元素 (uri:\"\", local:\"extension-level\")。所需元素为\u003c{}codename\u003e,\u003c{}layoutlib\u003e,\u003c{}api-level\u003e",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "WARN",
+    "message": "Errors limit exceeded. To receive all errors set com.sun.xml.bind logger to FINEST level.",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/skiaparser/1/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/sources/android-24/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/sources/android-25/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/sources/android-26/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/sources/android-27/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/sources/android-28/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/sources/android-29/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/sources/android-30/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/sources/android-31/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/sources/android-32/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/sources/android-33/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/system-images/android-33/google_apis/arm64-v8a/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /Users/yangchong/Library/Android/sdk/tools/package.xml",
+    "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
+    "tag": "debug|arm64-v8a"
+  },
+  {
+    "level": "INFO",
     "message": "- CMake found in SDK at \u0027/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
     "file": "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
     "tag": "debug|arm64-v8a"

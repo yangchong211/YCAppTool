@@ -342,7 +342,7 @@ public class ScanCardManager {
                     CardReadManager.CardType cardType = CardReadManager.getInstance().SearchCardType();
                     //AppLogUtils.d("Card 开始寻卡 " + cardType.getCardType() + " , " + cardType.getCardNo());
                     if (cardType.getCardType() == CardReadManager.CardType.M1_CARD.getCardType()) {
-                        SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep);
+                        SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep).play();
                         String cardNum = cardType.getCardNo();
 //                        decodeM1Card(cardNum);
 
@@ -351,7 +351,7 @@ public class ScanCardManager {
                         decodeM1Card2(cardNum);
 
                     } else if (cardType.getCardType() == CardReadManager.CardType.CPU_CARD.getCardType()) {
-                        SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep);
+                        SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep).play();
                         String cardNum = cardType.getCardNo();
 //                        decodeCpuCard(cardNum);
                         decodeCpuCard2(cardNum);

@@ -9,7 +9,7 @@ import com.yc.cardmanager.CardHelper;
 import com.yc.apphardware.R;
 import com.yc.toolutils.AppLogUtils;
 
-public class M1CardActivity extends AppCompatActivity {
+public class TestCardActivity extends AppCompatActivity {
 
 
     @Override

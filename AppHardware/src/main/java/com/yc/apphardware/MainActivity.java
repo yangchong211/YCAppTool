@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.yc.apphardware.card.M1CardActivity;
+import com.yc.apphardware.card.TestCardActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +17,6 @@ public class MainActivity extends AppCompatActivity {
 //        PresentationActivity.startActivity(this);
 //        startActivity(new Intent(this, KeyCodeActivity.class));
 //        startActivity(new Intent(this, KeyCodeActivity2.class));
-        startActivity(new Intent(this, M1CardActivity.class));
+        startActivity(new Intent(this, TestCardActivity.class));
     }
 }

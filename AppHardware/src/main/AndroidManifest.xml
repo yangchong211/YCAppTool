@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.yc.apphardware.PresentationActivity"/>
-        <activity android:name="com.yc.apphardware.card.M1CardActivity"/>
+        <activity android:name="com.yc.apphardware.card.TestCardActivity"/>
     </application>
 
 </manifest>
