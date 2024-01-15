@@ -37,7 +37,7 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
         ':GsonServer', ':IpcServer', ':ObjectEqualLib', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
-        ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker', ':NetChange',
+        ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
         ':GlideProgressLib', ':CompressServer',  ':Transformation', ':GrpcServer',
         ':HeartBeatServer'
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
@@ -61,7 +61,6 @@ project(':Transformation').projectDir = new File('ServerLib/Transformation')
 project(':TcpServerLib').projectDir = new File('ServerLib/TcpServerLib')
 project(':TcpManager').projectDir = new File('ServerLib/TcpManager')
 project(':GrpcServer').projectDir = new File('ServerLib/GrpcServer')
-project(':NetChange').projectDir = new File('ServerLib/NetChange')
 project(':HeartBeatServer').projectDir = new File('ServerLib/HeartBeatServer')
 
 
@@ -266,9 +265,9 @@ project(':MonitorFlow').projectDir = new File('MonitorLib/MonitorFlow')
 
 
 /* +++++++++ 音视频 +++++++++ */
-include ':VideoSqlLite', ':VideoCache', ':AudioPlayer', ':VideoSurface', ':SoundPool',
+include ':VideoSqlLite', ':VideoCache', ':AudioPlayer', ':VideoSurface', ':SoundPool',':EasyMediaPlayer',
         ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView',':EasyTtsPlayer',
-        ':BellsVibrations', ':AudioHelper', ':MediaHelper'
+        ':BellsVibrations', ':AudioHelper', ':MediaScanner'
 project(':VideoSqlLite').projectDir = new File('PlayerLib/VideoSqlLite')
 project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
 project(':AudioPlayer').projectDir = new File('PlayerLib/AudioPlayer')
@@ -280,12 +279,14 @@ project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 project(':BellsVibrations').projectDir = new File('PlayerLib/BellsVibrations')
 project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')
-project(':MediaHelper').projectDir = new File('PlayerLib/MediaHelper')
+//音视频扫描工具
+project(':MediaScanner').projectDir = new File('PlayerLib/MediaScanner')
 //SoundPool音效播放
 project(':SoundPool').projectDir = new File('PlayerLib/SoundPool')
 //简单型tts播放器
 project(':EasyTtsPlayer').projectDir = new File('PlayerLib/EasyTtsPlayer')
-
+//简单型MediaPlayer播放器
+project(':EasyMediaPlayer').projectDir = new File('PlayerLib/EasyMediaPlayer')
 
 /* +++++++++ 经典第三方库 +++++++++ */
 include ':LeakAnalyzer', ':LeakCanarySdk', ':LeakInstrumentation',':GsonLib',

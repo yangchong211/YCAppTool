@@ -2,7 +2,7 @@ plugins {
     id 'com.android.library'
 }
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
-
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]

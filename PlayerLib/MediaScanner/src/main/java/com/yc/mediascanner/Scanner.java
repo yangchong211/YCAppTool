@@ -1,4 +1,4 @@
-package com.yc.mediahelper;
+package com.yc.mediascanner;
 
 import android.content.ContentResolver;
 

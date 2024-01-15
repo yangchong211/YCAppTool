@@ -1,4 +1,4 @@
-package com.yc.bellsvibrations
+package com.yc.easymediaplayer
 
 import android.content.Context
 import android.media.AudioManager
@@ -27,7 +27,7 @@ class MediaAudioPlayer(private val context: Context) {
     /**
      * 播放raw资源
      */
-    fun playLoop(@DataSource type: Int, data: Any? , isLoop : Boolean = true) {
+    fun playLoop(@DataSource type: Int, data: Any?, isLoop : Boolean = true) {
         if (data == null) {
             return
         }

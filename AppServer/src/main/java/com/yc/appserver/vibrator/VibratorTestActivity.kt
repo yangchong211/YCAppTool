@@ -11,7 +11,7 @@ import com.yc.audiofocus.BecomeNoiseHelper
 import com.yc.audiofocus.OnAudioFocusChangeListener
 import com.yc.bellsvibrations.AudioSoundManager
 import com.yc.bellsvibrations.AudioVolumeHelper
-import com.yc.bellsvibrations.MediaAudioPlayer
+import com.yc.easymediaplayer.MediaAudioPlayer
 import com.yc.bellsvibrations.VibratorHelper
 import com.yc.logclient.LogUtils
 import com.yc.roundcorner.view.RoundTextView
@@ -33,7 +33,7 @@ class VibratorTestActivity : AppCompatActivity() {
     private lateinit var  tvMedia4:RoundTextView
     private lateinit var  tvMedia5:RoundTextView
     private var vibratorHelper: VibratorHelper?= null
-    private var mediaAudioPlayer: MediaAudioPlayer?= null
+    private var mediaAudioPlayer: com.yc.easymediaplayer.MediaAudioPlayer?= null
     private var audioVolumeHelper: AudioVolumeHelper?= null
     private var audioSoundManager: AudioSoundManager?= null
     private var audioFocus: AudioFocusHelper?=null
@@ -55,7 +55,7 @@ class VibratorTestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vibrator_main)
         vibratorHelper = VibratorHelper(this)
-        mediaAudioPlayer = MediaAudioPlayer(this)
+        mediaAudioPlayer = com.yc.easymediaplayer.MediaAudioPlayer(this)
         audioVolumeHelper = AudioVolumeHelper(this)
         audioSoundManager =
             AudioSoundManager(this.application)
@@ -117,13 +117,13 @@ class VibratorTestActivity : AppCompatActivity() {
             ToastUtils.showRoundRectToast("开始播放raw")
             //audioSoundManager?.changeToReceiver()
             audioFocus?.requestAudioFocus()
-            mediaAudioPlayer?.playLoop(MediaAudioPlayer.DataSource.DATA_SOURCE_URI,R.raw.audio_call_ring,true)
+            mediaAudioPlayer?.playLoop(com.yc.easymediaplayer.MediaAudioPlayer.DataSource.DATA_SOURCE_URI,R.raw.audio_call_ring,true)
         }
         tvMedia2.setOnClickListener {
             ToastUtils.showRoundRectToast("开始播放asset")
             //audioSoundManager?.changeToSpeaker()
             audioFocus?.requestAudioFocus()
-            mediaAudioPlayer?.playLoop(MediaAudioPlayer.DataSource.DATA_SOURCE_ASSET,"audio_call_ring.mp3")
+            mediaAudioPlayer?.playLoop(com.yc.easymediaplayer.MediaAudioPlayer.DataSource.DATA_SOURCE_ASSET,"audio_call_ring.mp3")
         }
         tvMedia3.setOnClickListener {
             ToastUtils.showRoundRectToast("取消播放")
