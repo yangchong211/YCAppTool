@@ -94,7 +94,7 @@ public class ScanCardManager {
         StringBuilder sb = new StringBuilder();
         String key_6 = arrayList.get(0);
 //        byte[] password6 = MyConverterTool.HexToByteArr(key_6);
-        byte[] password6 = BytesHexStrUtils.hexToBytes2(key_6);
+        byte[] password6 = BytesHexStrUtils.hexToBytes1(key_6);
         if (!TextUtils.isEmpty(key_6) && key_6.length() == 12) {
             int block61 = 24;
             byte[] data61 = CardHelper.getInstance().getM1Card().readBlock(cardNum, CardReadManager.KEY_MODE_A, block61, password6);
@@ -365,6 +365,7 @@ public class ScanCardManager {
             }
         }
     }
+
 
     private void decodeM1Card2(String cardNum) {
         //先将旋转卡号

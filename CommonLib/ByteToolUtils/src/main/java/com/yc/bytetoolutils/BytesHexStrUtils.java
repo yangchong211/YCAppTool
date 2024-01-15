@@ -98,7 +98,7 @@ public final class BytesHexStrUtils {
      * @param str 字符串
      * @return byte
      */
-    public static byte[] hexToBytes(String str) {
+    public static byte[] hexToBytes2(String str) {
         if (str == null || str.trim().equals("") || !isHexString(str)) {
             return new byte[0];
         }
@@ -119,9 +119,9 @@ public final class BytesHexStrUtils {
      * hex字符串转字节数组
      *
      * @param inHex hex字符串
-     * @return
+     * @return          字节数组
      */
-    public static byte[] hexToBytes2(String inHex) {
+    public static byte[] hexToBytes1(String inHex) {
         int hexlen = inHex.length();
         byte[] result;
         if (isOdd(hexlen) == 1) {

@@ -7,6 +7,7 @@ import com.tencent.wx.pos.jni.WxPosLib;
 import com.tencent.wx.pos.jni.bean.ByteArrayResult;
 import com.yc.apphardware.card.lib.CardReadManager;
 import com.yc.apphardware.card.lib.MyConverterTool;
+import com.yc.bytetoolutils.BytesHexStrUtils;
 import com.yc.mifarecard.AbstractM1Card;
 import com.yc.toolutils.AppLogUtils;
 
@@ -33,7 +34,7 @@ public class M1CardImpl extends AbstractM1Card {
     public byte[] readBlock(String cardNum , int mode, int block, byte[] password) {
         //fix 一定要转化为小写，否则会出现验证密钥不成功
         String cardNumNo = cardNum.toLowerCase();
-        byte[] cardNo = MyConverterTool.HexToByteArr(cardNumNo);
+        byte[] cardNo = BytesHexStrUtils.hexToBytes1(cardNumNo);
         //先验证秘钥
         boolean result = CardReadManager.getInstance().CardM1Authority(CardReadManager.KEY_MODE_A, password, cardNo, (byte) block);
         Log.d("Card M1", "扇区 " + block + " , 密钥 " + MyConverterTool.ByteArrToHex(password) + " , 卡号 " + cardNumNo + " , 验证结果" + result);
