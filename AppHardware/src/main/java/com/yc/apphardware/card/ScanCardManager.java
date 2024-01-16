@@ -19,6 +19,7 @@ import com.yc.soundpool.SoundPoolPlayer;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author: Administrator
@@ -233,12 +234,14 @@ public class ScanCardManager {
         String resetData = processRspByteArray(resetDataArray);
         AppLogUtils.d("Card CPU 复位 : " + resetData);
         if (resetData == null) {
+            //如果复位的数据不为空，则说明复位成功
             return;
         }
         //选择文件
         String selectFileOrder = WeCardCardHelper.getSelectFileOrder();
         AppLogUtils.d("Card CPU 选择文件 : " + selectFileOrder);
         byte[] bytes = MyConverterTool.HexToByteArr(selectFileOrder);
+        //apdu操作
         byte[] selectApplyDataArray = CardReadManager.getInstance().CardCpuSendCosCmd(bytes);
         String selectApplyData = processRspByteArray(selectApplyDataArray);
         AppLogUtils.d("Card CPU selectApplyData : " + selectApplyData);
@@ -394,8 +397,10 @@ public class ScanCardManager {
         }
         //选择文件
         String selectFileOrder = WeCardCardHelper.getSelectFileOrder();
+        //Card CPU 选择文件 : 00a40000023f01
         AppLogUtils.d("Card CPU 选择文件 : " + selectFileOrder);
         byte[] bytes = MyConverterTool.HexToByteArr(selectFileOrder);
+        //Card CPU selectApplyData : 6f33840854582e5041593031a5279f0801029f0c200000000000000000000000000000000000000000000000000000000000000000
         byte[] selectApplyDataArray = CardReadManager.getInstance().CardCpuSendCosCmd(bytes);
         String selectApplyData = processRspByteArray(selectApplyDataArray);
         AppLogUtils.d("Card CPU selectApplyData : " + selectApplyData);

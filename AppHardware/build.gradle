@@ -56,7 +56,6 @@ dependencies {
     implementation project(path: ':CpuCard')
     implementation project(path: ':MifareCard')
     implementation project(path: ':CardManager')
-    implementation project(path: ':SerialPort')
 
     implementation 'com.aill:AndroidSerialPort:1.0.8'
     implementation files('libs/wx_pos_jni_1.0.66_release.aar')

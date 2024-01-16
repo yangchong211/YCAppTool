@@ -11,13 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * Created on 2018/10/7
- *
- * @author AIll.
- * @description 串口操作类
- */
-public class SerialPort {
+
+public final class SerialPort {
 
     private static final String TAG = "SerialPort";
     /**
@@ -32,7 +27,7 @@ public class SerialPort {
     private static String mSuPath = "/system/bin/su";
 
     static {
-        System.loadLibrary("android_serial_port");
+        System.loadLibrary("SerialPort");
     }
 
     public static void setSuPath(String suPath) {
