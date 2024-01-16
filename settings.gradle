@@ -357,3 +357,4 @@ project(':usbCameraTest7').projectDir = new File('JniNdkLib/usbCameraTest7')
 project(':usbCameraTest8').projectDir = new File('JniNdkLib/usbCameraTest8')
 
 
+include ':serialportlibrary'

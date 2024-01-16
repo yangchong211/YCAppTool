@@ -30,6 +30,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation(rootProject.ext.dependencies["appcompat"])
     implementation(rootProject.ext.dependencies["annotation"])
+    implementation project(path: ':ByteToolUtils')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':AppContextLib')
     implementation project(path: ':ToolFileLib')

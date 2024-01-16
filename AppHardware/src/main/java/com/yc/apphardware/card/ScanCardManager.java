@@ -355,7 +355,7 @@ public class ScanCardManager {
                 if (TextUtils.isEmpty(cardData)) {
                     return;
                 }
-                //将卡数据转化为数据bean，相当于解析数据
+                //将卡数据转化为数据bean，相当于解析数据。这一步解析数据
                 NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(cardData, flipCardNum, "", "", "", "", "");
                 AppLogUtils.d("Card M1 nfcResult = " + nfcResult);
                 if (nfcResult == null) {

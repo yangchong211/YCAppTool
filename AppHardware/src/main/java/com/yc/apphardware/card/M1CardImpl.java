@@ -37,7 +37,7 @@ public class M1CardImpl extends AbstractM1Card {
         byte[] cardNo = BytesHexStrUtils.hexToBytes1(cardNumNo);
         //先验证秘钥
         boolean result = CardReadManager.getInstance().CardM1Authority(CardReadManager.KEY_MODE_A, password, cardNo, (byte) block);
-        Log.d("Card M1", "扇区 " + block + " , 密钥 " + MyConverterTool.ByteArrToHex(password) + " , 卡号 " + cardNumNo + " , 验证结果" + result);
+        Log.d("Card M1", "读数据扇区 " + block + " , 密钥 " + MyConverterTool.ByteArrToHex(password) + " , 卡号 " + cardNumNo + " , 验证结果" + result);
         if (result) {
             return CardReadManager.getInstance().CardM1BlockRead((byte) block);
         }
@@ -45,7 +45,16 @@ public class M1CardImpl extends AbstractM1Card {
     }
 
     @Override
-    public int writeBlock(String cardNo , int mode, int block, byte[] password, byte[] blockData) {
+    public int writeBlock(String cardNum , int mode, int block, byte[] password, byte[] blockData) {
+        String cardNumNo = cardNum.toLowerCase();
+        byte[] cardNo = BytesHexStrUtils.hexToBytes1(cardNumNo);
+        //先验证秘钥
+        boolean result = CardReadManager.getInstance().CardM1Authority(CardReadManager.KEY_MODE_A, password, cardNo, (byte) block);
+        Log.d("Card M1", "写数据扇区 " + block + " , 密钥 " + MyConverterTool.bytesToHex(password) + " , 卡号 " + cardNumNo + " , 验证结果" + result);
+        if (result) {
+            boolean writeResult = CardReadManager.getInstance().CardM1BlockWrite((byte) block, blockData);
+            return writeResult ? 1 : 0;
+        }
         return 0;
     }
 

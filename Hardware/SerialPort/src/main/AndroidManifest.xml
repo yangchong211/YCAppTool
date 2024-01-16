@@ -3,15 +3,6 @@
     package="com.yc.serialport">
 
 
-    <application>
-        <receiver android:name="com.yc.serialport.UsbReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_MOUNTED" />
-                <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
-                <action android:name="android.intent.action.MEDIA_REMOVED" />
-                <data android:scheme="file" />
-            </intent-filter>
-        </receiver>
-    </application>
+    <application></application>
 
 </manifest>
