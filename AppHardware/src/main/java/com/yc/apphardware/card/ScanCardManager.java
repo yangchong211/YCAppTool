@@ -74,21 +74,21 @@ public class ScanCardManager {
 
     private String processRspByteArray(byte[] rspByteArray) {
         if (rspByteArray == null) {
-            AppLogUtils.d("APDU通讯失败");
+            AppLogUtils.d("Card CPU APDU通讯失败");
             mOnScanCardListen.onScanCard("APDU通讯失败", null);
             return null;
         }
         String rspData = BytesHexStrUtils.bytesToHex(rspByteArray);
         if (rspData.length() <= 4) {
             String errorData = rspData + "|" + CpuResultMessage.commandProcessSW1SW2(rspData);
-            AppLogUtils.d("APDU错误：" + rspData + "，errorData " + errorData);
+            AppLogUtils.d("Card CPU APDU错误：" + rspData + "，errorData " + errorData);
             if (mOnScanCardListen != null) {
                 mOnScanCardListen.onScanCard(errorData, null);
             }
             return null;
         }
         String substring = rspData.substring(0, rspData.length() - 4);
-        AppLogUtils.d("APDU解析OK，processRspByteArray ：" + rspData + "，data " + substring);
+        AppLogUtils.d("Card CPU APDU解析OK，processRspByteArray ：" + rspData + "，data " + substring);
         return substring;
     }
 
@@ -398,24 +398,20 @@ public class ScanCardManager {
         }
         //选择文件
         String selectFileOrder = WeCardCardHelper.getSelectFileOrder();
-        //Card CPU 选择文件 : 00a40000023f01
         AppLogUtils.d("Card CPU 选择文件 : " + selectFileOrder);
         byte[] bytes = MyConverterTool.HexToByteArr(selectFileOrder);
-        //Card CPU selectApplyData : 6f33840854582e5041593031a5279f0801029f0c200000000000000000000000000000000000000000000000000000000000000000
-        byte[] selectApplyDataArray = CardReadManager.getInstance().CardCpuSendCosCmd(bytes);
-        String selectApplyData = processRspByteArray(selectApplyDataArray);
-        AppLogUtils.d("Card CPU selectApplyData : " + selectApplyData);
-        if (selectApplyData == null) {
+        String[] strings = CardHelper.getInstance().getCpuCard().sendAPDU(bytes);
+        if (!strings[0].equals("9000")) {
+            AppLogUtils.d("Card CPU 选择文件异常 : " + CpuResultMessage.commandProcessSW1SW2(strings[0]));
             return;
         }
 
         //获取随机数
         String randomOrder = WeCardCardHelper.getRandomOrder();
         byte[] randomOrderBytes = MyConverterTool.HexToByteArr(randomOrder);
-        byte[] randomDataArray = CardReadManager.getInstance().CardCpuSendCosCmd(randomOrderBytes);
-        String randomData = processRspByteArray(randomDataArray);
-        AppLogUtils.d("Card CPU 获取随机数 : " + randomData);
-        if (randomData == null) {
+        String[] randomData = CardHelper.getInstance().getCpuCard().sendAPDU(randomOrderBytes);
+        if (!randomData[0].equals("9000")) {
+            AppLogUtils.d("Card CPU 获取随机数 : " + CpuResultMessage.commandProcessSW1SW2(strings[0]));
             return;
         }
 
@@ -427,16 +423,17 @@ public class ScanCardManager {
             //拿到密钥
             String s = BytesHexStrUtils.bytesToHex(cardKeyArray);
             //获取读取CPU卡16文件的指令
-            String cardOrder = WeCardCardHelper.generateReadCardOrder(s, MyConverterTool.HexToByteArr(randomData));
+            String cardOrder = WeCardCardHelper.generateReadCardOrder(s, MyConverterTool.HexToByteArr(randomData[1]));
             AppLogUtils.d("Card CPU 密钥 " + s + " , 获取读取CPU卡16文件的指令 :" + cardOrder);
             if (!TextUtils.isEmpty(cardOrder)) {
-                byte[] rspCardOrderArray = CardReadManager.getInstance().CardCpuSendCosCmd(MyConverterTool.HexToByteArr(cardOrder));
-                String rspCardOrder = processRspByteArray(rspCardOrderArray);
-                AppLogUtils.d("Card CPU 解析指令 " + rspCardOrder);
-                if (rspCardOrder == null) {
+                String[] rspCardOrderArray = CardHelper.getInstance().getCpuCard().sendAPDU(MyConverterTool.HexToByteArr(cardOrder));
+                if (!rspCardOrderArray[0].equals("9000")) {
+                    AppLogUtils.d("Card CPU 解析指令 : " + CpuResultMessage.commandProcessSW1SW2(rspCardOrderArray[0]));
                     return;
                 }
+                String rspCardOrder = rspCardOrderArray[1];
                 NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(rspCardOrder, flipCardNum, "", "", "", "", "");
+                //Card CPU nfcResult = NfcResult{cardType=0, result=1, cardId='3e243c52', resultMsg='解卡成功', studentId='wh1', userName='武汉测试1cpu', sign='78a9d2378554a62f4e9a38d5ced055b8', date='000000', crc32Data=3543774472, totalMoney=0, cardDailyNum=0, version=2, totalCount=0, csTotalMoney=0, stTotalMoney=0}
                 AppLogUtils.d("Card CPU nfcResult = " + nfcResult);
                 if (nfcResult == null) {
                     if (mOnScanCardListen != null) {
