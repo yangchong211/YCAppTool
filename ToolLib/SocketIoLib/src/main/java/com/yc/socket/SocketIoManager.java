@@ -52,12 +52,12 @@ public class SocketIoManager {
                     .build();
 
 // default settings for all sockets
-            IO.setDefaultOkHttpWebSocketFactory(okHttpClient);
-            IO.setDefaultOkHttpCallFactory(okHttpClient);
-
-// set as an option
-            options.callFactory = okHttpClient;
-            options.webSocketFactory = okHttpClient;
+//            IO.setDefaultOkHttpWebSocketFactory(okHttpClient);
+//            IO.setDefaultOkHttpCallFactory(okHttpClient);
+//
+//// set as an option
+//            options.callFactory = okHttpClient;
+//            options.webSocketFactory = okHttpClient;
             options.transports=new String[]{"websocket"};
 
             if (!TextUtils.isEmpty(query)) {
