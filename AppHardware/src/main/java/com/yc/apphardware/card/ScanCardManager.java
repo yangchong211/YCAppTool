@@ -15,6 +15,7 @@ import com.yc.apphardware.card.lib.ResultMasage;
 import com.yc.bytetoolutils.ByteUtils;
 import com.yc.bytetoolutils.BytesHexStrUtils;
 import com.yc.cardmanager.CardHelper;
+import com.yc.cpucard.CpuResultMessage;
 import com.yc.soundpool.SoundPoolPlayer;
 import com.yc.toolutils.AppLogUtils;
 
@@ -79,7 +80,7 @@ public class ScanCardManager {
         }
         String rspData = BytesHexStrUtils.bytesToHex(rspByteArray);
         if (rspData.length() <= 4) {
-            String errorData = rspData + "|" + ResultMasage.CommandProcessSW1SW2(rspData);
+            String errorData = rspData + "|" + CpuResultMessage.commandProcessSW1SW2(rspData);
             AppLogUtils.d("APDU错误：" + rspData + "，errorData " + errorData);
             if (mOnScanCardListen != null) {
                 mOnScanCardListen.onScanCard(errorData, null);
@@ -409,7 +410,9 @@ public class ScanCardManager {
         }
 
         //获取随机数
-        byte[] randomDataArray = CardReadManager.getInstance().CardCpuSendCosCmd(MyConverterTool.HexToByteArr(WeCardCardHelper.getRandomOrder()));
+        String randomOrder = WeCardCardHelper.getRandomOrder();
+        byte[] randomOrderBytes = MyConverterTool.HexToByteArr(randomOrder);
+        byte[] randomDataArray = CardReadManager.getInstance().CardCpuSendCosCmd(randomOrderBytes);
         String randomData = processRspByteArray(randomDataArray);
         AppLogUtils.d("Card CPU 获取随机数 : " + randomData);
         if (randomData == null) {
@@ -418,10 +421,10 @@ public class ScanCardManager {
 
         //微卡密钥换算
         ByteArrayResult byteArrayResult;
-        byteArrayResult = WxPosLib.getInstance().getCardKey(flipCardNum, CPUSecret,
-                "", "", "", "", "");
+        byteArrayResult = WxPosLib.getInstance().getCardKey(flipCardNum, CPUSecret, "", "", "", "", "");
         if (byteArrayResult.getCode() == 1) {
             byte[] cardKeyArray = byteArrayResult.getByteArray();
+            //拿到密钥
             String s = BytesHexStrUtils.bytesToHex(cardKeyArray);
             //获取读取CPU卡16文件的指令
             String cardOrder = WeCardCardHelper.generateReadCardOrder(s, MyConverterTool.HexToByteArr(randomData));

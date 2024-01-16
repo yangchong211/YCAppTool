@@ -2,6 +2,7 @@ package com.yc.apphardware.card.lib;
 
 import android.util.Log;
 
+import com.yc.cpucard.CpuResultMessage;
 
 
 public class CardReadManager {
@@ -288,7 +289,7 @@ public class CardReadManager {
                 }
                 else {
                     if(getDebugStatus())
-                        Log.e(TAG,"error code ：" + ResultMasage.CommandProcessSW1SW2(SW1SW2));
+                        Log.e(TAG,"error code ：" + CpuResultMessage.commandProcessSW1SW2(SW1SW2));
                     return SW1SW2data;
                 }
             }else{// 状态码为“非成功”
@@ -1057,7 +1058,7 @@ public class CardReadManager {
                 }
                 else {
                     if(getDebugStatus())
-                        Log.e(TAG,"错误码 ：" + ResultMasage.CommandProcessSW1SW2(SW1SW2));
+                        Log.e(TAG,"错误码 ：" + CpuResultMessage.commandProcessSW1SW2(SW1SW2));
                     return SW1SW2data;
                 }
             } else {// 状态码为“非成功”
