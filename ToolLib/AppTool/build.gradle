@@ -78,7 +78,6 @@ dependencies {
     implementation 'com.github.yangchong211.YCToolLib:LongAliveLib:1.0.8'
     implementation 'com.github.yangchong211.YCToolLib:AppTraceTool:1.0.8'
     implementation 'com.github.yangchong211.YCToolLib:SerialTaskLib:1.0.8'
-    implementation project(path: ':RebootHelper')
     implementation project(path: ':SqlLiteLib')
 }
 
