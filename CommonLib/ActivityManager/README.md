@@ -1,9 +1,11 @@
 #### 目录介绍
-- 01.基础概念
+- 01.基础概念说明
 - 02.常见思路和做法
 - 03.Api调用说明
 - 04.遇到的坑分析
 - 05.其他问题说明
+- 06.技术问题思考&分析
+
 
 
 
@@ -61,7 +63,7 @@
 ### 03.Api调用说明
 #### 3.1 如何依赖
 - 直接在maven中依赖如下所示：
-    ``` java
+    ```
     //activity栈管理
     implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.9'
     ```
@@ -69,7 +71,7 @@
 
 #### 3.2 如何使用Api
 - api调用如下所示，直接拿来用即可
-    ``` java
+    ```
     //退出应用程序
     ActivityManager.getInstance().appExist();
     //查找指定的Activity

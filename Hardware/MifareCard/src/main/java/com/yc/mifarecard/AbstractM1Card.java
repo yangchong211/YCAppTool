@@ -32,8 +32,14 @@ public abstract class AbstractM1Card implements InterM1Card, IM1Function {
         return null;
     }
 
-
-    private String joinM1Data(String cardNum, ArrayList<String> arrayList) {
+    /**
+     * 子类可以自己实现扇区的读写
+     *
+     * @param cardNum   卡号
+     * @param arrayList 扇区密钥集合
+     * @return 扇区数据
+     */
+    protected String joinM1Data(String cardNum, ArrayList<String> arrayList) {
         StringBuilder sb = new StringBuilder();
         String key_6 = arrayList.get(0);
         byte[] password6 = BytesHexStrUtils.hexToBytes1(key_6);
@@ -66,14 +72,14 @@ public abstract class AbstractM1Card implements InterM1Card, IM1Function {
         if (!TextUtils.isEmpty(key_7) && key_7.length() == 12) {
             byte[] password7 = BytesHexStrUtils.hexToBytes1(key_7);
             int block71 = 28;
-            byte[] data71 = readBlock(cardNum,KEY_MODE_A, block71, password7);
+            byte[] data71 = readBlock(cardNum, KEY_MODE_A, block71, password7);
             String data71String = "";
             if (data71 != null) {
                 data71String = BytesHexStrUtils.bytesToHex(data71).replace("0", "");
             }
             if (data71 != null && !TextUtils.isEmpty(data71String)) {
-                byte[] data72 = readBlock(cardNum, KEY_MODE_A,block71 + 1, password7);
-                byte[] data73 = readBlock(cardNum, KEY_MODE_A,block71 + 2, password7);
+                byte[] data72 = readBlock(cardNum, KEY_MODE_A, block71 + 1, password7);
+                byte[] data73 = readBlock(cardNum, KEY_MODE_A, block71 + 2, password7);
                 if (data72 != null && data73 != null) {
                     String s2 = ByteUtils.bytesToHex(data72);
                     String s3 = ByteUtils.bytesToHex(data73);
@@ -93,13 +99,13 @@ public abstract class AbstractM1Card implements InterM1Card, IM1Function {
         if (!TextUtils.isEmpty(key_8) && key_8.length() == 12) {
             byte[] password8 = BytesHexStrUtils.hexToBytes1(key_7);
             int block81 = 32;
-            byte[] data81 = readBlock(cardNum,KEY_MODE_A, block81, password8);
+            byte[] data81 = readBlock(cardNum, KEY_MODE_A, block81, password8);
             String data81String = "";
             if (data81 != null) {
                 data81String = ByteUtils.bytesToHex(data81);
             }
             if (data81 != null && !TextUtils.isEmpty(data81String)) {
-                byte[] data82 = readBlock(cardNum, KEY_MODE_A,block81 + 1, password8);
+                byte[] data82 = readBlock(cardNum, KEY_MODE_A, block81 + 1, password8);
                 if (data82 != null) {
                     String s2 = ByteUtils.bytesToHex(data82);
                     sb.append(data81String).append(s2);
