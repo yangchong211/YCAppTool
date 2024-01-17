@@ -36,10 +36,10 @@ public class UnionCardImpl extends AbsUnionCard {
         String cardNo = "";
         if (cardType1 == CardType.CPU) {
             cardNo = CardHelper.getInstance().getCpuCard().search();
-            AppLogUtils.d(TAG + cardNo);
+            AppLogUtils.d(TAG + "CPU 卡号" + cardNo);
         } else if (cardType1 == CardType.M1) {
             cardNo = CardHelper.getInstance().getM1Card().search();
-            AppLogUtils.d(TAG + cardNo);
+            AppLogUtils.d(TAG+ "M1 卡号"  + cardNo);
         }
         return null;
     }
