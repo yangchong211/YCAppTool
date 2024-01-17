@@ -23,4 +23,10 @@ public interface IM1Function {
     ArrayList<String> getCardSecretList(String secret);
 
 
+    /**
+     * 校验卡号并读取数据
+     * @param cardNo            卡号
+     * @return                  卡数据
+     */
+    String verify(String cardNo);
 }

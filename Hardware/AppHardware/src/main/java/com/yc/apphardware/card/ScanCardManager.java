@@ -321,6 +321,7 @@ public class ScanCardManager {
                         if (cardType == CardType.M1) {
                             SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep).play();
                             decodeM1Card2(cardNum);
+//                            decodeM1Card3(cardNum);
                         } else if (cardType == CardType.CPU) {
                             SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep).play();
                             decodeCpuCard2(cardNum);
@@ -570,5 +571,32 @@ public class ScanCardManager {
         }
         return sb.toString();
     }
+
+
+    private void decodeM1Card3(String cardNum) {
+        //先将旋转卡号
+        String flipCardNum = WeCardCardHelper.flipCardNum(cardNum);
+        String cardNumber = flipCardNum.toLowerCase();
+        AppLogUtils.d("Card M1 flipCardNum : " + flipCardNum + " , " + cardNumber + " , 天安 M1卡秘钥 " + M1Secret);
+        String cardData = CardHelper.getInstance().getM1Card().verify(cardNum);
+        AppLogUtils.d("Card M1 cardData = " + cardData);
+        if (TextUtils.isEmpty(cardData)) {
+            return;
+        }
+        //将卡数据转化为数据bean，相当于解析数据。这一步解析数据
+        NfcResult nfcResult = WxPosLib.getInstance().getCardMessage(cardData, flipCardNum, "", "", "", "", "");
+        AppLogUtils.d("Card M1 nfcResult = " + nfcResult);
+        if (nfcResult == null) {
+            if (mOnScanCardListen != null) {
+                mOnScanCardListen.onScanCard("读卡失败", null);
+            }
+            return;
+        }
+        AppLogUtils.d("nfcResult = " + nfcResult);
+        if (mOnScanCardListen != null) {
+            mOnScanCardListen.onScanCard(nfcResult.getUserName(), nfcResult.getStudentId());
+        }
+    }
+
 
 }

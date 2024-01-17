@@ -17,9 +17,10 @@ public interface IUnionCard {
     String search();
 
     /**
-     * 该方法相当于 先getCardType + 后search
-     * 获取类型并校验卡号
-     * @return      返回卡号
+     * 校验卡号并读取数据
+     * @param type              类型
+     * @param cardNo            卡号
+     * @return                  卡数据
      */
-    String verify();
+    String verify(CardType type ,String cardNo);
 }

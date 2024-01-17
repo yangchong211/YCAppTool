@@ -2,7 +2,6 @@ package com.yc.cardmanager;
 
 import com.yc.cpucard.AbstractCpuCard;
 import com.yc.mifarecard.AbstractM1Card;
-import com.yc.toolutils.AppLogUtils;
 
 public abstract class AbsUnionCard implements IUnionCard {
 
@@ -16,11 +15,7 @@ public abstract class AbsUnionCard implements IUnionCard {
     }
 
     @Override
-    public String verify() {
-        CardType verifyCardType = getCardType();
-        if (verifyCardType != CardType.NONE) {
-            AppLogUtils.d(TAG + verifyCardType);
-        }
-        return search();
+    public String verify(CardType type, String cardNo) {
+        return null;
     }
 }
