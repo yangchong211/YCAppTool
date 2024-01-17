@@ -78,7 +78,6 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':ApplicationLib')
-    implementation project(path: ':BusinessInterface')
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':ArchitectureLib')
 

@@ -18,7 +18,7 @@
 ANDROID_ABI:UNINITIALIZED=armeabi-v7a
 
 //No help, variable specified on the command line.
-ANDROID_NDK:UNINITIALIZED=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462
+ANDROID_NDK:UNINITIALIZED=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570
 
 //No help, variable specified on the command line.
 ANDROID_PLATFORM:UNINITIALIZED=android-17
@@ -27,10 +27,10 @@ ANDROID_PLATFORM:UNINITIALIZED=android-17
 CMAKE_ANDROID_ARCH_ABI:UNINITIALIZED=armeabi-v7a
 
 //No help, variable specified on the command line.
-CMAKE_ANDROID_NDK:UNINITIALIZED=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462
+CMAKE_ANDROID_NDK:UNINITIALIZED=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570
 
 //Archiver
-CMAKE_AR:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-ar
+CMAKE_AR:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-ar
 
 //Flags used by the compiler during all build types.
 CMAKE_ASM_FLAGS:STRING=
@@ -123,7 +123,7 @@ CMAKE_INSTALL_PREFIX:PATH=/usr/local
 CMAKE_LIBRARY_OUTPUT_DIRECTORY:UNINITIALIZED=/Users/yc/github/YCAppTool/AppJni/build/intermediates/cmake/debug/obj/armeabi-v7a
 
 //Path to a program.
-CMAKE_LINKER:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-ld
+CMAKE_LINKER:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-ld
 
 //No help, variable specified on the command line.
 CMAKE_MAKE_PROGRAM:UNINITIALIZED=/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja
@@ -144,19 +144,19 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_NM:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-nm
+CMAKE_NM:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-nm
 
 //Path to a program.
-CMAKE_OBJCOPY:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-objcopy
+CMAKE_OBJCOPY:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-objcopy
 
 //Path to a program.
-CMAKE_OBJDUMP:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-objdump
+CMAKE_OBJDUMP:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-objdump
 
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=Project
 
 //Ranlib
-CMAKE_RANLIB:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-ranlib
+CMAKE_RANLIB:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-ranlib
 
 //Flags used by the linker during the creation of dll's.
 CMAKE_SHARED_LINKER_FLAGS:STRING=
@@ -196,7 +196,7 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_STRIP:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-strip
+CMAKE_STRIP:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-strip
 
 //No help, variable specified on the command line.
 CMAKE_SYSTEM_NAME:UNINITIALIZED=Android
@@ -205,7 +205,7 @@ CMAKE_SYSTEM_NAME:UNINITIALIZED=Android
 CMAKE_SYSTEM_VERSION:UNINITIALIZED=17
 
 //The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake
+CMAKE_TOOLCHAIN_FILE:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -220,10 +220,10 @@ Project_BINARY_DIR:STATIC=/Users/yc/github/YCAppTool/AppJni/.cxx/cmake/debug/arm
 Project_SOURCE_DIR:STATIC=/Users/yc/github/YCAppTool/AppJni/src/main/cpp
 
 //Path to a library.
-log-lib:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/17/liblog.so
+log-lib:FILEPATH=/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/17/liblog.so
 
 //Dependencies for the target
-test_crash_LIB_DEPENDS:STATIC=general;/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/17/liblog.so;
+test_crash_LIB_DEPENDS:STATIC=general;/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/17/liblog.so;
 
 
 ########################

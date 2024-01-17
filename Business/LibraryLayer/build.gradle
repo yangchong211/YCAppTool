@@ -117,11 +117,9 @@ dependencies {
     api 'com.github.yangchong211.YCBannerView:GalleryBannerLib:2.3.6'
 
     //ServiceLoader
-    api 'com.github.yangchong211.YCAppTool:ServiceLoaderApi:1.4.3'
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':EventUploadLib')
     implementation project(path: ':AppContextLib')
-    annotationProcessor 'com.github.yangchong211.YCAppTool:ServiceLoaderProcessor:1.4.3'
 
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':WebViewLib')
@@ -130,10 +128,8 @@ dependencies {
     implementation project(path: ':AppStateLib')
     implementation project(path: ':StatusBarLib')
     implementation project(path: ':ThreadPoolLib')
-    implementation project(path: ':BusinessInterface')
     implementation project(path: ':HttpServer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':CountTimerLib')
-
     implementation project(path: ':RoundCorners')
 }

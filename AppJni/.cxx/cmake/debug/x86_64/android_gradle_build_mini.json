@@ -1,8 +1,8 @@
 {
   "buildFiles": [
     "/Users/yc/github/YCAppTool/AppJni/src/main/cpp/CMakeLists.txt",
-    "/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
-    "/Users/yangchong/Library/Android/sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+    "/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake",
+    "/Users/yangchong/Library/Android/sdk/ndk/20.0.5594570/build/cmake/platforms.cmake"
   ],
   "cleanCommands": [
     "/Users/yangchong/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/yc/github/YCAppTool/AppJni/.cxx/cmake/debug/x86_64\" clean"

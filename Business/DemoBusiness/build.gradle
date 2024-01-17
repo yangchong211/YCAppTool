@@ -61,7 +61,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["material"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation project(path: ':MonitorNetLib')
-    implementation project(path: ':BusinessInterface')
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':SerialTaskLib')
     implementation project(path: ':ThreadPoolLib')
@@ -82,7 +81,6 @@ dependencies {
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     implementation 'com.github.yangchong211.YCDialog:DialogFragment:3.6.8'
     implementation project(path: ':ToolUtilsLib')
-    api project(path: ':BusinessInterface')
     implementation project(path: ':ApplicationLib')
     implementation project(path: ':LooperThread')
     implementation project(path: ':AppCoordinatorLayout')

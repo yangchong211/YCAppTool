@@ -227,7 +227,6 @@ dependencies {
 //    implementation project(path: ':MvvmDatabinding')
 //    implementation project(path: ':MvvmTodoLive')
 //    implementation project(path: ':MvcTodoBusiness')
-    implementation project(path: ':BusinessInterface')
     implementation project(path: ':ThreadPoolLib')
 //    implementation project(path: ':JetpackBusiness')
     implementation project(path: ':AppProcessLib')

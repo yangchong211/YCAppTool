@@ -10,12 +10,11 @@ include ':AppServer'
 include ':AppCommon'
 include ':AppWebView'
 include ':AppTool'
-include ':AppHardware'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
 include ':AnimBusiness', ':MvvmDatabinding', ':DemoBusiness', ':MvpTodoBusiness',
-        ':MvvmTodoLive', ':JetpackBusiness', ':BusinessInterface', ':StatusBusiness',
+        ':MvvmTodoLive', ':JetpackBusiness', ':StatusBusiness',
         ':BleBusiness', ':NotifyBusiness', ':KotlinBusiness',
         ':SocketBusiness', ':LibraryLayer'
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -24,7 +23,6 @@ project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
 project(':MvpTodoBusiness').projectDir = new File('Business/MvpTodoBusiness')
 project(':MvvmDatabinding').projectDir = new File('Business/MvvmDatabinding')
 project(':MvvmTodoLive').projectDir = new File('Business/MvvmTodoLive')
-project(':BusinessInterface').projectDir = new File('Business/BusinessInterface')
 project(':StatusBusiness').projectDir = new File('Business/StatusBusiness')
 project(':BleBusiness').projectDir = new File('Business/BleBusiness')
 project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')
@@ -322,6 +320,10 @@ project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
 
 
 /* +++++++++ 硬件相关 +++++++++ */
+//demo
+include ':AppHardware'
+project(':AppHardware').projectDir = new File('Hardware/AppHardware')
+//库
 include ':MifareCard', ':CpuCard','SecondaryScreen',':UsbManager',':SerialPort', ':CardManager',
         ':KeyEventLib'
 project(':MifareCard').projectDir = new File('Hardware/MifareCard')

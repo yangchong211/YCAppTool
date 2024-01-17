@@ -52,8 +52,8 @@ android {
         cmake {
             //声明cmake配置文件路径
             path "src/main/cpp/CMakeLists.txt"
-            //声明cmake版本
-            version "3.10.2"
+            //声明cmake版本，这个需要和在SDK Manager中切换CMake版本匹配
+            version "3.18.1"
         }
     }
 
