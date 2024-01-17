@@ -8,6 +8,7 @@ public final class CardHelper {
     private static volatile CardHelper singleton = null;
     private AbstractM1Card m1Card;
     private AbstractCpuCard cpuCard;
+    private AbsUnionCard unionCard;
 
     /**
      * 获取单例
@@ -43,5 +44,13 @@ public final class CardHelper {
 
     public void setCpuCard(AbstractCpuCard cpuCard) {
         this.cpuCard = cpuCard;
+    }
+
+    public AbsUnionCard getUnionCard() {
+        return unionCard;
+    }
+
+    public void setUnionCard(AbsUnionCard unionCard) {
+        this.unionCard = unionCard;
     }
 }

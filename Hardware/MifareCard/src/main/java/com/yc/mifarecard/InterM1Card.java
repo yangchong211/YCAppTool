@@ -10,7 +10,7 @@ public interface InterM1Card {
      *
      * @return 获取卡号
      */
-    String searchNo();
+    String search();
 
     /**
      * 读取卡数据

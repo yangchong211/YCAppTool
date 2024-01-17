@@ -15,6 +15,7 @@ import com.yc.apphardware.card.lib.ResultMasage;
 import com.yc.bytetoolutils.ByteUtils;
 import com.yc.bytetoolutils.BytesHexStrUtils;
 import com.yc.cardmanager.CardHelper;
+import com.yc.cardmanager.CardType;
 import com.yc.cpucard.CpuResultMessage;
 import com.yc.soundpool.SoundPoolPlayer;
 import com.yc.toolutils.AppLogUtils;
@@ -314,21 +315,34 @@ public class ScanCardManager {
                         e.printStackTrace();
                     }
                 } else {
-                    CardReadManager.CardType cardType = CardReadManager.getInstance().SearchCardType();
-                    //AppLogUtils.d("Card 开始寻卡 " + cardType.getCardType() + " , " + cardType.getCardNo());
-                    if (cardType.getCardType() == CardReadManager.CardType.M1_CARD.getCardType()) {
-                        SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep).play();
-                        String cardNum = cardType.getCardNo();
-//                        decodeM1Card(cardNum);
-
-                        decodeM1Card2(cardNum);
-
-                    } else if (cardType.getCardType() == CardReadManager.CardType.CPU_CARD.getCardType()) {
-                        SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep).play();
-                        String cardNum = cardType.getCardNo();
-//                        decodeCpuCard(cardNum);
-                        decodeCpuCard2(cardNum);
+                    CardType cardType = CardHelper.getInstance().getUnionCard().getCardType();
+                    String cardNum = CardHelper.getInstance().getUnionCard().search();
+                    if (!TextUtils.isEmpty(cardNum)) {
+                        if (cardType == CardType.M1) {
+                            SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep).play();
+                            decodeM1Card2(cardNum);
+                        } else if (cardType == CardType.CPU) {
+                            SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep).play();
+                            decodeCpuCard2(cardNum);
+                        }
                     }
+
+
+//                    CardReadManager.CardType cardType = CardReadManager.getInstance().SearchCardType();
+//                    //AppLogUtils.d("Card 开始寻卡 " + cardType.getCardType() + " , " + cardType.getCardNo());
+//                    if (cardType.getCardType() == CardReadManager.CardType.M1_CARD.getCardType()) {
+//                        SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep).play();
+//                        String cardNum = cardType.getCardNo();
+////                        decodeM1Card(cardNum);
+//
+//                        decodeM1Card2(cardNum);
+//
+//                    } else if (cardType.getCardType() == CardReadManager.CardType.CPU_CARD.getCardType()) {
+//                        SoundPoolPlayer.create(AppToolUtils.getApp(), R.raw.beep).play();
+//                        String cardNum = cardType.getCardNo();
+////                        decodeCpuCard(cardNum);
+//                        decodeCpuCard2(cardNum);
+//                    }
                     try {
                         Thread.sleep(100);
                     } catch (Exception e) {

@@ -32,7 +32,7 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 
 
 /* +++++++++ 框架业务服务层 +++++++++ */
-include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
+include ':ImageServer', ':HttpServer', ':ShareServer',
         ':GsonServer', ':IpcServer', ':ObjectEqualLib', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
@@ -41,7 +41,6 @@ include ':ImageServer', ':HttpServer', ':ShareServer', ':NfcServer',
 project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
-project(':NfcServer').projectDir = new File('ServerLib/NfcServer')
 project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
 project(':AppLogClient').projectDir = new File('ServerLib/AppLogClient')
 project(':AppLogService').projectDir = new File('ServerLib/AppLogService')
@@ -324,7 +323,7 @@ project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
 include ':AppHardware'
 project(':AppHardware').projectDir = new File('Hardware/AppHardware')
 //库
-include ':MifareCard', ':CpuCard','SecondaryScreen',':UsbManager',':SerialPort', ':CardManager',
+include ':MifareCard', ':CpuCard','SecondaryScreen',':UsbManager',':SerialPort', ':CardManager', ':NfcHelper',
         ':KeyEventLib'
 project(':MifareCard').projectDir = new File('Hardware/MifareCard')
 project(':CpuCard').projectDir = new File('Hardware/CpuCard')
@@ -333,6 +332,7 @@ project(':CardManager').projectDir = new File('Hardware/CardManager')
 project(':UsbManager').projectDir = new File('Hardware/UsbManager')
 project(':SerialPort').projectDir = new File('Hardware/SerialPort')
 project(':KeyEventLib').projectDir = new File('Hardware/KeyEventLib')
+project(':NfcHelper').projectDir = new File('Hardware/NfcHelper')
 
 
 

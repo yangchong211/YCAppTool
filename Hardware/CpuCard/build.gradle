@@ -27,4 +27,5 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation(rootProject.ext.dependencies["appcompat"])
+    implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
 }

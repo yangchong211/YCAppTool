@@ -16,8 +16,9 @@ public class TestCardActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        CardHelper.getInstance().setM1Card(new M1CardImpl());
-        CardHelper.getInstance().setCpuCard(new CpuCardImpl());
+//        CardHelper.getInstance().setM1Card(new M1CardImpl());
+//        CardHelper.getInstance().setCpuCard(new CpuCardImpl());
+        CardHelper.getInstance().setUnionCard(new UnionCardImpl(new M1CardImpl(),new CpuCardImpl()));
         startScanCard();
         AppLogUtils.d("Card M1CardActivity");
     }

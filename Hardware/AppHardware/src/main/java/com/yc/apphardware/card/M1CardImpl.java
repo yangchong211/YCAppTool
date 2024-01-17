@@ -19,14 +19,15 @@ public class M1CardImpl extends AbstractM1Card {
     private static final String M1Secret = "99a1ccc6bb40a8339e7c65445b6c7b09b6214065d3e023439b052d32f12c7d8c";
 
     @Override
-    public String searchNo() {
-        CardReadManager.CardType cardType = CardReadManager.getInstance().SearchCardType();
-        String carNumberOrigin = cardType.getCardNo();
+    public String search() {
+//        CardReadManager.CardType cardType = CardReadManager.getInstance().SearchCardType();
+//        String carNumberOrigin = cardType.getCardNo();
+        String carNumberOrigin = CardReadManager.getInstance().CardSearch();
         String newCarNumber = carNumberOrigin;
         if (!TextUtils.isEmpty(newCarNumber) && newCarNumber.length() == 8) {
             cardNumber = WeCardCardHelper.flipCardNum(newCarNumber);
         }
-        AppLogUtils.d("Card M1 开始寻卡 " + cardType.getCardType() + " , " + cardType.getCardNo());
+        AppLogUtils.d("Card M1 开始寻卡 " + carNumberOrigin);
         return carNumberOrigin;
     }
 

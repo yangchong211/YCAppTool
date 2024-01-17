@@ -11,15 +11,18 @@ import java.util.Arrays;
 
 public class CpuCardImpl extends AbstractCpuCard {
 
+    private static final String TAG = "Card CPU : ";
 
     @Override
     public String search() {
         //开始寻卡
-        CardReadManager.CardType cardType = CardReadManager.getInstance().SearchCardType();
-        String carNumber = cardType.getCardNo();
+//        CardReadManager.CardType cardType = CardReadManager.getInstance().SearchCardType();
+//        String carNumber = cardType.getCardNo();
+        String carNumber = CardReadManager.getInstance().CardSearch();
         if (!TextUtils.isEmpty(carNumber) && carNumber.length() == 8) {
             carNumber = WeCardCardHelper.flipCardNum(carNumber);
         }
+        AppLogUtils.d(TAG + carNumber);
         return carNumber;
     }
 
@@ -44,14 +47,14 @@ public class CpuCardImpl extends AbstractCpuCard {
             result[0] = "0000";
         }
         //[0000, null]
-        AppLogUtils.d("Card CPU 发送指令数据 " + Arrays.toString(result));
+        AppLogUtils.d(TAG+"发送指令数据 " + Arrays.toString(result));
         return result;
     }
 
     @Override
     public byte[] reset() {
         byte[] bytes = CardReadManager.getInstance().CardCpuReset();
-        AppLogUtils.d("Card CPU 复位 " + BytesHexStrUtils.bytesToHex(bytes));
+        AppLogUtils.d(TAG+"复位 " + BytesHexStrUtils.bytesToHex(bytes));
         return bytes;
     }
 }

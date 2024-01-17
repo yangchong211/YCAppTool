@@ -203,7 +203,7 @@ dependencies {
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ImageServer')
     implementation project(path: ':ZxingServerLib')
-    implementation project(path: ':NfcServer')
+    implementation project(path: ':NfcHelper')
     implementation project(path: ':LongAliveLib')
     implementation project(path: ':MonitorNetLib')
     implementation project(path: ':BannerViewLib')

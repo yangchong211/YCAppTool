@@ -22,4 +22,5 @@ public interface IM1Function {
      */
     ArrayList<String> getCardSecretList(String secret);
 
+
 }
