@@ -1,6 +1,5 @@
-package com.yc.reboothelper;
+package com.yc.apprestartlib;
 
-import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Process;

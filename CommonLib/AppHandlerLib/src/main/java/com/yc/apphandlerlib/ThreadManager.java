@@ -1,4 +1,4 @@
-package com.yc.handlerthread;
+package com.yc.apphandlerlib;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -59,7 +59,7 @@ public final class ThreadManager {
             try {
                 BaseHandlerThread handlerThread;
                 if (mHandlerThreadMap.containsKey(type) && mHandlerThreadMap.get(type) != null) {
-                    handlerThread = (BaseHandlerThread) mHandlerThreadMap.get(type);
+                    handlerThread = mHandlerThreadMap.get(type);
                     if (handlerThread == null) {
                         return null;
                     }

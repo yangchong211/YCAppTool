@@ -1,4 +1,4 @@
-package com.yc.handlerthread;
+package com.yc.apphandlerlib;
 
 import android.os.Handler;
 import android.os.HandlerThread;

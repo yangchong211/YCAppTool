@@ -1,7 +1,6 @@
-package com.yc.reboothelper;
+package com.yc.apprestartlib;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.os.Process;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;

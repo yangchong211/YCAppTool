@@ -1,18 +1,17 @@
 /* +++++++++ 主项目 +++++++++ */
-include ':AppGrpc'
-include ':AppHelper'
-include ':AppPlayer'
-include ':AppLeet'
-include ':AppDesign'
-include ':AppMonitor'
-include ':AppWidget'
-include ':AppServer'
-include ':AppCommon'
-include ':AppWebView'
-include ':AppTool'
 
 
 /* +++++++++ 业务组件层 +++++++++ */
+include ':AppGrpc'
+project(':AppGrpc').projectDir = new File('Business/AppGrpc')
+include ':AppHelper'
+project(':AppHelper').projectDir = new File('Business/AppHelper')
+include ':AppLeet'
+project(':AppLeet').projectDir = new File('Business/AppLeet')
+include ':AppDesign'
+project(':AppDesign').projectDir = new File('Business/AppDesign')
+include ':AppWebView'
+project(':AppWebView').projectDir = new File('Business/AppWebView')
 include ':AnimBusiness', ':MvvmDatabinding', ':DemoBusiness', ':MvpTodoBusiness',
         ':MvvmTodoLive', ':JetpackBusiness', ':StatusBusiness',
         ':BleBusiness', ':NotifyBusiness', ':KotlinBusiness',
@@ -32,6 +31,10 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 
 
 /* +++++++++ 框架业务服务层 +++++++++ */
+//demo
+include ':AppServer'
+project(':AppServer').projectDir = new File('ServerLib/AppServer')
+//库
 include ':ImageServer', ':HttpServer', ':ShareServer',
         ':GsonServer', ':IpcServer', ':ObjectEqualLib', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
@@ -62,6 +65,10 @@ project(':HeartBeatServer').projectDir = new File('ServerLib/HeartBeatServer')
 
 
 /* +++++++++ 框架公共组件层 +++++++++ */
+//案例
+include ':AppCommon'
+project(':AppCommon').projectDir = new File('CommonLib/AppCommon')
+//库
 include ':AppStatusLib', ':ToolUtilsLib', ':FragmentManager',
         ':ApplicationLib', ':ParallelTaskLib', ':AppBaseStore',
         ':BaseClassLib', ':ReflectionLib', ':AppLogLib', ':AppRestartLib', ':SafeIntentLib',
@@ -121,6 +128,10 @@ project(':ByteToolUtils').projectDir = new File('CommonLib/ByteToolUtils')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
+//demo
+include ':AppWidget'
+project(':AppWidget').projectDir = new File('WidgetLib/AppWidget')
+//库
 include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':ZoomImageLib', ':LargeImageLib',
         ':SwipeBackLib', ':StatusBarLib', ':AppStateLib', ':WebViewLib',
@@ -174,13 +185,17 @@ project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinator
 
 
 /* +++++++++ 框架基础工具库 +++++++++ */
+//demo
+include ':AppTool'
+project(':AppTool').projectDir = new File('ToolLib/AppTool')
+//库
 include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':EasySocket',
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',':InterceptorTime',
         ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':LooperThread',
         ':AnimatorHelper', ':ThreadDebugLib', ':AppUpdateLib',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib',
-        ':HandlerThread', ':CameraOpen', ':SqlLiteLib', ':RebootHelper'
+         ':CameraOpen', ':SqlLiteLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
@@ -206,10 +221,8 @@ project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
 project(':EasySocket').projectDir = new File('ToolLib/EasySocket')
 project(':LooperThread').projectDir = new File('ToolLib/LooperThread')
 project(':InterceptorTime').projectDir = new File('ToolLib/InterceptorTime')
-project(':HandlerThread').projectDir = new File('ToolLib/HandlerThread')
 project(':CameraOpen').projectDir = new File('ToolLib/CameraOpen')
 project(':SqlLiteLib').projectDir = new File('ToolLib/SqlLiteLib')
-project(':RebootHelper').projectDir = new File('ToolLib/RebootHelper')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -230,6 +243,10 @@ project(':RebootHelper').projectDir = new File('ToolLib/RebootHelper')
 
 
 /* +++++++++ App监控库 +++++++++ */
+//demo
+include ':AppMonitor'
+project(':AppMonitor').projectDir = new File('MonitorLib/AppMonitor')
+//库
 include ':MonitorCpuLib', ':MonitorCatonLib', ':MonitorAnrLib', ':MonitorCrashLib',
         ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
         ':MonitorXposed', ':MonitorMemory',':MonitorLeakLib',
@@ -262,6 +279,10 @@ project(':MonitorFlow').projectDir = new File('MonitorLib/MonitorFlow')
 
 
 /* +++++++++ 音视频 +++++++++ */
+//demo
+include ':AppPlayer'
+project(':AppPlayer').projectDir = new File('PlayerLib/AppPlayer')
+//库
 include ':VideoSqlLite', ':VideoCache', ':AudioPlayer', ':VideoSurface', ':SoundPool',':EasyMediaPlayer',
         ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView',':EasyTtsPlayer',
         ':BellsVibrations', ':AudioHelper', ':MediaScanner'
@@ -358,5 +379,3 @@ project(':usbCameraTest6').projectDir = new File('JniNdkLib/usbCameraTest6')
 project(':usbCameraTest7').projectDir = new File('JniNdkLib/usbCameraTest7')
 project(':usbCameraTest8').projectDir = new File('JniNdkLib/usbCameraTest8')
 
-
-include ':serialportlibrary'

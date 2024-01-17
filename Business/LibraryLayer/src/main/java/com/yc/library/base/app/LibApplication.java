@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import androidx.multidex.MultiDex;
 import android.util.Log;
 
-import com.yc.businessinterface.BusinessTransfer;
 import com.yc.eventuploadlib.LoggerReporter;
 import com.yc.library.LoggerReporterImpl;
 import com.yc.library.base.config.AppConfig;
@@ -87,7 +86,6 @@ public class LibApplication extends Application {
     }
 
     private void initSetTransfer() {
-        BusinessTransfer.$().injectBusinessImpl();
     }
 
 
