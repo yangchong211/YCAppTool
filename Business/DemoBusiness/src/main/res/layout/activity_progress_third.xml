@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:text="重新开始"/>
     </LinearLayout>
+
     <com.yc.ycprogresslib.NumberProgressbar
         android:id="@+id/bar2"
         android:layout_marginTop="10dp"

@@ -1,6 +1,10 @@
 package com.yc.other.ui.activity;
 
+import android.os.Bundle;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
@@ -15,22 +19,24 @@ import com.yc.ycprogresslib.ProgressBarUtils;
  *     time  : 2016/2/10
  *     desc  : 自定义进度条，新芽，沙丘大学下载进度条
  *     revise: 参考案例：夏安明博客http://blog.csdn.net/xiaanming/article/details/10298163
- *             案例地址：https://github.com/yangchong211/YCProgress
+ *             案例地址：<a href="https://github.com/yangchong211/YCProgress">...</a>
  * </pre>
  */
-public class ProgressThirdActivity extends BaseActivity implements View.OnClickListener {
+public class ProgressThirdActivity extends AppCompatActivity implements View.OnClickListener {
 
     private NumberProgressbar bar1;
     private NumberProgressbar bar2;
 
 
     @Override
-    public int getContentView() {
-        return R.layout.activity_progress_third;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_progress_third);
+        initView();
+        initListener();
     }
 
-    @Override
-    public void initView() {
+    private void initView() {
 
         bar1 = findViewById(R.id.bar1);
         //设置倒计时总时间
@@ -63,19 +69,13 @@ public class ProgressThirdActivity extends BaseActivity implements View.OnClickL
 
     }
 
-    @Override
-    public void initListener() {
+    private void initListener() {
         findViewById(R.id.btn_11).setOnClickListener(this);
         findViewById(R.id.btn_12).setOnClickListener(this);
         findViewById(R.id.btn_13).setOnClickListener(this);
         findViewById(R.id.btn_21).setOnClickListener(this);
         findViewById(R.id.btn_22).setOnClickListener(this);
         findViewById(R.id.btn_23).setOnClickListener(this);
-    }
-
-    @Override
-    public void initData() {
-
     }
 
     @Override

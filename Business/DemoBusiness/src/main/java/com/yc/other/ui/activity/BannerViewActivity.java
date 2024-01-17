@@ -18,7 +18,6 @@ import com.yc.gallerybannerlib.GalleryLinearSnapHelper;
 import com.yc.gallerybannerlib.GalleryRecyclerView;
 import com.yc.gallerybannerlib.GalleryScaleTransformer;
 import com.yc.library.base.mvp.BaseActivity;
-import com.yc.other.ui.adapter.MeBannerAdapter;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.other.R;

@@ -12,7 +12,6 @@ import com.yc.other.R;
 
 public class TestActivity extends BaseActivity implements View.OnClickListener {
 
-    private final IAnimServiceProvider mDelegate = ServiceLoader.load(IAnimServiceProvider.class).get();
 
 
     /**
