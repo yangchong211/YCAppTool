@@ -15,12 +15,9 @@ import java.io.OutputStream;
 public final class SerialPort {
 
     private static final String TAG = "SerialPort";
-    /**
-     * 不要删除或重命名字段mFd:原生方法close()使用了该字段
-     */
-    private FileDescriptor mFd;
-    private FileInputStream mFileInputStream;
-    private FileOutputStream mFileOutputStream;
+    private final FileDescriptor mFd;
+    private final FileInputStream mFileInputStream;
+    private final FileOutputStream mFileOutputStream;
     /**
      * 有些设备su路径是/system/xbin/su
      */
@@ -37,6 +34,12 @@ public final class SerialPort {
         mSuPath = suPath;
     }
 
+    /**
+     * 打开串口
+     * @param device 串口路径，根据你的设备不同，路径也不同
+     * @param baudrate 波特率
+     * @param flags flags 给0就好
+     */
     public SerialPort(File device, int baudrate, int flags) throws SecurityException, IOException {
         /* 检查访问权限 */
         if (!device.canRead() || !device.canWrite()) {
@@ -53,6 +56,9 @@ public final class SerialPort {
                 throw new SecurityException();
             }
         }
+        /**
+         * 不要删除或重命名字段mFd:原生方法close()使用了该字段
+         */
         mFd = open(device.getAbsolutePath(), baudrate, flags);
         if (mFd == null) {
             Log.i(TAG, "open() return null");

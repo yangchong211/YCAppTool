@@ -11,14 +11,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class MySerialPort {
+public class MySerialPort extends BaseSerialPort {
 
     private String mPort;
     private int mIBaudRate;
-
-    SerialPort mSerialPort;
-    OutputStream mOutputStream;
-    InputStream mInputStream;
 
     private static byte cSTX = 0x02;    //包头
     private static byte cFrame = 0x00;    //包序号
@@ -36,28 +32,17 @@ public class MySerialPort {
     public static long read_time;
 
     public MySerialPort() {
-        try {
-            if (mSerialPort == null) {
-                setSerialPort();
-                //mSerialPort.setSuPath("/system/xbin/su");
-                mSerialPort = new SerialPort(new File(mPort), mIBaudRate, 0);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (mSerialPort != null) {
-            mOutputStream = mSerialPort.getOutputStream();
-            mInputStream = mSerialPort.getInputStream();
-        }
+        setSerialPort();
+        open(mPort, mIBaudRate);
     }
 
-    public void setSerialPort() {
+    private void setSerialPort() {
         String product_model = Build.MODEL;
         if (product_model.contains("SP306+/SP308+") || product_model.contains("SP306/SP308")) {
             mPort = "/dev/ttyMT1";
             mIBaudRate = 115200;
-        } else if (product_model.contains("SP801") || product_model.contains("FR35") || product_model.contains("SP806") || product_model.contains("S225")) {
+        } else if (product_model.contains("SP801") || product_model.contains("FR35")
+                || product_model.contains("SP806") || product_model.contains("S225")) {
             mPort = "/dev/ttyS4";
             mIBaudRate = 115200;
         } else if (product_model.contains("SP805")) {
@@ -121,9 +106,7 @@ public class MySerialPort {
         }
 
         mInputStream.skip(mInputStream.available());
-        mOutputStream.write(bOutArray);
-        mOutputStream.flush();
-
+        writeByte(bOutArray);
         return readData(mInputStream);
     }
 
@@ -178,14 +161,6 @@ public class MySerialPort {
                 continue;
             }
             return readData;
-        }
-    }
-
-    //----------------------------------------------------
-    public void close() {
-        if (mSerialPort != null) {
-            mSerialPort.close();
-            mSerialPort = null;
         }
     }
 
