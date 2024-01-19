@@ -86,12 +86,9 @@ public class SoundPoolPlayer extends SoundPool {
     private void loadAndPlay() {
         duration = getSoundDuration(resId);
         soundId = super.load(context, resId, 1);
-        setOnLoadCompleteListener(new OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                loaded = true;
-                playIt();
-            }
+        setOnLoadCompleteListener((soundPool, sampleId, status) -> {
+            loaded = true;
+            playIt();
         });
     }
 

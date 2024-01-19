@@ -34,3 +34,7 @@
 
 
 ### 05.其他问题说明
+
+
+### 参考博客
+- https://github.com/licheedev/Android-SerialPort-API/tree/master/serialport
