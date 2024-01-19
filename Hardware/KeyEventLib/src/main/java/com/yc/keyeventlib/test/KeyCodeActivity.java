@@ -1,8 +1,6 @@
-package com.yc.keyeventlib.demo;
+package com.yc.keyeventlib.test;
 
 
-import android.content.ComponentName;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.TextView;
@@ -15,7 +13,6 @@ import com.yc.keyeventlib.board.AndroidKeyBoard;
 import com.yc.keyeventlib.board.KeyEventManager;
 import com.yc.keyeventlib.board.ResultCallback;
 import com.yc.keyeventlib.code.IKeyEvent;
-import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppLogUtils;
 
 public class KeyCodeActivity extends AppCompatActivity {

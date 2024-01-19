@@ -1,4 +1,4 @@
-package com.yc.keyeventlib.demo;
+package com.yc.keyeventlib.test;
 
 
 import android.os.Bundle;
