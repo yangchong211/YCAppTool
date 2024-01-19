@@ -122,21 +122,8 @@ public class MySerialPort extends BaseSerialPort {
                 Thread.sleep(10);
                 continue;
             }
+            String readData = readData();
 
-            StringBuilder sb = new StringBuilder();
-            byte[] buffer = new byte[512];
-
-            while ((is.available()) != 0) {
-                int len = is.read(buffer);
-
-                byte[] dataByte = new byte[len];
-                System.arraycopy(buffer, 0, dataByte, 0, len);
-                String data = MyConverterTool.ByteArrToHex(dataByte);
-
-                sb.append(data);
-            }
-
-            String readData = sb.toString();
             if (CardReadManager.getInstance().getDebugStatus()) {
                 Log.i("CardComm", "read data is : " + readData);
             }

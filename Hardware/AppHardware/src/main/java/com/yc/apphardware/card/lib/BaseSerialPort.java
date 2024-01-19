@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class BaseSerialPort implements ISerialPort{
+public class BaseSerialPort implements ISerialPort {
 
     protected SerialPort mSerialPort;
     protected OutputStream mOutputStream;
@@ -42,6 +42,20 @@ public class BaseSerialPort implements ISerialPort{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public String readData() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        byte[] buffer = new byte[512];
+        while ((mInputStream.available()) != 0) {
+            int len = mInputStream.read(buffer);
+            byte[] dataByte = new byte[len];
+            System.arraycopy(buffer, 0, dataByte, 0, len);
+            String data = MyConverterTool.ByteArrToHex(dataByte);
+            sb.append(data);
+        }
+        return sb.toString();
     }
 
     @Override
