@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.yc.cpucard.CpuResultMessage;
 
+import java.io.IOException;
+
 
 public class CardReadManager {
 
@@ -1091,7 +1093,11 @@ public class CardReadManager {
 	}
 
     public void destory() {
-        mySerialPort.close();
+        try {
+            mySerialPort.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         INSTANCE = null;
     }
 }

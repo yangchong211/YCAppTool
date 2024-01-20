@@ -12,6 +12,7 @@ public interface ISerialPort {
     void open(String port, int flag);
 
     /**
+     * 发送数据
      * 往串口中写入数据
      *
      * @param data 数据
@@ -19,6 +20,7 @@ public interface ISerialPort {
     void writeByte(byte[] data);
 
     /**
+     * 接受数据
      * 读取串口数据
      *
      * @return 数据
@@ -29,5 +31,5 @@ public interface ISerialPort {
     /**
      * 关闭串口
      */
-    void close();
+    void close() throws IOException;
 }

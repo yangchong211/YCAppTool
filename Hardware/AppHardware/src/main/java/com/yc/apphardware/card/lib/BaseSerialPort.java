@@ -59,10 +59,16 @@ public class BaseSerialPort implements ISerialPort {
     }
 
     @Override
-    public void close() {
+    public void close() throws IOException {
         if (mSerialPort != null) {
             mSerialPort.close();
             mSerialPort = null;
+        }
+        if (mInputStream!= null) {
+            mInputStream.close();
+        }
+        if (mOutputStream != null) {
+            mOutputStream.close();
         }
     }
 

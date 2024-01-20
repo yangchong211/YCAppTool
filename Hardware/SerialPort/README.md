@@ -21,6 +21,22 @@
     - 通过 USB 从机接口接收/发送数据
 
 
+#### 1.2 什么是串口通信
+- 串行端口 (SerialPort)简称：串口
+    - 主要用于数据被逐位按顺序传送的通讯方式称为串口通讯（简单来讲就是按顺序一位一位地传输数据）。
+
+
+#### 1.3 串口通信原理
+- 串口通信（Serial Communications）的概念非常简单，串口按位（bit）发送和接收字节。
+    - 串口用于ASCII码字符的传输。通信使用3根线完成，分别是地线(GND)、发送(TX)、接收(RX)。
+    - 由于串口通信是异步的，端口能够在一根线上发送数据同时在另一根线上接收数据。其他线用于握手，但不是必须的。
+    - 串口通信最重要的参数是波特率、数据位、停止位和奇偶校验。对于两个进行通信的端口，这些参数必须匹配。
+
+
+#### 1.4 Android串口通信
+- Android SDK并没有在Framework层实现封装关于串口通信的类库。
+- Android是基于Linux kernel 2.6上的，所以我们可以像在Linux系统上一样来使用串口。因为Framework层中并没有封装关于串口通信的类库，所以我们需要通过Android NDK来实现打开、读写串口，然后提供接口供JAVA本地调用。
+
 
 
 
@@ -60,8 +76,9 @@
 
 
 
-#### 4.7 Android串口系统
 
+#### 4.7 Android串口系统
+- https://www.cnblogs.com/hackfun/p/7683512.html
 
 
 
@@ -74,7 +91,13 @@
 ### 参考博客
 - https://github.com/licheedev/Android-SerialPort-API/tree/master/serialport
 - Android 串口驱动和应用测试
-
+  - https://www.cnblogs.com/hackfun/p/7612617.html
+- android6.0 SerialPort 服务
+  - https://www.cnblogs.com/hackfun/p/7683512.html
+- Android串口通讯SerialPort(使用篇)
+  - https://blog.csdn.net/qq_42111674/article/details/123653870
+- Android串口通讯SerialPort(浅谈原理)
+  - https://blog.csdn.net/qq_42111674/article/details/123737732
 
 
 
