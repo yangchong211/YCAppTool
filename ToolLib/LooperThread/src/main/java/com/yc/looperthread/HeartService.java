@@ -1,8 +1,9 @@
-package com.yc.heartbeatserver;
+package com.yc.looperthread;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
@@ -13,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class HeartService extends Service {
+public class HeartService extends Service implements IDoAction{
 
     public static final String ACTION_HEART_BEAT = "com.yc.heart.ACTION_HEART_BEAT";
     public static final String ACTION_STOP = "com.yc.heart.ACTION_STOP";
@@ -62,6 +63,16 @@ public class HeartService extends Service {
         pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
+    public static class HeartReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (HeartService.ACTION_HEART_BEAT.equals(action)) {
+                HeartService.start(context);
+            }
+        }
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent == null) {
@@ -75,6 +86,26 @@ public class HeartService extends Service {
             releaseService();
         }
         return START_STICKY;
+    }
+
+    @Override
+    public void startThread() {
+
+    }
+
+    @Override
+    public void beginLoop() {
+
+    }
+
+    @Override
+    public void endLoop() {
+
+    }
+
+    @Override
+    public void release() {
+
     }
 
     /**

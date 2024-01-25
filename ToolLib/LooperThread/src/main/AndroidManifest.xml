@@ -2,4 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yc.looperthread">
 
+    <application>
+        <service android:name="com.yc.looperthread.HeartService"/>
+    </application>
+
+
 </manifest>
