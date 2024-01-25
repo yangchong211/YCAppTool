@@ -108,10 +108,12 @@ public class HeartService extends Service implements IDoAction{
 
     }
 
+
     /**
      * 做具体的操作
      */
-    private void doAction() {
+    @Override
+    public void doAction() {
 
     }
 
