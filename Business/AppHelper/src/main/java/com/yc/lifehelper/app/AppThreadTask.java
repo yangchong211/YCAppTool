@@ -46,19 +46,16 @@ public class AppThreadTask extends AbsParallelTask {
     }
 
     private void initNtpTime() {
-        DelegateTaskExecutor.getInstance().executeOnCore(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    NtpGetTime.build()
-                            .withNtpHost("time.ustc.edu.cn")
-                            .withSharedPreferencesCache(MainApplication.getInstance())
-                            .withConnectionTimeout(30000)
-                            .initialize();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    AppLogUtils.e("something went wrong when trying to initialize NtpGetTime "+ e);
-                }
+        DelegateTaskExecutor.getInstance().executeOnCore(() -> {
+            try {
+                NtpGetTime.build()
+                        .withNtpHost("time.ustc.edu.cn")
+                        .withSharedPreferencesCache(MainApplication.getInstance())
+                        .withConnectionTimeout(30000)
+                        .initialize();
+            } catch (IOException e) {
+                e.printStackTrace();
+                AppLogUtils.e("something went wrong when trying to initialize NtpGetTime "+ e);
             }
         });
     }
