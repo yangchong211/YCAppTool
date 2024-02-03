@@ -4,6 +4,9 @@
 
     <application>
         <service android:name="com.yc.looperthread.heart.HeartService"/>
+        <receiver
+            android:name="com.yc.looperthread.heart.HeartReceiver"
+            android:exported="false" />
     </application>
 
 

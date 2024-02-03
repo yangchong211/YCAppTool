@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="1.版本更新案例"
+        android:textSize="18sp"
+        android:background="@android:color/darker_gray"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_2"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="2."
+        android:textSize="18sp"
+        android:background="@android:color/darker_gray"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_3"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="3."
+        android:textSize="18sp"
+        android:background="@android:color/darker_gray"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_4"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="4."
+        android:textSize="18sp"
+        android:background="@android:color/darker_gray"
+        app:rRadius="20dp" />
+
+    <com.yc.roundcorner.view.RoundTextView
+        android:id="@+id/tv_view_5"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="20dp"
+        android:text="5."
+        android:textSize="18sp"
+        android:background="@android:color/darker_gray"
+        app:rRadius="20dp" />
+
+</LinearLayout>

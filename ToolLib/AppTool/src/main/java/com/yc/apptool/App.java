@@ -7,7 +7,8 @@ import com.yc.interceptortime.CommonCallback;
 import com.yc.interceptortime.InterceptorBean;
 import com.yc.interceptortime.InterceptorManager;
 import com.yc.interceptortime.MonitorBean;
-import com.yc.reboothelper.RebootManager;
+import com.yc.looperthread.heart.HeartConfig;
+import com.yc.looperthread.heart.HeartManager;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.ycthreadpoollib.PoolThread;
 import com.yc.ycthreadpoollib.ScheduleTask;
@@ -24,10 +25,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        if (RebootManager.getInstance().isRebootProcess(this)) {
-            return;
-        }
         AppLogUtils.setShowLog(true);
+        HeartConfig.Builder builder = HeartConfig.builder();
+        HeartConfig heartConfig = builder.setContext(this).build();
+        HeartManager.getInstance().initHeart(heartConfig);
         //初始化线程池管理器
         initThreadPool();
         ScheduleTask.getInstance().schedule(new Runnable() {

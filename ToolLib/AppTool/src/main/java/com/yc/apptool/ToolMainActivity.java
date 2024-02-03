@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.yc.animbusiness.AnimationActiviy;
+import com.yc.apptool.heart.HeartActivity;
 import com.yc.apptool.looper.LoopThreadActivity;
 import com.yc.apptool.transition.TransitionActivity;
 import com.yc.interceptortime.BaseParam;
@@ -72,6 +73,7 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
         tvView3.setText("3.各种动画合集案例");
         tvView4.setText("4.测试线程循环执行案例");
         tvView5.setText("5.测试方法耗时操作");
+        tvView6.setText("6.测试心跳服务");
     }
 
     @Override
@@ -90,6 +92,8 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
             testDemo.testMethodSync();
             TimeTestDemo.Test1 test1 = new TimeTestDemo.Test1();
             test1.testMethodSync2();
+        } else if (v == tvView6) {
+            HeartActivity.startActivity(this);
         }
     }
 
