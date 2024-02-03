@@ -13,5 +13,6 @@ public class App extends Application {
         HeartConfig.Builder builder = HeartConfig.builder();
         HeartConfig heartConfig = builder.setContext(this).build();
         HeartManager.getInstance().initHeart(heartConfig);
+        CrashHandler.getInstance().init();
     }
 }

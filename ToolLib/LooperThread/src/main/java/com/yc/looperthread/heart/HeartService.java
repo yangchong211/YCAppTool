@@ -42,11 +42,11 @@ public class HeartService extends Service {
     /**
      * 时钟心跳间隔，设置为30秒
      */
-    private static final int TIME = 5 * 1000;
+    private static final int TIME = 3 * 1000;
     /**
      * 闲时时钟心跳间隔，设置为10分钟
      */
-    private static final int TIME_NIGHT = 2 * 60 * 1000;
+    private static final int TIME_NIGHT = 2 * 3 * 1000;
     /**
      * 延迟意图
      */
@@ -55,6 +55,10 @@ public class HeartService extends Service {
      * 闹钟服务
      */
     private AlarmManager alarmManager;
+    /**
+     * 静态对象
+     */
+    public static HeartService wxService;
 
     @Nullable
     @Override
@@ -89,6 +93,7 @@ public class HeartService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        wxService = this;
         HeartManager.getInstance().log("onCreate 服务");
         Context context = getApplicationContext();
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -119,6 +124,7 @@ public class HeartService extends Service {
      */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        HeartManager.getInstance().log("onStartCommand");
         if (intent == null) {
             //启动下一次心跳定时任务
             HeartManager.getInstance().log("启动下一次心跳定时任务");
@@ -130,12 +136,15 @@ public class HeartService extends Service {
             doAction();
         } else if (ACTION_STOP.equals(action)) {
             releaseService();
+        } else {
+            HeartManager.getInstance().log("其他action " + action);
         }
         return START_STICKY;
     }
 
     private void doAction() {
-        HeartManager.getInstance().log("doAction");
+        HeartManager.getInstance().log("doAction 这里启动下一次心跳定时任务");
+        startAlarmHeartBeat();
     }
 
     /**

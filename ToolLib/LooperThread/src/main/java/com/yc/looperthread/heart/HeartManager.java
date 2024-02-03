@@ -2,16 +2,15 @@ package com.yc.looperthread.heart;
 
 import android.util.Log;
 
-import com.yc.looperthread.abs.IDoAction;
-
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class HeartManager implements IDoAction {
+public class HeartManager {
 
     private static final String TAG = "HeartService";
     private static volatile HeartManager singleton = null;
     private final AtomicBoolean isInit = new AtomicBoolean(false);
     private HeartConfig heartConfig;
+    private boolean crash = true;
 
     public static HeartManager getInstance() {
         if (singleton == null) {
@@ -36,33 +35,23 @@ public class HeartManager implements IDoAction {
 
     }
 
-
-    @Override
-    public void startThread() {
+    public void start() {
         HeartService.start(heartConfig.getContext());
     }
 
-    @Override
-    public void beginLoop() {
-
-    }
-
-    @Override
-    public void endLoop() {
-
-    }
-
-    @Override
-    public void release() {
+    public void stop() {
         HeartService.stop(heartConfig.getContext());
-    }
-
-    @Override
-    public void doAction() {
-
     }
 
     public void log(String msg) {
         Log.d(TAG, msg);
+    }
+
+    public boolean isCrash() {
+        return crash;
+    }
+
+    public void setCrash(boolean crash) {
+        this.crash = crash;
     }
 }

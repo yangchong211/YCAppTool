@@ -51,7 +51,7 @@ public class HeartActivity extends AppCompatActivity {
     }
 
     private void initListener() {
-        tvView1.setOnClickListener(v -> HeartManager.getInstance().startThread());
+        tvView1.setOnClickListener(v -> HeartManager.getInstance().start());
         tvView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
