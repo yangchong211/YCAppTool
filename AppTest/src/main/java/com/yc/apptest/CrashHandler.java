@@ -1,6 +1,11 @@
 package com.yc.apptest;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.SystemClock;
+import android.util.Log;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -11,6 +16,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     private static final String TAG = CrashHandler.class.getSimpleName();
     private Thread.UncaughtExceptionHandler mDefaultHandler;
+    private Context context;
 
     private CrashHandler() {
     }
@@ -19,7 +25,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         return Inner.INSTANCE;
     }
 
-    public void init() {
+    public void init(Context context) {
+        this.context = context;
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
@@ -33,7 +40,19 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             // 如果用户没有处理则让系统默认的异常处理器来处理
             mDefaultHandler.uncaughtException(thread, ex);
         } else {
-            SystemClock.sleep(3000);
+            //SystemClock.sleep(3000);
+
+            Log.d("HeartService","uncaughtException 崩溃重启操作");
+            String packageName = context.getPackageName();
+            Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+            //为何用PendingIntent，不能Intent，因为PendingIntent其实是一种延迟intent
+            PendingIntent restartIntent = PendingIntent.getActivity(
+                    context.getApplicationContext(),
+                    0, intent,PendingIntent.FLAG_ONE_SHOT);
+            AlarmManager mgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000,restartIntent);
+
+
             // 退出程序
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);

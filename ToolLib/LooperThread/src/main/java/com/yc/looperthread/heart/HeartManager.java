@@ -28,6 +28,7 @@ public class HeartManager {
             log("已经初始化过了");
         } else {
             heartConfig = config;
+            log("初始化配置");
         }
     }
 

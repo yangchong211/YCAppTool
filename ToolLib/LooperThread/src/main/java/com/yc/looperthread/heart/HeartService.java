@@ -20,7 +20,7 @@ import java.util.Locale;
  * 如果只是想开个服务在后台运行的话，直接startService即可；
  * 如果需要相互之间进行传值或者操作的话，就应该通过bindService。
  * <p>
- *
+ * <p>
  * 调用context.startService() ->onCreate()- >onStartCommand()->Service running-->
  * 调用context.stopService() ->onDestroy()
  * <p>
@@ -55,10 +55,6 @@ public class HeartService extends Service {
      * 闹钟服务
      */
     private AlarmManager alarmManager;
-    /**
-     * 静态对象
-     */
-    public static HeartService wxService;
 
     @Nullable
     @Override
@@ -72,10 +68,14 @@ public class HeartService extends Service {
      * @param context 上下文
      */
     public static void start(Context context) {
-        Intent service = new Intent(context, HeartService.class);
-        service.setAction(HeartService.ACTION_HEART_BEAT);
-        context.startService(service);
-        HeartManager.getInstance().log("start 启动服务");
+        try {
+            Intent service = new Intent(context, HeartService.class);
+            service.setAction(HeartService.ACTION_HEART_BEAT);
+            context.startService(service);
+            HeartManager.getInstance().log("start 启动服务");
+        } catch (Exception e) {
+            HeartManager.getInstance().log("start 启动服务异常：" + e.getMessage());
+        }
     }
 
     /**
@@ -84,16 +84,19 @@ public class HeartService extends Service {
      * @param context 上下文
      */
     public static void stop(Context context) {
-        Intent service = new Intent(context, HeartService.class);
-        service.setAction(HeartService.ACTION_STOP);
-        context.startService(service);
-        HeartManager.getInstance().log("start 停止服务");
+        try {
+            Intent service = new Intent(context, HeartService.class);
+            service.setAction(HeartService.ACTION_STOP);
+            context.startService(service);
+            HeartManager.getInstance().log("stop 停止服务");
+        } catch (Exception e) {
+            HeartManager.getInstance().log("stop 停止服务：" + e.getMessage());
+        }
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        wxService = this;
         HeartManager.getInstance().log("onCreate 服务");
         Context context = getApplicationContext();
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -112,11 +115,11 @@ public class HeartService extends Service {
 
     /**
      * 每次通过startService()方法启动Service时都会被回调。服务启动时调用
-     * @param intent                intent
-     * @param flags                 flags
-     * @param startId               startId
-     * @return
-     * onStartCommand方法返回值作用：
+     *
+     * @param intent  intent
+     * @param flags   flags
+     * @param startId startId
+     * @return onStartCommand方法返回值作用：
      * START_STICKY：粘性，service进程被异常杀掉，系统重新创建进程与服务，会重新执行onCreate()、onStartCommand(Intent)
      * START_STICKY_COMPATIBILITY：START_STICKY的兼容版本，但不保证服务被kill后一定能重启。
      * START_NOT_STICKY：非粘性，Service进程被异常杀掉，系统不会自动重启该Service。
@@ -151,9 +154,11 @@ public class HeartService extends Service {
      * 启动下一次心跳定时任务
      */
     public void startAlarmHeartBeat() {
-        long triggerAtMillis = System.currentTimeMillis() + getDelayTime();
-        HeartManager.getInstance().log("启动下一次心跳定时任务 " + triggerAtMillis);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+        if (alarmManager != null) {
+            long triggerAtMillis = System.currentTimeMillis() + getDelayTime();
+            HeartManager.getInstance().log("启动下一次心跳定时任务 " + triggerAtMillis);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+        }
     }
 
     /**

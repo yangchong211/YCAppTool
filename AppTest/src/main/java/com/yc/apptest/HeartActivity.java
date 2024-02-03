@@ -1,5 +1,6 @@
 package com.yc.apptest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.looperthread.heart.HeartManager;
 import com.yc.roundcorner.view.RoundTextView;
+
+import java.util.ArrayList;
 
 public class HeartActivity extends AppCompatActivity {
 
@@ -48,14 +51,36 @@ public class HeartActivity extends AppCompatActivity {
 
         tvView1.setText("1.开启服务");
         tvView2.setText("2.模拟一个崩溃，看看是否重启");
+        tvView3.setText("3.模拟一个崩溃，看看是否重启");
+        tvView4.setText("4.模拟一个崩溃，看看是否重启");
     }
 
     private void initListener() {
+        HeartManager.getInstance().start();
         tvView1.setOnClickListener(v -> HeartManager.getInstance().start());
         tvView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Integer.parseInt("12.3");
+            }
+        });
+        tvView3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<Object> objects = new ArrayList<>();
+                objects.get(5);
+            }
+        });
+        tvView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity activity = null;
+                activity.isDestroyed();
+            }
+        });
+        tvView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         });
     }

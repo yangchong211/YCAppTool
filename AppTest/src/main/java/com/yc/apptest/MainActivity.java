@@ -21,6 +21,5 @@ public class MainActivity extends AppCompatActivity {
                 HeartActivity.startActivity(MainActivity.this);
             }
         });
-        HeartActivity.startActivity(this);
     }
 }
