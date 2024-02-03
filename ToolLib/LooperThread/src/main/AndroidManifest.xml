@@ -3,7 +3,7 @@
     package="com.yc.looperthread">
 
     <application>
-        <service android:name="com.yc.looperthread.HeartService"/>
+        <service android:name="com.yc.looperthread.heart.HeartService"/>
     </application>
 
 

@@ -1,4 +1,4 @@
-package com.yc.looperthread;
+package com.yc.looperthread.abs;
 
 /**
  * 轮询方案统一接口

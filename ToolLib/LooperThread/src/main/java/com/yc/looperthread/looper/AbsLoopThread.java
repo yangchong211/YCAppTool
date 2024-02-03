@@ -1,6 +1,8 @@
-package com.yc.looperthread;
+package com.yc.looperthread.looper;
 
 import android.util.Log;
+
+import com.yc.looperthread.abs.IDoAction;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

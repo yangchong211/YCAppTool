@@ -1,4 +1,4 @@
-package com.yc.looperthread;
+package com.yc.looperthread.looper;
 
 import android.util.Log;
 

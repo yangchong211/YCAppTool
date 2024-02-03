@@ -137,6 +137,6 @@ public class EasyCrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     private static class Inner {
-        private static final EasyCrashHandler INSTANCE = new EasyCrashHandler();
+        public static final EasyCrashHandler INSTANCE = new EasyCrashHandler();
     }
 }

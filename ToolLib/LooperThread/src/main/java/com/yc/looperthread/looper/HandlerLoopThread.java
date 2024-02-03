@@ -1,4 +1,4 @@
-package com.yc.looperthread;
+package com.yc.looperthread.looper;
 
 import android.os.Handler;
 import android.os.HandlerThread;

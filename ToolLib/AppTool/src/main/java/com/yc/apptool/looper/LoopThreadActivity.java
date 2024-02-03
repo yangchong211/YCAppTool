@@ -9,12 +9,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.apptool.R;
-import com.yc.looperthread.DefaultLoopThread;
-import com.yc.looperthread.HandlerLoopThread;
-import com.yc.looperthread.IDoAction;
-import com.yc.looperthread.ScheduledLoopThread;
-import com.yc.looperthread.TimerLoopThread;
-import com.yc.looperthread.WhileLoopThread;
+import com.yc.looperthread.abs.IDoAction;
+import com.yc.looperthread.looper.WhileLoopThread;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;

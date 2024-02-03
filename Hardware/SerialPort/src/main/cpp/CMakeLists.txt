@@ -5,7 +5,7 @@
 
 # 最低版本要求
 # cmake_minimum_required：要求的Cmake最低版本
-cmake_minimum_required(VERSION 3.18.1)
+cmake_minimum_required(VERSION 3.10.2)
 
 # Declares and names the project.
 

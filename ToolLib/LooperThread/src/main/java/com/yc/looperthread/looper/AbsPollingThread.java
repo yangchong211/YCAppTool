@@ -1,12 +1,11 @@
-package com.yc.looperthread;
+package com.yc.looperthread.looper;
 
 import android.util.Log;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import com.yc.looperthread.abs.IDoAction;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class AbsPollingThread implements IDoAction {
 

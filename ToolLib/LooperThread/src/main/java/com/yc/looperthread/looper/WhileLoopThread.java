@@ -1,10 +1,6 @@
-package com.yc.looperthread;
+package com.yc.looperthread.looper;
 
 import android.util.Log;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 使用while实现定时性周期性任务轮训

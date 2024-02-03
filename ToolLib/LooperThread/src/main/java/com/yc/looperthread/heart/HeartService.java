@@ -1,4 +1,4 @@
-package com.yc.looperthread;
+package com.yc.looperthread.heart;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class HeartService extends Service implements IDoAction{
+public class HeartService extends Service {
 
     public static final String ACTION_HEART_BEAT = "com.yc.heart.ACTION_HEART_BEAT";
     public static final String ACTION_STOP = "com.yc.heart.ACTION_STOP";
@@ -88,32 +88,7 @@ public class HeartService extends Service implements IDoAction{
         return START_STICKY;
     }
 
-    @Override
-    public void startThread() {
-
-    }
-
-    @Override
-    public void beginLoop() {
-
-    }
-
-    @Override
-    public void endLoop() {
-
-    }
-
-    @Override
-    public void release() {
-
-    }
-
-
-    /**
-     * 做具体的操作
-     */
-    @Override
-    public void doAction() {
+    private void doAction() {
 
     }
 
@@ -137,7 +112,7 @@ public class HeartService extends Service implements IDoAction{
     /**
      * 关闭时钟心跳，停止服务，释放资源
      */
-    public void releaseService() {
+    private void releaseService() {
         //停止时钟心跳
         stopAlarmHeartBeat();
         //关闭服务
