@@ -42,11 +42,11 @@ public class HeartService extends Service {
     /**
      * 时钟心跳间隔，设置为30秒
      */
-    private static final int TIME = 3 * 1000;
+    private static final int TIME = 10 * 1000;
     /**
      * 闲时时钟心跳间隔，设置为10分钟
      */
-    private static final int TIME_NIGHT = 2 * 3 * 1000;
+    private static final int TIME_NIGHT = 2 * 10 * 1000;
     /**
      * 延迟意图
      */
@@ -148,6 +148,10 @@ public class HeartService extends Service {
     private void doAction() {
         HeartManager.getInstance().log("doAction 这里启动下一次心跳定时任务");
         startAlarmHeartBeat();
+        HeartManager.OnHeartBeat onHeartBeat = HeartManager.getInstance().getOnHeartBeat();
+        if (onHeartBeat != null) {
+            onHeartBeat.heartBeat();
+        }
     }
 
     /**

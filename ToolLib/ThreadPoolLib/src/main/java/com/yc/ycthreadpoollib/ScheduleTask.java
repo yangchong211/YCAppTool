@@ -12,12 +12,9 @@ public final class ScheduleTask {
     private final ExecutorService mExecutors;
 
     private ScheduleTask() {
-        ThreadFactory threadFactory = new ThreadFactory() {
-            @Override
-            public Thread newThread(@NonNull Runnable runnable) {
-                //创建一个线程
-                return new Thread(runnable, "ScheduleTask");
-            }
+        ThreadFactory threadFactory = runnable -> {
+            //创建一个线程
+            return new Thread(runnable, "ScheduleTask");
         };
         this.mExecutors = Executors.newSingleThreadExecutor(threadFactory);
     }

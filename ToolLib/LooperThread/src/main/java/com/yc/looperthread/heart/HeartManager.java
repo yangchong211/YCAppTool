@@ -11,6 +11,7 @@ public class HeartManager {
     private final AtomicBoolean isInit = new AtomicBoolean(false);
     private HeartConfig heartConfig;
     private boolean crash = true;
+    private OnHeartBeat onHeartBeat;
 
     public static HeartManager getInstance() {
         if (singleton == null) {
@@ -37,10 +38,12 @@ public class HeartManager {
     }
 
     public void start() {
+        log("start");
         HeartService.start(heartConfig.getContext());
     }
 
     public void stop() {
+        log("stop");
         HeartService.stop(heartConfig.getContext());
     }
 
@@ -54,5 +57,17 @@ public class HeartManager {
 
     public void setCrash(boolean crash) {
         this.crash = crash;
+    }
+
+    public OnHeartBeat getOnHeartBeat() {
+        return onHeartBeat;
+    }
+
+    public void setOnHeartBeat(OnHeartBeat onHeartBeat) {
+        this.onHeartBeat = onHeartBeat;
+    }
+
+    public interface OnHeartBeat {
+        void heartBeat();
     }
 }
