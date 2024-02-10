@@ -177,10 +177,11 @@ public class HeartService extends Service {
 
     /**
      * 关闭时钟心跳，停止服务，释放资源
+     *
      */
     private void releaseService() {
         HeartManager.getInstance().log("关闭时钟心跳，停止服务，释放资源");
-        //停止时钟心跳
+        //停止时钟心跳。先停止时钟
         stopAlarmHeartBeat();
         //关闭服务
         Intent service = new Intent(getApplicationContext(), HeartService.class);
