@@ -9,10 +9,10 @@
         android:label="@string/app_name">
 
         <activity
-            android:name="com.yc.crash.CrashListActivity"
+            android:name="com.yc.crash.lib.CrashListActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.yc.crash.CrashDetailsActivity"
+            android:name="com.yc.crash.lib.CrashDetailsActivity"
             android:screenOrientation="portrait"/>
     </application>
 

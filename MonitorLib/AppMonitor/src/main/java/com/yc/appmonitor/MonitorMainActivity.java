@@ -7,7 +7,6 @@ import android.view.View;
 import com.yc.appmonitor.apm.ApmTestActivity;
 import com.yc.appmonitor.crash.CrashTestActivity;
 import com.yc.appmonitor.net.NetworkActivity;
-import com.yc.fpslib.PerformanceManager;
 import com.yc.clickhelper.PerfectClickListener;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
@@ -16,7 +15,7 @@ import com.yc.monitorpinglib.MonitorPingActivity;
 import com.yc.monitorspeed.ConnectionActivity;
 import com.yc.monitortimelib.TimeMonitorHelper;
 import com.yc.roundcorner.view.RoundTextView;
-import com.yc.crash.CrashListActivity;
+import com.yc.crash.lib.CrashListActivity;
 
 public class MonitorMainActivity extends BaseActivity {
 

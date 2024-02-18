@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
+apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion '29.0.0'
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    //buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
         ndk {
             // Specifies the ABI configurations of your native
             // libraries Gradle should build and package with your APK.
@@ -56,6 +57,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
 }

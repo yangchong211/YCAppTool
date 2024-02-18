@@ -9,8 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.yc.appmonitor.R
 import com.yc.monitortimelib.TimeMonitorHelper
 import com.yc.toastutils.ToastUtils
-import com.yc.crash.CrashListActivity
-import com.yc.crash.NativeCrashDumper
+import com.yc.crash.nativec.NativeCrashDumper
 import java.util.*
 
 /**

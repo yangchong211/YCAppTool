@@ -1,4 +1,4 @@
-package com.yc.crash;
+package com.yc.crash.nativec;
 
 /**
  * 捕获信号，记录日志后的处理方式

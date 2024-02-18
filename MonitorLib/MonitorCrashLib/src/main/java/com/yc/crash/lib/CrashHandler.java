@@ -1,4 +1,4 @@
-package com.yc.crash;
+package com.yc.crash.lib;
 
 import android.app.Application;
 import android.content.Context;

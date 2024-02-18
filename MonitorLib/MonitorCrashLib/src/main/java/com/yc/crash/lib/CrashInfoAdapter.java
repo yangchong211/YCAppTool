@@ -1,4 +1,4 @@
-package com.yc.crash;
+package com.yc.crash.lib;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -6,6 +6,7 @@ import android.text.Spannable;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import com.yc.crash.R;
 import com.yc.eastadapterlib.BaseRecycleAdapter;
 import com.yc.eastadapterlib.BaseViewHolder;
 

@@ -1,4 +1,4 @@
-package com.yc.crash;
+package com.yc.crash.lib;
 
 import android.Manifest;
 import android.animation.AnimatorSet;
@@ -30,6 +30,7 @@ import com.yc.appcompress.AppCompress;
 import com.yc.appfilelib.AppFileUtils;
 import com.yc.appmediastore.FileShareUtils;
 import com.yc.appscreenlib.AppShotsUtils;
+import com.yc.crash.R;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.fileiohelper.BufferIoUtils;
 import com.yc.fileiohelper.FileIoUtils;

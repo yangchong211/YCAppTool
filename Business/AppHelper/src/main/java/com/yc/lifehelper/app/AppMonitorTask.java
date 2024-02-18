@@ -5,8 +5,8 @@ import android.os.Looper;
 import com.yc.parallel.AbsParallelTask;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.netlib.utils.NetworkTool;
-import com.yc.crash.CrashHandler;
-import com.yc.crash.CrashListener;
+import com.yc.crash.lib.CrashHandler;
+import com.yc.crash.lib.CrashListener;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;

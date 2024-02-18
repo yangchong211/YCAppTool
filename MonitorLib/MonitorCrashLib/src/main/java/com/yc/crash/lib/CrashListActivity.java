@@ -1,4 +1,4 @@
-package com.yc.crash;
+package com.yc.crash.lib;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.yc.appfilelib.AppFileUtils;
+import com.yc.crash.R;
 import com.yc.eastadapterlib.OnItemClickListener;
 import com.yc.eastadapterlib.OnItemLongClickListener;
 import com.yc.easyexecutor.DelegateTaskExecutor;

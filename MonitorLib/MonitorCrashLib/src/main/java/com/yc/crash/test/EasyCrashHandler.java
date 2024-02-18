@@ -1,4 +1,4 @@
-package com.yc.crash;
+package com.yc.crash.test;
 
 import android.content.Context;
 import android.os.SystemClock;

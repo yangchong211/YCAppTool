@@ -1,4 +1,4 @@
-package com.yc.crash;
+package com.yc.crash.lib;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
