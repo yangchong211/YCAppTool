@@ -1,7 +1,8 @@
 package com.bumptech.glide.provider;
 
 import androidx.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
+import androidx.collection.ArrayMap;
+
 import com.bumptech.glide.load.ResourceDecoder;
 import com.bumptech.glide.load.engine.DecodePath;
 import com.bumptech.glide.load.engine.LoadPath;

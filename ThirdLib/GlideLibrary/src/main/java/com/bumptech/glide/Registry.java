@@ -2,7 +2,8 @@ package com.bumptech.glide;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.support.v4.util.Pools.Pool;
+import androidx.core.util.Pools;
+
 import com.bumptech.glide.load.Encoder;
 import com.bumptech.glide.load.ImageHeaderParser;
 import com.bumptech.glide.load.Options;
@@ -54,7 +55,7 @@ public class Registry {
   private final ModelToResourceClassCache modelToResourceClassCache =
       new ModelToResourceClassCache();
   private final LoadPathCache loadPathCache = new LoadPathCache();
-  private final Pool<List<Throwable>> throwableListPool = FactoryPools.threadSafeList();
+  private final Pools.Pool<List<Throwable>> throwableListPool = FactoryPools.threadSafeList();
 
   public Registry() {
     this.modelLoaderRegistry = new ModelLoaderRegistry(throwableListPool);

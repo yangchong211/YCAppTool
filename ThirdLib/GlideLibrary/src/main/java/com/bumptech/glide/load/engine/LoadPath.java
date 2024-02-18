@@ -1,7 +1,8 @@
 package com.bumptech.glide.load.engine;
 
 import androidx.annotation.NonNull;
-import android.support.v4.util.Pools.Pool;
+import androidx.core.util.Pools;
+
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.data.DataRewinder;
 import com.bumptech.glide.util.Preconditions;
@@ -22,13 +23,13 @@ import java.util.List;
  */
 public class LoadPath<Data, ResourceType, Transcode> {
   private final Class<Data> dataClass;
-  private final Pool<List<Throwable>> listPool;
+  private final Pools.Pool<List<Throwable>> listPool;
   private final List<? extends DecodePath<Data, ResourceType, Transcode>> decodePaths;
   private final String failureMessage;
 
   public LoadPath(Class<Data> dataClass, Class<ResourceType> resourceClass,
       Class<Transcode> transcodeClass,
-      List<DecodePath<Data, ResourceType, Transcode>> decodePaths, Pool<List<Throwable>> listPool) {
+      List<DecodePath<Data, ResourceType, Transcode>> decodePaths, Pools.Pool<List<Throwable>> listPool) {
     this.dataClass = dataClass;
     this.listPool = listPool;
     this.decodePaths = Preconditions.checkNotEmpty(decodePaths);

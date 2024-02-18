@@ -3,7 +3,8 @@ package com.bumptech.glide.load.engine;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import android.support.v4.util.Pools;
+import androidx.core.util.Pools;
+
 import android.util.Log;
 import com.bumptech.glide.GlideContext;
 import com.bumptech.glide.Priority;

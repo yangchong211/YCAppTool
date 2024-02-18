@@ -1,7 +1,8 @@
 package com.bumptech.glide.load.engine;
 
 import androidx.annotation.NonNull;
-import android.support.v4.util.Pools.Pool;
+import androidx.core.util.Pools;
+
 import android.util.Log;
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.ResourceDecoder;
@@ -25,13 +26,13 @@ public class DecodePath<DataType, ResourceType, Transcode> {
   private final Class<DataType> dataClass;
   private final List<? extends ResourceDecoder<DataType, ResourceType>> decoders;
   private final ResourceTranscoder<ResourceType, Transcode> transcoder;
-  private final Pool<List<Throwable>> listPool;
+  private final Pools.Pool<List<Throwable>> listPool;
   private final String failureMessage;
 
   public DecodePath(Class<DataType> dataClass, Class<ResourceType> resourceClass,
       Class<Transcode> transcodeClass,
       List<? extends ResourceDecoder<DataType, ResourceType>> decoders,
-      ResourceTranscoder<ResourceType, Transcode> transcoder, Pool<List<Throwable>> listPool) {
+      ResourceTranscoder<ResourceType, Transcode> transcoder, Pools.Pool<List<Throwable>> listPool) {
     this.dataClass = dataClass;
     this.decoders = decoders;
     this.transcoder = transcoder;

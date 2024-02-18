@@ -1,7 +1,8 @@
 package com.bumptech.glide.load.engine;
 
 import androidx.annotation.NonNull;
-import android.support.v4.util.Pools;
+import androidx.core.util.Pools;
+
 import com.bumptech.glide.util.Preconditions;
 import com.bumptech.glide.util.Synthetic;
 import com.bumptech.glide.util.pool.FactoryPools;

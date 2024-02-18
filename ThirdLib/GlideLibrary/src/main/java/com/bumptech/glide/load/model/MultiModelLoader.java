@@ -2,7 +2,8 @@ package com.bumptech.glide.load.model;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.support.v4.util.Pools.Pool;
+import androidx.core.util.Pools;
+
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.Key;
@@ -27,10 +28,10 @@ import java.util.List;
 class MultiModelLoader<Model, Data> implements ModelLoader<Model, Data> {
 
   private final List<ModelLoader<Model, Data>> modelLoaders;
-  private final Pool<List<Throwable>> exceptionListPool;
+  private final Pools.Pool<List<Throwable>> exceptionListPool;
 
   MultiModelLoader(@NonNull List<ModelLoader<Model, Data>> modelLoaders,
-      @NonNull Pool<List<Throwable>> exceptionListPool) {
+      @NonNull Pools.Pool<List<Throwable>> exceptionListPool) {
     this.modelLoaders = modelLoaders;
     this.exceptionListPool = exceptionListPool;
   }
@@ -74,7 +75,7 @@ class MultiModelLoader<Model, Data> implements ModelLoader<Model, Data> {
   static class MultiFetcher<Data> implements DataFetcher<Data>, DataCallback<Data> {
 
     private final List<DataFetcher<Data>> fetchers;
-    private final Pool<List<Throwable>> throwableListPool;
+    private final Pools.Pool<List<Throwable>> throwableListPool;
     private int currentIndex;
     private Priority priority;
     private DataCallback<? super Data> callback;
@@ -84,7 +85,7 @@ class MultiModelLoader<Model, Data> implements ModelLoader<Model, Data> {
 
     MultiFetcher(
         @NonNull List<DataFetcher<Data>> fetchers,
-        @NonNull Pool<List<Throwable>> throwableListPool) {
+        @NonNull Pools.Pool<List<Throwable>> throwableListPool) {
       this.throwableListPool = throwableListPool;
       Preconditions.checkNotEmpty(fetchers);
       this.fetchers = fetchers;

@@ -3,7 +3,8 @@ package com.bumptech.glide.load.model;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
-import android.support.v4.util.Pools.Pool;
+import androidx.core.util.Pools;
+
 import com.bumptech.glide.Registry.NoModelLoaderAvailableException;
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.util.Preconditions;
@@ -26,14 +27,14 @@ public class MultiModelLoaderFactory {
   private final List<Entry<?, ?>> entries = new ArrayList<>();
   private final Factory factory;
   private final Set<Entry<?, ?>> alreadyUsedEntries = new HashSet<>();
-  private final Pool<List<Throwable>> throwableListPool;
+  private final Pools.Pool<List<Throwable>> throwableListPool;
 
-  public MultiModelLoaderFactory(@NonNull Pool<List<Throwable>> throwableListPool) {
+  public MultiModelLoaderFactory(@NonNull Pools.Pool<List<Throwable>> throwableListPool) {
     this(throwableListPool, DEFAULT_FACTORY);
   }
 
   @VisibleForTesting
-  MultiModelLoaderFactory(@NonNull Pool<List<Throwable>> throwableListPool,
+  MultiModelLoaderFactory(@NonNull Pools.Pool<List<Throwable>> throwableListPool,
       @NonNull Factory factory) {
     this.throwableListPool = throwableListPool;
     this.factory = factory;
@@ -212,7 +213,7 @@ public class MultiModelLoaderFactory {
     @NonNull
     public <Model, Data> MultiModelLoader<Model, Data> build(
         @NonNull List<ModelLoader<Model, Data>> modelLoaders,
-        @NonNull Pool<List<Throwable>> throwableListPool) {
+        @NonNull Pools.Pool<List<Throwable>> throwableListPool) {
       return new MultiModelLoader<>(modelLoaders, throwableListPool);
     }
   }

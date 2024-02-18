@@ -21,6 +21,7 @@ public class NativeCrashDumper {
 
     /**
      * 初始化
+     * 使用静态注册
      *
      * @param crashDumpDir        dumpDir路径
      * @param nativeCrashListener 监听listener
@@ -31,6 +32,9 @@ public class NativeCrashDumper {
 
     /**
      * 模拟native崩溃
+     * 使用静态注册，本地方法声明，通过jni去实现。native自动生成的方法名称是：
+     * 包名_类名_方法名
+     * Java_com_yc_crash_nativec_NativeCrashDumper_nativeCrash
      */
     public native void nativeCrash();
 

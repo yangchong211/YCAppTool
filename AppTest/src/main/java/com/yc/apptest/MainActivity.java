@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.looperthread.heart.HeartManager;
 
+import me.pqpo.librarylog4a.test.MmapLogActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.tv_view1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HeartActivity.startActivity(MainActivity.this);
+                MmapLogActivity.startActivity(MainActivity.this);
             }
         });
     }

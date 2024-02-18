@@ -2,7 +2,8 @@ package com.bumptech.glide.load.model;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.support.v4.util.Pools.Pool;
+import androidx.core.util.Pools;
+
 import com.bumptech.glide.util.Synthetic;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +22,7 @@ public class ModelLoaderRegistry {
   private final MultiModelLoaderFactory multiModelLoaderFactory;
   private final ModelLoaderCache cache = new ModelLoaderCache();
 
-  public ModelLoaderRegistry(@NonNull Pool<List<Throwable>> throwableListPool) {
+  public ModelLoaderRegistry(@NonNull Pools.Pool<List<Throwable>> throwableListPool) {
     this(new MultiModelLoaderFactory(throwableListPool));
   }
 

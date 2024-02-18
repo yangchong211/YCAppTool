@@ -2,10 +2,11 @@ package com.bumptech.glide.request;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.CheckResult;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.FloatRange;
-import android.support.annotation.IntRange;
+
+import androidx.annotation.CheckResult;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.FloatRange;
+import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.bumptech.glide.Priority;
@@ -153,7 +154,7 @@ public class RequestOptions extends BaseRequestOptions<RequestOptions> {
   }
 
   /**
-   * Returns a {@link RequestOptions} object with {@link #signature} set.
+   * Returns a {@link RequestOptions} object with  set.
    */
   @NonNull
   @CheckResult

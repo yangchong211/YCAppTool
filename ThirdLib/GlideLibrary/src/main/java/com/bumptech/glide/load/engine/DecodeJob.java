@@ -2,7 +2,8 @@ package com.bumptech.glide.load.engine;
 
 import android.os.Build;
 import androidx.annotation.NonNull;
-import android.support.v4.util.Pools;
+import androidx.core.util.Pools;
+
 import android.util.Log;
 import com.bumptech.glide.GlideContext;
 import com.bumptech.glide.Priority;
