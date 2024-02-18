@@ -2,9 +2,6 @@ package me.pqpo.librarylog4a;
 
 import android.util.Log;
 
-/**
- * Created by pqpo on 2017/11/16.
- */
 public class LogBuffer {
 
     private static final String TAG = "LogBuffer";

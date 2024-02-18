@@ -2,9 +2,6 @@ package me.pqpo.librarylog4a.logger;
 
 import android.util.Log;
 
-/**
- * Created by pqpo on 2018/2/27.
- */
 
 public class AndroidLogger implements Logger {
 

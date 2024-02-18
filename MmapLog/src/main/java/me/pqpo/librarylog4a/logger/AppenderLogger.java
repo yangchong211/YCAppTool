@@ -5,12 +5,10 @@ import java.util.List;
 
 import me.pqpo.librarylog4a.appender.Appender;
 
-/**
- * Created by pqpo on 2017/11/16.
- */
+
 public class AppenderLogger implements Logger{
 
-    private List<Appender> appenderList = new ArrayList<>();
+    private final List<Appender> appenderList = new ArrayList<>();
 
     protected AppenderLogger() {
     }
@@ -53,7 +51,7 @@ public class AppenderLogger implements Logger{
 
     public static class Builder {
 
-        private AppenderLogger logger;
+        private final AppenderLogger logger;
 
         public Builder() {
             logger = new AppenderLogger();

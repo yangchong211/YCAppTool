@@ -7,10 +7,7 @@ import java.util.Locale;
 
 import me.pqpo.librarylog4a.Level;
 
-/**
- * Created by pqpo on 2017/11/24.
- * Change by Mainli on 2018/07/09.
- */
+
 public class DateFileFormatter implements Formatter {
     private SimpleDateFormat simpleDateFormat = null;
     private Date mDate;

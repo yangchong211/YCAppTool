@@ -16,16 +16,20 @@ class AsyncFileFlush {
 
 public:
     AsyncFileFlush();
+
     ~AsyncFileFlush();
-    bool async_flush(FlushBuffer* flushBuffer);
+
+    bool async_flush(FlushBuffer *flushBuffer);
+
     void stopFlush();
 
 private:
     void async_log_thread();
-    ssize_t flush(FlushBuffer* flushBuffer);
+
+    ssize_t flush(FlushBuffer *flushBuffer);
 
     bool exit = false;
-    std::vector<FlushBuffer*> async_buffer;
+    std::vector<FlushBuffer *> async_buffer;
     std::thread async_thread;
     std::condition_variable async_condition;
     std::mutex async_mtx;
