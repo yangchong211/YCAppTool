@@ -381,9 +381,9 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
     if (env == NULL) {
         return JNI_ERR;
     }
-    jclass crashDumperClazz = env->FindClass("com/yc/crash/NativeCrashDumper");
+    jclass crashDumperClazz = env->FindClass("com/yc/crash/nativec/NativeCrashDumper");
     JNINativeMethod jniNativeMethod[] = {
-            {"nativeInit", "(Ljava/lang/String;Lcom/yc/crash/NativeCrashListener;I)V",
+            {"nativeInit", "(Ljava/lang/String;Lcom/yc/crash/nativec/NativeCrashListener;I)V",
              (void *) nativeInit}
     };
     if (env->RegisterNatives(crashDumperClazz, jniNativeMethod,
@@ -397,7 +397,8 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_yc_crash_NativeCrashDumper_nativeCrash(JNIEnv *env, jobject thiz) {
+Java_com_yc_crash_nativec_NativeCrashDumper_nativeCrash(JNIEnv *env, jobject thiz) {
+    //模拟native崩溃
     raiseError(SIGABRT);
 }
 

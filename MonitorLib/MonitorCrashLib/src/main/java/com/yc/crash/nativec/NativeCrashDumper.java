@@ -1,7 +1,6 @@
 package com.yc.crash.nativec;
 
 
-
 import java.io.File;
 
 public class NativeCrashDumper {
@@ -22,13 +21,17 @@ public class NativeCrashDumper {
 
     /**
      * 初始化
-     * @param crashDumpDir
-     * @param nativeCrashListener
-     * @param handleMode
+     *
+     * @param crashDumpDir        dumpDir路径
+     * @param nativeCrashListener 监听listener
+     * @param handleMode          模式
      */
     private native void nativeInit(String crashDumpDir,
                                    NativeCrashListener nativeCrashListener, int handleMode);
 
+    /**
+     * 模拟native崩溃
+     */
     public native void nativeCrash();
 
     public boolean init(String crashDumpDir,
