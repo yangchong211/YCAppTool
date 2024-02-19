@@ -79,11 +79,12 @@ public class MmapLogActivity extends AppCompatActivity {
                 }
                 final String str = etContent.getText().toString();
                 for (int i=0; i<threads; i++) {
+                    int count = i;
                     new Thread(){
                         @Override
                         public void run() {
                             super.run();
-                            Log4a.i(TAG, str);
+                            Log4a.i(TAG, str + " --- "  + count);
                         }
                     }.start();
                 }
@@ -248,7 +249,7 @@ public class MmapLogActivity extends AppCompatActivity {
                     FileAppender fileAppender = (FileAppender) appender;
                     File log = FileUtils.getLogDir(this);
                     String time = new SimpleDateFormat("yyyy_MM_dd", Locale.getDefault()).format(new Date());
-                    String logPath = new File(log, time + "-" + System.currentTimeMillis() + ".txt").getAbsolutePath();
+                    String logPath = new File(log, time + "-yc-" + System.currentTimeMillis() + ".txt").getAbsolutePath();
                     fileAppender.changeLogPath(logPath);
                     break;
                 }
