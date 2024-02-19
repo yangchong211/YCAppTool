@@ -405,3 +405,35 @@ Java_com_yc_crash_nativec_NativeCrashDumper_nativeCrash(JNIEnv *env, jobject thi
 void raiseError(int signal) {
     raise(signal);
 }
+
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, "yangchong->", __VA_ARGS__)
+
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_yc_crash_nativec_NativeCrashDumper_exception(JNIEnv *env, jobject thiz) {
+    jclass clazz = env->GetObjectClass(thiz);
+    env->GetStaticFieldID(clazz, "test1", "Ljava/lang/String;");
+    //1.在native处理异常 不抛给java
+    jthrowable jthrowable1 = env->ExceptionOccurred();
+    if (jthrowable1) {
+        //进入这里表示出现了异常 小根据需求进行异常的处理
+        LOGD("在native处理异常 不抛给java");
+        env->ExceptionClear();//清除掉当前的异常，防止程序崩溃
+        env->GetStaticFieldID(clazz, "test", "Ljava/lang/String;");
+    }
+    LOGD("在native处理异常 不抛给java");
+    //2.把异常抛给java
+    env->GetStaticFieldID(clazz, "test1", "Ljava/lang/String;");
+    if (jthrowable1) {
+        //进入这里表示出现了异常 小根据需求进行异常的处理
+        LOGD("把异常抛给java");
+        env->ExceptionDescribe();
+        env->ExceptionClear();//清除掉当前的异常，防止程序崩溃
+        env->GetStaticFieldID(clazz, "test", "Ljava/lang/String;");
+//        env->ThrowNew(env->FindClass("java/lang/Exception"),"native 把异常抛给java");
+        env->DeleteLocalRef(clazz); //释放资源
+    }
+    //3.抛出致命异常 程序退
+    env->FatalError("抛出致命异常 程序退出");
+}

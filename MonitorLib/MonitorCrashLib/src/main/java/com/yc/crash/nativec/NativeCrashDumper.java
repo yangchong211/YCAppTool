@@ -38,6 +38,11 @@ public class NativeCrashDumper {
      */
     public native void nativeCrash();
 
+    /**
+     * 通过env来处理异常。分为三种，直接清除，抛给java，程序退出
+     */
+    public native void exception();
+
     public boolean init(String crashDumpDir,
                         NativeCrashListener nativeCrashListener, NativeHandleMode handleMode) {
         if (crashDumpDir == null) {
