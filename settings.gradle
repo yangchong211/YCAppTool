@@ -220,6 +220,7 @@ project(':EasySocket').projectDir = new File('ToolLib/EasySocket')
 project(':LooperThread').projectDir = new File('ToolLib/LooperThread')
 project(':InterceptorTime').projectDir = new File('ToolLib/InterceptorTime')
 project(':CameraOpen').projectDir = new File('ToolLib/CameraOpen')
+//project(':MmapLog').projectDir = new File('ToolLib/MmapLog')
 project(':SqlLiteLib').projectDir = new File('ToolLib/SqlLiteLib')
 
 
@@ -357,12 +358,11 @@ project(':NfcHelper').projectDir = new File('Hardware/NfcHelper')
 
 /* +++++++++ JNI开发demo +++++++++ */
 include ':AppJni'
-include ':CallJniLib', ':TestJniLib', ':CrashDumper',':SafetyJniLib',':ReLinker',
+include ':CallJniLib', ':TestJniLib',':SafetyJniLib',':ReLinker',
         ':UVCCameraLib', ':UsbCameraLib', ':usbCameraTest1',':usbCameraTest0',':usbCameraTest2',':usbCameraTest3',
         ':usbCameraTest4',':usbCameraTest5',':usbCameraTest6',':usbCameraTest7',':usbCameraTest8'
 project(':CallJniLib').projectDir = new File('JniNdkLib/CallJniLib')
 project(':TestJniLib').projectDir = new File('JniNdkLib/TestJniLib')
-project(':CrashDumper').projectDir = new File('JniNdkLib/CrashDumper')
 project(':SafetyJniLib').projectDir = new File('JniNdkLib/SafetyJniLib')
 project(':ReLinker').projectDir = new File('JniNdkLib/ReLinker')
 project(':UVCCameraLib').projectDir = new File('JniNdkLib/UVCCameraLib')
@@ -378,3 +378,4 @@ project(':usbCameraTest7').projectDir = new File('JniNdkLib/usbCameraTest7')
 project(':usbCameraTest8').projectDir = new File('JniNdkLib/usbCameraTest8')
 
 include ':AppTest'
+include ':MmapLog'
