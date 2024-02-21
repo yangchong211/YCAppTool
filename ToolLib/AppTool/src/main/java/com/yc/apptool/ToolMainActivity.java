@@ -8,12 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.yc.animbusiness.AnimationActiviy;
-import com.yc.apptool.heart.HeartActivity;
-import com.yc.apptool.looper.LoopThreadActivity;
 import com.yc.apptool.transition.TransitionActivity;
-import com.yc.interceptortime.BaseParam;
-import com.yc.interceptortime.InterceptorManager;
 import com.yc.interceptortime.TimeTestDemo;
+import com.yc.looperthread.test.HeartActivity;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.statusbar.bar.StateAppBar;
 
@@ -78,22 +75,21 @@ public class ToolMainActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if (v == tvView1){
-            startActivity(new Intent(this,UploadActivity.class));
-        } else if (v == tvView2){
+        if (v == tvView1) {
+            startActivity(new Intent(this, UploadActivity.class));
+        } else if (v == tvView2) {
             startActivity(new Intent(this, TransitionActivity.class));
-        } else if (v == tvView3){
+        } else if (v == tvView3) {
             AnimationActiviy.startActivity(this);
-        } else if (v == tvView4){
-            LoopThreadActivity.startActivity(this);
-        } else if (v == tvView5){
+        } else if (v == tvView4) {
+            HeartActivity.startActivity(this);
+        } else if (v == tvView5) {
             //测试一下
             TimeTestDemo testDemo = new TimeTestDemo();
             testDemo.testMethodSync();
             TimeTestDemo.Test1 test1 = new TimeTestDemo.Test1();
             test1.testMethodSync2();
         } else if (v == tvView6) {
-            HeartActivity.startActivity(this);
         }
     }
 

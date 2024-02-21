@@ -32,8 +32,6 @@
         <activity android:name="com.yc.apptool.thread.ThreadActivity"/>
         <activity android:name="com.yc.apptool.thread.EasyExecutorActivity"/>
         <activity android:name="com.yc.apptool.thread.ThreadPollActivity"/>
-        <activity android:name=".looper.LoopThreadActivity"/>
-        <activity android:name=".heart.HeartActivity"/>
     </application>
 
 </manifest>
