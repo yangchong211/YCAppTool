@@ -305,6 +305,7 @@ project(':EasyTtsPlayer').projectDir = new File('PlayerLib/EasyTtsPlayer')
 //简单型MediaPlayer播放器
 project(':EasyMediaPlayer').projectDir = new File('PlayerLib/EasyMediaPlayer')
 
+
 /* +++++++++ 经典第三方库 +++++++++ */
 include ':LeakAnalyzer', ':LeakCanarySdk', ':LeakInstrumentation',':GsonLib',
         ':LeakSample', ':LeakAndroid', ':LeakAnalyzer', ':LeakWatcher', ':LeakAndroidNoOp',
@@ -331,7 +332,7 @@ project(':GlideLibrary').projectDir = new File('ThirdLib/GlideLibrary')
 //eventBus，
 project(':EventbusAndroid').projectDir = new File('ThirdLib/EventbusAndroid')
 project(':EventBus').projectDir = new File('ThirdLib/EventBus')
-//OkHttp，
+//OkHttp，4.7.2版本
 project(':OkHttpLib').projectDir = new File('ThirdLib/OkHttpLib')
 //gson库，2.8.6版本
 project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
