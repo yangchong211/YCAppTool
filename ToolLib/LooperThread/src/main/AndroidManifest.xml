@@ -7,6 +7,7 @@
         <receiver
             android:name="com.yc.looperthread.heart.HeartReceiver"
             android:exported="false" />
+        <activity android:name="com.yc.looperthread.test.HeartActivity"/>
     </application>
 
 

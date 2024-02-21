@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_view_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:text="1.开启heart服务"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/tv_view_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:text="2.模拟一个崩溃，看看是否重启"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/tv_view_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:text="3.模拟一个崩溃，看看是否重启"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/tv_view_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:text="4.模拟一个崩溃，看看是否重启"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/tv_view_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:text="5.开始轮询"
+        android:background="@android:color/darker_gray"/>
+
+
+    <TextView
+        android:id="@+id/tv_view_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:text="6.停止轮训"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/tv_view_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:text="7.结束轮训"
+        android:background="@android:color/darker_gray"/>
+
+</LinearLayout>
