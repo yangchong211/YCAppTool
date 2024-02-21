@@ -1,5 +1,5 @@
 //
-// Created by pqpo on 2017/11/23.
+// Created by yangchong on 2017/11/23.
 //
 
 #ifndef LOG4A_FILEFLUSH_H

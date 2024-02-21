@@ -11,9 +11,9 @@ import static me.pqpo.librarylog4a.Level.*;
 
 
 /**
- * Created by pqpo on 2017/11/16.
+ * Created by yangchong on 2017/11/16.
  */
-public class Log4a {
+public final class Log4a {
 
     private static Logger sLoggerDelegate = new AndroidLogger();
 

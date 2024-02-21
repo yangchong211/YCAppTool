@@ -9,7 +9,7 @@ import me.pqpo.librarylog4a.Level;
 import me.pqpo.librarylog4a.appender.AbsAppender;
 
 /**
- * Created by pqpo on 2017/11/28.
+ * Created by yangchong on 2017/11/28.
  */
 public class NoBufferFileAppender extends AbsAppender {
 

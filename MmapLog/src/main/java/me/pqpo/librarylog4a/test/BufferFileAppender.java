@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import me.pqpo.librarylog4a.appender.AbsAppender;
 
 /**
- * Created by pqpo on 2017/11/28.
+ * Created by yangchong on 2017/11/28.
  */
 public class BufferFileAppender extends AbsAppender {
 

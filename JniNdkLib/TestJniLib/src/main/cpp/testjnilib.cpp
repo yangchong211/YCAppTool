@@ -127,3 +127,43 @@ JNIEXPORT void JNI_OnUnload(JavaVM *jvm, void *reserved) {
         env->UnregisterNatives(clazz);
     }
 }
+
+/**
+ * 抛出异常例子，函数封装如下：
+ * 作用：抛出java异常
+ * @param env JNIEnv 实例引用
+ * @param execptionClassName java异常类 全类名
+ * @param msg 异常信息
+ */
+void throwExecption(JNIEnv * env, const char * execptionClassName, const char * msg){
+    jclass jcls = env->FindClass(nullptr == execptionClassName?"java/lang/Throwable":execptionClassName);
+    if (jcls != nullptr) {
+        //抛出指定名称的异常
+        env->ThrowNew(jcls, nullptr == msg? "发生异常":msg);
+    }
+    env->DeleteLocalRef(jcls);
+}
+
+//JNI层异常处理例子
+void testException(JNIEnv * env){
+    //1 模拟JNI接口 或 JNI调用的java方法 抛出的异常
+    throwExecption(env,"java/lang/IllegalStateException","我是JNI，我这儿有异常");
+    //2 在每个可能抛出异常的JNI接口后面 检测 是否有异常发生
+    if(env->ExceptionCheck()){
+        //3 获取并缓存JNI层的java异常，用于后续再次抛出
+        jthrowable jthrowable = env->ExceptionOccurred();
+        //4 清除JNI层抛出的java异常
+        env->ExceptionClear();
+        //5 TODO:JNI层发生异常的处理逻辑
+        //6 重新抛出异常，目的是让java层也收到该异常，并通过try catch捕获并执行java层的相应逻辑
+        env->Throw(jthrowable);
+        //7 删除局部引用
+        env->DeleteLocalRef(jthrowable);
+        //8 结束方法，JNI抛出的java异常 传递 到java层
+        return;
+    }
+    // 抛出异常后，如果不处理，会执行该循环
+    for(int i = 0; i < 1000; i++){
+        __android_log_write(ANDROID_LOG_ERROR, "yy", std::to_string(i).c_str());
+    }
+}

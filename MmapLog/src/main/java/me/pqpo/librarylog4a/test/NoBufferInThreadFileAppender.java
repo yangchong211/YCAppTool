@@ -12,7 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import me.pqpo.librarylog4a.appender.AbsAppender;
 
 /**
- * Created by pqpo on 2017/11/28.
+ * Created by yangchong on 2017/11/28.
  */
 public class NoBufferInThreadFileAppender extends AbsAppender {
 

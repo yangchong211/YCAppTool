@@ -43,6 +43,11 @@ public class NativeCrashDumper {
      */
     public native void exception();
 
+    /**
+     * 测试异常
+     */
+    public native void testException();
+
     public boolean init(String crashDumpDir,
                         NativeCrashListener nativeCrashListener, NativeHandleMode handleMode) {
         if (crashDumpDir == null) {

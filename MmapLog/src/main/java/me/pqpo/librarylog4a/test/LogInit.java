@@ -17,7 +17,7 @@ import me.pqpo.librarylog4a.formatter.DateFileFormatter;
 import me.pqpo.librarylog4a.interceptor.Interceptor;
 
 /**
- * Created by pqpo on 2017/11/24.
+ * Created by yangchong on 2017/11/24.
  */
 public class LogInit {
 

@@ -2,7 +2,7 @@ package me.pqpo.librarylog4a;
 
 
 /**
- * Created by pqpo on 2017/11/21.
+ * Created by yangchong on 2017/11/21.
  */
 public class LogData {
 

@@ -8,9 +8,9 @@ public class LogBuffer {
 
     private long ptr = 0;
     private String logPath;
-    private String bufferPath;
-    private int bufferSize;
-    private boolean compress;
+    private final String bufferPath;
+    private final int bufferSize;
+    private final boolean compress;
 
     public LogBuffer(String bufferPath, int capacity, String logPath, boolean compress) {
         this.bufferPath = bufferPath;
