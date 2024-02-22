@@ -2,6 +2,8 @@ package com.yc.looperthread.looper;
 
 import android.util.Log;
 
+import com.yc.looperthread.abs.AbsPollingThread;
+
 /**
  * 使用while实现定时性周期性任务轮训
  */

@@ -67,6 +67,10 @@ public class HeartManager {
         this.onHeartBeat = onHeartBeat;
     }
 
+    protected HeartConfig getHeartConfig() {
+        return heartConfig;
+    }
+
     public interface OnHeartBeat {
         void heartBeat();
     }

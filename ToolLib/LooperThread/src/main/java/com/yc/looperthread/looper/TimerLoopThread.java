@@ -2,6 +2,8 @@ package com.yc.looperthread.looper;
 
 import android.util.Log;
 
+import com.yc.looperthread.abs.AbsPollingThread;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantLock;

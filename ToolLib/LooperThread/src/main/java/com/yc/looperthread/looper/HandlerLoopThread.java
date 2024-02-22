@@ -5,6 +5,8 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 
+import com.yc.looperthread.abs.AbsPollingThread;
+
 /**
  * 使用Handler不断发送消息来实现轮训
  */

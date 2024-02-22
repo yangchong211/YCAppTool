@@ -40,10 +40,6 @@ public class HeartService extends Service {
      */
     public static final String ACTION_STOP = "com.yc.heart.ACTION_STOP";
     /**
-     * 时钟心跳间隔，设置为30秒
-     */
-    private static final int TIME = 10 * 1000;
-    /**
      * 闲时时钟心跳间隔，设置为10分钟
      */
     private static final int TIME_NIGHT = 2 * 10 * 1000;
@@ -194,15 +190,15 @@ public class HeartService extends Service {
      *
      * @return 心跳间隔
      */
-    private int getDelayTime() {
+    private long getDelayTime() {
         if (!isDaytime()) { // 凌晨0-6点心跳频率降低
             return TIME_NIGHT;
         }
-        return TIME;
+        return HeartManager.getInstance().getHeartConfig().getLooperTime();
     }
 
     /**
-     * 是否为白天（凌晨0-6点不进行心跳和实体卡同步）
+     * 是否为白天（凌晨0-6点）
      */
     private boolean isDaytime() {
         Date date = new Date();

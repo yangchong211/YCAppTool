@@ -14,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.yc.looperthread.R;
 import com.yc.looperthread.abs.IDoAction;
 import com.yc.looperthread.heart.HeartManager;
+import com.yc.looperthread.looper.HandlerLoopThread;
+import com.yc.looperthread.looper.ScheduledLoopThread;
+import com.yc.looperthread.looper.ThreadLoopThread;
+import com.yc.looperthread.looper.TimerLoopThread;
 import com.yc.looperthread.looper.WhileLoopThread;
 
 import java.util.ArrayList;
@@ -112,7 +116,14 @@ public class HeartActivity extends AppCompatActivity {
         });
     }
 
-    private final IDoAction defaultLoopThread = new WhileLoopThread(){
+    /**
+     * {@link WhileLoopThread}
+     * {@link TimerLoopThread}
+     * {@link ScheduledLoopThread}
+     * {@link ThreadLoopThread}
+     * {@link HandlerLoopThread}
+     */
+    private final IDoAction defaultLoopThread = new ThreadLoopThread(){
         @Override
         public void doAction() {
             super.doAction();

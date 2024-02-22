@@ -5,20 +5,24 @@ import android.util.Log;
 import com.yc.looperthread.abs.IDoAction;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 使用Thread.sleep实现轮询。一直做while循环
  */
-public abstract class AbsLoopThread extends Thread implements IDoAction {
+public class ThreadLoopThread extends Thread implements IDoAction {
 
-    static final String TAG = AbsLoopThread.class.getSimpleName();
+    private static final String TAG = ThreadLoopThread.class.getSimpleName();
+    private final AtomicLong count = new AtomicLong(0);
     private volatile boolean beginRead = false;
     private final AtomicBoolean isStart = new AtomicBoolean(false);
 
     @Override
     public void run() {
         super.run();
+        //判断是否是非中断
         while (!interrupted()) {
+            //如果已经开始并且支持循环，则执行循环体逻辑
             while (beginRead && isLoop()) {
                 try {
                     doAction();
@@ -26,7 +30,8 @@ public abstract class AbsLoopThread extends Thread implements IDoAction {
                     e.printStackTrace();
                 } finally {
                     try {
-                        //线程轮训的方式中延时操作阻塞了线程
+                        //线程轮训的方式中延时操作阻塞了线程。
+                        //思考：线程阻塞延迟有几种方式？第一种：sleep；第二种：wait；第三种：无
                         Thread.sleep(getSleepTime());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -44,6 +49,7 @@ public abstract class AbsLoopThread extends Thread implements IDoAction {
         //防止多次启动
         if (!isStart.get()) {
             Log.v(TAG, "startThread");
+            //线程只能启动一次，如果启动多次则会抛出异常
             start();
             isStart.set(true);
         }
@@ -81,6 +87,11 @@ public abstract class AbsLoopThread extends Thread implements IDoAction {
         interrupt();
         //使用stop方法强行终止线程（不推荐使用，可能发生不可预料的结果）
         //stop();
+    }
+
+    @Override
+    public void doAction() {
+        Log.v(TAG, "doAction-> " + count.getAndIncrement());
     }
 
     /**

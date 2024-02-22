@@ -2,6 +2,8 @@ package com.yc.looperthread.looper;
 
 import android.util.Log;
 
+import com.yc.looperthread.abs.AbsPollingThread;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
