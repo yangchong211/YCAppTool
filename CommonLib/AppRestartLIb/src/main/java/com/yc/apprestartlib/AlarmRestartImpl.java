@@ -33,6 +33,7 @@ public class AlarmRestartImpl implements IRestartProduct {
                 Intent.FLAG_ACTIVITY_NEW_TASK
                         | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
         );
+        //这种方式会黑屏一下
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
         //        | Intent.FLAG_ACTIVITY_CLEAR_TASK |
