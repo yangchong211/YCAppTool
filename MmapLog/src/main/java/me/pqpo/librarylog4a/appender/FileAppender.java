@@ -15,7 +15,7 @@ import me.pqpo.librarylog4a.interceptor.Interceptor;
 
 public class FileAppender extends AbsAppender {
 
-    private LogBuffer logBuffer;
+    private final LogBuffer logBuffer;
 
     private Formatter formatter;
 

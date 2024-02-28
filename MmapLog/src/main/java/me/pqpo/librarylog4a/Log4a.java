@@ -91,7 +91,6 @@ public final class Log4a {
             }
             t = t.getCause();
         }
-
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         tr.printStackTrace(pw);

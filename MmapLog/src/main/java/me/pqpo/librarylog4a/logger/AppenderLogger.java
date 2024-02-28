@@ -25,9 +25,6 @@ public class AppenderLogger implements Logger{
 
     @Override
     public void println(int priority, String tag, String msg) {
-        if (appenderList == null) {
-            return;
-        }
         for (Appender appender : appenderList) {
             appender.append(priority, tag, msg);
         }
