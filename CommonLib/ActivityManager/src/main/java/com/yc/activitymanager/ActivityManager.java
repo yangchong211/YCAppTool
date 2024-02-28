@@ -53,6 +53,10 @@ public class ActivityManager implements IActivityManager<Activity> {
     private final ProxyActivityListener mProxyActivityListener =
             new ProxyActivityListener(this);
     /**
+     * app退出监听
+     */
+    private OnExitListener onExitListener;
+    /**
      * 是否初始化
      */
     private boolean mInit = false;
@@ -277,6 +281,10 @@ public class ActivityManager implements IActivityManager<Activity> {
             }
             //finish所有activity
             finishAll();
+            //做一些资源释放工作
+            if (getOnExitListener() != null) {
+                getOnExitListener().deInit();
+            }
         } catch (Exception ignored) {
             //ignored.printStackTrace();
         }
@@ -365,5 +373,13 @@ public class ActivityManager implements IActivityManager<Activity> {
             return false;
         }
         return name.equals(activityName);
+    }
+
+    public OnExitListener getOnExitListener() {
+        return onExitListener;
+    }
+
+    public void setOnExitListener(OnExitListener onExitListener) {
+        this.onExitListener = onExitListener;
     }
 }
