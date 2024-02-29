@@ -16,6 +16,7 @@ static AsyncFileFlush *fileFlush = nullptr;
 
 static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
                         jint capacity, jstring log_path_, jboolean compress_) {
+    //env
     const char *buffer_path = env->GetStringUTFChars(buffer_path_, 0);
     const char *log_path = env->GetStringUTFChars(log_path_, 0);
     size_t buffer_size = static_cast<size_t>(capacity);
