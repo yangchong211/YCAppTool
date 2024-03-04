@@ -8,6 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.looperthread.heart.HeartManager;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import me.pqpo.librarylog4a.test.MmapLogActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,5 +28,14 @@ public class MainActivity extends AppCompatActivity {
                 MmapLogActivity.startActivity(MainActivity.this);
             }
         });
+
+        Map<String ,String> map = new HashMap<>();
+        Set<String> strings = map.keySet();
+        Iterator<String> iterator = strings.iterator();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            String value = map.get(key);
+
+        }
     }
 }

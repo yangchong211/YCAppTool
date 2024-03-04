@@ -62,6 +62,12 @@ public abstract class AbsTaskExecutor {
     public abstract void postToMainThreadDelay(@NonNull Runnable runnable, long delayMills);
 
     /**
+     * 移除消息
+     * @param runnable  runnable
+     */
+    public abstract void removeRunnable(@NonNull Runnable runnable);
+
+    /**
      * 获取UI主线程共有handler对象
      *
      * @return handler

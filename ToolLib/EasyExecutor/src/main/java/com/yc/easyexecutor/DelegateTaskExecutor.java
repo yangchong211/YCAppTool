@@ -143,6 +143,13 @@ public class DelegateTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
+    public void removeRunnable(@Nullable Runnable runnable) {
+        if (runnable != null) {
+            mDelegate.removeRunnable(runnable);
+        }
+    }
+
+    @Override
     public Handler getMainHandler() {
         return mDelegate.getMainHandler();
     }

@@ -164,6 +164,14 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
+    public void removeRunnable(@Nullable Runnable runnable) {
+        mMainHandler = getMainHandler();
+        if (mMainHandler != null && runnable != null) {
+            mMainHandler.removeCallbacks(runnable);
+        }
+    }
+
+    @Override
     public Handler getMainHandler() {
         if (mMainHandler == null) {
             synchronized (mLock) {
