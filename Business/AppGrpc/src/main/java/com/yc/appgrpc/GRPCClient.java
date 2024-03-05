@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.yc.grpcserver.GrpcChannelBuilder;
+import com.yc.grpcserver.ChannelHelper;
 
 import io.grpc.ManagedChannel;
 import io.grpc.stub.StreamObserver;
@@ -23,7 +23,7 @@ public class GRPCClient {
 //        managedChannel = ManagedChannelBuilder.forAddress(host, port)
 //                .usePlaintext()
 //                .build();
-        managedChannel = GrpcChannelBuilder.build(host,port,null,false,null);
+        managedChannel = ChannelHelper.newChannel2(host,port);
         stub = GreeterGrpc.newStub(managedChannel);
     }
     // 使用广播的方法发送数据更新ui

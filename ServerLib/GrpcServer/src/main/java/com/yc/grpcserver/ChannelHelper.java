@@ -28,6 +28,11 @@ public final class ChannelHelper {
         return GrpcChannelBuilder.build(host, port, null, false, null);
     }
 
+    public static ManagedChannel newChannel3(String url) {
+        return GrpcChannelBuilder.build(url, null, false, null);
+    }
+
+
     /**
      * 获取连接状态
      *

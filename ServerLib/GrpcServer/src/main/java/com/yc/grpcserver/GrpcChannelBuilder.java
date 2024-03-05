@@ -24,6 +24,34 @@ import io.grpc.okhttp.OkHttpChannelBuilder;
 
 public class GrpcChannelBuilder {
 
+    public static ManagedChannel build(String url, @Nullable String serverHostOverride,
+                                       boolean useTls, @Nullable InputStream isCa) {
+        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forTarget(url);
+        OkHttpChannelBuilder.forTarget("");
+        if (serverHostOverride != null) {
+            channelBuilder.overrideAuthority(serverHostOverride);
+        }
+        if (useTls) {
+            try {
+                SSLContext sc = SSLContext.getInstance("TLSv1.2");
+                sc.init(null, getTrustManagers(isCa), null);
+                ConnectionSpec.Builder builder = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS);
+                ConnectionSpec cs = builder.tlsVersions(TlsVersion.TLS_1_2).build();
+                ((OkHttpChannelBuilder) channelBuilder).useTransportSecurity();
+                ((OkHttpChannelBuilder) channelBuilder).connectionSpec(cs);
+                Tls12SocketFactory socketFactory = new Tls12SocketFactory(sc.getSocketFactory());
+                ((OkHttpChannelBuilder) channelBuilder).sslSocketFactory(socketFactory);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            // 是否使用tls加密，true不使用
+            channelBuilder.usePlaintext();
+        }
+        return channelBuilder.build();
+    }
+
+
     public static ManagedChannel build(String host, int port, @Nullable String serverHostOverride,
                                        boolean useTls, @Nullable InputStream isCa) {
         ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress(host, port);
@@ -41,6 +69,44 @@ public class GrpcChannelBuilder {
                 ((OkHttpChannelBuilder) channelBuilder).connectionSpec(cs);
                 Tls12SocketFactory socketFactory = new Tls12SocketFactory(sc.getSocketFactory());
                 ((OkHttpChannelBuilder) channelBuilder).sslSocketFactory(socketFactory);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            // 是否使用tls加密，true不使用
+            channelBuilder.usePlaintext();
+        }
+        return channelBuilder.build();
+    }
+
+    /**
+     * 用来生成ManagedChannel的
+     *
+     * @param url                     url域名
+     * @param serverHostOverride      服务器端给的
+     * @param useTls                  是否使用tls加密 ，true代表使用https加密，false代表不使用，
+     * @param isCa                    证书的流
+     * @param androidSocketFactoryTls 不知道是啥，传null
+     * @return
+     */
+    public static ManagedChannel build(String url, @Nullable String serverHostOverride,
+                                       boolean useTls, @Nullable InputStream isCa,
+                                       @Nullable String androidSocketFactoryTls) {
+        //构建Channel
+        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forTarget(url);
+        if (serverHostOverride != null) {
+            channelBuilder.overrideAuthority(serverHostOverride);
+        }
+        if (useTls) {
+            try {
+                SSLSocketFactory factory;
+                if (androidSocketFactoryTls != null) {
+                    factory = getSslCertificateSocketFactory(isCa, androidSocketFactoryTls);
+                } else {
+                    factory = getSslSocketFactory(isCa);
+                }
+                ((OkHttpChannelBuilder) channelBuilder).useTransportSecurity();
+                ((OkHttpChannelBuilder) channelBuilder).sslSocketFactory(factory);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
