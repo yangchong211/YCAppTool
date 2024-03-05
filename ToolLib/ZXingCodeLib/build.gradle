@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.3'
     implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
     implementation 'com.github.yangchong211.YCCommonLib:AppEncryptLib:1.4.9'
+    implementation project(path: ':ToolUtilsLib')
 //    implementation project(path: ':ToolUtilsLib')
 //    implementation project(path: ':AppEncryptLib')
 }
