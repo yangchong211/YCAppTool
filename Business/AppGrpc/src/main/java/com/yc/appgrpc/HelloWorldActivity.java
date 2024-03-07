@@ -19,10 +19,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.yc.grpcserver.BaseRequest;
 import com.yc.grpcserver.BaseResponse;
 import com.yc.grpcserver.ChannelHelper;
 import com.yc.grpcserver.GrpcHelper;
-import com.yc.grpcserver.GrpcCallback;
+import com.yc.grpcserver.GrpcStubManager;
 import com.yc.toastutils.ToastUtils;
 
 import java.io.PrintWriter;
@@ -316,8 +317,10 @@ public class HelloWorldActivity extends AppCompatActivity {
             HelloWorldGrpc.HelloWorldBlockingStub stub = HelloWorldGrpc.newBlockingStub(channel);
             //构建请求实体，HelloRequest是自动生成的实体类
             HelloRequest request = HelloRequest.newBuilder().setName(message).build();
+            //设置超时
+            HelloWorldGrpc.HelloWorldBlockingStub blockingStub = GrpcStubManager.createStub(stub, new BaseRequest());
             //进行请求并且得到响应数据
-            HelloReply reply = stub.sayHello(request);
+            HelloReply reply = blockingStub.sayHello(request);
             BaseResponse response = GrpcHelper.translateResponse(reply, BaseResponse.class);
         } catch (Exception e) {
             Log.i("Exception", e.getMessage());
