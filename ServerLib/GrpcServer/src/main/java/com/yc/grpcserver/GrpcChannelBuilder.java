@@ -27,7 +27,6 @@ public class GrpcChannelBuilder {
     public static ManagedChannel build(String url, @Nullable String serverHostOverride,
                                        boolean useTls, @Nullable InputStream isCa) {
         ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forTarget(url);
-        OkHttpChannelBuilder.forTarget("");
         if (serverHostOverride != null) {
             channelBuilder.overrideAuthority(serverHostOverride);
         }
@@ -52,10 +51,19 @@ public class GrpcChannelBuilder {
     }
 
 
+    /**
+     * 用来生成ManagedChannel的
+     *
+     * @param host               ip地址
+     * @param port               端口号
+     * @param serverHostOverride 这个不知道是啥，是服务器端给我的
+     * @param useTls             是否使用tls加密 ，true代表使用https加密，false代表不使用，
+     * @param isCa               证书的流
+     * @return
+     */
     public static ManagedChannel build(String host, int port, @Nullable String serverHostOverride,
                                        boolean useTls, @Nullable InputStream isCa) {
         ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress(host, port);
-        OkHttpChannelBuilder.forTarget("");
         if (serverHostOverride != null) {
             channelBuilder.overrideAuthority(serverHostOverride);
         }
