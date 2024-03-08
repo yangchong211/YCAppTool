@@ -85,6 +85,9 @@ public class MediaTtsManager implements InterTtsPlayer {
     public void speak(String content) {
         Log.e(TAG, "speak content: " + content);
         myHashRender.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, content);
+        //使用指定的参数将给定的文本合成为文件。
+        //该方法是异步的，即该方法只是将请求添加到TTS请求队列中，然后返回。
+        //当此方法返回时，合成可能还没有完成(甚至还没有开始!)。
         int r = mSpeech.synthesizeToFile(content, myHashRender, wavPath);
         if (r == TextToSpeech.SUCCESS) {
             Log.e(TAG, "save success" + wavPath);

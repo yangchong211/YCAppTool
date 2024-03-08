@@ -3,11 +3,13 @@ package com.bumptech.glide;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.CheckResult;
-import android.support.annotation.DrawableRes;
+
+import androidx.annotation.CheckResult;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.support.annotation.RawRes;
+import androidx.annotation.RawRes;
+
 import java.io.File;
 import java.net.URL;
 

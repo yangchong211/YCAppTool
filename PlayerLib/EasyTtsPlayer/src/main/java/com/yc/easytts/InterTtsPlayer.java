@@ -27,6 +27,7 @@ package com.yc.easytts;
  * </pre>
  */
 public interface InterTtsPlayer {
+
     void speak(final String content);
 
     void pause();
