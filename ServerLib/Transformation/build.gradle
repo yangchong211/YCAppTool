@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply from: rootProject.projectDir.absolutePath + "/yc.gradle"
-apply plugin: 'kotlin-android'
+//迁移到jitpack
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
@@ -11,6 +12,7 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -19,15 +21,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    //jdk1.8
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
-    implementation rootProject.ext.dependencies["appcompat"]
-    implementation rootProject.ext.dependencies["annotation"]
-    implementation(rootProject.ext.dependencies["kotlinxJdk"])
-    implementation rootProject.ext.dependencies["coreKtx"]
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation(rootProject.ext.dependencies["appcompat"])
+    implementation(rootProject.ext.dependencies["annotation"])
+    implementation rootProject.ext.dependencies["glide"]
+    implementation project(path: ':ToolFileLib')
+    implementation project(path: ':ImageToolLib')
+    implementation project(path: ':AppContextLib')
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    implementation rootProject.ext.dependencies["okhttp"]
+    implementation project(path: ':ToolUtilsLib')
 }
