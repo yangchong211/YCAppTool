@@ -27,6 +27,7 @@ public class HandlerLoopThread extends AbsPollingThread {
     @Override
     public void beginLoop() {
         super.beginLoop();
+        handler.removeMessages(MSG_GET_COMPARE_RESULT);
         handler.sendEmptyMessageDelayed(MSG_GET_COMPARE_RESULT, 0);
     }
 
