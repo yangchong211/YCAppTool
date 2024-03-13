@@ -35,12 +35,12 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 include ':AppServer'
 project(':AppServer').projectDir = new File('ServerLib/AppServer')
 //库
-include ':ImageServer', ':HttpServer', ':ShareServer',
+include ':Transformation', ':HttpServer', ':ShareServer',
         ':GsonServer', ':IpcServer', ':ObjectEqualLib', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
-        ':GlideProgressLib', ':CompressServer',  ':Transformation', ':GrpcServer'
-project(':ImageServer').projectDir = new File('ServerLib/ImageServer')
+        ':GlideProgressLib', ':CompressServer', ':GrpcServer'
+project(':Transformation').projectDir = new File('ServerLib/Transformation')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
 project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
@@ -56,7 +56,6 @@ project(':NetInterceptor').projectDir = new File('ServerLib/NetInterceptor')
 project(':SignalHooker').projectDir = new File('ServerLib/SignalHooker')
 project(':GlideProgressLib').projectDir = new File('ServerLib/GlideProgressLib')
 project(':CompressServer').projectDir = new File('ServerLib/CompressServer')
-project(':Transformation').projectDir = new File('ServerLib/Transformation')
 project(':TcpServerLib').projectDir = new File('ServerLib/TcpServerLib')
 project(':TcpManager').projectDir = new File('ServerLib/TcpManager')
 project(':GrpcServer').projectDir = new File('ServerLib/GrpcServer')

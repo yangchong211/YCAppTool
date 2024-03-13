@@ -201,7 +201,7 @@ dependencies {
     implementation project(path: ':MonitorKeepAlive')
     implementation project(path: ':HttpServer')
     implementation project(path: ':LibraryLayer')
-    implementation project(path: ':ImageServer')
+    implementation project(path: ':Transformation')
     implementation project(path: ':ZxingServerLib')
     implementation project(path: ':NfcHelper')
     implementation project(path: ':LongAliveLib')

@@ -110,7 +110,7 @@ dependencies {
     implementation project(path: ':ImageToolLib')
     implementation project(path: ':BlurViewLib')
     implementation project(path: ':LibraryLayer')
-    implementation project(path: ':ImageServer')
+    implementation project(path: ':Transformation')
     implementation project(path: ':BannerViewLib')
     implementation project(path: ':SecondaryScreen')
 }

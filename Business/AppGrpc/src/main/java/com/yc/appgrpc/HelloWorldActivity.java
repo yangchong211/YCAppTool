@@ -306,7 +306,7 @@ public class HelloWorldActivity extends AppCompatActivity {
         int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
         try {
             //构建Channel
-            channel = ChannelHelper.newChannel1(host, port);
+            channel = ChannelHelper.getInstance().newChannel1(host, port);
             //构建服务请求API代理
             //* BlockingStub: 一对一（一元）的阻塞式响应。
             //* 内部也是基于FutureStub实现，只是在调用时就开启了while循环。

@@ -23,7 +23,7 @@ public class GRPCClient {
 //        managedChannel = ManagedChannelBuilder.forAddress(host, port)
 //                .usePlaintext()
 //                .build();
-        managedChannel = ChannelHelper.newChannel2(host,port);
+        managedChannel = ChannelHelper.getInstance().newChannel2(host,port);
         stub = GreeterGrpc.newStub(managedChannel);
     }
     // 使用广播的方法发送数据更新ui

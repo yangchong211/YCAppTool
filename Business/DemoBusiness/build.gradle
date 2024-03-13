@@ -65,7 +65,7 @@ dependencies {
     implementation project(path: ':SerialTaskLib')
     implementation project(path: ':ThreadPoolLib')
     implementation project(path: ':HttpServer')
-    implementation project(path: ':ImageServer')
+    implementation project(path: ':Transformation')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':AppEditText')
     implementation project(path: ':CustomWidget')
