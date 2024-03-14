@@ -11,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.yc.appcommoninter.ILogger;
 import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.inter.DefaultStateListener;
-import com.yc.audioplayer.inter.PlayStateListener;
-import com.yc.audioplayer.manager.AudioManager;
 import com.yc.audioplayer.service.AudioService;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.bean.AudioTtsPriority;

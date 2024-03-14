@@ -11,7 +11,7 @@ import com.yc.appcommoninter.ILogger;
 /**
  * <pre>
  *     @author 杨充
- *     blog  : https://github.com/yangchong211
+ *     blog  : <a href="https://github.com/yangchong211">...</a>
  *     time  : 2017/01/30
  *     desc  : 配置类
  *     revise:

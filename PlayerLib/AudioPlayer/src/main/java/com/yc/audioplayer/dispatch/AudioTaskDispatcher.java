@@ -4,7 +4,7 @@ import android.os.Process;
 
 import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.deque.AudioTtsDeque;
-import com.yc.audioplayer.manager.AudioManager;
+import com.yc.audioplayer.service.AudioManager;
 import com.yc.audioplayer.service.AudioService;
 import com.yc.audioplayer.inter.AbstractAudioWrapper;
 import com.yc.audioplayer.bean.AudioPlayData;
@@ -15,7 +15,7 @@ import com.yc.audioplayer.inter.InterPlayListener;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
- *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     GitHub : <a href="https://github.com/yangchong211/YCVideoPlayer">...</a>
  *     time  : 2018/8/6
  *     desc  : task任务分发处理器
  *     revise:

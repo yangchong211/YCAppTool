@@ -18,7 +18,7 @@ import com.yc.audioplayer.inter.InterPlayListener;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
- *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     GitHub : <a href="https://github.com/yangchong211/YCVideoPlayer">...</a>
  *     time  : 2018/8/6
  *     desc  : 音频播放player，使用原生media。本地资源可以使用这个
  *     revise:

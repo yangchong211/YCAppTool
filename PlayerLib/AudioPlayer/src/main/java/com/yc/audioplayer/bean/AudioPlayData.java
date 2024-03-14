@@ -5,7 +5,7 @@ package com.yc.audioplayer.bean;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
- *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     GitHub : <a href="https://github.com/yangchong211/YCVideoPlayer">...</a>
  *     time  : 2018/8/6
  *     desc  : 链表结果的播放数据
  *     revise:

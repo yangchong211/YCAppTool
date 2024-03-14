@@ -8,7 +8,7 @@ import com.yc.audioplayer.bean.AudioPlayData;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
- *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     GitHub : <a href="https://github.com/yangchong211/YCVideoPlayer">...</a>
  *     time  : 2018/8/6
  *     desc  : 音频播放接口定义
  *     revise:

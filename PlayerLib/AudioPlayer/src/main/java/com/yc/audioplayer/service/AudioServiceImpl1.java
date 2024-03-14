@@ -6,7 +6,6 @@ import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.dispatch.AudioTaskDispatcher;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.PlayStateListener;
-import com.yc.audioplayer.manager.AudioManager;
 
 /**
  * <pre>

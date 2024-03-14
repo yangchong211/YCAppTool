@@ -5,7 +5,6 @@ import android.content.Context;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.inter.PlayStateListener;
-import com.yc.audioplayer.manager.AudioManager;
 
 /**
  * <pre>
