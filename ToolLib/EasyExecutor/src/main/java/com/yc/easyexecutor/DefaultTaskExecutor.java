@@ -66,10 +66,12 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     private final ScheduledThreadPoolExecutor mDelayExecutor;
     /**
      * CPU 核数
+     * Java虚拟机可用处理器数量
      */
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
     /**
      * 线程池线程数
+     * 线程池的核心线程数。在没有设置 allowCoreThreadTimeOut 为 true 的情况下，核心线程会在线程池中一直存活，即使处于闲置状态。
      */
     private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 5));
     /**
@@ -80,10 +82,6 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
      * 线程空置回收时间
      */
     private static final int KEEP_ALIVE_SECONDS = 5;
-    /**
-     * 线程池队列
-     */
-    private final BlockingQueue<Runnable> mPoolWorkQueue = new LinkedBlockingQueue<>();
     /**
      * 这个是为了保障任务超出BlockingQueue的最大值，且线程池中的线程数已经达到MAXIMUM_POOL_SIZE时候
      * 还有任务到来会采取任务拒绝策略，这里定义的策略就是再开一个缓存线程池去执行。
@@ -100,19 +98,11 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
         //主要是处理io密集流
         mDiskIO = Executors.newFixedThreadPool(4, new MyThreadFactory("LoggerTask #"));
         //处理比较核心的任务
-        mCoreExecutor = Executors.newSingleThreadExecutor(new MyThreadFactory("ScheduleTask") {
-            @Override
-            public Thread newThread(Runnable r) {
-                //创建线程
-                Thread scheduleTask = new Thread(r);
-                scheduleTask.setName("ScheduleTask");
-                return scheduleTask;
-            }
-        });
+        mCoreExecutor = Executors.newSingleThreadExecutor(new MyThreadFactory("ScheduleTask"));
         //处理cpu密集任务
-        mCPUThreadPoolExecutor = new ThreadPoolExecutor(
+        mCPUThreadPoolExecutor = new MyThreadPoolExecutor(
                 CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_SECONDS, TimeUnit.SECONDS,
-                mPoolWorkQueue, Executors.defaultThreadFactory(), mHandler);
+                new LinkedBlockingQueue<>(), mHandler);
         mCPUThreadPoolExecutor.allowCoreThreadTimeOut(true);
         //处理其他
         mDelayExecutor = new ScheduledThreadPoolExecutor(CORE_POOL_SIZE);
