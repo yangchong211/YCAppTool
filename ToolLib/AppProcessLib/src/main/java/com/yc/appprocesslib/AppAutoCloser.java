@@ -1,4 +1,4 @@
-package com.yc.autocloserlib;
+package com.yc.appprocesslib;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,10 +7,6 @@ import android.os.Handler;
 import android.os.Process;
 import android.util.Log;
 
-
-import com.yc.appprocesslib.AppStateMonitor;
-import com.yc.appprocesslib.BackgroundThread;
-import com.yc.appprocesslib.OnStateListener;
 
 import java.util.concurrent.TimeUnit;
 

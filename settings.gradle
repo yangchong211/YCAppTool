@@ -36,7 +36,7 @@ include ':AppServer'
 project(':AppServer').projectDir = new File('ServerLib/AppServer')
 //库
 include ':Transformation', ':HttpServer', ':ShareServer',
-        ':GsonServer', ':IpcServer', ':ObjectEqualLib', ':TcpServerLib', ':TcpManager',
+        ':GsonServer', ':IpcServer', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
         ':GlideProgressLib', ':CompressServer', ':GrpcServer'
@@ -47,7 +47,6 @@ project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
 project(':AppLogClient').projectDir = new File('ServerLib/AppLogClient')
 project(':AppLogService').projectDir = new File('ServerLib/AppLogService')
 project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
-project(':ObjectEqualLib').projectDir = new File('ServerLib/ObjectEqualLib')
 project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')
 project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
 project(':OkHttpServer').projectDir = new File('ServerLib/OkHttpServer')
@@ -188,7 +187,7 @@ project(':AppTool').projectDir = new File('ToolLib/AppTool')
 //库
 include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':EasySocket',
         ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',':InterceptorTime',
-        ':AnimatorToolLib', ':AppTraceTool', ':LongAliveLib', ':EasyExecutor',
+        ':AnimatorToolLib', ':LongAliveLib', ':EasyExecutor',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':LooperThread',
         ':AnimatorHelper', ':ThreadDebugLib', ':AppUpdateLib',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib',
@@ -201,10 +200,8 @@ project(':SerialTaskLib').projectDir = new File('ToolLib/SerialTaskLib')
 project(':LocaleHelperLib').projectDir = new File('ToolLib/LocaleHelperLib')
 project(':CountTimerLib').projectDir = new File('ToolLib/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('ToolLib/AnimatorToolLib')
-project(':AppTraceTool').projectDir = new File('ToolLib/AppTraceTool')
 project(':LongAliveLib').projectDir = new File('ToolLib/LongAliveLib')
 project(':ThreadPoolLib').projectDir = new File('ToolLib/ThreadPoolLib')
-project(':AutoCloserLib').projectDir = new File('ToolLib/AutoCloserLib')
 project(':AppProcessLib').projectDir = new File('ToolLib/AppProcessLib')
 project(':EasyExecutor').projectDir = new File('ToolLib/EasyExecutor')
 project(':LocalShareLib').projectDir = new File('ToolLib/LocalShareLib')
@@ -281,12 +278,13 @@ project(':MonitorFlow').projectDir = new File('MonitorLib/MonitorFlow')
 include ':AppPlayer'
 project(':AppPlayer').projectDir = new File('PlayerLib/AppPlayer')
 //库
-include ':VideoSqlLite', ':VideoCache', ':AudioPlayer', ':VideoSurface', ':SoundPool',':EasyMediaPlayer',
-        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView',':EasyTtsPlayer',
+include ':VideoSqlLite', ':VideoCache', ':EasyTtsPlayer', ':VideoSurface', ':SoundPool',':EasyMediaPlayer',
+        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView',
         ':BellsVibrations', ':AudioHelper', ':MediaScanner'
 project(':VideoSqlLite').projectDir = new File('PlayerLib/VideoSqlLite')
 project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
-project(':AudioPlayer').projectDir = new File('PlayerLib/AudioPlayer')
+//简单型tts播放器
+project(':EasyTtsPlayer').projectDir = new File('PlayerLib/EasyTtsPlayer')
 project(':MusicPlayer').projectDir = new File('PlayerLib/MusicPlayer')
 project(':VideoKernel').projectDir = new File('PlayerLib/VideoKernel')
 project(':VideoSurface').projectDir = new File('PlayerLib/VideoSurface')
@@ -299,8 +297,6 @@ project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')
 project(':MediaScanner').projectDir = new File('PlayerLib/MediaScanner')
 //SoundPool音效播放
 project(':SoundPool').projectDir = new File('PlayerLib/SoundPool')
-//简单型tts播放器
-project(':EasyTtsPlayer').projectDir = new File('PlayerLib/EasyTtsPlayer')
 //简单型MediaPlayer播放器
 project(':EasyMediaPlayer').projectDir = new File('PlayerLib/EasyMediaPlayer')
 

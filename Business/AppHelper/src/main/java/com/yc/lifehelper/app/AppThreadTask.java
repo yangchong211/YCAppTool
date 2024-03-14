@@ -4,7 +4,7 @@ import android.os.Looper;
 
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.parallel.AbsParallelTask;
-import com.yc.autocloserlib.AppAutoCloser;
+import com.yc.appprocesslib.AppAutoCloser;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.ntptime.NtpGetTime;
 

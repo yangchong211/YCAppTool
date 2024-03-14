@@ -39,12 +39,10 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     /**
      * UI主线程共有handler对象
      */
-    @Nullable
     private volatile Handler mMainHandler;
     /**
      * 配合handlerThread使用的handler，一般用来执行大量任务
      */
-    @Nullable
     private volatile Handler mIoHandler;
     /**
      * 核心任务的线程池
@@ -110,35 +108,35 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
 
 
     @Override
-    public void executeOnCore(@NonNull Runnable runnable) {
-        if (runnable != null && mDiskIO != null) {
+    public void executeOnCore(@Nullable Runnable runnable) {
+        if (runnable != null && mCoreExecutor != null) {
             mCoreExecutor.execute(runnable);
         }
     }
 
     @Override
-    public void executeOnDiskIO(@NonNull Runnable runnable) {
-        if (runnable != null && mCoreExecutor != null) {
+    public void executeOnDiskIO(@Nullable Runnable runnable) {
+        if (runnable != null && mDiskIO != null) {
             mDiskIO.execute(runnable);
         }
     }
 
     @Override
-    public void executeOnCpu(@NonNull Runnable runnable) {
+    public void executeOnCpu(@Nullable Runnable runnable) {
         if (runnable != null && mCPUThreadPoolExecutor != null) {
             mCPUThreadPoolExecutor.execute(runnable);
         }
     }
 
     @Override
-    public void executeOnScheduled(@NonNull Runnable runnable, long delayMills) {
+    public void executeOnScheduled(@Nullable Runnable runnable, long delayMills) {
         if (runnable != null && mDelayExecutor != null) {
             mDelayExecutor.schedule(runnable, delayMills, TimeUnit.MILLISECONDS);
         }
     }
 
     @Override
-    public void postToMainThread(@NonNull Runnable runnable) {
+    public void postToMainThread(@Nullable Runnable runnable) {
         mMainHandler = getMainHandler();
         if (mMainHandler != null && runnable != null) {
             mMainHandler.post(runnable);
@@ -146,7 +144,7 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
-    public void postToMainThreadDelay(@NonNull Runnable runnable, long delayMills) {
+    public void postToMainThreadDelay(@Nullable Runnable runnable, long delayMills) {
         mMainHandler = getMainHandler();
         if (mMainHandler != null && runnable != null) {
             mMainHandler.postDelayed(runnable, delayMills);
@@ -174,7 +172,7 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     }
 
     @Override
-    public void postIoHandler(@NonNull Runnable runnable) {
+    public void postIoHandler(@Nullable Runnable runnable) {
         if (mIoHandler == null) {
             synchronized (mLock) {
                 if (mIoHandler == null) {

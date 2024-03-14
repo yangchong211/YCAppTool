@@ -1,8 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yc.easytts" >
+    package="com.yc.audioplayer">
 
-    <application>
 
-    </application>
+
+    <!--为兼容Android11系统手机，我们需要在应用程序AndroidManifest.xml文件中增加如下声明-->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE"/>
+        </intent>
+    </queries>
+
 
 </manifest>

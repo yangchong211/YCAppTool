@@ -89,7 +89,7 @@ dependencies {
     implementation project(path: ':MusicPlayer')
     implementation project(path: ':VideoM3u8')
     implementation project(path: ':VideoSqlLite')
-    implementation project(path: ':AudioPlayer')
+    implementation project(path: ':EasyTtsPlayer')
     implementation project(path: ':VideoSurface')
 
     //自己封装的库，都有对应的案例项目【欢迎star】：https://github.com/yangchong211

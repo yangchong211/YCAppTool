@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
+import android.util.Log;
 
 
 import com.yc.audioplayer.bean.TtsPlayerConfig;
@@ -51,7 +52,7 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
     @Override
     public void init(InterPlayListener next, Context context) {
         mPlayListener = next;
-        this.mTts = new TextToSpeech(context, this);
+        mTts = new TextToSpeech(context, this);
     }
 
     @Override
@@ -75,6 +76,8 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
     @Override
     public void onInit(final int status) {
         TtsPlayerConfig config = AudioService.getInstance().getConfig();
+        config.getLogger().log("onInit: success " + status);
+        mTts.setSpeechRate(1.0f);
         try {
             if (!mReady && (TextToSpeech.SUCCESS == status) && this.mTts != null) {
                 config.getLogger().log("Initialize TTS success");
@@ -150,6 +153,7 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
     public void release() {
         //关闭TTS
         this.mTts.shutdown();
+        mTts.stop();
         this.mReady = false;
     }
 
@@ -163,6 +167,8 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
         //停止播报
         mTts.stop();
     }
+
+
 
     private final class OnCompleteListener extends UtteranceProgressListener {
 
