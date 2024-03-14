@@ -8,7 +8,7 @@ import android.speech.tts.UtteranceProgressListener;
 
 import com.yc.audioplayer.bean.TtsPlayerConfig;
 import com.yc.audioplayer.service.AudioService;
-import com.yc.audioplayer.wrapper.AbstractAudioWrapper;
+import com.yc.audioplayer.inter.AbstractAudioWrapper;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.InterPlayListener;
 

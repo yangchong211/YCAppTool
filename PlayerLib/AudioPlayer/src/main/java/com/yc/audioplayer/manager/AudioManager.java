@@ -7,7 +7,7 @@ import com.yc.audioplayer.inter.PlayStateListener;
 import com.yc.audioplayer.player.DefaultTtsPlayer;
 import com.yc.audioplayer.player.ExoAudioPlayer;
 import com.yc.audioplayer.player.MediaAudioPlayer;
-import com.yc.audioplayer.wrapper.AbstractAudioWrapper;
+import com.yc.audioplayer.inter.AbstractAudioWrapper;
 import com.yc.audioplayer.bean.AudioPlayData;
 import com.yc.audioplayer.inter.InterAudio;
 import com.yc.audioplayer.inter.InterPlayListener;

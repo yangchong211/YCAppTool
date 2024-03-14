@@ -1,4 +1,4 @@
-package com.yc.audioplayer.wrapper;
+package com.yc.audioplayer.inter;
 
 
 import com.yc.audioplayer.inter.InterAudio;
