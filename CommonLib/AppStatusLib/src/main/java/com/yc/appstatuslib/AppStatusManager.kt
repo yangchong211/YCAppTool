@@ -4,10 +4,9 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.IntentFilter
-import com.yc.appcommoninter.IEventTrack
-import com.yc.appcommoninter.ILogger
-import com.yc.appcommoninter.IMonitorToggle
-import com.yc.appprocesslib.AppStateMonitor
+import com.yc.appcommoninter.inter.IEventTrack
+import com.yc.appcommoninter.inter.ILogger
+import com.yc.appcommoninter.inter.IMonitorToggle
 import com.yc.appstatuslib.broadcast.*
 import com.yc.appstatuslib.info.AppBatteryInfo
 import com.yc.appstatuslib.info.AppThreadInfo
@@ -272,17 +271,17 @@ class AppStatusManager private constructor(builder: Builder) {
         /**
          * 日志监听
          */
-        private var traceLog: ILogger? = null
+        private var traceLog: com.yc.appcommoninter.inter.ILogger? = null
 
         /**
          * ab测试
          */
-        private var monitorToggle: IMonitorToggle? = null
+        private var monitorToggle: com.yc.appcommoninter.inter.IMonitorToggle? = null
 
         /**
          * 事件统计
          */
-        private var eventTrack: IEventTrack? = null
+        private var eventTrack: com.yc.appcommoninter.inter.IEventTrack? = null
 
         /**
          * 是否开启线程监控，默认false
@@ -305,17 +304,17 @@ class AppStatusManager private constructor(builder: Builder) {
             return this
         }
 
-        fun traceLog(trace: ILogger?): Builder {
+        fun traceLog(trace: com.yc.appcommoninter.inter.ILogger?): Builder {
             traceLog = trace
             return this
         }
 
-        fun setMonitorToggle(toggle: IMonitorToggle): Builder {
+        fun setMonitorToggle(toggle: com.yc.appcommoninter.inter.IMonitorToggle): Builder {
             this.monitorToggle = toggle
             return this
         }
 
-        fun setEventTrack(eventTrack: IEventTrack): Builder {
+        fun setEventTrack(eventTrack: com.yc.appcommoninter.inter.IEventTrack): Builder {
             this.eventTrack = eventTrack
             return this
         }

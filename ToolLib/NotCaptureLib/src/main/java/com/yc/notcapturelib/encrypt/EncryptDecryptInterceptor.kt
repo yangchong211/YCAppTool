@@ -2,7 +2,7 @@ package com.yc.notcapturelib.encrypt
 
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
-import com.yc.eventuploadlib.LoggerReporter
+import com.yc.appcommoninter.report.LoggerReporter
 import com.yc.notcapturelib.helper.NotCaptureHelper
 import okhttp3.*
 import okio.Buffer
@@ -46,7 +46,7 @@ class  EncryptDecryptInterceptor : Interceptor {
         val headerEncrypt = !ignoreEncrypt || !forceEncrypt
         val newRequest: Request
         if (NotCaptureHelper.getInstance().config.isDebug){
-            LoggerReporter.report(
+            com.yc.appcommoninter.report.LoggerReporter.report(
                 "NotCaptureHelper",
                 "handleRequest 加密 $configEncrypt , $headerEncrypt"
             )
@@ -89,8 +89,8 @@ class  EncryptDecryptInterceptor : Interceptor {
         val url = request.url
         val requestBody = request.body as MultipartBody
         if (NotCaptureHelper.getInstance().config.isDebug){
-            LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody url: $url")
-            LoggerReporter.report(
+            com.yc.appcommoninter.report.LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody url: $url")
+            com.yc.appcommoninter.report.LoggerReporter.report(
                 "NotCaptureHelper",
                 "handleRequestPostMultipartBody requestBody: $requestBody"
             )
@@ -124,8 +124,8 @@ class  EncryptDecryptInterceptor : Interceptor {
             }
             .build()
         if (NotCaptureHelper.getInstance().config.isDebug){
-            LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody newUrl: $newUrl")
-            LoggerReporter.report(
+            com.yc.appcommoninter.report.LoggerReporter.report("NotCaptureHelper", "handleRequestPostMultipartBody newUrl: $newUrl")
+            com.yc.appcommoninter.report.LoggerReporter.report(
                 "NotCaptureHelper",
                 "handleRequestPostMultipartBody newRequestBody: $newRequestBody"
             )
@@ -146,7 +146,7 @@ class  EncryptDecryptInterceptor : Interceptor {
         val requestBody = request.body
         val newParameterList = InterceptorHelper.buildNewParameterList(request)
         if (NotCaptureHelper.getInstance().config.isDebug){
-            LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody url 请求链接: $url")
+            com.yc.appcommoninter.report.LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody url 请求链接: $url")
         }
         try {
             //请求参数body，转换为字符串
@@ -154,7 +154,7 @@ class  EncryptDecryptInterceptor : Interceptor {
             requestBody?.writeTo(buffer)
             val readUtf8 = buffer.readUtf8()
             if (NotCaptureHelper.getInstance().config.isDebug){
-                LoggerReporter.report(
+                com.yc.appcommoninter.report.LoggerReporter.report(
                     "NotCaptureHelper",
                     "handleRequestPostFormBody requestBody 请求body: $readUtf8"
                 )
@@ -184,7 +184,7 @@ class  EncryptDecryptInterceptor : Interceptor {
             }
             .build()
         if (NotCaptureHelper.getInstance().config.isDebug){
-            LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody newUrl 新请求链接: $newUrl")
+            com.yc.appcommoninter.report.LoggerReporter.report("NotCaptureHelper", "handleRequestPostFormBody newUrl 新请求链接: $newUrl")
         }
         try {
             //请求参数body，转换为字符串
@@ -192,7 +192,7 @@ class  EncryptDecryptInterceptor : Interceptor {
             newRequestBody.writeTo(buffer)
             val readUtf8 = buffer.readUtf8()
             if (NotCaptureHelper.getInstance().config.isDebug){
-                LoggerReporter.report(
+                com.yc.appcommoninter.report.LoggerReporter.report(
                     "NotCaptureHelper",
                     "handleRequestPostFormBody newRequestBody 新请求body: $readUtf8"
                 )
@@ -208,7 +208,7 @@ class  EncryptDecryptInterceptor : Interceptor {
     private fun handleRequestGet(request: Request): Request {
         val url = request.url
         if (NotCaptureHelper.getInstance().config.isDebug){
-            LoggerReporter.report("NotCaptureHelper", "handleRequestGet url: $url")
+            com.yc.appcommoninter.report.LoggerReporter.report("NotCaptureHelper", "handleRequestGet url: $url")
         }
         val newParameterList = InterceptorHelper.buildNewParameterList(request)
         val newUrl = url.newBuilder()
@@ -222,7 +222,7 @@ class  EncryptDecryptInterceptor : Interceptor {
             }
             .build()
         if (NotCaptureHelper.getInstance().config.isDebug){
-            LoggerReporter.report("NotCaptureHelper", "handleRequestGet newUrl: $newUrl")
+            com.yc.appcommoninter.report.LoggerReporter.report("NotCaptureHelper", "handleRequestGet newUrl: $newUrl")
         }
         return request.newBuilder()
             .url(newUrl)

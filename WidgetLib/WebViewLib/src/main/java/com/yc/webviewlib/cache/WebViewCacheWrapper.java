@@ -12,7 +12,7 @@ import com.tencent.smtt.sdk.WebView;
 import com.yc.netinterceptor.cache.CacheInterceptor;
 import com.yc.netinterceptor.log.HttpLoggerLevel;
 import com.yc.netinterceptor.log.HttpLoggingInterceptor;
-import com.yc.networklib.AppNetworkUtils;
+import com.yc.networklib.net.AppNetworkUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 
 import java.io.File;

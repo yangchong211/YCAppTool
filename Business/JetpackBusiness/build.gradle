@@ -77,7 +77,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':ApplicationLib')
     implementation project(path: ':BaseClassLib')
     implementation project(path: ':ArchitectureLib')
 
@@ -103,11 +102,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     // room 使用kapt，fix RoomDatabase_Impl does not exist
     implementation(rootProject.ext.dependencies["roomRuntime"])
-    implementation project(path: ':FragmentManager')
-    implementation project(path: ':BaseVpAdapter')
+    implementation project(path: ':ComponentManager')
     //kapt(rootProject.ext.dependencies["roomCompiler"])
     annotationProcessor(rootProject.ext.dependencies["roomCompiler"])
     //WorkManager
     implementation(rootProject.ext.dependencies["workKtx"])
-    implementation project(path: ':ApplicationLib')
 }

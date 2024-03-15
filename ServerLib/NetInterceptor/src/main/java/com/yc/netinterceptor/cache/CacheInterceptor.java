@@ -1,6 +1,6 @@
 package com.yc.netinterceptor.cache;
 
-import com.yc.networklib.AppNetworkUtils;
+import com.yc.networklib.net.AppNetworkUtils;
 
 import org.jetbrains.annotations.NotNull;
 

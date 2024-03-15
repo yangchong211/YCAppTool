@@ -3,7 +3,7 @@ package com.yc.lifehelper.listener;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.yc.activitymanager.AbsLifecycleListener;
+import com.yc.activitymanager.activity.AbsLifecycleListener;
 
 
 public class MainActivityListener extends AbsLifecycleListener {

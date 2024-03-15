@@ -1,7 +1,5 @@
 package com.yc.privacymonitor.handler;
 
-import android.util.Log;
-
 import com.yc.appcommoninter.ILogger;
 import com.yc.privacymonitor.helper.PrivacyHelper;
 

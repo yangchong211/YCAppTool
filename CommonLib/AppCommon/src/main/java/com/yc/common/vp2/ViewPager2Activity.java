@@ -3,8 +3,8 @@ package com.yc.common.vp2;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.yc.basevpadapter.viewpager2.BaseFragmentStateAdapter;
-import com.yc.basevpadapter.viewpager2.OnPageChangeCallback;
+import com.yc.baseclasslib.viewpager2.BaseFragmentStateAdapter;
+import com.yc.baseclasslib.viewpager2.OnPageChangeCallback;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.toastutils.ToastUtils;

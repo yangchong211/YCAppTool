@@ -16,7 +16,7 @@ limitations under the License.
 package com.yc.store.disk
 
 import com.yc.store.ICacheable
-import com.yc.applrudisk.DiskLruCacheHelper
+import com.yc.store.disk.lib.DiskLruCacheHelper
 import com.yc.toolutils.AppNumberUtils
 
 /**

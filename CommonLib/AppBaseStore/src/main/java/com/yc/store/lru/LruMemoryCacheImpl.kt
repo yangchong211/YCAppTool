@@ -16,7 +16,7 @@ limitations under the License.
 package com.yc.store.lru
 
 import com.yc.store.ICacheable
-import com.yc.applrucache.SystemLruCache
+import com.yc.store.lru.lib.SystemLruCache
 import com.yc.store.config.CacheInitHelper
 
 /**

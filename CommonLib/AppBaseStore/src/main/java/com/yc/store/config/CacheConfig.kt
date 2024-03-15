@@ -16,7 +16,7 @@ limitations under the License.
 package com.yc.store.config
 
 
-import com.yc.appcommoninter.IMonitorToggle
+import com.yc.appcommoninter.inter.IMonitorToggle
 import java.io.File
 
 /**
@@ -65,7 +65,7 @@ class CacheConfig private constructor(builder: Builder) {
     /**
      * 降级接口
      */
-    var monitorToggle: IMonitorToggle?
+    var monitorToggle: com.yc.appcommoninter.inter.IMonitorToggle?
 
     class Builder {
 
@@ -74,7 +74,7 @@ class CacheConfig private constructor(builder: Builder) {
         var logDir: String? = null
         var extraLogDir: File? = null
         var mmkvName: String? = null
-        var monitorToggle: IMonitorToggle? = null
+        var monitorToggle: com.yc.appcommoninter.inter.IMonitorToggle? = null
 
         fun maxCacheSize(maxCacheSize: Int): Builder {
             this.maxCacheSize = maxCacheSize
@@ -101,7 +101,7 @@ class CacheConfig private constructor(builder: Builder) {
             return this
         }
 
-        fun monitorToggle(monitorToggle: IMonitorToggle?): Builder {
+        fun monitorToggle(monitorToggle: com.yc.appcommoninter.inter.IMonitorToggle?): Builder {
             this.monitorToggle = monitorToggle
             return this
         }

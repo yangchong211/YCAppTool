@@ -1,6 +1,6 @@
 package com.yc.common.impl;
 
-import com.yc.eventuploadlib.PermissionDialog;
+import com.yc.appcommoninter.report.PermissionDialog;
 
 public class PermissionDialogImpl extends PermissionDialog {
     @Override

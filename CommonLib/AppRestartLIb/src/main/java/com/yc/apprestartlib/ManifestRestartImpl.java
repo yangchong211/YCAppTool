@@ -9,7 +9,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.yc.activitymanager.ActivityManager;
+import com.yc.activitymanager.activity.ActivityManager;
 
 import java.util.List;
 

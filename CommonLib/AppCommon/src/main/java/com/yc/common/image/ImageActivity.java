@@ -19,7 +19,7 @@ import com.yc.imagetoollib.ImageSaveUtils;
 import com.yc.imagetoollib.PicCalculateUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.roundcorner.view.RoundTextView;
-import com.yc.toolutils.AppIntentUtils;
+import com.yc.toolutils.intent.AppIntentUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.toolutils.AppWindowUtils;
 

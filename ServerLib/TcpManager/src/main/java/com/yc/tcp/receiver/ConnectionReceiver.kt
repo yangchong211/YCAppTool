@@ -4,13 +4,13 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.yc.logclient.LogUtils
-import com.yc.networklib.AppNetworkUtils
+import com.yc.networklib.net.AppNetworkUtils
 
 
 class ConnectionChangeReceiver(var netChangeCallback: NetWorkStateChangeCallBack?) : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        val hasNet = AppNetworkUtils.isConnected()
+        val hasNet = com.yc.networklib.net.AppNetworkUtils.isConnected()
         LogUtils.d("ConnectionChangeReceiver Network changed:${hasNet} ")
         netChangeCallback?.invoke(hasNet)
     }

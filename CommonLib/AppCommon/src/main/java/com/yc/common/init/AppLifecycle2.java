@@ -1,10 +1,9 @@
 package com.yc.common.init;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.res.Configuration;
 
-import com.yc.applicationlib.BaseApplicationHelper;
+import com.yc.activitymanager.application.BaseApplicationHelper;
 import com.yc.toolutils.AppLogUtils;
 
 public class AppLifecycle2 extends BaseApplicationHelper {

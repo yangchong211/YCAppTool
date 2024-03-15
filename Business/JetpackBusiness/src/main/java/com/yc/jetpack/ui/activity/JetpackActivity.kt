@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.yc.fragmentmanager.FragmentManager
+import com.yc.activitymanager.fragment.FragmentManager
 import com.yc.jetpack.R
 
 
@@ -24,12 +24,12 @@ class JetpackActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jetpack_main)
         initNavController()
-        FragmentManager.instance.registerActivityLifecycleListener(this,null)
+        com.yc.activitymanager.fragment.FragmentManager.instance.registerActivityLifecycleListener(this,null)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        FragmentManager.instance.registerActivityLifecycleListener(this,null)
+        com.yc.activitymanager.fragment.FragmentManager.instance.registerActivityLifecycleListener(this,null)
     }
 
     private fun initNavController() {

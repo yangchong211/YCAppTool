@@ -33,7 +33,7 @@ import com.tencent.smtt.export.external.interfaces.PermissionRequest;
 import com.tencent.smtt.sdk.ValueCallback;
 import com.tencent.smtt.sdk.WebStorage;
 import com.tencent.smtt.sdk.WebView;
-import com.yc.toolutils.AppIntentUtils;
+import com.yc.toolutils.intent.AppIntentUtils;
 import com.yc.webviewlib.inter.InterWebListener;
 import com.yc.webviewlib.inter.VideoWebListener;
 import com.yc.webviewlib.utils.X5LogUtils;

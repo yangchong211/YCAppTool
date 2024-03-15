@@ -35,7 +35,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["coordinatorlayout"])
     implementation(rootProject.ext.dependencies["okhttp"])
     implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':ToolFileLib')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
 
@@ -47,7 +46,6 @@ dependencies {
     implementation project(path: ':ImageToolLib')
     implementation project(path: ':NetWorkLib')
     implementation project(path: ':NetInterceptor')
-    implementation project(path: ':AppClickHelper')
     //x5库
     //仅仅在编译时使用，但最终不会被编译到apk或aar里
     //provided files('libs/tbs_sdk_thirdapp_v4.3.0.3_43903_sharewithdownloadwithfile_withoutGame_obfs_20200402_121309.jar')

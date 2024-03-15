@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.yc.appencryptlib.Rc4EncryptUtils;
 import com.yc.eventuploadlib.LoggerReporter;
-import com.yc.networklib.AddressToolUtils;
+import com.yc.networklib.net.AddressToolUtils;
 import com.yc.notcapturelib.encrypt.EncryptDecryptInterceptor;
 import com.yc.notcapturelib.ssl.HttpSslConfig;
 import com.yc.notcapturelib.ssl.HttpSslFactory;

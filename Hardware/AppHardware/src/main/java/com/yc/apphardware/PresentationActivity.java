@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.clickhelper.PerfectClickListener;
+import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.sceondary.DisplayManager;
 
 

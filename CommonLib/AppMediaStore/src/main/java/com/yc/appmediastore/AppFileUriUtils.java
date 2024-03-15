@@ -17,7 +17,7 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 
-import com.yc.fileiohelper.FileIoUtils;
+import com.yc.toolutils.stream.FileIoUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

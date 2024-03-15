@@ -18,9 +18,9 @@ package com.yc.store.config
 import android.app.Application
 import android.util.Log
 import com.tencent.mmkv.MMKV
-import com.yc.appfilelib.AppFileUtils
+import com.yc.toolutils.file.AppFileUtils
 import com.yc.store.StoreToolHelper
-import com.yc.applrudisk.DiskHelperUtils
+import com.yc.store.disk.lib.DiskHelperUtils
 import java.io.File
 
 

@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.yc.appcontextlib.AppToolUtils;
-import com.yc.appfilelib.AppFileUtils;
+import com.yc.toolutils.file.AppFileUtils;
 import com.yc.apploglib.log.DefaultLoggerImpl;
 import com.yc.apploglib.log.InterLogger;
 import com.yc.apploglib.printer.AbsPrinter;

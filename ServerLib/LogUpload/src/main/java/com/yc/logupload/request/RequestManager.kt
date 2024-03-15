@@ -3,7 +3,7 @@ package com.yc.logupload.request
 import android.widget.Toast
 import com.yc.logupload.config.UploadInitHelper
 import com.yc.logupload.inter.OnUploadListener
-import com.yc.activitymanager.ActivityManager
+import com.yc.activitymanager.activity.ActivityManager
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.File
@@ -103,7 +103,7 @@ class RequestManager private constructor() {
                 onUploadListener?.onError("url must be contain http or https")
                 return
             }
-            val activity = ActivityManager.getInstance().peek()
+            val activity = com.yc.activitymanager.activity.ActivityManager.getInstance().peek()
             postUploadFile(url, file.path, file.name, object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     onUploadListener?.onError("post net error :" + e.message)

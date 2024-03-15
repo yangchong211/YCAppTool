@@ -6,9 +6,9 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
-import com.yc.appfilelib.AppFileUtils;
-import com.yc.fileiohelper.BufferIoUtils;
-import com.yc.fileiohelper.FileIoUtils;
+import com.yc.toolutils.file.AppFileUtils;
+import com.yc.toolutils.stream.BufferIoUtils;
+import com.yc.toolutils.stream.FileIoUtils;
 import com.yc.appmediastore.AppFileUriUtils;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;

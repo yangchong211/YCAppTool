@@ -31,7 +31,7 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.yc.networklib.AppNetworkUtils;
+import com.yc.networklib.net.AppNetworkUtils;
 import com.yc.toolutils.AppLogUtils;
 import com.yc.video.bridge.ControlWrapper;
 import com.yc.video.config.ConstantKeys;

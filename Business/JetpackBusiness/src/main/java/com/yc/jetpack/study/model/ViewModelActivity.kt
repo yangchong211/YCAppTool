@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.yc.basevpadapter.adapter.BaseFragmentPagerAdapter
+import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter
 import com.yc.jetpack.R
 
 class ViewModelActivity : AppCompatActivity() {

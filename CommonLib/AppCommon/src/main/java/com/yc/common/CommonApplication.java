@@ -3,17 +3,17 @@ package com.yc.common;
 import android.os.Build;
 import android.util.Log;
 
-import com.yc.appcommoninter.IMonitorToggle;
+import com.yc.appcommoninter.inter.IMonitorToggle;
 import com.yc.appcontextlib.AppToolUtils;
-import com.yc.appfilelib.AppFileUtils;
+import com.yc.toolutils.file.AppFileUtils;
 
-import com.yc.applicationlib.AppInitHelper;
-import com.yc.applicationlib.LibBaseApplication;
+import com.yc.activitymanager.application.AppInitHelper;
+import com.yc.activitymanager.application.LibBaseApplication;
 import com.yc.apploglib.config.AppLogConfig;
 import com.yc.apploglib.config.AppLogFactory;
 import com.yc.common.impl.PermissionDialogImpl;
 import com.yc.common.init.AppLifecycleInit;
-import com.yc.eventuploadlib.PermissionDialog;
+import com.yc.appcommoninter.report.PermissionDialog;
 import com.yc.store.config.CacheConfig;
 import com.yc.store.config.CacheInitHelper;
 

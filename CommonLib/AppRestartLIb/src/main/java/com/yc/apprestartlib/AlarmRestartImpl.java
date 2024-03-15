@@ -5,7 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
-import com.yc.activitymanager.ActivityManager;
+import com.yc.activitymanager.activity.ActivityManager;
 import com.yc.toolutils.AppLogUtils;
 
 /**

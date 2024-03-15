@@ -56,7 +56,6 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':NetInterceptor')
     implementation project(path: ':MonitorInterceptor')
-    implementation project(path: ':ToolFileLib')
     implementation project(path: ':AppContextLib')
     implementation project(path: ':NotCaptureLib')
     implementation project(path: ':AudioHelper')

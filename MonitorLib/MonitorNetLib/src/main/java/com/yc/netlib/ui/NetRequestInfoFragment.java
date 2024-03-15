@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.yc.appfilelib.AppFileUtils;
 import com.yc.fileiohelper.FileSizeUtils;
 import com.yc.netlib.R;
 import com.yc.netlib.utils.NetWorkUtils;

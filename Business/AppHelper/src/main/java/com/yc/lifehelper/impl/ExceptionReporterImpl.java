@@ -1,6 +1,6 @@
 package com.yc.lifehelper.impl;
 
-import com.yc.eventuploadlib.ExceptionReporter;
+import com.yc.appcommoninter.report.ExceptionReporter;
 
 public class ExceptionReporterImpl extends ExceptionReporter {
     @Override

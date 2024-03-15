@@ -9,7 +9,7 @@ import androidx.core.content.FileProvider
 import com.yc.logupload.config.UploadInitHelper
 import com.yc.logupload.inter.BaseUploadLog
 import com.yc.logupload.inter.OnUploadListener
-import com.yc.activitymanager.ActivityManager
+import com.yc.activitymanager.activity.ActivityManager
 import java.io.File
 
 /**
@@ -23,7 +23,7 @@ class EmailUploadImpl : BaseUploadLog() {
 
     override fun sendReport(file: File?, onUploadListener: OnUploadListener?) {
         //获取栈顶activity
-        val activity = ActivityManager.getInstance().peek()
+        val activity = com.yc.activitymanager.activity.ActivityManager.getInstance().peek()
         if (file != null && activity!=null){
             val addresses = arrayOf(
                 "yangchong211@163.com"

@@ -13,7 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
 
 import com.yc.appcontextlib.AppToolUtils;
-import com.yc.networklib.AddressToolUtils;
+import com.yc.networklib.net.AddressToolUtils;
 import com.yc.toolutils.AppDeviceUtils;
 
 import java.lang.reflect.Method;

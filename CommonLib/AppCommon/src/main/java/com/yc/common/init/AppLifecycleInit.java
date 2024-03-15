@@ -3,7 +3,7 @@ package com.yc.common.init;
 import android.app.Application;
 import android.content.res.Configuration;
 
-import com.yc.applicationlib.BaseApplicationHelper;
+import com.yc.activitymanager.application.BaseApplicationHelper;
 import com.yc.toolutils.AppLogUtils;
 
 public class AppLifecycleInit extends BaseApplicationHelper {

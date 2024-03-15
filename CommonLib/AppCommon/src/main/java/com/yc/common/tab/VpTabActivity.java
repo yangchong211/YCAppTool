@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.yc.basevpadapter.adapter.BaseFragmentPagerAdapter;
+import com.yc.baseclasslib.adapter.BaseFragmentPagerAdapter;
 import com.yc.common.R;
 import com.yc.common.vp2.TextFragment;
 import com.yc.library.base.mvp.BaseActivity;

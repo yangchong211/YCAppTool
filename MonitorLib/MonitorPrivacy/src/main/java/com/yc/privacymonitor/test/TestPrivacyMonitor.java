@@ -3,7 +3,6 @@ package com.yc.privacymonitor.test;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.os.Build;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import com.yc.appcommoninter.ILogger;
 import com.yc.privacymonitor.bean.ClassMethodBean;

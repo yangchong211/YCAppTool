@@ -4,7 +4,7 @@ package com.yc.logupload.report
 import android.widget.Toast
 import com.yc.logupload.inter.BaseUploadLog
 import com.yc.logupload.inter.OnUploadListener
-import com.yc.activitymanager.ActivityManager
+import com.yc.activitymanager.activity.ActivityManager
 import com.yc.appmediastore.FileShareUtils
 import java.io.File
 
@@ -19,7 +19,7 @@ class ShareUploadImpl : BaseUploadLog() {
 
     override fun sendReport(file: File?, onUploadListener: OnUploadListener?) {
         //获取栈顶activity
-        val activity = ActivityManager.getInstance().peek()
+        val activity = com.yc.activitymanager.activity.ActivityManager.getInstance().peek()
         activity?.let {
             activity.runOnUiThread {
                 val shareFile = FileShareUtils.shareFile(it, file)

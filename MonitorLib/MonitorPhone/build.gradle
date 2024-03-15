@@ -33,17 +33,12 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':MonitorCpuLib')
-    implementation project(path: ':ToolFileLib')
     implementation project(path: ':AppContextLib')
-    implementation project(path: ':AppPermission')
-    implementation project(path: ':ToolMemoryLib')
     implementation project(path: ':NetWorkLib')
-    implementation project(path: ':AppWiFiLib')
     implementation project(path: ':MonitorFlow')
     //轻量级异步线程封装库：https://github.com/yangchong211/YCThreadPool
     implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
     implementation project(path: ':PrivateServer')
-    implementation project(path: ':NetReceiver')
     //    implementation 'com.github.yangchong211.YCCommonLib:ToolMemoryLib:1.4.4'
 //    implementation 'com.github.yangchong211.YCCommonLib:ToolFileLib:1.4.4'
 //    implementation 'com.github.yangchong211.YCCommonLib:AppContextLib:1.4.4'

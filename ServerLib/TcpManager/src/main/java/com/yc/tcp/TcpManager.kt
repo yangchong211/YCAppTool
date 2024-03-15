@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.os.Message
 import com.yc.logclient.LogUtils
-import com.yc.networklib.AppNetworkUtils
+import com.yc.networklib.net.AppNetworkUtils
 import com.yc.tcp.ext.toTcpMessage
 import com.yc.tcp.ext.toTcpPacket
 import com.yc.tcp.receiver.ConnectionChangeReceiver
@@ -36,7 +36,7 @@ abstract class TcpManager : TcpListener {
     //app切到后台断开Tcp
     private var mDisableTcpOnBackground: Boolean = false
     private var mForegroundMonitor: ForegroundMonitor = ForegroundMonitor { becomeForeground ->
-        val hasNet = AppNetworkUtils.isConnected()
+        val hasNet = com.yc.networklib.net.AppNetworkUtils.isConnected()
         LogUtils.d(
             TAG,
             "Foreground Monitor, become foreground:${becomeForeground},hasNet:${hasNet},mDisableTcpOnBackground:${mDisableTcpOnBackground},isTcpConnected:${isTcpConnected()}"

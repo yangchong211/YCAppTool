@@ -21,7 +21,7 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebStorage;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewDatabase;
-import com.yc.clickhelper.FastClickUtils;
+import com.yc.toolutils.click.FastClickUtils;
 import com.yc.easyexecutor.DelegateTaskExecutor;
 import com.yc.toastutils.ToastUtils;
 import com.yc.webviewlib.base.RequestInfo;

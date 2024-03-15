@@ -1,6 +1,6 @@
 package com.yc.lifehelper.impl;
 
-import com.yc.eventuploadlib.EventReporter;
+import com.yc.appcommoninter.report.EventReporter;
 
 import java.util.HashMap;
 

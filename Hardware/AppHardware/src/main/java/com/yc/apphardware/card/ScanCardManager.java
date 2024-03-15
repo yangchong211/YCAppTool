@@ -11,7 +11,6 @@ import com.yc.appcontextlib.AppToolUtils;
 import com.yc.apphardware.R;
 import com.yc.apphardware.card.lib.CardReadManager;
 import com.yc.apphardware.card.lib.MyConverterTool;
-import com.yc.apphardware.card.lib.ResultMasage;
 import com.yc.bytetoolutils.ByteUtils;
 import com.yc.bytetoolutils.BytesHexStrUtils;
 import com.yc.cardmanager.CardHelper;
@@ -21,7 +20,6 @@ import com.yc.soundpool.SoundPoolPlayer;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * @author: Administrator

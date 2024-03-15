@@ -1,6 +1,6 @@
 package com.yc.lifehelper.impl;
 
-import com.yc.eventuploadlib.LoggerReporter;
+import com.yc.appcommoninter.report.LoggerReporter;
 
 public class LoggerReporterImpl extends LoggerReporter {
     @Override

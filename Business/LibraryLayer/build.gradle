@@ -118,7 +118,6 @@ dependencies {
 
     //ServiceLoader
     implementation project(path: ':BaseClassLib')
-    implementation project(path: ':EventUploadLib')
     implementation project(path: ':AppContextLib')
 
     implementation project(path: ':ToolUtilsLib')

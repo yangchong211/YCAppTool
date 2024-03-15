@@ -19,7 +19,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
-import com.yc.appfilelib.SdCardUtils;
+import com.yc.toolutils.file.SdCardUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -7,7 +7,7 @@ import android.view.View;
 import com.yc.appmonitor.apm.ApmTestActivity;
 import com.yc.appmonitor.crash.CrashTestActivity;
 import com.yc.appmonitor.net.NetworkActivity;
-import com.yc.clickhelper.PerfectClickListener;
+import com.yc.toolutils.click.PerfectClickListener;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;

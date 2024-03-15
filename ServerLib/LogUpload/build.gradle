@@ -40,8 +40,7 @@ dependencies {
     implementation rootProject.ext.dependencies["annotation"]
     implementation rootProject.ext.dependencies["okhttp"]
     //implementation project(path: ':ActivityManager')
-    //implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':ZipFileLib')
+    implementation project(path: ':ToolUtilsLib')
 //    implementation 'com.github.yangchong211.YCCommonLib:ZipFileLib:1.4.9'
     implementation 'com.github.yangchong211.YCCommonLib:ActivityManager:1.4.9'
     implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'

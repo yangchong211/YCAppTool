@@ -1,7 +1,6 @@
 package com.yc.webviewlib.view;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -17,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.yc.toolutils.AppIntentUtils;
+import com.yc.toolutils.intent.AppIntentUtils;
 import com.yc.webviewlib.base.X5WebChromeClient;
 import com.yc.webviewlib.base.X5WebViewClient;
 import com.yc.webviewlib.inter.DefaultVideoListener;

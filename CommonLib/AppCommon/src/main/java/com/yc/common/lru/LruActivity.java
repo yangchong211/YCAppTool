@@ -2,7 +2,7 @@ package com.yc.common.lru;
 
 import android.view.View;
 
-import com.yc.applrucache.SystemLruCache;
+import com.yc.store.lru.lib.SystemLruCache;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.roundcorner.view.RoundTextView;

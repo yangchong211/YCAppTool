@@ -32,6 +32,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     //工具类utils
     implementation 'com.github.yangchong211.YCCommonLib:ToolUtilsLib:1.4.9'
-    implementation project(path: ':AppClickHelper')
+    implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':ToastUtils')
 }

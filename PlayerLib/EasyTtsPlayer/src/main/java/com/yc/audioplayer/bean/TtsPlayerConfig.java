@@ -1,7 +1,6 @@
 package com.yc.audioplayer.bean;
 
 
-import android.content.Context;
 import android.util.Log;
 
 import com.yc.appcommoninter.IEventTrack;

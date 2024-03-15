@@ -7,7 +7,7 @@ import android.text.TextUtils;
 
 
 import com.yc.appcontextlib.AppToolUtils;
-import com.yc.appfilelib.SdCardUtils;
+import com.yc.toolutils.file.SdCardUtils;
 import com.yc.imagetoollib.ImageSaveUtils;
 
 import java.io.File;

@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yc.apploglib.AppLogHelper;
-import com.yc.activitymanager.ActivityManager;
+import com.yc.activitymanager.activity.ActivityManager;
 import com.yc.banner.view.BannerView;
 
 import com.yc.easyexecutor.DelegateTaskExecutor;

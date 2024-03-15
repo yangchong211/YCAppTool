@@ -3,7 +3,7 @@ package com.yc.notcapturelib.encrypt
 import android.annotation.SuppressLint
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import com.yc.eventuploadlib.LoggerReporter
+import com.yc.appcommoninter.report.LoggerReporter
 import com.yc.notcapturelib.helper.NotCaptureHelper
 import okhttp3.FormBody
 import okhttp3.Request
@@ -72,7 +72,7 @@ object InterceptorHelper {
         }
         val data = dataStrBuilder.toString()
         if (NotCaptureHelper.getInstance().config.isDebug){
-            LoggerReporter.report("NotCaptureHelper", "buildNewParameterList data 公共参数: $data")
+            com.yc.appcommoninter.report.LoggerReporter.report("NotCaptureHelper", "buildNewParameterList data 公共参数: $data")
         }
         //添加自定义参数
         val reservedQueryParamNamesAndValues: MutableList<Triple<Boolean, String, String?>> = mutableListOf()
@@ -91,7 +91,7 @@ object InterceptorHelper {
         val encryptVersion = NotCaptureHelper.getInstance().config.encryptVersion
         val encryptData = encrypt(encryptVersion, data)
         if (NotCaptureHelper.getInstance().config.isDebug){
-            LoggerReporter.report("NotCaptureHelper", "buildNewParameterList encryptData 加密数据: $data")
+            com.yc.appcommoninter.report.LoggerReporter.report("NotCaptureHelper", "buildNewParameterList encryptData 加密数据: $data")
         }
         return mutableListOf<Triple<Boolean, String, String?>>().apply {
             //添加ev数据，这个是加解密版本号
@@ -120,7 +120,7 @@ object InterceptorHelper {
             if (!encryptVersion.isNullOrEmpty()) {
                 val decryptResponseBodyStr = decrypt(encryptVersion, encryptResponseBody.result ?: "") ?: ""
                 if (NotCaptureHelper.getInstance().config.isDebug){
-                    LoggerReporter.report("NotCaptureHelper",
+                    com.yc.appcommoninter.report.LoggerReporter.report("NotCaptureHelper",
                         "handleResponse toResponseBody 解密后响应数据: $decryptResponseBodyStr"
                     )
                 }
@@ -155,7 +155,7 @@ object InterceptorHelper {
             if (!encryptVersion.isNullOrEmpty()) {
                 val result = encryptResponseBody.result ?: ""
                 if (NotCaptureHelper.getInstance().config.isDebug){
-                    LoggerReporter.report(
+                    com.yc.appcommoninter.report.LoggerReporter.report(
                         "NotCaptureHelper",
                         "handleResponse result 加密过的响应数据: $result"
                     )
@@ -164,7 +164,7 @@ object InterceptorHelper {
                 val toResponseBody =
                     decryptResponseBodyStr.toResponseBody(responseBody.contentType())
                 if (NotCaptureHelper.getInstance().config.isDebug){
-                    LoggerReporter.report(
+                    com.yc.appcommoninter.report.LoggerReporter.report(
                         "NotCaptureHelper",
                         "handleResponse toResponseBody 解密后响应数据: ${toResponseBody.string()}"
                     )

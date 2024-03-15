@@ -28,6 +28,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["annotation"]
-    implementation project(path: ':ToolFileLib')
-    implementation project(path: ':FileIoHelper')
+    implementation project(path: ':ToolUtilsLib')
 }
