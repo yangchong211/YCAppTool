@@ -107,7 +107,6 @@ dependencies {
     implementation project(path: ':RedDotView')
     implementation project(path: ':ExpandLib')
     implementation project(path: ':FloatWindow')
-    implementation project(path: ':ImageToolLib')
     implementation project(path: ':BlurViewLib')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':Transformation')

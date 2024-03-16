@@ -118,7 +118,7 @@ dependencies {
 
     //ServiceLoader
     implementation project(path: ':BaseClassLib')
-    implementation project(path: ':AppContextLib')
+    implementation project(path: ':AppTaskLib')
 
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':WebViewLib')

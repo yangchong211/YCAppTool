@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.yc.toolutils.file.AppFileUtils;
 import com.yc.toolutils.stream.BufferIoUtils;
 import com.yc.toolutils.stream.FileIoUtils;
-import com.yc.appmediastore.AppFileUriUtils;
+import com.yc.toolutils.store.AppFileUriUtils;
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;

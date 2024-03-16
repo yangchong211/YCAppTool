@@ -2,7 +2,7 @@ package com.yc.imageserver.utils;
 
 import android.os.Looper;
 import com.bumptech.glide.Glide;
-import com.yc.appcontextlib.AppToolUtils;
+import com.yc.appcontextlib.context.AppToolUtils;
 
 import java.io.File;
 import java.math.BigDecimal;

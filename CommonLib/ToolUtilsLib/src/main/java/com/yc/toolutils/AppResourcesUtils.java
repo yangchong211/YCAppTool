@@ -3,7 +3,7 @@ package com.yc.toolutils;
 
 import android.content.Context;
 
-import com.yc.appcontextlib.AppToolUtils;
+import com.yc.appcontextlib.context.AppToolUtils;
 
 /**
  * <pre>

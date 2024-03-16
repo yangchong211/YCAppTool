@@ -21,7 +21,7 @@ android {
 
 dependencies {
     // 只是在debug下依赖，各种测试工具lib可以放到这里
-    implementation project(path: ':ThreadDebugLib')
+
 }
 
 //过滤，只在debug下使用

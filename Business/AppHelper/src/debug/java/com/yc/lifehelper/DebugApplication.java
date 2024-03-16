@@ -3,10 +3,10 @@ package com.yc.lifehelper;
 import android.app.Application;
 import android.util.Log;
 
-import com.yc.threaddebug.IThreadChangedCallback;
-import com.yc.threaddebug.IThreadDebugger;
-import com.yc.threaddebug.ThreadDebugger;
-import com.yc.threaddebug.ThreadDebuggers;
+import com.yc.ycthreadpoollib.debug.IThreadChangedCallback;
+import com.yc.ycthreadpoollib.debug.IThreadDebugger;
+import com.yc.ycthreadpoollib.debug.ThreadDebugger;
+import com.yc.ycthreadpoollib.debug.ThreadDebuggers;
 
 public class DebugApplication extends Application {
 

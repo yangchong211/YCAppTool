@@ -21,7 +21,7 @@ public final class TtsPlayerConfig {
     private final ILogger mLogger;
     private final IExceptionTrack mExceptionTrack;
     private final IEventTrack mEventTrack;
-    private boolean mIsTtsDeque = true;
+    private final boolean mIsTtsDeque;
     private final static String TAG = "TtsPlayer: ";
 
     private TtsPlayerConfig(Builder builder) {

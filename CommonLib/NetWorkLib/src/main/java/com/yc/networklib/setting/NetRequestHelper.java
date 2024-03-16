@@ -11,7 +11,7 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 import androidx.annotation.StringDef;
 
-import com.yc.appcontextlib.AppToolUtils;
+import com.yc.appcontextlib.context.AppToolUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

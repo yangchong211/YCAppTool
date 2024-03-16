@@ -1,8 +1,8 @@
 package com.yc.common.impl;
 
-import com.yc.appcommoninter.report.PermissionDialog;
+import com.yc.appcommoninter.report.PermissionReporter;
 
-public class PermissionDialogImpl extends PermissionDialog {
+public class PermissionDialogImpl extends PermissionReporter {
     @Override
     protected void showPermissionDialog(int type, PermissionListener listener) {
         if (type ==1 ){

@@ -1,7 +1,7 @@
 package com.yc.appencryptlib;
 
 
-import com.yc.appcontextlib.AppToolUtils;
+import com.yc.appcontextlib.context.AppToolUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

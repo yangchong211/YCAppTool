@@ -33,7 +33,7 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':MonitorCpuLib')
-    implementation project(path: ':AppContextLib')
+    implementation project(path: ':AppTaskLib')
     implementation project(path: ':NetWorkLib')
     implementation project(path: ':MonitorFlow')
     //轻量级异步线程封装库：https://github.com/yangchong211/YCThreadPool

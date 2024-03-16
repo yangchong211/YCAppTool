@@ -1,42 +1,22 @@
 package com.yc.toolutils;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
-import android.graphics.Point;
-import android.net.ConnectivityManager;
 import android.net.DhcpInfo;
-import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.os.Environment;
-import android.os.StatFs;
 import android.provider.Settings;
-import android.text.TextUtils;
-import android.text.format.Formatter;
-import android.util.DisplayMetrics;
-import android.view.Display;
-import android.view.WindowManager;
 
 import androidx.annotation.RequiresApi;
 
-import com.yc.appcontextlib.AppToolUtils;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.appcontextlib.context.AppToolUtils;
 
 import java.io.BufferedReader;
-import java.io.Closeable;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.List;
 

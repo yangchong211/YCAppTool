@@ -110,17 +110,15 @@ dependencies {
 
     //公共类
     implementation project(path: ':BaseClassLib')
-    implementation project(path: ':AppContextLib')
+    implementation project(path: ':AppTaskLib')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':ComponentManager')
     implementation project(path: ':AppBaseStore')
     implementation project(path: ':AppLogLib')
     implementation project(path: ':AppRestartLib')
     implementation project(path: ':AppCommonInter')
-    implementation project(path: ':AppStatusLib')
+    implementation project(path: ':AppReceiver')
     implementation project(path: ':ArchitectureLib')
-    implementation project(path: ':ReflectionLib')
-    implementation project(path: ':AppMediaStore')
     implementation project(path: ':AppEncryptLib')
     implementation project(path: ':NetWorkLib')
     //其他
@@ -129,7 +127,5 @@ dependencies {
     implementation project(path: ':AppProcessLib')
     implementation project(path: ':MonitorFileLib')
     implementation project(path: ':CompressServer')
-    implementation project(path: ':ImageToolLib')
-    implementation project(path: ':AppCallStatus')
     implementation project(path: ':AppRestartLib')
 }

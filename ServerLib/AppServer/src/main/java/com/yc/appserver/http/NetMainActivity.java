@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
-import com.yc.appcontextlib.AppToolUtils;
+import com.yc.appcontextlib.context.AppToolUtils;
 import com.yc.appserver.R;
 import com.yc.appserver.http.http.api.SearchAuthorApi;
 import com.yc.appserver.http.http.api.SearchBlogsApi;

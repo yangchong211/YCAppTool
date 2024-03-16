@@ -4,7 +4,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.yc.appcommoninter.inter.IMonitorToggle;
-import com.yc.appcontextlib.AppToolUtils;
+import com.yc.appcontextlib.context.AppToolUtils;
 import com.yc.toolutils.file.AppFileUtils;
 
 import com.yc.activitymanager.application.AppInitHelper;
@@ -13,7 +13,7 @@ import com.yc.apploglib.config.AppLogConfig;
 import com.yc.apploglib.config.AppLogFactory;
 import com.yc.common.impl.PermissionDialogImpl;
 import com.yc.common.init.AppLifecycleInit;
-import com.yc.appcommoninter.report.PermissionDialog;
+import com.yc.appcommoninter.report.PermissionReporter;
 import com.yc.store.config.CacheConfig;
 import com.yc.store.config.CacheInitHelper;
 
@@ -26,7 +26,7 @@ public class CommonApplication extends LibBaseApplication {
         initAppCache();
         initAppLog();
         AppToolUtils.init(this);
-        PermissionDialog.setPermissionDialog(new PermissionDialogImpl());
+        PermissionReporter.setPermissionDialog(new PermissionDialogImpl());
     }
 
     @Override

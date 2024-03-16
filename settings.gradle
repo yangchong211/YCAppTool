@@ -35,14 +35,13 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 include ':AppServer'
 project(':AppServer').projectDir = new File('ServerLib/AppServer')
 //库
-include ':Transformation', ':HttpServer', ':ShareServer',
+include ':Transformation', ':HttpServer',
         ':GsonServer', ':IpcServer', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
         ':GlideProgressLib', ':CompressServer', ':GrpcServer'
 project(':Transformation').projectDir = new File('ServerLib/Transformation')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
-project(':ShareServer').projectDir = new File('ServerLib/ShareServer')
 project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
 project(':AppLogClient').projectDir = new File('ServerLib/AppLogClient')
 project(':AppLogService').projectDir = new File('ServerLib/AppLogService')
@@ -65,34 +64,24 @@ project(':GrpcServer').projectDir = new File('ServerLib/GrpcServer')
 include ':AppCommon'
 project(':AppCommon').projectDir = new File('CommonLib/AppCommon')
 //库
-include ':AppStatusLib', ':ToolUtilsLib',
-        ':ParallelTaskLib', ':AppBaseStore',
-        ':BaseClassLib', ':ReflectionLib', ':AppLogLib', ':AppRestartLib',
+include ':AppReceiver', ':ToolUtilsLib', ':AppBaseStore',
+        ':BaseClassLib', ':AppLogLib', ':AppRestartLib',
         ':ArchitectureLib', ':ComponentManager',
         ':AppCommonInter', ':AppEncryptLib',
-        ':AppMediaStore', ':ImageToolLib',
-        ':AppHandlerLib', ':NetWorkLib', ':AppContextLib',
-        ':AppGrayLib', ':AppCallStatus',
+         ':NetWorkLib', ':AppTaskLib',
         ':SmEncryptLib'
-project(':AppStatusLib').projectDir = new File('CommonLib/AppStatusLib')
+project(':AppReceiver').projectDir = new File('CommonLib/AppReceiver')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
-project(':ParallelTaskLib').projectDir = new File('CommonLib/ParallelTaskLib')
 project(':AppBaseStore').projectDir = new File('CommonLib/AppBaseStore')
 project(':BaseClassLib').projectDir = new File('CommonLib/BaseClassLib')
-project(':ReflectionLib').projectDir = new File('CommonLib/ReflectionLib')
 project(':AppLogLib').projectDir = new File('CommonLib/AppLogLib')
 project(':AppRestartLib').projectDir = new File('CommonLib/AppRestartLib')
 project(':ArchitectureLib').projectDir = new File('CommonLib/ArchitectureLib')
 project(':ComponentManager').projectDir = new File('CommonLib/ComponentManager')
 project(':AppCommonInter').projectDir = new File('CommonLib/AppCommonInter')
 project(':AppEncryptLib').projectDir = new File('CommonLib/AppEncryptLib')
-project(':AppMediaStore').projectDir = new File('CommonLib/AppMediaStore')
-project(':ImageToolLib').projectDir = new File('CommonLib/ImageToolLib')
-project(':AppHandlerLib').projectDir = new File('CommonLib/AppHandlerLib')
 project(':NetWorkLib').projectDir = new File('CommonLib/NetWorkLib')
-project(':AppContextLib').projectDir = new File('CommonLib/AppContextLib')
-project(':AppGrayLib').projectDir = new File('CommonLib/AppGrayLib')
-project(':AppCallStatus').projectDir = new File('CommonLib/AppCallStatus')
+project(':AppTaskLib').projectDir = new File('CommonLib/AppTaskLib')
 project(':SmEncryptLib').projectDir = new File('CommonLib/SmEncryptLib')
 
 
@@ -109,7 +98,7 @@ include ':BannerViewLib', ':PhotoWidget', ':CustomWidget', ':BlurViewLib',
         ':EastAdapterLib', ':PhotoCoverLib', ':RefreshViewLib', ':SelectViewLib',
         ':GroupAdapterLib', ':BaseProgress', ':CircleProgress', ':SlideViewLib',
         ':FloatWindow', ':AppTextView', ':AppImageView', ':PercentLayout', ':AppScrollView',
-        ':AppSwitchView', ':AppEditText',
+        ':AppSwitchView', ':AppEditText',':AppGrayLib',
         ':RedDotView', ':ExpandLib', ':AppChartView', ':AppShadowLib', ':AppCoordinatorLayout'
 project(':BannerViewLib').projectDir = new File('WidgetLib/BannerViewLib')
 project(':PhotoWidget').projectDir = new File('WidgetLib/PhotoWidget')
@@ -150,7 +139,7 @@ project(':ExpandLib').projectDir = new File('WidgetLib/ExpandLib')
 project(':AppChartView').projectDir = new File('WidgetLib/AppChartView')
 project(':AppShadowLib').projectDir = new File('WidgetLib/AppShadowLib')
 project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinatorLayout')
-
+project(':AppGrayLib').projectDir = new File('WidgetLib/AppGrayLib')
 
 
 /* +++++++++ 框架基础工具库 +++++++++ */
@@ -158,18 +147,17 @@ project(':AppCoordinatorLayout').projectDir = new File('WidgetLib/AppCoordinator
 include ':AppTool'
 project(':AppTool').projectDir = new File('ToolLib/AppTool')
 //库
-include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':SerialTaskLib', ':EasySocket',
-        ':LocaleHelperLib', ':CountTimerLib', ':LocalShareLib', ':NtpTimeLib',':InterceptorTime',
+include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':EasySocket',
+        ':LocaleHelperLib', ':CountTimerLib', ':NtpTimeLib',':InterceptorTime',
         ':AnimatorToolLib', ':LongAliveLib', ':EasyExecutor',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':LooperThread',
-        ':AnimatorHelper', ':ThreadDebugLib', ':AppUpdateLib',
+         ':AppUpdateLib',
         ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib',
          ':CameraOpen', ':SqlLiteLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
 project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
 project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
-project(':SerialTaskLib').projectDir = new File('ToolLib/SerialTaskLib')
 project(':LocaleHelperLib').projectDir = new File('ToolLib/LocaleHelperLib')
 project(':CountTimerLib').projectDir = new File('ToolLib/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('ToolLib/AnimatorToolLib')
@@ -177,9 +165,6 @@ project(':LongAliveLib').projectDir = new File('ToolLib/LongAliveLib')
 project(':ThreadPoolLib').projectDir = new File('ToolLib/ThreadPoolLib')
 project(':AppProcessLib').projectDir = new File('ToolLib/AppProcessLib')
 project(':EasyExecutor').projectDir = new File('ToolLib/EasyExecutor')
-project(':LocalShareLib').projectDir = new File('ToolLib/LocalShareLib')
-project(':AnimatorHelper').projectDir = new File('ToolLib/AnimatorHelper')
-project(':ThreadDebugLib').projectDir = new File('ToolLib/ThreadDebugLib')
 project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
 project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
 project(':TransitionHelper').projectDir = new File('ToolLib/TransitionHelper')
@@ -251,10 +236,9 @@ project(':MonitorFlow').projectDir = new File('MonitorLib/MonitorFlow')
 include ':AppPlayer'
 project(':AppPlayer').projectDir = new File('PlayerLib/AppPlayer')
 //库
-include ':VideoSqlLite', ':VideoCache', ':EasyTtsPlayer', ':VideoSurface', ':SoundPool',':EasyMediaPlayer',
-        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoM3u8', ':VideoView',
+include ':VideoCache', ':EasyTtsPlayer', ':VideoSurface', ':SoundPool',':EasyMediaPlayer',
+        ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoView',
         ':BellsVibrations', ':AudioHelper', ':MediaScanner'
-project(':VideoSqlLite').projectDir = new File('PlayerLib/VideoSqlLite')
 project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
 //简单型tts播放器
 project(':EasyTtsPlayer').projectDir = new File('PlayerLib/EasyTtsPlayer')
@@ -262,7 +246,6 @@ project(':MusicPlayer').projectDir = new File('PlayerLib/MusicPlayer')
 project(':VideoKernel').projectDir = new File('PlayerLib/VideoKernel')
 project(':VideoSurface').projectDir = new File('PlayerLib/VideoSurface')
 project(':VideoPlayer').projectDir = new File('PlayerLib/VideoPlayer')
-project(':VideoM3u8').projectDir = new File('PlayerLib/VideoM3u8')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
 project(':BellsVibrations').projectDir = new File('PlayerLib/BellsVibrations')
 project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')

@@ -9,7 +9,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.yc.appcontextlib.AppToolUtils;
+import com.yc.appcontextlib.context.AppToolUtils;
 
 import java.util.ArrayList;
 import java.util.List;

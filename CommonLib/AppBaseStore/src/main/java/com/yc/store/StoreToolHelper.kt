@@ -1,15 +1,7 @@
 package com.yc.store
 
 import android.app.Application
-import com.yc.appcontextlib.AppToolUtils
 import com.yc.store.config.CacheConstants
-import com.yc.store.config.CacheInitHelper
-import com.yc.store.disk.LruDiskCacheImpl
-import com.yc.store.lru.LruMemoryCacheImpl
-import com.yc.store.memory.MemoryCacheImpl
-import com.yc.store.mmkv.MmkvCacheImpl
-import com.yc.store.sp.SpCacheImpl
-import com.yc.store.store.DataStoreCacheImpl
 
 /**
  * <pre>

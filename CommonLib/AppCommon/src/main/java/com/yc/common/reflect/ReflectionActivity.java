@@ -8,9 +8,9 @@ import androidx.annotation.RequiresApi;
 
 import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
-import com.yc.reflectionlib.ConstructorUtils;
-import com.yc.reflectionlib.FieldUtils;
-import com.yc.reflectionlib.MethodUtils;
+import com.yc.toolutils.reflect.ConstructorUtils;
+import com.yc.toolutils.reflect.FieldUtils;
+import com.yc.toolutils.reflect.MethodUtils;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toolutils.AppLogUtils;
 

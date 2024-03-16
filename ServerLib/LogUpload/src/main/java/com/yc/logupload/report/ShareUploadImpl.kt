@@ -5,7 +5,7 @@ import android.widget.Toast
 import com.yc.logupload.inter.BaseUploadLog
 import com.yc.logupload.inter.OnUploadListener
 import com.yc.activitymanager.activity.ActivityManager
-import com.yc.appmediastore.FileShareUtils
+import com.yc.toolutils.store.FileShareUtils
 import java.io.File
 
 /**

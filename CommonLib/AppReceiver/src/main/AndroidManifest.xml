@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yc.appstatuslib">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--为了要获取网络的状态，需要在manifest文件中设置相关权限-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--监听呼出电话-->
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <!--监听来电-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--拨打电话-->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+
+
+    <application>
+        <!--<receiver android:name=".MyPhoneReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE"/>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>-->
+
+    </application>
+
+</manifest>

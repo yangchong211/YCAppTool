@@ -11,7 +11,7 @@ import com.yc.easyexecutor.DelegateTaskExecutor;
  * <pre>
  *     @author yangchong
  *     email  : yangchong211@163.com
- *     GitHub : https://github.com/yangchong211/YCVideoPlayer
+ *     GitHub : <a href="https://github.com/yangchong211/YCVideoPlayer">...</a>
  *     time  : 2018/8/6
  *     desc  : provider接口具体代理类
  *     revise:
@@ -31,7 +31,7 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void init(final Context context , TtsPlayerConfig config) {
+    public void init(final Context context , TtsPlayerConfig config) {
         mConfig = config;
         if (mConfig.getIsTtsDeque()){
             mDelegate = new AudioServiceImpl1();
@@ -42,7 +42,7 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final boolean isInit() {
+    public boolean isInit() {
         return null != this.mDelegate && this.mDelegate.isInit();
     }
 
@@ -55,7 +55,7 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void stop() {
+    public void stop() {
         if (null != this.mDelegate) {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 mDelegate.stop();
@@ -71,7 +71,7 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void pause() {
+    public void pause() {
         if (null != this.mDelegate) {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 mDelegate.pause();
@@ -87,7 +87,7 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void resume() {
+    public void resume() {
         if (null != this.mDelegate) {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 mDelegate.resume();
@@ -103,7 +103,7 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void release() {
+    public void release() {
         if (null != this.mDelegate) {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 mDelegate.release();
@@ -119,12 +119,12 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final boolean isPlaying() {
+    public boolean isPlaying() {
         return null != this.mDelegate && this.mDelegate.isPlaying();
     }
 
     @Override
-    public final void play(final AudioPlayData audioPlayData) {
+    public void play(final AudioPlayData audioPlayData) {
         if (null != this.mDelegate) {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 this.mDelegate.play(audioPlayData);
@@ -140,7 +140,7 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void playTts(final String tts) {
+    public void playTts(final String tts) {
         if (null != this.mDelegate) {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 this.mDelegate.playTts(tts);
@@ -172,7 +172,7 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void playAudioResource(final int rawId) {
+    public void playAudioResource(final int rawId) {
         if (null != this.mDelegate) {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 this.mDelegate.playAudioResource(rawId);
@@ -188,7 +188,7 @@ public final class AudioService implements AudioServiceProvider {
     }
 
     @Override
-    public final void setPlayStateListener(final PlayStateListener arg0) {
+    public void setPlayStateListener(final PlayStateListener arg0) {
         if (null != this.mDelegate) {
             this.mDelegate.setPlayStateListener(arg0);
         }

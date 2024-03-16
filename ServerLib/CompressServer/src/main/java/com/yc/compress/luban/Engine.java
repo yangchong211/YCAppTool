@@ -3,8 +3,8 @@ package com.yc.compress.luban;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.yc.imagetoollib.AppBitmapUtils;
-import com.yc.imagetoollib.PicCalculateUtils;
+import com.yc.compress.image.AppBitmapUtils;
+import com.yc.compress.image.PicCalculateUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

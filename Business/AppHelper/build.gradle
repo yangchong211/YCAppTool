@@ -193,9 +193,9 @@ dependencies {
     implementation project(path: ':CustomWidget')
     implementation project(path: ':CountTimerLib')
     implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':AppReceiver')
 //    implementation project(path: ':DemoBusiness')
 //    implementation project(path: ':StatusBusiness')
-    implementation project(path: ':AppStatusLib')
 
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':MonitorKeepAlive')
@@ -221,7 +221,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["AutoCloserLib"])
     //implementation project(path: ':AutoCloserLib')
 //    implementation(rootProject.ext.dependencies["AppStartLib"])
-    implementation project(path: ':ParallelTaskLib')
 //    implementation project(path: ':MvpTodoBusiness')
 //    implementation project(path: ':MvvmDatabinding')
 //    implementation project(path: ':MvvmTodoLive')
