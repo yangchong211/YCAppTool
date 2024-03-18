@@ -110,6 +110,7 @@ public class DefaultTaskExecutor extends AbsTaskExecutor {
     @Override
     public void executeOnCore(@Nullable Runnable runnable) {
         if (runnable != null && mCoreExecutor != null) {
+            //提交一个事务，runnable
             mCoreExecutor.execute(runnable);
         }
     }

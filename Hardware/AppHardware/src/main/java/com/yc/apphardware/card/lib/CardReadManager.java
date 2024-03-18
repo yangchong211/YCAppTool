@@ -2,7 +2,7 @@ package com.yc.apphardware.card.lib;
 
 import android.util.Log;
 
-import com.yc.cpucard.CpuResultMessage;
+import com.yc.cardmanager.cpu.CpuResultMessage;
 
 import java.io.IOException;
 

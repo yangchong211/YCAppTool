@@ -15,17 +15,17 @@ import com.yc.appserver.R;
 import com.yc.appserver.http.http.exception.ResultException;
 import com.yc.appserver.http.http.exception.TokenException;
 import com.yc.gson.factory.GsonFactory;
-import com.yc.http.EasyLog;
-import com.yc.http.config.IRequestHandler;
-import com.yc.http.exception.CancelException;
-import com.yc.http.exception.DataException;
-import com.yc.http.exception.NetHttpException;
-import com.yc.http.exception.NetworkException;
-import com.yc.http.exception.NullBodyException;
-import com.yc.http.exception.ResponseException;
-import com.yc.http.exception.ServerException;
-import com.yc.http.exception.TimeoutException;
-import com.yc.http.request.HttpRequest;
+import com.yc.http.synthesis.EasyLog;
+import com.yc.http.synthesis.config.IRequestHandler;
+import com.yc.http.synthesis.exception.CancelException;
+import com.yc.http.synthesis.exception.DataException;
+import com.yc.http.synthesis.exception.NetHttpException;
+import com.yc.http.synthesis.exception.NetworkException;
+import com.yc.http.synthesis.exception.NullBodyException;
+import com.yc.http.synthesis.exception.ResponseException;
+import com.yc.http.synthesis.exception.ServerException;
+import com.yc.http.synthesis.exception.TimeoutException;
+import com.yc.http.synthesis.request.HttpRequest;
 
 
 import org.jetbrains.annotations.NotNull;

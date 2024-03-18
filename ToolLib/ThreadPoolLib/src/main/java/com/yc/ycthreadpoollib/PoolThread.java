@@ -252,6 +252,7 @@ public final class PoolThread implements Executor {
      * @return {@code true}: 是<br>{@code false}: 否
      */
     public boolean isShutDown() {
+        //判断线程池是否已关闭
         return pool.isShutdown();
     }
 

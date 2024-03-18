@@ -2,7 +2,7 @@ package com.yc.appserver.http.http.api;
 
 import androidx.annotation.NonNull;
 
-import com.yc.http.config.IRequestApi;
+import com.yc.http.synthesis.config.IRequestApi;
 
 
 public final class SearchAuthorApi implements IRequestApi {

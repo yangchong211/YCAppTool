@@ -2,7 +2,7 @@ package com.yc.appserver.http.http.server;
 
 import androidx.annotation.NonNull;
 
-import com.yc.http.config.IRequestServer;
+import com.yc.http.synthesis.config.IRequestServer;
 
 
 public class ReleaseServer implements IRequestServer {

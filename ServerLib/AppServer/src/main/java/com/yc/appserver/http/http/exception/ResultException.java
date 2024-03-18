@@ -3,7 +3,7 @@ package com.yc.appserver.http.http.exception;
 import androidx.annotation.NonNull;
 
 import com.yc.appserver.http.http.model.HttpData;
-import com.yc.http.exception.NetHttpException;
+import com.yc.http.synthesis.exception.NetHttpException;
 
 public final class ResultException extends NetHttpException {
 

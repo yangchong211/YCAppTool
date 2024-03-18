@@ -1,7 +1,7 @@
 package com.yc.cardmanager;
 
-import com.yc.cpucard.AbstractCpuCard;
-import com.yc.mifarecard.AbstractM1Card;
+import com.yc.cardmanager.cpu.AbstractCpuCard;
+import com.yc.cardmanager.m1.AbstractM1Card;
 
 public final class CardHelper {
 

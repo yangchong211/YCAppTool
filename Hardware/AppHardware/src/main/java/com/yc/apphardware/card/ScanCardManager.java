@@ -15,7 +15,7 @@ import com.yc.bytetoolutils.ByteUtils;
 import com.yc.bytetoolutils.BytesHexStrUtils;
 import com.yc.cardmanager.CardHelper;
 import com.yc.cardmanager.CardType;
-import com.yc.cpucard.CpuResultMessage;
+import com.yc.cardmanager.cpu.CpuResultMessage;
 import com.yc.soundpool.SoundPoolPlayer;
 import com.yc.toolutils.AppLogUtils;
 

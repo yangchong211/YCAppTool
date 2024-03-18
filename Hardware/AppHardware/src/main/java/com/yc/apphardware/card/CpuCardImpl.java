@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.yc.apphardware.card.lib.CardReadManager;
 import com.yc.bytetoolutils.BytesHexStrUtils;
-import com.yc.cpucard.AbstractCpuCard;
+import com.yc.cardmanager.cpu.AbstractCpuCard;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.Arrays;

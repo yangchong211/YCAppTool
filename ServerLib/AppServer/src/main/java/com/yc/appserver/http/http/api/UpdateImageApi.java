@@ -2,8 +2,8 @@ package com.yc.appserver.http.http.api;
 
 import androidx.annotation.NonNull;
 
-import com.yc.http.config.IRequestApi;
-import com.yc.http.config.IRequestServer;
+import com.yc.http.synthesis.config.IRequestApi;
+import com.yc.http.synthesis.config.IRequestServer;
 
 import java.io.File;
 

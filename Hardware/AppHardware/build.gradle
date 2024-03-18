@@ -53,8 +53,6 @@ dependencies {
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':KeyEventLib')
     implementation project(path: ':SecondaryScreen')
-    implementation project(path: ':CpuCard')
-    implementation project(path: ':MifareCard')
     implementation project(path: ':CardManager')
 
     implementation 'com.aill:AndroidSerialPort:1.0.8'

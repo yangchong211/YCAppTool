@@ -1,7 +1,7 @@
 package com.yc.appserver.http.http.exception;
 
 
-import com.yc.http.exception.NetHttpException;
+import com.yc.http.synthesis.exception.NetHttpException;
 
 public final class TokenException extends NetHttpException {
 

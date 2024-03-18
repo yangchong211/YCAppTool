@@ -8,7 +8,7 @@ import com.tencent.wx.pos.jni.bean.ByteArrayResult;
 import com.yc.apphardware.card.lib.CardReadManager;
 import com.yc.apphardware.card.lib.MyConverterTool;
 import com.yc.bytetoolutils.BytesHexStrUtils;
-import com.yc.mifarecard.AbstractM1Card;
+import com.yc.cardmanager.m1.AbstractM1Card;
 import com.yc.toolutils.AppLogUtils;
 
 import java.util.ArrayList;

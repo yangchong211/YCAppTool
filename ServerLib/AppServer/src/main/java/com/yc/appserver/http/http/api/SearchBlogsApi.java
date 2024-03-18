@@ -2,8 +2,8 @@ package com.yc.appserver.http.http.api;
 
 import androidx.annotation.NonNull;
 
-import com.yc.http.annotation.HttpRename;
-import com.yc.http.config.IRequestApi;
+import com.yc.http.synthesis.annotation.HttpRename;
+import com.yc.http.synthesis.config.IRequestApi;
 
 import java.util.List;
 

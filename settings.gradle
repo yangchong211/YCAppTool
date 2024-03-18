@@ -68,8 +68,7 @@ include ':AppReceiver', ':ToolUtilsLib', ':AppBaseStore',
         ':BaseClassLib', ':AppLogLib', ':AppRestartLib',
         ':ArchitectureLib', ':ComponentManager',
         ':AppCommonInter', ':AppEncryptLib',
-         ':NetWorkLib', ':AppTaskLib',
-        ':SmEncryptLib'
+         ':NetWorkLib', ':AppTaskLib'
 project(':AppReceiver').projectDir = new File('CommonLib/AppReceiver')
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':AppBaseStore').projectDir = new File('CommonLib/AppBaseStore')
@@ -82,7 +81,6 @@ project(':AppCommonInter').projectDir = new File('CommonLib/AppCommonInter')
 project(':AppEncryptLib').projectDir = new File('CommonLib/AppEncryptLib')
 project(':NetWorkLib').projectDir = new File('CommonLib/NetWorkLib')
 project(':AppTaskLib').projectDir = new File('CommonLib/AppTaskLib')
-project(':SmEncryptLib').projectDir = new File('CommonLib/SmEncryptLib')
 
 
 /* +++++++++ 框架view基础组件层 +++++++++ */
@@ -295,10 +293,8 @@ project(':GsonLib').projectDir = new File('ThirdLib/GsonLib')
 include ':AppHardware'
 project(':AppHardware').projectDir = new File('Hardware/AppHardware')
 //库
-include ':MifareCard', ':CpuCard','SecondaryScreen',':UsbManager',':SerialPort', ':CardManager', ':NfcHelper',
+include 'SecondaryScreen',':UsbManager',':SerialPort', ':CardManager', ':NfcHelper',
         ':KeyEventLib'
-project(':MifareCard').projectDir = new File('Hardware/MifareCard')
-project(':CpuCard').projectDir = new File('Hardware/CpuCard')
 project(':SecondaryScreen').projectDir = new File('Hardware/SecondaryScreen')
 project(':CardManager').projectDir = new File('Hardware/CardManager')
 project(':UsbManager').projectDir = new File('Hardware/UsbManager')
