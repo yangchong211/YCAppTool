@@ -24,6 +24,7 @@ import com.yc.grpcserver.BaseResponse;
 import com.yc.grpcserver.ChannelHelper;
 import com.yc.grpcserver.GrpcHelper;
 import com.yc.grpcserver.GrpcStubManager;
+import com.yc.grpcserver.LoggingInterceptor;
 import com.yc.toastutils.ToastUtils;
 
 import java.io.PrintWriter;
@@ -128,7 +129,10 @@ public class HelloWorldActivity extends AppCompatActivity {
             int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
             try {
                 //构建Channel
-                channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+                channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext()
+                        //添加拦截器
+                        .intercept(new LoggingInterceptor())
+                        .build();
                 //构建服务请求API代理
                 HelloWorldGrpc.HelloWorldBlockingStub stub = HelloWorldGrpc.newBlockingStub(channel);
                 //构建请求实体，HelloRequest是自动生成的实体类
@@ -163,6 +167,13 @@ public class HelloWorldActivity extends AppCompatActivity {
             Button sendButton = (Button) activity.findViewById(R.id.send_button);
             resultText.setText(result);
             sendButton.setEnabled(true);
+        }
+    }
+
+    private class MyService extends HelloWorldGrpc.HelloWorldImplBase {
+        @Override
+        public void sayHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
+            super.sayHello(request, responseObserver);
         }
     }
 
@@ -243,6 +254,7 @@ public class HelloWorldActivity extends AppCompatActivity {
             sendButton.setEnabled(true);
         }
     }
+
 
     /**
      * 异步

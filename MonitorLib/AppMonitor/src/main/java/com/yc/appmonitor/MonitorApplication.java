@@ -3,8 +3,8 @@ package com.yc.appmonitor;
 import android.app.Application;
 
 
-import com.yc.monitortimelib.OnMonitorListener;
-import com.yc.monitortimelib.TimeMonitorHelper;
+import com.yc.monitortimelib.monitor.OnMonitorListener;
+import com.yc.monitortimelib.monitor.TimeMonitorHelper;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.crash.lib.CrashHandler;
 import com.yc.crash.lib.CrashListener;

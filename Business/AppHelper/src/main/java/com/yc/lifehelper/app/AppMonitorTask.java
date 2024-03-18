@@ -3,7 +3,7 @@ package com.yc.lifehelper.app;
 import android.os.Looper;
 
 import com.yc.parallel.AbsParallelTask;
-import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.yc.ycthreadpoollib.easy.DelegateTaskExecutor;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.crash.lib.CrashHandler;
 import com.yc.crash.lib.CrashListener;

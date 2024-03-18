@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.bumptech.glide.request.target.ViewTarget;
 import com.yc.lifehelper.R;
-import com.yc.monitortimelib.TimeMonitorHelper;
+import com.yc.monitortimelib.monitor.TimeMonitorHelper;
 import com.yc.parallel.ParallelTaskDispatcher;
 import com.yc.library.base.app.LibApplication;
 import com.yc.localelib.service.LocaleService;

@@ -2,11 +2,11 @@ package com.yc.lifehelper.app;
 
 import android.os.Looper;
 
-import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.yc.ycthreadpoollib.easy.DelegateTaskExecutor;
 import com.yc.parallel.AbsParallelTask;
 import com.yc.appprocesslib.AppAutoCloser;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.ntptime.NtpGetTime;
+import com.yc.toolutils.sntp.NtpGetTime;
 
 import java.io.IOException;
 import java.util.ArrayList;

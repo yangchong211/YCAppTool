@@ -25,7 +25,7 @@ import com.yc.apploglib.AppLogHelper;
 import com.yc.activitymanager.activity.ActivityManager;
 import com.yc.banner.view.BannerView;
 
-import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.yc.ycthreadpoollib.easy.DelegateTaskExecutor;
 import com.yc.imageserver.utils.GlideImageUtils;
 import com.yc.library.api.ConstantStringApi;
 import com.yc.library.base.config.Constant;

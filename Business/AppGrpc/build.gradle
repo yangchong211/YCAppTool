@@ -73,7 +73,7 @@ dependencies {
     implementation rootProject.ext.dependencies["annotation"]
     implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation rootProject.ext.dependencies["gson"]
-    implementation project(path: ':RoundCorners')
+    implementation 'com.github.yangchong211.YCWidgetLib:RoundCorners:1.0.6'
     implementation project(path: ':GrpcServer')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     //工具类utils

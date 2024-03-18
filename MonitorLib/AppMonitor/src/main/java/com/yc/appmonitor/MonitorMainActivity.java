@@ -13,7 +13,7 @@ import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.monitorpinglib.MonitorPingActivity;
 import com.yc.monitorspeed.ConnectionActivity;
-import com.yc.monitortimelib.TimeMonitorHelper;
+import com.yc.monitortimelib.monitor.TimeMonitorHelper;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.crash.lib.CrashListActivity;
 

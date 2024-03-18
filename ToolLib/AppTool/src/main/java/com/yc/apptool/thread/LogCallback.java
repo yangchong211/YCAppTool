@@ -2,7 +2,7 @@ package com.yc.apptool.thread;
 
 import android.util.Log;
 
-import com.yc.ycthreadpoollib.callback.ThreadCallback;
+import com.yc.ycthreadpoollib.pool.callback.ThreadCallback;
 
 
 /**

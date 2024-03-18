@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.yc.apploglib.config.AppLogConfig;
 import com.yc.apploglib.config.AppLogFactory;
-import com.yc.monitortimelib.TimeMonitorHelper;
+import com.yc.monitortimelib.monitor.TimeMonitorHelper;
 import com.yc.parallel.AbsParallelTask;
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.AppBatteryInfo;

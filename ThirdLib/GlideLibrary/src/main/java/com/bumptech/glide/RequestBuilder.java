@@ -9,11 +9,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.CheckResult;
-import android.support.annotation.DrawableRes;
+
+import androidx.annotation.CheckResult;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.support.annotation.RawRes;
+import androidx.annotation.RawRes;
+
 import android.widget.ImageView;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;

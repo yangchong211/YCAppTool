@@ -10,7 +10,7 @@ import com.yc.interceptortime.MonitorBean;
 import com.yc.looperthread.heart.HeartConfig;
 import com.yc.looperthread.heart.HeartManager;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.ycthreadpoollib.PoolThread;
+import com.yc.ycthreadpoollib.pool.PoolThread;
 
 public class App extends Application {
 

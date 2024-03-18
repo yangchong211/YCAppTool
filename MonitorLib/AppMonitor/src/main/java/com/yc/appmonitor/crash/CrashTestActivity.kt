@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.yc.appmonitor.R
-import com.yc.monitortimelib.TimeMonitorHelper
+import com.yc.monitortimelib.monitor.TimeMonitorHelper
 import com.yc.toastutils.ToastUtils
 import com.yc.crash.nativec.NativeCrashDumper
 import java.util.*

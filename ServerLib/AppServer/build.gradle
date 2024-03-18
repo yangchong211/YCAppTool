@@ -54,7 +54,6 @@ dependencies {
     implementation project(path: ':OkHttpServer')
     implementation project(path: ':GsonServer')
     implementation project(path: ':ToolUtilsLib')
-    implementation project(path: ':NetInterceptor')
     implementation project(path: ':MonitorInterceptor')
     implementation project(path: ':AppTaskLib')
     implementation project(path: ':NotCaptureLib')

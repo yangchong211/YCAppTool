@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.apploglib.AppLogHelper;
 import com.yc.apptool.R;
-import com.yc.easyexecutor.DelegateTaskExecutor;
+import com.yc.ycthreadpoollib.easy.DelegateTaskExecutor;
 import com.yc.toastutils.ToastUtils;
 
 

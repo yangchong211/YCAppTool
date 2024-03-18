@@ -35,12 +35,12 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 include ':AppServer'
 project(':AppServer').projectDir = new File('ServerLib/AppServer')
 //库
-include ':Transformation', ':HttpServer',
+include ':GlideServer', ':HttpServer',
         ':GsonServer', ':IpcServer', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
-        ':AppLogClient', ':AppLogService', ':NetInterceptor', ':SignalHooker',
-        ':GlideProgressLib', ':CompressServer', ':GrpcServer'
-project(':Transformation').projectDir = new File('ServerLib/Transformation')
+        ':AppLogClient', ':AppLogService', ':SignalHooker',
+        ':CompressServer', ':GrpcServer'
+project(':GlideServer').projectDir = new File('ServerLib/GlideServer')
 project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
 project(':AppLogClient').projectDir = new File('ServerLib/AppLogClient')
@@ -50,9 +50,7 @@ project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')
 project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
 project(':OkHttpServer').projectDir = new File('ServerLib/OkHttpServer')
 project(':PrivateServer').projectDir = new File('ServerLib/PrivateServer')
-project(':NetInterceptor').projectDir = new File('ServerLib/NetInterceptor')
 project(':SignalHooker').projectDir = new File('ServerLib/SignalHooker')
-project(':GlideProgressLib').projectDir = new File('ServerLib/GlideProgressLib')
 project(':CompressServer').projectDir = new File('ServerLib/CompressServer')
 project(':TcpServerLib').projectDir = new File('ServerLib/TcpServerLib')
 project(':TcpManager').projectDir = new File('ServerLib/TcpManager')
@@ -146,11 +144,11 @@ include ':AppTool'
 project(':AppTool').projectDir = new File('ToolLib/AppTool')
 //库
 include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':EasySocket',
-        ':LocaleHelperLib', ':CountTimerLib', ':NtpTimeLib',':InterceptorTime',
-        ':AnimatorToolLib', ':LongAliveLib', ':EasyExecutor',
+        ':LocaleHelperLib', ':CountTimerLib',
+        ':AnimatorToolLib',
         ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':LooperThread',
          ':AppUpdateLib',
-        ':ZXingCodeLib', ':TransitionHelper', ':AnimBaseHelper', ':NotCaptureLib',
+        ':ZXingCodeLib', ':AnimBaseHelper', ':NotCaptureLib',
          ':CameraOpen', ':SqlLiteLib'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
 project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
@@ -159,18 +157,13 @@ project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
 project(':LocaleHelperLib').projectDir = new File('ToolLib/LocaleHelperLib')
 project(':CountTimerLib').projectDir = new File('ToolLib/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('ToolLib/AnimatorToolLib')
-project(':LongAliveLib').projectDir = new File('ToolLib/LongAliveLib')
 project(':ThreadPoolLib').projectDir = new File('ToolLib/ThreadPoolLib')
 project(':AppProcessLib').projectDir = new File('ToolLib/AppProcessLib')
-project(':EasyExecutor').projectDir = new File('ToolLib/EasyExecutor')
-project(':NtpTimeLib').projectDir = new File('ToolLib/NtpTimeLib')
 project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
-project(':TransitionHelper').projectDir = new File('ToolLib/TransitionHelper')
 project(':AnimBaseHelper').projectDir = new File('ToolLib/AnimBaseHelper')
 project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
 project(':EasySocket').projectDir = new File('ToolLib/EasySocket')
 project(':LooperThread').projectDir = new File('ToolLib/LooperThread')
-project(':InterceptorTime').projectDir = new File('ToolLib/InterceptorTime')
 project(':CameraOpen').projectDir = new File('ToolLib/CameraOpen')
 //project(':MmapLog').projectDir = new File('ToolLib/MmapLog')
 project(':SqlLiteLib').projectDir = new File('ToolLib/SqlLiteLib')

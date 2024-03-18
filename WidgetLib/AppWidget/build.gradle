@@ -109,7 +109,7 @@ dependencies {
     implementation project(path: ':FloatWindow')
     implementation project(path: ':BlurViewLib')
     implementation project(path: ':LibraryLayer')
-    implementation project(path: ':Transformation')
+    implementation project(path: ':GlideServer')
     implementation project(path: ':BannerViewLib')
     implementation project(path: ':SecondaryScreen')
 }

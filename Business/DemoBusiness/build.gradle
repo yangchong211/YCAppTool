@@ -64,7 +64,7 @@ dependencies {
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':ThreadPoolLib')
     implementation project(path: ':HttpServer')
-    implementation project(path: ':Transformation')
+    implementation project(path: ':GlideServer')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':AppEditText')
     implementation project(path: ':CustomWidget')
@@ -75,7 +75,6 @@ dependencies {
     implementation project(path: ':RoundCorners')
     implementation project(path: ':BaseProgress')
     implementation project(path: ':CircleProgress')
-    implementation project(path: ':NtpTimeLib')
     implementation project(path: ':BlurViewLib')
     implementation 'com.github.yangchong211.YCDialog:ToastUtils:3.6.9'
     implementation 'com.github.yangchong211.YCDialog:DialogFragment:3.6.8'

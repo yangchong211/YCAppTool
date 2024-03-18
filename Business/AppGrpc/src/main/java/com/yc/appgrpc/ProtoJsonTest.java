@@ -21,8 +21,10 @@ public class ProtoJsonTest {
             Gson gson = new Gson();
             String data = gson.toJson(addressBook);
             byte[] bytes = data.getBytes();
-            Log.e(TAG, "Gson 序列化耗时：" + (System.currentTimeMillis() - l));
-            Log.e(TAG, "Gson 序列化数据大小：" + bytes.length);
+            StringBuilder sb = new StringBuilder();
+            sb.append(TAG).append("\n");
+            sb.append("Gson 序列化耗时：").append(System.currentTimeMillis() - l).append("\n");
+            sb.append("Gson 序列化数据大小：").append(bytes.length).append("\n");
             l = System.currentTimeMillis();
             AddressBook addressBook1 = gson.fromJson(new String(bytes), AddressBook.class);
             Log.e(TAG, "Gson 反序列化耗时：" + (System.currentTimeMillis() - l));
@@ -52,7 +54,7 @@ public class ProtoJsonTest {
 
             AddressBook.PhoneNumber p_130 = new AddressBook.PhoneNumber();
             p_120.setNumber("130");
-            p_120.setType(AddressBook.PhoneNumber.PhoneType.MOBILE);
+            p_120.setType(AddressBook.PhoneNumber.PhoneType.WORK);
             AddressBook.Person ys = new AddressBook.Person();
             ys.setId(3);
             ys.setName("王五");
@@ -64,9 +66,9 @@ public class ProtoJsonTest {
 
 
         public void protoTest() {
-            MsgProto.Msg msg = MsgProto.Msg.newBuilder().setText("杨充").build();
             AddressBookProto.Person.PhoneNumber.Builder builder
-                    = AddressBookProto.Person.PhoneNumber.newBuilder().setNumber("110")
+                    = AddressBookProto.Person.PhoneNumber.newBuilder()
+                    .setNumber("110")
                     .setType(AddressBookProto.Person.PhoneType.HOME);
             AddressBookProto.Person.Builder zs = AddressBookProto.Person.newBuilder()
                     .setName("张三")
@@ -74,7 +76,8 @@ public class ProtoJsonTest {
                     .addPhones(builder);
 
             AddressBookProto.Person.PhoneNumber.Builder builder1
-                    = AddressBookProto.Person.PhoneNumber.newBuilder().setNumber("120")
+                    = AddressBookProto.Person.PhoneNumber.newBuilder()
+                    .setNumber("120")
                     .setType(AddressBookProto.Person.PhoneType.MOBILE);
             AddressBookProto.Person.Builder ls = AddressBookProto.Person.newBuilder()
                     .setName("李四")
@@ -82,7 +85,7 @@ public class ProtoJsonTest {
                     .addPhones(builder1);
 
             AddressBookProto.Person.PhoneNumber.Builder builder2 = AddressBookProto.Person.PhoneNumber.newBuilder()
-                    .setNumber("130").setType(AddressBookProto.Person.PhoneType.MOBILE);
+                    .setNumber("130").setType(AddressBookProto.Person.PhoneType.WORK);
             AddressBookProto.Person.Builder ys = AddressBookProto.Person.newBuilder().
                     setName("王五")
                     .setId(3)

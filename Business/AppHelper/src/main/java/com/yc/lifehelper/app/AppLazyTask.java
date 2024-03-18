@@ -2,7 +2,7 @@ package com.yc.lifehelper.app;
 
 import android.os.Looper;
 
-import com.yc.monitortimelib.TimeMonitorHelper;
+import com.yc.monitortimelib.monitor.TimeMonitorHelper;
 import com.yc.parallel.AbsParallelTask;
 import com.yc.toolutils.AppLogUtils;
 

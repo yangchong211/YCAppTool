@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.yc.library.base.callback.LogCallback;
 
-import com.yc.ycthreadpoollib.PoolThread;
+import com.yc.ycthreadpoollib.pool.PoolThread;
 
 
 /**

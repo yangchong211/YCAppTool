@@ -17,7 +17,6 @@ package com.yc.webviewlib.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Looper;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -29,7 +28,6 @@ import com.yc.webviewlib.bridge.WebJsMessage;
 import com.yc.webviewlib.inter.BridgeHandler;
 import com.yc.webviewlib.inter.CallBackFunction;
 import com.yc.webviewlib.utils.X5LogUtils;
-import com.yc.webviewlib.utils.X5WebUtils;
 import com.yc.webviewlib.inter.WebViewJavascriptBridge;
 
 import java.net.URLEncoder;
@@ -37,7 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <pre>

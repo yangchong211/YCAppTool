@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.other.R;
-import com.yc.ntptime.NtpGetTime;
+import com.yc.toolutils.sntp.NtpGetTime;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

@@ -26,7 +26,9 @@ public class GrpcChannelBuilder {
 
     public static ManagedChannel build(String url, @Nullable String serverHostOverride,
                                        boolean useTls, @Nullable InputStream isCa) {
-        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forTarget(url);
+        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forTarget(url)
+                //添加日志拦截器
+                .intercept(new LoggingInterceptor());
         if (serverHostOverride != null) {
             channelBuilder.overrideAuthority(serverHostOverride);
         }
@@ -63,7 +65,9 @@ public class GrpcChannelBuilder {
      */
     public static ManagedChannel build(String host, int port, @Nullable String serverHostOverride,
                                        boolean useTls, @Nullable InputStream isCa) {
-        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress(host, port);
+        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress(host, port)
+                //添加日志拦截器
+                .intercept(new LoggingInterceptor());
         if (serverHostOverride != null) {
             channelBuilder.overrideAuthority(serverHostOverride);
         }
@@ -101,7 +105,9 @@ public class GrpcChannelBuilder {
                                        boolean useTls, @Nullable InputStream isCa,
                                        @Nullable String androidSocketFactoryTls) {
         //构建Channel
-        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forTarget(url);
+        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forTarget(url)
+                //添加日志拦截器
+                .intercept(new LoggingInterceptor());
         if (serverHostOverride != null) {
             channelBuilder.overrideAuthority(serverHostOverride);
         }
@@ -140,7 +146,9 @@ public class GrpcChannelBuilder {
                                        boolean useTls, @Nullable InputStream isCa,
                                        @Nullable String androidSocketFactoryTls) {
         //构建Channel
-        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress(host, port);
+        ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress(host, port)
+                //添加日志拦截器
+                .intercept(new LoggingInterceptor());
         if (serverHostOverride != null) {
             channelBuilder.overrideAuthority(serverHostOverride);
         }
