@@ -71,11 +71,6 @@ public final class ChannelHelper {
         ready.set(false);
         //先释放，在重建
         release();
-        beforeServer = currentServer;
-        this.currentServer = server;
-        if (!serverList.isEmpty() && serverList.contains(server)) {
-            currentServerIndex = serverList.indexOf(server);
-        }
         //如果是空的，在获取一次
         managedChannel = createManagedChannel(server);
         channel = createChannel(managedChannel);

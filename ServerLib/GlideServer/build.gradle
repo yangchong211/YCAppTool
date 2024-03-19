@@ -42,6 +42,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["annotation"])
     implementation rootProject.ext.dependencies["glide"]
     implementation project(path: ':AppTaskLib')
+    implementation 'org.jetbrains:annotations:15.0'
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
 //    implementation rootProject.ext.dependencies["okhttp"]
     implementation project(path: ':OkHttpServer')

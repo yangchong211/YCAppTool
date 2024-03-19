@@ -34,13 +34,17 @@ public class GrpcChannelBuilder {
         }
         if (useTls) {
             try {
+                // 创建 SSLContext
                 SSLContext sc = SSLContext.getInstance("TLSv1.2");
                 sc.init(null, getTrustManagers(isCa), null);
+                // 创建 SSLSocketFactory
+                Tls12SocketFactory socketFactory = new Tls12SocketFactory(sc.getSocketFactory());
+                // 通过 channel 设置 sslSocketFactory做ssl安全处理
                 ConnectionSpec.Builder builder = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS);
                 ConnectionSpec cs = builder.tlsVersions(TlsVersion.TLS_1_2).build();
                 ((OkHttpChannelBuilder) channelBuilder).useTransportSecurity();
                 ((OkHttpChannelBuilder) channelBuilder).connectionSpec(cs);
-                Tls12SocketFactory socketFactory = new Tls12SocketFactory(sc.getSocketFactory());
+
                 ((OkHttpChannelBuilder) channelBuilder).sslSocketFactory(socketFactory);
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -79,8 +83,7 @@ public class GrpcChannelBuilder {
                 ConnectionSpec cs = builder.tlsVersions(TlsVersion.TLS_1_2).build();
                 ((OkHttpChannelBuilder) channelBuilder).useTransportSecurity();
                 ((OkHttpChannelBuilder) channelBuilder).connectionSpec(cs);
-                Tls12SocketFactory socketFactory = new Tls12SocketFactory(sc.getSocketFactory());
-                ((OkHttpChannelBuilder) channelBuilder).sslSocketFactory(socketFactory);
+                ((OkHttpChannelBuilder) channelBuilder).sslSocketFactory(new Tls12SocketFactory(sc.getSocketFactory()));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -130,6 +133,7 @@ public class GrpcChannelBuilder {
         }
         return channelBuilder.build();
     }
+
 
     /**
      * 用来生成ManagedChannel的

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.gson.Gson;
 import com.yc.grpcserver.BaseRequest;
 import com.yc.grpcserver.BaseResponse;
 import com.yc.grpcserver.ChannelHelper;
@@ -113,7 +114,6 @@ public class HelloWorldActivity extends AppCompatActivity {
      * 同步
      */
     private static class GrpcTask extends AsyncTask<String, Void, String> {
-
         private final WeakReference<Activity> activityReference;
         private ManagedChannel channel;
 
@@ -314,26 +314,26 @@ public class HelloWorldActivity extends AppCompatActivity {
      * @param message
      */
     private void GrpcTask3(String host, String portStr, String message) {
-        ManagedChannel channel;
         int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
+        //构建Channel
+        ManagedChannel channel = ChannelHelper.getInstance().newChannel1(host, port);
+        //构建服务请求API代理
+        //* BlockingStub: 一对一（一元）的阻塞式响应。
+        //* 内部也是基于FutureStub实现，只是在调用时就开启了while循环。
+        //1. 创建feature;
+        //2. while(future.isDone)监听;
+        //3. 执行结束时，返回feture.get()。
+        //所以BlockingStub的调用执行需要运行在子线程。
+        HelloWorldGrpc.HelloWorldBlockingStub stub = HelloWorldGrpc.newBlockingStub(channel);
+        //构建请求实体，HelloRequest是自动生成的实体类
+        HelloRequest request = HelloRequest.newBuilder().setName(message).build();
+        //设置超时
+        HelloWorldGrpc.HelloWorldBlockingStub blockingStub = GrpcStubManager.createStub(stub, new BaseRequest());
+        //进行请求并且得到响应数据
+        HelloReply reply = blockingStub.sayHello(request);
+        BaseResponse response = GrpcHelper.translateResponse(reply, BaseResponse.class);
         try {
-            //构建Channel
-            channel = ChannelHelper.getInstance().newChannel1(host, port);
-            //构建服务请求API代理
-            //* BlockingStub: 一对一（一元）的阻塞式响应。
-            //* 内部也是基于FutureStub实现，只是在调用时就开启了while循环。
-            //1. 创建feature;
-            //2. while(future.isDone)监听;
-            //3. 执行结束时，返回feture.get()。
-            //所以BlockingStub的调用执行需要运行在子线程。
-            HelloWorldGrpc.HelloWorldBlockingStub stub = HelloWorldGrpc.newBlockingStub(channel);
-            //构建请求实体，HelloRequest是自动生成的实体类
-            HelloRequest request = HelloRequest.newBuilder().setName(message).build();
-            //设置超时
-            HelloWorldGrpc.HelloWorldBlockingStub blockingStub = GrpcStubManager.createStub(stub, new BaseRequest());
-            //进行请求并且得到响应数据
-            HelloReply reply = blockingStub.sayHello(request);
-            BaseResponse response = GrpcHelper.translateResponse(reply, BaseResponse.class);
+
         } catch (Exception e) {
             Log.i("Exception", e.getMessage());
         }

@@ -47,6 +47,7 @@ public final class GrpcHelper {
      * @return 返回对象
      */
     public static <T> T translateResponse(Object response, Type type) {
+        //创建gson对象
         Gson gson = new Gson();
         //先将GRPC对象转为Json字符串
         String jsonString = gson.toJson(response);
