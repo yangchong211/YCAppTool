@@ -18,7 +18,7 @@ package com.yc.store.sp
 import android.content.Context
 import android.content.SharedPreferences
 import com.yc.store.ICacheable
-import com.yc.appcontextlib.context.AppToolUtils
+import com.yc.toolutils.context.AppToolUtils
 
 /**
  * <pre>

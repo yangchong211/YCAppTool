@@ -20,7 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 
-import com.yc.appcontextlib.context.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

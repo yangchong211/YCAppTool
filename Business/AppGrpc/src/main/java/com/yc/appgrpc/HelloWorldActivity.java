@@ -35,6 +35,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.okhttp.OkHttpChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
 public class HelloWorldActivity extends AppCompatActivity {
@@ -339,4 +340,9 @@ public class HelloWorldActivity extends AppCompatActivity {
         }
     }
 
+    private void test(String host, int port) {
+        ManagedChannel channel = OkHttpChannelBuilder.forAddress(host, port)
+                .usePlaintext()
+                .build();
+    }
 }

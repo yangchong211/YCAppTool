@@ -35,13 +35,12 @@ project(':LibraryLayer').projectDir = new File('Business/LibraryLayer')
 include ':AppServer'
 project(':AppServer').projectDir = new File('ServerLib/AppServer')
 //库
-include ':GlideServer', ':HttpServer',
+include ':GlideServer',
         ':GsonServer', ':IpcServer', ':TcpServerLib', ':TcpManager',
         ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':SignalHooker',
         ':CompressServer', ':GrpcServer'
 project(':GlideServer').projectDir = new File('ServerLib/GlideServer')
-project(':HttpServer').projectDir = new File('ServerLib/HttpServer')
 project(':GsonServer').projectDir = new File('ServerLib/GsonServer')
 project(':AppLogClient').projectDir = new File('ServerLib/AppLogClient')
 project(':AppLogService').projectDir = new File('ServerLib/AppLogService')

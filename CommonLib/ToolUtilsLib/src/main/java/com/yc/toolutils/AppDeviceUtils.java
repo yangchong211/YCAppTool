@@ -10,7 +10,7 @@ import android.provider.Settings;
 
 import androidx.annotation.RequiresApi;
 
-import com.yc.appcontextlib.context.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

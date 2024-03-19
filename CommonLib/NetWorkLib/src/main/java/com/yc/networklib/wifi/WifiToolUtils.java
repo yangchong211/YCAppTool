@@ -17,7 +17,7 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import com.yc.appcontextlib.context.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 import com.yc.toolutils.AppLogUtils;
 
 import java.lang.reflect.Method;

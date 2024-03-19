@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yc.zxingcodelib.DecodeManager;
 import com.yc.zxingserver.R;
 import com.yc.zxingserver.camera.FrontLightMode;
 import com.yc.zxingserver.scan.CaptureActivity;
@@ -31,7 +32,7 @@ public class EasyCaptureActivity extends CaptureActivity {
         tvTitle.setText("二维码扫描");
         getCaptureHelper()
                 //设置只识别二维码会提升速度
-                .decodeFormats(DecodeFormatManager.QR_CODE_FORMATS)
+                .decodeFormats(DecodeManager.QR_CODE_FORMATS)
                 .playBeep(true)
                 .vibrate(true);
 

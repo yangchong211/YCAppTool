@@ -11,7 +11,8 @@ import android.os.StatFs;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 
-import com.yc.eventuploadlib.ExceptionReporter;
+
+import com.yc.appcommoninter.report.ExceptionReporter;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

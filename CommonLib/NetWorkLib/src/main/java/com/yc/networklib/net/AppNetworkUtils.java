@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.yc.appcontextlib.context.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

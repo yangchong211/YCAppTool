@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.yc.appcontextlib.context.AppToolUtils
+import com.yc.toolutils.context.AppToolUtils
 
 /**
  * <pre>

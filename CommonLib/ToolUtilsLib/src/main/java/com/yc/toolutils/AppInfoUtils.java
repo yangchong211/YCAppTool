@@ -9,7 +9,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 
-import com.yc.appcontextlib.context.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 
 import java.io.File;
 import java.util.ArrayList;

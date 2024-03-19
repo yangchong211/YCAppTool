@@ -199,7 +199,6 @@ dependencies {
 
     implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':MonitorKeepAlive')
-    implementation project(path: ':HttpServer')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':GlideServer')
     implementation project(path: ':ZxingServerLib')

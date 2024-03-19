@@ -30,13 +30,6 @@ public class App extends Application {
         HeartManager.getInstance().initHeart(heartConfig);
         //初始化线程池管理器
         initThreadPool();
-        ScheduleTask.getInstance().schedule(new Runnable() {
-            @Override
-            public void run() {
-                //做一些耗时任务
-
-            }
-        });
         InterceptorManager.getInstance().addInterceptor(new CommonCallback<InterceptorBean>() {
             @Override
             public void result(InterceptorBean interceptorBean) {

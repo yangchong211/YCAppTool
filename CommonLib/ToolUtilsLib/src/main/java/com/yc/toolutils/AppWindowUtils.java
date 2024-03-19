@@ -15,7 +15,7 @@ import android.view.Surface;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.yc.appcontextlib.context.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 
 import java.lang.reflect.Method;
 

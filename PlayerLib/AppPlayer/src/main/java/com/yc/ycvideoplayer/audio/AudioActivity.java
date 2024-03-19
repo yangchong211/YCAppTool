@@ -9,11 +9,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.appcommoninter.ILogger;
-import com.yc.audioplayer.bean.TtsPlayerConfig;
-import com.yc.audioplayer.inter.DefaultStateListener;
-import com.yc.audioplayer.service.AudioService;
-import com.yc.audioplayer.bean.AudioPlayData;
-import com.yc.audioplayer.bean.AudioTtsPriority;
+import com.yc.audioplayer.powerful.bean.TtsPlayerConfig;
+import com.yc.audioplayer.powerful.inter.DefaultStateListener;
+import com.yc.audioplayer.powerful.service.AudioService;
+import com.yc.audioplayer.powerful.bean.AudioPlayData;
+import com.yc.audioplayer.powerful.bean.AudioTtsPriority;
 
 import com.yc.toolutils.AppLogUtils;
 import com.yc.ycvideoplayer.R;

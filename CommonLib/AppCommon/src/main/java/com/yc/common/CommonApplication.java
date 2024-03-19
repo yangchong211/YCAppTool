@@ -4,7 +4,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.yc.appcommoninter.inter.IMonitorToggle;
-import com.yc.appcontextlib.context.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 import com.yc.toolutils.file.AppFileUtils;
 
 import com.yc.activitymanager.application.AppInitHelper;

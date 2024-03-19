@@ -1,7 +1,8 @@
 package com.yc.appencryptlib;
 
 
-import com.yc.appcontextlib.context.AppToolUtils;
+
+import static com.yc.appencryptlib.Md5EncryptUtils.isSpace;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -65,7 +66,7 @@ public final class BaseEncryptUtils {
 
 
     public static byte[] hexString2Bytes(String hexString) {
-        if (AppToolUtils.isSpace(hexString)) {
+        if (isSpace(hexString)) {
             return null;
         }
         int len = hexString.length();

@@ -8,7 +8,7 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import com.yc.appcontextlib.context.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class RequestNetworkCallback extends BaseNetworkCallback {

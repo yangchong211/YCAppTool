@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 import androidx.collection.SimpleArrayMap;
 
-import com.yc.appcontextlib.context.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 
 import java.util.Collections;
 import java.util.Map;

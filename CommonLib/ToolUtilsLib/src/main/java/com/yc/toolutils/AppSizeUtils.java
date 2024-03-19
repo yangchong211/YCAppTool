@@ -6,7 +6,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yc.appcontextlib.context.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 
 public final class AppSizeUtils {
 
