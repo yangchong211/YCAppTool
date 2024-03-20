@@ -2,7 +2,8 @@ package com.yc.toolutils.stream;
 
 import android.util.Log;
 
-import com.yc.appfilelib.AppFileUtils;
+
+import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;

@@ -3,10 +3,7 @@
     package="com.yc.appcontextlib">
 
     <application>
-        <provider
-            android:name="com.yc.appcontextlib.com.yc.toolutils.context.ToolInitProvider"
-            android:authorities="${applicationId}.ToolInitProvider"
-            android:exported="false" />
+
     </application>
 
 </manifest>

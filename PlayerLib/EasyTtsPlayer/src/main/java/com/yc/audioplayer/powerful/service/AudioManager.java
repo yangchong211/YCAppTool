@@ -2,7 +2,6 @@ package com.yc.audioplayer.powerful.service;
 
 import android.content.Context;
 
-import com.yc.audioplayer.powerful.delegate.AudioServiceDelegate;
 import com.yc.audioplayer.powerful.inter.PlayStateListener;
 import com.yc.audioplayer.powerful.player.DefaultTtsPlayer;
 import com.yc.audioplayer.powerful.player.ExoAudioPlayer;
@@ -24,7 +23,7 @@ import com.yc.audioplayer.powerful.inter.InterPlayListener;
  */
 public class AudioManager extends AbstractAudioWrapper {
 
-    private final InterAudio mTtsEngine;
+    private final InterAudio mTtsPlayer;
     private final InterAudio mMediaPlayer;
     private final InterAudio mExoPlayer;
     private AudioPlayData mCurrentData;
@@ -33,9 +32,7 @@ public class AudioManager extends AbstractAudioWrapper {
 
     public AudioManager(Context context) {
         //创建tts播放器
-        DefaultTtsPlayer defaultTtsPlayer = new DefaultTtsPlayer(context);
-        //常见tts代理类对象
-        mTtsEngine = new AudioServiceDelegate(defaultTtsPlayer);
+        mTtsPlayer = new DefaultTtsPlayer(context);
         //创建音频播放器
         mMediaPlayer = new MediaAudioPlayer();
         //创建谷歌音频播放器
@@ -44,7 +41,7 @@ public class AudioManager extends AbstractAudioWrapper {
 
     @Override
     public void init(InterPlayListener next, Context context) {
-        mTtsEngine.init(next, context);
+        mTtsPlayer.init(next, context);
         mMediaPlayer.init(next, context);
         mExoPlayer.init(next, context);
     }
@@ -57,7 +54,7 @@ public class AudioManager extends AbstractAudioWrapper {
         this.mCurrentData = data;
         switch (data.audioTtsMode){
             case TTS:
-                this.mCurrentAudio = mTtsEngine;
+                this.mCurrentAudio = mTtsPlayer;
                 break;
             case URL:
                 this.mCurrentAudio = mExoPlayer;
@@ -90,7 +87,7 @@ public class AudioManager extends AbstractAudioWrapper {
 
     @Override
     public void release() {
-        mTtsEngine.release();
+        mTtsPlayer.release();
         mMediaPlayer.release();
         mExoPlayer.release();
     }

@@ -1,4 +1,4 @@
-package com.yc.audioplayer.powerful.deque;
+package com.yc.audioplayer.powerful.dispatch;
 
 import com.yc.audioplayer.powerful.bean.AudioPlayData;
 import com.yc.audioplayer.powerful.bean.TtsPlayerConfig;

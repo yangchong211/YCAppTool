@@ -29,7 +29,6 @@ import com.yc.videoview.tool.FloatMoveType;
 import com.yc.videoview.tool.FloatScreenType;
 import com.yc.videoview.tool.FloatWindowUtils;
 import com.yc.ycvideoplayer.audio.AudioActivity;
-import com.yc.ycvideoplayer.m3u8.M3u8Activity;
 import com.yc.ycvideoplayer.music.MusicPlayerActivity;
 import com.yc.ycvideoplayer.video.activity.TypeActivity;
 
@@ -105,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(MusicPlayerActivity.class);
                 break;
             case R.id.tv_5:
-                startActivity(M3u8Activity.class);
                 break;
             case R.id.tv_6:
                 if (Build.VERSION.SDK_INT >= 23) {

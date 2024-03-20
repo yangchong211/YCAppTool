@@ -60,12 +60,7 @@ public final class AudioService implements AudioServiceProvider {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 mDelegate.stop();
             } else {
-                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDelegate.stop();
-                    }
-                });
+                DelegateTaskExecutor.getInstance().postToMainThread(() -> mDelegate.stop());
             }
         }
     }
@@ -76,12 +71,7 @@ public final class AudioService implements AudioServiceProvider {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 mDelegate.pause();
             } else {
-                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDelegate.pause();
-                    }
-                });
+                DelegateTaskExecutor.getInstance().postToMainThread(() -> mDelegate.pause());
             }
         }
     }
@@ -92,12 +82,7 @@ public final class AudioService implements AudioServiceProvider {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 mDelegate.resume();
             } else {
-                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDelegate.resume();
-                    }
-                });
+                DelegateTaskExecutor.getInstance().postToMainThread(() -> mDelegate.resume());
             }
         }
     }
@@ -108,12 +93,7 @@ public final class AudioService implements AudioServiceProvider {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 mDelegate.release();
             } else {
-                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDelegate.release();
-                    }
-                });
+                DelegateTaskExecutor.getInstance().postToMainThread(() -> mDelegate.release());
             }
         }
     }
@@ -129,12 +109,7 @@ public final class AudioService implements AudioServiceProvider {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 this.mDelegate.play(audioPlayData);
             } else {
-                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDelegate.play(audioPlayData);
-                    }
-                });
+                DelegateTaskExecutor.getInstance().postToMainThread(() -> mDelegate.play(audioPlayData));
             }
         }
     }
@@ -145,12 +120,7 @@ public final class AudioService implements AudioServiceProvider {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 this.mDelegate.playTts(tts);
             } else {
-                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDelegate.playTts(tts);
-                    }
-                });
+                DelegateTaskExecutor.getInstance().postToMainThread(() -> mDelegate.playTts(tts));
             }
         }
     }
@@ -161,12 +131,7 @@ public final class AudioService implements AudioServiceProvider {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 this.mDelegate.playUrl(url);
             } else {
-                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDelegate.playUrl(url);
-                    }
-                });
+                DelegateTaskExecutor.getInstance().postToMainThread(() -> mDelegate.playUrl(url));
             }
         }
     }
@@ -177,12 +142,7 @@ public final class AudioService implements AudioServiceProvider {
             if (DelegateTaskExecutor.getInstance().isMainThread()){
                 this.mDelegate.playAudioResource(rawId);
             } else {
-                DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDelegate.playAudioResource(rawId);
-                    }
-                });
+                DelegateTaskExecutor.getInstance().postToMainThread(() -> mDelegate.playAudioResource(rawId));
             }
         }
     }

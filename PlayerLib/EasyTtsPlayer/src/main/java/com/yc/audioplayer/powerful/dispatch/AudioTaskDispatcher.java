@@ -3,7 +3,6 @@ package com.yc.audioplayer.powerful.dispatch;
 import android.os.Process;
 
 import com.yc.audioplayer.powerful.bean.TtsPlayerConfig;
-import com.yc.audioplayer.powerful.deque.AudioTtsDeque;
 import com.yc.audioplayer.powerful.bean.AudioPlayData;
 import com.yc.audioplayer.powerful.inter.InterPlayListener;
 import com.yc.audioplayer.powerful.service.AudioManager;

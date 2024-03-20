@@ -3,112 +3,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_tts_state1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="1.1 初始化按照顺序和优先级播放" />
-        <Button
-            android:id="@+id/btn_tts_state2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="1.2 初始化支持每次播放最新的tts" />
+            <Button
+                android:id="@+id/btn_tts_state1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1.1 初始化按照顺序和优先级播放" />
+            <Button
+                android:id="@+id/btn_tts_state2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1.2 初始化支持每次播放最新的tts" />
 
 
-        <Button
-            android:id="@+id/btn_speak_tts1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2.1播放文本内容语音" />
+            <Button
+                android:id="@+id/btn_speak_tts1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2.1播放文本内容语音" />
 
-        <Button
-            android:id="@+id/btn_speak_tts2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2.2播放本地资源语音" />
+            <Button
+                android:id="@+id/btn_speak_tts2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2.2播放本地资源语音" />
 
-        <Button
-            android:id="@+id/btn_speak_tts3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2.3播放网络资源语音" />
+            <Button
+                android:id="@+id/btn_speak_tts3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2.3播放网络资源语音" />
 
-        <Button
-            android:id="@+id/btn_speak_media"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="播放mp3" />
+            <Button
+                android:id="@+id/btn_speak_media"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="播放mp3" />
 
-        <Button
-            android:id="@+id/btn_mix_play"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="mix play" />
+            <Button
+                android:id="@+id/btn_mix_play"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="mix play" />
 
-        <Button
-            android:id="@+id/btn_pause"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="暂停" />
+            <Button
+                android:id="@+id/btn_pause"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="暂停" />
 
-        <Button
-            android:id="@+id/btn_resume"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <Button
+                android:id="@+id/btn_resume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="开始" />
 
-        <Button
-            android:id="@+id/btn_stop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="停止" />
+            <Button
+                android:id="@+id/btn_stop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="停止" />
 
-        <Button
-            android:id="@+id/btn_high_priority"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="高优先级" />
+            <Button
+                android:id="@+id/btn_high_priority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="高优先级" />
 
-        <Button
-            android:id="@+id/btn_release"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="销毁" />
-        <Button
-            android:id="@+id/btn_brazil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="葡萄牙语言"/>
-        <Button
-            android:id="@+id/btn_tts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="play_tts"/>
-        <Button
-            android:id="@+id/btn_url"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="连续播放多条播放网络tts1"/>
-        <Button
-            android:id="@+id/btn_url2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="子线程播放网络tts2"/>
-        <Button
-            android:id="@+id/btn_tts_demo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="play_tts_demo"/>
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_release"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="销毁" />
+            <Button
+                android:id="@+id/btn_brazil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="葡萄牙语言"/>
+            <Button
+                android:id="@+id/btn_tts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="play_tts"/>
+            <Button
+                android:id="@+id/btn_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="连续播放多条播放网络tts1"/>
+            <Button
+                android:id="@+id/btn_url2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="子线程播放网络tts2"/>
+            <Button
+                android:id="@+id/btn_tts_demo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="play_tts_demo"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

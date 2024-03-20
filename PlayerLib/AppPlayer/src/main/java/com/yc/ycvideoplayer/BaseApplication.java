@@ -16,9 +16,6 @@ import com.yc.music.tool.BaseAppHelper;
 import com.yc.toolutils.AppSpUtils;
 import com.yc.video.config.VideoPlayerConfig;
 import com.yc.video.player.VideoViewManager;
-import com.yc.videosqllite.CacheConfig;
-import com.yc.videosqllite.LocationManager;
-import com.yc.toolutils.AppLogUtils;
 
 /**
  * ================================================
@@ -79,13 +76,7 @@ public class BaseApplication extends Application {
     }
 
     private void initVideoCache() {
-        CacheConfig cacheConfig = new CacheConfig();
-        cacheConfig.setIsEffective(true);
-        cacheConfig.setType(2);
-        cacheConfig.setContext(this);
-        cacheConfig.setCacheMax(1000);
-        cacheConfig.setLog(false);
-        LocationManager.getInstance().init(cacheConfig);
+
     }
 
     /**
