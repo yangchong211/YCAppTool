@@ -131,11 +131,11 @@ public final class AudioPlayData {
     @Override
     public String toString() {
         return "AudioPlayData{" +
-                "priority=" + mPriority +
+                "mPriority=" + mPriority +
+                ", audioTtsMode=" + audioTtsMode +
                 ", mTts='" + mTts + '\'' +
                 ", mRawId=" + mRawId +
                 ", mNext=" + mNext +
                 '}';
     }
-
 }

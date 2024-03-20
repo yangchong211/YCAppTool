@@ -138,7 +138,10 @@ public class ExoAudioPlayer extends AbstractAudioWrapper {
         @Override
         public void onPlayerError(ExoPlaybackException error) {
             super.onPlayerError(error);
+            stop();
             onError(error.getMessage());
+            //如果播放异常，则先回调异常，然后再完成。
+            onCompleted();
         }
 
         @Override

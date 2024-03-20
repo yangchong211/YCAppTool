@@ -167,7 +167,10 @@ public class MediaAudioPlayer extends AbstractAudioWrapper {
     private final MediaPlayer.OnErrorListener onErrorListener = new MediaPlayer.OnErrorListener() {
         @Override
         public boolean onError(MediaPlayer mp, int what, int extra) {
+            stop();
             MediaAudioPlayer.this.onError("监听异常"+ what + ", extra: " + extra);
+            //如果播放异常，则先回调异常，然后再完成。
+            onCompleted();
             return true;
         }
     };

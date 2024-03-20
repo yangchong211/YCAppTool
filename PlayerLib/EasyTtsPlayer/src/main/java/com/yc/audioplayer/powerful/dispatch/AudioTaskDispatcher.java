@@ -122,7 +122,7 @@ public class AudioTaskDispatcher implements InterPlayListener {
         }
         TtsPlayerConfig config = AudioService.getInstance().getConfig();
         if (config != null && config.getLogger() != null) {
-            config.getLogger().log("AudioTaskDispatcher data: " + data.getTts() + data.mPriority);
+            config.getLogger().log("AudioTaskDispatcher data: " + data);
         }
         //添加对
         mTaskDeque.add(data);
