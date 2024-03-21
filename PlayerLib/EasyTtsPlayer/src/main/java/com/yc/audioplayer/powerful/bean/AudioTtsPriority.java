@@ -7,17 +7,23 @@ package com.yc.audioplayer.powerful.bean;
  *     GitHub : <a href="https://github.com/yangchong211/YCVideoPlayer">...</a>
  *     time  : 2018/8/6
  *     desc  : tts优先级
- *     revise:
+ *     revise: 优先级顺序：HIGH_PRIORITY > MIDDLE_PRIORITY > NORMAL_PRIORITY
  * </pre>
  */
 public enum AudioTtsPriority {
 
-    //p2正常普通级
+    /**
+     * 正常普通级
+     */
     NORMAL_PRIORITY,
 
-    //p1中优先级
+    /**
+     * 中优先级
+     */
     MIDDLE_PRIORITY,
 
-    //p0最高优先级
+    /**
+     * 最高优先级
+     */
     HIGH_PRIORITY
 }
