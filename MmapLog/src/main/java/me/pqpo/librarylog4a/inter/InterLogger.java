@@ -1,6 +1,6 @@
-package me.pqpo.librarylog4a.logger;
+package me.pqpo.librarylog4a.inter;
 
-public interface Logger {
+public interface InterLogger {
 
     void println(int priority, String tag, String msg);
 

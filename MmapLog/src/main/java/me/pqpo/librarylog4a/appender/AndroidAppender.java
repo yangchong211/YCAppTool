@@ -3,8 +3,8 @@ package me.pqpo.librarylog4a.appender;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.pqpo.librarylog4a.Level;
-import me.pqpo.librarylog4a.interceptor.Interceptor;
+import me.pqpo.librarylog4a.LogLevel;
+import me.pqpo.librarylog4a.inter.Interceptor;
 
 
 public class AndroidAppender extends AbsAppender {
@@ -21,7 +21,7 @@ public class AndroidAppender extends AbsAppender {
 
     public static class Builder {
 
-        private int level = Level.VERBOSE;
+        private int level = LogLevel.VERBOSE;
         private List<Interceptor> interceptors;
 
         public Builder setLevel(int level) {

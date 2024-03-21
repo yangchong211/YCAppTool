@@ -8,10 +8,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.pqpo.librarylog4a.Level;
+import me.pqpo.librarylog4a.LogLevel;
 import me.pqpo.librarylog4a.LogBuffer;
-import me.pqpo.librarylog4a.formatter.Formatter;
-import me.pqpo.librarylog4a.interceptor.Interceptor;
+import me.pqpo.librarylog4a.inter.Formatter;
+import me.pqpo.librarylog4a.inter.Interceptor;
 
 public class FileAppender extends AbsAppender {
 
@@ -73,7 +73,7 @@ public class FileAppender extends AbsAppender {
         private String bufferFilePath;
         private String logFilePath;
         private int bufferSize = 4096;
-        private int level = Level.VERBOSE;
+        private int level = LogLevel.VERBOSE;
         private List<Interceptor> interceptors;
         private Formatter formatter;
         private boolean compress;
@@ -131,7 +131,7 @@ public class FileAppender extends AbsAppender {
                 formatter = new Formatter() {
                     @Override
                     public String format(int logLevel, String tag, String msg) {
-                        return String.format("%s/%s: %s\n",  Level.getShortLevelName(logLevel), tag, msg);
+                        return String.format("%s/%s: %s\n",  LogLevel.getShortLevelName(logLevel), tag, msg);
                     }
                 };
             }

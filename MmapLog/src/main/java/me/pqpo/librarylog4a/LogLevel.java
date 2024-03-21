@@ -1,7 +1,15 @@
 package me.pqpo.librarylog4a;
 
 
-public final class Level {
+/**
+ * @author yangchong
+ * GitHub : <a href="https://github.com/yangchong211">...</a>
+ * email  : yangchong211@163.com
+ * time  : 2017/09/23
+ * desc  : 日志level
+ * revise:
+ */
+public final class LogLevel {
 
     public static final int VERBOSE = 2;
 

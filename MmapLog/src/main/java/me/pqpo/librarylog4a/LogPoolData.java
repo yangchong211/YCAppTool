@@ -2,36 +2,39 @@ package me.pqpo.librarylog4a;
 
 
 /**
- * Created by yangchong on 2017/11/21.
+ * @author yangchong
+ * GitHub : <a href="https://github.com/yangchong211">...</a>
+ * email  : yangchong211@163.com
+ * time  : 2017/09/23
+ * desc  : 日志实体data
+ * revise:
  */
-public class LogData {
+public class LogPoolData {
 
     public int logLevel;
     public String tag;
     public String msg;
-
-    private LogData next;
-
+    private LogPoolData next;
     private static final Object sPoolSync = new Object();
-    private static LogData sPool;
+    private static LogPoolData sPool;
     private static int sPoolSize = 0;
     private static final int MAX_POOL_SIZE = 50;
 
-    public static LogData obtain() {
+    public static LogPoolData obtain() {
         synchronized (sPoolSync) {
             if (sPool != null) {
-                LogData m = sPool;
+                LogPoolData m = sPool;
                 sPool = m.next;
                 m.next = null;
                 sPoolSize--;
                 return m;
             }
         }
-        return new LogData();
+        return new LogPoolData();
     }
 
-    public static LogData obtain(int logLevel, String tag, String msg) {
-        LogData obtain = obtain();
+    public static LogPoolData obtain(int logLevel, String tag, String msg) {
+        LogPoolData obtain = obtain();
         obtain.logLevel = logLevel;
         obtain.tag = tag;
         obtain.msg = msg;
@@ -42,7 +45,6 @@ public class LogData {
         logLevel = 0;
         tag = null;
         msg = null;
-
         synchronized (sPoolSync) {
             if (sPoolSize < MAX_POOL_SIZE) {
                 next = sPool;

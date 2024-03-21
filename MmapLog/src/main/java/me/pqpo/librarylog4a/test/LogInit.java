@@ -7,26 +7,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import me.pqpo.librarylog4a.Level;
-import me.pqpo.librarylog4a.Log4a;
-import me.pqpo.librarylog4a.LogData;
+import me.pqpo.librarylog4a.LogLevel;
+import me.pqpo.librarylog4a.LogManager;
 import me.pqpo.librarylog4a.logger.AppenderLogger;
 import me.pqpo.librarylog4a.appender.AndroidAppender;
 import me.pqpo.librarylog4a.appender.FileAppender;
 import me.pqpo.librarylog4a.formatter.DateFileFormatter;
-import me.pqpo.librarylog4a.interceptor.Interceptor;
+import me.pqpo.librarylog4a.inter.Interceptor;
 
-/**
- * Created by yangchong on 2017/11/24.
- */
+
 public class LogInit {
 
     public static final int BUFFER_SIZE = 1024 * 400; //400k
 
     public static void init(Context context) {
-        int level = Level.DEBUG;
+        int level = LogLevel.DEBUG;
         Interceptor wrapInterceptor = logData -> {
-            logData.tag = "Log4a-" + logData.tag;
+            logData.tag = "YCLog-" + logData.tag;
             return true;
         };
         AndroidAppender androidAppender = new AndroidAppender.Builder()
@@ -34,7 +31,7 @@ public class LogInit {
                 .addInterceptor(wrapInterceptor)
                 .create();
 
-        File log = FileUtils.getLogDir(context);
+        File log = getLogDir(context);
         String buffer_path = log.getAbsolutePath() + File.separator + ".logCache";
         String time = new SimpleDateFormat("yyyy_MM_dd", Locale.getDefault()).format(new Date());
         String log_path = log.getAbsolutePath() + File.separator + time + ".txt";
@@ -52,7 +49,17 @@ public class LogInit {
                 .addAppender(androidAppender)
                 .addAppender(fileAppender)
                 .create();
-        Log4a.setLogger(logger);
+        LogManager.setLogger(logger);
     }
 
+    public static File getLogDir(Context context) {
+        File log = context.getExternalFilesDir("logs");
+        if (log == null) {
+            log = new File(context.getFilesDir(), "logs");
+        }
+        if (!log.exists()) {
+            log.mkdir();
+        }
+        return log;
+    }
 }

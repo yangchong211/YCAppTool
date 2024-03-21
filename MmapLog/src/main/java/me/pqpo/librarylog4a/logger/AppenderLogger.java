@@ -3,21 +3,22 @@ package me.pqpo.librarylog4a.logger;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.pqpo.librarylog4a.appender.Appender;
+import me.pqpo.librarylog4a.inter.InterAppender;
+import me.pqpo.librarylog4a.inter.InterLogger;
 
 
-public class AppenderLogger implements Logger{
+public class AppenderLogger implements InterLogger {
 
-    private final List<Appender> appenderList = new ArrayList<>();
+    private final List<InterAppender> appenderList = new ArrayList<>();
 
     protected AppenderLogger() {
     }
 
-    public List<Appender> getAppenderList() {
+    public List<InterAppender> getAppenderList() {
         return appenderList;
     }
 
-    public void addAppender(Appender appender) {
+    public void addAppender(InterAppender appender) {
         if (appender != null) {
             appenderList.add(appender);
         }
@@ -25,21 +26,21 @@ public class AppenderLogger implements Logger{
 
     @Override
     public void println(int priority, String tag, String msg) {
-        for (Appender appender : appenderList) {
+        for (InterAppender appender : appenderList) {
             appender.append(priority, tag, msg);
         }
     }
 
     @Override
     public void flush() {
-        for (Appender appender : appenderList) {
+        for (InterAppender appender : appenderList) {
             appender.flush();
         }
     }
 
     @Override
     public void release() {
-        for (Appender appender : appenderList) {
+        for (InterAppender appender : appenderList) {
             appender.release();
         }
         appenderList.clear();
@@ -54,7 +55,7 @@ public class AppenderLogger implements Logger{
             logger = new AppenderLogger();
         }
 
-        public Builder addAppender(Appender appender) {
+        public Builder addAppender(InterAppender appender) {
             logger.addAppender(appender);
             return this;
         }

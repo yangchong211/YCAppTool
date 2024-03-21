@@ -20,7 +20,7 @@ public class LogBuffer {
         try {
             ptr = initNative(bufferPath, capacity, logPath, compress);
         }catch (Exception e) {
-            Log.e(TAG, Log4a.getStackTraceString(e));
+            Log.e(TAG, LogManager.getStackTraceString(e));
         }
     }
 
@@ -30,7 +30,7 @@ public class LogBuffer {
                 changeLogPathNative(ptr, logPath);
                 this.logPath = logPath;
             }catch (Exception e) {
-                Log.e(TAG, Log4a.getStackTraceString(e));
+                Log.e(TAG, LogManager.getStackTraceString(e));
             }
         }
     }
@@ -56,7 +56,7 @@ public class LogBuffer {
             try {
                 writeNative(ptr, log);
             }catch (Exception e) {
-                Log.e(TAG, Log4a.getStackTraceString(e));
+                Log.e(TAG, LogManager.getStackTraceString(e));
             }
         }
     }
@@ -66,7 +66,7 @@ public class LogBuffer {
             try {
                 flushAsyncNative(ptr);
             }catch (Exception e) {
-                Log.e(TAG, Log4a.getStackTraceString(e));
+                Log.e(TAG, LogManager.getStackTraceString(e));
             }
         }
     }
@@ -76,7 +76,7 @@ public class LogBuffer {
             try {
                 releaseNative(ptr);
             }catch (Exception e) {
-                Log.e(TAG, Log4a.getStackTraceString(e));
+                Log.e(TAG, LogManager.getStackTraceString(e));
             }
             ptr = 0;
         }

@@ -1,10 +1,12 @@
-package me.pqpo.librarylog4a.appender;
+package me.pqpo.librarylog4a.inter;
 
 
-public interface Appender {
+public interface InterAppender {
 
     void append(int logLevel, String tag, String msg);
+
     void flush();
+
     void release();
 
 }

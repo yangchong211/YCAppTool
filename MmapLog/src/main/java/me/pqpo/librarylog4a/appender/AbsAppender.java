@@ -3,12 +3,13 @@ package me.pqpo.librarylog4a.appender;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.pqpo.librarylog4a.LogData;
-import me.pqpo.librarylog4a.interceptor.Interceptor;
+import me.pqpo.librarylog4a.LogPoolData;
+import me.pqpo.librarylog4a.inter.InterAppender;
+import me.pqpo.librarylog4a.inter.Interceptor;
 import me.pqpo.librarylog4a.interceptor.LevelInterceptor;
 
 
-public abstract class AbsAppender implements Appender {
+public abstract class AbsAppender implements InterAppender {
 
     public static final int MAX_LENGTH_OF_SINGLE_MESSAGE = 4063;
 
@@ -44,7 +45,7 @@ public abstract class AbsAppender implements Appender {
 
     @Override
     public void append(int logLevel, String tag, String msg) {
-        LogData logData = LogData.obtain(logLevel, tag, msg);
+        LogPoolData logData = LogPoolData.obtain(logLevel, tag, msg);
         boolean intercepted = false;
         for (Interceptor interceptor : interceptors) {
             if (!interceptor.intercept(logData)) {

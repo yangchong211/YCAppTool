@@ -20,19 +20,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import me.pqpo.librarylog4a.Log4a;
+import me.pqpo.librarylog4a.LogManager;
 import me.pqpo.librarylog4a.R;
 import me.pqpo.librarylog4a.logger.AppenderLogger;
 import me.pqpo.librarylog4a.appender.AbsAppender;
 import me.pqpo.librarylog4a.appender.AndroidAppender;
-import me.pqpo.librarylog4a.appender.Appender;
+import me.pqpo.librarylog4a.inter.InterAppender;
 import me.pqpo.librarylog4a.appender.FileAppender;
-import me.pqpo.librarylog4a.formatter.Formatter;
-import me.pqpo.librarylog4a.logger.Logger;
+import me.pqpo.librarylog4a.inter.Formatter;
+import me.pqpo.librarylog4a.inter.InterLogger;
 
 public class MmapLogActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "MainActivity：";
 
     EditText etContent;
     EditText etThread;
@@ -84,7 +84,7 @@ public class MmapLogActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             super.run();
-                            Log4a.i(TAG, str + " --- "  + count);
+                            LogManager.i(TAG, str + " --- "  + count);
                         }
                     }.start();
                 }
@@ -119,43 +119,43 @@ public class MmapLogActivity extends AppCompatActivity {
     private void performanceTest(int times) {
         tvTest.append(String.format(Locale.getDefault(),
                 "## prints %d logs:\n", times));
-        Log4a.release();
+        LogManager.release();
         AppenderLogger logger = new AppenderLogger.Builder().create();
-        Log4a.setLogger(logger);
+        LogManager.setLogger(logger);
 
         logger.addAppender(createLog4aFileAppender());
         doPerformanceTest("log4a" ,times);
-        Log4a.release();
+        LogManager.release();
 
-        Log4a.setLogger(logger);
+        LogManager.setLogger(logger);
         logger.addAppender(createAndroidLogAppender());
         doPerformanceTest("android log" ,times);
-        Log4a.release();
+        LogManager.release();
 
-        Log4a.setLogger(logger);
+        LogManager.setLogger(logger);
         List<String> buffer = new ArrayList<>(times);
         logger.addAppender(createMemAppender(buffer));
         doPerformanceTest("array list log" ,times);
         buffer.clear();
-        Log4a.release();
+        LogManager.release();
 
-        Log4a.setLogger(logger);
+        LogManager.setLogger(logger);
         logger.addAppender(createNoBufferFileAppender());
         doPerformanceTest("file log(no buffer)" ,times);
-        Log4a.release();
+        LogManager.release();
 
-        Log4a.setLogger(logger);
+        LogManager.setLogger(logger);
         logger.addAppender(createWithBufferFileAppender());
         doPerformanceTest("file log(with buffer)" ,times);
-        Log4a.release();
+        LogManager.release();
 
-        Log4a.setLogger(logger);
+        LogManager.setLogger(logger);
         logger.addAppender(createNoBufferInThreadFileAppender());
         doPerformanceTest("file log(no buffer in thread)" ,times);
         tvTest.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log4a.release();
+                LogManager.release();
             }
         }, 1000);
 
@@ -163,25 +163,25 @@ public class MmapLogActivity extends AppCompatActivity {
         tvTest.append("## end");
     }
 
-    private Appender createNoBufferFileAppender() {
-        File logFile = new File(FileUtils.getLogDir(this), "logNoBufferFileTest.txt");
+    private InterAppender createNoBufferFileAppender() {
+        File logFile = new File(LogInit.getLogDir(this), "logNoBufferFileTest.txt");
         logFile.delete();
         return new NoBufferFileAppender(logFile);
     }
 
-    private Appender createWithBufferFileAppender() {
-        File logFile = new File(FileUtils.getLogDir(this), "logBufferFileTest.txt");
+    private InterAppender createWithBufferFileAppender() {
+        File logFile = new File(LogInit.getLogDir(this), "logBufferFileTest.txt");
         logFile.delete();
         return new BufferFileAppender(logFile, BUFFER_SIZE);
     }
 
-    private Appender createNoBufferInThreadFileAppender() {
-        File logFile = new File(FileUtils.getLogDir(this), "logNoBufferInThreadFileTest.txt");
+    private InterAppender createNoBufferInThreadFileAppender() {
+        File logFile = new File(LogInit.getLogDir(this), "logNoBufferInThreadFileTest.txt");
         logFile.delete();
         return new NoBufferInThreadFileAppender(logFile);
     }
 
-    private Appender createMemAppender(final List<String> buffer) {
+    private InterAppender createMemAppender(final List<String> buffer) {
         return new AbsAppender() {
             @Override
             protected void doAppend(int logLevel, String tag, String msg) {
@@ -190,8 +190,8 @@ public class MmapLogActivity extends AppCompatActivity {
         };
     }
 
-    private Appender createLog4aFileAppender() {
-        File log = FileUtils.getLogDir(this);
+    private InterAppender createLog4aFileAppender() {
+        File log = LogInit.getLogDir(this);
         File cacheFile = new File(log, "test.logCache");
         File logFile = new File(log, "log4aTest.txt");
         cacheFile.delete();
@@ -209,14 +209,14 @@ public class MmapLogActivity extends AppCompatActivity {
         return fileBuild.create();
     }
 
-    private Appender createAndroidLogAppender() {
+    private InterAppender createAndroidLogAppender() {
         return new AndroidAppender.Builder().create();
     }
 
     private void doPerformanceTest(String testName, int times) {
         long currentTimeMillis = System.currentTimeMillis();
         for (int i = 0; i < times; i++) {
-            Log4a.i(TAG, "log-" + i);
+            LogManager.i(TAG, "log-" + i);
         }
         tvTest.append(String.format(Locale.getDefault(),
                 "* %s spend: %d ms\n",
@@ -226,10 +226,10 @@ public class MmapLogActivity extends AppCompatActivity {
 
     public String getLogPath() {
         String logPath = "";
-        Logger logger = Log4a.getLogger();
+        InterLogger logger = LogManager.getLogger();
         if (logger instanceof AppenderLogger) {
-            List<Appender> appenderList = ((AppenderLogger)logger).getAppenderList();
-            for (Appender appender : appenderList) {
+            List<InterAppender> appenderList = ((AppenderLogger)logger).getAppenderList();
+            for (InterAppender appender : appenderList) {
                 if (appender instanceof FileAppender) {
                     FileAppender fileAppender = (FileAppender) appender;
                     logPath = fileAppender.getLogPath();
@@ -241,13 +241,13 @@ public class MmapLogActivity extends AppCompatActivity {
     }
 
     public void changeLogPath() {
-        Logger logger = Log4a.getLogger();
+        InterLogger logger = LogManager.getLogger();
         if (logger instanceof AppenderLogger) {
-            List<Appender> appenderList = ((AppenderLogger)logger).getAppenderList();
-            for (Appender appender : appenderList) {
+            List<InterAppender> appenderList = ((AppenderLogger)logger).getAppenderList();
+            for (InterAppender appender : appenderList) {
                 if (appender instanceof FileAppender) {
                     FileAppender fileAppender = (FileAppender) appender;
-                    File log = FileUtils.getLogDir(this);
+                    File log = LogInit.getLogDir(this);
                     String time = new SimpleDateFormat("yyyy_MM_dd", Locale.getDefault()).format(new Date());
                     String logPath = new File(log, time + "-yc-" + System.currentTimeMillis() + ".txt").getAbsolutePath();
                     fileAppender.changeLogPath(logPath);
@@ -260,6 +260,6 @@ public class MmapLogActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log4a.flush();
+        LogManager.flush();
     }
 }

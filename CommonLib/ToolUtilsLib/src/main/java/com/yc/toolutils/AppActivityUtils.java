@@ -20,14 +20,12 @@ import java.util.List;
 
 
 /**
- * <pre>
- *     @author yangchong
- *     GitHub : https://github.com/yangchong211/YCAppTool
- *     email  : yangchong211@163.com
- *     time  : 2016/09/23
- *     desc  : Activity 相关工具类
- *     revise:
- * </pre>
+ * @author yangchong
+ * GitHub : <a href="https://github.com/yangchong211">...</a>
+ * email  : yangchong211@163.com
+ * time  : 2016/09/23
+ * desc  : Activity 相关工具类
+ * revise:
  */
 public final class AppActivityUtils {
 
@@ -37,7 +35,8 @@ public final class AppActivityUtils {
 
     /**
      * 判断某Activity是否挂掉
-     * @param activity      activity
+     *
+     * @param activity activity
      * @return
      */
     public static boolean isActivityLiving(@Nullable Activity activity) {
@@ -57,8 +56,8 @@ public final class AppActivityUtils {
     /**
      * 通过上下文获取到activity，使用到了递归
      *
-     * @param context       上下文
-     * @return              对象的活动对象，如果它不是活动对象，则为空。
+     * @param context 上下文
+     * @return 对象的活动对象，如果它不是活动对象，则为空。
      */
     public static Activity scanForActivity(Context context) {
         if (context == null) {
@@ -108,8 +107,9 @@ public final class AppActivityUtils {
 
     /**
      * 通过context上下文找到activity
-     * @param context           上下文
-     * @return  activity
+     *
+     * @param context 上下文
+     * @return activity
      */
     private static AppCompatActivity getAppCompActivity(Context context) {
         if (context == null) {

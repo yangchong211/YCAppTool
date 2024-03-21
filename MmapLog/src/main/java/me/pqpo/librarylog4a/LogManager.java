@@ -5,23 +5,28 @@ import java.io.StringWriter;
 import java.net.UnknownHostException;
 
 import me.pqpo.librarylog4a.logger.AndroidLogger;
-import me.pqpo.librarylog4a.logger.Logger;
+import me.pqpo.librarylog4a.inter.InterLogger;
 
-import static me.pqpo.librarylog4a.Level.*;
+import static me.pqpo.librarylog4a.LogLevel.*;
 
 
 /**
- * Created by yangchong on 2017/11/16.
+ * @author yangchong
+ * GitHub : <a href="https://github.com/yangchong211">...</a>
+ * email  : yangchong211@163.com
+ * time  : 2017/09/23
+ * desc  : 日志工具类
+ * revise:
  */
-public final class Log4a {
+public final class LogManager {
 
-    private static Logger sLoggerDelegate = new AndroidLogger();
+    private static InterLogger sLoggerDelegate = new AndroidLogger();
 
-    public static void setLogger(Logger logger) {
+    public static void setLogger(InterLogger logger) {
         sLoggerDelegate = logger;
     }
 
-    public static Logger getLogger() {
+    public static InterLogger getLogger() {
         return sLoggerDelegate;
     }
 
