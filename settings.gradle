@@ -37,7 +37,7 @@ project(':AppServer').projectDir = new File('ServerLib/AppServer')
 //库
 include ':GlideServer',
         ':GsonServer', ':IpcServer', ':TcpServerLib', ':TcpManager',
-        ':EasyBleServer', ':LogUpload', ':OkHttpServer', ':PrivateServer',
+        ':EasyBleServer', ':OkHttpServer', ':PrivateServer',
         ':AppLogClient', ':AppLogService', ':SignalHooker',
         ':CompressServer', ':GrpcServer'
 project(':GlideServer').projectDir = new File('ServerLib/GlideServer')
@@ -46,7 +46,6 @@ project(':AppLogClient').projectDir = new File('ServerLib/AppLogClient')
 project(':AppLogService').projectDir = new File('ServerLib/AppLogService')
 project(':IpcServer').projectDir = new File('ServerLib/IpcServer')
 project(':EasyBleServer').projectDir = new File('ServerLib/EasyBleServer')
-project(':LogUpload').projectDir = new File('ServerLib/LogUpload')
 project(':OkHttpServer').projectDir = new File('ServerLib/OkHttpServer')
 project(':PrivateServer').projectDir = new File('ServerLib/PrivateServer')
 project(':SignalHooker').projectDir = new File('ServerLib/SignalHooker')
@@ -226,24 +225,21 @@ project(':MonitorFlow').projectDir = new File('MonitorLib/MonitorFlow')
 include ':AppPlayer'
 project(':AppPlayer').projectDir = new File('PlayerLib/AppPlayer')
 //库
-include ':VideoCache', ':EasyTtsPlayer', ':VideoSurface', ':SoundPool',':EasyMediaPlayer',
+include ':VideoCache', ':EasyTtsPlayer', ':VideoSurface', ':EasyMediaPlayer',
         ':MusicPlayer', ':VideoKernel', ':VideoPlayer', ':VideoView',
-        ':BellsVibrations', ':AudioHelper', ':MediaScanner'
+        ':AudioHelper', ':MediaScanner'
 project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
-//简单型tts播放器
+//简单型tts播放器，简单tts和综合性tts
 project(':EasyTtsPlayer').projectDir = new File('PlayerLib/EasyTtsPlayer')
 project(':MusicPlayer').projectDir = new File('PlayerLib/MusicPlayer')
 project(':VideoKernel').projectDir = new File('PlayerLib/VideoKernel')
 project(':VideoSurface').projectDir = new File('PlayerLib/VideoSurface')
 project(':VideoPlayer').projectDir = new File('PlayerLib/VideoPlayer')
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
-project(':BellsVibrations').projectDir = new File('PlayerLib/BellsVibrations')
 project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')
-//音视频扫描工具
+//音视频扫描工具，音频，视频
 project(':MediaScanner').projectDir = new File('PlayerLib/MediaScanner')
-//SoundPool音效播放
-project(':SoundPool').projectDir = new File('PlayerLib/SoundPool')
-//简单型MediaPlayer播放器
+//简单型MediaPlayer播放器，SoundPool音效播放
 project(':EasyMediaPlayer').projectDir = new File('PlayerLib/EasyMediaPlayer')
 
 

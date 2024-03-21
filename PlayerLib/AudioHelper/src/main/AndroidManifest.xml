@@ -3,5 +3,10 @@
     package="com.yc.audiofocus">
 
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <!--震动-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--话筒-->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
 
 </manifest>

@@ -49,7 +49,6 @@ dependencies {
     implementation project(path: ':AppLogClient')
     implementation project(path: ':AppLogService')
     implementation project(path: ':MonitorFileLib')
-    implementation project(path: ':BellsVibrations')
     implementation project(path: ':PrivateServer')
     implementation project(path: ':OkHttpServer')
     implementation project(path: ':GsonServer')

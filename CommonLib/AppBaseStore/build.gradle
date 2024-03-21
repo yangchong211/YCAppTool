@@ -33,14 +33,12 @@ dependencies {
     implementation rootProject.ext.dependencies["coreKtx"]
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation(rootProject.ext.dependencies["gson"])
-
+    implementation project(path: ':AppCommonInter')
     implementation project(path: ':ToolUtilsLib')
+    implementation project(path: ':AppEncryptLib')
     //腾讯mmkv库
     implementation "com.tencent:mmkv-static:1.2.7"
-    implementation project(path: ':AppTaskLib')
     //通用组件接口库
-    implementation 'com.github.yangchong211.YCCommonLib:AppCommonInter:1.4.4'
     //轻量级异步线程封装库：https://github.com/yangchong211/YCThreadPool
     implementation 'com.github.yangchong211.YCThreadPool:EasyExecutor:1.3.8'
-    implementation project(path: ':AppEncryptLib')
 }
