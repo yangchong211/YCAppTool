@@ -232,10 +232,15 @@ project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
 //简单型tts播放器，简单tts和综合性tts
 project(':EasyTtsPlayer').projectDir = new File('PlayerLib/EasyTtsPlayer')
 project(':MusicPlayer').projectDir = new File('PlayerLib/MusicPlayer')
+//视频播放器内核
 project(':VideoKernel').projectDir = new File('PlayerLib/VideoKernel')
+//视频播放器surface
 project(':VideoSurface').projectDir = new File('PlayerLib/VideoSurface')
+//视频播放器核心api
 project(':VideoPlayer').projectDir = new File('PlayerLib/VideoPlayer')
+//视频播放器view视图
 project(':VideoView').projectDir = new File('PlayerLib/VideoView')
+//音频播放，焦点抢占处理，铃声处理，震动效果
 project(':AudioHelper').projectDir = new File('PlayerLib/AudioHelper')
 //音视频扫描工具，音频，视频
 project(':MediaScanner').projectDir = new File('PlayerLib/MediaScanner')
