@@ -25,7 +25,7 @@ import com.yc.widgetbusiness.shadow.ShadowActivity;
 import com.yc.widgetbusiness.textview.MixtureTextViewActivity;
 import com.yc.widgetbusiness.zoom.ZoomMainActivity;
 import com.yc.ycnotification.NotificationActivity;
-import com.yc.ycstatusbar.BarActivity;
+import com.yc.widgetbusiness.status.BarActivity;
 
 public class WidgetActivity extends AppCompatActivity {
 

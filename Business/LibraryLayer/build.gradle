@@ -130,4 +130,5 @@ dependencies {
     implementation project(path: ':GlideServer')
     implementation project(path: ':CountTimerLib')
     implementation project(path: ':RoundCorners')
+    implementation project(path: ':AppCommonInter')
 }

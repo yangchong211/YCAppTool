@@ -17,7 +17,7 @@ import com.yc.monitorphone.MonitorPhoneActivity;
 import com.yc.other.ui.activity.NtpTimeActivity;
 import com.yc.toolutils.click.FastClickUtils;
 import com.yc.ycnotification.NotifyHomeActivity;
-import com.yc.ycstatusbar.BarActivity;
+import com.yc.widgetbusiness.status.BarActivity;
 import com.yc.ycthreadpool.ThreadMainActivity;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;

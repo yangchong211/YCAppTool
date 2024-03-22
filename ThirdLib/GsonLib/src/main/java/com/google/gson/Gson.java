@@ -110,6 +110,8 @@ public final class Gson {
   static final boolean DEFAULT_COMPLEX_MAP_KEYS = false;
   static final boolean DEFAULT_SPECIALIZE_FLOAT_VALUES = false;
 
+  private static final String VERSION = "GsonBuildConfig.VERSION";
+  //private static final String VERSION = GsonBuildConfig.VERSION;
   private static final TypeToken<?> NULL_KEY_SURROGATE = TypeToken.get(Object.class);
   private static final String JSON_NON_EXECUTABLE_PREFIX = ")]}'\n";
 
@@ -461,7 +463,7 @@ public final class Gson {
           return candidate;
         }
       }
-      throw new IllegalArgumentException("GSON (" + GsonBuildConfig.VERSION + ") cannot handle " + type);
+      throw new IllegalArgumentException("GSON (" + VERSION + ") cannot handle " + type);
     } finally {
       threadCalls.remove(type);
 
@@ -704,7 +706,7 @@ public final class Gson {
     } catch (IOException e) {
       throw new JsonIOException(e);
     } catch (AssertionError e) {
-      AssertionError error = new AssertionError("AssertionError (GSON " + GsonBuildConfig.VERSION + "): " + e.getMessage());
+      AssertionError error = new AssertionError("AssertionError (GSON " + VERSION + "): " + e.getMessage());
       error.initCause(e);
       throw error;
     } finally {
@@ -784,7 +786,7 @@ public final class Gson {
     } catch (IOException e) {
       throw new JsonIOException(e);
     } catch (AssertionError e) {
-      AssertionError error = new AssertionError("AssertionError (GSON " + GsonBuildConfig.VERSION + "): " + e.getMessage());
+      AssertionError error = new AssertionError("AssertionError (GSON " + VERSION + "): " + e.getMessage());
       error.initCause(e);
       throw error;
     } finally {
@@ -945,7 +947,7 @@ public final class Gson {
       // TODO(inder): Figure out whether it is indeed right to rethrow this as JsonSyntaxException
       throw new JsonSyntaxException(e);
     } catch (AssertionError e) {
-      AssertionError error = new AssertionError("AssertionError (GSON " + GsonBuildConfig.VERSION + "): " + e.getMessage());
+      AssertionError error = new AssertionError("AssertionError (GSON " + VERSION + "): " + e.getMessage());
       error.initCause(e);
       throw error;
     } finally {

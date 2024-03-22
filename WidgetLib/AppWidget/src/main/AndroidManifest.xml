@@ -39,6 +39,22 @@
         <activity android:name=".dialog.DialogActivity"/>
         <activity android:name=".percent.PercentActivity"/>
         <activity android:name=".screen.PresentationActivity"/>
+
+
+        <activity android:name="com.yc.widgetbusiness.status.BarActivity"/>
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarColorActivity" />
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarColorToolBarActivity" />
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarTranslucent"/>
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarColorCoordinatorActivity" />
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarTranslucentCoordinatorActivity"/>
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarWhiteActivity"/>
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarWhiteToolBarActivity"/>
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarWhiteCoordinatorActivity"/>
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarWhiteCoordinatorActivity2"/>
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarWhiteCoordinatorActivity3"/>
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarFragmentActivity"/>
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarFragment2Activity"/>
+        <activity android:name="com.yc.widgetbusiness.status.StatusBarFragment3Activity"/>
     </application>
 
 

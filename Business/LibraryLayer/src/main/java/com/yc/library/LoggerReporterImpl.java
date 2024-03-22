@@ -1,6 +1,6 @@
 package com.yc.library;
 
-import com.yc.eventuploadlib.LoggerReporter;
+import com.yc.appcommoninter.report.LoggerReporter;
 import com.yc.toolutils.AppLogUtils;
 
 public class LoggerReporterImpl extends LoggerReporter {

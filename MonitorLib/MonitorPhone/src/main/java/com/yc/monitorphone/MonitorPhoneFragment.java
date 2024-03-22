@@ -20,6 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.yc.appstatuslib.helper.network.NetWorkManager;
+import com.yc.appstatuslib.helper.network.OnNetStatusListener;
 import com.yc.toolutils.file.SdCardUtils;
 import com.yc.networklib.wifi.WifiHelper;
 import com.yc.cpu.ApmCpuHelper;

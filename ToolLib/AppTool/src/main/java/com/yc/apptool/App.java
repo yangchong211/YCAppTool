@@ -3,14 +3,8 @@ package com.yc.apptool;
 import android.app.Application;
 
 import com.yc.apptool.thread.LogCallback;
-import com.yc.interceptortime.CommonCallback;
-import com.yc.interceptortime.InterceptorBean;
-import com.yc.interceptortime.InterceptorManager;
-import com.yc.interceptortime.MonitorBean;
-import com.yc.looperthread.heart.HeartConfig;
-import com.yc.looperthread.heart.HeartManager;
 import com.yc.toolutils.AppLogUtils;
-import com.yc.ycthreadpoollib.pool.PoolThread;
+import cn.ycbjie.ycthreadpoollib.PoolThread;
 
 public class App extends Application {
 
@@ -25,23 +19,8 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         AppLogUtils.setShowLog(true);
-        HeartConfig.Builder builder = HeartConfig.builder();
-        HeartConfig heartConfig = builder.setContext(this).build();
-        HeartManager.getInstance().initHeart(heartConfig);
         //初始化线程池管理器
         initThreadPool();
-        InterceptorManager.getInstance().addInterceptor(new CommonCallback<InterceptorBean>() {
-            @Override
-            public void result(InterceptorBean interceptorBean) {
-                AppLogUtils.d("addInterceptor: " + interceptorBean.toString());
-            }
-        });
-        InterceptorManager.getInstance().setMonitorCallback(new CommonCallback<MonitorBean>() {
-            @Override
-            public void result(MonitorBean monitorBean) {
-                AppLogUtils.d("addInterceptor monitorBean : " + monitorBean.toString());
-            }
-        });
     }
 
 

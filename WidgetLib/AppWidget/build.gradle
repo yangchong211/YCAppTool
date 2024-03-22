@@ -39,7 +39,6 @@ dependencies {
     implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation(rootProject.ext.dependencies["material"])
     implementation(rootProject.ext.dependencies["percentlayout"])
-    implementation project(':StatusBusiness')
 
     //通用日志输出库
     implementation 'com.github.yangchong211.YCCommonLib:AppLogLib:1.4.9'
@@ -87,7 +86,7 @@ dependencies {
     implementation project(path: ':SnackBar')
     implementation project(path: ':DialogFragment')
     implementation project(path: ':BaseDialog')
-
+    implementation project(':StatusBarLib')
 
     implementation project(path: ':NotifyBusiness')
     implementation project(path: ':StatusBarLib')

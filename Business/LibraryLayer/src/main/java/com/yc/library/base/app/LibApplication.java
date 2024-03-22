@@ -6,8 +6,6 @@ import android.content.res.Configuration;
 import androidx.multidex.MultiDex;
 import android.util.Log;
 
-import com.yc.eventuploadlib.LoggerReporter;
-import com.yc.library.LoggerReporterImpl;
 import com.yc.library.base.config.AppConfig;
 
 /**
@@ -35,7 +33,6 @@ public class LibApplication extends Application {
         //在子线程中初始化
         InitializeService.start(this);
         initSetTransfer();
-        LoggerReporter.setLogReporter(new LoggerReporterImpl());
     }
 
     @Override

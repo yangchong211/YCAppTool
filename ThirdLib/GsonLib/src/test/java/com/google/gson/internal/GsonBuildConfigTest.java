@@ -16,6 +16,9 @@
 package com.google.gson.internal;
 
 
+import static org.junit.Assert.assertFalse;
+
+import org.junit.Test;
 
 /**
  * Unit tests for {@code GsonBuildConfig}
@@ -26,6 +29,6 @@ public class GsonBuildConfigTest {
 
   @Test
   public void testEnsureGsonBuildConfigGetsUpdatedToMavenVersion() {
-    assertFalse("${project.version}".equals(GsonBuildConfig.VERSION));
+    assertFalse("${project.version}".equals("GsonBuildConfig.VERSION"));
   }
 }

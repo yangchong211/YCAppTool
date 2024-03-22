@@ -13,7 +13,7 @@ project(':AppDesign').projectDir = new File('Business/AppDesign')
 include ':AppWebView'
 project(':AppWebView').projectDir = new File('Business/AppWebView')
 include ':AnimBusiness', ':MvvmDatabinding', ':DemoBusiness', ':MvpTodoBusiness',
-        ':MvvmTodoLive', ':JetpackBusiness', ':StatusBusiness',
+        ':MvvmTodoLive', ':JetpackBusiness',
         ':BleBusiness', ':NotifyBusiness', ':KotlinBusiness',
         ':SocketBusiness', ':LibraryLayer'
 project(':JetpackBusiness').projectDir = new File('Business/JetpackBusiness')
@@ -22,7 +22,6 @@ project(':AnimBusiness').projectDir = new File('Business/AnimBusiness')
 project(':MvpTodoBusiness').projectDir = new File('Business/MvpTodoBusiness')
 project(':MvvmDatabinding').projectDir = new File('Business/MvvmDatabinding')
 project(':MvvmTodoLive').projectDir = new File('Business/MvvmTodoLive')
-project(':StatusBusiness').projectDir = new File('Business/StatusBusiness')
 project(':BleBusiness').projectDir = new File('Business/BleBusiness')
 project(':NotifyBusiness').projectDir = new File('Business/NotifyBusiness')
 project(':KotlinBusiness').projectDir = new File('Business/KotlinBusiness')

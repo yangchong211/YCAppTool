@@ -1,6 +1,6 @@
 package com.yc.socket.easy;
 
-import com.yc.dataclonelib.BaseParentBean;
+import com.yc.toolutils.clone.BaseParentBean;
 
 public abstract class BaseBean extends BaseParentBean {
 
