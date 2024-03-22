@@ -25,9 +25,7 @@ public:
 
 private:
     void async_log_thread();
-
     ssize_t flush(FlushBuffer *flushBuffer);
-
     bool exit = false;
     std::vector<FlushBuffer *> async_buffer;
     std::thread async_thread;

@@ -32,7 +32,7 @@ import java.util.Locale;
 /**
  * <pre>
  *     @author 杨充
- *     blog  : https://github.com/yangchong211
+ *     blog  : <a href="https://github.com/yangchong211">...</a>
  *     time  : 2019/12/23
  *     desc  : 自定义LiveData<T>
  *     revise:

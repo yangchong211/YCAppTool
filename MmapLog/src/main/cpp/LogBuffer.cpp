@@ -1,18 +1,20 @@
 
 #include "LogBuffer.h"
 
-LogBuffer::LogBuffer(char *ptr, size_t buffer_size):
+
+LogBuffer::LogBuffer(char *ptr, size_t buffer_size) :
         buffer_ptr(ptr),
         buffer_size(buffer_size),
         logHeader(buffer_ptr, buffer_size) {
+    //判断
     if (logHeader.isAvailable()) {
         data_ptr = (char *) logHeader.ptr();
         write_ptr = (char *) logHeader.write_ptr();
-        if(logHeader.getIsCompress()) {
+        if (logHeader.getIsCompress()) {
             initCompress(true);
         }
-        char* log_path = getLogPath();
-        if(log_path != nullptr) {
+        char *log_path = getLogPath();
+        if (log_path != nullptr) {
             openSetLogFile(log_path);
             delete[] log_path;
         }
@@ -42,11 +44,11 @@ size_t LogBuffer::append(const char *log, size_t len) {
     size_t freeSize = emptySize();
     size_t writeSize = 0;
     if (is_compress) {
-        zStream.avail_in = (uInt)len;
-        zStream.next_in = (Bytef*)log;
+        zStream.avail_in = (uInt) len;
+        zStream.next_in = (Bytef *) log;
 
-        zStream.avail_out = (uInt)freeSize;
-        zStream.next_out = (Bytef*)write_ptr;
+        zStream.avail_out = (uInt) freeSize;
+        zStream.next_out = (Bytef *) write_ptr;
 
         if (Z_OK != deflate(&zStream, Z_SYNC_FLUSH)) {
             return 0;
@@ -75,7 +77,7 @@ void LogBuffer::async_flush(AsyncFileFlush *fileFlush) {
 }
 
 void LogBuffer::async_flush(AsyncFileFlush *fileFlush, LogBuffer *releaseThis) {
-    if(fileFlush == nullptr) {
+    if (fileFlush == nullptr) {
         if (releaseThis != nullptr) {
             delete releaseThis;
         }
@@ -86,7 +88,7 @@ void LogBuffer::async_flush(AsyncFileFlush *fileFlush, LogBuffer *releaseThis) {
         if (is_compress && Z_NULL != zStream.state) {
             deflateEnd(&zStream);
         }
-        FlushBuffer* flushBuffer = new FlushBuffer(log_file);
+        FlushBuffer *flushBuffer = new FlushBuffer(log_file);
         flushBuffer->write(data_ptr, length());
         flushBuffer->releaseThis(releaseThis);
         clear();
@@ -108,12 +110,12 @@ void LogBuffer::release() {
     if (is_compress && Z_NULL != zStream.state) {
         deflateEnd(&zStream);
     }
-    if(map_buffer) {
+    if (map_buffer) {
         munmap(buffer_ptr, buffer_size);
     } else {
         delete[] buffer_ptr;
     }
-    if(log_file != nullptr) {
+    if (log_file != nullptr) {
         fclose(log_file);
     }
 }
@@ -152,15 +154,17 @@ bool LogBuffer::initCompress(bool compress) {
         zStream.zalloc = Z_NULL;
         zStream.zfree = Z_NULL;
         zStream.opaque = Z_NULL;
-        return Z_OK == deflateInit2(&zStream, Z_BEST_COMPRESSION, Z_DEFLATED, -MAX_WBITS, MAX_MEM_LEVEL, Z_DEFAULT_STRATEGY);
+        return Z_OK ==
+               deflateInit2(&zStream, Z_BEST_COMPRESSION, Z_DEFLATED, -MAX_WBITS, MAX_MEM_LEVEL,
+                            Z_DEFAULT_STRATEGY);
     }
     return false;
 }
 
 bool LogBuffer::openSetLogFile(const char *log_path) {
     if (log_path != nullptr) {
-        FILE* _file_log = fopen(log_path, "ab+");
-        if(_file_log != NULL) {
+        FILE *_file_log = fopen(log_path, "ab+");
+        if (_file_log != NULL) {
             log_file = _file_log;
             return true;
         }
@@ -169,7 +173,7 @@ bool LogBuffer::openSetLogFile(const char *log_path) {
 }
 
 void LogBuffer::changeLogPath(char *log_path) {
-    if(log_file != nullptr) {
+    if (log_file != nullptr) {
         async_flush();
     }
     initData(log_path, strlen(log_path), is_compress);

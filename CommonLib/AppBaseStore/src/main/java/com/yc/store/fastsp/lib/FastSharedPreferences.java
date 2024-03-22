@@ -8,14 +8,14 @@ import androidx.annotation.Nullable;
 
 import com.yc.toolutils.context.AppToolUtils;
 import com.yc.toolutils.file.AppFileUtils;
-import com.yc.easyexecutor.DelegateTaskExecutor;
-
 import java.io.File;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -58,6 +58,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
      * 这个锁主要是为了锁住拷贝数据的过程，当进行数据拷贝的时候，不允许任何写入操作
      */
     private final ReadWriteLock copyLock = new ReentrantReadWriteLock();
+    private static final ExecutorService SYNC_EXECUTOR = Executors.newFixedThreadPool(4);
     private final DataChangeObserver observer;
     private final String logDir;
 
@@ -260,7 +261,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
             if (syncing.get()) {
                 return;
             }
-            DelegateTaskExecutor.getInstance().executeOnDiskIO(new SyncTask());
+            SYNC_EXECUTOR.execute(new SyncTask());
         }
 
         private class SyncTask implements Runnable {
@@ -335,7 +336,7 @@ public class FastSharedPreferences implements EnhancedSharedPreferences {
                 //如果正在同步，则取消reload
                 return;
             }
-            DelegateTaskExecutor.getInstance().executeOnDiskIO(new ReloadTask());
+            SYNC_EXECUTOR.execute(new ReloadTask());
         }
 
         public void onDelete(String path) {
