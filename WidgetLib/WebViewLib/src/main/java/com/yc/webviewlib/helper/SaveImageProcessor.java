@@ -25,7 +25,7 @@ import android.os.Build;
 import android.text.TextUtils;
 
 import com.tencent.smtt.sdk.WebView;
-import com.yc.imagetoollib.ImageSaveUtils;
+import com.yc.compress.image.ImageSaveUtils;
 import com.yc.toastutils.ToastUtils;
 import com.yc.toolutils.AppEncodeUtils;
 import com.yc.webviewlib.utils.OkHttpUtils;

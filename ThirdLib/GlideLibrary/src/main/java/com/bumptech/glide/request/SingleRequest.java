@@ -3,11 +3,13 @@ package com.bumptech.glide.request;
 import android.content.Context;
 import android.content.res.Resources.Theme;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.GuardedBy;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.GuardedBy;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.support.v4.util.Pools;
+import androidx.core.util.Pools;
+
 import android.util.Log;
 import com.bumptech.glide.GlideContext;
 import com.bumptech.glide.Priority;

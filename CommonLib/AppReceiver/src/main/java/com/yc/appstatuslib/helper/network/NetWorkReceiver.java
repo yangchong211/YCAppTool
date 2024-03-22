@@ -8,7 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.yc.appcontextlib.AppToolUtils;
+import com.yc.toolutils.context.AppToolUtils;
 
 public class NetWorkReceiver extends BroadcastReceiver {
 

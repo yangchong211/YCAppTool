@@ -122,8 +122,8 @@ dependencies {
 
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':WebViewLib')
+    implementation project(path: ':In18HelperLib')
 
-    implementation project(path: ':LocaleHelperLib')
     implementation project(path: ':AppStateLib')
     implementation project(path: ':StatusBarLib')
     implementation project(path: ':ThreadPoolLib')

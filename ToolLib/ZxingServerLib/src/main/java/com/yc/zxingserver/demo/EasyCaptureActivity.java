@@ -7,11 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yc.zxingcodelib.DecodeManager;
+import com.yc.zxingserver.tools.DecodeManager;
 import com.yc.zxingserver.R;
 import com.yc.zxingserver.camera.FrontLightMode;
 import com.yc.zxingserver.scan.CaptureActivity;
-import com.yc.zxingserver.scan.DecodeFormatManager;
 
 
 public class EasyCaptureActivity extends CaptureActivity {

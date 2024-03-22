@@ -10,7 +10,8 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import androidx.annotation.NonNull;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
+
 import com.bumptech.glide.util.Preconditions;
 import com.bumptech.glide.util.Synthetic;
 

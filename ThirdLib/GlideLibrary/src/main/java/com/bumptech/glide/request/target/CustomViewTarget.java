@@ -3,7 +3,8 @@ package com.bumptech.glide.request.target;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.IdRes;
+
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -34,7 +35,8 @@ import java.util.List;
  */
 public abstract class CustomViewTarget<T extends View, Z> implements Target<Z> {
   private static final String TAG = "CustomViewTarget";
-  @IdRes private static final int VIEW_TAG_ID =
+  @IdRes
+  private static final int VIEW_TAG_ID =
       R.id.glide_custom_view_target_tag;
 
   private final SizeDeterminer sizeDeterminer;

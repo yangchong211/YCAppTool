@@ -9,9 +9,6 @@ import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.URLUtil;
 import com.tencent.smtt.sdk.WebView;
-import com.yc.netinterceptor.cache.CacheInterceptor;
-import com.yc.netinterceptor.log.HttpLoggerLevel;
-import com.yc.netinterceptor.log.HttpLoggingInterceptor;
 import com.yc.networklib.net.AppNetworkUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
 
@@ -35,6 +32,7 @@ import okhttp3.Dns;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.internal.cache.CacheInterceptor;
 
 
 /**
@@ -118,10 +116,7 @@ public class WebViewCacheWrapper implements WebViewRequestClient {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .cache(cache)
                 .connectTimeout(mConnectTimeout, TimeUnit.SECONDS)
-                .readTimeout(mReadTimeout, TimeUnit.SECONDS)
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggerLevel.BASIC))
-                //.addInterceptor(new CacheInterceptor(client.internalCache())
-                .addNetworkInterceptor(new CacheInterceptor());
+                .readTimeout(mReadTimeout, TimeUnit.SECONDS);
         if (mTrustAllHostname) {
             builder.hostnameVerifier(new HostnameVerifier() {
                 @Override

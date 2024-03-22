@@ -11,9 +11,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.yc.toolutils.context.AppToolUtils;
-import com.yc.apppermission.PermissionUtils;
-import com.yc.localelib.service.LocaleService;
+import com.yc.localelib.locale.service.LocaleService;
 import com.yc.privateserver.UserPrivacyInit;
+import com.yc.toolutils.permission.PermissionUtils;
 
 /**
  * <pre>

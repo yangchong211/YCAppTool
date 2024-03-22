@@ -7,13 +7,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yc.clickhelper.ClickHelper;
 import com.yc.keyeventlib.R;
 import com.yc.keyeventlib.board.AndroidKeyBoard;
 import com.yc.keyeventlib.board.KeyEventManager;
 import com.yc.keyeventlib.board.ResultCallback;
 import com.yc.keyeventlib.code.IKeyEvent;
 import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.click.ClickHelper;
 
 public class KeyCodeActivity extends AppCompatActivity {
 

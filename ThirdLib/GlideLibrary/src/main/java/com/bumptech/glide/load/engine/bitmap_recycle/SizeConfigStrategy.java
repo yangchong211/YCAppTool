@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.os.Build;
 import androidx.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import androidx.annotation.VisibleForTesting;
 import com.bumptech.glide.util.Synthetic;
 import com.bumptech.glide.util.Util;

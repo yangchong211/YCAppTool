@@ -102,7 +102,7 @@ final class AutoFocusManager implements Camera.AutoFocusCallback {
 
     private static class AutoFocusTask extends AsyncTask<Object,Object,Object> {
 
-        private WeakReference<AutoFocusManager> weakReference;
+        private final WeakReference<AutoFocusManager> weakReference;
 
         public AutoFocusTask(AutoFocusManager manager){
             weakReference = new WeakReference<>(manager);

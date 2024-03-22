@@ -31,6 +31,7 @@
         <activity android:name="com.yc.apptool.thread.ThreadActivity"/>
         <activity android:name="com.yc.apptool.thread.EasyExecutorActivity"/>
         <activity android:name="com.yc.apptool.thread.ThreadPollActivity"/>
+        <activity android:name="com.yc.apptool.db.SqlLiteActivity"/>
     </application>
 
 </manifest>

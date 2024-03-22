@@ -3,7 +3,7 @@ import android.content.Intent;
 import android.net.Uri;
 
 import com.google.zxing.BarcodeFormat;
-import com.yc.zxingcodelib.DecodeManager;
+import com.yc.zxingserver.tools.DecodeManager;
 
 import java.util.Arrays;
 import java.util.EnumSet;

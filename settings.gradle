@@ -141,18 +141,12 @@ project(':AppGrayLib').projectDir = new File('WidgetLib/AppGrayLib')
 include ':AppTool'
 project(':AppTool').projectDir = new File('ToolLib/AppTool')
 //库
-include ':ZxingServerLib', ':WebSocketLib', ':SocketIoLib', ':EasySocket',
-        ':LocaleHelperLib', ':CountTimerLib',
-        ':AnimatorToolLib',
-        ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':LooperThread',
-         ':AppUpdateLib',
-        ':ZXingCodeLib', ':AnimBaseHelper', ':NotCaptureLib',
-         ':CameraOpen', ':SqlLiteLib'
+include ':ZxingServerLib', ':SocketHelper', ':In18HelperLib', ':CountTimerLib',
+        ':AnimatorToolLib', ':ThreadPoolLib', ':AutoCloserLib', ':AppProcessLib',':LooperThread',
+         ':AppUpdateLib', ':AnimBaseHelper', ':NotCaptureLib', ':CameraHelper'
 project(':ZxingServerLib').projectDir = new File('ToolLib/ZxingServerLib')
-project(':ZXingCodeLib').projectDir = new File('ToolLib/ZXingCodeLib')
-project(':WebSocketLib').projectDir = new File('ToolLib/WebSocketLib')
-project(':SocketIoLib').projectDir = new File('ToolLib/SocketIoLib')
-project(':LocaleHelperLib').projectDir = new File('ToolLib/LocaleHelperLib')
+project(':SocketHelper').projectDir = new File('ToolLib/SocketHelper')
+project(':In18HelperLib').projectDir = new File('ToolLib/In18HelperLib')
 project(':CountTimerLib').projectDir = new File('ToolLib/CountTimerLib')
 project(':AnimatorToolLib').projectDir = new File('ToolLib/AnimatorToolLib')
 project(':ThreadPoolLib').projectDir = new File('ToolLib/ThreadPoolLib')
@@ -160,11 +154,9 @@ project(':AppProcessLib').projectDir = new File('ToolLib/AppProcessLib')
 project(':AppUpdateLib').projectDir = new File('ToolLib/AppUpdateLib')
 project(':AnimBaseHelper').projectDir = new File('ToolLib/AnimBaseHelper')
 project(':NotCaptureLib').projectDir = new File('ToolLib/NotCaptureLib')
-project(':EasySocket').projectDir = new File('ToolLib/EasySocket')
 project(':LooperThread').projectDir = new File('ToolLib/LooperThread')
-project(':CameraOpen').projectDir = new File('ToolLib/CameraOpen')
+project(':CameraHelper').projectDir = new File('ToolLib/CameraHelper')
 //project(':MmapLog').projectDir = new File('ToolLib/MmapLog')
-project(':SqlLiteLib').projectDir = new File('ToolLib/SqlLiteLib')
 
 
 /* +++++++++ Apt框架基础工具库 +++++++++ */
@@ -190,7 +182,7 @@ include ':AppMonitor'
 project(':AppMonitor').projectDir = new File('MonitorLib/AppMonitor')
 //库
 include ':MonitorCpuLib', ':MonitorCatonLib', ':MonitorAnrLib', ':MonitorCrashLib',
-        ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib', ':MonitorKeepAlive',
+        ':MonitorNetLib', ':MonitorFileLib', ':MonitorOomLib',
         ':MonitorXposed', ':MonitorMemory',':MonitorLeakLib',
         ':MonitorApmLib', ':MonitorPingLib', ':MonitorFpsLib',':MonitorThread',
         ':MonitorPrivacy', ':MonitorTimeLib', ':MonitorSpeed', ':MonitorInterceptor',
@@ -202,7 +194,6 @@ project(':MonitorCrashLib').projectDir = new File('MonitorLib/MonitorCrashLib')
 project(':MonitorNetLib').projectDir = new File('MonitorLib/MonitorNetLib')
 project(':MonitorFileLib').projectDir = new File('MonitorLib/MonitorFileLib')
 project(':MonitorOomLib').projectDir = new File('MonitorLib/MonitorOomLib')
-project(':MonitorKeepAlive').projectDir = new File('MonitorLib/MonitorKeepAlive')
 project(':MonitorXposed').projectDir = new File('MonitorLib/MonitorXposed')
 project(':MonitorApmLib').projectDir = new File('MonitorLib/MonitorApmLib')
 project(':MonitorPingLib').projectDir = new File('MonitorLib/MonitorPingLib')

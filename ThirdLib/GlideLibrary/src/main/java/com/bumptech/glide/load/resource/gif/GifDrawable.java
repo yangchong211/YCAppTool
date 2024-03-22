@@ -14,7 +14,8 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import android.support.graphics.drawable.Animatable2Compat;
+import androidx.vectordrawable.graphics.drawable.Animatable2Compat;
+
 import android.view.Gravity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.gifdecoder.GifDecoder;

@@ -158,7 +158,7 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
     if (vm->GetEnv((void **) &env, JNI_VERSION_1_4) != JNI_OK) {
         return JNI_FALSE;
     }
-    jclass classDocScanner = env->FindClass("me/pqpo/librarylog4a/LogBuffer");
+    jclass classDocScanner = env->FindClass("me/pqpo/librarylog4a/LogNativeHelper");
     jint nMethods = sizeof(gMethods) / sizeof(gMethods[0]);
     if (env->RegisterNatives(classDocScanner, gMethods, nMethods) < 0) {
         return JNI_FALSE;

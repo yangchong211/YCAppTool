@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
-import com.yc.zxingcodelib.DecodeManager;
+import com.yc.zxingserver.tools.DecodeManager;
 import com.yc.zxingserver.camera.CameraManager;
 import com.yc.toolutils.AppLogUtils;
 

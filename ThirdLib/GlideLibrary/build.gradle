@@ -31,6 +31,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.github.bumptech.glide:disklrucache:4.9.0"
     api project(':GlideGifLib')
     api project(':GlideAnnotation')
     implementation rootProject.ext.dependencies["appcompat"]

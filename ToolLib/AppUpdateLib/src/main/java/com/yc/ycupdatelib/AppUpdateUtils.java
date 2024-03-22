@@ -7,8 +7,8 @@ import android.os.Build;
 
 import androidx.core.content.FileProvider;
 
-import com.yc.appfilelib.AppFileUtils;
 import com.yc.eventuploadlib.LoggerReporter;
+import com.yc.toolutils.file.AppFileUtils;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -8,7 +8,7 @@ import com.yc.lifehelper.R;
 import com.yc.monitortimelib.monitor.TimeMonitorHelper;
 import com.yc.parallel.ParallelTaskDispatcher;
 import com.yc.library.base.app.LibApplication;
-import com.yc.localelib.service.LocaleService;
+import com.yc.localelib.locale.service.LocaleService;
 import com.yc.tracesdk.TimeTrace;
 import com.yc.tracesdk.TimeTraceFactory;
 

@@ -12,8 +12,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.yc.businessinterface.AppServiceProvider;
-import com.yc.localelib.service.LocaleService;
-import com.yc.localelib.utils.LocaleToolUtils;
+import com.yc.localelib.locale.service.LocaleService;
+import com.yc.localelib.locale.utils.LocaleToolUtils;
 import com.yc.spi.loader.ServiceLoader;
 import java.util.List;
 import java.util.Locale;

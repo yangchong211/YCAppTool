@@ -6,9 +6,9 @@ import android.graphics.Bitmap;
 import android.text.TextUtils;
 
 
+import com.yc.compress.image.ImageSaveUtils;
 import com.yc.toolutils.context.AppToolUtils;
 import com.yc.toolutils.file.SdCardUtils;
-import com.yc.imagetoollib.ImageSaveUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -61,7 +61,7 @@ dependencies {
     implementation(rootProject.ext.dependencies["material"])
     implementation(rootProject.ext.dependencies["constraintlayout"])
     implementation project(path: ':MonitorNetLib')
-    implementation project(path: ':LocaleHelperLib')
+    implementation project(path: ':In18HelperLib')
     implementation project(path: ':ThreadPoolLib')
     implementation project(path: ':GlideServer')
     implementation project(path: ':LibraryLayer')

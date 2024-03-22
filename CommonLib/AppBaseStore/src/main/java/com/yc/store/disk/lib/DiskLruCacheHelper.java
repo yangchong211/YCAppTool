@@ -3,8 +3,8 @@ package com.yc.store.disk.lib;
 
 import android.util.Log;
 
-import com.yc.eventuploadlib.ExceptionReporter;
-import com.yc.eventuploadlib.LoggerReporter;
+import com.yc.appcommoninter.report.ExceptionReporter;
+import com.yc.appcommoninter.report.LoggerReporter;
 
 import java.io.File;
 import java.io.IOException;

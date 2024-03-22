@@ -16,7 +16,7 @@
         android:paddingLeft="20dp"
         android:text="1.版本更新案例"
         android:textSize="18sp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
@@ -27,7 +27,7 @@
         android:paddingLeft="20dp"
         android:text="2."
         android:textSize="18sp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
@@ -38,7 +38,7 @@
         android:paddingLeft="20dp"
         android:text="3."
         android:textSize="18sp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
@@ -49,7 +49,7 @@
         android:paddingLeft="20dp"
         android:text="4."
         android:textSize="18sp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
@@ -60,7 +60,7 @@
         android:paddingLeft="20dp"
         android:text="5."
         android:textSize="18sp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
@@ -71,7 +71,7 @@
         android:paddingLeft="20dp"
         android:text="6."
         android:textSize="18sp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
     <com.yc.roundcorner.view.RoundTextView
@@ -82,7 +82,7 @@
         android:paddingLeft="20dp"
         android:text="7."
         android:textSize="18sp"
-        android:background="@color/color_ffe935"
+        android:background="@color/colorAccent"
         app:rRadius="20dp" />
 
 </LinearLayout>

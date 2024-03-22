@@ -15,9 +15,7 @@
  */
 package com.google.gson.internal;
 
-import static org.junit.Assert.assertFalse;
 
-import org.junit.Test;
 
 /**
  * Unit tests for {@code GsonBuildConfig}

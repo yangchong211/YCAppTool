@@ -194,11 +194,9 @@ dependencies {
     implementation project(path: ':CountTimerLib')
     implementation project(path: ':ToolUtilsLib')
     implementation project(path: ':AppReceiver')
+    implementation project(path: ':In18HelperLib')
 //    implementation project(path: ':DemoBusiness')
 //    implementation project(path: ':StatusBusiness')
-
-    implementation project(path: ':LocaleHelperLib')
-    implementation project(path: ':MonitorKeepAlive')
     implementation project(path: ':LibraryLayer')
     implementation project(path: ':GlideServer')
     implementation project(path: ':ZxingServerLib')

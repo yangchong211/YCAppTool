@@ -9,18 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.pqpo.librarylog4a.LogLevel;
-import me.pqpo.librarylog4a.LogBuffer;
+import me.pqpo.librarylog4a.LogNativeHelper;
 import me.pqpo.librarylog4a.inter.Formatter;
 import me.pqpo.librarylog4a.inter.Interceptor;
 
 public class FileAppender extends AbsAppender {
 
-    private final LogBuffer logBuffer;
+    private final LogNativeHelper logBuffer;
 
     private Formatter formatter;
 
     protected FileAppender(Builder builder) {
-        logBuffer = new LogBuffer(builder.bufferFilePath, builder.bufferSize, builder.logFilePath, builder.compress);
+        logBuffer = new LogNativeHelper(builder.bufferFilePath, builder.bufferSize,
+                builder.logFilePath, builder.compress);
         setMaxSingleLength(builder.bufferSize);
         setLevel(builder.level);
         addInterceptor(builder.interceptors);
@@ -67,9 +68,7 @@ public class FileAppender extends AbsAppender {
     }
 
     public static class Builder {
-
-        private Context context;
-
+        private final Context context;
         private String bufferFilePath;
         private String logFilePath;
         private int bufferSize = 4096;

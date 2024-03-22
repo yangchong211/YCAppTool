@@ -1,6 +1,6 @@
 package com.yc.tcp.socket
 
-import com.yc.toolutils.stream.BaseIoUtils
+import com.yc.fileiohelper.BaseIoUtils
 import com.yc.logclient.LogUtils
 import com.yc.tcp.TcpConfig
 import com.yc.tcp.data.TcpDataBean
@@ -24,7 +24,7 @@ class NormalSocketAdapter : SocketAdapter {
         // 步骤3：通过输入流读取器对象 接收服务器发送过来的数据
         val readLine = br.readLine()*/
 
-        val readBytes = com.yc.toolutils.stream.BaseIoUtils.readBytes(mInput)
+        val readBytes = BaseIoUtils.readBytes(mInput)
         //组装tcp数据
         val tcpData = TcpDataBean(bytes = readBytes)
         //接收数据

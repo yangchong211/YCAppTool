@@ -59,12 +59,7 @@ public final class RebootManager {
             //发送一条重启请求，保存日志
             AppLogUtils.v(TAG, "20秒后开始重启");
             //20秒之后再执行，防止无限重启，还能救火...
-            DelegateTaskExecutor.getInstance().postToMainThread(new Runnable() {
-                @Override
-                public void run() {
-                    reboot(context);
-                }
-            }, 20000);
+            reboot(context);
         } else {
             AppLogUtils.d(TAG + "已经重启过：" + isRebootTime() + " , " + isTodayRebooted());
         }
