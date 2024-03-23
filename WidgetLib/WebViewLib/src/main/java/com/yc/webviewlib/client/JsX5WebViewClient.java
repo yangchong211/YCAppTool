@@ -21,12 +21,11 @@ import android.text.TextUtils;
 
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.sdk.WebView;
-import com.yc.toolutils.AppActivityUtils;
+import com.yc.toolutils.component.AppActivityUtils;
 import com.yc.webviewlib.bridge.BridgeUtil;
 import com.yc.webviewlib.bridge.WebJsMessage;
 import com.yc.toolutils.AppEncodeUtils;
 import com.yc.webviewlib.utils.X5LogUtils;
-import com.yc.webviewlib.utils.X5WebUtils;
 import com.yc.webviewlib.base.X5WebViewClient;
 import com.yc.webviewlib.view.BridgeWebView;
 import com.yc.webviewlib.view.X5WebView;

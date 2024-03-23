@@ -9,7 +9,7 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -14,7 +14,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.yc.toolutils.context.AppToolUtils;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

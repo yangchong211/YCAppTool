@@ -22,7 +22,7 @@ import com.google.zxing.common.GlobalHistogramBinarizer;
 import com.google.zxing.common.HybridBinarizer;
 import com.yc.zxingserver.R;
 import com.yc.zxingserver.camera.CameraManager;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Map;

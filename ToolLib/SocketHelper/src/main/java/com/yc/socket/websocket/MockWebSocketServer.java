@@ -2,7 +2,7 @@ package com.yc.socket.websocket;
 
 
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import okhttp3.Response;
 import okhttp3.WebSocket;

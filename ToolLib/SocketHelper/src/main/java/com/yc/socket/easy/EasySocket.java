@@ -1,7 +1,7 @@
 package com.yc.socket.easy;
 
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

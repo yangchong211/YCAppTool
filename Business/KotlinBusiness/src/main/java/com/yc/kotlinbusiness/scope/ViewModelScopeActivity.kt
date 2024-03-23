@@ -5,7 +5,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import com.yc.kotlinbusiness.R
-import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.system.AppLogUtils
 import kotlinx.coroutines.*
 
 class ViewModelScopeActivity : AppCompatActivity(){

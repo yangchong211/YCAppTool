@@ -1,7 +1,7 @@
 package com.yc.toolutils.sntp;
 import android.os.SystemClock;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

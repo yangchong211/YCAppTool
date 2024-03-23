@@ -13,7 +13,7 @@ import com.yc.appstatuslib.info.AppThreadInfo;
 import com.yc.appstatuslib.listener.BaseStatusListener;
 import com.yc.logclient.LogUtils;
 import com.yc.logclient.client.LogClient;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -4,7 +4,7 @@ import android.app.Application
 import com.yc.toolutils.file.AppFileUtils
 import com.yc.logclient.LogUtils
 import com.yc.logclient.client.LogClient
-import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.system.AppLogUtils
 import com.yc.tcp.TcpFacade
 import com.yc.tcp.trustmanager.TrustManagerProviderUnSafe
 

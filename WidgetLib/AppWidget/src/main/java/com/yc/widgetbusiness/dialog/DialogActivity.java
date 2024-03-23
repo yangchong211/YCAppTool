@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,9 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -23,7 +20,7 @@ import com.yc.library.base.mvp.BaseActivity;
 import com.yc.popup.CustomPopupWindow;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.AppWindowUtils;
+import com.yc.toolutils.appinfo.AppWindowUtils;
 import com.yc.widgetbusiness.R;
 
 public class DialogActivity extends BaseActivity {

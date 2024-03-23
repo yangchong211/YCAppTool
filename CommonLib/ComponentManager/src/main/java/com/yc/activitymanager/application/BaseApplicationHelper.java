@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.res.Configuration;
 import android.util.Log;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 import com.yc.toolutils.BuildConfig;
 
 /**

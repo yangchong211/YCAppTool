@@ -11,7 +11,7 @@ import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
 import com.yc.zxingserver.tools.DecodeManager;
 import com.yc.zxingserver.camera.CameraManager;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.util.Collection;
 import java.util.EnumMap;

@@ -8,7 +8,7 @@ import androidx.lifecycle.*
 import com.yc.architecturelib.lifecycle.ActivityLifecycleObserver
 import com.yc.jetpack.R
 import com.yc.jetpack.study.livedata.TextViewModel
-import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.system.AppLogUtils
 
 
 class LifecycleActivity : AppCompatActivity() {

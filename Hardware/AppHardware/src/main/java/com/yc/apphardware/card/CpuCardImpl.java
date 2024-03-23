@@ -3,9 +3,9 @@ package com.yc.apphardware.card;
 import android.text.TextUtils;
 
 import com.yc.apphardware.card.lib.CardReadManager;
-import com.yc.bytetoolutils.BytesHexStrUtils;
 import com.yc.cardmanager.cpu.AbstractCpuCard;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
+import com.yc.toolutils.bytes.BytesHexStrUtils;
 
 import java.util.Arrays;
 

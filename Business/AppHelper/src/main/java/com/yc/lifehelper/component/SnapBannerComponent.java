@@ -18,8 +18,8 @@ import com.yc.library.api.ConstantStringApi;
 import com.yc.library.bean.ListNewsData;
 import com.yc.lifehelper.R;
 import com.yc.snapbannerlib.ScrollLinearHelper;
-import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppSizeUtils;
+import com.yc.toolutils.system.AppLogUtils;
+import com.yc.toolutils.size.AppSizeUtils;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 

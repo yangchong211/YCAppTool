@@ -5,7 +5,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
-import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.system.AppLogUtils
 
 class ActivityLifecycleObserver : LifecycleObserver {
 

@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.yc.activitymanager.activity.ActivityManager;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 /**
  * <pre>

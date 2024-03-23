@@ -5,7 +5,7 @@ import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Build;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.util.Arrays;
 import java.util.Collection;

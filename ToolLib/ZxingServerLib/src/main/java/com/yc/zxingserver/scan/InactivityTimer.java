@@ -8,7 +8,7 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.RejectedExecutionException;

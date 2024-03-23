@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.view.View;
 
 
-import com.yc.businessinterface.IAnimServiceProvider;
-import com.yc.spi.loader.ServiceLoader;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 
@@ -67,19 +65,15 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         int i = v.getId();
         if (i == R.id.tv_1) {
         } else if (i == R.id.tv_2) {
-            mDelegate.setAnimTime(10);
             startActivity(new Intent(this, BannerViewActivity.class));
         } else if (i == R.id.tv_3) {
-            mDelegate.getAnimTime();
         } else if (i == R.id.tv_4) {
-            mDelegate.setStartAnim();
             startActivity(new Intent(this, ProgressThirdActivity.class));
         } else if (i == R.id.tv_5) {
         } else if (i == R.id.tv_6){
             startActivity(new Intent(this, TestFirstActivity.class));
         } else if (i == R.id.tv_7){
         } else if (i == R.id.tv_8){
-            startActivity(new Intent(this, MixtureTextViewActivity.class));
         }else if (i == R.id.tv_9){
             startActivity(new Intent(this, CloneAbleActivity.class));
         }else if (i == R.id.tv_10){

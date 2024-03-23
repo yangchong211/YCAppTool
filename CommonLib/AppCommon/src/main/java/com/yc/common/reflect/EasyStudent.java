@@ -1,7 +1,5 @@
 package com.yc.common.reflect;
 
-import com.yc.toolutils.AppLogUtils;
-
 public class EasyStudent{
 
     private String name = "杨充";

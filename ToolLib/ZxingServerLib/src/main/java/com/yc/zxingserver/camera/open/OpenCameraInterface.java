@@ -2,7 +2,7 @@ package com.yc.zxingserver.camera.open;
 
 import android.hardware.Camera;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 public final class OpenCameraInterface {
 

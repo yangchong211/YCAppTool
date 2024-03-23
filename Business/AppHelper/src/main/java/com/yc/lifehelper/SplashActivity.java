@@ -10,7 +10,7 @@ import android.view.View;
 import com.yc.statusbar.bar.StateAppBar;
 import com.yc.timerlib.view.CountDownView;
 import com.yc.library.base.mvp.BaseActivity;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.util.List;
 

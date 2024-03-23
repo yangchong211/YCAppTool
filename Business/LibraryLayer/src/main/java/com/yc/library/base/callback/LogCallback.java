@@ -1,7 +1,7 @@
 package com.yc.library.base.callback;
 
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import com.yc.ycthreadpoollib.pool.callback.ThreadCallback;
 

@@ -17,7 +17,7 @@ package com.yc.store.disk
 
 import com.yc.store.ICacheable
 import com.yc.store.disk.lib.DiskLruCacheHelper
-import com.yc.toolutils.AppNumberUtils
+import com.yc.toolutils.size.AppNumberUtils
 
 /**
  * <pre>

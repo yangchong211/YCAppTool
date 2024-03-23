@@ -19,7 +19,6 @@ import com.yc.apploglib.printer.AbsPrinter;
 import com.yc.toolutils.permission.PermissionGroup;
 import com.yc.toolutils.permission.PermissionHelper;
 import com.yc.toolutils.permission.PermissionResultListener;
-import com.yc.apppermission.PermissionUtils;
 import com.yc.appprocesslib.AppStateLifecycle;
 import com.yc.appprocesslib.OnStateListener;
 import com.yc.apprestartlib.RestartManager;
@@ -36,9 +35,10 @@ import com.yc.activitymanager.fragment.FragmentManager;
 import com.yc.toolutils.intent.IntentLogger;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppInfoUtils;
-import com.yc.toolutils.ByteTranslateUtils;
+import com.yc.toolutils.system.AppLogUtils;
+import com.yc.toolutils.appinfo.AppInfoUtils;
+import com.yc.toolutils.bytes.ByteTranslateUtils;
+import com.yc.toolutils.permission.PermissionUtils;
 
 import org.jetbrains.annotations.NotNull;
 

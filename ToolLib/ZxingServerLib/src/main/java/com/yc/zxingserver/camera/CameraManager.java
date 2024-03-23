@@ -11,7 +11,7 @@ import android.view.SurfaceHolder;
 import com.google.zxing.PlanarYUVLuminanceSource;
 import com.yc.zxingserver.camera.open.OpenCamera;
 import com.yc.zxingserver.camera.open.OpenCameraInterface;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.IOException;
 

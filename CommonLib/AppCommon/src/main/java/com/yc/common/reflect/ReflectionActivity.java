@@ -12,7 +12,7 @@ import com.yc.toolutils.reflect.ConstructorUtils;
 import com.yc.toolutils.reflect.FieldUtils;
 import com.yc.toolutils.reflect.MethodUtils;
 import com.yc.roundcorner.view.RoundTextView;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;

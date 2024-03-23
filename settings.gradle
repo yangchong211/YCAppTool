@@ -65,6 +65,9 @@ include ':AppReceiver', ':ToolUtilsLib', ':AppBaseStore',
         ':AppCommonInter', ':AppEncryptLib',
          ':NetWorkLib', ':AppTaskLib'
 project(':AppReceiver').projectDir = new File('CommonLib/AppReceiver')
+//综合工具库：
+//字节转化，点击，克隆clone，上下文，文件，intent，内存，权限，反射，屏幕，分享，时间校验，store，io流工具，uri工具，zip压缩工具
+//清除，app信息，设备
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
 project(':AppBaseStore').projectDir = new File('CommonLib/AppBaseStore')
 project(':BaseClassLib').projectDir = new File('CommonLib/BaseClassLib')
@@ -222,7 +225,7 @@ project(':VideoCache').projectDir = new File('PlayerLib/VideoCache')
 //简单型tts播放器，简单tts和综合性tts
 project(':EasyTtsPlayer').projectDir = new File('PlayerLib/EasyTtsPlayer')
 project(':MusicPlayer').projectDir = new File('PlayerLib/MusicPlayer')
-//视频播放器内核
+//视频播放器内核，ijk，exo，media
 project(':VideoKernel').projectDir = new File('PlayerLib/VideoKernel')
 //视频播放器surface
 project(':VideoSurface').projectDir = new File('PlayerLib/VideoSurface')

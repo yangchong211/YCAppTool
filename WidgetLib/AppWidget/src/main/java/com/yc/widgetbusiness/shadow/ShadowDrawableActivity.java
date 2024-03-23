@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.yc.shadow.drawable.ShadowTool;
 import com.yc.statusbar.bar.StateAppBar;
-import com.yc.toolutils.AppSizeUtils;
+import com.yc.toolutils.size.AppSizeUtils;
 import com.yc.widgetbusiness.R;
 
 public class ShadowDrawableActivity extends AppCompatActivity {

@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;

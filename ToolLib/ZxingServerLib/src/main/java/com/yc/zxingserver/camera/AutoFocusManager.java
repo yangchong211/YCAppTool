@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
 import com.yc.zxingserver.scan.Preferences;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

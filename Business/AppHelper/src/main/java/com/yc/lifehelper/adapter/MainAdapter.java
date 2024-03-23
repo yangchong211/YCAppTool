@@ -1,13 +1,12 @@
 package com.yc.lifehelper.adapter;
 
 import android.content.Context;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.yc.library.bean.ListNewsData;
 import com.yc.lifehelper.R;
-import com.yc.toolutils.AppTimeUtils;
+import com.yc.toolutils.time.AppTimeUtils;
 
 import org.yczbj.ycrefreshviewlib.adapter.RecyclerArrayAdapter;
 import org.yczbj.ycrefreshviewlib.holder.BaseViewHolder;

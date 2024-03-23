@@ -4,7 +4,7 @@ import android.os.Looper;
 
 import com.yc.monitortimelib.monitor.TimeMonitorHelper;
 import com.yc.parallel.AbsParallelTask;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

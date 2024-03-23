@@ -1,7 +1,6 @@
 package com.ycbjie.ycwebview;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.sdk.WebView;
-import com.yc.toolutils.AppActivityUtils;
+import com.yc.toolutils.component.AppActivityUtils;
 import com.yc.webviewlib.client.JsX5WebViewClient;
 import com.yc.webviewlib.inter.DefaultWebListener;
 import com.yc.webviewlib.utils.X5WebUtils;

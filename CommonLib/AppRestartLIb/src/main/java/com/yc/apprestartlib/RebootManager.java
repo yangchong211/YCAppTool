@@ -4,9 +4,8 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Process;
 
-import com.yc.easyexecutor.DelegateTaskExecutor;
-import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppSpUtils;
+import com.yc.toolutils.system.AppLogUtils;
+import com.yc.toolutils.sp.AppSpUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

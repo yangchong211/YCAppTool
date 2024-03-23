@@ -5,7 +5,7 @@ import com.yc.cardmanager.AbsUnionCard;
 import com.yc.cardmanager.CardType;
 import com.yc.cardmanager.cpu.AbstractCpuCard;
 import com.yc.cardmanager.m1.AbstractM1Card;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 public class UnionCardImpl extends AbsUnionCard {
 

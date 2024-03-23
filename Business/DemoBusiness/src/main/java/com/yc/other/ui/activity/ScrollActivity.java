@@ -16,7 +16,7 @@ import com.yc.library.base.config.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.statusbar.bar.StateAppBar;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 
 /**

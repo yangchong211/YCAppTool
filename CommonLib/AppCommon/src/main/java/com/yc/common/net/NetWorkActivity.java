@@ -41,7 +41,7 @@ import com.yc.networklib.test.OnNetTestListener;
 import com.yc.networklib.net.AppNetworkUtils;
 import com.yc.networklib.net.NetworkType;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.os.IBinder;
 
 import com.yc.activitymanager.activity.ActivityManager;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 /**
  * <pre>

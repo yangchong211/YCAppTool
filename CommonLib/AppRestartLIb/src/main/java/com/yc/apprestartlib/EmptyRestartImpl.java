@@ -2,7 +2,7 @@ package com.yc.apprestartlib;
 
 import android.content.Context;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 /**
  * <pre>

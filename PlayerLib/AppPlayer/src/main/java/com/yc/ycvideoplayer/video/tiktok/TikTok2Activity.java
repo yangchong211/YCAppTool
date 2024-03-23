@@ -20,7 +20,6 @@ import com.yc.pagerlib.pager.VerticalViewPager;
 import com.yc.videocache.cache.PreloadManager;
 import com.yc.videocache.cache.ProxyVideoCacheManager;
 
-import com.yc.video.config.ConstantKeys;
 import com.yc.video.config.VideoInfoBean;
 import com.yc.video.player.VideoPlayer;
 import com.yc.video.tool.PlayerUtils;

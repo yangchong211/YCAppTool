@@ -5,7 +5,6 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import com.yc.toolutils.AppLogUtils;
 import com.yc.webviewlib.utils.X5WebUtils;
 
 /**

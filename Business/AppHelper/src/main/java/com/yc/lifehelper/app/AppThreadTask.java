@@ -5,7 +5,7 @@ import android.os.Looper;
 import com.yc.ycthreadpoollib.easy.DelegateTaskExecutor;
 import com.yc.parallel.AbsParallelTask;
 import com.yc.appprocesslib.AppAutoCloser;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 import com.yc.toolutils.sntp.NtpGetTime;
 
 import java.io.IOException;

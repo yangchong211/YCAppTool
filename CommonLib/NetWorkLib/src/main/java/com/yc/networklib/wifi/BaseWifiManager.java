@@ -16,7 +16,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

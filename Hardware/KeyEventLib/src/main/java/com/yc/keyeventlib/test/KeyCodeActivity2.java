@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.yc.keyeventlib.R;
 import com.yc.keyeventlib.code.KeyCodeHelper;
 import com.yc.keyeventlib.code.KeyEventImpl;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 public class KeyCodeActivity2 extends AppCompatActivity {
 

@@ -12,7 +12,7 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
 import com.yc.zxingserver.R;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.Closeable;
 import java.io.IOException;

@@ -35,7 +35,7 @@ import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 import com.yc.networklib.net.AppNetworkUtils;
-import com.yc.toolutils.AppActivityUtils;
+import com.yc.toolutils.component.AppActivityUtils;
 import com.yc.webviewlib.helper.WebSchemeIntent;
 import com.yc.webviewlib.inter.InterWebListener;
 import com.yc.toolutils.AppEncodeUtils;

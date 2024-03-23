@@ -21,7 +21,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.ViewCompat;

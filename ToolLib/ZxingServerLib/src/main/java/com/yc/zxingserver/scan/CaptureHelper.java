@@ -21,7 +21,7 @@ import com.google.zxing.DecodeHintType;
 import com.google.zxing.Result;
 import com.yc.zxingserver.camera.CameraManager;
 import com.yc.zxingserver.camera.FrontLightMode;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package com.yc.store.utils;
 
 import com.yc.appencryptlib.Md5EncryptUtils;
 import com.yc.store.lru.lib.SystemLruCache;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 
 /**

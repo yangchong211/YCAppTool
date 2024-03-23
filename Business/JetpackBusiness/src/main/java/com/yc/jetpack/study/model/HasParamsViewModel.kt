@@ -2,7 +2,7 @@ package com.yc.jetpack.study.model
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.system.AppLogUtils
 import kotlinx.coroutines.launch
 
 class HasParamsViewModel(private val repository : SavedDataRepository) : ViewModel() {

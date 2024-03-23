@@ -18,7 +18,7 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 
 import com.yc.toolutils.context.AppToolUtils;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

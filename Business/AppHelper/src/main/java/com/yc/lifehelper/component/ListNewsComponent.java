@@ -18,7 +18,7 @@ import com.yc.library.api.ConstantImageApi;
 import com.yc.library.api.ConstantStringApi;
 import com.yc.library.bean.ListNewsData;
 import com.yc.lifehelper.R;
-import com.yc.toolutils.AppTimeUtils;
+import com.yc.toolutils.time.AppTimeUtils;
 
 import org.yczbj.ycrefreshviewlib.inter.InterItemView;
 import org.yczbj.ycrefreshviewlib.item.RecycleViewItemLine;

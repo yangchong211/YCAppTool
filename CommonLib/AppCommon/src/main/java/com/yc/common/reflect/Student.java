@@ -1,6 +1,6 @@
 package com.yc.common.reflect;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 public class Student implements InterStudent{
 

@@ -1,7 +1,7 @@
 package com.yc.imageserver.progress;
 
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import org.jetbrains.annotations.NotNull;
 

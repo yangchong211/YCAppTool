@@ -3,7 +3,7 @@ package com.yc.jetpack.study.model
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.yc.toolutils.AppLogUtils
+import com.yc.toolutils.system.AppLogUtils
 
 class SavedDataViewModel2(private val correction: String ,
                           private val repository : SavedDataRepository) : ViewModel() {

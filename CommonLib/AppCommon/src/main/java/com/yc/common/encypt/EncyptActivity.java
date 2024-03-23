@@ -18,7 +18,7 @@ import com.yc.common.R;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.appencryptlib.Md5EncryptUtils;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.File;
 import java.security.KeyPair;

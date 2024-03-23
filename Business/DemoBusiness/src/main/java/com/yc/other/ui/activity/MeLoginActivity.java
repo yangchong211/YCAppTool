@@ -19,7 +19,7 @@ import com.yc.appedittext.PasswordEditText;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 /**
  * <pre>

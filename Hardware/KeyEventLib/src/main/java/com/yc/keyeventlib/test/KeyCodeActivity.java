@@ -12,7 +12,7 @@ import com.yc.keyeventlib.board.AndroidKeyBoard;
 import com.yc.keyeventlib.board.KeyEventManager;
 import com.yc.keyeventlib.board.ResultCallback;
 import com.yc.keyeventlib.code.IKeyEvent;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 import com.yc.toolutils.click.ClickHelper;
 
 public class KeyCodeActivity extends AppCompatActivity {

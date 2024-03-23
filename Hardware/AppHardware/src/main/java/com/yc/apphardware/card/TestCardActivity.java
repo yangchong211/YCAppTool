@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yc.cardmanager.CardHelper;
 import com.yc.apphardware.R;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 public class TestCardActivity extends AppCompatActivity {
 

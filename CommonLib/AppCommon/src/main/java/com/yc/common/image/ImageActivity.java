@@ -20,8 +20,8 @@ import com.yc.compress.image.PicCalculateUtils;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toolutils.intent.AppIntentUtils;
-import com.yc.toolutils.AppLogUtils;
-import com.yc.toolutils.AppWindowUtils;
+import com.yc.toolutils.system.AppLogUtils;
+import com.yc.toolutils.appinfo.AppWindowUtils;
 
 import java.io.File;
 

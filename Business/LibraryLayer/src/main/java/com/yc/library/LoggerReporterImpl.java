@@ -1,7 +1,7 @@
 package com.yc.library;
 
 import com.yc.appcommoninter.report.LoggerReporter;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 public class LoggerReporterImpl extends LoggerReporter {
     @Override

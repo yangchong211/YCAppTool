@@ -8,7 +8,7 @@ import com.yc.monitortimelib.monitor.TimeMonitorHelper;
 import com.yc.netlib.utils.NetworkTool;
 import com.yc.crash.lib.CrashHandler;
 import com.yc.crash.lib.CrashListener;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;

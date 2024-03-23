@@ -1,7 +1,6 @@
 package com.yc.cpu;
 
 
-import android.os.Build;
 import android.text.TextUtils;
 
 import com.yc.toolutils.AppLogUtils;

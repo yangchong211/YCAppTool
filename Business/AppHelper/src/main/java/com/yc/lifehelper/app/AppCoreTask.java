@@ -28,7 +28,7 @@ import com.yc.longalive.LongAliveMonitor;
 import com.yc.longalive.LongAliveMonitorConfig;
 import com.yc.store.config.CacheConfig;
 import com.yc.store.config.CacheInitHelper;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import org.jetbrains.annotations.NotNull;
 

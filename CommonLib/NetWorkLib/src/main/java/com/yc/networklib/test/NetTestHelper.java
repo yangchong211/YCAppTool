@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 
 import com.yc.easyexecutor.DelegateTaskExecutor;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

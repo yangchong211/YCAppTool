@@ -13,7 +13,6 @@ import com.yc.kernel.utils.PlayerConstant;
 import com.yc.kernel.utils.PlayerFactoryUtils;
 
 import com.yc.music.tool.BaseAppHelper;
-import com.yc.toolutils.AppSpUtils;
 import com.yc.video.config.VideoPlayerConfig;
 import com.yc.video.player.VideoViewManager;
 

@@ -15,7 +15,7 @@ import com.yc.library.base.mvp.BaseActivity;
 import com.yc.monitorfilelib.FileExplorerActivity;
 import com.yc.roundcorner.view.RoundTextView;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.io.File;
 

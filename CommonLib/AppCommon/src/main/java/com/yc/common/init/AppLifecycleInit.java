@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.res.Configuration;
 
 import com.yc.activitymanager.application.BaseApplicationHelper;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 public class AppLifecycleInit extends BaseApplicationHelper {
 

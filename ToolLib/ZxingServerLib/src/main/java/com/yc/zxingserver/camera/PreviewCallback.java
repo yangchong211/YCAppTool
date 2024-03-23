@@ -4,7 +4,7 @@ import android.hardware.Camera;
 import android.os.Handler;
 import android.os.Message;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 
 @SuppressWarnings("deprecation") // camera APIs

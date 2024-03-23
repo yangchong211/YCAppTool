@@ -18,7 +18,7 @@ import com.yc.library.base.config.Constant;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.KeyboardUtils;
+import com.yc.toolutils.hardware.KeyboardUtils;
 
 
 /**

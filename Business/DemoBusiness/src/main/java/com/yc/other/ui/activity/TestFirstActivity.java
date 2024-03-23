@@ -4,11 +4,8 @@ import android.view.View;
 import com.yc.library.base.mvp.BaseActivity;
 import com.yc.other.R;
 import com.yc.toastutils.ToastUtils;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

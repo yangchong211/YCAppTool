@@ -18,7 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.yc.statusbar.dlBar.DlStatusBar;
-import com.yc.toolutils.AppRomUtils;
+import com.yc.toolutils.system.AppRomUtils;
 
 import cn.ycbjie.ycstatusbar.R;
 

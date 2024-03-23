@@ -2,7 +2,7 @@ package com.yc.toolutils.sntp;
 
 import android.os.SystemClock;
 
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import static com.yc.toolutils.sntp.CacheInterface.KEY_CACHED_BOOT_TIME;
 import static com.yc.toolutils.sntp.CacheInterface.KEY_CACHED_DEVICE_UPTIME;

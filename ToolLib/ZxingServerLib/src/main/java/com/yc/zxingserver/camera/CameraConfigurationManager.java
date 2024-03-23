@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import com.yc.zxingserver.camera.open.CameraFacing;
 import com.yc.zxingserver.camera.open.OpenCamera;
 import com.yc.zxingserver.scan.Preferences;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 
 /**

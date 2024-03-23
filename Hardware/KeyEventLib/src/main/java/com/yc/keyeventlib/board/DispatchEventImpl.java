@@ -9,7 +9,7 @@ import android.view.InputDevice;
 import android.view.KeyEvent;
 
 import com.yc.keyeventlib.code.IKeyEvent;
-import com.yc.toolutils.AppLogUtils;
+import com.yc.toolutils.system.AppLogUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
