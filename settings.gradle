@@ -67,17 +67,27 @@ include ':AppReceiver', ':ToolUtilsLib', ':AppBaseStore',
 project(':AppReceiver').projectDir = new File('CommonLib/AppReceiver')
 //综合工具库：
 //字节转化，点击，克隆clone，上下文，文件，intent，内存，权限，反射，屏幕，分享，时间校验，store，io流工具，uri工具，zip压缩工具
-//清除，app信息，设备
+//清除，app信息，设备，时间工具，系统，堆栈，sp
 project(':ToolUtilsLib').projectDir = new File('CommonLib/ToolUtilsLib')
+//综合K-V存储库：disk磁盘存储，sp存储，lru内存存储，mmkv存储，store存储
 project(':AppBaseStore').projectDir = new File('CommonLib/AppBaseStore')
+//综合base类库：activity，adapter，application，fragment，handler，provider，service，vp等
 project(':BaseClassLib').projectDir = new File('CommonLib/BaseClassLib')
+//日志库
 project(':AppLogLib').projectDir = new File('CommonLib/AppLogLib')
+//重启库：闹钟重启，服务重启，launcher重启，获取清单main重启
 project(':AppRestartLib').projectDir = new File('CommonLib/AppRestartLib')
+//jetpack公共库：lifecycle，livedata，navigation
 project(':ArchitectureLib').projectDir = new File('CommonLib/ArchitectureLib')
+//组件库：activity栈管理，fragment栈管理，application管理
 project(':ComponentManager').projectDir = new File('CommonLib/ComponentManager')
+//通用接口库：日志，异常，事件，回调等各种回调
 project(':AppCommonInter').projectDir = new File('CommonLib/AppCommonInter')
+//加解密：des，aes，rc4，rsa
 project(':AppEncryptLib').projectDir = new File('CommonLib/AppEncryptLib')
+//
 project(':NetWorkLib').projectDir = new File('CommonLib/NetWorkLib')
+//Task任务：
 project(':AppTaskLib').projectDir = new File('CommonLib/AppTaskLib')
 
 
