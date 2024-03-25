@@ -140,7 +140,7 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
 
     @Override
     public void play(AudioPlayData data) {
-        synchronized (this.mTts) {
+        synchronized (this) {
             //如果是在说话中，则先停止
             if (this.mTts.isSpeaking()) {
                 this.mTts.stop();
@@ -165,9 +165,11 @@ public class DefaultTtsPlayer extends AbstractAudioWrapper implements TextToSpee
     /**
      * 在不需要使用 TTS 功能时，应及时停止语音合成并释放相关资源，以避免资源浪费。
      * 可以使用 stop() 方法停止当前的语音合成，使用 shutdown() 方法释放 TTS 引擎。
+     * 释放了引擎后需要再次初始化引擎才可以播放tts
      */
     @Override
     public void release() {
+        //先停止播放
         stop();
         //关闭TTS
         this.mTts.shutdown();
