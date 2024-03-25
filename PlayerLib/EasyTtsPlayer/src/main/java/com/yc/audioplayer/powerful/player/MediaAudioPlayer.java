@@ -63,14 +63,11 @@ public class MediaAudioPlayer extends AbstractAudioWrapper {
                 mMediaPlayer.setOnCompletionListener(mOnCompletionListener);
                 mMediaPlayer.setOnErrorListener(onErrorListener);
                 mMediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-                mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-                        try {
-                            mMediaPlayer.start();
-                        } catch (Throwable e) {
-                            e.printStackTrace();
-                        }
+                mMediaPlayer.setOnPreparedListener(mp -> {
+                    try {
+                        mMediaPlayer.start();
+                    } catch (Throwable e) {
+                        e.printStackTrace();
                     }
                 });
                 mMediaPlayer.prepare();

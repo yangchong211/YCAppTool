@@ -33,6 +33,7 @@ public class AudioTtsDeque {
 
     /**
      * 将播放内容tts添加到对应级别待播放队列中
+     * 关于addTask添加tts播放任务，这里用到了lock锁，在开始添加调用lock()，在执行结束调用unlock释放
      * @param tts                           tts
      */
     public void add(AudioPlayData tts) {
