@@ -35,6 +35,15 @@
 
 
 
+#### 技术参考博客
+- TTS机制
+  - https://blog.csdn.net/androiddevs/article/details/132242203
+  - https://zhuanlan.zhihu.com/p/606517765
+- 车载tts
+  - https://blog.csdn.net/allisonchen/article/details/125571833
+
+
+
 
 
 
