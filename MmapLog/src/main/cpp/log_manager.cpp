@@ -79,18 +79,23 @@ static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
     return reinterpret_cast<long>(logBuffer);
 }
 
-static void writeNative(JNIEnv *env, jobject instance, jlong ptr,
-                        jstring log_) {
+static void writeNative(JNIEnv *env, jobject instance, jlong ptr, jstring log_) {
     //注意：log_打印出来乱码，需要用GetStringUTFChars进行转化
     const char *log = env->GetStringUTFChars(log_, 0);
-    logPrintI("writeNative 方法被调用 log_: %s", log);
     jsize log_len = env->GetStringUTFLength(log_);
+    logPrintD("writeNative 方法被调用 log_: %s , log_len: %d", log , log_len);
+    //重新解释转换（Reinterpret Cast）
+    //重新解释转换将一个数据类型的值重新解释为另一个数据类型的值，通常用于在不同的数据类型之间进行转换。
+    //重新解释转换不进行任何类型检查，因此可能会导致未定义的行为。
     log_buffer *logBuffer = reinterpret_cast<log_buffer *>(ptr);
-    // 缓存写不下时异步刷新
+    //缓存写不下时异步刷新
     if (log_len >= logBuffer->emptySize()) {
+        logPrintD("writeNative 方法被调用 缓存写不下时异步刷新");
         logBuffer->async_flush(fileFlush);
     }
+    //append添加
     logBuffer->append(log, (size_t) log_len);
+    //释放字符串内存
     env->ReleaseStringUTFChars(log_, log);
 }
 

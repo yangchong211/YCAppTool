@@ -23,10 +23,7 @@ public class LogInit {
 
     public static void init(Context context) {
         int level = LogLevel.DEBUG;
-        Interceptor wrapInterceptor = logData -> {
-            logData.tag = "YCLog-" + logData.tag;
-            return true;
-        };
+        Interceptor wrapInterceptor = logData -> true;
         AndroidAppender androidAppender = new AndroidAppender.Builder()
                 .setLevel(level)
                 .addInterceptor(wrapInterceptor)
