@@ -1,6 +1,6 @@
-package me.pqpo.librarylog4a.test;
+package com.yc.mmaplog.test;
 
-import static me.pqpo.librarylog4a.test.LogInit.BUFFER_SIZE;
+import static com.yc.mmaplog.test.LogInit.BUFFER_SIZE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.yc.mmaplog.LogManager;
+import com.yc.mmaplog.appender.AbsAppender;
+import com.yc.mmaplog.appender.AndroidAppender;
+import com.yc.mmaplog.appender.FileAppender;
+import com.yc.mmaplog.inter.Formatter;
+import com.yc.mmaplog.inter.InterAppender;
+import com.yc.mmaplog.inter.InterLogger;
+import com.yc.mmaplog.logger.AppenderLogger;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,15 +29,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import me.pqpo.librarylog4a.LogManager;
-import me.pqpo.librarylog4a.R;
-import me.pqpo.librarylog4a.logger.AppenderLogger;
-import me.pqpo.librarylog4a.appender.AbsAppender;
-import me.pqpo.librarylog4a.appender.AndroidAppender;
-import me.pqpo.librarylog4a.inter.InterAppender;
-import me.pqpo.librarylog4a.appender.FileAppender;
-import me.pqpo.librarylog4a.inter.Formatter;
-import me.pqpo.librarylog4a.inter.InterLogger;
+import me.pqpo.mmaplog.R;
 
 public class MmapLogActivity extends AppCompatActivity {
 

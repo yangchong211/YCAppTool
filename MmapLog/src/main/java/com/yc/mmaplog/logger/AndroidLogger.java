@@ -1,8 +1,8 @@
-package me.pqpo.librarylog4a.logger;
+package com.yc.mmaplog.logger;
 
 import android.util.Log;
 
-import me.pqpo.librarylog4a.inter.InterLogger;
+import com.yc.mmaplog.inter.InterLogger;
 
 
 public class AndroidLogger implements InterLogger {

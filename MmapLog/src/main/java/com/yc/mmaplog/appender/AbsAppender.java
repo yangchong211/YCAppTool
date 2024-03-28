@@ -1,12 +1,13 @@
-package me.pqpo.librarylog4a.appender;
+package com.yc.mmaplog.appender;
+
+import com.yc.mmaplog.interceptor.LevelInterceptor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import me.pqpo.librarylog4a.LogPoolData;
-import me.pqpo.librarylog4a.inter.InterAppender;
-import me.pqpo.librarylog4a.inter.Interceptor;
-import me.pqpo.librarylog4a.interceptor.LevelInterceptor;
+import com.yc.mmaplog.LogPoolData;
+import com.yc.mmaplog.inter.InterAppender;
+import com.yc.mmaplog.inter.Interceptor;
 
 
 public abstract class AbsAppender implements InterAppender {

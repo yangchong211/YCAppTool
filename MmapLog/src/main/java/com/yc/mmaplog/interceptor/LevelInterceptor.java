@@ -1,8 +1,8 @@
-package me.pqpo.librarylog4a.interceptor;
+package com.yc.mmaplog.interceptor;
 
-import me.pqpo.librarylog4a.LogLevel;
-import me.pqpo.librarylog4a.LogPoolData;
-import me.pqpo.librarylog4a.inter.Interceptor;
+import com.yc.mmaplog.LogLevel;
+import com.yc.mmaplog.LogPoolData;
+import com.yc.mmaplog.inter.Interceptor;
 
 
 public class LevelInterceptor implements Interceptor {

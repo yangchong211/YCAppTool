@@ -1,25 +1,22 @@
-package me.pqpo.librarylog4a.test;
+package com.yc.mmaplog.test;
 
-import java.io.BufferedOutputStream;
+import com.yc.mmaplog.appender.AbsAppender;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import me.pqpo.librarylog4a.appender.AbsAppender;
-
 /**
  * Created by yangchong on 2017/11/28.
  */
-public class BufferFileAppender extends AbsAppender {
+public class NoBufferFileAppender extends AbsAppender {
 
     private File logFile;
-    private BufferedOutputStream outputStream;
-    private int bufferSize;
+    private OutputStream outputStream;
 
-    public BufferFileAppender(File logFile, int bufferSize) {
+    public NoBufferFileAppender(File logFile) {
         this.logFile = logFile;
-        this.bufferSize = bufferSize;
         openFileOutputStream();
     }
 
@@ -29,8 +26,7 @@ public class BufferFileAppender extends AbsAppender {
                 if(!logFile.createNewFile()) {
                     return;
                 }
-                FileOutputStream os = new FileOutputStream(logFile);
-                outputStream = new BufferedOutputStream(os, bufferSize);
+                outputStream = new FileOutputStream(logFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }

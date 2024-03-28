@@ -1,4 +1,4 @@
-package me.pqpo.librarylog4a;
+package com.yc.mmaplog;
 
 import android.util.Log;
 

@@ -1,7 +1,7 @@
-package me.pqpo.librarylog4a.inter;
+package com.yc.mmaplog.inter;
 
 
-import me.pqpo.librarylog4a.LogPoolData;
+import com.yc.mmaplog.LogPoolData;
 
 
 public interface Interceptor {

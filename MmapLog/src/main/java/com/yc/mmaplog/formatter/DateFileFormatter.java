@@ -1,12 +1,12 @@
-package me.pqpo.librarylog4a.formatter;
+package com.yc.mmaplog.formatter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import me.pqpo.librarylog4a.LogLevel;
-import me.pqpo.librarylog4a.inter.Formatter;
+import com.yc.mmaplog.LogLevel;
+import com.yc.mmaplog.inter.Formatter;
 
 
 public class DateFileFormatter implements Formatter {

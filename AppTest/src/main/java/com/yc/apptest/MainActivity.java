@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import me.pqpo.librarylog4a.test.MmapLogActivity;
+import com.yc.mmaplog.test.MmapLogActivity;
 
 public class MainActivity extends AppCompatActivity {
 

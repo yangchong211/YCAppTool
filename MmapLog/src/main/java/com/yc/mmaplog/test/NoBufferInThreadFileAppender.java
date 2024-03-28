@@ -1,6 +1,8 @@
-package me.pqpo.librarylog4a.test;
+package com.yc.mmaplog.test;
 
 import android.util.Log;
+
+import com.yc.mmaplog.appender.AbsAppender;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,8 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.LinkedBlockingQueue;
-
-import me.pqpo.librarylog4a.appender.AbsAppender;
 
 /**
  * Created by yangchong on 2017/11/28.

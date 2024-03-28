@@ -1,13 +1,13 @@
-package me.pqpo.librarylog4a;
+package com.yc.mmaplog;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.UnknownHostException;
 
-import me.pqpo.librarylog4a.logger.AndroidLogger;
-import me.pqpo.librarylog4a.inter.InterLogger;
+import com.yc.mmaplog.logger.AndroidLogger;
+import com.yc.mmaplog.inter.InterLogger;
 
-import static me.pqpo.librarylog4a.LogLevel.*;
+import static com.yc.mmaplog.LogLevel.*;
 
 import android.util.Log;
 

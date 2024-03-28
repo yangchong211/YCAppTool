@@ -1,4 +1,4 @@
-package me.pqpo.librarylog4a.inter;
+package com.yc.mmaplog.inter;
 
 public interface InterLogger {
 

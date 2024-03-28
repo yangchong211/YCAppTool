@@ -143,7 +143,7 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
     if (vm->GetEnv((void **) &env, JNI_VERSION_1_4) != JNI_OK) {
         return JNI_FALSE;
     }
-    jclass classDocScanner = env->FindClass("me/pqpo/librarylog4a/LogNativeHelper");
+    jclass classDocScanner = env->FindClass("com/yc/mmaplog/LogNativeHelper");
     //如何打印class
     //logPrintD("JNI_OnLoad classDocScanner: %s" ,classDocScanner);
     jint nMethods = sizeof(gMethods) / sizeof(gMethods[0]);

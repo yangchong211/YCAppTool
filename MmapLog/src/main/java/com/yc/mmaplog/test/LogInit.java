@@ -1,19 +1,20 @@
-package me.pqpo.librarylog4a.test;
+package com.yc.mmaplog.test;
 
 import android.content.Context;
+
+import com.yc.mmaplog.LogManager;
+import com.yc.mmaplog.appender.AndroidAppender;
+import com.yc.mmaplog.appender.FileAppender;
+import com.yc.mmaplog.formatter.DateFileFormatter;
+import com.yc.mmaplog.inter.Interceptor;
+import com.yc.mmaplog.logger.AppenderLogger;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import me.pqpo.librarylog4a.LogLevel;
-import me.pqpo.librarylog4a.LogManager;
-import me.pqpo.librarylog4a.logger.AppenderLogger;
-import me.pqpo.librarylog4a.appender.AndroidAppender;
-import me.pqpo.librarylog4a.appender.FileAppender;
-import me.pqpo.librarylog4a.formatter.DateFileFormatter;
-import me.pqpo.librarylog4a.inter.Interceptor;
+import com.yc.mmaplog.LogLevel;
 
 
 public class LogInit {
