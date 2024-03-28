@@ -55,13 +55,25 @@ static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
     if (buffer_ptr == nullptr) {
         buffer_ptr = new char[buffer_size];
         map_buffer = false;
+        logPrintW("initNative openMMap 如果打开 mmap 失败，则降级使用内存缓存");
     }
     log_buffer *logBuffer = new log_buffer(buffer_ptr, buffer_size);
     logBuffer->setAsyncFileFlush(fileFlush);
     //将buffer内的数据清0， 并写入日志文件路径
     logBuffer->initData((char *) log_path, strlen(log_path), compress_);
     logBuffer->map_buffer = map_buffer;
-
+    /*方式1：native层处理*/
+    /*检测是否有异常*/
+    jboolean hasException = env->ExceptionCheck();
+    if (hasException == JNI_TRUE) {
+        logPrintW("initNative openMMap 检测到有异常");
+        //打印异常，同Java中的printExceptionStack;
+        env->ExceptionDescribe();
+        //清除当前异常
+        env->ExceptionClear();
+        return reinterpret_cast<long>(logBuffer);
+    }
+    //释放字符串内存
     env->ReleaseStringUTFChars(buffer_path_, buffer_path);
     env->ReleaseStringUTFChars(log_path_, log_path);
     return reinterpret_cast<long>(logBuffer);
