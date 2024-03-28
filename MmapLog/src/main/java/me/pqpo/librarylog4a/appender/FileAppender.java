@@ -15,12 +15,11 @@ import me.pqpo.librarylog4a.inter.Interceptor;
 
 public class FileAppender extends AbsAppender {
 
-    private final LogNativeHelper logBuffer;
-
+    private final LogNativeHelper logNativeHelper;
     private Formatter formatter;
 
     protected FileAppender(Builder builder) {
-        logBuffer = new LogNativeHelper(builder.bufferFilePath, builder.bufferSize,
+        logNativeHelper = new LogNativeHelper(builder.bufferFilePath, builder.bufferSize,
                 builder.logFilePath, builder.compress);
         setMaxSingleLength(builder.bufferSize);
         setLevel(builder.level);
@@ -29,19 +28,19 @@ public class FileAppender extends AbsAppender {
     }
 
     public String getBufferPath() {
-        return logBuffer.getBufferPath();
+        return logNativeHelper.getBufferPath();
     }
 
     public int getBufferSize() {
-        return logBuffer.getBufferSize();
+        return logNativeHelper.getBufferSize();
     }
 
     public String getLogPath() {
-        return logBuffer.getLogPath();
+        return logNativeHelper.getLogPath();
     }
 
     public void changeLogPath(String logPath) {
-        logBuffer.changeLogPath(logPath);
+        logNativeHelper.changeLogPath(logPath);
     }
 
     public void setFormatter(Formatter formatter) {
@@ -52,19 +51,19 @@ public class FileAppender extends AbsAppender {
 
     @Override
     protected void doAppend(int logLevel, String tag, String msg) {
-        logBuffer.write(formatter.format(logLevel, tag, msg));
+        logNativeHelper.write(formatter.format(logLevel, tag, msg));
     }
 
     @Override
     public void flush() {
         super.flush();
-        logBuffer.flushAsync();
+        logNativeHelper.flushAsync();
     }
 
     @Override
     public void release() {
         super.release();
-        logBuffer.release();
+        logNativeHelper.release();
     }
 
     public static class Builder {
@@ -137,6 +136,11 @@ public class FileAppender extends AbsAppender {
             return new FileAppender(this);
         }
 
+        /**
+         * 获取缓冲路径
+         * @param context       上下文
+         * @return              路径
+         */
         private String getDefaultBufferPath(Context context) {
             File bufferFile;
             if (Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)

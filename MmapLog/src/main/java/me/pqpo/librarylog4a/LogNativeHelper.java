@@ -2,7 +2,7 @@ package me.pqpo.librarylog4a;
 
 import android.util.Log;
 
-public class LogNativeHelper {
+public final class LogNativeHelper {
 
     private static final String TAG = "LogBuffer";
 
@@ -19,7 +19,7 @@ public class LogNativeHelper {
         this.compress = compress;
         try {
             ptr = initNative(bufferPath, capacity, logPath, compress);
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, LogManager.getStackTraceString(e));
         }
     }
@@ -29,7 +29,7 @@ public class LogNativeHelper {
             try {
                 changeLogPathNative(ptr, logPath);
                 this.logPath = logPath;
-            }catch (Exception e) {
+            } catch (Exception e) {
                 Log.e(TAG, LogManager.getStackTraceString(e));
             }
         }
@@ -55,7 +55,7 @@ public class LogNativeHelper {
         if (ptr != 0) {
             try {
                 writeNative(ptr, log);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 Log.e(TAG, LogManager.getStackTraceString(e));
             }
         }
@@ -65,7 +65,7 @@ public class LogNativeHelper {
         if (ptr != 0) {
             try {
                 flushAsyncNative(ptr);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 Log.e(TAG, LogManager.getStackTraceString(e));
             }
         }
@@ -75,7 +75,7 @@ public class LogNativeHelper {
         if (ptr != 0) {
             try {
                 releaseNative(ptr);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 Log.e(TAG, LogManager.getStackTraceString(e));
             }
             ptr = 0;
@@ -83,7 +83,7 @@ public class LogNativeHelper {
     }
 
     static {
-        System.loadLibrary("log4a-lib");
+        System.loadLibrary("log_manager");
     }
 
     private native static long initNative(String bufferPath, int capacity, String logPath, boolean compress);

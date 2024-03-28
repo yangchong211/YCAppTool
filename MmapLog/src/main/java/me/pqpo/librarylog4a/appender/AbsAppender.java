@@ -20,6 +20,7 @@ public abstract class AbsAppender implements InterAppender {
     private final LevelInterceptor levelInterceptor = new LevelInterceptor();
 
     public AbsAppender() {
+        //添加拦截器
         addInterceptor(levelInterceptor);
     }
 
