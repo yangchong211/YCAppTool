@@ -17,7 +17,7 @@ add_library(
         # 需要参与编译的src文件，如果有多个，则使用空格或者换行包括进来
         # 这个是程序入口
         log_manager.cpp
-        LogBuffer.cpp
+        log_buffer.cpp
         LogBufferHeader.cpp
         FlushBuffer.cpp
         AsyncFileFlush.cpp

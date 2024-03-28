@@ -4,7 +4,7 @@ import android.util.Log;
 
 public final class LogNativeHelper {
 
-    private static final String TAG = "LogBuffer";
+    private static final String TAG = "log_buffer";
 
     private long ptr = 0;
     private String logPath;

@@ -1,8 +1,8 @@
 
-#include "LogBuffer.h"
+#include "log_buffer.h"
 
 
-LogBuffer::LogBuffer(char *ptr, size_t buffer_size) :
+log_buffer::log_buffer(char *ptr, size_t buffer_size) :
         buffer_ptr(ptr),
         buffer_size(buffer_size),
         logHeader(buffer_ptr, buffer_size) {
@@ -22,19 +22,19 @@ LogBuffer::LogBuffer(char *ptr, size_t buffer_size) :
     memset(&zStream, 0, sizeof(zStream));
 }
 
-LogBuffer::~LogBuffer() {
+log_buffer::~log_buffer() {
     release();
 }
 
-size_t LogBuffer::length() {
+size_t log_buffer::length() {
     return write_ptr - data_ptr;
 }
 
-void LogBuffer::setLength(size_t len) {
+void log_buffer::setLength(size_t len) {
     logHeader.setLogLen(len);
 }
 
-size_t LogBuffer::append(const char *log, size_t len) {
+size_t log_buffer::append(const char *log, size_t len) {
     std::lock_guard<std::recursive_mutex> lck_append(log_mtx);
 
     if (length() == 0) {
@@ -64,19 +64,19 @@ size_t LogBuffer::append(const char *log, size_t len) {
     return writeSize;
 }
 
-void LogBuffer::setAsyncFileFlush(AsyncFileFlush *_fileFlush) {
+void log_buffer::setAsyncFileFlush(AsyncFileFlush *_fileFlush) {
     fileFlush = _fileFlush;
 }
 
-void LogBuffer::async_flush() {
+void log_buffer::async_flush() {
     async_flush(fileFlush);
 }
 
-void LogBuffer::async_flush(AsyncFileFlush *fileFlush) {
+void log_buffer::async_flush(AsyncFileFlush *fileFlush) {
     async_flush(fileFlush, nullptr);
 }
 
-void LogBuffer::async_flush(AsyncFileFlush *fileFlush, LogBuffer *releaseThis) {
+void log_buffer::async_flush(AsyncFileFlush *fileFlush, log_buffer *releaseThis) {
     if (fileFlush == nullptr) {
         if (releaseThis != nullptr) {
             delete releaseThis;
@@ -98,14 +98,14 @@ void LogBuffer::async_flush(AsyncFileFlush *fileFlush, LogBuffer *releaseThis) {
     }
 }
 
-void LogBuffer::clear() {
+void log_buffer::clear() {
     std::lock_guard<std::recursive_mutex> lck_clear(log_mtx);
     write_ptr = data_ptr;
     memset(write_ptr, '\0', emptySize());
     setLength(length());
 }
 
-void LogBuffer::release() {
+void log_buffer::release() {
     std::lock_guard<std::recursive_mutex> lck_release(log_mtx);
     if (is_compress && Z_NULL != zStream.state) {
         deflateEnd(&zStream);
@@ -120,11 +120,11 @@ void LogBuffer::release() {
     }
 }
 
-size_t LogBuffer::emptySize() {
+size_t log_buffer::emptySize() {
     return buffer_size - (write_ptr - buffer_ptr);
 }
 
-void LogBuffer::initData(char *log_path, size_t log_path_len, bool is_compress) {
+void log_buffer::initData(char *log_path, size_t log_path_len, bool is_compress) {
     std::lock_guard<std::recursive_mutex> lck_release(log_mtx);
     memset(buffer_ptr, '\0', buffer_size);
 
@@ -144,11 +144,11 @@ void LogBuffer::initData(char *log_path, size_t log_path_len, bool is_compress) 
     openSetLogFile(log_path);
 }
 
-char *LogBuffer::getLogPath() {
+char *log_buffer::getLogPath() {
     return logHeader.getLogPath();
 }
 
-bool LogBuffer::initCompress(bool compress) {
+bool log_buffer::initCompress(bool compress) {
     is_compress = compress;
     if (is_compress) {
         zStream.zalloc = Z_NULL;
@@ -161,7 +161,7 @@ bool LogBuffer::initCompress(bool compress) {
     return false;
 }
 
-bool LogBuffer::openSetLogFile(const char *log_path) {
+bool log_buffer::openSetLogFile(const char *log_path) {
     if (log_path != nullptr) {
         FILE *_file_log = fopen(log_path, "ab+");
         if (_file_log != NULL) {
@@ -172,7 +172,7 @@ bool LogBuffer::openSetLogFile(const char *log_path) {
     return false;
 }
 
-void LogBuffer::changeLogPath(char *log_path) {
+void log_buffer::changeLogPath(char *log_path) {
     if (log_file != nullptr) {
         async_flush();
     }

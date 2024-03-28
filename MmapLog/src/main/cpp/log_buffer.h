@@ -17,10 +17,10 @@
 
 using namespace log_header;
 
-class LogBuffer {
+class log_buffer {
 public:
-    LogBuffer(char* ptr, size_t capacity);
-    ~LogBuffer();
+    log_buffer(char* ptr, size_t capacity);
+    ~log_buffer();
 
     void initData(char *log_path, size_t log_path_len, bool is_compress);
     size_t length();
@@ -31,7 +31,7 @@ public:
     void setAsyncFileFlush(AsyncFileFlush *fileFlush);
     void async_flush();
     void async_flush(AsyncFileFlush *fileFlush);
-    void async_flush(AsyncFileFlush *fileFlush, LogBuffer *releaseThis);
+    void async_flush(AsyncFileFlush *fileFlush, log_buffer *releaseThis);
     void changeLogPath(char *log_path);
 
 public:

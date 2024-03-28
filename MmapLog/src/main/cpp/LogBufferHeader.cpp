@@ -1,6 +1,5 @@
 
 
-//#include "LogBufferHeader.h"
 #include <cstring>
 #include <ctime>
 #include "LogBufferHeader.h"
