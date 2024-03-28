@@ -6,6 +6,7 @@
 #include <asm-generic/mman-common.h>
 #include <sys/mman.h>
 #include "LogBuffer.h"
+#include "log_utils.h"
 
 
 static char *openMMap(int buffer_fd, size_t buffer_size);
@@ -19,6 +20,7 @@ static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
     //env
     const char *buffer_path = env->GetStringUTFChars(buffer_path_, 0);
     const char *log_path = env->GetStringUTFChars(log_path_, 0);
+    logPrintD("initNative 方法被调用 \nbuffer_path: %s \nbuffer_path: %s", buffer_path, log_path);
     size_t buffer_size = static_cast<size_t>(capacity);
     int buffer_fd = open(buffer_path, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     // buffer 的第一个字节会用于存储日志路径名称长度，后面紧跟日志路径，之后才是日志信息
@@ -46,6 +48,7 @@ static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
 }
 
 static char *openMMap(int buffer_fd, size_t buffer_size) {
+    logPrintD("openMMap方法被调用了 buffer_fd: %d", buffer_fd);
     char *map_ptr = nullptr;
     if (buffer_fd != -1) {
         // 写脏数据
@@ -62,6 +65,7 @@ static char *openMMap(int buffer_fd, size_t buffer_size) {
 }
 
 static void writeDirtyLogToFile(int buffer_fd) {
+    logPrintD("writeDirtyLogToFile buffer_fd: %d", buffer_fd);
     struct stat fileInfo;
     if (fstat(buffer_fd, &fileInfo) >= 0) {
         size_t buffered_size = static_cast<size_t>(fileInfo.st_size);
@@ -84,7 +88,9 @@ static void writeDirtyLogToFile(int buffer_fd) {
 
 static void writeNative(JNIEnv *env, jobject instance, jlong ptr,
                         jstring log_) {
+    //注意：log_打印出来乱码，需要用GetStringUTFChars进行转化
     const char *log = env->GetStringUTFChars(log_, 0);
+    logPrintD("writeNative 方法被调用 log_: %s", log);
     jsize log_len = env->GetStringUTFLength(log_);
     LogBuffer *logBuffer = reinterpret_cast<LogBuffer *>(ptr);
     // 缓存写不下时异步刷新
@@ -96,6 +102,7 @@ static void writeNative(JNIEnv *env, jobject instance, jlong ptr,
 }
 
 static void releaseNative(JNIEnv *env, jobject instance, jlong ptr) {
+    logPrintD("releaseNative 方法被调用");
     LogBuffer *logBuffer = reinterpret_cast<LogBuffer *>(ptr);
     logBuffer->async_flush(fileFlush, logBuffer);
     if (fileFlush != nullptr) {
@@ -106,6 +113,7 @@ static void releaseNative(JNIEnv *env, jobject instance, jlong ptr) {
 
 static void changeLogPathNative(JNIEnv *env, jobject instance, jlong ptr,
                                 jstring logFilePath) {
+    logPrintD("changeLogPathNative 方法被调用");
     const char *log_path = env->GetStringUTFChars(logFilePath, 0);
     LogBuffer *logBuffer = reinterpret_cast<LogBuffer *>(ptr);
     logBuffer->changeLogPath(const_cast<char *>(log_path));
@@ -113,52 +121,31 @@ static void changeLogPathNative(JNIEnv *env, jobject instance, jlong ptr,
 }
 
 static void flushAsyncNative(JNIEnv *env, jobject instance, jlong ptr) {
+    logPrintD("flushAsyncNative 方法被调用");
     LogBuffer *logBuffer = reinterpret_cast<LogBuffer *>(ptr);
     logBuffer->async_flush(fileFlush);
 }
 
 static JNINativeMethod gMethods[] = {
-
-        {
-                "initNative",
-                "(Ljava/lang/String;ILjava/lang/String;Z)J",
-                (void *) initNative
-        },
-
-        {
-                "writeNative",
-                "(JLjava/lang/String;)V",
-                (void *) writeNative
-        },
-
-        {
-                "flushAsyncNative",
-                "(J)V",
-                (void *) flushAsyncNative
-        },
-
-        {
-                "changeLogPathNative",
-                "(JLjava/lang/String;)V",
-                (void *) changeLogPathNative
-        },
-
-        {
-                "releaseNative",
-                "(J)V",
-                (void *) releaseNative
-        }
-
+        {"initNative",          "(Ljava/lang/String;ILjava/lang/String;Z)J", (void *) initNative},
+        {"writeNative",         "(JLjava/lang/String;)V",                    (void *) writeNative},
+        {"flushAsyncNative",    "(J)V",                                      (void *) flushAsyncNative},
+        {"changeLogPathNative", "(JLjava/lang/String;)V",                    (void *) changeLogPathNative},
+        {"releaseNative",       "(J)V",                                      (void *) releaseNative}
 };
+
 
 extern "C"
 JNIEXPORT jint JNICALL
 JNI_OnLoad(JavaVM *vm, void *reserved) {
+    logPrintD("JNI_OnLoad 方法被调用");
     JNIEnv *env = NULL;
     if (vm->GetEnv((void **) &env, JNI_VERSION_1_4) != JNI_OK) {
         return JNI_FALSE;
     }
     jclass classDocScanner = env->FindClass("me/pqpo/librarylog4a/LogNativeHelper");
+    //如何打印class
+    //logPrintD("JNI_OnLoad classDocScanner: %s" ,classDocScanner);
     jint nMethods = sizeof(gMethods) / sizeof(gMethods[0]);
     if (env->RegisterNatives(classDocScanner, gMethods, nMethods) < 0) {
         return JNI_FALSE;

@@ -21,6 +21,7 @@ add_library(
         LogBufferHeader.cpp
         FlushBuffer.cpp
         AsyncFileFlush.cpp
+        log_utils.cpp
 )
 
 find_library( # Sets the name of the path variable.

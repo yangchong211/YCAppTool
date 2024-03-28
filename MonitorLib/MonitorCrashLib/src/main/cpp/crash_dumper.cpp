@@ -406,7 +406,7 @@ void raiseError(int signal) {
     raise(signal);
 }
 
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, "yangchong->", __VA_ARGS__)
+#define logPrintD(...) __android_log_print(ANDROID_LOG_DEBUG, "yangchong->", __VA_ARGS__)
 
 
 extern "C"
@@ -418,16 +418,16 @@ Java_com_yc_crash_nativec_NativeCrashDumper_exception(JNIEnv *env, jobject thiz)
     jthrowable jthrowable1 = env->ExceptionOccurred();
     if (jthrowable1) {
         //进入这里表示出现了异常 小根据需求进行异常的处理
-        LOGD("在native处理异常 不抛给java");
+        logPrintD("在native处理异常 不抛给java");
         env->ExceptionClear();//清除掉当前的异常，防止程序崩溃
         env->GetStaticFieldID(clazz, "test", "Ljava/lang/String;");
     }
-    LOGD("在native处理异常 不抛给java");
+    logPrintD("在native处理异常 不抛给java");
     //2.把异常抛给java
     env->GetStaticFieldID(clazz, "test1", "Ljava/lang/String;");
     if (jthrowable1) {
         //进入这里表示出现了异常 小根据需求进行异常的处理
-        LOGD("把异常抛给java");
+        logPrintD("把异常抛给java");
         env->ExceptionDescribe();
         env->ExceptionClear();//清除掉当前的异常，防止程序崩溃
         env->GetStaticFieldID(clazz, "test", "Ljava/lang/String;");
