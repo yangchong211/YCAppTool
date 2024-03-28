@@ -32,8 +32,7 @@ import me.pqpo.librarylog4a.inter.InterLogger;
 
 public class MmapLogActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity：";
-
+    private static final String TAG = "MmapLog：";
     EditText etContent;
     EditText etThread;
     Button btnWrite;
@@ -68,23 +67,26 @@ public class MmapLogActivity extends AppCompatActivity {
         btnWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                LogManager.i(TAG, "点击时间触发");
                 if (testing) {
                     Toast.makeText(getApplicationContext(), "testing", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 int threads = Integer.valueOf(etThread.getText().toString());
                 if (threads > 500) {
+                    LogManager.i(TAG, "不要超过500个线程");
                     Toast.makeText(getApplicationContext(), "Do not exceed 500 threads", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                LogManager.i(TAG, "开始写入数据拉");
                 final String str = etContent.getText().toString();
-                for (int i=0; i<threads; i++) {
+                for (int i = 0; i < threads; i++) {
                     int count = i;
-                    new Thread(){
+                    new Thread() {
                         @Override
                         public void run() {
                             super.run();
-                            LogManager.i(TAG, str + " --- "  + count);
+                            LogManager.i(TAG, str + " --- " + count);
                         }
                     }.start();
                 }
@@ -124,34 +126,34 @@ public class MmapLogActivity extends AppCompatActivity {
         LogManager.setLogger(logger);
 
         logger.addAppender(createLog4aFileAppender());
-        doPerformanceTest("log4a" ,times);
+        doPerformanceTest("log4a", times);
         LogManager.release();
 
         LogManager.setLogger(logger);
         logger.addAppender(createAndroidLogAppender());
-        doPerformanceTest("android log" ,times);
+        doPerformanceTest("android log", times);
         LogManager.release();
 
         LogManager.setLogger(logger);
         List<String> buffer = new ArrayList<>(times);
         logger.addAppender(createMemAppender(buffer));
-        doPerformanceTest("array list log" ,times);
+        doPerformanceTest("array list log", times);
         buffer.clear();
         LogManager.release();
 
         LogManager.setLogger(logger);
         logger.addAppender(createNoBufferFileAppender());
-        doPerformanceTest("file log(no buffer)" ,times);
+        doPerformanceTest("file log(no buffer)", times);
         LogManager.release();
 
         LogManager.setLogger(logger);
         logger.addAppender(createWithBufferFileAppender());
-        doPerformanceTest("file log(with buffer)" ,times);
+        doPerformanceTest("file log(with buffer)", times);
         LogManager.release();
 
         LogManager.setLogger(logger);
         logger.addAppender(createNoBufferInThreadFileAppender());
-        doPerformanceTest("file log(no buffer in thread)" ,times);
+        doPerformanceTest("file log(no buffer in thread)", times);
         tvTest.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -228,7 +230,7 @@ public class MmapLogActivity extends AppCompatActivity {
         String logPath = "";
         InterLogger logger = LogManager.getLogger();
         if (logger instanceof AppenderLogger) {
-            List<InterAppender> appenderList = ((AppenderLogger)logger).getAppenderList();
+            List<InterAppender> appenderList = ((AppenderLogger) logger).getAppenderList();
             for (InterAppender appender : appenderList) {
                 if (appender instanceof FileAppender) {
                     FileAppender fileAppender = (FileAppender) appender;
@@ -243,7 +245,7 @@ public class MmapLogActivity extends AppCompatActivity {
     public void changeLogPath() {
         InterLogger logger = LogManager.getLogger();
         if (logger instanceof AppenderLogger) {
-            List<InterAppender> appenderList = ((AppenderLogger)logger).getAppenderList();
+            List<InterAppender> appenderList = ((AppenderLogger) logger).getAppenderList();
             for (InterAppender appender : appenderList) {
                 if (appender instanceof FileAppender) {
                     FileAppender fileAppender = (FileAppender) appender;
