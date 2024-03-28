@@ -3,6 +3,7 @@
 
 
 AsyncFileFlush::AsyncFileFlush() {
+    //创建一个异步线程
     async_thread = std::thread(&AsyncFileFlush::async_log_thread, this);
 }
 

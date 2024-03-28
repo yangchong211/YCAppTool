@@ -22,6 +22,7 @@ add_library(
         FlushBuffer.cpp
         AsyncFileFlush.cpp
         log_utils.cpp
+        mmap_helper.cpp
 )
 
 find_library( # Sets the name of the path variable.

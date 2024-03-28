@@ -7,11 +7,8 @@
 #include <sys/mman.h>
 #include "log_buffer.h"
 #include "log_utils.h"
+#include "mmap_helper.h"
 
-
-static char *openMMap(int buffer_fd, size_t buffer_size);
-
-static void writeDirtyLogToFile(int buffer_fd);
 
 static AsyncFileFlush *fileFlush = nullptr;
 
@@ -24,7 +21,7 @@ static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
     //思考一下，为什么直接使用字符串 buffer_path_ 会出现错误提示？
     const char *buffer_path = env->GetStringUTFChars(buffer_path_, 0);
     const char *log_path = env->GetStringUTFChars(log_path_, 0);
-    logPrintD("initNative 方法被调用 \nbuffer_path: %s \nbuffer_path: %s", buffer_path, log_path);
+    logPrintD("initNative 方法被调用 \nbuffer_path: %s \nlog_path: %s", buffer_path, log_path);
     //静态转换  static_cast
     //静态转换是将一种数据类型的值强制转换为另一种数据类型的值。
     //静态转换通常用于比较类型相似的对象之间的转换，例如将 int 类型转换为 float 类型。
@@ -37,15 +34,22 @@ static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
     //flags：打开文件的标志，用于指定文件的打开方式和操作选项。例如，O_RDONLY表示只读打开，O_WRONLY表示只写打开，O_RDWR表示读写打开，O_CREAT表示如果文件不存在则创建文件等。
     //mode：当使用O_CREAT标志创建新文件时，指定文件的权限。它是一个八进制数，例如0644表示文件权限为rw-r--r--。
     int buffer_fd = open(buffer_path, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    if (buffer_fd == -1) {
+        //我们使用open函数打开名为"buffer_path"的文件，以只写方式打开，并在需要时创建文件。如果打开文件失败，我们使用perror函数打印错误信息。
+        perror("initNative fcntl open file error");
+    }
     // buffer 的第一个字节会用于存储日志路径名称长度，后面紧跟日志路径，之后才是日志信息
-
+    logPrintD("initNative 打开文件 buffer_fd: %d", buffer_fd);
     //创建对象
     if (fileFlush == nullptr) {
         fileFlush = new AsyncFileFlush();
     }
     // 加上头占用的大小
     buffer_size = buffer_size + LogBufferHeader::calculateHeaderLen(strlen(log_path));
-    char *buffer_ptr = openMMap(buffer_fd, buffer_size);
+    mmap_helper *mmapHelper = new mmap_helper(fileFlush);
+    // 打开MMap
+    char *buffer_ptr = mmapHelper->openMMap(buffer_fd, buffer_size);
+    logPrintD("initNative openMMap buffer_ptr: %s", buffer_ptr);
     bool map_buffer = true;
     //如果打开 mmap 失败，则降级使用内存缓存
     if (buffer_ptr == nullptr) {
@@ -61,45 +65,6 @@ static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
     env->ReleaseStringUTFChars(buffer_path_, buffer_path);
     env->ReleaseStringUTFChars(log_path_, log_path);
     return reinterpret_cast<long>(logBuffer);
-}
-
-static char *openMMap(int buffer_fd, size_t buffer_size) {
-    logPrintD("openMMap方法被调用了 buffer_fd: %d", buffer_fd);
-    char *map_ptr = nullptr;
-    if (buffer_fd != -1) {
-        // 写脏数据
-        writeDirtyLogToFile(buffer_fd);
-        // 根据 buffer size 调整 buffer 文件大小
-        ftruncate(buffer_fd, static_cast<int>(buffer_size));
-        lseek(buffer_fd, 0, SEEK_SET);
-        map_ptr = (char *) mmap(0, buffer_size, PROT_WRITE | PROT_READ, MAP_SHARED, buffer_fd, 0);
-        if (map_ptr == MAP_FAILED) {
-            map_ptr = nullptr;
-        }
-    }
-    return map_ptr;
-}
-
-static void writeDirtyLogToFile(int buffer_fd) {
-    logPrintI("writeDirtyLogToFile buffer_fd: %d", buffer_fd);
-    struct stat fileInfo;
-    if (fstat(buffer_fd, &fileInfo) >= 0) {
-        size_t buffered_size = static_cast<size_t>(fileInfo.st_size);
-        // buffer_size 必须是大于文件头长度的，否则会导致下标溢出
-        if (buffered_size > LogBufferHeader::calculateHeaderLen(0)) {
-            char *buffer_ptr_tmp = (char *) mmap(0, buffered_size, PROT_WRITE | PROT_READ,
-                                                 MAP_SHARED, buffer_fd, 0);
-            if (buffer_ptr_tmp != MAP_FAILED) {
-                log_buffer *tmp = new log_buffer(buffer_ptr_tmp, buffered_size);
-                size_t data_size = tmp->length();
-                if (data_size > 0) {
-                    tmp->async_flush(fileFlush, tmp);
-                } else {
-                    delete tmp;
-                }
-            }
-        }
-    }
 }
 
 static void writeNative(JNIEnv *env, jobject instance, jlong ptr,
