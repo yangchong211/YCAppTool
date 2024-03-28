@@ -86,7 +86,16 @@ public final class LogNativeHelper {
         System.loadLibrary("log_manager");
     }
 
-    private native static long initNative(String bufferPath, int capacity, String logPath, boolean compress);
+    /**
+     * 初始化
+     *
+     * @param bufferPath 缓冲路径
+     * @param bufferSize 缓冲大小，目前是4096
+     * @param logPath    日志路径
+     * @param compress   是否压缩
+     * @return 返回
+     */
+    private native static long initNative(String bufferPath, int bufferSize, String logPath, boolean compress);
 
     private native void writeNative(long ptr, String log);
 

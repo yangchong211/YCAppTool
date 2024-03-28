@@ -16,18 +16,30 @@ static void writeDirtyLogToFile(int buffer_fd);
 static AsyncFileFlush *fileFlush = nullptr;
 
 static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
-                        jint capacity, jstring log_path_, jboolean compress_) {
+                        jint bufferSize, jstring log_path_, jboolean compress_) {
     //JNIEnv 代表了JNI的环境，只要在本地代码中拿到了JNIEnv和jobject
     //JNI层实现的方法都是通过JNIEnv 指针调用JNI层的方法访问Java虚拟机，进而操作Java对象，这样就能调用Java代码。
     //jobject thiz
     //在AS中自动为我们生成的JNI方法声明都会带一个这样的参数，这个instance就代表Java中native方法声明所在的
-    //env
+    //思考一下，为什么直接使用字符串 buffer_path_ 会出现错误提示？
     const char *buffer_path = env->GetStringUTFChars(buffer_path_, 0);
     const char *log_path = env->GetStringUTFChars(log_path_, 0);
     logPrintD("initNative 方法被调用 \nbuffer_path: %s \nbuffer_path: %s", buffer_path, log_path);
-    size_t buffer_size = static_cast<size_t>(capacity);
+    //静态转换  static_cast
+    //静态转换是将一种数据类型的值强制转换为另一种数据类型的值。
+    //静态转换通常用于比较类型相似的对象之间的转换，例如将 int 类型转换为 float 类型。
+    //静态转换不进行任何运行时类型检查，因此可能会导致运行时错误。
+    //size_t是C++中的一种无符号整数类型，用于表示对象的大小或元素的数量。它通常用于与内存分配、数组索引和循环计数等相关的操作。
+    //size_t的大小在不同的平台上可能会有所变化，但它通常被设计为足够大以容纳系统中最大可能的对象大小。在大多数情况下，size_t的大小与unsigned int或unsigned long相同。
+    size_t buffer_size = static_cast<size_t>(bufferSize);
+    //fcntl.h头文件中的open函数是C语言中用于打开文件的函数。它提供了对文件的访问和操作的功能。
+    //pathname：要打开的文件的路径名。
+    //flags：打开文件的标志，用于指定文件的打开方式和操作选项。例如，O_RDONLY表示只读打开，O_WRONLY表示只写打开，O_RDWR表示读写打开，O_CREAT表示如果文件不存在则创建文件等。
+    //mode：当使用O_CREAT标志创建新文件时，指定文件的权限。它是一个八进制数，例如0644表示文件权限为rw-r--r--。
     int buffer_fd = open(buffer_path, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     // buffer 的第一个字节会用于存储日志路径名称长度，后面紧跟日志路径，之后才是日志信息
+
+    //创建对象
     if (fileFlush == nullptr) {
         fileFlush = new AsyncFileFlush();
     }
