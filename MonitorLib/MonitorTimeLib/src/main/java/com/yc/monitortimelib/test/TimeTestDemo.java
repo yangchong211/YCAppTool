@@ -1,6 +1,41 @@
-package com.yc.monitortimelib.interceptor;
+package com.yc.monitortimelib.test;
+
+import com.yc.monitortimelib.interceptor.BaseInterceptor;
+import com.yc.monitortimelib.interceptor.BaseParam;
+import com.yc.monitortimelib.interceptor.BaseResult;
+import com.yc.monitortimelib.interceptor.CommonCallback;
+import com.yc.monitortimelib.interceptor.InterceptorBean;
+import com.yc.monitortimelib.interceptor.InterceptorManager;
+import com.yc.monitortimelib.interceptor.InvokeListener;
+import com.yc.monitortimelib.interceptor.MonitorBean;
+import com.yc.monitortimelib.interceptor.ResultCallback;
+import com.yc.monitortimelib.monitor.OnMonitorListener;
+import com.yc.monitortimelib.monitor.TimeMonitorHelper;
+import com.yc.toolutils.AppLogUtils;
 
 public class TimeTestDemo {
+
+    public void test1(){
+        InterceptorManager.getInstance().addInterceptor(new CommonCallback<InterceptorBean>() {
+            @Override
+            public void result(InterceptorBean interceptorBean) {
+                AppLogUtils.d("addInterceptor: " + interceptorBean.toString());
+            }
+        });
+        InterceptorManager.getInstance().setMonitorCallback(new CommonCallback<MonitorBean>() {
+            @Override
+            public void result(MonitorBean monitorBean) {
+                AppLogUtils.d("addInterceptor monitorBean : " + monitorBean.toString());
+            }
+        });
+        TimeMonitorHelper.init(true, null);
+        TimeMonitorHelper.setOnMonitorListener(new OnMonitorListener() {
+            @Override
+            public void onMonitorResult(String processName, String result) {
+                AppLogUtils.d("TimeMonitor processName: " + processName + " , result: " + result);
+            }
+        });
+    }
 
 
     /**
@@ -63,5 +98,15 @@ public class TimeTestDemo {
         }
     }
 
+
+    private void test2() {
+        InterceptorManager instance = InterceptorManager.getInstance();
+        instance.methodSync("test2", new InvokeListener() {
+            @Override
+            public void invoke() {
+                //执行函数
+            }
+        });
+    }
 
 }

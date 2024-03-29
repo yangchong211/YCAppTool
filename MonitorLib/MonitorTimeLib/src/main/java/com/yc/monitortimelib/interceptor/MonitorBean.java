@@ -7,6 +7,9 @@ import java.io.Serializable;
  */
 public class MonitorBean implements Serializable {
 
+    /**
+     * 耗时
+     */
     private long cos;
     private String methodName;
     private BaseParam param;
