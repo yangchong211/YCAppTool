@@ -6,10 +6,10 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.yc.mmaplog.LogLevel;
-import com.yc.mmaplog.inter.Formatter;
+import com.yc.mmaplog.inter.InterFormatter;
 
 
-public class DateFileFormatter implements Formatter {
+public class DateFileFormatter implements InterFormatter {
     private SimpleDateFormat simpleDateFormat = null;
     private Date mDate;
     private String lastDataFormated = null;

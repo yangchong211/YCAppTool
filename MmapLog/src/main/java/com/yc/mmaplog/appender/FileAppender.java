@@ -10,13 +10,13 @@ import java.util.List;
 
 import com.yc.mmaplog.LogLevel;
 import com.yc.mmaplog.LogNativeHelper;
-import com.yc.mmaplog.inter.Formatter;
+import com.yc.mmaplog.inter.InterFormatter;
 import com.yc.mmaplog.inter.Interceptor;
 
 public class FileAppender extends AbsAppender {
 
     private final LogNativeHelper logNativeHelper;
-    private Formatter formatter;
+    private InterFormatter formatter;
 
     protected FileAppender(Builder builder) {
         logNativeHelper = new LogNativeHelper(builder.bufferFilePath, builder.bufferSize,
@@ -43,7 +43,7 @@ public class FileAppender extends AbsAppender {
         logNativeHelper.changeLogPath(logPath);
     }
 
-    public void setFormatter(Formatter formatter) {
+    public void setFormatter(InterFormatter formatter) {
         if (formatter != null) {
             this.formatter = formatter;
         }
@@ -73,7 +73,7 @@ public class FileAppender extends AbsAppender {
         private int bufferSize = 4096;
         private int level = LogLevel.VERBOSE;
         private List<Interceptor> interceptors;
-        private Formatter formatter;
+        private InterFormatter formatter;
         private boolean compress;
 
         public Builder(Context context) {
@@ -108,7 +108,7 @@ public class FileAppender extends AbsAppender {
             return this;
         }
 
-        public Builder setFormatter(Formatter formatter) {
+        public Builder setFormatter(InterFormatter formatter) {
             this.formatter = formatter;
             return this;
         }
@@ -126,7 +126,7 @@ public class FileAppender extends AbsAppender {
                 bufferFilePath = getDefaultBufferPath(context);
             }
             if (formatter == null) {
-                formatter = new Formatter() {
+                formatter = new InterFormatter() {
                     @Override
                     public String format(int logLevel, String tag, String msg) {
                         return String.format("%s/%s: %s\n",  LogLevel.getShortLevelName(logLevel), tag, msg);

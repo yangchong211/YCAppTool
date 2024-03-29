@@ -17,7 +17,7 @@ import com.yc.mmaplog.LogManager;
 import com.yc.mmaplog.appender.AbsAppender;
 import com.yc.mmaplog.appender.AndroidAppender;
 import com.yc.mmaplog.appender.FileAppender;
-import com.yc.mmaplog.inter.Formatter;
+import com.yc.mmaplog.inter.InterFormatter;
 import com.yc.mmaplog.inter.InterAppender;
 import com.yc.mmaplog.inter.InterLogger;
 import com.yc.mmaplog.logger.AppenderLogger;
@@ -202,7 +202,7 @@ public class MmapLogActivity extends AppCompatActivity {
         FileAppender.Builder fileBuild = new FileAppender.Builder(this)
                 .setLogFilePath(logFile.getAbsolutePath())
                 .setBufferSize(BUFFER_SIZE)
-                .setFormatter(new Formatter() {
+                .setFormatter(new InterFormatter() {
                     @Override
                     public String format(int logLevel, String tag, String msg) {
                         return msg;
