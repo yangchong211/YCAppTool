@@ -18,7 +18,7 @@ add_library(
         # 这个是程序入口
         log_manager.cpp
         log_buffer.cpp
-        LogBufferHeader.cpp
+        log_buffer_header.cpp
         FlushBuffer.cpp
         AsyncFileFlush.cpp
         log_utils.cpp

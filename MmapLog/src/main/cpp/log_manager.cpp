@@ -10,6 +10,9 @@
 #include "mmap_helper.h"
 
 
+//动态申请内存
+//new 运算符，为给定类型的变量在运行时分配堆内的内存，这会返回所分配的空间地址。
+//delete 运算符，如果不再需要动态分配的内存空间，删除之前由 new 运算符分配的内存。
 static AsyncFileFlush *fileFlush = nullptr;
 
 static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
@@ -45,7 +48,7 @@ static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
         fileFlush = new AsyncFileFlush();
     }
     // 加上头占用的大小
-    buffer_size = buffer_size + LogBufferHeader::calculateHeaderLen(strlen(log_path));
+    buffer_size = buffer_size + log_buffer_header::calculateHeaderLen(strlen(log_path));
     mmap_helper *mmapHelper = new mmap_helper(fileFlush);
     // 打开MMap
     char *buffer_ptr = mmapHelper->openMMap(buffer_fd, buffer_size);
@@ -87,6 +90,8 @@ static void writeNative(JNIEnv *env, jobject instance, jlong ptr, jstring log_) 
     //重新解释转换（Reinterpret Cast）
     //重新解释转换将一个数据类型的值重新解释为另一个数据类型的值，通常用于在不同的数据类型之间进行转换。
     //重新解释转换不进行任何类型检查，因此可能会导致未定义的行为。
+    //& 运算符访问的地址，它表示了在内存中的一个地址。
+    //* 星号是用来指定一个变量是指针
     log_buffer *logBuffer = reinterpret_cast<log_buffer *>(ptr);
     //缓存写不下时异步刷新
     if (log_len >= logBuffer->emptySize()) {
@@ -102,10 +107,14 @@ static void writeNative(JNIEnv *env, jobject instance, jlong ptr, jstring log_) 
 static void releaseNative(JNIEnv *env, jobject instance, jlong ptr) {
     logPrintI("releaseNative 方法被调用");
     log_buffer *logBuffer = reinterpret_cast<log_buffer *>(ptr);
+    //异步刷新
     logBuffer->async_flush(fileFlush, logBuffer);
+    //在释放操作中。如何释放对象，针对new动态分配的内存，使用delete释放内存
     if (fileFlush != nullptr) {
+        // 释放内存
         delete fileFlush;
     }
+    //先调用delete释放new的对象，然后设置空
     fileFlush = nullptr;
 }
 
@@ -128,6 +137,7 @@ static void changeLogPathNative(JNIEnv *env, jobject instance, jlong ptr,
 static void flushAsyncNative(JNIEnv *env, jobject instance, jlong ptr) {
     logPrintI("flushAsyncNative 方法被调用");
     log_buffer *logBuffer = reinterpret_cast<log_buffer *>(ptr);
+    //刷新
     logBuffer->async_flush(fileFlush);
 }
 

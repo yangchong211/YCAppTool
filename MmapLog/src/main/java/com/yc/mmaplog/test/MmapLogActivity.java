@@ -114,6 +114,7 @@ public class MmapLogActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 changeLogPath();
+                LogManager.flush();
             }
         });
 

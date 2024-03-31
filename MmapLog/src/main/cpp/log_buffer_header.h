@@ -16,11 +16,11 @@ namespace log_header{
         bool isCompress;
     };
 
-    class LogBufferHeader {
+    class log_buffer_header {
 
     public:
-        LogBufferHeader(void* data, size_t size);
-        ~LogBufferHeader();
+        log_buffer_header(void* data, size_t size);
+        ~log_buffer_header();
         void initHeader(Header& header);
         void* originPtr();
         void* ptr();

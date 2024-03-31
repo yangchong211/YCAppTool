@@ -12,7 +12,7 @@
 #include <condition_variable>
 #include "AsyncFileFlush.h"
 #include "FlushBuffer.h"
-#include "LogBufferHeader.h"
+#include "log_buffer_header.h"
 #include <zlib.h>
 
 using namespace log_header;
@@ -52,7 +52,7 @@ private:
     size_t buffer_size = 0;
     std::recursive_mutex log_mtx;
 
-    LogBufferHeader logHeader;
+    log_buffer_header logHeader;
     z_stream zStream;
     bool is_compress = false;
 

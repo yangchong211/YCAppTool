@@ -176,7 +176,7 @@ public final class LogManager {
      * com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:493)
      * com.android.internal.os.ZygoteInit.main(ZygoteInit.java:911)
      */
-    public void printThreadLog() {
+    private void printThreadLog() {
         Thread thread = Thread.currentThread();
         //堆栈跟踪元素，它由 Throwable.getStackTrace() 返回。每个元素表示单独的一个【堆栈帧】。
         //所有的堆栈帧（堆栈顶部的那个堆栈帧除外）都表示一个【方法调用】。堆栈顶部的帧表示【生成堆栈跟踪的执行点】。

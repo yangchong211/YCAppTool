@@ -2,7 +2,7 @@
 
 #include <cstring>
 #include <ctime>
-#include "LogBufferHeader.h"
+#include "log_buffer_header.h"
 
 using namespace log_header;
 
@@ -14,18 +14,20 @@ using namespace log_header;
 //    char isCompress;
 //};
 
-LogBufferHeader::LogBufferHeader(void *data, size_t size) : data_ptr((char *) data), data_size(size) {
+log_buffer_header::log_buffer_header(void *data, size_t size) : data_ptr((char *) data),
+                                                                data_size(size) {
+
 }
 
-LogBufferHeader::~LogBufferHeader() {
+log_buffer_header::~log_buffer_header() {
 }
 
-void *LogBufferHeader::originPtr() {
+void *log_buffer_header::originPtr() {
     return data_ptr;
 }
 
-Header* LogBufferHeader::getHeader() {
-    Header* header = new Header();
+Header *log_buffer_header::getHeader() {
+    Header *header = new Header();
     if (isAvailable()) {
         header->magic = kMagicHeader;
         size_t log_len = 0;
@@ -38,45 +40,48 @@ Header* LogBufferHeader::getHeader() {
         memset(log_path, 0, log_path_len + 1);
         memcpy(log_path, data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t), log_path_len);
         header->log_path = log_path;
-        char isCompress = (data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t) + log_path_len)[0];
+        char isCompress = (data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t) +
+                           log_path_len)[0];
         header->isCompress = isCompress == 1;
     }
     return header;
 }
 
-size_t LogBufferHeader::getHeaderLen() {
+size_t log_buffer_header::getHeaderLen() {
     if (isAvailable()) {
         return calculateHeaderLen(getLogPathLen());
     }
     return 0;
 }
 
-void *LogBufferHeader::ptr() {
+void *log_buffer_header::ptr() {
     return data_ptr + getHeaderLen();
 }
 
-void *LogBufferHeader::write_ptr() {
+void *log_buffer_header::write_ptr() {
     return data_ptr + getHeaderLen() + getLogLen();
 }
 
-void LogBufferHeader::initHeader(Header &header) {
+void log_buffer_header::initHeader(Header &header) {
     if ((sizeof(char) + sizeof(size_t) + sizeof(size_t) + header.log_path_len) > data_size) {
         return;
     }
     memcpy(data_ptr, &header.magic, sizeof(char));
     memcpy(data_ptr + sizeof(char), &header.log_len, sizeof(size_t));
     memcpy(data_ptr + sizeof(char) + sizeof(size_t), &header.log_path_len, sizeof(size_t));
-    memcpy(data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t), header.log_path, header.log_path_len);
+    memcpy(data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t), header.log_path,
+           header.log_path_len);
     char isCompress = 0;
     if (header.isCompress) {
         isCompress = 1;
     }
-    memcpy(data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t) + header.log_path_len, &isCompress,
+    memcpy(data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t) + header.log_path_len,
+           &isCompress,
            sizeof(char));
 
 }
 
-size_t LogBufferHeader::getLogLen() {
+size_t log_buffer_header::getLogLen() {
     if (isAvailable()) {
         size_t log_len = 0;
         memcpy(&log_len, data_ptr + sizeof(char), sizeof(size_t));
@@ -89,7 +94,7 @@ size_t LogBufferHeader::getLogLen() {
     return 0;
 }
 
-size_t LogBufferHeader::getLogPathLen() {
+size_t log_buffer_header::getLogPathLen() {
     if (isAvailable()) {
         size_t log_path_len = 0;
         memcpy(&log_path_len, data_ptr + sizeof(char) + sizeof(size_t), sizeof(size_t));
@@ -102,38 +107,40 @@ size_t LogBufferHeader::getLogPathLen() {
     return 0;
 }
 
-char *LogBufferHeader::getLogPath() {
+char *log_buffer_header::getLogPath() {
     if (isAvailable()) {
         size_t log_path_len = getLogPathLen();
         if (log_path_len > 0) {
             char *log_path = new char[log_path_len + 1];
             memset(log_path, 0, log_path_len + 1);
-            memcpy(log_path, data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t), log_path_len);
+            memcpy(log_path, data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t),
+                   log_path_len);
             return log_path;
         }
     }
     return nullptr;
 }
 
-void LogBufferHeader::setLogLen(size_t log_len) {
+void log_buffer_header::setLogLen(size_t log_len) {
     if (isAvailable()) {
         memcpy(data_ptr + sizeof(char), &log_len, sizeof(size_t));
     }
 }
 
-bool LogBufferHeader::isAvailable() {
+bool log_buffer_header::isAvailable() {
     return data_ptr[0] == kMagicHeader;
 }
 
-bool LogBufferHeader::getIsCompress() {
+bool log_buffer_header::getIsCompress() {
     if (isAvailable()) {
-        char isCompress = (data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t) + getLogPathLen())[0];
+        char isCompress = (data_ptr + sizeof(char) + sizeof(size_t) + sizeof(size_t) +
+                           getLogPathLen())[0];
         return isCompress == 1;
     }
     return false;
 }
 
-size_t LogBufferHeader::calculateHeaderLen(size_t log_path_len) {
+size_t log_buffer_header::calculateHeaderLen(size_t log_path_len) {
     return sizeof(char) + sizeof(size_t) + sizeof(size_t) + log_path_len + sizeof(char);
 }
 

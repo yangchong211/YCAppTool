@@ -53,7 +53,7 @@ void mmap_helper::writeDirtyLogToFile(int buffer_fd) {
     if (fstat(buffer_fd, &fileInfo) >= 0) {
         size_t buffered_size = static_cast<size_t>(fileInfo.st_size);
         // buffer_size 必须是大于文件头长度的，否则会导致下标溢出
-        size_t headerLen = LogBufferHeader::calculateHeaderLen(0);
+        size_t headerLen = log_buffer_header::calculateHeaderLen(0);
         logPrintI("writeDirtyLogToFile calculateHeaderLen headerLen: %d , buffered_size: %d", headerLen , buffered_size);
         if (buffered_size > headerLen) {
             char *buffer_ptr_tmp = (char *) mmap(0, buffered_size, PROT_WRITE | PROT_READ,
