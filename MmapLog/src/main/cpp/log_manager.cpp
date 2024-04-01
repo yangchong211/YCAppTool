@@ -181,14 +181,16 @@ int register_dynamic_Methods(JNIEnv *env) {
     if (clazz == NULL) {
         return JNI_FALSE;
     }
+    //sizeof运算符返回的是对象在内存中所占用的字节大小，而不是对象的实际值的大小。
+    //例如，对于整数类型的变量，sizeof返回的是该类型的字节大小，而不是变量的值的大小。
+    //nMethods = 数组的字节大小 / 数组中数据的字节大小
+    jint nMethods = sizeof(gMethods) / sizeof(gMethods[0]);
     //注册JNI方法
     //核心方法：RegisterNatives，jni注册native方法。
+    //通过调用RegisterNatives函数将注册函数的Java类，以及注册函数的数组，以及个数注册在一起，这样就实现了绑定。
     //参数1：Java对应的类。
     //参数2：JNINativeMethod数组。
     //参数3：JNINativeMethod数组的长度，也就是要注册的方法的个数。
-    //通过调用RegisterNatives函数将注册函数的Java类，以及注册函数的数组，以及个数注册在一起，这样就实现了绑定。
-    jint nMethods = sizeof(gMethods) / sizeof(gMethods[0]);
-    //注册JNI方法
     if (env->RegisterNatives(clazz, gMethods, nMethods) < 0) {
         return JNI_FALSE;
     }
