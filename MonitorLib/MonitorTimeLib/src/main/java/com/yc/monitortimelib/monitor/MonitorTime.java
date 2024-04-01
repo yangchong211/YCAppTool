@@ -1,6 +1,5 @@
 package com.yc.monitortimelib.monitor;
 
-import com.yc.toolutils.AppLogUtils;
 
 /**
  * <pre>
@@ -50,10 +49,7 @@ public final class MonitorTime {
             MonitorFormatAdapter formatAdapter = MonitorTimeHelper.getFormatAdapter();
             String format = formatAdapter.onFormat(timeTraceBean.getActionName(), monitorTime);
             listener.onMonitorResult(timeTraceBean.getActionName(), format);
-            return;
         }
-        String tag = "TimeMonitor: ";
-        AppLogUtils.d(tag, timeTraceBean.getActionName() + " " + monitorTime);
     }
 
 }

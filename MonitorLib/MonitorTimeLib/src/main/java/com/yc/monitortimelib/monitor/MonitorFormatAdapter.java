@@ -22,8 +22,9 @@ public interface MonitorFormatAdapter {
             return new MonitorFormatAdapter() {
                 @Override
                 public String onFormat(String processName, long monitorTime) {
-                    String rst = processName + " " + monitorTime;
-                    return rst;
+                    StringBuilder stringBuffer = new StringBuilder();
+                    stringBuffer.append("耗时：").append(monitorTime).append("ms");
+                    return stringBuffer.toString();
                 }
             };
         }

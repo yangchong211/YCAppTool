@@ -35,7 +35,7 @@ public final class MonitorTimeHelper {
         }
         synchronized (OBJECT) {
             MonitorTime timeMonitor = TIME_MONITOR_CACHE.get(actionName);
-            if (timeMonitor == null){
+            if (timeMonitor == null) {
                 timeMonitor = new MonitorTime(actionName);
             }
             timeMonitor.start(actionName);
@@ -49,10 +49,10 @@ public final class MonitorTimeHelper {
         }
         synchronized (OBJECT) {
             MonitorTime timeMonitor = TIME_MONITOR_CACHE.get(actionName);
-            if (timeMonitor == null){
+            if (timeMonitor == null) {
                 timeMonitor = new MonitorTime(actionName);
             }
-            timeMonitor.end(actionName,rstListener);
+            timeMonitor.end(actionName, rstListener);
             TIME_MONITOR_CACHE.put(actionName, timeMonitor);
         }
     }
