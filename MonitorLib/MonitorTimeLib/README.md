@@ -45,8 +45,9 @@
 
 
 ### 03.Api调用说明
+#### 3.1 业务打点耗时统计
 - 首先初始化时间打点库
-    ``` java
+    ```
     // 初始化打点计时器
     // 第一个参数是是否开启打点，如果是true则打点，如果是false则表示不会记录打点
     // 第二个参数是自定义打印接口适配器，主要是自定义打印日志
@@ -60,9 +61,52 @@
     });
     ```
 - 如何高效打点。注意start和end打点的actionName必须是一样才会计算耗时
-    ``` java
+    ```
     TimeMonitorHelper.start("startActivity统计耗时");
     TimeMonitorHelper.end("startActivity统计耗时");
+    ```
+
+
+#### 3.2 统计函数执行耗时
+- 首先初始化时间打点库
+    ```
+    InterceptorManager.getInstance().addInterceptor(new CommonCallback<InterceptorBean>() {
+        @Override
+        public void result(InterceptorBean interceptorBean) {
+            //统计函数耗时
+            AppLogUtils.d("addInterceptor: " + interceptorBean.toString());
+        }
+    });
+    InterceptorManager.getInstance().setMonitorCallback(new CommonCallback<MonitorBean>() {
+        @Override
+        public void result(MonitorBean monitorBean) {
+            //监听函数耗时卡顿时间
+            AppLogUtils.d("addInterceptor monitorBean : " + monitorBean.toString());
+        }
+    });
+    ```
+- 如何高效打点。注意start和end打点的actionName必须是一样才会计算耗时
+    ```
+    InterceptorManager instance = InterceptorManager.getInstance();
+    BaseParam baseParam = new BaseParam("函数名称");
+    baseParam.setTimeout(5000);
+    instance.handleInterceptor(baseParam, new ResultCallback() {
+        @Override
+        public BaseResult getResult() {
+            BaseResult baseRt = new BaseResult();
+            try {
+                //这个地方做业务逻辑处理。
+                Thread.sleep(6000);
+                baseRt.setSuccess(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+                baseRt.setSuccess(false);
+                baseRt.setException(e);
+                baseRt.setErrMsg(e.toString());
+            }
+            return baseRt;
+        }
+    });
     ```
 
 

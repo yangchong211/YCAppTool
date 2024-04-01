@@ -19,12 +19,14 @@ public class TimeTestDemo {
         InterceptorManager.getInstance().addInterceptor(new CommonCallback<InterceptorBean>() {
             @Override
             public void result(InterceptorBean interceptorBean) {
+                //统计函数耗时
                 AppLogUtils.d("addInterceptor: " + interceptorBean.toString());
             }
         });
         InterceptorManager.getInstance().setMonitorCallback(new CommonCallback<MonitorBean>() {
             @Override
             public void result(MonitorBean monitorBean) {
+                //监听函数耗时卡顿时间
                 AppLogUtils.d("addInterceptor monitorBean : " + monitorBean.toString());
             }
         });
