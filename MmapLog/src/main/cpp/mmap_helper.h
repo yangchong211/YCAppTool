@@ -11,14 +11,14 @@
 #include <sstream>
 #include <sys/mman.h>
 #include "log_utils.h"
-#include "AsyncFileFlush.h"
+#include "async_file.h"
 #include <sys/stat.h>
 #include "log_buffer.h"
 
 
 class mmap_helper {
 public:
-    mmap_helper(AsyncFileFlush *pFlush);
+    mmap_helper(async_file *pFlush);
     ~mmap_helper();
     char *openMMap(int buffer_fd, unsigned int buffer_size);
     static void writeDirtyLogToFile(int fd);

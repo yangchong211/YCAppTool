@@ -9,11 +9,11 @@
 #include "stdio.h"
 
 
-class FlushBuffer {
+class flush_buffer {
 
     public:
-        FlushBuffer(FILE* log_file, size_t size = 128);
-        ~FlushBuffer();
+        flush_buffer(FILE* log_file, size_t size = 128);
+        ~flush_buffer();
         void write(void* data, size_t len);
         void reset();
         size_t length();

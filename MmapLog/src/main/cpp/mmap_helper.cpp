@@ -6,9 +6,9 @@
 #include "mmap_helper.h"
 
 
-static AsyncFileFlush *fileFlush = nullptr;
+static async_file *fileFlush = nullptr;
 
-mmap_helper::mmap_helper(AsyncFileFlush *pFlush) {
+mmap_helper::mmap_helper(async_file *pFlush) {
     //传递一个引用
     fileFlush = pFlush;
 }

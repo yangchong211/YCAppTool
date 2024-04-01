@@ -10,8 +10,8 @@
 #include<vector>
 #include <mutex>
 #include <condition_variable>
-#include "AsyncFileFlush.h"
-#include "FlushBuffer.h"
+#include "async_file.h"
+#include "flush_buffer.h"
 #include "log_buffer_header.h"
 #include <zlib.h>
 
@@ -28,10 +28,10 @@ public:
     void release();
     size_t emptySize();
     char *getLogPath();
-    void setAsyncFileFlush(AsyncFileFlush *fileFlush);
+    void setAsyncFileFlush(async_file *fileFlush);
     void async_flush();
-    void async_flush(AsyncFileFlush *fileFlush);
-    void async_flush(AsyncFileFlush *fileFlush, log_buffer *releaseThis);
+    void async_flush(async_file *fileFlush);
+    void async_flush(async_file *fileFlush, log_buffer *releaseThis);
     void changeLogPath(char *log_path);
 
 public:
@@ -44,7 +44,7 @@ private:
     bool openSetLogFile(const char *log_path);
 
     FILE* log_file = nullptr;
-    AsyncFileFlush *fileFlush = nullptr;
+    async_file *fileFlush = nullptr;
     char* const buffer_ptr = nullptr;
     char* data_ptr = nullptr;
     char* write_ptr = nullptr;

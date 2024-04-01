@@ -1,21 +1,21 @@
 
-#include "AsyncFileFlush.h"
+#include "async_file.h"
 
 
-AsyncFileFlush::AsyncFileFlush() {
+async_file::async_file() {
     //创建一个异步线程
-    async_thread = std::thread(&AsyncFileFlush::async_log_thread, this);
+    async_thread = std::thread(&async_file::async_log_thread, this);
 }
 
-AsyncFileFlush::~AsyncFileFlush() {
+async_file::~async_file() {
     stopFlush();
 }
 
-void AsyncFileFlush::async_log_thread() {
+void async_file::async_log_thread() {
     while (true) {
         std::unique_lock<std::mutex> lck_async_log_thread(async_mtx);
         while (!async_buffer.empty()) {
-            FlushBuffer* data = async_buffer.back();
+            flush_buffer* data = async_buffer.back();
             async_buffer.pop_back();
             flush(data);
         }
@@ -26,7 +26,7 @@ void AsyncFileFlush::async_log_thread() {
     }
 }
 
-ssize_t AsyncFileFlush::flush(FlushBuffer* flushBuffer) {
+ssize_t async_file::flush(flush_buffer* flushBuffer) {
     ssize_t written = 0;
     FILE* log_file = flushBuffer->logFile();
     if(log_file != nullptr && flushBuffer->length() > 0) {
@@ -37,7 +37,7 @@ ssize_t AsyncFileFlush::flush(FlushBuffer* flushBuffer) {
     return written;
 }
 
-bool AsyncFileFlush::async_flush(FlushBuffer* flushBuffer) {
+bool async_file::async_flush(flush_buffer* flushBuffer) {
     std::unique_lock<std::mutex> lck_async_flush(async_mtx);
     if (exit) {
         delete flushBuffer;
@@ -48,7 +48,7 @@ bool AsyncFileFlush::async_flush(FlushBuffer* flushBuffer) {
     return true;
 }
 
-void AsyncFileFlush::stopFlush() {
+void async_file::stopFlush() {
     exit = true;
     async_condition.notify_all();
     async_thread.join();

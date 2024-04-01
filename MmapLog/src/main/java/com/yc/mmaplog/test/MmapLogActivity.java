@@ -95,29 +95,19 @@ public class MmapLogActivity extends AppCompatActivity {
             }
         });
 
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!testing) {
-                    tvTest.setText("start testing\n");
-                    testing = true;
-                    int times = Integer.valueOf(etTimes.getText().toString());
-                    performanceTest(times);
-                    testing = false;
-                } else {
-                    Toast.makeText(getApplicationContext(), "testing", Toast.LENGTH_SHORT).show();
-                }
+        btnTest.setOnClickListener(view -> {
+            if (!testing) {
+                tvTest.setText("start testing\n");
+                testing = true;
+                int times = Integer.valueOf(etTimes.getText().toString());
+                performanceTest(times);
+                testing = false;
+            } else {
+                Toast.makeText(getApplicationContext(), "testing", Toast.LENGTH_SHORT).show();
             }
         });
-
-        findViewById(R.id.btn_change_log).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeLogPath();
-                LogManager.flush();
-            }
-        });
-
+        findViewById(R.id.btn_sync_log).setOnClickListener(view -> LogManager.flush());
+        findViewById(R.id.btn_change_log).setOnClickListener(view -> changeLogPath());
     }
 
     private void performanceTest(int times) {

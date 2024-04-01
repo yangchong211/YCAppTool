@@ -1,10 +1,10 @@
 
-//#include <FlushBuffer.h>
-#include "FlushBuffer.h"
+//#include <flush_buffer.h>
+#include "flush_buffer.h"
 
-FlushBuffer::FlushBuffer(FILE* log_file, size_t size) : capacity(size), log_file(log_file) {}
+flush_buffer::flush_buffer(FILE* log_file, size_t size) : capacity(size), log_file(log_file) {}
 
-FlushBuffer::~FlushBuffer() {
+flush_buffer::~flush_buffer() {
     if (data_ptr != nullptr) {
         delete[] data_ptr;
     }
@@ -13,22 +13,22 @@ FlushBuffer::~FlushBuffer() {
     }
 }
 
-size_t FlushBuffer::length() {
+size_t flush_buffer::length() {
     if (data_ptr != nullptr && write_ptr != nullptr) {
         return write_ptr - data_ptr;
     }
     return 0;
 }
 
-void *FlushBuffer::ptr() {
+void *flush_buffer::ptr() {
     return data_ptr;
 }
 
-size_t FlushBuffer::emptySize() {
+size_t flush_buffer::emptySize() {
     return capacity - length();
 }
 
-void FlushBuffer::write(void *data, size_t len) {
+void flush_buffer::write(void *data, size_t len) {
 
     if (data_ptr == nullptr) {
         capacity = (size_t)fmax(capacity, len);
@@ -53,18 +53,18 @@ void FlushBuffer::write(void *data, size_t len) {
     }
 }
 
-void FlushBuffer::reset() {
+void flush_buffer::reset() {
     if (data_ptr != nullptr) {
         memset(data_ptr, 0, capacity);
         write_ptr = data_ptr;
     }
 }
 
-FILE *FlushBuffer::logFile() {
+FILE *flush_buffer::logFile() {
     return log_file;
 }
 
-void FlushBuffer::releaseThis(void *release) {
+void flush_buffer::releaseThis(void *release) {
     this->release = release;
 }
 

@@ -13,7 +13,7 @@
 //动态申请内存
 //new 运算符，为给定类型的变量在运行时分配堆内的内存，这会返回所分配的空间地址。
 //delete 运算符，如果不再需要动态分配的内存空间，删除之前由 new 运算符分配的内存。
-static AsyncFileFlush *fileFlush = nullptr;
+static async_file *fileFlush = nullptr;
 
 static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
                         jint bufferSize, jstring log_path_, jboolean compress_) {
@@ -45,7 +45,7 @@ static jlong initNative(JNIEnv *env, jclass type, jstring buffer_path_,
     logPrintD("initNative 打开文件 buffer_fd: %d", buffer_fd);
     //创建对象
     if (fileFlush == nullptr) {
-        fileFlush = new AsyncFileFlush();
+        fileFlush = new async_file();
     }
     // 加上头占用的大小
     buffer_size = buffer_size + log_buffer_header::calculateHeaderLen(strlen(log_path));

@@ -71,6 +71,13 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_sync_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="手动刷新写入日志到文件" />
+
+        <Button
             android:id="@+id/btn_change_log"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

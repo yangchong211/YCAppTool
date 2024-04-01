@@ -64,7 +64,7 @@ size_t log_buffer::append(const char *log, size_t len) {
     return writeSize;
 }
 
-void log_buffer::setAsyncFileFlush(AsyncFileFlush *_fileFlush) {
+void log_buffer::setAsyncFileFlush(async_file *_fileFlush) {
     fileFlush = _fileFlush;
 }
 
@@ -72,11 +72,11 @@ void log_buffer::async_flush() {
     async_flush(fileFlush);
 }
 
-void log_buffer::async_flush(AsyncFileFlush *fileFlush) {
+void log_buffer::async_flush(async_file *fileFlush) {
     async_flush(fileFlush, nullptr);
 }
 
-void log_buffer::async_flush(AsyncFileFlush *fileFlush, log_buffer *releaseThis) {
+void log_buffer::async_flush(async_file *fileFlush, log_buffer *releaseThis) {
     if (fileFlush == nullptr) {
         if (releaseThis != nullptr) {
             delete releaseThis;
@@ -88,7 +88,7 @@ void log_buffer::async_flush(AsyncFileFlush *fileFlush, log_buffer *releaseThis)
         if (is_compress && Z_NULL != zStream.state) {
             deflateEnd(&zStream);
         }
-        FlushBuffer *flushBuffer = new FlushBuffer(log_file);
+        flush_buffer *flushBuffer = new flush_buffer(log_file);
         flushBuffer->write(data_ptr, length());
         flushBuffer->releaseThis(releaseThis);
         clear();

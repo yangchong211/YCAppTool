@@ -19,8 +19,8 @@ add_library(
         log_manager.cpp
         log_buffer.cpp
         log_buffer_header.cpp
-        FlushBuffer.cpp
-        AsyncFileFlush.cpp
+        flush_buffer.cpp
+        async_file.cpp
         log_utils.cpp
         mmap_helper.cpp
 )
