@@ -11,19 +11,19 @@ import java.util.HashMap;
  *     revise:
  * </pre>
  */
-public final class TimeMonitorHelper {
+public final class MonitorTimeHelper {
 
     private static final Object OBJECT = new Object();
-    private static final HashMap<String, TimeMonitor> TIME_MONITOR_CACHE = new HashMap<>();
-    private static PrintFormatAdapter mPrintAdapter = PrintFormatAdapter.Factory.newDefaultLogAdapter();
+    private static final HashMap<String, MonitorTime> TIME_MONITOR_CACHE = new HashMap<>();
+    private static MonitorFormatAdapter mPrintAdapter = MonitorFormatAdapter.Factory.newDefaultLogAdapter();
     private static boolean isMonitor = true;
 
-    private TimeMonitorHelper() {
+    private MonitorTimeHelper() {
 
     }
 
-    public static void init(boolean isMonitor, PrintFormatAdapter adapter) {
-        TimeMonitorHelper.isMonitor = isMonitor;
+    public static void init(boolean isMonitor, MonitorFormatAdapter adapter) {
+        MonitorTimeHelper.isMonitor = isMonitor;
         if (adapter != null) {
             mPrintAdapter = adapter;
         }
@@ -34,9 +34,9 @@ public final class TimeMonitorHelper {
             return;
         }
         synchronized (OBJECT) {
-            TimeMonitor timeMonitor = TIME_MONITOR_CACHE.get(actionName);
+            MonitorTime timeMonitor = TIME_MONITOR_CACHE.get(actionName);
             if (timeMonitor == null){
-                timeMonitor = new TimeMonitor(actionName);
+                timeMonitor = new MonitorTime(actionName);
             }
             timeMonitor.start(actionName);
             TIME_MONITOR_CACHE.put(actionName, timeMonitor);
@@ -48,22 +48,22 @@ public final class TimeMonitorHelper {
             return;
         }
         synchronized (OBJECT) {
-            TimeMonitor timeMonitor = TIME_MONITOR_CACHE.get(actionName);
+            MonitorTime timeMonitor = TIME_MONITOR_CACHE.get(actionName);
             if (timeMonitor == null){
-                timeMonitor = new TimeMonitor(actionName);
+                timeMonitor = new MonitorTime(actionName);
             }
             timeMonitor.end(actionName,rstListener);
             TIME_MONITOR_CACHE.put(actionName, timeMonitor);
         }
     }
 
-    private static OnMonitorListener rstListener;
+    private static MonitorListener rstListener;
 
-    public static void setOnMonitorListener(OnMonitorListener listener) {
+    public static void setOnMonitorListener(MonitorListener listener) {
         rstListener = listener;
     }
 
-    static PrintFormatAdapter getFormatAdapter() {
+    static MonitorFormatAdapter getFormatAdapter() {
         return mPrintAdapter;
     }
 }

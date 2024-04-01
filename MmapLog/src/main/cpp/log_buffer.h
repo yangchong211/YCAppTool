@@ -1,6 +1,6 @@
 
-#ifndef LOG4A_LOGBUFFER_H
-#define LOG4A_LOGBUFFER_H
+#ifndef YC_LOGBUFFER_H
+#define YC_LOGBUFFER_H
 
 #include <string>
 #include <math.h>
@@ -59,4 +59,4 @@ private:
 };
 
 
-#endif //LOG4A_LOGBUFFER_H
+#endif //YC_LOGBUFFER_H

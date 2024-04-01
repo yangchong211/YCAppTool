@@ -9,8 +9,8 @@ import com.yc.monitortimelib.interceptor.InterceptorManager;
 import com.yc.monitortimelib.interceptor.InvokeListener;
 import com.yc.monitortimelib.interceptor.MonitorBean;
 import com.yc.monitortimelib.interceptor.ResultCallback;
-import com.yc.monitortimelib.monitor.OnMonitorListener;
-import com.yc.monitortimelib.monitor.TimeMonitorHelper;
+import com.yc.monitortimelib.monitor.MonitorListener;
+import com.yc.monitortimelib.monitor.MonitorTimeHelper;
 import com.yc.toolutils.AppLogUtils;
 
 public class TimeTestDemo {
@@ -28,8 +28,11 @@ public class TimeTestDemo {
                 AppLogUtils.d("addInterceptor monitorBean : " + monitorBean.toString());
             }
         });
-        TimeMonitorHelper.init(true, null);
-        TimeMonitorHelper.setOnMonitorListener(new OnMonitorListener() {
+
+
+
+        MonitorTimeHelper.init(true, null);
+        MonitorTimeHelper.setOnMonitorListener(new MonitorListener() {
             @Override
             public void onMonitorResult(String processName, String result) {
                 AppLogUtils.d("TimeMonitor processName: " + processName + " , result: " + result);
@@ -109,4 +112,25 @@ public class TimeTestDemo {
         });
     }
 
+    private void test3() {
+        MonitorTimeHelper.start("testTime1");
+        try {
+            Thread.sleep(1231);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        MonitorTimeHelper.end("testTime1");
+
+        for (int i = 0 ; i<10 ; i++ ) {
+            int count = i;
+            try {
+                MonitorTimeHelper.start("testTimeA" + count);
+                Thread.sleep(1231);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } finally {
+                MonitorTimeHelper.end("testTimeA" + count);
+            }
+        }
+    }
 }

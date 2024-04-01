@@ -11,13 +11,13 @@ import com.yc.toolutils.AppLogUtils;
  *     revise:
  * </pre>
  */
-public final class TimeMonitor {
+public final class MonitorTime {
 
-    private final TimeTraceBean timeTraceBean;
+    private final MonitorTimeBean timeTraceBean;
     private final Object object = new Object();
 
-    TimeMonitor(String actionName) {
-        timeTraceBean = new TimeTraceBean(actionName);
+    MonitorTime(String actionName) {
+        timeTraceBean = new MonitorTimeBean(actionName);
     }
 
     void start(String actionName) {
@@ -31,7 +31,7 @@ public final class TimeMonitor {
         }
     }
 
-    void end(String actionName, OnMonitorListener listener) {
+    void end(String actionName, MonitorListener listener) {
         if (actionName == null || actionName.isEmpty()) {
             return;
         }
@@ -43,11 +43,11 @@ public final class TimeMonitor {
         debug(listener);
     }
 
-    void debug(OnMonitorListener listener) {
+    void debug(MonitorListener listener) {
         //计算开始时间和结束时间的差值
         long monitorTime = timeTraceBean.getActionEndTime() - timeTraceBean.getActionStartTime();
         if (listener != null) {
-            PrintFormatAdapter formatAdapter = TimeMonitorHelper.getFormatAdapter();
+            MonitorFormatAdapter formatAdapter = MonitorTimeHelper.getFormatAdapter();
             String format = formatAdapter.onFormat(timeTraceBean.getActionName(), monitorTime);
             listener.onMonitorResult(timeTraceBean.getActionName(), format);
             return;

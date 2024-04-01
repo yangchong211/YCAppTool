@@ -2,8 +2,8 @@
 // Created by 杨充 on 2024/3/28.
 //
 
-#ifndef YCAPPTOOL_LOG_UTILS_H
-#define YCAPPTOOL_LOG_UTILS_H
+#ifndef YC_LOG_UTILS_H
+#define YC_LOG_UTILS_H
 
 #include "string.h"
 #include <iostream>
@@ -35,4 +35,4 @@ public:
 };
 
 
-#endif //YCAPPTOOL_LOG_UTILS_H
+#endif //YC_LOG_UTILS_H

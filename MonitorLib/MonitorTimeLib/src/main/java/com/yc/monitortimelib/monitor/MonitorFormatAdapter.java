@@ -9,7 +9,7 @@ package com.yc.monitortimelib.monitor;
  *     revise:
  * </pre>
  */
-public interface PrintFormatAdapter {
+public interface MonitorFormatAdapter {
 
     String onFormat(String processName, long startTime);
 
@@ -18,8 +18,8 @@ public interface PrintFormatAdapter {
 
         }
 
-        public static PrintFormatAdapter newDefaultLogAdapter() {
-            return new PrintFormatAdapter() {
+        public static MonitorFormatAdapter newDefaultLogAdapter() {
+            return new MonitorFormatAdapter() {
                 @Override
                 public String onFormat(String processName, long monitorTime) {
                     String rst = processName + " " + monitorTime;

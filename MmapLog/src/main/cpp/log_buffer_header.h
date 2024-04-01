@@ -1,6 +1,6 @@
 
-#ifndef LOG4A_LOGBUFFERHEADER_H
-#define LOG4A_LOGBUFFERHEADER_H
+#ifndef YC_LOGBUFFERHEADER_H
+#define YC_LOGBUFFERHEADER_H
 
 #include "stddef.h"
 
@@ -43,4 +43,4 @@ namespace log_header{
 }
 
 
-#endif //LOG4A_LOGBUFFERHEADER_H
+#endif //YC_LOGBUFFERHEADER_H

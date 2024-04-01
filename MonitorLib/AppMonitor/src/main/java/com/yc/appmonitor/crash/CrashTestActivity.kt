@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.yc.appmonitor.R
-import com.yc.monitortimelib.monitor.TimeMonitorHelper
+import com.yc.monitortimelib.monitor.MonitorTimeHelper
 import com.yc.toastutils.ToastUtils
 import com.yc.crash.nativec.NativeCrashDumper
 import java.util.*
@@ -37,36 +37,36 @@ class CrashTestActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        TimeMonitorHelper.end("startActivity")
+        MonitorTimeHelper.end("startActivity")
     }
 
     override fun onStop() {
         super.onStop()
-        TimeMonitorHelper.start("onStop")
+        MonitorTimeHelper.start("onStop")
     }
 
     override fun onDestroy() {
-        TimeMonitorHelper.start("finish")
+        MonitorTimeHelper.start("finish")
         super.onDestroy()
-        TimeMonitorHelper.end("onStop")
+        MonitorTimeHelper.end("onStop")
 //        val refWatcher: RefWatcher = MonitorApplication.getRefWatcher(this)
 //        refWatcher.watch(this)
     }
 
     override fun finish() {
         super.finish()
-        TimeMonitorHelper.end("finish")
+        MonitorTimeHelper.end("finish")
     }
 
     override fun onClick(v: View) {
         val id = v.id
         if (id == R.id.tv_1) {
-            TimeMonitorHelper.start("Click")
+            MonitorTimeHelper.start("Click")
             "12.3".toInt()
         } else if (id == R.id.tv_2) {
             val list = ArrayList<String>()
             list[5]
-            TimeMonitorHelper.end("Click")
+            MonitorTimeHelper.end("Click")
         } else if (id == R.id.tv_3) {
             val activity: Activity? = null
             activity!!.isDestroyed

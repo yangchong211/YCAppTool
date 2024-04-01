@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.yc.apploglib.config.AppLogConfig;
 import com.yc.apploglib.config.AppLogFactory;
-import com.yc.monitortimelib.monitor.TimeMonitorHelper;
+import com.yc.monitortimelib.monitor.MonitorTimeHelper;
 import com.yc.parallel.AbsParallelTask;
 import com.yc.appstatuslib.AppStatusManager;
 import com.yc.appstatuslib.info.AppBatteryInfo;
@@ -23,7 +23,7 @@ public class AppDelayTask extends AbsParallelTask {
 
     @Override
     public void run() {
-        TimeMonitorHelper.start("AppDelayTask");
+        MonitorTimeHelper.start("AppDelayTask");
         long start = System.currentTimeMillis();
         //各种状态监听回调
         initAppStatusListener();
@@ -39,7 +39,7 @@ public class AppDelayTask extends AbsParallelTask {
         boolean isMainThread = (Looper.myLooper() == Looper.getMainLooper());
         AppLogUtils.i("app init 3 task delay total time : " + (end-start)
                 + " ; 线程是否是主线程" + isMainThread);
-        TimeMonitorHelper.end("AppDelayTask");
+        MonitorTimeHelper.end("AppDelayTask");
     }
 
     private void initAppLog() {

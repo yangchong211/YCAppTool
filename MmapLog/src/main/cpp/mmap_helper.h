@@ -2,8 +2,8 @@
 // Created by 杨充 on 2024/3/28.
 //
 
-#ifndef YCAPPTOOL_MMAP_HELPER_H
-#define YCAPPTOOL_MMAP_HELPER_H
+#ifndef YC_MMAP_HELPER_H
+#define YC_MMAP_HELPER_H
 
 #include "log_utils.h"
 #include "unistd.h"
@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif //YCAPPTOOL_MMAP_HELPER_H
+#endif //YC_MMAP_HELPER_H

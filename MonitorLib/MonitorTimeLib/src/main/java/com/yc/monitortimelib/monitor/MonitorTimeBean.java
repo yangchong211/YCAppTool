@@ -9,7 +9,7 @@ package com.yc.monitortimelib.monitor;
  *     revise:
  * </pre>
  */
-public final class TimeTraceBean {
+public final class MonitorTimeBean {
 
     /**
      * action名称
@@ -24,7 +24,7 @@ public final class TimeTraceBean {
      */
     private long actionEndTime;
 
-    TimeTraceBean(String actionName){
+    MonitorTimeBean(String actionName){
         setActionName(actionName);
     }
 

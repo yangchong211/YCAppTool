@@ -9,7 +9,7 @@ package com.yc.monitortimelib.monitor;
  *     revise:
  * </pre>
  */
-public interface OnMonitorListener {
+public interface MonitorListener {
     /**
      * 回调
      * @param processName       进程名称
