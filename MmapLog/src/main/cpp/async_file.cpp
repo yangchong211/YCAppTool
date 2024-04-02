@@ -8,6 +8,7 @@ async_file::async_file() {
 }
 
 async_file::~async_file() {
+    //停止刷新
     stopFlush();
 }
 

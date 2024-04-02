@@ -23,11 +23,8 @@ class async_file {
 
 public:
     async_file();
-
     ~async_file();
-
     bool async_flush(flush_buffer *flushBuffer);
-
     void stopFlush();
 
 private:
@@ -38,6 +35,7 @@ private:
     std::thread async_thread;
     std::condition_variable async_condition;
     std::mutex async_mtx;
+
 };
 
 
